@@ -1,0 +1,365 @@
+﻿/* Common Styles */
+
+.fileUpload {
+    position: relative;
+    overflow: hidden;
+}
+
+.fileUpload input.upload {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+
+#phraseLibraryDialog {
+    .selectedSection, .selectedPhraseField {
+        background: yellow;
+    }
+
+    .category {
+        padding-right: 5px;
+        border: 1px solid silver;
+        max-height: 450px;
+        overflow-y: auto;
+        margin-top: 14px;
+    }
+}
+
+.inlineGrid {
+    table {
+        max-width: 100%;
+        width: 100%;
+        min-width: 100%;
+
+        th {
+            // color: @column_header_color;
+        }
+
+        td {
+            padding: 4px 5px;
+            vertical-align: middle;
+        }
+
+
+        tr td select, textarea,
+        input[type="text"], input[type="password"],
+        input[type="datetime"], input[type="datetime-local"],
+        input[type="date"], input[type="month"],
+        input[type="time"], input[type="week"],
+        input[type="number"], input[type="email"],
+        input[type="url"], input[type="search"],
+        input[type="tel"], input[type="color"], .uneditable-input {
+            padding-left: 2px;
+            padding-right: 2px;
+            width: 100%;
+            max-width: 100%;
+            margin-bottom: 1px;
+            margin-right: 2px;
+        }
+
+        .selectedRow {
+            // background-color: @select_row_backgroundColor;
+            label {
+                color: #8B8B8B;
+                font-size: 13px;
+                text-align: left;
+            }
+        }
+    }
+}
+
+.my-modal {
+    overflow: auto !important;
+}
+
+.closeSaveButtonMarginRemove {
+    margin-left: 0;
+}
+
+/* Form Group in Details Page */
+
+.filter-block {
+    .form-group {
+        margin-bottom: 0;
+    }
+
+    .from-group-filterText {
+        margin-right: 0;
+    }
+}
+
+.form-group {
+    .input-group-addon {
+        text-decoration: none;
+        border: 0;
+        cursor: pointer;
+    }
+
+    .input-group {
+        .input-group-addon {
+            border: 1px solid #ccc;
+        }
+    }
+}
+
+.my-tabsHeader {
+    border: 1px solid silver;
+    -moz-box-shadow: 1px 1px 1px silver;
+    -webkit-box-shadow: 1px 1px 1px silver;
+    box-shadow: 1px 1px 1px silver;
+}
+
+.set-filter-margin {
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+/* Form Group in Details Page */
+
+/* Validation Summary */
+
+.validationSummaryContainer {
+    .validationSummaryLink {
+        margin-left: 15px;
+    }
+
+    ul {
+        padding-left: 20px;
+    }
+
+    a {
+        color: red;
+    }
+}
+
+.errorFill {
+    border: 1px solid red !important;
+    background-color: #fdd !important;
+}
+
+.errorFillRow {
+    border: 3px solid red !important;
+}
+
+/* For Elements That use ValidationTooltip + Css: { 'errorFill': someValue } , css should be css: { 'errorFillWithValidation': someValue }  */
+.errorFillWithValidation {
+    border: 1px solid red !important;
+    background-color: #fdd !important;
+}
+
+.errorMsgText {
+    color: red !important;
+    cursor: pointer !important;
+}
+
+div#spinner {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 1000000011;
+    border: 2px solid #eeeeee;
+    font-size: 40px;
+    width: 1em;
+    height: 1em;
+    -moz-border-radius: .5em;
+    -webkit-border-radius: .5em;
+    -ms-border-radius: .5em;
+    border-radius: .5em;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-animation: spin 1s linear infinite;
+    -moz-animation: spin 1s linear infinite;
+    -o-animation: spin 1s linear infinite;
+    -ms-animation: spin 1s linear infinite;
+    animation: spin 1s linear infinite;
+    border-top-color: #2eaef0;
+}
+
+/* Validation Summary */
+
+/* Selected Row Highlight */
+
+.selectedRow {
+    background: lightgray !important;
+}
+
+/* Selected Row Highlight */
+
+/* For Cost Centre Input Dialog */
+
+.opaqueLayer {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    opacity: 0.6;
+    filter: alpha(opacity=60);
+    background-color: gray;
+    z-Index: 9999;
+    width: 95% !important;
+    height: 100% !important;
+}
+
+#innerLayer {
+    background: white;
+}
+
+#FormulaMatrixLayer{
+    background: white;
+}
+.tabsdescriptions 
+{
+  color: #696969;
+  margin-bottom: 35px;
+  margin-left: 7px;
+  margin-top: 35px;
+}
+.delPhrase
+{
+    display: none;
+}
+
+.phraseHover:hover .delPhrase
+{
+    display: block;
+}
+.graphheaderleft{
+  margin-left: 8px !important;
+  margin-top: 10px !important;
+  margin-bottom: 10px !important;
+}
+.graphheaderright{
+  margin-left: -2px !important;
+  margin-top: 10px !important;
+  margin-bottom: 10px !important;
+}
+
+/*Custom ON OFF Switch for Store Live*/
+
+
+.onoffswitchlive {
+    position: relative;
+    width: 120px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    margin-right: 20px;
+}
+
+.onoffswitchlive-checkbox {
+    display: none;
+}
+
+.onoffswitchlive-label {
+    display: block;
+    overflow: hidden;
+    cursor: pointer;
+    border: 1px solid #999999;
+    border-radius: 20px;
+}
+
+.onoffswitchlive-inner {
+    width: 200%;
+    margin-left: -100%;
+    -moz-transition: margin 0.3s ease-in 0s;
+    -webkit-transition: margin 0.3s ease-in 0s;
+    -o-transition: margin 0.3s ease-in 0s;
+    transition: margin 0.3s ease-in 0s;
+}
+
+    .onoffswitchlive-inner:before, .onoffswitchlive-inner:after {
+        float: left;
+        width: 50%;
+        height: 40px;
+        padding: 0;
+        line-height: 30px;
+        font-size: 14px;
+        color: white;
+        font-family: Trebuchet,Arial,sans-serif;
+        font-weight: bold;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        padding-top: 5px;
+    }
+
+    .onoffswitchlive-inner:before {
+        content: "LIVE";
+        padding-left: 10px;
+        background-color: #2ecc71;
+        color: #FFFFFF;
+    }
+
+.onoffswitchlive.onoffswitchlive-success .onoffswitchlive-inner:before {
+    background-color: #2ecc71;
+}
+
+.onoffswitchlive.onoffswitchlive-danger .onoffswitchlive-inner:before {
+    background-color: #e74c3c;
+}
+
+.onoffswitchlive.onoffswitchlive-warning .onoffswitchlive-inner:before {
+    background-color: #f1c40f;
+}
+
+.onoffswitchlive-inner:after {
+    content: "OFFLINE";
+    padding-right: 10px;
+    background-color: #f1c40f;
+    color: #FFFFFF;
+    text-align: right;
+}
+
+.onoffswitchlive-switch {
+    width: 26px;
+    margin: 7px;
+    background: #FFFFFF;
+    border: 1px solid #999999;
+    border-radius: 20px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 80px;
+    -moz-transition: all 0.3s ease-in 0s;
+    -webkit-transition: all 0.3s ease-in 0s;
+    -o-transition: all 0.3s ease-in 0s;
+    transition: all 0.3s ease-in 0s;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+}
+
+.onoffswitchlive-checkbox:checked + .onoffswitchlive-label .onoffswitchlive-inner {
+    margin-left: 0;
+}
+
+.onoffswitchlive-checkbox:checked + .onoffswitchlive-label .onoffswitchlive-switch {
+    right: 0px;
+}
+
+/*Custom ON OFF Flag CSS ends */
+
+/* For Cost Centre Input Dialog */
+
+/* Common Styles */
+
+@import "Products";
+@import "Organisation";
+@import "Store";
+@import "Inventory";
+@import "PaperSheet";
+@import "InventoryCategory";
+@import "StockItemDialog";
+@import "Orders";
+@import "CompanySelector";
+@import "ItemJobStatus";
+@import "Invoice";
+@import "PurchaseOrder";
