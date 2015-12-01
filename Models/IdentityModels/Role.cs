@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace SMD.Models.IdentityModels
+namespace SMD.Models.DomainModels
 {
     /// <summary>
     /// Role Domain Model

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SMD.Models.IdentityModels
+namespace SMD.Models.DomainModels
 {
     /// <summary>
     /// User Domain Model
