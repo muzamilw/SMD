@@ -123,31 +123,4 @@
   <data name="ClaimsSecurityService_MissingNameIdentifierClaim" xml:space="preserve">
     <value>No name identifier claim specified. Cannot proceed.</value>
   </data>
-  <data name="ItemService_ItemNotFound" xml:space="preserve">
-    <value>Product with Id {0} not found.</value>
-  </data>
-  <data name="ItemService_InvalidItem" xml:space="preserve">
-    <value>Invalid Product.</value>
-  </data>
-  <data name="ItemService_InvalidFilePath" xml:space="preserve">
-    <value>Invalid File Path.</value>
-  </data>
-  <data name="MyOrganisationService_OrganisationNotFound" xml:space="preserve">
-    <value>Organisation with Id {0} not found.</value>
-  </data>
-  <data name="ItemService_FailedToGeneratePagesFromPdf" xml:space="preserve">
-    <value>Failed to generate Template pages from specified pdf.</value>
-  </data>
-  <data name="ItemService_FailedToGeneratePdfFromPages" xml:space="preserve">
-    <value>Failed to generate pdf from specified template pages.</value>
-  </data>
-  <data name="ItemService_TemplateNotFound" xml:space="preserve">
-    <value>Template with Id {0} not found.</value>
-  </data>
-  <data name="ItemService_ProductCodeDuplicated" xml:space="preserve">
-    <value>Product Code already exists.</value>
-  </data>
-  <data name="ItemService_TemplateDeleteFailed" xml:space="preserve">
-    <value>Failed to delete template.</value>
-  </data>
 </root>
