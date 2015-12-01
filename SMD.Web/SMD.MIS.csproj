@@ -1236,9 +1236,6 @@
     <Content Include="Content\less\StockItemDialog.less" />
     <Content Include="Content\less\Orders.less" />
     <Content Include="Content\less\CompanySelector.less" />
-    <None Include="config\Web.connectionstrings.config">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="config\Web.connectionstrings.default.config">
       <SubType>Designer</SubType>
     </None>
