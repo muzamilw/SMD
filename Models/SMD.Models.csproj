@@ -111,6 +111,9 @@
     <Compile Include="Common\UserIdentityModel.cs" />
     <Compile Include="Common\Utility.cs" />
     <Compile Include="DomainModels\Class1.cs" />
+    <Compile Include="IdentityModels\Role.cs" />
+    <Compile Include="IdentityModels\User.cs" />
+    <Compile Include="IdentityModels\UserLogin.cs" />
     <Compile Include="LanguageResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
