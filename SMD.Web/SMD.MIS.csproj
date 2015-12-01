@@ -346,6 +346,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LanguageResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\Survey\Controllers\SurveyController.cs" />
+    <Compile Include="Areas\Survey\SurveyAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UnauthorizedRequestController.cs" />
     <Compile Include="Global.asax.cs">
@@ -1236,6 +1238,9 @@
     <Content Include="Content\less\StockItemDialog.less" />
     <Content Include="Content\less\Orders.less" />
     <Content Include="Content\less\CompanySelector.less" />
+    <Content Include="Areas\Survey\Views\web.config" />
+    <Content Include="Areas\Survey\Views\Survey\Index.cshtml" />
+    <Content Include="Areas\Survey\Views\Survey\EditSurvery.cshtml" />
     <None Include="config\Web.connectionstrings.default.config">
       <SubType>Designer</SubType>
     </None>
@@ -2358,6 +2363,8 @@
     <Folder Include="Areas\Api\Controllers\" />
     <Folder Include="Areas\Api\ModelMappers\" />
     <Folder Include="Areas\Api\Models\" />
+    <Folder Include="Areas\Survey\Models\" />
+    <Folder Include="Areas\Survey\Views\Shared\" />
     <Folder Include="Content\themes\base\minified\images\" />
     <Folder Include="ModelMappers\" />
     <Folder Include="Models\" />
