@@ -16,7 +16,6 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using Newtonsoft.Json;
 using System.Configuration;
-using GrapeCity.ActiveReports;
 using SMD.Interfaces;
 
 namespace SMD.MIS.Controllers

@@ -2,6 +2,7 @@
 using System.Data.Entity;
 using System.Linq.Expressions;
 using Microsoft.Practices.Unity;
+using SMD.Models.DomainModels;
 
 namespace SMD.Repository.BaseRepository
 {
@@ -58,7 +59,11 @@ namespace SMD.Repository.BaseRepository
         {
             this.container = container;
         }
-        
+
+        /// <summary>
+        /// Profile Questions
+        /// </summary>
+        public DbSet<ProfileQuestion> ProfileQuestions { get; set; }
         #endregion
     }
 }
