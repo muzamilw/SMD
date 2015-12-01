@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets664428598FEB4D2674C94A3B39B115436B075B1D2AAD2949465F376CA09523C1))]
+[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySetsAC3C03BA268EC23AC55B9CF428E4507D63DBF64BE178A56393A28C13F97D488F))]
 
 namespace Edm_EntityMappingGeneratedViews
 {
@@ -17,19 +17,19 @@ namespace Edm_EntityMappingGeneratedViews
     /// <Summary>
     /// The type contains views for EntitySets and AssociationSets that were generated at design time.
     /// </Summary>
-    public sealed class ViewsForBaseEntitySets664428598FEB4D2674C94A3B39B115436B075B1D2AAD2949465F376CA09523C1 : System.Data.Mapping.EntityViewContainer
+    public sealed class ViewsForBaseEntitySetsAC3C03BA268EC23AC55B9CF428E4507D63DBF64BE178A56393A28C13F97D488F : System.Data.Mapping.EntityViewContainer
     {
         
         /// <Summary>
         /// The constructor stores the views for the extents and also the hash values generated based on the metadata and mapping closure and views.
         /// </Summary>
-        public ViewsForBaseEntitySets664428598FEB4D2674C94A3B39B115436B075B1D2AAD2949465F376CA09523C1()
+        public ViewsForBaseEntitySetsAC3C03BA268EC23AC55B9CF428E4507D63DBF64BE178A56393A28C13F97D488F()
         {
             this.EdmEntityContainerName = "BaseDbContext";
             this.StoreEntityContainerName = "SMDModelStoreContainer";
-            this.HashOverMappingClosure = "c3dbe04920176f64fa89c2c0996a88a38897cdd640a45610c8934d2e6421b50b";
-            this.HashOverAllExtentViews = "38e058fbad73fb00ff8421f1a63fb765786aef1985c938ad7de3c4685b1303f1";
-            this.ViewCount = 8;
+            this.HashOverMappingClosure = "3e1af06ed4d1fc4b4901d4f038999756e4fb6eef88379ad1dad9a0b1e8c8c4ac";
+            this.HashOverAllExtentViews = "31a3802d203dd01f78ff3aeb25503413a597e94830db3e608ef4066970392a59";
+            this.ViewCount = 16;
         }
         
         /// <Summary>
@@ -68,6 +68,38 @@ namespace Edm_EntityMappingGeneratedViews
             if ((index == 7))
             {
                 return GetView7();
+            }
+            if ((index == 8))
+            {
+                return GetView8();
+            }
+            if ((index == 9))
+            {
+                return GetView9();
+            }
+            if ((index == 10))
+            {
+                return GetView10();
+            }
+            if ((index == 11))
+            {
+                return GetView11();
+            }
+            if ((index == 12))
+            {
+                return GetView12();
+            }
+            if ((index == 13))
+            {
+                return GetView13();
+            }
+            if ((index == 14))
+            {
+                return GetView14();
+            }
+            if ((index == 15))
+            {
+                return GetView15();
             }
             throw new System.IndexOutOfRangeException();
         }
@@ -171,9 +203,83 @@ namespace Edm_EntityMappingGeneratedViews
         }
         
         /// <Summary>
-        /// return view for SMDModelStoreContainer.AspNetUserRoles
+        /// return view for SMDModelStoreContainer.ProfileQuestion
         /// </Summary>
         private System.Collections.Generic.KeyValuePair<string, string> GetView3()
+        {
+            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.ProfileQuestion", "\r\n    SELECT VALUE -- Constructing ProfileQuestion\r\n        [SMDModel.Store.Profi" +
+                    "leQuestion](T1.ProfileQuestion_PQID, T1.ProfileQuestion_LanguageID, T1.ProfileQu" +
+                    "estion_CountryID, T1.ProfileQuestion_ProfileGroupID, T1.ProfileQuestion_Priority" +
+                    ", T1.ProfileQuestion_Type, T1.ProfileQuestion_Question, T1.ProfileQuestion_Refre" +
+                    "shTime, T1.ProfileQuestion_SkippedCount, T1.ProfileQuestion_CreationDate, T1.Pro" +
+                    "fileQuestion_CreatedBy, T1.ProfileQuestion_ModifiedDate, T1.ProfileQuestion_Modi" +
+                    "fiedBy, T1.ProfileQuestion_HasLinkedQuestions, T1.ProfileQuestion_PenalityForNot" +
+                    "Answering)\r\n    FROM (\r\n        SELECT \r\n            T.PqId AS ProfileQuestion_P" +
+                    "QID, \r\n            T.LanguageId AS ProfileQuestion_LanguageID, \r\n            T.C" +
+                    "ountryId AS ProfileQuestion_CountryID, \r\n            T.ProfileGroupId AS Profile" +
+                    "Question_ProfileGroupID, \r\n            T.Priority AS ProfileQuestion_Priority, \r" +
+                    "\n            T.Type AS ProfileQuestion_Type, \r\n            T.Question AS Profile" +
+                    "Question_Question, \r\n            T.RefreshTime AS ProfileQuestion_RefreshTime, \r" +
+                    "\n            T.SkippedCount AS ProfileQuestion_SkippedCount, \r\n            T.Cre" +
+                    "ationDate AS ProfileQuestion_CreationDate, \r\n            T.CreatedBy AS ProfileQ" +
+                    "uestion_CreatedBy, \r\n            T.ModifiedDate AS ProfileQuestion_ModifiedDate," +
+                    " \r\n            T.ModifiedBy AS ProfileQuestion_ModifiedBy, \r\n            T.HasLi" +
+                    "nkedQuestions AS ProfileQuestion_HasLinkedQuestions, \r\n            T.PenalityFor" +
+                    "NotAnswering AS ProfileQuestion_PenalityForNotAnswering, \r\n            True AS _" +
+                    "from0\r\n        FROM BaseDbContext.ProfileQuestions AS T\r\n    ) AS T1");
+        }
+        
+        /// <Summary>
+        /// return view for SMDModelStoreContainer.ProfileQuestionAnswer
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView4()
+        {
+            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.ProfileQuestionAnswer", "\r\n    SELECT VALUE -- Constructing ProfileQuestionAnswer\r\n        [SMDModel.Store" +
+                    ".ProfileQuestionAnswer](T1.ProfileQuestionAnswer_PQAnswerID, T1.ProfileQuestionA" +
+                    "nswer_PQID, T1.ProfileQuestionAnswer_type, T1.ProfileQuestionAnswer_AnswerString" +
+                    ", T1.ProfileQuestionAnswer_ImagePath, T1.ProfileQuestionAnswer_SortOrder, T1.Pro" +
+                    "fileQuestionAnswer_LinkedQuestion1ID, T1.ProfileQuestionAnswer_LinkedQuestion2ID" +
+                    ", T1.ProfileQuestionAnswer_LinkedQuestion3ID, T1.ProfileQuestionAnswer_LinkedQue" +
+                    "stion4ID, T1.ProfileQuestionAnswer_LinkedQuestion5ID, T1.ProfileQuestionAnswer_L" +
+                    "inkedQuestion6ID)\r\n    FROM (\r\n        SELECT \r\n            T.PqAnswerId AS Prof" +
+                    "ileQuestionAnswer_PQAnswerID, \r\n            T.PqId AS ProfileQuestionAnswer_PQID" +
+                    ", \r\n            T.Type AS ProfileQuestionAnswer_type, \r\n            T.AnswerStri" +
+                    "ng AS ProfileQuestionAnswer_AnswerString, \r\n            T.ImagePath AS ProfileQu" +
+                    "estionAnswer_ImagePath, \r\n            T.SortOrder AS ProfileQuestionAnswer_SortO" +
+                    "rder, \r\n            T.LinkedQuestion1Id AS ProfileQuestionAnswer_LinkedQuestion1" +
+                    "ID, \r\n            T.LinkedQuestion2Id AS ProfileQuestionAnswer_LinkedQuestion2ID" +
+                    ", \r\n            T.LinkedQuestion3Id AS ProfileQuestionAnswer_LinkedQuestion3ID, " +
+                    "\r\n            T.LinkedQuestion4Id AS ProfileQuestionAnswer_LinkedQuestion4ID, \r\n" +
+                    "            T.LinkedQuestion5Id AS ProfileQuestionAnswer_LinkedQuestion5ID, \r\n  " +
+                    "          T.LinkedQuestion6Id AS ProfileQuestionAnswer_LinkedQuestion6ID, \r\n    " +
+                    "        True AS _from0\r\n        FROM BaseDbContext.ProfileQuestionAnswers AS T\r\n" +
+                    "    ) AS T1");
+        }
+        
+        /// <Summary>
+        /// return view for SMDModelStoreContainer.ProfileQuestionUserAnswer
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView5()
+        {
+            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.ProfileQuestionUserAnswer", @"
+    SELECT VALUE -- Constructing ProfileQuestionUserAnswer
+        [SMDModel.Store.ProfileQuestionUserAnswer](T1.ProfileQuestionUserAnswer_PQUAnswerID, T1.ProfileQuestionUserAnswer_PQID, T1.ProfileQuestionUserAnswer_UserID, T1.ProfileQuestionUserAnswer_AnswerDateTime, T1.ProfileQuestionUserAnswer_PQAnswerID)
+    FROM (
+        SELECT 
+            T.PquAnswerId AS ProfileQuestionUserAnswer_PQUAnswerID, 
+            T.PqId AS ProfileQuestionUserAnswer_PQID, 
+            T.UserId AS ProfileQuestionUserAnswer_UserID, 
+            T.AnswerDateTime AS ProfileQuestionUserAnswer_AnswerDateTime, 
+            T.PqAnswerId AS ProfileQuestionUserAnswer_PQAnswerID, 
+            True AS _from0
+        FROM BaseDbContext.ProfileQuestionUserAnswers AS T
+    ) AS T1");
+        }
+        
+        /// <Summary>
+        /// return view for SMDModelStoreContainer.AspNetUserRoles
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView6()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.AspNetUserRoles", @"
     SELECT VALUE -- Constructing AspNetUserRoles
@@ -190,7 +296,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.Roles
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView4()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView7()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.Roles", @"
     SELECT VALUE -- Constructing Roles
@@ -207,7 +313,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.UserLogins
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView5()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView8()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.UserLogins", @"
     SELECT VALUE -- Constructing UserLogins
@@ -225,7 +331,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.Users
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView6()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView9()
         {
             System.Text.StringBuilder viewString = new System.Text.StringBuilder(3639);
             viewString.Append("\r\n    SELECT VALUE -- Constructing Users\r\n        [DomainModels.User](T1.User_Id");
@@ -278,9 +384,83 @@ namespace Edm_EntityMappingGeneratedViews
         }
         
         /// <Summary>
+        /// return view for BaseDbContext.ProfileQuestions
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView10()
+        {
+            return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.ProfileQuestions", "\r\n    SELECT VALUE -- Constructing ProfileQuestions\r\n        [DomainModels.Profil" +
+                    "eQuestion](T1.ProfileQuestion_PqId, T1.ProfileQuestion_LanguageId, T1.ProfileQue" +
+                    "stion_CountryId, T1.ProfileQuestion_ProfileGroupId, T1.ProfileQuestion_Priority," +
+                    " T1.ProfileQuestion_Type, T1.ProfileQuestion_Question, T1.ProfileQuestion_Refres" +
+                    "hTime, T1.ProfileQuestion_SkippedCount, T1.ProfileQuestion_CreationDate, T1.Prof" +
+                    "ileQuestion_CreatedBy, T1.ProfileQuestion_ModifiedDate, T1.ProfileQuestion_Modif" +
+                    "iedBy, T1.ProfileQuestion_HasLinkedQuestions, T1.ProfileQuestion_PenalityForNotA" +
+                    "nswering)\r\n    FROM (\r\n        SELECT \r\n            T.PQID AS ProfileQuestion_Pq" +
+                    "Id, \r\n            T.LanguageID AS ProfileQuestion_LanguageId, \r\n            T.Co" +
+                    "untryID AS ProfileQuestion_CountryId, \r\n            T.ProfileGroupID AS ProfileQ" +
+                    "uestion_ProfileGroupId, \r\n            T.Priority AS ProfileQuestion_Priority, \r\n" +
+                    "            T.Type AS ProfileQuestion_Type, \r\n            T.Question AS ProfileQ" +
+                    "uestion_Question, \r\n            T.RefreshTime AS ProfileQuestion_RefreshTime, \r\n" +
+                    "            T.SkippedCount AS ProfileQuestion_SkippedCount, \r\n            T.Crea" +
+                    "tionDate AS ProfileQuestion_CreationDate, \r\n            T.CreatedBy AS ProfileQu" +
+                    "estion_CreatedBy, \r\n            T.ModifiedDate AS ProfileQuestion_ModifiedDate, " +
+                    "\r\n            T.ModifiedBy AS ProfileQuestion_ModifiedBy, \r\n            T.HasLin" +
+                    "kedQuestions AS ProfileQuestion_HasLinkedQuestions, \r\n            T.PenalityForN" +
+                    "otAnswering AS ProfileQuestion_PenalityForNotAnswering, \r\n            True AS _f" +
+                    "rom0\r\n        FROM SMDModelStoreContainer.ProfileQuestion AS T\r\n    ) AS T1");
+        }
+        
+        /// <Summary>
+        /// return view for BaseDbContext.ProfileQuestionAnswers
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView11()
+        {
+            return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.ProfileQuestionAnswers", "\r\n    SELECT VALUE -- Constructing ProfileQuestionAnswers\r\n        [DomainModels." +
+                    "ProfileQuestionAnswer](T1.ProfileQuestionAnswer_PqAnswerId, T1.ProfileQuestionAn" +
+                    "swer_PqId, T1.ProfileQuestionAnswer_Type, T1.ProfileQuestionAnswer_AnswerString," +
+                    " T1.ProfileQuestionAnswer_ImagePath, T1.ProfileQuestionAnswer_SortOrder, T1.Prof" +
+                    "ileQuestionAnswer_LinkedQuestion1Id, T1.ProfileQuestionAnswer_LinkedQuestion2Id," +
+                    " T1.ProfileQuestionAnswer_LinkedQuestion3Id, T1.ProfileQuestionAnswer_LinkedQues" +
+                    "tion4Id, T1.ProfileQuestionAnswer_LinkedQuestion5Id, T1.ProfileQuestionAnswer_Li" +
+                    "nkedQuestion6Id)\r\n    FROM (\r\n        SELECT \r\n            T.PQAnswerID AS Profi" +
+                    "leQuestionAnswer_PqAnswerId, \r\n            T.PQID AS ProfileQuestionAnswer_PqId," +
+                    " \r\n            T.type AS ProfileQuestionAnswer_Type, \r\n            T.AnswerStrin" +
+                    "g AS ProfileQuestionAnswer_AnswerString, \r\n            T.ImagePath AS ProfileQue" +
+                    "stionAnswer_ImagePath, \r\n            T.SortOrder AS ProfileQuestionAnswer_SortOr" +
+                    "der, \r\n            T.LinkedQuestion1ID AS ProfileQuestionAnswer_LinkedQuestion1I" +
+                    "d, \r\n            T.LinkedQuestion2ID AS ProfileQuestionAnswer_LinkedQuestion2Id," +
+                    " \r\n            T.LinkedQuestion3ID AS ProfileQuestionAnswer_LinkedQuestion3Id, \r" +
+                    "\n            T.LinkedQuestion4ID AS ProfileQuestionAnswer_LinkedQuestion4Id, \r\n " +
+                    "           T.LinkedQuestion5ID AS ProfileQuestionAnswer_LinkedQuestion5Id, \r\n   " +
+                    "         T.LinkedQuestion6ID AS ProfileQuestionAnswer_LinkedQuestion6Id, \r\n     " +
+                    "       True AS _from0\r\n        FROM SMDModelStoreContainer.ProfileQuestionAnswer" +
+                    " AS T\r\n    ) AS T1");
+        }
+        
+        /// <Summary>
+        /// return view for BaseDbContext.ProfileQuestionUserAnswers
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView12()
+        {
+            return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.ProfileQuestionUserAnswers", @"
+    SELECT VALUE -- Constructing ProfileQuestionUserAnswers
+        [DomainModels.ProfileQuestionUserAnswer](T1.ProfileQuestionUserAnswer_PquAnswerId, T1.ProfileQuestionUserAnswer_PqId, T1.ProfileQuestionUserAnswer_UserId, T1.ProfileQuestionUserAnswer_AnswerDateTime, T1.ProfileQuestionUserAnswer_PqAnswerId)
+    FROM (
+        SELECT 
+            T.PQUAnswerID AS ProfileQuestionUserAnswer_PquAnswerId, 
+            T.PQID AS ProfileQuestionUserAnswer_PqId, 
+            T.UserID AS ProfileQuestionUserAnswer_UserId, 
+            T.AnswerDateTime AS ProfileQuestionUserAnswer_AnswerDateTime, 
+            T.PQAnswerID AS ProfileQuestionUserAnswer_PqAnswerId, 
+            True AS _from0
+        FROM SMDModelStoreContainer.ProfileQuestionUserAnswer AS T
+    ) AS T1");
+        }
+        
+        /// <Summary>
         /// return view for BaseDbContext.AspNetUserRoles
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView7()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView13()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.AspNetUserRoles", @"
     SELECT VALUE -- Constructing AspNetUserRoles
@@ -302,6 +482,46 @@ namespace Edm_EntityMappingGeneratedViews
             ) AS T1
         ) AS T2
     ) AS T3");
+        }
+        
+        /// <Summary>
+        /// return view for SMDModelStoreContainer.ProfileQuestionGroup
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView14()
+        {
+            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.ProfileQuestionGroup", @"
+    SELECT VALUE -- Constructing ProfileQuestionGroup
+        [SMDModel.Store.ProfileQuestionGroup](T1.ProfileQuestionGroup_ProfileGroupID, T1.ProfileQuestionGroup_ProfileGroupName, T1.ProfileQuestionGroup_ImagePath, T1.ProfileQuestionGroup_LangaugeID, T1.ProfileQuestionGroup_CountryID)
+    FROM (
+        SELECT 
+            T.ProfileGroupId AS ProfileQuestionGroup_ProfileGroupID, 
+            T.ProfileGroupName AS ProfileQuestionGroup_ProfileGroupName, 
+            T.ImagePath AS ProfileQuestionGroup_ImagePath, 
+            T.LangaugeId AS ProfileQuestionGroup_LangaugeID, 
+            T.CountryId AS ProfileQuestionGroup_CountryID, 
+            True AS _from0
+        FROM BaseDbContext.ProfileQuestionGroups AS T
+    ) AS T1");
+        }
+        
+        /// <Summary>
+        /// return view for BaseDbContext.ProfileQuestionGroups
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView15()
+        {
+            return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.ProfileQuestionGroups", @"
+    SELECT VALUE -- Constructing ProfileQuestionGroups
+        [DomainModels.ProfileQuestionGroup](T1.ProfileQuestionGroup_ProfileGroupId, T1.ProfileQuestionGroup_ProfileGroupName, T1.ProfileQuestionGroup_ImagePath, T1.ProfileQuestionGroup_LangaugeId, T1.ProfileQuestionGroup_CountryId)
+    FROM (
+        SELECT 
+            T.ProfileGroupID AS ProfileQuestionGroup_ProfileGroupId, 
+            T.ProfileGroupName AS ProfileQuestionGroup_ProfileGroupName, 
+            T.ImagePath AS ProfileQuestionGroup_ImagePath, 
+            T.LangaugeID AS ProfileQuestionGroup_LangaugeId, 
+            T.CountryID AS ProfileQuestionGroup_CountryId, 
+            True AS _from0
+        FROM SMDModelStoreContainer.ProfileQuestionGroup AS T
+    ) AS T1");
         }
     }
 }
