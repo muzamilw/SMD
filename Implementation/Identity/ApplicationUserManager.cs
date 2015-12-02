@@ -33,6 +33,7 @@ namespace SMD.Implementation.Identity
         {
 
             string fromAddress = ConfigurationManager.AppSettings["FromAddress"];
+            string fromUser = ConfigurationManager.AppSettings["FromUser"];
             string fromPwd = ConfigurationManager.AppSettings["FromPassword"];
             string fromDisplayName = ConfigurationManager.AppSettings["FromDisplayNameA"];
 
@@ -52,7 +53,7 @@ namespace SMD.Implementation.Identity
             SmtpClient client = new SmtpClient(smtpServer, Convert.ToInt32(smtpPort))
             {
                 EnableSsl = enableSsl == "1",
-                Credentials = new NetworkCredential(fromAddress, fromPwd)
+                Credentials = new NetworkCredential(fromUser, fromPwd)
             };
 
             return client.SendMailAsync(oEmail);
