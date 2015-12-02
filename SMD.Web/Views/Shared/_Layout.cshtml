@@ -100,37 +100,39 @@
                         <img src="~/Content/themes/Centaurus/img/logo.png" alt="" class="normal-logo logo-white" height="30" width="180" style="margin-left:17px;margin-top:50px;margin-bottom:50px;" />
                     </a>*@
                 <section id="col-left" class="col-left-nano">
-                    <div id="col-left-inner" class="col-left-nano-content">
+                    @if (User != null && User.Identity != null)
+                    {
+                        <div id="col-left-inner" class="col-left-nano-content">
 
-                        @RenderSection("leftmenue", required: false)
+                            @RenderSection("leftmenue", required: false)
 
-                        @* left menue starts here*@
-                        <div class="collapse navbar-collapse navbar-ex1-collapse" id="sidebar-nav">
-                            <ul class="nav nav-pills nav-stacked" id="Navigation-bar">
-                                <li id="lidashboard">
-                                    <a href="~/Dashboard/Index" class="my-navigator" id="anchor-dashboard">
-                                        <i class="fa fa-dashboard"></i>
-                                        <span>Profile Question</span>
-                                    </a>
+                            @* left menue starts here*@
+                            <div class="collapse navbar-collapse navbar-ex1-collapse" id="sidebar-nav">
+                                <ul class="nav nav-pills nav-stacked" id="Navigation-bar">
+                                    <li id="lidashboard">
+                                        <a href="~/Dashboard/Index" class="my-navigator" id="anchor-dashboard">
+                                            <i class="fa fa-dashboard"></i>
+                                            <span>Profile Question</span>
+                                        </a>
 
-                                </li>
-                                <li id="licrm">
-                                    <a href="~/CRM/Home/Contacts" class="my-navigator">
-                                        <i class="fa fa-users"></i>
-                                        <span>Survey Question</span>
-                                    </a>
-                                </li>
-                                <li id="listores">
-                                    <a href="~/Stores/Stores/Index" class="my-navigator">
-                                        <i class="fa fa-th-large"></i>
-                                        <span>Ad Campaigns</span>
-                                    </a>
-                                </li>
-                            </ul>
+                                    </li>
+                                    <li id="licrm">
+                                        <a href="~/CRM/Home/Contacts" class="my-navigator">
+                                            <i class="fa fa-users"></i>
+                                            <span>Survey Question</span>
+                                        </a>
+                                    </li>
+                                    <li id="listores">
+                                        <a href="~/Stores/Stores/Index" class="my-navigator">
+                                            <i class="fa fa-th-large"></i>
+                                            <span>Ad Campaigns</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            @* Left menue ends here*@
                         </div>
-                        @* Left menue ends here*@
-                    </div>
-
+                    }
                 </section>
             </div>
             @*content wrapper goes here*@
