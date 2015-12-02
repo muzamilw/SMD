@@ -1,9 +1,12 @@
-﻿<!DOCTYPE html>
+﻿@{
+    Layout = "";
+}
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Centaurus - Bootstrap Admin Template</title>
+    <title>SMD - 2015</title>
     <script type="text/javascript">
         //<![CDATA[
         try { if (!window.CloudFlare) { var CloudFlare = [{ verbose: 0, p: 0, byc: 0, owlid: "cf", bag2: 1, mirage2: 0, oracle: 0, paths: { cloudflare: "/cdn-cgi/nexp/dokv=88e434a982/" }, atok: "dd9c6b9d970c21043597a4fadd80e4dd", petok: "c72ad64ff02a636e9ee15a6b938d94e820ea3f2d-1408352066-1800", zone: "adbee.technology", rocket: "0", apps: { "ga_key": { "ua": "UA-49262924-2", "ga_bs": "2" } } }]; !function (a, b) { a = document.createElement("script"), b = document.getElementsByTagName("script")[0], a.async = !0, a.src = "//ajax.cloudflare.com/cdn-cgi/nexp/dokv=97fb4d042e/cloudflare.min.js", b.parentNode.insertBefore(a, b) }() } } catch (e) { };
@@ -14,12 +17,12 @@
     <link rel="stylesheet" type="text/css" href="../Content/themes/Centaurus/css/compiled/layout.css">
     <link rel="stylesheet" type="text/css" href="../Content/themes/Centaurus/css/compiled/elements.css">
     <link href='//fonts.googleapis.com/css?family=Open+Sans:400,600,700,300|Titillium+Web:200,300,400'
-        rel='stylesheet' type='text/css'>
+          rel='stylesheet' type='text/css'>
     <link type="image/x-icon" href="favicon.png" rel="shortcut icon" />
     <!--[if lt IE 9]>
-		<script src="js/html5shiv.js"></script>
-		<script src="js/respond.min.js"></script>
-	<![endif]-->
+        <script src="js/html5shiv.js"></script>
+        <script src="js/respond.min.js"></script>
+    <![endif]-->
     <script type="text/javascript">
         /* <![CDATA[ */
         var _gaq = _gaq || [];
@@ -46,13 +49,14 @@
                             <div class="col-xs-12">
                                 <header id="login-header">
                                     <div id="login-logo">
-                                        <img src="../Content/themes/Centaurus/img/logo.png" alt="" />
+                                        @*<img src="../Content/themes/Centaurus/img/logo.png" alt="" />*@
+                                        Sell My Data
                                     </div>
                                 </header>
                                 <div id="login-box-inner">
-                                    <form role="form" action="/Dashboard/Index" id="loginForm">
+                                    <form role="form" action="/Account/Login" id="loginForm">
                                         <div class="input-group">
-                                            <span class="input-group-addon" tabindex="-1" ><i class="fa fa-user"></i></span>
+                                            <span class="input-group-addon" tabindex="-1"><i class="fa fa-user"></i></span>
                                             <input class="form-control" type="text" placeholder="Email address" id="username" name="username">
                                         </div>
                                         <div class="input-group">
@@ -69,13 +73,14 @@
                                                         </label>
                                                     </div>
                                                 </div>
-                                                <a href="#" id="login-forget-link" class="col-xs-6">Forgot password? </a>
+                                                @Html.ActionLink("Forgot password?", "ForgotPassword", null, new { @id = "login-forget-link", @class = "col-xs-6" })
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-xs-12">
                                                 <button type="submit" class="btn btn-success col-xs-12">
-                                                    Login</button>
+                                                    Login
+                                                </button>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -85,19 +90,25 @@
                                                 </p>
                                             </div>
                                         </div>
+                                    </form>
+                                    @using (Html.BeginForm("ExternalLogin", "Account", new { ReturnUrl = ViewBag.ReturnUrl }))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        <div class="col-xs-12 col-sm-6">
+                                            <button type="submit" name="provider" value="Google" title="Log in using your Google account">
+                                                <i class="fa fa-google"></i>Google
+                                            </button>
+                                        </div>
                                         <div class="row">
-                                            <div class="col-xs-12 col-sm-6">
-                                                <button type="submit" class="btn btn-primary col-xs-12 btn-facebook">
-                                                    <i class="fa fa-facebook"></i>facebook
-                                                </button>
-                                            </div>
-                                            <div class="col-xs-12 col-sm-6">
-                                                <button type="submit" class="btn btn-primary col-xs-12 btn-twitter">
-                                                    <i class="fa fa-twitter"></i>Twitter
-                                                </button>
+                                            <div class="col-xs-12">
+                                                <div class="create-account">
+                                                    <p>
+                                                        Don't have an account yet ?&nbsp; @Html.ActionLink("Create", "Register")
+                                                    </p>
+                                                </div>
                                             </div>
                                         </div>
-                                    </form>
+                                    }
                                 </div>
                             </div>
                         </div>

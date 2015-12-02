@@ -2,6 +2,8 @@
 using System.Data.Entity;
 using System.Linq.Expressions;
 using Microsoft.Practices.Unity;
+using SMD.Models.DomainModels;
+using SMD.Models.IdentityModels;
 
 namespace SMD.Repository.BaseRepository
 {
@@ -58,7 +60,23 @@ namespace SMD.Repository.BaseRepository
         {
             this.container = container;
         }
-        
+
+        /// <summary>
+        /// Users
+        /// </summary>
+        public DbSet<User> Users { get; set; }
+
+        /// <summary>
+        /// Roles
+        /// </summary>
+        public DbSet<Role> Roles { get; set; }
+
+        /// <summary>
+        /// User Logins
+        /// </summary>
+        public DbSet<UserLogin> UserLogins { get; set; }
+
+
         #endregion
     }
 }

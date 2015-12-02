@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using SMD.Models.DomainModels;
 
-namespace SMD.Models.DomainModels
+namespace SMD.Models.IdentityModels
 {
     /// <summary>
     /// User Domain Model
     /// </summary>
-    public class User
+    public partial class User
     {
         public string Id { get; set; }
         public string Email { get; set; }

@@ -115,8 +115,13 @@
     <Compile Include="DomainModels\ProfileQuestionGroup.cs" />
     <Compile Include="DomainModels\ProfileQuestionUserAnswer.cs" />
     <Compile Include="IdentityModels\Role.cs" />
+    <Compile Include="IdentityModels\Role`.cs" />
     <Compile Include="IdentityModels\User.cs" />
     <Compile Include="IdentityModels\UserLogin.cs" />
+    <Compile Include="IdentityModels\User`.cs" />
+    <Compile Include="IdentityModels\ViewModels\AccountViewModels.cs" />
+    <Compile Include="IdentityModels\ViewModels\AdminViewModel.cs" />
+    <Compile Include="IdentityModels\ViewModels\ManageViewModels.cs" />
     <Compile Include="LanguageResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
