@@ -200,9 +200,7 @@ namespace SMD.MIS.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            RegisterViewModel register = new RegisterViewModel();
-            register.Roles = RoleManager.Roles.Where(role => !role.Name.Equals("Admin")).ToList();
-            return View(register);
+            return View(new RegisterViewModel());
         }
 
         //
@@ -218,17 +216,17 @@ namespace SMD.MIS.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    var addUserToRoleResult = await UserManager.AddToRoleAsync(user.Id, model.SelectedRole);
+                    var addUserToRoleResult = await UserManager.AddToRoleAsync(user.Id, Roles.User); // Only Type 'User' Role will be registered from app
                     if (!addUserToRoleResult.Succeeded)
                     {
-                        throw new InvalidOperationException(string.Format("Failed to add user to role {0}", model.SelectedRole));
+                        throw new InvalidOperationException(string.Format("Failed to add user to role {0}", Roles.User));
                     }
 
                     var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code },
                         protocol: Request.Url.Scheme);
                     await
-                        UserManager.SendEmailAsync(model.Email, "Confirm your account", "\">link</a><br>Your Password is:" + model.Password);
+                        UserManager.SendEmailAsync(model.Email, "Confirm your account", callbackUrl + "<br>Your Password is:" + model.Password);
                     ViewBag.Link = callbackUrl;
                     return View("DisplayEmail");
                 }

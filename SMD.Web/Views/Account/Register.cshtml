@@ -1,4 +1,4 @@
-﻿@model MPC.MIS.Models.RegisterModel
+﻿@model SMD.Models.IdentityModels.ViewModels.RegisterViewModel
 @{
     ViewBag.Title = "Register";
 }
@@ -14,10 +14,14 @@
 
     <fieldset>
         <legend>Registration Form</legend>
-        <ol>
+        <ol class="list-unstyled">
             <li>
-                @Html.LabelFor(m => m.UserName)
-                @Html.TextBoxFor(m => m.UserName)
+                @Html.LabelFor(m => m.Email)
+                @Html.TextBoxFor(m => m.Email)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.FullName)
+                @Html.TextBoxFor(m => m.FullName)
             </li>
             <li>
                 @Html.LabelFor(m => m.Password)

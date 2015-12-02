@@ -100,7 +100,7 @@
                         <img src="~/Content/themes/Centaurus/img/logo.png" alt="" class="normal-logo logo-white" height="30" width="180" style="margin-left:17px;margin-top:50px;margin-bottom:50px;" />
                     </a>*@
                 <section id="col-left" class="col-left-nano">
-                    @if (User != null && User.Identity != null)
+                    @if (User != null && User.Identity != null && User.Identity.IsAuthenticated)
                     {
                         <div id="col-left-inner" class="col-left-nano-content">
 
