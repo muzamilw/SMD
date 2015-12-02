@@ -1,5 +1,7 @@
 ﻿using Microsoft.Practices.Unity;
+using SMD.Interfaces.Repository;
 using SMD.Repository.BaseRepository;
+using SMD.Repository.Repositories;
 
 namespace SMD.Repository
 {
@@ -14,6 +16,7 @@ namespace SMD.Repository
         public static void RegisterType(IUnityContainer unityContainer)
         {
             unityContainer.RegisterType<BaseDbContext>(new PerRequestLifetimeManager());
+            unityContainer.RegisterType<IProfileQuestionRepository, ProfileQuestionRepository>();
         }
     }
 }

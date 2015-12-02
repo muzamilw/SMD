@@ -1,0 +1,729 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SMDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="AlternateEmail" Type="nvarchar" MaxLength="256" />
+          <Property Name="IsEmailVerified" Type="nchar" MaxLength="10" />
+          <Property Name="Status" Type="int" />
+          <Property Name="CreatedDateTime" Type="datetime" />
+          <Property Name="ModifiedDateTime" Type="datetime" />
+          <Property Name="LastLoginTime" Type="datetime" />
+          <Property Name="Phone1" Type="nvarchar" MaxLength="100" />
+          <Property Name="Phone2" Type="nvarchar" MaxLength="100" />
+          <Property Name="Jobtitle" Type="nvarchar" MaxLength="50" />
+          <Property Name="ContactNotes" Type="nvarchar(max)" />
+          <Property Name="IsSubscribed" Type="bit" Nullable="false" />
+          <Property Name="AppID" Type="int" />
+          <Property Name="CompanyName" Type="nvarchar" MaxLength="200" />
+          <Property Name="SalesEmail" Type="nvarchar" MaxLength="300" />
+          <Property Name="CompanyRepresentative" Type="nvarchar" MaxLength="300" />
+          <Property Name="Address1" Type="nvarchar" MaxLength="200" />
+          <Property Name="Address2" Type="nvarchar" MaxLength="200" />
+          <Property Name="CityID" Type="int" />
+          <Property Name="CountryID" Type="int" />
+          <Property Name="State" Type="nvarchar" MaxLength="200" />
+          <Property Name="ZipCode" Type="nvarchar" MaxLength="100" />
+          <Property Name="UserTimeZone" Type="nvarchar" MaxLength="50" />
+          <Property Name="ReferralCode" Type="nvarchar" MaxLength="100" />
+          <Property Name="AfilliatianStatus" Type="bit" />
+          <Property Name="ChargeBeeCustomerID" Type="nvarchar" MaxLength="50" />
+          <Property Name="ChargeBeesubscriptionID" Type="nvarchar" MaxLength="50" />
+          <Property Name="RegisteredViaReferral" Type="bit" />
+          <Property Name="ReferringUserID" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="ProfileQuestion">
+          <Key>
+            <PropertyRef Name="PQID" />
+          </Key>
+          <Property Name="PQID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LanguageID" Type="int" />
+          <Property Name="CountryID" Type="int" />
+          <Property Name="ProfileGroupID" Type="int" />
+          <Property Name="Priority" Type="int" />
+          <Property Name="Type" Type="int" />
+          <Property Name="Question" Type="nvarchar" MaxLength="300" />
+          <Property Name="RefreshTime" Type="int" />
+          <Property Name="SkippedCount" Type="int" />
+          <Property Name="CreationDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="100" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="100" />
+          <Property Name="HasLinkedQuestions" Type="bit" />
+          <Property Name="PenalityForNotAnswering" Type="int" />
+        </EntityType>
+        <EntityType Name="ProfileQuestionAnswer">
+          <Key>
+            <PropertyRef Name="PQAnswerID" />
+          </Key>
+          <Property Name="PQAnswerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PQID" Type="int" />
+          <Property Name="type" Type="int" />
+          <Property Name="AnswerString" Type="nvarchar" MaxLength="100" />
+          <Property Name="ImagePath" Type="nvarchar" MaxLength="200" />
+          <Property Name="SortOrder" Type="int" />
+          <Property Name="LinkedQuestion1ID" Type="int" />
+          <Property Name="LinkedQuestion2ID" Type="int" />
+          <Property Name="LinkedQuestion3ID" Type="int" />
+          <Property Name="LinkedQuestion4ID" Type="int" />
+          <Property Name="LinkedQuestion5ID" Type="int" />
+          <Property Name="LinkedQuestion6ID" Type="int" />
+        </EntityType>
+        <EntityType Name="ProfileQuestionGroup">
+          <Key>
+            <PropertyRef Name="ProfileGroupID" />
+          </Key>
+          <Property Name="ProfileGroupID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProfileGroupName" Type="nvarchar" MaxLength="100" />
+          <Property Name="ImagePath" Type="nvarchar" MaxLength="200" />
+          <Property Name="LangaugeID" Type="int" />
+          <Property Name="CountryID" Type="int" />
+        </EntityType>
+        <EntityType Name="ProfileQuestionUserAnswer">
+          <Key>
+            <PropertyRef Name="PQUAnswerID" />
+          </Key>
+          <Property Name="PQUAnswerID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PQID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="AnswerDateTime" Type="datetime" Nullable="false" />
+          <Property Name="PQAnswerID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfileQuestionAnswer_ProfileQuestion">
+          <End Role="ProfileQuestion" Type="Self.ProfileQuestion" Multiplicity="0..1" />
+          <End Role="ProfileQuestionAnswer" Type="Self.ProfileQuestionAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProfileQuestion">
+              <PropertyRef Name="PQID" />
+            </Principal>
+            <Dependent Role="ProfileQuestionAnswer">
+              <PropertyRef Name="PQID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfileQuestionUserAnswer_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="ProfileQuestionUserAnswer" Type="Self.ProfileQuestionUserAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProfileQuestionUserAnswer">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfileQuestionUserAnswer_ProfileQuestion">
+          <End Role="ProfileQuestion" Type="Self.ProfileQuestion" Multiplicity="1" />
+          <End Role="ProfileQuestionUserAnswer" Type="Self.ProfileQuestionUserAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProfileQuestion">
+              <PropertyRef Name="PQID" />
+            </Principal>
+            <Dependent Role="ProfileQuestionUserAnswer">
+              <PropertyRef Name="PQID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfileQuestionUserAnswer_ProfileQuestionAnswer">
+          <End Role="ProfileQuestionAnswer" Type="Self.ProfileQuestionAnswer" Multiplicity="1" />
+          <End Role="ProfileQuestionUserAnswer" Type="Self.ProfileQuestionUserAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProfileQuestionAnswer">
+              <PropertyRef Name="PQAnswerID" />
+            </Principal>
+            <Dependent Role="ProfileQuestionUserAnswer">
+              <PropertyRef Name="PQAnswerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SMDModelStoreContainer">
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProfileQuestion" EntityType="Self.ProfileQuestion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProfileQuestionAnswer" EntityType="Self.ProfileQuestionAnswer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProfileQuestionGroup" EntityType="Self.ProfileQuestionGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProfileQuestionUserAnswer" EntityType="Self.ProfileQuestionUserAnswer" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfileQuestionAnswer_ProfileQuestion" Association="Self.FK_ProfileQuestionAnswer_ProfileQuestion">
+            <End Role="ProfileQuestion" EntitySet="ProfileQuestion" />
+            <End Role="ProfileQuestionAnswer" EntitySet="ProfileQuestionAnswer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfileQuestionUserAnswer_AspNetUsers" Association="Self.FK_ProfileQuestionUserAnswer_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="ProfileQuestionUserAnswer" EntitySet="ProfileQuestionUserAnswer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfileQuestionUserAnswer_ProfileQuestion" Association="Self.FK_ProfileQuestionUserAnswer_ProfileQuestion">
+            <End Role="ProfileQuestion" EntitySet="ProfileQuestion" />
+            <End Role="ProfileQuestionUserAnswer" EntitySet="ProfileQuestionUserAnswer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfileQuestionUserAnswer_ProfileQuestionAnswer" Association="Self.FK_ProfileQuestionUserAnswer_ProfileQuestionAnswer">
+            <End Role="ProfileQuestionAnswer" EntitySet="ProfileQuestionAnswer" />
+            <End Role="ProfileQuestionUserAnswer" EntitySet="ProfileQuestionUserAnswer" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DomainModels" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="UserLogin">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FullName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AlternateEmail" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="IsEmailVerified" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="LastLoginTime" Type="DateTime" Precision="3" />
+          <Property Name="Phone1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Phone2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Jobtitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ContactNotes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsSubscribed" Type="Boolean" Nullable="false" />
+          <Property Name="AppId" Type="Int32" />
+          <Property Name="CompanyName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="SalesEmail" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyRepresentative" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Address1" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Address2" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CityId" Type="Int32" />
+          <Property Name="CountryId" Type="Int32" />
+          <Property Name="State" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ZipCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="UserTimeZone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ReferralCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="AfilliatianStatus" Type="Boolean" />
+          <Property Name="ChargeBeeCustomerId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ChargeBeesubscriptionId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RegisteredViaReferral" Type="Boolean" />
+          <Property Name="ReferringUserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="Roles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+          <NavigationProperty Name="ProfileQuestionUserAnswers" Relationship="DomainModels.FK_ProfileQuestionUserAnswer_AspNetUsers" FromRole="User" ToRole="ProfileQuestionUserAnswer" />
+          <NavigationProperty Name="Claims" Relationship="DomainModels.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="User" ToRole="AspNetUserClaim" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="DomainModels.User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="DomainModels.UserLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Role="AspNetRoles" Type="DomainModels.Role" Multiplicity="*" />
+          <End Role="AspNetUsers" Type="DomainModels.User" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="BaseDbContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Roles" EntityType="DomainModels.Role" />
+          <EntitySet Name="UserLogins" EntityType="DomainModels.UserLogin" />
+          <EntitySet Name="Users" EntityType="DomainModels.User" />
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="Users" />
+            <End Role="AspNetUserLogins" EntitySet="UserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
+            <End Role="AspNetRoles" EntitySet="Roles" />
+            <End Role="AspNetUsers" EntitySet="Users" />
+          </AssociationSet>
+          <EntitySet Name="ProfileQuestions" EntityType="DomainModels.ProfileQuestion" />
+          <EntitySet Name="ProfileQuestionAnswers" EntityType="DomainModels.ProfileQuestionAnswer" />
+          <EntitySet Name="ProfileQuestionGroups" EntityType="DomainModels.ProfileQuestionGroup" />
+          <EntitySet Name="ProfileQuestionUserAnswers" EntityType="DomainModels.ProfileQuestionUserAnswer" />
+          <AssociationSet Name="FK_ProfileQuestionUserAnswer_AspNetUsers" Association="DomainModels.FK_ProfileQuestionUserAnswer_AspNetUsers">
+            <End Role="User" EntitySet="Users" />
+            <End Role="ProfileQuestionUserAnswer" EntitySet="ProfileQuestionUserAnswers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfileQuestionAnswer_ProfileQuestion" Association="DomainModels.FK_ProfileQuestionAnswer_ProfileQuestion">
+            <End Role="ProfileQuestion" EntitySet="ProfileQuestions" />
+            <End Role="ProfileQuestionAnswer" EntitySet="ProfileQuestionAnswers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfileQuestionUserAnswer_ProfileQuestion" Association="DomainModels.FK_ProfileQuestionUserAnswer_ProfileQuestion">
+            <End Role="ProfileQuestion" EntitySet="ProfileQuestions" />
+            <End Role="ProfileQuestionUserAnswer" EntitySet="ProfileQuestionUserAnswers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfileQuestionUserAnswer_ProfileQuestionAnswer" Association="DomainModels.FK_ProfileQuestionUserAnswer_ProfileQuestionAnswer">
+            <End Role="ProfileQuestionAnswer" EntitySet="ProfileQuestionAnswers" />
+            <End Role="ProfileQuestionUserAnswer" EntitySet="ProfileQuestionUserAnswers" />
+          </AssociationSet>
+          <EntitySet Name="UserClaims" EntityType="DomainModels.UserClaim" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="DomainModels.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="User" EntitySet="Users" />
+            <End Role="AspNetUserClaim" EntitySet="UserClaims" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="ProfileQuestion">
+          <Key>
+            <PropertyRef Name="PqId" />
+          </Key>
+          <Property Name="PqId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LanguageId" Type="Int32" />
+          <Property Name="CountryId" Type="Int32" />
+          <Property Name="ProfileGroupId" Type="Int32" />
+          <Property Name="Priority" Type="Int32" />
+          <Property Name="Type" Type="Int32" />
+          <Property Name="Question" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="RefreshTime" Type="Int32" />
+          <Property Name="SkippedCount" Type="Int32" />
+          <Property Name="CreationDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="HasLinkedQuestions" Type="Boolean" />
+          <Property Name="PenalityForNotAnswering" Type="Int32" />
+          <NavigationProperty Name="ProfileQuestionAnswers" Relationship="DomainModels.FK_ProfileQuestionAnswer_ProfileQuestion" FromRole="ProfileQuestion" ToRole="ProfileQuestionAnswer" />
+          <NavigationProperty Name="ProfileQuestionUserAnswers" Relationship="DomainModels.FK_ProfileQuestionUserAnswer_ProfileQuestion" FromRole="ProfileQuestion" ToRole="ProfileQuestionUserAnswer" />
+        </EntityType>
+        <EntityType Name="ProfileQuestionAnswer">
+          <Key>
+            <PropertyRef Name="PqAnswerId" />
+          </Key>
+          <Property Name="PqAnswerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PqId" Type="Int32" />
+          <Property Name="Type" Type="Int32" />
+          <Property Name="AnswerString" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ImagePath" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="SortOrder" Type="Int32" />
+          <Property Name="LinkedQuestion1Id" Type="Int32" />
+          <Property Name="LinkedQuestion2Id" Type="Int32" />
+          <Property Name="LinkedQuestion3Id" Type="Int32" />
+          <Property Name="LinkedQuestion4Id" Type="Int32" />
+          <Property Name="LinkedQuestion5Id" Type="Int32" />
+          <Property Name="LinkedQuestion6Id" Type="Int32" />
+          <NavigationProperty Name="ProfileQuestion" Relationship="DomainModels.FK_ProfileQuestionAnswer_ProfileQuestion" FromRole="ProfileQuestionAnswer" ToRole="ProfileQuestion" />
+          <NavigationProperty Name="ProfileQuestionUserAnswers" Relationship="DomainModels.FK_ProfileQuestionUserAnswer_ProfileQuestionAnswer" FromRole="ProfileQuestionAnswer" ToRole="ProfileQuestionUserAnswer" />
+        </EntityType>
+        <EntityType Name="ProfileQuestionGroup">
+          <Key>
+            <PropertyRef Name="ProfileGroupId" />
+          </Key>
+          <Property Name="ProfileGroupId" Type="Int32" Nullable="false" />
+          <Property Name="ProfileGroupName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ImagePath" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LangaugeId" Type="Int32" />
+          <Property Name="CountryId" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ProfileQuestionUserAnswer">
+          <Key>
+            <PropertyRef Name="PquAnswerId" />
+          </Key>
+          <Property Name="PquAnswerId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PqId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="AnswerDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PqAnswerId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="DomainModels.FK_ProfileQuestionUserAnswer_AspNetUsers" FromRole="ProfileQuestionUserAnswer" ToRole="User" />
+          <NavigationProperty Name="ProfileQuestion" Relationship="DomainModels.FK_ProfileQuestionUserAnswer_ProfileQuestion" FromRole="ProfileQuestionUserAnswer" ToRole="ProfileQuestion" />
+          <NavigationProperty Name="ProfileQuestionAnswer" Relationship="DomainModels.FK_ProfileQuestionUserAnswer_ProfileQuestionAnswer" FromRole="ProfileQuestionUserAnswer" ToRole="ProfileQuestionAnswer" />
+        </EntityType>
+        <Association Name="FK_ProfileQuestionUserAnswer_AspNetUsers">
+          <End Type="DomainModels.User" Role="User" Multiplicity="1" />
+          <End Type="DomainModels.ProfileQuestionUserAnswer" Role="ProfileQuestionUserAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProfileQuestionUserAnswer">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfileQuestionAnswer_ProfileQuestion">
+          <End Type="DomainModels.ProfileQuestion" Role="ProfileQuestion" Multiplicity="0..1" />
+          <End Type="DomainModels.ProfileQuestionAnswer" Role="ProfileQuestionAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProfileQuestion">
+              <PropertyRef Name="PqId" />
+            </Principal>
+            <Dependent Role="ProfileQuestionAnswer">
+              <PropertyRef Name="PqId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfileQuestionUserAnswer_ProfileQuestion">
+          <End Type="DomainModels.ProfileQuestion" Role="ProfileQuestion" Multiplicity="1" />
+          <End Type="DomainModels.ProfileQuestionUserAnswer" Role="ProfileQuestionUserAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProfileQuestion">
+              <PropertyRef Name="PqId" />
+            </Principal>
+            <Dependent Role="ProfileQuestionUserAnswer">
+              <PropertyRef Name="PqId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfileQuestionUserAnswer_ProfileQuestionAnswer">
+          <End Type="DomainModels.ProfileQuestionAnswer" Role="ProfileQuestionAnswer" Multiplicity="1" />
+          <End Type="DomainModels.ProfileQuestionUserAnswer" Role="ProfileQuestionUserAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProfileQuestionAnswer">
+              <PropertyRef Name="PqAnswerId" />
+            </Principal>
+            <Dependent Role="ProfileQuestionUserAnswer">
+              <PropertyRef Name="PqAnswerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="UserClaim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="User" Relationship="DomainModels.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaim" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Type="DomainModels.User" Role="User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="DomainModels.UserClaim" Role="AspNetUserClaim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaim">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SMDModelStoreContainer" CdmEntityContainer="BaseDbContext">
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="DomainModels.Role">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserLogins">
+            <EntityTypeMapping TypeName="DomainModels.UserLogin">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="DomainModels.User">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="AlternateEmail" ColumnName="AlternateEmail" />
+                <ScalarProperty Name="IsEmailVerified" ColumnName="IsEmailVerified" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="ModifiedDateTime" ColumnName="ModifiedDateTime" />
+                <ScalarProperty Name="LastLoginTime" ColumnName="LastLoginTime" />
+                <ScalarProperty Name="Phone1" ColumnName="Phone1" />
+                <ScalarProperty Name="Phone2" ColumnName="Phone2" />
+                <ScalarProperty Name="Jobtitle" ColumnName="Jobtitle" />
+                <ScalarProperty Name="ContactNotes" ColumnName="ContactNotes" />
+                <ScalarProperty Name="IsSubscribed" ColumnName="IsSubscribed" />
+                <ScalarProperty Name="AppId" ColumnName="AppID" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="SalesEmail" ColumnName="SalesEmail" />
+                <ScalarProperty Name="CompanyRepresentative" ColumnName="CompanyRepresentative" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="CityId" ColumnName="CityID" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryID" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="UserTimeZone" ColumnName="UserTimeZone" />
+                <ScalarProperty Name="ReferralCode" ColumnName="ReferralCode" />
+                <ScalarProperty Name="AfilliatianStatus" ColumnName="AfilliatianStatus" />
+                <ScalarProperty Name="ChargeBeeCustomerId" ColumnName="ChargeBeeCustomerID" />
+                <ScalarProperty Name="ChargeBeesubscriptionId" ColumnName="ChargeBeesubscriptionID" />
+                <ScalarProperty Name="RegisteredViaReferral" ColumnName="RegisteredViaReferral" />
+                <ScalarProperty Name="ReferringUserId" ColumnName="ReferringUserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="DomainModels.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetRoles">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="AspNetUsers">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="ProfileQuestions">
+            <EntityTypeMapping TypeName="DomainModels.ProfileQuestion">
+              <MappingFragment StoreEntitySet="ProfileQuestion">
+                <ScalarProperty Name="PenalityForNotAnswering" ColumnName="PenalityForNotAnswering" />
+                <ScalarProperty Name="HasLinkedQuestions" ColumnName="HasLinkedQuestions" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="SkippedCount" ColumnName="SkippedCount" />
+                <ScalarProperty Name="RefreshTime" ColumnName="RefreshTime" />
+                <ScalarProperty Name="Question" ColumnName="Question" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Priority" ColumnName="Priority" />
+                <ScalarProperty Name="ProfileGroupId" ColumnName="ProfileGroupID" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryID" />
+                <ScalarProperty Name="LanguageId" ColumnName="LanguageID" />
+                <ScalarProperty Name="PqId" ColumnName="PQID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProfileQuestionAnswers">
+            <EntityTypeMapping TypeName="DomainModels.ProfileQuestionAnswer">
+              <MappingFragment StoreEntitySet="ProfileQuestionAnswer">
+                <ScalarProperty Name="LinkedQuestion6Id" ColumnName="LinkedQuestion6ID" />
+                <ScalarProperty Name="LinkedQuestion5Id" ColumnName="LinkedQuestion5ID" />
+                <ScalarProperty Name="LinkedQuestion4Id" ColumnName="LinkedQuestion4ID" />
+                <ScalarProperty Name="LinkedQuestion3Id" ColumnName="LinkedQuestion3ID" />
+                <ScalarProperty Name="LinkedQuestion2Id" ColumnName="LinkedQuestion2ID" />
+                <ScalarProperty Name="LinkedQuestion1Id" ColumnName="LinkedQuestion1ID" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+                <ScalarProperty Name="AnswerString" ColumnName="AnswerString" />
+                <ScalarProperty Name="Type" ColumnName="type" />
+                <ScalarProperty Name="PqId" ColumnName="PQID" />
+                <ScalarProperty Name="PqAnswerId" ColumnName="PQAnswerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProfileQuestionGroups">
+            <EntityTypeMapping TypeName="DomainModels.ProfileQuestionGroup">
+              <MappingFragment StoreEntitySet="ProfileQuestionGroup">
+                <ScalarProperty Name="CountryId" ColumnName="CountryID" />
+                <ScalarProperty Name="LangaugeId" ColumnName="LangaugeID" />
+                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+                <ScalarProperty Name="ProfileGroupName" ColumnName="ProfileGroupName" />
+                <ScalarProperty Name="ProfileGroupId" ColumnName="ProfileGroupID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProfileQuestionUserAnswers">
+            <EntityTypeMapping TypeName="DomainModels.ProfileQuestionUserAnswer">
+              <MappingFragment StoreEntitySet="ProfileQuestionUserAnswer">
+                <ScalarProperty Name="PqAnswerId" ColumnName="PQAnswerID" />
+                <ScalarProperty Name="AnswerDateTime" ColumnName="AnswerDateTime" />
+                <ScalarProperty Name="UserId" ColumnName="UserID" />
+                <ScalarProperty Name="PqId" ColumnName="PQID" />
+                <ScalarProperty Name="PquAnswerId" ColumnName="PQUAnswerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserClaims">
+            <EntityTypeMapping TypeName="DomainModels.UserClaim">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

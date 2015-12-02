@@ -1,6 +1,7 @@
-﻿@model MPC.MIS.Models.RegisterExternalLoginModel
+﻿@model SMD.Models.IdentityModels.ViewModels.ExternalLoginConfirmationViewModel
 @{
     ViewBag.Title = "Register";
+    Layout = "";
 }
 
 <hgroup class="title">
@@ -21,12 +22,12 @@
         </p>
         <ol>
             <li class="name">
-                @Html.LabelFor(m => m.UserName)
-                @Html.TextBoxFor(m => m.UserName)
-                @Html.ValidationMessageFor(m => m.UserName)
+                @Html.LabelFor(m => m.Email)
+                @Html.TextBoxFor(m => m.Email)
+                @Html.ValidationMessageFor(m => m.Email)
             </li>
         </ol>
-        @Html.HiddenFor(m => m.ExternalLoginData)
+        @*@Html.HiddenFor(m => m.ExternalLoginData)*@
         <input type="submit" value="Register" />
     </fieldset>
 }

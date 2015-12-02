@@ -102,6 +102,7 @@
     <Compile Include="Common\AccessRight.cs" />
     <Compile Include="Common\AccessRightClaimValue.cs" />
     <Compile Include="Common\ActiveModuleMenuItem.cs" />
+    <Compile Include="Common\ProfileQuestionByColumn.cs" />
     <Compile Include="Common\SecurityRoles.cs" />
     <Compile Include="Common\StringHelper.cs" />
     <Compile Include="Common\Enums.cs" />
@@ -110,7 +111,19 @@
     <Compile Include="Common\NameClaimValue.cs" />
     <Compile Include="Common\UserIdentityModel.cs" />
     <Compile Include="Common\Utility.cs" />
-    <Compile Include="DomainModels\Class1.cs" />
+    <Compile Include="DomainModels\ProfileQuestion.cs" />
+    <Compile Include="DomainModels\ProfileQuestionAnswer.cs" />
+    <Compile Include="DomainModels\ProfileQuestionGroup.cs" />
+    <Compile Include="DomainModels\ProfileQuestionUserAnswer.cs" />
+    <Compile Include="IdentityModels\Role.cs" />
+    <Compile Include="IdentityModels\Role`.cs" />
+    <Compile Include="IdentityModels\User.cs" />
+    <Compile Include="IdentityModels\UserClaim.cs" />
+    <Compile Include="IdentityModels\UserLogin.cs" />
+    <Compile Include="IdentityModels\User`.cs" />
+    <Compile Include="IdentityModels\ViewModels\AccountViewModels.cs" />
+    <Compile Include="IdentityModels\ViewModels\AdminViewModel.cs" />
+    <Compile Include="IdentityModels\ViewModels\ManageViewModels.cs" />
     <Compile Include="LanguageResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -126,8 +139,9 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="RequestModels\Class1.cs" />
-    <Compile Include="ResponseModels\Class1.cs" />
+    <Compile Include="RequestModels\GetPagedListRequest.cs" />
+    <Compile Include="RequestModels\ProfileQuestionSearchRequest.cs" />
+    <Compile Include="ResponseModels\ProfileQuestionSearchRequestResponse.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">

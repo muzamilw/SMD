@@ -16,8 +16,8 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using Newtonsoft.Json;
 using System.Configuration;
-using GrapeCity.ActiveReports;
 using SMD.Interfaces;
+using SMD.WebBase.Mvc;
 
 namespace SMD.MIS.Controllers
 {
@@ -63,5 +63,13 @@ namespace SMD.MIS.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Welcome Page
+        /// </summary>
+        [SiteAuthorize]
+        public ActionResult Welcome()
+        {
+            return View();
+        }
     }
 }

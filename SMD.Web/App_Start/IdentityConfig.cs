@@ -10,22 +10,24 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Threading.Tasks;
 using System.Web;
-using MPC.Models.DomainModels;
+using SMD.Models.DomainModels;
 using Microsoft.Owin.Security.OAuth;
-using MPC.Models.Common;
-using MPC.Implementation.MISServices;
+using SMD.Models.Common;
+using SMD.Implementation;
+using SMD.Implementation.Identity;
+using SMD.Models.IdentityModels;
 
 namespace IdentitySample.Models
 {
     /// <summary>
     /// Application Signin Manager
     /// </summary>
-    public class ApplicationSignInManager : SignInManager<MisUser, string>
+    public class ApplicationSignInManager : SignInManager<User, string>
     {
         public ApplicationSignInManager(ApplicationUserManager userManager, IAuthenticationManager authenticationManager) :
             base(userManager, authenticationManager) { }
 
-        public override Task<ClaimsIdentity> CreateUserIdentityAsync(MisUser user)
+        public override Task<ClaimsIdentity> CreateUserIdentityAsync(User user)
         {
             return user.GenerateUserIdentityAsync((ApplicationUserManager)UserManager, DefaultAuthenticationTypes.ApplicationCookie);
         }
