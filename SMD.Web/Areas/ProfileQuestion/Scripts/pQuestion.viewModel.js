@@ -14,6 +14,8 @@ define("pQuestion/pQuestion.viewModel",
                     pager = ko.observable(),
                     //sorting
                     sortOn = ko.observable(1),
+                    // Search Filter value 
+                    filterValue = ko.observable(),
                     //Assending  / Desending
                     sortIsAsc = ko.observable(true),
                     // Controlls editor visibility 
@@ -27,6 +29,7 @@ define("pQuestion/pQuestion.viewModel",
                     getQuestions = function () {
                         dataservice.searchProfileQuestions(
                             {
+                                ProfileQuestionFilterText: filterValue(),
                                 PageSize: 10,
                                 PageNo: 1,//pager().currentPage(),
                                 SortBy: sortOn(),
@@ -35,19 +38,35 @@ define("pQuestion/pQuestion.viewModel",
                             {
                                 success: function (data) {
                                     questions.removeAll();
-                                    toastr.success("I am back !");
-                                    // pager().totalCount(data.TotalCount);
-                                    //_.each(data.ParentHireGroupDesc, function (item) {
-                                    //    parentHireGroups.push(model.parentHireGroupServertoClientMapper(item));
-                                    //});
+                                   //  pager().totalCount(data.TotalCount);
+                                    _.each(data.ProfileQuestions, function (item) {
+                                        questions.push(model.questionServertoClientMapper(item));
+                                    });
 
                                 },
                                 error: function () {
-                                    toastr.error(ist.resourceText.DepartmentLoadFailError);
+                                    toastr.error("Failed to load profile questions!");
                                 }
                             });
                     },
-               
+                    
+                    // Search Filter 
+                    filterProfileQuestion= function() {
+                        getQuestions();
+                    },
+                    // Add new Profile Question
+                    addNewProfileQuestion = function() {
+                       isEditorVisible(true);
+                    },
+                    // Close Editor 
+                    closeEditDialog= function() {
+                        isEditorVisible(false);
+                    },
+                    // On editing of existing PQ
+                    onEditProfileQuestion= function(item) {
+                        selectedQuestion(item);
+                        isEditorVisible(true);
+                    },
                     // Initialize the view model
                     initialize = function (specifiedView) {
                         view = specifiedView;
@@ -63,7 +82,12 @@ define("pQuestion/pQuestion.viewModel",
                     selectedQuestion: selectedQuestion,
                     questions: questions,
                     getQuestions: getQuestions,
-                    isEditorVisible: isEditorVisible
+                    isEditorVisible: isEditorVisible,
+                    filterProfileQuestion: filterProfileQuestion,
+                    filterValue: filterValue,
+                    addNewProfileQuestion: addNewProfileQuestion,
+                    closeEditDialog: closeEditDialog,
+                    onEditProfileQuestion: onEditProfileQuestion
                     
                 };
             })()

@@ -1255,6 +1255,7 @@
     <Content Include="Areas\Survey\Views\Survey\Index.cshtml" />
     <Content Include="Areas\Survey\Views\Survey\EditSurvery.cshtml" />
     <Content Include="Areas\ProfileQuestion\Views\Manage\Index.cshtml" />
+    <Content Include="Areas\ProfileQuestion\Views\Manage\_ProfileQuestionEditor.cshtml" />
     <None Include="config\Web.connectionstrings.default.config">
       <SubType>Designer</SubType>
     </None>
