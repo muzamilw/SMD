@@ -348,6 +348,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LanguageResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\Common\CommonAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Areas\ProfileQuestion\ProfileQuestionAreaRegistration.cs" />
     <Compile Include="Areas\Survey\Controllers\SurveyController.cs" />
@@ -366,6 +367,10 @@
     <Compile Include="TypeRegistrations.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Common\Scripts\clientSidePagination.js" />
+    <Content Include="Areas\Common\Scripts\confirmation.view.js" />
+    <Content Include="Areas\Common\Scripts\confirmation.viewModel.js" />
+    <Content Include="Areas\Common\Scripts\pagination.js" />
     <Content Include="Areas\ProfileQuestion\Scripts\pQuestion.dataservice.js" />
     <Content Include="Areas\ProfileQuestion\Scripts\pQuestion.model.js" />
     <Content Include="Areas\ProfileQuestion\Scripts\pQuestion.view.js" />
@@ -1256,6 +1261,9 @@
     <Content Include="Areas\Survey\Views\Survey\Index.cshtml" />
     <Content Include="Areas\Survey\Views\Survey\EditSurvery.cshtml" />
     <Content Include="Areas\ProfileQuestion\Views\Manage\Index.cshtml" />
+    <Content Include="Areas\Common\Views\web.config" />
+    <Content Include="Areas\Common\Views\Shared\_ConfirmationDialog.cshtml" />
+    <Content Include="Areas\Common\Views\Shared\_Pager.cshtml" />
     <None Include="config\Web.connectionstrings.default.config">
       <SubType>Designer</SubType>
     </None>
@@ -2387,6 +2395,8 @@
     <Folder Include="Areas\Api\ModelMappers\" />
     <Folder Include="Areas\Api\Models\" />
     <Folder Include="Areas\Api\Views\ProfileQuestion\" />
+    <Folder Include="Areas\Common\Controllers\" />
+    <Folder Include="Areas\Common\Models\" />
     <Folder Include="Areas\Survey\Models\" />
     <Folder Include="Areas\Survey\Views\Shared\" />
     <Folder Include="Content\themes\base\minified\images\" />
