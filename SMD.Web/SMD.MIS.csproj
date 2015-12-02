@@ -349,6 +349,8 @@
     </Compile>
     <Compile Include="Areas\ProfileQuestion\Controllers\ManageController.cs" />
     <Compile Include="Areas\ProfileQuestion\ProfileQuestionAreaRegistration.cs" />
+    <Compile Include="Areas\Survey\Controllers\SurveyController.cs" />
+    <Compile Include="Areas\Survey\SurveyAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UnauthorizedRequestController.cs" />
     <Compile Include="Global.asax.cs">
@@ -1249,6 +1251,9 @@
     <Content Include="Areas\ProfileQuestion\Views\web.config" />
     <Content Include="Areas\ProfileQuestion\Views\_ViewStart.cshtml" />
     <Content Include="Areas\ProfileQuestion\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Survey\Views\web.config" />
+    <Content Include="Areas\Survey\Views\Survey\Index.cshtml" />
+    <Content Include="Areas\Survey\Views\Survey\EditSurvery.cshtml" />
     <Content Include="Areas\ProfileQuestion\Views\Manage\Index.cshtml" />
     <None Include="config\Web.connectionstrings.default.config">
       <SubType>Designer</SubType>
@@ -2372,6 +2377,8 @@
     <Folder Include="Areas\Api\ModelMappers\" />
     <Folder Include="Areas\Api\Models\" />
     <Folder Include="Areas\Api\Views\ProfileQuestion\" />
+    <Folder Include="Areas\Survey\Models\" />
+    <Folder Include="Areas\Survey\Views\Shared\" />
     <Folder Include="Content\themes\base\minified\images\" />
     <Folder Include="Properties\PublishProfiles\" />
     <Folder Include="Reports\" />
