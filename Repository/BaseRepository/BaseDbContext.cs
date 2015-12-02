@@ -75,6 +75,11 @@ namespace SMD.Repository.BaseRepository
         /// User Logins
         /// </summary>
         public DbSet<UserLogin> UserLogins { get; set; }
+
+        /// <summary>
+        /// User Claims
+        /// </summary>
+        public DbSet<UserClaim> UserClaims { get; set; }
         
         /// <summary>
         /// Profile Questions

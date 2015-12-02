@@ -32,12 +32,18 @@ namespace SMD.WebBase.Mvc
             {
                 return false;
             }
+            // This check will allow the user to get in application unless we introduce access rights
+            if (user.Identity.IsAuthenticated)
+            {
+                return true;
+            }
             if (AuthorizationChecker == null)
             {
                 throw new InvalidOperationException(
                     LanguageResources.SiteAuthorizeAttribute_AuthorizationCheckerMissing);
             }
 
+            // This thing won't work until we add access rights
             return AuthorizationChecker.Check(
                 new AuthorizationCheckRequest(MisRoles, AccessRights));
         }

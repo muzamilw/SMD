@@ -149,7 +149,7 @@ namespace SMD.Repository.Repositories
 
             var userLogin = Activator.CreateInstance<UserLogin>();
             userLogin.UserId = user.Id;
-            userLogin.LoginProvider = login.ProviderKey;
+            userLogin.LoginProvider = login.LoginProvider;
             userLogin.ProviderKey = login.ProviderKey;
             user.UserLogins.Add(userLogin);
             return Task.FromResult(0);
@@ -221,12 +221,37 @@ namespace SMD.Repository.Repositories
 
         public Task<IList<Claim>> GetClaimsAsync(User user)
         {
-            throw new NotImplementedException();
+            if (user == null)
+            {
+                throw new ArgumentNullException("user");
+            }
+
+            return Task.FromResult<IList<Claim>>(user.Claims.Select(c => new Claim(c.ClaimType, c.ClaimValue)).ToList());
         }
 
         public Task RemoveClaimAsync(User user, Claim claim)
         {
-            throw new NotImplementedException();
+            if (user == null)
+            {
+                throw new ArgumentNullException("user");
+            }
+
+            if (claim == null)
+            {
+                throw new ArgumentNullException("claim");
+            }
+
+            foreach (var item in user.Claims.Where(uc => uc.ClaimValue == claim.Value && uc.ClaimType == claim.Type).ToList())
+            {
+                user.Claims.Remove(item);
+            }
+
+            foreach (var item in _db.UserClaims.Where(uc => uc.UserId.Equals(user.Id) && uc.ClaimValue == claim.Value && uc.ClaimType == claim.Type).ToList())
+            {
+                _db.UserClaims.Remove(item);
+            }
+
+            return Task.FromResult(0);
         }
 
         // IUserRoleStore<User, int>
@@ -544,7 +569,7 @@ namespace SMD.Repository.Repositories
                 }
             }
 
-            return null;
+            return Task.FromResult(0);
         }
     }
 }

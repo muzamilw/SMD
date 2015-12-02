@@ -118,6 +118,7 @@
     <Compile Include="IdentityModels\Role.cs" />
     <Compile Include="IdentityModels\Role`.cs" />
     <Compile Include="IdentityModels\User.cs" />
+    <Compile Include="IdentityModels\UserClaim.cs" />
     <Compile Include="IdentityModels\UserLogin.cs" />
     <Compile Include="IdentityModels\User`.cs" />
     <Compile Include="IdentityModels\ViewModels\AccountViewModels.cs" />

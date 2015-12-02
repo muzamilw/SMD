@@ -12,6 +12,15 @@
           <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="AspNetUserLogins">
           <Key>
             <PropertyRef Name="LoginProvider" />
@@ -46,7 +55,6 @@
           <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
           <Property Name="AccessFailedCount" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
-          <Property Name="UserDomainKey" Type="bigint" />
           <Property Name="FullName" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="AlternateEmail" Type="nvarchar" MaxLength="256" />
           <Property Name="IsEmailVerified" Type="nchar" MaxLength="10" />
@@ -59,11 +67,6 @@
           <Property Name="Jobtitle" Type="nvarchar" MaxLength="50" />
           <Property Name="ContactNotes" Type="nvarchar(max)" />
           <Property Name="IsSubscribed" Type="bit" Nullable="false" />
-          <Property Name="isDefault" Type="bit" />
-          <Property Name="LoginToken" Type="uniqueidentifier" />
-          <Property Name="EmailSignature" Type="nvarchar(max)" />
-          <Property Name="EstimateHeadNotes" Type="nvarchar(max)" />
-          <Property Name="EstimateFootNotes" Type="nvarchar(max)" />
           <Property Name="AppID" Type="int" />
           <Property Name="CompanyName" Type="nvarchar" MaxLength="200" />
           <Property Name="SalesEmail" Type="nvarchar" MaxLength="300" />
@@ -92,7 +95,7 @@
           <Property Name="ProfileGroupID" Type="int" />
           <Property Name="Priority" Type="int" />
           <Property Name="Type" Type="int" />
-          <Property Name="Question" Type="nvarchar" MaxLength="40" />
+          <Property Name="Question" Type="nvarchar" MaxLength="300" />
           <Property Name="RefreshTime" Type="int" />
           <Property Name="SkippedCount" Type="int" />
           <Property Name="CreationDate" Type="datetime" />
@@ -123,7 +126,7 @@
           <Key>
             <PropertyRef Name="ProfileGroupID" />
           </Key>
-          <Property Name="ProfileGroupID" Type="int" Nullable="false" />
+          <Property Name="ProfileGroupID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ProfileGroupName" Type="nvarchar" MaxLength="100" />
           <Property Name="ImagePath" Type="nvarchar" MaxLength="200" />
           <Property Name="LangaugeID" Type="int" />
@@ -139,6 +142,20 @@
           <Property Name="AnswerDateTime" Type="datetime" Nullable="false" />
           <Property Name="PQAnswerID" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -231,6 +248,7 @@
         </Association>
         <EntityContainer Name="SMDModelStoreContainer">
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
@@ -238,6 +256,10 @@
           <EntitySet Name="ProfileQuestionAnswer" EntityType="Self.ProfileQuestionAnswer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProfileQuestionGroup" EntityType="Self.ProfileQuestionGroup" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProfileQuestionUserAnswer" EntityType="Self.ProfileQuestionUserAnswer" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
@@ -306,7 +328,6 @@
           <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
           <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
           <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="UserDomainKey" Type="Int64" />
           <Property Name="FullName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="AlternateEmail" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="IsEmailVerified" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
@@ -319,11 +340,6 @@
           <Property Name="Jobtitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ContactNotes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="IsSubscribed" Type="Boolean" Nullable="false" />
-          <Property Name="IsDefault" Type="Boolean" />
-          <Property Name="LoginToken" Type="Guid" />
-          <Property Name="EmailSignature" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="EstimateHeadNotes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="EstimateFootNotes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="AppId" Type="Int32" />
           <Property Name="CompanyName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="SalesEmail" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
@@ -344,6 +360,7 @@
           <NavigationProperty Name="UserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
           <NavigationProperty Name="Roles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
           <NavigationProperty Name="ProfileQuestionUserAnswers" Relationship="DomainModels.FK_ProfileQuestionUserAnswer_AspNetUsers" FromRole="User" ToRole="ProfileQuestionUserAnswer" />
+          <NavigationProperty Name="Claims" Relationship="DomainModels.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="User" ToRole="AspNetUserClaim" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="DomainModels.User" Multiplicity="1">
@@ -395,6 +412,11 @@
             <End Role="ProfileQuestionAnswer" EntitySet="ProfileQuestionAnswers" />
             <End Role="ProfileQuestionUserAnswer" EntitySet="ProfileQuestionUserAnswers" />
           </AssociationSet>
+          <EntitySet Name="UserClaims" EntityType="DomainModels.UserClaim" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="DomainModels.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="User" EntitySet="Users" />
+            <End Role="AspNetUserClaim" EntitySet="UserClaims" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="ProfileQuestion">
           <Key>
@@ -406,7 +428,7 @@
           <Property Name="ProfileGroupId" Type="Int32" />
           <Property Name="Priority" Type="Int32" />
           <Property Name="Type" Type="Int32" />
-          <Property Name="Question" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="Question" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="RefreshTime" Type="Int32" />
           <Property Name="SkippedCount" Type="Int32" />
           <Property Name="CreationDate" Type="DateTime" Precision="3" />
@@ -508,6 +530,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="UserClaim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="User" Relationship="DomainModels.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaim" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Type="DomainModels.User" Role="User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="DomainModels.UserClaim" Role="AspNetUserClaim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaim">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -546,7 +592,6 @@
                 <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
                 <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="UserDomainKey" ColumnName="UserDomainKey" />
                 <ScalarProperty Name="FullName" ColumnName="FullName" />
                 <ScalarProperty Name="AlternateEmail" ColumnName="AlternateEmail" />
                 <ScalarProperty Name="IsEmailVerified" ColumnName="IsEmailVerified" />
@@ -559,11 +604,6 @@
                 <ScalarProperty Name="Jobtitle" ColumnName="Jobtitle" />
                 <ScalarProperty Name="ContactNotes" ColumnName="ContactNotes" />
                 <ScalarProperty Name="IsSubscribed" ColumnName="IsSubscribed" />
-                <ScalarProperty Name="IsDefault" ColumnName="isDefault" />
-                <ScalarProperty Name="LoginToken" ColumnName="LoginToken" />
-                <ScalarProperty Name="EmailSignature" ColumnName="EmailSignature" />
-                <ScalarProperty Name="EstimateHeadNotes" ColumnName="EstimateHeadNotes" />
-                <ScalarProperty Name="EstimateFootNotes" ColumnName="EstimateFootNotes" />
                 <ScalarProperty Name="AppId" ColumnName="AppID" />
                 <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
                 <ScalarProperty Name="SalesEmail" ColumnName="SalesEmail" />
@@ -650,6 +690,16 @@
                 <ScalarProperty Name="UserId" ColumnName="UserID" />
                 <ScalarProperty Name="PqId" ColumnName="PQID" />
                 <ScalarProperty Name="PquAnswerId" ColumnName="PQUAnswerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserClaims">
+            <EntityTypeMapping TypeName="DomainModels.UserClaim">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

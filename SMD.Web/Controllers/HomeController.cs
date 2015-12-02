@@ -17,6 +17,7 @@ using System.Net.Http.Headers;
 using Newtonsoft.Json;
 using System.Configuration;
 using SMD.Interfaces;
+using SMD.WebBase.Mvc;
 
 namespace SMD.MIS.Controllers
 {
@@ -62,5 +63,13 @@ namespace SMD.MIS.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Welcome Page
+        /// </summary>
+        [SiteAuthorize]
+        public ActionResult Welcome()
+        {
+            return View();
+        }
     }
 }

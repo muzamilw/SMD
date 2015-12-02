@@ -21,7 +21,6 @@ namespace SMD.Models.IdentityModels
         public bool LockoutEnabled { get; set; }
         public int AccessFailedCount { get; set; }
         public string UserName { get; set; }
-        public long? UserDomainKey { get; set; }
         public string FullName { get; set; }
         public string AlternateEmail { get; set; }
         public string IsEmailVerified { get; set; }
@@ -34,11 +33,6 @@ namespace SMD.Models.IdentityModels
         public string Jobtitle { get; set; }
         public string ContactNotes { get; set; }
         public bool IsSubscribed { get; set; }
-        public bool? IsDefault { get; set; }
-        public Guid? LoginToken { get; set; }
-        public string EmailSignature { get; set; }
-        public string EstimateHeadNotes { get; set; }
-        public string EstimateFootNotes { get; set; }
         public int? AppId { get; set; }
         public string CompanyName { get; set; }
         public string SalesEmail { get; set; } // till here 
@@ -59,6 +53,7 @@ namespace SMD.Models.IdentityModels
 
         public virtual ICollection<UserLogin> UserLogins { get; set; }
         public virtual ICollection<Role> Roles { get; set; }
+        public virtual ICollection<UserClaim> Claims { get; set; }
         public virtual ICollection<ProfileQuestionUserAnswer> ProfileQuestionUserAnswers { get; set; }
     }
 }

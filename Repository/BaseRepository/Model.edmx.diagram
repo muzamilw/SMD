@@ -18,6 +18,8 @@
         <AssociationConnector Association="DomainModels.FK_ProfileQuestionAnswer_ProfileQuestion" />
         <AssociationConnector Association="DomainModels.FK_ProfileQuestionUserAnswer_ProfileQuestion" />
         <AssociationConnector Association="DomainModels.FK_ProfileQuestionUserAnswer_ProfileQuestionAnswer" />
+        <EntityTypeShape EntityType="DomainModels.UserClaim" Width="1.5" PointX="5.875" PointY="9.25" />
+        <AssociationConnector Association="DomainModels.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
