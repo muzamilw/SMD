@@ -342,23 +342,34 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Api\ApiAreaRegistration.cs" />
+    <Compile Include="Areas\Api\Controllers\ProfileQuestionController.cs" />
     <Compile Include="Areas\Api\LanguageResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>LanguageResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Areas\ProfileQuestion\ProfileQuestionAreaRegistration.cs" />
+    <Compile Include="Areas\Survey\Controllers\SurveyController.cs" />
+    <Compile Include="Areas\Survey\SurveyAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UnauthorizedRequestController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helper\CultureHelper.cs" />
+    <Compile Include="ModelMappers\ProfileQuestionMapper.cs" />
+    <Compile Include="Models\RequestResposeModels\ProfileQuestionSearchRequestResponse.cs" />
+    <Compile Include="Models\WebModels\ProfileQuestion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="TypeRegistrations.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\ProfileQuestion\Scripts\pQuestion.dataservice.js" />
+    <Content Include="Areas\ProfileQuestion\Scripts\pQuestion.model.js" />
+    <Content Include="Areas\ProfileQuestion\Scripts\pQuestion.view.js" />
+    <Content Include="Areas\ProfileQuestion\Scripts\pQuestion.viewModel.js" />
     <Content Include="Content\colorpicker.css" />
     <Content Include="Content\CSS\bootstrap\bootstrap-responsive.css" />
     <Content Include="Content\CSS\bootstrap\bootstrap-responsive.min.css" />
@@ -1238,6 +1249,13 @@
     <Content Include="Content\less\StockItemDialog.less" />
     <Content Include="Content\less\Orders.less" />
     <Content Include="Content\less\CompanySelector.less" />
+    <Content Include="Areas\ProfileQuestion\Views\web.config" />
+    <Content Include="Areas\ProfileQuestion\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\ProfileQuestion\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Survey\Views\web.config" />
+    <Content Include="Areas\Survey\Views\Survey\Index.cshtml" />
+    <Content Include="Areas\Survey\Views\Survey\EditSurvery.cshtml" />
+    <Content Include="Areas\ProfileQuestion\Views\Manage\Index.cshtml" />
     <None Include="config\Web.connectionstrings.default.config">
       <SubType>Designer</SubType>
     </None>
@@ -2365,12 +2383,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Api\Controllers\" />
     <Folder Include="Areas\Api\ModelMappers\" />
     <Folder Include="Areas\Api\Models\" />
+    <Folder Include="Areas\Api\Views\ProfileQuestion\" />
+    <Folder Include="Areas\Survey\Models\" />
+    <Folder Include="Areas\Survey\Views\Shared\" />
     <Folder Include="Content\themes\base\minified\images\" />
-    <Folder Include="ModelMappers\" />
-    <Folder Include="Models\" />
     <Folder Include="Properties\PublishProfiles\" />
     <Folder Include="Reports\" />
     <Folder Include="Resources\" />

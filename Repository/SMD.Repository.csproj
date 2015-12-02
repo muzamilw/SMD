@@ -198,6 +198,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\RoleStore.cs" />
+    <Compile Include="Repositories\ProfileQuestionRepository.cs" />
     <Compile Include="Repositories\UserStore.cs" />
     <Compile Include="TypeRegistrations.cs" />
   </ItemGroup>

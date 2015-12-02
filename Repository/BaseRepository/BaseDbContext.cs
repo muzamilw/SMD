@@ -75,6 +75,11 @@ namespace SMD.Repository.BaseRepository
         /// User Logins
         /// </summary>
         public DbSet<UserLogin> UserLogins { get; set; }
+        
+        /// <summary>
+        /// Profile Questions
+        /// </summary>
+        public DbSet<ProfileQuestion> ProfileQuestions { get; set; }
 
 
         #endregion

@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 
-namespace SMD.Models.DomainModels
+namespace SMD.MIS.Models.WebModels
 {
     /// <summary>
-    /// Profile Question Domain Model
+    /// Profile Question Web Model
     /// </summary>
-    public  class ProfileQuestion
+    public class ProfileQuestion
     {
         public int PqId { get; set; }
         public int? LanguageId { get; set; }
@@ -23,8 +22,5 @@ namespace SMD.Models.DomainModels
         public string ModifiedBy { get; set; }
         public bool? HasLinkedQuestions { get; set; }
         public int? PenalityForNotAnswering { get; set; }
-
-        public virtual ICollection<ProfileQuestionAnswer> ProfileQuestionAnswers { get; set; }
-        public virtual ICollection<ProfileQuestionUserAnswer> ProfileQuestionUserAnswers { get; set; }
     }
 }

@@ -319,7 +319,7 @@
           <Property Name="Jobtitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ContactNotes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="IsSubscribed" Type="Boolean" Nullable="false" />
-          <Property Name="isDefault" Type="Boolean" />
+          <Property Name="IsDefault" Type="Boolean" />
           <Property Name="LoginToken" Type="Guid" />
           <Property Name="EmailSignature" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="EstimateHeadNotes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -559,7 +559,7 @@
                 <ScalarProperty Name="Jobtitle" ColumnName="Jobtitle" />
                 <ScalarProperty Name="ContactNotes" ColumnName="ContactNotes" />
                 <ScalarProperty Name="IsSubscribed" ColumnName="IsSubscribed" />
-                <ScalarProperty Name="isDefault" ColumnName="isDefault" />
+                <ScalarProperty Name="IsDefault" ColumnName="isDefault" />
                 <ScalarProperty Name="LoginToken" ColumnName="LoginToken" />
                 <ScalarProperty Name="EmailSignature" ColumnName="EmailSignature" />
                 <ScalarProperty Name="EstimateHeadNotes" ColumnName="EstimateHeadNotes" />

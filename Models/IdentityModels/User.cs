@@ -41,7 +41,7 @@ namespace SMD.Models.IdentityModels
         public string EstimateFootNotes { get; set; }
         public int? AppId { get; set; }
         public string CompanyName { get; set; }
-        public string SalesEmail { get; set; }
+        public string SalesEmail { get; set; } // till here 
         public string CompanyRepresentative { get; set; }
         public string Address1 { get; set; }
         public string Address2 { get; set; }
@@ -59,5 +59,6 @@ namespace SMD.Models.IdentityModels
 
         public virtual ICollection<UserLogin> UserLogins { get; set; }
         public virtual ICollection<Role> Roles { get; set; }
+        public virtual ICollection<ProfileQuestionUserAnswer> ProfileQuestionUserAnswers { get; set; }
     }
 }

@@ -102,6 +102,7 @@
     <Compile Include="Common\AccessRight.cs" />
     <Compile Include="Common\AccessRightClaimValue.cs" />
     <Compile Include="Common\ActiveModuleMenuItem.cs" />
+    <Compile Include="Common\ProfileQuestionByColumn.cs" />
     <Compile Include="Common\SecurityRoles.cs" />
     <Compile Include="Common\StringHelper.cs" />
     <Compile Include="Common\Enums.cs" />
@@ -137,8 +138,9 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="RequestModels\Class1.cs" />
-    <Compile Include="ResponseModels\Class1.cs" />
+    <Compile Include="RequestModels\GetPagedListRequest.cs" />
+    <Compile Include="RequestModels\ProfileQuestionSearchRequest.cs" />
+    <Compile Include="ResponseModels\ProfileQuestionSearchRequestResponse.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">

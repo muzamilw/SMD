@@ -1,8 +1,10 @@
 ﻿using Microsoft.Practices.Unity;
 using SMD.ExceptionHandling.Logger;
 using SMD.Implementation.Identity;
-using SMD.Interfaces.Logger;
+using SMD.Implementation.Services;
 using SMD.Interfaces;
+using SMD.Interfaces.Logger;
+using SMD.Interfaces.Services;
 
 namespace SMD.Implementation
 {
@@ -21,6 +23,7 @@ namespace SMD.Implementation
             unityContainer.RegisterType<ISMDLogger, SMDLogger>();
             unityContainer.RegisterType<IAuthorizationChecker, AuthorizationChecker>();
             unityContainer.RegisterType<IClaimsSecurityService, ClaimsSecurityService>();
+            unityContainer.RegisterType<IProfileQuestionService, ProfileQuestionService>();
 
         }
     }
