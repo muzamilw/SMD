@@ -1,4 +1,6 @@
-﻿namespace SMD.Models.DomainModels
+﻿using SMD.Models.IdentityModels;
+
+namespace SMD.Models.DomainModels
 {
     /// <summary>
     /// User Login Domain Model

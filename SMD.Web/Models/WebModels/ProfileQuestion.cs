@@ -11,6 +11,7 @@ namespace SMD.MIS.Models.WebModels
         public int? LanguageId { get; set; }
         public int? CountryId { get; set; }
         public int? ProfileGroupId { get; set; }
+        public string   ProfileGroupName { get; set; }
         public int? Priority { get; set; }
         public int? Type { get; set; }
         public string Question { get; set; }

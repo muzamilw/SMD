@@ -111,13 +111,21 @@
     <Compile Include="Common\NameClaimValue.cs" />
     <Compile Include="Common\UserIdentityModel.cs" />
     <Compile Include="Common\Utility.cs" />
+    <Compile Include="DomainModels\Country.cs" />
+    <Compile Include="DomainModels\Language.cs" />
     <Compile Include="DomainModels\ProfileQuestion.cs" />
     <Compile Include="DomainModels\ProfileQuestionAnswer.cs" />
     <Compile Include="DomainModels\ProfileQuestionGroup.cs" />
     <Compile Include="DomainModels\ProfileQuestionUserAnswer.cs" />
     <Compile Include="IdentityModels\Role.cs" />
+    <Compile Include="IdentityModels\Role`.cs" />
     <Compile Include="IdentityModels\User.cs" />
+    <Compile Include="IdentityModels\UserClaim.cs" />
     <Compile Include="IdentityModels\UserLogin.cs" />
+    <Compile Include="IdentityModels\User`.cs" />
+    <Compile Include="IdentityModels\ViewModels\AccountViewModels.cs" />
+    <Compile Include="IdentityModels\ViewModels\AdminViewModel.cs" />
+    <Compile Include="IdentityModels\ViewModels\ManageViewModels.cs" />
     <Compile Include="LanguageResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -135,6 +143,7 @@
     </Compile>
     <Compile Include="RequestModels\GetPagedListRequest.cs" />
     <Compile Include="RequestModels\ProfileQuestionSearchRequest.cs" />
+    <Compile Include="ResponseModels\ProfileQuestionBaseResponse.cs" />
     <Compile Include="ResponseModels\ProfileQuestionSearchRequestResponse.cs" />
   </ItemGroup>
   <ItemGroup>

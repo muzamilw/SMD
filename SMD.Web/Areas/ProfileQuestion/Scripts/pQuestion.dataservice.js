@@ -17,6 +17,23 @@ define("pQuestion/pQuestion.dataservice", function () {
                         dataType: 'json',
                         type: 'GET'
                     });
+                    
+
+                    //Delete Profile Questions
+                    amplify.request.define('deleteProfileQuestion', 'ajax', {
+                        url: '/Api/ProfileQuestion',
+                        dataType: 'json',
+                        type: 'DELETE'
+                    });
+
+                    //Get Base Data for Profile Questions
+                    amplify.request.define('getBaseData', 'ajax', {
+                        url: '/Api/ProfileQuestionBase',
+                        dataType: 'json',
+                        type: 'GET'
+                    });
+                    
+
 
                     isInitialized = true;
                 }
@@ -30,10 +47,33 @@ define("pQuestion/pQuestion.dataservice", function () {
                     error: callbacks.error,
                     data: params
                 });
+            }
+            ,
+             // Get Base Data of Profile Questions
+            getBaseData = function (params, callbacks) {
+                initialize();
+                return amplify.request({
+                    resourceId: 'getBaseData',
+                    success: callbacks.success,
+                    error: callbacks.error,
+                    data: params
+                });
+            },
+              // Get Base Data of Profile Questions
+            deleteProfileQuestion = function (params, callbacks) {
+                initialize();
+                return amplify.request({
+                    resourceId: 'deleteProfileQuestion',
+                    success: callbacks.success,
+                    error: callbacks.error,
+                    data: params
+                });
             };
 
         return {
-            searchProfileQuestions: searchProfileQuestions
+            searchProfileQuestions: searchProfileQuestions,
+            getBaseData: getBaseData,
+            deleteProfileQuestion: deleteProfileQuestion
         };
     })();
     return dataService;

@@ -1,5 +1,6 @@
 ﻿using SMD.Interfaces.Repository;
 using SMD.Interfaces.Services;
+using SMD.Models.DomainModels;
 using SMD.Models.RequestModels;
 using SMD.Models.ResponseModels;
 
@@ -36,6 +37,21 @@ namespace SMD.Implementation.Services
                 ProfileQuestions = _profileQuestionRepository.SearchProfileQuestions(request, out rowCount),
                 TotalCount = rowCount
             };
+        }
+
+        /// <summary>
+        /// Delete Profile Question
+        /// </summary>
+        public bool DeleteProfileQuestion(ProfileQuestion profileQuestion)
+        {
+            var dBprofileQuestion=_profileQuestionRepository.Find(profileQuestion.PqId);
+            if (dBprofileQuestion != null)
+            {
+                dBprofileQuestion.Status = 0;     // 0 -> archived  || 1 -> active
+                _profileQuestionRepository.SaveChanges();
+                return true;
+            }
+            return false;
         }
         #endregion
     }
