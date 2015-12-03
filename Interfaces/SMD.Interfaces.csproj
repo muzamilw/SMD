@@ -77,6 +77,10 @@
     <Compile Include="IClaimsSecurityService.cs" />
     <Compile Include="Logger\IMPCLogWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\IAdCampaignRepository.cs" />
+    <Compile Include="Repository\IAdCampaignResponseRepository.cs" />
+    <Compile Include="Repository\IAdCampaignTargetCriteriaRepository.cs" />
+    <Compile Include="Repository\IAdCampaignTargetLocationRepository.cs" />
     <Compile Include="Repository\IBaseRepository.cs" />
     <Compile Include="Repository\IProfileQuestionGroupRepository.cs" />
     <Compile Include="Repository\ILanguageRepository.cs" />
