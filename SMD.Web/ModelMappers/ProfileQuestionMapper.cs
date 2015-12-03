@@ -53,6 +53,9 @@ namespace SMD.MIS.ModelMappers
             };
         }
 
+        /// <summary>
+        /// Creates web model of BaseData
+        /// </summary>
         public static ProfileQuestionBaseResponse CreateFrom(
             this SMD.Models.ResponseModels.ProfileQuestionBaseResponse source)
         {

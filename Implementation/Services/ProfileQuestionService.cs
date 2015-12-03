@@ -1,4 +1,5 @@
-﻿using SMD.Interfaces.Repository;
+﻿using System.Data.Entity.Core.Objects.DataClasses;
+using SMD.Interfaces.Repository;
 using SMD.Interfaces.Services;
 using SMD.Models.DomainModels;
 using SMD.Models.RequestModels;
@@ -13,15 +14,21 @@ namespace SMD.Implementation.Services
     {
         #region Private
         private readonly IProfileQuestionRepository _profileQuestionRepository;
+        private readonly ICountryRepository _countryRepository;
+        private readonly ILanguageRepository _languageRepository;
+        private readonly IProfileQuestionGroupRepository _profileQuestionGroupRepository;
         #endregion
         #region Constructor
         /// <summary>
         /// Constructor 
         /// </summary>
 
-        public ProfileQuestionService(IProfileQuestionRepository profileQuestionRepository)
+        public ProfileQuestionService(IProfileQuestionRepository profileQuestionRepository, ICountryRepository countryRepository, ILanguageRepository languageRepository, IProfileQuestionGroupRepository profileQuestionGroupRepository)
         {
             _profileQuestionRepository = profileQuestionRepository;
+            _countryRepository = countryRepository;
+            _languageRepository = languageRepository;
+            _profileQuestionGroupRepository = profileQuestionGroupRepository;
         }
 
         #endregion
@@ -52,6 +59,19 @@ namespace SMD.Implementation.Services
                 return true;
             }
             return false;
+        }
+
+        /// <summary>
+        /// Get Base Data for PQ
+        /// </summary>
+        public ProfileQuestionBaseResponse GetProfileQuestionBaseData()
+        {
+            return new ProfileQuestionBaseResponse
+            {
+                Countries = _countryRepository.GetAllCountries(),
+                Languages = _languageRepository.GetAllLanguages(),
+                ProfileQuestionGroups = _profileQuestionGroupRepository.GetAllProfileQuestionGroups()
+            };
         }
         #endregion
     }

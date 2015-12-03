@@ -89,12 +89,18 @@
                 <form data-bind="submit:$root.filterProfileQuestion">
                     <div class="filter-block">
                         <div class="form-group" >
-                            <div class="col-xs-3">
+                            <div class="col-xs-2">
                                 <input type="text" class="form-control" placeholder="Search..." data-bind="value:$root.filterValue">
                                 <i data-bind="click:$root.filterProfileQuestion" class="fa fa-search search-icon" style=" margin-right: 8px;"></i>
                             </div>
                             <div class="col-xs-2">
-                                <select class="form-control" @*data-bind="options: $root.baseCompniesList, optionsText: 'CompanyCodeName', optionsValue: 'CompanyId', optionsCaption: '&lt;' + '@Cares.Web.Resources.Organization.Department.Comapny'+ '&gt;' , value:companyFilter"*@></select>
+                                <select class="form-control" data-bind="options: $root.qGroup, optionsText: 'ProfileGroupName', optionsValue: 'ProfileGroupId', optionsCaption: '&lt;' + 'Select Question Group'+ '&gt;' , value:$root.qGroupfilterValue"></select>
+                            </div>
+                            <div class="col-xs-2">
+                                <select class="form-control" data-bind="options: $root.countries, optionsText: 'CountryName', optionsValue: 'CountryId', optionsCaption: '&lt;' + 'Select Country'+ '&gt;' , value:$root.countryfilterValue"></select>
+                            </div>
+                            <div class="col-xs-2">
+                                <select class="form-control" data-bind="options: $root.langs, optionsText: 'LanguageName', optionsValue: 'LanguageId', optionsCaption: '&lt;' + 'Select Language'+ '&gt;' , value:$root.langfilterValue"></select>
                             </div>
                         </div>
                     </div>

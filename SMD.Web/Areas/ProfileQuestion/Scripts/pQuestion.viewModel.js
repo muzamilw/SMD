@@ -11,12 +11,19 @@ define("pQuestion/pQuestion.viewModel",
                 var view,
                     //  Array
                     questions = ko.observableArray([]),
+                    // Base Data
+                    langs = ko.observableArray([]),
+                    countries = ko.observableArray([]),
+                    qGroup = ko.observableArray([]),
                     //pager
                     pager = ko.observable(),
                     //sorting
                     sortOn = ko.observable(1),
                     // Search Filter value 
                     filterValue = ko.observable(),
+                    langfilterValue = ko.observable(),
+                    countryfilterValue = ko.observable(),
+                    qGroupfilterValue = ko.observable(),
                     //Assending  / Desending
                     sortIsAsc = ko.observable(true),
                     // Controlls editor visibility 
@@ -25,7 +32,6 @@ define("pQuestion/pQuestion.viewModel",
                     editorViewModel = new ist.ViewModel(model.hireGroupImage),
                     //selected Question
                     selectedQuestion = editorViewModel.itemForEditing,
-
                     //Get Questions
                     getQuestions = function () {
                         dataservice.searchProfileQuestions(
@@ -53,15 +59,24 @@ define("pQuestion/pQuestion.viewModel",
                     
                      //Get Base Data for Questions
                     getBasedata = function () {
-                        dataservice.searchProfileQuestions(
-                            {
-                                success: function (data) {
-                                  
-                                },
-                                error: function () {
-                                    toastr.error("Failed to load profile questions!");
-                                }
-                            });
+                        dataservice.searchProfileQuestions(null, {
+                            success: function (baseDataFromServer) {
+                                langs.removeAll();
+                                countries.removeAll();
+                                qGroup.removeAll();
+                                
+                                ko.utils.arrayPushAll(langs(), baseDataFromServer.LanguageDropdowns);
+                                ko.utils.arrayPushAll(countries(), baseDataFromServer.CountryDropdowns);
+                                ko.utils.arrayPushAll(qGroup(), baseDataFromServer.ProfileQuestionGroupDropdowns);
+                                
+                                langs.valueHasMutated();
+                                countries.valueHasMutated();
+                                qGroup.valueHasMutated();
+                            },
+                            error: function () {
+                                    toastr.error("Failed to load base data!");
+                            }
+                        });
                     },
                     // Search Filter 
                     filterProfileQuestion= function() {
@@ -106,7 +121,9 @@ define("pQuestion/pQuestion.viewModel",
                         view = specifiedView;
                         ko.applyBindings(view.viewModel, view.bindingRoot);
                         pager(pagination.Pagination({ PageSize: 10 }, questions, getQuestions));
-                     //   getBasedata();
+                        // Base Data Call
+                        getBasedata();
+                        // First request for LV
                         getQuestions();
                     };
                 return {
@@ -124,7 +141,13 @@ define("pQuestion/pQuestion.viewModel",
                     addNewProfileQuestion: addNewProfileQuestion,
                     closeEditDialog: closeEditDialog,
                     onEditProfileQuestion: onEditProfileQuestion,
-                    onDeleteProfileQuestion: onDeleteProfileQuestion
+                    onDeleteProfileQuestion: onDeleteProfileQuestion,
+                    langs: langs,
+                    countries: countries,
+                    qGroup: qGroup,
+                    langfilterValue :langfilterValue,
+                    countryfilterValue:countryfilterValue,
+                    qGroupfilterValue: qGroupfilterValue
                 };
             })()
         };
