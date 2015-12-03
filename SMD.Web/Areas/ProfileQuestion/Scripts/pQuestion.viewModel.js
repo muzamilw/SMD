@@ -21,9 +21,9 @@ define("pQuestion/pQuestion.viewModel",
                     sortOn = ko.observable(1),
                     // Search Filter value 
                     filterValue = ko.observable(),
-                    langfilterValue = ko.observable(),
-                    countryfilterValue = ko.observable(),
-                    qGroupfilterValue = ko.observable(),
+                    langfilterValue = ko.observable(41),
+                    countryfilterValue = ko.observable(214),
+                    qGroupfilterValue = ko.observable(undefined),
                     //Assending  / Desending
                     sortIsAsc = ko.observable(true),
                     // Controlls editor visibility 
@@ -37,7 +37,10 @@ define("pQuestion/pQuestion.viewModel",
                         dataservice.searchProfileQuestions(
                             {
                                 ProfileQuestionFilterText: filterValue(),
-                                PageSize: 10,
+                                LanguageFilter: langfilterValue(),
+                                QuestionGroupFilter: qGroupfilterValue(),
+                                CountryFilter : countryfilterValue(),
+                                PageSize: pager().pageSize(),
                                 PageNo: pager().currentPage(),
                                 SortBy: sortOn(),
                                 IsAsc: sortIsAsc()
