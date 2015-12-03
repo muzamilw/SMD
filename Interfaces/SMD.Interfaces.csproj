@@ -92,6 +92,9 @@
     <Compile Include="Repository\IProfileQuestionRepository.cs" />
     <Compile Include="Services\IEmailManagerService.cs" />
     <Compile Include="Services\IProfileQuestionService.cs" />
+    <Compile Include="Services\ISurveyQuestionService.cs" />
+    <Compile Include="Services\ISurveyQuestionTargetCriteriaService.cs" />
+    <Compile Include="Services\ISurveyQuestionTargetLocationService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\SMD.Models.csproj">
