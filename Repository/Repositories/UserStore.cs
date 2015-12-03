@@ -184,6 +184,11 @@ namespace SMD.Repository.Repositories
                 throw new ArgumentNullException("user");
             }
 
+            if (user.UserLogins == null)
+            {
+                user.UserLogins = new List<UserLogin>();
+            }
+
             return Task.FromResult<IList<UserLoginInfo>>(user.UserLogins.Select(l => new UserLoginInfo(l.LoginProvider, l.ProviderKey)).ToList());
         }
 
@@ -197,6 +202,11 @@ namespace SMD.Repository.Repositories
             if (login == null)
             {
                 throw new ArgumentNullException("login");
+            }
+
+            if (user.UserLogins == null)
+            {
+                user.UserLogins = new List<UserLogin>();
             }
 
             var provider = login.LoginProvider;
@@ -226,6 +236,11 @@ namespace SMD.Repository.Repositories
                 throw new ArgumentNullException("user");
             }
 
+            if (user.Claims == null)
+            {
+                user.Claims = new List<UserClaim>();
+            }
+
             return Task.FromResult<IList<Claim>>(user.Claims.Select(c => new Claim(c.ClaimType, c.ClaimValue)).ToList());
         }
 
@@ -239,6 +254,11 @@ namespace SMD.Repository.Repositories
             if (claim == null)
             {
                 throw new ArgumentNullException("claim");
+            }
+
+            if (user.Claims == null)
+            {
+                user.Claims = new List<UserClaim>();
             }
 
             foreach (var item in user.Claims.Where(uc => uc.ClaimValue == claim.Value && uc.ClaimType == claim.Type).ToList())
@@ -262,7 +282,7 @@ namespace SMD.Repository.Repositories
             {
                 throw new ArgumentNullException("user");
             }
-
+            
             if (string.IsNullOrWhiteSpace(roleName))
             {
                 throw new ArgumentException("Value can not be null", "roleName");
@@ -275,6 +295,11 @@ namespace SMD.Repository.Repositories
                 throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture, "Role {0} not found", new object[] { roleName }));
             }
 
+            if (user.Roles == null)
+            {
+                user.Roles = new List<Role>();
+            }
+
             user.Roles.Add(userRole);
             return Task.FromResult(0);
         }
@@ -284,6 +309,11 @@ namespace SMD.Repository.Repositories
             if (user == null)
             {
                 throw new ArgumentNullException("user");
+            }
+
+            if (user.Roles == null)
+            {
+                user.Roles = new List<Role>();
             }
 
             return Task.FromResult<IList<string>>(user.Roles.Join(_db.Roles, ur => ur.Id, r => r.Id, (ur, r) => r.Name).ToList());
@@ -314,6 +344,11 @@ namespace SMD.Repository.Repositories
             if (string.IsNullOrWhiteSpace(roleName))
             {
                 throw new ArgumentException("Value can not be null or empty", "roleName");
+            }
+
+            if (user.Roles == null)
+            {
+                user.Roles = new List<Role>();
             }
 
             var userRole = user.Roles.SingleOrDefault(r => r.Name == roleName);
