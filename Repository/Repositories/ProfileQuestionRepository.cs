@@ -23,7 +23,10 @@ namespace SMD.Repository.Repositories
         /// </summary>
         private readonly Dictionary<ProfileQuestionByColumn, Func<ProfileQuestion, object>> _profileQuestionOrderByClause = new Dictionary<ProfileQuestionByColumn, Func<ProfileQuestion, object>>
                     {
-                        {ProfileQuestionByColumn.Question, d => d.Question}                       
+                        {ProfileQuestionByColumn.Question, d => d.Question}      ,
+                        {ProfileQuestionByColumn.Group, d => d.ProfileQuestionGroup},
+                        {ProfileQuestionByColumn.HasLinked, d => d.HasLinkedQuestions},
+                        {ProfileQuestionByColumn.Priority, d => d.Priority}    
                     };
         #endregion
         #region Constructor
@@ -65,7 +68,14 @@ namespace SMD.Repository.Repositories
                 question =>
                     (string.IsNullOrEmpty(request.ProfileQuestionFilterText) ||
                      (question.Question.Contains(request.ProfileQuestionFilterText)))
+                     &&
+                     (question.ProfileQuestionGroup.ProfileGroupId==request.QuestionGroupFilter)
+                     &&
+                     (question.CountryId==request.CountryFilter)
+                     &&
+                     (question.LanguageId==request.LanguageFilter)
                      && (question.Status == null || question.Status == 1);   // 0 -> archived  || 1 -> active
+
             rowCount = DbSet.Count(query);
             return request.IsAsc
                 ? DbSet.Where(query)

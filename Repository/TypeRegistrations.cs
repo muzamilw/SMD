@@ -17,7 +17,10 @@ namespace SMD.Repository
         {
             unityContainer.RegisterType<BaseDbContext>(new PerRequestLifetimeManager());
             unityContainer.RegisterType<IProfileQuestionRepository, ProfileQuestionRepository>();
+            unityContainer.RegisterType<IProfileQuestionGroupRepository, ProfileQuestionGroupRepository>();
             unityContainer.RegisterType<ISystemMailsRepository, SystemMailsRepository>();
+            unityContainer.RegisterType<ICountryRepository, CountryRepository>();
+            unityContainer.RegisterType<ILanguageRepository, LanguageRepository>();
         }
     }
 }

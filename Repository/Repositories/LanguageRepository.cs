@@ -4,24 +4,23 @@ using Microsoft.Practices.Unity;
 using SMD.Interfaces.Repository;
 using SMD.Models.DomainModels;
 using SMD.Repository.BaseRepository;
-using System;
 using System.Data.Entity;
 
 namespace SMD.Repository.Repositories
 {
     /// <summary>
-    /// Profile Question Group Repository 
+    /// Language Repository 
     /// </summary>
-    public class ProfileQuestionGroupRepository : BaseRepository<ProfileQuestionGroup>, IProfileQuestionGroupRepository
+    public class LanguageRepository : BaseRepository<Language>, ILanguageRepository
     {
         #region Private
-       
+      
         #endregion
         #region Constructor
         /// <summary>
         /// Constructor 
         /// </summary>
-        public ProfileQuestionGroupRepository(IUnityContainer container)
+        public LanguageRepository(IUnityContainer container)
             : base(container)
         {
 
@@ -30,23 +29,27 @@ namespace SMD.Repository.Repositories
         /// <summary>
         /// Primary database set
         /// </summary>
-        protected override IDbSet<ProfileQuestionGroup> DbSet
+        protected override IDbSet<Language> DbSet
         {
-            get { return db.ProfileQuestionGroups; }
+            get { return db.Languages; }
         }
         #endregion
         #region Public
-        public ProfileQuestionGroup Find(int id)
+      
+        /// <summary>
+        /// Find Language by Id 
+        /// </summary>
+        public Language Find(int id)
         {
-            throw new NotImplementedException();
+            return DbSet.Find(id);
         }
 
         /// <summary>
-        /// Get List of Profile Question Groups 
+        /// Get List of Language 
         /// </summary>
-        public IEnumerable<ProfileQuestionGroup> GetAllProfileQuestionGroups()
+        public IEnumerable<Language> GetAllLanguages()
         {
-            return DbSet.Select(question => question).ToList();
+            return DbSet.Select(lang => lang).ToList();
         }
         #endregion
     }

@@ -12,7 +12,23 @@ namespace SMD.Models.RequestModels
         /// </summary>
         public string ProfileQuestionFilterText { get; set; }
 
-   
+        /// <summary>
+        /// Language Filter Text
+        /// </summary>
+        public int LanguageFilter { get; set; }
+
+        /// <summary>
+        /// Question Group Filter text
+        /// </summary>
+
+        public int QuestionGroupFilter { get; set; }
+
+        /// <summary>
+        /// Country Filter text
+        /// </summary>
+        public int CountryFilter { get; set; }
+
+
         /// <summary>
         /// Profile Question By Column for sorting
         /// </summary>

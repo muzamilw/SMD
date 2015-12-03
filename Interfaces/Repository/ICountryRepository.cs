@@ -1,4 +1,5 @@
-﻿using SMD.Models.DomainModels;
+﻿using System.Collections.Generic;
+using SMD.Models.DomainModels;
 
 namespace SMD.Interfaces.Repository
 {
@@ -7,6 +8,9 @@ namespace SMD.Interfaces.Repository
     /// </summary>
     public interface ICountryRepository : IBaseRepository<Country, int>
     {
-        
+        /// <summary>
+        /// Get List of Coutries 
+        /// </summary>
+        IEnumerable<Country> GetAllCountries();
     }
 }

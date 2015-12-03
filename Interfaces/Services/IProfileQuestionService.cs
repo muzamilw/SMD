@@ -19,5 +19,10 @@ namespace SMD.Interfaces.Services
         /// Delete Profile Question
         /// </summary>
         bool DeleteProfileQuestion(ProfileQuestion profileQuestion);
+
+        /// <summary>
+        /// Get Base Data for PQ
+        /// </summary>
+        ProfileQuestionBaseResponse GetProfileQuestionBaseData();
     }
 }
