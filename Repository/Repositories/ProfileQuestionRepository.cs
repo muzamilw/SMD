@@ -24,7 +24,7 @@ namespace SMD.Repository.Repositories
         private readonly Dictionary<ProfileQuestionByColumn, Func<ProfileQuestion, object>> _profileQuestionOrderByClause = new Dictionary<ProfileQuestionByColumn, Func<ProfileQuestion, object>>
                     {
                         {ProfileQuestionByColumn.Question, d => d.Question}      ,
-                        {ProfileQuestionByColumn.Group, d => d.ProfileQuestionGroup},
+                        {ProfileQuestionByColumn.Group, d => d.ProfileQuestionGroup.ProfileGroupId},
                         {ProfileQuestionByColumn.HasLinked, d => d.HasLinkedQuestions},
                         {ProfileQuestionByColumn.Priority, d => d.Priority}    
                     };
@@ -69,7 +69,7 @@ namespace SMD.Repository.Repositories
                     (string.IsNullOrEmpty(request.ProfileQuestionFilterText) ||
                      (question.Question.Contains(request.ProfileQuestionFilterText)))
                      &&
-                     (question.ProfileQuestionGroup.ProfileGroupId==request.QuestionGroupFilter)
+                     (request.QuestionGroupFilter == 0 || question.ProfileQuestionGroup.ProfileGroupId == request.QuestionGroupFilter)
                      &&
                      (question.CountryId==request.CountryFilter)
                      &&

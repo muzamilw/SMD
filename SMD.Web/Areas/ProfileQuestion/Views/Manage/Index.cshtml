@@ -36,7 +36,6 @@
                                         <th class="col-lg-1 th-pointer"><span id="3">Priority</span></th>
                                         <th class="col-lg-1 th-pointer"><span id="4">Has Linked</span></th>
                                         <th class="col-lg-1">&nbsp;</th>
-
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -94,13 +93,17 @@
                                 <i data-bind="click:$root.filterProfileQuestion" class="fa fa-search search-icon" style=" margin-right: 8px;"></i>
                             </div>
                             <div class="col-xs-2">
-                                <select class="form-control" data-bind="options: $root.qGroup, optionsText: 'ProfileGroupName', optionsValue: 'ProfileGroupId', optionsCaption: '&lt;' + 'Select Question Group'+ '&gt;' , value:$root.qGroupfilterValue"></select>
+                                <select class="form-control" data-bind="options: $root.qGroup, optionsText: 'ProfileGroupName', optionsValue: 'ProfileGroupId', optionsCaption: '&lt;' + 'All'+ '&gt;' , value:$root.qGroupfilterValue"></select>
                             </div>
                             <div class="col-xs-2">
                                 <select class="form-control" data-bind="options: $root.countries, optionsText: 'CountryName', optionsValue: 'CountryId', optionsCaption: '&lt;' + 'Select Country'+ '&gt;' , value:$root.countryfilterValue"></select>
                             </div>
                             <div class="col-xs-2">
                                 <select class="form-control" data-bind="options: $root.langs, optionsText: 'LanguageName', optionsValue: 'LanguageId', optionsCaption: '&lt;' + 'Select Language'+ '&gt;' , value:$root.langfilterValue"></select>
+                            </div>
+                            <div class="col-xs-2">
+                                <button class="btn  btn-info" id="saveBtn" data-bind="click:$root.filterProfileQuestion">Search</button>
+                                <button class="btn btn-default" id="saveBtn" data-bind="click:$root.clearFilters">Reset</button>
                             </div>
                         </div>
                     </div>
