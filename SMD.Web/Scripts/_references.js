@@ -750,3 +750,7 @@
 /// <reference path="plugins/forms/tiny_mce/themes/advanced/langs/en.js" />
 /// <reference path="plugins/forms/tiny_mce/themes/advanced/langs/en_dlg.js" />
 /// <reference path="plugins/forms/tiny_mce/themes/simple/langs/en.js" />
+/// <reference path="../areas/ads/scripts/ads.dataservice.js" />
+/// <reference path="../areas/ads/scripts/ads.model.js" />
+/// <reference path="../areas/ads/scripts/ads.view.js" />
+/// <reference path="../areas/ads/scripts/ads.viewmodel.js" />
