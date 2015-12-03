@@ -7,7 +7,7 @@ namespace SMD.Models.IdentityModels
     /// <summary>
     /// User
     /// </summary>
-    public sealed partial class User : IUser<string>
+    public partial class User : IUser<string>
     {
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User, string> manager, string authenticationType)
         {

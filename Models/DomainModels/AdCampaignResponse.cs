@@ -13,8 +13,7 @@ namespace SMD.Models.DomainModels
         public DateTime? CreatedDateTime { get; set; }
         public string UserId { get; set; }
         public double? EndUserDollarAmount { get; set; }
-
         public virtual AdCampaign AdCampaign { get; set; }
-        public virtual User AspNetUser { get; set; }
+        public virtual User User { get; set; }
     }
 }
