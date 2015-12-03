@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using SMD.Models.IdentityModels;
 
 namespace SMD.Models.DomainModels
@@ -17,5 +18,6 @@ namespace SMD.Models.DomainModels
         public virtual User User { get; set; }
         public virtual ProfileQuestion ProfileQuestion { get; set; }
         public virtual ProfileQuestionAnswer ProfileQuestionAnswer { get; set; }
+        public virtual ICollection<AdCampaignTargetCriteria> AdCampaignTargetCriterias { get; set; }
     }
 }
