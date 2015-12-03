@@ -7,23 +7,9 @@ namespace SMD.Models.IdentityModels
     /// <summary>
     /// User Domain Model
     /// </summary>
-    public sealed partial class User
+    public partial class User
     {
-        #region Constructor
-
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        public User()
-        {
-            UserLogins = new List<UserLogin>();
-            Roles = new List<Role>();
-            Claims = new List<UserClaim>();
-            ProfileQuestionUserAnswers = new List<ProfileQuestionUserAnswer>();
-        }
-
-        #endregion
-
+        
         #region Persisted Properties
         public string Id { get; set; }
         public string Email { get; set; }
@@ -67,10 +53,13 @@ namespace SMD.Models.IdentityModels
         public bool? RegisteredViaReferral { get; set; }
         public string ReferringUserId { get; set; }
 
-        public ICollection<UserLogin> UserLogins { get; set; }
-        public ICollection<Role> Roles { get; set; }
-        public ICollection<UserClaim> Claims { get; set; }
-        public ICollection<ProfileQuestionUserAnswer> ProfileQuestionUserAnswers { get; set; }
+        public virtual ICollection<UserLogin> UserLogins { get; set; }
+        public virtual ICollection<Role> Roles { get; set; }
+        public virtual ICollection<UserClaim> Claims { get; set; }
+        public virtual ICollection<ProfileQuestionUserAnswer> ProfileQuestionUserAnswers { get; set; }
+        public virtual ICollection<AdCampaignResponse> AdCampaignResponses { get; set; }
+        public virtual ICollection<ProfileQuestion> ProfileQuestions { get; set; }
+        public virtual ICollection<SurveyQuestion> SurveyQuestions { get; set; }
 
         #endregion
     }

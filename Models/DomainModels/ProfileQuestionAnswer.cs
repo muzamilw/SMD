@@ -22,5 +22,7 @@ namespace SMD.Models.DomainModels
 
         public virtual ProfileQuestion ProfileQuestion { get; set; }
         public virtual ICollection<ProfileQuestionUserAnswer> ProfileQuestionUserAnswers { get; set; }
+        public virtual ICollection<AdCampaignTargetCriteria> AdCampaignTargetCriterias { get; set; }
+        public virtual ICollection<SurveyQuestionTargetCriteria> SurveyQuestionTargetCriterias { get; set; }
     }
 }
