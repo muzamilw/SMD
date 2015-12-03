@@ -77,6 +77,9 @@
     <Compile Include="IClaimsSecurityService.cs" />
     <Compile Include="Logger\IMPCLogWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\ISurveyQuestionTargetLocationRepository.cs" />
+    <Compile Include="Repository\ISurveyQuestionTargetCriteriaRepository.cs" />
+    <Compile Include="Repository\ISurveyQuestionRepository.cs" />
     <Compile Include="Repository\IAdCampaignRepository.cs" />
     <Compile Include="Repository\IAdCampaignResponseRepository.cs" />
     <Compile Include="Repository\IAdCampaignTargetCriteriaRepository.cs" />
@@ -89,6 +92,9 @@
     <Compile Include="Repository\IProfileQuestionRepository.cs" />
     <Compile Include="Services\IEmailManagerService.cs" />
     <Compile Include="Services\IProfileQuestionService.cs" />
+    <Compile Include="Services\ISurveyQuestionService.cs" />
+    <Compile Include="Services\ISurveyQuestionTargetCriteriaService.cs" />
+    <Compile Include="Services\ISurveyQuestionTargetLocationService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\SMD.Models.csproj">

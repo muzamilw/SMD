@@ -197,6 +197,9 @@
       <DependentUpon>LanguageResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\SurveyQuestionTargetLocationRepository.cs" />
+    <Compile Include="Repositories\SurveyQuestionTargetCriteriaRepository.cs" />
+    <Compile Include="Repositories\SurveyQuestionRepository.cs" />
     <Compile Include="Repositories\AdCampaignRepository.cs" />
     <Compile Include="Repositories\AdCampaignResponseRepository.cs" />
     <Compile Include="Repositories\AdCampaignTargetCriteriaRepository.cs" />
