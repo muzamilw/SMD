@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="SMDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SMDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AspNetRoles">
           <Key>
             <PropertyRef Name="Id" />
@@ -85,6 +85,22 @@
           <Property Name="RegisteredViaReferral" Type="bit" />
           <Property Name="ReferringUserID" Type="nvarchar" MaxLength="128" />
         </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="CountryID" />
+          </Key>
+          <Property Name="CountryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CountryName" Type="nvarchar" MaxLength="200" />
+          <Property Name="CountryCode" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Language">
+          <Key>
+            <PropertyRef Name="LanguageID" />
+          </Key>
+          <Property Name="LanguageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LanguageName" Type="nvarchar" MaxLength="100" />
+          <Property Name="NativeName" Type="nvarchar" MaxLength="150" />
+        </EntityType>
         <EntityType Name="ProfileQuestion">
           <Key>
             <PropertyRef Name="PQID" />
@@ -104,6 +120,7 @@
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="100" />
           <Property Name="HasLinkedQuestions" Type="bit" />
           <Property Name="PenalityForNotAnswering" Type="int" />
+          <Property Name="Status" Type="int" />
         </EntityType>
         <EntityType Name="ProfileQuestionAnswer">
           <Key>
@@ -210,6 +227,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ProfileQuestionGroup_Country">
+          <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
+          <End Role="ProfileQuestionGroup" Type="Self.ProfileQuestionGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="CountryID" />
+            </Principal>
+            <Dependent Role="ProfileQuestionGroup">
+              <PropertyRef Name="CountryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfileQuestionGroup_ProfileQuestion">
+          <End Role="ProfileQuestionGroup" Type="Self.ProfileQuestionGroup" Multiplicity="0..1" />
+          <End Role="ProfileQuestion" Type="Self.ProfileQuestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProfileQuestionGroup">
+              <PropertyRef Name="ProfileGroupID" />
+            </Principal>
+            <Dependent Role="ProfileQuestion">
+              <PropertyRef Name="ProfileGroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ProfileQuestionUserAnswer_AspNetUsers">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="ProfileQuestionUserAnswer" Type="Self.ProfileQuestionUserAnswer" Multiplicity="*" />
@@ -252,6 +293,8 @@
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Language" EntityType="Self.Language" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProfileQuestion" EntityType="Self.ProfileQuestion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProfileQuestionAnswer" EntityType="Self.ProfileQuestionAnswer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProfileQuestionGroup" EntityType="Self.ProfileQuestionGroup" Schema="dbo" store:Type="Tables" />
@@ -275,6 +318,14 @@
           <AssociationSet Name="FK_ProfileQuestionAnswer_ProfileQuestion" Association="Self.FK_ProfileQuestionAnswer_ProfileQuestion">
             <End Role="ProfileQuestion" EntitySet="ProfileQuestion" />
             <End Role="ProfileQuestionAnswer" EntitySet="ProfileQuestionAnswer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfileQuestionGroup_Country" Association="Self.FK_ProfileQuestionGroup_Country">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="ProfileQuestionGroup" EntitySet="ProfileQuestionGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfileQuestionGroup_ProfileQuestion" Association="Self.FK_ProfileQuestionGroup_ProfileQuestion">
+            <End Role="ProfileQuestionGroup" EntitySet="ProfileQuestionGroup" />
+            <End Role="ProfileQuestion" EntitySet="ProfileQuestion" />
           </AssociationSet>
           <AssociationSet Name="FK_ProfileQuestionUserAnswer_AspNetUsers" Association="Self.FK_ProfileQuestionUserAnswer_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -417,6 +468,16 @@
             <End Role="User" EntitySet="Users" />
             <End Role="AspNetUserClaim" EntitySet="UserClaims" />
           </AssociationSet>
+          <EntitySet Name="Countries" EntityType="DomainModels.Country" />
+          <EntitySet Name="Languages" EntityType="DomainModels.Language" />
+          <AssociationSet Name="FK_ProfileQuestionGroup_Country" Association="DomainModels.FK_ProfileQuestionGroup_Country">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="ProfileQuestionGroup" EntitySet="ProfileQuestionGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfileQuestionGroup_ProfileQuestion" Association="DomainModels.FK_ProfileQuestionGroup_ProfileQuestion">
+            <End Role="ProfileQuestionGroup" EntitySet="ProfileQuestionGroups" />
+            <End Role="ProfileQuestion" EntitySet="ProfileQuestions" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="ProfileQuestion">
           <Key>
@@ -439,6 +500,8 @@
           <Property Name="PenalityForNotAnswering" Type="Int32" />
           <NavigationProperty Name="ProfileQuestionAnswers" Relationship="DomainModels.FK_ProfileQuestionAnswer_ProfileQuestion" FromRole="ProfileQuestion" ToRole="ProfileQuestionAnswer" />
           <NavigationProperty Name="ProfileQuestionUserAnswers" Relationship="DomainModels.FK_ProfileQuestionUserAnswer_ProfileQuestion" FromRole="ProfileQuestion" ToRole="ProfileQuestionUserAnswer" />
+          <Property Name="Status" Type="Int32" />
+          <NavigationProperty Name="ProfileQuestionGroup" Relationship="DomainModels.FK_ProfileQuestionGroup_ProfileQuestion" FromRole="ProfileQuestion" ToRole="ProfileQuestionGroup" />
         </EntityType>
         <EntityType Name="ProfileQuestionAnswer">
           <Key>
@@ -468,6 +531,8 @@
           <Property Name="ImagePath" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="LangaugeId" Type="Int32" />
           <Property Name="CountryId" Type="Int32" />
+          <NavigationProperty Name="Country" Relationship="DomainModels.FK_ProfileQuestionGroup_Country" FromRole="ProfileQuestionGroup" ToRole="Country" />
+          <NavigationProperty Name="ProfileQuestions" Relationship="DomainModels.FK_ProfileQuestionGroup_ProfileQuestion" FromRole="ProfileQuestionGroup" ToRole="ProfileQuestion" />
         </EntityType>
         <EntityType Name="ProfileQuestionUserAnswer">
           <Key>
@@ -554,6 +619,47 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="CountryId" />
+          </Key>
+          <Property Name="CountryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CountryName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CountryCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ProfileQuestionGroups" Relationship="DomainModels.FK_ProfileQuestionGroup_Country" FromRole="Country" ToRole="ProfileQuestionGroup" />
+        </EntityType>
+        <EntityType Name="Language">
+          <Key>
+            <PropertyRef Name="LanguageId" />
+          </Key>
+          <Property Name="LanguageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LanguageName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="NativeName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_ProfileQuestionGroup_Country">
+          <End Type="DomainModels.Country" Role="Country" Multiplicity="0..1" />
+          <End Type="DomainModels.ProfileQuestionGroup" Role="ProfileQuestionGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="CountryId" />
+            </Principal>
+            <Dependent Role="ProfileQuestionGroup">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfileQuestionGroup_ProfileQuestion">
+          <End Type="DomainModels.ProfileQuestionGroup" Role="ProfileQuestionGroup" Multiplicity="0..1" />
+          <End Type="DomainModels.ProfileQuestion" Role="ProfileQuestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProfileQuestionGroup">
+              <PropertyRef Name="ProfileGroupId" />
+            </Principal>
+            <Dependent Role="ProfileQuestion">
+              <PropertyRef Name="ProfileGroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -635,6 +741,7 @@
           <EntitySetMapping Name="ProfileQuestions">
             <EntityTypeMapping TypeName="DomainModels.ProfileQuestion">
               <MappingFragment StoreEntitySet="ProfileQuestion">
+                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="PenalityForNotAnswering" ColumnName="PenalityForNotAnswering" />
                 <ScalarProperty Name="HasLinkedQuestions" ColumnName="HasLinkedQuestions" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
@@ -700,6 +807,24 @@
                 <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Countries">
+            <EntityTypeMapping TypeName="DomainModels.Country">
+              <MappingFragment StoreEntitySet="Country">
+                <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
+                <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Languages">
+            <EntityTypeMapping TypeName="DomainModels.Language">
+              <MappingFragment StoreEntitySet="Language">
+                <ScalarProperty Name="NativeName" ColumnName="NativeName" />
+                <ScalarProperty Name="LanguageName" ColumnName="LanguageName" />
+                <ScalarProperty Name="LanguageId" ColumnName="LanguageID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

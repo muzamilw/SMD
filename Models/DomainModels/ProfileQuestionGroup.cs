@@ -1,4 +1,6 @@
-﻿namespace SMD.Models.DomainModels
+﻿using System.Collections.Generic;
+
+namespace SMD.Models.DomainModels
 {
     /// <summary>
     /// Profile Question Group Domain Model
@@ -10,5 +12,8 @@
         public string ImagePath { get; set; }
         public int? LangaugeId { get; set; }
         public int? CountryId { get; set; }
+
+        public virtual ICollection<ProfileQuestion> ProfileQuestions { get; set; }
+        public virtual Country Country { get; set; }
     }
 }

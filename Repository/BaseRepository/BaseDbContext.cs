@@ -86,6 +86,11 @@ namespace SMD.Repository.BaseRepository
         /// </summary>
         public DbSet<ProfileQuestion> ProfileQuestions { get; set; }
 
+        /// <summary>
+        /// Profile Questions Groups
+        /// </summary>
+        public DbSet<ProfileQuestionGroup> ProfileQuestionGroups { get; set; }
+
 
         #endregion
     }

@@ -342,6 +342,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Api\ApiAreaRegistration.cs" />
+    <Compile Include="Areas\Api\Controllers\ProfileQuestionBaseController.cs" />
     <Compile Include="Areas\Api\Controllers\ProfileQuestionController.cs" />
     <Compile Include="Areas\Api\LanguageResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -349,6 +350,7 @@
       <DependentUpon>LanguageResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\Common\CommonAreaRegistration.cs" />
+    <Compile Include="Areas\ProfileQuestion\Controllers\ManageController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Areas\ProfileQuestion\ProfileQuestionAreaRegistration.cs" />
     <Compile Include="Areas\Survey\Controllers\SurveyController.cs" />
@@ -359,9 +361,16 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helper\CultureHelper.cs" />
+    <Compile Include="ModelMappers\LanguageMapper.cs" />
+    <Compile Include="ModelMappers\CountryMapper.cs" />
+    <Compile Include="ModelMappers\ProfileQuestionGroupMapper.cs" />
     <Compile Include="ModelMappers\ProfileQuestionMapper.cs" />
+    <Compile Include="Models\RequestResposeModels\ProfileQuestionBaseResponse.cs" />
     <Compile Include="Models\RequestResposeModels\ProfileQuestionSearchRequestResponse.cs" />
+    <Compile Include="Models\WebModels\CountryDropdown.cs" />
+    <Compile Include="Models\WebModels\LanguageDropdown.cs" />
     <Compile Include="Models\WebModels\ProfileQuestion.cs" />
+    <Compile Include="Models\WebModels\ProfileQuestionGroupDropdown.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="TypeRegistrations.cs" />
@@ -1261,6 +1270,7 @@
     <Content Include="Areas\Survey\Views\Survey\Index.cshtml" />
     <Content Include="Areas\Survey\Views\Survey\EditSurvery.cshtml" />
     <Content Include="Areas\ProfileQuestion\Views\Manage\Index.cshtml" />
+    <Content Include="Areas\ProfileQuestion\Views\Manage\_ProfileQuestionEditor.cshtml" />
     <Content Include="Areas\Common\Views\web.config" />
     <Content Include="Areas\Common\Views\Shared\_ConfirmationDialog.cshtml" />
     <Content Include="Areas\Common\Views\Shared\_Pager.cshtml" />

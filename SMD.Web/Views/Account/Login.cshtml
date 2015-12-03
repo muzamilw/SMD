@@ -1,4 +1,6 @@
-﻿@{
+﻿@model SMD.Models.IdentityModels.ViewModels.LoginViewModel
+
+@{
     Layout = "";
 }
 <!DOCTYPE html>
@@ -54,14 +56,18 @@
                                     </div>
                                 </header>
                                 <div id="login-box-inner">
-                                    <form role="form" action="/Account/Login" id="loginForm">
+                                    @using (Html.BeginForm("Login", "Account"))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        @Html.ValidationSummary()
+
                                         <div class="input-group">
                                             <span class="input-group-addon" tabindex="-1"><i class="fa fa-user"></i></span>
-                                            <input class="form-control" type="text" placeholder="Email address" id="username" name="username">
+                                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Email address" })
                                         </div>
                                         <div class="input-group">
                                             <span class="input-group-addon" tabindex="-1"><i class="fa fa-key"></i></span>
-                                            <input type="password" class="form-control" placeholder="Password" id="password" name="password">
+                                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password" })
                                         </div>
                                         <div id="remember-me-wrapper">
                                             <div class="row">
@@ -90,7 +96,7 @@
                                                 </p>
                                             </div>
                                         </div>
-                                    </form>
+                                    }
                                     @using (Html.BeginForm("ExternalLogin", "Account", new { ReturnUrl = ViewBag.ReturnUrl }))
                                     {
                                         @Html.AntiForgeryToken()
@@ -119,33 +125,8 @@
     </div>
     <script src="../Content/themes/Centaurus/js/jquery.js"></script>
     <script src="../Content/themes/Centaurus/js/bootstrap.js"></script>
+    <script src="../Content/themes/Centaurus/js/jquery.nanoscroller.min.js"></script>
     <script src="../Content/themes/Centaurus/js/scripts.js"></script>
-    <script type="text/javascript">
-        // document ready function
-        $(document).ready(function () {
-            $("input, textarea, select").not('.nostyle').uniform();
-            $("#loginForm").validate({
-                rules: {
-                    username: {
-                        required: true
-
-                    },
-                    password: {
-                        required: true,
-                        minlength: 6
-                    }
-                },
-                messages: {
-                    username: {
-                        required: "Username is required!."
-                    },
-                    password: {
-                        required: "Please provide a password",
-                        minlength: "Password must be more than 6 characters!."
-                    }
-                }
-            });
-        });
-    </script>
+    @Scripts.Render("~/bundles/jqueryval")
 </body>
 </html>

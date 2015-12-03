@@ -4,15 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="b6ef084096a74d0cbd3034e3cafbef32" Name="Diagram1" ZoomLevel="74">
+      <Diagram DiagramId="b6ef084096a74d0cbd3034e3cafbef32" Name="Diagram1" ZoomLevel="83">
         <EntityTypeShape EntityType="DomainModels.Role" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DomainModels.UserLogin" Width="1.5" PointX="5.25" PointY="5.625" IsExpanded="true" />
         <EntityTypeShape EntityType="DomainModels.User" Width="2.125" PointX="3" PointY="1.375" IsExpanded="true" />
         <AssociationConnector Association="DomainModels.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="DomainModels.AspNetUserRoles" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="DomainModels.ProfileQuestion" Width="1.5" PointX="7.375" PointY="1" />
+        <EntityTypeShape EntityType="DomainModels.ProfileQuestion" Width="2.5" PointX="6.375" PointY="0.5" />
         <EntityTypeShape EntityType="DomainModels.ProfileQuestionAnswer" Width="2.125" PointX="9.625" PointY="1.375" />
-        <EntityTypeShape EntityType="DomainModels.ProfileQuestionGroup" Width="1.5" PointX="7.5" PointY="5.75" />
+        <EntityTypeShape EntityType="DomainModels.ProfileQuestionGroup" Width="2.25" PointX="7.5" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DomainModels.ProfileQuestionUserAnswer" Width="2.125" PointX="11.875" PointY="5.25" />
         <AssociationConnector Association="DomainModels.FK_ProfileQuestionUserAnswer_AspNetUsers" />
         <AssociationConnector Association="DomainModels.FK_ProfileQuestionAnswer_ProfileQuestion" />
@@ -20,6 +20,10 @@
         <AssociationConnector Association="DomainModels.FK_ProfileQuestionUserAnswer_ProfileQuestionAnswer" />
         <EntityTypeShape EntityType="DomainModels.UserClaim" Width="1.5" PointX="5.875" PointY="9.25" />
         <AssociationConnector Association="DomainModels.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <EntityTypeShape EntityType="DomainModels.Country" Width="2.125" PointX="5.25" PointY="12" />
+        <EntityTypeShape EntityType="DomainModels.Language" Width="1.5" PointX="8.375" PointY="9.75" />
+        <AssociationConnector Association="DomainModels.FK_ProfileQuestionGroup_Country" />
+        <AssociationConnector Association="DomainModels.FK_ProfileQuestionGroup_ProfileQuestion" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

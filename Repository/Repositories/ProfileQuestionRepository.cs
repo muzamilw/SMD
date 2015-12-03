@@ -64,7 +64,8 @@ namespace SMD.Repository.Repositories
             Expression<Func<ProfileQuestion, bool>> query =
                 question =>
                     (string.IsNullOrEmpty(request.ProfileQuestionFilterText) ||
-                     (question.Question.Contains(request.ProfileQuestionFilterText)));
+                     (question.Question.Contains(request.ProfileQuestionFilterText)))
+                     && (question.Status == null || question.Status == 1);   // 0 -> archived  || 1 -> active
             rowCount = DbSet.Count(query);
             return request.IsAsc
                 ? DbSet.Where(query)

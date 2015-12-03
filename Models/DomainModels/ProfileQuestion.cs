@@ -23,8 +23,10 @@ namespace SMD.Models.DomainModels
         public string ModifiedBy { get; set; }
         public bool? HasLinkedQuestions { get; set; }
         public int? PenalityForNotAnswering { get; set; }
+        public int? Status { get; set; }
 
         public virtual ICollection<ProfileQuestionAnswer> ProfileQuestionAnswers { get; set; }
         public virtual ICollection<ProfileQuestionUserAnswer> ProfileQuestionUserAnswers { get; set; }
+        public virtual ProfileQuestionGroup ProfileQuestionGroup { get; set; }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using SMD.Models.DomainModels;
 
 namespace SMD.Models.IdentityModels.ViewModels
 {
@@ -68,6 +67,10 @@ namespace SMD.Models.IdentityModels.ViewModels
         public string Email { get; set; }
 
         [Required]
+        [Display(Name = "Full Name")]
+        public string FullName { get; set; }
+
+        [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
@@ -77,34 +80,6 @@ namespace SMD.Models.IdentityModels.ViewModels
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
-
-        public string SelectedRole { get; set; }
-
-        public List<Role> Roles { get; set; }
-
-        [Required]
-        [Display(Name = "Account Type")]
-        public string AccountType { get; set; }
-
-        [Display(Name = "Phone Number")]
-        public string PhoneNumber { get; set; }
-
-
-        [Required]
-        [Display(Name = "Company Name")]
-        public string CompanyName { get; set; }
-
-        [Required]
-        [Display(Name = "Company Short-URL ")]
-        public string ShortUrl { get; set; }
-
-        [Required]
-        [Display(Name = "Address")]
-        public string CompanyAddress { get; set; }
-
-        [Required]
-        [Display(Name = "Country")]
-        public string CountryName { get; set; }
     }
 
     public class ResetPasswordViewModel

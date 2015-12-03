@@ -5,7 +5,7 @@ define("pQuestion/pQuestion.view",
     ["jquery", "pQuestion/pQuestion.viewModel"], function ($, parentHireGroupViewModel) {
         var ist = window.ist || {};
         // View 
-        ist.Contact.view = (function (specifiedViewModel) {
+        ist.ProfileQuestion.view = (function (specifiedViewModel) {
             var
                 // View model 
                 viewModel = specifiedViewModel,
@@ -17,7 +17,7 @@ define("pQuestion/pQuestion.view",
                         return;
                     }
                     // Handle Sorting
-                   // handleSorting("departmentTable", viewModel.sortOn, viewModel.sortIsAsc, viewModel.getContacts);
+                    handleSorting("profileQuestionLVTable", viewModel.sortOn, viewModel.sortIsAsc, viewModel.getQuestions);
                 };
             initialize();
             return {
@@ -26,8 +26,8 @@ define("pQuestion/pQuestion.view",
             };
         })(parentHireGroupViewModel);
         // Initialize the view model
-        if (ist.Contact.view.bindingRoot) {
-            parentHireGroupViewModel.initialize(ist.Contact.view);
+        if (ist.ProfileQuestion.view.bindingRoot) {
+            parentHireGroupViewModel.initialize(ist.ProfileQuestion.view);
         }
-        return ist.Contact.view;
+        return ist.ProfileQuestion.view;
     });

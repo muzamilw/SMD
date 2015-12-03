@@ -12,8 +12,8 @@
         baseUrl: ist.siteUrl + "/Scripts/App",
         waitSeconds: 20,
         paths: {
-            "sammy": ist.siteUrl + "/Scripts/sammy-0.7.5.min",
-            "common": ist.siteUrl + "/Areas/Common/Scripts",
+            "sammy": "/Scripts/sammy-0.7.5.min",
+            "common":  "/Areas/Common/Scripts",
             // SMD 
             "pQuestion": "/Areas/ProfileQuestion/Scripts",
         }
