@@ -91,6 +91,45 @@ namespace SMD.Repository.BaseRepository
         /// </summary>
         public DbSet<ProfileQuestionGroup> ProfileQuestionGroups { get; set; }
 
+        /// <summary>
+        /// System Mails
+        /// </summary>
+        public DbSet<SystemMail> SystemMails { get; set; }
+
+        /// <summary>
+        /// Ad Campaigns
+        /// </summary>
+        public DbSet<AdCampaign> AdCampaigns { get; set; }
+
+        /// <summary>
+        /// Ad Campaign Response
+        /// </summary>
+        public DbSet<AdCampaignResponse> AdCampaignResponses { get; set; }
+
+        /// <summary>
+        /// AdCampaign Target Criterias
+        /// </summary>
+        public DbSet<AdCampaignTargetCriteria> AdCampaignTargetCriterias { get; set; }
+
+        /// <summary>
+        /// AdCampaign Target Locations
+        /// </summary>
+        public DbSet<AdCampaignTargetLocation> AdCampaignTargetLocations { get; set; }
+
+        /// <summary>
+        /// Survey Question
+        /// </summary>
+        public DbSet<SurveyQuestion> SurveyQuestions { get; set; }
+
+        /// <summary>
+        /// Survery Question Target Criterias
+        /// </summary>
+        public DbSet<SurveyQuestionTargetCriteria> SurveyQuestionTargetCriterias { get; set; }
+
+        /// <summary>
+        /// Survey Question Target Locations
+        /// </summary>
+        public DbSet<SurveyQuestionTargetLocation> SurveyQuestionTargetLocations { get; set; }
 
         #endregion
     }

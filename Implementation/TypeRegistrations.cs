@@ -24,7 +24,7 @@ namespace SMD.Implementation
             unityContainer.RegisterType<IAuthorizationChecker, AuthorizationChecker>();
             unityContainer.RegisterType<IClaimsSecurityService, ClaimsSecurityService>();
             unityContainer.RegisterType<IProfileQuestionService, ProfileQuestionService>();
-
+            unityContainer.RegisterType<IEmailManagerService, EmailManagerService>();
         }
     }
 }
