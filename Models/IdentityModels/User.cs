@@ -1,13 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
+using SMD.Models.DomainModels;
 
-namespace SMD.Models.DomainModels
+namespace SMD.Models.IdentityModels
 {
     /// <summary>
     /// User Domain Model
     /// </summary>
-    public class User
+    public sealed partial class User
     {
+        #region Constructor
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public User()
+        {
+            UserLogins = new List<UserLogin>();
+            Roles = new List<Role>();
+            Claims = new List<UserClaim>();
+            ProfileQuestionUserAnswers = new List<ProfileQuestionUserAnswer>();
+        }
+
+        #endregion
+
+        #region Persisted Properties
         public string Id { get; set; }
         public string Email { get; set; }
         public bool EmailConfirmed { get; set; }
@@ -20,7 +37,6 @@ namespace SMD.Models.DomainModels
         public bool LockoutEnabled { get; set; }
         public int AccessFailedCount { get; set; }
         public string UserName { get; set; }
-        public long? UserDomainKey { get; set; }
         public string FullName { get; set; }
         public string AlternateEmail { get; set; }
         public string IsEmailVerified { get; set; }
@@ -33,14 +49,9 @@ namespace SMD.Models.DomainModels
         public string Jobtitle { get; set; }
         public string ContactNotes { get; set; }
         public bool IsSubscribed { get; set; }
-        public bool? IsDefault { get; set; }
-        public Guid? LoginToken { get; set; }
-        public string EmailSignature { get; set; }
-        public string EstimateHeadNotes { get; set; }
-        public string EstimateFootNotes { get; set; }
         public int? AppId { get; set; }
         public string CompanyName { get; set; }
-        public string SalesEmail { get; set; }
+        public string SalesEmail { get; set; } // till here 
         public string CompanyRepresentative { get; set; }
         public string Address1 { get; set; }
         public string Address2 { get; set; }
@@ -56,7 +67,11 @@ namespace SMD.Models.DomainModels
         public bool? RegisteredViaReferral { get; set; }
         public string ReferringUserId { get; set; }
 
-        public virtual ICollection<UserLogin> UserLogins { get; set; }
-        public virtual ICollection<Role> Roles { get; set; }
+        public ICollection<UserLogin> UserLogins { get; set; }
+        public ICollection<Role> Roles { get; set; }
+        public ICollection<UserClaim> Claims { get; set; }
+        public ICollection<ProfileQuestionUserAnswer> ProfileQuestionUserAnswers { get; set; }
+
+        #endregion
     }
 }

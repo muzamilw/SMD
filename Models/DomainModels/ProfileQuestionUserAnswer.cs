@@ -1,4 +1,5 @@
 ﻿using System;
+using SMD.Models.IdentityModels;
 
 namespace SMD.Models.DomainModels
 {
