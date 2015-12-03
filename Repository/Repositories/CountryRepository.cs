@@ -10,9 +10,9 @@ using System.Data.Entity;
 namespace SMD.Repository.Repositories
 {
     /// <summary>
-    /// Profile Question Group Repository 
+    /// Country Repository 
     /// </summary>
-    public class ProfileQuestionGroupRepository : BaseRepository<ProfileQuestionGroup>, IProfileQuestionGroupRepository
+    public class CountryRepository : BaseRepository<Country>, ICountryRepository
     {
         #region Private
        
@@ -21,7 +21,7 @@ namespace SMD.Repository.Repositories
         /// <summary>
         /// Constructor 
         /// </summary>
-        public ProfileQuestionGroupRepository(IUnityContainer container)
+        public CountryRepository(IUnityContainer container)
             : base(container)
         {
 
@@ -30,23 +30,23 @@ namespace SMD.Repository.Repositories
         /// <summary>
         /// Primary database set
         /// </summary>
-        protected override IDbSet<ProfileQuestionGroup> DbSet
+        protected override IDbSet<Country> DbSet
         {
-            get { return db.ProfileQuestionGroups; }
+            get { return db.Countries; }
         }
         #endregion
         #region Public
-        public ProfileQuestionGroup Find(int id)
+        public Country Find(int id)
         {
             throw new NotImplementedException();
         }
 
         /// <summary>
-        /// Get List of Profile Question Groups 
+        /// Get List of Coutries 
         /// </summary>
-        public IEnumerable<ProfileQuestionGroup> GetAllProfileQuestionGroups()
+        public IEnumerable<Country> GetAllCountries()
         {
-            return DbSet.Select(question => question).ToList();
+           return DbSet.Select(country => country).ToList();
         }
         #endregion
     }

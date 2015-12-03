@@ -202,7 +202,9 @@
     <Compile Include="Repositories\AdCampaignTargetCriteriaRepository.cs" />
     <Compile Include="Repositories\AdCampaignTargetLocationRepository.cs" />
     <Compile Include="Repositories\ProfileQuestionGroupRepository.cs" />
+    <Compile Include="Repositories\LanguageRepository.cs" />
     <Compile Include="Repositories\SystemMailsRepository.cs" />
+    <Compile Include="Repositories\CountryRepository.cs" />
     <Compile Include="Repositories\RoleStore.cs" />
     <Compile Include="Repositories\ProfileQuestionRepository.cs" />
     <Compile Include="Repositories\UserStore.cs" />

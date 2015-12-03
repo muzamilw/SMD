@@ -92,14 +92,14 @@ namespace SMD.Repository.BaseRepository
         public DbSet<ProfileQuestionGroup> ProfileQuestionGroups { get; set; }
 
         /// <summary>
-        /// System Mails
+        /// Countries
         /// </summary>
-        public DbSet<SystemMail> SystemMails { get; set; }
+        public DbSet<Country> Countries { get; set; }
 
         /// <summary>
-        /// Ad Campaigns
+        /// Languages
         /// </summary>
-        public DbSet<AdCampaign> AdCampaigns { get; set; }
+        public DbSet<Language> Languages { get; set; }
 
         /// <summary>
         /// Ad Campaign Response
@@ -130,6 +130,17 @@ namespace SMD.Repository.BaseRepository
         /// Survey Question Target Locations
         /// </summary>
         public DbSet<SurveyQuestionTargetLocation> SurveyQuestionTargetLocations { get; set; }
+
+        /// <summary>
+        /// System Mails
+        /// </summary>
+        public DbSet<SystemMail> SystemMails { get; set; }
+
+        /// <summary>
+        /// Ad Campaigns
+        /// </summary>
+        public DbSet<AdCampaign> AdCampaigns { get; set; }
+
 
         #endregion
     }

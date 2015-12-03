@@ -6,6 +6,9 @@ namespace SMD.Models.Common
     /// </summary>
     public enum ProfileQuestionByColumn
     {
-        Question=1
+        Group = 1,
+        Question=2,
+        Priority=3,
+        HasLinked=4
     }
 }
