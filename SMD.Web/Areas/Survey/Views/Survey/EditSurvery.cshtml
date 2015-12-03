@@ -1,8 +1,201 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "EditSurvery";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>EditSurvery</h2>
+<h2></h2>
+<div>
 
+    <div class="col-lg-12">
+
+        <div class="row" id="user-profile">
+            <div class="col-lg-12 col-md-8 col-sm-8" style="padding-bottom: 10px;">
+                <div class="clearfix ">
+                    <div class="col-xs-12" style="text-align: right; padding-right:0;margin-bottom:18px;">
+
+                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn  btn-info" id="saveBtn">Save</button>
+                        <button class="btn btn-default" id="saveBtn">Close</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="main-box clearfix" id="tabsHeader">
+                    <div class="tabs-wrapper profile-tabs">
+
+                        <div class="tab-content">
+                            <div class="tab-pane fade in active" id="tab-generalinfo">
+                                <div class="col-lg-12 form-horizontal" style="padding-left:6px;">
+
+
+                                    <div class="col-lg-9">
+                                        <div class="form-group" id="form-group-closer" style="margin-bottom:14px;">
+                                            <div class="col-lg-3 text-right" style="padding-top:12px;">
+                                                <label for="txtCompanyName" class="control-label text-right tooltip-float">Question </label>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <input type="text" style="height:60px;" name="Question" class="form-control height60 font24px" id="txtQuestion" placeholder="Enter Your Question" data-bind="value: name, validationTooltip: name, validationOnElement: name">
+
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group" id="form-group-closer" style="margin-bottom:14px;">
+                                            <div class="col-lg-3 text-right" style="padding-top:12px;">
+                                                <label for="txtCompanyName" class="control-label text-right tooltip-float">Question </label>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <input type="text" style="height:60px;" name="Question" class="form-control height60 font24px" id="txtQuestion" placeholder="Enter Your Question">
+
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:11px;">
+                                            <div class="col-lg-3 text-right">
+                                                <div class="bs-example-tooltips tooltip-float-width">
+                                                    <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="A Retail Store allows anyone to design or upload online and place an order. Corporate Stores are private stores and require users to be known to you." data-original-title="" title="">
+                                                        <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                    </a>
+                                                </div>
+                                                <label class="control-label text-right tooltip-float">Store Type</label>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="col-lg-12" style="margin-left:-10px;">
+                                                    <div class="radio">
+                                                        <input type="radio" name="optionsRadiosStoreType" id="optionsRadiosRetail" value="4" data-bind="checked: type">
+                                                        <label for="optionsRadiosRetail">
+                                                            Retail
+                                                        </label>
+                                                    </div>
+                                                    <div class="radio">
+                                                        <input type="radio" name="optionsRadiosStoreType" id="optionsRadiosCorporate" value="3" data-bind="checked: type">
+                                                        <label for="optionsRadiosCorporate">
+                                                            Corporate
+                                                        </label>
+                                                        <span class="help-block text-right"></span>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            @*data-bind="visible: type() == 'Corporate' || type() == 3"*@
+                                            <div class="col-lg-3 text-right">
+                                                <div class="bs-example-tooltips tooltip-float-width">
+                                                    <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Unique code for the Webstore, creates a unique URL (No Hyphens or Spaces) ABC Print = abcprint" data-original-title="" title="">
+                                                        <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                    </a>
+                                                </div>
+                                                <label for="txtWebAccessCode" class="control-label text-right tooltip-float">Unique Access Code</label>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <input type="text" name="Web Access Code" class="form-control" id="txtWebAccessCode" placeholder="Enter Web Access Code" data-bind="value: webAccessCode, validationTooltip: webAccessCode, validationOnElement: webAccessCode">
+
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="col-lg-3 text-right">
+                                                <div class="bs-example-tooltips tooltip-float-width">
+                                                    <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Default Phone Number displayed on main page" data-original-title="" title="">
+                                                        <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                    </a>
+                                                </div>
+                                                @*<label class="control-label tooltip-float" for="maskedPhone">Phone</label>*@
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon" tabindex="-1" data-bind="click: function(){}" data-trigger="focus"><i class="fa fa-phone"></i></span>
+                                                    <input type="text" class="form-control" id="maskedPhone" data-bind="value: phoneNo">
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" style="margin-bottom:25px;">
+                                            <div class="col-lg-3 text-right">
+                                                @*<div class="bs-example-tooltips tooltip-float-width">
+                                                        <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Internal Use Only for CRM Notes" data-original-title="" title="">
+                                                            <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                        </a>
+                                                    </div>
+                                                    <label for="txtNotes" class="control-label text-right tooltip-float">Notes</label>*@
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <textarea class="form-control notes" id="txtNotes" rows="5" placeholder="Enter Notes" data-bind="value: notes"></textarea>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+
+
+
+
+                                    <div class="col-lg-3 col-md-4 col-sm-4">
+                                        <div>
+
+                                            <div class="clearfix">
+
+                                                <div class="col-lg-12">
+                                                    <!-- ko if: !storeImageFileBinary() && !storeImagePath() -->
+                                                    <div style="width:210px;text-align:center;">
+                                                        <img src="/mis/Content/Images/Company_Default.png">
+                                                    </div>
+                                                    <!--/ko-->
+                                                    <!-- ko if: storeImageFileBinary() || storeImagePath() -->
+                                                    <img id="idCostcenterimage" style="width: 240px; height: 130px; -o-object-fit: contain; object-fit: contain;" data-bind="visible:storeImageFileBinary()==undefined ,attr: { src: '@Url.Content("~/")' + storeImagePath() }" />
+                                                    <img style="width: 240px; height: 130px; -o-object-fit: contain; object-fit: contain;" data-bind="visible:storeImageFileBinary()!==undefined,attr: { src: storeImageFileBinary }" />
+
+                                                    <!--/ko-->
+                                                </div>
+
+                                                <div class="col-lg-12" style="margin-top:15px;text-align:center;width:240px;padding-right:0px;">
+                                                    <div class="col-lg-5" style="padding-right:10px;">
+                                                        <div class="bs-example-tooltips tooltip-float-width">
+                                                            <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="left" data-html="true" data-content="Theme Yellow :(192px w x 40px h)
+                                                                <br /> Theme Purple :(240px w x 50px h) <br /> Theme Brown :(240px w x 50px h) <br /> Theme Pink :(240px w x 50px h) <br /> Theme Private Store(Saloon) :<br />(240px w x 50px h) <br /> Theme Private Store(RealEstate):<br />(290px w x 70px h) " data-original-title="" title="">
+                                                                <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6" style="text-align:left;">
+                                                        <div class="fileUpload btn btn-primary">
+                                                            <span>Upload </span>
+                                                            <input type="file" class="upload" id="image_files" multiple data-bind="files: { onLoaded: $root.storeImageFilesLoadedCallback, fileFilter: 'image.*'}" />
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-lg-12 ThoumbnailCostCenter" style="text-align:center;margin-top:5px;width:240px;margin-left:5px;">
+                                                    Store logo dimensions depend upon the selected theme. Upload a logo image (PNG,JPG,SVG) which is reasonably high resolution yet loads quicker.
+                                                </div>
+                                                <div class="profile-stars">
+                                                    <span data-bind="value: type"></span>
+                                                </div>
+
+                                            </div>
+
+
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
