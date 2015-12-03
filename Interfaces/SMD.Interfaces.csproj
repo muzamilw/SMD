@@ -81,7 +81,9 @@
     <Compile Include="Repository\IProfileQuestionGroupRepository.cs" />
     <Compile Include="Repository\ILanguageRepository.cs" />
     <Compile Include="Repository\ICountryRepository.cs" />
+    <Compile Include="Repository\ISystemMailsRepository.cs" />
     <Compile Include="Repository\IProfileQuestionRepository.cs" />
+    <Compile Include="Services\IEmailManagerService.cs" />
     <Compile Include="Services\IProfileQuestionService.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -24,6 +24,7 @@
         <EntityTypeShape EntityType="DomainModels.Language" Width="1.5" PointX="8.375" PointY="9.75" />
         <AssociationConnector Association="DomainModels.FK_ProfileQuestionGroup_Country" />
         <AssociationConnector Association="DomainModels.FK_ProfileQuestionGroup_ProfileQuestion" />
+        <EntityTypeShape EntityType="DomainModels.SystemMail" Width="1.5" PointX="10.375" PointY="8.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

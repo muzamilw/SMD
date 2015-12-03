@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Claims;
 using Microsoft.Owin.Security;
 using SMD.Implementation.Identity;
 using SMD.Interfaces;
+using SMD.Interfaces.Services;
 using SMD.Models.Common;
 using SMD.Models.IdentityModels.ViewModels;
 using System;
@@ -27,14 +28,21 @@ namespace SMD.MIS.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         private IClaimsSecurityService claimsSecurityService;
+        private IEmailManagerService emailManagerService;
         
         #endregion
 
         #region Constructor
 
-        public AccountController(IClaimsSecurityService claimsSecurityService)
+        public AccountController(IClaimsSecurityService claimsSecurityService, IEmailManagerService emailManagerService)
         {
+            if (emailManagerService == null)
+            {
+                throw new ArgumentNullException("emailManagerService");
+            }
+
             this.claimsSecurityService = claimsSecurityService;
+            this.emailManagerService = emailManagerService;
         }
 
         #endregion
@@ -226,7 +234,7 @@ namespace SMD.MIS.Controllers
                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code },
                         protocol: Request.Url.Scheme);
                     await
-                        UserManager.SendEmailAsync(model.Email, "Confirm your account", callbackUrl + "<br>Your Password is:" + model.Password);
+                        emailManagerService.SendAccountVerificationEmail(user, callbackUrl);
                     ViewBag.Link = callbackUrl;
                     return View("DisplayEmail");
                 }

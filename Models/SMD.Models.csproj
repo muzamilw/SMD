@@ -117,6 +117,7 @@
     <Compile Include="DomainModels\ProfileQuestionAnswer.cs" />
     <Compile Include="DomainModels\ProfileQuestionGroup.cs" />
     <Compile Include="DomainModels\ProfileQuestionUserAnswer.cs" />
+    <Compile Include="DomainModels\SystemMail.cs" />
     <Compile Include="IdentityModels\Role.cs" />
     <Compile Include="IdentityModels\Role`.cs" />
     <Compile Include="IdentityModels\User.cs" />

@@ -91,6 +91,11 @@ namespace SMD.Repository.BaseRepository
         /// </summary>
         public DbSet<ProfileQuestionGroup> ProfileQuestionGroups { get; set; }
 
+        /// <summary>
+        /// System Mails
+        /// </summary>
+        public DbSet<SystemMail> SystemMails { get; set; }
+
 
         #endregion
     }
