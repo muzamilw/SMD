@@ -8,7 +8,24 @@ define("ads/ads.viewModel",
         ist.Ads = {
             viewModel: (function () {
                 var view,
-                   
+                    advertGridContent = ko.observableArray([]),
+                    getAdvertGridContent = function () {
+                        
+                        dataservice.GetAdverts({}, {
+                             success: function (data) {
+                                 if (data != null) {
+                                    
+                                     advertGridContent.removeAll();
+                                     ko.utils.arrayPushAll(advertGridContent(), data);
+                                     advertGridContent.valueHasMutated();
+                                 }
+                             },
+                             error: function (response) {
+                               
+                             }
+                         });
+
+                     }
                     // Initialize the view model
                     initialize = function (specifiedView) {
                         view = specifiedView;
@@ -16,8 +33,8 @@ define("ads/ads.viewModel",
                        
                     };
                 return {
-                    initialize: initialize
-                   
+                    initialize: initialize,
+                    advertGridContent:advertGridContent
                 };
             })()
         };

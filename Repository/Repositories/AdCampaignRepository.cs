@@ -30,5 +30,11 @@ namespace SMD.Repository.Repositories
                 return db.AdCampaigns;
             }
         }
+
+        public List<AdCampaign> GetAdvertsByUserId() 
+        {
+           // return db.AdCampaigns.Where(a => a.UserId == UserId).ToList();
+            return db.AdCampaigns.ToList();
+        }
     }
 }

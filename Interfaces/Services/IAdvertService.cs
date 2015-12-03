@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SMD.Interfaces.Repository
+namespace SMD.Interfaces.Services
 {
-    public interface IAdCampaignRepository : IBaseRepository<AdCampaign, long>
+    public interface IAdvertService
     {
-        List<AdCampaign> GetAdvertsByUserId();
+        List<AdCampaign> GetAdverts();
     }
 }

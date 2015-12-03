@@ -43,4 +43,21 @@
         ResetPassword = 9,
         RegistrationConfirmed = 1
     }
+
+    public enum AdvertType
+    {
+        Video = 1,
+        Link = 2,
+        Other = 3
+    }
+
+    public enum AdvertStatus 
+    {
+        Draft = 1,
+        SubmitForApproval = 2,
+        Live = 3,
+        Paused = 4,
+        Completed = 5,
+        ApprovalRejected = 6
+    }
 }
