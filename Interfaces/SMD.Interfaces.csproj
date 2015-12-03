@@ -77,11 +77,17 @@
     <Compile Include="IClaimsSecurityService.cs" />
     <Compile Include="Logger\IMPCLogWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\IAdCampaignRepository.cs" />
+    <Compile Include="Repository\IAdCampaignResponseRepository.cs" />
+    <Compile Include="Repository\IAdCampaignTargetCriteriaRepository.cs" />
+    <Compile Include="Repository\IAdCampaignTargetLocationRepository.cs" />
     <Compile Include="Repository\IBaseRepository.cs" />
     <Compile Include="Repository\IProfileQuestionGroupRepository.cs" />
     <Compile Include="Repository\ILanguageRepository.cs" />
     <Compile Include="Repository\ICountryRepository.cs" />
+    <Compile Include="Repository\ISystemMailsRepository.cs" />
     <Compile Include="Repository\IProfileQuestionRepository.cs" />
+    <Compile Include="Services\IEmailManagerService.cs" />
     <Compile Include="Services\IProfileQuestionService.cs" />
   </ItemGroup>
   <ItemGroup>

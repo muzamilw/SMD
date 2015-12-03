@@ -102,6 +102,7 @@ define("pQuestion/pQuestion.viewModel",
                         });
                         confirmation.show();
                     },
+                    // Delete PQ
                     deleteProfileQuestion = function (item) {
                         dataservice.deleteProfileQuestion(item.convertToServerData(), {
                             success: function () {

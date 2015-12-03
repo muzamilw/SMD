@@ -24,6 +24,32 @@
         <EntityTypeShape EntityType="DomainModels.Language" Width="1.5" PointX="8.375" PointY="9.75" />
         <AssociationConnector Association="DomainModels.FK_ProfileQuestionGroup_Country" />
         <AssociationConnector Association="DomainModels.FK_ProfileQuestionGroup_ProfileQuestion" />
+        <EntityTypeShape EntityType="DomainModels.SystemMail" Width="1.5" PointX="10.375" PointY="8.75" />
+        <EntityTypeShape EntityType="DomainModels.AdCampaign" Width="1.5" PointX="13.25" PointY="18.125" />
+        <EntityTypeShape EntityType="DomainModels.AdCampaignResponse" Width="1.5" PointX="15.5" PointY="15.25" />
+        <EntityTypeShape EntityType="DomainModels.AdCampaignTargetCriteria" Width="1.5" PointX="15.5" PointY="1.625" />
+        <EntityTypeShape EntityType="DomainModels.AdCampaignTargetLocation" Width="1.5" PointX="8.125" PointY="13.375" />
+        <EntityTypeShape EntityType="DomainModels.SurveyQuestion" Width="1.5" PointX="12.625" PointY="9.75" />
+        <EntityTypeShape EntityType="DomainModels.SurveyQuestionTargetCriteria" Width="1.5" PointX="12.5" PointY="0.75" />
+        <EntityTypeShape EntityType="DomainModels.SurveyQuestionTargetLocation" Width="1.5" PointX="14.875" PointY="12.125" />
+        <AssociationConnector Association="DomainModels.FK_AdCampaign_Language" />
+        <AssociationConnector Association="DomainModels.FK_AdCampaignResponse_AdCampaign" />
+        <AssociationConnector Association="DomainModels.FK_AdCampaignTargetCriteria_AdCampaign" />
+        <AssociationConnector Association="DomainModels.FK_AdCampaignTargetLocation_AdCampaign" />
+        <AssociationConnector Association="DomainModels.FK_AdCampaignResponse_AspNetUsers" />
+        <AssociationConnector Association="DomainModels.FK_AdCampaignTargetCriteria_ProfileQuestion" />
+        <AssociationConnector Association="DomainModels.FK_AdCampaignTargetCriteria_ProfileQuestionAnswer" />
+        <AssociationConnector Association="DomainModels.FK_AdCampaignTargetCriteria_SurveyQuestion" />
+        <AssociationConnector Association="DomainModels.FK_AdCampaignTargetLocation_Country" />
+        <AssociationConnector Association="DomainModels.FK_SurveyQuestion_AspNetUsers" />
+        <AssociationConnector Association="DomainModels.FK_SurveyQuestion_Country" />
+        <AssociationConnector Association="DomainModels.FK_SurveyQuestionTargetLocation_Country" />
+        <AssociationConnector Association="DomainModels.FK_SurveyQuestion_Language" />
+        <AssociationConnector Association="DomainModels.FK_SurveyQuestionTargetCriteria_ProfileQuestion" />
+        <AssociationConnector Association="DomainModels.FK_SurveyQuestionTargetCriteria_ProfileQuestionAnswer" />
+        <AssociationConnector Association="DomainModels.FK_SurveyQuestionTargetCriteria_SurveyQuestion" />
+        <AssociationConnector Association="DomainModels.FK_SurveyQuestionTargetCriteria_SurveyQuestion1" />
+        <AssociationConnector Association="DomainModels.FK_SurveyQuestionTargetLocation_SurveyQuestion" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
