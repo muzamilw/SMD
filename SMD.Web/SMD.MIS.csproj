@@ -355,6 +355,12 @@
     </Compile>
     <Compile Include="Areas\Api\ModelMappers\WebApiUserMapper.cs" />
     <Compile Include="Areas\Api\Models\WebApiUser.cs" />
+    <Compile Include="Areas\Api\Models\CountryDropdown.cs" />
+    <Compile Include="Areas\Api\Models\LanguageDropdown.cs" />
+    <Compile Include="Areas\Api\Models\ProfileQuestion.cs" />
+    <Compile Include="Areas\Api\Models\ProfileQuestionBaseResponse.cs" />
+    <Compile Include="Areas\Api\Models\ProfileQuestionGroupDropdown.cs" />
+    <Compile Include="Areas\Api\Models\ProfileQuestionSearchRequestResponse.cs" />
     <Compile Include="Areas\Common\CommonAreaRegistration.cs" />
     <Compile Include="Areas\ProfileQuestion\Controllers\ManageController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -371,12 +377,6 @@
     <Compile Include="ModelMappers\CountryMapper.cs" />
     <Compile Include="ModelMappers\ProfileQuestionGroupMapper.cs" />
     <Compile Include="ModelMappers\ProfileQuestionMapper.cs" />
-    <Compile Include="Models\RequestResposeModels\ProfileQuestionBaseResponse.cs" />
-    <Compile Include="Models\RequestResposeModels\ProfileQuestionSearchRequestResponse.cs" />
-    <Compile Include="Models\WebModels\CountryDropdown.cs" />
-    <Compile Include="Models\WebModels\LanguageDropdown.cs" />
-    <Compile Include="Models\WebModels\ProfileQuestion.cs" />
-    <Compile Include="Models\WebModels\ProfileQuestionGroupDropdown.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="TypeRegistrations.cs" />
@@ -473,6 +473,9 @@
     </Content>
     <Content Include="Content\less\MainSite.min.css">
       <DependentUpon>MainSite.css</DependentUpon>
+    </Content>
+    <Content Include="Content\less\ProfileQuestion.css">
+      <DependentUpon>ProfileQuestion.less</DependentUpon>
     </Content>
     <Content Include="Content\ReportViewerSite.css" />
     <Content Include="Content\Site.css" />
@@ -1261,6 +1264,7 @@
     <Content Include="RichTextEditor\samples\assets\posteddata.php" />
     <Content Include="RichTextEditor\samples\plugins\htmlwriter\assets\outputforflash\outputforflash.fla" />
     <Content Include="RichTextEditor\skins\moono\readme.md" />
+    <Content Include="Content\less\ProfileQuestion.less" />
     <None Include="Scripts\amplify-vsdoc.js" />
     <Content Include="Scripts\amplify.js" />
     <Content Include="Scripts\amplify.min.js" />
@@ -2371,6 +2375,7 @@
     <Folder Include="Areas\Survey\Models\" />
     <Folder Include="Areas\Survey\Views\Shared\" />
     <Folder Include="Content\themes\base\minified\images\" />
+    <Folder Include="Models\" />
     <Folder Include="Properties\PublishProfiles\" />
     <Folder Include="Reports\" />
     <Folder Include="Resources\" />

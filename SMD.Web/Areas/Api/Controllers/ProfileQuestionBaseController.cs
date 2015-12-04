@@ -1,6 +1,6 @@
 ﻿using SMD.Interfaces.Services;
+using SMD.MIS.Areas.Api.Models;
 using SMD.MIS.ModelMappers;
-using SMD.MIS.Models.RequestResposeModels;
 using System.Web.Http;
 
 namespace SMD.MIS.Areas.Api.Controllers

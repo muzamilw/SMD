@@ -1,6 +1,6 @@
 ﻿using System;
-using SMD.MIS.Models.RequestResposeModels;
-using SMD.MIS.Models.WebModels;
+using SMD.MIS.Areas.Api.Models;
+
 using System.Linq;
 
 namespace SMD.MIS.ModelMappers
@@ -14,7 +14,7 @@ namespace SMD.MIS.ModelMappers
         /// Domain Search Response to Web Response 
         /// </summary>
         public static ProfileQuestionSearchRequestResponse CraeteFrom(
-            this SMD.Models.ResponseModels.ProfileQuestionSearchRequestResponse source)
+            this Models.ResponseModels.ProfileQuestionSearchRequestResponse source)
         {
             return new ProfileQuestionSearchRequestResponse
             {
@@ -26,7 +26,7 @@ namespace SMD.MIS.ModelMappers
         /// <summary>
         /// Domain To Web 
         /// </summary>
-        public static ProfileQuestion CreateFrom(this SMD.Models.DomainModels.ProfileQuestion source)
+        public static ProfileQuestion CreateFrom(this Models.DomainModels.ProfileQuestion source)
         {
             return new ProfileQuestion
             {
@@ -34,22 +34,43 @@ namespace SMD.MIS.ModelMappers
                 Question = source.Question,
                 Priority = source.Priority,
                 HasLinkedQuestions = source.HasLinkedQuestions,
+                ProfileGroupName = source.ProfileQuestionGroup.ProfileGroupName ,
+
+                LanguageId = source.LanguageId,
+                CountryId = source.CountryId,
                 ProfileGroupId = source.ProfileGroupId,
-                ProfileGroupName = source.ProfileQuestionGroup.ProfileGroupName
+                Type = source.Type,
+                RefreshTime = source.RefreshTime,
+                SkippedCount = source.SkippedCount,
+                CreationDate = source.CreationDate,
+                ModifiedDate = source.ModifiedDate,
+                PenalityForNotAnswering = source.PenalityForNotAnswering,
+                Status = source.Status
             };
         }
 
         /// <summary>
         /// Web to Domain 
         /// </summary>
-        public static SMD.Models.DomainModels.ProfileQuestion CreateFrom(this ProfileQuestion source)
+        public static Models.DomainModels.ProfileQuestion CreateFrom(this ProfileQuestion source)
         {
-            return new SMD.Models.DomainModels.ProfileQuestion
+            return new Models.DomainModels.ProfileQuestion
             {
                 PqId = source.PqId,
                 Question = source.Question,
                 Priority = source.Priority,
                 HasLinkedQuestions = source.HasLinkedQuestions,
+
+                LanguageId = source.LanguageId,
+                CountryId = source.CountryId,
+                ProfileGroupId = source.ProfileGroupId,
+                Type = source.Type,
+                RefreshTime = source.RefreshTime,
+                SkippedCount = source.SkippedCount,
+                CreationDate = source.CreationDate,
+                ModifiedDate = source.ModifiedDate,
+                PenalityForNotAnswering = source.PenalityForNotAnswering,
+                Status = source.Status
             };
         }
 
@@ -57,7 +78,7 @@ namespace SMD.MIS.ModelMappers
         /// Creates web model of BaseData
         /// </summary>
         public static ProfileQuestionBaseResponse CreateFrom(
-            this SMD.Models.ResponseModels.ProfileQuestionBaseResponse source)
+            this Models.ResponseModels.ProfileQuestionBaseResponse source)
         {
             return new ProfileQuestionBaseResponse
             {

@@ -1,13 +1,28 @@
 ﻿define(["ko", "underscore", "underscore-ko"], function(ko) {
 
     var // ReSharper disable InconsistentNaming
-        question = function (questionId, spcQuestion, pr,linkQ,gName) {
+        question = function (questionId, spcQuestion, pr,linkQ,gName, langId, countId, groupId, spcType,
+        spcRefreshtime,spcSkipped, spcCreationD, spcModDate,penality,spcStatus) {
             var 
                 qId = ko.observable(questionId),
                 questionString = ko.observable(spcQuestion),
                 priority = ko.observable(pr),
                 hasLinkedQuestions = ko.observable(linkQ),
                 profileGroupName = ko.observable(gName),
+                
+                languageId = ko.observable(langId),
+                countryId = ko.observable(countId),
+                profileGroupId = ko.observable(groupId),
+                type = ko.observable(spcType),
+
+                refreshTime = ko.observable(spcRefreshtime),
+                skippedCount = ko.observable(spcSkipped),
+                creationDate = ko.observable(spcCreationD),
+                modifiedDate = ko.observable(spcModDate),
+                
+                penalityForNotAnswering = ko.observable(penality),
+                status = ko.observable(spcStatus),
+                
                 errors = ko.validation.group({                    
                     
                 }),
@@ -43,6 +58,19 @@
                 hasLinkedQuestions: hasLinkedQuestions,
                 profileGroupName: profileGroupName,
                 
+                languageId :languageId,
+                countryId :countryId,
+                profileGroupId :profileGroupId,
+                type :type,
+
+                refreshTime :refreshTime,
+                skippedCount:skippedCount,
+                creationDate :creationDate,
+                modifiedDate :modifiedDate,
+                
+                penalityForNotAnswering :penalityForNotAnswering,
+                status: status,
+
                 hasChanges: hasChanges,
                 reset: reset,
                 convertToServerData: convertToServerData,
@@ -54,12 +82,14 @@
     //server to client mapper For Hire Group Category 
     var questionServertoClientMapper = function (itemFromServer) {
         return new question(itemFromServer.PqId, itemFromServer.Question, itemFromServer.Priority,
-            itemFromServer.HasLinkedQuestions, itemFromServer.ProfileGroupName);
+            itemFromServer.HasLinkedQuestions, itemFromServer.ProfileGroupName, itemFromServer.LanguageId, itemFromServer.CountryId, itemFromServer.ProfileGroupId, itemFromServer.Type, itemFromServer.RefreshTime
+        , itemFromServer.SkippedCount, itemFromServer.CreationDate, itemFromServer.ModifiedDate, itemFromServer.PenalityForNotAnswering, itemFromServer.Status);
     };
     
     // Function to attain cancel button functionality
     question.CreateFromClientModel = function (item) {
-        return new question(item.qId, item.questionString, item.priority, item.hasLinkedQuestions, item.profileGroupName);
+        return new question(item.qId, item.questionString, item.priority, item.hasLinkedQuestions, item.profileGroupName, item.languageId, item.countryId, item.profileGroupId, item.type, item.refreshTime
+        , item.skippedCount, item.creationDate, item.modifiedDate, item.penalityForNotAnswering, item.status);
     };
 
     return {
