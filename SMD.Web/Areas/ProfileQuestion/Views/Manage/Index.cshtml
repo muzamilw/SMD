@@ -32,9 +32,9 @@
                                 <thead>
                                     <tr>
                                         <th class="col-lg-2 th-pointer"><span id="1">Group<span class="icon-up"></span></span></th>
-                                        <th class="col-lg-7 th-pointer"><span id="2">Question</span></th>
-                                        <th class="col-lg-1 th-pointer"><span id="3">Priority</span></th>
-                                        <th class="col-lg-1 th-pointer"><span id="4">Has Linked</span></th>
+                                        <th class="col-lg-7 th-pointer"><span id="2">Question<span></span></span></th>
+                                        <th class="col-lg-1 th-pointer"><span id="3">Priority<span></span></span></th>
+                                        <th id="hasLinkedtableHeader" class="col-lg-1 th-pointer"><span id="4">Has Linked?<span></span></span></th>
                                         <th class="col-lg-1">&nbsp;</th>
                                     </tr>
                                 </thead>
@@ -67,7 +67,7 @@
                     <p data-bind="text:priority"></p>
                 </td>
                 <td>
-                    <p data-bind="text:hasLinkedQuestions()==true ? 'YES' : 'NO'"></p>
+                    <p id="IsLInkedQuestionParah" data-bind="text:hasLinkedQuestions()==true ? 'YES' : 'NO',css: { 'label-success': hasLinkedQuestions(), 'label-danger': !hasLinkedQuestions() }"></p>
                 </td>
                 <td>
                     <a class="table-link"  style="float: right">
