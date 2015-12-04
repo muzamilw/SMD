@@ -2,7 +2,7 @@
     Module with the view model for the Profile Questions
 */
 define("ads/ads.viewModel",
-    ["jquery", "amplify", "ko", "ads/ads.dataservice", "ads/ads.model", "common/confirmation.viewModel"],
+    ["jquery", "amplify", "ko", "ads/ads.dataservice", "ads/ads.model", "common/pagination", "common/confirmation.viewModel"],
     function ($, amplify, ko, dataservice, model, confirmation) {
         var ist = window.ist || {};
         ist.Ads = {
