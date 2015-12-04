@@ -44,14 +44,14 @@
         RegistrationConfirmed = 1
     }
 
-    public enum AdvertType
+    public enum AdCampaignType
     {
         Video = 1,
         Link = 2,
         Other = 3
     }
 
-    public enum AdvertStatus 
+    public enum AdCampaignStatus 
     {
         Draft = 1,
         SubmitForApproval = 2,

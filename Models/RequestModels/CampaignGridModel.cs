@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SMD.Models.RequestModels
 {
-    public class AdvertGridRequest
+    public class CampaignGridModel
     {
         public long CampaignId { get; set; }
         public int Status { get; set; }
@@ -17,5 +17,7 @@ namespace SMD.Models.RequestModels
         public string DisplayTitle { get; set; }
         public long ResultClicks { get; set; }
         public double? AmountSpent { get; set; }
+        public string StatusName { get; set; }
+        public string StatusColor { get; set; }
     }
 }

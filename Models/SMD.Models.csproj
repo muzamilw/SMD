@@ -149,7 +149,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="RequestModels\AdvertGridRequest.cs" />
+    <Compile Include="RequestModels\CampaignGridModel.cs" />
     <Compile Include="RequestModels\GetPagedListRequest.cs" />
     <Compile Include="RequestModels\ExternalLoginRequest.cs" />
     <Compile Include="RequestModels\StandardLoginRequest.cs" />
