@@ -150,6 +150,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="RequestModels\GetPagedListRequest.cs" />
+    <Compile Include="RequestModels\StandardLoginRequest.cs" />
     <Compile Include="RequestModels\ProfileQuestionSearchRequest.cs" />
     <Compile Include="ResponseModels\ProfileQuestionBaseResponse.cs" />
     <Compile Include="ResponseModels\ProfileQuestionSearchRequestResponse.cs" />

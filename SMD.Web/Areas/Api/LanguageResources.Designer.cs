@@ -61,6 +61,15 @@ namespace SMD.MIS.Areas.Api {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to UserName or Password is Invalid.
+        /// </summary>
+        internal static string InvalidCredentials {
+            get {
+                return ResourceManager.GetString("InvalidCredentials", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid Request.
         /// </summary>
         internal static string InvalidRequest {

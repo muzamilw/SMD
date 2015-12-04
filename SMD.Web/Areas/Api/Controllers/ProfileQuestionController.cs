@@ -44,7 +44,7 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// <summary>
         /// Delete Profile Question 
         /// </summary>
-        public Boolean Delete(Models.WebModels.ProfileQuestion question)
+        public Boolean Delete(MIS.Models.WebModels.ProfileQuestion question)
         {
             if (question == null || !ModelState.IsValid)
             {
