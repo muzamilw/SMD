@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Http;
 using SMD.MIS.Areas.Api.ModelMappers;
+using SMD.WebBase.Mvc;
 
 namespace SMD.MIS.Areas.Api.Controllers
 {
@@ -44,6 +45,7 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// <summary>
         /// Login
         /// </summary>
+        [ApiException]
         public async Task<WebApiUser> Post(StandardLoginRequest request)
         {
             if (request == null || !ModelState.IsValid)
