@@ -15,6 +15,14 @@ define("pQuestion/pQuestion.viewModel",
                     langs = ko.observableArray([]),
                     countries = ko.observableArray([]),
                     qGroup = ko.observableArray([]),
+                    priorityList = ko.observableArray([0,1,2,3,4,5,6,7,8,9]),
+                    questiontype = ko.observableArray([{
+                        typeId: 1,
+                        typeName:'Single Choice'
+                    }, {
+                        typeId: 2,
+                        typeName: 'Multiple Choice'
+                    }]),
                     //pager
                     pager = ko.observable(),
                     //sorting
@@ -37,9 +45,9 @@ define("pQuestion/pQuestion.viewModel",
                         dataservice.searchProfileQuestions(
                             {
                                 ProfileQuestionFilterText: filterValue(),
-                                LanguageFilter: langfilterValue(),
-                                QuestionGroupFilter: qGroupfilterValue(),
-                                CountryFilter : countryfilterValue(),
+                                LanguageFilter: langfilterValue() || 41,
+                                QuestionGroupFilter: qGroupfilterValue() || 0,
+                                CountryFilter : countryfilterValue() || 214,
                                 PageSize: pager().pageSize(),
                                 PageNo: pager().currentPage(),
                                 SortBy: sortOn(),
@@ -62,7 +70,7 @@ define("pQuestion/pQuestion.viewModel",
                     
                      //Get Base Data for Questions
                     getBasedata = function () {
-                        dataservice.searchProfileQuestions(null, {
+                        dataservice.getBaseData(null, {
                             success: function (baseDataFromServer) {
                                 langs.removeAll();
                                 countries.removeAll();
@@ -75,6 +83,9 @@ define("pQuestion/pQuestion.viewModel",
                                 langs.valueHasMutated();
                                 countries.valueHasMutated();
                                 qGroup.valueHasMutated();
+                                
+                                langfilterValue(41);
+                                countryfilterValue(214);
                             },
                             error: function () {
                                     toastr.error("Failed to load base data!");
@@ -120,6 +131,14 @@ define("pQuestion/pQuestion.viewModel",
                             }
                         });
                     },
+                    // Make Filters Claer
+                    clearFilters= function() {
+                        langfilterValue(undefined);
+                        countryfilterValue(undefined);
+                        qGroupfilterValue(undefined);
+                        filterValue(undefined);
+                        getQuestions();
+                    },
                     // Initialize the view model
                     initialize = function (specifiedView) {
                         view = specifiedView;
@@ -151,7 +170,10 @@ define("pQuestion/pQuestion.viewModel",
                     qGroup: qGroup,
                     langfilterValue :langfilterValue,
                     countryfilterValue:countryfilterValue,
-                    qGroupfilterValue: qGroupfilterValue
+                    qGroupfilterValue: qGroupfilterValue,
+                    clearFilters: clearFilters,
+                    priorityList: priorityList,
+                    questiontype: questiontype
                 };
             })()
         };

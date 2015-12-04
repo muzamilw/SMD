@@ -38,18 +38,19 @@
                                 <thead>
                                     <tr>
                                         <th class="col-sm-1">&nbsp;</th>
-                                        <th class="col-sm-3"><span>Advert Name</span></th>
-                                        <th class="col-sm-2"><span>Delivery</span></th>
-                                        <th class="col-sm-2"><span>Results</span></th>
-                                        <th class="col-sm-2"><span>Reach</span></th>
-                                        <th class="col-sm-2"><span>Cost</span></th>
-                                        <th class="col-sm-2"><span>Budget</span></th>
+                                        <th class="col-sm-2"><span>Advert Name</span></th>
+                                        <th class="col-sm-1"><span>Delivery</span></th>
+                                        <th class="col-sm-1"><span>Results</span></th>
+                                        <th class="col-sm-1"><span>Reach</span></th>
+                                        <th class="col-sm-1"><span>Cost</span></th>
+                                        <th class="col-sm-1"><span>Budget</span></th>
                                         <th class="col-sm-2"><span>Amount Spent</span></th>
                                         <th class="col-sm-2"><span>Schedule</span></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                   
+                                    <!-- ko template: { name: $root.advertsTemplate , foreach: $root.advertGridContent } -->
+                                    <!-- /ko -->
                                 </tbody>
                             </table>
                         </div>
@@ -58,9 +59,105 @@
             
             </div>
         </div>
-
-
+     
 
     </div>
 
 </div>
+
+<script id="advertsTemplate" type="text/html">
+    <tr style="cursor: pointer">
+     
+        <td>
+            <a href="#" class="store-user-link" data-bind="text: DisplayTitle()"></a>
+            <a href="#" class="store-user-link storeSubText"><i class="fa fa-external-link-square"></i></a>
+        </td>
+        <!-- ko if: Status == 1 -->
+        <td>
+            <span class="pull-left"><i class="fa fa-circle"></i>
+            </span>
+            <span class="pull-left label">
+                Draft
+            </span>
+        </td>
+        <!-- /ko -->
+        <!-- ko if: Status == 2 -->
+        <td>
+            <span class="pull-left">
+                <i class="fa fa-circle"></i>
+            </span>
+            <span class="pull-left label">
+                Submitted for Approval
+            </span>
+        </td>
+        <!-- /ko -->
+        <!-- ko if: Status == 3 -->
+        <td>
+            <span class="pull-left">
+                <i class="fa fa-circle"></i>
+            </span>
+            <span class="pull-left label">
+                Live
+            </span>
+        </td>
+        <!-- /ko -->
+        <!-- ko if: Status == 4 -->
+        <td>
+            <span class="pull-left">
+                <i class="fa fa-circle"></i>
+            </span>
+            <span class="pull-left label">
+                Paused
+            </span>
+        </td>
+        <!-- /ko -->
+        <!-- ko if: Status == 5 -->
+        <td>
+            <span class="pull-left">
+                <i class="fa fa-circle"></i>
+            </span>
+            <span class="pull-left label">
+                Completed
+            </span>
+        </td>
+        <!-- /ko -->
+        <!-- ko if: Status == 6 -->
+        <td>
+            <span class="pull-left">
+                <i class="fa fa-circle"></i>
+            </span>
+            <span class="pull-left label">
+                ApprovalRejected
+            </span>
+        </td>
+        <!-- /ko -->
+        <td>            <span class="label" >&nbsp;</span>
+        </td>
+        <td><span class="label" data-bind="text: ResultClicks"></span></td>
+        <td>
+            <span class="label">&nbsp;</span>
+        </td>
+        <td><span class="label" data-bind="text: MaxBudget"></span></td>
+        <td><span class="label" data-bind="text: AmountSpent"></span></td>
+        <td><span class="label" data-bind="text: StartDateTime"></span></td>
+        <!-- ko if: Status == 3 -->
+        <td>
+            <div class="onoffswitch" style="margin-right:0px;">
+                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchDisplayTaxable" data-bind="checked: $root.selectedStore().isDeliveryTaxAble">
+                <label class="onoffswitch-label" for="switchDisplayTaxable">
+                    <div class="onoffswitch-inner"></div>
+                    <div class="onoffswitch-switch"></div>
+                </label>
+            </div>
+
+        </td>
+        <!-- /ko -->
+       
+    </tr>
+</script>
+@section Scripts{
+    <script type="text/javascript">
+        require(["ads/ads.view"]);
+    </script>
+
+}
