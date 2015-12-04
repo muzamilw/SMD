@@ -1,5 +1,6 @@
 ﻿using SMD.Interfaces.Services;
 using SMD.Models.DomainModels;
+using SMD.Models.RequestModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,7 +31,7 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// Get Adverts 
         /// 
         /// </summary>
-        public List<AdCampaign> GetAdvertsByUserId()
+        public List<AdvertGridRequest> GetAdvertsByUserId()
         {
             return _advertService.GetAdverts();
         }

@@ -69,7 +69,7 @@
     <tr style="cursor: pointer">
      
         <td>
-            <a href="#" class="store-user-link" data-bind="text: DisplayTitle"></a>
+            <a href="#" class="store-user-link" data-bind="text: DisplayTitle()"></a>
             <a href="#" class="store-user-link storeSubText"><i class="fa fa-external-link-square"></i></a>
         </td>
         <!-- ko if: Status == 1 -->
@@ -155,3 +155,9 @@
        
     </tr>
 </script>
+@section Scripts{
+    <script type="text/javascript">
+        require(["ads/ads.view"]);
+    </script>
+
+}
