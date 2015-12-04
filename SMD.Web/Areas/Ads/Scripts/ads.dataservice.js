@@ -11,13 +11,26 @@ define("ads/ads.dataservice", function () {
             initialize = function () {
                 if (!isInitialized) {
 
-
                     isInitialized = true;
+                    amplify.request.define('GetAdverts', 'ajax', {
+                        url: '/Api/GetAdvertsByUserId',
+                        dataType: 'json',
+                        type: 'GET'
+                    });
                 }
             };
 
+        GetAdverts = function (params, callbacks) {
+            initialize();
+            return amplify.request({
+                resourceId: 'GetAdverts',
+                data: params,
+                success: callbacks.success,
+                error: callbacks.error,
+            });
+        }
         return {
-           
+            GetAdverts: GetAdverts,
         };
     })();
     return dataService;

@@ -6,6 +6,8 @@ using System.Data.Entity.Migrations;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Web;
+using Microsoft.AspNet.Identity;
 using Microsoft.Practices.Unity;
 using SMD.Common;
 using SMD.Interfaces.Repository;
@@ -148,10 +150,7 @@ namespace SMD.Repository.BaseRepository
         {
             get
             {
-                IEnumerable<NameClaimValue> nameClaimValues = ClaimHelper.GetClaimsByType<NameClaimValue>(SmdClaimTypes.MisUser);
-                return nameClaimValues != null && nameClaimValues.Any()
-                    ? nameClaimValues.ElementAt(0).Name
-                    : "N/A";
+                return HttpContext.Current.User.Identity.GetUserId();
             }
         }
 
