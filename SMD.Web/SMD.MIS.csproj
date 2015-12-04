@@ -346,6 +346,7 @@
     <Compile Include="Areas\Api\ApiAreaRegistration.cs" />
     <Compile Include="Areas\Api\Controllers\AdCampaignBaseController.cs" />
     <Compile Include="Areas\Api\Controllers\ProfileQuestionBaseController.cs" />
+    <Compile Include="Areas\Api\Controllers\ExternalLoginController.cs" />
     <Compile Include="Areas\Api\Controllers\StandardLoginController.cs" />
     <Compile Include="Areas\Api\Controllers\ProfileQuestionController.cs" />
     <Compile Include="Areas\Api\LanguageResources.Designer.cs">

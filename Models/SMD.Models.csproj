@@ -151,6 +151,7 @@
     </Compile>
     <Compile Include="RequestModels\AdvertGridRequest.cs" />
     <Compile Include="RequestModels\GetPagedListRequest.cs" />
+    <Compile Include="RequestModels\ExternalLoginRequest.cs" />
     <Compile Include="RequestModels\StandardLoginRequest.cs" />
     <Compile Include="RequestModels\ProfileQuestionSearchRequest.cs" />
     <Compile Include="ResponseModels\ProfileQuestionBaseResponse.cs" />

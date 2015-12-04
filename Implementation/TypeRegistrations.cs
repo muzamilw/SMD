@@ -26,6 +26,7 @@ namespace SMD.Implementation
             unityContainer.RegisterType<IProfileQuestionService, ProfileQuestionService>();
             unityContainer.RegisterType<IEmailManagerService, EmailManagerService>();
             unityContainer.RegisterType<IAdvertService, AdvertService>();
+            unityContainer.RegisterType<IWebApiUserService, WebApiUserService>();
         }
     }
 }

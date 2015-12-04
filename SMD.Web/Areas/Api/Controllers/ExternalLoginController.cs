@@ -12,14 +12,14 @@ using SMD.MIS.Areas.Api.ModelMappers;
 namespace SMD.MIS.Areas.Api.Controllers
 {
     /// <summary>
-    /// Standard Login Api Controller 
+    /// External Login Api Controller 
     /// </summary>
-    public class StandardLoginController : ApiController
+    public class ExternalLoginController : ApiController
     {
-        #region Private
-
         private readonly IWebApiUserService webApiUserService;
 
+        #region Private
+        
         #endregion
 
         #region Constructor
@@ -27,7 +27,7 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// <summary>
         /// Constructor
         /// </summary>
-        public StandardLoginController(IWebApiUserService webApiUserService)
+        public ExternalLoginController(IWebApiUserService webApiUserService)
         {
             if (webApiUserService == null)
             {
@@ -42,17 +42,17 @@ namespace SMD.MIS.Areas.Api.Controllers
         #region Public
         
         /// <summary>
-        /// Login
+        /// External Login
         /// </summary>
-        public async Task<WebApiUser> Post(StandardLoginRequest request)
+        public async Task<WebApiUser> Post(ExternalLoginRequest request)
         {
             if (request == null || !ModelState.IsValid)
             {
                 throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
             }
 
-            User user = await webApiUserService.StandardLogin(request);
-
+            // Check For Extenal Login 
+            User user = await webApiUserService.ExternalLogin(request); 
             return user.CreateFrom();
         }
 
