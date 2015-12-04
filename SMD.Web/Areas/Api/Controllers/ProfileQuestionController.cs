@@ -1,6 +1,6 @@
 ﻿using SMD.Interfaces.Services;
+using SMD.MIS.Areas.Api.Models;
 using SMD.MIS.ModelMappers;
-using SMD.MIS.Models.RequestResposeModels;
 using SMD.Models.RequestModels;
 using System;
 using System.Net;
@@ -44,7 +44,7 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// <summary>
         /// Delete Profile Question 
         /// </summary>
-        public Boolean Delete(Models.WebModels.ProfileQuestion question)
+        public Boolean Delete(Models.ProfileQuestion question)
         {
             if (question == null || !ModelState.IsValid)
             {

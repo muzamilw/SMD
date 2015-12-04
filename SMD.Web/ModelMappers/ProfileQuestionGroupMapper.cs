@@ -1,4 +1,4 @@
-﻿using SMD.MIS.Models.WebModels;
+﻿using SMD.MIS.Areas.Api.Models;
 using SMD.Models.DomainModels;
 
 namespace SMD.MIS.ModelMappers

@@ -15,6 +15,14 @@ define("pQuestion/pQuestion.viewModel",
                     langs = ko.observableArray([]),
                     countries = ko.observableArray([]),
                     qGroup = ko.observableArray([]),
+                    priorityList = ko.observableArray([0,1,2,3,4,5,6,7,8,9]),
+                    questiontype = ko.observableArray([{
+                        typeId: 1,
+                        typeName:'Single Choice'
+                    }, {
+                        typeId: 2,
+                        typeName: 'Multiple Choice'
+                    }]),
                     //pager
                     pager = ko.observable(),
                     //sorting
@@ -163,7 +171,9 @@ define("pQuestion/pQuestion.viewModel",
                     langfilterValue :langfilterValue,
                     countryfilterValue:countryfilterValue,
                     qGroupfilterValue: qGroupfilterValue,
-                    clearFilters: clearFilters
+                    clearFilters: clearFilters,
+                    priorityList: priorityList,
+                    questiontype: questiontype
                 };
             })()
         };
