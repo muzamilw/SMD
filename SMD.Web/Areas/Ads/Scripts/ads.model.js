@@ -10,6 +10,8 @@
                 MaxBudget = ko.observable(),
                 ResultClicks = ko.observable(),
                 AmountSpent = ko.observable(),
+                StatusName = ko.observable(),
+                StatusColor = ko.observable(),
         self = {
             CampaignId: CampaignId,
             DisplayTitle: DisplayTitle,
@@ -18,27 +20,16 @@
             EndDateTime: EndDateTime,
             MaxBudget: MaxBudget,
             ResultClicks: ResultClicks,
-            AmountSpent: AmountSpent
+            AmountSpent: AmountSpent,
+            StatusName: StatusName,
+            StatusColor: StatusColor
         };
         return self;
     };
 
-    var adsMapper = function (oads) {
-        return {
-            CampaignId: oads.CampaignId,
-            DisplayTitle: oads.DisplayTitle,
-            Status: oads.Status,
-            StartDateTime: oads.StartDateTime,
-            EndDateTime: oads.EndDateTime,
-            MaxBudget: oads.MaxBudget,
-            ResultClicks: oads.ResultClicks,
-            AmountSpent: oads.AmountSpent
-        };
-    };
-   
+  
     return {
-        AdvertGridModel: AdvertGridModel,
-        adsMapper: adsMapper
+        AdvertGridModel: AdvertGridModel
        
     };
 });

@@ -10,6 +10,6 @@ namespace SMD.Interfaces.Services
 {
     public interface IAdvertService
     {
-        List<AdvertGridRequest> GetAdverts();
+        List<CampaignGridModel> GetAdverts();
     }
 }

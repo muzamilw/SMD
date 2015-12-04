@@ -32,7 +32,7 @@ namespace SMD.Implementation.Services
             this._adCampaignRepository = adCampaignRepository;
             
         }
-        public List<AdvertGridRequest> GetAdverts()
+        public List<CampaignGridModel> GetAdverts()
         {
             return _adCampaignRepository.GetAdvertsByUserId();
         }

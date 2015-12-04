@@ -9,17 +9,15 @@ define("ads/ads.viewModel",
             viewModel: (function () {
                 var view,
                     advertGridContent = ko.observableArray([]),
-                    getAdvertGridContent = function () {
+                    getAdCampaignGridContent = function () {
 
                         dataservice.GetAdverts({}, {
                             success: function (data) {
                                 if (data != null) {
                                     advertGridContent.removeAll();
-                                    $.each(data, function (index, item) {
-                                        var module = model.adsMapper(item);
-                                        console.log( module);
-                                        advertGridContent.push(module);
-                                    });
+                                    ko.utils.arrayPushAll(advertGridContent(), data);
+                                    advertGridContent.valueHasMutated();
+                                  
                                 }
                                 
                             },
@@ -33,7 +31,8 @@ define("ads/ads.viewModel",
                 initialize = function (specifiedView) {
                     view = specifiedView; getAdvertGridContent();
                     ko.applyBindings(view.viewModel, view.bindingRoot);
-                   
+                  
+                    getAdCampaignGridContent();
                 };
                 return {
                     initialize: initialize,

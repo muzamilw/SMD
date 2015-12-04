@@ -31,7 +31,7 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// Get Adverts 
         /// 
         /// </summary>
-        public List<AdvertGridRequest> GetAdvertsByUserId()
+        public List<CampaignGridModel> GetAdvertsByUserId()
         {
             return _advertService.GetAdverts();
         }
