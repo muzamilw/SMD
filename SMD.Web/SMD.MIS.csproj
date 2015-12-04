@@ -394,6 +394,10 @@
     <Content Include="Areas\ProfileQuestion\Scripts\pQuestion.model.js" />
     <Content Include="Areas\ProfileQuestion\Scripts\pQuestion.view.js" />
     <Content Include="Areas\ProfileQuestion\Scripts\pQuestion.viewModel.js" />
+    <Content Include="Areas\Survey\Scripts\survey.dataservice.js" />
+    <Content Include="Areas\Survey\Scripts\survey.model.js" />
+    <Content Include="Areas\Survey\Scripts\survey.view.js" />
+    <Content Include="Areas\Survey\Scripts\survey.viewModel.js" />
     <Content Include="Content\colorpicker.css" />
     <Content Include="Content\CSS\bootstrap\bootstrap-responsive.css" />
     <Content Include="Content\CSS\bootstrap\bootstrap-responsive.min.css" />

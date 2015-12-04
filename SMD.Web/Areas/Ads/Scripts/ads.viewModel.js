@@ -29,7 +29,7 @@ define("ads/ads.viewModel",
                     }
                 // Initialize the view model
                 initialize = function (specifiedView) {
-                    view = specifiedView;
+                    view = specifiedView; getAdvertGridContent();
                     ko.applyBindings(view.viewModel, view.bindingRoot);
                   
                     getAdCampaignGridContent();
