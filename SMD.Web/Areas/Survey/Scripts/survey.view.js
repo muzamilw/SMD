@@ -1,42 +1,33 @@
 ﻿/*
     View for the ads. Used to keep the viewmodel clear of UI related logic
 */
-/*
-    View for the Order. Used to keep the viewmodel clear of UI related logic
-*/
-define("ads/ads.view",
-    ["jquery", "ads/ads.viewModel"], function ($, contentViewModel) {
-
+define("survey/survey.view",
+    ["jquery", "survey/survey.viewModel"], function ($, parentHireGroupViewModel) {
         var ist = window.ist || {};
-      //  ist.Ads = window.ist.Ads || {};
-
         // View 
-        ist.Ads.view = (function (specifiedViewModel) {
+        ist.survey.view = (function (specifiedViewModel) {
             var
                 // View model 
                 viewModel = specifiedViewModel,
                 // Binding root used with knockout
-                bindingRoot = $("#adsBinding")[0],
-
+                bindingRoot = $("#surveyBinding")[0],
                 // Initialize
                 initialize = function () {
                     if (!bindingRoot) {
                         return;
                     }
-
+                    // Handle Sorting
+                    handleSorting("surveyQuestionLVTable", viewModel.sortOn, viewModel.sortIsAsc, viewModel.getQuestions);
                 };
             initialize();
-
             return {
                 bindingRoot: bindingRoot,
-                viewModel: viewModel,
-
+                viewModel: viewModel
             };
-        })(contentViewModel);
-
+        })(parentHireGroupViewModel);
         // Initialize the view model
-        if (ist.Ads.view.bindingRoot) {
-            ist.Ads.viewModel.initialize(ist.Ads.view);
+        if (ist.survey.view.bindingRoot) {
+            parentHireGroupViewModel.initialize(ist.survey.view);
         }
-        return ist.Ads.view;
+        return ist.survey.view;
     });

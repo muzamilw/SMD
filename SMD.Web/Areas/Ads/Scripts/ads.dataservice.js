@@ -13,7 +13,7 @@ define("ads/ads.dataservice", function () {
 
                     isInitialized = true;
                     amplify.request.define('GetAdverts', 'ajax', {
-                        url: '/Api/GetAdvertsByUserId',
+                        url: '/Api/AdCampaignBase',
                         dataType: 'json',
                         type: 'GET'
                     });

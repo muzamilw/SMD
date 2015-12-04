@@ -1,4 +1,5 @@
 ﻿using SMD.Models.DomainModels;
+using SMD.Models.RequestModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace SMD.Interfaces.Services
 {
     public interface IAdvertService
     {
-        List<AdCampaign> GetAdverts();
+        List<CampaignGridModel> GetAdverts();
     }
 }

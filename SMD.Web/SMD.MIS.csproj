@@ -347,12 +347,16 @@
     <Compile Include="Areas\Api\Controllers\AdCampaignBaseController.cs" />
     <Compile Include="Areas\Api\Controllers\ProfileQuestionBaseController.cs" />
     <Compile Include="Areas\Api\Controllers\ProfileQuestionAnswerController.cs" />
+    <Compile Include="Areas\Api\Controllers\ExternalLoginController.cs" />
+    <Compile Include="Areas\Api\Controllers\StandardLoginController.cs" />
     <Compile Include="Areas\Api\Controllers\ProfileQuestionController.cs" />
     <Compile Include="Areas\Api\LanguageResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>LanguageResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\Api\ModelMappers\WebApiUserMapper.cs" />
+    <Compile Include="Areas\Api\Models\WebApiUser.cs" />
     <Compile Include="Areas\Api\Models\CountryDropdown.cs" />
     <Compile Include="Areas\Api\Models\ProfileQuestionDropdown.cs" />
     <Compile Include="Areas\Api\Models\LanguageDropdown.cs" />
@@ -396,6 +400,10 @@
     <Content Include="Areas\ProfileQuestion\Scripts\pQuestion.model.js" />
     <Content Include="Areas\ProfileQuestion\Scripts\pQuestion.view.js" />
     <Content Include="Areas\ProfileQuestion\Scripts\pQuestion.viewModel.js" />
+    <Content Include="Areas\Survey\Scripts\survey.dataservice.js" />
+    <Content Include="Areas\Survey\Scripts\survey.model.js" />
+    <Content Include="Areas\Survey\Scripts\survey.view.js" />
+    <Content Include="Areas\Survey\Scripts\survey.viewModel.js" />
     <Content Include="Content\colorpicker.css" />
     <Content Include="Content\CSS\bootstrap\bootstrap-responsive.css" />
     <Content Include="Content\CSS\bootstrap\bootstrap-responsive.min.css" />
@@ -2371,7 +2379,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Ads\Models\" />
-    <Folder Include="Areas\Api\ModelMappers\" />
     <Folder Include="Areas\Api\Views\ProfileQuestion\" />
     <Folder Include="Areas\Common\Controllers\" />
     <Folder Include="Areas\Common\Models\" />
@@ -2424,6 +2431,7 @@
     <EmbeddedResource Include="Areas\Api\LanguageResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>LanguageResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

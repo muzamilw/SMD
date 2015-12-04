@@ -77,5 +77,41 @@ namespace SMD.Implementation {
                 return ResourceManager.GetString("ClaimsSecurityService_MissingNameIdentifierClaim", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UserName or Password is Invalid..
+        /// </summary>
+        internal static string WebApiUserService_InvalidCredentials {
+            get {
+                return ResourceManager.GetString("WebApiUserService_InvalidCredentials", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email is invalid..
+        /// </summary>
+        internal static string WebApiUserService_InvalidEmail {
+            get {
+                return ResourceManager.GetString("WebApiUserService_InvalidEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No Login info found for provided email..
+        /// </summary>
+        internal static string WebApiUserService_LoginInfoNotFound {
+            get {
+                return ResourceManager.GetString("WebApiUserService_LoginInfoNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Provider Key is invalid..
+        /// </summary>
+        internal static string WebApiUserService_ProviderKeyInvalid {
+            get {
+                return ResourceManager.GetString("WebApiUserService_ProviderKeyInvalid", resourceCulture);
+            }
+        }
     }
 }

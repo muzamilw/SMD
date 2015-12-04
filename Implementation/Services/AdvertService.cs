@@ -1,6 +1,7 @@
 ﻿using SMD.Interfaces.Repository;
 using SMD.Interfaces.Services;
-using SMD.Models.DomainModels;
+using SMD.Models;
+using SMD.Models.RequestModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,7 +32,7 @@ namespace SMD.Implementation.Services
             this._adCampaignRepository = adCampaignRepository;
             
         }
-        public List<AdCampaign> GetAdverts()
+        public List<CampaignGridModel> GetAdverts()
         {
             return _adCampaignRepository.GetAdvertsByUserId();
         }
