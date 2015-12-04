@@ -120,4 +120,7 @@
   <data name="InvalidRequest" xml:space="preserve">
     <value>Invalid Request</value>
   </data>
+  <data name="InvalidCredentials" xml:space="preserve">
+    <value>UserName or Password is Invalid</value>
+  </data>
 </root>
