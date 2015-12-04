@@ -20,5 +20,10 @@ namespace SMD.Models.ResponseModels
         /// Langs
         /// </summary>
         public IEnumerable<Language> Languages { get; set; }
+
+        /// <summary>
+        /// Profile Questions for showing in editor - linked question
+        /// </summary>
+        public IEnumerable<ProfileQuestion> ProfileQuestions { get; set; }
     }
 }

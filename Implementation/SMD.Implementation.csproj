@@ -151,6 +151,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AdvertService.cs" />
     <Compile Include="Services\EmailManagerService.cs" />
+    <Compile Include="Services\ProfileQuestionAnswerService .cs" />
     <Compile Include="Services\ProfileQuestionService.cs" />
     <Compile Include="Services\SurveyQuestionService.cs" />
     <Compile Include="Services\SurveyQuestionTargetCriteriaService.cs" />

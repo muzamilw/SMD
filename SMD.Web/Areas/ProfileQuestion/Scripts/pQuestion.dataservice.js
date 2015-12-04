@@ -26,6 +26,7 @@ define("pQuestion/pQuestion.dataservice", function () {
                         type: 'DELETE'
                     });
 
+
                     //Get Base Data for Profile Questions
                     amplify.request.define('getBaseData', 'ajax', {
                         url: '/Api/ProfileQuestionBase',
@@ -34,6 +35,13 @@ define("pQuestion/pQuestion.dataservice", function () {
                     });
                     
 
+
+                    //Get Profile Question Answer 
+                    amplify.request.define('getPqAnswer', 'ajax', {
+                        url: '/Api/ProfileQuestionAnswer',
+                        dataType: 'json',
+                        type: 'GET'
+                    });
 
                     isInitialized = true;
                 }
@@ -47,8 +55,9 @@ define("pQuestion/pQuestion.dataservice", function () {
                     error: callbacks.error,
                     data: params
                 });
-            }
-            ,
+            },
+            
+
              // Get Base Data of Profile Questions
             getBaseData = function (params, callbacks) {
                 initialize();
@@ -59,6 +68,18 @@ define("pQuestion/pQuestion.dataservice", function () {
                     data: params
                 });
             },
+            
+             // Get Profile Questions Answer On edit 
+            getPqAnswer = function (params, callbacks) {
+                initialize();
+                return amplify.request({
+                    resourceId: 'getPqAnswer',
+                    success: callbacks.success,
+                    error: callbacks.error,
+                    data: params
+                });
+            },
+
               // Get Base Data of Profile Questions
             deleteProfileQuestion = function (params, callbacks) {
                 initialize();
@@ -73,7 +94,8 @@ define("pQuestion/pQuestion.dataservice", function () {
         return {
             searchProfileQuestions: searchProfileQuestions,
             getBaseData: getBaseData,
-            deleteProfileQuestion: deleteProfileQuestion
+            deleteProfileQuestion: deleteProfileQuestion,
+            getPqAnswer: getPqAnswer
         };
     })();
     return dataService;

@@ -346,6 +346,7 @@
     <Compile Include="Areas\Api\ApiAreaRegistration.cs" />
     <Compile Include="Areas\Api\Controllers\AdCampaignBaseController.cs" />
     <Compile Include="Areas\Api\Controllers\ProfileQuestionBaseController.cs" />
+    <Compile Include="Areas\Api\Controllers\ProfileQuestionAnswerController.cs" />
     <Compile Include="Areas\Api\Controllers\ProfileQuestionController.cs" />
     <Compile Include="Areas\Api\LanguageResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -353,10 +354,13 @@
       <DependentUpon>LanguageResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\Api\Models\CountryDropdown.cs" />
+    <Compile Include="Areas\Api\Models\ProfileQuestionDropdown.cs" />
     <Compile Include="Areas\Api\Models\LanguageDropdown.cs" />
     <Compile Include="Areas\Api\Models\ProfileQuestion.cs" />
+    <Compile Include="Areas\Api\Models\ProfileQuestionAnswer.cs" />
     <Compile Include="Areas\Api\Models\ProfileQuestionBaseResponse.cs" />
     <Compile Include="Areas\Api\Models\ProfileQuestionGroupDropdown.cs" />
+    <Compile Include="Areas\Api\Models\ProfileQuestionAnswerSearchRequest.cs" />
     <Compile Include="Areas\Api\Models\ProfileQuestionSearchRequestResponse.cs" />
     <Compile Include="Areas\Common\CommonAreaRegistration.cs" />
     <Compile Include="Areas\ProfileQuestion\Controllers\ManageController.cs" />
@@ -372,6 +376,7 @@
     <Compile Include="Helper\CultureHelper.cs" />
     <Compile Include="ModelMappers\LanguageMapper.cs" />
     <Compile Include="ModelMappers\CountryMapper.cs" />
+    <Compile Include="ModelMappers\ProfileQuestionAnswerMapper.cs" />
     <Compile Include="ModelMappers\ProfileQuestionGroupMapper.cs" />
     <Compile Include="ModelMappers\ProfileQuestionMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
