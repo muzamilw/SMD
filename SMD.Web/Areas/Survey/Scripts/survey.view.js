@@ -5,7 +5,7 @@ define("survey/survey.view",
     ["jquery", "survey/survey.viewModel"], function ($, parentHireGroupViewModel) {
         var ist = window.ist || {};
         // View 
-        ist.Ads.view = (function (specifiedViewModel) {
+        ist.survey.view = (function (specifiedViewModel) {
             var
                 // View model 
                 viewModel = specifiedViewModel,
@@ -26,8 +26,8 @@ define("survey/survey.view",
             };
         })(parentHireGroupViewModel);
         // Initialize the view model
-        if (ist.Ads.view.bindingRoot) {
-            parentHireGroupViewModel.initialize(ist.Ads.view);
+        if (ist.survey.view.bindingRoot) {
+            parentHireGroupViewModel.initialize(ist.survey.view);
         }
-        return ist.Ads.view;
+        return ist.survey.view;
     });

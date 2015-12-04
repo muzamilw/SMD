@@ -37,12 +37,12 @@
                                 <thead>
                                     <tr>
                                         <th class="col-sm-1">&nbsp;</th>
-                                        <th class="col-sm-3"><span>Survey Name</span></th>
-                                        <th class="col-sm-3"><span>Language</span></th>
-                                        <th class="col-sm-1"><span>Gender </span></th>
-                                        <th class="col-sm-1"><span>Country</span></th>
-                                        <th class="col-sm-1"><span>Status </span></th>
-                                        <th class="col-sm-2"><span> Username</span></th>
+                                        <th class="col-sm-3 th-pointer"><span>Survey Name</span></th>
+                                        <th class="col-sm-2 th-pointer"><span>Language</span></th>
+                                        <th class="col-sm-2 th-pointer"><span>Gender </span></th>
+                                        <th class="col-sm-2 th-pointer"><span>Country</span></th>
+                                        <th class="col-sm-2 th-pointer"><span>Status </span></th>
+                                        <th class="col-sm-2 th-pointer"><span> Username</span></th>
 
                                     </tr>
                                 </thead>
@@ -76,6 +76,9 @@
                             <i data-bind="click:$root.filterSurveyQuestion" class="fa fa-search search-icon" style=" margin-right: 8px;"></i>
                         </div>
                         <div class="col-xs-2">
+                            <select class="form-control" data-bind="options: $root.qStatuses, optionsText: 'StatusName', optionsValue: 'StatusID', optionsCaption: '&lt;' + 'Select Status'+ '&gt;' , value:$root.statusFilterValue"></select>
+                        </div>
+                        <div class="col-xs-2">
                             <select class="form-control" data-bind="options: $root.qGender, optionsText: 'GenderName', optionsValue: 'GenderId', optionsCaption: '&lt;' + 'Select Gender'+ '&gt;' , value:$root.genderFilterValue"></select>
                         </div>
                         <div class="col-xs-2">
@@ -98,7 +101,7 @@
 
 @section Scripts{
     <script type="text/javascript">
-        require(["survey/survey.view");
+        require(["survey/survey.view", "common/confirmation.view"]);
     </script>
 
 }

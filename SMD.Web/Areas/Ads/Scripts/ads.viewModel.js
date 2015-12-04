@@ -13,14 +13,11 @@ define("ads/ads.viewModel",
 
                         dataservice.GetAdverts({}, {
                             success: function (data) {
-                                console.log("add data " + data);
                                 if (data != null) {
                                     advertGridContent.removeAll();
-
                                     $.each(data, function (index, item) {
-                                        console.log("add module " + item.CampaignId);
                                         var module = model.adsMapper(item);
-                                        console.log("add module " + module);
+                                        console.log( module);
                                         advertGridContent.push(module);
                                     });
                                 }
@@ -34,10 +31,9 @@ define("ads/ads.viewModel",
                     }
                 // Initialize the view model
                 initialize = function (specifiedView) {
-                    view = specifiedView;
+                    view = specifiedView; getAdvertGridContent();
                     ko.applyBindings(view.viewModel, view.bindingRoot);
-                    alert();
-                    getAdvertGridContent();
+                   
                 };
                 return {
                     initialize: initialize,

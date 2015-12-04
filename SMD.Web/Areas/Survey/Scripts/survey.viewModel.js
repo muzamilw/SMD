@@ -8,13 +8,16 @@ define("survey/survey.viewModel",
         ist.survey = {
             viewModel: (function () {
                 var view,
-                   
+
                     //  Array
                     questions = ko.observableArray([]),
                     // Base Data
                     langs = ko.observableArray([]),
                     countries = ko.observableArray([]),
-                   
+                   // gender array
+                   qStatuses= ko.observableArray([]);
+                // status array 
+                qGender = ko.observableArray([]);
                     //pager
                     pager = ko.observable(),
                     //sorting
@@ -24,6 +27,7 @@ define("survey/survey.viewModel",
                     langfilterValue = ko.observable(41),
                     countryfilterValue = ko.observable(214),
                     genderFilterValue = ko.observable(1),
+                statusFilterValue= ko.observable(1),
                     //Assending  / Desending
                     sortIsAsc = ko.observable(true),
                     // Controlls editor visibility 
@@ -141,18 +145,20 @@ define("survey/survey.viewModel",
                     getQuestions: getQuestions,
                     getBasedata: getBasedata,
                     isEditorVisible: isEditorVisible,
-                    filterProfileQuestion: filterProfileQuestion,
+                    filterSurveyQuestion: filterSurveyQuestion,
                     filterValue: filterValue,
-                    addNewProfileQuestion: addNewProfileQuestion,
+                    addNewSurvey: addNewSurvey,
                     closeEditDialog: closeEditDialog,
-                    onEditProfileQuestion: onEditProfileQuestion,
-                    onDeleteProfileQuestion: onDeleteProfileQuestion,
+                    onEditSurvey: onEditSurvey,
+                    deleteSurvey: deleteSurvey,
                     langs: langs,
                     countries: countries,
-                    qGroup: qGroup,
+                    qGender: qGender,
+                    qStatuses:qStatuses,
                     langfilterValue: langfilterValue,
                     countryfilterValue: countryfilterValue,
-                    qGroupfilterValue: qGroupfilterValue
+                    genderFilterValue: genderFilterValue,
+                    statusFilterValue: statusFilterValue
                 };
             })()
         };
