@@ -10,6 +10,6 @@ namespace SMD.Interfaces.Repository
 {
     public interface IAdCampaignRepository : IBaseRepository<AdCampaign, long>
     {
-        List<AdvertGridRequest> GetAdvertsByUserId();
+        List<CampaignGridModel> GetAdvertsByUserId();
     }
 }
