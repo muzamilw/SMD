@@ -345,17 +345,22 @@
     <Compile Include="Areas\Ads\Controllers\AdsController.cs" />
     <Compile Include="Areas\Api\ApiAreaRegistration.cs" />
     <Compile Include="Areas\Api\Controllers\AdCampaignBaseController.cs" />
+    <Compile Include="Areas\Api\Controllers\CampaignController.cs" />
     <Compile Include="Areas\Api\Controllers\ProfileQuestionBaseController.cs" />
     <Compile Include="Areas\Api\Controllers\ProfileQuestionAnswerController.cs" />
     <Compile Include="Areas\Api\Controllers\ExternalLoginController.cs" />
     <Compile Include="Areas\Api\Controllers\StandardLoginController.cs" />
     <Compile Include="Areas\Api\Controllers\ProfileQuestionController.cs" />
+    <Compile Include="Areas\Api\Controllers\SurveyController.cs" />
     <Compile Include="Areas\Api\LanguageResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>LanguageResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\Api\ModelMappers\WebApiUserMapper.cs" />
+    <Compile Include="Areas\Api\Models\SurveyQuestion.cs" />
+    <Compile Include="Areas\Api\Models\AdCampaignBaseResponse.cs" />
+    <Compile Include="Areas\Api\Models\SurveyQuestionRequestResponseModel.cs" />
     <Compile Include="Areas\Api\Models\WebApiUser.cs" />
     <Compile Include="Areas\Api\Models\CountryDropdown.cs" />
     <Compile Include="Areas\Api\Models\ProfileQuestionDropdown.cs" />
@@ -383,6 +388,7 @@
     <Compile Include="ModelMappers\ProfileQuestionAnswerMapper.cs" />
     <Compile Include="ModelMappers\ProfileQuestionGroupMapper.cs" />
     <Compile Include="ModelMappers\ProfileQuestionMapper.cs" />
+    <Compile Include="ModelMappers\SurveyQuestionModelMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="TypeRegistrations.cs" />
@@ -424,6 +430,7 @@
     <Content Include="Content\CSS\fonts\wpzoom.svg" />
     <Content Include="Content\CSS\icons.css" />
     <Content Include="Content\CSS\jquery-Slider.css" />
+    <Content Include="Content\CSS\jquery.tokenize.css" />
     <Content Include="Content\CSS\main.css" />
     <Content Include="Content\CSS\spectrum.css" />
     <Content Include="Content\CSS\supr-theme\images\ui-bg_diagonals-small_100_f4f4f4_40x40.png" />
@@ -477,6 +484,7 @@
     <Content Include="Content\Images\company_contact.jpg" />
     <Content Include="Content\Images\imageplaceholder.png" />
     <Content Include="Content\Images\up-arrow-small.png" />
+
     <Content Include="Content\layout.css" />
     <Content Include="Content\less\MainSite.css">
       <DependentUpon>MainSite.less</DependentUpon>
@@ -1073,6 +1081,7 @@
     <Content Include="Scripts\Ace\lib\ace\worker-css.js" />
     <Content Include="Scripts\autoNumeric\autoNumeric-1.9.25.js" />
     <Content Include="Scripts\autoNumeric\autoNumeric-1.9.25.min.js" />
+    <Content Include="Scripts\jquery.tokenize.js" />
     <Content Include="Scripts\knockout-3.1.0.debug.js" />
     <Content Include="Scripts\knockout-ace.js" />
     <Content Include="Scripts\Ace\ace.js" />
@@ -1258,8 +1267,9 @@
     <Content Include="Areas\Ads\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Ads\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Ads\Views\Ads\Index.cshtml" />
+    
     <Content Include="Areas\Ads\Views\Ads\ManageCampaign.cshtml" />
-    <None Include="config\Web.connectionstrings.default.config">
+    <None Include="ModelMappers\config\Web.connectionstrings.default.config">
       <SubType>Designer</SubType>
     </None>
     <Content Include="Content\less\MainSite.css.map">
@@ -2381,6 +2391,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Ads\Models\" />
     <Folder Include="Areas\Api\Views\ProfileQuestion\" />
+    <Folder Include="Areas\Api\Views\Survey\" />
     <Folder Include="Areas\Common\Controllers\" />
     <Folder Include="Areas\Common\Models\" />
     <Folder Include="Areas\Survey\Models\" />

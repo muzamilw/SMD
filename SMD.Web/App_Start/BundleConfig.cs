@@ -80,7 +80,8 @@ namespace SMD.MIS
                 .Include("~/Scripts/Ace/lib/ace/ace.js")
                 .Include("~/Scripts/autoNumeric/autoNumeric-1.9.25.min.js")
                 .Include("~/Scripts/numeral/numeral.min.js")
-                .Include("~/Scripts/knockout-ace.js"));
+                .Include("~/Scripts/knockout-ace.js")
+                .Include("~/Scripts/jquery.tokenize.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                  "~/Scripts/bootstrap.js"));
@@ -90,7 +91,8 @@ namespace SMD.MIS
                 .Include("~/Content/colorpicker.css")
                 .Include("~/Content/CSS/spectrum.css")
                 .Include("~/RichTextEditor/skins/moono/editor.css")
-                .Include("~/Content/CSS/custom.css"));
+                .Include("~/Content/CSS/custom.css")
+                .Include("~/Content/CSS/jquery.tokenize.css"));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
                 "~/Content/themes/base/jquery.ui.core.css",

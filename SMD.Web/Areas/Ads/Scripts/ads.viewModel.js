@@ -11,10 +11,14 @@ define("ads/ads.viewModel",
                     advertGridContent = ko.observableArray([]),
                      pager = ko.observable(),
                        // Controlls editor visibility 
-                    isEditorVisible = ko.observable(false),
-                    CampaignType = ko.observable('Video'),
+                    isEditorVisible = ko.observable(true),
+                    CampaignType = ko.observable('1'),
+                    validFromDate = ko.observable(),
+                    validUptoDate = ko.observable(),
+                    Languages = ko.observableArray([]),
+                    Countries = ko.observableArray([]),
                     getAdCampaignGridContent = function () {
-                        dataservice.GetAdverts({}, {
+                        dataservice.getCampaignData({}, {
                             success: function (data) {
                                 if (data != null) {
                                     advertGridContent.removeAll();
@@ -30,6 +34,28 @@ define("ads/ads.viewModel",
                         });
 
                     },
+                    getBaseData = function () {
+                        dataservice.getBaseData({}, {
+                              success: function (data) {
+                                  if (data != null) {
+                                      console.log(JSON.stringify(data.Languages));
+                                      Languages.removeAll();
+                                      ko.utils.arrayPushAll(Languages(), data.Languages);// [{ LanguageId: 1, LanguageName: "Abkhaz" }, { LanguageId: 2, LanguageName: "Afar" }]);
+                                      Languages.valueHasMutated();
+                                    
+
+                                      Countries.removeAll();
+                                      ko.utils.arrayPushAll(Countries(), data.Countries);
+                                      Countries.valueHasMutated();
+                                  }
+
+                              },
+                              error: function (response) {
+
+                              }
+                          });
+
+                      },
                      // Add new Profile Question
                     addNewCampaign = function () {
                         isEditorVisible(true);
@@ -38,8 +64,9 @@ define("ads/ads.viewModel",
                 initialize = function (specifiedView) {
                     view = specifiedView; 
                     ko.applyBindings(view.viewModel, view.bindingRoot);
-                    pager(pagination.Pagination({ PageSize: 10 }, advertGridContent, getAdCampaignGridContent));
-                    getAdCampaignGridContent();
+                  //  pager(pagination.Pagination({ PageSize: 10 }, advertGridContent, getAdCampaignGridContent));
+                    getBaseData();
+                   // getAdCampaignGridContent();
                 };
                 return {
                     initialize: initialize,
@@ -47,7 +74,10 @@ define("ads/ads.viewModel",
                     isEditorVisible:isEditorVisible,
                     advertGridContent: advertGridContent,
                     addNewCampaign: addNewCampaign,
-                    CampaignType: CampaignType
+                    CampaignType: CampaignType,
+                    validFromDate: validFromDate,
+                    validUptoDate: validUptoDate,
+                    Languages: Languages
                 };
             })()
         };

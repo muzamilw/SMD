@@ -62,7 +62,7 @@
                         </div>
 
                         <div class="col-lg-9">
-                            <div class="form-group" id="form-group-closer" style="margin-bottom:14px;">
+                            <div class="form-group" style="margin-bottom:14px;">
                                 <div class="col-lg-3 text-right">
 
                                     <label for="txtCampaignName" class="control-label text-right tooltip-float">Campaign Name</label>
@@ -72,7 +72,7 @@
 
                                 </div>
                             </div>
-                            <div class="form-group" id="form-group-closer" style="margin-bottom:14px;">
+                            <div class="form-group" style="margin-bottom:14px;">
                                 <div class="col-lg-3 text-right" style="padding-top:12px;">
 
                                     <label for="txtCampaignDisplayName" class="control-label text-right tooltip-float">Campaign Display Name</label>
@@ -105,13 +105,13 @@
                                     <div class="col-lg-12" style="margin-left:-10px;">
                                         <div class="radio">
                                             <input type="radio" name="optionsRadiosStoreType" id="optionsRadiosVideos" value="1" data-bind="checked: $root.CampaignType">
-                                            <label for="optionsRadiosRetail">
+                                            <label for="optionsRadiosVideos">
                                                 Video
                                             </label>
                                         </div>
                                         <div class="radio">
                                             <input type="radio" name="optionsRadiosStoreType" id="optionsRadiosLink" value="2" data-bind="checked: $root.CampaignType">
-                                            <label for="optionsRadiosCorporate">
+                                            <label for="optionsRadiosLink">
                                                 Link
                                             </label>
                                             <span class="help-block text-right"></span>
@@ -121,6 +121,79 @@
                                         <input type="text" class="form-control" id="txtLinkOfCampaign" placeholder="Enter a link">
 
                                     </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-3 text-right">
+                                    <div class="bs-example-tooltips tooltip-float-width">
+                                        <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
+                                            <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                        </a>
+                                    </div>
+                                    <label for="txtAge" class="control-label text-right tooltip-float">Age</label>
+                                </div>
+                                <div class="col-lg-2">
+                                    <select class="form-control">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </select>
+                                </div>
+                                <div class="pull-left" style="width:10px;">
+                                   -
+                                </div>
+                                <div class="col-lg-2">
+                                    <select class="form-control">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-3 text-right">
+                                    <div class="bs-example-tooltips tooltip-float-width">
+                                        <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
+                                            <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                        </a>
+                                    </div>
+                                    <label for="txtGender" class="control-label text-right tooltip-float">Gender</label>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="btn-group" data-toggle="buttons">
+                                        <label class="btn btn-primary">
+                                            <input type="radio" name="genderoptions" id="GALL">All
+                                        </label>
+                                        <label class="btn btn-primary">
+                                            <input type="radio" name="genderoptions" id="GMen">Men
+                                        </label>
+                                        <label class="btn btn-primary active">
+                                            <input type="radio" name="genderoptions" id="GWomen">Women
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-3 text-right">
+                                    <div class="bs-example-tooltips tooltip-float-width">
+                                        <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
+                                            <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                        </a>
+                                    </div>
+                                    <label for="txtLanguages" class="control-label text-right tooltip-float">Languages</label>
+                                </div>
+                                <div class="col-lg-6">
+                                    <select id="tokenize" multiple="multiple" class="tokenize-sample" data-bind="options: $root.Languages, optionsText: 'LanguageName', optionsValue: 'LanguageId'"></select>
+                                    <select style="box-shadow: none;
+    border: 1px solid #bfbfbf;
+    padding: 2px 10px 4px 10px;    height: 35px;
+    width: 150px;
+    border-radius: 3px;" data-bind="options: $root.Languages, optionsText: 'LanguageName', optionsValue: 'LanguageId'"></select>
+                                </div>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -135,8 +208,38 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <input type="text" name="Budget" class="form-control" id="txtBudget">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-3 text-right">
+                                    <div class="bs-example-tooltips tooltip-float-width">
+                                        <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-original-title="" title="">
+                                            <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                        </a>
+                                    </div>
+                                    <label for="txtBudget" class="control-label text-right tooltip-float">Schedule</label>
+                                </div>
+                                <div class="col-sm-6" style="background-color: gainsboro">
+                                    <div class="form-group " style="margin-top: 15px;">
+                                        <div class="col-sm-4 text-right">
+                                            <label for="validFromDate" class="control-label text-right tooltip-float">Start Date</label>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" id="validFromDate" data-bind="datetimepicker:$root.validFromDate">
+                                        </div>
+                                       
+                                    </div>
+                                    <div class="form-group ">
+                                        <div class="col-sm-4 text-right">
+                                            <label for="validUptoDate" class="control-label text-right tooltip-float">End Date</label>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" id="validUptoDate" data-bind="datetimepicker:$root.validUptoDate">
+                                        </div>
+                                    </div>
 
                                 </div>
+
                             </div>
                             <div class="form-group">
                                 <div class="col-lg-3 text-right">

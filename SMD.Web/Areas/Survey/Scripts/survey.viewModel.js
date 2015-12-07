@@ -2,8 +2,8 @@
     Module with the view model for the Profile Questions
 */
 define("survey/survey.viewModel",
-    ["jquery", "amplify", "ko", "survey/survey.dataservice", "survey/survey.model"],
-    function ($, amplify, ko, dataservice, model, confirmation) {
+    ["jquery", "amplify", "ko", "survey/survey.dataservice", "common/pagination", "survey/survey.model", "common/confirmation.viewModel"],
+    function ($, amplify, ko, dataservice, pagination, model, confirmation) {
         var ist = window.ist || {};
         ist.survey = {
             viewModel: (function () {
@@ -14,22 +14,12 @@ define("survey/survey.viewModel",
                     // Base Data
                     langs = ko.observableArray([]),
                     countries = ko.observableArray([]),
-                   // gender array
-                   qStatuses= ko.observableArray([]);
-                // status array 
-                qGender = ko.observableArray([]);
                     //pager
                     pager = ko.observable(),
-                    //sorting
-                    sortOn = ko.observable(1),
                     // Search Filter value 
                     filterValue = ko.observable(),
                     langfilterValue = ko.observable(41),
                     countryfilterValue = ko.observable(214),
-                    genderFilterValue = ko.observable(1),
-                statusFilterValue= ko.observable(1),
-                    //Assending  / Desending
-                    sortIsAsc = ko.observable(true),
                     // Controlls editor visibility 
                     isEditorVisible = ko.observable(false),
                     //// Editor View Model   // view model for editing survey
@@ -38,54 +28,61 @@ define("survey/survey.viewModel",
                     //selectedQuestion = editorViewModel.itemForEditing,
 
                     //Get Questions
-                    getQuestions = function () {  //todo
-                        //dataservice.searchProfileQuestions(
-                        //    {
-                        //        ProfileQuestionFilterText: filterValue(),
-                        //        LanguageFilter: langfilterValue(),
-                        //        QuestionGroupFilter: qGroupfilterValue(),
-                        //        CountryFilter: countryfilterValue(),
-                        //        PageSize: pager().pageSize(),
-                        //        PageNo: pager().currentPage(),
-                        //        SortBy: sortOn(),
-                        //        IsAsc: sortIsAsc()
-                        //    },
-                        //    {
-                        //        success: function (data) {
-                        //            questions.removeAll();
-                        //            pager().totalCount(data.TotalCount);
-                        //            _.each(data.ProfileQuestions, function (item) {
-                        //                questions.push(model.questionServertoClientMapper(item));
-                        //            });
-
-                        //        },
-                        //        error: function () {
-                        //            toastr.error("Failed to load profile questions!");
-                        //        }
-                        //    });
-                    },
-
-                     //Get Base Data for Questions
-                    getBasedata = function () {
-                        dataservice.searchProfileQuestions(null, {
-                            success: function (baseDataFromServer) {
-                                langs.removeAll();
-                                countries.removeAll();
-                                qGroup.removeAll();
-
-                                ko.utils.arrayPushAll(langs(), baseDataFromServer.LanguageDropdowns);
-                                ko.utils.arrayPushAll(countries(), baseDataFromServer.CountryDropdowns);
-                                ko.utils.arrayPushAll(qGroup(), baseDataFromServer.ProfileQuestionGroupDropdowns);
-
-                                langs.valueHasMutated();
-                                countries.valueHasMutated();
-                                qGroup.valueHasMutated();
+                    getQuestions = function () {   
+                        dataservice.searchSurveyQuestions(
+                            {
+                                SearchText: filterValue(),
+                                LanguageFilter: langfilterValue(),
+                                CountryFilter: countryfilterValue(),
+                                PageSize: pager().pageSize(),
+                                PageNo: pager().currentPage(),
+                                FirstLoad:false
                             },
-                            error: function () {
-                                toastr.error("Failed to load base data!");
-                            }
-                        });
+                            {
+                                success: function (data) {
+                                    populateSurveyQuestions(data);
+                                },
+                                error: function () {
+                                    toastr.error("Failed to load  questions!");
+                                }
+                            });
                     },
+
+                    // //Get Base Data for Questions
+                    getBasedata = function () {
+                        dataservice.searchSurveyQuestions({
+                            FirstLoad: true,
+                            PageSize: pager().pageSize(),
+                            PageNo: pager().currentPage()
+                        },
+                            {
+                                success: function (data) {
+                                    // popullate base data 
+                                    langs.removeAll();
+                                    countries.removeAll();
+                                    ko.utils.arrayPushAll(langs(), data.LanguageDropdowns);
+                                    ko.utils.arrayPushAll(countries(), data.CountryDropdowns);
+                                    langs.valueHasMutated();
+                                    countries.valueHasMutated();
+                                    // populate survey questions 
+                                    populateSurveyQuestions(data);
+                                    console.log(questions());
+                                },
+                                error: function () {
+                                    toastr.error("Failed to load base data!");
+                                }
+                            });
+           
+                    },
+                    // update survey questions 
+                    populateSurveyQuestions = function (data) {
+                        questions.removeAll();
+                        pager().totalCount(data.TotalCount);
+                        _.each(data.SurveyQuestions, function (item) {
+                            questions.push(model.Survey.Create(item));
+                        });
+
+                    }
                     // Search Filter 
                     filterSurveyQuestion = function () {
                         getQuestions();
@@ -133,12 +130,10 @@ define("survey/survey.viewModel",
                         // Base Data Call
                         getBasedata();
                         // First request for LV
-                        getQuestions();
+                      //  getQuestions();
                     };
                 return {
                     initialize: initialize,
-                    sortOn: sortOn,
-                    sortIsAsc: sortIsAsc,
                     pager: pager,
                   //  selectedQuestion: selectedQuestion,
                     questions: questions,
@@ -153,12 +148,8 @@ define("survey/survey.viewModel",
                     deleteSurvey: deleteSurvey,
                     langs: langs,
                     countries: countries,
-                    qGender: qGender,
-                    qStatuses:qStatuses,
                     langfilterValue: langfilterValue,
-                    countryfilterValue: countryfilterValue,
-                    genderFilterValue: genderFilterValue,
-                    statusFilterValue: statusFilterValue
+                    countryfilterValue: countryfilterValue
                 };
             })()
         };
