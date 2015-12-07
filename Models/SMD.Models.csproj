@@ -153,8 +153,10 @@
     <Compile Include="RequestModels\GetPagedListRequest.cs" />
     <Compile Include="RequestModels\StandardLoginRequest.cs" />
     <Compile Include="RequestModels\ProfileQuestionSearchRequest.cs" />
+    <Compile Include="RequestModels\SurveySearchRequest.cs" />
     <Compile Include="ResponseModels\ProfileQuestionBaseResponse.cs" />
     <Compile Include="ResponseModels\ProfileQuestionSearchRequestResponse.cs" />
+    <Compile Include="ResponseModels\SurveyQuestionResponseModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">
