@@ -1252,6 +1252,7 @@
     <Content Include="Areas\Ads\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Ads\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Ads\Views\Ads\Index.cshtml" />
+    <Content Include="Areas\Ads\Views\Ads\ManageCampaign.cshtml" />
     <None Include="config\Web.connectionstrings.default.config">
       <SubType>Designer</SubType>
     </None>
