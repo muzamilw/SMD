@@ -20,20 +20,20 @@ namespace SMD.WebBase.Mvc
     {
         #region Private
 // ReSharper disable InconsistentNaming
-        private static ISMDLogger mpcLogger;
+        private static ISMDLogger smdLogger;
 // ReSharper restore InconsistentNaming
         /// <summary>
         /// Get Configured logger
         /// </summary>
 // ReSharper disable InconsistentNaming
-        private static ISMDLogger MPCLogger
+        private static ISMDLogger SMDLogger
 // ReSharper restore InconsistentNaming
         {
             get
             {
-                if (mpcLogger != null) return mpcLogger;
-                mpcLogger = (UnityConfig.GetConfiguredContainer()).Resolve<ISMDLogger>();
-                return mpcLogger;
+                if (smdLogger != null) return smdLogger;
+                smdLogger = (UnityConfig.GetConfiguredContainer()).Resolve<ISMDLogger>();
+                return smdLogger;
             }
         }
 
@@ -77,9 +77,9 @@ namespace SMD.WebBase.Mvc
         /// <summary>
         /// Log Error
         /// </summary>
-        private void LogError(Exception exp, long organisationId, string requestContents)
+        private void LogError(Exception exp, string requestContents)
         {
-            MPCLogger.Write(exp, SMDLogCategory.Error, -1, -1, TraceEventType.Warning, "", new Dictionary<string, object> { { "Organisation", organisationId }, 
+            SMDLogger.Write(exp, SMDLogCategory.Error, -1, -1, TraceEventType.Warning, "", new Dictionary<string, object> {  
             { "RequestContents", requestContents } });
         }
         #endregion
@@ -99,12 +99,12 @@ namespace SMD.WebBase.Mvc
 // ReSharper disable SuggestUseVarKeywordEvident
                 SMDException exp = filterContext.Exception as SMDException;
 // ReSharper restore SuggestUseVarKeywordEvident
-                LogError(exp, 0, filterContext.Request.Content.ToString());
+                LogError(exp, filterContext.Request.Content.ToString());
             }
             else
             {
                 SetGeneralExceptionApplicationResponse(filterContext);
-                LogError(filterContext.Exception, -1, filterContext.Request.Content.ToString());
+                LogError(filterContext.Exception, filterContext.Request.Content.ToString());
             }
 
         }

@@ -70,7 +70,8 @@ namespace SMD.Implementation.Services
             {
                 Countries = _countryRepository.GetAllCountries(),
                 Languages = _languageRepository.GetAllLanguages(),
-                ProfileQuestionGroups = _profileQuestionGroupRepository.GetAllProfileQuestionGroups()
+                ProfileQuestionGroups = _profileQuestionGroupRepository.GetAllProfileQuestionGroups(),
+                ProfileQuestions = _profileQuestionRepository.GetAllProfileQuestions()
             };
         }
         #endregion
