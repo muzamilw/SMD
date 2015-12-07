@@ -5,7 +5,7 @@
 <div class="row" id="ProfileQuestionBindingSpot">
     <div class="col-lg-12" data-bind="visible: !$root.isEditorVisible()">
         <div class="row">
-            <div class="col-lg-12" >
+            <div class="col-lg-12">
                 <ol class="breadcrumb">
                     <li><a href="~/Dashboard/Index">&nbsp;</a></li>
                 </ol>
@@ -14,11 +14,17 @@
                 </div>
                 <div class="row" style="margin-bottom:15px;">
                     <div class="pull-right top-page-ui" style="margin-right:5px;">
-                        <button class="btn btn-primary"  style="margin-right: 6px;" data-bind="click:$root.addNewProfileQuestion">
+                        <button class="btn btn-primary" style="margin-right: 6px;" data-bind="click:$root.addNewProfileQuestion">
                             Add New
                         </button>
                     </div>
+                    <button class="btn btn-primary" style="margin-right: 6px;" data-bind="click: $root.chargeCustomer">
+                        Pay
+                    </button>
                 </div>
+                <!-- ko stopBinding: true -->
+                @Html.Partial("~/Areas/Common/Views/Shared/_StripeChargeCustomerDialog.cshtml")
+                <!-- /ko -->
                 <!-- ko template: { name: 'filterTemplate' } -->
                 <!-- /ko -->
             </div>
@@ -53,8 +59,8 @@
                 </div>
             </div>
         </div>
-        
-      
+
+
         <script id="ProfileQuestionTemplate" type="text/html">
             <tr style="cursor: pointer">
                 <td>
@@ -70,8 +76,8 @@
                     <p id="IsLInkedQuestionParah" data-bind="text:hasLinkedQuestions()==true ? 'YES' : 'NO',css: { 'label-success': hasLinkedQuestions(), 'label-danger': !hasLinkedQuestions() }"></p>
                 </td>
                 <td>
-                    <a class="table-link"  style="float: right">
-                        <span class="fa-stack" >
+                    <a class="table-link" style="float: right">
+                        <span class="fa-stack">
                             <i class="fa fa-square fa-stack-2x"></i>
                             <i class="fa fa-pencil fa-stack-1x fa-inverse" data-bind="click:$root.onEditProfileQuestion"></i>
                         </span>
@@ -79,15 +85,15 @@
                             <i class="fa fa-square fa-stack-2x"></i>
                             <i class="fa fa-times fa-stack-1x fa-inverse" data-bind="click:$root.onDeleteProfileQuestion"></i>
                         </span>
-                    </a>  
+                    </a>
                 </td>
             </tr>
         </script>
         <script id="filterTemplate" type="text/html">
-            <div class="row filter-body"  style=" margin-bottom: 8px;">
+            <div class="row filter-body" style=" margin-bottom: 8px;">
                 <form data-bind="submit:$root.filterProfileQuestion">
                     <div class="filter-block">
-                        <div class="form-group" >
+                        <div class="form-group">
                             <div class="col-xs-2">
                                 <input type="text" class="form-control" placeholder="Search..." data-bind="value:$root.filterValue">
                                 <i data-bind="click:$root.filterProfileQuestion" class="fa fa-search search-icon" style=" margin-right: 8px;"></i>
@@ -120,7 +126,7 @@
 <!-- /ko -->
 @section Scripts{
     <script type="text/javascript">
-        require(["pQuestion/pQuestion.view", "common/confirmation.view"]);
+        require(["pQuestion/pQuestion.view", "common/confirmation.view", "common/stripeChargeCustomer.view"]);
     </script>
 
 }

@@ -3,8 +3,8 @@
 */
 define("pQuestion/pQuestion.viewModel",
     ["jquery", "amplify", "ko", "pQuestion/pQuestion.dataservice", "pQuestion/pQuestion.model", "common/pagination",
-     "common/confirmation.viewModel"],
-    function ($, amplify, ko, dataservice, model, pagination, confirmation) {
+     "common/confirmation.viewModel", "common/stripeChargeCustomer.viewModel"],
+    function ($, amplify, ko, dataservice, model, pagination, confirmation, stripeChargeCustomer) {
         var ist = window.ist || {};
         ist.ProfileQuestion = {
             viewModel: (function() {
@@ -139,6 +139,14 @@ define("pQuestion/pQuestion.viewModel",
                         filterValue(undefined);
                         getQuestions();
                     },
+                    // Charge Customer
+                    chargeCustomer = function() {
+                        stripeChargeCustomer.show(undefined, 2000, '2 Widgets');
+                    },
+                    // Charge Existing Customer
+                    chargeExistingCustomer = function () {
+                        stripeChargeCustomer.show(undefined, 2000, '2 Widgets', true);
+                    },
                     // Initialize the view model
                     initialize = function (specifiedView) {
                         view = specifiedView;
@@ -173,7 +181,9 @@ define("pQuestion/pQuestion.viewModel",
                     qGroupfilterValue: qGroupfilterValue,
                     clearFilters: clearFilters,
                     priorityList: priorityList,
-                    questiontype: questiontype
+                    questiontype: questiontype,
+                    chargeCustomer: chargeCustomer,
+                    chargeExistingCustomer: chargeExistingCustomer
                 };
             })()
         };
