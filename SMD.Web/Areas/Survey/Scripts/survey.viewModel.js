@@ -66,6 +66,7 @@ define("survey/survey.viewModel",
                                     countries.valueHasMutated();
                                     // populate survey questions 
                                     populateSurveyQuestions(data);
+                                    console.log(questions());
                                 },
                                 error: function () {
                                     toastr.error("Failed to load base data!");

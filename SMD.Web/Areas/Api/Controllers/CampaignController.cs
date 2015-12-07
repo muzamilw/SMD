@@ -1,27 +1,24 @@
 ﻿using SMD.Interfaces.Services;
-using SMD.Models.DomainModels;
-using SMD.Models.RequestModels;
+using SMD.Models.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using SMD.MIS.ModelMappers;
-using SMD.MIS.Areas.Api.Models;
 
 namespace SMD.MIS.Areas.Api.Controllers
 {
-    public class AdCampaignBaseController : ApiController
+    public class CampaignController : ApiController
     {
-        #region Public
+          #region Public
         private readonly IAdvertService _campaignService;
         #endregion
         #region Constructor
         /// <summary>
         /// Constuctor 
         /// </summary>
-        public AdCampaignBaseController(IAdvertService campaignService)
+        public CampaignController(IAdvertService campaignService)
         {
             this._campaignService = campaignService;
         }
@@ -33,12 +30,9 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// Get base data for campaigns 
         /// 
         /// </summary>
-        public AdCampaignBaseResponse getBaseData()
+        public List<CampaignGridModel> Get()
         {
-            return new AdCampaignBaseResponse { 
-                Languages = _campaignService.GetCampaignBaseData().Languages.Select(lang => lang.CreateFrom()),
-                countries = _campaignService.GetCampaignBaseData().countries.Select(coun => coun.CreateFrom())
-            };
+            return _campaignService.GetCampaignByUserId();
         }
 
         #endregion

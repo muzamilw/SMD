@@ -12,20 +12,18 @@ namespace SMD.ExceptionHandling
         /// <summary>
         /// Initializes a new instance of MPC Exception
         /// </summary>
-        public SMDException(string message, long organisationId) : base(message)
+        public SMDException(string message) : base(message)
         {
-            OrganisationId = organisationId;
         }
 
         /// <summary>
         /// Initializes a new instance of MPC Exception
         /// </summary>
-        public SMDException(string message, int organisationId, Exception innerException)
+        public SMDException(string message, Exception innerException)
             : base(message, innerException)
         {
-            OrganisationId = organisationId;
+           
         }
 
-        public long OrganisationId { get; set; }
     }
 }

@@ -8,6 +8,9 @@
 #hasLinkedtableHeader {
   width: 9%;
 }
+.marginBottom12 {
+  margin-bottom: 12px;
+}
 /* Common Styles */
 .fileUpload {
   position: relative;

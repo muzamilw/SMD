@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using SMD.MIS.Areas.Api.Models;
 
 using System.Linq;
@@ -73,6 +74,17 @@ namespace SMD.MIS.ModelMappers
                 Status = source.Status
             };
         }
+        /// <summary>
+        /// Create DD from Domain Model 
+        /// </summary>
+        public static ProfileQuestionDropdown CreateFromDropdown(this Models.DomainModels.ProfileQuestion source)
+        {
+            return new ProfileQuestionDropdown
+            {
+                PqId = source.PqId,
+                Question = source.Question
+            };
+        }
 
         /// <summary>
         /// Creates web model of BaseData
@@ -84,7 +96,8 @@ namespace SMD.MIS.ModelMappers
             {
                 CountryDropdowns = source.Countries.Select(country => country.CreateFrom()),
                 LanguageDropdowns = source.Languages.Select(lang => lang.CreateFrom()),
-                ProfileQuestionGroupDropdowns = source.ProfileQuestionGroups.Select(group => group.CreateFrom())
+                ProfileQuestionGroupDropdowns = source.ProfileQuestionGroups.Select(group => group.CreateFrom()),
+                ProfileQuestionDropdowns = source.ProfileQuestions.Select(question => question.CreateFromDropdown())
             };
         }
 

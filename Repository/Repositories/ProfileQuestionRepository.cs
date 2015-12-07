@@ -90,6 +90,13 @@ namespace SMD.Repository.Repositories
                     .ToList(); 
         }
 
+        /// <summary>
+        /// Get All Profile Questions
+        /// </summary>
+        public IEnumerable<ProfileQuestion> GetAllProfileQuestions()
+        {
+            return DbSet.Where(question => question.Status == null || question.Status == 1).ToList();
+        }
         #endregion
     }
 }

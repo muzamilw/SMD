@@ -2,7 +2,6 @@
 using SMD.Interfaces.Repository;
 using SMD.Models.Common;
 using SMD.Models.DomainModels;
-using SMD.Models.RequestModels;
 using SMD.Repository.BaseRepository;
 using System;
 using System.Collections.Generic;
@@ -33,7 +32,7 @@ namespace SMD.Repository.Repositories
             }
         }
 
-        public List<CampaignGridModel> GetAdvertsByUserId()
+        public List<CampaignGridModel> GetCampaignByUserId()
         {
             var query = from ad in db.AdCampaigns
                         where ad.UserId == LoggedInUserIdentity

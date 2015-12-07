@@ -1,5 +1,6 @@
 ﻿using SMD.Models.DomainModels;
-using SMD.Models.RequestModels;
+using SMD.Models.Common;
+using SMD.Models.ResponseModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,7 @@ namespace SMD.Interfaces.Services
 {
     public interface IAdvertService
     {
-        List<CampaignGridModel> GetAdverts();
+        List<CampaignGridModel> GetCampaignByUserId();
+        AdCampaignBaseResponse GetCampaignBaseData();
     }
 }
