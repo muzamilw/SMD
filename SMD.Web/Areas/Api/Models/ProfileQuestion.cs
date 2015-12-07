@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace SMD.MIS.Areas.Api.Models
 {
@@ -25,5 +26,7 @@ namespace SMD.MIS.Areas.Api.Models
         public int? PenalityForNotAnswering { get; set; }
 
         public int? Status { get; set; }
+
+        public ICollection<ProfileQuestionAnswer> ProfileQuestionAnswers { get; set; }
     }
 }
