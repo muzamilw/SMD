@@ -149,11 +149,12 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="RequestModels\CampaignGridModel.cs" />
+    <Compile Include="Common\CampaignGridModel.cs" />
     <Compile Include="RequestModels\GetPagedListRequest.cs" />
     <Compile Include="RequestModels\ExternalLoginRequest.cs" />
     <Compile Include="RequestModels\StandardLoginRequest.cs" />
     <Compile Include="RequestModels\ProfileQuestionSearchRequest.cs" />
+    <Compile Include="ResponseModels\AdCampaignBaseResponse.cs" />
     <Compile Include="ResponseModels\ProfileQuestionBaseResponse.cs" />
     <Compile Include="ResponseModels\ProfileQuestionSearchRequestResponse.cs" />
   </ItemGroup>

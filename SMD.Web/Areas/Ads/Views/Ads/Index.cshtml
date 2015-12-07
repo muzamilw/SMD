@@ -114,8 +114,30 @@
     </tr>
 </script>
 @section Scripts{
+<script src="~/Scripts/jquery.tokenize.js"></script>
     <script type="text/javascript">
         require(["ads/ads.view"]);
+
+
+        $(document).ready(function () {
+            
+            $('#tokenize').tokenize({
+
+                //onAddToken: function (value, text, e) {
+
+                //    $(".Token .Close").click();
+
+                //    var count = $('#tokenContainer').children().length + 1;
+                //    var htmlToAppend = '<li id="' + count + '" style="text-align:left;"><div class="pull-left"><span> ' + text + ' </span></div><div class="pull-right"><a id="deleteToken' + count + '" onclick=RemoveToken(' + count + '); title="Delete"> <img src="/Content/images/deleteicon.PNG" /></a></div><div class="pull-right"><input type="radio" checked="checked" id="full-access" name="S' + count + '" /><label for="full-access" class="share-link-radios">Full</label><input type="radio" id="readonly-access" name="S' + count + '" /><label for="View Only" class="share-link-radios">Readonly</label></div><div class="pull-right" style="display:none;">false</div><div class="clearfix"></div></li>';
+
+                //    $("#tokenContainer").append(htmlToAppend);
+                //}
+            });
+            $('#tokenize').next().next().css("display", "none");
+          
+
+        });
     </script>
+
 
 }
