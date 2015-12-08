@@ -22,7 +22,7 @@ define("common/stripeChargeCustomer.view",
                         token: function (token) {
                             // Use the token to create the charge with a server-side script.
                             // You can access the token ID with `token.id`
-                            viewModel.charge(token);
+                            viewModel.createCustomer(token);
                         },
                         closed: function() {
                             handler.close();

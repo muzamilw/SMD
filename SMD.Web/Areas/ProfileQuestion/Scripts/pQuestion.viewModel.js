@@ -139,14 +139,6 @@ define("pQuestion/pQuestion.viewModel",
                         filterValue(undefined);
                         getQuestions();
                     },
-                    // Charge Customer
-                    chargeCustomer = function() {
-                        stripeChargeCustomer.show(undefined, 2000, '2 Widgets');
-                    },
-                    // Charge Existing Customer
-                    chargeExistingCustomer = function () {
-                        stripeChargeCustomer.show(undefined, 2000, '2 Widgets', true);
-                    },
                     // Initialize the view model
                     initialize = function (specifiedView) {
                         view = specifiedView;
@@ -181,9 +173,7 @@ define("pQuestion/pQuestion.viewModel",
                     qGroupfilterValue: qGroupfilterValue,
                     clearFilters: clearFilters,
                     priorityList: priorityList,
-                    questiontype: questiontype,
-                    chargeCustomer: chargeCustomer,
-                    chargeExistingCustomer: chargeExistingCustomer
+                    questiontype: questiontype
                 };
             })()
         };

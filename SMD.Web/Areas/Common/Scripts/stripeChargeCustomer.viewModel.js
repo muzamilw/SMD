@@ -40,7 +40,7 @@ define("common/stripeChargeCustomer.viewModel",
                     },
                     // Create Customer
                     createCustomer = function (token) {
-                        dataservice.chargeCustomer({ Token: token.id, Email: token.email, Amount: chargeAmount() }, {
+                        dataservice.createStripeCustomer({ Token: token.id, Email: token.email, Amount: chargeAmount() }, {
                             success: function () {
                                 toastr.success("Customer has been added!");
                                 proceed(); // Callback if any

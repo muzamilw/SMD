@@ -408,7 +408,9 @@
     <Content Include="Areas\Common\Scripts\pagination.js" />
     <Content Include="Areas\ProfileQuestion\Scripts\pQuestion.dataservice.js" />
     <Content Include="Areas\ProfileQuestion\Scripts\pQuestion.model.js" />
+    <Content Include="Areas\ProfileQuestion\Scripts\stripeExample.view.js" />
     <Content Include="Areas\ProfileQuestion\Scripts\pQuestion.view.js" />
+    <Content Include="Areas\ProfileQuestion\Scripts\stripeExample.viewModel.js" />
     <Content Include="Areas\ProfileQuestion\Scripts\pQuestion.viewModel.js" />
     <Content Include="Areas\Survey\Scripts\survey.dataservice.js" />
     <Content Include="Areas\Survey\Scripts\survey.model.js" />
@@ -1269,6 +1271,7 @@
     <Content Include="Areas\Ads\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Ads\Views\Ads\Index.cshtml" />
     <Content Include="Areas\Common\Views\Shared\_StripeChargeCustomerDialog.cshtml" />
+    <Content Include="Areas\ProfileQuestion\Views\Manage\StripeExample.cshtml" />
     <None Include="config\Web.connectionstrings.default.config">
       <SubType>Designer</SubType>
     </None>
