@@ -45,7 +45,15 @@
                     };
                 };
             return {
-               
+                SQID :(SQID),
+                LanguageID :(LanguageID),
+                CountryID :(CountryID),
+                UserID :(UserID),
+                Status :(Status),
+                Question :(Question),
+                Gender :(Gender),
+                Language :(Language),
+                Country :(Country),
                 hasChanges: hasChanges,
                 reset: reset,
                 isValid: isValid,

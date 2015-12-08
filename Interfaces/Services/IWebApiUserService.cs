@@ -18,5 +18,16 @@ namespace SMD.Interfaces.Services
         /// Standard Login 
         /// </summary>
         Task<User> StandardLogin(StandardLoginRequest request);
+
+        /// <summary>
+        /// Save Stripe Customer 
+        /// </summary>
+        Task SaveStripeCustomerId(string customerId);
+
+        /// <summary>
+        /// Get Stripe Customer
+        /// </summary>
+        /// <returns></returns>
+        Task<string> GetStripeCustomerId();
     }
 }

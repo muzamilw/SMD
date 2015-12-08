@@ -77,5 +77,23 @@ namespace SMD.MIS.Areas.Api {
                 return ResourceManager.GetString("InvalidRequest", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Payment can&apos;t be proceed, card has been expired!.
+        /// </summary>
+        internal static string Stripe_CardExpired {
+            get {
+                return ResourceManager.GetString("Stripe_CardExpired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Payment can&apos;t be proceed, no customer found!.
+        /// </summary>
+        internal static string Stripe_CustomerNotFound {
+            get {
+                return ResourceManager.GetString("Stripe_CustomerNotFound", resourceCulture);
+            }
+        }
     }
 }

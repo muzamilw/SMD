@@ -3,8 +3,8 @@
 */
 define("pQuestion/pQuestion.viewModel",
     ["jquery", "amplify", "ko", "pQuestion/pQuestion.dataservice", "pQuestion/pQuestion.model", "common/pagination",
-     "common/confirmation.viewModel"],
-    function ($, amplify, ko, dataservice, model, pagination, confirmation) {
+     "common/confirmation.viewModel", "common/stripeChargeCustomer.viewModel"],
+    function ($, amplify, ko, dataservice, model, pagination, confirmation, stripeChargeCustomer) {
         var ist = window.ist || {};
         ist.ProfileQuestion = {
             viewModel: (function() {
