@@ -477,7 +477,7 @@
                     </a>
                 </td>
             </tr>
-            <tr data-bind="visible:linkedQustionsCount()>0">
+            <tr data-bind="visible:linkedQustionsCount()>0 && $root.selectedQuestion().hasLinkedQuestions()">
                 <td style="padding-top: 7px; padding-bottom: 0px">
                     <div class="table-responsive">
                         <table class="table table-bordered table-hover" id="profileQuestionLVTable">
