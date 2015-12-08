@@ -13,5 +13,10 @@ namespace SMD.Interfaces.Repository
         /// Search Profile Question 
         /// </summary>
         IEnumerable<ProfileQuestion> SearchProfileQuestions(ProfileQuestionSearchRequest request, out int rowCount);
+
+        /// <summary>
+        /// Get All Profile Questions
+        /// </summary>
+        IEnumerable<ProfileQuestion> GetAllProfileQuestions();
     }
 }

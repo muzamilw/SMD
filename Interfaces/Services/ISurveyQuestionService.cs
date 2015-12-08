@@ -10,6 +10,7 @@ namespace SMD.Interfaces.Services
     /// </summary>
     public interface ISurveyQuestionService
     {
-     
+        SurveyQuestionResponseModel GetSurveyQuestions(SurveySearchRequest request);
+        SurveyQuestionResponseModel GetSurveyQuestions();
     }
 }

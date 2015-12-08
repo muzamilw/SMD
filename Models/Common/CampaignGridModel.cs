@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SMD.Models.RequestModels
+namespace SMD.Models.Common
 {
     public class CampaignGridModel
     {

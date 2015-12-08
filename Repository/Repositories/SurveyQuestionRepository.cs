@@ -1,11 +1,13 @@
 ﻿using Microsoft.Practices.Unity;
 using SMD.Interfaces.Repository;
 using SMD.Models.DomainModels;
+using SMD.Models.RequestModels;
 using SMD.Repository.BaseRepository;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -30,5 +32,46 @@ namespace SMD.Repository.Repositories
                 return db.SurveyQuestions;
             }
         }
+
+        public SurveyQuestion Find(int id)
+        {
+            return DbSet.Find(id);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public IEnumerable<SurveyQuestion> SearchSurveyQuestions(SurveySearchRequest request, out int rowCount)
+        {
+            if (request == null)
+            {
+                int fromRow = 0;
+                int toRow = 10;
+                rowCount = DbSet.Count();
+                return DbSet.OrderBy(g => g.SqId)
+                        .Skip(fromRow)
+                        .Take(toRow)
+                        .ToList();
+            }
+            else
+            {
+                int fromRow = (request.PageNo - 1) * request.PageSize;
+                int toRow = request.PageSize;
+                Expression<Func<SurveyQuestion, bool>> query =
+                    question =>
+                        (string.IsNullOrEmpty(request.SearchString) ||
+                         (question.Question.Contains(request.SearchString)))
+                         && (question.CountryId == request.CountryFilter)
+                         && (question.LanguageId == request.LanguageFilter);
+
+
+                rowCount = DbSet.Count(query);
+                return DbSet.Where(query).OrderBy(g=>g.SqId)
+                        .Skip(fromRow)
+                        .Take(toRow)
+                        .ToList();
+            }
+        }
+
     }
 }

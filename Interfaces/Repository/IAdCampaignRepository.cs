@@ -1,5 +1,5 @@
 ﻿using SMD.Models.DomainModels;
-using SMD.Models.RequestModels;
+using SMD.Models.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +10,6 @@ namespace SMD.Interfaces.Repository
 {
     public interface IAdCampaignRepository : IBaseRepository<AdCampaign, long>
     {
-        List<CampaignGridModel> GetAdvertsByUserId();
+        List<CampaignGridModel> GetCampaignByUserId();
     }
 }

@@ -1,17 +1,20 @@
 ﻿using SMD.Models.DomainModels;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace SMD.Models.ResponseModels
 {
-    /// <summary>
-    /// Base Data model 
-    /// </summary>
-    public class ProfileQuestionBaseResponse
+  
+    public class SurveyQuestionResponseModel
     {
+        #region Public
         /// <summary>
-        /// Profile Question Groups
+        ///  Profile Questions List
         /// </summary>
-        public IEnumerable<ProfileQuestionGroup> ProfileQuestionGroups { get; set; }
+        public IEnumerable<SurveyQuestion> SurveyQuestions { get; set; }
         /// <summary>
         /// Countries
         /// </summary>
@@ -20,10 +23,10 @@ namespace SMD.Models.ResponseModels
         /// Langs
         /// </summary>
         public IEnumerable<Language> Languages { get; set; }
-
         /// <summary>
-        /// Profile Questions for showing in editor - linked question
+        /// Total Count of  Profile Questions
         /// </summary>
-        public IEnumerable<ProfileQuestion> ProfileQuestions { get; set; }
+        public int TotalCount { get; set; }
+        #endregion
     }
 }

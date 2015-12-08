@@ -141,6 +141,10 @@ namespace SMD.Repository.BaseRepository
         /// </summary>
         public DbSet<AdCampaign> AdCampaigns { get; set; }
 
+        /// <summary>
+        /// Profile Question Answers
+        /// </summary>
+        public DbSet<ProfileQuestionAnswer> ProfileQuestionAnswers { get; set; }
 
         #endregion
     }

@@ -9,8 +9,10 @@ define("pQuestion/pQuestion.viewModel",
         ist.ProfileQuestion = {
             viewModel: (function() {
                 var view,
-                    //  Array
+                    //  Questions list on LV
                     questions = ko.observableArray([]),
+                    //  Question list on Editor for linked questions
+                    linkedQuestions = ko.observableArray([]),
                     // Base Data
                     langs = ko.observableArray([]),
                     countries = ko.observableArray([]),
@@ -36,10 +38,16 @@ define("pQuestion/pQuestion.viewModel",
                     sortIsAsc = ko.observable(true),
                     // Controlls editor visibility 
                     isEditorVisible = ko.observable(false),
+                    // Controls visibility of Image/text on answer editor 
+                    isAnswerIsImage = ko.observable(false),
                     // Editor View Model
                     editorViewModel = new ist.ViewModel(model.hireGroupImage),
                     //selected Question
                     selectedQuestion = editorViewModel.itemForEditing,
+                     //selected Answer
+                    selectedAnswer = ko.observable(),
+                    // Random number
+                    randomIdForNewObjects= -1,
                     //Get Questions
                     getQuestions = function () {
                         dataservice.searchProfileQuestions(
@@ -67,7 +75,6 @@ define("pQuestion/pQuestion.viewModel",
                                 }
                             });
                     },
-                    
                      //Get Base Data for Questions
                     getBasedata = function () {
                         dataservice.getBaseData(null, {
@@ -75,17 +82,20 @@ define("pQuestion/pQuestion.viewModel",
                                 langs.removeAll();
                                 countries.removeAll();
                                 qGroup.removeAll();
+                                linkedQuestions.removeAll();
                                 
                                 ko.utils.arrayPushAll(langs(), baseDataFromServer.LanguageDropdowns);
                                 ko.utils.arrayPushAll(countries(), baseDataFromServer.CountryDropdowns);
                                 ko.utils.arrayPushAll(qGroup(), baseDataFromServer.ProfileQuestionGroupDropdowns);
+                                ko.utils.arrayPushAll(linkedQuestions(), baseDataFromServer.ProfileQuestionDropdowns);
                                 
                                 langs.valueHasMutated();
                                 countries.valueHasMutated();
                                 qGroup.valueHasMutated();
+                                linkedQuestions.valueHasMutated();
                                 
                                 langfilterValue(41);
-                                countryfilterValue(214);
+                                countryfilterValue(214); 
                             },
                             error: function () {
                                     toastr.error("Failed to load base data!");
@@ -105,10 +115,31 @@ define("pQuestion/pQuestion.viewModel",
                         isEditorVisible(false);
                     },
                     // On editing of existing PQ
-                    onEditProfileQuestion= function(item) {
+                    onEditProfileQuestion = function (item) {
+                        getQuestionAnswer(item.qId());
                         selectedQuestion(item);
                         isEditorVisible(true);
                     },
+                    // On Edit PQ, Get PQ Answer & linked Question 
+                    getQuestionAnswer= function(profileQuestionId) {
+                        dataservice.getPqAnswer(
+                           {
+                               ProfileQuestionId: profileQuestionId
+                           },
+                           {
+                               success: function (answers) {
+                                   _.each(answers, function (item) {
+                                       selectedQuestion().answers.push(model.questionAnswerServertoClientMapper(item));
+                                   });
+                                  
+                               },
+                               error: function () {
+                                   toastr.error("Failed to load profile questions!");
+                               }
+                           });
+                    },
+                   
+                    // Delete Handler PQ
                     onDeleteProfileQuestion = function(item) {
                         // Ask for confirmation
                         confirmation.afterProceed(function () {
@@ -138,6 +169,57 @@ define("pQuestion/pQuestion.viewModel",
                         qGroupfilterValue(undefined);
                         filterValue(undefined);
                         getQuestions();
+                    },
+                    // Add new Answer
+                    addNewAnswer = function () {
+                        var obj = new model.questionAnswer;
+                        obj.type("1");
+                        obj.pqAnswerId(randomIdForNewObjects);
+                        randomIdForNewObjects--;
+                        selectedAnswer(obj);
+                    },
+                    answerTypeChangeHandler= function(item) {
+                        //var tfff = this;
+                        //return true;
+                    },
+                    onEditQuestionAnswer= function(item) {
+                        selectedAnswer(item);
+                    },
+                    //
+                    onSaveNewAnswer = function () {
+                        var objId = selectedAnswer().pqAnswerId();
+                        if (objId < 0) {
+                            selectedQuestion().answers.push(selectedAnswer);
+                        } else {
+                            var existingAns = selectedQuestion().answers.find(function (ans) {
+                                return ans.pqAnswerId() == objId;
+                            });
+                            existingAns.answerString(selectedAnswer().answerString());
+                            existingAns.imagePath(selectedAnswer().imagePath());
+                            existingAns.linkedQuestion1Id(selectedAnswer().linkedQuestion1Id());
+                            existingAns.question1String(model.setAnswerString(existingAns.linkedQuestion1Id(), existingAns));
+                            existingAns.linkedQuestion2Id(selectedAnswer().linkedQuestion2Id());
+                            existingAns.question2String(model.setAnswerString(existingAns.linkedQuestion2Id(), existingAns));
+                            existingAns.linkedQuestion3Id(selectedAnswer().linkedQuestion3Id());
+                            existingAns.question3String(model.setAnswerString(existingAns.linkedQuestion3Id(), existingAns));
+                            existingAns.linkedQuestion4Id(selectedAnswer().linkedQuestion4Id());
+                            existingAns.question4String(model.setAnswerString(existingAns.linkedQuestion4Id(), existingAns));
+                            existingAns.linkedQuestion5Id(selectedAnswer().linkedQuestion5Id());
+                            existingAns.question5String(model.setAnswerString(existingAns.linkedQuestion5Id(), existingAns));
+                            existingAns.linkedQuestion6Id(selectedAnswer().linkedQuestion6Id());
+                            existingAns.question6String(model.setAnswerString(existingAns.linkedQuestion6Id(), existingAns));
+                            existingAns.type(selectedAnswer().type());
+                            
+                        }
+                    },
+                    onSaveProfileQuestion= function() {
+                        var serverAnswers=[];
+                        _.each(selectedQuestion().answers, function (item) {
+                            serverAnswers.push(item.convertToServerData());
+                        });
+                        var serverQuestion = selectedQuestion.convertToServerData();
+                        serverQuestion.ProfileQuestionAnswers = serverAnswers;
+                        
                     },
                     // Initialize the view model
                     initialize = function (specifiedView) {
@@ -173,7 +255,15 @@ define("pQuestion/pQuestion.viewModel",
                     qGroupfilterValue: qGroupfilterValue,
                     clearFilters: clearFilters,
                     priorityList: priorityList,
-                    questiontype: questiontype
+                    questiontype: questiontype,
+                    isAnswerIsImage: isAnswerIsImage,
+                    addNewAnswer: addNewAnswer,
+                    answerTypeChangeHandler: answerTypeChangeHandler,
+                    selectedAnswer: selectedAnswer,
+                    linkedQuestions: linkedQuestions,
+                    onEditQuestionAnswer: onEditQuestionAnswer,
+                    onSaveNewAnswer: onSaveNewAnswer,
+                    onSaveProfileQuestion: onSaveProfileQuestion
                 };
             })()
         };
