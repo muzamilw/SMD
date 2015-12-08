@@ -71,8 +71,13 @@
                     <p data-bind="text:priority"></p>
                 </td>
                 <td>
-                    <p id="IsLInkedQuestionParah" data-bind="text:hasLinkedQuestions()==true ? 'YES' : 'NO',css: { 'label-success': hasLinkedQuestions(), 'label-danger': !hasLinkedQuestions() }"></p>
+                    <div class="type">
+                        <span data-bind="text:hasLinkedQuestions()==true ? 'YES' : 'NO',css: { 'label-success': hasLinkedQuestions(), 'label-danger': !hasLinkedQuestions() }" class="label">YES</span>
+                    </div>
                 </td>
+                @*<td>
+                    <p id="IsLInkedQuestionParah" data-bind="text:hasLinkedQuestions()==true ? 'YES' : 'NO',css: { 'label-success': hasLinkedQuestions(), 'label-danger': !hasLinkedQuestions() }"></p>
+                </td>*@
                 <td>
                     <a class="table-link" style="float: right">
                         <span class="fa-stack">

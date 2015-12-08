@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Configuration;
 using System.Data.Entity.Core.Objects.DataClasses;
+using System.IO;
 using System.Linq;
+using System.Web;
 using SMD.Interfaces.Repository;
 using SMD.Interfaces.Services;
 using SMD.Models.Common;
@@ -127,6 +130,10 @@ namespace SMD.Implementation.Services
                             serverAns.LinkedQuestion6Id = answer.LinkedQuestion6Id;
                             serverAns.PqAnswerId = answer.PqAnswerId;
                             serverAns.SortOrder = answer.SortOrder;
+                            if (serverAns.Type == 2)
+                            {
+                                serverAns.ImagePath = SaveAnswerImage(serverAns);
+                            }
                         }
                         else
                         {
@@ -217,6 +224,76 @@ namespace SMD.Implementation.Services
             _profileQuestionAnswerRepository.SaveChanges();
             return _profileQuestionRepository.Find(serverObj.PqId);
 
+        }
+
+        public string SaveAnswerImage(ProfileQuestionAnswer source)
+        {
+            string mpcContentPath = ConfigurationManager.AppSettings["SMD_Content"];
+            HttpServerUtility server = HttpContext.Current.Server;
+            string mapPath =
+                server.MapPath(mpcContentPath + "/ProfileQuestions/" + "PQId-"+source.PqId +
+                               "/PQAId-" + source.PqAnswerId);
+
+            if (!Directory.Exists(mapPath))
+            {
+                Directory.CreateDirectory(mapPath);
+            }
+
+            mapPath = SaveImage(mapPath, string.Empty, string.Empty,
+                "AnswerImage_"+DateTime.Now.Second+".png", source.ImagePath, source.ImageUrlBytes);
+
+            return mapPath;
+        }
+       
+        private string SaveImage(string mapPath, string existingImage, string caption, string fileName,
+            string fileSource, byte[] fileSourceBytes, bool fileDeleted = false)
+        {
+            if (fileSourceBytes == null)
+            {
+                return fileSource;
+            }
+            if (!string.IsNullOrEmpty(fileSource) || fileDeleted)
+            {
+                // Look if file already exists then replace it
+                if (!string.IsNullOrEmpty(existingImage))
+                {
+                    if (Path.IsPathRooted(existingImage))
+                    {
+                        if (File.Exists(existingImage))
+                        {
+                            // Remove Existing File
+                            File.Delete(existingImage);
+                        }
+                    }
+                    else
+                    {
+                        string filePath = HttpContext.Current.Server.MapPath("~/" + existingImage);
+                        if (File.Exists(filePath))
+                        {
+                            // Remove Existing File
+                            File.Delete(filePath);
+                        }
+                    }
+
+                }
+
+                // If File has been deleted then set the specified field as empty
+                // Used for File1, File2, File3, File4, File5
+                if (fileDeleted)
+                {
+                    return string.Empty;
+                }
+
+                // First Time Upload
+                string imageurl = mapPath + "\\" + caption + fileName;
+                File.WriteAllBytes(imageurl, fileSourceBytes);
+
+                int indexOf = imageurl.LastIndexOf("SMD_Content", StringComparison.Ordinal);
+                imageurl = imageurl.Substring(indexOf, imageurl.Length - indexOf);
+                return imageurl;
+            }
+
+            return null;
         }
         #endregion
     }

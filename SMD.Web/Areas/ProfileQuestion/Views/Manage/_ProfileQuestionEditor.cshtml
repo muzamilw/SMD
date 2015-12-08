@@ -21,7 +21,7 @@
             <div class="col-lg-12 col-md-8 col-sm-8" style="padding-bottom: 10px;">
                 <div class="clearfix ">
                     <div class="col-xs-12" style="text-align: right; padding-right:0;margin-bottom:10px;">
-                        <button class="btn  btn-info" id="saveBtn" data-bind="click:$root.onSaveProfileQuestion @*enable: $root.hasChangesOnStore, css: { 'btn-warning': $root.hasChangesOnStore }*@">Save</button>
+                        <button class="btn  btn-info" id="saveBtn" data-bind="click:$root.onSaveProfileQuestion, enable: $root.hasChangesOnQuestion, css: { 'btn-warning': $root.hasChangesOnQuestion }">Save</button>
                         <button class="btn btn-default" id="saveBtn" data-bind="click: $root.closeEditDialog">Close</button>
                     </div>
                 </div>
@@ -170,7 +170,7 @@
                                                 <label  class="control-label text-right tooltip-float">Creation Date</label>
                                             </div>
                                             <div class="col-lg-6">
-                                                <input type="text" class="form-control" data-bind="value: creationDate">
+                                                <label disabled="" data-bind="dateString:creationDate,datePattern: 'DD/MM/YYYY'"></label>
                                             </div>
                                         </div>
                                     </div>
@@ -185,7 +185,7 @@
                                                 <label  class="control-label text-right tooltip-float">Modified Date</label>
                                             </div>
                                             <div class="col-lg-6">
-                                                <input type="text" class="form-control"  data-bind="value: modifiedDate">
+                                                <label disabled="" data-bind="dateString:modifiedDate,datePattern: 'DD/MM/YYYY'"></label>
                                             </div>
                                         </div>
                                     </div>
@@ -317,9 +317,13 @@
                                                                             </div>
                                                                             <div class="col-lg-9 marginBottom12" data-bind="visible:type()=='2'">
                                                                                 <div class="form-group">
-                                                                                    <div class="col-md-4">
-                                                                                        <input type="file" class="form-control" id="vehicleLandingLogo" name="file" onchange="readPhotoURL(this);" />
+                                                                                    <div class="col-md-4" style="text-align:right">
+                                                                                        <div class="fileUpload btn btn-primary">
+                                                                                            <span>Upload </span>
+                                                                                            <input type="file" class="upload" id="image_files" onchange="readPhotoURL(this);" />
+                                                                                        </div>
                                                                                     </div>
+                                                                                  
                                                                                     <div class="col-md-6">
                                                                                         <img id="vehicleImage" alt="" style="width: 120px;height:120px" data-bind="attr:{src:imagePath }" />
                                                                                         <h5>Answer Image<span></span></h5>

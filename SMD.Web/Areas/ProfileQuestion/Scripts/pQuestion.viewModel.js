@@ -113,9 +113,13 @@ define("pQuestion/pQuestion.viewModel",
                     },
                     // Close Editor 
                     closeEditDialog = function () {
-                        selectedQuestion().answers.removeAll();
-                        selectedQuestion(undefined);
-                        isEditorVisible(false);
+                        // Ask for confirmation
+                        confirmation.afterProceed(function () {
+                            selectedQuestion().answers.removeAll();
+                            selectedQuestion(undefined);
+                            isEditorVisible(false);
+                        });
+                        confirmation.show();
                     },
                     // On editing of existing PQ
                     onEditProfileQuestion = function (item) {
@@ -134,7 +138,7 @@ define("pQuestion/pQuestion.viewModel",
                                    _.each(answers, function (item) {
                                        selectedQuestion().answers.push(model.questionAnswerServertoClientMapper(item));
                                    });
-                                  
+                                   selectedQuestion().reset();
                                },
                                error: function () {
                                    toastr.error("Failed to load profile questions!");
@@ -263,6 +267,13 @@ define("pQuestion/pQuestion.viewModel",
                         selectedQuestion().answers.remove(newObjtodelete);
                         toastr.success("You are Good!");
                     },
+                    // Has Changes
+                    hasChangesOnQuestion = ko.computed(function () {
+                        if (selectedQuestion() == undefined) {
+                            return false;
+                        }
+                        return (selectedQuestion().hasChanges());
+                    }),
                     // Initialize the view model
                     initialize = function (specifiedView) {
                         view = specifiedView;
@@ -306,7 +317,8 @@ define("pQuestion/pQuestion.viewModel",
                     onEditQuestionAnswer: onEditQuestionAnswer,
                     onSaveNewAnswer: onSaveNewAnswer,
                     onSaveProfileQuestion: onSaveProfileQuestion,
-                    onDeleteQuestionAnswer: onDeleteQuestionAnswer
+                    onDeleteQuestionAnswer: onDeleteQuestionAnswer,
+                    hasChangesOnQuestion: hasChangesOnQuestion
                 };
             })()
         };
