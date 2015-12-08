@@ -50,6 +50,10 @@
         <AssociationConnector Association="DomainModels.FK_SurveyQuestionTargetCriteria_SurveyQuestion" />
         <AssociationConnector Association="DomainModels.FK_SurveyQuestionTargetCriteria_SurveyQuestion1" />
         <AssociationConnector Association="DomainModels.FK_SurveyQuestionTargetLocation_SurveyQuestion" />
+        <EntityTypeShape EntityType="DomainModels.AuditLog" Width="1.5" PointX="0.75" PointY="13.75" />
+        <EntityTypeShape EntityType="DomainModels.SurveyQuestionResponse" Width="1.5" PointX="15.25" PointY="8.5" />
+        <AssociationConnector Association="DomainModels.FK_SurveyQuestionResponse_AspNetUsers" />
+        <AssociationConnector Association="DomainModels.FK_SurveyQuestionResponse_SurveyQuestion" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

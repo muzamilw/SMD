@@ -83,7 +83,7 @@ namespace SMD.Implementation.Services
                 throw new SMDException(LanguageResources.WebApiUserService_LoginInfoNotFound);
             }
 
-            user.ChargeBeeCustomerId = customerId;
+            user.StripeCustomerId = customerId;
             await UserManager.UpdateAsync(user);
         }
 
@@ -98,7 +98,7 @@ namespace SMD.Implementation.Services
                 throw new SMDException(LanguageResources.WebApiUserService_LoginInfoNotFound);
             }
 
-            return user.ChargeBeeCustomerId;
+            return user.StripeCustomerId;
         }
 
         #endregion

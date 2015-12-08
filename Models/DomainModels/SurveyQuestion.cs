@@ -51,5 +51,6 @@ namespace SMD.Models.DomainModels
         public virtual ICollection<SurveyQuestionTargetCriteria> SurveyQuestionTargetCriterias { get; set; }
         public virtual ICollection<SurveyQuestionTargetCriteria> LinkedSurveyQuestionTargetCriterias { get; set; }
         public virtual ICollection<SurveyQuestionTargetLocation> SurveyQuestionTargetLocations { get; set; }
+        public virtual ICollection<SurveyQuestionResponse> SurveyQuestionResponses { get; set; }
     }
 }
