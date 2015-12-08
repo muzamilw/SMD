@@ -21,7 +21,7 @@
                 modifiedDate = ko.observable(spcModDate),
                 
                 penalityForNotAnswering = ko.observable(penality),
-                status = ko.observable(spcStatus),
+                status = ko.observable(spcStatus || 1),
                 answers = ko.observableArray([]),
 
                 errors = ko.validation.group({                    

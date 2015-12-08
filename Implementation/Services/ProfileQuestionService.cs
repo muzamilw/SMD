@@ -103,6 +103,7 @@ namespace SMD.Implementation.Services
                 serverObj.ModifiedDate = source.ModifiedDate;
                 serverObj.PenalityForNotAnswering = source.PenalityForNotAnswering;
                 serverObj.Status = source.Status;
+                serverObj.ModifiedDate = DateTime.Now;
                 if (source.ProfileQuestionAnswers != null)
                 {
                     #region Answer Add/Edit
@@ -150,10 +151,13 @@ namespace SMD.Implementation.Services
 
                     #endregion
                 }
-                else
-                {
+              
                     #region Answer Deletion
+
+                if (source.ProfileQuestionAnswers == null)
+                {
                     source.ProfileQuestionAnswers= new Collection<ProfileQuestionAnswer>();
+                }
                     var serverListOfAns = _profileQuestionAnswerRepository.GetProfileQuestionAnswerByQuestionId(source.PqId);
                     if (serverListOfAns != null)
                     {
@@ -166,7 +170,6 @@ namespace SMD.Implementation.Services
                         }
                     }
                     #endregion
-                }
             }
             #endregion
             #region Add Question

@@ -107,11 +107,14 @@ define("pQuestion/pQuestion.viewModel",
                         getQuestions();
                     },
                     // Add new Profile Question
-                    addNewProfileQuestion = function() {
-                       isEditorVisible(true);
+                    addNewProfileQuestion = function () {
+                        selectedQuestion(new model.question());
+                        isEditorVisible(true);
                     },
                     // Close Editor 
-                    closeEditDialog= function() {
+                    closeEditDialog = function () {
+                        selectedQuestion().answers.removeAll();
+                        selectedQuestion(undefined);
                         isEditorVisible(false);
                     },
                     // On editing of existing PQ
@@ -172,7 +175,7 @@ define("pQuestion/pQuestion.viewModel",
                     },
                     // Add new Answer
                     addNewAnswer = function () {
-                        var obj = new model.questionAnswer;
+                        var obj = new model.questionAnswer();
                         obj.type("1");
                         obj.pqAnswerId(randomIdForNewObjects);
                         randomIdForNewObjects--;
@@ -187,28 +190,33 @@ define("pQuestion/pQuestion.viewModel",
                     },
                     //
                     onSaveNewAnswer = function () {
-                        var objId = selectedAnswer().pqAnswerId();
+                        var newOnj = selectedAnswer();
+                        var objId = newOnj.pqAnswerId();
                         if (objId < 0) {
-                            selectedQuestion().answers.push(selectedAnswer);
+                            var newlyAddedobj = selectedQuestion().answers.find(function (ans) {
+                                return ans.pqAnswerId() == objId;
+                            });
+                            selectedQuestion().answers.remove(newlyAddedobj);
+                            selectedQuestion().answers.push(newOnj);
                         } else {
                             var existingAns = selectedQuestion().answers.find(function (ans) {
                                 return ans.pqAnswerId() == objId;
                             });
-                            existingAns.answerString(selectedAnswer().answerString());
-                            existingAns.imagePath(selectedAnswer().imagePath());
-                            existingAns.linkedQuestion1Id(selectedAnswer().linkedQuestion1Id());
+                            existingAns.answerString(newOnj.answerString());
+                            existingAns.imagePath(newOnj.imagePath());
+                            existingAns.linkedQuestion1Id(newOnj.linkedQuestion1Id());
                             existingAns.question1String(model.setAnswerString(existingAns.linkedQuestion1Id(), existingAns));
-                            existingAns.linkedQuestion2Id(selectedAnswer().linkedQuestion2Id());
+                            existingAns.linkedQuestion2Id(newOnj.linkedQuestion2Id());
                             existingAns.question2String(model.setAnswerString(existingAns.linkedQuestion2Id(), existingAns));
-                            existingAns.linkedQuestion3Id(selectedAnswer().linkedQuestion3Id());
+                            existingAns.linkedQuestion3Id(newOnj.linkedQuestion3Id());
                             existingAns.question3String(model.setAnswerString(existingAns.linkedQuestion3Id(), existingAns));
-                            existingAns.linkedQuestion4Id(selectedAnswer().linkedQuestion4Id());
+                            existingAns.linkedQuestion4Id(newOnj.linkedQuestion4Id());
                             existingAns.question4String(model.setAnswerString(existingAns.linkedQuestion4Id(), existingAns));
-                            existingAns.linkedQuestion5Id(selectedAnswer().linkedQuestion5Id());
+                            existingAns.linkedQuestion5Id(newOnj.linkedQuestion5Id());
                             existingAns.question5String(model.setAnswerString(existingAns.linkedQuestion5Id(), existingAns));
-                            existingAns.linkedQuestion6Id(selectedAnswer().linkedQuestion6Id());
+                            existingAns.linkedQuestion6Id(newOnj.linkedQuestion6Id());
                             existingAns.question6String(model.setAnswerString(existingAns.linkedQuestion6Id(), existingAns));
-                            existingAns.type(selectedAnswer().type());
+                            existingAns.type(newOnj.type());
                             
                         }
                     },
@@ -216,17 +224,23 @@ define("pQuestion/pQuestion.viewModel",
                     onSaveProfileQuestion= function() {
                         var serverAnswers=[];
                         _.each(selectedQuestion().answers(), function (item) {
-                            serverAnswers.push(item.convertToServerData());
+                            if (item !== null && typeof item === 'object') {
+                                serverAnswers.push(item.convertToServerData());
+                            } else {
+                                serverAnswers.push(item().convertToServerData());
+                            }
                         });
                         var serverQuestion = selectedQuestion().convertToServerData();
                         serverQuestion.ProfileQuestionAnswers = serverAnswers;
                         
                         dataservice.saveProfileQuestion(serverQuestion, {
                             success: function (obj) {
-                                //var newObjtodelete = questions.find(function (temp) {
-                                //    return temp.qId() == temp.qId();
-                                //});
-                                //questions.remove(newObjtodelete);
+                                var newObjtodelete = questions.find(function (temp) {
+                                    return serverQuestion.PqId == temp.qId();
+                                });
+                                questions.remove(newObjtodelete);
+                                questions.push(model.questionServertoClientMapper(obj));
+                                isEditorVisible(false);
                                 toastr.success("You are Good!");
                             },
                             error: function () {
@@ -235,6 +249,14 @@ define("pQuestion/pQuestion.viewModel",
                         });
                     },
                     onDeleteQuestionAnswer= function(itemTobeDeleted) {
+                        // Ask for confirmation
+                        confirmation.afterProceed(function () {
+                            deleteAnswer(itemTobeDeleted);
+                        });
+                        confirmation.show();
+                    },
+                    // Delete answer 
+                    deleteAnswer = function (itemTobeDeleted) {
                         var newObjtodelete = selectedQuestion().answers.find(function (temp) {
                             return itemTobeDeleted.pqAnswerId() == temp.pqAnswerId();
                         });
