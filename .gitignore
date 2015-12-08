@@ -108,3 +108,7 @@ UpgradeLog.htm
 *.csproj.user
 
 SMD.Web/config/Web.connectionstrings.config
+
+SMD.Web/SMD_Content
+
+SMD.MIS/SMD_Content
