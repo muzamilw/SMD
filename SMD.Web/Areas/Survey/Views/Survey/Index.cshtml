@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Manage Surveys";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -63,15 +62,15 @@
 
     <script id="SurveyQuestionTemplate" type="text/html">
         <tr style="cursor: pointer">
-        @*     <td>
+            <td>
                 <p data-bind="text:Question"></p>
             </td>
-         <td>
-        <p data-bind="text:Language"></p>
-    </td>
-    <td>
-        <p data-bind="text:Country"></p>
-    </td>*@
+            <td>
+                <p data-bind="text:Language"></p>
+            </td>
+            <td>
+                <p data-bind="text:Country"></p>
+            </td>
             <td>
                 @*<p id="IsLInkedQuestionParah" data-bind="text:Status()==1 ? 'YES' : 'NO',css: { 'label-success': hasLinkedQuestions(), 'label-danger': !hasLinkedQuestions() }"></p>*@
             </td>
@@ -95,11 +94,11 @@
                             <i data-bind="click:$root.filterSurveyQuestion" class="fa fa-search search-icon" style=" margin-right: 8px;"></i>
                         </div>
                         @*<div class="col-xs-2">
-                            <select class="form-control" data-bind="options: $root.qStatuses, optionsText: 'StatusName', optionsValue: 'StatusID', optionsCaption: '&lt;' + 'Select Status'+ '&gt;' , value:$root.statusFilterValue"></select>
-                        </div>
-                        <div class="col-xs-2">
-                            <select class="form-control" data-bind="options: $root.qGender, optionsText: 'GenderName', optionsValue: 'GenderId', optionsCaption: '&lt;' + 'Select Gender'+ '&gt;' , value:$root.genderFilterValue"></select>
-                        </div>*@
+                                <select class="form-control" data-bind="options: $root.qStatuses, optionsText: 'StatusName', optionsValue: 'StatusID', optionsCaption: '&lt;' + 'Select Status'+ '&gt;' , value:$root.statusFilterValue"></select>
+                            </div>
+                            <div class="col-xs-2">
+                                <select class="form-control" data-bind="options: $root.qGender, optionsText: 'GenderName', optionsValue: 'GenderId', optionsCaption: '&lt;' + 'Select Gender'+ '&gt;' , value:$root.genderFilterValue"></select>
+                            </div>*@
                         <div class="col-xs-3">
                             <select class="form-control" data-bind="options: $root.countries, optionsText: 'CountryName', optionsValue: 'CountryId', optionsCaption: '&lt;' + 'Select Country'+ '&gt;' , value:$root.countryfilterValue"></select>
                         </div>
@@ -116,12 +115,11 @@
         </div>
     </script>
 
-    </div>
+</div>
 
 <!-- ko stopBinding: true -->
 @Html.Partial("~/Areas/Common/Views/Shared/_ConfirmationDialog.cshtml")
 <!-- /ko -->
-
 @section Scripts{
     <script type="text/javascript">
         require(["survey/survey.view", "common/confirmation.view"]);
