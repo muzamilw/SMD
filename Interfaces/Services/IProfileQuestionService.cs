@@ -24,5 +24,10 @@ namespace SMD.Interfaces.Services
         /// Get Base Data for PQ
         /// </summary>
         ProfileQuestionBaseResponse GetProfileQuestionBaseData();
+
+        /// <summary>
+        /// Save Profile Question
+        /// </summary>
+        ProfileQuestion SaveProfileQuestion(ProfileQuestion source);
     }
 }

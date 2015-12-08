@@ -46,6 +46,8 @@ define("pQuestion/pQuestion.viewModel",
                     selectedQuestion = editorViewModel.itemForEditing,
                      //selected Answer
                     selectedAnswer = ko.observable(),
+                    // Random number
+                    randomIdForNewObjects= -1,
                     //Get Questions
                     getQuestions = function () {
                         dataservice.searchProfileQuestions(
@@ -129,14 +131,14 @@ define("pQuestion/pQuestion.viewModel",
                                    _.each(answers, function (item) {
                                        selectedQuestion().answers.push(model.questionAnswerServertoClientMapper(item));
                                    });
-                                   toastr.success("yahoo!");
-                                   //
+                                  
                                },
                                error: function () {
                                    toastr.error("Failed to load profile questions!");
                                }
                            });
                     },
+                   
                     // Delete Handler PQ
                     onDeleteProfileQuestion = function(item) {
                         // Ask for confirmation
@@ -169,12 +171,55 @@ define("pQuestion/pQuestion.viewModel",
                         getQuestions();
                     },
                     // Add new Answer
-                    addNewAnswer= function() {
-                        selectedAnswer(new model.questionAnswer);
+                    addNewAnswer = function () {
+                        var obj = new model.questionAnswer;
+                        obj.type("1");
+                        obj.pqAnswerId(randomIdForNewObjects);
+                        randomIdForNewObjects--;
+                        selectedAnswer(obj);
                     },
                     answerTypeChangeHandler= function(item) {
-                        var tfff = this;
-                        return true;
+                        //var tfff = this;
+                        //return true;
+                    },
+                    onEditQuestionAnswer= function(item) {
+                        selectedAnswer(item);
+                    },
+                    //
+                    onSaveNewAnswer = function () {
+                        var objId = selectedAnswer().pqAnswerId();
+                        if (objId < 0) {
+                            selectedQuestion().answers.push(selectedAnswer);
+                        } else {
+                            var existingAns = selectedQuestion().answers.find(function (ans) {
+                                return ans.pqAnswerId() == objId;
+                            });
+                            existingAns.answerString(selectedAnswer().answerString());
+                            existingAns.imagePath(selectedAnswer().imagePath());
+                            existingAns.linkedQuestion1Id(selectedAnswer().linkedQuestion1Id());
+                            existingAns.question1String(model.setAnswerString(existingAns.linkedQuestion1Id(), existingAns));
+                            existingAns.linkedQuestion2Id(selectedAnswer().linkedQuestion2Id());
+                            existingAns.question2String(model.setAnswerString(existingAns.linkedQuestion2Id(), existingAns));
+                            existingAns.linkedQuestion3Id(selectedAnswer().linkedQuestion3Id());
+                            existingAns.question3String(model.setAnswerString(existingAns.linkedQuestion3Id(), existingAns));
+                            existingAns.linkedQuestion4Id(selectedAnswer().linkedQuestion4Id());
+                            existingAns.question4String(model.setAnswerString(existingAns.linkedQuestion4Id(), existingAns));
+                            existingAns.linkedQuestion5Id(selectedAnswer().linkedQuestion5Id());
+                            existingAns.question5String(model.setAnswerString(existingAns.linkedQuestion5Id(), existingAns));
+                            existingAns.linkedQuestion6Id(selectedAnswer().linkedQuestion6Id());
+                            existingAns.question6String(model.setAnswerString(existingAns.linkedQuestion6Id(), existingAns));
+                            existingAns.type(selectedAnswer().type());
+                            
+                        }
+                    },
+                    onSaveProfileQuestion= function() {
+                        var serverAnswers=[];
+                        _.each(selectedQuestion().answers, function (item) {
+                            serverAnswers.push(item.convertToServerData());
+                        });
+                        var serverQuestion = selectedQuestion.convertToServerData();
+                        serverQuestion.ProfileQuestionAnswers = serverAnswers;
+                        
                     },
                     // Initialize the view model
                     initialize = function (specifiedView) {
@@ -215,7 +260,10 @@ define("pQuestion/pQuestion.viewModel",
                     addNewAnswer: addNewAnswer,
                     answerTypeChangeHandler: answerTypeChangeHandler,
                     selectedAnswer: selectedAnswer,
-                    linkedQuestions: linkedQuestions
+                    linkedQuestions: linkedQuestions,
+                    onEditQuestionAnswer: onEditQuestionAnswer,
+                    onSaveNewAnswer: onSaveNewAnswer,
+                    onSaveProfileQuestion: onSaveProfileQuestion
                 };
             })()
         };
