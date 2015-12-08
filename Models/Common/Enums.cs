@@ -1,6 +1,5 @@
 ﻿namespace SMD.Models.Common
 {
-
     public enum HashAlgos
     {
         MD5,
@@ -65,5 +64,31 @@
     {
         Archived=0,
         Acitve =1
+    }
+
+    /// <summary>
+    /// Audit Log Keys
+    /// </summary>
+    public enum AuditLogEntityType
+    {
+        /// <summary>
+        /// All Entities with No Filter
+        /// </summary>
+        All = 0,
+
+        /// <summary>
+        /// Profile Question
+        /// </summary>
+        ProfileQuestion = 1,
+
+        /// <summary>
+        /// Survry Question
+        /// </summary>
+        SurvryQuestion = 2,
+
+        /// <summary>
+        /// Ad Campaign
+        /// </summary>
+        AdCampaign = 3
     }
 }

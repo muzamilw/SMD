@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="SMDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SMDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AdCampaign">
           <Key>
             <PropertyRef Name="CampaignID" />
@@ -156,12 +156,24 @@
           <Property Name="UserTimeZone" Type="nvarchar" MaxLength="50" />
           <Property Name="ReferralCode" Type="nvarchar" MaxLength="100" />
           <Property Name="AfilliatianStatus" Type="bit" />
-          <Property Name="ChargeBeeCustomerID" Type="nvarchar" MaxLength="50" />
+          <Property Name="StripeCustomerId" Type="nvarchar" MaxLength="50" />
           <Property Name="ChargeBeesubscriptionID" Type="nvarchar" MaxLength="50" />
           <Property Name="RegisteredViaReferral" Type="bit" />
           <Property Name="ReferringUserID" Type="nvarchar" MaxLength="128" />
           <Property Name="Age" Type="int" />
           <Property Name="Gender" Type="int" />
+        </EntityType>
+        <EntityType Name="AuditLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" Nullable="false" />
+          <Property Name="AuditType" Type="int" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="AuditDateTime" Type="datetime" />
+          <Property Name="AuditEntity" Type="bigint" />
+          <Property Name="AuditEntityDescription" Type="nvarchar" MaxLength="500" />
+          <Property Name="TableName" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="Country">
           <Key>
@@ -272,6 +284,16 @@
           <Property Name="AgeRangeStart" Type="int" />
           <Property Name="AgeRangeEnd" Type="int" />
           <Property Name="Gender" Type="int" />
+        </EntityType>
+        <EntityType Name="SurveyQuestionResponse">
+          <Key>
+            <PropertyRef Name="SQResponseID" />
+          </Key>
+          <Property Name="SQResponseID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SQID" Type="bigint" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="ResoponseDateTime" Type="datetime" />
+          <Property Name="UserSelection" Type="int" />
         </EntityType>
         <EntityType Name="SurveyQuestionTargetCriteria">
           <Key>
@@ -581,6 +603,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_SurveyQuestionResponse_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="SurveyQuestionResponse" Type="Self.SurveyQuestionResponse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SurveyQuestionResponse">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SurveyQuestionResponse_SurveyQuestion">
+          <End Role="SurveyQuestion" Type="Self.SurveyQuestion" Multiplicity="0..1" />
+          <End Role="SurveyQuestionResponse" Type="Self.SurveyQuestionResponse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SurveyQuestion">
+              <PropertyRef Name="SQID" />
+            </Principal>
+            <Dependent Role="SurveyQuestionResponse">
+              <PropertyRef Name="SQID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_SurveyQuestionTargetCriteria_ProfileQuestion">
           <End Role="ProfileQuestion" Type="Self.ProfileQuestion" Multiplicity="0..1" />
           <End Role="SurveyQuestionTargetCriteria" Type="Self.SurveyQuestionTargetCriteria" Multiplicity="*" />
@@ -663,6 +709,7 @@
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AuditLog" EntityType="Self.AuditLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Language" EntityType="Self.Language" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProfileQuestion" EntityType="Self.ProfileQuestion" Schema="dbo" store:Type="Tables" />
@@ -670,6 +717,7 @@
           <EntitySet Name="ProfileQuestionGroup" EntityType="Self.ProfileQuestionGroup" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProfileQuestionUserAnswer" EntityType="Self.ProfileQuestionUserAnswer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SurveyQuestion" EntityType="Self.SurveyQuestion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SurveyQuestionResponse" EntityType="Self.SurveyQuestionResponse" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SurveyQuestionTargetCriteria" EntityType="Self.SurveyQuestionTargetCriteria" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SurveyQuestionTargetLocation" EntityType="Self.SurveyQuestionTargetLocation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SystemMails" EntityType="Self.SystemMails" Schema="dbo" store:Type="Tables" />
@@ -761,6 +809,14 @@
             <End Role="Language" EntitySet="Language" />
             <End Role="SurveyQuestion" EntitySet="SurveyQuestion" />
           </AssociationSet>
+          <AssociationSet Name="FK_SurveyQuestionResponse_AspNetUsers" Association="Self.FK_SurveyQuestionResponse_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="SurveyQuestionResponse" EntitySet="SurveyQuestionResponse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurveyQuestionResponse_SurveyQuestion" Association="Self.FK_SurveyQuestionResponse_SurveyQuestion">
+            <End Role="SurveyQuestion" EntitySet="SurveyQuestion" />
+            <End Role="SurveyQuestionResponse" EntitySet="SurveyQuestionResponse" />
+          </AssociationSet>
           <AssociationSet Name="FK_SurveyQuestionTargetCriteria_ProfileQuestion" Association="Self.FK_SurveyQuestionTargetCriteria_ProfileQuestion">
             <End Role="ProfileQuestion" EntitySet="ProfileQuestion" />
             <End Role="SurveyQuestionTargetCriteria" EntitySet="SurveyQuestionTargetCriteria" />
@@ -850,7 +906,6 @@
           <Property Name="UserTimeZone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ReferralCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="AfilliatianStatus" Type="Boolean" />
-          <Property Name="ChargeBeeCustomerId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ChargeBeesubscriptionId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="RegisteredViaReferral" Type="Boolean" />
           <Property Name="ReferringUserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
@@ -862,6 +917,8 @@
           <NavigationProperty Name="SurveyQuestions" Relationship="DomainModels.FK_SurveyQuestion_AspNetUsers" FromRole="User" ToRole="SurveyQuestion" />
           <Property Name="Age" Type="Int32" />
           <Property Name="Gender" Type="Int32" />
+          <Property Name="StripeCustomerId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SurveyQuestionResponses" Relationship="DomainModels.FK_SurveyQuestionResponse_AspNetUsers" FromRole="User" ToRole="SurveyQuestionResponse" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="DomainModels.User" Multiplicity="1">
@@ -1007,6 +1064,16 @@
           <AssociationSet Name="FK_SurveyQuestionTargetLocation_SurveyQuestion" Association="DomainModels.FK_SurveyQuestionTargetLocation_SurveyQuestion">
             <End Role="SurveyQuestion" EntitySet="SurveyQuestions" />
             <End Role="SurveyQuestionTargetLocation" EntitySet="SurveyQuestionTargetLocations" />
+          </AssociationSet>
+          <EntitySet Name="AuditLogs" EntityType="DomainModels.AuditLog" />
+          <EntitySet Name="SurveyQuestionResponses" EntityType="DomainModels.SurveyQuestionResponse" />
+          <AssociationSet Name="FK_SurveyQuestionResponse_AspNetUsers" Association="DomainModels.FK_SurveyQuestionResponse_AspNetUsers">
+            <End Role="User" EntitySet="Users" />
+            <End Role="SurveyQuestionResponse" EntitySet="SurveyQuestionResponses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurveyQuestionResponse_SurveyQuestion" Association="DomainModels.FK_SurveyQuestionResponse_SurveyQuestion">
+            <End Role="SurveyQuestion" EntitySet="SurveyQuestions" />
+            <End Role="SurveyQuestionResponse" EntitySet="SurveyQuestionResponses" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="ProfileQuestion">
@@ -1341,6 +1408,7 @@
           <Property Name="AgeRangeStart" Type="Int32" />
           <Property Name="AgeRangeEnd" Type="Int32" />
           <Property Name="Gender" Type="Int32" />
+          <NavigationProperty Name="SurveyQuestionResponses" Relationship="DomainModels.FK_SurveyQuestionResponse_SurveyQuestion" FromRole="SurveyQuestion" ToRole="SurveyQuestionResponse" />
         </EntityType>
         <EntityType Name="SurveyQuestionTargetCriteria">
           <Key>
@@ -1588,6 +1656,54 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="AuditLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="AuditType" Type="Int32" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="AuditDateTime" Type="DateTime" Precision="3" />
+          <Property Name="AuditEntity" Type="Int64" />
+          <Property Name="AuditEntityDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="TableName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SurveyQuestionResponse">
+          <Key>
+            <PropertyRef Name="SqResponseId" />
+          </Key>
+          <Property Name="SqResponseId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SqId" Type="Int64" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ResoponseDateTime" Type="DateTime" Precision="3" />
+          <Property Name="UserSelection" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="DomainModels.FK_SurveyQuestionResponse_AspNetUsers" FromRole="SurveyQuestionResponse" ToRole="User" />
+          <NavigationProperty Name="SurveyQuestion" Relationship="DomainModels.FK_SurveyQuestionResponse_SurveyQuestion" FromRole="SurveyQuestionResponse" ToRole="SurveyQuestion" />
+        </EntityType>
+        <Association Name="FK_SurveyQuestionResponse_AspNetUsers">
+          <End Type="DomainModels.User" Role="User" Multiplicity="0..1" />
+          <End Type="DomainModels.SurveyQuestionResponse" Role="SurveyQuestionResponse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SurveyQuestionResponse">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SurveyQuestionResponse_SurveyQuestion">
+          <End Type="DomainModels.SurveyQuestion" Role="SurveyQuestion" Multiplicity="0..1" />
+          <End Type="DomainModels.SurveyQuestionResponse" Role="SurveyQuestionResponse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SurveyQuestion">
+              <PropertyRef Name="SqId" />
+            </Principal>
+            <Dependent Role="SurveyQuestionResponse">
+              <PropertyRef Name="SqId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1614,6 +1730,7 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="DomainModels.User">
               <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="StripeCustomerId" ColumnName="StripeCustomerId" />
                 <ScalarProperty Name="Gender" ColumnName="Gender" />
                 <ScalarProperty Name="Age" ColumnName="Age" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -1653,7 +1770,6 @@
                 <ScalarProperty Name="UserTimeZone" ColumnName="UserTimeZone" />
                 <ScalarProperty Name="ReferralCode" ColumnName="ReferralCode" />
                 <ScalarProperty Name="AfilliatianStatus" ColumnName="AfilliatianStatus" />
-                <ScalarProperty Name="ChargeBeeCustomerId" ColumnName="ChargeBeeCustomerID" />
                 <ScalarProperty Name="ChargeBeesubscriptionId" ColumnName="ChargeBeesubscriptionID" />
                 <ScalarProperty Name="RegisteredViaReferral" ColumnName="RegisteredViaReferral" />
                 <ScalarProperty Name="ReferringUserId" ColumnName="ReferringUserID" />
@@ -1911,6 +2027,30 @@
                 <ScalarProperty Name="CountryId" ColumnName="CountryID" />
                 <ScalarProperty Name="SqId" ColumnName="SQID" />
                 <ScalarProperty Name="Id" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AuditLogs">
+            <EntityTypeMapping TypeName="DomainModels.AuditLog">
+              <MappingFragment StoreEntitySet="AuditLog">
+                <ScalarProperty Name="TableName" ColumnName="TableName" />
+                <ScalarProperty Name="AuditEntityDescription" ColumnName="AuditEntityDescription" />
+                <ScalarProperty Name="AuditEntity" ColumnName="AuditEntity" />
+                <ScalarProperty Name="AuditDateTime" ColumnName="AuditDateTime" />
+                <ScalarProperty Name="UserId" ColumnName="UserID" />
+                <ScalarProperty Name="AuditType" ColumnName="AuditType" />
+                <ScalarProperty Name="Id" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SurveyQuestionResponses">
+            <EntityTypeMapping TypeName="DomainModels.SurveyQuestionResponse">
+              <MappingFragment StoreEntitySet="SurveyQuestionResponse">
+                <ScalarProperty Name="UserSelection" ColumnName="UserSelection" />
+                <ScalarProperty Name="ResoponseDateTime" ColumnName="ResoponseDateTime" />
+                <ScalarProperty Name="UserId" ColumnName="UserID" />
+                <ScalarProperty Name="SqId" ColumnName="SQID" />
+                <ScalarProperty Name="SqResponseId" ColumnName="SQResponseID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

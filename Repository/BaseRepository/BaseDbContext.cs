@@ -146,6 +146,16 @@ namespace SMD.Repository.BaseRepository
         /// </summary>
         public DbSet<ProfileQuestionAnswer> ProfileQuestionAnswers { get; set; }
 
+        /// <summary>
+        /// Suvery Question Responses
+        /// </summary>
+        public DbSet<SurveyQuestionResponse> SurveyQuestionResponses { get; set; }
+
+        /// <summary>
+        /// Audit Logs
+        /// </summary>
+        public DbSet<AuditLog> AuditLogs { get; set; }
+
         #endregion
     }
 }

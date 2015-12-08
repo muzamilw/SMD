@@ -48,7 +48,7 @@ namespace SMD.Models.IdentityModels
         public string UserTimeZone { get; set; }
         public string ReferralCode { get; set; }
         public bool? AfilliatianStatus { get; set; }
-        public string ChargeBeeCustomerId { get; set; }
+        public string StripeCustomerId { get; set; }
         public string ChargeBeesubscriptionId { get; set; }
         public bool? RegisteredViaReferral { get; set; }
         public string ReferringUserId { get; set; }
@@ -62,6 +62,7 @@ namespace SMD.Models.IdentityModels
         public virtual ICollection<AdCampaignResponse> AdCampaignResponses { get; set; }
         public virtual ICollection<ProfileQuestion> ProfileQuestions { get; set; }
         public virtual ICollection<SurveyQuestion> SurveyQuestions { get; set; }
+        public virtual ICollection<SurveyQuestionResponse> SurveyQuestionResponses { get; set; }
 
         #endregion
     }

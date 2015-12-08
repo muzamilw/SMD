@@ -29,6 +29,7 @@ namespace SMD.Implementation
             unityContainer.RegisterType<ISurveyQuestionService, SurveyQuestionService>();
             unityContainer.RegisterType<IProfileQuestionAnswerService, ProfileQuestionAnswerService>();
             unityContainer.RegisterType<IWebApiUserService, WebApiUserService>();
+            unityContainer.RegisterType<IAuditLogService, AuditLogService>();
         }
     }
 }
