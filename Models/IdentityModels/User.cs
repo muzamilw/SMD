@@ -52,6 +52,8 @@ namespace SMD.Models.IdentityModels
         public string ChargeBeesubscriptionId { get; set; }
         public bool? RegisteredViaReferral { get; set; }
         public string ReferringUserId { get; set; }
+        public int? Age { get; set; }
+        public int? Gender { get; set; }
 
         public virtual ICollection<UserLogin> UserLogins { get; set; }
         public virtual ICollection<Role> Roles { get; set; }

@@ -37,6 +37,13 @@ namespace SMD.Models.DomainModels
         public long? DiscountVoucherId { get; set; }
         public string RejectionReason { get; set; }
 
+        public int? Status { get; set; }
+        public long? ProjectedReach { get; set; }
+        public long? ResultClicks { get; set; }
+        public int? AgeRangeStart { get; set; }
+        public int? AgeRangeEnd { get; set; }
+        public int? Gender { get; set; }
+
         public virtual ICollection<AdCampaignTargetCriteria> AdCampaignTargetCriterias { get; set; }
         public virtual User User { get; set; }
         public virtual Country Country { get; set; }

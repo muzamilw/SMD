@@ -20,6 +20,8 @@ namespace SMD.Models.DomainModels
         public int? LinkedQuestion5Id { get; set; }
         public int? LinkedQuestion6Id { get; set; }
 
+        public int? Status { get; set; }
+
         public virtual ProfileQuestion ProfileQuestion { get; set; }
         public virtual ICollection<ProfileQuestionUserAnswer> ProfileQuestionUserAnswers { get; set; }
         public virtual ICollection<AdCampaignTargetCriteria> AdCampaignTargetCriterias { get; set; }

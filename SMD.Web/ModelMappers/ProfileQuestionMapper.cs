@@ -71,7 +71,8 @@ namespace SMD.MIS.ModelMappers
                 CreationDate = source.CreationDate,
                 ModifiedDate = source.ModifiedDate,
                 PenalityForNotAnswering = source.PenalityForNotAnswering,
-                Status = source.Status
+                Status = source.Status,
+                ProfileQuestionAnswers = source.ProfileQuestionAnswers.Select(ans => ans.CreateFrom()).ToList()
             };
         }
         /// <summary>

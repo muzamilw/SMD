@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="SMDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SMDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AdCampaign">
           <Key>
             <PropertyRef Name="CampaignID" />
@@ -160,6 +160,8 @@
           <Property Name="ChargeBeesubscriptionID" Type="nvarchar" MaxLength="50" />
           <Property Name="RegisteredViaReferral" Type="bit" />
           <Property Name="ReferringUserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="Age" Type="int" />
+          <Property Name="Gender" Type="int" />
         </EntityType>
         <EntityType Name="Country">
           <Key>
@@ -214,6 +216,7 @@
           <Property Name="LinkedQuestion4ID" Type="int" />
           <Property Name="LinkedQuestion5ID" Type="int" />
           <Property Name="LinkedQuestion6ID" Type="int" />
+          <Property Name="Status" Type="int" />
         </EntityType>
         <EntityType Name="ProfileQuestionGroup">
           <Key>
@@ -244,6 +247,7 @@
           <Property Name="CountryID" Type="int" />
           <Property Name="Type" Type="int" />
           <Property Name="UserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="Status" Type="int" />
           <Property Name="Question" Type="nvarchar" MaxLength="500" />
           <Property Name="Description" Type="nvarchar" MaxLength="1000" />
           <Property Name="RepeatPeriod" Type="int" />
@@ -263,6 +267,11 @@
           <Property Name="VoucherCode" Type="nvarchar" MaxLength="50" />
           <Property Name="DiscountVoucherID" Type="bigint" />
           <Property Name="RejectionReason" Type="nvarchar" MaxLength="1000" />
+          <Property Name="ProjectedReach" Type="bigint" />
+          <Property Name="ResultClicks" Type="bigint" />
+          <Property Name="AgeRangeStart" Type="int" />
+          <Property Name="AgeRangeEnd" Type="int" />
+          <Property Name="Gender" Type="int" />
         </EntityType>
         <EntityType Name="SurveyQuestionTargetCriteria">
           <Key>
@@ -276,6 +285,7 @@
           <Property Name="LinkedSQID" Type="bigint" />
           <Property Name="LinkedSQAnswer" Type="int" />
           <Property Name="IncludeorExclude" Type="bit" />
+          <Property Name="LanguageID" Type="int" />
         </EntityType>
         <EntityType Name="SurveyQuestionTargetLocation">
           <Key>
@@ -850,6 +860,8 @@
           <NavigationProperty Name="Claims" Relationship="DomainModels.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="User" ToRole="AspNetUserClaim" />
           <NavigationProperty Name="AdCampaignResponses" Relationship="DomainModels.FK_AdCampaignResponse_AspNetUsers" FromRole="User" ToRole="AdCampaignResponse" />
           <NavigationProperty Name="SurveyQuestions" Relationship="DomainModels.FK_SurveyQuestion_AspNetUsers" FromRole="User" ToRole="SurveyQuestion" />
+          <Property Name="Age" Type="Int32" />
+          <Property Name="Gender" Type="Int32" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="DomainModels.User" Multiplicity="1">
@@ -1043,6 +1055,7 @@
           <NavigationProperty Name="ProfileQuestionUserAnswers" Relationship="DomainModels.FK_ProfileQuestionUserAnswer_ProfileQuestionAnswer" FromRole="ProfileQuestionAnswer" ToRole="ProfileQuestionUserAnswer" />
           <NavigationProperty Name="AdCampaignTargetCriterias" Relationship="DomainModels.FK_AdCampaignTargetCriteria_ProfileQuestionAnswer" FromRole="ProfileQuestionAnswer" ToRole="AdCampaignTargetCriteria" />
           <NavigationProperty Name="SurveyQuestionTargetCriterias" Relationship="DomainModels.FK_SurveyQuestionTargetCriteria_ProfileQuestionAnswer" FromRole="ProfileQuestionAnswer" ToRole="SurveyQuestionTargetCriteria" />
+          <Property Name="Status" Type="Int32" />
         </EntityType>
         <EntityType Name="ProfileQuestionGroup">
           <Key>
@@ -1322,6 +1335,12 @@
           <NavigationProperty Name="SurveyQuestionTargetCriterias" Relationship="DomainModels.FK_SurveyQuestionTargetCriteria_SurveyQuestion" FromRole="SurveyQuestion" ToRole="SurveyQuestionTargetCriteria" />
           <NavigationProperty Name="LinkedSurveyQuestionTargetCriterias" Relationship="DomainModels.FK_SurveyQuestionTargetCriteria_SurveyQuestion1" FromRole="SurveyQuestion" ToRole="SurveyQuestionTargetCriteria" />
           <NavigationProperty Name="SurveyQuestionTargetLocations" Relationship="DomainModels.FK_SurveyQuestionTargetLocation_SurveyQuestion" FromRole="SurveyQuestion" ToRole="SurveyQuestionTargetLocation" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="ProjectedReach" Type="Int64" />
+          <Property Name="ResultClicks" Type="Int64" />
+          <Property Name="AgeRangeStart" Type="Int32" />
+          <Property Name="AgeRangeEnd" Type="Int32" />
+          <Property Name="Gender" Type="Int32" />
         </EntityType>
         <EntityType Name="SurveyQuestionTargetCriteria">
           <Key>
@@ -1339,6 +1358,7 @@
           <NavigationProperty Name="ProfileQuestionAnswer" Relationship="DomainModels.FK_SurveyQuestionTargetCriteria_ProfileQuestionAnswer" FromRole="SurveyQuestionTargetCriteria" ToRole="ProfileQuestionAnswer" />
           <NavigationProperty Name="SurveyQuestion" Relationship="DomainModels.FK_SurveyQuestionTargetCriteria_SurveyQuestion" FromRole="SurveyQuestionTargetCriteria" ToRole="SurveyQuestion" />
           <NavigationProperty Name="LinkedSurveyQuestion" Relationship="DomainModels.FK_SurveyQuestionTargetCriteria_SurveyQuestion1" FromRole="SurveyQuestionTargetCriteria" ToRole="SurveyQuestion" />
+          <Property Name="LanguageId" Type="Int32" />
         </EntityType>
         <EntityType Name="SurveyQuestionTargetLocation">
           <Key>
@@ -1594,6 +1614,8 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="DomainModels.User">
               <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
@@ -1671,6 +1693,7 @@
           <EntitySetMapping Name="ProfileQuestionAnswers">
             <EntityTypeMapping TypeName="DomainModels.ProfileQuestionAnswer">
               <MappingFragment StoreEntitySet="ProfileQuestionAnswer">
+                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="LinkedQuestion6Id" ColumnName="LinkedQuestion6ID" />
                 <ScalarProperty Name="LinkedQuestion5Id" ColumnName="LinkedQuestion5ID" />
                 <ScalarProperty Name="LinkedQuestion4Id" ColumnName="LinkedQuestion4ID" />
@@ -1832,6 +1855,12 @@
           <EntitySetMapping Name="SurveyQuestions">
             <EntityTypeMapping TypeName="DomainModels.SurveyQuestion">
               <MappingFragment StoreEntitySet="SurveyQuestion">
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="AgeRangeEnd" ColumnName="AgeRangeEnd" />
+                <ScalarProperty Name="AgeRangeStart" ColumnName="AgeRangeStart" />
+                <ScalarProperty Name="ResultClicks" ColumnName="ResultClicks" />
+                <ScalarProperty Name="ProjectedReach" ColumnName="ProjectedReach" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="RejectionReason" ColumnName="RejectionReason" />
                 <ScalarProperty Name="DiscountVoucherId" ColumnName="DiscountVoucherID" />
                 <ScalarProperty Name="VoucherCode" ColumnName="VoucherCode" />
@@ -1862,6 +1891,7 @@
           <EntitySetMapping Name="SurveyQuestionTargetCriterias">
             <EntityTypeMapping TypeName="DomainModels.SurveyQuestionTargetCriteria">
               <MappingFragment StoreEntitySet="SurveyQuestionTargetCriteria">
+                <ScalarProperty Name="LanguageId" ColumnName="LanguageID" />
                 <ScalarProperty Name="IncludeorExclude" ColumnName="IncludeorExclude" />
                 <ScalarProperty Name="LinkedSqAnswer" ColumnName="LinkedSQAnswer" />
                 <ScalarProperty Name="LinkedSqId" ColumnName="LinkedSQID" />

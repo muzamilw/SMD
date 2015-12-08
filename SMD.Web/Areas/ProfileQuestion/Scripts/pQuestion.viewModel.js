@@ -152,7 +152,7 @@ define("pQuestion/pQuestion.viewModel",
                         dataservice.deleteProfileQuestion(item.convertToServerData(), {
                             success: function () {
                                 var newObjtodelete = questions.find(function (temp) {
-                                    return temp.qId() == temp.qId();
+                                    return item.qId() == temp.qId();
                                 });
                                 questions.remove(newObjtodelete);
                                 toastr.success("You are Good!");
@@ -212,14 +212,34 @@ define("pQuestion/pQuestion.viewModel",
                             
                         }
                     },
+                    // Save Question / Add 
                     onSaveProfileQuestion= function() {
                         var serverAnswers=[];
-                        _.each(selectedQuestion().answers, function (item) {
+                        _.each(selectedQuestion().answers(), function (item) {
                             serverAnswers.push(item.convertToServerData());
                         });
-                        var serverQuestion = selectedQuestion.convertToServerData();
+                        var serverQuestion = selectedQuestion().convertToServerData();
                         serverQuestion.ProfileQuestionAnswers = serverAnswers;
                         
+                        dataservice.saveProfileQuestion(serverQuestion, {
+                            success: function (obj) {
+                                //var newObjtodelete = questions.find(function (temp) {
+                                //    return temp.qId() == temp.qId();
+                                //});
+                                //questions.remove(newObjtodelete);
+                                toastr.success("You are Good!");
+                            },
+                            error: function () {
+                                toastr.error("Failed to delete!");
+                            }
+                        });
+                    },
+                    onDeleteQuestionAnswer= function(itemTobeDeleted) {
+                        var newObjtodelete = selectedQuestion().answers.find(function (temp) {
+                            return itemTobeDeleted.pqAnswerId() == temp.pqAnswerId();
+                        });
+                        selectedQuestion().answers.remove(newObjtodelete);
+                        toastr.success("You are Good!");
                     },
                     // Initialize the view model
                     initialize = function (specifiedView) {
@@ -263,7 +283,8 @@ define("pQuestion/pQuestion.viewModel",
                     linkedQuestions: linkedQuestions,
                     onEditQuestionAnswer: onEditQuestionAnswer,
                     onSaveNewAnswer: onSaveNewAnswer,
-                    onSaveProfileQuestion: onSaveProfileQuestion
+                    onSaveProfileQuestion: onSaveProfileQuestion,
+                    onDeleteQuestionAnswer: onDeleteQuestionAnswer
                 };
             })()
         };

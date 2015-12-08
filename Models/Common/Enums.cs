@@ -60,4 +60,10 @@
         Completed = 5,
         ApprovalRejected = 6
     }
+
+    public enum ObjectStatus
+    {
+        Archived=0,
+        Acitve =1
+    }
 }
