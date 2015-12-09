@@ -59,7 +59,7 @@ namespace SMD.Repository.Repositories
                 int fromRow = 0;
                 int toRow = 10;
                 rowCount = DbSet.Count();
-                return DbSet.OrderBy(g => g.SqId)
+                return DbSet.Where(g=>g.UserId == LoggedInUserIdentity).OrderBy(g => g.SqId)
                         .Skip(fromRow)
                         .Take(toRow)
                         .ToList();
@@ -70,10 +70,11 @@ namespace SMD.Repository.Repositories
                 int toRow = request.PageSize;
                 Expression<Func<SurveyQuestion, bool>> query =
                     question =>
-                        (string.IsNullOrEmpty(request.SearchString) ||
-                         (question.Question.Contains(request.SearchString)))
-                         && (question.CountryId == request.CountryFilter)
-                         && (question.LanguageId == request.LanguageFilter);
+                        (string.IsNullOrEmpty(request.SearchText) ||
+                         (question.Question.Contains(request.SearchText)))
+                         && (request.CountryFilter == 0 ||  question.CountryId == request.CountryFilter) 
+                         &&( question.UserId == LoggedInUserIdentity)
+                         && (request.LanguageFilter == 0 || question.LanguageId == request.LanguageFilter);
 
 
                 rowCount = DbSet.Count(query);

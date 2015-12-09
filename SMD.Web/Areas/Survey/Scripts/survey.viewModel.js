@@ -66,7 +66,7 @@ define("survey/survey.viewModel",
                                     countries.valueHasMutated();
                                     // populate survey questions 
                                     populateSurveyQuestions(data);
-                                    console.log(questions());
+                    
                                 },
                                 error: function () {
                                     toastr.error("Failed to load base data!");
@@ -77,14 +77,49 @@ define("survey/survey.viewModel",
                     // update survey questions 
                     populateSurveyQuestions = function (data) {
                         questions.removeAll();
-                        pager().totalCount(data.TotalCount);
+                       
                         _.each(data.SurveyQuestions, function (item) {
-                            questions.push(model.Survey.Create(item));
+                            questions.push(model.Survey.Create(updateSurveryItem(item)));
                         });
-
+                        pager().totalCount(data.TotalCount);
+                    }
+                    // populate country, language and status fields 
+                    updateSurveryItem = function (item) {
+                
+                        _.each(langs(), function (language) {
+                            if(language.LanguageId == item.LanguageId) {
+                                item.Language = language.LanguageName;
+                            }
+                        });
+                        _.each(countries(), function (country) {
+                            if (country.CountryId == item.CountryId) {
+                                item.Country = country.CountryName;
+                            }
+                        });
+                        if (item.Status == 1) {
+                            item.StatusValue = "Draft"
+                        } else if (item.Status == 2) {
+                            item.StatusValue = "Submitted for Approval"
+                        } else if (item.Status == 3) {
+                            item.StatusValue = "Live"
+                        } else if (item.Status == 4) {
+                            item.StatusValue = "Paused"
+                        } else if (item.Status == 5) {
+                            item.StatusValue = "Completed"
+                        } else if (item.Status == 6) {
+                            item.StatusValue = "Approval Rejected"
+                        }
+                        return item;
                     }
                     // Search Filter 
                     filterSurveyQuestion = function () {
+                        getQuestions();
+                    },
+                    // Make Filters Claer
+                    clearFilters = function () {
+                        langfilterValue(undefined);
+                        countryfilterValue(undefined);
+                        filterValue(undefined);
                         getQuestions();
                     },
                     // Add new Profile Question
@@ -97,15 +132,15 @@ define("survey/survey.viewModel",
                     },
                     // On editing of existing PQ
                     onEditSurvey = function (item) {
-                       // selectedQuestion(item);
+                       //call function to edit survey
                         isEditorVisible(true);
                     },
                     onDeleteSurvey = function (item) {
-                        // Ask for confirmation
-                        confirmation.afterProceed(function () {
-                            deleteProfileQuestion(item);
-                        });
-                        confirmation.show();
+                        //// Ask for confirmation
+                        //confirmation.afterProceed(function () {
+                        //    deleteSurvey(item);
+                        //});
+                        //confirmation.show();
                     },
                     // Delete PQ
                     deleteSurvey = function (item) {
@@ -122,6 +157,7 @@ define("survey/survey.viewModel",
                         //    }
                         //});
                     },
+                    
                     // Initialize the view model
                     initialize = function (specifiedView) {
                         view = specifiedView;
@@ -129,8 +165,6 @@ define("survey/survey.viewModel",
                         pager(pagination.Pagination({ PageSize: 10 }, questions, getQuestions));
                         // Base Data Call
                         getBasedata();
-                        // First request for LV
-                      //  getQuestions();
                     };
                 return {
                     initialize: initialize,
@@ -149,6 +183,7 @@ define("survey/survey.viewModel",
                     langs: langs,
                     countries: countries,
                     langfilterValue: langfilterValue,
+                    clearFilters: clearFilters,
                     countryfilterValue: countryfilterValue
                 };
             })()
