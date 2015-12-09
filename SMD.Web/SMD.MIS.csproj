@@ -1273,7 +1273,6 @@
     <Content Include="Areas\ProfileQuestion\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Survey\Views\web.config" />
     <Content Include="Areas\Survey\Views\Survey\Index.cshtml" />
-    <Content Include="Areas\Survey\Views\Survey\EditSurvery.cshtml" />
     <Content Include="Areas\ProfileQuestion\Views\Manage\Index.cshtml" />
     <Content Include="Areas\ProfileQuestion\Views\Manage\_ProfileQuestionEditor.cshtml" />
     <Content Include="Areas\Common\Views\web.config" />
@@ -1286,6 +1285,7 @@
     <Content Include="Areas\Common\Views\Shared\_StripeChargeCustomerDialog.cshtml" />
     <Content Include="Areas\ProfileQuestion\Views\Manage\StripeExample.cshtml" />
     <Content Include="Areas\Ads\Views\Ads\ManageCampaign.cshtml" />
+    <Content Include="Areas\Survey\Views\Shared\_AddEditSurvey.cshtml" />
     <None Include="ModelMappers\config\Web.connectionstrings.default.config">
       <SubType>Designer</SubType>
     </None>
@@ -2412,7 +2412,6 @@
     <Folder Include="Areas\Common\Controllers\" />
     <Folder Include="Areas\Common\Models\" />
     <Folder Include="Areas\Survey\Models\" />
-    <Folder Include="Areas\Survey\Views\Shared\" />
     <Folder Include="Content\themes\base\minified\images\" />
     <Folder Include="Models\" />
     <Folder Include="Properties\PublishProfiles\" />

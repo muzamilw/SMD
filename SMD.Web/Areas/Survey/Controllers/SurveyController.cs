@@ -13,10 +13,7 @@ namespace SMD.MIS.Areas.Survey.Controllers
         {
             return View();
         }
-        public ActionResult EditSurvery()
-        {
-            return View();
-        }
+      
       
     }
 }

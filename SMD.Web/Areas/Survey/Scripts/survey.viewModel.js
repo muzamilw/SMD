@@ -115,6 +115,13 @@ define("survey/survey.viewModel",
                     filterSurveyQuestion = function () {
                         getQuestions();
                     },
+                    // Make Filters Claer
+                    clearFilters = function () {
+                        langfilterValue(undefined);
+                        countryfilterValue(undefined);
+                        filterValue(undefined);
+                        getQuestions();
+                    },
                     // Add new Profile Question
                     addNewSurvey = function () {
                         isEditorVisible(true);
@@ -125,15 +132,15 @@ define("survey/survey.viewModel",
                     },
                     // On editing of existing PQ
                     onEditSurvey = function (item) {
-                       // selectedQuestion(item);
+                       //call function to edit survey
                         isEditorVisible(true);
                     },
                     onDeleteSurvey = function (item) {
-                        // Ask for confirmation
-                        confirmation.afterProceed(function () {
-                            deleteProfileQuestion(item);
-                        });
-                        confirmation.show();
+                        //// Ask for confirmation
+                        //confirmation.afterProceed(function () {
+                        //    deleteSurvey(item);
+                        //});
+                        //confirmation.show();
                     },
                     // Delete PQ
                     deleteSurvey = function (item) {
@@ -150,13 +157,7 @@ define("survey/survey.viewModel",
                         //    }
                         //});
                     },
-                    // Make Filters Claer
-                    clearFilters = function () {
-                        langfilterValue(undefined);
-                        countryfilterValue(undefined);
-                        filterValue(undefined);
-                        getQuestions();
-                    },
+                    
                     // Initialize the view model
                     initialize = function (specifiedView) {
                         view = specifiedView;
@@ -164,8 +165,6 @@ define("survey/survey.viewModel",
                         pager(pagination.Pagination({ PageSize: 10 }, questions, getQuestions));
                         // Base Data Call
                         getBasedata();
-                        // First request for LV
-                      //  getQuestions();
                     };
                 return {
                     initialize: initialize,
