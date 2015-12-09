@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using SMD.MIS.Areas.Api.Models;
 
 using System.Linq;
+using ProfileQuestionAnswer = SMD.Models.DomainModels.ProfileQuestionAnswer;
 
 namespace SMD.MIS.ModelMappers
 {
@@ -35,7 +37,7 @@ namespace SMD.MIS.ModelMappers
                 Question = source.Question,
                 Priority = source.Priority,
                 HasLinkedQuestions = source.HasLinkedQuestions,
-                ProfileGroupName = source.ProfileQuestionGroup.ProfileGroupName ,
+                ProfileGroupName = source.ProfileQuestionGroup!=null ? source.ProfileQuestionGroup.ProfileGroupName:null,
 
                 LanguageId = source.LanguageId,
                 CountryId = source.CountryId,
@@ -71,7 +73,8 @@ namespace SMD.MIS.ModelMappers
                 CreationDate = source.CreationDate,
                 ModifiedDate = source.ModifiedDate,
                 PenalityForNotAnswering = source.PenalityForNotAnswering,
-                Status = source.Status
+                Status = source.Status,
+                ProfileQuestionAnswers = source.ProfileQuestionAnswers!=null? source.ProfileQuestionAnswers.Select(ans => ans.CreateFrom()).ToList():new Collection<ProfileQuestionAnswer>().ToList()
             };
         }
         /// <summary>

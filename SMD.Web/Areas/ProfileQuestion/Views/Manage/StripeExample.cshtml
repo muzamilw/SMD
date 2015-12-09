@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "Stripe Example";
+}
+
+<div class="row" id="stripeBinding">
+    <div class="col-lg-12">
+        <div class="row">
+            <div class="col-lg-12">
+                <ol class="breadcrumb">
+                    <li><a href="~/Home/Welcome">&nbsp;</a></li>
+                </ol>
+                <div class="clearfix">
+                    <h1 class="pull-left" style="padding-left: 0">Stripe Example</h1>
+                </div>
+                <div class="row" style="margin-bottom:15px;">
+                    <label>Use this if you already have StipeId for Customer (Existing Customer)</label>
+                    <button class="btn btn-primary" style="margin-right: 6px;" data-bind="click: $root.chargeExistingCustomer">
+                        Pay (With Stripe)
+                    </button>
+                </div>
+                <div class="row" style="margin-bottom:15px;">
+                    <label>Use this if user's credit card is not saved on Stripe</label>
+                    <button class="btn btn-primary" style="margin-right: 6px;" data-bind="click: $root.chargeCustomer">
+                        Create Customer (With Stripe)
+                    </button>
+                </div>
+                <!-- ko stopBinding: true -->
+                @Html.Partial("~/Areas/Common/Views/Shared/_StripeChargeCustomerDialog.cshtml")
+                <!-- /ko -->
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        require(["pQuestion/stripeExample.view", "common/stripeChargeCustomer.view"]);
+    </script>
+
+}

@@ -14,6 +14,8 @@
         public int? LinkedSqAnswer { get; set; }
         public bool? IncludeorExclude { get; set; }
 
+        public int? LanguageId { get; set; }
+
         public virtual ProfileQuestion ProfileQuestion { get; set; }
         public virtual ProfileQuestionAnswer ProfileQuestionAnswer { get; set; }
         public virtual SurveyQuestion SurveyQuestion { get; set; }

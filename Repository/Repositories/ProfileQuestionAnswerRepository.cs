@@ -2,6 +2,7 @@
 using System.Linq;
 using Microsoft.Practices.Unity;
 using SMD.Interfaces.Repository;
+using SMD.Models.Common;
 using SMD.Models.DomainModels;
 using SMD.Repository.BaseRepository;
 using System;
@@ -38,7 +39,7 @@ namespace SMD.Repository.Repositories
         #region Public
         public ProfileQuestionAnswer Find(int id)
         {
-            throw new NotImplementedException();
+            return DbSet.Find(id);
         }
 
         /// <summary>
@@ -46,7 +47,7 @@ namespace SMD.Repository.Repositories
         /// </summary>
         public IEnumerable<ProfileQuestionAnswer> GetProfileQuestionAnswerByQuestionId(long profileQuestionId)
         {
-           return DbSet.Where(ans => ans.PqId == profileQuestionId).ToList();
+            return DbSet.Where(ans => ans.PqId == profileQuestionId && (ans.Status == null || ans.Status == (Int32)ObjectStatus.Acitve)).ToList();
         }
         #endregion
     }

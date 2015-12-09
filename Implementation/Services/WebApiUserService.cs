@@ -72,6 +72,35 @@ namespace SMD.Implementation.Services
             return user;
         }
 
+        /// <summary>
+        /// Save Stripe Customer
+        /// </summary>
+        public async Task SaveStripeCustomerId(string customerId)
+        {
+            User user = await UserManager.FindByIdAsync(UserManager.LoggedInUserId);
+            if (user == null)
+            {
+                throw new SMDException(LanguageResources.WebApiUserService_LoginInfoNotFound);
+            }
+
+            user.StripeCustomerId = customerId;
+            await UserManager.UpdateAsync(user);
+        }
+
+        /// <summary>
+        /// Get Stripe Customer
+        /// </summary>
+        public async Task<string> GetStripeCustomerId()
+        {
+            User user = await UserManager.FindByIdAsync(UserManager.LoggedInUserId);
+            if (user == null)
+            {
+                throw new SMDException(LanguageResources.WebApiUserService_LoginInfoNotFound);
+            }
+
+            return user.StripeCustomerId;
+        }
+
         #endregion
     }
 }

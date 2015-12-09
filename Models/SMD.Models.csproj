@@ -115,6 +115,7 @@
     <Compile Include="DomainModels\AdCampaignResponse.cs" />
     <Compile Include="DomainModels\AdCampaignTargetCriteria.cs" />
     <Compile Include="DomainModels\AdCampaignTargetLocation.cs" />
+    <Compile Include="DomainModels\AuditLog.cs" />
     <Compile Include="DomainModels\Country.cs" />
     <Compile Include="DomainModels\Language.cs" />
     <Compile Include="DomainModels\ProfileQuestion.cs" />
@@ -122,6 +123,7 @@
     <Compile Include="DomainModels\ProfileQuestionGroup.cs" />
     <Compile Include="DomainModels\ProfileQuestionUserAnswer.cs" />
     <Compile Include="DomainModels\SurveyQuestion.cs" />
+    <Compile Include="DomainModels\SurveyQuestionResponse.cs" />
     <Compile Include="DomainModels\SurveyQuestionTargetCriteria.cs" />
     <Compile Include="DomainModels\SurveyQuestionTargetLocation.cs" />
     <Compile Include="DomainModels\SystemMail.cs" />
@@ -150,6 +152,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Common\CampaignGridModel.cs" />
+    <Compile Include="RequestModels\StripeChargeCustomerRequest.cs" />
     <Compile Include="RequestModels\GetPagedListRequest.cs" />
     <Compile Include="RequestModels\ExternalLoginRequest.cs" />
     <Compile Include="RequestModels\StandardLoginRequest.cs" />

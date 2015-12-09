@@ -3,6 +3,7 @@ using System.Configuration;
 using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
+using System.Web;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
@@ -25,6 +26,8 @@ namespace SMD.Implementation.Identity
             : base(store)
         {
         }
+
+        public string LoggedInUserId { get { return HttpContext.Current.User.Identity.GetUserId(); } }
 
         /// <summary>
         /// Send Email

@@ -1,7 +1,7 @@
 ﻿define(["ko", "underscore", "underscore-ko"], function (ko) {
 
     var // ReSharper disable InconsistentNaming
-        Survey = function (SQID, LanguageID, CountryID, UserID, Status, Question, Gender, Language, Country) {
+        Survey = function (SQID, LanguageID, CountryID, UserID, Status, StatusValue, Question, Gender, Language, Country) {
             var
                 SQID = ko.observable(SQID),
                 LanguageID = ko.observable(LanguageID),
@@ -12,6 +12,7 @@
                 Gender = ko.observable(Gender),
                 Language = ko.observable(Language),
                 Country = ko.observable(Country),
+                StatusValue = ko.observable(StatusValue),
                 errors = ko.validation.group({
 
                     }),
@@ -38,6 +39,7 @@
                         CountryID: CountryID(),
                         UserID: UserID(),
                         Status: Status(),
+                        StatusValue: StatusValue(),
                         Question: Question(),
                         Gender: Gender(),
                         Language: Language(),
@@ -49,7 +51,8 @@
                 LanguageID :(LanguageID),
                 CountryID :(CountryID),
                 UserID :(UserID),
-                Status :(Status),
+                Status: (Status),
+                StatusValue: (StatusValue),
                 Question :(Question),
                 Gender :(Gender),
                 Language :(Language),
@@ -64,7 +67,7 @@
    
     // Factory Method
     Survey.Create = function (source) {
-        return new Survey(source.SQID, source.LanguageID, source.CountryID, source.UserID, source.Status, source.Question, source.Gender, source.Language, source.Country);
+        return new Survey(source.SQID, source.LanguageID, source.CountryID, source.UserID, source.Status,source.StatusValue, source.Question, source.Gender, source.Language, source.Country);
     };
 
     return {

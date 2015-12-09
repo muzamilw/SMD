@@ -43,6 +43,13 @@ define("pQuestion/pQuestion.dataservice", function () {
                         type: 'GET'
                     });
 
+
+                    // Add/Edit Profile Questions
+                    amplify.request.define('saveProfileQuestion', 'ajax', {
+                        url: '/Api/ProfileQuestion',
+                        dataType: 'json',
+                        type: 'POST'
+                    });
                     isInitialized = true;
                 }
             },       
@@ -89,13 +96,25 @@ define("pQuestion/pQuestion.dataservice", function () {
                     error: callbacks.error,
                     data: params
                 });
+            },
+            
+            // Save Profile Questions add /edit
+            saveProfileQuestion = function (params, callbacks) {
+                initialize();
+                return amplify.request({
+                    resourceId: 'saveProfileQuestion',
+                    success: callbacks.success,
+                    error: callbacks.error,
+                    data: params
+                });
             };
 
         return {
             searchProfileQuestions: searchProfileQuestions,
             getBaseData: getBaseData,
             deleteProfileQuestion: deleteProfileQuestion,
-            getPqAnswer: getPqAnswer
+            getPqAnswer: getPqAnswer,
+            saveProfileQuestion: saveProfileQuestion
         };
     })();
     return dataService;

@@ -123,4 +123,10 @@
   <data name="InvalidCredentials" xml:space="preserve">
     <value>UserName or Password is Invalid</value>
   </data>
+  <data name="Stripe_CustomerNotFound" xml:space="preserve">
+    <value>Payment can't be proceed, no customer found!</value>
+  </data>
+  <data name="Stripe_CardExpired" xml:space="preserve">
+    <value>Payment can't be proceed, card has been expired!</value>
+  </data>
 </root>

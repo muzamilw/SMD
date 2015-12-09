@@ -1,4 +1,6 @@
-﻿using SMD.MIS.Areas.Api.Models;
+﻿using System.Configuration;
+using System.Web;
+using SMD.MIS.Areas.Api.Models;
 
 namespace SMD.MIS.ModelMappers
 {
@@ -9,12 +11,18 @@ namespace SMD.MIS.ModelMappers
         /// </summary>
         public static ProfileQuestionAnswer CreateFrom(this Models.DomainModels.ProfileQuestionAnswer source)
         {
+            string path = source.ImagePath;
+            if (!source.ImagePath.Contains("http"))
+            {
+                 path = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + source.ImagePath;
+            }
+
             return new ProfileQuestionAnswer
             {
                 PqId = source.PqId,
                 Type = source.Type,
                 AnswerString = source.AnswerString,
-                ImagePath = source.ImagePath,
+                ImagePath = path,
 
                 LinkedQuestion1Id = source.LinkedQuestion1Id,
                 LinkedQuestion2Id = source.LinkedQuestion2Id,

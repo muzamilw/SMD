@@ -21,7 +21,7 @@
                 modifiedDate = ko.observable(spcModDate),
                 
                 penalityForNotAnswering = ko.observable(penality),
-                status = ko.observable(spcStatus),
+                status = ko.observable(spcStatus || 1),
                 answers = ko.observableArray([]),
 
                 errors = ko.validation.group({                    
@@ -32,7 +32,24 @@
                     return errors().length === 0;
                 }),
                 dirtyFlag = new ko.dirtyFlag({
-                   
+                    questionString: questionString,
+                    priority: priority,
+                    hasLinkedQuestions: hasLinkedQuestions,
+                    profileGroupName: profileGroupName,
+
+                    languageId: languageId,
+                    countryId: countryId,
+                    profileGroupId: profileGroupId,
+                    type: type,
+
+                    refreshTime: refreshTime,
+                    skippedCount: skippedCount,
+                    creationDate: creationDate,
+                    modifiedDate: modifiedDate,
+
+                    penalityForNotAnswering: penalityForNotAnswering,
+                    status: status,
+                    answers: answers
                 }),
                 // Has Changes
                 hasChanges = ko.computed(function() {
@@ -83,6 +100,7 @@
 
                 hasChanges: hasChanges,
                 reset: reset,
+                dirtyFlag:dirtyFlag,
                 convertToServerData: convertToServerData,
                 isValid: isValid,
                 errors: errors
@@ -127,7 +145,20 @@
                   return errors().length === 0;
               }),
               dirtyFlag = new ko.dirtyFlag({
+                  answerString: answerString,
+                  imagePath: imagePath,
+                  linkedQuestion1Id: linkedQuestion1Id,
+                  linkedQuestion2Id: linkedQuestion2Id,
+                  linkedQuestion3Id: linkedQuestion3Id,
 
+                  linkedQuestion4Id: linkedQuestion4Id,
+                  linkedQuestion5Id: linkedQuestion5Id,
+                  linkedQuestion6Id: linkedQuestion6Id,
+                  pqAnswerId: pqAnswerId,
+
+                  pqId: pqId,
+                  sortOrder: sortOrder,
+                  type: type,
               }),
               // Has Changes
               hasChanges = ko.computed(function () {
@@ -194,7 +225,7 @@
     var questionServertoClientMapper = function (itemFromServer) {
         return new question(itemFromServer.PqId, itemFromServer.Question, itemFromServer.Priority,
             itemFromServer.HasLinkedQuestions, itemFromServer.ProfileGroupName, itemFromServer.LanguageId, itemFromServer.CountryId, itemFromServer.ProfileGroupId, itemFromServer.Type, itemFromServer.RefreshTime
-        , itemFromServer.SkippedCount, itemFromServer.CreationDate, itemFromServer.ModifiedDate, itemFromServer.PenalityForNotAnswering, itemFromServer.Status);
+        , itemFromServer.SkippedCount, moment(itemFromServer.CreationDate), itemFromServer.ModifiedDate, itemFromServer.PenalityForNotAnswering, itemFromServer.Status);
     };
     
     // Function to attain cancel button functionality QUESTION

@@ -15,6 +15,7 @@ namespace SMD.MIS.Areas.Api.Models
         public string Question { get; set; }
         public string Description { get; set; }
         public int? RepeatPeriod { get; set; }
+        public int? Status { get; set; }
         public string DisplayQuestion { get; set; }
         public DateTime? StartDate { get; set; }
         public DateTime? EndDate { get; set; }

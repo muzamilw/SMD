@@ -53,6 +53,17 @@ namespace SMD.MIS.Areas.Api.Controllers
             return _profileQuestionService.DeleteProfileQuestion(question.CreateFrom());
         }
 
+        /// <summary>
+        /// Add/Edit Profile Question 
+        /// </summary>
+        public Models.ProfileQuestion Post(Models.ProfileQuestion question)
+        {
+            if (question == null || !ModelState.IsValid)
+            {
+                throw new HttpException((int)HttpStatusCode.BadRequest, "Invalid Request");
+            }
+            return _profileQuestionService.SaveProfileQuestion(question.CreateFrom()).CreateFrom();
+        }
         #endregion
     }
 }
