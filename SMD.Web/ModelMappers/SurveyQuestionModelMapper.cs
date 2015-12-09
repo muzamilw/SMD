@@ -36,7 +36,7 @@ namespace SMD.MIS.ModelMappers
                 CountryId = source.CountryId,
                 Type = source.Type,
                 UserId = source.UserId,
-
+                Status = source.Status,
                 Question = source.Question,
                 Description = source.Description,
                 RepeatPeriod = source.RepeatPeriod,
