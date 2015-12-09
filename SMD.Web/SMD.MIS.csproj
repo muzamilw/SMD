@@ -502,6 +502,12 @@
     <Content Include="Content\Images\imageplaceholder.png" />
     <Content Include="Content\Images\up-arrow-small.png" />
     <Content Include="Content\layout.css" />
+    <Content Include="Content\less\Campaign.css">
+      <DependentUpon>Campaign.less</DependentUpon>
+    </Content>
+    <Content Include="Content\less\Campaign.min.css">
+      <DependentUpon>Campaign.css</DependentUpon>
+    </Content>
     <Content Include="Content\less\MainSite.css">
       <DependentUpon>MainSite.less</DependentUpon>
     </Content>
@@ -1286,12 +1292,10 @@
     <Content Include="Areas\ProfileQuestion\Views\Manage\StripeExample.cshtml" />
     <Content Include="Areas\Ads\Views\Ads\ManageCampaign.cshtml" />
     <Content Include="Areas\Survey\Views\Shared\_AddEditSurvey.cshtml" />
+    <Content Include="Content\less\Campaign.less" />
     <None Include="ModelMappers\config\Web.connectionstrings.default.config">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="Content\less\MainSite.css.map">
-      <DependentUpon>MainSite.css</DependentUpon>
-    </Content>
     <Content Include="RichTextEditor\CHANGES.md" />
     <Content Include="RichTextEditor\LICENSE.md" />
     <Content Include="RichTextEditor\plugins\scayt\LICENSE.md" />
