@@ -38,14 +38,12 @@ define("ads/ads.viewModel",
                         dataservice.getBaseData({}, {
                               success: function (data) {
                                   if (data != null) {
-                                      console.log(JSON.stringify(data.Languages));
                                       Languages.removeAll();
                                       ko.utils.arrayPushAll(Languages(), data.Languages);// [{ LanguageId: 1, LanguageName: "Abkhaz" }, { LanguageId: 2, LanguageName: "Afar" }]);
                                       Languages.valueHasMutated();
-                                    
 
                                       Countries.removeAll();
-                                      ko.utils.arrayPushAll(Countries(), data.Countries);
+                                      ko.utils.arrayPushAll(Countries(), data.countries);
                                       Countries.valueHasMutated();
                                   }
 
@@ -77,7 +75,8 @@ define("ads/ads.viewModel",
                     CampaignType: CampaignType,
                     validFromDate: validFromDate,
                     validUptoDate: validUptoDate,
-                    Languages: Languages
+                    Languages: Languages,
+                    Countries: Countries
                 };
             })()
         };
