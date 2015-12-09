@@ -5,6 +5,9 @@ using System.Web;
 
 namespace SMD.MIS.Areas.Api.Models
 {
+    /// <summary>
+    /// Web Model 
+    /// </summary>
     public class SurveyQuestion
     {
         public long SqId { get; set; }

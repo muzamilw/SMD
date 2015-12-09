@@ -361,6 +361,7 @@
     <Compile Include="Areas\Api\Controllers\ProfileQuestionBaseController.cs" />
     <Compile Include="Areas\Api\Controllers\ProfileQuestionAnswerController.cs" />
     <Compile Include="Areas\Api\Controllers\ExternalLoginController.cs" />
+    <Compile Include="Areas\Api\Controllers\SurveyQuestionApprovalController.cs" />
     <Compile Include="Areas\Api\Controllers\StandardLoginController.cs" />
     <Compile Include="Areas\Api\Controllers\ProfileQuestionController.cs" />
     <Compile Include="Areas\Api\Controllers\SurveyController.cs" />
@@ -373,6 +374,7 @@
     <Compile Include="Areas\Api\Models\SurveyQuestion.cs" />
     <Compile Include="Areas\Api\Models\AdCampaignBaseResponse.cs" />
     <Compile Include="Areas\Api\Models\SurveyQuestionRequestResponseModel.cs" />
+    <Compile Include="Areas\Api\Models\SurveyQuestionResposneModelForAproval.cs" />
     <Compile Include="Areas\Api\Models\WebApiUser.cs" />
     <Compile Include="Areas\Api\Models\CountryDropdown.cs" />
     <Compile Include="Areas\Api\Models\ProfileQuestionDropdown.cs" />
@@ -423,6 +425,10 @@
     <Content Include="Areas\ProfileQuestion\Scripts\pQuestion.view.js" />
     <Content Include="Areas\ProfileQuestion\Scripts\stripeExample.viewModel.js" />
     <Content Include="Areas\ProfileQuestion\Scripts\pQuestion.viewModel.js" />
+    <Content Include="Areas\Survey\Scripts\surveyQuestionApp.dataservice.js" />
+    <Content Include="Areas\Survey\Scripts\surveyQuestionApp.model.js" />
+    <Content Include="Areas\Survey\Scripts\surveyQuestionApp.view.js" />
+    <Content Include="Areas\Survey\Scripts\surveyQuestionApp.viewModel.js" />
     <Content Include="Areas\Survey\Scripts\survey.dataservice.js" />
     <Content Include="Areas\Survey\Scripts\survey.model.js" />
     <Content Include="Areas\Survey\Scripts\survey.view.js" />
@@ -1286,6 +1292,10 @@
     <Content Include="Areas\Common\Views\Shared\_StripeChargeCustomerDialog.cshtml" />
     <Content Include="Areas\ProfileQuestion\Views\Manage\StripeExample.cshtml" />
     <Content Include="Areas\Ads\Views\Ads\ManageCampaign.cshtml" />
+    <Content Include="Areas\Survey\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Survey\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Survey\Views\Survey\SurveyQuestionApproval.cshtml" />
+    <Content Include="Areas\Survey\Views\Survey\_SurveyQuestionEditor.cshtml" />
     <None Include="ModelMappers\config\Web.connectionstrings.default.config">
       <SubType>Designer</SubType>
     </None>
@@ -2412,7 +2422,6 @@
     <Folder Include="Areas\Common\Controllers\" />
     <Folder Include="Areas\Common\Models\" />
     <Folder Include="Areas\Survey\Models\" />
-    <Folder Include="Areas\Survey\Views\Shared\" />
     <Folder Include="Content\themes\base\minified\images\" />
     <Folder Include="Models\" />
     <Folder Include="Properties\PublishProfiles\" />

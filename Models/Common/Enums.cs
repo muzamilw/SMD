@@ -59,7 +59,9 @@
         Completed = 5,
         ApprovalRejected = 6
     }
-
+    /// <summary>
+    /// Object Status enum for profile question
+    /// </summary>
     public enum ObjectStatus
     {
         Archived=0,
@@ -91,4 +93,5 @@
         /// </summary>
         AdCampaign = 3
     }
+  
 }

@@ -89,6 +89,18 @@ namespace SMD.MIS.ModelMappers
             };
         }
 
+        /// <summary>
+        /// Domain to Web mapper for Rejected Survey Questions 
+        /// </summary>
+        public static SurveyQuestionResposneModelForAproval CreateFrom(
+            this Models.ResponseModels.SurveyQuestionResposneModelForAproval source)
+        {
+            return new SurveyQuestionResposneModelForAproval
+            {
+                TotalCount = source.TotalCount,
+                SurveyQuestions = source.SurveyQuestions.Select(question => question.CreateFrom())
+            };
+        }
      
 
     }

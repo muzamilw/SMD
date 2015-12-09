@@ -62,6 +62,45 @@ namespace SMD.Implementation.Services
                 TotalCount = rowCount
             };
         }
+
+        /// <summary>
+        /// Get Survey Questions that are need aprroval
+        /// </summary>
+        public SurveyQuestionResposneModelForAproval GetRejectedSurveyQuestionsForAproval(SurveySearchRequest request)
+        {
+            int rowCount;
+            return new SurveyQuestionResposneModelForAproval
+            {
+                SurveyQuestions = surveyQuestionRepository.SearchRejectedProfileQuestions(request, out rowCount),
+                TotalCount = rowCount
+            };
+        }
+
+        /// <summary>
+        /// Edit Survey Question 
+        /// </summary>
+        public SurveyQuestion EditSurveyQuestion(SurveyQuestion source)
+        {
+            var dbServey=surveyQuestionRepository.Find(source.SqId);
+            if (dbServey != null)
+            {
+                dbServey.Approved = source.Approved;
+                if (source.Approved == true)
+                {
+                    dbServey.ApprovalDate = source.ApprovalDate;
+                    dbServey.ApprovedByUserId = surveyQuestionRepository.LoggedInUserIdentity;
+                }
+                else
+                {
+                    dbServey.Approved = false;
+                    dbServey.RejectionReason = source.RejectionReason;
+                }
+                dbServey.ModifiedDate = DateTime.Now;
+                dbServey.ModifiedBy = surveyQuestionRepository.LoggedInUserIdentity;
+            }
+            surveyQuestionRepository.SaveChanges();
+            return surveyQuestionRepository.Find(source.SqId);
+        }
         #endregion
     }
 
