@@ -413,6 +413,10 @@
     <Content Include="Areas\Ads\Scripts\ads.model.js" />
     <Content Include="Areas\Ads\Scripts\ads.view.js" />
     <Content Include="Areas\Ads\Scripts\ads.viewModel.js" />
+    <Content Include="Areas\Ads\Scripts\addApproval.dataservice.js" />
+    <Content Include="Areas\Ads\Scripts\addApproval.model.js" />
+    <Content Include="Areas\Ads\Scripts\addApproval.view.js" />
+    <Content Include="Areas\Ads\Scripts\addApproval.viewModel.js" />
     <Content Include="Areas\Common\Scripts\clientSidePagination.js" />
     <Content Include="Areas\Common\Scripts\stripeChargeCustomer.dataservice.js" />
     <Content Include="Areas\Common\Scripts\stripeChargeCustomer.view.js" />
@@ -1304,6 +1308,8 @@
     <Content Include="Content\less\Campaign.less" />
     <Content Include="Areas\Survey\Views\Survey\SurveyQuestionApproval.cshtml" />
     <Content Include="Areas\Survey\Views\Survey\_SurveyQuestionEditor.cshtml" />
+    <Content Include="Areas\Ads\Views\Ads\_addEditor.cshtml" />
+    <Content Include="Areas\Ads\Views\Ads\AddAproval.cshtml" />
     <None Include="ModelMappers\config\Web.connectionstrings.default.config">
       <SubType>Designer</SubType>
     </None>
