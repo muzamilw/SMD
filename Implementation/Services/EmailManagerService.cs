@@ -334,11 +334,64 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Send Invoice
         /// </summary>
+       
+
+        /// <summary>
+        /// Send Error Log
+        /// </summary>
+        public bool SendErrorLog(string errormsg)
+        {
+            MailMessage oMailBody = new MailMessage
+                                    {
+                                        IsBodyHtml = true,
+                                        From = new MailAddress("info@myprintcloud.com", "Sell My Data"),
+                                        Subject = "WebHook Handler Exception",
+                                        Body =
+                                            "<p>WebHook Handler have been failed due to following error.<br /><br />" +
+                                            errormsg + "</p>",
+                                        Priority = MailPriority.Normal
+                                    };
+
+
+            string smtp = ConfigurationManager.AppSettings["SMTPServer"];
+            string mailAddress = ConfigurationManager.AppSettings["smtpUser"];
+            string mailPassword = ConfigurationManager.AppSettings["smtpPassword"];
+            string mailAddressTo = ConfigurationManager.AppSettings["contactInternalEmail"];
+            oMailBody.To.Add(mailAddressTo);
+            SmtpClient objSmtpClient = new SmtpClient(smtp);
+            NetworkCredential mailAuthentication = new NetworkCredential(mailAddress, mailPassword);
+            objSmtpClient.EnableSsl = true;
+            objSmtpClient.UseDefaultCredentials = false;
+            objSmtpClient.Credentials = mailAuthentication;
+            objSmtpClient.Send(oMailBody);
+            return true;
+        }
+
+        /// <summary>
+        /// Account Verification Email
+        /// </summary>
+        public async Task SendAccountVerificationEmail(User oUser, string emailConfirmationLink)
+        {
+            if (oUser != null)
+            {
+                MMailto.Add(oUser.Email);
+                Mid = (int) EmailTypes.VerifyAccount;
+                Muser = oUser.Email;
+                Fname = oUser.FullName;
+                PhoneNo = oUser.PhoneNumber;
+                EmailConfirmationLink = emailConfirmationLink;
+                await SendEmail();
+            }
+            else
+            {
+                throw new Exception("Customer is null");    
+            }
+        }
         public bool SendInovice()
         {
-// ReSharper disable SuggestUseVarKeywordEvident
+            // ReSharper disable SuggestUseVarKeywordEvident
             MailMessage oMailBody = new MailMessage();
-// ReSharper restore SuggestUseVarKeywordEvident
+            // ReSharper restore SuggestUseVarKeywordEvident
             int id = Mid;
 
             if (id == 0)
@@ -416,59 +469,48 @@ namespace SMD.Implementation.Services
             return true;
 
         }
-
         /// <summary>
-        /// Send Error Log
+        /// Send Email on Question Approval 
         /// </summary>
-        public bool SendErrorLog(string errormsg)
+        public async Task SendQuestionApprovalEmail(string aspnetUserId)
         {
-            MailMessage oMailBody = new MailMessage
-                                    {
-                                        IsBodyHtml = true,
-                                        From = new MailAddress("info@myprintcloud.com", "Sell My Data"),
-                                        Subject = "WebHook Handler Exception",
-                                        Body =
-                                            "<p>WebHook Handler have been failed due to following error.<br /><br />" +
-                                            errormsg + "</p>",
-                                        Priority = MailPriority.Normal
-                                    };
+            var oUser = await UserManager.FindByIdAsync(aspnetUserId);
 
-
-            string smtp = ConfigurationManager.AppSettings["SMTPServer"];
-            string mailAddress = ConfigurationManager.AppSettings["smtpUser"];
-            string mailPassword = ConfigurationManager.AppSettings["smtpPassword"];
-            string mailAddressTo = ConfigurationManager.AppSettings["contactInternalEmail"];
-            oMailBody.To.Add(mailAddressTo);
-            SmtpClient objSmtpClient = new SmtpClient(smtp);
-            NetworkCredential mailAuthentication = new NetworkCredential(mailAddress, mailPassword);
-            objSmtpClient.EnableSsl = true;
-            objSmtpClient.UseDefaultCredentials = false;
-            objSmtpClient.Credentials = mailAuthentication;
-            objSmtpClient.Send(oMailBody);
-            return true;
-        }
-
-        /// <summary>
-        /// Account Verification Email
-        /// </summary>
-        public async Task SendAccountVerificationEmail(User oUser, string emailConfirmationLink)
-        {
             if (oUser != null)
             {
                 MMailto.Add(oUser.Email);
-                Mid = (int) EmailTypes.VerifyAccount;
+                Mid = (int)EmailTypes.QuestionApproved;
                 Muser = oUser.Email;
                 Fname = oUser.FullName;
                 PhoneNo = oUser.PhoneNumber;
-                EmailConfirmationLink = emailConfirmationLink;
                 await SendEmail();
             }
             else
             {
-                throw new Exception("Customer is null");    
+                throw new Exception("Email could not be sent!");
             }
         }
+        /// <summary>
+        ///Send Email on Question Rejection 
+        /// </summary>
+        public async Task SendQuestionRejectionEmail(string aspnetUserId)
+        {
+            var oUser = await UserManager.FindByIdAsync(aspnetUserId);
 
+            if (oUser != null)
+            {
+                MMailto.Add(oUser.Email);
+                Mid = (int)EmailTypes.QuestionRejected;
+                Muser = oUser.Email;
+                Fname = oUser.FullName;
+                PhoneNo = oUser.PhoneNumber;
+                await SendEmail();
+            }
+            else
+            {
+                throw new Exception("Email could not be sent!");
+            }
+        }
         /// <summary>
         /// Registration Success Email
         /// </summary>

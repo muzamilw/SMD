@@ -40,7 +40,9 @@
         DeveloperDueDate = 15,
         DeveloperQuestion = 16,
         ResetPassword = 9,
-        RegistrationConfirmed = 1
+        RegistrationConfirmed = 1,
+        QuestionApproved = 10,
+        QuestionRejected = 11
     }
 
     public enum AdCampaignType
@@ -59,7 +61,9 @@
         Completed = 5,
         ApprovalRejected = 6
     }
-
+    /// <summary>
+    /// Object Status enum for profile question
+    /// </summary>
     public enum ObjectStatus
     {
         Archived=0,
@@ -91,4 +95,5 @@
         /// </summary>
         AdCampaign = 3
     }
+  
 }

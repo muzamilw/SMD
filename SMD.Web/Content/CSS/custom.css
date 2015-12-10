@@ -327,3 +327,6 @@ a.reportAnchor a:hover {
     margin-left: 10%;
     position: absolute;
 }
+.bold {
+    font-weight:bold;
+}

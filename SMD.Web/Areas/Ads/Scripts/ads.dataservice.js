@@ -23,6 +23,12 @@ define("ads/ads.dataservice", function () {
                         dataType: 'json',
                         type: 'GET'
                     });
+
+                    amplify.request.define('addCampaignData', 'ajax', {
+                        url: '/Api/Campaign',
+                        dataType: 'json',
+                        type: 'POST'
+                    });
                 }
             };
 
@@ -43,10 +49,20 @@ define("ads/ads.dataservice", function () {
                 success: callbacks.success,
                 error: callbacks.error,
             });
-        }
+        },
+        addCampaignData = function (params, callbacks) {
+             initialize();
+             return amplify.request({
+                 resourceId: 'addCampaignData',
+                 data: params,
+                 success: callbacks.success,
+                 error: callbacks.error,
+             });
+         }
         return {
             getBaseData: getBaseData,
             getCampaignData: getCampaignData,
+            addCampaignData: addCampaignData
         };
     })();
     return dataService;

@@ -362,6 +362,7 @@
     <Compile Include="Areas\Api\Controllers\ProfileQuestionAnswerController.cs" />
     <Compile Include="Areas\Api\Controllers\ExternalLoginController.cs" />
     <Compile Include="Areas\Api\Controllers\AdaptivePaypalPaymentController.cs" />
+    <Compile Include="Areas\Api\Controllers\SurveyQuestionApprovalController.cs" />
     <Compile Include="Areas\Api\Controllers\StandardLoginController.cs" />
     <Compile Include="Areas\Api\Controllers\ProfileQuestionController.cs" />
     <Compile Include="Areas\Api\Controllers\SurveyController.cs" />
@@ -371,9 +372,11 @@
       <DependentUpon>LanguageResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\Api\ModelMappers\WebApiUserMapper.cs" />
+    <Compile Include="Areas\Api\Models\LocationDropDown.cs" />
     <Compile Include="Areas\Api\Models\SurveyQuestion.cs" />
     <Compile Include="Areas\Api\Models\AdCampaignBaseResponse.cs" />
     <Compile Include="Areas\Api\Models\SurveyQuestionRequestResponseModel.cs" />
+    <Compile Include="Areas\Api\Models\SurveyQuestionResposneModelForAproval.cs" />
     <Compile Include="Areas\Api\Models\WebApiUser.cs" />
     <Compile Include="Areas\Api\Models\CountryDropdown.cs" />
     <Compile Include="Areas\Api\Models\ProfileQuestionDropdown.cs" />
@@ -429,6 +432,10 @@
     <Content Include="Areas\ProfileQuestion\Scripts\paypalExample.viewModel.js" />
     <Content Include="Areas\ProfileQuestion\Scripts\stripeExample.viewModel.js" />
     <Content Include="Areas\ProfileQuestion\Scripts\pQuestion.viewModel.js" />
+    <Content Include="Areas\Survey\Scripts\surveyQuestionApp.dataservice.js" />
+    <Content Include="Areas\Survey\Scripts\surveyQuestionApp.model.js" />
+    <Content Include="Areas\Survey\Scripts\surveyQuestionApp.view.js" />
+    <Content Include="Areas\Survey\Scripts\surveyQuestionApp.viewModel.js" />
     <Content Include="Areas\Survey\Scripts\survey.dataservice.js" />
     <Content Include="Areas\Survey\Scripts\survey.model.js" />
     <Content Include="Areas\Survey\Scripts\survey.view.js" />
@@ -508,6 +515,12 @@
     <Content Include="Content\Images\imageplaceholder.png" />
     <Content Include="Content\Images\up-arrow-small.png" />
     <Content Include="Content\layout.css" />
+    <Content Include="Content\less\Campaign.css">
+      <DependentUpon>Campaign.less</DependentUpon>
+    </Content>
+    <Content Include="Content\less\Campaign.min.css">
+      <DependentUpon>Campaign.css</DependentUpon>
+    </Content>
     <Content Include="Content\less\MainSite.css">
       <DependentUpon>MainSite.less</DependentUpon>
     </Content>
@@ -1279,7 +1292,6 @@
     <Content Include="Areas\ProfileQuestion\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Survey\Views\web.config" />
     <Content Include="Areas\Survey\Views\Survey\Index.cshtml" />
-    <Content Include="Areas\Survey\Views\Survey\EditSurvery.cshtml" />
     <Content Include="Areas\ProfileQuestion\Views\Manage\Index.cshtml" />
     <Content Include="Areas\ProfileQuestion\Views\Manage\_ProfileQuestionEditor.cshtml" />
     <Content Include="Areas\Common\Views\web.config" />
@@ -1294,12 +1306,15 @@
     <Content Include="Areas\Ads\Views\Ads\ManageCampaign.cshtml" />
     <Content Include="Areas\ProfileQuestion\Views\Manage\PaypalExample.cshtml" />
     <Content Include="Areas\Common\Views\Shared\_PaypalPayment.cshtml" />
+    <Content Include="Areas\Survey\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Survey\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Survey\Views\Shared\_AddEditSurvey.cshtml" />
+    <Content Include="Content\less\Campaign.less" />
+    <Content Include="Areas\Survey\Views\Survey\SurveyQuestionApproval.cshtml" />
+    <Content Include="Areas\Survey\Views\Survey\_SurveyQuestionEditor.cshtml" />
     <None Include="ModelMappers\config\Web.connectionstrings.default.config">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="Content\less\MainSite.css.map">
-      <DependentUpon>MainSite.css</DependentUpon>
-    </Content>
     <Content Include="RichTextEditor\CHANGES.md" />
     <Content Include="RichTextEditor\LICENSE.md" />
     <Content Include="RichTextEditor\plugins\scayt\LICENSE.md" />
@@ -2420,7 +2435,6 @@
     <Folder Include="Areas\Common\Controllers\" />
     <Folder Include="Areas\Common\Models\" />
     <Folder Include="Areas\Survey\Models\" />
-    <Folder Include="Areas\Survey\Views\Shared\" />
     <Folder Include="Content\themes\base\minified\images\" />
     <Folder Include="Models\" />
     <Folder Include="Properties\PublishProfiles\" />

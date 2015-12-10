@@ -121,22 +121,55 @@
 
         $(document).ready(function () {
             
-            $('#tokenize').tokenize({
+            $('#tokenizeCountries').tokenize({
+                placeholder: 'Add country',
+                onAddToken: function (value, text, e) {
 
-                //onAddToken: function (value, text, e) {
-
-                //    $(".Token .Close").click();
-
-                //    var count = $('#tokenContainer').children().length + 1;
-                //    var htmlToAppend = '<li id="' + count + '" style="text-align:left;"><div class="pull-left"><span> ' + text + ' </span></div><div class="pull-right"><a id="deleteToken' + count + '" onclick=RemoveToken(' + count + '); title="Delete"> <img src="/Content/images/deleteicon.PNG" /></a></div><div class="pull-right"><input type="radio" checked="checked" id="full-access" name="S' + count + '" /><label for="full-access" class="share-link-radios">Full</label><input type="radio" id="readonly-access" name="S' + count + '" /><label for="View Only" class="share-link-radios">Readonly</label></div><div class="pull-right" style="display:none;">false</div><div class="clearfix"></div></li>';
-
-                //    $("#tokenContainer").append(htmlToAppend);
-                //}
+                    $(".Token .Close").click();
+                    
+                    var count = "count_" + $('#coun_token_cnt').children().length + 1;
+                    var htmlToAppend = '<div class="lang_newcnt"  id="' + count + '"><input type="text"  class="form-control lang_nr_box" readonly="readonly" value=' + text + '><a id="deleteToken' + count + '" onclick=RemoveCountryToken("' + count + '"); title="Delete" class="lang_del"> <i class="fa fa-times "></i></a></div>';
+                   
+                    $("#coun_token_cnt").css("display", "block");
+                    $("#coun_token_cnt").append(htmlToAppend);
+                }
             });
-            $('#tokenize').next().next().css("display", "none");
-          
+            $('#coun_token_cnt').next().next().css("display", "none");
+
+
+            $('#tokenizeLanguages').tokenize({
+                placeholder: 'Enter a language',
+                onAddToken: function (value, text, e) {
+
+                    $(".Token .Close").click();
+
+                    var count = "lang_"+ $('#lang_token_cnt').children().length + 1;
+                    var htmlToAppend = '<div class="lang_newcnt" id="' + count + '"><input type="text"   class="form-control lang_nr_box" readonly="readonly" value=' + text + '><a id="deleteToken' + count + '" onclick=RemoveLanguageToken("' + count + '"); title="Delete" class="lang_del"> <i class="fa fa-times "></i></a></div>';
+                  
+                    $("#lang_token_cnt").css("display", "block");
+                    $("#lang_token_cnt").append(htmlToAppend);
+                }
+            });
 
         });
+
+        function RemoveLanguageToken(tokenId) {
+
+            $("#" + tokenId).remove();
+            if ($('#lang_token_cnt').is(':empty')) {
+                $("#lang_token_cnt").css("display", "none");
+            }
+          
+        }
+
+        function RemoveCountryToken(tokenId) {
+
+            $("#" + tokenId).remove();
+            if ($('#coun_token_cnt').is(':empty')) {
+                $("#coun_token_cnt").css("display", "none");
+            }
+
+        }
     </script>
 
 
