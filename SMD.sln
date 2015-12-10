@@ -23,6 +23,8 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "SMD.Database", "SMDDatabase
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SMD.Common", "SMD.Common\SMD.Common.csproj", "{4BA9E712-F447-4A6B-BAE6-18EEB43087C6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cash4Ads", "Cash4Ads\Cash4Ads.csproj", "{1279DEE1-F226-4739-BEC8-B290371779F7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +89,12 @@ Global
 		{4BA9E712-F447-4A6B-BAE6-18EEB43087C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4BA9E712-F447-4A6B-BAE6-18EEB43087C6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4BA9E712-F447-4A6B-BAE6-18EEB43087C6}.Release|x86.ActiveCfg = Release|Any CPU
+		{1279DEE1-F226-4739-BEC8-B290371779F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1279DEE1-F226-4739-BEC8-B290371779F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1279DEE1-F226-4739-BEC8-B290371779F7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1279DEE1-F226-4739-BEC8-B290371779F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1279DEE1-F226-4739-BEC8-B290371779F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1279DEE1-F226-4739-BEC8-B290371779F7}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
