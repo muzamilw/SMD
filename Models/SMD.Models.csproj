@@ -152,6 +152,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Common\CampaignGridModel.cs" />
+    <Compile Include="RequestModels\MakePaypalPaymentRequest.cs" />
     <Compile Include="RequestModels\StripeChargeCustomerRequest.cs" />
     <Compile Include="RequestModels\GetPagedListRequest.cs" />
     <Compile Include="RequestModels\ExternalLoginRequest.cs" />

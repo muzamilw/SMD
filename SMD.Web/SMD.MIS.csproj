@@ -361,6 +361,7 @@
     <Compile Include="Areas\Api\Controllers\ProfileQuestionBaseController.cs" />
     <Compile Include="Areas\Api\Controllers\ProfileQuestionAnswerController.cs" />
     <Compile Include="Areas\Api\Controllers\ExternalLoginController.cs" />
+    <Compile Include="Areas\Api\Controllers\AdaptivePaypalPaymentController.cs" />
     <Compile Include="Areas\Api\Controllers\StandardLoginController.cs" />
     <Compile Include="Areas\Api\Controllers\ProfileQuestionController.cs" />
     <Compile Include="Areas\Api\Controllers\SurveyController.cs" />
@@ -411,16 +412,21 @@
     <Content Include="Areas\Ads\Scripts\ads.view.js" />
     <Content Include="Areas\Ads\Scripts\ads.viewModel.js" />
     <Content Include="Areas\Common\Scripts\clientSidePagination.js" />
+    <Content Include="Areas\Common\Scripts\paypalPayment.dataservice.js" />
     <Content Include="Areas\Common\Scripts\stripeChargeCustomer.dataservice.js" />
+    <Content Include="Areas\Common\Scripts\paypalPayment.view.js" />
     <Content Include="Areas\Common\Scripts\stripeChargeCustomer.view.js" />
     <Content Include="Areas\Common\Scripts\confirmation.view.js" />
+    <Content Include="Areas\Common\Scripts\paypalPayment.viewModel.js" />
     <Content Include="Areas\Common\Scripts\stripeChargeCustomer.viewModel.js" />
     <Content Include="Areas\Common\Scripts\confirmation.viewModel.js" />
     <Content Include="Areas\Common\Scripts\pagination.js" />
     <Content Include="Areas\ProfileQuestion\Scripts\pQuestion.dataservice.js" />
     <Content Include="Areas\ProfileQuestion\Scripts\pQuestion.model.js" />
+    <Content Include="Areas\ProfileQuestion\Scripts\paypalExample.view.js" />
     <Content Include="Areas\ProfileQuestion\Scripts\stripeExample.view.js" />
     <Content Include="Areas\ProfileQuestion\Scripts\pQuestion.view.js" />
+    <Content Include="Areas\ProfileQuestion\Scripts\paypalExample.viewModel.js" />
     <Content Include="Areas\ProfileQuestion\Scripts\stripeExample.viewModel.js" />
     <Content Include="Areas\ProfileQuestion\Scripts\pQuestion.viewModel.js" />
     <Content Include="Areas\Survey\Scripts\survey.dataservice.js" />
@@ -1286,6 +1292,8 @@
     <Content Include="Areas\Common\Views\Shared\_StripeChargeCustomerDialog.cshtml" />
     <Content Include="Areas\ProfileQuestion\Views\Manage\StripeExample.cshtml" />
     <Content Include="Areas\Ads\Views\Ads\ManageCampaign.cshtml" />
+    <Content Include="Areas\ProfileQuestion\Views\Manage\PaypalExample.cshtml" />
+    <Content Include="Areas\Common\Views\Shared\_PaypalPayment.cshtml" />
     <None Include="ModelMappers\config\Web.connectionstrings.default.config">
       <SubType>Designer</SubType>
     </None>

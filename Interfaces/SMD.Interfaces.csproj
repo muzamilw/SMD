@@ -95,6 +95,7 @@
     <Compile Include="Services\IAdvertService.cs" />
     <Compile Include="Services\IAuditLogService.cs" />
     <Compile Include="Services\IEmailManagerService.cs" />
+    <Compile Include="Services\IPaypalService.cs" />
     <Compile Include="Services\IProfileQuestionAnswerService.cs" />
     <Compile Include="Services\IWebApiUserService.cs" />
     <Compile Include="Services\IProfileQuestionService.cs" />
