@@ -15,6 +15,11 @@ namespace SMD.Models.ResponseModels
         public IEnumerable<Language> Languages { get; set; }
 
         /// <summary>
+        /// Cities
+        /// </summary>
+        //public IEnumerable<City> Cities { get; set; }
+
+        /// <summary>
         /// Country
         /// </summary>
         public IEnumerable<Country> countries { get; set; }
