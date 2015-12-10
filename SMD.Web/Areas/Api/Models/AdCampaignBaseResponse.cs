@@ -16,6 +16,6 @@ namespace SMD.MIS.Areas.Api.Models
         /// <summary>
         /// Country
         /// </summary>
-        public IEnumerable<CountryDropdown> countries { get; set; }
+        public IEnumerable<LocationDropDown> countriesAndCities { get; set; }
     }
 }

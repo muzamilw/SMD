@@ -398,6 +398,7 @@
     <Compile Include="Helper\CultureHelper.cs" />
     <Compile Include="ModelMappers\LanguageMapper.cs" />
     <Compile Include="ModelMappers\CountryMapper.cs" />
+    <Compile Include="ModelMappers\LocationMapper.cs" />
     <Compile Include="ModelMappers\ProfileQuestionAnswerMapper.cs" />
     <Compile Include="ModelMappers\ProfileQuestionGroupMapper.cs" />
     <Compile Include="ModelMappers\ProfileQuestionMapper.cs" />

@@ -116,6 +116,7 @@
     <Compile Include="DomainModels\AdCampaignTargetCriteria.cs" />
     <Compile Include="DomainModels\AdCampaignTargetLocation.cs" />
     <Compile Include="DomainModels\AuditLog.cs" />
+    <Compile Include="DomainModels\City.cs" />
     <Compile Include="DomainModels\Country.cs" />
     <Compile Include="DomainModels\Language.cs" />
     <Compile Include="DomainModels\ProfileQuestion.cs" />
