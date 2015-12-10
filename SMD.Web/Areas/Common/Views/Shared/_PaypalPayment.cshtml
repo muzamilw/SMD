@@ -1,0 +1,32 @@
+﻿<div id="paypalPaymentBinding">
+    <div class="row">
+        <div class="form-group">
+            <div class="col-md-3">
+                <label class="control-label">Sender's Email</label>
+            </div>
+            <div class="col-md-5">
+                <input type="text" class="form-control" data-bind="value: senderEmail" />
+            </div>
+        </div><br/>
+        <div class="form-group">
+            <div class="col-md-3">
+                <label class="control-label">Reciever's Email</label>
+            </div>
+            <div class="col-md-5">
+                <input type="text" class="form-control" data-bind="value: recieverEmail" />
+            </div>
+        </div><br/>
+        <div class="form-group">
+            <div class="col-md-3">
+                <label class="control-label">Amount</label>
+            </div>
+            <div class="col-md-5">
+                <input type="text" class="form-control" data-bind="value: amount" />
+            </div>
+        </div><br/>
+        <a href="#" data-bind="click: makePayment" data-paypal-button="true">
+            <img src="//www.paypalobjects.com/en_US/i/btn/btn_paynow_LG.gif" alt="Pay Now" />
+        </a>
+    </div>
+</div>
+

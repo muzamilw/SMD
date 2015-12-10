@@ -12,11 +12,11 @@ define("ads/ads.viewModel",
                      pager = ko.observable(),
                        // Controlls editor visibility 
                     isEditorVisible = ko.observable(true),
-                    CampaignType = ko.observable('1'),
-                    validFromDate = ko.observable(),
-                    validUptoDate = ko.observable(),
                     Languages = ko.observableArray([]),
-                    Countries = ko.observableArray([]),
+                    countoryidList = [],
+                    cityidList = [],
+                    langidList = [],
+                    campaignModel = ko.observable(new model.campaignModel()),
                     getAdCampaignGridContent = function () {
                         dataservice.getCampaignData({}, {
                             success: function (data) {
@@ -35,20 +35,61 @@ define("ads/ads.viewModel",
 
                     },
                     getBaseData = function () {
-                        dataservice.getBaseData({}, {
+                        //dataservice.getBaseData({}, {
+                        //      success: function (data) {
+                        //          if (data != null) {
+                        //              Languages.removeAll();
+                        //              ko.utils.arrayPushAll(Languages(), data.Languages);// [{ LanguageId: 1, LanguageName: "Abkhaz" }, { LanguageId: 2, LanguageName: "Afar" }]);
+                        //              Languages.valueHasMutated();
+
+                        //              Countries.removeAll();
+                        //              ko.utils.arrayPushAll(Countries(), data.countriesAndCities);
+                        //              Countries.valueHasMutated();
+                        //          }
+
+                        //      },
+                        //      error: function (response) {
+
+                        //      }
+                        //  });
+
+                      },
+                     // Add new Profile Question
+                    addNewCampaign = function () {
+                        isEditorVisible(true);
+                    },
+                    closeNewCampaignDialog = function () {
+                        isEditorVisible(false);
+                    },
+                      saveCampaignData = function () {
+                          debugger;
+                        
+                          for (var i = 0; i < $('div.count_city_newcnt').length; i++)
+                          {
+                              debugger;
+                              var idOfEle = $('div.count_city_newcnt')[i].id;
+                            
+                              var res_array = idOfEle.split("_");
+                              if (res_array[1] == "City")
+                              {
+                                  cityidList.push(res_array[0]);
+                              } else if (res_array[1] == "Country") {
+                                  countoryidList.push(res_array[0]);
+                              }
+                          }
+
+                          for (var i = 0; i < $('div.lang_newcnt').length; i++) {
+                              langidList.push($('div.lang_newcnt')[i].id);
+                          }
+                         
+                          var campignServerObj = campaignModel().convertToServerData();
+                          campignServerObj.Countries = countoryidList;
+                          campignServerObj.Cities = cityidList;
+                          campignServerObj.Languages = langidList;
+                          dataservice.addCampaignData(campignServerObj
+                              , {
                               success: function (data) {
-                                  if (data != null) {
-                                      console.log(JSON.stringify(data.Languages));
-                                      Languages.removeAll();
-                                      ko.utils.arrayPushAll(Languages(), data.Languages);// [{ LanguageId: 1, LanguageName: "Abkhaz" }, { LanguageId: 2, LanguageName: "Afar" }]);
-                                      Languages.valueHasMutated();
-                                    
-
-                                      Countries.removeAll();
-                                      ko.utils.arrayPushAll(Countries(), data.Countries);
-                                      Countries.valueHasMutated();
-                                  }
-
+                               
                               },
                               error: function (response) {
 
@@ -56,10 +97,6 @@ define("ads/ads.viewModel",
                           });
 
                       },
-                     // Add new Profile Question
-                    addNewCampaign = function () {
-                        isEditorVisible(true);
-                    },
                 // Initialize the view model
                 initialize = function (specifiedView) {
                     view = specifiedView; 
@@ -73,11 +110,11 @@ define("ads/ads.viewModel",
                     pager: pager,
                     isEditorVisible:isEditorVisible,
                     advertGridContent: advertGridContent,
-                    addNewCampaign: addNewCampaign,
-                    CampaignType: CampaignType,
-                    validFromDate: validFromDate,
-                    validUptoDate: validUptoDate,
-                    Languages: Languages
+                    addNewCampaign: addNewCampaign,                   
+                    Languages: Languages,
+                    campaignModel: campaignModel,
+                    saveCampaignData: saveCampaignData,
+                    closeNewCampaignDialog: closeNewCampaignDialog
                 };
             })()
         };

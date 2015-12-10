@@ -17,7 +17,9 @@
             // SMD 
             "pQuestion": "/Areas/ProfileQuestion/Scripts",
             "ads": "/Areas/Ads/Scripts",
-            "survey": "/Areas/Survey/Scripts"
+            "addApproval": "/Areas/Ads/Scripts",
+            "survey": "/Areas/Survey/Scripts",
+            "surveyQuestionApp": "/Areas/Survey/Scripts"
         }
     });
 

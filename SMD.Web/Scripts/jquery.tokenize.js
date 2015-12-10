@@ -247,6 +247,7 @@
             }
 
             var $this = this;
+            
             var item = $('<li />')
                 .attr('data-value', value)
                 .attr('data-text', text)
@@ -495,6 +496,7 @@
             }
 
             var $this = this;
+            
             var close_btn = $('<a />')
                 .addClass('Close')
                 .html("&#215;")

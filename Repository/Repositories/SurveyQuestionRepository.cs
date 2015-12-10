@@ -1,5 +1,6 @@
 ﻿using Microsoft.Practices.Unity;
 using SMD.Interfaces.Repository;
+using SMD.Models.Common;
 using SMD.Models.DomainModels;
 using SMD.Models.RequestModels;
 using SMD.Repository.BaseRepository;
@@ -16,6 +17,18 @@ namespace SMD.Repository.Repositories
     public class SurveyQuestionRepository : BaseRepository<SurveyQuestion>, ISurveyQuestionRepository
     {
 
+        /// <summary>
+        /// Survey Question Orderby clause
+        /// </summary>
+        private readonly Dictionary<SurveyQuestionByColumn, Func<SurveyQuestion, object>> _surveyQuestionOrderByClause = 
+            new Dictionary<SurveyQuestionByColumn, Func<SurveyQuestion, object>>
+                    {
+                        {SurveyQuestionByColumn.Question, d => d.Question}  ,    
+                        {SurveyQuestionByColumn.Description, d => d.Description} ,     
+                        {SurveyQuestionByColumn.DisplayQuestion, d => d.DisplayQuestion}  ,    
+                        {SurveyQuestionByColumn.CreatiedBy, d => d.User.FullName} ,     
+                        {SurveyQuestionByColumn.SubmissionDate, d => d.SubmissionDate}      
+                    };
         public SurveyQuestionRepository(IUnityContainer container)
             : base(container)
         {
@@ -48,7 +61,7 @@ namespace SMD.Repository.Repositories
                 int fromRow = 0;
                 int toRow = 10;
                 rowCount = DbSet.Count();
-                return DbSet.OrderBy(g => g.SqId)
+                return DbSet.Where(g=>g.UserId == LoggedInUserIdentity).OrderBy(g => g.SqId)
                         .Skip(fromRow)
                         .Take(toRow)
                         .ToList();
@@ -59,10 +72,11 @@ namespace SMD.Repository.Repositories
                 int toRow = request.PageSize;
                 Expression<Func<SurveyQuestion, bool>> query =
                     question =>
-                        (string.IsNullOrEmpty(request.SearchString) ||
-                         (question.Question.Contains(request.SearchString)))
-                         && (question.CountryId == request.CountryFilter)
-                         && (question.LanguageId == request.LanguageFilter);
+                        (string.IsNullOrEmpty(request.SearchText) ||
+                         (question.Question.Contains(request.SearchText)))
+                         && (request.CountryFilter == 0 ||  question.CountryId == request.CountryFilter) 
+                         &&( question.UserId == LoggedInUserIdentity)
+                         && (request.LanguageFilter == 0 || question.LanguageId == request.LanguageFilter);
 
 
                 rowCount = DbSet.Count(query);
@@ -73,5 +87,28 @@ namespace SMD.Repository.Repositories
             }
         }
 
+        /// <summary>
+        /// Get Rejected Survey Questions
+        /// </summary>
+        public IEnumerable<SurveyQuestion> SearchRejectedProfileQuestions(SurveySearchRequest request, out int rowCount)
+        {
+            int fromRow = (request.PageNo - 1) * request.PageSize;
+            int toRow = request.PageSize;
+            Expression<Func<SurveyQuestion, bool>> query =
+                question => question.Status == (Int32)AdCampaignStatus.SubmitForApproval;
+
+            rowCount = DbSet.Count(query);
+            return request.IsAsc
+                ? DbSet.Where(query)
+                    .OrderBy(_surveyQuestionOrderByClause[request.SurveyQuestionOrderBy])
+                    .Skip(fromRow)
+                    .Take(toRow)
+                    .ToList()
+                : DbSet.Where(query)
+                    .OrderByDescending(_surveyQuestionOrderByClause[request.SurveyQuestionOrderBy])
+                    .Skip(fromRow)
+                    .Take(toRow)
+                    .ToList();
+        }
     }
 }

@@ -13,7 +13,12 @@ namespace SMD.MIS.Areas.Survey.Controllers
         {
             return View();
         }
-        public ActionResult EditSurvery()
+      
+
+        /// <summary>
+        /// Manage Survey Question Approval Action 
+        /// </summary>
+        public ActionResult SurveyQuestionApproval()
         {
             return View();
         }

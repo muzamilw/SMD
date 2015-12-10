@@ -13,5 +13,8 @@ namespace SMD.Interfaces.Services
     {
         List<CampaignGridModel> GetCampaignByUserId();
         AdCampaignBaseResponse GetCampaignBaseData();
+        AdCampaignBaseResponse SearchCountriesAndCities(string searchString);
+        AdCampaignBaseResponse SearchLanguages(string searchString);
+        bool AddCampaign(AdCampaign campaignModel);
     }
 }

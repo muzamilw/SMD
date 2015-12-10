@@ -17,5 +17,12 @@ namespace SMD.MIS.Areas.ProfileQuestion.Controllers
         {
             return View();
         }
+
+        //
+        // GET: /ProfileQuestion/Manage/
+        public ActionResult PaypalExample()
+        {
+            return View();
+        }
 	}
 }

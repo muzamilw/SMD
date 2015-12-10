@@ -102,6 +102,8 @@
     <Compile Include="Common\AccessRight.cs" />
     <Compile Include="Common\AccessRightClaimValue.cs" />
     <Compile Include="Common\ActiveModuleMenuItem.cs" />
+    <Compile Include="Common\AdCampaignByColumn.cs" />
+    <Compile Include="Common\SurveyQuestionByColumn.cs" />
     <Compile Include="Common\ProfileQuestionByColumn.cs" />
     <Compile Include="Common\SecurityRoles.cs" />
     <Compile Include="Common\StringHelper.cs" />
@@ -116,6 +118,7 @@
     <Compile Include="DomainModels\AdCampaignTargetCriteria.cs" />
     <Compile Include="DomainModels\AdCampaignTargetLocation.cs" />
     <Compile Include="DomainModels\AuditLog.cs" />
+    <Compile Include="DomainModels\City.cs" />
     <Compile Include="DomainModels\Country.cs" />
     <Compile Include="DomainModels\Language.cs" />
     <Compile Include="DomainModels\ProfileQuestion.cs" />
@@ -152,6 +155,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Common\CampaignGridModel.cs" />
+    <Compile Include="RequestModels\AdCampaignSearchRequest.cs" />
+    <Compile Include="RequestModels\MakePaypalPaymentRequest.cs" />
     <Compile Include="RequestModels\StripeChargeCustomerRequest.cs" />
     <Compile Include="RequestModels\GetPagedListRequest.cs" />
     <Compile Include="RequestModels\ExternalLoginRequest.cs" />
@@ -162,6 +167,7 @@
     <Compile Include="ResponseModels\ProfileQuestionBaseResponse.cs" />
     <Compile Include="ResponseModels\ProfileQuestionSearchRequestResponse.cs" />
     <Compile Include="ResponseModels\SurveyQuestionResponseModel.cs" />
+    <Compile Include="ResponseModels\SurveyQuestionResposneModelForAproval.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">
