@@ -29,6 +29,16 @@ namespace SMD.MIS.ModelMappers
         /// </summary>
         public static SurveyQuestion CreateFrom(this Models.DomainModels.SurveyQuestion source)
         {
+            string leftPath = source.LeftPicturePath;
+            if (!source.LeftPicturePath.Contains("http"))
+            {
+                leftPath = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + source.LeftPicturePath;
+            }
+            string rightPath = source.RightPicturePath;
+            if (!source.RightPicturePath.Contains("http"))
+            {
+                rightPath = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + source.RightPicturePath;
+            }
             return new SurveyQuestion
             {
                 SqId = source.SqId,
@@ -47,12 +57,16 @@ namespace SMD.MIS.ModelMappers
                 ApprovalDate = source.ApprovalDate,
                 CreationDate = source.CreationDate,
                 ModifiedDate = source.ModifiedDate,
-                LeftPicturePath = source.LeftPicturePath,
-                RightPicturePath = source.RightPicturePath,
+                LeftPicturePath = leftPath,
+                RightPicturePath = rightPath,
                 DiscountVoucherApplied = source.DiscountVoucherApplied,
                 VoucherCode = source.VoucherCode,
                 DiscountVoucherId = source.DiscountVoucherId,
-                RejectionReason = source.RejectionReason
+                RejectionReason = source.RejectionReason,
+                SubmissionDate = source.SubmissionDate,
+                CreatedBy = source.User.FullName,
+                CreatorAddress= source.User.State + " "+ source.User.Address1
+                
             };
         }
 
@@ -85,7 +99,8 @@ namespace SMD.MIS.ModelMappers
                 DiscountVoucherApplied = source.DiscountVoucherApplied,
                 VoucherCode = source.VoucherCode,
                 DiscountVoucherId = source.DiscountVoucherId,
-                RejectionReason = source.RejectionReason
+                RejectionReason = source.RejectionReason,
+                SubmissionDate = source.SubmissionDate,
             };
         }
 

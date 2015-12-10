@@ -84,6 +84,13 @@ define("surveyQuestionApp/surveyQuestionApp.viewModel",
                         }
                         return (selectedQuestion().hasChanges());
                     }),
+                    onRejectQuestion= function() {
+                        if (selectedQuestion().rejectionReason() == undefined || selectedQuestion().rejectionReason() == "" || selectedQuestion().rejectionReason() == " ") {
+                            toastr.info("Please add rejection reason!");
+                            return false;
+                        }
+                        onSaveQuestion();
+                    },
                     // Initialize the view model
                     initialize = function (specifiedView) {
                         view = specifiedView;
@@ -105,7 +112,8 @@ define("surveyQuestionApp/surveyQuestionApp.viewModel",
                     onEditQuestion: onEditQuestion,
                     selectedQuestion: selectedQuestion,
                     onSaveQuestion: onSaveQuestion,
-                    hasChangesOnQuestion: hasChangesOnQuestion
+                    hasChangesOnQuestion: hasChangesOnQuestion,
+                    onRejectQuestion: onRejectQuestion
                 };
             })()
         };

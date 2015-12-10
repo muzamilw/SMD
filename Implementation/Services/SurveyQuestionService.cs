@@ -1,5 +1,6 @@
 ﻿using SMD.Interfaces.Repository;
 using SMD.Interfaces.Services;
+using SMD.Models.Common;
 using SMD.Models.DomainModels;
 using SMD.Models.RequestModels;
 using SMD.Models.ResponseModels;
@@ -84,14 +85,17 @@ namespace SMD.Implementation.Services
             var dbServey=surveyQuestionRepository.Find(source.SqId);
             if (dbServey != null)
             {
-                dbServey.Approved = source.Approved;
+               // Approved 
                 if (source.Approved == true)
                 {
+                    dbServey.Approved = source.Approved;
                     dbServey.ApprovalDate = source.ApprovalDate;
                     dbServey.ApprovedByUserId = surveyQuestionRepository.LoggedInUserIdentity;
-                }
+                    dbServey.Status = (Int32)AdCampaignStatus.Live;
+                } // Rejected 
                 else
                 {
+                    dbServey.Status = (Int32)AdCampaignStatus.ApprovalRejected;
                     dbServey.Approved = false;
                     dbServey.RejectionReason = source.RejectionReason;
                 }

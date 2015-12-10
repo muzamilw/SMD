@@ -93,7 +93,7 @@ namespace SMD.Repository.Repositories
             int fromRow = (request.PageNo - 1) * request.PageSize;
             int toRow = request.PageSize;
             Expression<Func<SurveyQuestion, bool>> query =
-                question => question.Approved==false;
+                question => question.Status == (Int32)AdCampaignStatus.SubmitForApproval;
 
             rowCount = DbSet.Count(query);
             return request.IsAsc
