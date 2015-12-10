@@ -1,5 +1,6 @@
 ﻿using Microsoft.Practices.Unity;
 using SMD.Interfaces.Repository;
+using SMD.Models.Common;
 using SMD.Models.DomainModels;
 using SMD.Models.RequestModels;
 using SMD.Repository.BaseRepository;
@@ -16,6 +17,18 @@ namespace SMD.Repository.Repositories
     public class SurveyQuestionRepository : BaseRepository<SurveyQuestion>, ISurveyQuestionRepository
     {
 
+        /// <summary>
+        /// Survey Question Orderby clause
+        /// </summary>
+        private readonly Dictionary<SurveyQuestionByColumn, Func<SurveyQuestion, object>> _surveyQuestionOrderByClause = 
+            new Dictionary<SurveyQuestionByColumn, Func<SurveyQuestion, object>>
+                    {
+                        {SurveyQuestionByColumn.Question, d => d.Question}  ,    
+                        {SurveyQuestionByColumn.Description, d => d.Description} ,     
+                        {SurveyQuestionByColumn.DisplayQuestion, d => d.DisplayQuestion}  ,    
+                        {SurveyQuestionByColumn.CreatiedBy, d => d.User.FullName} ,     
+                        {SurveyQuestionByColumn.SubmissionDate, d => d.SubmissionDate}      
+                    };
         public SurveyQuestionRepository(IUnityContainer container)
             : base(container)
         {
@@ -74,5 +87,28 @@ namespace SMD.Repository.Repositories
             }
         }
 
+        /// <summary>
+        /// Get Rejected Survey Questions
+        /// </summary>
+        public IEnumerable<SurveyQuestion> SearchRejectedProfileQuestions(SurveySearchRequest request, out int rowCount)
+        {
+            int fromRow = (request.PageNo - 1) * request.PageSize;
+            int toRow = request.PageSize;
+            Expression<Func<SurveyQuestion, bool>> query =
+                question => question.Status == (Int32)AdCampaignStatus.SubmitForApproval;
+
+            rowCount = DbSet.Count(query);
+            return request.IsAsc
+                ? DbSet.Where(query)
+                    .OrderBy(_surveyQuestionOrderByClause[request.SurveyQuestionOrderBy])
+                    .Skip(fromRow)
+                    .Take(toRow)
+                    .ToList()
+                : DbSet.Where(query)
+                    .OrderByDescending(_surveyQuestionOrderByClause[request.SurveyQuestionOrderBy])
+                    .Skip(fromRow)
+                    .Take(toRow)
+                    .ToList();
+        }
     }
 }

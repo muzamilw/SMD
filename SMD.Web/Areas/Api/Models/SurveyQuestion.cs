@@ -5,6 +5,9 @@ using System.Web;
 
 namespace SMD.MIS.Areas.Api.Models
 {
+    /// <summary>
+    /// Web Model 
+    /// </summary>
     public class SurveyQuestion
     {
         public long SqId { get; set; }
@@ -29,6 +32,9 @@ namespace SMD.MIS.Areas.Api.Models
         public string VoucherCode { get; set; }
         public long? DiscountVoucherId { get; set; }
         public string RejectionReason { get; set; }
+        public DateTime? SubmissionDate { get; set; }
+        public string CreatedBy { get; set; }
+        public string CreatorAddress { get; set; }
 
     }
 }
