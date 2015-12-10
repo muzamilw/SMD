@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="b6ef084096a74d0cbd3034e3cafbef32" Name="Diagram1" ZoomLevel="75">
+      <Diagram DiagramId="b6ef084096a74d0cbd3034e3cafbef32" Name="Diagram1" ZoomLevel="128">
         <EntityTypeShape EntityType="DomainModels.Role" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DomainModels.UserLogin" Width="1.5" PointX="5.25" PointY="5.625" IsExpanded="true" />
         <EntityTypeShape EntityType="DomainModels.User" Width="2.125" PointX="3" PointY="1.375" IsExpanded="true" />
@@ -54,6 +54,10 @@
         <EntityTypeShape EntityType="DomainModels.SurveyQuestionResponse" Width="1.5" PointX="15.25" PointY="8.5" />
         <AssociationConnector Association="DomainModels.FK_SurveyQuestionResponse_AspNetUsers" />
         <AssociationConnector Association="DomainModels.FK_SurveyQuestionResponse_SurveyQuestion" />
+        <EntityTypeShape EntityType="DomainModels.City" Width="1.5" PointX="8.125" PointY="17" />
+        <AssociationConnector Association="DomainModels.FK_AdCampaignTargetLocation_City" />
+        <AssociationConnector Association="DomainModels.FK_City_Country" />
+        <AssociationConnector Association="DomainModels.FK_SurveyQuestionTargetLocation_City" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
