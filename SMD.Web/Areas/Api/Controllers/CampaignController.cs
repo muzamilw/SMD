@@ -1,5 +1,6 @@
 ﻿using SMD.Interfaces.Services;
 using SMD.Models.Common;
+using SMD.Models.DomainModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +36,11 @@ namespace SMD.MIS.Areas.Api.Controllers
             return _campaignService.GetCampaignByUserId();
         }
 
+        
+        public void Post(AdCampaign campaignModel)
+        {
+           
+        }
         #endregion
     }
 }

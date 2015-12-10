@@ -370,6 +370,7 @@
       <DependentUpon>LanguageResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\Api\ModelMappers\WebApiUserMapper.cs" />
+    <Compile Include="Areas\Api\Models\LocationDropDown.cs" />
     <Compile Include="Areas\Api\Models\SurveyQuestion.cs" />
     <Compile Include="Areas\Api\Models\AdCampaignBaseResponse.cs" />
     <Compile Include="Areas\Api\Models\SurveyQuestionRequestResponseModel.cs" />

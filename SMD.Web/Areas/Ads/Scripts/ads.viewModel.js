@@ -12,11 +12,9 @@ define("ads/ads.viewModel",
                      pager = ko.observable(),
                        // Controlls editor visibility 
                     isEditorVisible = ko.observable(true),
-                    CampaignType = ko.observable('1'),
-                    validFromDate = ko.observable(),
-                    validUptoDate = ko.observable(),
                     Languages = ko.observableArray([]),
                     Countries = ko.observableArray([]),
+                    campaignModel = ko.observable(new model.campaignModel()),
                     getAdCampaignGridContent = function () {
                         dataservice.getCampaignData({}, {
                             success: function (data) {
@@ -58,6 +56,22 @@ define("ads/ads.viewModel",
                     addNewCampaign = function () {
                         isEditorVisible(true);
                     },
+                    closeNewCampaignDialog = function () {
+                        isEditorVisible(false);
+                    },
+                      saveCampaignData = function () {
+                          console.log(campaignModel());
+                         
+                          dataservice.addCampaignData(campaignModel().convertToServerData(), {
+                              success: function (data) {
+                               
+                              },
+                              error: function (response) {
+
+                              }
+                          });
+
+                      },
                 // Initialize the view model
                 initialize = function (specifiedView) {
                     view = specifiedView; 
@@ -71,12 +85,12 @@ define("ads/ads.viewModel",
                     pager: pager,
                     isEditorVisible:isEditorVisible,
                     advertGridContent: advertGridContent,
-                    addNewCampaign: addNewCampaign,
-                    CampaignType: CampaignType,
-                    validFromDate: validFromDate,
-                    validUptoDate: validUptoDate,
+                    addNewCampaign: addNewCampaign,                   
                     Languages: Languages,
-                    Countries: Countries
+                    Countries: Countries,
+                    campaignModel: campaignModel,
+                    saveCampaignData: saveCampaignData,
+                    closeNewCampaignDialog: closeNewCampaignDialog
                 };
             })()
         };

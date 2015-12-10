@@ -21,8 +21,8 @@
                     <div class="pull-right top-page-ui" style="margin-right:5px;margin-bottom:5px;">
 
                         <div class="btn-group">
-                            <button class="btn  btn-info" id="saveBtn">Save</button>
-                            <button class="btn btn-default" id="saveBtn" data-bind="click: $root.closeEditDialog">Close</button>
+                            <button class="btn  btn-info" id="saveBtn" data-bind="click:$root.saveCampaignData">Save</button>
+                            <button class="btn btn-default" id="saveBtn" data-bind="click: $root.closeNewCampaignDialog">Close</button>
                         </div>
 
                     </div>
@@ -31,8 +31,8 @@
         </div>
         <div class="row">
             <div class="col-lg-12">
-                <div class="main-box no-header clearfix" >
-                    <div class="col-lg-12 form-horizontal" style="    padding: 20px;">
+                <div class="main-box no-header clearfix">
+                    <div class="col-lg-12 form-horizontal" data-bind="with: $root.campaignModel" style="padding: 20px;">
                         <div class="tabsdescriptions" style="margin-left:3px;">
                             <div class="col-lg-9" style="padding-left: 0 !important;">
                                 <p class="group-header-description" style="margin-top:-1px;">
@@ -50,7 +50,7 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="onoffswitchlive" style="margin-right:0; margin-top: -4px;">
-                                        <input type="checkbox" name="onoffswitch" class="onoffswitchlive-checkbox" id="switchIsAdArchived">
+                                        <input type="checkbox" name="onoffswitch" class="onoffswitchlive-checkbox" id="switchIsAdArchived" data-bind="checked: Archived">
                                         <label class="onoffswitchlive-label" for="switchStoreLive">
                                             <div class="onoffswitchlive-inner"></div>
                                             <div class="onoffswitchlive-switch"></div>
@@ -68,7 +68,7 @@
                                     <label for="txtCampaignName" class="control-label text-right tooltip-float">Campaign Name</label>
                                 </div>
                                 <div class="col-lg-6">
-                                    <input type="text" name="Campaign Name" class="form-control" id="txtCampaignName" placeholder="Enter Campaign Name">
+                                    <input type="text" name="Campaign Name" class="form-control" id="txtCampaignName" placeholder="Enter Campaign Name" data-bind="value: CampaignName">
 
                                 </div>
                             </div>
@@ -78,7 +78,7 @@
                                     <label for="txtCampaignDisplayName" class="control-label text-right tooltip-float">Campaign Display Name</label>
                                 </div>
                                 <div class="col-lg-6">
-                                    <input type="text" style="height:60px;" name="Campaign Display Name" class="form-control height60 font24px" id="txtCampaignDisplayName" placeholder="Campaign Display Name">
+                                    <input type="text" style="height:60px;" name="Campaign Display Name" class="form-control height60 font24px" id="txtCampaignDisplayName" placeholder="Campaign Display Name" data-bind="value: DisplayTitle">
 
                                 </div>
                             </div>
@@ -88,7 +88,7 @@
                                     <label for="txtCampaignDesc" class="control-label text-right tooltip-float">Campaign Description</label>
                                 </div>
                                 <div class="col-lg-6">
-                                    <textarea class="form-control" id="txtCampaignDesc" rows="5" placeholder="Enter Description"></textarea>
+                                    <textarea class="form-control" id="txtCampaignDesc" rows="5" placeholder="Enter Description" data-bind="value: CampaignDescription"></textarea>
 
                                 </div>
                             </div>
@@ -104,13 +104,13 @@
                                 <div class="col-lg-6">
                                     <div class="col-lg-12" style="margin-left:-10px;">
                                         <div class="radio">
-                                            <input type="radio" name="optionsRadiosStoreType" id="optionsRadiosVideos" value="1" data-bind="checked: $root.CampaignType">
+                                            <input type="radio" name="optionsRadiosStoreType" id="optionsRadiosVideos" value="1" data-bind="checked: Type">
                                             <label for="optionsRadiosVideos">
                                                 Video
                                             </label>
                                         </div>
                                         <div class="radio">
-                                            <input type="radio" name="optionsRadiosStoreType" id="optionsRadiosLink" value="2" data-bind="checked: $root.CampaignType">
+                                            <input type="radio" name="optionsRadiosStoreType" id="optionsRadiosLink" value="2" data-bind="checked: Type">
                                             <label for="optionsRadiosLink">
                                                 Link
                                             </label>
@@ -118,7 +118,7 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-12" style="margin-left:-10px;">
-                                        <input type="text" class="form-control" id="txtLinkOfCampaign" placeholder="Enter a link">
+                                        <input type="text" class="form-control" id="txtLinkOfCampaign" placeholder="Enter a link" data-bind="value: LandingPageVideoLink">
 
                                     </div>
                                 </div>
@@ -133,7 +133,7 @@
                                     <label for="txtAge" class="control-label text-right tooltip-float">Age</label>
                                 </div>
                                 <div class="col-lg-2">
-                                    <select class="form-control">
+                                    <select class="form-control" data-bind="value: AgeRangeStart">
                                         <option>1</option>
                                         <option>2</option>
                                         <option>3</option>
@@ -142,10 +142,10 @@
                                     </select>
                                 </div>
                                 <div class="pull-left" style="width:10px;">
-                                   -
+                                    -
                                 </div>
                                 <div class="col-lg-2">
-                                    <select class="form-control">
+                                    <select class="form-control" data-bind="value: AgeRangeEnd">
                                         <option>1</option>
                                         <option>2</option>
                                         <option>3</option>
@@ -166,13 +166,13 @@
                                 <div class="col-lg-6">
                                     <div class="btn-group" data-toggle="buttons">
                                         <label class="btn btn-primary">
-                                            <input type="radio" name="genderoptions" id="GALL">All
+                                            <input type="radio" name="genderoptions" id="GALL" value="1" data-bind="checked: Gender">All
                                         </label>
                                         <label class="btn btn-primary">
-                                            <input type="radio" name="genderoptions" id="GMen">Men
+                                            <input type="radio" name="genderoptions" id="GMen" value="2" data-bind="checked: Gender">Men
                                         </label>
                                         <label class="btn btn-primary active">
-                                            <input type="radio" name="genderoptions" id="GWomen">Women
+                                            <input type="radio" name="genderoptions" id="GWomen" value="3" data-bind="checked: Gender">Women
                                         </label>
                                     </div>
                                 </div>
@@ -186,7 +186,7 @@
                                     </div>
                                     <label for="txtCountries" class="control-label text-right tooltip-float">Locations</label>
                                 </div>
-                                <div  class="col-lg-6">
+                                <div class="col-lg-6">
                                     <div id="coun_token_cnt" style="display:none;"></div>
                                     <div id="count_edt">
                                         <div class="coun_in_ex_cnt">
@@ -199,16 +199,16 @@
 
                                         </div>
                                         <div class="count_token_opt_cnt">
-                                            <select id="tokenizeCountries" multiple="multiple" class="tokenize-sample" data-bind="options: $root.Countries, optionsText: 'CountryName', optionsValue: 'CountryId'" ></select>
+                                            <select id="tokenizeCountries" multiple="multiple" class="tokenize-sample" data-bind="options: $root.Countries, optionsText: 'CountryName', optionsValue: 'CountryId'"></select>
 
                                         </div>
                                         <div class="clearfix">
 
                                         </div>
                                     </div>
-                                    
+
                                 </div>
-                               
+
                             </div>
                             <div class="form-group">
                                 <div class="col-lg-3 text-right">
@@ -245,7 +245,7 @@
                                     <label for="txtBudget" class="control-label text-right tooltip-float">Budget</label>
                                 </div>
                                 <div class="col-lg-6">
-                                    <input type="text" name="Budget" class="form-control" id="txtBudget">
+                                    <input type="text" name="Budget" class="form-control" id="txtBudget" data-bind="value: MaxBudget">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -263,16 +263,16 @@
                                             <label for="validFromDate" class="control-label text-right tooltip-float">Start Date</label>
                                         </div>
                                         <div class="col-sm-6">
-                                            <input type="text" class="form-control" id="validFromDate" data-bind="datetimepicker:$root.validFromDate">
+                                            <input type="text" class="form-control" id="validFromDate" data-bind="datetimepicker:StartDateTime">
                                         </div>
-                                       
+
                                     </div>
                                     <div class="form-group ">
                                         <div class="col-sm-4 text-right">
                                             <label for="validUptoDate" class="control-label text-right tooltip-float">End Date</label>
                                         </div>
                                         <div class="col-sm-6">
-                                            <input type="text" class="form-control" id="validUptoDate" data-bind="datetimepicker:$root.validUptoDate">
+                                            <input type="text" class="form-control" id="validUptoDate" data-bind="datetimepicker:EndDateTime">
                                         </div>
                                     </div>
 
@@ -289,7 +289,7 @@
                                     <label for="txtVerifyQuestion" class="control-label text-right tooltip-float">Enter your question</label>
                                 </div>
                                 <div class="col-lg-6">
-                                    <input type="text" class="form-control" id="txtVerifyQuestion" placeholder="Enter your question">
+                                    <input type="text" class="form-control" id="txtVerifyQuestion" placeholder="Enter your question" data-bind="value: VerifyQuestion">
 
                                 </div>
                             </div>
@@ -303,7 +303,7 @@
                                     <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float">Answer 1</label>
                                 </div>
                                 <div class="col-lg-6">
-                                    <input type="text" class="form-control" id="txtVerifyAnswer1" placeholder="Enter your answer 1">
+                                    <input type="text" class="form-control" id="txtVerifyAnswer1" placeholder="Enter your answer 1" data-bind="value: Answer1">
 
                                 </div>
                             </div>
@@ -317,7 +317,7 @@
                                     <label for="txtVerifyAnswer2" class="control-label text-right tooltip-float">Answer 2</label>
                                 </div>
                                 <div class="col-lg-6">
-                                    <input type="text" class="form-control" id="txtVerifyAnswer2" placeholder="Enter your answer 2">
+                                    <input type="text" class="form-control" id="txtVerifyAnswer2" placeholder="Enter your answer 2" data-bind="value: Answer2">
 
                                 </div>
                             </div>
@@ -331,7 +331,7 @@
                                     <label for="txtVerifyAnswer3" class="control-label text-right tooltip-float">Answer 3</label>
                                 </div>
                                 <div class="col-lg-6">
-                                    <input type="text" class="form-control" id="txtVerifyAnswer3" placeholder="Enter your answer 3">
+                                    <input type="text" class="form-control" id="txtVerifyAnswer3" placeholder="Enter your answer 3" data-bind="value: Answer3">
 
                                 </div>
                             </div>
@@ -345,32 +345,32 @@
                                     <label for="txtCorrectAnswer" class="control-label text-right tooltip-float">Correct Answer</label>
                                 </div>
                                 <div class="col-lg-6">
-                                    <input type="text" class="form-control" id="txtCorrectAnswer" placeholder="Enter your correct answer">
+                                    <input type="text" class="form-control" id="txtCorrectAnswer" placeholder="Enter your correct answer" data-bind="value: CorrectAnswer">
 
                                 </div>
                             </div>
-                        
+
                         </div>
 
                         <div class="col-lg-3 col-md-4 col-sm-4">
                             <div>
-                              
+
                                 <div class="clearfix">
 
                                     <div class="col-lg-12">
-                                      
+
                                         <div style="width:210px;text-align:center;">
                                             <img src="/Content/Images/Company_Default.png">
                                         </div>
-                                       
+
                                     </div>
 
                                     <div class="col-lg-12" style="margin-top:15px;text-align:center;width:240px;padding-right:0px;">
                                         <div class="col-lg-5" style="padding-right:10px;">
                                             <div class="bs-example-tooltips tooltip-float-width">
                                                 <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="left" data-html="true" data-content="" data-original-title="" title="">
-                                                                <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                            </a>
+                                                    <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                </a>
                                             </div>
                                         </div>
                                         <div class="col-lg-6" style="text-align:left;">
@@ -382,21 +382,12 @@
 
                                     </div>
                                     <div class="col-lg-12 ThoumbnailCostCenter" style="text-align:center;margin-top:5px;width:240px;margin-left:5px;">
-                                    
-                                    </div>
-                                    <div class="profile-stars">
-                                        <span data-bind="value: type"></span>
+
                                     </div>
 
                                 </div>
-
-
-
-
-
                             </div>
                         </div>
-
                     </div>
 
                 </div>
