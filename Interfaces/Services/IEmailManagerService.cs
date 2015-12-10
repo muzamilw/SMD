@@ -32,5 +32,17 @@ namespace SMD.Interfaces.Services
         /// Send Invoice
         /// </summary>
         bool SendInovice();
+
+
+        /// <summary>
+        /// Send Email on Question Approval 
+        /// </summary>
+        Task SendQuestionApprovalEmail(string aspnetUserId);
+
+
+        /// <summary>
+        ///Send Email on Question Rejection 
+        /// </summary>
+        Task SendQuestionRejectionEmail(string aspnetUserId);
     }
 }

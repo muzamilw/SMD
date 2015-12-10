@@ -23,6 +23,7 @@ namespace SMD.Implementation.Services
         private readonly ISurveyQuestionRepository surveyQuestionRepository;
         private readonly ICountryRepository countryRepository;
         private readonly ILanguageRepository languageRepository;
+        private readonly IEmailManagerService emailManagerService;
 
         #endregion
 
@@ -31,10 +32,11 @@ namespace SMD.Implementation.Services
         /// <summary>
         ///  Constructor
         /// </summary>
-        public SurveyQuestionService(ISurveyQuestionRepository _surveyQuestionRepository, ICountryRepository _countryRepository, ILanguageRepository _languageRepository)
+        public SurveyQuestionService(ISurveyQuestionRepository _surveyQuestionRepository, ICountryRepository _countryRepository, ILanguageRepository _languageRepository, IEmailManagerService emailManagerService)
         {
             this.surveyQuestionRepository = _surveyQuestionRepository;
             this.languageRepository = _languageRepository;
+            this.emailManagerService = emailManagerService;
             this.countryRepository = _countryRepository;
         }
 
@@ -65,7 +67,7 @@ namespace SMD.Implementation.Services
         }
 
         /// <summary>
-        /// Get Survey Questions that are need aprroval
+        /// Get Survey Questions that need aprroval | baqer
         /// </summary>
         public SurveyQuestionResposneModelForAproval GetRejectedSurveyQuestionsForAproval(SurveySearchRequest request)
         {
@@ -78,7 +80,7 @@ namespace SMD.Implementation.Services
         }
 
         /// <summary>
-        /// Edit Survey Question 
+        /// Edit Survey Question | baqer
         /// </summary>
         public SurveyQuestion EditSurveyQuestion(SurveyQuestion source)
         {
@@ -92,12 +94,15 @@ namespace SMD.Implementation.Services
                     dbServey.ApprovalDate = source.ApprovalDate;
                     dbServey.ApprovedByUserId = surveyQuestionRepository.LoggedInUserIdentity;
                     dbServey.Status = (Int32)AdCampaignStatus.Live;
+                    emailManagerService.SendQuestionApprovalEmail(dbServey.UserId);
+
                 } // Rejected 
                 else
                 {
                     dbServey.Status = (Int32)AdCampaignStatus.ApprovalRejected;
                     dbServey.Approved = false;
                     dbServey.RejectionReason = source.RejectionReason;
+                    emailManagerService.SendQuestionRejectionEmail(dbServey.UserId);
                 }
                 dbServey.ModifiedDate = DateTime.Now;
                 dbServey.ModifiedBy = surveyQuestionRepository.LoggedInUserIdentity;

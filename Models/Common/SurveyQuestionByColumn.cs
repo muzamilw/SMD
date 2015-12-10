@@ -9,7 +9,9 @@ namespace SMD.Models.Common
        
         Question=1,
         Description=2,
-        DisplayQuestion=3
+        DisplayQuestion=3,
+        CreatiedBy=4,
+        SubmissionDate=5
        
     }
 }

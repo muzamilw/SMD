@@ -40,7 +40,9 @@
         DeveloperDueDate = 15,
         DeveloperQuestion = 16,
         ResetPassword = 9,
-        RegistrationConfirmed = 1
+        RegistrationConfirmed = 1,
+        QuestionApproved = 10,
+        QuestionRejected = 11
     }
 
     public enum AdCampaignType

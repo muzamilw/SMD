@@ -25,7 +25,9 @@ namespace SMD.Repository.Repositories
                     {
                         {SurveyQuestionByColumn.Question, d => d.Question}  ,    
                         {SurveyQuestionByColumn.Description, d => d.Description} ,     
-                        {SurveyQuestionByColumn.DisplayQuestion, d => d.DisplayQuestion}      
+                        {SurveyQuestionByColumn.DisplayQuestion, d => d.DisplayQuestion}  ,    
+                        {SurveyQuestionByColumn.CreatiedBy, d => d.User.FullName} ,     
+                        {SurveyQuestionByColumn.SubmissionDate, d => d.SubmissionDate}      
                     };
         public SurveyQuestionRepository(IUnityContainer container)
             : base(container)
