@@ -12,5 +12,7 @@ namespace SMD.Interfaces.Repository
         /// Get List of Coutries 
         /// </summary>
         IEnumerable<Country> GetAllCountries();
+
+        IEnumerable<Country> GetSearchedCountries(string searchString);
     }
 }

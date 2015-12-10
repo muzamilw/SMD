@@ -126,7 +126,7 @@
                 onAddToken: function (value, text, e) {
 
                     $(".Token .Close").click();
-                    
+                    console.log(value);
                     var count = "count_" + $('#coun_token_cnt').children().length + 1;
                     var htmlToAppend = '<div class="lang_newcnt"  id="' + count + '"><input type="text"  class="form-control lang_nr_box" readonly="readonly" value=' + text + '><a id="deleteToken' + count + '" onclick=RemoveCountryToken("' + count + '"); title="Delete" class="lang_del"> <i class="fa fa-times "></i></a></div>';
                    

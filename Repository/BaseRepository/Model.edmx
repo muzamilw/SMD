@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="SMDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SMDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AdCampaign">
           <Key>
             <PropertyRef Name="CampaignID" />
@@ -61,7 +61,7 @@
           <Key>
             <PropertyRef Name="CriteriaID" />
           </Key>
-          <Property Name="CriteriaID" Type="bigint" Nullable="false" />
+          <Property Name="CriteriaID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CampaignID" Type="bigint" />
           <Property Name="Type" Type="int" />
           <Property Name="PQID" Type="int" />
@@ -174,6 +174,17 @@
           <Property Name="AuditEntity" Type="bigint" />
           <Property Name="AuditEntityDescription" Type="nvarchar" MaxLength="500" />
           <Property Name="TableName" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="CityID" />
+          </Key>
+          <Property Name="CityID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CityName" Type="nvarchar" MaxLength="200" />
+          <Property Name="IsCapital" Type="bit" />
+          <Property Name="CountryID" Type="int" />
+          <Property Name="GeoLONG" Type="nvarchar" MaxLength="100" />
+          <Property Name="GeoLAT" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="Country">
           <Key>
@@ -428,6 +439,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_AdCampaignTargetLocation_City">
+          <End Role="City" Type="Self.City" Multiplicity="0..1" />
+          <End Role="AdCampaignTargetLocation" Type="Self.AdCampaignTargetLocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="CityID" />
+            </Principal>
+            <Dependent Role="AdCampaignTargetLocation">
+              <PropertyRef Name="CityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_AdCampaignTargetLocation_Country">
           <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
           <End Role="AdCampaignTargetLocation" Type="Self.AdCampaignTargetLocation" Multiplicity="*" />
@@ -436,6 +459,18 @@
               <PropertyRef Name="CountryID" />
             </Principal>
             <Dependent Role="AdCampaignTargetLocation">
+              <PropertyRef Name="CountryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_City_Country">
+          <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
+          <End Role="City" Type="Self.City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="CountryID" />
+            </Principal>
+            <Dependent Role="City">
               <PropertyRef Name="CountryID" />
             </Dependent>
           </ReferentialConstraint>
@@ -676,6 +711,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_SurveyQuestionTargetLocation_City">
+          <End Role="City" Type="Self.City" Multiplicity="0..1" />
+          <End Role="SurveyQuestionTargetLocation" Type="Self.SurveyQuestionTargetLocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="CityID" />
+            </Principal>
+            <Dependent Role="SurveyQuestionTargetLocation">
+              <PropertyRef Name="CityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_SurveyQuestionTargetLocation_Country">
           <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
           <End Role="SurveyQuestionTargetLocation" Type="Self.SurveyQuestionTargetLocation" Multiplicity="*" />
@@ -711,6 +758,7 @@
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AuditLog" EntityType="Self.AuditLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Language" EntityType="Self.Language" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProfileQuestion" EntityType="Self.ProfileQuestion" Schema="dbo" store:Type="Tables" />
@@ -754,9 +802,17 @@
             <End Role="AdCampaign" EntitySet="AdCampaign" />
             <End Role="AdCampaignTargetLocation" EntitySet="AdCampaignTargetLocation" />
           </AssociationSet>
+          <AssociationSet Name="FK_AdCampaignTargetLocation_City" Association="Self.FK_AdCampaignTargetLocation_City">
+            <End Role="City" EntitySet="City" />
+            <End Role="AdCampaignTargetLocation" EntitySet="AdCampaignTargetLocation" />
+          </AssociationSet>
           <AssociationSet Name="FK_AdCampaignTargetLocation_Country" Association="Self.FK_AdCampaignTargetLocation_Country">
             <End Role="Country" EntitySet="Country" />
             <End Role="AdCampaignTargetLocation" EntitySet="AdCampaignTargetLocation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_City_Country" Association="Self.FK_City_Country">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="City" EntitySet="City" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -833,6 +889,10 @@
           <AssociationSet Name="FK_SurveyQuestionTargetCriteria_SurveyQuestion1" Association="Self.FK_SurveyQuestionTargetCriteria_SurveyQuestion1">
             <End Role="SurveyQuestion" EntitySet="SurveyQuestion" />
             <End Role="SurveyQuestionTargetCriteria" EntitySet="SurveyQuestionTargetCriteria" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurveyQuestionTargetLocation_City" Association="Self.FK_SurveyQuestionTargetLocation_City">
+            <End Role="City" EntitySet="City" />
+            <End Role="SurveyQuestionTargetLocation" EntitySet="SurveyQuestionTargetLocation" />
           </AssociationSet>
           <AssociationSet Name="FK_SurveyQuestionTargetLocation_Country" Association="Self.FK_SurveyQuestionTargetLocation_Country">
             <End Role="Country" EntitySet="Country" />
@@ -1076,6 +1136,19 @@
             <End Role="SurveyQuestion" EntitySet="SurveyQuestions" />
             <End Role="SurveyQuestionResponse" EntitySet="SurveyQuestionResponses" />
           </AssociationSet>
+          <EntitySet Name="Cities" EntityType="DomainModels.City" />
+          <AssociationSet Name="FK_AdCampaignTargetLocation_City" Association="DomainModels.FK_AdCampaignTargetLocation_City">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="AdCampaignTargetLocation" EntitySet="AdCampaignTargetLocations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_City_Country" Association="DomainModels.FK_City_Country">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="City" EntitySet="Cities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurveyQuestionTargetLocation_City" Association="DomainModels.FK_SurveyQuestionTargetLocation_City">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="SurveyQuestionTargetLocation" EntitySet="SurveyQuestionTargetLocations" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="ProfileQuestion">
           <Key>
@@ -1233,6 +1306,7 @@
           <NavigationProperty Name="AdCampaignTargetLocations" Relationship="DomainModels.FK_AdCampaignTargetLocation_Country" FromRole="Country" ToRole="AdCampaignTargetLocation" />
           <NavigationProperty Name="SurveyQuestions" Relationship="DomainModels.FK_SurveyQuestion_Country" FromRole="Country" ToRole="SurveyQuestion" />
           <NavigationProperty Name="SurveyQuestionTargetLocations" Relationship="DomainModels.FK_SurveyQuestionTargetLocation_Country" FromRole="Country" ToRole="SurveyQuestionTargetLocation" />
+          <NavigationProperty Name="Cities" Relationship="DomainModels.FK_City_Country" FromRole="Country" ToRole="City" />
         </EntityType>
         <EntityType Name="Language">
           <Key>
@@ -1367,6 +1441,7 @@
           <Property Name="Radius" Type="Int32" />
           <NavigationProperty Name="AdCampaign" Relationship="DomainModels.FK_AdCampaignTargetLocation_AdCampaign" FromRole="AdCampaignTargetLocation" ToRole="AdCampaign" />
           <NavigationProperty Name="Country" Relationship="DomainModels.FK_AdCampaignTargetLocation_Country" FromRole="AdCampaignTargetLocation" ToRole="Country" />
+          <NavigationProperty Name="City" Relationship="DomainModels.FK_AdCampaignTargetLocation_City" FromRole="AdCampaignTargetLocation" ToRole="City" />
         </EntityType>
         <EntityType Name="SurveyQuestion">
           <Key>
@@ -1441,6 +1516,7 @@
           <Property Name="Radius" Type="Int32" />
           <NavigationProperty Name="Country" Relationship="DomainModels.FK_SurveyQuestionTargetLocation_Country" FromRole="SurveyQuestionTargetLocation" ToRole="Country" />
           <NavigationProperty Name="SurveyQuestion" Relationship="DomainModels.FK_SurveyQuestionTargetLocation_SurveyQuestion" FromRole="SurveyQuestionTargetLocation" ToRole="SurveyQuestion" />
+          <NavigationProperty Name="City" Relationship="DomainModels.FK_SurveyQuestionTargetLocation_City" FromRole="SurveyQuestionTargetLocation" ToRole="City" />
         </EntityType>
         <Association Name="FK_AdCampaign_Language">
           <End Type="DomainModels.Language" Role="Language" Multiplicity="0..1" />
@@ -1703,6 +1779,56 @@
             </Principal>
             <Dependent Role="SurveyQuestionResponse">
               <PropertyRef Name="SqId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="CityId" />
+          </Key>
+          <Property Name="CityId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CityName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="IsCapital" Type="Boolean" />
+          <Property Name="CountryId" Type="Int32" />
+          <Property Name="GeoLong" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="GeoLat" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AdCampaignTargetLocations" Relationship="DomainModels.FK_AdCampaignTargetLocation_City" FromRole="City" ToRole="AdCampaignTargetLocation" />
+          <NavigationProperty Name="Country" Relationship="DomainModels.FK_City_Country" FromRole="City" ToRole="Country" />
+          <NavigationProperty Name="SurveyQuestionTargetLocations" Relationship="DomainModels.FK_SurveyQuestionTargetLocation_City" FromRole="City" ToRole="SurveyQuestionTargetLocation" />
+        </EntityType>
+        <Association Name="FK_AdCampaignTargetLocation_City">
+          <End Type="DomainModels.City" Role="City" Multiplicity="0..1" />
+          <End Type="DomainModels.AdCampaignTargetLocation" Role="AdCampaignTargetLocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="CityId" />
+            </Principal>
+            <Dependent Role="AdCampaignTargetLocation">
+              <PropertyRef Name="CityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_City_Country">
+          <End Type="DomainModels.Country" Role="Country" Multiplicity="0..1" />
+          <End Type="DomainModels.City" Role="City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="CountryId" />
+            </Principal>
+            <Dependent Role="City">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SurveyQuestionTargetLocation_City">
+          <End Type="DomainModels.City" Role="City" Multiplicity="0..1" />
+          <End Type="DomainModels.SurveyQuestionTargetLocation" Role="SurveyQuestionTargetLocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="CityId" />
+            </Principal>
+            <Dependent Role="SurveyQuestionTargetLocation">
+              <PropertyRef Name="CityId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2054,6 +2180,18 @@
                 <ScalarProperty Name="UserId" ColumnName="UserID" />
                 <ScalarProperty Name="SqId" ColumnName="SQID" />
                 <ScalarProperty Name="SqResponseId" ColumnName="SQResponseID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cities">
+            <EntityTypeMapping TypeName="DomainModels.City">
+              <MappingFragment StoreEntitySet="City">
+                <ScalarProperty Name="GeoLat" ColumnName="GeoLAT" />
+                <ScalarProperty Name="GeoLong" ColumnName="GeoLONG" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryID" />
+                <ScalarProperty Name="IsCapital" ColumnName="IsCapital" />
+                <ScalarProperty Name="CityName" ColumnName="CityName" />
+                <ScalarProperty Name="CityId" ColumnName="CityID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -53,5 +54,14 @@ namespace SMD.Models.DomainModels
         public virtual ICollection<AdCampaignResponse> AdCampaignResponses { get; set; }
         public virtual ICollection<AdCampaignTargetCriteria> AdCampaignTargetCriterias { get; set; }
         public virtual ICollection<AdCampaignTargetLocation> AdCampaignTargetLocations { get; set; }
+
+        [NotMapped]
+        public IEnumerable<string> Countries { get; set; }
+
+        [NotMapped]
+        public IEnumerable<string> Cities { get; set; }
+
+        [NotMapped]
+        public IEnumerable<string> Languages { get; set; }
     }
 }

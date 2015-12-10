@@ -36,10 +36,13 @@ namespace SMD.MIS.Areas.Api.Controllers
             return _campaignService.GetCampaignByUserId();
         }
 
-        
+
         public void Post(AdCampaign campaignModel)
         {
-           
+            campaignModel.Status = (int)AdCampaignStatus.Draft;
+
+            _campaignService.AddCampaign(campaignModel);
+
         }
         #endregion
     }

@@ -35,12 +35,50 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// </summary>
         public AdCampaignBaseResponse getBaseData()
         {
-            return new AdCampaignBaseResponse { 
-                Languages = _campaignService.GetCampaignBaseData().Languages.Select(lang => lang.CreateFrom()),
-                countries = _campaignService.GetCampaignBaseData().countries.Select(coun => coun.CreateFrom())
+            IEnumerable<LocationDropDown> listOfcount = _campaignService.GetCampaignBaseData().countries.Select(coun => coun.CreateCountryLocationFrom());
+            IEnumerable<LocationDropDown> listOfcity = _campaignService.GetCampaignBaseData().Cities.Select(coun => coun.CreateCityLocationFrom());
+            IEnumerable<LocationDropDown> listOfAllCC = listOfcity;
+            listOfAllCC = listOfAllCC.Concat(listOfcount);
+            return new AdCampaignBaseResponse
+            {
+               // Languages = _campaignService.GetCampaignBaseData().Languages.Select(lang => lang.CreateFrom()),
+                countriesAndCities = listOfAllCC
             };
         }
+        public AdCampaignBaseResponse Post(string searchText)
+        {
+            char[] separator = new char[] { '|' };
+            List<string> argsList = searchText.Split(separator, StringSplitOptions.RemoveEmptyEntries).ToList();
+            if (argsList[1] == "1")
+            {
+                IEnumerable<LocationDropDown> listOfcount = _campaignService.SearchCountriesAndCities(argsList[0]).countries.Select(coun => coun.CreateCountryLocationFrom());
+                IEnumerable<LocationDropDown> listOfcity = _campaignService.SearchCountriesAndCities(argsList[0]).Cities.Select(coun => coun.CreateCityLocationFrom());
+                IEnumerable<LocationDropDown> listOfAllCC = listOfcity;
+                listOfAllCC = listOfAllCC.Concat(listOfcount);
+                if (listOfAllCC != null && listOfAllCC.Count() > 10)
+                {
+                    listOfAllCC = listOfAllCC.Take(10);
+                }
+                return new AdCampaignBaseResponse
+                {
 
+                    countriesAndCities = listOfAllCC
+                };
+            }
+            else 
+            {
+                IEnumerable<LanguageDropdown> listOfLangs = _campaignService.SearchLanguages(argsList[0]).Languages.Select(lang => lang.CreateFrom());
+                if (listOfLangs != null && listOfLangs.Count() > 10)
+                {
+                    listOfLangs = listOfLangs.Take(10);
+                }
+                return new AdCampaignBaseResponse
+                {
+                    Languages = listOfLangs
+                };
+            }
+            
+        }
         #endregion
     }
 }

@@ -20,7 +20,7 @@ namespace SMD.Repository
             unityContainer.RegisterType<IAdCampaignRepository, AdCampaignRepository>();
             unityContainer.RegisterType<IProfileQuestionGroupRepository, ProfileQuestionGroupRepository>();
             unityContainer.RegisterType<IAdCampaignResponseRepository, IAdCampaignResponseRepository>();
-            unityContainer.RegisterType<IAdCampaignTargetCriteriaRepository, IAdCampaignTargetCriteriaRepository>();
+            unityContainer.RegisterType<IAdCampaignTargetCriteriaRepository, AdCampaignTargetCriteriaRepository>();
             unityContainer.RegisterType<IAdCampaignTargetLocationRepository, AdCampaignTargetLocationRepository>();
             unityContainer.RegisterType<ICountryRepository, CountryRepository>();
             unityContainer.RegisterType<ILanguageRepository, LanguageRepository>();
@@ -28,6 +28,7 @@ namespace SMD.Repository
             unityContainer.RegisterType<ISystemMailsRepository, SystemMailsRepository>();
             unityContainer.RegisterType<ISurveyQuestionRepository, SurveyQuestionRepository>();
             unityContainer.RegisterType<IAuditLogRepository, AuditLogRepository>();
+            unityContainer.RegisterType<ICityRepository, CityRepository>();
         }
     }
 }
