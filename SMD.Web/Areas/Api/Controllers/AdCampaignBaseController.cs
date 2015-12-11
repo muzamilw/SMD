@@ -35,14 +35,10 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// </summary>
         public AdCampaignBaseResponse getBaseData()
         {
-            IEnumerable<LocationDropDown> listOfcount = _campaignService.GetCampaignBaseData().countries.Select(coun => coun.CreateCountryLocationFrom());
-            IEnumerable<LocationDropDown> listOfcity = _campaignService.GetCampaignBaseData().Cities.Select(coun => coun.CreateCityLocationFrom());
-            IEnumerable<LocationDropDown> listOfAllCC = listOfcity;
-            listOfAllCC = listOfAllCC.Concat(listOfcount);
             return new AdCampaignBaseResponse
             {
-               // Languages = _campaignService.GetCampaignBaseData().Languages.Select(lang => lang.CreateFrom()),
-                countriesAndCities = listOfAllCC
+                Languages = _campaignService.GetCampaignBaseData().Languages.Select(lang => lang.CreateFrom()),
+              
             };
         }
         public AdCampaignBaseResponse Post(string searchText)

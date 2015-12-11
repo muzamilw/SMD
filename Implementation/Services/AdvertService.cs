@@ -57,9 +57,7 @@ namespace SMD.Implementation.Services
         {
             return new AdCampaignBaseResponse
             {
-                //Languages = _languageRepository.GetAllLanguages(),
-                countries = _countryRepository.GetAllCountries(),
-                Cities = _cityRepository.GetAllCities()
+                Languages = _languageRepository.GetAllLanguages()
             };
         }
 

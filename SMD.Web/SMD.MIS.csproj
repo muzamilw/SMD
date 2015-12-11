@@ -535,6 +535,9 @@
     <Content Include="Content\less\ProfileQuestion.css">
       <DependentUpon>ProfileQuestion.less</DependentUpon>
     </Content>
+    <Content Include="Content\less\Survey.css">
+      <DependentUpon>Survey.less</DependentUpon>
+    </Content>
     <Content Include="Content\ReportViewerSite.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -1315,6 +1318,7 @@
     <Content Include="Areas\Survey\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Survey\Views\Shared\_AddEditSurvey.cshtml" />
     <Content Include="Content\less\Campaign.less" />
+    <Content Include="Content\less\Survey.less" />
     <Content Include="Areas\Survey\Views\Survey\SurveyQuestionApproval.cshtml" />
     <Content Include="Areas\Survey\Views\Survey\_SurveyQuestionEditor.cshtml" />
     <Content Include="Areas\Ads\Views\Ads\_addEditor.cshtml" />
