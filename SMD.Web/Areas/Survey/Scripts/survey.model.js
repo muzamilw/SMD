@@ -30,6 +30,7 @@
                 DiscountVoucherID = ko.observable(DiscountVoucherID),
                 SubmissionDate = ko.observable(SubmissionDate),
                 SurveyQuestionTargetCriteria = ko.observableArray([]),
+                SurveyQuestionTargetLocation = ko.observableArray([]),
                 LeftPictureBytes = ko.observable(LeftPictureBytes),
                 RightPictureBytes = ko.observable(RightPictureBytes),
                 errors = ko.validation.group({
@@ -119,20 +120,12 @@
                 DiscountVoucherID :DiscountVoucherID,
                 SubmissionDate :SubmissionDate,
                 SurveyQuestionTargetCriteria: SurveyQuestionTargetCriteria,
+                SurveyQuestionTargetLocation:SurveyQuestionTargetLocation,
                 LeftPictureBytes: LeftPictureBytes,
                 RightPictureBytes: RightPictureBytes
             };
         };
 
-   
-    // Factory Method
-    Survey.Create = function (source) {
-        var survey = new Survey(source.SQID, source.LanguageID, source.CountryID, source.UserID, source.Status, source.StatusValue, source.Question, source.Gender, source.Language, source.Country, source.Description, source.DisplayQuestion, source.StartDate, source.EndDate, source.ModifiedDate, source.LeftPicturePath, source.RightPicturePath, source.ProjectedReach, source.AgeRangeStart, source.AgeRangeEnd, source.LeftPictureBytes, source.RightPictureBytes);
-        _.each(source.SurveyQuestionTargetCriteria, function (item) {
-            survey.SurveyQuestionTargetCriteria.push(SurveyQuestionTargetCriteria.Create(item));
-        });
-        return survey;
-    };
     var // ReSharper disable InconsistentNaming
       SurveyQuestionTargetCriteria = function (ID, SQID, Type, PQID, PQAnswerID, LinkedSQID, LinkedSQAnswer, IncludeorExclude, LanguageID, PQuestion, PQAnswer, LinkedSQ, LinkedSQImage) {
           var
@@ -178,11 +171,57 @@
               LinkedSQImage :LinkedSQImage,
           };
       };
-
-
+    var // ReSharper disable InconsistentNaming
+    SurveyQuestionTargetLocation = function (ID, SQID, CountryID, CityID, Radius, Country, City) {
+        var
+            //type and userID will be set on server sside
+            ID = ko.observable(ID),
+            SQID = ko.observable(SQID),
+            CountryID = ko.observable(CountryID),
+            CityID = ko.observable(CityID),
+            Radius = ko.observable(Radius),
+            Country = ko.observable(Country),
+            City = ko.observable(City),
+           
+            // Convert to server data
+            convertToServerData = function () {
+                return {
+                    ID: ID(),
+                    SQID: SQID(),
+                    CountryID: CountryID(),
+                    CityID: CityID(),
+                    Radius: Radius(),
+                    Country: Country(),
+                    City: City()
+                };
+            };
+        return {
+            ID: ID,
+            SQID: SQID,
+            CountryID: CountryID,
+            CityID: CityID,
+            Radius: Radius,
+            Country: Country,
+            City: City
+        };
+    };
+    // Factory Method
+    Survey.Create = function (source) {
+        var survey = new Survey(source.SQID, source.LanguageID, source.CountryID, source.UserID, source.Status, source.StatusValue, source.Question, source.Gender, source.Language, source.Country, source.Description, source.DisplayQuestion, source.StartDate, source.EndDate, source.ModifiedDate, source.LeftPicturePath, source.RightPicturePath, source.ProjectedReach, source.AgeRangeStart, source.AgeRangeEnd, source.LeftPictureBytes, source.RightPictureBytes);
+        _.each(source.SurveyQuestionTargetCriteria, function (item) {
+            survey.SurveyQuestionTargetCriteria.push(SurveyQuestionTargetCriteria.Create(item));
+        });
+        _.each(source.SurveyQuestionTargetLocation, function (item) {
+            survey.SurveyQuestionTargetLocation.push(SurveyQuestionTargetLocation.Create(item));
+        });
+        return survey;
+    };
     // Factory Method
     SurveyQuestionTargetCriteria.Create = function (source) {
         return new SurveyQuestionTargetCriteria(source.ID, source.SQID, source.Type, source.PQID, source.PQAnswerID, source.LinkedSQID, source.LinkedSQAnswer, source.IncludeorExclude, source.LanguageID, source.PQuestion, source.PQAnswer, source.LinkedSQ, source.LinkedSQImage);
+    };
+    SurveyQuestionTargetLocation.Create = function (source) {
+        return new SurveyQuestionTargetLocation(source.ID, source.SQID, source.CountryID, source.CityID, source.Radius, source.Country, source.City);
     };
     return {
         Survey: Survey

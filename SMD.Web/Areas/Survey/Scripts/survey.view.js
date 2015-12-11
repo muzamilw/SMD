@@ -38,18 +38,36 @@ define("survey/survey.view",
 
                     $('#searchSurveyLocations').typeahead({
                         highlight: true
-                    },
-                        {
+                    },{
                             displayKey: 'LocationName',
                             source: array.ttAdapter()
                         }).bind('typeahead:selected', function (obj, selected) {
                             if (selected) {
-                                console.log(selected);
-                                var idOfEleCnt = $("#in_ex_count_opt").val() + "|" + selected.LocationId;
-                                var htmlToAppend = '<div class="count_city_newcnt"  id="' + idOfEleCnt + '" ><input type="text"  class="form-control lang_nr_box" readonly="readonly" value=' + selected.LocationName + '><a id="deleteToken' + selected.LocationId + '" onclick=RemoveCountryToken("' + selected.LocationId + '"); title="Delete" class="lang_del"> <i class="fa fa-times "></i></a></div>';
+                                console.log(selected)
+                                var CityID = 0, CountryID = 0, Radius = 0, Country = '', City = '';
+                                if (selected.IsCountry)
+                                {
+                                    Country = selected.LocationName;
+                                    CountryId = selected.CountryId;
+                                }
+                                if (selected.IsCity) {
+                                    City = selected.LocationName;
+                                    CountryId = selected.CountryId;
+                                    CityID = selected.CityId;
+                                }
+                                var obj = {
+                                    CountryID :CountryID,
+                                    CityID :CityID,
+                                    Radius :Radius,
+                                    Country :Country,
+                                    City :City,
+                                }
+                                viewModel.selectedLocation(obj);
+                                //var idOfEleCnt = $("#in_ex_count_opt").val() + "|" + selected.LocationId;
+                                //var htmlToAppend = '<div class="count_city_newcnt"  id="' + idOfEleCnt + '" ><input type="text"  class="form-control lang_nr_box" readonly="readonly" value=' + selected.LocationName + '><a id="deleteToken' + selected.LocationId + '" onclick=RemoveCountryToken("' + selected.LocationId + '"); title="Delete" class="lang_del"> <i class="fa fa-times "></i></a></div>';
 
-                                $("#coun_token_cnt").css("display", "block");
-                                $("#coun_token_cnt").append(htmlToAppend);
+                                //$("#coun_token_cnt").css("display", "block");
+                                //$("#coun_token_cnt").append(htmlToAppend);
                             }
                         });
 
