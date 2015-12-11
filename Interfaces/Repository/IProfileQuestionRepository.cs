@@ -18,5 +18,6 @@ namespace SMD.Interfaces.Repository
         /// Get All Profile Questions
         /// </summary>
         IEnumerable<ProfileQuestion> GetAllProfileQuestions();
+        IEnumerable<ProfileQuestion> GetAll();
     }
 }

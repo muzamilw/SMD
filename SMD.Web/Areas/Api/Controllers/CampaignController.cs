@@ -41,7 +41,7 @@ namespace SMD.MIS.Areas.Api.Controllers
         {
             campaignModel.Status = (int)AdCampaignStatus.Draft;
 
-            _campaignService.AddCampaign(campaignModel);
+            _campaignService.CreateCampaign(campaignModel);
 
         }
         #endregion

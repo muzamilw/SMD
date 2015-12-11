@@ -24,6 +24,8 @@ namespace SMD.Implementation.Services
         private readonly IAdCampaignTargetLocationRepository _adCampaignTargetLocationRepository;
         private readonly IAdCampaignTargetCriteriaRepository _adCampaignTargetCriteriaRepository;
         private readonly IEmailManagerService emailManagerService;
+        private readonly IProfileQuestionRepository _profileQuestionRepository;
+        private readonly IProfileQuestionAnswerRepository _profileQuestionAnswerRepository;
         #endregion
 
         #region Constructor
@@ -37,7 +39,10 @@ namespace SMD.Implementation.Services
             ICountryRepository countryRepository, 
             ICityRepository cityRepository,
             IAdCampaignTargetLocationRepository adCampaignTargetLocationRepository,
-            IAdCampaignTargetCriteriaRepository adCampaignTargetCriteriaRepository, IEmailManagerService emailManagerService)
+             IEmailManagerService emailManagerService,
+            IAdCampaignTargetCriteriaRepository adCampaignTargetCriteriaRepository,
+            IProfileQuestionRepository profileQuestionRepository,
+            IProfileQuestionAnswerRepository profileQuestionAnswerRepository)
         {
             this._adCampaignRepository = adCampaignRepository;
             this._languageRepository = languageRepository;
@@ -46,6 +51,8 @@ namespace SMD.Implementation.Services
             this._adCampaignTargetLocationRepository = adCampaignTargetLocationRepository;
             this._adCampaignTargetCriteriaRepository = adCampaignTargetCriteriaRepository;
             this.emailManagerService = emailManagerService;
+            this._profileQuestionRepository = profileQuestionRepository;
+            this._profileQuestionAnswerRepository = profileQuestionAnswerRepository;
         }
         public List<CampaignGridModel> GetCampaignByUserId()
         {
@@ -89,7 +96,7 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Add Campaign
         /// </summary>
-        public bool AddCampaign(AdCampaign campaignModel)
+        public bool CreateCampaign(AdCampaign campaignModel)
         {
             _adCampaignRepository.Add(campaignModel);
             _adCampaignRepository.SaveChanges();
@@ -119,6 +126,7 @@ namespace SMD.Implementation.Services
 
                         oTargetLocation.CampaignId = campaignId;
                         oTargetLocation.CityId = Convert.ToInt32(argsList[1]);
+                        oTargetLocation.IncludeorExclude = Convert.ToBoolean(argsList[0]);
                         _adCampaignTargetLocationRepository.Add(oTargetLocation);
                     }
                     _adCampaignTargetLocationRepository.SaveChanges();
@@ -133,6 +141,7 @@ namespace SMD.Implementation.Services
 
                         oTargetLocation.CampaignId = campaignId;
                         oTargetLocation.CityId = Convert.ToInt32(argsList[1]);
+                        oTargetLocation.IncludeorExclude = Convert.ToBoolean(argsList[0]);
                         _adCampaignTargetLocationRepository.Add(oTargetLocation);
                     }
                     _adCampaignTargetLocationRepository.SaveChanges();
@@ -195,6 +204,29 @@ namespace SMD.Implementation.Services
             }
             return new AdCampaign();
         }
+            /// <summary>
+        /// Get profile questions 
+        /// </summary>
+        public AdCampaignBaseResponse GetProfileQuestionData()
+        {
+            return new AdCampaignBaseResponse
+            {
+                ProfileQuestions = _profileQuestionRepository.GetAll()
+            };
+        }
+
+        /// <summary>
+        /// Get profile answers by question id 
+        /// </summary>
+        public AdCampaignBaseResponse GetProfileQuestionAnswersData(int QuestionId)
+        {
+            return new AdCampaignBaseResponse
+            {
+                ProfileQuestionAnswers =
+                    _profileQuestionAnswerRepository.GetAllProfileQuestionAnswerByQuestionId(QuestionId)
+            };
+        }
+
         #endregion
     }
 }

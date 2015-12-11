@@ -122,10 +122,50 @@
         };
         return self;
     };
-  
+    var CriteriaModel = function (CriteriaID, Type, PQID, PQAnswerID, SQID, SQAnswer, IncludeorExclude, questionString,
+       answerString) {
+           var
+               CriteriaID = ko.observable(CriteriaID),
+               Type = ko.observable(Type),
+               PQID = ko.observable(PQID),
+               PQAnswerID = ko.observable(PQAnswerID),
+               SQID = ko.observable(SQID),
+               SQAnswer = ko.observable(SQAnswer),
+               IncludeorExclude = ko.observable(IncludeorExclude),
+               questionString = ko.observable(questionString),
+               answerString = ko.observable(answerString),
+               // Convert to server data
+               convertToServerData = function () {
+                   return {
+                       CriteriaID: CriteriaID(),
+                       Type: Type(),
+                       PQID: PQID(),
+                       PQAnswerID: PQAnswerID(),
+                       SQID: SQID(),
+                       SQAnswer: SQAnswer(),
+                       IncludeorExclude: IncludeorExclude(),
+                       questionString: questionString(),
+                       answerString: answerString()
+                   };
+               };
+           return {
+               CriteriaID: CriteriaID,
+               Type: Type,
+               PQID: PQID,
+               PQAnswerID: PQAnswerID,
+               SQID: SQID,
+               SQAnswer: SQAnswer,
+               IncludeorExclude: IncludeorExclude,
+               questionString: questionString,
+               answerString: answerString,
+               convertToServerData: convertToServerData
+           };
+    };
+
+   
     return {
         AdvertGridModel: AdvertGridModel,
-        campaignModel: campaignModel
-       
+        campaignModel: campaignModel,
+        CriteriaModel: CriteriaModel
     };
 });

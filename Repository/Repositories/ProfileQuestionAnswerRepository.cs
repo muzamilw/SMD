@@ -49,6 +49,14 @@ namespace SMD.Repository.Repositories
         {
             return DbSet.Where(ans => ans.PqId == profileQuestionId && (ans.Status == null || ans.Status == (Int32)ObjectStatus.Acitve)).ToList();
         }
+
+        /// <summary>
+        /// Get All Answer by Profile Question Id 
+        /// </summary>
+        public IEnumerable<ProfileQuestionAnswer> GetAllProfileQuestionAnswerByQuestionId(int profileQuestionId)
+        {
+            return DbSet.Where(ans => ans.PqId == profileQuestionId).ToList();
+        }
         #endregion
     }
 }
