@@ -17,6 +17,11 @@ define("ads/ads.viewModel",
                     cityidList = [],
                     langidList = [],
                     campaignModel = ko.observable(new model.campaignModel()),
+                    selectedCriteria = ko.observable(new model.CriteriaModel()),
+                    selectedCriteriaList = ko.observableArray([]),
+                    profileQuestionList = ko.observable([]),
+                    profileAnswerList = ko.observable([]),
+                    criteriaCount = ko.observable(0);
                     getAdCampaignGridContent = function () {
                         dataservice.getCampaignData({}, {
                             success: function (data) {
@@ -35,7 +40,10 @@ define("ads/ads.viewModel",
 
                     },
                     getBaseData = function () {
-                        dataservice.getBaseData({}, {
+                        dataservice.getBaseData({
+                            RequestId: 1,
+                            QuestionId: 0,
+                        }, {
                               success: function (data) {
                                   if (data != null) {
                                       langs.removeAll();
@@ -82,6 +90,8 @@ define("ads/ads.viewModel",
                           campignServerObj.Countries = countoryidList;
                           campignServerObj.Cities = cityidList;
                           campignServerObj.Languages = langidList;
+                          campignServerObj.AdCampaignTargetCriterias = selectedCriteriaList();
+                         
                           dataservice.addCampaignData(campignServerObj
                               , {
                               success: function (data) {
@@ -93,7 +103,101 @@ define("ads/ads.viewModel",
                           });
 
                     },
-                   
+                    // Add new Criteria
+                    addNewProfileCriteria = function () {
+                        
+                        var objCT = new model.CriteriaModel();
+                        objCT.Type("1");
+                        objCT.IncludeorExclude("1");
+                        objCT.CriteriaID(criteriaCount());
+                        selectedCriteria(objCT);
+                        if (profileQuestionList().length == 0)
+                        {
+                            dataservice.getBaseData({
+                                RequestId: 2,
+                                QuestionId: 0,
+                            }, {
+                                success: function (data) {
+                                    if (data != null) {
+                                        profileQuestionList([]);
+                                        ko.utils.arrayPushAll(profileQuestionList(), data.ProfileQuestions);
+                                        profileQuestionList.valueHasMutated();
+                                    }
+
+                                },
+                                error: function (response) {
+
+                                }
+                            });
+                        }
+                    
+                    },
+                    saveCriteria = function () {
+                        var selectedQuestionstring = $("#ddprofileQuestion option[value=" + $("#ddprofileQuestion").val() + "]").text();
+                        selectedCriteria().questionString(selectedQuestionstring);
+                        var selectedQuestionAnswerstring = $("#ddprofileAnswers option[value=" + $("#ddprofileAnswers").val() + "]").text();
+                        selectedCriteria().answerString(selectedQuestionAnswerstring);
+                        selectedCriteria().PQAnswerID($("#ddprofileAnswers").val());
+                        var criteriaServerObj = selectedCriteria().convertToServerData();
+                        console.log(criteriaServerObj);
+                        selectedCriteriaList.push(criteriaServerObj);
+                        console.log(selectedCriteriaList());
+                    },
+                    onEditCriteria = function (item) {
+                        console.log(item.PQAnswerID);
+                        selectedCriteria(item);
+                        //selectedCriteria().;
+                        dataservice.getBaseData({
+                            RequestId: 3,
+                            QuestionId: item.PQID,
+                        }, {
+                            success: function (data) {
+                                if (data != null) {
+                                    if (profileAnswerList().length > 0) {
+                                        profileAnswerList([]);
+                                    }
+                                    ko.utils.arrayPushAll(profileAnswerList(), data.ProfileQuestionAnswers);
+                                    profileAnswerList.valueHasMutated();
+                                    $("#profileAnswersContainer").show();
+                                }
+
+                            },
+                            error: function (response) {
+
+                            }
+                        });
+                        console.log(selectedCriteria().PQAnswerID);
+                    },
+                    onDeleteCriteria = function () {
+                       
+                    },
+                      // Delete Handler PQ
+                    onDeleteCriteria = function (item) {
+                        selectedCriteriaList.remove(item);
+                    },
+                    onChangeProfileQuestion = function () {
+                        var selectedQuestionId = $("#ddprofileQuestion").val();
+                        dataservice.getBaseData({
+                            RequestId: 3,
+                            QuestionId: selectedQuestionId,
+                        }, {
+                            success: function (data) {
+                                if (data != null) {
+                                    if (profileAnswerList().length > 0)
+                                    {
+                                        profileAnswerList([]);
+                                    }
+                                    ko.utils.arrayPushAll(profileAnswerList(), data.ProfileQuestionAnswers);
+                                    profileAnswerList.valueHasMutated();
+                                    $("#profileAnswersContainer").show();
+                                }
+
+                            },
+                            error: function (response) {
+
+                            }
+                        });
+                    },
                     // Initialize the view model
                     initialize = function (specifiedView) {
                         view = specifiedView; 
@@ -101,6 +205,7 @@ define("ads/ads.viewModel",
                         pager(pagination.Pagination({ PageSize: 10 }, advertGridContent, getAdCampaignGridContent));
                         getBaseData();
                         getAdCampaignGridContent();
+                        
                     };
                     return {
                         initialize: initialize,
@@ -111,7 +216,16 @@ define("ads/ads.viewModel",
                         langs: langs,
                         campaignModel: campaignModel,
                         saveCampaignData: saveCampaignData,
-                        closeNewCampaignDialog: closeNewCampaignDialog
+                        closeNewCampaignDialog: closeNewCampaignDialog,
+                        selectedCriteria: selectedCriteria,
+                        profileQuestionList: profileQuestionList,
+                        profileAnswerList: profileAnswerList,
+                        selectedCriteriaList: selectedCriteriaList,
+                        saveCriteria: saveCriteria,
+                        onDeleteCriteria: onDeleteCriteria,
+                        onEditCriteria: onEditCriteria,
+                        addNewProfileCriteria: addNewProfileCriteria,
+                        onChangeProfileQuestion: onChangeProfileQuestion
                     };
             })()
         };

@@ -22,11 +22,13 @@ define("survey/survey.viewModel",
                     countryfilterValue = ko.observable(214),
                     // Controlls editor visibility 
                     isEditorVisible = ko.observable(false),
-                    //// Editor View Model   // view model for editing survey
-                    //editorViewModel = new ist.ViewModel(model.hireGroupImage),
                     ////selected Question
-                    //selectedQuestion = editorViewModel.itemForEditing,
-
+                    selectedQuestion = ko.observable(new model.Survey()),
+                    // selected location 
+                    selectedLocation = ko.observable(),
+                    selectedLocationRadius = ko.observable(),
+                    // age list 
+                    ageRange = ko.observable([{ value: '11', text: '11' }, { value: '12', text: '12' }, { value: '13', text: '13' }, { value: '14', text: '14' }, { value: '15', text: '15' }, { value: '16', text: '16' }, { value: '17', text: '17' }, { value: '18', text: '18' }, { value: '19', text: '19' }])
                     //Get Questions
                     getQuestions = function () {   
                         dataservice.searchSurveyQuestions(
@@ -124,7 +126,10 @@ define("survey/survey.viewModel",
                     },
                     // Add new Profile Question
                     addNewSurvey = function () {
+                        selectedQuestion(new model.Survey());
+                        selectedQuestion().Gender("1");
                         isEditorVisible(true);
+                        view.initializeTypeahead();
                     },
                     // Close Editor 
                     closeEditDialog = function () {
@@ -157,7 +162,25 @@ define("survey/survey.viewModel",
                         //    }
                         //});
                     },
-                    
+                    // store left side ans image
+                    storeLeftImageCallback = function (file, data) {
+                        selectedQuestion().LeftPictureBytes(data);
+                    },
+                    // store right side ans image
+                    storeRightImageCallback = function (file, data) {
+                         selectedQuestion().RightPictureBytes(data);
+                    },
+                     // remove location 
+                    onRemoveLocation = function (file, data) {
+                        selectedQuestion().RightPictureBytes(data);
+                    },
+                    //add location
+                    onAddLocation = function (item) {
+                      
+                        selectedLocation().Radius = (selectedLocationRadius);
+                        selectedQuestion().SurveyQuestionTargetLocation.push(selectedLocation);
+                        console.log(selectedLocation());
+                    },
                     // Initialize the view model
                     initialize = function (specifiedView) {
                         view = specifiedView;
@@ -165,11 +188,12 @@ define("survey/survey.viewModel",
                         pager(pagination.Pagination({ PageSize: 10 }, questions, getQuestions));
                         // Base Data Call
                         getBasedata();
+                        selectedQuestion().Gender("1");
                     };
                 return {
                     initialize: initialize,
                     pager: pager,
-                  //  selectedQuestion: selectedQuestion,
+                    selectedQuestion: selectedQuestion,
                     questions: questions,
                     getQuestions: getQuestions,
                     getBasedata: getBasedata,
@@ -184,7 +208,14 @@ define("survey/survey.viewModel",
                     countries: countries,
                     langfilterValue: langfilterValue,
                     clearFilters: clearFilters,
-                    countryfilterValue: countryfilterValue
+                    countryfilterValue: countryfilterValue,
+                    storeLeftImageCallback: storeLeftImageCallback,
+                    storeRightImageCallback: storeRightImageCallback,
+                    ageRange: ageRange,
+                    selectedLocation: selectedLocation,
+                    selectedLocationRadius: selectedLocationRadius,
+                    onAddLocation: onAddLocation,
+                    onRemoveLocation: onRemoveLocation
                 };
             })()
         };
