@@ -33,19 +33,39 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// Get base data for campaigns 
         /// 
         /// </summary>
-        public AdCampaignBaseResponse getBaseData()
+        public AdCampaignBaseResponse getBaseData([FromUri]CampaignSearchRequest request)
         {
-            return new AdCampaignBaseResponse
+            if (request.RequestId == 2) //  get profile answers data 
             {
-                Languages = _campaignService.GetCampaignBaseData().Languages.Select(lang => lang.CreateFrom()),
-              
-            };
+                return new AdCampaignBaseResponse
+                {
+                    ProfileQuestions = _campaignService.GetProfileQuestionData().ProfileQuestions.Select(ques => ques.CreateFromDropdown()),
+
+                };
+            }
+            else if (request.RequestId == 3) //  get profile question data 
+            {
+                return new AdCampaignBaseResponse
+                {
+                    ProfileQuestionAnswers = _campaignService.GetProfileQuestionAnswersData((int)request.QuestionId).ProfileQuestionAnswers.Select(ques => ques.CreateFromDropdown()),
+
+                };
+            }
+            else //  get base data 
+            {
+                return new AdCampaignBaseResponse
+                {
+                    Languages = _campaignService.GetCampaignBaseData().Languages.Select(lang => lang.CreateFrom()),
+
+                };
+            }
+           
         }
         public AdCampaignBaseResponse Post(string searchText)
         {
             char[] separator = new char[] { '|' };
             List<string> argsList = searchText.Split(separator, StringSplitOptions.RemoveEmptyEntries).ToList();
-            if (argsList[1] == "1")
+            if (argsList[1] == "1") // get countries and cities list
             {
                 IEnumerable<LocationDropDown> listOfcount = _campaignService.SearchCountriesAndCities(argsList[0]).countries.Select(coun => coun.CreateCountryLocationFrom());
                 IEnumerable<LocationDropDown> listOfcity = _campaignService.SearchCountriesAndCities(argsList[0]).Cities.Select(coun => coun.CreateCityLocationFrom());
@@ -61,7 +81,7 @@ namespace SMD.MIS.Areas.Api.Controllers
                     countriesAndCities = listOfAllCC
                 };
             }
-            else 
+            else // get languages list
             {
                 IEnumerable<LanguageDropdown> listOfLangs = _campaignService.SearchLanguages(argsList[0]).Languages.Select(lang => lang.CreateFrom());
                 if (listOfLangs != null && listOfLangs.Count() > 10)
