@@ -22,10 +22,8 @@ define("survey/survey.viewModel",
                     countryfilterValue = ko.observable(214),
                     // Controlls editor visibility 
                     isEditorVisible = ko.observable(false),
-                    //// Editor View Model   // view model for editing survey
-                    //editorViewModel = new ist.ViewModel(model.hireGroupImage),
                     ////selected Question
-                    //selectedQuestion = editorViewModel.itemForEditing,
+                    selectedQuestion = ko.observable(new model.Survey({})),
 
                     //Get Questions
                     getQuestions = function () {   
@@ -157,7 +155,14 @@ define("survey/survey.viewModel",
                         //    }
                         //});
                     },
-                    
+                    // store left side ans image
+                    storeLeftImageCallback = function (file, data) {
+                        selectedQuestion().LeftPictureBytes(data);
+                    },
+                    // store right side ans image
+                    storeRightImageCallback = function (file, data) {
+                         selectedQuestion().RightPictureBytes(data);
+                    },
                     // Initialize the view model
                     initialize = function (specifiedView) {
                         view = specifiedView;
@@ -169,7 +174,7 @@ define("survey/survey.viewModel",
                 return {
                     initialize: initialize,
                     pager: pager,
-                  //  selectedQuestion: selectedQuestion,
+                    selectedQuestion: selectedQuestion,
                     questions: questions,
                     getQuestions: getQuestions,
                     getBasedata: getBasedata,
@@ -184,7 +189,9 @@ define("survey/survey.viewModel",
                     countries: countries,
                     langfilterValue: langfilterValue,
                     clearFilters: clearFilters,
-                    countryfilterValue: countryfilterValue
+                    countryfilterValue: countryfilterValue,
+                    storeLeftImageCallback: storeLeftImageCallback,
+                    storeRightImageCallback: storeRightImageCallback
                 };
             })()
         };
