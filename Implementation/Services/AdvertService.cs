@@ -23,6 +23,7 @@ namespace SMD.Implementation.Services
         private readonly ICityRepository _cityRepository;
         private readonly IAdCampaignTargetLocationRepository _adCampaignTargetLocationRepository;
         private readonly IAdCampaignTargetCriteriaRepository _adCampaignTargetCriteriaRepository;
+        private readonly IEmailManagerService emailManagerService;
         #endregion
 
         #region Constructor
@@ -36,7 +37,7 @@ namespace SMD.Implementation.Services
             ICountryRepository countryRepository, 
             ICityRepository cityRepository,
             IAdCampaignTargetLocationRepository adCampaignTargetLocationRepository,
-            IAdCampaignTargetCriteriaRepository adCampaignTargetCriteriaRepository)
+            IAdCampaignTargetCriteriaRepository adCampaignTargetCriteriaRepository, IEmailManagerService emailManagerService)
         {
             this._adCampaignRepository = adCampaignRepository;
             this._languageRepository = languageRepository;
@@ -44,6 +45,7 @@ namespace SMD.Implementation.Services
             this._cityRepository = cityRepository;
             this._adCampaignTargetLocationRepository = adCampaignTargetLocationRepository;
             this._adCampaignTargetCriteriaRepository = adCampaignTargetCriteriaRepository;
+            this.emailManagerService = emailManagerService;
         }
         public List<CampaignGridModel> GetCampaignByUserId()
         {
@@ -175,6 +177,7 @@ namespace SMD.Implementation.Services
                     dbAd.ApprovalDateTime = DateTime.Now;
                     dbAd.ApprovedBy = _adCampaignRepository.LoggedInUserIdentity;
                     dbAd.Status = (Int32) AdCampaignStatus.Live;
+                    emailManagerService.SendQuestionApprovalEmail(dbAd.UserId);
                 }
                 // Rejection 
                 else
@@ -182,6 +185,7 @@ namespace SMD.Implementation.Services
                     dbAd.Status = (Int32)AdCampaignStatus.ApprovalRejected;
                     dbAd.Approved = false;
                     dbAd.RejectedReason = source.RejectedReason;
+                    emailManagerService.SendQuestionRejectionEmail(dbAd.UserId);
                 }
                 dbAd.ModifiedDateTime = DateTime.Now;
                 dbAd.ModifiedBy = _adCampaignRepository.LoggedInUserIdentity;
