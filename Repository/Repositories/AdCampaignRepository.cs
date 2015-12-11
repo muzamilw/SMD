@@ -25,6 +25,7 @@ namespace SMD.Repository.Repositories
                     {
                         {AdCampaignByColumn.Name, d => d.CampaignName}  ,    
                         {AdCampaignByColumn.Description, d => d.Description} ,     
+                        {AdCampaignByColumn.Type, d => d.Type} ,     
                         {AdCampaignByColumn.CreatedBy, d => d.CreatedBy}  ,    
                         {AdCampaignByColumn.CreationDate, d => d.CreatedDateTime} 
                     };

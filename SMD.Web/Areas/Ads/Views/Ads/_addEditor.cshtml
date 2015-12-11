@@ -10,7 +10,7 @@
             <div class="col-lg-12">
                 <ol class="breadcrumb">
                     <li><a href="#" class="my-navigator">Home</a></li>
-                    <li><a href="#" class="my-navigator">Survey Questions</a></li>
+                    <li><a href="#" class="my-navigator">Ad Campaign Approval</a></li>
                 </ol>
                 <div class="tab-content dynamicNameHeading" style="height:41px;">
                     <h1>Details</h1>
@@ -21,8 +21,8 @@
             <div class="col-lg-12 col-md-8 col-sm-8" style="padding-bottom: 10px;">
                 <div class="clearfix ">
                     <div class="col-xs-12" style="text-align: right; padding-right:0;margin-bottom:10px;">
-                        <button class="btn  btn-info" id="saveBtn" data-bind="click:$root.onSaveQuestion">Approve</button>
-                        <button class="btn  btn-info" id="saveBtn" data-bind="click:$root.onRejectQuestion, enable: $root.hasChangesOnQuestion, css: { 'btn-warning': $root.hasChangesOnQuestion }">Reject</button>
+                        <button class="btn  btn-info" id="saveBtn" data-bind="click:$root.onSaveCampaign">Approve</button>
+                        <button class="btn  btn-info" id="saveBtn" data-bind="click:$root.onRejectCampaign, enable: $root.hasChangesOnCampaign, css: { 'btn-warning': $root.hasChangesOnCampaign }">Reject</button>
                         <button class="btn btn-default" id="saveBtn" data-bind="click: $root.closeEditDialog">Close</button>
                     </div>
                 </div>
@@ -34,10 +34,10 @@
                             <li class="active" id="generalInfoTab"><a href="#tab-generalinfo" data-toggle="tab">General Info</a></li>
                         </ul>
                         <div class="tab-content">
-                            <div class="tab-pane fade in active" data-bind="with: $root.selectedQuestion" id="tab-generalinfo">
+                            <div class="tab-pane fade in active" data-bind="with: $root.selectedCampaign" id="tab-generalinfo">
                                 <div class="col-lg-12 form-horizontal">
                                     <h3 class="group-header" style="margin-top:20px;">
-                                        Survey Question General Info
+                                        Ad Campaign General Info
                                     </h3>
                                     <p class="group-header-description">Enter information below </p>
                                     <div class="col-lg-9">
@@ -48,13 +48,14 @@
                                                         <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
                                                     </a>
                                                 </div>
-                                                <label class="control-label text-right tooltip-float">Question</label>
+                                                <label class="control-label text-right tooltip-float">Campaign Name</label>
                                             </div>
                                             <div class="col-lg-6">
-                                                <input type="text" readonly class="form-control" data-bind="value:question">
+                                                <input type="text" readonly class="form-control" data-bind="value:campaignName">
                                             </div>
                                         </div>
                                     </div>
+
                                     <div class="col-lg-9">
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
@@ -63,30 +64,30 @@
                                                         <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
                                                     </a>
                                                 </div>
-                                                <label  class="control-label text-right tooltip-float">Display Question</label>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <input type="text" readonly class="form-control" data-bind="value: displayQuestion">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-9">
-                                        <div class="form-group">
-                                            <div class="col-lg-4 text-right">
-                                                <div class="bs-example-tooltips tooltip-float-width">
-                                                    <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
-                                                        <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                    </a>
-                                                </div>
-                                                <label  class="control-label text-right tooltip-float">Description</label>
+                                                <label class="control-label text-right tooltip-float">Description</label>
                                             </div>
                                             <div class="col-lg-6">
                                                 <input type="text" readonly class="form-control" data-bind="value: description">
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="col-lg-9">
+                                        <div class="form-group">
+                                            <div class="col-lg-4 text-right">
+                                                <div class="bs-example-tooltips tooltip-float-width">
+                                                    <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
+                                                        <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                    </a>
+                                                </div>
+                                                <label class="control-label text-right tooltip-float">Type</label>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <input type="text" readonly class="form-control" data-bind="value: type()==1 ? 'Video':'Link'">
+                                            </div>
+                                        </div>
+                                    </div>
 
-                                   
+
                                     <div class="col-lg-9" data-bind="visible:!isApproved()">
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
@@ -98,25 +99,11 @@
                                                 <label class="control-label text-right tooltip-float">Rejection Reason</label>
                                             </div>
                                             <div class="col-lg-6">
-                                                <input type="text" placeholder="Enter rejection reason "class="form-control" data-bind="value: rejectionReason">
+                                                <input type="text" placeholder="Enter rejection reason " class="form-control" data-bind="value: rejectionReason">
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-9" >
-                                        <div class="form-group">
-                                            <div class="col-lg-4 text-right">
-                                                <div class="bs-example-tooltips tooltip-float-width">
-                                                    <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
-                                                        <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                    </a>
-                                                </div>
-                                                <label class="control-label text-right tooltip-float">Creator's Address</label>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <label  disabled="" class="form-control" data-bind="text: creatorAddress">
-                                                </label></div>
-                                        </div>
-                                    </div>
+                                    
                                     <div class="col-lg-9 marginBottom12" >
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
@@ -125,19 +112,16 @@
                                                         <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
                                                     </a>
                                                 </div>
-                                                <label class="control-label text-right tooltip-float">Images</label>
+                                                <label class="control-label text-right tooltip-float">Image</label>
                                             </div>
 
-                                            <div class="col-md-3">
-                                                <img id="vehicleImage" alt="" style="width: 120px;height:120px" data-bind="attr:{src:leftImage }" />
-                                                <h5>Left<span></span></h5>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <img id="vehicleImage" alt="" style="width: 120px;height:120px" data-bind="attr:{src:rightImage }" />
-                                                <h5>Right<span></span></h5>
+                                            <div class="col-md-6">
+                                                <img id="vehicleImage" alt="" style="width: 120px;height:120px" data-bind="attr:{src:imagePath }" />
+                                                <h5><span></span></h5>
                                             </div>
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
                         </div>

@@ -158,6 +158,39 @@ namespace SMD.Implementation.Services
                 TotalCount = rowCount
             };
         }
+
+        /// <summary>
+        /// Update Ad CAmpaign | baqer
+        /// </summary>
+        public AdCampaign UpdateAdCampaign(AdCampaign source)
+        {
+            var dbAd =_adCampaignRepository.Find(source.CampaignId);
+            // Update 
+            if (dbAd != null)
+            {
+                // Approval
+                if (source.Approved == true)
+                {
+                    dbAd.Approved = true;
+                    dbAd.ApprovalDateTime = DateTime.Now;
+                    dbAd.ApprovedBy = _adCampaignRepository.LoggedInUserIdentity;
+                    dbAd.Status = (Int32) AdCampaignStatus.Live;
+                }
+                // Rejection 
+                else
+                {
+                    dbAd.Status = (Int32)AdCampaignStatus.ApprovalRejected;
+                    dbAd.Approved = false;
+                    dbAd.RejectedReason = source.RejectedReason;
+                }
+                dbAd.ModifiedDateTime = DateTime.Now;
+                dbAd.ModifiedBy = _adCampaignRepository.LoggedInUserIdentity;
+
+                _adCampaignRepository.SaveChanges();
+                return _adCampaignRepository.Find(source.CampaignId);
+            }
+            return new AdCampaign();
+        }
         #endregion
     }
 }

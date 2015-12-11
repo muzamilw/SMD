@@ -1,20 +1,20 @@
 ﻿define(["ko", "underscore", "underscore-ko"], function(ko) {
 
     var // ReSharper disable InconsistentNaming
-      Survey = function (sQId, spcQuestion, spcDes, spcDisplayQuestion, spcIsApproved, spcRejectionReason,
-          subDate, spcCreatedBy,address,leftImg,righImg) {
+      AdCampaign = function (sQId, spcName, spcDes, spcIsApproved, spcRejectionReason,
+          subDate, spcCreatedBy, spcType, spcPath) {
           var
               id = ko.observable(sQId),
-              question = ko.observable(spcQuestion),
+              campaignName = ko.observable(spcName),
               description = ko.observable(spcDes),
-              displayQuestion = ko.observable(spcDisplayQuestion),
+
               isApproved = ko.observable(spcIsApproved),
               rejectionReason = ko.observable(spcRejectionReason),
               submissionDate = ko.observable(subDate),
               createdBy = ko.observable(spcCreatedBy),
-              creatorAddress = ko.observable(address),
-              leftImage = ko.observable(leftImg),
-              rightImage = ko.observable(righImg),
+              type = ko.observable(spcType),
+              imagePath = ko.observable(spcPath),
+             
              
               errors = ko.validation.group({
 
@@ -24,7 +24,6 @@
                   return errors().length === 0;
               }),
               dirtyFlag = new ko.dirtyFlag({
-                  isApproved: isApproved,
                   rejectionReason: rejectionReason
               }),
               // Has Changes
@@ -38,23 +37,22 @@
               // Convert to server data
               convertToServerData = function () {
                   return {
-                      SqId:id(),
+                      CampaignId: id(),
                       Approved: isApproved(),
-                      RejectionReason: rejectionReason(),
+                      RejectedReason: rejectionReason(),
                   };
               };
           return {
               id: id,
-              question: question,
+              campaignName: campaignName,
               description: description,
-              displayQuestion: displayQuestion,
               isApproved: isApproved,
               rejectionReason: rejectionReason,
               submissionDate: submissionDate,
               createdBy: createdBy,
-              creatorAddress: creatorAddress,
-              leftImage: leftImage,
-              rightImage:rightImage,
+              type: type,
+              imagePath:imagePath,
+            
               
               hasChanges: hasChanges,
               convertToServerData:convertToServerData,
@@ -65,24 +63,23 @@
       };
 
 
-    ///////////////////////////////////////////////////////// Survey QUESTION
-    //server to client mapper For Survey QUESTION
-    var SurveyquestionServertoClientMapper = function (itemFromServer) {
-        return new Survey(itemFromServer.SqId, itemFromServer.Question, itemFromServer.Description,
-            itemFromServer.DisplayQuestion, itemFromServer.Approved, itemFromServer.RejectionReason,
-            itemFromServer.SubmissionDate, itemFromServer.CreatedBy, itemFromServer.CreatorAddress,
-        itemFromServer.LeftPicturePath, itemFromServer.RightPicturePath);
+    ///////////////////////////////////////////////////////// Ad-Campaign
+    //server to client mapper For AdCampaign
+    var AdCampaignServertoClientMapper = function (itemFromServer) {
+        return new AdCampaign(itemFromServer.CampaignId, itemFromServer.CampaignName, itemFromServer.Description,
+            itemFromServer.Approved, itemFromServer.RejectedReason,
+            itemFromServer.CreatedDateTime, itemFromServer.CreatedBy, itemFromServer.Type, itemFromServer.ImagePath);
     };
     
-    // Function to attain cancel button functionality Survey QUESTION
-    Survey.CreateFromClientModel = function (item) {
-        return new Survey(item.id, item.question, item.description, item.displayQuestion, item.isApproved,
+    // Function to attain cancel button functionality AdCampaign
+    AdCampaign.CreateFromClientModel = function (item) {
+        return new AdCampaign(item.id, item.question, item.description, item.displayQuestion, item.isApproved,
             item.rejectionReason, item.submissionDate, item.createdBy, item.creatorAddress, item.leftImage,
         item.rightImage);
     };
    
     return {
-        Survey: Survey,
-        SurveyquestionServertoClientMapper: SurveyquestionServertoClientMapper
+        AdCampaign: AdCampaign,
+        AdCampaignServertoClientMapper: AdCampaignServertoClientMapper
     };
 });

@@ -22,5 +22,10 @@ namespace SMD.Interfaces.Services
         /// Get Ad Campaigns that are need aprroval | baqer
         /// </summary>
         AdCampaignResposneModelForAproval GetAdCampaignForAproval(AdCampaignSearchRequest request);
+
+        /// <summary>
+        /// Update Ad CAmpaign  | baqer
+        /// </summary>
+        AdCampaign UpdateAdCampaign(AdCampaign source); 
     }
 }

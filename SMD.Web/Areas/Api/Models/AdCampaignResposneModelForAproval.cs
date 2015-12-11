@@ -1,10 +1,9 @@
-﻿using SMD.Models.DomainModels;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace SMD.Models.ResponseModels
+namespace SMD.MIS.Areas.Api.Models
 {
     /// <summary>
-    /// Campaign response model | Domain
+    /// Web Response Model 
     /// </summary>
     public class AdCampaignResposneModelForAproval
     {
