@@ -2420,6 +2420,9 @@
     <Content Include="Views\Account\SendCode.cshtml" />
     <Content Include="Views\Account\VerifyCode.cshtml" />
     <Content Include="Views\Home\Welcome.cshtml" />
+    <Content Include="Views\Shared\_LoginLayout.cshtml" />
+    <Content Include="Views\Shared\_LoginMain.cshtml" />
+    <Content Include="Views\Shared\_ExternalLoginPartial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2507,7 +2510,7 @@
           <AutoAssignPort>False</AutoAssignPort>
           <DevelopmentServerPort>30630</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://smd</IISUrl>
+          <IISUrl>http://smdpreview.com</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

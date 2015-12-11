@@ -1,0 +1,55 @@
+﻿@model SMD.Models.IdentityModels.ViewModels.LoginViewModel
+
+@using (Html.BeginForm("Login", "Account"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+
+    <div class="input-group">
+        <span class="input-group-addon" tabindex="-1"><i class="fa fa-user"></i></span>
+        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Email address" })
+    </div>
+    <div class="input-group">
+        <span class="input-group-addon" tabindex="-1"><i class="fa fa-key"></i></span>
+        @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password" })
+    </div>
+    <div id="remember-me-wrapper">
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="checkbox-nice">
+                    <input type="checkbox" id="remember-me" checked="checked" />
+                    <label for="remember-me">
+                        Remember me
+                    </label>
+                </div>
+            </div>
+            @Html.ActionLink("Forgot password?", "ForgotPassword", null, new { @id = "login-forget-link", @class = "col-xs-6" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <button type="submit" class="btn btn-success col-xs-12">
+                Login
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <p class="social-text">
+                Or login with
+            </p>
+        </div>
+    </div>
+}
+<div class="row">
+    @Html.Partial("~/Views/Shared/_ExternalLoginPartial.cshtml")    
+</div><br/>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="create-account">
+            <p>
+                Don't have an account yet ?&nbsp; @Html.ActionLink("Create", "Register")
+            </p>
+        </div>
+    </div>
+</div>
