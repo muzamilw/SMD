@@ -46,6 +46,11 @@ namespace SMD.MIS
             app.UseGoogleAuthentication(
                 clientId: "1029675763032-gg256372ksn705012edqf7446lhm3vos.apps.googleusercontent.com",
                 clientSecret: "SvkUMyA5MpgWRv-l_4k0IIEg");
+
+            // Use Facebook Authentication
+            app.UseFacebookAuthentication(
+                appId: "548046378686707",
+                appSecret: "8b14dbc1e36697ba30678b04c6a58672");
         }
     }
 }
