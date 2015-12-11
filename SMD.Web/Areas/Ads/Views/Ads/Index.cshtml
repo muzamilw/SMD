@@ -100,7 +100,7 @@
         <td class="col-sm-2">
             <!-- ko if: Status == 3 -->
             <div class="onoffswitch" style="margin-right:0px;">
-                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchDisplayTaxable" data-bind="checked: $root.selectedStore().isDeliveryTaxAble">
+                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchToPause" >
                 <label class="onoffswitch-label" for="switchDisplayTaxable">
                     <div class="onoffswitch-inner"></div>
                     <div class="onoffswitch-switch"></div>
@@ -117,41 +117,6 @@
 <script src="~/Scripts/jquery.tokenize.js"></script>
     <script type="text/javascript">
         require(["ads/ads.view"]);
-
-
-        $(document).ready(function () {
-            
-            $('#tokenizeCountries').tokenize({
-                placeholder: 'Add country',
-                onAddToken: function (value, text, e) {
-
-                    $(".Token .Close").click();
-                    
-                    var count = "count_" + $('#coun_token_cnt').children().length + 1;
-                    var htmlToAppend = '<div class="lang_newcnt"  id="' + count + '"><input type="text"  class="form-control lang_nr_box" readonly="readonly" value=' + text + '><a id="deleteToken' + count + '" onclick=RemoveCountryToken("' + count + '"); title="Delete" class="lang_del"> <i class="fa fa-times "></i></a></div>';
-                   
-                    $("#coun_token_cnt").css("display", "block");
-                    $("#coun_token_cnt").append(htmlToAppend);
-                }
-            });
-            $('#coun_token_cnt').next().next().css("display", "none");
-
-
-            $('#tokenizeLanguages').tokenize({
-                placeholder: 'Enter a language',
-                onAddToken: function (value, text, e) {
-
-                    $(".Token .Close").click();
-
-                    var count = "lang_"+ $('#lang_token_cnt').children().length + 1;
-                    var htmlToAppend = '<div class="lang_newcnt" id="' + count + '"><input type="text"   class="form-control lang_nr_box" readonly="readonly" value=' + text + '><a id="deleteToken' + count + '" onclick=RemoveLanguageToken("' + count + '"); title="Delete" class="lang_del"> <i class="fa fa-times "></i></a></div>';
-                  
-                    $("#lang_token_cnt").css("display", "block");
-                    $("#lang_token_cnt").append(htmlToAppend);
-                }
-            });
-
-        });
 
         function RemoveLanguageToken(tokenId) {
 

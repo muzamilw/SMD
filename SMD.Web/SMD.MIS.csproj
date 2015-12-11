@@ -401,6 +401,7 @@
     <Compile Include="Helper\CultureHelper.cs" />
     <Compile Include="ModelMappers\LanguageMapper.cs" />
     <Compile Include="ModelMappers\CountryMapper.cs" />
+    <Compile Include="ModelMappers\LocationMapper.cs" />
     <Compile Include="ModelMappers\ProfileQuestionAnswerMapper.cs" />
     <Compile Include="ModelMappers\ProfileQuestionGroupMapper.cs" />
     <Compile Include="ModelMappers\ProfileQuestionMapper.cs" />
@@ -414,6 +415,10 @@
     <Content Include="Areas\Ads\Scripts\ads.model.js" />
     <Content Include="Areas\Ads\Scripts\ads.view.js" />
     <Content Include="Areas\Ads\Scripts\ads.viewModel.js" />
+    <Content Include="Areas\Ads\Scripts\addApproval.dataservice.js" />
+    <Content Include="Areas\Ads\Scripts\addApproval.model.js" />
+    <Content Include="Areas\Ads\Scripts\addApproval.view.js" />
+    <Content Include="Areas\Ads\Scripts\addApproval.viewModel.js" />
     <Content Include="Areas\Common\Scripts\clientSidePagination.js" />
     <Content Include="Areas\Common\Scripts\paypalPayment.dataservice.js" />
     <Content Include="Areas\Common\Scripts\stripeChargeCustomer.dataservice.js" />
@@ -529,6 +534,9 @@
     </Content>
     <Content Include="Content\less\ProfileQuestion.css">
       <DependentUpon>ProfileQuestion.less</DependentUpon>
+    </Content>
+    <Content Include="Content\less\Survey.css">
+      <DependentUpon>Survey.less</DependentUpon>
     </Content>
     <Content Include="Content\ReportViewerSite.css" />
     <Content Include="Content\Site.css" />
@@ -1310,8 +1318,11 @@
     <Content Include="Areas\Survey\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Survey\Views\Shared\_AddEditSurvey.cshtml" />
     <Content Include="Content\less\Campaign.less" />
+    <Content Include="Content\less\Survey.less" />
     <Content Include="Areas\Survey\Views\Survey\SurveyQuestionApproval.cshtml" />
     <Content Include="Areas\Survey\Views\Survey\_SurveyQuestionEditor.cshtml" />
+    <Content Include="Areas\Ads\Views\Ads\_addEditor.cshtml" />
+    <Content Include="Areas\Ads\Views\Ads\AddAproval.cshtml" />
     <None Include="ModelMappers\config\Web.connectionstrings.default.config">
       <SubType>Designer</SubType>
     </None>

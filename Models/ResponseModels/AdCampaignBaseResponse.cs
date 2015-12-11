@@ -17,7 +17,7 @@ namespace SMD.Models.ResponseModels
         /// <summary>
         /// Cities
         /// </summary>
-        //public IEnumerable<City> Cities { get; set; }
+        public IEnumerable<City> Cities { get; set; }
 
         /// <summary>
         /// Country

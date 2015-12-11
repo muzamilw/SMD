@@ -51,6 +51,14 @@ namespace SMD.Repository.Repositories
         {
             return DbSet.Select(lang => lang).ToList();
         }
+
+        /// <summary>
+        /// Get List of searched Language 
+        /// </summary>
+        public IEnumerable<Language> GetSearchedLanguages(string searchString)
+        {
+            return DbSet.Where(lang => lang.LanguageName.Contains(searchString)).ToList();
+        }
         #endregion
     }
 }
