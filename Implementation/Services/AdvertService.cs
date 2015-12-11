@@ -1,14 +1,12 @@
 ﻿using SMD.Interfaces.Repository;
 using SMD.Interfaces.Services;
-using SMD.Models;
 using SMD.Models.Common;
 using SMD.Models.DomainModels;
+using SMD.Models.RequestModels;
 using SMD.Models.ResponseModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SMD.Implementation.Services
 {
@@ -146,6 +144,21 @@ namespace SMD.Implementation.Services
                 return false;
             }
            
+        }
+        #endregion
+        #region Public
+
+        /// <summary>
+        /// Get Ad Campaigns that are need aprroval | baqer
+        /// </summary>
+        public AdCampaignResposneModelForAproval GetAdCampaignForAproval(AdCampaignSearchRequest request)
+        {
+            int rowCount;
+            return new AdCampaignResposneModelForAproval
+            {
+                AdCampaigns = _adCampaignRepository.SearchAdCampaigns(request, out rowCount),
+                TotalCount = rowCount
+            };
         }
         #endregion
     }
