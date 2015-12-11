@@ -9,7 +9,7 @@ define("ads/ads.viewModel",
             viewModel: (function () {
                 var view,
                     advertGridContent = ko.observableArray([]),
-                     pager = ko.observable(),
+                    pager = ko.observable(),
                        // Controlls editor visibility 
                     isEditorVisible = ko.observable(true),
                     CampaignType = ko.observable('1'),
