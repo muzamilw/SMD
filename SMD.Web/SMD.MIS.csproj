@@ -537,6 +537,9 @@
     <Content Include="Content\less\ProfileQuestion.css">
       <DependentUpon>ProfileQuestion.less</DependentUpon>
     </Content>
+    <Content Include="Content\less\Survey.css">
+      <DependentUpon>Survey.less</DependentUpon>
+    </Content>
     <Content Include="Content\ReportViewerSite.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -1317,6 +1320,7 @@
     <Content Include="Areas\Survey\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Survey\Views\Shared\_AddEditSurvey.cshtml" />
     <Content Include="Content\less\Campaign.less" />
+    <Content Include="Content\less\Survey.less" />
     <Content Include="Areas\Survey\Views\Survey\SurveyQuestionApproval.cshtml" />
     <Content Include="Areas\Survey\Views\Survey\_SurveyQuestionEditor.cshtml" />
     <Content Include="Areas\Ads\Views\Ads\_addEditor.cshtml" />
@@ -2429,6 +2433,9 @@
     <Content Include="Views\Account\SendCode.cshtml" />
     <Content Include="Views\Account\VerifyCode.cshtml" />
     <Content Include="Views\Home\Welcome.cshtml" />
+    <Content Include="Views\Shared\_LoginLayout.cshtml" />
+    <Content Include="Views\Shared\_LoginMain.cshtml" />
+    <Content Include="Views\Shared\_ExternalLoginPartial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2516,7 +2523,7 @@
           <AutoAssignPort>False</AutoAssignPort>
           <DevelopmentServerPort>30630</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://smd</IISUrl>
+          <IISUrl>http://smdpreview.com</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

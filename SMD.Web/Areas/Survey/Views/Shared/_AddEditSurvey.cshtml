@@ -24,8 +24,403 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-12 col-md-12 col-sm-12">
-                <!-- template -->
+            <div class="col-lg-12 col-md-12 col-sm-12" data-bind="with: $root.selectedQuestion">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="main-box no-header clearfix">
+                            <div class="col-lg-12 form-horizontal" style="    padding: 20px;">
+                                <div class="tabsdescriptions" style="margin-left:3px;">
+                                    <div class="col-lg-9" style="padding-left: 0 !important;">
+                                        <p class="group-header-description" style="margin-top:-1px;">
+                                            Manage the basic details of your survey in this section.
+                                        </p>
+                                    </div>
+                                    <div class="col-lg-3 pull-left" style="margin-top:-9px;padding-right:0px;">
+                                        <div class="col-lg-5 text-right">
+                                            <div class="bs-example-tooltips tooltip-float-width">
+                                                <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-original-title="" title="">
+                                                    <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                </a>
+                                            </div>
+                                            <label class="control-label">Status</label>
+                                        </div>
+                                        <div class="col-lg-6">
+
+                                            <label class="control-label bold">Archived</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-9">
+                                    <div class="form-group" style="margin-bottom:14px;">
+                                        <div class="col-lg-3 text-right">
+
+                                            <label for="txtSurveyTtile" class="control-label text-right tooltip-float">Survey Title</label>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <input type="text" name="Campaign Name" class="form-control" id="txtSurveyTtile" placeholder="Enter Survey title" data-bind="value: Question">
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group" style="margin-bottom:14px;">
+                                        <div class="col-lg-3 text-right" style="padding-top:12px;">
+
+                                            <label for="txtDisplayQuestion" class="control-label text-right tooltip-float">Survey Display Question</label>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <input type="text" style="height:60px;" name="" class="form-control height60 font24px" id="txtDisplayQuestion" placeholder="Survey Display Question" data-bind="value: DisplayQuestion">
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group" style="margin-bottom:25px;">
+                                        <div class="col-lg-3 text-right" style="padding-top:12px;">
+
+                                            <label for="txtSurveyDesc" class="control-label text-right tooltip-float">Survey Description</label>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <textarea class="form-control" id="txtSurveyDesc" rows="5" placeholder="Enter Description" data-bind="value: Description"></textarea>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group" style="margin-bottom:25px;">
+                                        <div class="col-lg-1"></div>
+                                        <div class="col-lg-5">
+                                            <div class="col-lg-4 text-right" style="padding-top:12px;">
+
+                                                <label for="txtSurveyDesc" class="control-label text-right tooltip-float">Left Answer</label>
+                                            </div>
+                                            <div class="col-lg-6">
+
+                                                <div class="col-lg-12">
+
+                                                    <div style="width:210px;text-align:center;">
+                                                        <img style="width:100px;height:auto;" data-bind="visible:LeftPictureBytes()==null  ,attr: { src: '@Url.Content("~/")' + LeftPicturePath() }" />
+                                                        <img style="width:100px;height:auto;" data-bind="visible:LeftPictureBytes()!=null,attr: { src: LeftPictureBytes }" />
+
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="col-lg-12" style="margin-top:15px;text-align:center;width:240px;padding-right:0px;">
+                                                    <div class="col-lg-5" style="padding-right:10px;">
+                                                        <div class="bs-example-tooltips tooltip-float-width">
+                                                            <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="left" data-html="true" data-content="" data-original-title="" title="">
+                                                                <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6" style="text-align:left;">
+                                                        <div class="fileUpload btn btn-primary">
+                                                            <span>Upload </span>
+                                                            <input type="file" class="upload" id="image_files"  data-bind="files: { onLoaded: $root.storeLeftImageCallback, fileFilter: 'image.*'}" />
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="col-lg-3 text-right" style="padding-top:12px;">
+
+                                                <label for="txtSurveyDesc" class="control-label text-right tooltip-float">Right Answer</label>
+                                            </div>
+                                            <div class="col-lg-6">
+
+                                                <div class="col-lg-12">
+
+                                                    <div style="width:210px;text-align:center;">
+                                                        <img style="width:100px;height:auto;" data-bind="visible:RightPictureBytes()==null,attr: { src: '@Url.Content("~/")' + RightPicturePath() }" />
+                                                        <img style="width:100px;height:auto;" data-bind="visible:RightPictureBytes()!=null,attr: { src: RightPictureBytes }" />
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="col-lg-12" style="margin-top:15px;text-align:center;width:240px;padding-right:0px;">
+                                                    <div class="col-lg-5" style="padding-right:10px;">
+                                                        <div class="bs-example-tooltips tooltip-float-width">
+                                                            <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="left" data-html="true" data-content="" data-original-title="" title="">
+                                                                <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6" style="text-align:left;">
+                                                        <div class="fileUpload btn btn-primary">
+                                                            <span>Upload </span>
+                                                            <input type="file" class="upload" id="image_files"  data-bind="files: { onLoaded: $root.storeRightImageCallback, fileFilter: 'image.*'}" />
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <div class="col-lg-3 text-right">
+                                            <div class="bs-example-tooltips tooltip-float-width">
+                                                <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-original-title="" title="">
+                                                    <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                </a>
+                                            </div>
+                                            <label for="txtBudget" class="control-label text-right tooltip-float">Schedule</label>
+                                        </div>
+                                        <div class="col-sm-6" style="background-color: gainsboro">
+                                            <div class="form-group " style="margin-top: 15px;">
+                                                <div class="col-sm-4 text-right">
+                                                    <label for="validFromDate" class="control-label text-right tooltip-float">Start Date</label>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control" id="validFromDate" data-bind="datetimepicker:StartDate">
+                                                </div>
+
+                                            </div>
+                                            <div class="form-group ">
+                                                <div class="col-sm-4 text-right">
+                                                    <label for="validUptoDate" class="control-label text-right tooltip-float">End Date</label>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control" id="validUptoDate" data-bind="datetimepicker:EndDate">
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-lg-3 text-right">
+                                            <div class="bs-example-tooltips tooltip-float-width">
+                                                <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
+                                                    <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                </a>
+                                            </div>
+                                            <label for="txtAge" class="control-label text-right tooltip-float">Age</label>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <select class="form-control" data-bind="value: AgeRangeStart">
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                                <option>5</option>
+                                            </select>
+                                        </div>
+                                        <div class="pull-left" style="width:10px;">
+                                            -
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <select class="form-control" data-bind="value: AgeRangeEnd">
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                                <option>5</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-lg-3 text-right">
+                                            <div class="bs-example-tooltips tooltip-float-width">
+                                                <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
+                                                    <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                </a>
+                                            </div>
+                                            <label for="txtGender" class="control-label text-right tooltip-float">Gender</label>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="radio">
+                                                <input type="radio" name="optionsRadiosGender" id="optionsRadiosGenderAll" value="1" data-bind="checked: Gender">
+                                                <label for="optionsRadiosGenderAll">
+                                                    All
+                                                </label>
+                                            </div>
+                                            <div class="radio">
+                                                <input type="radio" name="optionsRadiosGender" id="optionsRadiosGenderMEn" value="2" data-bind="checked: Gender">
+                                                <label for="optionsRadiosGenderMEn">
+                                                    Men
+                                                </label>
+                                                <span class="help-block text-right"></span>
+                                            </div>
+                                            <div class="radio">
+                                                <input type="radio" name="optionsRadiosGender" id="optionsRadiosGenderWMEn" value="3" data-bind="checked: Gender">
+                                                <label for="optionsRadiosGenderWMEn">
+                                                    Men
+                                                </label>
+                                                <span class="help-block text-right"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-lg-3 text-right">
+                                            <div class="bs-example-tooltips tooltip-float-width">
+                                                <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
+                                                    <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                </a>
+                                            </div>
+                                            <label for="txtCountries" class="control-label text-right tooltip-float">Locations</label>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div id="coun_token_cnt" style="display:none;"></div>
+                                            <div id="count_edt">
+                                                <div class="coun_in_ex_cnt">
+                                                    <select id="in_ex_count_opt" class="form-control">
+                                                        <option value="1">Include</option>
+                                                        <option value="2">Exclude</option>
+                                                    </select>
+                                                </div>
+                                                <div class="sep-line">
+
+                                                </div>
+                                                <div class="count_token_opt_cnt">
+                                                    <select id="tokenizeCountries" multiple="multiple" class="tokenize-sample" data-bind="options: $root.countries, optionsText: 'CountryName', optionsValue: 'CountryId'"></select>
+
+                                                </div>
+                                                <div class="clearfix">
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-lg-3 text-right">
+                                            <div class="bs-example-tooltips tooltip-float-width">
+                                                <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
+                                                    <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                </a>
+                                            </div>
+                                            <label for="txtLanguages" class="control-label text-right tooltip-float">Languages</label>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div id="lang_token_cnt" style="display:none;"></div>
+                                            <div id="land_edt">
+                                                <div class="lan_token_opt_cnt">
+                                                    <select id="tokenizeLanguages" multiple="multiple" class="tokenize-sample" data-bind="options: $root.langs, optionsText: 'LanguageName', optionsValue: 'LanguageId'"></select>
+
+                                                </div>
+                                                <div class="clearfix">
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    @*<div class="form-group">
+                                        <div class="col-lg-3 text-right">
+                                            <div class="bs-example-tooltips tooltip-float-width">
+                                                <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
+                                                    <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                </a>
+                                            </div>
+                                            <label for="txtAge" class="control-label text-right tooltip-float">Link With Profile Questions</label>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <select class="form-control">
+                                                <option>Select Question 1-2-3</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                                <option>5</option>
+                                            </select>
+                                        </div>
+                                        <div class="pull-left" style="width:10px;">
+                                            -
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <select class="form-control">
+                                                <option>Select Ans</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                                <option>5</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <div class="col-lg-3 text-right">
+                                            <div class="bs-example-tooltips tooltip-float-width">
+                                                <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
+                                                    <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                </a>
+                                            </div>
+                                            <label for="txtAge" class="control-label text-right tooltip-float">Link with Survey Question</label>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <select class="form-control">
+                                                <option>Question</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                                <option>5</option>
+                                            </select>
+                                        </div>
+                                        <div class="pull-left" style="width:10px;">
+                                            -
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <select class="form-control">
+                                                <option>Left Ans</option>
+                                                <option>Right Ans</option>
+
+                                            </select>
+                                        </div>
+                                    </div>*@
+
+                                    <div class="form-group">
+                                        <div class="col-lg-3 text-right">
+
+                                            <label for="txtVerifyQuestion" class="control-label text-right tooltip-float">&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                        </div>
+                                        <div class="col-lg-6 text-left">
+                                            <label for="txtVerifyQuestion" class="">Modification and creation date time</label>
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                                <div class="col-lg-3 col-md-4 col-sm-4">
+                                    <div>
+
+                                        <div class="clearfix">
+
+
+                                            <div class="col-lg-12">
+
+                                                <div style="width:210px;text-align:center;">
+                                                    <img src="/Content/Images/Company_Default.png">
+                                                </div>
+
+                                            </div>
+
+                                            <div class="col-lg-12" style="margin-top:15px;text-align:center;width:240px;padding-right:0px;">
+                                                <label> Potential Reach Table will go here </label>
+                                            </div>
+
+                                        </div>
+
+
+
+
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
