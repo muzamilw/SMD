@@ -49,14 +49,13 @@
                                     <label class="control-label">Archived</label>
                                 </div>
                                 <div class="col-lg-6">
-                                    <div class="onoffswitchlive" style="margin-right:0; margin-top: -4px;">
-                                        <input type="checkbox" name="onoffswitch" class="onoffswitchlive-checkbox" id="switchIsAdArchived" data-bind="checked: Archived">
-                                        <label class="onoffswitchlive-label" for="switchStoreLive">
-                                            <div class="onoffswitchlive-inner"></div>
-                                            <div class="onoffswitchlive-switch"></div>
+                                    <div class="onoffswitch">
+                                        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchToArchieved">
+                                        <label class="onoffswitch-label" for="switchToArchieved">
+                                            <div class="onoffswitch-inner"></div>
+                                            <div class="onoffswitch-switch"></div>
                                         </label>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
@@ -90,6 +89,15 @@
                                 <div class="col-lg-6">
                                     <textarea class="form-control" id="txtCampaignDesc" rows="5" placeholder="Enter Description" data-bind="value: CampaignDescription"></textarea>
 
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-3 text-right">
+
+                                    <label for="ddpLanguage" class="control-label text-right tooltip-float">Select Language</label>
+                                </div>
+                                <div class="col-lg-6">
+                                    <select id="ddpLanguage" class="form-control" data-bind="options: $root.langs, optionsText: 'LanguageName', optionsValue: 'LanguageId'"></select>
                                 </div>
                             </div>
                             <div class="form-group" style="margin-bottom:11px;">
@@ -164,17 +172,37 @@
                                     <label for="txtGender" class="control-label text-right tooltip-float">Gender</label>
                                 </div>
                                 <div class="col-lg-6">
-                                    <div class="btn-group" data-toggle="buttons">
+                                    <div class="radio">
+                                        <input type="radio" name="optionsRadiosGender" id="optionsRadiosGenderAll" value="1" data-bind="checked: Gender">
+                                        <label for="optionsRadiosGenderAll">
+                                            All
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <input type="radio" name="optionsRadiosGender" id="optionsRadiosGenderMEn" value="2" data-bind="checked: Gender">
+                                        <label for="optionsRadiosGenderMEn">
+                                            Men
+                                        </label>
+                                        <span class="help-block text-right"></span>
+                                    </div>
+                                    <div class="radio">
+                                        <input type="radio" name="optionsRadiosGender" id="optionsRadiosGenderWMEn" value="3" data-bind="checked: Gender">
+                                        <label for="optionsRadiosGenderWMEn">
+                                            Men
+                                        </label>
+                                        <span class="help-block text-right"></span>
+                                    </div>
+                                    @*<div class="btn-group" data-toggle="buttons">
                                         <label class="btn btn-primary">
                                             <input type="radio" name="genderoptions" id="GALL" value="1" data-bind="checked: Gender">All
                                         </label>
                                         <label class="btn btn-primary">
                                             <input type="radio" name="genderoptions" id="GMen" value="2" data-bind="checked: Gender">Men
                                         </label>
-                                        <label class="btn btn-primary active">
+                                        <label class="btn btn-primary">
                                             <input type="radio" name="genderoptions" id="GWomen" value="3" data-bind="checked: Gender">Women
                                         </label>
-                                    </div>
+                                    </div>*@
                                 </div>
                             </div>
                             <div class="form-group">
