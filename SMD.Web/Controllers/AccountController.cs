@@ -29,6 +29,27 @@ namespace SMD.MIS.Controllers
         private ApplicationUserManager _userManager;
         private IClaimsSecurityService claimsSecurityService;
         private IEmailManagerService emailManagerService;
+
+        /// <summary>
+        /// Adds Claims to generated identity
+        /// </summary>
+        /// <param name="identity"></param>
+        private void SetupUserClaims(ClaimsIdentity identity)
+        {
+            // Parse TimeZoneOffset.
+            var timeZoneCookie = Request.Cookies["_timeZoneOffset"];
+            var timeZoneOffSetValue = TimeSpan.FromMinutes(0);
+            if (timeZoneCookie != null)
+            {
+                double offsetMinutes = 0;
+                if (double.TryParse(timeZoneCookie.Value, out offsetMinutes))
+                {
+                    timeZoneOffSetValue = TimeSpan.FromMinutes(offsetMinutes);
+                }
+            }
+            claimsSecurityService.AddClaimsToIdentity(new UserIdentityModel { TimezoneOffset = timeZoneOffSetValue },
+                identity);
+        }
         
         #endregion
 
@@ -120,8 +141,7 @@ namespace SMD.MIS.Controllers
             {
                 case SignInStatus.Success:
                     {
-                        claimsSecurityService.AddClaimsToIdentity(new UserIdentityModel(), 
-                            identity);
+                        SetupUserClaims(identity);
                         AuthenticationManager.SignIn(new AuthenticationProperties { IsPersistent = true }, identity);
                         return RedirectToLocal(returnUrl);
                     }
@@ -420,6 +440,7 @@ namespace SMD.MIS.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    SetupUserClaims(loginInfo.ExternalIdentity);
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -464,6 +485,7 @@ namespace SMD.MIS.Controllers
                     if (result.Succeeded)
                     {
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                        SetupUserClaims(info.ExternalIdentity);
                         return RedirectToLocal(returnUrl);
                     }
                 }

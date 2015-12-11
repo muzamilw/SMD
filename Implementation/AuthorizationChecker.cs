@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using SMD.Common;
 using SMD.Interfaces.Data;
 using SMD.Interfaces;
@@ -34,7 +35,7 @@ namespace SMD.Implementation
         /// </summary>
         public bool IsPortalAdministrator()
         {
-            IList<SmdRoleClaimValue> roles = ClaimHelper.GetClaimsByType<SmdRoleClaimValue>(SmdClaimTypes.MisRole);
+            IList<SmdRoleClaimValue> roles = ClaimHelper.GetClaimsByType<SmdRoleClaimValue>(ClaimTypes.Role);
             return roles.Any(role => role.Role == SecurityRoles.Admin);
         }
 
@@ -47,7 +48,7 @@ namespace SMD.Implementation
             {
                 throw new ArgumentNullException("requiredPortalRoles");
             }
-            IEnumerable<SmdRoleClaimValue> roles = ClaimHelper.GetClaimsByType<SmdRoleClaimValue>(SmdClaimTypes.MisRole);
+            IEnumerable<SmdRoleClaimValue> roles = ClaimHelper.GetClaimsByType<SmdRoleClaimValue>(ClaimTypes.Role);
             return !requiredPortalRoles.Any() || roles.Any(role => requiredPortalRoles.Contains(role.Role));
         }
 
