@@ -2,7 +2,7 @@
 
     var // ReSharper disable InconsistentNaming
       AdCampaign = function (sQId, spcName, spcDes, spcIsApproved, spcRejectionReason,
-          subDate, spcCreatedBy, spcType, spcPath) {
+          subDate, spcCreatedBy, spcType, spcPath, spcLink, spcrate,spcBudget) {
           var
               id = ko.observable(sQId),
               campaignName = ko.observable(spcName),
@@ -14,6 +14,9 @@
               createdBy = ko.observable(spcCreatedBy),
               type = ko.observable(spcType),
               imagePath = ko.observable(spcPath),
+              landingLink = ko.observable(spcLink),
+              clickRate = ko.observable(spcrate),
+              maxBudget = ko.observable(spcBudget),
              
              
               errors = ko.validation.group({
@@ -51,8 +54,10 @@
               submissionDate: submissionDate,
               createdBy: createdBy,
               type: type,
-              imagePath:imagePath,
-            
+              imagePath: imagePath,
+              landingLink: landingLink,
+              clickRate:clickRate,
+              maxBudget:maxBudget,
               
               hasChanges: hasChanges,
               convertToServerData:convertToServerData,
@@ -68,14 +73,13 @@
     var AdCampaignServertoClientMapper = function (itemFromServer) {
         return new AdCampaign(itemFromServer.CampaignId, itemFromServer.CampaignName, itemFromServer.Description,
             itemFromServer.Approved, itemFromServer.RejectedReason,
-            itemFromServer.CreatedDateTime, itemFromServer.CreatedBy, itemFromServer.Type, itemFromServer.ImagePath);
+            itemFromServer.CreatedDateTime, itemFromServer.CreatedBy, itemFromServer.Type, itemFromServer.ImagePath, itemFromServer.LandingPageVideoLink,
+        itemFromServer.ClickRate, itemFromServer.MaxBudget);
     };
     
     // Function to attain cancel button functionality AdCampaign
     AdCampaign.CreateFromClientModel = function (item) {
-        return new AdCampaign(item.id, item.question, item.description, item.displayQuestion, item.isApproved,
-            item.rejectionReason, item.submissionDate, item.createdBy, item.creatorAddress, item.leftImage,
-        item.rightImage);
+       // To be Implemented
     };
    
     return {

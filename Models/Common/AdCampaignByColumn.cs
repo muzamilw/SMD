@@ -10,6 +10,7 @@ namespace SMD.Models.Common
         Description=2,
         Type=3,
         CreatedBy=4,
-        CreationDate=5
+        CreationDate=5,
+        ClickRate=6
     }
 }

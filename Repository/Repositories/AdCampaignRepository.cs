@@ -27,7 +27,8 @@ namespace SMD.Repository.Repositories
                         {AdCampaignByColumn.Description, d => d.Description} ,     
                         {AdCampaignByColumn.Type, d => d.Type} ,     
                         {AdCampaignByColumn.CreatedBy, d => d.CreatedBy}  ,    
-                        {AdCampaignByColumn.CreationDate, d => d.CreatedDateTime} 
+                        {AdCampaignByColumn.CreationDate, d => d.CreatedDateTime} ,
+                        {AdCampaignByColumn.ClickRate, d => d.ClickRate} 
                     };
 
         public AdCampaignRepository(IUnityContainer container)
