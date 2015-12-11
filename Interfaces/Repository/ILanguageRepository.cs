@@ -12,5 +12,7 @@ namespace SMD.Interfaces.Repository
         /// Get List of Language 
         /// </summary>
         IEnumerable<Language> GetAllLanguages();
+
+        IEnumerable<Language> GetSearchedLanguages(string searchString);
     }
 }

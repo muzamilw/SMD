@@ -35,7 +35,11 @@ namespace SMD.Repository.Repositories
             get { return db.Countries; }
         }
         #endregion
+
+        
         #region Public
+       
+      
         public Country Find(int id)
         {
             throw new NotImplementedException();
@@ -48,6 +52,14 @@ namespace SMD.Repository.Repositories
         {
            return DbSet.Select(country => country).ToList();
         }
+        /// <summary>
+        /// Get List of Coutries 
+        /// </summary>
+        public IEnumerable<Country> GetSearchedCountries(string searchString)
+        {
+            return DbSet.Where(country => country.CountryName.StartsWith(searchString)).ToList();
+        }
+       
         #endregion
     }
 }

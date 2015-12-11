@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "Paypal Example";
+}
+
+<div class="row" id="paypalBinding">
+    <div class="col-lg-12">
+        <div class="row">
+            <div class="col-lg-12">
+                <ol class="breadcrumb">
+                    <li><a href="~/Home/Welcome">&nbsp;</a></li>
+                </ol>
+                <div class="clearfix">
+                    <h1 class="pull-left" style="padding-left: 0">Paypal Example</h1>
+                </div>
+                <!-- ko stopBinding: true -->
+                @Html.Partial("~/Areas/Common/Views/Shared/_PaypalPayment.cshtml")
+                <!-- /ko -->
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        require(["pQuestion/paypalExample.view", "common/paypalPayment.view"]);
+    </script>
+
+}

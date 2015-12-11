@@ -26,10 +26,106 @@
         };
         return self;
     };
+    var campaignModel = function (source) {
 
+        if (source != undefined) {
+
+            var
+                   CampaignID = ko.observable(source.CampaignID),
+                   LanguageID = ko.observable(source.LanguageID),
+                   CampaignName = ko.observable(source.CampaignName),
+                   CampaignDescription = ko.observable(source.CampaignDescription),
+                   Archived = ko.observable(source.Archived),
+                   StartDateTime = ko.observable(source.StartDateTime),
+                   EndDateTime = ko.observable(source.EndDateTime),
+                   MaxBudget = ko.observable(source.MaxBudget),
+                   Type = ko.observable(source.Type),
+                   DisplayTitle = ko.observable(source.DisplayTitle),
+                   LandingPageVideoLink = ko.observable(source.LandingPageVideoLink),
+                   VerifyQuestion = ko.observable(source.VerifyQuestion),
+                   Answer1 = ko.observable(source.Answer1),
+                   Answer2 = ko.observable(source.Answer2),
+                   Answer3 = ko.observable(source.Answer3),
+                   CorrectAnswer = ko.observable(source.CorrectAnswer),
+                   AgeRangeStart = ko.observable(source.AgeRangeStart),
+                   AgeRangeEnd = ko.observable(source.AgeRangeEnd),
+                   Gender = ko.observable(source.Gender)
+
+        } else {
+            var
+                   CampaignID = ko.observable(),
+                   LanguageID = ko.observable(),
+                   CampaignName = ko.observable(),
+                   CampaignDescription = ko.observable(),
+                   Archived = ko.observable(),
+                   StartDateTime = ko.observable(),
+                   EndDateTime = ko.observable(),
+                   MaxBudget = ko.observable(),
+                   Type = ko.observable(),
+                   DisplayTitle = ko.observable(),
+                   LandingPageVideoLink = ko.observable(),
+                   VerifyQuestion = ko.observable(),
+                   Answer1 = ko.observable(),
+                   Answer2 = ko.observable(),
+                   Answer3 = ko.observable(),
+                   CorrectAnswer = ko.observable(),
+                   AgeRangeStart = ko.observable(),
+                   AgeRangeEnd = ko.observable(),
+                   Gender = ko.observable()
+
+        }
+
+        convertToServerData = function () {
+            return {
+                CampaignID: CampaignID(),
+                LanguageID: LanguageID(),
+                CampaignName: CampaignName(),
+                CampaignDescription: CampaignDescription(),
+                Archived: Archived(),
+                StartDateTime: StartDateTime(),
+                EndDateTime: EndDateTime(),
+                MaxBudget: MaxBudget(),
+                Type: Type(),
+                DisplayTitle: DisplayTitle(),
+                LandingPageVideoLink: LandingPageVideoLink(),
+                VerifyQuestion: VerifyQuestion(),
+                Answer1: Answer1(),
+                Answer2: Answer2(),
+                Answer3: Answer3(),
+                CorrectAnswer: CorrectAnswer(),
+                AgeRangeStart: AgeRangeStart(),
+                AgeRangeEnd: AgeRangeEnd(),
+                Gender: Gender()
+            };
+        };
+        self = {
+            CampaignID: CampaignID,
+            LanguageID: LanguageID,
+            CampaignName: CampaignName,
+            CampaignDescription: CampaignDescription,
+            Archived: Archived,
+            StartDateTime: StartDateTime,
+            EndDateTime: EndDateTime,
+            MaxBudget: MaxBudget,
+            Type: Type,
+            DisplayTitle: DisplayTitle,
+            LandingPageVideoLink: LandingPageVideoLink,
+            VerifyQuestion: VerifyQuestion,
+            Answer1: Answer1,
+            Answer2: Answer2,
+            Answer3: Answer3,
+            CorrectAnswer: CorrectAnswer,
+            AgeRangeStart: AgeRangeStart,
+            AgeRangeEnd: AgeRangeEnd,
+            Gender: Gender,
+            convertToServerData: convertToServerData
+        };
+        return self;
+    };
   
     return {
-        AdvertGridModel: AdvertGridModel
+        AdvertGridModel: AdvertGridModel,
+        campaignModel: campaignModel
        
     };
 });

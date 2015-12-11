@@ -28,6 +28,7 @@ namespace SMD.Models.DomainModels
         public DateTime? ApprovalDate { get; set; }
         public DateTime? CreationDate { get; set; }
         public DateTime? ModifiedDate { get; set; }
+        public DateTime? SubmissionDate { get; set; }
         public string CreatedBy { get; set; }
         public string ModifiedBy { get; set; }
         public string LeftPicturePath { get; set; }
@@ -43,6 +44,7 @@ namespace SMD.Models.DomainModels
         public int? AgeRangeStart { get; set; }
         public int? AgeRangeEnd { get; set; }
         public int? Gender { get; set; }
+
 
         public virtual ICollection<AdCampaignTargetCriteria> AdCampaignTargetCriterias { get; set; }
         public virtual User User { get; set; }

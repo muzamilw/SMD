@@ -81,7 +81,8 @@ namespace SMD.MIS
                 .Include("~/Scripts/autoNumeric/autoNumeric-1.9.25.min.js")
                 .Include("~/Scripts/numeral/numeral.min.js")
                 .Include("~/Scripts/knockout-ace.js")
-                .Include("~/Scripts/jquery.tokenize.js"));
+                .Include("~/Scripts/jquery.tokenize.js")
+                .Include("~/Scripts/typeahead.bundle.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                  "~/Scripts/bootstrap.js"));

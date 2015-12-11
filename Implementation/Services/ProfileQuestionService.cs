@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Configuration;
-using System.Data.Entity.Core.Objects.DataClasses;
-using System.IO;
-using System.Linq;
-using System.Web;
-using SMD.Interfaces.Repository;
+﻿using SMD.Interfaces.Repository;
 using SMD.Interfaces.Services;
 using SMD.Models.Common;
 using SMD.Models.DomainModels;
 using SMD.Models.RequestModels;
 using SMD.Models.ResponseModels;
+using System;
+using System.Collections.ObjectModel;
+using System.Configuration;
+using System.IO;
+using System.Linq;
+using System.Web;
 
 namespace SMD.Implementation.Services
 {
@@ -91,6 +90,7 @@ namespace SMD.Implementation.Services
         {
             var serverObj=_profileQuestionRepository.Find(source.PqId);
             #region Edit Question
+            // Edit Profile Question 
             if (serverObj != null)
             {
                 serverObj.Question = source.Question;
@@ -110,7 +110,7 @@ namespace SMD.Implementation.Services
                 if (source.ProfileQuestionAnswers != null)
                 {
                     #region Answer Add/Edit
-
+                    // Add/Edit Answer
                     foreach (var answer in source.ProfileQuestionAnswers)
                     {
                         var serverAns = _profileQuestionAnswerRepository.Find(answer.PqAnswerId);
@@ -225,7 +225,10 @@ namespace SMD.Implementation.Services
             return _profileQuestionRepository.Find(serverObj.PqId);
 
         }
-
+        
+        /// <summary>
+        /// Save Answer Image
+        /// </summary>
         public string SaveAnswerImage(ProfileQuestionAnswer source)
         {
             string mpcContentPath = ConfigurationManager.AppSettings["SMD_Content"];
@@ -245,6 +248,9 @@ namespace SMD.Implementation.Services
             return mapPath;
         }
        
+        /// <summary>
+        /// Saving Function 
+        /// </summary>
         private string SaveImage(string mapPath, string existingImage, string caption, string fileName,
             string fileSource, byte[] fileSourceBytes, bool fileDeleted = false)
         {

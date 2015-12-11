@@ -11,5 +11,10 @@ namespace SMD.Interfaces.Repository
     public interface ISurveyQuestionRepository : IBaseRepository<SurveyQuestion, long>
     {
         IEnumerable<SurveyQuestion> SearchSurveyQuestions(SurveySearchRequest request, out int rowCount);
+
+        /// <summary>
+        /// Get Rejected Survey Questions
+        /// </summary>
+        IEnumerable<SurveyQuestion> SearchRejectedProfileQuestions(SurveySearchRequest request, out int rowCount);
     }
 }

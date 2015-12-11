@@ -156,6 +156,11 @@ namespace SMD.Repository.BaseRepository
         /// </summary>
         public DbSet<AuditLog> AuditLogs { get; set; }
 
+        /// <summary>
+        /// cities
+        /// </summary>
+        public DbSet<City> Cities { get; set; }
+
         #endregion
     }
 }
