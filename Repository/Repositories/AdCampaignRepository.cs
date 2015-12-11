@@ -1,7 +1,9 @@
-﻿using Microsoft.Practices.Unity;
+﻿using System.Linq.Expressions;
+using Microsoft.Practices.Unity;
 using SMD.Interfaces.Repository;
 using SMD.Models.Common;
 using SMD.Models.DomainModels;
+using SMD.Models.RequestModels;
 using SMD.Repository.BaseRepository;
 using System;
 using System.Collections.Generic;
@@ -14,6 +16,18 @@ namespace SMD.Repository.Repositories
 {
     public class AdCampaignRepository : BaseRepository<AdCampaign>, IAdCampaignRepository
     {
+
+        /// <summary>
+        ///Ad Campaign Orderby clause
+        /// </summary>
+        private readonly Dictionary<AdCampaignByColumn, Func<AdCampaign, object>> _addCampaignByClause =
+            new Dictionary<AdCampaignByColumn, Func<AdCampaign, object>>
+                    {
+                        {AdCampaignByColumn.Name, d => d.CampaignName}  ,    
+                        {AdCampaignByColumn.Description, d => d.Description} ,     
+                        {AdCampaignByColumn.CreatedBy, d => d.CreatedBy}  ,    
+                        {AdCampaignByColumn.CreationDate, d => d.CreatedDateTime} 
+                    };
 
         public AdCampaignRepository(IUnityContainer container)
             : base(container)
@@ -53,6 +67,30 @@ namespace SMD.Repository.Repositories
 
             return query.ToList<CampaignGridModel>();
 
+        }
+
+        /// <summary>
+        /// Get Ad Campaigns
+        /// </summary>
+        public IEnumerable<AdCampaign> SearchAdCampaigns(AdCampaignSearchRequest request, out int rowCount)
+        {
+           int fromRow = (request.PageNo - 1) * request.PageSize;
+            int toRow = request.PageSize;
+            Expression<Func<AdCampaign, bool>> query =
+                ad => ad.Status == (Int32)AdCampaignStatus.SubmitForApproval;
+
+            rowCount = DbSet.Count(query);
+            return request.IsAsc
+                ? DbSet.Where(query)
+                    .OrderBy(_addCampaignByClause[request.AdCampaignOrderBy])
+                    .Skip(fromRow)
+                    .Take(toRow)
+                    .ToList()
+                : DbSet.Where(query)
+                    .OrderByDescending(_addCampaignByClause[request.AdCampaignOrderBy])
+                    .Skip(fromRow)
+                    .Take(toRow)
+                    .ToList();  
         }
     }
 }
