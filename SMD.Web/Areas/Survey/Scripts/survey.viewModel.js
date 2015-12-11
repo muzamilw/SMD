@@ -23,8 +23,9 @@ define("survey/survey.viewModel",
                     // Controlls editor visibility 
                     isEditorVisible = ko.observable(false),
                     ////selected Question
-                    selectedQuestion = ko.observable(new model.Survey({})),
-
+                    selectedQuestion = ko.observable(new model.Survey()),
+                    // age list 
+                    ageRange = ko.observable([{ value: '11', text: '11' }, { value: '12', text: '12' }, { value: '13', text: '13' }, { value: '14', text: '14' }, { value: '15', text: '15' }, { value: '16', text: '16' }, { value: '17', text: '17' }, { value: '18', text: '18' }, { value: '19', text: '19' }])
                     //Get Questions
                     getQuestions = function () {   
                         dataservice.searchSurveyQuestions(
@@ -122,7 +123,10 @@ define("survey/survey.viewModel",
                     },
                     // Add new Profile Question
                     addNewSurvey = function () {
+                        selectedQuestion(new model.Survey());
+                        selectedQuestion().Gender("1");
                         isEditorVisible(true);
+                        view.initializeTypeahead();
                     },
                     // Close Editor 
                     closeEditDialog = function () {
@@ -170,6 +174,7 @@ define("survey/survey.viewModel",
                         pager(pagination.Pagination({ PageSize: 10 }, questions, getQuestions));
                         // Base Data Call
                         getBasedata();
+                        selectedQuestion().Gender("1");
                     };
                 return {
                     initialize: initialize,
@@ -191,7 +196,8 @@ define("survey/survey.viewModel",
                     clearFilters: clearFilters,
                     countryfilterValue: countryfilterValue,
                     storeLeftImageCallback: storeLeftImageCallback,
-                    storeRightImageCallback: storeRightImageCallback
+                    storeRightImageCallback: storeRightImageCallback,
+                    ageRange: ageRange
                 };
             })()
         };
