@@ -61,5 +61,17 @@ namespace SMD.MIS.ModelMappers
                 SortOrder = source.SortOrder
             };
         }
+
+        /// <summary>
+        /// Create DD from Domain Model 
+        /// </summary>
+        public static ProfileQuestionAnswerDropdown CreateFromDropdown(this Models.DomainModels.ProfileQuestionAnswer source)
+        {
+            return new ProfileQuestionAnswerDropdown
+            {
+                PqAnswerId = source.PqAnswerId,
+                Answer = source.AnswerString
+            };
+        }
     }
 }

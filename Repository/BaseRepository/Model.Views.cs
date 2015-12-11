@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySetsE44B16C1FA866071616672721044FA75C5AE6F1020A078DB1CBF5F1D0B960A08))]
+[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets6D4BEF0E856F94BAF129A283FD1CC69B53C1D33C69B9B731D3056C1A37C1BAA1))]
 
 namespace Edm_EntityMappingGeneratedViews
 {
@@ -17,18 +17,18 @@ namespace Edm_EntityMappingGeneratedViews
     /// <Summary>
     /// The type contains views for EntitySets and AssociationSets that were generated at design time.
     /// </Summary>
-    public sealed class ViewsForBaseEntitySetsE44B16C1FA866071616672721044FA75C5AE6F1020A078DB1CBF5F1D0B960A08 : System.Data.Mapping.EntityViewContainer
+    public sealed class ViewsForBaseEntitySets6D4BEF0E856F94BAF129A283FD1CC69B53C1D33C69B9B731D3056C1A37C1BAA1 : System.Data.Mapping.EntityViewContainer
     {
         
         /// <Summary>
         /// The constructor stores the views for the extents and also the hash values generated based on the metadata and mapping closure and views.
         /// </Summary>
-        public ViewsForBaseEntitySetsE44B16C1FA866071616672721044FA75C5AE6F1020A078DB1CBF5F1D0B960A08()
+        public ViewsForBaseEntitySets6D4BEF0E856F94BAF129A283FD1CC69B53C1D33C69B9B731D3056C1A37C1BAA1()
         {
             this.EdmEntityContainerName = "BaseDbContext";
             this.StoreEntityContainerName = "SMDModelStoreContainer";
-            this.HashOverMappingClosure = "02e1ab74fbece42c772b88495742f58bb71b288524b47a1986251e18058d760c";
-            this.HashOverAllExtentViews = "e68e44de03d9b6d0ab6719468c8c5b8b2f8a54902a7b1c826a5392f763937fe4";
+            this.HashOverMappingClosure = "284eebd290bc482da8dcbd781da401a01ff72ccdefad44135563736341381edb";
+            this.HashOverAllExtentViews = "728f5bdea8ed6413d0c2c67cf94fae49ed8010a45f319d7c62765f1d798324c7";
             this.ViewCount = 44;
         }
         
@@ -561,7 +561,7 @@ namespace Edm_EntityMappingGeneratedViews
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.AdCampaignTargetLocation", @"
     SELECT VALUE -- Constructing AdCampaignTargetLocation
-        [SMDModel.Store.AdCampaignTargetLocation](T1.AdCampaignTargetLocation_ID, T1.AdCampaignTargetLocation_CampaignID, T1.AdCampaignTargetLocation_CountryID, T1.AdCampaignTargetLocation_CityID, T1.AdCampaignTargetLocation_Radius)
+        [SMDModel.Store.AdCampaignTargetLocation](T1.AdCampaignTargetLocation_ID, T1.AdCampaignTargetLocation_CampaignID, T1.AdCampaignTargetLocation_CountryID, T1.AdCampaignTargetLocation_CityID, T1.AdCampaignTargetLocation_Radius, T1.AdCampaignTargetLocation_IncludeorExclude)
     FROM (
         SELECT 
             T.Id AS AdCampaignTargetLocation_ID, 
@@ -569,6 +569,7 @@ namespace Edm_EntityMappingGeneratedViews
             T.CountryId AS AdCampaignTargetLocation_CountryID, 
             T.CityId AS AdCampaignTargetLocation_CityID, 
             T.Radius AS AdCampaignTargetLocation_Radius, 
+            T.IncludeorExclude AS AdCampaignTargetLocation_IncludeorExclude, 
             True AS _from0
         FROM BaseDbContext.AdCampaignTargetLocations AS T
     ) AS T1");
@@ -1060,7 +1061,7 @@ namespace Edm_EntityMappingGeneratedViews
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.AdCampaignTargetLocations", @"
     SELECT VALUE -- Constructing AdCampaignTargetLocations
-        [DomainModels.AdCampaignTargetLocation](T1.AdCampaignTargetLocation_Id, T1.AdCampaignTargetLocation_CampaignId, T1.AdCampaignTargetLocation_CountryId, T1.AdCampaignTargetLocation_CityId, T1.AdCampaignTargetLocation_Radius)
+        [DomainModels.AdCampaignTargetLocation](T1.AdCampaignTargetLocation_Id, T1.AdCampaignTargetLocation_CampaignId, T1.AdCampaignTargetLocation_CountryId, T1.AdCampaignTargetLocation_CityId, T1.AdCampaignTargetLocation_Radius, T1.AdCampaignTargetLocation_IncludeorExclude)
     FROM (
         SELECT 
             T.ID AS AdCampaignTargetLocation_Id, 
@@ -1068,6 +1069,7 @@ namespace Edm_EntityMappingGeneratedViews
             T.CountryID AS AdCampaignTargetLocation_CountryId, 
             T.CityID AS AdCampaignTargetLocation_CityId, 
             T.Radius AS AdCampaignTargetLocation_Radius, 
+            T.IncludeorExclude AS AdCampaignTargetLocation_IncludeorExclude, 
             True AS _from0
         FROM SMDModelStoreContainer.AdCampaignTargetLocation AS T
     ) AS T1");
