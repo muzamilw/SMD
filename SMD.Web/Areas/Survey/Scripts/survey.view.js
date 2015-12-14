@@ -75,7 +75,6 @@ define("survey/survey.view",
                                 //$("#coun_token_cnt").append(htmlToAppend);
                             }
                         });
-
                 },
                 // Initialize
                 initialize = function () {
