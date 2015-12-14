@@ -171,9 +171,28 @@ define("survey/survey.viewModel",
                          selectedQuestion().RightPictureBytes(data);
                     },
                      // remove location 
-                    onRemoveLocation = function (file, data) {
-                        selectedQuestion().RightPictureBytes(data);
+                    onRemoveLocation = function (item) {
+                        // Ask for confirmation
+                        confirmation.afterProceed(function () {
+                            deleteLocation(item);
+                        });
+                        confirmation.show();
                     },
+                     deleteLocation = function (item) {
+                         alert("del");
+                         //dataservice.deleteProfileQuestion(item.convertToServerData(), {
+                         //    success: function () {
+                         //        var newObjtodelete = questions.find(function (temp) {
+                         //            return temp.qId() == temp.qId();
+                         //        });
+                         //        questions.remove(newObjtodelete);
+                         //        toastr.success("You are Good!");
+                         //    },
+                         //    error: function () {
+                         //        toastr.error("Failed to delete!");
+                         //    }
+                         //});
+                     },
                     //add location
                     onAddLocation = function (item) {
                       
@@ -215,7 +234,8 @@ define("survey/survey.viewModel",
                     selectedLocation: selectedLocation,
                     selectedLocationRadius: selectedLocationRadius,
                     onAddLocation: onAddLocation,
-                    onRemoveLocation: onRemoveLocation
+                    onRemoveLocation: onRemoveLocation,
+                    deleteLocation:deleteLocation
                 };
             })()
         };

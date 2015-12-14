@@ -267,7 +267,7 @@
 
                                                 </div>
                                                 <div class="count_token_opt_cnt">
-                                                    <input type="text" data-autocomplete="off" class="" id="searchSurveyLocations" placeholder="Add country or city" />
+                                                    <input type="text" data-autocomplete="off" class="" id="searchSurveyLocations" placeholder="Add country or city"  />
                                                     <input type="text" class="" id="" placeholder="Add Radius" data-bind="value: $root.selectedLocationRadius " />
                                                     <button data-bind="click:$root.onAddLocation">Add Location</button>
                                                 </div>
@@ -422,13 +422,13 @@
 <script id="SurveyQuestionLocationTemplate" type="text/html">
     <div class="count_city_newcnt">
         <!--ko if:CityID == 0 || CityID == null-->
-        <input type="text" class="form-control lang_nr_box" readonly="readonly" data-bind="value:Country">
+        <input type="text" class="form-control lang_nr_box" readonly="readonly" data-bind="value:Country" style=" width: 60%;display: inline;float:left;">
         <!--/ko-->
         <!--ko if:CityID != 0 && CityID != null-->
-        <input type="text" class="form-control lang_nr_box" readonly="readonly" data-bind="value: City ">
+        <input type="text" class="form-control lang_nr_box" readonly="readonly" data-bind="value:'Radius: ' + City " style=" width: 60%;display: inline;float:left;">
         <!--/ko-->
         <!--ko if:Radius != 0 && Radius != null-->
-        <span class="form-control lang_nr_box" data-bind="text: Radius "></span>
+        <span class="form-control lang_nr_box" data-bind="text: Radius " style=" width: 40%;display: inline;float:left;"></span>
         <!--/ko-->
 
         
