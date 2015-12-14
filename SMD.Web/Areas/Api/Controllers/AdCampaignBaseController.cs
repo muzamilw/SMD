@@ -35,7 +35,7 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// </summary>
         public AdCampaignBaseResponse getBaseData([FromUri]CampaignSearchRequest request)
         {
-            if (request.RequestId == 2) //  get profile answers data 
+            if (request.RequestId == 2) //  get profile question data 
             {
                 return new AdCampaignBaseResponse
                 {
@@ -43,11 +43,19 @@ namespace SMD.MIS.Areas.Api.Controllers
 
                 };
             }
-            else if (request.RequestId == 3) //  get profile question data 
+            else if (request.RequestId == 3) //  get profile answer data 
             {
                 return new AdCampaignBaseResponse
                 {
                     ProfileQuestionAnswers = _campaignService.GetProfileQuestionAnswersData((int)request.QuestionId).ProfileQuestionAnswers.Select(ques => ques.CreateFromDropdown()),
+
+                };
+            }
+            else if (request.RequestId == 4) //  get survey question data 
+            {
+                return new AdCampaignBaseResponse
+                {
+                    SurveyQuestions = _campaignService.GetSurveyQuestionData().SurveyQuestions.Select(sur => sur.CreateFromDropdown()),
 
                 };
             }

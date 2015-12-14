@@ -27,5 +27,10 @@ namespace SMD.MIS.Areas.Api.Models
         /// profile question answer
         /// </summary>
         public IEnumerable<ProfileQuestionAnswerDropdown> ProfileQuestionAnswers { get; set; }
+
+        /// <summary>
+        /// survey question
+        /// </summary>
+        public IEnumerable<SurveyQuestionDropDown> SurveyQuestions { get; set; }
     }
 }

@@ -123,7 +123,7 @@
         return self;
     };
     var CriteriaModel = function (CriteriaID, Type, PQID, PQAnswerID, SQID, SQAnswer, IncludeorExclude, questionString,
-       answerString) {
+       answerString, surveyQuestLeftImageSrc, surveyQuestRightImageSrc) {
            var
                CriteriaID = ko.observable(CriteriaID),
                Type = ko.observable(Type),
@@ -134,6 +134,8 @@
                IncludeorExclude = ko.observable(IncludeorExclude),
                questionString = ko.observable(questionString),
                answerString = ko.observable(answerString),
+               surveyQuestLeftImageSrc = ko.observable(surveyQuestLeftImageSrc),
+               surveyQuestRightImageSrc = ko.observable(surveyQuestRightImageSrc),
                // Convert to server data
                convertToServerData = function () {
                    return {
@@ -145,7 +147,9 @@
                        SQAnswer: SQAnswer(),
                        IncludeorExclude: IncludeorExclude(),
                        questionString: questionString(),
-                       answerString: answerString()
+                       answerString: answerString(),
+                       surveyQuestLeftImageSrc: answerString(),
+                       surveyQuestRightImageSrc: answerString()
                    };
                };
            return {
@@ -158,6 +162,8 @@
                IncludeorExclude: IncludeorExclude,
                questionString: questionString,
                answerString: answerString,
+               surveyQuestLeftImageSrc: surveyQuestLeftImageSrc,
+               surveyQuestRightImageSrc: surveyQuestRightImageSrc,
                convertToServerData: convertToServerData
            };
     };

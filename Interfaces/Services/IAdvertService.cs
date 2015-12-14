@@ -18,5 +18,6 @@ namespace SMD.Interfaces.Services
         bool CreateCampaign(AdCampaign campaignModel);
         AdCampaignBaseResponse GetProfileQuestionData();
         AdCampaignBaseResponse GetProfileQuestionAnswersData(int QuestionId);
+        AdCampaignBaseResponse GetSurveyQuestionData();
     }
 }

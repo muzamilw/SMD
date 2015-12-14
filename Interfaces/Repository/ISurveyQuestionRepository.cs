@@ -16,5 +16,7 @@ namespace SMD.Interfaces.Repository
         /// Get Rejected Survey Questions
         /// </summary>
         IEnumerable<SurveyQuestion> SearchRejectedProfileQuestions(SurveySearchRequest request, out int rowCount);
+
+        IEnumerable<SurveyQuestion> GetAll();
     }
 }

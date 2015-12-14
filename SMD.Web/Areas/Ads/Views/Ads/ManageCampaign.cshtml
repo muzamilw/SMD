@@ -423,7 +423,9 @@
                             <div class="clearfix">
                                 <header class="main-box-header clearfix" style="padding-right:0px;">
                                     <div class="filter-block pull-right">
-
+                                        <a href="#" id="addTemplatePageBtn" class="btn btn-primary pull-right" data-toggle="modal" data-target=".bs-example-modal-lg" data-bind="click: $root.addNewSurveyCriteria">
+                                            Add Survey Criteria
+                                        </a>
                                         <a href="#" id="addTemplatePageBtn" class="btn btn-primary pull-right" data-toggle="modal" data-target=".bs-example-modal-lg" data-bind="click: $root.addNewProfileCriteria">
                                             Add Profile Criteria
                                         </a>
@@ -432,7 +434,7 @@
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                        <h4 class="modal-title" id="gridSystemModalLabel">Add Profile Criteria</h4>
+                                                        <h4 class="modal-title" id="gridSystemModalLabel">Add Criteria</h4>
                                                     </div>
                                                     <div class="modal-body" data-bind="with:$root.selectedCriteria">
                                                         <div class="row">
@@ -457,7 +459,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div id="questionContainer">
+                                                            <div data-bind="visible: Type() == 1">
                                                                 <div class="col-lg-9 marginBottom12">
                                                                     <div class="form-group">
                                                                         <div class="col-lg-5 text-right">
@@ -486,6 +488,51 @@
                                                                         </div>
                                                                         <div class="col-lg-5">
                                                                             <select id="ddprofileAnswers" class="form-control" data-bind="options: $root.profileAnswerList,  optionsText: 'Answer', optionsValue: 'PqAnswerId', optionsCaption: '&lt;' + 'Select Answer'+ '&gt;' , value:PQAnswerID"></select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div data-bind="visible: Type() == 2">
+                                                                <div class="col-lg-9 marginBottom12">
+                                                                    <div class="form-group">
+                                                                        <div class="col-lg-5 text-right">
+                                                                            <div class="bs-example-tooltips tooltip-float-width">
+                                                                                <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
+                                                                                    <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                                                </a>
+                                                                            </div>
+                                                                            <label class="control-label text-right tooltip-float">Select Survey Question Criteria</label>
+                                                                        </div>
+                                                                        <div class="col-lg-5">
+                                                                            <select id="ddsurveyQuestion" class="form-control" data-bind="options: $root.surveyQuestionList, optionsText: 'DisplayQuestion', optionsValue: 'SQID', optionsCaption: '&lt;' + 'Select Question'+ '&gt;' , value:SQID, event: { change: $root.onChangeSurveyQuestion } "></select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div id="surveyAnswersContainer" class="col-lg-9 marginBottom12" style="display:none;">
+                                                                    <div class="form-group">
+                                                                        <div class="col-lg-5 text-right">
+                                                                            <div class="bs-example-tooltips tooltip-float-width">
+                                                                                <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
+                                                                                    <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                                                </a>
+                                                                            </div>
+                                                                            <label class="control-label text-right tooltip-float">Select Answer</label>
+                                                                        </div>
+                                                                        <div class="col-lg-5">
+                                                                            <div class="radio">
+                                                                                <input type="radio" name="optionsRadiosSurveyAns" id="optionsRadiosSurveyAnsLeft" value="1" data-bind="checked: SQAnswer">
+                                                                                <label for="optionsRadiosSurveyAnsLeft">
+                                                                                    <img style="width:100px;height:auto;" data-bind="attr: { src: surveyQuestLeftImageSrc }" />
+                                                                                </label>
+                                                                            </div>
+                                                                            <div class="radio">
+                                                                                <input type="radio" name="optionsRadiosSurveyAns" id="optionsRadiosSurveyAnsRight" value="2" data-bind="checked: SQAnswer">
+                                                                                <label for="optionsRadiosSurveyAnsRight">
+                                                                                    <img style="width:100px;height:auto;" data-bind="attr: { src: surveyQuestRightImageSrc }" />
+                                                                                </label>
+                                                                                <span class="help-block text-right"></span>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>

@@ -27,6 +27,7 @@ namespace SMD.Implementation.Services
         private readonly IAdCampaignTargetCriteriaRepository _adCampaignTargetCriteriaRepository;
         private readonly IProfileQuestionRepository _profileQuestionRepository;
         private readonly IProfileQuestionAnswerRepository _profileQuestionAnswerRepository;
+        private readonly ISurveyQuestionRepository _surveyQuestionRepository;
         #endregion
 
         #region Constructor
@@ -42,7 +43,8 @@ namespace SMD.Implementation.Services
             IAdCampaignTargetLocationRepository adCampaignTargetLocationRepository,
             IAdCampaignTargetCriteriaRepository adCampaignTargetCriteriaRepository,
             IProfileQuestionRepository profileQuestionRepository,
-            IProfileQuestionAnswerRepository profileQuestionAnswerRepository)
+            IProfileQuestionAnswerRepository profileQuestionAnswerRepository,
+            ISurveyQuestionRepository surveyQuestionRepository)
         {
             this._adCampaignRepository = adCampaignRepository;
             this._languageRepository = languageRepository;
@@ -52,6 +54,7 @@ namespace SMD.Implementation.Services
             this._adCampaignTargetCriteriaRepository = adCampaignTargetCriteriaRepository;
             this._profileQuestionRepository = profileQuestionRepository;
             this._profileQuestionAnswerRepository = profileQuestionAnswerRepository;
+            this._surveyQuestionRepository = surveyQuestionRepository;
         }
         public List<CampaignGridModel> GetCampaignByUserId()
         {
@@ -111,6 +114,7 @@ namespace SMD.Implementation.Services
                         AdCampaignTargetCriteria oTargetCriteria = new AdCampaignTargetCriteria();
                         oTargetCriteria.CampaignId = campaignId;
                         oTargetCriteria.LanguageId = Convert.ToInt32(item);
+                        oTargetCriteria.Type = (int)AdCampaignCriteriaType.Language;
                         _adCampaignTargetCriteriaRepository.Add(oTargetCriteria);
                     }
                     _adCampaignTargetCriteriaRepository.SaveChanges();
@@ -173,6 +177,16 @@ namespace SMD.Implementation.Services
             return new AdCampaignBaseResponse
             {
                 ProfileQuestionAnswers = _profileQuestionAnswerRepository.GetAllProfileQuestionAnswerByQuestionId(QuestionId)
+            };
+        }
+        /// <summary>
+        /// Get survey questions 
+        /// </summary>
+        public AdCampaignBaseResponse GetSurveyQuestionData()
+        {
+            return new AdCampaignBaseResponse
+            {
+                SurveyQuestions = _surveyQuestionRepository.GetAll()
             };
         }
         #endregion

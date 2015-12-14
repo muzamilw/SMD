@@ -377,6 +377,7 @@
     <Compile Include="Areas\Api\Models\ProfileQuestionAnswerDropdown.cs" />
     <Compile Include="Areas\Api\Models\SurveyQuestion.cs" />
     <Compile Include="Areas\Api\Models\AdCampaignBaseResponse.cs" />
+    <Compile Include="Areas\Api\Models\SurveyQuestionDropDown.cs" />
     <Compile Include="Areas\Api\Models\SurveyQuestionRequestResponseModel.cs" />
     <Compile Include="Areas\Api\Models\SurveyQuestionResposneModelForAproval.cs" />
     <Compile Include="Areas\Api\Models\WebApiUser.cs" />
