@@ -19,7 +19,7 @@
   width: 280px;
 }
 #searchSurveyLocations {
-  width: 274px !important;
+  width: 150px !important;
   border-top-left-radius: 0px !important;
   border-top-right-radius: 0px !important;
   border: none;
@@ -75,4 +75,34 @@ div.Tokenize ul.Dropdown {
   border-radius: 4px;
   border-top-right-radius: 0px;
   border-top-left-radius: 0px;
+}
+.lang_delSurvey {
+  position: relative;
+}
+.langIncludeExclText {
+  width: 36%;
+  display: inline;
+  float: left;
+}
+.areaCity {
+  width: 60%;
+  display: inline;
+  float: left;
+}
+.count_city_newcnt {
+  width: 100%;
+  display: block;
+  clear: both;
+}
+.twitter-typeahead {
+  display: inline-block !important;
+}
+.locRadius {
+  width: 100px;
+  height: 33px;
+  display: inline-block;
+}
+.locVisibility,
+.locMap {
+  display: none;
 }
