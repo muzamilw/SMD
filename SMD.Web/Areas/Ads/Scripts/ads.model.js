@@ -221,7 +221,14 @@
               convertToServerData = function () {
                   var targetCriteria = [];
                   _.each(AdCampaignTargetCriterias(), function (item) {
-                      targetCriteria.push(AdCampaignTargetCriterias.convertToServerData(item));
+                      console.log("item on loop");
+                      console.log(item);
+                      targetCriteria.push(AdCampaignTargetCriteriasModel(item.CriteriaID, item.CampaignID, item.Type, item.PQID, item.PQAnswerID, item.SQID, item.SQAnswer, item.IncludeorExclude, item.questionString,
+       item.answerString, item.surveyQuestLeftImageSrc, item.surveyQuestRightImageSrc, item.LanguageID).convertCriteriaToServerData());
+                  });
+                  var LocationtargetCriteria = [];
+                  _.each(AdCampaignTargetLocation(), function (item) {
+                      LocationtargetCriteria.push(AdCampaignTargetLocation.convertToServerData(item));
                   });
                   return {
                       CampaignID: CampaignID(),
@@ -247,20 +254,22 @@
                       AgeRangeEnd: AgeRangeEnd(),
                       ResultClicks: ResultClicks(),
                       AmountSpent: AmountSpent(),
-                      MaxBudget: MaxBudget()
+                      MaxBudget: MaxBudget(),
+                      AdCampaignTargetCriterias: targetCriteria,
+                      AdCampaignTargetLocation: LocationtargetCriteria
                   };
               };
           return {
-              CampaignID: (CampaignID),
-              LanguageID: (LanguageID),
-              CampaignName: (CampaignName),
-              UserID: (UserID),
-              Status: (Status),
-              StatusValue: (StatusValue),
-              CampaignDescription: (CampaignDescription),
-              Gender: (Gender),
-              Archived: (Archived),
-              StartDateTime: (StartDateTime),
+              CampaignID: CampaignID,
+              LanguageID: LanguageID,
+              CampaignName: CampaignName,
+              UserID: UserID,
+              Status: Status,
+              StatusValue: StatusValue,
+              CampaignDescription: CampaignDescription,
+              Gender: Gender,
+              Archived: Archived,
+              StartDateTime: StartDateTime,
               EndDateTime: EndDateTime,
               Type: Type,
               DisplayTitle: DisplayTitle,
@@ -274,7 +283,9 @@
               AgeRangeEnd: AgeRangeEnd,
               ResultClicks: ResultClicks,
               AmountSpent: AmountSpent,
-              MaxBudget:MaxBudget,
+              MaxBudget: MaxBudget,
+              AdCampaignTargetCriterias: AdCampaignTargetCriterias,
+              convertToServerData:convertToServerData,
               hasChanges: hasChanges,
               reset: reset,
               isValid: isValid,
@@ -283,7 +294,7 @@
       };
 
     var // ReSharper disable InconsistentNaming
-      AdCampaignTargetCriterias = function (CriteriaID, CampaignID, Type, PQID, PQAnswerID, SQID, SQAnswer, IncludeorExclude, questionString,
+      AdCampaignTargetCriteriasModel = function (CriteriaID, CampaignID, Type, PQID, PQAnswerID, SQID, SQAnswer, IncludeorExclude, questionString,
        answerString, surveyQuestLeftImageSrc, surveyQuestRightImageSrc, LanguageID) {
           var
               //type and userID will be set on server sside
@@ -299,9 +310,10 @@
                answerString = ko.observable(answerString),
                surveyQuestLeftImageSrc = ko.observable(surveyQuestLeftImageSrc),
                surveyQuestRightImageSrc = ko.observable(surveyQuestRightImageSrc),
-               LanguageID = ko.observable(LanguageID)
+               LanguageID = ko.observable(LanguageID),
           // Convert to server data
-          convertToServerData = function () {
+          convertCriteriaToServerData = function () {
+           
               return {
                   CriteriaID: CriteriaID(),
                   CampaignID: CampaignID(),
@@ -327,7 +339,8 @@
               answerString: answerString,
               surveyQuestLeftImageSrc: surveyQuestLeftImageSrc,
               surveyQuestRightImageSrc: surveyQuestRightImageSrc,
-              LanguageID: LanguageID
+              LanguageID: LanguageID,
+              convertCriteriaToServerData: convertCriteriaToServerData
           };
       };
     var // ReSharper disable InconsistentNaming
@@ -368,7 +381,7 @@
     Campaign.Create = function (source) {
         var campaign = new Campaign(source.CampaignID, source.LanguageID, source.CampaignName, source.UserID, source.Status, source.StatusValue, source.CampaignDescription, source.Gender, source.Archived, source.StartDateTime, source.EndDateTime, source.Type, source.DisplayTitle, source.LandingPageVideoLink, source.VerifyQuestion, source.Answer1, source.Answer2, source.Answer3, source.CorrectAnswer, source.AgeRangeStart, source.AgeRangeEnd, source.ResultClicks, source.AmountSpent, source.MaxBudget);
         _.each(source.AdCampaignTargetCriterias, function (item) {
-            campaign.AdCampaignTargetCriterias.push(AdCampaignTargetCriterias.Create(item));
+            campaign.AdCampaignTargetCriterias.push(AdCampaignTargetCriteriasModel.Create(item));
         });
         _.each(source.AdCampaignTargetLocation, function (item) {
             campaign.AdCampaignTargetLocation.push(AdCampaignTargetLocation.Create(item));
@@ -376,8 +389,8 @@
         return campaign;
     };
     // Factory Method
-    AdCampaignTargetCriterias.Create = function (source) {
-        return new AdCampaignTargetCriterias(source.CriteriaID, source.CampaignID, source.Type, source.PQID, source.PQAnswerID, source.SQID, source.SQAnswer, source.IncludeorExclude, source.questionString, source.answerString, source.surveyQuestLeftImageSrc, source.surveyQuestRightImageSrc, source.LanguageID);
+    AdCampaignTargetCriteriasModel.Create = function (source) {
+        return new AdCampaignTargetCriteriasModel(source.CriteriaID, source.CampaignID, source.Type, source.PQID, source.PQAnswerID, source.SQID, source.SQAnswer, source.IncludeorExclude, source.questionString, source.answerString, source.surveyQuestLeftImageSrc, source.surveyQuestRightImageSrc, source.LanguageID);
     };
     AdCampaignTargetLocation.Create = function (source) {
         return new AdCampaignTargetLocation(source.ID, source.CampaignID, source.CountryID, source.CityID, source.Radius, source.Country, source.City);
@@ -386,6 +399,8 @@
         AdvertGridModel: AdvertGridModel,
         campaignModel: campaignModel,
         CriteriaModel: CriteriaModel,
-        Campaign: Campaign
+        Campaign: Campaign,
+        AdCampaignTargetCriteriasModel: AdCampaignTargetCriteriasModel,
+        AdCampaignTargetLocation: AdCampaignTargetLocation
     };
 });

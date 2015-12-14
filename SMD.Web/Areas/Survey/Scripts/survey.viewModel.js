@@ -181,7 +181,7 @@ define("survey/survey.viewModel",
                         });
                         confirmation.show();
                     },
-                     deleteLocation = function (item) {
+                    deleteLocation = function (item) {
                          alert("del");
                          //dataservice.deleteProfileQuestion(item.convertToServerData(), {
                          //    success: function () {

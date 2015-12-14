@@ -28,7 +28,8 @@ namespace SMD.MIS.ModelMappers
         public static AdCampaign CreateFrom(this Models.DomainModels.AdCampaign source)
         {
             string path = source.ImagePath;
-            if (!source.ImagePath.Contains("http"))
+          
+            if (source.ImagePath != null && !source.ImagePath.Contains("http"))
             {
                 path = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + source.ImagePath;
             }

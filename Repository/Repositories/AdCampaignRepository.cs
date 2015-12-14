@@ -128,5 +128,15 @@ namespace SMD.Repository.Repositories
                         .ToList();
             }
         }
+         /// <summary>
+        /// Get Ad Campaigns
+        /// </summary>
+        public long createCampaign(AdCampaign campaignObj)
+        {
+            campaignObj.UserId = LoggedInUserIdentity;
+            DbSet.Add(campaignObj);
+            db.SaveChanges();
+            return campaignObj.CampaignId;
+        }
     }
 }
