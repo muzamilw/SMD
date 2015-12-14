@@ -50,7 +50,7 @@
     }
     function addTimeZoneOffSetCookie() {
         if (!cookieExists("_timeZoneOffset") && '@HttpContext.Current.Request.Url.Authority' != "localhost" &&
-            '@HttpContext.Current.Request.Url.Authority' != "smd") {
+            '@HttpContext.Current.Request.Url.Authority' != "smd" && '@HttpContext.Current.Request.Url.Authority' != "smdpreview.com") {
                 var now = new Date();
                 var timeZoneOffset = -now.getTimezoneOffset();  // in minutes
                 now.setTime(now.getTime() + 10 * 24 * 60 * 60 * 1000); // keep it for 10 days
