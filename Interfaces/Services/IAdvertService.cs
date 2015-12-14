@@ -27,9 +27,9 @@ namespace SMD.Interfaces.Services
         /// Update Ad CAmpaign  | baqer
         /// </summary>
         AdCampaign UpdateAdCampaign(AdCampaign source); 
-        
-           AdCampaignBaseResponse GetProfileQuestionData();
+        AdCampaignBaseResponse GetProfileQuestionData();
         AdCampaignBaseResponse GetProfileQuestionAnswersData(int QuestionId);
         AdCampaignBaseResponse GetSurveyQuestionData();
+        CampaignResponseModel GetCampaigns(AdCampaignSearchRequest request);
     }
 }

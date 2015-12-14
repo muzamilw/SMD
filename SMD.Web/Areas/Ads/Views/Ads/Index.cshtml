@@ -50,7 +50,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <!-- ko template: { name: 'advertsTemplate' , foreach: $root.advertGridContent } -->
+                                    <!-- ko template: { name: 'advertsTemplate' , foreach: $root.campaignGridContent } -->
                                     <!-- /ko -->
                                 </tbody>
                             </table>
@@ -80,10 +80,10 @@
 
         </td>
         <td class="col-sm-1">
-            <span class="pull-left">
+            @*<span class="pull-left">
                 <i class="fa fa-circle" data-bind="style: { color: StatusColor }"></i>
-            </span>
-            <span class="pull-left " data-bind="text: StatusName">
+            </span>*@
+            <span class="pull-left " data-bind="text: StatusValue">
             </span>
         </td>
         <td class="col-sm-1">

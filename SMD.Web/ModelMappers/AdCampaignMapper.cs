@@ -124,5 +124,19 @@ namespace SMD.MIS.ModelMappers
 
 
         }
+
+        /// <summary>
+        /// Domain Search Response to Web Response 
+        /// </summary>
+        public static CampaignRequestResponseModel CreateCampaignFrom(
+            this Models.ResponseModels.CampaignResponseModel source)
+        {
+            return new CampaignRequestResponseModel
+            {
+                TotalCount = source.TotalCount,
+                Campaigns = source.Campaign.Select(campaign => campaign.CreateFrom()),
+                LanguageDropdowns = source.Languages.Select(lang => lang.CreateFrom())
+            };
+        }
     }
 }

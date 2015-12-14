@@ -158,6 +158,16 @@ namespace SMD.Implementation.Services
             }
            
         }
+        public CampaignResponseModel GetCampaigns(AdCampaignSearchRequest request)
+        {
+            int rowCount;
+            return new CampaignResponseModel
+            {
+                Campaign = _adCampaignRepository.SearchCampaign(request, out rowCount),
+                Languages = _languageRepository.GetAllLanguages(),
+                TotalCount = rowCount
+            };
+        }
         #endregion
         #region Public
 

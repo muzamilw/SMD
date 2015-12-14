@@ -8,7 +8,7 @@ define("ads/ads.viewModel",
         ist.Ads = {
             viewModel: (function () {
                 var view,
-                    advertGridContent = ko.observableArray([]),
+                    campaignGridContent = ko.observableArray([]),
                     pager = ko.observable(),
                        // Controlls editor visibility 
                     isEditorVisible = ko.observable(false),
@@ -16,21 +16,29 @@ define("ads/ads.viewModel",
                     countoryidList = [],
                     cityidList = [],
                     langidList = [],
-                    campaignModel = ko.observable(new model.campaignModel()),
-                    selectedCriteria = ko.observable(new model.CriteriaModel()),
+                    campaignModel = ko.observable(),
+                    selectedCriteria = ko.observable(),
                     selectedCriteriaList = ko.observableArray([]),
                     profileQuestionList = ko.observable([]),
                     surveyQuestionList = ko.observableArray([]),
                     profileAnswerList = ko.observable([]),
                     criteriaCount = ko.observable(0);
                     getAdCampaignGridContent = function () {
-                        dataservice.getCampaignData({}, {
+                        dataservice.getCampaignData({
+                            FirstLoad: true,
+                            PageSize: pager().pageSize(),
+                            PageNo: pager().currentPage()
+                        }, {
                             success: function (data) {
                                 if (data != null) {
-                                    advertGridContent.removeAll();
-                                    ko.utils.arrayPushAll(advertGridContent(), data);
-                                    advertGridContent.valueHasMutated();
+                                    console.log("campaigngrid data");
+                                    console.log(data);
+                                    campaignGridContent.removeAll();
                                   
+                                    _.each(data.Campaigns, function (item) {
+                                        campaignGridContent.push(model.Campaign.Create(updateCampaignGridItem(item)));
+                                    });
+                                    pager().totalCount(data.TotalCount);
                                 }
                                 
                             },
@@ -39,6 +47,24 @@ define("ads/ads.viewModel",
                             }
                         });
 
+                    },
+                // populate country, language and status fields 
+                    updateCampaignGridItem = function (item) {
+
+                        if (item.Status == 1) {
+                            item.StatusValue = "Draft"
+                        } else if (item.Status == 2) {
+                            item.StatusValue = "Submitted for Approval"
+                        } else if (item.Status == 3) {
+                            item.StatusValue = "Live"
+                        } else if (item.Status == 4) {
+                            item.StatusValue = "Paused"
+                        } else if (item.Status == 5) {
+                            item.StatusValue = "Completed"
+                        } else if (item.Status == 6) {
+                            item.StatusValue = "Approval Rejected"
+                        }
+                        return item;
                     },
                     getBaseData = function () {
                         dataservice.getBaseData({
@@ -62,6 +88,9 @@ define("ads/ads.viewModel",
                      // Add new Profile Question
                     addNewCampaign = function () {
                         isEditorVisible(true);
+                        campaignModel(new model.campaignModel());
+                        selectedCriteria(new model.CriteriaModel());
+                       
                         campaignModel().Gender('2');
                         campaignModel().Type('2');
                     },
@@ -95,8 +124,15 @@ define("ads/ads.viewModel",
                          
                           dataservice.addCampaignData(campignServerObj
                               , {
-                              success: function (data) {
-                               
+                                  success: function (data) {
+                                      profileQuestionList([]);
+                                      profileAnswerList([]);
+                                      surveyQuestionList([]);
+                                      criteriaCount(0);
+                                      selectedCriteriaList.removeAll();
+                                      campaignModel(new model.campaignModel());
+                                      selectedCriteria(new model.CriteriaModel());
+                                      toastr.success("Successfully saved.");
                               },
                               error: function (response) {
 
@@ -185,7 +221,7 @@ define("ads/ads.viewModel",
                         }
                         
                         var criteriaServerObj = selectedCriteria().convertToServerData();
-                        console.log(criteriaServerObj);
+                     
                         selectedCriteriaList.push(criteriaServerObj);
                         console.log(selectedCriteriaList());
                     },
@@ -210,9 +246,6 @@ define("ads/ads.viewModel",
                             }
                         });
                         selectedCriteria(item);
-                       
-                    },
-                    onDeleteCriteria = function () {
                        
                     },
                       // Delete Handler PQ
@@ -257,7 +290,7 @@ define("ads/ads.viewModel",
                     initialize = function (specifiedView) {
                         view = specifiedView; 
                         ko.applyBindings(view.viewModel, view.bindingRoot);
-                        pager(pagination.Pagination({ PageSize: 10 }, advertGridContent, getAdCampaignGridContent));
+                        pager(pagination.Pagination({ PageSize: 10 }, campaignGridContent, getAdCampaignGridContent));
                         getBaseData();
                         getAdCampaignGridContent();
                         
@@ -266,7 +299,7 @@ define("ads/ads.viewModel",
                         initialize: initialize,
                         pager: pager,
                         isEditorVisible:isEditorVisible,
-                        advertGridContent: advertGridContent,
+                        campaignGridContent: campaignGridContent,
                         addNewCampaign: addNewCampaign,                   
                         langs: langs,
                         campaignModel: campaignModel,
