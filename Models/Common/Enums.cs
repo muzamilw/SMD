@@ -45,6 +45,12 @@
         QuestionRejected = 11
     }
 
+    public enum AdCampaignCriteriaType
+    {
+        ProfileQuestion = 1,
+        SurveyQuestion = 2,
+        Language = 3
+    }
     public enum AdCampaignType
     {
         Video = 1,
@@ -95,5 +101,9 @@
         /// </summary>
         AdCampaign = 3
     }
-  
+    public enum SurveyQuestionAnswerType
+    {
+        Left = 1,
+        Right = 2
+    }
 }

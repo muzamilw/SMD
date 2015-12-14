@@ -110,5 +110,13 @@ namespace SMD.Repository.Repositories
                     .Take(toRow)
                     .ToList();
         }
+
+        /// <summary>
+        /// Get All survey Questions
+        /// </summary>
+        public IEnumerable<SurveyQuestion> GetAll()
+        {
+            return DbSet.Select(survey => survey).ToList();
+        }
     }
 }

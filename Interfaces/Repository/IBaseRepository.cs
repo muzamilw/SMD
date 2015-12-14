@@ -54,5 +54,10 @@ namespace SMD.Interfaces.Repository
         /// Logged in user identity
         /// </summary>
         string LoggedInUserIdentity { get; }
+
+        /// <summary>
+        /// Returns User Timezone Offset
+        /// </summary>
+        TimeSpan UserTimezoneOffSet { get; }
     }
 }

@@ -30,6 +30,6 @@ namespace SMD.Interfaces.Services
         
            AdCampaignBaseResponse GetProfileQuestionData();
         AdCampaignBaseResponse GetProfileQuestionAnswersData(int QuestionId);
-
+        AdCampaignBaseResponse GetSurveyQuestionData();
     }
 }

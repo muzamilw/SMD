@@ -11,7 +11,6 @@ using Microsoft.AspNet.Identity;
 using Microsoft.Practices.Unity;
 using SMD.Common;
 using SMD.Interfaces.Repository;
-using SMD.Models.Common;
 
 namespace SMD.Repository.BaseRepository
 {
@@ -151,6 +150,26 @@ namespace SMD.Repository.BaseRepository
             get
             {
                 return HttpContext.Current.User.Identity.GetUserId();
+            }
+        }
+
+        /// <summary>
+        /// User Timezone OffSet
+        /// </summary>
+        public TimeSpan UserTimezoneOffSet
+        {
+            get
+            {
+                var userTimeZoneOffsetClaims = ClaimHelper.GetClaimsByType<string>(SmdClaimTypes.UserTimezoneOffset);
+                if (userTimeZoneOffsetClaims == null || userTimeZoneOffsetClaims.Count == 0)
+                {
+                    return TimeSpan.FromMinutes(0);
+                }
+
+                TimeSpan userTimeZoneOffset;
+                TimeSpan.TryParse(userTimeZoneOffsetClaims[0], out userTimeZoneOffset);
+
+                return userTimeZoneOffset;
             }
         }
 

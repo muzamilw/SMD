@@ -33,5 +33,10 @@ namespace SMD.Models.ResponseModels
         /// profile questions answers
         /// </summary>
         public IEnumerable<ProfileQuestionAnswer> ProfileQuestionAnswers { get; set; }
+
+        /// <summary>
+        /// survey questions
+        /// </summary>
+        public IEnumerable<SurveyQuestion> SurveyQuestions { get; set; }
     }
 }

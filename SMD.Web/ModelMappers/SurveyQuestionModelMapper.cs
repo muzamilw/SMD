@@ -116,7 +116,29 @@ namespace SMD.MIS.ModelMappers
                 SurveyQuestions = source.SurveyQuestions.Select(question => question.CreateFrom())
             };
         }
-     
 
+        /// <summary>
+        /// Create DD from Domain Model 
+        /// </summary>
+        public static SurveyQuestionDropDown CreateFromDropdown(this Models.DomainModels.SurveyQuestion source)
+        {
+            string leftPath = source.LeftPicturePath;
+            if (!source.LeftPicturePath.Contains("http"))
+            {
+                leftPath = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + source.LeftPicturePath;
+            }
+            string rightPath = source.RightPicturePath;
+            if (!source.RightPicturePath.Contains("http"))
+            {
+                rightPath = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + source.RightPicturePath;
+            }
+            return new SurveyQuestionDropDown
+            {
+                SQID = source.SqId,
+                DisplayQuestion = source.DisplayQuestion,
+                LeftPicturePath = leftPath,
+                RightPicturePath = rightPath
+            };
+        }
     }
 }

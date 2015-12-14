@@ -331,6 +331,7 @@
           <Property Name="CountryID" Type="int" />
           <Property Name="CityID" Type="int" />
           <Property Name="Radius" Type="int" />
+          <Property Name="IncludeorExclude" Type="bit" />
         </EntityType>
         <EntityType Name="SystemMails">
           <Key>
@@ -1519,6 +1520,7 @@
           <NavigationProperty Name="Country" Relationship="DomainModels.FK_SurveyQuestionTargetLocation_Country" FromRole="SurveyQuestionTargetLocation" ToRole="Country" />
           <NavigationProperty Name="SurveyQuestion" Relationship="DomainModels.FK_SurveyQuestionTargetLocation_SurveyQuestion" FromRole="SurveyQuestionTargetLocation" ToRole="SurveyQuestion" />
           <NavigationProperty Name="City" Relationship="DomainModels.FK_SurveyQuestionTargetLocation_City" FromRole="SurveyQuestionTargetLocation" ToRole="City" />
+          <Property Name="IncludeorExclude" Type="Boolean" />
         </EntityType>
         <Association Name="FK_AdCampaign_Language">
           <End Type="DomainModels.Language" Role="Language" Multiplicity="0..1" />
@@ -2154,6 +2156,7 @@
           <EntitySetMapping Name="SurveyQuestionTargetLocations">
             <EntityTypeMapping TypeName="DomainModels.SurveyQuestionTargetLocation">
               <MappingFragment StoreEntitySet="SurveyQuestionTargetLocation">
+                <ScalarProperty Name="IncludeorExclude" ColumnName="IncludeorExclude" />
                 <ScalarProperty Name="Radius" ColumnName="Radius" />
                 <ScalarProperty Name="CityId" ColumnName="CityID" />
                 <ScalarProperty Name="CountryId" ColumnName="CountryID" />

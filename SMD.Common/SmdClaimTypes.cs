@@ -8,21 +8,16 @@
         /// <summary>
         /// Access right
         /// </summary>
-        public const string AccessRight = "http://schemas.2xb.com/2012/07/identity/claims/accessRight";
-        
-        /// <summary>
-        /// MIS Roles
-        /// </summary>
-        public const string MisRole = "http://schemas.2xb.com/2012/07/identity/claims/misRole";
-
-        /// <summary>
-        /// User Name
-        /// </summary>
-        public const string MisUser = "http://schemas.2xb.com/2012/07/identity/claims/misUser";
+        public const string AccessRight = "http://schemas.smd.com/2015/12/identity/claims/accessRight";
 
         /// <summary>
         /// System User Id
         /// </summary>
-        public const string SystemUser = "http://schemas.2xb.com/2012/07/identity/claims/systemUser";
+        public const string SystemUser = "http://schemas.smd.com/2015/12/identity/claims/systemUser";
+
+        /// <summary>
+        /// User Timezone Offset
+        /// </summary>
+        public const string UserTimezoneOffset = "http://schemas.smd.com/2015/12/identity/claims/userTimeZoneOffset";
     }
 }
