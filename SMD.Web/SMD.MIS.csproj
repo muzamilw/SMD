@@ -1345,6 +1345,7 @@
     <Content Include="RichTextEditor\samples\plugins\htmlwriter\assets\outputforflash\outputforflash.fla" />
     <Content Include="RichTextEditor\skins\moono\readme.md" />
     <Content Include="Content\less\ProfileQuestion.less" />
+    <None Include="Properties\PublishProfiles\SMD MIS Saqib.pubxml" />
     <None Include="Scripts\amplify-vsdoc.js" />
     <Content Include="Scripts\amplify.js" />
     <Content Include="Scripts\amplify.min.js" />
@@ -2460,7 +2461,6 @@
     <Folder Include="Areas\Survey\Models\" />
     <Folder Include="Content\themes\base\minified\images\" />
     <Folder Include="Models\" />
-    <Folder Include="Properties\PublishProfiles\" />
     <Folder Include="Reports\" />
     <Folder Include="Resources\" />
     <Folder Include="Scripts\Plugins\forms\tiny_mce\plugins\spellchecker\classes\utils\" />

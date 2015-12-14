@@ -127,7 +127,7 @@
         };
 
     var // ReSharper disable InconsistentNaming
-      SurveyQuestionTargetCriteria = function (ID, SQID, Type, PQID, PQAnswerID, LinkedSQID, LinkedSQAnswer, IncludeorExclude, LanguageID, PQuestion, PQAnswer, LinkedSQ, LinkedSQImage) {
+      SurveyQuestionTargetCriteria = function (ID, SQID, Type, PQID, PQAnswerID, LinkedSQID, LinkedSQAnswer, IncludeorExclude, LanguageID, PQuestion, PQAnswer, LinkedSQ, LinkedSQImage, Language) {
           var
               //type and userID will be set on server sside
               ID = ko.observable(ID),
@@ -143,6 +143,7 @@
               PQAnswer = ko.observable(PQAnswer),
               LinkedSQ = ko.observable(LinkedSQ),
               LinkedSQImage = ko.observable(LinkedSQImage),
+              Language = ko.observable(LanguageID),
               // Convert to server data
               convertToServerData = function () {
                   return {
@@ -168,7 +169,8 @@
               PQuestion :PQuestion,
               PQAnswer :PQAnswer,
               LinkedSQ :LinkedSQ,
-              LinkedSQImage :LinkedSQImage,
+              LinkedSQImage: LinkedSQImage,
+              Language: Language
           };
       };
     var // ReSharper disable InconsistentNaming
@@ -220,14 +222,14 @@
     };
     // Factory Method
     SurveyQuestionTargetCriteria.Create = function (source) {
-        return new SurveyQuestionTargetCriteria(source.ID, source.SQID, source.Type, source.PQID, source.PQAnswerID, source.LinkedSQID, source.LinkedSQAnswer, source.IncludeorExclude, source.LanguageID, source.PQuestion, source.PQAnswer, source.LinkedSQ, source.LinkedSQImage);
+        return new SurveyQuestionTargetCriteria(source.ID, source.SQID, source.Type, source.PQID, source.PQAnswerID, source.LinkedSQID, source.LinkedSQAnswer, source.IncludeorExclude, source.LanguageID, source.PQuestion, source.PQAnswer, source.LinkedSQ, source.LinkedSQImage,source.Language);
     };
     SurveyQuestionTargetLocation.Create = function (source) {
         return new SurveyQuestionTargetLocation(source.ID, source.SQID, source.CountryID, source.CityID, source.Radius, source.Country, source.City,source.IncludeorExclude);
     };
     return {
         Survey: Survey,
-        SurveyQuestionTargetLocation: SurveyQuestionTargetLocation
-       
+        SurveyQuestionTargetLocation: SurveyQuestionTargetLocation,
+        SurveyQuestionTargetCriteria:SurveyQuestionTargetCriteria
     };
 });

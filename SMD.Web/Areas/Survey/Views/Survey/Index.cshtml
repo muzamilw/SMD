@@ -3,8 +3,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<script type="text/javascript" src='http://maps.google.com/maps/api/js?sensor=false&libraries=places'></script>
-<script src="~/Scripts/locationpicker.jquery.min.js"></script>
+<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
 
 <div class="row" id="surveyBinding">
     <div class="col-lg-12" data-bind="visible: !$root.isEditorVisible()">
@@ -132,45 +131,6 @@
 <script src="~/Scripts/jquery.tokenize.js"></script>
     <script type="text/javascript">
         require(["survey/survey.view", "common/confirmation.view"]);
-
-        $(document).ready(function () {
-
-            
-
-            $('#tokenizeLanguages').tokenize({
-                placeholder: 'Enter a language',
-                onAddToken: function (value, text, e) {
-
-                    $(".Token .Close").click();
-
-                    var count = "lang_" + $('#lang_token_cnt').children().length + 1;
-                    var htmlToAppend = '<div class="lang_newcnt" id="' + count + '"><input type="text"   class="form-control lang_nr_box" readonly="readonly" value=' + text + '><a id="deleteToken' + count + '" onclick=RemoveLanguageToken("' + count + '"); title="Delete" class="lang_del"> <i class="fa fa-times "></i></a></div>';
-
-                    $("#lang_token_cnt").css("display", "block");
-                    $("#lang_token_cnt").append(htmlToAppend);
-                }
-            });
-          
-        });
-
-        function RemoveLanguageToken(tokenId) {
-
-            $("#" + tokenId).remove();
-            if ($('#lang_token_cnt').is(':empty')) {
-                $("#lang_token_cnt").css("display", "none");
-            }
-
-        }
-
-        function RemoveCountryToken(tokenId) {
-
-            $("#" + tokenId).remove();
-            if ($('#coun_token_cnt').is(':empty')) {
-                $("#coun_token_cnt").css("display", "none");
-            }
-
-        }
-
     </script>
 
 

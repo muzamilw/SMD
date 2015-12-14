@@ -9,7 +9,6 @@ using System.Linq.Expressions;
 using System.Web;
 using Microsoft.AspNet.Identity;
 using Microsoft.Practices.Unity;
-using SMD.Common;
 using SMD.Interfaces.Repository;
 
 namespace SMD.Repository.BaseRepository
@@ -160,14 +159,14 @@ namespace SMD.Repository.BaseRepository
         {
             get
             {
-                var userTimeZoneOffsetClaims = ClaimHelper.GetClaimsByType<string>(SmdClaimTypes.UserTimezoneOffset);
-                if (userTimeZoneOffsetClaims == null || userTimeZoneOffsetClaims.Count == 0)
+                var userTimeZoneOffsetClaim = HttpContext.Current.Session["UserTimezoneOffset"]; //ClaimHelper.GetClaimsByType<string>(SmdClaimTypes.UserTimezoneOffset);
+                if (userTimeZoneOffsetClaim == null)
                 {
                     return TimeSpan.FromMinutes(0);
                 }
 
                 TimeSpan userTimeZoneOffset;
-                TimeSpan.TryParse(userTimeZoneOffsetClaims[0], out userTimeZoneOffset);
+                TimeSpan.TryParse(userTimeZoneOffsetClaim.ToString(), out userTimeZoneOffset);
 
                 return userTimeZoneOffset;
             }

@@ -47,8 +47,9 @@ namespace SMD.MIS.Controllers
                     timeZoneOffSetValue = TimeSpan.FromMinutes(offsetMinutes);
                 }
             }
-            claimsSecurityService.AddClaimsToIdentity(new UserIdentityModel { TimezoneOffset = timeZoneOffSetValue },
-                identity);
+            //claimsSecurityService.AddClaimsToIdentity(new UserIdentityModel { TimezoneOffset = timeZoneOffSetValue },
+            //    identity);
+            Session["UserTimezoneOffset"] = timeZoneOffSetValue;
         }
         
         #endregion
