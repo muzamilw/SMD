@@ -598,8 +598,15 @@
                         <tbody>
                             <tr>
                                 <td style=" padding: 0px;">
+                                    <!-- ko if:   Type  == "1" -->
                                     <p style="margin-top: 5px;margin-left: 12px;" data-bind="text: answerString">
-</td>
+                                        </p>
+                                        <!-- /ko -->
+                                        <!-- ko if:   Type  == "2" -->
+                                    <p style="margin-top: 5px;margin-left: 12px;" >
+                                        <img data-bind="attr:{src: answerString}" /></p>
+                                        <!-- /ko -->
+                                </td>
                             </tr>
 
                         </tbody>

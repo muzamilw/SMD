@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets6D4BEF0E856F94BAF129A283FD1CC69B53C1D33C69B9B731D3056C1A37C1BAA1))]
+[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets0820DDC268FA8232CBF9F0126BC71131F1C0BEEC4E8C63A4DAF3A2994CF0244D))]
 
 namespace Edm_EntityMappingGeneratedViews
 {
@@ -17,18 +17,18 @@ namespace Edm_EntityMappingGeneratedViews
     /// <Summary>
     /// The type contains views for EntitySets and AssociationSets that were generated at design time.
     /// </Summary>
-    public sealed class ViewsForBaseEntitySets6D4BEF0E856F94BAF129A283FD1CC69B53C1D33C69B9B731D3056C1A37C1BAA1 : System.Data.Mapping.EntityViewContainer
+    public sealed class ViewsForBaseEntitySets0820DDC268FA8232CBF9F0126BC71131F1C0BEEC4E8C63A4DAF3A2994CF0244D : System.Data.Mapping.EntityViewContainer
     {
         
         /// <Summary>
         /// The constructor stores the views for the extents and also the hash values generated based on the metadata and mapping closure and views.
         /// </Summary>
-        public ViewsForBaseEntitySets6D4BEF0E856F94BAF129A283FD1CC69B53C1D33C69B9B731D3056C1A37C1BAA1()
+        public ViewsForBaseEntitySets0820DDC268FA8232CBF9F0126BC71131F1C0BEEC4E8C63A4DAF3A2994CF0244D()
         {
             this.EdmEntityContainerName = "BaseDbContext";
             this.StoreEntityContainerName = "SMDModelStoreContainer";
-            this.HashOverMappingClosure = "284eebd290bc482da8dcbd781da401a01ff72ccdefad44135563736341381edb";
-            this.HashOverAllExtentViews = "728f5bdea8ed6413d0c2c67cf94fae49ed8010a45f319d7c62765f1d798324c7";
+            this.HashOverMappingClosure = "a2c015bf4c89785db889379d119cdd8584db7943fb1335e134820d3a8edc4bd5";
+            this.HashOverAllExtentViews = "7f5c2a59cca342193eda6e9951b24345d2f734833f264a6f2b9b82926bd8fc5c";
             this.ViewCount = 44;
         }
         
@@ -653,7 +653,7 @@ namespace Edm_EntityMappingGeneratedViews
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.SurveyQuestionTargetLocation", @"
     SELECT VALUE -- Constructing SurveyQuestionTargetLocation
-        [SMDModel.Store.SurveyQuestionTargetLocation](T1.SurveyQuestionTargetLocation_ID, T1.SurveyQuestionTargetLocation_SQID, T1.SurveyQuestionTargetLocation_CountryID, T1.SurveyQuestionTargetLocation_CityID, T1.SurveyQuestionTargetLocation_Radius)
+        [SMDModel.Store.SurveyQuestionTargetLocation](T1.SurveyQuestionTargetLocation_ID, T1.SurveyQuestionTargetLocation_SQID, T1.SurveyQuestionTargetLocation_CountryID, T1.SurveyQuestionTargetLocation_CityID, T1.SurveyQuestionTargetLocation_Radius, T1.SurveyQuestionTargetLocation_IncludeorExclude)
     FROM (
         SELECT 
             T.Id AS SurveyQuestionTargetLocation_ID, 
@@ -661,6 +661,7 @@ namespace Edm_EntityMappingGeneratedViews
             T.CountryId AS SurveyQuestionTargetLocation_CountryID, 
             T.CityId AS SurveyQuestionTargetLocation_CityID, 
             T.Radius AS SurveyQuestionTargetLocation_Radius, 
+            T.IncludeorExclude AS SurveyQuestionTargetLocation_IncludeorExclude, 
             True AS _from0
         FROM BaseDbContext.SurveyQuestionTargetLocations AS T
     ) AS T1");
@@ -1153,7 +1154,7 @@ namespace Edm_EntityMappingGeneratedViews
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.SurveyQuestionTargetLocations", @"
     SELECT VALUE -- Constructing SurveyQuestionTargetLocations
-        [DomainModels.SurveyQuestionTargetLocation](T1.SurveyQuestionTargetLocation_Id, T1.SurveyQuestionTargetLocation_SqId, T1.SurveyQuestionTargetLocation_CountryId, T1.SurveyQuestionTargetLocation_CityId, T1.SurveyQuestionTargetLocation_Radius)
+        [DomainModels.SurveyQuestionTargetLocation](T1.SurveyQuestionTargetLocation_Id, T1.SurveyQuestionTargetLocation_SqId, T1.SurveyQuestionTargetLocation_CountryId, T1.SurveyQuestionTargetLocation_CityId, T1.SurveyQuestionTargetLocation_Radius, T1.SurveyQuestionTargetLocation_IncludeorExclude)
     FROM (
         SELECT 
             T.ID AS SurveyQuestionTargetLocation_Id, 
@@ -1161,6 +1162,7 @@ namespace Edm_EntityMappingGeneratedViews
             T.CountryID AS SurveyQuestionTargetLocation_CountryId, 
             T.CityID AS SurveyQuestionTargetLocation_CityId, 
             T.Radius AS SurveyQuestionTargetLocation_Radius, 
+            T.IncludeorExclude AS SurveyQuestionTargetLocation_IncludeorExclude, 
             True AS _from0
         FROM SMDModelStoreContainer.SurveyQuestionTargetLocation AS T
     ) AS T1");
