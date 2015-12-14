@@ -637,3 +637,83 @@ fieldset[disabled] .btn-submit.active {
 }
 
 /* end carousel - testimonial */
+
+
+#footer{
+        padding-top: 50px;
+    padding-bottom:50px;
+      font-family: 'Raleway', sans-serif;
+           background-color: #222;
+    border-color: #080808;
+}
+
+#footer a{
+
+    color:white;
+}
+
+
+.inner {
+	padding-top: 120px;
+	padding-bottom: 120px;
+}
+.inner-md {
+	padding-top: 100px;
+	padding-bottom: 100px;
+}
+.inner-sm {
+	padding-top: 80px;
+	padding-bottom: 80px;
+}
+.inner-xs {
+	padding-top: 40px;
+	padding-bottom: 40px;
+}
+.inner-top {
+	padding-top: 120px;
+}
+.inner-top-md {
+	padding-top: 100px;
+}
+.inner-top-sm {
+	padding-top: 80px;
+}
+.inner-top-xs {
+	padding-top: 40px;
+}
+.inner-bottom {
+	padding-bottom: 120px;
+}
+.inner-bottom-md {
+	padding-bottom: 100px;
+}
+.inner-bottom-sm {
+	padding-bottom: 80px;
+}
+.inner-bottom-xs {
+	padding-bottom: 40px;
+}
+.inner-left {
+	padding-left: 75px;
+}
+.inner-left-md {
+	padding-left: 60px;
+}
+.inner-left-sm {
+	padding-left: 45px;
+}
+.inner-left-xs {
+	padding-left: 30px;
+}
+.inner-right {
+	padding-right: 75px;
+}
+.inner-right-md {
+	padding-right: 60px;
+}
+.inner-right-sm {
+	padding-right: 45px;
+}
+.inner-right-xs {
+	padding-right: 30px;
+}
