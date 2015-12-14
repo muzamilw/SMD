@@ -172,7 +172,7 @@
           };
       };
     var // ReSharper disable InconsistentNaming
-    SurveyQuestionTargetLocation = function (ID, SQID, CountryID, CityID, Radius, Country, City) {
+    SurveyQuestionTargetLocation = function (ID, SQID, CountryID, CityID, Radius, Country, City, IncludeorExclude) {
         var
             //type and userID will be set on server sside
             ID = ko.observable(ID),
@@ -182,7 +182,7 @@
             Radius = ko.observable(Radius),
             Country = ko.observable(Country),
             City = ko.observable(City),
-           
+           IncludeorExclude = ko.observable(IncludeorExclude),
             // Convert to server data
             convertToServerData = function () {
                 return {
@@ -192,7 +192,8 @@
                     CityID: CityID(),
                     Radius: Radius(),
                     Country: Country(),
-                    City: City()
+                    City: City(),
+                    IncludeorExclude: IncludeorExclude()
                 };
             };
         return {
@@ -202,7 +203,8 @@
             CityID: CityID,
             Radius: Radius,
             Country: Country,
-            City: City
+            City: City,
+            IncludeorExclude: IncludeorExclude
         };
     };
     // Factory Method
@@ -221,10 +223,11 @@
         return new SurveyQuestionTargetCriteria(source.ID, source.SQID, source.Type, source.PQID, source.PQAnswerID, source.LinkedSQID, source.LinkedSQAnswer, source.IncludeorExclude, source.LanguageID, source.PQuestion, source.PQAnswer, source.LinkedSQ, source.LinkedSQImage);
     };
     SurveyQuestionTargetLocation.Create = function (source) {
-        return new SurveyQuestionTargetLocation(source.ID, source.SQID, source.CountryID, source.CityID, source.Radius, source.Country, source.City);
+        return new SurveyQuestionTargetLocation(source.ID, source.SQID, source.CountryID, source.CityID, source.Radius, source.Country, source.City,source.IncludeorExclude);
     };
     return {
-        Survey: Survey
+        Survey: Survey,
+        SurveyQuestionTargetLocation: SurveyQuestionTargetLocation
        
     };
 });
