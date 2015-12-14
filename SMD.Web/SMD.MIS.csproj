@@ -1330,9 +1330,6 @@
     <Content Include="Areas\Survey\Views\Survey\_SurveyQuestionEditor.cshtml" />
     <Content Include="Areas\Ads\Views\Ads\_addEditor.cshtml" />
     <Content Include="Areas\Ads\Views\Ads\AddAproval.cshtml" />
-    <None Include="ModelMappers\config\Web.connectionstrings.default.config">
-      <SubType>Designer</SubType>
-    </None>
     <Content Include="RichTextEditor\CHANGES.md" />
     <Content Include="RichTextEditor\LICENSE.md" />
     <Content Include="RichTextEditor\plugins\scayt\LICENSE.md" />
