@@ -12,8 +12,11 @@ namespace SMD.MIS.ModelMappers
         {
             return new LocationDropDown
             {
-                LocationId = source.CountryId + "_Country",
-                LocationName = source.CountryName
+                LocationId = source.CountryId + "_Country", 
+                LocationName = source.CountryName,
+                IsCountry = true,
+                CountryId = source.CountryId
+                
             };
         }
 
@@ -22,7 +25,12 @@ namespace SMD.MIS.ModelMappers
             return new LocationDropDown
             {
                 LocationId = source.CityId + "_City",
-                LocationName = source.CityName
+                LocationName = source.CityName,
+                GeoLat = source.GeoLat,
+                GeoLong = source.GeoLong,
+                IsCity = true,
+                CityId = source.CityId,
+                CountryId = source.CountryId.Value
             };
         }
     }

@@ -95,8 +95,8 @@
                                                 <div class="col-lg-12">
 
                                                     <div style="width:210px;text-align:center;">
-                                                        <img style="width:100px;height:auto;" data-bind="visible:LeftPictureBytes()==null  ,attr: { src: '@Url.Content("~/")' + LeftPicturePath() }" />
-                                                        <img style="width:100px;height:auto;" data-bind="visible:LeftPictureBytes()!=null,attr: { src: LeftPictureBytes }" />
+                                                        <img style="width:auto;height:80px;max-width:200px;" data-bind="visible:LeftPictureBytes()==null  ,attr: { src: '@Url.Content("~/")' + LeftPicturePath() }" />
+                                                        <img style="width:auto;height:80px;max-width:200px;" data-bind="visible:LeftPictureBytes()!=null,attr: { src: LeftPictureBytes }" />
 
                                                     </div>
 
@@ -113,7 +113,7 @@
                                                     <div class="col-lg-6" style="text-align:left;">
                                                         <div class="fileUpload btn btn-primary">
                                                             <span>Upload </span>
-                                                            <input type="file" class="upload" id="image_files"  data-bind="files: { onLoaded: $root.storeLeftImageCallback, fileFilter: 'image.*'}" />
+                                                            <input type="file" class="upload" id="image_files" data-bind="files: { onLoaded: $root.storeLeftImageCallback, fileFilter: 'image.*'}" />
                                                         </div>
                                                     </div>
 
@@ -132,8 +132,8 @@
                                                 <div class="col-lg-12">
 
                                                     <div style="width:210px;text-align:center;">
-                                                        <img style="width:100px;height:auto;" data-bind="visible:RightPictureBytes()==null,attr: { src: '@Url.Content("~/")' + RightPicturePath() }" />
-                                                        <img style="width:100px;height:auto;" data-bind="visible:RightPictureBytes()!=null,attr: { src: RightPictureBytes }" />
+                                                        <img style="width:auto;height:80px;max-width:200px;" data-bind="visible:RightPictureBytes()==null,attr: { src: '@Url.Content("~/")' + RightPicturePath() }" />
+                                                        <img style="width:auto;height:80px;max-width:200px;" data-bind="visible:RightPictureBytes()!=null,attr: { src: RightPictureBytes }" />
                                                     </div>
 
                                                 </div>
@@ -149,7 +149,7 @@
                                                     <div class="col-lg-6" style="text-align:left;">
                                                         <div class="fileUpload btn btn-primary">
                                                             <span>Upload </span>
-                                                            <input type="file" class="upload" id="image_files"  data-bind="files: { onLoaded: $root.storeRightImageCallback, fileFilter: 'image.*'}" />
+                                                            <input type="file" class="upload" id="image_files" data-bind="files: { onLoaded: $root.storeRightImageCallback, fileFilter: 'image.*'}" />
                                                         </div>
                                                     </div>
 
@@ -201,25 +201,13 @@
                                             <label for="txtAge" class="control-label text-right tooltip-float">Age</label>
                                         </div>
                                         <div class="col-lg-2">
-                                            <select class="form-control" data-bind="value: AgeRangeStart">
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                                <option>5</option>
-                                            </select>
+                                            <select class="form-control" data-bind="options: $root.ageRange, optionsText: 'text', optionsValue: 'value', value: AgeRangeStart"> </select>
                                         </div>
                                         <div class="pull-left" style="width:10px;">
                                             -
                                         </div>
                                         <div class="col-lg-2">
-                                            <select class="form-control" data-bind="value: AgeRangeEnd">
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                                <option>5</option>
-                                            </select>
+                                            <select class="form-control" data-bind="options: $root.ageRange, optionsText: 'text', optionsValue: 'value',value: AgeRangeEnd"> </select>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -264,7 +252,10 @@
                                             <label for="txtCountries" class="control-label text-right tooltip-float">Locations</label>
                                         </div>
                                         <div class="col-lg-6">
-                                            <div id="coun_token_cnt" style="display:none;"></div>
+                                            <div id="coun_token_cnt">
+                                                <!-- ko template: { name: 'SurveyQuestionLocationTemplate' , foreach: SurveyQuestionTargetLocation } -->
+                                                <!-- /ko -->
+                                            </div>
                                             <div id="count_edt">
                                                 <div class="coun_in_ex_cnt">
                                                     <select id="in_ex_count_opt" class="form-control">
@@ -276,8 +267,9 @@
 
                                                 </div>
                                                 <div class="count_token_opt_cnt">
-                                                    <select id="tokenizeCountries" multiple="multiple" class="tokenize-sample" data-bind="options: $root.countries, optionsText: 'CountryName', optionsValue: 'CountryId'"></select>
-
+                                                    <input type="text" data-autocomplete="off" class="" id="searchSurveyLocations" placeholder="Add country or city" />
+                                                    <input type="text" class="" id="" placeholder="Add Radius" data-bind="value: $root.selectedLocationRadius " />
+                                                    <button data-bind="click:$root.onAddLocation">Add Location</button>
                                                 </div>
                                                 <div class="clearfix">
 
@@ -313,67 +305,67 @@
                                     </div>
 
                                     @*<div class="form-group">
-                                        <div class="col-lg-3 text-right">
-                                            <div class="bs-example-tooltips tooltip-float-width">
-                                                <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
-                                                    <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                </a>
+                                            <div class="col-lg-3 text-right">
+                                                <div class="bs-example-tooltips tooltip-float-width">
+                                                    <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
+                                                        <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                    </a>
+                                                </div>
+                                                <label for="txtAge" class="control-label text-right tooltip-float">Link With Profile Questions</label>
                                             </div>
-                                            <label for="txtAge" class="control-label text-right tooltip-float">Link With Profile Questions</label>
-                                        </div>
-                                        <div class="col-lg-2">
-                                            <select class="form-control">
-                                                <option>Select Question 1-2-3</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                                <option>5</option>
-                                            </select>
-                                        </div>
-                                        <div class="pull-left" style="width:10px;">
-                                            -
-                                        </div>
-                                        <div class="col-lg-2">
-                                            <select class="form-control">
-                                                <option>Select Ans</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                                <option>5</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="form-group">
-                                        <div class="col-lg-3 text-right">
-                                            <div class="bs-example-tooltips tooltip-float-width">
-                                                <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
-                                                    <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                </a>
+                                            <div class="col-lg-2">
+                                                <select class="form-control">
+                                                    <option>Select Question 1-2-3</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                    <option>5</option>
+                                                </select>
                                             </div>
-                                            <label for="txtAge" class="control-label text-right tooltip-float">Link with Survey Question</label>
+                                            <div class="pull-left" style="width:10px;">
+                                                -
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <select class="form-control">
+                                                    <option>Select Ans</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                    <option>5</option>
+                                                </select>
+                                            </div>
                                         </div>
-                                        <div class="col-lg-2">
-                                            <select class="form-control">
-                                                <option>Question</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                                <option>5</option>
-                                            </select>
-                                        </div>
-                                        <div class="pull-left" style="width:10px;">
-                                            -
-                                        </div>
-                                        <div class="col-lg-2">
-                                            <select class="form-control">
-                                                <option>Left Ans</option>
-                                                <option>Right Ans</option>
 
-                                            </select>
-                                        </div>
-                                    </div>*@
+
+                                        <div class="form-group">
+                                            <div class="col-lg-3 text-right">
+                                                <div class="bs-example-tooltips tooltip-float-width">
+                                                    <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
+                                                        <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                    </a>
+                                                </div>
+                                                <label for="txtAge" class="control-label text-right tooltip-float">Link with Survey Question</label>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <select class="form-control">
+                                                    <option>Question</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                    <option>5</option>
+                                                </select>
+                                            </div>
+                                            <div class="pull-left" style="width:10px;">
+                                                -
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <select class="form-control">
+                                                    <option>Left Ans</option>
+                                                    <option>Right Ans</option>
+
+                                                </select>
+                                            </div>
+                                        </div>*@
 
                                     <div class="form-group">
                                         <div class="col-lg-3 text-right">
@@ -427,3 +419,19 @@
     </div>
 
 </div>
+<script id="SurveyQuestionLocationTemplate" type="text/html">
+    <div class="count_city_newcnt">
+        <!--ko if:CityID == 0 || CityID == null-->
+        <input type="text" class="form-control lang_nr_box" readonly="readonly" data-bind="value:Country">
+        <!--/ko-->
+        <!--ko if:CityID != 0 && CityID != null-->
+        <input type="text" class="form-control lang_nr_box" readonly="readonly" data-bind="value: City ">
+        <!--/ko-->
+        <!--ko if:Radius != 0 && Radius != null-->
+        <span class="form-control lang_nr_box" data-bind="text: Radius "></span>
+        <!--/ko-->
+
+        
+        <a id="deleteToken29" data-bind="click:$root.onRemoveLocation"  title=" delete" class="lang_del"> <i class="fa fa-times "></i></a>
+    </div>
+</script>

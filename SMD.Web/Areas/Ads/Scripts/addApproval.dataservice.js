@@ -11,28 +11,28 @@ define("addApproval/addApproval.dataservice", function () {
             initialize = function() {
                 if (!isInitialized) {
 
-                    //Search Survey Questions
-                    amplify.request.define('searchSurveyQuestions', 'ajax', {
-                        url: '/Api/SurveyQuestionApproval',
+                    //Search AdCampaigns
+                    amplify.request.define('searchAdCampaigns', 'ajax', {
+                        url: '/Api/AdCampaign',
                         dataType: 'json',
                         type: 'GET'
                     });
                     
 
-                    // Edit Survey Questions
-                    amplify.request.define('saveSurveyQuestion', 'ajax', {
-                        url: '/Api/SurveyQuestionApproval',
+                    // Edit AdCampaign
+                    amplify.request.define('saveAdCampaign', 'ajax', {
+                        url: '/Api/AdCampaign',
                         dataType: 'json',
                         type: 'POST'
                     });
                     isInitialized = true;
                 }
             },       
-            // Search Survey Questions
-            searchSurveyQuestions = function (params, callbacks) {
+            // Search Ad Campaigns
+            searchAdCampaigns = function (params, callbacks) {
                 initialize();
                 return amplify.request({
-                    resourceId: 'searchSurveyQuestions',
+                    resourceId: 'searchAdCampaigns',
                     success: callbacks.success,
                     error: callbacks.error,
                     data: params
@@ -41,11 +41,11 @@ define("addApproval/addApproval.dataservice", function () {
             
 
             
-            // Save Survey  Questions edit
-            saveSurveyQuestion = function (params, callbacks) {
+            // Save Ad Campaign edit
+            saveAdCampaign = function (params, callbacks) {
                 initialize();
                 return amplify.request({
-                    resourceId: 'saveSurveyQuestion',
+                    resourceId: 'saveAdCampaign',
                     success: callbacks.success,
                     error: callbacks.error,
                     data: params
@@ -53,8 +53,8 @@ define("addApproval/addApproval.dataservice", function () {
             };
 
         return {
-            saveSurveyQuestion: saveSurveyQuestion,
-            searchSurveyQuestions: searchSurveyQuestions
+            saveAdCampaign: saveAdCampaign,
+            searchAdCampaigns: searchAdCampaigns
         };
     })();
     return dataService;

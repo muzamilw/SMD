@@ -1,14 +1,12 @@
 ﻿using SMD.Interfaces.Repository;
 using SMD.Interfaces.Services;
-using SMD.Models;
 using SMD.Models.Common;
 using SMD.Models.DomainModels;
+using SMD.Models.RequestModels;
 using SMD.Models.ResponseModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SMD.Implementation.Services
 {
@@ -25,6 +23,7 @@ namespace SMD.Implementation.Services
         private readonly ICityRepository _cityRepository;
         private readonly IAdCampaignTargetLocationRepository _adCampaignTargetLocationRepository;
         private readonly IAdCampaignTargetCriteriaRepository _adCampaignTargetCriteriaRepository;
+        private readonly IEmailManagerService emailManagerService;
         private readonly IProfileQuestionRepository _profileQuestionRepository;
         private readonly IProfileQuestionAnswerRepository _profileQuestionAnswerRepository;
         private readonly ISurveyQuestionRepository _surveyQuestionRepository;
@@ -41,6 +40,7 @@ namespace SMD.Implementation.Services
             ICountryRepository countryRepository, 
             ICityRepository cityRepository,
             IAdCampaignTargetLocationRepository adCampaignTargetLocationRepository,
+             IEmailManagerService emailManagerService,
             IAdCampaignTargetCriteriaRepository adCampaignTargetCriteriaRepository,
             IProfileQuestionRepository profileQuestionRepository,
             IProfileQuestionAnswerRepository profileQuestionAnswerRepository,
@@ -52,6 +52,7 @@ namespace SMD.Implementation.Services
             this._cityRepository = cityRepository;
             this._adCampaignTargetLocationRepository = adCampaignTargetLocationRepository;
             this._adCampaignTargetCriteriaRepository = adCampaignTargetCriteriaRepository;
+            this.emailManagerService = emailManagerService;
             this._profileQuestionRepository = profileQuestionRepository;
             this._profileQuestionAnswerRepository = profileQuestionAnswerRepository;
             this._surveyQuestionRepository = surveyQuestionRepository;
@@ -157,8 +158,58 @@ namespace SMD.Implementation.Services
             }
            
         }
+        #endregion
+        #region Public
 
         /// <summary>
+        /// Get Ad Campaigns that are need aprroval | baqer
+        /// </summary>
+        public AdCampaignResposneModelForAproval GetAdCampaignForAproval(AdCampaignSearchRequest request)
+        {
+            int rowCount;
+            return new AdCampaignResposneModelForAproval
+            {
+                AdCampaigns = _adCampaignRepository.SearchAdCampaigns(request, out rowCount),
+                TotalCount = rowCount
+            };
+        }
+
+        /// <summary>
+        /// Update Ad CAmpaign | baqer
+        /// </summary>
+        public AdCampaign UpdateAdCampaign(AdCampaign source)
+        {
+            var dbAd =_adCampaignRepository.Find(source.CampaignId);
+            // Update 
+            if (dbAd != null)
+            {
+                // Approval
+                if (source.Approved == true)
+                {
+                    dbAd.Approved = true;
+                    dbAd.ApprovalDateTime = DateTime.Now;
+                    dbAd.ApprovedBy = _adCampaignRepository.LoggedInUserIdentity;
+                    dbAd.Status = (Int32) AdCampaignStatus.Live;
+                    emailManagerService.SendQuestionApprovalEmail(dbAd.UserId);
+                }
+                // Rejection 
+                else
+                {
+                    dbAd.Status = (Int32)AdCampaignStatus.ApprovalRejected;
+                    dbAd.Approved = false;
+                    dbAd.RejectedReason = source.RejectedReason;
+                    emailManagerService.SendQuestionRejectionEmail(dbAd.UserId);
+                }
+                dbAd.ModifiedDateTime = DateTime.Now;
+                dbAd.ModifiedBy = _adCampaignRepository.LoggedInUserIdentity;
+
+                _adCampaignRepository.SaveChanges();
+                return _adCampaignRepository.Find(source.CampaignId);
+            }
+            return new AdCampaign();
+        }
+
+            /// <summary>
         /// Get profile questions 
         /// </summary>
         public AdCampaignBaseResponse GetProfileQuestionData()
@@ -176,7 +227,8 @@ namespace SMD.Implementation.Services
         {
             return new AdCampaignBaseResponse
             {
-                ProfileQuestionAnswers = _profileQuestionAnswerRepository.GetAllProfileQuestionAnswerByQuestionId(QuestionId)
+                ProfileQuestionAnswers =
+                    _profileQuestionAnswerRepository.GetAllProfileQuestionAnswerByQuestionId(QuestionId)
             };
         }
         /// <summary>
@@ -189,6 +241,7 @@ namespace SMD.Implementation.Services
                 SurveyQuestions = _surveyQuestionRepository.GetAll()
             };
         }
+
         #endregion
     }
 }

@@ -1,29 +1,29 @@
 ﻿/*
-    Module with the view model for the Survey Questions
+    Module with the view model for the AdCampaign
 */
 define("addApproval/addApproval.viewModel",
     ["jquery", "amplify", "ko", "addApproval/addApproval.dataservice", "addApproval/addApproval.model", "common/pagination",
      "common/confirmation.viewModel"],
     function ($, amplify, ko, dataservice, model, pagination, confirmation) {
         var ist = window.ist || {};
-        ist.SurveyQuestion = {
+        ist.AdCampaign = {
             viewModel: (function() {
                 var view,
-                    //  Questions list on LV
-                    questions = ko.observableArray([]),
+                    //  AdCampaign list on LV
+                    campaigns = ko.observableArray([]),
                     //pager
                     pager = ko.observable(),
                     //sorting
-                    sortOn = ko.observable(1),
+                    sortOn = ko.observable(5),
                     //Assending  / Desending
                     sortIsAsc = ko.observable(true),
                     // Controlls editor visibility 
                     isEditorVisible = ko.observable(false),
-                     //selected Answer
-                    selectedQuestion = ko.observable(),
-                    //Get Questions
-                    getQuestions = function () {
-                        dataservice.searchSurveyQuestions(
+                    //selected AdCampaign
+                    selectedCampaign = ko.observable(),
+                    //Get AdCampaign
+                    getCampaigns = function() {
+                        dataservice.searchAdCampaigns(
                             {
                                 PageSize: pager().pageSize(),
                                 PageNo: pager().currentPage(),
@@ -31,91 +31,89 @@ define("addApproval/addApproval.viewModel",
                                 IsAsc: sortIsAsc()
                             },
                             {
-                                success: function (data) {
-                                    questions.removeAll();
+                                success: function(data) {
+                                    campaigns.removeAll();
                                     pager().totalCount(0);
                                     pager().totalCount(data.TotalCount);
-                                    _.each(data.SurveyQuestions, function (item) {
-                                        questions.push(model.SurveyquestionServertoClientMapper(item));
+                                    _.each(data.AdCampaigns, function (item) {
+                                        campaigns.push(model.AdCampaignServertoClientMapper(item));
                                     });
-
                                 },
-                                error: function () {
-                                    toastr.error("Failed to load servey questions!");
+                                error: function() {
+                                    toastr.error("Failed to load Ad Campaigns!");
                                 }
                             });
                     },
                     // Close Editor 
-                    closeEditDialog = function () {
+                    closeEditDialog = function() {
                         // Ask for confirmation
-                        confirmation.afterProceed(function () {
-                            selectedQuestion(undefined);
+                        confirmation.afterProceed(function() {
+                            selectedCampaign(undefined);
                             isEditorVisible(false);
                         });
                         confirmation.show();
                     },
-                    // On editing of existing PQ
-                    onEditQuestion = function (item) {
-                        selectedQuestion(item);
+                    // On editing of existing AdCampaign
+                    onEditCampaign = function(item) {
+                        selectedCampaign(item);
                         isEditorVisible(true);
-                    },
-                  
-                    // Save Question / Add 
-                    onSaveQuestion = function () {
-                        dataservice.saveSurveyQuestion(selectedQuestion().convertToServerData(), {
-                            success: function (obj) {
-                                var newObjtodelete = questions.find(function (temp) {
-                                    return obj.SqId == temp.id();
+                    },                  
+                    // Save AdCampaign 
+                    onSaveCampaign = function() {
+                        dataservice.saveAdCampaign(selectedCampaign().convertToServerData(), {
+                            success: function(obj) {
+                                var newObjtodelete = campaigns.find(function(temp) {
+                                    return obj.CampaignId == temp.id();
                                 });
-                                questions.remove(newObjtodelete);
+                                campaigns.remove(newObjtodelete);
                                 toastr.success("You are Good!");
                                 isEditorVisible(false);
                             },
-                            error: function () {
-                                toastr.error("Failed to delete!");
+                            error: function() {
+                                toastr.error("Failed to save!");
                             }
                         });
-                    },
-                   
+                    },                   
                     // Has Changes
-                    hasChangesOnQuestion = ko.computed(function () {
-                        if (selectedQuestion() == undefined) {
+                    hasChangesOnCampaign = ko.computed(function() {
+                        if (selectedCampaign() == undefined) {
                             return false;
                         }
-                        return (selectedQuestion().hasChanges());
+                        return (selectedCampaign().hasChanges());
                     }),
-                    onRejectQuestion= function() {
-                        if (selectedQuestion().rejectionReason() == undefined || selectedQuestion().rejectionReason() == "" || selectedQuestion().rejectionReason() == " ") {
+                    // Reject buttoin handler 
+                    onRejectCampaign = function() {
+                        if (selectedCampaign().rejectionReason() == undefined || selectedCampaign().rejectionReason() == "" || selectedCampaign().rejectionReason() == " ") {
                             toastr.info("Please add rejection reason!");
                             return false;
                         }
-                        onSaveQuestion();
+                        onSaveCampaign();
                     },
                     // Initialize the view model
                     initialize = function (specifiedView) {
                         view = specifiedView;
                         ko.applyBindings(view.viewModel, view.bindingRoot);
-                        pager(pagination.Pagination({ PageSize: 10 }, questions, getQuestions));
+                        pager(pagination.Pagination({ PageSize: 10 }, campaigns, getCampaigns));
                        
                         // First request for LV
-                        getQuestions();
+                        getCampaigns();
                     };
                 return {
                     initialize: initialize,
                     sortOn: sortOn,
                     sortIsAsc: sortIsAsc,
                     pager: pager,
-                    questions: questions,
-                    getQuestions: getQuestions,
+                    campaigns: campaigns,
+                    getCampaigns: getCampaigns,
                     isEditorVisible: isEditorVisible,
                     closeEditDialog: closeEditDialog,
-                    onEditQuestion: onEditQuestion,
-                    selectedQuestion: selectedQuestion,
-                    onSaveQuestion: onSaveQuestion,
-                    hasChangesOnQuestion: hasChangesOnQuestion,
-                    onRejectQuestion: onRejectQuestion
+                    onEditCampaign: onEditCampaign,
+                    selectedCampaign: selectedCampaign,
+                    onSaveCampaign: onSaveCampaign,
+                    hasChangesOnCampaign: hasChangesOnCampaign,
+                    onRejectCampaign: onRejectCampaign
                 };
             })()
         };
-        return ist.SurveyQuestion.viewModel;
+        return ist.AdCampaign.viewModel;
     });

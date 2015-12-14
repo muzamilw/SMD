@@ -362,6 +362,7 @@
     <Compile Include="Areas\Api\Controllers\ProfileQuestionAnswerController.cs" />
     <Compile Include="Areas\Api\Controllers\ExternalLoginController.cs" />
     <Compile Include="Areas\Api\Controllers\AdaptivePaypalPaymentController.cs" />
+    <Compile Include="Areas\Api\Controllers\AdCampaignController.cs" />
     <Compile Include="Areas\Api\Controllers\SurveyQuestionApprovalController.cs" />
     <Compile Include="Areas\Api\Controllers\StandardLoginController.cs" />
     <Compile Include="Areas\Api\Controllers\ProfileQuestionController.cs" />
@@ -372,7 +373,9 @@
       <DependentUpon>LanguageResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\Api\ModelMappers\WebApiUserMapper.cs" />
+    <Compile Include="Areas\Api\Models\AdCampaign.cs" />
     <Compile Include="Areas\Api\Models\CampaignSearchRequest.cs" />
+    <Compile Include="Areas\Api\Models\AdCampaignResposneModelForAproval.cs" />
     <Compile Include="Areas\Api\Models\LocationDropDown.cs" />
     <Compile Include="Areas\Api\Models\ProfileQuestionAnswerDropdown.cs" />
     <Compile Include="Areas\Api\Models\SurveyQuestion.cs" />
@@ -402,6 +405,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helper\CultureHelper.cs" />
+    <Compile Include="ModelMappers\AdCampaignMapper.cs" />
     <Compile Include="ModelMappers\LanguageMapper.cs" />
     <Compile Include="ModelMappers\CountryMapper.cs" />
     <Compile Include="ModelMappers\LocationMapper.cs" />

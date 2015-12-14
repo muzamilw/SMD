@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using SMD.Common;
+﻿using SMD.Common;
 using System.Security.Claims;
 using SMD.Interfaces;
 using SMD.Models.Common;
@@ -23,12 +20,11 @@ namespace SMD.Implementation
         #region Public
         
         /// <summary>
-        /// Add  general claims 
+        /// Add general claims 
         /// </summary>
         public void AddClaimsToIdentity(UserIdentityModel userIdentity, ClaimsIdentity identity)
         {
-            //ClaimHelper.AddClaim(new Claim(CaresUserClaims.Role, defaultRoleName), identity);   // role claim
-            //ClaimHelper.AddClaim(new Claim(CaresUserClaims.Name, userName), identity);         // user name claim
+            identity.AddClaim(new Claim(SmdClaimTypes.UserTimezoneOffset, userIdentity.TimezoneOffset.ToString()));
         }
         #endregion
     }
