@@ -44,13 +44,13 @@ namespace SMD.MIS
 
             // Use Google Authentication
             app.UseGoogleAuthentication(
-                clientId: "1029675763032-gg256372ksn705012edqf7446lhm3vos.apps.googleusercontent.com",
-                clientSecret: "SvkUMyA5MpgWRv-l_4k0IIEg");
+                clientId: "569299227032-23iqpe7ggoqdearjf83n3cid8ahhnd6r.apps.googleusercontent.com",
+                clientSecret: "iCQoRPK-m9W9B8NyGO9XQbCN");
 
             // Use Facebook Authentication
             app.UseFacebookAuthentication(
-                appId: "548046378686707",
-                appSecret: "8b14dbc1e36697ba30678b04c6a58672");
+                appId: "900194280062971",
+                appSecret: "7d8a7f398bb09ca362a051f1d8e2d71e");
         }
     }
 }

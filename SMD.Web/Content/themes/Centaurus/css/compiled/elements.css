@@ -4930,3 +4930,19 @@ input[type="radio"] {
 .marginT7 {
       margin-top: 7px;
 }
+.fbBtn{
+       background-color: #3B5997;
+    border: none;
+    padding: 3px 15px;
+    color: white;
+    border-radius: 5px;
+    font-size: 24px;
+}
+.gPlusBtn {
+    background-color: #D93037;
+    border: none;
+    padding: 3px 11px;
+    color: white;
+    border-radius: 5px;
+    font-size: 24px;
+}

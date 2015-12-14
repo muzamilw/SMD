@@ -472,7 +472,7 @@
 <script id="SurveyQuestionLanguageTemplate" type="text/html">
     <div class="count_city_newcnt">
         <!--ko if:Type() == 3 -->
-        <span class="form-control lang_nr_box LanguageLbl" data-bind="text:Language " style=" "></span>
+        <span class="form-control lang_nr_box LanguageLbl" data-bind="text:Language() " style=" "></span>
         <a id="" data-bind="click:$root.onRemoveLanguage" title=" delete" class="lang_delSurvey"> <i class="fa fa-times "></i></a>
         <!--/ko-->
     </div>

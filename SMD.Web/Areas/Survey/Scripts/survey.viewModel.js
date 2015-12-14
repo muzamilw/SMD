@@ -182,7 +182,7 @@ define("survey/survey.viewModel",
                         });
                         confirmation.show();
                     },
-                     deleteLocation = function (item) {
+                    deleteLocation = function (item) {
                          console.log(item.ID());
                          if(item.ID() != 0 )
                          {
@@ -235,7 +235,6 @@ define("survey/survey.viewModel",
                             ID: 0,
                             SQID: selectedQuestion().SQID()
                         }));
-                        console.log(selectedQuestion().SurveyQuestionTargetCriteria());
                         $("#searchLanguages").val("");
                     },
                     onRemoveLanguage = function (item) {
@@ -261,7 +260,7 @@ define("survey/survey.viewModel",
                              //    }
                              //});
                          } else {
-                             selectedQuestion().SurveyQuestionTargetLocation.remove(item);
+                             selectedQuestion().SurveyQuestionTargetCriteria.remove(item);
                              toastr.success("Removed Successfully!");
                          }
 

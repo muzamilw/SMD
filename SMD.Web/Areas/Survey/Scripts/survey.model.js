@@ -143,7 +143,7 @@
               PQAnswer = ko.observable(PQAnswer),
               LinkedSQ = ko.observable(LinkedSQ),
               LinkedSQImage = ko.observable(LinkedSQImage),
-              Language = ko.observable(LanguageID),
+              Language = ko.observable(Language),
               // Convert to server data
               convertToServerData = function () {
                   return {

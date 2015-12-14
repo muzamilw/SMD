@@ -7,8 +7,13 @@ namespace SMD.Models.RequestModels
     /// </summary>
     public class AdCampaignSearchRequest : GetPagedListRequest
     {
-       
 
+        /// <summary>
+        ///  text for searching 
+        /// </summary>
+        public string SearchText { get; set; }
+
+        public bool FirstLoad { get; set; }
         /// <summary>
         ///  Ad Campaign By Column for sorting
         /// </summary>

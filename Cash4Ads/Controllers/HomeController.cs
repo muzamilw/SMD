@@ -13,6 +13,16 @@ namespace Cash4Ads.Controllers
             return View();
         }
 
+        public ActionResult advertisers()
+        {
+            return View();
+        }
+
+        public ActionResult afilliates()
+        {
+            return View();
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

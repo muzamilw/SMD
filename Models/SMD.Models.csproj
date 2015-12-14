@@ -167,6 +167,7 @@
     <Compile Include="ResponseModels\AdCampaignResposneModelForAproval.cs" />
     <Compile Include="ResponseModels\ProfileQuestionBaseResponse.cs" />
     <Compile Include="ResponseModels\ProfileQuestionSearchRequestResponse.cs" />
+    <Compile Include="ResponseModels\CampaignResponseModel.cs" />
     <Compile Include="ResponseModels\SurveyQuestionResponseModel.cs" />
     <Compile Include="ResponseModels\SurveyQuestionResposneModelForAproval.cs" />
   </ItemGroup>
