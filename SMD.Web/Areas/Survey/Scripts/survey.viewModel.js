@@ -28,6 +28,7 @@ define("survey/survey.viewModel",
                     selectedLocation = ko.observable(),
                     selectedLocationRadius = ko.observable(),
                     selectedLocationIncludeExclude = ko.observable(true),
+                    selectedLangIncludeExclude = ko.observable(true),
                     selectedLocationLat = ko.observable(0),
                     selectedLocationLong = ko.observable(0),
                     // age list 
@@ -182,19 +183,26 @@ define("survey/survey.viewModel",
                         confirmation.show();
                     },
                      deleteLocation = function (item) {
-                         alert("del");
-                         //dataservice.deleteProfileQuestion(item.convertToServerData(), {
-                         //    success: function () {
-                         //        var newObjtodelete = questions.find(function (temp) {
-                         //            return temp.qId() == temp.qId();
-                         //        });
-                         //        questions.remove(newObjtodelete);
-                         //        toastr.success("You are Good!");
-                         //    },
-                         //    error: function () {
-                         //        toastr.error("Failed to delete!");
-                         //    }
-                         //});
+                         console.log(item.ID());
+                         if(item.ID() != 0 )
+                         {
+                             //dataservice.deleteProfileQuestion(item.convertToServerData(), {
+                             //    success: function () {
+                             //        var newObjtodelete = questions.find(function (temp) {
+                             //            return temp.qId() == temp.qId();
+                             //        });
+                             //        questions.remove(newObjtodelete);
+                             //        toastr.success("You are Good!");
+                             //    },
+                             //    error: function () {
+                             //        toastr.error("Failed to delete!");
+                             //    }
+                             //});
+                         } else {
+                             selectedQuestion().SurveyQuestionTargetLocation.remove(item);
+                             toastr.success("Removed Successfully!");
+                         }
+                        
                      },
                     //add location
                     onAddLocation = function (item) {
@@ -207,7 +215,9 @@ define("survey/survey.viewModel",
                             Radius: selectedLocation().Radius(),
                             Country: selectedLocation().Country,
                             City: selectedLocation().City,
-                            IncludeorExclude: selectedLocation().IncludeorExclude()
+                            IncludeorExclude: selectedLocation().IncludeorExclude(),
+                            ID: 0,
+                            SQID: selectedQuestion().SQID()
                         }));
                         $(".locVisibility,.locMap").css("display", "none");
                         resetLocations();
@@ -216,6 +226,46 @@ define("survey/survey.viewModel",
                         $("#searchSurveyLocations").val("");
                         selectedLocationRadius("");
                     },
+                    addLanguage = function (selected) {
+                        selectedQuestion().SurveyQuestionTargetCriteria.push(new model.SurveyQuestionTargetCriteria.Create({
+                            Language: selected.LanguageName,
+                            LanguageID: selected.LanguageId,
+                            IncludeorExclude: parseInt(selectedLangIncludeExclude()),
+                            Type: 3,
+                            ID: 0,
+                            SQID: selectedQuestion().SQID()
+                        }));
+                        console.log(selectedQuestion().SurveyQuestionTargetCriteria());
+                        $("#searchLanguages").val("");
+                    },
+                    onRemoveLanguage = function (item) {
+                        // Ask for confirmation
+                        confirmation.afterProceed(function () {
+                            deleteLanguage(item);
+                        });
+                        confirmation.show();
+                    },
+                     deleteLanguage = function (item) {
+                         console.log(item.ID());
+                         if (item.ID() != 0) {
+                             //dataservice.deleteProfileQuestion(item.convertToServerData(), {
+                             //    success: function () {
+                             //        var newObjtodelete = questions.find(function (temp) {
+                             //            return temp.qId() == temp.qId();
+                             //        });
+                             //        questions.remove(newObjtodelete);
+                             //        toastr.success("You are Good!");
+                             //    },
+                             //    error: function () {
+                             //        toastr.error("Failed to delete!");
+                             //    }
+                             //});
+                         } else {
+                             selectedQuestion().SurveyQuestionTargetLocation.remove(item);
+                             toastr.success("Removed Successfully!");
+                         }
+
+                     },
                     // Initialize the view model
                     initialize = function (specifiedView) {
                         view = specifiedView;
@@ -224,6 +274,7 @@ define("survey/survey.viewModel",
                         // Base Data Call
                         getBasedata();
                         selectedQuestion().Gender("1");
+                        selectedQuestion().SQID(0);
                     };
                 return {
                     initialize: initialize,
@@ -253,8 +304,11 @@ define("survey/survey.viewModel",
                     onRemoveLocation: onRemoveLocation,
                     deleteLocation: deleteLocation,
                     selectedLocationIncludeExclude: selectedLocationIncludeExclude,
+                    selectedLangIncludeExclude:selectedLangIncludeExclude,
                     selectedLocationLat: selectedLocationLat,
-                    selectedLocationLong: selectedLocationLong
+                    selectedLocationLong: selectedLocationLong,
+                    addLanguage: addLanguage,
+                    onRemoveLanguage: onRemoveLanguage
                 };
             })()
         };

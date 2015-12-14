@@ -169,6 +169,7 @@ div.Tokenize ul.Dropdown {
 }
 .lang_delSurvey {
   position: relative;
+  cursor: pointer;
 }
 .langIncludeExclText {
   width: 36%;
@@ -196,6 +197,11 @@ div.Tokenize ul.Dropdown {
 .locVisibility,
 .locMap {
   display: none;
+}
+.LanguageLbl {
+  width: 90%;
+  display: inline;
+  float: left;
 }
 /* Common Styles */
 .fileUpload {
