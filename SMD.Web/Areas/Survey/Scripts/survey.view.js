@@ -43,17 +43,19 @@ define("survey/survey.view",
                             source: array.ttAdapter()
                         }).bind('typeahead:selected', function (obj, selected) {
                             if (selected) {
-                                console.log(selected)
                                 var CityID = 0, CountryID = 0, Radius = 0, Country = '', City = '';
                                 if (selected.IsCountry)
                                 {
                                     Country = selected.LocationName;
-                                    CountryId = selected.CountryId;
+                                    CountryID = selected.CountryId;
                                 }
                                 if (selected.IsCity) {
                                     City = selected.LocationName;
-                                    CountryId = selected.CountryId;
+                                    CountryID = selected.CountryId;
                                     CityID = selected.CityId;
+                                    $(".locMap").css("display", "inline-block");
+                                    viewModel.selectedLocationLong(selected.GeoLong);
+                                    viewModel.selectedLocationLat(selected.GeoLat);
                                 }
                                 var obj = {
                                     CountryID :CountryID,
@@ -62,7 +64,10 @@ define("survey/survey.view",
                                     Country :Country,
                                     City :City,
                                 }
+                              
                                 viewModel.selectedLocation(obj);
+                                $(".locVisibility").css("display", "inline-block");
+
                                 //var idOfEleCnt = $("#in_ex_count_opt").val() + "|" + selected.LocationId;
                                 //var htmlToAppend = '<div class="count_city_newcnt"  id="' + idOfEleCnt + '" ><input type="text"  class="form-control lang_nr_box" readonly="readonly" value=' + selected.LocationName + '><a id="deleteToken' + selected.LocationId + '" onclick=RemoveCountryToken("' + selected.LocationId + '"); title="Delete" class="lang_del"> <i class="fa fa-times "></i></a></div>';
 

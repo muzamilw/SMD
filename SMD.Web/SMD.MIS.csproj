@@ -1390,6 +1390,7 @@
     <Content Include="Scripts\knockout.validation.debug.js" />
     <Content Include="Scripts\knockout.validation.js" />
     <Content Include="Scripts\layout.js" />
+    <Content Include="Scripts\locationpicker.jquery.min.js" />
     <Content Include="Scripts\metronic.js" />
     <Content Include="Scripts\MIT-LICENSE.txt" />
     <Content Include="Scripts\modal.js" />

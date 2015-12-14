@@ -27,6 +27,9 @@ define("survey/survey.viewModel",
                     // selected location 
                     selectedLocation = ko.observable(),
                     selectedLocationRadius = ko.observable(),
+                    selectedLocationIncludeExclude = ko.observable(true),
+                    selectedLocationLat = ko.observable(0),
+                    selectedLocationLong = ko.observable(0),
                     // age list 
                     ageRange = ko.observable([{ value: '11', text: '11' }, { value: '12', text: '12' }, { value: '13', text: '13' }, { value: '14', text: '14' }, { value: '15', text: '15' }, { value: '16', text: '16' }, { value: '17', text: '17' }, { value: '18', text: '18' }, { value: '19', text: '19' }])
                     //Get Questions
@@ -197,8 +200,21 @@ define("survey/survey.viewModel",
                     onAddLocation = function (item) {
                       
                         selectedLocation().Radius = (selectedLocationRadius);
-                        selectedQuestion().SurveyQuestionTargetLocation.push(selectedLocation);
-                        console.log(selectedLocation());
+                        selectedLocation().IncludeorExclude = (selectedLocationIncludeExclude);
+                        selectedQuestion().SurveyQuestionTargetLocation.push( new model.SurveyQuestionTargetLocation.Create( {
+                            CountryID: selectedLocation().CountryID,
+                            CityID: selectedLocation().CityID,
+                            Radius: selectedLocation().Radius(),
+                            Country: selectedLocation().Country,
+                            City: selectedLocation().City,
+                            IncludeorExclude: selectedLocation().IncludeorExclude()
+                        }));
+                        $(".locVisibility,.locMap").css("display", "none");
+                        resetLocations();
+                    },
+                    resetLocations = function () {
+                        $("#searchSurveyLocations").val("");
+                        selectedLocationRadius("");
                     },
                     // Initialize the view model
                     initialize = function (specifiedView) {
@@ -235,7 +251,10 @@ define("survey/survey.viewModel",
                     selectedLocationRadius: selectedLocationRadius,
                     onAddLocation: onAddLocation,
                     onRemoveLocation: onRemoveLocation,
-                    deleteLocation:deleteLocation
+                    deleteLocation: deleteLocation,
+                    selectedLocationIncludeExclude: selectedLocationIncludeExclude,
+                    selectedLocationLat: selectedLocationLat,
+                    selectedLocationLong: selectedLocationLong
                 };
             })()
         };
