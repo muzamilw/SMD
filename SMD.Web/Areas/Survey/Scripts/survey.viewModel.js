@@ -182,7 +182,7 @@ define("survey/survey.viewModel",
                         });
                         confirmation.show();
                     },
-                     deleteLocation = function (item) {
+                    deleteLocation = function (item) {
                          console.log(item.ID());
                          if(item.ID() != 0 )
                          {

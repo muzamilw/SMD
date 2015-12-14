@@ -101,9 +101,8 @@ namespace SMD.Implementation.Services
         /// </summary>
         public bool CreateCampaign(AdCampaign campaignModel)
         {
-            _adCampaignRepository.Add(campaignModel);
-            _adCampaignRepository.SaveChanges();
-            long campaignId = campaignModel.CampaignId;
+
+            long campaignId = _adCampaignRepository.createCampaign(campaignModel); 
             if (campaignId > 0)
             {
                  char[] separator = new char[] { '|' };
@@ -157,6 +156,16 @@ namespace SMD.Implementation.Services
                 return false;
             }
            
+        }
+        public CampaignResponseModel GetCampaigns(AdCampaignSearchRequest request)
+        {
+            int rowCount;
+            return new CampaignResponseModel
+            {
+                Campaign = _adCampaignRepository.SearchCampaign(request, out rowCount),
+                Languages = _languageRepository.GetAllLanguages(),
+                TotalCount = rowCount
+            };
         }
         #endregion
         #region Public
