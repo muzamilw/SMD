@@ -8,23 +8,41 @@ define("ads/ads.viewModel",
         ist.Ads = {
             viewModel: (function () {
                 var view,
-                    advertGridContent = ko.observableArray([]),
-                     pager = ko.observable(),
+                    campaignGridContent = ko.observableArray([]),
+                    pager = ko.observable(),
                        // Controlls editor visibility 
-                    isEditorVisible = ko.observable(true),
-                    Languages = ko.observableArray([]),
+                    searchFilterValue = ko.observable(),
+                    isEditorVisible = ko.observable(false),
+                    langs = ko.observableArray([]),
                     countoryidList = [],
                     cityidList = [],
                     langidList = [],
-                    campaignModel = ko.observable(new model.campaignModel()),
+                    campaignModel = ko.observable(),
+                    selectedCriteria = ko.observable(),
+                    profileQuestionList = ko.observable([]),
+                    surveyQuestionList = ko.observableArray([]),
+                    profileAnswerList = ko.observable([]),
+                    criteriaCount = ko.observable(0),
+                    isShowSurveyAns = ko.observable(false),
                     getAdCampaignGridContent = function () {
-                        dataservice.getCampaignData({}, {
+                        dataservice.getCampaignData({
+                            FirstLoad: true,
+                            PageSize: pager().pageSize(),
+                            PageNo: pager().currentPage(),
+                            SearchText:searchFilterValue()
+                        }, {
                             success: function (data) {
                                 if (data != null) {
-                                    advertGridContent.removeAll();
-                                    ko.utils.arrayPushAll(advertGridContent(), data);
-                                    advertGridContent.valueHasMutated();
-                                  
+                                    // set languages drop down
+                                    langs.removeAll();
+                                    ko.utils.arrayPushAll(langs(), data.LanguageDropdowns);
+                                    langs.valueHasMutated();
+                                    // set grid content
+                                    campaignGridContent.removeAll();
+                                    _.each(data.Campaigns, function (item) {
+                                        campaignGridContent.push(model.Campaign.Create(updateCampaignGridItem(item)));
+                                    });
+                                    pager().totalCount(data.TotalCount);
                                 }
                                 
                             },
@@ -34,39 +52,44 @@ define("ads/ads.viewModel",
                         });
 
                     },
-                    getBaseData = function () {
-                        //dataservice.getBaseData({}, {
-                        //      success: function (data) {
-                        //          if (data != null) {
-                        //              Languages.removeAll();
-                        //              ko.utils.arrayPushAll(Languages(), data.Languages);// [{ LanguageId: 1, LanguageName: "Abkhaz" }, { LanguageId: 2, LanguageName: "Afar" }]);
-                        //              Languages.valueHasMutated();
+               
+                    updateCampaignGridItem = function (item) {
 
-                        //              Countries.removeAll();
-                        //              ko.utils.arrayPushAll(Countries(), data.countriesAndCities);
-                        //              Countries.valueHasMutated();
-                        //          }
-
-                        //      },
-                        //      error: function (response) {
-
-                        //      }
-                        //  });
-
-                      },
+                        if (item.Status == 1) {
+                            item.StatusValue = "Draft"
+                        } else if (item.Status == 2) {
+                            item.StatusValue = "Submitted for Approval"
+                        } else if (item.Status == 3) {
+                            item.StatusValue = "Live"
+                        } else if (item.Status == 4) {
+                            item.StatusValue = "Paused"
+                        } else if (item.Status == 5) {
+                            item.StatusValue = "Completed"
+                        } else if (item.Status == 6) {
+                            item.StatusValue = "Approval Rejected"
+                        }
+                        return item;
+                    },
+                 
+                    getCampaignByFilter = function () {
+                        getAdCampaignGridContent();
+                    },
                      // Add new Profile Question
                     addNewCampaign = function () {
                         isEditorVisible(true);
+                        campaignModel(new model.Campaign());
+                        selectedCriteria(new model.CriteriaModel());
+                       
+                        campaignModel().Gender('2');
+                        campaignModel().Type('2');
                     },
                     closeNewCampaignDialog = function () {
                         isEditorVisible(false);
                     },
-                      saveCampaignData = function () {
-                          debugger;
-                        
+                    saveCampaignData = function () {
+                          
                           for (var i = 0; i < $('div.count_city_newcnt').length; i++)
                           {
-                              debugger;
                               var idOfEle = $('div.count_city_newcnt')[i].id;
                             
                               var res_array = idOfEle.split("_");
@@ -86,36 +109,227 @@ define("ads/ads.viewModel",
                           campignServerObj.Countries = countoryidList;
                           campignServerObj.Cities = cityidList;
                           campignServerObj.Languages = langidList;
-                          dataservice.addCampaignData(campignServerObj
-                              , {
+                          campignServerObj.Criterias = campignServerObj.AdCampaignTargetCriterias;
+                         
+                          dataservice.addCampaignData(campignServerObj, {
                               success: function (data) {
-                               
+                            
+                                      //profileQuestionList([]);
+                                      //profileAnswerList.removeAll();
+                                      //surveyQuestionList.removeAll();
+                                      criteriaCount(0);
+                                      
+                                      //campaignModel(new model.campaignModel());
+                                      //selectedCriteria(new model.CriteriaModel());
+                                      isEditorVisible(false);
+                                      getAdCampaignGridContent();
+                                      toastr.success("Successfully saved.");
                               },
                               error: function (response) {
 
                               }
                           });
 
-                      },
-                // Initialize the view model
-                initialize = function (specifiedView) {
-                    view = specifiedView; 
-                    ko.applyBindings(view.viewModel, view.bindingRoot);
-                  //  pager(pagination.Pagination({ PageSize: 10 }, advertGridContent, getAdCampaignGridContent));
-                    getBaseData();
-                   // getAdCampaignGridContent();
-                };
-                return {
-                    initialize: initialize,
-                    pager: pager,
-                    isEditorVisible:isEditorVisible,
-                    advertGridContent: advertGridContent,
-                    addNewCampaign: addNewCampaign,                   
-                    Languages: Languages,
-                    campaignModel: campaignModel,
-                    saveCampaignData: saveCampaignData,
-                    closeNewCampaignDialog: closeNewCampaignDialog
-                };
+                    },
+                    // Add new profile Criteria
+                    addNewProfileCriteria = function () {
+                        
+                        var objProfileCriteria = new model.AdCampaignTargetCriteriasModel();
+                      
+                        objProfileCriteria.Type("1");
+                        objProfileCriteria.IncludeorExclude("1");
+                        criteriaCount(criteriaCount() + 1);
+                        objProfileCriteria.CriteriaID(criteriaCount());
+                        selectedCriteria(objProfileCriteria);
+                        if (profileQuestionList().length == 0)
+                        {
+                            dataservice.getBaseData({
+                                RequestId: 2,
+                                QuestionId: 0,
+                            }, {
+                                success: function (data) {
+                                    if (data != null) {
+                                        profileQuestionList([]);
+                                        ko.utils.arrayPushAll(profileQuestionList(), data.ProfileQuestions);
+                                        profileQuestionList.valueHasMutated();
+                                    }
+
+                                },
+                                error: function (response) {
+
+                                }
+                            });
+                        }
+                    
+                    },
+
+                    // Add new survey Criteria
+                    addNewSurveyCriteria = function () {
+                        var objSurveyCriteria = new model.AdCampaignTargetCriteriasModel();
+                        objSurveyCriteria.Type("2");
+                        objSurveyCriteria.IncludeorExclude("1");
+                        criteriaCount(criteriaCount() + 1);
+                        objSurveyCriteria.CriteriaID(criteriaCount());
+                        selectedCriteria(objSurveyCriteria);
+                        if (surveyQuestionList().length == 0) {
+                            dataservice.getBaseData({
+                                RequestId: 4,
+                                QuestionId: 0,
+                            }, {
+                                success: function (data) {
+                                    if (data != null) {
+                                        surveyQuestionList([]);
+                                        ko.utils.arrayPushAll(surveyQuestionList(), data.SurveyQuestions);
+                                        surveyQuestionList.valueHasMutated();
+                                    }
+
+                                },
+                                error: function (response) {
+
+                                }
+                            });
+                        }
+                    },
+                    saveCriteria = function () {
+                        if (selectedCriteria().Type() == "1")
+                        {
+                            var selectedQuestionstring = $("#ddprofileQuestion option[value=" + $("#ddprofileQuestion").val() + "]").text();
+                            selectedCriteria().questionString(selectedQuestionstring);
+                            var selectedQuestionAnswerstring = $("#ddprofileAnswers option[value=" + $("#ddprofileAnswers").val() + "]").text();
+                            selectedCriteria().answerString(selectedQuestionAnswerstring);
+                            selectedCriteria().PQAnswerID($("#ddprofileAnswers").val());
+                        } else if (selectedCriteria().Type() == "2") {
+                            var selectedQuestionstring = $("#ddsurveyQuestion option[value=" + $("#ddsurveyQuestion").val() + "]").text();
+                            selectedCriteria().questionString(selectedQuestionstring);
+                            var matchSurveyQuestion = ko.utils.arrayFirst(surveyQuestionList(), function (item) {
+                                return item.SQID == $("#ddsurveyQuestion").val();
+                            });
+                            if (selectedCriteria().SQAnswer() == "1") {
+                                selectedCriteria().answerString(matchSurveyQuestion.LeftPicturePath);
+                            } else {
+                                selectedCriteria().answerString(matchSurveyQuestion.RightPicturePath);
+                            }
+                        }
+                      
+                        campaignModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
+                            Type: selectedCriteria().Type(),
+                            PQID: selectedCriteria().PQID(),
+                            PQAnswerID: selectedCriteria().PQAnswerID(),
+                            SQID: selectedCriteria().SQID(),
+                            SQAnswer: selectedCriteria().SQAnswer(),
+                            questionString: selectedCriteria().questionString(),
+                            answerString: selectedCriteria().answerString(),
+                            IncludeorExclude: selectedCriteria().IncludeorExclude()
+                        }));
+                        isShowSurveyAns(false);
+                    },
+                    onEditCriteria = function (item) {
+                        console.log(item.Type());
+                        if (item.Type() == "1") {
+                            dataservice.getBaseData({
+                                RequestId: 3,
+                                QuestionId: item.PQID(),
+                            }, {
+                                success: function (data) {
+                                    if (data != null) {
+
+                                        profileAnswerList([]);
+                                        ko.utils.arrayPushAll(profileAnswerList(), data.ProfileQuestionAnswers);
+                                        profileAnswerList.valueHasMutated();
+                                    }
+
+                                },
+                                error: function (response) {
+
+                                }
+                            });
+
+                            selectedCriteria(item);
+                        } else {
+                            selectedCriteria(item);
+                            var selectedSurveyQuestionId = $("#ddsurveyQuestion").val();
+                            var matchSurveyQuestion = ko.utils.arrayFirst(surveyQuestionList(), function (item) {
+                                return item.SQID == selectedSurveyQuestionId;
+                            });
+                            selectedCriteria().surveyQuestLeftImageSrc(matchSurveyQuestion.LeftPicturePath);
+                            selectedCriteria().surveyQuestRightImageSrc(matchSurveyQuestion.RightPicturePath);
+                            isShowSurveyAns(true);
+                        }
+                       
+                    },
+                      // Delete Handler PQ
+                    onDeleteCriteria = function (item) {
+                        campaignModel().AdCampaignTargetCriterias.remove(item);
+                       
+                    },
+
+                    onChangeProfileQuestion = function () {
+                        var selectedQuestionId = $("#ddprofileQuestion").val();
+                        dataservice.getBaseData({
+                            RequestId: 3,
+                            QuestionId: selectedQuestionId,
+                        }, {
+                            success: function (data) {
+                                if (data != null) {
+                                    if (profileAnswerList().length > 0)
+                                    {
+                                        profileAnswerList([]);
+                                    }
+                                    ko.utils.arrayPushAll(profileAnswerList(), data.ProfileQuestionAnswers);
+                                    profileAnswerList.valueHasMutated();
+                                 
+                                }
+
+                            },
+                            error: function (response) {
+
+                            }
+                        });
+                    },
+
+                    onChangeSurveyQuestion = function (item) {
+                        var selectedSurveyQuestionId = $("#ddsurveyQuestion").val();
+                        var matchSurveyQuestion = ko.utils.arrayFirst(surveyQuestionList(), function (item) {
+                            return item.SQID == selectedSurveyQuestionId;
+                        });
+                        item.SQAnswer("1");
+                        item.surveyQuestLeftImageSrc(matchSurveyQuestion.LeftPicturePath);
+                        item.surveyQuestRightImageSrc(matchSurveyQuestion.RightPicturePath);
+                        $("#surveyAnswersContainer").show();
+                        isShowSurveyAns(true);
+                    },
+                    // Initialize the view model
+                    initialize = function (specifiedView) {
+                        view = specifiedView; 
+                        ko.applyBindings(view.viewModel, view.bindingRoot);
+                        pager(pagination.Pagination({ PageSize: 10 }, campaignGridContent, getAdCampaignGridContent));
+                        getAdCampaignGridContent();
+                    };
+                    return {
+                        initialize: initialize,
+                        pager: pager,
+                        isEditorVisible:isEditorVisible,
+                        campaignGridContent: campaignGridContent,
+                        addNewCampaign: addNewCampaign,                   
+                        langs: langs,
+                        campaignModel: campaignModel,
+                        saveCampaignData: saveCampaignData,
+                        closeNewCampaignDialog: closeNewCampaignDialog,
+                        selectedCriteria: selectedCriteria,
+                        profileQuestionList: profileQuestionList,
+                        profileAnswerList: profileAnswerList,
+                        saveCriteria: saveCriteria,
+                        onDeleteCriteria: onDeleteCriteria,
+                        onEditCriteria: onEditCriteria,
+                        addNewProfileCriteria: addNewProfileCriteria,
+                        onChangeProfileQuestion: onChangeProfileQuestion,
+                        surveyQuestionList: surveyQuestionList,
+                        addNewSurveyCriteria: addNewSurveyCriteria,
+                        onChangeSurveyQuestion: onChangeSurveyQuestion,
+                        getCampaignByFilter: getCampaignByFilter,
+                        searchFilterValue: searchFilterValue,
+                        isShowSurveyAns: isShowSurveyAns
+                    };
             })()
         };
         return ist.Ads.viewModel;

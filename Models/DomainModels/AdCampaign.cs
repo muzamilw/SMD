@@ -63,5 +63,7 @@ namespace SMD.Models.DomainModels
 
         [NotMapped]
         public IEnumerable<string> Languages { get; set; }
+        [NotMapped]
+        public IEnumerable<AdCampaignTargetCriteria> Criterias { get; set; }
     }
 }

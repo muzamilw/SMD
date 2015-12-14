@@ -6,9 +6,11 @@ namespace SMD.Models.Common
     /// </summary>
     public enum AdCampaignByColumn
     {
-       Name=1,
+        Name=1,
         Description=2,
-        CreationDate=4,
-        CreatedBy=3
+        Type=3,
+        CreatedBy=4,
+        CreationDate=5,
+        ClickRate=6
     }
 }

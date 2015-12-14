@@ -29,7 +29,7 @@
 }
 .count_token_opt_cnt {
   float: left;
-  width: 280px;
+  width: 260px;
 }
 #searchLocations {
   width: 274px !important;
@@ -88,6 +88,120 @@ div.Tokenize ul.Dropdown {
   border-radius: 4px;
   border-top-right-radius: 0px;
   border-top-left-radius: 0px;
+}
+.lang_newcnt {
+  position: relative;
+}
+.count_city_newcnt {
+  position: relative;
+}
+.lang_del {
+  position: absolute;
+  top: 7px;
+  right: 12px;
+  cursor: pointer;
+}
+.coun_in_ex_cnt {
+  width: 100px;
+  float: left;
+}
+.count_token_opt_cnt {
+  float: left;
+  width: 280px;
+}
+#searchSurveyLocations {
+  width: 150px !important;
+  border-top-left-radius: 0px !important;
+  border-top-right-radius: 0px !important;
+  border: none;
+  height: 33px;
+  margin-left: 5px;
+}
+#searchLanguages {
+  width: 380px !important;
+  border-top-left-radius: 0px !important;
+  border-top-right-radius: 0px !important;
+  border: none;
+  height: 33px;
+  margin-left: 7px;
+}
+#in_ex_count_opt {
+  border: none !important;
+}
+div.Tokenize ul.TokensContainer,
+div.Tokenize ul.Dropdown {
+  border: none !important;
+}
+.sep-line {
+  width: 1px;
+  float: left;
+  margin-top: 4px;
+  border-left: 1px solid #e7ebee;
+  height: 25px;
+}
+#land_edt {
+  border: 1px solid #e7ebee;
+  padding-left: 0px;
+  padding-right: 0px;
+  border-radius: 0px;
+  height: 38px;
+}
+.lang_nr_box {
+  cursor: default !important;
+  background-color: #fff !important;
+  border: none;
+}
+#lang_token_cnt {
+  border: 1px solid #e7ebee;
+  border-bottom: none;
+}
+#coun_token_cnt {
+  border: 1px solid #e7ebee;
+  border-bottom: none;
+}
+#count_edt {
+  border: 1px solid #e7ebee;
+  padding-left: 0px;
+  padding-right: 0px;
+  border-radius: 4px;
+  border-top-right-radius: 0px;
+  border-top-left-radius: 0px;
+}
+.lang_delSurvey {
+  position: relative;
+  cursor: pointer;
+}
+.langIncludeExclText {
+  width: 36%;
+  display: inline;
+  float: left;
+}
+.areaCity {
+  width: 60%;
+  display: inline;
+  float: left;
+}
+.count_city_newcnt {
+  width: 100%;
+  display: block;
+  clear: both;
+}
+.twitter-typeahead {
+  display: inline-block !important;
+}
+.locRadius {
+  width: 100px;
+  height: 33px;
+  display: inline-block;
+}
+.locVisibility,
+.locMap {
+  display: none;
+}
+.LanguageLbl {
+  width: 90%;
+  display: inline;
+  float: left;
 }
 /* Common Styles */
 .fileUpload {

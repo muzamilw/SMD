@@ -23,5 +23,20 @@ namespace SMD.Models.ResponseModels
         /// Country
         /// </summary>
         public IEnumerable<Country> countries { get; set; }
+
+        /// <summary>
+        /// profile questions
+        /// </summary>
+        public IEnumerable<ProfileQuestion> ProfileQuestions { get; set; }
+
+        /// <summary>
+        /// profile questions answers
+        /// </summary>
+        public IEnumerable<ProfileQuestionAnswer> ProfileQuestionAnswers { get; set; }
+
+        /// <summary>
+        /// survey questions
+        /// </summary>
+        public IEnumerable<SurveyQuestion> SurveyQuestions { get; set; }
     }
 }

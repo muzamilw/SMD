@@ -25,8 +25,10 @@ namespace SMD.Repository.Repositories
                     {
                         {AdCampaignByColumn.Name, d => d.CampaignName}  ,    
                         {AdCampaignByColumn.Description, d => d.Description} ,     
+                        {AdCampaignByColumn.Type, d => d.Type} ,     
                         {AdCampaignByColumn.CreatedBy, d => d.CreatedBy}  ,    
-                        {AdCampaignByColumn.CreationDate, d => d.CreatedDateTime} 
+                        {AdCampaignByColumn.CreationDate, d => d.CreatedDateTime} ,
+                        {AdCampaignByColumn.ClickRate, d => d.ClickRate} 
                     };
 
         public AdCampaignRepository(IUnityContainer container)
@@ -91,6 +93,50 @@ namespace SMD.Repository.Repositories
                     .Skip(fromRow)
                     .Take(toRow)
                     .ToList();  
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public IEnumerable<AdCampaign> SearchCampaign(AdCampaignSearchRequest request, out int rowCount)
+        {
+            if (request == null)
+            {
+                int fromRow = 0;
+                int toRow = 10;
+                rowCount = DbSet.Count();
+                return DbSet.Where(g => g.UserId == LoggedInUserIdentity).OrderBy(g => g.CampaignId)
+                        .Skip(fromRow)
+                        .Take(toRow)
+                        .ToList();
+            }
+            else
+            {
+                int fromRow = (request.PageNo - 1) * request.PageSize;
+                int toRow = request.PageSize;
+                Expression<Func<AdCampaign, bool>> query =
+                    campaign =>
+                        (string.IsNullOrEmpty(request.SearchText) ||
+                         (campaign.DisplayTitle.Contains(request.SearchText)))
+                         && (campaign.UserId == LoggedInUserIdentity);
+
+
+                rowCount = DbSet.Count(query);
+                return DbSet.Where(query).OrderBy(g => g.CampaignId)
+                        .Skip(fromRow)
+                        .Take(toRow)
+                        .ToList();
+            }
+        }
+         /// <summary>
+        /// Get Ad Campaigns
+        /// </summary>
+        public long createCampaign(AdCampaign campaignObj)
+        {
+            campaignObj.UserId = LoggedInUserIdentity;
+            DbSet.Add(campaignObj);
+            db.SaveChanges();
+            return campaignObj.CampaignId;
         }
     }
 }
