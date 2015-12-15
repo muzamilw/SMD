@@ -137,6 +137,9 @@ define("survey/survey.viewModel",
                     addNewSurvey = function () {
                         selectedQuestion(new model.Survey());
                         selectedQuestion().Gender("1");
+                        selectedQuestion().LeftPicturePath("Content/Images/Company_Default.png");
+                        selectedQuestion().RightPicturePath("Content/Images/Company_Default.png");
+                        selectedQuestion().reset();
                         isEditorVisible(true);
                         view.initializeTypeahead();
                     },
@@ -385,7 +388,7 @@ define("survey/survey.viewModel",
                             selectedCriteria(item);
                             var selectedSurveyQuestionId = $("#ddsurveyQuestion").val();
                             var matchSurveyQuestion = ko.utils.arrayFirst(surveyQuestionList(), function (item) {
-                                return item.LinkedSQID == selectedSurveyQuestionId;
+                                return item.SQID == selectedSurveyQuestionId;
                             });
                             selectedCriteria().surveyQuestLeftImageSrc(matchSurveyQuestion.LeftPicturePath);
                             selectedCriteria().surveyQuestRightImageSrc(matchSurveyQuestion.RightPicturePath);
@@ -437,7 +440,13 @@ define("survey/survey.viewModel",
                         $("#surveyAnswersContainer").show();
                         isShowSurveyAns(true);
                     },
-
+                     // Has Changes
+                    hasChangesOnQuestion = ko.computed(function () {
+                        if (selectedQuestion() == undefined) {
+                            return false;
+                        } console.log(selectedQuestion().hasChanges());
+                        return (selectedQuestion().hasChanges());
+                    }),
 
                     // Initialize the view model
                     initialize = function (specifiedView) {
@@ -497,7 +506,8 @@ define("survey/survey.viewModel",
                     onDeleteCriteria: onDeleteCriteria,
                     onChangeProfileQuestion: onChangeProfileQuestion,
                     onChangeSurveyQuestion: onChangeSurveyQuestion,
-                    isShowSurveyAns: isShowSurveyAns
+                    isShowSurveyAns: isShowSurveyAns,
+                    hasChangesOnQuestion: hasChangesOnQuestion
                 };
             })()
         };
