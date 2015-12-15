@@ -46,7 +46,7 @@
                                         </div>
                                         <div class="col-lg-6">
 
-                                            <label class="control-label bold">Archived</label>
+                                            <label class="control-label bold" data-bind="text:StatusValue()">Archived</label>
                                         </div>
                                     </div>
                                 </div>
@@ -95,7 +95,7 @@
                                                 <div class="col-lg-12">
 
                                                     <div style="width:210px;text-align:center;">
-                                                        <img style="width:auto;height:80px;max-width:200px;" data-bind="visible:LeftPictureBytes()==null  ,attr: { src: '@Url.Content("~/")' + LeftPicturePath() }" />
+                                                        <img style="width:auto;height:80px;max-width:200px;" data-bind="visible:LeftPictureBytes()==null  ,attr: { src: '@Url.Content("~/")' + LeftPicturePath() }" src="/Content/Images/Company_Default.png" />
                                                         <img style="width:auto;height:80px;max-width:200px;" data-bind="visible:LeftPictureBytes()!=null,attr: { src: LeftPictureBytes }" />
 
                                                     </div>
@@ -132,7 +132,7 @@
                                                 <div class="col-lg-12">
 
                                                     <div style="width:210px;text-align:center;">
-                                                        <img style="width:auto;height:80px;max-width:200px;" data-bind="visible:RightPictureBytes()==null,attr: { src: '@Url.Content("~/")' + RightPicturePath() }" />
+                                                        <img style="width:auto;height:80px;max-width:200px;" data-bind="visible:RightPictureBytes()==null,attr: { src: '@Url.Content("~/")' + RightPicturePath() }" src="/Content/Images/Company_Default.png" />
                                                         <img style="width:auto;height:80px;max-width:200px;" data-bind="visible:RightPictureBytes()!=null,attr: { src: RightPictureBytes }" />
                                                     </div>
 
@@ -340,10 +340,7 @@
 
                                             <label for="txtVerifyQuestion" class="control-label text-right tooltip-float">&nbsp;&nbsp;&nbsp;&nbsp;</label>
                                         </div>
-                                        <div class="col-lg-6 text-left">
-                                            <label for="txtVerifyQuestion" class="">Modification and creation date time</label>
-
-                                        </div>
+                                     
                                     </div>
 
 
@@ -521,7 +518,11 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class=" text-center">
+                                <label data-bind="text:'Modification date : '+ ModifiedDate() , visible: ModifiedDate() != undefined">   </label>
+                                <label data-bind="text:'Creation date : '+ CreationDate(), visible: CreationDate() != undefined"></label>
 
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -612,6 +613,7 @@
 
 </script>
 <script id="answersTemplate" type="text/html">
+    <!--ko if:Type() != 3 -->
     <tr>
         <td>
             <p id="txtPages" data-bind="text: questionString">
@@ -658,4 +660,5 @@
             </div>
         </td>
     </tr>
+    <!--/ko-->
 </script>

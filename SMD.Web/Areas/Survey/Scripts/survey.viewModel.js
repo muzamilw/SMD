@@ -140,6 +140,8 @@ define("survey/survey.viewModel",
                         selectedQuestion().LeftPicturePath("Content/Images/Company_Default.png");
                         selectedQuestion().RightPicturePath("Content/Images/Company_Default.png");
                         selectedQuestion().reset();
+                        selectedQuestion().StatusValue("Draft");
+                        selectedQuestion().Status(1);
                         isEditorVisible(true);
                         view.initializeTypeahead();
                     },
@@ -454,7 +456,10 @@ define("survey/survey.viewModel",
                         ko.applyBindings(view.viewModel, view.bindingRoot);
                         for (var i = 10; i < 100; i++)
                         {
-                            ageRange.push({ value: i.toString(), text: i.toString() });
+                            var text = i.toString();
+                            if (i == 99)
+                                text += "+";
+                            ageRange.push({ value: i.toString(), text: text });
                         }
                         pager(pagination.Pagination({ PageSize: 10 }, questions, getQuestions));
                         // Base Data Call
