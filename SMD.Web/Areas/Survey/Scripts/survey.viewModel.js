@@ -137,6 +137,8 @@ define("survey/survey.viewModel",
                     addNewSurvey = function () {
                         selectedQuestion(new model.Survey());
                         selectedQuestion().Gender("1");
+                        selectedQuestion().LeftPicturePath("Content/Images/Company_Default.png");
+                        selectedQuestion().RightPicturePath("Content/Images/Company_Default.png");
                         selectedQuestion().reset();
                         isEditorVisible(true);
                         view.initializeTypeahead();
