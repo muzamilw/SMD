@@ -131,6 +131,8 @@ define("ads/ads.viewModel",
                           });
 
                     },
+
+
                     // Add new profile Criteria
                     addNewProfileCriteria = function () {
                         
@@ -298,6 +300,9 @@ define("ads/ads.viewModel",
                         $("#surveyAnswersContainer").show();
                         isShowSurveyAns(true);
                     },
+
+
+
                     // Initialize the view model
                     initialize = function (specifiedView) {
                         view = specifiedView; 

@@ -127,7 +127,7 @@
         };
 
     var // ReSharper disable InconsistentNaming
-      SurveyQuestionTargetCriteria = function (ID, SQID, Type, PQID, PQAnswerID, LinkedSQID, LinkedSQAnswer, IncludeorExclude, LanguageID, PQuestion, PQAnswer, LinkedSQ, LinkedSQImage, Language) {
+      SurveyQuestionTargetCriteria = function (ID, SQID, Type, PQID, PQAnswerID, LinkedSQID, LinkedSQAnswer, IncludeorExclude, LanguageID, questionString, answerString, Language, surveyQuestLeftImageSrc, surveyQuestRightImageSrc) {
           var
               //type and userID will be set on server sside
               ID = ko.observable(ID),
@@ -139,11 +139,11 @@
               LinkedSQAnswer = ko.observable(LinkedSQAnswer),
               IncludeorExclude = ko.observable(IncludeorExclude),
               LanguageID = ko.observable(LanguageID),
-              PQuestion = ko.observable(PQuestion),
-              PQAnswer = ko.observable(PQAnswer),
-              LinkedSQ = ko.observable(LinkedSQ),
-              LinkedSQImage = ko.observable(LinkedSQImage),
+              questionString = ko.observable(questionString),
+              answerString = ko.observable(answerString),
               Language = ko.observable(Language),
+              surveyQuestLeftImageSrc = ko.observable(surveyQuestLeftImageSrc),
+              surveyQuestRightImageSrc = ko.observable(surveyQuestRightImageSrc),
               // Convert to server data
               convertToServerData = function () {
                   return {
@@ -153,7 +153,9 @@
                       PQID: PQID(),
                       PQAnswerID: PQAnswerID(),
                       LinkedSQID: LinkedSQID(),
-                      IncludeorExclude: IncludeorExclude()
+                      IncludeorExclude: IncludeorExclude(),
+                      surveyQuestLeftImageSrc: surveyQuestLeftImageSrc(),
+                      surveyQuestRightImageSrc: surveyQuestRightImageSrc()
                   };
               };
           return {
@@ -166,11 +168,11 @@
               LinkedSQAnswer :LinkedSQAnswer,
               IncludeorExclude :IncludeorExclude,
               LanguageID :LanguageID,
-              PQuestion :PQuestion,
-              PQAnswer :PQAnswer,
-              LinkedSQ :LinkedSQ,
-              LinkedSQImage: LinkedSQImage,
-              Language: Language
+              questionString :questionString,
+              answerString :answerString,
+              Language: Language,
+              surveyQuestLeftImageSrc: surveyQuestLeftImageSrc,
+              surveyQuestRightImageSrc: surveyQuestRightImageSrc
           };
       };
     var // ReSharper disable InconsistentNaming
@@ -222,7 +224,7 @@
     };
     // Factory Method
     SurveyQuestionTargetCriteria.Create = function (source) {
-        return new SurveyQuestionTargetCriteria(source.ID, source.SQID, source.Type, source.PQID, source.PQAnswerID, source.LinkedSQID, source.LinkedSQAnswer, source.IncludeorExclude, source.LanguageID, source.PQuestion, source.PQAnswer, source.LinkedSQ, source.LinkedSQImage,source.Language);
+        return new SurveyQuestionTargetCriteria(source.ID, source.SQID, source.Type, source.PQID, source.PQAnswerID, source.LinkedSQID, source.LinkedSQAnswer, source.IncludeorExclude, source.LanguageID, source.questionString, source.answerString, source.Language, source.surveyQuestLeftImageSrc, source.surveyQuestRightImageSrc);
     };
     SurveyQuestionTargetLocation.Create = function (source) {
         return new SurveyQuestionTargetLocation(source.ID, source.SQID, source.CountryID, source.CityID, source.Radius, source.Country, source.City,source.IncludeorExclude);

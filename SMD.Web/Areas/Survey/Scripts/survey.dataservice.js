@@ -17,11 +17,26 @@ define("survey/survey.dataservice", function () {
                         dataType: 'json',
                         type: 'GET'
                     });
-
+                    // callings ads comapaign service for profile questions and survey questions list 
+                    amplify.request.define('getBaseData', 'ajax', {
+                        url: '/Api/AdCampaignBase',
+                        dataType: 'json',
+                        type: 'GET'
+                    });
 
 
                     isInitialized = true;
                 }
+            },
+            // callings ads comapaign service for profile questions and survey questions list 
+            getBaseData = function (params, callbacks) {
+                initialize();
+                return amplify.request({
+                    resourceId: 'getBaseData',
+                    data: params,
+                    success: callbacks.success,
+                    error: callbacks.error,
+                });
             },
               // Search Profile Questions
             searchSurveyQuestions = function (params, callbacks) {
@@ -35,6 +50,7 @@ define("survey/survey.dataservice", function () {
             };
 
         return {
+            getBaseData: getBaseData,
             searchSurveyQuestions: searchSurveyQuestions
         };
        
