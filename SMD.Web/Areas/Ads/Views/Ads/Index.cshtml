@@ -130,28 +130,14 @@
         </form>
     </div>
 </script>
+<!-- ko stopBinding: true -->
+@Html.Partial("~/Areas/Common/Views/Shared/_ConfirmationDialog.cshtml")
+<!-- /ko -->
 @section Scripts{
 <script src="~/Scripts/jquery.tokenize.js"></script>
     <script type="text/javascript">
         require(["ads/ads.view"]);
 
-        function RemoveLanguageToken(tokenId) {
-
-            $("#" + tokenId).remove();
-            if ($('#lang_token_cnt').is(':empty')) {
-                $("#lang_token_cnt").css("display", "none");
-            }
-          
-        }
-
-        function RemoveCountryToken(tokenId) {
-
-            $("#" + tokenId).remove();
-            if ($('#coun_token_cnt').is(':empty')) {
-                $("#coun_token_cnt").css("display", "none");
-            }
-
-        }
     </script>
 
 

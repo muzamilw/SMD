@@ -224,11 +224,11 @@
                       console.log("item on loop");
                       console.log(item);
                       targetCriteria.push(AdCampaignTargetCriteriasModel(item.CriteriaID, item.CampaignID, item.Type, item.PQID, item.PQAnswerID, item.SQID, item.SQAnswer, item.IncludeorExclude, item.questionString,
-       item.answerString, item.surveyQuestLeftImageSrc, item.surveyQuestRightImageSrc, item.LanguageID).convertCriteriaToServerData());
+                        item.answerString, item.surveyQuestLeftImageSrc, item.surveyQuestRightImageSrc, item.LanguageID).convertCriteriaToServerData());
                   });
                   var LocationtargetCriteria = [];
                   _.each(AdCampaignTargetLocation(), function (item) {
-                      LocationtargetCriteria.push(AdCampaignTargetLocation.convertToServerData(item));
+                      LocationtargetCriteria.push(item.convertToServerData());
                   });
                   return {
                       CampaignID: CampaignID(),
@@ -285,6 +285,7 @@
               AmountSpent: AmountSpent,
               MaxBudget: MaxBudget,
               AdCampaignTargetCriterias: AdCampaignTargetCriterias,
+              AdCampaignTargetLocation:AdCampaignTargetLocation,
               convertToServerData:convertToServerData,
               hasChanges: hasChanges,
               reset: reset,
@@ -295,7 +296,7 @@
 
     var // ReSharper disable InconsistentNaming
       AdCampaignTargetCriteriasModel = function (CriteriaID, CampaignID, Type, PQID, PQAnswerID, SQID, SQAnswer, IncludeorExclude, questionString,
-       answerString, surveyQuestLeftImageSrc, surveyQuestRightImageSrc, LanguageID) {
+       answerString, surveyQuestLeftImageSrc, surveyQuestRightImageSrc, LanguageID, Language) {
           var
               //type and userID will be set on server sside
                CriteriaID = ko.observable(CriteriaID),
@@ -311,6 +312,7 @@
                surveyQuestLeftImageSrc = ko.observable(surveyQuestLeftImageSrc),
                surveyQuestRightImageSrc = ko.observable(surveyQuestRightImageSrc),
                LanguageID = ko.observable(LanguageID),
+               Language = ko.observable(Language),
           // Convert to server data
           convertCriteriaToServerData = function () {
            
@@ -323,7 +325,8 @@
                   SQID: SQID(),
                   SQAnswer: SQAnswer(),
                   IncludeorExclude: IncludeorExclude(),
-                  LanguageID: LanguageID()
+                  LanguageID: LanguageID(),
+                  Language:Language(),
               };
           };
           return {
@@ -340,6 +343,7 @@
               surveyQuestLeftImageSrc: surveyQuestLeftImageSrc,
               surveyQuestRightImageSrc: surveyQuestRightImageSrc,
               LanguageID: LanguageID,
+              Language:Language,
               convertCriteriaToServerData: convertCriteriaToServerData
           };
       };
@@ -390,7 +394,7 @@
     };
     // Factory Method
     AdCampaignTargetCriteriasModel.Create = function (source) {
-        return new AdCampaignTargetCriteriasModel(source.CriteriaID, source.CampaignID, source.Type, source.PQID, source.PQAnswerID, source.SQID, source.SQAnswer, source.IncludeorExclude, source.questionString, source.answerString, source.surveyQuestLeftImageSrc, source.surveyQuestRightImageSrc, source.LanguageID);
+        return new AdCampaignTargetCriteriasModel(source.CriteriaID, source.CampaignID, source.Type, source.PQID, source.PQAnswerID, source.SQID, source.SQAnswer, source.IncludeorExclude, source.questionString, source.answerString, source.surveyQuestLeftImageSrc, source.surveyQuestRightImageSrc, source.LanguageID, source.Language);
     };
     AdCampaignTargetLocation.Create = function (source) {
         return new AdCampaignTargetLocation(source.ID, source.CampaignID, source.CountryID, source.CityID, source.Radius, source.Country, source.City);

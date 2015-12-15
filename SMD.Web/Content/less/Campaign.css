@@ -16,10 +16,10 @@
 }
 .count_token_opt_cnt {
   float: left;
-  width: 260px;
+  width: 280px;
 }
-#searchLocations {
-  width: 274px !important;
+#searchSurveyLocations {
+  width: 280px!important;
   border-top-left-radius: 0px !important;
   border-top-right-radius: 0px !important;
   border: none;
@@ -27,7 +27,7 @@
   margin-left: 5px;
 }
 #searchLanguages {
-  width: 380px !important;
+  width: 280px!important;
   border-top-left-radius: 0px !important;
   border-top-right-radius: 0px !important;
   border: none;
@@ -75,4 +75,38 @@ div.Tokenize ul.Dropdown {
   border-radius: 4px;
   border-top-right-radius: 0px;
   border-top-left-radius: 0px;
+}
+.lang_delSurvey {
+  position: relative;
+  cursor: pointer;
+}
+.langIncludeExclText {
+  width: 36%;
+  display: inline;
+  float: left;
+}
+.areaCity {
+  width: 60%;
+  display: inline;
+  float: left;
+}
+.count_city_newcnt {
+  width: 100%;
+  display: block;
+  clear: both;
+}
+.locRadius {
+  width: 165px;
+  height: 33px;
+  display: inline-block;
+  margin: 5px 0px;
+}
+.locVisibility,
+.locMap {
+  display: none;
+}
+.LanguageLbl {
+  width: 90%;
+  display: inline;
+  float: left;
 }
