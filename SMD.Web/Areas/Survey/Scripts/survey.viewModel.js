@@ -338,7 +338,7 @@ define("survey/survey.viewModel",
                             var selectedQuestionstring = $("#ddsurveyQuestion option[value=" + $("#ddsurveyQuestion").val() + "]").text();
                             selectedCriteria().questionString(selectedQuestionstring);
                             var matchSurveyQuestion = ko.utils.arrayFirst(surveyQuestionList(), function (item) {
-                                return item.LinkedSQID == $("#ddsurveyQuestion").val();
+                                return item.SQID == $("#ddsurveyQuestion").val();
                             });
                             if (selectedCriteria().LinkedSQAnswer() == "1") {
                                 selectedCriteria().answerString(matchSurveyQuestion.LeftPicturePath);
