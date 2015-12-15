@@ -90,7 +90,7 @@ define("ads/ads.viewModel",
                        
                         campaignModel().Gender('2');
                         campaignModel().Type('2');
-
+                        campaignModel().reset();
                         view.initializeTypeahead();
                     },
                     closeNewCampaignDialog = function () {
@@ -402,6 +402,13 @@ define("ads/ads.viewModel",
                         }
 
                     },
+                       // Has Changes
+                    hasChangesOnQuestion = ko.computed(function () {
+                        if (campaignModel() == undefined) {
+                            return false;
+                        }
+                        return (campaignModel().hasChanges());
+                    }),
                     // Initialize the view model
                     initialize = function (specifiedView) {
                         view = specifiedView; 
@@ -416,6 +423,7 @@ define("ads/ads.viewModel",
                     return {
                         initialize: initialize,
                         pager: pager,
+                        hasChangesOnQuestion:hasChangesOnQuestion,
                         isEditorVisible:isEditorVisible,
                         campaignGridContent: campaignGridContent,
                         addNewCampaign: addNewCampaign,                   

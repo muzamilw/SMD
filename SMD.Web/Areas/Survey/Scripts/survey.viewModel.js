@@ -446,7 +446,7 @@ define("survey/survey.viewModel",
                     hasChangesOnQuestion = ko.computed(function () {
                         if (selectedQuestion() == undefined) {
                             return false;
-                        } console.log(selectedQuestion().hasChanges());
+                        }
                         return (selectedQuestion().hasChanges());
                     }),
 

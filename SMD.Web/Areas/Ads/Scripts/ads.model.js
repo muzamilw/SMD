@@ -207,7 +207,32 @@
                   return errors().length === 0;
               }),
               dirtyFlag = new ko.dirtyFlag({
-
+                  CampaignID: CampaignID,
+                  LanguageID: LanguageID,
+                  CampaignName: CampaignName,
+                  UserID: UserID,
+                  Status: Status,
+                  StatusValue: StatusValue,
+                  CampaignDescription: CampaignDescription,
+                  Gender: Gender,
+                  Archived: Archived,
+                  StartDateTime: StartDateTime,
+                  EndDateTime: EndDateTime,
+                  Type: Type,
+                  DisplayTitle: DisplayTitle,
+                  LandingPageVideoLink: LandingPageVideoLink,
+                  VerifyQuestion: VerifyQuestion,
+                  Answer1: Answer1,
+                  Answer2: Answer2,
+                  Answer3: Answer3,
+                  CorrectAnswer: CorrectAnswer,
+                  AgeRangeStart: AgeRangeStart,
+                  AgeRangeEnd: AgeRangeEnd,
+                  ResultClicks: ResultClicks,
+                  AmountSpent: AmountSpent,
+                  MaxBudget: MaxBudget,
+                  AdCampaignTargetCriterias: AdCampaignTargetCriterias,
+                  AdCampaignTargetLocation: AdCampaignTargetLocation
               }),
               // Has Changes
               hasChanges = ko.computed(function () {
@@ -290,6 +315,7 @@
               hasChanges: hasChanges,
               reset: reset,
               isValid: isValid,
+              dirtyFlag:dirtyFlag,
               errors: errors
           };
       };
@@ -348,7 +374,7 @@
           };
       };
     var // ReSharper disable InconsistentNaming
-    AdCampaignTargetLocation = function (ID, CampaignID, CountryID, CityID, Radius, Country, City) {
+    AdCampaignTargetLocation = function (ID, CampaignID, CountryID, CityID, Radius, Country, City,IncludeorExclude) {
         var
             //type and userID will be set on server sside
             ID = ko.observable(ID),
@@ -358,7 +384,7 @@
             Radius = ko.observable(Radius),
             Country = ko.observable(Country),
             City = ko.observable(City),
-
+            IncludeorExclude =ko.observable(IncludeorExclude)
             // Convert to server data
             convertToServerData = function () {
                 return {
@@ -368,7 +394,8 @@
                     CityID: CityID(),
                     Radius: Radius(),
                     Country: Country(),
-                    City: City()
+                    City: City(),
+                    IncludeorExclude:IncludeorExclude()
                 };
             };
         return {
@@ -378,7 +405,8 @@
             CityID: CityID,
             Radius: Radius,
             Country: Country,
-            City: City
+            City: City,
+            IncludeorExclude:IncludeorExclude
         };
     };
     // Factory Method
@@ -397,7 +425,7 @@
         return new AdCampaignTargetCriteriasModel(source.CriteriaID, source.CampaignID, source.Type, source.PQID, source.PQAnswerID, source.SQID, source.SQAnswer, source.IncludeorExclude, source.questionString, source.answerString, source.surveyQuestLeftImageSrc, source.surveyQuestRightImageSrc, source.LanguageID, source.Language);
     };
     AdCampaignTargetLocation.Create = function (source) {
-        return new AdCampaignTargetLocation(source.ID, source.CampaignID, source.CountryID, source.CityID, source.Radius, source.Country, source.City);
+        return new AdCampaignTargetLocation(source.ID, source.CampaignID, source.CountryID, source.CityID, source.Radius, source.Country, source.City,source.IncludeorExclude);
     };
     return {
         AdvertGridModel: AdvertGridModel,
