@@ -385,7 +385,7 @@ define("survey/survey.viewModel",
                             selectedCriteria(item);
                             var selectedSurveyQuestionId = $("#ddsurveyQuestion").val();
                             var matchSurveyQuestion = ko.utils.arrayFirst(surveyQuestionList(), function (item) {
-                                return item.LinkedSQID == selectedSurveyQuestionId;
+                                return item.SQID == selectedSurveyQuestionId;
                             });
                             selectedCriteria().surveyQuestLeftImageSrc(matchSurveyQuestion.LeftPicturePath);
                             selectedCriteria().surveyQuestRightImageSrc(matchSurveyQuestion.RightPicturePath);
