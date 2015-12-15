@@ -137,6 +137,7 @@ define("survey/survey.viewModel",
                     addNewSurvey = function () {
                         selectedQuestion(new model.Survey());
                         selectedQuestion().Gender("1");
+                        selectedQuestion().reset();
                         isEditorVisible(true);
                         view.initializeTypeahead();
                     },
@@ -437,7 +438,13 @@ define("survey/survey.viewModel",
                         $("#surveyAnswersContainer").show();
                         isShowSurveyAns(true);
                     },
-
+                     // Has Changes
+                    hasChangesOnQuestion = ko.computed(function () {
+                        if (selectedQuestion() == undefined) {
+                            return false;
+                        } console.log(selectedQuestion().hasChanges());
+                        return (selectedQuestion().hasChanges());
+                    }),
 
                     // Initialize the view model
                     initialize = function (specifiedView) {
@@ -497,7 +504,8 @@ define("survey/survey.viewModel",
                     onDeleteCriteria: onDeleteCriteria,
                     onChangeProfileQuestion: onChangeProfileQuestion,
                     onChangeSurveyQuestion: onChangeSurveyQuestion,
-                    isShowSurveyAns: isShowSurveyAns
+                    isShowSurveyAns: isShowSurveyAns,
+                    hasChangesOnQuestion: hasChangesOnQuestion
                 };
             })()
         };

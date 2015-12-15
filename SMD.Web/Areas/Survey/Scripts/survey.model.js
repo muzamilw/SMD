@@ -41,7 +41,25 @@
                     return errors().length === 0;
                 }),
                 dirtyFlag = new ko.dirtyFlag({
-
+                    LanguageID: (LanguageID),
+                    CountryID: (CountryID),
+                    Question: (Question),
+                    Gender: (Gender),
+                    Language: (Language),
+                    Country: (Country),
+                    Description: Description,
+                    DisplayQuestion: DisplayQuestion,
+                    StartDate: StartDate,
+                    EndDate: EndDate,
+                    ProjectedReach: ProjectedReach,
+                    AgeRangeStart: AgeRangeStart,
+                    AgeRangeEnd: AgeRangeEnd,
+                    VoucherCode: VoucherCode,
+                    DiscountVoucherID: DiscountVoucherID,
+                    SurveyQuestionTargetCriteria: SurveyQuestionTargetCriteria,
+                    SurveyQuestionTargetLocation: SurveyQuestionTargetLocation,
+                    LeftPictureBytes: LeftPictureBytes,
+                    RightPictureBytes: RightPictureBytes
                 }),
                 // Has Changes
                 hasChanges = ko.computed(function () {
@@ -122,7 +140,8 @@
                 SurveyQuestionTargetCriteria: SurveyQuestionTargetCriteria,
                 SurveyQuestionTargetLocation:SurveyQuestionTargetLocation,
                 LeftPictureBytes: LeftPictureBytes,
-                RightPictureBytes: RightPictureBytes
+                RightPictureBytes: RightPictureBytes,
+                dirtyFlag: dirtyFlag
             };
         };
 
