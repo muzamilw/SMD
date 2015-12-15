@@ -788,6 +788,7 @@
     <Content Include="Global.asax" />
     <Content Include="Images\accent.png" />
     <Content Include="Images\bullet.png" />
+    <Content Include="Images\Cash4Ads_White_text.png" />
     <Content Include="Images\heroAccent.png" />
     <Content Include="Images\orderedList0.png" />
     <Content Include="Images\orderedList1.png" />
@@ -1331,9 +1332,6 @@
     <Content Include="Areas\Survey\Views\Survey\_SurveyQuestionEditor.cshtml" />
     <Content Include="Areas\Ads\Views\Ads\_addEditor.cshtml" />
     <Content Include="Areas\Ads\Views\Ads\AddAproval.cshtml" />
-    <None Include="ModelMappers\config\Web.connectionstrings.default.config">
-      <SubType>Designer</SubType>
-    </None>
     <Content Include="RichTextEditor\CHANGES.md" />
     <Content Include="RichTextEditor\LICENSE.md" />
     <Content Include="RichTextEditor\plugins\scayt\LICENSE.md" />
