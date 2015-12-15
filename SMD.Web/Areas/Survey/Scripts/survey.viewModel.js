@@ -31,8 +31,13 @@ define("survey/survey.viewModel",
                     selectedLangIncludeExclude = ko.observable(true),
                     selectedLocationLat = ko.observable(0),
                     selectedLocationLong = ko.observable(0),
+                    // criteria selection 
+                    selectedCriteria = ko.observable(),
+                    profileQuestionList = ko.observable([]),
+                    surveyQuestionList = ko.observableArray([]),
+                    profileAnswerList = ko.observable([]),
                     // age list 
-                    ageRange = ko.observable([{ value: '11', text: '11' }, { value: '12', text: '12' }, { value: '13', text: '13' }, { value: '14', text: '14' }, { value: '15', text: '15' }, { value: '16', text: '16' }, { value: '17', text: '17' }, { value: '18', text: '18' }, { value: '19', text: '19' }])
+                    ageRange = ko.observableArray([])
                     //Get Questions
                     getQuestions = function () {   
                         dataservice.searchSurveyQuestions(
@@ -132,6 +137,11 @@ define("survey/survey.viewModel",
                     addNewSurvey = function () {
                         selectedQuestion(new model.Survey());
                         selectedQuestion().Gender("1");
+                        selectedQuestion().LeftPicturePath("Content/Images/Company_Default.png");
+                        selectedQuestion().RightPicturePath("Content/Images/Company_Default.png");
+                        selectedQuestion().reset();
+                        selectedQuestion().StatusValue("Draft");
+                        selectedQuestion().Status(1);
                         isEditorVisible(true);
                         view.initializeTypeahead();
                     },
@@ -244,7 +254,7 @@ define("survey/survey.viewModel",
                         });
                         confirmation.show();
                     },
-                     deleteLanguage = function (item) {
+                    deleteLanguage = function (item) {
                          console.log(item.ID());
                          if (item.ID() != 0) {
                              //dataservice.deleteProfileQuestion(item.convertToServerData(), {
@@ -265,10 +275,192 @@ define("survey/survey.viewModel",
                          }
 
                      },
+                    isShowSurveyAns = ko.observable(false),
+                    // survey question and  profile question selection criteria 
+
+                    // Add new profile Criteria
+                    addNewProfileCriteria = function () {
+
+                        var objProfileCriteria = new model.SurveyQuestionTargetCriteria();
+
+                        objProfileCriteria.Type("1");
+                        objProfileCriteria.IncludeorExclude("1");
+                        selectedCriteria(objProfileCriteria);
+                        if (profileQuestionList().length == 0) {
+                            dataservice.getBaseData({
+                                RequestId: 2,
+                                QuestionId: 0,
+                            }, {
+                                success: function (data) {
+                                    if (data != null) {
+                                        profileQuestionList([]);
+                                        ko.utils.arrayPushAll(profileQuestionList(), data.ProfileQuestions);
+                                        profileQuestionList.valueHasMutated();
+                                    }
+
+                                },
+                                error: function (response) {
+
+                                }
+                            });
+                        }
+
+                    },
+
+                    // Add new survey Criteria
+                    addNewSurveyCriteria = function () {
+                        var objSurveyCriteria = new model.SurveyQuestionTargetCriteria();
+                        objSurveyCriteria.Type("2");
+                        objSurveyCriteria.IncludeorExclude("1");
+                        selectedCriteria(objSurveyCriteria);
+                        if (surveyQuestionList().length == 0) {
+                            dataservice.getBaseData({
+                                RequestId: 4,
+                                QuestionId: 0,
+                            }, {
+                                success: function (data) {
+                                    if (data != null) {
+                                        surveyQuestionList([]);
+                                        ko.utils.arrayPushAll(surveyQuestionList(), data.SurveyQuestions);
+                                        surveyQuestionList.valueHasMutated();
+                                    }
+
+                                },
+                                error: function (response) {
+
+                                }
+                            });
+                        }
+                    },
+                    saveCriteria = function () {
+                        if (selectedCriteria().Type() == "1") {
+                            var selectedQuestionstring = $("#ddprofileQuestion option[value=" + $("#ddprofileQuestion").val() + "]").text();
+                            selectedCriteria().questionString(selectedQuestionstring);
+                            var selectedQuestionAnswerstring = $("#ddprofileAnswers option[value=" + $("#ddprofileAnswers").val() + "]").text();
+                            selectedCriteria().answerString(selectedQuestionAnswerstring);
+                            selectedCriteria().PQAnswerID($("#ddprofileAnswers").val());
+                        } else if (selectedCriteria().Type() == "2") {
+                            var selectedQuestionstring = $("#ddsurveyQuestion option[value=" + $("#ddsurveyQuestion").val() + "]").text();
+                            selectedCriteria().questionString(selectedQuestionstring);
+                            var matchSurveyQuestion = ko.utils.arrayFirst(surveyQuestionList(), function (item) {
+                                return item.SQID == $("#ddsurveyQuestion").val();
+                            });
+                            if (selectedCriteria().LinkedSQAnswer() == "1") {
+                                selectedCriteria().answerString(matchSurveyQuestion.LeftPicturePath);
+                            } else {
+                                selectedCriteria().answerString(matchSurveyQuestion.RightPicturePath);
+                            }
+                        }
+
+                        selectedQuestion().SurveyQuestionTargetCriteria.push(new model.SurveyQuestionTargetCriteria.Create({
+                            Type: selectedCriteria().Type(),
+                            PQID: selectedCriteria().PQID(),
+                            PQAnswerID: selectedCriteria().PQAnswerID(),
+                            LinkedSQID: selectedCriteria().LinkedSQID(),
+                            LinkedLinkedSQAnswer: selectedCriteria().LinkedSQAnswer(),
+                            questionString: selectedCriteria().questionString(),
+                            answerString: selectedCriteria().answerString(),
+                            IncludeorExclude: selectedCriteria().IncludeorExclude()
+                        }));
+                        isShowSurveyAns(false);
+                    },
+                    onEditCriteria = function (item) {
+                        console.log(item.Type());
+                        if (item.Type() == "1") {
+                            dataservice.getBaseData({
+                                RequestId: 3,
+                                QuestionId: item.PQID(),
+                            }, {
+                                success: function (data) {
+                                    if (data != null) {
+
+                                        profileAnswerList([]);
+                                        ko.utils.arrayPushAll(profileAnswerList(), data.ProfileQuestionAnswers);
+                                        profileAnswerList.valueHasMutated();
+                                    }
+
+                                },
+                                error: function (response) {
+
+                                }
+                            });
+
+                            selectedCriteria(item);
+                        } else {
+                            selectedCriteria(item);
+                            var selectedSurveyQuestionId = $("#ddsurveyQuestion").val();
+                            var matchSurveyQuestion = ko.utils.arrayFirst(surveyQuestionList(), function (item) {
+                                return item.SQID == selectedSurveyQuestionId;
+                            });
+                            selectedCriteria().surveyQuestLeftImageSrc(matchSurveyQuestion.LeftPicturePath);
+                            selectedCriteria().surveyQuestRightImageSrc(matchSurveyQuestion.RightPicturePath);
+                            isShowSurveyAns(true);
+                        }
+
+                    },
+                    // Delete Handler PQ
+                    onDeleteCriteria = function (item) {
+                        // Ask for confirmation
+                        confirmation.afterProceed(function () {
+                            selectedQuestion().SurveyQuestionTargetCriteria.remove(item);
+                        });
+                        confirmation.show();
+                    },
+
+                    onChangeProfileQuestion = function () {
+                        var selectedQuestionId = $("#ddprofileQuestion").val();
+                        dataservice.getBaseData({
+                            RequestId: 3,
+                            QuestionId: selectedQuestionId,
+                        }, {
+                            success: function (data) {
+                                if (data != null) {
+                                    if (profileAnswerList().length > 0) {
+                                        profileAnswerList([]);
+                                    }
+                                    ko.utils.arrayPushAll(profileAnswerList(), data.ProfileQuestionAnswers);
+                                    profileAnswerList.valueHasMutated();
+
+                                }
+
+                            },
+                            error: function (response) {
+
+                            }
+                        });
+                    },
+
+                    onChangeSurveyQuestion = function (item) {
+                     
+                        var selectedSurveyQuestionId = $("#ddsurveyQuestion").val();
+                        var matchSurveyQuestion = ko.utils.arrayFirst(surveyQuestionList(), function (item) {
+                            return item.SQID == selectedSurveyQuestionId;
+                        });
+                        item.LinkedSQAnswer("1");
+                        item.surveyQuestLeftImageSrc(matchSurveyQuestion.LeftPicturePath);
+                        item.surveyQuestRightImageSrc(matchSurveyQuestion.RightPicturePath);
+                        $("#surveyAnswersContainer").show();
+                        isShowSurveyAns(true);
+                    },
+                     // Has Changes
+                    hasChangesOnQuestion = ko.computed(function () {
+                        if (selectedQuestion() == undefined) {
+                            return false;
+                        }
+                        return (selectedQuestion().hasChanges());
+                    }),
+
                     // Initialize the view model
                     initialize = function (specifiedView) {
                         view = specifiedView;
                         ko.applyBindings(view.viewModel, view.bindingRoot);
+                        for (var i = 10; i < 100; i++)
+                        {
+                            var text = i.toString();
+                            if (i == 99)
+                                text += "+";
+                            ageRange.push({ value: i.toString(), text: text });
+                        }
                         pager(pagination.Pagination({ PageSize: 10 }, questions, getQuestions));
                         // Base Data Call
                         getBasedata();
@@ -307,7 +499,20 @@ define("survey/survey.viewModel",
                     selectedLocationLat: selectedLocationLat,
                     selectedLocationLong: selectedLocationLong,
                     addLanguage: addLanguage,
-                    onRemoveLanguage: onRemoveLanguage
+                    onRemoveLanguage: onRemoveLanguage,
+                    selectedCriteria: selectedCriteria,
+                    profileQuestionList: profileQuestionList,
+                    profileAnswerList: profileAnswerList,
+                    surveyQuestionList: surveyQuestionList,
+                    addNewProfileCriteria: addNewProfileCriteria,
+                    addNewSurveyCriteria: addNewSurveyCriteria,
+                    saveCriteria: saveCriteria,
+                    onEditCriteria: onEditCriteria,
+                    onDeleteCriteria: onDeleteCriteria,
+                    onChangeProfileQuestion: onChangeProfileQuestion,
+                    onChangeSurveyQuestion: onChangeSurveyQuestion,
+                    isShowSurveyAns: isShowSurveyAns,
+                    hasChangesOnQuestion: hasChangesOnQuestion
                 };
             })()
         };
