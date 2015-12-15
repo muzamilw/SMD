@@ -1,4 +1,6 @@
-﻿using SMD.Models.Common;
+﻿using System.Collections.ObjectModel;
+using System.IdentityModel.Tokens;
+using SMD.Models.Common;
 using Owin;
 using Microsoft.Owin;
 using SMD.Implementation;
@@ -8,6 +10,13 @@ using Microsoft.AspNet.Identity.Owin;
 using System;
 using SMD.Implementation.Identity;
 using IdentitySample.Models;
+using System.Web.Http;
+using SMD.WebBase.Mvc;
+using SMD.WebBase.UnityConfiguration;
+using Thinktecture.IdentityModel.Tokens;
+using Thinktecture.IdentityModel.Tokens.Http;
+using System.Net.Http;
+using System.Web.Http.Dispatcher;
 
 namespace SMD.MIS
 {
@@ -51,6 +60,37 @@ namespace SMD.MIS
             app.UseFacebookAuthentication(
                 appId: "900194280062971",
                 appSecret: "7d8a7f398bb09ca362a051f1d8e2d71e");
+
+            app.Map("/Api_Mobile", inner =>
+            {
+                // Web API configuration and services
+                var config = new HttpConfiguration();
+                config.SuppressDefaultHostAuthentication();
+                // List of delegating handlers.
+                var handlers = new DelegatingHandler[] {
+                      new AuthenticationHandler(SecurityConfig.CreateConfiguration(UnityWebActivator.Container))
+                };
+                // Create a message handler chain with an end-point.
+                var routeHandlers = HttpClientFactory.CreatePipeline(new HttpControllerDispatcher(config), handlers);
+
+                // configure route
+                config.Routes.MapHttpRoute("ApiMobileDefault",
+                  "{controller}/{id}",
+                  new { id = RouteParameter.Optional },
+                  null,
+                  routeHandlers);
+
+                // configure route
+                config.Routes.MapHttpRoute("ApiMobileDefaultWithoutId",
+                  "{controller}",
+                  null,
+                  null,
+                  routeHandlers);
+
+                config.DependencyResolver = new UnityDependencyResolver(UnityWebActivator.Container);
+
+                inner.UseWebApi(config);
+            });
         }
     }
 }

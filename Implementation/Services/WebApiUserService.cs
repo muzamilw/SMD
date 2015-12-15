@@ -73,6 +73,20 @@ namespace SMD.Implementation.Services
         }
 
         /// <summary>
+        /// Standard Login
+        /// </summary>
+        public User AuthenticateUser(StandardLoginRequest request)
+        {
+            User user = UserManager.FindAsync(request.UserName, request.Password).Result;
+            if (user == null)
+            {
+                throw new SMDException(LanguageResources.WebApiUserService_InvalidCredentials);
+            }
+
+            return user;
+        }
+
+        /// <summary>
         /// Save Stripe Customer
         /// </summary>
         public async Task SaveStripeCustomerId(string customerId)

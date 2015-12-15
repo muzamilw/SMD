@@ -15,6 +15,7 @@ namespace SMD.MIS.Areas.Api.Controllers
     /// <summary>
     /// Standard Login Api Controller 
     /// </summary>
+    [Authorize]
     public class StandardLoginController : ApiController
     {
         #region Private
@@ -41,7 +42,13 @@ namespace SMD.MIS.Areas.Api.Controllers
         #endregion
 
         #region Public
-        
+
+        public string Get()
+        {
+            return "I am from Get method!";
+        }
+
+
         /// <summary>
         /// Login
         /// </summary>
