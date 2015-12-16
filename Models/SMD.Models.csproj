@@ -165,6 +165,7 @@
     <Compile Include="RequestModels\StandardLoginRequest.cs" />
     <Compile Include="RequestModels\ProfileQuestionSearchRequest.cs" />
     <Compile Include="RequestModels\SurveySearchRequest.cs" />
+    <Compile Include="RequestModels\UpdateProfileQuestionUserAnswerApiRequest.cs" />
     <Compile Include="ResponseModels\AdCampaignBaseResponse.cs" />
     <Compile Include="ResponseModels\AdCampaignResposneModelForAproval.cs" />
     <Compile Include="ResponseModels\ProfileQuestionApiSearchResponse.cs" />

@@ -99,6 +99,7 @@
     <Compile Include="Services\IEmailManagerService.cs" />
     <Compile Include="Services\IPaypalService.cs" />
     <Compile Include="Services\IProfileQuestionAnswerService.cs" />
+    <Compile Include="Services\IProfileQuestionUserAnswerService.cs" />
     <Compile Include="Services\IWebApiUserService.cs" />
     <Compile Include="Services\IProfileQuestionService.cs" />
     <Compile Include="Services\ISurveyQuestionService.cs" />
