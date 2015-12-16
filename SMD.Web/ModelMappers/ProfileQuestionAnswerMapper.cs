@@ -73,5 +73,20 @@ namespace SMD.MIS.ModelMappers
                 Answer = source.AnswerString
             };
         }
+
+        /// <summary>
+        /// Create Model For API
+        /// </summary>
+        public static ProfileQuestionAnswerApiModel CreateForApi(this Models.DomainModels.ProfileQuestionAnswer source)
+        {
+            return new ProfileQuestionAnswerApiModel
+            {
+                PqAnswerId = source.PqAnswerId,
+                AnswerString = source.AnswerString,
+                ImagePath = source.ImagePath,
+                PqId = source.PqId,
+                Type = source.Type
+            };
+        }
     }
 }

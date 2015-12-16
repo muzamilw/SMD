@@ -156,6 +156,8 @@
     </Compile>
     <Compile Include="Common\CampaignGridModel.cs" />
     <Compile Include="RequestModels\AdCampaignSearchRequest.cs" />
+    <Compile Include="RequestModels\GetProfileQuestionApiRequest.cs" />
+    <Compile Include="RequestModels\RegisterExternalRequest.cs" />
     <Compile Include="RequestModels\MakePaypalPaymentRequest.cs" />
     <Compile Include="RequestModels\StripeChargeCustomerRequest.cs" />
     <Compile Include="RequestModels\GetPagedListRequest.cs" />
@@ -165,6 +167,7 @@
     <Compile Include="RequestModels\SurveySearchRequest.cs" />
     <Compile Include="ResponseModels\AdCampaignBaseResponse.cs" />
     <Compile Include="ResponseModels\AdCampaignResposneModelForAproval.cs" />
+    <Compile Include="ResponseModels\ProfileQuestionApiSearchResponse.cs" />
     <Compile Include="ResponseModels\ProfileQuestionBaseResponse.cs" />
     <Compile Include="ResponseModels\ProfileQuestionSearchRequestResponse.cs" />
     <Compile Include="ResponseModels\CampaignResponseModel.cs" />

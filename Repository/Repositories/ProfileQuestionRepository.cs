@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Web.Mvc.Html;
 using Microsoft.Practices.Unity;
 using SMD.Interfaces.Repository;
 using SMD.Models.Common;
@@ -18,6 +19,8 @@ namespace SMD.Repository.Repositories
     public class ProfileQuestionRepository : BaseRepository<ProfileQuestion>, IProfileQuestionRepository
     {
         #region Private
+
+
         /// <summary>
         /// Profile Question Orderby clause
         /// </summary>
@@ -98,13 +101,47 @@ namespace SMD.Repository.Repositories
             return DbSet.Where(question => question.Status == null || question.Status == 1).ToList();
         }
 
+
         /// <summary>
-        /// Get All Profile Questions
+        /// Get Count of PQ For Group Id
         /// </summary>
-        public IEnumerable<ProfileQuestion> GetAll()
+        public int GetTotalCountOfGroupQuestion(double groupId)
         {
-            return DbSet.Select(question => question).ToList();
+            return DbSet.Count(question => question.ProfileGroupId == groupId);
         }
+
+        /// <summary>
+        /// Get Answered Questions count 
+        /// </summary>
+        public int GetCountOfUnAnsweredQuestionsByGroupId(double groupId,string userId)
+        {
+            var countOfUnAnsweredQuestions = (from question in db.ProfileQuestions
+                                              where (question.ProfileGroupId == groupId &&
+                                              !(db.ProfileQuestionUserAnswers.Distinct().Any(ans => ans.PqId == question.PqId && ans.UserId == userId)))
+                                              select question.PqId).ToList().Count;
+            return countOfUnAnsweredQuestions;
+        }
+
+
+        /// <summary>
+        /// Get Un-answered Profile Questions by Group Id 
+        /// </summary>
+        public IEnumerable<ProfileQuestion> GetUnansweredQuestionsByGroupId(GetProfileQuestionApiRequest request)
+        {
+            int fromRow = (request.PageNo - 1) * request.PageSize;
+            int toRow = request.PageSize;
+
+            var unAnsweredQuestions = (from question in db.ProfileQuestions
+                     where (question.ProfileGroupId==request.GroupId && !(db.ProfileQuestionUserAnswers.Any(ans => ans.PqId == question.PqId)))
+                select question)
+                .OrderBy(qst => qst.ProfileQuestionGroup.ProfileGroupName)
+                 .Skip(fromRow)
+                 .Take(toRow)
+                 .ToList();
+            return unAnsweredQuestions;
+        }
+
+       
         #endregion
     }
 }

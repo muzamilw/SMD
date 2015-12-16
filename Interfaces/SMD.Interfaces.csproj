@@ -80,6 +80,7 @@
     <Compile Include="Repository\IAuditLogRepository.cs" />
     <Compile Include="Repository\ICityRepository.cs" />
     <Compile Include="Repository\IProfileQuestionAnswerRepository.cs" />
+    <Compile Include="Repository\IProfileQuestionUserAnswerRepository.cs" />
     <Compile Include="Repository\ISurveyQuestionTargetLocationRepository.cs" />
     <Compile Include="Repository\ISurveyQuestionTargetCriteriaRepository.cs" />
     <Compile Include="Repository\ISurveyQuestionRepository.cs" />

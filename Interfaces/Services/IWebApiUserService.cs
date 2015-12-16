@@ -12,12 +12,22 @@ namespace SMD.Interfaces.Services
         /// <summary>
         /// External Login 
         /// </summary>
+        Task<User> RegisterExternal(RegisterExternalRequest request);
+        
+        /// <summary>
+        /// External Login 
+        /// </summary>
         Task<User> ExternalLogin(ExternalLoginRequest request);
 
         /// <summary>
         /// Standard Login 
         /// </summary>
         Task<User> StandardLogin(StandardLoginRequest request);
+
+        /// <summary>
+        /// Standard Login 
+        /// </summary>
+        User AuthenticateUser(StandardLoginRequest request);
 
         /// <summary>
         /// Save Stripe Customer 

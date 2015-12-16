@@ -1,6 +1,8 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using SMD.ExceptionHandling;
 using SMD.Implementation.Identity;
@@ -23,6 +25,15 @@ namespace SMD.Implementation.Services
             get { return HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
         }
 
+        /// <summary>
+        /// Throws Exception if registreation fails
+        /// </summary>
+        private static void ThrowRegisterUserErrors(IdentityResult result)
+        {
+            string errors = result.Errors.Aggregate("", (current, error) => current + (Environment.NewLine + error));
+            throw new SMDException(errors);
+        }
+
         #endregion
 
         #region Constructor
@@ -30,6 +41,28 @@ namespace SMD.Implementation.Services
         #endregion
 
         #region Public
+
+        /// <summary>
+        /// Perform External Registration
+        /// </summary>
+        public async Task<User> RegisterExternal(RegisterExternalRequest request)
+        {
+            var user = new User { UserName = request.Email, Email = request.Email, FullName = request.FullName };
+            var result = await UserManager.CreateAsync(user);
+            if (!result.Succeeded)
+            {
+                ThrowRegisterUserErrors(result);
+            }
+
+            var login = new UserLoginInfo(request.LoginProvider, request.LoginProviderKey);
+            result = await UserManager.AddLoginAsync(user.Id, login);
+            if (!result.Succeeded)
+            {
+                ThrowRegisterUserErrors(result);
+            }
+
+            return user;
+        }
         
         /// <summary>
         /// Perform External Login
@@ -64,6 +97,20 @@ namespace SMD.Implementation.Services
         public async Task<User> StandardLogin(StandardLoginRequest request)
         {
             User user = await UserManager.FindAsync(request.UserName, request.Password);
+            if (user == null)
+            {
+                throw new SMDException(LanguageResources.WebApiUserService_InvalidCredentials);
+            }
+
+            return user;
+        }
+
+        /// <summary>
+        /// Standard Login
+        /// </summary>
+        public User AuthenticateUser(StandardLoginRequest request)
+        {
+            User user = UserManager.FindAsync(request.UserName, request.Password).Result;
             if (user == null)
             {
                 throw new SMDException(LanguageResources.WebApiUserService_InvalidCredentials);

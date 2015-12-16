@@ -161,6 +161,11 @@ namespace SMD.Repository.BaseRepository
         /// </summary>
         public DbSet<City> Cities { get; set; }
 
+        /// <summary>
+        /// Profile Question User Answers
+        /// </summary>
+        public DbSet<ProfileQuestionUserAnswer> ProfileQuestionUserAnswers { get; set; }
+
         #endregion
     }
 }

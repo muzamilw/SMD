@@ -1,4 +1,5 @@
-﻿using SMD.Interfaces.Repository;
+﻿using System.Collections.Generic;
+using SMD.Interfaces.Repository;
 using SMD.Interfaces.Services;
 using SMD.Models.Common;
 using SMD.Models.DomainModels;
@@ -24,6 +25,59 @@ namespace SMD.Implementation.Services
         private readonly ILanguageRepository _languageRepository;
         private readonly IProfileQuestionGroupRepository _profileQuestionGroupRepository;
         private readonly IProfileQuestionAnswerRepository _profileQuestionAnswerRepository;
+        /// <summary>
+        /// Saving Function 
+        /// </summary>
+        private string SaveImage(string mapPath, string existingImage, string caption, string fileName,
+            string fileSource, byte[] fileSourceBytes, bool fileDeleted = false)
+        {
+            if (fileSourceBytes == null)
+            {
+                return fileSource;
+            }
+            if (!string.IsNullOrEmpty(fileSource) || fileDeleted)
+            {
+                // Look if file already exists then replace it
+                if (!string.IsNullOrEmpty(existingImage))
+                {
+                    if (Path.IsPathRooted(existingImage))
+                    {
+                        if (File.Exists(existingImage))
+                        {
+                            // Remove Existing File
+                            File.Delete(existingImage);
+                        }
+                    }
+                    else
+                    {
+                        string filePath = HttpContext.Current.Server.MapPath("~/" + existingImage);
+                        if (File.Exists(filePath))
+                        {
+                            // Remove Existing File
+                            File.Delete(filePath);
+                        }
+                    }
+
+                }
+
+                // If File has been deleted then set the specified field as empty
+                // Used for File1, File2, File3, File4, File5
+                if (fileDeleted)
+                {
+                    return string.Empty;
+                }
+
+                // First Time Upload
+                string imageurl = mapPath + "\\" + caption + fileName;
+                File.WriteAllBytes(imageurl, fileSourceBytes);
+
+                int indexOf = imageurl.LastIndexOf("SMD_Content", StringComparison.Ordinal);
+                imageurl = imageurl.Substring(indexOf, imageurl.Length - indexOf);
+                return imageurl;
+            }
+
+            return null;
+        }
         #endregion
         #region Constructor
         /// <summary>
@@ -247,60 +301,41 @@ namespace SMD.Implementation.Services
 
             return mapPath;
         }
-       
+
         /// <summary>
-        /// Saving Function 
+        /// Profile Questions For Api
         /// </summary>
-        private string SaveImage(string mapPath, string existingImage, string caption, string fileName,
-            string fileSource, byte[] fileSourceBytes, bool fileDeleted = false)
+        public ProfileQuestionApiSearchResponse GetProfileQuestionsByGroupForApi(GetProfileQuestionApiRequest request)
         {
-            if (fileSourceBytes == null)
+            //request.UserId = "02de201f-f4ea-420e-a1a8-74e7c1975277";
+            var allPqGroups = _profileQuestionGroupRepository.GetAllProfileQuestionGroups();
+            var unAnsweredQuestions = new List<ProfileQuestion>();
+            double percentageCompleted = 0;
+
+            foreach (var pqGroup in allPqGroups)
             {
-                return fileSource;
+                var unAnsweredQuestionsCount = _profileQuestionRepository.GetCountOfUnAnsweredQuestionsByGroupId(pqGroup.ProfileGroupId, request.UserId);
+               int totalQuestionsCount= _profileQuestionRepository.GetTotalCountOfGroupQuestion(pqGroup.ProfileGroupId);
+                if (unAnsweredQuestionsCount > 0)
+                {
+                    request.GroupId = pqGroup.ProfileGroupId;
+                    unAnsweredQuestions = _profileQuestionRepository.GetUnansweredQuestionsByGroupId(request).ToList();
+                    percentageCompleted = ((totalQuestionsCount - unAnsweredQuestionsCount) * 100) / totalQuestionsCount;
+                    break;
+                }
+                // Reseting 
+                request.TotalCount = 0;
+                request.PageNo = 1;
+
             }
-            if (!string.IsNullOrEmpty(fileSource) || fileDeleted)
+            return new ProfileQuestionApiSearchResponse
             {
-                // Look if file already exists then replace it
-                if (!string.IsNullOrEmpty(existingImage))
-                {
-                    if (Path.IsPathRooted(existingImage))
-                    {
-                        if (File.Exists(existingImage))
-                        {
-                            // Remove Existing File
-                            File.Delete(existingImage);
-                        }
-                    }
-                    else
-                    {
-                        string filePath = HttpContext.Current.Server.MapPath("~/" + existingImage);
-                        if (File.Exists(filePath))
-                        {
-                            // Remove Existing File
-                            File.Delete(filePath);
-                        }
-                    }
-
-                }
-
-                // If File has been deleted then set the specified field as empty
-                // Used for File1, File2, File3, File4, File5
-                if (fileDeleted)
-                {
-                    return string.Empty;
-                }
-
-                // First Time Upload
-                string imageurl = mapPath + "\\" + caption + fileName;
-                File.WriteAllBytes(imageurl, fileSourceBytes);
-
-                int indexOf = imageurl.LastIndexOf("SMD_Content", StringComparison.Ordinal);
-                imageurl = imageurl.Substring(indexOf, imageurl.Length - indexOf);
-                return imageurl;
-            }
-
-            return null;
+                ProfileQuestions = unAnsweredQuestions,
+                PercentageCompleted = percentageCompleted
+            };
         }
+       
+        
         #endregion
     }
 }
