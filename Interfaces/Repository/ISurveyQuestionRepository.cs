@@ -18,5 +18,7 @@ namespace SMD.Interfaces.Repository
         IEnumerable<SurveyQuestion> SearchRejectedProfileQuestions(SurveySearchRequest request, out int rowCount);
 
         IEnumerable<SurveyQuestion> GetAll();
+
+        bool updateSurveyImages(string[] imagePathsList, long surveyID);
     }
 }

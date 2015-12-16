@@ -10,6 +10,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using SMD.MIS.ModelMappers;
 using SMD.MIS.Areas.Api.Models;
+using SMD.Models.Common;
 
 namespace SMD.MIS.Areas.Api.Controllers
 {
@@ -48,7 +49,13 @@ namespace SMD.MIS.Areas.Api.Controllers
             }
            
         }
+        public bool Post(SMD.Models.DomainModels.SurveyQuestion surveyModel)
+        {
+           // surveyModel.Status = (int)SurveyQuestionStatus.Draft; already assigned in ko based on stripe
 
+            return _surveyQuestionService.Create(surveyModel);
+
+        }
         #endregion
     }
 }

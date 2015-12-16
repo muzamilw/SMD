@@ -118,5 +118,20 @@ namespace SMD.Repository.Repositories
         {
             return DbSet.Select(survey => survey).ToList();
         }
+        // <summary>
+        /// update survey images
+        /// </summary>
+        public bool updateSurveyImages(string[] imagePathsList,long surveyID)
+        {
+            SurveyQuestion survey = DbSet.Where(g => g.SqId == surveyID).SingleOrDefault();
+            if(survey != null)
+            {
+                survey.LeftPicturePath = imagePathsList[0];
+                survey.RightPicturePath = imagePathsList[1];
+                SaveChanges();
+                return true;
+            }
+            return false;
+        }
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SMD.Models.IdentityModels;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SMD.Models.DomainModels
 {
@@ -54,5 +55,10 @@ namespace SMD.Models.DomainModels
         public virtual ICollection<SurveyQuestionTargetCriteria> LinkedSurveyQuestionTargetCriterias { get; set; }
         public virtual ICollection<SurveyQuestionTargetLocation> SurveyQuestionTargetLocations { get; set; }
         public virtual ICollection<SurveyQuestionResponse> SurveyQuestionResponses { get; set; }
+        //left image and right image not mapped bytes
+        [NotMapped]
+        public string LeftPictureBytes { get; set; }
+        [NotMapped]
+        public string RightPictureBytes { get; set; }
     }
 }

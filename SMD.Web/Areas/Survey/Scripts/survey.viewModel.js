@@ -141,9 +141,10 @@ define("survey/survey.viewModel",
                         selectedQuestion().Gender("1");
                         selectedQuestion().LeftPicturePath("Content/Images/Company_Default.png");
                         selectedQuestion().RightPicturePath("Content/Images/Company_Default.png");
-                        selectedQuestion().reset();
                         selectedQuestion().StatusValue("Draft");
                         selectedQuestion().Status(1);
+                        selectedQuestion().SQID(0);
+                        selectedQuestion().reset();
                         isEditorVisible(true);
                         view.initializeTypeahead();
                     },
@@ -155,28 +156,6 @@ define("survey/survey.viewModel",
                     onEditSurvey = function (item) {
                        //call function to edit survey
                         isEditorVisible(true);
-                    },
-                    onDeleteSurvey = function (item) {
-                        //// Ask for confirmation
-                        //confirmation.afterProceed(function () {
-                        //    deleteSurvey(item);
-                        //});
-                        //confirmation.show();
-                    },
-                    // Delete PQ
-                    deleteSurvey = function (item) {
-                        //dataservice.deleteProfileQuestion(item.convertToServerData(), {
-                        //    success: function () {
-                        //        var newObjtodelete = questions.find(function (temp) {
-                        //            return temp.qId() == temp.qId();
-                        //        });
-                        //        questions.remove(newObjtodelete);
-                        //        toastr.success("You are Good!");
-                        //    },
-                        //    error: function () {
-                        //        toastr.error("Failed to delete!");
-                        //    }
-                        //});
                     },
                     // store left side ans image
                     storeLeftImageCallback = function (file, data) {
@@ -370,7 +349,6 @@ define("survey/survey.viewModel",
 
                             selectedCriteria(item);
                         } else {
-                            debugger;
                             editCriteriaHeading("Edit Survey Criteria");
                             selectedCriteria(item);
                             var selectedSurveyQuestionId = $("#ddsurveyQuestion").val();
@@ -438,7 +416,25 @@ define("survey/survey.viewModel",
                         }
                         return (selectedQuestion().hasChanges());
                     }),
+                    // save survey question 
+                    onSaveSurveyQuestion = function () {
+                        // now saving survey as draft but check stripe intergration and save it for submit for approval
+                        saveSurveyQuestion(1);
+                    },
+                    saveSurveyQuestion = function (mode) {
+                        var surveyData = selectedQuestion().convertToServerData();
 
+                        dataservice.addSurveyData(campignServerObj, {
+                            success: function (data) {
+                                isEditorVisible(false);
+                                getQuestions();
+                                toastr.success("Successfully saved.");
+                            },
+                            error: function (response) {
+
+                            }
+                        });
+                    }
                     // Initialize the view model
                     initialize = function (specifiedView) {
                         view = specifiedView;
@@ -453,8 +449,6 @@ define("survey/survey.viewModel",
                         pager(pagination.Pagination({ PageSize: 10 }, questions, getQuestions));
                         // Base Data Call
                         getBasedata();
-                        selectedQuestion().Gender("1");
-                        selectedQuestion().SQID(0);
                     };
                 return {
                     initialize: initialize,
@@ -503,7 +497,8 @@ define("survey/survey.viewModel",
                     isShowSurveyAns: isShowSurveyAns,
                     hasChangesOnQuestion: hasChangesOnQuestion,
                     editCriteriaHeading: editCriteriaHeading,
-                    isNewCriteria: isNewCriteria
+                    isNewCriteria: isNewCriteria,
+                    onSaveSurveyQuestion: onSaveSurveyQuestion
                 };
             })()
         };
