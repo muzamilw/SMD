@@ -1,4 +1,5 @@
 ﻿
+using System.Collections.Generic;
 using SMD.Models.DomainModels;
 using SMD.Models.RequestModels;
 using SMD.Models.ResponseModels;
@@ -29,5 +30,10 @@ namespace SMD.Interfaces.Services
         /// Save Profile Question
         /// </summary>
         ProfileQuestion SaveProfileQuestion(ProfileQuestion source);
+
+        /// <summary>
+        /// Profile Questions For Api
+        /// </summary>
+        ProfileQuestionApiSearchResponse GetProfileQuestionsByGroupForApi(GetProfileQuestionApiRequest request);
     }
 }
