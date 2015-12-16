@@ -29,7 +29,7 @@ namespace SMD.Interfaces.Services
         AdCampaign UpdateAdCampaign(AdCampaign source); 
         AdCampaignBaseResponse GetProfileQuestionData();
         AdCampaignBaseResponse GetProfileQuestionAnswersData(int QuestionId);
-        AdCampaignBaseResponse GetSurveyQuestionData();
+        AdCampaignBaseResponse GetSurveyQuestionData(long surveyId);
         CampaignResponseModel GetCampaigns(AdCampaignSearchRequest request);
     }
 }

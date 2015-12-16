@@ -242,11 +242,11 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Get survey questions 
         /// </summary>
-        public AdCampaignBaseResponse GetSurveyQuestionData()
+        public AdCampaignBaseResponse GetSurveyQuestionData(long surveyId)
         {
             return new AdCampaignBaseResponse
             {
-                SurveyQuestions = _surveyQuestionRepository.GetAll()
+                SurveyQuestions = _surveyQuestionRepository.GetAll().Where(g=>g.SqId != surveyId && g.UserId == _surveyQuestionRepository.LoggedInUserIdentity)
             };
         }
 

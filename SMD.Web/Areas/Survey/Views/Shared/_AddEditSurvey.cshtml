@@ -389,7 +389,7 @@
                                                     <div class="modal-content">
                                                         <div class="modal-header">
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                            <h4 class="modal-title" id="gridSystemModalLabel">Add Criteria</h4>
+                                                            <h4 class="modal-title" id="gridSystemModalLabel" data-bind="text:$root.editCriteriaHeading()">Add Criteria</h4>
                                                         </div>
                                                         <div class="modal-body" data-bind="with:$root.selectedCriteria">
                                                             <div class="row">
@@ -401,16 +401,25 @@
                                                                                     <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
                                                                                 </a>
                                                                             </div>
-                                                                            <label class="control-label text-right tooltip-float">Include Criteria</label>
+                                                                            <label class="control-label text-right tooltip-float">Criteria</label>
                                                                         </div>
                                                                         <div class="col-lg-5">
-                                                                            <div class="onoffswitch" style="margin-right:0px;">
-                                                                                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchToInclude" data-bind="checked: IncludeorExclude">
-                                                                                <label class=" onoffswitch-label" for="switchToInclude">
-                                                                                    <div class="onoffswitch-inner"></div>
-                                                                                    <div class="onoffswitch-switch"></div>
-                                                                                </label>
+                                                                            <div class="col-lg-12" style="margin-left:-10px;">
+                                                                                <div class="radio">
+                                                                                    <input type="radio" name="optionRadioSelectionCriteria" id="optionIncludeCriteria" value="1" data-bind="checked: IncludeorExclude">
+                                                                                    <label for="optionIncludeCriteria">
+                                                                                        Include
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div class="radio">
+                                                                                    <input type="radio" name="optionRadioSelectionCriteria" id="optionExcludeCriteria" value="0" data-bind="checked: IncludeorExclude ">
+                                                                                    <label for="optionExcludeCriteria">
+                                                                                        Exclude
+                                                                                    </label>
+                                                                                    <span class="help-block text-right"></span>
+                                                                                </div>
                                                                             </div>
+                                                                         
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -442,7 +451,7 @@
                                                                                 <label class="control-label text-right tooltip-float">Select Answer</label>
                                                                             </div>
                                                                             <div class="col-lg-5">
-                                                                                <select id="ddprofileAnswers" class="form-control" data-bind="options: $root.profileAnswerList,  optionsText: 'Answer', optionsValue: 'PqAnswerId', optionsCaption: '&lt;' + 'Select Answer'+ '&gt;' , value:PQAnswerID"></select>
+                                                                                <select id="ddprofileAnswers" class="form-control" data-bind="options: $root.profileAnswerList,  optionsText: 'Answer', optionsValue: 'PQAnswerID', optionsCaption: '&lt;' + 'Select Answer'+ '&gt;' , value:$root.selectedCriteria().PQAnswerID"></select>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -459,7 +468,7 @@
                                                                                 <label class="control-label text-right tooltip-float">Select Survey Question Criteria</label>
                                                                             </div>
                                                                             <div class="col-lg-5">
-                                                                                <select id="ddsurveyQuestion" class="form-control" data-bind="options: $root.surveyQuestionList, optionsText: 'DisplayQuestion', optionsValue: 'SQID', optionsCaption: '&lt;' + 'Select Question'+ '&gt;' , value:SQID, event: { change: $root.onChangeSurveyQuestion } "></select>
+                                                                                <select id="ddsurveyQuestion" class="form-control" data-bind="options: $root.surveyQuestionList, optionsText: 'DisplayQuestion', optionsValue: 'SQID', optionsCaption: '&lt;' + 'Select Question'+ '&gt;' , value:LinkedSQID, event: { change: $root.onChangeSurveyQuestion } "></select>
                                                                             </div>
                                                                         </div>
                                                                     </div>
