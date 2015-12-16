@@ -10,7 +10,7 @@ using System.Web.Http;
 namespace SMD.MIS.Areas.Api.Controllers
 {
     /// <summary>
-    /// Profile Question Api Controller 
+    /// Profile Question for APIs Controller 
     /// </summary>
     [Authorize]
     public class GetProfileQuestionForApiController : ApiController

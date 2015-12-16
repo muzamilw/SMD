@@ -1,8 +1,10 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using Microsoft.Practices.Unity;
 using SMD.Interfaces.Repository;
 using SMD.Models.DomainModels;
+using SMD.Models.RequestModels;
 using SMD.Repository.BaseRepository;
 
 namespace SMD.Repository.Repositories
@@ -24,7 +26,6 @@ namespace SMD.Repository.Repositories
         }
 
         #endregion
-
         #region Constructor
 
         /// <summary>
@@ -37,11 +38,15 @@ namespace SMD.Repository.Repositories
         }
 
         #endregion
-
         #region Public
 
-
+        /// <summary>
+        /// Get Question's Answer
+        /// </summary>
+        public IEnumerable<ProfileQuestionUserAnswer> GetProfileQuestionUserAnswerByQuestionId(UpdateProfileQuestionUserAnswerApiRequest request)
+        {
+           return DbSet.Where(ans => ans.PqId == request.ProfileQuestionId && ans.UserId==request.UserId).ToList();
+        }
         #endregion
-
     }
 }
