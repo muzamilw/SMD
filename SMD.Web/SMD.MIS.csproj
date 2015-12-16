@@ -376,6 +376,7 @@
     <Compile Include="Areas\Api\Controllers\CreateStripeCustomerController.cs" />
     <Compile Include="Areas\Api\Controllers\CampaignController.cs" />
     <Compile Include="Areas\Api\Controllers\ChargeCustomerController.cs" />
+    <Compile Include="Areas\Api\Controllers\RegisterExternalController.cs" />
     <Compile Include="Areas\Api\Controllers\ProfileQuestionBaseController.cs" />
     <Compile Include="Areas\Api\Controllers\ProfileQuestionAnswerController.cs" />
     <Compile Include="Areas\Api\Controllers\ExternalLoginController.cs" />

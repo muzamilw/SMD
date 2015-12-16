@@ -12,6 +12,11 @@ namespace SMD.Interfaces.Services
         /// <summary>
         /// External Login 
         /// </summary>
+        Task<User> RegisterExternal(RegisterExternalRequest request);
+        
+        /// <summary>
+        /// External Login 
+        /// </summary>
         Task<User> ExternalLogin(ExternalLoginRequest request);
 
         /// <summary>
