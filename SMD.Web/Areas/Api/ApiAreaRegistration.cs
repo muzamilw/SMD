@@ -27,7 +27,18 @@ namespace SMD.MIS.Areas.Api
                 name: "ApiDefaultWithoutId",
                 routeTemplate: AreaName + "/{controller}"
             );
-           
+
+            //context.Routes.MapHttpRoute(
+            //    name: "ApiMobileDefault",
+            //    routeTemplate: "ApiMobile" + "/{controller}/{id}",
+            //    defaults: new { id = UrlParameter.Optional },
+            //    constraints: new { id = @"^[0-9]+$" }
+            //);
+
+            //context.Routes.MapHttpRoute(
+            //    name: "ApiMobileDefaultWithoutId",
+            //    routeTemplate: "ApiMobile" + "/{controller}"
+            //);
         }
     }
 }

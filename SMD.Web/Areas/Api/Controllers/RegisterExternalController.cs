@@ -13,15 +13,15 @@ using SMD.WebBase.Mvc;
 namespace SMD.MIS.Areas.Api.Controllers
 {
     /// <summary>
-    /// Standard Login Api Controller 
+    /// External Login Api Controller 
     /// </summary>
     [Authorize]
-    public class StandardLoginController : ApiController
+    public class RegisterExternalController : ApiController
     {
-        #region Private
-
         private readonly IWebApiUserService webApiUserService;
 
+        #region Private
+        
         #endregion
 
         #region Constructor
@@ -29,7 +29,7 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// <summary>
         /// Constructor
         /// </summary>
-        public StandardLoginController(IWebApiUserService webApiUserService)
+        public RegisterExternalController(IWebApiUserService webApiUserService)
         {
             if (webApiUserService == null)
             {
@@ -42,26 +42,20 @@ namespace SMD.MIS.Areas.Api.Controllers
         #endregion
 
         #region Public
-
-        public string Get()
-        {
-            return "I am from Get method!";
-        }
-
-
+        
         /// <summary>
-        /// Login
+        /// Register External
         /// </summary>
         [ApiException]
-        public async Task<WebApiUser> Post(StandardLoginRequest request)
+        public async Task<WebApiUser> Post(RegisterExternalRequest request)
         {
             if (request == null || !ModelState.IsValid)
             {
                 throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
             }
 
-            User user = await webApiUserService.StandardLogin(request);
-
+            // Register User with External Provider
+            User user = await webApiUserService.RegisterExternal(request); 
             return user.CreateFrom();
         }
 
