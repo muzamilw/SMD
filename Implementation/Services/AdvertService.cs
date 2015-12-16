@@ -28,7 +28,6 @@ namespace SMD.Implementation.Services
         private readonly IProfileQuestionAnswerRepository _profileQuestionAnswerRepository;
         private readonly ISurveyQuestionRepository _surveyQuestionRepository;
         #endregion
-
         #region Constructor
 
         /// <summary>
