@@ -24,7 +24,7 @@
   border-top-right-radius: 0px !important;
   border: none;
   height: 33px;
-  margin-left: 5px;
+  margin-left: 2px;
 }
 #searchLanguages {
   width: 280px!important;
@@ -109,4 +109,7 @@ div.Tokenize ul.Dropdown {
   width: 90%;
   display: inline;
   float: left;
+}
+.tt-dropdown-menu {
+  width: 286px !important;
 }
