@@ -378,6 +378,7 @@
     <Compile Include="Areas\Api\Controllers\CampaignController.cs" />
     <Compile Include="Areas\Api\Controllers\ChargeCustomerController.cs" />
     <Compile Include="Areas\Api\Controllers\ConfirmEmailController.cs" />
+    <Compile Include="Areas\Api\Controllers\ArchiveUserAccountController.cs" />
     <Compile Include="Areas\Api\Controllers\UpdateUserProfileController.cs" />
     <Compile Include="Areas\Api\Controllers\RegisterController.cs" />
     <Compile Include="Areas\Api\Controllers\UpdateQuestionAnswerForApiController.cs" />

@@ -57,6 +57,14 @@ namespace SMD.MIS
                 new { controller = "UpdateUserProfile" },
                 null,
                 routeHandlers);
+
+            // Archive User route
+            config.Routes.MapHttpRoute(
+                "ArchiveUserAccount",
+                "User/Archive/",
+                new { controller = "ArchiveUserAccount" },
+                null,
+                routeHandlers);
         }
     }
 }
