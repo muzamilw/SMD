@@ -139,5 +139,17 @@ namespace SMD.MIS.ModelMappers
                 LanguageDropdowns = source.Languages.Select(lang => lang.CreateFrom())
             };
         }
+
+        /// <summary>
+        /// Domain to Web Resposne For API 
+        /// </summary>
+        public static AdCampaignApiSearchRequestResponse CreateForApi(
+            this Models.ResponseModels.AdCampaignApiSearchRequestResponse source)
+        {
+            return new AdCampaignApiSearchRequestResponse
+            {
+                AdCampaigns = source.AdCampaigns.Select(ad => ad.CreateFrom())
+            };
+        }
     }
 }
