@@ -49,6 +49,14 @@ namespace SMD.MIS
                 new { controller = "ConfirmEmail" },
                 null,
                 routeHandlers);
+
+            // Update User Profile Custom route
+            config.Routes.MapHttpRoute(
+                "UpdateUserProfile",
+                "Update/User/",
+                new { controller = "UpdateUserProfile" },
+                null,
+                routeHandlers);
         }
     }
 }

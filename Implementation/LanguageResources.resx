@@ -141,4 +141,7 @@
   <data name="WebApiUserService_EmailNotVerified" xml:space="preserve">
     <value>Email is not verified yet.</value>
   </data>
+  <data name="WebApiUserService_InvalidUserId" xml:space="preserve">
+    <value>UserId is invalid.</value>
+  </data>
 </root>

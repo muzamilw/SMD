@@ -108,6 +108,8 @@ namespace SMD.Repository.BaseRepository
                     var entityName = validationResult.Entry.Entity.GetType().Name;
                     errorMessages.AddRange(validationResult.ValidationErrors.Select(error => entityName + "." + error.PropertyName + ": " + error.ErrorMessage));
                 }
+
+                throw;
             }
         }
         /// <summary>
