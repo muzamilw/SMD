@@ -163,6 +163,11 @@ namespace SMD.Implementation.Services
                 throw new SMDException(LanguageResources.WebApiUserService_InvalidCredentials);
             }
 
+            if (!user.EmailConfirmed)
+            {
+                throw new SMDException(LanguageResources.WebApiUserService_EmailNotVerified);    
+            }
+
             return user;
         }
 

@@ -138,4 +138,7 @@
   <data name="EmailManagerService_FailedToSendEmail" xml:space="preserve">
     <value>There is some problem while sending email.</value>
   </data>
+  <data name="WebApiUserService_EmailNotVerified" xml:space="preserve">
+    <value>Email is not verified yet.</value>
+  </data>
 </root>

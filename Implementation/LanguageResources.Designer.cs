@@ -88,6 +88,15 @@ namespace SMD.Implementation {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Email is not verified yet..
+        /// </summary>
+        internal static string WebApiUserService_EmailNotVerified {
+            get {
+                return ResourceManager.GetString("WebApiUserService_EmailNotVerified", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to UserName or Password is Invalid..
         /// </summary>
         internal static string WebApiUserService_InvalidCredentials {
