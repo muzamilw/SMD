@@ -13,5 +13,7 @@ namespace SMD.Models.DomainModels
         public virtual ICollection<SurveyQuestion> SurveyQuestions { get; set; }
         public virtual ICollection<SurveyQuestionTargetLocation> SurveyQuestionTargetLocations { get; set; }
         public virtual ICollection<City> Cities { get; set; }
+
+        public virtual ICollection<Product> Products { get; set; }
     }
 }

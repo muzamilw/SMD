@@ -17,5 +17,9 @@ namespace SMD.Models.DomainModels
         public Nullable<double> ClickFeePercentage { get; set; }
         public Nullable<double> ClausePrice { get; set; }
         public Nullable<double> AffiliatePercentage { get; set; }
+
+        public virtual Country Country { get; set; }
+
+        public virtual Currency Currency { get; set; }
     }
 }
