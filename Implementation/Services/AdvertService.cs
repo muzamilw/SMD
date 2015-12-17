@@ -101,56 +101,56 @@ namespace SMD.Implementation.Services
         public bool CreateCampaign(AdCampaign campaignModel)
         {
 
-            long campaignId = _adCampaignRepository.createCampaign(campaignModel);
+            long campaignId = _adCampaignRepository.createCampaign(campaignModel); 
             if (campaignId > 0)
             {
-                //char[] separator = new char[] { '|' };
-                //List<string> argsList = null;
-                //if (campaignModel.Languages != null)
-                //{
-                //    foreach (string item in campaignModel.Languages)
-                //    {
-                //        AdCampaignTargetCriteria oTargetCriteria = new AdCampaignTargetCriteria();
-                //        oTargetCriteria.CampaignId = campaignId;
-                //        oTargetCriteria.LanguageId = Convert.ToInt32(item);
-                //        oTargetCriteria.Type = (int)AdCampaignCriteriaType.Language;
-                //        _adCampaignTargetCriteriaRepository.Add(oTargetCriteria);
-                //    }
-                //    _adCampaignTargetCriteriaRepository.SaveChanges();
-                //}
+                 char[] separator = new char[] { '|' };
+                 List<string> argsList = null;
+                if(campaignModel.Languages != null)
+                {
+                    foreach (string item in campaignModel.Languages) 
+                    {
+                        AdCampaignTargetCriteria oTargetCriteria = new AdCampaignTargetCriteria();
+                        oTargetCriteria.CampaignId = campaignId;
+                        oTargetCriteria.LanguageId = Convert.ToInt32(item);
+                        oTargetCriteria.Type = (int)AdCampaignCriteriaType.Language;
+                        _adCampaignTargetCriteriaRepository.Add(oTargetCriteria);
+                    }
+                    _adCampaignTargetCriteriaRepository.SaveChanges();
+                }
 
-                //if (campaignModel.Cities != null)
-                //{
-                //    foreach (string item in campaignModel.Cities)
-                //    {
-                //        argsList = item.Split(separator, StringSplitOptions.RemoveEmptyEntries).ToList();
-                //        AdCampaignTargetLocation oTargetLocation = new AdCampaignTargetLocation();
+                if (campaignModel.Cities != null)
+                {
+                    foreach (string item in campaignModel.Cities)
+                    {
+                        argsList = item.Split(separator, StringSplitOptions.RemoveEmptyEntries).ToList();
+                        AdCampaignTargetLocation oTargetLocation = new AdCampaignTargetLocation();
 
-                //        oTargetLocation.CampaignId = campaignId;
-                //        oTargetLocation.CityId = Convert.ToInt32(argsList[1]);
-                //        oTargetLocation.IncludeorExclude = Convert.ToBoolean(argsList[0]);
-                //        _adCampaignTargetLocationRepository.Add(oTargetLocation);
-                //    }
-                //    _adCampaignTargetLocationRepository.SaveChanges();
-                //}
+                        oTargetLocation.CampaignId = campaignId;
+                        oTargetLocation.CityId = Convert.ToInt32(argsList[1]);
+                        oTargetLocation.IncludeorExclude = Convert.ToBoolean(argsList[0]);
+                        _adCampaignTargetLocationRepository.Add(oTargetLocation);
+                    }
+                    _adCampaignTargetLocationRepository.SaveChanges();
+                }
 
-                //if (campaignModel.Countries != null)
-                //{
-                //    foreach (string item in campaignModel.Countries)
-                //    {
-                //        argsList = item.Split(separator, StringSplitOptions.RemoveEmptyEntries).ToList();
-                //        AdCampaignTargetLocation oTargetLocation = new AdCampaignTargetLocation();
+                if (campaignModel.Countries != null)
+                {
+                    foreach (string item in campaignModel.Countries)
+                    {
+                        argsList = item.Split(separator, StringSplitOptions.RemoveEmptyEntries).ToList();
+                        AdCampaignTargetLocation oTargetLocation = new AdCampaignTargetLocation();
 
-                //        oTargetLocation.CampaignId = campaignId;
-                //        oTargetLocation.CityId = Convert.ToInt32(argsList[1]);
-                //        oTargetLocation.IncludeorExclude = Convert.ToBoolean(argsList[0]);
-                //        _adCampaignTargetLocationRepository.Add(oTargetLocation);
-                //    }
-                //    _adCampaignTargetLocationRepository.SaveChanges();
-                //}
+                        oTargetLocation.CampaignId = campaignId;
+                        oTargetLocation.CityId = Convert.ToInt32(argsList[1]);
+                        oTargetLocation.IncludeorExclude = Convert.ToBoolean(argsList[0]);
+                        _adCampaignTargetLocationRepository.Add(oTargetLocation);
+                    }
+                    _adCampaignTargetLocationRepository.SaveChanges();
+                }
                 return true;
             }
-            else
+            else 
             {
                 return false;
             }

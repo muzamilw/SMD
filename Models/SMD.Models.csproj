@@ -120,7 +120,6 @@
     <Compile Include="DomainModels\AuditLog.cs" />
     <Compile Include="DomainModels\City.cs" />
     <Compile Include="DomainModels\Country.cs" />
-    <Compile Include="DomainModels\Currency.cs" />
     <Compile Include="DomainModels\Industry.cs" />
     <Compile Include="DomainModels\Language.cs" />
     <Compile Include="DomainModels\Product.cs" />

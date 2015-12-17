@@ -86,7 +86,8 @@ define("ads/ads.viewModel",
                     addNewCampaign = function () {
                         isEditorVisible(true);
                         campaignModel(new model.Campaign());
-                        
+                        selectedCriteria(new model.CriteriaModel());
+                       
                         campaignModel().Gender('2');
                         campaignModel().Type('2');
                         campaignModel().reset();

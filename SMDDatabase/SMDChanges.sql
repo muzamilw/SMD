@@ -404,3 +404,86 @@ ALTER TABLE dbo.SurveyQuestionTargetCriteria ADD CONSTRAINT
 	
 GO
 COMMIT
+
+
+------------  SP GetAds  17-Dec-15  06:53 PM  | IST-Lhr  | baqer
+
+
+
+USE [SMD]
+GO
+
+/****** Object:  StoredProcedure [dbo].[GetAds]    Script Date: 17-Dec-15 6:52:13 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:		Baqer Naqvi - IST 
+-- Create date: 17-Dec-15
+-- Description:	Returns Ads for specified User
+-- =============================================
+
+CREATE PROCEDURE [dbo].[GetAds] 
+
+	-- Add the parameters for the stored procedure here
+	@UserID nvarchar(128) = 0
+AS
+BEGIN
+DECLARE @age AS INT
+DECLARE @gender AS INT
+DECLARE @countryId AS INT
+DECLARE @cityId AS INT
+DECLARE @languageId AS INT
+DECLARE @industryId AS INT
+
+        -- Setting local variables
+		   SELECT @age = age FROM AspNetUsers where id=@UserID
+		   SELECT @gender = gender FROM AspNetUsers where id=@UserID
+		   SELECT @countryId = countryId FROM AspNetUsers where id=@UserID
+		   SELECT @cityId = cityId FROM AspNetUsers where id=@UserID
+		   SELECT @languageId = LanguageID FROM AspNetUsers where id=@UserID
+		   SELECT @industryId = industryId FROM AspNetUsers where id=@UserID
+		   SELECT @countryId = CountryID FROM AspNetUsers where id=@UserID
+		   SELECT @cityId = CityID FROM AspNetUsers where id=@UserID
+
+
+		   select MyCampaign.CampaignID, MyCampaign.CampaignName, MyCampaign.Description, MyCampaign.VerifyQuestion, MyCampaign.LandingPageVideoLink ,
+		   MyCampaign.Answer1, MyCampaign.Answer2, MyCampaign.Answer3, MyCampaign.CorrectAnswer , MyCampaign.ClickRate
+		   from AdCampaign MyCampaign
+
+		   where ( 
+		    (MyCampaign.AgeRangeEnd >= @age and  @age >= MyCampaign.AgeRangeStart) 
+			 and
+			(MyCampaign.Gender= @gender)
+			 and
+			(MyCampaign.EndDateTime >= GETDATE() and GETDATE() >= MyCampaign.StartDateTime ) 
+			 and
+			(MyCampaign.Approved = 1) 
+		  	 and
+			(MyCampaign.Status = 6)   
+			 and 
+			((select count(*) from AdCampaignResponse MyCampaignResponse
+			 where MyCampaignResponse.UserID=@UserID and MyCampaignResponse.CampaignID = MyCampaign.CampaignID) = 0) 
+			 and
+		    (MyCampaign.MaxBudget > MyCampaign.AmountSpent) 
+			 and
+			(MyCampaign.LanguageID=@languageId) 
+			 and
+			 ((select count(*) from AdCampaignTargetLocation MyCampaignLoc
+			 where MyCampaignLoc.CampaignID=MyCampaign.CampaignID and MyCampaignLoc.CountryID=@countryId and
+			 MyCampaignLoc.CityID=@cityId) > 0 
+			 and 
+			 ((select count(*) from AdCampaignTargetCriteria MyCampaignCrit
+			 where MyCampaignCrit.CampaignID = MyCampaign.CampaignID and 
+			 MyCampaignCrit.LanguageID=@languageId and MyCampaignCrit.IndustryID=@industryId) > 0 )) 
+		   )
+END
+
+GO
+
+
+
+
