@@ -337,7 +337,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="bigint" Nullable="false" />
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="SQID" Type="bigint" />
           <Property Name="Type" Type="int" />
           <Property Name="PQID" Type="int" />
@@ -352,7 +352,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="bigint" Nullable="false" />
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="SQID" Type="bigint" />
           <Property Name="CountryID" Type="int" />
           <Property Name="CityID" Type="int" />
