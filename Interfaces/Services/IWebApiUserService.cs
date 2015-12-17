@@ -10,6 +10,11 @@ namespace SMD.Interfaces.Services
     public interface IWebApiUserService
     {
         /// <summary>
+        /// Update Profile
+        /// </summary>
+        Task UpdateProfile(UpdateUserProfileRequest request);
+        
+        /// <summary>
         /// Confirm Email
         /// </summary>
         Task<bool> ConfirmEmail(string userId, string code);

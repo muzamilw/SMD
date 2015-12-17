@@ -60,6 +60,24 @@ namespace SMD.Implementation.Services
         #region Public
 
         /// <summary>
+        /// Update Profile
+        /// </summary>
+        public async Task UpdateProfile(UpdateUserProfileRequest request)
+        {
+            User user = await UserManager.FindByIdAsync(request.UserId);
+            if (user == null)
+            {
+                throw new SMDException(LanguageResources.WebApiUserService_InvalidUserId);
+            }
+
+            // Update User
+            user.Update(request);
+
+            // Save Changes
+            await UserManager.UpdateAsync(user);
+        }
+
+        /// <summary>
         /// Confirm Email
         /// </summary>
         public async Task<bool> ConfirmEmail(string userId, string code)
