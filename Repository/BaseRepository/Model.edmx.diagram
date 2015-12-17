@@ -65,6 +65,8 @@
         <AssociationConnector Association="DomainModels.FK_AspNetUsers_Language" />
         <AssociationConnector Association="DomainModels.FK_SMDPrice_Country" />
         <AssociationConnector Association="DomainModels.FK_SurveyQuestionTargetCriteria_Industry" />
+        <EntityTypeShape EntityType="DomainModels.Currency" Width="1.5" PointX="3.375" PointY="15.875" />
+        <AssociationConnector Association="DomainModels.FK_SMDPrice_Currency" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
