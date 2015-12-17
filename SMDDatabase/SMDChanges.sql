@@ -485,5 +485,39 @@ END
 GO
 
 
+/* Added By Khurram - 17 Dec 2015 (Start) */ 
+SET ANSI_NULLS ON
+GO
 
+SET QUOTED_IDENTIFIER ON
+GO
 
+CREATE TABLE [dbo].[Account](
+	[AccountId] [bigint] IDENTITY(1,1) NOT NULL,
+	[AccountName] [nvarchar](200) NULL,
+	[AccountType] [int] NULL,
+	[AccountBalance] [decimal](18, 0) NULL,
+	[UserId] [nvarchar](128) NULL,
+ CONSTRAINT [PK_Account] PRIMARY KEY CLUSTERED 
+(
+	[AccountId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+ALTER TABLE [dbo].[Account]  WITH CHECK ADD  CONSTRAINT [FK_Account_AspNetUsers] FOREIGN KEY([UserId])
+REFERENCES [dbo].[AspNetUsers] ([Id])
+GO
+
+ALTER TABLE [dbo].[Account] CHECK CONSTRAINT [FK_Account_AspNetUsers]
+GO
+
+ALTER TABLE [dbo].[Transaction]  WITH CHECK ADD  CONSTRAINT [FK_Transaction_Account] FOREIGN KEY([AccountID])
+REFERENCES [dbo].[Account] ([AccountId])
+GO
+
+ALTER TABLE [dbo].[Transaction] CHECK CONSTRAINT [FK_Transaction_Account]
+GO
+
+/* Added By Khurram - 17 Dec 2015 (End) */ 
