@@ -1,4 +1,5 @@
 ﻿
+using SMD.Models.IdentityModels;
 using System.Collections.Generic;
 
 namespace SMD.Models.DomainModels
@@ -11,5 +12,7 @@ namespace SMD.Models.DomainModels
 
         public virtual ICollection<AdCampaign> AdCampaigns { get; set; }
         public virtual ICollection<SurveyQuestion> SurveyQuestions { get; set; }
+
+        public virtual ICollection<User> AspNetUsers { get; set; }
     }
 }

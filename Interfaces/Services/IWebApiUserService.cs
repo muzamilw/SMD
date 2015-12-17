@@ -10,7 +10,17 @@ namespace SMD.Interfaces.Services
     public interface IWebApiUserService
     {
         /// <summary>
-        /// External Login 
+        /// Confirm Email
+        /// </summary>
+        Task<bool> ConfirmEmail(string userId, string code);
+        
+        /// <summary>
+        /// Register Custom
+        /// </summary>
+        Task<User> RegisterCustom(RegisterCustomRequest request);
+        
+        /// <summary>
+        /// Register External 
         /// </summary>
         Task<User> RegisterExternal(RegisterExternalRequest request);
         

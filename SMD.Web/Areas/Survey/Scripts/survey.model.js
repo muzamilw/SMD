@@ -71,9 +71,12 @@
                 },
                 // Convert to server data
                 convertToServerData = function () {
-                    var targetCriteria =[];
+                    var targetCriteria =[],targetLocation  = [];
                     _.each(SurveyQuestionTargetCriteria(), function (item) {
-                        targetCriteria.push(SurveyQuestionTargetCriteria.convertToServerData(item));
+                        targetCriteria.push(item.convertToServerData());
+                    });
+                    _.each(SurveyQuestionTargetLocation(), function (item) {
+                        targetLocation.push(item.convertToServerData());
                     });
                     return {
                         SQID: SQID(),
@@ -104,7 +107,8 @@
                         SubmissionDate: SubmissionDate(),
                         SurveyQuestionTargetCriteria: targetCriteria,
                         LeftPictureBytes:LeftPictureBytes(),
-                        RightPictureBytes: RightPictureBytes()
+                        RightPictureBytes: RightPictureBytes(),
+                        SurveyQuestionTargetLocation: targetLocation
                     };
                 };
             return {
