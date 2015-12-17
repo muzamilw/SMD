@@ -47,7 +47,7 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// External Login
         /// </summary>
         [ApiException]
-        public async Task<WebApiUser> Post(ExternalLoginRequest request)
+        public async Task<WebApiUser> Get([FromUri] ExternalLoginRequest request)
         {
             if (request == null || !ModelState.IsValid)
             {

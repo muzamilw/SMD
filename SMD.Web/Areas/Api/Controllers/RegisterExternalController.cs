@@ -47,8 +47,16 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// Register External
         /// </summary>
         [ApiException]
-        public async Task<WebApiUser> Post(RegisterExternalRequest request)
+        public async Task<WebApiUser> Post(string email, string fullName, string loginProvider, string loginProviderKey)
         {
+            var request = new RegisterExternalRequest
+                          {
+                              Email = email,
+                              FullName = fullName,
+                              LoginProvider = loginProvider,
+                              LoginProviderKey = loginProviderKey
+                          };
+
             if (request == null || !ModelState.IsValid)
             {
                 throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);

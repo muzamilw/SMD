@@ -42,18 +42,12 @@ namespace SMD.MIS.Areas.Api.Controllers
         #endregion
 
         #region Public
-
-        public string Get()
-        {
-            return "I am from Get method!";
-        }
-
-
+        
         /// <summary>
         /// Login
         /// </summary>
         [ApiException]
-        public async Task<WebApiUser> Post(StandardLoginRequest request)
+        public async Task<WebApiUser> Get([FromUri] StandardLoginRequest request)
         {
             if (request == null || !ModelState.IsValid)
             {
