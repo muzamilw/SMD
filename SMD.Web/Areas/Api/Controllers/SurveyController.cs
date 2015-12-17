@@ -1,22 +1,19 @@
 ﻿using SMD.Interfaces.Services;
+using SMD.MIS.Areas.Api.Models;
+using SMD.MIS.ModelMappers;
 using SMD.Models.RequestModels;
-using SMD.Models.ResponseModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Http;
-using System.Web.Mvc;
-using SMD.MIS.ModelMappers;
-using SMD.MIS.Areas.Api.Models;
-using SMD.Models.Common;
 
 namespace SMD.MIS.Areas.Api.Controllers
 {
+    /// <summary>
+    /// Survey APi Controller 
+    /// </summary>
     public class SurveyController : ApiController
     {
-     #region Public
+        #region Public
         private readonly ISurveyQuestionService _surveyQuestionService;
         #endregion
         #region Constructor
@@ -49,6 +46,11 @@ namespace SMD.MIS.Areas.Api.Controllers
             }
            
         }
+
+
+        /// <summary>
+        /// Update Survey Questions
+        /// </summary>
         public bool Post(SMD.Models.DomainModels.SurveyQuestion surveyModel)
         {
            // surveyModel.Status = (int)SurveyQuestionStatus.Draft; already assigned in ko based on stripe
