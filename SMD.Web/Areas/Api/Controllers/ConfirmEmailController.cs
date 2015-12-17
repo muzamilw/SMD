@@ -1,22 +1,19 @@
 ﻿using System.Threading.Tasks;
+using System.Web.Http.Results;
 using SMD.Interfaces.Services;
-using SMD.MIS.Areas.Api.Models;
-using SMD.Models.IdentityModels;
-using SMD.Models.RequestModels;
 using System;
 using System.Net;
 using System.Web;
 using System.Web.Http;
-using SMD.MIS.Areas.Api.ModelMappers;
 using SMD.WebBase.Mvc;
 
 namespace SMD.MIS.Areas.Api.Controllers
 {
     /// <summary>
-    /// External Login Api Controller 
+    /// Confirm Email Api Controller 
     /// </summary>
     [Authorize]
-    public class RegisterExternalController : ApiController
+    public class ConfirmEmailController : ApiController
     {
         private readonly IWebApiUserService webApiUserService;
 
@@ -29,7 +26,7 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// <summary>
         /// Constructor
         /// </summary>
-        public RegisterExternalController(IWebApiUserService webApiUserService)
+        public ConfirmEmailController(IWebApiUserService webApiUserService)
         {
             if (webApiUserService == null)
             {
@@ -44,19 +41,19 @@ namespace SMD.MIS.Areas.Api.Controllers
         #region Public
         
         /// <summary>
-        /// Register External
+        /// Confirm Email
         /// </summary>
         [ApiException]
-        public async Task<WebApiUser> Post([FromUri] RegisterExternalRequest request)
+        public async Task<NegotiatedContentResult<string>> Get(string userId, string code)
         {
-            if (request == null || !ModelState.IsValid)
+            if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(code))
             {
                 throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
             }
 
-            // Register User with External Provider
-            User user = await webApiUserService.RegisterExternal(request); 
-            return user.CreateFrom();
+            // Confirm Email
+            await webApiUserService.ConfirmEmail(userId, code);
+            return Content(HttpStatusCode.OK, LanguageResources.ConfirmEmail_EmailVerified);
         }
 
         #endregion

@@ -61,6 +61,15 @@ namespace SMD.MIS.Areas.Api {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Your email has been verified!.
+        /// </summary>
+        internal static string ConfirmEmail_EmailVerified {
+            get {
+                return ResourceManager.GetString("ConfirmEmail_EmailVerified", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to UserName or Password is Invalid.
         /// </summary>
         internal static string InvalidCredentials {
