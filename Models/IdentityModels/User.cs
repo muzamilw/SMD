@@ -54,7 +54,11 @@ namespace SMD.Models.IdentityModels
         public string ReferringUserId { get; set; }
         public int? Age { get; set; }
         public int? Gender { get; set; }
+        public int? LanguageID { get; set; }
+        public int? IndustryID { get; set; }
 
+        public virtual Industry Industry { get; set; }
+        public virtual Language Language { get; set; }
         public virtual ICollection<UserLogin> UserLogins { get; set; }
         public virtual ICollection<Role> Roles { get; set; }
         public virtual ICollection<UserClaim> Claims { get; set; }
