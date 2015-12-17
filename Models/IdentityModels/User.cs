@@ -147,6 +147,11 @@ namespace SMD.Models.IdentityModels
             {
                 Gender = source.Gender;
             }
+
+            if (source.IndustryId.HasValue)
+            {
+                IndustryID = source.IndustryId;
+            }
         }
 
         #endregion
