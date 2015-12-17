@@ -79,6 +79,15 @@ namespace SMD.Implementation {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There is some problem while sending email..
+        /// </summary>
+        internal static string EmailManagerService_FailedToSendEmail {
+            get {
+                return ResourceManager.GetString("EmailManagerService_FailedToSendEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to UserName or Password is Invalid..
         /// </summary>
         internal static string WebApiUserService_InvalidCredentials {

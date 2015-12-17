@@ -26,11 +26,27 @@ namespace SMD.MIS
                 null,
                 routeHandlers);
 
-            // External Login route
+            // Register External route
             config.Routes.MapHttpRoute(
                 "RegisterExternal",
                 "Register/External/",
                 new { controller = "RegisterExternal" },
+                null,
+                routeHandlers);
+
+            // Register Custom route
+            config.Routes.MapHttpRoute(
+                "RegisterCustom",
+                "Register/Custom/",
+                new { controller = "RegisterCustom" },
+                null,
+                routeHandlers);
+
+            // Confirm Email - Register Custom route
+            config.Routes.MapHttpRoute(
+                "ConfirmEmail",
+                "Register/Confirm/",
+                new { controller = "ConfirmEmail" },
                 null,
                 routeHandlers);
         }

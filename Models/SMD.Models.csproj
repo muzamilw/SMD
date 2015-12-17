@@ -157,6 +157,7 @@
     <Compile Include="Common\CampaignGridModel.cs" />
     <Compile Include="RequestModels\AdCampaignSearchRequest.cs" />
     <Compile Include="RequestModels\GetProfileQuestionApiRequest.cs" />
+    <Compile Include="RequestModels\RegisterCustomRequest.cs" />
     <Compile Include="RequestModels\RegisterExternalRequest.cs" />
     <Compile Include="RequestModels\MakePaypalPaymentRequest.cs" />
     <Compile Include="RequestModels\StripeChargeCustomerRequest.cs" />

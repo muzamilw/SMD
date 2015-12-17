@@ -135,4 +135,7 @@
   <data name="WebApiUserService_InvalidCredentials" xml:space="preserve">
     <value>UserName or Password is Invalid.</value>
   </data>
+  <data name="EmailManagerService_FailedToSendEmail" xml:space="preserve">
+    <value>There is some problem while sending email.</value>
+  </data>
 </root>
