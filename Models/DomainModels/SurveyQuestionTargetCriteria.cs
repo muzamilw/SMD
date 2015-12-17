@@ -16,6 +16,11 @@
 
         public int? LanguageId { get; set; }
 
+
+        public int? IndustryID { get; set; }
+
+        public virtual Industry Industry { get; set; }
+
         public virtual ProfileQuestion ProfileQuestion { get; set; }
         public virtual ProfileQuestionAnswer ProfileQuestionAnswer { get; set; }
         public virtual SurveyQuestion SurveyQuestion { get; set; }
