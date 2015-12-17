@@ -143,7 +143,7 @@ define("survey/survey.viewModel",
                         selectedQuestion().RightPicturePath("Content/Images/Company_Default.png");
                         selectedQuestion().StatusValue("Draft");
                         selectedQuestion().Status(1);
-                        selectedQuestion().SQID(0);
+                    //    selectedQuestion().SQID(0);
                         selectedQuestion().reset();
                         isEditorVisible(true);
                         view.initializeTypeahead();
@@ -189,7 +189,7 @@ define("survey/survey.viewModel",
                             Country: selectedLocation().Country,
                             City: selectedLocation().City,
                             IncludeorExclude: selectedLocation().IncludeorExclude(),
-                            ID: 0,
+                          //  ID: 0,
                             SQID: selectedQuestion().SQID()
                         }));
                         $(".locVisibility,.locMap").css("display", "none");
@@ -205,7 +205,7 @@ define("survey/survey.viewModel",
                             LanguageID: selected.LanguageId,
                             IncludeorExclude: parseInt(selectedLangIncludeExclude()),
                             Type: 3,
-                            ID: 0,
+                       //     ID: 0,
                             SQID: selectedQuestion().SQID()
                         }));
                         $("#searchLanguages").val("");
@@ -424,7 +424,7 @@ define("survey/survey.viewModel",
                     saveSurveyQuestion = function (mode) {
                         var surveyData = selectedQuestion().convertToServerData();
 
-                        dataservice.addSurveyData(campignServerObj, {
+                        dataservice.addSurveyData(surveyData, {
                             success: function (data) {
                                 isEditorVisible(false);
                                 getQuestions();

@@ -71,6 +71,7 @@
                 },
                 // Convert to server data
                 convertToServerData = function () {
+                    debugger;
                     var targetCriteria =[],targetLocation  = [];
                     _.each(SurveyQuestionTargetCriteria(), function (item) {
                         targetCriteria.push(item.convertToServerData());
@@ -80,9 +81,9 @@
                     });
                     return {
                         SQID: SQID(),
-                        LanguageID: LanguageID(),
-                        CountryID: CountryID(),
-                        UserID: UserID(),
+                        LanguageId: LanguageID(),
+                        CountryId: CountryID(),
+                        UserId: UserID(),
                         Status: Status(),
                         StatusValue: StatusValue(),
                         Question: Question(),
@@ -90,25 +91,25 @@
                         Language: Language(),
                         Country: Country(),
                         StatusValue : StatusValue(),
-                        Description : Description(),
-                        DisplayQuestion : DisplayQuestion(),
-                        StartDate : StartDate(),
-                        EndDate : EndDate(),
-                        CreationDate : CreationDate(),
+                        Description: Description(),
+                        DisplayQuestion: DisplayQuestion(),
+                        StartDate: StartDate(),
+                        EndDate: EndDate(),
+                        CreationDate: CreationDate(),
                         ModifiedDate : ModifiedDate(),
                         LeftPicturePath : LeftPicturePath(),
                         RightPicturePath : RightPicturePath(),
-                        ProjectedReach : ProjectedReach(),
-                        AgeRangeStart : AgeRangeStart(),
+                        ProjectedReach: ProjectedReach(),
+                        AgeRangeStart: AgeRangeStart(),
                         AgeRangeEnd : AgeRangeEnd(),
                         DiscountVoucherApplied : DiscountVoucherApplied(),
                         VoucherCode : VoucherCode(),
                         DiscountVoucherID : DiscountVoucherID(),
                         SubmissionDate: SubmissionDate(),
-                        SurveyQuestionTargetCriteria: targetCriteria,
+                        SurveyQuestionTargetCriterias: targetCriteria,
                         LeftPictureBytes:LeftPictureBytes(),
                         RightPictureBytes: RightPictureBytes(),
-                        SurveyQuestionTargetLocation: targetLocation
+                        SurveyQuestionTargetLocations: targetLocation
                     };
                 };
             return {
@@ -145,7 +146,8 @@
                 SurveyQuestionTargetLocation:SurveyQuestionTargetLocation,
                 LeftPictureBytes: LeftPictureBytes,
                 RightPictureBytes: RightPictureBytes,
-                dirtyFlag: dirtyFlag
+                dirtyFlag: dirtyFlag,
+                convertToServerData: convertToServerData
             };
         };
 
@@ -171,11 +173,12 @@
               convertToServerData = function () {
                   return {
                       ID:ID(),
-                      SQID: SQID(),
+                      SqId: SQID(),
                       Type: Type(),
-                      PQID: PQID(),
-                      PQAnswerID: PQAnswerID(),
-                      LinkedSQID: LinkedSQID(),
+                      PqId: PQID(),
+                      PqAnswerId: PQAnswerID(),
+                      LinkedSqId: LinkedSQID(),
+                      LinkedSqAnswer: LinkedSQAnswer(),
                       IncludeorExclude: IncludeorExclude(),
                       surveyQuestLeftImageSrc: surveyQuestLeftImageSrc(),
                       surveyQuestRightImageSrc: surveyQuestRightImageSrc()
@@ -195,7 +198,8 @@
               answerString :answerString,
               Language: Language,
               surveyQuestLeftImageSrc: surveyQuestLeftImageSrc,
-              surveyQuestRightImageSrc: surveyQuestRightImageSrc
+              surveyQuestRightImageSrc: surveyQuestRightImageSrc,
+              convertToServerData: convertToServerData
           };
       };
     var // ReSharper disable InconsistentNaming
@@ -214,9 +218,9 @@
             convertToServerData = function () {
                 return {
                     ID: ID(),
-                    SQID: SQID(),
-                    CountryID: CountryID(),
-                    CityID: CityID(),
+                    SqId: SQID(),
+                    CountryId: CountryID(),
+                    CityId: CityID(),
                     Radius: Radius(),
                     Country: Country(),
                     City: City(),
@@ -231,7 +235,8 @@
             Radius: Radius,
             Country: Country,
             City: City,
-            IncludeorExclude: IncludeorExclude
+            IncludeorExclude: IncludeorExclude,
+            convertToServerData: convertToServerData
         };
     };
     // Factory Method
