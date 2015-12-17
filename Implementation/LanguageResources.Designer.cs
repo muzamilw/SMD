@@ -115,6 +115,15 @@ namespace SMD.Implementation {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to UserId is invalid..
+        /// </summary>
+        internal static string WebApiUserService_InvalidUserId {
+            get {
+                return ResourceManager.GetString("WebApiUserService_InvalidUserId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No Login info found for provided email..
         /// </summary>
         internal static string WebApiUserService_LoginInfoNotFound {
