@@ -171,6 +171,7 @@ namespace SMD.Implementation.Services
         public SurveyQuestion GetSurveyQuestion(long SqId)
         {
             var Servey = surveyQuestionRepository.Find(SqId);
+            Servey.SurveyQuestionResponses = null;
             return Servey;
         }
         #endregion
