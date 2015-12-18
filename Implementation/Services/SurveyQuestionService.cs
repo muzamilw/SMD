@@ -160,7 +160,12 @@ namespace SMD.Implementation.Services
                 surveyQuestionRepository.Add(survey);
                 surveyQuestionRepository.SaveChanges();
                 string[] paths = SaveSurveyImages(survey);
-                return surveyQuestionRepository.updateSurveyImages(paths, survey.SqId);
+               // return surveyQuestionRepository.updateSurveyImages(paths, survey.SqId);
+                survey.LeftPicturePath = paths[0];
+                survey.RightPicturePath = paths[1];
+                surveyQuestionRepository.SaveChanges();
+                return true;
+                
             }
             catch(Exception ex)
             {
@@ -168,11 +173,23 @@ namespace SMD.Implementation.Services
             }
         }
 
-        public SurveyQuestion GetSurveyQuestion(long SqId)
+        public SurveyQuestionEditResponseModel GetSurveyQuestion(long SqId)
         {
-            var Servey = surveyQuestionRepository.Find(SqId);
+            SurveyQuestion Servey = surveyQuestionRepository.Get(SqId);
             Servey.SurveyQuestionResponses = null;
-            return Servey;
+            foreach (var criteria in Servey.SurveyQuestionTargetCriterias)
+            {
+                criteria.SurveyQuestion = null;
+            }
+            foreach (var loc in Servey.SurveyQuestionTargetLocations)
+            {
+                loc.SurveyQuestion = null;
+            }
+            return new SurveyQuestionEditResponseModel
+            {
+                SurveyQuestionObj = Servey
+           
+            };
         }
         #endregion
     }

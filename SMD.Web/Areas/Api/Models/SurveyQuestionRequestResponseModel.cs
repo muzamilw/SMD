@@ -23,7 +23,7 @@ namespace SMD.MIS.Areas.Api.Models
         /// </summary>
         public int TotalCount { get; set; }
     }
-    public class SurveyQuestionEditorResponseModel
+    public class SurveyQuestionEditorRequestResponseModel
     {
         public SurveyQuestion SurveyQuestion { get; set; }
     }
