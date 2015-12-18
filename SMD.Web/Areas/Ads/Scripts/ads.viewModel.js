@@ -49,9 +49,12 @@ define("ads/ads.viewModel",
                                     // set grid content
                                     campaignGridContent.removeAll();
                                     _.each(data.Campaigns, function (item) {
+                                        console.log(item);
                                         campaignGridContent.push(model.Campaign.Create(updateCampaignGridItem(item)));
                                     });
                                     pager().totalCount(data.TotalCount);
+
+                                    
                                 }
                                 
                             },
@@ -87,7 +90,7 @@ define("ads/ads.viewModel",
                     addNewCampaign = function () {
                         isEditorVisible(true);
                         campaignModel(new model.Campaign());
-                        selectedCriteria(new model.CriteriaModel());
+                        selectedCriteria(new model.AdCampaignTargetCriteriasModel());
                        
                         campaignModel().Gender('2');
                         campaignModel().Type('2');
