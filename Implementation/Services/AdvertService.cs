@@ -250,6 +250,14 @@ namespace SMD.Implementation.Services
             };
         }
 
+        /// <summary>
+        /// Get Ads For API  | baqer
+        /// </summary>
+        public AdCampaignApiSearchRequestResponse GetAdCampaignsForApi(GetAdsApiRequest source)
+        {
+            return new AdCampaignApiSearchRequestResponse();
+        }
+
         #endregion
     }
 }

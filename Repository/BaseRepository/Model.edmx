@@ -198,6 +198,16 @@
           <Property Name="CountryName" Type="nvarchar" MaxLength="200" />
           <Property Name="CountryCode" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="Currency">
+          <Key>
+            <PropertyRef Name="CurrencyID" />
+          </Key>
+          <Property Name="CurrencyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="CurrencyCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="SMDCreditRatio" Type="float" />
+          <Property Name="CurrencySymbol" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="Industry">
           <Key>
             <PropertyRef Name="IndustryID" />
@@ -679,6 +689,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_SMDPrice_Currency">
+          <End Role="Currency" Type="Self.Currency" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currency">
+              <PropertyRef Name="CurrencyID" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="CurrencyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_SurveyQuestion_AspNetUsers">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
           <End Role="SurveyQuestion" Type="Self.SurveyQuestion" Multiplicity="*" />
@@ -848,6 +870,7 @@
           <EntitySet Name="AuditLog" EntityType="Self.AuditLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Currency" EntityType="Self.Currency" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Industry" EntityType="Self.Industry" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Language" EntityType="Self.Language" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
@@ -958,6 +981,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_SMDPrice_Country" Association="Self.FK_SMDPrice_Country">
             <End Role="Country" EntitySet="Country" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SMDPrice_Currency" Association="Self.FK_SMDPrice_Currency">
+            <End Role="Currency" EntitySet="Currency" />
             <End Role="Products" EntitySet="Products" />
           </AssociationSet>
           <AssociationSet Name="FK_SurveyQuestion_AspNetUsers" Association="Self.FK_SurveyQuestion_AspNetUsers">
@@ -1284,6 +1311,11 @@
           <AssociationSet Name="FK_SurveyQuestionTargetCriteria_Industry" Association="DomainModels.FK_SurveyQuestionTargetCriteria_Industry">
             <End Role="Industry" EntitySet="Industries" />
             <End Role="SurveyQuestionTargetCriteria" EntitySet="SurveyQuestionTargetCriterias" />
+          </AssociationSet>
+          <EntitySet Name="Currencies" EntityType="DomainModels.Currency" />
+          <AssociationSet Name="FK_SMDPrice_Currency" Association="DomainModels.FK_SMDPrice_Currency">
+            <End Role="Currency" EntitySet="Currencies" />
+            <End Role="Product" EntitySet="Products" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="ProfileQuestion">
@@ -2001,6 +2033,7 @@
           <Property Name="ClausePrice" Type="Double" />
           <Property Name="AffiliatePercentage" Type="Double" />
           <NavigationProperty Name="Country" Relationship="DomainModels.FK_SMDPrice_Country" FromRole="Product" ToRole="Country" />
+          <NavigationProperty Name="Currency" Relationship="DomainModels.FK_SMDPrice_Currency" FromRole="Product" ToRole="Currency" />
         </EntityType>
         <Association Name="FK_AdCampaignTargetCriteria_Industry">
           <End Type="DomainModels.Industry" Role="Industry" Multiplicity="0..1" />
@@ -2059,6 +2092,29 @@
             </Principal>
             <Dependent Role="SurveyQuestionTargetCriteria">
               <PropertyRef Name="IndustryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Currency">
+          <Key>
+            <PropertyRef Name="CurrencyId" />
+          </Key>
+          <Property Name="CurrencyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CurrencyCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SMDCreditRatio" Type="Double" />
+          <Property Name="CurrencySymbol" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Products" Relationship="DomainModels.FK_SMDPrice_Currency" FromRole="Currency" ToRole="Product" />
+        </EntityType>
+        <Association Name="FK_SMDPrice_Currency">
+          <End Type="DomainModels.Currency" Role="Currency" Multiplicity="0..1" />
+          <End Type="DomainModels.Product" Role="Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currency">
+              <PropertyRef Name="CurrencyId" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="CurrencyId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2452,6 +2508,17 @@
                 <ScalarProperty Name="CurrencyId" ColumnName="CurrencyID" />
                 <ScalarProperty Name="CountryId" ColumnName="CountryID" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Currencies">
+            <EntityTypeMapping TypeName="DomainModels.Currency">
+              <MappingFragment StoreEntitySet="Currency">
+                <ScalarProperty Name="CurrencySymbol" ColumnName="CurrencySymbol" />
+                <ScalarProperty Name="SMDCreditRatio" ColumnName="SMDCreditRatio" />
+                <ScalarProperty Name="CurrencyCode" ColumnName="CurrencyCode" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CurrencyId" ColumnName="CurrencyID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -60,6 +60,42 @@ namespace SMD.Implementation.Services
         #region Public
 
         /// <summary>
+        /// Archive Account
+        /// </summary>
+        public async Task Archive(string userId)
+        {
+            User user = await UserManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                throw new SMDException(LanguageResources.WebApiUserService_InvalidUserId);
+            }
+
+            // Archive Account
+            user.Status = (int)UserStatus.InActive;
+
+            // Save Changes
+            await UserManager.UpdateAsync(user);
+        }
+
+        /// <summary>
+        /// Update Profile
+        /// </summary>
+        public async Task UpdateProfile(UpdateUserProfileRequest request)
+        {
+            User user = await UserManager.FindByIdAsync(request.UserId);
+            if (user == null)
+            {
+                throw new SMDException(LanguageResources.WebApiUserService_InvalidUserId);
+            }
+
+            // Update User
+            user.Update(request);
+
+            // Save Changes
+            await UserManager.UpdateAsync(user);
+        }
+
+        /// <summary>
         /// Confirm Email
         /// </summary>
         public async Task<bool> ConfirmEmail(string userId, string code)
@@ -135,6 +171,11 @@ namespace SMD.Implementation.Services
                 throw new SMDException(LanguageResources.WebApiUserService_InvalidEmail);
             }
 
+            if (user.Status == (int)UserStatus.InActive)
+            {
+                throw new SMDException(LanguageResources.WebApiUserService_InactiveUser);
+            }
+
             if (user.UserLogins == null)
             {
                 throw new SMDException(LanguageResources.WebApiUserService_LoginInfoNotFound);
@@ -165,6 +206,11 @@ namespace SMD.Implementation.Services
             if (!user.EmailConfirmed)
             {
                 throw new SMDException(LanguageResources.WebApiUserService_EmailNotVerified);    
+            }
+
+            if (user.Status == (int)UserStatus.InActive)
+            {
+                throw new SMDException(LanguageResources.WebApiUserService_InactiveUser);
             }
 
             return user;

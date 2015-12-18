@@ -97,6 +97,15 @@ namespace SMD.Implementation {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This user is not active anymore..
+        /// </summary>
+        internal static string WebApiUserService_InactiveUser {
+            get {
+                return ResourceManager.GetString("WebApiUserService_InactiveUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to UserName or Password is Invalid..
         /// </summary>
         internal static string WebApiUserService_InvalidCredentials {
@@ -111,6 +120,15 @@ namespace SMD.Implementation {
         internal static string WebApiUserService_InvalidEmail {
             get {
                 return ResourceManager.GetString("WebApiUserService_InvalidEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UserId is invalid..
+        /// </summary>
+        internal static string WebApiUserService_InvalidUserId {
+            get {
+                return ResourceManager.GetString("WebApiUserService_InvalidUserId", resourceCulture);
             }
         }
         

@@ -378,8 +378,11 @@
     <Compile Include="Areas\Api\Controllers\CampaignController.cs" />
     <Compile Include="Areas\Api\Controllers\ChargeCustomerController.cs" />
     <Compile Include="Areas\Api\Controllers\ConfirmEmailController.cs" />
+    <Compile Include="Areas\Api\Controllers\ArchiveUserAccountController.cs" />
+    <Compile Include="Areas\Api\Controllers\UpdateQuestionAnswerForApiController - Copy.cs" />
+    <Compile Include="Areas\Api\Controllers\UpdateUserProfileController.cs" />
     <Compile Include="Areas\Api\Controllers\RegisterController.cs" />
-    <Compile Include="Areas\Api\Controllers\UpdateQuestionAnswerForApiController.cs" />
+    <Compile Include="Areas\Api\Controllers\GetAdsForApiController.cs" />
     <Compile Include="Areas\Api\Controllers\RegisterExternalController.cs" />
     <Compile Include="Areas\Api\Controllers\ProfileQuestionBaseController.cs" />
     <Compile Include="Areas\Api\Controllers\ProfileQuestionAnswerController.cs" />
@@ -398,6 +401,7 @@
     </Compile>
     <Compile Include="Areas\Api\ModelMappers\WebApiUserMapper.cs" />
     <Compile Include="Areas\Api\Models\AdCampaign.cs" />
+    <Compile Include="Areas\Api\Models\AdCampaignApiSearchRequestResponse.cs" />
     <Compile Include="Areas\Api\Models\CampaignRequestResponseModel.cs" />
     <Compile Include="Areas\Api\Models\CampaignSearchRequest.cs" />
     <Compile Include="Areas\Api\Models\AdCampaignResposneModelForAproval.cs" />
