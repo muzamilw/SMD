@@ -255,7 +255,11 @@ namespace SMD.Implementation.Services
         /// </summary>
         public AdCampaignApiSearchRequestResponse GetAdCampaignsForApi(GetAdsApiRequest source)
         {
-            return new AdCampaignApiSearchRequestResponse();
+           var response=  _surveyQuestionRepository.GetAdCompaignForApi("02de201f-f4ea-420e-a1a8-74e7c1975277");
+            return new AdCampaignApiSearchRequestResponse
+            {
+                AdCampaigns = response
+            };
         }
 
         #endregion
