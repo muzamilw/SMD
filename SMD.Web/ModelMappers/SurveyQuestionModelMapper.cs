@@ -197,7 +197,10 @@ namespace SMD.MIS.ModelMappers
                 RejectionReason = source.RejectionReason,
                 SubmissionDate = source.SubmissionDate,
                 SurveyQuestionTargetCriterias = source.SurveyQuestionTargetCriterias == null ? null : source.SurveyQuestionTargetCriterias.ToList(),
-                SurveyQuestionTargetLocations = source.SurveyQuestionTargetLocations == null ? null : source.SurveyQuestionTargetLocations.ToList()
+                SurveyQuestionTargetLocations = source.SurveyQuestionTargetLocations == null ? null : source.SurveyQuestionTargetLocations.ToList(),
+                AgeRangeEnd = source.AgeRangeEnd,
+                AgeRangeStart = source.AgeRangeStart,
+                Gender = source.Gender
             };
         }
     }

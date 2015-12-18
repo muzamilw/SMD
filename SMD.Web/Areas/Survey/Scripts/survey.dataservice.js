@@ -27,6 +27,8 @@ define("survey/survey.dataservice", function () {
                     amplify.request.define('addSurveyData', 'ajax', {
                         url: '/Api/Survey',
                         dataType: 'json',
+                        dataMap: JSON.stringify,
+                        contentType: "application/json; charset=utf-8",
                         type: 'POST'
                     });
                     // getting survey for editor
