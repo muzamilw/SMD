@@ -11,7 +11,7 @@ namespace SMD.MIS.Areas.Api.Controllers
     /// <summary>
     /// Get Ads for APIs Controller 
     /// </summary>
-   // [Authorize]
+    [Authorize]
     public class GetAdsForApiController : ApiController
     {
         #region Public
@@ -39,7 +39,7 @@ namespace SMD.MIS.Areas.Api.Controllers
             {
                 throw new HttpException((int)HttpStatusCode.BadRequest, "Invalid Request");
             }
-            return advertService.GetAdCampaignsForApi(request).CreateForApi();
+            return advertService.GetAdCampaignsForApi(request).CreateResponseForApi();
         }
         #endregion
     }

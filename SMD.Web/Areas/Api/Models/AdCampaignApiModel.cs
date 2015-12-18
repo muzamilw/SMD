@@ -1,12 +1,12 @@
 ﻿
-namespace SMD.Models.DomainModels
+namespace SMD.MIS.Areas.Api.Models
 {
     /// <summary>
-    /// SP Response For API 
+    /// API Model | Web 
     /// </summary>
-    public class GetAds_Result
+    public class AdCampaignApiModel
     {
-        public long CampaignID { get; set; }
+        public long CampaignId { get; set; }
         public string CampaignName { get; set; }
         public string Description { get; set; }
         public string VerifyQuestion { get; set; }

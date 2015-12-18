@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Data.Entity.Core.Objects;
-using System.Data.Entity.Infrastructure;
-using System.Linq;
-using System.Linq.Expressions;
-using Microsoft.Practices.Unity;
+﻿using Microsoft.Practices.Unity;
 using SMD.Models.DomainModels;
 using SMD.Models.IdentityModels;
+using System;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.Linq.Expressions;
 
 namespace SMD.Repository.BaseRepository
 {
@@ -193,36 +190,15 @@ namespace SMD.Repository.BaseRepository
         /// </summary>
         public DbSet<Transaction> Transactions { get; set; }
 
-        public ObjectResult<GetAds_Result> GetAds(int? age, int? gender, int? countryId, int? cityId, int? languageId, int? industryId)
-        // ReSharper restore InconsistentNaming
+
+        /// <summary>
+        /// Get Ad-Campaigns for APIs 
+        /// </summary>
+        public System.Data.Entity.Core.Objects.ObjectResult<GetAds_Result> GetAdCompaignForApi(string userId)
         {
-            var ageParameter = age.HasValue ?
-                new ObjectParameter("age", industryId) :
-                new ObjectParameter("age", typeof(int));
-
-            var genderParameter = gender.HasValue ?
-                new ObjectParameter("gender", gender) :
-                new ObjectParameter("gender", typeof(int));
-
-            var countryIdParameter = countryId.HasValue ?
-                new ObjectParameter("countryId", countryId) :
-                new ObjectParameter("countryId", typeof(int));
-
-            var cityIdParameter = cityId.HasValue ?
-               new ObjectParameter("countryId", cityId) :
-               new ObjectParameter("countryId", typeof(int));
-
-            var languageIdParameter = languageId.HasValue ?
-               new ObjectParameter("languageId", languageId) :
-               new ObjectParameter("languageId", typeof(int));
-
-            var industryIdParameter = industryId.HasValue ?
-               new ObjectParameter("industryId", industryId) :
-               new ObjectParameter("industryId", typeof(int));
-
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAds_Result>("GetAds", ageParameter, genderParameter, countryIdParameter, cityIdParameter, languageIdParameter, industryIdParameter);
+            var uId = new System.Data.Entity.Core.Objects.ObjectParameter("UserID", userId);
+           return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAds_Result>("GetAds", uId);
         }
-
         #endregion
     }
 }

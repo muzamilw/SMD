@@ -11,6 +11,6 @@ namespace SMD.Models.ResponseModels
         /// <summary>
         /// List of AdCampaigns
         /// </summary>
-        public IEnumerable<AdCampaign> AdCampaigns { get; set; }
+        public IEnumerable<GetAds_Result> AdCampaigns { get; set; }
     }
 }
