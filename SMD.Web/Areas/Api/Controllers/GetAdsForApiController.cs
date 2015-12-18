@@ -11,7 +11,7 @@ namespace SMD.MIS.Areas.Api.Controllers
     /// <summary>
     /// Get Ads for APIs Controller 
     /// </summary>
-    [Authorize]
+   // [Authorize]
     public class GetAdsForApiController : ApiController
     {
         #region Public
