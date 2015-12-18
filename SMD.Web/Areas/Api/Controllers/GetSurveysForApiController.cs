@@ -9,22 +9,22 @@ using System.Web.Http;
 namespace SMD.MIS.Areas.Api.Controllers
 {
     /// <summary>
-    /// Get Ads for APIs Controller 
+    /// Get Surveys for APIs Controller 
     /// </summary>
-    [Authorize]
-    public class GetAdsForApiController : ApiController
+   // [Authorize]
+    public class GetSurveysForApiController : ApiController
     {
         #region Public
 
-        private readonly IAdvertService advertService;
+        private readonly ISurveyQuestionService surveyQuestionService;
         #endregion
         #region Constructor
         /// <summary>
         /// Constuctor 
         /// </summary>
-        public GetAdsForApiController(IAdvertService advertService)
+        public GetSurveysForApiController(ISurveyQuestionService surveyQuestionService)
         {
-            this.advertService = advertService;
+            this.surveyQuestionService = surveyQuestionService;
         }
 
         #endregion
@@ -33,13 +33,13 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// <summary>
         /// Get Ads for API
         /// </summary>
-        public AdCampaignApiSearchRequestResponse Post(GetAdsApiRequest request)
+        public SurveyForApiSearchResponse Post(GetSurveysApiRequest request)
         {
             if (request == null || !ModelState.IsValid)
             {
                 throw new HttpException((int)HttpStatusCode.BadRequest, "Invalid Request");
             }
-            return advertService.GetAdCampaignsForApi(request).CreateResponseForApi();
+            return surveyQuestionService.GetSueveysForApi(request).CreateFrom();
         }
         #endregion
     }

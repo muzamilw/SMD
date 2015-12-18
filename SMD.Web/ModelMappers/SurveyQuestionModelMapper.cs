@@ -1,8 +1,8 @@
 ﻿using SMD.MIS.Areas.Api.Models;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using SMD.Models.DomainModels;
+using SurveyQuestion = SMD.MIS.Areas.Api.Models.SurveyQuestion;
 
 namespace SMD.MIS.ModelMappers
 {
@@ -10,7 +10,39 @@ namespace SMD.MIS.ModelMappers
     public static class SurveyQuestionModelMapper
     {
         /// <summary>
-        /// Domain Search Response to Web Response 
+        /// Domain API to WEB API | baqer
+        /// </summary>
+        public static SurveyApiModel CreateFrom(this GetSurveysResults source)
+        {
+            return new SurveyApiModel
+            {
+                Question = source.Question,
+                Description = source.Description,
+                ApprovalDate = source.ApprovalDate,
+                DisplayQuestion = source.DisplayQuestion,
+                LeftPicturePath = source.LeftPicturePath,
+                ResultClicks = source.ResultClicks,
+                RightPicturePath = source.RightPicturePath,
+                SQID = source.SQID,
+                VoucherCode = source.VoucherCode
+            };
+        }
+
+        /// <summary>
+        /// Domain resposne to Web resposne | API | baqer
+        /// </summary>
+        public static SurveyForApiSearchResponse CreateFrom(
+            this Models.ResponseModels.SurveyForApiSearchResponse source)
+        {
+            return new GetSurveyForApiSearchResponse
+            {
+                Surveys = source.Surveys.Select(survey => survey.CreateFrom()).ToList()
+            };
+        }
+
+
+        /// <summary>
+        /// Domain Search Response to Web Response | baqer
         /// </summary>
         public static SurveyQuestionRequestResponseModel CreateFrom(
             this Models.ResponseModels.SurveyQuestionResponseModel source)
@@ -25,7 +57,7 @@ namespace SMD.MIS.ModelMappers
         }
 
         /// <summary>
-        /// Domain To Web 
+        /// Domain To Web  | baqer
         /// </summary>
         public static SurveyQuestion CreateFrom(this Models.DomainModels.SurveyQuestion source)
         {
@@ -72,7 +104,7 @@ namespace SMD.MIS.ModelMappers
 
 
         /// <summary>
-        /// Web to Domain 
+        /// Web to Domain | baqer
         /// </summary>
         public static Models.DomainModels.SurveyQuestion CreateFrom(this SurveyQuestion source)
         {
@@ -105,7 +137,7 @@ namespace SMD.MIS.ModelMappers
         }
 
         /// <summary>
-        /// Domain to Web mapper for Rejected Survey Questions 
+        /// Domain to Web mapper for Rejected Survey Questions | baqer
         /// </summary>
         public static SurveyQuestionResposneModelForAproval CreateFrom(
             this Models.ResponseModels.SurveyQuestionResposneModelForAproval source)
@@ -118,7 +150,7 @@ namespace SMD.MIS.ModelMappers
         }
 
         /// <summary>
-        /// Create DD from Domain Model 
+        /// Create DD from Domain Model
         /// </summary>
         public static SurveyQuestionDropDown CreateFromDropdown(this Models.DomainModels.SurveyQuestion source)
         {

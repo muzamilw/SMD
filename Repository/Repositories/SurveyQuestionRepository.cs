@@ -135,5 +135,14 @@ namespace SMD.Repository.Repositories
             return db.GetAdCompaignForApi(request.UserId, fromRow, toRow).ToList();
         }
 
+        /// <summary>
+        /// Get Surveys | SP-API | baqer
+        /// </summary>
+        public IEnumerable<GetSurveysResults> GetSurveysForApi(GetSurveysApiRequest request)
+        {
+            int fromRow = (request.PageNo - 1) * request.PageSize;
+            int toRow = request.PageSize;
+            return db.GetSurveysForApi(request.UserId, fromRow, toRow).ToList();  
+        }
     }
 }

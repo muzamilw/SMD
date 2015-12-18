@@ -191,6 +191,17 @@ namespace SMD.Implementation.Services
            
             };
         }
+
+        /// <summary>
+        /// Get Surveys For APi | baqer
+        /// </summary>
+        public SurveyForApiSearchResponse GetSueveysForApi(GetSurveysApiRequest request)
+        {
+            return new SurveyForApiSearchResponse
+            {
+                Surveys = surveyQuestionRepository.GetSurveysForApi(request)
+            };
+        }
         #endregion
     }
 
