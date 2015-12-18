@@ -24,5 +24,6 @@ namespace SMD.Interfaces.Services
         SurveyQuestion EditSurveyQuestion(SurveyQuestion source);
 
         bool Create(SurveyQuestion survey);
+        SurveyQuestion GetSurveyQuestion(long SqId);
     }
 }

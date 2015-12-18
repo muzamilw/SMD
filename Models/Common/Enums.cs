@@ -121,4 +121,9 @@
         Active = 1,
         InActive = 0
     }
+    public enum SurveyQuestionType
+    {
+        Advertiser = 1,
+        MySMD = 2
+    }
 }

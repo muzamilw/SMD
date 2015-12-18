@@ -156,6 +156,7 @@ namespace SMD.Implementation.Services
             try
             {
                 survey.UserId = surveyQuestionRepository.LoggedInUserIdentity;
+                survey.Type = (int)SurveyQuestionType.Advertiser;
                 surveyQuestionRepository.Add(survey);
                 surveyQuestionRepository.SaveChanges();
                 string[] paths = SaveSurveyImages(survey);
@@ -165,6 +166,12 @@ namespace SMD.Implementation.Services
             {
                 throw ex;
             }
+        }
+
+        public SurveyQuestion GetSurveyQuestion(long SqId)
+        {
+            var Servey = surveyQuestionRepository.Find(SqId);
+            return Servey;
         }
         #endregion
     }

@@ -30,12 +30,12 @@ namespace SMD.MIS.ModelMappers
         public static SurveyQuestion CreateFrom(this Models.DomainModels.SurveyQuestion source)
         {
             string leftPath = source.LeftPicturePath;
-            if (!source.LeftPicturePath.Contains("http"))
+            if (source.LeftPicturePath !=  null &&  !source.LeftPicturePath.Contains("http"))
             {
                 leftPath = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + source.LeftPicturePath;
             }
             string rightPath = source.RightPicturePath;
-            if (!source.RightPicturePath.Contains("http"))
+            if (source.RightPicturePath != null && !source.RightPicturePath.Contains("http"))
             {
                 rightPath = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + source.RightPicturePath;
             }

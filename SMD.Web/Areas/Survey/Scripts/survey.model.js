@@ -152,7 +152,7 @@
         };
 
     var // ReSharper disable InconsistentNaming
-      SurveyQuestionTargetCriteria = function (ID, SQID, Type, PQID, PQAnswerID, LinkedSQID, LinkedSQAnswer, IncludeorExclude, LanguageID, questionString, answerString, Language, surveyQuestLeftImageSrc, surveyQuestRightImageSrc) {
+      SurveyQuestionTargetCriteria = function (ID, SQID, Type, PQID, PQAnswerID, LinkedSQID, LinkedSQAnswer, IncludeorExclude, LanguageID, questionString, answerString, Language, surveyQuestLeftImageSrc, surveyQuestRightImageSrc, IndustryID) {
           var
               //type and userID will be set on server sside
               ID = ko.observable(ID),
@@ -169,6 +169,7 @@
               Language = ko.observable(Language),
               surveyQuestLeftImageSrc = ko.observable(surveyQuestLeftImageSrc),
               surveyQuestRightImageSrc = ko.observable(surveyQuestRightImageSrc),
+              IndustryID = ko.observable(IndustryID),
               // Convert to server data
               convertToServerData = function () {
                   return {
@@ -181,7 +182,9 @@
                       LinkedSqAnswer: LinkedSQAnswer(),
                       IncludeorExclude: IncludeorExclude(),
                       surveyQuestLeftImageSrc: surveyQuestLeftImageSrc(),
-                      surveyQuestRightImageSrc: surveyQuestRightImageSrc()
+                      surveyQuestRightImageSrc: surveyQuestRightImageSrc(),
+                      LanguageId: LanguageID,
+                      IndustryID: IndustryID
                   };
               };
           return {
@@ -199,7 +202,8 @@
               Language: Language,
               surveyQuestLeftImageSrc: surveyQuestLeftImageSrc,
               surveyQuestRightImageSrc: surveyQuestRightImageSrc,
-              convertToServerData: convertToServerData
+              convertToServerData: convertToServerData,
+              IndustryID: IndustryID
           };
       };
     var // ReSharper disable InconsistentNaming
@@ -252,7 +256,7 @@
     };
     // Factory Method
     SurveyQuestionTargetCriteria.Create = function (source) {
-        return new SurveyQuestionTargetCriteria(source.ID, source.SQID, source.Type, source.PQID, source.PQAnswerID, source.LinkedSQID, source.LinkedSQAnswer, source.IncludeorExclude, source.LanguageID, source.questionString, source.answerString, source.Language, source.surveyQuestLeftImageSrc, source.surveyQuestRightImageSrc);
+        return new SurveyQuestionTargetCriteria(source.ID, source.SQID, source.Type, source.PQID, source.PQAnswerID, source.LinkedSQID, source.LinkedSQAnswer, source.IncludeorExclude, source.LanguageID, source.questionString, source.answerString, source.Language, source.surveyQuestLeftImageSrc, source.surveyQuestRightImageSrc, source.IndustryID);
     };
     SurveyQuestionTargetLocation.Create = function (source) {
         return new SurveyQuestionTargetLocation(source.ID, source.SQID, source.CountryID, source.CityID, source.Radius, source.Country, source.City,source.IncludeorExclude);

@@ -46,7 +46,7 @@ namespace SMD.Models.DomainModels
         public int? AgeRangeEnd { get; set; }
         public int? Gender { get; set; }
 
-
+        public virtual ICollection<AdCampaignTargetCriteria> AdCampaignTargetCriterias { get; set; }
         public virtual User User { get; set; }
         public virtual Country Country { get; set; }
         public virtual Language Language { get; set; }

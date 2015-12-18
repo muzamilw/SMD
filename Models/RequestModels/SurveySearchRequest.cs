@@ -35,5 +35,7 @@ namespace SMD.Models.RequestModels
                 SortBy = (short)value;
             }
         }
+        // Survey Question ID 
+        public long SqId { get; set; }
     }
 }
