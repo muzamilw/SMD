@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.Data.Objects;
 using System.Linq.Expressions;
 using Microsoft.Practices.Unity;
 using SMD.Models.DomainModels;
@@ -166,6 +168,15 @@ namespace SMD.Repository.BaseRepository
         /// </summary>
         public DbSet<ProfileQuestionUserAnswer> ProfileQuestionUserAnswers { get; set; }
 
+
+        /// <summary>
+        /// Get Fleet Utilization 
+        /// </summary>
+        //public ObjectResult<GetFleetUtilization_Result> GetCompaignAdsForApi(string userId)
+        //{
+        //    var uId = new ObjectParameter("UserID", typeof(string));
+        //    ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetFleetUtilization_Result>("GetAds", uId);
+        //}
         #endregion
     }
 }

@@ -174,9 +174,9 @@
     <Compile Include="RequestModels\ProfileQuestionSearchRequest.cs" />
     <Compile Include="RequestModels\SurveySearchRequest.cs" />
     <Compile Include="RequestModels\UpdateProfileQuestionUserAnswerApiRequest.cs" />
-    <Compile Include="ResponseModels\AdCampaignApiSearchRequestResponse.cs" />
     <Compile Include="ResponseModels\AdCampaignBaseResponse.cs" />
     <Compile Include="ResponseModels\AdCampaignResposneModelForAproval.cs" />
+    <Compile Include="ResponseModels\AdCampaignApiSearchRequestResponse.cs" />
     <Compile Include="ResponseModels\ProfileQuestionApiSearchResponse.cs" />
     <Compile Include="ResponseModels\ProfileQuestionBaseResponse.cs" />
     <Compile Include="ResponseModels\ProfileQuestionSearchRequestResponse.cs" />
