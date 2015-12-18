@@ -113,6 +113,7 @@
     <Compile Include="Common\NameClaimValue.cs" />
     <Compile Include="Common\UserIdentityModel.cs" />
     <Compile Include="Common\Utility.cs" />
+    <Compile Include="DomainModels\Account.cs" />
     <Compile Include="DomainModels\AdCampaign.cs" />
     <Compile Include="DomainModels\AdCampaignResponse.cs" />
     <Compile Include="DomainModels\AdCampaignTargetCriteria.cs" />
@@ -133,6 +134,7 @@
     <Compile Include="DomainModels\SurveyQuestionTargetCriteria.cs" />
     <Compile Include="DomainModels\SurveyQuestionTargetLocation.cs" />
     <Compile Include="DomainModels\SystemMail.cs" />
+    <Compile Include="DomainModels\Transaction.cs" />
     <Compile Include="IdentityModels\Role.cs" />
     <Compile Include="IdentityModels\Role`.cs" />
     <Compile Include="IdentityModels\User.cs" />

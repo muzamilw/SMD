@@ -31,20 +31,22 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// <summary>
         /// Get Profile Questions
         /// </summary>
-        public SurveyQuestionEditorResponseModel Get([FromUri] SurveySearchRequest request)
-        {
-            if (!ModelState.IsValid || request == null)
-            {
-                throw new HttpException((int)HttpStatusCode.BadRequest, "Invalid Request");
-            }
-            else
-            {
-                if (request.SqId != 0)
-                    return _surveyQuestionService.GetSurveyQuestion(request.SqId).CreateFrom();
-                else
-                    throw new HttpException((int)HttpStatusCode.BadRequest, "Invalid Request");
-            }
-           
-        }
+        //public SurveyQuestionEditorResponseModel Get([FromUri] SurveySearchRequest request)
+        //{
+        //    if (!ModelState.IsValid || request == null)
+        //    {
+        //        throw new HttpException((int)HttpStatusCode.BadRequest, "Invalid Request");
+        //    }
+        //    else
+        //    {
+        //        if (request.SqId != 0)
+        //            return _surveyQuestionService.GetSurveyQuestion(request.SqId).CreateFrom();
+        //        else
+        //            throw new HttpException((int)HttpStatusCode.BadRequest, "Invalid Request");
+        //    }
+
+        //}
+
+        #endregion Public
     }
 }

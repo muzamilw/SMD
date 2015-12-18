@@ -5,6 +5,16 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="SMDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="AccountId" />
+          </Key>
+          <Property Name="AccountId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AccountName" Type="nvarchar" MaxLength="200" />
+          <Property Name="AccountType" Type="int" />
+          <Property Name="AccountBalance" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+        </EntityType>
         <EntityType Name="AdCampaign">
           <Key>
             <PropertyRef Name="CampaignID" />
@@ -381,6 +391,38 @@
           <Property Name="body" Type="ntext" />
           <Property Name="EmailTarget" Type="int" />
         </EntityType>
+        <EntityType Name="Transaction">
+          <Key>
+            <PropertyRef Name="TxID" />
+          </Key>
+          <Property Name="TxID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TransactionDate" Type="datetime" />
+          <Property Name="Type" Type="int" />
+          <Property Name="DebitCredit" Type="int" />
+          <Property Name="CreditAmount" Type="float" />
+          <Property Name="DebitAmount" Type="float" />
+          <Property Name="AccountID" Type="bigint" />
+          <Property Name="TaxPerc" Type="float" />
+          <Property Name="TaxValue" Type="float" />
+          <Property Name="AdCampaignID" Type="bigint" />
+          <Property Name="SQID" Type="bigint" />
+          <Property Name="isProcessed" Type="bit" />
+          <Property Name="CurrencyID" Type="int" />
+          <Property Name="CurrencyRateID" Type="int" />
+          <Property Name="Sequence" Type="int" />
+        </EntityType>
+        <Association Name="FK_Account_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_AdCampaign_Language">
           <End Role="Language" Type="Self.Language" Multiplicity="0..1" />
           <End Role="AdCampaign" Type="Self.AdCampaign" Multiplicity="*" />
@@ -857,7 +899,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Transaction_Account">
+          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+          <End Role="Transaction" Type="Self.Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="AccountId" />
+            </Principal>
+            <Dependent Role="Transaction">
+              <PropertyRef Name="AccountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="SMDModelStoreContainer">
+          <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AdCampaign" EntityType="Self.AdCampaign" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AdCampaignResponse" EntityType="Self.AdCampaignResponse" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AdCampaignTargetCriteria" EntityType="Self.AdCampaignTargetCriteria" Schema="dbo" store:Type="Tables" />
@@ -883,6 +938,11 @@
           <EntitySet Name="SurveyQuestionTargetCriteria" EntityType="Self.SurveyQuestionTargetCriteria" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SurveyQuestionTargetLocation" EntityType="Self.SurveyQuestionTargetLocation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SystemMails" EntityType="Self.SystemMails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Transaction" EntityType="Self.Transaction" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Account_AspNetUsers" Association="Self.FK_Account_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Account" EntitySet="Account" />
+          </AssociationSet>
           <AssociationSet Name="FK_AdCampaign_Language" Association="Self.FK_AdCampaign_Language">
             <End Role="Language" EntitySet="Language" />
             <End Role="AdCampaign" EntitySet="AdCampaign" />
@@ -1039,6 +1099,10 @@
             <End Role="SurveyQuestion" EntitySet="SurveyQuestion" />
             <End Role="SurveyQuestionTargetLocation" EntitySet="SurveyQuestionTargetLocation" />
           </AssociationSet>
+          <AssociationSet Name="FK_Transaction_Account" Association="Self.FK_Transaction_Account">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Transaction" EntitySet="Transaction" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -1121,6 +1185,7 @@
           <Property Name="IndustryID" Type="Int32" />
           <NavigationProperty Name="Industry" Relationship="DomainModels.FK_AspNetUsers_Industry" FromRole="User" ToRole="Industry" />
           <NavigationProperty Name="Language" Relationship="DomainModels.FK_AspNetUsers_Language" FromRole="User" ToRole="Language" />
+          <NavigationProperty Name="Accounts" Relationship="DomainModels.FK_Account_AspNetUsers" FromRole="User" ToRole="Account" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="DomainModels.User" Multiplicity="1">
@@ -1316,6 +1381,16 @@
           <AssociationSet Name="FK_SMDPrice_Currency" Association="DomainModels.FK_SMDPrice_Currency">
             <End Role="Currency" EntitySet="Currencies" />
             <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <EntitySet Name="Accounts" EntityType="DomainModels.Account" />
+          <EntitySet Name="Transactions" EntityType="DomainModels.Transaction" />
+          <AssociationSet Name="FK_Account_AspNetUsers" Association="DomainModels.FK_Account_AspNetUsers">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Account" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transaction_Account" Association="DomainModels.FK_Transaction_Account">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Transaction" EntitySet="Transactions" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="ProfileQuestion">
@@ -2118,6 +2193,63 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="AccountId" />
+          </Key>
+          <Property Name="AccountId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccountName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="AccountType" Type="Int32" />
+          <Property Name="AccountBalance" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="DomainModels.FK_Account_AspNetUsers" FromRole="Account" ToRole="User" />
+          <NavigationProperty Name="Transactions" Relationship="DomainModels.FK_Transaction_Account" FromRole="Account" ToRole="Transaction" />
+        </EntityType>
+        <EntityType Name="Transaction">
+          <Key>
+            <PropertyRef Name="TxId" />
+          </Key>
+          <Property Name="TxId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TransactionDate" Type="DateTime" Precision="3" />
+          <Property Name="Type" Type="Int32" />
+          <Property Name="DebitCredit" Type="Int32" />
+          <Property Name="CreditAmount" Type="Double" />
+          <Property Name="DebitAmount" Type="Double" />
+          <Property Name="AccountId" Type="Int64" />
+          <Property Name="TaxPerc" Type="Double" />
+          <Property Name="TaxValue" Type="Double" />
+          <Property Name="AdCampaignId" Type="Int64" />
+          <Property Name="SQId" Type="Int64" />
+          <Property Name="isProcessed" Type="Boolean" />
+          <Property Name="CurrencyId" Type="Int32" />
+          <Property Name="CurrencyRateId" Type="Int32" />
+          <Property Name="Sequence" Type="Int32" />
+          <NavigationProperty Name="Account" Relationship="DomainModels.FK_Transaction_Account" FromRole="Transaction" ToRole="Account" />
+        </EntityType>
+        <Association Name="FK_Account_AspNetUsers">
+          <End Type="DomainModels.User" Role="User" Multiplicity="0..1" />
+          <End Type="DomainModels.Account" Role="Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transaction_Account">
+          <End Type="DomainModels.Account" Role="Account" Multiplicity="0..1" />
+          <End Type="DomainModels.Transaction" Role="Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="AccountId" />
+            </Principal>
+            <Dependent Role="Transaction">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2519,6 +2651,38 @@
                 <ScalarProperty Name="CurrencyCode" ColumnName="CurrencyCode" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="CurrencyId" ColumnName="CurrencyID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Accounts">
+            <EntityTypeMapping TypeName="DomainModels.Account">
+              <MappingFragment StoreEntitySet="Account">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="AccountBalance" ColumnName="AccountBalance" />
+                <ScalarProperty Name="AccountType" ColumnName="AccountType" />
+                <ScalarProperty Name="AccountName" ColumnName="AccountName" />
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Transactions">
+            <EntityTypeMapping TypeName="DomainModels.Transaction">
+              <MappingFragment StoreEntitySet="Transaction">
+                <ScalarProperty Name="Sequence" ColumnName="Sequence" />
+                <ScalarProperty Name="CurrencyRateId" ColumnName="CurrencyRateID" />
+                <ScalarProperty Name="CurrencyId" ColumnName="CurrencyID" />
+                <ScalarProperty Name="isProcessed" ColumnName="isProcessed" />
+                <ScalarProperty Name="SQId" ColumnName="SQID" />
+                <ScalarProperty Name="AdCampaignId" ColumnName="AdCampaignID" />
+                <ScalarProperty Name="TaxValue" ColumnName="TaxValue" />
+                <ScalarProperty Name="TaxPerc" ColumnName="TaxPerc" />
+                <ScalarProperty Name="AccountId" ColumnName="AccountID" />
+                <ScalarProperty Name="DebitAmount" ColumnName="DebitAmount" />
+                <ScalarProperty Name="CreditAmount" ColumnName="CreditAmount" />
+                <ScalarProperty Name="DebitCredit" ColumnName="DebitCredit" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
+                <ScalarProperty Name="TxId" ColumnName="TxID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
