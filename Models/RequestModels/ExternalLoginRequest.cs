@@ -6,6 +6,11 @@
     public class ExternalLoginRequest
     {
         /// <summary>
+        /// User Full Name
+        /// </summary>
+        public string FullName { get; set; }
+        
+        /// <summary>
         /// Email
         /// </summary>
         public string Email { get; set; }

@@ -166,28 +166,31 @@ namespace SMD.Implementation.Services
         public async Task<User> ExternalLogin(ExternalLoginRequest request)
         {
             User user = await UserManager.FindByEmailAsync(request.Email);
-            if (user == null)
+            if (user != null)
             {
-                throw new SMDException(LanguageResources.WebApiUserService_InvalidEmail);
+                if (user.UserLogins == null)
+                {
+                    throw new SMDException(LanguageResources.WebApiUserService_LoginInfoNotFound);
+                }
+
+                UserLogin userLoginInfo = user.UserLogins.FirstOrDefault(
+                    u => u.LoginProvider == request.LoginProvider && u.ProviderKey == request.LoginProviderKey);
+
+                if (userLoginInfo == null)
+                {
+                    throw new SMDException(LanguageResources.WebApiUserService_ProviderKeyInvalid);
+                }
+
+                if (user.Status == (int)UserStatus.InActive)
+                {
+                    throw new SMDException(LanguageResources.WebApiUserService_InactiveUser);
+                }
+
+                return user;
             }
 
-            if (user.Status == (int)UserStatus.InActive)
-            {
-                throw new SMDException(LanguageResources.WebApiUserService_InactiveUser);
-            }
-
-            if (user.UserLogins == null)
-            {
-                throw new SMDException(LanguageResources.WebApiUserService_LoginInfoNotFound);
-            }
-
-            UserLogin userLoginInfo = user.UserLogins.FirstOrDefault(
-                u => u.LoginProvider == request.LoginProvider && u.ProviderKey == request.LoginProviderKey);
-            
-            if (userLoginInfo == null)
-            {
-                throw new SMDException(LanguageResources.WebApiUserService_ProviderKeyInvalid);        
-            }
+            user = await RegisterExternal(new RegisterExternalRequest{ Email = request.Email, FullName = request.FullName, 
+                LoginProvider = request.LoginProvider, LoginProviderKey = request.LoginProviderKey});
 
             return user;
         }
