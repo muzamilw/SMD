@@ -35,6 +35,7 @@ define("ads/ads.viewModel",
                     isNewCriteria = ko.observable(true),
                     isEnableUploadImageLink = ko.observable(false),
                     campaignTypePlaceHolderValue = ko.observable('Enter a link'),
+                    correctAnswers = ko.observableArray([{ id: 1, name: "Answer 1" }, { id: 1, name: "Answer 2" }, { id: 3, name: "Answer 3" }]),
                     getAdCampaignGridContent = function () {
                         dataservice.getCampaignData({
                             FirstLoad: true,
@@ -51,7 +52,7 @@ define("ads/ads.viewModel",
                                     // set grid content
                                     campaignGridContent.removeAll();
                                     _.each(data.Campaigns, function (item) {
-                                        console.log(item);
+                                     
                                         campaignGridContent.push(model.Campaign.Create(updateCampaignGridItem(item)));
                                     });
                                     pager().totalCount(data.TotalCount);
@@ -92,6 +93,7 @@ define("ads/ads.viewModel",
                     addNewCampaign = function () {
                         isEditorVisible(true);
                         campaignModel(new model.Campaign());
+                      
                         selectedCriteria(new model.AdCampaignTargetCriteriasModel());
                        
                         campaignModel().Gender('2');
@@ -99,7 +101,9 @@ define("ads/ads.viewModel",
                         campaignModel().reset();
                         view.initializeTypeahead();
                         isEnableUploadImageLink(false);
-                        console.log(isEnableUploadImageLink());
+                        campaignModel().CampaignTypeImagePath("");
+                        campaignModel().CampaignImagePath("");
+                       
                     },
 
                     closeNewCampaignDialog = function () {
@@ -107,40 +111,13 @@ define("ads/ads.viewModel",
                     },
 
                     saveCampaignData = function () {
-                          
-                          for (var i = 0; i < $('div.count_city_newcnt').length; i++)
-                          {
-                              var idOfEle = $('div.count_city_newcnt')[i].id;
-                            
-                              var res_array = idOfEle.split("_");
-                              if (res_array[1] == "City")
-                              {
-                                  cityidList.push(res_array[0]);
-                              } else if (res_array[1] == "Country") {
-                                  countoryidList.push(res_array[0]);
-                              }
-                          }
-
-                          for (var i = 0; i < $('div.lang_newcnt').length; i++) {
-                              langidList.push($('div.lang_newcnt')[i].id);
-                          }
                          
                           var campignServerObj = campaignModel().convertToServerData();
-                          campignServerObj.Countries = countoryidList;
-                          campignServerObj.Cities = cityidList;
-                          campignServerObj.Languages = langidList;
-                          campignServerObj.Criterias = campignServerObj.AdCampaignTargetCriterias;
-                         
+                       
                           dataservice.addCampaignData(campignServerObj, {
                               success: function (data) {
                             
-                                      //profileQuestionList([]);
-                                      //profileAnswerList.removeAll();
-                                      //surveyQuestionList.removeAll();
                                       criteriaCount(0);
-                                      
-                                      //campaignModel(new model.campaignModel());
-                                      //selectedCriteria(new model.CriteriaModel());
                                       isEditorVisible(false);
                                       getAdCampaignGridContent();
                                       toastr.success("Successfully saved.");
@@ -339,7 +316,7 @@ define("ads/ads.viewModel",
                     },
 
                     deleteLocation = function (item) {
-                        console.log(item.ID());
+                       
                         if (item.ID() != 0) {
                             //dataservice.deleteProfileQuestion(item.convertToServerData(), {
                             //    success: function () {
@@ -354,7 +331,7 @@ define("ads/ads.viewModel",
                             //    }
                             //});
                         } else {
-                            campaignModel().AdCampaignTargetLocation.remove(item);
+                            campaignModel().AdCampaignTargetLocations.remove(item);
                             toastr.success("Removed Successfully!");
                         }
 
@@ -364,7 +341,7 @@ define("ads/ads.viewModel",
 
                         selectedLocation().Radius = (selectedLocationRadius);
                         selectedLocation().IncludeorExclude = (selectedLocationIncludeExclude);
-                        campaignModel().AdCampaignTargetLocation.push(new model.AdCampaignTargetLocation.Create({
+                        campaignModel().AdCampaignTargetLocations.push(new model.AdCampaignTargetLocation.Create({
                             CountryID: selectedLocation().CountryID,
                             CityID: selectedLocation().CityID,
                             Radius: selectedLocation().Radius(),
@@ -384,7 +361,7 @@ define("ads/ads.viewModel",
                     },
 
                     addLanguage = function (selected) {
-                        console.log(campaignModel());
+                      
                         campaignModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
                             Language: selected.LanguageName,
                             LanguageID: selected.LanguageId,
@@ -405,7 +382,7 @@ define("ads/ads.viewModel",
                     },
 
                     deleteLanguage = function (item) {
-                        console.log(item.ID());
+                     
                         if (item.ID() != 0) {
                             //dataservice.deleteProfileQuestion(item.convertToServerData(), {
                             //    success: function () {
@@ -509,7 +486,8 @@ define("ads/ads.viewModel",
                         campaignTypePlaceHolderValue: campaignTypePlaceHolderValue,
                         OnChangeCampaignType: OnChangeCampaignType,
                         campaignTypeImageCallback: campaignTypeImageCallback,
-                        campaignImageCallback: campaignImageCallback
+                        campaignImageCallback: campaignImageCallback,
+                        correctAnswers: correctAnswers
                     };
             })()
         };

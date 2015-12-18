@@ -35,7 +35,7 @@
               CampaignImagePath = ko.observable(CampaignImagePath),
               CampaignTypeImagePath = ko.observable(CampaignTypeImagePath),
               AdCampaignTargetCriterias = ko.observableArray([]),
-              AdCampaignTargetLocation = ko.observableArray([]),
+              AdCampaignTargetLocations = ko.observableArray([]),
               errors = ko.validation.group({
 
               }),
@@ -69,7 +69,7 @@
                   ResultClicks: ResultClicks,
                   AmountSpent: AmountSpent,
                   AdCampaignTargetCriterias: AdCampaignTargetCriterias,
-                  AdCampaignTargetLocation: AdCampaignTargetLocation
+                  AdCampaignTargetLocations: AdCampaignTargetLocations
               }),
               // Has Changes
               hasChanges = ko.computed(function () {
@@ -86,7 +86,9 @@
                       targetCriteria.push(item.convertCriteriaToServerData());
                   });
                   var LocationtargetCriteria = [];
-                  _.each(AdCampaignTargetLocation(), function (item) {
+                 
+                  _.each(AdCampaignTargetLocations(), function (item) {
+                    
                       LocationtargetCriteria.push(item.convertToServerData());
                   });
                   return {
@@ -118,12 +120,12 @@
                       CampaignImagePath: CampaignImagePath(),
                       CampaignTypeImagePath: CampaignTypeImagePath(),
                       AdCampaignTargetCriterias: targetCriteria,
-                      AdCampaignTargetLocation: LocationtargetCriteria
+                      AdCampaignTargetLocations: AdCampaignTargetLocations
                   };
               };
           return {
               CampaignID: CampaignID,
-              LanguageID: LanguageID,
+              LanguageId: LanguageID,
               CampaignName: CampaignName,
               UserID: UserID,
               Status: Status,
@@ -150,7 +152,7 @@
               CampaignImagePath: CampaignImagePath,
               CampaignTypeImagePath: CampaignTypeImagePath,
               AdCampaignTargetCriterias: AdCampaignTargetCriterias,
-              AdCampaignTargetLocation:AdCampaignTargetLocation,
+              AdCampaignTargetLocations: AdCampaignTargetLocations,
               convertToServerData:convertToServerData,
               hasChanges: hasChanges,
               reset: reset,
@@ -228,10 +230,10 @@
             // Convert to server data
             convertToServerData = function () {
                 return {
-                    ID: ID(),
-                    CampaignID: CampaignID(),
-                    CountryID: CountryID(),
-                    CityID: CityID(),
+                    Id: ID(),
+                    CampaignId: CampaignID(),
+                    CountryId: CountryID(),
+                    CityId: CityID(),
                     Radius: Radius(),
                     Country: Country(),
                     City: City(),
