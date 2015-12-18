@@ -21,7 +21,7 @@ namespace SMD.Models.DomainModels
         public bool? IncludeorExclude { get; set; }
         public int? LanguageId { get; set; }
 
-        public int? IndustryID { get; set; }
+        public int? IndustryId { get; set; }
 
         public virtual Industry Industry { get; set; }
         public virtual AdCampaign AdCampaign { get; set; }

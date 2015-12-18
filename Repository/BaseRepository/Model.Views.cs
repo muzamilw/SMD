@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets275351347816AA8338E0A7369CF073CE02ADED9A2B348F960DDB3C94BECCA6BD))]
+[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets8CFBBE364DD6F7D7E574A97CF50519435DD2CE31E08972389ECCA7577A6EE7B3))]
 
 namespace Edm_EntityMappingGeneratedViews
 {
@@ -17,18 +17,18 @@ namespace Edm_EntityMappingGeneratedViews
     /// <Summary>
     /// The type contains views for EntitySets and AssociationSets that were generated at design time.
     /// </Summary>
-    public sealed class ViewsForBaseEntitySets275351347816AA8338E0A7369CF073CE02ADED9A2B348F960DDB3C94BECCA6BD : System.Data.Mapping.EntityViewContainer
+    public sealed class ViewsForBaseEntitySets8CFBBE364DD6F7D7E574A97CF50519435DD2CE31E08972389ECCA7577A6EE7B3 : System.Data.Mapping.EntityViewContainer
     {
         
         /// <Summary>
         /// The constructor stores the views for the extents and also the hash values generated based on the metadata and mapping closure and views.
         /// </Summary>
-        public ViewsForBaseEntitySets275351347816AA8338E0A7369CF073CE02ADED9A2B348F960DDB3C94BECCA6BD()
+        public ViewsForBaseEntitySets8CFBBE364DD6F7D7E574A97CF50519435DD2CE31E08972389ECCA7577A6EE7B3()
         {
             this.EdmEntityContainerName = "BaseDbContext";
             this.StoreEntityContainerName = "SMDModelStoreContainer";
-            this.HashOverMappingClosure = "2dab52d8c0c710f6c4c819bcf4142f75090b674c8847809b8031d6a71a70661a";
-            this.HashOverAllExtentViews = "0a08ea3557834b58f7a5640a060c8f19242a78a51446d140c3ff493d5122478a";
+            this.HashOverMappingClosure = "46664b7db19d479eae473c5f942e0691463c7a815f6dd803c6f15cb274c03d7e";
+            this.HashOverAllExtentViews = "7accbf099bad2079a866767158105b9a58c0f8d6b55a16400f0a1a78c3e53a6b";
             this.ViewCount = 54;
         }
         
@@ -345,8 +345,8 @@ namespace Edm_EntityMappingGeneratedViews
             viewString.Append("BeesubscriptionID, \r\n            T.RegisteredViaReferral AS AspNetUsers_Register");
             viewString.Append("edViaReferral, \r\n            T.ReferringUserId AS AspNetUsers_ReferringUserID, \r");
             viewString.Append("\n            T.Age AS AspNetUsers_Age, \r\n            T.Gender AS AspNetUsers_Gen");
-            viewString.Append("der, \r\n            T.LanguageID AS AspNetUsers_LanguageID, \r\n            T.Indus");
-            viewString.Append("tryID AS AspNetUsers_IndustryID, \r\n            True AS _from0\r\n        FROM Base");
+            viewString.Append("der, \r\n            T.LanguageId AS AspNetUsers_LanguageID, \r\n            T.Indus");
+            viewString.Append("tryId AS AspNetUsers_IndustryID, \r\n            True AS _from0\r\n        FROM Base");
             viewString.Append("DbContext.Users AS T\r\n    ) AS T1");
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.AspNetUsers", viewString.ToString());
         }
@@ -591,7 +591,7 @@ namespace Edm_EntityMappingGeneratedViews
             T.SqAnswer AS AdCampaignTargetCriteria_SQAnswer, 
             T.IncludeorExclude AS AdCampaignTargetCriteria_IncludeorExclude, 
             T.LanguageId AS AdCampaignTargetCriteria_LanguageID, 
-            T.IndustryID AS AdCampaignTargetCriteria_IndustryID, 
+            T.IndustryId AS AdCampaignTargetCriteria_IndustryID, 
             True AS _from0
         FROM BaseDbContext.AdCampaignTargetCriterias AS T
     ) AS T1");
@@ -684,7 +684,7 @@ namespace Edm_EntityMappingGeneratedViews
             T.LinkedSqAnswer AS SurveyQuestionTargetCriteria_LinkedSQAnswer, 
             T.IncludeorExclude AS SurveyQuestionTargetCriteria_IncludeorExclude, 
             T.LanguageId AS SurveyQuestionTargetCriteria_LanguageID, 
-            T.IndustryID AS SurveyQuestionTargetCriteria_IndustryID, 
+            T.IndustryId AS SurveyQuestionTargetCriteria_IndustryID, 
             True AS _from0
         FROM BaseDbContext.SurveyQuestionTargetCriterias AS T
     ) AS T1");
@@ -934,7 +934,7 @@ namespace Edm_EntityMappingGeneratedViews
             viewString.Append("_CityId, T1.User_CountryId, T1.User_State, T1.User_ZipCode, T1.User_UserTimeZone");
             viewString.Append(", T1.User_ReferralCode, T1.User_AfilliatianStatus, T1.User_ChargeBeesubscription");
             viewString.Append("Id, T1.User_RegisteredViaReferral, T1.User_ReferringUserId, T1.User_Age, T1.User");
-            viewString.Append("_Gender, T1.User_StripeCustomerId, T1.User_LanguageID, T1.User_IndustryID)\r\n    ");
+            viewString.Append("_Gender, T1.User_StripeCustomerId, T1.User_LanguageId, T1.User_IndustryId)\r\n    ");
             viewString.Append("FROM (\r\n        SELECT \r\n            T.Id AS User_Id, \r\n            T.Email AS U");
             viewString.Append("ser_Email, \r\n            T.EmailConfirmed AS User_EmailConfirmed, \r\n            ");
             viewString.Append("T.PasswordHash AS User_PasswordHash, \r\n            T.SecurityStamp AS User_Secur");
@@ -962,8 +962,8 @@ namespace Edm_EntityMappingGeneratedViews
             viewString.Append("           T.RegisteredViaReferral AS User_RegisteredViaReferral, \r\n            ");
             viewString.Append("T.ReferringUserID AS User_ReferringUserId, \r\n            T.Age AS User_Age, \r\n  ");
             viewString.Append("          T.Gender AS User_Gender, \r\n            T.StripeCustomerId AS User_Stri");
-            viewString.Append("peCustomerId, \r\n            T.LanguageID AS User_LanguageID, \r\n            T.Ind");
-            viewString.Append("ustryID AS User_IndustryID, \r\n            True AS _from0\r\n        FROM SMDModelS");
+            viewString.Append("peCustomerId, \r\n            T.LanguageID AS User_LanguageId, \r\n            T.Ind");
+            viewString.Append("ustryID AS User_IndustryId, \r\n            True AS _from0\r\n        FROM SMDModelS");
             viewString.Append("toreContainer.AspNetUsers AS T\r\n    ) AS T1");
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.Users", viewString.ToString());
         }
@@ -1196,7 +1196,7 @@ namespace Edm_EntityMappingGeneratedViews
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.AdCampaignTargetCriterias", @"
     SELECT VALUE -- Constructing AdCampaignTargetCriterias
-        [DomainModels.AdCampaignTargetCriteria](T1.AdCampaignTargetCriteria_CriteriaId, T1.AdCampaignTargetCriteria_CampaignId, T1.AdCampaignTargetCriteria_Type, T1.AdCampaignTargetCriteria_PqId, T1.AdCampaignTargetCriteria_PqAnswerId, T1.AdCampaignTargetCriteria_SqId, T1.AdCampaignTargetCriteria_SqAnswer, T1.AdCampaignTargetCriteria_IncludeorExclude, T1.AdCampaignTargetCriteria_LanguageId, T1.AdCampaignTargetCriteria_IndustryID)
+        [DomainModels.AdCampaignTargetCriteria](T1.AdCampaignTargetCriteria_CriteriaId, T1.AdCampaignTargetCriteria_CampaignId, T1.AdCampaignTargetCriteria_Type, T1.AdCampaignTargetCriteria_PqId, T1.AdCampaignTargetCriteria_PqAnswerId, T1.AdCampaignTargetCriteria_SqId, T1.AdCampaignTargetCriteria_SqAnswer, T1.AdCampaignTargetCriteria_IncludeorExclude, T1.AdCampaignTargetCriteria_LanguageId, T1.AdCampaignTargetCriteria_IndustryId)
     FROM (
         SELECT 
             T.CriteriaID AS AdCampaignTargetCriteria_CriteriaId, 
@@ -1208,7 +1208,7 @@ namespace Edm_EntityMappingGeneratedViews
             T.SQAnswer AS AdCampaignTargetCriteria_SqAnswer, 
             T.IncludeorExclude AS AdCampaignTargetCriteria_IncludeorExclude, 
             T.LanguageID AS AdCampaignTargetCriteria_LanguageId, 
-            T.IndustryID AS AdCampaignTargetCriteria_IndustryID, 
+            T.IndustryID AS AdCampaignTargetCriteria_IndustryId, 
             True AS _from0
         FROM SMDModelStoreContainer.AdCampaignTargetCriteria AS T
     ) AS T1");
@@ -1289,7 +1289,7 @@ namespace Edm_EntityMappingGeneratedViews
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.SurveyQuestionTargetCriterias", @"
     SELECT VALUE -- Constructing SurveyQuestionTargetCriterias
-        [DomainModels.SurveyQuestionTargetCriteria](T1.SurveyQuestionTargetCriteria_Id, T1.SurveyQuestionTargetCriteria_SqId, T1.SurveyQuestionTargetCriteria_Type, T1.SurveyQuestionTargetCriteria_PqId, T1.SurveyQuestionTargetCriteria_PqAnswerId, T1.SurveyQuestionTargetCriteria_LinkedSqId, T1.SurveyQuestionTargetCriteria_LinkedSqAnswer, T1.SurveyQuestionTargetCriteria_IncludeorExclude, T1.SurveyQuestionTargetCriteria_LanguageId, T1.SurveyQuestionTargetCriteria_IndustryID)
+        [DomainModels.SurveyQuestionTargetCriteria](T1.SurveyQuestionTargetCriteria_Id, T1.SurveyQuestionTargetCriteria_SqId, T1.SurveyQuestionTargetCriteria_Type, T1.SurveyQuestionTargetCriteria_PqId, T1.SurveyQuestionTargetCriteria_PqAnswerId, T1.SurveyQuestionTargetCriteria_LinkedSqId, T1.SurveyQuestionTargetCriteria_LinkedSqAnswer, T1.SurveyQuestionTargetCriteria_IncludeorExclude, T1.SurveyQuestionTargetCriteria_LanguageId, T1.SurveyQuestionTargetCriteria_IndustryId)
     FROM (
         SELECT 
             T.ID AS SurveyQuestionTargetCriteria_Id, 
@@ -1301,7 +1301,7 @@ namespace Edm_EntityMappingGeneratedViews
             T.LinkedSQAnswer AS SurveyQuestionTargetCriteria_LinkedSqAnswer, 
             T.IncludeorExclude AS SurveyQuestionTargetCriteria_IncludeorExclude, 
             T.LanguageID AS SurveyQuestionTargetCriteria_LanguageId, 
-            T.IndustryID AS SurveyQuestionTargetCriteria_IndustryID, 
+            T.IndustryID AS SurveyQuestionTargetCriteria_IndustryId, 
             True AS _from0
         FROM SMDModelStoreContainer.SurveyQuestionTargetCriteria AS T
     ) AS T1");
