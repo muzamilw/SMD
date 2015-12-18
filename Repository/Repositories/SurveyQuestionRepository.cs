@@ -88,7 +88,7 @@ namespace SMD.Repository.Repositories
         }
 
         /// <summary>
-        /// Get Rejected Survey Questions
+        /// Get Rejected Survey Questions | baqer
         /// </summary>
         public IEnumerable<SurveyQuestion> SearchRejectedProfileQuestions(SurveySearchRequest request, out int rowCount)
         {
@@ -124,5 +124,14 @@ namespace SMD.Repository.Repositories
             db.Configuration.LazyLoadingEnabled = false;
             return DbSet.Where(survey => survey.SqId == SqId).Include("SurveyQuestionTargetCriterias").Include("SurveyQuestionTargetLocations").SingleOrDefault();
         }
+
+        /// <summary>
+        /// Get Ads Campaigns | SP-API | baqer
+        /// </summary>
+        public IEnumerable<GetAds_Result> GetAdCompaignForApi(string userId)
+        {
+            return db.GetAdCompaignForApi(userId,0,0).ToList();
+        }
+
     }
 }

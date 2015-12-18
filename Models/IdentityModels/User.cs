@@ -54,8 +54,8 @@ namespace SMD.Models.IdentityModels
         public string ReferringUserId { get; set; }
         public int? Age { get; set; }
         public int? Gender { get; set; }
-        public int? LanguageID { get; set; }
-        public int? IndustryID { get; set; }
+        public int? LanguageId { get; set; }
+        public int? IndustryId { get; set; }
 
         public virtual Industry Industry { get; set; }
         public virtual Language Language { get; set; }
@@ -68,6 +68,7 @@ namespace SMD.Models.IdentityModels
         public virtual ICollection<SurveyQuestion> SurveyQuestions { get; set; }
         public virtual ICollection<SurveyQuestionResponse> SurveyQuestionResponses { get; set; }
 
+        public virtual ICollection<Account> Accounts { get; set; }
         #endregion
 
         #region Public
@@ -150,7 +151,7 @@ namespace SMD.Models.IdentityModels
 
             if (source.IndustryId.HasValue)
             {
-                IndustryID = source.IndustryId;
+                IndustryId = source.IndustryId;
             }
         }
 

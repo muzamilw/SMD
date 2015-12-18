@@ -67,6 +67,10 @@
         <AssociationConnector Association="DomainModels.FK_SurveyQuestionTargetCriteria_Industry" />
         <EntityTypeShape EntityType="DomainModels.Currency" Width="1.5" PointX="0.75" PointY="17" />
         <AssociationConnector Association="DomainModels.FK_SMDPrice_Currency" />
+        <EntityTypeShape EntityType="DomainModels.Account" Width="1.5" PointX="5.875" PointY="27" />
+        <EntityTypeShape EntityType="DomainModels.Transaction" Width="1.5" PointX="8.125" PointY="26.125" />
+        <AssociationConnector Association="DomainModels.FK_Account_AspNetUsers" />
+        <AssociationConnector Association="DomainModels.FK_Transaction_Account" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

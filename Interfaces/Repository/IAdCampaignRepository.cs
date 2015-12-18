@@ -7,7 +7,7 @@ namespace SMD.Interfaces.Repository
 {
     public interface IAdCampaignRepository : IBaseRepository<AdCampaign, long>
     {
-        List<CampaignGridModel> GetCampaignByUserId();
+       
 
         /// <summary>
         /// Get Ad Campaigns
@@ -15,6 +15,6 @@ namespace SMD.Interfaces.Repository
         IEnumerable<AdCampaign> SearchAdCampaigns(AdCampaignSearchRequest request, out int rowCount);
 
         IEnumerable<AdCampaign> SearchCampaign(AdCampaignSearchRequest request, out int rowCount);
-        long createCampaign(AdCampaign campaignObj);
+       
     }
 }

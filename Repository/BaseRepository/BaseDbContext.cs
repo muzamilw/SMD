@@ -1,9 +1,10 @@
-﻿using System;
-using System.Data.Entity;
-using System.Linq.Expressions;
-using Microsoft.Practices.Unity;
+﻿using Microsoft.Practices.Unity;
 using SMD.Models.DomainModels;
 using SMD.Models.IdentityModels;
+using System;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.Linq.Expressions;
 
 namespace SMD.Repository.BaseRepository
 {
@@ -165,7 +166,41 @@ namespace SMD.Repository.BaseRepository
         /// Profile Question User Answers
         /// </summary>
         public DbSet<ProfileQuestionUserAnswer> ProfileQuestionUserAnswers { get; set; }
+       
+        /// <summary>
+        /// Industry
+        /// </summary>
+        public DbSet<Industry> Industries { get; set; }
+        /// <summary>
+        /// Product
+        /// </summary>
+        public DbSet<Product> Products { get; set; }
+        
+        /// <summary>
+        /// Currency
+        /// </summary>
+        public DbSet<Currency> Currencies { get; set; }
+        
+        /// <summary>
+        /// Account
+        /// </summary>
+        public DbSet<Account> Accounts { get; set; }
+        /// <summary>
+        /// Transaction
+        /// </summary>
+        public DbSet<Transaction> Transactions { get; set; }
 
+
+        /// <summary>
+        /// Get Ad-Campaigns for APIs 
+        /// </summary>
+        public System.Data.Entity.Core.Objects.ObjectResult<GetAds_Result> GetAdCompaignForApi(string userId, int FromRow, int ToRow)
+        {
+            var uId = new System.Data.Entity.Core.Objects.ObjectParameter("UserID", userId);
+            var fRow = new System.Data.Entity.Core.Objects.ObjectParameter("FromRow", FromRow);
+            var tRow = new System.Data.Entity.Core.Objects.ObjectParameter("ToRow", ToRow);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAds_Result>("GetAds", uId, fRow, tRow);
+        }
         #endregion
     }
 }
