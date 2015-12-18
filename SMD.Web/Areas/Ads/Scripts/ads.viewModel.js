@@ -33,6 +33,7 @@ define("ads/ads.viewModel",
                     selectedLocationLong = ko.observable(0),
                     ageRange = ko.observableArray([]),
                     isNewCriteria = ko.observable(true),
+                    isEnableUploadImageLink = ko.observable(false),
                     getAdCampaignGridContent = function () {
                         dataservice.getCampaignData({
                             FirstLoad: true,
@@ -97,9 +98,11 @@ define("ads/ads.viewModel",
                         campaignModel().reset();
                         view.initializeTypeahead();
                     },
+
                     closeNewCampaignDialog = function () {
                         isEditorVisible(false);
                     },
+
                     saveCampaignData = function () {
                           
                           for (var i = 0; i < $('div.count_city_newcnt').length; i++)
@@ -145,7 +148,6 @@ define("ads/ads.viewModel",
                           });
 
                     },
-
 
                     // Add new profile Criteria
                     addNewProfileCriteria = function () {
@@ -207,6 +209,7 @@ define("ads/ads.viewModel",
                             });
                         }
                     },
+
                     saveCriteria = function () {
                         if (selectedCriteria().Type() == "1")
                         {
@@ -242,6 +245,7 @@ define("ads/ads.viewModel",
                        
                         isShowSurveyAns(false);
                     },
+
                     onEditCriteria = function (item) {
                         isNewCriteria(false);
                         var val = item.PQAnswerID() + 0;
@@ -323,14 +327,14 @@ define("ads/ads.viewModel",
                         isShowSurveyAns(true);
                     },
 
-
-                     onRemoveLocation = function (item) {
+                    onRemoveLocation = function (item) {
                          // Ask for confirmation
                          confirmation.afterProceed(function () {
                              deleteLocation(item);
                          });
                          confirmation.show();
-                     },
+                    },
+
                     deleteLocation = function (item) {
                         console.log(item.ID());
                         if (item.ID() != 0) {
@@ -370,10 +374,12 @@ define("ads/ads.viewModel",
                         $(".locVisibility,.locMap").css("display", "none");
                         resetLocations();
                     },
+
                     resetLocations = function () {
                         $("#searchCampaignLocations").val("");
                         selectedLocationRadius("");
                     },
+
                     addLanguage = function (selected) {
                         console.log(campaignModel());
                         campaignModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
@@ -386,6 +392,7 @@ define("ads/ads.viewModel",
                         }));
                         $("#searchLanguages").val("");
                     },
+
                     onRemoveLanguage = function (item) {
                         // Ask for confirmation
                         confirmation.afterProceed(function () {
@@ -393,6 +400,7 @@ define("ads/ads.viewModel",
                         });
                         confirmation.show();
                     },
+
                     deleteLanguage = function (item) {
                         console.log(item.ID());
                         if (item.ID() != 0) {
@@ -421,6 +429,18 @@ define("ads/ads.viewModel",
                         }
                         return (campaignModel().hasChanges());
                     }),
+
+                     OnChangeCampaignType = function () {
+                         if (campaignModel().Type() == "3") {
+                             isEnableUploadImageLink(true);
+                         } else {
+                             isEnableUploadImageLink(false);
+                             if (campaignModel().Type() == "2") {
+
+                             }
+                         }
+                     },
+
                     // Initialize the view model
                     initialize = function (specifiedView) {
                         view = specifiedView; 
@@ -432,6 +452,7 @@ define("ads/ads.viewModel",
                         getAdCampaignGridContent();
                        
                     };
+
                     return {
                         initialize: initialize,
                         pager: pager,
@@ -470,7 +491,8 @@ define("ads/ads.viewModel",
                         onRemoveLanguage: onRemoveLanguage,
                         deleteLanguage: deleteLanguage,
                         ageRange: ageRange,
-                        isNewCriteria: isNewCriteria
+                        isNewCriteria: isNewCriteria,
+                        isEnableUploadImageLink: isEnableUploadImageLink
                     };
             })()
         };
