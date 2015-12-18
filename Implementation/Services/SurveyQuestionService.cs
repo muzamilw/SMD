@@ -157,6 +157,9 @@ namespace SMD.Implementation.Services
             {
                 survey.UserId = surveyQuestionRepository.LoggedInUserIdentity;
                 survey.Type = (int)SurveyQuestionType.Advertiser;
+                survey.StartDate = survey.StartDate.Value.Subtract(surveyQuestionRepository.UserTimezoneOffSet);
+                survey.EndDate = survey.EndDate.Value.Subtract(surveyQuestionRepository.UserTimezoneOffSet);
+                survey.SubmissionDate = DateTime.Now;
                 surveyQuestionRepository.Add(survey);
                 surveyQuestionRepository.SaveChanges();
                 string[] paths = SaveSurveyImages(survey);
@@ -176,6 +179,10 @@ namespace SMD.Implementation.Services
         public SurveyQuestionEditResponseModel GetSurveyQuestion(long SqId)
         {
             SurveyQuestion Servey = surveyQuestionRepository.Get(SqId);
+            if(Servey.StartDate.HasValue)
+                Servey.StartDate = Servey.StartDate.Value.Add(surveyQuestionRepository.UserTimezoneOffSet);
+            if(Servey.EndDate.HasValue)
+                 Servey.EndDate = Servey.EndDate.Value.Add(surveyQuestionRepository.UserTimezoneOffSet);
             Servey.SurveyQuestionResponses = null;
             foreach (var criteria in Servey.SurveyQuestionTargetCriterias)
             {
