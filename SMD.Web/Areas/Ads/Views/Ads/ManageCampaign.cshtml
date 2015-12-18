@@ -97,7 +97,7 @@
                                     <label for="ddpLanguage" class="control-label text-right tooltip-float">Select Language</label>
                                 </div>
                                 <div class="col-lg-6">
-                                    <select id="ddpLanguage" class="form-control" data-bind="options: $root.langs, optionsText: 'LanguageName', optionsValue: 'LanguageId'"></select>
+                                    <select id="ddpLanguage" class="form-control" data-bind="options: $root.langs, optionsText: 'LanguageName', optionsValue: 'LanguageId', value: LanguageId"></select>
                                 </div>
                             </div>
                             <div class="form-group" style="margin-bottom:11px;">
@@ -111,20 +111,20 @@
                                 </div>
                                 <div class="col-lg-6">
                                    
-                                    <div class="radio pull-left mright60">
+                                    <div class="radio col-lg-3">
                                         <input type="radio" name="optionsRadiosStoreType" id="optionsRadiosVideos" value="1" data-bind="checked: Type, event:{ change: $root.OnChangeCampaignType }">
                                         <label for="optionsRadiosVideos">
                                             Video
                                         </label>
                                     </div>
-                                    <div class="radio pull-left mright60">
+                                    <div class="radio col-lg-3">
                                         <input type="radio" name="optionsRadiosStoreType" id="optionsRadiosLink" value="2" data-bind="checked: Type, event:{ change: $root.OnChangeCampaignType }">
                                         <label for="optionsRadiosLink">
                                             Link
                                         </label>
                                         <span class="help-block text-right"></span>
                                     </div>
-                                    <div class="radio pull-left">
+                                    <div class="radio col-lg-5">
                                         <input type="radio" name="optionsRadiosStoreType" id="optionsRadiosUploadImage" value="3" data-bind="checked: Type, event:{ change: $root.OnChangeCampaignType }">
                                         <label for="optionsRadiosUploadImage">
                                             Upload Image
@@ -145,8 +145,8 @@
 
                                             <div class="defaultImgUploadImage">
 
-                                                <img style="width:auto;height:80px;max-width:200px;" data-bind="visible: CampaignTypeImagePath() == null  ,attr: { src: '@Url.Content("~/")' + CampaignTypeImagePath() }" src="/Content/Images/Company_Default.png" />
-                                                <img style="width:auto;height:80px;max-width:200px;" data-bind="visible: CampaignTypeImagePath() !=null ,attr: { src: CampaignTypeImagePath }" />
+                                                <img style="width:auto;height:80px;max-width:200px;" data-bind="visible: CampaignTypeImagePath() == ''" src="/Content/Images/Company_Default.png" />
+                                                <img style="width:auto;height:80px;max-width:200px;" data-bind="visible: CampaignTypeImagePath() != '' ,attr: { src: CampaignTypeImagePath }" />
 
                                             </div>
 
@@ -196,20 +196,20 @@
                                     <label for="txtGender" class="control-label text-right tooltip-float">Gender</label>
                                 </div>
                                 <div class="col-lg-6">
-                                    <div class="radio pull-left mright60">
+                                    <div class="radio col-lg-3">
                                         <input type="radio" name="optionsRadiosGender" id="optionsRadiosGenderAll" value="1" data-bind="checked: Gender">
                                         <label for="optionsRadiosGenderAll">
                                             All
                                         </label>
                                     </div>
-                                    <div class="radio pull-left mright60">
+                                    <div class="radio col-lg-3">
                                         <input type="radio" name="optionsRadiosGender" id="optionsRadiosGenderMEn" value="2" data-bind="checked: Gender">
                                         <label for="optionsRadiosGenderMEn">
                                             Men
                                         </label>
                                         <span class="help-block text-right"></span>
                                     </div>
-                                    <div class="radio">
+                                    <div class="radio col-lg-5">
                                         <input type="radio" name="optionsRadiosGender" id="optionsRadiosGenderWMEn" value="3" data-bind="checked: Gender">
                                         <label for="optionsRadiosGenderWMEn">
                                             Women
@@ -229,7 +229,7 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div id="coun_token_cnt">
-                                        <!-- ko template: { name: 'AdCampaignLocationTemplate' , foreach: AdCampaignTargetLocation } -->
+                                        <!-- ko template: { name: 'AdCampaignLocationTemplate' , foreach: AdCampaignTargetLocations } -->
                                         <!-- /ko -->
                                     </div>
                                     <div class="clearfix"></div>
@@ -318,10 +318,14 @@
                                             <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
                                         </a>
                                     </div>
-                                    <label for="txtBudget" class="control-label text-right tooltip-float">Budget</label>
+                                    <label for="txtBudget" class="control-label text-right tooltip-float">Max Budget</label>
                                 </div>
                                 <div class="col-lg-6">
-                                    <input type="text" name="Budget" class="form-control" id="txtBudget" data-bind="value: MaxBudget">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">$</span>
+                                        <input type="text" name="Budget" class="form-control" id="txtBudget" data-bind="value: MaxBudget">
+                                        <span class="input-group-addon">.00</span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -355,77 +359,227 @@
                                 </div>
 
                             </div>
-                            <div class="form-group">
-                                <div class="col-lg-3 text-right">
-                                    <div class="bs-example-tooltips tooltip-float-width">
-                                        <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
-                                            <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                          
+                            <div class="clearfix col-lg-9">
+                                <header class="main-box-header clearfix" style="padding-right:0px;">
+                                    <div class="filter-block pull-right">
+                                        <a href="#" id="addTemplatePageBtn" class="btn btn-primary pull-right" data-toggle="modal" data-target=".bs-example-modal-lg" data-bind="click: $root.addNewSurveyCriteria">
+                                            Add Survey Criteria
                                         </a>
-                                    </div>
-                                    <label for="txtVerifyQuestion" class="control-label text-right tooltip-float">Enter your question</label>
-                                </div>
-                                <div class="col-lg-6">
-                                    <input type="text" class="form-control" id="txtVerifyQuestion" placeholder="Enter your question" data-bind="value: VerifyQuestion">
+                                        <a href="#" id="addTemplatePageBtn" class="btn btn-primary pull-right" data-toggle="modal" data-target=".bs-example-modal-lg" data-bind="click: $root.addNewProfileCriteria">
+                                            Add Profile Criteria
+                                        </a>
+                                        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                                            <div class="modal-dialog modal-lg">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                        <h4 class="modal-title" id="gridSystemModalLabel">Add Criteria</h4>
+                                                    </div>
+                                                    <div class="modal-body" data-bind="with:$root.selectedCriteria">
+                                                        <div class="row">
+                                                            <div class="col-lg-9 marginBottom12">
+                                                                <div class="form-group">
+                                                                    <div class="col-lg-5 text-right">
+                                                                        <div class="bs-example-tooltips tooltip-float-width">
+                                                                            <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
+                                                                                <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                                            </a>
+                                                                        </div>
+                                                                        <label class="control-label text-right tooltip-float">Include Criteria</label>
+                                                                    </div>
+                                                                    <div class="col-lg-5">
+                                                                        <div class="onoffswitch" style="margin-right:0px;">
+                                                                            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchToInclude" data-bind="checked: IncludeorExclude">
+                                                                            <label class=" onoffswitch-label" for="switchToInclude">
+                                                                                <div class="onoffswitch-inner"></div>
+                                                                                <div class="onoffswitch-switch"></div>
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div data-bind="visible: Type() == 1">
+                                                                <div class="col-lg-9 marginBottom12">
+                                                                    <div class="form-group">
+                                                                        <div class="col-lg-5 text-right">
+                                                                            <div class="bs-example-tooltips tooltip-float-width">
+                                                                                <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
+                                                                                    <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                                                </a>
+                                                                            </div>
+                                                                            <label class="control-label text-right tooltip-float">Select Profile Question Criteria</label>
+                                                                        </div>
+                                                                        <div class="col-lg-5">
+                                                                            <select id="ddprofileQuestion" class="form-control" data-bind="options: $root.profileQuestionList, optionsText: 'Question', optionsValue: 'PqId', optionsCaption: '&lt;' + 'Select Question'+ '&gt;' , value:PQID, event: { change: $root.onChangeProfileQuestion } "></select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
 
+                                                                <div id="profileAnswersContainer" class="col-lg-9 marginBottom12" data-bind="visible: $root.profileAnswerList().length > 0">
+                                                                    <div class="form-group">
+                                                                        <div class="col-lg-5 text-right">
+                                                                            <div class="bs-example-tooltips tooltip-float-width">
+                                                                                <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
+                                                                                    <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                                                </a>
+                                                                            </div>
+                                                                            <label class="control-label text-right tooltip-float">Select Answer</label>
+                                                                        </div>
+                                                                        <div class="col-lg-5">
+                                                                            <select id="ddprofileAnswers" class="form-control" data-bind="options: $root.profileAnswerList,  optionsText: 'Answer', optionsValue: 'PqAnswerId', optionsCaption: '&lt;' + 'Select Answer'+ '&gt;' , value:PQAnswerID"></select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div data-bind="visible: Type() == 2">
+                                                                <div class="col-lg-9 marginBottom12">
+                                                                    <div class="form-group">
+                                                                        <div class="col-lg-5 text-right">
+                                                                            <div class="bs-example-tooltips tooltip-float-width">
+                                                                                <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
+                                                                                    <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                                                </a>
+                                                                            </div>
+                                                                            <label class="control-label text-right tooltip-float">Select Survey Question Criteria</label>
+                                                                        </div>
+                                                                        <div class="col-lg-5">
+                                                                            <select id="ddsurveyQuestion" class="form-control" data-bind="options: $root.surveyQuestionList, optionsText: 'DisplayQuestion', optionsValue: 'SQID', optionsCaption: '&lt;' + 'Select Question'+ '&gt;' , value:SQID, event: { change: $root.onChangeSurveyQuestion } "></select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div id="surveyAnswersContainer" class="col-lg-9 marginBottom12" data-bind="visible: $root.isShowSurveyAns() ==  true">
+                                                                    <div class="form-group">
+                                                                        <div class="col-lg-5 text-right">
+                                                                            <div class="bs-example-tooltips tooltip-float-width">
+                                                                                <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
+                                                                                    <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                                                </a>
+                                                                            </div>
+                                                                            <label class="control-label text-right tooltip-float">Select Answer</label>
+                                                                        </div>
+                                                                        <div class="col-lg-5">
+                                                                            <div class="radio">
+                                                                                <input type="radio" name="optionsRadiosSurveyAns" id="optionsRadiosSurveyAnsLeft" value="1" data-bind="checked: SQAnswer">
+                                                                                <label for="optionsRadiosSurveyAnsLeft">
+                                                                                    <img style="width:100px;height:auto;" data-bind="attr: { src: surveyQuestLeftImageSrc }" />
+                                                                                </label>
+                                                                            </div>
+                                                                            <div class="radio">
+                                                                                <input type="radio" name="optionsRadiosSurveyAns" id="optionsRadiosSurveyAnsRight" value="2" data-bind="checked: SQAnswer">
+                                                                                <label for="optionsRadiosSurveyAnsRight">
+                                                                                    <img style="width:100px;height:auto;" data-bind="attr: { src: surveyQuestRightImageSrc }" />
+                                                                                </label>
+                                                                                <span class="help-block text-right"></span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" data-dismiss="modal" class="btn btn-primary" data-bind="click:$root.saveCriteria">Save</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </header>
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th class="col-lg-11"><span>Selected Criteria's</span></th>
+                                                <th>&nbsp;</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- ko template: { name: 'answersTemplate', foreach: AdCampaignTargetCriterias } -->
+                                            <!-- /ko -->
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <div class="col-lg-3 text-right">
-                                    <div class="bs-example-tooltips tooltip-float-width">
-                                        <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
-                                            <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                        </a>
-                                    </div>
-                                    <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float">Answer 1</label>
-                                </div>
-                                <div class="col-lg-6">
-                                    <input type="text" class="form-control" id="txtVerifyAnswer1" placeholder="Enter your answer 1" data-bind="value: Answer1">
+                            <div class="clearfix">
 
+                            </div>
+                            <div class="col-lg-9" data-bind="visible: $root.isEnableUploadImageLink">
+                                <div>
+                                    <h4 class="ad_h4">Additional targeting Criteria</h4>
+                                   
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-4 text-right">
+                                        <div class="bs-example-tooltips tooltip-float-width">
+                                            <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
+                                                <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                            </a>
+                                        </div>
+                                        <label for="txtVerifyQuestion" class="control-label text-right tooltip-float">Enter your question</label>
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <input type="text" class="form-control" id="txtVerifyQuestion" placeholder="Enter your question" data-bind="value: VerifyQuestion">
+
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-4 text-right">
+                                        <div class="bs-example-tooltips tooltip-float-width">
+                                            <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
+                                                <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                            </a>
+                                        </div>
+                                        <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float">Answer 1</label>
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <input type="text" class="form-control" id="txtVerifyAnswer1" placeholder="Enter your answer 1" data-bind="value: Answer1">
+
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-4 text-right">
+                                        <div class="bs-example-tooltips tooltip-float-width">
+                                            <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
+                                                <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                            </a>
+                                        </div>
+                                        <label for="txtVerifyAnswer2" class="control-label text-right tooltip-float">Answer 2</label>
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <input type="text" class="form-control" id="txtVerifyAnswer2" placeholder="Enter your answer 2" data-bind="value: Answer2">
+
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-4 text-right">
+                                        <div class="bs-example-tooltips tooltip-float-width">
+                                            <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
+                                                <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                            </a>
+                                        </div>
+                                        <label for="txtVerifyAnswer3" class="control-label text-right tooltip-float">Answer 3</label>
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <input type="text" class="form-control" id="txtVerifyAnswer3" placeholder="Enter your answer 3" data-bind="value: Answer3">
+
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-4 text-right">
+                                        <div class="bs-example-tooltips tooltip-float-width">
+                                            <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
+                                                <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                            </a>
+                                        </div>
+                                        <label for="txtCorrectAnswer" class="control-label text-right tooltip-float">Correct Answer</label>
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <select class="form-control" data-bind="options: $root.correctAnswers, optionsText: 'name', optionsValue: 'id', value: CorrectAnswer"></select>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <div class="col-lg-3 text-right">
-                                    <div class="bs-example-tooltips tooltip-float-width">
-                                        <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
-                                            <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                        </a>
-                                    </div>
-                                    <label for="txtVerifyAnswer2" class="control-label text-right tooltip-float">Answer 2</label>
-                                </div>
-                                <div class="col-lg-6">
-                                    <input type="text" class="form-control" id="txtVerifyAnswer2" placeholder="Enter your answer 2" data-bind="value: Answer2">
-
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-lg-3 text-right">
-                                    <div class="bs-example-tooltips tooltip-float-width">
-                                        <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
-                                            <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                        </a>
-                                    </div>
-                                    <label for="txtVerifyAnswer3" class="control-label text-right tooltip-float">Answer 3</label>
-                                </div>
-                                <div class="col-lg-6">
-                                    <input type="text" class="form-control" id="txtVerifyAnswer3" placeholder="Enter your answer 3" data-bind="value: Answer3">
-
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-lg-3 text-right">
-                                    <div class="bs-example-tooltips tooltip-float-width">
-                                        <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
-                                            <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                        </a>
-                                    </div>
-                                    <label for="txtCorrectAnswer" class="control-label text-right tooltip-float">Correct Answer</label>
-                                </div>
-                                <div class="col-lg-6">
-                                    <input type="text" class="form-control" id="txtCorrectAnswer" placeholder="Enter your correct answer" data-bind="value: CorrectAnswer">
-
-                                </div>
-                            </div>
-
                         </div>
 
                         <div class="col-lg-3 col-md-4 col-sm-4">
@@ -436,8 +590,8 @@
                                     <div class="col-lg-12">
 
                                         <div style="width:210px;text-align:center;">
-                                            <img style="width:auto;height:80px;max-width:200px;" data-bind="visible:CampaignImagePath() == null  ,attr: { src: '@Url.Content("~/")' + CampaignImagePath() }" src="/Content/Images/Company_Default.png" />
-                                            <img style="width:auto;height:80px;max-width:200px;" data-bind="visible:CampaignImagePath() !=null ,attr: { src: CampaignImagePath }" />
+                                            <img style="width:auto;height:80px;max-width:200px;" data-bind="visible:CampaignImagePath() == ''" src="/Content/Images/Company_Default.png" />
+                                            <img style="width:auto;height:80px;max-width:200px;" data-bind="visible:CampaignImagePath() != '' ,attr: { src: CampaignImagePath }" />
 
                                         </div>
 
@@ -463,148 +617,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="clearfix">
-                            <header class="main-box-header clearfix" style="padding-right:0px;">
-                                <div class="filter-block pull-right">
-                                    <a href="#" id="addTemplatePageBtn" class="btn btn-primary pull-right" data-toggle="modal" data-target=".bs-example-modal-lg" data-bind="click: $root.addNewSurveyCriteria">
-                                        Add Survey Criteria
-                                    </a>
-                                    <a href="#" id="addTemplatePageBtn" class="btn btn-primary pull-right" data-toggle="modal" data-target=".bs-example-modal-lg" data-bind="click: $root.addNewProfileCriteria">
-                                        Add Profile Criteria
-                                    </a>
-                                    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-                                        <div class="modal-dialog modal-lg">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                    <h4 class="modal-title" id="gridSystemModalLabel">Add Criteria</h4>
-                                                </div>
-                                                <div class="modal-body" data-bind="with:$root.selectedCriteria">
-                                                    <div class="row">
-                                                        <div class="col-lg-9 marginBottom12">
-                                                            <div class="form-group">
-                                                                <div class="col-lg-5 text-right">
-                                                                    <div class="bs-example-tooltips tooltip-float-width">
-                                                                        <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
-                                                                            <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                                        </a>
-                                                                    </div>
-                                                                    <label class="control-label text-right tooltip-float">Include Criteria</label>
-                                                                </div>
-                                                                <div class="col-lg-5">
-                                                                    <div class="onoffswitch" style="margin-right:0px;">
-                                                                        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchToInclude" data-bind="checked: IncludeorExclude">
-                                                                        <label class=" onoffswitch-label" for="switchToInclude">
-                                                                            <div class="onoffswitch-inner"></div>
-                                                                            <div class="onoffswitch-switch"></div>
-                                                                        </label>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div data-bind="visible: Type() == 1">
-                                                            <div class="col-lg-9 marginBottom12">
-                                                                <div class="form-group">
-                                                                    <div class="col-lg-5 text-right">
-                                                                        <div class="bs-example-tooltips tooltip-float-width">
-                                                                            <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
-                                                                                <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                                            </a>
-                                                                        </div>
-                                                                        <label class="control-label text-right tooltip-float">Select Profile Question Criteria</label>
-                                                                    </div>
-                                                                    <div class="col-lg-5">
-                                                                        <select id="ddprofileQuestion" class="form-control" data-bind="options: $root.profileQuestionList, optionsText: 'Question', optionsValue: 'PqId', optionsCaption: '&lt;' + 'Select Question'+ '&gt;' , value:PQID, event: { change: $root.onChangeProfileQuestion } "></select>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div id="profileAnswersContainer" class="col-lg-9 marginBottom12" data-bind="visible: $root.profileAnswerList().length > 0">
-                                                                <div class="form-group">
-                                                                    <div class="col-lg-5 text-right">
-                                                                        <div class="bs-example-tooltips tooltip-float-width">
-                                                                            <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
-                                                                                <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                                            </a>
-                                                                        </div>
-                                                                        <label class="control-label text-right tooltip-float">Select Answer</label>
-                                                                    </div>
-                                                                    <div class="col-lg-5">
-                                                                        <select id="ddprofileAnswers" class="form-control" data-bind="options: $root.profileAnswerList,  optionsText: 'Answer', optionsValue: 'PqAnswerId', optionsCaption: '&lt;' + 'Select Answer'+ '&gt;' , value:PQAnswerID"></select>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div data-bind="visible: Type() == 2">
-                                                            <div class="col-lg-9 marginBottom12">
-                                                                <div class="form-group">
-                                                                    <div class="col-lg-5 text-right">
-                                                                        <div class="bs-example-tooltips tooltip-float-width">
-                                                                            <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
-                                                                                <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                                            </a>
-                                                                        </div>
-                                                                        <label class="control-label text-right tooltip-float">Select Survey Question Criteria</label>
-                                                                    </div>
-                                                                    <div class="col-lg-5">
-                                                                        <select id="ddsurveyQuestion" class="form-control" data-bind="options: $root.surveyQuestionList, optionsText: 'DisplayQuestion', optionsValue: 'SQID', optionsCaption: '&lt;' + 'Select Question'+ '&gt;' , value:SQID, event: { change: $root.onChangeSurveyQuestion } "></select>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div id="surveyAnswersContainer" class="col-lg-9 marginBottom12" data-bind="visible: $root.isShowSurveyAns() ==  true">
-                                                                <div class="form-group">
-                                                                    <div class="col-lg-5 text-right">
-                                                                        <div class="bs-example-tooltips tooltip-float-width">
-                                                                            <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
-                                                                                <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                                            </a>
-                                                                        </div>
-                                                                        <label class="control-label text-right tooltip-float">Select Answer</label>
-                                                                    </div>
-                                                                    <div class="col-lg-5">
-                                                                        <div class="radio">
-                                                                            <input type="radio" name="optionsRadiosSurveyAns" id="optionsRadiosSurveyAnsLeft" value="1" data-bind="checked: SQAnswer">
-                                                                            <label for="optionsRadiosSurveyAnsLeft">
-                                                                                <img style="width:100px;height:auto;" data-bind="attr: { src: surveyQuestLeftImageSrc }" />
-                                                                            </label>
-                                                                        </div>
-                                                                        <div class="radio">
-                                                                            <input type="radio" name="optionsRadiosSurveyAns" id="optionsRadiosSurveyAnsRight" value="2" data-bind="checked: SQAnswer">
-                                                                            <label for="optionsRadiosSurveyAnsRight">
-                                                                                <img style="width:100px;height:auto;" data-bind="attr: { src: surveyQuestRightImageSrc }" />
-                                                                            </label>
-                                                                            <span class="help-block text-right"></span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" data-dismiss="modal" class="btn btn-primary" data-bind="click:$root.saveCriteria">Save</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </header>
-                            <div class="table-responsive">
-                                <table class="table table-striped table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th class="col-lg-11"><span>Selected Criteria's</span></th>
-                                            <th>&nbsp;</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <!-- ko template: { name: 'answersTemplate', foreach: AdCampaignTargetCriterias } -->
-                                        <!-- /ko -->
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                       
                     </div>
                 </div>
             </div>
