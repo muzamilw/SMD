@@ -139,7 +139,7 @@ namespace SMD.Repository.Repositories
         /// </summary>
         public IEnumerable<GetAds_Result> GetAdCompaignForApi(string userId)
         {
-            return db.GetAdCompaignForApi(userId).ToList();
+            return db.GetAdCompaignForApi(userId,0,0).ToList();
         }
 
     }

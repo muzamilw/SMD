@@ -194,10 +194,12 @@ namespace SMD.Repository.BaseRepository
         /// <summary>
         /// Get Ad-Campaigns for APIs 
         /// </summary>
-        public System.Data.Entity.Core.Objects.ObjectResult<GetAds_Result> GetAdCompaignForApi(string userId)
+        public System.Data.Entity.Core.Objects.ObjectResult<GetAds_Result> GetAdCompaignForApi(string userId, int FromRow, int ToRow)
         {
             var uId = new System.Data.Entity.Core.Objects.ObjectParameter("UserID", userId);
-           return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAds_Result>("GetAds", uId);
+            var fRow = new System.Data.Entity.Core.Objects.ObjectParameter("FromRow", FromRow);
+            var tRow = new System.Data.Entity.Core.Objects.ObjectParameter("ToRow", ToRow);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAds_Result>("GetAds", uId, fRow, tRow);
         }
         #endregion
     }
