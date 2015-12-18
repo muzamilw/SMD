@@ -34,7 +34,7 @@ namespace SMD.MIS.ModelMappers
         public static SurveyForApiSearchResponse CreateFrom(
             this Models.ResponseModels.SurveyForApiSearchResponse source)
         {
-            return new GetSurveyForApiSearchResponse
+            return new SurveyForApiSearchResponse
             {
                 Surveys = source.Surveys.Select(survey => survey.CreateFrom()).ToList()
             };
