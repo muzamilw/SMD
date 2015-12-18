@@ -251,9 +251,9 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Get Ads For API  | baqer
         /// </summary>
-        public AdCampaignApiSearchRequestResponse GetAdCampaignsForApi(GetAdsApiRequest source)
+        public AdCampaignApiSearchRequestResponse GetAdCampaignsForApi(GetAdsApiRequest request)
         {
-           var response=  _surveyQuestionRepository.GetAdCompaignForApi("02de201f-f4ea-420e-a1a8-74e7c1975277");
+            var response = _surveyQuestionRepository.GetAdCompaignForApi(request);
             return new AdCampaignApiSearchRequestResponse
             {
                 AdCampaigns = response

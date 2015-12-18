@@ -137,9 +137,11 @@ namespace SMD.Repository.Repositories
         /// <summary>
         /// Get Ads Campaigns | SP-API | baqer
         /// </summary>
-        public IEnumerable<GetAds_Result> GetAdCompaignForApi(string userId)
+        public IEnumerable<GetAds_Result> GetAdCompaignForApi(GetAdsApiRequest request)
         {
-            return db.GetAdCompaignForApi(userId,0,0).ToList();
+            int fromRow = (request.PageNo - 1) * request.PageSize;
+            int toRow = request.PageSize;
+            return db.GetAdCompaignForApi(request.UserId, fromRow, toRow).ToList();
         }
 
     }
