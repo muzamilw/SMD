@@ -32,6 +32,9 @@ define("ads/ads.viewModel",
                     selectedLocationLat = ko.observable(0),
                     selectedLocationLong = ko.observable(0),
                     ageRange = ko.observableArray([]),
+                    isNewCriteria = ko.observable(true),
+                    isEnableUploadImageLink = ko.observable(false),
+                    campaignTypePlaceHolderValue = ko.observable('Enter a link'),
                     getAdCampaignGridContent = function () {
                         dataservice.getCampaignData({
                             FirstLoad: true,
@@ -48,9 +51,12 @@ define("ads/ads.viewModel",
                                     // set grid content
                                     campaignGridContent.removeAll();
                                     _.each(data.Campaigns, function (item) {
+                                        console.log(item);
                                         campaignGridContent.push(model.Campaign.Create(updateCampaignGridItem(item)));
                                     });
                                     pager().totalCount(data.TotalCount);
+
+                                    
                                 }
                                 
                             },
@@ -86,16 +92,20 @@ define("ads/ads.viewModel",
                     addNewCampaign = function () {
                         isEditorVisible(true);
                         campaignModel(new model.Campaign());
-                        selectedCriteria(new model.CriteriaModel());
+                        selectedCriteria(new model.AdCampaignTargetCriteriasModel());
                        
                         campaignModel().Gender('2');
                         campaignModel().Type('2');
                         campaignModel().reset();
                         view.initializeTypeahead();
+                        isEnableUploadImageLink(false);
+                        console.log(isEnableUploadImageLink());
                     },
+
                     closeNewCampaignDialog = function () {
                         isEditorVisible(false);
                     },
+
                     saveCampaignData = function () {
                           
                           for (var i = 0; i < $('div.count_city_newcnt').length; i++)
@@ -142,10 +152,9 @@ define("ads/ads.viewModel",
 
                     },
 
-
                     // Add new profile Criteria
                     addNewProfileCriteria = function () {
-                        
+                        isNewCriteria(true);
                         var objProfileCriteria = new model.AdCampaignTargetCriteriasModel();
                       
                         objProfileCriteria.Type("1");
@@ -177,6 +186,7 @@ define("ads/ads.viewModel",
 
                     // Add new survey Criteria
                     addNewSurveyCriteria = function () {
+                        isNewCriteria(true);
                         var objSurveyCriteria = new model.AdCampaignTargetCriteriasModel();
                         objSurveyCriteria.Type("2");
                         objSurveyCriteria.IncludeorExclude("1");
@@ -202,6 +212,7 @@ define("ads/ads.viewModel",
                             });
                         }
                     },
+
                     saveCriteria = function () {
                         if (selectedCriteria().Type() == "1")
                         {
@@ -222,21 +233,25 @@ define("ads/ads.viewModel",
                                 selectedCriteria().answerString(matchSurveyQuestion.RightPicturePath);
                             }
                         }
-                      
-                        campaignModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
-                            Type: selectedCriteria().Type(),
-                            PQID: selectedCriteria().PQID(),
-                            PQAnswerID: selectedCriteria().PQAnswerID(),
-                            SQID: selectedCriteria().SQID(),
-                            SQAnswer: selectedCriteria().SQAnswer(),
-                            questionString: selectedCriteria().questionString(),
-                            answerString: selectedCriteria().answerString(),
-                            IncludeorExclude: selectedCriteria().IncludeorExclude()
-                        }));
+                        if (isNewCriteria()) {
+                            campaignModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
+                                Type: selectedCriteria().Type(),
+                                PQID: selectedCriteria().PQID(),
+                                PQAnswerID: selectedCriteria().PQAnswerID(),
+                                SQID: selectedCriteria().SQID(),
+                                SQAnswer: selectedCriteria().SQAnswer(),
+                                questionString: selectedCriteria().questionString(),
+                                answerString: selectedCriteria().answerString(),
+                                IncludeorExclude: selectedCriteria().IncludeorExclude()
+                            }));
+                        }
+                       
                         isShowSurveyAns(false);
                     },
+
                     onEditCriteria = function (item) {
-                        console.log(item.Type());
+                        isNewCriteria(false);
+                        var val = item.PQAnswerID() + 0;
                         if (item.Type() == "1") {
                             dataservice.getBaseData({
                                 RequestId: 3,
@@ -244,10 +259,14 @@ define("ads/ads.viewModel",
                             }, {
                                 success: function (data) {
                                     if (data != null) {
-
+                                        _.each(data.ProfileQuestionAnswers, function (question) {
+                                            question.PQID = question.PqId;
+                                            question.PQAnswerID = question.PqAnswerId;
+                                        });
                                         profileAnswerList([]);
                                         ko.utils.arrayPushAll(profileAnswerList(), data.ProfileQuestionAnswers);
                                         profileAnswerList.valueHasMutated();
+                                        item.PQAnswerID(val);
                                     }
 
                                 },
@@ -311,14 +330,14 @@ define("ads/ads.viewModel",
                         isShowSurveyAns(true);
                     },
 
-
-                     onRemoveLocation = function (item) {
+                    onRemoveLocation = function (item) {
                          // Ask for confirmation
                          confirmation.afterProceed(function () {
                              deleteLocation(item);
                          });
                          confirmation.show();
-                     },
+                    },
+
                     deleteLocation = function (item) {
                         console.log(item.ID());
                         if (item.ID() != 0) {
@@ -358,10 +377,12 @@ define("ads/ads.viewModel",
                         $(".locVisibility,.locMap").css("display", "none");
                         resetLocations();
                     },
+
                     resetLocations = function () {
                         $("#searchCampaignLocations").val("");
                         selectedLocationRadius("");
                     },
+
                     addLanguage = function (selected) {
                         console.log(campaignModel());
                         campaignModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
@@ -374,6 +395,7 @@ define("ads/ads.viewModel",
                         }));
                         $("#searchLanguages").val("");
                     },
+
                     onRemoveLanguage = function (item) {
                         // Ask for confirmation
                         confirmation.afterProceed(function () {
@@ -381,6 +403,7 @@ define("ads/ads.viewModel",
                         });
                         confirmation.show();
                     },
+
                     deleteLanguage = function (item) {
                         console.log(item.ID());
                         if (item.ID() != 0) {
@@ -409,6 +432,28 @@ define("ads/ads.viewModel",
                         }
                         return (campaignModel().hasChanges());
                     }),
+
+                    OnChangeCampaignType = function () {
+                         if (campaignModel().Type() == "3") {
+                             isEnableUploadImageLink(true);
+                         } else {
+                             isEnableUploadImageLink(false);
+                             if (campaignModel().Type() == "1") {
+                                 campaignTypePlaceHolderValue('Enter a video embed code');
+                             } else {
+                                 campaignTypePlaceHolderValue('Enter a link');
+                             }
+                         }
+                    },
+
+                    campaignTypeImageCallback = function (file, data) {
+                        campaignModel().CampaignTypeImagePath(data);
+                    },
+
+                    campaignImageCallback = function (file, data) {
+                        campaignModel().CampaignImagePath(data);
+                    },
+
                     // Initialize the view model
                     initialize = function (specifiedView) {
                         view = specifiedView; 
@@ -418,8 +463,9 @@ define("ads/ads.viewModel",
                         }
                         pager(pagination.Pagination({ PageSize: 10 }, campaignGridContent, getAdCampaignGridContent));
                         getAdCampaignGridContent();
-                       
+                      
                     };
+
                     return {
                         initialize: initialize,
                         pager: pager,
@@ -457,7 +503,13 @@ define("ads/ads.viewModel",
                         addLanguage: addLanguage,
                         onRemoveLanguage: onRemoveLanguage,
                         deleteLanguage: deleteLanguage,
-                        ageRange: ageRange
+                        ageRange: ageRange,
+                        isNewCriteria: isNewCriteria,
+                        isEnableUploadImageLink: isEnableUploadImageLink,
+                        campaignTypePlaceHolderValue: campaignTypePlaceHolderValue,
+                        OnChangeCampaignType: OnChangeCampaignType,
+                        campaignTypeImageCallback: campaignTypeImageCallback,
+                        campaignImageCallback: campaignImageCallback
                     };
             })()
         };

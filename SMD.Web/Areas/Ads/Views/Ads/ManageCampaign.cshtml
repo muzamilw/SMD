@@ -110,24 +110,58 @@
                                     <label class="control-label text-right tooltip-float">Campaign Type</label>
                                 </div>
                                 <div class="col-lg-6">
-                                    <div class="col-lg-12" style="margin-left:-10px;">
-                                        <div class="radio">
-                                            <input type="radio" name="optionsRadiosStoreType" id="optionsRadiosVideos" value="1" data-bind="checked: Type">
-                                            <label for="optionsRadiosVideos">
-                                                Video
-                                            </label>
-                                        </div>
-                                        <div class="radio">
-                                            <input type="radio" name="optionsRadiosStoreType" id="optionsRadiosLink" value="2" data-bind="checked: Type">
-                                            <label for="optionsRadiosLink">
-                                                Link
-                                            </label>
-                                            <span class="help-block text-right"></span>
-                                        </div>
+                                   
+                                    <div class="radio pull-left mright60">
+                                        <input type="radio" name="optionsRadiosStoreType" id="optionsRadiosVideos" value="1" data-bind="checked: Type, event:{ change: $root.OnChangeCampaignType }">
+                                        <label for="optionsRadiosVideos">
+                                            Video
+                                        </label>
                                     </div>
-                                    <div class="col-lg-12" style="margin-left:-10px;">
-                                        <input type="text" class="form-control" id="txtLinkOfCampaign" placeholder="Enter a link" data-bind="value: LandingPageVideoLink">
+                                    <div class="radio pull-left mright60">
+                                        <input type="radio" name="optionsRadiosStoreType" id="optionsRadiosLink" value="2" data-bind="checked: Type, event:{ change: $root.OnChangeCampaignType }">
+                                        <label for="optionsRadiosLink">
+                                            Link
+                                        </label>
+                                        <span class="help-block text-right"></span>
+                                    </div>
+                                    <div class="radio pull-left">
+                                        <input type="radio" name="optionsRadiosStoreType" id="optionsRadiosUploadImage" value="3" data-bind="checked: Type, event:{ change: $root.OnChangeCampaignType }">
+                                        <label for="optionsRadiosUploadImage">
+                                            Upload Image
+                                        </label>
+                                        <span class="help-block text-right"></span>
+                                    </div>
+                                   <div class="clearfix">
 
+                                   </div>
+                                    <div data-bind="visible: !$root.isEnableUploadImageLink() ">
+
+                                        <textarea class="form-control" id="txtLinkOfCampaign"  rows="2" placeholder="" data-bind="value: LandingPageVideoLink, attr:{placeholder : $root.campaignTypePlaceHolderValue}"></textarea>
+
+                                    </div>
+                                    <div class="col-lg-12" style="margin-left:-10px;" data-bind="visible: $root.isEnableUploadImageLink">
+
+                                        <div>
+
+                                            <div class="defaultImgUploadImage">
+
+                                                <img style="width:auto;height:80px;max-width:200px;" data-bind="visible: CampaignTypeImagePath() == null  ,attr: { src: '@Url.Content("~/")' + CampaignTypeImagePath() }" src="/Content/Images/Company_Default.png" />
+                                                <img style="width:auto;height:80px;max-width:200px;" data-bind="visible: CampaignTypeImagePath() !=null ,attr: { src: CampaignTypeImagePath }" />
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="defaultImgUploadImageBtn" >
+
+                                            <div class="col-lg-6" style="text-align:left;">
+                                                <div class="fileUpload btn btn-primary">
+                                                    <span>Upload </span>
+                                                    <input type="file" class="upload" id="campaignType_image_file" data-bind="files: { onLoaded: $root.campaignTypeImageCallback, fileFilter: 'image.*'}" />
+                                                </div>
+                                            </div>
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -162,13 +196,13 @@
                                     <label for="txtGender" class="control-label text-right tooltip-float">Gender</label>
                                 </div>
                                 <div class="col-lg-6">
-                                    <div class="radio">
+                                    <div class="radio pull-left mright60">
                                         <input type="radio" name="optionsRadiosGender" id="optionsRadiosGenderAll" value="1" data-bind="checked: Gender">
                                         <label for="optionsRadiosGenderAll">
                                             All
                                         </label>
                                     </div>
-                                    <div class="radio">
+                                    <div class="radio pull-left mright60">
                                         <input type="radio" name="optionsRadiosGender" id="optionsRadiosGenderMEn" value="2" data-bind="checked: Gender">
                                         <label for="optionsRadiosGenderMEn">
                                             Men
@@ -402,7 +436,9 @@
                                     <div class="col-lg-12">
 
                                         <div style="width:210px;text-align:center;">
-                                            <img src="/Content/Images/Company_Default.png">
+                                            <img style="width:auto;height:80px;max-width:200px;" data-bind="visible:CampaignImagePath() == null  ,attr: { src: '@Url.Content("~/")' + CampaignImagePath() }" src="/Content/Images/Company_Default.png" />
+                                            <img style="width:auto;height:80px;max-width:200px;" data-bind="visible:CampaignImagePath() !=null ,attr: { src: CampaignImagePath }" />
+
                                         </div>
 
                                     </div>
@@ -418,15 +454,12 @@
                                         <div class="col-lg-6" style="text-align:left;">
                                             <div class="fileUpload btn btn-primary">
                                                 <span>Upload </span>
-                                                <input type="file" class="upload" id="image_files" multiple data-bind="files: { onLoaded: $root.storeImageFilesLoadedCallback, fileFilter: 'image.*'}" />
+                                                <input type="file" class="upload" id="campaign_image_files" data-bind="files: { onLoaded: $root.campaignImageCallback, fileFilter: 'image.*'}" />
                                             </div>
                                         </div>
 
                                     </div>
-                                    <div class="col-lg-12 ThoumbnailCostCenter" style="text-align:center;margin-top:5px;width:240px;margin-left:5px;">
-
-                                    </div>
-
+                                 
                                 </div>
                             </div>
                         </div>

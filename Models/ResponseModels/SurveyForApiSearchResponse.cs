@@ -4,13 +4,13 @@ using System.Collections.Generic;
 namespace SMD.Models.ResponseModels
 {
     /// <summary>
-    /// Get Ad Campaign | API Reposne
+    /// Get Surveys| API Reposne | Domain
     /// </summary>
-    public class AdCampaignApiSearchRequestResponse
+    public class SurveyForApiSearchResponse
     {
         /// <summary>
-        /// List of AdCampaigns
+        /// List of Surveys
         /// </summary>
-        public IEnumerable<GetAds_Result> AdCampaigns { get; set; }
+        public IEnumerable<GetSurveysResults> Surveys { get; set; }
     }
 }

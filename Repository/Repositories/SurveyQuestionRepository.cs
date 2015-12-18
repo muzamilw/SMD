@@ -88,7 +88,7 @@ namespace SMD.Repository.Repositories
         }
 
         /// <summary>
-        /// Get Rejected Survey Questions
+        /// Get Rejected Survey Questions | baqer
         /// </summary>
         public IEnumerable<SurveyQuestion> SearchRejectedProfileQuestions(SurveySearchRequest request, out int rowCount)
         {
@@ -118,20 +118,31 @@ namespace SMD.Repository.Repositories
         {
             return DbSet.Select(survey => survey).ToList();
         }
-        // <summary>
-        /// update survey images
-        /// </summary>
-        public bool updateSurveyImages(string[] imagePathsList,long surveyID)
+        public SurveyQuestion Get(long SqId)
         {
-            SurveyQuestion survey = DbSet.Where(g => g.SqId == surveyID).SingleOrDefault();
-            if(survey != null)
-            {
-                survey.LeftPicturePath = imagePathsList[0];
-                survey.RightPicturePath = imagePathsList[1];
-                SaveChanges();
-                return true;
-            }
-            return false;
+            db.Configuration.ProxyCreationEnabled = false;
+            db.Configuration.LazyLoadingEnabled = false;
+            return DbSet.Where(survey => survey.SqId == SqId).Include("SurveyQuestionTargetCriterias").Include("SurveyQuestionTargetLocations").SingleOrDefault();
+        }
+
+        /// <summary>
+        /// Get Ads Campaigns | SP-API | baqer
+        /// </summary>
+        public IEnumerable<GetAds_Result> GetAdCompaignForApi(GetAdsApiRequest request)
+        {
+            int fromRow = (request.PageNo - 1) * request.PageSize;
+            int toRow = request.PageSize;
+            return db.GetAdCompaignForApi(request.UserId, fromRow, toRow).ToList();
+        }
+
+        /// <summary>
+        /// Get Surveys | SP-API | baqer
+        /// </summary>
+        public IEnumerable<GetSurveysResults> GetSurveysForApi(GetSurveysApiRequest request)
+        {
+            int fromRow = (request.PageNo - 1) * request.PageSize;
+            int toRow = request.PageSize;
+            return db.GetSurveysForApi(request.UserId, fromRow, toRow).ToList();  
         }
     }
 }

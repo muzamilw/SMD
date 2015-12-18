@@ -37,6 +37,7 @@ define("survey/survey.viewModel",
                     surveyQuestionList = ko.observableArray([]),
                     profileAnswerList = ko.observable([]),
                     editCriteriaHeading = ko.observable("Add Profile Criteria"),
+                    titleText = ko.observable("Add new survey"),
                     isNewCriteria = ko.observable(true),
                     // age list 
                     ageRange = ko.observableArray([])
@@ -137,13 +138,13 @@ define("survey/survey.viewModel",
                     },
                     // Add new Profile Question
                     addNewSurvey = function () {
+                        titleText("Add new survey");
                         selectedQuestion(new model.Survey());
                         selectedQuestion().Gender("1");
                         selectedQuestion().LeftPicturePath("Content/Images/Company_Default.png");
                         selectedQuestion().RightPicturePath("Content/Images/Company_Default.png");
                         selectedQuestion().StatusValue("Draft");
                         selectedQuestion().Status(1);
-                    //    selectedQuestion().SQID(0);
                         selectedQuestion().reset();
                         isEditorVisible(true);
                         view.initializeTypeahead();
@@ -154,8 +155,25 @@ define("survey/survey.viewModel",
                     },
                     // On editing of existing PQ
                     onEditSurvey = function (item) {
-                       //call function to edit survey
-                        isEditorVisible(true);
+                        titleText("Edit survey");
+                        //call function to edit survey
+                        dataservice.getSurveyQuestion(
+                           {
+                               SqId: item.SQID(),
+                               FirstLoad: false
+                           },
+                           {
+                               success: function (data) {
+                                   //
+                                   selectedQuestion(model.Survey.Create(updateSurveryItem(data.SurveyQuestion)));
+                                   selectedQuestion().reset();
+                                   isEditorVisible(true);
+                               },
+                               error: function () {
+                                   toastr.error("Failed to load  question!");
+                               }
+                           });
+                        
                     },
                     // store left side ans image
                     storeLeftImageCallback = function (file, data) {
@@ -179,12 +197,11 @@ define("survey/survey.viewModel",
                      },
                     //add location
                     onAddLocation = function (item) {
-                      
                         selectedLocation().Radius = (selectedLocationRadius);
                         selectedLocation().IncludeorExclude = (selectedLocationIncludeExclude);
                         selectedQuestion().SurveyQuestionTargetLocation.push( new model.SurveyQuestionTargetLocation.Create( {
-                            CountryID: selectedLocation().CountryID,
-                            CityID: selectedLocation().CityID,
+                            CountryId: selectedLocation().CountryID,
+                            CityId: selectedLocation().CityID,
                             Radius: selectedLocation().Radius(),
                             Country: selectedLocation().Country,
                             City: selectedLocation().City,
@@ -497,7 +514,8 @@ define("survey/survey.viewModel",
                     hasChangesOnQuestion: hasChangesOnQuestion,
                     editCriteriaHeading: editCriteriaHeading,
                     isNewCriteria: isNewCriteria,
-                    onSaveSurveyQuestion: onSaveSurveyQuestion
+                    onSaveSurveyQuestion: onSaveSurveyQuestion,
+                    titleText: titleText
                 };
             })()
         };

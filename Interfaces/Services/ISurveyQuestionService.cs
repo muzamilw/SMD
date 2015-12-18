@@ -14,16 +14,21 @@ namespace SMD.Interfaces.Services
         SurveyQuestionResponseModel GetSurveyQuestions();
 
         /// <summary>
-        /// Get Survey Questions that are need aprroval
+        /// Get Survey Questions that are need aprroval | baqer
         /// </summary>
         SurveyQuestionResposneModelForAproval GetRejectedSurveyQuestionsForAproval(SurveySearchRequest request);
 
         /// <summary>
-        /// Edit Survey Question 
+        /// Edit Survey Question | baqer
         /// </summary>
         SurveyQuestion EditSurveyQuestion(SurveyQuestion source);
 
         bool Create(SurveyQuestion survey);
-        SurveyQuestion GetSurveyQuestion(long SqId);
+        SurveyQuestionEditResponseModel GetSurveyQuestion(long SqId);
+
+        /// <summary>
+        /// Get Surveys For APi | baqer
+        /// </summary>
+        SurveyForApiSearchResponse GetSueveysForApi(GetSurveysApiRequest request);
     }
 }

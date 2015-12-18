@@ -13,12 +13,22 @@ namespace SMD.Interfaces.Repository
         IEnumerable<SurveyQuestion> SearchSurveyQuestions(SurveySearchRequest request, out int rowCount);
 
         /// <summary>
-        /// Get Rejected Survey Questions
+        /// Get Rejected Survey Questions | baqer
         /// </summary>
         IEnumerable<SurveyQuestion> SearchRejectedProfileQuestions(SurveySearchRequest request, out int rowCount);
 
         IEnumerable<SurveyQuestion> GetAll();
 
-        bool updateSurveyImages(string[] imagePathsList, long surveyID);
+        SurveyQuestion Get(long SqId);
+
+        /// <summary>
+        /// Get Ads Campaigns | SP-API | baqer
+        /// </summary>
+        IEnumerable<GetAds_Result> GetAdCompaignForApi(GetAdsApiRequest request);
+
+        /// <summary>
+        /// Get Surveys | SP-API | baqer
+        /// </summary>
+        IEnumerable<GetSurveysResults> GetSurveysForApi(GetSurveysApiRequest request);
     }
 }

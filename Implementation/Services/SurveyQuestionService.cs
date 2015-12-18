@@ -157,10 +157,18 @@ namespace SMD.Implementation.Services
             {
                 survey.UserId = surveyQuestionRepository.LoggedInUserIdentity;
                 survey.Type = (int)SurveyQuestionType.Advertiser;
+                survey.StartDate = survey.StartDate.Value.Subtract(surveyQuestionRepository.UserTimezoneOffSet);
+                survey.EndDate = survey.EndDate.Value.Subtract(surveyQuestionRepository.UserTimezoneOffSet);
+                survey.SubmissionDate = DateTime.Now;
                 surveyQuestionRepository.Add(survey);
                 surveyQuestionRepository.SaveChanges();
                 string[] paths = SaveSurveyImages(survey);
-                return surveyQuestionRepository.updateSurveyImages(paths, survey.SqId);
+               // return surveyQuestionRepository.updateSurveyImages(paths, survey.SqId);
+                survey.LeftPicturePath = paths[0];
+                survey.RightPicturePath = paths[1];
+                surveyQuestionRepository.SaveChanges();
+                return true;
+                
             }
             catch(Exception ex)
             {
@@ -168,11 +176,38 @@ namespace SMD.Implementation.Services
             }
         }
 
-        public SurveyQuestion GetSurveyQuestion(long SqId)
+        public SurveyQuestionEditResponseModel GetSurveyQuestion(long SqId)
         {
-            var Servey = surveyQuestionRepository.Find(SqId);
+            SurveyQuestion Servey = surveyQuestionRepository.Get(SqId);
+            if(Servey.StartDate.HasValue)
+                Servey.StartDate = Servey.StartDate.Value.Add(surveyQuestionRepository.UserTimezoneOffSet);
+            if(Servey.EndDate.HasValue)
+                 Servey.EndDate = Servey.EndDate.Value.Add(surveyQuestionRepository.UserTimezoneOffSet);
             Servey.SurveyQuestionResponses = null;
-            return Servey;
+            foreach (var criteria in Servey.SurveyQuestionTargetCriterias)
+            {
+                criteria.SurveyQuestion = null;
+            }
+            foreach (var loc in Servey.SurveyQuestionTargetLocations)
+            {
+                loc.SurveyQuestion = null;
+            }
+            return new SurveyQuestionEditResponseModel
+            {
+                SurveyQuestionObj = Servey
+           
+            };
+        }
+
+        /// <summary>
+        /// Get Surveys For APi | baqer
+        /// </summary>
+        public SurveyForApiSearchResponse GetSueveysForApi(GetSurveysApiRequest request)
+        {
+            return new SurveyForApiSearchResponse
+            {
+                Surveys = surveyQuestionRepository.GetSurveysForApi(request)
+            };
         }
         #endregion
     }

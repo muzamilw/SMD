@@ -12,11 +12,11 @@ namespace SMD.Interfaces.Services
 {
     public interface IAdvertService
     {
-        List<CampaignGridModel> GetCampaignByUserId();
+       
         AdCampaignBaseResponse GetCampaignBaseData();
         AdCampaignBaseResponse SearchCountriesAndCities(string searchString);
         AdCampaignBaseResponse SearchLanguages(string searchString);
-        bool CreateCampaign(AdCampaign campaignModel);
+        void CreateCampaign(AdCampaign campaignModel);
 
         /// <summary>
         /// Get Ad Campaigns that are need aprroval | baqer

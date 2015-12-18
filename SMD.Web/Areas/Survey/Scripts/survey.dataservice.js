@@ -27,7 +27,15 @@ define("survey/survey.dataservice", function () {
                     amplify.request.define('addSurveyData', 'ajax', {
                         url: '/Api/Survey',
                         dataType: 'json',
+                        dataMap: JSON.stringify,
+                        contentType: "application/json; charset=utf-8",
                         type: 'POST'
+                    });
+                    // getting survey for editor
+                    amplify.request.define('getSurveyQuestion', 'ajax', {
+                        url: '/Api/SurveyQuestionEditor',
+                        dataType: 'json',
+                        type: 'GET'
                     });
                     isInitialized = true;
                 }
@@ -52,6 +60,16 @@ define("survey/survey.dataservice", function () {
                     data: params
                 });
             },
+               // get survey Questions
+            getSurveyQuestion = function (params, callbacks) {
+                initialize();
+                return amplify.request({
+                    resourceId: 'getSurveyQuestion',
+                    success: callbacks.success,
+                    error: callbacks.error,
+                    data: params
+                });
+            },
            addSurveyData = function (params, callbacks) {
                initialize();
                return amplify.request({
@@ -65,7 +83,8 @@ define("survey/survey.dataservice", function () {
         return {
             getBaseData: getBaseData,
             searchSurveyQuestions: searchSurveyQuestions,
-            addSurveyData: addSurveyData
+            addSurveyData: addSurveyData,
+            getSurveyQuestion: getSurveyQuestion
         };
        
     })();

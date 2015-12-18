@@ -2,6 +2,7 @@
 
     var // ReSharper disable InconsistentNaming
         Survey = function (SQID, LanguageID, CountryID, UserID, Status, StatusValue, Question, Gender, Language, Country, Description, DisplayQuestion, StartDate, EndDate, ModifiedDate, LeftPicturePath, RightPicturePath, ProjectedReach, AgeRangeStart, AgeRangeEnd, LeftPictureBytes, RightPictureBytes) {
+           
             var
                 //type and userID will be set on server sside
                 SQID = ko.observable(SQID),
@@ -16,8 +17,8 @@
                 StatusValue = ko.observable(StatusValue),
                 Description = ko.observable(Description),
                 DisplayQuestion = ko.observable(DisplayQuestion),
-                StartDate = ko.observable(StartDate),
-                EndDate = ko.observable(EndDate),
+                StartDate = ko.observable((StartDate !== null && StartDate !== undefined) ? moment(StartDate).toDate() : undefined),
+                EndDate = ko.observable((EndDate !== null && EndDate !== undefined) ? moment(EndDate).toDate() : undefined),
                 CreationDate = ko.observable(CreationDate),
                 ModifiedDate = ko.observable(ModifiedDate),
                 LeftPicturePath = ko.observable(LeftPicturePath),
@@ -71,7 +72,6 @@
                 },
                 // Convert to server data
                 convertToServerData = function () {
-                    debugger;
                     var targetCriteria =[],targetLocation  = [];
                     _.each(SurveyQuestionTargetCriteria(), function (item) {
                         targetCriteria.push(item.convertToServerData());
@@ -93,8 +93,8 @@
                         StatusValue : StatusValue(),
                         Description: Description(),
                         DisplayQuestion: DisplayQuestion(),
-                        StartDate: StartDate(),
-                        EndDate: EndDate(),
+                        StartDate: moment(StartDate()).format(ist.utcFormat) + 'Z',
+                        EndDate: moment(EndDate()).format(ist.utcFormat) + 'Z',
                         CreationDate: CreationDate(),
                         ModifiedDate : ModifiedDate(),
                         LeftPicturePath : LeftPicturePath(),
@@ -245,21 +245,21 @@
     };
     // Factory Method
     Survey.Create = function (source) {
-        var survey = new Survey(source.SQID, source.LanguageID, source.CountryID, source.UserID, source.Status, source.StatusValue, source.Question, source.Gender, source.Language, source.Country, source.Description, source.DisplayQuestion, source.StartDate, source.EndDate, source.ModifiedDate, source.LeftPicturePath, source.RightPicturePath, source.ProjectedReach, source.AgeRangeStart, source.AgeRangeEnd, source.LeftPictureBytes, source.RightPictureBytes);
-        _.each(source.SurveyQuestionTargetCriteria, function (item) {
+        var survey = new Survey(source.SqId, source.LanguageId, source.CountryId, source.UserId, source.Status, source.StatusValue, source.Question, source.Gender + "" , source.Language, source.Country, source.Description, source.DisplayQuestion, source.StartDate, source.EndDate, source.ModifiedDate, source.LeftPicturePath, source.RightPicturePath, source.ProjectedReach, source.AgeRangeStart, source.AgeRangeEnd, source.LeftPictureBytes, source.RightPictureBytes);
+        _.each(source.SurveyQuestionTargetCriterias, function (item) {
             survey.SurveyQuestionTargetCriteria.push(SurveyQuestionTargetCriteria.Create(item));
         });
-        _.each(source.SurveyQuestionTargetLocation, function (item) {
+        _.each(source.SurveyQuestionTargetLocations, function (item) {
             survey.SurveyQuestionTargetLocation.push(SurveyQuestionTargetLocation.Create(item));
         });
         return survey;
     };
     // Factory Method
     SurveyQuestionTargetCriteria.Create = function (source) {
-        return new SurveyQuestionTargetCriteria(source.ID, source.SQID, source.Type, source.PQID, source.PQAnswerID, source.LinkedSQID, source.LinkedSQAnswer, source.IncludeorExclude, source.LanguageID, source.questionString, source.answerString, source.Language, source.surveyQuestLeftImageSrc, source.surveyQuestRightImageSrc, source.IndustryID);
+        return new SurveyQuestionTargetCriteria(source.ID, source.SqId, source.Type, source.PqId, source.PqAnswerId, source.LinkedSqId, source.LinkedSQAnswer, source.IncludeorExclude, source.LanguageID, source.questionString, source.answerString, source.Language, source.surveyQuestLeftImageSrc, source.surveyQuestRightImageSrc, source.IndustryID);
     };
     SurveyQuestionTargetLocation.Create = function (source) {
-        return new SurveyQuestionTargetLocation(source.ID, source.SQID, source.CountryID, source.CityID, source.Radius, source.Country, source.City,source.IncludeorExclude);
+        return new SurveyQuestionTargetLocation(source.ID, source.SqId, source.CountryId, source.CityId, source.Radius, source.Country, source.City, source.IncludeorExclude);
     };
     return {
         Survey: Survey,

@@ -911,6 +911,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="GetAds" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserID" Type="nvarchar" Mode="In" />
+          <Parameter Name="FromRow" Type="int" Mode="In" />
+          <Parameter Name="ToRow" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="SMDModelStoreContainer">
           <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AdCampaign" EntityType="Self.AdCampaign" Schema="dbo" store:Type="Tables" />
@@ -1392,6 +1397,11 @@
             <End Role="Account" EntitySet="Accounts" />
             <End Role="Transaction" EntitySet="Transactions" />
           </AssociationSet>
+          <FunctionImport Name="GetAds" ReturnType="Collection(DomainModels.GetAds_Result)">
+            <Parameter Name="UserID" Mode="In" Type="String" />
+            <Parameter Name="FromRow" Mode="In" Type="Int32" />
+            <Parameter Name="ToRow" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="ProfileQuestion">
           <Key>
@@ -2250,6 +2260,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="GetAds_Result">
+          <Property Type="Int64" Name="CampaignID" Nullable="false" />
+          <Property Type="String" Name="CampaignName" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="VerifyQuestion" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="LandingPageVideoLink" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="Answer1" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="Answer2" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="Answer3" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="CorrectAnswer" Nullable="true" />
+          <Property Type="Double" Name="ClickRate" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2686,6 +2708,22 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetAds" FunctionName="SMDModel.Store.GetAds">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DomainModels.GetAds_Result">
+                <ScalarProperty Name="CampaignID" ColumnName="CampaignID" />
+                <ScalarProperty Name="CampaignName" ColumnName="CampaignName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="VerifyQuestion" ColumnName="VerifyQuestion" />
+                <ScalarProperty Name="LandingPageVideoLink" ColumnName="LandingPageVideoLink" />
+                <ScalarProperty Name="Answer1" ColumnName="Answer1" />
+                <ScalarProperty Name="Answer2" ColumnName="Answer2" />
+                <ScalarProperty Name="Answer3" ColumnName="Answer3" />
+                <ScalarProperty Name="CorrectAnswer" ColumnName="CorrectAnswer" />
+                <ScalarProperty Name="ClickRate" ColumnName="ClickRate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

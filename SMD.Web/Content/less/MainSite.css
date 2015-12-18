@@ -45,7 +45,7 @@
   border-top-right-radius: 0px !important;
   border: none;
   height: 33px;
-  margin-left: 7px;
+  margin-left: 2px;
 }
 #in_ex_count_opt {
   border: none !important;
@@ -126,6 +126,20 @@ div.Tokenize ul.Dropdown {
 .tt-dropdown-menu {
   width: 286px !important;
 }
+.defaultImgUploadImage {
+  width: 260px;
+  float: left;
+  text-align: center;
+}
+.defaultImgUploadImageBtn {
+  margin-top: 15px;
+  text-align: center;
+  padding-right: 0px;
+  float: left;
+}
+.mright60 {
+  margin-right: 60px;
+}
 .lang_newcnt {
   position: relative;
 }
@@ -160,7 +174,7 @@ div.Tokenize ul.Dropdown {
   border-top-right-radius: 0px !important;
   border: none;
   height: 33px;
-  margin-left: 7px;
+  margin-left: 2px;
 }
 #in_ex_count_opt {
   border: none !important;

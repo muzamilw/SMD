@@ -10,6 +10,6 @@ namespace SMD.MIS.Areas.Api.Models
         /// <summary>
         /// List of AdCampaigns
         /// </summary>
-        public IEnumerable<AdCampaign> AdCampaigns { get; set; }
+        public IEnumerable<AdCampaignApiModel> AdCampaigns { get; set; }
     }
 }

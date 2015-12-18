@@ -122,6 +122,8 @@
     <Compile Include="DomainModels\City.cs" />
     <Compile Include="DomainModels\Country.cs" />
     <Compile Include="DomainModels\Currency.cs" />
+    <Compile Include="DomainModels\GetAds_Result.cs" />
+    <Compile Include="DomainModels\GetSurveysResults.cs" />
     <Compile Include="DomainModels\Industry.cs" />
     <Compile Include="DomainModels\Language.cs" />
     <Compile Include="DomainModels\Product.cs" />
@@ -163,6 +165,7 @@
     <Compile Include="RequestModels\AdCampaignSearchRequest.cs" />
     <Compile Include="RequestModels\GetAdsApiRequest.cs" />
     <Compile Include="RequestModels\GetProfileQuestionApiRequest.cs" />
+    <Compile Include="RequestModels\GetSurveysApiRequest.cs" />
     <Compile Include="RequestModels\UpdateUserProfileRequest.cs" />
     <Compile Include="RequestModels\RegisterCustomRequest.cs" />
     <Compile Include="RequestModels\RegisterExternalRequest.cs" />
@@ -174,9 +177,10 @@
     <Compile Include="RequestModels\ProfileQuestionSearchRequest.cs" />
     <Compile Include="RequestModels\SurveySearchRequest.cs" />
     <Compile Include="RequestModels\UpdateProfileQuestionUserAnswerApiRequest.cs" />
-    <Compile Include="ResponseModels\AdCampaignApiSearchRequestResponse.cs" />
     <Compile Include="ResponseModels\AdCampaignBaseResponse.cs" />
     <Compile Include="ResponseModels\AdCampaignResposneModelForAproval.cs" />
+    <Compile Include="ResponseModels\AdCampaignApiSearchRequestResponse.cs" />
+    <Compile Include="ResponseModels\SurveyForApiSearchResponse.cs" />
     <Compile Include="ResponseModels\ProfileQuestionApiSearchResponse.cs" />
     <Compile Include="ResponseModels\ProfileQuestionBaseResponse.cs" />
     <Compile Include="ResponseModels\ProfileQuestionSearchRequestResponse.cs" />
