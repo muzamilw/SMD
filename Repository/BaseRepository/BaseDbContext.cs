@@ -204,7 +204,7 @@ namespace SMD.Repository.BaseRepository
 
 
         /// <summary>
-        /// Get Ad-Campaigns for APIs 
+        /// Get Surveys for APIs 
         /// </summary>
         public System.Data.Entity.Core.Objects.ObjectResult<GetSurveysResults> GetSurveysForApi(string userId, int fromRow, int toRow)
         {
