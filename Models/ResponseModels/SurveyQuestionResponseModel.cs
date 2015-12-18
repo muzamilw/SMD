@@ -29,4 +29,8 @@ namespace SMD.Models.ResponseModels
         public int TotalCount { get; set; }
         #endregion
     }
+    public class SurveyQuestionEditResponseModel
+    {
+        public SurveyQuestion SurveyQuestionObj { get; set; }
+    }
 }
