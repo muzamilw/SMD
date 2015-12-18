@@ -112,7 +112,7 @@
                                 <div class="col-lg-6">
                                     <div class="col-lg-12" style="margin-left:-10px;">
                                         <div class="radio">
-                                            <input type="radio" name="optionsRadiosStoreType" id="optionsRadiosVideos" value="1" data-bind="checked: Type">
+                                            <input type="radio" name="optionsRadiosStoreType" id="optionsRadiosVideos" value="1" data-bind="checked: Type, event:{ change: $root.OnChangeCampaignType }">
                                             <label for="optionsRadiosVideos">
                                                 Video
                                             </label>
@@ -125,9 +125,36 @@
                                             <span class="help-block text-right"></span>
                                         </div>
                                     </div>
-                                    <div class="col-lg-12" style="margin-left:-10px;">
+                                    <div class="col-lg-12" style="margin-left:-10px;" data-bind="visible: isEnableUploadImageLink == false">
                                         <input type="text" class="form-control" id="txtLinkOfCampaign" placeholder="Enter a link" data-bind="value: LandingPageVideoLink">
 
+                                    </div>
+                                    <div class="col-lg-12" style="margin-left:-10px;" data-bind="visible: isEnableUploadImageLink == true">
+
+                                        <div >
+
+                                            <div style="width:210px;text-align:center;">
+                                                <img src="/Content/Images/Company_Default.png">
+                                            </div>
+
+                                        </div>
+
+                                        <div  style="margin-top:15px;text-align:center;width:240px;padding-right:0px;">
+                                            <div class="col-lg-5" style="padding-right:10px;">
+                                                <div class="bs-example-tooltips tooltip-float-width">
+                                                    <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="left" data-html="true" data-content="" data-original-title="" title="">
+                                                        <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6" style="text-align:left;">
+                                                <div class="fileUpload btn btn-primary">
+                                                    <span>Upload </span>
+                                                    <input type="file" class="upload" id="image_files" multiple data-bind="files: { onLoaded: $root.storeImageFilesLoadedCallback, fileFilter: 'image.*'}" />
+                                                </div>
+                                            </div>
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -423,10 +450,7 @@
                                         </div>
 
                                     </div>
-                                    <div class="col-lg-12 ThoumbnailCostCenter" style="text-align:center;margin-top:5px;width:240px;margin-left:5px;">
-
-                                    </div>
-
+                                 
                                 </div>
                             </div>
                         </div>
