@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SMD.Models.DomainModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -36,5 +37,7 @@ namespace SMD.MIS.Areas.Api.Models
         public string CreatedBy { get; set; }
         public string CreatorAddress { get; set; }
 
+        public List<SurveyQuestionTargetCriteria> SurveyQuestionTargetCriterias { get; set; }
+        public List<SurveyQuestionTargetLocation> SurveyQuestionTargetLocations { get; set; }
     }
 }

@@ -245,7 +245,7 @@
     };
     // Factory Method
     Survey.Create = function (source) {
-        var survey = new Survey(source.SQID, source.LanguageID, source.CountryID, source.UserID, source.Status, source.StatusValue, source.Question, source.Gender, source.Language, source.Country, source.Description, source.DisplayQuestion, source.StartDate, source.EndDate, source.ModifiedDate, source.LeftPicturePath, source.RightPicturePath, source.ProjectedReach, source.AgeRangeStart, source.AgeRangeEnd, source.LeftPictureBytes, source.RightPictureBytes);
+        var survey = new Survey(source.SqId, source.LanguageId, source.CountryId, source.UserId, source.Status, source.StatusValue, source.Question, source.Gender, source.Language, source.Country, source.Description, source.DisplayQuestion, source.StartDate, source.EndDate, source.ModifiedDate, source.LeftPicturePath, source.RightPicturePath, source.ProjectedReach, source.AgeRangeStart, source.AgeRangeEnd, source.LeftPictureBytes, source.RightPictureBytes);
         _.each(source.SurveyQuestionTargetCriteria, function (item) {
             survey.SurveyQuestionTargetCriteria.push(SurveyQuestionTargetCriteria.Create(item));
         });
@@ -256,10 +256,10 @@
     };
     // Factory Method
     SurveyQuestionTargetCriteria.Create = function (source) {
-        return new SurveyQuestionTargetCriteria(source.ID, source.SQID, source.Type, source.PQID, source.PQAnswerID, source.LinkedSQID, source.LinkedSQAnswer, source.IncludeorExclude, source.LanguageID, source.questionString, source.answerString, source.Language, source.surveyQuestLeftImageSrc, source.surveyQuestRightImageSrc, source.IndustryID);
+        return new SurveyQuestionTargetCriteria(source.ID, source.SqId, source.Type, source.PqId, source.PqAnswerId, source.LinkedSqId, source.LinkedSQAnswer, source.IncludeorExclude, source.LanguageID, source.questionString, source.answerString, source.Language, source.surveyQuestLeftImageSrc, source.surveyQuestRightImageSrc, source.IndustryID);
     };
     SurveyQuestionTargetLocation.Create = function (source) {
-        return new SurveyQuestionTargetLocation(source.ID, source.SQID, source.CountryID, source.CityID, source.Radius, source.Country, source.City,source.IncludeorExclude);
+        return new SurveyQuestionTargetLocation(source.ID, source.SqId, source.CountryId, source.CityId, source.Radius, source.Country, source.City, source.IncludeorExclude);
     };
     return {
         Survey: Survey,

@@ -154,8 +154,23 @@ define("survey/survey.viewModel",
                     },
                     // On editing of existing PQ
                     onEditSurvey = function (item) {
-                       //call function to edit survey
-                        isEditorVisible(true);
+                        //call function to edit survey
+                        dataservice.getSurveyQuestion(
+                           {
+                               SqId: item.SQID(),
+                               FirstLoad: false
+                           },
+                           {
+                               success: function (data) {
+                                   //
+                                   selectedQuestion(model.Survey.Create( updateSurveryItem(data.SurveyQuestion)));
+                                   isEditorVisible(true);
+                               },
+                               error: function () {
+                                   toastr.error("Failed to load  question!");
+                               }
+                           });
+                        
                     },
                     // store left side ans image
                     storeLeftImageCallback = function (file, data) {

@@ -141,4 +141,64 @@ namespace SMD.MIS.ModelMappers
             };
         }
     }
+
+    public static class SurveyQuestionEditorModelMapper
+    {
+        /// <summary>
+        /// Domain Search Response to Web Response 
+        /// </summary>
+        public static SurveyQuestionEditorRequestResponseModel CreateFromWithRef(
+            this Models.ResponseModels.SurveyQuestionEditResponseModel source)
+        {
+            return new SurveyQuestionEditorRequestResponseModel
+            {
+                SurveyQuestion = source.SurveyQuestionObj.CreateFromWithReference(),
+            };
+        }
+
+        /// <summary>
+        /// Domain To Web 
+        /// </summary>
+        public static SurveyQuestion CreateFromWithReference(this Models.DomainModels.SurveyQuestion source)
+        {
+            string leftPath = source.LeftPicturePath;
+            if (source.LeftPicturePath != null && !source.LeftPicturePath.Contains("http"))
+            {
+                leftPath = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + source.LeftPicturePath;
+            }
+            string rightPath = source.RightPicturePath;
+            if (source.RightPicturePath != null && !source.RightPicturePath.Contains("http"))
+            {
+                rightPath = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + source.RightPicturePath;
+            }
+            return new SurveyQuestion
+            {
+                SqId = source.SqId,
+                LanguageId = source.LanguageId,
+                CountryId = source.CountryId,
+                Type = source.Type,
+                UserId = source.UserId,
+                Status = source.Status,
+                Question = source.Question,
+                Description = source.Description,
+                RepeatPeriod = source.RepeatPeriod,
+                DisplayQuestion = source.DisplayQuestion,
+                StartDate = source.StartDate,
+                EndDate = source.EndDate,
+                Approved = source.Approved,
+                ApprovalDate = source.ApprovalDate,
+                CreationDate = source.CreationDate,
+                ModifiedDate = source.ModifiedDate,
+                LeftPicturePath = leftPath,
+                RightPicturePath = rightPath,
+                DiscountVoucherApplied = source.DiscountVoucherApplied,
+                VoucherCode = source.VoucherCode,
+                DiscountVoucherId = source.DiscountVoucherId,
+                RejectionReason = source.RejectionReason,
+                SubmissionDate = source.SubmissionDate,
+                SurveyQuestionTargetCriterias = source.SurveyQuestionTargetCriterias == null ? null : source.SurveyQuestionTargetCriterias.ToList(),
+                SurveyQuestionTargetLocations = source.SurveyQuestionTargetLocations == null ? null : source.SurveyQuestionTargetLocations.ToList()
+            };
+        }
+    }
 }
