@@ -3,7 +3,8 @@
     var // ReSharper disable InconsistentNaming
       Campaign = function (CampaignID, LanguageID, CampaignName, UserID, Status, StatusValue, CampaignDescription, Gender,
           Archived, StartDateTime, EndDateTime, MaxBudget, Type, DisplayTitle, LandingPageVideoLink, VerifyQuestion,
-          Answer1, Answer2, Answer3, CorrectAnswer, AgeRangeStart, AgeRangeEnd, ResultClicks, AmountSpent) {
+          Answer1, Answer2, Answer3, CorrectAnswer, AgeRangeStart, AgeRangeEnd, ResultClicks, AmountSpent
+          , ImagePath, CampaignImagePath, CampaignTypeImagePath) {
           var
               //type and userID will be set on server sside
               CampaignID = ko.observable(CampaignID),
@@ -30,6 +31,9 @@
               AgeRangeEnd = ko.observable(AgeRangeEnd),
               ResultClicks = ko.observable(ResultClicks),
               AmountSpent = ko.observable(AmountSpent),
+              ImagePath = ko.observable(ImagePath),
+              CampaignImagePath = ko.observable(CampaignImagePath),
+              CampaignTypeImagePath = ko.observable(CampaignTypeImagePath),
               AdCampaignTargetCriterias = ko.observableArray([]),
               AdCampaignTargetLocation = ko.observableArray([]),
               errors = ko.validation.group({
@@ -110,6 +114,9 @@
                       AgeRangeEnd: AgeRangeEnd(),
                       ResultClicks: ResultClicks(),
                       AmountSpent: AmountSpent(),
+                      ImagePath: ImagePath(),
+                      CampaignImagePath: CampaignImagePath(),
+                      CampaignTypeImagePath: CampaignTypeImagePath(),
                       AdCampaignTargetCriterias: targetCriteria,
                       AdCampaignTargetLocation: LocationtargetCriteria
                   };
@@ -139,6 +146,9 @@
               AgeRangeEnd: AgeRangeEnd,
               ResultClicks: ResultClicks,
               AmountSpent: AmountSpent,
+              ImagePath: ImagePath,
+              CampaignImagePath: CampaignImagePath,
+              CampaignTypeImagePath: CampaignTypeImagePath,
               AdCampaignTargetCriterias: AdCampaignTargetCriterias,
               AdCampaignTargetLocation:AdCampaignTargetLocation,
               convertToServerData:convertToServerData,
@@ -242,7 +252,7 @@
     };
     // Factory Method
     Campaign.Create = function (source) {
-        var campaign = new Campaign(source.CampaignID, source.LanguageID, source.CampaignName, source.UserID, source.Status, source.StatusValue, source.CampaignDescription, source.Gender, source.Archived, source.StartDateTime, source.EndDateTime, source.MaxBudget, source.Type, source.DisplayTitle, source.LandingPageVideoLink, source.VerifyQuestion, source.Answer1, source.Answer2, source.Answer3, source.CorrectAnswer, source.AgeRangeStart, source.AgeRangeEnd, source.ResultClicks, source.AmountSpent);
+        var campaign = new Campaign(source.CampaignID, source.LanguageID, source.CampaignName, source.UserID, source.Status, source.StatusValue, source.CampaignDescription, source.Gender, source.Archived, source.StartDateTime, source.EndDateTime, source.MaxBudget, source.Type, source.DisplayTitle, source.LandingPageVideoLink, source.VerifyQuestion, source.Answer1, source.Answer2, source.Answer3, source.CorrectAnswer, source.AgeRangeStart, source.AgeRangeEnd, source.ResultClicks, source.AmountSpent, source.ImagePath, source.CampaignImagePath, source.CampaignTypeImagePath);
         _.each(source.AdCampaignTargetCriterias, function (item) {
             campaign.AdCampaignTargetCriterias.push(AdCampaignTargetCriteriasModel.Create(item));
         });

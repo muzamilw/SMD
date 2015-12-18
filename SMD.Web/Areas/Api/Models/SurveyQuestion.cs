@@ -36,8 +36,10 @@ namespace SMD.MIS.Areas.Api.Models
         public DateTime? SubmissionDate { get; set; }
         public string CreatedBy { get; set; }
         public string CreatorAddress { get; set; }
-
+        public int? AgeRangeStart { get; set; }
+        public int? AgeRangeEnd { get; set; }
         public List<SurveyQuestionTargetCriteria> SurveyQuestionTargetCriterias { get; set; }
         public List<SurveyQuestionTargetLocation> SurveyQuestionTargetLocations { get; set; }
+        public int? Gender { get; set; }
     }
 }

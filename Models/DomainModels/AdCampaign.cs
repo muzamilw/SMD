@@ -56,14 +56,8 @@ namespace SMD.Models.DomainModels
         public virtual ICollection<AdCampaignTargetLocation> AdCampaignTargetLocations { get; set; }
 
         [NotMapped]
-        public IEnumerable<string> Countries { get; set; }
-
+        public string CampaignImagePath { get; set; }
         [NotMapped]
-        public IEnumerable<string> Cities { get; set; }
-
-        [NotMapped]
-        public IEnumerable<string> Languages { get; set; }
-        [NotMapped]
-        public IEnumerable<AdCampaignTargetCriteria> Criterias { get; set; }
+        public string CampaignTypeImagePath { get; set; }
     }
 }
