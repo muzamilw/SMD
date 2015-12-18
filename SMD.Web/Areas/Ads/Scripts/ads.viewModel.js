@@ -34,6 +34,7 @@ define("ads/ads.viewModel",
                     ageRange = ko.observableArray([]),
                     isNewCriteria = ko.observable(true),
                     isEnableUploadImageLink = ko.observable(false),
+                    campaignTypePlaceHolderValue = ko.observable('Enter a link'),
                     getAdCampaignGridContent = function () {
                         dataservice.getCampaignData({
                             FirstLoad: true,
@@ -97,6 +98,8 @@ define("ads/ads.viewModel",
                         campaignModel().Type('2');
                         campaignModel().reset();
                         view.initializeTypeahead();
+                        isEnableUploadImageLink(false);
+                        console.log(isEnableUploadImageLink());
                     },
 
                     closeNewCampaignDialog = function () {
@@ -430,16 +433,26 @@ define("ads/ads.viewModel",
                         return (campaignModel().hasChanges());
                     }),
 
-                     OnChangeCampaignType = function () {
+                    OnChangeCampaignType = function () {
                          if (campaignModel().Type() == "3") {
                              isEnableUploadImageLink(true);
                          } else {
                              isEnableUploadImageLink(false);
-                             if (campaignModel().Type() == "2") {
-
+                             if (campaignModel().Type() == "1") {
+                                 campaignTypePlaceHolderValue('Enter a video embed code');
+                             } else {
+                                 campaignTypePlaceHolderValue('Enter a link');
                              }
                          }
-                     },
+                    },
+
+                    campaignTypeImageCallback = function (file, data) {
+                        campaignModel().CampaignTypeImagePath(data);
+                    },
+
+                    campaignImageCallback = function (file, data) {
+                        campaignModel().CampaignImagePath(data);
+                    },
 
                     // Initialize the view model
                     initialize = function (specifiedView) {
@@ -450,7 +463,7 @@ define("ads/ads.viewModel",
                         }
                         pager(pagination.Pagination({ PageSize: 10 }, campaignGridContent, getAdCampaignGridContent));
                         getAdCampaignGridContent();
-                       
+                      
                     };
 
                     return {
@@ -492,7 +505,11 @@ define("ads/ads.viewModel",
                         deleteLanguage: deleteLanguage,
                         ageRange: ageRange,
                         isNewCriteria: isNewCriteria,
-                        isEnableUploadImageLink: isEnableUploadImageLink
+                        isEnableUploadImageLink: isEnableUploadImageLink,
+                        campaignTypePlaceHolderValue: campaignTypePlaceHolderValue,
+                        OnChangeCampaignType: OnChangeCampaignType,
+                        campaignTypeImageCallback: campaignTypeImageCallback,
+                        campaignImageCallback: campaignImageCallback
                     };
             })()
         };

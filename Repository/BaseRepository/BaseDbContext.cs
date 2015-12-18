@@ -194,12 +194,24 @@ namespace SMD.Repository.BaseRepository
         /// <summary>
         /// Get Ad-Campaigns for APIs 
         /// </summary>
-        public System.Data.Entity.Core.Objects.ObjectResult<GetAds_Result> GetAdCompaignForApi(string userId, int FromRow, int ToRow)
+        public System.Data.Entity.Core.Objects.ObjectResult<GetAds_Result> GetAdCompaignForApi(string userId, int fromRow, int toRow)
         {
             var uId = new System.Data.Entity.Core.Objects.ObjectParameter("UserID", userId);
-            var fRow = new System.Data.Entity.Core.Objects.ObjectParameter("FromRow", FromRow);
-            var tRow = new System.Data.Entity.Core.Objects.ObjectParameter("ToRow", ToRow);
+            var fRow = new System.Data.Entity.Core.Objects.ObjectParameter("FromRow", fromRow);
+            var tRow = new System.Data.Entity.Core.Objects.ObjectParameter("ToRow", toRow);
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAds_Result>("GetAds", uId, fRow, tRow);
+        }
+
+
+        /// <summary>
+        /// Get Surveys for APIs 
+        /// </summary>
+        public System.Data.Entity.Core.Objects.ObjectResult<GetSurveysResults> GetSurveysForApi(string userId, int fromRow, int toRow)
+        {
+            var uId = new System.Data.Entity.Core.Objects.ObjectParameter("UserID", userId);
+            var fRow = new System.Data.Entity.Core.Objects.ObjectParameter("FromRow", fromRow);
+            var tRow = new System.Data.Entity.Core.Objects.ObjectParameter("ToRow", toRow);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetSurveysResults>("GetSurveys", uId, fRow, tRow);
         }
         #endregion
     }

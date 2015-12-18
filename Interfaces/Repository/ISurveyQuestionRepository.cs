@@ -24,6 +24,11 @@ namespace SMD.Interfaces.Repository
         /// <summary>
         /// Get Ads Campaigns | SP-API | baqer
         /// </summary>
-        IEnumerable<GetAds_Result> GetAdCompaignForApi(string userId);
+        IEnumerable<GetAds_Result> GetAdCompaignForApi(GetAdsApiRequest request);
+
+        /// <summary>
+        /// Get Surveys | SP-API | baqer
+        /// </summary>
+        IEnumerable<GetSurveysResults> GetSurveysForApi(GetSurveysApiRequest request);
     }
 }

@@ -6,7 +6,9 @@ using SMD.Models.RequestModels;
 using SMD.Models.ResponseModels;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Web;
 
 namespace SMD.Implementation.Services
 {
@@ -99,60 +101,14 @@ namespace SMD.Implementation.Services
             campaignModel.UserId = _adCampaignRepository.LoggedInUserIdentity;
             _adCampaignRepository.Add(campaignModel);
             _adCampaignRepository.SaveChanges();
+            string[] paths = SaveImages(campaignModel);
+            if (paths != null && paths.Count() > 0) 
+            {
+                campaignModel.ImagePath = paths[0];
+                campaignModel.LandingPageVideoLink = paths[1];
+                _adCampaignRepository.SaveChanges();
+            }
             
-            //if (campaignId > 0)
-            //{
-            //    // char[] separator = new char[] { '|' };
-            //    // List<string> argsList = null;
-            //    //if(campaignModel.Languages != null)
-            //    //{
-            //    //    foreach (string item in campaignModel.Languages) 
-            //    //    {
-            //    //        AdCampaignTargetCriteria oTargetCriteria = new AdCampaignTargetCriteria();
-            //    //        oTargetCriteria.CampaignId = campaignId;
-            //    //        oTargetCriteria.LanguageId = Convert.ToInt32(item);
-            //    //        oTargetCriteria.Type = (int)AdCampaignCriteriaType.Language;
-            //    //        _adCampaignTargetCriteriaRepository.Add(oTargetCriteria);
-            //    //    }
-            //    //    _adCampaignTargetCriteriaRepository.SaveChanges();
-            //    //}
-
-            //    //if (campaignModel.Cities != null)
-            //    //{
-            //    //    foreach (string item in campaignModel.Cities)
-            //    //    {
-            //    //        argsList = item.Split(separator, StringSplitOptions.RemoveEmptyEntries).ToList();
-            //    //        AdCampaignTargetLocation oTargetLocation = new AdCampaignTargetLocation();
-
-            //    //        oTargetLocation.CampaignId = campaignId;
-            //    //        oTargetLocation.CityId = Convert.ToInt32(argsList[1]);
-            //    //        oTargetLocation.IncludeorExclude = Convert.ToBoolean(argsList[0]);
-            //    //        _adCampaignTargetLocationRepository.Add(oTargetLocation);
-            //    //    }
-            //    //    _adCampaignTargetLocationRepository.SaveChanges();
-            //    //}
-
-            //    //if (campaignModel.Countries != null)
-            //    //{
-            //    //    foreach (string item in campaignModel.Countries)
-            //    //    {
-            //    //        argsList = item.Split(separator, StringSplitOptions.RemoveEmptyEntries).ToList();
-            //    //        AdCampaignTargetLocation oTargetLocation = new AdCampaignTargetLocation();
-
-            //    //        oTargetLocation.CampaignId = campaignId;
-            //    //        oTargetLocation.CityId = Convert.ToInt32(argsList[1]);
-            //    //        oTargetLocation.IncludeorExclude = Convert.ToBoolean(argsList[0]);
-            //    //        _adCampaignTargetLocationRepository.Add(oTargetLocation);
-            //    //    }
-            //    //    _adCampaignTargetLocationRepository.SaveChanges();
-            //    //}
-            //    return true;
-            //}
-            //else 
-            //{
-            //    return false;
-            //}
-           
         }
         public CampaignResponseModel GetCampaigns(AdCampaignSearchRequest request)
         {
@@ -251,13 +207,60 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Get Ads For API  | baqer
         /// </summary>
-        public AdCampaignApiSearchRequestResponse GetAdCampaignsForApi(GetAdsApiRequest source)
+        public AdCampaignApiSearchRequestResponse GetAdCampaignsForApi(GetAdsApiRequest request)
         {
-           var response=  _surveyQuestionRepository.GetAdCompaignForApi("02de201f-f4ea-420e-a1a8-74e7c1975277");
+            var response = _surveyQuestionRepository.GetAdCompaignForApi(request);
             return new AdCampaignApiSearchRequestResponse
             {
                 AdCampaigns = response
             };
+        }
+
+        #endregion
+
+        #region Private
+
+        private string[] SaveImages(AdCampaign campaign)
+        {
+            string[] savePaths = new string[2];
+            string directoryPath = HttpContext.Current.Server.MapPath("~/SMD_Content/AdCampaign/" + campaign.CampaignId);
+
+            if (directoryPath != null && !Directory.Exists(directoryPath))
+            {
+                Directory.CreateDirectory(directoryPath);
+            }
+            if (campaign.CampaignImagePath != null)
+            {
+                string base64 = campaign.CampaignImagePath.Substring(campaign.CampaignImagePath.IndexOf(',') + 1);
+                base64 = base64.Trim('\0');
+                byte[] data = Convert.FromBase64String(base64);
+                string savePath = directoryPath + "\\CampaignDefaultImage.jpg";
+                File.WriteAllBytes(savePath, data);
+                int indexOf = savePath.LastIndexOf("SMD_Content", StringComparison.Ordinal);
+                savePath = savePath.Substring(indexOf, savePath.Length - indexOf);
+                savePaths[0] = savePath;
+            }
+            if (campaign.Type == 3)
+            {
+                if (!string.IsNullOrEmpty(campaign.CampaignTypeImagePath))
+                {
+                    string base64 = campaign.CampaignTypeImagePath.Substring(campaign.CampaignTypeImagePath.IndexOf(',') + 1);
+                    base64 = base64.Trim('\0');
+                    byte[] data = Convert.FromBase64String(base64);
+
+                    if (directoryPath != null && !Directory.Exists(directoryPath))
+                    {
+                        Directory.CreateDirectory(directoryPath);
+                    }
+                    string savePath = directoryPath + "\\CampaignTypeDefaultImage.jpg";
+                    File.WriteAllBytes(savePath, data);
+                    int indexOf = savePath.LastIndexOf("SMD_Content", StringComparison.Ordinal);
+                    savePath = savePath.Substring(indexOf, savePath.Length - indexOf);
+                    savePaths[1] = savePath;
+                }
+              
+            }
+            return savePaths;
         }
 
         #endregion
