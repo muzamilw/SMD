@@ -1,8 +1,6 @@
-﻿using System;
+﻿using SMD.MIS.Areas.Api.Models;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
-using SMD.MIS.Areas.Api.Models;
-
 using System.Linq;
 using ProfileQuestionAnswer = SMD.Models.DomainModels.ProfileQuestionAnswer;
 
@@ -13,6 +11,7 @@ namespace SMD.MIS.ModelMappers
     /// </summary>
     public static class ProfileQuestionMapper
     {
+        #region MIS
         /// <summary>
         /// Domain Search Response to Web Response 
         /// </summary>
@@ -37,7 +36,7 @@ namespace SMD.MIS.ModelMappers
                 Question = source.Question,
                 Priority = source.Priority,
                 HasLinkedQuestions = source.HasLinkedQuestions,
-                ProfileGroupName = source.ProfileQuestionGroup!=null ? source.ProfileQuestionGroup.ProfileGroupName:null,
+                ProfileGroupName = source.ProfileQuestionGroup != null ? source.ProfileQuestionGroup.ProfileGroupName : null,
 
                 LanguageId = source.LanguageId,
                 CountryId = source.CountryId,
@@ -74,7 +73,7 @@ namespace SMD.MIS.ModelMappers
                 ModifiedDate = source.ModifiedDate,
                 PenalityForNotAnswering = source.PenalityForNotAnswering,
                 Status = source.Status,
-                ProfileQuestionAnswers = source.ProfileQuestionAnswers!=null? source.ProfileQuestionAnswers.Select(ans => ans.CreateFrom()).ToList():new Collection<ProfileQuestionAnswer>().ToList()
+                ProfileQuestionAnswers = source.ProfileQuestionAnswers != null ? source.ProfileQuestionAnswers.Select(ans => ans.CreateFrom()).ToList() : new Collection<ProfileQuestionAnswer>().ToList()
             };
         }
         /// <summary>
@@ -104,6 +103,35 @@ namespace SMD.MIS.ModelMappers
             };
         }
 
+        #endregion
+        #region APIs
 
+        /// <summary>
+        /// Domain to Api
+        /// </summary>
+        public static ProfileQuestionApiModel CreateForApi(this Models.DomainModels.ProfileQuestion source)
+        {
+            return new ProfileQuestionApiModel
+            {
+                PqId= source.PqId,
+                Question = source.Question,
+                QuestionType= source.Type,
+                ProfileGroupName= source.ProfileQuestionGroup.ProfileGroupName,
+                ProfileQuestionAnswers = source.ProfileQuestionAnswers.Select(ans => ans.CreateForApi()).ToList()
+            };
+        }
+
+        /// <summary>
+        /// Response to Apis Call
+        /// </summary>
+        public static ProfileQuestionApiSearchResponse CreateFrom(this Models.ResponseModels.ProfileQuestionApiSearchResponse source)
+        {
+            return new ProfileQuestionApiSearchResponse
+            {
+                ProfileQuestionApiModels = source.ProfileQuestions.Select(question => question.CreateForApi()),
+                PercentageCompleted= source.PercentageCompleted
+            };
+        }
+        #endregion 
     }
 }

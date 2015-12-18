@@ -55,7 +55,7 @@ namespace SMD.MIS.Areas.Api.Controllers
             {
                 return new AdCampaignBaseResponse
                 {
-                    SurveyQuestions = _campaignService.GetSurveyQuestionData().SurveyQuestions.Select(sur => sur.CreateFromDropdown()),
+                    SurveyQuestions = _campaignService.GetSurveyQuestionData(request.SQID).SurveyQuestions.Select(sur => sur.CreateFromDropdown()),
 
                 };
             }

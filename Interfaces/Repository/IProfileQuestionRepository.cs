@@ -18,6 +18,22 @@ namespace SMD.Interfaces.Repository
         /// Get All Profile Questions
         /// </summary>
         IEnumerable<ProfileQuestion> GetAllProfileQuestions();
-        IEnumerable<ProfileQuestion> GetAll();
+
+        
+        /// <summary>
+        /// Get Un-answered Profile Questions by Group Id 
+        /// </summary>
+        IEnumerable<ProfileQuestion> GetUnansweredQuestionsByGroupId(GetProfileQuestionApiRequest request);
+
+        /// <summary>
+        /// Get Count of PQ For Group Id
+        /// </summary>
+        int GetTotalCountOfGroupQuestion(double groupId);
+
+        /// <summary>
+        /// Get Answered Questions count 
+        /// </summary>
+        int GetCountOfUnAnsweredQuestionsByGroupId(double groupId, string userId);
+
     }
 }

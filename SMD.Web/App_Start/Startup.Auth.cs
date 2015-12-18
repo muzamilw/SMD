@@ -1,4 +1,7 @@
-﻿using SMD.Models.Common;
+﻿using System.Collections.ObjectModel;
+using System.IdentityModel.Tokens;
+using System.Net.Http.Formatting;
+using SMD.Models.Common;
 using Owin;
 using Microsoft.Owin;
 using SMD.Implementation;
@@ -8,6 +11,15 @@ using Microsoft.AspNet.Identity.Owin;
 using System;
 using SMD.Implementation.Identity;
 using IdentitySample.Models;
+using System.Web.Http;
+using SMD.WebBase.Mvc;
+using SMD.WebBase.UnityConfiguration;
+using SMD.WebBase.WebApi;
+using Thinktecture.IdentityModel.Tokens;
+using Thinktecture.IdentityModel.Tokens.Http;
+using System.Net.Http;
+using System.Web.Http.Dispatcher;
+using System.Web.Mvc;
 
 namespace SMD.MIS
 {
@@ -51,6 +63,33 @@ namespace SMD.MIS
             app.UseFacebookAuthentication(
                 appId: "900194280062971",
                 appSecret: "7d8a7f398bb09ca362a051f1d8e2d71e");
+
+            app.Map("/Api_Mobile", inner =>
+            {
+                // Web API configuration and services
+                var config = new HttpConfiguration();
+                // Suppress default authentication
+                config.SuppressDefaultHostAuthentication();
+                // List of delegating handlers.
+                var handlers = new DelegatingHandler[] {
+                      new AuthenticationHandler(SecurityConfig.CreateConfiguration(UnityWebActivator.Container))
+                };
+                // Create a message handler chain with an end-point.
+                var routeHandlers = HttpClientFactory.CreatePipeline(new HttpControllerDispatcher(config), handlers);
+                
+                // configure route
+                WebApiRouteConfig.RegisterRoutes(config, routeHandlers);
+                
+                // Configure Dependency Resolver
+                config.DependencyResolver = new UnityDependencyResolver(UnityWebActivator.Container);
+                
+                // Configure Formatter
+                config.Formatters.Clear();
+                config.Formatters.Add(new JsonMediaTypeFormatter());
+
+                // Use Configuration for Webapi
+                inner.UseWebApi(config);
+            });
         }
     }
 }

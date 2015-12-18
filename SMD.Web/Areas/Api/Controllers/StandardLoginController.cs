@@ -15,6 +15,7 @@ namespace SMD.MIS.Areas.Api.Controllers
     /// <summary>
     /// Standard Login Api Controller 
     /// </summary>
+    [Authorize]
     public class StandardLoginController : ApiController
     {
         #region Private
@@ -46,7 +47,7 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// Login
         /// </summary>
         [ApiException]
-        public async Task<WebApiUser> Post(StandardLoginRequest request)
+        public async Task<WebApiUser> Get([FromUri] StandardLoginRequest request)
         {
             if (request == null || !ModelState.IsValid)
             {

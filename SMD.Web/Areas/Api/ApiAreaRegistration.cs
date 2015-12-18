@@ -27,7 +27,6 @@ namespace SMD.MIS.Areas.Api
                 name: "ApiDefaultWithoutId",
                 routeTemplate: AreaName + "/{controller}"
             );
-           
         }
     }
 }

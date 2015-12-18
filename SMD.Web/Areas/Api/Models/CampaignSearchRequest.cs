@@ -15,6 +15,8 @@ namespace SMD.MIS.Areas.Api.Models
         public int RequestId { get; set; }
 
         public int QuestionId { get; set; }
+
+        public long SQID { get; set; }
         #endregion
     }
 }

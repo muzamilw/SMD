@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using SMD.Models.DomainModels;
+using SMD.Models.RequestModels;
 
 namespace SMD.Models.IdentityModels
 {
@@ -9,7 +10,6 @@ namespace SMD.Models.IdentityModels
     /// </summary>
     public partial class User
     {
-        
         #region Persisted Properties
         public string Id { get; set; }
         public string Email { get; set; }
@@ -54,7 +54,11 @@ namespace SMD.Models.IdentityModels
         public string ReferringUserId { get; set; }
         public int? Age { get; set; }
         public int? Gender { get; set; }
+        public int? LanguageId { get; set; }
+        public int? IndustryId { get; set; }
 
+        public virtual Industry Industry { get; set; }
+        public virtual Language Language { get; set; }
         public virtual ICollection<UserLogin> UserLogins { get; set; }
         public virtual ICollection<Role> Roles { get; set; }
         public virtual ICollection<UserClaim> Claims { get; set; }
@@ -63,6 +67,93 @@ namespace SMD.Models.IdentityModels
         public virtual ICollection<ProfileQuestion> ProfileQuestions { get; set; }
         public virtual ICollection<SurveyQuestion> SurveyQuestions { get; set; }
         public virtual ICollection<SurveyQuestionResponse> SurveyQuestionResponses { get; set; }
+
+        public virtual ICollection<Account> Accounts { get; set; }
+        #endregion
+
+        #region Public
+
+        /// <summary>
+        /// Update user
+        /// </summary>
+        public void Update(UpdateUserProfileRequest source)
+        {
+            if (source == null)
+            {
+                return;
+            }
+
+            // Update only the ones that changed
+            if (!string.IsNullOrEmpty(source.Phone1))
+            {
+                Phone1 = source.Phone1;
+            }
+
+            if (!string.IsNullOrEmpty(source.Phone2))
+            {
+                Phone2 = source.Phone2;
+            }
+
+            if (!string.IsNullOrEmpty(source.Address1))
+            {
+                Address1 = source.Address1;
+            }
+
+            if (!string.IsNullOrEmpty(source.Address2))
+            {
+                Address2 = source.Address2;
+            }
+
+            if (!string.IsNullOrEmpty(source.JobTitle))
+            {
+                Jobtitle = source.JobTitle;
+            }
+
+            if (!string.IsNullOrEmpty(source.CompanyName))
+            {
+                CompanyName = source.CompanyName;
+            }
+
+            if (!string.IsNullOrEmpty(source.ContactNotes))
+            {
+                ContactNotes = source.ContactNotes;
+            }
+
+            if (!string.IsNullOrEmpty(source.State))
+            {
+                State = source.State;
+            }
+
+            if (!string.IsNullOrEmpty(source.ZipCode))
+            {
+                ZipCode = source.ZipCode;
+            }
+
+            if (source.Age.HasValue)
+            {
+                Age = source.Age;
+            }
+
+            if (source.CityId.HasValue)
+            {
+                CityId = source.CityId;
+            }
+
+            if (source.CountryId.HasValue)
+            {
+                CountryId = source.CountryId;
+            }
+
+            if (source.Gender.HasValue)
+            {
+                Gender = source.Gender;
+            }
+
+            if (source.IndustryId.HasValue)
+            {
+                IndustryId = source.IndustryId;
+            }
+        }
 
         #endregion
     }

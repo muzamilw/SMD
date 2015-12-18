@@ -17,11 +17,36 @@ define("survey/survey.dataservice", function () {
                         dataType: 'json',
                         type: 'GET'
                     });
-
-
-
+                    // callings ads comapaign service for profile questions and survey questions list 
+                    amplify.request.define('getBaseData', 'ajax', {
+                        url: '/Api/AdCampaignBase',
+                        dataType: 'json',
+                        type: 'GET'
+                    });
+                    // posting survey to save/update
+                    amplify.request.define('addSurveyData', 'ajax', {
+                        url: '/Api/Survey',
+                        dataType: 'json',
+                        type: 'POST'
+                    });
+                    // getting survey for editor
+                    amplify.request.define('getSurveyQuestion', 'ajax', {
+                        url: '/Api/SurveyQuestionEditor',
+                        dataType: 'json',
+                        type: 'GET'
+                    });
                     isInitialized = true;
                 }
+            },
+            // callings ads comapaign service for profile questions and survey questions list 
+            getBaseData = function (params, callbacks) {
+                initialize();
+                return amplify.request({
+                    resourceId: 'getBaseData',
+                    data: params,
+                    success: callbacks.success,
+                    error: callbacks.error,
+                });
             },
               // Search Profile Questions
             searchSurveyQuestions = function (params, callbacks) {
@@ -32,10 +57,32 @@ define("survey/survey.dataservice", function () {
                     error: callbacks.error,
                     data: params
                 });
-            };
+            },
+               // get survey Questions
+            getSurveyQuestion = function (params, callbacks) {
+                initialize();
+                return amplify.request({
+                    resourceId: 'getSurveyQuestion',
+                    success: callbacks.success,
+                    error: callbacks.error,
+                    data: params
+                });
+            },
+           addSurveyData = function (params, callbacks) {
+               initialize();
+               return amplify.request({
+                   resourceId: 'addSurveyData',
+                   data: params,
+                   success: callbacks.success,
+                   error: callbacks.error,
+               });
+           };
 
         return {
-            searchSurveyQuestions: searchSurveyQuestions
+            getBaseData: getBaseData,
+            searchSurveyQuestions: searchSurveyQuestions,
+            addSurveyData: addSurveyData,
+            getSurveyQuestion: getSurveyQuestion
         };
        
     })();

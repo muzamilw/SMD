@@ -21,7 +21,7 @@
                     <div class="pull-right top-page-ui" style="margin-right:5px;margin-bottom:5px;">
 
                         <div class="btn-group">
-                            <button class="btn  btn-warning" id="saveBtn" data-bind="click:$root.saveCampaignData">Save</button>
+                            <button class="btn  btn-warning" id="saveBtn" data-bind="click:$root.saveCampaignData, enable: $root.hasChangesOnQuestion, css: { 'btn-warning': $root.hasChangesOnQuestion }">Save</button>
                             <button class="btn btn-default" id="saveBtn" data-bind="click: $root.closeNewCampaignDialog">Close</button>
                         </div>
 
@@ -112,7 +112,7 @@
                                 <div class="col-lg-6">
                                     <div class="col-lg-12" style="margin-left:-10px;">
                                         <div class="radio">
-                                            <input type="radio" name="optionsRadiosStoreType" id="optionsRadiosVideos" value="1" data-bind="checked: Type">
+                                            <input type="radio" name="optionsRadiosStoreType" id="optionsRadiosVideos" value="1" data-bind="checked: Type, event:{ change: $root.OnChangeCampaignType }">
                                             <label for="optionsRadiosVideos">
                                                 Video
                                             </label>
@@ -125,9 +125,36 @@
                                             <span class="help-block text-right"></span>
                                         </div>
                                     </div>
-                                    <div class="col-lg-12" style="margin-left:-10px;">
+                                    <div class="col-lg-12" style="margin-left:-10px;" data-bind="visible: isEnableUploadImageLink == false">
                                         <input type="text" class="form-control" id="txtLinkOfCampaign" placeholder="Enter a link" data-bind="value: LandingPageVideoLink">
 
+                                    </div>
+                                    <div class="col-lg-12" style="margin-left:-10px;" data-bind="visible: isEnableUploadImageLink == true">
+
+                                        <div >
+
+                                            <div style="width:210px;text-align:center;">
+                                                <img src="/Content/Images/Company_Default.png">
+                                            </div>
+
+                                        </div>
+
+                                        <div  style="margin-top:15px;text-align:center;width:240px;padding-right:0px;">
+                                            <div class="col-lg-5" style="padding-right:10px;">
+                                                <div class="bs-example-tooltips tooltip-float-width">
+                                                    <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="left" data-html="true" data-content="" data-original-title="" title="">
+                                                        <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6" style="text-align:left;">
+                                                <div class="fileUpload btn btn-primary">
+                                                    <span>Upload </span>
+                                                    <input type="file" class="upload" id="image_files" multiple data-bind="files: { onLoaded: $root.storeImageFilesLoadedCallback, fileFilter: 'image.*'}" />
+                                                </div>
+                                            </div>
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -141,25 +168,15 @@
                                     <label for="txtAge" class="control-label text-right tooltip-float">Age</label>
                                 </div>
                                 <div class="col-lg-2">
-                                    <select class="form-control" data-bind="value: AgeRangeStart">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
-                                    </select>
+                                    <select class="form-control" data-bind="options: $root.ageRange, optionsText: 'text', optionsValue: 'value', value: AgeRangeStart"></select>
+                                   
                                 </div>
                                 <div class="pull-left" style="width:10px;">
                                     -
                                 </div>
                                 <div class="col-lg-2">
-                                    <select class="form-control" data-bind="value: AgeRangeEnd">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
-                                    </select>
+                                    <select class="form-control" data-bind="options: $root.ageRange, optionsText: 'text', optionsValue: 'value', value: AgeRangeEnd"></select>
+
                                 </div>
                             </div>
                             <div class="form-group">
@@ -188,21 +205,10 @@
                                     <div class="radio">
                                         <input type="radio" name="optionsRadiosGender" id="optionsRadiosGenderWMEn" value="3" data-bind="checked: Gender">
                                         <label for="optionsRadiosGenderWMEn">
-                                            Men
+                                            Women
                                         </label>
                                         <span class="help-block text-right"></span>
                                     </div>
-                                    @*<div class="btn-group" data-toggle="buttons">
-                                        <label class="btn btn-primary">
-                                            <input type="radio" name="genderoptions" id="GALL" value="1" data-bind="checked: Gender">All
-                                        </label>
-                                        <label class="btn btn-primary">
-                                            <input type="radio" name="genderoptions" id="GMen" value="2" data-bind="checked: Gender">Men
-                                        </label>
-                                        <label class="btn btn-primary">
-                                            <input type="radio" name="genderoptions" id="GWomen" value="3" data-bind="checked: Gender">Women
-                                        </label>
-                                    </div>*@
                                 </div>
                             </div>
                             <div class="form-group">
@@ -215,10 +221,14 @@
                                     <label for="txtCountries" class="control-label text-right tooltip-float">Locations</label>
                                 </div>
                                 <div class="col-lg-6">
-                                    <div id="coun_token_cnt" style="display:none;"></div>
+                                    <div id="coun_token_cnt">
+                                        <!-- ko template: { name: 'AdCampaignLocationTemplate' , foreach: AdCampaignTargetLocation } -->
+                                        <!-- /ko -->
+                                    </div>
+                                    <div class="clearfix"></div>
                                     <div id="count_edt">
                                         <div class="coun_in_ex_cnt">
-                                            <select id="in_ex_count_opt" class="form-control">
+                                            <select id="in_ex_count_opt" class="form-control" data-bind="value: $root.selectedLocationIncludeExclude">
                                                 <option value="1">Include</option>
                                                 <option value="0">Exclude</option>
                                             </select>
@@ -227,8 +237,20 @@
 
                                         </div>
                                         <div class="count_token_opt_cnt">
-                                            @*<select id="tokenizeCountries" multiple="multiple" class="tokenize-sample" data-bind="options: $root.Countries, optionsText: 'LocationName', optionsValue: 'LocationId'"></select>*@
-                                            <input type="text" data-autocomplete="off" class="" id="searchLocations" placeholder="Add country or city" />
+                                            <input type="text" data-autocomplete="off" class="" id="searchCampaignLocations" placeholder="Add country or city" />
+                                            <input type="text" id="us3-radius" placeholder="Radius (meters)" data-bind="value: $root.selectedLocationRadius " class="locRadius locVisibility" />
+                                            <button data-bind="click:$root.onAddLocation" class="locVisibility btn btn-info">Add Location</button>
+
+                                        </div>
+                                        <div class="count_token_opt_cnt locMap">
+                                            <div id="mapContainer" style="width: 400px; height: 200px;"></div>
+                                            <div class="clearfix">&nbsp;</div>
+                                            <div class="m-t-small" style="display:none;">
+                                                <label class="p-r-small col-sm-1 control-label">Lat.:</label>
+                                                <div class="col-sm-3"><input type="text" class="form-control" style="width: 110px" id="us3-lat" data-bind="value: $root.selectedLocationLat " /></div>
+                                                <label class="p-r-small col-sm-2 control-label">Long.:</label>
+                                                <div class="col-sm-3"><input type="text" class="form-control" style="width: 110px" id="us3-lon" data-bind="value: $root.selectedLocationLong " /></div>
+                                            </div>
                                         </div>
                                         <div class="clearfix">
 
@@ -248,20 +270,39 @@
                                     <label for="txtLanguages" class="control-label text-right tooltip-float">Languages</label>
                                 </div>
                                 <div class="col-lg-6">
-                                    <div id="lang_token_cnt" style="display:none;"></div>
-                                    <div id="land_edt">
-                                        <div class="lan_token_opt_cnt">
-                                            @*<select id="tokenizeLanguages" multiple="multiple" class="tokenize-sample" data-bind="options: $root.Languages, optionsText: 'LanguageName', optionsValue: 'LanguageId'"></select>*@
-                                            <input type="text" data-autocomplete="off" class="" id="searchLanguages" placeholder="Enter a language" />
-                                        </div>
-                                        <div class="clearfix">
+                                    <div>
 
+                                        <div id="lang_token_cnt">
+                                            <!-- ko template: { name: 'AdCampaignLanguageTemplate' , foreach: AdCampaignTargetCriterias } -->
+                                            <!-- /ko -->
                                         </div>
+                                        <div class="clearfix"></div>
+                                        <div id="land_edt">
+                                            <div class="coun_in_ex_cnt">
+                                                <select id="in_ex_count_opt" class="form-control" data-bind="value: $root.selectedLangIncludeExclude">
+                                                    <option value="1">Include</option>
+                                                    <option value="0">Exclude</option>
+                                                </select>
+                                            </div>
+                                            <div class="sep-line">
+
+                                            </div>
+                                            <div class="count_token_opt_cnt">
+                                                <input type="text" data-autocomplete="off" class="" id="searchLanguages" placeholder="Enter a language" />
+                                            </div>
+
+                                            <div class="clearfix">
+
+                                            </div>
+                                        </div>
+
                                     </div>
 
                                 </div>
 
                             </div>
+
+
                             <div class="form-group">
 
                                 <div class="col-lg-3 text-right">
@@ -409,10 +450,7 @@
                                         </div>
 
                                     </div>
-                                    <div class="col-lg-12 ThoumbnailCostCenter" style="text-align:center;margin-top:5px;width:240px;margin-left:5px;">
-
-                                    </div>
-
+                                 
                                 </div>
                             </div>
                         </div>
@@ -563,51 +601,136 @@
             </div>
         </div>
     </div>
-    <script id="answersTemplate" type="text/html">
-        <tr>
-            <td>
-                <p id="txtPages" data-bind="text: questionString">
-            </td>
-            <td>
-                <a class="table-link" style="float: right">
-                    <span class="fa-stack">
-                        <i class="fa fa-square fa-stack-2x"></i>
-                        <i class="fa fa-pencil fa-stack-1x fa-inverse" data-bind="click:$root.onEditCriteria" data-toggle="modal" data-target=".bs-example-modal-lg"></i>
-                    </span>
-                    <span class="fa-stack">
-                        <i class="fa fa-square fa-stack-2x"></i>
-                        <i class="fa fa-times fa-stack-1x fa-inverse" data-bind="click:$root.onDeleteCriteria"></i>
-                    </span>
-                </a>
-            </td>
-        </tr>
-        <tr>
-            <td style="padding-top: 7px; padding-bottom: 0px">
-                <div class="table-responsive">
-                    <table class="table table-bordered table-hover" id="profileQuestionLVTable">
-                        <thead>
-                            <tr>
-                                <th class="col-lg-8 th-pointer"><span id="1">Answer</span></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td style=" padding: 0px;">
-                                    <!-- ko if:   Type() == "1" -->
-                                    <p style="margin-top: 5px;margin-left: 12px;" data-bind="text: answerString()">
-                                        </p>
-                                        <!-- /ko -->
-                                        <!-- ko if:   Type()  == "2" -->
-                                    <p style="margin-top: 5px;margin-left: 12px;" >
-                                        <img data-bind="attr:{src: answerString()}" /></p>
-                                        <!-- /ko -->
-                                </td>
-                            </tr>
-
-                        </tbody>
-                    </table>
-                </div>
-            </td>
-        </tr>
-    </script>
+  
 </div>
+<script id="answersTemplate" type="text/html">
+    <!--ko if:Type() != 3 -->
+    <tr>
+        <td>
+            <p id="txtPages" data-bind="text: questionString">
+        </td>
+        <td>
+            <a class="table-link" style="float: right">
+                <span class="fa-stack">
+                    <i class="fa fa-square fa-stack-2x"></i>
+                    <i class="fa fa-pencil fa-stack-1x fa-inverse" data-bind="click:$root.onEditCriteria" data-toggle="modal" data-target=".bs-example-modal-lg"></i>
+                </span>
+                <span class="fa-stack">
+                    <i class="fa fa-square fa-stack-2x"></i>
+                    <i class="fa fa-times fa-stack-1x fa-inverse" data-bind="click:$root.onDeleteCriteria"></i>
+                </span>
+            </a>
+        </td>
+    </tr>
+    <tr>
+        <td style="padding-top: 7px; padding-bottom: 0px">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover" id="profileQuestionLVTable">
+                    <thead>
+                        <tr>
+                            <th class="col-lg-8 th-pointer"><span id="1">Answer</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style=" padding: 0px;">
+                                <!-- ko if:   Type() == "1" -->
+                                <p style="margin-top: 5px;margin-left: 12px;" data-bind="text: answerString()">
+                                </p>
+                                <!-- /ko -->
+                                <!-- ko if:   Type()  == "2" -->
+                                <p style="margin-top: 5px;margin-left: 12px;">
+                                    <img data-bind="attr:{src: answerString()}" />
+                                </p>
+                                <!-- /ko -->
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </td>
+    </tr>
+    <!--/ko-->
+</script>
+<script id="AdCampaignLocationTemplate" type="text/html">
+    <div class="count_city_newcnt">
+        <!--ko if:CityID() == 0 || CityID() == null-->
+        <span class="form-control lang_nr_box areaCity" data-bind="text:Country " style=" "></span>
+        <!--/ko-->
+        <!--ko if:CityID() != 0 && CityID() != null-->
+        <span class="form-control lang_nr_box areaCity" data-bind="text:City " style=" "></span>
+        <!--/ko-->
+        <!--ko if:Radius() != 0 && Radius() != null && Radius() != undefined-->
+        <!--ko if:IncludeorExclude() == '1'-->
+        <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'Included (' + Radius() +')' "></span>
+        <!--/ko-->
+        <!--ko if:IncludeorExclude() == '0' -->
+        <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'Excluded (' + Radius() +')' "></span>
+        <!--/ko-->
+        <!--/ko-->
+
+
+        <a id="" data-bind="click:$root.onRemoveLocation" title=" delete" class="lang_delSurvey"> <i class="fa fa-times "></i></a>
+    </div>
+    <div class="clear"></div>
+</script>
+<script id="AdCampaignLanguageTemplate" type="text/html">
+    <div class="count_city_newcnt">
+        <!--ko if:Type() == 3 -->
+        <span class="form-control lang_nr_box areaCity" data-bind="text:Language() " style=" "></span>
+        <!--ko if:IncludeorExclude() == '1'-->
+        <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Included)' "></span>
+        <!--/ko-->
+        <!--ko if:IncludeorExclude() == '0' -->
+        <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Excluded)' "></span>
+        <!--/ko-->
+        <a id="" data-bind="click:$root.onRemoveLanguage" title=" delete" class="lang_delSurvey"> <i class="fa fa-times "></i></a>
+        <!--/ko-->
+    </div>
+    <div class="clear"></div>
+</script>
+<script>
+    var map;
+    var center;
+    var circle = null;
+    function initializeMap(lat, long, place) {
+        // LOCATION IN LATITUDE AND LONGITUDE.
+        center = new google.maps.LatLng(long, lat);
+        // MAP ATTRIBUTES.
+        var mapAttr = {
+            center: center,
+            zoom: 15,
+            mapTypeId: google.maps.MapTypeId.TERRAIN
+        };
+        var myLatLng = { lat: parseFloat(lat), lng: parseFloat(long) };
+        // THE MAP TO DISPLAY.
+
+        map = new google.maps.Map(document.getElementById("mapContainer"), mapAttr);
+        google.maps.event.addDomListener(window, 'load', initialize);
+
+        var marker = new google.maps.Marker({
+            position: center,
+            map: map,
+            title: place
+        });
+
+    }
+    function addRadius(radius) {
+        if (circle != null)
+            circle.setMap(null);
+        circle = new google.maps.Circle({
+            center: center,
+            map: map,
+            radius: parseInt(radius),          // IN METERS.
+            fillColor: '#FF6600',
+            fillOpacity: 0.3,
+            strokeColor: "#FFF",
+            strokeWeight: 0         // DON'T SHOW CIRCLE BORDER.
+        });
+
+    }
+
+
+</script>
+

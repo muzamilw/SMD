@@ -6,9 +6,11 @@ using SMD.Models.RequestModels;
 using SMD.Models.ResponseModels;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 
 namespace SMD.Implementation.Services
@@ -25,6 +27,44 @@ namespace SMD.Implementation.Services
         private readonly ILanguageRepository languageRepository;
         private readonly IEmailManagerService emailManagerService;
 
+        private string[] SaveSurveyImages(SurveyQuestion question)
+        {
+            string[] savePaths = new string[2];
+            string directoryPath = HttpContext.Current.Server.MapPath("~/SMD_Content/SurveyQuestions/" + question.SqId);
+            
+            if (directoryPath != null && !Directory.Exists(directoryPath))
+            {
+                Directory.CreateDirectory(directoryPath);
+            }
+            if (question.LeftPictureBytes != null)
+            {
+                string base64 = question.LeftPictureBytes.Substring(question.LeftPictureBytes.IndexOf(',') + 1);
+                base64 = base64.Trim('\0');
+                byte[] data = Convert.FromBase64String(base64);
+                string savePath = directoryPath + "\\LeftPicture.jpg";
+                File.WriteAllBytes(savePath, data);
+                int indexOf = savePath.LastIndexOf("SMD_Content", StringComparison.Ordinal);
+                savePath = savePath.Substring(indexOf, savePath.Length - indexOf);
+                savePaths[0] = savePath;
+            }
+            if (question.RightPictureBytes != null)
+            {
+                string base64 = question.RightPictureBytes.Substring(question.RightPictureBytes.IndexOf(',') + 1);
+                base64 = base64.Trim('\0');
+                byte[] data = Convert.FromBase64String(base64);
+
+                if (directoryPath != null && !Directory.Exists(directoryPath))
+                {
+                    Directory.CreateDirectory(directoryPath);
+                }
+                string savePath = directoryPath + "\\RightPicture.jpg";
+                File.WriteAllBytes(savePath, data);
+                int indexOf = savePath.LastIndexOf("SMD_Content", StringComparison.Ordinal);
+                savePath = savePath.Substring(indexOf, savePath.Length - indexOf);
+                savePaths[1] = savePath;
+            }
+            return savePaths;
+        }
         #endregion
 
         #region Constructor
@@ -109,6 +149,47 @@ namespace SMD.Implementation.Services
             }
             surveyQuestionRepository.SaveChanges();
             return surveyQuestionRepository.Find(source.SqId);
+        }
+
+        public bool Create(SurveyQuestion survey)
+        {
+            try
+            {
+                survey.UserId = surveyQuestionRepository.LoggedInUserIdentity;
+                survey.Type = (int)SurveyQuestionType.Advertiser;
+                surveyQuestionRepository.Add(survey);
+                surveyQuestionRepository.SaveChanges();
+                string[] paths = SaveSurveyImages(survey);
+               // return surveyQuestionRepository.updateSurveyImages(paths, survey.SqId);
+                survey.LeftPicturePath = paths[0];
+                survey.RightPicturePath = paths[1];
+                surveyQuestionRepository.SaveChanges();
+                return true;
+                
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public SurveyQuestionEditResponseModel GetSurveyQuestion(long SqId)
+        {
+            SurveyQuestion Servey = surveyQuestionRepository.Get(SqId);
+            Servey.SurveyQuestionResponses = null;
+            foreach (var criteria in Servey.SurveyQuestionTargetCriterias)
+            {
+                criteria.SurveyQuestion = null;
+            }
+            foreach (var loc in Servey.SurveyQuestionTargetLocations)
+            {
+                loc.SurveyQuestion = null;
+            }
+            return new SurveyQuestionEditResponseModel
+            {
+                SurveyQuestionObj = Servey
+           
+            };
         }
         #endregion
     }

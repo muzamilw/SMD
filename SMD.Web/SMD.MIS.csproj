@@ -122,9 +122,15 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.Owin.2.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Owin.Host.HttpListener">
+      <HintPath>..\packages\Microsoft.Owin.Host.HttpListener.2.0.2\lib\net45\Microsoft.Owin.Host.HttpListener.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.2.1.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Hosting">
+      <HintPath>..\packages\Microsoft.Owin.Hosting.2.0.2\lib\net45\Microsoft.Owin.Hosting.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Owin.Security, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -233,6 +239,11 @@
     <Reference Include="System.Drawing">
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.IdentityModel.Services" />
+    <Reference Include="System.IdentityModel.Tokens.Jwt">
+      <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.1.0.0\lib\net45\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+    </Reference>
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
@@ -262,6 +273,9 @@
     <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Owin.5.2.3\lib\net45\System.Web.Http.Owin.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -331,6 +345,9 @@
     <Reference Include="System.Net.Http.WebRequest">
       <Private>True</Private>
     </Reference>
+    <Reference Include="Thinktecture.IdentityModel">
+      <HintPath>..\packages\Thinktecture.IdentityModel.3.6.1\lib\net45\Thinktecture.IdentityModel.dll</HintPath>
+    </Reference>
     <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\WebActivatorEx.2.0\lib\net40\WebActivatorEx.dll</HintPath>
@@ -349,7 +366,9 @@
     <Compile Include="App_Start\CustomRazorViewEngine.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\WebApiRouteConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\SecurityConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Ads\AdsAreaRegistration.cs" />
     <Compile Include="Areas\Ads\Controllers\AdsController.cs" />
@@ -358,11 +377,20 @@
     <Compile Include="Areas\Api\Controllers\CreateStripeCustomerController.cs" />
     <Compile Include="Areas\Api\Controllers\CampaignController.cs" />
     <Compile Include="Areas\Api\Controllers\ChargeCustomerController.cs" />
+    <Compile Include="Areas\Api\Controllers\ConfirmEmailController.cs" />
+    <Compile Include="Areas\Api\Controllers\ArchiveUserAccountController.cs" />
+    <Compile Include="Areas\Api\Controllers\SurveyQuestionEditorController.cs" />
+    <Compile Include="Areas\Api\Controllers\UpdateQuestionAnswerForApiController - Copy.cs" />
+    <Compile Include="Areas\Api\Controllers\UpdateUserProfileController.cs" />
+    <Compile Include="Areas\Api\Controllers\RegisterController.cs" />
+    <Compile Include="Areas\Api\Controllers\GetAdsForApiController.cs" />
+    <Compile Include="Areas\Api\Controllers\RegisterExternalController.cs" />
     <Compile Include="Areas\Api\Controllers\ProfileQuestionBaseController.cs" />
     <Compile Include="Areas\Api\Controllers\ProfileQuestionAnswerController.cs" />
     <Compile Include="Areas\Api\Controllers\ExternalLoginController.cs" />
     <Compile Include="Areas\Api\Controllers\AdaptivePaypalPaymentController.cs" />
     <Compile Include="Areas\Api\Controllers\AdCampaignController.cs" />
+    <Compile Include="Areas\Api\Controllers\GetProfileQuestionForApiController.cs" />
     <Compile Include="Areas\Api\Controllers\SurveyQuestionApprovalController.cs" />
     <Compile Include="Areas\Api\Controllers\StandardLoginController.cs" />
     <Compile Include="Areas\Api\Controllers\ProfileQuestionController.cs" />
@@ -374,11 +402,16 @@
     </Compile>
     <Compile Include="Areas\Api\ModelMappers\WebApiUserMapper.cs" />
     <Compile Include="Areas\Api\Models\AdCampaign.cs" />
+    <Compile Include="Areas\Api\Models\AdCampaignApiModel.cs" />
+    <Compile Include="Areas\Api\Models\AdCampaignApiSearchRequestResponse.cs" />
     <Compile Include="Areas\Api\Models\CampaignRequestResponseModel.cs" />
     <Compile Include="Areas\Api\Models\CampaignSearchRequest.cs" />
     <Compile Include="Areas\Api\Models\AdCampaignResposneModelForAproval.cs" />
     <Compile Include="Areas\Api\Models\LocationDropDown.cs" />
+    <Compile Include="Areas\Api\Models\ProfileQuestionAnswerApiModel.cs" />
     <Compile Include="Areas\Api\Models\ProfileQuestionAnswerDropdown.cs" />
+    <Compile Include="Areas\Api\Models\ProfileQuestionApiModel.cs" />
+    <Compile Include="Areas\Api\Models\ProfileQuestionApiSearchResponse.cs" />
     <Compile Include="Areas\Api\Models\SurveyQuestion.cs" />
     <Compile Include="Areas\Api\Models\AdCampaignBaseResponse.cs" />
     <Compile Include="Areas\Api\Models\SurveyQuestionDropDown.cs" />
@@ -788,6 +821,7 @@
     <Content Include="Global.asax" />
     <Content Include="Images\accent.png" />
     <Content Include="Images\bullet.png" />
+    <Content Include="Images\Cash4Ads_White_text.png" />
     <Content Include="Images\heroAccent.png" />
     <Content Include="Images\orderedList0.png" />
     <Content Include="Images\orderedList1.png" />

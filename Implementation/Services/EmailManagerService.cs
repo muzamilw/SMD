@@ -6,6 +6,7 @@ using System.Net.Mail;
 using System.Threading.Tasks;
 using System.Web;
 using Microsoft.AspNet.Identity.Owin;
+using SMD.ExceptionHandling;
 using SMD.Implementation.Identity;
 using SMD.Interfaces.Repository;
 using SMD.Interfaces.Services;
@@ -133,7 +134,7 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Sends Email
         /// </summary>
-        private Task SendEmail()
+        private async Task SendEmail()
         {
 // ReSharper disable SuggestUseVarKeywordEvident
             MailMessage oMailBody = new MailMessage();
@@ -204,7 +205,14 @@ namespace SMD.Implementation.Services
             objSmtpClient.UseDefaultCredentials = false;
             objSmtpClient.Credentials = mailAuthentication;
             MMailto.Clear();
-            return objSmtpClient.SendMailAsync(oMailBody);
+            try
+            {
+                await objSmtpClient.SendMailAsync(oMailBody);
+            }
+            catch (Exception)
+            {
+                throw new SMDException(LanguageResources.EmailManagerService_FailedToSendEmail);
+            }
         }
 
         /// <summary>

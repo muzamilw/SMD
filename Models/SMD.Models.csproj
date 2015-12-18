@@ -113,6 +113,7 @@
     <Compile Include="Common\NameClaimValue.cs" />
     <Compile Include="Common\UserIdentityModel.cs" />
     <Compile Include="Common\Utility.cs" />
+    <Compile Include="DomainModels\Account.cs" />
     <Compile Include="DomainModels\AdCampaign.cs" />
     <Compile Include="DomainModels\AdCampaignResponse.cs" />
     <Compile Include="DomainModels\AdCampaignTargetCriteria.cs" />
@@ -120,7 +121,12 @@
     <Compile Include="DomainModels\AuditLog.cs" />
     <Compile Include="DomainModels\City.cs" />
     <Compile Include="DomainModels\Country.cs" />
+    <Compile Include="DomainModels\Currency.cs" />
+    <Compile Include="DomainModels\GetAds_Result.cs" />
+    <Compile Include="DomainModels\GetSurveysResults.cs" />
+    <Compile Include="DomainModels\Industry.cs" />
     <Compile Include="DomainModels\Language.cs" />
+    <Compile Include="DomainModels\Product.cs" />
     <Compile Include="DomainModels\ProfileQuestion.cs" />
     <Compile Include="DomainModels\ProfileQuestionAnswer.cs" />
     <Compile Include="DomainModels\ProfileQuestionGroup.cs" />
@@ -130,6 +136,7 @@
     <Compile Include="DomainModels\SurveyQuestionTargetCriteria.cs" />
     <Compile Include="DomainModels\SurveyQuestionTargetLocation.cs" />
     <Compile Include="DomainModels\SystemMail.cs" />
+    <Compile Include="DomainModels\Transaction.cs" />
     <Compile Include="IdentityModels\Role.cs" />
     <Compile Include="IdentityModels\Role`.cs" />
     <Compile Include="IdentityModels\User.cs" />
@@ -156,6 +163,11 @@
     </Compile>
     <Compile Include="Common\CampaignGridModel.cs" />
     <Compile Include="RequestModels\AdCampaignSearchRequest.cs" />
+    <Compile Include="RequestModels\GetAdsApiRequest.cs" />
+    <Compile Include="RequestModels\GetProfileQuestionApiRequest.cs" />
+    <Compile Include="RequestModels\UpdateUserProfileRequest.cs" />
+    <Compile Include="RequestModels\RegisterCustomRequest.cs" />
+    <Compile Include="RequestModels\RegisterExternalRequest.cs" />
     <Compile Include="RequestModels\MakePaypalPaymentRequest.cs" />
     <Compile Include="RequestModels\StripeChargeCustomerRequest.cs" />
     <Compile Include="RequestModels\GetPagedListRequest.cs" />
@@ -163,8 +175,11 @@
     <Compile Include="RequestModels\StandardLoginRequest.cs" />
     <Compile Include="RequestModels\ProfileQuestionSearchRequest.cs" />
     <Compile Include="RequestModels\SurveySearchRequest.cs" />
+    <Compile Include="RequestModels\UpdateProfileQuestionUserAnswerApiRequest.cs" />
     <Compile Include="ResponseModels\AdCampaignBaseResponse.cs" />
     <Compile Include="ResponseModels\AdCampaignResposneModelForAproval.cs" />
+    <Compile Include="ResponseModels\AdCampaignApiSearchRequestResponse.cs" />
+    <Compile Include="ResponseModels\ProfileQuestionApiSearchResponse.cs" />
     <Compile Include="ResponseModels\ProfileQuestionBaseResponse.cs" />
     <Compile Include="ResponseModels\ProfileQuestionSearchRequestResponse.cs" />
     <Compile Include="ResponseModels\CampaignResponseModel.cs" />

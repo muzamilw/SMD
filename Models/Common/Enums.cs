@@ -106,4 +106,24 @@
         Left = 1,
         Right = 2
     }
+    public enum SurveyQuestionStatus
+    {
+        Draft = 1 ,
+        SubmittedForApproval = 2,
+        Live = 3,
+        Paused = 4,
+        Completed = 5,
+        ApprovalRejected = 6
+    }
+
+    public enum UserStatus
+    {
+        Active = 1,
+        InActive = 0
+    }
+    public enum SurveyQuestionType
+    {
+        Advertiser = 1,
+        MySMD = 2
+    }
 }

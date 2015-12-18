@@ -1,6 +1,8 @@
 ﻿using System.Web;
 using SMD.MIS.Areas.Api.Models;
 using System.Linq;
+using SMD.Models.DomainModels;
+using AdCampaign = SMD.MIS.Areas.Api.Models.AdCampaign;
 
 namespace SMD.MIS.ModelMappers
 {
@@ -137,6 +139,38 @@ namespace SMD.MIS.ModelMappers
                 TotalCount = source.TotalCount,
                 Campaigns = source.Campaign.Select(campaign => campaign.CreateFrom()),
                 LanguageDropdowns = source.Languages.Select(lang => lang.CreateFrom())
+            };
+        }
+
+        /// <summary>
+        /// Domain to Web Resposne For API 
+        /// </summary>
+        public static AdCampaignApiSearchRequestResponse CreateResponseForApi(
+            this Models.ResponseModels.AdCampaignApiSearchRequestResponse source)
+        {
+            return new AdCampaignApiSearchRequestResponse
+            {
+                AdCampaigns = source.AdCampaigns.Select(ad => ad.CreateApiModel())
+            };
+        }
+
+        /// <summary>
+        /// Domain APi to web APi 
+        /// </summary>
+        public static AdCampaignApiModel CreateApiModel(this GetAds_Result source)
+        {
+            return new AdCampaignApiModel
+            {
+                Answer1 = source.Answer1,
+                Answer2 = source.Answer2,
+                Answer3 = source.Answer3,
+                CampaignId = source.CampaignID,
+                CampaignName = source.CampaignName,
+                ClickRate = source.ClickRate,
+                CorrectAnswer = source.CorrectAnswer,
+                Description = source.Description,
+                LandingPageVideoLink = source.LandingPageVideoLink,
+                VerifyQuestion = source.VerifyQuestion
             };
         }
     }

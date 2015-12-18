@@ -15,6 +15,7 @@ namespace SMD.MIS.Areas.Api.Controllers
     /// <summary>
     /// External Login Api Controller 
     /// </summary>
+    [Authorize]
     public class ExternalLoginController : ApiController
     {
         private readonly IWebApiUserService webApiUserService;
@@ -46,7 +47,7 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// External Login
         /// </summary>
         [ApiException]
-        public async Task<WebApiUser> Post(ExternalLoginRequest request)
+        public async Task<WebApiUser> Get([FromUri] ExternalLoginRequest request)
         {
             if (request == null || !ModelState.IsValid)
             {

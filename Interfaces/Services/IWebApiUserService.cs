@@ -10,6 +10,31 @@ namespace SMD.Interfaces.Services
     public interface IWebApiUserService
     {
         /// <summary>
+        /// Archive Account
+        /// </summary>
+        Task Archive(string userId);
+        
+        /// <summary>
+        /// Update Profile
+        /// </summary>
+        Task UpdateProfile(UpdateUserProfileRequest request);
+        
+        /// <summary>
+        /// Confirm Email
+        /// </summary>
+        Task<bool> ConfirmEmail(string userId, string code);
+        
+        /// <summary>
+        /// Register Custom
+        /// </summary>
+        Task<User> RegisterCustom(RegisterCustomRequest request);
+        
+        /// <summary>
+        /// Register External 
+        /// </summary>
+        Task<User> RegisterExternal(RegisterExternalRequest request);
+        
+        /// <summary>
         /// External Login 
         /// </summary>
         Task<User> ExternalLogin(ExternalLoginRequest request);
@@ -18,6 +43,11 @@ namespace SMD.Interfaces.Services
         /// Standard Login 
         /// </summary>
         Task<User> StandardLogin(StandardLoginRequest request);
+
+        /// <summary>
+        /// Standard Login 
+        /// </summary>
+        User AuthenticateUser(StandardLoginRequest request);
 
         /// <summary>
         /// Save Stripe Customer 

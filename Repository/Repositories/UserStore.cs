@@ -603,9 +603,9 @@ namespace SMD.Repository.Repositories
                     var entityName = validationResult.Entry.Entity.GetType().Name;
                     errorMessages.AddRange(validationResult.ValidationErrors.Select(error => entityName + "." + error.PropertyName + ": " + error.ErrorMessage));
                 }
-            }
 
-            return Task.FromResult(0);
+                throw;
+            }
         }
     }
 }

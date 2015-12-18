@@ -200,6 +200,7 @@
     <Compile Include="Repositories\AuditLogRepository.cs" />
     <Compile Include="Repositories\CityRepository.cs" />
     <Compile Include="Repositories\ProfileQuestionAnswerRepository.cs" />
+    <Compile Include="Repositories\ProfileQuestionUserAnswerRepository.cs" />
     <Compile Include="Repositories\SurveyQuestionTargetLocationRepository.cs" />
     <Compile Include="Repositories\SurveyQuestionTargetCriteriaRepository.cs" />
     <Compile Include="Repositories\SurveyQuestionRepository.cs" />

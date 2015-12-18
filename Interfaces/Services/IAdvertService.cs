@@ -12,11 +12,11 @@ namespace SMD.Interfaces.Services
 {
     public interface IAdvertService
     {
-        List<CampaignGridModel> GetCampaignByUserId();
+       
         AdCampaignBaseResponse GetCampaignBaseData();
         AdCampaignBaseResponse SearchCountriesAndCities(string searchString);
         AdCampaignBaseResponse SearchLanguages(string searchString);
-        bool CreateCampaign(AdCampaign campaignModel);
+        void CreateCampaign(AdCampaign campaignModel);
 
         /// <summary>
         /// Get Ad Campaigns that are need aprroval | baqer
@@ -26,10 +26,16 @@ namespace SMD.Interfaces.Services
         /// <summary>
         /// Update Ad CAmpaign  | baqer
         /// </summary>
-        AdCampaign UpdateAdCampaign(AdCampaign source); 
+        AdCampaign UpdateAdCampaign(AdCampaign source);
+
+        /// <summary>
+        /// Get Ads For API  | baqer
+        /// </summary>
+        AdCampaignApiSearchRequestResponse GetAdCampaignsForApi(GetAdsApiRequest source);
+
         AdCampaignBaseResponse GetProfileQuestionData();
         AdCampaignBaseResponse GetProfileQuestionAnswersData(int QuestionId);
-        AdCampaignBaseResponse GetSurveyQuestionData();
+        AdCampaignBaseResponse GetSurveyQuestionData(long surveyId);
         CampaignResponseModel GetCampaigns(AdCampaignSearchRequest request);
     }
 }
