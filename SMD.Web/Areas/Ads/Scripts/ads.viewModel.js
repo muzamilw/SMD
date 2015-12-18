@@ -32,6 +32,7 @@ define("ads/ads.viewModel",
                     selectedLocationLat = ko.observable(0),
                     selectedLocationLong = ko.observable(0),
                     ageRange = ko.observableArray([]),
+                    isNewCriteria = ko.observable(true),
                     getAdCampaignGridContent = function () {
                         dataservice.getCampaignData({
                             FirstLoad: true,
@@ -145,7 +146,7 @@ define("ads/ads.viewModel",
 
                     // Add new profile Criteria
                     addNewProfileCriteria = function () {
-                        
+                        isNewCriteria(true);
                         var objProfileCriteria = new model.AdCampaignTargetCriteriasModel();
                       
                         objProfileCriteria.Type("1");
@@ -177,6 +178,7 @@ define("ads/ads.viewModel",
 
                     // Add new survey Criteria
                     addNewSurveyCriteria = function () {
+                        isNewCriteria(true);
                         var objSurveyCriteria = new model.AdCampaignTargetCriteriasModel();
                         objSurveyCriteria.Type("2");
                         objSurveyCriteria.IncludeorExclude("1");
@@ -222,21 +224,24 @@ define("ads/ads.viewModel",
                                 selectedCriteria().answerString(matchSurveyQuestion.RightPicturePath);
                             }
                         }
-                      
-                        campaignModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
-                            Type: selectedCriteria().Type(),
-                            PQID: selectedCriteria().PQID(),
-                            PQAnswerID: selectedCriteria().PQAnswerID(),
-                            SQID: selectedCriteria().SQID(),
-                            SQAnswer: selectedCriteria().SQAnswer(),
-                            questionString: selectedCriteria().questionString(),
-                            answerString: selectedCriteria().answerString(),
-                            IncludeorExclude: selectedCriteria().IncludeorExclude()
-                        }));
+                        if (isNewCriteria()) {
+                            campaignModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
+                                Type: selectedCriteria().Type(),
+                                PQID: selectedCriteria().PQID(),
+                                PQAnswerID: selectedCriteria().PQAnswerID(),
+                                SQID: selectedCriteria().SQID(),
+                                SQAnswer: selectedCriteria().SQAnswer(),
+                                questionString: selectedCriteria().questionString(),
+                                answerString: selectedCriteria().answerString(),
+                                IncludeorExclude: selectedCriteria().IncludeorExclude()
+                            }));
+                        }
+                       
                         isShowSurveyAns(false);
                     },
                     onEditCriteria = function (item) {
-                        console.log(item.Type());
+                        isNewCriteria(false);
+                        var val = item.PQAnswerID() + 0;
                         if (item.Type() == "1") {
                             dataservice.getBaseData({
                                 RequestId: 3,
@@ -244,10 +249,14 @@ define("ads/ads.viewModel",
                             }, {
                                 success: function (data) {
                                     if (data != null) {
-
+                                        _.each(data.ProfileQuestionAnswers, function (question) {
+                                            question.PQID = question.PqId;
+                                            question.PQAnswerID = question.PqAnswerId;
+                                        });
                                         profileAnswerList([]);
                                         ko.utils.arrayPushAll(profileAnswerList(), data.ProfileQuestionAnswers);
                                         profileAnswerList.valueHasMutated();
+                                        item.PQAnswerID(val);
                                     }
 
                                 },
@@ -457,7 +466,8 @@ define("ads/ads.viewModel",
                         addLanguage: addLanguage,
                         onRemoveLanguage: onRemoveLanguage,
                         deleteLanguage: deleteLanguage,
-                        ageRange: ageRange
+                        ageRange: ageRange,
+                        isNewCriteria: isNewCriteria
                     };
             })()
         };
