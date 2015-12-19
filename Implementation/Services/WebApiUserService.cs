@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -6,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using SMD.ExceptionHandling;
 using SMD.Implementation.Identity;
+using SMD.Interfaces.Repository;
 using SMD.Interfaces.Services;
 using SMD.Models.Common;
 using SMD.Models.DomainModels;
@@ -23,6 +25,9 @@ namespace SMD.Implementation.Services
         #region Private
 
         private readonly IEmailManagerService emailManagerService;
+        private readonly IAdCampaignRepository adCampaignRepository;
+        private readonly IAccountRepository accountRepository;
+        private readonly ITransactionRepository transactionRepository;
 
         private ApplicationUserManager UserManager
         {
@@ -38,6 +43,202 @@ namespace SMD.Implementation.Services
             throw new SMDException(errors);
         }
 
+        #region Ad Campaign Transactions
+
+        /// <summary>
+        /// Perform AdCampaign Transaction
+        /// </summary>
+        /// <param name="request">Contains Ad Campaing Id, User Id</param>
+        /// <param name="advertisersAccount">Advertisers Account Info</param>
+        /// <param name="adClickRate">AdClick Rate</param>
+        /// <param name="adViewersAccount">AdViewers Account Info</param>
+        /// <param name="adViewersCut">AdViewers Amount to credit</param>
+        /// <param name="referringUser">Affiliate</param>
+        /// <param name="smdsCut">SMDs Amount to credit</param>
+        /// <param name="affiliatesAccount">Affiliate Account Info</param>
+        /// <param name="smdAccount">SMD Account Info</param>
+        /// <param name="adCampaign">Ad Campaign</param>
+        private void PerformAdCampaignTransactions(AdViewedRequest request, Account advertisersAccount, double? adClickRate,
+            Account adViewersAccount, double? adViewersCut, User referringUser, double? smdsCut, Account affiliatesAccount,
+            Account smdAccount, AdCampaign adCampaign)
+        {
+            // Debit Advertiser
+            var transactionSequence = PerformDebitTransactionForAdvertiser(request, advertisersAccount, adClickRate);
+
+            // Credit AdViewer
+            transactionSequence += 1;
+            PerformCreditTransactionForAdViewer(request, adViewersAccount, adViewersCut, transactionSequence);
+
+            // Credit Affiliate
+            smdsCut = PerformCreditTransactionForAffiliate(request, referringUser, smdsCut, affiliatesAccount, ref transactionSequence);
+
+            // Credit SMD
+            transactionSequence += 1;
+            var creditSmdsTransaction = PerformCreditTransactionForSmd(request, smdsCut, smdAccount, transactionSequence);
+
+            // Update AdCampaign Amount Spent
+            adCampaign.AmountSpent += adClickRate;
+
+            // Add Transcation to repository
+            transactionRepository.Add(creditSmdsTransaction);
+
+            // Save Changes
+            transactionRepository.SaveChanges();
+        }
+
+        /// <summary>
+        /// Credit SMD for Ad Campaing
+        /// </summary>
+        private static Transaction PerformCreditTransactionForSmd(AdViewedRequest request, double? smdsCut, Account smdAccount,
+            int transactionSequence)
+        {
+            var creditSmdsTransaction = new Transaction
+            {
+                AccountId = smdAccount.AccountId,
+                AdCampaignId = request.AdCampaignId,
+                CreditAmount = smdsCut,
+                Sequence = transactionSequence,
+                Type = (int)TransactionType.AdClick,
+                isProcessed = true,
+                TransactionDate = DateTime.Now
+            };
+
+            // Update SMD Account Balance
+            if (!smdAccount.AccountBalance.HasValue)
+            {
+                smdAccount.AccountBalance = 0;
+            }
+            smdAccount.AccountBalance += Convert.ToDecimal(smdsCut);
+            return creditSmdsTransaction;
+        }
+
+        /// <summary>
+        /// Credit Campaing Affiliate
+        /// </summary>
+        private double? PerformCreditTransactionForAffiliate(AdViewedRequest request, User referringUser, double? smdsCut,
+            Account affiliatesAccount, ref int transactionSequence)
+        {
+            if (referringUser != null)
+            {
+                // Credit Affiliate - if exists
+                double? affiliatesCut = ((smdsCut * 20) / 100);
+                smdsCut = ((smdsCut * 30) / 100);
+                transactionSequence += 1;
+                var creditAffiliatesTransaction = new Transaction
+                {
+                    AccountId = affiliatesAccount.AccountId,
+                    AdCampaignId = request.AdCampaignId,
+                    CreditAmount = affiliatesCut,
+                    Sequence = transactionSequence,
+                    Type = (int)TransactionType.AdClick,
+                    isProcessed = true,
+                    TransactionDate = DateTime.Now
+                };
+                // Update Affiliates Account Balance
+                if (!affiliatesAccount.AccountBalance.HasValue)
+                {
+                    affiliatesAccount.AccountBalance = 0;
+                }
+                affiliatesAccount.AccountBalance += Convert.ToDecimal(affiliatesCut);
+
+                // Add Transcation to repository
+                transactionRepository.Add(creditAffiliatesTransaction);
+            }
+            return smdsCut;
+        }
+
+        /// <summary>
+        /// Credit Campaing Ad Viewer
+        /// </summary>
+        private void PerformCreditTransactionForAdViewer(AdViewedRequest request, Account adViewersAccount, double? adViewersCut,
+            int transactionSequence)
+        {
+            var creditAdViewerTransaction = new Transaction
+            {
+                AccountId = adViewersAccount.AccountId,
+                AdCampaignId = request.AdCampaignId,
+                CreditAmount = adViewersCut,
+                Sequence = transactionSequence,
+                Type = (int)TransactionType.AdClick,
+                isProcessed = true,
+                TransactionDate = DateTime.Now
+            };
+            // Update Adviewers Account Balance
+            if (!adViewersAccount.AccountBalance.HasValue)
+            {
+                adViewersAccount.AccountBalance = 0;
+            }
+            adViewersAccount.AccountBalance += Convert.ToDecimal(adViewersCut);
+
+            // Add Transcation to repository
+            transactionRepository.Add(creditAdViewerTransaction);
+        }
+
+        /// <summary>
+        /// Debit Campaing Advertiser
+        /// </summary>
+        private int PerformDebitTransactionForAdvertiser(AdViewedRequest request, Account advertisersAccount,
+            double? adClickRate)
+        {
+            // Debit Advertiser
+            const int transactionSequence = 1;
+            var debitAdvertiserTransaction = new Transaction
+            {
+                AccountId = advertisersAccount.AccountId,
+                AdCampaignId = request.AdCampaignId,
+                DebitAmount = adClickRate,
+                Sequence = transactionSequence,
+                Type = (int)TransactionType.AdClick,
+                isProcessed = true,
+                TransactionDate = DateTime.Now
+            };
+
+            // Update Advertisers Account Balance
+            if (!advertisersAccount.AccountBalance.HasValue)
+            {
+                advertisersAccount.AccountBalance = 0;
+            }
+            advertisersAccount.AccountBalance -= Convert.ToDecimal(adClickRate);
+
+            // Add Transcation to repository
+            transactionRepository.Add(debitAdvertiserTransaction);
+
+            return transactionSequence;
+        }
+
+        /// <summary>
+        /// Sets up accounts for transcations
+        /// Verifies if required accounts exist
+        /// </summary>
+        private void SetupAdCampaignTransaction(AdViewedRequest request, AdCampaign adCampaign,
+            out Account adViewersAccount, out Account advertisersAccount, out Account smdAccount)
+        {
+            
+            // Get business Accounts for Each Individual involved in this transaction
+            adViewersAccount = accountRepository.GetByUserId(request.UserId);
+            if (adViewersAccount == null)
+            {
+                throw new SMDException(string.Format(CultureInfo.InvariantCulture,
+                    LanguageResources.WebApiUserService_AccountNotFound, "Current User"));
+            }
+
+            advertisersAccount = accountRepository.GetByUserId(adCampaign.UserId);
+            if (advertisersAccount == null)
+            {
+                throw new SMDException(string.Format(CultureInfo.InvariantCulture,
+                    LanguageResources.WebApiUserService_AccountNotFound, "Advertiser"));
+            }
+
+            smdAccount = accountRepository.GetByName(Accounts.Smd);
+            if (smdAccount == null)
+            {
+                throw new SMDException(string.Format(CultureInfo.InvariantCulture,
+                    LanguageResources.WebApiUserService_AccountNotFound, "SMD"));
+            }
+        }
+
+        #endregion
+        
         #endregion
 
         #region Constructor
@@ -45,19 +246,117 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Constructor
         /// </summary>
-        public WebApiUserService(IEmailManagerService emailManagerService)
+        public WebApiUserService(IEmailManagerService emailManagerService, IAdCampaignRepository adCampaignRepository, 
+            IAccountRepository accountRepository, ITransactionRepository transactionRepository)
         {
             if (emailManagerService == null)
             {
                 throw new ArgumentNullException("emailManagerService");
             }
+            if (adCampaignRepository == null)
+            {
+                throw new ArgumentNullException("adCampaignRepository");
+            }
+            if (accountRepository == null)
+            {
+                throw new ArgumentNullException("accountRepository");
+            }
+            if (transactionRepository == null)
+            {
+                throw new ArgumentNullException("transactionRepository");
+            }
 
             this.emailManagerService = emailManagerService;
+            this.adCampaignRepository = adCampaignRepository;
+            this.accountRepository = accountRepository;
+            this.transactionRepository = transactionRepository;
         }
 
         #endregion
 
         #region Public
+
+        /// <summary>
+        /// Update Transactions on viewing ad
+        /// </summary>
+        public async Task UpdateTransactionOnViewingAd(AdViewedRequest request)
+        {
+            // Get Ad Viewer
+            User adViewer = await UserManager.FindByIdAsync(request.UserId);
+            if (adViewer == null)
+            {
+                throw new SMDException(LanguageResources.WebApiUserService_InvalidUserId);
+            }
+            
+            // Validates if Ad Campaing Exists
+            var adCampaign = await ValidateAdCampaign(request);
+            
+            // Get Referral if any
+            User referringUser = null;
+            Account affiliatesAccount = null;
+            if (!string.IsNullOrEmpty(adViewer.ReferringUserId))
+            {
+                referringUser = await UserManager.FindByIdAsync(adViewer.ReferringUserId);
+                if (referringUser == null)
+                {
+                    throw new SMDException(LanguageResources.WebApiUserService_ReferrerNotFound);
+                }
+
+                affiliatesAccount = accountRepository.GetByUserId(adViewer.ReferringUserId);
+                if (affiliatesAccount == null)
+                {
+                    throw new SMDException(string.Format(CultureInfo.InvariantCulture,
+                        LanguageResources.WebApiUserService_AccountNotFound, "Affiliate"));
+                }
+            }
+
+            // Begin Transaction
+            // Ad Viewer will get 50% and other 50% will be divided b/w SMD (30%), Affiliate(20%) (Referrer) if exists
+            double? adClickRate = adCampaign.ClickRate ?? 0;
+            double? adViewersCut = ((adClickRate * 50) / 100);
+            double? smdsCut = adViewersCut;
+            Account adViewersAccount;
+            Account advertisersAccount;
+            Account smdAccount;
+
+            // Sets up transaction 
+            // Gets Accounts required
+            SetupAdCampaignTransaction(request, adCampaign, out adViewersAccount, out advertisersAccount, out smdAccount);
+
+            // Perform Transactions
+            PerformAdCampaignTransactions(request, advertisersAccount, adClickRate, adViewersAccount, adViewersCut, referringUser, smdsCut, 
+                affiliatesAccount, smdAccount, adCampaign);
+        }
+
+        /// <summary>
+        /// Validates Ad Campaing
+        /// AdCampaign Exists
+        /// </summary>
+        private async Task<AdCampaign> ValidateAdCampaign(AdViewedRequest request)
+        {
+            // Get AdCampaign against AdCampaign Id
+            AdCampaign adCampaign = adCampaignRepository.Find(request.AdCampaignId);
+            if (adCampaign == null)
+            {
+                throw new SMDException(string.Format(CultureInfo.InvariantCulture,
+                    LanguageResources.WebApiUserService_AdCampaignNotFound,
+                    request.AdCampaignId));
+            }
+
+            if (string.IsNullOrEmpty(adCampaign.UserId))
+            {
+                throw new SMDException(LanguageResources.WebApiUserService_AdvertiserNotFound);
+            }
+
+            // Get Advertiser
+            User advertiser = await UserManager.FindByIdAsync(adCampaign.UserId);
+            if (advertiser == null)
+            {
+                throw new SMDException(LanguageResources.WebApiUserService_AdvertiserNotFound);
+            }
+            
+            return adCampaign;
+        }
 
         /// <summary>
         /// Archive Account

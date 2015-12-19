@@ -126,4 +126,33 @@
         Advertiser = 1,
         MySMD = 2
     }
+
+    /// <summary>
+    /// Account Names
+    /// </summary>
+    public static class Accounts
+    {
+        public static string Smd { get { return "SMD"; } }
+    }
+
+    /// <summary>
+    /// Transaction Types
+    /// </summary>
+    public enum TransactionType
+    {
+        /// <summary>
+        /// Ad Click / Viewed
+        /// </summary>
+        AdClick = 1,
+
+        /// <summary>
+        /// Approve Survey
+        /// </summary>
+        ApproveSurvey = 2,
+
+        /// <summary>
+        /// View Survey Report
+        /// </summary>
+        ViewSurveyReport = 3
+    }
 }

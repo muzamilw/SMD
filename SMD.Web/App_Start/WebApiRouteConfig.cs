@@ -65,6 +65,14 @@ namespace SMD.MIS
                 new { controller = "ArchiveUserAccount" },
                 null,
                 routeHandlers);
+
+            // Ad Viewed route
+            config.Routes.MapHttpRoute(
+                "AdViewed",
+                "Ad/Viewed/",
+                new { controller = "AdViewed" },
+                null,
+                routeHandlers);
         }
     }
 }

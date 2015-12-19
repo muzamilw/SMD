@@ -147,4 +147,16 @@
   <data name="WebApiUserService_InactiveUser" xml:space="preserve">
     <value>This user is not active anymore.</value>
   </data>
+  <data name="WebApiUserService_AdCampaignNotFound" xml:space="preserve">
+    <value>Ad Campaign not found against Id {0}.</value>
+  </data>
+  <data name="WebApiUserService_AdvertiserNotFound" xml:space="preserve">
+    <value>Advertiser not found against specified Ad Campaign.</value>
+  </data>
+  <data name="WebApiUserService_ReferrerNotFound" xml:space="preserve">
+    <value>Refferer not found against specified user.</value>
+  </data>
+  <data name="WebApiUserService_AccountNotFound" xml:space="preserve">
+    <value>Account not found for {0}.</value>
+  </data>
 </root>

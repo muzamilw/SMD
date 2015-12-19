@@ -88,6 +88,33 @@ namespace SMD.Implementation {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Account not found for {0}..
+        /// </summary>
+        internal static string WebApiUserService_AccountNotFound {
+            get {
+                return ResourceManager.GetString("WebApiUserService_AccountNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ad Campaign not found against Id {0}..
+        /// </summary>
+        internal static string WebApiUserService_AdCampaignNotFound {
+            get {
+                return ResourceManager.GetString("WebApiUserService_AdCampaignNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Advertiser not found against specified Ad Campaign..
+        /// </summary>
+        internal static string WebApiUserService_AdvertiserNotFound {
+            get {
+                return ResourceManager.GetString("WebApiUserService_AdvertiserNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email is not verified yet..
         /// </summary>
         internal static string WebApiUserService_EmailNotVerified {
@@ -147,6 +174,15 @@ namespace SMD.Implementation {
         internal static string WebApiUserService_ProviderKeyInvalid {
             get {
                 return ResourceManager.GetString("WebApiUserService_ProviderKeyInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Refferer not found against specified user..
+        /// </summary>
+        internal static string WebApiUserService_ReferrerNotFound {
+            get {
+                return ResourceManager.GetString("WebApiUserService_ReferrerNotFound", resourceCulture);
             }
         }
     }

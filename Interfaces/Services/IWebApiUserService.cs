@@ -10,6 +10,11 @@ namespace SMD.Interfaces.Services
     public interface IWebApiUserService
     {
         /// <summary>
+        /// Ad Viewed
+        /// </summary>
+        Task UpdateTransactionOnViewingAd(AdViewedRequest request);
+
+        /// <summary>
         /// Archive Account
         /// </summary>
         Task Archive(string userId);
