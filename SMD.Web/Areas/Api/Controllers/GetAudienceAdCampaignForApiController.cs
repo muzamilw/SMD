@@ -1,6 +1,4 @@
 ﻿using SMD.Interfaces.Services;
-using SMD.MIS.Areas.Api.Models;
-using SMD.MIS.ModelMappers;
 using SMD.Models.RequestModels;
 using System.Net;
 using System.Web;
@@ -9,10 +7,10 @@ using System.Web.Http;
 namespace SMD.MIS.Areas.Api.Controllers
 {
     /// <summary>
-    /// Get Surveys for APIs Controller 
+    /// Get Audience Ad Campaign For Api Controller
     /// </summary>
     [Authorize]
-    public class GetSurveysForApiController : ApiController
+    public class GetAudienceAdCampaignForApiController : ApiController
     {
         #region Public
 
@@ -22,7 +20,7 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// <summary>
         /// Constuctor 
         /// </summary>
-        public GetSurveysForApiController(ISurveyQuestionService surveyQuestionService)
+        public GetAudienceAdCampaignForApiController(ISurveyQuestionService surveyQuestionService)
         {
             this.surveyQuestionService = surveyQuestionService;
         }
@@ -31,15 +29,15 @@ namespace SMD.MIS.Areas.Api.Controllers
         #region Public
 
         /// <summary>
-        /// Get Surveys for API
+        /// Get Ad Campaign Matching Count for API
         /// </summary>
-        public SurveyForApiSearchResponse Post(GetSurveysApiRequest request)
+        public long Post(GetAudienceSurveyRequest request)
         {
             if (request == null || !ModelState.IsValid)
             {
                 throw new HttpException((int)HttpStatusCode.BadRequest, "Invalid Request");
             }
-            return surveyQuestionService.GetSueveysForApi(request).CreateFrom();
+            return surveyQuestionService.GetAudienceAdCampaignCount(request);
         }
         #endregion
     }

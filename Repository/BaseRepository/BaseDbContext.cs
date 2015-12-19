@@ -5,6 +5,7 @@ using System;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq.Expressions;
+using SMD.Models.RequestModels;
 
 namespace SMD.Repository.BaseRepository
 {
@@ -192,7 +193,7 @@ namespace SMD.Repository.BaseRepository
 
 
         /// <summary>
-        /// Get Ad-Campaigns for APIs 
+        /// Get Ad-Campaigns for APIs | baqer
         /// </summary>
         public System.Data.Entity.Core.Objects.ObjectResult<GetAds_Result> GetAdCompaignForApi(string userId, int fromRow, int toRow)
         {
@@ -204,7 +205,7 @@ namespace SMD.Repository.BaseRepository
 
 
         /// <summary>
-        /// Get Surveys for APIs 
+        /// Get Surveys for APIs | baqer
         /// </summary>
         public System.Data.Entity.Core.Objects.ObjectResult<GetSurveysResults> GetSurveysForApi(string userId, int fromRow, int toRow)
         {
@@ -212,6 +213,40 @@ namespace SMD.Repository.BaseRepository
             var fRow = new System.Data.Entity.Core.Objects.ObjectParameter("FromRow", fromRow);
             var tRow = new System.Data.Entity.Core.Objects.ObjectParameter("ToRow", toRow);
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetSurveysResults>("GetSurveys", uId, fRow, tRow);
+        }
+
+
+        /// <summary>
+        /// Get Surveys matching count for APIs | baqer
+        /// </summary>
+        public System.Data.Entity.Core.Objects.ObjectResult<long> GetAudienceSurveyCount(GetAudienceSurveyRequest request)
+        {
+            var countryId = new System.Data.Entity.Core.Objects.ObjectParameter("countryId", request.CountryId);
+            var cityId = new System.Data.Entity.Core.Objects.ObjectParameter("cityId", request.CityId);
+            var languageId = new System.Data.Entity.Core.Objects.ObjectParameter("languageId", request.LanguageId);
+            var industryId = new System.Data.Entity.Core.Objects.ObjectParameter("industryId", request.IndustryId);
+            var gender = new System.Data.Entity.Core.Objects.ObjectParameter("gender", request.Gender);
+            var age = new System.Data.Entity.Core.Objects.ObjectParameter("age", request.Age);
+            var pqIds = new System.Data.Entity.Core.Objects.ObjectParameter("ListOfPQIds", request.ProfileQuestionIds);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<long>
+                ("GetAudienceSurvey", age, gender, countryId, cityId, languageId, industryId, pqIds);
+        }
+
+
+        /// <summary>
+        /// Get AdCampaign matching count for APIs | baqer
+        /// </summary>
+        public System.Data.Entity.Core.Objects.ObjectResult<long> GetAudienceAdCampaignCount(GetAudienceSurveyRequest request)
+        {
+            var countryId = new System.Data.Entity.Core.Objects.ObjectParameter("countryId", request.CountryId);
+            var cityId = new System.Data.Entity.Core.Objects.ObjectParameter("cityId", request.CityId);
+            var languageId = new System.Data.Entity.Core.Objects.ObjectParameter("languageId", request.LanguageId);
+            var industryId = new System.Data.Entity.Core.Objects.ObjectParameter("industryId", request.IndustryId);
+            var gender = new System.Data.Entity.Core.Objects.ObjectParameter("gender", request.Gender);
+            var age = new System.Data.Entity.Core.Objects.ObjectParameter("age", request.Age);
+            var pqIds = new System.Data.Entity.Core.Objects.ObjectParameter("ListOfPQIds", request.ProfileQuestionIds);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<long>
+               ("GetAudienceAdCampaign", age, gender, countryId, cityId, languageId, industryId, pqIds);
         }
         #endregion
     }

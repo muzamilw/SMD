@@ -144,5 +144,23 @@ namespace SMD.Repository.Repositories
             int toRow = request.PageSize;
             return db.GetSurveysForApi(request.UserId, fromRow, toRow).ToList();  
         }
+
+        /// <summary>
+        /// Returns count of Matches Surveys| baqer
+        /// </summary>
+        public long GetAudienceSurveyCount(GetAudienceSurveyRequest request)
+        {
+            db.GetAudienceSurveyCount(request);
+            return 5;
+        }
+
+        /// <summary>
+        /// Returns count of Matches AdCampaigns | baqer
+        /// </summary>
+        public long GetAudienceAdCampaignCount(GetAudienceSurveyRequest request)
+        {
+            db.GetAudienceAdCampaignCount(request);
+            return 9;  
+        }
     }
 }

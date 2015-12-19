@@ -1,4 +1,5 @@
 ﻿
+using System.Security.Cryptography.X509Certificates;
 using SMD.Models.DomainModels;
 using SMD.Models.RequestModels;
 using SMD.Models.ResponseModels;
@@ -30,5 +31,15 @@ namespace SMD.Interfaces.Services
         /// Get Surveys For APi | baqer
         /// </summary>
         SurveyForApiSearchResponse GetSueveysForApi(GetSurveysApiRequest request);
+
+        /// <summary>
+        /// Returns count of Matches Surveys| baqer
+        /// </summary>
+        long GetAudienceSurveyCount(GetAudienceSurveyRequest request);
+
+        /// <summary>
+        /// Returns count of Matches AdCampaigns| baqer
+        /// </summary>
+        long GetAudienceAdCampaignCount(GetAudienceSurveyRequest request);
     }
 }
