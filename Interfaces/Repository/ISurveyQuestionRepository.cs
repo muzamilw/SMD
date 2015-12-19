@@ -30,5 +30,16 @@ namespace SMD.Interfaces.Repository
         /// Get Surveys | SP-API | baqer
         /// </summary>
         IEnumerable<GetSurveysResults> GetSurveysForApi(GetSurveysApiRequest request);
+
+        /// <summary>
+        /// Returns count of Matches Surveys| baqer
+        /// </summary>
+        long GetAudienceSurveyCount(GetAudienceSurveyRequest request);
+
+
+        /// <summary>
+        /// Returns count of Matches AdCampaigns | baqer
+        /// </summary>
+        long GetAudienceAdCampaignCount(GetAudienceSurveyRequest request);
     }
 }

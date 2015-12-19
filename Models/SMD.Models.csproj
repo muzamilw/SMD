@@ -164,6 +164,7 @@
     <Compile Include="Common\CampaignGridModel.cs" />
     <Compile Include="RequestModels\AdCampaignSearchRequest.cs" />
     <Compile Include="RequestModels\GetAdsApiRequest.cs" />
+    <Compile Include="RequestModels\GetAudienceSurveyRequest.cs" />
     <Compile Include="RequestModels\GetProfileQuestionApiRequest.cs" />
     <Compile Include="RequestModels\GetSurveysApiRequest.cs" />
     <Compile Include="RequestModels\UpdateUserProfileRequest.cs" />

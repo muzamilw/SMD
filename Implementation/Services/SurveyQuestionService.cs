@@ -209,6 +209,48 @@ namespace SMD.Implementation.Services
                 Surveys = surveyQuestionRepository.GetSurveysForApi(request)
             };
         }
+
+        /// <summary>
+        /// Returns count of Matches Surveys| baqer
+        /// </summary>
+        public long GetAudienceSurveyCount(GetAudienceSurveyRequest request)
+        {
+            #region Comma Separted String
+            string list = null;
+            if (request.ProfileQuestionIds != null && request.ProfileQuestionIds.Count > 0)
+            {
+                int i = 0;
+                for (; request.ProfileQuestionIds.Count > i + 1; i++)
+                {
+                    list = list + request.ProfileQuestionIds[i] + ",";
+                }
+                list = list + request.ProfileQuestionIds[i];
+                request.IdsList = list;
+            }
+            #endregion
+            return surveyQuestionRepository.GetAudienceSurveyCount(request);
+        }
+
+        /// <summary>
+        /// Returns count of Matches AdCampaigns| baqer
+        /// </summary>
+        public long GetAudienceAdCampaignCount(GetAudienceSurveyRequest request)
+        {
+            #region Comma Separted String
+            string list = null;
+            if (request.ProfileQuestionIds != null && request.ProfileQuestionIds.Count > 0)
+            {
+                int i = 0;
+                for (; request.ProfileQuestionIds.Count > i + 1; i++)
+                {
+                    list = list + request.ProfileQuestionIds[i] + ",";
+                }
+                list = list + request.ProfileQuestionIds[i];
+                request.IdsList = list;
+            }
+            #endregion
+            return surveyQuestionRepository.GetAudienceAdCampaignCount(request);  
+        }
         #endregion
     }
 
