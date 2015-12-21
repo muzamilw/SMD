@@ -155,4 +155,11 @@
         /// </summary>
         ViewSurveyReport = 3
     }
+    public enum SurveyQuestionTargetCriteriaType
+    {
+        ProfileQuestion = 1, 
+        SurveryQuestion = 2, 
+        Language = 3,
+        Industry = 4
+    }
 }

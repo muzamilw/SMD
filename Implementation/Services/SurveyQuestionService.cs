@@ -178,20 +178,20 @@ namespace SMD.Implementation.Services
 
         public SurveyQuestionEditResponseModel GetSurveyQuestion(long SqId)
         {
-            SurveyQuestion Servey = surveyQuestionRepository.Get(SqId);
+            SurveyQuestion Servey = surveyQuestionRepository.Find(SqId);
             if(Servey.StartDate.HasValue)
                 Servey.StartDate = Servey.StartDate.Value.Add(surveyQuestionRepository.UserTimezoneOffSet);
             if(Servey.EndDate.HasValue)
                  Servey.EndDate = Servey.EndDate.Value.Add(surveyQuestionRepository.UserTimezoneOffSet);
-            Servey.SurveyQuestionResponses = null;
-            foreach (var criteria in Servey.SurveyQuestionTargetCriterias)
-            {
-                criteria.SurveyQuestion = null;
-            }
-            foreach (var loc in Servey.SurveyQuestionTargetLocations)
-            {
-                loc.SurveyQuestion = null;
-            }
+            //Servey.SurveyQuestionResponses = null;
+            //foreach (var criteria in Servey.SurveyQuestionTargetCriterias)
+            //{
+            //    criteria.SurveyQuestion = null;
+            //}
+            //foreach (var loc in Servey.SurveyQuestionTargetLocations)
+            //{
+            //    loc.SurveyQuestion = null;
+            //}
             return new SurveyQuestionEditResponseModel
             {
                 SurveyQuestionObj = Servey
