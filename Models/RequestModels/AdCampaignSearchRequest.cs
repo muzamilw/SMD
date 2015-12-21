@@ -13,7 +13,7 @@ namespace SMD.Models.RequestModels
         /// </summary>
         public string SearchText { get; set; }
 
-        public bool FirstLoad { get; set; }
+        public long CampaignId { get; set; }
         /// <summary>
         ///  Ad Campaign By Column for sorting
         /// </summary>

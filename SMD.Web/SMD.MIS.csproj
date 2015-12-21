@@ -1384,6 +1384,7 @@
     <Content Include="RichTextEditor\skins\moono\readme.md" />
     <Content Include="Content\less\ProfileQuestion.less" />
     <None Include="Properties\PublishProfiles\SMD MIS Saqib.pubxml" />
+    <None Include="Properties\PublishProfiles\SMD.pubxml" />
     <None Include="Scripts\amplify-vsdoc.js" />
     <Content Include="Scripts\amplify.js" />
     <Content Include="Scripts\amplify.min.js" />

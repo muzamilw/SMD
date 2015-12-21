@@ -9,7 +9,7 @@ namespace SMD.Models.DomainModels
     public class Product
     {
         public int ProductId { get; set; }
-        public Nullable<int> CountryId { get; set; }
+        public int? CountryId { get; set; }
         public Nullable<int> CurrencyId { get; set; }
         public string ProductName { get; set; }
         public Nullable<bool> IsActive { get; set; }
