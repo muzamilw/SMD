@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 using SMD.Interfaces.Services;
 using SMD.MIS.Areas.Api.Models;
-using SMD.Models.IdentityModels;
 using SMD.Models.RequestModels;
 using System;
 using System.Net;
@@ -46,8 +45,8 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// <summary>
         /// External Login
         /// </summary>
-        [ApiException]
-        public async Task<WebApiUser> Get([FromUri] ExternalLoginRequest request)
+        [ApiExceptionCustom]
+        public async Task<LoginResponse> Get([FromUri] ExternalLoginRequest request)
         {
             if (request == null || !ModelState.IsValid)
             {
@@ -55,8 +54,8 @@ namespace SMD.MIS.Areas.Api.Controllers
             }
 
             // Check For Extenal Login 
-            User user = await webApiUserService.ExternalLogin(request); 
-            return user.CreateFrom();
+            SMD.Models.ResponseModels.LoginResponse response = await webApiUserService.ExternalLogin(request); 
+            return response.CreateFrom();
         }
 
         #endregion

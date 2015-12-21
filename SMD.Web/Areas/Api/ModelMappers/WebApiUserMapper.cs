@@ -1,5 +1,6 @@
 ﻿using SMD.MIS.Areas.Api.Models;
 using SMD.Models.IdentityModels;
+using LoginResponse = SMD.Models.ResponseModels.LoginResponse;
 
 namespace SMD.MIS.Areas.Api.ModelMappers
 {
@@ -22,6 +23,19 @@ namespace SMD.MIS.Areas.Api.ModelMappers
                        JobTitle = source.Jobtitle,
                        UserTimeZone = source.UserTimeZone
                    };
+        }
+
+        /// <summary>
+        /// Create WebApi User from Domain Model
+        /// </summary>
+        public static Models.LoginResponse CreateFrom(this LoginResponse source)
+        {
+            return new Models.LoginResponse
+            {
+                Status = source.Status,
+                Message = source.Message,
+                User = source.User != null ? source.User.CreateFrom() : null
+            };
         }
     }
 }

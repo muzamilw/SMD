@@ -38,10 +38,13 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Throws Exception if registreation fails
         /// </summary>
-        private static void ThrowRegisterUserErrors(IdentityResult result)
+        private static LoginResponse ThrowRegisterUserErrors(IdentityResult result)
         {
             string errors = result.Errors.Aggregate("", (current, error) => current + (Environment.NewLine + error));
-            throw new SMDException(errors);
+            return new LoginResponse
+                   {
+                       Message = errors
+                   };
         }
 
         #region Ad Campaign Transactions
@@ -280,7 +283,7 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Update Transactions on viewing ad
         /// </summary>
-        public async Task UpdateTransactionOnViewingAd(AdViewedRequest request)
+        public async Task<BaseApiResponse> UpdateTransactionOnViewingAd(AdViewedRequest request)
         {
             // Get Ad Viewer
             User adViewer = await UserManager.FindByIdAsync(request.UserId);
@@ -327,6 +330,12 @@ namespace SMD.Implementation.Services
             // Perform Transactions
             PerformAdCampaignTransactions(request, advertisersAccount, adClickRate, adViewersAccount, adViewersCut, referringUser, smdsCut, 
                 affiliatesAccount, smdAccount, adCampaign);
+
+            return new BaseApiResponse
+                   {
+                       Status = true,
+                       Message = "Success"
+                   };
         }
 
         /// <summary>
@@ -362,7 +371,7 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Archive Account
         /// </summary>
-        public async Task Archive(string userId)
+        public async Task<BaseApiResponse> Archive(string userId)
         {
             User user = await UserManager.FindByIdAsync(userId);
             if (user == null)
@@ -375,12 +384,18 @@ namespace SMD.Implementation.Services
 
             // Save Changes
             await UserManager.UpdateAsync(user);
+
+            return new BaseApiResponse
+                   {
+                       Status = true,
+                       Message = "Success"
+                   };
         }
 
         /// <summary>
         /// Update Profile
         /// </summary>
-        public async Task UpdateProfile(UpdateUserProfileRequest request)
+        public async Task<BaseApiResponse> UpdateProfile(UpdateUserProfileRequest request)
         {
             User user = await UserManager.FindByIdAsync(request.UserId);
             if (user == null)
@@ -393,34 +408,44 @@ namespace SMD.Implementation.Services
 
             // Save Changes
             await UserManager.UpdateAsync(user);
+
+            return new BaseApiResponse
+            {
+                Status = true,
+                Message = "Success"
+            };
         }
 
         /// <summary>
         /// Confirm Email
         /// </summary>
-        public async Task<bool> ConfirmEmail(string userId, string code)
+        public async Task<BaseApiResponse> ConfirmEmail(string userId, string code)
         {
             IdentityResult result = await UserManager.ConfirmEmailAsync(userId, code);
             if (!result.Succeeded)
             {
-                ThrowRegisterUserErrors(result);
+                return ThrowRegisterUserErrors(result);
             }
 
             await emailManagerService.SendRegisrationSuccessEmail(userId);
 
-            return true;
+            return new BaseApiResponse
+                   {
+                       Status = true,
+                       Message = "Success"
+                   };
         }
 
         /// <summary>
         /// Perform Custom Registration
         /// </summary>
-        public async Task<User> RegisterCustom(RegisterCustomRequest request)
+        public async Task<LoginResponse> RegisterCustom(RegisterCustomRequest request)
         {
             var user = new User { UserName = request.Email, Email = request.Email, FullName = request.FullName };
             var result = await UserManager.CreateAsync(user, request.Password);
             if (!result.Succeeded)
             {
-                ThrowRegisterUserErrors(result);
+                return ThrowRegisterUserErrors(result);
             }
 
             var addUserToRoleResult = await UserManager.AddToRoleAsync(user.Id, Roles.User); // Only Type 'User' Role will be registered from app
@@ -434,43 +459,56 @@ namespace SMD.Implementation.Services
                               "/Api_Mobile/Register/Confirm/?UserId=" + user.Id + "&Code=" + HttpUtility.UrlEncode(code);
             await
                 emailManagerService.SendAccountVerificationEmail(user, callbackUrl);
-            
-            return user;
+
+            return new LoginResponse
+            {
+                Status = true,
+                Message = "Success",
+                User = user
+            };
         }
 
         /// <summary>
         /// Perform External Registration
         /// </summary>
-        public async Task<User> RegisterExternal(RegisterExternalRequest request)
+        public async Task<LoginResponse> RegisterExternal(RegisterExternalRequest request)
         {
             var user = new User { UserName = request.Email, Email = request.Email, FullName = request.FullName };
             var result = await UserManager.CreateAsync(user);
             if (!result.Succeeded)
             {
-                ThrowRegisterUserErrors(result);
+                return ThrowRegisterUserErrors(result);
             }
 
             var login = new UserLoginInfo(request.LoginProvider, request.LoginProviderKey);
             result = await UserManager.AddLoginAsync(user.Id, login);
             if (!result.Succeeded)
             {
-                ThrowRegisterUserErrors(result);
+                return ThrowRegisterUserErrors(result);
             }
 
-            return user;
+            return new LoginResponse
+            {
+                Status = true,
+                Message = "Success",
+                User = user
+            };
         }
         
         /// <summary>
         /// Perform External Login
         /// </summary>
-        public async Task<User> ExternalLogin(ExternalLoginRequest request)
+        public async Task<LoginResponse> ExternalLogin(ExternalLoginRequest request)
         {
             User user = await UserManager.FindByEmailAsync(request.Email);
             if (user != null)
             {
                 if (user.UserLogins == null)
                 {
-                    throw new SMDException(LanguageResources.WebApiUserService_LoginInfoNotFound);
+                    return new LoginResponse
+                    {
+                        Message = LanguageResources.WebApiUserService_LoginInfoNotFound
+                    };
                 }
 
                 UserLogin userLoginInfo = user.UserLogins.FirstOrDefault(
@@ -478,21 +516,30 @@ namespace SMD.Implementation.Services
 
                 if (userLoginInfo == null)
                 {
-                    throw new SMDException(LanguageResources.WebApiUserService_ProviderKeyInvalid);
+                    return new LoginResponse
+                    {
+                        Message = LanguageResources.WebApiUserService_ProviderKeyInvalid
+                    };
                 }
 
                 if (user.Status == (int)UserStatus.InActive)
                 {
-                    throw new SMDException(LanguageResources.WebApiUserService_InactiveUser);
+                    return new LoginResponse
+                    {
+                        Message = LanguageResources.WebApiUserService_InactiveUser
+                    };
                 }
 
-                return user;
+                return new LoginResponse
+                {
+                    Status = true,
+                    Message = "Success",
+                    User = user
+                };
             }
 
-            user = await RegisterExternal(new RegisterExternalRequest{ Email = request.Email, FullName = request.FullName, 
+            return await RegisterExternal(new RegisterExternalRequest{ Email = request.Email, FullName = request.FullName, 
                 LoginProvider = request.LoginProvider, LoginProviderKey = request.LoginProviderKey});
-
-            return user;
         }
 
         /// <summary>

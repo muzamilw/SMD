@@ -1,7 +1,5 @@
 ﻿using System.Threading.Tasks;
 using SMD.Interfaces.Services;
-using SMD.MIS.Areas.Api.Models;
-using SMD.Models.IdentityModels;
 using SMD.Models.RequestModels;
 using System;
 using System.Net;
@@ -9,6 +7,7 @@ using System.Web;
 using System.Web.Http;
 using SMD.MIS.Areas.Api.ModelMappers;
 using SMD.WebBase.Mvc;
+using LoginResponse = SMD.Models.ResponseModels.LoginResponse;
 
 namespace SMD.MIS.Areas.Api.Controllers
 {
@@ -46,8 +45,8 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// <summary>
         /// Register External
         /// </summary>
-        [ApiException]
-        public async Task<WebApiUser> Post([FromUri] RegisterExternalRequest request)
+        [ApiExceptionCustom]
+        public async Task<Models.LoginResponse> Post([FromUri] RegisterExternalRequest request)
         {
             if (request == null || !ModelState.IsValid)
             {
@@ -55,8 +54,8 @@ namespace SMD.MIS.Areas.Api.Controllers
             }
 
             // Register User with External Provider
-            User user = await webApiUserService.RegisterExternal(request); 
-            return user.CreateFrom();
+            LoginResponse response = await webApiUserService.RegisterExternal(request); 
+            return response.CreateFrom();
         }
 
         #endregion

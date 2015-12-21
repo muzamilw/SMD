@@ -5,6 +5,7 @@ using System;
 using System.Net;
 using System.Web;
 using System.Web.Http;
+using SMD.Models.ResponseModels;
 using SMD.WebBase.Mvc;
 
 namespace SMD.MIS.Areas.Api.Controllers
@@ -43,8 +44,8 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// <summary>
         /// Confirm Email
         /// </summary>
-        [ApiException]
-        public async Task<NegotiatedContentResult<string>> Get(string userId, string code)
+        [ApiExceptionCustom]
+        public async Task<BaseApiResponse> Get(string userId, string code)
         {
             if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(code))
             {
@@ -52,8 +53,7 @@ namespace SMD.MIS.Areas.Api.Controllers
             }
 
             // Confirm Email
-            await webApiUserService.ConfirmEmail(userId, code);
-            return Content(HttpStatusCode.OK, LanguageResources.ConfirmEmail_EmailVerified);
+            return await webApiUserService.ConfirmEmail(userId, code);
         }
 
         #endregion

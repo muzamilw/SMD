@@ -3,8 +3,6 @@ using SMD.Interfaces.Services;
 using SMD.MIS.Areas.Api.Models;
 using SMD.Models.RequestModels;
 using System;
-using System.Net;
-using System.Web;
 using System.Web.Http;
 using SMD.MIS.Areas.Api.ModelMappers;
 using SMD.WebBase.Mvc;
@@ -57,13 +55,7 @@ namespace SMD.MIS.Areas.Api.Controllers
             }
 
             SMD.Models.ResponseModels.LoginResponse response = await webApiUserService.StandardLogin(request);
-
-            return new LoginResponse
-                   {
-                       Status = response.Status,
-                       Message = response.Message,
-                       User = response.User != null ? response.User.CreateFrom() : null
-                   };
+            return response.CreateFrom();
         }
 
         #endregion
