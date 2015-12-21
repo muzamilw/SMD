@@ -20,7 +20,7 @@ namespace SMD.MIS.ModelMappers
             return new AdCampaignResposneModelForAproval
             {
                 TotalCount = source.TotalCount,
-                AdCampaigns = source.AdCampaigns.Select(ad=> ad.CreateFrom()).ToList()
+                AdCampaigns = source.AdCampaigns.Select(ad => ad.CreateFrom()).ToList()
             };
         }
 
@@ -30,7 +30,7 @@ namespace SMD.MIS.ModelMappers
         public static AdCampaign CreateFrom(this Models.DomainModels.AdCampaign source)
         {
             string path = source.ImagePath;
-          
+
             if (source.ImagePath != null && !source.ImagePath.Contains("http"))
             {
                 path = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + source.ImagePath;
@@ -73,7 +73,13 @@ namespace SMD.MIS.ModelMappers
                 SmdCredits = source.SmdCredits,
                 StartDateTime = source.StartDateTime,
                 UserId = source.UserId,
-                VerifyQuestion = source.VerifyQuestion
+                VerifyQuestion = source.VerifyQuestion,
+                
+                AdCampaignTargetCriterias =
+                    source.AdCampaignTargetCriterias != null ? source.AdCampaignTargetCriterias.Select(x => x.CreateFrom()).ToList() : null,
+
+                AdCampaignTargetLocations =
+                    source.AdCampaignTargetLocations != null ? source.AdCampaignTargetLocations.Select(x => x.CreateFrom()).ToList() : null,
             };
 
 
@@ -171,6 +177,46 @@ namespace SMD.MIS.ModelMappers
                 Description = source.Description,
                 LandingPageVideoLink = source.LandingPageVideoLink,
                 VerifyQuestion = source.VerifyQuestion
+            };
+        }
+
+
+        /// <summary>
+        /// Domain to Web Mapper
+        /// </summary>
+        public static AdCampaignTargetCriteria CreateFrom(this Models.DomainModels.AdCampaignTargetCriteria source)
+        {
+
+            return new AdCampaignTargetCriteria
+            {
+                CriteriaId = source.CriteriaId,
+                CampaignId = source.CampaignId,
+                IncludeorExclude = source.IncludeorExclude,
+                IndustryId = source.IndustryId,
+                LanguageId = source.LanguageId,
+                PqAnswerId = source.PqAnswerId,
+                PqId = source.PqId,
+                SqAnswer = source.SqAnswer,
+                SqId = source.SqId,
+                Type = source.Type
+            };
+        }
+
+        /// <summary>
+        /// Domain to Web Mapper
+        /// </summary>
+        public static AdCampaignTargetLocation CreateFrom(this Models.DomainModels.AdCampaignTargetLocation source)
+        {
+
+            return new AdCampaignTargetLocation
+            {
+                Id = source.Id,
+                CampaignId = source.CampaignId,
+                CityId = source.CityId,
+                CountryId = source.CountryId,
+                IncludeorExclude = source.IncludeorExclude,
+                Radius = source.Radius
+
             };
         }
     }
