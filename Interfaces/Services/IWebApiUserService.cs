@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using SMD.Models.IdentityModels;
 using SMD.Models.RequestModels;
+using SMD.Models.ResponseModels;
 
 namespace SMD.Interfaces.Services
 {
@@ -47,7 +48,7 @@ namespace SMD.Interfaces.Services
         /// <summary>
         /// Standard Login 
         /// </summary>
-        Task<User> StandardLogin(StandardLoginRequest request);
+        Task<LoginResponse> StandardLogin(StandardLoginRequest request);
 
         /// <summary>
         /// Standard Login 
