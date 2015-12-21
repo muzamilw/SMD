@@ -402,138 +402,12 @@ ALTER TABLE dbo.SurveyQuestionTargetCriteria ADD CONSTRAINT
 	) ON UPDATE  NO ACTION 
 	 ON DELETE  NO ACTION 
 	
+-- ====================================== By  Baqer On  21-Dec-15 5:45:37 PM
+
 GO
-COMMIT
-
-
-------------  SP GetAds  17-Dec-15  06:53 PM  | IST-Lhr  | baqer
-
-
-
-USE [SMD]
-GO
-
-/****** Object:  StoredProcedure [dbo].[GetAds]    Script Date: 17-Dec-15 6:52:13 PM ******/
+/****** Object:  StoredProcedure [dbo].[GetAds]    Script Date: 21-Dec-15 5:45:37 PM ******/
 SET ANSI_NULLS ON
 GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
--- =============================================
--- Author:		Baqer Naqvi - IST 
--- Create date: 17-Dec-15
--- Description:	Returns Ads for specified User
--- =============================================
-
-CREATE PROCEDURE [dbo].[GetAds] 
-
-	-- Add the parameters for the stored procedure here
-	@UserID nvarchar(128) = 0
-AS
-BEGIN
-DECLARE @age AS INT
-DECLARE @gender AS INT
-DECLARE @countryId AS INT
-DECLARE @cityId AS INT
-DECLARE @languageId AS INT
-DECLARE @industryId AS INT
-
-        -- Setting local variables
-		   SELECT @age = age FROM AspNetUsers where id=@UserID
-		   SELECT @gender = gender FROM AspNetUsers where id=@UserID
-		   SELECT @countryId = countryId FROM AspNetUsers where id=@UserID
-		   SELECT @cityId = cityId FROM AspNetUsers where id=@UserID
-		   SELECT @languageId = LanguageID FROM AspNetUsers where id=@UserID
-		   SELECT @industryId = industryId FROM AspNetUsers where id=@UserID
-		   SELECT @countryId = CountryID FROM AspNetUsers where id=@UserID
-		   SELECT @cityId = CityID FROM AspNetUsers where id=@UserID
-
-
-		   select MyCampaign.CampaignID, MyCampaign.CampaignName, MyCampaign.Description, MyCampaign.VerifyQuestion, MyCampaign.LandingPageVideoLink ,
-		   MyCampaign.Answer1, MyCampaign.Answer2, MyCampaign.Answer3, MyCampaign.CorrectAnswer , MyCampaign.ClickRate
-		   from AdCampaign MyCampaign
-
-		   where ( 
-		    (MyCampaign.AgeRangeEnd >= @age and  @age >= MyCampaign.AgeRangeStart) 
-			 and
-			(MyCampaign.Gender= @gender)
-			 and
-			(MyCampaign.EndDateTime >= GETDATE() and GETDATE() >= MyCampaign.StartDateTime ) 
-			 and
-			(MyCampaign.Approved = 1) 
-		  	 and
-			(MyCampaign.Status = 6)   
-			 and 
-			((select count(*) from AdCampaignResponse MyCampaignResponse
-			 where MyCampaignResponse.UserID=@UserID and MyCampaignResponse.CampaignID = MyCampaign.CampaignID) = 0) 
-			 and
-		    (MyCampaign.MaxBudget > MyCampaign.AmountSpent) 
-			 and
-			(MyCampaign.LanguageID=@languageId) 
-			 and
-			 ((select count(*) from AdCampaignTargetLocation MyCampaignLoc
-			 where MyCampaignLoc.CampaignID=MyCampaign.CampaignID and MyCampaignLoc.CountryID=@countryId and
-			 MyCampaignLoc.CityID=@cityId) > 0 
-			 and 
-			 ((select count(*) from AdCampaignTargetCriteria MyCampaignCrit
-			 where MyCampaignCrit.CampaignID = MyCampaign.CampaignID and 
-			 MyCampaignCrit.LanguageID=@languageId and MyCampaignCrit.IndustryID=@industryId) > 0 )) 
-		   )
-END
-
-GO
-
-
-/* Added By Khurram - 17 Dec 2015 (Start) */ 
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
-CREATE TABLE [dbo].[Account](
-	[AccountId] [bigint] IDENTITY(1,1) NOT NULL,
-	[AccountName] [nvarchar](200) NULL,
-	[AccountType] [int] NULL,
-	[AccountBalance] [decimal](18, 0) NULL,
-	[UserId] [nvarchar](128) NULL,
- CONSTRAINT [PK_Account] PRIMARY KEY CLUSTERED 
-(
-	[AccountId] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-
-GO
-
-ALTER TABLE [dbo].[Account]  WITH CHECK ADD  CONSTRAINT [FK_Account_AspNetUsers] FOREIGN KEY([UserId])
-REFERENCES [dbo].[AspNetUsers] ([Id])
-GO
-
-ALTER TABLE [dbo].[Account] CHECK CONSTRAINT [FK_Account_AspNetUsers]
-GO
-
-ALTER TABLE [dbo].[Transaction]  WITH CHECK ADD  CONSTRAINT [FK_Transaction_Account] FOREIGN KEY([AccountID])
-REFERENCES [dbo].[Account] ([AccountId])
-GO
-
-ALTER TABLE [dbo].[Transaction] CHECK CONSTRAINT [FK_Transaction_Account]
-GO
-
-/* Added By Khurram - 17 Dec 2015 (End) */ 
-
-
-
-
-/* Added by baqer 18 Dec 2015 (Start)*/
-
-USE [SMD]
-GO
-
-/****** Object:  StoredProcedure [dbo].[GetAds]    Script Date: 18-Dec-15 1:10:43 PM ******/
-SET ANSI_NULLS ON
-GO
-
 SET QUOTED_IDENTIFIER ON
 GO
 
@@ -608,7 +482,131 @@ DECLARE @industryId AS INT
 		   FETCH NEXT @ToRow ROWS ONLY; -- take 10 rows
 END
 
+
+
 GO
+
+
+/* Added By Khurram - 17 Dec 2015 (Start) */ 
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Account](
+	[AccountId] [bigint] IDENTITY(1,1) NOT NULL,
+	[AccountName] [nvarchar](200) NULL,
+	[AccountType] [int] NULL,
+	[AccountBalance] [decimal](18, 0) NULL,
+	[UserId] [nvarchar](128) NULL,
+ CONSTRAINT [PK_Account] PRIMARY KEY CLUSTERED 
+(
+	[AccountId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+ALTER TABLE [dbo].[Account]  WITH CHECK ADD  CONSTRAINT [FK_Account_AspNetUsers] FOREIGN KEY([UserId])
+REFERENCES [dbo].[AspNetUsers] ([Id])
+GO
+
+ALTER TABLE [dbo].[Account] CHECK CONSTRAINT [FK_Account_AspNetUsers]
+GO
+
+ALTER TABLE [dbo].[Transaction]  WITH CHECK ADD  CONSTRAINT [FK_Transaction_Account] FOREIGN KEY([AccountID])
+REFERENCES [dbo].[Account] ([AccountId])
+GO
+
+ALTER TABLE [dbo].[Transaction] CHECK CONSTRAINT [FK_Transaction_Account]
+GO
+
+/* Added By Khurram - 17 Dec 2015 (End) */ 
+
+-- Baqer Naqvi - IST 21-DEC-15
+GO
+/****** Object:  StoredProcedure [dbo].[GetSurveys]    Script Date: 21-Dec-15 5:46:48 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+-- =============================================
+-- Author:		Baqer Naqvi - IST 
+-- Create date: 18-Dec-15
+-- Description:	Returns Surveys for specified User
+-- =============================================
+
+ALTER PROCEDURE [dbo].[GetSurveys] 
+
+	-- Add the parameters for the stored procedure here
+	@UserID nvarchar(128) = 0 ,
+	@FromRow int =0           ,
+	@ToRow int =0
+
+AS
+BEGIN
+DECLARE @age AS INT
+DECLARE @gender AS INT
+DECLARE @countryId AS INT
+DECLARE @cityId AS INT
+DECLARE @languageId AS INT
+DECLARE @industryId AS INT
+
+        -- Setting local variables
+		   SELECT @age = age FROM AspNetUsers where id=@UserID
+		   SELECT @gender = gender FROM AspNetUsers where id=@UserID
+		   SELECT @countryId = countryId FROM AspNetUsers where id=@UserID
+		   SELECT @cityId = cityId FROM AspNetUsers where id=@UserID
+		   SELECT @languageId = LanguageID FROM AspNetUsers where id=@UserID
+		   SELECT @industryId = industryId FROM AspNetUsers where id=@UserID
+		   SELECT @countryId = CountryID FROM AspNetUsers where id=@UserID
+		   SELECT @cityId = CityID FROM AspNetUsers where id=@UserID
+
+
+		   select MySurveyQuestion.SQID,  MySurveyQuestion.Question, MySurveyQuestion.Description, MySurveyQuestion.DisplayQuestion ,
+		   MySurveyQuestion.LeftPicturePath, MySurveyQuestion.RightPicturePath, MySurveyQuestion.ApprovalDate, MySurveyQuestion.VoucherCode , 
+		   MySurveyQuestion.ResultClicks 
+		   from SurveyQuestion MySurveyQuestion
+
+		   where ( 
+		    (MySurveyQuestion.AgeRangeEnd >= @age and  @age >= MySurveyQuestion.AgeRangeStart) 
+			 and
+			(MySurveyQuestion.Gender= @gender)
+			 and
+			(MySurveyQuestion.EndDate >= GETDATE() and GETDATE() >= MySurveyQuestion.StartDate ) 
+			 and
+			(MySurveyQuestion.Approved = 1) 
+		  	 and
+			(MySurveyQuestion.Status = 6)   
+			 and 
+			((select count(*) from SurveyQuestionResponse MySurveyQuestionResponse
+			 where MySurveyQuestionResponse.UserID=@UserID and MySurveyQuestionResponse.SQID = MySurveyQuestion.SQID) = 0) 
+			 and
+			(MySurveyQuestion.LanguageID=@languageId) 
+			 and
+			 ((select count(*) from SurveyQuestionTargetLocation MySurveyQuestionLoc
+			 where MySurveyQuestionLoc.SQID=MySurveyQuestion.SQID and MySurveyQuestionLoc.CountryID=@countryId and
+			 MySurveyQuestionLoc.CityID=@cityId)) > 0 
+			 and 
+			 ((select count(*) from SurveyQuestionTargetCriteria MySurveyQuestionCrit
+			 where MySurveyQuestionCrit.SQID = MySurveyQuestion.SQID and 
+			 MySurveyQuestionCrit.LanguageID=@languageId and MySurveyQuestionCrit.IndustryID=@industryId)) > 0 
+		   )
+
+		   --  for paging 
+		   order by MySurveyQuestion.ApprovalDate
+		   OFFSET @FromRow ROWS -- skip 10 rows
+		   FETCH NEXT @ToRow ROWS ONLY; -- take 10 rows
+END
+
+
+
+
+
+
 
 
 
@@ -683,5 +681,174 @@ GO
 COMMIT
 
 /* added by iqra 21 dec 2015*/
+
+
+
+-- =========================== ADDED by Baqer  21-DEC-2015  | start
+
+GO
+/****** Object:  StoredProcedure [dbo].[GetAudienceAdCampaign]    Script Date: 21-Dec-15 5:50:16 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:		Baqer Naqvi - IST 
+-- Create date: 19-Dec-15
+-- Description:	Returns Count Of Matched Users
+-- =============================================
+
+ALTER PROCEDURE [dbo].[GetAudienceAdCampaign] 
+
+	-- Add the parameters for the stored procedure here
+	     @age AS INT,
+		 @gender AS INT,
+		 @countryId AS INT,
+		 @cityId AS INT,
+		 @languageId AS INT,
+		 @industryId AS INT,
+		 @profileQuestionIds as nvarchar(500)
+
+
+AS
+BEGIN
+DECLARE @countOfids AS INT
+
+    -- User Defined Split function 
+	SELECT @countOfids=  count(*) from SplitString(@profileQuestionIds,',') 
+
+    SELECT * FROM AspNetUsers SMDUser
+	where
+	SMDUser.Age= @age
+	and
+	SMDUser.Gender= @gender 
+	and 
+	SMDUser.CountryID= @countryId
+	and 
+	SMDUser.CityID= @cityId
+	and 
+	SMDUser.LanguageID= @languageId
+	and 
+	SMDUser.IndustryID= @industryId
+	and
+	(select count(*) from ProfileQuestionUserAnswer MyAnswer where MyAnswer.UserID = SMDUser.Id and 
+     MyAnswer.PQID IN (SELECT  * from SplitString(@profileQuestionIds,','))) > = @countOfids
+
+END
+
+ 
+GO
+/****** Object:  StoredProcedure [dbo].[GetAudienceSurvey]    Script Date: 21-Dec-15 5:50:42 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+-- =============================================
+-- Author:		Baqer Naqvi - IST 
+-- Create date: 19-Dec-15
+-- Description:	Returns Count Of Matched Users
+-- =============================================
+
+ALTER PROCEDURE [dbo].[GetAudienceSurvey] 
+
+	-- Add the parameters for the stored procedure here
+	     @age AS INT,
+		 @gender AS INT,
+		 @countryId AS INT,
+		 @cityId AS INT,
+		 @languageId AS INT,
+		 @industryId AS INT,
+		 @profileQuestionIds as nvarchar(500)
+
+
+AS
+BEGIN
+DECLARE @countOfids AS INT
+
+    -- User Defined Split function 
+	SELECT @countOfids=  count(*) from SplitString(@profileQuestionIds,',') 
+
+    SELECT COUNT(*) FROM AspNetUsers SMDUser
+	where
+	SMDUser.Age= @age
+	and
+	SMDUser.Gender= @gender 
+	and 
+	SMDUser.CountryID= @countryId
+	and 
+	SMDUser.CityID= @cityId
+	and 
+	SMDUser.LanguageID= @languageId
+	and 
+	SMDUser.IndustryID= @industryId
+	and
+	(select count(*) from ProfileQuestionUserAnswer MyAnswer where MyAnswer.UserID = SMDUser.Id and 
+     MyAnswer.PQID IN (SELECT  * from SplitString(@profileQuestionIds,','))) >= @countOfids
+
+END
+
+
+
+GO
+/****** Object:  UserDefinedFunction [dbo].[SplitString]    Script Date: 21-Dec-15 5:51:07 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER FUNCTION [dbo].[SplitString] (
+      @InputString                  VARCHAR(8000),
+      @Delimiter                    VARCHAR(50)
+)
+
+RETURNS @Items TABLE (
+      Item                          VARCHAR(8000)
+)
+
+AS
+BEGIN
+      IF @Delimiter = ' '
+      BEGIN
+            SET @Delimiter = ','
+            SET @InputString = REPLACE(@InputString, ' ', @Delimiter)
+      END
+
+      IF (@Delimiter IS NULL OR @Delimiter = '')
+            SET @Delimiter = ','
+
+--INSERT INTO @Items VALUES (@Delimiter) -- Diagnostic
+--INSERT INTO @Items VALUES (@InputString) -- Diagnostic
+
+      DECLARE @Item                 VARCHAR(8000)
+      DECLARE @ItemList       VARCHAR(8000)
+      DECLARE @DelimIndex     INT
+
+      SET @ItemList = @InputString
+      SET @DelimIndex = CHARINDEX(@Delimiter, @ItemList, 0)
+      WHILE (@DelimIndex != 0)
+      BEGIN
+            SET @Item = SUBSTRING(@ItemList, 0, @DelimIndex)
+            INSERT INTO @Items VALUES (@Item)
+
+            -- Set @ItemList = @ItemList minus one less item
+            SET @ItemList = SUBSTRING(@ItemList, @DelimIndex+1, LEN(@ItemList)-@DelimIndex)
+            SET @DelimIndex = CHARINDEX(@Delimiter, @ItemList, 0)
+      END -- End WHILE
+
+      IF @Item IS NOT NULL -- At least one delimiter was encountered in @InputString
+      BEGIN
+            SET @Item = @ItemList
+            INSERT INTO @Items VALUES (@Item)
+      END
+
+      -- No delimiters were encountered in @InputString, so just return @InputString
+      ELSE INSERT INTO @Items VALUES (@InputString)
+      RETURN
+END -- End Function
+
+
+-- =========================== ADDED by Baqer  21-DEC-2015  | end
 
 
