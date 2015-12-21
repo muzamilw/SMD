@@ -13,37 +13,37 @@ namespace SMD.Interfaces.Services
         /// <summary>
         /// Ad Viewed
         /// </summary>
-        Task UpdateTransactionOnViewingAd(AdViewedRequest request);
+        Task<BaseApiResponse> UpdateTransactionOnViewingAd(AdViewedRequest request);
 
         /// <summary>
         /// Archive Account
         /// </summary>
-        Task Archive(string userId);
+        Task<BaseApiResponse> Archive(string userId);
         
         /// <summary>
         /// Update Profile
         /// </summary>
-        Task UpdateProfile(UpdateUserProfileRequest request);
+        Task<BaseApiResponse> UpdateProfile(UpdateUserProfileRequest request);
         
         /// <summary>
         /// Confirm Email
         /// </summary>
-        Task<bool> ConfirmEmail(string userId, string code);
+        Task<BaseApiResponse> ConfirmEmail(string userId, string code);
         
         /// <summary>
         /// Register Custom
         /// </summary>
-        Task<User> RegisterCustom(RegisterCustomRequest request);
+        Task<LoginResponse> RegisterCustom(RegisterCustomRequest request);
         
         /// <summary>
         /// Register External 
         /// </summary>
-        Task<User> RegisterExternal(RegisterExternalRequest request);
+        Task<LoginResponse> RegisterExternal(RegisterExternalRequest request);
         
         /// <summary>
         /// External Login 
         /// </summary>
-        Task<User> ExternalLogin(ExternalLoginRequest request);
+        Task<LoginResponse> ExternalLogin(ExternalLoginRequest request);
 
         /// <summary>
         /// Standard Login 

@@ -2,17 +2,17 @@
 using SMD.MIS.Areas.Api.Models;
 using SMD.MIS.ModelMappers;
 using SMD.Models.RequestModels;
-using System;
 using System.Net;
 using System.Web;
 using System.Web.Http;
+using SMD.WebBase.Mvc;
 
 namespace SMD.MIS.Areas.Api.Controllers
 {
     /// <summary>
     /// Profile Question for APIs Controller 
     /// </summary>
-    //[Authorize]
+    [Authorize]
     public class GetProfileQuestionForApiController : ApiController
     {
         #region Public
@@ -33,6 +33,7 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// <summary>
         /// Get Profile Questions
         /// </summary>
+        [ApiExceptionCustom]
         public ProfileQuestionApiSearchResponse Get([FromUri] GetProfileQuestionApiRequest request)
         {
             if (request == null || !ModelState.IsValid)

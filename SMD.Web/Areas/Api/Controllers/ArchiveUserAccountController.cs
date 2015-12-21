@@ -1,10 +1,10 @@
-﻿using System.Net.Http;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using SMD.Interfaces.Services;
 using System;
 using System.Net;
 using System.Web;
 using System.Web.Http;
+using SMD.Models.ResponseModels;
 using SMD.WebBase.Mvc;
 
 namespace SMD.MIS.Areas.Api.Controllers
@@ -43,20 +43,15 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// <summary>
         /// Archive User Account
         /// </summary>
-        [ApiException]
-        public async Task<HttpResponseMessage> Post(string userId)
+        [ApiExceptionCustom]
+        public async Task<BaseApiResponse> Post(string userId)
         {
             if (string.IsNullOrEmpty(userId))
             {
                 throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
             }
 
-            await webApiUserService.Archive(userId); 
-
-            return new HttpResponseMessage
-                   {
-                       StatusCode = HttpStatusCode.OK
-                   };
+            return await webApiUserService.Archive(userId); 
         }
 
         #endregion

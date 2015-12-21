@@ -25,5 +25,7 @@
         public virtual ProfileQuestionAnswer ProfileQuestionAnswer { get; set; }
         public virtual SurveyQuestion SurveyQuestion { get; set; }
         public virtual SurveyQuestion LinkedSurveyQuestion { get; set; }
+
+        public virtual Language Language { get; set; }
     }
 }

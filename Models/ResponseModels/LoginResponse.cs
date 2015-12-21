@@ -5,12 +5,8 @@ namespace SMD.Models.ResponseModels
     /// <summary>
     /// Login Response 
     /// </summary>
-    public class LoginResponse
+    public class LoginResponse : BaseApiResponse
     {
-       public bool Status { get; set; }
-        
-       public string Message { get; set; }
-
        public User User { get; set; }
     }
 }

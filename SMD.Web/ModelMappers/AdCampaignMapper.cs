@@ -1,4 +1,5 @@
 ﻿using System.Web;
+using Excel;
 using SMD.MIS.Areas.Api.Models;
 using System.Linq;
 using SMD.Models.DomainModels;
@@ -12,7 +13,7 @@ namespace SMD.MIS.ModelMappers
     public static class AdCampaignMapper
     {
         /// <summary>
-        /// Domain Search Response to Web Response 
+        /// Domain Search Response to Web Response |baqer
         /// </summary>
         public static AdCampaignResposneModelForAproval CreateFrom(
             this Models.ResponseModels.AdCampaignResposneModelForAproval source)
@@ -25,7 +26,7 @@ namespace SMD.MIS.ModelMappers
         }
 
         /// <summary>
-        /// Domain to Web Mapper
+        /// Domain to Web Mapper |baqer
         /// </summary>
         public static AdCampaign CreateFrom(this Models.DomainModels.AdCampaign source)
         {
@@ -86,7 +87,7 @@ namespace SMD.MIS.ModelMappers
         }
 
         /// <summary>
-        /// Web To Domain Mapper
+        /// Web To Domain Mapper |baqer
         /// </summary>
         public static Models.DomainModels.AdCampaign CreateFrom(this AdCampaign source)
         {
@@ -135,7 +136,7 @@ namespace SMD.MIS.ModelMappers
         }
 
         /// <summary>
-        /// Domain Search Response to Web Response 
+        /// Domain Search Response to Web Response  |baqer
         /// </summary>
         public static CampaignRequestResponseModel CreateCampaignFrom(
             this Models.ResponseModels.CampaignResponseModel source)
@@ -149,7 +150,7 @@ namespace SMD.MIS.ModelMappers
         }
 
         /// <summary>
-        /// Domain to Web Resposne For API 
+        /// Domain to Web Resposne For API  |baqer
         /// </summary>
         public static AdCampaignApiSearchRequestResponse CreateResponseForApi(
             this Models.ResponseModels.AdCampaignApiSearchRequestResponse source)
@@ -161,7 +162,7 @@ namespace SMD.MIS.ModelMappers
         }
 
         /// <summary>
-        /// Domain APi to web APi 
+        /// Domain APi to web APi  |baqer
         /// </summary>
         public static AdCampaignApiModel CreateApiModel(this GetAds_Result source)
         {
@@ -180,7 +181,16 @@ namespace SMD.MIS.ModelMappers
             };
         }
 
-
+        /// <summary>
+        /// Return User Count  |baqer
+        /// </summary>
+        public static AudienceAdCampaignForApiResponse CreateCountFrom(this long source)
+        {
+            return new AudienceAdCampaignForApiResponse
+            {
+                UserCount = source
+            };
+        }
         /// <summary>
         /// Domain to Web Mapper
         /// </summary>

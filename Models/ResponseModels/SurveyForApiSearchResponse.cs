@@ -11,6 +11,6 @@ namespace SMD.Models.ResponseModels
         /// <summary>
         /// List of Surveys
         /// </summary>
-        public IEnumerable<GetSurveysResults> Surveys { get; set; }
+        public IEnumerable<GetSurveys_Result> Surveys { get; set; }
     }
 }

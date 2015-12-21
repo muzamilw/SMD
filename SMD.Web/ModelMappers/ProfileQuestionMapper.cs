@@ -132,6 +132,17 @@ namespace SMD.MIS.ModelMappers
                 PercentageCompleted= source.PercentageCompleted
             };
         }
+
+        /// <summary>
+        /// Domain to API response 
+        /// </summary>
+        public static UpdateProfileQuestionUserAnswerResponse CreateFrom(this string source)
+        {
+            return new UpdateProfileQuestionUserAnswerResponse
+            {
+                Response = source
+            };
+        }
         #endregion 
     }
 }

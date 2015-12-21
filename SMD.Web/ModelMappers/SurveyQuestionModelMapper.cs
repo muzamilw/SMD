@@ -12,7 +12,7 @@ namespace SMD.MIS.ModelMappers
         /// <summary>
         /// Domain API to WEB API | baqer
         /// </summary>
-        public static SurveyApiModel CreateFrom(this GetSurveysResults source)
+        public static SurveyApiModel CreateFrom(this GetSurveys_Result source)
         {
             return new SurveyApiModel
             {
@@ -36,7 +36,7 @@ namespace SMD.MIS.ModelMappers
         {
             return new SurveyForApiSearchResponse
             {
-                Surveys = source.Surveys.Select(survey => survey.CreateFrom()).ToList()
+                Surveys = source.Surveys.Select(survey => survey.CreateFrom())
             };
         }
 
@@ -146,6 +146,17 @@ namespace SMD.MIS.ModelMappers
             {
                 TotalCount = source.TotalCount,
                 SurveyQuestions = source.SurveyQuestions.Select(question => question.CreateFrom())
+            };
+        }
+
+        /// <summary>
+        /// Returns user count  | baqer
+        /// </summary>
+        public static AudienceSurveyForApiResponse CreateFrom(this long count)
+        {
+            return new AudienceSurveyForApiResponse
+            {
+                UserCount = count
             };
         }
 

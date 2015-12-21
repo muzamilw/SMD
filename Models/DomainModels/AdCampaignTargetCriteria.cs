@@ -28,5 +28,7 @@ namespace SMD.Models.DomainModels
         public virtual ProfileQuestion ProfileQuestion { get; set; }
         public virtual ProfileQuestionAnswer ProfileQuestionAnswer { get; set; }
         public virtual SurveyQuestion SurveyQuestion { get; set; }
+
+        public virtual Language Language { get; set; }
     }
 }

@@ -384,7 +384,7 @@
     <Compile Include="Areas\Api\Controllers\GetSurveysForApiController.cs" />
     <Compile Include="Areas\Api\Controllers\AdViewedController.cs" />
     <Compile Include="Areas\Api\Controllers\SurveyQuestionEditorController.cs" />
-    <Compile Include="Areas\Api\Controllers\UpdateQuestionAnswerForApiController - Copy.cs" />
+    <Compile Include="Areas\Api\Controllers\UpdateQuestionAnswerForApiController.cs" />
     <Compile Include="Areas\Api\Controllers\UpdateUserProfileController.cs" />
     <Compile Include="Areas\Api\Controllers\RegisterController.cs" />
     <Compile Include="Areas\Api\Controllers\GetAdsForApiController.cs" />
@@ -409,6 +409,8 @@
     <Compile Include="Areas\Api\Models\AdCampaignApiModel.cs" />
     <Compile Include="Areas\Api\Models\AdCampaignApiSearchRequestResponse.cs" />
     <Compile Include="Areas\Api\Models\AdCampaignTargetCriteria.cs" />
+    <Compile Include="Areas\Api\Models\AudienceAdCampaignForApiResponse.cs" />
+    <Compile Include="Areas\Api\Models\AudienceSurveyForApiResponse.cs" />
     <Compile Include="Areas\Api\Models\CampaignRequestResponseModel.cs" />
     <Compile Include="Areas\Api\Models\CampaignSearchRequest.cs" />
     <Compile Include="Areas\Api\Models\AdCampaignResposneModelForAproval.cs" />
@@ -425,6 +427,7 @@
     <Compile Include="Areas\Api\Models\SurveyQuestionDropDown.cs" />
     <Compile Include="Areas\Api\Models\SurveyQuestionRequestResponseModel.cs" />
     <Compile Include="Areas\Api\Models\SurveyQuestionResposneModelForAproval.cs" />
+    <Compile Include="Areas\Api\Models\UpdateProfileQuestionUserAnswerResponse.cs" />
     <Compile Include="Areas\Api\Models\WebApiUser.cs" />
     <Compile Include="Areas\Api\Models\CountryDropdown.cs" />
     <Compile Include="Areas\Api\Models\ProfileQuestionDropdown.cs" />
