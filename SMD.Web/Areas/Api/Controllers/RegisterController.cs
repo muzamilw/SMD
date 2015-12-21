@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 using SMD.Interfaces.Services;
 using SMD.MIS.Areas.Api.Models;
-using SMD.Models.IdentityModels;
 using SMD.Models.RequestModels;
 using System;
 using System.Net;
@@ -46,8 +45,8 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// <summary>
         /// Register In app user
         /// </summary>
-        [ApiException]
-        public async Task<WebApiUser> Post([FromUri] RegisterCustomRequest request)
+        [ApiExceptionCustom]
+        public async Task<LoginResponse> Post([FromUri] RegisterCustomRequest request)
         {
             if (request == null || !ModelState.IsValid)
             {
@@ -55,8 +54,8 @@ namespace SMD.MIS.Areas.Api.Controllers
             }
 
             // Register User IN App
-            User user = await webApiUserService.RegisterCustom(request); 
-            return user.CreateFrom();
+            SMD.Models.ResponseModels.LoginResponse response = await webApiUserService.RegisterCustom(request);
+            return response.CreateFrom();
         }
 
         #endregion

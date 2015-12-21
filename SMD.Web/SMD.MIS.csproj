@@ -411,6 +411,7 @@
     <Compile Include="Areas\Api\Models\CampaignRequestResponseModel.cs" />
     <Compile Include="Areas\Api\Models\CampaignSearchRequest.cs" />
     <Compile Include="Areas\Api\Models\AdCampaignResposneModelForAproval.cs" />
+    <Compile Include="Areas\Api\Models\LoginResponse.cs" />
     <Compile Include="Areas\Api\Models\SurveyForApiSearchResponse.cs" />
     <Compile Include="Areas\Api\Models\LocationDropDown.cs" />
     <Compile Include="Areas\Api\Models\ProfileQuestionAnswerApiModel.cs" />
@@ -1383,6 +1384,7 @@
     <Content Include="RichTextEditor\skins\moono\readme.md" />
     <Content Include="Content\less\ProfileQuestion.less" />
     <None Include="Properties\PublishProfiles\SMD MIS Saqib.pubxml" />
+    <None Include="Properties\PublishProfiles\SMD.pubxml" />
     <None Include="Scripts\amplify-vsdoc.js" />
     <Content Include="Scripts\amplify.js" />
     <Content Include="Scripts\amplify.min.js" />
