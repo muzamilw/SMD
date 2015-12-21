@@ -5,13 +5,14 @@ using SMD.Models.RequestModels;
 using System.Net;
 using System.Web;
 using System.Web.Http;
+using SMD.WebBase.Mvc;
 
 namespace SMD.MIS.Areas.Api.Controllers
 {
     /// <summary>
     /// Get Surveys for APIs Controller 
     /// </summary>
-    //[Authorize]
+    [Authorize]
     public class GetSurveysForApiController : ApiController
     {
         #region Public
@@ -33,6 +34,7 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// <summary>
         /// Get Surveys for API
         /// </summary>
+        [ApiExceptionCustom]
         public SurveyForApiSearchResponse Post(GetSurveysApiRequest request)
         {
             if (request == null || !ModelState.IsValid)

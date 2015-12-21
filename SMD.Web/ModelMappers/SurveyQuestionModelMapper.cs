@@ -150,6 +150,17 @@ namespace SMD.MIS.ModelMappers
         }
 
         /// <summary>
+        /// Returns user count  | baqer
+        /// </summary>
+        public static AudienceSurveyForApiResponse CreateFrom(this long count)
+        {
+            return new AudienceSurveyForApiResponse
+            {
+                UserCount = count
+            };
+        }
+
+        /// <summary>
         /// Create DD from Domain Model
         /// </summary>
         public static SurveyQuestionDropDown CreateFromDropdown(this Models.DomainModels.SurveyQuestion source)
