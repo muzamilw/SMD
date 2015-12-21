@@ -1,5 +1,4 @@
-﻿using SMD.Models.DomainModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -41,5 +40,33 @@ namespace SMD.MIS.Areas.Api.Models
         public List<SurveyQuestionTargetCriteria> SurveyQuestionTargetCriterias { get; set; }
         public List<SurveyQuestionTargetLocation> SurveyQuestionTargetLocations { get; set; }
         public int? Gender { get; set; }
+    }
+    public class SurveyQuestionTargetCriteria
+    {
+        public long Id { get; set; }
+        public long? SqId { get; set; }
+        public int? Type { get; set; }
+        public int? PqId { get; set; }
+        public int? PqAnswerId { get; set; }
+        public long? LinkedSqId { get; set; }
+        public int? LinkedSqAnswer { get; set; }
+        public bool? IncludeorExclude { get; set; }
+        public int? LanguageId { get; set; }
+        public int? IndustryId { get; set; }
+
+        public string QuestionQueryString { get; set; }   // survey Question , profile Question,  industry name
+        public string AnswerQueryString { get; set; }  // survey Question Answer , profile Question Answer
+        public string Language { get; set; } // language name
+    }
+    public class SurveyQuestionTargetLocation
+    {
+        public long Id { get; set; }
+        public long? SqId { get; set; }
+        public int? CountryId { get; set; }
+        public int? CityId { get; set; }
+        public int? Radius { get; set; }
+        public bool? IncludeorExclude { get; set; }
+        public string CityName { get; set; }
+        public string CountryName { get; set; }
     }
 }

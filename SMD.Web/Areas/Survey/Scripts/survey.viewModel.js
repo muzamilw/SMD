@@ -440,7 +440,7 @@ define("survey/survey.viewModel",
                     },
                     saveSurveyQuestion = function (mode) {
                         var surveyData = selectedQuestion().convertToServerData();
-
+                        console.log(surveyData);
                         dataservice.addSurveyData(surveyData, {
                             success: function (data) {
                                 isEditorVisible(false);
