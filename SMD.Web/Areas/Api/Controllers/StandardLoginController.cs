@@ -13,7 +13,8 @@ using SMD.WebBase.Mvc;
 namespace SMD.MIS.Areas.Api.Controllers
 {
     /// <summary>
-    /// Standard Login Api Controller 
+    /// Standard Login Api Controller
+    /// 
     /// </summary>
     //[Authorize]
     public class StandardLoginController : ApiController
