@@ -115,9 +115,7 @@ namespace SMD.Repository.Repositories
             Expression<Func<AdCampaign, bool>> query =
                 ad => ad.CampaignId == CampaignId;
             
-
-            IEnumerable<AdCampaign>  campd = DbSet.Where(query);
-            return campd;
+            return  DbSet.Where(query);
         }
 
     }

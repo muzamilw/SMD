@@ -4,6 +4,7 @@ using SMD.MIS.Areas.Api.Models;
 using System.Linq;
 using SMD.Models.DomainModels;
 using AdCampaign = SMD.MIS.Areas.Api.Models.AdCampaign;
+using SMD.Models.Common;
 
 namespace SMD.MIS.ModelMappers
 {
@@ -75,7 +76,7 @@ namespace SMD.MIS.ModelMappers
                 StartDateTime = source.StartDateTime,
                 UserId = source.UserId,
                 VerifyQuestion = source.VerifyQuestion,
-                
+
                 AdCampaignTargetCriterias =
                     source.AdCampaignTargetCriterias != null ? source.AdCampaignTargetCriterias.Select(x => x.CreateFrom()).ToList() : null,
 
@@ -194,10 +195,49 @@ namespace SMD.MIS.ModelMappers
         /// <summary>
         /// Domain to Web Mapper
         /// </summary>
-        public static AdCampaignTargetCriteria CreateFrom(this Models.DomainModels.AdCampaignTargetCriteria source)
+        public static SMD.MIS.Areas.Api.Models.AdCampaignTargetCriteria CreateFrom(this Models.DomainModels.AdCampaignTargetCriteria source)
         {
-
-            return new AdCampaignTargetCriteria
+            string QuestionString = "";
+            string AnswerString = "";
+            if (source.Type != null && source.Type == (int)AdCampaignCriteriaType.ProfileQuestion)
+            {
+                if (source.PqId != null && source.PqId > 0 && source.ProfileQuestion != null)
+                {
+                    QuestionString = source.ProfileQuestion.Question;
+                }
+                if (source.PqAnswerId != null && source.PqAnswerId > 0 && source.ProfileQuestionAnswer != null)
+                {
+                    AnswerString = source.ProfileQuestionAnswer.AnswerString;
+                }
+            }
+            else if (source.Type != null && source.Type == (int)AdCampaignCriteriaType.SurveyQuestion)
+            {
+                if (source.SqId != null && source.SqId > 0 && source.SurveyQuestion != null)
+                {
+                    QuestionString = source.SurveyQuestion.Question;
+                }
+                if (source.SqAnswer != null && source.SqAnswer > 0 && source.SurveyQuestion != null)
+                {
+                    if (source.SqAnswer == 1)
+                    {
+                        AnswerString = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + source.SurveyQuestion.LeftPicturePath;
+                    }
+                    else 
+                    {
+                        AnswerString = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + source.SurveyQuestion.RightPicturePath;
+                    }
+                    
+                }
+            }
+            else if (source.Type != null && source.Type == (int)AdCampaignCriteriaType.Language)
+            {
+                if (source.LanguageId != null && source.LanguageId > 0 && source.Language != null)
+                {
+                    QuestionString = source.Language.LanguageName;
+                }
+            }
+            
+            return new SMD.MIS.Areas.Api.Models.AdCampaignTargetCriteria
             {
                 CriteriaId = source.CriteriaId,
                 CampaignId = source.CampaignId,
@@ -208,7 +248,9 @@ namespace SMD.MIS.ModelMappers
                 PqId = source.PqId,
                 SqAnswer = source.SqAnswer,
                 SqId = source.SqId,
-                Type = source.Type
+                Type = source.Type,
+                QuestionString = QuestionString,
+                AnswerString = AnswerString
             };
         }
 
