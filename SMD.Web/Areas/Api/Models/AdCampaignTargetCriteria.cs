@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
-namespace SMD.Models.DomainModels
+namespace SMD.MIS.Areas.Api.Models
 {
-    /// <summary>
-    /// AdCampaignTargetCriteria Domain Model
-    /// </summary>
     public class AdCampaignTargetCriteria
     {
         public long CriteriaId { get; set; }
@@ -23,12 +19,8 @@ namespace SMD.Models.DomainModels
 
         public int? IndustryId { get; set; }
 
-        public virtual Industry Industry { get; set; }
-        public virtual AdCampaign AdCampaign { get; set; }
-        public virtual ProfileQuestion ProfileQuestion { get; set; }
-        public virtual ProfileQuestionAnswer ProfileQuestionAnswer { get; set; }
-        public virtual SurveyQuestion SurveyQuestion { get; set; }
+        public string QuestionString { get; set; }
 
-        public virtual Language Language { get; set; }
+        public string AnswerString { get; set; }
     }
 }

@@ -164,8 +164,10 @@ namespace SMD.Implementation.Services
                 surveyQuestionRepository.SaveChanges();
                 string[] paths = SaveSurveyImages(survey);
                // return surveyQuestionRepository.updateSurveyImages(paths, survey.SqId);
-                survey.LeftPicturePath = paths[0];
-                survey.RightPicturePath = paths[1];
+                if(survey.LeftPictureBytes != null)
+                    survey.LeftPicturePath = paths[0];
+                if(survey.RightPictureBytes != null)
+                    survey.RightPicturePath = paths[1];
                 surveyQuestionRepository.SaveChanges();
                 return true;
                 
@@ -175,23 +177,46 @@ namespace SMD.Implementation.Services
                 throw ex;
             }
         }
+        public bool Update(SurveyQuestion survey)
+        {
+            try
+            {
+                survey.ModifiedDate = DateTime.Now;
+                survey.ModifiedBy = surveyQuestionRepository.LoggedInUserIdentity;
+                surveyQuestionRepository.Update(survey);
+                surveyQuestionRepository.SaveChanges();
+                string[] paths = SaveSurveyImages(survey);
+                // return surveyQuestionRepository.updateSurveyImages(paths, survey.SqId);
+                if (survey.LeftPictureBytes != null)
+                    survey.LeftPicturePath = paths[0];
+                if (survey.RightPictureBytes != null)
+                    survey.RightPicturePath = paths[1];
+                surveyQuestionRepository.SaveChanges();
+                return true;
+                
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
         public SurveyQuestionEditResponseModel GetSurveyQuestion(long SqId)
         {
-            SurveyQuestion Servey = surveyQuestionRepository.Get(SqId);
+            SurveyQuestion Servey = surveyQuestionRepository.Find(SqId);
             if(Servey.StartDate.HasValue)
                 Servey.StartDate = Servey.StartDate.Value.Add(surveyQuestionRepository.UserTimezoneOffSet);
             if(Servey.EndDate.HasValue)
                  Servey.EndDate = Servey.EndDate.Value.Add(surveyQuestionRepository.UserTimezoneOffSet);
-            Servey.SurveyQuestionResponses = null;
-            foreach (var criteria in Servey.SurveyQuestionTargetCriterias)
-            {
-                criteria.SurveyQuestion = null;
-            }
-            foreach (var loc in Servey.SurveyQuestionTargetLocations)
-            {
-                loc.SurveyQuestion = null;
-            }
+            //Servey.SurveyQuestionResponses = null;
+            //foreach (var criteria in Servey.SurveyQuestionTargetCriterias)
+            //{
+            //    criteria.SurveyQuestion = null;
+            //}
+            //foreach (var loc in Servey.SurveyQuestionTargetLocations)
+            //{
+            //    loc.SurveyQuestion = null;
+            //}
             return new SurveyQuestionEditResponseModel
             {
                 SurveyQuestionObj = Servey

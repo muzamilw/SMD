@@ -3,6 +3,8 @@ using System.Linq;
 using System.Web;
 using SMD.Models.DomainModels;
 using SurveyQuestion = SMD.MIS.Areas.Api.Models.SurveyQuestion;
+using System.Collections.Generic;
+using SMD.Models.Common;
 
 namespace SMD.MIS.ModelMappers
 {
@@ -12,7 +14,7 @@ namespace SMD.MIS.ModelMappers
         /// <summary>
         /// Domain API to WEB API | baqer
         /// </summary>
-        public static SurveyApiModel CreateFrom(this GetSurveysResults source)
+        public static SurveyApiModel CreateFrom(this GetSurveys_Result source)
         {
             return new SurveyApiModel
             {
@@ -36,7 +38,7 @@ namespace SMD.MIS.ModelMappers
         {
             return new SurveyForApiSearchResponse
             {
-                Surveys = source.Surveys.Select(survey => survey.CreateFrom()).ToList()
+                Surveys = source.Surveys.Select(survey => survey.CreateFrom())
             };
         }
 
@@ -150,17 +152,28 @@ namespace SMD.MIS.ModelMappers
         }
 
         /// <summary>
+        /// Returns user count  | baqer
+        /// </summary>
+        public static AudienceSurveyForApiResponse CreateFrom(this long count)
+        {
+            return new AudienceSurveyForApiResponse
+            {
+                UserCount = count
+            };
+        }
+
+        /// <summary>
         /// Create DD from Domain Model
         /// </summary>
         public static SurveyQuestionDropDown CreateFromDropdown(this Models.DomainModels.SurveyQuestion source)
         {
             string leftPath = source.LeftPicturePath;
-            if (!source.LeftPicturePath.Contains("http"))
+            if (source.LeftPicturePath != null && !source.LeftPicturePath.Contains("http"))
             {
                 leftPath = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + source.LeftPicturePath;
             }
             string rightPath = source.RightPicturePath;
-            if (!source.RightPicturePath.Contains("http"))
+            if (source.RightPicturePath != null && !source.RightPicturePath.Contains("http"))
             {
                 rightPath = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + source.RightPicturePath;
             }
@@ -203,6 +216,8 @@ namespace SMD.MIS.ModelMappers
             {
                 rightPath = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + source.RightPicturePath;
             }
+            List<SMD.MIS.Areas.Api.Models.SurveyQuestionTargetCriteria> criterias = GetSurveyQuestionTargetCriterias(source);
+            List<SMD.MIS.Areas.Api.Models.SurveyQuestionTargetLocation> locs = GetSurveyLocations(source);
             return new SurveyQuestion
             {
                 SqId = source.SqId,
@@ -228,12 +243,92 @@ namespace SMD.MIS.ModelMappers
                 DiscountVoucherId = source.DiscountVoucherId,
                 RejectionReason = source.RejectionReason,
                 SubmissionDate = source.SubmissionDate,
-                SurveyQuestionTargetCriterias = source.SurveyQuestionTargetCriterias == null ? null : source.SurveyQuestionTargetCriterias.ToList(),
-                SurveyQuestionTargetLocations = source.SurveyQuestionTargetLocations == null ? null : source.SurveyQuestionTargetLocations.ToList(),
+                SurveyQuestionTargetCriterias = criterias,
+                SurveyQuestionTargetLocations = locs,
                 AgeRangeEnd = source.AgeRangeEnd,
                 AgeRangeStart = source.AgeRangeStart,
                 Gender = source.Gender
             };
+        }
+        public static List<SMD.MIS.Areas.Api.Models.SurveyQuestionTargetCriteria> GetSurveyQuestionTargetCriterias(this Models.DomainModels.SurveyQuestion source)
+        {
+            List<SMD.MIS.Areas.Api.Models.SurveyQuestionTargetCriteria> result = new List<Areas.Api.Models.SurveyQuestionTargetCriteria>();
+
+            foreach(var criteria in source.SurveyQuestionTargetCriterias)
+            {
+                SMD.MIS.Areas.Api.Models.SurveyQuestionTargetCriteria modelCriteria = new Areas.Api.Models.SurveyQuestionTargetCriteria();
+                modelCriteria.Id = criteria.Id;
+                modelCriteria.IncludeorExclude = criteria.IncludeorExclude;
+                modelCriteria.IndustryId = criteria.IndustryId;
+                modelCriteria.LanguageId = criteria.LanguageId;
+                modelCriteria.LinkedSqAnswer = criteria.LinkedSqAnswer;
+                modelCriteria.LinkedSqId = criteria.LinkedSqId;
+                modelCriteria.PqAnswerId = criteria.PqAnswerId;
+                modelCriteria.PqId = criteria.PqId;
+                modelCriteria.SqId = criteria.SqId;
+                modelCriteria.Type = criteria.Type;
+                if (criteria.Type == (int)SurveyQuestionTargetCriteriaType.ProfileQuestion)
+                {
+                    if (criteria.ProfileQuestion != null)
+                    {
+                        modelCriteria.questionString = criteria.ProfileQuestion.Question;
+                        if(criteria.ProfileQuestionAnswer != null)
+                            modelCriteria.answerString = criteria.ProfileQuestionAnswer.AnswerString;
+                    }
+                }
+                else if (criteria.Type == (int)SurveyQuestionTargetCriteriaType.SurveryQuestion)
+                {
+                    if (criteria.SurveyQuestion != null)
+                    {
+                        modelCriteria.questionString = criteria.SurveyQuestion.DisplayQuestion;
+                        string pictureUrl = criteria.SurveyQuestion.RightPicturePath;
+                        if (criteria.LinkedSqAnswer == (int)SurveyQuestionAnswerType.Left)
+                        {
+                            pictureUrl = criteria.SurveyQuestion.LeftPicturePath;
+                        }
+
+                        if (pictureUrl != null && !pictureUrl.Contains("http"))
+                        {
+                            pictureUrl = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + pictureUrl;
+                        }
+                        modelCriteria.answerString = pictureUrl;
+                    }
+                }
+                else if (criteria.Type == (int)SurveyQuestionTargetCriteriaType.Language)
+                {
+                    if (criteria.Language != null)
+                        modelCriteria.Language = criteria.Language.LanguageName;
+                }
+                else if (criteria.Type == (int)SurveyQuestionTargetCriteriaType.Industry)
+                {
+                    if (criteria.Industry != null)
+                    {
+                        modelCriteria.questionString = criteria.Industry.IndustryName;
+                    }
+                }
+                result.Add(modelCriteria);
+            }
+            return result;
+        }
+        public static List<SMD.MIS.Areas.Api.Models.SurveyQuestionTargetLocation> GetSurveyLocations(this Models.DomainModels.SurveyQuestion source)
+        {
+            List<SMD.MIS.Areas.Api.Models.SurveyQuestionTargetLocation> result = new List<Areas.Api.Models.SurveyQuestionTargetLocation>();
+            foreach(var location in source.SurveyQuestionTargetLocations)
+            {
+                SMD.MIS.Areas.Api.Models.SurveyQuestionTargetLocation modelLocation = new Areas.Api.Models.SurveyQuestionTargetLocation();
+                modelLocation.CityId = location.CityId;
+                modelLocation.CountryId = location.CountryId;
+                if(location.City != null)
+                    modelLocation.City = location.City.CityName;
+                if(location.Country != null)
+                    modelLocation.Country = location.Country.CountryName;
+                modelLocation.Id = location.Id;
+                modelLocation.IncludeorExclude = location.IncludeorExclude;
+                modelLocation.Radius = location.Radius;
+                modelLocation.SqId = location.SqId;
+                result.Add(modelLocation);
+            }
+            return result;
         }
     }
 }

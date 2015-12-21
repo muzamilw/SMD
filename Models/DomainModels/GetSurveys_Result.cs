@@ -5,7 +5,7 @@ namespace SMD.Models.DomainModels
     /// <summary>
     /// Sp Results For Api
     /// </summary>
-    public class GetSurveysResults
+    public class GetSurveys_Result
     {
         public long SQID { get; set; }
         public string Question { get; set; }
@@ -15,6 +15,6 @@ namespace SMD.Models.DomainModels
         public string RightPicturePath { get; set; }
         public DateTime ApprovalDate { get; set; }
         public string VoucherCode { get; set; }
-        public long ResultClicks { get; set; }  
+        public long? ResultClicks { get; set; }  
     }
 }

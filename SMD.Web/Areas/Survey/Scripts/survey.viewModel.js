@@ -197,6 +197,7 @@ define("survey/survey.viewModel",
                      },
                     //add location
                     onAddLocation = function (item) {
+                        debugger;
                         selectedLocation().Radius = (selectedLocationRadius);
                         selectedLocation().IncludeorExclude = (selectedLocationIncludeExclude);
                         selectedQuestion().SurveyQuestionTargetLocation.push( new model.SurveyQuestionTargetLocation.Create( {
@@ -222,7 +223,6 @@ define("survey/survey.viewModel",
                             LanguageID: selected.LanguageId,
                             IncludeorExclude: parseInt(selectedLangIncludeExclude()),
                             Type: 3,
-                       //     ID: 0,
                             SQID: selectedQuestion().SQID()
                         }));
                         $("#searchLanguages").val("");
@@ -325,10 +325,10 @@ define("survey/survey.viewModel",
                         if (isNewCriteria()) {
                             selectedQuestion().SurveyQuestionTargetCriteria.push(new model.SurveyQuestionTargetCriteria.Create({
                                 Type: selectedCriteria().Type(),
-                                PQID: selectedCriteria().PQID(),
-                                PQAnswerID: selectedCriteria().PQAnswerID(),
-                                LinkedSQID: selectedCriteria().LinkedSQID(),
-                                LinkedSQAnswer: selectedCriteria().LinkedSQAnswer(),
+                                PqId: selectedCriteria().PQID(),
+                                PqAnswerId: selectedCriteria().PQAnswerID(),
+                                LinkedSqId: selectedCriteria().LinkedSQID(),
+                                LinkedSqAnswer: selectedCriteria().LinkedSQAnswer(),
                                 questionString: selectedCriteria().questionString(),
                                 answerString: selectedCriteria().answerString(),
                                 IncludeorExclude: selectedCriteria().IncludeorExclude()
@@ -440,7 +440,6 @@ define("survey/survey.viewModel",
                     },
                     saveSurveyQuestion = function (mode) {
                         var surveyData = selectedQuestion().convertToServerData();
-
                         dataservice.addSurveyData(surveyData, {
                             success: function (data) {
                                 isEditorVisible(false);

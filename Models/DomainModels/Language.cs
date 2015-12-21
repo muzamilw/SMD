@@ -14,5 +14,8 @@ namespace SMD.Models.DomainModels
         public virtual ICollection<SurveyQuestion> SurveyQuestions { get; set; }
 
         public virtual ICollection<User> AspNetUsers { get; set; }
+
+        public virtual ICollection<AdCampaignTargetCriteria> AdCampaignTargetCriterias { get; set; }
+        public virtual ICollection<SurveyQuestionTargetCriteria> SurveyQuestionTargetCriterias { get; set; }
     }
 }

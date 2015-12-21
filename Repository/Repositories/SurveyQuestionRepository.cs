@@ -132,17 +132,17 @@ namespace SMD.Repository.Repositories
         {
             int fromRow = (request.PageNo - 1) * request.PageSize;
             int toRow = request.PageSize;
-            return db.GetAdCompaignForApi(request.UserId, fromRow, toRow).ToList();
+            return db.GetAdCompaignForApi(request.UserId, fromRow, toRow);
         }
 
         /// <summary>
         /// Get Surveys | SP-API | baqer
         /// </summary>
-        public IEnumerable<GetSurveysResults> GetSurveysForApi(GetSurveysApiRequest request)
+        public IEnumerable<GetSurveys_Result> GetSurveysForApi(GetSurveysApiRequest request)
         {
             int fromRow = (request.PageNo - 1) * request.PageSize;
             int toRow = request.PageSize;
-            return db.GetSurveysForApi(request.UserId, fromRow, toRow).ToList();  
+            return db.GetSurveysForApi(request.UserId, fromRow, toRow);  
         }
 
         /// <summary>
@@ -150,8 +150,8 @@ namespace SMD.Repository.Repositories
         /// </summary>
         public long GetAudienceSurveyCount(GetAudienceSurveyRequest request)
         {
-            db.GetAudienceSurveyCount(request);
-            return 5;
+           var resposne=  db.GetAudienceSurveyCount(request).ToList();
+           return resposne.FirstOrDefault();
         }
 
         /// <summary>
@@ -159,8 +159,8 @@ namespace SMD.Repository.Repositories
         /// </summary>
         public long GetAudienceAdCampaignCount(GetAudienceSurveyRequest request)
         {
-            db.GetAudienceAdCampaignCount(request);
-            return 9;  
+            var resposne = db.GetAudienceAdCampaignCount(request);
+            return resposne.FirstOrDefault(); 
         }
     }
 }

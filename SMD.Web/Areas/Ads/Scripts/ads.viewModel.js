@@ -38,7 +38,7 @@ define("ads/ads.viewModel",
                     correctAnswers = ko.observableArray([{ id: 1, name: "Answer 1" }, { id: 1, name: "Answer 2" }, { id: 3, name: "Answer 3" }]),
                     getAdCampaignGridContent = function () {
                         dataservice.getCampaignData({
-                            FirstLoad: true,
+                            CampaignId: 0,
                             PageSize: pager().pageSize(),
                             PageNo: pager().currentPage(),
                             SearchText:searchFilterValue()
@@ -52,7 +52,7 @@ define("ads/ads.viewModel",
                                     // set grid content
                                     campaignGridContent.removeAll();
                                     _.each(data.Campaigns, function (item) {
-                                     
+                                       
                                         campaignGridContent.push(model.Campaign.Create(updateCampaignGridItem(item)));
                                     });
                                     pager().totalCount(data.TotalCount);
@@ -69,7 +69,7 @@ define("ads/ads.viewModel",
                     },
                
                     updateCampaignGridItem = function (item) {
-
+                     
                         if (item.Status == 1) {
                             item.StatusValue = "Draft"
                         } else if (item.Status == 2) {
@@ -431,6 +431,31 @@ define("ads/ads.viewModel",
                         campaignModel().CampaignImagePath(data);
                     },
 
+                    onEditCampaign = function (item) {
+                        dataservice.getCampaignData({
+                            CampaignId: item.CampaignID(),
+                            SearchText: ""
+                        }, {
+                            success: function (data) {
+                                if (data != null) {
+                                    // set languages drop down
+                                    langs.removeAll();
+                                    ko.utils.arrayPushAll(langs(), data.LanguageDropdowns);
+                                    langs.valueHasMutated();
+                                    // set grid content
+                                    
+                                    console.log("edit ");
+                                    console.log(data);
+
+                                    
+                                }
+
+                            },
+                            error: function (response) {
+
+                            }
+                        });
+                    },
                     // Initialize the view model
                     initialize = function (specifiedView) {
                         view = specifiedView; 
@@ -487,7 +512,8 @@ define("ads/ads.viewModel",
                         OnChangeCampaignType: OnChangeCampaignType,
                         campaignTypeImageCallback: campaignTypeImageCallback,
                         campaignImageCallback: campaignImageCallback,
-                        correctAnswers: correctAnswers
+                        correctAnswers: correctAnswers,
+                        onEditCampaign: onEditCampaign
                     };
             })()
         };
