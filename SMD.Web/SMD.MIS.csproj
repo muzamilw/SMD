@@ -409,6 +409,7 @@
     <Compile Include="Areas\Api\Models\AdCampaignApiModel.cs" />
     <Compile Include="Areas\Api\Models\AdCampaignApiSearchRequestResponse.cs" />
     <Compile Include="Areas\Api\Models\AdCampaignTargetCriteria.cs" />
+    <Compile Include="Areas\Api\Models\AdCampaignTargetLocation.cs" />
     <Compile Include="Areas\Api\Models\AudienceAdCampaignForApiResponse.cs" />
     <Compile Include="Areas\Api\Models\AudienceSurveyForApiResponse.cs" />
     <Compile Include="Areas\Api\Models\CampaignRequestResponseModel.cs" />

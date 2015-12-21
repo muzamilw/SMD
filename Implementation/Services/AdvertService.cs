@@ -130,6 +130,22 @@ namespace SMD.Implementation.Services
                 Languages = _languageRepository.GetAllLanguages()
             };
         }
+        /// <summary>
+        /// update Campaign
+        /// </summary>
+        public void UpdateCampaign(AdCampaign campaignModel)
+        {
+            campaignModel.UserId = _adCampaignRepository.LoggedInUserIdentity;
+            string[] paths = SaveImages(campaignModel);
+            if (paths != null && paths.Count() > 0)
+            {
+                campaignModel.ImagePath = paths[0];
+                campaignModel.LandingPageVideoLink = paths[1];
+
+            }
+            _adCampaignRepository.Update(campaignModel);
+            _adCampaignRepository.SaveChanges();
+        }
         #endregion
         #region Public
 

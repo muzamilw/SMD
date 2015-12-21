@@ -38,5 +38,6 @@ namespace SMD.Interfaces.Services
         AdCampaignBaseResponse GetSurveyQuestionData(long surveyId);
         CampaignResponseModel GetCampaigns(AdCampaignSearchRequest request);
         CampaignResponseModel GetCampaignById(long CampaignId);
+        void UpdateCampaign(AdCampaign campaignModel);
     }
 }

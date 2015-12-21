@@ -19,8 +19,10 @@ namespace SMD.MIS.Areas.Api.Models
 
         public int? IndustryId { get; set; }
 
-        public string QuestionString { get; set; }
+        public string questionString { get; set; }
 
-        public string AnswerString { get; set; }
+        public string answerString { get; set; }
+
+        public string Language { get; set; } 
     }
 }

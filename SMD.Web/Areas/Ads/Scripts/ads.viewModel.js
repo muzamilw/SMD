@@ -442,11 +442,22 @@ define("ads/ads.viewModel",
                                     langs.removeAll();
                                     ko.utils.arrayPushAll(langs(), data.LanguageDropdowns);
                                     langs.valueHasMutated();
-                                    // set grid content
-                                    
-                                    console.log("edit ");
-                                    console.log(data);
+                                    console.log(data.Campaigns);
 
+                                    campaignModel(model.Campaign.Create(data.Campaigns[0]));
+
+                                    view.initializeTypeahead();
+                                    if (campaignModel().Type() == "3") {
+                                        isEnableUploadImageLink(true);
+                                    } else {
+                                        isEnableUploadImageLink(false);
+                                        if (campaignModel().Type() == "1") {
+                                            campaignTypePlaceHolderValue('Enter a video embed code');
+                                        } else {
+                                            campaignTypePlaceHolderValue('Enter a link');
+                                        }
+                                    }
+                                    isEditorVisible(true);
                                     
                                 }
 
