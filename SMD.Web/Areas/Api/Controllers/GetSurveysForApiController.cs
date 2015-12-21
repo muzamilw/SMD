@@ -11,7 +11,7 @@ namespace SMD.MIS.Areas.Api.Controllers
     /// <summary>
     /// Get Surveys for APIs Controller 
     /// </summary>
-    [Authorize]
+    //[Authorize]
     public class GetSurveysForApiController : ApiController
     {
         #region Public

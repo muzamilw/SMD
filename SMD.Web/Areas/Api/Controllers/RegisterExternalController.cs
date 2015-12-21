@@ -15,7 +15,7 @@ namespace SMD.MIS.Areas.Api.Controllers
     /// <summary>
     /// External Login Api Controller 
     /// </summary>
-    [Authorize]
+    //[Authorize]
     public class RegisterExternalController : ApiController
     {
         private readonly IWebApiUserService webApiUserService;

@@ -12,7 +12,7 @@ namespace SMD.MIS.Areas.Api.Controllers
     /// <summary>
     /// Profile Question for APIs Controller 
     /// </summary>
-    [Authorize]
+    //[Authorize]
     public class GetProfileQuestionForApiController : ApiController
     {
         #region Public

@@ -13,7 +13,7 @@ namespace SMD.MIS.Areas.Api.Controllers
     /// <summary>
     /// Ad Viewed Api Controller 
     /// </summary>
-    [Authorize]
+    //[Authorize]
     public class AdViewedController : ApiController
     {
 

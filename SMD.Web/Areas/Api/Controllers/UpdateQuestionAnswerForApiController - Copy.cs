@@ -9,7 +9,7 @@ namespace SMD.MIS.Areas.Api.Controllers
     /// <summary>
     /// Update Profile Question's Ans for APIs Controller 
     /// </summary>
-    [Authorize]
+    //[Authorize]
     public class UpdateQuestionAnswerForApiController : ApiController
     {
         #region Public

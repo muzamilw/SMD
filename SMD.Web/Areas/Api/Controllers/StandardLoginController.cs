@@ -15,7 +15,7 @@ namespace SMD.MIS.Areas.Api.Controllers
     /// <summary>
     /// Standard Login Api Controller 
     /// </summary>
-    [Authorize]
+    //[Authorize]
     public class StandardLoginController : ApiController
     {
         #region Private

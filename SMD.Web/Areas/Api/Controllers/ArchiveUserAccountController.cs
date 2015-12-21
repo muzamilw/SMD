@@ -12,7 +12,7 @@ namespace SMD.MIS.Areas.Api.Controllers
     /// <summary>
     /// Update User Profile Api Controller 
     /// </summary>
-    [Authorize]
+    //[Authorize]
     public class ArchiveUserAccountController : ApiController
     {
         #region Private

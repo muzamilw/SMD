@@ -9,7 +9,7 @@ namespace SMD.MIS.Areas.Api.Controllers
     /// <summary>
     /// Get Audience Ad Campaign For Api Controller
     /// </summary>
-    [Authorize]
+    //[Authorize]
     public class GetAudienceAdCampaignForApiController : ApiController
     {
         #region Public

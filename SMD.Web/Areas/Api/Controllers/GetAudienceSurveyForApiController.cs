@@ -9,7 +9,7 @@ namespace SMD.MIS.Areas.Api.Controllers
     /// <summary>
     /// Get Audience Survey For Api Controller
     /// </summary>
-    [Authorize]
+    //[Authorize]
     public class GetAudienceSurveyForApiController : ApiController
     {
         #region Public
