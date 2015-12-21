@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 using SMD.Interfaces.Services;
 using SMD.MIS.Areas.Api.Models;
-using SMD.Models.IdentityModels;
 using SMD.Models.RequestModels;
 using System;
 using System.Net;
@@ -47,16 +46,24 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// Login
         /// </summary>
         [ApiException]
-        public async Task<WebApiUser> Get([FromUri] StandardLoginRequest request)
+        public async Task<LoginResponse> Get([FromUri] StandardLoginRequest request)
         {
             if (request == null || !ModelState.IsValid)
             {
-                throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
+                return new LoginResponse
+                       {
+                           Message = LanguageResources.InvalidRequest
+                       };
             }
 
-            User user = await webApiUserService.StandardLogin(request);
+            SMD.Models.ResponseModels.LoginResponse response = await webApiUserService.StandardLogin(request);
 
-            return user.CreateFrom();
+            return new LoginResponse
+                   {
+                       Status = response.Status,
+                       Message = response.Message,
+                       User = response.User != null ? response.User.CreateFrom() : null
+                   };
         }
 
         #endregion
