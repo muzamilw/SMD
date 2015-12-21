@@ -13,6 +13,7 @@ using SMD.Models.Common;
 using SMD.Models.DomainModels;
 using SMD.Models.IdentityModels;
 using SMD.Models.RequestModels;
+using SMD.Models.ResponseModels;
 
 namespace SMD.Implementation.Services
 {
@@ -497,25 +498,39 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Standard Login
         /// </summary>
-        public async Task<User> StandardLogin(StandardLoginRequest request)
+        public async Task<LoginResponse> StandardLogin(StandardLoginRequest request)
         {
             User user = await UserManager.FindAsync(request.UserName, request.Password);
             if (user == null)
             {
-                throw new SMDException(LanguageResources.WebApiUserService_InvalidCredentials);
+                return new LoginResponse
+                       {
+                           Message = LanguageResources.WebApiUserService_InvalidCredentials
+                       };
             }
 
             if (!user.EmailConfirmed)
             {
-                throw new SMDException(LanguageResources.WebApiUserService_EmailNotVerified);    
+                return new LoginResponse
+                {
+                    Message = LanguageResources.WebApiUserService_EmailNotVerified
+                };    
             }
 
             if (user.Status == (int)UserStatus.InActive)
             {
-                throw new SMDException(LanguageResources.WebApiUserService_InactiveUser);
+                return new LoginResponse
+                {
+                    Message = LanguageResources.WebApiUserService_InactiveUser
+                };
             }
 
-            return user;
+            return new LoginResponse
+                       {
+                           Status = true,
+                           Message = "Success",
+                           User = user
+                       };
         }
 
         /// <summary>

@@ -115,6 +115,7 @@
       <DependentUpon>LanguageResources.resx</DependentUpon>
     </Compile>
     <Compile Include="LessTransform.cs" />
+    <Compile Include="Mvc\ApiExceptionCustom.cs" />
     <Compile Include="Mvc\ApiException.cs" />
     <Compile Include="Mvc\CompressionHelper.cs" />
     <Compile Include="Mvc\LogExceptionFilterAttribute.cs" />

@@ -58,6 +58,7 @@
     <Compile Include="Logger\SMDLogCategory.cs" />
     <Compile Include="Logger\SMDLogger.cs" />
     <Compile Include="SMDException.cs" />
+    <Compile Include="SMDExceptionContentCustom.cs" />
     <Compile Include="SMDExceptionContent.cs" />
     <Compile Include="SMDExceptionTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
