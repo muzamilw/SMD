@@ -11,6 +11,11 @@ namespace SMD.Interfaces.Services
     public interface IWebApiUserService
     {
         /// <summary>
+        /// Approve Survey
+        /// </summary>
+        Task<BaseApiResponse> UpdateTransactionOnSurveyApproval(ApproveSurveyRequest request);
+
+        /// <summary>
         /// Ad Viewed
         /// </summary>
         Task<BaseApiResponse> UpdateTransactionOnViewingAd(AdViewedRequest request);
