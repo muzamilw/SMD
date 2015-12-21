@@ -105,5 +105,17 @@ namespace SMD.Repository.Repositories
                         .ToList();
             }
         }
+
+        /// <summary>
+        /// Get Ad Campaign by id
+        /// </summary>
+        public IEnumerable<AdCampaign> GetAdCampaignById(long CampaignId)
+        {
+           
+            Expression<Func<AdCampaign, bool>> query =
+                ad => ad.CampaignId == CampaignId;
+            return DbSet.Where(query);
+        }
+
     }
 }

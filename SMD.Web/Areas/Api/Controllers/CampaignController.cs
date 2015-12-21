@@ -38,7 +38,15 @@ namespace SMD.MIS.Areas.Api.Controllers
             }
             else
             {
-                return _campaignService.GetCampaigns(request).CreateCampaignFrom();
+                if (request.CampaignId > 0)
+                {
+                    return _campaignService.GetCampaignById(request.CampaignId).CreateCampaignFrom();
+                }
+                else 
+                {
+                    return _campaignService.GetCampaigns(request).CreateCampaignFrom();
+                }
+               
             }
            
         }

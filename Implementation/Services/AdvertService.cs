@@ -120,6 +120,16 @@ namespace SMD.Implementation.Services
                 TotalCount = rowCount
             };
         }
+
+        public CampaignResponseModel GetCampaignById(long CampaignId)
+        {
+          
+            return new CampaignResponseModel
+            {
+                Campaign = _adCampaignRepository.GetAdCampaignById(CampaignId),
+                Languages = _languageRepository.GetAllLanguages()
+            };
+        }
         #endregion
         #region Public
 
