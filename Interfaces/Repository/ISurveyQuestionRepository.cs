@@ -29,7 +29,7 @@ namespace SMD.Interfaces.Repository
         /// <summary>
         /// Get Surveys | SP-API | baqer
         /// </summary>
-        IEnumerable<GetSurveysResults> GetSurveysForApi(GetSurveysApiRequest request);
+        IEnumerable<GetSurveys_Result> GetSurveysForApi(GetSurveysApiRequest request);
 
         /// <summary>
         /// Returns count of Matches Surveys| baqer

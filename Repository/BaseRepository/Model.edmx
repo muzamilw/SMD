@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="SMDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SMDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Account">
           <Key>
             <PropertyRef Name="AccountId" />
@@ -916,6 +916,44 @@
           <Parameter Name="FromRow" Type="int" Mode="In" />
           <Parameter Name="ToRow" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetAudienceAdCampaign" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="age" Type="int" Mode="In" />
+          <Parameter Name="gender" Type="int" Mode="In" />
+          <Parameter Name="countryId" Type="int" Mode="In" />
+          <Parameter Name="cityId" Type="int" Mode="In" />
+          <Parameter Name="languageId" Type="int" Mode="In" />
+          <Parameter Name="industryId" Type="int" Mode="In" />
+          <Parameter Name="profileQuestionIds" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="GetAudienceSurvey" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="age" Type="int" Mode="In" />
+          <Parameter Name="gender" Type="int" Mode="In" />
+          <Parameter Name="countryId" Type="int" Mode="In" />
+          <Parameter Name="cityId" Type="int" Mode="In" />
+          <Parameter Name="languageId" Type="int" Mode="In" />
+          <Parameter Name="industryId" Type="int" Mode="In" />
+          <Parameter Name="profileQuestionIds" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="GetSurveys" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserID" Type="nvarchar" Mode="In" />
+          <Parameter Name="FromRow" Type="int" Mode="In" />
+          <Parameter Name="ToRow" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spGetProfileQuestion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserID" Type="nvarchar" Mode="In" />
+          <Parameter Name="questioncount" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SplitString" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="InputString" Type="varchar" Mode="In" />
+          <Parameter Name="Delimiter" Type="varchar" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="Item" Type="varchar" MaxLength="8000" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
         <EntityContainer Name="SMDModelStoreContainer">
           <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AdCampaign" EntityType="Self.AdCampaign" Schema="dbo" store:Type="Tables" />
@@ -1397,10 +1435,41 @@
             <End Role="Account" EntitySet="Accounts" />
             <End Role="Transaction" EntitySet="Transactions" />
           </AssociationSet>
+          <FunctionImport Name="GetSurveys" ReturnType="Collection(DomainModels.GetSurveys_Result)">
+            <Parameter Name="UserID" Mode="In" Type="String" />
+            <Parameter Name="FromRow" Mode="In" Type="Int32" />
+            <Parameter Name="ToRow" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spGetProfileQuestion" ReturnType="Collection(Int32)">
+            <Parameter Name="UserID" Mode="In" Type="String" />
+            <Parameter Name="questioncount" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SplitString" IsComposable="true" ReturnType="Collection(String)">
+            <Parameter Name="InputString" Mode="In" Type="String" />
+            <Parameter Name="Delimiter" Mode="In" Type="String" />
+          </FunctionImport>
           <FunctionImport Name="GetAds" ReturnType="Collection(DomainModels.GetAds_Result)">
             <Parameter Name="UserID" Mode="In" Type="String" />
             <Parameter Name="FromRow" Mode="In" Type="Int32" />
             <Parameter Name="ToRow" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetAudienceAdCampaign" ReturnType="Collection(Int64)">
+            <Parameter Name="age" Mode="In" Type="Int32" />
+            <Parameter Name="gender" Mode="In" Type="Int32" />
+            <Parameter Name="countryId" Mode="In" Type="Int32" />
+            <Parameter Name="cityId" Mode="In" Type="Int32" />
+            <Parameter Name="languageId" Mode="In" Type="Int32" />
+            <Parameter Name="industryId" Mode="In" Type="Int32" />
+            <Parameter Name="profileQuestionIds" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetAudienceSurvey" ReturnType="Collection(Int32)">
+            <Parameter Name="age" Mode="In" Type="Int32" />
+            <Parameter Name="gender" Mode="In" Type="Int32" />
+            <Parameter Name="countryId" Mode="In" Type="Int32" />
+            <Parameter Name="cityId" Mode="In" Type="Int32" />
+            <Parameter Name="languageId" Mode="In" Type="Int32" />
+            <Parameter Name="industryId" Mode="In" Type="Int32" />
+            <Parameter Name="profileQuestionIds" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="ProfileQuestion">
@@ -2272,6 +2341,147 @@
           <Property Type="Int32" Name="CorrectAnswer" Nullable="true" />
           <Property Type="Double" Name="ClickRate" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="GetAds1_Result">
+          <Property Type="Int64" Name="CampaignID" Nullable="false" />
+          <Property Type="String" Name="CampaignName" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="VerifyQuestion" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="LandingPageVideoLink" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="Answer1" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="Answer2" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="Answer3" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="CorrectAnswer" Nullable="true" />
+          <Property Type="Double" Name="ClickRate" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetAudienceAdCampaign_Result">
+          <Property Type="String" Name="Id" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="256" />
+          <Property Type="Boolean" Name="EmailConfirmed" Nullable="false" />
+          <Property Type="String" Name="PasswordHash" Nullable="true" />
+          <Property Type="String" Name="SecurityStamp" Nullable="true" />
+          <Property Type="String" Name="PhoneNumber" Nullable="true" />
+          <Property Type="Boolean" Name="PhoneNumberConfirmed" Nullable="false" />
+          <Property Type="Boolean" Name="TwoFactorEnabled" Nullable="false" />
+          <Property Type="DateTime" Name="LockoutEndDateUtc" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="LockoutEnabled" Nullable="false" />
+          <Property Type="Int32" Name="AccessFailedCount" Nullable="false" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="256" />
+          <Property Type="String" Name="FullName" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="AlternateEmail" Nullable="true" MaxLength="256" />
+          <Property Type="String" Name="IsEmailVerified" Nullable="true" MaxLength="10" />
+          <Property Type="Int32" Name="Status" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedDateTime" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="ModifiedDateTime" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="LastLoginTime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Phone1" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Phone2" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Jobtitle" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ContactNotes" Nullable="true" />
+          <Property Type="Boolean" Name="IsSubscribed" Nullable="false" />
+          <Property Type="Int32" Name="AppID" Nullable="true" />
+          <Property Type="String" Name="CompanyName" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="SalesEmail" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="CompanyRepresentative" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="Address1" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Address2" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="CityID" Nullable="true" />
+          <Property Type="Int32" Name="CountryID" Nullable="true" />
+          <Property Type="String" Name="State" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="ZipCode" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="UserTimeZone" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ReferralCode" Nullable="true" MaxLength="100" />
+          <Property Type="Boolean" Name="AfilliatianStatus" Nullable="true" />
+          <Property Type="String" Name="StripeCustomerId" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ChargeBeesubscriptionID" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="RegisteredViaReferral" Nullable="true" />
+          <Property Type="String" Name="ReferringUserID" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="Age" Nullable="true" />
+          <Property Type="Int32" Name="Gender" Nullable="true" />
+          <Property Type="Int32" Name="LanguageID" Nullable="true" />
+          <Property Type="Int32" Name="IndustryID" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetAudienceSurvey_Result">
+          <Property Type="String" Name="Id" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="256" />
+          <Property Type="Boolean" Name="EmailConfirmed" Nullable="false" />
+          <Property Type="String" Name="PasswordHash" Nullable="true" />
+          <Property Type="String" Name="SecurityStamp" Nullable="true" />
+          <Property Type="String" Name="PhoneNumber" Nullable="true" />
+          <Property Type="Boolean" Name="PhoneNumberConfirmed" Nullable="false" />
+          <Property Type="Boolean" Name="TwoFactorEnabled" Nullable="false" />
+          <Property Type="DateTime" Name="LockoutEndDateUtc" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="LockoutEnabled" Nullable="false" />
+          <Property Type="Int32" Name="AccessFailedCount" Nullable="false" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="256" />
+          <Property Type="String" Name="FullName" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="AlternateEmail" Nullable="true" MaxLength="256" />
+          <Property Type="String" Name="IsEmailVerified" Nullable="true" MaxLength="10" />
+          <Property Type="Int32" Name="Status" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedDateTime" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="ModifiedDateTime" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="LastLoginTime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Phone1" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Phone2" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Jobtitle" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ContactNotes" Nullable="true" />
+          <Property Type="Boolean" Name="IsSubscribed" Nullable="false" />
+          <Property Type="Int32" Name="AppID" Nullable="true" />
+          <Property Type="String" Name="CompanyName" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="SalesEmail" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="CompanyRepresentative" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="Address1" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Address2" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="CityID" Nullable="true" />
+          <Property Type="Int32" Name="CountryID" Nullable="true" />
+          <Property Type="String" Name="State" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="ZipCode" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="UserTimeZone" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ReferralCode" Nullable="true" MaxLength="100" />
+          <Property Type="Boolean" Name="AfilliatianStatus" Nullable="true" />
+          <Property Type="String" Name="StripeCustomerId" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ChargeBeesubscriptionID" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="RegisteredViaReferral" Nullable="true" />
+          <Property Type="String" Name="ReferringUserID" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="Age" Nullable="true" />
+          <Property Type="Int32" Name="Gender" Nullable="true" />
+          <Property Type="Int32" Name="LanguageID" Nullable="true" />
+          <Property Type="Int32" Name="IndustryID" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetSurveys_Result">
+          <Property Type="Int64" Name="SQID" Nullable="false" />
+          <Property Type="String" Name="Question" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="DisplayQuestion" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="LeftPicturePath" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="RightPicturePath" Nullable="true" MaxLength="300" />
+          <Property Type="DateTime" Name="ApprovalDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="VoucherCode" Nullable="true" MaxLength="50" />
+          <Property Type="Int64" Name="ResultClicks" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetAds_Result1">
+          <Property Type="Int64" Name="CampaignID" Nullable="false" />
+          <Property Type="String" Name="CampaignName" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="VerifyQuestion" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="LandingPageVideoLink" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="Answer1" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="Answer2" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="Answer3" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="CorrectAnswer" Nullable="true" />
+          <Property Type="Double" Name="ClickRate" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetAds_Result2">
+          <Property Type="Int64" Name="CampaignID" Nullable="false" />
+          <Property Type="String" Name="CampaignName" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="VerifyQuestion" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="LandingPageVideoLink" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="Answer1" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="Answer2" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="Answer3" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="CorrectAnswer" Nullable="true" />
+          <Property Type="Double" Name="ClickRate" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2708,8 +2918,25 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="GetAds" FunctionName="SMDModel.Store.GetAds">
+          <FunctionImportMapping FunctionImportName="GetSurveys" FunctionName="SMDModel.Store.GetSurveys">
             <ResultMapping>
+              <ComplexTypeMapping TypeName="DomainModels.GetSurveys_Result">
+                <ScalarProperty Name="SQID" ColumnName="SQID" />
+                <ScalarProperty Name="Question" ColumnName="Question" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DisplayQuestion" ColumnName="DisplayQuestion" />
+                <ScalarProperty Name="LeftPicturePath" ColumnName="LeftPicturePath" />
+                <ScalarProperty Name="RightPicturePath" ColumnName="RightPicturePath" />
+                <ScalarProperty Name="ApprovalDate" ColumnName="ApprovalDate" />
+                <ScalarProperty Name="VoucherCode" ColumnName="VoucherCode" />
+                <ScalarProperty Name="ResultClicks" ColumnName="ResultClicks" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spGetProfileQuestion" FunctionName="SMDModel.Store.spGetProfileQuestion" />
+          <FunctionImportMapping FunctionImportName="SplitString" FunctionName="SMDModel.Store.SplitString" />
+          <FunctionImportMapping FunctionImportName="GetAds" FunctionName="SMDModel.Store.GetAds">
+          <ResultMapping>
               <ComplexTypeMapping TypeName="DomainModels.GetAds_Result">
                 <ScalarProperty Name="CampaignID" ColumnName="CampaignID" />
                 <ScalarProperty Name="CampaignName" ColumnName="CampaignName" />
@@ -2724,6 +2951,8 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAudienceAdCampaign" FunctionName="SMDModel.Store.GetAudienceAdCampaign" />
+          <FunctionImportMapping FunctionImportName="GetAudienceSurvey" FunctionName="SMDModel.Store.GetAudienceSurvey" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

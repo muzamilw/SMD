@@ -15,6 +15,6 @@ namespace SMD.MIS.Areas.Api.Models
         public string RightPicturePath { get; set; }
         public DateTime ApprovalDate { get; set; }
         public string VoucherCode { get; set; }
-        public long ResultClicks { get; set; }  
+        public long? ResultClicks { get; set; }  
     }
 }
