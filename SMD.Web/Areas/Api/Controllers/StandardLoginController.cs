@@ -45,7 +45,7 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// <summary>
         /// Login
         /// </summary>
-        [ApiException]
+        [ApiExceptionCustom]
         public async Task<LoginResponse> Get([FromUri] StandardLoginRequest request)
         {
             if (request == null || !ModelState.IsValid)
