@@ -54,8 +54,8 @@ namespace SMD.MIS.Areas.Api.Models
         public int? LanguageId { get; set; }
         public int? IndustryId { get; set; }
 
-        public string QuestionQueryString { get; set; }   // survey Question , profile Question,  industry name
-        public string AnswerQueryString { get; set; }  // survey Question Answer , profile Question Answer
+        public string questionString { get; set; }   // survey Question , profile Question,  industry name
+        public string answerString { get; set; }  // survey Question Answer , profile Question Answer
         public string Language { get; set; } // language name
     }
     public class SurveyQuestionTargetLocation
@@ -66,7 +66,7 @@ namespace SMD.MIS.Areas.Api.Models
         public int? CityId { get; set; }
         public int? Radius { get; set; }
         public bool? IncludeorExclude { get; set; }
-        public string CityName { get; set; }
-        public string CountryName { get; set; }
+        public string City { get; set; }
+        public string Country { get; set; }
     }
 }

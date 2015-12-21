@@ -271,15 +271,16 @@ namespace SMD.MIS.ModelMappers
                 {
                     if (criteria.ProfileQuestion != null)
                     {
-                        modelCriteria.QuestionQueryString = criteria.ProfileQuestion.Question;
-                        modelCriteria.AnswerQueryString = criteria.ProfileQuestionAnswer.AnswerString;
+                        modelCriteria.questionString = criteria.ProfileQuestion.Question;
+                        if(criteria.ProfileQuestionAnswer != null)
+                            modelCriteria.answerString = criteria.ProfileQuestionAnswer.AnswerString;
                     }
                 }
                 else if (criteria.Type == (int)SurveyQuestionTargetCriteriaType.SurveryQuestion)
                 {
                     if (criteria.SurveyQuestion != null)
                     {
-                        modelCriteria.QuestionQueryString = criteria.SurveyQuestion.DisplayQuestion;
+                        modelCriteria.questionString = criteria.SurveyQuestion.DisplayQuestion;
                         string pictureUrl = criteria.SurveyQuestion.RightPicturePath;
                         if (criteria.LinkedSqAnswer == (int)SurveyQuestionAnswerType.Left)
                         {
@@ -290,18 +291,19 @@ namespace SMD.MIS.ModelMappers
                         {
                             pictureUrl = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + pictureUrl;
                         }
-                        modelCriteria.AnswerQueryString = pictureUrl;
+                        modelCriteria.answerString = pictureUrl;
                     }
                 }
                 else if (criteria.Type == (int)SurveyQuestionTargetCriteriaType.Language)
                 {
-                  //  modelCriteria.QuestionQueryString = criteria.l
+                    if (criteria.Language != null)
+                        modelCriteria.Language = criteria.Language.LanguageName;
                 }
                 else if (criteria.Type == (int)SurveyQuestionTargetCriteriaType.Industry)
                 {
                     if (criteria.Industry != null)
                     {
-                        modelCriteria.QuestionQueryString = criteria.Industry.IndustryName;
+                        modelCriteria.questionString = criteria.Industry.IndustryName;
                     }
                 }
                 result.Add(modelCriteria);
@@ -316,8 +318,10 @@ namespace SMD.MIS.ModelMappers
                 SMD.MIS.Areas.Api.Models.SurveyQuestionTargetLocation modelLocation = new Areas.Api.Models.SurveyQuestionTargetLocation();
                 modelLocation.CityId = location.CityId;
                 modelLocation.CountryId = location.CountryId;
-                modelLocation.CityName = location.City.CityName;
-                modelLocation.CountryName = location.Country.CountryName;
+                if(location.City != null)
+                    modelLocation.City = location.City.CityName;
+                if(location.Country != null)
+                    modelLocation.Country = location.Country.CountryName;
                 modelLocation.Id = location.Id;
                 modelLocation.IncludeorExclude = location.IncludeorExclude;
                 modelLocation.Radius = location.Radius;
