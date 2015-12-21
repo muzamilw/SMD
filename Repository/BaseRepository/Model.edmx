@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="SMDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SMDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Account">
           <Key>
             <PropertyRef Name="AccountId" />
@@ -483,6 +483,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_AdCampaignTargetCriteria_Language">
+          <End Role="Language" Type="Self.Language" Multiplicity="0..1" />
+          <End Role="AdCampaignTargetCriteria" Type="Self.AdCampaignTargetCriteria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Language">
+              <PropertyRef Name="LanguageID" />
+            </Principal>
+            <Dependent Role="AdCampaignTargetCriteria">
+              <PropertyRef Name="LanguageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_AdCampaignTargetCriteria_ProfileQuestion">
           <End Role="ProfileQuestion" Type="Self.ProfileQuestion" Multiplicity="0..1" />
           <End Role="AdCampaignTargetCriteria" Type="Self.AdCampaignTargetCriteria" Multiplicity="*" />
@@ -815,6 +827,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_SurveyQuestionTargetCriteria_Language">
+          <End Role="Language" Type="Self.Language" Multiplicity="0..1" />
+          <End Role="SurveyQuestionTargetCriteria" Type="Self.SurveyQuestionTargetCriteria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Language">
+              <PropertyRef Name="LanguageID" />
+            </Principal>
+            <Dependent Role="SurveyQuestionTargetCriteria">
+              <PropertyRef Name="LanguageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_SurveyQuestionTargetCriteria_ProfileQuestion">
           <End Role="ProfileQuestion" Type="Self.ProfileQuestion" Multiplicity="0..1" />
           <End Role="SurveyQuestionTargetCriteria" Type="Self.SurveyQuestionTargetCriteria" Multiplicity="*" />
@@ -1006,6 +1030,10 @@
             <End Role="Industry" EntitySet="Industry" />
             <End Role="AdCampaignTargetCriteria" EntitySet="AdCampaignTargetCriteria" />
           </AssociationSet>
+          <AssociationSet Name="FK_AdCampaignTargetCriteria_Language" Association="Self.FK_AdCampaignTargetCriteria_Language">
+            <End Role="Language" EntitySet="Language" />
+            <End Role="AdCampaignTargetCriteria" EntitySet="AdCampaignTargetCriteria" />
+          </AssociationSet>
           <AssociationSet Name="FK_AdCampaignTargetCriteria_ProfileQuestion" Association="Self.FK_AdCampaignTargetCriteria_ProfileQuestion">
             <End Role="ProfileQuestion" EntitySet="ProfileQuestion" />
             <End Role="AdCampaignTargetCriteria" EntitySet="AdCampaignTargetCriteria" />
@@ -1112,6 +1140,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_SurveyQuestionTargetCriteria_Industry" Association="Self.FK_SurveyQuestionTargetCriteria_Industry">
             <End Role="Industry" EntitySet="Industry" />
+            <End Role="SurveyQuestionTargetCriteria" EntitySet="SurveyQuestionTargetCriteria" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurveyQuestionTargetCriteria_Language" Association="Self.FK_SurveyQuestionTargetCriteria_Language">
+            <End Role="Language" EntitySet="Language" />
             <End Role="SurveyQuestionTargetCriteria" EntitySet="SurveyQuestionTargetCriteria" />
           </AssociationSet>
           <AssociationSet Name="FK_SurveyQuestionTargetCriteria_ProfileQuestion" Association="Self.FK_SurveyQuestionTargetCriteria_ProfileQuestion">
@@ -1471,6 +1503,14 @@
             <Parameter Name="industryId" Mode="In" Type="Int32" />
             <Parameter Name="profileQuestionIds" Mode="In" Type="String" />
           </FunctionImport>
+          <AssociationSet Name="FK_AdCampaignTargetCriteria_Language" Association="DomainModels.FK_AdCampaignTargetCriteria_Language">
+            <End Role="Language" EntitySet="Languages" />
+            <End Role="AdCampaignTargetCriteria" EntitySet="AdCampaignTargetCriterias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurveyQuestionTargetCriteria_Language" Association="DomainModels.FK_SurveyQuestionTargetCriteria_Language">
+            <End Role="Language" EntitySet="Languages" />
+            <End Role="SurveyQuestionTargetCriteria" EntitySet="SurveyQuestionTargetCriterias" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="ProfileQuestion">
           <Key>
@@ -1641,6 +1681,8 @@
           <NavigationProperty Name="AdCampaigns" Relationship="DomainModels.FK_AdCampaign_Language" FromRole="Language" ToRole="AdCampaign" />
           <NavigationProperty Name="SurveyQuestions" Relationship="DomainModels.FK_SurveyQuestion_Language" FromRole="Language" ToRole="SurveyQuestion" />
           <NavigationProperty Name="AspNetUsers" Relationship="DomainModels.FK_AspNetUsers_Language" FromRole="Language" ToRole="User" />
+          <NavigationProperty Name="AdCampaignTargetCriterias" Relationship="DomainModels.FK_AdCampaignTargetCriteria_Language" FromRole="Language" ToRole="AdCampaignTargetCriteria" />
+          <NavigationProperty Name="SurveyQuestionTargetCriterias" Relationship="DomainModels.FK_SurveyQuestionTargetCriteria_Language" FromRole="Language" ToRole="SurveyQuestionTargetCriteria" />
         </EntityType>
         <Association Name="FK_ProfileQuestionGroup_Country">
           <End Type="DomainModels.Country" Role="Country" Multiplicity="0..1" />
@@ -1755,6 +1797,7 @@
           <NavigationProperty Name="SurveyQuestion" Relationship="DomainModels.FK_AdCampaignTargetCriteria_SurveyQuestion" FromRole="AdCampaignTargetCriteria" ToRole="SurveyQuestion" />
           <Property Name="IndustryId" Type="Int32" />
           <NavigationProperty Name="Industry" Relationship="DomainModels.FK_AdCampaignTargetCriteria_Industry" FromRole="AdCampaignTargetCriteria" ToRole="Industry" />
+          <NavigationProperty Name="Language" Relationship="DomainModels.FK_AdCampaignTargetCriteria_Language" FromRole="AdCampaignTargetCriteria" ToRole="Language" />
         </EntityType>
         <EntityType Name="AdCampaignTargetLocation">
           <Key>
@@ -1833,6 +1876,7 @@
           <Property Name="LanguageId" Type="Int32" />
           <Property Name="IndustryId" Type="Int32" />
           <NavigationProperty Name="Industry" Relationship="DomainModels.FK_SurveyQuestionTargetCriteria_Industry" FromRole="SurveyQuestionTargetCriteria" ToRole="Industry" />
+          <NavigationProperty Name="Language" Relationship="DomainModels.FK_SurveyQuestionTargetCriteria_Language" FromRole="SurveyQuestionTargetCriteria" ToRole="Language" />
         </EntityType>
         <EntityType Name="SurveyQuestionTargetLocation">
           <Key>
@@ -2482,6 +2526,30 @@
           <Property Type="Int32" Name="CorrectAnswer" Nullable="true" />
           <Property Type="Double" Name="ClickRate" Nullable="true" />
         </ComplexType>
+        <Association Name="FK_AdCampaignTargetCriteria_Language">
+          <End Type="DomainModels.Language" Role="Language" Multiplicity="0..1" />
+          <End Type="DomainModels.AdCampaignTargetCriteria" Role="AdCampaignTargetCriteria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Language">
+              <PropertyRef Name="LanguageId" />
+            </Principal>
+            <Dependent Role="AdCampaignTargetCriteria">
+              <PropertyRef Name="LanguageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SurveyQuestionTargetCriteria_Language">
+          <End Type="DomainModels.Language" Role="Language" Multiplicity="0..1" />
+          <End Type="DomainModels.SurveyQuestionTargetCriteria" Role="SurveyQuestionTargetCriteria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Language">
+              <PropertyRef Name="LanguageId" />
+            </Principal>
+            <Dependent Role="SurveyQuestionTargetCriteria">
+              <PropertyRef Name="LanguageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
