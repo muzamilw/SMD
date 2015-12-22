@@ -12,7 +12,6 @@ namespace SMD.MIS.Areas.Api.Controllers
     /// <summary>
     /// Get Ads for APIs Controller 
     /// </summary>
-    [Authorize]
     public class GetAdsForApiController : ApiController
     {
         #region Public
@@ -35,9 +34,9 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// Get Ads for API
         /// </summary>
         [ApiExceptionCustom]
-        public AdCampaignApiSearchRequestResponse Post(GetAdsApiRequest request)
+        public AdCampaignApiSearchRequestResponse Post(string authenticationToken,[FromUri] GetAdsApiRequest request)
         {
-            if (request == null || !ModelState.IsValid)
+            if (string.IsNullOrEmpty(authenticationToken) || request == null || !ModelState.IsValid)
             {
                 throw new HttpException((int)HttpStatusCode.BadRequest, "Invalid Request");
             }

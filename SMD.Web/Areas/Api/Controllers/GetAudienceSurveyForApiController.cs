@@ -12,7 +12,6 @@ namespace SMD.MIS.Areas.Api.Controllers
     /// <summary>
     /// Get Audience Survey For Api Controller
     /// </summary>
-    [Authorize]
     public class GetAudienceSurveyForApiController : ApiController
     {
         #region Public
@@ -35,9 +34,9 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// Get Survey Matching Count for API
         /// </summary>
         [ApiExceptionCustom]
-        public AudienceSurveyForApiResponse Post(GetAudienceSurveyRequest request)
+        public AudienceSurveyForApiResponse Post(string authenticationToken,[FromUri] GetAudienceSurveyRequest request)
         {
-            if (request == null || !ModelState.IsValid)
+            if (string.IsNullOrEmpty(authenticationToken) || request == null || !ModelState.IsValid)
             {
                 throw new HttpException((int)HttpStatusCode.BadRequest, "Invalid Request");
             }
