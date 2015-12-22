@@ -851,7 +851,7 @@ END -- End Function
 
 -- =========================== ADDED by Baqer  21-DEC-2015  | end
 
--- ============================= updated on server =============================
+
 /* Added by Khurram - 22 Dec 2015 (Start) */
 /* Invoice */
 
@@ -912,5 +912,6 @@ ALTER TABLE [dbo].[InvoiceDetail] CHECK CONSTRAINT [FK_InvoiceDetail_Invoice]
 GO
 
 /* Added by Khurram - 22 Dec 2015 (End) */
+-- ============================= updated on server =============================
 
 

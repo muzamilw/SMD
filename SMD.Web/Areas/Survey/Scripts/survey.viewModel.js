@@ -345,7 +345,6 @@ define("survey/survey.viewModel",
                         }
                     },
                     saveCriteria = function () {
-                        debugger;
                         if (selectedCriteria().Type() == "1") {
                             var selectedQuestionstring = $("#ddprofileQuestion option[value=" + $("#ddprofileQuestion").val() + "]").text();
                             selectedCriteria().questionString(selectedQuestionstring);
@@ -365,19 +364,21 @@ define("survey/survey.viewModel",
                                 selectedCriteria().answerString(matchSurveyQuestion.RightPicturePath);
                             }
                         }
-                        if (isNewCriteria()) {
-                            selectedQuestion().SurveyQuestionTargetCriteria.push(new model.SurveyQuestionTargetCriteria.Create({
-                                Type: selectedCriteria().Type(),
-                                PqId: selectedCriteria().PQID(),
-                                PqAnswerId: selectedCriteria().PQAnswerID(),
-                                LinkedSqId: selectedCriteria().LinkedSQID(),
-                                LinkedSqAnswer: selectedCriteria().LinkedSQAnswer(),
-                                questionString: selectedCriteria().questionString(),
-                                answerString: selectedCriteria().answerString(),
-                                IncludeorExclude: selectedCriteria().IncludeorExclude()
-                            }));
+                       
+                        selectedQuestion().SurveyQuestionTargetCriteria.push(new model.SurveyQuestionTargetCriteria.Create({
+                            Type: selectedCriteria().Type(),
+                            PqId: selectedCriteria().PQID(),
+                            PqAnswerId: selectedCriteria().PQAnswerID(),
+                            LinkedSqId: selectedCriteria().LinkedSQID(),
+                            LinkedSqAnswer: selectedCriteria().LinkedSQAnswer(),
+                            questionString: selectedCriteria().questionString(),
+                            answerString: selectedCriteria().answerString(),
+                            IncludeorExclude: selectedCriteria().IncludeorExclude()
+                        }));
+                        if (!isNewCriteria()) {
+                            selectedQuestion().SurveyQuestionTargetCriteria.remove(selectedCriteria());
                         } else {
-                            // already observable
+
                         }
                         isShowSurveyAns(false);
                     },
@@ -385,6 +386,7 @@ define("survey/survey.viewModel",
                         isNewCriteria(false);
                         var val = item.PQAnswerID() + 0;
                         if (item.Type() == "1") {
+
                             editCriteriaHeading("Edit Profile Criteria");
                             dataservice.getBaseData({
                                 RequestId: 3,
