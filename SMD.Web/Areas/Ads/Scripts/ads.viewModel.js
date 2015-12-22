@@ -33,7 +33,7 @@ define("ads/ads.viewModel",
                     selectedLocationLong = ko.observable(0),
                     ageRange = ko.observableArray([]),
                     isNewCriteria = ko.observable(true),
-                    isEnableUploadImageLink = ko.observable(false),
+                    isEnableVedioVerificationLink = ko.observable(false),
                     campaignTypePlaceHolderValue = ko.observable('Enter a link'),
                     isEditCampaign = ko.observable(false),
                     correctAnswers = ko.observableArray([{ id: 1, name: "Answer 1" }, { id: 1, name: "Answer 2" }, { id: 3, name: "Answer 3" }]),
@@ -101,7 +101,7 @@ define("ads/ads.viewModel",
                         campaignModel().Type('2');
                         campaignModel().reset();
                         view.initializeTypeahead();
-                        isEnableUploadImageLink(false);
+                        isEnableVedioVerificationLink(false);
                         isEditCampaign(false);
                         campaignModel().CampaignTypeImagePath("");
                         campaignModel().CampaignImagePath("");
@@ -114,9 +114,10 @@ define("ads/ads.viewModel",
 
                     saveCampaignData = function () {
                          
-                       
+                        console.log($("#ddpCorrectAns").val());
                           var campignServerObj = campaignModel().convertToServerData();
                           console.log(campignServerObj);
+
                           dataservice.addCampaignData(campignServerObj, {
                               success: function (data) {
                                 
@@ -202,6 +203,7 @@ define("ads/ads.viewModel",
                             selectedCriteria().answerString(selectedQuestionAnswerstring);
                             selectedCriteria().PQAnswerID($("#ddprofileAnswers").val());
                         } else if (selectedCriteria().Type() == "2") {
+                            console.log(selectedCriteria().SQAnswer());
                             var selectedQuestionstring = $("#ddsurveyQuestion option[value=" + $("#ddsurveyQuestion").val() + "]").text();
                             selectedCriteria().questionString(selectedQuestionstring);
                             var matchSurveyQuestion = ko.utils.arrayFirst(surveyQuestionList(), function (item) {
@@ -213,6 +215,7 @@ define("ads/ads.viewModel",
                                 selectedCriteria().answerString(matchSurveyQuestion.RightPicturePath);
                             }
                         }
+                        
                         if (isNewCriteria()) {
                             campaignModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
                                 Type: selectedCriteria().Type(),
@@ -232,7 +235,30 @@ define("ads/ads.viewModel",
                     onEditCriteria = function (item) {
                         isNewCriteria(false);
                         var val = item.PQAnswerID() + 0;
+                        var valQuest = item.PQID() + 0;
                         if (item.Type() == "1") {
+
+                            if (profileQuestionList().length == 0) {
+                                dataservice.getBaseData({
+                                    RequestId: 2,
+                                    QuestionId: 0,
+                                }, {
+                                    success: function (data) {
+                                        if (data != null) {
+                                            profileQuestionList([]);
+                                            ko.utils.arrayPushAll(profileQuestionList(), data.ProfileQuestions);
+                                            profileQuestionList.valueHasMutated();
+                                            item.PQID(valQuest);
+                                        }
+
+                                    },
+                                    error: function (response) {
+
+                                    }
+                                });
+                            }
+
+
                             dataservice.getBaseData({
                                 RequestId: 3,
                                 QuestionId: item.PQID(),
@@ -257,14 +283,40 @@ define("ads/ads.viewModel",
 
                             selectedCriteria(item);
                         } else {
-                            selectedCriteria(item);
-                            var selectedSurveyQuestionId = $("#ddsurveyQuestion").val();
-                            var matchSurveyQuestion = ko.utils.arrayFirst(surveyQuestionList(), function (item) {
-                                return item.SQID == selectedSurveyQuestionId;
-                            });
-                            selectedCriteria().surveyQuestLeftImageSrc(matchSurveyQuestion.LeftPicturePath);
-                            selectedCriteria().surveyQuestRightImageSrc(matchSurveyQuestion.RightPicturePath);
-                            isShowSurveyAns(true);
+                            var selectedSurveyQuestionId = item.SQID() + 0;
+                            var selectedSurveyAnsId = item.SQAnswer() + 0;
+                            var SurQuestionList = [];
+                            if (surveyQuestionList().length == 0) {
+                                dataservice.getBaseData({
+                                    RequestId: 4,
+                                    QuestionId: 0,
+                                }, {
+                                    success: function (data) {
+                                        if (data != null) {
+                                           
+                                            surveyQuestionList.removeAll();
+                                            ko.utils.arrayPushAll(surveyQuestionList(), data.SurveyQuestions);
+                                            surveyQuestionList.valueHasMutated();
+                                            item.SQID(selectedSurveyQuestionId);
+                                            item.SQAnswer(selectedSurveyAnsId + "");
+                                            selectedCriteria(item);
+                                            
+                                            var matchSurveyQuestion = ko.utils.arrayFirst(surveyQuestionList(), function (item) {
+                                                return item.SQID == selectedSurveyQuestionId;
+                                            });
+                                            selectedCriteria().surveyQuestLeftImageSrc(matchSurveyQuestion.LeftPicturePath);
+                                            selectedCriteria().surveyQuestRightImageSrc(matchSurveyQuestion.RightPicturePath);
+                                            isShowSurveyAns(true);
+                                            console.log(selectedCriteria());
+                                        }
+
+                                    },
+                                    error: function (response) {
+
+                                    }
+                                });
+                            }
+                           
                         }
                        
                     },
@@ -312,32 +364,13 @@ define("ads/ads.viewModel",
 
                     onRemoveLocation = function (item) {
                          // Ask for confirmation
-                         confirmation.afterProceed(function () {
                              deleteLocation(item);
-                         });
-                         confirmation.show();
+                       
                     },
 
                     deleteLocation = function (item) {
-                       
-                        if (item.ID() != 0) {
-                            //dataservice.deleteProfileQuestion(item.convertToServerData(), {
-                            //    success: function () {
-                            //        var newObjtodelete = questions.find(function (temp) {
-                            //            return temp.qId() == temp.qId();
-                            //        });
-                            //        questions.remove(newObjtodelete);
-                            //        toastr.success("You are Good!");
-                            //    },
-                            //    error: function () {
-                            //        toastr.error("Failed to delete!");
-                            //    }
-                            //});
-                        } else {
-                            campaignModel().AdCampaignTargetLocations.remove(item);
-                            toastr.success("Removed Successfully!");
-                        }
-
+                        campaignModel().AdCampaignTargetLocations.remove(item);
+                        toastr.success("Removed Successfully!");
                     },
                     //add location
                     onAddLocation = function (item) {
@@ -398,15 +431,14 @@ define("ads/ads.viewModel",
                     }),
 
                     OnChangeCampaignType = function () {
-                         if (campaignModel().Type() == "3") {
-                             isEnableUploadImageLink(true);
+                         if (campaignModel().Type() == "1") {
+                             isEnableVedioVerificationLink(true);
+                             campaignTypePlaceHolderValue('Enter a video embed code');
                          } else {
-                             isEnableUploadImageLink(false);
-                             if (campaignModel().Type() == "1") {
-                                 campaignTypePlaceHolderValue('Enter a video embed code');
-                             } else {
+                             isEnableVedioVerificationLink(false);
+                             if (campaignModel().Type() == "2") {
                                  campaignTypePlaceHolderValue('Enter a link');
-                             }
+                             } 
                          }
                     },
 
@@ -436,13 +468,12 @@ define("ads/ads.viewModel",
                                     campaignModel(model.Campaign.Create(data.Campaigns[0]));
 
                                     view.initializeTypeahead();
-                                    if (campaignModel().Type() == "3") {
-                                        isEnableUploadImageLink(true);
+                                    if (campaignModel().Type() == "1") {
+                                        isEnableVedioVerificationLink(true);
+                                        campaignTypePlaceHolderValue('Enter a video embed code');
                                     } else {
-                                        isEnableUploadImageLink(false);
-                                        if (campaignModel().Type() == "1") {
-                                            campaignTypePlaceHolderValue('Enter a video embed code');
-                                        } else {
+                                        isEnableVedioVerificationLink(false);
+                                        if (campaignModel().Type() == "2") {
                                             campaignTypePlaceHolderValue('Enter a link');
                                         }
                                     }
@@ -507,7 +538,7 @@ define("ads/ads.viewModel",
                         deleteLanguage: deleteLanguage,
                         ageRange: ageRange,
                         isNewCriteria: isNewCriteria,
-                        isEnableUploadImageLink: isEnableUploadImageLink,
+                        isEnableVedioVerificationLink: isEnableVedioVerificationLink,
                         campaignTypePlaceHolderValue: campaignTypePlaceHolderValue,
                         OnChangeCampaignType: OnChangeCampaignType,
                         campaignTypeImageCallback: campaignTypeImageCallback,

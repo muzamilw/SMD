@@ -167,7 +167,6 @@
       AdCampaignTargetCriteriasModel = function (CriteriaID, CampaignID, Type, PQID, PQAnswerID, SQID, SQAnswer, IncludeorExclude, questionString,
        answerString, surveyQuestLeftImageSrc, surveyQuestRightImageSrc, LanguageID, Language) {
 
-          debugger;
           var
               //type and userID will be set on server sside
                CriteriaID = ko.observable(CriteriaID),
@@ -177,7 +176,7 @@
                PQAnswerID = ko.observable(PQAnswerID),
                SQID = ko.observable(SQID),
                SQAnswer = ko.observable(SQAnswer),
-               IncludeorExclude = ko.observable(IncludeorExclude),
+               IncludeorExclude = ko.observable(IncludeorExclude == true ? "1" : "0"),
                questionString = ko.observable(questionString),
                answerString = ko.observable(answerString),
                surveyQuestLeftImageSrc = ko.observable(surveyQuestLeftImageSrc),
@@ -195,7 +194,7 @@
                   PQAnswerId: PQAnswerID(),
                   SQId: SQID(),
                   SQAnswer: SQAnswer(),
-                  IncludeorExclude: IncludeorExclude(),
+                  IncludeorExclude: IncludeorExclude() == 1 ? true : false,
                   LanguageId: LanguageID(),
                   Language:Language(),
               };
@@ -230,7 +229,7 @@
             Radius = ko.observable(Radius),
             Country = ko.observable(Country),
             City = ko.observable(City),
-            IncludeorExclude =ko.observable(IncludeorExclude)
+            IncludeorExclude = ko.observable(IncludeorExclude == true ? "1" : "0")
             // Convert to server data
             convertToServerData = function () {
                 return {
@@ -241,7 +240,7 @@
                     Radius: Radius(),
                     Country: Country(),
                     City: City(),
-                    IncludeorExclude: IncludeorExclude()
+                    IncludeorExclude: IncludeorExclude() == 1 ? true : false
                 };
             };
         return {
@@ -264,7 +263,7 @@
             campaign.AdCampaignTargetCriterias.push(AdCampaignTargetCriteriasModel.Create(item));
         });
         _.each(source.AdCampaignTargetLocations, function (item) {
-            
+            debugger;
             campaign.AdCampaignTargetLocations.push(AdCampaignTargetLocation.Create(item));
         });
         return campaign;

@@ -176,13 +176,16 @@ namespace SMD.Implementation.Services
 
                 }
                 _adCampaignTargetLocationRepository.SaveChanges();
-
+                // delete location records if any
+                List<long> idsToCompare = campaignModel.AdCampaignTargetLocations.Where(i => i.Id > 0).Select(i => i.Id).ToList();
+                List<AdCampaignTargetLocation> listOflocationsToDelete = _adCampaignTargetLocationRepository.GetAll().Where(c => c.CampaignId == campaignModel.CampaignId && !idsToCompare.Contains(c.Id)).ToList();
+                _adCampaignTargetLocationRepository.RemoveAll(listOflocationsToDelete);
               
             }
             else 
             {
-                //List<AdCampaignTargetLocation> listOfCriteriasToDelete = _adCampaignTargetCriteriaRepository.GetAll().Where(c => c.CampaignId == campaignModel.CampaignId).ToList();
-                //_adCampaignTargetCriteriaRepository.RemoveAll(listOfCriteriasToDelete);
+                List<AdCampaignTargetLocation> listOflocationsToDelete = _adCampaignTargetLocationRepository.GetAll().Where(c => c.CampaignId == campaignModel.CampaignId).ToList();
+                _adCampaignTargetLocationRepository.RemoveAll(listOflocationsToDelete);
             }
          
            
@@ -297,7 +300,7 @@ namespace SMD.Implementation.Services
         {
             return new AdCampaignBaseResponse
             {
-                SurveyQuestions = _surveyQuestionRepository.GetAll().Where(g=>g.SqId != surveyId && g.UserId == _surveyQuestionRepository.LoggedInUserIdentity)
+                SurveyQuestions = _surveyQuestionRepository.GetAll().Where(g => g.UserId == _surveyQuestionRepository.LoggedInUserIdentity)
             };
         }
 
