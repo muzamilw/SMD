@@ -161,8 +161,8 @@
               PQID = ko.observable(PQID),
               PQAnswerID = ko.observable(PQAnswerID),
               LinkedSQID = ko.observable(LinkedSQID),
-              LinkedSQAnswer = ko.observable(LinkedSqAnswer),
-              IncludeorExclude = ko.observable(IncludeorExclude),
+              LinkedSQAnswer = ko.observable(LinkedSqAnswer + "" ),
+              IncludeorExclude = ko.observable(IncludeorExclude == true?"1":"0"),
               LanguageID = ko.observable(LanguageID),
               questionString = ko.observable(questionString),
               answerString = ko.observable(answerString),
@@ -180,7 +180,7 @@
                       PqAnswerId: PQAnswerID(),
                       LinkedSqId: LinkedSQID(),
                       LinkedSqAnswer: LinkedSQAnswer(),
-                      IncludeorExclude: IncludeorExclude(),
+                      IncludeorExclude: IncludeorExclude() == 1 ? true : false,
                       surveyQuestLeftImageSrc: surveyQuestLeftImageSrc(),
                       surveyQuestRightImageSrc: surveyQuestRightImageSrc(),
                       LanguageId: LanguageID(),
@@ -217,7 +217,7 @@
             Radius = ko.observable(Radius),
             Country = ko.observable(Country),
             City = ko.observable(City),
-           IncludeorExclude = ko.observable(IncludeorExclude),
+           IncludeorExclude = ko.observable(IncludeorExclude == true ? "1" : "0"),
             // Convert to server data
             convertToServerData = function () {
                 return {
@@ -228,7 +228,7 @@
                     Radius: Radius(),
                     Country: Country(),
                     City: City(),
-                    IncludeorExclude: IncludeorExclude()
+                    IncludeorExclude: IncludeorExclude() == 1 ? true:false
                 };
             };
         return {

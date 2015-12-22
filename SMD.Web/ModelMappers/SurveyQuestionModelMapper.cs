@@ -278,13 +278,13 @@ namespace SMD.MIS.ModelMappers
                 }
                 else if (criteria.Type == (int)SurveyQuestionTargetCriteriaType.SurveryQuestion)
                 {
-                    if (criteria.SurveyQuestion != null)
+                    if (criteria.LinkedSurveyQuestion != null)
                     {
-                        modelCriteria.questionString = criteria.SurveyQuestion.DisplayQuestion;
-                        string pictureUrl = criteria.SurveyQuestion.RightPicturePath;
+                        modelCriteria.questionString = criteria.LinkedSurveyQuestion.DisplayQuestion;
+                        string pictureUrl = criteria.LinkedSurveyQuestion.RightPicturePath;
                         if (criteria.LinkedSqAnswer == (int)SurveyQuestionAnswerType.Left)
                         {
-                            pictureUrl = criteria.SurveyQuestion.LeftPicturePath;
+                            pictureUrl = criteria.LinkedSurveyQuestion.LeftPicturePath;
                         }
 
                         if (pictureUrl != null && !pictureUrl.Contains("http"))
