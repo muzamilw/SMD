@@ -19,4 +19,18 @@ namespace SMD.MIS.Areas.Api.Models
         public long SQID { get; set; }
         #endregion
     }
+
+    public class CampaignUpdateRequest
+    {
+        #region Public
+        /// <summary>
+        /// Search request type
+        /// 
+        /// </summary>
+        public AdCampaignTargetCriteria criteriaObj { get; set; }
+
+        public AdCampaignTargetLocation locationObj { get; set; }
+
+        #endregion
+    }
 }

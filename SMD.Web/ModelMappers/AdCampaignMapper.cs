@@ -37,6 +37,13 @@ namespace SMD.MIS.ModelMappers
             {
                 path = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + source.ImagePath;
             }
+            string LandingPageVideoLinkAsPath = "";
+            string LandingPageVideoLink = source.LandingPageVideoLink;
+            if (source.Type == (int)AdCampaignType.Other && !string.IsNullOrEmpty(source.LandingPageVideoLink))
+            {
+                LandingPageVideoLinkAsPath = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + source.LandingPageVideoLink;
+                LandingPageVideoLink = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + source.LandingPageVideoLink;
+            }
             return new AdCampaign
             {
                 CampaignId = source.CampaignId,
@@ -65,7 +72,7 @@ namespace SMD.MIS.ModelMappers
                 SmdCampaign = source.SmdCampaign,
                 EndDateTime = source.EndDateTime,
                 Gender = source.Gender,
-                LandingPageVideoLink = source.LandingPageVideoLink,
+                LandingPageVideoLink = LandingPageVideoLink,
                 MaxBudget = source.MaxBudget,
                 ModifiedBy = source.ModifiedBy,
                 ModifiedDateTime = source.ModifiedDateTime,
@@ -76,7 +83,8 @@ namespace SMD.MIS.ModelMappers
                 StartDateTime = source.StartDateTime,
                 UserId = source.UserId,
                 VerifyQuestion = source.VerifyQuestion,
-
+                CampaignImagePath = path,
+                CampaignTypeImagePath = LandingPageVideoLinkAsPath,
                 AdCampaignTargetCriterias =
                     source.AdCampaignTargetCriterias != null ? source.AdCampaignTargetCriterias.Select(x => x.CreateFrom()).ToList() : null,
 
@@ -92,6 +100,8 @@ namespace SMD.MIS.ModelMappers
         /// </summary>
         public static Models.DomainModels.AdCampaign CreateFrom(this AdCampaign source)
         {
+           
+
             return new Models.DomainModels.AdCampaign
             {
                 CampaignId = source.CampaignId,
@@ -130,7 +140,8 @@ namespace SMD.MIS.ModelMappers
                 SmdCredits = source.SmdCredits,
                 StartDateTime = source.StartDateTime,
                 UserId = source.UserId,
-                VerifyQuestion = source.VerifyQuestion
+                VerifyQuestion = source.VerifyQuestion,
+           
             };
 
 
@@ -199,6 +210,7 @@ namespace SMD.MIS.ModelMappers
         {
             string QuestionString = "";
             string AnswerString = "";
+            string LanguageName = "";
             if (source.Type != null && source.Type == (int)AdCampaignCriteriaType.ProfileQuestion)
             {
                 if (source.PqId != null && source.PqId > 0 && source.ProfileQuestion != null)
@@ -233,7 +245,7 @@ namespace SMD.MIS.ModelMappers
             {
                 if (source.LanguageId != null && source.LanguageId > 0 && source.Language != null)
                 {
-                    QuestionString = source.Language.LanguageName;
+                    LanguageName = source.Language.LanguageName;
                 }
             }
             
@@ -244,31 +256,43 @@ namespace SMD.MIS.ModelMappers
                 IncludeorExclude = source.IncludeorExclude,
                 IndustryId = source.IndustryId,
                 LanguageId = source.LanguageId,
-                PqAnswerId = source.PqAnswerId,
-                PqId = source.PqId,
-                SqAnswer = source.SqAnswer,
-                SqId = source.SqId,
+                PQAnswerId = source.PqAnswerId,
+                PQId = source.PqId,
+                SQAnswer = source.SqAnswer,
+                SQId = source.SqId,
                 Type = source.Type,
-                QuestionString = QuestionString,
-                AnswerString = AnswerString
+                questionString = QuestionString,
+                answerString = AnswerString,
+                Language = LanguageName
             };
         }
 
         /// <summary>
         /// Domain to Web Mapper
         /// </summary>
-        public static AdCampaignTargetLocation CreateFrom(this Models.DomainModels.AdCampaignTargetLocation source)
+        public static SMD.MIS.Areas.Api.Models.AdCampaignTargetLocation CreateFrom(this Models.DomainModels.AdCampaignTargetLocation source)
         {
-
-            return new AdCampaignTargetLocation
+            string CName = "";
+            string CountName = "";
+            if (source.CountryId != null && source.CountryId > 0 && source.Country != null)
+            {
+                CountName = source.Country.CountryName;
+                
+            }
+            if (source.CityId != null && source.CityId > 0 && source.City != null)
+            {
+                CName = source.City.CityName;                
+            }
+            return new SMD.MIS.Areas.Api.Models.AdCampaignTargetLocation
             {
                 Id = source.Id,
                 CampaignId = source.CampaignId,
                 CityId = source.CityId,
                 CountryId = source.CountryId,
                 IncludeorExclude = source.IncludeorExclude,
-                Radius = source.Radius
-
+                Radius = source.Radius,
+                City = CName,
+                Country = CountName
             };
         }
     }

@@ -215,7 +215,8 @@ namespace SMD.Implementation.Services
                 {
                     if (criteria.Id != 0)
                     {
-                        surveyQuestionTargtCriteriaRepository.Update(criteria);
+                        if (criteria.Type != (int)SurveyQuestionTargetCriteriaType.Language && criteria.Type != (int)SurveyQuestionTargetCriteriaType.Industry)  // industry and languages are addable and deleteable
+                            surveyQuestionTargtCriteriaRepository.Update(criteria);
                     }
                     else
                     {
@@ -257,15 +258,7 @@ namespace SMD.Implementation.Services
                 Servey.StartDate = Servey.StartDate.Value.Add(surveyQuestionRepository.UserTimezoneOffSet);
             if(Servey.EndDate.HasValue)
                  Servey.EndDate = Servey.EndDate.Value.Add(surveyQuestionRepository.UserTimezoneOffSet);
-            //Servey.SurveyQuestionResponses = null;
-            //foreach (var criteria in Servey.SurveyQuestionTargetCriterias)
-            //{
-            //    criteria.SurveyQuestion = null;
-            //}
-            //foreach (var loc in Servey.SurveyQuestionTargetLocations)
-            //{
-            //    loc.SurveyQuestion = null;
-            //}
+
             return new SurveyQuestionEditResponseModel
             {
                 SurveyQuestionObj = Servey

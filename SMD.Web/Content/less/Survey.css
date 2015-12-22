@@ -113,3 +113,8 @@ div.Tokenize ul.Dropdown {
 .tt-dropdown-menu {
   width: 286px !important;
 }
+.range_dash {
+  width: 10px;
+  font-size: 20px;
+  padding: 0px 17px 0px 10px;
+}

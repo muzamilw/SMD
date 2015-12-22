@@ -13,7 +13,6 @@ namespace SMD.MIS.Areas.Api.Controllers
     /// <summary>
     /// Update User Profile Api Controller 
     /// </summary>
-    [Authorize]
     public class UpdateUserProfileController : ApiController
     {
         private readonly IWebApiUserService webApiUserService;
@@ -45,9 +44,9 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// Update User Profile
         /// </summary>
         [ApiExceptionCustom]
-        public async Task<BaseApiResponse> Post([FromUri] UpdateUserProfileRequest request)
+        public async Task<BaseApiResponse> Post(string authenticationToken, [FromUri] UpdateUserProfileRequest request)
         {
-            if (request == null || !ModelState.IsValid)
+            if (string.IsNullOrEmpty(authenticationToken) || request == null || !ModelState.IsValid)
             {
                 throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
             }

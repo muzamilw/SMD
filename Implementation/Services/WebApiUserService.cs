@@ -268,17 +268,8 @@ namespace SMD.Implementation.Services
         /// Sets up accounts for transcations
         /// Verifies if required accounts exist
         /// </summary>
-        private void SetupSurveyApproveTransaction(ApproveSurveyRequest request, SurveyQuestion surveyQuestion,
-            out Account adViewersAccount, out Account advertisersAccount, out Account smdAccount)
+        private void SetupSurveyApproveTransaction(SurveyQuestion surveyQuestion, out Account advertisersAccount, out Account smdAccount)
         {
-            // Get business Accounts for Each Individual involved in this transaction
-            adViewersAccount = accountRepository.GetByUserId(request.UserId);
-            if (adViewersAccount == null)
-            {
-                throw new SMDException(string.Format(CultureInfo.InvariantCulture,
-                    LanguageResources.WebApiUserService_AccountNotFound, "Current User"));
-            }
-
             advertisersAccount = accountRepository.GetByUserId(surveyQuestion.UserId);
             if (advertisersAccount == null)
             {
@@ -300,16 +291,11 @@ namespace SMD.Implementation.Services
         /// <param name="request">Survey Approve Request object</param>
         /// <param name="advertisersAccount">Advertisers account</param>
         /// <param name="approvedSurveyAmount">Survey Amount</param>
-        /// <param name="adViewersAccount"></param>
-        /// <param name="adViewersCut"></param>
-        /// <param name="referringUser"></param>
         /// <param name="smdsCut"></param>
-        /// <param name="affiliatesAccount"></param>
         /// <param name="smdAccount"></param>
         /// <param name="surveyQuestion"></param>
         private void PerformSurveyApproveTransactions(ApproveSurveyRequest request, Account advertisersAccount, double approvedSurveyAmount,
-            Account adViewersAccount, double? adViewersCut, User referringUser, double? smdsCut, Account affiliatesAccount,
-            Account smdAccount, SurveyQuestion surveyQuestion)
+            double? smdsCut, Account smdAccount, SurveyQuestion surveyQuestion)
         {
             // Debit Advertiser
             var transactionSequence = 1;
@@ -317,13 +303,6 @@ namespace SMD.Implementation.Services
             // Perform the transactions
             // Debit Survey Advertiser
             PerformTransaction(null, request.SurveyQuestionId, advertisersAccount, approvedSurveyAmount, transactionSequence, TransactionType.ApproveSurvey, false);
-
-            // Credit Survey Approver
-            transactionSequence += 1;
-            PerformTransaction(null, request.SurveyQuestionId, adViewersAccount, adViewersCut, transactionSequence, TransactionType.ApproveSurvey);
-
-            // Credit Affiliate
-            //smdsCut = PerformCreditTransactionForAffiliate(request, referringUser, smdsCut, affiliatesAccount, ref transactionSequence);
 
             // Credit SMD
             transactionSequence += 1;
@@ -407,42 +386,19 @@ namespace SMD.Implementation.Services
 
             // Validates if Ad Campaing Exists and has Advertiser info as well
             var surveyQuestion = await ValidateSurveyQuestion(request);
-
-            // Get Referral if any
-            User referringUser = null;
-            Account affiliatesAccount = null;
-            if (!string.IsNullOrEmpty(surveyApprover.ReferringUserId))
-            {
-                referringUser = await UserManager.FindByIdAsync(surveyApprover.ReferringUserId);
-                if (referringUser == null)
-                {
-                    throw new SMDException(LanguageResources.WebApiUserService_ReferrerNotFound);
-                }
-
-                affiliatesAccount = accountRepository.GetByUserId(surveyApprover.ReferringUserId);
-                if (affiliatesAccount == null)
-                {
-                    throw new SMDException(string.Format(CultureInfo.InvariantCulture,
-                        LanguageResources.WebApiUserService_AccountNotFound, "Affiliate"));
-                }
-            }
-
+            
             // Begin Transaction
-            // Ad Viewer will get 50% and other 50% will be divided b/w SMD (30%), Affiliate(20%) (Referrer) if exists
+            // SMD will get 100 %
             double approvedSurveyAmount = request.Amount;
-            double? adViewersCut = ((approvedSurveyAmount * 50) / 100);
-            double? smdsCut = adViewersCut;
-            Account adViewersAccount;
             Account advertisersAccount;
             Account smdAccount;
 
             // Sets up transaction 
             // Gets Accounts required
-            SetupSurveyApproveTransaction(request, surveyQuestion, out adViewersAccount, out advertisersAccount, out smdAccount);
+            SetupSurveyApproveTransaction(surveyQuestion, out advertisersAccount, out smdAccount);
             
             // Perform Transactions
-            PerformSurveyApproveTransactions(request, advertisersAccount, approvedSurveyAmount, adViewersAccount, adViewersCut, referringUser, smdsCut,
-                affiliatesAccount, smdAccount, surveyQuestion);
+            PerformSurveyApproveTransactions(request, advertisersAccount, approvedSurveyAmount, approvedSurveyAmount, smdAccount, surveyQuestion);
 
             return new BaseApiResponse
             {

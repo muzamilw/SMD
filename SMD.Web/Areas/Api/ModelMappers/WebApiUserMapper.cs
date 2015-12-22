@@ -1,4 +1,5 @@
-﻿using SMD.MIS.Areas.Api.Models;
+﻿using System;
+using SMD.MIS.Areas.Api.Models;
 using SMD.Models.IdentityModels;
 using LoginResponse = SMD.Models.ResponseModels.LoginResponse;
 
@@ -35,7 +36,8 @@ namespace SMD.MIS.Areas.Api.ModelMappers
             {
                 Status = source.Status,
                 Message = source.Message,
-                User = source.User != null ? source.User.CreateFrom() : null
+                User = source.User != null ? source.User.CreateFrom() : null,
+                AuthenticationToken = Guid.NewGuid()
             };
         }
     }

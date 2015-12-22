@@ -53,7 +53,7 @@ namespace SMD.MIS
             // Update User Profile Custom route
             config.Routes.MapHttpRoute(
                 "UpdateUserProfile",
-                "Update/User/",
+                "Update/User/{AuthenticationToken}/",
                 new { controller = "UpdateUserProfile" },
                 null,
                 routeHandlers);
@@ -61,7 +61,7 @@ namespace SMD.MIS
             // Archive User route
             config.Routes.MapHttpRoute(
                 "ArchiveUserAccount",
-                "User/Archive/",
+                "User/Archive/{AuthenticationToken}/",
                 new { controller = "ArchiveUserAccount" },
                 null,
                 routeHandlers);
@@ -69,8 +69,16 @@ namespace SMD.MIS
             // Ad Viewed route
             config.Routes.MapHttpRoute(
                 "AdViewed",
-                "Ad/Viewed/",
+                "Ad/Viewed/{AuthenticationToken}/",
                 new { controller = "AdViewed" },
+                null,
+                routeHandlers);
+
+            // Ad Viewed route
+            config.Routes.MapHttpRoute(
+                "ApproveSurvey",
+                "Survey/Approve/{AuthenticationToken}/",
+                new { controller = "ApproveSurvey" },
                 null,
                 routeHandlers);
         }

@@ -31,5 +31,13 @@ namespace SMD.Repository.Repositories
                 return db.AdCampaignTargetLocations;
             }
         }
+
+        public void RemoveAll(List<AdCampaignTargetLocation> locations)
+        {
+
+            db.AdCampaignTargetLocations.RemoveRange(locations);
+            db.SaveChanges();
+
+        }
     }
 }

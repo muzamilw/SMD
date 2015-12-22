@@ -374,6 +374,7 @@
     <Compile Include="Areas\Ads\Controllers\AdsController.cs" />
     <Compile Include="Areas\Api\ApiAreaRegistration.cs" />
     <Compile Include="Areas\Api\Controllers\AdCampaignBaseController.cs" />
+    <Compile Include="Areas\Api\Controllers\ApproveSurveyController.cs" />
     <Compile Include="Areas\Api\Controllers\CreateStripeCustomerController.cs" />
     <Compile Include="Areas\Api\Controllers\CampaignController.cs" />
     <Compile Include="Areas\Api\Controllers\ChargeCustomerController.cs" />
@@ -384,6 +385,7 @@
     <Compile Include="Areas\Api\Controllers\GetSurveysForApiController.cs" />
     <Compile Include="Areas\Api\Controllers\AdViewedController.cs" />
     <Compile Include="Areas\Api\Controllers\SurveyQuestionEditorController.cs" />
+    <Compile Include="Areas\Api\Controllers\UpdateCampaignController.cs" />
     <Compile Include="Areas\Api\Controllers\UpdateQuestionAnswerForApiController.cs" />
     <Compile Include="Areas\Api\Controllers\UpdateUserProfileController.cs" />
     <Compile Include="Areas\Api\Controllers\RegisterController.cs" />
@@ -409,6 +411,7 @@
     <Compile Include="Areas\Api\Models\AdCampaignApiModel.cs" />
     <Compile Include="Areas\Api\Models\AdCampaignApiSearchRequestResponse.cs" />
     <Compile Include="Areas\Api\Models\AdCampaignTargetCriteria.cs" />
+    <Compile Include="Areas\Api\Models\AdCampaignTargetLocation.cs" />
     <Compile Include="Areas\Api\Models\AudienceAdCampaignForApiResponse.cs" />
     <Compile Include="Areas\Api\Models\AudienceSurveyForApiResponse.cs" />
     <Compile Include="Areas\Api\Models\CampaignRequestResponseModel.cs" />

@@ -72,7 +72,6 @@
                 },
                 // Convert to server data
                 convertToServerData = function () {
-                    debugger;
                     var targetCriteria =[],targetLocation  = [];
                     _.each(SurveyQuestionTargetCriteria(), function (item) {
                         targetCriteria.push(item.convertToServerData());
@@ -193,7 +192,7 @@
               SQID :SQID,
               Type :Type,
               PQID :PQID,
-              PQAnswerID :PQAnswerID,
+              PQAnswerID: PQAnswerID,
               LinkedSQID :LinkedSQID,
               LinkedSQAnswer :LinkedSQAnswer,
               IncludeorExclude :IncludeorExclude,
