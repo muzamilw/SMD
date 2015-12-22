@@ -33,5 +33,6 @@ namespace SMD.Implementation
             unityContainer.RegisterType<IPaypalService, PaypalService>();
             unityContainer.RegisterType<IProfileQuestionUserAnswerService, ProfileQuestionUserAnswerService>();
         }
+
     }
 }

@@ -23,6 +23,8 @@ namespace SMD.Implementation.Services
         /// Private members
         /// </summary>
         private readonly ISurveyQuestionRepository surveyQuestionRepository;
+        private readonly ISurveyQuestionTargetCriteriaRepository surveyQuestionTargtCriteriaRepository;
+        private readonly ISurveyQuestionTargetLocationRepository surveyQuestionTargetLocationRepository;
         private readonly ICountryRepository countryRepository;
         private readonly ILanguageRepository languageRepository;
         private readonly IEmailManagerService emailManagerService;
@@ -72,12 +74,14 @@ namespace SMD.Implementation.Services
         /// <summary>
         ///  Constructor
         /// </summary>
-        public SurveyQuestionService(ISurveyQuestionRepository _surveyQuestionRepository, ICountryRepository _countryRepository, ILanguageRepository _languageRepository, IEmailManagerService emailManagerService)
+        public SurveyQuestionService(ISurveyQuestionRepository _surveyQuestionRepository, ICountryRepository _countryRepository, ILanguageRepository _languageRepository, IEmailManagerService emailManagerService, ISurveyQuestionTargetCriteriaRepository _surveyQuestionTargtCriteriaRepository, ISurveyQuestionTargetLocationRepository _surveyQuestionTargetLocationRepository)
         {
             this.surveyQuestionRepository = _surveyQuestionRepository;
             this.languageRepository = _languageRepository;
             this.emailManagerService = emailManagerService;
             this.countryRepository = _countryRepository;
+            this.surveyQuestionTargetLocationRepository = _surveyQuestionTargetLocationRepository;
+            this.surveyQuestionTargtCriteriaRepository = _surveyQuestionTargtCriteriaRepository;
         }
 
         #endregion
@@ -183,6 +187,8 @@ namespace SMD.Implementation.Services
             {
                 survey.ModifiedDate = DateTime.Now;
                 survey.ModifiedBy = surveyQuestionRepository.LoggedInUserIdentity;
+                survey.StartDate = survey.StartDate.Value.Subtract(surveyQuestionRepository.UserTimezoneOffSet);
+                survey.EndDate = survey.EndDate.Value.Subtract(surveyQuestionRepository.UserTimezoneOffSet);
                 surveyQuestionRepository.Update(survey);
                 surveyQuestionRepository.SaveChanges();
                 string[] paths = SaveSurveyImages(survey);
@@ -191,6 +197,49 @@ namespace SMD.Implementation.Services
                     survey.LeftPicturePath = paths[0];
                 if (survey.RightPictureBytes != null)
                     survey.RightPicturePath = paths[1];
+                // add or update locations
+                foreach(var loc in survey.SurveyQuestionTargetLocations)
+                {
+                    if (loc.Id != 0)
+                    {
+                        surveyQuestionTargetLocationRepository.Update(loc);
+                    }
+                    else
+                    {
+                        loc.SqId = survey.SqId;
+                        surveyQuestionTargetLocationRepository.Add(loc);
+                    }
+                }
+                // add or update criteria
+                foreach (var criteria in survey.SurveyQuestionTargetCriterias)
+                {
+                    if (criteria.Id != 0)
+                    {
+                        surveyQuestionTargtCriteriaRepository.Update(criteria);
+                    }
+                    else
+                    {
+                        criteria.SqId = survey.SqId;
+                        surveyQuestionTargtCriteriaRepository.Add(criteria);
+                    }
+                }
+                // delete criteria 
+                foreach (var dbCriteria in surveyQuestionTargtCriteriaRepository.GetAll().Where(g => g.SqId == survey.SqId).ToList())
+                {
+                    var clientObj = survey.SurveyQuestionTargetCriterias.Where(g => g.Id == dbCriteria.Id).SingleOrDefault();
+                    if (clientObj == null)
+                        surveyQuestionTargtCriteriaRepository.Delete(dbCriteria);
+                }
+                // delete locations 
+                // delete criteria 
+                foreach (var dbLocation in surveyQuestionTargetLocationRepository.GetAll().Where(g => g.SqId == survey.SqId).ToList())
+                {
+                    var clientObj = survey.SurveyQuestionTargetLocations.Where(g => g.Id == dbLocation.Id).SingleOrDefault();
+                    if (clientObj == null)
+                        surveyQuestionTargetLocationRepository.Delete(dbLocation);
+                }
+                surveyQuestionTargetLocationRepository.SaveChanges();
+                surveyQuestionTargtCriteriaRepository.SaveChanges();
                 surveyQuestionRepository.SaveChanges();
                 return true;
                 

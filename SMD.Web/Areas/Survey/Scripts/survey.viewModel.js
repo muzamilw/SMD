@@ -167,6 +167,7 @@ define("survey/survey.viewModel",
                                    //
                                    selectedQuestion(model.Survey.Create(updateSurveryItem(data.SurveyQuestion)));
                                    selectedQuestion().reset();
+                                   view.initializeTypeahead();
                                    // load survey questions
                                    if (surveyQuestionList().length == 0) {
                                        dataservice.getBaseData({
@@ -239,7 +240,6 @@ define("survey/survey.viewModel",
                      },
                     //add location
                     onAddLocation = function (item) {
-                        debugger;
                         selectedLocation().Radius = (selectedLocationRadius);
                         selectedLocation().IncludeorExclude = (selectedLocationIncludeExclude);
                         selectedQuestion().SurveyQuestionTargetLocation.push( new model.SurveyQuestionTargetLocation.Create( {
@@ -345,6 +345,7 @@ define("survey/survey.viewModel",
                         }
                     },
                     saveCriteria = function () {
+                        debugger;
                         if (selectedCriteria().Type() == "1") {
                             var selectedQuestionstring = $("#ddprofileQuestion option[value=" + $("#ddprofileQuestion").val() + "]").text();
                             selectedCriteria().questionString(selectedQuestionstring);

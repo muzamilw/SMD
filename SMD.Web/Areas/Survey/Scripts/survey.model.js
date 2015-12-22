@@ -72,6 +72,7 @@
                 },
                 // Convert to server data
                 convertToServerData = function () {
+                    debugger;
                     var targetCriteria =[],targetLocation  = [];
                     _.each(SurveyQuestionTargetCriteria(), function (item) {
                         targetCriteria.push(item.convertToServerData());
@@ -173,7 +174,7 @@
               // Convert to server data
               convertToServerData = function () {
                   return {
-                      ID:ID(),
+                      Id:ID(),
                       SqId: SQID(),
                       Type: Type(),
                       PqId: PQID(),
@@ -221,7 +222,7 @@
             // Convert to server data
             convertToServerData = function () {
                 return {
-                    ID: ID(),
+                    Id: ID(),
                     SqId: SQID(),
                     CountryId: CountryID(),
                     CityId: CityID(),
@@ -256,11 +257,10 @@
     };
     // Factory Method
     SurveyQuestionTargetCriteria.Create = function (source) {
-        console.log(source);
-        return new SurveyQuestionTargetCriteria(source.ID, source.SqId, source.Type, source.PqId, source.PqAnswerId, source.LinkedSqId, source.LinkedSqAnswer, source.IncludeorExclude, source.LanguageID, source.questionString, source.answerString, source.Language, source.surveyQuestLeftImageSrc, source.surveyQuestRightImageSrc, source.IndustryID);
+        return new SurveyQuestionTargetCriteria(source.Id, source.SqId, source.Type, source.PqId, source.PqAnswerId, source.LinkedSqId, source.LinkedSqAnswer, source.IncludeorExclude, source.LanguageID, source.questionString, source.answerString, source.Language, source.surveyQuestLeftImageSrc, source.surveyQuestRightImageSrc, source.IndustryID);
     };
     SurveyQuestionTargetLocation.Create = function (source) {
-        return new SurveyQuestionTargetLocation(source.ID, source.SqId, source.CountryId, source.CityId, source.Radius, source.Country, source.City, source.IncludeorExclude);
+        return new SurveyQuestionTargetLocation(source.Id, source.SqId, source.CountryId, source.CityId, source.Radius, source.Country, source.City, source.IncludeorExclude);
     };
     return {
         Survey: Survey,
