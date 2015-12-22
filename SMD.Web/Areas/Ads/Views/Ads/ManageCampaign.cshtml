@@ -46,18 +46,14 @@
                                             <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
                                         </a>
                                     </div>
-                                    <label class="control-label">Archived</label>
+                                    <label class="control-label">Status</label>
                                 </div>
                                 <div class="col-lg-6">
-                                    <div class="onoffswitch">
-                                        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchToArchieved">
-                                        <label class="onoffswitch-label" for="switchToArchieved">
-                                            <div class="onoffswitch-inner"></div>
-                                            <div class="onoffswitch-switch"></div>
-                                        </label>
-                                    </div>
+
+                                    <label class="control-label bold" data-bind="text:StatusValue()"></label>
                                 </div>
                             </div>
+                           
                         </div>
 
                         <div class="col-lg-9">
@@ -181,7 +177,7 @@
                                 <div class="pull-left range_dash">
                                     -
                                 </div>
-                                <div class="col-lg-1" style=" padding: 0px !important; text-align:right;">
+                                <div class="col-lg-1" style=" padding: 0px !important;">
                                     <select class="form-control" data-bind="options: $root.ageRange, optionsText: 'text', optionsValue: 'value', value: AgeRangeEnd"></select>
 
                                 </div>

@@ -477,6 +477,20 @@ define("ads/ads.viewModel",
                                             campaignTypePlaceHolderValue('Enter a link');
                                         }
                                     }
+
+                                    if (campaignModel().Status() == 1) {
+                                        campaignModel().StatusValue("Draft");
+                                    } else if (campaignModel().Status() == 2) {
+                                        campaignModel().StatusValue("Submitted for Approval");
+                                    } else if (campaignModel().Status() == 3) {
+                                        campaignModel().StatusValue("Live");
+                                    } else if (campaignModel().Status() == 4) {
+                                        campaignModel().StatusValue("Paused");
+                                    } else if (campaignModel().Status() == 5) {
+                                        campaignModel().StatusValue("Completed");
+                                    } else if (campaignModel().Status() == 6) {
+                                        campaignModel().StatusValue("Approval Rejected");
+                                    }
                                     isEditorVisible(true);
                                     
                                 }
