@@ -12,7 +12,6 @@ namespace SMD.MIS.Areas.Api.Controllers
     /// <summary>
     /// Update User Profile Api Controller 
     /// </summary>
-    [Authorize]
     public class ArchiveUserAccountController : ApiController
     {
         #region Private
@@ -44,9 +43,9 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// Archive User Account
         /// </summary>
         [ApiExceptionCustom]
-        public async Task<BaseApiResponse> Post(string userId)
+        public async Task<BaseApiResponse> Post(string authenticationToken, string userId)
         {
-            if (string.IsNullOrEmpty(userId))
+            if (string.IsNullOrEmpty(authenticationToken) || string.IsNullOrEmpty(userId))
             {
                 throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
             }

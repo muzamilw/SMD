@@ -1,4 +1,6 @@
 ﻿
+using System;
+
 namespace SMD.MIS.Areas.Api.Models
 {
     /// <summary>
@@ -11,5 +13,7 @@ namespace SMD.MIS.Areas.Api.Models
         public string Message { get; set; }
 
         public WebApiUser User { get; set; }
+
+        public Guid AuthenticationToken { get; set; }
     }
 }

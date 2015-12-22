@@ -11,9 +11,9 @@ using SMD.WebBase.Mvc;
 namespace SMD.MIS.Areas.Api.Controllers
 {
     /// <summary>
-    /// Ad Viewed Api Controller 
+    /// Approve Survey Api Controller 
     /// </summary>
-    public class AdViewedController : ApiController
+    public class ApproveSurveyController : ApiController
     {
 
         #region Private
@@ -27,7 +27,7 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// <summary>
         /// Constructor
         /// </summary>
-        public AdViewedController(IWebApiUserService webApiUserService)
+        public ApproveSurveyController(IWebApiUserService webApiUserService)
         {
             if (webApiUserService == null)
             {
@@ -42,19 +42,19 @@ namespace SMD.MIS.Areas.Api.Controllers
         #region Public
         
         /// <summary>
-        /// Ad Viewed
+        /// Approve Survey
         /// </summary>
         [ApiExceptionCustom]
-        public async Task<BaseApiResponse> Post(string authenticationToken, [FromUri] AdViewedRequest request)
+        public async Task<BaseApiResponse> Post(string authenticationToken, [FromUri] ApproveSurveyRequest request)
         {
             if (string.IsNullOrEmpty(authenticationToken) || request == null || !ModelState.IsValid || 
-                string.IsNullOrEmpty(request.UserId) || request.AdCampaignId <= 0)
+                string.IsNullOrEmpty(request.UserId) || request.SurveyQuestionId <= 0)
             {
                 throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
             }
 
-            // Update Transactions on Ad View
-            return await webApiUserService.UpdateTransactionOnViewingAd(request);
+            // Update Transactions on Approve Survey
+            return await webApiUserService.UpdateTransactionOnSurveyApproval(request);
         }
 
         #endregion
