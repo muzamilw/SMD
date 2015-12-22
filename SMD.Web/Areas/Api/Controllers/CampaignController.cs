@@ -55,9 +55,17 @@ namespace SMD.MIS.Areas.Api.Controllers
         public void Post(SMD.Models.DomainModels.AdCampaign campaignModel)
         {
             campaignModel.Status = (int)AdCampaignStatus.Draft;
+            if (campaignModel.CampaignId > 0)
+            {
+                _campaignService.UpdateCampaign(campaignModel);
 
-            _campaignService.CreateCampaign(campaignModel);
+            }
+            else 
+            {
+                _campaignService.CreateCampaign(campaignModel);
 
+            }
+           
         }
         #endregion
     }

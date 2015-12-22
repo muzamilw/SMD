@@ -30,5 +30,13 @@ namespace SMD.Repository.Repositories
                 return db.AdCampaignTargetCriterias;
             }
         }
+
+        public void RemoveAll(List<AdCampaignTargetCriteria> criterias)
+        {
+
+            db.AdCampaignTargetCriterias.RemoveRange(criterias);
+            db.SaveChanges();
+           
+        }
     }
 }

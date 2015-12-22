@@ -46,6 +46,8 @@ namespace SMD.MIS.Areas.Api.Models
         public long? ProjectedReach { get; set; }
         public long? ResultClicks { get; set; }
         public double? AmountSpent { get; set; }
+        public string CampaignImagePath { get; set; }
+        public string CampaignTypeImagePath { get; set; }
         public List<AdCampaignTargetCriteria> AdCampaignTargetCriterias { get; set; }
         public List<AdCampaignTargetLocation> AdCampaignTargetLocations { get; set; }
     }

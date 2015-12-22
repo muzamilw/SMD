@@ -9,5 +9,6 @@ namespace SMD.Interfaces.Repository
 {
     public interface IAdCampaignTargetLocationRepository : IBaseRepository<AdCampaignTargetLocation, long>
     {
+        void RemoveAll(List<AdCampaignTargetLocation> locations);
     }
 }
