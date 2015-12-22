@@ -185,5 +185,14 @@ namespace SMD.Implementation {
                 return ResourceManager.GetString("WebApiUserService_ReferrerNotFound", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Survey Question not found against Id {0}..
+        /// </summary>
+        internal static string WebApiUserService_SurveyQuestionNotFound {
+            get {
+                return ResourceManager.GetString("WebApiUserService_SurveyQuestionNotFound", resourceCulture);
+            }
+        }
     }
 }

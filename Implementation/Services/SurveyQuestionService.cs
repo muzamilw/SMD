@@ -164,13 +164,38 @@ namespace SMD.Implementation.Services
                 surveyQuestionRepository.SaveChanges();
                 string[] paths = SaveSurveyImages(survey);
                // return surveyQuestionRepository.updateSurveyImages(paths, survey.SqId);
-                survey.LeftPicturePath = paths[0];
-                survey.RightPicturePath = paths[1];
+                if(survey.LeftPictureBytes != null)
+                    survey.LeftPicturePath = paths[0];
+                if(survey.RightPictureBytes != null)
+                    survey.RightPicturePath = paths[1];
                 surveyQuestionRepository.SaveChanges();
                 return true;
                 
             }
             catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public bool Update(SurveyQuestion survey)
+        {
+            try
+            {
+                survey.ModifiedDate = DateTime.Now;
+                survey.ModifiedBy = surveyQuestionRepository.LoggedInUserIdentity;
+                surveyQuestionRepository.Update(survey);
+                surveyQuestionRepository.SaveChanges();
+                string[] paths = SaveSurveyImages(survey);
+                // return surveyQuestionRepository.updateSurveyImages(paths, survey.SqId);
+                if (survey.LeftPictureBytes != null)
+                    survey.LeftPicturePath = paths[0];
+                if (survey.RightPictureBytes != null)
+                    survey.RightPicturePath = paths[1];
+                surveyQuestionRepository.SaveChanges();
+                return true;
+                
+            }
+            catch (Exception ex)
             {
                 throw ex;
             }

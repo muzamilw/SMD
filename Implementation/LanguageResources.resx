@@ -159,4 +159,7 @@
   <data name="WebApiUserService_AccountNotFound" xml:space="preserve">
     <value>Account not found for {0}.</value>
   </data>
+  <data name="WebApiUserService_SurveyQuestionNotFound" xml:space="preserve">
+    <value>Survey Question not found against Id {0}.</value>
+  </data>
 </root>

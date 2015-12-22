@@ -152,17 +152,17 @@
         };
 
     var // ReSharper disable InconsistentNaming
-      SurveyQuestionTargetCriteria = function (ID, SQID, Type, PQID, PQAnswerID, LinkedSQID, LinkedSQAnswer, IncludeorExclude, LanguageID, questionString, answerString, Language, surveyQuestLeftImageSrc, surveyQuestRightImageSrc, IndustryID) {
+      SurveyQuestionTargetCriteria = function (ID, SQID, Type, PQID, PQAnswerID, LinkedSQID, LinkedSqAnswer, IncludeorExclude, LanguageID, questionString, answerString, Language, surveyQuestLeftImageSrc, surveyQuestRightImageSrc, IndustryID) {
           var
-              //type and userID will be set on server sside
+              //type and userID will be set on server side
               ID = ko.observable(ID),
               SQID = ko.observable(SQID),
               Type = ko.observable(Type),
               PQID = ko.observable(PQID),
               PQAnswerID = ko.observable(PQAnswerID),
               LinkedSQID = ko.observable(LinkedSQID),
-              LinkedSQAnswer = ko.observable(LinkedSQAnswer),
-              IncludeorExclude = ko.observable(IncludeorExclude),
+              LinkedSQAnswer = ko.observable(LinkedSqAnswer + "" ),
+              IncludeorExclude = ko.observable(IncludeorExclude == true?"1":"0"),
               LanguageID = ko.observable(LanguageID),
               questionString = ko.observable(questionString),
               answerString = ko.observable(answerString),
@@ -180,11 +180,11 @@
                       PqAnswerId: PQAnswerID(),
                       LinkedSqId: LinkedSQID(),
                       LinkedSqAnswer: LinkedSQAnswer(),
-                      IncludeorExclude: IncludeorExclude(),
+                      IncludeorExclude: IncludeorExclude() == 1 ? true : false,
                       surveyQuestLeftImageSrc: surveyQuestLeftImageSrc(),
                       surveyQuestRightImageSrc: surveyQuestRightImageSrc(),
-                      LanguageId: LanguageID,
-                      IndustryID: IndustryID
+                      LanguageId: LanguageID(),
+                      IndustryID: IndustryID()
                   };
               };
           return {
@@ -217,7 +217,7 @@
             Radius = ko.observable(Radius),
             Country = ko.observable(Country),
             City = ko.observable(City),
-           IncludeorExclude = ko.observable(IncludeorExclude),
+           IncludeorExclude = ko.observable(IncludeorExclude == true ? "1" : "0"),
             // Convert to server data
             convertToServerData = function () {
                 return {
@@ -228,7 +228,7 @@
                     Radius: Radius(),
                     Country: Country(),
                     City: City(),
-                    IncludeorExclude: IncludeorExclude()
+                    IncludeorExclude: IncludeorExclude() == 1 ? true:false
                 };
             };
         return {
@@ -256,7 +256,8 @@
     };
     // Factory Method
     SurveyQuestionTargetCriteria.Create = function (source) {
-        return new SurveyQuestionTargetCriteria(source.ID, source.SqId, source.Type, source.PqId, source.PqAnswerId, source.LinkedSqId, source.LinkedSQAnswer, source.IncludeorExclude, source.LanguageID, source.questionString, source.answerString, source.Language, source.surveyQuestLeftImageSrc, source.surveyQuestRightImageSrc, source.IndustryID);
+        console.log(source);
+        return new SurveyQuestionTargetCriteria(source.ID, source.SqId, source.Type, source.PqId, source.PqAnswerId, source.LinkedSqId, source.LinkedSqAnswer, source.IncludeorExclude, source.LanguageID, source.questionString, source.answerString, source.Language, source.surveyQuestLeftImageSrc, source.surveyQuestRightImageSrc, source.IndustryID);
     };
     SurveyQuestionTargetLocation.Create = function (source) {
         return new SurveyQuestionTargetLocation(source.ID, source.SqId, source.CountryId, source.CityId, source.Radius, source.Country, source.City, source.IncludeorExclude);

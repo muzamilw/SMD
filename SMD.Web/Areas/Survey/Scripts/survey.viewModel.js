@@ -167,6 +167,48 @@ define("survey/survey.viewModel",
                                    //
                                    selectedQuestion(model.Survey.Create(updateSurveryItem(data.SurveyQuestion)));
                                    selectedQuestion().reset();
+                                   // load survey questions
+                                   if (surveyQuestionList().length == 0) {
+                                       dataservice.getBaseData({
+                                           RequestId: 4,
+                                           QuestionId: 0,
+                                           SQID: selectedQuestion().SQID()
+                                       }, {
+                                           success: function (data) {
+                                               if (data != null) {
+                                                   surveyQuestionList([]);
+                                                   ko.utils.arrayPushAll(surveyQuestionList(), data.SurveyQuestions);
+                                                   surveyQuestionList.valueHasMutated();
+                                               }
+
+                                           },
+                                           error: function (response) {
+
+                                           }
+                                       });
+                                   }
+                                   // load profile questions 
+                                   if (profileQuestionList().length == 0) {
+                                       dataservice.getBaseData({
+                                           RequestId: 2,
+                                           QuestionId: 0,
+                                       }, {
+                                           success: function (data) {
+                                               if (data != null) {
+                                                   _.each(data.ProfileQuestions, function (question) {
+                                                       question.PQID = question.PqId;
+                                                   });
+                                                   profileQuestionList([]);
+                                                   ko.utils.arrayPushAll(profileQuestionList(), data.ProfileQuestions);
+                                                   profileQuestionList.valueHasMutated();
+                                               }
+
+                                           },
+                                           error: function (response) {
+
+                                           }
+                                       });
+                                   }
                                    isEditorVisible(true);
                                },
                                error: function () {
@@ -197,6 +239,7 @@ define("survey/survey.viewModel",
                      },
                     //add location
                     onAddLocation = function (item) {
+                        debugger;
                         selectedLocation().Radius = (selectedLocationRadius);
                         selectedLocation().IncludeorExclude = (selectedLocationIncludeExclude);
                         selectedQuestion().SurveyQuestionTargetLocation.push( new model.SurveyQuestionTargetLocation.Create( {
@@ -222,7 +265,6 @@ define("survey/survey.viewModel",
                             LanguageID: selected.LanguageId,
                             IncludeorExclude: parseInt(selectedLangIncludeExclude()),
                             Type: 3,
-                       //     ID: 0,
                             SQID: selectedQuestion().SQID()
                         }));
                         $("#searchLanguages").val("");
@@ -325,10 +367,10 @@ define("survey/survey.viewModel",
                         if (isNewCriteria()) {
                             selectedQuestion().SurveyQuestionTargetCriteria.push(new model.SurveyQuestionTargetCriteria.Create({
                                 Type: selectedCriteria().Type(),
-                                PQID: selectedCriteria().PQID(),
-                                PQAnswerID: selectedCriteria().PQAnswerID(),
-                                LinkedSQID: selectedCriteria().LinkedSQID(),
-                                LinkedSQAnswer: selectedCriteria().LinkedSQAnswer(),
+                                PqId: selectedCriteria().PQID(),
+                                PqAnswerId: selectedCriteria().PQAnswerID(),
+                                LinkedSqId: selectedCriteria().LinkedSQID(),
+                                LinkedSqAnswer: selectedCriteria().LinkedSQAnswer(),
                                 questionString: selectedCriteria().questionString(),
                                 answerString: selectedCriteria().answerString(),
                                 IncludeorExclude: selectedCriteria().IncludeorExclude()
@@ -440,7 +482,6 @@ define("survey/survey.viewModel",
                     },
                     saveSurveyQuestion = function (mode) {
                         var surveyData = selectedQuestion().convertToServerData();
-                        console.log(surveyData);
                         dataservice.addSurveyData(surveyData, {
                             success: function (data) {
                                 isEditorVisible(false);

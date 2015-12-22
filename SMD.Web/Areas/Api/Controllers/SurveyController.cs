@@ -57,7 +57,7 @@ namespace SMD.MIS.Areas.Api.Controllers
             if (surveyModel.SqId == 0)
                 return _surveyQuestionService.Create(surveyModel);
             else
-                return false;// have to write edit 
+                return _surveyQuestionService.Update(surveyModel);// have to write edit 
         }
         #endregion
     }
