@@ -6,6 +6,11 @@
     public class WebApiUser
     {
         /// <summary>
+        /// User Id
+        /// </summary>
+        public string UserId { get; set; }
+
+        /// <summary>
         /// Full Name
         /// </summary>
         public string FullName { get; set; }

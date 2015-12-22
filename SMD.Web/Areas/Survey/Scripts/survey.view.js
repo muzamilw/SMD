@@ -103,7 +103,6 @@ define("survey/survey.view",
                                 source: lan_array.ttAdapter()
                             }).bind('typeahead:selected', function (obj, selected) {
                                 if (selected) {
-                                    console.log(selected);
                                     viewModel.addLanguage(selected);
                                 }
                             });
