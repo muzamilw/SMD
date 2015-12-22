@@ -915,3 +915,143 @@ GO
 -- ============================= updated on server =============================
 
 
+
+
+--   =============================  By Baqer - 22 DEC 2015 START
+
+
+
+GO
+
+ALTER TABLE [dbo].[Invoice] DROP CONSTRAINT [FK_Invoice_AspNetUsers]
+GO
+
+/****** Object:  Table [dbo].[Invoice]    Script Date: 22-Dec-15 4:49:39 PM ******/
+DROP TABLE [dbo].[Invoice]
+GO
+
+/****** Object:  Table [dbo].[Invoice]    Script Date: 22-Dec-15 4:49:39 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Invoice](
+	[InvoiceId] [bigint] IDENTITY(1,1) NOT NULL,
+	[InvoiceDate] [datetime] NOT NULL,
+	[InvoiceDueDate] [datetime] NOT NULL,
+	[UserId] [nvarchar](128) NOT NULL,
+	[TaxPercentage] [float] NULL,
+	[Total] [float] NOT NULL,
+	[NetTotal] [nchar](10) NOT NULL,
+	[TaxValue] [float] NULL,
+	[CompanyName] [nvarchar](250) NOT NULL,
+	[Address1] [nvarchar](250) NULL,
+	[Address2] [nvarchar](250) NULL,
+	[City] [nvarchar](250) NULL,
+	[State] [nvarchar](250) NULL,
+	[Country] [nvarchar](250) NULL,
+	[ZipCode] [nvarchar](20) NULL,
+	[CreditCardRef] [nvarchar](250) NULL,
+ CONSTRAINT [PK_Invoice] PRIMARY KEY CLUSTERED 
+(
+	[InvoiceId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+ALTER TABLE [dbo].[Invoice]  WITH CHECK ADD  CONSTRAINT [FK_Invoice_AspNetUsers] FOREIGN KEY([UserId])
+REFERENCES [dbo].[AspNetUsers] ([Id])
+GO
+
+ALTER TABLE [dbo].[Invoice] CHECK CONSTRAINT [FK_Invoice_AspNetUsers]
+
+GO
+
+
+-- second 
+
+
+GO
+
+ALTER TABLE [dbo].[InvoiceDetail] DROP CONSTRAINT [FK_InvoiceDetail_SurveyQuestion]
+GO
+
+ALTER TABLE [dbo].[InvoiceDetail] DROP CONSTRAINT [FK_InvoiceDetail_Products]
+GO
+
+ALTER TABLE [dbo].[InvoiceDetail] DROP CONSTRAINT [FK_InvoiceDetail_InvoiceDetail]
+GO
+
+ALTER TABLE [dbo].[InvoiceDetail] DROP CONSTRAINT [FK_InvoiceDetail_AdCampaign]
+GO
+
+/****** Object:  Table [dbo].[InvoiceDetail]    Script Date: 22-Dec-15 4:52:52 PM ******/
+DROP TABLE [dbo].[InvoiceDetail]
+GO
+
+/****** Object:  Table [dbo].[InvoiceDetail]    Script Date: 22-Dec-15 4:52:52 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[InvoiceDetail](
+	[InvoiceDetailId] [bigint] IDENTITY(1,1) NOT NULL,
+	[InvoiceId] [bigint] NOT NULL,
+	[ItemName] [nvarchar](250) NOT NULL,
+	[ItemTax] [float] NULL,
+	[ItemAmount] [float] NOT NULL,
+	[ItemGrossAmount] [float] NOT NULL,
+	[ItemDescription] [nvarchar](300) NULL,
+	[CampaignId] [bigint] NULL,
+	[SQId] [bigint] NULL,
+	[ProductId] [int] NULL,
+ CONSTRAINT [PK_InvoiceDetail] PRIMARY KEY CLUSTERED 
+(
+	[InvoiceDetailId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+ALTER TABLE [dbo].[InvoiceDetail]  WITH CHECK ADD  CONSTRAINT [FK_InvoiceDetail_AdCampaign] FOREIGN KEY([CampaignId])
+REFERENCES [dbo].[AdCampaign] ([CampaignID])
+GO
+
+ALTER TABLE [dbo].[InvoiceDetail] CHECK CONSTRAINT [FK_InvoiceDetail_AdCampaign]
+GO
+
+ALTER TABLE [dbo].[InvoiceDetail]  WITH CHECK ADD  CONSTRAINT [FK_InvoiceDetail_InvoiceDetail] FOREIGN KEY([InvoiceDetailId])
+REFERENCES [dbo].[InvoiceDetail] ([InvoiceDetailId])
+GO
+
+ALTER TABLE [dbo].[InvoiceDetail] CHECK CONSTRAINT [FK_InvoiceDetail_InvoiceDetail]
+GO
+
+ALTER TABLE [dbo].[InvoiceDetail]  WITH CHECK ADD  CONSTRAINT [FK_InvoiceDetail_Products] FOREIGN KEY([ProductId])
+REFERENCES [dbo].[Products] ([ProductID])
+GO
+
+ALTER TABLE [dbo].[InvoiceDetail] CHECK CONSTRAINT [FK_InvoiceDetail_Products]
+GO
+
+ALTER TABLE [dbo].[InvoiceDetail]  WITH CHECK ADD  CONSTRAINT [FK_InvoiceDetail_SurveyQuestion] FOREIGN KEY([SQId])
+REFERENCES [dbo].[SurveyQuestion] ([SQID])
+GO
+
+ALTER TABLE [dbo].[InvoiceDetail] CHECK CONSTRAINT [FK_InvoiceDetail_SurveyQuestion]
+GO
+
+
+
+
+
+
+--   =============================  By Baqer - 22 DEC 2015 END
+
+
+
