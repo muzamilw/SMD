@@ -852,3 +852,65 @@ END -- End Function
 -- =========================== ADDED by Baqer  21-DEC-2015  | end
 
 -- ============================= updated on server =============================
+/* Added by Khurram - 22 Dec 2015 (Start) */
+/* Invoice */
+
+/****** Object:  Table [dbo].[Invoice]    Script Date: 12/22/2015 1:06:28 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Invoice](
+	[InvoiceId] [bigint] IDENTITY(1,1) NOT NULL,
+	[InvoiceDate] [datetime] NOT NULL,
+	[InvoiceDueDate] [datetime] NOT NULL,
+	[UserId] [nvarchar](128) NOT NULL,
+	[Tax] [float] NULL,
+	[Amout] [float] NULL,
+	[GrossAmount] [nchar](10) NULL,
+	[Discount] [float] NULL,
+ CONSTRAINT [PK_Invoice] PRIMARY KEY CLUSTERED 
+(
+	[InvoiceId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+/****** Object:  Table [dbo].[InvoiceDetail]    Script Date: 12/22/2015 1:12:59 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[InvoiceDetail](
+	[InvoiceDetailId] [bigint] IDENTITY(1,1) NOT NULL,
+	[InvoiceId] [bigint] NOT NULL,
+	[ItemName] [nvarchar](250) NOT NULL,
+	[ItemTax] [float] NULL,
+	[ItemDiscount] [float] NULL,
+	[ItemAmount] [float] NULL,
+	[ItemGrossAmount] [float] NULL,
+	[ItemDescription] [nvarchar](300) NULL,
+	[ItemId] [bigint] NOT NULL,
+ CONSTRAINT [PK_InvoiceDetail] PRIMARY KEY CLUSTERED 
+(
+	[InvoiceDetailId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+ALTER TABLE [dbo].[InvoiceDetail]  WITH CHECK ADD  CONSTRAINT [FK_InvoiceDetail_Invoice] FOREIGN KEY([InvoiceId])
+REFERENCES [dbo].[Invoice] ([InvoiceId])
+GO
+
+ALTER TABLE [dbo].[InvoiceDetail] CHECK CONSTRAINT [FK_InvoiceDetail_Invoice]
+GO
+
+/* Added by Khurram - 22 Dec 2015 (End) */
+
+
