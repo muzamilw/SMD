@@ -99,15 +99,23 @@ namespace SMD.Implementation.Services
         public void CreateCampaign(AdCampaign campaignModel)
         {
             campaignModel.UserId = _adCampaignRepository.LoggedInUserIdentity;
+            string[] paths = SaveImages(campaignModel);
+            if (paths != null && paths.Count() > 0)
+            {
+                if (!string.IsNullOrEmpty(paths[0]))
+                {
+                    campaignModel.ImagePath = paths[0];
+                }
+                if (!string.IsNullOrEmpty(paths[1]))
+                {
+                    campaignModel.LandingPageVideoLink = paths[1];
+                }
+               
+              
+            }
             _adCampaignRepository.Add(campaignModel);
             _adCampaignRepository.SaveChanges();
-            string[] paths = SaveImages(campaignModel);
-            if (paths != null && paths.Count() > 0) 
-            {
-                campaignModel.ImagePath = paths[0];
-                campaignModel.LandingPageVideoLink = paths[1];
-                _adCampaignRepository.SaveChanges();
-            }
+           
             
         }
         public CampaignResponseModel GetCampaigns(AdCampaignSearchRequest request)
@@ -139,12 +147,75 @@ namespace SMD.Implementation.Services
             string[] paths = SaveImages(campaignModel);
             if (paths != null && paths.Count() > 0)
             {
-                campaignModel.ImagePath = paths[0];
-                campaignModel.LandingPageVideoLink = paths[1];
-
+                if (!string.IsNullOrEmpty(paths[0])) 
+                {
+                    campaignModel.ImagePath = paths[0];
+                }
+                if (!string.IsNullOrEmpty(paths[1]) )
+                {
+                    campaignModel.LandingPageVideoLink = paths[1];
+                }
             }
             _adCampaignRepository.Update(campaignModel);
             _adCampaignRepository.SaveChanges();
+
+            // add or update target locations
+            if (campaignModel.AdCampaignTargetLocations != null && campaignModel.AdCampaignTargetLocations.Count() > 0)
+            {
+                foreach (AdCampaignTargetLocation item in campaignModel.AdCampaignTargetLocations)
+                {
+                    if (item.Id == 0)
+                    {
+                        item.CampaignId = campaignModel.CampaignId;
+                        _adCampaignTargetLocationRepository.Add(item);
+                    }
+                    else
+                    {
+                        _adCampaignTargetLocationRepository.Update(item);
+                    }
+
+                }
+                _adCampaignTargetLocationRepository.SaveChanges();
+
+              
+            }
+            else 
+            {
+                //List<AdCampaignTargetLocation> listOfCriteriasToDelete = _adCampaignTargetCriteriaRepository.GetAll().Where(c => c.CampaignId == campaignModel.CampaignId).ToList();
+                //_adCampaignTargetCriteriaRepository.RemoveAll(listOfCriteriasToDelete);
+            }
+         
+           
+
+            // add or update target criterias
+            if (campaignModel.AdCampaignTargetLocations != null && campaignModel.AdCampaignTargetLocations.Count() > 0)
+            {
+                foreach (AdCampaignTargetCriteria citem in campaignModel.AdCampaignTargetCriterias)
+                {
+                    if (citem.CriteriaId == 0)
+                    {
+                        citem.CampaignId = campaignModel.CampaignId;
+                        _adCampaignTargetCriteriaRepository.Add(citem);
+                    }
+                    else
+                    {
+                        _adCampaignTargetCriteriaRepository.Update(citem);
+                    }
+
+
+                }
+                _adCampaignTargetCriteriaRepository.SaveChanges();
+
+                List<long> idsToCompare = campaignModel.AdCampaignTargetCriterias.Where(i => i.CriteriaId > 0).Select(i => i.CriteriaId).ToList();
+                List<AdCampaignTargetCriteria> listOfCriteriasToDelete = _adCampaignTargetCriteriaRepository.GetAll().Where(c => c.CampaignId == campaignModel.CampaignId && !idsToCompare.Contains(c.CriteriaId)).ToList();
+                _adCampaignTargetCriteriaRepository.RemoveAll(listOfCriteriasToDelete);
+            }
+            else
+            {
+                List<AdCampaignTargetCriteria> listOfCriteriasToDelete = _adCampaignTargetCriteriaRepository.GetAll().Where(c => c.CampaignId == campaignModel.CampaignId).ToList();
+                _adCampaignTargetCriteriaRepository.RemoveAll(listOfCriteriasToDelete);
+            }
+           
         }
         #endregion
         #region Public
@@ -251,11 +322,11 @@ namespace SMD.Implementation.Services
             string[] savePaths = new string[2];
             string directoryPath = HttpContext.Current.Server.MapPath("~/SMD_Content/AdCampaign/" + campaign.CampaignId);
 
-            if (directoryPath != null && !Directory.Exists(directoryPath))
+            if (directoryPath != null && !Directory.Exists(directoryPath) )
             {
                 Directory.CreateDirectory(directoryPath);
             }
-            if (campaign.CampaignImagePath != null)
+            if (!string.IsNullOrEmpty(campaign.CampaignImagePath) && !campaign.CampaignImagePath.Contains("CampaignDefaultImage"))
             {
                 string base64 = campaign.CampaignImagePath.Substring(campaign.CampaignImagePath.IndexOf(',') + 1);
                 base64 = base64.Trim('\0');
@@ -268,7 +339,7 @@ namespace SMD.Implementation.Services
             }
             if (campaign.Type == 3)
             {
-                if (!string.IsNullOrEmpty(campaign.CampaignTypeImagePath))
+                if (!string.IsNullOrEmpty(campaign.CampaignTypeImagePath) && !campaign.CampaignTypeImagePath.Contains("CampaignTypeDefaultImage"))
                 {
                     string base64 = campaign.CampaignTypeImagePath.Substring(campaign.CampaignTypeImagePath.IndexOf(',') + 1);
                     base64 = base64.Trim('\0');

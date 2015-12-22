@@ -10,10 +10,10 @@ namespace SMD.MIS.Areas.Api.Models
         public long CriteriaId { get; set; }
         public long? CampaignId { get; set; }
         public int? Type { get; set; }
-        public int? PqId { get; set; }
-        public int? PqAnswerId { get; set; }
-        public long? SqId { get; set; }
-        public int? SqAnswer { get; set; }
+        public int? PQId { get; set; }
+        public int? PQAnswerId { get; set; }
+        public long? SQId { get; set; }
+        public int? SQAnswer { get; set; }
         public bool? IncludeorExclude { get; set; }
         public int? LanguageId { get; set; }
 

@@ -37,14 +37,12 @@ namespace SMD.MIS.ModelMappers
             {
                 path = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + source.ImagePath;
             }
-            string LandingPageVideoLinkOrPath = "";
+            string LandingPageVideoLinkAsPath = "";
+            string LandingPageVideoLink = source.LandingPageVideoLink;
             if (source.Type == (int)AdCampaignType.Other && !string.IsNullOrEmpty(source.LandingPageVideoLink))
             {
-                LandingPageVideoLinkOrPath = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + source.LandingPageVideoLink;
-            }
-            else 
-            {
-                LandingPageVideoLinkOrPath = source.LandingPageVideoLink;
+                LandingPageVideoLinkAsPath = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + source.LandingPageVideoLink;
+                LandingPageVideoLink = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + source.LandingPageVideoLink;
             }
             return new AdCampaign
             {
@@ -74,7 +72,7 @@ namespace SMD.MIS.ModelMappers
                 SmdCampaign = source.SmdCampaign,
                 EndDateTime = source.EndDateTime,
                 Gender = source.Gender,
-                LandingPageVideoLink = LandingPageVideoLinkOrPath,
+                LandingPageVideoLink = LandingPageVideoLink,
                 MaxBudget = source.MaxBudget,
                 ModifiedBy = source.ModifiedBy,
                 ModifiedDateTime = source.ModifiedDateTime,
@@ -86,7 +84,7 @@ namespace SMD.MIS.ModelMappers
                 UserId = source.UserId,
                 VerifyQuestion = source.VerifyQuestion,
                 CampaignImagePath = path,
-                CampaignTypeImagePath = LandingPageVideoLinkOrPath,
+                CampaignTypeImagePath = LandingPageVideoLinkAsPath,
                 AdCampaignTargetCriterias =
                     source.AdCampaignTargetCriterias != null ? source.AdCampaignTargetCriterias.Select(x => x.CreateFrom()).ToList() : null,
 
@@ -258,10 +256,10 @@ namespace SMD.MIS.ModelMappers
                 IncludeorExclude = source.IncludeorExclude,
                 IndustryId = source.IndustryId,
                 LanguageId = source.LanguageId,
-                PqAnswerId = source.PqAnswerId,
-                PqId = source.PqId,
-                SqAnswer = source.SqAnswer,
-                SqId = source.SqId,
+                PQAnswerId = source.PqAnswerId,
+                PQId = source.PqId,
+                SQAnswer = source.SqAnswer,
+                SQId = source.SqId,
                 Type = source.Type,
                 questionString = QuestionString,
                 answerString = AnswerString,
@@ -293,8 +291,8 @@ namespace SMD.MIS.ModelMappers
                 CountryId = source.CountryId,
                 IncludeorExclude = source.IncludeorExclude,
                 Radius = source.Radius,
-                CityName = CName,
-                CountryName = CountName
+                City = CName,
+                Country = CountName
             };
         }
     }

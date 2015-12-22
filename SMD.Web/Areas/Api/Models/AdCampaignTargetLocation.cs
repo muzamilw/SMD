@@ -13,7 +13,7 @@ namespace SMD.MIS.Areas.Api.Models
         public int? CityId { get; set; }
         public int? Radius { get; set; }
         public bool? IncludeorExclude { get; set; }
-        public string CityName { get; set; }
-        public string CountryName { get; set; }
+        public string City { get; set; }
+        public string Country { get; set; }
     }
 }
