@@ -154,7 +154,7 @@
     var // ReSharper disable InconsistentNaming
       SurveyQuestionTargetCriteria = function (ID, SQID, Type, PQID, PQAnswerID, LinkedSQID, LinkedSqAnswer, IncludeorExclude, LanguageID, questionString, answerString, Language, surveyQuestLeftImageSrc, surveyQuestRightImageSrc, IndustryID) {
           var
-              //type and userID will be set on server sside
+              //type and userID will be set on server side
               ID = ko.observable(ID),
               SQID = ko.observable(SQID),
               Type = ko.observable(Type),
