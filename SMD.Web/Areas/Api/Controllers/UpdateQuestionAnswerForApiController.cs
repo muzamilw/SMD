@@ -12,7 +12,6 @@ namespace SMD.MIS.Areas.Api.Controllers
     /// <summary>
     /// Update Profile Question's Ans for APIs Controller 
     /// </summary>
-    [Authorize]
     public class UpdateQuestionAnswerForApiController : ApiController
     {
         #region Public
@@ -34,9 +33,9 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// Update Profile Question's Answer
         /// </summary>
         [ApiExceptionCustom]
-        public UpdateProfileQuestionUserAnswerResponse Post(UpdateProfileQuestionUserAnswerApiRequest request)
+        public UpdateProfileQuestionUserAnswerResponse Post(string authenticationToken, [FromUri] UpdateProfileQuestionUserAnswerApiRequest request)
         {
-            if (request == null || !ModelState.IsValid)
+            if (string.IsNullOrEmpty(authenticationToken) || request == null || !ModelState.IsValid)
             {
                 throw new HttpException((int)HttpStatusCode.BadRequest, "Invalid Request");
             }
