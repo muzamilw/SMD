@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using Microsoft.AspNet.Identity;
@@ -338,6 +339,16 @@ namespace SMD.Implementation.Services
 
         #endregion
 
+        /// <summary>
+        /// Logs in user to system
+        /// </summary>
+        private static void LoginUser(string email)
+        {
+            // Log user in
+            var identity = new ClaimsIdentity(email);
+            HttpContext.Current.User = new ClaimsPrincipal(identity);
+        }
+
         #endregion
 
         #region Constructor
@@ -561,6 +572,9 @@ namespace SMD.Implementation.Services
 
             await emailManagerService.SendRegisrationSuccessEmail(userId);
 
+            // Login user
+            LoginUser(userId);
+
             return new BaseApiResponse
                    {
                        Status = true,
@@ -619,6 +633,9 @@ namespace SMD.Implementation.Services
                 return ThrowRegisterUserErrors(result);
             }
 
+            // Login user
+            LoginUser(request.Email);
+
             return new LoginResponse
             {
                 Status = true,
@@ -662,6 +679,9 @@ namespace SMD.Implementation.Services
                     };
                 }
 
+                // Login user
+                LoginUser(request.Email);
+
                 return new LoginResponse
                 {
                     Status = true,
@@ -703,6 +723,9 @@ namespace SMD.Implementation.Services
                     Message = LanguageResources.WebApiUserService_InactiveUser
                 };
             }
+
+            // Login user
+            LoginUser(request.UserName);
 
             return new LoginResponse
                        {

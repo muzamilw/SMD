@@ -13,7 +13,6 @@ namespace SMD.MIS.Areas.Api.Controllers
     /// <summary>
     /// Confirm Email Api Controller 
     /// </summary>
-    //[Authorize]
     public class ConfirmEmailController : ApiController
     {
         private readonly IWebApiUserService webApiUserService;

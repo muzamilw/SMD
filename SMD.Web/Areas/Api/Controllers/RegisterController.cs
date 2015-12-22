@@ -14,7 +14,6 @@ namespace SMD.MIS.Areas.Api.Controllers
     /// <summary>
     /// Register Api Controller 
     /// </summary>
-    //[Authorize]
     public class RegisterCustomController : ApiController
     {
         private readonly IWebApiUserService webApiUserService;
