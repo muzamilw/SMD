@@ -156,11 +156,11 @@ namespace SMD.Implementation.Services
             string[] paths = SaveImages(campaignModel);
             if (paths != null && paths.Count() > 0)
             {
-                if (!string.IsNullOrEmpty(paths[0])) 
+                if (!string.IsNullOrEmpty(paths[0]) && !paths[0].Contains("http:")) 
                 {
                     campaignModel.ImagePath = paths[0];
                 }
-                if (!string.IsNullOrEmpty(paths[1]) )
+                if (!string.IsNullOrEmpty(paths[1]) && !paths[1].Contains("http:"))
                 {
                     campaignModel.LandingPageVideoLink = paths[1];
                 }
