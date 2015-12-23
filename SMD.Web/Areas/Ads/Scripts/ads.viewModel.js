@@ -457,16 +457,15 @@ define("ads/ads.viewModel",
                             SearchText: ""
                         }, {
                             success: function (data) {
-                              
                                 if (data != null) {
                                     // set languages drop down
+                                    selectedCriteria();
                                     langs.removeAll();
                                     ko.utils.arrayPushAll(langs(), data.LanguageDropdowns);
                                     langs.valueHasMutated();
-                                    console.log(data.Campaigns);
 
                                     campaignModel(model.Campaign.Create(data.Campaigns[0]));
-
+                                    campaignModel().reset();
                                     view.initializeTypeahead();
                                     if (campaignModel().Type() == "1") {
                                         isEnableVedioVerificationLink(true);
@@ -491,6 +490,7 @@ define("ads/ads.viewModel",
                                     } else if (campaignModel().Status() == 6) {
                                         campaignModel().StatusValue("Approval Rejected");
                                     }
+                                    isEditCampaign(true);
                                     isEditorVisible(true);
                                     
                                 }
