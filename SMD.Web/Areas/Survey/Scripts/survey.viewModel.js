@@ -39,6 +39,7 @@ define("survey/survey.viewModel",
                     editCriteriaHeading = ko.observable("Add Profile Criteria"),
                     titleText = ko.observable("Add new survey"),
                     isNewCriteria = ko.observable(true),
+                    canSubmitForApproval = ko.observable(true),
                     // age list 
                     ageRange = ko.observableArray([])
                     //Get Questions
@@ -111,17 +112,17 @@ define("survey/survey.viewModel",
                             }
                         });
                         if (item.Status == 1) {
-                            item.StatusValue = "Draft"
+                            item.StatusValue = "Draft";
                         } else if (item.Status == 2) {
-                            item.StatusValue = "Submitted for Approval"
+                            item.StatusValue = "Submitted for Approval"; canSubmitForApproval(false);
                         } else if (item.Status == 3) {
-                            item.StatusValue = "Live"
+                            item.StatusValue = "Live"; canSubmitForApproval(false);
                         } else if (item.Status == 4) {
-                            item.StatusValue = "Paused"
+                            item.StatusValue = "Paused"; canSubmitForApproval(false);
                         } else if (item.Status == 5) {
-                            item.StatusValue = "Completed"
+                            item.StatusValue = "Completed"; canSubmitForApproval(false);
                         } else if (item.Status == 6) {
-                            item.StatusValue = "Approval Rejected"
+                            item.StatusValue = "Approval Rejected"; canSubmitForApproval(false);
                         }
                         return item;
                     }
@@ -147,6 +148,7 @@ define("survey/survey.viewModel",
                         selectedQuestion().Status(1);
                         selectedQuestion().reset();
                         isEditorVisible(true);
+                        canSubmitForApproval(true);
                         view.initializeTypeahead();
                     },
                     // Close Editor 
@@ -156,6 +158,7 @@ define("survey/survey.viewModel",
                     // On editing of existing PQ
                     onEditSurvey = function (item) {
                         titleText("Edit survey");
+                        canSubmitForApproval(true);
                         //call function to edit survey
                         dataservice.getSurveyQuestion(
                            {
@@ -483,7 +486,12 @@ define("survey/survey.viewModel",
                         // now saving survey as draft but check stripe intergration and save it for submit for approval
                         saveSurveyQuestion(1);
                     },
+                   // submit  survey question for approval
+                    onSubmitSurveyQuestion = function () {
+                        saveSurveyQuestion(2);
+                    },
                     saveSurveyQuestion = function (mode) {
+                        selectedQuestion().Status(mode);
                         var surveyData = selectedQuestion().convertToServerData();
                         dataservice.addSurveyData(surveyData, {
                             success: function (data) {
@@ -559,6 +567,8 @@ define("survey/survey.viewModel",
                     editCriteriaHeading: editCriteriaHeading,
                     isNewCriteria: isNewCriteria,
                     onSaveSurveyQuestion: onSaveSurveyQuestion,
+                    onSubmitSurveyQuestion: onSubmitSurveyQuestion,
+                    canSubmitForApproval:canSubmitForApproval,
                     titleText: titleText
                 };
             })()

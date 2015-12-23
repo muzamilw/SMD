@@ -36,6 +36,7 @@ define("ads/ads.viewModel",
                     isEnableVedioVerificationLink = ko.observable(false),
                     campaignTypePlaceHolderValue = ko.observable('Enter a link'),
                     isEditCampaign = ko.observable(false),
+                     canSubmitForApproval = ko.observable(true),
                     correctAnswers = ko.observableArray([{ id: 1, name: "Answer 1" }, { id: 1, name: "Answer 2" }, { id: 3, name: "Answer 3" }]),
                     getAdCampaignGridContent = function () {
                         dataservice.getCampaignData({
@@ -70,9 +71,10 @@ define("ads/ads.viewModel",
                     },
                
                     updateCampaignGridItem = function (item) {
-                     
+                        canSubmitForApproval(false);
                         if (item.Status == 1) {
-                            item.StatusValue = "Draft"
+                            item.StatusValue = "Draft";
+                            canSubmitForApproval(true);
                         } else if (item.Status == 2) {
                             item.StatusValue = "Submitted for Approval"
                         } else if (item.Status == 3) {
@@ -114,25 +116,30 @@ define("ads/ads.viewModel",
 
                     saveCampaignData = function () {
                          
-                        console.log($("#ddpCorrectAns").val());
-                          var campignServerObj = campaignModel().convertToServerData();
-                          console.log(campignServerObj);
-
-                          dataservice.addCampaignData(campignServerObj, {
-                              success: function (data) {
-                                
-                                      criteriaCount(0);
-                                      isEditorVisible(false);
-                                      getAdCampaignGridContent();
-                                      toastr.success("Successfully saved.");
-                              },
-                              error: function (response) {
-
-                              }
-                          });
+                        saveCampaign(1);
 
                     },
+                    submitCampaignData = function () {
+                        saveCampaign(2);
+                    }
+                    saveCampaign = function (mode) {
+                        campaignModel().Status(mode);
+                        var campignServerObj = campaignModel().convertToServerData();
+                        console.log(campignServerObj);
 
+                        dataservice.addCampaignData(campignServerObj, {
+                            success: function (data) {
+
+                                criteriaCount(0);
+                                isEditorVisible(false);
+                                getAdCampaignGridContent();
+                                toastr.success("Successfully saved.");
+                            },
+                            error: function (response) {
+
+                            }
+                        });
+                    }
                     // Add new profile Criteria
                     addNewProfileCriteria = function () {
                         isNewCriteria(true);
@@ -559,7 +566,9 @@ define("ads/ads.viewModel",
                         campaignTypeImageCallback: campaignTypeImageCallback,
                         campaignImageCallback: campaignImageCallback,
                         correctAnswers: correctAnswers,
-                        onEditCampaign: onEditCampaign
+                        onEditCampaign: onEditCampaign,
+                        canSubmitForApproval: canSubmitForApproval,
+                        submitCampaignData: submitCampaignData
                     };
             })()
         };
