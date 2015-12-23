@@ -44,5 +44,15 @@
         /// Age
         /// </summary>
         public int Age { get; set; }
+
+        /// <summary>
+        /// Gender
+        /// </summary>
+        public int? Gender { get; set; }
+
+        /// <summary>
+        /// Image Url
+        /// </summary>
+        public string ImageUrl { get; set; }
     }
 }

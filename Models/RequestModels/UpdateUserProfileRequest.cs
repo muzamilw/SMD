@@ -79,5 +79,11 @@
         /// Industry Id
         /// </summary>
         public int? IndustryId { get; set; }
+
+        /// <summary>
+        /// Full Name
+        /// </summary>
+        public string FullName { get; set; }
+
     }
 }

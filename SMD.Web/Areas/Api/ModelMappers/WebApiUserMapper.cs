@@ -23,7 +23,8 @@ namespace SMD.MIS.Areas.Api.ModelMappers
                        Email = source.Email,
                        JobTitle = source.Jobtitle,
                        UserTimeZone = source.UserTimeZone,
-                       UserId = source.Id
+                       UserId = source.Id,
+                       Gender = source.Gender
                    };
         }
 
