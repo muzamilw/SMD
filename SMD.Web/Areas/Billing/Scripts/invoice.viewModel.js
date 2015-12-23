@@ -6,7 +6,7 @@ define("invoice/invoice.viewModel",
      "common/confirmation.viewModel"],
     function ($, amplify, ko, dataservice, model, pagination, confirmation) {
         var ist = window.ist || {};
-        ist.SurveyQuestion = {
+        ist.Invoice = {
             viewModel: (function() {
                 var view,
                     //  Invoices list on LV
@@ -21,14 +21,20 @@ define("invoice/invoice.viewModel",
                     isEditorVisible = ko.observable(false),
                      //selected Answer
                     selectedInvoice = ko.observable(),
+                    // From Date for filter
+                    fromDateFilter = ko.observable(undefined),
+                    // To filter
+                    toDateFilter = ko.observable(undefined),
                     //Get Questions
                     getInvoices = function () {
                         dataservice.searchInvoices(
                             {
+                                FromDate: fromDateFilter(),
+                                ToDate:   toDateFilter(),
                                 PageSize: pager().pageSize(),
-                                PageNo: pager().currentPage(),
-                                SortBy: sortOn(),
-                                IsAsc: sortIsAsc()
+                                PageNo:   pager().currentPage(),
+                                SortBy:   sortOn(),
+                                IsAsc:    sortIsAsc()
                             },
                             {
                                 success: function (data) {
@@ -37,7 +43,6 @@ define("invoice/invoice.viewModel",
                                     _.each(data.Invoices, function (item) {
                                         invoices.push(model.InvoiceServertoClientMapper(item));
                                     });
-
                                 },
                                 error: function () {
                                     toastr.error("Failed to load Invoices!");
@@ -83,13 +88,6 @@ define("invoice/invoice.viewModel",
                         }
                         return (selectedInvoice().hasChanges());
                     }),
-                    onRejectQuestion= function() {
-                        if (selectedInvoice().rejectionReason() == undefined || selectedInvoice().rejectionReason() == "" || selectedInvoice().rejectionReason() == " ") {
-                            toastr.info("Please add rejection reason!");
-                            return false;
-                        }
-                        onSaveQuestion();
-                    },
                     // Initialize the view model
                     initialize = function (specifiedView) {
                         view = specifiedView;
@@ -104,7 +102,7 @@ define("invoice/invoice.viewModel",
                     sortOn: sortOn,
                     sortIsAsc: sortIsAsc,
                     pager: pager,
-                    questions: invoices,
+                    invoices: invoices,
                     getInvoices: getInvoices,
                     isEditorVisible: isEditorVisible,
                     closeEditDialog: closeEditDialog,
@@ -112,9 +110,10 @@ define("invoice/invoice.viewModel",
                     selectedQuestion: selectedInvoice,
                     onSaveQuestion: onSaveQuestion,
                     hasChangesOnQuestion: hasChangesOnQuestion,
-                    onRejectQuestion: onRejectQuestion
+                    fromDateFilter: fromDateFilter,
+                    toDateFilter: toDateFilter
                 };
             })()
         };
-        return ist.SurveyQuestion.viewModel;
+        return ist.Invoice.viewModel;
     });

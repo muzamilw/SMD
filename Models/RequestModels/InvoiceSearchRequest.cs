@@ -16,7 +16,7 @@ namespace SMD.Models.RequestModels
         /// <summary>
         /// For Searching , To Date 
         /// </summary>
-        public DateTime ToDate { get; set; }
+        public DateTime? ToDate { get; set; }
 
         /// <summary>
         /// Invoice By Column for sorting
