@@ -155,6 +155,11 @@ namespace SMD.Models.IdentityModels
             {
                 IndustryId = source.IndustryId;
             }
+
+            if (!string.IsNullOrEmpty(source.FullName))
+            {
+                FullName = source.FullName;
+            }
         }
 
         #endregion
