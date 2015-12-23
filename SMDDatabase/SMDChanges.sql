@@ -912,7 +912,7 @@ ALTER TABLE [dbo].[InvoiceDetail] CHECK CONSTRAINT [FK_InvoiceDetail_Invoice]
 GO
 
 /* Added by Khurram - 22 Dec 2015 (End) */
--- ============================= updated on server =============================
+
 
 
 
@@ -1054,6 +1054,7 @@ GO
 --   =============================  By Baqer - 22 DEC 2015 END
 
 
+-- ============================= updated on server =============================
 --   =============================  By Baqer - 23 DEC 2015 START
 
 GO
@@ -1149,7 +1150,6 @@ CREATE TABLE [dbo].[InvoiceDetail](
 ) ON [PRIMARY]
 
 GO
-
 ALTER TABLE [dbo].[InvoiceDetail]  WITH CHECK ADD  CONSTRAINT [FK_InvoiceDetail_AdCampaign] FOREIGN KEY([CampaignId])
 REFERENCES [dbo].[AdCampaign] ([CampaignID])
 GO

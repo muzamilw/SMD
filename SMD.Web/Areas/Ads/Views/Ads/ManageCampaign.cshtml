@@ -21,6 +21,7 @@
                     <div class="pull-right top-page-ui" style="margin-right:5px;margin-bottom:5px;">
 
                         <div class="btn-group">
+                            <button class="btn  btn-success" id="saveBtn" data-bind="click:$root.submitCampaignData, visible: $root.canSubmitForApproval">Submit for Approvals</button>
                             <button class="btn  btn-warning" id="saveBtn" data-bind="click:$root.saveCampaignData, enable: $root.hasChangesOnQuestion, css: { 'btn-warning': $root.hasChangesOnQuestion }">Save</button>
                             <button class="btn btn-default" id="saveBtn" data-bind="click: $root.closeNewCampaignDialog">Close</button>
                         </div>

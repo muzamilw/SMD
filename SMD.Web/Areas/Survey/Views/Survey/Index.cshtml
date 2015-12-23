@@ -78,7 +78,7 @@
             <td>
                 <p class="bold" data-bind="text:StatusValue "></p>
             </td>
-           
+            <!--ko if:Status() == 1 || Status() == null-->
             <td>
                 <a class="table-link" style="float: right">
                     <span class="fa-stack">
@@ -87,6 +87,7 @@
                     </span>
                 </a>
             </td>
+            <!--/ko-->
         </tr>
     </script>
     <script id="filterTemplate" type="text/html">
