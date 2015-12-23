@@ -492,7 +492,8 @@ define("ads/ads.viewModel",
                                     }
                                     isEditCampaign(true);
                                     isEditorVisible(true);
-                                    
+                                    // handle 2nd edit error 
+                                    $(".modal-backdrop").remove();
                                 }
 
                             },

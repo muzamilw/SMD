@@ -912,7 +912,7 @@ ALTER TABLE [dbo].[InvoiceDetail] CHECK CONSTRAINT [FK_InvoiceDetail_Invoice]
 GO
 
 /* Added by Khurram - 22 Dec 2015 (End) */
--- ============================= updated on server =============================
+
 
 
 
@@ -1054,4 +1054,4 @@ GO
 --   =============================  By Baqer - 22 DEC 2015 END
 
 
-
+-- ============================= updated on server =============================
