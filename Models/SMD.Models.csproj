@@ -125,6 +125,8 @@
     <Compile Include="DomainModels\GetAds_Result.cs" />
     <Compile Include="DomainModels\GetSurveys_Result.cs" />
     <Compile Include="DomainModels\Industry.cs" />
+    <Compile Include="DomainModels\Invoice.cs" />
+    <Compile Include="DomainModels\InvoiceDetail.cs" />
     <Compile Include="DomainModels\Language.cs" />
     <Compile Include="DomainModels\Product.cs" />
     <Compile Include="DomainModels\ProfileQuestion.cs" />
