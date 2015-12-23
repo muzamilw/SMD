@@ -633,7 +633,7 @@
             <!-- /ko -->
             <!-- ko if:   Type()  == "2" -->
             <p style="margin-top: 5px;margin-left: 12px;">
-                <span data-bind="text: questionString() + ' = ' "></span>
+                <span data-bind="text: '(Excluded) ' +  questionString() + ' = ' "></span>
                 <img data-bind="attr:{src: answerString()}"  width="80"/>
             </p>
             <!-- /ko -->
@@ -647,7 +647,7 @@
             <!-- /ko -->
             <!-- ko if:   Type()  == "2" -->
             <p style="margin-top: 5px;margin-left: 12px;">
-                <span data-bind="text: questionString() + ' = ' "></span>
+                <span data-bind="text: '(Included) ' + questionString() + ' = ' "></span>
                 <img data-bind="attr:{src: answerString()}" width="80" />
             </p>
             <!-- /ko -->

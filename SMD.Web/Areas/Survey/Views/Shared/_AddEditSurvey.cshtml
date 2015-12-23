@@ -220,20 +220,20 @@
                                             <label for="txtGender" class="control-label text-right tooltip-float">Gender</label>
                                         </div>
                                         <div class="col-lg-6">
-                                            <div class="radio">
+                                            <div class="radio  col-lg-3">
                                                 <input type="radio" name="optionsRadiosGender" id="optionsRadiosGenderAll" value="1" data-bind="checked: Gender">
                                                 <label for="optionsRadiosGenderAll">
                                                     All
                                                 </label>
                                             </div>
-                                            <div class="radio">
+                                            <div class="radio  col-lg-3">
                                                 <input type="radio" name="optionsRadiosGender" id="optionsRadiosGenderMEn" value="2" data-bind="checked: Gender">
                                                 <label for="optionsRadiosGenderMEn">
                                                     Men
                                                 </label>
                                                 <span class="help-block text-right"></span>
                                             </div>
-                                            <div class="radio">
+                                            <div class="radio col-lg-5">
                                                 <input type="radio" name="optionsRadiosGender" id="optionsRadiosGenderWMEn" value="3" data-bind="checked: Gender">
                                                 <label for="optionsRadiosGenderWMEn">
                                                     Women
@@ -633,7 +633,7 @@
             <!-- /ko -->
             <!-- ko if:   Type()  == "2" -->
             <p style="margin-top: 5px;margin-left: 12px;">
-                <span data-bind="text: questionString() + ' = ' "></span>
+                <span data-bind="text: '(Excluded) ' +  questionString() + ' = ' "></span>
                 <img data-bind="attr:{src: answerString()}" width="80" />
             </p>
             <!-- /ko -->
@@ -647,7 +647,7 @@
             <!-- /ko -->
             <!-- ko if:   Type()  == "2" -->
             <p style="margin-top: 5px;margin-left: 12px;">
-                <span data-bind="text: questionString() + ' = ' "></span>
+                <span data-bind="text: '(Included) ' +  questionString() + ' = ' "></span>
                 <img data-bind="attr:{src: answerString()}" width="80" />
             </p>
             <!-- /ko -->
