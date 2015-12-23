@@ -108,7 +108,7 @@ define("ads/ads.viewModel",
                         isEditCampaign(false);
                         campaignModel().CampaignTypeImagePath("");
                         campaignModel().CampaignImagePath("");
-                       
+                        campaignModel().LanguageId(41);
                     },
 
                     closeNewCampaignDialog = function () {
@@ -405,7 +405,7 @@ define("ads/ads.viewModel",
                     },
 
                     addLanguage = function (selected) {
-                      
+            
                         campaignModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
                             Language: selected.LanguageName,
                             LanguageId: selected.LanguageId,
