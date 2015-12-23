@@ -384,6 +384,7 @@
     <Compile Include="Areas\Api\Controllers\GetAudienceSurveyForApiController.cs" />
     <Compile Include="Areas\Api\Controllers\GetSurveysForApiController.cs" />
     <Compile Include="Areas\Api\Controllers\AdViewedController.cs" />
+    <Compile Include="Areas\Api\Controllers\InvoiceController.cs" />
     <Compile Include="Areas\Api\Controllers\SurveyQuestionEditorController.cs" />
     <Compile Include="Areas\Api\Controllers\UpdateCampaignController.cs" />
     <Compile Include="Areas\Api\Controllers\UpdateQuestionAnswerForApiController.cs" />
@@ -417,6 +418,8 @@
     <Compile Include="Areas\Api\Models\CampaignRequestResponseModel.cs" />
     <Compile Include="Areas\Api\Models\CampaignSearchRequest.cs" />
     <Compile Include="Areas\Api\Models\AdCampaignResposneModelForAproval.cs" />
+    <Compile Include="Areas\Api\Models\Invoice.cs" />
+    <Compile Include="Areas\Api\Models\InvoiceSearchRequestResponse.cs" />
     <Compile Include="Areas\Api\Models\LoginResponse.cs" />
     <Compile Include="Areas\Api\Models\SurveyForApiSearchResponse.cs" />
     <Compile Include="Areas\Api\Models\LocationDropDown.cs" />
@@ -456,6 +459,7 @@
     </Compile>
     <Compile Include="Helper\CultureHelper.cs" />
     <Compile Include="ModelMappers\AdCampaignMapper.cs" />
+    <Compile Include="ModelMappers\InvoiceMapper.cs" />
     <Compile Include="ModelMappers\LanguageMapper.cs" />
     <Compile Include="ModelMappers\CountryMapper.cs" />
     <Compile Include="ModelMappers\LocationMapper.cs" />
@@ -2587,7 +2591,7 @@
           <AutoAssignPort>False</AutoAssignPort>
           <DevelopmentServerPort>30630</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://smdpreview.com</IISUrl>
+           <IISUrl>http://smdpreview.com</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
