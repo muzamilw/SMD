@@ -34,6 +34,7 @@ namespace SMD.Repository
             unityContainer.RegisterType<ITransactionRepository, TransactionRepository>();
             unityContainer.RegisterType<ISurveyQuestionTargetCriteriaRepository, SurveyQuestionTargetCriteriaRepository>();
             unityContainer.RegisterType<ISurveyQuestionTargetLocationRepository, SurveyQuestionTargetLocationRepository>();
+            unityContainer.RegisterType<IInvoiceRepository, InvoiceRepository>();
         }
     }
 }
