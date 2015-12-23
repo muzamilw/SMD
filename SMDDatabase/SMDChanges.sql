@@ -1179,5 +1179,4 @@ ALTER TABLE [dbo].[InvoiceDetail] CHECK CONSTRAINT [FK_InvoiceDetail_SurveyQuest
 GO
 
 
-
 --   =============================  By Baqer - 23 DEC 2015 END
