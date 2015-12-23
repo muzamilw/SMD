@@ -20,7 +20,7 @@
 
                     <div class="pull-right top-page-ui" style="margin-right:5px;margin-bottom:5px;">
 
-                        <div class="btn-group">
+                        <div class="col-xs-12" style="text-align: right; padding-right:0;margin-bottom:10px;">
                             <button class="btn  btn-success" id="saveBtn" data-bind="click:$root.submitCampaignData, visible: $root.canSubmitForApproval">Submit for Approvals</button>
                             <button class="btn  btn-warning" id="saveBtn" data-bind="click:$root.saveCampaignData, enable: $root.hasChangesOnQuestion, css: { 'btn-warning': $root.hasChangesOnQuestion }">Save</button>
                             <button class="btn btn-default" id="saveBtn" data-bind="click: $root.closeNewCampaignDialog">Close</button>
@@ -71,7 +71,7 @@
                             <div class="form-group" style="margin-bottom:14px;">
                                 <div class="col-lg-3 text-right" style="padding-top:12px;">
 
-                                    <label for="txtCampaignDisplayName" class="control-label text-right tooltip-float">Campaign Display Name</label>
+                                    <label for="txtCampaignDisplayName" class="control-label text-right tooltip-float">Campaign Title</label>
                                 </div>
                                 <div class="col-lg-6">
                                     <input type="text" style="height:60px;" name="Campaign Display Name" class="form-control height60 font24px" id="txtCampaignDisplayName" placeholder="Campaign Display Name" data-bind="value: DisplayTitle">
@@ -81,7 +81,17 @@
                             <div class="form-group" style="margin-bottom:25px;">
                                 <div class="col-lg-3 text-right" style="padding-top:12px;">
 
-                                    <label for="txtCampaignDesc" class="control-label text-right tooltip-float">Campaign Description</label>
+                                    <label for="txtCampaignDesc" class="control-label text-right tooltip-float">Ad line 1</label>
+                                </div>
+                                <div class="col-lg-6">
+                                    <textarea class="form-control" id="txtCampaignDesc" rows="5" placeholder="Enter Description" data-bind="value: Description"></textarea>
+
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin-bottom:25px;">
+                                <div class="col-lg-3 text-right" style="padding-top:12px;">
+
+                                    <label for="txtCampaignDesc" class="control-label text-right tooltip-float">Ad line 2</label>
                                 </div>
                                 <div class="col-lg-6">
                                     <textarea class="form-control" id="txtCampaignDesc" rows="5" placeholder="Enter Description" data-bind="value: CampaignDescription"></textarea>
@@ -104,7 +114,7 @@
                                             <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
                                         </a>
                                     </div>
-                                    <label class="control-label text-right tooltip-float">Campaign Type</label>
+                                    <label class="control-label text-right tooltip-float">Display Type</label>
                                 </div>
                                 <div class="col-lg-6">
                                    
@@ -117,14 +127,14 @@
                                     <div class="radio col-lg-3">
                                         <input type="radio" name="optionsRadiosStoreType" id="optionsRadiosLink" value="2" data-bind="checked: Type, event:{ change: $root.OnChangeCampaignType }">
                                         <label for="optionsRadiosLink">
-                                            Link
+                                            URL
                                         </label>
                                         <span class="help-block text-right"></span>
                                     </div>
                                     <div class="radio col-lg-5">
                                         <input type="radio" name="optionsRadiosStoreType" id="optionsRadiosUploadImage" value="3" data-bind="checked: Type, event:{ change: $root.OnChangeCampaignType }">
                                         <label for="optionsRadiosUploadImage">
-                                            Upload Image
+                                            Flyer / Image
                                         </label>
                                         <span class="help-block text-right"></span>
                                     </div>
@@ -169,7 +179,7 @@
                                             <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
                                         </a>
                                     </div>
-                                    <label for="txtAge" class="control-label text-right tooltip-float">Age</label>
+                                    <label for="txtAge" class="control-label text-right tooltip-float">Age Range</label>
                                 </div>
                                 <div class="col-lg-1" style=" padding: 0px !important;     margin-left: 8px;">
                                     <select class="form-control" data-bind="options: $root.ageRange, optionsText: 'text', optionsValue: 'value', value: AgeRangeStart"></select>

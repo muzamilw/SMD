@@ -158,68 +158,69 @@ define("survey/survey.viewModel",
                     // On editing of existing PQ
                     onEditSurvey = function (item) {
                         titleText("Edit survey");
-                        canSubmitForApproval(true);
-                        //call function to edit survey
-                        dataservice.getSurveyQuestion(
-                           {
-                               SqId: item.SQID(),
-                               FirstLoad: false
-                           },
-                           {
-                               success: function (data) {
-                                   //
-                                   selectedQuestion(model.Survey.Create(updateSurveryItem(data.SurveyQuestion)));
-                                   selectedQuestion().reset();
-                                   view.initializeTypeahead();
-                                   // load survey questions
-                                   if (surveyQuestionList().length == 0) {
-                                       dataservice.getBaseData({
-                                           RequestId: 4,
-                                           QuestionId: 0,
-                                           SQID: selectedQuestion().SQID()
-                                       }, {
-                                           success: function (data) {
-                                               if (data != null) {
-                                                   surveyQuestionList([]);
-                                                   ko.utils.arrayPushAll(surveyQuestionList(), data.SurveyQuestions);
-                                                   surveyQuestionList.valueHasMutated();
-                                               }
-
-                                           },
-                                           error: function (response) {
-
-                                           }
-                                       });
-                                   }
-                                   // load profile questions 
-                                   if (profileQuestionList().length == 0) {
-                                       dataservice.getBaseData({
-                                           RequestId: 2,
-                                           QuestionId: 0,
-                                       }, {
-                                           success: function (data) {
-                                               if (data != null) {
-                                                   _.each(data.ProfileQuestions, function (question) {
-                                                       question.PQID = question.PqId;
-                                                   });
-                                                   profileQuestionList([]);
-                                                   ko.utils.arrayPushAll(profileQuestionList(), data.ProfileQuestions);
-                                                   profileQuestionList.valueHasMutated();
-                                               }
-
-                                           },
-                                           error: function (response) {
-
-                                           }
-                                       });
-                                   }
-                                   isEditorVisible(true);
+                        if (item.Status() == 1 || item.Status() == null) {
+                            canSubmitForApproval(true);
+                            //call function to edit survey
+                            dataservice.getSurveyQuestion(
+                               {
+                                   SqId: item.SQID(),
+                                   FirstLoad: false
                                },
-                               error: function () {
-                                   toastr.error("Failed to load  question!");
-                               }
-                           });
-                        
+                               {
+                                   success: function (data) {
+                                       //
+                                       selectedQuestion(model.Survey.Create(updateSurveryItem(data.SurveyQuestion)));
+                                       selectedQuestion().reset();
+                                       view.initializeTypeahead();
+                                       // load survey questions
+                                       if (surveyQuestionList().length == 0) {
+                                           dataservice.getBaseData({
+                                               RequestId: 4,
+                                               QuestionId: 0,
+                                               SQID: selectedQuestion().SQID()
+                                           }, {
+                                               success: function (data) {
+                                                   if (data != null) {
+                                                       surveyQuestionList([]);
+                                                       ko.utils.arrayPushAll(surveyQuestionList(), data.SurveyQuestions);
+                                                       surveyQuestionList.valueHasMutated();
+                                                   }
+
+                                               },
+                                               error: function (response) {
+
+                                               }
+                                           });
+                                       }
+                                       // load profile questions 
+                                       if (profileQuestionList().length == 0) {
+                                           dataservice.getBaseData({
+                                               RequestId: 2,
+                                               QuestionId: 0,
+                                           }, {
+                                               success: function (data) {
+                                                   if (data != null) {
+                                                       _.each(data.ProfileQuestions, function (question) {
+                                                           question.PQID = question.PqId;
+                                                       });
+                                                       profileQuestionList([]);
+                                                       ko.utils.arrayPushAll(profileQuestionList(), data.ProfileQuestions);
+                                                       profileQuestionList.valueHasMutated();
+                                                   }
+
+                                               },
+                                               error: function (response) {
+
+                                               }
+                                           });
+                                       }
+                                       isEditorVisible(true);
+                                   },
+                                   error: function () {
+                                       toastr.error("Failed to load  question!");
+                                   }
+                               });
+                        }
                     },
                     // store left side ans image
                     storeLeftImageCallback = function (file, data) {

@@ -95,6 +95,7 @@ define("ads/ads.viewModel",
                      // Add new Profile Question
                     addNewCampaign = function () {
                         isEditorVisible(true);
+                        canSubmitForApproval(true);
                         campaignModel(new model.Campaign());
                       
                         selectedCriteria();
@@ -458,56 +459,59 @@ define("ads/ads.viewModel",
                     },
 
                     onEditCampaign = function (item) {
-                        
-                        dataservice.getCampaignData({
-                            CampaignId: item.CampaignID(),
-                            SearchText: ""
-                        }, {
-                            success: function (data) {
-                                if (data != null) {
-                                    // set languages drop down
-                                    selectedCriteria();
-                                    langs.removeAll();
-                                    ko.utils.arrayPushAll(langs(), data.LanguageDropdowns);
-                                    langs.valueHasMutated();
+                        if (item.Status() == 1 || item.Status() == null) {
+                            canSubmitForApproval(true);
+                            dataservice.getCampaignData({
+                                CampaignId: item.CampaignID(),
+                                SearchText: ""
+                            }, {
+                                success: function (data) {
+                                    if (data != null) {
+                                        // set languages drop down
+                                        selectedCriteria();
+                                        langs.removeAll();
+                                        ko.utils.arrayPushAll(langs(), data.LanguageDropdowns);
+                                        langs.valueHasMutated();
 
-                                    campaignModel(model.Campaign.Create(data.Campaigns[0]));
-                                    campaignModel().reset();
-                                    view.initializeTypeahead();
-                                    if (campaignModel().Type() == "1") {
-                                        isEnableVedioVerificationLink(true);
-                                        campaignTypePlaceHolderValue('Enter a video embed code');
-                                    } else {
-                                        isEnableVedioVerificationLink(false);
-                                        if (campaignModel().Type() == "2") {
-                                            campaignTypePlaceHolderValue('Enter a link');
+                                        campaignModel(model.Campaign.Create(data.Campaigns[0]));
+                                        campaignModel().reset();
+                                        view.initializeTypeahead();
+                                        if (campaignModel().Type() == "1") {
+                                            isEnableVedioVerificationLink(true);
+                                            campaignTypePlaceHolderValue('Enter a video embed code');
+                                        } else {
+                                            isEnableVedioVerificationLink(false);
+                                            if (campaignModel().Type() == "2") {
+                                                campaignTypePlaceHolderValue('Enter a link');
+                                            }
                                         }
+
+                                        if (campaignModel().Status() == 1) {
+                                            campaignModel().StatusValue("Draft");
+                                        } else if (campaignModel().Status() == 2) {
+                                            campaignModel().StatusValue("Submitted for Approval");
+                                        } else if (campaignModel().Status() == 3) {
+                                            campaignModel().StatusValue("Live");
+                                        } else if (campaignModel().Status() == 4) {
+                                            campaignModel().StatusValue("Paused");
+                                        } else if (campaignModel().Status() == 5) {
+                                            campaignModel().StatusValue("Completed");
+                                        } else if (campaignModel().Status() == 6) {
+                                            campaignModel().StatusValue("Approval Rejected");
+                                        }
+                                        isEditCampaign(true);
+                                        isEditorVisible(true);
+                                        // handle 2nd edit error 
+                                        //  $(".modal-backdrop").remove();
+                                        $.unblockUI(spinner);
                                     }
 
-                                    if (campaignModel().Status() == 1) {
-                                        campaignModel().StatusValue("Draft");
-                                    } else if (campaignModel().Status() == 2) {
-                                        campaignModel().StatusValue("Submitted for Approval");
-                                    } else if (campaignModel().Status() == 3) {
-                                        campaignModel().StatusValue("Live");
-                                    } else if (campaignModel().Status() == 4) {
-                                        campaignModel().StatusValue("Paused");
-                                    } else if (campaignModel().Status() == 5) {
-                                        campaignModel().StatusValue("Completed");
-                                    } else if (campaignModel().Status() == 6) {
-                                        campaignModel().StatusValue("Approval Rejected");
-                                    }
-                                    isEditCampaign(true);
-                                    isEditorVisible(true);
-                                    // handle 2nd edit error 
-                                    $(".modal-backdrop").remove();
+                                },
+                                error: function (response) {
+
                                 }
-
-                            },
-                            error: function (response) {
-
-                            }
-                        });
+                            });
+                        }
                     },
                     // Initialize the view model
                     initialize = function (specifiedView) {
