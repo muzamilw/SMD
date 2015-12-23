@@ -257,6 +257,25 @@ namespace SMD.Repository.BaseRepository
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Int32>
                ("GetAudienceAdCampaign", age, gender, countryId, cityId, languageId, industryId, pqIds);
         }
+
+        public System.Data.Entity.Core.Objects.ObjectResult<GetAudience_Result> GetAdCompaignForApi(int ageFrom, int ageTo, int gender, string countryIds, string cityIds, string languageIds, string industryIds, string profileQuestionIds, string profileAnswerIds, string surveyQuestionIds, string surveyAnswerIds)
+        {
+            var ageFromParameter = new System.Data.Entity.Core.Objects.ObjectParameter("ageFrom", ageFrom);
+            var ageToParameter = new System.Data.Entity.Core.Objects.ObjectParameter("ageTo", ageTo);
+            var genderParameter = new System.Data.Entity.Core.Objects.ObjectParameter("gender", gender);
+            var countryIdsParameter = new System.Data.Entity.Core.Objects.ObjectParameter("countryIds", countryIds);
+            var cityIdsParameter = new System.Data.Entity.Core.Objects.ObjectParameter("cityIds", cityIds);
+            var languageIdsParameter = new System.Data.Entity.Core.Objects.ObjectParameter("languageIds", languageIds);
+            var industryIdsParameter = new System.Data.Entity.Core.Objects.ObjectParameter("industryIds", industryIds);
+            var profileQuestionIdsParameter = new System.Data.Entity.Core.Objects.ObjectParameter("profileQuestionIds", profileQuestionIds);
+            var profileAnswerIdsParameter = new System.Data.Entity.Core.Objects.ObjectParameter("profileAnswerIds", profileAnswerIds);
+            var surveyQuestionIdsParameter = new System.Data.Entity.Core.Objects.ObjectParameter("surveyQuestionIds", surveyQuestionIds);
+            var surveyAnswerIdsParameter = new System.Data.Entity.Core.Objects.ObjectParameter("surveyAnswerIds", surveyAnswerIds);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAudience_Result>("GetAudience",
+                ageFromParameter, ageToParameter, genderParameter, countryIdsParameter, cityIdsParameter, languageIdsParameter,
+                industryIdsParameter, profileQuestionIdsParameter, profileAnswerIdsParameter, surveyQuestionIdsParameter
+                , surveyAnswerIdsParameter);
+        }
         #endregion
     }
 }

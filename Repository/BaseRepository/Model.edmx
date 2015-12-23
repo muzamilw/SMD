@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="SMDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SMDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Account">
           <Key>
             <PropertyRef Name="AccountId" />
@@ -1036,6 +1036,19 @@
           <Parameter Name="FromRow" Type="int" Mode="In" />
           <Parameter Name="ToRow" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetAudience" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ageFrom" Type="int" Mode="In" />
+          <Parameter Name="ageTo" Type="int" Mode="In" />
+          <Parameter Name="gender" Type="int" Mode="In" />
+          <Parameter Name="countryIds" Type="nvarchar" Mode="In" />
+          <Parameter Name="cityIds" Type="nvarchar" Mode="In" />
+          <Parameter Name="languageIds" Type="nvarchar" Mode="In" />
+          <Parameter Name="industryIds" Type="nvarchar" Mode="In" />
+          <Parameter Name="profileQuestionIds" Type="nvarchar" Mode="In" />
+          <Parameter Name="profileAnswerIds" Type="nvarchar" Mode="In" />
+          <Parameter Name="surveyQuestionIds" Type="nvarchar" Mode="In" />
+          <Parameter Name="surveyAnswerIds" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="GetAudienceAdCampaign" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="age" Type="int" Mode="In" />
           <Parameter Name="gender" Type="int" Mode="In" />
@@ -1652,6 +1665,19 @@
             <End Role="SurveyQuestion" EntitySet="SurveyQuestions" />
             <End Role="InvoiceDetail" EntitySet="InvoiceDetails" />
           </AssociationSet>
+          <FunctionImport Name="GetAudience" ReturnType="Collection(DomainModels.GetAudience_Result)">
+            <Parameter Name="ageFrom" Mode="In" Type="Int32" />
+            <Parameter Name="ageTo" Mode="In" Type="Int32" />
+            <Parameter Name="gender" Mode="In" Type="Int32" />
+            <Parameter Name="countryIds" Mode="In" Type="String" />
+            <Parameter Name="cityIds" Mode="In" Type="String" />
+            <Parameter Name="languageIds" Mode="In" Type="String" />
+            <Parameter Name="industryIds" Mode="In" Type="String" />
+            <Parameter Name="profileQuestionIds" Mode="In" Type="String" />
+            <Parameter Name="profileAnswerIds" Mode="In" Type="String" />
+            <Parameter Name="surveyQuestionIds" Mode="In" Type="String" />
+            <Parameter Name="surveyAnswerIds" Mode="In" Type="String" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="ProfileQuestion">
           <Key>
@@ -2796,6 +2822,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="GetAudience_Result">
+          <Property Type="Int32" Name="MatchingUsers" Nullable="true" />
+          <Property Type="Int32" Name="AllUsers" Nullable="true" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3305,6 +3335,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetAudience" FunctionName="SMDModel.Store.GetAudience">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DomainModels.GetAudience_Result">
+                <ScalarProperty Name="MatchingUsers" ColumnName="MatchingUsers" />
+                <ScalarProperty Name="AllUsers" ColumnName="AllUsers" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

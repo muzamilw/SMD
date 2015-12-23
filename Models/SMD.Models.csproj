@@ -124,6 +124,7 @@
     <Compile Include="DomainModels\Country.cs" />
     <Compile Include="DomainModels\Currency.cs" />
     <Compile Include="DomainModels\GetAds_Result.cs" />
+    <Compile Include="DomainModels\GetAudience_Result.cs" />
     <Compile Include="DomainModels\GetSurveys_Result.cs" />
     <Compile Include="DomainModels\Industry.cs" />
     <Compile Include="DomainModels\Invoice.cs" />

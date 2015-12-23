@@ -233,11 +233,27 @@ namespace SMD.MIS.ModelMappers
                 {
                     if (source.SqAnswer == 1)
                     {
-                        AnswerString = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + source.SurveyQuestion.LeftPicturePath;
+                        if (!source.SurveyQuestion.LeftPicturePath.Contains("http:"))
+                        {
+                            AnswerString = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + source.SurveyQuestion.LeftPicturePath;
+                        }
+                        else 
+                        {
+                            AnswerString = source.SurveyQuestion.LeftPicturePath;
+                        }
+                       
                     }
                     else 
                     {
-                        AnswerString = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + source.SurveyQuestion.RightPicturePath;
+                        if (!source.SurveyQuestion.RightPicturePath.Contains("http:"))
+                        {
+                            AnswerString = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + source.SurveyQuestion.RightPicturePath;
+                        }
+                        else 
+                        {
+                            AnswerString = source.SurveyQuestion.RightPicturePath;
+                        }
+                       
                     }
                     
                 }
