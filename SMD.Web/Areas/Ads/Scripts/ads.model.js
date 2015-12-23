@@ -4,7 +4,7 @@
       Campaign = function (CampaignID, LanguageID, CampaignName, UserID, Status, StatusValue, CampaignDescription, Gender,
           Archived, StartDateTime, EndDateTime, MaxBudget, Type, DisplayTitle, LandingPageVideoLink, VerifyQuestion,
           Answer1, Answer2, Answer3, CorrectAnswer, AgeRangeStart, AgeRangeEnd, ResultClicks, AmountSpent
-          , ImagePath, CampaignImagePath, CampaignTypeImagePath) {
+          , ImagePath, CampaignImagePath, CampaignTypeImagePath, Description) {
           var
               //type and userID will be set on server sside
               CampaignID = ko.observable(CampaignID),
@@ -14,6 +14,7 @@
               Status = ko.observable(Status),
               StatusValue = ko.observable(StatusValue),
               CampaignDescription = ko.observable(CampaignDescription),
+              Description = ko.observable(Description),
               Gender = ko.observable(Gender),
               Archived = ko.observable(Archived),
               StartDateTime = ko.observable((StartDateTime !== null && StartDateTime !== undefined) ? moment(StartDateTime).toDate() : undefined),//ko.observable(),
@@ -51,6 +52,7 @@
                   Status: Status,
                   StatusValue: StatusValue,
                   CampaignDescription: CampaignDescription,
+                  Description:Description,
                   Gender: Gender,
                   Archived: Archived,
                   StartDateTime: StartDateTime,
@@ -100,6 +102,7 @@
                       Status: Status(),
                       StatusValue: StatusValue(),
                       CampaignDescription: CampaignDescription(),
+                      Description:Description(),
                       Gender: Gender(),
                       Archived: Archived(),
                       StartDateTime: moment(StartDateTime()).format(ist.utcFormat) + 'Z',//StartDateTime(),
@@ -132,6 +135,7 @@
               Status: Status,
               StatusValue: StatusValue,
               CampaignDescription: CampaignDescription,
+              Description:Description,
               Gender: Gender,
               Archived: Archived,
               StartDateTime: StartDateTime,
@@ -258,7 +262,7 @@
     // Factory Method
     Campaign.Create = function (source) {
   
-        var campaign = new Campaign(source.CampaignId, source.LanguageId, source.CampaignName, source.UserId, source.Status, source.StatusValue, source.CampaignDescription, source.Gender + "", source.Archived, source.StartDateTime, source.EndDateTime, source.MaxBudget, source.Type + "", source.DisplayTitle, source.LandingPageVideoLink, source.VerifyQuestion, source.Answer1, source.Answer2, source.Answer3, source.CorrectAnswer, source.AgeRangeStart, source.AgeRangeEnd, source.ResultClicks, source.AmountSpent, source.ImagePath, source.CampaignImagePath, source.CampaignTypeImagePath);
+        var campaign = new Campaign(source.CampaignId, source.LanguageId, source.CampaignName, source.UserId, source.Status, source.StatusValue, source.CampaignDescription, source.Gender + "", source.Archived, source.StartDateTime, source.EndDateTime, source.MaxBudget, source.Type + "", source.DisplayTitle, source.LandingPageVideoLink, source.VerifyQuestion, source.Answer1, source.Answer2, source.Answer3, source.CorrectAnswer, source.AgeRangeStart, source.AgeRangeEnd, source.ResultClicks, source.AmountSpent, source.ImagePath, source.CampaignImagePath, source.CampaignTypeImagePath, source.Description);
         _.each(source.AdCampaignTargetCriterias, function (item) {
             campaign.AdCampaignTargetCriterias.push(AdCampaignTargetCriteriasModel.Create(item));
         });
