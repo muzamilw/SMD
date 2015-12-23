@@ -9,8 +9,8 @@ define("invoice/invoice.viewModel",
         ist.SurveyQuestion = {
             viewModel: (function() {
                 var view,
-                    //  Questions list on LV
-                    questions = ko.observableArray([]),
+                    //  Invoices list on LV
+                    invoices = ko.observableArray([]),
                     //pager
                     pager = ko.observable(),
                     //sorting
@@ -20,10 +20,10 @@ define("invoice/invoice.viewModel",
                     // Controlls editor visibility 
                     isEditorVisible = ko.observable(false),
                      //selected Answer
-                    selectedQuestion = ko.observable(),
+                    selectedInvoice = ko.observable(),
                     //Get Questions
-                    getQuestions = function () {
-                        dataservice.searchSurveyQuestions(
+                    getInvoices = function () {
+                        dataservice.searchInvoices(
                             {
                                 PageSize: pager().pageSize(),
                                 PageNo: pager().currentPage(),
@@ -32,16 +32,15 @@ define("invoice/invoice.viewModel",
                             },
                             {
                                 success: function (data) {
-                                    questions.removeAll();
-                                    pager().totalCount(0);
+                                    invoices.removeAll();
                                     pager().totalCount(data.TotalCount);
-                                    _.each(data.SurveyQuestions, function (item) {
-                                        questions.push(model.SurveyquestionServertoClientMapper(item));
+                                    _.each(data.Invoices, function (item) {
+                                        invoices.push(model.InvoiceServertoClientMapper(item));
                                     });
 
                                 },
                                 error: function () {
-                                    toastr.error("Failed to load servey questions!");
+                                    toastr.error("Failed to load Invoices!");
                                 }
                             });
                     },
@@ -49,25 +48,25 @@ define("invoice/invoice.viewModel",
                     closeEditDialog = function () {
                         // Ask for confirmation
                         confirmation.afterProceed(function () {
-                            selectedQuestion(undefined);
+                            selectedInvoice(undefined);
                             isEditorVisible(false);
                         });
                         confirmation.show();
                     },
                     // On editing of existing PQ
                     onEditQuestion = function (item) {
-                        selectedQuestion(item);
+                        selectedInvoice(item);
                         isEditorVisible(true);
                     },
                   
                     // Save Question / Add 
                     onSaveQuestion = function () {
-                        dataservice.saveSurveyQuestion(selectedQuestion().convertToServerData(), {
+                        dataservice.saveSurveyQuestion(selectedInvoice().convertToServerData(), {
                             success: function (obj) {
-                                var newObjtodelete = questions.find(function (temp) {
+                                var newObjtodelete = invoices.find(function (temp) {
                                     return obj.SqId == temp.id();
                                 });
-                                questions.remove(newObjtodelete);
+                                invoices.remove(newObjtodelete);
                                 toastr.success("You are Good!");
                                 isEditorVisible(false);
                             },
@@ -79,13 +78,13 @@ define("invoice/invoice.viewModel",
                    
                     // Has Changes
                     hasChangesOnQuestion = ko.computed(function () {
-                        if (selectedQuestion() == undefined) {
+                        if (selectedInvoice() == undefined) {
                             return false;
                         }
-                        return (selectedQuestion().hasChanges());
+                        return (selectedInvoice().hasChanges());
                     }),
                     onRejectQuestion= function() {
-                        if (selectedQuestion().rejectionReason() == undefined || selectedQuestion().rejectionReason() == "" || selectedQuestion().rejectionReason() == " ") {
+                        if (selectedInvoice().rejectionReason() == undefined || selectedInvoice().rejectionReason() == "" || selectedInvoice().rejectionReason() == " ") {
                             toastr.info("Please add rejection reason!");
                             return false;
                         }
@@ -95,22 +94,22 @@ define("invoice/invoice.viewModel",
                     initialize = function (specifiedView) {
                         view = specifiedView;
                         ko.applyBindings(view.viewModel, view.bindingRoot);
-                        pager(pagination.Pagination({ PageSize: 10 }, questions, getQuestions));
+                        pager(pagination.Pagination({ PageSize: 10 }, invoices, getInvoices));
                        
                         // First request for LV
-                        getQuestions();
+                        getInvoices();
                     };
                 return {
                     initialize: initialize,
                     sortOn: sortOn,
                     sortIsAsc: sortIsAsc,
                     pager: pager,
-                    questions: questions,
-                    getQuestions: getQuestions,
+                    questions: invoices,
+                    getInvoices: getInvoices,
                     isEditorVisible: isEditorVisible,
                     closeEditDialog: closeEditDialog,
                     onEditQuestion: onEditQuestion,
-                    selectedQuestion: selectedQuestion,
+                    selectedQuestion: selectedInvoice,
                     onSaveQuestion: onSaveQuestion,
                     hasChangesOnQuestion: hasChangesOnQuestion,
                     onRejectQuestion: onRejectQuestion

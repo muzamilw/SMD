@@ -1,20 +1,12 @@
 ﻿define(["ko", "underscore", "underscore-ko"], function(ko) {
 
     var // ReSharper disable InconsistentNaming
-      Survey = function (sQId, spcQuestion, spcDes, spcDisplayQuestion, spcIsApproved, spcRejectionReason,
-          subDate, spcCreatedBy,address,leftImg,righImg) {
+      Invoice = function (invoiceId, spcDate, spcRef, spcTotal) {
           var
-              id = ko.observable(sQId),
-              question = ko.observable(spcQuestion),
-              description = ko.observable(spcDes),
-              displayQuestion = ko.observable(spcDisplayQuestion),
-              isApproved = ko.observable(spcIsApproved),
-              rejectionReason = ko.observable(spcRejectionReason),
-              submissionDate = ko.observable(subDate),
-              createdBy = ko.observable(spcCreatedBy),
-              creatorAddress = ko.observable(address),
-              leftImage = ko.observable(leftImg),
-              rightImage = ko.observable(righImg),
+              id = ko.observable(invoiceId),
+              invoDate = ko.observable(spcDate),
+              refrence = ko.observable(spcRef),
+              invoiceTotal = ko.observable(spcTotal),
              
               errors = ko.validation.group({
 
@@ -24,8 +16,8 @@
                   return errors().length === 0;
               }),
               dirtyFlag = new ko.dirtyFlag({
-                  isApproved: isApproved,
-                  rejectionReason: rejectionReason
+                  invoDate: invoDate,
+                  refrence: refrence
               }),
               // Has Changes
               hasChanges = ko.computed(function () {
@@ -38,24 +30,15 @@
               // Convert to server data
               convertToServerData = function () {
                   return {
-                      SqId:id(),
-                      Approved: isApproved(),
-                      RejectionReason: rejectionReason(),
+                      
                   };
               };
           return {
               id: id,
-              question: question,
-              description: description,
-              displayQuestion: displayQuestion,
-              isApproved: isApproved,
-              rejectionReason: rejectionReason,
-              submissionDate: submissionDate,
-              createdBy: createdBy,
-              creatorAddress: creatorAddress,
-              leftImage: leftImage,
-              rightImage:rightImage,
-              
+              invoDate: invoDate,
+              refrence: refrence,
+              invoiceTotal:invoiceTotal,
+
               hasChanges: hasChanges,
               convertToServerData:convertToServerData,
               reset: reset,
@@ -64,25 +47,19 @@
           };
       };
 
-
-    ///////////////////////////////////////////////////////// Survey QUESTION
-    //server to client mapper For Survey QUESTION
-    var SurveyquestionServertoClientMapper = function (itemFromServer) {
-        return new Survey(itemFromServer.SqId, itemFromServer.Question, itemFromServer.Description,
-            itemFromServer.DisplayQuestion, itemFromServer.Approved, itemFromServer.RejectionReason,
-            itemFromServer.SubmissionDate, itemFromServer.CreatedBy, itemFromServer.CreatorAddress,
-        itemFromServer.LeftPicturePath, itemFromServer.RightPicturePath);
+    //server to client mapper For Invoice
+    var InvoiceServertoClientMapper = function (itemFromServer) {
+        return new Invoice(itemFromServer.InvoiceId, itemFromServer.InvoiceDate, itemFromServer.CreditCardRef,
+            itemFromServer.NetTotal);
     };
     
-    // Function to attain cancel button functionality Survey QUESTION
-    Survey.CreateFromClientModel = function (item) {
-        return new Survey(item.id, item.question, item.description, item.displayQuestion, item.isApproved,
-            item.rejectionReason, item.submissionDate, item.createdBy, item.creatorAddress, item.leftImage,
-        item.rightImage);
+    // Function to attain cancel button functionality Invoice
+    Invoice.CreateFromClientModel = function (item) {
+        return new Invoice(item.id, item.invoDate, item.refrence, item.invoiceTotal);
     };
    
     return {
-        Survey: Survey,
-        SurveyquestionServertoClientMapper: SurveyquestionServertoClientMapper
+        Invoice: Invoice,
+        InvoiceServertoClientMapper: InvoiceServertoClientMapper
     };
 });

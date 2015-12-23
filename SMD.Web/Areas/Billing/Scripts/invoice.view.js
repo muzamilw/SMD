@@ -10,14 +10,14 @@ define("invoice/invoice.view",
                 // View model 
                 viewModel = specifiedViewModel,
                 // Binding root used with knockout
-                bindingRoot = $("#SurveyQuestionBindingSpot")[0],
+                bindingRoot = $("#InvoiceLVBindingSpot")[0],
                 // Initialize
                 initialize = function () {
                     if (!bindingRoot) {
                         return;
                     }
                     // Handle Sorting
-                    handleSorting("surveyQuestionLVTable", viewModel.sortOn, viewModel.sortIsAsc, viewModel.getQuestions);
+                    handleSorting("invoiceLVTable", viewModel.sortOn, viewModel.sortIsAsc, viewModel.getInvoices);
                 };
             initialize();
             return {

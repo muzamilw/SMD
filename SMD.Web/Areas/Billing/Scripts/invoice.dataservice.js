@@ -11,15 +11,15 @@ define("invoice/invoice.dataservice", function () {
             initialize = function() {
                 if (!isInitialized) {
 
-                    //Search Survey Questions
-                    amplify.request.define('searchSurveyQuestions', 'ajax', {
-                        url: '/Api/SurveyQuestionApproval',
+                    //Search Invoices
+                    amplify.request.define('searchInvoices', 'ajax', {
+                        url: '/Api/Invoice',
                         dataType: 'json',
                         type: 'GET'
                     });
                     
 
-                    // Edit Survey Questions
+                    // Edit Invoices
                     amplify.request.define('saveSurveyQuestion', 'ajax', {
                         url: '/Api/SurveyQuestionApproval',
                         dataType: 'json',
@@ -28,11 +28,11 @@ define("invoice/invoice.dataservice", function () {
                     isInitialized = true;
                 }
             },       
-            // Search Survey Questions
-            searchSurveyQuestions = function (params, callbacks) {
+            // Search Invoices
+            searchInvoices = function (params, callbacks) {
                 initialize();
                 return amplify.request({
-                    resourceId: 'searchSurveyQuestions',
+                    resourceId: 'searchInvoices',
                     success: callbacks.success,
                     error: callbacks.error,
                     data: params
@@ -41,7 +41,7 @@ define("invoice/invoice.dataservice", function () {
             
 
             
-            // Save Survey  Questions edit
+            // Save Invoices edit
             saveSurveyQuestion = function (params, callbacks) {
                 initialize();
                 return amplify.request({
@@ -54,7 +54,7 @@ define("invoice/invoice.dataservice", function () {
 
         return {
             saveSurveyQuestion: saveSurveyQuestion,
-            searchSurveyQuestions: searchSurveyQuestions
+            searchInvoices: searchInvoices
         };
     })();
     return dataService;
