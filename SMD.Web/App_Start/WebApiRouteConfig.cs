@@ -81,6 +81,54 @@ namespace SMD.MIS
                 new { controller = "ApproveSurvey" },
                 null,
                 routeHandlers);
+
+            // Get Ads route
+            config.Routes.MapHttpRoute(
+                "GetAdsForApi",
+                "GetAdsForApi/{AuthenticationToken}/",
+                new { controller = "GetAdsForApi" },
+                null,
+                null);
+
+            // Get AudienceAdCampaign route
+            config.Routes.MapHttpRoute(
+                "GetAudienceAdCampaignForApi",
+                "GetAudienceAdCampaignForApi/{AuthenticationToken}/",
+                new { controller = "GetAudienceAdCampaignForApi" },
+                null,
+                null);
+
+            // Get Audience Survey route
+            config.Routes.MapHttpRoute(
+                "GetAudienceSurveyForApi",
+                "GetAudienceSurveyForApi/{AuthenticationToken}/",
+                new { controller = "GetAudienceSurveyForApi" },
+                null,
+                null);
+
+            // Get Profile Question route
+            config.Routes.MapHttpRoute(
+                "GetProfileQuestionForApi",
+                "GetProfileQuestionForApi/{AuthenticationToken}/",
+                new { controller = "GetProfileQuestionForApi" },
+                null,
+                null);
+
+            // Get Surveys route
+            config.Routes.MapHttpRoute(
+                "GetSurveysForApi",
+                "GetSurveysForApi/{AuthenticationToken}/",
+                new { controller = "GetSurveysForApi" },
+                null,
+                null);
+
+            // Update Question Answer route
+            config.Routes.MapHttpRoute(
+                "UpdateQuestionAnswerForApi",
+                "UpdateQuestionAnswerForApi/{AuthenticationToken}/",
+                new { controller = "UpdateQuestionAnswerForApi" },
+                null,
+                null);
         }
     }
 }

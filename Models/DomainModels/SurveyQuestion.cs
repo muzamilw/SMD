@@ -54,6 +54,8 @@ namespace SMD.Models.DomainModels
         public virtual ICollection<SurveyQuestionTargetCriteria> LinkedSurveyQuestionTargetCriterias { get; set; }
         public virtual ICollection<SurveyQuestionTargetLocation> SurveyQuestionTargetLocations { get; set; }
         public virtual ICollection<SurveyQuestionResponse> SurveyQuestionResponses { get; set; }
+
+        public virtual ICollection<InvoiceDetail> InvoiceDetails { get; set; }
         //left image and right image not mapped bytes
         [NotMapped]
         public string LeftPictureBytes { get; set; }

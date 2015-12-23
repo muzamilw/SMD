@@ -54,6 +54,7 @@ namespace SMD.Models.DomainModels
         public virtual ICollection<AdCampaignResponse> AdCampaignResponses { get; set; }
         public virtual ICollection<AdCampaignTargetCriteria> AdCampaignTargetCriterias { get; set; }
         public virtual ICollection<AdCampaignTargetLocation> AdCampaignTargetLocations { get; set; }
+        public virtual ICollection<InvoiceDetail> InvoiceDetails { get; set; }
 
         [NotMapped]
         public string CampaignImagePath { get; set; }

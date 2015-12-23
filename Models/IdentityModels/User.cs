@@ -69,6 +69,8 @@ namespace SMD.Models.IdentityModels
         public virtual ICollection<SurveyQuestionResponse> SurveyQuestionResponses { get; set; }
 
         public virtual ICollection<Account> Accounts { get; set; }
+
+        public virtual ICollection<Invoice> Invoices { get; set; }
         #endregion
 
         #region Public
@@ -152,6 +154,11 @@ namespace SMD.Models.IdentityModels
             if (source.IndustryId.HasValue)
             {
                 IndustryId = source.IndustryId;
+            }
+
+            if (!string.IsNullOrEmpty(source.FullName))
+            {
+                FullName = source.FullName;
             }
         }
 

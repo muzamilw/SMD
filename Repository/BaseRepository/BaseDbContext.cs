@@ -191,7 +191,16 @@ namespace SMD.Repository.BaseRepository
         /// </summary>
         public DbSet<Transaction> Transactions { get; set; }
 
+        /// <summary>
+        /// Invoice 
+        /// </summary>
+        public DbSet<Invoice> Invoices { get; set; }
 
+
+        /// <summary>
+        /// Invoice Details
+        /// </summary>
+        public DbSet<InvoiceDetail> InvoiceDetails { get; set; }
         /// <summary>
         /// Get Ad-Campaigns for APIs | baqer
         /// </summary>

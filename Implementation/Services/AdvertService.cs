@@ -113,6 +113,8 @@ namespace SMD.Implementation.Services
                
               
             }
+            campaignModel.StartDateTime = campaignModel.StartDateTime.Value.Subtract(_adCampaignRepository.UserTimezoneOffSet);
+            campaignModel.EndDateTime = campaignModel.EndDateTime.Value.Subtract(_adCampaignRepository.UserTimezoneOffSet);
             _adCampaignRepository.Add(campaignModel);
             _adCampaignRepository.SaveChanges();
            
@@ -131,10 +133,17 @@ namespace SMD.Implementation.Services
 
         public CampaignResponseModel GetCampaignById(long CampaignId)
         {
-          
+            var campaignEnumarable = _adCampaignRepository.GetAdCampaignById(CampaignId);
+            foreach (var campaign in campaignEnumarable)
+            {
+                if (campaign.StartDateTime.HasValue)
+                    campaign.StartDateTime = campaign.StartDateTime.Value.Add(_adCampaignRepository.UserTimezoneOffSet);
+                if (campaign.EndDateTime.HasValue)
+                    campaign.EndDateTime = campaign.EndDateTime.Value.Add(_adCampaignRepository.UserTimezoneOffSet);
+            }
             return new CampaignResponseModel
             {
-                Campaign = _adCampaignRepository.GetAdCampaignById(CampaignId),
+                Campaign = campaignEnumarable,
                 Languages = _languageRepository.GetAllLanguages()
             };
         }
@@ -156,6 +165,9 @@ namespace SMD.Implementation.Services
                     campaignModel.LandingPageVideoLink = paths[1];
                 }
             }
+            campaignModel.StartDateTime = campaignModel.StartDateTime.Value.Subtract(_adCampaignRepository.UserTimezoneOffSet);
+            campaignModel.EndDateTime = campaignModel.EndDateTime.Value.Subtract(_adCampaignRepository.UserTimezoneOffSet);
+
             _adCampaignRepository.Update(campaignModel);
             _adCampaignRepository.SaveChanges();
 

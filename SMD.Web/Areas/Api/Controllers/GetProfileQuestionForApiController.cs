@@ -12,7 +12,6 @@ namespace SMD.MIS.Areas.Api.Controllers
     /// <summary>
     /// Profile Question for APIs Controller 
     /// </summary>
-    [Authorize]
     public class GetProfileQuestionForApiController : ApiController
     {
         #region Public
@@ -34,9 +33,9 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// Get Profile Questions
         /// </summary>
         [ApiExceptionCustom]
-        public ProfileQuestionApiSearchResponse Get([FromUri] GetProfileQuestionApiRequest request)
+        public ProfileQuestionApiSearchResponse Get(string authenticationToken, [FromUri] GetProfileQuestionApiRequest request)
         {
-            if (request == null || !ModelState.IsValid)
+            if (string.IsNullOrEmpty(authenticationToken) || request == null || !ModelState.IsValid)
             {
                 throw new HttpException((int)HttpStatusCode.BadRequest, "Invalid Request");
             }

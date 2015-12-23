@@ -12,7 +12,6 @@ namespace SMD.MIS.Areas.Api.Controllers
     /// <summary>
     /// Get Surveys for APIs Controller 
     /// </summary>
-    [Authorize]
     public class GetSurveysForApiController : ApiController
     {
         #region Public
@@ -35,9 +34,9 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// Get Surveys for API
         /// </summary>
         [ApiExceptionCustom]
-        public SurveyForApiSearchResponse Post(GetSurveysApiRequest request)
+        public SurveyForApiSearchResponse Post(string authenticationToken, [FromUri] GetSurveysApiRequest request)
         {
-            if (request == null || !ModelState.IsValid)
+            if (string.IsNullOrEmpty(authenticationToken) || request == null || !ModelState.IsValid)
             {
                 throw new HttpException((int)HttpStatusCode.BadRequest, "Invalid Request");
             }

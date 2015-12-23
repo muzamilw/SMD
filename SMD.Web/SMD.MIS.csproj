@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -384,6 +384,7 @@
     <Compile Include="Areas\Api\Controllers\GetAudienceSurveyForApiController.cs" />
     <Compile Include="Areas\Api\Controllers\GetSurveysForApiController.cs" />
     <Compile Include="Areas\Api\Controllers\AdViewedController.cs" />
+    <Compile Include="Areas\Api\Controllers\InvoiceController.cs" />
     <Compile Include="Areas\Api\Controllers\SurveyQuestionEditorController.cs" />
     <Compile Include="Areas\Api\Controllers\UpdateCampaignController.cs" />
     <Compile Include="Areas\Api\Controllers\UpdateQuestionAnswerForApiController.cs" />
@@ -417,6 +418,8 @@
     <Compile Include="Areas\Api\Models\CampaignRequestResponseModel.cs" />
     <Compile Include="Areas\Api\Models\CampaignSearchRequest.cs" />
     <Compile Include="Areas\Api\Models\AdCampaignResposneModelForAproval.cs" />
+    <Compile Include="Areas\Api\Models\Invoice.cs" />
+    <Compile Include="Areas\Api\Models\InvoiceSearchRequestResponse.cs" />
     <Compile Include="Areas\Api\Models\LoginResponse.cs" />
     <Compile Include="Areas\Api\Models\SurveyForApiSearchResponse.cs" />
     <Compile Include="Areas\Api\Models\LocationDropDown.cs" />
@@ -441,6 +444,8 @@
     <Compile Include="Areas\Api\Models\ProfileQuestionGroupDropdown.cs" />
     <Compile Include="Areas\Api\Models\ProfileQuestionAnswerSearchRequest.cs" />
     <Compile Include="Areas\Api\Models\ProfileQuestionSearchRequestResponse.cs" />
+    <Compile Include="Areas\Billing\BillingAreaRegistration.cs" />
+    <Compile Include="Areas\Billing\Controllers\ManageController.cs" />
     <Compile Include="Areas\Common\CommonAreaRegistration.cs" />
     <Compile Include="Areas\ProfileQuestion\Controllers\ManageController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -454,6 +459,7 @@
     </Compile>
     <Compile Include="Helper\CultureHelper.cs" />
     <Compile Include="ModelMappers\AdCampaignMapper.cs" />
+    <Compile Include="ModelMappers\InvoiceMapper.cs" />
     <Compile Include="ModelMappers\LanguageMapper.cs" />
     <Compile Include="ModelMappers\CountryMapper.cs" />
     <Compile Include="ModelMappers\LocationMapper.cs" />
@@ -474,6 +480,10 @@
     <Content Include="Areas\Ads\Scripts\addApproval.model.js" />
     <Content Include="Areas\Ads\Scripts\addApproval.view.js" />
     <Content Include="Areas\Ads\Scripts\addApproval.viewModel.js" />
+    <Content Include="Areas\Billing\Scripts\invoice.dataservice.js" />
+    <Content Include="Areas\Billing\Scripts\invoice.model.js" />
+    <Content Include="Areas\Billing\Scripts\invoice.view.js" />
+    <Content Include="Areas\Billing\Scripts\invoice.viewModel.js" />
     <Content Include="Areas\Common\Scripts\clientSidePagination.js" />
     <Content Include="Areas\Common\Scripts\paypalPayment.dataservice.js" />
     <Content Include="Areas\Common\Scripts\stripeChargeCustomer.dataservice.js" />
@@ -1390,6 +1400,10 @@
     <Content Include="RichTextEditor\samples\plugins\htmlwriter\assets\outputforflash\outputforflash.fla" />
     <Content Include="RichTextEditor\skins\moono\readme.md" />
     <Content Include="Content\less\ProfileQuestion.less" />
+    <Content Include="Areas\Billing\Views\web.config" />
+    <Content Include="Areas\Billing\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Billing\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Billing\Views\Manage\Invoice.cshtml" />
     <None Include="Properties\PublishProfiles\SMD MIS Saqib.pubxml" />
     <None Include="Properties\PublishProfiles\SMD.pubxml" />
     <None Include="Scripts\amplify-vsdoc.js" />
@@ -2502,6 +2516,7 @@
     <Folder Include="Areas\Ads\Models\" />
     <Folder Include="Areas\Api\Views\ProfileQuestion\" />
     <Folder Include="Areas\Api\Views\Survey\" />
+    <Folder Include="Areas\Billing\Models\" />
     <Folder Include="Areas\Common\Controllers\" />
     <Folder Include="Areas\Common\Models\" />
     <Folder Include="Areas\Survey\Models\" />
@@ -2576,7 +2591,7 @@
           <AutoAssignPort>False</AutoAssignPort>
           <DevelopmentServerPort>30630</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://smdpreview.com</IISUrl>
+           <IISUrl>http://smdpreview.com</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

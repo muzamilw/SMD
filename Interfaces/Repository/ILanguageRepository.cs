@@ -1,18 +1,17 @@
 ﻿using System.Collections.Generic;
 using SMD.Models.DomainModels;
+using SMD.Models.RequestModels;
 
 namespace SMD.Interfaces.Repository
 {
     /// <summary>
-    /// Language Repository Interface 
+    /// Invoice Repository Interface 
     /// </summary>
-    public interface ILanguageRepository : IBaseRepository<Language, int>
+    public interface IInvoiceRepository : IBaseRepository<Invoice, int>
     {
         /// <summary>
-        /// Get List of Language 
+        /// Search Invoces for LV
         /// </summary>
-        IEnumerable<Language> GetAllLanguages();
-
-        IEnumerable<Language> GetSearchedLanguages(string searchString);
+        IEnumerable<Invoice> SearchInvoices(InvoiceSearchRequest request, out int rowCount);
     }
 }

@@ -103,6 +103,7 @@
     <Compile Include="Common\AccessRightClaimValue.cs" />
     <Compile Include="Common\ActiveModuleMenuItem.cs" />
     <Compile Include="Common\AdCampaignByColumn.cs" />
+    <Compile Include="Common\InvoiceByColumn.cs" />
     <Compile Include="Common\SurveyQuestionByColumn.cs" />
     <Compile Include="Common\ProfileQuestionByColumn.cs" />
     <Compile Include="Common\SecurityRoles.cs" />
@@ -125,6 +126,8 @@
     <Compile Include="DomainModels\GetAds_Result.cs" />
     <Compile Include="DomainModels\GetSurveys_Result.cs" />
     <Compile Include="DomainModels\Industry.cs" />
+    <Compile Include="DomainModels\Invoice.cs" />
+    <Compile Include="DomainModels\InvoiceDetail.cs" />
     <Compile Include="DomainModels\Language.cs" />
     <Compile Include="DomainModels\Product.cs" />
     <Compile Include="DomainModels\ProfileQuestion.cs" />
@@ -169,6 +172,7 @@
     <Compile Include="RequestModels\GetProfileQuestionApiRequest.cs" />
     <Compile Include="RequestModels\GetSurveysApiRequest.cs" />
     <Compile Include="RequestModels\AdViewedRequest.cs" />
+    <Compile Include="RequestModels\InvoiceSearchRequest.cs" />
     <Compile Include="RequestModels\UpdateUserProfileRequest.cs" />
     <Compile Include="RequestModels\RegisterCustomRequest.cs" />
     <Compile Include="RequestModels\RegisterExternalRequest.cs" />
@@ -184,6 +188,7 @@
     <Compile Include="ResponseModels\AdCampaignResposneModelForAproval.cs" />
     <Compile Include="ResponseModels\AdCampaignApiSearchRequestResponse.cs" />
     <Compile Include="ResponseModels\BaseApiResponse.cs" />
+    <Compile Include="ResponseModels\InvoiceSearchRequestResponse.cs" />
     <Compile Include="ResponseModels\LoginResponse.cs" />
     <Compile Include="ResponseModels\SurveyForApiSearchResponse.cs" />
     <Compile Include="ResponseModels\ProfileQuestionApiSearchResponse.cs" />

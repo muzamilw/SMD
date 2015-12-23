@@ -138,7 +138,7 @@ namespace SMD.Implementation.Services
                     dbServey.ApprovalDate = source.ApprovalDate;
                     dbServey.ApprovedByUserId = surveyQuestionRepository.LoggedInUserIdentity;
                     dbServey.Status = (Int32)AdCampaignStatus.Live;
-                    emailManagerService.SendQuestionApprovalEmail(dbServey.UserId);
+                  //  emailManagerService.SendQuestionApprovalEmail(dbServey.UserId);
 
                 } // Rejected 
                 else
@@ -146,7 +146,7 @@ namespace SMD.Implementation.Services
                     dbServey.Status = (Int32)AdCampaignStatus.ApprovalRejected;
                     dbServey.Approved = false;
                     dbServey.RejectionReason = source.RejectionReason;
-                    emailManagerService.SendQuestionRejectionEmail(dbServey.UserId);
+                 //   emailManagerService.SendQuestionRejectionEmail(dbServey.UserId);
                 }
                 dbServey.ModifiedDate = DateTime.Now;
                 dbServey.ModifiedBy = surveyQuestionRepository.LoggedInUserIdentity;

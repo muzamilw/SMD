@@ -67,7 +67,6 @@ namespace SMD.MIS.ModelMappers
                 ClickRate = source.ClickRate,
                 CorrectAnswer = source.CorrectAnswer,
                 CreatedDateTime = source.CreatedDateTime,
-                Description = source.Description,
                 DisplayTitle = source.DisplayTitle,
                 SmdCampaign = source.SmdCampaign,
                 EndDateTime = source.EndDateTime,
@@ -85,11 +84,13 @@ namespace SMD.MIS.ModelMappers
                 VerifyQuestion = source.VerifyQuestion,
                 CampaignImagePath = path,
                 CampaignTypeImagePath = LandingPageVideoLinkAsPath,
+                Description = source.Description,
                 AdCampaignTargetCriterias =
                     source.AdCampaignTargetCriterias != null ? source.AdCampaignTargetCriterias.Select(x => x.CreateFrom()).ToList() : null,
 
                 AdCampaignTargetLocations =
                     source.AdCampaignTargetLocations != null ? source.AdCampaignTargetLocations.Select(x => x.CreateFrom()).ToList() : null,
+
             };
 
 
