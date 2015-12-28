@@ -1048,6 +1048,10 @@
           <Parameter Name="profileAnswerIds" Type="nvarchar" Mode="In" />
           <Parameter Name="surveyQuestionIds" Type="nvarchar" Mode="In" />
           <Parameter Name="surveyAnswerIds" Type="nvarchar" Mode="In" />
+          <Parameter Name="countryIdsExcluded" Type="nvarchar" Mode="In" />
+          <Parameter Name="cityIdsExcluded" Type="nvarchar" Mode="In" />
+          <Parameter Name="languageIdsExcluded" Type="nvarchar" Mode="In" />
+          <Parameter Name="industryIdsExcluded" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="GetAudienceAdCampaign" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="age" Type="int" Mode="In" />
@@ -1677,6 +1681,10 @@
             <Parameter Name="profileAnswerIds" Mode="In" Type="String" />
             <Parameter Name="surveyQuestionIds" Mode="In" Type="String" />
             <Parameter Name="surveyAnswerIds" Mode="In" Type="String" />
+            <Parameter Name="countryIdsExcluded" Mode="In" Type="String" />
+            <Parameter Name="cityIdsExcluded" Mode="In" Type="String" />
+            <Parameter Name="languageIdsExcluded" Mode="In" Type="String" />
+            <Parameter Name="industryIdsExcluded" Mode="In" Type="String" />
           </FunctionImport>
           </EntityContainer>
         <EntityType Name="ProfileQuestion">

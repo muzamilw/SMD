@@ -258,7 +258,9 @@ namespace SMD.Repository.BaseRepository
                ("GetAudienceAdCampaign", age, gender, countryId, cityId, languageId, industryId, pqIds);
         }
 
-        public System.Data.Entity.Core.Objects.ObjectResult<GetAudience_Result> GetAdCompaignForApi(int ageFrom, int ageTo, int gender, string countryIds, string cityIds, string languageIds, string industryIds, string profileQuestionIds, string profileAnswerIds, string surveyQuestionIds, string surveyAnswerIds)
+        public System.Data.Entity.Core.Objects.ObjectResult<GetAudience_Result> GetAudienceCampaignAndSurveyCounts(int ageFrom, int ageTo, int gender, string countryIds, string cityIds, string languageIds, 
+            string industryIds, string profileQuestionIds, string profileAnswerIds, string surveyQuestionIds
+            , string surveyAnswerIds, string countryIdsExcluded, string cityIdsExcluded, string languageIdsExcluded, string industryIdsExcluded)
         {
             var ageFromParameter = new System.Data.Entity.Core.Objects.ObjectParameter("ageFrom", ageFrom);
             var ageToParameter = new System.Data.Entity.Core.Objects.ObjectParameter("ageTo", ageTo);
@@ -271,10 +273,15 @@ namespace SMD.Repository.BaseRepository
             var profileAnswerIdsParameter = new System.Data.Entity.Core.Objects.ObjectParameter("profileAnswerIds", profileAnswerIds);
             var surveyQuestionIdsParameter = new System.Data.Entity.Core.Objects.ObjectParameter("surveyQuestionIds", surveyQuestionIds);
             var surveyAnswerIdsParameter = new System.Data.Entity.Core.Objects.ObjectParameter("surveyAnswerIds", surveyAnswerIds);
+            var countryIdsExcludedParameter = new System.Data.Entity.Core.Objects.ObjectParameter("countryIdsExcluded", countryIdsExcluded);
+            var cityIdsExcludedParameter = new System.Data.Entity.Core.Objects.ObjectParameter("cityIdsExcluded", cityIdsExcluded);
+            var languageIdsExcludedParameter = new System.Data.Entity.Core.Objects.ObjectParameter("languageIdsExcluded", languageIdsExcluded);
+            var industryIdsExcludedParameter = new System.Data.Entity.Core.Objects.ObjectParameter("industryIdsExcluded", industryIdsExcluded);
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAudience_Result>("GetAudience",
                 ageFromParameter, ageToParameter, genderParameter, countryIdsParameter, cityIdsParameter, languageIdsParameter,
                 industryIdsParameter, profileQuestionIdsParameter, profileAnswerIdsParameter, surveyQuestionIdsParameter
-                , surveyAnswerIdsParameter);
+                , surveyAnswerIdsParameter, countryIdsExcludedParameter, cityIdsExcludedParameter, languageIdsExcludedParameter
+                , industryIdsExcludedParameter);
         }
         #endregion
     }
