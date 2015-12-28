@@ -162,6 +162,7 @@
     <Compile Include="Services\PaypalService.cs" />
     <Compile Include="Services\ProfileQuestionAnswerService .cs" />
     <Compile Include="Services\ProfileQuestionUserAnswerService.cs" />
+    <Compile Include="Services\TransactionService.cs" />
     <Compile Include="Services\WebApiUserService.cs" />
     <Compile Include="Services\ProfileQuestionService.cs" />
     <Compile Include="Services\SurveyQuestionService.cs" />

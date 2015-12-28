@@ -318,6 +318,11 @@ namespace SMD.Implementation.Services
             #endregion
             return surveyQuestionRepository.GetAudienceAdCampaignCount(request);  
         }
+        // added by saqib for getting audience count survey add /edit screen
+        public GetAudience_Result GetAudienceCount(GetAudienceCountRequest request)
+        {
+            return surveyQuestionRepository.GetAudienceCount(request);
+        }
         #endregion
     }
 

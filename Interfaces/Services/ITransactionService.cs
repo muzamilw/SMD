@@ -9,6 +9,6 @@ namespace SMD.Interfaces.Services
         /// <summary>
         /// Makes Transaction on Approval 
         /// </summary>
-        void SurveyApprovalTransaction(long sQid);
+        //void SurveyApprovalTransaction(long sQid);
     }
 }

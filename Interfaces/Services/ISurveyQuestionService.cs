@@ -42,5 +42,6 @@ namespace SMD.Interfaces.Services
         /// Returns count of Matches AdCampaigns| baqer
         /// </summary>
         long GetAudienceAdCampaignCount(GetAudienceSurveyRequest request);
+        GetAudience_Result GetAudienceCount(GetAudienceCountRequest request);
     }
 }
