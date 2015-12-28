@@ -190,7 +190,8 @@ namespace SMD.MIS.ModelMappers
                 CorrectAnswer = source.CorrectAnswer,
                 Description = source.Description,
                 LandingPageVideoLink = source.LandingPageVideoLink,
-                VerifyQuestion = source.VerifyQuestion
+                VerifyQuestion = source.VerifyQuestion,
+                Type = source.Type
             };
         }
 

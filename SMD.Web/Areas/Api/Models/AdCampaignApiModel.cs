@@ -16,5 +16,6 @@ namespace SMD.MIS.Areas.Api.Models
         public string Answer3 { get; set; }
         public int? CorrectAnswer { get; set; }
         public double? ClickRate { get; set; }
+        public int? Type { get; set; }
     }
 }
