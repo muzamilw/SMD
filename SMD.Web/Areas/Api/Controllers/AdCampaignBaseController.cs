@@ -89,7 +89,7 @@ namespace SMD.MIS.Areas.Api.Controllers
                     countriesAndCities = listOfAllCC
                 };
             }
-            else // get languages list
+            else if (argsList[1] == "2") /// get languages list
             {
                 IEnumerable<LanguageDropdown> listOfLangs = _campaignService.SearchLanguages(argsList[0]).Languages.Select(lang => lang.CreateFrom());
                 if (listOfLangs != null && listOfLangs.Count() > 10)
@@ -99,6 +99,19 @@ namespace SMD.MIS.Areas.Api.Controllers
                 return new AdCampaignBaseResponse
                 {
                     Languages = listOfLangs
+                };
+            }
+            else    // get industry
+            {
+                IEnumerable<Industry> listOfIndustry = _campaignService.SearchIndustry(argsList[0]).Select(lang => lang.CreateFrom());
+
+                if (listOfIndustry != null && listOfIndustry.Count() > 10)
+                {
+                    listOfIndustry = listOfIndustry.Take(10);
+                }
+                return new AdCampaignBaseResponse
+                {
+                    listIndustry = listOfIndustry
                 };
             }
             

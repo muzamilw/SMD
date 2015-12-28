@@ -106,6 +106,43 @@ define("survey/survey.view",
                                     viewModel.addLanguage(selected);
                                 }
                             });
+
+                    // industry
+                        var ind_array = new Bloodhound({
+                            datumTokenizer: function (d) {
+                                return Bloodhound.tokenizers.whitespace(d.IndustryName);
+                            },
+                            queryTokenizer: Bloodhound.tokenizers.whitespace,
+                            remote: {
+                                rateLimitWait: 1000,
+                                url: '/Api/AdCampaignBase?searchText=%QUERY',
+                                ajax: {
+                                    type: 'POST'
+                                },
+                                replace: function (url, query) {
+                                    query = query + "|3";
+                                    return url.replace('%QUERY', query);
+                                },
+                                filter: function (data) {
+
+                                    return data.listIndustry;
+                                }
+                            }
+                        });
+
+                        ind_array.initialize();
+
+                    $('#searchIndustries').typeahead({
+                            highlight: true
+                        },
+                            {
+                                displayKey: 'IndustryName',
+                                source: ind_array.ttAdapter()
+                            }).bind('typeahead:selected', function (obj, selected) {
+                                if (selected) {
+                                    viewModel.addIndustry(selected);
+                                }
+                            });
                 },
                 // Initialize
                 initialize = function () {

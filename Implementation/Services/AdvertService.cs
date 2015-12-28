@@ -29,6 +29,7 @@ namespace SMD.Implementation.Services
         private readonly IProfileQuestionRepository _profileQuestionRepository;
         private readonly IProfileQuestionAnswerRepository _profileQuestionAnswerRepository;
         private readonly ISurveyQuestionRepository _surveyQuestionRepository;
+        private readonly IIndustryRepository _industryRepository;
         #endregion
         #region Constructor
 
@@ -38,6 +39,7 @@ namespace SMD.Implementation.Services
         public AdvertService(
             IAdCampaignRepository adCampaignRepository, 
             ILanguageRepository languageRepository,
+            IIndustryRepository industryRepository,
             ICountryRepository countryRepository, 
             ICityRepository cityRepository,
             IAdCampaignTargetLocationRepository adCampaignTargetLocationRepository,
@@ -57,6 +59,7 @@ namespace SMD.Implementation.Services
             this._profileQuestionRepository = profileQuestionRepository;
             this._profileQuestionAnswerRepository = profileQuestionAnswerRepository;
             this._surveyQuestionRepository = surveyQuestionRepository;
+            this._industryRepository = industryRepository;
         }
      
         /// <summary>
@@ -92,6 +95,15 @@ namespace SMD.Implementation.Services
                 Languages = _languageRepository.GetSearchedLanguages(searchString)
             };
         }
+        /// <summary>
+        /// Get Industry search data
+        /// </summary>
+        public IEnumerable<Industry> SearchIndustry(string searchString)
+        {
+            return _industryRepository.SearchIndustries(searchString);
+    
+        }
+        
 
         /// <summary>
         /// Add Campaign

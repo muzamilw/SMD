@@ -303,7 +303,7 @@ namespace SMD.MIS.ModelMappers
                 {
                     if (criteria.Industry != null)
                     {
-                        modelCriteria.questionString = criteria.Industry.IndustryName;
+                        modelCriteria.Industry = criteria.Industry.IndustryName;
                     }
                 }
                 result.Add(modelCriteria);

@@ -38,5 +38,9 @@ namespace SMD.Models.ResponseModels
         /// survey questions
         /// </summary>
         public IEnumerable<SurveyQuestion> SurveyQuestions { get; set; }
+        /// <summary>
+        /// industry
+        /// </summary>
+        public IEnumerable<Industry> Industry { get; set; }
     }
 }

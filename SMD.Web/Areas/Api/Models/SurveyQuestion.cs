@@ -57,6 +57,7 @@ namespace SMD.MIS.Areas.Api.Models
         public string questionString { get; set; }   // survey Question , profile Question,  industry name
         public string answerString { get; set; }  // survey Question Answer , profile Question Answer
         public string Language { get; set; } // language name
+        public string Industry { get; set; }  // industry name 
     }
     public class SurveyQuestionTargetLocation
     {

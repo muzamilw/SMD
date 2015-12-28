@@ -29,6 +29,7 @@ define("survey/survey.viewModel",
                     selectedLocationRadius = ko.observable(),
                     selectedLocationIncludeExclude = ko.observable(true),
                     selectedLangIncludeExclude = ko.observable(true),
+                    selectedIndustryIncludeExclude = ko.observable(true),
                     selectedLocationLat = ko.observable(0),
                     selectedLocationLong = ko.observable(0),
                     // criteria selection 
@@ -147,6 +148,7 @@ define("survey/survey.viewModel",
                         selectedQuestion().StatusValue("Draft");
                         selectedQuestion().Status(1);
                         selectedQuestion().reset();
+                        selectedQuestion().SurveyQuestionTargetCriteria([]);
                         isEditorVisible(true);
                         canSubmitForApproval(true);
                         view.initializeTypeahead();
@@ -272,6 +274,24 @@ define("survey/survey.viewModel",
                             SQID: selectedQuestion().SQID()
                         }));
                         $("#searchLanguages").val("");
+                    },
+                     addIndustry = function (selected) {
+                         selectedQuestion().SurveyQuestionTargetCriteria.push(new model.SurveyQuestionTargetCriteria.Create({
+                             Industry: selected.IndustryName,
+                             IndustryID: selected.IndustryId,
+                             IncludeorExclude: parseInt(selectedIndustryIncludeExclude()),
+                             Type: 4,
+                             SQID: selectedQuestion().SQID()
+                         }));
+                         $("#searchIndustries").val("");
+                     },
+                    onRemoveIndustry = function (item) {
+                        // Ask for confirmation
+                        confirmation.afterProceed(function () {
+                            selectedQuestion().SurveyQuestionTargetCriteria.remove(item);
+                            toastr.success("Removed Successfully!");
+                        });
+                        confirmation.show();
                     },
                     onRemoveLanguage = function (item) {
                         // Ask for confirmation
@@ -547,10 +567,12 @@ define("survey/survey.viewModel",
                     onRemoveLocation: onRemoveLocation,
                     deleteLocation: deleteLocation,
                     selectedLocationIncludeExclude: selectedLocationIncludeExclude,
-                    selectedLangIncludeExclude:selectedLangIncludeExclude,
+                    selectedLangIncludeExclude: selectedLangIncludeExclude,
+                    selectedIndustryIncludeExclude:selectedIndustryIncludeExclude,
                     selectedLocationLat: selectedLocationLat,
                     selectedLocationLong: selectedLocationLong,
                     addLanguage: addLanguage,
+                    addIndustry:addIndustry,
                     onRemoveLanguage: onRemoveLanguage,
                     selectedCriteria: selectedCriteria,
                     profileQuestionList: profileQuestionList,
@@ -570,7 +592,8 @@ define("survey/survey.viewModel",
                     onSaveSurveyQuestion: onSaveSurveyQuestion,
                     onSubmitSurveyQuestion: onSubmitSurveyQuestion,
                     canSubmitForApproval:canSubmitForApproval,
-                    titleText: titleText
+                    titleText: titleText,
+                    onRemoveIndustry: onRemoveIndustry
                 };
             })()
         };

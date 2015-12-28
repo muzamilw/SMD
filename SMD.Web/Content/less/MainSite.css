@@ -181,7 +181,8 @@ div.Tokenize ul.Dropdown {
   height: 33px;
   margin-left: 2px;
 }
-#searchLanguages {
+#searchLanguages,
+#searchIndustries {
   width: 280px!important;
   border-top-left-radius: 0px !important;
   border-top-right-radius: 0px !important;
