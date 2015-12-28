@@ -23,7 +23,10 @@ namespace SMD.Implementation.Services
 
         #endregion
         #region Public
+        public void SurveyApprovalTransaction(long sQid)
+        {
 
+        }
         #endregion
     }
 }
