@@ -734,6 +734,20 @@ namespace SMD.Implementation.Services
             return user.StripeCustomerId;
         }
 
+
+        /// <summary>
+        /// Get Stripe Customer by Email
+        /// </summary>
+        public async Task<string> GetStripeCustomerIdByEmail(string email)
+        {
+            User user = await UserManager.FindByEmailAsync(email);
+            if (user == null)
+            {
+                throw new SMDException("No such user with provided email address!");
+            }
+
+            return user.StripeCustomerId; 
+        }
         #endregion
     }
 }

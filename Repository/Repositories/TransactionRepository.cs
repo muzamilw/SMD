@@ -15,7 +15,6 @@ namespace SMD.Repository.Repositories
         #region Private
        
         #endregion
-
         #region Constructor
 
         /// <summary>
@@ -36,12 +35,8 @@ namespace SMD.Repository.Repositories
         }
 
         #endregion
-
-        
         #region Public
 
-        #endregion
-
-        
+        #endregion 
     }
 }

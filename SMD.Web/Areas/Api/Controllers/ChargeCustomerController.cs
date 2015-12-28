@@ -25,7 +25,7 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// <summary>
         /// Create Charge With Customer Id
         /// </summary>
-        private static void CreateChargeWithCustomerId(StripeChargeCustomerRequest request, string customerId)
+        private static bool CreateChargeWithCustomerId(StripeChargeCustomerRequest request, string customerId)
         {
             // Verify If Credit Card is not expired
             var customerService = new StripeCustomerService();
@@ -55,7 +55,12 @@ namespace SMD.MIS.Areas.Api.Controllers
                 // (not required) set this to false if you don't want to capture the charge yet - requires you call capture later
             };
             var chargeService = new StripeChargeService();
-            chargeService.Create(stripeChargeCreateOptions);
+            var resposne=  chargeService.Create(stripeChargeCreateOptions);
+            if (resposne.Status == "succeeded")
+            {
+                return true;
+            }
+            return false;
         }
 
         #endregion
@@ -83,22 +88,22 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// Charge Customer
         /// </summary>
         [ApiException]
-        public async Task Post(StripeChargeCustomerRequest request)
+        public async Task<bool> Post(StripeChargeCustomerRequest request)
         {
             if (request == null || !ModelState.IsValid)
             {
                 throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
             }
 
-            string customerId = await webApiUserService.GetStripeCustomerId();
+            string stripeCustomerId = await webApiUserService.GetStripeCustomerIdByEmail(request.Email);
             // Check if Stripe Customer Id Exists then use that to Create Charge
-            if (string.IsNullOrEmpty(customerId))
+            if (string.IsNullOrEmpty(stripeCustomerId))
             {
                 throw new SMDException(LanguageResources.Stripe_CustomerNotFound);
             }
 
             // Charge Customer
-            CreateChargeWithCustomerId(request, customerId);
+           return CreateChargeWithCustomerId(request, stripeCustomerId);
         }
         
         #endregion

@@ -70,5 +70,10 @@ namespace SMD.Interfaces.Services
         /// </summary>
         /// <returns></returns>
         Task<string> GetStripeCustomerId();
+
+        /// <summary>
+        /// Get Stripe Customer by Email
+        /// </summary>
+        Task<string> GetStripeCustomerIdByEmail(string email);
     }
 }
