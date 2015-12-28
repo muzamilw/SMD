@@ -65,7 +65,7 @@ namespace SMD.Repository.Repositories
             int fromRow = (request.PageNo - 1) * request.PageSize;
             int toRow = request.PageSize;
             Expression<Func<Invoice, bool>> query =
-                invo => ((request.FromDate == DateTime.MinValue && request.ToDate == DateTime.MinValue) ||
+                invo => ((request.FromDate == null && request.ToDate ==null) ||
                          (request.FromDate <= invo.InvoiceDate && request.ToDate >= invo.InvoiceDate));
 
             rowCount = DbSet.Count(query);

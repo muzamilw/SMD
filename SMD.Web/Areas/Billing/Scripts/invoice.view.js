@@ -1,11 +1,11 @@
 ﻿/*
-    View for the Survey Questions. Used to keep the viewmodel clear of UI related logic
+    View for the Invoice. Used to keep the viewmodel clear of UI related logic
 */
 define("invoice/invoice.view",
-    ["jquery", "invoice/invoice.viewModel"], function ($, surveyQuestionViewModel) {
+    ["jquery", "invoice/invoice.viewModel"], function ($, invoiceViewModel) {
         var ist = window.ist || {};
         // View 
-        ist.SurveyQuestion.view = (function (specifiedViewModel) {
+        ist.Invoice.view = (function (specifiedViewModel) {
             var
                 // View model 
                 viewModel = specifiedViewModel,
@@ -24,10 +24,10 @@ define("invoice/invoice.view",
                 bindingRoot: bindingRoot,
                 viewModel: viewModel
             };
-        })(surveyQuestionViewModel);
+        })(invoiceViewModel);
         // Initialize the view model
-        if (ist.SurveyQuestion.view.bindingRoot) {
-            surveyQuestionViewModel.initialize(ist.SurveyQuestion.view);
+        if (ist.Invoice.view.bindingRoot) {
+            invoiceViewModel.initialize(ist.Invoice.view);
         }
-        return ist.SurveyQuestion.view;
+        return ist.Invoice.view;
     });
