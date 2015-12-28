@@ -162,5 +162,12 @@ namespace SMD.Repository.Repositories
             var resposne = db.GetAudienceAdCampaignCount(request);
             return resposne.FirstOrDefault(); 
         }
+
+        public GetAudience_Result GetAudienceCount(GetAudienceCountRequest request)
+        {
+            return db.GetAudienceCampaignAndSurveyCounts(request.ageFrom, request.ageTo, request.gender, request.countryIds, request.cityIds, request.languageIds, request.industryIds
+                , request.profileQuestionIds, request.profileAnswerIds, request.surveyQuestionIds, request.surveyAnswerIds,
+                request.countryIdsExcluded, request.cityIdsExcluded, request.languageIdsExcluded, request.industryIdsExcluded);
+        }
     }
 }
