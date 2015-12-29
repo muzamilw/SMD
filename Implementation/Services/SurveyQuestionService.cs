@@ -1,7 +1,12 @@
-﻿using SMD.Interfaces.Repository;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using SMD.ExceptionHandling;
+using SMD.Implementation.Identity;
+using SMD.Interfaces.Repository;
 using SMD.Interfaces.Services;
 using SMD.Models.Common;
 using SMD.Models.DomainModels;
+using SMD.Models.IdentityModels;
 using SMD.Models.RequestModels;
 using SMD.Models.ResponseModels;
 using System;
@@ -11,6 +16,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using Stripe;
 
 
 namespace SMD.Implementation.Services
@@ -30,6 +36,13 @@ namespace SMD.Implementation.Services
         private readonly IEmailManagerService emailManagerService;
         private readonly IProductRepository productRepository;
         private readonly ITaxRepository taxRepository;
+        private readonly IInvoiceRepository invoiceRepository;
+        private readonly IInvoiceDetailRepository invoiceDetailRepository;
+
+        private ApplicationUserManager UserManager
+        {
+            get { return HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
+        }
 
         private string[] SaveSurveyImages(SurveyQuestion question)
         {
@@ -76,7 +89,7 @@ namespace SMD.Implementation.Services
         /// <summary>
         ///  Constructor
         /// </summary>
-        public SurveyQuestionService(ISurveyQuestionRepository _surveyQuestionRepository, ICountryRepository _countryRepository, ILanguageRepository _languageRepository, IEmailManagerService emailManagerService, ISurveyQuestionTargetCriteriaRepository _surveyQuestionTargtCriteriaRepository, ISurveyQuestionTargetLocationRepository _surveyQuestionTargetLocationRepository, IProductRepository productRepository, ITaxRepository taxRepository)
+        public SurveyQuestionService(ISurveyQuestionRepository _surveyQuestionRepository, ICountryRepository _countryRepository, ILanguageRepository _languageRepository, IEmailManagerService emailManagerService, ISurveyQuestionTargetCriteriaRepository _surveyQuestionTargtCriteriaRepository, ISurveyQuestionTargetLocationRepository _surveyQuestionTargetLocationRepository, IProductRepository productRepository, ITaxRepository taxRepository, IInvoiceRepository invoiceRepository, IInvoiceDetailRepository invoiceDetailRepository)
         {
             this.surveyQuestionRepository = _surveyQuestionRepository;
             this.languageRepository = _languageRepository;
@@ -85,6 +98,8 @@ namespace SMD.Implementation.Services
             this.surveyQuestionTargetLocationRepository = _surveyQuestionTargetLocationRepository;
             this.productRepository = productRepository;
             this.taxRepository = taxRepository;
+            this.invoiceRepository = invoiceRepository;
+            this.invoiceDetailRepository = invoiceDetailRepository;
             this.surveyQuestionTargtCriteriaRepository = _surveyQuestionTargtCriteriaRepository;
         }
 
@@ -142,8 +157,8 @@ namespace SMD.Implementation.Services
                     dbServey.ApprovalDate = source.ApprovalDate;
                     dbServey.ApprovedByUserId = surveyQuestionRepository.LoggedInUserIdentity;
                     dbServey.Status = (Int32)AdCampaignStatus.Live;
-
-                    DoWork(dbServey);
+                    // Strpe + Invoice Work 
+                    MakeStripePaymentandAddInvoice(dbServey);
 
                   //  emailManagerService.SendQuestionApprovalEmail(dbServey.UserId);
 
@@ -332,10 +347,120 @@ namespace SMD.Implementation.Services
             return surveyQuestionRepository.GetAudienceCount(request);
         }
 
-        private void DoWork(SurveyQuestion source)
+        /// <summary>
+        /// Makes Payment From Stripe & Add Invoice | baqer
+        /// </summary>
+        private void MakeStripePaymentandAddInvoice(SurveyQuestion source)
         {
+            #region Stripe Payment
+            // Get Current Product
             var product = productRepository.GetProductByCountryId(source.CountryId, "SQ");
-            var tax  =    taxRepository.GetTaxByCountryId(source.CountryId);
+            // Tax Applied
+            var tax = taxRepository.GetTaxByCountryId(source.CountryId);
+            // Total includes tax
+            var amount = product.SetupPrice + tax.TaxValue;
+            // User who added Survey Question for approval 
+            var user = GetUserByUserId(source.UserId);
+            // Make Stripe actual payment 
+            var response = CreateChargeWithCustomerId((int?)amount, user.StripeCustomerId);
+
+            #endregion
+            if (response!="failed")
+            {
+                #region Add Invoice
+
+                // Add invoice data
+                var invoice = new Invoice
+                {
+                    Country = source.Country.CountryName,
+                    Total = (double)amount,
+                    NetTotal = (double)amount,
+                    InvoiceDate = DateTime.Now,
+                    InvoiceDueDate = DateTime.Now.AddDays(7),
+                    Address1 = source.Country.CountryName,
+                    UserId = user.Id,
+                    CompanyName = "My Company",
+                    CreditCardRef = response
+                };
+                invoiceRepository.Add(invoice);
+
+                #endregion
+                #region Add Invoice Detail
+
+                // Add Invoice Detail Data 
+                var invoiceDetail = new InvoiceDetail
+                {
+                    InvoiceId = invoice.InvoiceId,
+                    SqId = source.SqId,
+                    ProductId = product.ProductId,
+                    ItemName = "Survey Question",
+                    ItemAmount = (double)amount,
+                    ItemTax = (double)tax.TaxValue,
+                    ItemDescription = "This is description!",
+                    ItemGrossAmount = (double)amount,
+                    CampaignId = null,
+
+                };
+                invoiceDetailRepository.Add(invoiceDetail);
+                invoiceDetailRepository.SaveChanges();
+
+                #endregion
+            }
+        }
+
+        /// <summary>
+        /// Get Stripe Customer by User Id
+        /// </summary>
+        public User GetUserByUserId(string email)
+        {
+            User user =  UserManager.FindById(email);
+            if (user == null)
+            {
+                throw new SMDException("No such user with provided user Id!");
+            }
+
+            return user;
+        }
+
+        /// <summary>
+        /// Stripe Payment Work
+        /// </summary>
+        public string CreateChargeWithCustomerId(int? amount, string customerId)
+        {
+            // Verify If Credit Card is not expired
+            var customerService = new StripeCustomerService();
+            var customer = customerService.Get(customerId);
+            if (customer == null)
+            {
+                throw new SMDException("Customrt Not Found!");
+            }
+
+            // If Card has been expired then skip payment
+            if (customer.SourceList != null && customer.SourceList.Data != null && customer.DefaultSourceId != null)
+            {
+                var defaultStripeCard = customer.SourceList.Data.FirstOrDefault(card => card.Id == customer.DefaultSourceId);
+                if (defaultStripeCard != null && (Convert.ToInt32(defaultStripeCard.ExpirationMonth) < DateTime.Now.Month ||
+                    Convert.ToInt32(defaultStripeCard.ExpirationYear) < DateTime.Now.Year))
+                {
+                    throw new SMDException("Card Expired!");
+                }
+            }
+
+            var stripeChargeCreateOptions = new StripeChargeCreateOptions
+            {
+                CustomerId = customerId,
+                Amount = amount,
+                Currency = "usd",
+                Capture = true
+                // (not required) set this to false if you don't want to capture the charge yet - requires you call capture later
+            };
+            var chargeService = new StripeChargeService();
+            var resposne = chargeService.Create(stripeChargeCreateOptions);
+            if (resposne.Status == "succeeded")
+            {
+                return resposne.BalanceTransactionId;
+            }
+            return "failed";
         }
         #endregion
     }

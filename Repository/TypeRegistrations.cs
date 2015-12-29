@@ -38,6 +38,7 @@ namespace SMD.Repository
             unityContainer.RegisterType<IIndustryRepository, IndustryRepository>();
             unityContainer.RegisterType<IProductRepository, ProductRepository>();
             unityContainer.RegisterType<ITaxRepository, TaxRepository>();
+            unityContainer.RegisterType<IInvoiceDetailRepository, InvoiceDetailRepository>();
         }
     }
 }

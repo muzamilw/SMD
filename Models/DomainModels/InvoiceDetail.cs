@@ -23,11 +23,11 @@ namespace SMD.Models.DomainModels
 
         public string ItemDescription { get; set; }
 
-        public long CampaignId { get; set; }
+        public long? CampaignId { get; set; }
 
-        public long SqId { get; set; }
+        public long? SqId { get; set; }
 
-        public int ProductId { get; set; }
+        public int? ProductId { get; set; }
         #endregion
         #region Navigational
 
