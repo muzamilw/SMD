@@ -140,6 +140,7 @@
     <Compile Include="DomainModels\SurveyQuestionTargetCriteria.cs" />
     <Compile Include="DomainModels\SurveyQuestionTargetLocation.cs" />
     <Compile Include="DomainModels\SystemMail.cs" />
+    <Compile Include="DomainModels\Tax.cs" />
     <Compile Include="DomainModels\Transaction.cs" />
     <Compile Include="IdentityModels\Role.cs" />
     <Compile Include="IdentityModels\Role`.cs" />

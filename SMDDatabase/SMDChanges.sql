@@ -1318,3 +1318,41 @@ exec(@query + @where)
 END
 
  -- ============================= updated on server =============================
+
+ -- by Baqer on 29-Dec
+ alter table products
+ add ProductCode nvarchar(50) NULL 
+
+
+
+ 
+GO
+
+/****** Object:  Table [dbo].[Tax]    Script Date: 29-Dec-15 2:52:29 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Tax](
+	[TaxId] [int] IDENTITY(1,1) NOT NULL,
+	[TaxName] [nvarchar](200) NULL,
+	[TaxValue] [float] NULL,
+	[CountryId] [int] NOT NULL,
+ CONSTRAINT [PK_Tax] PRIMARY KEY CLUSTERED 
+(
+	[TaxId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+ALTER TABLE [dbo].[Tax]  WITH CHECK ADD  CONSTRAINT [FK_Tax_Country] FOREIGN KEY([CountryId])
+REFERENCES [dbo].[Country] ([CountryID])
+GO
+
+ALTER TABLE [dbo].[Tax] CHECK CONSTRAINT [FK_Tax_Country]
+GO
+
+

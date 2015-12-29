@@ -201,6 +201,12 @@ namespace SMD.Repository.BaseRepository
         /// Invoice Details
         /// </summary>
         public DbSet<InvoiceDetail> InvoiceDetails { get; set; }
+
+        /// <summary>
+        /// Taxes
+        /// </summary>
+        public DbSet<Tax> Taxes { get; set; }
+
         /// <summary>
         /// Get Ad-Campaigns for APIs | baqer
         /// </summary>

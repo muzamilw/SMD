@@ -28,6 +28,8 @@ namespace SMD.Implementation.Services
         private readonly ICountryRepository countryRepository;
         private readonly ILanguageRepository languageRepository;
         private readonly IEmailManagerService emailManagerService;
+        private readonly IProductRepository productRepository;
+        private readonly ITaxRepository taxRepository;
 
         private string[] SaveSurveyImages(SurveyQuestion question)
         {
@@ -74,13 +76,15 @@ namespace SMD.Implementation.Services
         /// <summary>
         ///  Constructor
         /// </summary>
-        public SurveyQuestionService(ISurveyQuestionRepository _surveyQuestionRepository, ICountryRepository _countryRepository, ILanguageRepository _languageRepository, IEmailManagerService emailManagerService, ISurveyQuestionTargetCriteriaRepository _surveyQuestionTargtCriteriaRepository, ISurveyQuestionTargetLocationRepository _surveyQuestionTargetLocationRepository)
+        public SurveyQuestionService(ISurveyQuestionRepository _surveyQuestionRepository, ICountryRepository _countryRepository, ILanguageRepository _languageRepository, IEmailManagerService emailManagerService, ISurveyQuestionTargetCriteriaRepository _surveyQuestionTargtCriteriaRepository, ISurveyQuestionTargetLocationRepository _surveyQuestionTargetLocationRepository, IProductRepository productRepository, ITaxRepository taxRepository)
         {
             this.surveyQuestionRepository = _surveyQuestionRepository;
             this.languageRepository = _languageRepository;
             this.emailManagerService = emailManagerService;
             this.countryRepository = _countryRepository;
             this.surveyQuestionTargetLocationRepository = _surveyQuestionTargetLocationRepository;
+            this.productRepository = productRepository;
+            this.taxRepository = taxRepository;
             this.surveyQuestionTargtCriteriaRepository = _surveyQuestionTargtCriteriaRepository;
         }
 
@@ -124,7 +128,7 @@ namespace SMD.Implementation.Services
         }
 
         /// <summary>
-        /// Edit Survey Question | baqer
+        /// Edit/Approve Survey Question | baqer
         /// </summary>
         public SurveyQuestion EditSurveyQuestion(SurveyQuestion source)
         {
@@ -138,6 +142,9 @@ namespace SMD.Implementation.Services
                     dbServey.ApprovalDate = source.ApprovalDate;
                     dbServey.ApprovedByUserId = surveyQuestionRepository.LoggedInUserIdentity;
                     dbServey.Status = (Int32)AdCampaignStatus.Live;
+
+                    DoWork(dbServey);
+
                   //  emailManagerService.SendQuestionApprovalEmail(dbServey.UserId);
 
                 } // Rejected 
@@ -318,10 +325,17 @@ namespace SMD.Implementation.Services
             #endregion
             return surveyQuestionRepository.GetAudienceAdCampaignCount(request);  
         }
+
         // added by saqib for getting audience count survey add /edit screen
         public GetAudience_Result GetAudienceCount(GetAudienceCountRequest request)
         {
             return surveyQuestionRepository.GetAudienceCount(request);
+        }
+
+        private void DoWork(SurveyQuestion source)
+        {
+            var product = productRepository.GetProductByCountryId(source.CountryId, "SQ");
+            var tax  =    taxRepository.GetTaxByCountryId(source.CountryId);
         }
         #endregion
     }

@@ -197,6 +197,8 @@
       <DependentUpon>LanguageResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\ProductRepository.cs" />
+    <Compile Include="Repositories\TaxRepository.cs" />
     <Compile Include="Repositories\IndustryRepository.cs" />
     <Compile Include="Repositories\InvoiceRepository.cs" />
     <Compile Include="Repositories\TransactionRepository.cs" />

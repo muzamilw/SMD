@@ -36,6 +36,8 @@ namespace SMD.Repository
             unityContainer.RegisterType<ISurveyQuestionTargetLocationRepository, SurveyQuestionTargetLocationRepository>();
             unityContainer.RegisterType<IInvoiceRepository, InvoiceRepository>();
             unityContainer.RegisterType<IIndustryRepository, IndustryRepository>();
+            unityContainer.RegisterType<IProductRepository, ProductRepository>();
+            unityContainer.RegisterType<ITaxRepository, TaxRepository>();
         }
     }
 }
