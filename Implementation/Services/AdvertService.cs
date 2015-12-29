@@ -1,7 +1,12 @@
-﻿using SMD.Interfaces.Repository;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using SMD.ExceptionHandling;
+using SMD.Implementation.Identity;
+using SMD.Interfaces.Repository;
 using SMD.Interfaces.Services;
 using SMD.Models.Common;
 using SMD.Models.DomainModels;
+using SMD.Models.IdentityModels;
 using SMD.Models.RequestModels;
 using SMD.Models.ResponseModels;
 using System;
@@ -9,6 +14,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web;
+using Stripe;
 
 namespace SMD.Implementation.Services
 {
@@ -30,6 +36,115 @@ namespace SMD.Implementation.Services
         private readonly IProfileQuestionAnswerRepository _profileQuestionAnswerRepository;
         private readonly ISurveyQuestionRepository _surveyQuestionRepository;
         private readonly IIndustryRepository _industryRepository;
+        private readonly IProductRepository productRepository;
+        private readonly ITaxRepository taxRepository;
+        private readonly IInvoiceRepository invoiceRepository;
+        private readonly IInvoiceDetailRepository invoiceDetailRepository;
+        #region Private Funcs
+        private ApplicationUserManager UserManager
+        {
+            get { return HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
+        }
+        private string[] SaveImages(AdCampaign campaign)
+        {
+            string[] savePaths = new string[2];
+            string directoryPath = HttpContext.Current.Server.MapPath("~/SMD_Content/AdCampaign/" + campaign.CampaignId);
+
+            if (directoryPath != null && !Directory.Exists(directoryPath))
+            {
+                Directory.CreateDirectory(directoryPath);
+            }
+            if (!string.IsNullOrEmpty(campaign.CampaignImagePath) && !campaign.CampaignImagePath.Contains("CampaignDefaultImage"))
+            {
+                string base64 = campaign.CampaignImagePath.Substring(campaign.CampaignImagePath.IndexOf(',') + 1);
+                base64 = base64.Trim('\0');
+                byte[] data = Convert.FromBase64String(base64);
+                string savePath = directoryPath + "\\CampaignDefaultImage.jpg";
+                File.WriteAllBytes(savePath, data);
+                int indexOf = savePath.LastIndexOf("SMD_Content", StringComparison.Ordinal);
+                savePath = savePath.Substring(indexOf, savePath.Length - indexOf);
+                savePaths[0] = savePath;
+            }
+            if (campaign.Type == 3)
+            {
+                if (!string.IsNullOrEmpty(campaign.CampaignTypeImagePath) && !campaign.CampaignTypeImagePath.Contains("CampaignTypeDefaultImage"))
+                {
+                    string base64 = campaign.CampaignTypeImagePath.Substring(campaign.CampaignTypeImagePath.IndexOf(',') + 1);
+                    base64 = base64.Trim('\0');
+                    byte[] data = Convert.FromBase64String(base64);
+
+                    if (directoryPath != null && !Directory.Exists(directoryPath))
+                    {
+                        Directory.CreateDirectory(directoryPath);
+                    }
+                    string savePath = directoryPath + "\\CampaignTypeDefaultImage.jpg";
+                    File.WriteAllBytes(savePath, data);
+                    int indexOf = savePath.LastIndexOf("SMD_Content", StringComparison.Ordinal);
+                    savePath = savePath.Substring(indexOf, savePath.Length - indexOf);
+                    savePaths[1] = savePath;
+                }
+
+            }
+            return savePaths;
+        }
+
+        /// <summary>
+        /// Get Stripe Customer by User Id
+        /// </summary>
+        private User GetUserByUserId(string email)
+        {
+            User user = UserManager.FindById(email);
+            if (user == null)
+            {
+                throw new SMDException("No such user with provided user Id!");
+            }
+
+            return user;
+        }
+
+        /// <summary>
+        /// Stripe Payment Work
+        /// </summary>
+        private string CreateChargeWithCustomerId(int? amount, string customerId)
+        {
+            // Verify If Credit Card is not expired
+            var customerService = new StripeCustomerService();
+            var customer = customerService.Get(customerId);
+            if (customer == null)
+            {
+                throw new SMDException("Customrt Not Found!");
+            }
+
+            // If Card has been expired then skip payment
+            if (customer.SourceList != null && customer.SourceList.Data != null && customer.DefaultSourceId != null)
+            {
+                var defaultStripeCard = customer.SourceList.Data.FirstOrDefault(card => card.Id == customer.DefaultSourceId);
+                if (defaultStripeCard != null && (Convert.ToInt32(defaultStripeCard.ExpirationMonth) < DateTime.Now.Month ||
+                    Convert.ToInt32(defaultStripeCard.ExpirationYear) < DateTime.Now.Year))
+                {
+                    throw new SMDException("Card Expired!");
+                }
+            }
+
+            var stripeChargeCreateOptions = new StripeChargeCreateOptions
+            {
+                CustomerId = customerId,
+                Amount = amount,
+                Currency = "usd",
+                Capture = true
+                // (not required) set this to false if you don't want to capture the charge yet - requires you call capture later
+            };
+            var chargeService = new StripeChargeService();
+            var resposne = chargeService.Create(stripeChargeCreateOptions);
+            if (resposne.Status == "succeeded")
+            {
+                return resposne.BalanceTransactionId;
+            }
+            return "failed";
+        }
+
+        #endregion
+
         #endregion
         #region Constructor
 
@@ -47,7 +162,7 @@ namespace SMD.Implementation.Services
             IAdCampaignTargetCriteriaRepository adCampaignTargetCriteriaRepository,
             IProfileQuestionRepository profileQuestionRepository,
             IProfileQuestionAnswerRepository profileQuestionAnswerRepository,
-            ISurveyQuestionRepository surveyQuestionRepository)
+            ISurveyQuestionRepository surveyQuestionRepository, IProductRepository productRepository, ITaxRepository taxRepository, IInvoiceRepository invoiceRepository, IInvoiceDetailRepository invoiceDetailRepository)
         {
             this._adCampaignRepository = adCampaignRepository;
             this._languageRepository = languageRepository;
@@ -59,6 +174,10 @@ namespace SMD.Implementation.Services
             this._profileQuestionRepository = profileQuestionRepository;
             this._profileQuestionAnswerRepository = profileQuestionAnswerRepository;
             this._surveyQuestionRepository = surveyQuestionRepository;
+            this.productRepository = productRepository;
+            this.taxRepository = taxRepository;
+            this.invoiceRepository = invoiceRepository;
+            this.invoiceDetailRepository = invoiceDetailRepository;
             this._industryRepository = industryRepository;
         }
      
@@ -277,6 +396,9 @@ namespace SMD.Implementation.Services
                     dbAd.ApprovedBy = _adCampaignRepository.LoggedInUserIdentity;
                     dbAd.Status = (Int32) AdCampaignStatus.Live;
                     emailManagerService.SendQuestionApprovalEmail(dbAd.UserId);
+                    
+                    // Stripe payment + Invoice Generation
+                    MakeStripePaymentandAddInvoiceForCampaign(dbAd);
                 }
                 // Rejection 
                 else
@@ -295,7 +417,73 @@ namespace SMD.Implementation.Services
             return new AdCampaign();
         }
 
-            /// <summary>
+
+        /// <summary>
+        /// Makes Payment From Stripe & Add Invoice | baqer
+        /// </summary>
+        private void MakeStripePaymentandAddInvoiceForCampaign(AdCampaign source)
+        {
+            #region Stripe Payment
+
+            // User who added Campaign for approval 
+            var user = GetUserByUserId(source.UserId);
+            // Get Current Product
+            var product = productRepository.GetProductByCountryId(user.CountryId, "Ad");
+            // Tax Applied
+            var tax = taxRepository.GetTaxByCountryId(user.CountryId);
+            // Total includes tax
+            var amount = product.SetupPrice + tax.TaxValue;
+           
+            // Make Stripe actual payment 
+            var response = CreateChargeWithCustomerId((int?)amount, user.StripeCustomerId);
+
+            #endregion
+            if (response != "failed")
+            {
+                #region Add Invoice
+
+                // Add invoice data
+                var invoice = new Invoice
+                {
+                    Country = user.CountryId.ToString(),   
+                    Total = (double)amount,
+                    NetTotal = (double)amount,
+                    InvoiceDate = DateTime.Now,
+                    InvoiceDueDate = DateTime.Now.AddDays(7),
+                    Address1 = user.CountryId.ToString(), 
+                    UserId = user.Id,
+                    CompanyName = "My Company",
+                    CreditCardRef = response
+                };
+                invoiceRepository.Add(invoice);
+
+                #endregion
+                #region Add Invoice Detail
+
+                // Add Invoice Detail Data 
+                var invoiceDetail = new InvoiceDetail
+                {
+                    InvoiceId = invoice.InvoiceId,
+                    SqId = null,
+                    ProductId = product.ProductId,
+                    ItemName = "Ad Campaign",
+                    ItemAmount = (double)amount,
+                    ItemTax = (double)tax.TaxValue,
+                    ItemDescription = "This is description!",
+                    ItemGrossAmount = (double)amount,
+                    CampaignId = source.CampaignId,
+
+                };
+                invoiceDetailRepository.Add(invoiceDetail);
+                invoiceDetailRepository.SaveChanges();
+
+                #endregion
+            }
+        }
+
+      
+
+        /// <summary>
         /// Get profile questions 
         /// </summary>
         public AdCampaignBaseResponse GetProfileQuestionData()
@@ -342,51 +530,6 @@ namespace SMD.Implementation.Services
 
         #endregion
 
-        #region Private
-
-        private string[] SaveImages(AdCampaign campaign)
-        {
-            string[] savePaths = new string[2];
-            string directoryPath = HttpContext.Current.Server.MapPath("~/SMD_Content/AdCampaign/" + campaign.CampaignId);
-
-            if (directoryPath != null && !Directory.Exists(directoryPath) )
-            {
-                Directory.CreateDirectory(directoryPath);
-            }
-            if (!string.IsNullOrEmpty(campaign.CampaignImagePath) && !campaign.CampaignImagePath.Contains("CampaignDefaultImage"))
-            {
-                string base64 = campaign.CampaignImagePath.Substring(campaign.CampaignImagePath.IndexOf(',') + 1);
-                base64 = base64.Trim('\0');
-                byte[] data = Convert.FromBase64String(base64);
-                string savePath = directoryPath + "\\CampaignDefaultImage.jpg";
-                File.WriteAllBytes(savePath, data);
-                int indexOf = savePath.LastIndexOf("SMD_Content", StringComparison.Ordinal);
-                savePath = savePath.Substring(indexOf, savePath.Length - indexOf);
-                savePaths[0] = savePath;
-            }
-            if (campaign.Type == 3)
-            {
-                if (!string.IsNullOrEmpty(campaign.CampaignTypeImagePath) && !campaign.CampaignTypeImagePath.Contains("CampaignTypeDefaultImage"))
-                {
-                    string base64 = campaign.CampaignTypeImagePath.Substring(campaign.CampaignTypeImagePath.IndexOf(',') + 1);
-                    base64 = base64.Trim('\0');
-                    byte[] data = Convert.FromBase64String(base64);
-
-                    if (directoryPath != null && !Directory.Exists(directoryPath))
-                    {
-                        Directory.CreateDirectory(directoryPath);
-                    }
-                    string savePath = directoryPath + "\\CampaignTypeDefaultImage.jpg";
-                    File.WriteAllBytes(savePath, data);
-                    int indexOf = savePath.LastIndexOf("SMD_Content", StringComparison.Ordinal);
-                    savePath = savePath.Substring(indexOf, savePath.Length - indexOf);
-                    savePaths[1] = savePath;
-                }
-              
-            }
-            return savePaths;
-        }
-
-        #endregion
+       
     }
 }

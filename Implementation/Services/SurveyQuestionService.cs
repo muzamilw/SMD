@@ -82,6 +82,68 @@ namespace SMD.Implementation.Services
             }
             return savePaths;
         }
+
+        /// <summary>
+        /// Makes Payment From Stripe & Add Invoice | baqer
+        /// </summary>
+        private void MakeStripePaymentandAddInvoice(SurveyQuestion source)
+        {
+            #region Stripe Payment
+
+            // Get Current Product
+            var product = productRepository.GetProductByCountryId(source.CountryId, "SQ");
+            // Tax Applied
+            var tax = taxRepository.GetTaxByCountryId(source.CountryId);
+            // Total includes tax
+            var amount = product.SetupPrice + tax.TaxValue;
+            // User who added Survey Question for approval 
+            var user = GetUserByUserId(source.UserId);
+            // Make Stripe actual payment 
+            var response = CreateChargeWithCustomerId((int?)amount, user.StripeCustomerId);
+
+            #endregion
+            if (response != "failed")
+            {
+                #region Add Invoice
+
+                // Add invoice data
+                var invoice = new Invoice
+                {
+                    Country = source.Country.CountryName,
+                    Total = (double)amount,
+                    NetTotal = (double)amount,
+                    InvoiceDate = DateTime.Now,
+                    InvoiceDueDate = DateTime.Now.AddDays(7),
+                    Address1 = source.Country.CountryName,
+                    UserId = user.Id,
+                    CompanyName = "My Company",
+                    CreditCardRef = response
+                };
+                invoiceRepository.Add(invoice);
+
+                #endregion
+                #region Add Invoice Detail
+
+                // Add Invoice Detail Data 
+                var invoiceDetail = new InvoiceDetail
+                {
+                    InvoiceId = invoice.InvoiceId,
+                    SqId = source.SqId,
+                    ProductId = product.ProductId,
+                    ItemName = "Survey Question",
+                    ItemAmount = (double)amount,
+                    ItemTax = (double)tax.TaxValue,
+                    ItemDescription = "This is description!",
+                    ItemGrossAmount = (double)amount,
+                    CampaignId = null,
+
+                };
+                invoiceDetailRepository.Add(invoiceDetail);
+                invoiceDetailRepository.SaveChanges();
+
+                #endregion
+            }
+        }
         #endregion
 
         #region Constructor
@@ -347,66 +409,7 @@ namespace SMD.Implementation.Services
             return surveyQuestionRepository.GetAudienceCount(request);
         }
 
-        /// <summary>
-        /// Makes Payment From Stripe & Add Invoice | baqer
-        /// </summary>
-        private void MakeStripePaymentandAddInvoice(SurveyQuestion source)
-        {
-            #region Stripe Payment
-            // Get Current Product
-            var product = productRepository.GetProductByCountryId(source.CountryId, "SQ");
-            // Tax Applied
-            var tax = taxRepository.GetTaxByCountryId(source.CountryId);
-            // Total includes tax
-            var amount = product.SetupPrice + tax.TaxValue;
-            // User who added Survey Question for approval 
-            var user = GetUserByUserId(source.UserId);
-            // Make Stripe actual payment 
-            var response = CreateChargeWithCustomerId((int?)amount, user.StripeCustomerId);
-
-            #endregion
-            if (response!="failed")
-            {
-                #region Add Invoice
-
-                // Add invoice data
-                var invoice = new Invoice
-                {
-                    Country = source.Country.CountryName,
-                    Total = (double)amount,
-                    NetTotal = (double)amount,
-                    InvoiceDate = DateTime.Now,
-                    InvoiceDueDate = DateTime.Now.AddDays(7),
-                    Address1 = source.Country.CountryName,
-                    UserId = user.Id,
-                    CompanyName = "My Company",
-                    CreditCardRef = response
-                };
-                invoiceRepository.Add(invoice);
-
-                #endregion
-                #region Add Invoice Detail
-
-                // Add Invoice Detail Data 
-                var invoiceDetail = new InvoiceDetail
-                {
-                    InvoiceId = invoice.InvoiceId,
-                    SqId = source.SqId,
-                    ProductId = product.ProductId,
-                    ItemName = "Survey Question",
-                    ItemAmount = (double)amount,
-                    ItemTax = (double)tax.TaxValue,
-                    ItemDescription = "This is description!",
-                    ItemGrossAmount = (double)amount,
-                    CampaignId = null,
-
-                };
-                invoiceDetailRepository.Add(invoiceDetail);
-                invoiceDetailRepository.SaveChanges();
-
-                #endregion
-            }
-        }
+        
 
         /// <summary>
         /// Get Stripe Customer by User Id
