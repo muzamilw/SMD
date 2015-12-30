@@ -379,7 +379,7 @@
 
                                             <label for="txtVerifyQuestion" class="control-label text-right tooltip-float">&nbsp;&nbsp;&nbsp;&nbsp;</label>
                                         </div>
-                                     
+
                                     </div>
                                     <div class="clearfix col-lg-9">
                                         <header class="main-box-header clearfix" style="padding-right:0px;">
@@ -541,16 +541,95 @@
                                         <div class="clearfix">
 
 
-                                            <div class="col-lg-12">
+                                            <div style="position:relative;">
 
-                                                <div style="width:210px;text-align:center;">
-                                                    <img src="/Content/Images/Company_Default.png">
+                                                <div class="aud_cnt">
+                                                    <h4 class="ad_h4">Audience Definition</h4>
+
+                                                    <div class="clearfix _1gab VAGUE">
+                                                        <div class="_1g9- lfloat">
+                                                            <div class="_1g9_">
+                                                                <i class="_1ga0 broad_aud img sp_NQc91B1T0mb sx_f05cb6 meterPin"></i>
+                                                                <i class="_1ga1 img sp_NQc91B1T0mb3 sx_0eeab0"></i>
+                                                                <div class="_1ga2 clearfix">
+                                                                    <div class="_ohe lfloat">
+                                                                        <span class="_1ga3">Specific</span>
+                                                                    </div>
+                                                                    <div class="_ohf rfloat">
+                                                                        <span class="_1ga3">Broad</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="rfloat fsm _1ga4">
+                                                            <p data-bind="visible: $root.getAudienceReachMode()  == 1">Your audience selection is fairly broad.</p>
+                                                            <p data-bind="visible: $root.getAudienceReachMode()  == 2">Your audience is defined.</p>
+                                                            <p data-bind="visible: $root.getAudienceReachMode()  == 3">Your audience is too specific for your ads to be shown. Try making it broader.</p>
+                                                        </div>
+                                                        <div class="clearfix">
+                                                            &nbsp;
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <span class="ad_h4_noborder">Audience Details:</span>
+                                                        <ul>
+                                                            <li class="li-audul" data-bind="visible: $root.selectedQuestion().SurveyQuestionTargetLocation().length > 0" style="display: none;">
+                                                                <div class="fsm_bold">Locations:</div>
+
+                                                                <ul class="pad-11">
+                                                                    <!-- ko template: { name: 'targetLocationAudienceTemplate' , foreach: SurveyQuestionTargetLocation } --><!-- /ko -->
+                                                                </ul>
+                                                            </li>
+                                                            <li class="li-audul" data-bind="visible: $root.visibleTargetAudience(4)  == 1" style="display: none;">
+                                                                <div class="fsm_bold">Industries:</div>
+                                                                <ul class="pad-11">
+                                                                    <!-- ko template: { name: 'targetIndustryAudienceTemplate' , foreach: SurveyQuestionTargetCriteria } --><!-- /ko -->
+
+                                                                </ul>
+                                                            </li>
+                                                            <li class="li-audul" data-bind="visible: $root.visibleTargetAudience(3)  == 1" style="display: none;">
+                                                                <div class="fsm_bold">Languages:</div>
+                                                                <ul class="pad-11">
+                                                                    <!-- ko template: { name: 'targetLanguageAudienceTemplate' , foreach: SurveyQuestionTargetCriteria } --><!-- /ko -->
+
+                                                                </ul>
+                                                            </li>
+                                                            <li class="li-audul" data-bind="visible: $root.visibleTargetAudience(1) == 1 || $root.visibleTargetAudience(2)  == 1" style="display: none;">
+                                                                <div class="fsm_bold">ADDITIONAL TARGETING CRITERIA'S:</div>
+
+                                                                <ul class="pad-11">
+                                                                    <!-- ko template: { name: 'targetCriteriasAudienceTemplate', foreach: SurveyQuestionTargetCriteria } --><!-- /ko -->
+                                                                </ul>
+                                                            </li>
+
+                                                            <li class="li-audul">
+                                                                <div class="fsm_bold">Age:</div>
+                                                                <ul class="pad-11">
+                                                                    <li>
+                                                                        <span data-bind="text: $root.selectedQuestion().AgeRangeStart() +' - '+ $root.selectedQuestion().AgeRangeEnd()">13 - 13</span>
+                                                                    </li>
+                                                                </ul>
+                                                            </li>
+                                                            <li class="li-audul">
+                                                                <div class="fsm_bold">Gender:</div>
+                                                                <ul class="pad-11">
+                                                                    <li>
+                                                                        <!--ko if:$root.selectedQuestion().Gender() == 1 -->
+                                                                        <span class="aud_licontent">All</span><!--/ko-->
+                                                                        <!--ko if:$root.selectedQuestion().Gender() == 2 -->
+                                                                        <span class="aud_licontent">Men</span>
+                                                                        <!--/ko-->
+                                                                        <!--ko if:$root.selectedQuestion().Gender() == 3 -->
+                                                                        <span class="aud_licontent">Women</span><!--/ko-->
+
+                                                                    </li>
+                                                                </ul>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <div>Potential Reach: <span data-bind="text:$root.reachedAudience()">0</span> people</div>
+
                                                 </div>
-
-                                            </div>
-
-                                            <div class="col-lg-12" style="margin-top:15px;text-align:center;width:240px;padding-right:0px;">
-                                                <label> Potential Reach Table will go here </label>
                                             </div>
 
                                         </div>
@@ -564,7 +643,7 @@
 
                                 <!--selection criteria templata-->
 
-                               
+
                             </div>
                             <div class=" text-center">
                                 <label data-bind="text:'Modification date : '+ ModifiedDate() , visible: ModifiedDate() != undefined">   </label>
@@ -731,4 +810,124 @@
     </tr>
 
     <!--/ko-->
+</script>
+<script id="targetCriteriasAudienceTemplate" type="text/html">
+    <!--ko if:Type() != 3 && Type() != 4 -->
+    <!--ko if:IncludeorExclude() == '0' -->
+    <li>
+        <!-- ko if:   Type() == "1" -->
+        <p class="aud_licontent" data-bind="text: '(Excluded) ' + questionString() + ' = ' + answerString()">
+        </p>
+        <!-- /ko -->
+        <!-- ko if:   Type()  == "2" -->
+        <p class="aud_licontent">
+            <span data-bind="text: '(Excluded) ' +  questionString() + ' = ' "></span>
+            <img data-bind="attr:{src: answerString()}" width="80" />
+        </p>
+        <!-- /ko -->
+    </li>
+    <!--/ko-->
+    <!--ko if:IncludeorExclude() == '1'-->
+    <li>
+        <!-- ko if:   Type() == "1" -->
+        <p class="aud_licontent" data-bind="text: '(Included) ' + questionString() + ' = ' + answerString()">
+        </p>
+        <!-- /ko -->
+        <!-- ko if:   Type()  == "2" -->
+        <p class="aud_licontent">
+            <span data-bind="text: '(Included) ' + questionString() + ' = ' "></span>
+            <img data-bind="attr:{src: answerString()}" width="80" />
+        </p>
+        <!-- /ko -->
+    </li>
+    <!--/ko-->
+    <!--/ko-->
+</script>
+<script id="targetIndustryAudienceTemplate" type="text/html">
+
+    <!--ko if:Type() == 4 -->
+    <li>
+        <!--ko if:IncludeorExclude() == '1'-->
+        <span class="aud_licontent" data-bind="text:'(Included)' + Industry() "></span>
+        <!--/ko-->
+        <!--ko if:IncludeorExclude() == '0' -->
+        <span class="aud_licontent" data-bind="text:'(Excluded)' + Industry() "></span>
+        <!--/ko-->
+    </li>
+    <!--/ko-->
+
+
+</script>
+<script id="targetLanguageAudienceTemplate" type="text/html">
+
+
+    <!--ko if:Type() == 3 -->
+    <li>
+        <!--ko if:IncludeorExclude() == '1'-->
+        <span class="aud_licontent" data-bind="text:'(Included)' + Language()"></span>
+        <!--/ko-->
+        <!--ko if:IncludeorExclude() == '0' -->
+        <span class="aud_licontent" data-bind="text:'(Excluded)' + Language() "></span>
+        <!--/ko-->
+    </li>
+    <!--/ko-->
+
+
+
+</script>
+<script id="targetLocationAudienceTemplate" type="text/html">
+    <li>
+        <!--ko if:CityID() == 0 || CityID() == null-->
+        <!--ko if:Radius() != 0 && Radius() != null && Radius() != undefined-->
+        <!--ko if:IncludeorExclude() == '1'-->
+
+        <span class="aud_licontent" data-bind="text:'Included (' + Radius() +') ' + Country()"></span>
+
+        <!--/ko-->
+        <!--ko if:IncludeorExclude() == '0' -->
+
+        <span class="aud_licontent" data-bind="text:'Excluded (' + Radius() +') ' + Country()"></span>
+
+        <!--/ko-->
+        <!--/ko-->
+        <!--ko if:Radius() == null || Radius() == undefined-->
+        <!--ko if:IncludeorExclude() == '1'-->
+
+        <span class="aud_licontent" data-bind="text:'(Included) ' + Country()"></span>
+
+        <!--/ko-->
+        <!--ko if:IncludeorExclude() == '0' -->
+
+        <span class="aud_licontent" data-bind="text:'(Excluded) ' + Country()"></span>
+
+        <!--/ko-->
+        <!--/ko-->
+        <!--/ko-->
+        <!--ko if:CityID() != 0 && CityID() != null-->
+        <!--ko if:Radius() != 0 && Radius() != null && Radius() != undefined-->
+        <!--ko if:IncludeorExclude() == '1'-->
+
+        <span class="aud_licontent" data-bind="text:'Included (' + Radius() +') ' + City() "></span>
+
+        <!--/ko-->
+        <!--ko if:IncludeorExclude() == '0' -->
+
+        <span class="aud_licontent" data-bind="text:'Excluded (' + Radius() +') ' + City()"></span>
+
+        <!--/ko-->
+        <!--/ko-->
+        <!--ko if:Radius() == null || Radius() == undefined-->
+        <!--ko if:IncludeorExclude() == '1'-->
+
+        <span class="aud_licontent" data-bind="text:'(Included) ' + City() "></span>
+
+        <!--/ko-->
+        <!--ko if:IncludeorExclude() == '0' -->
+
+        <span class="aud_licontent" data-bind="text:'(Excluded) ' + City()"></span>
+
+        <!--/ko-->
+        <!--/ko-->
+        <!--/ko-->
+    </li>
 </script>

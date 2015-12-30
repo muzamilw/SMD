@@ -42,7 +42,11 @@ define("survey/survey.viewModel",
                     isNewCriteria = ko.observable(true),
                     canSubmitForApproval = ko.observable(true),
                     // age list 
-                    ageRange = ko.observableArray([])
+                    ageRange = ko.observableArray([]),
+                    //audience reach
+                    reachedAudience = ko.observable(0),
+                    //total audience
+                    totalAudience = ko.observable(0),
                     //Get Questions
                     getQuestions = function () {   
                         dataservice.searchSurveyQuestions(
@@ -149,6 +153,7 @@ define("survey/survey.viewModel",
                         selectedQuestion().Status(1);
                         selectedQuestion().reset();
                         selectedQuestion().SurveyQuestionTargetCriteria([]);
+                       
                         isEditorVisible(true);
                         canSubmitForApproval(true);
                         view.initializeTypeahead();
@@ -174,6 +179,7 @@ define("survey/survey.viewModel",
                                        selectedQuestion(model.Survey.Create(updateSurveryItem(data.SurveyQuestion)));
                                        selectedQuestion().reset();
                                        view.initializeTypeahead();
+                                       getAudienceCount();
                                        // load survey questions
                                        if (surveyQuestionList().length == 0) {
                                            dataservice.getBaseData({
@@ -405,6 +411,7 @@ define("survey/survey.viewModel",
 
                         }
                         isShowSurveyAns(false);
+                        //getAudienceCount();
                     },
                     onEditCriteria = function (item) {
                         isNewCriteria(false);
@@ -445,7 +452,7 @@ define("survey/survey.viewModel",
                             selectedCriteria().surveyQuestRightImageSrc(matchSurveyQuestion.RightPicturePath);
                             isShowSurveyAns(true);
                         }
-
+                      //  getAudienceCount();
                     },
                     // Delete Handler PQ
                     onDeleteCriteria = function (item) {
@@ -525,6 +532,192 @@ define("survey/survey.viewModel",
                             }
                         });
                     }
+                    getAudienceCount = function () {
+                        var countryIds = '', cityIds = '', countryIdsExcluded = '', cityIdsExcluded = '';
+                        _.each(selectedQuestion().SurveyQuestionTargetLocation(), function (item) {
+                            if(item.CityID() == 0 || item.CityID() == null)
+                            {
+                                if(item.IncludeorExclude() == '0')
+                                {
+                                    if(countryIdsExcluded == '')
+                                    {
+                                        countryIdsExcluded += item.CountryId();
+                                    } else {
+                                        countryIdsExcluded += ','+ item.CountryId();
+                                    }
+                                } else {
+                                    if (countryIds == '') {
+                                        countryIds += item.CountryId();
+                                    } else {
+                                        countryIds += ',' + item.CountryId();
+                                    }
+                                }
+                            } else {
+                                if (item.IncludeorExclude() == '0') {
+                                    if (cityIdsExcluded == '') {
+                                        cityIdsExcluded += item.CityID();
+                                    } else {
+                                        cityIdsExcluded += ',' + item.CityID();
+                                    }
+                                } else {
+                                    if (cityIds == '') {
+                                        cityIds += item.CityID();
+                                    } else {
+                                        cityIds += ',' + item.CityID();
+                                    }
+                                }
+                            }
+                        });
+                        var languageIds = '', industryIds = '', languageIdsExcluded = '',
+                            industryIdsExcluded = '', profileQuestionIds = '', profileAnswerIds = '',
+                            surveyQuestionIds = '', surveyAnswerIds = '', profileQuestionIdsExcluded = '', profileAnswerIdsExcluded = '',
+                            surveyQuestionIdsExcluded = '', surveyAnswerIdsExcluded = '';
+                        _.each(selectedQuestion().SurveyQuestionTargetCriteria(), function (item) {
+                            if (item.Type() == 1) {
+                                if (item.IncludeorExclude() == '0') {
+                                    if (profileQuestionIdsExcluded == '') {
+                                        profileQuestionIdsExcluded += item.PQID();
+                                    } else {
+                                        profileQuestionIdsExcluded += ',' + item.PQID();
+                                    }
+                                    if (profileAnswerIdsExcluded == '') {
+                                        profileAnswerIdsExcluded += item.PQAnswerID();
+                                    } else {
+                                        profileAnswerIdsExcluded += ',' + item.PQAnswerID();
+                                    }
+                                } else {
+                                    if (profileQuestionIds == '') {
+                                        profileQuestionIds += item.PQID();
+                                    } else {
+                                        profileQuestionIds += ',' + item.PQID();
+                                    }
+                                    if (profileAnswerIds == '') {
+                                        profileAnswerIds += item.PQAnswerID();
+                                    } else {
+                                        profileAnswerIds += ',' + item.PQAnswerID();
+                                    }
+                                }
+                            } else if (item.Type() == 2) {
+                                if (item.IncludeorExclude() == '0') {
+                                    if (surveyQuestionIdsExcluded == '') {
+                                        surveyQuestionIdsExcluded += item.LinkedSQID();
+                                    } else {
+                                        surveyQuestionIdsExcluded += ',' + item.LinkedSQID();
+                                    }
+                                    if (surveyAnswerIdsExcluded == '') {
+                                        surveyAnswerIdsExcluded += item.LinkedSQAnswer();
+                                    } else {
+                                        surveyAnswerIdsExcluded += ',' + item.LinkedSQAnswer();
+                                    }
+                                } else {
+                                    if (surveyQuestionIds == '') {
+                                        surveyQuestionIds += item.LinkedSQID();
+                                    } else {
+                                        surveyQuestionIds += ',' + item.LinkedSQID();
+                                    }
+                                    if (surveyAnswerIds == '') {
+                                        surveyAnswerIds += item.LinkedSQAnswer();
+                                    } else {
+                                        surveyAnswerIds += ',' + item.LinkedSQAnswer();
+                                    }
+                                }
+                            } else if (item.Type() == 3) {
+                                if(item.IncludeorExclude() == '0')
+                                {
+                                    if (languageIdsExcluded == '') {
+                                        languageIdsExcluded += item.LanguageID();
+                                    } else {
+                                        languageIdsExcluded += ',' + item.LanguageID();
+                                    }
+                                } else {
+                                    if (languageIds == '') {
+                                        languageIds += item.LanguageID();
+                                    } else {
+                                        languageIds += ',' + item.LanguageID();
+                                    }
+                                }
+                            } else if (item.Type() == 4) {
+                                if (item.IncludeorExclude() == '0') {
+                                    if (industryIdsExcluded == '') {
+                                        industryIdsExcluded += item.IndustryID();
+                                    } else {
+                                        industryIdsExcluded += ',' + item.IndustryID();
+                                    }
+                                } else {
+                                    if (industryIds == '') {
+                                        industryIds += item.IndustryID();
+                                    } else {
+                                        industryIds += ',' + item.IndustryID();
+                                    }
+                                }
+                            }
+                        });
+                        var surveyData = {
+                            ageFrom: selectedQuestion().AgeRangeStart(),
+                            ageTo: selectedQuestion().AgeRangeEnd(),
+                            gender: selectedQuestion().Gender(),
+                            countryIds: countryIds,
+                            cityIds: cityIds,
+                            languageIds: languageIds,
+                            industryIds: industryIds,
+                            profileQuestionIds: profileQuestionIds,
+                            profileAnswerIds: profileAnswerIds,
+                            surveyQuestionIds: surveyQuestionIds,
+                            surveyAnswerIds: surveyAnswerIds,
+                            countryIdsExcluded: countryIdsExcluded,
+                            cityIdsExcluded: cityIdsExcluded,
+                            languageIdsExcluded: languageIdsExcluded,
+                            industryIdsExcluded: industryIdsExcluded,
+                            profileQuestionIdsExcluded: profileQuestionIdsExcluded,
+                            profileAnswerIdsExcluded: profileAnswerIdsExcluded,
+                            surveyQuestionIdsExcluded: surveyQuestionIdsExcluded,
+                            surveyAnswerIdsExcluded: surveyAnswerIdsExcluded
+                        };
+                        dataservice.getAudienceData(surveyData, {
+                            success: function (data) {
+                                reachedAudience(data.MatchingUsers);
+                                totalAudience(data.AllUsers);
+                                if (getAudienceReachMode() == 1) {
+                                    $(".meterPin").removeClass("spec_aud").removeClass("defined_aud").removeClass("broad_aud").addClass("spec_aud");
+                                } else if (getAudienceReachMode() == 2) {
+                                    $(".meterPin").removeClass("spec_aud").removeClass("defined_aud").removeClass("broad_aud").addClass("defined_aud");
+                                } else if (getAudienceReachMode() == 3) {
+                                    $(".meterPin").removeClass("spec_aud").removeClass("defined_aud").removeClass("broad_aud").addClass("broad_aud");
+                                }
+                            },
+                            error: function (response) {
+                                toastr.error("Error while getting audience count.");
+                            }
+                        });
+                    },
+                     visibleTargetAudience = function (mode) {
+
+                         if (mode != undefined) {
+                            
+                             var matcharry = ko.utils.arrayFirst(selectedQuestion().SurveyQuestionTargetCriteria(), function (item) {
+
+                                 return item.Type() == mode;
+                             });
+
+                             if (matcharry != null) {
+                                 return 1;
+                             } else {
+                                 return 0;
+                             }
+                         } else {
+                             return 0;
+                         }
+                     },
+                    getAudienceReachMode = function () {
+                        var percent = reachedAudience() / totalAudience();
+                        if (percent < 20) {
+                            return 1;
+                        } else if (percent < 70) {
+                            return 2;
+                        } else {
+                            return 3;
+                        }
+                    },
                     // Initialize the view model
                     initialize = function (specifiedView) {
                         view = specifiedView;
@@ -593,7 +786,12 @@ define("survey/survey.viewModel",
                     onSubmitSurveyQuestion: onSubmitSurveyQuestion,
                     canSubmitForApproval:canSubmitForApproval,
                     titleText: titleText,
-                    onRemoveIndustry: onRemoveIndustry
+                    onRemoveIndustry: onRemoveIndustry,
+                    getAudienceCount: getAudienceCount,
+                    visibleTargetAudience: visibleTargetAudience,
+                    totalAudience: totalAudience,
+                    reachedAudience: reachedAudience,
+                    getAudienceReachMode: getAudienceReachMode
                 };
             })()
         };
