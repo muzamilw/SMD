@@ -140,6 +140,7 @@ namespace SMD.Repository.Repositories
                             LocationClausePrice = prod.LocationClausePrice,
                             OtherClausePrice = prod.OtherClausePrice,
                             ProfessionClausePrice = prod.ProfessionClausePrice
+                           
                         };
 
             return query.FirstOrDefault();
