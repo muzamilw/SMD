@@ -615,7 +615,8 @@ define("ads/ads.viewModel",
                                         isEditCampaign(true);
                                         isEditorVisible(true);
                                        
-
+                                        var profileQIds = [];
+                                        var surveyQIds = [];
                                         if (campaignModel().AdCampaignTargetLocations() != null || campaignModel().AdCampaignTargetLocations().length > 0) {
                                             if (UserAndCostDetail().LocationClausePrice != null && isLocationPerClickPriceAdded() == false) {
                                                 pricePerclick(pricePerclick() + UserAndCostDetail().LocationClausePrice);
@@ -634,7 +635,7 @@ define("ads/ads.viewModel",
                                         _.each(data.campaignModel().AdCampaignTargetCriterias(), function (item) {
 
                                             if (item.Type() == "1") { // profile
-
+                                                //profileQIds.
                                             }
                                             if (item.Type() == "2") { // survey
 
