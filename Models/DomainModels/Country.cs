@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using SMD.Models.IdentityModels;
+using System.Collections.Generic;
 
 namespace SMD.Models.DomainModels
 {
@@ -17,5 +18,7 @@ namespace SMD.Models.DomainModels
         public virtual ICollection<City> Cities { get; set; }
         public virtual ICollection<Product> Products { get; set; }
         public virtual ICollection<Tax> Taxes { get; set; }
+
+        public virtual ICollection<User> AspNetUsers { get; set; }
     }
 }
