@@ -162,4 +162,10 @@
         Language = 3,
         Industry = 4
     }
+    public enum ProductCode
+    {
+        SurveyQuestion = 1,
+        AdApproval = 2,
+        DownloadReport = 3
+    }
 }

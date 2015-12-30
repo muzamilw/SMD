@@ -158,7 +158,8 @@ namespace SMD.MIS.ModelMappers
             {
                 TotalCount = source.TotalCount,
                 Campaigns = source.Campaign.Select(campaign => campaign.CreateFrom()),
-                LanguageDropdowns = source.Languages.Select(lang => lang.CreateFrom())
+                //LanguageDropdowns = source.Languages.Select(lang => lang.CreateFrom()),
+                //UserAndCostDetails = source.UserAndCostDetails.CreateFrom()
             };
         }
 
@@ -191,7 +192,7 @@ namespace SMD.MIS.ModelMappers
                 Description = source.Description,
                 LandingPageVideoLink = source.LandingPageVideoLink,
                 VerifyQuestion = source.VerifyQuestion,
-                Type = source.Type
+                Type = source.AdType
             };
         }
 
@@ -319,6 +320,45 @@ namespace SMD.MIS.ModelMappers
                 Radius = source.Radius,
                 City = CName,
                 Country = CountName
+            };
+        }
+
+
+        /// <summary>
+        /// User Cost and detail
+        /// </summary>
+        public static SMD.MIS.Areas.Api.Models.UserAndCostDetail CreateFrom(this SMD.Models.Common.UserAndCostDetail source)
+        {
+
+
+            return new SMD.MIS.Areas.Api.Models.UserAndCostDetail
+            {
+                AgeClausePrice = source.AgeClausePrice,
+                CityId = source.CityId,
+                CountryId = source.CountryId,
+                EducationClausePrice = source.EducationClausePrice,
+                EducationId = source.EducationId,
+                GenderClausePrice = source.GenderClausePrice,
+                IndustryId = source.IndustryId,
+                LanguageId = source.LanguageId,
+                LocationClausePrice = source.LocationClausePrice,
+                OtherClausePrice = source.OtherClausePrice,
+                ProfessionClausePrice = source.ProfessionClausePrice,
+                
+            };
+
+
+        }
+        /// <summary>
+        /// Domain Search Response to Web Response 
+        /// </summary>
+        public static AdCampaignBaseResponse CreateCampaignBaseResponseFrom(
+            this Models.ResponseModels.AdCampaignBaseResponse source)
+        {
+            return new AdCampaignBaseResponse
+            {
+                Languages = source.Languages.Select(lang => lang.CreateFrom()),
+                UserAndCostDetails = source.UserAndCostDetails.CreateFrom()
             };
         }
     }

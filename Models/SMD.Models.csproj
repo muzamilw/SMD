@@ -112,6 +112,7 @@
     <Compile Include="Common\SmdRoleClaimValue.cs" />
     <Compile Include="Common\SmdUser.cs" />
     <Compile Include="Common\NameClaimValue.cs" />
+    <Compile Include="Common\UserAndCostDetail.cs" />
     <Compile Include="Common\UserIdentityModel.cs" />
     <Compile Include="Common\Utility.cs" />
     <Compile Include="DomainModels\Account.cs" />

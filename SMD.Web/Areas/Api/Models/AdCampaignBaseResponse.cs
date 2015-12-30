@@ -12,6 +12,10 @@ namespace SMD.MIS.Areas.Api.Models
         /// Langs
         /// </summary>
         public IEnumerable<LanguageDropdown> Languages { get; set; }
+        /// <summary>
+        /// User and Cost detail
+        /// </summary>
+        public UserAndCostDetail UserAndCostDetails { get; set; }
 
         /// <summary>
         /// Country

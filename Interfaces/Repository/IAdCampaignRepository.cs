@@ -17,6 +17,7 @@ namespace SMD.Interfaces.Repository
         IEnumerable<AdCampaign> SearchCampaign(AdCampaignSearchRequest request, out int rowCount);
 
         IEnumerable<AdCampaign> GetAdCampaignById(long CampaignId);
+        UserAndCostDetail GetUserAndCostDetail();
        
     }
 }

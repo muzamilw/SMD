@@ -1519,3 +1519,75 @@ COMMIT
 
 
  -- ============================= updated on server 20151230 =============================
+
+
+
+ -- ============================= updated on SMDDEV db 20151230 =============================
+
+ ALTER PROCEDURE [dbo].[GetAds] 
+
+	-- Add the parameters for the stored procedure here
+	@UserID nvarchar(128) = 0 ,
+	-- newly added 
+	@FromRow int =0           ,
+	@ToRow int =0
+
+AS
+BEGIN
+DECLARE @age AS INT
+DECLARE @gender AS INT
+DECLARE @countryId AS INT
+DECLARE @cityId AS INT
+DECLARE @languageId AS INT
+DECLARE @industryId AS INT
+
+        -- Setting local variables
+		   SELECT @age = age FROM AspNetUsers where id=@UserID
+		   SELECT @gender = gender FROM AspNetUsers where id=@UserID
+		   SELECT @countryId = countryId FROM AspNetUsers where id=@UserID
+		   SELECT @cityId = cityId FROM AspNetUsers where id=@UserID
+		   SELECT @languageId = LanguageID FROM AspNetUsers where id=@UserID
+		   SELECT @industryId = industryId FROM AspNetUsers where id=@UserID
+		   SELECT @countryId = CountryID FROM AspNetUsers where id=@UserID
+		   SELECT @cityId = CityID FROM AspNetUsers where id=@UserID
+
+
+		   select MyCampaign.CampaignID, MyCampaign.CampaignName, MyCampaign.Description, MyCampaign.VerifyQuestion, MyCampaign.LandingPageVideoLink ,
+		   MyCampaign.Answer1, MyCampaign.Answer2, MyCampaign.Answer3, MyCampaign.CorrectAnswer , MyCampaign.ClickRate, MyCampaign.Type as AdType
+		   from AdCampaign MyCampaign
+
+		 --  where ( 
+		 --   (MyCampaign.AgeRangeEnd >= @age and  @age >= MyCampaign.AgeRangeStart) 
+			-- and
+			--(MyCampaign.Gender= @gender)
+			-- and
+			--(MyCampaign.EndDateTime >= GETDATE() and GETDATE() >= MyCampaign.StartDateTime ) 
+			-- and
+			--(MyCampaign.Approved = 1) 
+		 -- 	 and
+			--(MyCampaign.Status = 6)   
+			-- and 
+			--((select count(*) from AdCampaignResponse MyCampaignResponse
+			-- where MyCampaignResponse.UserID=@UserID and MyCampaignResponse.CampaignID = MyCampaign.CampaignID) = 0) 
+			-- and
+		 --   (MyCampaign.MaxBudget > MyCampaign.AmountSpent) 
+			-- and
+			--(MyCampaign.LanguageID=@languageId) 
+			-- and
+			-- ((select count(*) from AdCampaignTargetLocation MyCampaignLoc
+			-- where MyCampaignLoc.CampaignID=MyCampaign.CampaignID and MyCampaignLoc.CountryID=@countryId and
+			-- MyCampaignLoc.CityID=@cityId) > 0 
+			-- and 
+			-- ((select count(*) from AdCampaignTargetCriteria MyCampaignCrit
+			-- where MyCampaignCrit.CampaignID = MyCampaign.CampaignID and 
+			-- MyCampaignCrit.LanguageID=@languageId and MyCampaignCrit.IndustryID=@industryId) > 0 )) 
+		 --  )
+
+		 --  -- newly added for paging 
+		 --  order by MyCampaign.ApprovalDateTime
+		 --  OFFSET @FromRow ROWS -- skip 10 rows
+		 --  FETCH NEXT @ToRow ROWS ONLY; -- take 10 rows
+END
+
+
+
