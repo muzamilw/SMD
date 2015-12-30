@@ -189,21 +189,27 @@ namespace SMD.MIS.ModelMappers
         }
         public static SMD.MIS.Areas.Api.Models.UserBaseData CreateFrom(this Models.Common.UserBaseData source)
         {
-
-            return new SMD.MIS.Areas.Api.Models.UserBaseData
+            if (source != null)
             {
-                CityId = source.CityId,
-                CountryId = source.CountryId,
-                LanguageId = source.LanguageId,
-                IndustryId = source.IndustryId,
-                EducationId = source.EducationId,
-                City = source.City,
-                Country = source.Country,
-                Language = source.Language,
-                Industry = source.Industry,
-                Education = source.Education,
-                CurrencySymbol = source.CurrencySymbol
-            };
+                return new SMD.MIS.Areas.Api.Models.UserBaseData
+                {
+                    CityId = source.CityId,
+                    CountryId = source.CountryId,
+                    LanguageId = source.LanguageId,
+                    IndustryId = source.IndustryId,
+                    EducationId = source.EducationId,
+                    City = source.City,
+                    Country = source.Country,
+                    Language = source.Language,
+                    Industry = source.Industry,
+                    Education = source.Education,
+                    CurrencySymbol = source.CurrencySymbol
+                };
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 

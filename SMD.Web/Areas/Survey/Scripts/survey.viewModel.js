@@ -49,7 +49,7 @@ define("survey/survey.viewModel",
                     totalAudience = ko.observable(0),
                     // audience reach mode 
                     audienceReachMode = ko.observable(1),
-                    userBaseData = ko.observable(null),
+                    userBaseData = ko.observable({CurrencySymbol:''}),
                     setupPrice = ko.observable(0),
                     //Get Questions
                     getQuestions = function () {   
