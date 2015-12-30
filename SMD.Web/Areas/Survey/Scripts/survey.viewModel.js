@@ -42,7 +42,11 @@ define("survey/survey.viewModel",
                     isNewCriteria = ko.observable(true),
                     canSubmitForApproval = ko.observable(true),
                     // age list 
-                    ageRange = ko.observableArray([])
+                    ageRange = ko.observableArray([]),
+                    //audience reach
+                    reachedAudience = ko.observable(0),
+                    //total audience
+                    totalAudience = ko.observable(0),
                     //Get Questions
                     getQuestions = function () {   
                         dataservice.searchSurveyQuestions(
@@ -671,13 +675,49 @@ define("survey/survey.viewModel",
                         };
                         dataservice.getAudienceData(surveyData, {
                             success: function (data) {
-                                console.log(data);
+                                reachedAudience(data.MatchingUsers);
+                                totalAudience(data.AllUsers);
+                                if (getAudienceReachMode() == 1) {
+                                    $(".meterPin").removeClass("spec_aud").removeClass("defined_aud").removeClass("broad_aud").addClass("spec_aud");
+                                } else if (getAudienceReachMode() == 2) {
+                                    $(".meterPin").removeClass("spec_aud").removeClass("defined_aud").removeClass("broad_aud").addClass("defined_aud");
+                                } else if (getAudienceReachMode() == 3) {
+                                    $(".meterPin").removeClass("spec_aud").removeClass("defined_aud").removeClass("broad_aud").addClass("broad_aud");
+                                }
                             },
                             error: function (response) {
                                 toastr.error("Error while getting audience count.");
                             }
                         });
-                    }
+                    },
+                     visibleTargetAudience = function (mode) {
+
+                         if (mode != undefined) {
+                            
+                             var matcharry = ko.utils.arrayFirst(selectedQuestion().SurveyQuestionTargetCriteria(), function (item) {
+
+                                 return item.Type() == mode;
+                             });
+
+                             if (matcharry != null) {
+                                 return 1;
+                             } else {
+                                 return 0;
+                             }
+                         } else {
+                             return 0;
+                         }
+                     },
+                    getAudienceReachMode = function () {
+                        var percent = reachedAudience() / totalAudience();
+                        if (percent < 20) {
+                            return 1;
+                        } else if (percent < 70) {
+                            return 2;
+                        } else {
+                            return 3;
+                        }
+                    },
                     // Initialize the view model
                     initialize = function (specifiedView) {
                         view = specifiedView;
@@ -747,7 +787,11 @@ define("survey/survey.viewModel",
                     canSubmitForApproval:canSubmitForApproval,
                     titleText: titleText,
                     onRemoveIndustry: onRemoveIndustry,
-                    getAudienceCount: getAudienceCount
+                    getAudienceCount: getAudienceCount,
+                    visibleTargetAudience: visibleTargetAudience,
+                    totalAudience: totalAudience,
+                    reachedAudience: reachedAudience,
+                    getAudienceReachMode: getAudienceReachMode
                 };
             })()
         };
