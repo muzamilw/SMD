@@ -42,7 +42,6 @@ namespace SMD.MIS.Areas.Api.Controllers
         }
 
 
-
         /// <summary>
         /// Edit Survey Question 
         /// </summary>

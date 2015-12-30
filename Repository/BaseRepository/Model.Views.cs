@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets70122A0D22AB185EE0B11E12760F5B5BF54070FFC7CA38756E981DBFF8866660))]
+[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets7F7DE777A4A3345F62FFCB2B2EF081322EFA89C6B19263AA758BD445ABD0E571))]
 
 namespace Edm_EntityMappingGeneratedViews
 {
@@ -17,19 +17,19 @@ namespace Edm_EntityMappingGeneratedViews
     /// <Summary>
     /// The type contains views for EntitySets and AssociationSets that were generated at design time.
     /// </Summary>
-    public sealed class ViewsForBaseEntitySets70122A0D22AB185EE0B11E12760F5B5BF54070FFC7CA38756E981DBFF8866660 : System.Data.Mapping.EntityViewContainer
+    public sealed class ViewsForBaseEntitySets7F7DE777A4A3345F62FFCB2B2EF081322EFA89C6B19263AA758BD445ABD0E571 : System.Data.Mapping.EntityViewContainer
     {
         
         /// <Summary>
         /// The constructor stores the views for the extents and also the hash values generated based on the metadata and mapping closure and views.
         /// </Summary>
-        public ViewsForBaseEntitySets70122A0D22AB185EE0B11E12760F5B5BF54070FFC7CA38756E981DBFF8866660()
+        public ViewsForBaseEntitySets7F7DE777A4A3345F62FFCB2B2EF081322EFA89C6B19263AA758BD445ABD0E571()
         {
             this.EdmEntityContainerName = "BaseDbContext";
             this.StoreEntityContainerName = "SMDModelStoreContainer";
-            this.HashOverMappingClosure = "caeb2d31e30db44dcac29e9f650b48bef68fb78d01f3ed71e6ac61442c2eeca4";
-            this.HashOverAllExtentViews = "aea3457d41636da098aee0cfc74baec006fd60fb91deefaf7373ed66bc295582";
-            this.ViewCount = 58;
+            this.HashOverMappingClosure = "530fbf458c704d09f38d90a6d0b25b758adf68d3d071e253034a97ba2baccb79";
+            this.HashOverAllExtentViews = "14574c16e8aeedb66f21c0307a45fb38c72db0875c2a40eb9137fc074fda1140";
+            this.ViewCount = 60;
         }
         
         /// <Summary>
@@ -268,6 +268,14 @@ namespace Edm_EntityMappingGeneratedViews
             if ((index == 57))
             {
                 return GetView57();
+            }
+            if ((index == 58))
+            {
+                return GetView58();
+            }
+            if ((index == 59))
+            {
+                return GetView59();
             }
             throw new System.IndexOutOfRangeException();
         }
@@ -793,7 +801,7 @@ namespace Edm_EntityMappingGeneratedViews
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.Products", @"
     SELECT VALUE -- Constructing Products
-        [SMDModel.Store.Products](T1.Products_ProductID, T1.Products_CountryID, T1.Products_CurrencyID, T1.Products_ProductName, T1.Products_IsActive, T1.Products_SetupPrice, T1.Products_ClickFeePercentage, T1.Products_ClausePrice, T1.Products_AffiliatePercentage)
+        [SMDModel.Store.Products](T1.Products_ProductID, T1.Products_CountryID, T1.Products_CurrencyID, T1.Products_ProductName, T1.Products_IsActive, T1.Products_SetupPrice, T1.Products_ClickFeePercentage, T1.Products_ClausePrice, T1.Products_AffiliatePercentage, T1.Products_ProductCode)
     FROM (
         SELECT 
             T.ProductId AS Products_ProductID, 
@@ -805,6 +813,7 @@ namespace Edm_EntityMappingGeneratedViews
             T.ClickFeePercentage AS Products_ClickFeePercentage, 
             T.ClausePrice AS Products_ClausePrice, 
             T.AffiliatePercentage AS Products_AffiliatePercentage, 
+            T.ProductCode AS Products_ProductCode, 
             True AS _from0
         FROM BaseDbContext.Products AS T
     ) AS T1");
@@ -937,9 +946,28 @@ namespace Edm_EntityMappingGeneratedViews
         }
         
         /// <Summary>
-        /// return view for SMDModelStoreContainer.AspNetUserRoles
+        /// return view for SMDModelStoreContainer.Tax
         /// </Summary>
         private System.Collections.Generic.KeyValuePair<string, string> GetView26()
+        {
+            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.Tax", @"
+    SELECT VALUE -- Constructing Tax
+        [SMDModel.Store.Tax](T1.Tax_TaxId, T1.Tax_TaxName, T1.Tax_TaxValue, T1.Tax_CountryId)
+    FROM (
+        SELECT 
+            T.TaxId AS Tax_TaxId, 
+            T.TaxName AS Tax_TaxName, 
+            T.TaxValue AS Tax_TaxValue, 
+            T.CountryId AS Tax_CountryId, 
+            True AS _from0
+        FROM BaseDbContext.Taxes AS T
+    ) AS T1");
+        }
+        
+        /// <Summary>
+        /// return view for SMDModelStoreContainer.AspNetUserRoles
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView27()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.AspNetUserRoles", @"
     SELECT VALUE -- Constructing AspNetUserRoles
@@ -956,7 +984,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.Roles
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView27()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView28()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.Roles", @"
     SELECT VALUE -- Constructing Roles
@@ -973,7 +1001,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.UserLogins
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView28()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView29()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.UserLogins", @"
     SELECT VALUE -- Constructing UserLogins
@@ -991,7 +1019,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.Users
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView29()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView30()
         {
             System.Text.StringBuilder viewString = new System.Text.StringBuilder(3403);
             viewString.Append("\r\n    SELECT VALUE -- Constructing Users\r\n        [DomainModels.User](T1.User_Id");
@@ -1043,7 +1071,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.ProfileQuestions
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView30()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView31()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.ProfileQuestions", "\r\n    SELECT VALUE -- Constructing ProfileQuestions\r\n        [DomainModels.Profil" +
                     "eQuestion](T1.ProfileQuestion_PqId, T1.ProfileQuestion_LanguageId, T1.ProfileQue" +
@@ -1071,7 +1099,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.ProfileQuestionAnswers
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView31()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView32()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.ProfileQuestionAnswers", "\r\n    SELECT VALUE -- Constructing ProfileQuestionAnswers\r\n        [DomainModels." +
                     "ProfileQuestionAnswer](T1.ProfileQuestionAnswer_PqAnswerId, T1.ProfileQuestionAn" +
@@ -1099,7 +1127,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.ProfileQuestionGroups
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView32()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView33()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.ProfileQuestionGroups", @"
     SELECT VALUE -- Constructing ProfileQuestionGroups
@@ -1119,7 +1147,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.ProfileQuestionUserAnswers
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView33()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView34()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.ProfileQuestionUserAnswers", @"
     SELECT VALUE -- Constructing ProfileQuestionUserAnswers
@@ -1139,7 +1167,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.UserClaims
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView34()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView35()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.UserClaims", @"
     SELECT VALUE -- Constructing UserClaims
@@ -1158,7 +1186,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.Countries
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView35()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView36()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.Countries", @"
     SELECT VALUE -- Constructing Countries
@@ -1176,7 +1204,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.Languages
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView36()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView37()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.Languages", @"
     SELECT VALUE -- Constructing Languages
@@ -1194,7 +1222,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.AdCampaigns
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView37()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView38()
         {
             System.Text.StringBuilder viewString = new System.Text.StringBuilder(3226);
             viewString.Append("\r\n    SELECT VALUE -- Constructing AdCampaigns\r\n        [DomainModels.AdCampaign");
@@ -1244,7 +1272,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.AdCampaignResponses
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView38()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView39()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.AdCampaignResponses", @"
     SELECT VALUE -- Constructing AdCampaignResponses
@@ -1264,7 +1292,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.AdCampaignTargetCriterias
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView39()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView40()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.AdCampaignTargetCriterias", @"
     SELECT VALUE -- Constructing AdCampaignTargetCriterias
@@ -1289,7 +1317,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.AdCampaignTargetLocations
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView40()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView41()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.AdCampaignTargetLocations", @"
     SELECT VALUE -- Constructing AdCampaignTargetLocations
@@ -1310,7 +1338,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.SurveyQuestions
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView41()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView42()
         {
             System.Text.StringBuilder viewString = new System.Text.StringBuilder(3021);
             viewString.Append("\r\n    SELECT VALUE -- Constructing SurveyQuestions\r\n        [DomainModels.Survey");
@@ -1357,7 +1385,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.SurveyQuestionTargetCriterias
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView42()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView43()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.SurveyQuestionTargetCriterias", @"
     SELECT VALUE -- Constructing SurveyQuestionTargetCriterias
@@ -1382,7 +1410,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.SurveyQuestionTargetLocations
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView43()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView44()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.SurveyQuestionTargetLocations", @"
     SELECT VALUE -- Constructing SurveyQuestionTargetLocations
@@ -1403,7 +1431,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.SurveyQuestionResponses
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView44()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView45()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.SurveyQuestionResponses", @"
     SELECT VALUE -- Constructing SurveyQuestionResponses
@@ -1423,7 +1451,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.Cities
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView45()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView46()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.Cities", @"
     SELECT VALUE -- Constructing Cities
@@ -1444,7 +1472,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.Industries
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView46()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView47()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.Industries", @"
     SELECT VALUE -- Constructing Industries
@@ -1462,11 +1490,11 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.Products
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView47()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView48()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.Products", @"
     SELECT VALUE -- Constructing Products
-        [DomainModels.Product](T1.Product_ProductId, T1.Product_CountryId, T1.Product_CurrencyId, T1.Product_ProductName, T1.Product_IsActive, T1.Product_SetupPrice, T1.Product_ClickFeePercentage, T1.Product_ClausePrice, T1.Product_AffiliatePercentage)
+        [DomainModels.Product](T1.Product_ProductId, T1.Product_CountryId, T1.Product_CurrencyId, T1.Product_ProductName, T1.Product_IsActive, T1.Product_SetupPrice, T1.Product_ClickFeePercentage, T1.Product_ClausePrice, T1.Product_AffiliatePercentage, T1.Product_ProductCode)
     FROM (
         SELECT 
             T.ProductID AS Product_ProductId, 
@@ -1478,6 +1506,7 @@ namespace Edm_EntityMappingGeneratedViews
             T.ClickFeePercentage AS Product_ClickFeePercentage, 
             T.ClausePrice AS Product_ClausePrice, 
             T.AffiliatePercentage AS Product_AffiliatePercentage, 
+            T.ProductCode AS Product_ProductCode, 
             True AS _from0
         FROM SMDModelStoreContainer.Products AS T
     ) AS T1");
@@ -1486,7 +1515,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.Currencies
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView48()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView49()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.Currencies", @"
     SELECT VALUE -- Constructing Currencies
@@ -1506,7 +1535,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.Accounts
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView49()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView50()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.Accounts", @"
     SELECT VALUE -- Constructing Accounts
@@ -1526,7 +1555,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.Transactions
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView50()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView51()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.Transactions", @"
     SELECT VALUE -- Constructing Transactions
@@ -1556,7 +1585,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.Invoices
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView51()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView52()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.Invoices", @"
     SELECT VALUE -- Constructing Invoices
@@ -1587,7 +1616,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.InvoiceDetails
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView52()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView53()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.InvoiceDetails", @"
     SELECT VALUE -- Constructing InvoiceDetails
@@ -1610,9 +1639,28 @@ namespace Edm_EntityMappingGeneratedViews
         }
         
         /// <Summary>
+        /// return view for BaseDbContext.Taxes
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView54()
+        {
+            return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.Taxes", @"
+    SELECT VALUE -- Constructing Taxes
+        [DomainModels.Tax](T1.Tax_TaxId, T1.Tax_TaxName, T1.Tax_TaxValue, T1.Tax_CountryId)
+    FROM (
+        SELECT 
+            T.TaxId AS Tax_TaxId, 
+            T.TaxName AS Tax_TaxName, 
+            T.TaxValue AS Tax_TaxValue, 
+            T.CountryId AS Tax_CountryId, 
+            True AS _from0
+        FROM SMDModelStoreContainer.Tax AS T
+    ) AS T1");
+        }
+        
+        /// <Summary>
         /// return view for BaseDbContext.AspNetUserRoles
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView53()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView55()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.AspNetUserRoles", @"
     SELECT VALUE -- Constructing AspNetUserRoles
@@ -1639,7 +1687,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for SMDModelStoreContainer.SystemMails
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView54()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView56()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.SystemMails", @"
     SELECT VALUE -- Constructing SystemMails
@@ -1661,7 +1709,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.SystemMails
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView55()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView57()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.SystemMails", @"
     SELECT VALUE -- Constructing SystemMails
@@ -1683,7 +1731,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for SMDModelStoreContainer.AuditLog
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView56()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView58()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.AuditLog", @"
     SELECT VALUE -- Constructing AuditLog
@@ -1705,7 +1753,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.AuditLogs
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView57()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView59()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.AuditLogs", @"
     SELECT VALUE -- Constructing AuditLogs

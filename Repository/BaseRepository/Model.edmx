@@ -283,6 +283,7 @@
           <Property Name="ClickFeePercentage" Type="float" />
           <Property Name="ClausePrice" Type="float" />
           <Property Name="AffiliatePercentage" Type="float" />
+          <Property Name="ProductCode" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="ProfileQuestion">
           <Key>
@@ -426,6 +427,15 @@
           <Property Name="Subject" Type="nvarchar" MaxLength="150" />
           <Property Name="body" Type="ntext" />
           <Property Name="EmailTarget" Type="int" />
+        </EntityType>
+        <EntityType Name="Tax">
+          <Key>
+            <PropertyRef Name="TaxId" />
+          </Key>
+          <Property Name="TaxId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TaxName" Type="nvarchar" MaxLength="200" />
+          <Property Name="TaxValue" Type="float" />
+          <Property Name="CountryId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Transaction">
           <Key>
@@ -1019,6 +1029,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Tax_Country">
+          <End Role="Country" Type="Self.Country" Multiplicity="1" />
+          <End Role="Tax" Type="Self.Tax" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="CountryID" />
+            </Principal>
+            <Dependent Role="Tax">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Transaction_Account">
           <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
           <End Role="Transaction" Type="Self.Transaction" Multiplicity="*" />
@@ -1120,6 +1142,7 @@
           <EntitySet Name="SurveyQuestionTargetCriteria" EntityType="Self.SurveyQuestionTargetCriteria" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SurveyQuestionTargetLocation" EntityType="Self.SurveyQuestionTargetLocation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SystemMails" EntityType="Self.SystemMails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tax" EntityType="Self.Tax" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Transaction" EntityType="Self.Transaction" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Account_AspNetUsers" Association="Self.FK_Account_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -1308,6 +1331,10 @@
           <AssociationSet Name="FK_SurveyQuestionTargetLocation_SurveyQuestion" Association="Self.FK_SurveyQuestionTargetLocation_SurveyQuestion">
             <End Role="SurveyQuestion" EntitySet="SurveyQuestion" />
             <End Role="SurveyQuestionTargetLocation" EntitySet="SurveyQuestionTargetLocation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tax_Country" Association="Self.FK_Tax_Country">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="Tax" EntitySet="Tax" />
           </AssociationSet>
           <AssociationSet Name="FK_Transaction_Account" Association="Self.FK_Transaction_Account">
             <End Role="Account" EntitySet="Account" />
@@ -1686,6 +1713,11 @@
             <Parameter Name="languageIdsExcluded" Mode="In" Type="String" />
             <Parameter Name="industryIdsExcluded" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="Taxes" EntityType="DomainModels.Tax" />
+          <AssociationSet Name="FK_Tax_Country" Association="DomainModels.FK_Tax_Country">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="Tax" EntitySet="Taxes" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="ProfileQuestion">
           <Key>
@@ -1845,6 +1877,7 @@
           <NavigationProperty Name="SurveyQuestionTargetLocations" Relationship="DomainModels.FK_SurveyQuestionTargetLocation_Country" FromRole="Country" ToRole="SurveyQuestionTargetLocation" />
           <NavigationProperty Name="Cities" Relationship="DomainModels.FK_City_Country" FromRole="Country" ToRole="City" />
           <NavigationProperty Name="Products" Relationship="DomainModels.FK_SMDPrice_Country" FromRole="Country" ToRole="Product" />
+          <NavigationProperty Name="Taxes" Relationship="DomainModels.FK_Tax_Country" FromRole="Country" ToRole="Tax" />
         </EntityType>
         <EntityType Name="Language">
           <Key>
@@ -2410,6 +2443,7 @@
           <NavigationProperty Name="Country" Relationship="DomainModels.FK_SMDPrice_Country" FromRole="Product" ToRole="Country" />
           <NavigationProperty Name="Currency" Relationship="DomainModels.FK_SMDPrice_Currency" FromRole="Product" ToRole="Currency" />
           <NavigationProperty Name="InvoiceDetails" Relationship="DomainModels.FK_InvoiceDetail_Products" FromRole="Product" ToRole="InvoiceDetail" />
+          <Property Name="ProductCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_AdCampaignTargetCriteria_Industry">
           <End Type="DomainModels.Industry" Role="Industry" Multiplicity="0..1" />
@@ -2834,6 +2868,28 @@
           <Property Type="Int32" Name="MatchingUsers" Nullable="true" />
           <Property Type="Int32" Name="AllUsers" Nullable="true" />
         </ComplexType>
+        <EntityType Name="Tax">
+          <Key>
+            <PropertyRef Name="TaxId" />
+          </Key>
+          <Property Name="TaxId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TaxName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="TaxValue" Type="Double" />
+          <Property Name="CountryId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Country" Relationship="DomainModels.FK_Tax_Country" FromRole="Tax" ToRole="Country" />
+        </EntityType>
+        <Association Name="FK_Tax_Country">
+          <End Type="DomainModels.Country" Role="Country" Multiplicity="1" />
+          <End Type="DomainModels.Tax" Role="Tax" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="CountryId" />
+            </Principal>
+            <Dependent Role="Tax">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3215,6 +3271,7 @@
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="DomainModels.Product">
               <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
                 <ScalarProperty Name="AffiliatePercentage" ColumnName="AffiliatePercentage" />
                 <ScalarProperty Name="ClausePrice" ColumnName="ClausePrice" />
                 <ScalarProperty Name="ClickFeePercentage" ColumnName="ClickFeePercentage" />
@@ -3351,6 +3408,16 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="Taxes">
+            <EntityTypeMapping TypeName="DomainModels.Tax">
+              <MappingFragment StoreEntitySet="Tax">
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="TaxValue" ColumnName="TaxValue" />
+                <ScalarProperty Name="TaxName" ColumnName="TaxName" />
+                <ScalarProperty Name="TaxId" ColumnName="TaxId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -80,6 +80,8 @@
         <AssociationConnector Association="DomainModels.FK_InvoiceDetail_Invoice" />
         <AssociationConnector Association="DomainModels.FK_InvoiceDetail_Products" />
         <AssociationConnector Association="DomainModels.FK_InvoiceDetail_SurveyQuestion" />
+        <EntityTypeShape EntityType="DomainModels.Tax" Width="1.5" PointX="8.125" PointY="10.5" />
+        <AssociationConnector Association="DomainModels.FK_Tax_Country" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
