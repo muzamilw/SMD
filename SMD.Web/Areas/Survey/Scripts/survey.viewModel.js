@@ -554,6 +554,7 @@ define("survey/survey.viewModel",
                     }
                     getAudienceCount = function () {
                         var countryIds = '', cityIds = '', countryIdsExcluded = '', cityIdsExcluded = '';
+                        var educationIds = '', educationIdsExcluded = '';
                         _.each(selectedQuestion().SurveyQuestionTargetLocation(), function (item) {
                             if(item.CityID() == 0 || item.CityID() == null)
                             {
@@ -671,6 +672,21 @@ define("survey/survey.viewModel",
                                     }
                                 }
                             }
+                            else if (item.Type() == 5) {
+                                if (item.IncludeorExclude() == '0') {
+                                    if (educationIdsExcluded == '') {
+                                        educationIdsExcluded += item.EducationId();
+                                    } else {
+                                        educationIdsExcluded += ',' + item.EducationId();
+                                    }
+                                } else {
+                                    if (educationIds == '') {
+                                        educationIds += item.EducationId();
+                                    } else {
+                                        educationIds += ',' + item.EducationId();
+                                    }
+                                }
+                            }
                         });
                         var surveyData = {
                             ageFrom: selectedQuestion().AgeRangeStart(),
@@ -691,7 +707,9 @@ define("survey/survey.viewModel",
                             profileQuestionIdsExcluded: profileQuestionIdsExcluded,
                             profileAnswerIdsExcluded: profileAnswerIdsExcluded,
                             surveyQuestionIdsExcluded: surveyQuestionIdsExcluded,
-                            surveyAnswerIdsExcluded: surveyAnswerIdsExcluded
+                            surveyAnswerIdsExcluded: surveyAnswerIdsExcluded,
+                            educationIds: educationIds,
+                            educationIdsExcluded: educationIdsExcluded
                         };
                         dataservice.getAudienceData(surveyData, {
                             success: function (data) {
