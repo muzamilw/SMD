@@ -113,13 +113,17 @@ define("pQuestion/pQuestion.viewModel",
                     },
                     // Close Editor 
                     closeEditDialog = function () {
-                        // Ask for confirmation
-                        confirmation.afterProceed(function () {
+                        if (!hasChangesOnQuestion()) {
+                            isEditorVisible(false);
+                            return;
+                        }
+                    // Ask for confirmation
+                    confirmation.afterProceed(function () {
                             selectedQuestion().answers.removeAll();
                             selectedQuestion(undefined);
                             isEditorVisible(false);
-                        });
-                        confirmation.show();
+                      });
+                      confirmation.show();
                     },
                     // On editing of existing PQ
                     onEditProfileQuestion = function (item) {
@@ -239,11 +243,10 @@ define("pQuestion/pQuestion.viewModel",
                         
                         dataservice.saveProfileQuestion(serverQuestion, {
                             success: function (obj) {
-                                var newObjtodelete = questions.find(function (temp) {
-                                    return serverQuestion.PqId == temp.qId();
+                                var newAssigendGroup = qGroup.find(function (temp) {
+                                    return obj.ProfileGroupId == temp.ProfileGroupId;
                                 });
-                                questions.remove(newObjtodelete);
-                                questions.push(model.questionServertoClientMapper(obj));
+                                selectedQuestion().profileGroupName(newAssigendGroup.ProfileGroupName);
                                 isEditorVisible(false);
                                 toastr.success("You are Good!");
                             },
@@ -252,6 +255,7 @@ define("pQuestion/pQuestion.viewModel",
                             }
                         });
                     },
+                    // Delete Answer
                     onDeleteQuestionAnswer= function(itemTobeDeleted) {
                         // Ask for confirmation
                         confirmation.afterProceed(function () {
