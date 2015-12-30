@@ -2838,11 +2838,11 @@
         </EntityType>
         <EntityType Name="Product">
           <Key>
-            <PropertyRef Name="ProductID" />
+            <PropertyRef Name="ProductId" />
           </Key>
-          <Property Name="ProductID" Type="Int32" Nullable="false" />
-          <Property Name="CountryID" Type="Int32" />
-          <Property Name="CurrencyID" Type="Int32" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <Property Name="CountryId" Type="Int32" />
+          <Property Name="CurrencyId" Type="Int32" />
           <Property Name="ProductName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="IsActive" Type="Boolean" />
           <Property Name="SetupPrice" Type="Double" />
@@ -2879,7 +2879,7 @@
               <PropertyRef Name="CountryId" />
             </Principal>
             <Dependent Role="Product">
-              <PropertyRef Name="CountryID" />
+              <PropertyRef Name="CountryId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2891,7 +2891,7 @@
               <PropertyRef Name="CurrencyId" />
             </Principal>
             <Dependent Role="Product">
-              <PropertyRef Name="CurrencyID" />
+              <PropertyRef Name="CurrencyId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2912,7 +2912,7 @@
           <End Type="DomainModels.InvoiceDetail" Role="InvoiceDetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Product">
-              <PropertyRef Name="ProductID" />
+              <PropertyRef Name="ProductId" />
             </Principal>
             <Dependent Role="InvoiceDetail">
               <PropertyRef Name="ProductId" />
@@ -3548,9 +3548,9 @@
                 <ScalarProperty Name="SetupPrice" ColumnName="SetupPrice" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="ProductName" ColumnName="ProductName" />
-                <ScalarProperty Name="CurrencyID" ColumnName="CurrencyID" />
-                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
-                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="CurrencyId" ColumnName="CurrencyID" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryID" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
