@@ -36,8 +36,10 @@ define("ads/ads.viewModel",
                     isEnableVedioVerificationLink = ko.observable(false),
                     campaignTypePlaceHolderValue = ko.observable('Enter a link'),
                     isEditCampaign = ko.observable(false),
-                     canSubmitForApproval = ko.observable(true),
+                    canSubmitForApproval = ko.observable(true),
                     correctAnswers = ko.observableArray([{ id: 1, name: "Answer 1" }, { id: 1, name: "Answer 2" }, { id: 3, name: "Answer 3" }]),
+                    selectedIndustryIncludeExclude = ko.observable(true),
+                       
                     getAdCampaignGridContent = function () {
                         dataservice.getCampaignData({
                             CampaignId: 0,
@@ -513,6 +515,45 @@ define("ads/ads.viewModel",
                             });
                         }
                     },
+                    addIndustry = function (selected) {
+                        campaignModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
+                            Industry: selected.IndustryName,
+                            IndustryID: selected.IndustryId,
+                            IncludeorExclude: parseInt(selectedIndustryIncludeExclude()),
+                            Type: 4,
+                            CampaignId: campaignModel().CampaignID()
+                        }));
+                        $("#searchIndustries").val("");
+                    },
+                    onRemoveIndustry = function (item) {
+                            // Ask for confirmation
+                           
+                            campaignModel().AdCampaignTargetCriterias.remove(item);
+                                toastr.success("Removed Successfully!");
+                           
+                    },
+                    visibleTargetAudience = function (mode) {
+                       
+                        if (mode != undefined) {
+                            console.log(campaignModel().AdCampaignTargetCriterias());
+                            var matcharry = ko.utils.arrayFirst(campaignModel().AdCampaignTargetCriterias(), function (item) {
+                               
+                                return item.Type() == mode;
+                            });
+                            console.log(mode);
+                            console.log(matcharry);
+                            
+                            if (matcharry != null) {
+                                console.log(console.log(matcharry));
+                                return 1;
+                            } else {
+                                return 0;
+                            }
+                        } else {
+                            return 0;
+                        }
+                    },
+                 
                     // Initialize the view model
                     initialize = function (specifiedView) {
                         view = specifiedView; 
@@ -524,7 +565,7 @@ define("ads/ads.viewModel",
                         getAdCampaignGridContent();
                       
                     };
-
+                    
                     return {
                         initialize: initialize,
                         pager: pager,
@@ -572,7 +613,11 @@ define("ads/ads.viewModel",
                         correctAnswers: correctAnswers,
                         onEditCampaign: onEditCampaign,
                         canSubmitForApproval: canSubmitForApproval,
-                        submitCampaignData: submitCampaignData
+                        submitCampaignData: submitCampaignData,
+                        selectedIndustryIncludeExclude: selectedIndustryIncludeExclude,
+                        addIndustry: addIndustry,
+                        onRemoveIndustry: onRemoveIndustry,
+                        visibleTargetAudience: visibleTargetAudience
                     };
             })()
         };

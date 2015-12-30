@@ -23,6 +23,7 @@ namespace SMD.MIS.Areas.Api.Models
 
         public string answerString { get; set; }
 
-        public string Language { get; set; } 
+        public string Language { get; set; }
+        public string Industry { get; set; } 
     }
 }

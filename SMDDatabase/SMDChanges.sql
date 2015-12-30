@@ -1318,3 +1318,32 @@ exec(@query + @where)
 END
 
  -- ============================= updated on server =============================
+
+
+  -- ============================= 20151229 =============================
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+GO
+EXECUTE sp_rename N'dbo.Products.ClausePrice', N'Tmp_AgeClausePrice', 'COLUMN' 
+GO
+EXECUTE sp_rename N'dbo.Products.Tmp_AgeClausePrice', N'AgeClausePrice', 'COLUMN' 
+GO
+ALTER TABLE dbo.Products ADD
+	GenderClausePrice float(53) NULL,
+	LocationClausePrice float(53) NULL,
+	OtherClausePrice float(53) NULL,
+	ProfessionClausePrice float(53) NULL,
+	EducationClausePrice float(53) NULL
+GO
+ALTER TABLE dbo.Products SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+ -- ============================= =============================

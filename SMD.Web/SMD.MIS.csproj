@@ -585,6 +585,8 @@
     <Content Include="Content\Images\company_contact.jpg" />
     <Content Include="Content\Images\company_contact.jpg" />
     <Content Include="Content\Images\imageplaceholder.png" />
+    <Content Include="Content\Images\meter.png" />
+    <Content Include="Content\Images\pin.png" />
     <Content Include="Content\Images\up-arrow-small.png" />
     <Content Include="Content\layout.css" />
     <Content Include="Content\less\Campaign.css">
