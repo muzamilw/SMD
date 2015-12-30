@@ -150,10 +150,11 @@ define("survey/survey.viewModel",
                         selectedQuestion().LeftPicturePath("Content/Images/Company_Default.png");
                         selectedQuestion().RightPicturePath("Content/Images/Company_Default.png");
                         selectedQuestion().StatusValue("Draft");
-                        selectedQuestion().Status(1);
+                        selectedQuestion().AgeRangeStart(10);
+                        selectedQuestion().AgeRangeEnd(90);
                         selectedQuestion().reset();
                         selectedQuestion().SurveyQuestionTargetCriteria([]);
-                       
+                        getAudienceCount();
                         isEditorVisible(true);
                         canSubmitForApproval(true);
                         view.initializeTypeahead();
