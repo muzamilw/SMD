@@ -11,6 +11,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SMD.Models.IdentityModels;
 
 namespace SMD.Repository.Repositories
 {
@@ -117,16 +118,23 @@ namespace SMD.Repository.Repositories
 
             return DbSet.Where(query);
         }
+        /// <summary>
+        /// Get user by id
+        /// </summary>
+        public User GetUserById()
+        {
 
+            return db.Users.Where(i => i.Id == LoggedInUserIdentity).SingleOrDefault();
+        }
         /// <summary>
         /// Get User And Cost
         /// </summary>
         public UserAndCostDetail GetUserAndCostDetail()
         {
-            string code = Convert.ToString((int)ProductCode.AdApproval);
-            var query = from usr in db.Users
+            
+            var query = from usr in db.Users.Include("Cities").Include("Countries")
                         join prod in db.Products on usr.CountryId equals prod.CountryId
-                        where usr.Id == LoggedInUserIdentity && prod.ProductId == 2 && prod.ProductCode == code
+                        where usr.Id == LoggedInUserIdentity && prod.ProductId == 2 //&& prod.ProductCode == code
                         select new UserAndCostDetail()
                         {
                             AgeClausePrice = prod.AgeClausePrice,
@@ -139,12 +147,12 @@ namespace SMD.Repository.Repositories
                             LanguageId = usr.LanguageId,
                             LocationClausePrice = prod.LocationClausePrice,
                             OtherClausePrice = prod.OtherClausePrice,
-                            ProfessionClausePrice = prod.ProfessionClausePrice,
-                            City = usr.City != null? usr.City.CityName:"",
-                            Country = usr.Country != null ? usr.Country.CountryName : "",
-                            Education = usr.Education != null?usr.Education.Title : "",
-                            Industry = usr.Industry != null?usr.Industry.IndustryName:"",
-                            Language = usr.Language != null? usr.Language.LanguageName: ""
+                            ProfessionClausePrice = prod.ProfessionClausePrice//,
+                            //CityName = usr.Cities.Cities != null ? usr.Cities.CityName : "",
+                            //CountryName = usr.Countries != null ? usr.Countries.CountryName : "",
+                            //EducationTitle = usr.Education != null?usr.Education.Title : "",
+                            //IndustryName = usr.Industry != null?usr.Industry.IndustryName:"",
+                            //LanguageName = usr.Language != null? usr.Language.LanguageName: ""
                            
                         };
 

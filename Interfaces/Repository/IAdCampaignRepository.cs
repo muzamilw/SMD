@@ -1,5 +1,6 @@
 ﻿using SMD.Models.Common;
 using SMD.Models.DomainModels;
+using SMD.Models.IdentityModels;
 using SMD.Models.RequestModels;
 using System.Collections.Generic;
 
@@ -18,6 +19,7 @@ namespace SMD.Interfaces.Repository
 
         IEnumerable<AdCampaign> GetAdCampaignById(long CampaignId);
         UserAndCostDetail GetUserAndCostDetail();
+        User GetUserById();
        
     }
 }

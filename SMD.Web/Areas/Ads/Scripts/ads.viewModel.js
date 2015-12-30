@@ -39,17 +39,30 @@ define("ads/ads.viewModel",
                     canSubmitForApproval = ko.observable(true),
                     correctAnswers = ko.observableArray([{ id: 1, name: "Answer 1" }, { id: 1, name: "Answer 2" }, { id: 3, name: "Answer 3" }]),
                     selectedIndustryIncludeExclude = ko.observable(true),
+                    UserAndCostDetail = ko.observable(),
+                    pricePerclick = ko.observable(0),
+                    isLocationPerClickPriceAdded = ko.observable(false),
+                    isLanguagePerClickPriceAdded = ko.observable(false),
+                    isIndustoryPerClickPriceAdded = ko.observable(false),
+                    isProfileSurveyPerClickPriceAdded = ko.observable(false),
                     getCampaignBaseContent = function () {
                             dataservice.getBaseData({
                                 RequestId: 1,
                                 QuestionId: 0,
                             }, {
                                 success: function (data) {
-                                    debugger;
+                                   
                                     if (data != null) {
                                         langs.removeAll();
                                         ko.utils.arrayPushAll(langs(), data.Languages);
                                         langs.valueHasMutated();
+                                        UserAndCostDetail(data.UserAndCostDetails);
+                                        if (UserAndCostDetail().GenderClausePrice != null) {
+                                            pricePerclick(pricePerclick() + UserAndCostDetail().GenderClausePrice);
+                                        }
+                                        if (UserAndCostDetail().AgeClausePrice != null) {
+                                            pricePerclick(pricePerclick() + UserAndCostDetail().AgeClausePrice);
+                                        }
                                     }
 
                                 },
@@ -69,10 +82,6 @@ define("ads/ads.viewModel",
                                
                                 if (data != null) {
                                    
-                                    //// set languages drop down
-                                    //langs.removeAll();
-                                    //ko.utils.arrayPushAll(langs(), data.LanguageDropdowns);
-                                    //langs.valueHasMutated();
                                     // set grid content
                                     campaignGridContent.removeAll();
                                     _.each(data.Campaigns, function (item) {
@@ -124,6 +133,8 @@ define("ads/ads.viewModel",
                        
                         campaignModel().Gender('2');
                         campaignModel().Type('2');
+                        campaignModel().MaxBudget('0');
+                        
                         campaignModel().reset();
                         view.initializeTypeahead();
                         isEnableVedioVerificationLink(false);
@@ -148,8 +159,7 @@ define("ads/ads.viewModel",
                     saveCampaign = function (mode) {
                         campaignModel().Status(mode);
                         var campignServerObj = campaignModel().convertToServerData();
-                        console.log(campignServerObj);
-
+                        
                         dataservice.addCampaignData(campignServerObj, {
                             success: function (data) {
 
@@ -173,6 +183,8 @@ define("ads/ads.viewModel",
                         criteriaCount(criteriaCount() + 1);
                         objProfileCriteria.CriteriaID(criteriaCount());
                         selectedCriteria(objProfileCriteria);
+
+                      
                         if (profileQuestionList().length == 0)
                         {
                             dataservice.getBaseData({
@@ -204,6 +216,7 @@ define("ads/ads.viewModel",
                         criteriaCount(criteriaCount() + 1);
                         objSurveyCriteria.CriteriaID(criteriaCount());
                         selectedCriteria(objSurveyCriteria);
+                      
                         if (surveyQuestionList().length == 0) {
                             dataservice.getBaseData({
                                 RequestId: 4,
@@ -232,8 +245,20 @@ define("ads/ads.viewModel",
                             var selectedQuestionAnswerstring = $("#ddprofileAnswers option[value=" + $("#ddprofileAnswers").val() + "]").text();
                             selectedCriteria().answerString(selectedQuestionAnswerstring);
                             selectedCriteria().PQAnswerID($("#ddprofileAnswers").val());
+
+                            var matchedProfileCriteria = ko.utils.arrayFirst(campaignModel().AdCampaignTargetCriterias(), function (arrayitem) {
+                                
+                                return arrayitem.PQID() == $("#ddprofileQuestion").val();
+                            });
+                           
+                            if (matchedProfileCriteria == null) {
+                                if (UserAndCostDetail().OtherClausePrice != null) {
+                                    pricePerclick(pricePerclick() + UserAndCostDetail().OtherClausePrice);
+                                    isProfileSurveyPerClickPriceAdded(true);
+                                }
+                            }
                         } else if (selectedCriteria().Type() == "2") {
-                            console.log(selectedCriteria().SQAnswer());
+                          
                             var selectedQuestionstring = $("#ddsurveyQuestion option[value=" + $("#ddsurveyQuestion").val() + "]").text();
                             selectedCriteria().questionString(selectedQuestionstring);
                             var matchSurveyQuestion = ko.utils.arrayFirst(surveyQuestionList(), function (item) {
@@ -244,8 +269,19 @@ define("ads/ads.viewModel",
                             } else {
                                 selectedCriteria().answerString(matchSurveyQuestion.RightPicturePath);
                             }
+                          
+                            var matchedSurveyCriteria = ko.utils.arrayFirst(campaignModel().AdCampaignTargetCriterias(), function (arrayitem) {
+
+                                return arrayitem.SQID() == $("#ddsurveyQuestion").val();
+                            });
+                            if (matchedSurveyCriteria == null) {
+                                if (UserAndCostDetail().OtherClausePrice != null) {
+                                    pricePerclick(pricePerclick() + UserAndCostDetail().OtherClausePrice);
+                                    isProfileSurveyPerClickPriceAdded(true);
+                                }
+                            }
                         }
-                        
+                      
                         if (isNewCriteria()) {
                             campaignModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
                                 Type: selectedCriteria().Type(),
@@ -337,7 +373,7 @@ define("ads/ads.viewModel",
                                             selectedCriteria().surveyQuestLeftImageSrc(matchSurveyQuestion.LeftPicturePath);
                                             selectedCriteria().surveyQuestRightImageSrc(matchSurveyQuestion.RightPicturePath);
                                             isShowSurveyAns(true);
-                                            console.log(selectedCriteria());
+                                         
                                         }
 
                                     },
@@ -352,8 +388,37 @@ define("ads/ads.viewModel",
                     },
                       // Delete Handler PQ
                     onDeleteCriteria = function (item) {
+                        
                         campaignModel().AdCampaignTargetCriterias.remove(item);
                        
+                       if (item.Type() == "1")
+                       {
+                           var matchedProfileCriteria = ko.utils.arrayFirst(campaignModel().AdCampaignTargetCriterias(), function (arrayitem) {
+                             
+                               return arrayitem.PQID() == item.PQID()
+                           });
+
+                           if (matchedProfileCriteria == null) {
+                               if (UserAndCostDetail().OtherClausePrice != null) {
+                                   pricePerclick(pricePerclick() - UserAndCostDetail().OtherClausePrice);
+                                  
+                               }
+                           }
+                       } else if (item.Type() == "2")
+                       {
+                           var matchedSurveyCriteria = ko.utils.arrayFirst(campaignModel().AdCampaignTargetCriterias(), function (arrayitem) {
+
+                               return arrayitem.SQID() == item.SQID();
+                           });
+
+                           if (matchedSurveyCriteria == null) {
+                               if (UserAndCostDetail().OtherClausePrice != null) {
+                                   pricePerclick(pricePerclick() - UserAndCostDetail().OtherClausePrice);
+                            
+                               }
+                           }
+                       }
+
                     },
 
                     onChangeProfileQuestion = function () {
@@ -400,6 +465,11 @@ define("ads/ads.viewModel",
 
                     deleteLocation = function (item) {
                         campaignModel().AdCampaignTargetLocations.remove(item);
+                      
+                        if (campaignModel().AdCampaignTargetLocations() == null || campaignModel().AdCampaignTargetLocations().length == 0) {
+                            isLocationPerClickPriceAdded(false);
+                            pricePerclick(pricePerclick() - UserAndCostDetail().LocationClausePrice);
+                        }
                         toastr.success("Removed Successfully!");
                     },
                     //add location
@@ -419,6 +489,11 @@ define("ads/ads.viewModel",
                         }));
                         $(".locVisibility,.locMap").css("display", "none");
                         resetLocations();
+
+                        if (UserAndCostDetail().LocationClausePrice != null && isLocationPerClickPriceAdded() == false) {
+                            pricePerclick(pricePerclick() + UserAndCostDetail().LocationClausePrice);
+                            isLocationPerClickPriceAdded(true);
+                        }
                     },
 
                     resetLocations = function () {
@@ -437,11 +512,15 @@ define("ads/ads.viewModel",
                             CampaignId: campaignModel().CampaignID()
                         }));
                         $("#searchLanguages").val("");
+                        if (UserAndCostDetail().OtherClausePrice != null && isLanguagePerClickPriceAdded() == false) {
+                            pricePerclick(pricePerclick() + UserAndCostDetail().OtherClausePrice);
+                            isLanguagePerClickPriceAdded(true);
+                        }
                     },
 
                     onRemoveLanguage = function (item) {
                         // Ask for confirmation
-                            deleteLanguage(item);
+                        deleteLanguage(item);
                         
                        
                     },
@@ -449,6 +528,16 @@ define("ads/ads.viewModel",
                     deleteLanguage = function (item) {
                        
                         campaignModel().AdCampaignTargetCriterias.remove(item);
+
+                        var matchedLanguageCriterias = ko.utils.arrayFirst(campaignModel().AdCampaignTargetCriterias(), function (arrayitem) {
+
+                            return arrayitem.Type() == item.Type();
+                        });
+
+                        if (matchedLanguageCriterias == null) {
+                            isLanguagePerClickPriceAdded(false);
+                            pricePerclick(pricePerclick() - UserAndCostDetail().OtherClausePrice);
+                        }
                         toastr.success("Removed Successfully!");
                        
                     },
@@ -544,27 +633,37 @@ define("ads/ads.viewModel",
                             CampaignId: campaignModel().CampaignID()
                         }));
                         $("#searchIndustries").val("");
+                        if (UserAndCostDetail().ProfessionClausePrice != null && isIndustoryPerClickPriceAdded() == false) {
+                            pricePerclick(pricePerclick() + UserAndCostDetail().ProfessionClausePrice);
+                            isIndustoryPerClickPriceAdded(true);
+                        }
                     },
                     onRemoveIndustry = function (item) {
                             // Ask for confirmation
                            
-                            campaignModel().AdCampaignTargetCriterias.remove(item);
-                                toastr.success("Removed Successfully!");
+                        campaignModel().AdCampaignTargetCriterias.remove(item);
+                        var matchedIndustoryCriterias = ko.utils.arrayFirst(campaignModel().AdCampaignTargetCriterias(), function (arrayitem) {
+
+                            return arrayitem.Type() == item.Type();
+                        });
+
+                        if (matchedIndustoryCriterias == null) {
+                            isIndustoryPerClickPriceAdded(false);
+                            pricePerclick(pricePerclick() - UserAndCostDetail().ProfessionClausePrice);
+                        }
+                        toastr.success("Removed Successfully!");
                            
                     },
                     visibleTargetAudience = function (mode) {
                        
                         if (mode != undefined) {
-                            console.log(campaignModel().AdCampaignTargetCriterias());
                             var matcharry = ko.utils.arrayFirst(campaignModel().AdCampaignTargetCriterias(), function (item) {
                                
                                 return item.Type() == mode;
                             });
-                            console.log(mode);
-                            console.log(matcharry);
-                            
+                        
                             if (matcharry != null) {
-                                console.log(console.log(matcharry));
+                              
                                 return 1;
                             } else {
                                 return 0;
@@ -637,7 +736,8 @@ define("ads/ads.viewModel",
                         selectedIndustryIncludeExclude: selectedIndustryIncludeExclude,
                         addIndustry: addIndustry,
                         onRemoveIndustry: onRemoveIndustry,
-                        visibleTargetAudience: visibleTargetAudience
+                        visibleTargetAudience: visibleTargetAudience,
+                        pricePerclick: pricePerclick
                     };
             })()
         };

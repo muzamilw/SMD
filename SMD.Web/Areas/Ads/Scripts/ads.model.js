@@ -287,6 +287,7 @@
        
         return new AdCampaignTargetLocation(source.Id, source.CampaignId, source.CountryId, source.CityId, source.Radius, source.Country, source.City,source.IncludeorExclude);
     };
+
     return {
         Campaign: Campaign,
         AdCampaignTargetCriteriasModel: AdCampaignTargetCriteriasModel,
