@@ -139,7 +139,12 @@ namespace SMD.Repository.Repositories
                             LanguageId = usr.LanguageId,
                             LocationClausePrice = prod.LocationClausePrice,
                             OtherClausePrice = prod.OtherClausePrice,
-                            ProfessionClausePrice = prod.ProfessionClausePrice
+                            ProfessionClausePrice = prod.ProfessionClausePrice,
+                            City = usr.City != null? usr.City.CityName:"",
+                            Country = usr.Country != null ? usr.Country.CountryName : "",
+                            Education = usr.Education != null?usr.Education.Title : "",
+                            Industry = usr.Industry != null?usr.Industry.IndustryName:"",
+                            Language = usr.Language != null? usr.Language.LanguageName: ""
                            
                         };
 
