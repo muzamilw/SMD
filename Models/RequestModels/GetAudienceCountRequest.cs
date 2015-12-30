@@ -23,5 +23,9 @@ namespace SMD.Models.RequestModels
         public string cityIdsExcluded { get; set; }
         public string languageIdsExcluded { get; set; }
         public string industryIdsExcluded { get; set; }
+        public string profileQuestionIdsExcluded { get; set; }
+        public string profileAnswerIdsExcluded { get; set; }
+        public string surveyQuestionIdsExcluded { get; set; }
+        public string surveyAnswerIdsExcluded { get; set; }
     }
 }

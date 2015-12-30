@@ -213,6 +213,7 @@ namespace SMD.MIS.ModelMappers
             string QuestionString = "";
             string AnswerString = "";
             string LanguageName = "";
+            string IndustryName = "";
             if (source.Type != null && source.Type == (int)AdCampaignCriteriaType.ProfileQuestion)
             {
                 if (source.PqId != null && source.PqId > 0 && source.ProfileQuestion != null)
@@ -266,7 +267,13 @@ namespace SMD.MIS.ModelMappers
                     LanguageName = source.Language.LanguageName;
                 }
             }
-            
+            else if (source.Type == (int)SurveyQuestionTargetCriteriaType.Industry)
+            {
+                if (source.Industry != null)
+                {
+                    IndustryName = source.Industry.IndustryName;
+                }
+            }
             return new SMD.MIS.Areas.Api.Models.AdCampaignTargetCriteria
             {
                 CriteriaId = source.CriteriaId,
@@ -281,7 +288,8 @@ namespace SMD.MIS.ModelMappers
                 Type = source.Type,
                 questionString = QuestionString,
                 answerString = AnswerString,
-                Language = LanguageName
+                Language = LanguageName,
+                Industry = IndustryName
             };
         }
 

@@ -153,6 +153,130 @@ div.Tokenize ul.Dropdown {
   font-size: 20px;
   padding: 0px 17px 0px 10px;
 }
+._1gab {
+  max-height: 300px;
+  overflow: hidden;
+  -webkit-transition: max-height 1s ease;
+}
+._1g9- {
+  display: inline-block;
+}
+.lfloat {
+  float: left;
+}
+._1g9_ {
+  display: inline-block;
+  position: relative;
+  width: 110px;
+}
+.sp_NQc91B1T0mb.sx_f05cb6 {
+  width: 5px;
+  height: 39px;
+}
+i.img {
+  -ms-high-contrast-adjust: none;
+  _overflow: hidden;
+}
+._1ga0 {
+  height: 39px;
+  left: 54px;
+  position: absolute;
+  top: 6px;
+  -webkit-transform-origin: 50% 100%;
+  -webkit-transition: -webkit-transform ease 0.7s;
+  width: 4px;
+}
+.sp_NQc91B1T0mb {
+  background-image: url('/Content/Images/pin.png');
+  background-size: auto;
+  background-repeat: no-repeat;
+  display: inline-block;
+}
+.sp_NQc91B1T0mb.sx_0eeab0 {
+  width: 89px;
+  height: 45px;
+  /*background-position: -601px -667px;*/
+}
+._1ga1 {
+  height: 44px;
+  margin-left: 12px;
+  width: 87px;
+}
+.sp_NQc91B1T0mb3 {
+  background-image: url('/Content/Images/meter.png');
+  background-size: auto;
+  background-repeat: no-repeat;
+  display: inline-block;
+}
+._1ga2,
+._1g9z {
+  color: #6a7180;
+  font-family: helvetica, arial, 'lucida grande', sans-serif;
+}
+._1ga2 {
+  font-size: 10px;
+  width: 110px;
+}
+._5p3y .fsm,
+._5p3y .uiHeader h3,
+._5p3y h4,
+._5p3y h5,
+._5p3y h6,
+._5p3y .UFICommentContent ._5v47 {
+  font-size: 12px;
+}
+.fsm {
+  font-size: 11px;
+}
+._1ga4 {
+  margin-top: -2px;
+  width: 100px;
+}
+.fsm {
+  font-size: 11px;
+}
+.rfloat {
+  float: right;
+}
+.broad_aud {
+  -webkit-transform: rotate(74deg);
+}
+.defined_aud {
+  -webkit-transform: rotate(0deg);
+}
+.spec_aud {
+  -webkit-transform: rotate(-74deg);
+}
+.ad_h4_noborder {
+  text-transform: uppercase;
+  font-size: 0.875em;
+  font-weight: bold;
+  padding-bottom: 5px;
+  padding-left: 10px;
+}
+.aud_cnt {
+  width: 270px;
+  background: #f3f3f3;
+  padding: 10px;
+  border: 5px;
+  /*position: fixed;*/
+  top: 200px;
+}
+.fsm_bold {
+  font-size: 10px;
+  font-weight: bold;
+}
+.pad-11 {
+  padding-left: 11px;
+}
+.li-audul {
+  top: 10px;
+}
+.aud_licontent {
+  margin-top: 5px;
+  /* margin-left: 12px; */
+  font-size: 12px;
+}
 .lang_newcnt {
   position: relative;
 }
