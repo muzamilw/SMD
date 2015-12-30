@@ -57,6 +57,7 @@ namespace SMD.Models.IdentityModels
         public int? LanguageId { get; set; }
         public int? IndustryId { get; set; }
 
+        public long? EducationId { get; set; }
         public virtual Industry Industry { get; set; }
         public virtual Language Language { get; set; }
         public virtual ICollection<UserLogin> UserLogins { get; set; }
@@ -71,6 +72,9 @@ namespace SMD.Models.IdentityModels
         public virtual ICollection<Account> Accounts { get; set; }
 
         public virtual ICollection<Invoice> Invoices { get; set; }
+
+
+        public virtual Education Education { get; set; }
         #endregion
 
         #region Public

@@ -17,8 +17,13 @@ namespace SMD.Models.DomainModels
         public Nullable<bool> IsActive { get; set; }
         public Nullable<double> SetupPrice { get; set; }
         public Nullable<double> ClickFeePercentage { get; set; }
-        public Nullable<double> ClausePrice { get; set; }
+        public Nullable<double> AgeClausePrice { get; set; }
         public Nullable<double> AffiliatePercentage { get; set; }
+        public Nullable<double> GenderClausePrice { get; set; }
+        public Nullable<double> LocationClausePrice { get; set; }
+        public Nullable<double> OtherClausePrice { get; set; }
+        public Nullable<double> ProfessionClausePrice { get; set; }
+        public Nullable<double> EducationClausePrice { get; set; }
 
         public virtual Country Country { get; set; }
         public virtual Currency Currency { get; set; }

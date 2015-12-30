@@ -19,6 +19,8 @@
 
         public int? IndustryId { get; set; }
 
+        public long? EducationId { get; set; }
+    
         public virtual Industry Industry { get; set; }
 
         public virtual ProfileQuestion ProfileQuestion { get; set; }
@@ -27,5 +29,7 @@
         public virtual SurveyQuestion LinkedSurveyQuestion { get; set; }
 
         public virtual Language Language { get; set; }
+
+        public virtual Education Education { get; set; }
     }
 }
