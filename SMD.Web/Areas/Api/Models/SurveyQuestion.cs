@@ -53,11 +53,12 @@ namespace SMD.MIS.Areas.Api.Models
         public bool? IncludeorExclude { get; set; }
         public int? LanguageId { get; set; }
         public int? IndustryId { get; set; }
-
+        public long? EducationId { get; set; }
         public string questionString { get; set; }   // survey Question , profile Question,  industry name
         public string answerString { get; set; }  // survey Question Answer , profile Question Answer
         public string Language { get; set; } // language name
         public string Industry { get; set; }  // industry name 
+        public string Education { get; set; }  // education name 
     }
     public class SurveyQuestionTargetLocation
     {

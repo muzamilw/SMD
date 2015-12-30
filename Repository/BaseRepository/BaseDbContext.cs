@@ -102,7 +102,10 @@ namespace SMD.Repository.BaseRepository
         /// Languages
         /// </summary>
         public DbSet<Language> Languages { get; set; }
-
+        /// <summary>
+        /// Educations
+        /// </summary>
+        public DbSet<Education> Educations { get; set; }
         /// <summary>
         /// Ad Campaign Response
         /// </summary>

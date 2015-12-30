@@ -40,6 +40,7 @@ namespace SMD.Implementation.Services
         private readonly ITaxRepository taxRepository;
         private readonly IInvoiceRepository invoiceRepository;
         private readonly IInvoiceDetailRepository invoiceDetailRepository;
+        private readonly IEducationRepository _educationRepository;
         #region Private Funcs
         private ApplicationUserManager UserManager
         {
@@ -162,7 +163,7 @@ namespace SMD.Implementation.Services
             IAdCampaignTargetCriteriaRepository adCampaignTargetCriteriaRepository,
             IProfileQuestionRepository profileQuestionRepository,
             IProfileQuestionAnswerRepository profileQuestionAnswerRepository,
-            ISurveyQuestionRepository surveyQuestionRepository, IProductRepository productRepository, ITaxRepository taxRepository, IInvoiceRepository invoiceRepository, IInvoiceDetailRepository invoiceDetailRepository)
+            ISurveyQuestionRepository surveyQuestionRepository, IProductRepository productRepository, ITaxRepository taxRepository, IInvoiceRepository invoiceRepository, IInvoiceDetailRepository invoiceDetailRepository,IEducationRepository educationRepository)
         {
             this._adCampaignRepository = adCampaignRepository;
             this._languageRepository = languageRepository;
@@ -179,6 +180,7 @@ namespace SMD.Implementation.Services
             this.invoiceRepository = invoiceRepository;
             this.invoiceDetailRepository = invoiceDetailRepository;
             this._industryRepository = industryRepository;
+            this._educationRepository = educationRepository;
         }
      
         /// <summary>
@@ -223,7 +225,10 @@ namespace SMD.Implementation.Services
             return _industryRepository.SearchIndustries(searchString);
     
         }
-        
+        public IEnumerable<Education> SearchEducation(string searchString)
+        {
+            return _educationRepository.SearchEducation(searchString);
+        }
 
         /// <summary>
         /// Add Campaign

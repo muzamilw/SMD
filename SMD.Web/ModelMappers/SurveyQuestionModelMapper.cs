@@ -293,6 +293,7 @@ namespace SMD.MIS.ModelMappers
                 modelCriteria.PqId = criteria.PqId;
                 modelCriteria.SqId = criteria.SqId;
                 modelCriteria.Type = criteria.Type;
+                modelCriteria.EducationId = criteria.EducationId;
                 if (criteria.Type == (int)SurveyQuestionTargetCriteriaType.ProfileQuestion)
                 {
                     if (criteria.ProfileQuestion != null)
@@ -330,6 +331,13 @@ namespace SMD.MIS.ModelMappers
                     if (criteria.Industry != null)
                     {
                         modelCriteria.Industry = criteria.Industry.IndustryName;
+                    }
+                }
+                else if (criteria.Type == (int)SurveyQuestionTargetCriteriaType.Education)
+                {
+                    if (criteria.Education != null)
+                    {
+                        modelCriteria.Education = criteria.Education.Title;
                     }
                 }
                 result.Add(modelCriteria);

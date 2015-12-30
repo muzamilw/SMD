@@ -30,6 +30,7 @@ define("survey/survey.viewModel",
                     selectedLocationIncludeExclude = ko.observable(true),
                     selectedLangIncludeExclude = ko.observable(true),
                     selectedIndustryIncludeExclude = ko.observable(true),
+                    selectedEducationIncludeExclude = ko.observable(true),
                     selectedLocationLat = ko.observable(0),
                     selectedLocationLong = ko.observable(0),
                     // criteria selection 
@@ -298,6 +299,18 @@ define("survey/survey.viewModel",
                          }));
                          $("#searchIndustries").val("");
                      },
+                      addEducation = function (selected) {
+                          console.log(selected);
+                          selectedQuestion().SurveyQuestionTargetCriteria.push(new model.SurveyQuestionTargetCriteria.Create({
+                              Education: selected.Title,
+                              EducationId: selected.EducationId,
+                              IncludeorExclude: parseInt(selectedEducationIncludeExclude()),
+                              Type: 5,
+                              SQID: selectedQuestion().SQID()
+                          }));
+                          $("#searchEducations").val("");
+                      },
+                // same function used to remove education
                     onRemoveIndustry = function (item) {
                         // Ask for confirmation
                         confirmation.afterProceed(function () {
@@ -783,7 +796,8 @@ define("survey/survey.viewModel",
                     deleteLocation: deleteLocation,
                     selectedLocationIncludeExclude: selectedLocationIncludeExclude,
                     selectedLangIncludeExclude: selectedLangIncludeExclude,
-                    selectedIndustryIncludeExclude:selectedIndustryIncludeExclude,
+                    selectedIndustryIncludeExclude: selectedIndustryIncludeExclude,
+                    selectedEducationIncludeExclude:selectedEducationIncludeExclude,
                     selectedLocationLat: selectedLocationLat,
                     selectedLocationLong: selectedLocationLong,
                     addLanguage: addLanguage,
@@ -816,7 +830,8 @@ define("survey/survey.viewModel",
                     audienceReachMode: audienceReachMode,
                     bindAudienceReachCount: bindAudienceReachCount,
                     userBaseData: userBaseData,
-                    setupPrice: setupPrice
+                    setupPrice: setupPrice,
+                    addEducation: addEducation
                 };
             })()
         };
