@@ -143,6 +143,7 @@ define("survey/survey.view",
                                     viewModel.addIndustry(selected);
                                 }
                             });
+
                 },
                 // Initialize
                 initialize = function () {

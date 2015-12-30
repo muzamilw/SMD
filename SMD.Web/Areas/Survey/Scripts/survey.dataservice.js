@@ -37,6 +37,14 @@ define("survey/survey.dataservice", function () {
                         dataType: 'json',
                         type: 'GET'
                     });
+                    // getting audience for survey
+                    amplify.request.define('getAudienceData', 'ajax', {
+                        url: '/Api/SurveyAudience',
+                        dataType: 'json',
+                        dataMap: JSON.stringify,
+                        contentType: "application/json; charset=utf-8",
+                        type: 'POST'
+                    });
                     isInitialized = true;
                 }
             },
@@ -70,6 +78,16 @@ define("survey/survey.dataservice", function () {
                     data: params
                 });
             },
+            // get audiance Count
+             getAudienceData = function (params, callbacks) {
+                 initialize();
+                 return amplify.request({
+                     resourceId: 'getAudienceData',
+                     data: params,
+                     success: callbacks.success,
+                     error: callbacks.error,
+                 });
+             },
            addSurveyData = function (params, callbacks) {
                initialize();
                return amplify.request({
@@ -84,7 +102,8 @@ define("survey/survey.dataservice", function () {
             getBaseData: getBaseData,
             searchSurveyQuestions: searchSurveyQuestions,
             addSurveyData: addSurveyData,
-            getSurveyQuestion: getSurveyQuestion
+            getSurveyQuestion: getSurveyQuestion,
+            getAudienceData: getAudienceData
         };
        
     })();
