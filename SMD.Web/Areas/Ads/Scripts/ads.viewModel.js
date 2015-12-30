@@ -164,8 +164,13 @@ define("ads/ads.viewModel",
                             success: function (data) {
 
                                 criteriaCount(0);
+                                pricePerclick(0);
                                 isEditorVisible(false);
                                 getAdCampaignGridContent();
+                                isLocationPerClickPriceAdded(false);
+                                isLanguagePerClickPriceAdded(false);
+                                isIndustoryPerClickPriceAdded(false);
+                                isProfileSurveyPerClickPriceAdded(false);
                                 toastr.success("Successfully saved.");
                             },
                             error: function (response) {
@@ -580,10 +585,7 @@ define("ads/ads.viewModel",
                                     if (data != null) {
                                         // set languages drop down
                                         selectedCriteria();
-                                        langs.removeAll();
-                                        ko.utils.arrayPushAll(langs(), data.LanguageDropdowns);
-                                        langs.valueHasMutated();
-
+                                      
                                         campaignModel(model.Campaign.Create(data.Campaigns[0]));
                                         campaignModel().reset();
                                         view.initializeTypeahead();
@@ -612,6 +614,46 @@ define("ads/ads.viewModel",
                                         }
                                         isEditCampaign(true);
                                         isEditorVisible(true);
+                                       
+
+                                        if (campaignModel().AdCampaignTargetLocations() != null || campaignModel().AdCampaignTargetLocations().length > 0) {
+                                            if (UserAndCostDetail().LocationClausePrice != null && isLocationPerClickPriceAdded() == false) {
+                                                pricePerclick(pricePerclick() + UserAndCostDetail().LocationClausePrice);
+                                                isLocationPerClickPriceAdded(true);
+                                            }
+                                        }else{
+                                            isLocationPerClickPriceAdded(true);
+                                        }
+                                        if (UserAndCostDetail().GenderClausePrice != null) {
+                                            pricePerclick(pricePerclick() + UserAndCostDetail().GenderClausePrice);
+                                        }
+                                        if (UserAndCostDetail().AgeClausePrice != null) {
+                                            pricePerclick(pricePerclick() + UserAndCostDetail().AgeClausePrice);
+                                        }
+
+                                        _.each(data.campaignModel().AdCampaignTargetCriterias(), function (item) {
+
+                                            if (item.Type() == "1") { // profile
+
+                                            }
+                                            if (item.Type() == "2") { // survey
+
+                                            }
+                                            if (item.Type() == "3") { // language
+                                                if (isLanguagePerClickPriceAdded() == true) {
+                                                    isLanguagePerClickPriceAdded(true);
+                                                    pricePerclick(pricePerclick() + UserAndCostDetail().OtherClausePrice);
+                                                }
+                                            }
+                                            if (item.Type() == "4") { // industry
+                                                if (isIndustoryPerClickPriceAdded() == true) {
+                                                    isIndustoryPerClickPriceAdded(true);
+                                                    pricePerclick(pricePerclick() + UserAndCostDetail().OtherClausePrice);
+                                                }
+                                            }
+                                        });
+
+                                        
                                         // handle 2nd edit error 
                                         //  $(".modal-backdrop").remove();
                                         $.unblockUI(spinner);
