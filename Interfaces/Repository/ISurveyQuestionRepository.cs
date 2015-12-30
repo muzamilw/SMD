@@ -1,4 +1,5 @@
-﻿using SMD.Models.DomainModels;
+﻿using SMD.Models.Common;
+using SMD.Models.DomainModels;
 using SMD.Models.RequestModels;
 using System;
 using System.Collections.Generic;
@@ -42,5 +43,6 @@ namespace SMD.Interfaces.Repository
         /// </summary>
         long GetAudienceAdCampaignCount(GetAudienceSurveyRequest request);
         GetAudience_Result GetAudienceCount(GetAudienceCountRequest request);
+        UserBaseData getBaseData();
     }
 }

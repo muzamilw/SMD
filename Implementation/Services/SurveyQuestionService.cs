@@ -38,7 +38,6 @@ namespace SMD.Implementation.Services
         private readonly ITaxRepository taxRepository;
         private readonly IInvoiceRepository invoiceRepository;
         private readonly IInvoiceDetailRepository invoiceDetailRepository;
-
         private ApplicationUserManager UserManager
         {
             get { return HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
@@ -182,12 +181,23 @@ namespace SMD.Implementation.Services
         public SurveyQuestionResponseModel GetSurveyQuestions()
         {
             int rowCount;
+            string code = Convert.ToString((int)ProductCode.SurveyQuestion);
+            var product = productRepository.GetAll().Where(g=>g.ProductCode == code).FirstOrDefault();
+            var userBaseData = surveyQuestionRepository.getBaseData();
+            double? setupPrice = 0;
+            if (product != null)
+            {
+                userBaseData.CurrencySymbol = product.Currency != null ? product.Currency.CurrencyCode : "$";
+                setupPrice = product.SetupPrice;
+            }
             return new SurveyQuestionResponseModel
             {
                 SurveyQuestions = surveyQuestionRepository.SearchSurveyQuestions(null, out rowCount),
                 Countries = countryRepository.GetAllCountries(),
                 Languages = languageRepository.GetAllLanguages(),
-                TotalCount = rowCount
+                TotalCount = rowCount,
+                setupPrice = setupPrice,
+                objBaseData = userBaseData
             };
         }
 

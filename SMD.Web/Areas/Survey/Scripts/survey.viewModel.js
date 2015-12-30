@@ -49,6 +49,8 @@ define("survey/survey.viewModel",
                     totalAudience = ko.observable(0),
                     // audience reach mode 
                     audienceReachMode = ko.observable(1),
+                    userBaseData = ko.observable(null),
+                    setupPrice = ko.observable(0),
                     //Get Questions
                     getQuestions = function () {   
                         dataservice.searchSurveyQuestions(
@@ -88,7 +90,8 @@ define("survey/survey.viewModel",
                                     countries.valueHasMutated();
                                     // populate survey questions 
                                     populateSurveyQuestions(data);
-                    
+                                    userBaseData(data.objBaseData);
+                                    setupPrice(data.setupPrice);
                                 },
                                 error: function () {
                                     toastr.error("Failed to load base data!");
@@ -811,7 +814,9 @@ define("survey/survey.viewModel",
                     totalAudience: totalAudience,
                     reachedAudience: reachedAudience,
                     audienceReachMode: audienceReachMode,
-                    bindAudienceReachCount: bindAudienceReachCount
+                    bindAudienceReachCount: bindAudienceReachCount,
+                    userBaseData: userBaseData,
+                    setupPrice: setupPrice
                 };
             })()
         };
