@@ -85,7 +85,7 @@
               convertToServerData = function () {
                   var targetCriteria = [];
                   _.each(AdCampaignTargetCriterias(), function (item) {
-                     
+                      console.log(item);
                       targetCriteria.push(item.convertCriteriaToServerData());
                   });
                   var LocationtargetCriteria = [];
@@ -280,8 +280,8 @@
     };
     // Factory Method
     AdCampaignTargetCriteriasModel.Create = function (source) {
-    
-        return new AdCampaignTargetCriteriasModel(source.CriteriaId, source.CampaignId, source.Type, source.PQId, source.PQAnswerId, source.SQId, source.SQAnswer, source.IncludeorExclude, source.questionString, source.answerString, source.surveyQuestLeftImageSrc, source.surveyQuestRightImageSrc, source.LanguageId, source.Language, source.IndustryId, source.Industry);
+       
+        return new AdCampaignTargetCriteriasModel(source.CriteriaId, source.CampaignId, source.Type, source.PQId, source.PQAnswerId, source.SQId, source.SQAnswer, source.IncludeorExclude, source.questionString, source.answerString, source.surveyQuestLeftImageSrc, source.surveyQuestRightImageSrc, source.LanguageId, source.Language, source.IndustryID, source.Industry);
     };
     AdCampaignTargetLocation.Create = function (source) {
        

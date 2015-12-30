@@ -632,13 +632,28 @@ define("ads/ads.viewModel",
                                             pricePerclick(pricePerclick() + UserAndCostDetail().AgeClausePrice);
                                         }
 
-                                        _.each(data.campaignModel().AdCampaignTargetCriterias(), function (item) {
-
+                                        _.each(campaignModel().AdCampaignTargetCriterias(), function (item) {
+                                           
+                                        
                                             if (item.Type() == "1") { // profile
-                                                //profileQIds.
+                                                if ($.inArray('profileQIds', item.PQID()) == -1) {
+                                                    profileQIds.push(item.PQID());
+                                                    if (UserAndCostDetail().OtherClausePrice != null) {
+                                                        pricePerclick(pricePerclick() + UserAndCostDetail().OtherClausePrice);
+                                                        isProfileSurveyPerClickPriceAdded(true);
+                                                    }
+                                                }
+                                                
                                             }
                                             if (item.Type() == "2") { // survey
-
+                                                if ($.inArray('surveyQIds', item.SQID()) == -1) {
+                                                    surveyQIds.push(item.SQID());
+                                                    if (UserAndCostDetail().OtherClausePrice != null) {
+                                                        pricePerclick(pricePerclick() + UserAndCostDetail().OtherClausePrice);
+                                                        isProfileSurveyPerClickPriceAdded(true);
+                                                    }
+                                                }
+                                                
                                             }
                                             if (item.Type() == "3") { // language
                                                 if (isLanguagePerClickPriceAdded() == true) {
@@ -653,8 +668,7 @@ define("ads/ads.viewModel",
                                                 }
                                             }
                                         });
-
-                                        
+                                       
                                         // handle 2nd edit error 
                                         //  $(".modal-backdrop").remove();
                                         $.unblockUI(spinner);
@@ -668,13 +682,16 @@ define("ads/ads.viewModel",
                         }
                     },
                     addIndustry = function (selected) {
+                        console.log(selected.IndustryId);
                         campaignModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
                             Industry: selected.IndustryName,
                             IndustryID: selected.IndustryId,
-                            IncludeorExclude: parseInt(selectedIndustryIncludeExclude()),
+                            IncludeorExclude: parseInt(selected.IndustryIncludeExclude),
                             Type: 4,
                             CampaignId: campaignModel().CampaignID()
                         }));
+
+                        console.log(campaignModel().AdCampaignTargetCriterias());
                         $("#searchIndustries").val("");
                         if (UserAndCostDetail().ProfessionClausePrice != null && isIndustoryPerClickPriceAdded() == false) {
                             pricePerclick(pricePerclick() + UserAndCostDetail().ProfessionClausePrice);
