@@ -436,6 +436,7 @@
     <Compile Include="Areas\Api\Models\SurveyQuestionResposneModelForAproval.cs" />
     <Compile Include="Areas\Api\Models\UpdateProfileQuestionUserAnswerResponse.cs" />
     <Compile Include="Areas\Api\Models\UserAndCostDetail.cs" />
+    <Compile Include="Areas\Api\Models\UserBaseData.cs" />
     <Compile Include="Areas\Api\Models\WebApiUser.cs" />
     <Compile Include="Areas\Api\Models\CountryDropdown.cs" />
     <Compile Include="Areas\Api\Models\ProfileQuestionDropdown.cs" />
@@ -461,6 +462,7 @@
     </Compile>
     <Compile Include="Helper\CultureHelper.cs" />
     <Compile Include="ModelMappers\AdCampaignMapper.cs" />
+    <Compile Include="ModelMappers\EducationMapper.cs" />
     <Compile Include="ModelMappers\IndustryMapper.cs" />
     <Compile Include="ModelMappers\InvoiceMapper.cs" />
     <Compile Include="ModelMappers\LanguageMapper.cs" />

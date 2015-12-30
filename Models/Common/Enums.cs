@@ -160,7 +160,8 @@
         ProfileQuestion = 1, 
         SurveryQuestion = 2, 
         Language = 3,
-        Industry = 4
+        Industry = 4,
+        Education = 5
     }
     public enum ProductCode
     {

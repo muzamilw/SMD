@@ -339,7 +339,7 @@
                                                     <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
                                                 </a>
                                             </div>
-                                            <label for="txtLanguages" class="control-label text-right tooltip-float">Industries</label>
+                                            <label for="txtLanguages" class="control-label text-right tooltip-float">Professions</label>
                                         </div>
                                         <div class="col-lg-6">
                                             <div>
@@ -373,7 +373,46 @@
                                         </div>
                                     </div>
 
+                                    <div class="form-group">
+                                        <div class="col-lg-3 text-right">
+                                            <div class="bs-example-tooltips tooltip-float-width">
+                                                <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
+                                                    <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                </a>
+                                            </div>
+                                            <label for="txtLanguages" class="control-label text-right tooltip-float">Educations</label>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div>
 
+                                                <div id="lang_token_cnt">
+                                                    <!-- ko template: { name: 'SurveyQuestionEducationTemplate' , foreach: SurveyQuestionTargetCriteria } -->
+                                                    <!-- /ko -->
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <div id="land_edt">
+                                                    <div class="coun_in_ex_cnt">
+                                                        <select id="in_ex_count_opt" class="form-control" data-bind="value: $root.selectedEducationIncludeExclude">
+                                                            <option value="1">Include</option>
+                                                            <option value="0">Exclude</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="sep-line">
+
+                                                    </div>
+                                                    <div class="count_token_opt_cnt">
+                                                        <input type="text" data-autocomplete="off" class="" id="searchEducations" placeholder="Enter an Education" />
+                                                    </div>
+
+                                                    <div class="clearfix">
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
                                     <div class="form-group">
                                         <div class="col-lg-3 text-right">
 
@@ -628,6 +667,7 @@
                                                             </li>
                                                         </ul>
                                                     </div>
+                                                    <div>Price per click: <span data-bind="text: $root.userBaseData().CurrencySymbol"></span><span data-bind="text: $root.setupPrice()"></span></div>
                                                     <div>Potential Reach: <span data-bind="text:$root.reachedAudience()">0</span> people</div>
 
                                                 </div>
@@ -701,6 +741,21 @@
     <div class="count_city_newcnt">
         <!--ko if:Type() == 4 -->
         <span class="form-control lang_nr_box areaCity" data-bind="text:Industry() " style=" "></span>
+        <!--ko if:IncludeorExclude() == '1'-->
+        <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Included)' "></span>
+        <!--/ko-->
+        <!--ko if:IncludeorExclude() == '0' -->
+        <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Excluded)' "></span>
+        <!--/ko-->
+        <a id="" data-bind="click:$root.onRemoveIndustry" title=" delete" class="lang_delSurvey"> <i class="fa fa-times "></i></a>
+        <!--/ko-->
+    </div>
+    <div class="clear"></div>
+</script>
+<script id="SurveyQuestionEducationTemplate" type="text/html">
+    <div class="count_city_newcnt">
+        <!--ko if:Type() == 5 -->
+        <span class="form-control lang_nr_box areaCity" data-bind="text:Education() " style=" "></span>
         <!--ko if:IncludeorExclude() == '1'-->
         <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Included)' "></span>
         <!--/ko-->
@@ -813,7 +868,7 @@
     <!--/ko-->
 </script>
 <script id="targetCriteriasAudienceTemplate" type="text/html">
-    <!--ko if:Type() != 3 && Type() != 4 -->
+    <!--ko if:Type() != 3 && Type() != 4 && Type() != 5 -->
     <!--ko if:IncludeorExclude() == '0' -->
     <li>
         <!-- ko if:   Type() == "1" -->
