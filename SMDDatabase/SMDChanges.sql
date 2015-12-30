@@ -1519,3 +1519,154 @@ COMMIT
 
 
  -- ============================= updated on server 20151230 =============================
+
+
+ 
+
+/****** Object:  StoredProcedure [dbo].[GetAudience]    Script Date: 12/30/2015 12:17:59 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+-- =============================================
+-- Author:		
+-- Create date: 23-Dec-15
+-- Description:	Returns Count Of Matched Users
+-- =============================================
+
+ALTER PROCEDURE [dbo].[GetAudience] 
+
+	-- Add the parameters for the stored procedure here
+	     @ageFrom AS INT,
+		 @ageTo AS INT,
+		 @gender AS INT,
+		 @countryIds as nvarchar(500),
+		 @cityIds as nvarchar(500),
+		 @languageIds as nvarchar(500),
+		 @industryIds as nvarchar(500),
+		 @profileQuestionIds as nvarchar(500),
+		 @profileAnswerIds as nvarchar(500),
+		 @surveyQuestionIds as nvarchar(500),
+		 @surveyAnswerIds as nvarchar(500),
+		 @countryIdsExcluded as nvarchar(500),
+		 @cityIdsExcluded as nvarchar(500),
+		 @languageIdsExcluded as nvarchar(500),
+		 @industryIdsExcluded as nvarchar(500)
+
+
+AS
+BEGIN
+
+	Declare @counter int = 1
+	Declare @query nvarchar(max)
+   
+    Declare @where nvarchar(max)
+	
+
+    set @where = ' where '
+
+	set @query = 'SELECT count(*) as MatchingUsers, (select count(*) from AspNetUsers) as AllUsers FROM AspNetUsers SMDUser'
+	set @where = @where +' ((SMDUser.Age >= ' + CAST(@ageFrom AS NVARCHAR(10)) + ' and SMDUser.Age <= ' + CAST(@ageTo AS NVARCHAR(10)) + ') or  SMDUser.Age is null) '
+	
+	if(@gender = 1)
+	begin
+		set @where = @where + ' and ( SMDUser.Gender in (2,3) or  SMDUser.Gender is null )'
+	end
+	else
+	begin
+		set @where = @where + 'and (SMDUser.Gender = ' + CAST(@gender AS NVARCHAR(10)) + '  or  SMDUser.Gender is null )'
+	end
+
+	if(@countryIds IS NOT NULL AND @countryIds != '')
+	begin
+		set @where = @where + ' and SMDUser.CountryID in ('+ @countryIds +')'
+	end
+	if(@countryIdsExcluded IS NOT NULL AND @countryIdsExcluded != '')
+	begin
+		set @where = @where + ' and SMDUser.CountryID not in ('+ @countryIdsExcluded +')'
+	end
+	if(@cityIds IS NOT NULL AND @cityIds != '')
+	begin
+		set @where = @where + ' and SMDUser.CityID in ('+ @cityIds +')'
+	end
+	if(@cityIdsExcluded IS NOT NULL AND @cityIdsExcluded != '')
+	begin
+		set @where = @where + ' and SMDUser.CityID not in ('+ @cityIdsExcluded +')'
+	end
+    if(@languageIds IS NOT NULL AND @languageIds != '')
+	begin
+		set @where = @where + ' and SMDUser.LanguageID in ('+ @languageIds +')'
+	end
+	if(@languageIdsExcluded IS NOT NULL AND @languageIdsExcluded != '')
+	begin
+		set @where = @where + ' and SMDUser.LanguageID not in ('+ @languageIdsExcluded +')'
+	end
+    if(@industryIds IS NOT NULL AND @industryIds != '')
+	begin
+		set @where = @where + ' and SMDUser.IndustryID in ('+ @industryIds +')'
+	end
+	if(@industryIdsExcluded IS NOT NULL AND @industryIdsExcluded != '')
+	begin
+		set @where = @where + ' and SMDUser.IndustryID not in ('+ @industryIdsExcluded +')'
+	end
+	if(@profileQuestionIds IS NOT NULL AND @profileQuestionIds != '')
+	begin
+		
+		Declare @Profilewhere nvarchar(max)
+		set @Profilewhere = 'SELECT DISTINCT UserID FROM ProfileQuestionUserAnswer where '
+		while len(@profileQuestionIds) > 0
+		begin
+		 
+			if(@counter = 1)
+			begin
+				 set @counter = @counter + 1;
+				 set @Profilewhere = @Profilewhere + ' (PQID =' + left(@profileQuestionIds, charindex(',', @profileQuestionIds+',')-1) + ' and PQAnswerID =' + left(@profileAnswerIds, charindex(',', @profileAnswerIds +',')-1) + ')'
+			end
+			else if(@counter != 1)
+			begin
+				 set @Profilewhere = @Profilewhere + ' and (PQID =' + left(@profileQuestionIds, charindex(',', @profileQuestionIds+',')-1) + ' and PQAnswerID =' + left(@profileAnswerIds, charindex(',', @profileAnswerIds +',')-1) + ')'
+			end
+		 
+		  set @profileQuestionIds = stuff(@profileQuestionIds, 1, charindex(',', @profileQuestionIds+','), '')
+		  set @profileAnswerIds = stuff(@profileAnswerIds, 1, charindex(',', @profileAnswerIds +','), '')
+		end
+		set @where = @where + ' and SMDUser.Id in (' + @Profilewhere + ')'
+	end
+	if(@surveyAnswerIds IS NOT NULL AND @surveyAnswerIds != '')
+	begin
+		set @counter = 1;
+		Declare @Surveywhere nvarchar(max)
+		set @Surveywhere = 'SELECT DISTINCT UserID FROM SurveyQuestionResponse where '
+		while len(@surveyQuestionIds) > 0
+		begin
+		 
+			if(@counter = 1)
+			begin
+				 set @counter = @counter + 1;
+				 set @Surveywhere = @Surveywhere + ' (SQID =' + left(@surveyQuestionIds, charindex(',', @surveyQuestionIds +',')-1) + ' and UserSelection =' + left(@surveyAnswerIds, charindex(',', @surveyAnswerIds +',')-1) + ')'
+			end
+			else if(@counter != 1)
+			begin
+				 set @Surveywhere = @Surveywhere + ' and (SQID =' + left(@surveyQuestionIds, charindex(',', @surveyQuestionIds +',')-1) + ' and UserSelection =' + left(@surveyAnswerIds, charindex(',', @surveyAnswerIds +',')-1) + ')'
+			end
+
+		  set @surveyQuestionIds = stuff(@surveyQuestionIds, 1, charindex(',', @surveyQuestionIds +','), '')
+		  set @surveyAnswerIds = stuff(@surveyAnswerIds, 1, charindex(',', @surveyAnswerIds +','), '')
+		 
+		end
+		set @where = @where + ' and SMDUser.Id in (' + @Surveywhere + ')'
+	end
+
+--select (@query + @where)
+exec(@query + @where)
+
+END
+
+ 
+GO
+
+
