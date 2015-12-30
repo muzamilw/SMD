@@ -1,4 +1,5 @@
-﻿using SMD.Models.DomainModels;
+﻿using SMD.Models.Common;
+using SMD.Models.DomainModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,11 @@ namespace SMD.Models.ResponseModels
         /// Langs
         /// </summary>
         public IEnumerable<Language> Languages { get; set; }
+
+        /// <summary>
+        /// User and Cost detail
+        /// </summary>
+        public UserAndCostDetail UserAndCostDetails { get; set; }
 
         /// <summary>
         /// Cities

@@ -1521,14 +1521,82 @@ COMMIT
  -- ============================= updated on server 20151230 =============================
 
 
- 
+ ALTER PROCEDURE [dbo].[GetAds] 
 
-/****** Object:  StoredProcedure [dbo].[GetAudience]    Script Date: 12/30/2015 12:17:59 PM ******/
+	-- Add the parameters for the stored procedure here
+	@UserID nvarchar(128) = 0 ,
+	-- newly added 
+	@FromRow int =0           ,
+	@ToRow int =0
+
+AS
+BEGIN
+DECLARE @age AS INT
+DECLARE @gender AS INT
+DECLARE @countryId AS INT
+DECLARE @cityId AS INT
+DECLARE @languageId AS INT
+DECLARE @industryId AS INT
+
+        -- Setting local variables
+		   SELECT @age = age FROM AspNetUsers where id=@UserID
+		   SELECT @gender = gender FROM AspNetUsers where id=@UserID
+		   SELECT @countryId = countryId FROM AspNetUsers where id=@UserID
+		   SELECT @cityId = cityId FROM AspNetUsers where id=@UserID
+		   SELECT @languageId = LanguageID FROM AspNetUsers where id=@UserID
+		   SELECT @industryId = industryId FROM AspNetUsers where id=@UserID
+		   SELECT @countryId = CountryID FROM AspNetUsers where id=@UserID
+		   SELECT @cityId = CityID FROM AspNetUsers where id=@UserID
+
+
+		   select MyCampaign.CampaignID, MyCampaign.CampaignName, MyCampaign.Description, MyCampaign.VerifyQuestion, MyCampaign.LandingPageVideoLink ,
+		   MyCampaign.Answer1, MyCampaign.Answer2, MyCampaign.Answer3, MyCampaign.CorrectAnswer , MyCampaign.ClickRate, MyCampaign.Type as AdType
+		   from AdCampaign MyCampaign
+
+		 --  where ( 
+		 --   (MyCampaign.AgeRangeEnd >= @age and  @age >= MyCampaign.AgeRangeStart) 
+			-- and
+			--(MyCampaign.Gender= @gender)
+			-- and
+			--(MyCampaign.EndDateTime >= GETDATE() and GETDATE() >= MyCampaign.StartDateTime ) 
+			-- and
+			--(MyCampaign.Approved = 1) 
+		 -- 	 and
+			--(MyCampaign.Status = 6)   
+			-- and 
+			--((select count(*) from AdCampaignResponse MyCampaignResponse
+			-- where MyCampaignResponse.UserID=@UserID and MyCampaignResponse.CampaignID = MyCampaign.CampaignID) = 0) 
+			-- and
+		 --   (MyCampaign.MaxBudget > MyCampaign.AmountSpent) 
+			-- and
+			--(MyCampaign.LanguageID=@languageId) 
+			-- and
+			-- ((select count(*) from AdCampaignTargetLocation MyCampaignLoc
+			-- where MyCampaignLoc.CampaignID=MyCampaign.CampaignID and MyCampaignLoc.CountryID=@countryId and
+			-- MyCampaignLoc.CityID=@cityId) > 0 
+			-- and 
+			-- ((select count(*) from AdCampaignTargetCriteria MyCampaignCrit
+			-- where MyCampaignCrit.CampaignID = MyCampaign.CampaignID and 
+			-- MyCampaignCrit.LanguageID=@languageId and MyCampaignCrit.IndustryID=@industryId) > 0 )) 
+		 --  )
+
+		 --  -- newly added for paging 
+		 --  order by MyCampaign.ApprovalDateTime
+		 --  OFFSET @FromRow ROWS -- skip 10 rows
+		 --  FETCH NEXT @ToRow ROWS ONLY; -- take 10 rows
+END
+
+
+
+
+
+/****** Object:  StoredProcedure [dbo].[GetAudience]    Script Date: 12/30/2015 3:12:29 PM ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
 
 
 
@@ -1667,6 +1735,63 @@ exec(@query + @where)
 END
 
  
-GO
 
+GO
+ -- ============================= updated on server 20151230 =============================
+
+/*
+   Wednesday, December 30, 20153:45:40 PM
+   User: smdsa
+   Server: www.myprintcloud.com,9998
+   Database: SMD
+   Application: 
+*/
+
+/* To prevent any potential data loss issues, you should review this script in detail before running it outside the context of the database designer.*/
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.Country SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.City SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.AspNetUsers ADD CONSTRAINT
+	FK_AspNetUsers_City FOREIGN KEY
+	(
+	CityID
+	) REFERENCES dbo.City
+	(
+	CityID
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+	
+GO
+ALTER TABLE dbo.AspNetUsers ADD CONSTRAINT
+	FK_AspNetUsers_Country FOREIGN KEY
+	(
+	CountryID
+	) REFERENCES dbo.Country
+	(
+	CountryID
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+	
+GO
+ALTER TABLE dbo.AspNetUsers SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
 

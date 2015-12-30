@@ -188,7 +188,8 @@ namespace SMD.Implementation.Services
         {
             return new AdCampaignBaseResponse
             {
-                Languages = _languageRepository.GetAllLanguages()
+                Languages = _languageRepository.GetAllLanguages(),
+                UserAndCostDetails = _adCampaignRepository.GetUserAndCostDetail()
             };
         }
 
@@ -257,8 +258,9 @@ namespace SMD.Implementation.Services
             return new CampaignResponseModel
             {
                 Campaign = _adCampaignRepository.SearchCampaign(request, out rowCount),
-                Languages = _languageRepository.GetAllLanguages(),
+                //Languages = _languageRepository.GetAllLanguages(),
                 TotalCount = rowCount
+               // UserAndCostDetails = _adCampaignRepository.GetUserAndCostDetail()
             };
         }
 
@@ -274,8 +276,7 @@ namespace SMD.Implementation.Services
             }
             return new CampaignResponseModel
             {
-                Campaign = campaignEnumarable,
-                Languages = _languageRepository.GetAllLanguages()
+                Campaign = campaignEnumarable
             };
         }
         /// <summary>

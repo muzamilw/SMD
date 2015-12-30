@@ -39,7 +39,25 @@ define("ads/ads.viewModel",
                     canSubmitForApproval = ko.observable(true),
                     correctAnswers = ko.observableArray([{ id: 1, name: "Answer 1" }, { id: 1, name: "Answer 2" }, { id: 3, name: "Answer 3" }]),
                     selectedIndustryIncludeExclude = ko.observable(true),
-                       
+                    getCampaignBaseContent = function () {
+                            dataservice.getBaseData({
+                                RequestId: 1,
+                                QuestionId: 0,
+                            }, {
+                                success: function (data) {
+                                    debugger;
+                                    if (data != null) {
+                                        langs.removeAll();
+                                        ko.utils.arrayPushAll(langs(), data.Languages);
+                                        langs.valueHasMutated();
+                                    }
+
+                                },
+                                error: function (response) {
+
+                                }
+                            });
+                     },
                     getAdCampaignGridContent = function () {
                         dataservice.getCampaignData({
                             CampaignId: 0,
@@ -48,11 +66,13 @@ define("ads/ads.viewModel",
                             SearchText:searchFilterValue()
                         }, {
                             success: function (data) {
+                               
                                 if (data != null) {
-                                    // set languages drop down
-                                    langs.removeAll();
-                                    ko.utils.arrayPushAll(langs(), data.LanguageDropdowns);
-                                    langs.valueHasMutated();
+                                   
+                                    //// set languages drop down
+                                    //langs.removeAll();
+                                    //ko.utils.arrayPushAll(langs(), data.LanguageDropdowns);
+                                    //langs.valueHasMutated();
                                     // set grid content
                                     campaignGridContent.removeAll();
                                     _.each(data.Campaigns, function (item) {
@@ -563,7 +583,7 @@ define("ads/ads.viewModel",
                         }
                         pager(pagination.Pagination({ PageSize: 10 }, campaignGridContent, getAdCampaignGridContent));
                         getAdCampaignGridContent();
-                      
+                        getCampaignBaseContent();
                     };
                     
                     return {

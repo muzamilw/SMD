@@ -47,6 +47,8 @@ define("survey/survey.viewModel",
                     reachedAudience = ko.observable(0),
                     //total audience
                     totalAudience = ko.observable(0),
+                    // audience reach mode 
+                    audienceReachMode = ko.observable(1),
                     //Get Questions
                     getQuestions = function () {   
                         dataservice.searchSurveyQuestions(
@@ -158,6 +160,7 @@ define("survey/survey.viewModel",
                         isEditorVisible(true);
                         canSubmitForApproval(true);
                         view.initializeTypeahead();
+                        bindAudienceReachCount();
                     },
                     // Close Editor 
                     closeEditDialog = function () {
@@ -222,7 +225,7 @@ define("survey/survey.viewModel",
 
                                                }
                                            });
-                                       }
+                                       } bindAudienceReachCount();
                                        isEditorVisible(true);
                                    },
                                    error: function () {
@@ -275,7 +278,7 @@ define("survey/survey.viewModel",
                     addLanguage = function (selected) {
                         selectedQuestion().SurveyQuestionTargetCriteria.push(new model.SurveyQuestionTargetCriteria.Create({
                             Language: selected.LanguageName,
-                            LanguageID: selected.LanguageId,
+                            LanguageId: selected.LanguageId,
                             IncludeorExclude: parseInt(selectedLangIncludeExclude()),
                             Type: 3,
                             SQID: selectedQuestion().SQID()
@@ -285,7 +288,7 @@ define("survey/survey.viewModel",
                      addIndustry = function (selected) {
                          selectedQuestion().SurveyQuestionTargetCriteria.push(new model.SurveyQuestionTargetCriteria.Create({
                              Industry: selected.IndustryName,
-                             IndustryID: selected.IndustryId,
+                             IndustryId: selected.IndustryId,
                              IncludeorExclude: parseInt(selectedIndustryIncludeExclude()),
                              Type: 4,
                              SQID: selectedQuestion().SQID()
@@ -678,11 +681,19 @@ define("survey/survey.viewModel",
                             success: function (data) {
                                 reachedAudience(data.MatchingUsers);
                                 totalAudience(data.AllUsers);
-                                if (getAudienceReachMode() == 1) {
+                                var percent = data.MatchingUsers / data.AllUsers;
+                                if (percent < 0.20) {
+                                    audienceReachMode(1);
+                                } else if (percent < 0.70) {
+                                    audienceReachMode(2);
+                                } else {
+                                    audienceReachMode(3);
+                                }
+                                if (audienceReachMode() == 1) {
                                     $(".meterPin").removeClass("spec_aud").removeClass("defined_aud").removeClass("broad_aud").addClass("spec_aud");
-                                } else if (getAudienceReachMode() == 2) {
+                                } else if (audienceReachMode() == 2) {
                                     $(".meterPin").removeClass("spec_aud").removeClass("defined_aud").removeClass("broad_aud").addClass("defined_aud");
-                                } else if (getAudienceReachMode() == 3) {
+                                } else if (audienceReachMode() == 3) {
                                     $(".meterPin").removeClass("spec_aud").removeClass("defined_aud").removeClass("broad_aud").addClass("broad_aud");
                                 }
                             },
@@ -709,16 +720,23 @@ define("survey/survey.viewModel",
                              return 0;
                          }
                      },
-                    getAudienceReachMode = function () {
-                        var percent = reachedAudience() / totalAudience();
-                        if (percent < 20) {
-                            return 1;
-                        } else if (percent < 70) {
-                            return 2;
-                        } else {
-                            return 3;
-                        }
-                    },
+                     bindAudienceReachCount = function () {
+                         selectedQuestion().AgeRangeStart.subscribe(function (value) {
+                             getAudienceCount();
+                         });
+                         selectedQuestion().AgeRangeEnd.subscribe(function (value) {
+                             getAudienceCount();
+                         });
+                         selectedQuestion().Gender.subscribe(function (value) {
+                             getAudienceCount();
+                         });
+                         selectedQuestion().SurveyQuestionTargetLocation.subscribe(function (value) {
+                             getAudienceCount();
+                         });
+                         selectedQuestion().SurveyQuestionTargetCriteria.subscribe(function (value) {
+                             getAudienceCount();
+                         });
+                     },
                     // Initialize the view model
                     initialize = function (specifiedView) {
                         view = specifiedView;
@@ -792,7 +810,8 @@ define("survey/survey.viewModel",
                     visibleTargetAudience: visibleTargetAudience,
                     totalAudience: totalAudience,
                     reachedAudience: reachedAudience,
-                    getAudienceReachMode: getAudienceReachMode
+                    audienceReachMode: audienceReachMode,
+                    bindAudienceReachCount: bindAudienceReachCount
                 };
             })()
         };

@@ -1,4 +1,5 @@
-﻿using SMD.Models.DomainModels;
+﻿using SMD.Models.Common;
+using SMD.Models.DomainModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,10 +17,7 @@ namespace SMD.Models.ResponseModels
         /// </summary>
         public IEnumerable<AdCampaign> Campaign { get; set; }
      
-        /// <summary>
-        /// Langs
-        /// </summary>
-        public IEnumerable<Language> Languages { get; set; }
+      
         /// <summary>
         /// Total Count of  Profile Questions
         /// </summary>

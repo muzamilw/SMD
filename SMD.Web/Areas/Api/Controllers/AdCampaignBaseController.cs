@@ -61,11 +61,9 @@ namespace SMD.MIS.Areas.Api.Controllers
             }
             else //  get base data 
             {
-                return new AdCampaignBaseResponse
-                {
-                    Languages = _campaignService.GetCampaignBaseData().Languages.Select(lang => lang.CreateFrom()),
+                return _campaignService.GetCampaignBaseData().CreateCampaignBaseResponseFrom();
 
-                };
+               
             }
            
         }

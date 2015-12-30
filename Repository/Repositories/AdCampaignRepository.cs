@@ -53,7 +53,7 @@ namespace SMD.Repository.Repositories
         /// </summary>
         public IEnumerable<AdCampaign> SearchAdCampaigns(AdCampaignSearchRequest request, out int rowCount)
         {
-           int fromRow = (request.PageNo - 1) * request.PageSize;
+            int fromRow = (request.PageNo - 1) * request.PageSize;
             int toRow = request.PageSize;
             Expression<Func<AdCampaign, bool>> query =
                 ad => ad.Status == (Int32)AdCampaignStatus.SubmitForApproval;
@@ -69,7 +69,7 @@ namespace SMD.Repository.Repositories
                     .OrderByDescending(_addCampaignByClause[request.AdCampaignOrderBy])
                     .Skip(fromRow)
                     .Take(toRow)
-                    .ToList();  
+                    .ToList();
         }
 
         /// <summary>
@@ -111,12 +111,39 @@ namespace SMD.Repository.Repositories
         /// </summary>
         public IEnumerable<AdCampaign> GetAdCampaignById(long CampaignId)
         {
-           
+
             Expression<Func<AdCampaign, bool>> query =
                 ad => ad.CampaignId == CampaignId;
-            
-            return  DbSet.Where(query);
+
+            return DbSet.Where(query);
         }
 
+        /// <summary>
+        /// Get User And Cost
+        /// </summary>
+        public UserAndCostDetail GetUserAndCostDetail()
+        {
+            string code = Convert.ToString((int)ProductCode.AdApproval);
+            var query = from usr in db.Users
+                        join prod in db.Products on usr.CountryId equals prod.CountryId
+                        where usr.Id == LoggedInUserIdentity && prod.ProductId == 2 && prod.ProductCode == code
+                        select new UserAndCostDetail()
+                        {
+                            AgeClausePrice = prod.AgeClausePrice,
+                            CityId = usr.CityId,
+                            CountryId = usr.CountryId,
+                            EducationClausePrice = prod.EducationClausePrice,
+                            EducationId = usr.EducationId,
+                            GenderClausePrice = prod.GenderClausePrice,
+                            IndustryId = usr.IndustryId,
+                            LanguageId = usr.LanguageId,
+                            LocationClausePrice = prod.LocationClausePrice,
+                            OtherClausePrice = prod.OtherClausePrice,
+                            ProfessionClausePrice = prod.ProfessionClausePrice
+                           
+                        };
+
+            return query.FirstOrDefault();
+        }
     }
 }
