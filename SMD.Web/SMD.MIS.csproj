@@ -384,6 +384,7 @@
     <Compile Include="Areas\Api\Controllers\GetAudienceSurveyForApiController.cs" />
     <Compile Include="Areas\Api\Controllers\GetSurveysForApiController.cs" />
     <Compile Include="Areas\Api\Controllers\AdViewedController.cs" />
+    <Compile Include="Areas\Api\Controllers\InvoiceDetailController.cs" />
     <Compile Include="Areas\Api\Controllers\InvoiceController.cs" />
     <Compile Include="Areas\Api\Controllers\SurveyAudienceController.cs" />
     <Compile Include="Areas\Api\Controllers\SurveyQuestionEditorController.cs" />
@@ -420,6 +421,7 @@
     <Compile Include="Areas\Api\Models\CampaignSearchRequest.cs" />
     <Compile Include="Areas\Api\Models\AdCampaignResposneModelForAproval.cs" />
     <Compile Include="Areas\Api\Models\Invoice.cs" />
+    <Compile Include="Areas\Api\Models\InvoiceDetail.cs" />
     <Compile Include="Areas\Api\Models\InvoiceSearchRequestResponse.cs" />
     <Compile Include="Areas\Api\Models\LoginResponse.cs" />
     <Compile Include="Areas\Api\Models\SurveyForApiSearchResponse.cs" />
@@ -436,6 +438,7 @@
     <Compile Include="Areas\Api\Models\SurveyQuestionResposneModelForAproval.cs" />
     <Compile Include="Areas\Api\Models\UpdateProfileQuestionUserAnswerResponse.cs" />
     <Compile Include="Areas\Api\Models\UserAndCostDetail.cs" />
+    <Compile Include="Areas\Api\Models\UserBaseData.cs" />
     <Compile Include="Areas\Api\Models\WebApiUser.cs" />
     <Compile Include="Areas\Api\Models\CountryDropdown.cs" />
     <Compile Include="Areas\Api\Models\ProfileQuestionDropdown.cs" />
@@ -461,7 +464,9 @@
     </Compile>
     <Compile Include="Helper\CultureHelper.cs" />
     <Compile Include="ModelMappers\AdCampaignMapper.cs" />
+    <Compile Include="ModelMappers\EducationMapper.cs" />
     <Compile Include="ModelMappers\IndustryMapper.cs" />
+    <Compile Include="ModelMappers\InvoiceDetailMapper.cs" />
     <Compile Include="ModelMappers\InvoiceMapper.cs" />
     <Compile Include="ModelMappers\LanguageMapper.cs" />
     <Compile Include="ModelMappers\CountryMapper.cs" />
@@ -1409,6 +1414,7 @@
     <Content Include="Areas\Billing\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Billing\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Billing\Views\Manage\Invoice.cshtml" />
+    <Content Include="Areas\Billing\Views\Manage\_InvoiceDetail.cshtml" />
     <None Include="Properties\PublishProfiles\SMD MIS Saqib.pubxml" />
     <None Include="Properties\PublishProfiles\SMD.pubxml" />
     <None Include="Scripts\amplify-vsdoc.js" />

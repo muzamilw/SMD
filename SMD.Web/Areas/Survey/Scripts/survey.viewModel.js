@@ -30,6 +30,7 @@ define("survey/survey.viewModel",
                     selectedLocationIncludeExclude = ko.observable(true),
                     selectedLangIncludeExclude = ko.observable(true),
                     selectedIndustryIncludeExclude = ko.observable(true),
+                    selectedEducationIncludeExclude = ko.observable(true),
                     selectedLocationLat = ko.observable(0),
                     selectedLocationLong = ko.observable(0),
                     // criteria selection 
@@ -49,6 +50,8 @@ define("survey/survey.viewModel",
                     totalAudience = ko.observable(0),
                     // audience reach mode 
                     audienceReachMode = ko.observable(1),
+                    userBaseData = ko.observable({CurrencySymbol:''}),
+                    setupPrice = ko.observable(0),
                     //Get Questions
                     getQuestions = function () {   
                         dataservice.searchSurveyQuestions(
@@ -88,7 +91,8 @@ define("survey/survey.viewModel",
                                     countries.valueHasMutated();
                                     // populate survey questions 
                                     populateSurveyQuestions(data);
-                    
+                                    userBaseData(data.objBaseData);
+                                    setupPrice(data.setupPrice);
                                 },
                                 error: function () {
                                     toastr.error("Failed to load base data!");
@@ -295,6 +299,18 @@ define("survey/survey.viewModel",
                          }));
                          $("#searchIndustries").val("");
                      },
+                      addEducation = function (selected) {
+                          console.log(selected);
+                          selectedQuestion().SurveyQuestionTargetCriteria.push(new model.SurveyQuestionTargetCriteria.Create({
+                              Education: selected.Title,
+                              EducationId: selected.EducationId,
+                              IncludeorExclude: parseInt(selectedEducationIncludeExclude()),
+                              Type: 5,
+                              SQID: selectedQuestion().SQID()
+                          }));
+                          $("#searchEducations").val("");
+                      },
+                // same function used to remove education
                     onRemoveIndustry = function (item) {
                         // Ask for confirmation
                         confirmation.afterProceed(function () {
@@ -538,6 +554,7 @@ define("survey/survey.viewModel",
                     }
                     getAudienceCount = function () {
                         var countryIds = '', cityIds = '', countryIdsExcluded = '', cityIdsExcluded = '';
+                        var educationIds = '', educationIdsExcluded = '';
                         _.each(selectedQuestion().SurveyQuestionTargetLocation(), function (item) {
                             if(item.CityID() == 0 || item.CityID() == null)
                             {
@@ -655,6 +672,21 @@ define("survey/survey.viewModel",
                                     }
                                 }
                             }
+                            else if (item.Type() == 5) {
+                                if (item.IncludeorExclude() == '0') {
+                                    if (educationIdsExcluded == '') {
+                                        educationIdsExcluded += item.EducationId();
+                                    } else {
+                                        educationIdsExcluded += ',' + item.EducationId();
+                                    }
+                                } else {
+                                    if (educationIds == '') {
+                                        educationIds += item.EducationId();
+                                    } else {
+                                        educationIds += ',' + item.EducationId();
+                                    }
+                                }
+                            }
                         });
                         var surveyData = {
                             ageFrom: selectedQuestion().AgeRangeStart(),
@@ -675,7 +707,9 @@ define("survey/survey.viewModel",
                             profileQuestionIdsExcluded: profileQuestionIdsExcluded,
                             profileAnswerIdsExcluded: profileAnswerIdsExcluded,
                             surveyQuestionIdsExcluded: surveyQuestionIdsExcluded,
-                            surveyAnswerIdsExcluded: surveyAnswerIdsExcluded
+                            surveyAnswerIdsExcluded: surveyAnswerIdsExcluded,
+                            educationIds: educationIds,
+                            educationIdsExcluded: educationIdsExcluded
                         };
                         dataservice.getAudienceData(surveyData, {
                             success: function (data) {
@@ -780,7 +814,8 @@ define("survey/survey.viewModel",
                     deleteLocation: deleteLocation,
                     selectedLocationIncludeExclude: selectedLocationIncludeExclude,
                     selectedLangIncludeExclude: selectedLangIncludeExclude,
-                    selectedIndustryIncludeExclude:selectedIndustryIncludeExclude,
+                    selectedIndustryIncludeExclude: selectedIndustryIncludeExclude,
+                    selectedEducationIncludeExclude:selectedEducationIncludeExclude,
                     selectedLocationLat: selectedLocationLat,
                     selectedLocationLong: selectedLocationLong,
                     addLanguage: addLanguage,
@@ -811,7 +846,10 @@ define("survey/survey.viewModel",
                     totalAudience: totalAudience,
                     reachedAudience: reachedAudience,
                     audienceReachMode: audienceReachMode,
-                    bindAudienceReachCount: bindAudienceReachCount
+                    bindAudienceReachCount: bindAudienceReachCount,
+                    userBaseData: userBaseData,
+                    setupPrice: setupPrice,
+                    addEducation: addEducation
                 };
             })()
         };

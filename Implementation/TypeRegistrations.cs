@@ -34,6 +34,7 @@ namespace SMD.Implementation
             unityContainer.RegisterType<IProfileQuestionUserAnswerService, ProfileQuestionUserAnswerService>();
             unityContainer.RegisterType<IInvoiceService, InvoiceService>();
             unityContainer.RegisterType<ITransactionService, TransactionService>();
+            unityContainer.RegisterType<IInvoiceDetailService, InvoiceDetailService>();
         }
     }
 }

@@ -247,6 +247,9 @@ define("pQuestion/pQuestion.viewModel",
                                     return obj.ProfileGroupId == temp.ProfileGroupId;
                                 });
                                 selectedQuestion().profileGroupName(newAssigendGroup.ProfileGroupName);
+                                selectedQuestion().questionString(obj.Question);
+                                selectedQuestion().priority(obj.Priority);
+                                selectedQuestion().hasLinkedQuestions(obj.HasLinkedQuestions);
                                 isEditorVisible(false);
                                 toastr.success("You are Good!");
                             },

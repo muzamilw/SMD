@@ -113,6 +113,7 @@
     <Compile Include="Common\SmdUser.cs" />
     <Compile Include="Common\NameClaimValue.cs" />
     <Compile Include="Common\UserAndCostDetail.cs" />
+    <Compile Include="Common\UserBaseData.cs" />
     <Compile Include="Common\UserIdentityModel.cs" />
     <Compile Include="Common\Utility.cs" />
     <Compile Include="DomainModels\Account.cs" />
@@ -174,6 +175,7 @@
     <Compile Include="RequestModels\GetAdsApiRequest.cs" />
     <Compile Include="RequestModels\GetAudienceCountRequest.cs" />
     <Compile Include="RequestModels\GetAudienceSurveyRequest.cs" />
+    <Compile Include="RequestModels\GetInvoiceDetailRequest.cs" />
     <Compile Include="RequestModels\GetProfileQuestionApiRequest.cs" />
     <Compile Include="RequestModels\GetSurveysApiRequest.cs" />
     <Compile Include="RequestModels\AdViewedRequest.cs" />

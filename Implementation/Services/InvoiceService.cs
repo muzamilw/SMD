@@ -1,43 +1,39 @@
-﻿using SMD.Interfaces.Repository;
+﻿using System.Collections.Generic;
+using SMD.Interfaces.Repository;
 using SMD.Interfaces.Services;
-using SMD.Models.RequestModels;
-using SMD.Models.ResponseModels;
+using SMD.Models.DomainModels;
 
 namespace SMD.Implementation.Services
 {
     /// <summary>
-    /// Invoice Service Model 
+    /// Invoice Detail Service Model 
     /// </summary>
-    public class InvoiceService : IInvoiceService
+    public class InvoiceDetailService : IInvoiceDetailService
     {
         #region Private
 
-        private readonly IInvoiceRepository invoiceRepository;
+        private readonly IInvoiceDetailRepository invoiceDetailRepository;
         #endregion 
         #region Constructor
         /// <summary>
         /// Constructor 
         /// </summary>
-        public InvoiceService(IInvoiceRepository invoiceRepository)
+        public InvoiceDetailService(IInvoiceDetailRepository invoiceDetailRepository)
         {
-            this.invoiceRepository = invoiceRepository;
+            this.invoiceDetailRepository = invoiceDetailRepository;
         }
 
         #endregion
         #region Public
 
         /// <summary>
-        /// Search Invoices for LV
+        /// Get Detail by Id 
         /// </summary>
-        public InvoiceSearchRequestResponse SearchInvoices(InvoiceSearchRequest request)
+        public IEnumerable<InvoiceDetail> GetInvoiceDetailByInvoiceId(long invoiceId)
         {
-            int rowCount;
-            return new InvoiceSearchRequestResponse
-            {
-                Invoices = invoiceRepository.SearchInvoices(request,out rowCount),
-                TotalCount = rowCount
-            };
+            return invoiceDetailRepository.GetInvoiceDetailByInvoiceId(invoiceId);
         }
+      
         #endregion
     }
 }

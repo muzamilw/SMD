@@ -1,4 +1,5 @@
-﻿using SMD.Models.DomainModels;
+﻿using System.Collections.Generic;
+using SMD.Models.DomainModels;
 
 namespace SMD.Interfaces.Repository
 {
@@ -7,6 +8,9 @@ namespace SMD.Interfaces.Repository
     /// </summary>
     public interface IInvoiceDetailRepository : IBaseRepository<InvoiceDetail, int>
     {
-        
+        /// <summary>
+        /// Get Details by Id 
+        /// </summary>
+        IEnumerable<InvoiceDetail> GetInvoiceDetailByInvoiceId(long invoiceId);   
     }
 }

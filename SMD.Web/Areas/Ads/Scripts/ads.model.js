@@ -85,7 +85,7 @@
               convertToServerData = function () {
                   var targetCriteria = [];
                   _.each(AdCampaignTargetCriterias(), function (item) {
-                     
+                      console.log(item);
                       targetCriteria.push(item.convertCriteriaToServerData());
                   });
                   var LocationtargetCriteria = [];
@@ -169,7 +169,7 @@
 
     var // ReSharper disable InconsistentNaming
       AdCampaignTargetCriteriasModel = function (CriteriaID, CampaignID, Type, PQID, PQAnswerID, SQID, SQAnswer, IncludeorExclude, questionString,
-       answerString, surveyQuestLeftImageSrc, surveyQuestRightImageSrc, LanguageID, Language, IndustryID, Industry) {
+       answerString, surveyQuestLeftImageSrc, surveyQuestRightImageSrc, LanguageID, Language, IndustryID, Industry, EducationID, Education) {
 
           var
               //type and userID will be set on server sside
@@ -189,6 +189,8 @@
                Language = ko.observable(Language),
                IndustryID = ko.observable(IndustryID),
                Industry = ko.observable(Industry),
+               Education = ko.observable(Education),
+               EducationID = ko.observable(EducationID),
           // Convert to server data
           convertCriteriaToServerData = function () {
            
@@ -204,7 +206,9 @@
                   LanguageId: LanguageID(),
                   Language: Language(),
                   IndustryId: IndustryID(),
-                  Industry: Industry()
+                  Industry: Industry(),
+                  EducationId: EducationID(),
+                  Education: Education()
               };
           };
           return {
@@ -224,6 +228,8 @@
               Language: Language,
               IndustryID: IndustryID,
               Industry: Industry,
+              EducationID: EducationID,
+              Education: Education,
               convertCriteriaToServerData: convertCriteriaToServerData
           };
       };
@@ -280,13 +286,14 @@
     };
     // Factory Method
     AdCampaignTargetCriteriasModel.Create = function (source) {
-    
-        return new AdCampaignTargetCriteriasModel(source.CriteriaId, source.CampaignId, source.Type, source.PQId, source.PQAnswerId, source.SQId, source.SQAnswer, source.IncludeorExclude, source.questionString, source.answerString, source.surveyQuestLeftImageSrc, source.surveyQuestRightImageSrc, source.LanguageId, source.Language, source.IndustryId, source.Industry);
+        
+        return new AdCampaignTargetCriteriasModel(source.CriteriaId, source.CampaignId, source.Type, source.PQId, source.PQAnswerId, source.SQId, source.SQAnswer, source.IncludeorExclude, source.questionString, source.answerString, source.surveyQuestLeftImageSrc, source.surveyQuestRightImageSrc, source.LanguageId, source.Language, source.IndustryId, source.Industry, source.EducationId, source.Education);
     };
     AdCampaignTargetLocation.Create = function (source) {
        
         return new AdCampaignTargetLocation(source.Id, source.CampaignId, source.CountryId, source.CityId, source.Radius, source.Country, source.City,source.IncludeorExclude);
     };
+
     return {
         Campaign: Campaign,
         AdCampaignTargetCriteriasModel: AdCampaignTargetCriteriasModel,

@@ -1795,3 +1795,4 @@ ALTER TABLE dbo.AspNetUsers SET (LOCK_ESCALATION = TABLE)
 GO
 COMMIT
 
+ -- ============================= updated on smd live server 20151230 =============================

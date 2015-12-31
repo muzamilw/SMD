@@ -1,4 +1,5 @@
-﻿using Microsoft.Practices.Unity;
+﻿using System.Linq;
+using Microsoft.Practices.Unity;
 using SMD.Interfaces.Repository;
 using SMD.Models.Common;
 using SMD.Models.DomainModels;
@@ -52,6 +53,14 @@ namespace SMD.Repository.Repositories
         public InvoiceDetail Find(int id)
         {
             return DbSet.Find(id);
+        }
+
+       /// <summary>
+        /// Get Details by Id 
+        /// </summary>
+        public IEnumerable<InvoiceDetail> GetInvoiceDetailByInvoiceId(long invoiceId)   
+        {
+            return DbSet.Where(invo => invo.InvoiceId == invoiceId).ToList();
         }
         #endregion
     }

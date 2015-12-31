@@ -19,7 +19,7 @@ define("invoice/invoice.viewModel",
                     sortIsAsc = ko.observable(true),
                     // Controlls editor visibility 
                     isEditorVisible = ko.observable(false),
-                     //selected Answer
+                     //selected Invoice
                     selectedInvoice = ko.observable(),
                     // From Date for filter
                     fromDateFilter = ko.observable(undefined),
@@ -51,36 +51,33 @@ define("invoice/invoice.viewModel",
                     },
                     // Close Editor 
                     closeEditDialog = function () {
-                        // Ask for confirmation
-                        confirmation.afterProceed(function () {
-                            selectedInvoice(undefined);
-                            isEditorVisible(false);
-                        });
-                        confirmation.show();
+                        selectedInvoice(undefined);
+                        isEditorVisible(false);
                     },
                     // On editing of existing PQ
-                    onEditQuestion = function (item) {
-                        selectedInvoice(item);
+                    onEditInvoice = function (invoice) {
+                        selectedInvoice(invoice);
+                        getInvoiceDetails(invoice);
                         isEditorVisible(true);
+
                     },
-                  
-                    // Save Question / Add 
-                    onSaveQuestion = function () {
-                        dataservice.saveSurveyQuestion(selectedInvoice().convertToServerData(), {
-                            success: function (obj) {
-                                var newObjtodelete = invoices.find(function (temp) {
-                                    return obj.SqId == temp.id();
-                                });
-                                invoices.remove(newObjtodelete);
-                                toastr.success("You are Good!");
-                                isEditorVisible(false);
+                   getInvoiceDetails= function(invoice) {
+                       dataservice.getInvoiceDetails(
+                            {
+                                InvoiceId: selectedInvoice().id()
                             },
-                            error: function () {
-                                toastr.error("Failed to delete!");
-                            }
-                        });
-                    },
-                   
+                            {
+                                success: function (invoiceDetails) {
+                                    selectedInvoice().invoiceDetails.removeAll();
+                                    _.each(invoiceDetails, function (det) {
+                                        selectedInvoice().invoiceDetails.push(model.InvoiceItemServertoClientMapper(det));
+                                    });
+                                },
+                                error: function () {
+                                    toastr.error("Failed to load Invoices!");
+                                }
+                            });
+                   },
                     // Has Changes
                     hasChangesOnQuestion = ko.computed(function () {
                         if (selectedInvoice() == undefined) {
@@ -106,9 +103,8 @@ define("invoice/invoice.viewModel",
                     getInvoices: getInvoices,
                     isEditorVisible: isEditorVisible,
                     closeEditDialog: closeEditDialog,
-                    onEditQuestion: onEditQuestion,
-                    selectedQuestion: selectedInvoice,
-                    onSaveQuestion: onSaveQuestion,
+                    onEditInvoice: onEditInvoice,
+                    selectedInvoice: selectedInvoice,
                     hasChangesOnQuestion: hasChangesOnQuestion,
                     fromDateFilter: fromDateFilter,
                     toDateFilter: toDateFilter
