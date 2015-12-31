@@ -704,7 +704,7 @@ define("ads/ads.viewModel",
                        
                         campaignModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
                             Industry: selected.IndustryName,
-                            IndustryID: selected.IndustryId,
+                            IndustryId: selected.IndustryId,
                             IncludeorExclude: parseInt(selected.IndustryIncludeExclude),
                             Type: 4,
                             CampaignId: campaignModel().CampaignID()
@@ -753,7 +753,7 @@ define("ads/ads.viewModel",
                     addEducation = function (selected) {
                         campaignModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
                             Education: selected.Title,
-                            EducationID: selected.EducationId,
+                            EducationId: selected.EducationId,
                             IncludeorExclude: parseInt(selectedEducationIncludeExclude()),
                             Type: 5,
                             CampaignId: campaignModel().CampaignID()

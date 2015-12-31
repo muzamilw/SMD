@@ -287,7 +287,7 @@
     // Factory Method
     AdCampaignTargetCriteriasModel.Create = function (source) {
         
-        return new AdCampaignTargetCriteriasModel(source.CriteriaId, source.CampaignId, source.Type, source.PQId, source.PQAnswerId, source.SQId, source.SQAnswer, source.IncludeorExclude, source.questionString, source.answerString, source.surveyQuestLeftImageSrc, source.surveyQuestRightImageSrc, source.LanguageId, source.Language, source.IndustryID, source.Industry, source.EducationID, source.Education);
+        return new AdCampaignTargetCriteriasModel(source.CriteriaId, source.CampaignId, source.Type, source.PQId, source.PQAnswerId, source.SQId, source.SQAnswer, source.IncludeorExclude, source.questionString, source.answerString, source.surveyQuestLeftImageSrc, source.surveyQuestRightImageSrc, source.LanguageId, source.Language, source.IndustryId, source.Industry, source.EducationId, source.Education);
     };
     AdCampaignTargetLocation.Create = function (source) {
        
