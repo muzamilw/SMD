@@ -37,6 +37,15 @@ define("ads/ads.dataservice", function () {
                         dataType: 'json',
                         type: 'GET'
                     });
+
+                    // getting audience for survey
+                    amplify.request.define('getAudienceData', 'ajax', {
+                        url: '/Api/SurveyAudience',
+                        dataType: 'json',
+                        dataMap: JSON.stringify,
+                        contentType: "application/json; charset=utf-8",
+                        type: 'POST'
+                    });
                 }
             };
 
@@ -75,12 +84,23 @@ define("ads/ads.dataservice", function () {
                   success: callbacks.success,
                   error: callbacks.error,
               });
-         }
+         },
+        // get audiance Count
+             getAudienceData = function (params, callbacks) {
+                 initialize();
+                 return amplify.request({
+                     resourceId: 'getAudienceData',
+                     data: params,
+                     success: callbacks.success,
+                     error: callbacks.error,
+                 });
+             }
         return {
             getBaseData: getBaseData,
             getCampaignData: getCampaignData,
             addCampaignData: addCampaignData,
-            UpdateCampaignCriteriaOrLocation: UpdateCampaignCriteriaOrLocation
+            UpdateCampaignCriteriaOrLocation: UpdateCampaignCriteriaOrLocation,
+            getAudienceData: getAudienceData
         };
     })();
     return dataService;

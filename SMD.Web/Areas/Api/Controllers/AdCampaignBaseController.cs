@@ -99,7 +99,7 @@ namespace SMD.MIS.Areas.Api.Controllers
                     Languages = listOfLangs
                 };
             }
-            else    // get industry
+            else if (argsList[1] == "3")  // get industry
             {
                 IEnumerable<Industry> listOfIndustry = _campaignService.SearchIndustry(argsList[0]).Select(lang => lang.CreateFrom());
 
@@ -110,6 +110,19 @@ namespace SMD.MIS.Areas.Api.Controllers
                 return new AdCampaignBaseResponse
                 {
                     listIndustry = listOfIndustry
+                };
+            }
+            else  // get education  4
+            {
+                IEnumerable<Education> listOfEducation = _campaignService.SearchEducation(argsList[0]).Select(edu => edu.CreateFrom());
+
+                if (listOfEducation != null && listOfEducation.Count() > 10)
+                {
+                    listOfEducation = listOfEducation.Take(10);
+                }
+                return new AdCampaignBaseResponse
+                {
+                    listEducation = listOfEducation
                 };
             }
             

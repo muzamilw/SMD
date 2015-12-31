@@ -16,7 +16,7 @@ namespace SMD.MIS.Areas.Api.Models
         public int? SQAnswer { get; set; }
         public bool? IncludeorExclude { get; set; }
         public int? LanguageId { get; set; }
-
+        public long? EducationId { get; set; }
         public int? IndustryId { get; set; }
 
         public string questionString { get; set; }
@@ -24,6 +24,7 @@ namespace SMD.MIS.Areas.Api.Models
         public string answerString { get; set; }
 
         public string Language { get; set; }
-        public string Industry { get; set; } 
+        public string Industry { get; set; }
+        public string Education { get; set; }  
     }
 }

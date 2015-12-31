@@ -40,6 +40,7 @@ namespace SMD.Implementation.Services
         private readonly ITaxRepository taxRepository;
         private readonly IInvoiceRepository invoiceRepository;
         private readonly IInvoiceDetailRepository invoiceDetailRepository;
+        private readonly IEducationRepository _educationRepository;
         #region Private Funcs
         private ApplicationUserManager UserManager
         {
@@ -152,17 +153,17 @@ namespace SMD.Implementation.Services
         ///  Constructor
         /// </summary>
         public AdvertService(
-            IAdCampaignRepository adCampaignRepository, 
+            IAdCampaignRepository adCampaignRepository,
             ILanguageRepository languageRepository,
             IIndustryRepository industryRepository,
-            ICountryRepository countryRepository, 
+            ICountryRepository countryRepository,
             ICityRepository cityRepository,
             IAdCampaignTargetLocationRepository adCampaignTargetLocationRepository,
              IEmailManagerService emailManagerService,
             IAdCampaignTargetCriteriaRepository adCampaignTargetCriteriaRepository,
             IProfileQuestionRepository profileQuestionRepository,
             IProfileQuestionAnswerRepository profileQuestionAnswerRepository,
-            ISurveyQuestionRepository surveyQuestionRepository, IProductRepository productRepository, ITaxRepository taxRepository, IInvoiceRepository invoiceRepository, IInvoiceDetailRepository invoiceDetailRepository)
+            ISurveyQuestionRepository surveyQuestionRepository, IProductRepository productRepository, ITaxRepository taxRepository, IInvoiceRepository invoiceRepository, IInvoiceDetailRepository invoiceDetailRepository,IEducationRepository educationRepository)
         {
             this._adCampaignRepository = adCampaignRepository;
             this._languageRepository = languageRepository;
@@ -179,17 +180,50 @@ namespace SMD.Implementation.Services
             this.invoiceRepository = invoiceRepository;
             this.invoiceDetailRepository = invoiceDetailRepository;
             this._industryRepository = industryRepository;
+            this._educationRepository = educationRepository;
         }
-     
+
         /// <summary>
         /// Get Base Data 
         /// </summary>
         public AdCampaignBaseResponse GetCampaignBaseData()
         {
+            string code = Convert.ToString((int)ProductCode.AdApproval);
+            User loggedInUser = _adCampaignRepository.GetUserById();
+            Product campaignProduct = null;
+            UserAndCostDetail objUC = new UserAndCostDetail();
+            if (loggedInUser != null)
+            {
+                campaignProduct = productRepository.GetProductByCountryId(Convert.ToInt32(loggedInUser.CountryId), code);
+                objUC.CountryId = loggedInUser.CountryId;
+                objUC.CityId = loggedInUser.CityId;
+                objUC.CityName = loggedInUser.Cities != null ? loggedInUser.Cities.CityName : "";
+
+
+                objUC.EducationId = loggedInUser.EducationId;
+
+                objUC.IndustryId = loggedInUser.IndustryId;
+                objUC.LanguageId = loggedInUser.LanguageId;
+
+
+                objUC.CountryName = loggedInUser.Countries != null ? loggedInUser.Countries.CountryName : "";
+                objUC.EducationTitle = loggedInUser.Education != null ? loggedInUser.Education.Title : "";
+                objUC.IndustryName = loggedInUser.Industry != null ? loggedInUser.Industry.IndustryName : "";
+                objUC.LanguageName = loggedInUser.Language != null ? loggedInUser.Language.LanguageName : "";
+            }
+            if (campaignProduct != null)
+            {
+                objUC.AgeClausePrice = campaignProduct.AgeClausePrice;
+                objUC.EducationClausePrice = campaignProduct.EducationClausePrice;
+                objUC.LocationClausePrice = campaignProduct.LocationClausePrice;
+                objUC.OtherClausePrice = campaignProduct.OtherClausePrice;
+                objUC.ProfessionClausePrice = campaignProduct.ProfessionClausePrice;
+                objUC.GenderClausePrice = campaignProduct.GenderClausePrice;
+            }
             return new AdCampaignBaseResponse
             {
                 Languages = _languageRepository.GetAllLanguages(),
-                UserAndCostDetails = _adCampaignRepository.GetUserAndCostDetail()
+                UserAndCostDetails = objUC
             };
         }
 
@@ -221,9 +255,12 @@ namespace SMD.Implementation.Services
         public IEnumerable<Industry> SearchIndustry(string searchString)
         {
             return _industryRepository.SearchIndustries(searchString);
-    
+
         }
-        
+        public IEnumerable<Education> SearchEducation(string searchString)
+        {
+            return _educationRepository.SearchEducation(searchString);
+        }
 
         /// <summary>
         /// Add Campaign
@@ -242,15 +279,15 @@ namespace SMD.Implementation.Services
                 {
                     campaignModel.LandingPageVideoLink = paths[1];
                 }
-               
-              
+
+
             }
             campaignModel.StartDateTime = campaignModel.StartDateTime.Value.Subtract(_adCampaignRepository.UserTimezoneOffSet);
             campaignModel.EndDateTime = campaignModel.EndDateTime.Value.Subtract(_adCampaignRepository.UserTimezoneOffSet);
             _adCampaignRepository.Add(campaignModel);
             _adCampaignRepository.SaveChanges();
-           
-            
+
+
         }
         public CampaignResponseModel GetCampaigns(AdCampaignSearchRequest request)
         {
@@ -260,7 +297,7 @@ namespace SMD.Implementation.Services
                 Campaign = _adCampaignRepository.SearchCampaign(request, out rowCount),
                 //Languages = _languageRepository.GetAllLanguages(),
                 TotalCount = rowCount
-               // UserAndCostDetails = _adCampaignRepository.GetUserAndCostDetail()
+                // UserAndCostDetails = _adCampaignRepository.GetUserAndCostDetail()
             };
         }
 
@@ -288,7 +325,7 @@ namespace SMD.Implementation.Services
             string[] paths = SaveImages(campaignModel);
             if (paths != null && paths.Count() > 0)
             {
-                if (!string.IsNullOrEmpty(paths[0]) && !paths[0].Contains("http:")) 
+                if (!string.IsNullOrEmpty(paths[0]) && !paths[0].Contains("http:"))
                 {
                     campaignModel.ImagePath = paths[0];
                 }
@@ -324,15 +361,15 @@ namespace SMD.Implementation.Services
                 List<long> idsToCompare = campaignModel.AdCampaignTargetLocations.Where(i => i.Id > 0).Select(i => i.Id).ToList();
                 List<AdCampaignTargetLocation> listOflocationsToDelete = _adCampaignTargetLocationRepository.GetAll().Where(c => c.CampaignId == campaignModel.CampaignId && !idsToCompare.Contains(c.Id)).ToList();
                 _adCampaignTargetLocationRepository.RemoveAll(listOflocationsToDelete);
-              
+
             }
-            else 
+            else
             {
                 List<AdCampaignTargetLocation> listOflocationsToDelete = _adCampaignTargetLocationRepository.GetAll().Where(c => c.CampaignId == campaignModel.CampaignId).ToList();
                 _adCampaignTargetLocationRepository.RemoveAll(listOflocationsToDelete);
             }
-         
-           
+
+
 
             // add or update target criterias
             if (campaignModel.AdCampaignTargetLocations != null && campaignModel.AdCampaignTargetLocations.Count() > 0)
@@ -362,7 +399,7 @@ namespace SMD.Implementation.Services
                 List<AdCampaignTargetCriteria> listOfCriteriasToDelete = _adCampaignTargetCriteriaRepository.GetAll().Where(c => c.CampaignId == campaignModel.CampaignId).ToList();
                 _adCampaignTargetCriteriaRepository.RemoveAll(listOfCriteriasToDelete);
             }
-           
+
         }
         #endregion
         #region Public
@@ -385,7 +422,7 @@ namespace SMD.Implementation.Services
         /// </summary>
         public AdCampaign UpdateAdCampaign(AdCampaign source)
         {
-            var dbAd =_adCampaignRepository.Find(source.CampaignId);
+            var dbAd = _adCampaignRepository.Find(source.CampaignId);
             // Update 
             if (dbAd != null)
             {
@@ -395,9 +432,9 @@ namespace SMD.Implementation.Services
                     dbAd.Approved = true;
                     dbAd.ApprovalDateTime = DateTime.Now;
                     dbAd.ApprovedBy = _adCampaignRepository.LoggedInUserIdentity;
-                    dbAd.Status = (Int32) AdCampaignStatus.Live;
+                    dbAd.Status = (Int32)AdCampaignStatus.Live;
                     emailManagerService.SendQuestionApprovalEmail(dbAd.UserId);
-                    
+
                     // Stripe payment + Invoice Generation
                     MakeStripePaymentandAddInvoiceForCampaign(dbAd);
                 }
@@ -434,7 +471,7 @@ namespace SMD.Implementation.Services
             var tax = taxRepository.GetTaxByCountryId(user.CountryId);
             // Total includes tax
             var amount = product.SetupPrice + tax.TaxValue;
-           
+
             // Make Stripe actual payment 
             var response = CreateChargeWithCustomerId((int?)amount, user.StripeCustomerId);
 
@@ -446,12 +483,12 @@ namespace SMD.Implementation.Services
                 // Add invoice data
                 var invoice = new Invoice
                 {
-                    Country = user.CountryId.ToString(),   
+                    Country = user.CountryId.ToString(),
                     Total = (double)amount,
                     NetTotal = (double)amount,
                     InvoiceDate = DateTime.Now,
                     InvoiceDueDate = DateTime.Now.AddDays(7),
-                    Address1 = user.CountryId.ToString(), 
+                    Address1 = user.CountryId.ToString(),
                     UserId = user.Id,
                     CompanyName = "My Company",
                     CreditCardRef = response
@@ -482,7 +519,7 @@ namespace SMD.Implementation.Services
             }
         }
 
-      
+
 
         /// <summary>
         /// Get profile questions 
@@ -531,6 +568,6 @@ namespace SMD.Implementation.Services
 
         #endregion
 
-       
+
     }
 }

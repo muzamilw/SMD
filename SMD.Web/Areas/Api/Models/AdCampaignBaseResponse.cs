@@ -38,5 +38,6 @@ namespace SMD.MIS.Areas.Api.Models
         public IEnumerable<SurveyQuestionDropDown> SurveyQuestions { get; set; }
 
         public IEnumerable<Industry> listIndustry { get; set; }
+        public IEnumerable<Education> listEducation { get; set; }
     }
 }

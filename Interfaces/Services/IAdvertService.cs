@@ -17,6 +17,7 @@ namespace SMD.Interfaces.Services
         AdCampaignBaseResponse SearchCountriesAndCities(string searchString);
         AdCampaignBaseResponse SearchLanguages(string searchString);
         IEnumerable<Industry> SearchIndustry(string searchString);
+        IEnumerable<Education> SearchEducation(string searchString);
         void CreateCampaign(AdCampaign campaignModel);
 
         /// <summary>

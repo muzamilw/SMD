@@ -22,6 +22,8 @@ namespace SMD.MIS.Areas.Api.Models
         /// Total Count of  Profile Questions
         /// </summary>
         public int TotalCount { get; set; }
+        public UserBaseData objBaseData { get; set; }
+        public Nullable<double> setupPrice { get; set; }
     }
     public class SurveyQuestionEditorRequestResponseModel
     {

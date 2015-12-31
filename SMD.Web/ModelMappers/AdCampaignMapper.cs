@@ -101,7 +101,7 @@ namespace SMD.MIS.ModelMappers
         /// </summary>
         public static Models.DomainModels.AdCampaign CreateFrom(this AdCampaign source)
         {
-           
+
 
             return new Models.DomainModels.AdCampaign
             {
@@ -142,7 +142,7 @@ namespace SMD.MIS.ModelMappers
                 StartDateTime = source.StartDateTime,
                 UserId = source.UserId,
                 VerifyQuestion = source.VerifyQuestion,
-           
+
             };
 
 
@@ -215,6 +215,7 @@ namespace SMD.MIS.ModelMappers
             string AnswerString = "";
             string LanguageName = "";
             string IndustryName = "";
+            string EducationName = "";
             if (source.Type != null && source.Type == (int)AdCampaignCriteriaType.ProfileQuestion)
             {
                 if (source.PqId != null && source.PqId > 0 && source.ProfileQuestion != null)
@@ -240,25 +241,25 @@ namespace SMD.MIS.ModelMappers
                         {
                             AnswerString = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + source.SurveyQuestion.LeftPicturePath;
                         }
-                        else 
+                        else
                         {
                             AnswerString = source.SurveyQuestion.LeftPicturePath;
                         }
-                       
+
                     }
-                    else 
+                    else
                     {
                         if (!source.SurveyQuestion.RightPicturePath.Contains("http:"))
                         {
                             AnswerString = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + source.SurveyQuestion.RightPicturePath;
                         }
-                        else 
+                        else
                         {
                             AnswerString = source.SurveyQuestion.RightPicturePath;
                         }
-                       
+
                     }
-                    
+
                 }
             }
             else if (source.Type != null && source.Type == (int)AdCampaignCriteriaType.Language)
@@ -273,6 +274,13 @@ namespace SMD.MIS.ModelMappers
                 if (source.Industry != null)
                 {
                     IndustryName = source.Industry.IndustryName;
+                }
+            }
+            else if (source.Type == (int)SurveyQuestionTargetCriteriaType.Education)
+            {
+                if (source.Education != null)
+                {
+                    EducationName = source.Education.Title;
                 }
             }
             return new SMD.MIS.Areas.Api.Models.AdCampaignTargetCriteria
@@ -290,7 +298,9 @@ namespace SMD.MIS.ModelMappers
                 questionString = QuestionString,
                 answerString = AnswerString,
                 Language = LanguageName,
-                Industry = IndustryName
+                Industry = IndustryName,
+                EducationId = source.EducationId,
+                Education = EducationName
             };
         }
 
@@ -304,11 +314,11 @@ namespace SMD.MIS.ModelMappers
             if (source.CountryId != null && source.CountryId > 0 && source.Country != null)
             {
                 CountName = source.Country.CountryName;
-                
+
             }
             if (source.CityId != null && source.CityId > 0 && source.City != null)
             {
-                CName = source.City.CityName;                
+                CName = source.City.CityName;
             }
             return new SMD.MIS.Areas.Api.Models.AdCampaignTargetLocation
             {
@@ -344,7 +354,11 @@ namespace SMD.MIS.ModelMappers
                 LocationClausePrice = source.LocationClausePrice,
                 OtherClausePrice = source.OtherClausePrice,
                 ProfessionClausePrice = source.ProfessionClausePrice,
-                
+                City = source.CityName,
+                Country = source.CountryName,
+                Education = source.EducationTitle,
+                Industry = source.IndustryName,
+                Language = source.LanguageName,
             };
 
 

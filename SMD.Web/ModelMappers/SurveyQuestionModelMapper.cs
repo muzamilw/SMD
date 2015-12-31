@@ -54,7 +54,9 @@ namespace SMD.MIS.ModelMappers
                 TotalCount = source.TotalCount,
                 SurveyQuestions = source.SurveyQuestions.Select(question => question.CreateFrom()),
                 CountryDropdowns =source.Countries.Select(country => country.CreateFrom()),
-                LanguageDropdowns = source.Languages.Select(lang => lang.CreateFrom()) 
+                LanguageDropdowns = source.Languages.Select(lang => lang.CreateFrom()) ,
+                objBaseData = source.objBaseData.CreateFrom(),
+                setupPrice = source.setupPrice
             };
         }
 
@@ -185,6 +187,30 @@ namespace SMD.MIS.ModelMappers
                 RightPicturePath = rightPath
             };
         }
+        public static SMD.MIS.Areas.Api.Models.UserBaseData CreateFrom(this Models.Common.UserBaseData source)
+        {
+            if (source != null)
+            {
+                return new SMD.MIS.Areas.Api.Models.UserBaseData
+                {
+                    CityId = source.CityId,
+                    CountryId = source.CountryId,
+                    LanguageId = source.LanguageId,
+                    IndustryId = source.IndustryId,
+                    EducationId = source.EducationId,
+                    City = source.City,
+                    Country = source.Country,
+                    Language = source.Language,
+                    Industry = source.Industry,
+                    Education = source.Education,
+                    CurrencySymbol = source.CurrencySymbol
+                };
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 
     public static class SurveyQuestionEditorModelMapper
@@ -267,6 +293,7 @@ namespace SMD.MIS.ModelMappers
                 modelCriteria.PqId = criteria.PqId;
                 modelCriteria.SqId = criteria.SqId;
                 modelCriteria.Type = criteria.Type;
+                modelCriteria.EducationId = criteria.EducationId;
                 if (criteria.Type == (int)SurveyQuestionTargetCriteriaType.ProfileQuestion)
                 {
                     if (criteria.ProfileQuestion != null)
@@ -304,6 +331,13 @@ namespace SMD.MIS.ModelMappers
                     if (criteria.Industry != null)
                     {
                         modelCriteria.Industry = criteria.Industry.IndustryName;
+                    }
+                }
+                else if (criteria.Type == (int)SurveyQuestionTargetCriteriaType.Education)
+                {
+                    if (criteria.Education != null)
+                    {
+                        modelCriteria.Education = criteria.Education.Title;
                     }
                 }
                 result.Add(modelCriteria);
