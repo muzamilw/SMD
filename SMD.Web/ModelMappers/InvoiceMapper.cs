@@ -34,7 +34,8 @@ namespace SMD.MIS.ModelMappers
                 InvoiceId = source.InvoiceId,
                 CreditCardRef = source.CreditCardRef,
                 Total = source.Total,
-                NetTotal = source.NetTotal
+                NetTotal = source.NetTotal,
+                UserName= source.User.FullName
             };
         }
              

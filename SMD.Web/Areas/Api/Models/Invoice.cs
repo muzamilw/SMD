@@ -40,6 +40,7 @@ namespace SMD.MIS.Areas.Api.Models
         public string ZipCode { get; set; }
 
         public string CreditCardRef { get; set; }
+        public string UserName { get; set; }
         #endregion
     }
 }

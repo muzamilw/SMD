@@ -19,11 +19,11 @@ define("invoice/invoice.dataservice", function () {
                     });
                     
 
-                    // Edit Invoices
-                    amplify.request.define('saveSurveyQuestion', 'ajax', {
-                        url: '/Api/SurveyQuestionApproval',
+                    // Edit Invoices / Details
+                    amplify.request.define('getInvoiceDetails', 'ajax', {
+                        url: '/Api/InvoiceDetail',
                         dataType: 'json',
-                        type: 'POST'
+                        type: 'GET'
                     });
                     isInitialized = true;
                 }
@@ -39,13 +39,11 @@ define("invoice/invoice.dataservice", function () {
                 });
             },
             
-
-            
-            // Save Invoices edit
-            saveSurveyQuestion = function (params, callbacks) {
+            // Get Invoice Details
+            getInvoiceDetails = function (params, callbacks) {
                 initialize();
                 return amplify.request({
-                    resourceId: 'saveSurveyQuestion',
+                    resourceId: 'getInvoiceDetails',
                     success: callbacks.success,
                     error: callbacks.error,
                     data: params
@@ -53,7 +51,7 @@ define("invoice/invoice.dataservice", function () {
             };
 
         return {
-            saveSurveyQuestion: saveSurveyQuestion,
+            getInvoiceDetails: getInvoiceDetails,
             searchInvoices: searchInvoices
         };
     })();
