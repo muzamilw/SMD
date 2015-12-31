@@ -85,6 +85,15 @@ define("invoice/invoice.viewModel",
                         }
                         return (selectedInvoice().hasChanges());
                     }),
+                    // Search Button Func
+                    onSearchButtonClick= function() {
+                        getInvoices();
+                    },
+                    resetData= function() {
+                        fromDateFilter(undefined);
+                        toDateFilter(undefined);
+                        getInvoices();
+                    },
                     // Initialize the view model
                     initialize = function (specifiedView) {
                         view = specifiedView;
@@ -107,7 +116,9 @@ define("invoice/invoice.viewModel",
                     selectedInvoice: selectedInvoice,
                     hasChangesOnQuestion: hasChangesOnQuestion,
                     fromDateFilter: fromDateFilter,
-                    toDateFilter: toDateFilter
+                    toDateFilter: toDateFilter,
+                    onSearchButtonClick: onSearchButtonClick,
+                    resetData: resetData
                 };
             })()
         };
