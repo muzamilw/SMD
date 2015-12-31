@@ -148,6 +148,43 @@ define("ads/ads.view",
                                       viewModel.addIndustry(selected);
                                   }
                               });
+                    // education
+                      var edu_array = new Bloodhound({
+                          datumTokenizer: function (d) {
+                              return Bloodhound.tokenizers.whitespace(d.Title);
+                          },
+                          queryTokenizer: Bloodhound.tokenizers.whitespace,
+                          remote: {
+                              rateLimitWait: 1000,
+                              url: '/Api/AdCampaignBase?searchText=%QUERY',
+                              ajax: {
+                                  type: 'POST'
+                              },
+                              replace: function (url, query) {
+                                  query = query + "|4";
+                                  return url.replace('%QUERY', query);
+                              },
+                              filter: function (data) {
+
+                                  return data.listEducation;
+                              }
+                          }
+                      });
+
+                      edu_array.initialize();
+
+                      $('#searchEducations').typeahead({
+                          highlight: true
+                      },
+                              {
+                                  displayKey: 'Title',
+                                  source: edu_array.ttAdapter()
+                              }).bind('typeahead:selected', function (obj, selected) {
+                                  if (selected) {
+                                      viewModel.addEducation(selected);
+                                  }
+                              });
+
                   },
                 // Initialize
                 initialize = function () {
