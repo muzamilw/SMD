@@ -254,8 +254,12 @@
                                         </div>
                                         <div class="col-lg-6">
                                             <div id="coun_token_cnt">
-                                                <!-- ko template: { name: 'SurveyQuestionLocationTemplate' , foreach: SurveyQuestionTargetLocation } -->
-                                                <!-- /ko -->
+                                                <div class="_4zmf">
+                                                    <ul class="_4zmg">
+                                                        <!-- ko template: { name: 'SurveyQuestionLocationTemplate' , foreach:  $root.selectedQuestionCountryList } -->
+                                                        <!-- /ko -->
+                                                    </ul>
+                                                </div>
                                             </div>
                                             <div class="clearfix"></div>
                                             <div id="count_edt">
@@ -708,24 +712,110 @@
 
 </div>
 <script id="SurveyQuestionLocationTemplate" type="text/html">
+    <li>
+        <ul class="_53ga">
+            <li>
+                <div class="_53gb clearfix">
+                    <div class="_4bl8 _4bl7">
+                        <span class="_47la">
+                            <button type="button" title="Remove" class="_50zy _50zz _50z- _5upp _42ft" style="display:none;">
+                                <span>Remove</span>
+                            </button>
+                        </span>
+                    </div>
+                    <div class="_4bl9">
+                        <span class="_3bsr">
+                            <span class="_3bss" data-bind="text:name">
+
+                            </span><span></span>
+                        </span>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <ul>
+                    <!-- ko template: { name: 'SubSurveyQuestionLocationTemplate' , foreach: $root.findLocationsInCountry(id) } --><!-- /ko -->
+
+                </ul>
+            </li>
+        </ul>
+    </li>
+</script>
+<script id="SubSurveyQuestionLocationTemplate" type="text/html">
     <div class="count_city_newcnt">
         <!--ko if:CityID() == 0 || CityID() == null-->
-        <span class="form-control lang_nr_box areaCity" data-bind="text:Country " style=" "></span>
+        <li class="_40m_">
+            <div class="clearfix">
+                <div class="_4bl7">
+                    <!--ko if:IncludeorExclude() == '1'-->
+                    <i class="_40n0 img sp_NQc91B1T0mb sx_d7a1cb"></i>
+                    <!--/ko-->
+                    <!--ko if:IncludeorExclude() == '0' -->
+                    <i class="_40n0 img sp_NQc91B1T0mb sx_999ca6"></i>
+                    <!--/ko-->
+                    
+                </div>
+                <div class="_4bl8 _4bl7">
+                    <span class="_47la">
+                        <button type="button" title="Remove" class="_50zy _50zz _50z- _5upp _42ft" data-bind="click:$root.onRemoveLocation">
+                            <span>Remove</span>
+                        </button>
+                    </span>
+                </div>
+                <div class="_4bl8 _4bl7">
+                    <div>
+                       
+                    </div>
+                </div>
+                <div class="_4bl9">
+                    <div class="fwb">
+                        <span class="_3bsr"><span class="_3bss" data-bind="text:Country "></span><span></span></span>
+                    </div>
+                </div>
+            </div>
+        </li>
         <!--/ko-->
         <!--ko if:CityID() != 0 && CityID() != null-->
-        <span class="form-control lang_nr_box areaCity" data-bind="text:City " style=" "></span>
+        <li class="_40m_">
+            <div class="clearfix">
+                <div class="_4bl7">
+                    <!--ko if:IncludeorExclude() == '1'-->
+                    <i class="_40n0 img sp_NQc91B1T0mb sx_d7a1cb"></i>
+                    <!--/ko-->
+                    <!--ko if:IncludeorExclude() == '0' -->
+                    <i class="_40n0 img sp_NQc91B1T0mb sx_999ca6"></i>
+                    <!--/ko-->
+                </div>
+                <div class="_4bl8 _4bl7">
+                    <span class="_47la"><button type="button" title="Remove" class="_50zy _50zz _50z- _5upp _42ft" data-bind="click:$root.onRemoveLocation"><span>Remove</span></button></span>
+                </div>
+                <div class="_4bl9">
+                    <div class="fwb">
+                        <span class="_3bsr">
+                            <span style="float:left;">
+                                <span data-bind="text:City "></span>
+                                <span>
+                                    <span>, </span><span data-bind="text:Country "></span>
+                                </span>
+                            </span>
+                            <span style="float:left;">
+                                <select class="form-control radius_ddp" data-bind="value: Radius">
+                                    <option value="0">No radius</option>
+                                    <option value="10">10</option>
+                                    <option value="25">25</option>
+                                    <option value="40">40</option>
+                                    <option value="100">100+</option>
+                                </select>
+                            </span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </li>
         <!--/ko-->
-        <!--ko if:Radius() != 0 && Radius() != null && Radius() != undefined-->
-        <!--ko if:IncludeorExclude() == '1'-->
-        <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'Included (' + Radius() +')' "></span>
-        <!--/ko-->
-        <!--ko if:IncludeorExclude() == '0' -->
-        <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'Excluded (' + Radius() +')' "></span>
-        <!--/ko-->
-        <!--/ko-->
+      
 
 
-        <a id="" data-bind="click:$root.onRemoveLocation" title=" delete" class="lang_delSurvey"> <i class="fa fa-times "></i></a>
     </div>
     <div class="clear"></div>
 </script>

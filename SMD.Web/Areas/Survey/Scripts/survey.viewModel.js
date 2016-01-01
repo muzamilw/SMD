@@ -192,8 +192,9 @@ define("survey/survey.viewModel",
                                        view.initializeTypeahead();
                                        getAudienceCount();
                                        // build location dropdown
+                                       selectedQuestionCountryList([]);
                                        _.each(selectedQuestion().SurveyQuestionTargetLocation(), function (item) {
-                                           addCountryToCountryList(item.CountryID());
+                                           addCountryToCountryList(item.CountryID(),item.Country());
                                        });
                                        // load survey questions
                                        if (surveyQuestionList().length == 0) {
@@ -259,8 +260,14 @@ define("survey/survey.viewModel",
                         // Ask for confirmation
                         confirmation.afterProceed(function () {
                             deleteLocation(item);
+                            // build location dropdown
+                            selectedQuestionCountryList.removeAll();
+                            _.each(selectedQuestion().SurveyQuestionTargetLocation(), function (item) {
+                                addCountryToCountryList(item.CountryID(), item.Country());
+                            });
                         });
                         confirmation.show();
+                       
                     },
                     deleteLocation = function (item) {
                         selectedQuestion().SurveyQuestionTargetLocation.remove(item);
@@ -280,7 +287,7 @@ define("survey/survey.viewModel",
                           //  ID: 0,
                             SQID: selectedQuestion().SQID()
                         }));
-                        addCountryToCountryList(selectedLocation().CountryID);
+                        addCountryToCountryList(selectedLocation().CountryID, selectedLocation().Country);
                         $(".locVisibility,.locMap").css("display", "none");
                         resetLocations();
                     },
@@ -743,11 +750,25 @@ define("survey/survey.viewModel",
                             }
                         });
                     },
-                    addCountryToCountryList = function (country) {
-                        if (selectedQuestionCountryList.indexOf(country) < 0)
-                        {
-                            selectedQuestionCountryList.push(country);
-                        }
+                    addCountryToCountryList = function (country,name) {
+                        if (country != undefined) {
+
+                            var matcharry = ko.utils.arrayFirst(selectedQuestionCountryList(), function (item) {
+
+                                return item.id == country;
+                            });
+
+                            if (matcharry == null) {
+                                selectedQuestionCountryList.push({id:country,name:name});
+                            }
+                        } 
+                    },
+                    findLocationsInCountry = function (id) {
+                 
+                        var list =  ko.utils.arrayFilter(selectedQuestion().SurveyQuestionTargetLocation(), function (prod) {
+                            return prod.CountryID() == id;
+                        });
+                        return list;
                     },
                      visibleTargetAudience = function (mode) {
 
@@ -784,6 +805,7 @@ define("survey/survey.viewModel",
                              getAudienceCount();
                          });
                      },
+                 
                     // Initialize the view model
                     initialize = function (specifiedView) {
                         view = specifiedView;
@@ -865,6 +887,7 @@ define("survey/survey.viewModel",
                     addEducation: addEducation,
                     selectedQuestionCountryList: selectedQuestionCountryList,
                     addCountryToCountryList: addCountryToCountryList,
+                    findLocationsInCountry: findLocationsInCountry
                 };
             })()
         };
