@@ -43,7 +43,7 @@ define("survey/survey.view",
                             source: array.ttAdapter()
                         }).bind('typeahead:selected', function (obj, selected) {
                             if (selected) {
-                                var CityID = 0, CountryID = 0, Radius = 0, Country = '', City = '';
+                                var CityID = null, CountryID = null, Radius = 0, Country = '', City = '';
                                 if (selected.IsCountry)
                                 {
                                     Country = selected.LocationName;

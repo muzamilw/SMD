@@ -292,7 +292,7 @@
                                         </div>
 
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group" style="display:none;">
                                         <div class="col-lg-3 text-right">
                                             <div class="bs-example-tooltips tooltip-float-width">
                                                 <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
@@ -380,7 +380,7 @@
                                                     <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
                                                 </a>
                                             </div>
-                                            <label for="txtLanguages" class="control-label text-right tooltip-float">Educations</label>
+                                            <label for="txtLanguages" class="control-label text-right tooltip-float">Education</label>
                                         </div>
                                         <div class="col-lg-6">
                                             <div>
@@ -635,7 +635,7 @@
                                                                 </ul>
                                                             </li>
                                                             <li class="li-audul" data-bind="visible: $root.visibleTargetAudience(5)  == 1" style="display: none;">
-                                                                <div class="fsm_bold">Educations:</div>
+                                                                <div class="fsm_bold">Education:</div>
                                                                 <ul class="pad-11">
                                                                     <!-- ko template: { name: 'targetIndustryEducationTemplate' , foreach: SurveyQuestionTargetCriteria } --><!-- /ko -->
 
@@ -674,7 +674,7 @@
                                                             </li>
                                                         </ul>
                                                     </div>
-                                                    <div>Price per click: <span data-bind="text: $root.userBaseData().CurrencySymbol"></span><span data-bind="text: $root.setupPrice()"></span></div>
+                                                    <div>Survey Cost : <span data-bind="text: $root.userBaseData().CurrencySymbol"></span><span data-bind="text: $root.setupPrice()"></span></div>
                                                     <div>Potential Reach: <span data-bind="text:$root.reachedAudience()">0</span> people</div>
 
                                                 </div>

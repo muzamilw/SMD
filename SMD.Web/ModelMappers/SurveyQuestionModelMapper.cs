@@ -362,7 +362,7 @@ namespace SMD.MIS.ModelMappers
                 modelLocation.SqId = location.SqId;
                 result.Add(modelLocation);
             }
-            return result;
+            return result.OrderBy(g=>g.CountryId).ToList();
         }
     }
 }

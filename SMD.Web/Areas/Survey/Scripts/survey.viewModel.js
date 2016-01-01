@@ -52,6 +52,8 @@ define("survey/survey.viewModel",
                     audienceReachMode = ko.observable(1),
                     userBaseData = ko.observable({CurrencySymbol:''}),
                     setupPrice = ko.observable(0),
+                    // unique country list used to bind location dropdown
+                    selectedQuestionCountryList = ko.observableArray([]),
                     //Get Questions
                     getQuestions = function () {   
                         dataservice.searchSurveyQuestions(
@@ -165,6 +167,7 @@ define("survey/survey.viewModel",
                         canSubmitForApproval(true);
                         view.initializeTypeahead();
                         bindAudienceReachCount();
+                        selectedQuestionCountryList([]);
                     },
                     // Close Editor 
                     closeEditDialog = function () {
@@ -188,6 +191,10 @@ define("survey/survey.viewModel",
                                        selectedQuestion().reset();
                                        view.initializeTypeahead();
                                        getAudienceCount();
+                                       // build location dropdown
+                                       _.each(selectedQuestion().SurveyQuestionTargetLocation(), function (item) {
+                                           addCountryToCountryList(item.CountryID());
+                                       });
                                        // load survey questions
                                        if (surveyQuestionList().length == 0) {
                                            dataservice.getBaseData({
@@ -229,7 +236,8 @@ define("survey/survey.viewModel",
 
                                                }
                                            });
-                                       } bindAudienceReachCount();
+                                       }
+                                       bindAudienceReachCount();
                                        isEditorVisible(true);
                                    },
                                    error: function () {
@@ -272,6 +280,7 @@ define("survey/survey.viewModel",
                           //  ID: 0,
                             SQID: selectedQuestion().SQID()
                         }));
+                        addCountryToCountryList(selectedLocation().CountryID);
                         $(".locVisibility,.locMap").css("display", "none");
                         resetLocations();
                     },
@@ -300,7 +309,6 @@ define("survey/survey.viewModel",
                          $("#searchIndustries").val("");
                      },
                       addEducation = function (selected) {
-                          console.log(selected);
                           selectedQuestion().SurveyQuestionTargetCriteria.push(new model.SurveyQuestionTargetCriteria.Create({
                               Education: selected.Title,
                               EducationId: selected.EducationId,
@@ -557,20 +565,20 @@ define("survey/survey.viewModel",
                         var educationIds = '', educationIdsExcluded = '';
                         _.each(selectedQuestion().SurveyQuestionTargetLocation(), function (item) {
                             if(item.CityID() == 0 || item.CityID() == null)
-                            {
+                            { 
                                 if(item.IncludeorExclude() == '0')
                                 {
                                     if(countryIdsExcluded == '')
                                     {
-                                        countryIdsExcluded += item.CountryId();
+                                        countryIdsExcluded += item.CountryID();
                                     } else {
-                                        countryIdsExcluded += ','+ item.CountryId();
+                                        countryIdsExcluded += ',' + item.CountryID();
                                     }
                                 } else {
                                     if (countryIds == '') {
-                                        countryIds += item.CountryId();
+                                        countryIds += item.CountryID();
                                     } else {
-                                        countryIds += ',' + item.CountryId();
+                                        countryIds += ',' + item.CountryID();
                                     }
                                 }
                             } else {
@@ -723,18 +731,23 @@ define("survey/survey.viewModel",
                                 } else {
                                     audienceReachMode(3);
                                 }
-                                if (audienceReachMode() == 1) {
-                                    $(".meterPin").removeClass("spec_aud").removeClass("defined_aud").removeClass("broad_aud").addClass("spec_aud");
-                                } else if (audienceReachMode() == 2) {
-                                    $(".meterPin").removeClass("spec_aud").removeClass("defined_aud").removeClass("broad_aud").addClass("defined_aud");
-                                } else if (audienceReachMode() == 3) {
-                                    $(".meterPin").removeClass("spec_aud").removeClass("defined_aud").removeClass("broad_aud").addClass("broad_aud");
-                                }
+                                var dialPercent = percent * 180;
+                                if (dialPercent > 90)
+                                    dialPercent -= 90;
+                                else
+                                    dialPercent = (90 - dialPercent) * -1;
+                                $(".meterPin").css("-webkit-transform", "rotate(" +dialPercent+"deg)");
                             },
                             error: function (response) {
                                 toastr.error("Error while getting audience count.");
                             }
                         });
+                    },
+                    addCountryToCountryList = function (country) {
+                        if (selectedQuestionCountryList.indexOf(country) < 0)
+                        {
+                            selectedQuestionCountryList.push(country);
+                        }
                     },
                      visibleTargetAudience = function (mode) {
 
@@ -849,7 +862,9 @@ define("survey/survey.viewModel",
                     bindAudienceReachCount: bindAudienceReachCount,
                     userBaseData: userBaseData,
                     setupPrice: setupPrice,
-                    addEducation: addEducation
+                    addEducation: addEducation,
+                    selectedQuestionCountryList: selectedQuestionCountryList,
+                    addCountryToCountryList: addCountryToCountryList,
                 };
             })()
         };
