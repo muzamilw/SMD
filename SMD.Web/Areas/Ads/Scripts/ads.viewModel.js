@@ -786,6 +786,7 @@ define("ads/ads.viewModel",
                          var countryIds = '', cityIds = '', countryIdsExcluded = '', cityIdsExcluded = '';
                          var educationIds = '', educationIdsExcluded = '';
                          _.each(campaignModel().AdCampaignTargetLocations(), function (item) {
+                             console.log(item);
                              if (item.CityID() == 0 || item.CityID() == null) {
                                  if (item.IncludeorExclude() == '0') {
                                      if (countryIdsExcluded == '') {
