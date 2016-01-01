@@ -53,6 +53,7 @@ define("ads/ads.viewModel",
                     totalAudience = ko.observable(0),
                     // audience reach mode 
                     audienceReachMode = ko.observable(1),
+                    errorList = ko.observableArray([]),
                     getCampaignBaseContent = function () {
                             dataservice.getBaseData({
                                 RequestId: 1,
@@ -158,13 +159,35 @@ define("ads/ads.viewModel",
                     },
 
                     saveCampaignData = function () {
-                         
-                        saveCampaign(1);
-
+                        debugger;
+                        
+                        if (campaignModel().isValid()) {
+                            //if (campaignModel().Type() == "2") {
+                            //    var valuetovalidate = campaignModel().LandingPageVideoLink();
+                            //    var regex = /^(?:(?:https?|ftp):\/\/)(?:\S+(?::\S*)?@)?(?:(?!10(?:\.\d{1,3}){3})(?!127(?:\.\d{1,3}){3})(?!169\.254(?:\.\d{1,3}){2})(?!192\.168(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/[^\s]*)?$/i;
+                            //    if (regex.test(valuetovalidate) == false) {
+                            //        errorList.removeAll();
+                            //        errorList.push({ name: "Please enter valid web url.", element: campaignModel().LandingPageVideoLink().domElement });
+                            //    }
+                            //}
+                            //console.log(errorList());
+                            //if (errorList() == null || errorList().length == 0) {
+                                saveCampaign(1);
+                           // }
+                           
+                        } else {
+                            campaignModel().errors.showAllMessages();
+                        }
                     },
                     submitCampaignData = function () {
-                        saveCampaign(2);
-                    }
+                        if (campaignModel().isValid()) {
+                            if (campaignModel().LandingPageVideoLink()) { }
+                            saveCampaign(2);
+                        } else {
+                            campaignModel().errors.showAllMessages();
+                        }
+                    },
+
                     saveCampaign = function (mode) {
                         campaignModel().Status(mode);
                         var campignServerObj = campaignModel().convertToServerData();
@@ -1051,7 +1074,8 @@ define("ads/ads.viewModel",
                         reachedAudience: reachedAudience,
                         audienceReachMode: audienceReachMode,
                         onRemoveEducation: onRemoveEducation,
-                        bindAudienceReachCount: bindAudienceReachCount
+                        bindAudienceReachCount: bindAudienceReachCount,
+                        errorList: errorList
                     };
             })()
         };

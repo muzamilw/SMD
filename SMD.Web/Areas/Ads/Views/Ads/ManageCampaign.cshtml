@@ -17,6 +17,18 @@
                     <h1 class="pull-left" style="padding-left:0px;">Add Campaign</h1>
                 </div>
                 <div class="row" style="margin-bottom:15px;">
+                    <div class="col-xs-6 pull-left validationSummaryContainer">
+                        <a class="validationSummaryLink" data-bind="visible: $root.errorList().length > 0, bootstrapPopover: { html: true, title: 'Please fix following errors', elementNode: 'validationSummaryPopupForStore', popoverId: 'validationSummaryPopoverBodyForStore' }" style="display: none">Invalid data: Click here to see details.</a>
+                        <div class="well well-small validationSummaryModal" id="validationSummaryPopupForStore" style="display: none">
+                            <div id="validationSummaryPopoverBodyForStore">
+                                <ul data-bind="foreach: $root.errorList">
+                                    <li>
+                                        <a><span data-bind="text: name"></span></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="pull-right top-page-ui" style="margin-right:5px;margin-bottom:5px;">
 
@@ -74,7 +86,7 @@
                                     <label for="txtCampaignDisplayName" class="control-label text-right tooltip-float">Campaign Title</label>
                                 </div>
                                 <div class="col-lg-6">
-                                    <input type="text" style="height:60px;" name="Campaign Display Name" class="form-control height60 font24px" id="txtCampaignDisplayName" placeholder="Campaign Display Name" data-bind="value: DisplayTitle">
+                                    <input type="text" style="height:60px;" name="Campaign Display Name" class="form-control height60 font24px" id="txtCampaignDisplayName" placeholder="Campaign Display Name" data-bind="value: DisplayTitle,validationTooltip: DisplayTitle, validationOnElement: DisplayTitle">
 
                                 </div>
                             </div>
@@ -143,7 +155,7 @@
                                     </div>
                                     <div data-bind="visible: Type() != 3 ">
 
-                                        <textarea class="form-control" id="txtLinkOfCampaign" rows="2" placeholder="" data-bind="value: LandingPageVideoLink, attr:{placeholder : $root.campaignTypePlaceHolderValue}"></textarea>
+                                        <textarea class="form-control" id="txtLinkOfCampaign" rows="2" placeholder="" data-bind="value: LandingPageVideoLink, validationOnElement: LandingPageVideoLink, attr:{placeholder : $root.campaignTypePlaceHolderValue}"></textarea>
 
                                     </div>
                                     <div class="col-lg-12" style="margin-left:-10px;" data-bind="visible: Type() == 3">
@@ -479,7 +491,7 @@
                                 <div class="col-lg-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">$</span>
-                                        <input type="text" name="Budget" class="form-control" id="txtBudget" data-bind="value: MaxBudget">
+                                        <input type="number" name="Budget" class="form-control" id="txtBudget" data-bind="value: MaxBudget">
                                         <span class="input-group-addon">.00</span>
                                     </div>
                                 </div>
