@@ -68,7 +68,17 @@ namespace SMD.MIS.Areas.Api.Controllers
                 throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
             }
 
-            string stripeCustomerId = await webApiUserService.GetStripeCustomerIdByEmail(request.Email);
+            //// Get Item Id
+            //long? itemId = request.AdCampaignId.HasValue
+            //    ? request.AdCampaignId.Value
+            //    : request.SqId.HasValue ? request.SqId.Value : (long?)null;
+
+            //if (!itemId.HasValue)
+            //{
+            //    throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
+            //}
+
+            string stripeCustomerId = await webApiUserService.GetStripeCustomerId();
             // Check if Stripe Customer Id Exists then use that to Create Charge
             if (string.IsNullOrEmpty(stripeCustomerId))
             {
