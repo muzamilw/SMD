@@ -172,9 +172,11 @@ namespace SMD.Repository.Repositories
         public UserBaseData getBaseData()
         {
             UserBaseData data = new UserBaseData();
-            var usr = db.Users.Where(g => g.Id == LoggedInUserIdentity).Include("Countries").Include("Cities").SingleOrDefault();
+            var usr = db.Users.Where(g => g.Id == LoggedInUserIdentity).SingleOrDefault();
             if(usr!= null)
             {
+                
+                var country = 
                  data.CityId = usr.CityId;
                  data.CountryId = usr.CountryId;
                  data.EducationId = usr.EducationId;

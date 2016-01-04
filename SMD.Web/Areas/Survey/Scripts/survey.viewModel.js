@@ -164,17 +164,17 @@ define("survey/survey.viewModel",
                         selectedQuestion().SurveyQuestionTargetCriteria([]);
                         selectedQuestion().SurveyQuestionTargetLocation([]);
                         if (userBaseData().CountryId != null && userBaseData.CountryId != 0) {
-                            selectedQuestion().SurveyQuestionTargetLocation.push(new model.SurveyQuestionTargetLocation.Create({
-                                CountryId: userBaseData().CountryId,
-                                CityId: userBaseData().CityId,
-                                Country: userBaseData().Country,
-                                City: userBaseData().City,
-                                IncludeorExclude: true,
-                                Latitude: userBaseData().Latitude,
-                                Longitude: userBaseData().Longitude,
+                            //selectedQuestion().SurveyQuestionTargetLocation.push(new model.SurveyQuestionTargetLocation.Create({
+                            //    CountryId: userBaseData().CountryId,
+                            //    CityId: userBaseData().CityId,
+                            //    Country: userBaseData().Country,
+                            //    City: userBaseData().City,
+                            //    IncludeorExclude: true,
+                            //    Latitude: userBaseData().Latitude,
+                            //    Longitude: userBaseData().Longitude,
 
-                            }));
-                            addCountryToCountryList(userBaseData().CountryId, userBaseData().Country);
+                            //}));
+                            //addCountryToCountryList(userBaseData().CountryId, userBaseData().Country);
                         }
                        
                         getAudienceCount();
