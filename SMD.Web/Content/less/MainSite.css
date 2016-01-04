@@ -284,7 +284,6 @@ i.img {
 }
 ._4zmg {
   max-height: 280px;
-  overflow-y: scroll;
 }
 ._53ga:first-child {
   padding-top: 4px;
@@ -312,12 +311,6 @@ i.img {
   cursor: pointer;
   display: inline-block;
   padding: 0 12px;
-}
-._50zz._50z- {
-  background-image: url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yT/r/c3H9WXNcRAS.png);
-  background-repeat: no-repeat;
-  background-size: auto;
-  background-position: -183px -234px;
 }
 ._4bl7,
 ._4bl9 {
@@ -383,6 +376,9 @@ ul {
   height: 22px;
   margin-left: 5px;
   margin-top: 5px;
+}
+#coun_token_cnt li {
+  list-style: none;
 }
 .lang_newcnt {
   position: relative;

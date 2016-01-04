@@ -254,12 +254,10 @@
                                         </div>
                                         <div class="col-lg-6">
                                             <div id="coun_token_cnt">
-                                                <div class="_4zmf">
                                                     <ul class="_4zmg">
                                                         <!-- ko template: { name: 'SurveyQuestionLocationTemplate' , foreach:  $root.selectedQuestionCountryList } -->
                                                         <!-- /ko -->
                                                     </ul>
-                                                </div>
                                             </div>
                                             <div class="clearfix"></div>
                                             <div id="count_edt">
@@ -278,21 +276,22 @@
                                                     <button data-bind="click:$root.onAddLocation" class="locVisibility btn btn-info">Add Location</button>
 
                                                 </div>
-                                                <div class="count_token_opt_cnt locMap">
-                                                    <div id="mapContainer" style="width: 400px; height: 200px;"></div>
-                                                    <div class="clearfix">&nbsp;</div>
-                                                    <div class="m-t-small" style="display:none;">
-                                                        <label class="p-r-small col-sm-1 control-label">Lat.:</label>
-                                                        <div class="col-sm-3"><input type="text" class="form-control" style="width: 110px" id="us3-lat" data-bind="value: $root.selectedLocationLat " /></div>
-                                                        <label class="p-r-small col-sm-2 control-label">Long.:</label>
-                                                        <div class="col-sm-3"><input type="text" class="form-control" style="width: 110px" id="us3-lon" data-bind="value: $root.selectedLocationLong " /></div>
-                                                    </div>
-                                                </div>
-                                                <div class="clearfix">
-
+                                          
+                                            </div>
+                                            <div class="clearfix"></div>
+                                            <div class="count_token_opt_cnt locMap">
+                                                <div id="mapContainer" style="width: 400px; height: 200px;"></div>
+                                                <div class="clearfix">&nbsp;</div>
+                                                <div class="m-t-small" style="display:none;">
+                                                    <label class="p-r-small col-sm-1 control-label">Lat.:</label>
+                                                    <div class="col-sm-3"><input type="text" class="form-control" style="width: 110px" id="us3-lat" data-bind="value: $root.selectedLocationLat " /></div>
+                                                    <label class="p-r-small col-sm-2 control-label">Long.:</label>
+                                                    <div class="col-sm-3"><input type="text" class="form-control" style="width: 110px" id="us3-lon" data-bind="value: $root.selectedLocationLong " /></div>
                                                 </div>
                                             </div>
+                                            <div class="clearfix">
 
+                                            </div>
                                         </div>
 
                                     </div>
@@ -757,9 +756,9 @@
                 </div>
                 <div class="_4bl8 _4bl7">
                     <span class="_47la">
-                        <button type="button" title="Remove" class="_50zy _50zz _50z- _5upp _42ft" data-bind="click:$root.onRemoveLocation">
-                            <span>Remove</span>
-                        </button>
+                        <a type="button" title="Remove" class="lang_delSurvey _42ft" data-bind="click:$root.onRemoveLocation">
+                            <i class="fa fa-times "></i>
+                        </a>
                     </span>
                 </div>
                 <div class="_4bl8 _4bl7">
@@ -787,7 +786,9 @@
                     <!--/ko-->
                 </div>
                 <div class="_4bl8 _4bl7">
-                    <span class="_47la"><button type="button" title="Remove" class="_50zy _50zz _50z- _5upp _42ft" data-bind="click:$root.onRemoveLocation"><span>Remove</span></button></span>
+                    <span class="_47la"><a type="button" title="Remove" class="lang_delSurvey _42ft" data-bind="click:$root.onRemoveLocation">
+    <i class="fa fa-times "></i>
+</a></span>
                 </div>
                 <div class="_4bl9">
                     <div class="fwb">
@@ -874,7 +875,7 @@
         // MAP ATTRIBUTES.
         var mapAttr = {
             center: center,
-            zoom: 15,
+            zoom: 5,
             mapTypeId: google.maps.MapTypeId.TERRAIN
         };
         var myLatLng = { lat: parseFloat(lat), lng: parseFloat(long) };
@@ -897,7 +898,6 @@
         addRadius(radius,include)
     }
     function addRadius(radius,include) {
-       
         var clr = '#3B5998';
         if (!include)
             clr = '#C82834';
@@ -918,7 +918,21 @@
                 value.setMap(null);
         });
     }
-
+    function addCountryMarker(countryName)
+    {
+        var code = new google.maps.Geocoder().geocode({ 'address': countryName }, function (results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                map.setCenter(results[0].geometry.location);
+                var marker = new google.maps.Marker({
+                    position: results[0].geometry.location,
+                    map: map,
+                    title: 'Click for more details'
+                });
+            } else {
+                console.log('Geocode was not successful for the following reason: ' + status);
+            }
+        });
+    }
 </script>
 <script id="answersTemplate" type="text/html">
     <!--ko if:Type() == 1  || Type() == 2 -->

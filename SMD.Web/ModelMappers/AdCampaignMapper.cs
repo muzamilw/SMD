@@ -311,6 +311,8 @@ namespace SMD.MIS.ModelMappers
         {
             string CName = "";
             string CountName = "";
+            string latitdue = "";
+            string longitude = "";
             if (source.CountryId != null && source.CountryId > 0 && source.Country != null)
             {
                 CountName = source.Country.CountryName;
@@ -319,6 +321,8 @@ namespace SMD.MIS.ModelMappers
             if (source.CityId != null && source.CityId > 0 && source.City != null)
             {
                 CName = source.City.CityName;
+                latitdue = source.City.GeoLat;
+                longitude = source.City.GeoLong;
             }
             return new SMD.MIS.Areas.Api.Models.AdCampaignTargetLocation
             {
@@ -329,7 +333,9 @@ namespace SMD.MIS.ModelMappers
                 IncludeorExclude = source.IncludeorExclude,
                 Radius = source.Radius,
                 City = CName,
-                Country = CountName
+                Country = CountName,
+                Latitude = latitdue,
+                Longitude = longitude
             };
         }
 

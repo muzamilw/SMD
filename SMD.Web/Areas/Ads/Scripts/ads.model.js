@@ -265,7 +265,7 @@
           };
       };
     var // ReSharper disable InconsistentNaming
-    AdCampaignTargetLocation = function (ID, CampaignID, CountryID, CityID, Radius, Country, City,IncludeorExclude) {
+    AdCampaignTargetLocation = function (ID, CampaignID, CountryID, CityID, Radius, Country, City, IncludeorExclude, Latitude, Longitude) {
       
         var
             //type and userID will be set on server sside
@@ -276,7 +276,9 @@
             Radius = ko.observable(Radius),
             Country = ko.observable(Country),
             City = ko.observable(City),
-            IncludeorExclude = ko.observable(IncludeorExclude == true ? "1" : "0")
+            IncludeorExclude = ko.observable(IncludeorExclude == true ? "1" : "0"),
+                     Latitude = ko.observable(Latitude),
+           Longitude = ko.observable(Longitude),
             // Convert to server data
             convertToServerData = function () {
                 return {
@@ -299,7 +301,9 @@
             Country: Country,
             City: City,
             IncludeorExclude:IncludeorExclude,
-            convertToServerData: convertToServerData
+            convertToServerData: convertToServerData,
+            Latitude: Latitude,
+            Longitude: Longitude
         };
     };
     // Factory Method
@@ -322,7 +326,7 @@
     };
     AdCampaignTargetLocation.Create = function (source) {
        
-        return new AdCampaignTargetLocation(source.Id, source.CampaignId, source.CountryId, source.CityId, source.Radius, source.Country, source.City,source.IncludeorExclude);
+        return new AdCampaignTargetLocation(source.Id, source.CampaignId, source.CountryId, source.CityId, source.Radius, source.Country, source.City, source.IncludeorExclude, source.Latitude, source.Longitude);
     };
 
     return {

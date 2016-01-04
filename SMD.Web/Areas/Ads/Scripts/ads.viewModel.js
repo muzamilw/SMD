@@ -529,11 +529,11 @@ define("ads/ads.viewModel",
                             Country: selectedLocation().Country,
                             City: selectedLocation().City,
                             IncludeorExclude: selectedLocation().IncludeorExclude(),
-                            Id: 0,
-                            CampaignId: campaignModel().CampaignID()
+                            CampaignId: campaignModel().CampaignID(),
+                            Latitude: selectedLocation().Latitude,
+                            Longitude: selectedLocation().Longitude,
                         }));
                         addCountryToCountryList(selectedLocation().CountryID, selectedLocation().Country);
-                        $(".locVisibility,.locMap").css("display", "none");
                         resetLocations();
 
                         if (UserAndCostDetail().LocationClausePrice != null && isLocationPerClickPriceAdded() == false) {
@@ -662,7 +662,7 @@ define("ads/ads.viewModel",
                                         }
                                         isEditCampaign(true);
                                         isEditorVisible(true);
-                                       
+                                        buildMap();
                                         var profileQIds = [];
                                         var surveyQIds = [];
                                         if (campaignModel().AdCampaignTargetLocations() != null || campaignModel().AdCampaignTargetLocations().length > 0) {
@@ -828,15 +828,15 @@ define("ads/ads.viewModel",
                              if (item.CityID() == 0 || item.CityID() == null) {
                                  if (item.IncludeorExclude() == '0') {
                                      if (countryIdsExcluded == '') {
-                                         countryIdsExcluded += item.CountryId();
+                                         countryIdsExcluded += item.CountryID();
                                      } else {
-                                         countryIdsExcluded += ',' + item.CountryId();
+                                         countryIdsExcluded += ',' + item.CountryID();
                                      }
                                  } else {
                                      if (countryIds == '') {
-                                         countryIds += item.CountryId();
+                                         countryIds += item.CountryID();
                                      } else {
-                                         countryIds += ',' + item.CountryId();
+                                         countryIds += ',' + item.CountryID();
                                      }
                                  }
                              } else {
@@ -1014,11 +1014,32 @@ define("ads/ads.viewModel",
                          });
                          campaignModel().AdCampaignTargetLocations.subscribe(function (value) {
                              getAudienceCount();
+                             buildMap();
                          });
                          campaignModel().AdCampaignTargetCriterias.subscribe(function (value) {
                              getAudienceCount();
                          });
                     },
+                 buildMap = function () {
+                     $(".locMap").css("display", "none");
+                     var initialized = false;
+                     _.each(campaignModel().AdCampaignTargetLocations(), function (item) {
+                         $(".locMap").css("display", "inline-block");
+                         clearRadiuses();
+                         if (item.CityID() == 0 || item.CityID() == null) {
+                             addCountryMarker(item.Country());
+                         } else {
+                             if (!initialized)
+                                 initializeMap(parseFloat(item.Longitude()), parseFloat(item.Latitude()));
+                             initialized = true;
+                             var included = true;
+                             if (item.IncludeorExclude() == '0') {
+                                 included = false;
+                             }
+                             addPointer(parseFloat(item.Longitude()), parseFloat(item.Latitude()), item.City(), parseFloat(item.Radius()), included);
+                         }
+                     });
+                 }
                     addCountryToCountryList = function (country, name) {
                          if (country != undefined) {
 
@@ -1112,7 +1133,8 @@ define("ads/ads.viewModel",
                         bindAudienceReachCount: bindAudienceReachCount,
                         errorList: errorList,
                         addCountryToCountryList: addCountryToCountryList,
-                        findLocationsInCountry: findLocationsInCountry
+                        findLocationsInCountry: findLocationsInCountry,
+                        selectedQuestionCountryList: selectedQuestionCountryList
                     };
             })()
         };
