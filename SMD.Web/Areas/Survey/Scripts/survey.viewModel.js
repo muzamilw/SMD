@@ -579,7 +579,7 @@ define("survey/survey.viewModel",
                             stripeChargeCustomer.show(function () {
                                 userBaseData().isStripeIntegrated = true;
                                 saveSurveyQuestion(2);
-                            }, 2000, '2 Widgets');
+                            }, 2000, 'Enter your details');
                         } else {
                             saveSurveyQuestion(2);
                         }
