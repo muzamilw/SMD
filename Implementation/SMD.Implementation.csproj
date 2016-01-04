@@ -124,11 +124,9 @@
     <Reference Include="RestSharp">
       <HintPath>..\packages\RestSharp.103.4\lib\net4\RestSharp.dll</HintPath>
     </Reference>
-    <Reference Include="Stripe">
-      <HintPath>..\packages\Stripe.1.12.0\lib\net40\Stripe.dll</HintPath>
-    </Reference>
-    <Reference Include="Stripe.net">
+    <Reference Include="Stripe.net, Version=5.1.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Stripe.net.5.1.2\lib\Stripe.net.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />

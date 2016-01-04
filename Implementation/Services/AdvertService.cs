@@ -567,7 +567,5 @@ namespace SMD.Implementation.Services
         }
 
         #endregion
-
-
     }
 }
