@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using SMD.ExceptionHandling;
 using SMD.Interfaces.Services;
 using SMD.Models.RequestModels;
@@ -8,7 +7,6 @@ using System.Net;
 using System.Web;
 using System.Web.Http;
 using SMD.WebBase.Mvc;
-using Stripe;
 
 namespace SMD.MIS.Areas.Api.Controllers
 {
@@ -21,42 +19,15 @@ namespace SMD.MIS.Areas.Api.Controllers
         #region Private
 
         private readonly IWebApiUserService webApiUserService;
+        private readonly IStripeService stripeService;
 
         /// <summary>
         /// Create Charge With Customer Id
         /// </summary>
-        private static bool CreateChargeWithCustomerId(StripeChargeCustomerRequest request, string customerId)
+        private bool CreateChargeWithCustomerId(StripeChargeCustomerRequest request, string customerId)
         {
-            // Verify If Credit Card is not expired
-            var customerService = new StripeCustomerService();
-            var customer = customerService.Get(customerId);
-            if (customer == null)
-            {
-                throw new SMDException(LanguageResources.Stripe_CustomerNotFound);
-            }
-
-            // If Card has been expired then skip payment
-            if (customer.SourceList != null && customer.SourceList.Data != null && customer.DefaultSourceId != null)
-            {
-                var defaultStripeCard = customer.SourceList.Data.FirstOrDefault(card => card.Id == customer.DefaultSourceId);
-                if (defaultStripeCard != null && (Convert.ToInt32(defaultStripeCard.ExpirationMonth) < DateTime.Now.Month ||
-                    Convert.ToInt32(defaultStripeCard.ExpirationYear) < DateTime.Now.Year))
-                {
-                    throw new SMDException(LanguageResources.Stripe_CardExpired);
-                }
-            }
-            
-            var stripeChargeCreateOptions = new StripeChargeCreateOptions
-            {
-                CustomerId = customerId,
-                Amount = request.Amount,
-                Currency = "usd",
-                Capture = true
-                // (not required) set this to false if you don't want to capture the charge yet - requires you call capture later
-            };
-            var chargeService = new StripeChargeService();
-            var resposne=  chargeService.Create(stripeChargeCreateOptions);
-            if (resposne.Status == "succeeded")
+            var resposne = stripeService.ChargeCustomer(request.Amount, customerId);
+            if (resposne != "failed")
             {
                 return true;
             }
@@ -70,14 +41,16 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// <summary>
         /// Constructor
         /// </summary>
-        public ChargeCustomerController(IWebApiUserService webApiUserService)
+        public ChargeCustomerController(IWebApiUserService webApiUserService, IStripeService stripeService)
         {
             if (webApiUserService == null)
             {
                 throw new ArgumentNullException("webApiUserService");
             }
+            if (stripeService == null) throw new ArgumentNullException("stripeService");
 
             this.webApiUserService = webApiUserService;
+            this.stripeService = stripeService;
         }
 
         #endregion

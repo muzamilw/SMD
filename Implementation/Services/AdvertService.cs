@@ -41,6 +41,7 @@ namespace SMD.Implementation.Services
         private readonly IInvoiceRepository invoiceRepository;
         private readonly IInvoiceDetailRepository invoiceDetailRepository;
         private readonly IEducationRepository _educationRepository;
+        private readonly IStripeService stripeService;
         #region Private Funcs
         private ApplicationUserManager UserManager
         {
@@ -103,47 +104,6 @@ namespace SMD.Implementation.Services
             return user;
         }
 
-        /// <summary>
-        /// Stripe Payment Work
-        /// </summary>
-        private string CreateChargeWithCustomerId(int? amount, string customerId)
-        {
-            // Verify If Credit Card is not expired
-            var customerService = new StripeCustomerService();
-            var customer = customerService.Get(customerId);
-            if (customer == null)
-            {
-                throw new SMDException("Customrt Not Found!");
-            }
-
-            // If Card has been expired then skip payment
-            if (customer.SourceList != null && customer.SourceList.Data != null && customer.DefaultSourceId != null)
-            {
-                var defaultStripeCard = customer.SourceList.Data.FirstOrDefault(card => card.Id == customer.DefaultSourceId);
-                if (defaultStripeCard != null && (Convert.ToInt32(defaultStripeCard.ExpirationMonth) < DateTime.Now.Month ||
-                    Convert.ToInt32(defaultStripeCard.ExpirationYear) < DateTime.Now.Year))
-                {
-                    throw new SMDException("Card Expired!");
-                }
-            }
-
-            var stripeChargeCreateOptions = new StripeChargeCreateOptions
-            {
-                CustomerId = customerId,
-                Amount = amount,
-                Currency = "usd",
-                Capture = true
-                // (not required) set this to false if you don't want to capture the charge yet - requires you call capture later
-            };
-            var chargeService = new StripeChargeService();
-            var resposne = chargeService.Create(stripeChargeCreateOptions);
-            if (resposne.Status == "succeeded")
-            {
-                return resposne.BalanceTransactionId;
-            }
-            return "failed";
-        }
-
         #endregion
 
         #endregion
@@ -163,7 +123,7 @@ namespace SMD.Implementation.Services
             IAdCampaignTargetCriteriaRepository adCampaignTargetCriteriaRepository,
             IProfileQuestionRepository profileQuestionRepository,
             IProfileQuestionAnswerRepository profileQuestionAnswerRepository,
-            ISurveyQuestionRepository surveyQuestionRepository, IProductRepository productRepository, ITaxRepository taxRepository, IInvoiceRepository invoiceRepository, IInvoiceDetailRepository invoiceDetailRepository,IEducationRepository educationRepository)
+            ISurveyQuestionRepository surveyQuestionRepository, IProductRepository productRepository, ITaxRepository taxRepository, IInvoiceRepository invoiceRepository, IInvoiceDetailRepository invoiceDetailRepository,IEducationRepository educationRepository, IStripeService stripeService)
         {
             this._adCampaignRepository = adCampaignRepository;
             this._languageRepository = languageRepository;
@@ -181,6 +141,7 @@ namespace SMD.Implementation.Services
             this.invoiceDetailRepository = invoiceDetailRepository;
             this._industryRepository = industryRepository;
             this._educationRepository = educationRepository;
+            this.stripeService = stripeService;
         }
 
         /// <summary>
@@ -473,7 +434,7 @@ namespace SMD.Implementation.Services
             var amount = product.SetupPrice + tax.TaxValue;
 
             // Make Stripe actual payment 
-            var response = CreateChargeWithCustomerId((int?)amount, user.StripeCustomerId);
+            var response = stripeService.ChargeCustomer((int?)amount, user.StripeCustomerId);
 
             #endregion
             if (response != "failed")
@@ -567,7 +528,5 @@ namespace SMD.Implementation.Services
         }
 
         #endregion
-
-
     }
 }

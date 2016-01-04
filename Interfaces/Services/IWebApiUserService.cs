@@ -13,7 +13,7 @@ namespace SMD.Interfaces.Services
         /// <summary>
         /// Approve Survey
         /// </summary>
-        Task<BaseApiResponse> UpdateTransactionOnSurveyApproval(ApproveSurveyRequest request);
+        Task<BaseApiResponse> UpdateTransactionOnSurveyApproval(ApproveSurveyRequest request, bool isApiCall = true);
 
         /// <summary>
         /// Ad Viewed

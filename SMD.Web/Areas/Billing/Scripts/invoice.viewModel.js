@@ -8,7 +8,7 @@ define("invoice/invoice.viewModel",
         ist.Invoice = {
             viewModel: (function() {
                 var view,
-                    //  Invoices list on LV
+                    // Invoices list on LV
                     invoices = ko.observableArray([]),
                     // Pager
                     pager = ko.observable(),
@@ -24,7 +24,7 @@ define("invoice/invoice.viewModel",
                     fromDateFilter = ko.observable(undefined),
                     // To filter
                     toDateFilter = ko.observable(undefined),
-                    //Get Questions
+                    // Get Questions
                     getInvoices = function () {
                         dataservice.searchInvoices(
                             {
@@ -78,7 +78,7 @@ define("invoice/invoice.viewModel",
                                 }
                             });
                    },
-                    //Has Changes Makes 
+                    // Has Changes Makes 
                     hasChangesOnQuestion = ko.computed(function () {
                         if (selectedInvoice() == undefined) {
                             return false;
