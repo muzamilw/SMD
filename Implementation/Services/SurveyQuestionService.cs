@@ -38,6 +38,7 @@ namespace SMD.Implementation.Services
         private readonly ITaxRepository taxRepository;
         private readonly IInvoiceRepository invoiceRepository;
         private readonly IInvoiceDetailRepository invoiceDetailRepository;
+        private readonly IStripeService stripeService;
         private ApplicationUserManager UserManager
         {
             get { return HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
@@ -98,7 +99,7 @@ namespace SMD.Implementation.Services
             // User who added Survey Question for approval 
             var user = GetUserByUserId(source.UserId);
             // Make Stripe actual payment 
-            var response = CreateChargeWithCustomerId((int?)amount, user.StripeCustomerId);
+            var response = stripeService.ChargeCustomer((int?)amount, user.StripeCustomerId);
 
             #endregion
             if (response != "failed")
@@ -150,7 +151,7 @@ namespace SMD.Implementation.Services
         /// <summary>
         ///  Constructor
         /// </summary>
-        public SurveyQuestionService(ISurveyQuestionRepository _surveyQuestionRepository, ICountryRepository _countryRepository, ILanguageRepository _languageRepository, IEmailManagerService emailManagerService, ISurveyQuestionTargetCriteriaRepository _surveyQuestionTargtCriteriaRepository, ISurveyQuestionTargetLocationRepository _surveyQuestionTargetLocationRepository, IProductRepository productRepository, ITaxRepository taxRepository, IInvoiceRepository invoiceRepository, IInvoiceDetailRepository invoiceDetailRepository)
+        public SurveyQuestionService(ISurveyQuestionRepository _surveyQuestionRepository, ICountryRepository _countryRepository, ILanguageRepository _languageRepository, IEmailManagerService emailManagerService, ISurveyQuestionTargetCriteriaRepository _surveyQuestionTargtCriteriaRepository, ISurveyQuestionTargetLocationRepository _surveyQuestionTargetLocationRepository, IProductRepository productRepository, ITaxRepository taxRepository, IInvoiceRepository invoiceRepository, IInvoiceDetailRepository invoiceDetailRepository, IStripeService stripeService)
         {
             this.surveyQuestionRepository = _surveyQuestionRepository;
             this.languageRepository = _languageRepository;
@@ -161,6 +162,7 @@ namespace SMD.Implementation.Services
             this.taxRepository = taxRepository;
             this.invoiceRepository = invoiceRepository;
             this.invoiceDetailRepository = invoiceDetailRepository;
+            this.stripeService = stripeService;
             this.surveyQuestionTargtCriteriaRepository = _surveyQuestionTargtCriteriaRepository;
         }
 

@@ -41,6 +41,7 @@ namespace SMD.Implementation.Services
             user.StripeCustomerId = customerId;
             await UserManager<>.UpdateAsync(user);
         }
+
         #endregion
         #endregion
         #region Constructor
@@ -99,7 +100,7 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Create Charge With Token
         /// </summary>
-        public string CreateCustomer(StripeChargeCustomerRequest request)
+        public async Task<string> CreateCustomer(StripeChargeCustomerRequest request)
         {
             // Create the charge on Stripe's servers - this will charge the user's card
             var stripeSourceOptions = new StripeSourceOptions { TokenId = request.Token };
@@ -115,7 +116,7 @@ namespace SMD.Implementation.Services
             {
                 var stripeCustomer = customerService.Create(myCustomer);
                 // Save Customer For Later Use
-                webApiUserService.SaveStripeCustomerId(stripeCustomer.Id);
+                await SaveStripeCustomerId(stripeCustomer.Id);
                 // Return Customer Id
                 return stripeCustomer.Id;
             }
