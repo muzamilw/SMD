@@ -19,5 +19,10 @@
         /// Approval Amount
         /// </summary>
         public double Amount { get; set; }
+
+        /// <summary>
+        /// Stripe Response
+        /// </summary>
+        public string StripeResponse { get; set; }
     }
 }

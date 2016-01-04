@@ -31,6 +31,10 @@ namespace SMD.Implementation.Services
         private readonly IAccountRepository accountRepository;
         private readonly ITransactionRepository transactionRepository;
         private readonly ISurveyQuestionRepository surveyQuestionRepository;
+        private readonly IInvoiceRepository invoiceRepository;
+        private readonly IInvoiceDetailRepository invoiceDetailRepository;
+        private readonly IProductRepository productRepository;
+        private readonly ITaxRepository taxRepository;
 
         private ApplicationUserManager UserManager
         {
@@ -288,15 +292,9 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Performs Transactions on Survey Approval
         /// </summary>
-        /// <param name="request">Survey Approve Request object</param>
-        /// <param name="advertisersAccount">Advertisers account</param>
-        /// <param name="approvedSurveyAmount">Survey Amount</param>
-        /// <param name="smdsCut"></param>
-        /// <param name="smdAccount"></param>
-        /// <param name="surveyQuestion"></param>
-        /// <param name="isApiCall"></param>
         private void PerformSurveyApproveTransactions(ApproveSurveyRequest request, Account advertisersAccount, double approvedSurveyAmount,
-            double? smdsCut, Account smdAccount, SurveyQuestion surveyQuestion, bool isApiCall = true)
+            double? smdsCut, Account smdAccount, SurveyQuestion surveyQuestion,double amount,  int? productId,
+            double taxValue,bool isApiCall = true)
         {
             // Debit Advertiser
             var transactionSequence = 1;
@@ -309,6 +307,8 @@ namespace SMD.Implementation.Services
             transactionSequence += 1;
             PerformTransaction(null, request.SurveyQuestionId, smdAccount, smdsCut, transactionSequence, TransactionType.ApproveSurvey);
 
+            // Add Invoice Details
+            AddInvoiceDetails(surveyQuestion, amount, request.StripeResponse, productId, taxValue, isApiCall);
             // If called locally
             if (!isApiCall)
             {
@@ -323,6 +323,53 @@ namespace SMD.Implementation.Services
             transactionRepository.SaveChanges();
         }
 
+        /// <summary>
+        /// Invoice + Details work 
+        /// </summary>
+        private void AddInvoiceDetails(SurveyQuestion source, double amount, string stripeResponse, int? productId, 
+            double taxValue, bool isApiCall = true)
+        {
+            #region Add Invoice
+
+            // Add invoice data
+            var invoice = new Invoice
+            {
+                Country = source.Country.CountryName,
+                Total = (double)amount,
+                NetTotal = (double)amount,
+                InvoiceDate = DateTime.Now,
+                InvoiceDueDate = DateTime.Now.AddDays(7),
+                Address1 = source.Country.CountryName,
+                UserId = source.UserId,
+                CompanyName = "My Company",
+                CreditCardRef = stripeResponse
+            };
+            invoiceRepository.Add(invoice);
+
+            #endregion
+            #region Add Invoice Detail
+
+            // Add Invoice Detail Data 
+            var invoiceDetail = new InvoiceDetail
+            {
+                InvoiceId = invoice.InvoiceId,
+                SqId = source.SqId,
+                ProductId = productId,
+                ItemName = "Survey Question",
+                ItemAmount = (double)amount,
+                ItemTax = taxValue,
+                ItemDescription = "This is description!",
+                ItemGrossAmount = (double)amount,
+                CampaignId = null,
+
+            };
+            invoiceDetailRepository.Add(invoiceDetail);
+            if (!isApiCall)
+            {
+                invoiceDetailRepository.SaveChanges();
+            }
+            #endregion
+        }
         #endregion
 
         /// <summary>
@@ -343,7 +390,10 @@ namespace SMD.Implementation.Services
         /// Constructor
         /// </summary>
         public WebApiUserService(IEmailManagerService emailManagerService, IAdCampaignRepository adCampaignRepository, 
-            IAccountRepository accountRepository, ITransactionRepository transactionRepository, ISurveyQuestionRepository surveyQuestionRepository)
+            IAccountRepository accountRepository, ITransactionRepository transactionRepository,
+            ISurveyQuestionRepository surveyQuestionRepository, IInvoiceRepository invoiceRepository, 
+            IInvoiceDetailRepository invoiceDetailRepository, IProductRepository productRepository,
+            ITaxRepository taxRepository)
         {
             if (emailManagerService == null)
             {
@@ -365,12 +415,18 @@ namespace SMD.Implementation.Services
             {
                 throw new ArgumentNullException("surveyQuestionRepository");
             }
+            if (productRepository == null) throw new ArgumentNullException("productRepository");
+            if (taxRepository == null) throw new ArgumentNullException("taxRepository");
 
             this.emailManagerService = emailManagerService;
             this.adCampaignRepository = adCampaignRepository;
             this.accountRepository = accountRepository;
             this.transactionRepository = transactionRepository;
             this.surveyQuestionRepository = surveyQuestionRepository;
+            this.invoiceRepository = invoiceRepository;
+            this.invoiceDetailRepository = invoiceDetailRepository;
+            this.productRepository = productRepository;
+            this.taxRepository = taxRepository;
         }
 
         #endregion
@@ -396,7 +452,12 @@ namespace SMD.Implementation.Services
             
             // Begin Transaction
             // SMD will get 100 %
-            double approvedSurveyAmount = request.Amount;
+            // Get Current Product
+            var product = productRepository.GetProductByCountryId(surveyQuestion.CountryId, "SQ");
+            // Tax Applied
+            var tax = taxRepository.GetTaxByCountryId(surveyQuestion.CountryId);
+            // Total includes tax
+            double? approvedSurveyAmount = product.SetupPrice + tax.TaxValue;
             Account advertisersAccount;
             Account smdAccount;
 
@@ -405,7 +466,8 @@ namespace SMD.Implementation.Services
             SetupSurveyApproveTransaction(surveyQuestion, out advertisersAccount, out smdAccount);
             
             // Perform Transactions
-            PerformSurveyApproveTransactions(request, advertisersAccount, approvedSurveyAmount, approvedSurveyAmount, smdAccount, surveyQuestion);
+            PerformSurveyApproveTransactions(request, advertisersAccount, (double) approvedSurveyAmount, approvedSurveyAmount,
+                smdAccount, surveyQuestion,(double) approvedSurveyAmount,product.ProductId,(double) tax.TaxValue,isApiCall);
 
             return new BaseApiResponse
             {
