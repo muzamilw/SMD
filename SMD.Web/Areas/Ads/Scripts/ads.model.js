@@ -28,7 +28,7 @@
                   validation: {
                       validator: function (val, someOtherVal) {
                       
-                          return moment(val).toDate() <= moment(StartDateTime()).toDate();
+                          return moment(val).toDate() > moment(StartDateTime()).toDate();
                       },
                       message: 'End date must be greater than start date',
                   }
