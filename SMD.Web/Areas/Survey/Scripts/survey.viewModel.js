@@ -812,6 +812,7 @@ define("survey/survey.viewModel",
                         $(".locMap").css("display", "inline-block");
                         var initialized = false;
                         _.each(selectedQuestion().SurveyQuestionTargetLocation(), function (item) {
+                            debugger;
                             clearRadiuses();
                             if (item.CityID() == 0 || item.CityID() == null) {
                             } else {
