@@ -239,6 +239,7 @@ define("survey/survey.viewModel",
                                            });
                                        }
                                        bindAudienceReachCount();
+                                       buildMap();
                                        isEditorVisible(true);
                                    },
                                    error: function () {
@@ -800,12 +801,31 @@ define("survey/survey.viewModel",
                          });
                          selectedQuestion().SurveyQuestionTargetLocation.subscribe(function (value) {
                              getAudienceCount();
+                             // update map 
+                             buildMap();
                          });
                          selectedQuestion().SurveyQuestionTargetCriteria.subscribe(function (value) {
                              getAudienceCount();
                          });
                      },
-                 
+                    buildMap = function () {
+                        $(".locMap").css("display", "inline-block");
+                        var initialized = false;
+                        _.each(selectedQuestion().SurveyQuestionTargetLocation(), function (item) {
+                            clearRadiuses();
+                            if (item.CityID() == 0 || item.CityID() == null) {
+                            } else {
+                                if (!initialized)
+                                    initializeMap(item.Latitude(), item.Longitude());
+                                initialized = true;
+                                var included = true;
+                                if (item.IncludeorExclude() == '0') {
+                                    included = false;
+                                }
+                                addPointer(item.Latitude(), item.Longitude(), item.City(), item.Radius(), included);
+                            }
+                        });
+                    }
                     // Initialize the view model
                     initialize = function (specifiedView) {
                         view = specifiedView;
