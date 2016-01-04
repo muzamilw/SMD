@@ -359,7 +359,7 @@ ul {
   vertical-align: text-bottom;
 }
 .sp_NQc91B1T0mb {
-  background-image: url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yA/r/CZ_AOFDdEE7.png);
+  background-image: url(../Images/CZ_AOFDdEE7.png);
   background-size: auto;
   background-repeat: no-repeat;
   display: inline-block;
@@ -395,13 +395,15 @@ ul {
 .coun_in_ex_cnt {
   width: 100px;
   float: left;
+  border: 1px solid #e7ebee;
 }
 .count_token_opt_cnt {
   float: left;
-  width: 280px;
+  width: 285px;
+  border: 1px solid #e7ebee;
 }
 #searchSurveyLocations {
-  width: 280px!important;
+  width: 280px !important;
   border-top-left-radius: 0px !important;
   border-top-right-radius: 0px !important;
   border: none;
@@ -411,7 +413,7 @@ ul {
 #searchLanguages,
 #searchIndustries,
 #searchEducations {
-  width: 280px!important;
+  width: 280px !important;
   border-top-left-radius: 0px !important;
   border-top-right-radius: 0px !important;
   border: none;
@@ -506,6 +508,10 @@ div.Tokenize ul.Dropdown {
   width: 10px;
   height: 14px;
   background-position: -724px -244px;
+}
+.meterPin {
+  background-image: url('/Content/Images/pin.png') !important;
+  background-position: center !important;
 }
 /* Common Styles */
 .fileUpload {
