@@ -365,6 +365,7 @@ namespace SMD.MIS.ModelMappers
                 Education = source.EducationTitle,
                 Industry = source.IndustryName,
                 Language = source.LanguageName,
+                isStripeIntegrated = source.isStripeIntegrated
             };
 
 

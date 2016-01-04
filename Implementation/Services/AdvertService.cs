@@ -158,7 +158,7 @@ namespace SMD.Implementation.Services
                 campaignProduct = productRepository.GetProductByCountryId(Convert.ToInt32(loggedInUser.CountryId), code);
                 objUC.CountryId = loggedInUser.CountryId;
                 objUC.CityId = loggedInUser.CityId;
-                objUC.CityName = loggedInUser.Cities != null ? loggedInUser.Cities.CityName : "";
+                objUC.CityName = loggedInUser.City != null ? loggedInUser.City.CityName : "";
 
 
                 objUC.EducationId = loggedInUser.EducationId;
@@ -167,10 +167,11 @@ namespace SMD.Implementation.Services
                 objUC.LanguageId = loggedInUser.LanguageId;
 
 
-                objUC.CountryName = loggedInUser.Countries != null ? loggedInUser.Countries.CountryName : "";
+                objUC.CountryName = loggedInUser.Country != null ? loggedInUser.Country.CountryName : "";
                 objUC.EducationTitle = loggedInUser.Education != null ? loggedInUser.Education.Title : "";
                 objUC.IndustryName = loggedInUser.Industry != null ? loggedInUser.Industry.IndustryName : "";
                 objUC.LanguageName = loggedInUser.Language != null ? loggedInUser.Language.LanguageName : "";
+                objUC.isStripeIntegrated = String.IsNullOrEmpty(loggedInUser.StripeCustomerId) ? false : true;
             }
             if (campaignProduct != null)
             {

@@ -153,10 +153,13 @@
 <!-- ko stopBinding: true -->
 @Html.Partial("~/Areas/Common/Views/Shared/_ConfirmationDialog.cshtml")
 <!-- /ko -->
+  <!-- ko stopBinding: true -->
+@Html.Partial("~/Areas/Common/Views/Shared/_StripeChargeCustomerDialog.cshtml")
+<!-- /ko -->
 @section Scripts{
     <script src="~/Scripts/jquery.tokenize.js"></script>
     <script type="text/javascript">
-        require(["ads/ads.view"]);
+        require(["ads/ads.view", "common/stripeChargeCustomer.view"]);
 
     </script>
 

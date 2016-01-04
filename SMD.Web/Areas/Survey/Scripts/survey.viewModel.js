@@ -2,8 +2,8 @@
     Module with the view model for the Profile Questions
 */
 define("survey/survey.viewModel",
-    ["jquery", "amplify", "ko", "survey/survey.dataservice", "common/pagination", "survey/survey.model", "common/confirmation.viewModel"],
-    function ($, amplify, ko, dataservice, pagination, model, confirmation) {
+    ["jquery", "amplify", "ko", "survey/survey.dataservice", "common/pagination", "survey/survey.model", "common/confirmation.viewModel", "common/stripeChargeCustomer.viewModel"],
+    function ($, amplify, ko, dataservice, pagination, model, confirmation, stripeChargeCustomer) {
         var ist = window.ist || {};
         ist.survey = {
             viewModel: (function () {
@@ -50,7 +50,7 @@ define("survey/survey.viewModel",
                     totalAudience = ko.observable(0),
                     // audience reach mode 
                     audienceReachMode = ko.observable(1),
-                    userBaseData = ko.observable({CurrencySymbol:''}),
+                    userBaseData = ko.observable({CurrencySymbol:'',isStripeIntegrated:false}),
                     setupPrice = ko.observable(0),
                     // unique country list used to bind location dropdown
                     selectedQuestionCountryList = ko.observableArray([]),
@@ -163,18 +163,19 @@ define("survey/survey.viewModel",
                         selectedQuestion().reset();
                         selectedQuestion().SurveyQuestionTargetCriteria([]);
                         selectedQuestion().SurveyQuestionTargetLocation([]);
+                        console.log(userBaseData());
                         if (userBaseData().CountryId != null && userBaseData.CountryId != 0) {
-                            selectedQuestion().SurveyQuestionTargetLocation.push(new model.SurveyQuestionTargetLocation.Create({
-                                CountryId: userBaseData().CountryId,
-                                CityId: userBaseData().CityId,
-                                Country: userBaseData().Country,
-                                City: userBaseData().City,
-                                IncludeorExclude: true,
-                                Latitude: userBaseData().Latitude,
-                                Longitude: userBaseData().Longitude,
+                            //selectedQuestion().SurveyQuestionTargetLocation.push(new model.SurveyQuestionTargetLocation.Create({
+                            //    CountryId: userBaseData().CountryId,
+                            //    CityId: userBaseData().CityId,
+                            //    Country: userBaseData().Country,
+                            //    City: userBaseData().City,
+                            //    IncludeorExclude: true,
+                            //    Latitude: userBaseData().Latitude,
+                            //    Longitude: userBaseData().Longitude,
 
-                            }));
-                            addCountryToCountryList(userBaseData().CountryId, userBaseData().Country);
+                            //}));
+                            //addCountryToCountryList(userBaseData().CountryId, userBaseData().Country);
                         }
                        
                         getAudienceCount();
@@ -286,7 +287,7 @@ define("survey/survey.viewModel",
                        
                     },
                     deleteLocation = function (item) {
-                        if (item.CountryId() == userBaseData().CountryId && item.CityId() == userBaseData().CityId) {
+                        if (item.CountryID() == userBaseData().CountryId && item.CityID() == userBaseData().CityId) {
                             toastr.error("You cannot remove your home town or country!");
                         }else {
                             selectedQuestion().SurveyQuestionTargetLocation.remove(item);
@@ -573,7 +574,15 @@ define("survey/survey.viewModel",
                     },
                    // submit  survey question for approval
                     onSubmitSurveyQuestion = function () {
-                        saveSurveyQuestion(2);
+                        if (userBaseData().isStripeIntegrated == false)
+                        {
+                            stripeChargeCustomer.show(function () {
+                                userBaseData().isStripeIntegrated = true;
+                                saveSurveyQuestion(2);
+                            }, 2000, 'Enter your details');
+                        } else {
+                            saveSurveyQuestion(2);
+                        }
                     },
                     saveSurveyQuestion = function (mode) {
                         selectedQuestion().Status(mode);
