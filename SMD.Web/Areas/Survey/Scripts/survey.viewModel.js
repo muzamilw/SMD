@@ -162,6 +162,21 @@ define("survey/survey.viewModel",
                         selectedQuestion().AgeRangeEnd(90);
                         selectedQuestion().reset();
                         selectedQuestion().SurveyQuestionTargetCriteria([]);
+                        selectedQuestion().SurveyQuestionTargetLocation([]);
+                        if (userBaseData().CountryId != null && userBaseData.CountryId != 0) {
+                            selectedQuestion().SurveyQuestionTargetLocation.push(new model.SurveyQuestionTargetLocation.Create({
+                                CountryId: userBaseData().CountryId,
+                                CityId: userBaseData().CityId,
+                                Country: userBaseData().Country,
+                                City: userBaseData().City,
+                                IncludeorExclude: true,
+                                Latitude: userBaseData().Latitude,
+                                Longitude: userBaseData().Longitude,
+
+                            }));
+                            addCountryToCountryList(userBaseData().CountryId, userBaseData().Country);
+                        }
+                       
                         getAudienceCount();
                         isEditorVisible(true);
                         canSubmitForApproval(true);
@@ -271,8 +286,13 @@ define("survey/survey.viewModel",
                        
                     },
                     deleteLocation = function (item) {
-                        selectedQuestion().SurveyQuestionTargetLocation.remove(item);
-                        toastr.success("Removed Successfully!");
+                        if (item.CountryId() == userBaseData().CountryId && item.CityId() == userBaseData().CityId) {
+                            toastr.error("You cannot remove your home town or country!");
+                        }else {
+                            selectedQuestion().SurveyQuestionTargetLocation.remove(item);
+                            toastr.success("Removed Successfully!");
+                        }
+                        
                      },
                     //add location
                     onAddLocation = function (item) {
