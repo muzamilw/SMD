@@ -19,5 +19,6 @@ namespace SMD.Models.Common
         public string Industry { get; set; }
         public string Education { get; set; }
         public string CurrencySymbol { get; set; }
+        public bool isStripeIntegrated { get; set; }
     }
 }

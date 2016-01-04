@@ -187,6 +187,7 @@ namespace SMD.Repository.Repositories
                  data.Education = usr.Education != null?usr.Education.Title : "";
                  data.Industry = usr.Industry != null?usr.Industry.IndustryName:"";
                  data.Language = usr.Language != null? usr.Language.LanguageName: "";
+                 data.isStripeIntegrated = String.IsNullOrEmpty(usr.StripeCustomerId) == true ? false : true;
             }
 
             return data;
