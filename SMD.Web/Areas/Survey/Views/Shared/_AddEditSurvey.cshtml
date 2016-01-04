@@ -867,8 +867,8 @@
 <script>
     var map;
     var center;
-    var circle = null;
-    function initializeMap(lat, long, place) {
+    var circles = [];
+    function initializeMap(lat, long) {
         // LOCATION IN LATITUDE AND LONGITUDE.
         center = new google.maps.LatLng(long, lat);
         // MAP ATTRIBUTES.
@@ -883,28 +883,41 @@
         map = new google.maps.Map(document.getElementById("mapContainer"), mapAttr);
         google.maps.event.addDomListener(window, 'load', initialize);
 
+      
+
+    }
+    function addPointer(lat, long, place, radius,include) {
+        // LOCATION IN LATITUDE AND LONGITUDE.
+        center = new google.maps.LatLng(long, lat);
         var marker = new google.maps.Marker({
             position: center,
             map: map,
             title: place
         });
-
+        addRadius(radius,include)
     }
-    function addRadius(radius) {
-        if (circle != null)
-            circle.setMap(null);
-        circle = new google.maps.Circle({
+    function addRadius(radius,include) {
+       
+        var clr = '#3B5998';
+        if (!include)
+            clr = '#C82834';
+        var circle = new google.maps.Circle({
             center: center,
             map: map,
             radius: parseInt(radius),          // IN METERS.
-            fillColor: '#FF6600',
+            fillColor: clr, 
             fillOpacity: 0.3,
             strokeColor: "#FFF",
             strokeWeight: 0         // DON'T SHOW CIRCLE BORDER.
         });
-
+        circles.push(circle);
     }
-
+    function clearRadiuses() {
+        $.each(circles, function (key, value) {
+            if (value != null)
+                value.setMap(null);
+        });
+    }
 
 </script>
 <script id="answersTemplate" type="text/html">

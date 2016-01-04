@@ -30,7 +30,8 @@ namespace SMD.MIS.ModelMappers
                 GeoLong = source.GeoLong,
                 IsCity = true,
                 CityId = source.CityId,
-                CountryId = source.CountryId.Value
+                CountryId = source.CountryId.Value,
+                parentCountryName = source.Country.CountryName
             };
         }
     }

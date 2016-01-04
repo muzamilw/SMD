@@ -216,7 +216,7 @@
           };
       };
     var // ReSharper disable InconsistentNaming
-    SurveyQuestionTargetLocation = function (ID, SQID, CountryID, CityID, Radius, Country, City, IncludeorExclude) {
+    SurveyQuestionTargetLocation = function (ID, SQID, CountryID, CityID, Radius, Country, City, IncludeorExclude, Latitude, Longitude) {
         var
             //type and userID will be set on server sside
             ID = ko.observable(ID),
@@ -227,6 +227,8 @@
             Country = ko.observable(Country),
             City = ko.observable(City),
            IncludeorExclude = ko.observable(IncludeorExclude == true ? "1" : "0"),
+           Latitude = ko.observable(Latitude),
+           Longitude = ko.observable(Longitude),
             // Convert to server data
             convertToServerData = function () {
                 return {
@@ -249,7 +251,9 @@
             Country: Country,
             City: City,
             IncludeorExclude: IncludeorExclude,
-            convertToServerData: convertToServerData
+            convertToServerData: convertToServerData,
+            Latitude: Latitude,
+            Longitude: Longitude
         };
     };
     // Factory Method
@@ -268,7 +272,8 @@
         return new SurveyQuestionTargetCriteria(source.Id, source.SqId, source.Type, source.PqId, source.PqAnswerId, source.LinkedSqId, source.LinkedSqAnswer, source.IncludeorExclude, source.LanguageId, source.questionString, source.answerString, source.Language, source.surveyQuestLeftImageSrc, source.surveyQuestRightImageSrc, source.IndustryId, source.Industry,source.EducationId, source.Education);
     };
     SurveyQuestionTargetLocation.Create = function (source) {
-        return new SurveyQuestionTargetLocation(source.Id, source.SqId, source.CountryId, source.CityId, source.Radius, source.Country, source.City, source.IncludeorExclude);
+        return new SurveyQuestionTargetLocation(source.Id, source.SqId, source.CountryId, source.CityId, source.Radius,
+            source.Country, source.City, source.IncludeorExclude, source.Latitude, source.Longitude);
     };
     return {
         Survey: Survey,
