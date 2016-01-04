@@ -172,9 +172,11 @@ namespace SMD.Repository.Repositories
         public UserBaseData getBaseData()
         {
             UserBaseData data = new UserBaseData();
-            var usr = db.Users.Where(g => g.Id == LoggedInUserIdentity).Include("Countries").Include("Cities").SingleOrDefault();
+            var usr = db.Users.Where(g => g.Id == LoggedInUserIdentity).SingleOrDefault();
             if(usr!= null)
             {
+                
+                var country = 
                  data.CityId = usr.CityId;
                  data.CountryId = usr.CountryId;
                  data.EducationId = usr.EducationId;
@@ -185,6 +187,7 @@ namespace SMD.Repository.Repositories
                  data.Education = usr.Education != null?usr.Education.Title : "";
                  data.Industry = usr.Industry != null?usr.Industry.IndustryName:"";
                  data.Language = usr.Language != null? usr.Language.LanguageName: "";
+                 data.isStripeIntegrated = String.IsNullOrEmpty(usr.StripeCustomerId) == true ? false : true;
             }
 
             return data;
