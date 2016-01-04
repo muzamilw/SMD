@@ -816,6 +816,7 @@ define("survey/survey.viewModel",
                             $(".locMap").css("display", "inline-block");
                             clearRadiuses();
                             if (item.CityID() == 0 || item.CityID() == null) {
+                                addCountryMarker(item.Country());
                             } else {
                                 if (!initialized)
                                     initializeMap( parseFloat(item.Longitude()),parseFloat(item.Latitude()));
