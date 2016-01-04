@@ -124,14 +124,16 @@
         Html.RenderPartial("~/Areas/Survey/Views/Shared/_AddEditSurvey.cshtml");
     }
 </div>
-
+  <!-- ko stopBinding: true -->
+@Html.Partial("~/Areas/Common/Views/Shared/_StripeChargeCustomerDialog.cshtml")
+<!-- /ko -->
 <!-- ko stopBinding: true -->
 @Html.Partial("~/Areas/Common/Views/Shared/_ConfirmationDialog.cshtml")
 <!-- /ko -->
 @section Scripts{
 <script src="~/Scripts/jquery.tokenize.js"></script>
     <script type="text/javascript">
-        require(["survey/survey.view", "common/confirmation.view"]);
+        require(["survey/survey.view", "common/confirmation.view", "common/stripeChargeCustomer.view"]);
     </script>
 
 

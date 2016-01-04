@@ -9,7 +9,9 @@
               //type and userID will be set on server sside
               CampaignID = ko.observable(CampaignID),
               LanguageID = ko.observable(LanguageID),
-              CampaignName = ko.observable(CampaignName),
+              CampaignName = ko.observable(CampaignName).extend({  // custom message
+                  required: true
+              }),
               UserID = ko.observable(UserID),
               Status = ko.observable(Status),
               StatusValue = ko.observable(StatusValue),
@@ -22,8 +24,16 @@
               }),//ko.observable(),
               EndDateTime = ko.observable((EndDateTime !== null && EndDateTime !== undefined) ? moment(EndDateTime).toDate() : undefined).extend({  // custom message
                   required: true
+              }).extend({
+                  validation: {
+                      validator: function (val, someOtherVal) {
+                      
+                          return moment(val).toDate() > moment(StartDateTime()).toDate();
+                      },
+                      message: 'End date must be greater than start date',
+                  }
               }),// ko.observable(EndDateTime),
-              MaxBudget = ko.observable(MaxBudget),
+              MaxBudget = ko.observable(MaxBudget).extend({ required: true, number: true, min: 1}),
               Type = ko.observable(Type),
               DisplayTitle = ko.observable(DisplayTitle).extend({  // custom message
                   required: true
@@ -37,10 +47,11 @@
                               return false;
                           }
                       }
-                  },
+                  }
+              }).extend({
                   pattern: {
                       message: 'Please enter valid web url.',
-                      params: '/^(?:(?:https?|ftp):\/\/)(?:\S+(?::\S*)?@)?(?:(?!10(?:\.\d{1,3}){3})(?!127(?:\.\d{1,3}){3})(?!169\.254(?:\.\d{1,3}){2})(?!192\.168(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/[^\s]*)?$/i',
+                      params: /^(?:(?:https?|ftp):\/\/)(?:\S+(?::\S*)?@)?(?:(?!10(?:\.\d{1,3}){3})(?!127(?:\.\d{1,3}){3})(?!169\.254(?:\.\d{1,3}){2})(?!192\.168(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/[^\s]*)?$/i,
                       onlyIf: function () {
                           if (Type() == "2") {
                               return true;
@@ -56,7 +67,14 @@
               Answer3 = ko.observable(Answer3),
               CorrectAnswer = ko.observable(CorrectAnswer),
               AgeRangeStart = ko.observable(AgeRangeStart),
-              AgeRangeEnd = ko.observable(AgeRangeEnd),
+              AgeRangeEnd = ko.observable(AgeRangeEnd).extend({
+                  validation: {
+                      validator: function (val, someOtherVal) {
+                          return val > AgeRangeStart();
+                      },
+                      message: 'Age end range must be greater than start range',
+                  }
+              }),
               ResultClicks = ko.observable(ResultClicks),
               AmountSpent = ko.observable(AmountSpent),
               ImagePath = ko.observable(ImagePath),
@@ -66,10 +84,13 @@
               AdCampaignTargetLocations = ko.observableArray([]),
                // Errors
                 errors = ko.validation.group({
+                    CampaignName:CampaignName,
                     DisplayTitle: DisplayTitle,
                     LandingPageVideoLink: LandingPageVideoLink,
                     StartDateTime: StartDateTime,
-                    EndDateTime: EndDateTime
+                    EndDateTime: EndDateTime,
+                    MaxBudget: MaxBudget,
+                    AgeRangeEnd: AgeRangeEnd
                 }),
                 // Is Valid 
                 isValid = ko.computed(function () {

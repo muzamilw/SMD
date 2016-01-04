@@ -2,8 +2,8 @@
     Module with the view model for the Profile Questions
 */
 define("ads/ads.viewModel",
-    ["jquery", "amplify", "ko", "ads/ads.dataservice", "ads/ads.model", "common/pagination", "common/confirmation.viewModel"],
-    function ($, amplify, ko, dataservice, model, pagination, confirmation) {
+    ["jquery", "amplify", "ko", "ads/ads.dataservice", "ads/ads.model", "common/pagination", "common/confirmation.viewModel", "common/stripeChargeCustomer.viewModel"],
+    function ($, amplify, ko, dataservice, model, pagination, confirmation, stripeChargeCustomer) {
         var ist = window.ist || {};
         ist.Ads = {
             viewModel: (function () {
@@ -175,7 +175,7 @@ define("ads/ads.viewModel",
                             //console.log(errorList());
                             //if (errorList() == null || errorList().length == 0) {
                                 saveCampaign(1);
-                           // }
+                          // }
                            
                         } else {
                             campaignModel().errors.showAllMessages();
@@ -183,8 +183,18 @@ define("ads/ads.viewModel",
                     },
                     submitCampaignData = function () {
                         if (campaignModel().isValid()) {
-                            if (campaignModel().LandingPageVideoLink()) { }
-                            saveCampaign(2);
+                            if (UserAndCostDetail().isStripeIntegrated == false)
+                            {
+                                stripeChargeCustomer.show(function () {
+                                    UserAndCostDetail().isStripeIntegrated = true;
+                                    if (campaignModel().LandingPageVideoLink()) { }
+                                    saveCampaign(2);
+                                }, 2000, 'Enter your details');
+                            } else {
+                                if (campaignModel().LandingPageVideoLink()) { }
+                                saveCampaign(2);
+                            }
+                          
                         } else {
                             campaignModel().errors.showAllMessages();
                         }

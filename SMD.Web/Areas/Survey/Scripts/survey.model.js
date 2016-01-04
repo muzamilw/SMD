@@ -10,22 +10,45 @@
                 CountryID = ko.observable(CountryID),
                 UserID = ko.observable(UserID),
                 Status = ko.observable(Status),
-                Question = ko.observable(Question),
+                Question = ko.observable(Question).extend({  // custom message
+                    required: true
+                }),
                 Gender = ko.observable(Gender),
                 Language = ko.observable(Language),
                 Country = ko.observable(Country),
                 StatusValue = ko.observable(StatusValue),
                 Description = ko.observable(Description),
-                DisplayQuestion = ko.observable(DisplayQuestion),
-                StartDate = ko.observable((StartDate !== null && StartDate !== undefined) ? moment(StartDate).toDate() : undefined),
-                EndDate = ko.observable((EndDate !== null && EndDate !== undefined) ? moment(EndDate).toDate() : undefined),
+                DisplayQuestion = ko.observable(DisplayQuestion).extend({  // custom message
+                    required: true
+                }),
+                StartDate = ko.observable((StartDate !== null && StartDate !== undefined) ? moment(StartDate).toDate() : undefined).extend({  // custom message
+                    required: true
+                }),
+                EndDate = ko.observable((EndDate !== null && EndDate !== undefined) ? moment(EndDate).toDate() : undefined).extend({  // custom message
+                    required: true,
+                }).extend({
+                    validation: {
+                        validator: function (val, someOtherVal) {
+
+                            return moment(val).toDate() > moment(StartDate()).toDate();
+                        },
+                        message: 'End date must be greater than start date',
+                    }
+                }),
                 CreationDate = ko.observable(CreationDate),
                 ModifiedDate = ko.observable(ModifiedDate),
                 LeftPicturePath = ko.observable(LeftPicturePath),
                 RightPicturePath = ko.observable(RightPicturePath),
                 ProjectedReach = ko.observable(ProjectedReach),
                 AgeRangeStart = ko.observable(AgeRangeStart),
-                AgeRangeEnd = ko.observable(AgeRangeEnd),
+                AgeRangeEnd = ko.observable(AgeRangeEnd).extend({
+                    validation: {
+                        validator: function (val, someOtherVal) {
+                            return val > AgeRangeStart();
+                        },
+                        message: 'Age end range must be greater than start range',
+                    }
+                }),
                 DiscountVoucherApplied = ko.observable(DiscountVoucherApplied),
                 VoucherCode = ko.observable(VoucherCode),
                 DiscountVoucherID = ko.observable(DiscountVoucherID),
@@ -35,7 +58,11 @@
                 LeftPictureBytes = ko.observable(LeftPictureBytes),
                 RightPictureBytes = ko.observable(RightPictureBytes),
                 errors = ko.validation.group({
-
+                    Question: Question,
+                    DisplayQuestion: DisplayQuestion,
+                    StartDate: StartDate,
+                    EndDate: EndDate,
+                    AgeRangeEnd: AgeRangeEnd,
                     }),
                 // Is Valid
                 isValid = ko.computed(function () {
