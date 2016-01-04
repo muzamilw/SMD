@@ -4,7 +4,7 @@
       Campaign = function (CampaignID, LanguageID, CampaignName, UserID, Status, StatusValue, CampaignDescription, Gender,
           Archived, StartDateTime, EndDateTime, MaxBudget, Type, DisplayTitle, LandingPageVideoLink, VerifyQuestion,
           Answer1, Answer2, Answer3, CorrectAnswer, AgeRangeStart, AgeRangeEnd, ResultClicks, AmountSpent
-          , ImagePath, CampaignImagePath, CampaignTypeImagePath, Description) {
+          , ImagePath, CampaignImagePath, CampaignTypeImagePath, Description, ClickRate) {
           var
               //type and userID will be set on server sside
               CampaignID = ko.observable(CampaignID),
@@ -80,6 +80,7 @@
               ImagePath = ko.observable(ImagePath),
               CampaignImagePath = ko.observable(CampaignImagePath),
               CampaignTypeImagePath = ko.observable(CampaignTypeImagePath),
+              ClickRate = ko.observable(ClickRate),
               AdCampaignTargetCriterias = ko.observableArray([]),
               AdCampaignTargetLocations = ko.observableArray([]),
                // Errors
@@ -175,6 +176,7 @@
                       ImagePath: ImagePath(),
                       CampaignImagePath: CampaignImagePath(),
                       CampaignTypeImagePath: CampaignTypeImagePath(),
+                      ClickRate:ClickRate(),
                       AdCampaignTargetCriterias: targetCriteria,
                       AdCampaignTargetLocations: LocationtargetCriteria
                   };
@@ -208,6 +210,7 @@
               ImagePath: ImagePath,
               CampaignImagePath: CampaignImagePath,
               CampaignTypeImagePath: CampaignTypeImagePath,
+              ClickRate:ClickRate,
               AdCampaignTargetCriterias: AdCampaignTargetCriterias,
               AdCampaignTargetLocations: AdCampaignTargetLocations,
               convertToServerData:convertToServerData,
@@ -330,7 +333,7 @@
     // Factory Method
     Campaign.Create = function (source) {
   
-        var campaign = new Campaign(source.CampaignId, source.LanguageId, source.CampaignName, source.UserId, source.Status, source.StatusValue, source.CampaignDescription, source.Gender + "", source.Archived, source.StartDateTime, source.EndDateTime, source.MaxBudget, source.Type + "", source.DisplayTitle, source.LandingPageVideoLink, source.VerifyQuestion, source.Answer1, source.Answer2, source.Answer3, source.CorrectAnswer, source.AgeRangeStart, source.AgeRangeEnd, source.ResultClicks, source.AmountSpent, source.ImagePath, source.CampaignImagePath, source.CampaignTypeImagePath, source.Description);
+        var campaign = new Campaign(source.CampaignId, source.LanguageId, source.CampaignName, source.UserId, source.Status, source.StatusValue, source.CampaignDescription, source.Gender + "", source.Archived, source.StartDateTime, source.EndDateTime, source.MaxBudget, source.Type + "", source.DisplayTitle, source.LandingPageVideoLink, source.VerifyQuestion, source.Answer1, source.Answer2, source.Answer3, source.CorrectAnswer, source.AgeRangeStart, source.AgeRangeEnd, source.ResultClicks, source.AmountSpent, source.ImagePath, source.CampaignImagePath, source.CampaignTypeImagePath, source.Description, source.ClickRate);
         _.each(source.AdCampaignTargetCriterias, function (item) {
             campaign.AdCampaignTargetCriterias.push(AdCampaignTargetCriteriasModel.Create(item));
         });

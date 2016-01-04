@@ -202,6 +202,7 @@ define("ads/ads.viewModel",
 
                     saveCampaign = function (mode) {
                         campaignModel().Status(mode);
+                        campaignModel().ClickRate(pricePerclick());
                         var campignServerObj = campaignModel().convertToServerData();
                         
                         dataservice.addCampaignData(campignServerObj, {
