@@ -41,9 +41,9 @@ define("survey/survey.view",
                     },{
                             displayKey: 'LocationName',
                             source: array.ttAdapter()
-                        }).bind('typeahead:selected', function (obj, selected) {
+                    }).bind('typeahead:selected', function (obj, selected) {
                             if (selected) {
-                                var CityID = 0, CountryID = 0, Radius = 0, Country = '', City = '';
+                                var CityID = null, CountryID = null, Radius = 0, Country = '', City = '',latitude = '',longitude = '';
                                 if (selected.IsCountry)
                                 {
                                     Country = selected.LocationName;
@@ -53,22 +53,22 @@ define("survey/survey.view",
                                     City = selected.LocationName;
                                     CountryID = selected.CountryId;
                                     CityID = selected.CityId;
-                                    $(".locMap").css("display", "inline-block");
-                                    initializeMap(selected.GeoLong, selected.GeoLat,selected.LocationName);
-                                    $("#us3-radius").change(function () {
-                                        addRadius($("#us3-radius").val());
-                                    });
+                                    Country = selected.parentCountryName;
+                                    latitude = selected.GeoLat;
+                                    longitude = selected.GeoLong;
                                 }
                                 var obj = {
                                     CountryID :CountryID,
                                     CityID :CityID,
                                     Radius :Radius,
                                     Country :Country,
-                                    City :City,
+                                    City: City,
+                                    Latitude: latitude,
+                                    Longitude : longitude
                                 }
                               
                                 viewModel.selectedLocation(obj);
-                                $(".locVisibility").css("display", "inline-block");
+                                viewModel.onAddLocation();
                             }
                         });
                         var lan_array = new Bloodhound({

@@ -254,8 +254,12 @@
                                         </div>
                                         <div class="col-lg-6">
                                             <div id="coun_token_cnt">
-                                                <!-- ko template: { name: 'SurveyQuestionLocationTemplate' , foreach: SurveyQuestionTargetLocation } -->
-                                                <!-- /ko -->
+                                                <div class="_4zmf">
+                                                    <ul class="_4zmg">
+                                                        <!-- ko template: { name: 'SurveyQuestionLocationTemplate' , foreach:  $root.selectedQuestionCountryList } -->
+                                                        <!-- /ko -->
+                                                    </ul>
+                                                </div>
                                             </div>
                                             <div class="clearfix"></div>
                                             <div id="count_edt">
@@ -292,7 +296,7 @@
                                         </div>
 
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group" style="display:none;">
                                         <div class="col-lg-3 text-right">
                                             <div class="bs-example-tooltips tooltip-float-width">
                                                 <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
@@ -380,7 +384,7 @@
                                                     <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
                                                 </a>
                                             </div>
-                                            <label for="txtLanguages" class="control-label text-right tooltip-float">Educations</label>
+                                            <label for="txtLanguages" class="control-label text-right tooltip-float">Education</label>
                                         </div>
                                         <div class="col-lg-6">
                                             <div>
@@ -635,7 +639,7 @@
                                                                 </ul>
                                                             </li>
                                                             <li class="li-audul" data-bind="visible: $root.visibleTargetAudience(5)  == 1" style="display: none;">
-                                                                <div class="fsm_bold">Educations:</div>
+                                                                <div class="fsm_bold">Education:</div>
                                                                 <ul class="pad-11">
                                                                     <!-- ko template: { name: 'targetIndustryEducationTemplate' , foreach: SurveyQuestionTargetCriteria } --><!-- /ko -->
 
@@ -674,7 +678,7 @@
                                                             </li>
                                                         </ul>
                                                     </div>
-                                                    <div>Price per click: <span data-bind="text: $root.userBaseData().CurrencySymbol"></span><span data-bind="text: $root.setupPrice()"></span></div>
+                                                    <div>Survey Cost : <span data-bind="text: $root.userBaseData().CurrencySymbol"></span><span data-bind="text: $root.setupPrice()"></span></div>
                                                     <div>Potential Reach: <span data-bind="text:$root.reachedAudience()">0</span> people</div>
 
                                                 </div>
@@ -708,24 +712,110 @@
 
 </div>
 <script id="SurveyQuestionLocationTemplate" type="text/html">
+    <li>
+        <ul class="_53ga">
+            <li>
+                <div class="_53gb clearfix">
+                    <div class="_4bl8 _4bl7">
+                        <span class="_47la">
+                            <button type="button" title="Remove" class="_50zy _50zz _50z- _5upp _42ft" style="display:none;">
+                                <span>Remove</span>
+                            </button>
+                        </span>
+                    </div>
+                    <div class="_4bl9">
+                        <span class="_3bsr">
+                            <span class="_3bss" data-bind="text:name">
+
+                            </span><span></span>
+                        </span>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <ul>
+                    <!-- ko template: { name: 'SubSurveyQuestionLocationTemplate' , foreach: $root.findLocationsInCountry(id) } --><!-- /ko -->
+
+                </ul>
+            </li>
+        </ul>
+    </li>
+</script>
+<script id="SubSurveyQuestionLocationTemplate" type="text/html">
     <div class="count_city_newcnt">
         <!--ko if:CityID() == 0 || CityID() == null-->
-        <span class="form-control lang_nr_box areaCity" data-bind="text:Country " style=" "></span>
+        <li class="_40m_">
+            <div class="clearfix">
+                <div class="_4bl7">
+                    <!--ko if:IncludeorExclude() == '1'-->
+                    <i class="_40n0 img sp_NQc91B1T0mb sx_d7a1cb"></i>
+                    <!--/ko-->
+                    <!--ko if:IncludeorExclude() == '0' -->
+                    <i class="_40n0 img sp_NQc91B1T0mb sx_999ca6"></i>
+                    <!--/ko-->
+                    
+                </div>
+                <div class="_4bl8 _4bl7">
+                    <span class="_47la">
+                        <button type="button" title="Remove" class="_50zy _50zz _50z- _5upp _42ft" data-bind="click:$root.onRemoveLocation">
+                            <span>Remove</span>
+                        </button>
+                    </span>
+                </div>
+                <div class="_4bl8 _4bl7">
+                    <div>
+                       
+                    </div>
+                </div>
+                <div class="_4bl9">
+                    <div class="fwb">
+                        <span class="_3bsr"><span class="_3bss" data-bind="text:Country "></span><span></span></span>
+                    </div>
+                </div>
+            </div>
+        </li>
         <!--/ko-->
         <!--ko if:CityID() != 0 && CityID() != null-->
-        <span class="form-control lang_nr_box areaCity" data-bind="text:City " style=" "></span>
+        <li class="_40m_">
+            <div class="clearfix">
+                <div class="_4bl7">
+                    <!--ko if:IncludeorExclude() == '1'-->
+                    <i class="_40n0 img sp_NQc91B1T0mb sx_d7a1cb"></i>
+                    <!--/ko-->
+                    <!--ko if:IncludeorExclude() == '0' -->
+                    <i class="_40n0 img sp_NQc91B1T0mb sx_999ca6"></i>
+                    <!--/ko-->
+                </div>
+                <div class="_4bl8 _4bl7">
+                    <span class="_47la"><button type="button" title="Remove" class="_50zy _50zz _50z- _5upp _42ft" data-bind="click:$root.onRemoveLocation"><span>Remove</span></button></span>
+                </div>
+                <div class="_4bl9">
+                    <div class="fwb">
+                        <span class="_3bsr">
+                            <span style="float:left;">
+                                <span data-bind="text:City "></span>
+                                <span>
+                                    <span>, </span><span data-bind="text:Country "></span>
+                                </span>
+                            </span>
+                            <span style="float:left;">
+                                <select class="form-control radius_ddp" data-bind="value: Radius">
+                                    <option value="0">No radius</option>
+                                    <option value="10">10</option>
+                                    <option value="25">25</option>
+                                    <option value="40">40</option>
+                                    <option value="100">100+</option>
+                                </select>
+                            </span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </li>
         <!--/ko-->
-        <!--ko if:Radius() != 0 && Radius() != null && Radius() != undefined-->
-        <!--ko if:IncludeorExclude() == '1'-->
-        <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'Included (' + Radius() +')' "></span>
-        <!--/ko-->
-        <!--ko if:IncludeorExclude() == '0' -->
-        <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'Excluded (' + Radius() +')' "></span>
-        <!--/ko-->
-        <!--/ko-->
+      
 
 
-        <a id="" data-bind="click:$root.onRemoveLocation" title=" delete" class="lang_delSurvey"> <i class="fa fa-times "></i></a>
     </div>
     <div class="clear"></div>
 </script>
@@ -777,14 +867,15 @@
 <script>
     var map;
     var center;
-    var circle = null;
-    function initializeMap(lat, long, place) {
+    var circles = [];
+    function initializeMap(lat, long) {
+        console.log(lat + " " + long);
         // LOCATION IN LATITUDE AND LONGITUDE.
         center = new google.maps.LatLng(long, lat);
         // MAP ATTRIBUTES.
         var mapAttr = {
             center: center,
-            zoom: 15,
+            zoom: 5,
             mapTypeId: google.maps.MapTypeId.TERRAIN
         };
         var myLatLng = { lat: parseFloat(lat), lng: parseFloat(long) };
@@ -793,28 +884,40 @@
         map = new google.maps.Map(document.getElementById("mapContainer"), mapAttr);
         google.maps.event.addDomListener(window, 'load', initialize);
 
+      
+
+    }
+    function addPointer(lat, long, place, radius,include) {
+        // LOCATION IN LATITUDE AND LONGITUDE.
+        center = new google.maps.LatLng(long, lat);
         var marker = new google.maps.Marker({
             position: center,
             map: map,
             title: place
         });
-
+        addRadius(radius,include)
     }
-    function addRadius(radius) {
-        if (circle != null)
-            circle.setMap(null);
-        circle = new google.maps.Circle({
+    function addRadius(radius,include) {
+        var clr = '#3B5998';
+        if (!include)
+            clr = '#C82834';
+        var circle = new google.maps.Circle({
             center: center,
             map: map,
             radius: parseInt(radius),          // IN METERS.
-            fillColor: '#FF6600',
+            fillColor: clr, 
             fillOpacity: 0.3,
             strokeColor: "#FFF",
             strokeWeight: 0         // DON'T SHOW CIRCLE BORDER.
         });
-
+        circles.push(circle);
     }
-
+    function clearRadiuses() {
+        $.each(circles, function (key, value) {
+            if (value != null)
+                value.setMap(null);
+        });
+    }
 
 </script>
 <script id="answersTemplate" type="text/html">

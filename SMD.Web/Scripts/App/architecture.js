@@ -524,6 +524,11 @@ require(["ko", "knockout-validation"], function (ko) {
             $(element).datetimepicker("option", "dateFormat", ist.shortDatePattern);
             $(element).datepicker("option", "changeMonth", true);
             $(element).datepicker("option", "changeYear", true);
+            // this will disable all previous months and also days from current date 
+            var today_date = new Date();
+            today_date.setDate(today_date.getDate() + 7);
+           
+            $(element).datepicker("option", "minDate", today_date);
             //handle the field changing
             ko.utils.registerEventHandler(element, "change", function () {
                 var observable = valueAccessor();

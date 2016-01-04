@@ -352,8 +352,12 @@ namespace SMD.MIS.ModelMappers
                 SMD.MIS.Areas.Api.Models.SurveyQuestionTargetLocation modelLocation = new Areas.Api.Models.SurveyQuestionTargetLocation();
                 modelLocation.CityId = location.CityId;
                 modelLocation.CountryId = location.CountryId;
-                if(location.City != null)
+                if (location.City != null)
+                {
                     modelLocation.City = location.City.CityName;
+                    modelLocation.Latitude = location.City.GeoLat;
+                    modelLocation.Longitude = location.City.GeoLong;
+                }
                 if(location.Country != null)
                     modelLocation.Country = location.Country.CountryName;
                 modelLocation.Id = location.Id;
@@ -362,7 +366,7 @@ namespace SMD.MIS.ModelMappers
                 modelLocation.SqId = location.SqId;
                 result.Add(modelLocation);
             }
-            return result;
+            return result.OrderBy(g=>g.CountryId).ToList();
         }
     }
 }

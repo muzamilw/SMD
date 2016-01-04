@@ -41,7 +41,6 @@ define("ads/ads.view",
                       });
 
                       array.initialize();
-
                     $('#searchCampaignLocations').typeahead({
                           highlight: true
                       }, {
@@ -49,7 +48,7 @@ define("ads/ads.view",
                           source: array.ttAdapter()
                       }).bind('typeahead:selected', function (obj, selected) {
                           if (selected) {
-                              var CityID = 0, CountryID = 0, Radius = 0, Country = '', City = '';
+                              var CityID = null, CountryID = null, Radius = 0, Country = '', City = '';
                               if (selected.IsCountry) {
                                   Country = selected.LocationName;
                                   CountryID = selected.CountryId;
@@ -58,7 +57,7 @@ define("ads/ads.view",
                                   City = selected.LocationName;
                                   CountryID = selected.CountryId;
                                   CityID = selected.CityId;
-                                  $(".locMap").css("display", "inline-block");
+                                  // $(".locMap").css("display", "inline-block");
                                   initializeMap(selected.GeoLong, selected.GeoLat, selected.LocationName);
                                   $("#us3-radius").change(function () {
                                       addRadius($("#us3-radius").val());
@@ -73,9 +72,11 @@ define("ads/ads.view",
                               }
 
                               viewModel.selectedLocation(obj);
-                              $(".locVisibility").css("display", "inline-block");
+                              viewModel.onAddLocation();
+                              //  $(".locVisibility").css("display", "inline-block");
                           }
                       });
+                   
                       var lan_array = new Bloodhound({
                           datumTokenizer: function (d) {
                               return Bloodhound.tokenizers.whitespace(d.LanguageName);

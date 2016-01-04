@@ -17,12 +17,39 @@
               Description = ko.observable(Description),
               Gender = ko.observable(Gender),
               Archived = ko.observable(Archived),
-              StartDateTime = ko.observable((StartDateTime !== null && StartDateTime !== undefined) ? moment(StartDateTime).toDate() : undefined),//ko.observable(),
-              EndDateTime = ko.observable((EndDateTime !== null && EndDateTime !== undefined) ? moment(EndDateTime).toDate() : undefined),// ko.observable(EndDateTime),
+              StartDateTime = ko.observable((StartDateTime !== null && StartDateTime !== undefined) ? moment(StartDateTime).toDate() : undefined).extend({  // custom message
+                  required: true
+              }),//ko.observable(),
+              EndDateTime = ko.observable((EndDateTime !== null && EndDateTime !== undefined) ? moment(EndDateTime).toDate() : undefined).extend({  // custom message
+                  required: true
+              }),// ko.observable(EndDateTime),
               MaxBudget = ko.observable(MaxBudget),
               Type = ko.observable(Type),
-              DisplayTitle = ko.observable(DisplayTitle),
-              LandingPageVideoLink = ko.observable(LandingPageVideoLink),
+              DisplayTitle = ko.observable(DisplayTitle).extend({  // custom message
+                  required: true
+              }),
+              LandingPageVideoLink = ko.observable(LandingPageVideoLink).extend({
+                  required: {
+                      onlyIf: function () {
+                          if (Type() == "2" || Type() == "1") {
+                              return true;
+                          } else {
+                              return false;
+                          }
+                      }
+                  },
+                  pattern: {
+                      message: 'Please enter valid web url.',
+                      params: '/^(?:(?:https?|ftp):\/\/)(?:\S+(?::\S*)?@)?(?:(?!10(?:\.\d{1,3}){3})(?!127(?:\.\d{1,3}){3})(?!169\.254(?:\.\d{1,3}){2})(?!192\.168(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/[^\s]*)?$/i',
+                      onlyIf: function () {
+                          if (Type() == "2") {
+                              return true;
+                          } else {
+                              return false;
+                          }
+                      }
+                  }
+              }),
               VerifyQuestion = ko.observable(VerifyQuestion),
               Answer1 = ko.observable(Answer1),
               Answer2 = ko.observable(Answer2),
@@ -37,13 +64,17 @@
               CampaignTypeImagePath = ko.observable(CampaignTypeImagePath),
               AdCampaignTargetCriterias = ko.observableArray([]),
               AdCampaignTargetLocations = ko.observableArray([]),
-              errors = ko.validation.group({
-
-              }),
-              // Is Valid
-              isValid = ko.computed(function () {
-                  return errors().length === 0;
-              }),
+               // Errors
+                errors = ko.validation.group({
+                    DisplayTitle: DisplayTitle,
+                    LandingPageVideoLink: LandingPageVideoLink,
+                    StartDateTime: StartDateTime,
+                    EndDateTime: EndDateTime
+                }),
+                // Is Valid 
+                isValid = ko.computed(function () {
+                    return errors().length === 0 ? true : false;
+                }),
               dirtyFlag = new ko.dirtyFlag({
                   CampaignID: CampaignID,
                   LanguageID: LanguageID,
