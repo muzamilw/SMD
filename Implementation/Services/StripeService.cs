@@ -39,7 +39,7 @@ namespace SMD.Implementation.Services
             }
 
             user.StripeCustomerId = customerId;
-            await UserManager<>.UpdateAsync(user);
+            await UserManager.UpdateAsync(user);
         }
 
         #endregion

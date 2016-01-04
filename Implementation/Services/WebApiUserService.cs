@@ -294,8 +294,9 @@ namespace SMD.Implementation.Services
         /// <param name="smdsCut"></param>
         /// <param name="smdAccount"></param>
         /// <param name="surveyQuestion"></param>
+        /// <param name="isApiCall"></param>
         private void PerformSurveyApproveTransactions(ApproveSurveyRequest request, Account advertisersAccount, double approvedSurveyAmount,
-            double? smdsCut, Account smdAccount, SurveyQuestion surveyQuestion)
+            double? smdsCut, Account smdAccount, SurveyQuestion surveyQuestion, bool isApiCall = true)
         {
             // Debit Advertiser
             var transactionSequence = 1;
@@ -307,6 +308,12 @@ namespace SMD.Implementation.Services
             // Credit SMD
             transactionSequence += 1;
             PerformTransaction(null, request.SurveyQuestionId, smdAccount, smdsCut, transactionSequence, TransactionType.ApproveSurvey);
+
+            // If called locally
+            if (!isApiCall)
+            {
+                return;
+            }
 
             // Mark survey as approved
             surveyQuestion.Approved = true;
@@ -375,7 +382,7 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Update Transactions on viewing ad
         /// </summary>
-        public async Task<BaseApiResponse> UpdateTransactionOnSurveyApproval(ApproveSurveyRequest request)
+        public async Task<BaseApiResponse> UpdateTransactionOnSurveyApproval(ApproveSurveyRequest request, bool isApiCall = true)
         {
             // Get Survey Approver
             User surveyApprover = await UserManager.FindByIdAsync(request.UserId);
