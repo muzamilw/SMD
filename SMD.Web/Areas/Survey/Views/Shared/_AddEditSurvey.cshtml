@@ -869,12 +869,13 @@
     var center;
     var circles = [];
     function initializeMap(lat, long) {
+        console.log(lat + " " + long);
         // LOCATION IN LATITUDE AND LONGITUDE.
         center = new google.maps.LatLng(long, lat);
         // MAP ATTRIBUTES.
         var mapAttr = {
             center: center,
-            zoom: 15,
+            zoom: 5,
             mapTypeId: google.maps.MapTypeId.TERRAIN
         };
         var myLatLng = { lat: parseFloat(lat), lng: parseFloat(long) };
@@ -897,7 +898,6 @@
         addRadius(radius,include)
     }
     function addRadius(radius,include) {
-       
         var clr = '#3B5998';
         if (!include)
             clr = '#C82834';

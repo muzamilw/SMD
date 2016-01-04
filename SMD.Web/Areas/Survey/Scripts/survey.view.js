@@ -41,7 +41,7 @@ define("survey/survey.view",
                     },{
                             displayKey: 'LocationName',
                             source: array.ttAdapter()
-                        }).bind('typeahead:selected', function (obj, selected) {
+                    }).bind('typeahead:selected', function (obj, selected) {
                             if (selected) {
                                 var CityID = null, CountryID = null, Radius = 0, Country = '', City = '',latitude = '',longitude = '';
                                 if (selected.IsCountry)
@@ -54,11 +54,8 @@ define("survey/survey.view",
                                     CountryID = selected.CountryId;
                                     CityID = selected.CityId;
                                     Country = selected.parentCountryName;
-                                   // $(".locMap").css("display", "inline-block");
-                                    //initializeMap(selected.GeoLong, selected.GeoLat,selected.LocationName);
-                                    //$("#us3-radius").change(function () {
-                                    //    addRadius($("#us3-radius").val());
-                                    //});
+                                    latitude = selected.GeoLat;
+                                    longitude = selected.GeoLong;
                                 }
                                 var obj = {
                                     CountryID :CountryID,
@@ -72,7 +69,6 @@ define("survey/survey.view",
                               
                                 viewModel.selectedLocation(obj);
                                 viewModel.onAddLocation();
-                              //  $(".locVisibility").css("display", "inline-block");
                             }
                         });
                         var lan_array = new Bloodhound({

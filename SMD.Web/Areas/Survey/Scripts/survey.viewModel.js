@@ -285,11 +285,12 @@ define("survey/survey.viewModel",
                             Country: selectedLocation().Country,
                             City: selectedLocation().City,
                             IncludeorExclude: selectedLocation().IncludeorExclude(),
-                          //  ID: 0,
-                            SQID: selectedQuestion().SQID()
+                            SQID: selectedQuestion().SQID(),
+                            Latitude: selectedLocation().Latitude,
+                            Longitude: selectedLocation().Longitude,
+
                         }));
                         addCountryToCountryList(selectedLocation().CountryID, selectedLocation().Country);
-                        $(".locVisibility,.locMap").css("display", "none");
                         resetLocations();
                     },
                     resetLocations = function () {
@@ -809,21 +810,21 @@ define("survey/survey.viewModel",
                          });
                      },
                     buildMap = function () {
-                        $(".locMap").css("display", "inline-block");
+                        $(".locMap").css("display", "none");
                         var initialized = false;
                         _.each(selectedQuestion().SurveyQuestionTargetLocation(), function (item) {
-                            debugger;
+                            $(".locMap").css("display", "inline-block");
                             clearRadiuses();
                             if (item.CityID() == 0 || item.CityID() == null) {
                             } else {
                                 if (!initialized)
-                                    initializeMap(item.Latitude(), item.Longitude());
+                                    initializeMap( parseFloat(item.Longitude()),parseFloat(item.Latitude()));
                                 initialized = true;
                                 var included = true;
                                 if (item.IncludeorExclude() == '0') {
                                     included = false;
                                 }
-                                addPointer(item.Latitude(), item.Longitude(), item.City(), item.Radius(), included);
+                                addPointer(parseFloat(item.Longitude()), parseFloat(item.Latitude()), item.City(), parseFloat(item.Radius()), included);
                             }
                         });
                     }
