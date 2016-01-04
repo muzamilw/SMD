@@ -25,7 +25,7 @@
                     required: true
                 }),
                 EndDate = ko.observable((EndDate !== null && EndDate !== undefined) ? moment(EndDate).toDate() : undefined).extend({  // custom message
-                    required: true
+                    required: true,
                 }).extend({
                     validation: {
                         validator: function (val, someOtherVal) {
@@ -37,12 +37,8 @@
                 }),
                 CreationDate = ko.observable(CreationDate),
                 ModifiedDate = ko.observable(ModifiedDate),
-                LeftPicturePath = ko.observable(LeftPicturePath).extend({  // custom message
-                    required: true
-                }),
-                RightPicturePath = ko.observable(RightPicturePath).extend({  // custom message
-                    required: true
-                }),
+                LeftPicturePath = ko.observable(LeftPicturePath),
+                RightPicturePath = ko.observable(RightPicturePath),
                 ProjectedReach = ko.observable(ProjectedReach),
                 AgeRangeStart = ko.observable(AgeRangeStart),
                 AgeRangeEnd = ko.observable(AgeRangeEnd).extend({
@@ -66,7 +62,7 @@
                     DisplayQuestion: DisplayQuestion,
                     StartDate: StartDate,
                     EndDate: EndDate,
-                    AgeRangeEnd: AgeRangeEnd
+                    AgeRangeEnd: AgeRangeEnd,
                     }),
                 // Is Valid
                 isValid = ko.computed(function () {

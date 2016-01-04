@@ -54,6 +54,7 @@ define("survey/survey.viewModel",
                     setupPrice = ko.observable(0),
                     // unique country list used to bind location dropdown
                     selectedQuestionCountryList = ko.observableArray([]),
+                    errorList = ko.observableArray([]),
                     //Get Questions
                     getQuestions = function () {   
                         dataservice.searchSurveyQuestions(
@@ -570,33 +571,56 @@ define("survey/survey.viewModel",
                     // save survey question 
                     onSaveSurveyQuestion = function () {
                         // now saving survey as draft but check stripe intergration and save it for submit for approval
-                        saveSurveyQuestion(1);
+                        if (selectedQuestion().isValid()) {
+                            if (ValidateSurvey() == true) {
+                                saveSurveyQuestion(1);
+                            }
+                            
+                        } else {
+                            selectedQuestion().errors.showAllMessages();
+                        }
+                        
                     },
                    // submit  survey question for approval
                     onSubmitSurveyQuestion = function () {
-                        if (userBaseData().isStripeIntegrated == false)
-                        {
-                            stripeChargeCustomer.show(function () {
-                                userBaseData().isStripeIntegrated = true;
-                                saveSurveyQuestion(2);
-                            }, 2000, '2 Widgets');
+                        if (selectedQuestion().isValid()) {
+                            if (ValidateSurvey() == true) {
+                                if (userBaseData().isStripeIntegrated == false) {
+                                    stripeChargeCustomer.show(function () {
+                                        userBaseData().isStripeIntegrated = true;
+                                        saveSurveyQuestion(2);
+                                    }, 2000, '2 Widgets');
+                                } else {
+                                    saveSurveyQuestion(2);
+                                }
+                            }
+                           
                         } else {
-                            saveSurveyQuestion(2);
+                            selectedQuestion().errors.showAllMessages();
                         }
+                       
                     },
                     saveSurveyQuestion = function (mode) {
-                        selectedQuestion().Status(mode);
-                        var surveyData = selectedQuestion().convertToServerData();
-                        dataservice.addSurveyData(surveyData, {
-                            success: function (data) {
-                                isEditorVisible(false);
-                                getQuestions();
-                                toastr.success("Successfully saved.");
-                            },
-                            error: function (response) {
+                        debugger;
+                        if (selectedQuestion().isValid()) {
+                            if (ValidateSurvey() == true) {
+                                selectedQuestion().Status(mode);
+                                var surveyData = selectedQuestion().convertToServerData();
+                                dataservice.addSurveyData(surveyData, {
+                                    success: function (data) {
+                                        isEditorVisible(false);
+                                        getQuestions();
+                                        toastr.success("Successfully saved.");
+                                    },
+                                    error: function (response) {
 
+                                    }
+                                });
                             }
-                        });
+                        } else {
+                            selectedQuestion().errors.showAllMessages();
+                        }
+                       
                     }
                     getAudienceCount = function () {
                         var countryIds = '', cityIds = '', countryIdsExcluded = '', cityIdsExcluded = '';
@@ -801,7 +825,7 @@ define("survey/survey.viewModel",
                         });
                         return list;
                     },
-                     visibleTargetAudience = function (mode) {
+                    visibleTargetAudience = function (mode) {
 
                          if (mode != undefined) {
                             
@@ -819,7 +843,7 @@ define("survey/survey.viewModel",
                              return 0;
                          }
                      },
-                     bindAudienceReachCount = function () {
+                    bindAudienceReachCount = function () {
                          selectedQuestion().AgeRangeStart.subscribe(function (value) {
                              getAudienceCount();
                          });
@@ -857,7 +881,23 @@ define("survey/survey.viewModel",
                                 addPointer(parseFloat(item.Longitude()), parseFloat(item.Latitude()), item.City(), parseFloat(item.Radius()), included);
                             }
                         });
+                    },
+                    ValidateSurvey = function () {
+                        errorList.removeAll();
+                        if (selectedQuestion().LeftPictureBytes() == "" || selectedQuestion().LeftPictureBytes() == null) {
+                            errorList.push({ name: "Please select left survey answer.", element: "" });
+                        }
+                        if (selectedQuestion().RightPictureBytes() == "" || selectedQuestion().RightPictureBytes() == null) {
+                            errorList.push({ name: "Please select right survey answer.", element: "" });
+                        }
+
+                        if (errorList() == null || errorList().length == 0) {
+                            return true;
+                        } else {
+                            return false;
+                        }
                     }
+                
                     // Initialize the view model
                     initialize = function (specifiedView) {
                         view = specifiedView;
@@ -939,7 +979,8 @@ define("survey/survey.viewModel",
                     addEducation: addEducation,
                     selectedQuestionCountryList: selectedQuestionCountryList,
                     addCountryToCountryList: addCountryToCountryList,
-                    findLocationsInCountry: findLocationsInCountry
+                    findLocationsInCountry: findLocationsInCountry,
+                    errorList: errorList
                 };
             })()
         };
