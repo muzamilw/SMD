@@ -182,8 +182,8 @@ namespace SMD.Repository.Repositories
                  data.EducationId = usr.EducationId;
                  data.IndustryId = usr.IndustryId;
                  data.LanguageId = usr.LanguageId;
-                 data.City = usr.Cities != null ? usr.Cities.CityName : "";
-                 data.Country = usr.Countries != null ? usr.Countries.CountryName : "";
+                 data.City = usr.City != null ? usr.City.CityName : "";
+                 data.Country = usr.Country != null ? usr.Country.CountryName : "";
                  data.Education = usr.Education != null?usr.Education.Title : "";
                  data.Industry = usr.Industry != null?usr.Industry.IndustryName:"";
                  data.Language = usr.Language != null? usr.Language.LanguageName: "";
