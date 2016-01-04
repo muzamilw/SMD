@@ -2,24 +2,23 @@
     Module with the view model for the Invoice
 */
 define("invoice/invoice.viewModel",
-    ["jquery", "amplify", "ko", "invoice/invoice.dataservice", "invoice/invoice.model", "common/pagination",
-     "common/confirmation.viewModel"],
-    function ($, amplify, ko, dataservice, model, pagination, confirmation) {
+    ["jquery", "amplify", "ko", "invoice/invoice.dataservice", "invoice/invoice.model", "common/pagination"],
+    function ($, amplify, ko, dataservice, model, pagination) {
         var ist = window.ist || {};
         ist.Invoice = {
             viewModel: (function() {
                 var view,
                     //  Invoices list on LV
                     invoices = ko.observableArray([]),
-                    //pager
+                    // Pager
                     pager = ko.observable(),
-                    //sorting
+                    // Sorting
                     sortOn = ko.observable(1),
-                    //Assending  / Desending
+                    // Assending  / Desending
                     sortIsAsc = ko.observable(true),
                     // Controlls editor visibility 
                     isEditorVisible = ko.observable(false),
-                     //selected Invoice
+                    // Selected Invoice
                     selectedInvoice = ko.observable(),
                     // From Date for filter
                     fromDateFilter = ko.observable(undefined),
@@ -61,7 +60,8 @@ define("invoice/invoice.viewModel",
                         isEditorVisible(true);
 
                     },
-                   getInvoiceDetails= function(invoice) {
+                    // Get Invoice Details 
+                    getInvoiceDetails= function(invoice) {
                        dataservice.getInvoiceDetails(
                             {
                                 InvoiceId: selectedInvoice().id()
@@ -78,7 +78,7 @@ define("invoice/invoice.viewModel",
                                 }
                             });
                    },
-                    // Has Changes
+                    //Has Changes Makes 
                     hasChangesOnQuestion = ko.computed(function () {
                         if (selectedInvoice() == undefined) {
                             return false;
@@ -89,6 +89,7 @@ define("invoice/invoice.viewModel",
                     onSearchButtonClick= function() {
                         getInvoices();
                     },
+                    // Reset Filters
                     resetData= function() {
                         fromDateFilter(undefined);
                         toDateFilter(undefined);
@@ -99,7 +100,6 @@ define("invoice/invoice.viewModel",
                         view = specifiedView;
                         ko.applyBindings(view.viewModel, view.bindingRoot);
                         pager(pagination.Pagination({ PageSize: 10 }, invoices, getInvoices));
-                       
                         // First request for LV
                         getInvoices();
                     };

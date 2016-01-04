@@ -211,6 +211,16 @@ namespace SMD.Repository.BaseRepository
         public DbSet<Tax> Taxes { get; set; }
 
         /// <summary>
+        /// Taxes
+        /// </summary>
+        public DbSet<Game> Games { get; set; }
+
+        /// <summary>
+        /// Taxes
+        /// </summary>
+        public DbSet<CustomUrl> CustomUrls { get; set; }
+
+        /// <summary>
         /// Get Ad-Campaigns for APIs | baqer
         /// </summary>
         public System.Data.Entity.Core.Objects.ObjectResult<GetAds_Result> GetAdCompaignForApi(string userId, int fromRow, int toRow)

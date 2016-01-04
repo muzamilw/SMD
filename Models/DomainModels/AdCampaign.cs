@@ -49,7 +49,13 @@ namespace SMD.Models.DomainModels
         public long? ProjectedReach { get; set; }
         public long? ResultClicks { get; set; }
         public double? AmountSpent { get; set; }
-
+        public int? RewardType { get; set; }
+        public string Voucher1Heading { get; set; }
+        public string Voucher1Description { get; set; }
+        public string Voucher1Value { get; set; }
+        public string Voucher2Heading { get; set; }
+        public string Voucher2Description { get; set; }
+        public string Voucher2Value { get; set; }
         public virtual Language Language { get; set; }
         public virtual ICollection<AdCampaignResponse> AdCampaignResponses { get; set; }
         public virtual ICollection<AdCampaignTargetCriteria> AdCampaignTargetCriterias { get; set; }
