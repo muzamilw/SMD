@@ -54,6 +54,8 @@ define("ads/ads.viewModel",
                     // audience reach mode 
                     audienceReachMode = ko.observable(1),
                     errorList = ko.observableArray([]),
+                      // unique country list used to bind location dropdown
+                    selectedQuestionCountryList = ko.observableArray([]),
                     getCampaignBaseContent = function () {
                             dataservice.getBaseData({
                                 RequestId: 1,
@@ -152,6 +154,7 @@ define("ads/ads.viewModel",
                         campaignModel().CampaignImagePath("");
                         campaignModel().LanguageId(41);
                         bindAudienceReachCount();
+                        selectedQuestionCountryList([]);
                     },
 
                     closeNewCampaignDialog = function () {
@@ -159,8 +162,7 @@ define("ads/ads.viewModel",
                     },
 
                     saveCampaignData = function () {
-                        debugger;
-                        
+                       
                         if (campaignModel().isValid()) {
                             //if (campaignModel().Type() == "2") {
                             //    var valuetovalidate = campaignModel().LandingPageVideoLink();
@@ -502,12 +504,17 @@ define("ads/ads.viewModel",
                     },
 
                     deleteLocation = function (item) {
+                      
                         campaignModel().AdCampaignTargetLocations.remove(item);
                       
                         if (campaignModel().AdCampaignTargetLocations() == null || campaignModel().AdCampaignTargetLocations().length == 0) {
                             isLocationPerClickPriceAdded(false);
                             pricePerclick(pricePerclick() - UserAndCostDetail().LocationClausePrice);
                         }
+                        selectedQuestionCountryList([]);
+                        _.each(campaignModel().AdCampaignTargetLocations(), function (item) {
+                            addCountryToCountryList(item.CountryID(), item.Country());
+                        });
                         toastr.success("Removed Successfully!");
                     },
                     //add location
@@ -525,6 +532,7 @@ define("ads/ads.viewModel",
                             Id: 0,
                             CampaignId: campaignModel().CampaignID()
                         }));
+                        addCountryToCountryList(selectedLocation().CountryID, selectedLocation().Country);
                         $(".locVisibility,.locMap").css("display", "none");
                         resetLocations();
 
@@ -619,9 +627,16 @@ define("ads/ads.viewModel",
                                         // set languages drop down
                                         selectedCriteria();
                                         pricePerclick(0);
+                                       
                                         campaignModel(model.Campaign.Create(data.Campaigns[0]));
                                         campaignModel().reset();
                                         view.initializeTypeahead();
+
+                                        selectedQuestionCountryList([]);
+                                        _.each(campaignModel().AdCampaignTargetLocations(), function (item) {
+                                            addCountryToCountryList(item.CountryID(), item.Country());
+                                        });
+
                                         if (campaignModel().Type() == "1") {
                                             isEnableVedioVerificationLink(true);
                                             campaignTypePlaceHolderValue('Enter a video embed code');
@@ -1003,7 +1018,27 @@ define("ads/ads.viewModel",
                          campaignModel().AdCampaignTargetCriterias.subscribe(function (value) {
                              getAudienceCount();
                          });
-                     },
+                    },
+                    addCountryToCountryList = function (country, name) {
+                         if (country != undefined) {
+
+                             var matcharry = ko.utils.arrayFirst(selectedQuestionCountryList(), function (item) {
+
+                                 return item.id == country;
+                             });
+
+                             if (matcharry == null) {
+                                 selectedQuestionCountryList.push({ id: country, name: name });
+                             }
+                         }
+                    },
+                    findLocationsInCountry = function (id) {
+
+                        var list = ko.utils.arrayFilter(campaignModel().AdCampaignTargetLocations(), function (prod) {
+                              return prod.CountryID() == id;
+                          });
+                          return list;
+                      },
                     // Initialize the view model
                     initialize = function (specifiedView) {
                         view = specifiedView; 
@@ -1075,7 +1110,9 @@ define("ads/ads.viewModel",
                         audienceReachMode: audienceReachMode,
                         onRemoveEducation: onRemoveEducation,
                         bindAudienceReachCount: bindAudienceReachCount,
-                        errorList: errorList
+                        errorList: errorList,
+                        addCountryToCountryList: addCountryToCountryList,
+                        findLocationsInCountry: findLocationsInCountry
                     };
             })()
         };
