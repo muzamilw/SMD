@@ -175,7 +175,7 @@ define("ads/ads.viewModel",
                             //console.log(errorList());
                             //if (errorList() == null || errorList().length == 0) {
                                 saveCampaign(1);
-                           // }
+                          // }
                            
                         } else {
                             campaignModel().errors.showAllMessages();

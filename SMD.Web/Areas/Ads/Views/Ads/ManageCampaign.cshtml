@@ -76,7 +76,7 @@
                                     <label for="txtCampaignName" class="control-label text-right tooltip-float">Campaign Name</label>
                                 </div>
                                 <div class="col-lg-6">
-                                    <input type="text" name="Campaign Name" class="form-control" id="txtCampaignName" placeholder="Enter Campaign Name" data-bind="value: CampaignName">
+                                    <input type="text" name="Campaign Name" class="form-control" id="txtCampaignName" placeholder="Enter Campaign Name" data-bind="value: CampaignName,validationTooltip: CampaignName, validationOnElement: CampaignName">
 
                                 </div>
                             </div>
@@ -155,7 +155,7 @@
                                     </div>
                                     <div data-bind="visible: Type() != 3 ">
 
-                                        <textarea class="form-control" id="txtLinkOfCampaign" rows="2" placeholder="" data-bind="value: LandingPageVideoLink, validationOnElement: LandingPageVideoLink, attr:{placeholder : $root.campaignTypePlaceHolderValue}"></textarea>
+                                        <textarea class="form-control" id="txtLinkOfCampaign" rows="2" placeholder="" data-bind="value: LandingPageVideoLink,validationTooltip:LandingPageVideoLink, validationOnElement: LandingPageVideoLink, attr:{placeholder : $root.campaignTypePlaceHolderValue}"></textarea>
 
                                     </div>
                                     <div class="col-lg-12" style="margin-left:-10px;" data-bind="visible: Type() == 3">
@@ -201,7 +201,7 @@
                                     -
                                 </div>
                                 <div class="col-lg-1" style=" padding: 0px !important;">
-                                    <select class="form-control" data-bind="options: $root.ageRange, optionsText: 'text', optionsValue: 'value', value: AgeRangeEnd"></select>
+                                    <select class="form-control" data-bind="options: $root.ageRange, optionsText: 'text', optionsValue: 'value', value: AgeRangeEnd,validationTooltip: AgeRangeEnd, validationOnElement: AgeRangeEnd"></select>
 
                                 </div>
                             </div>
@@ -422,7 +422,7 @@
                                 <div class="col-lg-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">$</span>
-                                        <input type="number" name="Budget" class="form-control" id="txtBudget" data-bind="value: MaxBudget">
+                                        <input type="number" name="Budget" class="form-control" id="txtBudget" data-bind="value: MaxBudget,validationTooltip:MaxBudget, validationOnElement: MaxBudget">
                                         <span class="input-group-addon">.00</span>
                                     </div>
                                 </div>
@@ -451,7 +451,7 @@
                                             <label for="validUptoDate" class="control-label text-right tooltip-float">End Date</label>
                                         </div>
                                         <div class="col-sm-6">
-                                            <input type="text" class="form-control" id="validUptoDate" data-bind="datetimepicker:EndDateTime">
+                                            <input type="text" class="form-control" id="validUptoDate" data-bind="datetimepicker:EndDateTime,validationTooltip:EndDateTime, validationOnElement: EndDateTime">
                                         </div>
                                     </div>
 
