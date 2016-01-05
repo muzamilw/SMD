@@ -273,7 +273,9 @@ namespace SMD.MIS.ModelMappers
                 SurveyQuestionTargetLocations = locs,
                 AgeRangeEnd = source.AgeRangeEnd,
                 AgeRangeStart = source.AgeRangeStart,
-                Gender = source.Gender
+                Gender = source.Gender,
+                ParentSurveyId = source.ParentSurveyId,
+                Priority = source.Priority
             };
         }
         public static List<SMD.MIS.Areas.Api.Models.SurveyQuestionTargetCriteria> GetSurveyQuestionTargetCriterias(this Models.DomainModels.SurveyQuestion source)
@@ -368,5 +370,6 @@ namespace SMD.MIS.ModelMappers
             }
             return result.OrderBy(g=>g.CountryId).ToList();
         }
+   
     }
 }

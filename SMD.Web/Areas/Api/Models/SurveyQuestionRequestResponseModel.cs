@@ -29,4 +29,8 @@ namespace SMD.MIS.Areas.Api.Models
     {
         public SurveyQuestion SurveyQuestion { get; set; }
     }
+    public class SurveyQuestionParentListRequestResponseModel
+    {
+        public IEnumerable<SurveyQuestionDropDown> SurveyQuestion { get; set; }
+    }
 }
