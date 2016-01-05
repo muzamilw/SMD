@@ -51,5 +51,10 @@ namespace SMD.Interfaces.Services
 
 
         GetAudience_Result GetAudienceCount(GetAudienceCountRequest request);
+
+        /// <summary>
+        /// Get Survey By Id
+        /// </summary>
+        SurveyQuestion GetSurveyQuestionById(long sqid);
     }
 }

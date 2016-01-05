@@ -42,6 +42,8 @@ namespace SMD.Implementation.Services
         private readonly IInvoiceDetailRepository invoiceDetailRepository;
         private readonly IEducationRepository _educationRepository;
         private readonly IStripeService stripeService;
+        private readonly WebApiUserService webApiUserService;
+
         #region Private Funcs
         private ApplicationUserManager UserManager
         {
@@ -89,21 +91,6 @@ namespace SMD.Implementation.Services
             }
             return savePaths;
         }
-
-        /// <summary>
-        /// Get Stripe Customer by User Id
-        /// </summary>
-        private User GetUserByUserId(string email)
-        {
-            User user = UserManager.FindById(email);
-            if (user == null)
-            {
-                throw new SMDException("No such user with provided user Id!");
-            }
-
-            return user;
-        }
-
         #endregion
 
         #endregion
@@ -123,7 +110,7 @@ namespace SMD.Implementation.Services
             IAdCampaignTargetCriteriaRepository adCampaignTargetCriteriaRepository,
             IProfileQuestionRepository profileQuestionRepository,
             IProfileQuestionAnswerRepository profileQuestionAnswerRepository,
-            ISurveyQuestionRepository surveyQuestionRepository, IProductRepository productRepository, ITaxRepository taxRepository, IInvoiceRepository invoiceRepository, IInvoiceDetailRepository invoiceDetailRepository,IEducationRepository educationRepository, IStripeService stripeService)
+            ISurveyQuestionRepository surveyQuestionRepository, IProductRepository productRepository, ITaxRepository taxRepository, IInvoiceRepository invoiceRepository, IInvoiceDetailRepository invoiceDetailRepository,IEducationRepository educationRepository, IStripeService stripeService, WebApiUserService webApiUserService)
         {
             this._adCampaignRepository = adCampaignRepository;
             this._languageRepository = languageRepository;
@@ -142,6 +129,7 @@ namespace SMD.Implementation.Services
             this._industryRepository = industryRepository;
             this._educationRepository = educationRepository;
             this.stripeService = stripeService;
+            this.webApiUserService = webApiUserService;
         }
 
         /// <summary>
@@ -426,7 +414,7 @@ namespace SMD.Implementation.Services
             #region Stripe Payment
 
             // User who added Campaign for approval 
-            var user = GetUserByUserId(source.UserId);
+            var user = webApiUserService.GetUserByUserId(source.UserId);
             // Get Current Product
             var product = productRepository.GetProductByCountryId(user.CountryId, "Ad");
             // Tax Applied
@@ -528,6 +516,14 @@ namespace SMD.Implementation.Services
             };
         }
 
+
+        /// <summary>
+        /// Get Ad Campaign By Id
+        /// </summary>
+        public AdCampaign GetAdCampaignById(long campaignId)
+        {
+            return _adCampaignRepository.Find(campaignId);
+        }
         #endregion
     }
 }

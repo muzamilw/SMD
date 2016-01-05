@@ -98,7 +98,7 @@ namespace SMD.Implementation.Services
             // Total includes tax
             var amount = product.SetupPrice + tax.TaxValue;
             // User who added Survey Question for approval 
-            var user = GetUserByUserId(source.UserId);
+            var user = webApiUserService.GetUserByUserId(source.UserId);
             // Make Stripe actual payment 
             var response = stripeService.ChargeCustomer((int?)amount, user.StripeCustomerId);
 
@@ -400,20 +400,6 @@ namespace SMD.Implementation.Services
         
 
         /// <summary>
-        /// Get Stripe Customer by User Id
-        /// </summary>
-        public User GetUserByUserId(string email)
-        {
-            User user =  UserManager.FindById(email);
-            if (user == null)
-            {
-                throw new SMDException("No such user with provided user Id!");
-            }
-
-            return user;
-        }
-
-        /// <summary>
         /// Stripe Payment Work
         /// </summary>
         public string CreateChargeWithCustomerId(int? amount, string customerId)
@@ -452,6 +438,14 @@ namespace SMD.Implementation.Services
                 return resposne.BalanceTransactionId;
             }
             return "failed";
+        }
+
+        /// <summary>
+        /// Get Survey By Id
+        /// </summary>
+        public SurveyQuestion GetSurveyQuestionById(long sqid)
+        {
+            return surveyQuestionRepository.Find(sqid);
         }
         #endregion
     }
