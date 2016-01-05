@@ -159,6 +159,10 @@ define("ads/ads.viewModel",
 
                     closeNewCampaignDialog = function () {
                         isEditorVisible(false);
+
+                        $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign").css("display", "none");
+                        $("#btnSubmitForApproval,#saveBtn").css("display", "inline-block");
+                        $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign").removeAttr('disabled');
                     },
 
                     saveCampaignData = function () {
@@ -202,6 +206,7 @@ define("ads/ads.viewModel",
 
                     saveCampaign = function (mode) {
                         campaignModel().Status(mode);
+                        campaignModel().ClickRate(pricePerclick());
                         var campignServerObj = campaignModel().convertToServerData();
                         
                         dataservice.addCampaignData(campignServerObj, {
@@ -626,7 +631,7 @@ define("ads/ads.viewModel",
                     },
 
                     onEditCampaign = function (item) {
-                        if (item.Status() == 1 || item.Status() == null) {
+                        if (item.Status() == 1 || item.Status() == 3 || item.Status() == 4 || item.Status() == null) {
                             canSubmitForApproval(true);
                             dataservice.getCampaignData({
                                 CampaignId: item.CampaignID(),
@@ -662,8 +667,18 @@ define("ads/ads.viewModel",
                                         } else if (campaignModel().Status() == 2) {
                                             campaignModel().StatusValue("Submitted for Approval");
                                         } else if (campaignModel().Status() == 3) {
+                                            $("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
+                                            $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign").css("display", "none");
+                                            $("#saveBtn").css("display", "none"); $("a").unbind("click");
+                                            $("#btnPauseCampaign").css("display", "inline-block");
+                                            $("#btnCancel,#btnPauseCampaign").removeAttr('disabled');
                                             campaignModel().StatusValue("Live");
                                         } else if (campaignModel().Status() == 4) {
+                                            $("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
+                                            $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign").css("display", "none");
+                                            $("#saveBtn").css("display", "none"); $("a").unbind("click");
+                                            $("#btnResumeCampagin").css("display", "inline-block");
+                                            $("#btnCancel,#btnResumeCampagin").removeAttr('disabled');
                                             campaignModel().StatusValue("Paused");
                                         } else if (campaignModel().Status() == 5) {
                                             campaignModel().StatusValue("Completed");
@@ -739,6 +754,7 @@ define("ads/ads.viewModel",
                                         // handle 2nd edit error 
                                         //  $(".modal-backdrop").remove();
                                         $.unblockUI(spinner);
+
                                     }
 
                                 },
@@ -747,6 +763,14 @@ define("ads/ads.viewModel",
                                 }
                             });
                         }
+                    },
+                    changeStatus = function (status) {
+                        if (campaignModel() != undefined)
+                            saveCampaign(status);
+                     
+                        $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign").css("display", "none");
+                        $("#btnSubmitForApproval,#saveBtn").css("display", "inline-block");
+                        $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign").removeAttr('disabled');
                     },
                     addIndustry = function (selected) {
                        
@@ -1144,7 +1168,8 @@ define("ads/ads.viewModel",
                         errorList: errorList,
                         addCountryToCountryList: addCountryToCountryList,
                         findLocationsInCountry: findLocationsInCountry,
-                        selectedQuestionCountryList: selectedQuestionCountryList
+                        selectedQuestionCountryList: selectedQuestionCountryList,
+                        changeStatus: changeStatus
                     };
             })()
         };
