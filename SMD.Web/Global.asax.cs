@@ -98,7 +98,7 @@ namespace SMD.MIS
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters, container);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            TaskManager.Initialize(new Test()); 
+            TaskManager.Initialize(new DebitScheduler()); 
 
             // Set MVC resolver
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));

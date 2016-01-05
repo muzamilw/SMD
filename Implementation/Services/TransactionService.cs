@@ -1,5 +1,7 @@
-﻿using SMD.Interfaces.Repository;
+﻿using System.Collections.Generic;
+using SMD.Interfaces.Repository;
 using SMD.Interfaces.Services;
+using SMD.Models.DomainModels;
 
 namespace SMD.Implementation.Services
 {
@@ -26,6 +28,14 @@ namespace SMD.Implementation.Services
         public void SurveyApprovalTransaction(long sQid)
         {
 
+        }
+
+        /// <summary>
+        /// Get Un-debited transactions
+        /// </summary>
+        public IEnumerable<Transaction> GetUnprocessedTransactionsForDebit()
+        {
+            return transactionRepository.GetUnprocessedTransactionsForDebit();
         }
         #endregion
     }

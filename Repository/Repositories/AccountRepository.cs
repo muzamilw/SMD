@@ -56,6 +56,14 @@ namespace SMD.Repository.Repositories
             return DbSet.FirstOrDefault(account => account.AccountName == name);
         }
 
+
+        /// <summary>
+        /// Get Account By ID
+        /// </summary>
+        public Account GetById(long accountId)
+        {
+            return DbSet.FirstOrDefault(account => account.AccountId == accountId);
+        }
         #endregion
 
         
