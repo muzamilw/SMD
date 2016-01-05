@@ -16,7 +16,7 @@ define("common/stripeChargeCustomer.view",
                 // Show Dialog
                 showDialog = function() {
                     handler = StripeCheckout.configure({
-                        key: 'pk_test_4cvCakbWYxeSnDjlOSMt3Doe',
+                        key: 'pk_test_OS229T2614QGEJu7KeNaGEc1',
                         image: '/img/documentation/checkout/marketplace.png',
                         locale: 'auto',
                         token: function (token) {

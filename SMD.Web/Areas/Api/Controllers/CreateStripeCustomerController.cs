@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using SMD.ExceptionHandling;
 using SMD.Interfaces.Services;
 using SMD.Models.RequestModels;
 using System;
@@ -42,7 +41,7 @@ namespace SMD.MIS.Areas.Api.Controllers
         #endregion
 
         #region Public
-
+        
         /// <summary>
         /// Charge Customer
         /// </summary>

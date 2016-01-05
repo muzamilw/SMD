@@ -72,7 +72,7 @@ namespace SMD.Implementation.Services
                                              {
                                                  AccountId = account.AccountId,
                                                  Sequence = transactionSequence,
-                                                 Type = (int)transactionType, 
+                                                 Type = (int)transactionType,
                                                  isProcessed = true,
                                                  TransactionDate = DateTime.Now
                                              };
@@ -94,7 +94,7 @@ namespace SMD.Implementation.Services
             {
                 account.AccountBalance = 0;
             }
-            
+
             // If Credit Add to balance else deduct
             if (isCredit)
             {
@@ -104,9 +104,9 @@ namespace SMD.Implementation.Services
             else
             {
                 transaction.DebitAmount = transactionAmount;
-                account.AccountBalance -= Convert.ToDecimal(transactionAmount);    
-            } 
-            
+                account.AccountBalance -= Convert.ToDecimal(transactionAmount);
+            }
+
             // Add Transcation to repository
             transactionRepository.Add(transaction);
         }
@@ -130,7 +130,7 @@ namespace SMD.Implementation.Services
         {
             // Debit Advertiser
             var transactionSequence = 1;
-            
+
             // Perform the transactions
             // Debit Campaign Advertiser
             PerformTransaction(request.AdCampaignId, null, advertisersAccount, adClickRate, transactionSequence, TransactionType.AdClick, false);
@@ -179,7 +179,7 @@ namespace SMD.Implementation.Services
         private void SetupAdCampaignTransaction(AdViewedRequest request, AdCampaign adCampaign,
             out Account adViewersAccount, out Account advertisersAccount, out Account smdAccount)
         {
-            
+
             // Get business Accounts for Each Individual involved in this transaction
             adViewersAccount = accountRepository.GetByUserId(request.UserId);
             if (adViewersAccount == null)
@@ -293,8 +293,8 @@ namespace SMD.Implementation.Services
         /// Performs Transactions on Survey Approval
         /// </summary>
         private void PerformSurveyApproveTransactions(ApproveSurveyRequest request, Account advertisersAccount, double approvedSurveyAmount,
-            double? smdsCut, Account smdAccount, SurveyQuestion surveyQuestion,double amount,  int? productId,
-            double taxValue,bool isApiCall = true)
+            double? smdsCut, Account smdAccount, SurveyQuestion surveyQuestion, double amount, int? productId,
+            double taxValue, bool isApiCall = true)
         {
             // Debit Advertiser
             var transactionSequence = 1;
@@ -326,7 +326,7 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Invoice + Details work 
         /// </summary>
-        private void AddInvoiceDetails(SurveyQuestion source, double amount, string stripeResponse, int? productId, 
+        private void AddInvoiceDetails(SurveyQuestion source, double amount, string stripeResponse, int? productId,
             double taxValue, bool isApiCall = true)
         {
             #region Add Invoice
@@ -335,8 +335,8 @@ namespace SMD.Implementation.Services
             var invoice = new Invoice
             {
                 Country = source.Country.CountryName,
-                Total = (double)amount,
-                NetTotal = (double)amount,
+                Total = amount,
+                NetTotal = amount,
                 InvoiceDate = DateTime.Now,
                 InvoiceDueDate = DateTime.Now.AddDays(7),
                 Address1 = source.Country.CountryName,
@@ -356,10 +356,10 @@ namespace SMD.Implementation.Services
                 SqId = source.SqId,
                 ProductId = productId,
                 ItemName = "Survey Question",
-                ItemAmount = (double)amount,
+                ItemAmount = amount,
                 ItemTax = taxValue,
                 ItemDescription = "This is description!",
-                ItemGrossAmount = (double)amount,
+                ItemGrossAmount = amount,
                 CampaignId = null,
 
             };
@@ -389,9 +389,9 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Constructor
         /// </summary>
-        public WebApiUserService(IEmailManagerService emailManagerService, IAdCampaignRepository adCampaignRepository, 
+        public WebApiUserService(IEmailManagerService emailManagerService, IAdCampaignRepository adCampaignRepository,
             IAccountRepository accountRepository, ITransactionRepository transactionRepository,
-            ISurveyQuestionRepository surveyQuestionRepository, IInvoiceRepository invoiceRepository, 
+            ISurveyQuestionRepository surveyQuestionRepository, IInvoiceRepository invoiceRepository,
             IInvoiceDetailRepository invoiceDetailRepository, IProductRepository productRepository,
             ITaxRepository taxRepository)
         {
@@ -449,25 +449,26 @@ namespace SMD.Implementation.Services
 
             // Validates if Ad Campaing Exists and has Advertiser info as well
             var surveyQuestion = await ValidateSurveyQuestion(request);
-            
+
             // Begin Transaction
             // SMD will get 100 %
             // Get Current Product
             var product = productRepository.GetProductByCountryId(surveyQuestion.CountryId, "SQ");
             // Tax Applied
             var tax = taxRepository.GetTaxByCountryId(surveyQuestion.CountryId);
+            var taxValue = tax != null && tax.TaxValue.HasValue ? tax.TaxValue.Value : 0;
             // Total includes tax
-            double? approvedSurveyAmount = product.SetupPrice + tax.TaxValue;
+            double? approvedSurveyAmount = product.SetupPrice + taxValue;
             Account advertisersAccount;
             Account smdAccount;
 
             // Sets up transaction 
             // Gets Accounts required
             SetupSurveyApproveTransaction(surveyQuestion, out advertisersAccount, out smdAccount);
-            
+
             // Perform Transactions
-            PerformSurveyApproveTransactions(request, advertisersAccount, (double) approvedSurveyAmount, approvedSurveyAmount,
-                smdAccount, surveyQuestion,(double) approvedSurveyAmount,product.ProductId,(double) tax.TaxValue,isApiCall);
+            PerformSurveyApproveTransactions(request, advertisersAccount, (double)approvedSurveyAmount, approvedSurveyAmount,
+                smdAccount, surveyQuestion, (double)approvedSurveyAmount, product.ProductId, taxValue, isApiCall);
 
             return new BaseApiResponse
             {
@@ -475,7 +476,7 @@ namespace SMD.Implementation.Services
                 Message = "Success"
             };
         }
-        
+
         #endregion
 
         /// <summary>
@@ -489,10 +490,10 @@ namespace SMD.Implementation.Services
             {
                 throw new SMDException(LanguageResources.WebApiUserService_InvalidUserId);
             }
-            
+
             // Validates if Ad Campaing Exists
             var adCampaign = await ValidateAdCampaign(request);
-            
+
             // Get Referral if any
             User referringUser = null;
             Account affiliatesAccount = null;
@@ -526,7 +527,7 @@ namespace SMD.Implementation.Services
             SetupAdCampaignTransaction(request, adCampaign, out adViewersAccount, out advertisersAccount, out smdAccount);
 
             // Perform Transactions
-            PerformAdCampaignTransactions(request, advertisersAccount, adClickRate, adViewersAccount, adViewersCut, referringUser, smdsCut, 
+            PerformAdCampaignTransactions(request, advertisersAccount, adClickRate, adViewersAccount, adViewersCut, referringUser, smdsCut,
                 affiliatesAccount, smdAccount, adCampaign);
 
             return new BaseApiResponse
@@ -535,7 +536,7 @@ namespace SMD.Implementation.Services
                        Message = "Success"
                    };
         }
-        
+
         /// <summary>
         /// Archive Account
         /// </summary>
@@ -668,7 +669,7 @@ namespace SMD.Implementation.Services
                 User = user
             };
         }
-        
+
         /// <summary>
         /// Perform External Login
         /// </summary>
@@ -715,8 +716,13 @@ namespace SMD.Implementation.Services
                 };
             }
 
-            return await RegisterExternal(new RegisterExternalRequest{ Email = request.Email, FullName = request.FullName, 
-                LoginProvider = request.LoginProvider, LoginProviderKey = request.LoginProviderKey});
+            return await RegisterExternal(new RegisterExternalRequest
+            {
+                Email = request.Email,
+                FullName = request.FullName,
+                LoginProvider = request.LoginProvider,
+                LoginProviderKey = request.LoginProviderKey
+            });
         }
 
         /// <summary>
@@ -738,7 +744,7 @@ namespace SMD.Implementation.Services
                 return new LoginResponse
                 {
                     Message = LanguageResources.WebApiUserService_EmailNotVerified
-                };    
+                };
             }
 
             if (user.Status == (int)UserStatus.InActive)
@@ -815,7 +821,7 @@ namespace SMD.Implementation.Services
                 throw new SMDException("No such user with provided email address!");
             }
 
-            return user.StripeCustomerId; 
+            return user.StripeCustomerId;
         }
         #endregion
     }
