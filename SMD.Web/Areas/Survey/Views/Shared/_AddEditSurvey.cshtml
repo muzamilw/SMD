@@ -31,7 +31,9 @@
                         </div>
                     </div>
                     <div class="pull-right top-page-ui" style="margin-right:5px;margin-bottom:5px;">
-                        <button class="btn  btn-success" id="saveBtn" data-bind="click:$root.onSubmitSurveyQuestion, visible: $root.canSubmitForApproval">Submit for Approvals</button>
+                        <button class="btn  btn-success" id="btnPauseCampaign" data-bind="click:$root.changeStatus(4)" style="display:none;">Pause</button>
+                        <button class="btn  btn-success" id="btnResumeCampagin" data-bind="click:$root.changeStatus(3)" style="display:none;">Resume</button>
+                        <button class="btn  btn-success" id="btnSubmitForApproval" data-bind="click:$root.onSubmitSurveyQuestion, visible: $root.canSubmitForApproval">Submit for Approvals</button>
                         <button class="btn  btn-info" id="saveBtn" data-bind="click:$root.onSaveSurveyQuestion, enable: $root.hasChangesOnQuestion, css: { 'btn-warning': $root.hasChangesOnQuestion }">Save</button>
                         <button class="btn btn-default" id="closeBtn" data-bind="click: $root.closeEditDialog">Close</button>
                     </div>
@@ -586,7 +588,39 @@
                                             </table>
                                         </div>
                                     </div>
+                                    <div class="col-lg-9">
+                                        <div>
+                                            <h4 class="ad_h4">Link with another Survey Question</h4>
 
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-4 text-right">
+                                                <div class="bs-example-tooltips tooltip-float-width">
+                                                    <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
+                                                        <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                    </a>
+                                                </div>
+                                                <label for="txtVerifyQuestion" class="control-label text-right tooltip-float">Parent Survey Question</label>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <select class="form-control" data-bind="options:$root.surveyQuestionList, optionsText: 'DisplayQuestion', optionsValue: 'SQID', optionsCaption: '&lt;' + 'Select Question'+ '&gt;' , value: ParentSurveyId"></select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-4 text-right">
+                                                <div class="bs-example-tooltips tooltip-float-width">
+                                                    <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
+                                                        <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                    </a>
+                                                </div>
+                                                <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float">Priority</label>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <input type="text" class="form-control" id="txtVerifyAnswer1" placeholder="Priority" data-bind="value: Priority">
+
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div class="col-lg-3 col-md-4 col-sm-4">

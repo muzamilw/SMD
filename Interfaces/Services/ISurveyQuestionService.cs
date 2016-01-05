@@ -3,6 +3,7 @@ using System.Security.Cryptography.X509Certificates;
 using SMD.Models.DomainModels;
 using SMD.Models.RequestModels;
 using SMD.Models.ResponseModels;
+using System.Collections.Generic;
 
 namespace SMD.Interfaces.Services
 {

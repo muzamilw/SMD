@@ -161,7 +161,7 @@ define("ads/ads.viewModel",
                         isEditorVisible(false);
 
                         $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign").css("display", "none");
-                        $("#btnSubmitForApproval,#saveBtn").css("display", "inline-block");
+                        $("#btnSubmitForApproval,#saveBtn,.table-link").css("display", "inline-block");
                         $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign").removeAttr('disabled');
                     },
 
@@ -443,7 +443,8 @@ define("ads/ads.viewModel",
                     },
                       // Delete Handler PQ
                     onDeleteCriteria = function (item) {
-                        
+                 
+
                         campaignModel().AdCampaignTargetCriterias.remove(item);
                        
                        if (item.Type() == "1")
@@ -519,7 +520,7 @@ define("ads/ads.viewModel",
                     },
 
                     deleteLocation = function (item) {
-                      
+                   
                         campaignModel().AdCampaignTargetLocations.remove(item);
                       
                         if (campaignModel().AdCampaignTargetLocations() == null || campaignModel().AdCampaignTargetLocations().length == 0) {
@@ -631,7 +632,7 @@ define("ads/ads.viewModel",
                     },
 
                     onEditCampaign = function (item) {
-                        if (item.Status() == 1 || item.Status() == 3 || item.Status() == 4 || item.Status() == null) {
+                        if (item.Status() == 1 || item.Status() == 2 || item.Status() == 3 || item.Status() == 4 || item.Status() == null) {
                             canSubmitForApproval(true);
                             dataservice.getCampaignData({
                                 CampaignId: item.CampaignID(),
@@ -665,18 +666,22 @@ define("ads/ads.viewModel",
                                         if (campaignModel().Status() == 1) {
                                             campaignModel().StatusValue("Draft");
                                         } else if (campaignModel().Status() == 2) {
+                                                $("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
+                                                $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,#btnPauseCampaign,.lang_delSurvey,.table-link").css("display", "none");
+                                                $("#saveBtn").css("display", "none")
+                                                $("#btnCancel,#btnPauseCampaign").removeAttr('disabled');
                                             campaignModel().StatusValue("Submitted for Approval");
                                         } else if (campaignModel().Status() == 3) {
                                             $("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
-                                            $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign").css("display", "none");
-                                            $("#saveBtn").css("display", "none"); $("a").unbind("click");
+                                            $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,.lang_delSurvey,.table-link").css("display", "none");
+                                            $("#saveBtn").css("display", "none"); 
                                             $("#btnPauseCampaign").css("display", "inline-block");
                                             $("#btnCancel,#btnPauseCampaign").removeAttr('disabled');
                                             campaignModel().StatusValue("Live");
                                         } else if (campaignModel().Status() == 4) {
                                             $("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
-                                            $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign").css("display", "none");
-                                            $("#saveBtn").css("display", "none"); $("a").unbind("click");
+                                            $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,.lang_delSurvey,.table-link").css("display", "none");
+                                            $("#saveBtn").css("display", "none");
                                             $("#btnResumeCampagin").css("display", "inline-block");
                                             $("#btnCancel,#btnResumeCampagin").removeAttr('disabled');
                                             campaignModel().StatusValue("Paused");
@@ -769,7 +774,7 @@ define("ads/ads.viewModel",
                             saveCampaign(status);
                      
                         $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign").css("display", "none");
-                        $("#btnSubmitForApproval,#saveBtn").css("display", "inline-block");
+                        $("#btnSubmitForApproval,#saveBtn,.lang_delSurvey,.table-link").css("display", "inline-block");
                         $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign").removeAttr('disabled');
                     },
                     addIndustry = function (selected) {
