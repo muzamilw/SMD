@@ -848,6 +848,20 @@ namespace SMD.Implementation.Services
 
             return user.StripeCustomerId;
         }
+
+        /// <summary>
+        /// Get User using usermanager  For Stripe Work 
+        /// </summary>
+        public User GetUserByUserId(string userId)
+        {
+            User user = UserManager.FindById(userId);
+            if (user == null)
+            {
+                throw new SMDException("No such user with provided user Id!");
+            }
+
+            return user; 
+        }
         #endregion
     }
 }

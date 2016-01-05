@@ -570,7 +570,6 @@ define("survey/survey.viewModel",
                     }),
                     // save survey question 
                     onSaveSurveyQuestion = function () {
-                        // now saving survey as draft but check stripe intergration and save it for submit for approval
                         if (selectedQuestion().isValid()) {
                             if (ValidateSurvey() == true) {
                                 saveSurveyQuestion(1);
@@ -601,7 +600,6 @@ define("survey/survey.viewModel",
                        
                     },
                     saveSurveyQuestion = function (mode) {
-                        debugger;
                         if (selectedQuestion().isValid()) {
                             if (ValidateSurvey() == true) {
                                 selectedQuestion().Status(mode);
@@ -883,6 +881,8 @@ define("survey/survey.viewModel",
                         });
                     },
                     ValidateSurvey = function () {
+                        if (selectedQuestion().SQID() > 0)
+                            return true;
                         errorList.removeAll();
                         if (selectedQuestion().LeftPictureBytes() == "" || selectedQuestion().LeftPictureBytes() == null) {
                             errorList.push({ name: "Please select left survey answer.", element: "" });

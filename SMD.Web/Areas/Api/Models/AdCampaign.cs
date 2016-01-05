@@ -50,5 +50,11 @@ namespace SMD.MIS.Areas.Api.Models
         public string CampaignTypeImagePath { get; set; }
         public List<AdCampaignTargetCriteria> AdCampaignTargetCriterias { get; set; }
         public List<AdCampaignTargetLocation> AdCampaignTargetLocations { get; set; }
+        public string Voucher1Heading { get; set; }
+        public string Voucher1Description { get; set; }
+        public string Voucher1Value { get; set; }
+        public string Voucher2Heading { get; set; }
+        public string Voucher2Description { get; set; }
+        public string Voucher2Value { get; set; }
     }
 }

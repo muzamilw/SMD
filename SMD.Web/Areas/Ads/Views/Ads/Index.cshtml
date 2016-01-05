@@ -112,16 +112,8 @@
         <td class="col-sm-2"><span class="" data-bind="text: StartDateTime"></span></td>
 
         <td class="col-sm-2">
-            <!-- ko if: Status() == 3 -->
-            <div class="onoffswitch" style="margin-right:0px;">
-                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchToPause">
-                <label class="onoffswitch-label" for="switchToPause">
-                    <div class="onoffswitch-inner"></div>
-                    <div class="onoffswitch-switch"></div>
-                </label>
-            </div>
-            <!-- /ko -->
-            <!-- ko if: Status() == 1-->
+          
+            <!-- ko if: Status() == 1 || Status() == 3 || Status() == 4-->
             <a class="table-link" style="float: right">
                 <span class="fa-stack">
                     <i class="fa fa-square fa-stack-2x"></i>

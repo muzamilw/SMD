@@ -33,9 +33,11 @@
                     <div class="pull-right top-page-ui" style="margin-right:5px;margin-bottom:5px;">
 
                         <div class="col-xs-12" style="text-align: right; padding-right:0;margin-bottom:10px;">
-                            <button class="btn  btn-success" id="saveBtn" data-bind="click:$root.submitCampaignData, visible: $root.canSubmitForApproval">Submit for Approvals</button>
+                            <button class="btn  btn-success" id="btnPauseCampaign" data-bind="click:$root.changeStatus(4)" style="display:none;">Pause</button>
+                            <button class="btn  btn-success" id="btnResumeCampagin" data-bind="click:$root.changeStatus(3)" style="display:none;">Resume</button>
+                            <button class="btn  btn-success" id="btnSubmitForApproval" data-bind="click:$root.submitCampaignData, visible: $root.canSubmitForApproval">Submit for Approvals</button>
                             <button class="btn  btn-warning" id="saveBtn" data-bind="click:$root.saveCampaignData, enable: $root.hasChangesOnQuestion, css: { 'btn-warning': $root.hasChangesOnQuestion }">Save</button>
-                            <button class="btn btn-default" id="saveBtn" data-bind="click: $root.closeNewCampaignDialog">Close</button>
+                            <button class="btn btn-default" id="btnCancel" data-bind="click: $root.closeNewCampaignDialog">Close</button>
                         </div>
 
                     </div>
@@ -143,10 +145,17 @@
                                         </label>
                                         <span class="help-block text-right"></span>
                                     </div>
-                                    <div class="radio col-lg-5">
+                                    <div class="radio col-lg-3">
                                         <input type="radio" name="optionsRadiosStoreType" id="optionsRadiosUploadImage" value="3" data-bind="checked: Type, event:{ change: $root.OnChangeCampaignType }">
                                         <label for="optionsRadiosUploadImage">
                                             Flyer / Image
+                                        </label>
+                                        <span class="help-block text-right"></span>
+                                    </div>
+                                    <div class="radio col-lg-3">
+                                        <input type="radio" name="optionsRadiosStoreType" id="optionsRadiosGame" value="4" data-bind="checked: Type, event:{ change: $root.OnChangeCampaignType }">
+                                        <label for="optionsRadiosGame">
+                                            Games
                                         </label>
                                         <span class="help-block text-right"></span>
                                     </div>
@@ -676,6 +685,97 @@
                                     </div>
                                     <div class="col-lg-8">
                                         <select class="form-control" id="ddpCorrectAns" data-bind="options: $root.correctAnswers, optionsText: 'name', optionsValue: 'id', value: CorrectAnswer"></select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-9">
+                                <div>
+                                    <h4 class="ad_h4">Enter voucher codes for users</h4>
+
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-4 text-right">
+                                        <div class="bs-example-tooltips tooltip-float-width">
+                                            <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
+                                                <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                            </a>
+                                        </div>
+                                        <label for="txtVerifyQuestion" class="control-label text-right tooltip-float">Voucher 1 Title</label>
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <input type="text" class="form-control" id="txtVerifyQuestion" placeholder="Enter your voucher title" data-bind="value: Voucher1Heading">
+
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-4 text-right">
+                                        <div class="bs-example-tooltips tooltip-float-width">
+                                            <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
+                                                <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                            </a>
+                                        </div>
+                                        <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float">Voucher 1 Description</label>
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <input type="text" class="form-control" id="txtVerifyAnswer1" placeholder="Enter voucher description" data-bind="value: Voucher1Description">
+
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-4 text-right">
+                                        <div class="bs-example-tooltips tooltip-float-width">
+                                            <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
+                                                <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                            </a>
+                                        </div>
+                                        <label for="txtVerifyAnswer2" class="control-label text-right tooltip-float">Voucher 1 Value</label>
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <input type="text" class="form-control" id="txtVerifyAnswer2" placeholder="Enter Voucher Value" data-bind="value: Voucher1Value">
+
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-4 text-right">
+                                        <div class="bs-example-tooltips tooltip-float-width">
+                                            <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
+                                                <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                            </a>
+                                        </div>
+                                        <label for="txtVerifyQuestion" class="control-label text-right tooltip-float">Voucher 2 Title</label>
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <input type="text" class="form-control" id="txtVerifyQuestion" placeholder="Enter your voucher title" data-bind="value: Voucher2Heading">
+
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-4 text-right">
+                                        <div class="bs-example-tooltips tooltip-float-width">
+                                            <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
+                                                <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                            </a>
+                                        </div>
+                                        <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float">Voucher 2 Description</label>
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <input type="text" class="form-control" id="txtVerifyAnswer1" placeholder="Enter voucher description" data-bind="value: Voucher2Description">
+
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-4 text-right">
+                                        <div class="bs-example-tooltips tooltip-float-width">
+                                            <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
+                                                <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                            </a>
+                                        </div>
+                                        <label for="txtVerifyAnswer2" class="control-label text-right tooltip-float">Voucher 2 Value</label>
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <input type="text" class="form-control" id="txtVerifyAnswer2" placeholder="Enter Voucher Value" data-bind="value: Voucher2Value">
+
                                     </div>
                                 </div>
                             </div>
