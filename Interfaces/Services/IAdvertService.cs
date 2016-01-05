@@ -41,5 +41,10 @@ namespace SMD.Interfaces.Services
         CampaignResponseModel GetCampaigns(AdCampaignSearchRequest request);
         CampaignResponseModel GetCampaignById(long CampaignId);
         void UpdateCampaign(AdCampaign campaignModel);
+
+        /// <summary>
+        /// Get Ad Campaign By Id
+        /// </summary>
+        AdCampaign GetAdCampaignById(long campaignId);
     }
 }

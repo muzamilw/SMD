@@ -75,5 +75,10 @@ namespace SMD.Interfaces.Services
         /// Get Stripe Customer by Email
         /// </summary>
         Task<string> GetStripeCustomerIdByEmail(string email);
+
+        /// <summary>
+        /// Get User using usermanager  For Stripe Work 
+        /// </summary>
+        User GetUserByUserId(string userId);
     }
 }
