@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Configuration;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using SMD.Common;
 using SMD.ExceptionHandling;
 using SMD.Implementation.Identity;
 using SMD.Interfaces.Repository;
@@ -382,6 +385,25 @@ namespace SMD.Implementation.Services
             HttpContext.Current.User = new ClaimsPrincipal(identity);
         }
 
+        /// <summary>
+        /// Updates Profile Image
+        /// </summary>
+        private static void UpdateProfileImage(UpdateUserProfileRequest request, User user)
+        {
+            string smdContentPath = ConfigurationManager.AppSettings["SMD_Content"];
+            HttpServerUtility server = HttpContext.Current.Server;
+            string mapPath = server.MapPath(smdContentPath + "/Users/" + user.Id);
+
+            // Create directory if not there
+            if (!Directory.Exists(mapPath))
+            {
+                Directory.CreateDirectory(mapPath);
+            }
+
+            user.ProfileImage = ImageHelper.Save(mapPath, user.ProfileImage, string.Empty, request.ProfileImageName,
+                request.ProfileImage, request.ProfileImageBytes);
+        }
+
         #endregion
 
         #region Constructor
@@ -575,6 +597,9 @@ namespace SMD.Implementation.Services
             // Update User
             user.Update(request);
 
+            // Update Profile Image
+            UpdateProfileImage(request, user);
+
             // Save Changes
             await UserManager.UpdateAsync(user);
 
@@ -584,7 +609,7 @@ namespace SMD.Implementation.Services
                 Message = "Success"
             };
         }
-
+        
         /// <summary>
         /// Confirm Email
         /// </summary>
