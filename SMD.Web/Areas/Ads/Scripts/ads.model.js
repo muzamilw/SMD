@@ -4,7 +4,8 @@
       Campaign = function (CampaignID, LanguageID, CampaignName, UserID, Status, StatusValue, CampaignDescription, Gender,
           Archived, StartDateTime, EndDateTime, MaxBudget, Type, DisplayTitle, LandingPageVideoLink, VerifyQuestion,
           Answer1, Answer2, Answer3, CorrectAnswer, AgeRangeStart, AgeRangeEnd, ResultClicks, AmountSpent
-          , ImagePath, CampaignImagePath, CampaignTypeImagePath, Description, ClickRate) {
+          , ImagePath, CampaignImagePath, CampaignTypeImagePath, Description, ClickRate,
+          Voucher1Heading, Voucher1Description, Voucher1Value, Voucher2Heading, Voucher2Description, Voucher2Value) {
           var
               //type and userID will be set on server sside
               CampaignID = ko.observable(CampaignID),
@@ -62,6 +63,12 @@
                   }
               }),
               VerifyQuestion = ko.observable(VerifyQuestion),
+              Voucher1Heading = ko.observable(Voucher1Heading),
+              Voucher1Description = ko.observable(Voucher1Description),
+              Voucher1Value = ko.observable(Voucher1Value),
+              Voucher2Heading = ko.observable(Voucher2Heading),
+              Voucher2Description = ko.observable(Voucher2Description),
+              Voucher2Value = ko.observable(Voucher2Value),
               Answer1 = ko.observable(Answer1),
               Answer2 = ko.observable(Answer2),
               Answer3 = ko.observable(Answer3),
@@ -124,7 +131,13 @@
                   ResultClicks: ResultClicks,
                   AmountSpent: AmountSpent,
                   AdCampaignTargetCriterias: AdCampaignTargetCriterias,
-                  AdCampaignTargetLocations: AdCampaignTargetLocations
+                  AdCampaignTargetLocations: AdCampaignTargetLocations,
+                  Voucher1Heading:Voucher1Heading,
+                  Voucher1Description:Voucher1Description,
+                  Voucher1Value:Voucher1Value,
+                  Voucher2Heading:Voucher2Heading,
+                  Voucher2Description:Voucher2Description,
+                  Voucher2Value: Voucher2Value
               }),
               // Has Changes
               hasChanges = ko.computed(function () {
@@ -178,7 +191,13 @@
                       CampaignTypeImagePath: CampaignTypeImagePath(),
                       ClickRate:ClickRate(),
                       AdCampaignTargetCriterias: targetCriteria,
-                      AdCampaignTargetLocations: LocationtargetCriteria
+                      AdCampaignTargetLocations: LocationtargetCriteria,
+                      Voucher1Heading: Voucher1Heading(),
+                      Voucher1Description: Voucher1Description(),
+                      Voucher1Value: Voucher1Value(),
+                      Voucher2Heading: Voucher2Heading(),
+                      Voucher2Description: Voucher2Description(),
+                      Voucher2Value: Voucher2Value()
                   };
               };
           return {
@@ -218,7 +237,13 @@
               reset: reset,
               isValid: isValid,
               dirtyFlag:dirtyFlag,
-              errors: errors
+              errors: errors,
+              Voucher1Heading: Voucher1Heading,
+              Voucher1Description: Voucher1Description,
+              Voucher1Value: Voucher1Value,
+              Voucher2Heading: Voucher2Heading,
+              Voucher2Description: Voucher2Description,
+              Voucher2Value: Voucher2Value
           };
       };
 
@@ -333,7 +358,12 @@
     // Factory Method
     Campaign.Create = function (source) {
   
-        var campaign = new Campaign(source.CampaignId, source.LanguageId, source.CampaignName, source.UserId, source.Status, source.StatusValue, source.CampaignDescription, source.Gender + "", source.Archived, source.StartDateTime, source.EndDateTime, source.MaxBudget, source.Type + "", source.DisplayTitle, source.LandingPageVideoLink, source.VerifyQuestion, source.Answer1, source.Answer2, source.Answer3, source.CorrectAnswer, source.AgeRangeStart, source.AgeRangeEnd, source.ResultClicks, source.AmountSpent, source.ImagePath, source.CampaignImagePath, source.CampaignTypeImagePath, source.Description, source.ClickRate);
+        var campaign = new Campaign(source.CampaignId, source.LanguageId, source.CampaignName, source.UserId, source.Status, source.StatusValue,
+            source.CampaignDescription, source.Gender + "", source.Archived, source.StartDateTime, source.EndDateTime, source.MaxBudget
+            , source.Type + "", source.DisplayTitle, source.LandingPageVideoLink, source.VerifyQuestion, source.Answer1, source.Answer2, source.Answer3,
+            source.CorrectAnswer, source.AgeRangeStart, source.AgeRangeEnd, source.ResultClicks, source.AmountSpent, source.ImagePath, source.CampaignImagePath,
+            source.CampaignTypeImagePath, source.Description, source.ClickRate, source.Voucher1Heading, source.Voucher1Description, source.Voucher1Value, source.Voucher2Heading, source.Voucher2Description,
+             source.Voucher2Value);
         _.each(source.AdCampaignTargetCriterias, function (item) {
             campaign.AdCampaignTargetCriterias.push(AdCampaignTargetCriteriasModel.Create(item));
         });

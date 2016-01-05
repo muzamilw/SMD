@@ -51,7 +51,7 @@ namespace SMD.Models.DomainModels
         public double? AmountSpent { get; set; }
         public int? RewardType { get; set; }
         public string Voucher1Heading { get; set; }
-        public string Voucher1Description { get; set; }
+        public string Voucher1Description { get; set; } 
         public string Voucher1Value { get; set; }
         public string Voucher2Heading { get; set; }
         public string Voucher2Description { get; set; }
