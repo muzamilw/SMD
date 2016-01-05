@@ -1,7 +1,9 @@
 ﻿using System.Net.Http;
 using System.Web.Http;
 
+// ReSharper disable CheckNamespace
 namespace SMD.MIS
+// ReSharper restore CheckNamespace
 {
     /// <summary>
     /// WebApi configurations 
@@ -127,6 +129,14 @@ namespace SMD.MIS
                 "UpdateQuestionAnswerForApi",
                 "UpdateQuestionAnswerForApi/{AuthenticationToken}/",
                 new { controller = "UpdateQuestionAnswerForApi" },
+                null,
+                null);
+
+            // Update User Profile Custom route
+            config.Routes.MapHttpRoute(
+                "UpdateUserProfileImage",
+                "Update/User/{AuthenticationToken}/ProfileImage/",
+                new { controller = "UpdateUserProfileImage" },
                 null,
                 null);
         }

@@ -394,6 +394,7 @@
     <Compile Include="Areas\Api\Controllers\SurveyQuestionEditorController.cs" />
     <Compile Include="Areas\Api\Controllers\UpdateCampaignController.cs" />
     <Compile Include="Areas\Api\Controllers\UpdateQuestionAnswerForApiController.cs" />
+    <Compile Include="Areas\Api\Controllers\UpdateUserProfileImageController.cs" />
     <Compile Include="Areas\Api\Controllers\UpdateUserProfileController.cs" />
     <Compile Include="Areas\Api\Controllers\RegisterController.cs" />
     <Compile Include="Areas\Api\Controllers\GetAdsForApiController.cs" />
