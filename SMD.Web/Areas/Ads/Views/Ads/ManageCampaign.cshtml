@@ -599,7 +599,7 @@
                                 </header>
                                 <div class="table-responsive">
                                     <table class="table table-striped table-hover">
-                                        <thead>
+                                        <thead data-bind="visible: $root.visibleTargetAudience(1)  == 1 || $root.visibleTargetAudience(2)  == 1">
                                             <tr>
                                                 <th class="col-lg-11"><span>Additional targeting Criteria's</span></th>
                                                 <th>&nbsp;</th>
@@ -693,24 +693,34 @@
 
                             <div class="col-lg-9">
                                 <div>
-                                    <h4 class="ad_h4">Enter voucher codes for users</h4>
+                                    <h4 class="ad_h4">Allow user to select and redeem a voucher instead of cash reward ?</h4>
 
                                 </div>
-                                <div class="form-group">
+                                <div class="">
+                                    <div class="onoffswitch">
+                                        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchA" data-bind="checked: $root.voucherQuestionStatus() == 1, event: { click: $root.ChangeVoucherSettings }">
+                                        <label class="onoffswitch-label" for="switchA">
+                                            <div class="onoffswitch-inner"></div>
+                                            <div class="onoffswitch-switch"></div>
+                                        </label>
+                                    </div>
+                                    <span class="help-block text-right"></span>
+                                </div>
+                                <div class="form-group" data-bind="visible: $root.voucherQuestionStatus() == 1 ">
                                     <div class="col-lg-4 text-right">
                                         <div class="bs-example-tooltips tooltip-float-width">
                                             <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
                                                 <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
                                             </a>
                                         </div>
-                                        <label for="txtVerifyQuestion" class="control-label text-right tooltip-float">Voucher 1 Title</label>
+                                        <label for="txtVerifyQuestion" class="control-label text-right tooltip-float">Voucher</label>
                                     </div>
                                     <div class="col-lg-8">
-                                        <input type="text" class="form-control" id="txtVerifyQuestion" placeholder="Enter your voucher title" data-bind="value: Voucher1Heading">
+                                        <input type="text" class="form-control" id="txtVoucher" placeholder="Enter your voucher detail" data-bind="value: Voucher1Heading">
 
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                @*<div class="form-group">
                                     <div class="col-lg-4 text-right">
                                         <div class="bs-example-tooltips tooltip-float-width">
                                             <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
@@ -737,8 +747,8 @@
                                         <input type="text" class="form-control" id="txtVerifyAnswer2" placeholder="Enter Voucher Value" data-bind="value: Voucher1Value">
 
                                     </div>
-                                </div>
-                                <div class="form-group">
+                                </div>*@
+                                @*<div class="form-group">
                                     <div class="col-lg-4 text-right">
                                         <div class="bs-example-tooltips tooltip-float-width">
                                             <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
@@ -779,7 +789,7 @@
                                         <input type="text" class="form-control" id="txtVerifyAnswer2" placeholder="Enter Voucher Value" data-bind="value: Voucher2Value">
 
                                     </div>
-                                </div>
+                                </div>*@
                             </div>
                         </div>
 
