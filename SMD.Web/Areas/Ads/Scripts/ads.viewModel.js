@@ -103,34 +103,7 @@ define("ads/ads.viewModel",
                                 }
                             });
                     },
-                    SetDefaultUserLocation = function (IsCity, IsCountry, userData) {
-                        debugger;
-                        var CityID = null, CountryID = null, Radius = 0, Country = '', City = '', latitude = '', longitude = '';
-                        if (IsCountry) {
-                            Country = userData.Country;
-                            CountryID = userData.CountryId;
-                        }
-                        if (IsCity) {
-                            City = userData.City;
-                            CountryID = userData.CountryId;
-                            CityID = userData.CityId;
-                            latitude = userData.GeoLat;
-                            longitude = userData.GeoLong;
-                            Country = userData.Country;
-                        }
-                        var obj = {
-                            CountryID: CountryID,
-                            CityID: CityID,
-                            Radius: Radius,
-                            Country: Country,
-                            City: City,
-                            Latitude: latitude,
-                            Longitude: longitude
-                        }
-
-                        selectedLocation(obj);
-                        onAddLocation();
-                    },
+                   
                     getAdCampaignGridContent = function () {
                         dataservice.getCampaignData({
                             CampaignId: 0,
@@ -189,17 +162,14 @@ define("ads/ads.viewModel",
                         canSubmitForApproval(true);
                         campaignModel(new model.Campaign());
                        
-                        if (UserAndCostDetail().CountryId != null) {
-                            SetDefaultUserLocation(false, true, UserAndCostDetail());
-                        }
-
+                        
                         selectedCriteria();
                        
                         campaignModel().Gender('2');
                         campaignModel().Type('2');
-                        campaignModel().MaxBudget('0');
+                        campaignModel().MaxBudget('1');
+                        campaignModel().AgeRangeEnd(18);
                         
-                        campaignModel().reset();
                         view.initializeTypeahead();
                         isEnableVedioVerificationLink(false);
                         isEditCampaign(false);
@@ -208,7 +178,21 @@ define("ads/ads.viewModel",
                         campaignModel().LanguageId(41);
                         bindAudienceReachCount();
                         selectedQuestionCountryList([]);
-                       
+                      
+                        if (UserAndCostDetail().CountryId != null && UserAndCostDetail().CityId != null) {
+
+                            var objCity = {
+                                CountryID: UserAndCostDetail().CountryId,
+                                CityID: UserAndCostDetail().CityId,
+                                Radius: 0,
+                                Country: UserAndCostDetail().Country,
+                                City: UserAndCostDetail().City,
+                                Latitude: UserAndCostDetail().GeoLat,
+                                Longitude: UserAndCostDetail().GeoLong
+                            }
+                            selectedLocation(objCity);
+                            onAddLocation();
+                        }
                     },
 
                     closeNewCampaignDialog = function () {
@@ -223,7 +207,10 @@ define("ads/ads.viewModel",
                                 $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign").removeAttr('disabled');
                             });
                             confirmation.afterCancel(function () {
-
+                                
+                                campaignModel();
+                                selectedCriteria();
+                                isEditorVisible(false);
                             });
                             confirmation.show();
                             return;
@@ -245,6 +232,7 @@ define("ads/ads.viewModel",
                            
                         } else {
                             campaignModel().errors.showAllMessages();
+                            toastr.error("Please fill the required feilds to continue.");
                         }
                     },
                     submitCampaignData = function () {
@@ -253,16 +241,26 @@ define("ads/ads.viewModel",
                             {
                                 stripeChargeCustomer.show(function () {
                                     UserAndCostDetail().isStripeIntegrated = true;
-                                    if (campaignModel().LandingPageVideoLink()) { }
-                                    saveCampaign(2);
+                                    if (reachedAudience() > 0) {
+                                        saveCampaign(2);
+
+                                    } else {
+                                        toastr.error("You have no audience against the specified criteria please broad your audience definition.");
+                                    }
                                 }, 2000, 'Enter your details');
                             } else {
-                                if (campaignModel().LandingPageVideoLink()) { }
-                                saveCampaign(2);
+                                if (reachedAudience() > 0) {
+                                    saveCampaign(2);
+
+                                } else {
+                                    toastr.error("You have no audience against the specified criteria please broad your audience definition.");
+                                }
+                                
                             }
                           
                         } else {
                             campaignModel().errors.showAllMessages();
+                            toastr.error("Please fill the required feilds to continue.");
                         }
                     },
 
@@ -582,22 +580,26 @@ define("ads/ads.viewModel",
                     },
 
                     deleteLocation = function (item) {
-                   
-                        campaignModel().AdCampaignTargetLocations.remove(item);
-                      
-                        if (campaignModel().AdCampaignTargetLocations() == null || campaignModel().AdCampaignTargetLocations().length == 0) {
-                            isLocationPerClickPriceAdded(false);
-                            pricePerclick(pricePerclick() - UserAndCostDetail().LocationClausePrice);
+                        if (item.CountryID() == UserAndCostDetail().CountryId && item.CityID() == UserAndCostDetail().CityId) {
+                            toastr.error("You cannot remove your home town or country!");
+                        } else {
+                            campaignModel().AdCampaignTargetLocations.remove(item);
+
+                            if (campaignModel().AdCampaignTargetLocations() == null || campaignModel().AdCampaignTargetLocations().length == 0) {
+                                isLocationPerClickPriceAdded(false);
+                                pricePerclick(pricePerclick() - UserAndCostDetail().LocationClausePrice);
+                            }
+                            selectedQuestionCountryList([]);
+                            _.each(campaignModel().AdCampaignTargetLocations(), function (item) {
+                                addCountryToCountryList(item.CountryID(), item.Country());
+                            });
+                            toastr.success("Removed Successfully!");
                         }
-                        selectedQuestionCountryList([]);
-                        _.each(campaignModel().AdCampaignTargetLocations(), function (item) {
-                            addCountryToCountryList(item.CountryID(), item.Country());
-                        });
-                        toastr.success("Removed Successfully!");
+                      
                     },
                     //add location
                     onAddLocation = function (item) {
-                        
+                        debugger;
                         selectedLocation().Radius = (selectedLocationRadius);
                         selectedLocation().IncludeorExclude = (selectedLocationIncludeExclude);
                         campaignModel().AdCampaignTargetLocations.push(new model.AdCampaignTargetLocation.Create({
@@ -612,12 +614,12 @@ define("ads/ads.viewModel",
                             Longitude: selectedLocation().Longitude,
                         }));
                         addCountryToCountryList(selectedLocation().CountryID, selectedLocation().Country);
-                        resetLocations();
-
+                      
                         if (UserAndCostDetail().LocationClausePrice != null && isLocationPerClickPriceAdded() == false) {
                             pricePerclick(pricePerclick() + UserAndCostDetail().LocationClausePrice);
                             isLocationPerClickPriceAdded(true);
                         }
+                        console.log(campaignModel().AdCampaignTargetLocations());
                     },
 
                     resetLocations = function () {
@@ -1177,6 +1179,7 @@ define("ads/ads.viewModel",
                                  selectedQuestionCountryList.push({ id: country, name: name });
                              }
                          }
+                         console.log(selectedQuestionCountryList());
                     },
                     findLocationsInCountry = function (id) {
 

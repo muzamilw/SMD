@@ -74,6 +74,7 @@ define("ads/ads.view",
 
                               viewModel.selectedLocation(obj);
                               viewModel.onAddLocation();
+                              $('#searchCampaignLocations').val("");
                           }
                       });
                    

@@ -175,20 +175,7 @@ define("survey/survey.viewModel",
                         selectedQuestion().reset();
                         selectedQuestion().SurveyQuestionTargetCriteria([]);
                         selectedQuestion().SurveyQuestionTargetLocation([]);
-                        console.log(userBaseData());
-                        if (userBaseData().CountryId != null && userBaseData.CountryId != 0) {
-                            //selectedQuestion().SurveyQuestionTargetLocation.push(new model.SurveyQuestionTargetLocation.Create({
-                            //    CountryId: userBaseData().CountryId,
-                            //    CityId: userBaseData().CityId,
-                            //    Country: userBaseData().Country,
-                            //    City: userBaseData().City,
-                            //    IncludeorExclude: true,
-                            //    Latitude: userBaseData().Latitude,
-                            //    Longitude: userBaseData().Longitude,
-
-                            //}));
-                            //addCountryToCountryList(userBaseData().CountryId, userBaseData().Country);
-                        }
+                      
                         buildParentSQList();
                         getAudienceCount();
                         isEditorVisible(true);
@@ -196,6 +183,19 @@ define("survey/survey.viewModel",
                         view.initializeTypeahead();
                         bindAudienceReachCount();
                         selectedQuestionCountryList([]);
+                        if (userBaseData().CountryId != null) {
+                            selectedQuestion().SurveyQuestionTargetLocation.push(new model.SurveyQuestionTargetLocation.Create({
+                                CountryId: userBaseData().CountryId,
+                                CityId: userBaseData().CityId,
+                                Country: userBaseData().Country,
+                                City: userBaseData().City,
+                                IncludeorExclude: true,
+                                Latitude: userBaseData().Latitude,
+                                Longitude: userBaseData().Longitude,
+
+                            }));
+                            addCountryToCountryList(userBaseData().CountryId, userBaseData().Country);
+                        }
                     },
                     // Close Editor 
                     closeEditDialog = function () {
@@ -599,19 +599,33 @@ define("survey/survey.viewModel",
                    // submit  survey question for approval
                     onSubmitSurveyQuestion = function () {
                         if (selectedQuestion().isValid()) {
+
                             if (ValidateSurvey() == true) {
                                 if (userBaseData().isStripeIntegrated == false) {
                                     stripeChargeCustomer.show(function () {
-                                        userBaseData().isStripeIntegrated = true;
-                                        saveSurveyQuestion(2);
+                                        if (reachedAudience() > 0) {
+                                            userBaseData().isStripeIntegrated = true;
+                                            saveSurveyQuestion(2);
+
+                                        } else {
+                                            toastr.error("You have no audience against the specified criteria please broad your audience definition.");
+                                        }
+                                        
                             }, 2000, 'Enter your details');
                                 } else {
-                                    saveSurveyQuestion(2);
+                                    if (reachedAudience() > 0) {
+                                        saveSurveyQuestion(2);
+
+                                    } else {
+                                        toastr.error("You have no audience against the specified criteria please broad your audience definition.");
+                                    }
+                                   
                                 }
                             }
                            
                         } else {
                             selectedQuestion().errors.showAllMessages();
+                            toastr.error("Please fill the required feilds to continue.");
                         }
                        
                     },
@@ -633,6 +647,7 @@ define("survey/survey.viewModel",
                             }
                         } else {
                             selectedQuestion().errors.showAllMessages();
+                            toastr.error("Please fill the required feilds to continue.");
                         }
                        
                     }
