@@ -158,7 +158,7 @@ define("ads/ads.viewModel",
                     },
 
                     closeNewCampaignDialog = function () {
-                        if (campaignModel().hasChanges()) {
+                        if (campaignModel().hasChanges()  && (campaignModel().Status() == null ||campaignModel().Status() == 1) ) {
                             confirmation.messageText("Do you want to save changes?");
                             confirmation.afterProceed(function () {
                                 saveCampaignData();
