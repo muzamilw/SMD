@@ -385,7 +385,7 @@ ul {
   list-style: none;
 }
 #ui-datepicker-div {
-  z-index: 999999999;
+  z-index: 999999999 !important;
 }
 .lang_newcnt {
   position: relative;
