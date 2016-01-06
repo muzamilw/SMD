@@ -56,6 +56,8 @@ define("ads/ads.viewModel",
                     errorList = ko.observableArray([]),
                       // unique country list used to bind location dropdown
                     selectedQuestionCountryList = ko.observableArray([]),
+                     educations = ko.observableArray([]),
+                      professions = ko.observableArray([]),
                     getCampaignBaseContent = function () {
                             dataservice.getBaseData({
                                 RequestId: 1,
@@ -67,6 +69,15 @@ define("ads/ads.viewModel",
                                         langs.removeAll();
                                         ko.utils.arrayPushAll(langs(), data.Languages);
                                         langs.valueHasMutated();
+
+                                        educations.removeAll();
+                                        ko.utils.arrayPushAll(educations(), data.Educations);
+                                        educations.valueHasMutated();
+                                        
+                                        professions.removeAll();
+                                        ko.utils.arrayPushAll(professions(), data.Professions);
+                                        professions.valueHasMutated();
+
                                         UserAndCostDetail(data.UserAndCostDetails);
                                         if (UserAndCostDetail().GenderClausePrice != null) {
                                             pricePerclick(pricePerclick() + UserAndCostDetail().GenderClausePrice);
@@ -851,6 +862,30 @@ define("ads/ads.viewModel",
                             isEducationPerClickPriceAdded(true);
                         }
                     },
+                    addNewEducationCriteria = function () {
+                        if ($("#ddpEducation").val() != "") {
+                            
+                            var matchedEducationRec = ko.utils.arrayFirst(educations(), function (arrayitem) {
+
+                                return arrayitem.EducationId == $("#ddpEducation").val();
+                            });
+                            if (matchedEducationRec != null) {
+                                addEducation(matchedEducationRec);
+                            }
+                        }
+                    },
+                    addNewProfessionCriteria = function () {
+                        if ($("#ddpIndustory").val() != "") {
+
+                            var matchedprofessionRec = ko.utils.arrayFirst(professions(), function (arrayitem) {
+
+                                return arrayitem.IndustryId == $("#ddpIndustory").val();
+                            });
+                            if (matchedprofessionRec != null) {
+                                addIndustry(matchedprofessionRec);
+                            }
+                        }
+                    },
                     onRemoveEducation = function (item) {
                      // Ask for confirmation
 
@@ -1182,7 +1217,11 @@ define("ads/ads.viewModel",
                         addCountryToCountryList: addCountryToCountryList,
                         findLocationsInCountry: findLocationsInCountry,
                         selectedQuestionCountryList: selectedQuestionCountryList,
-                        changeStatus: changeStatus
+                        changeStatus: changeStatus,
+                        educations: educations,
+                        professions: professions,
+                        addNewEducationCriteria: addNewEducationCriteria,
+                        addNewProfessionCriteria: addNewProfessionCriteria
                     };
             })()
         };

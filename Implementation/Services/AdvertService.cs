@@ -173,7 +173,9 @@ namespace SMD.Implementation.Services
             return new AdCampaignBaseResponse
             {
                 Languages = _languageRepository.GetAllLanguages(),
-                UserAndCostDetails = objUC
+                Education = _educationRepository.GetAll(),
+                UserAndCostDetails = objUC,
+                Industry = _industryRepository.GetAll()
             };
         }
 

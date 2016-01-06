@@ -385,7 +385,9 @@ namespace SMD.MIS.ModelMappers
             return new AdCampaignBaseResponse
             {
                 Languages = source.Languages.Select(lang => lang.CreateFrom()),
-                UserAndCostDetails = source.UserAndCostDetails.CreateFrom()
+                UserAndCostDetails = source.UserAndCostDetails.CreateFrom(),
+                Educations = source.Education.Select(edu => edu.CreateFrom()),
+                Professions = source.Industry.Select(ind => ind.CreateFrom())
             };
         }
     }

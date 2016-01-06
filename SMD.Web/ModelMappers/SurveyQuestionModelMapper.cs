@@ -56,7 +56,9 @@ namespace SMD.MIS.ModelMappers
                 CountryDropdowns =source.Countries.Select(country => country.CreateFrom()),
                 LanguageDropdowns = source.Languages.Select(lang => lang.CreateFrom()) ,
                 objBaseData = source.objBaseData.CreateFrom(),
-                setupPrice = source.setupPrice
+                setupPrice = source.setupPrice,
+                Educations = source.Education.Select(edu => edu.CreateFrom()),
+                Professions = source.Industry.Select(ind => ind.CreateFrom())
             };
         }
 

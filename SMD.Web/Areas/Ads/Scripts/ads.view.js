@@ -180,6 +180,7 @@ define("ads/ads.view",
                                   displayKey: 'Title',
                                   source: edu_array.ttAdapter()
                               }).bind('typeahead:selected', function (obj, selected) {
+                                  debugger;
                                   if (selected) {
                                       viewModel.addEducation(selected);
                                   }

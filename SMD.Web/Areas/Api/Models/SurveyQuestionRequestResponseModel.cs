@@ -1,4 +1,5 @@
 ﻿
+using SMD.Models.DomainModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,14 @@ namespace SMD.MIS.Areas.Api.Models
         public int TotalCount { get; set; }
         public UserBaseData objBaseData { get; set; }
         public Nullable<double> setupPrice { get; set; }
+        /// <summary>
+        /// Industory
+        /// </summary>
+        public IEnumerable<Industry> Professions { get; set; }
+        /// <summary>
+        /// Education
+        /// </summary>
+        public IEnumerable<Education> Educations { get; set; }
     }
     public class SurveyQuestionEditorRequestResponseModel
     {

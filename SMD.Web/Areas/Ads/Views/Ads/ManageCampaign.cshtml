@@ -365,7 +365,8 @@
 
                                             </div>
                                             <div class="count_token_opt_cnt">
-                                                <input type="text" data-autocomplete="off" class="" id="searchEducations" placeholder="Enter an Education" />
+                                                <select id="ddpEducation" class="form-control" data-bind="options: $root.educations, optionsText: 'Title', optionsValue: 'EducationId',optionsCaption: 'Choose...', event: { change: addNewEducationCriteria }"></select>
+                                                @*<input type="text" data-autocomplete="off" class="" id="searchEducations" placeholder="Enter an Education" />*@
                                             </div>
 
                                             <div class="clearfix">
@@ -405,7 +406,8 @@
 
                                             </div>
                                             <div class="count_token_opt_cnt">
-                                                <input type="text" data-autocomplete="off" class="" id="searchIndustries" placeholder="Enter an industry" />
+                                                <select id="ddpIndustory" class="form-control" data-bind="options: $root.professions, optionsText: 'IndustryName', optionsValue: 'IndustryId',optionsCaption: 'Choose...', event: { change: addNewProfessionCriteria }"></select>
+                                                @*<input type="text" data-autocomplete="off" class="" id="searchIndustries" placeholder="Enter an industry" />*@
                                             </div>
 
                                             <div class="clearfix">

@@ -40,6 +40,8 @@ namespace SMD.Implementation.Services
         private readonly IInvoiceDetailRepository invoiceDetailRepository;
         private readonly IStripeService stripeService;
         private readonly WebApiUserService webApiUserService;
+        private readonly IEducationRepository _educationRepository;
+        private readonly IIndustryRepository _industryRepository;
         private ApplicationUserManager UserManager
         {
             get { return HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
@@ -126,7 +128,7 @@ namespace SMD.Implementation.Services
         /// <summary>
         ///  Constructor
         /// </summary>
-        public SurveyQuestionService(ISurveyQuestionRepository _surveyQuestionRepository, ICountryRepository _countryRepository, ILanguageRepository _languageRepository, IEmailManagerService emailManagerService, ISurveyQuestionTargetCriteriaRepository _surveyQuestionTargtCriteriaRepository, ISurveyQuestionTargetLocationRepository _surveyQuestionTargetLocationRepository, IProductRepository productRepository, ITaxRepository taxRepository, IInvoiceRepository invoiceRepository, IInvoiceDetailRepository invoiceDetailRepository, IStripeService stripeService, WebApiUserService webApiUserService)
+        public SurveyQuestionService(ISurveyQuestionRepository _surveyQuestionRepository, ICountryRepository _countryRepository, ILanguageRepository _languageRepository, IEmailManagerService emailManagerService, ISurveyQuestionTargetCriteriaRepository _surveyQuestionTargtCriteriaRepository, ISurveyQuestionTargetLocationRepository _surveyQuestionTargetLocationRepository, IProductRepository productRepository, ITaxRepository taxRepository, IInvoiceRepository invoiceRepository, IInvoiceDetailRepository invoiceDetailRepository, IStripeService stripeService, WebApiUserService webApiUserService, IEducationRepository educationRepository, IIndustryRepository industryRepository)
         {
             this.surveyQuestionRepository = _surveyQuestionRepository;
             this.languageRepository = _languageRepository;
@@ -140,6 +142,8 @@ namespace SMD.Implementation.Services
             this.stripeService = stripeService;
             this.webApiUserService = webApiUserService;
             this.surveyQuestionTargtCriteriaRepository = _surveyQuestionTargtCriteriaRepository;
+            this._educationRepository = educationRepository;
+            this._industryRepository = industryRepository;
         }
 
         #endregion
@@ -175,7 +179,9 @@ namespace SMD.Implementation.Services
                 Languages = languageRepository.GetAllLanguages(),
                 TotalCount = rowCount,
                 setupPrice = setupPrice,
-                objBaseData = userBaseData
+                objBaseData = userBaseData,
+                Education = _educationRepository.GetAll(),
+                Industry = _industryRepository.GetAll()
             };
         }
 

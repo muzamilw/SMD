@@ -55,6 +55,8 @@ define("survey/survey.viewModel",
                     // unique country list used to bind location dropdown
                     selectedQuestionCountryList = ko.observableArray([]),
                     errorList = ko.observableArray([]),
+                      educations = ko.observableArray([]),
+                      professions = ko.observableArray([]),
                     //Get Questions
                     getQuestions = function () {   
                         dataservice.searchSurveyQuestions(
@@ -96,6 +98,15 @@ define("survey/survey.viewModel",
                                     populateSurveyQuestions(data);
                                     userBaseData(data.objBaseData);
                                     setupPrice(data.setupPrice);
+
+                                    educations.removeAll();
+                                    ko.utils.arrayPushAll(educations(), data.Educations);
+                                    educations.valueHasMutated();
+
+                                    professions.removeAll();
+                                    ko.utils.arrayPushAll(professions(), data.Professions);
+                                    professions.valueHasMutated();
+
                                 },
                                 error: function () {
                                     toastr.error("Failed to load base data!");
@@ -949,6 +960,30 @@ define("survey/survey.viewModel",
 
                          enableControls()
                      },
+                    addNewEducationCriteria = function () {
+                        if ($("#ddpEducation").val() != "") {
+
+                            var matchedEducationRec = ko.utils.arrayFirst(educations(), function (arrayitem) {
+
+                                return arrayitem.EducationId == $("#ddpEducation").val();
+                            });
+                            if (matchedEducationRec != null) {
+                                addEducation(matchedEducationRec);
+                            }
+                        }
+                    },
+                        addNewProfessionCriteria = function () {
+                            if ($("#ddpIndustory").val() != "") {
+
+                                var matchedprofessionRec = ko.utils.arrayFirst(professions(), function (arrayitem) {
+
+                                    return arrayitem.IndustryId == $("#ddpIndustory").val();
+                                });
+                                if (matchedprofessionRec != null) {
+                                    addIndustry(matchedprofessionRec);
+                                }
+                            }
+                        },
                     // Initialize the view model
                     initialize = function (specifiedView) {
                         view = specifiedView;
@@ -1033,7 +1068,10 @@ define("survey/survey.viewModel",
                     findLocationsInCountry: findLocationsInCountry,
                     errorList: errorList,
                     changeStatus: changeStatus,
-                   // parentSurveyList: parentSurveyList
+                    educations: educations,
+                    professions: professions,
+                    addNewEducationCriteria: addNewEducationCriteria,
+                    addNewProfessionCriteria: addNewProfessionCriteria
                 };
             })()
         };
