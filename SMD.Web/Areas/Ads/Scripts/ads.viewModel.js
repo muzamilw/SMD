@@ -66,24 +66,34 @@ define("ads/ads.viewModel",
                                 success: function (data) {
                                    
                                     if (data != null) {
-                                        langs.removeAll();
-                                        ko.utils.arrayPushAll(langs(), data.Languages);
-                                        langs.valueHasMutated();
-
-                                        educations.removeAll();
-                                        ko.utils.arrayPushAll(educations(), data.Educations);
-                                        educations.valueHasMutated();
-                                        
-                                        professions.removeAll();
-                                        ko.utils.arrayPushAll(professions(), data.Professions);
-                                        professions.valueHasMutated();
-
+                                       
                                         UserAndCostDetail(data.UserAndCostDetails);
                                         if (UserAndCostDetail().GenderClausePrice != null) {
                                             pricePerclick(pricePerclick() + UserAndCostDetail().GenderClausePrice);
                                         }
                                         if (UserAndCostDetail().AgeClausePrice != null) {
                                             pricePerclick(pricePerclick() + UserAndCostDetail().AgeClausePrice);
+                                        }
+
+                                        console.log(data.UserAndCostDetails);
+
+                                        if (data.Languages != null) {
+                                            langs.removeAll();
+                                            ko.utils.arrayPushAll(langs(), data.Languages);
+                                            langs.valueHasMutated();
+
+                                        }
+
+                                        if (data.Educations != null) {
+                                            educations.removeAll();
+                                            ko.utils.arrayPushAll(educations(), data.Educations);
+                                            educations.valueHasMutated();
+                                        }
+
+                                        if (data.Professions != null) {
+                                            professions.removeAll();
+                                            ko.utils.arrayPushAll(professions(), data.Professions);
+                                            professions.valueHasMutated();
                                         }
                                     }
 
@@ -92,7 +102,35 @@ define("ads/ads.viewModel",
 
                                 }
                             });
-                     },
+                    },
+                    SetDefaultUserLocation = function (IsCity, IsCountry, userData) {
+                        debugger;
+                        var CityID = null, CountryID = null, Radius = 0, Country = '', City = '', latitude = '', longitude = '';
+                        if (IsCountry) {
+                            Country = userData.Country;
+                            CountryID = userData.CountryId;
+                        }
+                        if (IsCity) {
+                            City = userData.City;
+                            CountryID = userData.CountryId;
+                            CityID = userData.CityId;
+                            latitude = userData.GeoLat;
+                            longitude = userData.GeoLong;
+                            Country = userData.Country;
+                        }
+                        var obj = {
+                            CountryID: CountryID,
+                            CityID: CityID,
+                            Radius: Radius,
+                            Country: Country,
+                            City: City,
+                            Latitude: latitude,
+                            Longitude: longitude
+                        }
+
+                        selectedLocation(obj);
+                        onAddLocation();
+                    },
                     getAdCampaignGridContent = function () {
                         dataservice.getCampaignData({
                             CampaignId: 0,
@@ -150,7 +188,11 @@ define("ads/ads.viewModel",
                         isEditorVisible(true);
                         canSubmitForApproval(true);
                         campaignModel(new model.Campaign());
-                      
+                       
+                        if (UserAndCostDetail().CountryId != null) {
+                            SetDefaultUserLocation(false, true, UserAndCostDetail());
+                        }
+
                         selectedCriteria();
                        
                         campaignModel().Gender('2');
@@ -166,6 +208,7 @@ define("ads/ads.viewModel",
                         campaignModel().LanguageId(41);
                         bindAudienceReachCount();
                         selectedQuestionCountryList([]);
+                       
                     },
 
                     closeNewCampaignDialog = function () {

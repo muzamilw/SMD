@@ -147,6 +147,8 @@ namespace SMD.Implementation.Services
                 objUC.CountryId = loggedInUser.CountryId;
                 objUC.CityId = loggedInUser.CityId;
                 objUC.CityName = loggedInUser.City != null ? loggedInUser.City.CityName : "";
+                objUC.GeoLat = loggedInUser.City != null ? loggedInUser.City.GeoLat : "";
+                objUC.GeoLong = loggedInUser.City != null ? loggedInUser.City.GeoLong : "";
 
 
                 objUC.EducationId = loggedInUser.EducationId;

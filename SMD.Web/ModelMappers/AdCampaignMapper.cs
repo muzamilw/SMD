@@ -90,12 +90,12 @@ namespace SMD.MIS.ModelMappers
 
                 AdCampaignTargetLocations =
                     source.AdCampaignTargetLocations != null ? source.AdCampaignTargetLocations.Select(x => x.CreateFrom()).ToList() : null,
-                    Voucher1Description = source.Voucher1Description,
-                    Voucher1Heading = source.Voucher1Heading,
-                    Voucher1Value = source.Voucher1Value,
-                    Voucher2Description = source.Voucher2Description,
-                    Voucher2Heading = source.Voucher2Heading,
-                    Voucher2Value = source.Voucher2Value
+                Voucher1Description = source.Voucher1Description,
+                Voucher1Heading = source.Voucher1Heading,
+                Voucher1Value = source.Voucher1Value,
+                Voucher2Description = source.Voucher2Description,
+                Voucher2Heading = source.Voucher2Heading,
+                Voucher2Value = source.Voucher2Value
 
             };
 
@@ -371,7 +371,9 @@ namespace SMD.MIS.ModelMappers
                 Education = source.EducationTitle,
                 Industry = source.IndustryName,
                 Language = source.LanguageName,
-                isStripeIntegrated = source.isStripeIntegrated
+                isStripeIntegrated = source.isStripeIntegrated,
+                GeoLat = source.GeoLat,
+                GeoLong = source.GeoLong
             };
 
 
