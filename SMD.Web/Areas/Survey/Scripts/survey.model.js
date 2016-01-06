@@ -1,7 +1,9 @@
 ﻿define(["ko", "underscore", "underscore-ko"], function (ko) {
 
     var // ReSharper disable InconsistentNaming
-        Survey = function (SQID, LanguageID, CountryID, UserID, Status, StatusValue, Question, Gender, Language, Country, Description, DisplayQuestion, StartDate, EndDate, ModifiedDate, LeftPicturePath, RightPicturePath, ProjectedReach, AgeRangeStart, AgeRangeEnd, LeftPictureBytes, RightPictureBytes) {
+        Survey = function (SQID, LanguageID, CountryID, UserID, Status, StatusValue, Question, Gender, Language, Country,
+            Description, DisplayQuestion, StartDate, EndDate, ModifiedDate, LeftPicturePath, RightPicturePath, ProjectedReach, AgeRangeStart,
+            AgeRangeEnd, LeftPictureBytes, RightPictureBytes, ParentSurveyId, Priority) {
            
             var
                 //type and userID will be set on server sside
@@ -57,6 +59,8 @@
                 SurveyQuestionTargetLocation = ko.observableArray([]),
                 LeftPictureBytes = ko.observable(LeftPictureBytes),
                 RightPictureBytes = ko.observable(RightPictureBytes),
+                ParentSurveyId = ko.observable(ParentSurveyId),
+                Priority = ko.observable(Priority),
                 errors = ko.validation.group({
                     Question: Question,
                     DisplayQuestion: DisplayQuestion,
@@ -87,7 +91,9 @@
                     SurveyQuestionTargetCriteria: SurveyQuestionTargetCriteria,
                     SurveyQuestionTargetLocation: SurveyQuestionTargetLocation,
                     LeftPictureBytes: LeftPictureBytes,
-                    RightPictureBytes: RightPictureBytes
+                    RightPictureBytes: RightPictureBytes,
+                    ParentSurveyId: ParentSurveyId,
+                    Priority: Priority
                 }),
                 // Has Changes
                 hasChanges = ko.computed(function () {
@@ -136,7 +142,9 @@
                         SurveyQuestionTargetCriterias: targetCriteria,
                         LeftPictureBytes:LeftPictureBytes(),
                         RightPictureBytes: RightPictureBytes(),
-                        SurveyQuestionTargetLocations: targetLocation
+                        SurveyQuestionTargetLocations: targetLocation,
+                        ParentSurveyId: ParentSurveyId(),
+                        Priority: Priority()
                     };
                 };
             return {
@@ -174,7 +182,9 @@
                 LeftPictureBytes: LeftPictureBytes,
                 RightPictureBytes: RightPictureBytes,
                 dirtyFlag: dirtyFlag,
-                convertToServerData: convertToServerData
+                convertToServerData: convertToServerData,
+                ParentSurveyId: ParentSurveyId,
+                Priority: Priority
             };
         };
 
@@ -285,7 +295,10 @@
     };
     // Factory Method
     Survey.Create = function (source) {
-        var survey = new Survey(source.SqId, source.LanguageId, source.CountryId, source.UserId, source.Status, source.StatusValue, source.Question, source.Gender + "" , source.Language, source.Country, source.Description, source.DisplayQuestion, source.StartDate, source.EndDate, source.ModifiedDate, source.LeftPicturePath, source.RightPicturePath, source.ProjectedReach, source.AgeRangeStart, source.AgeRangeEnd, source.LeftPictureBytes, source.RightPictureBytes);
+        var survey = new Survey(source.SqId, source.LanguageId, source.CountryId, source.UserId, source.Status, source.StatusValue, source.Question,
+            source.Gender + "", source.Language, source.Country, source.Description, source.DisplayQuestion, source.StartDate, source.EndDate, source.ModifiedDate,
+            source.LeftPicturePath, source.RightPicturePath, source.ProjectedReach, source.AgeRangeStart, source.AgeRangeEnd, source.LeftPictureBytes,
+            source.RightPictureBytes, source.ParentSurveyId, source.Priority);
         _.each(source.SurveyQuestionTargetCriterias, function (item) {
             survey.SurveyQuestionTargetCriteria.push(SurveyQuestionTargetCriteria.Create(item));
         });

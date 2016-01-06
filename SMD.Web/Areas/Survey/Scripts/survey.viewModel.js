@@ -178,7 +178,7 @@ define("survey/survey.viewModel",
                             //}));
                             //addCountryToCountryList(userBaseData().CountryId, userBaseData().Country);
                         }
-                       
+                        buildParentSQList();
                         getAudienceCount();
                         isEditorVisible(true);
                         canSubmitForApproval(true);
@@ -188,12 +188,13 @@ define("survey/survey.viewModel",
                     },
                     // Close Editor 
                     closeEditDialog = function () {
-                        isEditorVisible(false);
+                        isEditorVisible(false); enableControls();
                     },
                     // On editing of existing PQ
                     onEditSurvey = function (item) {
                         titleText("Edit survey");
-                        if (item.Status() == 1 || item.Status() == null) {
+                        //   if (item.Status() == 1 || item.Status() == null) {
+                        
                             canSubmitForApproval(true);
                             //call function to edit survey
                             dataservice.getSurveyQuestion(
@@ -258,12 +259,16 @@ define("survey/survey.viewModel",
                                        bindAudienceReachCount();
                                        buildMap();
                                        isEditorVisible(true);
+                                       if (item.Status() == 1 != 1 && item.Status() != null) {
+                                           disableControls(item.Status());
+                                       }
+                                     //  getParentSurveyList();
                                    },
                                    error: function () {
                                        toastr.error("Failed to load  question!");
                                    }
                                });
-                        }
+                       // }
                     },
                     // store left side ans image
                     storeLeftImageCallback = function (file, data) {
@@ -570,7 +575,6 @@ define("survey/survey.viewModel",
                     }),
                     // save survey question 
                     onSaveSurveyQuestion = function () {
-                        // now saving survey as draft but check stripe intergration and save it for submit for approval
                         if (selectedQuestion().isValid()) {
                             if (ValidateSurvey() == true) {
                                 saveSurveyQuestion(1);
@@ -601,7 +605,6 @@ define("survey/survey.viewModel",
                        
                     },
                     saveSurveyQuestion = function (mode) {
-                        debugger;
                         if (selectedQuestion().isValid()) {
                             if (ValidateSurvey() == true) {
                                 selectedQuestion().Status(mode);
@@ -882,7 +885,30 @@ define("survey/survey.viewModel",
                             }
                         });
                     },
+                    buildParentSQList = function () {
+                        if (surveyQuestionList().length == 0) {
+                            dataservice.getBaseData({
+                                RequestId: 4,
+                                QuestionId: 0,
+                                SQID: selectedQuestion().SQID()
+                            }, {
+                                success: function (data) {
+                                    if (data != null) {
+                                        surveyQuestionList([]);
+                                        ko.utils.arrayPushAll(surveyQuestionList(), data.SurveyQuestions);
+                                        surveyQuestionList.valueHasMutated();
+                                    }
+
+                                },
+                                error: function (response) {
+
+                                }
+                            });
+                        }
+                    },
                     ValidateSurvey = function () {
+                        if (selectedQuestion().SQID() > 0)
+                            return true;
                         errorList.removeAll();
                         if (selectedQuestion().LeftPictureBytes() == "" || selectedQuestion().LeftPictureBytes() == null) {
                             errorList.push({ name: "Please select left survey answer.", element: "" });
@@ -896,8 +922,33 @@ define("survey/survey.viewModel",
                         } else {
                             return false;
                         }
-                    }
-                
+                    },
+                    disableControls = function(status)
+                    {
+                        $("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
+                        $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,#btnPauseCampaign,.lang_delSurvey,.table-link").css("display", "none");
+                        $("#saveBtn").css("display", "none");
+                        $("#closeBtn").removeAttr('disabled');
+                        if (status == 3) {
+                            $("#btnPauseCampaign").css("display", "inline-block");
+                            $("#btnPauseCampaign").removeAttr('disabled');
+                        } else if (status == 4) {
+                            $("#btnResumeCampagin").css("display", "inline-block");
+                            $("#btnResumeCampagin").removeAttr('disabled');
+                        }
+                    },
+                    enableControls = function(mode)
+                    {
+                        $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign").css("display", "none");
+                        $("#btnSubmitForApproval,#saveBtn,.lang_delSurvey,.table-link").css("display", "inline-block");
+                        $("input,button,textarea,a,select,#closeBtn,#btnPauseCampaign").removeAttr('disabled');
+                    },
+                     changeStatus = function (status) {
+                         if (selectedQuestion() != undefined)
+                             saveSurveyQuestion(status);
+
+                         enableControls()
+                     },
                     // Initialize the view model
                     initialize = function (specifiedView) {
                         view = specifiedView;
@@ -980,7 +1031,9 @@ define("survey/survey.viewModel",
                     selectedQuestionCountryList: selectedQuestionCountryList,
                     addCountryToCountryList: addCountryToCountryList,
                     findLocationsInCountry: findLocationsInCountry,
-                    errorList: errorList
+                    errorList: errorList,
+                    changeStatus: changeStatus,
+                   // parentSurveyList: parentSurveyList
                 };
             })()
         };

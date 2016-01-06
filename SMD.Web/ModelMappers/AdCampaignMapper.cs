@@ -90,6 +90,12 @@ namespace SMD.MIS.ModelMappers
 
                 AdCampaignTargetLocations =
                     source.AdCampaignTargetLocations != null ? source.AdCampaignTargetLocations.Select(x => x.CreateFrom()).ToList() : null,
+                    Voucher1Description = source.Voucher1Description,
+                    Voucher1Heading = source.Voucher1Heading,
+                    Voucher1Value = source.Voucher1Value,
+                    Voucher2Description = source.Voucher2Description,
+                    Voucher2Heading = source.Voucher2Heading,
+                    Voucher2Value = source.Voucher2Value
 
             };
 

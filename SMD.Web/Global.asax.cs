@@ -12,12 +12,20 @@ using Microsoft.Practices.EnterpriseLibrary.Common.Configuration;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 using Microsoft.Practices.EnterpriseLibrary.Logging;
 using Microsoft.Practices.Unity;
+using SMD.Implementation.Services;
 using SMD.MIS.App_Start;
 using SMD.Models.LoggerModels;
 using SMD.WebBase.UnityConfiguration;
 using UnityDependencyResolver = SMD.WebBase.UnityConfiguration.UnityDependencyResolver;
 using System.Web;
 using SMD.WebBase.WebApi;
+using Microsoft.AspNet.Identity.Owin;
+using SMD.ExceptionHandling;
+using SMD.Implementation.Identity;
+using SMD.Interfaces.Services;
+using SMD.Models.IdentityModels;
+using FluentScheduler; 
+
 
 
 namespace SMD.MIS
@@ -90,6 +98,7 @@ namespace SMD.MIS
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters, container);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            TaskManager.Initialize(new DebitScheduler()); 
 
             // Set MVC resolver
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));

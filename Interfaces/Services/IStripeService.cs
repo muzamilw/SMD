@@ -12,7 +12,7 @@ namespace SMD.Interfaces.Services
         /// <summary>
         /// Make Payment with Stripe 
         /// </summary>
-        string ChargeCustomer(int? amount, string customerId);
+        string ChargeCustomer(int? amount, string customerStripeId);
 
         /// <summary>
         /// Create Charge With Token

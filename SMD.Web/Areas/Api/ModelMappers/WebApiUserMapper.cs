@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web;
 using SMD.MIS.Areas.Api.Models;
 using SMD.Models.IdentityModels;
 using LoginResponse = SMD.Models.ResponseModels.LoginResponse;
@@ -24,7 +25,9 @@ namespace SMD.MIS.Areas.Api.ModelMappers
                        JobTitle = source.Jobtitle,
                        UserTimeZone = source.UserTimeZone,
                        UserId = source.Id,
-                       Gender = source.Gender
+                       Gender = source.Gender,
+                       ImageUrl = !string.IsNullOrEmpty(source.ProfileImage) ? HttpContext.Current.Request.Url.Scheme + "://" + 
+                       HttpContext.Current.Request.Url.Host + "/" + source.ProfileImage + "?" + DateTime.Now : string.Empty
                    };
         }
 

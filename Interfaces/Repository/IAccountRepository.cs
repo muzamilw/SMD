@@ -16,5 +16,10 @@ namespace SMD.Interfaces.Repository
         /// Get Account By name
         /// </summary>
         Account GetByName(string name);
+
+        /// <summary>
+        /// Get Account By ID
+        /// </summary>
+        Account GetById(long accountId);
     }
 }

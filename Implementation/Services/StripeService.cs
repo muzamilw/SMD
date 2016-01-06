@@ -58,11 +58,11 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Make Payment with Stripe 
         /// </summary>
-        public string ChargeCustomer(int? amount, string customerId)
+        public string ChargeCustomer(int? amount, string customerStripeId)
         {
             // Verify If Credit Card is not expired
             var customerService = new StripeCustomerService();
-            var customer = customerService.Get(customerId);
+            var customer = customerService.Get(customerStripeId);
             if (customer == null)
             {
                 throw new SMDException("Customrt Not Found!");
@@ -81,7 +81,7 @@ namespace SMD.Implementation.Services
 
             var stripeChargeCreateOptions = new StripeChargeCreateOptions
             {
-                CustomerId = customerId,
+                CustomerId = customerStripeId,
                 Amount = amount,
                 Currency = "usd",
                 Capture = true
