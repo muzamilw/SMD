@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web;
+using System.Web.Configuration;
 using PayPal.AdaptivePayments.Model;
 using PayPal.Manager;
 using SMD.ExceptionHandling;
@@ -23,17 +25,12 @@ namespace SMD.Implementation.Services
             // The code for the language in which errors are returned
             var envelopeRequest = new RequestEnvelope {errorLanguage = "en_US"};
 
-            var listReceiver = new List<Receiver>();
+            var listReceiver = request.RecieverEmails.Select(recieverEmail => new Receiver(request.Amount) {email = recieverEmail}).ToList();
 
-            // Amount to be credited to the receiver's account
-            var receive = new Receiver(request.Amount) {email = request.RecieverEmail};
-
-            // A receiver's email address
-            listReceiver.Add(receive);
             var listOfReceivers = new ReceiverList(listReceiver);
 
-            string baseUrl = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority +
-                             "/Api/";
+            var url = WebConfigurationManager.AppSettings["SiteURL"];
+            string baseUrl = url + "/Api/";
 
             string returnUrl = baseUrl + "AdaptivePaypalPayment";
             string cancelUrl = baseUrl + "AdaptivePaypalPayment?cancel=true";

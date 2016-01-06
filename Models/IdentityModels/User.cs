@@ -64,6 +64,14 @@ namespace SMD.Models.IdentityModels
         public string AdvertisingContact { get; set; }
         public string AdvertisingContactPhoneNumber { get; set; }
         public string AdvertisingContactEmail { get; set; }
+
+        public string PaypalCustomerId { get; set; }
+        public string GoogleWalletCustomerId { get; set; }
+        public int? PreferredPayoutAccount { get; set; }
+        
+
+
+
         public virtual Industry Industry { get; set; }
         public virtual Language Language { get; set; }
         public virtual ICollection<UserLogin> UserLogins { get; set; }

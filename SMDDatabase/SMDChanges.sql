@@ -1948,3 +1948,16 @@ COMMIT
 
  
  -- ============================= updated on smd live server 201611 ============================= Jan-05_2016
+
+ -- 06-Jan-16  by Baqer STARTS
+
+ alter table aspnetusers
+add PaypalCustomerId nvarchar (250) null
+
+alter table aspnetusers
+add GoogleWalletCustomerId nvarchar (250) null
+
+alter table aspnetusers
+add PreferredPayoutAccount int null
+
+-- 06-Jan-16  by Baqer ENDS

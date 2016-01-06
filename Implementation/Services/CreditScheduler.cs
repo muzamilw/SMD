@@ -1,29 +1,32 @@
 ﻿using System.Linq;
 using FluentScheduler;
 using Microsoft.Practices.Unity;
+using SMD.ExceptionHandling;
 using SMD.ExceptionHandling.Logger;
 using SMD.Implementation.Identity;
 using SMD.Interfaces.Logger;
 using SMD.Interfaces.Services;
+using SMD.Models.RequestModels;
 using SMD.Repository.BaseRepository;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Transactions;
 using System.Web.Http.Filters;
+using System.Web.Configuration;
 
 namespace SMD.Implementation.Services
 {
     /// <summary>
-    /// Debit Scheduler BackGround Service 
+    /// Credit Scheduler 
     /// </summary>
-    public class DebitScheduler 
+    public class CreditScheduler
     {
         #region Private
         // Properties 
 
         [Dependency]
-        private static IStripeService StripeService { get; set; }
+        private static IPaypalService PaypalService { get; set; }
 
         private static ISMDLogger smdLogger;
         /// <summary>
@@ -31,7 +34,7 @@ namespace SMD.Implementation.Services
         /// </summary>
         private static ISMDLogger SmdLogger
         {
-            
+
             get
             {
                 if (smdLogger != null) return smdLogger;
@@ -55,7 +58,7 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Constructor
         /// </summary>
-        public DebitScheduler()
+        public CreditScheduler()
         {
            //todo 
         }
@@ -65,24 +68,27 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Scheduler Initializer
         /// </summary>
-        public static void SetDebitScheduler(Registry registry )
+        public static void SetDebitScheduler(Registry registry)
         {
-            // Registration of Debit Process Scheduler Run after every 7 days 
-            registry.Schedule(PerformDebit).ToRunEvery(7).Days().At(23, 55);
+            // Registration of Credit Process Scheduler Run after every 7 days 
+            registry.Schedule(PerformCredit).ToRunNow();
         }
 
         /// <summary>
-        /// Perform Debit work after scheduled time | 7 Days
+        /// Perform Credit work after scheduled time | 7 Days
         /// </summary>
-        private static void PerformDebit()
+        private static void PerformCredit()
         {
+
             // Initialize Service
-            StripeService = UnityConfig.UnityContainer.Resolve<IStripeService>();
+            PaypalService = UnityConfig.UnityContainer.Resolve<IPaypalService>();
+           
             // Using Base DB Context
             using (var dbContext = new BaseDbContext())
             {
-                // Get UnProcessed Debit Trasactions
-                var unProcessedTrasactions = dbContext.Transactions.Where(trans => trans.DebitAmount != null && trans.CreditAmount == null
+                // Get UnProcessed Credit Trasactions
+                var unProcessedTrasactions = dbContext.Transactions.
+                    Where(trans => trans.DebitAmount == null && trans.CreditAmount != null
                 && (trans.isProcessed == null || trans.isProcessed == false)).ToList();
 
                 foreach (var transaction in unProcessedTrasactions)
@@ -91,18 +97,35 @@ namespace SMD.Implementation.Services
                     {
                         // Get User from which credit to debit 
                         var user = dbContext.Users.Find(transaction.Account.UserId);
+
+                        // User's Prefered Account
+                        var preferedAccount = user.PreferredPayoutAccount == 1
+                            ? user.PaypalCustomerId
+                            : user.GoogleWalletCustomerId;
+
+                        var smdUser = dbContext.Users.FirstOrDefault(obj => obj.Email == "MuzzammilShb@mpc.com");
+                        if (smdUser == null)
+                        {
+                            throw new Exception("SMD User does not exist!");
+                        }
+
                         // Secure Transation
                         using (var tran = new TransactionScope())
                         {
                             try
                             {
-                                // Stripe + Invoice Work 
-                                string response = StripeService.ChargeCustomer((int?)transaction.DebitAmount, user.StripeCustomerId);
-                                if (response != "failed")
+                                // PayPal Request Model 
+                                var requestModel = new MakePaypalPaymentRequest()
                                 {
-                                    // Success
-                                    transaction.isProcessed = true;
-                                }
+                                    Amount = (int?) transaction.CreditAmount,
+                                    RecieverEmails = new List<string> { preferedAccount },
+                                    SenderEmail = smdUser.PaypalCustomerId
+                                };
+
+                                // Stripe + Invoice Work 
+                                PaypalService.MakeAdaptiveImplicitPayment(requestModel);
+
+                                transaction.isProcessed = true;
                                 // Indicates we are happy
                                 tran.Complete();
                             }
