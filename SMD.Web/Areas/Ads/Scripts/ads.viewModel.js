@@ -158,28 +158,36 @@ define("ads/ads.viewModel",
                     },
 
                     closeNewCampaignDialog = function () {
-                        isEditorVisible(false);
+                        if (campaignModel().hasChanges()) {
+                            confirmation.messageText("Do you want to save changes?");
+                            confirmation.afterProceed(function () {
+                                saveCampaignData();
+                                isEditorVisible(false);
 
-                        $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign").css("display", "none");
-                        $("#btnSubmitForApproval,#saveBtn,.table-link").css("display", "inline-block");
-                        $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign").removeAttr('disabled');
+                                $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign").css("display", "none");
+                                $("#btnSubmitForApproval,#saveBtn,.table-link").css("display", "inline-block");
+                                $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign").removeAttr('disabled');
+                            });
+                            confirmation.afterCancel(function () {
+
+                            });
+                            confirmation.show();
+                            return;
+                        } else {
+                            isEditorVisible(false);
+
+                            $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign").css("display", "none");
+                            $("#btnSubmitForApproval,#saveBtn,.table-link").css("display", "inline-block");
+                            $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign").removeAttr('disabled');
+                        }
                     },
 
                     saveCampaignData = function () {
                        
                         if (campaignModel().isValid()) {
-                            //if (campaignModel().Type() == "2") {
-                            //    var valuetovalidate = campaignModel().LandingPageVideoLink();
-                            //    var regex = /^(?:(?:https?|ftp):\/\/)(?:\S+(?::\S*)?@)?(?:(?!10(?:\.\d{1,3}){3})(?!127(?:\.\d{1,3}){3})(?!169\.254(?:\.\d{1,3}){2})(?!192\.168(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/[^\s]*)?$/i;
-                            //    if (regex.test(valuetovalidate) == false) {
-                            //        errorList.removeAll();
-                            //        errorList.push({ name: "Please enter valid web url.", element: campaignModel().LandingPageVideoLink().domElement });
-                            //    }
-                            //}
-                            //console.log(errorList());
-                            //if (errorList() == null || errorList().length == 0) {
+                           
                                 saveCampaign(1);
-                          // }
+                          
                            
                         } else {
                             campaignModel().errors.showAllMessages();
