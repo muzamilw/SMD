@@ -110,7 +110,7 @@
 
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" style="display:none;">
                                 <div class="col-lg-3 text-right">
 
                                     <label for="ddpLanguage" class="control-label text-right tooltip-float">Select Language</label>
@@ -160,7 +160,7 @@
                                     <div class="clearfix">
 
                                     </div>
-                                    <div data-bind="visible: Type() != 3 ">
+                                    <div data-bind="visible: Type() != 3 && Type() != 4">
 
                                         <textarea class="form-control" id="txtLinkOfCampaign" rows="2" placeholder="" data-bind="value: LandingPageVideoLink,validationTooltip:LandingPageVideoLink, validationOnElement: LandingPageVideoLink, attr:{placeholder : $root.campaignTypePlaceHolderValue}"></textarea>
 

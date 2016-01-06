@@ -26,10 +26,14 @@
 .coun_in_ex_cnt {
   width: 100px;
   float: left;
+  border: 1px solid #e7ebee !important;
+  border-right: 0px !important;
 }
 .count_token_opt_cnt {
   float: left;
   width: 280px;
+  border: 1px solid #e7ebee !important;
+  border-left: 0px !important;
 }
 #searchCampaignLocations {
   width: 280px!important;
