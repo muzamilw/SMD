@@ -88,6 +88,8 @@
         <AssociationConnector Association="DomainModels.FK_AdCampaignTargetCriteria_SurveyQuestion" />
         <EntityTypeShape EntityType="DomainModels.CustomUrl" Width="1.5" PointX="12.375" PointY="0.75" />
         <EntityTypeShape EntityType="DomainModels.Game" Width="1.5" PointX="12.375" PointY="8.75" />
+        <AssociationConnector Association="DomainModels.FK_AspNetUsers_City" />
+        <AssociationConnector Association="DomainModels.FK_AspNetUsers_Country" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

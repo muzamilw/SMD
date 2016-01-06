@@ -20,6 +20,6 @@ namespace SMD.Models.DomainModels
         public virtual ICollection<AdCampaignTargetLocation> AdCampaignTargetLocations { get; set; }
         public virtual ICollection<SurveyQuestionTargetLocation> SurveyQuestionTargetLocations { get; set; }
 
-        public virtual ICollection<User> AspNetUsers { get; set; }
+        public virtual ICollection<User> Users { get; set; }
     }
 }
