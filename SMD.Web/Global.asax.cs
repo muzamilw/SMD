@@ -26,8 +26,6 @@ using SMD.Interfaces.Services;
 using SMD.Models.IdentityModels;
 using FluentScheduler; 
 
-
-
 namespace SMD.MIS
 {
     // Note: For instructions on enabling IIS7 classic mode, 

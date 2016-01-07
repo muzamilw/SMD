@@ -847,7 +847,7 @@ BEGIN
       ELSE INSERT INTO @Items VALUES (@InputString)
       RETURN
 END -- End Function
-
+GO
 
 -- =========================== ADDED by Baqer  21-DEC-2015  | end
 
@@ -1520,7 +1520,7 @@ COMMIT
 
  -- ============================= updated on server 20151230 =============================
 
-
+ GO
  ALTER PROCEDURE [dbo].[GetAds] 
 
 	-- Add the parameters for the stored procedure here
