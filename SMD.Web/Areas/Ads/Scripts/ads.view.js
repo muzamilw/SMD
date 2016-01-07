@@ -44,7 +44,7 @@ define("ads/ads.view",
                     $('#searchCampaignLocations').typeahead({
                           highlight: true
                       }, {
-                          displayKey: 'LocationName',
+                          displayKey: 'bindedValue',
                           source: array.ttAdapter()
                       }).bind('typeahead:selected', function (obj, selected) {
                           debugger;
@@ -75,6 +75,10 @@ define("ads/ads.view",
                               viewModel.selectedLocation(obj);
                               viewModel.onAddLocation();
                               $('#searchCampaignLocations').val("");
+                              $('.twitter-typeahead input').val("");
+                              $('#searchCampaignLocations').focus(function () {
+                                  $('.twitter-typeahead input').val("");
+                              });
                           }
                       });
                    

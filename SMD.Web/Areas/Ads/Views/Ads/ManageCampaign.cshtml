@@ -703,24 +703,17 @@
                                 </div>
                                 <div class="rfloat">
                                     <div class="onoffswitch">
-                                        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchAB" data-bind="checked: $root.voucherQuestionStatus() == 1, event: { click: $root.ChangeVoucherSettings }">
+                                        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchAB" data-bind="checked: $root.voucherQuestionStatus">
                                         <label class="onoffswitch-label" for="switchAB">
                                             <div class="onoffswitch-inner"></div>
                                             <div class="onoffswitch-switch"></div>
                                         </label>
                                     </div>
-                                    @*<div class="onoffswitch">
-                                        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" data-bind=" event: { click: $root.ChangeVoucherSettings }">
-                                        <label class="onoffswitch-label" for="myonoffswitch">
-                                            <div class="onoffswitch-inner"></div>
-                                            <div class="onoffswitch-switch"></div>
-                                        </label>
-                                    </div>*@
                                 </div>
                                 <div class="clearfix">
 
                                 </div>
-                                <div class="form-group" data-bind="visible: $root.voucherQuestionStatus() == 1 ">
+                                <div class="form-group" data-bind="visible: $root.voucherQuestionStatus()">
                                     <div class="col-lg-4 text-right">
                                         <div class="bs-example-tooltips tooltip-float-width">
                                             <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
@@ -755,7 +748,7 @@
                                                 <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
                                             </a>
                                         </div>
-                                        <label for="txtVoucherVal" class="control-label text-right tooltip-float">Voucher Value</label>
+                                        <label for="txtVoucherVal" class="control-label text-right tooltip-float">Voucher Value / Code</label>
                                     </div>
                                     <div class="col-lg-8">
                                         <input type="text" class="form-control" id="txtVoucherVal" placeholder="Enter Voucher Value" data-bind="value: Voucher1Value">
@@ -842,7 +835,7 @@
                                 </div>
                             </div>
                             <br />
-                            <div style="position:relative;">
+                            <div id="reachTableContainer" style="position:absolute;top:150px;">
 
                                 <div class="aud_cnt">
                                     <h4 class="ad_h4">Audience Definition</h4>
@@ -949,13 +942,13 @@
                                             <span>Your Budget: $</span>
                                         </div>
                                         <div class="yourBudgtBoxCnt">
-                                            
-                                            <input type="number" name="Budget" class="form-control" id="txtBudget" data-bind="value: MaxBudget,validationTooltip:MaxBudget, validationOnElement: MaxBudget">
-                                           
-                                        </div>
-                                       <div class="clearfix">
 
-                                       </div>
+                                            <input type="number" name="Budget" class="form-control" id="txtBudget" data-bind="value: MaxBudget,validationTooltip:MaxBudget, validationOnElement: MaxBudget">
+
+                                        </div>
+                                        <div class="clearfix">
+
+                                        </div>
                                     </div>
                                     <div>Potential Reach: <span data-bind="text:$root.reachedAudience()">0</span> people</div>
 
@@ -1408,5 +1401,15 @@
             }
         });
     }
+    $(window).scroll(function () {
+        var scrollYpos = $(document).scrollTop(); 
+        if (scrollYpos >= 419) {
+            $("#reachTableContainer").css("position", "fixed");
+            $("#reachTableContainer").css("top", "10px");
+        } else {
+            $("#reachTableContainer").css("position", "absolute");
+            $("#reachTableContainer").css("top", "150px");
+        }
+    });
 </script>
 

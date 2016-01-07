@@ -635,7 +635,7 @@
                                         <div class="clearfix">
 
 
-                                            <div style="/*position: fixed;height: 52%;overflow-x: hidden;overflow-y: auto;*/position:relative;">
+                                            <div  id="reachTableContainer" style="position:absolute;top:10px;">
 
                                                 <div class="aud_cnt">
                                                     <h4 class="ad_h4">Audience Definition</h4>
@@ -985,6 +985,15 @@
             }
         });
     }
+    $(window).scroll(function () {
+        var scrollYpos = $(document).scrollTop();
+        if(scrollYpos >= 247)
+        {
+            $("#reachTableContainer").css("position","fixed");
+        } else {
+            $("#reachTableContainer").css("position", "absolute");
+        }
+    });
 </script>
 <script id="answersTemplate" type="text/html">
     <!--ko if:Type() == 1  || Type() == 2 -->
