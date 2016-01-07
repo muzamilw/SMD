@@ -896,6 +896,16 @@
 /// <reference path="plugins/forms/globalize/cultures/globalize.culture.smj.js" />
 /// <reference path="plugins/forms/globalize/cultures/globalize.culture.smn-fi.js" />
 /// <reference path="plugins/forms/globalize/cultures/globalize.culture.smn.js" />
+/// <reference path="plugins/forms/globalize/cultures/globalize.culture.sms-fi.js" />
+/// <reference path="plugins/forms/globalize/cultures/globalize.culture.sms.js" />
+/// <reference path="plugins/forms/globalize/cultures/globalize.culture.sq-al.js" />
+/// <reference path="plugins/forms/globalize/cultures/globalize.culture.sq.js" />
+/// <reference path="plugins/forms/globalize/cultures/globalize.culture.sr-cyrl-ba.js" />
+/// <reference path="jquery-ui-1.11.0.js" />
+/// <reference path="locationpicker.jquery.js" />
+/// <reference path="script/supr-theme/jquery-ui-1.8.21.custom.js" />
+/// <reference path="script/supr-theme/jquery-ui-1.8.22.custom.js" />
+/// <reference path="plugins/charts/flot/excanvas.js" />
 <<<<<<< HEAD
 /// <reference path="../content/themes/centaurus/js/bootstrap-datepicker.js" />
 /// <reference path="../content/themes/centaurus/js/bootstrap-timepicker.min.js" />
