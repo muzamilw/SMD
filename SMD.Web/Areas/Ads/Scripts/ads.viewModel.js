@@ -238,25 +238,23 @@ define("ads/ads.viewModel",
                     },
                     submitCampaignData = function () {
                         if (campaignModel().isValid()) {
-                            if (UserAndCostDetail().isStripeIntegrated == false) {
-                                stripeChargeCustomer.show(function () {
-                                    UserAndCostDetail().isStripeIntegrated = true;
-                                    if (reachedAudience() > 0) {
-                                        saveCampaign(2);
+                            if (reachedAudience() > 0) {
+                                if (UserAndCostDetail().isStripeIntegrated == false) {
+                                    stripeChargeCustomer.show(function () {
+                                        UserAndCostDetail().isStripeIntegrated = true;
 
-                                    } else {
-                                        toastr.error("You have no audience against the specified criteria please broad your audience definition.");
-                                    }
-                                }, 2000, 'Enter your details');
-                            } else {
-                                if (reachedAudience() > 0) {
+                                    }, 2000, 'Enter your details');
+                                } else {
+
                                     saveCampaign(2);
 
-                                } else {
-                                    toastr.error("You have no audience against the specified criteria please broad your audience definition.");
-                                }
 
+
+                                }
+                            } else {
+                                toastr.error("You have no audience against the specified criteria please broad your audience definition.");
                             }
+                            
 
                         } else {
                             campaignModel().errors.showAllMessages();

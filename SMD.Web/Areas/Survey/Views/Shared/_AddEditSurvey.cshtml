@@ -581,9 +581,13 @@
                                                     <tr>
                                                         <th class="col-lg-11"><span>Additional targeting Criteria's</span></th>
                                                         <th>&nbsp;</th>
+                                                        
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                    <tr data-bind="visible: $root.visibleTargetAudience(1)  != 1 && $root.visibleTargetAudience(2)  != 1">
+                                                        <td class="noCriteria"><span>No additional targeting criteria selected</span></td>
+                                                    </tr>
                                                     <!-- ko template: { name: 'answersTemplate', foreach: SurveyQuestionTargetCriteria } -->
                                                     <!-- /ko -->
                                                 </tbody>
@@ -850,10 +854,10 @@
                             <span style="float:left;">
                                 <select class="form-control radius_ddp" data-bind="value: Radius">
                                     <option value="0">No radius</option>
-                                    <option value="10">10</option>
-                                    <option value="25">25</option>
-                                    <option value="40">40</option>
-                                    <option value="100">100+</option>
+                                    <option value="10">10 km</option>
+                                    <option value="25">25 km</option>
+                                    <option value="40">40 km</option>
+                                    <option value="100">100+ km</option>
                                 </select>
                             </span>
                         </span>
