@@ -109,6 +109,7 @@ define("pQuestion/pQuestion.viewModel",
                     // Add new Profile Question
                     addNewProfileQuestion = function () {
                         selectedQuestion(new model.question());
+                        selectedQuestion().penalityForNotAnswering(0);
                         isEditorVisible(true);
                     },
                     // Close Editor 
@@ -281,6 +282,16 @@ define("pQuestion/pQuestion.viewModel",
                         }
                         return (selectedQuestion().hasChanges());
                     }),
+
+                    // show / hide add answers button
+                    CanAddAnswers = function () {
+                        console.log(selectedQuestion().answers().length);
+                        if (selectedQuestion().answers().length == 6) {
+                            return false;
+                        } else {
+                            return true;
+                        }
+                    },
                     // Initialize the view model
                     initialize = function (specifiedView) {
                         view = specifiedView;
@@ -325,7 +336,8 @@ define("pQuestion/pQuestion.viewModel",
                     onSaveNewAnswer: onSaveNewAnswer,
                     onSaveProfileQuestion: onSaveProfileQuestion,
                     onDeleteQuestionAnswer: onDeleteQuestionAnswer,
-                    hasChangesOnQuestion: hasChangesOnQuestion
+                    hasChangesOnQuestion: hasChangesOnQuestion,
+                    CanAddAnswers: CanAddAnswers
                 };
             })()
         };

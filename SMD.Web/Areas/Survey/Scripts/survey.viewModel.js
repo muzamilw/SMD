@@ -170,8 +170,8 @@ define("survey/survey.viewModel",
                         selectedQuestion().LeftPicturePath("Content/Images/Company_Default.png");
                         selectedQuestion().RightPicturePath("Content/Images/Company_Default.png");
                         selectedQuestion().StatusValue("Draft");
-                        selectedQuestion().AgeRangeStart(10);
-                        selectedQuestion().AgeRangeEnd(90);
+                        selectedQuestion().AgeRangeStart(13);
+                        selectedQuestion().AgeRangeEnd(80);
                         selectedQuestion().reset();
                         selectedQuestion().SurveyQuestionTargetCriteria([]);
                         selectedQuestion().SurveyQuestionTargetLocation([]);
@@ -1006,10 +1006,10 @@ define("survey/survey.viewModel",
                     initialize = function (specifiedView) {
                         view = specifiedView;
                         ko.applyBindings(view.viewModel, view.bindingRoot);
-                        for (var i = 10; i < 100; i++)
+                        for (var i = 10; i < 111; i++)
                         {
                             var text = i.toString();
-                            if (i == 99)
+                            if (i == 110)
                                 text += "+";
                             ageRange.push({ value: i.toString(), text: text });
                         }
