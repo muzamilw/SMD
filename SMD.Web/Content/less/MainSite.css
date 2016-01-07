@@ -24,12 +24,16 @@
   cursor: pointer;
 }
 .coun_in_ex_cnt {
-  width: 100px;
+  width: 30%;
   float: left;
+  border: 1px solid #e7ebee !important;
+  border-right: 0px !important;
 }
 .count_token_opt_cnt {
   float: left;
-  width: 280px;
+  width: 69%;
+  border: 1px solid #e7ebee !important;
+  border-left: 0px !important;
 }
 #searchCampaignLocations {
   width: 280px!important;
@@ -381,7 +385,21 @@ ul {
   list-style: none;
 }
 #ui-datepicker-div {
-  z-index: 999999999;
+  z-index: 999999999 !important;
+}
+.count_token_opt_cnt_map {
+  float: left;
+  width: 100%;
+  border: 1px solid #e7ebee;
+}
+.yourBudgtHeadingCnt {
+  float: left;
+  width: 40%;
+  margin-top: 7px;
+}
+.yourBudgtBoxCnt {
+  float: left;
+  width: 30%;
 }
 .lang_newcnt {
   position: relative;
@@ -396,13 +414,13 @@ ul {
   cursor: pointer;
 }
 .coun_in_ex_cnt {
-  width: 100px;
+  width: 30%;
   float: left;
   border: 1px solid #e7ebee;
 }
 .count_token_opt_cnt {
   float: left;
-  width: 285px;
+  width: 69%;
   border: 1px solid #e7ebee;
 }
 #searchSurveyLocations {
@@ -515,6 +533,11 @@ div.Tokenize ul.Dropdown {
 .meterPin {
   background-image: url('/Content/Images/pin.png') !important;
   background-position: center !important;
+}
+.count_token_opt_cnt_map {
+  float: left;
+  width: 100%;
+  border: 1px solid #e7ebee;
 }
 /* Common Styles */
 .fileUpload {

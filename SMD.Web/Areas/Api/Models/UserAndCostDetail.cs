@@ -24,5 +24,7 @@ namespace SMD.MIS.Areas.Api.Models
         public string Industry { get; set; }
         public string Education { get; set; }
         public bool isStripeIntegrated { get; set; }
+        public string GeoLat { get; set; }
+        public string GeoLong { get; set; }
     }
 }

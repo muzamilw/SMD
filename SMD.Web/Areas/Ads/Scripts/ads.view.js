@@ -47,6 +47,7 @@ define("ads/ads.view",
                           displayKey: 'LocationName',
                           source: array.ttAdapter()
                       }).bind('typeahead:selected', function (obj, selected) {
+                          debugger;
                           if (selected) {
                               var CityID = null, CountryID = null, Radius = 0, Country = '', City = '', latitude = '', longitude = '';
                               if (selected.IsCountry) {
@@ -73,6 +74,7 @@ define("ads/ads.view",
 
                               viewModel.selectedLocation(obj);
                               viewModel.onAddLocation();
+                              $('#searchCampaignLocations').val("");
                           }
                       });
                    
@@ -180,6 +182,7 @@ define("ads/ads.view",
                                   displayKey: 'Title',
                                   source: edu_array.ttAdapter()
                               }).bind('typeahead:selected', function (obj, selected) {
+                                  debugger;
                                   if (selected) {
                                       viewModel.addEducation(selected);
                                   }

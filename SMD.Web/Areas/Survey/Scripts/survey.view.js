@@ -69,6 +69,7 @@ define("survey/survey.view",
                               
                                 viewModel.selectedLocation(obj);
                                 viewModel.onAddLocation();
+                                $('#searchSurveyLocations').val("");
                             }
                         });
                         var lan_array = new Bloodhound({

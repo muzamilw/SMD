@@ -19,6 +19,6 @@ namespace SMD.Models.DomainModels
         public virtual ICollection<Product> Products { get; set; }
         public virtual ICollection<Tax> Taxes { get; set; }
 
-        public virtual ICollection<User> AspNetUsers { get; set; }
+        public virtual ICollection<User> Users { get; set; }
     }
 }

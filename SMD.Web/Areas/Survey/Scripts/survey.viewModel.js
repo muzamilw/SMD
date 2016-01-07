@@ -55,6 +55,8 @@ define("survey/survey.viewModel",
                     // unique country list used to bind location dropdown
                     selectedQuestionCountryList = ko.observableArray([]),
                     errorList = ko.observableArray([]),
+                      educations = ko.observableArray([]),
+                      professions = ko.observableArray([]),
                     //Get Questions
                     getQuestions = function () {   
                         dataservice.searchSurveyQuestions(
@@ -96,6 +98,15 @@ define("survey/survey.viewModel",
                                     populateSurveyQuestions(data);
                                     userBaseData(data.objBaseData);
                                     setupPrice(data.setupPrice);
+
+                                    educations.removeAll();
+                                    ko.utils.arrayPushAll(educations(), data.Educations);
+                                    educations.valueHasMutated();
+
+                                    professions.removeAll();
+                                    ko.utils.arrayPushAll(professions(), data.Professions);
+                                    professions.valueHasMutated();
+
                                 },
                                 error: function () {
                                     toastr.error("Failed to load base data!");
@@ -164,20 +175,7 @@ define("survey/survey.viewModel",
                         selectedQuestion().reset();
                         selectedQuestion().SurveyQuestionTargetCriteria([]);
                         selectedQuestion().SurveyQuestionTargetLocation([]);
-                        console.log(userBaseData());
-                        if (userBaseData().CountryId != null && userBaseData.CountryId != 0) {
-                            //selectedQuestion().SurveyQuestionTargetLocation.push(new model.SurveyQuestionTargetLocation.Create({
-                            //    CountryId: userBaseData().CountryId,
-                            //    CityId: userBaseData().CityId,
-                            //    Country: userBaseData().Country,
-                            //    City: userBaseData().City,
-                            //    IncludeorExclude: true,
-                            //    Latitude: userBaseData().Latitude,
-                            //    Longitude: userBaseData().Longitude,
-
-                            //}));
-                            //addCountryToCountryList(userBaseData().CountryId, userBaseData().Country);
-                        }
+                      
                         buildParentSQList();
                         getAudienceCount();
                         isEditorVisible(true);
@@ -185,6 +183,19 @@ define("survey/survey.viewModel",
                         view.initializeTypeahead();
                         bindAudienceReachCount();
                         selectedQuestionCountryList([]);
+                        if (userBaseData().CountryId != null) {
+                            selectedQuestion().SurveyQuestionTargetLocation.push(new model.SurveyQuestionTargetLocation.Create({
+                                CountryId: userBaseData().CountryId,
+                                CityId: userBaseData().CityId,
+                                Country: userBaseData().Country,
+                                City: userBaseData().City,
+                                IncludeorExclude: true,
+                                Latitude: userBaseData().Latitude,
+                                Longitude: userBaseData().Longitude,
+
+                            }));
+                            addCountryToCountryList(userBaseData().CountryId, userBaseData().Country);
+                        }
                     },
                     // Close Editor 
                     closeEditDialog = function () {
@@ -588,19 +599,33 @@ define("survey/survey.viewModel",
                    // submit  survey question for approval
                     onSubmitSurveyQuestion = function () {
                         if (selectedQuestion().isValid()) {
+
                             if (ValidateSurvey() == true) {
                                 if (userBaseData().isStripeIntegrated == false) {
                                     stripeChargeCustomer.show(function () {
-                                        userBaseData().isStripeIntegrated = true;
-                                        saveSurveyQuestion(2);
+                                        if (reachedAudience() > 0) {
+                                            userBaseData().isStripeIntegrated = true;
+                                            saveSurveyQuestion(2);
+
+                                        } else {
+                                            toastr.error("You have no audience against the specified criteria please broad your audience definition.");
+                                        }
+                                        
                             }, 2000, 'Enter your details');
                                 } else {
-                                    saveSurveyQuestion(2);
+                                    if (reachedAudience() > 0) {
+                                        saveSurveyQuestion(2);
+
+                                    } else {
+                                        toastr.error("You have no audience against the specified criteria please broad your audience definition.");
+                                    }
+                                   
                                 }
                             }
                            
                         } else {
                             selectedQuestion().errors.showAllMessages();
+                            toastr.error("Please fill the required feilds to continue.");
                         }
                        
                     },
@@ -622,6 +647,7 @@ define("survey/survey.viewModel",
                             }
                         } else {
                             selectedQuestion().errors.showAllMessages();
+                            toastr.error("Please fill the required feilds to continue.");
                         }
                        
                     }
@@ -949,6 +975,30 @@ define("survey/survey.viewModel",
 
                          enableControls()
                      },
+                    addNewEducationCriteria = function () {
+                        if ($("#ddpEducation").val() != "") {
+
+                            var matchedEducationRec = ko.utils.arrayFirst(educations(), function (arrayitem) {
+
+                                return arrayitem.EducationId == $("#ddpEducation").val();
+                            });
+                            if (matchedEducationRec != null) {
+                                addEducation(matchedEducationRec);
+                            }
+                        }
+                    },
+                        addNewProfessionCriteria = function () {
+                            if ($("#ddpIndustory").val() != "") {
+
+                                var matchedprofessionRec = ko.utils.arrayFirst(professions(), function (arrayitem) {
+
+                                    return arrayitem.IndustryId == $("#ddpIndustory").val();
+                                });
+                                if (matchedprofessionRec != null) {
+                                    addIndustry(matchedprofessionRec);
+                                }
+                            }
+                        },
                     // Initialize the view model
                     initialize = function (specifiedView) {
                         view = specifiedView;
@@ -1033,7 +1083,10 @@ define("survey/survey.viewModel",
                     findLocationsInCountry: findLocationsInCountry,
                     errorList: errorList,
                     changeStatus: changeStatus,
-                   // parentSurveyList: parentSurveyList
+                    educations: educations,
+                    professions: professions,
+                    addNewEducationCriteria: addNewEducationCriteria,
+                    addNewProfessionCriteria: addNewProfessionCriteria
                 };
             })()
         };

@@ -53,10 +53,12 @@ namespace SMD.MIS.ModelMappers
             {
                 TotalCount = source.TotalCount,
                 SurveyQuestions = source.SurveyQuestions.Select(question => question.CreateFrom()),
-                CountryDropdowns =source.Countries.Select(country => country.CreateFrom()),
-                LanguageDropdowns = source.Languages.Select(lang => lang.CreateFrom()) ,
+                CountryDropdowns = source.Countries.Select(country => country.CreateFrom()),
+                LanguageDropdowns = source.Languages.Select(lang => lang.CreateFrom()),
                 objBaseData = source.objBaseData.CreateFrom(),
-                setupPrice = source.setupPrice
+                setupPrice = source.setupPrice,
+                Educations = source.Education.Select(edu => edu.CreateFrom()),
+                Professions = source.Industry.Select(ind => ind.CreateFrom())
             };
         }
 
@@ -66,7 +68,7 @@ namespace SMD.MIS.ModelMappers
         public static SurveyQuestion CreateFrom(this Models.DomainModels.SurveyQuestion source)
         {
             string leftPath = source.LeftPicturePath;
-            if (source.LeftPicturePath !=  null &&  !source.LeftPicturePath.Contains("http"))
+            if (source.LeftPicturePath != null && !source.LeftPicturePath.Contains("http"))
             {
                 leftPath = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + source.LeftPicturePath;
             }
@@ -101,8 +103,8 @@ namespace SMD.MIS.ModelMappers
                 RejectionReason = source.RejectionReason,
                 SubmissionDate = source.SubmissionDate,
                 CreatedBy = source.User.FullName,
-                CreatorAddress= source.User.State + " "+ source.User.Address1
-                
+                CreatorAddress = source.User.State + " " + source.User.Address1
+
             };
         }
 
@@ -203,7 +205,10 @@ namespace SMD.MIS.ModelMappers
                     Language = source.Language,
                     Industry = source.Industry,
                     Education = source.Education,
-                    CurrencySymbol = source.CurrencySymbol
+                    CurrencySymbol = source.CurrencySymbol,
+                    Latitude = source.Latitude,
+                    Longitude = source.Longitude,
+                    isStripeIntegrated = source.isStripeIntegrated
                 };
             }
             else
@@ -282,7 +287,7 @@ namespace SMD.MIS.ModelMappers
         {
             List<SMD.MIS.Areas.Api.Models.SurveyQuestionTargetCriteria> result = new List<Areas.Api.Models.SurveyQuestionTargetCriteria>();
 
-            foreach(var criteria in source.SurveyQuestionTargetCriterias)
+            foreach (var criteria in source.SurveyQuestionTargetCriterias)
             {
                 SMD.MIS.Areas.Api.Models.SurveyQuestionTargetCriteria modelCriteria = new Areas.Api.Models.SurveyQuestionTargetCriteria();
                 modelCriteria.Id = criteria.Id;
@@ -301,7 +306,7 @@ namespace SMD.MIS.ModelMappers
                     if (criteria.ProfileQuestion != null)
                     {
                         modelCriteria.questionString = criteria.ProfileQuestion.Question;
-                        if(criteria.ProfileQuestionAnswer != null)
+                        if (criteria.ProfileQuestionAnswer != null)
                             modelCriteria.answerString = criteria.ProfileQuestionAnswer.AnswerString;
                     }
                 }
@@ -349,7 +354,7 @@ namespace SMD.MIS.ModelMappers
         public static List<SMD.MIS.Areas.Api.Models.SurveyQuestionTargetLocation> GetSurveyLocations(this Models.DomainModels.SurveyQuestion source)
         {
             List<SMD.MIS.Areas.Api.Models.SurveyQuestionTargetLocation> result = new List<Areas.Api.Models.SurveyQuestionTargetLocation>();
-            foreach(var location in source.SurveyQuestionTargetLocations)
+            foreach (var location in source.SurveyQuestionTargetLocations)
             {
                 SMD.MIS.Areas.Api.Models.SurveyQuestionTargetLocation modelLocation = new Areas.Api.Models.SurveyQuestionTargetLocation();
                 modelLocation.CityId = location.CityId;
@@ -360,7 +365,7 @@ namespace SMD.MIS.ModelMappers
                     modelLocation.Latitude = location.City.GeoLat;
                     modelLocation.Longitude = location.City.GeoLong;
                 }
-                if(location.Country != null)
+                if (location.Country != null)
                     modelLocation.Country = location.Country.CountryName;
                 modelLocation.Id = location.Id;
                 modelLocation.IncludeorExclude = location.IncludeorExclude;
@@ -368,8 +373,8 @@ namespace SMD.MIS.ModelMappers
                 modelLocation.SqId = location.SqId;
                 result.Add(modelLocation);
             }
-            return result.OrderBy(g=>g.CountryId).ToList();
+            return result.OrderBy(g => g.CountryId).ToList();
         }
-   
+
     }
 }

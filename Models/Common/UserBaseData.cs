@@ -20,5 +20,7 @@ namespace SMD.Models.Common
         public string Education { get; set; }
         public string CurrencySymbol { get; set; }
         public bool isStripeIntegrated { get; set; }
+        public string Latitude { get; set; }
+        public string Longitude { get; set; }
     }
 }

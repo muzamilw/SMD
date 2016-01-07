@@ -9,4 +9,5 @@ namespace SMD.MIS.Areas.Api.Models
         public int LanguageId { get; set; }
         public string LanguageName { get; set; }
     }
+
 }

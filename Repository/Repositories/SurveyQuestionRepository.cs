@@ -188,6 +188,8 @@ namespace SMD.Repository.Repositories
                  data.Industry = usr.Industry != null?usr.Industry.IndustryName:"";
                  data.Language = usr.Language != null? usr.Language.LanguageName: "";
                  data.isStripeIntegrated = String.IsNullOrEmpty(usr.StripeCustomerId) == true ? false : true;
+                 data.Latitude = usr.City != null ? usr.City.GeoLat : "";
+                 data.Longitude = usr.City != null ? usr.City.GeoLong : "";
             }
 
             return data;

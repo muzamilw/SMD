@@ -31,6 +31,14 @@ namespace SMD.Models.ResponseModels
 
         public UserBaseData objBaseData { get; set; }
         public Nullable<double> setupPrice { get; set; }
+        /// <summary>
+        /// industry
+        /// </summary>
+        public IEnumerable<Industry> Industry { get; set; }
+        /// <summary>
+        /// Education
+        /// </summary>
+        public IEnumerable<Education> Education { get; set; }
         #endregion
     }
     public class SurveyQuestionEditResponseModel

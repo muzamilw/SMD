@@ -48,5 +48,10 @@ namespace SMD.Models.ResponseModels
         /// industry
         /// </summary>
         public IEnumerable<Industry> Industry { get; set; }
+        /// <summary>
+        /// Education
+        /// </summary>
+        public IEnumerable<Education> Education { get; set; }
+
     }
 }
