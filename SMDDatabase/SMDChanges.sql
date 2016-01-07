@@ -847,7 +847,7 @@ BEGIN
       ELSE INSERT INTO @Items VALUES (@InputString)
       RETURN
 END -- End Function
-
+GO
 
 -- =========================== ADDED by Baqer  21-DEC-2015  | end
 
@@ -1520,7 +1520,7 @@ COMMIT
 
  -- ============================= updated on server 20151230 =============================
 
-
+ GO
  ALTER PROCEDURE [dbo].[GetAds] 
 
 	-- Add the parameters for the stored procedure here
@@ -1962,6 +1962,83 @@ add PreferredPayoutAccount int null
 
 -- 06-Jan-16  by Baqer ENDS
 
+/* Added by khurram - (7 Jan 2016) Starts */
+
+/****** Object:  StoredProcedure [dbo].[GetProducts]    Script Date: 1/7/2016 3:05:50 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[GetProducts] 
+
+	-- Add the parameters for the stored procedure here
+	@UserID nvarchar(128) = 0 ,
+	@FromRow int = 0,
+	@ToRow int = 0
+
+AS
+BEGIN
+DECLARE @age AS INT
+DECLARE @gender AS INT
+DECLARE @countryId AS INT
+DECLARE @cityId AS INT
+DECLARE @languageId AS INT
+DECLARE @industryId AS INT
+DECLARE @currentDate AS DateTime
+
+        -- Setting local variables
+		   SELECT @age = age FROM AspNetUsers where id=@UserID
+		   SELECT @gender = gender FROM AspNetUsers where id=@UserID
+		   SELECT @countryId = countryId FROM AspNetUsers where id=@UserID
+		   SELECT @cityId = cityId FROM AspNetUsers where id=@UserID
+		   SELECT @languageId = LanguageID FROM AspNetUsers where id=@UserID
+		   SELECT @industryId = industryId FROM AspNetUsers where id=@UserID
+		   SET @currentDate = getDate()
+
+select *, COUNT(*) OVER() AS TotalItems
+from
+(	select campaignid as ItemId, campaignname ItemName, 'Ad' ItemType, 
+	((row_number() over (order by campaignid) * 10) + 1) Weightage from adcampaign
+	where (
+		((@age is null) or (adcampaign.AgeRangeEnd >= @age and  @age >= adcampaign.AgeRangeStart))
+		and
+		((@gender is null) or (adcampaign.Gender = @gender))
+		and
+		((@languageId is null) or (adcampaign.LanguageId = @languageId))
+		and
+		(adcampaign.EndDateTime >= @currentDate and @currentDate >= adcampaign.StartDateTime)
+		and
+		((adcampaign.AmountSpent is null) or (adcampaign.MaxBudget > adcampaign.AmountSpent))
+		and
+		((@countryId is null or @cityId is null) or ((select count(*) from AdCampaignTargetLocation MyCampaignLoc
+			 where MyCampaignLoc.CampaignID=adcampaign.CampaignID and MyCampaignLoc.CountryID=@countryId and
+			 MyCampaignLoc.CityID=@cityId) > 0))
+	    and
+		((@languageId is null or @industryId is null) or ((select count(*) from AdCampaignTargetCriteria MyCampaignCrit
+			 where MyCampaignCrit.CampaignID = adcampaign.CampaignID and 
+			 MyCampaignCrit.LanguageID=@languageId and MyCampaignCrit.IndustryID=@industryId) > 0 ))
+	)
+	
+	union
+	select sqid, question, 'Survey', 
+	((row_number() over (order by sqid) * 10) + 2) Weightage from surveyquestion
+
+	union
+	select pqid, question, 'Question', 
+	((row_number() over (order by pqid) * 10) + 3) Weightage from profilequestion
+
+	) as items
+	order by Weightage
+	OFFSET @FromRow ROWS -- skip 10 rows
+	FETCH NEXT @ToRow ROWS ONLY -- take 10 rows
+
+END
+GO
+
+/* Added by khurram - (7 Jan 2016) Ends */
+
 -- 07-Jan-16 by Baqer STARTS
 
 GO
@@ -2004,4 +2081,3 @@ GO
 ALTER TABLE [dbo].[TransactionLog] CHECK CONSTRAINT [FK_TransactionLog_TransactionLog1]
 GO
 -- 07-Jan-16  by Baqer ENDS
-

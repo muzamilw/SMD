@@ -1,4 +1,5 @@
-﻿using Microsoft.Practices.Unity;
+﻿using System.Data.Entity.Core.Objects;
+using Microsoft.Practices.Unity;
 using SMD.Models.DomainModels;
 using SMD.Models.IdentityModels;
 using System;
@@ -223,11 +224,11 @@ namespace SMD.Repository.BaseRepository
         /// <summary>
         /// Get Ad-Campaigns for APIs | baqer
         /// </summary>
-        public System.Data.Entity.Core.Objects.ObjectResult<GetAds_Result> GetAdCompaignForApi(string userId, int fromRow, int toRow)
+        public ObjectResult<GetAds_Result> GetAdCompaignForApi(string userId, int fromRow, int toRow)
         {
-            var uId = new System.Data.Entity.Core.Objects.ObjectParameter("UserID", userId);
-            var fRow = new System.Data.Entity.Core.Objects.ObjectParameter("FromRow", fromRow);
-            var tRow = new System.Data.Entity.Core.Objects.ObjectParameter("ToRow", toRow);
+            var uId = new ObjectParameter("UserID", userId);
+            var fRow = new ObjectParameter("FromRow", fromRow);
+            var tRow = new ObjectParameter("ToRow", toRow);
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAds_Result>("GetAds", uId, fRow, tRow);
         }
 
@@ -235,11 +236,11 @@ namespace SMD.Repository.BaseRepository
         /// <summary>
         /// Get Surveys for APIs | baqer
         /// </summary>
-        public System.Data.Entity.Core.Objects.ObjectResult<GetSurveys_Result> GetSurveysForApi(string userId, int fromRow, int toRow)
+        public ObjectResult<GetSurveys_Result> GetSurveysForApi(string userId, int fromRow, int toRow)
         {
-            var uId = new System.Data.Entity.Core.Objects.ObjectParameter("UserID", userId);
-            var fRow = new System.Data.Entity.Core.Objects.ObjectParameter("FromRow", fromRow);
-            var tRow = new System.Data.Entity.Core.Objects.ObjectParameter("ToRow", toRow);
+            var uId = new ObjectParameter("UserID", userId);
+            var fRow = new ObjectParameter("FromRow", fromRow);
+            var tRow = new ObjectParameter("ToRow", toRow);
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetSurveys_Result>("GetSurveys", uId, fRow, tRow);
         }
 
@@ -247,15 +248,15 @@ namespace SMD.Repository.BaseRepository
         /// <summary>
         /// Get Surveys matching count for APIs | baqer
         /// </summary>
-        public System.Data.Entity.Core.Objects.ObjectResult<Int32> GetAudienceSurveyCount(GetAudienceSurveyRequest request)
+        public ObjectResult<Int32> GetAudienceSurveyCount(GetAudienceSurveyRequest request)
         {
-            var countryId = new System.Data.Entity.Core.Objects.ObjectParameter("countryId", request.CountryId);
-            var cityId = new System.Data.Entity.Core.Objects.ObjectParameter("cityId", request.CityId);
-            var languageId = new System.Data.Entity.Core.Objects.ObjectParameter("languageId", request.LanguageId);
-            var industryId = new System.Data.Entity.Core.Objects.ObjectParameter("industryId", request.IndustryId);
-            var gender = new System.Data.Entity.Core.Objects.ObjectParameter("gender", request.Gender);
-            var age = new System.Data.Entity.Core.Objects.ObjectParameter("age", request.Age);
-            var pqIds = new System.Data.Entity.Core.Objects.ObjectParameter("profileQuestionIds", request.IdsList);
+            var countryId = new ObjectParameter("countryId", request.CountryId);
+            var cityId = new ObjectParameter("cityId", request.CityId);
+            var languageId = new ObjectParameter("languageId", request.LanguageId);
+            var industryId = new ObjectParameter("industryId", request.IndustryId);
+            var gender = new ObjectParameter("gender", request.Gender);
+            var age = new ObjectParameter("age", request.Age);
+            var pqIds = new ObjectParameter("profileQuestionIds", request.IdsList);
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Int32>
                 ("GetAudienceSurvey", age, gender, countryId, cityId, languageId, industryId, pqIds);
         }
@@ -264,44 +265,65 @@ namespace SMD.Repository.BaseRepository
         /// <summary>
         /// Get AdCampaign matching count for APIs | baqer
         /// </summary>
-        public System.Data.Entity.Core.Objects.ObjectResult<Int32> GetAudienceAdCampaignCount(GetAudienceSurveyRequest request)
+        public ObjectResult<Int32> GetAudienceAdCampaignCount(GetAudienceSurveyRequest request)
         {
-            var countryId = new System.Data.Entity.Core.Objects.ObjectParameter("countryId", request.CountryId);
-            var cityId = new System.Data.Entity.Core.Objects.ObjectParameter("cityId", request.CityId);
-            var languageId = new System.Data.Entity.Core.Objects.ObjectParameter("languageId", request.LanguageId);
-            var industryId = new System.Data.Entity.Core.Objects.ObjectParameter("industryId", request.IndustryId);
-            var gender = new System.Data.Entity.Core.Objects.ObjectParameter("gender", request.Gender);
-            var age = new System.Data.Entity.Core.Objects.ObjectParameter("age", request.Age);
-            var pqIds = new System.Data.Entity.Core.Objects.ObjectParameter("profileQuestionIds", request.IdsList);
+            var countryId = new ObjectParameter("countryId", request.CountryId);
+            var cityId = new ObjectParameter("cityId", request.CityId);
+            var languageId = new ObjectParameter("languageId", request.LanguageId);
+            var industryId = new ObjectParameter("industryId", request.IndustryId);
+            var gender = new ObjectParameter("gender", request.Gender);
+            var age = new ObjectParameter("age", request.Age);
+            var pqIds = new ObjectParameter("profileQuestionIds", request.IdsList);
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Int32>
                ("GetAudienceAdCampaign", age, gender, countryId, cityId, languageId, industryId, pqIds);
         }
 
-        public System.Data.Entity.Core.Objects.ObjectResult<GetAudience_Result> GetAudienceCampaignAndSurveyCounts(int ageFrom, int ageTo, int gender, string countryIds, string cityIds, string languageIds, 
+        public ObjectResult<GetAudience_Result> GetAudienceCampaignAndSurveyCounts(int ageFrom, int ageTo, int gender, string countryIds, string cityIds, string languageIds, 
             string industryIds, string profileQuestionIds, string profileAnswerIds, string surveyQuestionIds
             , string surveyAnswerIds, string countryIdsExcluded, string cityIdsExcluded, string languageIdsExcluded, string industryIdsExcluded)
         {
-            var ageFromParameter = new System.Data.Entity.Core.Objects.ObjectParameter("ageFrom", ageFrom);
-            var ageToParameter = new System.Data.Entity.Core.Objects.ObjectParameter("ageTo", ageTo);
-            var genderParameter = new System.Data.Entity.Core.Objects.ObjectParameter("gender", gender);
-            var countryIdsParameter = new System.Data.Entity.Core.Objects.ObjectParameter("countryIds", countryIds);
-            var cityIdsParameter = new System.Data.Entity.Core.Objects.ObjectParameter("cityIds", cityIds);
-            var languageIdsParameter = new System.Data.Entity.Core.Objects.ObjectParameter("languageIds", languageIds);
-            var industryIdsParameter = new System.Data.Entity.Core.Objects.ObjectParameter("industryIds", industryIds);
-            var profileQuestionIdsParameter = new System.Data.Entity.Core.Objects.ObjectParameter("profileQuestionIds", profileQuestionIds);
-            var profileAnswerIdsParameter = new System.Data.Entity.Core.Objects.ObjectParameter("profileAnswerIds", profileAnswerIds);
-            var surveyQuestionIdsParameter = new System.Data.Entity.Core.Objects.ObjectParameter("surveyQuestionIds", surveyQuestionIds);
-            var surveyAnswerIdsParameter = new System.Data.Entity.Core.Objects.ObjectParameter("surveyAnswerIds", surveyAnswerIds);
-            var countryIdsExcludedParameter = new System.Data.Entity.Core.Objects.ObjectParameter("countryIdsExcluded", countryIdsExcluded);
-            var cityIdsExcludedParameter = new System.Data.Entity.Core.Objects.ObjectParameter("cityIdsExcluded", cityIdsExcluded);
-            var languageIdsExcludedParameter = new System.Data.Entity.Core.Objects.ObjectParameter("languageIdsExcluded", languageIdsExcluded);
-            var industryIdsExcludedParameter = new System.Data.Entity.Core.Objects.ObjectParameter("industryIdsExcluded", industryIdsExcluded);
+            var ageFromParameter = new ObjectParameter("ageFrom", ageFrom);
+            var ageToParameter = new ObjectParameter("ageTo", ageTo);
+            var genderParameter = new ObjectParameter("gender", gender);
+            var countryIdsParameter = new ObjectParameter("countryIds", countryIds);
+            var cityIdsParameter = new ObjectParameter("cityIds", cityIds);
+            var languageIdsParameter = new ObjectParameter("languageIds", languageIds);
+            var industryIdsParameter = new ObjectParameter("industryIds", industryIds);
+            var profileQuestionIdsParameter = new ObjectParameter("profileQuestionIds", profileQuestionIds);
+            var profileAnswerIdsParameter = new ObjectParameter("profileAnswerIds", profileAnswerIds);
+            var surveyQuestionIdsParameter = new ObjectParameter("surveyQuestionIds", surveyQuestionIds);
+            var surveyAnswerIdsParameter = new ObjectParameter("surveyAnswerIds", surveyAnswerIds);
+            var countryIdsExcludedParameter = new ObjectParameter("countryIdsExcluded", countryIdsExcluded);
+            var cityIdsExcludedParameter = new ObjectParameter("cityIdsExcluded", cityIdsExcluded);
+            var languageIdsExcludedParameter = new ObjectParameter("languageIdsExcluded", languageIdsExcluded);
+            var industryIdsExcludedParameter = new ObjectParameter("industryIdsExcluded", industryIdsExcluded);
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAudience_Result>("GetAudience",
                 ageFromParameter, ageToParameter, genderParameter, countryIdsParameter, cityIdsParameter, languageIdsParameter,
                 industryIdsParameter, profileQuestionIdsParameter, profileAnswerIdsParameter, surveyQuestionIdsParameter
                 , surveyAnswerIdsParameter, countryIdsExcludedParameter, cityIdsExcludedParameter, languageIdsExcludedParameter
                 , industryIdsExcludedParameter);
         }
+
+        /// <summary>
+        /// Gets Combination of Ads, Surveys, Questions as paged view
+        /// </summary>
+        public ObjectResult<GetProducts_Result> GetProducts(string userId, int? fromRow, int? toRow)
+        {
+            var userIdParameter = userId != null ?
+                new ObjectParameter("UserID", userId) :
+                new ObjectParameter("UserID", typeof(string));
+
+            var fromRowParameter = fromRow.HasValue ?
+                new ObjectParameter("FromRow", fromRow) :
+                new ObjectParameter("FromRow", typeof(int));
+
+            var toRowParameter = toRow.HasValue ?
+                new ObjectParameter("ToRow", toRow) :
+                new ObjectParameter("ToRow", typeof(int));
+
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetProducts_Result>("GetProducts", userIdParameter, fromRowParameter, toRowParameter);
+        }
+
         #endregion
     }
 }

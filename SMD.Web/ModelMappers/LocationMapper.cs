@@ -15,7 +15,8 @@ namespace SMD.MIS.ModelMappers
                 LocationId = source.CountryId + "_Country", 
                 LocationName = source.CountryName,
                 IsCountry = true,
-                CountryId = source.CountryId
+                CountryId = source.CountryId,
+                bindedValue = source.CountryName
                 
             };
         }
@@ -31,7 +32,8 @@ namespace SMD.MIS.ModelMappers
                 IsCity = true,
                 CityId = source.CityId,
                 CountryId = source.CountryId.Value,
-                parentCountryName = source.Country.CountryName
+                parentCountryName = source.Country.CountryName,
+                bindedValue = source.CityName + " , " + source.Country.CountryName
             };
         }
     }

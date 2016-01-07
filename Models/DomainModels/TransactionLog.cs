@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SMD.Models.DomainModels
 {
@@ -50,5 +46,8 @@ namespace SMD.Models.DomainModels
         /// State of Transaction
         /// </summary>
         public Boolean IsCompleted { get; set; }
+
+
+        public virtual Transaction Transaction { get; set; }
     }
 }

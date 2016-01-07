@@ -162,4 +162,7 @@
   <data name="WebApiUserService_SurveyQuestionNotFound" xml:space="preserve">
     <value>Survey Question not found against Id {0}.</value>
   </data>
+  <data name="Success" xml:space="preserve">
+    <value>Success</value>
+  </data>
 </root>

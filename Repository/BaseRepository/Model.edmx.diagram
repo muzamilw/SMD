@@ -90,6 +90,9 @@
         <EntityTypeShape EntityType="DomainModels.Game" Width="1.5" PointX="12.375" PointY="8.75" />
         <AssociationConnector Association="DomainModels.FK_AspNetUsers_City" />
         <AssociationConnector Association="DomainModels.FK_AspNetUsers_Country" />
+        <EntityTypeShape EntityType="DomainModels.TransactionLog" Width="1.5" PointX="10.375" PointY="26.75" />
+        <AssociationConnector Association="DomainModels.FK_TransactionLog_TransactionLog" />
+        <AssociationConnector Association="DomainModels.FK_TransactionLog_TransactionLog1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

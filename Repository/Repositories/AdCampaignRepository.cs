@@ -50,6 +50,16 @@ namespace SMD.Repository.Repositories
         }
 
         /// <summary>
+        /// Gets Combination of Ads, Surveys, Questions in a paged view
+        /// </summary>
+        public IEnumerable<GetProducts_Result> GetProducts(GetProductsRequest request)
+        {
+            int fromRow = (request.PageNo - 1) * request.PageSize;
+            int toRow = request.PageSize;
+            return db.GetProducts(request.UserId, fromRow, toRow);
+        }
+
+        /// <summary>
         /// Get Ad Campaigns
         /// </summary>
         public IEnumerable<AdCampaign> SearchAdCampaigns(AdCampaignSearchRequest request, out int rowCount)

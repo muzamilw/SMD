@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Globalization;
 using System.IO;
@@ -456,6 +457,21 @@ namespace SMD.Implementation.Services
         #region Public
 
         #region Approve Survey
+
+        /// <summary>
+        /// Gets Combination of Ads, Surveys, Questions as paged view
+        /// </summary>
+        public GetProductsResponse GetProducts(GetProductsRequest request)
+        {
+            List<GetProducts_Result> products = adCampaignRepository.GetProducts(request).ToList();
+            return new GetProductsResponse
+                   {
+                       Status = true, 
+                       Message = LanguageResources.Success, 
+                       Products = products, 
+                       TotalCount = products.Any() && products[0].TotalItems.HasValue ? products[0].TotalItems.Value : 0
+                   };
+        }
 
         /// <summary>
         /// Update Transactions on viewing ad

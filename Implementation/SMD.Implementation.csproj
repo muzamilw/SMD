@@ -159,7 +159,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AdvertService.cs" />
     <Compile Include="Services\AuditLogService.cs" />
-    <Compile Include="Services\CreditScheduler.cs" />
+    <Compile Include="Services\PayOutScheduler.cs" />
     <Compile Include="Services\EmailManagerService.cs" />
     <Compile Include="Services\InvoiceDetailService.cs" />
     <Compile Include="Services\InvoiceService.cs" />
@@ -168,7 +168,7 @@
     <Compile Include="Services\ProfileQuestionAnswerService .cs" />
     <Compile Include="Services\ProfileQuestionUserAnswerService.cs" />
     <Compile Include="Services\StripeService.cs" />
-    <Compile Include="Services\DebitScheduler.cs" />
+    <Compile Include="Services\CollectionScheduler.cs" />
     <Compile Include="Services\TransactionService.cs" />
     <Compile Include="Services\WebApiUserService.cs" />
     <Compile Include="Services\ProfileQuestionService.cs" />

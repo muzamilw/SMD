@@ -39,7 +39,7 @@ define("survey/survey.view",
                     $('#searchSurveyLocations').typeahead({
                         highlight: true
                     },{
-                            displayKey: 'LocationName',
+                        displayKey: 'bindedValue',
                             source: array.ttAdapter()
                     }).bind('typeahead:selected', function (obj, selected) {
                             if (selected) {
@@ -69,7 +69,10 @@ define("survey/survey.view",
                               
                                 viewModel.selectedLocation(obj);
                                 viewModel.onAddLocation();
-                                $('#searchSurveyLocations').val("");
+                                $('.twitter-typeahead input').val("");
+                                $('#searchSurveyLocations').focus(function () {
+                                    $('.twitter-typeahead input').val("");
+                                });
                             }
                         });
                         var lan_array = new Bloodhound({
