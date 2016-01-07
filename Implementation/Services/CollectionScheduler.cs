@@ -17,7 +17,7 @@ namespace SMD.Implementation.Services
     /// <summary>
     /// Debit Scheduler BackGround Service 
     /// </summary>
-    public class DebitScheduler 
+    public class CollectionScheduler 
     {
         #region Private
         // Properties 
@@ -55,7 +55,7 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Constructor
         /// </summary>
-        public DebitScheduler()
+        public CollectionScheduler()
         {
            //todo 
         }

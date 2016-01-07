@@ -13,10 +13,10 @@ namespace SMD.Implementation.Services
         public ParentScheduler()
         {
             // Debit Scheduler 
-             DebitScheduler.SetDebitScheduler(this);
+             CollectionScheduler.SetDebitScheduler(this);
 
             // Credit Scheduler
-             CreditScheduler.SetDebitScheduler(this);
+             PayOutScheduler.SetDebitScheduler(this);
 
             // Ad more Schedulers here ...
         }
