@@ -11,6 +11,11 @@ namespace SMD.Interfaces.Services
     public interface IWebApiUserService
     {
         /// <summary>
+        /// Gets Ads, Surveys, Questions as paged view
+        /// </summary>
+        GetProductsResponse GetProducts(GetProductsRequest request);
+        
+        /// <summary>
         /// Approve Survey
         /// </summary>
         Task<BaseApiResponse> UpdateTransactionOnSurveyApproval(ApproveSurveyRequest request, bool isApiCall = true);

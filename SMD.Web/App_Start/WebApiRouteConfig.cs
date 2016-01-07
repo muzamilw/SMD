@@ -139,6 +139,14 @@ namespace SMD.MIS
                 new { controller = "UpdateUserProfileImage" },
                 null,
                 null);
+
+            // Get Products (Ads, Surveys, Questions) Custom route
+            config.Routes.MapHttpRoute(
+                "GetProducts",
+                "Products/{AuthenticationToken}/",
+                new { controller = "GetProducts" },
+                null,
+                null);
         }
     }
 }

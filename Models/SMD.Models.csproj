@@ -130,6 +130,7 @@
     <Compile Include="DomainModels\Game.cs" />
     <Compile Include="DomainModels\GetAds_Result.cs" />
     <Compile Include="DomainModels\GetAudience_Result.cs" />
+    <Compile Include="DomainModels\GetProducts_Result.cs" />
     <Compile Include="DomainModels\GetSurveys_Result.cs" />
     <Compile Include="DomainModels\Industry.cs" />
     <Compile Include="DomainModels\Invoice.cs" />
@@ -174,6 +175,7 @@
     <Compile Include="Common\CampaignGridModel.cs" />
     <Compile Include="RequestModels\AdCampaignSearchRequest.cs" />
     <Compile Include="RequestModels\ApproveSurveyRequest.cs" />
+    <Compile Include="RequestModels\GetProductsRequest.cs" />
     <Compile Include="RequestModels\GetAdsApiRequest.cs" />
     <Compile Include="RequestModels\GetAudienceCountRequest.cs" />
     <Compile Include="RequestModels\GetAudienceSurveyRequest.cs" />
@@ -199,6 +201,7 @@
     <Compile Include="ResponseModels\BaseApiResponse.cs" />
     <Compile Include="ResponseModels\InvoiceSearchRequestResponse.cs" />
     <Compile Include="ResponseModels\LoginResponse.cs" />
+    <Compile Include="ResponseModels\GetProductsResponse.cs" />
     <Compile Include="ResponseModels\SurveyForApiSearchResponse.cs" />
     <Compile Include="ResponseModels\ProfileQuestionApiSearchResponse.cs" />
     <Compile Include="ResponseModels\ProfileQuestionBaseResponse.cs" />
