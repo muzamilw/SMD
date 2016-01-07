@@ -79,13 +79,13 @@
                 <p class="bold" data-bind="text:StatusValue "></p>
             </td>
             
-            <td><!--ko if:Status() == 1 || Status() == null-->
+            <td>
                 <a class="table-link" style="float: right">
                     <span class="fa-stack">
                         <i class="fa fa-square fa-stack-2x"></i>
                         <i class="fa fa-pencil fa-stack-1x fa-inverse" data-bind="click:$root.onEditSurvey"></i>
                     </span>
-                </a> <!--/ko-->
+                </a> 
             </td>
            
         </tr>
@@ -124,14 +124,16 @@
         Html.RenderPartial("~/Areas/Survey/Views/Shared/_AddEditSurvey.cshtml");
     }
 </div>
-
+  <!-- ko stopBinding: true -->
+@Html.Partial("~/Areas/Common/Views/Shared/_StripeChargeCustomerDialog.cshtml")
+<!-- /ko -->
 <!-- ko stopBinding: true -->
 @Html.Partial("~/Areas/Common/Views/Shared/_ConfirmationDialog.cshtml")
 <!-- /ko -->
 @section Scripts{
 <script src="~/Scripts/jquery.tokenize.js"></script>
     <script type="text/javascript">
-        require(["survey/survey.view", "common/confirmation.view"]);
+        require(["survey/survey.view", "common/confirmation.view", "common/stripeChargeCustomer.view"]);
     </script>
 
 

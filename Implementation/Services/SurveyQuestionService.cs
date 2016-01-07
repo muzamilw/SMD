@@ -38,6 +38,10 @@ namespace SMD.Implementation.Services
         private readonly ITaxRepository taxRepository;
         private readonly IInvoiceRepository invoiceRepository;
         private readonly IInvoiceDetailRepository invoiceDetailRepository;
+        private readonly IStripeService stripeService;
+        private readonly WebApiUserService webApiUserService;
+        private readonly IEducationRepository _educationRepository;
+        private readonly IIndustryRepository _industryRepository;
         private ApplicationUserManager UserManager
         {
             get { return HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
@@ -85,7 +89,7 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Makes Payment From Stripe & Add Invoice | baqer
         /// </summary>
-        private void MakeStripePaymentandAddInvoice(SurveyQuestion source)
+        private async void MakeStripePaymentandAddInvoice(SurveyQuestion source)
         {
             #region Stripe Payment
 
@@ -96,50 +100,24 @@ namespace SMD.Implementation.Services
             // Total includes tax
             var amount = product.SetupPrice + tax.TaxValue;
             // User who added Survey Question for approval 
-            var user = GetUserByUserId(source.UserId);
+            var user = webApiUserService.GetUserByUserId(source.UserId);
             // Make Stripe actual payment 
-            var response = CreateChargeWithCustomerId((int?)amount, user.StripeCustomerId);
+            var response = stripeService.ChargeCustomer((int?)amount, user.StripeCustomerId);
 
             #endregion
             if (response != "failed")
             {
-                #region Add Invoice
-
-                // Add invoice data
-                var invoice = new Invoice
+                #region Invocing + Transactions
+                var requestModel = new ApproveSurveyRequest
                 {
-                    Country = source.Country.CountryName,
-                    Total = (double)amount,
-                    NetTotal = (double)amount,
-                    InvoiceDate = DateTime.Now,
-                    InvoiceDueDate = DateTime.Now.AddDays(7),
-                    Address1 = source.Country.CountryName,
-                    UserId = user.Id,
-                    CompanyName = "My Company",
-                    CreditCardRef = response
-                };
-                invoiceRepository.Add(invoice);
-
-                #endregion
-                #region Add Invoice Detail
-
-                // Add Invoice Detail Data 
-                var invoiceDetail = new InvoiceDetail
-                {
-                    InvoiceId = invoice.InvoiceId,
-                    SqId = source.SqId,
-                    ProductId = product.ProductId,
-                    ItemName = "Survey Question",
-                    ItemAmount = (double)amount,
-                    ItemTax = (double)tax.TaxValue,
-                    ItemDescription = "This is description!",
-                    ItemGrossAmount = (double)amount,
-                    CampaignId = null,
+                    UserId = source.UserId,
+                    Amount = (double)amount,
+                    SurveyQuestionId = source.SqId,
+                    StripeResponse = response
 
                 };
-                invoiceDetailRepository.Add(invoiceDetail);
-                invoiceDetailRepository.SaveChanges();
-
+                // Transactions + Invocing 
+                await webApiUserService.UpdateTransactionOnSurveyApproval(requestModel, false);
                 #endregion
             }
         }
@@ -150,7 +128,7 @@ namespace SMD.Implementation.Services
         /// <summary>
         ///  Constructor
         /// </summary>
-        public SurveyQuestionService(ISurveyQuestionRepository _surveyQuestionRepository, ICountryRepository _countryRepository, ILanguageRepository _languageRepository, IEmailManagerService emailManagerService, ISurveyQuestionTargetCriteriaRepository _surveyQuestionTargtCriteriaRepository, ISurveyQuestionTargetLocationRepository _surveyQuestionTargetLocationRepository, IProductRepository productRepository, ITaxRepository taxRepository, IInvoiceRepository invoiceRepository, IInvoiceDetailRepository invoiceDetailRepository)
+        public SurveyQuestionService(ISurveyQuestionRepository _surveyQuestionRepository, ICountryRepository _countryRepository, ILanguageRepository _languageRepository, IEmailManagerService emailManagerService, ISurveyQuestionTargetCriteriaRepository _surveyQuestionTargtCriteriaRepository, ISurveyQuestionTargetLocationRepository _surveyQuestionTargetLocationRepository, IProductRepository productRepository, ITaxRepository taxRepository, IInvoiceRepository invoiceRepository, IInvoiceDetailRepository invoiceDetailRepository, IStripeService stripeService, WebApiUserService webApiUserService, IEducationRepository educationRepository, IIndustryRepository industryRepository)
         {
             this.surveyQuestionRepository = _surveyQuestionRepository;
             this.languageRepository = _languageRepository;
@@ -161,7 +139,11 @@ namespace SMD.Implementation.Services
             this.taxRepository = taxRepository;
             this.invoiceRepository = invoiceRepository;
             this.invoiceDetailRepository = invoiceDetailRepository;
+            this.stripeService = stripeService;
+            this.webApiUserService = webApiUserService;
             this.surveyQuestionTargtCriteriaRepository = _surveyQuestionTargtCriteriaRepository;
+            this._educationRepository = educationRepository;
+            this._industryRepository = industryRepository;
         }
 
         #endregion
@@ -197,7 +179,9 @@ namespace SMD.Implementation.Services
                 Languages = languageRepository.GetAllLanguages(),
                 TotalCount = rowCount,
                 setupPrice = setupPrice,
-                objBaseData = userBaseData
+                objBaseData = userBaseData,
+                Education = _educationRepository.GetAll(),
+                Industry = _industryRepository.GetAll()
             };
         }
 
@@ -422,20 +406,6 @@ namespace SMD.Implementation.Services
         
 
         /// <summary>
-        /// Get Stripe Customer by User Id
-        /// </summary>
-        public User GetUserByUserId(string email)
-        {
-            User user =  UserManager.FindById(email);
-            if (user == null)
-            {
-                throw new SMDException("No such user with provided user Id!");
-            }
-
-            return user;
-        }
-
-        /// <summary>
         /// Stripe Payment Work
         /// </summary>
         public string CreateChargeWithCustomerId(int? amount, string customerId)
@@ -475,6 +445,15 @@ namespace SMD.Implementation.Services
             }
             return "failed";
         }
+
+        /// <summary>
+        /// Get Survey By Id
+        /// </summary>
+        public SurveyQuestion GetSurveyQuestionById(long sqid)
+        {
+            return surveyQuestionRepository.Find(sqid);
+        }
+     
         #endregion
     }
 

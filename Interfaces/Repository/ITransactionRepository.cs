@@ -1,4 +1,5 @@
-﻿using SMD.Models.DomainModels;
+﻿using System.Collections.Generic;
+using SMD.Models.DomainModels;
 
 namespace SMD.Interfaces.Repository
 {
@@ -7,6 +8,9 @@ namespace SMD.Interfaces.Repository
     /// </summary>
     public interface ITransactionRepository : IBaseRepository<Transaction, long>
     {
-        
+        /// <summary>
+        /// Get Un-debited transactions
+        /// </summary>
+        IEnumerable<Transaction> GetUnprocessedTransactionsForDebit();
     }
 }

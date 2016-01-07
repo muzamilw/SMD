@@ -1,7 +1,9 @@
 ﻿define(["ko", "underscore", "underscore-ko"], function (ko) {
 
     var // ReSharper disable InconsistentNaming
-        Survey = function (SQID, LanguageID, CountryID, UserID, Status, StatusValue, Question, Gender, Language, Country, Description, DisplayQuestion, StartDate, EndDate, ModifiedDate, LeftPicturePath, RightPicturePath, ProjectedReach, AgeRangeStart, AgeRangeEnd, LeftPictureBytes, RightPictureBytes) {
+        Survey = function (SQID, LanguageID, CountryID, UserID, Status, StatusValue, Question, Gender, Language, Country,
+            Description, DisplayQuestion, StartDate, EndDate, ModifiedDate, LeftPicturePath, RightPicturePath, ProjectedReach, AgeRangeStart,
+            AgeRangeEnd, LeftPictureBytes, RightPictureBytes, ParentSurveyId, Priority) {
            
             var
                 //type and userID will be set on server sside
@@ -10,22 +12,45 @@
                 CountryID = ko.observable(CountryID),
                 UserID = ko.observable(UserID),
                 Status = ko.observable(Status),
-                Question = ko.observable(Question),
+                Question = ko.observable(Question).extend({  // custom message
+                    required: true
+                }),
                 Gender = ko.observable(Gender),
                 Language = ko.observable(Language),
                 Country = ko.observable(Country),
                 StatusValue = ko.observable(StatusValue),
                 Description = ko.observable(Description),
-                DisplayQuestion = ko.observable(DisplayQuestion),
-                StartDate = ko.observable((StartDate !== null && StartDate !== undefined) ? moment(StartDate).toDate() : undefined),
-                EndDate = ko.observable((EndDate !== null && EndDate !== undefined) ? moment(EndDate).toDate() : undefined),
+                DisplayQuestion = ko.observable(DisplayQuestion).extend({  // custom message
+                    required: true
+                }),
+                StartDate = ko.observable((StartDate !== null && StartDate !== undefined) ? moment(StartDate).toDate() : undefined).extend({  // custom message
+                    required: true
+                }),
+                EndDate = ko.observable((EndDate !== null && EndDate !== undefined) ? moment(EndDate).toDate() : undefined).extend({  // custom message
+                    required: true,
+                }).extend({
+                    validation: {
+                        validator: function (val, someOtherVal) {
+
+                            return moment(val).toDate() > moment(StartDate()).toDate();
+                        },
+                        message: 'End date must be greater than start date',
+                    }
+                }),
                 CreationDate = ko.observable(CreationDate),
                 ModifiedDate = ko.observable(ModifiedDate),
                 LeftPicturePath = ko.observable(LeftPicturePath),
                 RightPicturePath = ko.observable(RightPicturePath),
                 ProjectedReach = ko.observable(ProjectedReach),
                 AgeRangeStart = ko.observable(AgeRangeStart),
-                AgeRangeEnd = ko.observable(AgeRangeEnd),
+                AgeRangeEnd = ko.observable(AgeRangeEnd).extend({
+                    validation: {
+                        validator: function (val, someOtherVal) {
+                            return val > AgeRangeStart();
+                        },
+                        message: 'Age end range must be greater than start range',
+                    }
+                }),
                 DiscountVoucherApplied = ko.observable(DiscountVoucherApplied),
                 VoucherCode = ko.observable(VoucherCode),
                 DiscountVoucherID = ko.observable(DiscountVoucherID),
@@ -34,8 +59,14 @@
                 SurveyQuestionTargetLocation = ko.observableArray([]),
                 LeftPictureBytes = ko.observable(LeftPictureBytes),
                 RightPictureBytes = ko.observable(RightPictureBytes),
+                ParentSurveyId = ko.observable(ParentSurveyId),
+                Priority = ko.observable(Priority),
                 errors = ko.validation.group({
-
+                    Question: Question,
+                    DisplayQuestion: DisplayQuestion,
+                    StartDate: StartDate,
+                    EndDate: EndDate,
+                    AgeRangeEnd: AgeRangeEnd,
                     }),
                 // Is Valid
                 isValid = ko.computed(function () {
@@ -60,7 +91,9 @@
                     SurveyQuestionTargetCriteria: SurveyQuestionTargetCriteria,
                     SurveyQuestionTargetLocation: SurveyQuestionTargetLocation,
                     LeftPictureBytes: LeftPictureBytes,
-                    RightPictureBytes: RightPictureBytes
+                    RightPictureBytes: RightPictureBytes,
+                    ParentSurveyId: ParentSurveyId,
+                    Priority: Priority
                 }),
                 // Has Changes
                 hasChanges = ko.computed(function () {
@@ -109,7 +142,9 @@
                         SurveyQuestionTargetCriterias: targetCriteria,
                         LeftPictureBytes:LeftPictureBytes(),
                         RightPictureBytes: RightPictureBytes(),
-                        SurveyQuestionTargetLocations: targetLocation
+                        SurveyQuestionTargetLocations: targetLocation,
+                        ParentSurveyId: ParentSurveyId(),
+                        Priority: Priority()
                     };
                 };
             return {
@@ -147,7 +182,9 @@
                 LeftPictureBytes: LeftPictureBytes,
                 RightPictureBytes: RightPictureBytes,
                 dirtyFlag: dirtyFlag,
-                convertToServerData: convertToServerData
+                convertToServerData: convertToServerData,
+                ParentSurveyId: ParentSurveyId,
+                Priority: Priority
             };
         };
 
@@ -216,7 +253,7 @@
           };
       };
     var // ReSharper disable InconsistentNaming
-    SurveyQuestionTargetLocation = function (ID, SQID, CountryID, CityID, Radius, Country, City, IncludeorExclude) {
+    SurveyQuestionTargetLocation = function (ID, SQID, CountryID, CityID, Radius, Country, City, IncludeorExclude, Latitude, Longitude) {
         var
             //type and userID will be set on server sside
             ID = ko.observable(ID),
@@ -227,6 +264,8 @@
             Country = ko.observable(Country),
             City = ko.observable(City),
            IncludeorExclude = ko.observable(IncludeorExclude == true ? "1" : "0"),
+           Latitude = ko.observable(Latitude),
+           Longitude = ko.observable(Longitude),
             // Convert to server data
             convertToServerData = function () {
                 return {
@@ -249,12 +288,17 @@
             Country: Country,
             City: City,
             IncludeorExclude: IncludeorExclude,
-            convertToServerData: convertToServerData
+            convertToServerData: convertToServerData,
+            Latitude: Latitude,
+            Longitude: Longitude
         };
     };
     // Factory Method
     Survey.Create = function (source) {
-        var survey = new Survey(source.SqId, source.LanguageId, source.CountryId, source.UserId, source.Status, source.StatusValue, source.Question, source.Gender + "" , source.Language, source.Country, source.Description, source.DisplayQuestion, source.StartDate, source.EndDate, source.ModifiedDate, source.LeftPicturePath, source.RightPicturePath, source.ProjectedReach, source.AgeRangeStart, source.AgeRangeEnd, source.LeftPictureBytes, source.RightPictureBytes);
+        var survey = new Survey(source.SqId, source.LanguageId, source.CountryId, source.UserId, source.Status, source.StatusValue, source.Question,
+            source.Gender + "", source.Language, source.Country, source.Description, source.DisplayQuestion, source.StartDate, source.EndDate, source.ModifiedDate,
+            source.LeftPicturePath, source.RightPicturePath, source.ProjectedReach, source.AgeRangeStart, source.AgeRangeEnd, source.LeftPictureBytes,
+            source.RightPictureBytes, source.ParentSurveyId, source.Priority);
         _.each(source.SurveyQuestionTargetCriterias, function (item) {
             survey.SurveyQuestionTargetCriteria.push(SurveyQuestionTargetCriteria.Create(item));
         });
@@ -268,7 +312,8 @@
         return new SurveyQuestionTargetCriteria(source.Id, source.SqId, source.Type, source.PqId, source.PqAnswerId, source.LinkedSqId, source.LinkedSqAnswer, source.IncludeorExclude, source.LanguageId, source.questionString, source.answerString, source.Language, source.surveyQuestLeftImageSrc, source.surveyQuestRightImageSrc, source.IndustryId, source.Industry,source.EducationId, source.Education);
     };
     SurveyQuestionTargetLocation.Create = function (source) {
-        return new SurveyQuestionTargetLocation(source.Id, source.SqId, source.CountryId, source.CityId, source.Radius, source.Country, source.City, source.IncludeorExclude);
+        return new SurveyQuestionTargetLocation(source.Id, source.SqId, source.CountryId, source.CityId, source.Radius,
+            source.Country, source.City, source.IncludeorExclude, source.Latitude, source.Longitude);
     };
     return {
         Survey: Survey,

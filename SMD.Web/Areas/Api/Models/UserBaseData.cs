@@ -18,5 +18,8 @@ namespace SMD.MIS.Areas.Api.Models
         public string Industry { get; set; }
         public string Education { get; set; }
         public string CurrencySymbol { get; set; }
+        public bool isStripeIntegrated { get; set; }
+        public string Latitude { get; set; }
+        public string Longitude { get; set; }
     }
 }

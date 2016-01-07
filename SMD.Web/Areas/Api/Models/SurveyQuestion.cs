@@ -40,6 +40,8 @@ namespace SMD.MIS.Areas.Api.Models
         public List<SurveyQuestionTargetCriteria> SurveyQuestionTargetCriterias { get; set; }
         public List<SurveyQuestionTargetLocation> SurveyQuestionTargetLocations { get; set; }
         public int? Gender { get; set; }
+        public long? ParentSurveyId { get; set; }
+        public int? Priority { get; set; }
     }
     public class SurveyQuestionTargetCriteria
     {
@@ -70,5 +72,7 @@ namespace SMD.MIS.Areas.Api.Models
         public bool? IncludeorExclude { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
+        public string Latitude { get; set; }
+        public string Longitude { get; set; }
     }
 }

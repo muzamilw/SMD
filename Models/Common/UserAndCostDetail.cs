@@ -25,5 +25,9 @@ namespace SMD.Models.Common
         public string LanguageName { get; set; }
         public string IndustryName { get; set; }
         public string EducationTitle { get; set; }
+        public bool isStripeIntegrated { get; set; }
+
+        public string GeoLat { get; set; }
+        public string GeoLong { get; set; }
     }
 }

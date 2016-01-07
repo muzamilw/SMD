@@ -39,5 +39,14 @@ namespace SMD.MIS.Areas.Api.Models
 
         public IEnumerable<Industry> listIndustry { get; set; }
         public IEnumerable<Education> listEducation { get; set; }
+
+        /// <summary>
+        /// Industory
+        /// </summary>
+        public IEnumerable<Industry> Professions { get; set; }
+        /// <summary>
+        /// Education
+        /// </summary>
+        public IEnumerable<Education> Educations { get; set; }
     }
 }

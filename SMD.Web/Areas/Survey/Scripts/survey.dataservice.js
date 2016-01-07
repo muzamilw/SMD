@@ -45,6 +45,11 @@ define("survey/survey.dataservice", function () {
                         contentType: "application/json; charset=utf-8",
                         type: 'POST'
                     });
+                    amplify.request.define('getSurveyParentList', 'ajax', {
+                        url: '/Api/SurveyBase',
+                        dataType: 'json',
+                        type: 'GET'
+                    });
                     isInitialized = true;
                 }
             },
@@ -88,6 +93,16 @@ define("survey/survey.dataservice", function () {
                      error: callbacks.error,
                  });
              },
+              // get 
+               getSurveyParentList = function (params, callbacks) {
+                   initialize();
+                   return amplify.request({
+                       resourceId: 'getSurveyParentList',
+                       data: params,
+                       success: callbacks.success,
+                       error: callbacks.error,
+                   });
+               },
            addSurveyData = function (params, callbacks) {
                initialize();
                return amplify.request({
@@ -96,6 +111,7 @@ define("survey/survey.dataservice", function () {
                    success: callbacks.success,
                    error: callbacks.error,
                });
+              
            };
 
         return {
@@ -103,7 +119,8 @@ define("survey/survey.dataservice", function () {
             searchSurveyQuestions: searchSurveyQuestions,
             addSurveyData: addSurveyData,
             getSurveyQuestion: getSurveyQuestion,
-            getAudienceData: getAudienceData
+            getAudienceData: getAudienceData,
+            getSurveyParentList:getSurveyParentList
         };
        
     })();

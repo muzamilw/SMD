@@ -125,7 +125,9 @@
     <Compile Include="DomainModels\City.cs" />
     <Compile Include="DomainModels\Country.cs" />
     <Compile Include="DomainModels\Currency.cs" />
+    <Compile Include="DomainModels\CustomUrl.cs" />
     <Compile Include="DomainModels\Education.cs" />
+    <Compile Include="DomainModels\Game.cs" />
     <Compile Include="DomainModels\GetAds_Result.cs" />
     <Compile Include="DomainModels\GetAudience_Result.cs" />
     <Compile Include="DomainModels\GetSurveys_Result.cs" />

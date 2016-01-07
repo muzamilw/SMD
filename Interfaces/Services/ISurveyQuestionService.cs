@@ -3,6 +3,7 @@ using System.Security.Cryptography.X509Certificates;
 using SMD.Models.DomainModels;
 using SMD.Models.RequestModels;
 using SMD.Models.ResponseModels;
+using System.Collections.Generic;
 
 namespace SMD.Interfaces.Services
 {
@@ -51,5 +52,10 @@ namespace SMD.Interfaces.Services
 
 
         GetAudience_Result GetAudienceCount(GetAudienceCountRequest request);
+
+        /// <summary>
+        /// Get Survey By Id
+        /// </summary>
+        SurveyQuestion GetSurveyQuestionById(long sqid);
     }
 }

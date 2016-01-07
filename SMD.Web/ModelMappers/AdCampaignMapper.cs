@@ -90,6 +90,12 @@ namespace SMD.MIS.ModelMappers
 
                 AdCampaignTargetLocations =
                     source.AdCampaignTargetLocations != null ? source.AdCampaignTargetLocations.Select(x => x.CreateFrom()).ToList() : null,
+                Voucher1Description = source.Voucher1Description,
+                Voucher1Heading = source.Voucher1Heading,
+                Voucher1Value = source.Voucher1Value,
+                Voucher2Description = source.Voucher2Description,
+                Voucher2Heading = source.Voucher2Heading,
+                Voucher2Value = source.Voucher2Value
 
             };
 
@@ -311,6 +317,8 @@ namespace SMD.MIS.ModelMappers
         {
             string CName = "";
             string CountName = "";
+            string latitdue = "";
+            string longitude = "";
             if (source.CountryId != null && source.CountryId > 0 && source.Country != null)
             {
                 CountName = source.Country.CountryName;
@@ -319,6 +327,8 @@ namespace SMD.MIS.ModelMappers
             if (source.CityId != null && source.CityId > 0 && source.City != null)
             {
                 CName = source.City.CityName;
+                latitdue = source.City.GeoLat;
+                longitude = source.City.GeoLong;
             }
             return new SMD.MIS.Areas.Api.Models.AdCampaignTargetLocation
             {
@@ -329,7 +339,9 @@ namespace SMD.MIS.ModelMappers
                 IncludeorExclude = source.IncludeorExclude,
                 Radius = source.Radius,
                 City = CName,
-                Country = CountName
+                Country = CountName,
+                Latitude = latitdue,
+                Longitude = longitude
             };
         }
 
@@ -359,6 +371,9 @@ namespace SMD.MIS.ModelMappers
                 Education = source.EducationTitle,
                 Industry = source.IndustryName,
                 Language = source.LanguageName,
+                isStripeIntegrated = source.isStripeIntegrated,
+                GeoLat = source.GeoLat,
+                GeoLong = source.GeoLong
             };
 
 
@@ -372,7 +387,9 @@ namespace SMD.MIS.ModelMappers
             return new AdCampaignBaseResponse
             {
                 Languages = source.Languages.Select(lang => lang.CreateFrom()),
-                UserAndCostDetails = source.UserAndCostDetails.CreateFrom()
+                UserAndCostDetails = source.UserAndCostDetails.CreateFrom(),
+                Educations = source.Education.Select(edu => edu.CreateFrom()),
+                Professions = source.Industry.Select(ind => ind.CreateFrom())
             };
         }
     }

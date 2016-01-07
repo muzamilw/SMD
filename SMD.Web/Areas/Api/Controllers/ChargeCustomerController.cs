@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using SMD.ExceptionHandling;
+﻿using SMD.ExceptionHandling;
 using SMD.Interfaces.Services;
 using SMD.Models.RequestModels;
 using System;
@@ -8,7 +6,6 @@ using System.Net;
 using System.Web;
 using System.Web.Http;
 using SMD.WebBase.Mvc;
-using Stripe;
 
 namespace SMD.MIS.Areas.Api.Controllers
 {
@@ -21,45 +18,55 @@ namespace SMD.MIS.Areas.Api.Controllers
         #region Private
 
         private readonly IWebApiUserService webApiUserService;
+        private readonly IStripeService stripeService;
+        private readonly IAdvertService advertService;
+        private readonly ISurveyQuestionService surveyQuestionService;
 
         /// <summary>
         /// Create Charge With Customer Id
         /// </summary>
-        private static bool CreateChargeWithCustomerId(StripeChargeCustomerRequest request, string customerId)
+        private bool CreateChargeWithCustomerId(StripeChargeCustomerRequest request)
         {
-            // Verify If Credit Card is not expired
-            var customerService = new StripeCustomerService();
-            var customer = customerService.Get(customerId);
-            if (customer == null)
+            // Get Item Id
+            long itemId = request.AdCampaignId.HasValue
+                ? request.AdCampaignId.Value
+                : request.SqId.HasValue ? request.SqId.Value : long.MinValue;
+
+            if (itemId == long.MinValue)
+            {
+                throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
+            }
+
+            // To check whether it is adCampaign or survey 
+            bool isAdCampaignRequest = request.AdCampaignId.HasValue;
+            string stripeCustomerId;
+            if (isAdCampaignRequest)
+            {
+                // If Item is Ad Campaign 
+                var adCampaign = advertService.GetAdCampaignById(itemId);
+                var user = webApiUserService.GetUserByUserId(adCampaign.UserId);
+                stripeCustomerId = user.StripeCustomerId;
+            }
+            else
+            {
+                // If Item is Survey Question 
+                var survey = surveyQuestionService.GetSurveyQuestionById(itemId);
+                var user = webApiUserService.GetUserByUserId(survey.UserId);
+                stripeCustomerId = user.StripeCustomerId;
+            }
+
+            // Check if Stripe Customer Id Exists then use that to Create Charge
+            if (string.IsNullOrEmpty(stripeCustomerId))
             {
                 throw new SMDException(LanguageResources.Stripe_CustomerNotFound);
             }
 
-            // If Card has been expired then skip payment
-            if (customer.SourceList != null && customer.SourceList.Data != null && customer.DefaultSourceId != null)
-            {
-                var defaultStripeCard = customer.SourceList.Data.FirstOrDefault(card => card.Id == customer.DefaultSourceId);
-                if (defaultStripeCard != null && (Convert.ToInt32(defaultStripeCard.ExpirationMonth) < DateTime.Now.Month ||
-                    Convert.ToInt32(defaultStripeCard.ExpirationYear) < DateTime.Now.Year))
-                {
-                    throw new SMDException(LanguageResources.Stripe_CardExpired);
-                }
-            }
-            
-            var stripeChargeCreateOptions = new StripeChargeCreateOptions
-            {
-                CustomerId = customerId,
-                Amount = request.Amount,
-                Currency = "usd",
-                Capture = true
-                // (not required) set this to false if you don't want to capture the charge yet - requires you call capture later
-            };
-            var chargeService = new StripeChargeService();
-            var resposne=  chargeService.Create(stripeChargeCreateOptions);
-            if (resposne.Status == "succeeded")
+            var resposne = stripeService.ChargeCustomer(request.Amount, stripeCustomerId);
+            if (resposne != "failed")
             {
                 return true;
             }
+
             return false;
         }
 
@@ -70,14 +77,18 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// <summary>
         /// Constructor
         /// </summary>
-        public ChargeCustomerController(IWebApiUserService webApiUserService)
+        public ChargeCustomerController(IWebApiUserService webApiUserService, IStripeService stripeService, IAdvertService advertService, ISurveyQuestionService surveyQuestionService)
         {
             if (webApiUserService == null)
             {
                 throw new ArgumentNullException("webApiUserService");
             }
+            if (stripeService == null) throw new ArgumentNullException("stripeService");
 
             this.webApiUserService = webApiUserService;
+            this.stripeService = stripeService;
+            this.advertService = advertService;
+            this.surveyQuestionService = surveyQuestionService;
         }
 
         #endregion
@@ -88,22 +99,15 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// Charge Customer
         /// </summary>
         [ApiException]
-        public async Task<bool> Post(StripeChargeCustomerRequest request)
+        public bool Post(StripeChargeCustomerRequest request)
         {
             if (request == null || !ModelState.IsValid)
             {
                 throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
             }
-
-            string stripeCustomerId = await webApiUserService.GetStripeCustomerIdByEmail(request.Email);
-            // Check if Stripe Customer Id Exists then use that to Create Charge
-            if (string.IsNullOrEmpty(stripeCustomerId))
-            {
-                throw new SMDException(LanguageResources.Stripe_CustomerNotFound);
-            }
-
+            
             // Charge Customer
-           return CreateChargeWithCustomerId(request, stripeCustomerId);
+           return CreateChargeWithCustomerId(request);
         }
         
         #endregion

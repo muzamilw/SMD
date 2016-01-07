@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Practices.Unity;
 using SMD.Interfaces.Repository;
 using SMD.Models.DomainModels;
@@ -37,6 +38,14 @@ namespace SMD.Repository.Repositories
         #endregion
         #region Public
 
+        /// <summary>
+        /// Get Un-debited transactions
+        /// </summary>
+        public IEnumerable<Transaction> GetUnprocessedTransactionsForDebit()
+        {
+            return DbSet.Where(trans => trans.DebitAmount != null && trans.CreditAmount == null 
+                && (trans.isProcessed == null || trans.isProcessed == false)).ToList();
+        }
         #endregion 
     }
 }

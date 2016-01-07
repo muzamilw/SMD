@@ -79,14 +79,14 @@
                     <div class="filter-block">
                         <div class="form-group">
                             <div class="col-xs-2">
-                                <select class="form-control" ></select>
+                                <input type="text" class="form-control" data-bind="datetimepicker:$root.fromDateFilter">
                             </div>
                             <div class="col-xs-2">
-                                <select class="form-control" ></select>
+                                <input type="text" class="form-control" data-bind="datetimepicker:$root.toDateFilter">
                             </div>
                             <div class="col-xs-2">
-                                <button class="btn  btn-info" id="saveBtn" data-bind="">Search</button>
-                                <button class="btn btn-default" id="saveBtn" data-bind="">Reset</button>
+                                <button class="btn  btn-info" id="saveBtn" data-bind="click:$root.onSearchButtonClick">Search</button>
+                                <button class="btn btn-default" id="saveBtn" data-bind="click:$root.resetData">Reset</button>
                             </div>
                         </div>
                     </div>

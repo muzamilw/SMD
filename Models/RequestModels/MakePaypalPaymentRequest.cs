@@ -1,4 +1,6 @@
-﻿namespace SMD.Models.RequestModels
+﻿using System.Collections.Generic;
+
+namespace SMD.Models.RequestModels
 {
     /// <summary>
     /// Make Paypal Payment Request Model 
@@ -13,7 +15,7 @@
         /// <summary>
         /// Reciever's Email 
         /// </summary>
-        public string RecieverEmail { get; set; }
+        public List<string> RecieverEmails { get; set; }
 
         /// <summary>
         /// Amount

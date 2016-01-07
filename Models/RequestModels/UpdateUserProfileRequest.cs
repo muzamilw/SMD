@@ -1,4 +1,6 @@
-﻿namespace SMD.Models.RequestModels
+﻿using System;
+
+namespace SMD.Models.RequestModels
 {
     /// <summary>
     /// Update User Profile Request Model 
@@ -85,5 +87,57 @@
         /// </summary>
         public string FullName { get; set; }
 
+        /// <summary>
+        /// Profile Image
+        /// Base64 representation of image
+        /// </summary>
+        public string ProfileImage { get; set; }
+
+        /// <summary>
+        /// Profile Image Name
+        /// </summary>
+        public string ProfileImageName { get; set; }
+
+        /// <summary>
+        /// Profile Image Bytes
+        /// </summary>
+        public byte[] ProfileImageBytes
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(ProfileImage))
+                {
+                    return null;
+                }
+
+                int firtsAppearingCommaIndex = ProfileImage.IndexOf(',');
+
+                if (firtsAppearingCommaIndex < 0)
+                {
+                    return null;
+                }
+
+                if (ProfileImage.Length < firtsAppearingCommaIndex + 1)
+                {
+                    return null;
+                }
+
+                string sourceSubString = ProfileImage.Substring(firtsAppearingCommaIndex + 1);
+
+                try
+                {
+                    return Convert.FromBase64String(sourceSubString.Trim('\0'));
+                }
+                catch (FormatException)
+                {
+                    return null;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Authentication Token
+        /// </summary>
+        public string AuthenticationToken { get; set; }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using SMD.ExceptionHandling;
 using SMD.Interfaces.Services;
 using SMD.Models.RequestModels;
 using System;
@@ -7,7 +6,6 @@ using System.Net;
 using System.Web;
 using System.Web.Http;
 using SMD.WebBase.Mvc;
-using Stripe;
 
 namespace SMD.MIS.Areas.Api.Controllers
 {
@@ -20,36 +18,7 @@ namespace SMD.MIS.Areas.Api.Controllers
         #region Private
 
         private readonly IWebApiUserService webApiUserService;
-
-        /// <summary>
-        /// Create Charge With Token
-        /// </summary>
-        private async Task<string> CreateCustomer(StripeChargeCustomerRequest request)
-        {
-            // Create the charge on Stripe's servers - this will charge the user's card
-            var stripeSourceOptions = new StripeSourceOptions { TokenId = request.Token };
-            
-            // Create Customer For Later Use
-            var myCustomer = new StripeCustomerCreateOptions
-            {
-                Email = request.Email,
-                Source = stripeSourceOptions
-            };
-            var customerService = new StripeCustomerService();
-            try
-            {
-                var stripeCustomer = customerService.Create(myCustomer);
-                // Save Customer For Later Use
-                await webApiUserService.SaveStripeCustomerId(stripeCustomer.Id);
-                // Return Customer Id
-                return stripeCustomer.Id;
-            }
-            catch (Exception exp)
-            {
-                throw new SMDException(exp.Message);
-            }
-        }
-
+        private readonly IStripeService stripeService;
 
         #endregion
 
@@ -58,7 +27,7 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// <summary>
         /// Constructor
         /// </summary>
-        public CreateStripeCustomerController(IWebApiUserService webApiUserService)
+        public CreateStripeCustomerController(IWebApiUserService webApiUserService, IStripeService stripeService)
         {
             if (webApiUserService == null)
             {
@@ -66,12 +35,13 @@ namespace SMD.MIS.Areas.Api.Controllers
             }
 
             this.webApiUserService = webApiUserService;
+            this.stripeService = stripeService;
         }
 
         #endregion
 
         #region Public
-
+        
         /// <summary>
         /// Charge Customer
         /// </summary>
@@ -87,7 +57,7 @@ namespace SMD.MIS.Areas.Api.Controllers
             // Check if Stripe Customer Id Exists then use that to Create Charge
             if (string.IsNullOrEmpty(customerId))
             {
-                await CreateCustomer(request);
+                await stripeService.CreateCustomer(request);
             }
         }
         

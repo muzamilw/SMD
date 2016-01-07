@@ -41,15 +41,15 @@ define("ads/ads.view",
                       });
 
                       array.initialize();
-
                     $('#searchCampaignLocations').typeahead({
                           highlight: true
                       }, {
                           displayKey: 'LocationName',
                           source: array.ttAdapter()
                       }).bind('typeahead:selected', function (obj, selected) {
+                          debugger;
                           if (selected) {
-                              var CityID = 0, CountryID = 0, Radius = 0, Country = '', City = '';
+                              var CityID = null, CountryID = null, Radius = 0, Country = '', City = '', latitude = '', longitude = '';
                               if (selected.IsCountry) {
                                   Country = selected.LocationName;
                                   CountryID = selected.CountryId;
@@ -58,11 +58,9 @@ define("ads/ads.view",
                                   City = selected.LocationName;
                                   CountryID = selected.CountryId;
                                   CityID = selected.CityId;
-                                  $(".locMap").css("display", "inline-block");
-                                  initializeMap(selected.GeoLong, selected.GeoLat, selected.LocationName);
-                                  $("#us3-radius").change(function () {
-                                      addRadius($("#us3-radius").val());
-                                  });
+                                  latitude = selected.GeoLat;
+                                  longitude = selected.GeoLong;
+                                  Country = selected.parentCountryName;
                               }
                               var obj = {
                                   CountryID: CountryID,
@@ -70,12 +68,16 @@ define("ads/ads.view",
                                   Radius: Radius,
                                   Country: Country,
                                   City: City,
+                                  Latitude: latitude,
+                                  Longitude: longitude
                               }
 
                               viewModel.selectedLocation(obj);
-                              $(".locVisibility").css("display", "inline-block");
+                              viewModel.onAddLocation();
+                              $('#searchCampaignLocations').val("");
                           }
                       });
+                   
                       var lan_array = new Bloodhound({
                           datumTokenizer: function (d) {
                               return Bloodhound.tokenizers.whitespace(d.LanguageName);
@@ -180,6 +182,7 @@ define("ads/ads.view",
                                   displayKey: 'Title',
                                   source: edu_array.ttAdapter()
                               }).bind('typeahead:selected', function (obj, selected) {
+                                  debugger;
                                   if (selected) {
                                       viewModel.addEducation(selected);
                                   }

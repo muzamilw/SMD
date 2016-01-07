@@ -19,5 +19,15 @@
         /// Email
         /// </summary>
         public string Email { get; set; }
+
+        /// <summary>
+        /// Ad Campaign Id
+        /// </summary>
+        public long? AdCampaignId { get; set; }
+
+        /// <summary>
+        /// Survey question Id
+        /// </summary>
+        public long? SqId { get; set; }
     }
 }

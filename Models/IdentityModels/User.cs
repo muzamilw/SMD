@@ -56,8 +56,22 @@ namespace SMD.Models.IdentityModels
         public int? Gender { get; set; }
         public int? LanguageId { get; set; }
         public int? IndustryId { get; set; }
-
         public long? EducationId { get; set; }
+        public string ProfileImage { get; set; }
+        public string UserCode { get; set; }
+        public string SmsCode { get; set; }
+        public string WebsiteLink { get; set; }
+        public string AdvertisingContact { get; set; }
+        public string AdvertisingContactPhoneNumber { get; set; }
+        public string AdvertisingContactEmail { get; set; }
+
+        public string PaypalCustomerId { get; set; }
+        public string GoogleWalletCustomerId { get; set; }
+        public int? PreferredPayoutAccount { get; set; }
+        
+
+
+
         public virtual Industry Industry { get; set; }
         public virtual Language Language { get; set; }
         public virtual ICollection<UserLogin> UserLogins { get; set; }
@@ -76,8 +90,9 @@ namespace SMD.Models.IdentityModels
 
         public virtual Education Education { get; set; }
 
-        public virtual City Cities { get; set; }
-        public virtual Country Countries { get; set; }
+        public virtual City City { get; set; }
+        public virtual Country Country { get; set; }
+        
         #endregion
 
         #region Public

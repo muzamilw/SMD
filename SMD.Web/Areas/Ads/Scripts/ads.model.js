@@ -4,12 +4,15 @@
       Campaign = function (CampaignID, LanguageID, CampaignName, UserID, Status, StatusValue, CampaignDescription, Gender,
           Archived, StartDateTime, EndDateTime, MaxBudget, Type, DisplayTitle, LandingPageVideoLink, VerifyQuestion,
           Answer1, Answer2, Answer3, CorrectAnswer, AgeRangeStart, AgeRangeEnd, ResultClicks, AmountSpent
-          , ImagePath, CampaignImagePath, CampaignTypeImagePath, Description) {
+          , ImagePath, CampaignImagePath, CampaignTypeImagePath, Description, ClickRate,
+          Voucher1Heading, Voucher1Description, Voucher1Value, Voucher2Heading, Voucher2Description, Voucher2Value) {
           var
               //type and userID will be set on server sside
               CampaignID = ko.observable(CampaignID),
               LanguageID = ko.observable(LanguageID),
-              CampaignName = ko.observable(CampaignName),
+              CampaignName = ko.observable(CampaignName).extend({  // custom message
+                  required: true
+              }),
               UserID = ko.observable(UserID),
               Status = ko.observable(Status),
               StatusValue = ko.observable(StatusValue),
@@ -17,44 +20,94 @@
               Description = ko.observable(Description),
               Gender = ko.observable(Gender),
               Archived = ko.observable(Archived),
-              StartDateTime = ko.observable((StartDateTime !== null && StartDateTime !== undefined) ? moment(StartDateTime).toDate() : undefined),//ko.observable(),
-              EndDateTime = ko.observable((EndDateTime !== null && EndDateTime !== undefined) ? moment(EndDateTime).toDate() : undefined),// ko.observable(EndDateTime),
-              MaxBudget = ko.observable(MaxBudget),
+              StartDateTime = ko.observable((StartDateTime !== null && StartDateTime !== undefined) ? moment(StartDateTime).toDate() : undefined).extend({  // custom message
+                  required: true
+              }),//ko.observable(),
+              EndDateTime = ko.observable((EndDateTime !== null && EndDateTime !== undefined) ? moment(EndDateTime).toDate() : undefined).extend({  // custom message
+                  required: true
+              }).extend({
+                  validation: {
+                      validator: function (val, someOtherVal) {
+                      
+                          return moment(val).toDate() > moment(StartDateTime()).toDate();
+                      },
+                      message: 'End date must be greater than start date',
+                  }
+              }),// ko.observable(EndDateTime),
+              MaxBudget = ko.observable(MaxBudget).extend({ required: true, number: true, min: 1}),
               Type = ko.observable(Type),
-              DisplayTitle = ko.observable(DisplayTitle),
-              LandingPageVideoLink = ko.observable(LandingPageVideoLink),
+              DisplayTitle = ko.observable(DisplayTitle).extend({  // custom message
+                  required: true
+              }),
+              LandingPageVideoLink = ko.observable(LandingPageVideoLink).extend({
+                  required: {
+                      onlyIf: function () {
+                          if (Type() == "2" || Type() == "1") {
+                              return true;
+                          } else {
+                              return false;
+                          }
+                      }
+                  }
+              }).extend({
+                  pattern: {
+                      message: 'Please enter valid web url.',
+                      params: /^(?:(?:https?|ftp):\/\/)(?:\S+(?::\S*)?@)?(?:(?!10(?:\.\d{1,3}){3})(?!127(?:\.\d{1,3}){3})(?!169\.254(?:\.\d{1,3}){2})(?!192\.168(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/[^\s]*)?$/i,
+                      onlyIf: function () {
+                          if (Type() == "2") {
+                              return true;
+                          } else {
+                              return false;
+                          }
+                      }
+                  }
+              }),
               VerifyQuestion = ko.observable(VerifyQuestion),
+              Voucher1Heading = ko.observable(Voucher1Heading),
+              Voucher1Description = ko.observable(Voucher1Description),
+              Voucher1Value = ko.observable(Voucher1Value),
+              Voucher2Heading = ko.observable(Voucher2Heading),
+              Voucher2Description = ko.observable(Voucher2Description),
+              Voucher2Value = ko.observable(Voucher2Value),
               Answer1 = ko.observable(Answer1),
               Answer2 = ko.observable(Answer2),
               Answer3 = ko.observable(Answer3),
               CorrectAnswer = ko.observable(CorrectAnswer),
               AgeRangeStart = ko.observable(AgeRangeStart),
-              AgeRangeEnd = ko.observable(AgeRangeEnd),
+              AgeRangeEnd = ko.observable(AgeRangeEnd).extend({
+                  validation: {
+                      validator: function (val, someOtherVal) {
+                          return val > AgeRangeStart();
+                      },
+                      message: 'Age end range must be greater than start range',
+                  }
+              }),
               ResultClicks = ko.observable(ResultClicks),
               AmountSpent = ko.observable(AmountSpent),
               ImagePath = ko.observable(ImagePath),
               CampaignImagePath = ko.observable(CampaignImagePath),
               CampaignTypeImagePath = ko.observable(CampaignTypeImagePath),
+              ClickRate = ko.observable(ClickRate),
               AdCampaignTargetCriterias = ko.observableArray([]),
               AdCampaignTargetLocations = ko.observableArray([]),
-              errors = ko.validation.group({
-
-              }),
-              // Is Valid
-              isValid = ko.computed(function () {
-                  return errors().length === 0;
-              }),
+               // Errors
+                errors = ko.validation.group({
+                    CampaignName:CampaignName,
+                    DisplayTitle: DisplayTitle,
+                    LandingPageVideoLink: LandingPageVideoLink,
+                    StartDateTime: StartDateTime,
+                    EndDateTime: EndDateTime,
+                    MaxBudget: MaxBudget,
+                    AgeRangeEnd: AgeRangeEnd
+                }),
+                // Is Valid 
+                isValid = ko.computed(function () {
+                    return errors().length === 0 ? true : false;
+                }),
               dirtyFlag = new ko.dirtyFlag({
-                  CampaignID: CampaignID,
-                  LanguageID: LanguageID,
                   CampaignName: CampaignName,
-                  UserID: UserID,
-                  Status: Status,
-                  StatusValue: StatusValue,
                   CampaignDescription: CampaignDescription,
                   Description:Description,
-                  Gender: Gender,
-                  Archived: Archived,
                   StartDateTime: StartDateTime,
                   EndDateTime: EndDateTime,
                   MaxBudget: MaxBudget,
@@ -68,10 +121,14 @@
                   CorrectAnswer: CorrectAnswer,
                   AgeRangeStart: AgeRangeStart,
                   AgeRangeEnd: AgeRangeEnd,
-                  ResultClicks: ResultClicks,
-                  AmountSpent: AmountSpent,
                   AdCampaignTargetCriterias: AdCampaignTargetCriterias,
-                  AdCampaignTargetLocations: AdCampaignTargetLocations
+                  AdCampaignTargetLocations: AdCampaignTargetLocations,
+                  Voucher1Heading:Voucher1Heading,
+                  Voucher1Description:Voucher1Description,
+                  Voucher1Value:Voucher1Value,
+                  Voucher2Heading:Voucher2Heading,
+                  Voucher2Description:Voucher2Description,
+                  Voucher2Value: Voucher2Value
               }),
               // Has Changes
               hasChanges = ko.computed(function () {
@@ -123,8 +180,15 @@
                       ImagePath: ImagePath(),
                       CampaignImagePath: CampaignImagePath(),
                       CampaignTypeImagePath: CampaignTypeImagePath(),
+                      ClickRate:ClickRate(),
                       AdCampaignTargetCriterias: targetCriteria,
-                      AdCampaignTargetLocations: LocationtargetCriteria
+                      AdCampaignTargetLocations: LocationtargetCriteria,
+                      Voucher1Heading: Voucher1Heading(),
+                      Voucher1Description: Voucher1Description(),
+                      Voucher1Value: Voucher1Value(),
+                      Voucher2Heading: Voucher2Heading(),
+                      Voucher2Description: Voucher2Description(),
+                      Voucher2Value: Voucher2Value()
                   };
               };
           return {
@@ -156,6 +220,7 @@
               ImagePath: ImagePath,
               CampaignImagePath: CampaignImagePath,
               CampaignTypeImagePath: CampaignTypeImagePath,
+              ClickRate:ClickRate,
               AdCampaignTargetCriterias: AdCampaignTargetCriterias,
               AdCampaignTargetLocations: AdCampaignTargetLocations,
               convertToServerData:convertToServerData,
@@ -163,7 +228,13 @@
               reset: reset,
               isValid: isValid,
               dirtyFlag:dirtyFlag,
-              errors: errors
+              errors: errors,
+              Voucher1Heading: Voucher1Heading,
+              Voucher1Description: Voucher1Description,
+              Voucher1Value: Voucher1Value,
+              Voucher2Heading: Voucher2Heading,
+              Voucher2Description: Voucher2Description,
+              Voucher2Value: Voucher2Value
           };
       };
 
@@ -234,7 +305,7 @@
           };
       };
     var // ReSharper disable InconsistentNaming
-    AdCampaignTargetLocation = function (ID, CampaignID, CountryID, CityID, Radius, Country, City,IncludeorExclude) {
+    AdCampaignTargetLocation = function (ID, CampaignID, CountryID, CityID, Radius, Country, City, IncludeorExclude, Latitude, Longitude) {
       
         var
             //type and userID will be set on server sside
@@ -245,7 +316,9 @@
             Radius = ko.observable(Radius),
             Country = ko.observable(Country),
             City = ko.observable(City),
-            IncludeorExclude = ko.observable(IncludeorExclude == true ? "1" : "0")
+            IncludeorExclude = ko.observable(IncludeorExclude == true ? "1" : "0"),
+                     Latitude = ko.observable(Latitude),
+           Longitude = ko.observable(Longitude),
             // Convert to server data
             convertToServerData = function () {
                 return {
@@ -268,13 +341,20 @@
             Country: Country,
             City: City,
             IncludeorExclude:IncludeorExclude,
-            convertToServerData: convertToServerData
+            convertToServerData: convertToServerData,
+            Latitude: Latitude,
+            Longitude: Longitude
         };
     };
     // Factory Method
     Campaign.Create = function (source) {
   
-        var campaign = new Campaign(source.CampaignId, source.LanguageId, source.CampaignName, source.UserId, source.Status, source.StatusValue, source.CampaignDescription, source.Gender + "", source.Archived, source.StartDateTime, source.EndDateTime, source.MaxBudget, source.Type + "", source.DisplayTitle, source.LandingPageVideoLink, source.VerifyQuestion, source.Answer1, source.Answer2, source.Answer3, source.CorrectAnswer, source.AgeRangeStart, source.AgeRangeEnd, source.ResultClicks, source.AmountSpent, source.ImagePath, source.CampaignImagePath, source.CampaignTypeImagePath, source.Description);
+        var campaign = new Campaign(source.CampaignId, source.LanguageId, source.CampaignName, source.UserId, source.Status, source.StatusValue,
+            source.CampaignDescription, source.Gender + "", source.Archived, source.StartDateTime, source.EndDateTime, source.MaxBudget
+            , source.Type + "", source.DisplayTitle, source.LandingPageVideoLink, source.VerifyQuestion, source.Answer1, source.Answer2, source.Answer3,
+            source.CorrectAnswer, source.AgeRangeStart, source.AgeRangeEnd, source.ResultClicks, source.AmountSpent, source.ImagePath, source.CampaignImagePath,
+            source.CampaignTypeImagePath, source.Description, source.ClickRate, source.Voucher1Heading, source.Voucher1Description, source.Voucher1Value, source.Voucher2Heading, source.Voucher2Description,
+             source.Voucher2Value);
         _.each(source.AdCampaignTargetCriterias, function (item) {
             campaign.AdCampaignTargetCriterias.push(AdCampaignTargetCriteriasModel.Create(item));
         });
@@ -291,7 +371,7 @@
     };
     AdCampaignTargetLocation.Create = function (source) {
        
-        return new AdCampaignTargetLocation(source.Id, source.CampaignId, source.CountryId, source.CityId, source.Radius, source.Country, source.City,source.IncludeorExclude);
+        return new AdCampaignTargetLocation(source.Id, source.CampaignId, source.CountryId, source.CityId, source.Radius, source.Country, source.City, source.IncludeorExclude, source.Latitude, source.Longitude);
     };
 
     return {

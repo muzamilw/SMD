@@ -1795,4 +1795,169 @@ ALTER TABLE dbo.AspNetUsers SET (LOCK_ESCALATION = TABLE)
 GO
 COMMIT
 
- -- ============================= updated on smd live server 20151230 =============================
+ -- ============================= updated on smd live server 20151230 ============================= here
+
+ 
+ -- ============================= updated on smd live server 201611 =============================
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[CustomUrl](
+	[UrlId] [bigint] IDENTITY(1,1) NOT NULL,
+	[ShortUrl] [nvarchar](50) NULL,
+	[ActualUrl] [nvarchar](250) NULL,
+	[UserId] [bigint] NULL,
+ CONSTRAINT [PK_CustomUrl] PRIMARY KEY CLUSTERED 
+(
+	[UrlId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.AdCampaign ADD
+	RewardType int NULL,
+	Voucher1Heading nvarchar(200) NULL,
+	Voucher1Description nvarchar(MAX) NULL,
+	Voucher1Value nvarchar(MAX) NULL,
+	Voucher2Heading nvarchar(200) NULL,
+	Voucher2Description nvarchar(MAX) NULL,
+	Voucher2Value nvarchar(MAX) NULL
+GO
+ALTER TABLE dbo.AdCampaign SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Game](
+	[GameId] [bigint] IDENTITY(1,1) NOT NULL,
+	[GameName] [nvarchar](200) NULL,
+	[Status] [bit] NULL,
+	[AgeRangeStart] [int] NULL,
+	[AgeRangeEnd] [int] NULL,
+ CONSTRAINT [PK_Game] PRIMARY KEY CLUSTERED 
+(
+	[GameId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+/* To prevent any potential data loss issues, you should review this script in detail before running it outside the context of the database designer.*/
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.SurveyQuestion ADD
+	ParentSurveyId bigint NULL,
+	Priority int NULL
+GO
+ALTER TABLE dbo.SurveyQuestion SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+
+
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.SurveyQuestionResponse ADD
+	SkipCount int NULL
+GO
+ALTER TABLE dbo.SurveyQuestionResponse SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.AdCampaignResponse ADD
+	SkipCount int NULL
+GO
+ALTER TABLE dbo.AdCampaignResponse SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+
+
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.AspNetUsers ADD
+	ProfileImage nvarchar(200) NULL,
+	UserCode nvarchar(300) NULL,
+	SmsCode nvarchar(50) NULL,
+	WebsiteLink nvarchar(100) NULL,
+	AdvertisingContact nvarchar(MAX) NULL,
+	AdvertisingContactPhoneNumber nvarchar(MAX) NULL,
+	AdvertisingContactEmail nvarchar(MAX) NULL
+GO
+ALTER TABLE dbo.AspNetUsers SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+
+ 
+ -- ============================= updated on smd live server 201611 ============================= Jan-05_2016
+
+ -- 06-Jan-16  by Baqer STARTS
+
+ alter table aspnetusers
+add PaypalCustomerId nvarchar (250) null
+
+alter table aspnetusers
+add GoogleWalletCustomerId nvarchar (250) null
+
+alter table aspnetusers
+add PreferredPayoutAccount int null
+
+-- 06-Jan-16  by Baqer ENDS

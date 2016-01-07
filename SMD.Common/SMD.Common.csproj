@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="ClaimHelper.cs" />
     <Compile Include="HashingManager.cs" />
+    <Compile Include="ImageHelper.cs" />
     <Compile Include="LanguageResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -70,8 +71,16 @@
       <LastGenOutput>LanguageResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Externaldlls\" />
+    <Content Include="Externaldlls\GrapeCity.ActiveReports.Document.v7.dll" />
+    <Content Include="Externaldlls\GrapeCity.ActiveReports.Export.Document.v7.dll" />
+    <Content Include="Externaldlls\GrapeCity.ActiveReports.Export.Excel.v7.dll" />
+    <Content Include="Externaldlls\GrapeCity.ActiveReports.Export.Html.v7.dll" />
+    <Content Include="Externaldlls\GrapeCity.ActiveReports.Export.Pdf.v7.dll" />
+    <Content Include="Externaldlls\GrapeCity.ActiveReports.v7.dll" />
+    <Content Include="Externaldlls\GrapeCity.ActiveReports.Web.v7.dll" />
+    <Content Include="Externaldlls\GrapeCity.LicenseService.ActiveReports.v7.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

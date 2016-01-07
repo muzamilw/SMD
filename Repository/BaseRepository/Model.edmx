@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="SMDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SMDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Account">
           <Key>
             <PropertyRef Name="AccountId" />
@@ -56,6 +56,13 @@
           <Property Name="ProjectedReach" Type="bigint" />
           <Property Name="ResultClicks" Type="bigint" />
           <Property Name="AmountSpent" Type="float" />
+          <Property Name="RewardType" Type="int" />
+          <Property Name="Voucher1Heading" Type="nvarchar" MaxLength="200" />
+          <Property Name="Voucher1Description" Type="nvarchar(max)" />
+          <Property Name="Voucher1Value" Type="nvarchar(max)" />
+          <Property Name="Voucher2Heading" Type="nvarchar" MaxLength="200" />
+          <Property Name="Voucher2Description" Type="nvarchar(max)" />
+          <Property Name="Voucher2Value" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="AdCampaignResponse">
           <Key>
@@ -66,6 +73,7 @@
           <Property Name="CreatedDateTime" Type="datetime" />
           <Property Name="UserID" Type="nvarchar" MaxLength="128" />
           <Property Name="EndUserDollarAmount" Type="float" />
+          <Property Name="SkipCount" Type="int" />
         </EntityType>
         <EntityType Name="AdCampaignTargetCriteria">
           <Key>
@@ -178,6 +186,16 @@
           <Property Name="LanguageID" Type="int" />
           <Property Name="IndustryID" Type="int" />
           <Property Name="EducationId" Type="bigint" />
+          <Property Name="ProfileImage" Type="nvarchar" MaxLength="200" />
+          <Property Name="UserCode" Type="nvarchar" MaxLength="300" />
+          <Property Name="SmsCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="WebsiteLink" Type="nvarchar" MaxLength="100" />
+          <Property Name="AdvertisingContact" Type="nvarchar(max)" />
+          <Property Name="AdvertisingContactPhoneNumber" Type="nvarchar(max)" />
+          <Property Name="AdvertisingContactEmail" Type="nvarchar(max)" />
+          <Property Name="PaypalCustomerId" Type="nvarchar" MaxLength="250" />
+          <Property Name="GoogleWalletCustomerId" Type="nvarchar" MaxLength="250" />
+          <Property Name="PreferredPayoutAccount" Type="int" />
         </EntityType>
         <EntityType Name="AuditLog">
           <Key>
@@ -220,6 +238,15 @@
           <Property Name="SMDCreditRatio" Type="float" />
           <Property Name="CurrencySymbol" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="CustomUrl">
+          <Key>
+            <PropertyRef Name="UrlId" />
+          </Key>
+          <Property Name="UrlId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ShortUrl" Type="nvarchar" MaxLength="50" />
+          <Property Name="ActualUrl" Type="nvarchar" MaxLength="250" />
+          <Property Name="UserId" Type="bigint" />
+        </EntityType>
         <EntityType Name="Education">
           <Key>
             <PropertyRef Name="EducationId" />
@@ -227,6 +254,16 @@
           <Property Name="EducationId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="200" />
           <Property Name="Status" Type="int" />
+        </EntityType>
+        <EntityType Name="Game">
+          <Key>
+            <PropertyRef Name="GameId" />
+          </Key>
+          <Property Name="GameId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GameName" Type="nvarchar" MaxLength="200" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="AgeRangeStart" Type="int" />
+          <Property Name="AgeRangeEnd" Type="int" />
         </EntityType>
         <EntityType Name="Industry">
           <Key>
@@ -394,6 +431,8 @@
           <Property Name="AgeRangeEnd" Type="int" />
           <Property Name="Gender" Type="int" />
           <Property Name="SubmissionDate" Type="datetime" />
+          <Property Name="ParentSurveyId" Type="bigint" />
+          <Property Name="Priority" Type="int" />
         </EntityType>
         <EntityType Name="SurveyQuestionResponse">
           <Key>
@@ -404,6 +443,7 @@
           <Property Name="UserID" Type="nvarchar" MaxLength="128" />
           <Property Name="ResoponseDateTime" Type="datetime" />
           <Property Name="UserSelection" Type="int" />
+          <Property Name="SkipCount" Type="int" />
         </EntityType>
         <EntityType Name="SurveyQuestionTargetCriteria">
           <Key>
@@ -637,6 +677,30 @@
               <PropertyRef Name="CountryID" />
             </Principal>
             <Dependent Role="AdCampaignTargetLocation">
+              <PropertyRef Name="CountryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUsers_City">
+          <End Role="City" Type="Self.City" Multiplicity="0..1" />
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="CityID" />
+            </Principal>
+            <Dependent Role="AspNetUsers">
+              <PropertyRef Name="CityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUsers_Country">
+          <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="CountryID" />
+            </Principal>
+            <Dependent Role="AspNetUsers">
               <PropertyRef Name="CountryID" />
             </Dependent>
           </ReferentialConstraint>
@@ -1180,7 +1244,9 @@
           <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Currency" EntityType="Self.Currency" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CustomUrl" EntityType="Self.CustomUrl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Education" EntityType="Self.Education" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Game" EntityType="Self.Game" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Industry" EntityType="Self.Industry" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Invoice" EntityType="Self.Invoice" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InvoiceDetail" EntityType="Self.InvoiceDetail" Schema="dbo" store:Type="Tables" />
@@ -1252,6 +1318,14 @@
           <AssociationSet Name="FK_AdCampaignTargetLocation_Country" Association="Self.FK_AdCampaignTargetLocation_Country">
             <End Role="Country" EntitySet="Country" />
             <End Role="AdCampaignTargetLocation" EntitySet="AdCampaignTargetLocation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUsers_City" Association="Self.FK_AspNetUsers_City">
+            <End Role="City" EntitySet="City" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUsers_Country" Association="Self.FK_AspNetUsers_Country">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
           <AssociationSet Name="FK_AspNetUsers_Education" Association="Self.FK_AspNetUsers_Education">
             <End Role="Education" EntitySet="Education" />
@@ -1491,6 +1565,18 @@
           <NavigationProperty Name="Invoices" Relationship="DomainModels.FK_Invoice_AspNetUsers" FromRole="User" ToRole="Invoice" />
           <Property Name="EducationId" Type="Int64" />
           <NavigationProperty Name="Education" Relationship="DomainModels.FK_AspNetUsers_Education" FromRole="User" ToRole="Education" />
+          <Property Name="ProfileImage" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="UserCode" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="SmsCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="WebsiteLink" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="AdvertisingContact" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AdvertisingContactPhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AdvertisingContactEmail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PaypalCustomerId" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="GoogleWalletCustomerId" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="PreferredPayoutAccount" Type="Int32" />
+          <NavigationProperty Name="City" Relationship="DomainModels.FK_AspNetUsers_City" FromRole="User" ToRole="City" />
+          <NavigationProperty Name="Country" Relationship="DomainModels.FK_AspNetUsers_Country" FromRole="User" ToRole="Country" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="DomainModels.User" Multiplicity="1">
@@ -1798,6 +1884,16 @@
             <Parameter Name="FromRow" Mode="In" Type="Int32" />
             <Parameter Name="ToRow" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="CustomUrls" EntityType="DomainModels.CustomUrl" />
+          <EntitySet Name="Games" EntityType="DomainModels.Game" />
+          <AssociationSet Name="FK_AspNetUsers_City" Association="DomainModels.FK_AspNetUsers_City">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUsers_Country" Association="DomainModels.FK_AspNetUsers_Country">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="ProfileQuestion">
           <Key>
@@ -1958,6 +2054,7 @@
           <NavigationProperty Name="Cities" Relationship="DomainModels.FK_City_Country" FromRole="Country" ToRole="City" />
           <NavigationProperty Name="Taxes" Relationship="DomainModels.FK_Tax_Country" FromRole="Country" ToRole="Tax" />
           <NavigationProperty Name="Products" Relationship="DomainModels.FK_SMDPrice_Country" FromRole="Country" ToRole="Product" />
+          <NavigationProperty Name="Users" Relationship="DomainModels.FK_AspNetUsers_Country" FromRole="Country" ToRole="User" />
         </EntityType>
         <EntityType Name="Language">
           <Key>
@@ -1968,7 +2065,7 @@
           <Property Name="NativeName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AdCampaigns" Relationship="DomainModels.FK_AdCampaign_Language" FromRole="Language" ToRole="AdCampaign" />
           <NavigationProperty Name="SurveyQuestions" Relationship="DomainModels.FK_SurveyQuestion_Language" FromRole="Language" ToRole="SurveyQuestion" />
-          <NavigationProperty Name="AspNetUsers" Relationship="DomainModels.FK_AspNetUsers_Language" FromRole="Language" ToRole="User" />
+          <NavigationProperty Name="Users" Relationship="DomainModels.FK_AspNetUsers_Language" FromRole="Language" ToRole="User" />
           <NavigationProperty Name="SurveyQuestionTargetCriterias" Relationship="DomainModels.FK_SurveyQuestionTargetCriteria_Language" FromRole="Language" ToRole="SurveyQuestionTargetCriteria" />
           <NavigationProperty Name="AdCampaignTargetCriterias" Relationship="DomainModels.FK_AdCampaignTargetCriteria_Language" FromRole="Language" ToRole="AdCampaignTargetCriteria" />
         </EntityType>
@@ -2054,6 +2151,13 @@
           <NavigationProperty Name="AdCampaignTargetLocations" Relationship="DomainModels.FK_AdCampaignTargetLocation_AdCampaign" FromRole="AdCampaign" ToRole="AdCampaignTargetLocation" />
           <NavigationProperty Name="InvoiceDetails" Relationship="DomainModels.FK_InvoiceDetail_AdCampaign" FromRole="AdCampaign" ToRole="InvoiceDetail" />
           <NavigationProperty Name="AdCampaignTargetCriterias" Relationship="DomainModels.FK_AdCampaignTargetCriteria_AdCampaign" FromRole="AdCampaign" ToRole="AdCampaignTargetCriteria" />
+          <Property Name="RewardType" Type="Int32" />
+          <Property Name="Voucher1Heading" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Voucher1Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Voucher1Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Voucher2Heading" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Voucher2Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Voucher2Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="AdCampaignResponse">
           <Key>
@@ -2066,6 +2170,7 @@
           <Property Name="EndUserDollarAmount" Type="Double" />
           <NavigationProperty Name="AdCampaign" Relationship="DomainModels.FK_AdCampaignResponse_AdCampaign" FromRole="AdCampaignResponse" ToRole="AdCampaign" />
           <NavigationProperty Name="User" Relationship="DomainModels.FK_AdCampaignResponse_AspNetUsers" FromRole="AdCampaignResponse" ToRole="User" />
+          <Property Name="SkipCount" Type="Int32" />
         </EntityType>
         <EntityType Name="AdCampaignTargetLocation">
           <Key>
@@ -2125,6 +2230,8 @@
           <Property Name="SubmissionDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="InvoiceDetails" Relationship="DomainModels.FK_InvoiceDetail_SurveyQuestion" FromRole="SurveyQuestion" ToRole="InvoiceDetail" />
           <NavigationProperty Name="AdCampaignTargetCriterias" Relationship="DomainModels.FK_AdCampaignTargetCriteria_SurveyQuestion" FromRole="SurveyQuestion" ToRole="AdCampaignTargetCriteria" />
+          <Property Name="ParentSurveyId" Type="Int64" />
+          <Property Name="Priority" Type="Int32" />
         </EntityType>
         <EntityType Name="SurveyQuestionTargetCriteria">
           <Key>
@@ -2354,6 +2461,7 @@
           <Property Name="UserSelection" Type="Int32" />
           <NavigationProperty Name="User" Relationship="DomainModels.FK_SurveyQuestionResponse_AspNetUsers" FromRole="SurveyQuestionResponse" ToRole="User" />
           <NavigationProperty Name="SurveyQuestion" Relationship="DomainModels.FK_SurveyQuestionResponse_SurveyQuestion" FromRole="SurveyQuestionResponse" ToRole="SurveyQuestion" />
+          <Property Name="SkipCount" Type="Int32" />
         </EntityType>
         <Association Name="FK_SurveyQuestionResponse_AspNetUsers">
           <End Type="DomainModels.User" Role="User" Multiplicity="0..1" />
@@ -2392,6 +2500,7 @@
           <NavigationProperty Name="AdCampaignTargetLocations" Relationship="DomainModels.FK_AdCampaignTargetLocation_City" FromRole="City" ToRole="AdCampaignTargetLocation" />
           <NavigationProperty Name="Country" Relationship="DomainModels.FK_City_Country" FromRole="City" ToRole="Country" />
           <NavigationProperty Name="SurveyQuestionTargetLocations" Relationship="DomainModels.FK_SurveyQuestionTargetLocation_City" FromRole="City" ToRole="SurveyQuestionTargetLocation" />
+          <NavigationProperty Name="Users" Relationship="DomainModels.FK_AspNetUsers_City" FromRole="City" ToRole="User" />
         </EntityType>
         <Association Name="FK_AdCampaignTargetLocation_City">
           <End Type="DomainModels.City" Role="City" Multiplicity="0..1" />
@@ -3027,6 +3136,49 @@
           <Property Type="Double" Name="ClickRate" Nullable="true" />
           <Property Type="Int32" Name="AdType" Nullable="true" />
         </ComplexType>
+        <EntityType Name="CustomUrl">
+          <Key>
+            <PropertyRef Name="UrlId" />
+          </Key>
+          <Property Name="UrlId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ShortUrl" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ActualUrl" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="Int64" />
+        </EntityType>
+        <EntityType Name="Game">
+          <Key>
+            <PropertyRef Name="GameId" />
+          </Key>
+          <Property Name="GameId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GameName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="AgeRangeStart" Type="Int32" />
+          <Property Name="AgeRangeEnd" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_AspNetUsers_City">
+          <End Type="DomainModels.City" Role="City" Multiplicity="0..1" />
+          <End Type="DomainModels.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="CityId" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="CityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUsers_Country">
+          <End Type="DomainModels.Country" Role="Country" Multiplicity="0..1" />
+          <End Type="DomainModels.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="CountryId" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3053,6 +3205,16 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="DomainModels.User">
               <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="PreferredPayoutAccount" ColumnName="PreferredPayoutAccount" />
+                <ScalarProperty Name="GoogleWalletCustomerId" ColumnName="GoogleWalletCustomerId" />
+                <ScalarProperty Name="PaypalCustomerId" ColumnName="PaypalCustomerId" />
+                <ScalarProperty Name="AdvertisingContactEmail" ColumnName="AdvertisingContactEmail" />
+                <ScalarProperty Name="AdvertisingContactPhoneNumber" ColumnName="AdvertisingContactPhoneNumber" />
+                <ScalarProperty Name="AdvertisingContact" ColumnName="AdvertisingContact" />
+                <ScalarProperty Name="WebsiteLink" ColumnName="WebsiteLink" />
+                <ScalarProperty Name="SmsCode" ColumnName="SmsCode" />
+                <ScalarProperty Name="UserCode" ColumnName="UserCode" />
+                <ScalarProperty Name="ProfileImage" ColumnName="ProfileImage" />
                 <ScalarProperty Name="EducationId" ColumnName="EducationId" />
                 <ScalarProperty Name="IndustryId" ColumnName="IndustryID" />
                 <ScalarProperty Name="LanguageId" ColumnName="LanguageID" />
@@ -3217,6 +3379,13 @@
           <EntitySetMapping Name="AdCampaigns">
             <EntityTypeMapping TypeName="DomainModels.AdCampaign">
               <MappingFragment StoreEntitySet="AdCampaign">
+                <ScalarProperty Name="Voucher2Value" ColumnName="Voucher2Value" />
+                <ScalarProperty Name="Voucher2Description" ColumnName="Voucher2Description" />
+                <ScalarProperty Name="Voucher2Heading" ColumnName="Voucher2Heading" />
+                <ScalarProperty Name="Voucher1Value" ColumnName="Voucher1Value" />
+                <ScalarProperty Name="Voucher1Description" ColumnName="Voucher1Description" />
+                <ScalarProperty Name="Voucher1Heading" ColumnName="Voucher1Heading" />
+                <ScalarProperty Name="RewardType" ColumnName="RewardType" />
                 <ScalarProperty Name="AmountSpent" ColumnName="AmountSpent" />
                 <ScalarProperty Name="ResultClicks" ColumnName="ResultClicks" />
                 <ScalarProperty Name="ProjectedReach" ColumnName="ProjectedReach" />
@@ -3260,6 +3429,7 @@
           <EntitySetMapping Name="AdCampaignResponses">
             <EntityTypeMapping TypeName="DomainModels.AdCampaignResponse">
               <MappingFragment StoreEntitySet="AdCampaignResponse">
+                <ScalarProperty Name="SkipCount" ColumnName="SkipCount" />
                 <ScalarProperty Name="EndUserDollarAmount" ColumnName="EndUserDollarAmount" />
                 <ScalarProperty Name="UserId" ColumnName="UserID" />
                 <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
@@ -3283,6 +3453,8 @@
           <EntitySetMapping Name="SurveyQuestions">
             <EntityTypeMapping TypeName="DomainModels.SurveyQuestion">
               <MappingFragment StoreEntitySet="SurveyQuestion">
+                <ScalarProperty Name="Priority" ColumnName="Priority" />
+                <ScalarProperty Name="ParentSurveyId" ColumnName="ParentSurveyId" />
                 <ScalarProperty Name="SubmissionDate" ColumnName="SubmissionDate" />
                 <ScalarProperty Name="Gender" ColumnName="Gender" />
                 <ScalarProperty Name="AgeRangeEnd" ColumnName="AgeRangeEnd" />
@@ -3362,6 +3534,7 @@
           <EntitySetMapping Name="SurveyQuestionResponses">
             <EntityTypeMapping TypeName="DomainModels.SurveyQuestionResponse">
               <MappingFragment StoreEntitySet="SurveyQuestionResponse">
+                <ScalarProperty Name="SkipCount" ColumnName="SkipCount" />
                 <ScalarProperty Name="UserSelection" ColumnName="UserSelection" />
                 <ScalarProperty Name="ResoponseDateTime" ColumnName="ResoponseDateTime" />
                 <ScalarProperty Name="UserId" ColumnName="UserID" />
@@ -3573,6 +3746,27 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="CustomUrls">
+            <EntityTypeMapping TypeName="DomainModels.CustomUrl">
+              <MappingFragment StoreEntitySet="CustomUrl">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ActualUrl" ColumnName="ActualUrl" />
+                <ScalarProperty Name="ShortUrl" ColumnName="ShortUrl" />
+                <ScalarProperty Name="UrlId" ColumnName="UrlId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Games">
+            <EntityTypeMapping TypeName="DomainModels.Game">
+              <MappingFragment StoreEntitySet="Game">
+                <ScalarProperty Name="AgeRangeEnd" ColumnName="AgeRangeEnd" />
+                <ScalarProperty Name="AgeRangeStart" ColumnName="AgeRangeStart" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="GameName" ColumnName="GameName" />
+                <ScalarProperty Name="GameId" ColumnName="GameId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

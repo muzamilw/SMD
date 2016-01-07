@@ -41,6 +41,9 @@ namespace SMD.Implementation.Services
         private readonly IInvoiceRepository invoiceRepository;
         private readonly IInvoiceDetailRepository invoiceDetailRepository;
         private readonly IEducationRepository _educationRepository;
+        private readonly IStripeService stripeService;
+        private readonly WebApiUserService webApiUserService;
+
         #region Private Funcs
         private ApplicationUserManager UserManager
         {
@@ -88,62 +91,6 @@ namespace SMD.Implementation.Services
             }
             return savePaths;
         }
-
-        /// <summary>
-        /// Get Stripe Customer by User Id
-        /// </summary>
-        private User GetUserByUserId(string email)
-        {
-            User user = UserManager.FindById(email);
-            if (user == null)
-            {
-                throw new SMDException("No such user with provided user Id!");
-            }
-
-            return user;
-        }
-
-        /// <summary>
-        /// Stripe Payment Work
-        /// </summary>
-        private string CreateChargeWithCustomerId(int? amount, string customerId)
-        {
-            // Verify If Credit Card is not expired
-            var customerService = new StripeCustomerService();
-            var customer = customerService.Get(customerId);
-            if (customer == null)
-            {
-                throw new SMDException("Customrt Not Found!");
-            }
-
-            // If Card has been expired then skip payment
-            if (customer.SourceList != null && customer.SourceList.Data != null && customer.DefaultSourceId != null)
-            {
-                var defaultStripeCard = customer.SourceList.Data.FirstOrDefault(card => card.Id == customer.DefaultSourceId);
-                if (defaultStripeCard != null && (Convert.ToInt32(defaultStripeCard.ExpirationMonth) < DateTime.Now.Month ||
-                    Convert.ToInt32(defaultStripeCard.ExpirationYear) < DateTime.Now.Year))
-                {
-                    throw new SMDException("Card Expired!");
-                }
-            }
-
-            var stripeChargeCreateOptions = new StripeChargeCreateOptions
-            {
-                CustomerId = customerId,
-                Amount = amount,
-                Currency = "usd",
-                Capture = true
-                // (not required) set this to false if you don't want to capture the charge yet - requires you call capture later
-            };
-            var chargeService = new StripeChargeService();
-            var resposne = chargeService.Create(stripeChargeCreateOptions);
-            if (resposne.Status == "succeeded")
-            {
-                return resposne.BalanceTransactionId;
-            }
-            return "failed";
-        }
-
         #endregion
 
         #endregion
@@ -163,7 +110,7 @@ namespace SMD.Implementation.Services
             IAdCampaignTargetCriteriaRepository adCampaignTargetCriteriaRepository,
             IProfileQuestionRepository profileQuestionRepository,
             IProfileQuestionAnswerRepository profileQuestionAnswerRepository,
-            ISurveyQuestionRepository surveyQuestionRepository, IProductRepository productRepository, ITaxRepository taxRepository, IInvoiceRepository invoiceRepository, IInvoiceDetailRepository invoiceDetailRepository,IEducationRepository educationRepository)
+            ISurveyQuestionRepository surveyQuestionRepository, IProductRepository productRepository, ITaxRepository taxRepository, IInvoiceRepository invoiceRepository, IInvoiceDetailRepository invoiceDetailRepository,IEducationRepository educationRepository, IStripeService stripeService, WebApiUserService webApiUserService)
         {
             this._adCampaignRepository = adCampaignRepository;
             this._languageRepository = languageRepository;
@@ -181,6 +128,8 @@ namespace SMD.Implementation.Services
             this.invoiceDetailRepository = invoiceDetailRepository;
             this._industryRepository = industryRepository;
             this._educationRepository = educationRepository;
+            this.stripeService = stripeService;
+            this.webApiUserService = webApiUserService;
         }
 
         /// <summary>
@@ -197,7 +146,9 @@ namespace SMD.Implementation.Services
                 campaignProduct = productRepository.GetProductByCountryId(Convert.ToInt32(loggedInUser.CountryId), code);
                 objUC.CountryId = loggedInUser.CountryId;
                 objUC.CityId = loggedInUser.CityId;
-                objUC.CityName = loggedInUser.Cities != null ? loggedInUser.Cities.CityName : "";
+                objUC.CityName = loggedInUser.City != null ? loggedInUser.City.CityName : "";
+                objUC.GeoLat = loggedInUser.City != null ? loggedInUser.City.GeoLat : "";
+                objUC.GeoLong = loggedInUser.City != null ? loggedInUser.City.GeoLong : "";
 
 
                 objUC.EducationId = loggedInUser.EducationId;
@@ -206,10 +157,11 @@ namespace SMD.Implementation.Services
                 objUC.LanguageId = loggedInUser.LanguageId;
 
 
-                objUC.CountryName = loggedInUser.Countries != null ? loggedInUser.Countries.CountryName : "";
+                objUC.CountryName = loggedInUser.Country != null ? loggedInUser.Country.CountryName : "";
                 objUC.EducationTitle = loggedInUser.Education != null ? loggedInUser.Education.Title : "";
                 objUC.IndustryName = loggedInUser.Industry != null ? loggedInUser.Industry.IndustryName : "";
                 objUC.LanguageName = loggedInUser.Language != null ? loggedInUser.Language.LanguageName : "";
+                objUC.isStripeIntegrated = String.IsNullOrEmpty(loggedInUser.StripeCustomerId) ? false : true;
             }
             if (campaignProduct != null)
             {
@@ -223,7 +175,9 @@ namespace SMD.Implementation.Services
             return new AdCampaignBaseResponse
             {
                 Languages = _languageRepository.GetAllLanguages(),
-                UserAndCostDetails = objUC
+                Education = _educationRepository.GetAll(),
+                UserAndCostDetails = objUC,
+                Industry = _industryRepository.GetAll()
             };
         }
 
@@ -464,7 +418,7 @@ namespace SMD.Implementation.Services
             #region Stripe Payment
 
             // User who added Campaign for approval 
-            var user = GetUserByUserId(source.UserId);
+            var user = webApiUserService.GetUserByUserId(source.UserId);
             // Get Current Product
             var product = productRepository.GetProductByCountryId(user.CountryId, "Ad");
             // Tax Applied
@@ -473,7 +427,7 @@ namespace SMD.Implementation.Services
             var amount = product.SetupPrice + tax.TaxValue;
 
             // Make Stripe actual payment 
-            var response = CreateChargeWithCustomerId((int?)amount, user.StripeCustomerId);
+            var response = stripeService.ChargeCustomer((int?)amount, user.StripeCustomerId);
 
             #endregion
             if (response != "failed")
@@ -566,8 +520,14 @@ namespace SMD.Implementation.Services
             };
         }
 
+
+        /// <summary>
+        /// Get Ad Campaign By Id
+        /// </summary>
+        public AdCampaign GetAdCampaignById(long campaignId)
+        {
+            return _adCampaignRepository.Find(campaignId);
+        }
         #endregion
-
-
     }
 }

@@ -11,15 +11,17 @@
   cursor: pointer;
 }
 .coun_in_ex_cnt {
-  width: 100px;
+  width: 30%;
   float: left;
+  border: 1px solid #e7ebee;
 }
 .count_token_opt_cnt {
   float: left;
-  width: 280px;
+  width: 69%;
+  border: 1px solid #e7ebee;
 }
 #searchSurveyLocations {
-  width: 280px!important;
+  width: 280px !important;
   border-top-left-radius: 0px !important;
   border-top-right-radius: 0px !important;
   border: none;
@@ -29,7 +31,7 @@
 #searchLanguages,
 #searchIndustries,
 #searchEducations {
-  width: 280px!important;
+  width: 280px !important;
   border-top-left-radius: 0px !important;
   border-top-right-radius: 0px !important;
   border: none;
@@ -119,4 +121,23 @@ div.Tokenize ul.Dropdown {
   width: 10px;
   font-size: 20px;
   padding: 0px 17px 0px 10px;
+}
+.sp_NQc91B1T0mb {
+  width: 10px;
+  height: 14px;
+  background-position: -724px -244px;
+}
+.meterPin {
+  background-image: url('/Content/Images/pin.png') !important;
+  background-position: center !important;
+}
+.count_token_opt_cnt_map {
+  float: left;
+  width: 100%;
+  border: 1px solid #e7ebee;
+}
+.noCriteria {
+  background: none !important;
+  font-size: 13px !important;
+  padding-left: 20px;
 }

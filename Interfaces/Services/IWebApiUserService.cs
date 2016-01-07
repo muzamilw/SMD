@@ -13,7 +13,7 @@ namespace SMD.Interfaces.Services
         /// <summary>
         /// Approve Survey
         /// </summary>
-        Task<BaseApiResponse> UpdateTransactionOnSurveyApproval(ApproveSurveyRequest request);
+        Task<BaseApiResponse> UpdateTransactionOnSurveyApproval(ApproveSurveyRequest request, bool isApiCall = true);
 
         /// <summary>
         /// Ad Viewed
@@ -75,5 +75,10 @@ namespace SMD.Interfaces.Services
         /// Get Stripe Customer by Email
         /// </summary>
         Task<string> GetStripeCustomerIdByEmail(string email);
+
+        /// <summary>
+        /// Get User using usermanager  For Stripe Work 
+        /// </summary>
+        User GetUserByUserId(string userId);
     }
 }
