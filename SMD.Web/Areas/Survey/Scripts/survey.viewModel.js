@@ -624,8 +624,11 @@ define("survey/survey.viewModel",
                             }
                            
                         } else {
-                            selectedQuestion().errors.showAllMessages();
-                            toastr.error("Please fill the required feilds to continue.");
+                            if (isEditorVisible()) {
+                                selectedQuestion().errors.showAllMessages();
+                                toastr.error("Please fill the required feilds to continue.");
+                            }
+
                         }
                        
                     },
@@ -646,8 +649,10 @@ define("survey/survey.viewModel",
                                 });
                             }
                         } else {
-                            selectedQuestion().errors.showAllMessages();
-                            toastr.error("Please fill the required feilds to continue.");
+                            if (isEditorVisible()) {
+                                selectedQuestion().errors.showAllMessages();
+                                toastr.error("Please fill the required feilds to continue.");
+                            }
                         }
                        
                     }
