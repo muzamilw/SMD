@@ -58,7 +58,7 @@ define("ads/ads.viewModel",
                     selectedQuestionCountryList = ko.observableArray([]),
                      educations = ko.observableArray([]),
                       professions = ko.observableArray([]),
-                      voucherQuestionStatus = ko.observable(0),
+                      voucherQuestionStatus = ko.observable(false),
                     getCampaignBaseContent = function () {
                         dataservice.getBaseData({
                             RequestId: 1,
@@ -592,7 +592,6 @@ define("ads/ads.viewModel",
                 },
                 //add location
                 onAddLocation = function (item) {
-                    debugger;
                     selectedLocation().Radius = (selectedLocationRadius);
                     selectedLocation().IncludeorExclude = (selectedLocationIncludeExclude);
                     campaignModel().AdCampaignTargetLocations.push(new model.AdCampaignTargetLocation.Create({
@@ -1182,10 +1181,10 @@ define("ads/ads.viewModel",
                     return list;
                 },
                  ChangeVoucherSettings = function () {
-                     if (voucherQuestionStatus() == 0) {
-                         voucherQuestionStatus(1);
+                     if (voucherQuestionStatus() == false) {
+                         voucherQuestionStatus(true);
                      } else {
-                         voucherQuestionStatus(0);
+                         voucherQuestionStatus(false);
                      }
                  },
                 // Initialize the view model

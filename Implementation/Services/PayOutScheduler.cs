@@ -20,7 +20,7 @@ namespace SMD.Implementation.Services
     /// <summary>
     /// Credit Scheduler 
     /// </summary>
-    public class CreditScheduler
+    public class PayOutScheduler
     {
         #region Private
         // Properties 
@@ -58,7 +58,7 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Constructor
         /// </summary>
-        public CreditScheduler()
+        public PayOutScheduler()
         {
            //todo 
         }
@@ -71,7 +71,7 @@ namespace SMD.Implementation.Services
         public static void SetDebitScheduler(Registry registry)
         {
             // Registration of Credit Process Scheduler Run after every 7 days 
-            registry.Schedule(PerformCredit).ToRunNow();
+            registry.Schedule(PerformCredit).ToRunEvery(7).Days();
         }
 
         /// <summary>
