@@ -23,7 +23,7 @@ namespace SMD.Implementation.Services
 {
     public class SurveyQuestionService : ISurveyQuestionService
     {
-          #region Private
+        #region Private
 
         /// <summary>
         /// Private members
@@ -122,7 +122,6 @@ namespace SMD.Implementation.Services
             }
         }
         #endregion
-
         #region Constructor
 
         /// <summary>

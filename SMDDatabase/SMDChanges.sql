@@ -1961,3 +1961,47 @@ alter table aspnetusers
 add PreferredPayoutAccount int null
 
 -- 06-Jan-16  by Baqer ENDS
+
+-- 07-Jan-16 by Baqer STARTS
+
+GO
+
+/****** Object:  Table [dbo].[TransactionLog]    Script Date: 07-Jan-16 7:20:30 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[TransactionLog](
+	[TransactionLogId] [bigint] IDENTITY(1,1) NOT NULL,
+	[TxId] [bigint] NOT NULL,
+	[LogDate] [datetime] NOT NULL,
+	[Amount] [float] NOT NULL,
+	[Type] [int] NOT NULL,
+	[FromUser] [nvarchar](250) NULL,
+	[ToUser] [nvarchar](250) NULL,
+	[IsCompleted] [bit] NULL,
+ CONSTRAINT [PK_TransactionLog] PRIMARY KEY CLUSTERED 
+(
+	[TransactionLogId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+ALTER TABLE [dbo].[TransactionLog]  WITH CHECK ADD  CONSTRAINT [FK_TransactionLog_TransactionLog] FOREIGN KEY([TxId])
+REFERENCES [dbo].[Transaction] ([TxID])
+GO
+
+ALTER TABLE [dbo].[TransactionLog] CHECK CONSTRAINT [FK_TransactionLog_TransactionLog]
+GO
+
+ALTER TABLE [dbo].[TransactionLog]  WITH CHECK ADD  CONSTRAINT [FK_TransactionLog_TransactionLog1] FOREIGN KEY([TransactionLogId])
+REFERENCES [dbo].[TransactionLog] ([TransactionLogId])
+GO
+
+ALTER TABLE [dbo].[TransactionLog] CHECK CONSTRAINT [FK_TransactionLog_TransactionLog1]
+GO
+-- 07-Jan-16  by Baqer ENDS
+
