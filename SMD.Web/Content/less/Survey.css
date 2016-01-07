@@ -136,3 +136,8 @@ div.Tokenize ul.Dropdown {
   width: 100%;
   border: 1px solid #e7ebee;
 }
+.noCriteria {
+  background: none !important;
+  font-size: 13px !important;
+  padding-left: 20px;
+}

@@ -601,26 +601,24 @@ define("survey/survey.viewModel",
                         if (selectedQuestion().isValid()) {
 
                             if (ValidateSurvey() == true) {
-                                if (userBaseData().isStripeIntegrated == false) {
-                                    stripeChargeCustomer.show(function () {
-                                        if (reachedAudience() > 0) {
+                                if (reachedAudience() > 0) {
+                                   
+                                    if (userBaseData().isStripeIntegrated == false) {
+                                        stripeChargeCustomer.show(function () {
                                             userBaseData().isStripeIntegrated = true;
                                             saveSurveyQuestion(2);
 
-                                        } else {
-                                            toastr.error("You have no audience against the specified criteria please broad your audience definition.");
-                                        }
-                                        
-                            }, 2000, 'Enter your details');
-                                } else {
-                                    if (reachedAudience() > 0) {
+                                        }, 2000, 'Enter your details');
+                                    } else {
+
                                         saveSurveyQuestion(2);
 
-                                    } else {
-                                        toastr.error("You have no audience against the specified criteria please broad your audience definition.");
+
                                     }
-                                   
+                                } else {
+                                    toastr.error("You have no audience against the specified criteria please broad your audience definition.");
                                 }
+                             
                             }
                            
                         } else {
