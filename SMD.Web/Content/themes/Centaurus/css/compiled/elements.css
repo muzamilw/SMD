@@ -4946,3 +4946,6 @@ input[type="radio"] {
     border-radius: 5px;
     font-size: 24px;
 }
+.navbar-brand {
+    height:100px !important;
+}

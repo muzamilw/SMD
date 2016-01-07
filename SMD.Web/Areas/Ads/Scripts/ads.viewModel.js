@@ -169,8 +169,8 @@ define("ads/ads.viewModel",
                         campaignModel().Gender('2');
                         campaignModel().Type('2');
                         campaignModel().MaxBudget('1');
-                        campaignModel().AgeRangeEnd(18);
-
+                        campaignModel().AgeRangeEnd(80);
+                        campaignModel().AgeRangeStart(13);
                         view.initializeTypeahead();
                         isEnableVedioVerificationLink(false);
                         isEditCampaign(false);
@@ -1191,8 +1191,11 @@ define("ads/ads.viewModel",
                 initialize = function (specifiedView) {
                     view = specifiedView;
                     ko.applyBindings(view.viewModel, view.bindingRoot);
-                    for (var i = 13; i < 65; i++) {
-                        ageRange.push({ value: i.toString(), text: i.toString() });
+                    for (var i = 10; i < 111; i++) {
+                        var text = i.toString();
+                        if (i == 110)
+                            text += "+";
+                        ageRange.push({ value: i.toString(), text: text });
                     }
                     pager(pagination.Pagination({ PageSize: 10 }, campaignGridContent, getAdCampaignGridContent));
                     getAdCampaignGridContent();

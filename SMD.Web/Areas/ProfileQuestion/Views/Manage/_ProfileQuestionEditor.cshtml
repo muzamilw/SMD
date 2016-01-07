@@ -54,7 +54,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-9">
+                                    <div class="col-lg-9" style="display:none;">
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
                                                 <div class="bs-example-tooltips tooltip-float-width">
@@ -69,7 +69,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-9">
+                                    <div class="col-lg-9" style="display:none;">
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
                                                 <div class="bs-example-tooltips tooltip-float-width">
@@ -77,7 +77,7 @@
                                                         <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
                                                     </a>
                                                 </div>
-                                                <label  class="control-label text-right tooltip-float">Country</label>
+                                                <label class="control-label text-right tooltip-float">Country</label>
                                             </div>
                                             <div class="col-lg-6">
                                                 <select class="form-control" data-bind="options: $root.countries, optionsText: 'CountryName', optionsValue: 'CountryId', optionsCaption: '&lt;' + 'Select Country'+ '&gt;' , value:countryId"></select>
@@ -137,7 +137,7 @@
                                                         <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
                                                     </a>
                                                 </div>
-                                                <label  class="control-label text-right tooltip-float">Refresh Time</label>
+                                                <label  class="control-label text-right tooltip-float">Refresh Time (days)</label>
                                             </div>
                                             <div class="col-lg-6">
                                                 <input type="text" class="form-control" data-bind="value: refreshTime">
@@ -189,8 +189,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-9">
-                                        <div class="form-group">
+                                    <div class="col-lg-9" style="display:none;">
+                                        <div class="form-group" >
                                             <div class="col-lg-4 text-right">
                                                 <div class="bs-example-tooltips tooltip-float-width">
                                                     <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
@@ -262,7 +262,7 @@
                                                 <header class="main-box-header clearfix" style="padding-right:0px;">
                                                     <div class="filter-block pull-right">
 
-                                                        <a href="#" id="addTemplatePageBtn" class="btn btn-primary pull-right" data-toggle="modal" data-target=".bs-example-modal-lg" data-bind="click: $root.addNewAnswer">
+                                                        <a href="#" id="addTemplatePageBtn" class="btn btn-primary pull-right" data-toggle="modal" data-target=".bs-example-modal-lg" data-bind="click: $root.addNewAnswer, visible: $root.CanAddAnswers()">
                                                             Add Answer
                                                         </a>
                                                         <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
@@ -351,9 +351,7 @@
                                                                                     <div class="form-group">
                                                                                         <div class="col-lg-4 text-right">
                                                                                             <div class="bs-example-tooltips tooltip-float-width">
-                                                                                                <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
-                                                                                                    <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                                                                </a>
+                                                                                             
                                                                                             </div>
                                                                                             <label class="control-label text-right tooltip-float">Linked Question 2</label>
                                                                                         </div>
@@ -367,9 +365,7 @@
                                                                                     <div class="form-group">
                                                                                         <div class="col-lg-4 text-right">
                                                                                             <div class="bs-example-tooltips tooltip-float-width">
-                                                                                                <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
-                                                                                                    <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                                                                </a>
+                                                                                           
                                                                                             </div>
                                                                                             <label  class="control-label text-right tooltip-float">Linked Question 3</label>
                                                                                         </div>
@@ -383,9 +379,7 @@
                                                                                     <div class="form-group">
                                                                                         <div class="col-lg-4 text-right">
                                                                                             <div class="bs-example-tooltips tooltip-float-width">
-                                                                                                <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
-                                                                                                    <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                                                                </a>
+                                                                                        
                                                                                             </div>
                                                                                             <label  class="control-label text-right tooltip-float">Linked Question 4</label>
                                                                                         </div>
@@ -399,9 +393,7 @@
                                                                                     <div class="form-group">
                                                                                         <div class="col-lg-4 text-right">
                                                                                             <div class="bs-example-tooltips tooltip-float-width">
-                                                                                                <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
-                                                                                                    <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                                                                </a>
+                                                                                     
                                                                                             </div>
                                                                                             <label  class="control-label text-right tooltip-float">Linked Question 5</label>
                                                                                         </div>
@@ -415,9 +407,7 @@
                                                                                     <div class="form-group">
                                                                                         <div class="col-lg-4 text-right">
                                                                                             <div class="bs-example-tooltips tooltip-float-width">
-                                                                                                <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
-                                                                                                    <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                                                                </a>
+                                                                                     
                                                                                             </div>
                                                                                             <label  class="control-label text-right tooltip-float">Linked Question 6</label>
                                                                                         </div>
@@ -469,15 +459,18 @@
                    
                 </td>
                 <td>
-                    <a class="table-link" style="float: right">
-                        <span class="fa-stack" >
+                    <a class="table-link danger" style="float: right">
+                        <span class="fa-stack">
+                            <i class="fa fa-square fa-stack-2x"></i>
+                            <i class="fa fa-trash-o fa-stack-1x fa-inverse " data-bind="click:$root.onDeleteQuestionAnswer"></i>
+                        </span>
+                    </a>
+                    <a class="table-link fa fa-stack" style="float: right">
+                        <span class="fa-stack">
                             <i class="fa fa-square fa-stack-2x"></i>
                             <i class="fa fa-pencil fa-stack-1x fa-inverse" data-bind="click:$root.onEditQuestionAnswer" data-toggle="modal" data-target=".bs-example-modal-lg"></i>
                         </span>
-                        <span class="fa-stack">
-                            <i class="fa fa-square fa-stack-2x"></i>
-                            <i class="fa fa-times fa-stack-1x fa-inverse" data-bind="click:$root.onDeleteQuestionAnswer"></i>
-                        </span>
+
                     </a>
                 </td>
             </tr>

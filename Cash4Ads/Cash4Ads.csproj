@@ -205,6 +205,7 @@
     <Content Include="images\Affiliate_Slider_2.png" />
     <Content Include="images\Affiliate_Slider_3.png" />
     <Content Include="images\au.png" />
+    <Content Include="images\Cash4ads_logo.png" />
     <Content Include="images\Cash4Ads_White_text.svg" />
     <Content Include="images\de.png" />
     <Content Include="images\Earn_Slider_1.png" />
@@ -221,6 +222,7 @@
     <Content Include="images\mockup-ipad-air.png" />
     <Content Include="images\mockup-iphone6.png" />
     <Content Include="images\mockup-iphone6_2.png" />
+    <Content Include="images\beta.jpg" />
     <Content Include="images\team_01.png" />
     <Content Include="images\team_02.png" />
     <Content Include="images\team_03.png" />
