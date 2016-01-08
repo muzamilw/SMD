@@ -203,6 +203,7 @@
     <Compile Include="Repositories\TaxRepository.cs" />
     <Compile Include="Repositories\IndustryRepository.cs" />
     <Compile Include="Repositories\InvoiceRepository.cs" />
+    <Compile Include="Repositories\TransactionLogRepository.cs" />
     <Compile Include="Repositories\TransactionRepository.cs" />
     <Compile Include="Repositories\AuditLogRepository.cs" />
     <Compile Include="Repositories\CityRepository.cs" />

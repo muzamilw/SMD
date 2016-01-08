@@ -5,6 +5,7 @@ using SMD.ExceptionHandling.Logger;
 using SMD.Implementation.Identity;
 using SMD.Interfaces.Logger;
 using SMD.Interfaces.Services;
+using SMD.Models.DomainModels;
 using SMD.Repository.BaseRepository;
 using System;
 using System.Collections.Generic;
@@ -102,6 +103,21 @@ namespace SMD.Implementation.Services
                                 {
                                     // Success
                                     transaction.isProcessed = true;
+
+                                    transaction.isProcessed = true;
+                                    // Transaction log entery 
+                                    var transactionLog = new TransactionLog
+                                    {
+                                        Amount = (double)transaction.DebitAmount,
+                                        FromUser = user.Email,
+                                        Type = 2, // debit 
+                                        IsCompleted = true,
+                                        LogDate = DateTime.Now,
+                                        ToUser = "SMD",
+                                        TxId = transaction.TxId
+                                    };
+                                    dbContext.TransactionLogs.Add(transactionLog);
+                                    dbContext.SaveChanges();
                                 }
                                 // Indicates we are happy
                                 tran.Complete();
