@@ -56,5 +56,8 @@ namespace SMD.MIS.Areas.Api.Models
         public string Voucher2Heading { get; set; }
         public string Voucher2Description { get; set; }
         public string Voucher2Value { get; set; }
+
+        public string Voucher1ImagePath { get; set; }
+        public string VoucherImagePath { get; set; }
     }
 }

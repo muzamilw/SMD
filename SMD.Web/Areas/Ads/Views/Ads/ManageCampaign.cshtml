@@ -701,17 +701,19 @@
                                     <h4 class="ad_h4">Allow user to select and redeem a voucher instead of cash reward ?</h4>
 
                                 </div>
-                                <div class="rfloat">
-                                    <div class="onoffswitch">
+                                <div class="form-group" >
+                                    <div class="col-lg-4 text-right">
+                                      
+                                    </div>
+                                    <div class="col-lg-8">
+                                         <div class="onoffswitch">
                                         <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchAB" data-bind="checked: $root.voucherQuestionStatus">
                                         <label class="onoffswitch-label" for="switchAB">
                                             <div class="onoffswitch-inner"></div>
                                             <div class="onoffswitch-switch"></div>
                                         </label>
                                     </div>
-                                </div>
-                                <div class="clearfix">
-
+                                    </div>
                                 </div>
                                 <div class="form-group" data-bind="visible: $root.voucherQuestionStatus()">
                                     <div class="col-lg-4 text-right">
@@ -753,6 +755,38 @@
                                     <div class="col-lg-8">
                                         <input type="text" class="form-control" id="txtVoucherVal" placeholder="Enter Voucher Value" data-bind="value: Voucher1Value">
 
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <div class="col-lg-4 text-right">
+                                       
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <div class="col-lg-12" style="margin-left:-10px;" data-bind="visible: $root.voucherQuestionStatus() == 1 ">
+
+                                            <div>
+
+                                                <div class="defaultImgUploadImage">
+
+                                                    <img style="width:auto;height:80px;max-width:200px;" data-bind="visible: VoucherImagePath() == ''" src="/Content/Images/Company_Default.png" />
+                                                    <img style="width:auto;height:80px;max-width:200px;" data-bind="visible: VoucherImagePath() != '' ,attr: { src: VoucherImagePath }" />
+
+                                                </div>
+
+                                            </div>
+
+                                            <div class="defaultImgUploadImageBtn">
+
+                                                <div class="col-lg-6" style="text-align:left;">
+                                                    <div class="fileUpload btn btn-primary">
+                                                        <span>Upload </span>
+                                                        <input type="file" class="upload" id="Voucher_image_file" data-bind="files: { onLoaded: $root.VoucherImageCallback, fileFilter: 'image.*'}" />
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 @*<div class="form-group">

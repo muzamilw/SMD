@@ -551,12 +551,15 @@ div.Tokenize ul.Dropdown {
 .surveyLeftImagePc {
   background-image: url(/Images/select_image.jpg);
   background-repeat: no-repeat;
-  background-size: 85%;
   margin-top: 5px;
   margin-left: 5px;
   height: 184px;
   background-position-y: -53px;
   background-position-x: -16px;
+}
+#ddpEducation,
+#ddpIndustory {
+  border: none !important;
 }
 /* Common Styles */
 .fileUpload {

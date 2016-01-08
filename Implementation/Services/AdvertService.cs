@@ -51,7 +51,7 @@ namespace SMD.Implementation.Services
         }
         private string[] SaveImages(AdCampaign campaign)
         {
-            string[] savePaths = new string[2];
+            string[] savePaths = new string[3];
             string directoryPath = HttpContext.Current.Server.MapPath("~/SMD_Content/AdCampaign/" + campaign.CampaignId);
 
             if (directoryPath != null && !Directory.Exists(directoryPath))
@@ -88,6 +88,17 @@ namespace SMD.Implementation.Services
                     savePaths[1] = savePath;
                 }
 
+            }
+            if (!string.IsNullOrEmpty(campaign.VoucherImagePath) && !campaign.VoucherImagePath.Contains("guid_Voucher1DefaultImage"))
+            {
+                string base64 = campaign.VoucherImagePath.Substring(campaign.VoucherImagePath.IndexOf(',') + 1);
+                base64 = base64.Trim('\0');
+                byte[] data = Convert.FromBase64String(base64);
+                string savePath = directoryPath + "\\guid_Voucher1DefaultImage.jpg";
+                File.WriteAllBytes(savePath, data);
+                int indexOf = savePath.LastIndexOf("SMD_Content", StringComparison.Ordinal);
+                savePath = savePath.Substring(indexOf, savePath.Length - indexOf);
+                savePaths[2] = savePath;
             }
             return savePaths;
         }
@@ -222,6 +233,12 @@ namespace SMD.Implementation.Services
         public void CreateCampaign(AdCampaign campaignModel)
         {
             campaignModel.UserId = _adCampaignRepository.LoggedInUserIdentity;
+           
+            campaignModel.StartDateTime = campaignModel.StartDateTime.Value.Subtract(_adCampaignRepository.UserTimezoneOffSet);
+            campaignModel.EndDateTime = campaignModel.EndDateTime.Value.Subtract(_adCampaignRepository.UserTimezoneOffSet);
+            _adCampaignRepository.Add(campaignModel);
+            _adCampaignRepository.SaveChanges();
+
             string[] paths = SaveImages(campaignModel);
             if (paths != null && paths.Count() > 0)
             {
@@ -233,15 +250,12 @@ namespace SMD.Implementation.Services
                 {
                     campaignModel.LandingPageVideoLink = paths[1];
                 }
-
-
+                if (!string.IsNullOrEmpty(paths[2]))
+                {
+                    campaignModel.Voucher1ImagePath = paths[2];
+                }
+                _adCampaignRepository.SaveChanges();
             }
-            campaignModel.StartDateTime = campaignModel.StartDateTime.Value.Subtract(_adCampaignRepository.UserTimezoneOffSet);
-            campaignModel.EndDateTime = campaignModel.EndDateTime.Value.Subtract(_adCampaignRepository.UserTimezoneOffSet);
-            _adCampaignRepository.Add(campaignModel);
-            _adCampaignRepository.SaveChanges();
-
-
         }
         public CampaignResponseModel GetCampaigns(AdCampaignSearchRequest request)
         {

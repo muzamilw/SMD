@@ -5,7 +5,8 @@
           Archived, StartDateTime, EndDateTime, MaxBudget, Type, DisplayTitle, LandingPageVideoLink, VerifyQuestion,
           Answer1, Answer2, Answer3, CorrectAnswer, AgeRangeStart, AgeRangeEnd, ResultClicks, AmountSpent
           , ImagePath, CampaignImagePath, CampaignTypeImagePath, Description, ClickRate,
-          Voucher1Heading, Voucher1Description, Voucher1Value, Voucher2Heading, Voucher2Description, Voucher2Value) {
+          Voucher1Heading, Voucher1Description, Voucher1Value, Voucher2Heading, Voucher2Description, Voucher2Value,
+          Voucher1ImagePath,VoucherImagePath) {
           var
               //type and userID will be set on server sside
               CampaignID = ko.observable(CampaignID),
@@ -88,6 +89,8 @@
               CampaignImagePath = ko.observable(CampaignImagePath),
               CampaignTypeImagePath = ko.observable(CampaignTypeImagePath),
               ClickRate = ko.observable(ClickRate),
+              Voucher1ImagePath = ko.observable(Voucher1ImagePath),
+              VoucherImagePath = ko.observable(VoucherImagePath),
               AdCampaignTargetCriterias = ko.observableArray([]),
               AdCampaignTargetLocations = ko.observableArray([]),
                // Errors
@@ -188,7 +191,9 @@
                       Voucher1Value: Voucher1Value(),
                       Voucher2Heading: Voucher2Heading(),
                       Voucher2Description: Voucher2Description(),
-                      Voucher2Value: Voucher2Value()
+                      Voucher2Value: Voucher2Value(),
+                      Voucher1ImagePath:Voucher1ImagePath(),
+                      VoucherImagePath: VoucherImagePath()
                   };
               };
           return {
@@ -234,7 +239,9 @@
               Voucher1Value: Voucher1Value,
               Voucher2Heading: Voucher2Heading,
               Voucher2Description: Voucher2Description,
-              Voucher2Value: Voucher2Value
+              Voucher2Value: Voucher2Value,
+              Voucher1ImagePath: Voucher1ImagePath,
+              VoucherImagePath: VoucherImagePath
           };
       };
 
@@ -354,7 +361,7 @@
             , source.Type + "", source.DisplayTitle, source.LandingPageVideoLink, source.VerifyQuestion, source.Answer1, source.Answer2, source.Answer3,
             source.CorrectAnswer, source.AgeRangeStart, source.AgeRangeEnd, source.ResultClicks, source.AmountSpent, source.ImagePath, source.CampaignImagePath,
             source.CampaignTypeImagePath, source.Description, source.ClickRate, source.Voucher1Heading, source.Voucher1Description, source.Voucher1Value, source.Voucher2Heading, source.Voucher2Description,
-             source.Voucher2Value);
+             source.Voucher2Value, source.Voucher1ImagePath, source.VoucherImagePath);
         _.each(source.AdCampaignTargetCriterias, function (item) {
             campaign.AdCampaignTargetCriterias.push(AdCampaignTargetCriteriasModel.Create(item));
         });

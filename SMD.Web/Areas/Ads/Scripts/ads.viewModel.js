@@ -176,7 +176,10 @@ define("ads/ads.viewModel",
                         isEditCampaign(false);
                         campaignModel().CampaignTypeImagePath("");
                         campaignModel().CampaignImagePath("");
+                        campaignModel().VoucherImagePath("");
                         campaignModel().LanguageId(41);
+
+                       
                         bindAudienceReachCount();
                         selectedQuestionCountryList([]);
 
@@ -812,6 +815,12 @@ define("ads/ads.viewModel",
                                         }
                                     });
                                     bindAudienceReachCount();
+                                    console.log(campaignModel());
+                                    if (campaignModel().VoucherImagePath() != null || campaignModel().Voucher1Value() != null || campaignModel().Voucher1Description() != null || campaignModel().Voucher1Heading() != null)
+                                    {
+                                        voucherQuestionStatus(true);
+                                    }
+
                                     // handle 2nd edit error 
                                     //  $(".modal-backdrop").remove();
                                     $.unblockUI(spinner);
@@ -1187,6 +1196,9 @@ define("ads/ads.viewModel",
                          voucherQuestionStatus(false);
                      }
                  },
+                VoucherImageCallback = function (file, data) {
+                    campaignModel().VoucherImagePath(data);
+                },
                 // Initialize the view model
                 initialize = function (specifiedView) {
                     view = specifiedView;
@@ -1271,7 +1283,8 @@ define("ads/ads.viewModel",
                     addNewEducationCriteria: addNewEducationCriteria,
                     addNewProfessionCriteria: addNewProfessionCriteria,
                     voucherQuestionStatus: voucherQuestionStatus,
-                    ChangeVoucherSettings:ChangeVoucherSettings
+                    ChangeVoucherSettings:ChangeVoucherSettings,
+                    VoucherImageCallback: VoucherImageCallback
                 };
             })()
         };
