@@ -127,6 +127,7 @@ namespace SMD.Implementation.Services
                                 PaypalService.MakeAdaptiveImplicitPayment(requestModel);
 
                                 transaction.isProcessed = true;
+                                // Transaction log entery 
                                 var transactionLog = new TransactionLog
                                 {
                                     Amount = (double) requestModel.Amount,
@@ -135,7 +136,7 @@ namespace SMD.Implementation.Services
                                     IsCompleted = true,
                                     LogDate = DateTime.Now,
                                     ToUser = requestModel.RecieverEmails.FirstOrDefault(),
-                                    TxId = 1
+                                    TxId = transaction.TxId
                                 };
                                 dbContext.TransactionLogs.Add(transactionLog);
                                 dbContext.SaveChanges();
