@@ -171,6 +171,10 @@ namespace SMD.Implementation.Services
             MBody = MBody.Replace("++lastname++", Lname);
             MBody = MBody.Replace("++CurrentDateTime++", DateTime.Now.ToLongDateString() + " " + DateTime.Now.ToLongTimeString() + " GMT");
             MBody = MBody.Replace("++EmailConfirmationLink++", EmailConfirmationLink);
+            if (Mid == (int)EmailTypes.ResetPassword)
+            {
+                MBody = MBody.Replace("++PasswordResetLink++", PasswordResetLink);
+            }
             MBody = MBody.Replace("++Fname++", Fname);
             oMailBody.IsBodyHtml = true;
             oMailBody.From = new MailAddress(sfemail, sfname);

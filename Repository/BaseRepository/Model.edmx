@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="SMDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SMDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Account">
           <Key>
             <PropertyRef Name="AccountId" />
@@ -63,6 +63,8 @@
           <Property Name="Voucher2Heading" Type="nvarchar" MaxLength="200" />
           <Property Name="Voucher2Description" Type="nvarchar(max)" />
           <Property Name="Voucher2Value" Type="nvarchar(max)" />
+          <Property Name="Voucher1ImagePath" Type="nvarchar" MaxLength="200" />
+          <Property Name="Voucher2ImagePath" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="AdCampaignResponse">
           <Key>
@@ -264,6 +266,9 @@
           <Property Name="Status" Type="bit" />
           <Property Name="AgeRangeStart" Type="int" />
           <Property Name="AgeRangeEnd" Type="int" />
+          <Property Name="GameType" Type="int" />
+          <Property Name="Complexity" Type="int" />
+          <Property Name="GameUrl" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="Industry">
           <Key>
@@ -2223,6 +2228,8 @@
           <Property Name="Voucher2Heading" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Voucher2Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Voucher2Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Voucher1ImagePath" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Voucher2ImagePath" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="AdCampaignResponse">
           <Key>
@@ -3220,6 +3227,9 @@
           <Property Name="Status" Type="Boolean" />
           <Property Name="AgeRangeStart" Type="Int32" />
           <Property Name="AgeRangeEnd" Type="Int32" />
+          <Property Name="GameType" Type="Int32" />
+          <Property Name="Complexity" Type="Int32" />
+          <Property Name="GameUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_AspNetUsers_City">
           <End Type="DomainModels.City" Role="City" Multiplicity="0..1" />
@@ -3490,6 +3500,8 @@
           <EntitySetMapping Name="AdCampaigns">
             <EntityTypeMapping TypeName="DomainModels.AdCampaign">
               <MappingFragment StoreEntitySet="AdCampaign">
+                <ScalarProperty Name="Voucher2ImagePath" ColumnName="Voucher2ImagePath" />
+                <ScalarProperty Name="Voucher1ImagePath" ColumnName="Voucher1ImagePath" />
                 <ScalarProperty Name="Voucher2Value" ColumnName="Voucher2Value" />
                 <ScalarProperty Name="Voucher2Description" ColumnName="Voucher2Description" />
                 <ScalarProperty Name="Voucher2Heading" ColumnName="Voucher2Heading" />
@@ -3870,6 +3882,9 @@
           <EntitySetMapping Name="Games">
             <EntityTypeMapping TypeName="DomainModels.Game">
               <MappingFragment StoreEntitySet="Game">
+                <ScalarProperty Name="GameUrl" ColumnName="GameUrl" />
+                <ScalarProperty Name="Complexity" ColumnName="Complexity" />
+                <ScalarProperty Name="GameType" ColumnName="GameType" />
                 <ScalarProperty Name="AgeRangeEnd" ColumnName="AgeRangeEnd" />
                 <ScalarProperty Name="AgeRangeStart" ColumnName="AgeRangeStart" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
