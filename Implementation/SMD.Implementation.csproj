@@ -169,6 +169,7 @@
     <Compile Include="Services\ProfileQuestionUserAnswerService.cs" />
     <Compile Include="Services\StripeService.cs" />
     <Compile Include="Services\CollectionScheduler.cs" />
+    <Compile Include="Services\TransactionLogService.cs" />
     <Compile Include="Services\TransactionService.cs" />
     <Compile Include="Services\WebApiUserService.cs" />
     <Compile Include="Services\ProfileQuestionService.cs" />
