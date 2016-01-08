@@ -37,6 +37,7 @@ namespace SMD.Implementation
             unityContainer.RegisterType<IInvoiceDetailService, InvoiceDetailService>();
             unityContainer.RegisterType<IStripeService, StripeService>();
             unityContainer.RegisterType<ITransactionLogService, TransactionLogService>();
+            unityContainer.RegisterType<IAccountService, AccountService>();
         }
     }
 }
