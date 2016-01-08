@@ -169,4 +169,15 @@
         AdApproval = 2,
         DownloadReport = 3
     }
+
+    /// <summary>
+    /// User Account Types
+    /// </summary>
+    public enum AccountType
+    {
+        Stripe =1 ,
+        Paypal=2,
+        GoogleWallet=3,
+        VirtualAccount=4
+    }
 }

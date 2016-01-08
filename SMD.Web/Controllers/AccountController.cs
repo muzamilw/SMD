@@ -29,6 +29,7 @@ namespace SMD.MIS.Controllers
         private ApplicationUserManager _userManager;
         private IClaimsSecurityService claimsSecurityService;
         private IEmailManagerService emailManagerService;
+        private readonly IAccountService accountService;
 
         /// <summary>
         /// Adds Claims to generated identity
@@ -56,7 +57,7 @@ namespace SMD.MIS.Controllers
 
         #region Constructor
 
-        public AccountController(IClaimsSecurityService claimsSecurityService, IEmailManagerService emailManagerService)
+        public AccountController(IClaimsSecurityService claimsSecurityService, IEmailManagerService emailManagerService, IAccountService account)
         {
             if (emailManagerService == null)
             {
@@ -65,6 +66,7 @@ namespace SMD.MIS.Controllers
 
             this.claimsSecurityService = claimsSecurityService;
             this.emailManagerService = emailManagerService;
+            accountService = account;
         }
 
         #endregion
@@ -278,6 +280,7 @@ namespace SMD.MIS.Controllers
             IdentityResult result = await UserManager.ConfirmEmailAsync(userId, code);
             if (result.Succeeded)
             {
+                CreateUserAccounts(userId);
                 return View("Login");
             }
             return View("Error");
@@ -487,6 +490,7 @@ namespace SMD.MIS.Controllers
                     {
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                         SetupUserClaims(info.ExternalIdentity);
+                        CreateUserAccounts(user.Id);
                         return RedirectToLocal(returnUrl);
                     }
                 }
@@ -594,6 +598,14 @@ namespace SMD.MIS.Controllers
             }
         }
 
+        /// <summary>
+        /// Account Creater
+        /// </summary>
+        private void CreateUserAccounts(string userId)
+        {
+            //Creates User Native Accounts
+            accountService.AddAccountsForNewUser(userId);
+        }
         #endregion
     }
 }
