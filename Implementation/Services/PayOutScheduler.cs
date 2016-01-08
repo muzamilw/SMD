@@ -6,6 +6,7 @@ using SMD.ExceptionHandling.Logger;
 using SMD.Implementation.Identity;
 using SMD.Interfaces.Logger;
 using SMD.Interfaces.Services;
+using SMD.Models.DomainModels;
 using SMD.Models.RequestModels;
 using SMD.Repository.BaseRepository;
 using System;
@@ -126,6 +127,20 @@ namespace SMD.Implementation.Services
                                 PaypalService.MakeAdaptiveImplicitPayment(requestModel);
 
                                 transaction.isProcessed = true;
+                                // Transaction log entery 
+                                var transactionLog = new TransactionLog
+                                {
+                                    Amount = (double) requestModel.Amount,
+                                    FromUser = requestModel.SenderEmail,
+                                    Type = 1, // credit 
+                                    IsCompleted = true,
+                                    LogDate = DateTime.Now,
+                                    ToUser = requestModel.RecieverEmails.FirstOrDefault(),
+                                    TxId = transaction.TxId
+                                };
+                                dbContext.TransactionLogs.Add(transactionLog);
+                                dbContext.SaveChanges();
+
                                 // Indicates we are happy
                                 tran.Complete();
                             }

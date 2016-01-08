@@ -222,6 +222,11 @@ namespace SMD.Repository.BaseRepository
         public DbSet<CustomUrl> CustomUrls { get; set; }
 
         /// <summary>
+        /// Transaction Log
+        /// </summary>
+        public DbSet<TransactionLog> TransactionLogs { get; set; }
+
+        /// <summary>
         /// Get Ad-Campaigns for APIs | baqer
         /// </summary>
         public ObjectResult<GetAds_Result> GetAdCompaignForApi(string userId, int fromRow, int toRow)

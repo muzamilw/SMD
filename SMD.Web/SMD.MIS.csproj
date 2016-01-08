@@ -16,7 +16,7 @@
     <AssemblyName>SMD.MIS</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort>44300</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
     <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
@@ -862,6 +862,7 @@
     <Content Include="Images\accent.png" />
     <Content Include="Images\ads.png" />
     <Content Include="Images\bullet.png" />
+    <Content Include="Images\Cash4ads_logo.png" />
     <Content Include="Images\Cash4Ads_White_text.png" />
     <Content Include="Images\heroAccent.png" />
     <Content Include="Images\orderedList0.png" />
@@ -2609,7 +2610,7 @@
           <AutoAssignPort>False</AutoAssignPort>
           <DevelopmentServerPort>30630</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://smdpreview.com/</IISUrl>
+          <IISUrl>http://localhost:30630/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

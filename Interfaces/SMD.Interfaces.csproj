@@ -83,6 +83,7 @@
     <Compile Include="Repository\IInvoiceRepository.cs" />
     <Compile Include="Repository\ITaxRepository.cs" />
     <Compile Include="Repository\IProductRepository.cs" />
+    <Compile Include="Repository\ITransactionLogRepository.cs" />
     <Compile Include="Repository\ITransactionRepository.cs" />
     <Compile Include="Repository\IAuditLogRepository.cs" />
     <Compile Include="Repository\ICityRepository.cs" />
@@ -111,6 +112,7 @@
     <Compile Include="Services\IProfileQuestionAnswerService.cs" />
     <Compile Include="Services\IProfileQuestionUserAnswerService.cs" />
     <Compile Include="Services\IStripeService.cs" />
+    <Compile Include="Services\ITransactionLogService.cs" />
     <Compile Include="Services\ITransactionService.cs" />
     <Compile Include="Services\IWebApiUserService.cs" />
     <Compile Include="Services\IProfileQuestionService.cs" />
