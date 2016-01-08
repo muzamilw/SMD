@@ -311,8 +311,8 @@ namespace SMD.MIS.Controllers
                 var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code },
                     protocol: Request.Url.Scheme);
                 await
-                    UserManager.SendEmailAsync(user.Id, "Reset Password",
-                        "Please reset your password by clicking here: <a href=\"" + callbackUrl + "\">link</a>");
+                    emailManagerService.SendPasswordResetLinkEmail(user, 
+                        "<a href=\"" + callbackUrl + "\">link</a>");
                 ViewBag.Link = callbackUrl;
                 return View("ForgotPasswordConfirmation");
             }
