@@ -58,12 +58,12 @@ namespace SMD.Implementation.Services
             {
                 Directory.CreateDirectory(directoryPath);
             }
-            if (!string.IsNullOrEmpty(campaign.CampaignImagePath) && !campaign.CampaignImagePath.Contains("CampaignDefaultImage"))
+            if (!string.IsNullOrEmpty(campaign.CampaignImagePath) && !campaign.CampaignImagePath.Contains("guid_CampaignDefaultImage"))
             {
                 string base64 = campaign.CampaignImagePath.Substring(campaign.CampaignImagePath.IndexOf(',') + 1);
                 base64 = base64.Trim('\0');
                 byte[] data = Convert.FromBase64String(base64);
-                string savePath = directoryPath + "\\CampaignDefaultImage.jpg";
+                string savePath = directoryPath + "\\guid_CampaignDefaultImage.jpg";
                 File.WriteAllBytes(savePath, data);
                 int indexOf = savePath.LastIndexOf("SMD_Content", StringComparison.Ordinal);
                 savePath = savePath.Substring(indexOf, savePath.Length - indexOf);
@@ -71,7 +71,7 @@ namespace SMD.Implementation.Services
             }
             if (campaign.Type == 3)
             {
-                if (!string.IsNullOrEmpty(campaign.CampaignTypeImagePath) && !campaign.CampaignTypeImagePath.Contains("CampaignTypeDefaultImage"))
+                if (!string.IsNullOrEmpty(campaign.CampaignTypeImagePath) && !campaign.CampaignTypeImagePath.Contains("guid_CampaignTypeDefaultImage"))
                 {
                     string base64 = campaign.CampaignTypeImagePath.Substring(campaign.CampaignTypeImagePath.IndexOf(',') + 1);
                     base64 = base64.Trim('\0');
@@ -81,7 +81,7 @@ namespace SMD.Implementation.Services
                     {
                         Directory.CreateDirectory(directoryPath);
                     }
-                    string savePath = directoryPath + "\\CampaignTypeDefaultImage.jpg";
+                    string savePath = directoryPath + "\\guid_CampaignTypeDefaultImage.jpg";
                     File.WriteAllBytes(savePath, data);
                     int indexOf = savePath.LastIndexOf("SMD_Content", StringComparison.Ordinal);
                     savePath = savePath.Substring(indexOf, savePath.Length - indexOf);

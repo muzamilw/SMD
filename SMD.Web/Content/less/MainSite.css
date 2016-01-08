@@ -548,6 +548,16 @@ div.Tokenize ul.Dropdown {
   font-size: 13px !important;
   padding-left: 20px;
 }
+.surveyLeftImagePc {
+  background-image: url(/Images/select_image.jpg);
+  background-repeat: no-repeat;
+  background-size: 85%;
+  margin-top: 5px;
+  margin-left: 5px;
+  height: 184px;
+  background-position-y: -53px;
+  background-position-x: -16px;
+}
 /* Common Styles */
 .fileUpload {
   position: relative;

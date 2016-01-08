@@ -167,8 +167,8 @@ define("survey/survey.viewModel",
                         titleText("Add new survey");
                         selectedQuestion(new model.Survey());
                         selectedQuestion().Gender("1");
-                        selectedQuestion().LeftPicturePath("Content/Images/Company_Default.png");
-                        selectedQuestion().RightPicturePath("Content/Images/Company_Default.png");
+                        selectedQuestion().LeftPicturePath("/Images/select_image.jpg");
+                        selectedQuestion().RightPicturePath("/Images/select_image.jpg");
                         selectedQuestion().StatusValue("Draft");
                         selectedQuestion().AgeRangeStart(13);
                         selectedQuestion().AgeRangeEnd(80);
