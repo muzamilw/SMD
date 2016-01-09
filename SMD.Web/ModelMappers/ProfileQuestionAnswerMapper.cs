@@ -1,6 +1,5 @@
-﻿using System.Configuration;
+﻿using SMD.MIS.Areas.Api.Models;
 using System.Web;
-using SMD.MIS.Areas.Api.Models;
 
 namespace SMD.MIS.ModelMappers
 {
@@ -11,18 +10,13 @@ namespace SMD.MIS.ModelMappers
         /// </summary>
         public static ProfileQuestionAnswer CreateFrom(this Models.DomainModels.ProfileQuestionAnswer source)
         {
-            string path = source.ImagePath;
-            if (source.ImagePath!=null && !source.ImagePath.Contains("http"))
-            {
-                 path = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + source.ImagePath;
-            }
 
             return new ProfileQuestionAnswer
             {
                 PqId = source.PqId,
                 Type = source.Type,
                 AnswerString = source.AnswerString,
-                ImagePath = path,
+                ImagePath = GetImagePath(source),
 
                 LinkedQuestion1Id = source.LinkedQuestion1Id,
                 LinkedQuestion2Id = source.LinkedQuestion2Id,
@@ -83,10 +77,23 @@ namespace SMD.MIS.ModelMappers
             {
                 PqAnswerId = source.PqAnswerId,
                 AnswerString = source.AnswerString,
-                ImagePath = source.ImagePath,
+                ImagePath = GetImagePath(source),
                 PqId = source.PqId,
                 Type = source.Type
             };
+        }
+
+        /// <summary>
+        /// Returns Image Path for Answer Image 
+        /// </summary>
+        private static string GetImagePath(Models.DomainModels.ProfileQuestionAnswer source)
+        {
+            string path = source.ImagePath;
+            if (source.ImagePath != null && !source.ImagePath.Contains("http"))
+            {
+                path = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + source.ImagePath;
+            }
+            return path;
         }
     }
 }
