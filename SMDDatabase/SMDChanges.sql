@@ -2131,3 +2131,141 @@ COMMIT
 
 
 -- 08-Jan-16 by iqra End
+
+
+/* Added By Khurram (09 Jan 2016) - Starts (Need to run while giving release - Remove this once script gets updated) */ 
+
+GO
+ALTER PROCEDURE [dbo].[GetProducts] 
+
+	-- Add the parameters for the stored procedure here
+	@UserID nvarchar(128) = 0 ,
+	@FromRow int = 0,
+	@ToRow int = 0
+
+AS
+BEGIN
+DECLARE @age AS INT
+DECLARE @gender AS INT
+DECLARE @countryId AS INT
+DECLARE @cityId AS INT
+DECLARE @languageId AS INT
+DECLARE @industryId AS INT
+DECLARE @currentDate AS DateTime
+
+        -- Setting local variables
+		   SELECT @age = age FROM AspNetUsers where id=@UserID
+		   SELECT @gender = gender FROM AspNetUsers where id=@UserID
+		   SELECT @countryId = countryId FROM AspNetUsers where id=@UserID
+		   SELECT @cityId = cityId FROM AspNetUsers where id=@UserID
+		   SELECT @languageId = LanguageID FROM AspNetUsers where id=@UserID
+		   SELECT @industryId = industryId FROM AspNetUsers where id=@UserID
+		   SET @currentDate = getDate()
+
+select *, COUNT(*) OVER() AS TotalItems
+from
+(	select campaignid as ItemId, campaignname ItemName, 'Ad' Type, 
+    Description, Type ItemType, 
+	((ClickRate * 50) / 100) as AdClickRate,  -- Amount AdViewer will get
+	ImagePath as AdImagePath, LandingPageVideoLink as AdVideoLink,
+	Answer1 as AdAnswer1, Answer2 as AdAnswer2, Answer3 as AdAnswer3, CorrectAnswer as AdCorrectAnswer, VerifyQuestion as AdVerifyQuestion, 
+	RewardType as AdRewardType,
+	Voucher1Heading as AdVoucher1Heading, Voucher1Description as AdVoucher1Description,
+	Voucher1Value as AdVoucher1Value, NULL as SqLeftImagePath, NULL as SqRightImagePath,
+	Case 
+	    when Type = 4  -- Game
+		THEN
+		    (select top 1 GameUrl from Game ORDER BY NEWID())
+		when Type != 4
+		THEN
+		    NULL
+	END as GameUrl, 
+	NULL as PqAnswer1Id, NULL as PqAnswer1, NULL as PqAnswer2Id, NULL as PqAnswer2,
+	NULL as PqAnswer3Id, NULL as PqAnswer3,
+	((row_number() over (order by campaignid) * 10) + 1) Weightage from adcampaign
+	where (
+		((@age is null) or (adcampaign.AgeRangeEnd >= @age and  @age >= adcampaign.AgeRangeStart))
+		and
+		((@gender is null) or (adcampaign.Gender = @gender))
+		and
+		((@languageId is null) or (adcampaign.LanguageId = @languageId))
+		and
+		(adcampaign.EndDateTime >= @currentDate and @currentDate >= adcampaign.StartDateTime)
+		and
+		(adcampaign.Approved = 1)
+		and
+		(adcampaign.Status = 6)
+		and
+		((adcampaign.AmountSpent is null) or (adcampaign.MaxBudget > adcampaign.AmountSpent))
+		and
+		((@countryId is null or @cityId is null) or ((select count(*) from AdCampaignTargetLocation MyCampaignLoc
+			 where MyCampaignLoc.CampaignID=adcampaign.CampaignID and MyCampaignLoc.CountryID=@countryId and
+			 MyCampaignLoc.CityID=@cityId) > 0))
+	    and
+		((@languageId is null or @industryId is null) or ((select count(*) from AdCampaignTargetCriteria MyCampaignCrit
+			 where MyCampaignCrit.CampaignID = adcampaign.CampaignID and 
+			 MyCampaignCrit.LanguageID=@languageId and MyCampaignCrit.IndustryID=@industryId) > 0 ))
+	)
+	
+	union
+	select sqid, question, 'Survey', 
+	Description, Type SurveyType, NULL, NULL, NULL,
+	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+	NULL, LeftPicturePath as SqLeftImagePath, RightPicturePath as SqRightImagePath, NULL, 
+	NULL, NULL, NULL, NULL, NULL, NULL, -- PQAnswers
+	((row_number() over (order by sqid) * 10) + 2) Weightage from surveyquestion
+	where -- If this survey has no response yet
+	((select count(*) from SurveyQuestionResponse mySurveyQuestionResponse
+			 where mySurveyQuestionResponse.UserID = @UserID and mySurveyQuestionResponse.SQID = surveyQuestion.SQID) = 0)
+
+	union
+	select pq.pqid, pq.question, 'Question', 
+	NULL, pq.Type QuestionType, NULL, NULL, NULL,
+	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+	NULL, NULL,NULL, NULL, 
+	pqa1.PQAnswerID as PQAnswerID1, pqa1.AnswerString as PQAnswer1,
+	pqa2.PQAnswerID as PQAnswerID2, pqa2.AnswerString as PQAnswer2,
+	pqa3.PQAnswerID as PQAnswerID3, pqa3.AnswerString as PQAnswer3,
+	((row_number() over (order by pq.pqid) * 10) + 3) Weightage 
+	from profilequestion pq
+	outer apply (
+		select top 1 pqa.PQAnswerID, pqa.AnswerString
+		from ProfileQuestionAnswer pqa
+		where pqa.PQID = pq.PQID
+		order by pqa.PQAnswerID
+	) Pqa1
+	outer apply (
+		select pqa2.PQAnswerID, pqa2.AnswerString
+		from ProfileQuestionAnswer pqa2
+		where pqa2.PQID = pq.PQID
+		order by pqa2.PQAnswerID
+		OFFSET 1 ROWS -- skip 1 rows
+		FETCH NEXT 1 ROWS ONLY -- take 1 rows
+	) Pqa2
+	outer apply (
+		select pqa3.PQAnswerID, pqa3.AnswerString
+		from ProfileQuestionAnswer pqa3
+		where pqa3.PQID = pq.PQID
+		order by pqa3.PQAnswerID
+		OFFSET 2 ROWS -- skip 2 rows
+		FETCH NEXT 1 ROWS ONLY -- take 1 rows
+	) Pqa3
+	where 
+	(
+		(((select count(*) from ProfileQuestionUserAnswer pqu 
+			where pq.PQID = pqu.PQID and pqu.UserID = @UserID and pq.CountryID = @countryid) = 0)
+		  or 	 
+		  ((select datediff(day, dateadd(month, pq.refreshtime,pqu.AnswerDateTime), getdate()) 
+			from ProfileQuestionUserAnswer pqu 
+			where pq.PQID = pqu.PQID and pqu.UserID = @UserID and pq.CountryID = @countryid) > 0 )	
+		)
+	)
+	
+	) as items
+	order by Weightage
+	OFFSET @FromRow ROWS -- skip 10 rows
+	FETCH NEXT @ToRow ROWS ONLY -- take 10 rows
+END
+GO
+
+/* Added By Khurram (09 Jan 2016) - Ends */
