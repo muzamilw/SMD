@@ -42,7 +42,8 @@
         ResetPassword = 9,
         RegistrationConfirmed = 1,
         QuestionApproved = 10,
-        QuestionRejected = 11
+        QuestionRejected = 11,
+        CollectionMade=12
     }
 
     public enum AdCampaignCriteriaType

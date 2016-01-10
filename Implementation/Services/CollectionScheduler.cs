@@ -26,6 +26,10 @@ namespace SMD.Implementation.Services
         [Dependency]
         private static IStripeService StripeService { get; set; }
 
+
+        [Dependency]
+        private static IEmailManagerService EmailSerice { get; set; }
+
         private static ISMDLogger smdLogger;
         /// <summary>
         /// Get Configured logger
@@ -79,6 +83,8 @@ namespace SMD.Implementation.Services
         {
             // Initialize Service
             StripeService = UnityConfig.UnityContainer.Resolve<IStripeService>();
+            EmailSerice = UnityConfig.UnityContainer.Resolve<IEmailManagerService>();
+
             // Using Base DB Context
             using (var dbContext = new BaseDbContext())
             {
@@ -95,16 +101,28 @@ namespace SMD.Implementation.Services
                         // Secure Transation
                         using (var tran = new TransactionScope())
                         {
+                            string response = null;
+                            Boolean isSystemUser;
                             try
                             {
+                                // If It is not System User then make transation 
+                                if (user.Roles.Any(role => role.Name.ToLower().Equals("user")))
+                                {
+                                   response = StripeService.ChargeCustomer((int?)transaction.DebitAmount, user.StripeCustomerId);
+                                   isSystemUser = false;
+                                }
+                                else
+                                {
+                                    isSystemUser = true;
+                                    transaction.TxId = 0; // No Transaction Made
+                                }
                                 // Stripe + Invoice Work 
-                                string response = StripeService.ChargeCustomer((int?)transaction.DebitAmount, user.StripeCustomerId);
-                                if (response != "failed")
+                                if (isSystemUser || ( response != "failed"))
                                 {
                                     // Success
                                     transaction.isProcessed = true;
 
-                                    transaction.isProcessed = true;
+                                    #region Transaction Log
                                     // Transaction log entery 
                                     var transactionLog = new TransactionLog
                                     {
@@ -117,6 +135,46 @@ namespace SMD.Implementation.Services
                                         TxId = transaction.TxId
                                     };
                                     dbContext.TransactionLogs.Add(transactionLog);
+                                    #endregion
+                                    #region Add Invoice
+
+                                    // Add invoice data
+                                    var invoice = new Invoice
+                                    {
+                                        Country = user.CountryId.ToString(),
+                                        Total = (double) transaction.DebitAmount,
+                                        NetTotal = (double)transaction.DebitAmount,
+                                        InvoiceDate = DateTime.Now,
+                                        InvoiceDueDate = DateTime.Now.AddDays(7),
+                                        Address1 = user.CountryId.ToString(),
+                                        UserId = user.Id,
+                                        CompanyName = "My Company",
+                                        CreditCardRef = response
+                                    };
+                                    dbContext.Invoices.Add(invoice);
+
+                                    #endregion
+                                    #region Add Invoice Detail
+
+                                    // Add Invoice Detail Data 
+                                    var invoiceDetail = new InvoiceDetail
+                                    {
+                                        InvoiceId = invoice.InvoiceId,
+                                        SqId = null,
+                                        ProductId = null,
+                                        ItemName = "Item from Scheduler",
+                                        ItemAmount = (double)transaction.DebitAmount,
+                                        ItemTax = (double)transaction.TaxValue,
+                                        ItemDescription = "This is description!",
+                                        ItemGrossAmount = (double) transaction.DebitAmount,
+                                        CampaignId = transaction.AdCampaignId,
+
+                                    };
+                                    dbContext.InvoiceDetails.Add(invoiceDetail);
+
+                                    #endregion
+                                    // Email To User 
+                                    EmailSerice.SendCollectionRoutineEmail(user.Id);
                                     dbContext.SaveChanges();
                                 }
                                 // Indicates we are happy

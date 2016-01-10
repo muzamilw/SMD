@@ -44,5 +44,11 @@ namespace SMD.Interfaces.Services
         ///Send Email on Question Rejection 
         /// </summary>
         Task SendQuestionRejectionEmail(string aspnetUserId);
+
+
+        /// <summary>
+        ///Send Email when Collection scheduler run
+        /// </summary>
+        Task SendCollectionRoutineEmail(string aspnetUserId);
     }
 }
