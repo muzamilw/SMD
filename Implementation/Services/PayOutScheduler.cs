@@ -1,7 +1,5 @@
-﻿using System.Linq;
-using FluentScheduler;
+﻿using FluentScheduler;
 using Microsoft.Practices.Unity;
-using SMD.ExceptionHandling;
 using SMD.ExceptionHandling.Logger;
 using SMD.Implementation.Identity;
 using SMD.Interfaces.Logger;
@@ -12,9 +10,9 @@ using SMD.Repository.BaseRepository;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Transactions;
 using System.Web.Http.Filters;
-using System.Web.Configuration;
 
 namespace SMD.Implementation.Services
 {

@@ -69,15 +69,16 @@ namespace SMD.Implementation.Services
         /// <param name="transactionSequence">Sequence this transaction is going through</param>
         /// <param name="transactionType">Type of transaction AdClick or Approve Survey</param>
         /// <param name="isCredit">Credit if true</param>
+        /// <param name="isProcessed">Tranation status </param>
         private void PerformTransaction(long? adCampaingId, long? surveyQuestionId, Account account, double? transactionAmount,
-            int transactionSequence, TransactionType transactionType, bool isCredit = true)
+            int transactionSequence, TransactionType transactionType, bool isCredit = true, bool isProcessed = false)
         {
             var transaction = new Transaction
                                              {
                                                  AccountId = account.AccountId,
                                                  Sequence = transactionSequence,
                                                  Type = (int)transactionType,
-                                                 isProcessed = true,
+                                                 isProcessed = isProcessed,
                                                  TransactionDate = DateTime.Now
                                              };
 
@@ -305,7 +306,7 @@ namespace SMD.Implementation.Services
 
             // Perform the transactions
             // Debit Survey Advertiser
-            PerformTransaction(null, request.SurveyQuestionId, advertisersAccount, approvedSurveyAmount, transactionSequence, TransactionType.ApproveSurvey, false);
+            PerformTransaction(null, request.SurveyQuestionId, advertisersAccount, approvedSurveyAmount, transactionSequence, TransactionType.ApproveSurvey, false, true);
 
             // Credit SMD
             transactionSequence += 1;
