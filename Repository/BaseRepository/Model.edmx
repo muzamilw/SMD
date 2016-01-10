@@ -3258,9 +3258,32 @@
         <ComplexType Name="GetProducts_Result">
           <Property Type="Int64" Name="ItemId" Nullable="false" />
           <Property Type="String" Name="ItemName" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="ItemType" Nullable="false" MaxLength="8" />
+          <Property Type="Int32" Name="ItemType" Nullable="true" />
           <Property Type="Int64" Name="Weightage" Nullable="true" />
           <Property Type="Int32" Name="TotalItems" Nullable="true" />
+          <Property Type="String" Name="Type" Nullable="false" MaxLength="8" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="1000" />
+          <Property Type="Double" Name="AdClickRate" Nullable="true" />
+          <Property Type="String" Name="AdImagePath" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="AdVideoLink" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="AdAnswer1" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="AdAnswer2" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="AdAnswer3" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="AdCorrectAnswer" Nullable="true" />
+          <Property Type="String" Name="AdVerifyQuestion" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="AdRewardType" Nullable="true" />
+          <Property Type="String" Name="AdVoucher1Heading" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="AdVoucher1Description" Nullable="true" />
+          <Property Type="String" Name="AdVoucher1Value" Nullable="true" />
+          <Property Type="String" Name="SqLeftImagePath" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="SqRightImagePath" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="GameUrl" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="PqAnswer1Id" Nullable="true" />
+          <Property Type="String" Name="PqAnswer1" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="PqAnswer2Id" Nullable="true" />
+          <Property Type="String" Name="PqAnswer2" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="PqAnswer3Id" Nullable="true" />
+          <Property Type="String" Name="PqAnswer3" Nullable="true" MaxLength="100" />
         </ComplexType>
         <EntityType Name="TransactionLog">
           <Key>
@@ -3901,6 +3924,29 @@
                 <ScalarProperty Name="ItemType" ColumnName="ItemType" />
                 <ScalarProperty Name="Weightage" ColumnName="Weightage" />
                 <ScalarProperty Name="TotalItems" ColumnName="TotalItems" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="AdClickRate" ColumnName="AdClickRate" />
+                <ScalarProperty Name="AdImagePath" ColumnName="AdImagePath" />
+                <ScalarProperty Name="AdVideoLink" ColumnName="AdVideoLink" />
+                <ScalarProperty Name="AdAnswer1" ColumnName="AdAnswer1" />
+                <ScalarProperty Name="AdAnswer2" ColumnName="AdAnswer2" />
+                <ScalarProperty Name="AdAnswer3" ColumnName="AdAnswer3" />
+                <ScalarProperty Name="AdCorrectAnswer" ColumnName="AdCorrectAnswer" />
+                <ScalarProperty Name="AdVerifyQuestion" ColumnName="AdVerifyQuestion" />
+                <ScalarProperty Name="AdRewardType" ColumnName="AdRewardType" />
+                <ScalarProperty Name="AdVoucher1Heading" ColumnName="AdVoucher1Heading" />
+                <ScalarProperty Name="AdVoucher1Description" ColumnName="AdVoucher1Description" />
+                <ScalarProperty Name="AdVoucher1Value" ColumnName="AdVoucher1Value" />
+                <ScalarProperty Name="SqLeftImagePath" ColumnName="SqLeftImagePath" />
+                <ScalarProperty Name="SqRightImagePath" ColumnName="SqRightImagePath" />
+                <ScalarProperty Name="GameUrl" ColumnName="GameUrl" />
+                <ScalarProperty Name="PqAnswer1Id" ColumnName="PqAnswer1Id" />
+                <ScalarProperty Name="PqAnswer1" ColumnName="PqAnswer1" />
+                <ScalarProperty Name="PqAnswer2Id" ColumnName="PqAnswer2Id" />
+                <ScalarProperty Name="PqAnswer2" ColumnName="PqAnswer2" />
+                <ScalarProperty Name="PqAnswer3Id" ColumnName="PqAnswer3Id" />
+                <ScalarProperty Name="PqAnswer3" ColumnName="PqAnswer3" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
