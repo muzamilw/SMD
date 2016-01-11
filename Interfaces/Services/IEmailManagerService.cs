@@ -50,5 +50,10 @@ namespace SMD.Interfaces.Services
         ///Send Email when Collection scheduler run
         /// </summary>
         Task SendCollectionRoutineEmail(string aspnetUserId);
+
+        /// <summary>
+        ///Send Email when Payout scheduler run
+        /// </summary>
+        Task SendPayOutRoutineEmail(string aspnetUserId);
     }
 }

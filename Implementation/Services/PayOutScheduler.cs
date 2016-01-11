@@ -27,6 +27,9 @@ namespace SMD.Implementation.Services
         [Dependency]
         private static IPaypalService PaypalService { get; set; }
 
+        [Dependency]
+        private static IEmailManagerService EmailSerice { get; set; }
+
         private static ISMDLogger smdLogger;
         /// <summary>
         /// Get Configured logger
@@ -81,7 +84,8 @@ namespace SMD.Implementation.Services
 
             // Initialize Service
             PaypalService = UnityConfig.UnityContainer.Resolve<IPaypalService>();
-           
+            EmailSerice = UnityConfig.UnityContainer.Resolve<IEmailManagerService>();
+
             // Using Base DB Context
             using (var dbContext = new BaseDbContext())
             {
@@ -139,6 +143,8 @@ namespace SMD.Implementation.Services
                                 dbContext.TransactionLogs.Add(transactionLog);
                                 dbContext.SaveChanges();
 
+                                // Email To User 
+                                EmailSerice.SendPayOutRoutineEmail(user.Id);
                                 // Indicates we are happy
                                 tran.Complete();
                             }
