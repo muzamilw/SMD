@@ -439,12 +439,22 @@ namespace SMD.Implementation.Services
             var tax = taxRepository.GetTaxByCountryId(user.CountryId);
             // Total includes tax
             var amount = product.SetupPrice + tax.TaxValue;
+            string response = null;
+            Boolean isSystemUser;
 
-            // Make Stripe actual payment 
-            var response = stripeService.ChargeCustomer((int?)amount, user.StripeCustomerId);
-
+            // If It is not System User then make transation 
+            if (user.Roles.Any(role => role.Name.ToLower().Equals("user")))
+            {
+                // Make Stripe actual payment 
+                response = stripeService.ChargeCustomer((int?)amount, user.StripeCustomerId);
+                isSystemUser = false;
+            }
+            else
+            {
+                isSystemUser = true;
+            }
             #endregion
-            if (response != "failed")
+            if (isSystemUser || (response != "failed"))
             {
                 #region Add Invoice
 

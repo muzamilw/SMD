@@ -12,7 +12,7 @@ namespace SMD.MIS.Areas.Api.Controllers
     /// <summary>
     /// Get Products Controller 
     /// </summary>
-    public class GetProductsController : ApiController
+    public class ProductsController : ApiController
     {
         
         #region Private
@@ -26,7 +26,7 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// <summary>
         /// Constuctor 
         /// </summary>
-        public GetProductsController(IWebApiUserService webApiUserService)
+        public ProductsController(IWebApiUserService webApiUserService)
         {
             if (webApiUserService == null)
             {
@@ -52,6 +52,20 @@ namespace SMD.MIS.Areas.Api.Controllers
             }
 
             return webApiUserService.GetProducts(request);
+        }
+
+        /// <summary>
+        /// Response From User on Ads, Surveys, Questions
+        /// </summary>
+        [ApiExceptionCustom]
+        public BaseApiResponse Post(string authenticationToken, ProductActionRequest request)
+        {
+            if (string.IsNullOrEmpty(authenticationToken) || request == null || !ModelState.IsValid)
+            {
+                throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
+            }
+
+            return new BaseApiResponse();
         }
 
         #endregion

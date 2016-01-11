@@ -1,22 +1,18 @@
-﻿using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
+﻿using Microsoft.AspNet.Identity.Owin;
 using SMD.ExceptionHandling;
 using SMD.Implementation.Identity;
 using SMD.Interfaces.Repository;
 using SMD.Interfaces.Services;
 using SMD.Models.Common;
 using SMD.Models.DomainModels;
-using SMD.Models.IdentityModels;
 using SMD.Models.RequestModels;
 using SMD.Models.ResponseModels;
+using Stripe;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web;
-using Stripe;
 
 
 namespace SMD.Implementation.Services
@@ -101,11 +97,24 @@ namespace SMD.Implementation.Services
             var amount = product.SetupPrice + tax.TaxValue;
             // User who added Survey Question for approval 
             var user = webApiUserService.GetUserByUserId(source.UserId);
-            // Make Stripe actual payment 
-            var response = stripeService.ChargeCustomer((int?)amount, user.StripeCustomerId);
+
+            string response = null;
+            Boolean isSystemUser;
+
+            // If It is not System User then make transation 
+            if (user.Roles.Any(role => role.Name.ToLower().Equals("user")))
+            {
+                // Make Stripe actual payment 
+                response = stripeService.ChargeCustomer((int?)amount, user.StripeCustomerId);
+                isSystemUser = false;
+            }
+            else
+            {
+                isSystemUser = true;
+            }
 
             #endregion
-            if (response != "failed")
+            if (isSystemUser || (response != "failed"))
             {
                 #region Invocing + Transactions
                 var requestModel = new ApproveSurveyRequest

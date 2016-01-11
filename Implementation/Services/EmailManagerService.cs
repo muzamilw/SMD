@@ -559,6 +559,51 @@ namespace SMD.Implementation.Services
             await SendEmail();
         }
         // ReSharper restore SuggestUseVarKeywordEvident
+
+        /// <summary>
+        ///Send Email when Collection scheduler run
+        /// </summary>
+        public async Task SendCollectionRoutineEmail(string aspnetUserId)
+        {
+            User oUser = await UserManager.FindByIdAsync(aspnetUserId);
+
+            if (oUser != null)
+            {
+                MMailto.Add(oUser.Email);
+                Mid = (int)EmailTypes.CollectionMade;
+                Muser = oUser.Email;
+                Fname = oUser.FullName;
+                PhoneNo = oUser.PhoneNumber;
+                await SendEmail();
+            }
+            else
+            {
+                throw new Exception("Customer is null");
+            } 
+        }
+
+
+        /// <summary>
+        ///Send Email when Payout scheduler run
+        /// </summary>
+        public async Task SendPayOutRoutineEmail(string aspnetUserId)
+        {
+            User oUser = await UserManager.FindByIdAsync(aspnetUserId);
+
+            if (oUser != null)
+            {
+                MMailto.Add(oUser.Email);
+                Mid = (int)EmailTypes.PayoutMade;
+                Muser = oUser.Email;
+                Fname = oUser.FullName;
+                PhoneNo = oUser.PhoneNumber;
+                await SendEmail();
+            }
+            else
+            {
+                throw new Exception("Customer is null");
+            }  
+        }
         #endregion
 
     }

@@ -130,6 +130,7 @@ define("pQuestion/pQuestion.viewModel",
                     onEditProfileQuestion = function (item) {
                         getQuestionAnswer(item.qId());
                         selectedQuestion(item);
+                        filterLinkedQuestions();
                         isEditorVisible(true);
                     },
                     // On Edit PQ, Get PQ Answer & linked Question 
@@ -291,6 +292,13 @@ define("pQuestion/pQuestion.viewModel",
                         } else {
                             return true;
                         }
+                    },
+                    // Filter Linked Questions on edit of Profile Question 
+                    filterLinkedQuestions = function () {
+                        var newObjtodelete = linkedQuestions.find(function (temp) {
+                            return selectedQuestion().qId() == temp.PqId;
+                        });
+                        linkedQuestions.remove(newObjtodelete);
                     },
                     // Initialize the view model
                     initialize = function (specifiedView) {
