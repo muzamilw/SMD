@@ -9,6 +9,11 @@ namespace SMD.Interfaces.Services
     public interface IEmailManagerService
     {
         /// <summary>
+        /// Send Voucher to User
+        /// </summary>
+        Task SendVoucherEmail(string aspnetUserId, string voucherDescription, string voucherValue, string voucherImage);
+
+        /// <summary>
         /// Send Account Verification Email
         /// </summary>
         Task SendAccountVerificationEmail(User oUser, string emailConfirmationLink);

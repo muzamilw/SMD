@@ -130,7 +130,8 @@ namespace SMD.Implementation.Services
         public string SharedDesignLink { get; set; }
         public string CreateAccountLink { get; set; }
         public string PasswordResetLink { get; set; }
-
+        public string VoucherDescription { get; set; }
+        public string VoucherValue { get; set; }
         /// <summary>
         /// Sends Email
         /// </summary>
@@ -174,6 +175,11 @@ namespace SMD.Implementation.Services
             if (Mid == (int)EmailTypes.ResetPassword)
             {
                 MBody = MBody.Replace("++PasswordResetLink++", PasswordResetLink);
+            }
+            if (Mid == (int)EmailTypes.Voucher)
+            {
+                MBody = MBody.Replace("++VoucherDescription++", VoucherDescription);
+                MBody = MBody.Replace("++VoucherValue++", VoucherValue);
             }
             MBody = MBody.Replace("++Fname++", Fname);
             oMailBody.IsBodyHtml = true;
@@ -580,6 +586,30 @@ namespace SMD.Implementation.Services
             {
                 throw new Exception("Customer is null");
             } 
+        }
+
+        /// <summary>
+        /// Send Email when Collection scheduler run
+        /// </summary>
+        public async Task SendVoucherEmail(string aspnetUserId, string voucherDescription, string voucherValue, string voucherImage)
+        {
+            User oUser = await UserManager.FindByIdAsync(aspnetUserId);
+
+            if (oUser != null)
+            {
+                MMailto.Add(oUser.Email);
+                Mid = (int)EmailTypes.Voucher;
+                Muser = oUser.Email;
+                Fname = oUser.FullName;
+                PhoneNo = oUser.PhoneNumber;
+                VoucherValue = voucherValue;
+                VoucherDescription = voucherDescription;
+                await SendEmail();
+            }
+            else
+            {
+                throw new Exception("Customer is null");
+            }
         }
 
 

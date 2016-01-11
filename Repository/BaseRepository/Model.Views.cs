@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySetsEF88BA4E6CB412F342A8EC3E9D171C8A15E0A23473F4AEFFCD3E8F0BECBF9FC0))]
+[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets4170F8E56855DAC3DF5816AC21D7BB10A747EFD5ACB38C23048384229495D507))]
 
 namespace Edm_EntityMappingGeneratedViews
 {
@@ -17,18 +17,18 @@ namespace Edm_EntityMappingGeneratedViews
     /// <Summary>
     /// The type contains views for EntitySets and AssociationSets that were generated at design time.
     /// </Summary>
-    public sealed class ViewsForBaseEntitySetsEF88BA4E6CB412F342A8EC3E9D171C8A15E0A23473F4AEFFCD3E8F0BECBF9FC0 : System.Data.Mapping.EntityViewContainer
+    public sealed class ViewsForBaseEntitySets4170F8E56855DAC3DF5816AC21D7BB10A747EFD5ACB38C23048384229495D507 : System.Data.Mapping.EntityViewContainer
     {
         
         /// <Summary>
         /// The constructor stores the views for the extents and also the hash values generated based on the metadata and mapping closure and views.
         /// </Summary>
-        public ViewsForBaseEntitySetsEF88BA4E6CB412F342A8EC3E9D171C8A15E0A23473F4AEFFCD3E8F0BECBF9FC0()
+        public ViewsForBaseEntitySets4170F8E56855DAC3DF5816AC21D7BB10A747EFD5ACB38C23048384229495D507()
         {
             this.EdmEntityContainerName = "BaseDbContext";
             this.StoreEntityContainerName = "SMDModelStoreContainer";
-            this.HashOverMappingClosure = "33c5ae1f5eb1328daf5f1c06cc942e0806cd220cdac173148bd0994061e0cd21";
-            this.HashOverAllExtentViews = "92d4491224923ba3e11dafff0f9225911680f1b46f1266a62a9fbba753c9849b";
+            this.HashOverMappingClosure = "d76518be53850b2406341c1a60d7bd8b544dcf69a5c434d561323d2c2f3f0706";
+            this.HashOverAllExtentViews = "12f2f2c952edf56cdca6961739dc824bbd9956b71735104045d4b6aec1df6851";
             this.ViewCount = 68;
         }
         
@@ -639,7 +639,7 @@ namespace Edm_EntityMappingGeneratedViews
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.AdCampaignResponse", @"
     SELECT VALUE -- Constructing AdCampaignResponse
-        [SMDModel.Store.AdCampaignResponse](T1.AdCampaignResponse_ResponseID, T1.AdCampaignResponse_CampaignID, T1.AdCampaignResponse_CreatedDateTime, T1.AdCampaignResponse_UserID, T1.AdCampaignResponse_EndUserDollarAmount, T1.AdCampaignResponse_SkipCount)
+        [SMDModel.Store.AdCampaignResponse](T1.AdCampaignResponse_ResponseID, T1.AdCampaignResponse_CampaignID, T1.AdCampaignResponse_CreatedDateTime, T1.AdCampaignResponse_UserID, T1.AdCampaignResponse_EndUserDollarAmount, T1.AdCampaignResponse_SkipCount, T1.AdCampaignResponse_UserSelection)
     FROM (
         SELECT 
             T.ResponseId AS AdCampaignResponse_ResponseID, 
@@ -648,6 +648,7 @@ namespace Edm_EntityMappingGeneratedViews
             T.UserId AS AdCampaignResponse_UserID, 
             T.EndUserDollarAmount AS AdCampaignResponse_EndUserDollarAmount, 
             T.SkipCount AS AdCampaignResponse_SkipCount, 
+            T.UserSelection AS AdCampaignResponse_UserSelection, 
             True AS _from0
         FROM BaseDbContext.AdCampaignResponses AS T
     ) AS T1");
@@ -1403,7 +1404,7 @@ namespace Edm_EntityMappingGeneratedViews
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.AdCampaignResponses", @"
     SELECT VALUE -- Constructing AdCampaignResponses
-        [DomainModels.AdCampaignResponse](T1.AdCampaignResponse_ResponseId, T1.AdCampaignResponse_CampaignId, T1.AdCampaignResponse_CreatedDateTime, T1.AdCampaignResponse_UserId, T1.AdCampaignResponse_EndUserDollarAmount, T1.AdCampaignResponse_SkipCount)
+        [DomainModels.AdCampaignResponse](T1.AdCampaignResponse_ResponseId, T1.AdCampaignResponse_CampaignId, T1.AdCampaignResponse_CreatedDateTime, T1.AdCampaignResponse_UserId, T1.AdCampaignResponse_EndUserDollarAmount, T1.AdCampaignResponse_SkipCount, T1.AdCampaignResponse_UserSelection)
     FROM (
         SELECT 
             T.ResponseID AS AdCampaignResponse_ResponseId, 
@@ -1412,6 +1413,7 @@ namespace Edm_EntityMappingGeneratedViews
             T.UserID AS AdCampaignResponse_UserId, 
             T.EndUserDollarAmount AS AdCampaignResponse_EndUserDollarAmount, 
             T.SkipCount AS AdCampaignResponse_SkipCount, 
+            T.UserSelection AS AdCampaignResponse_UserSelection, 
             True AS _from0
         FROM SMDModelStoreContainer.AdCampaignResponse AS T
     ) AS T1");

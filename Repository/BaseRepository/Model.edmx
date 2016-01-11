@@ -76,6 +76,7 @@
           <Property Name="UserID" Type="nvarchar" MaxLength="128" />
           <Property Name="EndUserDollarAmount" Type="float" />
           <Property Name="SkipCount" Type="int" />
+          <Property Name="UserSelection" Type="int" />
         </EntityType>
         <EntityType Name="AdCampaignTargetCriteria">
           <Key>
@@ -2243,6 +2244,7 @@
           <NavigationProperty Name="AdCampaign" Relationship="DomainModels.FK_AdCampaignResponse_AdCampaign" FromRole="AdCampaignResponse" ToRole="AdCampaign" />
           <NavigationProperty Name="User" Relationship="DomainModels.FK_AdCampaignResponse_AspNetUsers" FromRole="AdCampaignResponse" ToRole="User" />
           <Property Name="SkipCount" Type="Int32" />
+          <Property Name="UserSelection" Type="Int32" />
         </EntityType>
         <EntityType Name="AdCampaignTargetLocation">
           <Key>
@@ -3575,6 +3577,7 @@
           <EntitySetMapping Name="AdCampaignResponses">
             <EntityTypeMapping TypeName="DomainModels.AdCampaignResponse">
               <MappingFragment StoreEntitySet="AdCampaignResponse">
+                <ScalarProperty Name="UserSelection" ColumnName="UserSelection" />
                 <ScalarProperty Name="SkipCount" ColumnName="SkipCount" />
                 <ScalarProperty Name="EndUserDollarAmount" ColumnName="EndUserDollarAmount" />
                 <ScalarProperty Name="UserId" ColumnName="UserID" />

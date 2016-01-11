@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
+using SMD.ExceptionHandling;
 using SMD.Interfaces.Repository;
 using SMD.Interfaces.Services;
 using SMD.Models.Common;
@@ -84,7 +86,9 @@ namespace SMD.Implementation.Services
         /// Constructor 
         /// </summary>
 
-        public ProfileQuestionService(IProfileQuestionRepository profileQuestionRepository, ICountryRepository countryRepository, ILanguageRepository languageRepository, IProfileQuestionGroupRepository profileQuestionGroupRepository, IProfileQuestionAnswerRepository profileQuestionAnswerRepository)
+        public ProfileQuestionService(IProfileQuestionRepository profileQuestionRepository, ICountryRepository countryRepository, 
+            ILanguageRepository languageRepository, IProfileQuestionGroupRepository profileQuestionGroupRepository, 
+            IProfileQuestionAnswerRepository profileQuestionAnswerRepository)
         {
             _profileQuestionRepository = profileQuestionRepository;
             _countryRepository = countryRepository;
@@ -95,6 +99,31 @@ namespace SMD.Implementation.Services
 
         #endregion
         #region Public
+
+        /// <summary>
+        /// Skip Profile Question
+        /// </summary>
+        public void PerformSkip(int pqId)
+        {
+            ProfileQuestion profileQuestion = _profileQuestionRepository.Find(pqId);
+            if (profileQuestion == null)
+            {
+                throw new SMDException(string.Format(CultureInfo.InvariantCulture, 
+                    LanguageResources.ProfileQuestionService_ProfileQuestionNotFound, pqId));
+            }
+
+            // Update Skipped Count
+            if (profileQuestion.SkippedCount == null)
+            {
+                profileQuestion.SkippedCount = 0;
+            }
+
+            profileQuestion.SkippedCount += 1;
+
+            // Save Changes
+            _profileQuestionRepository.SaveChanges();
+        }
+
         /// <summary>
         /// Profile Question Search request 
         /// </summary>

@@ -2269,3 +2269,24 @@ END
 GO
 
 /* Added By Khurram (09 Jan 2016) - Ends */
+
+
+/* Added By Khurram (11 Jan 2016) - Starts (Need to run while giving release - Remove this once script gets updated) */
+
+GO
+
+alter table adCampaignResponse
+add UserSelection int null
+
+GO
+
+GO
+
+  insert into systemMails
+  values
+  (14, 'Voucher', 'Sell My Data Team', 'info@myprintcloud.com',
+  'You received a voucher', 'You received a voucher ++VoucherDescription++, worth ++VoucherValue++.', NULL)
+
+GO
+
+/* Added By Khurram (11 Jan 2016) - Ends */

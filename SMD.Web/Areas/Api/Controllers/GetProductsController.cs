@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using SMD.Interfaces.Services;
 using SMD.Models.RequestModels;
 using System.Net;
@@ -58,14 +59,15 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// Response From User on Ads, Surveys, Questions
         /// </summary>
         [ApiExceptionCustom]
-        public BaseApiResponse Post(string authenticationToken, ProductActionRequest request)
+        public async Task<BaseApiResponse> Post(string authenticationToken, ProductActionRequest request)
         {
-            if (string.IsNullOrEmpty(authenticationToken) || request == null || !ModelState.IsValid)
+            if (string.IsNullOrEmpty(authenticationToken) || request == null || !ModelState.IsValid || string.IsNullOrEmpty(request.UserId))
             {
                 throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
             }
 
-            return new BaseApiResponse();
+            BaseApiResponse response = await webApiUserService.ExecuteActionOnProductsResponse(request);
+            return response;
         }
 
         #endregion
