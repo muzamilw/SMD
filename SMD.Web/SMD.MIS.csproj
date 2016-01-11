@@ -861,6 +861,7 @@
     <Content Include="Global.asax" />
     <Content Include="Images\accent.png" />
     <Content Include="Images\ads.png" />
+    <Content Include="Images\beta.jpg" />
     <Content Include="Images\bullet.png" />
     <Content Include="Images\Cash4ads_logo.png" />
     <Content Include="Images\Cash4Ads_White_pink.png" />
