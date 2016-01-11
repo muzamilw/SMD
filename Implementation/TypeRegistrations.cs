@@ -4,6 +4,7 @@ using SMD.Implementation.Identity;
 using SMD.Implementation.Services;
 using SMD.Interfaces;
 using SMD.Interfaces.Logger;
+using SMD.Interfaces.Repository;
 using SMD.Interfaces.Services;
 
 namespace SMD.Implementation
@@ -38,6 +39,7 @@ namespace SMD.Implementation
             unityContainer.RegisterType<IStripeService, StripeService>();
             unityContainer.RegisterType<ITransactionLogService, TransactionLogService>();
             unityContainer.RegisterType<IAccountService, AccountService>();
+            unityContainer.RegisterType<ICityService, CityService>();
         }
     }
 }

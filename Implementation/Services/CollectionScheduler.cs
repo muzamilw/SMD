@@ -173,8 +173,13 @@ namespace SMD.Implementation.Services
                                     dbContext.InvoiceDetails.Add(invoiceDetail);
 
                                     #endregion
-                                    // Email To User 
-                                    EmailSerice.SendCollectionRoutineEmail(user.Id);
+
+                                    if (!isSystemUser)
+                                    {
+                                        // Email To User 
+                                        EmailSerice.SendCollectionRoutineEmail(user.Id);  
+                                    }
+                                   
                                     dbContext.SaveChanges();
                                 }
                                 // Indicates we are happy

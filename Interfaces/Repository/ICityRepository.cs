@@ -17,5 +17,10 @@ namespace SMD.Interfaces.Repository
         /// Get List of City 
         /// </summary>
         IEnumerable<City> GetSearchCities(string searchText);
+
+        /// <summary>
+        /// Get List of City Of a Country
+        /// </summary>
+        IEnumerable<City> GetAllCitiesOfCountry(long countryId);
     }
 }

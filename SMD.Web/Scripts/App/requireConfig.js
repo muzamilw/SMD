@@ -20,7 +20,8 @@
             "addApproval": "/Areas/Ads/Scripts",
             "survey": "/Areas/Survey/Scripts",
             "surveyQuestionApp": "/Areas/Survey/Scripts",
-            "invoice":"/Areas/Billing/Scripts"
+            "invoice":"/Areas/Billing/Scripts",
+            "user": "/Areas/User/Scripts"
         }
     });
 

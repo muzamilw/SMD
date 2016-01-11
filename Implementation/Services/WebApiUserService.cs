@@ -39,6 +39,10 @@ namespace SMD.Implementation.Services
         private readonly IInvoiceDetailRepository invoiceDetailRepository;
         private readonly IProductRepository productRepository;
         private readonly ITaxRepository taxRepository;
+        private readonly ICountryRepository countryRepository;
+        private readonly ICityRepository cityRepository;
+        private readonly IIndustryRepository industryRepository;
+
 
         private ApplicationUserManager UserManager
         {
@@ -417,7 +421,7 @@ namespace SMD.Implementation.Services
             IAccountRepository accountRepository, ITransactionRepository transactionRepository,
             ISurveyQuestionRepository surveyQuestionRepository, IInvoiceRepository invoiceRepository,
             IInvoiceDetailRepository invoiceDetailRepository, IProductRepository productRepository,
-            ITaxRepository taxRepository)
+            ITaxRepository taxRepository, ICountryRepository countryRepository, ICityRepository cityRepository, IIndustryRepository industryRepository)
         {
             if (emailManagerService == null)
             {
@@ -451,6 +455,9 @@ namespace SMD.Implementation.Services
             this.invoiceDetailRepository = invoiceDetailRepository;
             this.productRepository = productRepository;
             this.taxRepository = taxRepository;
+            this.countryRepository = countryRepository;
+            this.cityRepository = cityRepository;
+            this.industryRepository = industryRepository;
         }
 
         #endregion
@@ -626,7 +633,20 @@ namespace SMD.Implementation.Services
                 Message = "Success"
             };
         }
-        
+
+        /// <summary>
+        /// Get Logged-In User profile 
+        /// </summary>
+        public User GetLoggedInUser()
+        {
+            User user =  UserManager.FindById(productRepository.LoggedInUserIdentity);
+            if (user == null)
+            {
+                throw new SMDException(LanguageResources.WebApiUserService_InvalidUserId);
+            }
+            return user;
+        }
+
         /// <summary>
         /// Confirm Email
         /// </summary>
@@ -878,6 +898,20 @@ namespace SMD.Implementation.Services
             }
 
             return user; 
+        }
+
+
+        /// <summary>
+        /// Base Data for User Profile 
+        /// </summary>
+        public UserProfileBaseResponseModel GetBaseDataForUserProfile()
+        {
+            return new UserProfileBaseResponseModel
+            {
+               Cities = cityRepository.GetAllCities(),
+               Countries = countryRepository.GetAllCountries(),
+               Industries = industryRepository.GetAll()
+            };
         }
         #endregion
     }
