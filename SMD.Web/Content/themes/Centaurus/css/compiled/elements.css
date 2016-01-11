@@ -1775,7 +1775,7 @@ input[type="radio"] {
 }
 
 #login-logo {
-    background: none repeat scroll 0 0 #34495e;
+    background: none repeat scroll 0 0 #3dd2b5;
     color: #fff;
     display: block;
     font-size: 2em;
@@ -4950,10 +4950,11 @@ input[type="radio"] {
     height:100px !important;
 }
 .login-logo-bakImg {
-        background: url(/Images/Cash4Ads_White_pink.png);
+background: url(/Images/ads.png);
     width: 117px;
-    height: 113px;
-    background-size: 200px;
-    background-position-x: 125px;
+    height: 117px;
+    background-size: 100%;
+    /* background-position-x: 125px; */
     margin: auto;
+    background-repeat: no-repeat;
 }
