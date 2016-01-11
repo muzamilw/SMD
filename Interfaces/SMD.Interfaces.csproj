@@ -78,6 +78,7 @@
     <Compile Include="Logger\IMPCLogWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\ICityService.cs" />
+    <Compile Include="Repository\ISurveyQuestionResponseRepository.cs" />
     <Compile Include="Repository\IEducationRepository.cs" />
     <Compile Include="Repository\IIndustryRepository.cs" />
     <Compile Include="Repository\IInvoiceDetailRepository.cs" />

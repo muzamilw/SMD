@@ -13,6 +13,11 @@ namespace SMD.Interfaces.Services
         /// <summary>
         /// Gets Ads, Surveys, Questions as paged view
         /// </summary>
+        Task<BaseApiResponse> ExecuteActionOnProductsResponse(ProductActionRequest request);
+
+        /// <summary>
+        /// Gets Ads, Surveys, Questions as paged view
+        /// </summary>
         GetProductsResponse GetProducts(GetProductsRequest request);
         
         /// <summary>

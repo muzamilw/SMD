@@ -1,4 +1,6 @@
-﻿namespace SMD.Models.RequestModels
+﻿using System.Collections.Generic;
+
+namespace SMD.Models.RequestModels
 {
     /// <summary>
     /// Product Action Request Model 
@@ -43,7 +45,7 @@
         /// <summary>
         /// Profile Question User Answer
         /// </summary>
-        public long? PqAnswerId { get; set; }
+        public List<int> PqAnswerIds { get; set; }
 
         /// <summary>
         /// Ad Reward User Selection

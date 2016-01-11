@@ -126,6 +126,9 @@
   <data name="WebApiUserService_InvalidEmail" xml:space="preserve">
     <value>Email is invalid.</value>
   </data>
+  <data name="WebApiUserService_ProductTypeNotProvided" xml:space="preserve">
+    <value>Product Type is not provided.</value>
+  </data>
   <data name="WebApiUserService_LoginInfoNotFound" xml:space="preserve">
     <value>No Login info found for provided email.</value>
   </data>
@@ -161,6 +164,9 @@
   </data>
   <data name="WebApiUserService_SurveyQuestionNotFound" xml:space="preserve">
     <value>Survey Question not found against Id {0}.</value>
+  </data>
+  <data name="ProfileQuestionService_ProfileQuestionNotFound" xml:space="preserve">
+    <value>Profile Question not found against Id {0}.</value>
   </data>
   <data name="Success" xml:space="preserve">
     <value>Success</value>

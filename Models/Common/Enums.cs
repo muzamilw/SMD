@@ -44,7 +44,8 @@
         QuestionApproved = 10,
         QuestionRejected = 11,
         CollectionMade=12,
-        PayoutMade=13
+        PayoutMade=13,
+        Voucher = 14
     }
 
     public enum AdCampaignCriteriaType
@@ -181,5 +182,20 @@
         Paypal=2,
         GoogleWallet=3,
         VirtualAccount=4
+    }
+    public enum ProductType
+    {
+        Ad = 1,
+        SurveyQuestion = 2,
+        Question = 3
+    }
+
+    /// <summary>
+    /// Ad Reward
+    /// </summary>
+    public enum AdRewardType
+    {
+        Cash = 1,
+        Voucher = 2
     }
 }
