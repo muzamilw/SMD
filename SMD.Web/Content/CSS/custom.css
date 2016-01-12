@@ -333,3 +333,6 @@ a.reportAnchor a:hover {
 .removeMenuMargin {
     margin-left:0px !important;
 }
+.displayNone{
+    display:none !important;
+}
