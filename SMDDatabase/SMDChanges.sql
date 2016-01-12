@@ -2541,4 +2541,14 @@ END
 
 GO
 
+GO
+
+alter table aspnetusers
+drop column age
+
+alter table aspnetusers
+add DOB datetime null
+
+GO
+
 /* Added By Khurram (12 Jan 2016) - Ends */
