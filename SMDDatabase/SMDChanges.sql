@@ -1962,7 +1962,7 @@ add PreferredPayoutAccount int null
 
 -- 06-Jan-16  by Baqer ENDS
 
-/* Added by khurram - (7 Jan 2016) Starts */
+/* Added by khurram - (7 Jan 2016) Starts (Updated on SMD live server) */
 
 /****** Object:  StoredProcedure [dbo].[GetProducts]    Script Date: 1/7/2016 3:05:50 PM ******/
 SET ANSI_NULLS ON
@@ -2043,7 +2043,7 @@ GO
 
 GO
 
-/****** Object:  Table [dbo].[TransactionLog]    Script Date: 07-Jan-16 7:20:30 PM ******/
+/****** Object:  Table [dbo].[TransactionLog]    Script Date: 07-Jan-16 7:20:30 PM  (Updated on SMD live server) ******/
 SET ANSI_NULLS ON
 GO
 
@@ -2133,7 +2133,7 @@ COMMIT
 -- 08-Jan-16 by iqra End
 
 
-/* Added By Khurram (09 Jan 2016) - Starts (Need to run while giving release - Remove this once script gets updated) */ 
+/* Added By Khurram (09 Jan 2016) - Starts (Updated on smd live server) */ 
 
 GO
 ALTER PROCEDURE [dbo].[GetProducts] 
@@ -2271,7 +2271,7 @@ GO
 /* Added By Khurram (09 Jan 2016) - Ends */
 
 
-/* Added By Khurram (11 Jan 2016) - Starts (Need to run while giving release - Remove this once script gets updated) */
+/* Added By Khurram (11 Jan 2016) - Starts (Updated on smd live server) */
 
 GO
 
