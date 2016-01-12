@@ -330,3 +330,6 @@ a.reportAnchor a:hover {
 .bold {
     font-weight:bold;
 }
+.removeMenuMargin {
+    margin-left:0px !important;
+}
