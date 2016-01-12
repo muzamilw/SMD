@@ -99,14 +99,46 @@
         /// </summary>
         public string ZipCode { get; set; }
 
-      
-
+     
         /// <summary>
         /// Industry Id
         /// </summary>
         public int? IndustryId { get; set; }
 
-      
+        /// <summary>
+        /// Advertising Contact
+        /// </summary>
+        public string AdvertContact { get; set; }
+
+        /// <summary>
+        /// Advertising Contact phone
+        /// </summary>
+        public string AdvertContactPhone { get; set; }
+
+        /// <summary>
+        /// Advertising Contact Email
+        /// </summary>
+        public string AdvertContactEmail { get; set; }
+
+        /// <summary>
+        /// EDucation Id
+        /// </summary>
+        public long? EducationId { get; set; }
+
+        /// <summary>
+        /// Stripe Account
+        /// </summary>
+        public string StripeId { get; set; }
+
+        /// <summary>
+        /// PayPAl Account
+        /// </summary>
+        public string PayPal { get; set; }
+
+        /// <summary>
+        /// Goole Walet 
+        /// </summary>
+        public string GoogleVallet { get; set; }
 
     }
 }

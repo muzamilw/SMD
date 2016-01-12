@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using SMD.MIS.Areas.Api.Models;
 using System;
 using System.Web;
@@ -39,7 +41,14 @@ namespace SMD.MIS.Areas.Api.ModelMappers
                        State = source.State,
                        ZipCode= source.ZipCode,
                        ImageUrl = !string.IsNullOrEmpty(source.ProfileImage) ? HttpContext.Current.Request.Url.Scheme + "://" + 
-                       HttpContext.Current.Request.Url.Host + "/" + source.ProfileImage + "?" + DateTime.Now : string.Empty
+                       HttpContext.Current.Request.Url.Host + "/" + source.ProfileImage + "?" + DateTime.Now : string.Empty,
+                       AdvertContact = source.AdvertisingContact,
+                       AdvertContactEmail = source.AdvertisingContactEmail,
+                       AdvertContactPhone = source.AdvertisingContactPhoneNumber,
+                       EducationId = source.EducationId,
+                       StripeId = source.StripeCustomerId,
+                       GoogleVallet = source.GoogleWalletCustomerId,
+                       PayPal = source.PaypalCustomerId
                    };
         }
 
@@ -62,11 +71,18 @@ namespace SMD.MIS.Areas.Api.ModelMappers
         /// </summary>
         public static UserProfileBaseResponse CreateFrom(this UserProfileBaseResponseModel source)
         {
+            var timeZones = TimeZoneInfo.GetSystemTimeZones().Select(timeZoneInfo => new TimeZoneDropDown
+            {
+                TimeZoneId = timeZoneInfo.Id, TimeZoneName = timeZoneInfo.Id + "  [" + timeZoneInfo.BaseUtcOffset + "]"
+            }).ToList();
+
             return new UserProfileBaseResponse
             {
                 CityDropDowns = source.Cities.Select(city => city.CreateFrom()),
                 CountryDropdowns = source.Countries.Select(country => country.CreateFrom()),
-                IndusteryDropdowns = source.Industries.Select(industery => industery.CreateForDd())
+                IndusteryDropdowns = source.Industries.Select(industery => industery.CreateForDd()),
+                EducationDropdowns = source.Educations.Select(edu => edu.CreateFromDd()),
+                TimeZoneDropDowns = timeZones
             };
         }
     }

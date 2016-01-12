@@ -42,6 +42,7 @@ namespace SMD.Implementation.Services
         private readonly ICountryRepository countryRepository;
         private readonly ICityRepository cityRepository;
         private readonly IIndustryRepository industryRepository;
+        private readonly IEducationRepository educationRepository;
 
         private readonly IProfileQuestionUserAnswerService profileQuestionAnswerService;
         private readonly IProfileQuestionService profileQuestionService;
@@ -603,7 +604,7 @@ namespace SMD.Implementation.Services
             ITaxRepository taxRepository, IProfileQuestionUserAnswerService profileQuestionAnswerService,
             ICountryRepository countryRepository, ICityRepository cityRepository, IIndustryRepository industryRepository,
             IProfileQuestionService profileQuestionService, IAdCampaignResponseRepository adCampaignResponseRepository,
-            ISurveyQuestionResponseRepository surveyQuestionResponseRepository)
+            ISurveyQuestionResponseRepository surveyQuestionResponseRepository, IEducationRepository educationRepository)
         {
             if (emailManagerService == null)
             {
@@ -666,6 +667,7 @@ namespace SMD.Implementation.Services
             this.profileQuestionService = profileQuestionService;
             this.adCampaignResponseRepository = adCampaignResponseRepository;
             this.surveyQuestionResponseRepository = surveyQuestionResponseRepository;
+            this.educationRepository = educationRepository;
         }
 
         #endregion
@@ -1202,9 +1204,10 @@ namespace SMD.Implementation.Services
         {
             return new UserProfileBaseResponseModel
             {
-               Cities = cityRepository.GetAllCities(),
-               Countries = countryRepository.GetAllCountries(),
-               Industries = industryRepository.GetAll()
+               Cities = cityRepository.GetAllCities().ToList(),
+               Countries = countryRepository.GetAllCountries().ToList(),
+               Industries = industryRepository.GetAll().ToList(),
+               Educations = educationRepository.GetAllEducations().ToList()
             };
         }
 

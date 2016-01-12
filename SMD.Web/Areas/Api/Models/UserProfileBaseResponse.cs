@@ -18,5 +18,15 @@ namespace SMD.MIS.Areas.Api.Models
         /// List of Industries 
         /// </summary>
         public IEnumerable<IndusteryDropdown> IndusteryDropdowns { get; set; }
+
+        /// <summary>
+        /// List of Educations
+        /// </summary>
+        public IEnumerable<EducationDropdown> EducationDropdowns { get; set; }
+
+        /// <summary>
+        /// List of time zones 
+        /// </summary>
+        public IEnumerable<TimeZoneDropDown> TimeZoneDropDowns { get; set; }
     }
 }

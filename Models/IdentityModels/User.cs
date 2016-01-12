@@ -182,6 +182,38 @@ namespace SMD.Models.IdentityModels
             {
                 FullName = source.FullName;
             }
+
+            if (!string.IsNullOrEmpty(source.TimeZone))
+            {
+                UserTimeZone = source.TimeZone;
+            }
+
+           
+
+            if (!string.IsNullOrEmpty(source.AdvertContact))
+            {
+                AdvertisingContact = source.AdvertContact;
+            }
+
+            if (!string.IsNullOrEmpty(source.AdvertContactEmail))
+            {
+                AdvertisingContactEmail = source.AdvertContactEmail;
+            }
+
+            if (!string.IsNullOrEmpty(source.AdvertContactPhone))
+            {
+                AdvertisingContactPhoneNumber = source.AdvertContactPhone;
+            }
+
+            if (source.EducationId.HasValue)
+            {
+                EducationId = source.EducationId;
+            }
+
+            if (!string.IsNullOrEmpty(source.PayPal))
+            {
+                PaypalCustomerId = source.PayPal;
+            }
         }
 
         #endregion
