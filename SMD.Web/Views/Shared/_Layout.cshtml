@@ -1,5 +1,6 @@
 ﻿@{ 
     string classes = "";
+    string classesMenu = "";
 }
 <!DOCTYPE html>
 <html>
@@ -69,6 +70,7 @@
                             else
                             {
                                 classes = "removeMenuMargin";
+                                classesMenu = "displayNone";
                             }
                         </li>
                     </ul>
@@ -109,10 +111,9 @@
     <div id="page-wrapper" class="container">
 
         <div class="row">
-            @if(!User.IsInRole("User")) {
-
+      
             
-            <div id="nav-col">
+            <div id="nav-col" class="@classesMenu">
 
 
                 @*<a id="menu-logo" href="~/Dashboard/Index">
@@ -188,7 +189,7 @@
                 </section>
 
             </div>
-            }
+            
             @*content wrapper goes here*@
             <div id="content-wrapper" class="@classes">
                 @RenderBody()
