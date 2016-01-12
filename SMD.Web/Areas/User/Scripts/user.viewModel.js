@@ -2,8 +2,8 @@
     Module with the view model for the User
 */
 define("user/user.viewModel",
-    ["jquery", "amplify", "ko", "user/user.dataservice", "user/user.model"],
-    function ($, amplify, ko, dataservice, model) {
+    ["jquery", "amplify", "ko", "user/user.dataservice", "user/user.model", "common/stripeChargeCustomer.viewModel"],
+    function ($, amplify, ko, dataservice, model, stripeChargeCustomer) {
         var ist = window.ist || {};
         ist.userProfile = {
             viewModel: (function() {
@@ -16,6 +16,10 @@ define("user/user.viewModel",
                     cities = ko.observableArray([]),
                     // list of industries 
                     industries = ko.observableArray([]),
+                    // list of education 
+                    educations = ko.observableArray([]),
+                    // list of Time Zones 
+                    timeZones = ko.observableArray([]),
                     // Gender list
                     genderList = ko.observableArray([{
                          id: 1,
@@ -64,19 +68,32 @@ define("user/user.viewModel",
                     getBasedata = function () {
                         dataservice.getBaseDataForUserProfile(null, {
                             success: function (baseDataFromServer) {
-                                
-                                countries.removeAll();
-                                ko.utils.arrayPushAll(countries(), baseDataFromServer.CountryDropdowns);
-                                countries.valueHasMutated();
+                                if (baseDataFromServer != null && baseDataFromServer.CountryDropdowns != null) {
+                                    countries.removeAll();
+                                    ko.utils.arrayPushAll(countries(), baseDataFromServer.CountryDropdowns);
+                                    countries.valueHasMutated();
+                                }
 
-                                cities.removeAll();
-                                ko.utils.arrayPushAll(cities(), baseDataFromServer.CityDropDowns);
-                                cities.valueHasMutated();
-
-                                industries.removeAll();
-                                ko.utils.arrayPushAll(industries(), baseDataFromServer.IndusteryDropdowns);
-                                industries.valueHasMutated();
-
+                                if (baseDataFromServer != null && baseDataFromServer.CityDropDowns != null) {
+                                    cities.removeAll();
+                                    ko.utils.arrayPushAll(cities(), baseDataFromServer.CityDropDowns);
+                                    cities.valueHasMutated();
+                                }
+                                if (baseDataFromServer != null && baseDataFromServer.IndusteryDropdowns != null) {
+                                    industries.removeAll();
+                                    ko.utils.arrayPushAll(industries(), baseDataFromServer.IndusteryDropdowns);
+                                    industries.valueHasMutated();
+                                }
+                                if (baseDataFromServer != null && baseDataFromServer.EducationDropdowns != null) {
+                                    educations.removeAll();
+                                    ko.utils.arrayPushAll(educations(), baseDataFromServer.EducationDropdowns);
+                                    educations.valueHasMutated();
+                                }
+                                if (baseDataFromServer != null && baseDataFromServer.TimeZoneDropDowns != null) {
+                                    timeZones.removeAll();
+                                    ko.utils.arrayPushAll(timeZones(), baseDataFromServer.TimeZoneDropDowns);
+                                    timeZones.valueHasMutated();
+                                }
                                 // Get Profile When Base data is loaded 
                                 getUserProfile();
                             },
@@ -101,6 +118,10 @@ define("user/user.viewModel",
                     onUpdateProfile= function() {
                         updateProfile();
                     },
+                     // Charge Customer
+                    chargeCustomer = function () {
+                        stripeChargeCustomer.show(undefined, 2000, '2 Widgets');
+                    },
                     // Initialize the view model
                     initialize = function (specifiedView) {
                         view = specifiedView;
@@ -116,7 +137,10 @@ define("user/user.viewModel",
                     cities: cities,
                     industries: industries,
                     genderList: genderList,
-                    onUpdateProfile: onUpdateProfile
+                    onUpdateProfile: onUpdateProfile,
+                    educations: educations,
+                    timeZones: timeZones,
+                    chargeCustomer: chargeCustomer
                 };
             })()
         };

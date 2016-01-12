@@ -18,15 +18,21 @@ using Newtonsoft.Json;
 using System.Configuration;
 using SMD.Interfaces;
 using SMD.WebBase.Mvc;
+using SMD.Implementation.Identity;
 
 namespace SMD.MIS.Controllers
 {
     public class HomeController : Controller
     {
-
+        private ApplicationUserManager _userManager;
         private IAuthenticationManager AuthenticationManager
         {
             get { return HttpContext.GetOwinContext().Authentication; }
+        }
+        public ApplicationUserManager UserManager
+        {
+            get { return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
+            private set { _userManager = value; }
         }
 
         [Dependency]
@@ -69,6 +75,14 @@ namespace SMD.MIS.Controllers
         [SiteAuthorize]
         public ActionResult Welcome()
         {
+            if (UserManager.LoggedInUserRole != (string)Roles.User)
+            {
+                ViewBag.isUser = false;
+            }
+            else
+            {
+                ViewBag.isUser = true;
+            }
             return View();
         }
     }

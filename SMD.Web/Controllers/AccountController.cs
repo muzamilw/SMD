@@ -97,7 +97,7 @@ namespace SMD.MIS.Controllers
                 ViewBag.ReturnUrl = returnUrl;
                 return View();
             }
-            return RedirectToAction("Welcome", "Home", new { area = "" });
+            return RedirectToLocal("");
         }
 
         public ApplicationSignInManager SignInManager
@@ -168,13 +168,21 @@ namespace SMD.MIS.Controllers
 
         private ActionResult RedirectToLocal(string returnUrl)
         {
-            if (Url.IsLocalUrl(returnUrl))
+
+            if (UserManager.LoggedInUserRole !=  "" && UserManager.LoggedInUserRole != (string)Roles.User)
             {
-                return Redirect(returnUrl);
+                if (Url.IsLocalUrl(returnUrl))
+                {
+                    return Redirect(returnUrl);
+                }
+                else
+                {
+                    return RedirectToAction("Welcome", "Home", new { area = "" });
+                }
             }
             else
             {
-                return RedirectToAction("Welcome", "Home", new { area = "" });
+                return RedirectToAction("Index","Ads", new { area = "Ads" });
             }
         }
 

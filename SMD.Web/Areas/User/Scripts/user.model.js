@@ -3,7 +3,8 @@
     var // ReSharper disable InconsistentNaming
       User = function (specifiedId, specifiedFullName, specifiedAddress1, specifiedCmpname, specifiedEmail,
           specifiedJTitle, specifiedTimeZone, specifiedGender, specifiedAddress2, specifiedAge, specifiedCityId,
-          specifiedContNotes, specifiedCountryId,indsId, specifiedPhn1, specifiedPhn2, specifiedState, specifiedZip, specifiedImg) {
+          specifiedContNotes, specifiedCountryId,indsId, specifiedPhn1, specifiedPhn2, specifiedState, specifiedZip, specifiedImg,
+          advertisingContact, advertisingEmail, advertisingPhone, spcEduId, spcStripe, spcPayPal, spcGoogle) {
           var
               id = ko.observable(specifiedId),
               fullName = ko.observable(specifiedFullName),
@@ -29,6 +30,16 @@
               zipCode = ko.observable(specifiedZip),
 
               imageUrl = ko.observable(specifiedImg),
+
+              advert = ko.observable(advertisingContact),
+              advertEmail = ko.observable(advertisingEmail),
+              advertPhone = ko.observable(advertisingPhone),
+              educationId = ko.observable(spcEduId),
+
+              stripeId = ko.observable(spcStripe || 'undefined'),
+              payPalId = ko.observable(spcPayPal || 'undefined'),
+              googleValletId = ko.observable(spcGoogle || 'undefined'),
+
               errors = ko.validation.group({
               }),
               // Is Valid
@@ -53,7 +64,12 @@
                   phone2: phone2,
                   state: state,
                   zipCode: zipCode,
-                  imageUrl: imageUrl
+                  imageUrl: imageUrl,
+                  advert: advert,
+                  advertEmail: advertEmail,
+                  advertPhone: advertPhone,
+                  educationId:educationId
+
               }),
               // Has Changes
               hasChanges = ko.computed(function () {
@@ -72,19 +88,24 @@
                       CompanyName: companyName(),
                       Email: email(),
                       JobTitle: jobTitle(),
-                      UserTimeZone: userTimeZone(),
+                      TimeZone: userTimeZone(),
                       Gender: gender(),
                       Address2: address2(),
                       Age: age(),
                       CityId: cityId(),
                       ContactNotes: contactNotes(),
                       CountryId: countryId(),
-                      IndusteryId: industeryId(),
+                      IndustryId: industeryId(),
                       Phone1: phone1(),
                       Phone2: phone2(),
                       State: state(),
                       ZipCode: zipCode(),
-                      ProfileImage: imageUrl()
+                      ProfileImage: imageUrl(),
+                      AdvertContact: advert(),
+                      AdvertContactEmail: advertEmail(),
+                      AdvertContactPhone: advertPhone(),
+                      EducationId: educationId(),
+                      PayPal: payPalId()
                   };
               };
           return {
@@ -108,6 +129,15 @@
               zipCode: zipCode,
               imageUrl: imageUrl,
 
+              advert: advert,
+              advertEmail: advertEmail,
+              advertPhone: advertPhone,
+              educationId:educationId,
+
+              stripeId :stripeId,
+              payPalId :payPalId,
+              googleValletId: googleValletId,
+
               hasChanges: hasChanges,
               convertToServerData:convertToServerData,
               reset: reset,
@@ -123,7 +153,8 @@
             itemFromServer.Email,itemFromServer.JobTitle,itemFromServer.UserTimeZone,itemFromServer.Gender,
             itemFromServer.Address2,itemFromServer.Age,itemFromServer.CityId,itemFromServer.ContactNotes,itemFromServer.CountryId,
             itemFromServer.IndustryId,itemFromServer.Phone1,itemFromServer.Phone2,itemFromServer.State,itemFromServer.ZipCode,
-            itemFromServer.ImageUrl);
+            itemFromServer.ImageUrl ,itemFromServer.AdvertContact,itemFromServer.AdvertContactEmail,itemFromServer.AdvertContactPhone,
+            itemFromServer.EducationId, itemFromServer.StripeId, itemFromServer.PayPal, itemFromServer.GoogleVallet);
     };
     
     // Function to attain cancel button functionality User

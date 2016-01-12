@@ -429,6 +429,7 @@
     <Compile Include="Areas\Api\Models\CampaignSearchRequest.cs" />
     <Compile Include="Areas\Api\Models\AdCampaignResposneModelForAproval.cs" />
     <Compile Include="Areas\Api\Models\CityDropDown.cs" />
+    <Compile Include="Areas\Api\Models\EducationDropdown.cs" />
     <Compile Include="Areas\Api\Models\IndusteryDropdown.cs" />
     <Compile Include="Areas\Api\Models\Invoice.cs" />
     <Compile Include="Areas\Api\Models\InvoiceDetail.cs" />
@@ -446,6 +447,7 @@
     <Compile Include="Areas\Api\Models\SurveyQuestionDropDown.cs" />
     <Compile Include="Areas\Api\Models\SurveyQuestionRequestResponseModel.cs" />
     <Compile Include="Areas\Api\Models\SurveyQuestionResposneModelForAproval.cs" />
+    <Compile Include="Areas\Api\Models\TimeZoneDropDown.cs" />
     <Compile Include="Areas\Api\Models\UpdateProfileQuestionUserAnswerResponse.cs" />
     <Compile Include="Areas\Api\Models\UserAndCostDetail.cs" />
     <Compile Include="Areas\Api\Models\UserBaseData.cs" />
@@ -1442,6 +1444,7 @@
     <Content Include="Areas\User\Views\_ViewStart.cshtml" />
     <Content Include="Areas\User\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\User\Views\ManageUser\Index.cshtml" />
+    <Content Include="Areas\ProfileQuestion\Views\Manage\test.cshtml" />
     <None Include="Properties\PublishProfiles\SMD MIS Saqib.pubxml" />
     <None Include="Properties\PublishProfiles\SMD.pubxml" />
     <None Include="Scripts\amplify-vsdoc.js" />
@@ -2630,7 +2633,7 @@
           <AutoAssignPort>False</AutoAssignPort>
           <DevelopmentServerPort>30630</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://smdpreview.com</IISUrl>
+         <IISUrl>http://smdpreview.com</IISUrl>
           <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
           <IISAppRootUrl>http://smdpreview.com</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
