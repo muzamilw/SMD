@@ -13,7 +13,7 @@ namespace SMD.Repository.Repositories
 {
     public class CityRepository : BaseRepository<City>, ICityRepository
     {
-         #region Private
+        #region Private
        
         #endregion
         #region Constructor
@@ -54,6 +54,14 @@ namespace SMD.Repository.Repositories
         public IEnumerable<City> GetSearchCities(string searchText)
         {
             return DbSet.Where(city => city.CityName.StartsWith(searchText)).ToList();
+        }
+
+        /// <summary>
+        /// Get List of City Of a Country
+        /// </summary>
+        public IEnumerable<City> GetAllCitiesOfCountry(long countryId)
+        {
+            return DbSet.Where(city => city.CountryId == countryId).ToList();
         }
         #endregion
     }

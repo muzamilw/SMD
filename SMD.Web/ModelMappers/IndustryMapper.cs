@@ -18,5 +18,14 @@ namespace SMD.MIS.ModelMappers
                 IndustryName = source.IndustryName
             };
         }
+
+        public static IndusteryDropdown CreateForDd(this Industry source )
+        {
+            return new IndusteryDropdown
+            {
+                IndusteryId = source.IndustryId,
+                IndusteryName = source.IndustryName
+            };
+        }
     }
 }

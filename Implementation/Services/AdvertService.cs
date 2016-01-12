@@ -408,7 +408,8 @@ namespace SMD.Implementation.Services
                     emailManagerService.SendQuestionApprovalEmail(dbAd.UserId);
 
                     // Stripe payment + Invoice Generation
-                    MakeStripePaymentandAddInvoiceForCampaign(dbAd);
+                    // Muzi bhai said we will see it on latter stage 
+                   //  MakeStripePaymentandAddInvoiceForCampaign(dbAd);
                 }
                 // Rejection 
                 else

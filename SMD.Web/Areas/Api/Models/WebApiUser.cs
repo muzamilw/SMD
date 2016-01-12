@@ -54,5 +54,59 @@
         /// Image Url
         /// </summary>
         public string ImageUrl { get; set; }
+
+        /// <summary>
+        /// Phone 1
+        /// </summary>
+        public string Phone1 { get; set; }
+
+        /// <summary>
+        /// Phone 2
+        /// </summary>
+        public string Phone2 { get; set; }
+      
+
+        /// <summary>
+        /// Contact Notes
+        /// </summary>
+        public string ContactNotes { get; set; }
+
+     
+       
+
+        /// <summary>
+        /// Address 2
+        /// </summary>
+        public string Address2 { get; set; }
+
+        /// <summary>
+        /// CityId
+        /// </summary>
+        public int? CityId { get; set; }
+
+        /// <summary>
+        /// Country Id
+        /// </summary>
+        public int? CountryId { get; set; }
+
+        /// <summary>
+        /// State
+        /// </summary>
+        public string State { get; set; }
+
+        /// <summary>
+        /// Zip Code
+        /// </summary>
+        public string ZipCode { get; set; }
+
+      
+
+        /// <summary>
+        /// Industry Id
+        /// </summary>
+        public int? IndustryId { get; set; }
+
+      
+
     }
 }

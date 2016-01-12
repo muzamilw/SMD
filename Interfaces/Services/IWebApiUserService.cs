@@ -90,5 +90,15 @@ namespace SMD.Interfaces.Services
         /// Get User using usermanager  For Stripe Work 
         /// </summary>
         User GetUserByUserId(string userId);
+
+        /// <summary>
+        /// Get Logged-In User profile 
+        /// </summary>
+        User GetLoggedInUser();
+
+        /// <summary>
+        /// Base Data for User Profile 
+        /// </summary>
+        UserProfileBaseResponseModel GetBaseDataForUserProfile();
     }
 }

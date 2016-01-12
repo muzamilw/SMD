@@ -211,6 +211,7 @@
     <Compile Include="ResponseModels\CampaignResponseModel.cs" />
     <Compile Include="ResponseModels\SurveyQuestionResponseModel.cs" />
     <Compile Include="ResponseModels\SurveyQuestionResposneModelForAproval.cs" />
+    <Compile Include="ResponseModels\UserProfileBaseResponseModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">

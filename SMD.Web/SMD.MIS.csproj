@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -395,6 +395,9 @@
     <Compile Include="Areas\Api\Controllers\SurveyQuestionEditorController.cs" />
     <Compile Include="Areas\Api\Controllers\UpdateCampaignController.cs" />
     <Compile Include="Areas\Api\Controllers\UpdateQuestionAnswerForApiController.cs" />
+    <Compile Include="Areas\Api\Controllers\GetCityByCountryController.cs" />
+    <Compile Include="Areas\Api\Controllers\UpdateUserFromWebBaseController.cs" />
+    <Compile Include="Areas\Api\Controllers\UpdateUserFromWebController.cs" />
     <Compile Include="Areas\Api\Controllers\UpdateUserProfileController.cs" />
     <Compile Include="Areas\Api\Controllers\RegisterController.cs" />
     <Compile Include="Areas\Api\Controllers\GetAdsForApiController.cs" />
@@ -409,7 +412,6 @@
     <Compile Include="Areas\Api\Controllers\StandardLoginController.cs" />
     <Compile Include="Areas\Api\Controllers\ProfileQuestionController.cs" />
     <Compile Include="Areas\Api\Controllers\SurveyController.cs" />
-    <Compile Include="Areas\Api\Controllers\UpdateUserProfileImageController.cs" />
     <Compile Include="Areas\Api\LanguageResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -426,6 +428,8 @@
     <Compile Include="Areas\Api\Models\CampaignRequestResponseModel.cs" />
     <Compile Include="Areas\Api\Models\CampaignSearchRequest.cs" />
     <Compile Include="Areas\Api\Models\AdCampaignResposneModelForAproval.cs" />
+    <Compile Include="Areas\Api\Models\CityDropDown.cs" />
+    <Compile Include="Areas\Api\Models\IndusteryDropdown.cs" />
     <Compile Include="Areas\Api\Models\Invoice.cs" />
     <Compile Include="Areas\Api\Models\InvoiceDetail.cs" />
     <Compile Include="Areas\Api\Models\InvoiceSearchRequestResponse.cs" />
@@ -445,6 +449,7 @@
     <Compile Include="Areas\Api\Models\UpdateProfileQuestionUserAnswerResponse.cs" />
     <Compile Include="Areas\Api\Models\UserAndCostDetail.cs" />
     <Compile Include="Areas\Api\Models\UserBaseData.cs" />
+    <Compile Include="Areas\Api\Models\UserProfileBaseResponse.cs" />
     <Compile Include="Areas\Api\Models\WebApiUser.cs" />
     <Compile Include="Areas\Api\Models\CountryDropdown.cs" />
     <Compile Include="Areas\Api\Models\ProfileQuestionDropdown.cs" />
@@ -459,6 +464,8 @@
     <Compile Include="Areas\Billing\Controllers\ManageController.cs" />
     <Compile Include="Areas\Common\CommonAreaRegistration.cs" />
     <Compile Include="Areas\ProfileQuestion\Controllers\ManageController.cs" />
+    <Compile Include="Areas\User\Controllers\ManageUserController.cs" />
+    <Compile Include="Areas\User\UserAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Areas\ProfileQuestion\ProfileQuestionAreaRegistration.cs" />
     <Compile Include="Areas\Survey\Controllers\SurveyController.cs" />
@@ -470,6 +477,7 @@
     </Compile>
     <Compile Include="Helper\CultureHelper.cs" />
     <Compile Include="ModelMappers\AdCampaignMapper.cs" />
+    <Compile Include="ModelMappers\CityMapper.cs" />
     <Compile Include="ModelMappers\EducationMapper.cs" />
     <Compile Include="ModelMappers\IndustryMapper.cs" />
     <Compile Include="ModelMappers\InvoiceDetailMapper.cs" />
@@ -524,6 +532,10 @@
     <Content Include="Areas\Survey\Scripts\survey.model.js" />
     <Content Include="Areas\Survey\Scripts\survey.view.js" />
     <Content Include="Areas\Survey\Scripts\survey.viewModel.js" />
+    <Content Include="Areas\User\Scripts\user.dataservice.js" />
+    <Content Include="Areas\User\Scripts\user.model.js" />
+    <Content Include="Areas\User\Scripts\user.view.js" />
+    <Content Include="Areas\User\Scripts\user.viewModel.js" />
     <Content Include="Content\colorpicker.css" />
     <Content Include="Content\CSS\bootstrap\bootstrap-responsive.css" />
     <Content Include="Content\CSS\bootstrap\bootstrap-responsive.min.css" />
@@ -862,7 +874,6 @@
     <Content Include="Global.asax" />
     <Content Include="Images\accent.png" />
     <Content Include="Images\ads.png" />
-    <Content Include="Images\beta.jpg" />
     <Content Include="Images\bullet.png" />
     <Content Include="Images\Cash4ads_logo.png" />
     <Content Include="Images\Cash4Ads_White_pink.png" />
@@ -1427,6 +1438,10 @@
     <Content Include="Areas\Billing\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Billing\Views\Manage\Invoice.cshtml" />
     <Content Include="Areas\Billing\Views\Manage\_InvoiceDetail.cshtml" />
+    <Content Include="Areas\User\Views\web.config" />
+    <Content Include="Areas\User\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\User\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\User\Views\ManageUser\Index.cshtml" />
     <None Include="Properties\PublishProfiles\SMD MIS Saqib.pubxml" />
     <None Include="Properties\PublishProfiles\SMD.pubxml" />
     <None Include="Scripts\amplify-vsdoc.js" />
@@ -2552,6 +2567,7 @@
     <Folder Include="SMD_Content\AdCampaigns\" />
     <Folder Include="SMD_Content\ProfileQuestions\" />
     <Folder Include="SMD_Content\SurveyQuestions\" />
+    <Folder Include="SMD_Content\Users\02de201f-f4ea-420e-a1a8-74e7c1975277\" />
     <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
