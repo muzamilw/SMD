@@ -6,32 +6,54 @@
 <div class="row" id="adsBinding">
     <div class="col-lg-12" data-bind="visible: !$root.isEditorVisible()">
         <div class="row">
-            <div class="col-lg-12" id="topArea">
-                <ol class="breadcrumb">
-                    <li><a href="~/Dashboard/Index">&nbsp;</a></li>
-                </ol>
-                <div class="clearfix">
-                    <h1 class="pull-left" style="padding-left:0px;">Manage Campaigns</h1>
-                </div>
-                <div class="row" style="margin-bottom:15px;">
+            <div class="col-md-12" id="topArea">
+                <div class="social-box-wrapper">
 
-                    <div class="pull-right top-page-ui" style="margin-right:5px;margin-bottom:5px;">
+                    <div class="social-box col-lg-3 col-sm-6 col-xs-6  estimates" style="cursor:pointer;" title="Pending Estimates">
 
-                        <div class="btn-group">
-                            <button class="btn btn-primary" data-bind="click:$root.addNewCampaign">
-                                Create Campaign
-                            </button>
+                        <div class="clearfix">
+                            <span class="social-count">£1024.00</span><br />
+                            <span class="social-action">All time spend</span>
+                        </div>
+                    </div>
+
+                    <div class="social-box col-lg-3 col-sm-6 col-xs-6  facebook" style="cursor:pointer;" title="Pending Orders">
+
+                        <div class="clearfix">
+                            <span class="social-count">3405</span><br />
+                            <span class="social-action">Games and Ads Delivered</span>
                         </div>
 
                     </div>
+
+                    <div class="social-box col-lg-3 col-sm-6 col-xs-6  twitter" style="cursor:pointer;" title="In Production">
+
+                        <div class="clearfix">
+                            <span class="social-count">2100</span><br />
+                            <span class="social-action">Vouchers Accepted</span>
+                        </div>
+
+                    </div>
+
+                    <div class="social-box col-lg-3 col-sm-6 col-xs-6  google" style="cursor:pointer;" title="Completed">
+
+                        <div class="clearfix">
+                            <span class="social-count">£125.00</span><br />
+                            <span class="social-action">Paid out to customers</span>
+                        </div>
+
+                    </div>
+
                 </div>
             </div>
+         
         </div>
         <div class="row">
             <div class="col-lg-12">
+                <!-- ko template: { name: 'filterTemplate' } -->
+                <!-- /ko -->
                 <div data-bind="visible: $root.campaignGridContent().length > 0">
-                    <!-- ko template: { name: 'filterTemplate' } -->
-                    <!-- /ko -->
+                   
                     <div class="main-box no-header clearfix" style="padding-top:0px;">
                         <div class="main-box-body clearfix" style="padding-left:20px;padding-right:22px;">
                             <div class="tabsdescriptions" style="margin-left:0px;">
@@ -42,14 +64,17 @@
                                     <thead>
                                         <tr>
 
-                                            <th class="col-sm-2"><span>Campaign Name</span></th>
-                                            <th class="col-sm-1"><span>Delivery</span></th>
-                                            <th class="col-sm-1"><span>Results</span></th>
-                                            <th class="col-sm-1"><span>Reach</span></th>
-                                            <th class="col-sm-1"><span>Cost</span></th>
-                                            <th class="col-sm-1"><span>Budget</span></th>
-                                            <th class="col-sm-2"><span>Amount Spent</span></th>
-                                            <th class="col-sm-2"><span>Schedule</span></th>
+                                            <th class="col-sm-2"><span>Name</span></th>
+                                           
+                                            @*<th class="col-sm-1"><span>Results</span></th>
+    <th class="col-sm-1"><span>Reach</span></th>
+    <th class="col-sm-1"><span>Cost</span></th>
+    <th class="col-sm-1"><span>Budget</span></th>*@
+                                            <th class="col-sm-2"><span>Start Date</span></th>
+                                            <th class="col-sm-2"><span>End Date</span></th>
+                                            <th class="col-sm-1"><span>Status</span></th>
+                                            <th class="col-sm-2"><span>Spent</span></th>
+                                          
                                             <th class="col-sm-1">&nbsp;</th>
                                         </tr>
                                     </thead>
@@ -93,23 +118,57 @@
             <a href="#" class="store-user-link" data-bind="text: DisplayTitle,click:$root.onEditCampaign"></a>
 
         </td>
-        <td class="col-sm-1">
-            @*<span class="pull-left">
-                    <i class="fa fa-circle" data-bind="style: { color: StatusColor }"></i>
-                </span>*@
-            <span class="pull-left " data-bind="text: StatusValue">
-            </span>
-        </td>
-        <td class="col-sm-1">
+       
+        @*<td class="col-sm-1">
             <span class="">&nbsp;</span>
         </td>
         <td class="col-sm-1"><span class="" data-bind="text: ResultClicks"></span></td>
         <td class="col-sm-1">
             <span class="">&nbsp;</span>
         </td>
-        <td class="col-sm-1"><span class="" data-bind="text: MaxBudget"></span></td>
-        <td class="col-sm-2"><span class="" data-bind="text: AmountSpent"></span></td>
+        <td class="col-sm-1"><span class="" data-bind="text: MaxBudget"></span></td>*@
         <td class="col-sm-2"><span class="" data-bind="text: StartDateTime"></span></td>
+        <td class="col-sm-2"><span class="" data-bind="text: EndDateTime"></span></td>
+        <td class="col-sm-2">
+            <!-- ko if: Status() == 1-->
+            <div class="text-left statusbg" style="background:#6D6EFA;    width: 47px;">
+                <span data-bind="text: StatusValue">
+                </span>
+            </div>
+            <!-- /ko -->
+            <!-- ko if: Status() == 2-->
+            <div class="text-left statusbg" style="background:#fc0;">
+                <span data-bind="text: StatusValue">
+                </span>
+            </div>
+            <!-- /ko -->
+            <!-- ko if:  Status() == 3-->
+            <div class="text-left statusbg" style="background:#37c675;    width: 47px;">
+                <span data-bind="text: StatusValue">
+                </span>
+            </div>
+            <!-- /ko -->
+            <!-- ko if: Status() == 4-->
+            <div class="text-left statusbg" style="background:#fd008e;">
+                <span data-bind="text: StatusValue">
+                </span>
+            </div>
+            <!-- /ko -->
+            <!-- ko if: Status() == 5-->
+            <div class="text-left statusbg" style="background:#c8e392;">
+                <span data-bind="text: StatusValue">
+                </span>
+            </div>
+            <!-- /ko -->
+            <!-- ko if: Status() == 6-->
+            <div class="text-left statusbg" style="background:red;">
+                <span data-bind="text: StatusValue">
+                </span>
+            </div>
+            <!-- /ko -->
+        </td>
+        <td class="col-sm-2"><span class="" data-bind="text: AmountSpent"></span></td>
+        
 
         <td class="col-sm-2">
           
@@ -129,17 +188,32 @@
 </script>
 @* Filter Template *@
 <script id="filterTemplate" type="text/html">
-    <div class="filter-body" id="filter" style="margin-bottom:10px;">
-
-        <form data-bind="submit: $root.getCampaignByFilter">
-            <div class="filter-block pull-right" style="margin-right: -10px">
-                <div class="form-group pull-left">
-                    <input type="text" class="form-control" placeholder="Search..." data-bind="value: $root.searchFilterValue">
-                    <i class="fa fa-search search-icon" data-bind="click: $root.getCampaignByFilter"></i>
+    <div class="filter-body" id="filter">
+        <div class="col-lg-3">
+            <span style="    font-size: 24px;">My Ad Campaigns</span>
+        </div>
+        <div class="col-lg-3 text-left">
+            <form data-bind="submit: $root.getCampaignByFilter">
+                <div class="filter-block" style="margin-right: -10px">
+                    <div class="form-group ">
+                        <input type="text" class="form-control" placeholder="Search..." data-bind="value: $root.searchFilterValue">
+                        <i class="fa fa-search search-icon" data-bind="click: $root.getCampaignByFilter"></i>
+                    </div>
                 </div>
+                <div class="clearfix"></div>
+            </form>
+        </div>
+        <div class="col-lg-6 text-right">
+            <div class="btn-group">
+                <button class="btn ctCampaign" data-bind="click:$root.addNewCampaign">
+                    Create Campaign
+                </button>
             </div>
-            <div class="clearfix"></div>
-        </form>
+
+        </div>
+       <div class="clearfix">
+
+       </div>
     </div>
 </script>
 <!-- ko stopBinding: true -->

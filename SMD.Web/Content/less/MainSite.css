@@ -405,6 +405,29 @@ ul {
   font-size: 13px !important;
   padding-left: 20px;
 }
+.social-box .social-action {
+  font-size: 19PX !important;
+  clear: both;
+}
+.social-box-wrapper > div.social-box {
+  background: #6d6efa !important;
+}
+.ctCampaign {
+  background: #6d6efa !important;
+  color: white;
+  border: none;
+  border-radius: 0px;
+  width: 200px;
+  margin-top: 2px;
+  height: 35px;
+}
+.statusbg {
+  padding: 7px;
+  width: 126px;
+  color: white;
+  border-radius: 5px;
+  font-size: 13px;
+}
 .lang_newcnt {
   position: relative;
 }
