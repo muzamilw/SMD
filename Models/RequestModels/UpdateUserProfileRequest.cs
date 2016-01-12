@@ -70,7 +70,7 @@ namespace SMD.Models.RequestModels
         /// <summary>
         /// Age
         /// </summary>
-        public int? Age { get; set; }
+        public DateTime? DOB { get; set; }
 
         /// <summary>
         /// Gender

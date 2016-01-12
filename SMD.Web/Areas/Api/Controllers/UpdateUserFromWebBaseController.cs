@@ -1,14 +1,7 @@
-﻿using System.Collections.ObjectModel;
-using SMD.Interfaces.Services;
+﻿using SMD.Interfaces.Services;
 using SMD.MIS.Areas.Api.ModelMappers;
 using SMD.MIS.Areas.Api.Models;
-using SMD.Models.RequestModels;
-using SMD.Models.ResponseModels;
-using SMD.WebBase.Mvc;
 using System;
-using System.Net;
-using System.Threading.Tasks;
-using System.Web;
 using System.Web.Http;
 
 namespace SMD.MIS.Areas.Api.Controllers
