@@ -31,7 +31,7 @@ namespace SMD.MIS.Areas.Api.ModelMappers
                        UserTimeZone = source.UserTimeZone,
                        Gender = source.Gender,
                        Address2 = source.Address2,
-                       Age =  (source.Age ?? 0),
+                       DOB =  source.DOB,
                        CityId = source.CityId,
                        ContactNotes = source.ContactNotes,
                        CountryId = source.CountryId,
@@ -73,7 +73,8 @@ namespace SMD.MIS.Areas.Api.ModelMappers
         {
             var timeZones = TimeZoneInfo.GetSystemTimeZones().Select(timeZoneInfo => new TimeZoneDropDown
             {
-                TimeZoneId = timeZoneInfo.Id, TimeZoneName = timeZoneInfo.Id + "  [" + timeZoneInfo.BaseUtcOffset + "]"
+                TimeZoneId = timeZoneInfo.Id,
+                TimeZoneName = timeZoneInfo.BaseUtcOffset + "  [ " + timeZoneInfo.Id + " ]"
             }).ToList();
 
             return new UserProfileBaseResponse

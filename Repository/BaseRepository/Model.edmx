@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="SMDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SMDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Account">
           <Key>
             <PropertyRef Name="AccountId" />
@@ -184,7 +184,6 @@
           <Property Name="ChargeBeesubscriptionID" Type="nvarchar" MaxLength="50" />
           <Property Name="RegisteredViaReferral" Type="bit" />
           <Property Name="ReferringUserID" Type="nvarchar" MaxLength="128" />
-          <Property Name="Age" Type="int" />
           <Property Name="Gender" Type="int" />
           <Property Name="LanguageID" Type="int" />
           <Property Name="IndustryID" Type="int" />
@@ -199,6 +198,7 @@
           <Property Name="PaypalCustomerId" Type="nvarchar" MaxLength="250" />
           <Property Name="GoogleWalletCustomerId" Type="nvarchar" MaxLength="250" />
           <Property Name="PreferredPayoutAccount" Type="int" />
+          <Property Name="DOB" Type="datetime" />
         </EntityType>
         <EntityType Name="AuditLog">
           <Key>
@@ -1610,7 +1610,6 @@
           <NavigationProperty Name="Claims" Relationship="DomainModels.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="User" ToRole="AspNetUserClaim" />
           <NavigationProperty Name="AdCampaignResponses" Relationship="DomainModels.FK_AdCampaignResponse_AspNetUsers" FromRole="User" ToRole="AdCampaignResponse" />
           <NavigationProperty Name="SurveyQuestions" Relationship="DomainModels.FK_SurveyQuestion_AspNetUsers" FromRole="User" ToRole="SurveyQuestion" />
-          <Property Name="Age" Type="Int32" />
           <Property Name="Gender" Type="Int32" />
           <Property Name="StripeCustomerId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="SurveyQuestionResponses" Relationship="DomainModels.FK_SurveyQuestionResponse_AspNetUsers" FromRole="User" ToRole="SurveyQuestionResponse" />
@@ -1634,6 +1633,7 @@
           <Property Name="PreferredPayoutAccount" Type="Int32" />
           <NavigationProperty Name="City" Relationship="DomainModels.FK_AspNetUsers_City" FromRole="User" ToRole="City" />
           <NavigationProperty Name="Country" Relationship="DomainModels.FK_AspNetUsers_Country" FromRole="User" ToRole="Country" />
+          <Property Name="DOB" Type="DateTime" Precision="3" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="DomainModels.User" Multiplicity="1">
@@ -3351,6 +3351,7 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="DomainModels.User">
               <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
                 <ScalarProperty Name="PreferredPayoutAccount" ColumnName="PreferredPayoutAccount" />
                 <ScalarProperty Name="GoogleWalletCustomerId" ColumnName="GoogleWalletCustomerId" />
                 <ScalarProperty Name="PaypalCustomerId" ColumnName="PaypalCustomerId" />
@@ -3366,7 +3367,6 @@
                 <ScalarProperty Name="LanguageId" ColumnName="LanguageID" />
                 <ScalarProperty Name="StripeCustomerId" ColumnName="StripeCustomerId" />
                 <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="Age" ColumnName="Age" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />

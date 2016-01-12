@@ -1,4 +1,6 @@
-﻿namespace SMD.MIS.Areas.Api.Models
+﻿using System;
+
+namespace SMD.MIS.Areas.Api.Models
 {
     /// <summary>
     /// WebApi User 
@@ -43,7 +45,7 @@
         /// <summary>
         /// Age
         /// </summary>
-        public int Age { get; set; }
+        public DateTime? DOB { get; set; }
 
         /// <summary>
         /// Gender
