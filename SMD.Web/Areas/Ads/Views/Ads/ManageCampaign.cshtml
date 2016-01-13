@@ -39,34 +39,24 @@
 
                     </div>
                 </div>
+                <div class="row" data-bind="with: $root.campaignModel" style="text-align:center;">
+                    <div class=" center" style="margin-top:-9px;padding-right:0px;margin-top: -9px;padding-right: 0px; width:200px; margin: auto;">
+                        <div class="pull-left">
+                            <label class="control-label">Status - </label>
+                        </div>
+                        <div class="pull-left">
+                            <label class="control-label bold" data-bind="text:StatusValue()"></label>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-12">
                 <div class="main-box no-header clearfix">
                     <div class="col-lg-12 form-horizontal" data-bind="with: $root.campaignModel" style="padding: 20px;">
-                        <div class="tabsdescriptions" style="margin-left:3px;">
-                            <div class="col-lg-9" style="padding-left: 0 !important;">
-                                <p class="group-header-description" style="margin-top:-1px;">
-                                    Manage the basic details of your campaign in this section.
-                                </p>
-                            </div>
-                            <div class="col-lg-3 pull-left" style="margin-top:-9px;padding-right:0px;">
-                                <div class="col-lg-5 text-right">
-                                    <div class="bs-example-tooltips tooltip-float-width">
-                                        <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-original-title="" title="">
-                                            <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                        </a>
-                                    </div>
-                                    <label class="control-label">Status</label>
-                                </div>
-                                <div class="col-lg-6">
 
-                                    <label class="control-label bold" data-bind="text:StatusValue()"></label>
-                                </div>
-                            </div>
-
-                        </div>
 
                         <div class="col-lg-9">
                             <div class="form-group" style="margin-bottom:14px;">
@@ -78,6 +68,17 @@
                                     <input type="text" name="Campaign Name" class="form-control" id="txtCampaignName" placeholder="Enter Campaign Name" data-bind="value: CampaignName,validationTooltip: CampaignName, validationOnElement: CampaignName">
 
                                 </div>
+                            </div>
+                            <div class="form-group" style="margin-bottom:20px; margin-top:20px;">
+                                <div class="col-lg-3 text-right">
+                                    <div class="bs-example-tooltips tooltip-float-width" style="    margin-top: 10px;">
+                                        <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-original-title="" title="">
+                                            <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                        </a>
+                                    </div>
+                                    <label class="control-label text-right tooltip-float font20">Free Ad View</label>
+                                </div>
+
                             </div>
                             <div class="form-group" style="margin-bottom:14px;">
                                 <div class="col-lg-3 text-right" style="padding-top:12px;">
@@ -118,77 +119,131 @@
                                     <select id="ddpLanguage" class="form-control" data-bind="options: $root.langs, optionsText: 'LanguageName', optionsValue: 'LanguageId', value: LanguageId" disabled="disabled"></select>
                                 </div>
                             </div>
-                            <div class="form-group" style="margin-bottom:11px;">
+                            <div class="form-group" style="margin-bottom:20px; margin-top:20px;">
                                 <div class="col-lg-3 text-right">
+                                    <div class="bs-example-tooltips tooltip-float-width" style="    margin-top: 10px;">
+                                        <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-original-title="" title="">
+                                            <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                        </a>
+                                    </div>
+                                    <label class="control-label text-right tooltip-float font20">Ad View Mode</label>
+                                </div>
+
+                            </div>
+                            <div class="form-group" style="margin-bottom:11px;">
+                                <div class="col-lg-3 text-right" style=" visibility: hidden;">
                                     <div class="bs-example-tooltips tooltip-float-width">
                                         <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-original-title="" title="">
                                             <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
                                         </a>
                                     </div>
-                                    <label class="control-label text-right tooltip-float">Display Type</label>
+                                    <label class="control-label text-right tooltip-float"> &nbsp; &nbsp;</label>
                                 </div>
                                 <div class="col-lg-6">
+                                    <div class="row">
 
-                                    <div class="radio col-lg-3">
-                                        <input type="radio" name="optionsRadiosStoreType" id="optionsRadiosVideos" value="1" data-bind="checked: Type, event:{ change: $root.OnChangeCampaignType }">
-                                        <label for="optionsRadiosVideos">
-                                            Video
-                                        </label>
-                                    </div>
-                                    <div class="radio col-lg-3">
-                                        <input type="radio" name="optionsRadiosStoreType" id="optionsRadiosLink" value="2" data-bind="checked: Type, event:{ change: $root.OnChangeCampaignType }">
-                                        <label for="optionsRadiosLink">
-                                            URL
-                                        </label>
-                                        <span class="help-block text-right"></span>
-                                    </div>
-                                    <div class="radio col-lg-3">
-                                        <input type="radio" name="optionsRadiosStoreType" id="optionsRadiosUploadImage" value="3" data-bind="checked: Type, event:{ change: $root.OnChangeCampaignType }">
-                                        <label for="optionsRadiosUploadImage">
-                                            Flyer / Image
-                                        </label>
-                                        <span class="help-block text-right"></span>
-                                    </div>
-                                    <div class="radio col-lg-3">
-                                        <input type="radio" name="optionsRadiosStoreType" id="optionsRadiosGame" value="4" data-bind="checked: Type, event:{ change: $root.OnChangeCampaignType }">
-                                        <label for="optionsRadiosGame">
-                                            Games
-                                        </label>
-                                        <span class="help-block text-right"></span>
-                                    </div>
-                                    <div class="clearfix">
+                                        <div class="radio col-lg-3">
+                                            <input type="radio" name="optionsRadiosStoreType" id="optionsRadiosVideos" value="1" data-bind="checked: Type, event:{ change: $root.OnChangeCampaignType }">
+                                            <label for="optionsRadiosVideos">
+                                                Video
+                                            </label>
+                                        </div>
+                                        <div class="col-lg-9" data-bind="visible: Type() == 1">
 
-                                    </div>
-                                    <div data-bind="visible: Type() != 3 && Type() != 4">
-
-                                        <textarea class="form-control" id="txtLinkOfCampaign" rows="2" placeholder="" data-bind="value: LandingPageVideoLink,validationTooltip:LandingPageVideoLink, validationOnElement: LandingPageVideoLink, attr:{placeholder : $root.campaignTypePlaceHolderValue}"></textarea>
-
-                                    </div>
-                                    <div class="col-lg-12" style="margin-left:-10px;" data-bind="visible: Type() == 3">
-
-                                        <div>
-
-                                            <div class="defaultImgUploadImage">
-
-                                                <img style="width:auto;height:80px;max-width:200px;" data-bind="visible: CampaignTypeImagePath() == ''" src="/Content/Images/Company_Default.png" />
-                                                <img style="width:auto;height:80px;max-width:200px;" data-bind="visible: CampaignTypeImagePath() != '' ,attr: { src: CampaignTypeImagePath }" />
-
-                                            </div>
+                                            <textarea class="form-control" id="txtLinkOfCampaign" rows="2" placeholder="" data-bind="value: LandingPageVideoLink,validationTooltip:LandingPageVideoLink, validationOnElement: LandingPageVideoLink, attr:{placeholder : $root.campaignTypePlaceHolderValue}"></textarea>
 
                                         </div>
 
-                                        <div class="defaultImgUploadImageBtn">
 
-                                            <div class="col-lg-6" style="text-align:left;">
-                                                <div class="fileUpload btn btn-primary">
+
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="radio col-lg-3">
+                                            <input type="radio" name="optionsRadiosStoreType" id="optionsRadiosLink" value="2" data-bind="checked: Type, event:{ change: $root.OnChangeCampaignType }">
+                                            <label for="optionsRadiosLink">
+                                                URL
+                                            </label>
+                                            <span class="help-block text-right"></span>
+                                        </div>
+                                        <div class="col-lg-9" data-bind="visible: Type() == 2">
+
+                                            <textarea class="form-control" id="txtLinkOfCampaign" rows="2" placeholder="" data-bind="value: LandingPageVideoLink,validationTooltip:LandingPageVideoLink, validationOnElement: LandingPageVideoLink, attr:{placeholder : $root.campaignTypePlaceHolderValue}"></textarea>
+
+                                        </div>
+
+
+
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="radio col-lg-4">
+                                            <input type="radio" name="optionsRadiosStoreType" id="optionsRadiosUploadImage" value="3" data-bind="checked: Type, event:{ change: $root.OnChangeCampaignType }">
+                                            <label for="optionsRadiosUploadImage">
+                                                Flyer / Image
+                                            </label>
+                                            <span class="help-block text-right"></span>
+                                        </div>
+
+                                        <div class="col-lg-8" style="margin-left:-10px;" data-bind="visible: Type() == 3">
+
+                                            <div>
+
+                                                <div style="float:left;">
+
+                                                    <img style="width:auto;height:80px;max-width:200px;" data-bind="visible: CampaignTypeImagePath() == ''" src="/Content/Images/Company_Default.png" />
+                                                    <img style="width:auto;height:80px;max-width:200px;" data-bind="visible: CampaignTypeImagePath() != '' ,attr: { src: CampaignTypeImagePath }" />
+
+                                                </div>
+                                                <div class="fileUpload btn btn-primary" style="    margin-top: 18px;">
                                                     <span>Upload </span>
                                                     <input type="file" class="upload" id="campaignType_image_file" data-bind="files: { onLoaded: $root.campaignTypeImageCallback, fileFilter: 'image.*'}" />
                                                 </div>
+
                                             </div>
 
+
                                         </div>
+
+
                                     </div>
+
+                                    <div class="row">
+
+                                        <div class="radio col-lg-5">
+                                            <input type="radio" name="optionsRadiosStoreType" id="optionsRadiosGame" value="4" data-bind="checked: Type, event:{ change: $root.OnChangeCampaignType }">
+                                            <label for="optionsRadiosGame">
+                                                Sponsored Games
+                                            </label>
+                                            <span class="help-block text-right"></span>
+                                        </div>
+
+                                    </div>
+
+
                                 </div>
+
+
+                            </div>
+                            <div class="form-group" style="margin-bottom:20px; margin-top:20px;">
+                                <div class="col-lg-6 text-right" style="margin-left:-22px;">
+
+                                    <label class="control-label text-right tooltip-float font20">Target your audience using basic profiling</label>
+                                </div>
+
+                            </div>
+                            <div class="form-group" style="margin-bottom:20px; margin-top:20px;">
+                                <div class="col-lg-7 text-right" style=" margin-left: 35px; color:#3DD2B5">
+                                    <div class="bs-example-tooltips tooltip-float-width" style="    margin-top: 10px;">
+                                        <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-original-title="" title="">
+                                            <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                        </a>
+                                    </div>
+                                    <label class="control-label text-right tooltip-float font20">Step 1 : Select your high - level search criteria</label>
+                                </div>
+
                             </div>
                             <div class="form-group">
                                 <div class="col-lg-3 text-right">
@@ -352,16 +407,16 @@
                                         </div>
                                         <div class="clearfix"></div>
                                         <div id="land_edt">
-                                            <div class="coun_in_ex_cnt">
+                                            <div class="coun_in_ex_cnt" style="display:none;">
                                                 <select id="in_ex_count_opt" class="form-control" data-bind="value: $root.selectedEducationIncludeExclude">
                                                     <option value="1">Include</option>
                                                     <option value="0">Exclude</option>
                                                 </select>
                                             </div>
-                                            <div class="sep-line">
+                                            <div class="sep-line" style="display:none;">
 
                                             </div>
-                                            <div class="count_token_opt_cnt">
+                                            <div class="count_token_opt_prof_cnt">
                                                 <select id="ddpEducation" class="form-control" data-bind="options: $root.educations, optionsText: 'Title', optionsValue: 'EducationId',optionsCaption: 'Choose...', event: { change: addNewEducationCriteria }"></select>
                                                 @*<input type="text" data-autocomplete="off" class="" id="searchEducations" placeholder="Enter an Education" />*@
                                             </div>
@@ -393,16 +448,16 @@
                                         </div>
                                         <div class="clearfix"></div>
                                         <div id="land_edt">
-                                            <div class="coun_in_ex_cnt">
+                                            <div class="coun_in_ex_cnt" style="display:none;">
                                                 <select id="in_ex_count_opt" class="form-control" data-bind="value: $root.selectedIndustryIncludeExclude">
                                                     <option value="1">Include</option>
                                                     <option value="0">Exclude</option>
                                                 </select>
                                             </div>
-                                            <div class="sep-line">
+                                            <div class="sep-line" style="display:none;">
 
                                             </div>
-                                            <div class="count_token_opt_cnt">
+                                            <div class="count_token_opt_prof_cnt">
                                                 <select id="ddpIndustory" class="form-control" data-bind="options: $root.professions, optionsText: 'IndustryName', optionsValue: 'IndustryId',optionsCaption: 'Choose...', event: { change: addNewProfessionCriteria }"></select>
                                                 @*<input type="text" data-autocomplete="off" class="" id="searchIndustries" placeholder="Enter an industry" />*@
                                             </div>
@@ -466,7 +521,17 @@
                                 </div>
 
                             </div>
+                            <div class="form-group" style="margin-bottom:20px; margin-top:20px;">
+                                <div class="col-lg-9 text-right" style=" margin-left: 35px; color:#3DD2B5">
+                                    <div class="bs-example-tooltips tooltip-float-width" style="    margin-top: 10px;">
+                                        <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-original-title="" title="">
+                                            <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                        </a>
+                                    </div>
+                                    <label class="control-label text-right tooltip-float font20">Step 2 : Refine more using profile and survey matches (optional)</label>
+                                </div>
 
+                            </div>
                             <div class="clearfix col-lg-9">
                                 <header class="main-box-header clearfix" style="padding-right:0px;">
                                     <div class="filter-block pull-right">
@@ -596,14 +661,14 @@
                                 </header>
                                 <div class="table-responsive">
                                     <table class="table table-striped table-hover">
-                                        <thead >
-                                            <tr>
-                                                <th class="col-lg-11"><span>Additional targeting Criteria's</span></th>
-                                                <th>&nbsp;</th>
-                                               
-                                            </tr>
-                                          
-                                        </thead>
+                                        @*<thead>
+                                                <tr>
+                                                    <th class="col-lg-11"><span>Additional targeting Criteria's</span></th>
+                                                    <th>&nbsp;</th>
+
+                                                </tr>
+
+                                            </thead>*@
                                         <tbody>
                                             <tr data-bind="visible: $root.visibleTargetAudience(1)  != 1 && $root.visibleTargetAudience(2)  != 1">
                                                 <td class="noCriteria"><span>No additional targeting criteria selected</span></td>
@@ -618,8 +683,15 @@
 
                             </div>
                             <div class="col-lg-9" data-bind="visible: $root.isEnableVedioVerificationLink">
-                                <div>
-                                    <h4 class="ad_h4">Verify if the video has been watched by asking a question</h4>
+                                <div class="form-group" style="margin-bottom:20px; margin-top:20px;">
+                                    <div class="col-lg-10 text-right" style="margin-left: 33px;">
+                                        <div class="bs-example-tooltips tooltip-float-width" style="    margin-top: 10px;">
+                                            <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-original-title="" title="">
+                                                <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                            </a>
+                                        </div>
+                                        <label class="control-label text-right tooltip-float font20">Verify if the video has been watched by asking a question</label>
+                                    </div>
 
                                 </div>
                                 <div class="form-group">
@@ -694,22 +766,29 @@
                             </div>
 
                             <div class="col-lg-9">
-                                <div>
-                                    <h4 class="ad_h4">Allow user to select and redeem a voucher instead of cash reward ?</h4>
+                                <div class="form-group" style="margin-bottom:20px; margin-top:20px;">
+                                    <div class="col-lg-12 text-right" style="    margin-left: 8px;">
+                                        <div class="bs-example-tooltips tooltip-float-width" style="    margin-top: 10px;">
+                                            <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-original-title="" title="">
+                                                <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                            </a>
+                                        </div>
+                                        <label class="control-label text-right tooltip-float font20">Allow user to select and redeem a voucher instead of cash reward ?</label>
+                                    </div>
 
                                 </div>
-                                <div class="form-group" >
+                                <div class="form-group">
                                     <div class="col-lg-4 text-right">
-                                      
+
                                     </div>
                                     <div class="col-lg-8">
-                                         <div class="onoffswitch">
-                                        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchAB" data-bind="checked: $root.voucherQuestionStatus">
-                                        <label class="onoffswitch-label" for="switchAB">
-                                            <div class="onoffswitch-inner"></div>
-                                            <div class="onoffswitch-switch"></div>
-                                        </label>
-                                    </div>
+                                        <div class="onoffswitch">
+                                            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchAB" data-bind="checked: $root.voucherQuestionStatus">
+                                            <label class="onoffswitch-label" for="switchAB">
+                                                <div class="onoffswitch-inner"></div>
+                                                <div class="onoffswitch-switch"></div>
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group" data-bind="visible: $root.voucherQuestionStatus()">
@@ -754,10 +833,10 @@
 
                                     </div>
                                 </div>
-                                
+
                                 <div class="form-group">
-                                    <div class="col-lg-4 text-right">
-                                       
+                                    <div class="col-lg-4 text-right" data-bind="visible: $root.voucherQuestionStatus() == 1 ">
+                                        <label for="txtVoucherVal" class="control-label text-right tooltip-float">Voucher email attachment</label>
                                     </div>
                                     <div class="col-lg-8">
                                         <div class="col-lg-12" style="margin-left:-10px;" data-bind="visible: $root.voucherQuestionStatus() == 1 ">
@@ -786,53 +865,61 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="form-group text-right">
+                                    <label class="text-right">
+                                        We only charge you when viewers have correctly answered a quiz or successfully completed a sponsered game.
+                                        <br />
+
+                                        We collect payment from your credit card every 4th day.
+                                    </label>
+                                </div>
                                 @*<div class="form-group">
-                                    <div class="col-lg-4 text-right">
-                                        <div class="bs-example-tooltips tooltip-float-width">
-                                            <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
-                                                <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                            </a>
+                                        <div class="col-lg-4 text-right">
+                                            <div class="bs-example-tooltips tooltip-float-width">
+                                                <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
+                                                    <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                </a>
+                                            </div>
+                                            <label for="txtVerifyQuestion" class="control-label text-right tooltip-float">Voucher 2 Title</label>
                                         </div>
-                                        <label for="txtVerifyQuestion" class="control-label text-right tooltip-float">Voucher 2 Title</label>
-                                    </div>
-                                    <div class="col-lg-8">
-                                        <input type="text" class="form-control" id="txtVerifyQuestion" placeholder="Enter your voucher title" data-bind="value: Voucher2Heading">
+                                        <div class="col-lg-8">
+                                            <input type="text" class="form-control" id="txtVerifyQuestion" placeholder="Enter your voucher title" data-bind="value: Voucher2Heading">
 
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-lg-4 text-right">
-                                        <div class="bs-example-tooltips tooltip-float-width">
-                                            <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
-                                                <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                            </a>
                                         </div>
-                                        <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float">Voucher 2 Description</label>
                                     </div>
-                                    <div class="col-lg-8">
-                                        <input type="text" class="form-control" id="txtVerifyAnswer1" placeholder="Enter voucher description" data-bind="value: Voucher2Description">
-
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-lg-4 text-right">
-                                        <div class="bs-example-tooltips tooltip-float-width">
-                                            <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
-                                                <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                            </a>
+                                    <div class="form-group">
+                                        <div class="col-lg-4 text-right">
+                                            <div class="bs-example-tooltips tooltip-float-width">
+                                                <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
+                                                    <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                </a>
+                                            </div>
+                                            <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float">Voucher 2 Description</label>
                                         </div>
-                                        <label for="txtVerifyAnswer2" class="control-label text-right tooltip-float">Voucher 2 Value</label>
-                                    </div>
-                                    <div class="col-lg-8">
-                                        <input type="text" class="form-control" id="txtVerifyAnswer2" placeholder="Enter Voucher Value" data-bind="value: Voucher2Value">
+                                        <div class="col-lg-8">
+                                            <input type="text" class="form-control" id="txtVerifyAnswer1" placeholder="Enter voucher description" data-bind="value: Voucher2Description">
 
+                                        </div>
                                     </div>
-                                </div>*@
+                                    <div class="form-group">
+                                        <div class="col-lg-4 text-right">
+                                            <div class="bs-example-tooltips tooltip-float-width">
+                                                <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
+                                                    <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                </a>
+                                            </div>
+                                            <label for="txtVerifyAnswer2" class="control-label text-right tooltip-float">Voucher 2 Value</label>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <input type="text" class="form-control" id="txtVerifyAnswer2" placeholder="Enter Voucher Value" data-bind="value: Voucher2Value">
+
+                                        </div>
+                                    </div>*@
                             </div>
                         </div>
 
                         <div class="col-lg-3 col-md-4 col-sm-4">
-                            <div>
+                            <div style="display:none;">
 
                                 <div class="clearfix">
 
@@ -867,11 +954,15 @@
                             </div>
                             <br />
                             <div id="reachTableContainer" style="position:absolute;top:150px;">
-
+                                <div class="aud_cnt_head">
+                                    <h4 class="ad_h4" data-bind="visible: Type() == 1">Video</h4>
+                                    <h4 class="ad_h4" data-bind="visible: Type() == 2">URL</h4>
+                                    <h4 class="ad_h4" data-bind="visible: Type() == 3">Flyer / Image</h4>
+                                    <h4 class="ad_h4" data-bind="visible: Type() == 4">Sponsored game</h4>
+                                </div>
                                 <div class="aud_cnt">
-                                    <h4 class="ad_h4">Audience Definition</h4>
-
-                                    <div class="clearfix _1gab VAGUE">
+                                   
+                                    <div class="clearfix _1gab VAGUE" style="display:none;">
                                         <div class="_1g9- lfloat">
                                             <div class="_1g9_">
                                                 <i class="_1ga0 broad_aud img sp_NQc91B1T0mb sx_f05cb6 meterPin"></i>
@@ -896,8 +987,8 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <span class="ad_h4_noborder">Audience Details:</span>
-                                        <ul>
+                                        @*<span class="ad_h4_noborder">Audience Details:</span>*@
+                                        <ul style="display:none;">
                                             <li class="li-audul" data-bind="visible: $root.campaignModel().AdCampaignTargetLocations().length > 0">
                                                 <div class="fsm_bold">Locations:</div>
 
@@ -967,10 +1058,13 @@
                                             </li>
                                         </ul>
                                     </div>
-                                    <div>Price per click: <span data-bind="text: '$' + $root.pricePerclick()"></span></div>
+                                    <div>Reach: <span data-bind="text:$root.reachedAudience()">0</span> people</div>
+                                    <div>PPC : <span data-bind="text: '$' + $root.pricePerclick()"></span></div>
+                                    <div>Max spend : <span data-bind="text: '$' + ($root.pricePerclick() * $root.reachedAudience() )"></span></div>
+                                    <div>Start date : <span data-bind="dateString:  StartDateTime"></span></div>
                                     <div>
                                         <div class="yourBudgtHeadingCnt">
-                                            <span>Your Budget: $</span>
+                                            <span>Cap my spend: $</span>
                                         </div>
                                         <div class="yourBudgtBoxCnt">
 
@@ -980,9 +1074,13 @@
                                         <div class="clearfix">
 
                                         </div>
+                                   
                                     </div>
-                                    <div>Potential Reach: <span data-bind="text:$root.reachedAudience()">0</span> people</div>
-
+                                </div>
+                                <div class="aud_cnt_foot">
+                                    <span>This cap will deliver to </span><br />
+                                    <span data-bind="text:  (($root.pricePerclick() * $root.reachedAudience())/MaxBudget() ) +'%' ">73 %</span><br />
+                                    <span>of your target audience</span>
                                 </div>
                             </div>
                         </div>
@@ -1433,7 +1531,7 @@
         });
     }
     $(window).scroll(function () {
-        var scrollYpos = $(document).scrollTop(); 
+        var scrollYpos = $(document).scrollTop();
         if (scrollYpos >= 419) {
             $("#reachTableContainer").css("position", "fixed");
             $("#reachTableContainer").css("top", "10px");

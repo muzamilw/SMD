@@ -393,12 +393,12 @@ ul {
 }
 .yourBudgtHeadingCnt {
   float: left;
-  width: 40%;
-  margin-top: 7px;
+  width: 44%;
 }
 .yourBudgtBoxCnt {
   float: left;
   width: 30%;
+  margin-top: -8px;
 }
 .noCriteria {
   background: none !important;
@@ -448,6 +448,11 @@ ul {
 .count_token_opt_cnt {
   float: left;
   width: 69%;
+  border: 1px solid #e7ebee;
+}
+.count_token_opt_prof_cnt {
+  float: left;
+  width: 100% !important;
   border: 1px solid #e7ebee;
 }
 #searchSurveyLocations {
@@ -583,6 +588,24 @@ div.Tokenize ul.Dropdown {
 #ddpEducation,
 #ddpIndustory {
   border: none !important;
+}
+.aud_cnt_head {
+  background-color: #6B6AFE;
+  color: white;
+  text-align: center;
+  height: 49px;
+  padding: 5px 5px 5px 5px;
+  font-size: 18px;
+}
+.aud_cnt_foot {
+  background-color: #6B6AFE;
+  color: white;
+  text-align: center;
+  height: 90px;
+  padding: 14px 5px 5px 5px;
+}
+.aud_cnt div {
+  padding: 5px 0px 0px 0px;
 }
 /* Common Styles */
 .fileUpload {

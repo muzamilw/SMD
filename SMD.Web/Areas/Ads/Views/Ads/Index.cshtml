@@ -7,53 +7,93 @@
     <div class="col-lg-12" data-bind="visible: !$root.isEditorVisible()">
         <div class="row">
             <div class="col-md-12" id="topArea">
+              
                 <div class="social-box-wrapper">
+                    <div class="row">
+
+                        <div class="icon-box pull-right">
+
+                            <p class="graphControls">
+                                <span class="fc-button fc-button-month fc-state-default fc-corner-left fc-state-active">Daily</span>
+                                <span class="fc-button fc-button-agendaWeek fc-state-default"  >3 months</span>
+                                <span class="fc-button fc-button-agendaDay fc-state-default fc-corner-right" >6 months</span>
+                                <span class="fc-button fc-button-agendaDay fc-state-default fc-corner-right" >1 year</span>
+                                <span class="fc-button fc-button-agendaDay fc-state-lbl fc-corner-right">01 Dec - 07 Dec</span>
+                            </p>
+                        </div>
+                    </div>
 
                     <div class="social-box col-lg-3 col-sm-6 col-xs-6  estimates" style="cursor:pointer;" title="Pending Estimates">
 
-                        <div class="clearfix">
-                            <span class="social-count">£1024.00</span><br />
-                            <span class="social-action">All time spend</span>
+                        <div class="socialCampaignLeft">
+                            <span class="social-count">SPEND</span><br />
+                            <span class="social-action">£1024.00</span><br />
+                            <span class="social-count font10">All time spend</span>
+                        </div>
+                        <div class="socialCampaignRight">
+                            <span class="social-count">Ads Delivered</span><br />
+                            <span class="social-action">34065</span><br />
+                            <span class="social-count font10">average PPC 3.6p </span>
                         </div>
                     </div>
 
-                    <div class="social-box col-lg-3 col-sm-6 col-xs-6  facebook" style="cursor:pointer;" title="Pending Orders">
+                    <div class="social-box col-lg-4 col-sm-6 col-xs-6  facebook" style="cursor:pointer;background-color:#8284FB !important" title="Pending Orders">
 
-                        <div class="clearfix">
-                            <span class="social-count">3405</span><br />
-                            <span class="social-action">Games and Ads Delivered</span>
+                        <div class="socialCampaignLeft">
+                            <span class="social-count">Branding views</span><br />
+                            <span class="social-action">405</span><br />
+                            <span class="social-count font10">Games played</span>
+                        </div>
+                        <div class="socialCampaignLeft">
+                            <span class="social-count"> &nbsp;&nbsp;</span><br />
+                            <span class="social-action">40</span><br />
+                            <span class="social-count font10">Videos played</span>
+                        </div>
+                        <div class="socialCampaignRight">
+                            <span class="social-count">&nbsp;&nbsp;</span><br />
+                            <span class="social-action">440</span><br />
+                            <span class="social-count font10">Leaflets viewed</span>
+                        </div>
+                    </div>
+
+                    <div class="social-box col-lg-3 col-sm-6 col-xs-6  twitter" style="cursor:pointer; background-color:#9093FB !important" title="In Production">
+
+                        <div class="socialCampaignLeft">
+                            <span class="social-count">Conversions</span><br />
+                            <span class="social-action">44</span><br />
+                            <span class="social-count font10">Landing page hits</span>
+                        </div>
+                        <div class="socialCampaignLeft">
+                            <span class="social-count">&nbsp;&nbsp;</span><br />
+                            <span class="social-action">1999</span><br />
+                            <span class="social-count font10">Vouchers issued </span>
                         </div>
 
                     </div>
 
-                    <div class="social-box col-lg-3 col-sm-6 col-xs-6  twitter" style="cursor:pointer;" title="In Production">
+                    <div class="social-box col-lg-2 col-sm-6 col-xs-6  google" style="cursor:pointer; background-color:#C19AFC !important" title="Completed">
 
-                        <div class="clearfix">
-                            <span class="social-count">2100</span><br />
-                            <span class="social-action">Vouchers Accepted</span>
-                        </div>
-
-                    </div>
-
-                    <div class="social-box col-lg-3 col-sm-6 col-xs-6  google" style="cursor:pointer;" title="Completed">
-
-                        <div class="clearfix">
-                            <span class="social-count">£125.00</span><br />
-                            <span class="social-action">Paid out to customers</span>
+                        <div class="socialCampaignLeft">
+                            <span class="social-count">Paid out</span><br />
+                            <span class="social-action">£512.00</span><br />
+                            <span class="social-count font10">to happy clicks</span>
                         </div>
 
                     </div>
 
                 </div>
+                <div style="    border-bottom: 2px solid #3DD2B5; margin-bottom: 20px;">
+                 
+                </div>
             </div>
-         
+
         </div>
         <div class="row">
             <div class="col-lg-12">
                 <!-- ko template: { name: 'filterTemplate' } -->
                 <!-- /ko -->
                 <div data-bind="visible: $root.campaignGridContent().length > 0">
-                   
+
                     <div class="main-box no-header clearfix" style="padding-top:0px;">
                         <div class="main-box-body clearfix" style="padding-left:20px;padding-right:22px;">
                             <div class="tabsdescriptions" style="margin-left:0px;">
@@ -65,16 +105,16 @@
                                         <tr>
 
                                             <th class="col-sm-2"><span>Name</span></th>
-                                           
+
                                             @*<th class="col-sm-1"><span>Results</span></th>
-    <th class="col-sm-1"><span>Reach</span></th>
-    <th class="col-sm-1"><span>Cost</span></th>
-    <th class="col-sm-1"><span>Budget</span></th>*@
+                                                <th class="col-sm-1"><span>Reach</span></th>
+                                                <th class="col-sm-1"><span>Cost</span></th>
+                                                <th class="col-sm-1"><span>Budget</span></th>*@
                                             <th class="col-sm-2"><span>Start Date</span></th>
                                             <th class="col-sm-2"><span>End Date</span></th>
                                             <th class="col-sm-1"><span>Status</span></th>
                                             <th class="col-sm-2"><span>Spent</span></th>
-                                          
+
                                             <th class="col-sm-1">&nbsp;</th>
                                         </tr>
                                     </thead>
@@ -101,7 +141,7 @@
                     </div>
                 </div>
             </div>
-            
+
         </div>
 
 
@@ -118,17 +158,17 @@
             <a href="#" class="store-user-link" data-bind="text: DisplayTitle,click:$root.onEditCampaign"></a>
 
         </td>
-       
+
         @*<td class="col-sm-1">
-            <span class="">&nbsp;</span>
-        </td>
-        <td class="col-sm-1"><span class="" data-bind="text: ResultClicks"></span></td>
-        <td class="col-sm-1">
-            <span class="">&nbsp;</span>
-        </td>
-        <td class="col-sm-1"><span class="" data-bind="text: MaxBudget"></span></td>*@
-        <td class="col-sm-2"><span class="" data-bind="text: StartDateTime"></span></td>
-        <td class="col-sm-2"><span class="" data-bind="text: EndDateTime"></span></td>
+                <span class="">&nbsp;</span>
+            </td>
+            <td class="col-sm-1"><span class="" data-bind="text: ResultClicks"></span></td>
+            <td class="col-sm-1">
+                <span class="">&nbsp;</span>
+            </td>
+            <td class="col-sm-1"><span class="" data-bind="text: MaxBudget"></span></td>*@
+        <td class="col-sm-2"><span class="" data-bind="dateString: StartDateTime"></span></td>
+        <td class="col-sm-2"><span class="" data-bind="dateString: EndDateTime"></span></td>
         <td class="col-sm-2">
             <!-- ko if: Status() == 1-->
             <div class="text-left statusbg" style="background:#6D6EFA;    width: 47px;">
@@ -168,15 +208,15 @@
             <!-- /ko -->
         </td>
         <td class="col-sm-2"><span class="" data-bind="text: AmountSpent"></span></td>
-        
+
 
         <td class="col-sm-2">
-          
+
             <!-- ko if: Status() == 1 || Status() == 2|| Status() == 3 || Status() == 4-->
             <a class="table-link" style="float: right">
                 <span class="fa-stack">
                     <i class="fa fa-square fa-stack-2x"></i>
-                    <i class="fa fa-pencil fa-stack-1x fa-inverse" data-bind="click:$root.onEditCampaign" ></i>
+                    <i class="fa fa-pencil fa-stack-1x fa-inverse" data-bind="click:$root.onEditCampaign"></i>
                 </span>
             </a>
             <!-- /ko -->
@@ -211,15 +251,15 @@
             </div>
 
         </div>
-       <div class="clearfix">
+        <div class="clearfix">
 
-       </div>
+        </div>
     </div>
 </script>
 <!-- ko stopBinding: true -->
 @Html.Partial("~/Areas/Common/Views/Shared/_ConfirmationDialog.cshtml")
 <!-- /ko -->
-  <!-- ko stopBinding: true -->
+<!-- ko stopBinding: true -->
 @Html.Partial("~/Areas/Common/Views/Shared/_StripeChargeCustomerDialog.cshtml")
 <!-- /ko -->
 @section Scripts{

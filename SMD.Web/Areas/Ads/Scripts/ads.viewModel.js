@@ -847,7 +847,7 @@ define("ads/ads.viewModel",
                     campaignModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
                         Industry: selected.IndustryName,
                         IndustryId: selected.IndustryId,
-                        IncludeorExclude: parseInt(selected.IndustryIncludeExclude),
+                        IncludeorExclude: true,//parseInt(selected.IndustryIncludeExclude),
                         Type: 4,
                         CampaignId: campaignModel().CampaignID()
                     }));
@@ -1152,7 +1152,7 @@ define("ads/ads.viewModel",
                  $(".locMap").css("display", "none");
                  var initialized = false;
                  _.each(campaignModel().AdCampaignTargetLocations(), function (item) {
-                     $(".locMap").css("display", "inline-block");
+                    // $(".locMap").css("display", "inline-block");
                      clearRadiuses();
                      if (item.CityID() == 0 || item.CityID() == null) {
                          addCountryMarker(item.Country());
