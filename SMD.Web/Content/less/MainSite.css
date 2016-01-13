@@ -149,8 +149,9 @@ div.Tokenize ul.Dropdown {
   font-size: 0.875em;
   font-weight: bold;
   padding-bottom: 5px;
-  border-bottom: 2px solid #f0f0f0;
+  /* border-bottom: 2px solid #f0f0f0; */
   padding-left: 10px;
+  padding-top: 3px;
 }
 .range_dash {
   width: 10px;
