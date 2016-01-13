@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="SMDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SMDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Account">
           <Key>
             <PropertyRef Name="AccountId" />
@@ -3286,6 +3286,12 @@
           <Property Type="String" Name="PqAnswer2" Nullable="true" MaxLength="100" />
           <Property Type="Int32" Name="PqAnswer3Id" Nullable="true" />
           <Property Type="String" Name="PqAnswer3" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="PqAnswer4Id" Nullable="true" />
+          <Property Type="String" Name="PqAnswer4" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="PqAnswer5Id" Nullable="true" />
+          <Property Type="String" Name="PqAnswer5" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="PqAnswer6Id" Nullable="true" />
+          <Property Type="String" Name="PqAnswer6" Nullable="true" MaxLength="100" />
         </ComplexType>
         <EntityType Name="TransactionLog">
           <Key>
@@ -3950,6 +3956,12 @@
                 <ScalarProperty Name="PqAnswer2" ColumnName="PqAnswer2" />
                 <ScalarProperty Name="PqAnswer3Id" ColumnName="PqAnswer3Id" />
                 <ScalarProperty Name="PqAnswer3" ColumnName="PqAnswer3" />
+                <ScalarProperty Name="PqAnswer4Id" ColumnName="PqAnswer4Id" />
+                <ScalarProperty Name="PqAnswer4" ColumnName="PqAnswer4" />
+                <ScalarProperty Name="PqAnswer5Id" ColumnName="PqAnswer5Id" />
+                <ScalarProperty Name="PqAnswer5" ColumnName="PqAnswer5" />
+                <ScalarProperty Name="PqAnswer6Id" ColumnName="PqAnswer6Id" />
+                <ScalarProperty Name="PqAnswer6" ColumnName="PqAnswer6" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

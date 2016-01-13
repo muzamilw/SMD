@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
 using SMD.Interfaces.Services;
+using SMD.MIS.Areas.Api.ModelMappers;
+using SMD.MIS.Areas.Api.Models;
 using SMD.Models.RequestModels;
 using System.Net;
 using System.Web;
@@ -45,14 +47,14 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// Get Ads, Surveys, Questions
         /// </summary>
         [ApiExceptionCustom]
-        public GetProductsResponse Get(string authenticationToken,[FromUri] GetProductsRequest request)
+        public ProductViewResponse Get(string authenticationToken,[FromUri] GetProductsRequest request)
         {
             if (string.IsNullOrEmpty(authenticationToken) || request == null || !ModelState.IsValid)
             {
                 throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
             }
 
-            return webApiUserService.GetProducts(request);
+            return webApiUserService.GetProducts(request).CreateFrom();
         }
 
         /// <summary>

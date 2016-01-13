@@ -2407,6 +2407,79 @@ GO
 
 GO
 
+alter table aspnetusers
+drop column age
+
+alter table aspnetusers
+add DOB datetime null
+
+GO
+
+/* Added By Khurram (12 Jan 2016) - Ends */
+
+/* Added By Khurram (13 Jan 2016) - Starts (Need to update on live db server) */
+
+GO
+/****** Object:  UserDefinedFunction [dbo].[GetUserSurveys]    Script Date: 1/13/2016 4:04:07 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER FUNCTION [dbo].[GetUserSurveys]
+(	
+	-- Add the parameters for the function here
+	@userId uniqueidentifier = ''
+)
+RETURNS TABLE 
+AS
+RETURN 
+(
+	-- Add the SELECT statement with parameter references here
+	with surveyquestions(sqid, question, sqtype, description, surveytype, adclickrate, 
+ adimagepath, advideolink, adanswer1, adanswer2, adanswer3, adcorrectanswer, adverifyquestion, 
+ adrewardtype, advoucher1heading, advoucher1description, advoucher1value, sqleftimagepath,
+ sqrightimagepath, gameurl, pqanswer1id, pqanswer1, pqanswer2id, pqanswer2, pqanswer3id, pqanswer3,
+ pqanswer4id, pqanswer4, pqanswer5id, pqanswer5, pqanswer6id, pqanswer6 ,weightage)
+as (
+	select sq.sqid, sq.question, 'Survey', 
+	sq.Description, sq.Type SurveyType, NULL, '', '',
+	'', '', '', NULL, '', NULL, '', '',
+	'', sq.LeftPicturePath as SqLeftImagePath, sq.RightPicturePath as SqRightImagePath, '', 
+	NULL, '', NULL, '', NULL, '',NULL, '', NULL, '', NULL, '', -- PQAnswers
+	((row_number() over (order by sq.sqid) * 10) + 2) Weightage
+	from surveyquestion sq
+	where -- If this survey has no response yet
+	((select count(*) from SurveyQuestionResponse mySurveyQuestionResponse
+			 where mySurveyQuestionResponse.UserID = @userId and 
+			 mySurveyQuestionResponse.SQID = sq.SQID) = 0)
+
+	and sq.ParentSurveyId is null
+	UNION ALL
+	-- Recursive member definition
+		select sqp.sqid, sqp.question, 'Survey',
+	sqp.Description, sqp.Type SurveyType, NULL, NULL, NULL,
+	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+	NULL, sqp.LeftPicturePath as SqLeftImagePath, sqp.RightPicturePath as SqRightImagePath, NULL, 
+	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -- PQAnswers
+	(select weightage from [GetRootParentSurvey](sq.SQID)) as weightage
+	from surveyquestion sq
+	inner join SurveyQuestion sqp on sqp.ParentSurveyId = sq.SQID
+	where -- If this survey has no response yet
+	((select count(*) from SurveyQuestionResponse mySurveyQuestionResponse
+			 where mySurveyQuestionResponse.UserID = @userId and 
+			 mySurveyQuestionResponse.SQID = sq.SQID) = 0)
+    ) 
+
+	select * from surveyquestions
+)
+GO
+
+GO
+/****** Object:  StoredProcedure [dbo].[GetProducts]    Script Date: 1/13/2016 3:34:30 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
 ALTER PROCEDURE [dbo].[GetProducts] 
 
 	-- Add the parameters for the stored procedure here
@@ -2416,6 +2489,7 @@ ALTER PROCEDURE [dbo].[GetProducts]
 
 AS
 BEGIN
+DECLARE @dob AS DateTime
 DECLARE @age AS INT
 DECLARE @gender AS INT
 DECLARE @countryId AS INT
@@ -2425,13 +2499,14 @@ DECLARE @industryId AS INT
 DECLARE @currentDate AS DateTime
 
         -- Setting local variables
-		   SELECT @age = age FROM AspNetUsers where id=@UserID
+		   SELECT @dob = DOB FROM AspNetUsers where id=@UserID
 		   SELECT @gender = gender FROM AspNetUsers where id=@UserID
 		   SELECT @countryId = countryId FROM AspNetUsers where id=@UserID
 		   SELECT @cityId = cityId FROM AspNetUsers where id=@UserID
 		   SELECT @languageId = LanguageID FROM AspNetUsers where id=@UserID
 		   SELECT @industryId = industryId FROM AspNetUsers where id=@UserID
 		   SET @currentDate = getDate()
+		   SET @age = DATEDIFF(year, @age, @currentDate)
 
 select *, COUNT(*) OVER() AS TotalItems
 from
@@ -2452,7 +2527,8 @@ from
 		    NULL
 	END as GameUrl, 
 	NULL as PqAnswer1Id, NULL as PqAnswer1, NULL as PqAnswer2Id, NULL as PqAnswer2,
-	NULL as PqAnswer3Id, NULL as PqAnswer3,
+	NULL as PqAnswer3Id, NULL as PqAnswer3, NULL as PqAnswer4Id, NULL as PqAnswer4,
+	NULL as PqAnswer5Id, NULL as PqAnswer5, NULL as PqAnswer6Id, NULL as PqAnswer6,
 	((row_number() over (order by campaignid) * 10) + 1) Weightage from adcampaign
 	where (
 		((@age is null) or (adcampaign.AgeRangeEnd >= @age and  @age >= adcampaign.AgeRangeStart))
@@ -2479,15 +2555,6 @@ from
 	)
 	
 	union
-	--select sqid, question, 'Survey', 
-	--Description, Type SurveyType, NULL, NULL, NULL,
-	--NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
-	--NULL, LeftPicturePath as SqLeftImagePath, RightPicturePath as SqRightImagePath, NULL, 
-	--NULL, NULL, NULL, NULL, NULL, NULL, -- PQAnswers
-	--((row_number() over (order by sqid) * 10) + 2) Weightage from surveyquestion
-	--where -- If this survey has no response yet
-	--((select count(*) from SurveyQuestionResponse mySurveyQuestionResponse
-	--		 where mySurveyQuestionResponse.UserID = @UserID and mySurveyQuestionResponse.SQID = surveyQuestion.SQID) = 0)
 	select * from [GetUserSurveys](@UserID)
 
 	union
@@ -2498,6 +2565,9 @@ from
 	pqa1.PQAnswerID as PQAnswerID1, pqa1.AnswerString as PQAnswer1,
 	pqa2.PQAnswerID as PQAnswerID2, pqa2.AnswerString as PQAnswer2,
 	pqa3.PQAnswerID as PQAnswerID3, pqa3.AnswerString as PQAnswer3,
+	pqa4.PQAnswerID as PQAnswerID4, pqa4.AnswerString as PQAnswer4,
+	pqa5.PQAnswerID as PQAnswerID5, pqa5.AnswerString as PQAnswer5,
+	pqa6.PQAnswerID as PQAnswerID6, pqa6.AnswerString as PQAnswer6,
 	((row_number() over (order by pq.pqid) * 10) + 3) Weightage 
 	from profilequestion pq
 	outer apply (
@@ -2522,6 +2592,30 @@ from
 		OFFSET 2 ROWS -- skip 2 rows
 		FETCH NEXT 1 ROWS ONLY -- take 1 rows
 	) Pqa3
+	outer apply (
+		select pqa4.PQAnswerID, pqa4.AnswerString
+		from ProfileQuestionAnswer pqa4
+		where pqa4.PQID = pq.PQID
+		order by pqa4.PQAnswerID
+		OFFSET 3 ROWS -- skip 2 rows
+		FETCH NEXT 1 ROWS ONLY -- take 1 rows
+	) Pqa4
+	outer apply (
+		select pqa5.PQAnswerID, pqa5.AnswerString
+		from ProfileQuestionAnswer pqa5
+		where pqa5.PQID = pq.PQID
+		order by pqa5.PQAnswerID
+		OFFSET 4 ROWS -- skip 2 rows
+		FETCH NEXT 1 ROWS ONLY -- take 1 rows
+	) Pqa5
+	outer apply (
+		select pqa6.PQAnswerID, pqa6.AnswerString
+		from ProfileQuestionAnswer pqa6
+		where pqa6.PQID = pq.PQID
+		order by pqa6.PQAnswerID
+		OFFSET 5 ROWS -- skip 2 rows
+		FETCH NEXT 1 ROWS ONLY -- take 1 rows
+	) Pqa6
 	where 
 	(
 		(((select count(*) from ProfileQuestionUserAnswer pqu 
@@ -2539,16 +2633,4 @@ from
 	FETCH NEXT @ToRow ROWS ONLY -- take 10 rows
 END
 
-GO
-
-GO
-
-alter table aspnetusers
-drop column age
-
-alter table aspnetusers
-add DOB datetime null
-
-GO
-
-/* Added By Khurram (12 Jan 2016) - Ends */
+/* Added By Khurram (13 Jan 2016) - Ends */

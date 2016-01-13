@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -417,6 +417,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LanguageResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\Api\ModelMappers\ProductViewMapper.cs" />
     <Compile Include="Areas\Api\ModelMappers\WebApiUserMapper.cs" />
     <Compile Include="Areas\Api\Models\AdCampaign.cs" />
     <Compile Include="Areas\Api\Models\AdCampaignApiModel.cs" />
@@ -435,6 +436,8 @@
     <Compile Include="Areas\Api\Models\InvoiceDetail.cs" />
     <Compile Include="Areas\Api\Models\InvoiceSearchRequestResponse.cs" />
     <Compile Include="Areas\Api\Models\LoginResponse.cs" />
+    <Compile Include="Areas\Api\Models\ProductView.cs" />
+    <Compile Include="Areas\Api\Models\ProductViewResponse.cs" />
     <Compile Include="Areas\Api\Models\SurveyForApiSearchResponse.cs" />
     <Compile Include="Areas\Api\Models\LocationDropDown.cs" />
     <Compile Include="Areas\Api\Models\ProfileQuestionAnswerApiModel.cs" />
@@ -2633,7 +2636,7 @@
           <AutoAssignPort>False</AutoAssignPort>
           <DevelopmentServerPort>30630</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-         <IISUrl>http://smdpreview.com</IISUrl>
+          <IISUrl>http://smdpreview.com</IISUrl>
           <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
           <IISAppRootUrl>http://smdpreview.com</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>

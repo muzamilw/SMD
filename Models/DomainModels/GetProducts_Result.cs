@@ -1,4 +1,7 @@
-﻿namespace SMD.Models.DomainModels
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace SMD.Models.DomainModels
 {
     /// <summary>
     /// Get Products Result Domain Model
@@ -33,8 +36,55 @@
         public string PqAnswer2 { get; set; }
         public int? PqAnswer3Id { get; set; }
         public string PqAnswer3 { get; set; }
+        public int? PqAnswer4Id { get; set; }
+        public string PqAnswer4 { get; set; }
+        public int? PqAnswer5Id { get; set; }
+        public string PqAnswer5 { get; set; }
+        public int? PqAnswer6Id { get; set; }
+        public string PqAnswer6 { get; set; }
         public long? Weightage { get; set; }
         public int? TotalItems { get; set; }
 
+        /// <summary>
+        /// Profile Question Answers
+        /// </summary>
+        [NotMapped]
+        public ICollection<ProfileQuestionAnswer> PqAnswers {
+            get
+            {
+                var answers = new List<ProfileQuestionAnswer>();
+                if (Type != "Question")
+                {
+                    return answers;
+                }
+
+                if (PqAnswer1Id.HasValue)
+                {
+                   answers.Add(new ProfileQuestionAnswer { PqAnswerId = PqAnswer1Id.Value, AnswerString = PqAnswer1, PqId = (int)ItemId }); 
+                }
+                if (PqAnswer2Id.HasValue)
+                {
+                    answers.Add(new ProfileQuestionAnswer { PqAnswerId = PqAnswer2Id.Value, AnswerString = PqAnswer2, PqId = (int)ItemId });
+                }
+                if (PqAnswer3Id.HasValue)
+                {
+                    answers.Add(new ProfileQuestionAnswer { PqAnswerId = PqAnswer3Id.Value, AnswerString = PqAnswer3, PqId = (int)ItemId });
+                }
+                if (PqAnswer4Id.HasValue)
+                {
+                    answers.Add(new ProfileQuestionAnswer { PqAnswerId = PqAnswer4Id.Value, AnswerString = PqAnswer4, PqId = (int)ItemId });
+                }
+                if (PqAnswer5Id.HasValue)
+                {
+                    answers.Add(new ProfileQuestionAnswer { PqAnswerId = PqAnswer5Id.Value, AnswerString = PqAnswer5, PqId = (int)ItemId });
+                }
+                if (PqAnswer6Id.HasValue)
+                {
+                    answers.Add(new ProfileQuestionAnswer { PqAnswerId = PqAnswer6Id.Value, AnswerString = PqAnswer6, PqId = (int)ItemId });
+                }
+
+                return answers;
+            } 
+        }
     }
 }
