@@ -174,7 +174,7 @@ namespace SMD.Implementation.Services
         }
         public SurveyQuestionResponseModel GetSurveyQuestions()
         {
-            int rowCount;
+           // int rowCount;
             string code = Convert.ToString((int)ProductCode.SurveyQuestion);
             var product = productRepository.GetAll().Where(g => g.ProductCode == code).FirstOrDefault();
             var userBaseData = surveyQuestionRepository.getBaseData();
@@ -186,10 +186,10 @@ namespace SMD.Implementation.Services
             }
             return new SurveyQuestionResponseModel
             {
-                SurveyQuestions = surveyQuestionRepository.SearchSurveyQuestions(null, out rowCount),
+                SurveyQuestions = new List<SurveyQuestion>(),
                 Countries = countryRepository.GetAllCountries(),
                 Languages = languageRepository.GetAllLanguages(),
-                TotalCount = rowCount,
+              //  TotalCount = rowCount,
                 setupPrice = setupPrice,
                 objBaseData = userBaseData,
                 Education = _educationRepository.GetAll(),

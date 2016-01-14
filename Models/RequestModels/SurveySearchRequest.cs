@@ -37,5 +37,7 @@ namespace SMD.Models.RequestModels
         }
         // Survey Question ID 
         public long SqId { get; set; }
+
+        public int Status { get; set; }
     }
 }

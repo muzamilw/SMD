@@ -76,7 +76,8 @@ namespace SMD.Repository.Repositories
                          (question.Question.Contains(request.SearchText)))
                          && (request.CountryFilter == 0 ||  question.CountryId == request.CountryFilter) 
                          &&( question.UserId == LoggedInUserIdentity)
-                         && (request.LanguageFilter == 0 || question.LanguageId == request.LanguageFilter);
+                         && (request.LanguageFilter == 0 || question.LanguageId == request.LanguageFilter)
+                         && (request.Status == 0 || question.Status == request.Status);
 
 
                 rowCount = DbSet.Count(query);

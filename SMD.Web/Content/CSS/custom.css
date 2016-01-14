@@ -347,12 +347,12 @@ a.reportAnchor a:hover {
 .socialCampaignLeft {
         display: inline-block;
     float: left;
-    font-size:12px;
+    font-size:11px;
 }
 .socialCampaignRight {
         display: inline-block;
     float: right;
-    font-size:12px;
+    font-size:11px;
 }
 .font10 {
     font-size:10px !important;
