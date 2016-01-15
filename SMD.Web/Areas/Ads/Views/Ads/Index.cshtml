@@ -6,7 +6,7 @@
 <div class="row" id="adsBinding">
     <div class="col-lg-12" data-bind="visible: !$root.isEditorVisible()">
         <div class="row">
-            <div class="col-md-12" id="topArea">
+            <div class="col-md-11" id="topArea" style=" margin-left: 4%;">
               
                 <div class="social-box-wrapper">
                     <div class="row">
@@ -26,12 +26,12 @@
                     <div class="social-box col-lg-3 col-sm-6 col-xs-6  estimates" style="cursor:pointer;" title="Pending Estimates">
 
                         <div class="socialCampaignLeft">
-                            <span class="social-count">SPEND</span><br />
+                            <span class="social-count">Spend</span><br />
                             <span class="social-action">£1024.00</span><br />
                             <span class="social-count font10">All time spend</span>
                         </div>
                         <div class="socialCampaignRight">
-                            <span class="social-count">Ads Delivered</span><br />
+                            <span class="social-count">Ads delivered</span><br />
                             <span class="social-action">34065</span><br />
                             <span class="social-count font10">average PPC 3.6p </span>
                         </div>
@@ -82,14 +82,14 @@
                     </div>
 
                 </div>
-                <div style="    border-bottom: 2px solid #3DD2B5; margin-bottom: 20px;">
-                 
-                </div>
+              
             </div>
+            <div style="    border-bottom: 2px solid #3DD2B5; margin-bottom: 20px;" class="col-md-12">
 
+            </div>
         </div>
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-11" style=" margin-left: 4%;">
                 <!-- ko template: { name: 'filterTemplate' } -->
                 <!-- /ko -->
                 <div data-bind="visible: $root.campaignGridContent().length > 0">
@@ -104,16 +104,16 @@
                                     <thead>
                                         <tr>
 
-                                            <th class="col-sm-2"><span>Name</span></th>
+                                            <th class="col-sm-3"><span>Name</span></th>
 
                                             @*<th class="col-sm-1"><span>Results</span></th>
-                                                <th class="col-sm-1"><span>Reach</span></th>
-                                                <th class="col-sm-1"><span>Cost</span></th>
-                                                <th class="col-sm-1"><span>Budget</span></th>*@
+                                        <th class="col-sm-1"><span>Reach</span></th>
+                                        <th class="col-sm-1"><span>Cost</span></th>
+                                        <th class="col-sm-1"><span>Budget</span></th>*@
                                             <th class="col-sm-2"><span>Start Date</span></th>
                                             <th class="col-sm-2"><span>End Date</span></th>
                                             <th class="col-sm-1"><span>Status</span></th>
-                                            <th class="col-sm-2"><span>Spent</span></th>
+                                            <th class="col-sm-1"><span>Spent</span></th>
 
                                             <th class="col-sm-1">&nbsp;</th>
                                         </tr>
@@ -154,7 +154,7 @@
 <script id="advertsTemplate" type="text/html">
     <tr style="cursor: pointer">
 
-        <td class="col-sm-2">
+        <td class="col-sm-3">
             <a href="#" class="store-user-link" data-bind="text: DisplayTitle,click:$root.onEditCampaign"></a>
 
         </td>
@@ -207,7 +207,7 @@
             </div>
             <!-- /ko -->
         </td>
-        <td class="col-sm-2"><span class="" data-bind="text: AmountSpent"></span></td>
+        <td class="col-sm-1"><span class="" data-bind="text: AmountSpent"></span></td>
 
 
         <td class="col-sm-2">

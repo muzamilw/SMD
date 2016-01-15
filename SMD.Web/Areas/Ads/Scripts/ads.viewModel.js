@@ -178,7 +178,8 @@ define("ads/ads.viewModel",
                         campaignModel().CampaignImagePath("");
                         campaignModel().VoucherImagePath("");
                         campaignModel().LanguageId(41);
-
+                        campaignModel().CampaignName('New Campaign');
+                        
                        
                         bindAudienceReachCount();
                         selectedQuestionCountryList([]);

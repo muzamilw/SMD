@@ -48,11 +48,12 @@ define("surveyQuestionApp/surveyQuestionApp.viewModel",
                     // Close Editor 
                     closeEditDialog = function () {
                         // Ask for confirmation
-                        confirmation.afterProceed(function () {
-                            selectedQuestion(undefined);
-                            isEditorVisible(false);
-                        });
-                        confirmation.show();
+                        //confirmation.afterProceed(function () {
+                           
+                        //});
+                        //confirmation.show();
+                        selectedQuestion(undefined);
+                        isEditorVisible(false);
                     },
                     // On editing of existing PQ
                     onEditQuestion = function (item) {

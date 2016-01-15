@@ -1233,6 +1233,10 @@
           <Parameter Name="cityIdsExcluded" Type="nvarchar" Mode="In" />
           <Parameter Name="languageIdsExcluded" Type="nvarchar" Mode="In" />
           <Parameter Name="industryIdsExcluded" Type="nvarchar" Mode="In" />
+          <Parameter Name="educationIds" Type="nvarchar" Mode="In" />
+          <Parameter Name="educationIdsExcluded" Type="nvarchar" Mode="In" />
+          <Parameter Name="profileQuestionIdsExcluded" Type="nvarchar" Mode="In" />
+          <Parameter Name="surveyQuestionIdsExcluded" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="GetAudienceAdCampaign" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="age" Type="int" Mode="In" />
@@ -1863,23 +1867,6 @@
             <End Role="SurveyQuestion" EntitySet="SurveyQuestions" />
             <End Role="InvoiceDetail" EntitySet="InvoiceDetails" />
           </AssociationSet>
-          <FunctionImport Name="GetAudience" ReturnType="Collection(DomainModels.GetAudience_Result)">
-            <Parameter Name="ageFrom" Mode="In" Type="Int32" />
-            <Parameter Name="ageTo" Mode="In" Type="Int32" />
-            <Parameter Name="gender" Mode="In" Type="Int32" />
-            <Parameter Name="countryIds" Mode="In" Type="String" />
-            <Parameter Name="cityIds" Mode="In" Type="String" />
-            <Parameter Name="languageIds" Mode="In" Type="String" />
-            <Parameter Name="industryIds" Mode="In" Type="String" />
-            <Parameter Name="profileQuestionIds" Mode="In" Type="String" />
-            <Parameter Name="profileAnswerIds" Mode="In" Type="String" />
-            <Parameter Name="surveyQuestionIds" Mode="In" Type="String" />
-            <Parameter Name="surveyAnswerIds" Mode="In" Type="String" />
-            <Parameter Name="countryIdsExcluded" Mode="In" Type="String" />
-            <Parameter Name="cityIdsExcluded" Mode="In" Type="String" />
-            <Parameter Name="languageIdsExcluded" Mode="In" Type="String" />
-            <Parameter Name="industryIdsExcluded" Mode="In" Type="String" />
-          </FunctionImport>
           <EntitySet Name="Taxes" EntityType="DomainModels.Tax" />
           <AssociationSet Name="FK_Tax_Country" Association="DomainModels.FK_Tax_Country">
             <End Role="Country" EntitySet="Countries" />
@@ -1965,6 +1952,27 @@
             <End Role="TransactionLog" EntitySet="TransactionLogs" />
             <End Role="TransactionLog1" EntitySet="TransactionLogs" />
           </AssociationSet>
+          <FunctionImport Name="GetAudience" ReturnType="Collection(DomainModels.GetAudience_Result)">
+            <Parameter Name="ageFrom" Mode="In" Type="Int32" />
+            <Parameter Name="ageTo" Mode="In" Type="Int32" />
+            <Parameter Name="gender" Mode="In" Type="Int32" />
+            <Parameter Name="countryIds" Mode="In" Type="String" />
+            <Parameter Name="cityIds" Mode="In" Type="String" />
+            <Parameter Name="languageIds" Mode="In" Type="String" />
+            <Parameter Name="industryIds" Mode="In" Type="String" />
+            <Parameter Name="profileQuestionIds" Mode="In" Type="String" />
+            <Parameter Name="profileAnswerIds" Mode="In" Type="String" />
+            <Parameter Name="surveyQuestionIds" Mode="In" Type="String" />
+            <Parameter Name="surveyAnswerIds" Mode="In" Type="String" />
+            <Parameter Name="countryIdsExcluded" Mode="In" Type="String" />
+            <Parameter Name="cityIdsExcluded" Mode="In" Type="String" />
+            <Parameter Name="languageIdsExcluded" Mode="In" Type="String" />
+            <Parameter Name="industryIdsExcluded" Mode="In" Type="String" />
+            <Parameter Name="educationIds" Mode="In" Type="String" />
+            <Parameter Name="educationIdsExcluded" Mode="In" Type="String" />
+            <Parameter Name="profileQuestionIdsExcluded" Mode="In" Type="String" />
+            <Parameter Name="surveyQuestionIdsExcluded" Mode="In" Type="String" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="ProfileQuestion">
           <Key>
@@ -2971,10 +2979,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <ComplexType Name="GetAudience_Result">
-          <Property Type="Int32" Name="MatchingUsers" Nullable="true" />
-          <Property Type="Int32" Name="AllUsers" Nullable="true" />
-        </ComplexType>
         <EntityType Name="Tax">
           <Key>
             <PropertyRef Name="TaxId" />
@@ -3331,6 +3335,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="GetAudience_Result">
+          <Property Type="Int32" Name="MatchingUsers" Nullable="true" />
+          <Property Type="Int32" Name="AllUsers" Nullable="true" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3819,14 +3827,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="GetAudience" FunctionName="SMDModel.Store.GetAudience">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="DomainModels.GetAudience_Result">
-                <ScalarProperty Name="MatchingUsers" ColumnName="MatchingUsers" />
-                <ScalarProperty Name="AllUsers" ColumnName="AllUsers" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <EntitySetMapping Name="Taxes">
             <EntityTypeMapping TypeName="DomainModels.Tax">
               <MappingFragment StoreEntitySet="Tax">
@@ -3979,6 +3979,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetAudience" FunctionName="SMDModel.Store.GetAudience">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DomainModels.GetAudience_Result">
+                <ScalarProperty Name="MatchingUsers" ColumnName="MatchingUsers" />
+                <ScalarProperty Name="AllUsers" ColumnName="AllUsers" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
