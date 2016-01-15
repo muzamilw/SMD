@@ -57,7 +57,7 @@ define("survey/survey.viewModel",
                     errorList = ko.observableArray([]),
                       educations = ko.observableArray([]),
                       professions = ko.observableArray([]),
-                    qStatuses = ko.observableArray([{ id: 0, value: 'All' }, { id: 1, value: 'Draft' }, { id: 2, value: 'Submitted for Approval' }, { id: 3, value: 'Live' }, { id: 4, value: 'Paused' }, { id: 5, value: 'Completed' }, { id: 6, value: 'Approval Rejected' }]);
+                    qStatuses = ko.observableArray([{ id: 0, value: 'All' }, { id: 1, value: 'Draft' }, { id: 2, value: 'Submitted for Approval' }, { id: 3, value: 'Live' }, { id: 4, value: 'Paused' }, { id: 5, value: 'Completed' }, { id: 6, value: 'Rejected' }]);
                     statusFilterValue = ko.observable();
                     //Get Questions
                     getQuestions = function () {   

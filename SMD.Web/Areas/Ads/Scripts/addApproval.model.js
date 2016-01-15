@@ -2,7 +2,7 @@
 
     var // ReSharper disable InconsistentNaming
       AdCampaign = function (sQId, spcName, spcDes, spcIsApproved, spcRejectionReason,
-          subDate, spcCreatedBy, spcType, spcPath, spcLink, spcrate,spcBudget) {
+          subDate, spcCreatedBy, spcType, spcPath, spcLink, spcrate, spcBudget, CampaignDescription, Voucher1Heading, Voucher1Description, Voucher1Value, Voucher1ImagePath) {
           var
               id = ko.observable(sQId),
               campaignName = ko.observable(spcName),
@@ -17,8 +17,11 @@
               landingLink = ko.observable(spcLink),
               clickRate = ko.observable(spcrate),
               maxBudget = ko.observable(spcBudget),
-             
-             
+             CampaignDescription = ko.observable(CampaignDescription),
+             Voucher1Heading = ko.observable(Voucher1Heading),
+             Voucher1Description = ko.observable(Voucher1Description),
+             Voucher1Value = ko.observable(Voucher1Value),
+             Voucher1ImagePath = ko.observable(Voucher1ImagePath),
               errors = ko.validation.group({
 
               }),
@@ -58,12 +61,16 @@
               landingLink: landingLink,
               clickRate:clickRate,
               maxBudget:maxBudget,
-              
+              CampaignDescription:CampaignDescription,
               hasChanges: hasChanges,
               convertToServerData:convertToServerData,
               reset: reset,
               isValid: isValid,
-              errors: errors
+              errors: errors,
+              Voucher1Heading: Voucher1Heading,
+              Voucher1Description: Voucher1Description,
+              Voucher1Value: Voucher1Value,
+              Voucher1ImagePath: Voucher1ImagePath
           };
       };
 
@@ -71,10 +78,12 @@
     ///////////////////////////////////////////////////////// Ad-Campaign
     //server to client mapper For AdCampaign
     var AdCampaignServertoClientMapper = function (itemFromServer) {
+        console.log(itemFromServer);
         return new AdCampaign(itemFromServer.CampaignId, itemFromServer.CampaignName, itemFromServer.Description,
             itemFromServer.Approved, itemFromServer.RejectedReason,
             itemFromServer.CreatedDateTime, itemFromServer.CreatedBy, itemFromServer.Type, itemFromServer.ImagePath, itemFromServer.LandingPageVideoLink,
-        itemFromServer.ClickRate, itemFromServer.MaxBudget);
+        itemFromServer.ClickRate, itemFromServer.MaxBudget, itemFromServer.CampaignDescription, itemFromServer.Voucher1Heading, itemFromServer.Voucher1Description,
+            itemFromServer.Voucher1Value, itemFromServer.Voucher1ImagePath);
     };
     
     // Function to attain cancel button functionality AdCampaign
