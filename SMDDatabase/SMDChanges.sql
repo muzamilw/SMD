@@ -2291,7 +2291,7 @@ GO
 
 /* Added By Khurram (11 Jan 2016) - Ends */
 
-/* Added By Khurram (12 Jan 2016) - Starts (Need to update on smd live server) */
+/* Added By Khurram (12 Jan 2016) - Starts (Updated on smd live server) */
 
 GO
 
@@ -2417,7 +2417,7 @@ GO
 
 /* Added By Khurram (12 Jan 2016) - Ends */
 
-/* Added By Khurram (13 Jan 2016) - Starts (Need to update on live db server) */
+/* Added By Khurram (13 Jan 2016) - Starts (Updated on live db server) */
 
 GO
 /****** Object:  UserDefinedFunction [dbo].[GetUserSurveys]    Script Date: 1/13/2016 4:04:07 PM ******/
@@ -2634,3 +2634,46 @@ from
 END
 
 /* Added By Khurram (13 Jan 2016) - Ends */
+
+/* Added By Khurram (14 Jan 2016) - Start (Updated on live db server) */
+GO
+
+ALTER FUNCTION [dbo].[GetRootParentSurvey]
+(	
+	-- Add the parameters for the function here
+	@sqId int
+)
+RETURNS TABLE 
+AS
+RETURN 
+(
+
+	with parentsurveyquestions(sqid, question, parentsurveyid, weightage)
+	as (
+		select sq.sqid, sq.question,
+			sq.ParentSurveyId,
+			((ROW_NUMBER() over (order by sq.sqid) * 10) + 2) as weightage
+						
+		from surveyQuestion sq
+		where sq.parentsurveyid is null
+		UNION ALL
+		select sq.sqid, sq.question,
+			sq.ParentSurveyId,
+			((ROW_NUMBER() over (order by sq.sqid) * 100) + 3) as weightage
+			from SurveyQuestion sq
+			where sq.SQID = 17
+		UNION ALL
+		select sq.sqid, sq.question,
+			sq.ParentSurveyId,
+			((ROW_NUMBER() over (order by sq.sqid) * 100000) + 4) weightage
+			from SurveyQuestion sq
+			join parentsurveyquestions sqs on sqs.parentsurveyid = sq.SQID
+	)
+	
+	select sq.sqid, sq.weightage
+	from parentsurveyquestions sq
+	join parentsurveyquestions pqs on pqs.sqid = sq.sqid 
+	where sq.weightage < pqs.weightage
+)
+
+/* Added By Khurram (14 Jan 2016) - Ends */
