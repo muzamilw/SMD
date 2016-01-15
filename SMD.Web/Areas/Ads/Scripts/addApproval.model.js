@@ -78,7 +78,6 @@
     ///////////////////////////////////////////////////////// Ad-Campaign
     //server to client mapper For AdCampaign
     var AdCampaignServertoClientMapper = function (itemFromServer) {
-        console.log(itemFromServer);
         return new AdCampaign(itemFromServer.CampaignId, itemFromServer.CampaignName, itemFromServer.Description,
             itemFromServer.Approved, itemFromServer.RejectedReason,
             itemFromServer.CreatedDateTime, itemFromServer.CreatedBy, itemFromServer.Type, itemFromServer.ImagePath, itemFromServer.LandingPageVideoLink,
