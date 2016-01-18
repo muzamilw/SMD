@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 
 namespace SMD.MIS.Areas.Api.Models
 {
@@ -10,7 +7,7 @@ namespace SMD.MIS.Areas.Api.Models
     /// </summary>
     public class ProductView
     {
-        public long ItemId { get; set; }
+        public long? ItemId { get; set; }
         public string ItemName { get; set; }
         public string Type { get; set; }
         public int? ItemType { get; set; }
@@ -30,6 +27,8 @@ namespace SMD.MIS.Areas.Api.Models
         public string SqLeftImagePath { get; set; }
         public string SqRightImagePath { get; set; }
         public string GameUrl { get; set; }
+        public double? SqLeftImagePercentage { get; set; }
+        public double? SqRightImagePercentage { get; set; }
         public List<ProfileQuestionAnswerDropdown> PqAnswers { get; set; }
     }
 }

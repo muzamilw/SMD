@@ -10,7 +10,7 @@ namespace SMD.Models.DomainModels
     public class GetProducts_Result
 // ReSharper restore InconsistentNaming
     {
-        public long ItemId { get; set; }
+        public long? ItemId { get; set; }
         public string ItemName { get; set; }
         public string Type { get; set; }
         public int? ItemType { get; set; }
@@ -44,6 +44,8 @@ namespace SMD.Models.DomainModels
         public string PqAnswer6 { get; set; }
         public long? Weightage { get; set; }
         public int? TotalItems { get; set; }
+        public double? SqLeftImagePercentage { get; set; }
+        public double? SqRightImagePercentage { get; set; }
 
         /// <summary>
         /// Profile Question Answers
@@ -53,7 +55,7 @@ namespace SMD.Models.DomainModels
             get
             {
                 var answers = new List<ProfileQuestionAnswer>();
-                if (Type != "Question")
+                if (Type != "Question" || !ItemId.HasValue)
                 {
                     return answers;
                 }

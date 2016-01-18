@@ -3262,7 +3262,7 @@
           </ReferentialConstraint>
         </Association>
         <ComplexType Name="GetProducts_Result">
-          <Property Type="Int64" Name="ItemId" Nullable="false" />
+          <Property Type="Int64" Name="ItemId" Nullable="true" />
           <Property Type="String" Name="ItemName" Nullable="true" MaxLength="500" />
           <Property Type="Int32" Name="ItemType" Nullable="true" />
           <Property Type="Int64" Name="Weightage" Nullable="true" />
@@ -3296,6 +3296,8 @@
           <Property Type="String" Name="PqAnswer5" Nullable="true" MaxLength="100" />
           <Property Type="Int32" Name="PqAnswer6Id" Nullable="true" />
           <Property Type="String" Name="PqAnswer6" Nullable="true" MaxLength="100" />
+          <Property Type="Double" Name="SqLeftImagePercentage" Nullable="true" />
+          <Property Type="Double" Name="SqRightImagePercentage" Nullable="true" />
         </ComplexType>
         <EntityType Name="TransactionLog">
           <Key>
@@ -3962,6 +3964,8 @@
                 <ScalarProperty Name="PqAnswer5" ColumnName="PqAnswer5" />
                 <ScalarProperty Name="PqAnswer6Id" ColumnName="PqAnswer6Id" />
                 <ScalarProperty Name="PqAnswer6" ColumnName="PqAnswer6" />
+                <ScalarProperty Name="SqLeftImagePercentage" ColumnName="SqLeftImagePercentage" />
+                <ScalarProperty Name="SqRightImagePercentage" ColumnName="SqRightImagePercentage" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

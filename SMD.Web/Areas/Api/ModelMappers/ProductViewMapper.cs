@@ -39,6 +39,8 @@ namespace SMD.MIS.Areas.Api.ModelMappers
                        GameUrl = source.GameUrl,
                        SqLeftImagePath = source.SqLeftImagePath,
                        SqRightImagePath = source.SqRightImagePath,
+                       SqLeftImagePercentage = source.SqLeftImagePercentage,
+                       SqRightImagePercentage = source.SqRightImagePercentage,
                        PqAnswers = source.PqAnswers != null ? source.PqAnswers.Select(pqa => pqa.CreateFromDropdown()).ToList() : 
                        new List<ProfileQuestionAnswerDropdown>()
                    };
