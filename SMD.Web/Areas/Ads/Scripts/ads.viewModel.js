@@ -184,20 +184,20 @@ define("ads/ads.viewModel",
                         bindAudienceReachCount();
                         selectedQuestionCountryList([]);
 
-                        if (UserAndCostDetail().CountryId != null && UserAndCostDetail().CityId != null) {
+                        //if (UserAndCostDetail().CountryId != null && UserAndCostDetail().CityId != null) {
 
-                            var objCity = {
-                                CountryID: UserAndCostDetail().CountryId,
-                                CityID: UserAndCostDetail().CityId,
-                                Radius: 0,
-                                Country: UserAndCostDetail().Country,
-                                City: UserAndCostDetail().City,
-                                Latitude: UserAndCostDetail().GeoLat,
-                                Longitude: UserAndCostDetail().GeoLong
-                            }
-                            selectedLocation(objCity);
-                            onAddLocation();
-                        }
+                        //    var objCity = {
+                        //        CountryID: UserAndCostDetail().CountryId,
+                        //        CityID: UserAndCostDetail().CityId,
+                        //        Radius: 0,
+                        //        Country: UserAndCostDetail().Country,
+                        //        City: UserAndCostDetail().City,
+                        //        Latitude: UserAndCostDetail().GeoLat,
+                        //        Longitude: UserAndCostDetail().GeoLong
+                        //    }
+                        //    selectedLocation(objCity);
+                        //    onAddLocation();
+                        //}
                     },
 
                     closeNewCampaignDialog = function () {
@@ -679,6 +679,9 @@ define("ads/ads.viewModel",
                         isEnableVedioVerificationLink(false);
                         if (campaignModel().Type() == "2") {
                             campaignTypePlaceHolderValue('Enter a link');
+                        }
+                        if (campaignModel().Type() == "3") {
+                            isEnableVedioVerificationLink(true);
                         }
                     }
                 },

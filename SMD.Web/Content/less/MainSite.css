@@ -398,7 +398,7 @@ ul {
 }
 .yourBudgtBoxCnt {
   float: left;
-  width: 30%;
+  width: 35%;
   margin-top: -8px;
 }
 .noCriteria {
@@ -602,11 +602,14 @@ div.Tokenize ul.Dropdown {
   background-color: #6B6AFE;
   color: white;
   text-align: center;
-  height: 90px;
+  height: 150px;
   padding: 14px 5px 5px 5px;
 }
 .aud_cnt div {
   padding: 5px 0px 0px 0px;
+}
+.btnSubmitApproval {
+  margin-top: 17px;
 }
 /* Common Styles */
 .fileUpload {
