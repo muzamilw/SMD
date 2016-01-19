@@ -71,21 +71,7 @@ namespace SMD.MIS.Areas.Api.Controllers
             BaseApiResponse response = await webApiUserService.ExecuteActionOnProductsResponse(request);
             return response;
         }
-
-        /// <summary>
-        /// Resets responses From User on Ads, Surveys, Questions
-        /// </summary>
-        [ApiExceptionCustom]
-        public void Delete(string authenticationToken)
-        {
-            if (string.IsNullOrEmpty(authenticationToken))
-            {
-                throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
-            }
-
-            webApiUserService.ResetProductsResponses();
-        }
-
+        
         #endregion
     }
 }
