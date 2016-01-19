@@ -9,6 +9,11 @@ namespace SMD.Interfaces.Repository
     public interface IAdCampaignRepository : IBaseRepository<AdCampaign, long>
     {
         /// <summary>
+        /// Reset User Products Responses
+        /// </summary>
+        void ResetUserProductsResponses();
+
+        /// <summary>
         /// Gets Ads, Surveys, Questions as paged view
         /// </summary>
         IEnumerable<GetProducts_Result> GetProducts(GetProductsRequest request);

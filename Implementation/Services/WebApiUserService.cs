@@ -823,6 +823,13 @@ namespace SMD.Implementation.Services
 
         #region Other
 
+        /// <summary>
+        /// Resets User Responses for Products
+        /// </summary>
+        public void ResetProductsResponses()
+        {
+            adCampaignRepository.ResetUserProductsResponses();
+        }
 
         /// <summary>
         /// Handles Response for Products

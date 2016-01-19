@@ -147,6 +147,14 @@ namespace SMD.MIS
                 new { controller = "Products" },
                 null,
                 null);
+
+            // Reset Products Responses (Ads, Surveys, Questions) Custom route
+            config.Routes.MapHttpRoute(
+                "ProductsReset",
+                "Products/Reset",
+                new { controller = "Products", action = "Delete" },
+                null,
+                null);
         }
     }
 }

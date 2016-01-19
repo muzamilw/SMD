@@ -2891,4 +2891,40 @@ from
 END
 GO
 
+-- ================================================
+-- Template generated from Template Explorer using:
+-- Create Procedure (New Menu).SQL
+--
+-- Use the Specify Values for Template Parameters 
+-- command (Ctrl-Shift-M) to fill in the parameter 
+-- values below.
+--
+-- This block of comments will not be included in
+-- the definition of the procedure.
+-- ================================================
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Khurram
+-- Create date: 2016-19-01 12:00
+-- Description:	Resets the users responses for Ads, Surveys and Questions
+-- =============================================
+CREATE PROCEDURE ResetProductsUserResponses
+	-- Add the parameters for the stored procedure here
+AS
+BEGIN
+	
+    -- Insert statements for procedure here
+	delete from AdCampaignResponse
+
+	delete from SurveyQuestionResponse
+
+	delete from ProfileQuestionUserAnswer
+
+END
+GO
+
 /* Added By Khurram (18 Jan 2016) - End */
+

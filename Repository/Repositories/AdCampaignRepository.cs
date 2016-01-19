@@ -50,6 +50,14 @@ namespace SMD.Repository.Repositories
         }
 
         /// <summary>
+        /// Resets Users Responses for Ads, Surveys and Questions
+        /// </summary>
+        public void ResetUserProductsResponses()
+        {
+            db.ResetProductsUserResponses();
+        }
+
+        /// <summary>
         /// Gets Combination of Ads, Surveys, Questions in a paged view
         /// </summary>
         public IEnumerable<GetProducts_Result> GetProducts(GetProductsRequest request)

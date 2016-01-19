@@ -1266,6 +1266,7 @@
           <Parameter Name="FromRow" Type="int" Mode="In" />
           <Parameter Name="ToRow" Type="int" Mode="In" />
         </Function>
+        <Function Name="ResetProductsUserResponses" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="spGetProfileQuestion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserID" Type="nvarchar" Mode="In" />
           <Parameter Name="questioncount" Type="int" Mode="In" />
@@ -1973,6 +1974,7 @@
             <Parameter Name="profileQuestionIdsExcluded" Mode="In" Type="String" />
             <Parameter Name="surveyQuestionIdsExcluded" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="ResetProductsUserResponses" />
           </EntityContainer>
         <EntityType Name="ProfileQuestion">
           <Key>
@@ -3991,6 +3993,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ResetProductsUserResponses" FunctionName="SMDModel.Store.ResetProductsUserResponses" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

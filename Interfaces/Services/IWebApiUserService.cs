@@ -11,6 +11,11 @@ namespace SMD.Interfaces.Services
     public interface IWebApiUserService
     {
         /// <summary>
+        /// Resets User Responses for Ads, Surveys and Questions
+        /// </summary>
+        void ResetProductsResponses();
+
+        /// <summary>
         /// Gets Ads, Surveys, Questions as paged view
         /// </summary>
         Task<BaseApiResponse> ExecuteActionOnProductsResponse(ProductActionRequest request);

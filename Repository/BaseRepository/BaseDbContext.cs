@@ -342,6 +342,14 @@ namespace SMD.Repository.BaseRepository
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetProducts_Result>("GetProducts", userIdParameter, fromRowParameter, toRowParameter);
         }
 
+        /// <summary>
+        /// Resets User Responses For Ads, Surveys and Questions
+        /// </summary>
+        public int ResetProductsUserResponses()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ResetProductsUserResponses");
+        }
+
         #endregion
     }
 }
