@@ -29,6 +29,7 @@ namespace SMD.MIS.Areas.Api.Models
         public string GameUrl { get; set; }
         public double? SqLeftImagePercentage { get; set; }
         public double? SqRightImagePercentage { get; set; }
+        public string AdvertisersLogoPath { get; set; }
         public List<ProfileQuestionAnswerDropdown> PqAnswers { get; set; }
     }
 }
