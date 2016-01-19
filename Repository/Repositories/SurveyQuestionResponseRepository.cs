@@ -1,4 +1,5 @@
-﻿using Microsoft.Practices.Unity;
+﻿using System.Linq;
+using Microsoft.Practices.Unity;
 using SMD.Interfaces.Repository;
 using SMD.Models.DomainModels;
 using SMD.Repository.BaseRepository;
@@ -44,5 +45,12 @@ namespace SMD.Repository.Repositories
 
         #endregion
 
+        /// <summary>
+        /// Get Response by user Id
+        /// </summary>
+        public SurveyQuestionResponse GetByUserId(long sqId, string userId)
+        {
+            return DbSet.FirstOrDefault(sqr => sqr.SqId == sqId && sqr.UserId == userId);
+        }
     }
 }

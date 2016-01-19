@@ -2,12 +2,8 @@
 using SMD.Interfaces.Repository;
 using SMD.Models.DomainModels;
 using SMD.Repository.BaseRepository;
-using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SMD.Repository.Repositories
 {
@@ -39,5 +35,12 @@ namespace SMD.Repository.Repositories
             return DbSet.Find(id);
         }
 
+        /// <summary>
+        /// Returns Users response for campaign
+        /// </summary>
+        public AdCampaignResponse GetByUserId(long campaignId, string userId)
+        {
+            return DbSet.FirstOrDefault(adr => adr.CampaignId == campaignId && adr.UserId == userId);
+        }
     }
 }

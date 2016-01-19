@@ -3283,8 +3283,8 @@
           <Property Type="String" Name="AdVoucher1Heading" Nullable="true" MaxLength="200" />
           <Property Type="String" Name="AdVoucher1Description" Nullable="true" />
           <Property Type="String" Name="AdVoucher1Value" Nullable="true" />
-          <Property Type="String" Name="SqLeftImagePath" Nullable="true" MaxLength="300" />
-          <Property Type="String" Name="SqRightImagePath" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="SqLeftImagePath" Nullable="true" MaxLength="327" />
+          <Property Type="String" Name="SqRightImagePath" Nullable="true" MaxLength="327" />
           <Property Type="String" Name="GameUrl" Nullable="true" MaxLength="200" />
           <Property Type="Int32" Name="PqAnswer1Id" Nullable="true" />
           <Property Type="String" Name="PqAnswer1" Nullable="true" MaxLength="100" />

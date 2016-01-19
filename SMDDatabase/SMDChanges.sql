@@ -2678,7 +2678,7 @@ RETURN
 
 /* Added By Khurram (14 Jan 2016) - Ends */
 
-/* Added By Khurram (18 Jan 2016) - Start (Need to update on live db server) */
+/* Added By Khurram (18 Jan 2016, 19 Jan 2016) - Start (Need to update on live db server) */
 
 SET ANSI_NULLS ON
 GO
@@ -2756,7 +2756,19 @@ as (
 	select sq.sqid, sq.question, 'Survey', 
 	sq.Description, sq.Type SurveyType, NULL, '', '',
 	'', '', '', NULL, '', NULL, '', '',
-	'', sq.LeftPicturePath as SqLeftImagePath, sq.RightPicturePath as SqRightImagePath, '', 
+	'', 
+	CASE
+		WHEN sq.LeftPicturePath is null or sq.LeftPicturePath = ''
+		THEN sq.LeftPicturePath
+		WHEN sq.LeftPicturePath is not null
+		THEN 'http://manage.cash4ads.com/' + sq.LeftPicturePath
+	END as SqLeftImagePath, 
+	CASE
+		WHEN sq.RightPicturePath is null or sq.RightPicturePath = ''
+		THEN sq.RightPicturePath
+		WHEN sq.RightPicturePath is not null
+		THEN 'http://manage.cash4ads.com/' + sq.RightPicturePath
+	END as SqRightImagePath, '', 
 	NULL, '', NULL, '', NULL, '',NULL, '', NULL, '', NULL, '', -- PQAnswers
 	(((row_number() over (order by sq.sqid) * 10) + 2) + ISNULL(sq.priority, 0)) Weightage,
 	sqResponsePercentages.leftImagePercentage, sqResponsePercentages.rightImagePercentage
@@ -2764,17 +2776,33 @@ as (
 	outer apply
 	(select * from [GetUserSurveySelectionPercentage](sq.sqid)) as sqResponsePercentages
 	where -- If this survey has no response yet
-	((select count(*) from SurveyQuestionResponse mySurveyQuestionResponse
+	(((select count(*) from SurveyQuestionResponse mySurveyQuestionResponse
 			 where mySurveyQuestionResponse.UserID = @userId and 
 			 mySurveyQuestionResponse.SQID = sq.SQID) = 0)
-
+	  or  
+	  ((select top 1 mySurveyQuestionResponse.UserSelection from SurveyQuestionResponse mySurveyQuestionResponse
+			 where mySurveyQuestionResponse.UserID = @userId and 
+			 mySurveyQuestionResponse.SQID = sq.SQID) is null)
+	)
 	and sq.ParentSurveyId is null and sq.Status = 3 -- live
 	UNION ALL
 	-- Recursive member definition
 		select sqp.sqid, sqp.question, 'Survey',
 	sqp.Description, sqp.Type SurveyType, NULL, NULL, NULL,
 	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
-	NULL, sqp.LeftPicturePath as SqLeftImagePath, sqp.RightPicturePath as SqRightImagePath, NULL, 
+	NULL, 
+	CASE
+		WHEN sqp.LeftPicturePath is null or sqp.LeftPicturePath = ''
+		THEN sqp.LeftPicturePath
+		WHEN sqp.LeftPicturePath is not null
+		THEN 'http://manage.cash4ads.com/' + sqp.LeftPicturePath
+	END as SqLeftImagePath, 
+	CASE
+		WHEN sqp.RightPicturePath is null or sqp.RightPicturePath = ''
+		THEN sqp.RightPicturePath
+		WHEN sqp.RightPicturePath is not null
+		THEN 'http://manage.cash4ads.com/' + sqp.RightPicturePath
+	END as SqRightImagePath, NULL, 
 	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -- PQAnswers
 	(select (ISNULL(weightage, 0) + ISNULL(sq.priority,0)) from [GetRootParentSurvey](sq.SQID)) as weightage,
 	sqResponsePercentages.leftImagePercentage, sqResponsePercentages.rightImagePercentage
@@ -2783,11 +2811,18 @@ as (
 	outer apply
 	(select * from [GetUserSurveySelectionPercentage](sq.sqid)) as sqResponsePercentages
 	where -- If this survey has no response yet
-	((select count(*) from SurveyQuestionResponse mySurveyQuestionResponse
+	((((select count(*) from SurveyQuestionResponse mySurveyQuestionResponse
 			 where mySurveyQuestionResponse.UserID = @userId and 
 			 mySurveyQuestionResponse.SQID = sq.SQID) = 0)
-	   and sq.Status = 3 -- live
-    ) 
+	  or  
+	  ((select top 1 mySurveyQuestionResponse.UserSelection from SurveyQuestionResponse mySurveyQuestionResponse
+			 where mySurveyQuestionResponse.UserID = @userId and 
+			 mySurveyQuestionResponse.SQID = sq.SQID) is null)
+		)
+	  and
+	  sq.Status = 3 -- live
+    )
+  ) 
 
 	select * from surveyquestions
 )
@@ -2822,7 +2857,7 @@ DECLARE @currentDate AS DateTime
 		   SET @currentDate = getDate()
 		   SET @age = DATEDIFF(year, @age, @currentDate)
 
-select *, COUNT(*) OVER() AS TotalItems
+select top 10 *, COUNT(*) OVER() AS TotalItems
 from
 (	select campaignid as ItemId, campaignname ItemName, 'Ad' Type, 
     Description, Type ItemType, 
@@ -2868,6 +2903,14 @@ from
 		((@languageId is null or @industryId is null) or ((select count(*) from AdCampaignTargetCriteria MyCampaignCrit
 			 where MyCampaignCrit.CampaignID = adcampaign.CampaignID and 
 			 MyCampaignCrit.LanguageID=@languageId and MyCampaignCrit.IndustryID=@industryId) > 0 ))
+	    and
+		(((select count(*) from AdCampaignResponse adResponse where  
+			adResponse.CampaignID = adcampaign.CampaignID and adResponse.UserID = @UserID) = 0)
+		 or
+		 ((select top 1 adResponse.UserSelection from AdCampaignResponse adResponse 
+			where adResponse.CampaignID = adcampaign.CampaignID and adResponse.UserID = @UserID) 
+			is null)
+		)
 	)
 	
 	union
@@ -2886,45 +2929,9 @@ from
 	
 	) as items
 	order by Weightage
-	OFFSET @FromRow ROWS -- skip 10 rows
-	FETCH NEXT @ToRow ROWS ONLY -- take 10 rows
 END
 GO
 
--- ================================================
--- Template generated from Template Explorer using:
--- Create Procedure (New Menu).SQL
---
--- Use the Specify Values for Template Parameters 
--- command (Ctrl-Shift-M) to fill in the parameter 
--- values below.
---
--- This block of comments will not be included in
--- the definition of the procedure.
--- ================================================
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
--- =============================================
--- Author:		Khurram
--- Create date: 2016-19-01 12:00
--- Description:	Resets the users responses for Ads, Surveys and Questions
--- =============================================
-CREATE PROCEDURE ResetProductsUserResponses
-	-- Add the parameters for the stored procedure here
-AS
-BEGIN
-	
-    -- Insert statements for procedure here
-	delete from AdCampaignResponse
 
-	delete from SurveyQuestionResponse
-
-	delete from ProfileQuestionUserAnswer
-
-END
-GO
-
-/* Added By Khurram (18 Jan 2016) - End */
+/* Added By Khurram (18 Jan 2016, 19 Jan 2016) - End */
 
