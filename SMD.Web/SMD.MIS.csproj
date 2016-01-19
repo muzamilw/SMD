@@ -413,6 +413,7 @@
     <Compile Include="Areas\Api\Controllers\StandardLoginController.cs" />
     <Compile Include="Areas\Api\Controllers\ProfileQuestionController.cs" />
     <Compile Include="Areas\Api\Controllers\SurveyController.cs" />
+    <Compile Include="Areas\Api\Controllers\UpdateUserProfileImageController.cs" />
     <Compile Include="Areas\Api\LanguageResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
