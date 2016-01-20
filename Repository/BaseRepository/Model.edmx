@@ -3300,6 +3300,7 @@
           <Property Type="String" Name="PqAnswer6" Nullable="true" MaxLength="100" />
           <Property Type="Double" Name="SqLeftImagePercentage" Nullable="true" />
           <Property Type="Double" Name="SqRightImagePercentage" Nullable="true" />
+          <Property Type="String" Name="AdvertisersLogoPath" Nullable="true" MaxLength="227" />
         </ComplexType>
         <EntityType Name="TransactionLog">
           <Key>
@@ -3968,6 +3969,7 @@
                 <ScalarProperty Name="PqAnswer6" ColumnName="PqAnswer6" />
                 <ScalarProperty Name="SqLeftImagePercentage" ColumnName="SqLeftImagePercentage" />
                 <ScalarProperty Name="SqRightImagePercentage" ColumnName="SqRightImagePercentage" />
+                <ScalarProperty Name="AdvertisersLogoPath" ColumnName="AdvertisersLogoPath" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

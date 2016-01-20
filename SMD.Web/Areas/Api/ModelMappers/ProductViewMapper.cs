@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using SMD.MIS.Areas.Api.Models;
 using SMD.MIS.ModelMappers;
 using SMD.Models.DomainModels;
@@ -42,8 +41,7 @@ namespace SMD.MIS.Areas.Api.ModelMappers
                        SqRightImagePath = source.SqRightImagePath,
                        SqLeftImagePercentage = source.SqLeftImagePercentage,
                        SqRightImagePercentage = source.SqRightImagePercentage,
-                       AdvertisersLogoPath = source.Type == "Ad" ? 
-                       HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/Content/Images/Company_Default.png" : string.Empty, 
+                       AdvertisersLogoPath = source.AdvertisersLogoPath, 
                        PqAnswers = source.PqAnswers != null ? source.PqAnswers.Select(pqa => pqa.CreateFromDropdown()).ToList() : 
                        new List<ProfileQuestionAnswerDropdown>()
                    };

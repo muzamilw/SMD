@@ -2678,7 +2678,7 @@ RETURN
 
 /* Added By Khurram (14 Jan 2016) - Ends */
 
-/* Added By Khurram (18 Jan 2016, 19 Jan 2016) - Start (Need to update on live db server) */
+/* Added By Khurram (18 Jan 2016, 19 Jan 2016) - Start (Updated on live db server) */
 
 SET ANSI_NULLS ON
 GO
@@ -2828,6 +2828,266 @@ as (
 )
 GO
 
+/****** Object:  UserDefinedFunction [dbo].[GetUserProfileQuestions]    Script Date: 1/20/2016 12:07:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Khurram
+-- Create date: 2016-01-15 17:17
+-- Description:	Return Profile Questions for user having
+-- Linked ones coming as a batch
+-- =============================================
+CREATE FUNCTION [dbo].[GetUserProfileQuestions] 
+(	
+	-- Add the parameters for the function here
+	@UserID uniqueidentifier = '', 
+	@countryId int = 0
+)
+RETURNS TABLE 
+AS
+RETURN 
+(
+
+	-- Add the SELECT statement with parameter references here
+	with profilequestions(pqid, question, linkedquestion1id, linkedquestion2id,
+linkedquestion3id, linkedquestion4id, linkedquestion5id, linkedquestion6id,
+linkedquestion7id, linkedquestion8id,
+linkedquestion9id, linkedquestion10id, linkedquestion11id, linkedquestion12id, refreshtime,
+countryid, status, type, rowNumber, weightage)
+as
+( 
+	select pqo.pqid, pqo.question, pql.LinkedQuestion1ID, pql.LinkedQuestion2ID,
+	pql2.LinkedQuestion1ID, pql2.LinkedQuestion2ID, pql3.LinkedQuestion1ID, pql3.LinkedQuestion2ID,
+	pql4.LinkedQuestion1ID, pql4.LinkedQuestion2ID,pql5.LinkedQuestion1ID, pql5.LinkedQuestion2ID,
+	pql6.LinkedQuestion1ID, pql6.LinkedQuestion2ID,
+	pqo.refreshtime, pqo.CountryID, pqo.status, pqo.type,
+	((row_number() over (order by pqo.pqid)) + isNUll(pqo.Priority,0)) rowNumber,
+	(((row_number() over (order by pqo.pqid) * 10) + 3) + isNull(pqo.Priority,0)) Weightage 
+	from ProfileQuestion pqo
+	outer apply
+	(
+		select top 1 pqa.LinkedQuestion1ID, pqa.LinkedQuestion2ID
+		from ProfileQuestionAnswer pqa
+		join ProfileQuestion pq on pq.PQID = pqa.PqID
+		and pq.PQID  = pqo.PQID
+		order by pq.PQID
+	) as pql
+	outer apply
+	(
+		select pqa.LinkedQuestion1ID, pqa.LinkedQuestion2ID
+		from ProfileQuestionAnswer pqa
+		join ProfileQuestion pq on pq.PQID = pqa.PqID
+		and pq.PQID  = pqo.PQID
+		order by pq.PQID
+		OFFSET 1 Rows
+		FETCH NEXT 1 Rows ONLY
+	) as pql2
+	outer apply
+	(
+		select pqa.LinkedQuestion1ID, pqa.LinkedQuestion2ID
+		from ProfileQuestionAnswer pqa
+		join ProfileQuestion pq on pq.PQID = pqa.PqID
+		and pq.PQID  = pqo.PQID
+		order by pq.PQID
+		OFFSET 2 Rows
+		FETCH NEXT 1 Rows ONLY
+	) as pql3
+	outer apply
+	(
+		select pqa.LinkedQuestion1ID, pqa.LinkedQuestion2ID
+		from ProfileQuestionAnswer pqa
+		join ProfileQuestion pq on pq.PQID = pqa.PqID
+		and pq.PQID  = pqo.PQID
+		order by pq.PQID
+		OFFSET 3 Rows
+		FETCH NEXT 1 Rows ONLY
+	) as pql4
+	outer apply
+	(
+		select pqa.LinkedQuestion1ID, pqa.LinkedQuestion2ID
+		from ProfileQuestionAnswer pqa
+		join ProfileQuestion pq on pq.PQID = pqa.PqID
+		and pq.PQID  = pqo.PQID
+		order by pq.PQID
+		OFFSET 4 Rows
+		FETCH NEXT 1 Rows ONLY
+	) as pql5
+	outer apply
+	(
+		select pqa.LinkedQuestion1ID, pqa.LinkedQuestion2ID
+		from ProfileQuestionAnswer pqa
+		join ProfileQuestion pq on pq.PQID = pqa.PqID
+		and pq.PQID  = pqo.PQID
+		order by pq.PQID
+		OFFSET 5 Rows
+		FETCH NEXT 1 Rows ONLY
+	) as pql6
+	where pqo.HasLinkedQuestions = 1 and pqo.Status = 1
+	UNION ALL
+	select pq.pqid, pq.question, null, null,
+	null, null, null, null,
+	null, null,
+	null, null, null, null, 
+	pq.RefreshTime, pq.CountryID, pq.status, pq.type,
+	pqs.rowNumber + isnull(pq.Priority, 0),
+	pqs.weightage + isnull(pq.Priority, 0) Weightage 
+	from profilequestion pq
+	join profilequestions pqs on 
+	pqs.linkedquestion1id = pq.PQID or pqs.linkedquestion2id = pq.PQID or pqs.linkedquestion3id = pq.PQID
+	or pqs.linkedquestion4id = pq.PQID or pqs.linkedquestion5id = pq.PQID or pqs.linkedquestion6id = pq.PQID
+	or pqs.linkedquestion7id = pq.PQID or pqs.linkedquestion8id = pq.PQID or pqs.linkedquestion9id = pq.PQID
+	or pqs.linkedquestion10id = pq.PQID or pqs.linkedquestion11id = pq.PQID or pqs.linkedquestion12id = pq.PQID
+)
+
+select pq.*,
+pqa1.PQAnswerID as PQAnswerID1, pqa1.AnswerString as PQAnswer1,
+	pqa2.PQAnswerID as PQAnswerID2, pqa2.AnswerString as PQAnswer2,
+	pqa3.PQAnswerID as PQAnswerID3, pqa3.AnswerString as PQAnswer3,
+	pqa4.PQAnswerID as PQAnswerID4, pqa4.AnswerString as PQAnswer4,
+	pqa5.PQAnswerID as PQAnswerID5, pqa5.AnswerString as PQAnswer5,
+	pqa6.PQAnswerID as PQAnswerID6, pqa6.AnswerString as PQAnswer6
+from profilequestions pq
+outer apply (
+		select top 1 pqa.PQAnswerID, pqa.AnswerString
+		from ProfileQuestionAnswer pqa
+		where pqa.PQID = pq.PQID
+		order by pqa.PQAnswerID
+	) Pqa1
+	outer apply (
+		select pqa2.PQAnswerID, pqa2.AnswerString
+		from ProfileQuestionAnswer pqa2
+		where pqa2.PQID = pq.PQID
+		order by pqa2.PQAnswerID
+		OFFSET 1 ROWS -- skip 1 rows
+		FETCH NEXT 1 ROWS ONLY -- take 1 rows
+	) Pqa2
+	outer apply (
+		select pqa3.PQAnswerID, pqa3.AnswerString
+		from ProfileQuestionAnswer pqa3
+		where pqa3.PQID = pq.PQID
+		order by pqa3.PQAnswerID
+		OFFSET 2 ROWS -- skip 2 rows
+		FETCH NEXT 1 ROWS ONLY -- take 1 rows
+	) Pqa3
+	outer apply (
+		select pqa4.PQAnswerID, pqa4.AnswerString
+		from ProfileQuestionAnswer pqa4
+		where pqa4.PQID = pq.PQID
+		order by pqa4.PQAnswerID
+		OFFSET 3 ROWS -- skip 2 rows
+		FETCH NEXT 1 ROWS ONLY -- take 1 rows
+	) Pqa4
+	outer apply (
+		select pqa5.PQAnswerID, pqa5.AnswerString
+		from ProfileQuestionAnswer pqa5
+		where pqa5.PQID = pq.PQID
+		order by pqa5.PQAnswerID
+		OFFSET 4 ROWS -- skip 2 rows
+		FETCH NEXT 1 ROWS ONLY -- take 1 rows
+	) Pqa5
+	outer apply (
+		select pqa6.PQAnswerID, pqa6.AnswerString
+		from ProfileQuestionAnswer pqa6
+		where pqa6.PQID = pq.PQID
+		order by pqa6.PQAnswerID
+		OFFSET 5 ROWS -- skip 2 rows
+		FETCH NEXT 1 ROWS ONLY -- take 1 rows
+	) Pqa6
+	where 
+	(
+		(((select count(*) from ProfileQuestionUserAnswer pqu 
+			where pq.PQID = pqu.PQID and pqu.UserID = @UserID and pq.CountryID = @countryId) = 0)
+		  or 	 
+		  ((select top 1 datediff(day, dateadd(month, pq.refreshtime,pqu.AnswerDateTime), getdate()) 
+			from ProfileQuestionUserAnswer pqu 
+			where pq.PQID = pqu.PQID and pqu.UserID = @UserID and pq.CountryID = @countryId 
+			order by pqu.pquanswerid) > 0 )	
+		)
+		and pq.status = 1
+	)
+	UNION ALL
+	select pq.pqid, pq.question, null, null,
+	null, null, null, null,
+	null, null,
+	null, null, null, null, 
+	pq.refreshtime, pq.countryid, pq.Status, pq.type,
+	(select max(rownumber) + 1 from profilequestions) rowNumber,
+	(select (((max(rowNumber) + 1) * 10) + 3) from profilequestions) Weightage,
+	pqa1.PQAnswerID as PQAnswerID1, pqa1.AnswerString as PQAnswer1,
+	pqa2.PQAnswerID as PQAnswerID2, pqa2.AnswerString as PQAnswer2,
+	pqa3.PQAnswerID as PQAnswerID3, pqa3.AnswerString as PQAnswer3,
+	pqa4.PQAnswerID as PQAnswerID4, pqa4.AnswerString as PQAnswer4,
+	pqa5.PQAnswerID as PQAnswerID5, pqa5.AnswerString as PQAnswer5,
+	pqa6.PQAnswerID as PQAnswerID6, pqa6.AnswerString as PQAnswer6
+	from profilequestion pq
+	outer apply (
+		select top 1 pqa.PQAnswerID, pqa.AnswerString
+		from ProfileQuestionAnswer pqa
+		where pqa.PQID = pq.PQID
+		order by pqa.PQAnswerID
+	) Pqa1
+	outer apply (
+		select pqa2.PQAnswerID, pqa2.AnswerString
+		from ProfileQuestionAnswer pqa2
+		where pqa2.PQID = pq.PQID
+		order by pqa2.PQAnswerID
+		OFFSET 1 ROWS -- skip 1 rows
+		FETCH NEXT 1 ROWS ONLY -- take 1 rows
+	) Pqa2
+	outer apply (
+		select pqa3.PQAnswerID, pqa3.AnswerString
+		from ProfileQuestionAnswer pqa3
+		where pqa3.PQID = pq.PQID
+		order by pqa3.PQAnswerID
+		OFFSET 2 ROWS -- skip 2 rows
+		FETCH NEXT 1 ROWS ONLY -- take 1 rows
+	) Pqa3
+	outer apply (
+		select pqa4.PQAnswerID, pqa4.AnswerString
+		from ProfileQuestionAnswer pqa4
+		where pqa4.PQID = pq.PQID
+		order by pqa4.PQAnswerID
+		OFFSET 3 ROWS -- skip 2 rows
+		FETCH NEXT 1 ROWS ONLY -- take 1 rows
+	) Pqa4
+	outer apply (
+		select pqa5.PQAnswerID, pqa5.AnswerString
+		from ProfileQuestionAnswer pqa5
+		where pqa5.PQID = pq.PQID
+		order by pqa5.PQAnswerID
+		OFFSET 4 ROWS -- skip 2 rows
+		FETCH NEXT 1 ROWS ONLY -- take 1 rows
+	) Pqa5
+	outer apply (
+		select pqa6.PQAnswerID, pqa6.AnswerString
+		from ProfileQuestionAnswer pqa6
+		where pqa6.PQID = pq.PQID
+		order by pqa6.PQAnswerID
+		OFFSET 5 ROWS -- skip 2 rows
+		FETCH NEXT 1 ROWS ONLY -- take 1 rows
+	) Pqa6
+	where pq.PQID not in
+	(select pqid from profilequestions)
+	and
+	(
+		(((select count(*) from ProfileQuestionUserAnswer pqu 
+			where pq.PQID = pqu.PQID and pqu.UserID = @UserID and pq.CountryID = @countryId) = 0)
+		  or 	 
+		  ((select top 1 datediff(day, dateadd(month, pq.refreshtime,pqu.AnswerDateTime), getdate()) 
+			from ProfileQuestionUserAnswer pqu 
+			where pq.PQID = pqu.PQID and pqu.UserID = @UserID and pq.CountryID = @countryId 
+			order by pqu.pquanswerid) > 0 )	
+		)
+	)
+	and
+	pq.Status = 1
+		
+	
+)
+GO
+
 GO
 ALTER PROCEDURE [dbo].[GetProducts] 
 
@@ -2935,3 +3195,117 @@ GO
 
 /* Added By Khurram (18 Jan 2016, 19 Jan 2016) - End */
 
+/* Added By Khurram (20 Jan 2016) - Start (Need to update on live db server) */
+GO
+ALTER PROCEDURE [dbo].[GetProducts] 
+
+	-- Add the parameters for the stored procedure here
+	@UserID nvarchar(128) = 0 ,
+	@FromRow int = 0,
+	@ToRow int = 0
+
+AS
+BEGIN
+DECLARE @dob AS DateTime
+DECLARE @age AS INT
+DECLARE @gender AS INT
+DECLARE @countryId AS INT
+DECLARE @cityId AS INT
+DECLARE @languageId AS INT
+DECLARE @industryId AS INT
+DECLARE @currentDate AS DateTime
+
+        -- Setting local variables
+		   SELECT @dob = DOB FROM AspNetUsers where id=@UserID
+		   SELECT @gender = gender FROM AspNetUsers where id=@UserID
+		   SELECT @countryId = countryId FROM AspNetUsers where id=@UserID
+		   SELECT @cityId = cityId FROM AspNetUsers where id=@UserID
+		   SELECT @languageId = LanguageID FROM AspNetUsers where id=@UserID
+		   SELECT @industryId = industryId FROM AspNetUsers where id=@UserID
+		   SET @currentDate = getDate()
+		   SET @age = DATEDIFF(year, @age, @currentDate)
+
+select top 10 *, COUNT(*) OVER() AS TotalItems
+from
+(	select campaignid as ItemId, campaignname ItemName, 'Ad' Type, 
+    Description, Type ItemType, 
+	((ClickRate * 50) / 100) as AdClickRate,  -- Amount AdViewer will get
+	ImagePath as AdImagePath, LandingPageVideoLink as AdVideoLink,
+	Answer1 as AdAnswer1, Answer2 as AdAnswer2, Answer3 as AdAnswer3, CorrectAnswer as AdCorrectAnswer, VerifyQuestion as AdVerifyQuestion, 
+	RewardType as AdRewardType,
+	Voucher1Heading as AdVoucher1Heading, Voucher1Description as AdVoucher1Description,
+	Voucher1Value as AdVoucher1Value, NULL as SqLeftImagePath, NULL as SqRightImagePath,
+	Case 
+	    when Type = 3  -- Game
+		THEN
+		    (select top 1 GameUrl from Game ORDER BY NEWID())
+		when Type != 3
+		THEN
+		    NULL
+	END as GameUrl, 
+	NULL as PqAnswer1Id, NULL as PqAnswer1, NULL as PqAnswer2Id, NULL as PqAnswer2,
+	NULL as PqAnswer3Id, NULL as PqAnswer3, NULL as PqAnswer4Id, NULL as PqAnswer4,
+	NULL as PqAnswer5Id, NULL as PqAnswer5, NULL as PqAnswer6Id, NULL as PqAnswer6,
+	((row_number() over (order by campaignid) * 10) + 1) Weightage,
+	NULL as SqLeftImagePercentage, NULL as SqRightImagePercentage,
+	(select 
+	CASE
+		WHEN usr.ProfileImage is null or usr.ProfileImage = ''
+		THEN usr.ProfileImage
+		WHEN usr.ProfileImage is not null
+		THEN 'http://manage.cash4ads.com/' + usr.ProfileImage
+	END as AdvertisersLogoPath from AspNetUsers usr where usr.Id = UserID) as AdvertisersLogoPath 
+	from adcampaign
+	where (
+		((@age is null) or (adcampaign.AgeRangeEnd >= @age and  @age >= adcampaign.AgeRangeStart))
+		and
+		((@gender is null) or (adcampaign.Gender = @gender))
+		and
+		((@languageId is null) or (adcampaign.LanguageId = @languageId))
+		and
+		(adcampaign.EndDateTime >= @currentDate and @currentDate >= adcampaign.StartDateTime)
+		and
+		(adcampaign.Approved = 1)
+		and
+		(adcampaign.Status = 3) -- live
+		and
+		((adcampaign.AmountSpent is null) or (adcampaign.MaxBudget > adcampaign.AmountSpent))
+		and
+		((@countryId is null or @cityId is null) or ((select count(*) from AdCampaignTargetLocation MyCampaignLoc
+			 where MyCampaignLoc.CampaignID=adcampaign.CampaignID and MyCampaignLoc.CountryID=@countryId and
+			 MyCampaignLoc.CityID=@cityId) > 0))
+	    and
+		((@languageId is null or @industryId is null) or ((select count(*) from AdCampaignTargetCriteria MyCampaignCrit
+			 where MyCampaignCrit.CampaignID = adcampaign.CampaignID and 
+			 MyCampaignCrit.LanguageID=@languageId and MyCampaignCrit.IndustryID=@industryId) > 0 ))
+		and
+		(((select count(*) from AdCampaignResponse adResponse where  
+			adResponse.CampaignID = adcampaign.CampaignID and adResponse.UserID = @UserID) = 0)
+		 or
+		 ((select top 1 adResponse.UserSelection from AdCampaignResponse adResponse 
+			where adResponse.CampaignID = adcampaign.CampaignID and adResponse.UserID = @UserID) 
+			is null)
+		)
+	)
+	
+	union
+	select *, NULL as AdvertisersLogoPath  from [GetUserSurveys](@UserID)
+
+	union
+	select pqid, question, 'Question', 
+	NULL, Type QuestionType, NULL, NULL, NULL,
+	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+	NULL, NULL,NULL, NULL, 
+	PQAnswerID1, PQAnswer1, PQAnswerID2, PQAnswer2,
+	PQAnswerID3, PQAnswer3, PQAnswerID4, PQAnswer4,
+	PQAnswerID5, PQAnswer5, PQAnswerID6, PQAnswer6,
+	Weightage,
+	NULL as SqLeftImagePercentage, NULL as SqRightImagePercentage, 
+	NULL as AdvertisersLogoPath 
+	from [GetUserProfileQuestions](@UserID, @countryId)
+	
+	) as items
+	order by Weightage
+END
+GO
+/* Added By Khurram (20 Jan 2016) - End */

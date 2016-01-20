@@ -27,6 +27,7 @@ namespace SMD.Models.DomainModels
         public string AdVoucher1Heading { get; set; }
         public string AdVoucher1Description { get; set; }
         public string AdVoucher1Value { get; set; }
+        public string AdvertisersLogoPath { get; set; }
         public string SqLeftImagePath { get; set; }
         public string SqRightImagePath { get; set; }
         public string GameUrl { get; set; }
