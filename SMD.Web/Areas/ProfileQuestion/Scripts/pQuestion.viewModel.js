@@ -49,13 +49,13 @@ define("pQuestion/pQuestion.viewModel",
                     // Random number
                     randomIdForNewObjects= -1,
                     //Get Questions
-                    getQuestions = function () {
+                    getQuestions = function (defaultCountryId, defaultLanguageId) {
                         dataservice.searchProfileQuestions(
                             {
                                 ProfileQuestionFilterText: filterValue(),
-                                LanguageFilter: langfilterValue() || 41,
+                                LanguageFilter: langfilterValue() || defaultLanguageId,
                                 QuestionGroupFilter: qGroupfilterValue() || 0,
-                                CountryFilter : countryfilterValue() || 214,
+                                CountryFilter: countryfilterValue() || defaultCountryId,
                                 PageSize: pager().pageSize(),
                                 PageNo: pager().currentPage(),
                                 SortBy: sortOn(),
@@ -64,11 +64,10 @@ define("pQuestion/pQuestion.viewModel",
                             {
                                 success: function (data) {
                                     questions.removeAll();
-                                     pager().totalCount(data.TotalCount);
-                                    _.each(data.ProfileQuestions, function (item) {
+                                     _.each(data.ProfileQuestions, function (item) {
                                         questions.push(model.questionServertoClientMapper(item));
                                     });
-
+                                    pager().totalCount(data.TotalCount);
                                 },
                                 error: function () {
                                     toastr.error("Failed to load profile questions!");
@@ -104,6 +103,7 @@ define("pQuestion/pQuestion.viewModel",
                     },
                     // Search Filter 
                     filterProfileQuestion= function() {
+                        pager().reset();
                         getQuestions();
                     },
                     // Add new Profile Question
@@ -147,7 +147,7 @@ define("pQuestion/pQuestion.viewModel",
                                    selectedQuestion().reset();
                                },
                                error: function () {
-                                   toastr.error("Failed to load profile questions!");
+                                   toastr.error("Failed to load profile question!");
                                }
                            });
                     },
@@ -168,7 +168,7 @@ define("pQuestion/pQuestion.viewModel",
                                     return item.qId() == temp.qId();
                                 });
                                 questions.remove(newObjtodelete);
-                                toastr.success("You are Good!");
+                                toastr.success("Deleted Successfully!");
                             },
                             error: function () {
                                     toastr.error("Failed to delete!");
@@ -177,17 +177,21 @@ define("pQuestion/pQuestion.viewModel",
                     },
                     // Make Filters Claer
                     clearFilters= function() {
-                        langfilterValue(undefined);
-                        countryfilterValue(undefined);
+                        // Language and country are hidden for now
+                        //langfilterValue(undefined);
+                        //countryfilterValue(undefined);
                         qGroupfilterValue(undefined);
                         filterValue(undefined);
-                        getQuestions();
+                        filterProfileQuestion();
                     },
                     // Add new Answer
                     addNewAnswer = function () {
                         var obj = new model.questionAnswer();
                         obj.type("1");
                         obj.pqAnswerId(randomIdForNewObjects);
+                        // Set Country Id and Language Id for now as UK and English
+                        obj.countryId(241);
+                        obj.languageId(41);
                         randomIdForNewObjects--;
                         selectedAnswer(obj);
                     },
@@ -253,10 +257,10 @@ define("pQuestion/pQuestion.viewModel",
                                 selectedQuestion().priority(obj.Priority);
                                 selectedQuestion().hasLinkedQuestions(obj.HasLinkedQuestions);
                                 isEditorVisible(false);
-                                toastr.success("You are Good!");
+                                toastr.success("Saved Successfully.");
                             },
                             error: function () {
-                                toastr.error("Failed to delete!");
+                                toastr.error("Failed to save!");
                             }
                         });
                     },
@@ -274,7 +278,6 @@ define("pQuestion/pQuestion.viewModel",
                             return itemTobeDeleted.pqAnswerId() == temp.pqAnswerId();
                         });
                         selectedQuestion().answers.remove(newObjtodelete);
-                        toastr.success("You are Good!");
                     },
                     // Has Changes
                     hasChangesOnQuestion = ko.computed(function () {
@@ -308,7 +311,7 @@ define("pQuestion/pQuestion.viewModel",
                         // Base Data Call
                         getBasedata();
                         // First request for LV
-                        getQuestions();
+                        getQuestions(214, 41);
                     };
                 return {
                     initialize: initialize,
