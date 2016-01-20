@@ -187,19 +187,19 @@ define("survey/survey.viewModel",
                         view.initializeTypeahead();
                         bindAudienceReachCount();
                         selectedQuestionCountryList([]);
-                        if (userBaseData().CountryId != null) {
-                            selectedQuestion().SurveyQuestionTargetLocation.push(new model.SurveyQuestionTargetLocation.Create({
-                                CountryId: userBaseData().CountryId,
-                                CityId: userBaseData().CityId,
-                                Country: userBaseData().Country,
-                                City: userBaseData().City,
-                                IncludeorExclude: true,
-                                Latitude: userBaseData().Latitude,
-                                Longitude: userBaseData().Longitude,
+                        //if (userBaseData().CountryId != null) {
+                        //    selectedQuestion().SurveyQuestionTargetLocation.push(new model.SurveyQuestionTargetLocation.Create({
+                        //        CountryId: userBaseData().CountryId,
+                        //        CityId: userBaseData().CityId,
+                        //        Country: userBaseData().Country,
+                        //        City: userBaseData().City,
+                        //        IncludeorExclude: true,
+                        //        Latitude: userBaseData().Latitude,
+                        //        Longitude: userBaseData().Longitude,
 
-                            }));
-                            addCountryToCountryList(userBaseData().CountryId, userBaseData().Country);
-                        }
+                        //    }));
+                        //    addCountryToCountryList(userBaseData().CountryId, userBaseData().Country);
+                        //}
                     },
                     // Close Editor 
                     closeEditDialog = function () {
@@ -902,7 +902,7 @@ define("survey/survey.viewModel",
                         $(".locMap").css("display", "none");
                         var initialized = false;
                         _.each(selectedQuestion().SurveyQuestionTargetLocation(), function (item) {
-                            $(".locMap").css("display", "inline-block");
+                         //   $(".locMap").css("display", "inline-block");
                             clearRadiuses();
                             if (item.CityID() == 0 || item.CityID() == null) {
                                 addCountryMarker(item.Country());
