@@ -5,15 +5,15 @@
         spcRefreshtime,spcSkipped, spcCreationD, spcModDate,penality,spcStatus) {
             var 
                 qId = ko.observable(questionId),
-                questionString = ko.observable(spcQuestion),
+                questionString = ko.observable(spcQuestion).extend({ required: true }),
                 priority = ko.observable(pr),
                 hasLinkedQuestions = ko.observable(linkQ),
                 profileGroupName = ko.observable(gName),
                 
                 languageId = ko.observable(langId),
                 countryId = ko.observable(countId),
-                profileGroupId = ko.observable(groupId),
-                type = ko.observable(spcType),
+                profileGroupId = ko.observable(groupId).extend({ required: true }),
+                type = ko.observable(spcType).extend({ required: true }),
 
                 refreshTime = ko.observable(spcRefreshtime),
                 skippedCount = ko.observable(spcSkipped),
@@ -25,7 +25,9 @@
                 answers = ko.observableArray([]),
 
                 errors = ko.validation.group({                    
-                    
+                    questionString: questionString,
+                    profileGroupId: profileGroupId,
+                    type: type
                 }),
                 // Is Valid
                 isValid = ko.computed(function() {
@@ -112,8 +114,6 @@
       questionAnswer = function (ansString, imgpath, linkQ1, linkQ2, linkQ3, linkQ4, linkQ5, linkQ6, ansId,
       qstId, srtOrder, spcType) {
           var
-              answerString = ko.observable(ansString),
-              imagePath = ko.observable(imgpath),
               linkedQuestion1Id = ko.observable(linkQ1),
               linkedQuestion2Id = ko.observable(linkQ2),
               linkedQuestion3Id = ko.observable(linkQ3),
@@ -135,10 +135,27 @@
               pqId = ko.observable(qstId),
               sortOrder = ko.observable(srtOrder),
               type = ko.observable(spcType == 1 ? "1" : "2"),
-
-
+              answerString = ko.observable(ansString).extend({
+                  required: {
+                      onlyIf: function () {
+                          return type() === 1 || type() === "1";
+                      }
+                  }
+              }),
+              imagePath = ko.observable(imgpath).extend({
+                  required: {
+                      onlyIf: function () {
+                          return type() === 2 || type() === "2";
+                      }
+                  }
+              }),
+              // Is image required
+              isImageRequired = ko.computed(function () {
+                  return !imagePath() && (type() === 2 || type() === "2");
+              }),
               errors = ko.validation.group({
-
+                  answerString: answerString,
+                  imagePath: imagePath
               }),
               // Is Valid
               isValid = ko.computed(function () {
@@ -215,6 +232,7 @@
               reset: reset,
               convertToServerData: convertToServerData,
               isValid: isValid,
+              isImageRequired: isImageRequired,
               errors: errors
           };
       };
