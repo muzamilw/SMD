@@ -70,7 +70,7 @@
           <Key>
             <PropertyRef Name="ResponseID" />
           </Key>
-          <Property Name="ResponseID" Type="int" Nullable="false" />
+          <Property Name="ResponseID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CampaignID" Type="bigint" />
           <Property Name="CreatedDateTime" Type="datetime" />
           <Property Name="UserID" Type="nvarchar" MaxLength="128" />
@@ -2246,7 +2246,7 @@
           <Key>
             <PropertyRef Name="ResponseId" />
           </Key>
-          <Property Name="ResponseId" Type="Int32" Nullable="false" />
+          <Property Name="ResponseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CampaignId" Type="Int64" />
           <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
           <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
