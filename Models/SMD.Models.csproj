@@ -203,6 +203,7 @@
     <Compile Include="ResponseModels\BaseApiResponse.cs" />
     <Compile Include="ResponseModels\GetProductsResponse.cs" />
     <Compile Include="ResponseModels\InvoiceSearchRequestResponse.cs" />
+    <Compile Include="ResponseModels\UpdateProfileImageResponse.cs" />
     <Compile Include="ResponseModels\LoginResponse.cs" />
     <Compile Include="ResponseModels\SurveyForApiSearchResponse.cs" />
     <Compile Include="ResponseModels\ProfileQuestionApiSearchResponse.cs" />

@@ -963,10 +963,7 @@ namespace SMD.Implementation.Services
 
             // Update User
             user.Update(request);
-
-            // Update Profile Image
-            UpdateProfileImage(request, user);
-
+            
             // Save Changes
             await UserManager.UpdateAsync(user);
 
@@ -975,6 +972,31 @@ namespace SMD.Implementation.Services
                 Status = true,
                 Message = "Success"
             };
+        }
+
+        /// <summary>
+        /// Update Profile Image
+        /// </summary>
+        public async Task<UpdateProfileImageResponse> UpdateProfileImage(UpdateUserProfileRequest request)
+        {
+            User user = await UserManager.FindByIdAsync(request.UserId);
+            if (user == null)
+            {
+                throw new SMDException(LanguageResources.WebApiUserService_InvalidUserId);
+            }
+
+            // Update Profile Image
+            UpdateProfileImage(request, user);
+
+            // Save Changes
+            await UserManager.UpdateAsync(user);
+
+            return new UpdateProfileImageResponse
+                   {
+                       ImageUrl = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + user.ProfileImage,
+                       Status = true,
+                       Message = "Success"
+                   };
         }
 
         /// <summary>

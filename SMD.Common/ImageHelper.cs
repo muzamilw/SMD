@@ -59,16 +59,8 @@ namespace SMD.Common
             }
 
             // First Time Upload
-            string imageurl = mapPath + "\\" + caption + fileName;
-            try
-            {
-                File.WriteAllBytes(imageurl, fileSourceBytes);
-            }
-            catch (Exception excep)
-            {
-                
-                throw;
-            }
+            string imageurl = mapPath + "\\" + Guid.NewGuid() + ".png";
+            File.WriteAllBytes(imageurl, fileSourceBytes);
 
             int indexOf = imageurl.LastIndexOf("SMD_Content", StringComparison.Ordinal);
             imageurl = imageurl.Substring(indexOf, imageurl.Length - indexOf);
