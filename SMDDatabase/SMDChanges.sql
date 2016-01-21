@@ -3195,7 +3195,7 @@ GO
 
 /* Added By Khurram (18 Jan 2016, 19 Jan 2016) - End */
 
-/* Added By Khurram (20 Jan 2016) - Start (Need to update on live db server) */
+/* Added By Khurram (20 Jan 2016) - Start (Updated on live db server) */
 GO
 ALTER PROCEDURE [dbo].[GetProducts] 
 
@@ -3309,3 +3309,20 @@ from
 END
 GO
 /* Added By Khurram (20 Jan 2016) - End */
+
+/* Added By Khurram (21 Jan 2016) - Start (Need to update on live db server) */
+
+GO
+delete  from adcampaignresponse
+
+alter table adcampaignresponse
+drop PK_AdCampaignResponse
+
+alter table adcampaignresponse
+drop column ResponseID
+
+alter table adcampaignresponse
+add ResponseID int identity(1,1) primary key
+GO
+
+/* Added By Khurram (21 Jan 2016) - End */
