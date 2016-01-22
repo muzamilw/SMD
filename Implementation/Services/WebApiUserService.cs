@@ -169,7 +169,7 @@ namespace SMD.Implementation.Services
 
             // Add Campaign Response 
             PerformSkipOrUpdateUserAdSelection((int)request.AdCampaignId, request.UserId, 
-                (adViewerUsedVoucher ? (int)AdRewardType.Voucher : (int)AdRewardType.Cash), false, false);
+                (adViewerUsedVoucher ? (int)AdRewardType.Voucher : (int)AdRewardType.Cash), false, adViewersCut, false);
 
             // Save Changes
             transactionRepository.SaveChanges();
@@ -488,7 +488,7 @@ namespace SMD.Implementation.Services
         /// Skips Ad Campaign
         /// </summary>
         private void PerformSkipOrUpdateUserAdSelection(int adCampaignId, string userId, int? userSelection, bool? isSkipped, 
-            bool saveChanges = true)
+            double? endUserAmount, bool saveChanges = true)
         {
             AdCampaign adCampaign = adCampaignRepository.Find(adCampaignId);
             if (adCampaign == null)
@@ -500,8 +500,8 @@ namespace SMD.Implementation.Services
             AdCampaignResponse adCampaignResponse = adCampaignResponseRepository.GetByUserId(adCampaignId, userId) ??
                                                     CreateAdCampaignResponse(adCampaignId, userId, adCampaign);
 
-            UpdateAdResponse(userSelection, isSkipped, adCampaignResponse);
-
+            UpdateAdResponse(userSelection, isSkipped, endUserAmount, adCampaignResponse);
+            
             if (!saveChanges)
             {
                 return;
@@ -526,9 +526,9 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Updates users response for Ads
         /// </summary>
-        private void UpdateAdResponse(int? userSelection, bool? isSkipped, AdCampaignResponse adCampaignResponse)
+        private void UpdateAdResponse(int? userSelection, bool? isSkipped, double? endUserAmount, AdCampaignResponse adCampaignResponse)
         {
-            if (isSkipped.HasValue)
+            if (isSkipped.HasValue && isSkipped.Value)
             {
                 if (!adCampaignResponse.SkipCount.HasValue)
                 {
@@ -540,6 +540,11 @@ namespace SMD.Implementation.Services
             else if (userSelection.HasValue)
             {
                 adCampaignResponse.UserSelection = userSelection;
+                if (!adCampaignResponse.EndUserDollarAmount.HasValue)
+                {
+                    adCampaignResponse.EndUserDollarAmount = 0;
+                }
+                adCampaignResponse.EndUserDollarAmount += endUserAmount ?? 0;
             }
             adCampaignResponse.CreatedDateTime = DateTime.Now.Add(-(adCampaignRepository.UserTimezoneOffSet));
         }
@@ -581,7 +586,7 @@ namespace SMD.Implementation.Services
         /// </summary>
         private void UpdateProductsResponse(int? userSelection, bool? isSkipped, SurveyQuestionResponse sqResponse)
         {
-            if (isSkipped.HasValue)
+            if (isSkipped.HasValue && isSkipped.Value)
             {
                 if (!sqResponse.SkipCount.HasValue)
                 {
@@ -620,7 +625,7 @@ namespace SMD.Implementation.Services
 
                 else if (request.Type.Value == (int)ProductType.Ad)
                 {
-                    PerformSkipOrUpdateUserAdSelection((int)request.ItemId.Value, request.UserId, null, true);
+                    PerformSkipOrUpdateUserAdSelection((int)request.ItemId.Value, request.UserId, null, true, null);
                 }
 
                 else if (request.Type.Value == (int)ProductType.SurveyQuestion)
