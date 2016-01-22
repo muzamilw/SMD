@@ -109,6 +109,9 @@ define("pQuestion/pQuestion.viewModel",
                     // Add new Profile Question
                     addNewProfileQuestion = function () {
                         selectedQuestion(new model.question());
+                        // Set Country Id and Language Id for now as UK and English
+                        selectedQuestion().countryId(241);
+                        selectedQuestion().languageId(41);
                         selectedQuestion().penalityForNotAnswering(0);
                         isEditorVisible(true);
                     },
@@ -189,9 +192,6 @@ define("pQuestion/pQuestion.viewModel",
                         var obj = new model.questionAnswer();
                         obj.type("1");
                         obj.pqAnswerId(randomIdForNewObjects);
-                        // Set Country Id and Language Id for now as UK and English
-                        obj.countryId(241);
-                        obj.languageId(41);
                         randomIdForNewObjects--;
                         selectedAnswer(obj);
                     },
@@ -202,8 +202,19 @@ define("pQuestion/pQuestion.viewModel",
                     onEditQuestionAnswer= function(item) {
                         selectedAnswer(item);
                     },
+                    doBeforeSaveAnswer = function () {
+                        var isValid = true;
+                        if (!selectedAnswer().isValid()) {
+                            selectedAnswer().errors.showAllMessages();
+                            isValid = false;
+                        }
+                        return isValid;
+                    },
                     //
                     onSaveNewAnswer = function () {
+                        if (!doBeforeSaveAnswer()) {
+                            return;
+                        }
                         var newOnj = selectedAnswer();
                         var objId = newOnj.pqAnswerId();
                         if (objId < 0) {
@@ -233,9 +244,27 @@ define("pQuestion/pQuestion.viewModel",
                             existingAns.type(newOnj.type());
                             
                         }
+
+                        view.hideAnswerDialog();
+                    },
+                    // To do before save
+                    doBeforeSave = function() {
+                        var isValid = true;
+                        if (!selectedQuestion().isValid()) {
+                            selectedQuestion().errors.showAllMessages();
+                            isValid = false;
+                        }
+                        if (selectedQuestion().answers().length === 0) {
+                            isValid = false;
+                            toastr.info("Question must have atleast 2 answers");
+                        }
+                        return isValid;
                     },
                     // Save Question / Add 
-                    onSaveProfileQuestion= function() {
+                    onSaveProfileQuestion = function () {
+                        if (!doBeforeSave()) {
+                            return;
+                        }
                         var serverAnswers=[];
                         _.each(selectedQuestion().answers(), function (item) {
                             if (item !== null && typeof item === 'object') {
@@ -289,7 +318,6 @@ define("pQuestion/pQuestion.viewModel",
 
                     // show / hide add answers button
                     CanAddAnswers = function () {
-                        console.log(selectedQuestion().answers().length);
                         if (selectedQuestion().answers().length == 6) {
                             return false;
                         } else {

@@ -11,6 +11,10 @@ define("pQuestion/pQuestion.view",
                 viewModel = specifiedViewModel,
                 // Binding root used with knockout
                 bindingRoot = $("#ProfileQuestionBindingSpot")[0],
+                // Hide Answer Dialog
+                hideAnswerDialog = function() {
+                    $("#pqAnswerDialog").modal('hide');
+                },
                 // Initialize
                 initialize = function () {
                     if (!bindingRoot) {
@@ -22,7 +26,8 @@ define("pQuestion/pQuestion.view",
             initialize();
             return {
                 bindingRoot: bindingRoot,
-                viewModel: viewModel
+                viewModel: viewModel,
+                hideAnswerDialog: hideAnswerDialog
             };
         })(parentHireGroupViewModel);
         // Initialize the view model
