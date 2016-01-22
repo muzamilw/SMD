@@ -212,21 +212,21 @@ namespace SMD.Implementation.Services
         {
 
             // Get business Accounts for Each Individual involved in this transaction
-            adViewersAccount = accountRepository.GetByUserId(request.UserId);
+            adViewersAccount = accountRepository.GetByUserId(request.UserId, AccountType.VirtualAccount);
             if (adViewersAccount == null)
             {
                 throw new SMDException(string.Format(CultureInfo.InvariantCulture,
                     LanguageResources.WebApiUserService_AccountNotFound, "Current User"));
             }
 
-            advertisersAccount = accountRepository.GetByUserId(adCampaign.UserId);
+            advertisersAccount = accountRepository.GetByUserId(adCampaign.UserId, AccountType.VirtualAccount);
             if (advertisersAccount == null)
             {
                 throw new SMDException(string.Format(CultureInfo.InvariantCulture,
                     LanguageResources.WebApiUserService_AccountNotFound, "Advertiser"));
             }
 
-            smdAccount = accountRepository.GetByUserId(systemUserId);
+            smdAccount = accountRepository.GetByUserId(systemUserId, AccountType.VirtualAccount);
             if (smdAccount == null)
             {
                 throw new SMDException(string.Format(CultureInfo.InvariantCulture,
@@ -306,14 +306,14 @@ namespace SMD.Implementation.Services
         private void SetupSurveyApproveTransaction(SurveyQuestion surveyQuestion, out Account advertisersAccount, out Account smdAccount, 
             string systemUserId)
         {
-            advertisersAccount = accountRepository.GetByUserId(surveyQuestion.UserId);
+            advertisersAccount = accountRepository.GetByUserId(surveyQuestion.UserId, AccountType.VirtualAccount);
             if (advertisersAccount == null)
             {
                 throw new SMDException(string.Format(CultureInfo.InvariantCulture,
                     LanguageResources.WebApiUserService_AccountNotFound, "Advertiser"));
             }
 
-            smdAccount = accountRepository.GetByUserId(systemUserId);
+            smdAccount = accountRepository.GetByUserId(systemUserId, AccountType.VirtualAccount);
             if (smdAccount == null)
             {
                 throw new SMDException(string.Format(CultureInfo.InvariantCulture,
@@ -811,7 +811,7 @@ namespace SMD.Implementation.Services
                     throw new SMDException(LanguageResources.WebApiUserService_ReferrerNotFound);
                 }
 
-                affiliatesAccount = accountRepository.GetByUserId(adViewer.ReferringUserId);
+                affiliatesAccount = accountRepository.GetByUserId(adViewer.ReferringUserId, AccountType.VirtualAccount);
                 if (affiliatesAccount == null)
                 {
                     throw new SMDException(string.Format(CultureInfo.InvariantCulture,
