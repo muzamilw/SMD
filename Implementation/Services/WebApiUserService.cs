@@ -40,7 +40,6 @@ namespace SMD.Implementation.Services
         private readonly IProductRepository productRepository;
         private readonly ITaxRepository taxRepository;
         private readonly ICountryRepository countryRepository;
-        private readonly ICityRepository cityRepository;
         private readonly IIndustryRepository industryRepository;
         private readonly IEducationRepository educationRepository;
 
@@ -405,6 +404,7 @@ namespace SMD.Implementation.Services
         }
         #endregion
 
+
         /// <summary>
         /// Logs in user to system
         /// </summary>
@@ -433,9 +433,7 @@ namespace SMD.Implementation.Services
             user.ProfileImage = ImageHelper.Save(mapPath, user.ProfileImage, string.Empty, request.ProfileImageName,
                 request.ProfileImage, request.ProfileImageBytes);
         }
-
-        #endregion
-
+        
         #region Product Response Actions
 
         /// <summary>
@@ -642,6 +640,8 @@ namespace SMD.Implementation.Services
 
         #endregion
 
+        #endregion
+
         #region Constructor
 
         /// <summary>
@@ -652,7 +652,7 @@ namespace SMD.Implementation.Services
             ISurveyQuestionRepository surveyQuestionRepository, IInvoiceRepository invoiceRepository,
             IInvoiceDetailRepository invoiceDetailRepository, IProductRepository productRepository,
             ITaxRepository taxRepository, IProfileQuestionUserAnswerService profileQuestionAnswerService,
-            ICountryRepository countryRepository, ICityRepository cityRepository, IIndustryRepository industryRepository,
+            ICountryRepository countryRepository, IIndustryRepository industryRepository,
             IProfileQuestionService profileQuestionService, IAdCampaignResponseRepository adCampaignResponseRepository,
             ISurveyQuestionResponseRepository surveyQuestionResponseRepository, IEducationRepository educationRepository)
         {
@@ -711,7 +711,6 @@ namespace SMD.Implementation.Services
             this.productRepository = productRepository;
             this.taxRepository = taxRepository;
             this.countryRepository = countryRepository;
-            this.cityRepository = cityRepository;
             this.industryRepository = industryRepository;
             this.profileQuestionAnswerService = profileQuestionAnswerService;
             this.profileQuestionService = profileQuestionService;
@@ -1304,7 +1303,6 @@ namespace SMD.Implementation.Services
         {
             return new UserProfileBaseResponseModel
             {
-               Cities = cityRepository.GetAllCities().ToList(),
                Countries = countryRepository.GetAllCountries().ToList(),
                Industries = industryRepository.GetAll().ToList(),
                Educations = educationRepository.GetAllEducations().ToList()

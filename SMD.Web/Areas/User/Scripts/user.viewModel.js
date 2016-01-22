@@ -34,7 +34,9 @@ define("user/user.viewModel",
                             {
                                 success: function (userProfile) {
                                     selectedUser(model.UserServertoClientMapper(userProfile));
-                                    selectedUser().countryId.subscribe(function(oldValue) {
+                                    // Load Cities by Country
+                                    updateCities(userProfile.CityId);
+                                    selectedUser().countryId.subscribe(function() {
                                         updateCities();
                                     });
                                 },
@@ -44,26 +46,26 @@ define("user/user.viewModel",
                             });
                    },
                    // Update City DD on country change 
-                   updateCities = function() {
+                   updateCities = function (cityId) {
+                       if (!selectedUser().countryId()) {
+                           return;
+                       }
                        dataservice.getCitiesByCountry({ countryId: selectedUser().countryId()},
                            {
                                success: function (serverData) {
                                    cities.removeAll();
                                    ko.utils.arrayPushAll(cities(), serverData);
                                    cities.valueHasMutated();
+                                   if (!cityId) {
+                                       return;
+                                   }
+                                   selectedUser().cityId(cityId);
                                },
                                error: function () {
                                    toastr.error("Failed to get cities!");
                                }
                            });
                    },
-                    // Has Changes Makes 
-                    hasChangesOnQuestion = ko.computed(function () {
-                        //if (selectedInvoice() == undefined) {
-                        //    return false;
-                        //}
-                        //return (selectedInvoice().hasChanges());
-                    }),
                     //Get Base Data for Questions
                     getBasedata = function () {
                         dataservice.getBaseDataForUserProfile(null, {
@@ -72,12 +74,6 @@ define("user/user.viewModel",
                                     countries.removeAll();
                                     ko.utils.arrayPushAll(countries(), baseDataFromServer.CountryDropdowns);
                                     countries.valueHasMutated();
-                                }
-
-                                if (baseDataFromServer != null && baseDataFromServer.CityDropDowns != null) {
-                                    cities.removeAll();
-                                    ko.utils.arrayPushAll(cities(), baseDataFromServer.CityDropDowns);
-                                    cities.valueHasMutated();
                                 }
                                 if (baseDataFromServer != null && baseDataFromServer.IndusteryDropdowns != null) {
                                     industries.removeAll();
@@ -106,7 +102,7 @@ define("user/user.viewModel",
                      //Get Base Data for Questions
                     updateProfile = function () {
                         dataservice.saveUserProfile(selectedUser().convertToServerData(), {
-                            success: function (baseDataFromServer) {
+                            success: function () {
                                 toastr.success("Profile updated!");
                             },
                             error: function () {

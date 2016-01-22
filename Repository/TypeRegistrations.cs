@@ -19,7 +19,6 @@ namespace SMD.Repository
             unityContainer.RegisterType<IProfileQuestionRepository, ProfileQuestionRepository>();
             unityContainer.RegisterType<IAdCampaignRepository, AdCampaignRepository>();
             unityContainer.RegisterType<IProfileQuestionGroupRepository, ProfileQuestionGroupRepository>();
-            unityContainer.RegisterType<IAdCampaignResponseRepository, IAdCampaignResponseRepository>();
             unityContainer.RegisterType<IAdCampaignTargetCriteriaRepository, AdCampaignTargetCriteriaRepository>();
             unityContainer.RegisterType<IAdCampaignTargetLocationRepository, AdCampaignTargetLocationRepository>();
             unityContainer.RegisterType<ICountryRepository, CountryRepository>();
