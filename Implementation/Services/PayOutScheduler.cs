@@ -1,9 +1,11 @@
-﻿using FluentScheduler;
+﻿using System.Globalization;
+using FluentScheduler;
 using Microsoft.Practices.Unity;
 using SMD.ExceptionHandling.Logger;
 using SMD.Implementation.Identity;
 using SMD.Interfaces.Logger;
 using SMD.Interfaces.Services;
+using SMD.Models.Common;
 using SMD.Models.DomainModels;
 using SMD.Models.RequestModels;
 using SMD.Repository.BaseRepository;
@@ -106,10 +108,11 @@ namespace SMD.Implementation.Services
                             ? user.PaypalCustomerId
                             : user.GoogleWalletCustomerId;
 
-                        var smdUser = dbContext.Users.FirstOrDefault(obj => obj.Email == "MuzzammilShb@mpc.com");
+                        var smdUser = dbContext.Users.FirstOrDefault(obj => obj.Email == SystemUsers.Cash4Ads);
                         if (smdUser == null)
                         {
-                            throw new Exception("SMD User does not exist!");
+                            throw new Exception(string.Format(CultureInfo.InvariantCulture, LanguageResources.WebApiUserService_InvalidUser,
+                                "Cash4Ads"));
                         }
 
                         // Secure Transation
