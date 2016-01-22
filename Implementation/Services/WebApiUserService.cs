@@ -139,7 +139,7 @@ namespace SMD.Implementation.Services
         /// <param name="smdAccount">SMD Account Info</param>
         /// <param name="adCampaign">Ad Campaign</param>
         /// <param name="adViewerUsedVoucher">If Ad Viewer Uses Voucher</param>
-        private async void PerformAdCampaignTransactions(AdViewedRequest request, Account advertisersAccount, double? adClickRate,
+        private async Task PerformAdCampaignTransactions(AdViewedRequest request, Account advertisersAccount, double? adClickRate,
             Account adViewersAccount, double? adViewersCut, User referringUser, double? smdsCut, Account affiliatesAccount,
             Account smdAccount, AdCampaign adCampaign, bool adViewerUsedVoucher = false)
         {
@@ -165,6 +165,10 @@ namespace SMD.Implementation.Services
             PerformTransaction(request.AdCampaignId, null, smdAccount, smdsCut, transactionSequence, TransactionType.AdClick);
 
             // Update AdCampaign Amount Spent
+            if (!adCampaign.AmountSpent.HasValue)
+            {
+                adCampaign.AmountSpent = 0;
+            }
             adCampaign.AmountSpent += adClickRate;
 
             // Add Campaign Response 
@@ -205,7 +209,7 @@ namespace SMD.Implementation.Services
         /// Verifies if required accounts exist
         /// </summary>
         private void SetupAdCampaignTransaction(AdViewedRequest request, AdCampaign adCampaign,
-            out Account adViewersAccount, out Account advertisersAccount, out Account smdAccount)
+            out Account adViewersAccount, out Account advertisersAccount, out Account smdAccount, string systemUserId)
         {
 
             // Get business Accounts for Each Individual involved in this transaction
@@ -223,11 +227,11 @@ namespace SMD.Implementation.Services
                     LanguageResources.WebApiUserService_AccountNotFound, "Advertiser"));
             }
 
-            smdAccount = accountRepository.GetByName(Accounts.Smd);
+            smdAccount = accountRepository.GetByUserId(systemUserId);
             if (smdAccount == null)
             {
                 throw new SMDException(string.Format(CultureInfo.InvariantCulture,
-                    LanguageResources.WebApiUserService_AccountNotFound, "SMD"));
+                    LanguageResources.WebApiUserService_AccountNotFound, "Cash4Ads"));
             }
         }
 
@@ -300,7 +304,8 @@ namespace SMD.Implementation.Services
         /// Sets up accounts for transcations
         /// Verifies if required accounts exist
         /// </summary>
-        private void SetupSurveyApproveTransaction(SurveyQuestion surveyQuestion, out Account advertisersAccount, out Account smdAccount)
+        private void SetupSurveyApproveTransaction(SurveyQuestion surveyQuestion, out Account advertisersAccount, out Account smdAccount, 
+            string systemUserId)
         {
             advertisersAccount = accountRepository.GetByUserId(surveyQuestion.UserId);
             if (advertisersAccount == null)
@@ -309,11 +314,11 @@ namespace SMD.Implementation.Services
                     LanguageResources.WebApiUserService_AccountNotFound, "Advertiser"));
             }
 
-            smdAccount = accountRepository.GetByName(Accounts.Smd);
+            smdAccount = accountRepository.GetByUserId(systemUserId);
             if (smdAccount == null)
             {
                 throw new SMDException(string.Format(CultureInfo.InvariantCulture,
-                    LanguageResources.WebApiUserService_AccountNotFound, "SMD"));
+                    LanguageResources.WebApiUserService_AccountNotFound, "Cash4Ads"));
             }
         }
 
@@ -369,7 +374,7 @@ namespace SMD.Implementation.Services
                 InvoiceDueDate = DateTime.Now.AddDays(7),
                 Address1 = source.Country.CountryName,
                 UserId = source.UserId,
-                CompanyName = "My Company",
+                CompanyName = "Cash4Ads",
                 CreditCardRef = stripeResponse
             };
             invoiceRepository.Add(invoice);
@@ -733,6 +738,13 @@ namespace SMD.Implementation.Services
                 throw new SMDException(LanguageResources.WebApiUserService_InvalidUserId);
             }
 
+            User cash4Ads = await UserManager.FindByEmailAsync(SystemUsers.Cash4Ads);
+            if (cash4Ads == null)
+            {
+                throw new SMDException(string.Format(CultureInfo.InvariantCulture, LanguageResources.WebApiUserService_InvalidUser,
+                    "Cash4Ads"));
+            }
+
             // Validates if Ad Campaing Exists and has Advertiser info as well
             var surveyQuestion = await ValidateSurveyQuestion(request);
 
@@ -750,7 +762,7 @@ namespace SMD.Implementation.Services
 
             // Sets up transaction 
             // Gets Accounts required
-            SetupSurveyApproveTransaction(surveyQuestion, out advertisersAccount, out smdAccount);
+            SetupSurveyApproveTransaction(surveyQuestion, out advertisersAccount, out smdAccount, cash4Ads.Id);
 
             // Perform Transactions
             PerformSurveyApproveTransactions(request, advertisersAccount, (double)approvedSurveyAmount, approvedSurveyAmount,
@@ -777,6 +789,13 @@ namespace SMD.Implementation.Services
             if (adViewer == null)
             {
                 throw new SMDException(LanguageResources.WebApiUserService_InvalidUserId);
+            }
+
+            User cash4Ads = await UserManager.FindByEmailAsync(SystemUsers.Cash4Ads);
+            if (cash4Ads == null)
+            {
+                throw new SMDException(string.Format(CultureInfo.InvariantCulture, LanguageResources.WebApiUserService_InvalidUser,
+                    "Cash4Ads"));
             }
 
             // Validates if Ad Campaing Exists
@@ -812,10 +831,10 @@ namespace SMD.Implementation.Services
 
             // Sets up transaction 
             // Gets Accounts required
-            SetupAdCampaignTransaction(request, adCampaign, out adViewersAccount, out advertisersAccount, out smdAccount);
+            SetupAdCampaignTransaction(request, adCampaign, out adViewersAccount, out advertisersAccount, out smdAccount, cash4Ads.Id);
 
             // Perform Transactions
-            PerformAdCampaignTransactions(request, advertisersAccount, adClickRate, adViewersAccount, adViewersCut, referringUser, smdsCut,
+            await PerformAdCampaignTransactions(request, advertisersAccount, adClickRate, adViewersAccount, adViewersCut, referringUser, smdsCut,
                 affiliatesAccount, smdAccount, adCampaign);
 
             return new BaseApiResponse
@@ -837,6 +856,13 @@ namespace SMD.Implementation.Services
                 throw new SMDException(LanguageResources.WebApiUserService_InvalidUserId);
             }
 
+            User cash4Ads = await UserManager.FindByEmailAsync(SystemUsers.Cash4Ads);
+            if (cash4Ads == null)
+            {
+                throw new SMDException(string.Format(CultureInfo.InvariantCulture, LanguageResources.WebApiUserService_InvalidUser,
+                    "Cash4Ads"));
+            }
+
             // Validates if Ad Campaing Exists
             var adCampaign = await ValidateAdCampaign(request);
             
@@ -850,10 +876,10 @@ namespace SMD.Implementation.Services
 
             // Sets up transaction 
             // Gets Accounts required
-            SetupAdCampaignTransaction(request, adCampaign, out adViewersAccount, out advertisersAccount, out smdAccount);
+            SetupAdCampaignTransaction(request, adCampaign, out adViewersAccount, out advertisersAccount, out smdAccount, cash4Ads.Id);
 
             // Perform Transactions
-            PerformAdCampaignTransactions(request, advertisersAccount, adClickRate, adViewersAccount, 0, null, smdsCut,
+            await PerformAdCampaignTransactions(request, advertisersAccount, adClickRate, adViewersAccount, 0, null, smdsCut,
                 null, smdAccount, adCampaign, true);
 
             return new BaseApiResponse

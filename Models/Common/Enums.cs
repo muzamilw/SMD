@@ -139,6 +139,14 @@
     }
 
     /// <summary>
+    /// System User
+    /// </summary>
+    public static class SystemUsers
+    {
+        public static string Cash4Ads { get { return "cash4ads@cash4ads.com"; } }
+    }
+
+    /// <summary>
     /// Transaction Types
     /// </summary>
     public enum TransactionType

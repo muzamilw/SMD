@@ -169,6 +169,15 @@ namespace SMD.Implementation {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to User with name {0} does not exist..
+        /// </summary>
+        internal static string WebApiUserService_InvalidUser {
+            get {
+                return ResourceManager.GetString("WebApiUserService_InvalidUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to UserId is invalid..
         /// </summary>
         internal static string WebApiUserService_InvalidUserId {
