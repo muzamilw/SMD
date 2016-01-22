@@ -21,6 +21,7 @@
 {
         width: 184px !important;
     font-size: 12px;
+       background-color:white !important;
 }
     .listview:before, .listview:after {
         display: table;
@@ -96,11 +97,17 @@
     display:block;
 }
 .chlidList .list.active {
-     background-color: #64b4db;
+     background-color: #45D145 !important;
 }
 .modelHeading{
         padding-left: 0.825rem;
     padding-bottom: 0.5rem;
     font-size: 14px;
     font-weight: bold;
+}
+#lv1 .list {
+    background-color:lightgreen; overflow:hidden;
+}
+#lv2 .list {
+    background-color:#FFE13B; overflow:hidden;
 }
