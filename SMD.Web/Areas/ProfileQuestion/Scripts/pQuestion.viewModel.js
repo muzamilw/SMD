@@ -144,6 +144,7 @@ define("pQuestion/pQuestion.viewModel",
                            },
                            {
                                success: function (answers) {
+                                   selectedQuestion().answers.removeAll();
                                    _.each(answers, function (item) {
                                        selectedQuestion().answers.push(model.questionAnswerServertoClientMapper(item));
                                    });
