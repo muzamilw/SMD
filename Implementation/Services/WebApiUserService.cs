@@ -161,7 +161,7 @@ namespace SMD.Implementation.Services
             
             // Credit SMD
             transactionSequence += 1;
-            PerformTransaction(request.AdCampaignId, null, smdAccount, smdsCut, transactionSequence, TransactionType.AdClick);
+            PerformTransaction(request.AdCampaignId, null, smdAccount, smdsCut, transactionSequence, TransactionType.AdClick, true, true);
 
             // Update AdCampaign Amount Spent
             if (!adCampaign.AmountSpent.HasValue)
@@ -337,7 +337,7 @@ namespace SMD.Implementation.Services
 
             // Credit SMD
             transactionSequence += 1;
-            PerformTransaction(null, request.SurveyQuestionId, smdAccount, smdsCut, transactionSequence, TransactionType.ApproveSurvey);
+            PerformTransaction(null, request.SurveyQuestionId, smdAccount, smdsCut, transactionSequence, TransactionType.ApproveSurvey, true, true);
 
             // Add Invoice Details
             AddInvoiceDetails(surveyQuestion, amount, request.StripeResponse, productId, taxValue, isApiCall);

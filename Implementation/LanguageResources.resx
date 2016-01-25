@@ -174,4 +174,10 @@
   <data name="Success" xml:space="preserve">
     <value>Success</value>
   </data>
+  <data name="CollectionService_UserNotFound" xml:space="preserve">
+    <value>Transaction can't be processed as user {0} doesn't exist.</value>
+  </data>
+  <data name="CollectionService_AccountNotRegistered" xml:space="preserve">
+    <value>Transaction can't be processed as user {0} doesn't have {1} registration.</value>
+  </data>
 </root>

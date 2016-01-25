@@ -1,24 +1,28 @@
-﻿using System.Linq;
+﻿using System.Globalization;
+using System.Linq;
 using FluentScheduler;
 using Microsoft.Practices.Unity;
 using SMD.ExceptionHandling.Logger;
 using SMD.Implementation.Identity;
 using SMD.Interfaces.Logger;
 using SMD.Interfaces.Services;
+using SMD.Models.Common;
 using SMD.Models.DomainModels;
+using SMD.Models.IdentityModels;
 using SMD.Repository.BaseRepository;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Transactions;
 using System.Web.Http.Filters;
+using Transaction = SMD.Models.DomainModels.Transaction;
 
 namespace SMD.Implementation.Services
 {
     /// <summary>
     /// Debit Scheduler BackGround Service 
     /// </summary>
-    public class CollectionScheduler 
+    public class CollectionScheduler
     {
         #region Private
         // Properties 
@@ -30,18 +34,18 @@ namespace SMD.Implementation.Services
         [Dependency]
         private static IEmailManagerService EmailSerice { get; set; }
 
-        private static ISMDLogger smdLogger;
+        private static ISMDLogger _smdLogger;
         /// <summary>
         /// Get Configured logger
         /// </summary>
         private static ISMDLogger SmdLogger
         {
-            
+
             get
             {
-                if (smdLogger != null) return smdLogger;
-                smdLogger = (UnityConfig.UnityContainer).Resolve<ISMDLogger>();
-                return smdLogger;
+                if (_smdLogger != null) return _smdLogger;
+                _smdLogger = (UnityConfig.UnityContainer).Resolve<ISMDLogger>();
+                return _smdLogger;
             }
         }
 
@@ -54,23 +58,50 @@ namespace SMD.Implementation.Services
             { "RequestContents", requestContents } });
         }
 
+        /// <summary>
+        /// Updates Accounts
+        /// </summary>
+        private static void UpdateAccounts(User user, Transaction transaction, BaseDbContext dbContext)
+        {
+            Account usersStripeAccount = user.Accounts.FirstOrDefault(acc => acc.AccountType == (int)AccountType.Stripe);
+            if (usersStripeAccount != null)
+            {
+                if (!usersStripeAccount.AccountBalance.HasValue)
+                {
+                    usersStripeAccount.AccountBalance = 0;
+                }
+                usersStripeAccount.AccountBalance -= (decimal?)transaction.DebitAmount;
+                transaction.Account.AccountBalance += (decimal?)transaction.DebitAmount;
+            }
+            // Update Cash4Ads User Stripe Account
+            var smdUser = dbContext.Users.FirstOrDefault(obj => obj.Email == SystemUsers.Cash4Ads);
+            if (smdUser == null)
+            {
+                throw new Exception(string.Format(CultureInfo.InvariantCulture, LanguageResources.WebApiUserService_InvalidUser,
+                    "Cash4Ads"));
+            }
+
+            Account smdUserStripeAccount = smdUser.Accounts.FirstOrDefault(acc => acc.AccountType == (int)AccountType.Stripe);
+            if (smdUserStripeAccount != null)
+            {
+                if (!smdUserStripeAccount.AccountBalance.HasValue)
+                {
+                    smdUserStripeAccount.AccountBalance = 0;
+                }
+                smdUserStripeAccount.AccountBalance += (decimal?)transaction.DebitAmount;
+            }
+        }
+
         #endregion
         #region Constructor
 
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        public CollectionScheduler()
-        {
-           //todo 
-        }
         #endregion
         #region Funcs
 
         /// <summary>
         /// Scheduler Initializer
         /// </summary>
-        public static void SetDebitScheduler(Registry registry )
+        public static void SetDebitScheduler(Registry registry)
         {
             // Registration of Debit Process Scheduler Run after every 7 days 
             registry.Schedule(PerformDebit).ToRunEvery(7).Days().At(23, 55);
@@ -79,7 +110,7 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Perform Debit work after scheduled time | 7 Days
         /// </summary>
-        private static void PerformDebit()
+        public static void PerformDebit()
         {
             // Initialize Service
             StripeService = UnityConfig.UnityContainer.Resolve<IStripeService>();
@@ -98,18 +129,38 @@ namespace SMD.Implementation.Services
                     {
                         // Get User from which credit to debit 
                         var user = dbContext.Users.Find(transaction.Account.UserId);
+                        if (user == null)
+                        {
+                            try
+                            {
+                                throw new Exception(string.Format(CultureInfo.InvariantCulture, LanguageResources.CollectionService_UserNotFound,
+                                    transaction.Account.UserId));
+                            }
+                            catch (Exception exception)
+                            {
+                                // Exception Loging
+                                LogError(exception, new HttpActionExecutedContext().Request.Content.ToString());   
+                            }
+                        }
                         // Secure Transation
                         using (var tran = new TransactionScope())
                         {
                             string response = null;
-                            Boolean isSystemUser;
                             try
                             {
                                 // If It is not System User then make transation 
+                                Boolean isSystemUser;
                                 if (user.Roles.Any(role => role.Name.ToLower().Equals("user")))
                                 {
-                                   response = StripeService.ChargeCustomer((int?)transaction.DebitAmount, user.StripeCustomerId);
-                                   isSystemUser = false;
+                                    if (string.IsNullOrEmpty(user.StripeCustomerId))
+                                    {
+                                        throw new Exception(string.Format(CultureInfo.InvariantCulture,
+                                            LanguageResources.CollectionService_AccountNotRegistered,
+                                            transaction.Account.UserId, "Stripe"));
+                                    }
+
+                                    response = StripeService.ChargeCustomer((int?)transaction.DebitAmount, user.StripeCustomerId);
+                                    isSystemUser = false;
                                 }
                                 else
                                 {
@@ -117,7 +168,7 @@ namespace SMD.Implementation.Services
                                     transaction.TxId = 0; // No Transaction Made
                                 }
                                 // Stripe + Invoice Work 
-                                if (isSystemUser || ( response != "failed"))
+                                if (isSystemUser || (response != "failed"))
                                 {
                                     // Success
                                     transaction.isProcessed = true;
@@ -131,7 +182,7 @@ namespace SMD.Implementation.Services
                                         Type = 2, // debit 
                                         IsCompleted = true,
                                         LogDate = DateTime.Now,
-                                        ToUser = "SMD",
+                                        ToUser = "Cash4Ads",
                                         TxId = transaction.TxId
                                     };
                                     dbContext.TransactionLogs.Add(transactionLog);
@@ -142,13 +193,13 @@ namespace SMD.Implementation.Services
                                     var invoice = new Invoice
                                     {
                                         Country = user.CountryId.ToString(),
-                                        Total = (double) transaction.DebitAmount,
+                                        Total = (double)transaction.DebitAmount,
                                         NetTotal = (double)transaction.DebitAmount,
                                         InvoiceDate = DateTime.Now,
                                         InvoiceDueDate = DateTime.Now.AddDays(7),
                                         Address1 = user.CountryId.ToString(),
                                         UserId = user.Id,
-                                        CompanyName = "My Company",
+                                        CompanyName = "Cash4Ads",
                                         CreditCardRef = response
                                     };
                                     dbContext.Invoices.Add(invoice);
@@ -166,7 +217,7 @@ namespace SMD.Implementation.Services
                                         ItemAmount = (double)transaction.DebitAmount,
                                         ItemTax = (double)transaction.TaxValue,
                                         ItemDescription = "This is description!",
-                                        ItemGrossAmount = (double) transaction.DebitAmount,
+                                        ItemGrossAmount = (double)transaction.DebitAmount,
                                         CampaignId = transaction.AdCampaignId,
 
                                     };
@@ -174,12 +225,19 @@ namespace SMD.Implementation.Services
 
                                     #endregion
 
+                                    #region Update Accounts
+
+                                    // Update User's Virtual and stripe account
+                                    UpdateAccounts(user, transaction, dbContext);
+
+                                    #endregion
+
                                     if (!isSystemUser)
                                     {
                                         // Email To User 
-                                        EmailSerice.SendCollectionRoutineEmail(user.Id);  
+                                        EmailSerice.SendCollectionRoutineEmail(user.Id);
                                     }
-                                   
+
                                     dbContext.SaveChanges();
                                 }
                                 // Indicates we are happy
@@ -196,7 +254,7 @@ namespace SMD.Implementation.Services
                 dbContext.SaveChanges();
             }
         }
-
+        
         #endregion
     }
 }
