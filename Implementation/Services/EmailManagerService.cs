@@ -208,7 +208,7 @@ namespace SMD.Implementation.Services
             string smtp = ConfigurationManager.AppSettings["SMTPServer"];
             string mailAddress = ConfigurationManager.AppSettings["SMTPUser"];
             string mailPassword = ConfigurationManager.AppSettings["SMTPPassword"];
-// ReSharper disable SuggestUseVarKeywordEvident
+            // ReSharper disable SuggestUseVarKeywordEvident
             SmtpClient objSmtpClient = new SmtpClient(smtp);
             NetworkCredential mailAuthentication = new NetworkCredential(mailAddress, mailPassword);
             objSmtpClient.EnableSsl = true;

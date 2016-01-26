@@ -8,6 +8,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using System.Web.SessionState;
 using Castle.Components.DictionaryAdapter.Xml;
+using FluentScheduler.Model;
 using Microsoft.Practices.EnterpriseLibrary.Common.Configuration;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 using Microsoft.Practices.EnterpriseLibrary.Logging;
@@ -24,7 +25,9 @@ using SMD.ExceptionHandling;
 using SMD.Implementation.Identity;
 using SMD.Interfaces.Services;
 using SMD.Models.IdentityModels;
-using FluentScheduler; 
+using FluentScheduler;
+using SMD.ExceptionHandling.Logger;
+using System.Threading.Tasks; 
 
 namespace SMD.MIS
 {
@@ -98,6 +101,7 @@ namespace SMD.MIS
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             // Background Tasks Init
+            TaskManager.UnobservedTaskException += TaskManager_UnobservedTaskException;
             TaskManager.Initialize(new ParentScheduler());
 
             // Set MVC resolver
@@ -119,6 +123,15 @@ namespace SMD.MIS
         private bool IsWebApiRequest()
         {
             return HttpContext.Current.Request.AppRelativeCurrentExecutionFilePath.StartsWith("~/Api");
+        }
+
+        static void TaskManager_UnobservedTaskException(object sender, UnhandledExceptionEventArgs e)
+        {
+            Logger.Write(e.ExceptionObject, SMDLogCategory.Error, -1, -1, TraceEventType.Warning, "",
+                new Dictionary<string, object>
+                {
+                    {"RequestContents", string.Empty}
+                });
         }
 
         #endregion

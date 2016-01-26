@@ -31,14 +31,7 @@
     /// </summary>
     public enum EmailTypes
     {
-        RegisterConfirm = 5,
         VerifyAccount = 6, // Email Confirmation
-        SuuportTicketReciept = 7,
-        TicketAssignedToUser = 12,
-        IssueResolved = 13,
-        TicketReAssignedToUser = 14,
-        DeveloperDueDate = 15,
-        DeveloperQuestion = 16,
         ResetPassword = 9,
         RegistrationConfirmed = 1,
         QuestionApproved = 10,
