@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets0B2D65924F937B56D9685E8CFB854CAED9FDA0D276C601607409508D8156BA6F))]
+[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets96D4EBB5FFEFA48128F727C327E4621ABF614645511594A7E65A49674018F974))]
 
 namespace Edm_EntityMappingGeneratedViews
 {
@@ -17,18 +17,18 @@ namespace Edm_EntityMappingGeneratedViews
     /// <Summary>
     /// The type contains views for EntitySets and AssociationSets that were generated at design time.
     /// </Summary>
-    public sealed class ViewsForBaseEntitySets0B2D65924F937B56D9685E8CFB854CAED9FDA0D276C601607409508D8156BA6F : System.Data.Mapping.EntityViewContainer
+    public sealed class ViewsForBaseEntitySets96D4EBB5FFEFA48128F727C327E4621ABF614645511594A7E65A49674018F974 : System.Data.Mapping.EntityViewContainer
     {
         
         /// <Summary>
         /// The constructor stores the views for the extents and also the hash values generated based on the metadata and mapping closure and views.
         /// </Summary>
-        public ViewsForBaseEntitySets0B2D65924F937B56D9685E8CFB854CAED9FDA0D276C601607409508D8156BA6F()
+        public ViewsForBaseEntitySets96D4EBB5FFEFA48128F727C327E4621ABF614645511594A7E65A49674018F974()
         {
             this.EdmEntityContainerName = "BaseDbContext";
             this.StoreEntityContainerName = "SMDModelStoreContainer";
-            this.HashOverMappingClosure = "098bffeff6fd066e84cb1e4d5d2a0fbb87f913c166a80e879cc27bfab8bfb77d";
-            this.HashOverAllExtentViews = "2515043940ad704b8300e2a7c7348020570fd6bcc06f0265e1fc6a433ac2d1bd";
+            this.HashOverMappingClosure = "f4a9c5693f37eccf7b9516ef7dd2ab92a292e6f111840525bea67932288843e4";
+            this.HashOverAllExtentViews = "caf2dc215e5c33bc60c497605e27c83ccdc49a51da0179343df60743eb405f70";
             this.ViewCount = 68;
         }
         
@@ -858,14 +858,14 @@ namespace Edm_EntityMappingGeneratedViews
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.Account", @"
     SELECT VALUE -- Constructing Account
-        [SMDModel.Store.Account](T1.Account_AccountId, T1.Account_AccountName, T1.Account_AccountType, T1.Account_AccountBalance, T1.Account_UserId)
+        [SMDModel.Store.Account](T1.Account_AccountId, T1.Account_AccountName, T1.Account_AccountType, T1.Account_UserId, T1.Account_AccountBalance)
     FROM (
         SELECT 
             T.AccountId AS Account_AccountId, 
             T.AccountName AS Account_AccountName, 
             T.AccountType AS Account_AccountType, 
-            T.AccountBalance AS Account_AccountBalance, 
             T.UserId AS Account_UserId, 
+            T.AccountBalance AS Account_AccountBalance, 
             True AS _from0
         FROM BaseDbContext.Accounts AS T
     ) AS T1");

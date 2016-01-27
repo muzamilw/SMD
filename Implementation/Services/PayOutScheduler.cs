@@ -49,8 +49,8 @@ namespace SMD.Implementation.Services
 
             if (transaction.CreditAmount != null)
             {
-                usersPaypalAccount.AccountBalance += (decimal)transaction.CreditAmount;
-                transaction.Account.AccountBalance -= (decimal)transaction.CreditAmount;
+                usersPaypalAccount.AccountBalance += transaction.CreditAmount;
+                transaction.Account.AccountBalance -= transaction.CreditAmount;
 
                 // Update Cash4ads accounts
                 Account smdUsersPaypalAccount = smdUser.Accounts.FirstOrDefault(acc => acc.AccountType == (int)AccountType.Paypal);
@@ -66,7 +66,7 @@ namespace SMD.Implementation.Services
                     smdUsersPaypalAccount.AccountBalance = 0;
                 }
 
-                smdUsersPaypalAccount.AccountBalance -= (decimal)transaction.CreditAmount;
+                smdUsersPaypalAccount.AccountBalance -= transaction.CreditAmount;
             }
         }
 

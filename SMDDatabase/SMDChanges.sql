@@ -2676,6 +2676,8 @@ RETURN
 	where sq.weightage < pqs.weightage
 )
 
+GO
+
 /* Added By Khurram (14 Jan 2016) - Ends */
 
 /* Added By Khurram (18 Jan 2016, 19 Jan 2016) - Start (Updated on live db server) */
@@ -3310,7 +3312,7 @@ END
 GO
 /* Added By Khurram (20 Jan 2016) - End */
 
-/* Added By Khurram (21 Jan 2016) - Start (Need to update on live db server) */
+/* Added By Khurram (21 Jan 2016) - Start (Updated on live db server) */
 
 GO
 delete  from adcampaignresponse
@@ -3326,3 +3328,623 @@ add ResponseID int identity(1,1) primary key
 GO
 
 /* Added By Khurram (21 Jan 2016) - End */
+
+/* Added By Khurram (27 Jan 2016) - Start */
+
+GO
+
+alter table account
+drop column accountbalance
+
+alter table account
+add AccountBalance float null
+
+GO
+
+GO
+
+ALTER FUNCTION [dbo].[GetUserProfileQuestions] 
+(	
+	-- Add the parameters for the function here
+	@UserID uniqueidentifier = '', 
+	@countryId int = 0
+)
+RETURNS TABLE 
+AS
+RETURN 
+(
+  -- Add the SELECT statement with parameter references here
+  with profilequestions(pqid, question, linkedquestion1id, linkedquestion2id,
+linkedquestion3id, linkedquestion4id, linkedquestion5id, linkedquestion6id,
+linkedquestion7id, linkedquestion8id,
+linkedquestion9id, linkedquestion10id, linkedquestion11id, linkedquestion12id, refreshtime,
+countryid, status, type, rowNumber, weightage)
+as
+( 
+	select pqo.pqid, pqo.question, pql.LinkedQuestion1ID, pql.LinkedQuestion2ID,
+	pql2.LinkedQuestion1ID, pql2.LinkedQuestion2ID, pql3.LinkedQuestion1ID, pql3.LinkedQuestion2ID,
+	pql4.LinkedQuestion1ID, pql4.LinkedQuestion2ID,pql5.LinkedQuestion1ID, pql5.LinkedQuestion2ID,
+	pql6.LinkedQuestion1ID, pql6.LinkedQuestion2ID,
+	pqo.refreshtime, pqo.CountryID, pqo.status, pqo.type,
+	((row_number() over (order by pqo.pqid)) + isNUll(pqo.Priority,0)) rowNumber,
+	(((row_number() over (order by pqo.pqid) * 10) + 3) + isNull(pqo.Priority,0)) Weightage 
+	from ProfileQuestion pqo
+	outer apply
+	(
+		select top 1 pqa.LinkedQuestion1ID, pqa.LinkedQuestion2ID
+		from ProfileQuestionAnswer pqa
+		join ProfileQuestion pq on pq.PQID = pqa.PqID
+		and pq.PQID  = pqo.PQID
+		order by pq.PQID
+	) as pql
+	outer apply
+	(
+		select pqa.LinkedQuestion1ID, pqa.LinkedQuestion2ID
+		from ProfileQuestionAnswer pqa
+		join ProfileQuestion pq on pq.PQID = pqa.PqID
+		and pq.PQID  = pqo.PQID
+		order by pq.PQID
+		OFFSET 1 Rows
+		FETCH NEXT 1 Rows ONLY
+	) as pql2
+	outer apply
+	(
+		select pqa.LinkedQuestion1ID, pqa.LinkedQuestion2ID
+		from ProfileQuestionAnswer pqa
+		join ProfileQuestion pq on pq.PQID = pqa.PqID
+		and pq.PQID  = pqo.PQID
+		order by pq.PQID
+		OFFSET 2 Rows
+		FETCH NEXT 1 Rows ONLY
+	) as pql3
+	outer apply
+	(
+		select pqa.LinkedQuestion1ID, pqa.LinkedQuestion2ID
+		from ProfileQuestionAnswer pqa
+		join ProfileQuestion pq on pq.PQID = pqa.PqID
+		and pq.PQID  = pqo.PQID
+		order by pq.PQID
+		OFFSET 3 Rows
+		FETCH NEXT 1 Rows ONLY
+	) as pql4
+	outer apply
+	(
+		select pqa.LinkedQuestion1ID, pqa.LinkedQuestion2ID
+		from ProfileQuestionAnswer pqa
+		join ProfileQuestion pq on pq.PQID = pqa.PqID
+		and pq.PQID  = pqo.PQID
+		order by pq.PQID
+		OFFSET 4 Rows
+		FETCH NEXT 1 Rows ONLY
+	) as pql5
+	outer apply
+	(
+		select pqa.LinkedQuestion1ID, pqa.LinkedQuestion2ID
+		from ProfileQuestionAnswer pqa
+		join ProfileQuestion pq on pq.PQID = pqa.PqID
+		and pq.PQID  = pqo.PQID
+		order by pq.PQID
+		OFFSET 5 Rows
+		FETCH NEXT 1 Rows ONLY
+	) as pql6
+	where pqo.HasLinkedQuestions = 1 and pqo.Status = 1
+	UNION ALL
+	select pq.pqid, pq.question, null, null,
+	null, null, null, null,
+	null, null,
+	null, null, null, null, 
+	pq.RefreshTime, pq.CountryID, pq.status, pq.type,
+	pqs.rowNumber + isnull(pq.Priority, 0),
+	pqs.weightage + isnull(pq.Priority, 0) Weightage 
+	from profilequestion pq
+	join profilequestions pqs on 
+	pqs.linkedquestion1id = pq.PQID or pqs.linkedquestion2id = pq.PQID or pqs.linkedquestion3id = pq.PQID
+	or pqs.linkedquestion4id = pq.PQID or pqs.linkedquestion5id = pq.PQID or pqs.linkedquestion6id = pq.PQID
+	or pqs.linkedquestion7id = pq.PQID or pqs.linkedquestion8id = pq.PQID or pqs.linkedquestion9id = pq.PQID
+	or pqs.linkedquestion10id = pq.PQID or pqs.linkedquestion11id = pq.PQID or pqs.linkedquestion12id = pq.PQID
+)
+
+select pq.*,
+pqa1.PQAnswerID as PQAnswerID1, pqa1.AnswerString as PQAnswer1, 
+pqa1.LinkedQuestion1ID as PQA1LinkedQ1, pqa1.LinkedQuestion2ID PQA1LinkedQ2,
+pqa1.type as PQA1Type, pqa1.SortOrder as PQA1SortOrder,
+CASE
+	WHEN pqa1.ImagePath is null or pqa1.ImagePath = ''
+	THEN pqa1.ImagePath
+	WHEN pqa1.ImagePath is not null
+	THEN 'http://manage.cash4ads.com/' + pqa1.ImagePath
+END as PQA1ImagePath,
+pqa2.PQAnswerID as PQAnswerID2, pqa2.AnswerString as PQAnswer2, 
+pqa2.LinkedQuestion1ID as PQA2LinkedQ1, pqa2.LinkedQuestion2ID PQA2LinkedQ2,
+pqa2.type as PQA2Type, pqa2.SortOrder as PQA2SortOrder,
+CASE
+	WHEN pqa2.ImagePath is null or pqa2.ImagePath = ''
+	THEN pqa2.ImagePath
+	WHEN pqa2.ImagePath is not null
+	THEN 'http://manage.cash4ads.com/' + pqa2.ImagePath
+END as PQA2ImagePath,
+pqa3.PQAnswerID as PQAnswerID3, pqa3.AnswerString as PQAnswer3, 
+pqa3.LinkedQuestion1ID as PQA3LinkedQ1, pqa3.LinkedQuestion2ID PQA3LinkedQ2,
+pqa3.type as PQA3Type, pqa3.SortOrder as PQA3SortOrder,
+CASE
+	WHEN pqa3.ImagePath is null or pqa3.ImagePath = ''
+	THEN pqa3.ImagePath
+	WHEN pqa3.ImagePath is not null
+	THEN 'http://manage.cash4ads.com/' + pqa3.ImagePath
+END as PQA3ImagePath,
+pqa4.PQAnswerID as PQAnswerID4, pqa4.AnswerString as PQAnswer4, 
+pqa4.LinkedQuestion1ID as PQA4LinkedQ1, pqa4.LinkedQuestion2ID PQA4LinkedQ2,
+pqa4.type as PQA4Type, pqa4.SortOrder as PQA4SortOrder,
+CASE
+	WHEN pqa4.ImagePath is null or pqa4.ImagePath = ''
+	THEN pqa4.ImagePath
+	WHEN pqa4.ImagePath is not null
+	THEN 'http://manage.cash4ads.com/' + pqa4.ImagePath
+END as PQA4ImagePath,
+pqa5.PQAnswerID as PQAnswerID5, pqa5.AnswerString as PQAnswer5, 
+pqa5.LinkedQuestion1ID as PQA5LinkedQ1, pqa5.LinkedQuestion2ID PQA5LinkedQ2,
+pqa5.type as PQA5Type, pqa5.SortOrder as PQA5SortOrder,
+CASE
+	WHEN pqa5.ImagePath is null or pqa5.ImagePath = ''
+	THEN pqa5.ImagePath
+	WHEN pqa5.ImagePath is not null
+	THEN 'http://manage.cash4ads.com/' + pqa5.ImagePath
+END as PQA5ImagePath,
+pqa6.PQAnswerID as PQAnswerID6, pqa6.AnswerString as PQAnswer6,
+pqa6.LinkedQuestion1ID as PQA6LinkedQ1, pqa1.LinkedQuestion2ID PQA6LinkedQ2, 
+pqa6.type as PQA6Type, pqa6.SortOrder as PQA6SortOrder,
+CASE
+	WHEN pqa6.ImagePath is null or pqa6.ImagePath = ''
+	THEN pqa6.ImagePath
+	WHEN pqa6.ImagePath is not null
+	THEN 'http://manage.cash4ads.com/' + pqa6.ImagePath
+END as PQA6ImagePath
+from profilequestions pq
+outer apply (
+		select top 1 pqa.PQAnswerID, pqa.AnswerString
+		, pqa.LinkedQuestion1ID, pqa.LinkedQuestion2ID, pqa.type, 
+		pqa.ImagePath, pqa.SortOrder
+		from ProfileQuestionAnswer pqa
+		where pqa.PQID = pq.PQID
+		order by pqa.PQAnswerID
+	) Pqa1
+	outer apply (
+		select pqa2.PQAnswerID, pqa2.AnswerString
+		, pqa2.LinkedQuestion1ID, pqa2.LinkedQuestion2ID, pqa2.type, 
+		pqa2.ImagePath, pqa2.SortOrder
+		from ProfileQuestionAnswer pqa2
+		where pqa2.PQID = pq.PQID
+		order by pqa2.PQAnswerID
+		OFFSET 1 ROWS -- skip 1 rows
+		FETCH NEXT 1 ROWS ONLY -- take 1 rows
+	) Pqa2
+	outer apply (
+		select pqa3.PQAnswerID, pqa3.AnswerString
+		, pqa3.LinkedQuestion1ID, pqa3.LinkedQuestion2ID, pqa3.type, 
+		pqa3.ImagePath, pqa3.SortOrder
+		from ProfileQuestionAnswer pqa3
+		where pqa3.PQID = pq.PQID
+		order by pqa3.PQAnswerID
+		OFFSET 2 ROWS -- skip 2 rows
+		FETCH NEXT 1 ROWS ONLY -- take 1 rows
+	) Pqa3
+	outer apply (
+		select pqa4.PQAnswerID, pqa4.AnswerString
+		, pqa4.LinkedQuestion1ID, pqa4.LinkedQuestion2ID, pqa4.type, 
+		pqa4.ImagePath, pqa4.SortOrder
+		from ProfileQuestionAnswer pqa4
+		where pqa4.PQID = pq.PQID
+		order by pqa4.PQAnswerID
+		OFFSET 3 ROWS -- skip 2 rows
+		FETCH NEXT 1 ROWS ONLY -- take 1 rows
+	) Pqa4
+	outer apply (
+		select pqa5.PQAnswerID, pqa5.AnswerString
+		, pqa5.LinkedQuestion1ID, pqa5.LinkedQuestion2ID, pqa5.type, 
+		pqa5.ImagePath, pqa5.SortOrder
+		from ProfileQuestionAnswer pqa5
+		where pqa5.PQID = pq.PQID
+		order by pqa5.PQAnswerID
+		OFFSET 4 ROWS -- skip 2 rows
+		FETCH NEXT 1 ROWS ONLY -- take 1 rows
+	) Pqa5
+	outer apply (
+		select pqa6.PQAnswerID, pqa6.AnswerString
+		, pqa6.LinkedQuestion1ID, pqa6.LinkedQuestion2ID, pqa6.type, 
+		pqa6.ImagePath, pqa6.SortOrder
+		from ProfileQuestionAnswer pqa6
+		where pqa6.PQID = pq.PQID
+		order by pqa6.PQAnswerID
+		OFFSET 5 ROWS -- skip 2 rows
+		FETCH NEXT 1 ROWS ONLY -- take 1 rows
+	) Pqa6
+	where 
+	(
+		(((select count(*) from ProfileQuestionUserAnswer pqu 
+			where pq.PQID = pqu.PQID and pqu.UserID = @UserID and pq.CountryID = @countryId) = 0)
+		  or 	 
+		  ((select top 1 datediff(day, dateadd(month, pq.refreshtime,pqu.AnswerDateTime), getdate()) 
+			from ProfileQuestionUserAnswer pqu 
+			where pq.PQID = pqu.PQID and pqu.UserID = @UserID and pq.CountryID = @countryId 
+			order by pqu.pquanswerid) > 0 )	
+		)
+		and pq.status = 1
+	)
+	UNION ALL
+	select pq.pqid, pq.question, null, null,
+	null, null, null, null,
+	null, null,
+	null, null, null, null, 
+	pq.refreshtime, pq.countryid, pq.Status, pq.type,
+	(select max(rownumber) + 1 from profilequestions) rowNumber,
+	(select (((max(rowNumber) + 1) * 10) + 3) from profilequestions) Weightage,
+	pqa1.PQAnswerID as PQAnswerID1, pqa1.AnswerString as PQAnswer1, 
+	pqa1.LinkedQuestion1ID as PQA1LinkedQ1, pqa1.LinkedQuestion2ID PQA1LinkedQ2,
+	pqa1.type as PQA1Type, pqa1.SortOrder as PQA1SortOrder,
+	CASE
+		WHEN pqa1.ImagePath is null or pqa1.ImagePath = ''
+		THEN pqa1.ImagePath
+		WHEN pqa1.ImagePath is not null
+		THEN 'http://manage.cash4ads.com/' + pqa1.ImagePath
+	END as PQA1ImagePath,
+	pqa2.PQAnswerID as PQAnswerID2, pqa2.AnswerString as PQAnswer2, 
+	pqa2.LinkedQuestion1ID as PQA2LinkedQ1, pqa2.LinkedQuestion2ID PQA2LinkedQ2,
+	pqa2.type as PQA2Type, pqa2.SortOrder as PQA2SortOrder,
+	CASE
+		WHEN pqa2.ImagePath is null or pqa2.ImagePath = ''
+		THEN pqa2.ImagePath
+		WHEN pqa2.ImagePath is not null
+		THEN 'http://manage.cash4ads.com/' + pqa2.ImagePath
+	END as PQA2ImagePath,
+	pqa3.PQAnswerID as PQAnswerID3, pqa3.AnswerString as PQAnswer3, 
+	pqa3.LinkedQuestion1ID as PQA3LinkedQ1, pqa3.LinkedQuestion2ID PQA3LinkedQ2,
+	pqa3.type as PQA3Type, pqa3.SortOrder as PQA3SortOrder,
+	CASE
+		WHEN pqa3.ImagePath is null or pqa3.ImagePath = ''
+		THEN pqa3.ImagePath
+		WHEN pqa3.ImagePath is not null
+		THEN 'http://manage.cash4ads.com/' + pqa3.ImagePath
+	END as PQA3ImagePath,
+	pqa4.PQAnswerID as PQAnswerID4, pqa4.AnswerString as PQAnswer4, 
+	pqa4.LinkedQuestion1ID as PQA4LinkedQ1, pqa4.LinkedQuestion2ID PQA4LinkedQ2,
+	pqa4.type as PQA4Type, pqa4.SortOrder as PQA4SortOrder,
+	CASE
+		WHEN pqa4.ImagePath is null or pqa4.ImagePath = ''
+		THEN pqa4.ImagePath
+		WHEN pqa4.ImagePath is not null
+		THEN 'http://manage.cash4ads.com/' + pqa4.ImagePath
+	END as PQA4ImagePath,
+	pqa5.PQAnswerID as PQAnswerID5, pqa5.AnswerString as PQAnswer5, 
+	pqa5.LinkedQuestion1ID as PQA5LinkedQ1, pqa5.LinkedQuestion2ID PQA5LinkedQ2,
+	pqa5.type as PQA5Type, pqa5.SortOrder as PQA5SortOrder,
+	CASE
+		WHEN pqa5.ImagePath is null or pqa5.ImagePath = ''
+		THEN pqa5.ImagePath
+		WHEN pqa5.ImagePath is not null
+		THEN 'http://manage.cash4ads.com/' + pqa5.ImagePath
+	END as PQA5ImagePath,
+	pqa6.PQAnswerID as PQAnswerID6, pqa6.AnswerString as PQAnswer6,
+	pqa6.LinkedQuestion1ID as PQA6LinkedQ1, pqa1.LinkedQuestion2ID PQA6LinkedQ2,
+	pqa6.type as PQA6Type, pqa6.SortOrder as PQA6SortOrder,
+	CASE
+		WHEN pqa6.ImagePath is null or pqa6.ImagePath = ''
+		THEN pqa6.ImagePath
+		WHEN pqa6.ImagePath is not null
+		THEN 'http://manage.cash4ads.com/' + pqa6.ImagePath
+	END as PQA6ImagePath
+	from profilequestion pq
+	outer apply (
+		select top 1 pqa.PQAnswerID, pqa.AnswerString
+		, pqa.LinkedQuestion1ID, pqa.LinkedQuestion2ID, pqa.type, 
+		pqa.ImagePath, pqa.SortOrder
+		from ProfileQuestionAnswer pqa
+		where pqa.PQID = pq.PQID
+		order by pqa.PQAnswerID
+	) Pqa1
+	outer apply (
+		select pqa2.PQAnswerID, pqa2.AnswerString
+		, pqa2.LinkedQuestion1ID, pqa2.LinkedQuestion2ID, pqa2.type, 
+		pqa2.ImagePath, pqa2.SortOrder
+		from ProfileQuestionAnswer pqa2
+		where pqa2.PQID = pq.PQID
+		order by pqa2.PQAnswerID
+		OFFSET 1 ROWS -- skip 1 rows
+		FETCH NEXT 1 ROWS ONLY -- take 1 rows
+	) Pqa2
+	outer apply (
+		select pqa3.PQAnswerID, pqa3.AnswerString
+		, pqa3.LinkedQuestion1ID, pqa3.LinkedQuestion2ID, pqa3.type, 
+		pqa3.ImagePath, pqa3.SortOrder
+		from ProfileQuestionAnswer pqa3
+		where pqa3.PQID = pq.PQID
+		order by pqa3.PQAnswerID
+		OFFSET 2 ROWS -- skip 2 rows
+		FETCH NEXT 1 ROWS ONLY -- take 1 rows
+	) Pqa3
+	outer apply (
+		select pqa4.PQAnswerID, pqa4.AnswerString
+		, pqa4.LinkedQuestion1ID, pqa4.LinkedQuestion2ID, pqa4.type, 
+		pqa4.ImagePath, pqa4.SortOrder
+		from ProfileQuestionAnswer pqa4
+		where pqa4.PQID = pq.PQID
+		order by pqa4.PQAnswerID
+		OFFSET 3 ROWS -- skip 2 rows
+		FETCH NEXT 1 ROWS ONLY -- take 1 rows
+	) Pqa4
+	outer apply (
+		select pqa5.PQAnswerID, pqa5.AnswerString
+		, pqa5.LinkedQuestion1ID, pqa5.LinkedQuestion2ID, pqa5.type, 
+		pqa5.ImagePath, pqa5.SortOrder
+		from ProfileQuestionAnswer pqa5
+		where pqa5.PQID = pq.PQID
+		order by pqa5.PQAnswerID
+		OFFSET 4 ROWS -- skip 2 rows
+		FETCH NEXT 1 ROWS ONLY -- take 1 rows
+	) Pqa5
+	outer apply (
+		select pqa6.PQAnswerID, pqa6.AnswerString
+		, pqa6.LinkedQuestion1ID, pqa6.LinkedQuestion2ID, pqa6.type, 
+		pqa6.ImagePath, pqa6.SortOrder
+		from ProfileQuestionAnswer pqa6
+		where pqa6.PQID = pq.PQID
+		order by pqa6.PQAnswerID
+		OFFSET 5 ROWS -- skip 2 rows
+		FETCH NEXT 1 ROWS ONLY -- take 1 rows
+	) Pqa6
+	where pq.PQID not in
+	(select pqid from profilequestions)
+	and
+	(
+		(((select count(*) from ProfileQuestionUserAnswer pqu 
+			where pq.PQID = pqu.PQID and pqu.UserID = @UserID and pq.CountryID = @countryId) = 0)
+		  or 	 
+		  ((select top 1 datediff(day, dateadd(month, pq.refreshtime,pqu.AnswerDateTime), getdate()) 
+			from ProfileQuestionUserAnswer pqu 
+			where pq.PQID = pqu.PQID and pqu.UserID = @UserID and pq.CountryID = @countryId 
+			order by pqu.pquanswerid) > 0 )	
+		)
+	)
+	and
+	pq.Status = 1
+)
+
+GO
+
+GO
+
+ALTER FUNCTION [dbo].[GetUserSurveys]
+(	
+	-- Add the parameters for the function here
+	@userId uniqueidentifier = ''
+)
+RETURNS TABLE 
+AS
+RETURN 
+(
+	-- Add the SELECT statement with parameter references here
+	with surveyquestions(sqid, question, sqtype, description, surveytype, adclickrate, 
+ adimagepath, advideolink, adanswer1, adanswer2, adanswer3, adcorrectanswer, adverifyquestion, 
+ adrewardtype, advoucher1heading, advoucher1description, advoucher1value, sqleftimagepath,
+ sqrightimagepath, gameurl, 
+ pqanswer1id, pqanswer1, pqa1Linkedq1, pqa1Linkedq2, pqa1Type, pqa1SortOrder, pqa1ImagePath,
+ pqanswer2id, pqanswer2, pqa2Linkedq1, pqa2Linkedq2, pqa2Type, pqa2SortOrder, pqa2ImagePath,
+ pqanswer3id, pqanswer3, pqa3Linkedq1, pqa3Linkedq2, pqa3Type, pqa3SortOrder, pqa3ImagePath,
+ pqanswer4id, pqanswer4, pqa4Linkedq1, pqa4Linkedq2, pqa4Type, pqa4SortOrder, pqa4ImagePath,
+ pqanswer5id, pqanswer5, pqa5Linkedq1, pqa5Linkedq2, pqa5Type, pqa5SortOrder, pqa5ImagePath,
+ pqanswer6id, pqanswer6, pqa6Linkedq1, pqa6Linkedq2, pqa6Type, pqa6SortOrder, pqa6ImagePath,
+ weightage, sqleftImagePercentage,
+ sqRightImagePercentage)
+as (
+	select sq.sqid, sq.question, 'Survey', 
+	sq.Description, sq.Type SurveyType, NULL, '', '',
+	'', '', '', NULL, '', NULL, '', '',
+	'', 
+	CASE
+		WHEN sq.LeftPicturePath is null or sq.LeftPicturePath = ''
+		THEN sq.LeftPicturePath
+		WHEN sq.LeftPicturePath is not null
+		THEN 'http://manage.cash4ads.com/' + sq.LeftPicturePath
+	END as SqLeftImagePath, 
+	CASE
+		WHEN sq.RightPicturePath is null or sq.RightPicturePath = ''
+		THEN sq.RightPicturePath
+		WHEN sq.RightPicturePath is not null
+		THEN 'http://manage.cash4ads.com/' + sq.RightPicturePath
+	END as SqRightImagePath, '', 
+	NULL, '', NULL, NULL, NULL, NULL, '', -- PQAnswer1
+	NULL, '', NULL, NULL, NULL, NULL, '', -- PQAnswer2
+	NULL, '', NULL, NULL, NULL, NULL, '', -- PQAnswer3
+	NULL, '', NULL, NULL, NULL, NULL, '', -- PQAnswer4
+	NULL, '', NULL, NULL, NULL, NULL, '', -- PQAnswer5
+	NULL, '', NULL, NULL, NULL, NULL, '', -- PQAnswer6
+	(((row_number() over (order by sq.sqid) * 10) + 2) + isnull(sq.Priority, 0)) Weightage,
+	sqResponsePercentages.leftImagePercentage, sqResponsePercentages.rightImagePercentage
+	from surveyquestion sq
+	outer apply
+	(select * from [GetUserSurveySelectionPercentage](sq.sqid)) as sqResponsePercentages
+	where -- If this survey has no response yet
+	(((select count(*) from SurveyQuestionResponse mySurveyQuestionResponse
+			 where mySurveyQuestionResponse.UserID = @userId and 
+			 mySurveyQuestionResponse.SQID = sq.SQID) = 0)
+	  or  
+	  ((select top 1 mySurveyQuestionResponse.UserSelection from SurveyQuestionResponse mySurveyQuestionResponse
+			 where mySurveyQuestionResponse.UserID = @userId and 
+			 mySurveyQuestionResponse.SQID = sq.SQID) is null)
+	)
+	and sq.ParentSurveyId is null and sq.Status = 3 -- live
+	UNION ALL
+	-- Recursive member definition
+		select sqp.sqid, sqp.question, 'Survey',
+	sqp.Description, sqp.Type SurveyType, NULL, '', '',
+	'', '', '', NULL, '', NULL, '', '',
+	'',
+	CASE
+		WHEN sqp.LeftPicturePath is null or sqp.LeftPicturePath = ''
+		THEN sqp.LeftPicturePath
+		WHEN sqp.LeftPicturePath is not null
+		THEN 'http://manage.cash4ads.com/' + sqp.LeftPicturePath
+	END as SqLeftImagePath, 
+	CASE
+		WHEN sqp.RightPicturePath is null or sqp.RightPicturePath = ''
+		THEN sqp.RightPicturePath
+		WHEN sqp.RightPicturePath is not null
+		THEN 'http://manage.cash4ads.com/' + sqp.RightPicturePath
+	END as SqRightImagePath, '', 
+	NULL, '', NULL, NULL, NULL, NULL, '', -- PQAnswer1
+	NULL, '', NULL, NULL, NULL, NULL, '', -- PQAnswer2
+	NULL, '', NULL, NULL, NULL, NULL, '', -- PQAnswer3
+	NULL, '', NULL, NULL, NULL, NULL, '', -- PQAnswer4
+	NULL, '', NULL, NULL, NULL, NULL, '', -- PQAnswer5
+	NULL, '', NULL, NULL, NULL, NULL, '', -- PQAnswer6
+	(select (isnull(weightage, 0) + isnull(sq.Priority, 0)) from [GetRootParentSurvey](sq.SQID)) as weightage,
+	sqResponsePercentages.leftImagePercentage, sqResponsePercentages.rightImagePercentage
+	from surveyquestion sq	
+	inner join SurveyQuestion sqp on sqp.ParentSurveyId = sq.SQID
+	outer apply
+	(select * from [GetUserSurveySelectionPercentage](sq.sqid)) as sqResponsePercentages
+	where -- If this survey has no response yet
+	((((select count(*) from SurveyQuestionResponse mySurveyQuestionResponse
+			 where mySurveyQuestionResponse.UserID = @userId and 
+			 mySurveyQuestionResponse.SQID = sq.SQID) = 0)
+	  or  
+	  ((select top 1 mySurveyQuestionResponse.UserSelection from SurveyQuestionResponse mySurveyQuestionResponse
+			 where mySurveyQuestionResponse.UserID = @userId and 
+			 mySurveyQuestionResponse.SQID = sq.SQID) is null)
+		)
+	  and
+	  sq.Status = 3 -- live
+    ) 
+  )
+	select * from surveyquestions
+)
+
+GO
+
+GO
+
+ALTER PROCEDURE [dbo].[GetProducts] 
+
+	-- Add the parameters for the stored procedure here
+	@UserID nvarchar(128) = 0 ,
+	@FromRow int = 0,
+	@ToRow int = 0
+
+AS
+BEGIN
+DECLARE @dob AS DateTime
+DECLARE @age AS INT
+DECLARE @gender AS INT
+DECLARE @countryId AS INT
+DECLARE @cityId AS INT
+DECLARE @languageId AS INT
+DECLARE @industryId AS INT
+DECLARE @currentDate AS DateTime
+
+        -- Setting local variables
+		   SELECT @dob = DOB FROM AspNetUsers where id=@UserID
+		   SELECT @gender = gender FROM AspNetUsers where id=@UserID
+		   SELECT @countryId = countryId FROM AspNetUsers where id=@UserID
+		   SELECT @cityId = cityId FROM AspNetUsers where id=@UserID
+		   SELECT @languageId = LanguageID FROM AspNetUsers where id=@UserID
+		   SELECT @industryId = industryId FROM AspNetUsers where id=@UserID
+		   SET @currentDate = getDate()
+		   SET @age = DATEDIFF(year, @age, @currentDate)
+
+select top 10 *, COUNT(*) OVER() AS TotalItems
+from
+(	select campaignid as ItemId, campaignname ItemName, 'Ad' Type, 
+    Description, Type ItemType, 
+	((ClickRate * 50) / 100) as AdClickRate,  -- Amount AdViewer will get
+	ImagePath as AdImagePath, LandingPageVideoLink as AdVideoLink,
+	Answer1 as AdAnswer1, Answer2 as AdAnswer2, Answer3 as AdAnswer3, CorrectAnswer as AdCorrectAnswer, VerifyQuestion as AdVerifyQuestion, 
+	RewardType as AdRewardType,
+	Voucher1Heading as AdVoucher1Heading, Voucher1Description as AdVoucher1Description,
+	Voucher1Value as AdVoucher1Value, NULL as SqLeftImagePath, NULL as SqRightImagePath,
+	Case 
+	    when Type = 3  -- Game
+		THEN
+		    (select top 1 GameUrl from Game ORDER BY NEWID())
+		when Type != 3
+		THEN
+		    NULL
+	END as GameUrl, 
+	NULL as PqAnswer1Id, NULL as PqAnswer1, NULL as PqA1LinkedQ1, NULL as PqA1LinkedQ2, 
+	NULL as PqA1Type, NULL as PqA1SortOrder, NULL as PqA1ImagePath,
+	NULL as PqAnswer2Id, NULL as PqAnswer2, NULL as PqA2LinkedQ1, NULL as PqA2LinkedQ2,
+	NULL as PqA2Type, NULL as PqA2SortOrder, NULL as PqA2ImagePath,
+	NULL as PqAnswer3Id, NULL as PqAnswer3, NULL as PqA3LinkedQ1, NULL as PqA3LinkedQ2,
+	NULL as PqA3Type, NULL as PqA3SortOrder, NULL as PqA3ImagePath, 
+	NULL as PqAnswer4Id, NULL as PqAnswer4, NULL as PqA4LinkedQ1, NULL as PqA4LinkedQ2,
+	NULL as PqA4Type, NULL as PqA4SortOrder, NULL as PqA4ImagePath,
+	NULL as PqAnswer5Id, NULL as PqAnswer5, NULL as PqA5LinkedQ1, NULL as PqA5LinkedQ2,
+	NULL as PqA5Type, NULL as PqA5SortOrder, NULL as PqA5ImagePath,
+	NULL as PqAnswer6Id, NULL as PqAnswer6, NULL as PqA6LinkedQ1, NULL as PqA6LinkedQ2,
+	NULL as PqA6Type, NULL as PqA6SortOrder, NULL as PqA6ImagePath,
+	((row_number() over (order by campaignid) * 10) + 1) Weightage,
+	NULL as SqLeftImagePercentage, NULL as SqRightImagePercentage,
+	(select 
+	CASE
+		WHEN usr.ProfileImage is null or usr.ProfileImage = ''
+		THEN usr.ProfileImage
+		WHEN usr.ProfileImage is not null
+		THEN 'http://manage.cash4ads.com/' + usr.ProfileImage
+	END as AdvertisersLogoPath from AspNetUsers usr where usr.Id = UserID) as AdvertisersLogoPath 
+	from adcampaign
+	where (
+		((@age is null) or (adcampaign.AgeRangeEnd >= @age and  @age >= adcampaign.AgeRangeStart))
+		and
+		((@gender is null) or (adcampaign.Gender = @gender))
+		and
+		((@languageId is null) or (adcampaign.LanguageId = @languageId))
+		and
+		(adcampaign.EndDateTime >= @currentDate and @currentDate >= adcampaign.StartDateTime)
+		and
+		(adcampaign.Approved = 1)
+		and
+		(adcampaign.Status = 3) -- live
+		and
+		((adcampaign.AmountSpent is null) or (adcampaign.MaxBudget > adcampaign.AmountSpent))
+		and
+		((@countryId is null or @cityId is null) or ((select count(*) from AdCampaignTargetLocation MyCampaignLoc
+			 where MyCampaignLoc.CampaignID=adcampaign.CampaignID and MyCampaignLoc.CountryID=@countryId and
+			 MyCampaignLoc.CityID=@cityId) > 0))
+	    and
+		((@languageId is null or @industryId is null) or ((select count(*) from AdCampaignTargetCriteria MyCampaignCrit
+			 where MyCampaignCrit.CampaignID = adcampaign.CampaignID and 
+			 MyCampaignCrit.LanguageID=@languageId and MyCampaignCrit.IndustryID=@industryId) > 0 ))
+		and
+		(((select count(*) from AdCampaignResponse adResponse where  
+			adResponse.CampaignID = adcampaign.CampaignID and adResponse.UserID = @UserID) = 0)
+		 or
+		 ((select top 1 adResponse.UserSelection from AdCampaignResponse adResponse 
+			where adResponse.CampaignID = adcampaign.CampaignID and adResponse.UserID = @UserID) 
+			is null)
+		)
+	)
+	
+	union
+	select *, NULL as AdvertisersLogoPath from [GetUserSurveys](@UserID)
+
+	union
+	select pqid, question, 'Question', 
+	NULL, Type QuestionType, NULL, NULL, NULL,
+	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+	NULL, NULL,NULL, NULL, 
+	PQAnswerID1, PQAnswer1, PQA1LinkedQ1, PQA1LinkedQ2, PQA1Type, PQA1SortOrder, PQA1ImagePath,
+	PQAnswerID2, PQAnswer2, PQA2LinkedQ1, PQA2LinkedQ2, PQA2Type, PQA2SortOrder, PQA2ImagePath,
+	PQAnswerID3, PQAnswer3, PQA3LinkedQ1, PQA3LinkedQ2, PQA3Type, PQA3SortOrder, PQA3ImagePath,
+	PQAnswerID4, PQAnswer4, PQA4LinkedQ1, PQA4LinkedQ2, PQA4Type, PQA4SortOrder, PQA4ImagePath,
+	PQAnswerID5, PQAnswer5, PQA5LinkedQ1, PQA5LinkedQ2, PQA5Type, PQA5SortOrder, PQA5ImagePath,
+	PQAnswerID6, PQAnswer6, PQA6LinkedQ1, PQA6LinkedQ2, PQA6Type, PQA6SortOrder, PQA6ImagePath,
+	Weightage,
+	NULL as SqLeftImagePercentage, NULL as SqRightImagePercentage, 
+	NULL as AdvertisersLogoPath 
+	from [GetUserProfileQuestions](@UserID, @countryId)
+	
+	) as items
+	order by Weightage
+END
+
+GO
+
+/* Added By Khurram (27 Jan 2016) - End */

@@ -37,8 +37,8 @@ namespace SMD.Implementation.Services
                 {
                     usersStripeAccount.AccountBalance = 0;
                 }
-                usersStripeAccount.AccountBalance -= (decimal?)transaction.DebitAmount;
-                transaction.Account.AccountBalance += (decimal?)transaction.DebitAmount;
+                usersStripeAccount.AccountBalance -= transaction.DebitAmount;
+                transaction.Account.AccountBalance += transaction.DebitAmount;
             }
             // Update Cash4Ads User Stripe Account
             var smdUser = dbContext.Users.FirstOrDefault(obj => obj.Email == SystemUsers.Cash4Ads);
@@ -55,7 +55,7 @@ namespace SMD.Implementation.Services
                 {
                     smdUserStripeAccount.AccountBalance = 0;
                 }
-                smdUserStripeAccount.AccountBalance += (decimal?)transaction.DebitAmount;
+                smdUserStripeAccount.AccountBalance += transaction.DebitAmount;
             }
         }
 

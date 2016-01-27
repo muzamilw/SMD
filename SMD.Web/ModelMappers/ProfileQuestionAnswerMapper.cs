@@ -71,6 +71,24 @@ namespace SMD.MIS.ModelMappers
         /// <summary>
         /// Create Model For API
         /// </summary>
+        public static ProfileQuestionAnswerView CreateFromForProduct(this Models.DomainModels.ProfileQuestionAnswer source)
+        {
+            return new ProfileQuestionAnswerView
+            {
+                PqAnswerId = source.PqAnswerId,
+                Answer = source.AnswerString,
+                ImagePath = source.ImagePath,
+                PqId = source.PqId,
+                Type = source.Type,
+                SortOrder = source.SortOrder,
+                LinkedQuestion1Id = source.LinkedQuestion1Id,
+                LinkedQuestion2Id = source.LinkedQuestion2Id
+            };
+        }
+
+        /// <summary>
+        /// Create Model For API
+        /// </summary>
         public static ProfileQuestionAnswerApiModel CreateForApi(this Models.DomainModels.ProfileQuestionAnswer source)
         {
             return new ProfileQuestionAnswerApiModel

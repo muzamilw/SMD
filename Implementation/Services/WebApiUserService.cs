@@ -112,12 +112,12 @@ namespace SMD.Implementation.Services
             if (isCredit)
             {
                 transaction.CreditAmount = transactionAmount;
-                account.AccountBalance += Convert.ToDecimal(transactionAmount);
+                account.AccountBalance += transactionAmount;
             }
             else
             {
                 transaction.DebitAmount = transactionAmount;
-                account.AccountBalance -= Convert.ToDecimal(transactionAmount);
+                account.AccountBalance -= transactionAmount;
             }
 
             // Add Transcation to repository

@@ -33,16 +33,46 @@ namespace SMD.Models.DomainModels
         public string GameUrl { get; set; }
         public int? PqAnswer1Id { get; set; }
         public string PqAnswer1 { get; set; }
+        public int? PqA1LinkedQ1 { get; set; }
+        public int? PqA1LinkedQ2 { get; set; }
+        public int? PqA1Type { get; set; }
+        public int? PqA1SortOrder { get; set; }
+        public string PqA1ImagePath { get; set; }
         public int? PqAnswer2Id { get; set; }
         public string PqAnswer2 { get; set; }
+        public int? PqA2LinkedQ1 { get; set; }
+        public int? PqA2LinkedQ2 { get; set; }
+        public int? PqA2Type { get; set; }
+        public int? PqA2SortOrder { get; set; }
+        public string PqA2ImagePath { get; set; }
         public int? PqAnswer3Id { get; set; }
         public string PqAnswer3 { get; set; }
+        public int? PqA3LinkedQ1 { get; set; }
+        public int? PqA3LinkedQ2 { get; set; }
+        public int? PqA3Type { get; set; }
+        public int? PqA3SortOrder { get; set; }
+        public string PqA3ImagePath { get; set; }
         public int? PqAnswer4Id { get; set; }
         public string PqAnswer4 { get; set; }
+        public int? PqA4LinkedQ1 { get; set; }
+        public int? PqA4LinkedQ2 { get; set; }
+        public int? PqA4Type { get; set; }
+        public int? PqA4SortOrder { get; set; }
+        public string PqA4ImagePath { get; set; }
         public int? PqAnswer5Id { get; set; }
         public string PqAnswer5 { get; set; }
+        public int? PqA5LinkedQ1 { get; set; }
+        public int? PqA5LinkedQ2 { get; set; }
+        public int? PqA5Type { get; set; }
+        public int? PqA5SortOrder { get; set; }
+        public string PqA5ImagePath { get; set; }
         public int? PqAnswer6Id { get; set; }
         public string PqAnswer6 { get; set; }
+        public int? PqA6LinkedQ1 { get; set; }
+        public int? PqA6LinkedQ2 { get; set; }
+        public int? PqA6Type { get; set; }
+        public int? PqA6SortOrder { get; set; }
+        public string PqA6ImagePath { get; set; }
         public long? Weightage { get; set; }
         public int? TotalItems { get; set; }
         public double? SqLeftImagePercentage { get; set; }
@@ -63,27 +93,87 @@ namespace SMD.Models.DomainModels
 
                 if (PqAnswer1Id.HasValue)
                 {
-                   answers.Add(new ProfileQuestionAnswer { PqAnswerId = PqAnswer1Id.Value, AnswerString = PqAnswer1, PqId = (int)ItemId }); 
+                    answers.Add(new ProfileQuestionAnswer
+                    {
+                        PqAnswerId = PqAnswer1Id.Value,
+                        AnswerString = PqAnswer1,
+                        PqId = (int)ItemId,
+                        LinkedQuestion1Id = PqA1LinkedQ1,
+                        LinkedQuestion2Id = PqA1LinkedQ2,
+                        Type = PqA1Type,
+                        SortOrder = PqA1SortOrder,
+                        ImagePath = PqA1ImagePath
+                    }); 
                 }
                 if (PqAnswer2Id.HasValue)
                 {
-                    answers.Add(new ProfileQuestionAnswer { PqAnswerId = PqAnswer2Id.Value, AnswerString = PqAnswer2, PqId = (int)ItemId });
+                    answers.Add(new ProfileQuestionAnswer
+                    {
+                        PqAnswerId = PqAnswer2Id.Value,
+                        AnswerString = PqAnswer2,
+                        PqId = (int)ItemId,
+                        LinkedQuestion1Id = PqA2LinkedQ1,
+                        LinkedQuestion2Id = PqA2LinkedQ2,
+                        Type = PqA2Type,
+                        SortOrder = PqA2SortOrder,
+                        ImagePath = PqA2ImagePath
+                    });
                 }
                 if (PqAnswer3Id.HasValue)
                 {
-                    answers.Add(new ProfileQuestionAnswer { PqAnswerId = PqAnswer3Id.Value, AnswerString = PqAnswer3, PqId = (int)ItemId });
+                    answers.Add(new ProfileQuestionAnswer
+                    {
+                        PqAnswerId = PqAnswer3Id.Value,
+                        AnswerString = PqAnswer3,
+                        PqId = (int)ItemId,
+                        LinkedQuestion1Id = PqA3LinkedQ1,
+                        LinkedQuestion2Id = PqA3LinkedQ2,
+                        Type = PqA3Type,
+                        SortOrder = PqA3SortOrder,
+                        ImagePath = PqA3ImagePath
+                    });
                 }
                 if (PqAnswer4Id.HasValue)
                 {
-                    answers.Add(new ProfileQuestionAnswer { PqAnswerId = PqAnswer4Id.Value, AnswerString = PqAnswer4, PqId = (int)ItemId });
+                    answers.Add(new ProfileQuestionAnswer
+                    {
+                        PqAnswerId = PqAnswer4Id.Value,
+                        AnswerString = PqAnswer4,
+                        PqId = (int)ItemId,
+                        LinkedQuestion1Id = PqA4LinkedQ1,
+                        LinkedQuestion2Id = PqA4LinkedQ2,
+                        Type = PqA4Type,
+                        SortOrder = PqA4SortOrder,
+                        ImagePath = PqA4ImagePath
+                    });
                 }
                 if (PqAnswer5Id.HasValue)
                 {
-                    answers.Add(new ProfileQuestionAnswer { PqAnswerId = PqAnswer5Id.Value, AnswerString = PqAnswer5, PqId = (int)ItemId });
+                    answers.Add(new ProfileQuestionAnswer
+                    {
+                        PqAnswerId = PqAnswer5Id.Value,
+                        AnswerString = PqAnswer5,
+                        PqId = (int)ItemId,
+                        LinkedQuestion1Id = PqA5LinkedQ1,
+                        LinkedQuestion2Id = PqA5LinkedQ2,
+                        Type = PqA5Type,
+                        SortOrder = PqA5SortOrder,
+                        ImagePath = PqA5ImagePath
+                    });
                 }
                 if (PqAnswer6Id.HasValue)
                 {
-                    answers.Add(new ProfileQuestionAnswer { PqAnswerId = PqAnswer6Id.Value, AnswerString = PqAnswer6, PqId = (int)ItemId });
+                    answers.Add(new ProfileQuestionAnswer
+                    {
+                        PqAnswerId = PqAnswer6Id.Value,
+                        AnswerString = PqAnswer6,
+                        PqId = (int)ItemId,
+                        LinkedQuestion1Id = PqA6LinkedQ1,
+                        LinkedQuestion2Id = PqA6LinkedQ2,
+                        Type = PqA6Type,
+                        SortOrder = PqA6SortOrder,
+                        ImagePath = PqA6ImagePath
+                    });
                 }
 
                 return answers;
