@@ -72,10 +72,7 @@ namespace SMD.MIS.Areas.Api.Models
         /// Contact Notes
         /// </summary>
         public string ContactNotes { get; set; }
-
-     
-       
-
+        
         /// <summary>
         /// Address 2
         /// </summary>
@@ -141,6 +138,11 @@ namespace SMD.MIS.Areas.Api.Models
         /// Goole Walet 
         /// </summary>
         public string GoogleVallet { get; set; }
+
+        /// <summary>
+        /// Account Balance
+        /// </summary>
+        public double? AccountBalance { get; set; }
 
     }
 }
