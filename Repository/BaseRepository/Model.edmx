@@ -531,6 +531,7 @@
           <Property Name="FromUser" Type="nvarchar" MaxLength="250" />
           <Property Name="ToUser" Type="nvarchar" MaxLength="250" />
           <Property Name="IsCompleted" Type="bit" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <Association Name="FK_Account_AspNetUsers">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
@@ -1200,18 +1201,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TransactionLog_TransactionLog1">
-          <End Role="TransactionLog" Type="Self.TransactionLog" Multiplicity="1" />
-          <End Role="TransactionLog1" Type="Self.TransactionLog" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="TransactionLog">
-              <PropertyRef Name="TransactionLogId" />
-            </Principal>
-            <Dependent Role="TransactionLog1">
-              <PropertyRef Name="TransactionLogId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Function Name="GetAds" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserID" Type="nvarchar" Mode="In" />
           <Parameter Name="FromRow" Type="int" Mode="In" />
@@ -1536,10 +1525,6 @@
           <AssociationSet Name="FK_TransactionLog_TransactionLog" Association="Self.FK_TransactionLog_TransactionLog">
             <End Role="Transaction" EntitySet="Transaction" />
             <End Role="TransactionLog" EntitySet="TransactionLog" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TransactionLog_TransactionLog1" Association="Self.FK_TransactionLog_TransactionLog1">
-            <End Role="TransactionLog" EntitySet="TransactionLog" />
-            <End Role="TransactionLog1" EntitySet="TransactionLog" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -1948,10 +1933,6 @@
           <AssociationSet Name="FK_TransactionLog_TransactionLog" Association="DomainModels.FK_TransactionLog_TransactionLog">
             <End Role="Transaction" EntitySet="Transactions" />
             <End Role="TransactionLog" EntitySet="TransactionLogs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TransactionLog_TransactionLog1" Association="DomainModels.FK_TransactionLog_TransactionLog1">
-            <End Role="TransactionLog" EntitySet="TransactionLogs" />
-            <End Role="TransactionLog1" EntitySet="TransactionLogs" />
           </AssociationSet>
           <FunctionImport Name="GetAudience" ReturnType="Collection(DomainModels.GetAudience_Result)">
             <Parameter Name="ageFrom" Mode="In" Type="Int32" />
@@ -3345,6 +3326,7 @@
           <Property Name="ToUser" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="IsCompleted" Type="Boolean" />
           <NavigationProperty Name="Transaction" Relationship="DomainModels.FK_TransactionLog_TransactionLog" FromRole="TransactionLog" ToRole="Transaction" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_TransactionLog_TransactionLog">
           <End Type="DomainModels.Transaction" Role="Transaction" Multiplicity="1" />
@@ -3355,18 +3337,6 @@
             </Principal>
             <Dependent Role="TransactionLog">
               <PropertyRef Name="TxId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TransactionLog_TransactionLog1">
-          <End Type="DomainModels.TransactionLog" Role="TransactionLog" Multiplicity="1" />
-          <End Type="DomainModels.TransactionLog" Role="TransactionLog1" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="TransactionLog">
-              <PropertyRef Name="TransactionLogId" />
-            </Principal>
-            <Dependent Role="TransactionLog1">
-              <PropertyRef Name="TransactionLogId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4036,6 +4006,7 @@
           <EntitySetMapping Name="TransactionLogs">
             <EntityTypeMapping TypeName="DomainModels.TransactionLog">
               <MappingFragment StoreEntitySet="TransactionLog">
+                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="IsCompleted" ColumnName="IsCompleted" />
                 <ScalarProperty Name="ToUser" ColumnName="ToUser" />
                 <ScalarProperty Name="FromUser" ColumnName="FromUser" />

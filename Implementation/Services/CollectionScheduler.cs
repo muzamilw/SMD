@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using FluentScheduler;
 using Microsoft.Practices.Unity;
@@ -9,7 +10,6 @@ using SMD.Models.DomainModels;
 using SMD.Models.IdentityModels;
 using SMD.Repository.BaseRepository;
 using System;
-using System.Transactions;
 using Transaction = SMD.Models.DomainModels.Transaction;
 
 namespace SMD.Implementation.Services
@@ -24,22 +24,24 @@ namespace SMD.Implementation.Services
 
         [Dependency]
         private static IStripeService StripeService { get; set; }
-        
+
         /// <summary>
         /// Updates Accounts
         /// </summary>
-        private static void UpdateAccounts(User user, Transaction transaction, BaseDbContext dbContext)
+        private static void UpdateAccounts(User user, double? amount, long adCampaignId, BaseDbContext dbContext)
         {
-            Account usersStripeAccount = user.Accounts.FirstOrDefault(acc => acc.AccountType == (int)AccountType.Stripe);
-            if (usersStripeAccount != null)
-            {
-                if (!usersStripeAccount.AccountBalance.HasValue)
-                {
-                    usersStripeAccount.AccountBalance = 0;
-                }
-                usersStripeAccount.AccountBalance -= transaction.DebitAmount;
-                transaction.Account.AccountBalance += transaction.DebitAmount;
-            }
+            // Debit Advertiser
+            UpdateUsersStripeAccount(user, amount, adCampaignId, dbContext, false);
+
+            // Credit Cash4Ads
+            UpdateCash4AdsStripeAccount(amount, adCampaignId, dbContext);
+        }
+
+        /// <summary>
+        /// Updates Cash4Ads Stripe Account and Adds Transaction for it
+        /// </summary>
+        private static void UpdateCash4AdsStripeAccount(double? amount, long adCampaignId, BaseDbContext dbContext)
+        {
             // Update Cash4Ads User Stripe Account
             var smdUser = dbContext.Users.FirstOrDefault(obj => obj.Email == SystemUsers.Cash4Ads);
             if (smdUser == null)
@@ -48,15 +50,133 @@ namespace SMD.Implementation.Services
                     "Cash4Ads"));
             }
 
-            Account smdUserStripeAccount = smdUser.Accounts.FirstOrDefault(acc => acc.AccountType == (int)AccountType.Stripe);
-            if (smdUserStripeAccount != null)
+            UpdateUsersStripeAccount(smdUser, amount, adCampaignId, dbContext);
+        }
+
+        /// <summary>
+        /// Updates Users Stripe Account and 
+        /// </summary>
+        private static void UpdateUsersStripeAccount(User user, double? amount, long adCampaignId,
+            BaseDbContext dbContext, bool isCredit = true)
+        {
+            Account usersStripeAccount = user.Accounts.FirstOrDefault(acc => acc.AccountType == (int)AccountType.Stripe);
+            if (usersStripeAccount != null)
             {
-                if (!smdUserStripeAccount.AccountBalance.HasValue)
+                if (!usersStripeAccount.AccountBalance.HasValue)
                 {
-                    smdUserStripeAccount.AccountBalance = 0;
+                    usersStripeAccount.AccountBalance = 0;
                 }
-                smdUserStripeAccount.AccountBalance += transaction.DebitAmount;
+                
+                var batchTransaction = new Transaction
+                                       {
+                                           AccountId = usersStripeAccount.AccountId,
+                                           Type = 1,
+                                           AdCampaignId = adCampaignId,
+                                           isProcessed = true,
+                                           TransactionDate = DateTime.Now
+                                       };
+
+                if (isCredit)
+                {
+                    batchTransaction.CreditAmount = amount;
+                    usersStripeAccount.AccountBalance += amount;
+                }
+                else
+                {
+                    batchTransaction.DebitAmount = amount;
+                    usersStripeAccount.AccountBalance -= amount;
+                }
+
+                usersStripeAccount.Transactions.Add(batchTransaction);
+                dbContext.Transactions.Add(batchTransaction);
             }
+        }
+
+        /// <summary>
+        /// Genereate Invoice
+        /// </summary>
+        private static void GenerateInvoice(User user, double? amount, BaseDbContext dbContext, List<InvoiceDetail> invoiceDetails)
+        {
+            string userCountry = user.Country != null ? user.Country.CountryName : string.Empty;
+
+            // Add invoice data
+            var invoice = new Invoice
+            {
+                Country = userCountry,
+                Total = amount ?? 0,
+                NetTotal = amount ?? 0,
+                InvoiceDate = DateTime.Now,
+                InvoiceDueDate = DateTime.Now.AddDays(7),
+                Address1 = user.Address1,
+                UserId = user.Id,
+                CompanyName = "Cash4Ads",
+                InvoiceDetails = new List<InvoiceDetail>()
+            };
+
+            dbContext.Invoices.Add(invoice);
+            invoiceDetails.ForEach(inv =>
+            {
+                dbContext.InvoiceDetails.Add(inv);
+                invoice.InvoiceDetails.Add(inv);
+            });
+        }
+
+        /// <summary>
+        /// Create Transaction Logs with Invoice Details
+        /// </summary>
+        private static void CreateTransactionLogWithInvoice(Transaction transaction, User user, BaseDbContext dbContext,
+            List<InvoiceDetail> invoiceDetails)
+        {
+            transaction.isProcessed = true;
+
+            #region Transaction Log
+
+            // Transaction log entery 
+            var transactionLog = new TransactionLog
+            {
+                Amount = transaction.DebitAmount ?? 0,
+                FromUser = user.Email,
+                Type = 2, // debit 
+                IsCompleted = true,
+                LogDate = DateTime.Now,
+                ToUser = "Cash4Ads",
+                TxId = transaction.TxId
+            };
+
+            dbContext.TransactionLogs.Add(transactionLog);
+            transaction.TransactionLogs.Add(transactionLog);
+
+            #endregion
+
+            // Add Invoice Detail 
+            var invoiceDetail = new InvoiceDetail
+            {
+                ItemName = "AdCampaign",
+                ItemAmount = transaction.DebitAmount ?? 0,
+                ItemTax = transaction.TaxValue ?? 0,
+                ItemDescription = "Ad Click",
+                ItemGrossAmount = transaction.DebitAmount ?? 0,
+                CampaignId = transaction.AdCampaignId
+            };
+            invoiceDetails.Add(invoiceDetail);
+        }
+
+        /// <summary>
+        /// Logs Error
+        /// </summary>
+        private static void LogError(Exception exp, string transactionFrom, string transactionTo, 
+            long transactionId, double amount, BaseDbContext dbContext)
+        {
+            dbContext.TransactionLogs.Add(new TransactionLog
+                                          {
+                                              TxId = transactionId, 
+                                              Description = exp.Message, 
+                                              LogDate = DateTime.Now, 
+                                              FromUser = transactionFrom,
+                                              ToUser = transactionTo,
+                                              Type = 2, // Debit
+                                              Amount = amount
+                                          });
         }
 
         #endregion
@@ -89,131 +209,97 @@ namespace SMD.Implementation.Services
                 var unProcessedTrasactions = dbContext.Transactions.Where(trans => trans.DebitAmount != null && trans.CreditAmount == null
                 && (trans.isProcessed == null || trans.isProcessed == false)).ToList();
 
-                foreach (var transaction in unProcessedTrasactions)
-                {
-                    if (transaction.AccountId != null)
-                    {
-                        // Get User from which credit to debit 
-                        var user = dbContext.Users.Find(transaction.Account.UserId);
-                        if (user == null)
-                        {
-                            throw new Exception(string.Format(CultureInfo.InvariantCulture, LanguageResources.CollectionService_UserNotFound,
-                                    transaction.Account.UserId));
-                        }
-                        // Secure Transation
-                        using (var tran = new TransactionScope())
-                        {
-                            string response = null;
+                // Get Distinct AdCampaign to process transactions
+                // in a batch for each adcampaign
+                List<long?> adCampaigns =
+                        unProcessedTrasactions
+                        .Select(trn => trn.AdCampaignId).Distinct().ToList();
 
-                            // If It is not System User then make transation 
-                            Boolean isSystemUser;
+                // Process transactions for each account
+                foreach (long? adCampaign in adCampaigns)
+                {
+                    // Get Distinct Accounts so that transactions 
+                    // for an account should be processed in a batch
+                    List<Account> accounts =
+                        unProcessedTrasactions
+                        .Where(trn => trn.AdCampaignId == adCampaign)
+                        .Select(trn => trn.Account).Distinct().ToList();
+
+                    // If It is not System User then make transation 
+                    Boolean isSystemUser = true;
+                    double? debitAmount = 0;
+                    foreach (Account account in accounts)
+                    {
+                        try
+                        {
+                            // Batch of transaction for this account and adcampaign
+                            List<Transaction> transactions =
+                            unProcessedTrasactions
+                            .Where(trn => trn.AccountId == account.AccountId && trn.AdCampaignId == adCampaign).ToList();
+
+                            debitAmount = transactions.Sum(trn => trn.DebitAmount);
+                            // Stripe charges in cents i.e. $1 = 100 cents minimum is $0.50
+                            double? chargeAmount = debitAmount.HasValue ? debitAmount * 100 : 0; 
+
+                            // Get User from which credit to debit 
+                            var user = dbContext.Users.Find(account.UserId);
+                            if (user == null)
+                            {
+                                throw new Exception(string.Format(CultureInfo.InvariantCulture,
+                                    LanguageResources.CollectionService_UserNotFound,
+                                    account.UserId));
+                            }
+
+                            string response = null;
                             if (user.Roles.Any(role => role.Name.ToLower().Equals("user")))
                             {
                                 if (string.IsNullOrEmpty(user.StripeCustomerId))
                                 {
                                     throw new Exception(string.Format(CultureInfo.InvariantCulture,
                                         LanguageResources.CollectionService_AccountNotRegistered,
-                                        transaction.Account.UserId, "Stripe"));
+                                        account.UserId, "Stripe"));
                                 }
 
-                                response = StripeService.ChargeCustomer((int?)transaction.DebitAmount, user.StripeCustomerId);
+                                response = StripeService.ChargeCustomer((int?)chargeAmount, user.StripeCustomerId);
                                 isSystemUser = false;
-                            }
-                            else
-                            {
-                                isSystemUser = true;
-                                transaction.TxId = 0; // No Transaction Made
                             }
                             // Stripe + Invoice Work 
                             if (isSystemUser || (response != "failed"))
                             {
                                 // Success
-                                transaction.isProcessed = true;
-
-                                #region Transaction Log
-                                // Transaction log entery 
-                                if (transaction.DebitAmount != null)
-                                {
-                                    var transactionLog = new TransactionLog
-                                                         {
-                                                             Amount = (double)transaction.DebitAmount,
-                                                             FromUser = user.Email,
-                                                             Type = 2, // debit 
-                                                             IsCompleted = true,
-                                                             LogDate = DateTime.Now,
-                                                             ToUser = "Cash4Ads",
-                                                             TxId = transaction.TxId
-                                                         };
-                                    dbContext.TransactionLogs.Add(transactionLog);
-                                }
-
-                                #endregion
-                                #region Add Invoice
-
-                                // Add invoice data
-                                if (transaction.DebitAmount != null)
-                                {
-                                    var invoice = new Invoice
-                                                  {
-                                                      Country = user.CountryId.ToString(),
-                                                      Total = (double)transaction.DebitAmount,
-                                                      NetTotal = (double)transaction.DebitAmount,
-                                                      InvoiceDate = DateTime.Now,
-                                                      InvoiceDueDate = DateTime.Now.AddDays(7),
-                                                      Address1 = user.CountryId.ToString(),
-                                                      UserId = user.Id,
-                                                      CompanyName = "Cash4Ads",
-                                                      CreditCardRef = response
-                                                  };
-                                    dbContext.Invoices.Add(invoice);
-
-                                    #region Add Invoice Detail
-
-                                    // Add Invoice Detail Data 
-                                    if (transaction.TaxValue != null)
-                                    {
-                                        var invoiceDetail = new InvoiceDetail
-                                                            {
-                                                                InvoiceId = invoice.InvoiceId,
-                                                                SqId = null,
-                                                                ProductId = null,
-                                                                ItemName = "Item from Scheduler",
-                                                                ItemAmount = (double)transaction.DebitAmount,
-                                                                ItemTax = (double)transaction.TaxValue,
-                                                                ItemDescription = "This is description!",
-                                                                ItemGrossAmount = (double)transaction.DebitAmount,
-                                                                CampaignId = transaction.AdCampaignId,
-
-                                                            };
-                                        dbContext.InvoiceDetails.Add(invoiceDetail);
-                                    }
-                                    #endregion
-                                }
-
-                                #endregion
+                                var invoiceDetails = new List<InvoiceDetail>();
+                                transactions.ForEach(transaction => CreateTransactionLogWithInvoice(transaction, user, dbContext, invoiceDetails));
 
                                 #region Update Accounts
 
                                 // Update User's Virtual and stripe account
-                                UpdateAccounts(user, transaction, dbContext);
+                                UpdateAccounts(user, debitAmount, adCampaign.Value, dbContext);
 
                                 #endregion
 
+                                // Generate Invoice
+                                #region Add Invoice
+
+                                GenerateInvoice(user, debitAmount, dbContext, invoiceDetails);
+
+                                #endregion
+                                
                                 if (!isSystemUser)
                                 {
                                     // Email To User 
                                     BackgroundEmailManagerService.SendCollectionRoutineEmail(dbContext, user.Id);
                                 }
-
-                                dbContext.SaveChanges();
                             }
-                            // Indicates we are happy
-                            tran.Complete();
-
                         }
+                        catch (Exception exp)
+                        {
+                            LogError(exp, account.AspNetUser.FullName,
+                                "Cash4Ads", account.Transactions.FirstOrDefault().TxId, debitAmount ?? 0, dbContext);
+                        }
+
+                        dbContext.SaveChanges();
                     }
                 }
-                dbContext.SaveChanges();
             }
         }
 

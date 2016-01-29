@@ -1,6 +1,9 @@
-﻿using System.Globalization;
+﻿using System.Diagnostics;
+using System.Globalization;
 using FluentScheduler;
+using Microsoft.Practices.EnterpriseLibrary.Logging;
 using Microsoft.Practices.Unity;
+using SMD.ExceptionHandling.Logger;
 using SMD.Implementation.Identity;
 using SMD.Interfaces.Services;
 using SMD.Models.Common;
@@ -109,6 +112,15 @@ namespace SMD.Implementation.Services
             }
         }
 
+        /// <summary>
+        /// Logs Error
+        /// </summary>
+        public static void LogError(Exception exp)
+        {
+            Logger.Write(exp.Message, SMDLogCategory.Error, -1, -1, TraceEventType.Warning, "", new Dictionary<string, object> {  
+                                    { "RequestContents", string.Empty } });
+        }
+
         #endregion
         #region Constructor
 
@@ -143,60 +155,65 @@ namespace SMD.Implementation.Services
 
                 foreach (var transaction in unProcessedTrasactions)
                 {
-                    if (transaction.AccountId != null)
+                    if (transaction.AccountId != null && !string.IsNullOrEmpty(transaction.Account.UserId))
                     {
-                        // Get User from which credit to debit 
-                        var user = dbContext.Users.Find(transaction.Account.UserId);
-
-                        // User's Prefered Account
-                        var preferedAccount = user.PreferredPayoutAccount == 1
-                            ? user.PaypalCustomerId
-                            : user.GoogleWalletCustomerId;
-
-                        var smdUser = GetCash4AdsUser(dbContext);
-
                         // Secure Transation
                         using (var tran = new TransactionScope())
                         {
-
-                            CheckAccounts(smdUser, preferedAccount, transaction);
-
-                            // PayPal Request Model 
-                            var requestModel = new MakePaypalPaymentRequest
+                            try
                             {
-                                Amount = (int?)transaction.CreditAmount,
-                                RecieverEmails = new List<string> { preferedAccount },
-                                SenderEmail = smdUser.PaypalCustomerId
-                            };
+                                // Get User from which credit to debit 
+                                var user = dbContext.Users.Find(transaction.Account.UserId);
 
-                            // Stripe + Invoice Work 
-                            PaypalService.MakeAdaptiveImplicitPayment(requestModel);
+                                // User's Prefered Account
+                                var preferedAccount = user.PreferredPayoutAccount == 1
+                                    ? user.PaypalCustomerId
+                                    : user.GoogleWalletCustomerId;
 
-                            transaction.isProcessed = true;
-                            // Transaction log entery 
-                            if (requestModel.Amount != null)
-                            {
-                                var transactionLog = new TransactionLog
-                                                     {
-                                                         Amount = (double)requestModel.Amount,
-                                                         FromUser = requestModel.SenderEmail,
-                                                         Type = 1, // credit 
-                                                         IsCompleted = true,
-                                                         LogDate = DateTime.Now,
-                                                         ToUser = requestModel.RecieverEmails.FirstOrDefault(),
-                                                         TxId = transaction.TxId
-                                                     };
-                                dbContext.TransactionLogs.Add(transactionLog);
+                                var smdUser = GetCash4AdsUser(dbContext);
+
+                                CheckAccounts(smdUser, preferedAccount, transaction);
+
+                                // PayPal Request Model 
+                                var requestModel = new MakePaypalPaymentRequest
+                                                   {
+                                                       Amount = (int?) transaction.CreditAmount,
+                                                       RecieverEmails = new List<string> {preferedAccount},
+                                                       SenderEmail = smdUser.PaypalCustomerId
+                                                   };
+
+                                // Stripe + Invoice Work 
+                                PaypalService.MakeAdaptiveImplicitPayment(requestModel);
+
+                                transaction.isProcessed = true;
+                                // Transaction log entery 
+                                if (requestModel.Amount != null)
+                                {
+                                    var transactionLog = new TransactionLog
+                                                         {
+                                                             Amount = (double) requestModel.Amount,
+                                                             FromUser = requestModel.SenderEmail,
+                                                             Type = 1, // credit 
+                                                             IsCompleted = true,
+                                                             LogDate = DateTime.Now,
+                                                             ToUser = requestModel.RecieverEmails.FirstOrDefault(),
+                                                             TxId = transaction.TxId
+                                                         };
+                                    dbContext.TransactionLogs.Add(transactionLog);
+                                }
+
+                                UpdateAccounts(transaction, user, smdUser);
+
+                                dbContext.SaveChanges();
+                                // Email To User 
+                                BackgroundEmailManagerService.SendPayOutRoutineEmail(dbContext, user.Id);
+                                // Indicates we are happy
+                                tran.Complete();
                             }
-
-                            UpdateAccounts(transaction, user, smdUser);
-
-                            dbContext.SaveChanges();
-                            // Email To User 
-                            BackgroundEmailManagerService.SendPayOutRoutineEmail(dbContext, user.Id);
-                            // Indicates we are happy
-                            tran.Complete();
-
+                            catch (Exception exp)
+                            {
+                                LogError(exp);
+                            }
                         }
                     }
                 }

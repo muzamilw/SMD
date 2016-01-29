@@ -47,6 +47,11 @@ namespace SMD.Models.DomainModels
         /// </summary>
         public Boolean IsCompleted { get; set; }
 
+        /// <summary>
+        /// Description if any
+        /// </summary>
+        public string Description { get; set; }
+
 
         public virtual Transaction Transaction { get; set; }
     }

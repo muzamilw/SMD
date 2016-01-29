@@ -3948,3 +3948,17 @@ END
 GO
 
 /* Added By Khurram (27 Jan 2016) - End */
+
+/* Added By Khurram (29 Jan 2016) - Start */
+
+GO
+
+alter table TransactionLog
+drop constraint FK_TransactionLog_TransactionLog1
+
+alter table TransactionLog
+add Description nvarchar(500)
+
+GO
+
+/* Added By Khurram (29 Jan 2016) - End */
