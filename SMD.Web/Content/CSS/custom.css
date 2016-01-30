@@ -364,3 +364,7 @@ a.reportAnchor a:hover {
 .font20 {
     font-size:20px;
 }
+.inlineMenuItem{
+       padding-left: 10px;
+    font-size: 12px;
+}

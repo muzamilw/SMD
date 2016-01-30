@@ -211,7 +211,8 @@ namespace SMD.MIS.ModelMappers
                     CurrencySymbol = source.CurrencySymbol,
                     Latitude = source.Latitude,
                     Longitude = source.Longitude,
-                    isStripeIntegrated = source.isStripeIntegrated
+                    isStripeIntegrated = source.isStripeIntegrated,
+                    isUserAddmin = source.isUserAdmin
                 };
             }
             else
