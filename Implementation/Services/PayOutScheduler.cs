@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System.Configuration;
+using System.Globalization;
 using FluentScheduler;
 using Microsoft.Practices.Unity;
 using SMD.Implementation.Identity;
@@ -246,6 +247,12 @@ namespace SMD.Implementation.Services
                             CheckAccounts(smdUser, preferedAccount, account);
 
                             creditAmount = transactions.Sum(trn => trn.CreditAmount);
+                            // Check if Payout amount has reached a limit e.g. $20 then process it.
+                            var payoutLimit = ConfigurationManager.AppSettings["PayoutLimit"];
+                            if (payoutLimit != null && creditAmount < Convert.ToDouble(payoutLimit))
+                            {
+                                continue;
+                            }
 
                             // PayPal Request Model 
                             var requestModel = new MakePaypalPaymentRequest
