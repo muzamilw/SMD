@@ -147,6 +147,14 @@ namespace SMD.MIS
                 new { controller = "Products" },
                 null,
                 null);
+
+            // Get Products (Ads, Surveys, Questions) Custom route
+            config.Routes.MapHttpRoute(
+                "UserBalanceInquiry",
+                "Balance/Inquire/{AuthenticationToken}/",
+                new { controller = "UserBalanceInquiry" },
+                null,
+                null);
         }
     }
 }

@@ -48,21 +48,43 @@ namespace SMD.MIS.Areas.Api.ModelMappers
                        EducationId = source.EducationId,
                        StripeId = source.StripeCustomerId,
                        GoogleVallet = source.GoogleWalletCustomerId,
-                       PayPal = source.PaypalCustomerId
+                       PayPal = source.PaypalCustomerId,
+                       AccountBalance = CreateFromForAccount(source)
                    };
 
+            return user;
+        }
+
+        /// <summary>
+        /// Create WebApi User from Domain Model
+        /// </summary>
+        public static UserBalanceInquiryResponse CreateFromForBalance(this LoginResponse source)
+        {
+            return new UserBalanceInquiryResponse
+            {
+                Status = source.Status,
+                Message = source.Message,
+                Balance = CreateFromForAccount(source.User)
+            };
+        }
+
+        /// <summary>
+        /// Create WebApi User from Domain Model
+        /// </summary>
+        public static double? CreateFromForAccount(this SMD.Models.IdentityModels.User source)
+        {
             if (source.Accounts == null || !source.Accounts.Any())
             {
-                return user;
+                return null;
             }
 
-            Account account = source.Accounts.FirstOrDefault(acc => acc.AccountType == (int) AccountType.VirtualAccount);
-            if (account != null)
+            Account account = source.Accounts.FirstOrDefault(acc => acc.AccountType == (int)AccountType.VirtualAccount);
+            if (account == null)
             {
-                user.AccountBalance = account.AccountBalance;
+                return null;
             }
 
-            return user;
+            return account.AccountBalance;
         }
 
         /// <summary>

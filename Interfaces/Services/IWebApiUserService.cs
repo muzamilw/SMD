@@ -11,6 +11,11 @@ namespace SMD.Interfaces.Services
     public interface IWebApiUserService
     {
         /// <summary>
+        /// Get User by Id
+        /// </summary>
+        Task<LoginResponse> GetById(string userId);
+
+        /// <summary>
         /// Resets User Responses for Ads, Surveys and Questions
         /// </summary>
         void ResetProductsResponses();

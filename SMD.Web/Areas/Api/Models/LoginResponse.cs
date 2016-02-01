@@ -1,17 +1,14 @@
 ﻿
 using System;
+using SMD.Models.ResponseModels;
 
 namespace SMD.MIS.Areas.Api.Models
 {
     /// <summary>
     /// Login Response WebApi Model
     /// </summary>
-    public class LoginResponse
+    public class LoginResponse : BaseApiResponse
     {
-        public bool Status { get; set; }
-
-        public string Message { get; set; }
-
         public WebApiUser User { get; set; }
 
         public Guid AuthenticationToken { get; set; }
