@@ -1,9 +1,6 @@
-﻿using System.Diagnostics;
-using System.Globalization;
+﻿using System.Globalization;
 using FluentScheduler;
-using Microsoft.Practices.EnterpriseLibrary.Logging;
 using Microsoft.Practices.Unity;
-using SMD.ExceptionHandling.Logger;
 using SMD.Implementation.Identity;
 using SMD.Interfaces.Services;
 using SMD.Models.Common;
@@ -14,7 +11,6 @@ using SMD.Repository.BaseRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Transactions;
 using Transaction = SMD.Models.DomainModels.Transaction;
 
 namespace SMD.Implementation.Services
@@ -25,7 +21,6 @@ namespace SMD.Implementation.Services
     public class PayOutScheduler
     {
         #region Private
-        // Properties 
 
         [Dependency]
         private static IPaypalService PaypalService { get; set; }
@@ -34,15 +29,28 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Updates User's and Cash4Ads Accounts
         /// </summary>
-        private static void UpdateAccounts(Transaction transaction, User user, User smdUser)
+        private static void UpdateAccounts(User user, User smdUser, double amount, 
+            long? adCampaignId, BaseDbContext dbContext)
         {
             // Update users virtual account and add to paypal account
-            Account usersPaypalAccount = user.Accounts.FirstOrDefault(acc => acc.AccountType == (int)AccountType.Paypal);
+            UpdateUsersPaypalAccount(user, amount, adCampaignId, dbContext);
+
+            // Update Cash4ads accounts
+            UpdateUsersPaypalAccount(smdUser, amount, adCampaignId, dbContext, false);
+        }
+
+        /// <summary>
+        /// Updates Users Paypal Account
+        /// </summary>
+        private static void UpdateUsersPaypalAccount(User user, double amount, long? adCampaignId,
+            BaseDbContext dbContext, bool isCredit = true)
+        {
+            Account usersPaypalAccount = user.Accounts.FirstOrDefault(acc => acc.AccountType == (int) AccountType.Paypal);
             if (usersPaypalAccount == null)
             {
                 throw new Exception(string.Format(CultureInfo.InvariantCulture,
                     LanguageResources.CollectionService_AccountNotRegistered,
-                    transaction.Account.UserId, "Paypal"));
+                    user.Id, "Paypal"));
             }
 
             if (!usersPaypalAccount.AccountBalance.HasValue)
@@ -50,27 +58,40 @@ namespace SMD.Implementation.Services
                 usersPaypalAccount.AccountBalance = 0;
             }
 
-            if (transaction.CreditAmount != null)
+            var batchTransaction = new Transaction
+                                   {
+                                       AccountId = usersPaypalAccount.AccountId,
+                                       Type = 1,
+                                       AdCampaignId = adCampaignId,
+                                       isProcessed = true,
+                                       TransactionDate = DateTime.Now,
+                                       TransactionLogs = new List<TransactionLog>
+                                                         {
+                                                             new TransactionLog
+                                                             {
+                                                                 IsCompleted = true, 
+                                                                 Amount = amount, 
+                                                                 FromUser = "Cash4Ads",
+                                                                 LogDate = DateTime.Now,
+                                                                 ToUser = user.FullName,
+                                                                 Type = isCredit ? 1 : 2
+                                                             }
+                                                         }
+                                   };
+
+            if (isCredit)
             {
-                usersPaypalAccount.AccountBalance += transaction.CreditAmount;
-                transaction.Account.AccountBalance -= transaction.CreditAmount;
-
-                // Update Cash4ads accounts
-                Account smdUsersPaypalAccount = smdUser.Accounts.FirstOrDefault(acc => acc.AccountType == (int)AccountType.Paypal);
-                if (smdUsersPaypalAccount == null)
-                {
-                    throw new Exception(string.Format(CultureInfo.InvariantCulture,
-                        LanguageResources.CollectionService_AccountNotRegistered,
-                        smdUser.Id, "Paypal"));
-                }
-
-                if (!smdUsersPaypalAccount.AccountBalance.HasValue)
-                {
-                    smdUsersPaypalAccount.AccountBalance = 0;
-                }
-
-                smdUsersPaypalAccount.AccountBalance -= transaction.CreditAmount;
+                batchTransaction.CreditAmount = amount;
+                usersPaypalAccount.AccountBalance += amount;
             }
+            else
+            {
+                batchTransaction.DebitAmount = amount;
+                usersPaypalAccount.AccountBalance -= amount;
+            }
+
+            usersPaypalAccount.Transactions.Add(batchTransaction);
+            dbContext.Transactions.Add(batchTransaction);
         }
 
         /// <summary>
@@ -93,7 +114,7 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Checks if accounts are registered
         /// </summary>
-        private static void CheckAccounts(User smdUser, string preferedAccount, Transaction transaction)
+        private static void CheckAccounts(User smdUser, string preferedAccount, Account account)
         {
             if (preferedAccount == null) throw new ArgumentNullException("preferedAccount");
 
@@ -108,17 +129,49 @@ namespace SMD.Implementation.Services
             {
                 throw new Exception(string.Format(CultureInfo.InvariantCulture,
                     LanguageResources.CollectionService_AccountNotRegistered,
-                    transaction.Account.UserId, "Paypal"));
+                    account.UserId, "Paypal"));
             }
+        }
+
+        /// <summary>
+        /// Updates Transactions
+        /// </summary>
+        private static void UpdateTransactions(Transaction tran, double? creditAmount, MakePaypalPaymentRequest requestModel,
+            BaseDbContext dbContext)
+        {
+            tran.isProcessed = true;
+
+            var transactionLog = new TransactionLog
+            {
+                Amount = creditAmount ?? 0,
+                FromUser = requestModel.SenderEmail,
+                Type = 1, // credit 
+                IsCompleted = true,
+                LogDate = DateTime.Now,
+                ToUser = requestModel.RecieverEmails.FirstOrDefault(),
+                TxId = tran.TxId
+            };
+
+            dbContext.TransactionLogs.Add(transactionLog);
+            tran.TransactionLogs.Add(transactionLog);
         }
 
         /// <summary>
         /// Logs Error
         /// </summary>
-        public static void LogError(Exception exp)
+        private static void LogError(Exception exp, string transactionFrom, string transactionTo,
+            long transactionId, double amount, BaseDbContext dbContext)
         {
-            Logger.Write(exp.Message, SMDLogCategory.Error, -1, -1, TraceEventType.Warning, "", new Dictionary<string, object> {  
-                                    { "RequestContents", string.Empty } });
+            dbContext.TransactionLogs.Add(new TransactionLog
+            {
+                TxId = transactionId,
+                Description = exp.Message,
+                LogDate = DateTime.Now,
+                FromUser = transactionFrom,
+                ToUser = transactionTo,
+                Type = 1, // Credit
+                Amount = amount
+            });
         }
 
         #endregion
@@ -153,74 +206,82 @@ namespace SMD.Implementation.Services
                     Where(trans => trans.DebitAmount == null && trans.CreditAmount != null
                 && (trans.isProcessed == null || trans.isProcessed == false)).ToList();
 
-                foreach (var transaction in unProcessedTrasactions)
+                // Get Distinct AdCampaign to process transactions
+                // in a batch for each adcampaign
+                List<long?> adCampaigns =
+                        unProcessedTrasactions
+                        .Select(trn => trn.AdCampaignId).Distinct().ToList();
+
+                // Process transactions for each account
+                foreach (long? adCampaign in adCampaigns)
                 {
-                    if (transaction.AccountId != null && !string.IsNullOrEmpty(transaction.Account.UserId))
+                    // Get Distinct Accounts so that transactions 
+                    // for an account should be processed in a batch
+                    List<Account> accounts =
+                        unProcessedTrasactions
+                            .Where(trn => trn.AdCampaignId == adCampaign)
+                            .Select(trn => trn.Account).Distinct().ToList();
+
+                    double? creditAmount = 0;
+                    User user = null;
+                    foreach (Account account in accounts)
                     {
-                        // Secure Transation
-                        using (var tran = new TransactionScope())
+                        try
                         {
-                            try
+                            // Batch of transaction for this account and adcampaign
+                            List<Transaction> transactions =
+                            unProcessedTrasactions
+                            .Where(trn => trn.AccountId == account.AccountId && trn.AdCampaignId == adCampaign).ToList();
+
+                            // Get User from which credit to debit 
+                            user = dbContext.Users.Find(account.UserId);
+
+                            // User's Prefered Account
+                            var preferedAccount = user.PreferredPayoutAccount == 1
+                                ? user.PaypalCustomerId
+                                : user.GoogleWalletCustomerId;
+
+                            var smdUser = GetCash4AdsUser(dbContext);
+
+                            CheckAccounts(smdUser, preferedAccount, account);
+
+                            creditAmount = transactions.Sum(trn => trn.CreditAmount);
+
+                            // PayPal Request Model 
+                            var requestModel = new MakePaypalPaymentRequest
                             {
-                                // Get User from which credit to debit 
-                                var user = dbContext.Users.Find(transaction.Account.UserId);
+                                Amount = (decimal)creditAmount,
+                                RecieverEmails = new List<string> { preferedAccount },
+                                SenderEmail = smdUser.PaypalCustomerId
+                            };
 
-                                // User's Prefered Account
-                                var preferedAccount = user.PreferredPayoutAccount == 1
-                                    ? user.PaypalCustomerId
-                                    : user.GoogleWalletCustomerId;
+                            // Stripe + Invoice Work 
+                            PaypalService.MakeAdaptiveImplicitPayment(requestModel);
 
-                                var smdUser = GetCash4AdsUser(dbContext);
+                            // Update Transactions
+                            transactions.ForEach(tran => UpdateTransactions(tran, creditAmount, requestModel, dbContext));
 
-                                CheckAccounts(smdUser, preferedAccount, transaction);
+                            // Update Accounts
+                            UpdateAccounts(user, smdUser, creditAmount.Value, adCampaign, dbContext);
 
-                                // PayPal Request Model 
-                                var requestModel = new MakePaypalPaymentRequest
-                                                   {
-                                                       Amount = (int?) transaction.CreditAmount,
-                                                       RecieverEmails = new List<string> {preferedAccount},
-                                                       SenderEmail = smdUser.PaypalCustomerId
-                                                   };
+                            // Save Changes
+                            dbContext.SaveChanges();
 
-                                // Stripe + Invoice Work 
-                                PaypalService.MakeAdaptiveImplicitPayment(requestModel);
+                            // Email To User 
+                            BackgroundEmailManagerService.SendPayOutRoutineEmail(dbContext, user.Id);
+                        }
+                        catch (Exception exp)
+                        {
 
-                                transaction.isProcessed = true;
-                                // Transaction log entery 
-                                if (requestModel.Amount != null)
-                                {
-                                    var transactionLog = new TransactionLog
-                                                         {
-                                                             Amount = (double) requestModel.Amount,
-                                                             FromUser = requestModel.SenderEmail,
-                                                             Type = 1, // credit 
-                                                             IsCompleted = true,
-                                                             LogDate = DateTime.Now,
-                                                             ToUser = requestModel.RecieverEmails.FirstOrDefault(),
-                                                             TxId = transaction.TxId
-                                                         };
-                                    dbContext.TransactionLogs.Add(transactionLog);
-                                }
-
-                                UpdateAccounts(transaction, user, smdUser);
-
-                                dbContext.SaveChanges();
-                                // Email To User 
-                                BackgroundEmailManagerService.SendPayOutRoutineEmail(dbContext, user.Id);
-                                // Indicates we are happy
-                                tran.Complete();
-                            }
-                            catch (Exception exp)
-                            {
-                                LogError(exp);
-                            }
+                            var transaction = account.Transactions.FirstOrDefault();
+                            LogError(exp, user != null ? user.FullName : string.Empty,
+                                "Cash4Ads", transaction != null ? transaction.TxId : 0, creditAmount.Value, dbContext);
                         }
                     }
                 }
-                dbContext.SaveChanges();
             }
         }
-
+        
         #endregion
     }
 }

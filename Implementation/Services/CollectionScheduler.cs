@@ -31,16 +31,16 @@ namespace SMD.Implementation.Services
         private static void UpdateAccounts(User user, double? amount, long adCampaignId, BaseDbContext dbContext)
         {
             // Debit Advertiser
-            UpdateUsersStripeAccount(user, amount, adCampaignId, dbContext, false);
+            UpdateUsersStripeAccount(user, user, amount, adCampaignId, dbContext, false);
 
             // Credit Cash4Ads
-            UpdateCash4AdsStripeAccount(amount, adCampaignId, dbContext);
+            UpdateCash4AdsStripeAccount(user, amount, adCampaignId, dbContext);
         }
 
         /// <summary>
         /// Updates Cash4Ads Stripe Account and Adds Transaction for it
         /// </summary>
-        private static void UpdateCash4AdsStripeAccount(double? amount, long adCampaignId, BaseDbContext dbContext)
+        private static void UpdateCash4AdsStripeAccount(User transactionUser, double? amount, long adCampaignId, BaseDbContext dbContext)
         {
             // Update Cash4Ads User Stripe Account
             var smdUser = dbContext.Users.FirstOrDefault(obj => obj.Email == SystemUsers.Cash4Ads);
@@ -50,13 +50,13 @@ namespace SMD.Implementation.Services
                     "Cash4Ads"));
             }
 
-            UpdateUsersStripeAccount(smdUser, amount, adCampaignId, dbContext);
+            UpdateUsersStripeAccount(smdUser, transactionUser, amount, adCampaignId, dbContext);
         }
 
         /// <summary>
         /// Updates Users Stripe Account and 
         /// </summary>
-        private static void UpdateUsersStripeAccount(User user, double? amount, long adCampaignId,
+        private static void UpdateUsersStripeAccount(User user, User transactionUser, double? amount, long adCampaignId,
             BaseDbContext dbContext, bool isCredit = true)
         {
             Account usersStripeAccount = user.Accounts.FirstOrDefault(acc => acc.AccountType == (int)AccountType.Stripe);
@@ -73,7 +73,19 @@ namespace SMD.Implementation.Services
                                            Type = 1,
                                            AdCampaignId = adCampaignId,
                                            isProcessed = true,
-                                           TransactionDate = DateTime.Now
+                                           TransactionDate = DateTime.Now,
+                                           TransactionLogs = new List<TransactionLog>
+                                                         {
+                                                             new TransactionLog
+                                                             {
+                                                                 IsCompleted = true, 
+                                                                 Amount = amount ?? 0, 
+                                                                 FromUser = transactionUser.FullName,
+                                                                 LogDate = DateTime.Now,
+                                                                 ToUser = user.FullName,
+                                                                 Type = isCredit ? 1 : 2
+                                                             }
+                                                         }
                                        };
 
                 if (isCredit)
