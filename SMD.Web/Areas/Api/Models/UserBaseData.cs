@@ -21,5 +21,6 @@ namespace SMD.MIS.Areas.Api.Models
         public bool isStripeIntegrated { get; set; }
         public string Latitude { get; set; }
         public string Longitude { get; set; }
+        public bool isUserAddmin { get; set; }
     }
 }

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets0B2D65924F937B56D9685E8CFB854CAED9FDA0D276C601607409508D8156BA6F))]
+[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets6F0F9BDC5903D9944B574F690D19C9BAA83B1D5732160DFCC55C6FFB23189225))]
 
 namespace Edm_EntityMappingGeneratedViews
 {
@@ -17,18 +17,18 @@ namespace Edm_EntityMappingGeneratedViews
     /// <Summary>
     /// The type contains views for EntitySets and AssociationSets that were generated at design time.
     /// </Summary>
-    public sealed class ViewsForBaseEntitySets0B2D65924F937B56D9685E8CFB854CAED9FDA0D276C601607409508D8156BA6F : System.Data.Mapping.EntityViewContainer
+    public sealed class ViewsForBaseEntitySets6F0F9BDC5903D9944B574F690D19C9BAA83B1D5732160DFCC55C6FFB23189225 : System.Data.Mapping.EntityViewContainer
     {
         
         /// <Summary>
         /// The constructor stores the views for the extents and also the hash values generated based on the metadata and mapping closure and views.
         /// </Summary>
-        public ViewsForBaseEntitySets0B2D65924F937B56D9685E8CFB854CAED9FDA0D276C601607409508D8156BA6F()
+        public ViewsForBaseEntitySets6F0F9BDC5903D9944B574F690D19C9BAA83B1D5732160DFCC55C6FFB23189225()
         {
             this.EdmEntityContainerName = "BaseDbContext";
             this.StoreEntityContainerName = "SMDModelStoreContainer";
-            this.HashOverMappingClosure = "098bffeff6fd066e84cb1e4d5d2a0fbb87f913c166a80e879cc27bfab8bfb77d";
-            this.HashOverAllExtentViews = "2515043940ad704b8300e2a7c7348020570fd6bcc06f0265e1fc6a433ac2d1bd";
+            this.HashOverMappingClosure = "ea28158c3103ad72d5cd64162e6660ddc94e19578d53bec109be063edd09d9ce";
+            this.HashOverAllExtentViews = "6b8c22eb755088eed894b2857a559694cc5f9a835a1baf3938bc51e61783bf06";
             this.ViewCount = 68;
         }
         
@@ -858,14 +858,14 @@ namespace Edm_EntityMappingGeneratedViews
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.Account", @"
     SELECT VALUE -- Constructing Account
-        [SMDModel.Store.Account](T1.Account_AccountId, T1.Account_AccountName, T1.Account_AccountType, T1.Account_AccountBalance, T1.Account_UserId)
+        [SMDModel.Store.Account](T1.Account_AccountId, T1.Account_AccountName, T1.Account_AccountType, T1.Account_UserId, T1.Account_AccountBalance)
     FROM (
         SELECT 
             T.AccountId AS Account_AccountId, 
             T.AccountName AS Account_AccountName, 
             T.AccountType AS Account_AccountType, 
-            T.AccountBalance AS Account_AccountBalance, 
             T.UserId AS Account_UserId, 
+            T.AccountBalance AS Account_AccountBalance, 
             True AS _from0
         FROM BaseDbContext.Accounts AS T
     ) AS T1");
@@ -1053,7 +1053,7 @@ namespace Edm_EntityMappingGeneratedViews
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.TransactionLog", @"
     SELECT VALUE -- Constructing TransactionLog
-        [SMDModel.Store.TransactionLog](T1.TransactionLog_TransactionLogId, T1.TransactionLog_TxId, T1.TransactionLog_LogDate, T1.TransactionLog_Amount, T1.TransactionLog_Type, T1.TransactionLog_FromUser, T1.TransactionLog_ToUser, T1.TransactionLog_IsCompleted)
+        [SMDModel.Store.TransactionLog](T1.TransactionLog_TransactionLogId, T1.TransactionLog_TxId, T1.TransactionLog_LogDate, T1.TransactionLog_Amount, T1.TransactionLog_Type, T1.TransactionLog_FromUser, T1.TransactionLog_ToUser, T1.TransactionLog_IsCompleted, T1.TransactionLog_Description)
     FROM (
         SELECT 
             T.TransactionLogId AS TransactionLog_TransactionLogId, 
@@ -1064,6 +1064,7 @@ namespace Edm_EntityMappingGeneratedViews
             T.FromUser AS TransactionLog_FromUser, 
             T.ToUser AS TransactionLog_ToUser, 
             T.IsCompleted AS TransactionLog_IsCompleted, 
+            T.Description AS TransactionLog_Description, 
             True AS _from0
         FROM BaseDbContext.TransactionLogs AS T
     ) AS T1");
@@ -1823,7 +1824,7 @@ namespace Edm_EntityMappingGeneratedViews
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.TransactionLogs", @"
     SELECT VALUE -- Constructing TransactionLogs
-        [DomainModels.TransactionLog](T1.TransactionLog_TransactionLogId, T1.TransactionLog_TxId, T1.TransactionLog_LogDate, T1.TransactionLog_Amount, T1.TransactionLog_Type, T1.TransactionLog_FromUser, T1.TransactionLog_ToUser, T1.TransactionLog_IsCompleted)
+        [DomainModels.TransactionLog](T1.TransactionLog_TransactionLogId, T1.TransactionLog_TxId, T1.TransactionLog_LogDate, T1.TransactionLog_Amount, T1.TransactionLog_Type, T1.TransactionLog_FromUser, T1.TransactionLog_ToUser, T1.TransactionLog_IsCompleted, T1.TransactionLog_Description)
     FROM (
         SELECT 
             T.TransactionLogId AS TransactionLog_TransactionLogId, 
@@ -1834,6 +1835,7 @@ namespace Edm_EntityMappingGeneratedViews
             T.FromUser AS TransactionLog_FromUser, 
             T.ToUser AS TransactionLog_ToUser, 
             T.IsCompleted AS TransactionLog_IsCompleted, 
+            T.Description AS TransactionLog_Description, 
             True AS _from0
         FROM SMDModelStoreContainer.TransactionLog AS T
     ) AS T1");

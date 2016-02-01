@@ -30,6 +30,6 @@ namespace SMD.MIS.Areas.Api.Models
         public double? SqLeftImagePercentage { get; set; }
         public double? SqRightImagePercentage { get; set; }
         public string AdvertisersLogoPath { get; set; }
-        public List<ProfileQuestionAnswerDropdown> PqAnswers { get; set; }
+        public List<ProfileQuestionAnswerView> PqAnswers { get; set; }
     }
 }

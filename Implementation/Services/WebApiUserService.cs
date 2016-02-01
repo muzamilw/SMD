@@ -40,7 +40,6 @@ namespace SMD.Implementation.Services
         private readonly IProductRepository productRepository;
         private readonly ITaxRepository taxRepository;
         private readonly ICountryRepository countryRepository;
-        private readonly ICityRepository cityRepository;
         private readonly IIndustryRepository industryRepository;
         private readonly IEducationRepository educationRepository;
 
@@ -113,12 +112,12 @@ namespace SMD.Implementation.Services
             if (isCredit)
             {
                 transaction.CreditAmount = transactionAmount;
-                account.AccountBalance += Convert.ToDecimal(transactionAmount);
+                account.AccountBalance += transactionAmount;
             }
             else
             {
                 transaction.DebitAmount = transactionAmount;
-                account.AccountBalance -= Convert.ToDecimal(transactionAmount);
+                account.AccountBalance -= transactionAmount;
             }
 
             // Add Transcation to repository
@@ -162,7 +161,7 @@ namespace SMD.Implementation.Services
             
             // Credit SMD
             transactionSequence += 1;
-            PerformTransaction(request.AdCampaignId, null, smdAccount, smdsCut, transactionSequence, TransactionType.AdClick);
+            PerformTransaction(request.AdCampaignId, null, smdAccount, smdsCut, transactionSequence, TransactionType.AdClick, true, true);
 
             // Update AdCampaign Amount Spent
             if (!adCampaign.AmountSpent.HasValue)
@@ -213,21 +212,21 @@ namespace SMD.Implementation.Services
         {
 
             // Get business Accounts for Each Individual involved in this transaction
-            adViewersAccount = accountRepository.GetByUserId(request.UserId);
+            adViewersAccount = accountRepository.GetByUserId(request.UserId, AccountType.VirtualAccount);
             if (adViewersAccount == null)
             {
                 throw new SMDException(string.Format(CultureInfo.InvariantCulture,
                     LanguageResources.WebApiUserService_AccountNotFound, "Current User"));
             }
 
-            advertisersAccount = accountRepository.GetByUserId(adCampaign.UserId);
+            advertisersAccount = accountRepository.GetByUserId(adCampaign.UserId, AccountType.VirtualAccount);
             if (advertisersAccount == null)
             {
                 throw new SMDException(string.Format(CultureInfo.InvariantCulture,
                     LanguageResources.WebApiUserService_AccountNotFound, "Advertiser"));
             }
 
-            smdAccount = accountRepository.GetByUserId(systemUserId);
+            smdAccount = accountRepository.GetByUserId(systemUserId, AccountType.VirtualAccount);
             if (smdAccount == null)
             {
                 throw new SMDException(string.Format(CultureInfo.InvariantCulture,
@@ -307,14 +306,14 @@ namespace SMD.Implementation.Services
         private void SetupSurveyApproveTransaction(SurveyQuestion surveyQuestion, out Account advertisersAccount, out Account smdAccount, 
             string systemUserId)
         {
-            advertisersAccount = accountRepository.GetByUserId(surveyQuestion.UserId);
+            advertisersAccount = accountRepository.GetByUserId(surveyQuestion.UserId, AccountType.VirtualAccount);
             if (advertisersAccount == null)
             {
                 throw new SMDException(string.Format(CultureInfo.InvariantCulture,
                     LanguageResources.WebApiUserService_AccountNotFound, "Advertiser"));
             }
 
-            smdAccount = accountRepository.GetByUserId(systemUserId);
+            smdAccount = accountRepository.GetByUserId(systemUserId, AccountType.VirtualAccount);
             if (smdAccount == null)
             {
                 throw new SMDException(string.Format(CultureInfo.InvariantCulture,
@@ -338,7 +337,7 @@ namespace SMD.Implementation.Services
 
             // Credit SMD
             transactionSequence += 1;
-            PerformTransaction(null, request.SurveyQuestionId, smdAccount, smdsCut, transactionSequence, TransactionType.ApproveSurvey);
+            PerformTransaction(null, request.SurveyQuestionId, smdAccount, smdsCut, transactionSequence, TransactionType.ApproveSurvey, true, true);
 
             // Add Invoice Details
             AddInvoiceDetails(surveyQuestion, amount, request.StripeResponse, productId, taxValue, isApiCall);
@@ -405,6 +404,7 @@ namespace SMD.Implementation.Services
         }
         #endregion
 
+
         /// <summary>
         /// Logs in user to system
         /// </summary>
@@ -433,9 +433,7 @@ namespace SMD.Implementation.Services
             user.ProfileImage = ImageHelper.Save(mapPath, user.ProfileImage, string.Empty, request.ProfileImageName,
                 request.ProfileImage, request.ProfileImageBytes);
         }
-
-        #endregion
-
+        
         #region Product Response Actions
 
         /// <summary>
@@ -642,6 +640,8 @@ namespace SMD.Implementation.Services
 
         #endregion
 
+        #endregion
+
         #region Constructor
 
         /// <summary>
@@ -652,7 +652,7 @@ namespace SMD.Implementation.Services
             ISurveyQuestionRepository surveyQuestionRepository, IInvoiceRepository invoiceRepository,
             IInvoiceDetailRepository invoiceDetailRepository, IProductRepository productRepository,
             ITaxRepository taxRepository, IProfileQuestionUserAnswerService profileQuestionAnswerService,
-            ICountryRepository countryRepository, ICityRepository cityRepository, IIndustryRepository industryRepository,
+            ICountryRepository countryRepository, IIndustryRepository industryRepository,
             IProfileQuestionService profileQuestionService, IAdCampaignResponseRepository adCampaignResponseRepository,
             ISurveyQuestionResponseRepository surveyQuestionResponseRepository, IEducationRepository educationRepository)
         {
@@ -711,7 +711,6 @@ namespace SMD.Implementation.Services
             this.productRepository = productRepository;
             this.taxRepository = taxRepository;
             this.countryRepository = countryRepository;
-            this.cityRepository = cityRepository;
             this.industryRepository = industryRepository;
             this.profileQuestionAnswerService = profileQuestionAnswerService;
             this.profileQuestionService = profileQuestionService;
@@ -812,7 +811,7 @@ namespace SMD.Implementation.Services
                     throw new SMDException(LanguageResources.WebApiUserService_ReferrerNotFound);
                 }
 
-                affiliatesAccount = accountRepository.GetByUserId(adViewer.ReferringUserId);
+                affiliatesAccount = accountRepository.GetByUserId(adViewer.ReferringUserId, AccountType.VirtualAccount);
                 if (affiliatesAccount == null)
                 {
                     throw new SMDException(string.Format(CultureInfo.InvariantCulture,
@@ -1304,7 +1303,6 @@ namespace SMD.Implementation.Services
         {
             return new UserProfileBaseResponseModel
             {
-               Cities = cityRepository.GetAllCities().ToList(),
                Countries = countryRepository.GetAllCountries().ToList(),
                Industries = industryRepository.GetAll().ToList(),
                Educations = educationRepository.GetAllEducations().ToList()

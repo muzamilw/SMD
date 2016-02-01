@@ -41,9 +41,9 @@ namespace SMD.MIS.Areas.Api.ModelMappers
                        SqRightImagePath = source.SqRightImagePath,
                        SqLeftImagePercentage = source.SqLeftImagePercentage,
                        SqRightImagePercentage = source.SqRightImagePercentage,
-                       AdvertisersLogoPath = source.AdvertisersLogoPath, 
-                       PqAnswers = source.PqAnswers != null ? source.PqAnswers.Select(pqa => pqa.CreateFromDropdown()).ToList() : 
-                       new List<ProfileQuestionAnswerDropdown>()
+                       AdvertisersLogoPath = source.AdvertisersLogoPath,
+                       PqAnswers = source.PqAnswers != null ? source.PqAnswers.Select(pqa => pqa.CreateFromForProduct()).ToList() : 
+                       new List<ProfileQuestionAnswerView>()
                    };
         }
 

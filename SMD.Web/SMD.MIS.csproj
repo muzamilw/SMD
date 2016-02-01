@@ -379,11 +379,13 @@
     <Compile Include="Areas\Api\ApiAreaRegistration.cs" />
     <Compile Include="Areas\Api\Controllers\AdCampaignBaseController.cs" />
     <Compile Include="Areas\Api\Controllers\ApproveSurveyController.cs" />
+    <Compile Include="Areas\Api\Controllers\PayoutController.cs" />
     <Compile Include="Areas\Api\Controllers\CreateStripeCustomerController.cs" />
     <Compile Include="Areas\Api\Controllers\CampaignController.cs" />
     <Compile Include="Areas\Api\Controllers\ChargeCustomerController.cs" />
     <Compile Include="Areas\Api\Controllers\ConfirmEmailController.cs" />
     <Compile Include="Areas\Api\Controllers\ArchiveUserAccountController.cs" />
+    <Compile Include="Areas\Api\Controllers\CollectionController.cs" />
     <Compile Include="Areas\Api\Controllers\ResetProductsController.cs" />
     <Compile Include="Areas\Api\Controllers\GetProductsController.cs" />
     <Compile Include="Areas\Api\Controllers\GetAudienceAdCampaignForApiController.cs" />
@@ -440,6 +442,7 @@
     <Compile Include="Areas\Api\Models\LoginResponse.cs" />
     <Compile Include="Areas\Api\Models\ProductView.cs" />
     <Compile Include="Areas\Api\Models\ProductViewResponse.cs" />
+    <Compile Include="Areas\Api\Models\ProfileQuestionAnswerView.cs" />
     <Compile Include="Areas\Api\Models\SurveyForApiSearchResponse.cs" />
     <Compile Include="Areas\Api\Models\LocationDropDown.cs" />
     <Compile Include="Areas\Api\Models\ProfileQuestionAnswerApiModel.cs" />
@@ -922,6 +925,7 @@
     <Content Include="Images\Cash4ads_logo.png" />
     <Content Include="Images\Cash4Ads_White_pink.png" />
     <Content Include="Images\Cash4Ads_White_text.png" />
+    <Content Include="Images\guru.png" />
     <Content Include="Images\heroAccent.png" />
     <Content Include="Images\orderedList0.png" />
     <Content Include="Images\orderedList1.png" />
