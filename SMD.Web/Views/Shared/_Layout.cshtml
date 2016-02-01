@@ -63,9 +63,9 @@
                         <li>
                             @if (!User.IsInRole("User"))
                             { 
-                                <a class="btn" id="make-small-nav">
+                                @*<a class="btn" id="make-small-nav">
                                     <i class="fa fa-bars"></i>
-                                </a>
+                                </a>*@
                             }
                             else
                             {
@@ -87,46 +87,19 @@
                                 </div>
                             </a>
                             <ul class="dropdown-menu">
-                                <li id="listores">
-                                    <a href="~/Ads/Ads/Index" class="my-navigator">
-                                     
-                                        <span>View all Ad campaigns</span>
-                                    </a>
-                                </li>
-                                <li id="licrm">
-                                    <a href="~/survey" class="my-navigator">
-                                       
-                                        <span>View all Survey Questions </span>
-                                    </a>
-                                </li>
-                                <li id="listores">
-                                    <a href="~/Ads/Ads/AddAproval" class="my-navigator">
-                                       
-                                        <span>Approve User Ad campaigns</span>
-                                    </a>
-                                </li>
-                                <li id="listores">
-                                    <a href="~/Survey/SurveyQuestionApproval" class="my-navigator">
-                                     
-                                        <span>Approve user surveys</span>
-                                    </a>
-                                </li>
+                                <li><a href="">Approve/Reject </a></li>
+                                <li class="inlineMenuItem"><a href="~/Ads/Ads/AddAproval">&nbsp;&nbsp; Ad Campaigns</a></li>
+                                <li class="inlineMenuItem"><a href="~/Survey/SurveyQuestionApproval">&nbsp;&nbsp;User Suvey Slides</a></li>
 
-                                <li id="lidashboard">
-                                    <a href="~/ProfileQuestion/Manage/Index" class="my-navigator" id="anchor-dashboard">
-                                      
-                                        <span>Modify System Profile Questions</span>
-                                    </a>
+                                <li><a href="">Edit</a></li>
+                                <li class="inlineMenuItem"><a href="~/ProfileQuestion/Manage/Index">&nbsp;&nbsp;Profile Questions</a></li>
+                                <li class="inlineMenuItem"><a href="~/survey">&nbsp;&nbsp;Survey Questions</a></li>
 
-                                </li>
-                               
-                                
-                                <li id="listores">
-                                    <a href="~/Billing/Manage/Invoice" class="my-navigator">
-                                       
-                                        <span>View Billing history </span>
-                                    </a>
-                                </li>
+                                <li><a href="">View</a></li>
+                                <li class="inlineMenuItem"><a href="~/Ads/Ads/Index">&nbsp;&nbsp;All Live Ad Campaigns</a></li>
+                                <li class="inlineMenuItem"><a href="~/survey">&nbsp;&nbsp;All Live Survey Slides</a></li>
+
+                                <li><a href="~/Billing/Manage/Invoice">Reports and Analytics</a></li>
                             </ul>
                         </li>
                         <li class="dropdown profile-dropdown">
@@ -142,9 +115,18 @@
                                 </div>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="~/User/ManageUser/Index">My Business Profile</a></li>
-                                <li id="licrm"><a href="~/survey" class="my-navigator">My Survey Questions</a> </li>
-                                <li><a href="~/Billing/Manage/Invoice" >View Billing History </a></li>
+                                <li><a href="~/User/ManageUser/Index">Edit my marketing profile/logo</a></li>
+                                <li><a href="">Ad Campaigns</a></li>
+                                <li class="inlineMenuItem"><a href="~/Ads/Ads">&nbsp;&nbsp;Create Ad Campaigns</a></li>
+                                <li class="inlineMenuItem"><a href="~/Ads/Ads">&nbsp;&nbsp;View Ad Campaigns</a></li>
+                                <li><a href="">Survey Slides</a></li>
+                                <li class="inlineMenuItem"><a href="~/survey">&nbsp;&nbsp;Create Survey Slides</a></li>
+                                <li class="inlineMenuItem"><a href="~/survey">&nbsp;&nbsp;View Survey Slides</a></li>
+
+                                <li><a href="">Billing</a></li>
+                                <li class="inlineMenuItem"><a href="~/Billing/Manage/Invoice">&nbsp;&nbsp;View Statements </a></li>
+                                <li class="inlineMenuItem"><a href="">&nbsp;&nbsp;Payment Methods</a></li>
+                                <li class="inlineMenuItem"><a href="">&nbsp;&nbsp;Delete My Account</a></li>
                                 <li><a href="~/Account/LogOff"><i class="fa fa-power-off"></i>Logout</a></li>
                             </ul>
                         </li>

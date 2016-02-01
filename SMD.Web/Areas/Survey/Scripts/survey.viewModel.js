@@ -275,7 +275,11 @@ define("survey/survey.viewModel",
                                        buildMap();
                                        isEditorVisible(true);
                                        if (item.Status() != 1 && item.Status() != 6 && item.Status() != null) {
-                                           disableControls(item.Status());
+                                           if (userBaseData().isUserAddmin == true) {
+                                           } else {
+                                               disableControls(item.Status());
+                                           }
+                                          
                                        }
                                      //  getParentSurveyList();
                                    },

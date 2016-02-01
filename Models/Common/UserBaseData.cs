@@ -22,5 +22,6 @@ namespace SMD.Models.Common
         public bool isStripeIntegrated { get; set; }
         public string Latitude { get; set; }
         public string Longitude { get; set; }
+        public bool isUserAdmin { get; set; }
     }
 }

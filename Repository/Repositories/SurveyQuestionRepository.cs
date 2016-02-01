@@ -56,15 +56,29 @@ namespace SMD.Repository.Repositories
         /// </summary>
         public IEnumerable<SurveyQuestion> SearchSurveyQuestions(SurveySearchRequest request, out int rowCount)
         {
+            bool isAdmin = false;
+            var users = db.Users.Where(g => g.Id == LoggedInUserIdentity).SingleOrDefault();
+            if (users.Roles.FirstOrDefault().Name == Roles.Adminstrator)
+                isAdmin = true;
             if (request == null)
             {
                 int fromRow = 0;
                 int toRow = 10;
                 rowCount = DbSet.Count();
-                return DbSet.Where(g=>g.UserId == LoggedInUserIdentity).OrderBy(g => g.SqId)
+                if (isAdmin)
+                {
+                    return DbSet.OrderBy(g => g.SqId)
                         .Skip(fromRow)
                         .Take(toRow)
                         .ToList();
+                }
+                else
+                {
+                    return DbSet.Where(g => g.UserId == LoggedInUserIdentity).OrderBy(g => g.SqId)
+                            .Skip(fromRow)
+                            .Take(toRow)
+                            .ToList();
+                }
             }
             else
             {
@@ -74,8 +88,8 @@ namespace SMD.Repository.Repositories
                     question =>
                         (string.IsNullOrEmpty(request.SearchText) ||
                          (question.Question.Contains(request.SearchText)))
-                         && (request.CountryFilter == 0 ||  question.CountryId == request.CountryFilter) 
-                         &&( question.UserId == LoggedInUserIdentity)
+                         && (request.CountryFilter == 0 ||  question.CountryId == request.CountryFilter)
+                         && (isAdmin || question.UserId == LoggedInUserIdentity)
                          && (request.LanguageFilter == 0 || question.LanguageId == request.LanguageFilter)
                          && (request.Status == 0 || question.Status == request.Status);
 
@@ -177,7 +191,9 @@ namespace SMD.Repository.Repositories
             var usr = db.Users.Where(g => g.Id == LoggedInUserIdentity).SingleOrDefault();
             if(usr!= null)
             {
-                
+                bool isAdmin = false;
+                if (usr.Roles.FirstOrDefault().Name == Roles.Adminstrator)
+                    isAdmin = true;
                 var country = 
                  data.CityId = usr.CityId;
                  data.CountryId = usr.CountryId;
@@ -192,6 +208,7 @@ namespace SMD.Repository.Repositories
                  data.isStripeIntegrated = String.IsNullOrEmpty(usr.StripeCustomerId) == true ? false : true;
                  data.Latitude = usr.City != null ? usr.City.GeoLat : "";
                  data.Longitude = usr.City != null ? usr.City.GeoLong : "";
+                 data.isUserAdmin = isAdmin;
             }
 
             return data;
