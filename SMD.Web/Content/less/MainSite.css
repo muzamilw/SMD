@@ -261,11 +261,12 @@ i.img {
 }
 .aud_cnt {
   width: 270px;
-  background: #f3f3f3;
+  background: #6B6AFE;
   padding: 10px;
   border: 5px;
-  /*position: fixed;*/
+  /* position: fixed; */
   top: 200px;
+  color: white;
 }
 .fsm_bold {
   font-size: 10px;
@@ -436,6 +437,12 @@ ul {
 .text-campaign-left {
   text-align: left !important;
   padding-left: 0px !important;
+}
+#btnSubmitForApproval {
+  width: 100%;
+  display: inline-block;
+  margin-bottom: 10px;
+  height: 45px;
 }
 .lang_newcnt {
   position: relative;
