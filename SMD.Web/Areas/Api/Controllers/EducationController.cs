@@ -1,18 +1,18 @@
-﻿using SMD.Interfaces.Services;
-using System;
+﻿using System.Web;
+using SMD.Interfaces.Services;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using SMD.MIS.ModelMappers;
+using SMD.WebBase.Mvc;
 
 namespace SMD.MIS.Areas.Api.Controllers
 {
     public class EducationController : ApiController
     {
             #region Public
-        private readonly IEducationService _educationService;
+        private readonly IEducationService educationService;
         #endregion
         #region Constructor
         /// <summary>
@@ -20,7 +20,7 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// </summary>
         public EducationController(IEducationService educationService)
         {
-            _educationService = educationService;
+            this.educationService = educationService;
         }
 
         #endregion
@@ -29,9 +29,15 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// <summary>
         /// Get Profile Questions
         /// </summary>
-        public IEnumerable<SMD.MIS.Areas.Api.Models.Education> Get()
+        [ApiExceptionCustom]
+        public IEnumerable<Models.Education> Get(string authenticationToken)
         {
-            return _educationService.GetEducationsList().Select(lang => lang.CreateFrom());
+            if (string.IsNullOrEmpty(authenticationToken))
+            {
+                throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
+            }
+
+            return educationService.GetEducationsList().Select(lang => lang.CreateFrom());
         }
 
 

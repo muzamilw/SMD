@@ -1,20 +1,18 @@
-﻿using SMD.Interfaces.Services;
-using SMD.Models.DomainModels;
-using System;
+﻿using System.Web;
+using SMD.Interfaces.Services;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using SMD.MIS.ModelMappers;
-using SMD.MIS.Areas.Api.Models;
+using SMD.WebBase.Mvc;
 
 namespace SMD.MIS.Areas.Api.Controllers
 {
     public class IndustryController : ApiController
     {
           #region Public
-        private readonly IIndustryService _industryService;
+        private readonly IIndustryService industryService;
         #endregion
         #region Constructor
         /// <summary>
@@ -22,7 +20,7 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// </summary>
         public IndustryController(IIndustryService industryService)
         {
-            _industryService = industryService;
+            this.industryService = industryService;
         }
 
         #endregion
@@ -31,9 +29,15 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// <summary>
         /// Get Profile Questions
         /// </summary>
-        public IEnumerable<SMD.MIS.Areas.Api.Models.Industry> Get()
+        [ApiExceptionCustom]
+        public IEnumerable<Models.Industry> Get(string authenticationToken)
         {
-            return _industryService.GetIndustryList().Select(lang => lang.CreateFrom());
+            if (string.IsNullOrEmpty(authenticationToken))
+            {
+                throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
+            }
+
+            return industryService.GetIndustryList().Select(lang => lang.CreateFrom());
         }
 
 
