@@ -20,6 +20,6 @@ namespace SMD.Models.RequestModels
         /// <summary>
         /// Amount
         /// </summary>
-        public int? Amount { get; set; }
+        public decimal? Amount { get; set; }
     }
 }

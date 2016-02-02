@@ -175,6 +175,7 @@
     </Compile>
     <Compile Include="Common\CampaignGridModel.cs" />
     <Compile Include="RequestModels\AdCampaignSearchRequest.cs" />
+    <Compile Include="RequestModels\UserBalanceInquiryRequest.cs" />
     <Compile Include="RequestModels\ProductActionRequest.cs" />
     <Compile Include="RequestModels\ApproveSurveyRequest.cs" />
     <Compile Include="RequestModels\GetAdsApiRequest.cs" />
@@ -203,6 +204,7 @@
     <Compile Include="ResponseModels\BaseApiResponse.cs" />
     <Compile Include="ResponseModels\GetProductsResponse.cs" />
     <Compile Include="ResponseModels\InvoiceSearchRequestResponse.cs" />
+    <Compile Include="ResponseModels\UserBalanceInquiryResponse.cs" />
     <Compile Include="ResponseModels\UpdateProfileImageResponse.cs" />
     <Compile Include="ResponseModels\LoginResponse.cs" />
     <Compile Include="ResponseModels\SurveyForApiSearchResponse.cs" />

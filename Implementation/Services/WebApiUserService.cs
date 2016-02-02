@@ -894,6 +894,25 @@ namespace SMD.Implementation.Services
         #region Other
 
         /// <summary>
+        /// Get User By Id Async
+        /// </summary>
+        public async Task<LoginResponse> GetById(string userId)
+        {
+            User user = await UserManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                throw new SMDException(LanguageResources.WebApiUserService_InvalidUserId);
+            }
+
+            return new LoginResponse
+                   {
+                       Status = true,
+                       Message = LanguageResources.Success,
+                       User = user
+                   };
+        }
+
+        /// <summary>
         /// Resets User Responses for Products
         /// </summary>
         public void ResetProductsResponses()
