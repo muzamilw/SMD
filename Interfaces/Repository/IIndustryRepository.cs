@@ -1,9 +1,5 @@
 ﻿using SMD.Models.DomainModels;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SMD.Interfaces.Repository
 {
@@ -13,6 +9,11 @@ namespace SMD.Interfaces.Repository
         /// Search Invoces for LV
         /// </summary>
         IEnumerable<Industry> SearchIndustries(string input);
+
+        /// <summary>
+        /// Get All Active ones
+        /// </summary>
+        IEnumerable<Industry> GetAllAvailable();
     }
 
 

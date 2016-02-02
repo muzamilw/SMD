@@ -1,4 +1,7 @@
 ﻿
+using System.Collections.Generic;
+using SMD.Models.ResponseModels;
+
 namespace SMD.MIS.Areas.Api.Models
 {
     public class IndusteryDropdown
@@ -10,5 +13,10 @@ namespace SMD.MIS.Areas.Api.Models
     {
         public int IndustryId { get; set; }
         public string IndustryName { get; set; }
+    }
+
+    public class IndustryResponse : BaseApiResponse
+    {
+        public IEnumerable<Industry> Industries { get; set; }
     }
 }

@@ -1,11 +1,6 @@
 ﻿using SMD.Interfaces.Repository;
 using SMD.Interfaces.Services;
-using SMD.Models.DomainModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using SMD.Models.ResponseModels;
 
 namespace SMD.Implementation.Services
 {
@@ -32,9 +27,15 @@ namespace SMD.Implementation.Services
         #endregion
         #region public
 
-        public IEnumerable<Education> GetEducationsList()
+        public EducationResponse GetEducationsList()
         {
-            return _educationRepository.GetAll().Where(g => g.Status != 0);
+            var educations = _educationRepository.GetAllAvailable();
+            return new EducationResponse
+                   {
+                       Educations = educations,
+                       Status = true,
+                       Message = LanguageResources.Success
+                   };
         }
 
         #endregion

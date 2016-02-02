@@ -1,11 +1,6 @@
 ﻿using SMD.Interfaces.Repository;
 using SMD.Interfaces.Services;
-using SMD.Models.DomainModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using SMD.Models.ResponseModels;
 
 namespace SMD.Implementation.Services
 {
@@ -32,9 +27,15 @@ namespace SMD.Implementation.Services
         #endregion
         #region public
 
-        public IEnumerable<Industry> GetIndustryList()
+        public IndustryResponse GetIndustryList()
         {
-            return _indRepository.GetAll().Where(g => g.Status != 0);
+            var industries = _indRepository.GetAllAvailable();
+            return new IndustryResponse
+                   {
+                       Industries = industries,
+                       Status = true,
+                       Message = LanguageResources.Success
+                   };
         }
 
         #endregion

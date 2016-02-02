@@ -202,8 +202,10 @@
     <Compile Include="ResponseModels\AdCampaignResposneModelForAproval.cs" />
     <Compile Include="ResponseModels\AdCampaignApiSearchRequestResponse.cs" />
     <Compile Include="ResponseModels\BaseApiResponse.cs" />
+    <Compile Include="ResponseModels\IndustryResponse.cs" />
     <Compile Include="ResponseModels\GetProductsResponse.cs" />
     <Compile Include="ResponseModels\InvoiceSearchRequestResponse.cs" />
+    <Compile Include="ResponseModels\EducationResponse.cs" />
     <Compile Include="ResponseModels\UserBalanceInquiryResponse.cs" />
     <Compile Include="ResponseModels\UpdateProfileImageResponse.cs" />
     <Compile Include="ResponseModels\LoginResponse.cs" />

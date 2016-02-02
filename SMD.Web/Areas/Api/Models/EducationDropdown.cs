@@ -1,4 +1,7 @@
 ﻿
+using System.Collections.Generic;
+using SMD.Models.ResponseModels;
+
 namespace SMD.MIS.Areas.Api.Models
 {
     public class EducationDropdown
@@ -24,5 +27,10 @@ namespace SMD.MIS.Areas.Api.Models
         /// Education Title
         /// </summary>
         public string Title { get; set; }
+    }
+
+    public class EducationResponse : BaseApiResponse
+    {
+        public IEnumerable<Education> Educations { get; set; }
     }
 }

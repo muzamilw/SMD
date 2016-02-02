@@ -1,7 +1,5 @@
 ﻿using System.Web;
 using SMD.Interfaces.Services;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Web.Http;
 using SMD.MIS.ModelMappers;
@@ -30,14 +28,14 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// Get Profile Questions
         /// </summary>
         [ApiExceptionCustom]
-        public IEnumerable<Models.Education> Get(string authenticationToken)
+        public Models.EducationResponse Get(string authenticationToken)
         {
             if (string.IsNullOrEmpty(authenticationToken))
             {
                 throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
             }
 
-            return educationService.GetEducationsList().Select(lang => lang.CreateFrom());
+            return educationService.GetEducationsList().CreateFrom();
         }
 
 

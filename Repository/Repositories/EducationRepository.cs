@@ -38,14 +38,6 @@ namespace SMD.Repository.Repositories
         #region Public
 
         /// <summary>
-        /// Find Language by Id 
-        /// </summary>
-        public Education Find(int id)
-        {
-            return DbSet.Find(id);
-        }
-
-        /// <summary>
         /// Get List of Language 
         /// </summary>
         public IEnumerable<Education> GetAllEducations()
@@ -60,6 +52,16 @@ namespace SMD.Repository.Repositories
         {
             return DbSet.Where(lang => lang.Title.Contains(searchString)).ToList();
         }
+
+        /// <summary>
+        /// Get All Available Education List
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Education> GetAllAvailable()
+        {
+            return DbSet.Where(ed => ed.Status != 0).ToList();
+        }
+
         #endregion
     }
 }

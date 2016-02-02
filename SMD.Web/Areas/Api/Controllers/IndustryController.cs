@@ -1,9 +1,8 @@
 ﻿using System.Web;
 using SMD.Interfaces.Services;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Web.Http;
+using SMD.MIS.Areas.Api.Models;
 using SMD.MIS.ModelMappers;
 using SMD.WebBase.Mvc;
 
@@ -30,14 +29,14 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// Get Profile Questions
         /// </summary>
         [ApiExceptionCustom]
-        public IEnumerable<Models.Industry> Get(string authenticationToken)
+        public IndustryResponse Get(string authenticationToken)
         {
             if (string.IsNullOrEmpty(authenticationToken))
             {
                 throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
             }
 
-            return industryService.GetIndustryList().Select(lang => lang.CreateFrom());
+            return industryService.GetIndustryList().CreateFrom();
         }
 
 
