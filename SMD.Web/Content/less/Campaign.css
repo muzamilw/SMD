@@ -381,7 +381,7 @@ ul {
 }
 .yourBudgtHeadingCnt {
   float: left;
-  width: 50%;
+  width: 64%;
 }
 .yourBudgtBoxCnt {
   float: left;
@@ -415,4 +415,12 @@ ul {
   color: white;
   border-radius: 5px;
   font-size: 13px;
+}
+.formcontrol-bg {
+  background: #f3f3f3;
+  padding: 20px;
+}
+.text-campaign-left {
+  text-align: left !important;
+  padding-left: 0px !important;
 }
