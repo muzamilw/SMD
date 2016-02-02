@@ -3962,3 +3962,134 @@ add Description nvarchar(500)
 GO
 
 /* Added By Khurram (29 Jan 2016) - End */
+
+/* Added By Khurram (02 Feb 2016) - Start */
+
+GO
+
+ALTER PROCEDURE [dbo].[GetProducts] 
+
+	-- Add the parameters for the stored procedure here
+	@UserID nvarchar(128) = 0 ,
+	@FromRow int = 0,
+	@ToRow int = 0
+
+AS
+BEGIN
+DECLARE @dob AS DateTime
+DECLARE @age AS INT
+DECLARE @gender AS INT
+DECLARE @countryId AS INT
+DECLARE @cityId AS INT
+DECLARE @languageId AS INT
+DECLARE @industryId AS INT
+DECLARE @currentDate AS DateTime
+
+        -- Setting local variables
+		   SELECT @dob = DOB FROM AspNetUsers where id=@UserID
+		   SELECT @gender = gender FROM AspNetUsers where id=@UserID
+		   SELECT @countryId = countryId FROM AspNetUsers where id=@UserID
+		   SELECT @cityId = cityId FROM AspNetUsers where id=@UserID
+		   SELECT @languageId = LanguageID FROM AspNetUsers where id=@UserID
+		   SELECT @industryId = industryId FROM AspNetUsers where id=@UserID
+		   SET @currentDate = getDate()
+		   SET @age = DATEDIFF(year, @age, @currentDate)
+
+select *, COUNT(*) OVER() AS TotalItems
+from
+(	select campaignid as ItemId, campaignname ItemName, 'Ad' Type, 
+    Description, Type ItemType, 
+	((ClickRate * 50) / 100) as AdClickRate,  -- Amount AdViewer will get
+	ImagePath as AdImagePath, LandingPageVideoLink as AdVideoLink,
+	Answer1 as AdAnswer1, Answer2 as AdAnswer2, Answer3 as AdAnswer3, CorrectAnswer as AdCorrectAnswer, VerifyQuestion as AdVerifyQuestion, 
+	RewardType as AdRewardType,
+	Voucher1Heading as AdVoucher1Heading, Voucher1Description as AdVoucher1Description,
+	Voucher1Value as AdVoucher1Value, NULL as SqLeftImagePath, NULL as SqRightImagePath,
+	Case 
+	    when Type = 3  -- Game
+		THEN
+		    (select top 1 GameUrl from Game ORDER BY NEWID())
+		when Type != 3
+		THEN
+		    NULL
+	END as GameUrl, 
+	NULL as PqAnswer1Id, NULL as PqAnswer1, NULL as PqA1LinkedQ1, NULL as PqA1LinkedQ2, 
+	NULL as PqA1Type, NULL as PqA1SortOrder, NULL as PqA1ImagePath,
+	NULL as PqAnswer2Id, NULL as PqAnswer2, NULL as PqA2LinkedQ1, NULL as PqA2LinkedQ2,
+	NULL as PqA2Type, NULL as PqA2SortOrder, NULL as PqA2ImagePath,
+	NULL as PqAnswer3Id, NULL as PqAnswer3, NULL as PqA3LinkedQ1, NULL as PqA3LinkedQ2,
+	NULL as PqA3Type, NULL as PqA3SortOrder, NULL as PqA3ImagePath, 
+	NULL as PqAnswer4Id, NULL as PqAnswer4, NULL as PqA4LinkedQ1, NULL as PqA4LinkedQ2,
+	NULL as PqA4Type, NULL as PqA4SortOrder, NULL as PqA4ImagePath,
+	NULL as PqAnswer5Id, NULL as PqAnswer5, NULL as PqA5LinkedQ1, NULL as PqA5LinkedQ2,
+	NULL as PqA5Type, NULL as PqA5SortOrder, NULL as PqA5ImagePath,
+	NULL as PqAnswer6Id, NULL as PqAnswer6, NULL as PqA6LinkedQ1, NULL as PqA6LinkedQ2,
+	NULL as PqA6Type, NULL as PqA6SortOrder, NULL as PqA6ImagePath,
+	((row_number() over (order by campaignid) * 10) + 1) Weightage,
+	NULL as SqLeftImagePercentage, NULL as SqRightImagePercentage,
+	(select 
+	CASE
+		WHEN usr.ProfileImage is null or usr.ProfileImage = ''
+		THEN usr.ProfileImage
+		WHEN usr.ProfileImage is not null
+		THEN 'http://manage.cash4ads.com/' + usr.ProfileImage
+	END as AdvertisersLogoPath from AspNetUsers usr where usr.Id = UserID) as AdvertisersLogoPath 
+	from adcampaign
+	where (
+		((@age is null) or (adcampaign.AgeRangeEnd >= @age and  @age >= adcampaign.AgeRangeStart))
+		and
+		((@gender is null) or (adcampaign.Gender = @gender))
+		and
+		((@languageId is null) or (adcampaign.LanguageId = @languageId))
+		and
+		(adcampaign.EndDateTime >= @currentDate and @currentDate >= adcampaign.StartDateTime)
+		and
+		(adcampaign.Approved = 1)
+		and
+		(adcampaign.Status = 3) -- live
+		and
+		((adcampaign.AmountSpent is null) or (adcampaign.MaxBudget > adcampaign.AmountSpent))
+		and
+		((@countryId is null or @cityId is null) or ((select count(*) from AdCampaignTargetLocation MyCampaignLoc
+			 where MyCampaignLoc.CampaignID=adcampaign.CampaignID and MyCampaignLoc.CountryID=@countryId and
+			 MyCampaignLoc.CityID=@cityId) > 0))
+	    and
+		((@languageId is null or @industryId is null) or ((select count(*) from AdCampaignTargetCriteria MyCampaignCrit
+			 where MyCampaignCrit.CampaignID = adcampaign.CampaignID and 
+			 MyCampaignCrit.LanguageID=@languageId and MyCampaignCrit.IndustryID=@industryId) > 0 ))
+		and
+		(((select count(*) from AdCampaignResponse adResponse where  
+			adResponse.CampaignID = adcampaign.CampaignID and adResponse.UserID = @UserID) = 0)
+		 or
+		 ((select top 1 adResponse.UserSelection from AdCampaignResponse adResponse 
+			where adResponse.CampaignID = adcampaign.CampaignID and adResponse.UserID = @UserID) 
+			is null)
+		)
+	)
+	
+	union
+	select *, NULL as AdvertisersLogoPath from [GetUserSurveys](@UserID)
+
+	union
+	select pqid, question, 'Question', 
+	NULL, Type QuestionType, NULL, NULL, NULL,
+	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+	NULL, NULL,NULL, NULL, 
+	PQAnswerID1, PQAnswer1, PQA1LinkedQ1, PQA1LinkedQ2, PQA1Type, PQA1SortOrder, PQA1ImagePath,
+	PQAnswerID2, PQAnswer2, PQA2LinkedQ1, PQA2LinkedQ2, PQA2Type, PQA2SortOrder, PQA2ImagePath,
+	PQAnswerID3, PQAnswer3, PQA3LinkedQ1, PQA3LinkedQ2, PQA3Type, PQA3SortOrder, PQA3ImagePath,
+	PQAnswerID4, PQAnswer4, PQA4LinkedQ1, PQA4LinkedQ2, PQA4Type, PQA4SortOrder, PQA4ImagePath,
+	PQAnswerID5, PQAnswer5, PQA5LinkedQ1, PQA5LinkedQ2, PQA5Type, PQA5SortOrder, PQA5ImagePath,
+	PQAnswerID6, PQAnswer6, PQA6LinkedQ1, PQA6LinkedQ2, PQA6Type, PQA6SortOrder, PQA6ImagePath,
+	Weightage,
+	NULL as SqLeftImagePercentage, NULL as SqRightImagePercentage, 
+	NULL as AdvertisersLogoPath 
+	from [GetUserProfileQuestions](@UserID, @countryId)
+	
+	) as items
+	order by Weightage
+	OFFSET @FromRow ROWS
+	FETCH NEXT @TORow ROWS ONLY
+END
+
+/* Added By Khurram (02 Feb 2016) - End */
