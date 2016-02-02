@@ -101,7 +101,7 @@ namespace SMD.MIS.Areas.Api.Controllers
             }
             else if (argsList[1] == "3")  // get industry
             {
-                IEnumerable<Industry> listOfIndustry = _campaignService.SearchIndustry(argsList[0]).Select(lang => lang.CreateFrom());
+                IEnumerable<SMD.MIS.Areas.Api.Models.Industry> listOfIndustry = _campaignService.SearchIndustry(argsList[0]).Select(lang => lang.CreateFrom());
 
                 if (listOfIndustry != null && listOfIndustry.Count() > 10)
                 {
@@ -114,7 +114,7 @@ namespace SMD.MIS.Areas.Api.Controllers
             }
             else  // get education  4
             {
-                IEnumerable<Education> listOfEducation = _campaignService.SearchEducation(argsList[0]).Select(edu => edu.CreateFrom());
+                IEnumerable<SMD.MIS.Areas.Api.Models.Education> listOfEducation = _campaignService.SearchEducation(argsList[0]).Select(edu => edu.CreateFrom());
 
                 if (listOfEducation != null && listOfEducation.Count() > 10)
                 {

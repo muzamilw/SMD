@@ -10,16 +10,16 @@ namespace SMD.MIS.ModelMappers
 
     public static class EducationMapper
     {
-        public static Education CreateFrom(this Education source)
+        public static SMD.MIS.Areas.Api.Models.Education CreateFrom(this SMD.Models.DomainModels.Education source)
         {
-            return new Education
+            return new SMD.MIS.Areas.Api.Models.Education
             {
                 EducationId = source.EducationId,
                 Title = source.Title
             };
         }
 
-        public static EducationDropdown CreateFromDd(this Education source)
+        public static EducationDropdown CreateFromDd(this SMD.Models.DomainModels.Education source)
         {
             return new EducationDropdown
             {

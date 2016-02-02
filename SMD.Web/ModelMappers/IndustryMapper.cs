@@ -10,16 +10,16 @@ namespace SMD.MIS.ModelMappers
 
     public static class IndustryMapper
     {
-        public static Industry CreateFrom(this Industry source)
+        public static SMD.MIS.Areas.Api.Models.Industry CreateFrom(this SMD.Models.DomainModels.Industry source)
         {
-            return new Industry
+            return new SMD.MIS.Areas.Api.Models.Industry
             {
                 IndustryId = source.IndustryId,
                 IndustryName = source.IndustryName
             };
         }
 
-        public static IndusteryDropdown CreateForDd(this Industry source )
+        public static IndusteryDropdown CreateForDd(this SMD.Models.DomainModels.Industry source )
         {
             return new IndusteryDropdown
             {

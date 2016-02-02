@@ -13,4 +13,16 @@ namespace SMD.MIS.Areas.Api.Models
         /// </summary>
         public string EducationName { get; set; }
     }
+    public class Education
+    {
+        /// <summary>
+        /// Education id
+        /// </summary>
+        public long EducationId { get; set; }
+
+        /// <summary>
+        /// Education Title
+        /// </summary>
+        public string Title { get; set; }
+    }
 }

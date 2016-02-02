@@ -43,10 +43,10 @@ namespace SMD.MIS.Areas.Api.Models
         /// <summary>
         /// Industory
         /// </summary>
-        public IEnumerable<Industry> Professions { get; set; }
+        public IEnumerable<Models.Industry> Professions { get; set; }
         /// <summary>
         /// Education
         /// </summary>
-        public IEnumerable<Education> Educations { get; set; }
+        public IEnumerable<Models.Education> Educations { get; set; }
     }
 }
