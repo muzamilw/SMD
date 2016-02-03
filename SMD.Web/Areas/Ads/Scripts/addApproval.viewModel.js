@@ -33,11 +33,12 @@ define("addApproval/addApproval.viewModel",
                             {
                                 success: function(data) {
                                     campaigns.removeAll();
-                                    pager().totalCount(0);
-                                    pager().totalCount(data.TotalCount);
                                     _.each(data.AdCampaigns, function (item) {
                                         campaigns.push(model.AdCampaignServertoClientMapper(item));
                                     });
+                                    console.log(data.AdCampaigns);
+                                    pager().totalCount(0);
+                                    pager().totalCount(data.TotalCount);
                                 },
                                 error: function() {
                                     toastr.error("Failed to load Ad Campaigns!");
@@ -67,7 +68,7 @@ define("addApproval/addApproval.viewModel",
                                     return obj.CampaignId == temp.id();
                                 });
                                 campaigns.remove(newObjtodelete);
-                                toastr.success("You are Good!");
+                              //  toastr.success("You are Good!");
                                 isEditorVisible(false);
                             },
                             error: function() {

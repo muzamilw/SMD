@@ -49,7 +49,7 @@
                                     <div class="form-group">
                                         <div class="col-lg-4 text-right">
 
-                                            <label class="control-label text-right tooltip-float">Age</label>
+                                            <label class="control-label text-right tooltip-float">DOB</label>
                                         </div>
                                         <div class="col-lg-6">
                                             <input type="text" class="form-control" data-bind="datepicker:dob">
@@ -63,7 +63,7 @@
                                             <label class="control-label text-right tooltip-float">Education</label>
                                         </div>
                                         <div class="col-lg-6">
-                                            <select class="form-control" data-bind="options: $root.educations, optionsText: 'EducationName', optionsValue: 'EducationId', optionsCaption: '&lt;' + 'Select Profession'+ '&gt;' , value:educationId"></select>
+                                            <select class="form-control" data-bind="options: $root.educations, optionsText: 'EducationName', optionsValue: 'EducationId', optionsCaption:  'Select ...' , value:educationId"></select>
                                         </div>
                                     </div>
                                 </div>
@@ -85,26 +85,12 @@
                                             <label class="control-label text-right tooltip-float">Profession</label>
                                         </div>
                                         <div class="col-lg-6">
-                                            <select class="form-control" data-bind="options: $root.industries, optionsText: 'IndusteryName', optionsValue: 'IndusteryId', optionsCaption: '&lt;' + 'Select Profession'+ '&gt;' , value:industeryId"></select>
+                                            <select class="form-control" data-bind="options: $root.industries, optionsText: 'IndusteryName', optionsValue: 'IndusteryId', optionsCaption:  'Select ...', value:industeryId"></select>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-3" style="margin-top: 12px;">
-                                <div class="form-group">
-                                    <div class="col-md-6" style="text-align:right">
-                                        <div class="fileUpload btn btn-primary">
-                                            <span>Image/Logo </span>
-                                            <input type="file" class="upload" id="image_files" onchange="readPhotoURL(this);" />
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <img id="vehicleImage" alt="" style="width: 120px;height:120px" data-bind="attr:{src:imageUrl }" />
-                                        <h5>Profile Image<span></span></h5>
-                                    </div>
-                                </div>
-                            </div>
+                          
                         </div>
                         <div class="col-lg-12 form-horizontal">
                             <h3 class="group-header" style="margin-top:20px;">
@@ -235,7 +221,7 @@
                                             <label class="control-label text-right tooltip-float">Time Zone</label>
                                         </div>
                                         <div class="col-lg-6">
-                                            <select class="form-control" data-bind="options: $root.timeZones, optionsText: 'TimeZoneName', optionsValue: 'TimeZoneId', optionsCaption: '&lt;' + 'Select Profession'+ '&gt;' , value:userTimeZone"></select>
+                                            <select class="form-control" data-bind="options: $root.timeZones, optionsText: 'TimeZoneName', optionsValue: 'TimeZoneId', optionsCaption: 'Select ...' , value:userTimeZone"></select>
                                         </div>
                                     </div>
                                 </div>
@@ -293,12 +279,33 @@
                                             <input type="text" class="form-control" data-bind="value: companyName">
                                         </div>
                                     </div>
+                                    <div class="form-group">
+                                        <div class="col-lg-4 text-right">
+                                      
+                                            <label class="control-label text-right tooltip-float">&nbsp;</label>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <div class="col-md-3" style="text-align:right;margin-left: 10px;">
+                                                    <div class="fileUpload btn btn-primary">
+                                                        <span>Image / Logo </span>
+                                                        <input type="file" class="upload" id="image_files" onchange="readPhotoURL(this);" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <img id="vehicleImage" alt="" style="width: 120px;height:120px" data-bind="attr:{src:imageUrl }" />
+                                                    <h5><span></span></h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-12 form-horizontal">
                             <h3 class="group-header" style="margin-top:20px;">
-                                Payment Methods
+                                Credit Card Information
                             </h3>
                             <div class="col-lg-9">
                                 <div class="form-group">
@@ -312,7 +319,7 @@
                                         <button class="btn  btn-info" id="saveBtn" data-bind="click: $root.chargeCustomer, text:stripeId() =='undefined' ? 'Configure':'Update' ">Processing...</button>
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" style="display:none;">
                                     <div class="col-lg-4 text-right">
                                         <label class="control-label text-right tooltip-float">PayPal Account</label>
                                     </div>
@@ -320,9 +327,9 @@
                                         <input type="text"  class="form-control" data-bind="value: payPalId() ">
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" style="display:none;">
                                     <div class="col-lg-4 text-right">
-                                        <label class="control-label text-right tooltip-float">Goolge Vallet</label>
+                                        <label class="control-label text-right tooltip-float">Goolge Wallet</label>
                                     </div>
                                     <div class="col-lg-4">
                                         <input type="text" readonly class="form-control" data-bind="value: googleValletId() !='undefined' ? googleValletId :'( Not Configured )'">

@@ -33,11 +33,11 @@ define("surveyQuestionApp/surveyQuestionApp.viewModel",
                             {
                                 success: function (data) {
                                     questions.removeAll();
-                                    pager().totalCount(0);
-                                    pager().totalCount(data.TotalCount);
                                     _.each(data.SurveyQuestions, function (item) {
                                         questions.push(model.SurveyquestionServertoClientMapper(item));
                                     });
+                                    pager().totalCount(0);
+                                    pager().totalCount(data.TotalCount);
 
                                 },
                                 error: function () {
@@ -69,7 +69,7 @@ define("surveyQuestionApp/surveyQuestionApp.viewModel",
                                     return obj.SqId == temp.id();
                                 });
                                 questions.remove(newObjtodelete);
-                                toastr.success("You are Good!");
+                                toastr.success("Saved Successfully!");
                                 isEditorVisible(false);
                             },
                             error: function () {

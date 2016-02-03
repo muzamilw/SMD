@@ -104,16 +104,30 @@ namespace SMD.Repository.Repositories
         /// </summary>
         public IEnumerable<AdCampaign> SearchCampaign(AdCampaignSearchRequest request, out int rowCount)
         {
+            bool isAdmin = false;
+             var users = db.Users.Where(g => g.Id == LoggedInUserIdentity).SingleOrDefault();
+            if (users.Roles.FirstOrDefault().Name == Roles.Adminstrator)
+                isAdmin = true;
             if (request == null)
             {
                 const int fromRow = 0;
                 const int toRow = 10;
                 rowCount = DbSet.Count();
-                return DbSet.Where(g => g.UserId == LoggedInUserIdentity).OrderBy(g => g.CampaignId)
-                        .Skip(fromRow)
-                        .Take(toRow)
-                        .ToList();
-            }
+                if (isAdmin)
+                {
+                    return DbSet.OrderBy(g => g.CampaignId)
+                            .Skip(fromRow)
+                            .Take(toRow)
+                            .ToList();
+                }
+                else
+                {
+                    return DbSet.Where(g => g.UserId == LoggedInUserIdentity).OrderBy(g => g.CampaignId)
+                            .Skip(fromRow)
+                            .Take(toRow)
+                            .ToList();
+                }
+            } 
             else
             {
                 int fromRow = (request.PageNo - 1) * request.PageSize;
@@ -122,7 +136,7 @@ namespace SMD.Repository.Repositories
                     campaign =>
                         (string.IsNullOrEmpty(request.SearchText) ||
                          (campaign.DisplayTitle.Contains(request.SearchText)))
-                         && (campaign.UserId == LoggedInUserIdentity);
+                         && (campaign.UserId == LoggedInUserIdentity || isAdmin);
 
 
                 rowCount = DbSet.Count(query);

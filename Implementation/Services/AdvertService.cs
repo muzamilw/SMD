@@ -237,7 +237,9 @@ namespace SMD.Implementation.Services
         public void CreateCampaign(AdCampaign campaignModel)
         {
             campaignModel.UserId = _adCampaignRepository.LoggedInUserIdentity;
-           
+            var user = UserManager.Users.Where(g => g.Id == _adCampaignRepository.LoggedInUserIdentity).SingleOrDefault();
+            if (user != null)
+                campaignModel.CreatedBy = user.FullName;
             campaignModel.StartDateTime = campaignModel.StartDateTime.Value.Subtract(_adCampaignRepository.UserTimezoneOffSet);
             campaignModel.EndDateTime = campaignModel.EndDateTime.Value.Subtract(_adCampaignRepository.UserTimezoneOffSet);
             _adCampaignRepository.Add(campaignModel);
@@ -294,6 +296,9 @@ namespace SMD.Implementation.Services
         public void UpdateCampaign(AdCampaign campaignModel)
         {
             campaignModel.UserId = _adCampaignRepository.LoggedInUserIdentity;
+            var user = UserManager.Users.Where(g => g.Id == _adCampaignRepository.LoggedInUserIdentity).SingleOrDefault();
+            if (user != null)
+                campaignModel.CreatedBy = user.FullName;
             string[] paths = SaveImages(campaignModel);
             if (paths != null && paths.Count() > 0)
             {
