@@ -54,7 +54,7 @@ define("pQuestion/pQuestion.viewModel",
                             {
                                 ProfileQuestionFilterText: filterValue(),
                                 LanguageFilter: langfilterValue() || defaultLanguageId,
-                                QuestionGroupFilter: qGroupfilterValue() || 0,
+                                QuestionGroupFilter: qGroupfilterValue(),
                                 CountryFilter: countryfilterValue() || defaultCountryId,
                                 PageSize: pager().pageSize(),
                                 PageNo: pager().currentPage(),
@@ -110,7 +110,7 @@ define("pQuestion/pQuestion.viewModel",
                     addNewProfileQuestion = function () {
                         selectedQuestion(new model.question());
                         // Set Country Id and Language Id for now as UK and English
-                        selectedQuestion().countryId(241);
+                        selectedQuestion().countryId(214);
                         selectedQuestion().languageId(41);
                         selectedQuestion().penalityForNotAnswering(0);
                         isEditorVisible(true);
@@ -258,6 +258,19 @@ define("pQuestion/pQuestion.viewModel",
                         if (selectedQuestion().answers().length === 0) {
                             isValid = false;
                             toastr.info("Question must have atleast 2 answers");
+                        }
+                        if ((selectedQuestion().answers().length) % 2 !== 0) {
+                            isValid = false;
+                            toastr.info("Answers must be even in number");
+                        }
+                        if (selectedQuestion().hasLinkedQuestions()) {
+                            var answerWithLinkedQtns = selectedQuestion().answers.find(function(answer) {
+                                return answer.linkedQustionsCount() > 0;
+                            });
+                            if (!answerWithLinkedQtns) {
+                                isValid = false;
+                                toastr.info("Linked Questions should have atleast 1 question linked");
+                            }   
                         }
                         return isValid;
                     },
