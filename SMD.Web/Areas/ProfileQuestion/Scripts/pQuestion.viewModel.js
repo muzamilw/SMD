@@ -133,7 +133,6 @@ define("pQuestion/pQuestion.viewModel",
                     onEditProfileQuestion = function (item) {
                         getQuestionAnswer(item.qId());
                         selectedQuestion(item);
-                        filterLinkedQuestions();
                         isEditorVisible(true);
                     },
                     // On Edit PQ, Get PQ Answer & linked Question 
@@ -299,6 +298,8 @@ define("pQuestion/pQuestion.viewModel",
                                 selectedQuestion().questionString(obj.Question);
                                 selectedQuestion().priority(obj.Priority);
                                 selectedQuestion().hasLinkedQuestions(obj.HasLinkedQuestions);
+                                // Update Linked Questions
+                                linkedQuestions.push({ PqId: obj.PqId, Question: obj.Question });
                                 isEditorVisible(false);
                                 toastr.success("Saved Successfully.");
                             },
@@ -339,12 +340,15 @@ define("pQuestion/pQuestion.viewModel",
                         }
                     },
                     // Filter Linked Questions on edit of Profile Question 
-                    filterLinkedQuestions = function () {
-                        var newObjtodelete = linkedQuestions.find(function (temp) {
-                            return selectedQuestion().qId() == temp.PqId;
+                    filteredLinkedQuestions = ko.computed(function () {
+                        if (!selectedQuestion()) {
+                            return linkedQuestions();
+                        }
+                        // Return all but that is being edited
+                        return linkedQuestions.filter(function (temp) {
+                            return selectedQuestion().qId() !== temp.PqId;
                         });
-                        linkedQuestions.remove(newObjtodelete);
-                    },
+                    }),
                     // Initialize the view model
                     initialize = function (specifiedView) {
                         view = specifiedView;
@@ -390,7 +394,8 @@ define("pQuestion/pQuestion.viewModel",
                     onSaveProfileQuestion: onSaveProfileQuestion,
                     onDeleteQuestionAnswer: onDeleteQuestionAnswer,
                     hasChangesOnQuestion: hasChangesOnQuestion,
-                    CanAddAnswers: CanAddAnswers
+                    CanAddAnswers: CanAddAnswers,
+                    filteredLinkedQuestions: filteredLinkedQuestions
                 };
             })()
         };

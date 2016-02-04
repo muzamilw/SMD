@@ -23,7 +23,6 @@
                 penalityForNotAnswering = ko.observable(penality),
                 status = ko.observable(spcStatus || 1),
                 answers = ko.observableArray([]),
-
                 errors = ko.validation.group({                    
                     questionString: questionString,
                     profileGroupId: profileGroupId,
@@ -130,6 +129,12 @@
               question4String = ko.observable(undefined),
               question5String = ko.observable(undefined),
               question6String = ko.observable(undefined),
+              resetLinkedQustionsCount = ko.computed(function() {
+                  if (!question1String() && !question2String() && !question3String() &&
+                      !question4String() && !question5String() && !question6String()) {
+                      linkedQustionsCount(0);
+                  }    
+              }),
               pqAnswerId = ko.observable(ansId),
 
               pqId = ko.observable(qstId),
@@ -233,7 +238,8 @@
               convertToServerData: convertToServerData,
               isValid: isValid,
               isImageRequired: isImageRequired,
-              errors: errors
+              errors: errors,
+              resetLinkedQustionsCount: resetLinkedQustionsCount
           };
       };
 
