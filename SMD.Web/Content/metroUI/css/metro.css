@@ -1,0 +1,113 @@
+.set-border {
+    border: 1px #d9d9d9 solid;
+}
+
+.padding10 {
+    padding: 0.625rem;
+}
+
+.listview {
+    display: block;
+    width: 100%;
+    height: auto;
+ 
+}
+.parentList{
+    height:400px;
+       overflow-y: scroll;
+    overflow-x: hidden;
+}
+.childList
+{
+        width: 184px !important;
+    font-size: 12px;
+       background-color:white !important;
+}
+    .listview:before, .listview:after {
+        display: table;
+        content: "";
+    }
+
+    .listview .list {
+        display: block;
+        width: 100%;
+        padding: 8px 8px 4px 48px;
+        border: 1px transparent solid;
+        cursor: pointer;
+       
+        border-bottom-color: #eeeeee;
+        position: relative;
+        border-color: #eeeeee;
+    }
+
+    .listview.list-type-tiles .list {
+        display: block;
+        float: left;
+        padding: 6px 4px 4px 10px;
+        width: 235px;
+        min-height: 52px;
+        margin: .625rem;
+        
+    background-color: white;
+    }
+
+    .listview .list.active {
+        background-color: #d1e8ff;
+        border-color: #64b4db;
+    }
+
+    .listview .list .list-icon {
+        position: absolute;
+        left: 0;
+        top: 0;
+        margin: 8px;
+        width: 32px;
+        height: 32px;
+        font-size: 32px;
+        text-align: center;
+    }
+
+    .listview.list-type-tiles .list .list-icon {
+        width: 48px;
+        height: 48px;
+        font-size: 48px;
+        text-align: center;
+        top: 0;
+        left: 0;
+        margin: 2px;
+    }
+
+    .listview.list-type-tiles .list .list-title {
+        margin-top: 8px;
+        display: block;
+    }
+.parent-list-title{
+      margin-top: 8px;
+        display: block;
+        height:40px;
+}
+
+.clear-both {
+    clear: both;
+}
+.chlidList {
+    display:none;
+}
+.active .chlidList {
+    display:block;
+}
+.chlidList .list.active {
+     background-color: #45D145 !important;
+}
+.modelHeading{
+        padding-left: 0.825rem;
+    padding-bottom: 0.5rem;
+    font-size: 14px;
+    font-weight: bold;
+}
+#lv1 .list {
+    background-color:lightgreen; overflow:hidden;
+}
+#lv2 .list {
+    background-color:#FFE13B; overflow:hidden;
+}

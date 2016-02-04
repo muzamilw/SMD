@@ -1,4 +1,5 @@
-﻿using FluentScheduler;
+﻿using System;
+using FluentScheduler;
 
 namespace SMD.Implementation.Services
 {
@@ -10,7 +11,7 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Constructor 
         /// </summary>
-        public ParentScheduler()
+        public ParentScheduler() //Action<Exception> unhandledExceptionHandler
         {
             // Debit Scheduler 
              CollectionScheduler.SetDebitScheduler(this);

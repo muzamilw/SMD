@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
+﻿using System.Linq;
 using SMD.MIS.Areas.Api.Models;
 using System;
 using System.Web;
 using SMD.MIS.ModelMappers;
+using SMD.Models.Common;
+using SMD.Models.DomainModels;
 using SMD.Models.ResponseModels;
 using LoginResponse = SMD.Models.ResponseModels.LoginResponse;
 
@@ -20,7 +20,7 @@ namespace SMD.MIS.Areas.Api.ModelMappers
         /// </summary>
         public static WebApiUser CreateFrom(this SMD.Models.IdentityModels.User source)
         {
-            return new WebApiUser
+            var user = new WebApiUser
                    {
                        UserId = source.Id,
                        FullName = source.FullName,
@@ -48,8 +48,43 @@ namespace SMD.MIS.Areas.Api.ModelMappers
                        EducationId = source.EducationId,
                        StripeId = source.StripeCustomerId,
                        GoogleVallet = source.GoogleWalletCustomerId,
-                       PayPal = source.PaypalCustomerId
+                       PayPal = source.PaypalCustomerId,
+                       AccountBalance = CreateFromForAccount(source)
                    };
+
+            return user;
+        }
+
+        /// <summary>
+        /// Create WebApi User from Domain Model
+        /// </summary>
+        public static UserBalanceInquiryResponse CreateFromForBalance(this LoginResponse source)
+        {
+            return new UserBalanceInquiryResponse
+            {
+                Status = source.Status,
+                Message = source.Message,
+                Balance = CreateFromForAccount(source.User)
+            };
+        }
+
+        /// <summary>
+        /// Create WebApi User from Domain Model
+        /// </summary>
+        public static double? CreateFromForAccount(this SMD.Models.IdentityModels.User source)
+        {
+            if (source.Accounts == null || !source.Accounts.Any())
+            {
+                return null;
+            }
+
+            Account account = source.Accounts.FirstOrDefault(acc => acc.AccountType == (int)AccountType.VirtualAccount);
+            if (account == null)
+            {
+                return null;
+            }
+
+            return account.AccountBalance;
         }
 
         /// <summary>
@@ -79,7 +114,6 @@ namespace SMD.MIS.Areas.Api.ModelMappers
 
             return new UserProfileBaseResponse
             {
-                CityDropDowns = source.Cities.Select(city => city.CreateFrom()),
                 CountryDropdowns = source.Countries.Select(country => country.CreateFrom()),
                 IndusteryDropdowns = source.Industries.Select(industery => industery.CreateForDd()),
                 EducationDropdowns = source.Educations.Select(edu => edu.CreateFromDd()),

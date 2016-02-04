@@ -9,8 +9,6 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SMD.Models.IdentityModels;
 
 namespace SMD.Repository.Repositories
@@ -21,7 +19,7 @@ namespace SMD.Repository.Repositories
         /// <summary>
         ///Ad Campaign Orderby clause
         /// </summary>
-        private readonly Dictionary<AdCampaignByColumn, Func<AdCampaign, object>> _addCampaignByClause =
+        private readonly Dictionary<AdCampaignByColumn, Func<AdCampaign, object>> addCampaignByClause =
             new Dictionary<AdCampaignByColumn, Func<AdCampaign, object>>
                     {
                         {AdCampaignByColumn.Name, d => d.CampaignName}  ,    
@@ -50,12 +48,31 @@ namespace SMD.Repository.Repositories
         }
 
         /// <summary>
+        /// Page Size for Products Feed
+        /// </summary>
+        protected int PageSizeForProducts
+        {
+            get
+            {
+                return 10;
+            }
+        }
+
+        /// <summary>
+        /// Resets Users Responses for Ads, Surveys and Questions
+        /// </summary>
+        public void ResetUserProductsResponses()
+        {
+            db.ResetProductsUserResponses();
+        }
+
+        /// <summary>
         /// Gets Combination of Ads, Surveys, Questions in a paged view
         /// </summary>
         public IEnumerable<GetProducts_Result> GetProducts(GetProductsRequest request)
         {
-            int fromRow = (request.PageNo - 1) * request.PageSize;
-            int toRow = request.PageSize;
+            int fromRow = (request.PageNo - 1) * PageSizeForProducts;
+            int toRow = PageSizeForProducts;
             return db.GetProducts(request.UserId, fromRow, toRow);
         }
 
@@ -72,11 +89,11 @@ namespace SMD.Repository.Repositories
             rowCount = DbSet.Count(query);
             return request.IsAsc
                 ? DbSet.Where(query)
-                    .OrderBy(_addCampaignByClause[request.AdCampaignOrderBy])
+                    .OrderBy(addCampaignByClause[request.AdCampaignOrderBy])
                     .Skip(fromRow)
                     .Take(toRow)                   
                 : DbSet.Where(query)
-                    .OrderByDescending(_addCampaignByClause[request.AdCampaignOrderBy])
+                    .OrderByDescending(addCampaignByClause[request.AdCampaignOrderBy])
                     .Skip(fromRow)
                     .Take(toRow)
                     .ToList();
@@ -87,16 +104,30 @@ namespace SMD.Repository.Repositories
         /// </summary>
         public IEnumerable<AdCampaign> SearchCampaign(AdCampaignSearchRequest request, out int rowCount)
         {
+            bool isAdmin = false;
+             var users = db.Users.Where(g => g.Id == LoggedInUserIdentity).SingleOrDefault();
+            if (users.Roles.FirstOrDefault().Name == Roles.Adminstrator)
+                isAdmin = true;
             if (request == null)
             {
-                int fromRow = 0;
-                int toRow = 10;
+                const int fromRow = 0;
+                const int toRow = 10;
                 rowCount = DbSet.Count();
-                return DbSet.Where(g => g.UserId == LoggedInUserIdentity).OrderBy(g => g.CampaignId)
-                        .Skip(fromRow)
-                        .Take(toRow)
-                        .ToList();
-            }
+                if (isAdmin)
+                {
+                    return DbSet.OrderBy(g => g.CampaignId)
+                            .Skip(fromRow)
+                            .Take(toRow)
+                            .ToList();
+                }
+                else
+                {
+                    return DbSet.Where(g => g.UserId == LoggedInUserIdentity).OrderBy(g => g.CampaignId)
+                            .Skip(fromRow)
+                            .Take(toRow)
+                            .ToList();
+                }
+            } 
             else
             {
                 int fromRow = (request.PageNo - 1) * request.PageSize;
@@ -105,7 +136,7 @@ namespace SMD.Repository.Repositories
                     campaign =>
                         (string.IsNullOrEmpty(request.SearchText) ||
                          (campaign.DisplayTitle.Contains(request.SearchText)))
-                         && (campaign.UserId == LoggedInUserIdentity);
+                         && (campaign.UserId == LoggedInUserIdentity || isAdmin);
 
 
                 rowCount = DbSet.Count(query);
@@ -119,11 +150,11 @@ namespace SMD.Repository.Repositories
         /// <summary>
         /// Get Ad Campaign by id
         /// </summary>
-        public IEnumerable<AdCampaign> GetAdCampaignById(long CampaignId)
+        public IEnumerable<AdCampaign> GetAdCampaignById(long campaignId)
         {
 
             Expression<Func<AdCampaign, bool>> query =
-                ad => ad.CampaignId == CampaignId;
+                ad => ad.CampaignId == campaignId;
 
             return DbSet.Where(query);
         }
@@ -133,7 +164,7 @@ namespace SMD.Repository.Repositories
         public User GetUserById()
         {
 
-            return db.Users.Where(i => i.Id == LoggedInUserIdentity).SingleOrDefault();
+            return db.Users.SingleOrDefault(i => i.Id == LoggedInUserIdentity);
         }
         /// <summary>
         /// Get User And Cost
@@ -144,7 +175,7 @@ namespace SMD.Repository.Repositories
             var query = from usr in db.Users.Include("Cities").Include("Countries")
                         join prod in db.Products on usr.CountryId equals prod.CountryId
                         where usr.Id == LoggedInUserIdentity && prod.ProductId == 2 //&& prod.ProductCode == code
-                        select new UserAndCostDetail()
+                        select new UserAndCostDetail
                         {
                             AgeClausePrice = prod.AgeClausePrice,
                             CityId = usr.CityId,
@@ -156,13 +187,7 @@ namespace SMD.Repository.Repositories
                             LanguageId = usr.LanguageId,
                             LocationClausePrice = prod.LocationClausePrice,
                             OtherClausePrice = prod.OtherClausePrice,
-                            ProfessionClausePrice = prod.ProfessionClausePrice//,
-                            //CityName = usr.Cities.Cities != null ? usr.Cities.CityName : "",
-                            //CountryName = usr.Countries != null ? usr.Countries.CountryName : "",
-                            //EducationTitle = usr.Education != null?usr.Education.Title : "",
-                            //IndustryName = usr.Industry != null?usr.Industry.IndustryName:"",
-                            //LanguageName = usr.Language != null? usr.Language.LanguageName: ""
-                           
+                            ProfessionClausePrice = prod.ProfessionClausePrice
                         };
 
             return query.FirstOrDefault();

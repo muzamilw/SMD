@@ -40,6 +40,8 @@ namespace SMD.Implementation
             unityContainer.RegisterType<ITransactionLogService, TransactionLogService>();
             unityContainer.RegisterType<IAccountService, AccountService>();
             unityContainer.RegisterType<ICityService, CityService>();
+            unityContainer.RegisterType<IEducationService, EducationService>();
+            unityContainer.RegisterType<IIndustryService, IndustryService>();
         }
     }
 }

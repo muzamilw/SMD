@@ -147,6 +147,30 @@ namespace SMD.MIS
                 new { controller = "Products" },
                 null,
                 null);
+
+            // Get Users Balance Custom route
+            config.Routes.MapHttpRoute(
+                "UserBalanceInquiry",
+                "Balance/Inquire/{AuthenticationToken}/",
+                new { controller = "UserBalanceInquiry" },
+                null,
+                null);
+
+            // Get Education Custom route
+            config.Routes.MapHttpRoute(
+                "Education",
+                "Education/{AuthenticationToken}/",
+                new { controller = "Education" },
+                null,
+                null);
+
+            // Get Industry Custom route
+            config.Routes.MapHttpRoute(
+                "Industry",
+                "Industry/{AuthenticationToken}/",
+                new { controller = "Industry" },
+                null,
+                null);
         }
     }
 }

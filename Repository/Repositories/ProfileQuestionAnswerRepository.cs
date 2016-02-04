@@ -47,7 +47,7 @@ namespace SMD.Repository.Repositories
         /// </summary>
         public IEnumerable<ProfileQuestionAnswer> GetProfileQuestionAnswerByQuestionId(long profileQuestionId)
         {
-            return DbSet.Where(ans => ans.PqId == profileQuestionId && (ans.Status == null || ans.Status == (Int32)ObjectStatus.Acitve)).ToList();
+            return DbSet.Where(ans => ans.PqId == profileQuestionId && (ans.Status == (Int32)ObjectStatus.Active)).ToList();
         }
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace SMD.Repository.Repositories
         /// </summary>
         public IEnumerable<ProfileQuestionAnswer> GetAllProfileQuestionAnswerByQuestionId(int profileQuestionId)
         {
-            return DbSet.Where(ans => ans.PqId == profileQuestionId).ToList();
+            return DbSet.Where(ans => ans.PqId == profileQuestionId && ans.Status != 0).ToList();
         }
         #endregion
     }

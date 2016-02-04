@@ -49,13 +49,13 @@ define("pQuestion/pQuestion.viewModel",
                     // Random number
                     randomIdForNewObjects= -1,
                     //Get Questions
-                    getQuestions = function () {
+                    getQuestions = function (defaultCountryId, defaultLanguageId) {
                         dataservice.searchProfileQuestions(
                             {
                                 ProfileQuestionFilterText: filterValue(),
-                                LanguageFilter: langfilterValue() || 41,
-                                QuestionGroupFilter: qGroupfilterValue() || 0,
-                                CountryFilter : countryfilterValue() || 214,
+                                LanguageFilter: langfilterValue() || defaultLanguageId,
+                                QuestionGroupFilter: qGroupfilterValue(),
+                                CountryFilter: countryfilterValue() || defaultCountryId,
                                 PageSize: pager().pageSize(),
                                 PageNo: pager().currentPage(),
                                 SortBy: sortOn(),
@@ -64,11 +64,10 @@ define("pQuestion/pQuestion.viewModel",
                             {
                                 success: function (data) {
                                     questions.removeAll();
-                                     pager().totalCount(data.TotalCount);
-                                    _.each(data.ProfileQuestions, function (item) {
+                                     _.each(data.ProfileQuestions, function (item) {
                                         questions.push(model.questionServertoClientMapper(item));
                                     });
-
+                                    pager().totalCount(data.TotalCount);
                                 },
                                 error: function () {
                                     toastr.error("Failed to load profile questions!");
@@ -104,11 +103,15 @@ define("pQuestion/pQuestion.viewModel",
                     },
                     // Search Filter 
                     filterProfileQuestion= function() {
+                        pager().reset();
                         getQuestions();
                     },
                     // Add new Profile Question
                     addNewProfileQuestion = function () {
                         selectedQuestion(new model.question());
+                        // Set Country Id and Language Id for now as UK and English
+                        selectedQuestion().countryId(214);
+                        selectedQuestion().languageId(41);
                         selectedQuestion().penalityForNotAnswering(0);
                         isEditorVisible(true);
                     },
@@ -130,7 +133,6 @@ define("pQuestion/pQuestion.viewModel",
                     onEditProfileQuestion = function (item) {
                         getQuestionAnswer(item.qId());
                         selectedQuestion(item);
-                        filterLinkedQuestions();
                         isEditorVisible(true);
                     },
                     // On Edit PQ, Get PQ Answer & linked Question 
@@ -141,13 +143,14 @@ define("pQuestion/pQuestion.viewModel",
                            },
                            {
                                success: function (answers) {
+                                   selectedQuestion().answers.removeAll();
                                    _.each(answers, function (item) {
                                        selectedQuestion().answers.push(model.questionAnswerServertoClientMapper(item));
                                    });
                                    selectedQuestion().reset();
                                },
                                error: function () {
-                                   toastr.error("Failed to load profile questions!");
+                                   toastr.error("Failed to load profile question!");
                                }
                            });
                     },
@@ -168,7 +171,7 @@ define("pQuestion/pQuestion.viewModel",
                                     return item.qId() == temp.qId();
                                 });
                                 questions.remove(newObjtodelete);
-                                toastr.success("You are Good!");
+                                toastr.success("Deleted Successfully!");
                             },
                             error: function () {
                                     toastr.error("Failed to delete!");
@@ -177,11 +180,12 @@ define("pQuestion/pQuestion.viewModel",
                     },
                     // Make Filters Claer
                     clearFilters= function() {
-                        langfilterValue(undefined);
-                        countryfilterValue(undefined);
+                        // Language and country are hidden for now
+                        //langfilterValue(undefined);
+                        //countryfilterValue(undefined);
                         qGroupfilterValue(undefined);
                         filterValue(undefined);
-                        getQuestions();
+                        filterProfileQuestion();
                     },
                     // Add new Answer
                     addNewAnswer = function () {
@@ -198,8 +202,19 @@ define("pQuestion/pQuestion.viewModel",
                     onEditQuestionAnswer= function(item) {
                         selectedAnswer(item);
                     },
+                    doBeforeSaveAnswer = function () {
+                        var isValid = true;
+                        if (!selectedAnswer().isValid()) {
+                            selectedAnswer().errors.showAllMessages();
+                            isValid = false;
+                        }
+                        return isValid;
+                    },
                     //
                     onSaveNewAnswer = function () {
+                        if (!doBeforeSaveAnswer()) {
+                            return;
+                        }
                         var newOnj = selectedAnswer();
                         var objId = newOnj.pqAnswerId();
                         if (objId < 0) {
@@ -229,9 +244,40 @@ define("pQuestion/pQuestion.viewModel",
                             existingAns.type(newOnj.type());
                             
                         }
+
+                        view.hideAnswerDialog();
+                    },
+                    // To do before save
+                    doBeforeSave = function() {
+                        var isValid = true;
+                        if (!selectedQuestion().isValid()) {
+                            selectedQuestion().errors.showAllMessages();
+                            isValid = false;
+                        }
+                        if (selectedQuestion().answers().length === 0) {
+                            isValid = false;
+                            toastr.info("Question must have atleast 2 answers");
+                        }
+                        if ((selectedQuestion().answers().length) % 2 !== 0) {
+                            isValid = false;
+                            toastr.info("Answers must be even in number");
+                        }
+                        if (selectedQuestion().hasLinkedQuestions()) {
+                            var answerWithLinkedQtns = selectedQuestion().answers.find(function(answer) {
+                                return answer.linkedQustionsCount() > 0;
+                            });
+                            if (!answerWithLinkedQtns) {
+                                isValid = false;
+                                toastr.info("Linked Questions should have atleast 1 question linked");
+                            }   
+                        }
+                        return isValid;
                     },
                     // Save Question / Add 
-                    onSaveProfileQuestion= function() {
+                    onSaveProfileQuestion = function () {
+                        if (!doBeforeSave()) {
+                            return;
+                        }
                         var serverAnswers=[];
                         _.each(selectedQuestion().answers(), function (item) {
                             if (item !== null && typeof item === 'object') {
@@ -252,11 +298,13 @@ define("pQuestion/pQuestion.viewModel",
                                 selectedQuestion().questionString(obj.Question);
                                 selectedQuestion().priority(obj.Priority);
                                 selectedQuestion().hasLinkedQuestions(obj.HasLinkedQuestions);
+                                // Update Linked Questions
+                                linkedQuestions.push({ PqId: obj.PqId, Question: obj.Question });
                                 isEditorVisible(false);
-                                toastr.success("You are Good!");
+                                toastr.success("Saved Successfully.");
                             },
                             error: function () {
-                                toastr.error("Failed to delete!");
+                                toastr.error("Failed to save!");
                             }
                         });
                     },
@@ -274,7 +322,6 @@ define("pQuestion/pQuestion.viewModel",
                             return itemTobeDeleted.pqAnswerId() == temp.pqAnswerId();
                         });
                         selectedQuestion().answers.remove(newObjtodelete);
-                        toastr.success("You are Good!");
                     },
                     // Has Changes
                     hasChangesOnQuestion = ko.computed(function () {
@@ -286,7 +333,6 @@ define("pQuestion/pQuestion.viewModel",
 
                     // show / hide add answers button
                     CanAddAnswers = function () {
-                        console.log(selectedQuestion().answers().length);
                         if (selectedQuestion().answers().length == 6) {
                             return false;
                         } else {
@@ -294,12 +340,15 @@ define("pQuestion/pQuestion.viewModel",
                         }
                     },
                     // Filter Linked Questions on edit of Profile Question 
-                    filterLinkedQuestions = function () {
-                        var newObjtodelete = linkedQuestions.find(function (temp) {
-                            return selectedQuestion().qId() == temp.PqId;
+                    filteredLinkedQuestions = ko.computed(function () {
+                        if (!selectedQuestion()) {
+                            return linkedQuestions();
+                        }
+                        // Return all but that is being edited
+                        return linkedQuestions.filter(function (temp) {
+                            return selectedQuestion().qId() !== temp.PqId;
                         });
-                        linkedQuestions.remove(newObjtodelete);
-                    },
+                    }),
                     // Initialize the view model
                     initialize = function (specifiedView) {
                         view = specifiedView;
@@ -308,7 +357,7 @@ define("pQuestion/pQuestion.viewModel",
                         // Base Data Call
                         getBasedata();
                         // First request for LV
-                        getQuestions();
+                        getQuestions(214, 41);
                     };
                 return {
                     initialize: initialize,
@@ -345,7 +394,8 @@ define("pQuestion/pQuestion.viewModel",
                     onSaveProfileQuestion: onSaveProfileQuestion,
                     onDeleteQuestionAnswer: onDeleteQuestionAnswer,
                     hasChangesOnQuestion: hasChangesOnQuestion,
-                    CanAddAnswers: CanAddAnswers
+                    CanAddAnswers: CanAddAnswers,
+                    filteredLinkedQuestions: filteredLinkedQuestions
                 };
             })()
         };

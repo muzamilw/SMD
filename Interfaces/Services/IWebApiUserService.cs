@@ -11,6 +11,16 @@ namespace SMD.Interfaces.Services
     public interface IWebApiUserService
     {
         /// <summary>
+        /// Get User by Id
+        /// </summary>
+        Task<LoginResponse> GetById(string userId);
+
+        /// <summary>
+        /// Resets User Responses for Ads, Surveys and Questions
+        /// </summary>
+        void ResetProductsResponses();
+
+        /// <summary>
         /// Gets Ads, Surveys, Questions as paged view
         /// </summary>
         Task<BaseApiResponse> ExecuteActionOnProductsResponse(ProductActionRequest request);
@@ -39,6 +49,11 @@ namespace SMD.Interfaces.Services
         /// Update Profile
         /// </summary>
         Task<BaseApiResponse> UpdateProfile(UpdateUserProfileRequest request);
+
+        /// <summary>
+        /// Update Profile Image
+        /// </summary>
+        Task<UpdateProfileImageResponse> UpdateProfileImage(UpdateUserProfileRequest request);
         
         /// <summary>
         /// Confirm Email

@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Web;
-using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using SMD.ExceptionHandling;
 using SMD.Implementation.Identity;
@@ -45,13 +42,7 @@ namespace SMD.Implementation.Services
         #endregion
         #endregion
         #region Constructor
-        /// <summary>
-        /// Constructor 
-        /// </summary>
-        public StripeService()
-        {
-            
-        }
+
         #endregion
         #region Public
 
@@ -60,12 +51,22 @@ namespace SMD.Implementation.Services
         /// </summary>
         public string ChargeCustomer(int? amount, string customerStripeId)
         {
+            if (amount <= 0)
+            {
+                throw new ArgumentException("Amount");    
+            }
+
+            if (string.IsNullOrEmpty(customerStripeId))
+            {
+                throw new ArgumentException("customerStripeId");
+            }
+
             // Verify If Credit Card is not expired
             var customerService = new StripeCustomerService();
             var customer = customerService.Get(customerStripeId);
             if (customer == null)
             {
-                throw new SMDException("Customrt Not Found!");
+                throw new SMDException("Customer Not Found!");
             }
 
             // If Card has been expired then skip payment

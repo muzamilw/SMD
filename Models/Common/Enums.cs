@@ -31,14 +31,7 @@
     /// </summary>
     public enum EmailTypes
     {
-        RegisterConfirm = 5,
         VerifyAccount = 6, // Email Confirmation
-        SuuportTicketReciept = 7,
-        TicketAssignedToUser = 12,
-        IssueResolved = 13,
-        TicketReAssignedToUser = 14,
-        DeveloperDueDate = 15,
-        DeveloperQuestion = 16,
         ResetPassword = 9,
         RegistrationConfirmed = 1,
         QuestionApproved = 10,
@@ -76,7 +69,7 @@
     public enum ObjectStatus
     {
         Archived=0,
-        Acitve =1
+        Active =1
     }
 
     /// <summary>
@@ -136,6 +129,14 @@
     public static class Accounts
     {
         public static string Smd { get { return "SMD"; } }
+    }
+
+    /// <summary>
+    /// System User
+    /// </summary>
+    public static class SystemUsers
+    {
+        public static string Cash4Ads { get { return "cash4ads@cash4ads.com"; } }
     }
 
     /// <summary>

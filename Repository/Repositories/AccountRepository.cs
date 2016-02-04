@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Microsoft.Practices.Unity;
 using SMD.Interfaces.Repository;
+using SMD.Models.Common;
 using SMD.Models.DomainModels;
 using SMD.Repository.BaseRepository;
 using System.Data.Entity;
@@ -43,9 +44,9 @@ namespace SMD.Repository.Repositories
         /// <summary>
         /// Get Account by user id
         /// </summary>
-        public Account GetByUserId(string userId)
+        public Account GetByUserId(string userId, AccountType accountType)
         {
-            return DbSet.FirstOrDefault(account => account.UserId == userId);
+            return DbSet.FirstOrDefault(account => account.UserId == userId && account.AccountType == (int)accountType);
         }
 
         /// <summary>

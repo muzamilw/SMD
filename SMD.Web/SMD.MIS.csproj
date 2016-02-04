@@ -379,11 +379,16 @@
     <Compile Include="Areas\Api\ApiAreaRegistration.cs" />
     <Compile Include="Areas\Api\Controllers\AdCampaignBaseController.cs" />
     <Compile Include="Areas\Api\Controllers\ApproveSurveyController.cs" />
+    <Compile Include="Areas\Api\Controllers\EducationController.cs" />
+    <Compile Include="Areas\Api\Controllers\IndustryController.cs" />
+    <Compile Include="Areas\Api\Controllers\PayoutController.cs" />
     <Compile Include="Areas\Api\Controllers\CreateStripeCustomerController.cs" />
     <Compile Include="Areas\Api\Controllers\CampaignController.cs" />
     <Compile Include="Areas\Api\Controllers\ChargeCustomerController.cs" />
     <Compile Include="Areas\Api\Controllers\ConfirmEmailController.cs" />
     <Compile Include="Areas\Api\Controllers\ArchiveUserAccountController.cs" />
+    <Compile Include="Areas\Api\Controllers\CollectionController.cs" />
+    <Compile Include="Areas\Api\Controllers\ResetProductsController.cs" />
     <Compile Include="Areas\Api\Controllers\GetProductsController.cs" />
     <Compile Include="Areas\Api\Controllers\GetAudienceAdCampaignForApiController.cs" />
     <Compile Include="Areas\Api\Controllers\GetAudienceSurveyForApiController.cs" />
@@ -391,6 +396,7 @@
     <Compile Include="Areas\Api\Controllers\AdViewedController.cs" />
     <Compile Include="Areas\Api\Controllers\InvoiceDetailController.cs" />
     <Compile Include="Areas\Api\Controllers\InvoiceController.cs" />
+    <Compile Include="Areas\Api\Controllers\UserBalanceInquiryController.cs" />
     <Compile Include="Areas\Api\Controllers\SurveyAudienceController.cs" />
     <Compile Include="Areas\Api\Controllers\SurveyQuestionEditorController.cs" />
     <Compile Include="Areas\Api\Controllers\UpdateCampaignController.cs" />
@@ -412,6 +418,7 @@
     <Compile Include="Areas\Api\Controllers\StandardLoginController.cs" />
     <Compile Include="Areas\Api\Controllers\ProfileQuestionController.cs" />
     <Compile Include="Areas\Api\Controllers\SurveyController.cs" />
+    <Compile Include="Areas\Api\Controllers\UpdateUserProfileImageController.cs" />
     <Compile Include="Areas\Api\LanguageResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -438,6 +445,7 @@
     <Compile Include="Areas\Api\Models\LoginResponse.cs" />
     <Compile Include="Areas\Api\Models\ProductView.cs" />
     <Compile Include="Areas\Api\Models\ProductViewResponse.cs" />
+    <Compile Include="Areas\Api\Models\ProfileQuestionAnswerView.cs" />
     <Compile Include="Areas\Api\Models\SurveyForApiSearchResponse.cs" />
     <Compile Include="Areas\Api\Models\LocationDropDown.cs" />
     <Compile Include="Areas\Api\Models\ProfileQuestionAnswerApiModel.cs" />
@@ -589,6 +597,7 @@
     <Content Include="Content\CSS\supr-theme\jquery.ui.supr.css" />
     <Content Include="Content\CSS\supr-theme\jquery.ui.theme.css" />
     <Content Include="Content\CSS\toastr.css" />
+    <Content Include="Content\Images\5_Main_4.png" />
     <Content Include="Content\Images\arrow-down-small.png" />
     <Content Include="Content\Images\arrow-down.png" />
     <Content Include="Content\Images\arrow-right.jpg" />
@@ -637,6 +646,43 @@
     <Content Include="Content\less\Survey.css">
       <DependentUpon>Survey.less</DependentUpon>
     </Content>
+    <Content Include="Content\metroUI\css\metro-icons.css" />
+    <Content Include="Content\metroUI\css\metro-responsive.css" />
+    <Content Include="Content\metroUI\css\metro-rtl.css" />
+    <Content Include="Content\metroUI\css\metro-schemes.css" />
+    <Content Include="Content\metroUI\css\metro.css" />
+    <Content Include="Content\metroUI\js\metro.js" />
+    <Content Include="Content\metroUI\js\prettify\lang-apollo.js" />
+    <Content Include="Content\metroUI\js\prettify\lang-basic.js" />
+    <Content Include="Content\metroUI\js\prettify\lang-clj.js" />
+    <Content Include="Content\metroUI\js\prettify\lang-css.js" />
+    <Content Include="Content\metroUI\js\prettify\lang-dart.js" />
+    <Content Include="Content\metroUI\js\prettify\lang-erlang.js" />
+    <Content Include="Content\metroUI\js\prettify\lang-go.js" />
+    <Content Include="Content\metroUI\js\prettify\lang-hs.js" />
+    <Content Include="Content\metroUI\js\prettify\lang-lisp.js" />
+    <Content Include="Content\metroUI\js\prettify\lang-llvm.js" />
+    <Content Include="Content\metroUI\js\prettify\lang-lua.js" />
+    <Content Include="Content\metroUI\js\prettify\lang-matlab.js" />
+    <Content Include="Content\metroUI\js\prettify\lang-ml.js" />
+    <Content Include="Content\metroUI\js\prettify\lang-mumps.js" />
+    <Content Include="Content\metroUI\js\prettify\lang-n.js" />
+    <Content Include="Content\metroUI\js\prettify\lang-pascal.js" />
+    <Content Include="Content\metroUI\js\prettify\lang-proto.js" />
+    <Content Include="Content\metroUI\js\prettify\lang-r.js" />
+    <Content Include="Content\metroUI\js\prettify\lang-rd.js" />
+    <Content Include="Content\metroUI\js\prettify\lang-scala.js" />
+    <Content Include="Content\metroUI\js\prettify\lang-sql.js" />
+    <Content Include="Content\metroUI\js\prettify\lang-tcl.js" />
+    <Content Include="Content\metroUI\js\prettify\lang-tex.js" />
+    <Content Include="Content\metroUI\js\prettify\lang-vb.js" />
+    <Content Include="Content\metroUI\js\prettify\lang-vhdl.js" />
+    <Content Include="Content\metroUI\js\prettify\lang-wiki.js" />
+    <Content Include="Content\metroUI\js\prettify\lang-xq.js" />
+    <Content Include="Content\metroUI\js\prettify\lang-yaml.js" />
+    <Content Include="Content\metroUI\js\prettify\prettify.css" />
+    <Content Include="Content\metroUI\js\prettify\prettify.js" />
+    <Content Include="Content\metroUI\js\prettify\run_prettify.js" />
     <Content Include="Content\ReportViewerSite.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -883,6 +929,7 @@
     <Content Include="Images\Cash4ads_logo.png" />
     <Content Include="Images\Cash4Ads_White_pink.png" />
     <Content Include="Images\Cash4Ads_White_text.png" />
+    <Content Include="Images\guru.png" />
     <Content Include="Images\heroAccent.png" />
     <Content Include="Images\orderedList0.png" />
     <Content Include="Images\orderedList1.png" />

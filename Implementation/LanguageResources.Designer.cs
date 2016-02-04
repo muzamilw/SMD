@@ -79,6 +79,24 @@ namespace SMD.Implementation {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Transaction can&apos;t be processed as user {0} doesn&apos;t have {1} registration..
+        /// </summary>
+        internal static string CollectionService_AccountNotRegistered {
+            get {
+                return ResourceManager.GetString("CollectionService_AccountNotRegistered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Transaction can&apos;t be processed as user {0} doesn&apos;t exist..
+        /// </summary>
+        internal static string CollectionService_UserNotFound {
+            get {
+                return ResourceManager.GetString("CollectionService_UserNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to There is some problem while sending email..
         /// </summary>
         internal static string EmailManagerService_FailedToSendEmail {
@@ -165,6 +183,15 @@ namespace SMD.Implementation {
         internal static string WebApiUserService_InvalidEmail {
             get {
                 return ResourceManager.GetString("WebApiUserService_InvalidEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User with name {0} does not exist..
+        /// </summary>
+        internal static string WebApiUserService_InvalidUser {
+            get {
+                return ResourceManager.GetString("WebApiUserService_InvalidUser", resourceCulture);
             }
         }
         

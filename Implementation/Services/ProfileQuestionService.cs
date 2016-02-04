@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
+using SMD.Common;
 using SMD.ExceptionHandling;
 using SMD.Interfaces.Repository;
 using SMD.Interfaces.Services;
@@ -27,59 +28,7 @@ namespace SMD.Implementation.Services
         private readonly ILanguageRepository _languageRepository;
         private readonly IProfileQuestionGroupRepository _profileQuestionGroupRepository;
         private readonly IProfileQuestionAnswerRepository _profileQuestionAnswerRepository;
-        /// <summary>
-        /// Saving Function 
-        /// </summary>
-        private string SaveImage(string mapPath, string existingImage, string caption, string fileName,
-            string fileSource, byte[] fileSourceBytes, bool fileDeleted = false)
-        {
-            if (fileSourceBytes == null)
-            {
-                return fileSource;
-            }
-            if (!string.IsNullOrEmpty(fileSource) || fileDeleted)
-            {
-                // Look if file already exists then replace it
-                if (!string.IsNullOrEmpty(existingImage))
-                {
-                    if (Path.IsPathRooted(existingImage))
-                    {
-                        if (File.Exists(existingImage))
-                        {
-                            // Remove Existing File
-                            File.Delete(existingImage);
-                        }
-                    }
-                    else
-                    {
-                        string filePath = HttpContext.Current.Server.MapPath("~/" + existingImage);
-                        if (File.Exists(filePath))
-                        {
-                            // Remove Existing File
-                            File.Delete(filePath);
-                        }
-                    }
-
-                }
-
-                // If File has been deleted then set the specified field as empty
-                // Used for File1, File2, File3, File4, File5
-                if (fileDeleted)
-                {
-                    return string.Empty;
-                }
-
-                // First Time Upload
-                string imageurl = mapPath + "\\" + caption + fileName;
-                File.WriteAllBytes(imageurl, fileSourceBytes);
-
-                int indexOf = imageurl.LastIndexOf("SMD_Content", StringComparison.Ordinal);
-                imageurl = imageurl.Substring(indexOf, imageurl.Length - indexOf);
-                return imageurl;
-            }
-
-            return null;
-        }
+        
         #endregion
         #region Constructor
         /// <summary>
@@ -189,9 +138,13 @@ namespace SMD.Implementation.Services
                 serverObj.ModifiedDate = source.ModifiedDate;
                 serverObj.PenalityForNotAnswering = source.PenalityForNotAnswering;
                 serverObj.Status = source.Status;
-                serverObj.ModifiedDate = DateTime.Now;
+                serverObj.ModifiedDate = DateTime.Now.Add(-(_profileQuestionRepository.UserTimezoneOffSet));
                 if (source.ProfileQuestionAnswers != null)
                 {
+                    if (serverObj.ProfileQuestionAnswers == null)
+                    {
+                        serverObj.ProfileQuestionAnswers = new List<ProfileQuestionAnswer>();
+                    }
                     #region Answer Add/Edit
                     // Add/Edit Answer
                     foreach (var answer in source.ProfileQuestionAnswers)
@@ -203,7 +156,6 @@ namespace SMD.Implementation.Services
                             serverAns.Type = answer.Type;
                             serverAns.AnswerString = answer.AnswerString;
                             serverAns.ImagePath = answer.ImagePath;
-
                             serverAns.LinkedQuestion1Id = answer.LinkedQuestion1Id;
                             serverAns.LinkedQuestion2Id = answer.LinkedQuestion2Id;
                             serverAns.LinkedQuestion3Id = answer.LinkedQuestion3Id;
@@ -226,6 +178,7 @@ namespace SMD.Implementation.Services
                                 Type = answer.Type,
                                 AnswerString = answer.AnswerString,
                                 ImagePath = answer.ImagePath,
+                                Status = (int) ObjectStatus.Active,
                                 LinkedQuestion1Id = answer.LinkedQuestion1Id,
                                 LinkedQuestion2Id = answer.LinkedQuestion2Id,
                                 LinkedQuestion3Id = answer.LinkedQuestion3Id,
@@ -235,7 +188,12 @@ namespace SMD.Implementation.Services
                                 PqAnswerId = answer.PqAnswerId,
                                 SortOrder = answer.SortOrder
                             };
+                            if (serverAns.Type == 2)
+                            {
+                                serverAns.ImagePath = SaveAnswerImage(serverAns);
+                            }
                             _profileQuestionAnswerRepository.Add(serverAns);
+                            serverObj.ProfileQuestionAnswers.Add(serverAns);
                         }
                     }
 
@@ -281,16 +239,17 @@ namespace SMD.Implementation.Services
                     Status = source.Status
                 };
                 _profileQuestionRepository.Add(serverObj);
-                _profileQuestionRepository.SaveChanges();
+                if (serverObj.ProfileQuestionAnswers == null)
+                {
+                    serverObj.ProfileQuestionAnswers = new List<ProfileQuestionAnswer>();
+                }
                 foreach (var answer in source.ProfileQuestionAnswers)
                 {
-                    var serverAns = _profileQuestionAnswerRepository.Find(answer.PqAnswerId);
-                        serverAns = new ProfileQuestionAnswer
+                    var serverAns = new ProfileQuestionAnswer
                         {
                             PqId = serverObj.PqId,
                             Type = answer.Type,
                             AnswerString = answer.AnswerString,
-                            ImagePath = answer.ImagePath,
                             LinkedQuestion1Id = answer.LinkedQuestion1Id,
                             LinkedQuestion2Id = answer.LinkedQuestion2Id,
                             LinkedQuestion3Id = answer.LinkedQuestion3Id,
@@ -298,13 +257,20 @@ namespace SMD.Implementation.Services
                             LinkedQuestion5Id = answer.LinkedQuestion5Id,
                             LinkedQuestion6Id = answer.LinkedQuestion6Id,
                             PqAnswerId = answer.PqAnswerId,
-                            SortOrder = answer.SortOrder
+                            SortOrder = answer.SortOrder,
+                            Status = (int) ObjectStatus.Active
                         };
+                        if (serverAns.Type == 2)
+                        {
+                            serverAns.ImagePath = SaveAnswerImage(answer);
+                        }
                         _profileQuestionAnswerRepository.Add(serverAns);
+                        serverObj.ProfileQuestionAnswers.Add(serverAns);
                 }
             }
             #endregion
-            _profileQuestionAnswerRepository.SaveChanges();
+
+            _profileQuestionRepository.SaveChanges();
             return _profileQuestionRepository.Find(serverObj.PqId);
 
         }
@@ -325,7 +291,7 @@ namespace SMD.Implementation.Services
                 Directory.CreateDirectory(mapPath);
             }
 
-            mapPath = SaveImage(mapPath, string.Empty, string.Empty,
+            mapPath = ImageHelper.Save(mapPath, string.Empty, string.Empty,
                 "AnswerImage_"+DateTime.Now.Second+".png", source.ImagePath, source.ImageUrlBytes);
 
             return mapPath;

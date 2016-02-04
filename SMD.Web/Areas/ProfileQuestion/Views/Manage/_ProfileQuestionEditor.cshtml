@@ -47,10 +47,10 @@
                                                         <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
                                                     </a>
                                                 </div>
-                                                <label  class="control-label text-right tooltip-float">Question</label>
+                                                <label class="control-label text-right tooltip-float">Question</label>
                                             </div>
                                             <div class="col-lg-6">
-                                                <input type="text" class="form-control"  data-bind="value: questionString">
+                                                <input type="text" class="form-control" data-bind="value: questionString, validationTooltip: questionString">
                                             </div>
                                         </div>
                                     </div>
@@ -62,7 +62,7 @@
                                                         <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
                                                     </a>
                                                 </div>
-                                                <label  class="control-label text-right tooltip-float">Language</label>
+                                                <label class="control-label text-right tooltip-float">Language</label>
                                             </div>
                                             <div class="col-lg-6">
                                                 <select class="form-control" data-bind="options: $root.langs, optionsText: 'LanguageName', optionsValue: 'LanguageId', optionsCaption: '&lt;' + 'Select Language'+ '&gt;' , value:languageId"></select>
@@ -92,10 +92,10 @@
                                                         <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
                                                     </a>
                                                 </div>
-                                                <label  class="control-label text-right tooltip-float">Profile Group</label>
+                                                <label class="control-label text-right tooltip-float">Profile Group</label>
                                             </div>
                                             <div class="col-lg-6">
-                                                <select class="form-control" data-bind="options: $root.qGroup, optionsText: 'ProfileGroupName', optionsValue: 'ProfileGroupId', optionsCaption: '&lt;' + 'All'+ '&gt;' , value:profileGroupId"></select>
+                                                <select class="form-control" data-bind="options: $root.qGroup, optionsText: 'ProfileGroupName', optionsValue: 'ProfileGroupId', optionsCaption: '&lt;' + 'All'+ '&gt;' , value:profileGroupId, validationTooltip: profileGroupId"></select>
                                             </div>
                                         </div>
                                     </div>
@@ -107,7 +107,7 @@
                                                         <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
                                                     </a>
                                                 </div>
-                                                <label  class="control-label text-right tooltip-float">Priority</label>
+                                                <label class="control-label text-right tooltip-float">Priority</label>
                                             </div>
                                             <div class="col-lg-6">
                                                 <select class="form-control" data-bind="options: $root.priorityList, optionsCaption: '&lt;' + 'All'+ '&gt;' , value:priority"></select>
@@ -122,10 +122,10 @@
                                                         <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
                                                     </a>
                                                 </div>
-                                                <label  class="control-label text-right tooltip-float">Question Type</label>
+                                                <label class="control-label text-right tooltip-float">Question Type</label>
                                             </div>
                                             <div class="col-lg-6">
-                                                <select class="form-control" data-bind="options: $root.questiontype, optionsText: 'typeName', optionsValue: 'typeId', optionsCaption: '&lt;' + 'All'+ '&gt;' , value:type"></select>
+                                                <select class="form-control" data-bind="options: $root.questiontype, optionsText: 'typeName', optionsValue: 'typeId', optionsCaption: '&lt;' + 'All'+ '&gt;' , value:type, validationTooltip: type"></select>
                                             </div>
                                         </div>
                                     </div>
@@ -137,7 +137,7 @@
                                                         <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
                                                     </a>
                                                 </div>
-                                                <label  class="control-label text-right tooltip-float">Refresh Time (days)</label>
+                                                <label class="control-label text-right tooltip-float">Refresh Time (days)</label>
                                             </div>
                                             <div class="col-lg-6">
                                                 <input type="text" class="form-control" data-bind="value: refreshTime">
@@ -155,7 +155,7 @@
                                                 <label class="control-label text-right tooltip-float">Skipped Count</label>
                                             </div>
                                             <div class="col-lg-6">
-                                                <input type="text" readonly="" class="form-control"  data-bind="value: skippedCount">
+                                                <input type="text" readonly="" class="form-control" data-bind="value: skippedCount">
                                             </div>
                                         </div>
                                     </div>
@@ -167,7 +167,7 @@
                                                         <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
                                                     </a>
                                                 </div>
-                                                <label  class="control-label text-right tooltip-float">Creation Date</label>
+                                                <label class="control-label text-right tooltip-float">Creation Date</label>
                                             </div>
                                             <div class="col-lg-6">
                                                 <label disabled="" class="form-control" data-bind="dateString:creationDate,datePattern: 'DD/MM/YYYY'"></label>
@@ -182,7 +182,7 @@
                                                         <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
                                                     </a>
                                                 </div>
-                                                <label  class="control-label text-right tooltip-float">Modified Date</label>
+                                                <label class="control-label text-right tooltip-float">Modified Date</label>
                                             </div>
                                             <div class="col-lg-6">
                                                 <label disabled="" class="form-control" data-bind="dateString:modifiedDate,datePattern: 'DD/MM/YYYY'"></label>
@@ -190,7 +190,7 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-9" style="display:none;">
-                                        <div class="form-group" >
+                                        <div class="form-group">
                                             <div class="col-lg-4 text-right">
                                                 <div class="bs-example-tooltips tooltip-float-width">
                                                     <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
@@ -212,7 +212,7 @@
                                                         <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
                                                     </a>
                                                 </div>
-                                                <label  class="control-label text-right tooltip-float">Active</label>
+                                                <label class="control-label text-right tooltip-float">Active</label>
                                             </div>
                                             <div class="col-lg-3">
                                                 <div>
@@ -236,7 +236,7 @@
                                                         <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
                                                     </a>
                                                 </div>
-                                                <label  class="control-label text-right tooltip-float">Has Linked Questions?</label>
+                                                <label class="control-label text-right tooltip-float">Has Linked Questions</label>
                                             </div>
                                             <div class="col-lg-3">
                                                 <div>
@@ -254,8 +254,8 @@
                                     </div>
                                     <div class="col-lg-12 form-horizontal">
                                         @*<div class="tabsdescriptions" style="margin-top:25px;margin-left:2px;">
-                                            <p class="group-header-description">All possible answers to the question. </p>
-                                        </div>*@
+                                                <p class="group-header-description">All possible answers to the question. </p>
+                                            </div>*@
 
                                         <div class="col-lg-12" @*data-bind="with: template"*@ style="padding-left:3px;padding-right:0px;">
                                             <div class="clearfix">
@@ -265,7 +265,7 @@
                                                         <a href="#" id="addTemplatePageBtn" class="btn btn-primary pull-right" data-toggle="modal" data-target=".bs-example-modal-lg" data-bind="click: $root.addNewAnswer, visible: $root.CanAddAnswers()">
                                                             Add Answer
                                                         </a>
-                                                        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                                                        <div class="modal fade bs-example-modal-lg" id="pqAnswerDialog" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
                                                             <div class="modal-dialog modal-lg">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
@@ -282,7 +282,7 @@
                                                                                                 <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
                                                                                             </a>
                                                                                         </div>
-                                                                                        <label  class="control-label text-right tooltip-float">Answer Type</label>
+                                                                                        <label class="control-label text-right tooltip-float">Answer Type</label>
                                                                                     </div>
                                                                                     <div class="col-lg-6">
                                                                                         <div class="radio" style="padding-left:0px;">
@@ -308,10 +308,10 @@
                                                                                                 <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
                                                                                             </a>
                                                                                         </div>
-                                                                                        <label  class="control-label text-right tooltip-float">Answer String</label>
+                                                                                        <label class="control-label text-right tooltip-float">Answer String</label>
                                                                                     </div>
                                                                                     <div class="col-lg-6">
-                                                                                        <input type="text" class="form-control"  data-bind="value: answerString">
+                                                                                        <input type="text" class="form-control" data-bind="value: answerString, validationTooltip: answerString">
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -323,9 +323,9 @@
                                                                                             <input type="file" class="upload" id="image_files" onchange="readPhotoURL(this);" />
                                                                                         </div>
                                                                                     </div>
-                                                                                  
+
                                                                                     <div class="col-md-6">
-                                                                                        <img id="vehicleImage" alt="" style="width: 120px;height:120px" data-bind="attr:{src:imagePath }" />
+                                                                                        <img id="vehicleImage" alt="" style="width: 120px;height:120px" data-bind="attr:{src:imagePath }, css: { errorFill: isImageRequired }" />
                                                                                         <h5>Answer Image<span></span></h5>
                                                                                     </div>
                                                                                 </div>
@@ -342,7 +342,7 @@
                                                                                             <label class="control-label text-right tooltip-float">Linked Question 1</label>
                                                                                         </div>
                                                                                         <div class="col-lg-6">
-                                                                                            <select class="form-control" data-bind="options: $root.linkedQuestions, optionsText: 'Question', optionsValue: 'PqId', optionsCaption: '&lt;' + 'Select Question'+ '&gt;' , value:linkedQuestion1Id"></select>
+                                                                                            <select class="form-control" data-bind="options: $root.filteredLinkedQuestions, optionsText: 'Question', optionsValue: 'PqId', optionsCaption: '&lt;' + 'Select Question'+ '&gt;' , value:linkedQuestion1Id"></select>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -351,7 +351,7 @@
                                                                                     <div class="form-group">
                                                                                         <div class="col-lg-4 text-right">
                                                                                             <div class="bs-example-tooltips tooltip-float-width">
-                                                                                             
+
                                                                                             </div>
                                                                                             <label class="control-label text-right tooltip-float">Linked Question 2</label>
                                                                                         </div>
@@ -365,9 +365,9 @@
                                                                                     <div class="form-group">
                                                                                         <div class="col-lg-4 text-right">
                                                                                             <div class="bs-example-tooltips tooltip-float-width">
-                                                                                           
+
                                                                                             </div>
-                                                                                            <label  class="control-label text-right tooltip-float">Linked Question 3</label>
+                                                                                            <label class="control-label text-right tooltip-float">Linked Question 3</label>
                                                                                         </div>
                                                                                         <div class="col-lg-6">
                                                                                             <select class="form-control" data-bind="options: $root.linkedQuestions,  optionsText: 'Question', optionsValue: 'PqId',  optionsCaption: '&lt;' + 'Select Question'+ '&gt;' , value:linkedQuestion3Id"></select>
@@ -379,9 +379,9 @@
                                                                                     <div class="form-group">
                                                                                         <div class="col-lg-4 text-right">
                                                                                             <div class="bs-example-tooltips tooltip-float-width">
-                                                                                        
+
                                                                                             </div>
-                                                                                            <label  class="control-label text-right tooltip-float">Linked Question 4</label>
+                                                                                            <label class="control-label text-right tooltip-float">Linked Question 4</label>
                                                                                         </div>
                                                                                         <div class="col-lg-6">
                                                                                             <select class="form-control" data-bind="options: $root.linkedQuestions,  optionsText: 'Question', optionsValue: 'PqId',  optionsCaption: '&lt;' + 'Select Question'+ '&gt;' , value:linkedQuestion4Id"></select>
@@ -393,9 +393,9 @@
                                                                                     <div class="form-group">
                                                                                         <div class="col-lg-4 text-right">
                                                                                             <div class="bs-example-tooltips tooltip-float-width">
-                                                                                     
+
                                                                                             </div>
-                                                                                            <label  class="control-label text-right tooltip-float">Linked Question 5</label>
+                                                                                            <label class="control-label text-right tooltip-float">Linked Question 5</label>
                                                                                         </div>
                                                                                         <div class="col-lg-6">
                                                                                             <select class="form-control" data-bind="options: $root.linkedQuestions,  optionsText: 'Question', optionsValue: 'PqId',  optionsCaption: '&lt;' + 'Select Question'+ '&gt;' , value:linkedQuestion5Id"></select>
@@ -407,9 +407,9 @@
                                                                                     <div class="form-group">
                                                                                         <div class="col-lg-4 text-right">
                                                                                             <div class="bs-example-tooltips tooltip-float-width">
-                                                                                     
+
                                                                                             </div>
-                                                                                            <label  class="control-label text-right tooltip-float">Linked Question 6</label>
+                                                                                            <label class="control-label text-right tooltip-float">Linked Question 6</label>
                                                                                         </div>
                                                                                         <div class="col-lg-6">
                                                                                             <select class="form-control" data-bind="options: $root.linkedQuestions,  optionsText: 'Question', optionsValue: 'PqId',  optionsCaption: '&lt;' + 'Select Question'+ '&gt;' , value:linkedQuestion6Id"></select>
@@ -420,7 +420,7 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="modal-footer">
-                                                                        <button type="button" data-dismiss="modal" class="btn btn-primary" data-bind="click:$root.onSaveNewAnswer">Save</button>
+                                                                        <button type="button" class="btn btn-primary" data-bind="click:$root.onSaveNewAnswer">Save</button>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -455,8 +455,13 @@
         <script id="answersTemplate" type="text/html">
             <tr>
                 <td>
-                    <p  id="txtPages" data-bind="text: answerString">
-                   
+                    <!-- ko if: (type() === 1 || type() === '1') -->
+                    <p id="txtPages" data-bind="text: answerString">
+                    </p>
+                    <!-- /ko -->
+                    <!-- ko if: (type() === 2 || type() === '2') -->
+                    <img id="vehicleImage" alt="" style="width: 35px;height:35px" data-bind="attr:{src:imagePath }" />
+                    <!-- /ko -->
                 </td>
                 <td>
                     <a class="table-link danger" style="float: right">
@@ -524,5 +529,5 @@
             </tr>
         </script>
     </div>
-   
+
 </div>

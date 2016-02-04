@@ -9,6 +9,11 @@ namespace SMD.Interfaces.Repository
     public interface IAdCampaignRepository : IBaseRepository<AdCampaign, long>
     {
         /// <summary>
+        /// Reset User Products Responses
+        /// </summary>
+        void ResetUserProductsResponses();
+
+        /// <summary>
         /// Gets Ads, Surveys, Questions as paged view
         /// </summary>
         IEnumerable<GetProducts_Result> GetProducts(GetProductsRequest request);
@@ -20,7 +25,7 @@ namespace SMD.Interfaces.Repository
 
         IEnumerable<AdCampaign> SearchCampaign(AdCampaignSearchRequest request, out int rowCount);
 
-        IEnumerable<AdCampaign> GetAdCampaignById(long CampaignId);
+        IEnumerable<AdCampaign> GetAdCampaignById(long campaignId);
         UserAndCostDetail GetUserAndCostDetail();
         User GetUserById();
        
