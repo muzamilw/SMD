@@ -47,11 +47,12 @@ define("addApproval/addApproval.viewModel",
                     // Close Editor 
                     closeEditDialog = function() {
                         // Ask for confirmation
-                        confirmation.afterProceed(function() {
-                            selectedCampaign(undefined);
-                            isEditorVisible(false);
-                        });
-                        confirmation.show();
+                        //confirmation.afterProceed(function() {
+                          
+                        //});
+                        //confirmation.show();
+                        selectedCampaign(undefined);
+                        isEditorVisible(false);
                     },
                     // On editing of existing AdCampaign
                     onEditCampaign = function(item) {
@@ -81,12 +82,17 @@ define("addApproval/addApproval.viewModel",
                         }
                         return (selectedCampaign().hasChanges());
                     }),
+                    onApproveCampaign = function () {
+                        selectedCampaign().isApproved(true) ;
+                        onSaveCampaign();
+                    },
                     // Reject buttoin handler 
                     onRejectCampaign = function() {
                         if (selectedCampaign().rejectionReason() == undefined || selectedCampaign().rejectionReason() == "" || selectedCampaign().rejectionReason() == " ") {
                             toastr.info("Please add rejection reason!");
                             return false;
                         }
+                        selectedCampaign().isApproved(false);
                         onSaveCampaign();
                     },
                     // Initialize the view model
@@ -110,6 +116,7 @@ define("addApproval/addApproval.viewModel",
                     onEditCampaign: onEditCampaign,
                     selectedCampaign: selectedCampaign,
                     onSaveCampaign: onSaveCampaign,
+                    onApproveCampaign : onApproveCampaign,
                     hasChangesOnCampaign: hasChangesOnCampaign,
                     onRejectCampaign: onRejectCampaign
                 };

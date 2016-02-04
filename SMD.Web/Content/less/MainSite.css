@@ -149,8 +149,9 @@ div.Tokenize ul.Dropdown {
   font-size: 0.875em;
   font-weight: bold;
   padding-bottom: 5px;
-  border-bottom: 2px solid #f0f0f0;
+  /* border-bottom: 2px solid #f0f0f0; */
   padding-left: 10px;
+  padding-top: 3px;
 }
 .range_dash {
   width: 10px;
@@ -393,17 +394,40 @@ ul {
 }
 .yourBudgtHeadingCnt {
   float: left;
-  width: 40%;
-  margin-top: 7px;
+  width: 50%;
 }
 .yourBudgtBoxCnt {
   float: left;
-  width: 30%;
+  width: 35%;
+  margin-top: -8px;
 }
 .noCriteria {
   background: none !important;
   font-size: 13px !important;
   padding-left: 20px;
+}
+.social-box .social-action {
+  font-size: 19PX !important;
+  clear: both;
+}
+.social-box-wrapper > div.social-box {
+  background: #6d6efa !important;
+}
+.ctCampaign {
+  background: #6d6efa !important;
+  color: white;
+  border: none;
+  border-radius: 0px;
+  width: 200px;
+  margin-top: 2px;
+  height: 35px;
+}
+.statusbg {
+  padding: 7px;
+  width: 166px;
+  color: white;
+  border-radius: 5px;
+  font-size: 13px;
 }
 .lang_newcnt {
   position: relative;
@@ -425,6 +449,11 @@ ul {
 .count_token_opt_cnt {
   float: left;
   width: 69%;
+  border: 1px solid #e7ebee;
+}
+.count_token_opt_prof_cnt {
+  float: left;
+  width: 100% !important;
   border: 1px solid #e7ebee;
 }
 #searchSurveyLocations {
@@ -547,6 +576,40 @@ div.Tokenize ul.Dropdown {
   background: none !important;
   font-size: 13px !important;
   padding-left: 20px;
+}
+.surveyLeftImagePc {
+  background-image: url(/Images/select_image.jpg);
+  background-repeat: no-repeat;
+  margin-top: 5px;
+  margin-left: 5px;
+  height: 184px;
+  background-position-y: -53px;
+  background-position-x: -16px;
+}
+#ddpEducation,
+#ddpIndustory {
+  border: none !important;
+}
+.aud_cnt_head {
+  background-color: #6B6AFE;
+  color: white;
+  text-align: center;
+  height: 49px;
+  padding: 5px 5px 5px 5px;
+  font-size: 18px;
+}
+.aud_cnt_foot {
+  background-color: #6B6AFE;
+  color: white;
+  text-align: center;
+  height: 150px;
+  padding: 14px 5px 5px 5px;
+}
+.aud_cnt div {
+  padding: 5px 0px 0px 0px;
+}
+.btnSubmitApproval {
+  margin-top: 17px;
 }
 /* Common Styles */
 .fileUpload {

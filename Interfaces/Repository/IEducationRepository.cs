@@ -14,5 +14,10 @@ namespace SMD.Interfaces.Repository
         /// Search Invoces for LV
         /// </summary>
         IEnumerable<Education> SearchEducation(string input);
+
+        /// <summary>
+        /// Get List of Language 
+        /// </summary>
+        IEnumerable<Education> GetAllEducations();
     }
 }

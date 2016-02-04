@@ -50,13 +50,15 @@ define("survey/survey.viewModel",
                     totalAudience = ko.observable(0),
                     // audience reach mode 
                     audienceReachMode = ko.observable(1),
-                    userBaseData = ko.observable({CurrencySymbol:'',isStripeIntegrated:false}),
+                    userBaseData = ko.observable({ CurrencySymbol: '', isStripeIntegrated: false }),
                     setupPrice = ko.observable(0),
                     // unique country list used to bind location dropdown
                     selectedQuestionCountryList = ko.observableArray([]),
                     errorList = ko.observableArray([]),
                       educations = ko.observableArray([]),
                       professions = ko.observableArray([]),
+                    qStatuses = ko.observableArray([{ id: 0, value: 'All' }, { id: 1, value: 'Draft' }, { id: 2, value: 'Submitted for Approval' }, { id: 3, value: 'Live' }, { id: 4, value: 'Paused' }, { id: 5, value: 'Completed' }, { id: 6, value: 'Rejected' }]);
+                    statusFilterValue = ko.observable();
                     //Get Questions
                     getQuestions = function () {   
                         dataservice.searchSurveyQuestions(
@@ -66,6 +68,7 @@ define("survey/survey.viewModel",
                                 CountryFilter: countryfilterValue(),
                                 PageSize: pager().pageSize(),
                                 PageNo: pager().currentPage(),
+                                Status: statusFilterValue(),
                                 FirstLoad:false
                             },
                             {
@@ -95,7 +98,7 @@ define("survey/survey.viewModel",
                                     langs.valueHasMutated();
                                     countries.valueHasMutated();
                                     // populate survey questions 
-                                    populateSurveyQuestions(data);
+                                    //populateSurveyQuestions(data);
                                     userBaseData(data.objBaseData);
                                     setupPrice(data.setupPrice);
 
@@ -147,7 +150,7 @@ define("survey/survey.viewModel",
                         } else if (item.Status == 5) {
                             item.StatusValue = "Completed"; canSubmitForApproval(false);
                         } else if (item.Status == 6) {
-                            item.StatusValue = "Approval Rejected"; canSubmitForApproval(false);
+                            item.StatusValue = "Approval Rejected"; canSubmitForApproval(true);
                         }
                         return item;
                     }
@@ -160,6 +163,7 @@ define("survey/survey.viewModel",
                         langfilterValue(undefined);
                         countryfilterValue(undefined);
                         filterValue(undefined);
+                        statusFilterValue(undefined);
                         getQuestions();
                     },
                     // Add new Profile Question
@@ -167,8 +171,8 @@ define("survey/survey.viewModel",
                         titleText("Add new survey");
                         selectedQuestion(new model.Survey());
                         selectedQuestion().Gender("1");
-                        selectedQuestion().LeftPicturePath("Content/Images/Company_Default.png");
-                        selectedQuestion().RightPicturePath("Content/Images/Company_Default.png");
+                        selectedQuestion().LeftPicturePath("/Images/select_image.jpg");
+                        selectedQuestion().RightPicturePath("/Images/select_image.jpg");
                         selectedQuestion().StatusValue("Draft");
                         selectedQuestion().AgeRangeStart(13);
                         selectedQuestion().AgeRangeEnd(80);
@@ -270,7 +274,7 @@ define("survey/survey.viewModel",
                                        bindAudienceReachCount();
                                        buildMap();
                                        isEditorVisible(true);
-                                       if (item.Status() == 1 != 1 && item.Status() != null) {
+                                       if (item.Status() != 1 && item.Status() != 6 && item.Status() != null) {
                                            disableControls(item.Status());
                                        }
                                      //  getParentSurveyList();
@@ -1016,6 +1020,7 @@ define("survey/survey.viewModel",
                         pager(pagination.Pagination({ PageSize: 10 }, questions, getQuestions));
                         // Base Data Call
                         getBasedata();
+                        getQuestions();
                     };
                 return {
                     initialize: initialize,
@@ -1089,7 +1094,9 @@ define("survey/survey.viewModel",
                     educations: educations,
                     professions: professions,
                     addNewEducationCriteria: addNewEducationCriteria,
-                    addNewProfessionCriteria: addNewProfessionCriteria
+                    addNewProfessionCriteria: addNewProfessionCriteria,
+                    statusFilterValue: statusFilterValue,
+                    qStatuses: qStatuses
                 };
             })()
         };

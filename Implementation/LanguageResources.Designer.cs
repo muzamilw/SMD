@@ -88,6 +88,15 @@ namespace SMD.Implementation {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Profile Question not found against Id {0}..
+        /// </summary>
+        internal static string ProfileQuestionService_ProfileQuestionNotFound {
+            get {
+                return ResourceManager.GetString("ProfileQuestionService_ProfileQuestionNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Success.
         /// </summary>
         internal static string Success {
@@ -174,6 +183,15 @@ namespace SMD.Implementation {
         internal static string WebApiUserService_LoginInfoNotFound {
             get {
                 return ResourceManager.GetString("WebApiUserService_LoginInfoNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Product Type is not provided..
+        /// </summary>
+        internal static string WebApiUserService_ProductTypeNotProvided {
+            get {
+                return ResourceManager.GetString("WebApiUserService_ProductTypeNotProvided", resourceCulture);
             }
         }
         

@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SMD.Models.DomainModels
 {
@@ -53,9 +50,11 @@ namespace SMD.Models.DomainModels
         public string Voucher1Heading { get; set; }
         public string Voucher1Description { get; set; } 
         public string Voucher1Value { get; set; }
+        public string Voucher1ImagePath { get; set; }
         public string Voucher2Heading { get; set; }
         public string Voucher2Description { get; set; }
         public string Voucher2Value { get; set; }
+        public string Voucher2ImagePath { get; set; }
         public virtual Language Language { get; set; }
         public virtual ICollection<AdCampaignResponse> AdCampaignResponses { get; set; }
         public virtual ICollection<AdCampaignTargetCriteria> AdCampaignTargetCriterias { get; set; }
@@ -66,5 +65,7 @@ namespace SMD.Models.DomainModels
         public string CampaignImagePath { get; set; }
         [NotMapped]
         public string CampaignTypeImagePath { get; set; }
+        [NotMapped]
+        public string VoucherImagePath { get; set; }
     }
 }

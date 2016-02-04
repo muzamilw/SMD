@@ -1,29 +1,25 @@
-﻿using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
+﻿using Microsoft.AspNet.Identity.Owin;
 using SMD.ExceptionHandling;
 using SMD.Implementation.Identity;
 using SMD.Interfaces.Repository;
 using SMD.Interfaces.Services;
 using SMD.Models.Common;
 using SMD.Models.DomainModels;
-using SMD.Models.IdentityModels;
 using SMD.Models.RequestModels;
 using SMD.Models.ResponseModels;
+using Stripe;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web;
-using Stripe;
 
 
 namespace SMD.Implementation.Services
 {
     public class SurveyQuestionService : ISurveyQuestionService
     {
-          #region Private
+        #region Private
 
         /// <summary>
         /// Private members
@@ -51,7 +47,7 @@ namespace SMD.Implementation.Services
         {
             string[] savePaths = new string[2];
             string directoryPath = HttpContext.Current.Server.MapPath("~/SMD_Content/SurveyQuestions/" + question.SqId);
-            
+
             if (directoryPath != null && !Directory.Exists(directoryPath))
             {
                 Directory.CreateDirectory(directoryPath);
@@ -61,7 +57,7 @@ namespace SMD.Implementation.Services
                 string base64 = question.LeftPictureBytes.Substring(question.LeftPictureBytes.IndexOf(',') + 1);
                 base64 = base64.Trim('\0');
                 byte[] data = Convert.FromBase64String(base64);
-                string savePath = directoryPath + "\\LeftPicture.jpg";
+                string savePath = directoryPath + "\\guid_LeftPicture.jpg";
                 File.WriteAllBytes(savePath, data);
                 int indexOf = savePath.LastIndexOf("SMD_Content", StringComparison.Ordinal);
                 savePath = savePath.Substring(indexOf, savePath.Length - indexOf);
@@ -77,7 +73,7 @@ namespace SMD.Implementation.Services
                 {
                     Directory.CreateDirectory(directoryPath);
                 }
-                string savePath = directoryPath + "\\RightPicture.jpg";
+                string savePath = directoryPath + "\\guid_RightPicture.jpg";
                 File.WriteAllBytes(savePath, data);
                 int indexOf = savePath.LastIndexOf("SMD_Content", StringComparison.Ordinal);
                 savePath = savePath.Substring(indexOf, savePath.Length - indexOf);
@@ -101,11 +97,24 @@ namespace SMD.Implementation.Services
             var amount = product.SetupPrice + tax.TaxValue;
             // User who added Survey Question for approval 
             var user = webApiUserService.GetUserByUserId(source.UserId);
-            // Make Stripe actual payment 
-            var response = stripeService.ChargeCustomer((int?)amount, user.StripeCustomerId);
+
+            string response = null;
+            Boolean isSystemUser;
+
+            // If It is not System User then make transation 
+            if (user.Roles.Any(role => role.Name.ToLower().Equals("user")))
+            {
+                // Make Stripe actual payment 
+                response = stripeService.ChargeCustomer((int?)amount, user.StripeCustomerId);
+                isSystemUser = false;
+            }
+            else
+            {
+                isSystemUser = true;
+            }
 
             #endregion
-            if (response != "failed")
+            if (isSystemUser || (response != "failed"))
             {
                 #region Invocing + Transactions
                 var requestModel = new ApproveSurveyRequest
@@ -122,7 +131,6 @@ namespace SMD.Implementation.Services
             }
         }
         #endregion
-
         #region Constructor
 
         /// <summary>
@@ -155,16 +163,20 @@ namespace SMD.Implementation.Services
             return new SurveyQuestionResponseModel
             {
                 SurveyQuestions = surveyQuestionRepository.SearchSurveyQuestions(request, out rowCount),
-                Countries =  new List<Country>(),
+                Countries = new List<Country>(),
                 Languages = new List<Language>(),
-                TotalCount = rowCount
+                TotalCount = rowCount,
+                Industry = new List<Industry>(),
+                Education = new List<Education>(),
+                objBaseData = new UserBaseData(),
+                setupPrice = 0
             };
         }
         public SurveyQuestionResponseModel GetSurveyQuestions()
         {
-            int rowCount;
+           // int rowCount;
             string code = Convert.ToString((int)ProductCode.SurveyQuestion);
-            var product = productRepository.GetAll().Where(g=>g.ProductCode == code).FirstOrDefault();
+            var product = productRepository.GetAll().Where(g => g.ProductCode == code).FirstOrDefault();
             var userBaseData = surveyQuestionRepository.getBaseData();
             double? setupPrice = 0;
             if (product != null)
@@ -174,10 +186,10 @@ namespace SMD.Implementation.Services
             }
             return new SurveyQuestionResponseModel
             {
-                SurveyQuestions = surveyQuestionRepository.SearchSurveyQuestions(null, out rowCount),
+                SurveyQuestions = new List<SurveyQuestion>(),
                 Countries = countryRepository.GetAllCountries(),
                 Languages = languageRepository.GetAllLanguages(),
-                TotalCount = rowCount,
+              //  TotalCount = rowCount,
                 setupPrice = setupPrice,
                 objBaseData = userBaseData,
                 Education = _educationRepository.GetAll(),
@@ -203,10 +215,10 @@ namespace SMD.Implementation.Services
         /// </summary>
         public SurveyQuestion EditSurveyQuestion(SurveyQuestion source)
         {
-            var dbServey=surveyQuestionRepository.Find(source.SqId);
+            var dbServey = surveyQuestionRepository.Find(source.SqId);
             if (dbServey != null)
             {
-               // Approved 
+                // Approved 
                 if (source.Approved == true)
                 {
                     dbServey.Approved = source.Approved;
@@ -216,7 +228,7 @@ namespace SMD.Implementation.Services
                     // Strpe + Invoice Work 
                     MakeStripePaymentandAddInvoice(dbServey);
 
-                  //  emailManagerService.SendQuestionApprovalEmail(dbServey.UserId);
+                    //  emailManagerService.SendQuestionApprovalEmail(dbServey.UserId);
 
                 } // Rejected 
                 else
@@ -224,7 +236,7 @@ namespace SMD.Implementation.Services
                     dbServey.Status = (Int32)AdCampaignStatus.ApprovalRejected;
                     dbServey.Approved = false;
                     dbServey.RejectionReason = source.RejectionReason;
-                 //   emailManagerService.SendQuestionRejectionEmail(dbServey.UserId);
+                    //   emailManagerService.SendQuestionRejectionEmail(dbServey.UserId);
                 }
                 dbServey.ModifiedDate = DateTime.Now;
                 dbServey.ModifiedBy = surveyQuestionRepository.LoggedInUserIdentity;
@@ -245,16 +257,16 @@ namespace SMD.Implementation.Services
                 surveyQuestionRepository.Add(survey);
                 surveyQuestionRepository.SaveChanges();
                 string[] paths = SaveSurveyImages(survey);
-               // return surveyQuestionRepository.updateSurveyImages(paths, survey.SqId);
-                if(survey.LeftPictureBytes != null)
+                // return surveyQuestionRepository.updateSurveyImages(paths, survey.SqId);
+                if (survey.LeftPictureBytes != null)
                     survey.LeftPicturePath = paths[0];
-                if(survey.RightPictureBytes != null)
+                if (survey.RightPictureBytes != null)
                     survey.RightPicturePath = paths[1];
                 surveyQuestionRepository.SaveChanges();
                 return true;
-                
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -276,7 +288,7 @@ namespace SMD.Implementation.Services
                 if (survey.RightPictureBytes != null)
                     survey.RightPicturePath = paths[1];
                 // add or update locations
-                foreach(var loc in survey.SurveyQuestionTargetLocations)
+                foreach (var loc in survey.SurveyQuestionTargetLocations)
                 {
                     if (loc.Id != 0)
                     {
@@ -321,7 +333,7 @@ namespace SMD.Implementation.Services
                 surveyQuestionTargtCriteriaRepository.SaveChanges();
                 surveyQuestionRepository.SaveChanges();
                 return true;
-                
+
             }
             catch (Exception ex)
             {
@@ -332,15 +344,15 @@ namespace SMD.Implementation.Services
         public SurveyQuestionEditResponseModel GetSurveyQuestion(long SqId)
         {
             SurveyQuestion Servey = surveyQuestionRepository.Find(SqId);
-            if(Servey.StartDate.HasValue)
+            if (Servey.StartDate.HasValue)
                 Servey.StartDate = Servey.StartDate.Value.Add(surveyQuestionRepository.UserTimezoneOffSet);
-            if(Servey.EndDate.HasValue)
-                 Servey.EndDate = Servey.EndDate.Value.Add(surveyQuestionRepository.UserTimezoneOffSet);
+            if (Servey.EndDate.HasValue)
+                Servey.EndDate = Servey.EndDate.Value.Add(surveyQuestionRepository.UserTimezoneOffSet);
 
             return new SurveyQuestionEditResponseModel
             {
                 SurveyQuestionObj = Servey
-           
+
             };
         }
 
@@ -394,7 +406,7 @@ namespace SMD.Implementation.Services
                 request.IdsList = list;
             }
             #endregion
-            return surveyQuestionRepository.GetAudienceAdCampaignCount(request);  
+            return surveyQuestionRepository.GetAudienceAdCampaignCount(request);
         }
 
         // added by saqib for getting audience count survey add /edit screen
@@ -403,7 +415,7 @@ namespace SMD.Implementation.Services
             return surveyQuestionRepository.GetAudienceCount(request);
         }
 
-        
+
 
         /// <summary>
         /// Stripe Payment Work
@@ -453,7 +465,7 @@ namespace SMD.Implementation.Services
         {
             return surveyQuestionRepository.Find(sqid);
         }
-     
+
         #endregion
     }
 

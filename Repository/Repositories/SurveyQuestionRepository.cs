@@ -76,7 +76,8 @@ namespace SMD.Repository.Repositories
                          (question.Question.Contains(request.SearchText)))
                          && (request.CountryFilter == 0 ||  question.CountryId == request.CountryFilter) 
                          &&( question.UserId == LoggedInUserIdentity)
-                         && (request.LanguageFilter == 0 || question.LanguageId == request.LanguageFilter);
+                         && (request.LanguageFilter == 0 || question.LanguageId == request.LanguageFilter)
+                         && (request.Status == 0 || question.Status == request.Status);
 
 
                 rowCount = DbSet.Count(query);
@@ -167,7 +168,8 @@ namespace SMD.Repository.Repositories
         {
             return db.GetAudienceCampaignAndSurveyCounts(request.ageFrom, request.ageTo, request.gender, request.countryIds, request.cityIds, request.languageIds, request.industryIds
                 , request.profileQuestionIds, request.profileAnswerIds, request.surveyQuestionIds, request.surveyAnswerIds,
-                request.countryIdsExcluded, request.cityIdsExcluded, request.languageIdsExcluded, request.industryIdsExcluded).FirstOrDefault();
+                request.countryIdsExcluded, request.cityIdsExcluded, request.languageIdsExcluded, request.industryIdsExcluded,
+                request.educationIds, request.educationIdsExcluded, request.profileQuestionIdsExcluded, request.surveyQuestionIdsExcluded).FirstOrDefault();
         }
         public UserBaseData getBaseData()
         {

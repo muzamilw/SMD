@@ -42,7 +42,10 @@
         ResetPassword = 9,
         RegistrationConfirmed = 1,
         QuestionApproved = 10,
-        QuestionRejected = 11
+        QuestionRejected = 11,
+        CollectionMade=12,
+        PayoutMade=13,
+        Voucher = 14
     }
 
     public enum AdCampaignCriteriaType
@@ -168,5 +171,31 @@
         SurveyQuestion = 1,
         AdApproval = 2,
         DownloadReport = 3
+    }
+
+    /// <summary>
+    /// User Account Types
+    /// </summary>
+    public enum AccountType
+    {
+        Stripe =1 ,
+        Paypal=2,
+        GoogleWallet=3,
+        VirtualAccount=4
+    }
+    public enum ProductType
+    {
+        Ad = 1,
+        SurveyQuestion = 2,
+        Question = 3
+    }
+
+    /// <summary>
+    /// Ad Reward
+    /// </summary>
+    public enum AdRewardType
+    {
+        Cash = 1,
+        Voucher = 2
     }
 }

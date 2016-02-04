@@ -23,9 +23,9 @@
                                 <thead>
                                     <tr>
                                         <th class="col-lg-3 th-pointer"><span id="1">Question<span class="icon-up"></span></span></th>
-                                        <th class="col-lg-2 th-pointer"><span id="2">Description<span></span></span></th>
+                                     
                                         <th class="col-lg-3 th-pointer"><span id="3">Display Question<span></span></span></th>
-                                        <th class="col-lg-1 th-pointer"><span id="4">CreatedBy<span></span></span></th>
+                                        <th class="col-lg-2 th-pointer"><span id="4">CreatedBy<span></span></span></th>
                                         <th class="col-lg-2 th-pointer"><span id="5">Submission Date<span></span></span></th>
                                         <th class="col-lg-1">&nbsp;</th>
                                     </tr>
@@ -48,13 +48,11 @@
 
 
         <script id="ServeyQuestionTemplate" type="text/html">
-            <tr style="cursor: pointer">
+            <tr style="cursor: pointer" data-bind="click:$root.onEditQuestion">
                 <td>
                     <p data-bind="text:question"></p>
                 </td>
-                <td>
-                    <p data-bind="text:description"></p>
-                </td>
+             
                 <td>
                     <p data-bind="text:displayQuestion"></p>
                 </td>

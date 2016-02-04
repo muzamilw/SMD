@@ -33,6 +33,7 @@ namespace SMD.MIS.ModelMappers
         {
             string path = source.ImagePath;
 
+            string Voucherpath = "";
             if (source.ImagePath != null && !source.ImagePath.Contains("http"))
             {
                 path = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + source.ImagePath;
@@ -43,6 +44,12 @@ namespace SMD.MIS.ModelMappers
             {
                 LandingPageVideoLinkAsPath = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + source.LandingPageVideoLink;
                 LandingPageVideoLink = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + source.LandingPageVideoLink;
+            }
+
+
+            if (source.Voucher1ImagePath != null && !source.Voucher1ImagePath.Contains("http"))
+            {
+                Voucherpath = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + source.Voucher1ImagePath;
             }
             return new AdCampaign
             {
@@ -95,7 +102,9 @@ namespace SMD.MIS.ModelMappers
                 Voucher1Value = source.Voucher1Value,
                 Voucher2Description = source.Voucher2Description,
                 Voucher2Heading = source.Voucher2Heading,
-                Voucher2Value = source.Voucher2Value
+                Voucher2Value = source.Voucher2Value,
+                Voucher1ImagePath = source.Voucher1ImagePath,
+                VoucherImagePath = Voucherpath
 
             };
 

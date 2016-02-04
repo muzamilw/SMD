@@ -13,6 +13,11 @@ namespace SMD.Interfaces.Services
         /// <summary>
         /// Gets Ads, Surveys, Questions as paged view
         /// </summary>
+        Task<BaseApiResponse> ExecuteActionOnProductsResponse(ProductActionRequest request);
+
+        /// <summary>
+        /// Gets Ads, Surveys, Questions as paged view
+        /// </summary>
         GetProductsResponse GetProducts(GetProductsRequest request);
         
         /// <summary>
@@ -85,5 +90,15 @@ namespace SMD.Interfaces.Services
         /// Get User using usermanager  For Stripe Work 
         /// </summary>
         User GetUserByUserId(string userId);
+
+        /// <summary>
+        /// Get Logged-In User profile 
+        /// </summary>
+        User GetLoggedInUser();
+
+        /// <summary>
+        /// Base Data for User Profile 
+        /// </summary>
+        UserProfileBaseResponseModel GetBaseDataForUserProfile();
     }
 }

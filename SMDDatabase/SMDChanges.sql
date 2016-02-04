@@ -1962,7 +1962,7 @@ add PreferredPayoutAccount int null
 
 -- 06-Jan-16  by Baqer ENDS
 
-/* Added by khurram - (7 Jan 2016) Starts */
+/* Added by khurram - (7 Jan 2016) Starts (Updated on SMD live server) */
 
 /****** Object:  StoredProcedure [dbo].[GetProducts]    Script Date: 1/7/2016 3:05:50 PM ******/
 SET ANSI_NULLS ON
@@ -2038,3 +2038,857 @@ END
 GO
 
 /* Added by khurram - (7 Jan 2016) Ends */
+
+-- 07-Jan-16 by Baqer STARTS
+
+GO
+
+/****** Object:  Table [dbo].[TransactionLog]    Script Date: 07-Jan-16 7:20:30 PM  (Updated on SMD live server) ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[TransactionLog](
+	[TransactionLogId] [bigint] IDENTITY(1,1) NOT NULL,
+	[TxId] [bigint] NOT NULL,
+	[LogDate] [datetime] NOT NULL,
+	[Amount] [float] NOT NULL,
+	[Type] [int] NOT NULL,
+	[FromUser] [nvarchar](250) NULL,
+	[ToUser] [nvarchar](250) NULL,
+	[IsCompleted] [bit] NULL,
+ CONSTRAINT [PK_TransactionLog] PRIMARY KEY CLUSTERED 
+(
+	[TransactionLogId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+ALTER TABLE [dbo].[TransactionLog]  WITH CHECK ADD  CONSTRAINT [FK_TransactionLog_TransactionLog] FOREIGN KEY([TxId])
+REFERENCES [dbo].[Transaction] ([TxID])
+GO
+
+ALTER TABLE [dbo].[TransactionLog] CHECK CONSTRAINT [FK_TransactionLog_TransactionLog]
+GO
+
+ALTER TABLE [dbo].[TransactionLog]  WITH CHECK ADD  CONSTRAINT [FK_TransactionLog_TransactionLog1] FOREIGN KEY([TransactionLogId])
+REFERENCES [dbo].[TransactionLog] ([TransactionLogId])
+GO
+
+ALTER TABLE [dbo].[TransactionLog] CHECK CONSTRAINT [FK_TransactionLog_TransactionLog1]
+GO
+-- 07-Jan-16  by Baqer ENDS
+
+
+
+-- 08-Jan-16 by iqra   STARTS   updated on live server
+
+/* To prevent any potential data loss issues, you should review this script in detail before running it outside the context of the database designer.*/
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.Game ADD
+	GameType int NULL,
+	Complexity int NULL,
+	GameUrl nvarchar(200) NULL
+GO
+ALTER TABLE dbo.Game SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+
+
+
+/* To prevent any potential data loss issues, you should review this script in detail before running it outside the context of the database designer.*/
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.AdCampaign ADD
+	Voucher1ImagePath nvarchar(200) NULL,
+	Voucher2ImagePath nvarchar(200) NULL
+GO
+ALTER TABLE dbo.AdCampaign SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+
+
+-- 08-Jan-16 by iqra End
+
+
+/* Added By Khurram (09 Jan 2016) - Starts (Updated on smd live server) */ 
+
+GO
+ALTER PROCEDURE [dbo].[GetProducts] 
+
+	-- Add the parameters for the stored procedure here
+	@UserID nvarchar(128) = 0 ,
+	@FromRow int = 0,
+	@ToRow int = 0
+
+AS
+BEGIN
+DECLARE @age AS INT
+DECLARE @gender AS INT
+DECLARE @countryId AS INT
+DECLARE @cityId AS INT
+DECLARE @languageId AS INT
+DECLARE @industryId AS INT
+DECLARE @currentDate AS DateTime
+
+        -- Setting local variables
+		   SELECT @age = age FROM AspNetUsers where id=@UserID
+		   SELECT @gender = gender FROM AspNetUsers where id=@UserID
+		   SELECT @countryId = countryId FROM AspNetUsers where id=@UserID
+		   SELECT @cityId = cityId FROM AspNetUsers where id=@UserID
+		   SELECT @languageId = LanguageID FROM AspNetUsers where id=@UserID
+		   SELECT @industryId = industryId FROM AspNetUsers where id=@UserID
+		   SET @currentDate = getDate()
+
+select *, COUNT(*) OVER() AS TotalItems
+from
+(	select campaignid as ItemId, campaignname ItemName, 'Ad' Type, 
+    Description, Type ItemType, 
+	((ClickRate * 50) / 100) as AdClickRate,  -- Amount AdViewer will get
+	ImagePath as AdImagePath, LandingPageVideoLink as AdVideoLink,
+	Answer1 as AdAnswer1, Answer2 as AdAnswer2, Answer3 as AdAnswer3, CorrectAnswer as AdCorrectAnswer, VerifyQuestion as AdVerifyQuestion, 
+	RewardType as AdRewardType,
+	Voucher1Heading as AdVoucher1Heading, Voucher1Description as AdVoucher1Description,
+	Voucher1Value as AdVoucher1Value, NULL as SqLeftImagePath, NULL as SqRightImagePath,
+	Case 
+	    when Type = 4  -- Game
+		THEN
+		    (select top 1 GameUrl from Game ORDER BY NEWID())
+		when Type != 4
+		THEN
+		    NULL
+	END as GameUrl, 
+	NULL as PqAnswer1Id, NULL as PqAnswer1, NULL as PqAnswer2Id, NULL as PqAnswer2,
+	NULL as PqAnswer3Id, NULL as PqAnswer3,
+	((row_number() over (order by campaignid) * 10) + 1) Weightage from adcampaign
+	where (
+		((@age is null) or (adcampaign.AgeRangeEnd >= @age and  @age >= adcampaign.AgeRangeStart))
+		and
+		((@gender is null) or (adcampaign.Gender = @gender))
+		and
+		((@languageId is null) or (adcampaign.LanguageId = @languageId))
+		and
+		(adcampaign.EndDateTime >= @currentDate and @currentDate >= adcampaign.StartDateTime)
+		and
+		(adcampaign.Approved = 1)
+		and
+		(adcampaign.Status = 6)
+		and
+		((adcampaign.AmountSpent is null) or (adcampaign.MaxBudget > adcampaign.AmountSpent))
+		and
+		((@countryId is null or @cityId is null) or ((select count(*) from AdCampaignTargetLocation MyCampaignLoc
+			 where MyCampaignLoc.CampaignID=adcampaign.CampaignID and MyCampaignLoc.CountryID=@countryId and
+			 MyCampaignLoc.CityID=@cityId) > 0))
+	    and
+		((@languageId is null or @industryId is null) or ((select count(*) from AdCampaignTargetCriteria MyCampaignCrit
+			 where MyCampaignCrit.CampaignID = adcampaign.CampaignID and 
+			 MyCampaignCrit.LanguageID=@languageId and MyCampaignCrit.IndustryID=@industryId) > 0 ))
+	)
+	
+	union
+	select sqid, question, 'Survey', 
+	Description, Type SurveyType, NULL, NULL, NULL,
+	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+	NULL, LeftPicturePath as SqLeftImagePath, RightPicturePath as SqRightImagePath, NULL, 
+	NULL, NULL, NULL, NULL, NULL, NULL, -- PQAnswers
+	((row_number() over (order by sqid) * 10) + 2) Weightage from surveyquestion
+	where -- If this survey has no response yet
+	((select count(*) from SurveyQuestionResponse mySurveyQuestionResponse
+			 where mySurveyQuestionResponse.UserID = @UserID and mySurveyQuestionResponse.SQID = surveyQuestion.SQID) = 0)
+
+	union
+	select pq.pqid, pq.question, 'Question', 
+	NULL, pq.Type QuestionType, NULL, NULL, NULL,
+	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+	NULL, NULL,NULL, NULL, 
+	pqa1.PQAnswerID as PQAnswerID1, pqa1.AnswerString as PQAnswer1,
+	pqa2.PQAnswerID as PQAnswerID2, pqa2.AnswerString as PQAnswer2,
+	pqa3.PQAnswerID as PQAnswerID3, pqa3.AnswerString as PQAnswer3,
+	((row_number() over (order by pq.pqid) * 10) + 3) Weightage 
+	from profilequestion pq
+	outer apply (
+		select top 1 pqa.PQAnswerID, pqa.AnswerString
+		from ProfileQuestionAnswer pqa
+		where pqa.PQID = pq.PQID
+		order by pqa.PQAnswerID
+	) Pqa1
+	outer apply (
+		select pqa2.PQAnswerID, pqa2.AnswerString
+		from ProfileQuestionAnswer pqa2
+		where pqa2.PQID = pq.PQID
+		order by pqa2.PQAnswerID
+		OFFSET 1 ROWS -- skip 1 rows
+		FETCH NEXT 1 ROWS ONLY -- take 1 rows
+	) Pqa2
+	outer apply (
+		select pqa3.PQAnswerID, pqa3.AnswerString
+		from ProfileQuestionAnswer pqa3
+		where pqa3.PQID = pq.PQID
+		order by pqa3.PQAnswerID
+		OFFSET 2 ROWS -- skip 2 rows
+		FETCH NEXT 1 ROWS ONLY -- take 1 rows
+	) Pqa3
+	where 
+	(
+		(((select count(*) from ProfileQuestionUserAnswer pqu 
+			where pq.PQID = pqu.PQID and pqu.UserID = @UserID and pq.CountryID = @countryid) = 0)
+		  or 	 
+		  ((select datediff(day, dateadd(month, pq.refreshtime,pqu.AnswerDateTime), getdate()) 
+			from ProfileQuestionUserAnswer pqu 
+			where pq.PQID = pqu.PQID and pqu.UserID = @UserID and pq.CountryID = @countryid) > 0 )	
+		)
+	)
+	
+	) as items
+	order by Weightage
+	OFFSET @FromRow ROWS -- skip 10 rows
+	FETCH NEXT @ToRow ROWS ONLY -- take 10 rows
+END
+GO
+
+/* Added By Khurram (09 Jan 2016) - Ends */
+
+
+/* Added By Khurram (11 Jan 2016) - Starts (Updated on smd live server) */
+
+GO
+
+alter table adCampaignResponse
+add UserSelection int null
+
+GO
+
+GO
+
+  insert into systemMails
+  values
+  (14, 'Voucher', 'Sell My Data Team', 'info@myprintcloud.com',
+  'You received a voucher', 'You received a voucher ++VoucherDescription++, worth ++VoucherValue++.', NULL)
+
+GO
+
+/* Added By Khurram (11 Jan 2016) - Ends */
+
+/* Added By Khurram (12 Jan 2016) - Starts (Updated on smd live server) */
+
+GO
+
+/****** Object:  UserDefinedFunction [dbo].[GetRootParentSurvey]    Script Date: 1/12/2016 7:19:31 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:		Khurram
+-- Create date: 2016-01-12 17:37
+-- Description:	Returns Root level parent for given survey question
+-- Used In Get Products SP
+-- =============================================
+CREATE FUNCTION [dbo].[GetRootParentSurvey]
+(	
+	-- Add the parameters for the function here
+	@sqId int
+)
+RETURNS TABLE 
+AS
+RETURN 
+(
+
+	with parentsurveyquestions(sqid, question, parentsurveyid, weightage)
+	as (
+		select sq.sqid, sq.question,
+			sq.ParentSurveyId,
+			((ROW_NUMBER() over (order by sq.sqid) * 10) + 2) as weightage
+			
+		from surveyQuestion sq
+		where sq.parentsurveyid is null
+		UNION ALL
+		select sq.sqid, sq.question,
+			sq.ParentSurveyId,
+			((ROW_NUMBER() over (order by sq.sqid) * 10) + 2) as weightage
+			from SurveyQuestion sq
+			where sq.SQID = @sqId
+		UNION ALL
+		select sq.sqid, sq.question,
+			sq.ParentSurveyId,
+			((ROW_NUMBER() over (order by sq.sqid) * 10) + 2) weightage
+			from SurveyQuestion sq
+			join parentsurveyquestions sqs on sqs.parentsurveyid = sq.SQID
+	)
+	
+	select psq.weightage, psq.sqid, psq.question from parentsurveyquestions psq
+	join parentsurveyquestions pqs on pqs.sqid = psq.sqid
+	where psq.weightage > pqs.weightage
+)
+
+GO
+
+GO
+
+/****** Object:  UserDefinedFunction [dbo].[GetUserSurveys]    Script Date: 1/12/2016 7:20:13 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE FUNCTION [dbo].[GetUserSurveys]
+(	
+	-- Add the parameters for the function here
+	@userId uniqueidentifier = ''
+)
+RETURNS TABLE 
+AS
+RETURN 
+(
+	-- Add the SELECT statement with parameter references here
+	with surveyquestions(sqid, question, sqtype, description, surveytype, adclickrate, 
+ adimagepath, advideolink, adanswer1, adanswer2, adanswer3, adcorrectanswer, adverifyquestion, 
+ adrewardtype, advoucher1heading, advoucher1description, advoucher1value, sqleftimagepath,
+ sqrightimagepath, gameurl, pqanswer1id, pqanswer1, pqanswer2id, pqanswer2, pqanswer3id, pqanswer3 ,weightage)
+as (
+	select sq.sqid, sq.question, 'Survey', 
+	sq.Description, sq.Type SurveyType, NULL, '', '',
+	'', '', '', NULL, '', NULL, '', '',
+	'', sq.LeftPicturePath as SqLeftImagePath, sq.RightPicturePath as SqRightImagePath, '', 
+	NULL, '', NULL, '', NULL, '', -- PQAnswers
+	((row_number() over (order by sq.sqid) * 10) + 2) Weightage
+	from surveyquestion sq
+	where -- If this survey has no response yet
+	((select count(*) from SurveyQuestionResponse mySurveyQuestionResponse
+			 where mySurveyQuestionResponse.UserID = @userId and 
+			 mySurveyQuestionResponse.SQID = sq.SQID) = 0)
+
+	and sq.ParentSurveyId is null
+	UNION ALL
+	-- Recursive member definition
+		select sqp.sqid, sqp.question, 'Survey',
+	sqp.Description, sqp.Type SurveyType, NULL, NULL, NULL,
+	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+	NULL, sqp.LeftPicturePath as SqLeftImagePath, sqp.RightPicturePath as SqRightImagePath, NULL, 
+	NULL, NULL, NULL, NULL, NULL, NULL, -- PQAnswers
+	(select weightage from [GetRootParentSurvey](sq.SQID)) as weightage
+	from surveyquestion sq
+	inner join SurveyQuestion sqp on sqp.ParentSurveyId = sq.SQID
+	where -- If this survey has no response yet
+	((select count(*) from SurveyQuestionResponse mySurveyQuestionResponse
+			 where mySurveyQuestionResponse.UserID = @userId and 
+			 mySurveyQuestionResponse.SQID = sq.SQID) = 0)
+    ) 
+
+	select * from surveyquestions
+)
+
+GO
+
+GO
+
+alter table aspnetusers
+drop column age
+
+alter table aspnetusers
+add DOB datetime null
+
+GO
+
+/* Added By Khurram (12 Jan 2016) - Ends */
+
+/* Added By Khurram (13 Jan 2016) - Starts (Updated on live db server) */
+
+GO
+/****** Object:  UserDefinedFunction [dbo].[GetUserSurveys]    Script Date: 1/13/2016 4:04:07 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER FUNCTION [dbo].[GetUserSurveys]
+(	
+	-- Add the parameters for the function here
+	@userId uniqueidentifier = ''
+)
+RETURNS TABLE 
+AS
+RETURN 
+(
+	-- Add the SELECT statement with parameter references here
+	with surveyquestions(sqid, question, sqtype, description, surveytype, adclickrate, 
+ adimagepath, advideolink, adanswer1, adanswer2, adanswer3, adcorrectanswer, adverifyquestion, 
+ adrewardtype, advoucher1heading, advoucher1description, advoucher1value, sqleftimagepath,
+ sqrightimagepath, gameurl, pqanswer1id, pqanswer1, pqanswer2id, pqanswer2, pqanswer3id, pqanswer3,
+ pqanswer4id, pqanswer4, pqanswer5id, pqanswer5, pqanswer6id, pqanswer6 ,weightage)
+as (
+	select sq.sqid, sq.question, 'Survey', 
+	sq.Description, sq.Type SurveyType, NULL, '', '',
+	'', '', '', NULL, '', NULL, '', '',
+	'', sq.LeftPicturePath as SqLeftImagePath, sq.RightPicturePath as SqRightImagePath, '', 
+	NULL, '', NULL, '', NULL, '',NULL, '', NULL, '', NULL, '', -- PQAnswers
+	((row_number() over (order by sq.sqid) * 10) + 2) Weightage
+	from surveyquestion sq
+	where -- If this survey has no response yet
+	((select count(*) from SurveyQuestionResponse mySurveyQuestionResponse
+			 where mySurveyQuestionResponse.UserID = @userId and 
+			 mySurveyQuestionResponse.SQID = sq.SQID) = 0)
+
+	and sq.ParentSurveyId is null
+	UNION ALL
+	-- Recursive member definition
+		select sqp.sqid, sqp.question, 'Survey',
+	sqp.Description, sqp.Type SurveyType, NULL, NULL, NULL,
+	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+	NULL, sqp.LeftPicturePath as SqLeftImagePath, sqp.RightPicturePath as SqRightImagePath, NULL, 
+	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -- PQAnswers
+	(select weightage from [GetRootParentSurvey](sq.SQID)) as weightage
+	from surveyquestion sq
+	inner join SurveyQuestion sqp on sqp.ParentSurveyId = sq.SQID
+	where -- If this survey has no response yet
+	((select count(*) from SurveyQuestionResponse mySurveyQuestionResponse
+			 where mySurveyQuestionResponse.UserID = @userId and 
+			 mySurveyQuestionResponse.SQID = sq.SQID) = 0)
+    ) 
+
+	select * from surveyquestions
+)
+GO
+
+GO
+/****** Object:  StoredProcedure [dbo].[GetProducts]    Script Date: 1/13/2016 3:34:30 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE [dbo].[GetProducts] 
+
+	-- Add the parameters for the stored procedure here
+	@UserID nvarchar(128) = 0 ,
+	@FromRow int = 0,
+	@ToRow int = 0
+
+AS
+BEGIN
+DECLARE @dob AS DateTime
+DECLARE @age AS INT
+DECLARE @gender AS INT
+DECLARE @countryId AS INT
+DECLARE @cityId AS INT
+DECLARE @languageId AS INT
+DECLARE @industryId AS INT
+DECLARE @currentDate AS DateTime
+
+        -- Setting local variables
+		   SELECT @dob = DOB FROM AspNetUsers where id=@UserID
+		   SELECT @gender = gender FROM AspNetUsers where id=@UserID
+		   SELECT @countryId = countryId FROM AspNetUsers where id=@UserID
+		   SELECT @cityId = cityId FROM AspNetUsers where id=@UserID
+		   SELECT @languageId = LanguageID FROM AspNetUsers where id=@UserID
+		   SELECT @industryId = industryId FROM AspNetUsers where id=@UserID
+		   SET @currentDate = getDate()
+		   SET @age = DATEDIFF(year, @age, @currentDate)
+
+select *, COUNT(*) OVER() AS TotalItems
+from
+(	select campaignid as ItemId, campaignname ItemName, 'Ad' Type, 
+    Description, Type ItemType, 
+	((ClickRate * 50) / 100) as AdClickRate,  -- Amount AdViewer will get
+	ImagePath as AdImagePath, LandingPageVideoLink as AdVideoLink,
+	Answer1 as AdAnswer1, Answer2 as AdAnswer2, Answer3 as AdAnswer3, CorrectAnswer as AdCorrectAnswer, VerifyQuestion as AdVerifyQuestion, 
+	RewardType as AdRewardType,
+	Voucher1Heading as AdVoucher1Heading, Voucher1Description as AdVoucher1Description,
+	Voucher1Value as AdVoucher1Value, NULL as SqLeftImagePath, NULL as SqRightImagePath,
+	Case 
+	    when Type = 4  -- Game
+		THEN
+		    (select top 1 GameUrl from Game ORDER BY NEWID())
+		when Type != 4
+		THEN
+		    NULL
+	END as GameUrl, 
+	NULL as PqAnswer1Id, NULL as PqAnswer1, NULL as PqAnswer2Id, NULL as PqAnswer2,
+	NULL as PqAnswer3Id, NULL as PqAnswer3, NULL as PqAnswer4Id, NULL as PqAnswer4,
+	NULL as PqAnswer5Id, NULL as PqAnswer5, NULL as PqAnswer6Id, NULL as PqAnswer6,
+	((row_number() over (order by campaignid) * 10) + 1) Weightage from adcampaign
+	where (
+		((@age is null) or (adcampaign.AgeRangeEnd >= @age and  @age >= adcampaign.AgeRangeStart))
+		and
+		((@gender is null) or (adcampaign.Gender = @gender))
+		and
+		((@languageId is null) or (adcampaign.LanguageId = @languageId))
+		and
+		(adcampaign.EndDateTime >= @currentDate and @currentDate >= adcampaign.StartDateTime)
+		and
+		(adcampaign.Approved = 1)
+		and
+		(adcampaign.Status = 6)
+		and
+		((adcampaign.AmountSpent is null) or (adcampaign.MaxBudget > adcampaign.AmountSpent))
+		and
+		((@countryId is null or @cityId is null) or ((select count(*) from AdCampaignTargetLocation MyCampaignLoc
+			 where MyCampaignLoc.CampaignID=adcampaign.CampaignID and MyCampaignLoc.CountryID=@countryId and
+			 MyCampaignLoc.CityID=@cityId) > 0))
+	    and
+		((@languageId is null or @industryId is null) or ((select count(*) from AdCampaignTargetCriteria MyCampaignCrit
+			 where MyCampaignCrit.CampaignID = adcampaign.CampaignID and 
+			 MyCampaignCrit.LanguageID=@languageId and MyCampaignCrit.IndustryID=@industryId) > 0 ))
+	)
+	
+	union
+	select * from [GetUserSurveys](@UserID)
+
+	union
+	select pq.pqid, pq.question, 'Question', 
+	NULL, pq.Type QuestionType, NULL, NULL, NULL,
+	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+	NULL, NULL,NULL, NULL, 
+	pqa1.PQAnswerID as PQAnswerID1, pqa1.AnswerString as PQAnswer1,
+	pqa2.PQAnswerID as PQAnswerID2, pqa2.AnswerString as PQAnswer2,
+	pqa3.PQAnswerID as PQAnswerID3, pqa3.AnswerString as PQAnswer3,
+	pqa4.PQAnswerID as PQAnswerID4, pqa4.AnswerString as PQAnswer4,
+	pqa5.PQAnswerID as PQAnswerID5, pqa5.AnswerString as PQAnswer5,
+	pqa6.PQAnswerID as PQAnswerID6, pqa6.AnswerString as PQAnswer6,
+	((row_number() over (order by pq.pqid) * 10) + 3) Weightage 
+	from profilequestion pq
+	outer apply (
+		select top 1 pqa.PQAnswerID, pqa.AnswerString
+		from ProfileQuestionAnswer pqa
+		where pqa.PQID = pq.PQID
+		order by pqa.PQAnswerID
+	) Pqa1
+	outer apply (
+		select pqa2.PQAnswerID, pqa2.AnswerString
+		from ProfileQuestionAnswer pqa2
+		where pqa2.PQID = pq.PQID
+		order by pqa2.PQAnswerID
+		OFFSET 1 ROWS -- skip 1 rows
+		FETCH NEXT 1 ROWS ONLY -- take 1 rows
+	) Pqa2
+	outer apply (
+		select pqa3.PQAnswerID, pqa3.AnswerString
+		from ProfileQuestionAnswer pqa3
+		where pqa3.PQID = pq.PQID
+		order by pqa3.PQAnswerID
+		OFFSET 2 ROWS -- skip 2 rows
+		FETCH NEXT 1 ROWS ONLY -- take 1 rows
+	) Pqa3
+	outer apply (
+		select pqa4.PQAnswerID, pqa4.AnswerString
+		from ProfileQuestionAnswer pqa4
+		where pqa4.PQID = pq.PQID
+		order by pqa4.PQAnswerID
+		OFFSET 3 ROWS -- skip 2 rows
+		FETCH NEXT 1 ROWS ONLY -- take 1 rows
+	) Pqa4
+	outer apply (
+		select pqa5.PQAnswerID, pqa5.AnswerString
+		from ProfileQuestionAnswer pqa5
+		where pqa5.PQID = pq.PQID
+		order by pqa5.PQAnswerID
+		OFFSET 4 ROWS -- skip 2 rows
+		FETCH NEXT 1 ROWS ONLY -- take 1 rows
+	) Pqa5
+	outer apply (
+		select pqa6.PQAnswerID, pqa6.AnswerString
+		from ProfileQuestionAnswer pqa6
+		where pqa6.PQID = pq.PQID
+		order by pqa6.PQAnswerID
+		OFFSET 5 ROWS -- skip 2 rows
+		FETCH NEXT 1 ROWS ONLY -- take 1 rows
+	) Pqa6
+	where 
+	(
+		(((select count(*) from ProfileQuestionUserAnswer pqu 
+			where pq.PQID = pqu.PQID and pqu.UserID = @UserID and pq.CountryID = @countryid) = 0)
+		  or 	 
+		  ((select datediff(day, dateadd(month, pq.refreshtime,pqu.AnswerDateTime), getdate()) 
+			from ProfileQuestionUserAnswer pqu 
+			where pq.PQID = pqu.PQID and pqu.UserID = @UserID and pq.CountryID = @countryid) > 0 )	
+		)
+	)
+	
+	) as items
+	order by Weightage
+	OFFSET @FromRow ROWS -- skip 10 rows
+	FETCH NEXT @ToRow ROWS ONLY -- take 10 rows
+END
+
+/* Added By Khurram (13 Jan 2016) - Ends */
+
+/* Added By Khurram (14 Jan 2016) - Start (Updated on live db server) */
+GO
+
+ALTER FUNCTION [dbo].[GetRootParentSurvey]
+(	
+	-- Add the parameters for the function here
+	@sqId int
+)
+RETURNS TABLE 
+AS
+RETURN 
+(
+
+	with parentsurveyquestions(sqid, question, parentsurveyid, weightage)
+	as (
+		select sq.sqid, sq.question,
+			sq.ParentSurveyId,
+			((ROW_NUMBER() over (order by sq.sqid) * 10) + 2) as weightage
+						
+		from surveyQuestion sq
+		where sq.parentsurveyid is null
+		UNION ALL
+		select sq.sqid, sq.question,
+			sq.ParentSurveyId,
+			((ROW_NUMBER() over (order by sq.sqid) * 100) + 3) as weightage
+			from SurveyQuestion sq
+			where sq.SQID = 17
+		UNION ALL
+		select sq.sqid, sq.question,
+			sq.ParentSurveyId,
+			((ROW_NUMBER() over (order by sq.sqid) * 100000) + 4) weightage
+			from SurveyQuestion sq
+			join parentsurveyquestions sqs on sqs.parentsurveyid = sq.SQID
+	)
+	
+	select sq.sqid, sq.weightage
+	from parentsurveyquestions sq
+	join parentsurveyquestions pqs on pqs.sqid = sq.sqid 
+	where sq.weightage < pqs.weightage
+)
+
+/* Added By Khurram (14 Jan 2016) - Ends */
+
+/* Added By Khurram (18 Jan 2016) - Start (Need to update on live db server) */
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Khurram
+-- Create date: 2016-01-18 15:23
+-- Description:	% of users selected left image and right image
+-- =============================================
+CREATE FUNCTION GetUserSurveySelectionPercentage
+(
+	-- Add the parameters for the function here
+	@sqId int = 0
+)
+RETURNS 
+@SurveySelectionPercentage TABLE
+(
+	-- Add the column definitions for the TABLE variable here
+	leftImagePercentage float null, 
+	rightImagePercentage float null
+)
+AS
+BEGIN
+	-- Fill the table variable with the rows for your result set
+	DECLARE @surveyResponses float
+	SELECT @surveyResponses = count(*) from SurveyQuestionResponse where SQID = @sqId
+
+	-- Add the SELECT statement with parameter references here
+	insert into @SurveySelectionPercentage
+	values
+	((select 
+	CASE
+		WHEN @surveyResponses is null or @surveyResponses <= 0
+		THEN @surveyResponses
+		WHEN @surveyResponses > 0
+		THEN  
+		((count(*) / @surveyResponses) * 100)
+	END as leftImagePercentage
+	  from SurveyQuestionResponse
+	where SQID = @sqId and UserSelection = 1),
+	((select 
+	CASE
+		WHEN @surveyResponses is null or @surveyResponses <= 0
+		THEN @surveyResponses
+		WHEN @surveyResponses > 0
+		THEN  
+		((count(*) / @surveyResponses) * 100)
+	END as rightImagePercentage
+	 from SurveyQuestionResponse
+	where SQID = @sqId and UserSelection = 2)))
+
+	RETURN 
+END
+GO
+
+GO
+ALTER FUNCTION [dbo].[GetUserSurveys]
+(	
+	-- Add the parameters for the function here
+	@userId uniqueidentifier = ''
+)
+RETURNS TABLE 
+AS
+RETURN 
+(
+	-- Add the SELECT statement with parameter references here
+	with surveyquestions(sqid, question, sqtype, description, surveytype, adclickrate, 
+ adimagepath, advideolink, adanswer1, adanswer2, adanswer3, adcorrectanswer, adverifyquestion, 
+ adrewardtype, advoucher1heading, advoucher1description, advoucher1value, sqleftimagepath,
+ sqrightimagepath, gameurl, pqanswer1id, pqanswer1, pqanswer2id, pqanswer2, pqanswer3id, pqanswer3,
+ pqanswer4id, pqanswer4, pqanswer5id, pqanswer5, pqanswer6id, pqanswer6 ,weightage, sqleftImagePercentage,
+ sqRightImagePercentage)
+as (
+	select sq.sqid, sq.question, 'Survey', 
+	sq.Description, sq.Type SurveyType, NULL, '', '',
+	'', '', '', NULL, '', NULL, '', '',
+	'', sq.LeftPicturePath as SqLeftImagePath, sq.RightPicturePath as SqRightImagePath, '', 
+	NULL, '', NULL, '', NULL, '',NULL, '', NULL, '', NULL, '', -- PQAnswers
+	(((row_number() over (order by sq.sqid) * 10) + 2) + ISNULL(sq.priority, 0)) Weightage,
+	sqResponsePercentages.leftImagePercentage, sqResponsePercentages.rightImagePercentage
+	from surveyquestion sq
+	outer apply
+	(select * from [GetUserSurveySelectionPercentage](sq.sqid)) as sqResponsePercentages
+	where -- If this survey has no response yet
+	((select count(*) from SurveyQuestionResponse mySurveyQuestionResponse
+			 where mySurveyQuestionResponse.UserID = @userId and 
+			 mySurveyQuestionResponse.SQID = sq.SQID) = 0)
+
+	and sq.ParentSurveyId is null and sq.Status = 3 -- live
+	UNION ALL
+	-- Recursive member definition
+		select sqp.sqid, sqp.question, 'Survey',
+	sqp.Description, sqp.Type SurveyType, NULL, NULL, NULL,
+	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+	NULL, sqp.LeftPicturePath as SqLeftImagePath, sqp.RightPicturePath as SqRightImagePath, NULL, 
+	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -- PQAnswers
+	(select (ISNULL(weightage, 0) + ISNULL(sq.priority,0)) from [GetRootParentSurvey](sq.SQID)) as weightage,
+	sqResponsePercentages.leftImagePercentage, sqResponsePercentages.rightImagePercentage
+	from surveyquestion sq
+	inner join SurveyQuestion sqp on sqp.ParentSurveyId = sq.SQID
+	outer apply
+	(select * from [GetUserSurveySelectionPercentage](sq.sqid)) as sqResponsePercentages
+	where -- If this survey has no response yet
+	((select count(*) from SurveyQuestionResponse mySurveyQuestionResponse
+			 where mySurveyQuestionResponse.UserID = @userId and 
+			 mySurveyQuestionResponse.SQID = sq.SQID) = 0)
+	   and sq.Status = 3 -- live
+    ) 
+
+	select * from surveyquestions
+)
+GO
+
+GO
+ALTER PROCEDURE [dbo].[GetProducts] 
+
+	-- Add the parameters for the stored procedure here
+	@UserID nvarchar(128) = 0 ,
+	@FromRow int = 0,
+	@ToRow int = 0
+
+AS
+BEGIN
+DECLARE @dob AS DateTime
+DECLARE @age AS INT
+DECLARE @gender AS INT
+DECLARE @countryId AS INT
+DECLARE @cityId AS INT
+DECLARE @languageId AS INT
+DECLARE @industryId AS INT
+DECLARE @currentDate AS DateTime
+
+        -- Setting local variables
+		   SELECT @dob = DOB FROM AspNetUsers where id=@UserID
+		   SELECT @gender = gender FROM AspNetUsers where id=@UserID
+		   SELECT @countryId = countryId FROM AspNetUsers where id=@UserID
+		   SELECT @cityId = cityId FROM AspNetUsers where id=@UserID
+		   SELECT @languageId = LanguageID FROM AspNetUsers where id=@UserID
+		   SELECT @industryId = industryId FROM AspNetUsers where id=@UserID
+		   SET @currentDate = getDate()
+		   SET @age = DATEDIFF(year, @age, @currentDate)
+
+select *, COUNT(*) OVER() AS TotalItems
+from
+(	select campaignid as ItemId, campaignname ItemName, 'Ad' Type, 
+    Description, Type ItemType, 
+	((ClickRate * 50) / 100) as AdClickRate,  -- Amount AdViewer will get
+	ImagePath as AdImagePath, LandingPageVideoLink as AdVideoLink,
+	Answer1 as AdAnswer1, Answer2 as AdAnswer2, Answer3 as AdAnswer3, CorrectAnswer as AdCorrectAnswer, VerifyQuestion as AdVerifyQuestion, 
+	RewardType as AdRewardType,
+	Voucher1Heading as AdVoucher1Heading, Voucher1Description as AdVoucher1Description,
+	Voucher1Value as AdVoucher1Value, NULL as SqLeftImagePath, NULL as SqRightImagePath,
+	Case 
+	    when Type = 3  -- Game
+		THEN
+		    (select top 1 GameUrl from Game ORDER BY NEWID())
+		when Type != 3
+		THEN
+		    NULL
+	END as GameUrl, 
+	NULL as PqAnswer1Id, NULL as PqAnswer1, NULL as PqAnswer2Id, NULL as PqAnswer2,
+	NULL as PqAnswer3Id, NULL as PqAnswer3, NULL as PqAnswer4Id, NULL as PqAnswer4,
+	NULL as PqAnswer5Id, NULL as PqAnswer5, NULL as PqAnswer6Id, NULL as PqAnswer6,
+	((row_number() over (order by campaignid) * 10) + 1) Weightage,
+	NULL as SqLeftImagePercentage, NULL as SqRightImagePercentage  
+	from adcampaign
+	where (
+		((@age is null) or (adcampaign.AgeRangeEnd >= @age and  @age >= adcampaign.AgeRangeStart))
+		and
+		((@gender is null) or (adcampaign.Gender = @gender))
+		and
+		((@languageId is null) or (adcampaign.LanguageId = @languageId))
+		and
+		(adcampaign.EndDateTime >= @currentDate and @currentDate >= adcampaign.StartDateTime)
+		and
+		(adcampaign.Approved = 1)
+		and
+		(adcampaign.Status = 3) -- live
+		and
+		((adcampaign.AmountSpent is null) or (adcampaign.MaxBudget > adcampaign.AmountSpent))
+		and
+		((@countryId is null or @cityId is null) or ((select count(*) from AdCampaignTargetLocation MyCampaignLoc
+			 where MyCampaignLoc.CampaignID=adcampaign.CampaignID and MyCampaignLoc.CountryID=@countryId and
+			 MyCampaignLoc.CityID=@cityId) > 0))
+	    and
+		((@languageId is null or @industryId is null) or ((select count(*) from AdCampaignTargetCriteria MyCampaignCrit
+			 where MyCampaignCrit.CampaignID = adcampaign.CampaignID and 
+			 MyCampaignCrit.LanguageID=@languageId and MyCampaignCrit.IndustryID=@industryId) > 0 ))
+	)
+	
+	union
+	select * from [GetUserSurveys](@UserID)
+
+	union
+	select pqid, question, 'Question', 
+	NULL, Type QuestionType, NULL, NULL, NULL,
+	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+	NULL, NULL,NULL, NULL, 
+	PQAnswerID1, PQAnswer1, PQAnswerID2, PQAnswer2,
+	PQAnswerID3, PQAnswer3, PQAnswerID4, PQAnswer4,
+	PQAnswerID5, PQAnswer5, PQAnswerID6, PQAnswer6,
+	Weightage, NULL as SqLeftImagePercentage, NULL as SqRightImagePercentage  
+	from [GetUserProfileQuestions](@UserID, @countryId)
+	
+	) as items
+	order by Weightage
+	OFFSET @FromRow ROWS -- skip 10 rows
+	FETCH NEXT @ToRow ROWS ONLY -- take 10 rows
+END
+GO
+
+/* Added By Khurram (18 Jan 2016) - End */

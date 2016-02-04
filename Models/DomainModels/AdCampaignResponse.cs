@@ -14,6 +14,7 @@ namespace SMD.Models.DomainModels
         public string UserId { get; set; }
         public double? EndUserDollarAmount { get; set; }
         public int? SkipCount { get; set; }
+        public int? UserSelection { get; set; }
     
         public virtual AdCampaign AdCampaign { get; set; }
         public virtual User User { get; set; }

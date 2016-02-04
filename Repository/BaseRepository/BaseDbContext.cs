@@ -222,6 +222,11 @@ namespace SMD.Repository.BaseRepository
         public DbSet<CustomUrl> CustomUrls { get; set; }
 
         /// <summary>
+        /// Transaction Log
+        /// </summary>
+        public DbSet<TransactionLog> TransactionLogs { get; set; }
+
+        /// <summary>
         /// Get Ad-Campaigns for APIs | baqer
         /// </summary>
         public ObjectResult<GetAds_Result> GetAdCompaignForApi(string userId, int fromRow, int toRow)
@@ -280,7 +285,12 @@ namespace SMD.Repository.BaseRepository
 
         public ObjectResult<GetAudience_Result> GetAudienceCampaignAndSurveyCounts(int ageFrom, int ageTo, int gender, string countryIds, string cityIds, string languageIds, 
             string industryIds, string profileQuestionIds, string profileAnswerIds, string surveyQuestionIds
-            , string surveyAnswerIds, string countryIdsExcluded, string cityIdsExcluded, string languageIdsExcluded, string industryIdsExcluded)
+            , string surveyAnswerIds, string countryIdsExcluded, string cityIdsExcluded, 
+            string languageIdsExcluded, string industryIdsExcluded
+            , string educationIds
+            , string educationIdsExcluded
+            , string profileQuestionIdsExcluded
+            , string surveyQuestionIdsExcluded)
         {
             var ageFromParameter = new ObjectParameter("ageFrom", ageFrom);
             var ageToParameter = new ObjectParameter("ageTo", ageTo);
@@ -297,11 +307,19 @@ namespace SMD.Repository.BaseRepository
             var cityIdsExcludedParameter = new ObjectParameter("cityIdsExcluded", cityIdsExcluded);
             var languageIdsExcludedParameter = new ObjectParameter("languageIdsExcluded", languageIdsExcluded);
             var industryIdsExcludedParameter = new ObjectParameter("industryIdsExcluded", industryIdsExcluded);
+            var educationIdsParameter = new ObjectParameter("educationIds", educationIds);
+            var educationIdsExcludedParameter = new ObjectParameter("educationIdsExcluded", educationIdsExcluded);
+            var profileQuestionIdsExcludedParameter = new ObjectParameter("profileQuestionIdsExcluded", profileQuestionIdsExcluded);
+            var surveyQuestionIdsExcludedParameter = new ObjectParameter("surveyQuestionIdsExcluded", surveyQuestionIdsExcluded);
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAudience_Result>("GetAudience",
                 ageFromParameter, ageToParameter, genderParameter, countryIdsParameter, cityIdsParameter, languageIdsParameter,
                 industryIdsParameter, profileQuestionIdsParameter, profileAnswerIdsParameter, surveyQuestionIdsParameter
                 , surveyAnswerIdsParameter, countryIdsExcludedParameter, cityIdsExcludedParameter, languageIdsExcludedParameter
-                , industryIdsExcludedParameter);
+                , industryIdsExcludedParameter
+                , educationIdsParameter
+                , educationIdsExcludedParameter
+                , profileQuestionIdsExcludedParameter
+                , surveyQuestionIdsExcludedParameter);
         }
 
         /// <summary>

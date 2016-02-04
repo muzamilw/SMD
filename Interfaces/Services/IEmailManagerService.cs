@@ -9,6 +9,11 @@ namespace SMD.Interfaces.Services
     public interface IEmailManagerService
     {
         /// <summary>
+        /// Send Voucher to User
+        /// </summary>
+        Task SendVoucherEmail(string aspnetUserId, string voucherDescription, string voucherValue, string voucherImage);
+
+        /// <summary>
         /// Send Account Verification Email
         /// </summary>
         Task SendAccountVerificationEmail(User oUser, string emailConfirmationLink);
@@ -44,5 +49,16 @@ namespace SMD.Interfaces.Services
         ///Send Email on Question Rejection 
         /// </summary>
         Task SendQuestionRejectionEmail(string aspnetUserId);
+
+
+        /// <summary>
+        ///Send Email when Collection scheduler run
+        /// </summary>
+        Task SendCollectionRoutineEmail(string aspnetUserId);
+
+        /// <summary>
+        ///Send Email when Payout scheduler run
+        /// </summary>
+        Task SendPayOutRoutineEmail(string aspnetUserId);
     }
 }

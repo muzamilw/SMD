@@ -339,7 +339,7 @@ blockquote.pull-right:before {
     float: left;
     display: block;
     margin-right: 3px;
-    font-size: em;
+    font-size: 1.2em;
 }
 
 #header-nav .form-control {

@@ -63,6 +63,8 @@
           <Property Name="Voucher2Heading" Type="nvarchar" MaxLength="200" />
           <Property Name="Voucher2Description" Type="nvarchar(max)" />
           <Property Name="Voucher2Value" Type="nvarchar(max)" />
+          <Property Name="Voucher1ImagePath" Type="nvarchar" MaxLength="200" />
+          <Property Name="Voucher2ImagePath" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="AdCampaignResponse">
           <Key>
@@ -74,6 +76,7 @@
           <Property Name="UserID" Type="nvarchar" MaxLength="128" />
           <Property Name="EndUserDollarAmount" Type="float" />
           <Property Name="SkipCount" Type="int" />
+          <Property Name="UserSelection" Type="int" />
         </EntityType>
         <EntityType Name="AdCampaignTargetCriteria">
           <Key>
@@ -181,7 +184,6 @@
           <Property Name="ChargeBeesubscriptionID" Type="nvarchar" MaxLength="50" />
           <Property Name="RegisteredViaReferral" Type="bit" />
           <Property Name="ReferringUserID" Type="nvarchar" MaxLength="128" />
-          <Property Name="Age" Type="int" />
           <Property Name="Gender" Type="int" />
           <Property Name="LanguageID" Type="int" />
           <Property Name="IndustryID" Type="int" />
@@ -196,6 +198,7 @@
           <Property Name="PaypalCustomerId" Type="nvarchar" MaxLength="250" />
           <Property Name="GoogleWalletCustomerId" Type="nvarchar" MaxLength="250" />
           <Property Name="PreferredPayoutAccount" Type="int" />
+          <Property Name="DOB" Type="datetime" />
         </EntityType>
         <EntityType Name="AuditLog">
           <Key>
@@ -264,6 +267,9 @@
           <Property Name="Status" Type="bit" />
           <Property Name="AgeRangeStart" Type="int" />
           <Property Name="AgeRangeEnd" Type="int" />
+          <Property Name="GameType" Type="int" />
+          <Property Name="Complexity" Type="int" />
+          <Property Name="GameUrl" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="Industry">
           <Key>
@@ -512,6 +518,19 @@
           <Property Name="CurrencyID" Type="int" />
           <Property Name="CurrencyRateID" Type="int" />
           <Property Name="Sequence" Type="int" />
+        </EntityType>
+        <EntityType Name="TransactionLog">
+          <Key>
+            <PropertyRef Name="TransactionLogId" />
+          </Key>
+          <Property Name="TransactionLogId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TxId" Type="bigint" Nullable="false" />
+          <Property Name="LogDate" Type="datetime" Nullable="false" />
+          <Property Name="Amount" Type="float" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="FromUser" Type="nvarchar" MaxLength="250" />
+          <Property Name="ToUser" Type="nvarchar" MaxLength="250" />
+          <Property Name="IsCompleted" Type="bit" />
         </EntityType>
         <Association Name="FK_Account_AspNetUsers">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
@@ -1169,6 +1188,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TransactionLog_TransactionLog">
+          <End Role="Transaction" Type="Self.Transaction" Multiplicity="1" />
+          <End Role="TransactionLog" Type="Self.TransactionLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Transaction">
+              <PropertyRef Name="TxID" />
+            </Principal>
+            <Dependent Role="TransactionLog">
+              <PropertyRef Name="TxId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransactionLog_TransactionLog1">
+          <End Role="TransactionLog" Type="Self.TransactionLog" Multiplicity="1" />
+          <End Role="TransactionLog1" Type="Self.TransactionLog" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TransactionLog">
+              <PropertyRef Name="TransactionLogId" />
+            </Principal>
+            <Dependent Role="TransactionLog1">
+              <PropertyRef Name="TransactionLogId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="GetAds" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserID" Type="nvarchar" Mode="In" />
           <Parameter Name="FromRow" Type="int" Mode="In" />
@@ -1190,6 +1233,10 @@
           <Parameter Name="cityIdsExcluded" Type="nvarchar" Mode="In" />
           <Parameter Name="languageIdsExcluded" Type="nvarchar" Mode="In" />
           <Parameter Name="industryIdsExcluded" Type="nvarchar" Mode="In" />
+          <Parameter Name="educationIds" Type="nvarchar" Mode="In" />
+          <Parameter Name="educationIdsExcluded" Type="nvarchar" Mode="In" />
+          <Parameter Name="profileQuestionIdsExcluded" Type="nvarchar" Mode="In" />
+          <Parameter Name="surveyQuestionIdsExcluded" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="GetAudienceAdCampaign" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="age" Type="int" Mode="In" />
@@ -1268,6 +1315,7 @@
           <EntitySet Name="SystemMails" EntityType="Self.SystemMails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tax" EntityType="Self.Tax" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Transaction" EntityType="Self.Transaction" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TransactionLog" EntityType="Self.TransactionLog" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Account_AspNetUsers" Association="Self.FK_Account_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Account" EntitySet="Account" />
@@ -1484,6 +1532,14 @@
             <End Role="Account" EntitySet="Account" />
             <End Role="Transaction" EntitySet="Transaction" />
           </AssociationSet>
+          <AssociationSet Name="FK_TransactionLog_TransactionLog" Association="Self.FK_TransactionLog_TransactionLog">
+            <End Role="Transaction" EntitySet="Transaction" />
+            <End Role="TransactionLog" EntitySet="TransactionLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransactionLog_TransactionLog1" Association="Self.FK_TransactionLog_TransactionLog1">
+            <End Role="TransactionLog" EntitySet="TransactionLog" />
+            <End Role="TransactionLog1" EntitySet="TransactionLog" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -1558,7 +1614,6 @@
           <NavigationProperty Name="Claims" Relationship="DomainModels.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="User" ToRole="AspNetUserClaim" />
           <NavigationProperty Name="AdCampaignResponses" Relationship="DomainModels.FK_AdCampaignResponse_AspNetUsers" FromRole="User" ToRole="AdCampaignResponse" />
           <NavigationProperty Name="SurveyQuestions" Relationship="DomainModels.FK_SurveyQuestion_AspNetUsers" FromRole="User" ToRole="SurveyQuestion" />
-          <Property Name="Age" Type="Int32" />
           <Property Name="Gender" Type="Int32" />
           <Property Name="StripeCustomerId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="SurveyQuestionResponses" Relationship="DomainModels.FK_SurveyQuestionResponse_AspNetUsers" FromRole="User" ToRole="SurveyQuestionResponse" />
@@ -1582,6 +1637,7 @@
           <Property Name="PreferredPayoutAccount" Type="Int32" />
           <NavigationProperty Name="City" Relationship="DomainModels.FK_AspNetUsers_City" FromRole="User" ToRole="City" />
           <NavigationProperty Name="Country" Relationship="DomainModels.FK_AspNetUsers_Country" FromRole="User" ToRole="Country" />
+          <Property Name="DOB" Type="DateTime" Precision="3" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="DomainModels.User" Multiplicity="1">
@@ -1811,23 +1867,6 @@
             <End Role="SurveyQuestion" EntitySet="SurveyQuestions" />
             <End Role="InvoiceDetail" EntitySet="InvoiceDetails" />
           </AssociationSet>
-          <FunctionImport Name="GetAudience" ReturnType="Collection(DomainModels.GetAudience_Result)">
-            <Parameter Name="ageFrom" Mode="In" Type="Int32" />
-            <Parameter Name="ageTo" Mode="In" Type="Int32" />
-            <Parameter Name="gender" Mode="In" Type="Int32" />
-            <Parameter Name="countryIds" Mode="In" Type="String" />
-            <Parameter Name="cityIds" Mode="In" Type="String" />
-            <Parameter Name="languageIds" Mode="In" Type="String" />
-            <Parameter Name="industryIds" Mode="In" Type="String" />
-            <Parameter Name="profileQuestionIds" Mode="In" Type="String" />
-            <Parameter Name="profileAnswerIds" Mode="In" Type="String" />
-            <Parameter Name="surveyQuestionIds" Mode="In" Type="String" />
-            <Parameter Name="surveyAnswerIds" Mode="In" Type="String" />
-            <Parameter Name="countryIdsExcluded" Mode="In" Type="String" />
-            <Parameter Name="cityIdsExcluded" Mode="In" Type="String" />
-            <Parameter Name="languageIdsExcluded" Mode="In" Type="String" />
-            <Parameter Name="industryIdsExcluded" Mode="In" Type="String" />
-          </FunctionImport>
           <EntitySet Name="Taxes" EntityType="DomainModels.Tax" />
           <AssociationSet Name="FK_Tax_Country" Association="DomainModels.FK_Tax_Country">
             <End Role="Country" EntitySet="Countries" />
@@ -1903,6 +1942,36 @@
             <Parameter Name="UserID" Mode="In" Type="String" />
             <Parameter Name="FromRow" Mode="In" Type="Int32" />
             <Parameter Name="ToRow" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="TransactionLogs" EntityType="DomainModels.TransactionLog" />
+          <AssociationSet Name="FK_TransactionLog_TransactionLog" Association="DomainModels.FK_TransactionLog_TransactionLog">
+            <End Role="Transaction" EntitySet="Transactions" />
+            <End Role="TransactionLog" EntitySet="TransactionLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransactionLog_TransactionLog1" Association="DomainModels.FK_TransactionLog_TransactionLog1">
+            <End Role="TransactionLog" EntitySet="TransactionLogs" />
+            <End Role="TransactionLog1" EntitySet="TransactionLogs" />
+          </AssociationSet>
+          <FunctionImport Name="GetAudience" ReturnType="Collection(DomainModels.GetAudience_Result)">
+            <Parameter Name="ageFrom" Mode="In" Type="Int32" />
+            <Parameter Name="ageTo" Mode="In" Type="Int32" />
+            <Parameter Name="gender" Mode="In" Type="Int32" />
+            <Parameter Name="countryIds" Mode="In" Type="String" />
+            <Parameter Name="cityIds" Mode="In" Type="String" />
+            <Parameter Name="languageIds" Mode="In" Type="String" />
+            <Parameter Name="industryIds" Mode="In" Type="String" />
+            <Parameter Name="profileQuestionIds" Mode="In" Type="String" />
+            <Parameter Name="profileAnswerIds" Mode="In" Type="String" />
+            <Parameter Name="surveyQuestionIds" Mode="In" Type="String" />
+            <Parameter Name="surveyAnswerIds" Mode="In" Type="String" />
+            <Parameter Name="countryIdsExcluded" Mode="In" Type="String" />
+            <Parameter Name="cityIdsExcluded" Mode="In" Type="String" />
+            <Parameter Name="languageIdsExcluded" Mode="In" Type="String" />
+            <Parameter Name="industryIdsExcluded" Mode="In" Type="String" />
+            <Parameter Name="educationIds" Mode="In" Type="String" />
+            <Parameter Name="educationIdsExcluded" Mode="In" Type="String" />
+            <Parameter Name="profileQuestionIdsExcluded" Mode="In" Type="String" />
+            <Parameter Name="surveyQuestionIdsExcluded" Mode="In" Type="String" />
           </FunctionImport>
           </EntityContainer>
         <EntityType Name="ProfileQuestion">
@@ -2168,6 +2237,8 @@
           <Property Name="Voucher2Heading" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Voucher2Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Voucher2Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Voucher1ImagePath" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Voucher2ImagePath" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="AdCampaignResponse">
           <Key>
@@ -2181,6 +2252,7 @@
           <NavigationProperty Name="AdCampaign" Relationship="DomainModels.FK_AdCampaignResponse_AdCampaign" FromRole="AdCampaignResponse" ToRole="AdCampaign" />
           <NavigationProperty Name="User" Relationship="DomainModels.FK_AdCampaignResponse_AspNetUsers" FromRole="AdCampaignResponse" ToRole="User" />
           <Property Name="SkipCount" Type="Int32" />
+          <Property Name="UserSelection" Type="Int32" />
         </EntityType>
         <EntityType Name="AdCampaignTargetLocation">
           <Key>
@@ -2638,6 +2710,7 @@
           <Property Name="CurrencyRateId" Type="Int32" />
           <Property Name="Sequence" Type="Int32" />
           <NavigationProperty Name="Account" Relationship="DomainModels.FK_Transaction_Account" FromRole="Transaction" ToRole="Account" />
+          <NavigationProperty Name="TransactionLogs" Relationship="DomainModels.FK_TransactionLog_TransactionLog" FromRole="Transaction" ToRole="TransactionLog" />
         </EntityType>
         <Association Name="FK_Account_AspNetUsers">
           <End Type="DomainModels.User" Role="User" Multiplicity="0..1" />
@@ -2906,10 +2979,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <ComplexType Name="GetAudience_Result">
-          <Property Type="Int32" Name="MatchingUsers" Nullable="true" />
-          <Property Type="Int32" Name="AllUsers" Nullable="true" />
-        </ComplexType>
         <EntityType Name="Tax">
           <Key>
             <PropertyRef Name="TaxId" />
@@ -3164,6 +3233,9 @@
           <Property Name="Status" Type="Boolean" />
           <Property Name="AgeRangeStart" Type="Int32" />
           <Property Name="AgeRangeEnd" Type="Int32" />
+          <Property Name="GameType" Type="Int32" />
+          <Property Name="Complexity" Type="Int32" />
+          <Property Name="GameUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_AspNetUsers_City">
           <End Type="DomainModels.City" Role="City" Multiplicity="0..1" />
@@ -3190,11 +3262,84 @@
           </ReferentialConstraint>
         </Association>
         <ComplexType Name="GetProducts_Result">
-          <Property Type="Int64" Name="ItemId" Nullable="false" />
+          <Property Type="Int64" Name="ItemId" Nullable="true" />
           <Property Type="String" Name="ItemName" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="ItemType" Nullable="false" MaxLength="8" />
+          <Property Type="Int32" Name="ItemType" Nullable="true" />
           <Property Type="Int64" Name="Weightage" Nullable="true" />
           <Property Type="Int32" Name="TotalItems" Nullable="true" />
+          <Property Type="String" Name="Type" Nullable="false" MaxLength="8" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="1000" />
+          <Property Type="Double" Name="AdClickRate" Nullable="true" />
+          <Property Type="String" Name="AdImagePath" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="AdVideoLink" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="AdAnswer1" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="AdAnswer2" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="AdAnswer3" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="AdCorrectAnswer" Nullable="true" />
+          <Property Type="String" Name="AdVerifyQuestion" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="AdRewardType" Nullable="true" />
+          <Property Type="String" Name="AdVoucher1Heading" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="AdVoucher1Description" Nullable="true" />
+          <Property Type="String" Name="AdVoucher1Value" Nullable="true" />
+          <Property Type="String" Name="SqLeftImagePath" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="SqRightImagePath" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="GameUrl" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="PqAnswer1Id" Nullable="true" />
+          <Property Type="String" Name="PqAnswer1" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="PqAnswer2Id" Nullable="true" />
+          <Property Type="String" Name="PqAnswer2" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="PqAnswer3Id" Nullable="true" />
+          <Property Type="String" Name="PqAnswer3" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="PqAnswer4Id" Nullable="true" />
+          <Property Type="String" Name="PqAnswer4" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="PqAnswer5Id" Nullable="true" />
+          <Property Type="String" Name="PqAnswer5" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="PqAnswer6Id" Nullable="true" />
+          <Property Type="String" Name="PqAnswer6" Nullable="true" MaxLength="100" />
+          <Property Type="Double" Name="SqLeftImagePercentage" Nullable="true" />
+          <Property Type="Double" Name="SqRightImagePercentage" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="TransactionLog">
+          <Key>
+            <PropertyRef Name="TransactionLogId" />
+          </Key>
+          <Property Name="TransactionLogId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TxId" Type="Int64" Nullable="false" />
+          <Property Name="LogDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Amount" Type="Double" Nullable="false" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="FromUser" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ToUser" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="IsCompleted" Type="Boolean" />
+          <NavigationProperty Name="Transaction" Relationship="DomainModels.FK_TransactionLog_TransactionLog" FromRole="TransactionLog" ToRole="Transaction" />
+        </EntityType>
+        <Association Name="FK_TransactionLog_TransactionLog">
+          <End Type="DomainModels.Transaction" Role="Transaction" Multiplicity="1" />
+          <End Type="DomainModels.TransactionLog" Role="TransactionLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Transaction">
+              <PropertyRef Name="TxId" />
+            </Principal>
+            <Dependent Role="TransactionLog">
+              <PropertyRef Name="TxId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransactionLog_TransactionLog1">
+          <End Type="DomainModels.TransactionLog" Role="TransactionLog" Multiplicity="1" />
+          <End Type="DomainModels.TransactionLog" Role="TransactionLog1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TransactionLog">
+              <PropertyRef Name="TransactionLogId" />
+            </Principal>
+            <Dependent Role="TransactionLog1">
+              <PropertyRef Name="TransactionLogId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="GetAudience_Result">
+          <Property Type="Int32" Name="MatchingUsers" Nullable="true" />
+          <Property Type="Int32" Name="AllUsers" Nullable="true" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -3222,6 +3367,7 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="DomainModels.User">
               <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
                 <ScalarProperty Name="PreferredPayoutAccount" ColumnName="PreferredPayoutAccount" />
                 <ScalarProperty Name="GoogleWalletCustomerId" ColumnName="GoogleWalletCustomerId" />
                 <ScalarProperty Name="PaypalCustomerId" ColumnName="PaypalCustomerId" />
@@ -3237,7 +3383,6 @@
                 <ScalarProperty Name="LanguageId" ColumnName="LanguageID" />
                 <ScalarProperty Name="StripeCustomerId" ColumnName="StripeCustomerId" />
                 <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="Age" ColumnName="Age" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
@@ -3396,6 +3541,8 @@
           <EntitySetMapping Name="AdCampaigns">
             <EntityTypeMapping TypeName="DomainModels.AdCampaign">
               <MappingFragment StoreEntitySet="AdCampaign">
+                <ScalarProperty Name="Voucher2ImagePath" ColumnName="Voucher2ImagePath" />
+                <ScalarProperty Name="Voucher1ImagePath" ColumnName="Voucher1ImagePath" />
                 <ScalarProperty Name="Voucher2Value" ColumnName="Voucher2Value" />
                 <ScalarProperty Name="Voucher2Description" ColumnName="Voucher2Description" />
                 <ScalarProperty Name="Voucher2Heading" ColumnName="Voucher2Heading" />
@@ -3446,6 +3593,7 @@
           <EntitySetMapping Name="AdCampaignResponses">
             <EntityTypeMapping TypeName="DomainModels.AdCampaignResponse">
               <MappingFragment StoreEntitySet="AdCampaignResponse">
+                <ScalarProperty Name="UserSelection" ColumnName="UserSelection" />
                 <ScalarProperty Name="SkipCount" ColumnName="SkipCount" />
                 <ScalarProperty Name="EndUserDollarAmount" ColumnName="EndUserDollarAmount" />
                 <ScalarProperty Name="UserId" ColumnName="UserID" />
@@ -3681,14 +3829,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="GetAudience" FunctionName="SMDModel.Store.GetAudience">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="DomainModels.GetAudience_Result">
-                <ScalarProperty Name="MatchingUsers" ColumnName="MatchingUsers" />
-                <ScalarProperty Name="AllUsers" ColumnName="AllUsers" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <EntitySetMapping Name="Taxes">
             <EntityTypeMapping TypeName="DomainModels.Tax">
               <MappingFragment StoreEntitySet="Tax">
@@ -3776,6 +3916,9 @@
           <EntitySetMapping Name="Games">
             <EntityTypeMapping TypeName="DomainModels.Game">
               <MappingFragment StoreEntitySet="Game">
+                <ScalarProperty Name="GameUrl" ColumnName="GameUrl" />
+                <ScalarProperty Name="Complexity" ColumnName="Complexity" />
+                <ScalarProperty Name="GameType" ColumnName="GameType" />
                 <ScalarProperty Name="AgeRangeEnd" ColumnName="AgeRangeEnd" />
                 <ScalarProperty Name="AgeRangeStart" ColumnName="AgeRangeStart" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
@@ -3792,6 +3935,59 @@
                 <ScalarProperty Name="ItemType" ColumnName="ItemType" />
                 <ScalarProperty Name="Weightage" ColumnName="Weightage" />
                 <ScalarProperty Name="TotalItems" ColumnName="TotalItems" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="AdClickRate" ColumnName="AdClickRate" />
+                <ScalarProperty Name="AdImagePath" ColumnName="AdImagePath" />
+                <ScalarProperty Name="AdVideoLink" ColumnName="AdVideoLink" />
+                <ScalarProperty Name="AdAnswer1" ColumnName="AdAnswer1" />
+                <ScalarProperty Name="AdAnswer2" ColumnName="AdAnswer2" />
+                <ScalarProperty Name="AdAnswer3" ColumnName="AdAnswer3" />
+                <ScalarProperty Name="AdCorrectAnswer" ColumnName="AdCorrectAnswer" />
+                <ScalarProperty Name="AdVerifyQuestion" ColumnName="AdVerifyQuestion" />
+                <ScalarProperty Name="AdRewardType" ColumnName="AdRewardType" />
+                <ScalarProperty Name="AdVoucher1Heading" ColumnName="AdVoucher1Heading" />
+                <ScalarProperty Name="AdVoucher1Description" ColumnName="AdVoucher1Description" />
+                <ScalarProperty Name="AdVoucher1Value" ColumnName="AdVoucher1Value" />
+                <ScalarProperty Name="SqLeftImagePath" ColumnName="SqLeftImagePath" />
+                <ScalarProperty Name="SqRightImagePath" ColumnName="SqRightImagePath" />
+                <ScalarProperty Name="GameUrl" ColumnName="GameUrl" />
+                <ScalarProperty Name="PqAnswer1Id" ColumnName="PqAnswer1Id" />
+                <ScalarProperty Name="PqAnswer1" ColumnName="PqAnswer1" />
+                <ScalarProperty Name="PqAnswer2Id" ColumnName="PqAnswer2Id" />
+                <ScalarProperty Name="PqAnswer2" ColumnName="PqAnswer2" />
+                <ScalarProperty Name="PqAnswer3Id" ColumnName="PqAnswer3Id" />
+                <ScalarProperty Name="PqAnswer3" ColumnName="PqAnswer3" />
+                <ScalarProperty Name="PqAnswer4Id" ColumnName="PqAnswer4Id" />
+                <ScalarProperty Name="PqAnswer4" ColumnName="PqAnswer4" />
+                <ScalarProperty Name="PqAnswer5Id" ColumnName="PqAnswer5Id" />
+                <ScalarProperty Name="PqAnswer5" ColumnName="PqAnswer5" />
+                <ScalarProperty Name="PqAnswer6Id" ColumnName="PqAnswer6Id" />
+                <ScalarProperty Name="PqAnswer6" ColumnName="PqAnswer6" />
+                <ScalarProperty Name="SqLeftImagePercentage" ColumnName="SqLeftImagePercentage" />
+                <ScalarProperty Name="SqRightImagePercentage" ColumnName="SqRightImagePercentage" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="TransactionLogs">
+            <EntityTypeMapping TypeName="DomainModels.TransactionLog">
+              <MappingFragment StoreEntitySet="TransactionLog">
+                <ScalarProperty Name="IsCompleted" ColumnName="IsCompleted" />
+                <ScalarProperty Name="ToUser" ColumnName="ToUser" />
+                <ScalarProperty Name="FromUser" ColumnName="FromUser" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="LogDate" ColumnName="LogDate" />
+                <ScalarProperty Name="TxId" ColumnName="TxId" />
+                <ScalarProperty Name="TransactionLogId" ColumnName="TransactionLogId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetAudience" FunctionName="SMDModel.Store.GetAudience">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DomainModels.GetAudience_Result">
+                <ScalarProperty Name="MatchingUsers" ColumnName="MatchingUsers" />
+                <ScalarProperty Name="AllUsers" ColumnName="AllUsers" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

@@ -1,19 +1,18 @@
-﻿using System.Linq;
-using FluentScheduler;
+﻿using FluentScheduler;
 using Microsoft.Practices.Unity;
-using SMD.ExceptionHandling;
 using SMD.ExceptionHandling.Logger;
 using SMD.Implementation.Identity;
 using SMD.Interfaces.Logger;
 using SMD.Interfaces.Services;
+using SMD.Models.DomainModels;
 using SMD.Models.RequestModels;
 using SMD.Repository.BaseRepository;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Transactions;
 using System.Web.Http.Filters;
-using System.Web.Configuration;
 
 namespace SMD.Implementation.Services
 {
@@ -27,6 +26,9 @@ namespace SMD.Implementation.Services
 
         [Dependency]
         private static IPaypalService PaypalService { get; set; }
+
+        [Dependency]
+        private static IEmailManagerService EmailSerice { get; set; }
 
         private static ISMDLogger smdLogger;
         /// <summary>
@@ -82,7 +84,8 @@ namespace SMD.Implementation.Services
 
             // Initialize Service
             PaypalService = UnityConfig.UnityContainer.Resolve<IPaypalService>();
-           
+            EmailSerice = UnityConfig.UnityContainer.Resolve<IEmailManagerService>();
+
             // Using Base DB Context
             using (var dbContext = new BaseDbContext())
             {
@@ -126,6 +129,22 @@ namespace SMD.Implementation.Services
                                 PaypalService.MakeAdaptiveImplicitPayment(requestModel);
 
                                 transaction.isProcessed = true;
+                                // Transaction log entery 
+                                var transactionLog = new TransactionLog
+                                {
+                                    Amount = (double) requestModel.Amount,
+                                    FromUser = requestModel.SenderEmail,
+                                    Type = 1, // credit 
+                                    IsCompleted = true,
+                                    LogDate = DateTime.Now,
+                                    ToUser = requestModel.RecieverEmails.FirstOrDefault(),
+                                    TxId = transaction.TxId
+                                };
+                                dbContext.TransactionLogs.Add(transactionLog);
+                                dbContext.SaveChanges();
+
+                                // Email To User 
+                                EmailSerice.SendPayOutRoutineEmail(user.Id);
                                 // Indicates we are happy
                                 tran.Complete();
                             }

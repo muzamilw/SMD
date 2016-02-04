@@ -70,7 +70,7 @@ namespace SMD.Models.RequestModels
         /// <summary>
         /// Age
         /// </summary>
-        public int? Age { get; set; }
+        public DateTime? DOB { get; set; }
 
         /// <summary>
         /// Gender
@@ -139,5 +139,38 @@ namespace SMD.Models.RequestModels
         /// Authentication Token
         /// </summary>
         public string AuthenticationToken { get; set; }
+
+      
+
+        /// <summary>
+        /// Advertising Contact
+        /// </summary>
+        public string AdvertContact { get; set; }
+
+        /// <summary>
+        /// Advertising Contact phone
+        /// </summary>
+        public string AdvertContactPhone { get; set; }
+
+        /// <summary>
+        /// Advertising Contact Email
+        /// </summary>
+
+        public string AdvertContactEmail { get; set; }
+
+        /// <summary>
+        /// User Time ZOne
+        /// </summary>
+        public string TimeZone { get; set; }
+
+        /// <summary>
+        /// EDucation Id
+        /// </summary>
+        public long? EducationId { get; set; }
+
+        /// <summary>
+        /// PayPAl Account
+        /// </summary>
+        public string PayPal { get; set; }
     }
 }

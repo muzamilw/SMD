@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using System.Globalization;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using SMD.ExceptionHandling;
 using SMD.Implementation.Identity;
@@ -51,19 +52,19 @@ namespace SMD.Implementation.Services
         }
         private string[] SaveImages(AdCampaign campaign)
         {
-            string[] savePaths = new string[2];
+            string[] savePaths = new string[3];
             string directoryPath = HttpContext.Current.Server.MapPath("~/SMD_Content/AdCampaign/" + campaign.CampaignId);
 
             if (directoryPath != null && !Directory.Exists(directoryPath))
             {
                 Directory.CreateDirectory(directoryPath);
             }
-            if (!string.IsNullOrEmpty(campaign.CampaignImagePath) && !campaign.CampaignImagePath.Contains("CampaignDefaultImage"))
+            if (!string.IsNullOrEmpty(campaign.CampaignImagePath) && !campaign.CampaignImagePath.Contains("guid_CampaignDefaultImage"))
             {
                 string base64 = campaign.CampaignImagePath.Substring(campaign.CampaignImagePath.IndexOf(',') + 1);
                 base64 = base64.Trim('\0');
                 byte[] data = Convert.FromBase64String(base64);
-                string savePath = directoryPath + "\\CampaignDefaultImage.jpg";
+                string savePath = directoryPath + "\\guid_CampaignDefaultImage.jpg";
                 File.WriteAllBytes(savePath, data);
                 int indexOf = savePath.LastIndexOf("SMD_Content", StringComparison.Ordinal);
                 savePath = savePath.Substring(indexOf, savePath.Length - indexOf);
@@ -71,7 +72,7 @@ namespace SMD.Implementation.Services
             }
             if (campaign.Type == 3)
             {
-                if (!string.IsNullOrEmpty(campaign.CampaignTypeImagePath) && !campaign.CampaignTypeImagePath.Contains("CampaignTypeDefaultImage"))
+                if (!string.IsNullOrEmpty(campaign.CampaignTypeImagePath) && !campaign.CampaignTypeImagePath.Contains("guid_CampaignTypeDefaultImage"))
                 {
                     string base64 = campaign.CampaignTypeImagePath.Substring(campaign.CampaignTypeImagePath.IndexOf(',') + 1);
                     base64 = base64.Trim('\0');
@@ -81,13 +82,24 @@ namespace SMD.Implementation.Services
                     {
                         Directory.CreateDirectory(directoryPath);
                     }
-                    string savePath = directoryPath + "\\CampaignTypeDefaultImage.jpg";
+                    string savePath = directoryPath + "\\guid_CampaignTypeDefaultImage.jpg";
                     File.WriteAllBytes(savePath, data);
                     int indexOf = savePath.LastIndexOf("SMD_Content", StringComparison.Ordinal);
                     savePath = savePath.Substring(indexOf, savePath.Length - indexOf);
                     savePaths[1] = savePath;
                 }
 
+            }
+            if (!string.IsNullOrEmpty(campaign.VoucherImagePath) && !campaign.VoucherImagePath.Contains("guid_Voucher1DefaultImage"))
+            {
+                string base64 = campaign.VoucherImagePath.Substring(campaign.VoucherImagePath.IndexOf(',') + 1);
+                base64 = base64.Trim('\0');
+                byte[] data = Convert.FromBase64String(base64);
+                string savePath = directoryPath + "\\guid_Voucher1DefaultImage.jpg";
+                File.WriteAllBytes(savePath, data);
+                int indexOf = savePath.LastIndexOf("SMD_Content", StringComparison.Ordinal);
+                savePath = savePath.Substring(indexOf, savePath.Length - indexOf);
+                savePaths[2] = savePath;
             }
             return savePaths;
         }
@@ -110,7 +122,10 @@ namespace SMD.Implementation.Services
             IAdCampaignTargetCriteriaRepository adCampaignTargetCriteriaRepository,
             IProfileQuestionRepository profileQuestionRepository,
             IProfileQuestionAnswerRepository profileQuestionAnswerRepository,
-            ISurveyQuestionRepository surveyQuestionRepository, IProductRepository productRepository, ITaxRepository taxRepository, IInvoiceRepository invoiceRepository, IInvoiceDetailRepository invoiceDetailRepository,IEducationRepository educationRepository, IStripeService stripeService, WebApiUserService webApiUserService)
+            ISurveyQuestionRepository surveyQuestionRepository, 
+            IProductRepository productRepository, ITaxRepository taxRepository, IInvoiceRepository invoiceRepository, 
+            IInvoiceDetailRepository invoiceDetailRepository,IEducationRepository educationRepository, 
+            IStripeService stripeService, WebApiUserService webApiUserService)
         {
             this._adCampaignRepository = adCampaignRepository;
             this._languageRepository = languageRepository;
@@ -131,7 +146,7 @@ namespace SMD.Implementation.Services
             this.stripeService = stripeService;
             this.webApiUserService = webApiUserService;
         }
-
+        
         /// <summary>
         /// Get Base Data 
         /// </summary>
@@ -222,6 +237,12 @@ namespace SMD.Implementation.Services
         public void CreateCampaign(AdCampaign campaignModel)
         {
             campaignModel.UserId = _adCampaignRepository.LoggedInUserIdentity;
+           
+            campaignModel.StartDateTime = campaignModel.StartDateTime.Value.Subtract(_adCampaignRepository.UserTimezoneOffSet);
+            campaignModel.EndDateTime = campaignModel.EndDateTime.Value.Subtract(_adCampaignRepository.UserTimezoneOffSet);
+            _adCampaignRepository.Add(campaignModel);
+            _adCampaignRepository.SaveChanges();
+
             string[] paths = SaveImages(campaignModel);
             if (paths != null && paths.Count() > 0)
             {
@@ -233,15 +254,12 @@ namespace SMD.Implementation.Services
                 {
                     campaignModel.LandingPageVideoLink = paths[1];
                 }
-
-
+                if (!string.IsNullOrEmpty(paths[2]))
+                {
+                    campaignModel.Voucher1ImagePath = paths[2];
+                }
+                _adCampaignRepository.SaveChanges();
             }
-            campaignModel.StartDateTime = campaignModel.StartDateTime.Value.Subtract(_adCampaignRepository.UserTimezoneOffSet);
-            campaignModel.EndDateTime = campaignModel.EndDateTime.Value.Subtract(_adCampaignRepository.UserTimezoneOffSet);
-            _adCampaignRepository.Add(campaignModel);
-            _adCampaignRepository.SaveChanges();
-
-
         }
         public CampaignResponseModel GetCampaigns(AdCampaignSearchRequest request)
         {
@@ -390,7 +408,8 @@ namespace SMD.Implementation.Services
                     emailManagerService.SendQuestionApprovalEmail(dbAd.UserId);
 
                     // Stripe payment + Invoice Generation
-                    MakeStripePaymentandAddInvoiceForCampaign(dbAd);
+                    // Muzi bhai said we will see it on latter stage 
+                   //  MakeStripePaymentandAddInvoiceForCampaign(dbAd);
                 }
                 // Rejection 
                 else
@@ -425,12 +444,22 @@ namespace SMD.Implementation.Services
             var tax = taxRepository.GetTaxByCountryId(user.CountryId);
             // Total includes tax
             var amount = product.SetupPrice + tax.TaxValue;
+            string response = null;
+            Boolean isSystemUser;
 
-            // Make Stripe actual payment 
-            var response = stripeService.ChargeCustomer((int?)amount, user.StripeCustomerId);
-
+            // If It is not System User then make transation 
+            if (user.Roles.Any(role => role.Name.ToLower().Equals("user")))
+            {
+                // Make Stripe actual payment 
+                response = stripeService.ChargeCustomer((int?)amount, user.StripeCustomerId);
+                isSystemUser = false;
+            }
+            else
+            {
+                isSystemUser = true;
+            }
             #endregion
-            if (response != "failed")
+            if (isSystemUser || (response != "failed"))
             {
                 #region Add Invoice
 

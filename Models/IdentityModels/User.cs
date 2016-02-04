@@ -52,7 +52,7 @@ namespace SMD.Models.IdentityModels
         public string ChargeBeesubscriptionId { get; set; }
         public bool? RegisteredViaReferral { get; set; }
         public string ReferringUserId { get; set; }
-        public int? Age { get; set; }
+        public DateTime? DOB { get; set; }
         public int? Gender { get; set; }
         public int? LanguageId { get; set; }
         public int? IndustryId { get; set; }
@@ -153,9 +153,9 @@ namespace SMD.Models.IdentityModels
                 ZipCode = source.ZipCode;
             }
 
-            if (source.Age.HasValue)
+            if (source.DOB.HasValue)
             {
-                Age = source.Age;
+                DOB = source.DOB;
             }
 
             if (source.CityId.HasValue)
@@ -181,6 +181,38 @@ namespace SMD.Models.IdentityModels
             if (!string.IsNullOrEmpty(source.FullName))
             {
                 FullName = source.FullName;
+            }
+
+            if (!string.IsNullOrEmpty(source.TimeZone))
+            {
+                UserTimeZone = source.TimeZone;
+            }
+
+           
+
+            if (!string.IsNullOrEmpty(source.AdvertContact))
+            {
+                AdvertisingContact = source.AdvertContact;
+            }
+
+            if (!string.IsNullOrEmpty(source.AdvertContactEmail))
+            {
+                AdvertisingContactEmail = source.AdvertContactEmail;
+            }
+
+            if (!string.IsNullOrEmpty(source.AdvertContactPhone))
+            {
+                AdvertisingContactPhoneNumber = source.AdvertContactPhone;
+            }
+
+            if (source.EducationId.HasValue)
+            {
+                EducationId = source.EducationId;
+            }
+
+            if (!string.IsNullOrEmpty(source.PayPal))
+            {
+                PaypalCustomerId = source.PayPal;
             }
         }
 

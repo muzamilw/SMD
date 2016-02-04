@@ -29,6 +29,7 @@ namespace SMD.MIS.Controllers
         private ApplicationUserManager _userManager;
         private IClaimsSecurityService claimsSecurityService;
         private IEmailManagerService emailManagerService;
+        private readonly IAccountService accountService;
 
         /// <summary>
         /// Adds Claims to generated identity
@@ -56,7 +57,7 @@ namespace SMD.MIS.Controllers
 
         #region Constructor
 
-        public AccountController(IClaimsSecurityService claimsSecurityService, IEmailManagerService emailManagerService)
+        public AccountController(IClaimsSecurityService claimsSecurityService, IEmailManagerService emailManagerService, IAccountService account)
         {
             if (emailManagerService == null)
             {
@@ -65,6 +66,7 @@ namespace SMD.MIS.Controllers
 
             this.claimsSecurityService = claimsSecurityService;
             this.emailManagerService = emailManagerService;
+            accountService = account;
         }
 
         #endregion
@@ -95,7 +97,7 @@ namespace SMD.MIS.Controllers
                 ViewBag.ReturnUrl = returnUrl;
                 return View();
             }
-            return RedirectToAction("Welcome", "Home", new { area = "" });
+            return RedirectToLocal("");
         }
 
         public ApplicationSignInManager SignInManager
@@ -166,13 +168,21 @@ namespace SMD.MIS.Controllers
 
         private ActionResult RedirectToLocal(string returnUrl)
         {
-            if (Url.IsLocalUrl(returnUrl))
+
+            if (UserManager.LoggedInUserRole !=  "" && UserManager.LoggedInUserRole != (string)Roles.User)
             {
-                return Redirect(returnUrl);
+                if (Url.IsLocalUrl(returnUrl))
+                {
+                    return Redirect(returnUrl);
+                }
+                else
+                {
+                    return RedirectToAction("Welcome", "Home", new { area = "" });
+                }
             }
             else
             {
-                return RedirectToAction("Welcome", "Home", new { area = "" });
+                return RedirectToAction("Index","Ads", new { area = "Ads" });
             }
         }
 
@@ -278,6 +288,7 @@ namespace SMD.MIS.Controllers
             IdentityResult result = await UserManager.ConfirmEmailAsync(userId, code);
             if (result.Succeeded)
             {
+                CreateUserAccounts(userId);
                 return View("Login");
             }
             return View("Error");
@@ -311,8 +322,8 @@ namespace SMD.MIS.Controllers
                 var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code },
                     protocol: Request.Url.Scheme);
                 await
-                    UserManager.SendEmailAsync(user.Id, "Reset Password",
-                        "Please reset your password by clicking here: <a href=\"" + callbackUrl + "\">link</a>");
+                    emailManagerService.SendPasswordResetLinkEmail(user, 
+                        "<a href=\"" + callbackUrl + "\">link</a>");
                 ViewBag.Link = callbackUrl;
                 return View("ForgotPasswordConfirmation");
             }
@@ -487,6 +498,7 @@ namespace SMD.MIS.Controllers
                     {
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                         SetupUserClaims(info.ExternalIdentity);
+                        CreateUserAccounts(user.Id);
                         return RedirectToLocal(returnUrl);
                     }
                 }
@@ -594,6 +606,14 @@ namespace SMD.MIS.Controllers
             }
         }
 
+        /// <summary>
+        /// Account Creater
+        /// </summary>
+        private void CreateUserAccounts(string userId)
+        {
+            //Creates User Native Accounts
+            accountService.AddAccountsForNewUser(userId);
+        }
         #endregion
     }
 }

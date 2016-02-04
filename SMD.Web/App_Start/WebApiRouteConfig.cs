@@ -142,9 +142,9 @@ namespace SMD.MIS
 
             // Get Products (Ads, Surveys, Questions) Custom route
             config.Routes.MapHttpRoute(
-                "GetProducts",
+                "Products",
                 "Products/{AuthenticationToken}/",
-                new { controller = "GetProducts" },
+                new { controller = "Products" },
                 null,
                 null);
         }

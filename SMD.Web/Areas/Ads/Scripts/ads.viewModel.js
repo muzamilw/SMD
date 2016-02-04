@@ -37,7 +37,7 @@ define("ads/ads.viewModel",
                     campaignTypePlaceHolderValue = ko.observable('Enter a link'),
                     isEditCampaign = ko.observable(false),
                     canSubmitForApproval = ko.observable(true),
-                    correctAnswers = ko.observableArray([{ id: 1, name: "Answer 1" }, { id: 1, name: "Answer 2" }, { id: 3, name: "Answer 3" }]),
+                    correctAnswers = ko.observableArray([{ id: 1, name: "Answer 1" }, { id: 2, name: "Answer 2" }]),
                     selectedIndustryIncludeExclude = ko.observable(true),
                     UserAndCostDetail = ko.observable(),
                     pricePerclick = ko.observable(0),
@@ -176,24 +176,28 @@ define("ads/ads.viewModel",
                         isEditCampaign(false);
                         campaignModel().CampaignTypeImagePath("");
                         campaignModel().CampaignImagePath("");
+                        campaignModel().VoucherImagePath("");
                         campaignModel().LanguageId(41);
+                        campaignModel().CampaignName('New Campaign');
+                        
+                       
                         bindAudienceReachCount();
                         selectedQuestionCountryList([]);
 
-                        if (UserAndCostDetail().CountryId != null && UserAndCostDetail().CityId != null) {
+                        //if (UserAndCostDetail().CountryId != null && UserAndCostDetail().CityId != null) {
 
-                            var objCity = {
-                                CountryID: UserAndCostDetail().CountryId,
-                                CityID: UserAndCostDetail().CityId,
-                                Radius: 0,
-                                Country: UserAndCostDetail().Country,
-                                City: UserAndCostDetail().City,
-                                Latitude: UserAndCostDetail().GeoLat,
-                                Longitude: UserAndCostDetail().GeoLong
-                            }
-                            selectedLocation(objCity);
-                            onAddLocation();
-                        }
+                        //    var objCity = {
+                        //        CountryID: UserAndCostDetail().CountryId,
+                        //        CityID: UserAndCostDetail().CityId,
+                        //        Radius: 0,
+                        //        Country: UserAndCostDetail().Country,
+                        //        City: UserAndCostDetail().City,
+                        //        Latitude: UserAndCostDetail().GeoLat,
+                        //        Longitude: UserAndCostDetail().GeoLong
+                        //    }
+                        //    selectedLocation(objCity);
+                        //    onAddLocation();
+                        //}
                     },
 
                     closeNewCampaignDialog = function () {
@@ -676,6 +680,9 @@ define("ads/ads.viewModel",
                         if (campaignModel().Type() == "2") {
                             campaignTypePlaceHolderValue('Enter a link');
                         }
+                        if (campaignModel().Type() == "3") {
+                            isEnableVedioVerificationLink(true);
+                        }
                     }
                 },
 
@@ -812,6 +819,12 @@ define("ads/ads.viewModel",
                                         }
                                     });
                                     bindAudienceReachCount();
+                                    console.log(campaignModel());
+                                    if (campaignModel().VoucherImagePath() != null || campaignModel().Voucher1Value() != null || campaignModel().Voucher1Description() != null || campaignModel().Voucher1Heading() != null)
+                                    {
+                                        voucherQuestionStatus(true);
+                                    }
+
                                     // handle 2nd edit error 
                                     //  $(".modal-backdrop").remove();
                                     $.unblockUI(spinner);
@@ -838,7 +851,7 @@ define("ads/ads.viewModel",
                     campaignModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
                         Industry: selected.IndustryName,
                         IndustryId: selected.IndustryId,
-                        IncludeorExclude: parseInt(selected.IndustryIncludeExclude),
+                        IncludeorExclude: true,//parseInt(selected.IndustryIncludeExclude),
                         Type: 4,
                         CampaignId: campaignModel().CampaignID()
                     }));
@@ -1143,7 +1156,7 @@ define("ads/ads.viewModel",
                  $(".locMap").css("display", "none");
                  var initialized = false;
                  _.each(campaignModel().AdCampaignTargetLocations(), function (item) {
-                     $(".locMap").css("display", "inline-block");
+                    // $(".locMap").css("display", "inline-block");
                      clearRadiuses();
                      if (item.CityID() == 0 || item.CityID() == null) {
                          addCountryMarker(item.Country());
@@ -1187,6 +1200,9 @@ define("ads/ads.viewModel",
                          voucherQuestionStatus(false);
                      }
                  },
+                VoucherImageCallback = function (file, data) {
+                    campaignModel().VoucherImagePath(data);
+                },
                 // Initialize the view model
                 initialize = function (specifiedView) {
                     view = specifiedView;
@@ -1271,7 +1287,8 @@ define("ads/ads.viewModel",
                     addNewEducationCriteria: addNewEducationCriteria,
                     addNewProfessionCriteria: addNewProfessionCriteria,
                     voucherQuestionStatus: voucherQuestionStatus,
-                    ChangeVoucherSettings:ChangeVoucherSettings
+                    ChangeVoucherSettings:ChangeVoucherSettings,
+                    VoucherImageCallback: VoucherImageCallback
                 };
             })()
         };
