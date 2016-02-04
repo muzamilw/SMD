@@ -69,7 +69,7 @@
     public enum ObjectStatus
     {
         Archived=0,
-        Acitve =1
+        Active =1
     }
 
     /// <summary>

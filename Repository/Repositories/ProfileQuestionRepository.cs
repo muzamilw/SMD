@@ -77,7 +77,7 @@ namespace SMD.Repository.Repositories
                      (question.CountryId==request.CountryFilter)
                      &&
                      (question.LanguageId==request.LanguageFilter)
-                     && (question.Status == null || question.Status == (Int32) ObjectStatus.Acitve);   
+                     && (question.Status == (Int32) ObjectStatus.Active);   
 
             rowCount = DbSet.Count(query);
             return request.IsAsc

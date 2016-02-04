@@ -156,7 +156,6 @@ namespace SMD.Implementation.Services
                             serverAns.Type = answer.Type;
                             serverAns.AnswerString = answer.AnswerString;
                             serverAns.ImagePath = answer.ImagePath;
-
                             serverAns.LinkedQuestion1Id = answer.LinkedQuestion1Id;
                             serverAns.LinkedQuestion2Id = answer.LinkedQuestion2Id;
                             serverAns.LinkedQuestion3Id = answer.LinkedQuestion3Id;
@@ -179,6 +178,7 @@ namespace SMD.Implementation.Services
                                 Type = answer.Type,
                                 AnswerString = answer.AnswerString,
                                 ImagePath = answer.ImagePath,
+                                Status = (int) ObjectStatus.Active,
                                 LinkedQuestion1Id = answer.LinkedQuestion1Id,
                                 LinkedQuestion2Id = answer.LinkedQuestion2Id,
                                 LinkedQuestion3Id = answer.LinkedQuestion3Id,
@@ -257,7 +257,8 @@ namespace SMD.Implementation.Services
                             LinkedQuestion5Id = answer.LinkedQuestion5Id,
                             LinkedQuestion6Id = answer.LinkedQuestion6Id,
                             PqAnswerId = answer.PqAnswerId,
-                            SortOrder = answer.SortOrder
+                            SortOrder = answer.SortOrder,
+                            Status = (int) ObjectStatus.Active
                         };
                         if (serverAns.Type == 2)
                         {
