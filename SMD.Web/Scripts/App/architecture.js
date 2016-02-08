@@ -476,11 +476,14 @@ require(["ko", "knockout-validation"], function (ko) {
             //initialize datepicker with some optional options
             // ReSharper disable DuplicatingLocalDeclaration
             var options = allBindingsAccessor().datepickerOptions || {};
+            options.changeMonth = true;
+            options.changeYear = true;
+            if (!options.yearRange) {
+                options.yearRange = "-20:+10";
+            }
             // ReSharper restore DuplicatingLocalDeclaration
             $(element).datepicker(options);
             $(element).datepicker("option", "dateFormat", ist.shortDatePattern);
-            $(element).datepicker("option", "changeMonth", true);
-            $(element).datepicker("option", "changeYear", true);
             //handle the field changing
             ko.utils.registerEventHandler(element, "change", function () {
                 var observable = valueAccessor();
@@ -519,16 +522,19 @@ require(["ko", "knockout-validation"], function (ko) {
             //initialize datepicker with some optional options
             // ReSharper disable DuplicatingLocalDeclaration
             var options = allBindingsAccessor().datepickerOptions || {};
+            options.changeMonth = true;
+            options.changeYear = true;
+            if (!options.yearRange) {
+                options.yearRange = "-20:+10";
+            }
             // ReSharper restore DuplicatingLocalDeclaration
             $(element).datetimepicker(options);
             $(element).datetimepicker("option", "dateFormat", ist.shortDatePattern);
-            $(element).datepicker("option", "changeMonth", true);
-            $(element).datepicker("option", "changeYear", true);
             // this will disable all previous months and also days from current date 
-            var today_date = new Date();
+            var todayDate = new Date();
            // today_date.setDate(today_date.getDate() + 7);
-            today_date.setDate(today_date.getDate());
-            $(element).datepicker("option", "minDate", today_date);
+            todayDate.setDate(todayDate.getDate());
+            $(element).datepicker("option", "minDate", todayDate);
             //handle the field changing
             ko.utils.registerEventHandler(element, "change", function () {
                 var observable = valueAccessor();
