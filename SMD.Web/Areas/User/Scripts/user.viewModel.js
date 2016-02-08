@@ -98,10 +98,17 @@ define("user/user.viewModel",
                             }
                         });
                     },
+                         // store right side ans image
+                    storeImageCallback = function (file, data) {
+                        selectedUser().ProfileImageBytes(data);
+                    },
                     //Update Profile
                      //Get Base Data for Questions
                     updateProfile = function () {
-                        dataservice.saveUserProfile(selectedUser().convertToServerData(), {
+                      
+                        var data = selectedUser().convertToServerData();
+                        dataservice.saveUserProfile(
+                            data, {
                             success: function () {
                                 toastr.success("Profile updated!");
                             },
@@ -136,7 +143,8 @@ define("user/user.viewModel",
                     onUpdateProfile: onUpdateProfile,
                     educations: educations,
                     timeZones: timeZones,
-                    chargeCustomer: chargeCustomer
+                    chargeCustomer: chargeCustomer,
+                    storeImageCallback: storeImageCallback
                 };
             })()
         };

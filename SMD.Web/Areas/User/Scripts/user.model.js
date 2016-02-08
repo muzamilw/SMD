@@ -4,7 +4,7 @@
       User = function (specifiedId, specifiedFullName, specifiedAddress1, specifiedCmpname, specifiedEmail,
           specifiedJTitle, specifiedTimeZone, specifiedGender, specifiedAddress2, specifiedAge, specifiedCityId,
           specifiedContNotes, specifiedCountryId,indsId, specifiedPhn1, specifiedPhn2, specifiedState, specifiedZip, specifiedImg,
-          advertisingContact, advertisingEmail, advertisingPhone, spcEduId, spcStripe, spcPayPal, spcGoogle) {
+          advertisingContact, advertisingEmail, advertisingPhone, spcEduId, spcStripe, spcPayPal, spcGoogle, ProfileImageBytes) {
           var
               id = ko.observable(specifiedId),
               fullName = ko.observable(specifiedFullName),
@@ -30,7 +30,7 @@
               zipCode = ko.observable(specifiedZip),
 
               imageUrl = ko.observable(specifiedImg),
-
+              ProfileImageBytes = ko.observable(ProfileImageBytes),
               advert = ko.observable(advertisingContact),
               advertEmail = ko.observable(advertisingEmail),
               advertPhone = ko.observable(advertisingPhone),
@@ -105,7 +105,9 @@
                       AdvertContactEmail: advertEmail(),
                       AdvertContactPhone: advertPhone(),
                       EducationId: educationId(),
-                      PayPal: payPalId()
+                      PayPal: payPalId(),
+                      ProfileImageBytesString: ProfileImageBytes()
+
                   };
               };
           return {
@@ -142,7 +144,8 @@
               convertToServerData:convertToServerData,
               reset: reset,
               isValid: isValid,
-              errors: errors
+              errors: errors,
+              ProfileImageBytes: ProfileImageBytes
           };
       };
 
@@ -154,7 +157,7 @@
             itemFromServer.Address2, itemFromServer.DOB, itemFromServer.CityId, itemFromServer.ContactNotes, itemFromServer.CountryId,
             itemFromServer.IndustryId,itemFromServer.Phone1,itemFromServer.Phone2,itemFromServer.State,itemFromServer.ZipCode,
             itemFromServer.ImageUrl ,itemFromServer.AdvertContact,itemFromServer.AdvertContactEmail,itemFromServer.AdvertContactPhone,
-            itemFromServer.EducationId, itemFromServer.StripeId, itemFromServer.PayPal, itemFromServer.GoogleVallet);
+            itemFromServer.EducationId, itemFromServer.StripeId, itemFromServer.PayPal, itemFromServer.GoogleVallet,null);
     };
     
     // Function to attain cancel button functionality User
