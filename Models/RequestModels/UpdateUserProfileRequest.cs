@@ -133,7 +133,13 @@ namespace SMD.Models.RequestModels
                     return null;
                 }
             }
+
         }
+
+        /// <summary>
+        /// Authentication Token
+        /// </summary>
+        public string ProfileImageBytesString { get; set; }
 
         /// <summary>
         /// Authentication Token

@@ -3,7 +3,7 @@
     var // ReSharper disable InconsistentNaming
         Survey = function (SQID, LanguageID, CountryID, UserID, Status, StatusValue, Question, Gender, Language, Country,
             Description, DisplayQuestion, StartDate, EndDate, ModifiedDate, LeftPicturePath, RightPicturePath, ProjectedReach, AgeRangeStart,
-            AgeRangeEnd, LeftPictureBytes, RightPictureBytes, ParentSurveyId, Priority) {
+            AgeRangeEnd, LeftPictureBytes, RightPictureBytes, ParentSurveyId, Priority, CreatedBy) {
            
             var
                 //type and userID will be set on server sside
@@ -43,6 +43,7 @@
                 RightPicturePath = ko.observable(RightPicturePath),
                 ProjectedReach = ko.observable(ProjectedReach),
                 AgeRangeStart = ko.observable(AgeRangeStart),
+                CreatedBy = ko.observable(CreatedBy),
                 AgeRangeEnd = ko.observable(AgeRangeEnd).extend({
                     validation: {
                         validator: function (val, someOtherVal) {
@@ -184,7 +185,8 @@
                 dirtyFlag: dirtyFlag,
                 convertToServerData: convertToServerData,
                 ParentSurveyId: ParentSurveyId,
-                Priority: Priority
+                Priority: Priority,
+                CreatedBy: CreatedBy
             };
         };
 
@@ -298,7 +300,7 @@
         var survey = new Survey(source.SqId, source.LanguageId, source.CountryId, source.UserId, source.Status, source.StatusValue, source.Question,
             source.Gender + "", source.Language, source.Country, source.Description, source.DisplayQuestion, source.StartDate, source.EndDate, source.ModifiedDate,
             source.LeftPicturePath, source.RightPicturePath, source.ProjectedReach, source.AgeRangeStart, source.AgeRangeEnd, source.LeftPictureBytes,
-            source.RightPictureBytes, source.ParentSurveyId, source.Priority);
+            source.RightPictureBytes, source.ParentSurveyId, source.Priority,source.CreatedBy);
         _.each(source.SurveyQuestionTargetCriterias, function (item) {
             survey.SurveyQuestionTargetCriteria.push(SurveyQuestionTargetCriteria.Create(item));
         });

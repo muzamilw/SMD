@@ -6,7 +6,7 @@
     <div class="col-lg-12 col-md-8 col-sm-8" style="padding-bottom: 10px;">
         <div class="clearfix ">
             <div class="col-xs-12" style="text-align: right; padding-right:0;margin-bottom:10px;">
-                <button class="btn  btn-info" id="saveBtn" data-bind="click:$root.onUpdateProfile @*, enable: $root.hasChangesOnQuestion, css: { 'btn-warning': $root.hasChangesOnQuestion }*@">Update</button>
+                <button class="btn  btn-info" id="saveBtn" data-bind="click:$root.onUpdateProfile , enable: $root.hasChangesOnProfile, css: { 'btn-warning': $root.hasChangesOnProfile }">Update</button>
             </div>
         </div>
     </div>
@@ -52,7 +52,7 @@
                                             <label class="control-label text-right tooltip-float">DOB</label>
                                         </div>
                                         <div class="col-lg-6">
-                                            <input type="text" class="form-control" data-bind="datepicker:dob">
+                                            <input type="text" class="form-control" data-bind="datepicker:dob, datepickerOptions: { yearRange: '-60:+0' }">
                                         </div>
                                     </div>
                                 </div>
@@ -289,11 +289,14 @@
                                                 <div class="col-md-3" style="text-align:right;margin-left: 10px;">
                                                     <div class="fileUpload btn btn-primary">
                                                         <span>Image / Logo </span>
+                                                        @*<input type="file" class="upload" id="image_files" data-bind="files: { onLoaded: $root.storeImageCallback, fileFilter: 'image.*'}" />*@
                                                         <input type="file" class="upload" id="image_files" onchange="readPhotoURL(this);" />
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md-6">
+                                                    @*<img style="width: auto; height: 150px; max-width: 200px; min-width: 100px; border: 1px solid;" data-bind="visible:ProfileImageBytes()==null,attr: { src:  imageUrl }," src="/Images/select_image.jpg" />
+                                                    <img style="width:auto;height:80px;max-width:200px;" data-bind="visible:ProfileImageBytes!=null,attr: { src: ProfileImageBytes }" />*@
                                                     <img id="vehicleImage" alt="" style="width: 120px;height:120px" data-bind="attr:{src:imageUrl }" />
                                                     <h5><span></span></h5>
                                                 </div>

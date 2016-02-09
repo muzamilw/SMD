@@ -113,7 +113,6 @@ define("ads/ads.viewModel",
                             SearchText: searchFilterValue()
                         }, {
                             success: function (data) {
-
                                 if (data != null) {
 
                                     // set grid content

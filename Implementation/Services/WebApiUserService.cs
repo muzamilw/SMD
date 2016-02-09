@@ -1009,12 +1009,27 @@ namespace SMD.Implementation.Services
             {
                 throw new SMDException(LanguageResources.WebApiUserService_InvalidUserId);
             }
+           
+            // update image 
+            //if(!String.IsNullOrEmpty( request.ProfileImageBytesString))
+            //{
+            //    string directoryPath = HttpContext.Current.Server.MapPath("~/SMD_Content/Users/" + user.Id);
 
+            //    string base64 = request.ProfileImageBytesString.Substring(request.ProfileImageBytesString.IndexOf(',') + 1);
+            //    base64 = base64.Trim('\0');
+            //    byte[] data = Convert.FromBase64String(base64);
+            //    string savePath = directoryPath + "\\profileImage.jpg";
+            //    File.WriteAllBytes(savePath, data);
+            //    int indexOf = savePath.LastIndexOf("SMD_Content", StringComparison.Ordinal);
+            //    savePath = savePath.Substring(indexOf, savePath.Length - indexOf);
+            //    user.ProfileImage = savePath;
+            //}
             // Update User
             user.Update(request);
             
             // Save Changes
-            await UserManager.UpdateAsync(user);
+           await UserManager.UpdateAsync(user);
+           await UpdateProfileImage(request);
 
             return new BaseApiResponse
             {

@@ -165,6 +165,7 @@ namespace SMD.Implementation.Services
                             serverAns.LinkedQuestion6Id = answer.LinkedQuestion6Id;
                             serverAns.PqAnswerId = answer.PqAnswerId;
                             serverAns.SortOrder = answer.SortOrder;
+                            serverAns.Status = (int)ObjectStatus.Active;
                             if (serverAns.Type == 2)
                             {
                                 serverAns.ImagePath = SaveAnswerImage(serverAns);

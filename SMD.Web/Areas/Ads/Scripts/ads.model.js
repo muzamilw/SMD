@@ -6,7 +6,7 @@
           Answer1, Answer2, Answer3, CorrectAnswer, AgeRangeStart, AgeRangeEnd, ResultClicks, AmountSpent
           , ImagePath, CampaignImagePath, CampaignTypeImagePath, Description, ClickRate,
           Voucher1Heading, Voucher1Description, Voucher1Value, Voucher2Heading, Voucher2Description, Voucher2Value,
-          Voucher1ImagePath,VoucherImagePath) {
+          Voucher1ImagePath, VoucherImagePath, CreatedBy) {
           var
               //type and userID will be set on server sside
               CampaignID = ko.observable(CampaignID),
@@ -73,6 +73,7 @@
               Answer1 = ko.observable(Answer1),
               Answer2 = ko.observable(Answer2),
               Answer3 = ko.observable(Answer3),
+              CreatedBy = ko.observable(CreatedBy),
               CorrectAnswer = ko.observable(CorrectAnswer),
               AgeRangeStart = ko.observable(AgeRangeStart),
               AgeRangeEnd = ko.observable(AgeRangeEnd).extend({
@@ -193,7 +194,8 @@
                       Voucher2Description: Voucher2Description(),
                       Voucher2Value: Voucher2Value(),
                       Voucher1ImagePath:Voucher1ImagePath(),
-                      VoucherImagePath: VoucherImagePath()
+                      VoucherImagePath: VoucherImagePath(),
+                      CreatedBy: CreatedBy()
                   };
               };
           return {
@@ -241,7 +243,8 @@
               Voucher2Description: Voucher2Description,
               Voucher2Value: Voucher2Value,
               Voucher1ImagePath: Voucher1ImagePath,
-              VoucherImagePath: VoucherImagePath
+              VoucherImagePath: VoucherImagePath,
+              CreatedBy: CreatedBy
           };
       };
 
@@ -361,7 +364,7 @@
             , source.Type + "", source.DisplayTitle, source.LandingPageVideoLink, source.VerifyQuestion, source.Answer1, source.Answer2, source.Answer3,
             source.CorrectAnswer, source.AgeRangeStart, source.AgeRangeEnd, source.ResultClicks, source.AmountSpent, source.ImagePath, source.CampaignImagePath,
             source.CampaignTypeImagePath, source.Description, source.ClickRate, source.Voucher1Heading, source.Voucher1Description, source.Voucher1Value, source.Voucher2Heading, source.Voucher2Description,
-             source.Voucher2Value, source.Voucher1ImagePath, source.VoucherImagePath);
+             source.Voucher2Value, source.Voucher1ImagePath, source.VoucherImagePath,source.CreatedBy);
         _.each(source.AdCampaignTargetCriterias, function (item) {
             campaign.AdCampaignTargetCriterias.push(AdCampaignTargetCriteriasModel.Create(item));
         });
