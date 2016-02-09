@@ -38,7 +38,9 @@ define("user/user.viewModel",
                                     updateCities(userProfile.CityId);
                                     selectedUser().countryId.subscribe(function() {
                                         updateCities();
+                                       
                                     });
+                                    selectedUser().reset();
                                 },
                                 error: function () {
                                     toastr.error("Failed to load User's Profile!");
@@ -59,7 +61,7 @@ define("user/user.viewModel",
                                    if (!cityId) {
                                        return;
                                    }
-                                   selectedUser().cityId(cityId);
+                                  
                                },
                                error: function () {
                                    toastr.error("Failed to get cities!");
@@ -92,16 +94,19 @@ define("user/user.viewModel",
                                 }
                                 // Get Profile When Base data is loaded 
                                 getUserProfile();
+                                selectedUser().cityId(cityId);
                             },
                             error: function () {
                                 toastr.error("Failed to load base data!");
                             }
                         });
                     },
-                         // store right side ans image
-                    storeImageCallback = function (file, data) {
-                        selectedUser().ProfileImageBytes(data);
-                    },
+                      hasChangesOnProfile = ko.computed(function () {
+                          if (selectedUser() == undefined) {
+                              return false;
+                          }
+                          return (selectedUser().hasChanges());
+                      }),
                     //Update Profile
                      //Get Base Data for Questions
                     updateProfile = function () {
@@ -144,7 +149,7 @@ define("user/user.viewModel",
                     educations: educations,
                     timeZones: timeZones,
                     chargeCustomer: chargeCustomer,
-                    storeImageCallback: storeImageCallback
+                    hasChangesOnProfile: hasChangesOnProfile
                 };
             })()
         };
