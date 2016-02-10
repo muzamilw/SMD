@@ -1354,7 +1354,7 @@ namespace SMD.Implementation.Services
             }
             Random _rdm = new Random(); 
             int code = _rdm.Next(1000, 9999);
-            if (String.IsNullOrEmpty(user.PhoneNumber))
+            if (String.IsNullOrEmpty(user.Phone1))
                 return 0;
             var messagingService = new MessagingService("omar.c@me.com", "DBVgYFGNCWwK");
             messagingService.SendMessage(new SmsMessage(user.PhoneNumber, "Your verification code for Cash4Ads profile update is " + code.ToString() + ". Please enter this code in Cash4Ads app to update your profile.", "EX0205631"));
