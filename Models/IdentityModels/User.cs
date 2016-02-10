@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using SMD.Models.DomainModels;
 using SMD.Models.RequestModels;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SMD.Models.IdentityModels
 {
@@ -92,7 +93,12 @@ namespace SMD.Models.IdentityModels
 
         public virtual City City { get; set; }
         public virtual Country Country { get; set; }
-        
+
+        //city name and country name
+        [NotMapped]
+        public string CountryName { get; set; }
+        [NotMapped]
+        public string CityName { get; set; }
         #endregion
 
         #region Public
@@ -214,6 +220,7 @@ namespace SMD.Models.IdentityModels
             {
                 PaypalCustomerId = source.PayPal;
             }
+           
         }
 
         #endregion

@@ -59,7 +59,24 @@ namespace SMD.Repository.Repositories
         {
             return DbSet.Where(country => country.CountryName.StartsWith(searchString)).ToList();
         }
-       
+        public int GetCountryId(string name)
+        {
+            int countryId = 0;
+            Country country = DbSet.Where(g => g.CountryName.ToLower() == name.ToLower()).SingleOrDefault();
+            if(country != null)
+            {
+                countryId = country.CountryId;
+            }
+            else
+            {
+                country = new Country();
+                country.CountryName = name;
+                db.Countries.Add(country);
+                db.SaveChanges();
+                countryId = country.CountryId;
+            }
+            return countryId;
+        }
         #endregion
     }
 }

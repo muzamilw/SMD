@@ -56,7 +56,14 @@ namespace SMD.Models.RequestModels
         /// Country Id
         /// </summary>
         public int? CountryId { get; set; }
-
+        /// <summary>
+        /// Country name
+        /// </summary>
+        public string Country { get; set; }
+        /// <summary>
+        /// City name
+        /// </summary>
+        public string City { get; set; }
         /// <summary>
         /// State
         /// </summary>

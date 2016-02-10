@@ -63,6 +63,24 @@ namespace SMD.Repository.Repositories
         {
             return DbSet.Where(city => city.CountryId == countryId).ToList();
         }
+        public int GetCityId(string name)
+        {
+            int cityId = 0;
+            City city = DbSet.Where(g => g.CityName.ToLower() == name.ToLower()).SingleOrDefault();
+            if (city != null)
+            {
+                cityId = city.CityId;
+            }
+            else
+            {
+                city = new City();
+                city.CityName = name;
+                db.Cities.Add(city);
+                db.SaveChanges();
+                cityId = city.CityId;
+            }
+            return cityId;
+        }
         #endregion
     }
 }

@@ -42,7 +42,7 @@ namespace SMD.Implementation.Services
         private readonly ICountryRepository countryRepository;
         private readonly IIndustryRepository industryRepository;
         private readonly IEducationRepository educationRepository;
-
+        private readonly ICityRepository cityRepository;
         private readonly IProfileQuestionUserAnswerService profileQuestionAnswerService;
         private readonly IProfileQuestionService profileQuestionService;
         private readonly IAdCampaignResponseRepository adCampaignResponseRepository;
@@ -654,7 +654,7 @@ namespace SMD.Implementation.Services
             ITaxRepository taxRepository, IProfileQuestionUserAnswerService profileQuestionAnswerService,
             ICountryRepository countryRepository, IIndustryRepository industryRepository,
             IProfileQuestionService profileQuestionService, IAdCampaignResponseRepository adCampaignResponseRepository,
-            ISurveyQuestionResponseRepository surveyQuestionResponseRepository, IEducationRepository educationRepository)
+            ISurveyQuestionResponseRepository surveyQuestionResponseRepository, IEducationRepository educationRepository, ICityRepository cityRepository)
         {
             if (emailManagerService == null)
             {
@@ -717,6 +717,7 @@ namespace SMD.Implementation.Services
             this.adCampaignResponseRepository = adCampaignResponseRepository;
             this.surveyQuestionResponseRepository = surveyQuestionResponseRepository;
             this.educationRepository = educationRepository;
+            this.cityRepository = cityRepository;
         }
 
         #endregion
@@ -1010,26 +1011,23 @@ namespace SMD.Implementation.Services
                 throw new SMDException(LanguageResources.WebApiUserService_InvalidUserId);
             }
            
-            // update image 
-            //if(!String.IsNullOrEmpty( request.ProfileImageBytesString))
-            //{
-            //    string directoryPath = HttpContext.Current.Server.MapPath("~/SMD_Content/Users/" + user.Id);
 
-            //    string base64 = request.ProfileImageBytesString.Substring(request.ProfileImageBytesString.IndexOf(',') + 1);
-            //    base64 = base64.Trim('\0');
-            //    byte[] data = Convert.FromBase64String(base64);
-            //    string savePath = directoryPath + "\\profileImage.jpg";
-            //    File.WriteAllBytes(savePath, data);
-            //    int indexOf = savePath.LastIndexOf("SMD_Content", StringComparison.Ordinal);
-            //    savePath = savePath.Substring(indexOf, savePath.Length - indexOf);
-            //    user.ProfileImage = savePath;
-            //}
+            /// update country and city based on name
+            if (!string.IsNullOrEmpty(request.Country))
+            {
+                request.CountryId = countryRepository.GetCountryId(request.Country);
+            }
+            if (!string.IsNullOrEmpty(request.City))
+            {
+                request.CityId = cityRepository.GetCityId(request.City);
+            }
             // Update User
             user.Update(request);
             
             // Save Changes
            await UserManager.UpdateAsync(user);
-           await UpdateProfileImage(request);
+           if (!String.IsNullOrEmpty(request.ProfileImage))
+               await UpdateProfileImage(request);
 
             return new BaseApiResponse
             {
@@ -1176,7 +1174,11 @@ namespace SMD.Implementation.Services
                         Message = LanguageResources.WebApiUserService_LoginInfoNotFound
                     };
                 }
-
+                // update user name  and cuntry name for api 
+                if (user.Country != null)
+                    user.CountryName = user.Country.CountryName;
+                if (user.City != null)
+                    user.CityName = user.City.CityName;
                 UserLogin userLoginInfo = user.UserLogins.FirstOrDefault(
                     u => u.LoginProvider == request.LoginProvider && u.ProviderKey == request.LoginProviderKey);
 
