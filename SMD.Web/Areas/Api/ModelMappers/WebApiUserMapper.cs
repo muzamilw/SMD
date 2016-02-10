@@ -49,7 +49,9 @@ namespace SMD.MIS.Areas.Api.ModelMappers
                        StripeId = source.StripeCustomerId,
                        GoogleVallet = source.GoogleWalletCustomerId,
                        PayPal = source.PaypalCustomerId,
-                       AccountBalance = CreateFromForAccount(source)
+                       AccountBalance = CreateFromForAccount(source),
+                       CityName = source.CityName,
+                       CountryName = source.CountryName
                    };
 
             return user;
