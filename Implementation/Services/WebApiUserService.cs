@@ -1357,7 +1357,7 @@ namespace SMD.Implementation.Services
             if (String.IsNullOrEmpty(user.PhoneNumber))
                 return 0;
             var messagingService = new MessagingService("omar.c@me.com", "DBVgYFGNCWwK");
-            messagingService.SendMessage(new SmsMessage(user.PhoneNumber, "Your verification code for cash4ads profile update is " + code.ToString() + ". Please enter this code in cash4ads app to update your payment profile.", "EX0205631"));
+            messagingService.SendMessage(new SmsMessage(user.PhoneNumber, "Your verification code for Cash4Ads profile update is " + code.ToString() + ". Please enter this code in Cash4Ads app to update your profile.", "EX0205631"));
             return code;
         }
         #endregion
