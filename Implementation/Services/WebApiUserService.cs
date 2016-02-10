@@ -19,6 +19,7 @@ using SMD.Models.DomainModels;
 using SMD.Models.IdentityModels;
 using SMD.Models.RequestModels;
 using SMD.Models.ResponseModels;
+using com.esendex.sdk.messaging;
 
 namespace SMD.Implementation.Services
 {
@@ -1344,7 +1345,21 @@ namespace SMD.Implementation.Services
                Educations = educationRepository.GetAllEducations().ToList()
             };
         }
-
+        public int generateAndSmsCode(string userId)
+        {
+            User user = UserManager.FindById(userId);
+            if (user == null)
+            {
+                throw new SMDException("No such user with provided user Id!");
+            }
+            Random _rdm = new Random(); 
+            int code = _rdm.Next(1000, 9999);
+            if (String.IsNullOrEmpty(user.PhoneNumber))
+                return 0;
+            var messagingService = new MessagingService("omar.c@me.com", "DBVgYFGNCWwK");
+            messagingService.SendMessage(new SmsMessage(user.PhoneNumber, "Your verification code for cash4ads profile update is " + code.ToString() + ". Please enter this code in cash4ads app to update your payment profile.", "EX0205631"));
+            return code;
+        }
         #endregion
 
         #endregion
