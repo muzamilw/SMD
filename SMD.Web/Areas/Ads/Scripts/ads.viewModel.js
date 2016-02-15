@@ -34,7 +34,7 @@ define("ads/ads.viewModel",
                     ageRange = ko.observableArray([]),
                     isNewCriteria = ko.observable(true),
                     isEnableVedioVerificationLink = ko.observable(false),
-                    campaignTypePlaceHolderValue = ko.observable('Enter a link'),
+                    campaignTypePlaceHolderValue = ko.observable('Enter in the YouTube video link'),
                     isEditCampaign = ko.observable(false),
                     canSubmitForApproval = ko.observable(true),
                     correctAnswers = ko.observableArray([{ id: 1, name: "Answer 1" }, { id: 2, name: "Answer 2" }]),
@@ -165,8 +165,8 @@ define("ads/ads.viewModel",
 
                         selectedCriteria();
 
-                        campaignModel().Gender('2');
-                        campaignModel().Type('2');
+                        campaignModel().Gender('1');
+                        campaignModel().Type('1');
                         campaignModel().MaxBudget('1');
                         campaignModel().AgeRangeEnd(80);
                         campaignModel().AgeRangeStart(13);
@@ -670,13 +670,14 @@ define("ads/ads.viewModel",
                 OnChangeCampaignType = function () {
                     if (campaignModel().Type() == "1") {
                         isEnableVedioVerificationLink(true);
-                        campaignTypePlaceHolderValue('Enter a video embed code');
+                        campaignTypePlaceHolderValue('Enter in the YouTube video link');
                     } else {
                         isEnableVedioVerificationLink(false);
                         if (campaignModel().Type() == "2") {
-                            campaignTypePlaceHolderValue('Enter a link');
+                            campaignTypePlaceHolderValue('Enter in your Web site landing Page link');
                         }
                         if (campaignModel().Type() == "3") {
+                            campaignTypePlaceHolderValue('Enter in your Web site landing Page link');
                             isEnableVedioVerificationLink(true);
                         }
                     }
@@ -714,11 +715,11 @@ define("ads/ads.viewModel",
 
                                     if (campaignModel().Type() == "1") {
                                         isEnableVedioVerificationLink(true);
-                                        campaignTypePlaceHolderValue('Enter a video embed code');
+                                        campaignTypePlaceHolderValue('Enter in the YouTube video link');
                                     } else {
                                         isEnableVedioVerificationLink(false);
                                         if (campaignModel().Type() == "2") {
-                                            campaignTypePlaceHolderValue('Enter a link');
+                                            campaignTypePlaceHolderValue('Enter in your Web site landing Page link');
                                         }
                                     }
 
