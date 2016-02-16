@@ -4093,3 +4093,27 @@ from
 END
 
 /* Added By Khurram (02 Feb 2016) - End */
+/* added by iqra 16 feb 2-16*/
+/* To prevent any potential data loss issues, you should review this script in detail before running it outside the context of the database designer.*/
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.AdCampaign ADD
+ VideoUrl nvarchar(1000) NULL,
+ BuuyItLine1 nvarchar(MAX) NULL,
+ BuyItLine2 nvarchar(MAX) NULL,
+ BuyItLine3 nvarchar(MAX) NULL,
+ BuyItButtonLabel nvarchar(MAX) NULL,
+ BuyItImageUrl nvarchar(200) NULL
+GO
+ALTER TABLE dbo.AdCampaign SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT

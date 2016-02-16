@@ -55,7 +55,7 @@ namespace SMD.Repository.Repositories
         /// </summary>
         public IEnumerable<ProfileQuestionAnswer> GetAllProfileQuestionAnswerByQuestionId(int profileQuestionId)
         {
-            return DbSet.Where(ans => ans.PqId == profileQuestionId && ans.Status != 0).ToList();
+            return DbSet.Where(ans => ans.PqId == profileQuestionId && ans.Status != 0).OrderByDescending(g=>g.SortOrder.HasValue ).ThenBy(g=>g.SortOrder).ToList();
         }
         #endregion
     }
