@@ -100,6 +100,7 @@
               BuyItLine3 = ko.observable(BuyItLine3),
               BuyItButtonLabel = ko.observable(BuyItButtonLabel),
               BuyItImageUrl = ko.observable(BuyItImageUrl),
+              buyItImageBytes = ko.observable(''),
                // Errors
                 errors = ko.validation.group({
                     CampaignName:CampaignName,
@@ -144,7 +145,8 @@
                   BuyItLine2: BuyItLine2,
                   BuyItLine3: BuyItLine3,
                   BuyItButtonLabel: BuyItButtonLabel,
-                  BuyItImageUrl: BuyItImageUrl
+                  BuyItImageUrl: BuyItImageUrl,
+                  buyItImageBytes: buyItImageBytes
               }),
               // Has Changes
               hasChanges = ko.computed(function () {
@@ -213,7 +215,8 @@
                       BuyItLine2: BuyItLine2(),
                       BuyItLine3: BuyItLine3(),
                       BuyItButtonLabel: BuyItButtonLabel(),
-                      BuyItImageUrl: BuyItImageUrl()
+                      BuyItImageUrl: BuyItImageUrl(),
+                      buyItImageBytes: buyItImageBytes(),
                   };
               };
           return {
@@ -268,7 +271,8 @@
               BuyItLine2: BuyItLine2,
               BuyItLine3: BuyItLine3,
               BuyItButtonLabel: BuyItButtonLabel,
-              BuyItImageUrl: BuyItImageUrl
+              BuyItImageUrl: BuyItImageUrl,
+              buyItImageBytes: buyItImageBytes
           };
       };
 

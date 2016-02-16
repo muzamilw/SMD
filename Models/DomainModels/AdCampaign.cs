@@ -73,5 +73,7 @@ namespace SMD.Models.DomainModels
         public string CampaignTypeImagePath { get; set; }
         [NotMapped]
         public string VoucherImagePath { get; set; }
+        [NotMapped]
+        public string buyItImageBytes { get; set; }
     }
 }
