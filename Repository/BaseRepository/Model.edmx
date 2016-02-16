@@ -65,6 +65,12 @@
           <Property Name="Voucher2Value" Type="nvarchar(max)" />
           <Property Name="Voucher1ImagePath" Type="nvarchar" MaxLength="200" />
           <Property Name="Voucher2ImagePath" Type="nvarchar" MaxLength="200" />
+          <Property Name="VideoUrl" Type="nvarchar" MaxLength="1000" />
+          <Property Name="BuuyItLine1" Type="nvarchar(max)" />
+          <Property Name="BuyItLine2" Type="nvarchar(max)" />
+          <Property Name="BuyItLine3" Type="nvarchar(max)" />
+          <Property Name="BuyItButtonLabel" Type="nvarchar(max)" />
+          <Property Name="BuyItImageUrl" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="AdCampaignResponse">
           <Key>
@@ -2222,6 +2228,12 @@
           <Property Name="Voucher2Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Voucher1ImagePath" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Voucher2ImagePath" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="VideoUrl" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="BuuyItLine1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BuyItLine2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BuyItLine3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BuyItButtonLabel" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BuyItImageUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="AdCampaignResponse">
           <Key>
@@ -3544,6 +3556,12 @@
           <EntitySetMapping Name="AdCampaigns">
             <EntityTypeMapping TypeName="DomainModels.AdCampaign">
               <MappingFragment StoreEntitySet="AdCampaign">
+                <ScalarProperty Name="BuyItImageUrl" ColumnName="BuyItImageUrl" />
+                <ScalarProperty Name="BuyItButtonLabel" ColumnName="BuyItButtonLabel" />
+                <ScalarProperty Name="BuyItLine3" ColumnName="BuyItLine3" />
+                <ScalarProperty Name="BuyItLine2" ColumnName="BuyItLine2" />
+                <ScalarProperty Name="BuuyItLine1" ColumnName="BuuyItLine1" />
+                <ScalarProperty Name="VideoUrl" ColumnName="VideoUrl" />
                 <ScalarProperty Name="Voucher2ImagePath" ColumnName="Voucher2ImagePath" />
                 <ScalarProperty Name="Voucher1ImagePath" ColumnName="Voucher1ImagePath" />
                 <ScalarProperty Name="Voucher2Value" ColumnName="Voucher2Value" />

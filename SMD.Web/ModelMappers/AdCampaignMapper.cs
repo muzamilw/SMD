@@ -104,7 +104,13 @@ namespace SMD.MIS.ModelMappers
                 Voucher2Heading = source.Voucher2Heading,
                 Voucher2Value = source.Voucher2Value,
                 Voucher1ImagePath = source.Voucher1ImagePath,
-                VoucherImagePath = Voucherpath
+                VoucherImagePath = Voucherpath,
+                VideoUrl  = source.VideoUrl,
+                BuuyItLine1 = source.BuuyItLine1,
+                BuyItButtonLabel = source.BuyItButtonLabel,
+                BuyItImageUrl = source.BuyItImageUrl,
+                BuyItLine2 = source.BuyItLine2,
+                BuyItLine3 = source.BuyItLine3
 
             };
 
