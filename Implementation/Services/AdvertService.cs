@@ -536,7 +536,7 @@ namespace SMD.Implementation.Services
         {
             return new AdCampaignBaseResponse
             {
-                ProfileQuestions = _profileQuestionRepository.GetAll()
+                ProfileQuestions = _profileQuestionRepository.GetAll().Where(g=>g.Status != 0)
             };
         }
 
