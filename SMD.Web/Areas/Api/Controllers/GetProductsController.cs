@@ -9,7 +9,6 @@ using System.Web;
 using System.Web.Http;
 using SMD.Models.ResponseModels;
 using SMD.WebBase.Mvc;
-using System.Web.Http.Cors;
 
 namespace SMD.MIS.Areas.Api.Controllers
 {
@@ -63,7 +62,6 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// Response From User on Ads, Surveys, Questions
         /// </summary>
         [ApiExceptionCustom]
-        [EnableCors("*", "*", "PUT, POST")]
         public async Task<BaseApiResponse> Post(string authenticationToken, ProductActionRequest request)
         {
             if (string.IsNullOrEmpty(authenticationToken) || request == null || !ModelState.IsValid || string.IsNullOrEmpty(request.UserId))
@@ -72,7 +70,6 @@ namespace SMD.MIS.Areas.Api.Controllers
             }
 
             BaseApiResponse response = await webApiUserService.ExecuteActionOnProductsResponse(request);
-            System.Web.HttpContext.Current.Response.AppendHeader("Access-Control-Allow-Origin", "*");
             return response;
         }
         
