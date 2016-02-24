@@ -42,6 +42,7 @@ namespace SMD.Implementation
             unityContainer.RegisterType<ICityService, CityService>();
             unityContainer.RegisterType<IEducationService, EducationService>();
             unityContainer.RegisterType<IIndustryService, IndustryService>();
+            unityContainer.RegisterType<ICompanyService, CompanyService>();
         }
     }
 }

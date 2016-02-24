@@ -30,28 +30,28 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Updates User's and Cash4Ads Accounts
         /// </summary>
-        private static void UpdateAccounts(User user, User smdUser, double amount, 
+        private static void UpdateAccounts(Company company, Company smdCompany, double amount, 
             long? adCampaignId, BaseDbContext dbContext)
         {
             // Update users virtual account and add to paypal account
-            UpdateUsersPaypalAccount(user, amount, adCampaignId, dbContext);
+            UpdateUsersPaypalAccount(company, amount, adCampaignId, dbContext);
 
             // Update Cash4ads accounts
-            UpdateUsersPaypalAccount(smdUser, amount, adCampaignId, dbContext, false);
+            UpdateUsersPaypalAccount(smdCompany, amount, adCampaignId, dbContext, false);
         }
 
         /// <summary>
         /// Updates Users Paypal Account
         /// </summary>
-        private static void UpdateUsersPaypalAccount(User user, double amount, long? adCampaignId,
+        private static void UpdateUsersPaypalAccount(Company company, double amount, long? adCampaignId,
             BaseDbContext dbContext, bool isCredit = true)
         {
-            Account usersPaypalAccount = user.Accounts.FirstOrDefault(acc => acc.AccountType == (int) AccountType.Paypal);
+            Account usersPaypalAccount = company.Accounts.FirstOrDefault(acc => acc.AccountType == (int)AccountType.Paypal);
             if (usersPaypalAccount == null)
             {
                 throw new Exception(string.Format(CultureInfo.InvariantCulture,
                     LanguageResources.CollectionService_AccountNotRegistered,
-                    user.Id, "Paypal"));
+                    company.CompanyId, "Paypal"));
             }
 
             if (!usersPaypalAccount.AccountBalance.HasValue)
@@ -74,7 +74,7 @@ namespace SMD.Implementation.Services
                                                                  Amount = amount, 
                                                                  FromUser = "Cash4Ads",
                                                                  LogDate = DateTime.Now,
-                                                                 ToUser = user.FullName,
+                                                                 ToUser = company.CompanyName,
                                                                  Type = isCredit ? 1 : 2
                                                              }
                                                          }
@@ -119,18 +119,18 @@ namespace SMD.Implementation.Services
         {
             if (preferedAccount == null) throw new ArgumentNullException("preferedAccount");
 
-            if (string.IsNullOrEmpty(smdUser.PaypalCustomerId))
+            if (string.IsNullOrEmpty(smdUser.Company.PaypalCustomerId))
             {
                 throw new Exception(string.Format(CultureInfo.InvariantCulture,
                     LanguageResources.CollectionService_AccountNotRegistered,
-                    smdUser.Id, "Paypal"));
+                    smdUser.Company.CompanyId, "Paypal"));
             }
 
             if (string.IsNullOrEmpty(preferedAccount))
             {
                 throw new Exception(string.Format(CultureInfo.InvariantCulture,
                     LanguageResources.CollectionService_AccountNotRegistered,
-                    account.UserId, "Paypal"));
+                    account.CompanyId, "Paypal"));
             }
         }
 
@@ -224,7 +224,7 @@ namespace SMD.Implementation.Services
                             .Select(trn => trn.Account).Distinct().ToList();
 
                     double? creditAmount = 0;
-                    User user = null;
+                    Company company = null;
                     foreach (Account account in accounts)
                     {
                         try
@@ -235,12 +235,12 @@ namespace SMD.Implementation.Services
                             .Where(trn => trn.AccountId == account.AccountId && trn.AdCampaignId == adCampaign).ToList();
 
                             // Get User from which credit to debit 
-                            user = dbContext.Users.Find(account.UserId);
+                            company = dbContext.Companies.Find(account.CompanyId);
 
                             // User's Prefered Account
-                            var preferedAccount = user.PreferredPayoutAccount == 1
-                                ? user.PaypalCustomerId
-                                : user.GoogleWalletCustomerId;
+                            var preferedAccount = company.PreferredPayoutAccount == 1
+                                ? company.PaypalCustomerId
+                                : company.GoogleWalletCustomerId;
 
                             var smdUser = GetCash4AdsUser(dbContext);
 
@@ -259,7 +259,7 @@ namespace SMD.Implementation.Services
                             {
                                 Amount = (decimal)creditAmount,
                                 RecieverEmails = new List<string> { preferedAccount },
-                                SenderEmail = smdUser.PaypalCustomerId
+                                SenderEmail = smdUser.Company.PaypalCustomerId
                             };
 
                             // Stripe + Invoice Work 
@@ -269,19 +269,19 @@ namespace SMD.Implementation.Services
                             transactions.ForEach(tran => UpdateTransactions(tran, creditAmount, requestModel, dbContext));
 
                             // Update Accounts
-                            UpdateAccounts(user, smdUser, creditAmount.Value, adCampaign, dbContext);
+                            UpdateAccounts(company, smdUser.Company, creditAmount.Value, adCampaign, dbContext);
 
                             // Save Changes
                             dbContext.SaveChanges();
 
                             // Email To User 
-                            BackgroundEmailManagerService.SendPayOutRoutineEmail(dbContext, user.Id);
+                            BackgroundEmailManagerService.SendPayOutRoutineEmail(dbContext, company.CompanyId);
                         }
                         catch (Exception exp)
                         {
 
                             var transaction = account.Transactions.FirstOrDefault();
-                            LogError(exp, user != null ? user.FullName : string.Empty,
+                            LogError(exp, company != null ? company.CompanyName : string.Empty,
                                 "Cash4Ads", transaction != null ? transaction.TxId : 0, creditAmount.Value, dbContext);
                         }
                     }

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySetsE84AAE3DD34BE6CD037094285701B704ACC2AEC186432EB7FC260B24A7744F96))]
+[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySetsE2A5636FE1091169B699E9D8F8C33D0F6A89D76C5CED014BD9BBA36B8C6F445A))]
 
 namespace Edm_EntityMappingGeneratedViews
 {
@@ -17,19 +17,19 @@ namespace Edm_EntityMappingGeneratedViews
     /// <Summary>
     /// The type contains views for EntitySets and AssociationSets that were generated at design time.
     /// </Summary>
-    public sealed class ViewsForBaseEntitySetsE84AAE3DD34BE6CD037094285701B704ACC2AEC186432EB7FC260B24A7744F96 : System.Data.Mapping.EntityViewContainer
+    public sealed class ViewsForBaseEntitySetsE2A5636FE1091169B699E9D8F8C33D0F6A89D76C5CED014BD9BBA36B8C6F445A : System.Data.Mapping.EntityViewContainer
     {
         
         /// <Summary>
         /// The constructor stores the views for the extents and also the hash values generated based on the metadata and mapping closure and views.
         /// </Summary>
-        public ViewsForBaseEntitySetsE84AAE3DD34BE6CD037094285701B704ACC2AEC186432EB7FC260B24A7744F96()
+        public ViewsForBaseEntitySetsE2A5636FE1091169B699E9D8F8C33D0F6A89D76C5CED014BD9BBA36B8C6F445A()
         {
             this.EdmEntityContainerName = "BaseDbContext";
             this.StoreEntityContainerName = "SMDModelStoreContainer";
-            this.HashOverMappingClosure = "03689196f36a30c29aee4d93d4b6087a52220c08bafdd70fa535678f3523f391";
-            this.HashOverAllExtentViews = "7ad6fb2a6283b81dd32db47529b687fd336cea4e635f979c9f7df4fae24532cf";
-            this.ViewCount = 68;
+            this.HashOverMappingClosure = "1a957ffba91f320dec2debb08622b0b537bead6c22c2d819046960a851bb61b9";
+            this.HashOverAllExtentViews = "de6bd5283c3231949c2b54c9fb9149544c8207535878e88dc31233b3d2de77f6";
+            this.ViewCount = 70;
         }
         
         /// <Summary>
@@ -309,6 +309,14 @@ namespace Edm_EntityMappingGeneratedViews
             {
                 return GetView67();
             }
+            if ((index == 68))
+            {
+                return GetView68();
+            }
+            if ((index == 69))
+            {
+                return GetView69();
+            }
             throw new System.IndexOutOfRangeException();
         }
         
@@ -348,83 +356,9 @@ namespace Edm_EntityMappingGeneratedViews
         }
         
         /// <Summary>
-        /// return view for SMDModelStoreContainer.AspNetUsers
-        /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView2()
-        {
-            System.Text.StringBuilder viewString = new System.Text.StringBuilder(5131);
-            viewString.Append("\r\n    SELECT VALUE -- Constructing AspNetUsers\r\n        [SMDModel.Store.AspNetUs");
-            viewString.Append("ers](T1.AspNetUsers_Id, T1.AspNetUsers_Email, T1.AspNetUsers_EmailConfirmed, T1.");
-            viewString.Append("AspNetUsers_PasswordHash, T1.AspNetUsers_SecurityStamp, T1.AspNetUsers_PhoneNumb");
-            viewString.Append("er, T1.AspNetUsers_PhoneNumberConfirmed, T1.AspNetUsers_TwoFactorEnabled, T1.Asp");
-            viewString.Append("NetUsers_LockoutEndDateUtc, T1.AspNetUsers_LockoutEnabled, T1.AspNetUsers_Access");
-            viewString.Append("FailedCount, T1.AspNetUsers_UserName, T1.AspNetUsers_FullName, T1.AspNetUsers_Al");
-            viewString.Append("ternateEmail, T1.AspNetUsers_IsEmailVerified, T1.AspNetUsers_Status, T1.AspNetUs");
-            viewString.Append("ers_CreatedDateTime, T1.AspNetUsers_ModifiedDateTime, T1.AspNetUsers_LastLoginTi");
-            viewString.Append("me, T1.AspNetUsers_Phone1, T1.AspNetUsers_Phone2, T1.AspNetUsers_Jobtitle, T1.As");
-            viewString.Append("pNetUsers_ContactNotes, T1.AspNetUsers_IsSubscribed, T1.AspNetUsers_AppID, T1.As");
-            viewString.Append("pNetUsers_CompanyName, T1.AspNetUsers_SalesEmail, T1.AspNetUsers_CompanyRepresen");
-            viewString.Append("tative, T1.AspNetUsers_Address1, T1.AspNetUsers_Address2, T1.AspNetUsers_CityID,");
-            viewString.Append(" T1.AspNetUsers_CountryID, T1.AspNetUsers_State, T1.AspNetUsers_ZipCode, T1.AspN");
-            viewString.Append("etUsers_UserTimeZone, T1.AspNetUsers_ReferralCode, T1.AspNetUsers_AfilliatianSta");
-            viewString.Append("tus, T1.AspNetUsers_StripeCustomerId, T1.AspNetUsers_ChargeBeesubscriptionID, T1");
-            viewString.Append(".AspNetUsers_RegisteredViaReferral, T1.AspNetUsers_ReferringUserID, T1.AspNetUse");
-            viewString.Append("rs_Gender, T1.AspNetUsers_LanguageID, T1.AspNetUsers_IndustryID, T1.AspNetUsers_");
-            viewString.Append("EducationId, T1.AspNetUsers_ProfileImage, T1.AspNetUsers_UserCode, T1.AspNetUser");
-            viewString.Append("s_SmsCode, T1.AspNetUsers_WebsiteLink, T1.AspNetUsers_AdvertisingContact, T1.Asp");
-            viewString.Append("NetUsers_AdvertisingContactPhoneNumber, T1.AspNetUsers_AdvertisingContactEmail, ");
-            viewString.Append("T1.AspNetUsers_PaypalCustomerId, T1.AspNetUsers_GoogleWalletCustomerId, T1.AspNe");
-            viewString.Append("tUsers_PreferredPayoutAccount, T1.AspNetUsers_DOB)\r\n    FROM (\r\n        SELECT \r");
-            viewString.Append("\n            T.Id AS AspNetUsers_Id, \r\n            T.Email AS AspNetUsers_Email,");
-            viewString.Append(" \r\n            T.EmailConfirmed AS AspNetUsers_EmailConfirmed, \r\n            T.P");
-            viewString.Append("asswordHash AS AspNetUsers_PasswordHash, \r\n            T.SecurityStamp AS AspNet");
-            viewString.Append("Users_SecurityStamp, \r\n            T.PhoneNumber AS AspNetUsers_PhoneNumber, \r\n ");
-            viewString.Append("           T.PhoneNumberConfirmed AS AspNetUsers_PhoneNumberConfirmed, \r\n       ");
-            viewString.Append("     T.TwoFactorEnabled AS AspNetUsers_TwoFactorEnabled, \r\n            T.Lockout");
-            viewString.Append("EndDateUtc AS AspNetUsers_LockoutEndDateUtc, \r\n            T.LockoutEnabled AS A");
-            viewString.Append("spNetUsers_LockoutEnabled, \r\n            T.AccessFailedCount AS AspNetUsers_Acce");
-            viewString.Append("ssFailedCount, \r\n            T.UserName AS AspNetUsers_UserName, \r\n            T");
-            viewString.Append(".FullName AS AspNetUsers_FullName, \r\n            T.AlternateEmail AS AspNetUsers");
-            viewString.Append("_AlternateEmail, \r\n            T.IsEmailVerified AS AspNetUsers_IsEmailVerified,");
-            viewString.Append(" \r\n            T.Status AS AspNetUsers_Status, \r\n            T.CreatedDateTime A");
-            viewString.Append("S AspNetUsers_CreatedDateTime, \r\n            T.ModifiedDateTime AS AspNetUsers_M");
-            viewString.Append("odifiedDateTime, \r\n            T.LastLoginTime AS AspNetUsers_LastLoginTime, \r\n ");
-            viewString.Append("           T.Phone1 AS AspNetUsers_Phone1, \r\n            T.Phone2 AS AspNetUsers");
-            viewString.Append("_Phone2, \r\n            T.Jobtitle AS AspNetUsers_Jobtitle, \r\n            T.Conta");
-            viewString.Append("ctNotes AS AspNetUsers_ContactNotes, \r\n            T.IsSubscribed AS AspNetUsers");
-            viewString.Append("_IsSubscribed, \r\n            T.AppId AS AspNetUsers_AppID, \r\n            T.Compa");
-            viewString.Append("nyName AS AspNetUsers_CompanyName, \r\n            T.SalesEmail AS AspNetUsers_Sal");
-            viewString.Append("esEmail, \r\n            T.CompanyRepresentative AS AspNetUsers_CompanyRepresentat");
-            viewString.Append("ive, \r\n            T.Address1 AS AspNetUsers_Address1, \r\n            T.Address2 ");
-            viewString.Append("AS AspNetUsers_Address2, \r\n            T.CityId AS AspNetUsers_CityID, \r\n       ");
-            viewString.Append("     T.CountryId AS AspNetUsers_CountryID, \r\n            T.State AS AspNetUsers_");
-            viewString.Append("State, \r\n            T.ZipCode AS AspNetUsers_ZipCode, \r\n            T.UserTimeZ");
-            viewString.Append("one AS AspNetUsers_UserTimeZone, \r\n            T.ReferralCode AS AspNetUsers_Ref");
-            viewString.Append("erralCode, \r\n            T.AfilliatianStatus AS AspNetUsers_AfilliatianStatus, \r");
-            viewString.Append("\n            T.StripeCustomerId AS AspNetUsers_StripeCustomerId, \r\n            T");
-            viewString.Append(".ChargeBeesubscriptionId AS AspNetUsers_ChargeBeesubscriptionID, \r\n            T");
-            viewString.Append(".RegisteredViaReferral AS AspNetUsers_RegisteredViaReferral, \r\n            T.Ref");
-            viewString.Append("erringUserId AS AspNetUsers_ReferringUserID, \r\n            T.Gender AS AspNetUse");
-            viewString.Append("rs_Gender, \r\n            T.LanguageId AS AspNetUsers_LanguageID, \r\n            T");
-            viewString.Append(".IndustryId AS AspNetUsers_IndustryID, \r\n            T.EducationId AS AspNetUser");
-            viewString.Append("s_EducationId, \r\n            T.ProfileImage AS AspNetUsers_ProfileImage, \r\n     ");
-            viewString.Append("       T.UserCode AS AspNetUsers_UserCode, \r\n            T.SmsCode AS AspNetUser");
-            viewString.Append("s_SmsCode, \r\n            T.WebsiteLink AS AspNetUsers_WebsiteLink, \r\n           ");
-            viewString.Append(" T.AdvertisingContact AS AspNetUsers_AdvertisingContact, \r\n            T.Adverti");
-            viewString.Append("singContactPhoneNumber AS AspNetUsers_AdvertisingContactPhoneNumber, \r\n         ");
-            viewString.Append("   T.AdvertisingContactEmail AS AspNetUsers_AdvertisingContactEmail, \r\n         ");
-            viewString.Append("   T.PaypalCustomerId AS AspNetUsers_PaypalCustomerId, \r\n            T.GoogleWal");
-            viewString.Append("letCustomerId AS AspNetUsers_GoogleWalletCustomerId, \r\n            T.PreferredPa");
-            viewString.Append("youtAccount AS AspNetUsers_PreferredPayoutAccount, \r\n            T.DOB AS AspNet");
-            viewString.Append("Users_DOB, \r\n            True AS _from0\r\n        FROM BaseDbContext.Users AS T\r\n");
-            viewString.Append("    ) AS T1");
-            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.AspNetUsers", viewString.ToString());
-        }
-        
-        /// <Summary>
         /// return view for SMDModelStoreContainer.ProfileQuestion
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView3()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView2()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.ProfileQuestion", "\r\n    SELECT VALUE -- Constructing ProfileQuestion\r\n        [SMDModel.Store.Profi" +
                     "leQuestion](T1.ProfileQuestion_PQID, T1.ProfileQuestion_LanguageID, T1.ProfileQu" +
@@ -452,7 +386,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for SMDModelStoreContainer.ProfileQuestionAnswer
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView4()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView3()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.ProfileQuestionAnswer", "\r\n    SELECT VALUE -- Constructing ProfileQuestionAnswer\r\n        [SMDModel.Store" +
                     ".ProfileQuestionAnswer](T1.ProfileQuestionAnswer_PQAnswerID, T1.ProfileQuestionA" +
@@ -480,7 +414,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for SMDModelStoreContainer.ProfileQuestionGroup
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView5()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView4()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.ProfileQuestionGroup", @"
     SELECT VALUE -- Constructing ProfileQuestionGroup
@@ -498,29 +432,9 @@ namespace Edm_EntityMappingGeneratedViews
         }
         
         /// <Summary>
-        /// return view for SMDModelStoreContainer.ProfileQuestionUserAnswer
-        /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView6()
-        {
-            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.ProfileQuestionUserAnswer", @"
-    SELECT VALUE -- Constructing ProfileQuestionUserAnswer
-        [SMDModel.Store.ProfileQuestionUserAnswer](T1.ProfileQuestionUserAnswer_PQUAnswerID, T1.ProfileQuestionUserAnswer_PQID, T1.ProfileQuestionUserAnswer_UserID, T1.ProfileQuestionUserAnswer_AnswerDateTime, T1.ProfileQuestionUserAnswer_PQAnswerID)
-    FROM (
-        SELECT 
-            T.PquAnswerId AS ProfileQuestionUserAnswer_PQUAnswerID, 
-            T.PqId AS ProfileQuestionUserAnswer_PQID, 
-            T.UserId AS ProfileQuestionUserAnswer_UserID, 
-            T.AnswerDateTime AS ProfileQuestionUserAnswer_AnswerDateTime, 
-            T.PqAnswerId AS ProfileQuestionUserAnswer_PQAnswerID, 
-            True AS _from0
-        FROM BaseDbContext.ProfileQuestionUserAnswers AS T
-    ) AS T1");
-        }
-        
-        /// <Summary>
         /// return view for SMDModelStoreContainer.AspNetUserClaims
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView7()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView5()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.AspNetUserClaims", @"
     SELECT VALUE -- Constructing AspNetUserClaims
@@ -539,7 +453,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for SMDModelStoreContainer.Country
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView8()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView6()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.Country", @"
     SELECT VALUE -- Constructing Country
@@ -557,7 +471,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for SMDModelStoreContainer.Language
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView9()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView7()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.Language", @"
     SELECT VALUE -- Constructing Language
@@ -573,98 +487,9 @@ namespace Edm_EntityMappingGeneratedViews
         }
         
         /// <Summary>
-        /// return view for SMDModelStoreContainer.AdCampaign
-        /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView10()
-        {
-            System.Text.StringBuilder viewString = new System.Text.StringBuilder(4572);
-            viewString.Append("\r\n    SELECT VALUE -- Constructing AdCampaign\r\n        [SMDModel.Store.AdCampaig");
-            viewString.Append("n](T1.AdCampaign_CampaignID, T1.AdCampaign_LanguageID, T1.AdCampaign_UserID, T1.");
-            viewString.Append("AdCampaign_SMDCampaign, T1.AdCampaign_CampaignName, T1.AdCampaign_CampaignDescri");
-            viewString.Append("ption, T1.AdCampaign_Status, T1.AdCampaign_Archived, T1.AdCampaign_Approved, T1.");
-            viewString.Append("AdCampaign_ApprovedBy, T1.AdCampaign_ApprovalDateTime, T1.AdCampaign_StartDateTi");
-            viewString.Append("me, T1.AdCampaign_EndDateTime, T1.AdCampaign_MaxBudget, T1.AdCampaign_Type, T1.A");
-            viewString.Append("dCampaign_ClickRate, T1.AdCampaign_SMDCredits, T1.AdCampaign_DisplayTitle, T1.Ad");
-            viewString.Append("Campaign_Description, T1.AdCampaign_ImagePath, T1.AdCampaign_LandingPageVideoLin");
-            viewString.Append("k, T1.AdCampaign_VerifyQuestion, T1.AdCampaign_Answer1, T1.AdCampaign_Answer2, T");
-            viewString.Append("1.AdCampaign_Answer3, T1.AdCampaign_CorrectAnswer, T1.AdCampaign_CreatedDateTime");
-            viewString.Append(", T1.AdCampaign_CreatedBy, T1.AdCampaign_ModifiedDateTime, T1.AdCampaign_Modifie");
-            viewString.Append("dBy, T1.AdCampaign_AgeRangeStart, T1.AdCampaign_AgeRangeEnd, T1.AdCampaign_Gende");
-            viewString.Append("r, T1.AdCampaign_RejectedReason, T1.AdCampaign_ProjectedReach, T1.AdCampaign_Res");
-            viewString.Append("ultClicks, T1.AdCampaign_AmountSpent, T1.AdCampaign_RewardType, T1.AdCampaign_Vo");
-            viewString.Append("ucher1Heading, T1.AdCampaign_Voucher1Description, T1.AdCampaign_Voucher1Value, T");
-            viewString.Append("1.AdCampaign_Voucher2Heading, T1.AdCampaign_Voucher2Description, T1.AdCampaign_V");
-            viewString.Append("oucher2Value, T1.AdCampaign_Voucher1ImagePath, T1.AdCampaign_Voucher2ImagePath, ");
-            viewString.Append("T1.AdCampaign_VideoUrl, T1.AdCampaign_BuuyItLine1, T1.AdCampaign_BuyItLine2, T1.");
-            viewString.Append("AdCampaign_BuyItLine3, T1.AdCampaign_BuyItButtonLabel, T1.AdCampaign_BuyItImageU");
-            viewString.Append("rl)\r\n    FROM (\r\n        SELECT \r\n            T.CampaignId AS AdCampaign_Campaig");
-            viewString.Append("nID, \r\n            T.LanguageId AS AdCampaign_LanguageID, \r\n            T.UserId");
-            viewString.Append(" AS AdCampaign_UserID, \r\n            T.SmdCampaign AS AdCampaign_SMDCampaign, \r\n");
-            viewString.Append("            T.CampaignName AS AdCampaign_CampaignName, \r\n            T.CampaignD");
-            viewString.Append("escription AS AdCampaign_CampaignDescription, \r\n            T.Status AS AdCampai");
-            viewString.Append("gn_Status, \r\n            T.Archived AS AdCampaign_Archived, \r\n            T.Appr");
-            viewString.Append("oved AS AdCampaign_Approved, \r\n            T.ApprovedBy AS AdCampaign_ApprovedBy");
-            viewString.Append(", \r\n            T.ApprovalDateTime AS AdCampaign_ApprovalDateTime, \r\n           ");
-            viewString.Append(" T.StartDateTime AS AdCampaign_StartDateTime, \r\n            T.EndDateTime AS AdC");
-            viewString.Append("ampaign_EndDateTime, \r\n            T.MaxBudget AS AdCampaign_MaxBudget, \r\n      ");
-            viewString.Append("      T.Type AS AdCampaign_Type, \r\n            T.ClickRate AS AdCampaign_ClickRa");
-            viewString.Append("te, \r\n            T.SmdCredits AS AdCampaign_SMDCredits, \r\n            T.Display");
-            viewString.Append("Title AS AdCampaign_DisplayTitle, \r\n            T.Description AS AdCampaign_Desc");
-            viewString.Append("ription, \r\n            T.ImagePath AS AdCampaign_ImagePath, \r\n            T.Land");
-            viewString.Append("ingPageVideoLink AS AdCampaign_LandingPageVideoLink, \r\n            T.VerifyQuest");
-            viewString.Append("ion AS AdCampaign_VerifyQuestion, \r\n            T.Answer1 AS AdCampaign_Answer1,");
-            viewString.Append(" \r\n            T.Answer2 AS AdCampaign_Answer2, \r\n            T.Answer3 AS AdCam");
-            viewString.Append("paign_Answer3, \r\n            T.CorrectAnswer AS AdCampaign_CorrectAnswer, \r\n    ");
-            viewString.Append("        T.CreatedDateTime AS AdCampaign_CreatedDateTime, \r\n            T.Created");
-            viewString.Append("By AS AdCampaign_CreatedBy, \r\n            T.ModifiedDateTime AS AdCampaign_Modif");
-            viewString.Append("iedDateTime, \r\n            T.ModifiedBy AS AdCampaign_ModifiedBy, \r\n            ");
-            viewString.Append("T.AgeRangeStart AS AdCampaign_AgeRangeStart, \r\n            T.AgeRangeEnd AS AdCa");
-            viewString.Append("mpaign_AgeRangeEnd, \r\n            T.Gender AS AdCampaign_Gender, \r\n            T");
-            viewString.Append(".RejectedReason AS AdCampaign_RejectedReason, \r\n            T.ProjectedReach AS ");
-            viewString.Append("AdCampaign_ProjectedReach, \r\n            T.ResultClicks AS AdCampaign_ResultClic");
-            viewString.Append("ks, \r\n            T.AmountSpent AS AdCampaign_AmountSpent, \r\n            T.Rewar");
-            viewString.Append("dType AS AdCampaign_RewardType, \r\n            T.Voucher1Heading AS AdCampaign_Vo");
-            viewString.Append("ucher1Heading, \r\n            T.Voucher1Description AS AdCampaign_Voucher1Descrip");
-            viewString.Append("tion, \r\n            T.Voucher1Value AS AdCampaign_Voucher1Value, \r\n            T");
-            viewString.Append(".Voucher2Heading AS AdCampaign_Voucher2Heading, \r\n            T.Voucher2Descript");
-            viewString.Append("ion AS AdCampaign_Voucher2Description, \r\n            T.Voucher2Value AS AdCampai");
-            viewString.Append("gn_Voucher2Value, \r\n            T.Voucher1ImagePath AS AdCampaign_Voucher1ImageP");
-            viewString.Append("ath, \r\n            T.Voucher2ImagePath AS AdCampaign_Voucher2ImagePath, \r\n      ");
-            viewString.Append("      T.VideoUrl AS AdCampaign_VideoUrl, \r\n            T.BuuyItLine1 AS AdCampai");
-            viewString.Append("gn_BuuyItLine1, \r\n            T.BuyItLine2 AS AdCampaign_BuyItLine2, \r\n         ");
-            viewString.Append("   T.BuyItLine3 AS AdCampaign_BuyItLine3, \r\n            T.BuyItButtonLabel AS Ad");
-            viewString.Append("Campaign_BuyItButtonLabel, \r\n            T.BuyItImageUrl AS AdCampaign_BuyItImag");
-            viewString.Append("eUrl, \r\n            True AS _from0\r\n        FROM BaseDbContext.AdCampaigns AS T\r");
-            viewString.Append("\n    ) AS T1");
-            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.AdCampaign", viewString.ToString());
-        }
-        
-        /// <Summary>
-        /// return view for SMDModelStoreContainer.AdCampaignResponse
-        /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView11()
-        {
-            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.AdCampaignResponse", @"
-    SELECT VALUE -- Constructing AdCampaignResponse
-        [SMDModel.Store.AdCampaignResponse](T1.AdCampaignResponse_ResponseID, T1.AdCampaignResponse_CampaignID, T1.AdCampaignResponse_CreatedDateTime, T1.AdCampaignResponse_UserID, T1.AdCampaignResponse_EndUserDollarAmount, T1.AdCampaignResponse_SkipCount, T1.AdCampaignResponse_UserSelection)
-    FROM (
-        SELECT 
-            T.ResponseId AS AdCampaignResponse_ResponseID, 
-            T.CampaignId AS AdCampaignResponse_CampaignID, 
-            T.CreatedDateTime AS AdCampaignResponse_CreatedDateTime, 
-            T.UserId AS AdCampaignResponse_UserID, 
-            T.EndUserDollarAmount AS AdCampaignResponse_EndUserDollarAmount, 
-            T.SkipCount AS AdCampaignResponse_SkipCount, 
-            T.UserSelection AS AdCampaignResponse_UserSelection, 
-            True AS _from0
-        FROM BaseDbContext.AdCampaignResponses AS T
-    ) AS T1");
-        }
-        
-        /// <Summary>
         /// return view for SMDModelStoreContainer.AdCampaignTargetLocation
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView12()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView8()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.AdCampaignTargetLocation", @"
     SELECT VALUE -- Constructing AdCampaignTargetLocation
@@ -683,58 +508,9 @@ namespace Edm_EntityMappingGeneratedViews
         }
         
         /// <Summary>
-        /// return view for SMDModelStoreContainer.SurveyQuestion
-        /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView13()
-        {
-            System.Text.StringBuilder viewString = new System.Text.StringBuilder(3194);
-            viewString.Append("\r\n    SELECT VALUE -- Constructing SurveyQuestion\r\n        [SMDModel.Store.Surve");
-            viewString.Append("yQuestion](T1.SurveyQuestion_SQID, T1.SurveyQuestion_LanguageID, T1.SurveyQuesti");
-            viewString.Append("on_CountryID, T1.SurveyQuestion_Type, T1.SurveyQuestion_UserID, T1.SurveyQuestio");
-            viewString.Append("n_Status, T1.SurveyQuestion_Question, T1.SurveyQuestion_Description, T1.SurveyQu");
-            viewString.Append("estion_RepeatPeriod, T1.SurveyQuestion_DisplayQuestion, T1.SurveyQuestion_StartD");
-            viewString.Append("ate, T1.SurveyQuestion_EndDate, T1.SurveyQuestion_Approved, T1.SurveyQuestion_Ap");
-            viewString.Append("provedByUserID, T1.SurveyQuestion_ApprovalDate, T1.SurveyQuestion_CreationDate, ");
-            viewString.Append("T1.SurveyQuestion_ModifiedDate, T1.SurveyQuestion_CreatedBy, T1.SurveyQuestion_M");
-            viewString.Append("odifiedBy, T1.SurveyQuestion_LeftPicturePath, T1.SurveyQuestion_RightPicturePath");
-            viewString.Append(", T1.SurveyQuestion_DiscountVoucherApplied, T1.SurveyQuestion_VoucherCode, T1.Su");
-            viewString.Append("rveyQuestion_DiscountVoucherID, T1.SurveyQuestion_RejectionReason, T1.SurveyQues");
-            viewString.Append("tion_ProjectedReach, T1.SurveyQuestion_ResultClicks, T1.SurveyQuestion_AgeRangeS");
-            viewString.Append("tart, T1.SurveyQuestion_AgeRangeEnd, T1.SurveyQuestion_Gender, T1.SurveyQuestion");
-            viewString.Append("_SubmissionDate, T1.SurveyQuestion_ParentSurveyId, T1.SurveyQuestion_Priority)\r\n");
-            viewString.Append("    FROM (\r\n        SELECT \r\n            T.SqId AS SurveyQuestion_SQID, \r\n      ");
-            viewString.Append("      T.LanguageId AS SurveyQuestion_LanguageID, \r\n            T.CountryId AS Su");
-            viewString.Append("rveyQuestion_CountryID, \r\n            T.Type AS SurveyQuestion_Type, \r\n         ");
-            viewString.Append("   T.UserId AS SurveyQuestion_UserID, \r\n            T.Status AS SurveyQuestion_S");
-            viewString.Append("tatus, \r\n            T.Question AS SurveyQuestion_Question, \r\n            T.Desc");
-            viewString.Append("ription AS SurveyQuestion_Description, \r\n            T.RepeatPeriod AS SurveyQue");
-            viewString.Append("stion_RepeatPeriod, \r\n            T.DisplayQuestion AS SurveyQuestion_DisplayQue");
-            viewString.Append("stion, \r\n            T.StartDate AS SurveyQuestion_StartDate, \r\n            T.En");
-            viewString.Append("dDate AS SurveyQuestion_EndDate, \r\n            T.Approved AS SurveyQuestion_Appr");
-            viewString.Append("oved, \r\n            T.ApprovedByUserId AS SurveyQuestion_ApprovedByUserID, \r\n   ");
-            viewString.Append("         T.ApprovalDate AS SurveyQuestion_ApprovalDate, \r\n            T.Creation");
-            viewString.Append("Date AS SurveyQuestion_CreationDate, \r\n            T.ModifiedDate AS SurveyQuest");
-            viewString.Append("ion_ModifiedDate, \r\n            T.CreatedBy AS SurveyQuestion_CreatedBy, \r\n     ");
-            viewString.Append("       T.ModifiedBy AS SurveyQuestion_ModifiedBy, \r\n            T.LeftPicturePat");
-            viewString.Append("h AS SurveyQuestion_LeftPicturePath, \r\n            T.RightPicturePath AS SurveyQ");
-            viewString.Append("uestion_RightPicturePath, \r\n            T.DiscountVoucherApplied AS SurveyQuesti");
-            viewString.Append("on_DiscountVoucherApplied, \r\n            T.VoucherCode AS SurveyQuestion_Voucher");
-            viewString.Append("Code, \r\n            T.DiscountVoucherId AS SurveyQuestion_DiscountVoucherID, \r\n ");
-            viewString.Append("           T.RejectionReason AS SurveyQuestion_RejectionReason, \r\n            T.");
-            viewString.Append("ProjectedReach AS SurveyQuestion_ProjectedReach, \r\n            T.ResultClicks AS");
-            viewString.Append(" SurveyQuestion_ResultClicks, \r\n            T.AgeRangeStart AS SurveyQuestion_Ag");
-            viewString.Append("eRangeStart, \r\n            T.AgeRangeEnd AS SurveyQuestion_AgeRangeEnd, \r\n      ");
-            viewString.Append("      T.Gender AS SurveyQuestion_Gender, \r\n            T.SubmissionDate AS Surve");
-            viewString.Append("yQuestion_SubmissionDate, \r\n            T.ParentSurveyId AS SurveyQuestion_Paren");
-            viewString.Append("tSurveyId, \r\n            T.Priority AS SurveyQuestion_Priority, \r\n            Tr");
-            viewString.Append("ue AS _from0\r\n        FROM BaseDbContext.SurveyQuestions AS T\r\n    ) AS T1");
-            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.SurveyQuestion", viewString.ToString());
-        }
-        
-        /// <Summary>
         /// return view for SMDModelStoreContainer.SurveyQuestionTargetCriteria
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView14()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView9()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.SurveyQuestionTargetCriteria", @"
     SELECT VALUE -- Constructing SurveyQuestionTargetCriteria
@@ -760,7 +536,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for SMDModelStoreContainer.SurveyQuestionTargetLocation
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView15()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView10()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.SurveyQuestionTargetLocation", @"
     SELECT VALUE -- Constructing SurveyQuestionTargetLocation
@@ -779,30 +555,9 @@ namespace Edm_EntityMappingGeneratedViews
         }
         
         /// <Summary>
-        /// return view for SMDModelStoreContainer.SurveyQuestionResponse
-        /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView16()
-        {
-            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.SurveyQuestionResponse", @"
-    SELECT VALUE -- Constructing SurveyQuestionResponse
-        [SMDModel.Store.SurveyQuestionResponse](T1.SurveyQuestionResponse_SQResponseID, T1.SurveyQuestionResponse_SQID, T1.SurveyQuestionResponse_UserID, T1.SurveyQuestionResponse_ResoponseDateTime, T1.SurveyQuestionResponse_UserSelection, T1.SurveyQuestionResponse_SkipCount)
-    FROM (
-        SELECT 
-            T.SqResponseId AS SurveyQuestionResponse_SQResponseID, 
-            T.SqId AS SurveyQuestionResponse_SQID, 
-            T.UserId AS SurveyQuestionResponse_UserID, 
-            T.ResoponseDateTime AS SurveyQuestionResponse_ResoponseDateTime, 
-            T.UserSelection AS SurveyQuestionResponse_UserSelection, 
-            T.SkipCount AS SurveyQuestionResponse_SkipCount, 
-            True AS _from0
-        FROM BaseDbContext.SurveyQuestionResponses AS T
-    ) AS T1");
-        }
-        
-        /// <Summary>
         /// return view for SMDModelStoreContainer.City
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView17()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView11()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.City", @"
     SELECT VALUE -- Constructing City
@@ -823,7 +578,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for SMDModelStoreContainer.Industry
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView18()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView12()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.Industry", @"
     SELECT VALUE -- Constructing Industry
@@ -841,7 +596,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for SMDModelStoreContainer.Currency
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView19()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView13()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.Currency", @"
     SELECT VALUE -- Constructing Currency
@@ -859,29 +614,9 @@ namespace Edm_EntityMappingGeneratedViews
         }
         
         /// <Summary>
-        /// return view for SMDModelStoreContainer.Account
-        /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView20()
-        {
-            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.Account", @"
-    SELECT VALUE -- Constructing Account
-        [SMDModel.Store.Account](T1.Account_AccountId, T1.Account_AccountName, T1.Account_AccountType, T1.Account_UserId, T1.Account_AccountBalance)
-    FROM (
-        SELECT 
-            T.AccountId AS Account_AccountId, 
-            T.AccountName AS Account_AccountName, 
-            T.AccountType AS Account_AccountType, 
-            T.UserId AS Account_UserId, 
-            T.AccountBalance AS Account_AccountBalance, 
-            True AS _from0
-        FROM BaseDbContext.Accounts AS T
-    ) AS T1");
-        }
-        
-        /// <Summary>
         /// return view for SMDModelStoreContainer.Transaction
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView21()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView14()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.Transaction", @"
     SELECT VALUE -- Constructing Transaction
@@ -909,40 +644,9 @@ namespace Edm_EntityMappingGeneratedViews
         }
         
         /// <Summary>
-        /// return view for SMDModelStoreContainer.Invoice
-        /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView22()
-        {
-            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.Invoice", @"
-    SELECT VALUE -- Constructing Invoice
-        [SMDModel.Store.Invoice](T1.Invoice_InvoiceId, T1.Invoice_InvoiceDate, T1.Invoice_InvoiceDueDate, T1.Invoice_UserId, T1.Invoice_TaxPercentage, T1.Invoice_Total, T1.Invoice_NetTotal, T1.Invoice_TaxValue, T1.Invoice_CompanyName, T1.Invoice_Address1, T1.Invoice_Address2, T1.Invoice_City, T1.Invoice_State, T1.Invoice_Country, T1.Invoice_ZipCode, T1.Invoice_CreditCardRef)
-    FROM (
-        SELECT 
-            T.InvoiceId AS Invoice_InvoiceId, 
-            T.InvoiceDate AS Invoice_InvoiceDate, 
-            T.InvoiceDueDate AS Invoice_InvoiceDueDate, 
-            T.UserId AS Invoice_UserId, 
-            T.TaxPercentage AS Invoice_TaxPercentage, 
-            T.Total AS Invoice_Total, 
-            T.NetTotal AS Invoice_NetTotal, 
-            T.TaxValue AS Invoice_TaxValue, 
-            T.CompanyName AS Invoice_CompanyName, 
-            T.Address1 AS Invoice_Address1, 
-            T.Address2 AS Invoice_Address2, 
-            T.City AS Invoice_City, 
-            T.State AS Invoice_State, 
-            T.Country AS Invoice_Country, 
-            T.ZipCode AS Invoice_ZipCode, 
-            T.CreditCardRef AS Invoice_CreditCardRef, 
-            True AS _from0
-        FROM BaseDbContext.Invoices AS T
-    ) AS T1");
-        }
-        
-        /// <Summary>
         /// return view for SMDModelStoreContainer.InvoiceDetail
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView23()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView15()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.InvoiceDetail", @"
     SELECT VALUE -- Constructing InvoiceDetail
@@ -967,7 +671,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for SMDModelStoreContainer.Tax
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView24()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView16()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.Tax", @"
     SELECT VALUE -- Constructing Tax
@@ -986,7 +690,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for SMDModelStoreContainer.Education
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView25()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView17()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.Education", @"
     SELECT VALUE -- Constructing Education
@@ -1004,7 +708,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for SMDModelStoreContainer.Products
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView26()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView18()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.Products", "\r\n    SELECT VALUE -- Constructing Products\r\n        [SMDModel.Store.Products](T1" +
                     ".Products_ProductID, T1.Products_CountryID, T1.Products_CurrencyID, T1.Products_" +
@@ -1028,35 +732,9 @@ namespace Edm_EntityMappingGeneratedViews
         }
         
         /// <Summary>
-        /// return view for SMDModelStoreContainer.AdCampaignTargetCriteria
-        /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView27()
-        {
-            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.AdCampaignTargetCriteria", @"
-    SELECT VALUE -- Constructing AdCampaignTargetCriteria
-        [SMDModel.Store.AdCampaignTargetCriteria](T1.AdCampaignTargetCriteria_CriteriaID, T1.AdCampaignTargetCriteria_CampaignID, T1.AdCampaignTargetCriteria_Type, T1.AdCampaignTargetCriteria_PQID, T1.AdCampaignTargetCriteria_PQAnswerID, T1.AdCampaignTargetCriteria_SQID, T1.AdCampaignTargetCriteria_SQAnswer, T1.AdCampaignTargetCriteria_IncludeorExclude, T1.AdCampaignTargetCriteria_LanguageID, T1.AdCampaignTargetCriteria_IndustryID, T1.AdCampaignTargetCriteria_EducationID)
-    FROM (
-        SELECT 
-            T.CriteriaId AS AdCampaignTargetCriteria_CriteriaID, 
-            T.CampaignId AS AdCampaignTargetCriteria_CampaignID, 
-            T.Type AS AdCampaignTargetCriteria_Type, 
-            T.PqId AS AdCampaignTargetCriteria_PQID, 
-            T.PqAnswerId AS AdCampaignTargetCriteria_PQAnswerID, 
-            T.SqId AS AdCampaignTargetCriteria_SQID, 
-            T.SqAnswer AS AdCampaignTargetCriteria_SQAnswer, 
-            T.IncludeorExclude AS AdCampaignTargetCriteria_IncludeorExclude, 
-            T.LanguageId AS AdCampaignTargetCriteria_LanguageID, 
-            T.IndustryId AS AdCampaignTargetCriteria_IndustryID, 
-            T.EducationId AS AdCampaignTargetCriteria_EducationID, 
-            True AS _from0
-        FROM BaseDbContext.AdCampaignTargetCriterias AS T
-    ) AS T1");
-        }
-        
-        /// <Summary>
         /// return view for SMDModelStoreContainer.TransactionLog
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView28()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView19()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.TransactionLog", @"
     SELECT VALUE -- Constructing TransactionLog
@@ -1078,17 +756,381 @@ namespace Edm_EntityMappingGeneratedViews
         }
         
         /// <Summary>
-        /// return view for SMDModelStoreContainer.AspNetUserRoles
+        /// return view for SMDModelStoreContainer.Account
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView20()
+        {
+            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.Account", @"
+    SELECT VALUE -- Constructing Account
+        [SMDModel.Store.Account](T1.Account_AccountId, T1.Account_AccountName, T1.Account_AccountType, T1.Account_AccountBalance, T1.Account_CompanyId)
+    FROM (
+        SELECT 
+            T.AccountId AS Account_AccountId, 
+            T.AccountName AS Account_AccountName, 
+            T.AccountType AS Account_AccountType, 
+            T.AccountBalance AS Account_AccountBalance, 
+            T.CompanyId AS Account_CompanyId, 
+            True AS _from0
+        FROM BaseDbContext.Accounts AS T
+    ) AS T1");
+        }
+        
+        /// <Summary>
+        /// return view for SMDModelStoreContainer.AdCampaign
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView21()
+        {
+            System.Text.StringBuilder viewString = new System.Text.StringBuilder(5030);
+            viewString.Append("\r\n    SELECT VALUE -- Constructing AdCampaign\r\n        [SMDModel.Store.AdCampaig");
+            viewString.Append("n](T1.AdCampaign_CampaignID, T1.AdCampaign_LanguageID, T1.AdCampaign_UserID, T1.");
+            viewString.Append("AdCampaign_SMDCampaign, T1.AdCampaign_CampaignName, T1.AdCampaign_CampaignDescri");
+            viewString.Append("ption, T1.AdCampaign_Status, T1.AdCampaign_Archived, T1.AdCampaign_Approved, T1.");
+            viewString.Append("AdCampaign_ApprovedBy, T1.AdCampaign_ApprovalDateTime, T1.AdCampaign_StartDateTi");
+            viewString.Append("me, T1.AdCampaign_EndDateTime, T1.AdCampaign_MaxBudget, T1.AdCampaign_Type, T1.A");
+            viewString.Append("dCampaign_ClickRate, T1.AdCampaign_SMDCredits, T1.AdCampaign_DisplayTitle, T1.Ad");
+            viewString.Append("Campaign_Description, T1.AdCampaign_ImagePath, T1.AdCampaign_LandingPageVideoLin");
+            viewString.Append("k, T1.AdCampaign_VerifyQuestion, T1.AdCampaign_Answer1, T1.AdCampaign_Answer2, T");
+            viewString.Append("1.AdCampaign_Answer3, T1.AdCampaign_CorrectAnswer, T1.AdCampaign_CreatedDateTime");
+            viewString.Append(", T1.AdCampaign_CreatedBy, T1.AdCampaign_ModifiedDateTime, T1.AdCampaign_Modifie");
+            viewString.Append("dBy, T1.AdCampaign_AgeRangeStart, T1.AdCampaign_AgeRangeEnd, T1.AdCampaign_Gende");
+            viewString.Append("r, T1.AdCampaign_RejectedReason, T1.AdCampaign_ProjectedReach, T1.AdCampaign_Res");
+            viewString.Append("ultClicks, T1.AdCampaign_AmountSpent, T1.AdCampaign_RewardType, T1.AdCampaign_Vo");
+            viewString.Append("ucher1Heading, T1.AdCampaign_Voucher1Description, T1.AdCampaign_Voucher1Value, T");
+            viewString.Append("1.AdCampaign_Voucher2Heading, T1.AdCampaign_Voucher2Description, T1.AdCampaign_V");
+            viewString.Append("oucher2Value, T1.AdCampaign_Voucher1ImagePath, T1.AdCampaign_Voucher2ImagePath, ");
+            viewString.Append("T1.AdCampaign_VideoUrl, T1.AdCampaign_BuuyItLine1, T1.AdCampaign_BuyItLine2, T1.");
+            viewString.Append("AdCampaign_BuyItLine3, T1.AdCampaign_BuyItButtonLabel, T1.AdCampaign_BuyItImageU");
+            viewString.Append("rl, T1.AdCampaign_CouponSwapValue, T1.AdCampaign_CouponActualValue, T1.AdCampaig");
+            viewString.Append("n_CouponTakenCount, T1.AdCampaign_CouponQuantity, T1.AdCampaign_CompanyId)\r\n    ");
+            viewString.Append("FROM (\r\n        SELECT \r\n            T.CampaignID AS AdCampaign_CampaignID, \r\n  ");
+            viewString.Append("          T.LanguageID AS AdCampaign_LanguageID, \r\n            T.UserID AS AdCam");
+            viewString.Append("paign_UserID, \r\n            T.SMDCampaign AS AdCampaign_SMDCampaign, \r\n         ");
+            viewString.Append("   T.CampaignName AS AdCampaign_CampaignName, \r\n            T.CampaignDescriptio");
+            viewString.Append("n AS AdCampaign_CampaignDescription, \r\n            T.Status AS AdCampaign_Status");
+            viewString.Append(", \r\n            T.Archived AS AdCampaign_Archived, \r\n            T.Approved AS A");
+            viewString.Append("dCampaign_Approved, \r\n            T.ApprovedBy AS AdCampaign_ApprovedBy, \r\n     ");
+            viewString.Append("       T.ApprovalDateTime AS AdCampaign_ApprovalDateTime, \r\n            T.StartD");
+            viewString.Append("ateTime AS AdCampaign_StartDateTime, \r\n            T.EndDateTime AS AdCampaign_E");
+            viewString.Append("ndDateTime, \r\n            T.MaxBudget AS AdCampaign_MaxBudget, \r\n            T.T");
+            viewString.Append("ype AS AdCampaign_Type, \r\n            T.ClickRate AS AdCampaign_ClickRate, \r\n   ");
+            viewString.Append("         T.SMDCredits AS AdCampaign_SMDCredits, \r\n            T.DisplayTitle AS ");
+            viewString.Append("AdCampaign_DisplayTitle, \r\n            T.Description AS AdCampaign_Description, ");
+            viewString.Append("\r\n            T.ImagePath AS AdCampaign_ImagePath, \r\n            T.LandingPageVi");
+            viewString.Append("deoLink AS AdCampaign_LandingPageVideoLink, \r\n            T.VerifyQuestion AS Ad");
+            viewString.Append("Campaign_VerifyQuestion, \r\n            T.Answer1 AS AdCampaign_Answer1, \r\n      ");
+            viewString.Append("      T.Answer2 AS AdCampaign_Answer2, \r\n            T.Answer3 AS AdCampaign_Ans");
+            viewString.Append("wer3, \r\n            T.CorrectAnswer AS AdCampaign_CorrectAnswer, \r\n            T");
+            viewString.Append(".CreatedDateTime AS AdCampaign_CreatedDateTime, \r\n            T.CreatedBy AS AdC");
+            viewString.Append("ampaign_CreatedBy, \r\n            T.ModifiedDateTime AS AdCampaign_ModifiedDateTi");
+            viewString.Append("me, \r\n            T.ModifiedBy AS AdCampaign_ModifiedBy, \r\n            T.AgeRang");
+            viewString.Append("eStart AS AdCampaign_AgeRangeStart, \r\n            T.AgeRangeEnd AS AdCampaign_Ag");
+            viewString.Append("eRangeEnd, \r\n            T.Gender AS AdCampaign_Gender, \r\n            T.Rejected");
+            viewString.Append("Reason AS AdCampaign_RejectedReason, \r\n            T.ProjectedReach AS AdCampaig");
+            viewString.Append("n_ProjectedReach, \r\n            T.ResultClicks AS AdCampaign_ResultClicks, \r\n   ");
+            viewString.Append("         T.AmountSpent AS AdCampaign_AmountSpent, \r\n            T.RewardType AS ");
+            viewString.Append("AdCampaign_RewardType, \r\n            T.Voucher1Heading AS AdCampaign_Voucher1Hea");
+            viewString.Append("ding, \r\n            T.Voucher1Description AS AdCampaign_Voucher1Description, \r\n ");
+            viewString.Append("           T.Voucher1Value AS AdCampaign_Voucher1Value, \r\n            T.Voucher2");
+            viewString.Append("Heading AS AdCampaign_Voucher2Heading, \r\n            T.Voucher2Description AS Ad");
+            viewString.Append("Campaign_Voucher2Description, \r\n            T.Voucher2Value AS AdCampaign_Vouche");
+            viewString.Append("r2Value, \r\n            T.Voucher1ImagePath AS AdCampaign_Voucher1ImagePath, \r\n  ");
+            viewString.Append("          T.Voucher2ImagePath AS AdCampaign_Voucher2ImagePath, \r\n            T.V");
+            viewString.Append("ideoUrl AS AdCampaign_VideoUrl, \r\n            T.BuuyItLine1 AS AdCampaign_BuuyIt");
+            viewString.Append("Line1, \r\n            T.BuyItLine2 AS AdCampaign_BuyItLine2, \r\n            T.BuyI");
+            viewString.Append("tLine3 AS AdCampaign_BuyItLine3, \r\n            T.BuyItButtonLabel AS AdCampaign_");
+            viewString.Append("BuyItButtonLabel, \r\n            T.BuyItImageUrl AS AdCampaign_BuyItImageUrl, \r\n ");
+            viewString.Append("           T.CouponSwapValue AS AdCampaign_CouponSwapValue, \r\n            T.Coup");
+            viewString.Append("onActualValue AS AdCampaign_CouponActualValue, \r\n            T.CouponTakenCount ");
+            viewString.Append("AS AdCampaign_CouponTakenCount, \r\n            T.CouponQuantity AS AdCampaign_Cou");
+            viewString.Append("ponQuantity, \r\n            T.CompanyId AS AdCampaign_CompanyId, \r\n            Tr");
+            viewString.Append("ue AS _from0\r\n        FROM BaseDbContext.AdCampaigns AS T\r\n    ) AS T1");
+            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.AdCampaign", viewString.ToString());
+        }
+        
+        /// <Summary>
+        /// return view for SMDModelStoreContainer.AdCampaignResponse
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView22()
+        {
+            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.AdCampaignResponse", @"
+    SELECT VALUE -- Constructing AdCampaignResponse
+        [SMDModel.Store.AdCampaignResponse](T1.AdCampaignResponse_ResponseID, T1.AdCampaignResponse_CampaignID, T1.AdCampaignResponse_CreatedDateTime, T1.AdCampaignResponse_UserID, T1.AdCampaignResponse_EndUserDollarAmount, T1.AdCampaignResponse_SkipCount, T1.AdCampaignResponse_UserSelection, T1.AdCampaignResponse_CompanyId, T1.AdCampaignResponse_GameTime, T1.AdCampaignResponse_GameScore, T1.AdCampaignResponse_GameLevel, T1.AdCampaignResponse_GameId)
+    FROM (
+        SELECT 
+            T.ResponseID AS AdCampaignResponse_ResponseID, 
+            T.CampaignID AS AdCampaignResponse_CampaignID, 
+            T.CreatedDateTime AS AdCampaignResponse_CreatedDateTime, 
+            T.UserID AS AdCampaignResponse_UserID, 
+            T.EndUserDollarAmount AS AdCampaignResponse_EndUserDollarAmount, 
+            T.SkipCount AS AdCampaignResponse_SkipCount, 
+            T.UserSelection AS AdCampaignResponse_UserSelection, 
+            T.CompanyId AS AdCampaignResponse_CompanyId, 
+            T.GameTime AS AdCampaignResponse_GameTime, 
+            T.GameScore AS AdCampaignResponse_GameScore, 
+            T.GameLevel AS AdCampaignResponse_GameLevel, 
+            T.GameId AS AdCampaignResponse_GameId, 
+            True AS _from0
+        FROM BaseDbContext.AdCampaignResponses AS T
+    ) AS T1");
+        }
+        
+        /// <Summary>
+        /// return view for SMDModelStoreContainer.AdCampaignTargetCriteria
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView23()
+        {
+            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.AdCampaignTargetCriteria", "\r\n    SELECT VALUE -- Constructing AdCampaignTargetCriteria\r\n        [SMDModel.St" +
+                    "ore.AdCampaignTargetCriteria](T1.AdCampaignTargetCriteria_CriteriaID, T1.AdCampa" +
+                    "ignTargetCriteria_CampaignID, T1.AdCampaignTargetCriteria_Type, T1.AdCampaignTar" +
+                    "getCriteria_PQID, T1.AdCampaignTargetCriteria_PQAnswerID, T1.AdCampaignTargetCri" +
+                    "teria_SQID, T1.AdCampaignTargetCriteria_SQAnswer, T1.AdCampaignTargetCriteria_In" +
+                    "cludeorExclude, T1.AdCampaignTargetCriteria_LanguageID, T1.AdCampaignTargetCrite" +
+                    "ria_IndustryID, T1.AdCampaignTargetCriteria_EducationID, T1.AdCampaignTargetCrit" +
+                    "eria_QuizCampaignId, T1.AdCampaignTargetCriteria_QuizAnswerId)\r\n    FROM (\r\n    " +
+                    "    SELECT \r\n            T.CriteriaID AS AdCampaignTargetCriteria_CriteriaID, \r\n" +
+                    "            T.CampaignID AS AdCampaignTargetCriteria_CampaignID, \r\n            T" +
+                    ".Type AS AdCampaignTargetCriteria_Type, \r\n            T.PQID AS AdCampaignTarget" +
+                    "Criteria_PQID, \r\n            T.PQAnswerID AS AdCampaignTargetCriteria_PQAnswerID" +
+                    ", \r\n            T.SQID AS AdCampaignTargetCriteria_SQID, \r\n            T.SQAnswe" +
+                    "r AS AdCampaignTargetCriteria_SQAnswer, \r\n            T.IncludeorExclude AS AdCa" +
+                    "mpaignTargetCriteria_IncludeorExclude, \r\n            T.LanguageID AS AdCampaignT" +
+                    "argetCriteria_LanguageID, \r\n            T.IndustryID AS AdCampaignTargetCriteria" +
+                    "_IndustryID, \r\n            T.EducationID AS AdCampaignTargetCriteria_EducationID" +
+                    ", \r\n            T.QuizCampaignId AS AdCampaignTargetCriteria_QuizCampaignId, \r\n " +
+                    "           T.QuizAnswerId AS AdCampaignTargetCriteria_QuizAnswerId, \r\n          " +
+                    "  True AS _from0\r\n        FROM BaseDbContext.AdCampaignTargetCriterias AS T\r\n   " +
+                    " ) AS T1");
+        }
+        
+        /// <Summary>
+        /// return view for SMDModelStoreContainer.AspNetUsers
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView24()
+        {
+            System.Text.StringBuilder viewString = new System.Text.StringBuilder(3742);
+            viewString.Append("\r\n    SELECT VALUE -- Constructing AspNetUsers\r\n        [SMDModel.Store.AspNetUs");
+            viewString.Append("ers](T1.AspNetUsers_Id, T1.AspNetUsers_Email, T1.AspNetUsers_EmailConfirmed, T1.");
+            viewString.Append("AspNetUsers_PasswordHash, T1.AspNetUsers_SecurityStamp, T1.AspNetUsers_PhoneNumb");
+            viewString.Append("er, T1.AspNetUsers_PhoneNumberConfirmed, T1.AspNetUsers_TwoFactorEnabled, T1.Asp");
+            viewString.Append("NetUsers_LockoutEndDateUtc, T1.AspNetUsers_LockoutEnabled, T1.AspNetUsers_Access");
+            viewString.Append("FailedCount, T1.AspNetUsers_UserName, T1.AspNetUsers_FullName, T1.AspNetUsers_Al");
+            viewString.Append("ternateEmail, T1.AspNetUsers_IsEmailVerified, T1.AspNetUsers_Status, T1.AspNetUs");
+            viewString.Append("ers_CreatedDateTime, T1.AspNetUsers_ModifiedDateTime, T1.AspNetUsers_LastLoginTi");
+            viewString.Append("me, T1.AspNetUsers_Phone1, T1.AspNetUsers_Phone2, T1.AspNetUsers_Jobtitle, T1.As");
+            viewString.Append("pNetUsers_ContactNotes, T1.AspNetUsers_IsSubscribed, T1.AspNetUsers_AppID, T1.As");
+            viewString.Append("pNetUsers_IsCompanyRepresentative, T1.AspNetUsers_Address1, T1.AspNetUsers_Addre");
+            viewString.Append("ss2, T1.AspNetUsers_CityID, T1.AspNetUsers_CountryID, T1.AspNetUsers_State, T1.A");
+            viewString.Append("spNetUsers_ZipCode, T1.AspNetUsers_UserTimeZone, T1.AspNetUsers_Gender, T1.AspNe");
+            viewString.Append("tUsers_LanguageID, T1.AspNetUsers_IndustryID, T1.AspNetUsers_EducationId, T1.Asp");
+            viewString.Append("NetUsers_ProfileImage, T1.AspNetUsers_UserCode, T1.AspNetUsers_SmsCode, T1.AspNe");
+            viewString.Append("tUsers_WebsiteLink, T1.AspNetUsers_DOB, T1.AspNetUsers_CompanyId)\r\n    FROM (\r\n ");
+            viewString.Append("       SELECT \r\n            T.Id AS AspNetUsers_Id, \r\n            T.Email AS Asp");
+            viewString.Append("NetUsers_Email, \r\n            T.EmailConfirmed AS AspNetUsers_EmailConfirmed, \r\n");
+            viewString.Append("            T.PasswordHash AS AspNetUsers_PasswordHash, \r\n            T.Security");
+            viewString.Append("Stamp AS AspNetUsers_SecurityStamp, \r\n            T.PhoneNumber AS AspNetUsers_P");
+            viewString.Append("honeNumber, \r\n            T.PhoneNumberConfirmed AS AspNetUsers_PhoneNumberConfi");
+            viewString.Append("rmed, \r\n            T.TwoFactorEnabled AS AspNetUsers_TwoFactorEnabled, \r\n      ");
+            viewString.Append("      T.LockoutEndDateUtc AS AspNetUsers_LockoutEndDateUtc, \r\n            T.Lock");
+            viewString.Append("outEnabled AS AspNetUsers_LockoutEnabled, \r\n            T.AccessFailedCount AS A");
+            viewString.Append("spNetUsers_AccessFailedCount, \r\n            T.UserName AS AspNetUsers_UserName, ");
+            viewString.Append("\r\n            T.FullName AS AspNetUsers_FullName, \r\n            T.AlternateEmail");
+            viewString.Append(" AS AspNetUsers_AlternateEmail, \r\n            T.IsEmailVerified AS AspNetUsers_I");
+            viewString.Append("sEmailVerified, \r\n            T.Status AS AspNetUsers_Status, \r\n            T.Cr");
+            viewString.Append("eatedDateTime AS AspNetUsers_CreatedDateTime, \r\n            T.ModifiedDateTime A");
+            viewString.Append("S AspNetUsers_ModifiedDateTime, \r\n            T.LastLoginTime AS AspNetUsers_Las");
+            viewString.Append("tLoginTime, \r\n            T.Phone1 AS AspNetUsers_Phone1, \r\n            T.Phone2");
+            viewString.Append(" AS AspNetUsers_Phone2, \r\n            T.Jobtitle AS AspNetUsers_Jobtitle, \r\n    ");
+            viewString.Append("        T.ContactNotes AS AspNetUsers_ContactNotes, \r\n            T.IsSubscribed");
+            viewString.Append(" AS AspNetUsers_IsSubscribed, \r\n            T.AppID AS AspNetUsers_AppID, \r\n    ");
+            viewString.Append("        T.IsCompanyRepresentative AS AspNetUsers_IsCompanyRepresentative, \r\n    ");
+            viewString.Append("        T.Address1 AS AspNetUsers_Address1, \r\n            T.Address2 AS AspNetUs");
+            viewString.Append("ers_Address2, \r\n            T.CityID AS AspNetUsers_CityID, \r\n            T.Coun");
+            viewString.Append("tryID AS AspNetUsers_CountryID, \r\n            T.State AS AspNetUsers_State, \r\n  ");
+            viewString.Append("          T.ZipCode AS AspNetUsers_ZipCode, \r\n            T.UserTimeZone AS AspN");
+            viewString.Append("etUsers_UserTimeZone, \r\n            T.Gender AS AspNetUsers_Gender, \r\n          ");
+            viewString.Append("  T.LanguageID AS AspNetUsers_LanguageID, \r\n            T.IndustryID AS AspNetUs");
+            viewString.Append("ers_IndustryID, \r\n            T.EducationId AS AspNetUsers_EducationId, \r\n      ");
+            viewString.Append("      T.ProfileImage AS AspNetUsers_ProfileImage, \r\n            T.UserCode AS As");
+            viewString.Append("pNetUsers_UserCode, \r\n            T.SmsCode AS AspNetUsers_SmsCode, \r\n          ");
+            viewString.Append("  T.WebsiteLink AS AspNetUsers_WebsiteLink, \r\n            T.DOB AS AspNetUsers_D");
+            viewString.Append("OB, \r\n            T.CompanyId AS AspNetUsers_CompanyId, \r\n            True AS _f");
+            viewString.Append("rom0\r\n        FROM BaseDbContext.AspNetUsers AS T\r\n    ) AS T1");
+            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.AspNetUsers", viewString.ToString());
+        }
+        
+        /// <Summary>
+        /// return view for SMDModelStoreContainer.Invoice
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView25()
+        {
+            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.Invoice", @"
+    SELECT VALUE -- Constructing Invoice
+        [SMDModel.Store.Invoice](T1.Invoice_InvoiceId, T1.Invoice_InvoiceDate, T1.Invoice_InvoiceDueDate, T1.Invoice_TaxPercentage, T1.Invoice_Total, T1.Invoice_NetTotal, T1.Invoice_TaxValue, T1.Invoice_CompanyName, T1.Invoice_Address1, T1.Invoice_Address2, T1.Invoice_City, T1.Invoice_State, T1.Invoice_Country, T1.Invoice_ZipCode, T1.Invoice_CreditCardRef, T1.Invoice_CompanyId)
+    FROM (
+        SELECT 
+            T.InvoiceId AS Invoice_InvoiceId, 
+            T.InvoiceDate AS Invoice_InvoiceDate, 
+            T.InvoiceDueDate AS Invoice_InvoiceDueDate, 
+            T.TaxPercentage AS Invoice_TaxPercentage, 
+            T.Total AS Invoice_Total, 
+            T.NetTotal AS Invoice_NetTotal, 
+            T.TaxValue AS Invoice_TaxValue, 
+            T.CompanyName AS Invoice_CompanyName, 
+            T.Address1 AS Invoice_Address1, 
+            T.Address2 AS Invoice_Address2, 
+            T.City AS Invoice_City, 
+            T.State AS Invoice_State, 
+            T.Country AS Invoice_Country, 
+            T.ZipCode AS Invoice_ZipCode, 
+            T.CreditCardRef AS Invoice_CreditCardRef, 
+            T.CompanyId AS Invoice_CompanyId, 
+            True AS _from0
+        FROM BaseDbContext.Invoices AS T
+    ) AS T1");
+        }
+        
+        /// <Summary>
+        /// return view for SMDModelStoreContainer.ProfileQuestionUserAnswer
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView26()
+        {
+            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.ProfileQuestionUserAnswer", @"
+    SELECT VALUE -- Constructing ProfileQuestionUserAnswer
+        [SMDModel.Store.ProfileQuestionUserAnswer](T1.ProfileQuestionUserAnswer_PQUAnswerID, T1.ProfileQuestionUserAnswer_PQID, T1.ProfileQuestionUserAnswer_UserID, T1.ProfileQuestionUserAnswer_AnswerDateTime, T1.ProfileQuestionUserAnswer_PQAnswerID, T1.ProfileQuestionUserAnswer_CompanyId)
+    FROM (
+        SELECT 
+            T.PQUAnswerID AS ProfileQuestionUserAnswer_PQUAnswerID, 
+            T.PQID AS ProfileQuestionUserAnswer_PQID, 
+            T.UserID AS ProfileQuestionUserAnswer_UserID, 
+            T.AnswerDateTime AS ProfileQuestionUserAnswer_AnswerDateTime, 
+            T.PQAnswerID AS ProfileQuestionUserAnswer_PQAnswerID, 
+            T.CompanyId AS ProfileQuestionUserAnswer_CompanyId, 
+            True AS _from0
+        FROM BaseDbContext.ProfileQuestionUserAnswers AS T
+    ) AS T1");
+        }
+        
+        /// <Summary>
+        /// return view for SMDModelStoreContainer.SurveyQuestion
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView27()
+        {
+            System.Text.StringBuilder viewString = new System.Text.StringBuilder(3278);
+            viewString.Append("\r\n    SELECT VALUE -- Constructing SurveyQuestion\r\n        [SMDModel.Store.Surve");
+            viewString.Append("yQuestion](T1.SurveyQuestion_SQID, T1.SurveyQuestion_LanguageID, T1.SurveyQuesti");
+            viewString.Append("on_CountryID, T1.SurveyQuestion_Type, T1.SurveyQuestion_UserID, T1.SurveyQuestio");
+            viewString.Append("n_Status, T1.SurveyQuestion_Question, T1.SurveyQuestion_Description, T1.SurveyQu");
+            viewString.Append("estion_RepeatPeriod, T1.SurveyQuestion_DisplayQuestion, T1.SurveyQuestion_StartD");
+            viewString.Append("ate, T1.SurveyQuestion_EndDate, T1.SurveyQuestion_Approved, T1.SurveyQuestion_Ap");
+            viewString.Append("provedByUserID, T1.SurveyQuestion_ApprovalDate, T1.SurveyQuestion_CreationDate, ");
+            viewString.Append("T1.SurveyQuestion_ModifiedDate, T1.SurveyQuestion_CreatedBy, T1.SurveyQuestion_M");
+            viewString.Append("odifiedBy, T1.SurveyQuestion_LeftPicturePath, T1.SurveyQuestion_RightPicturePath");
+            viewString.Append(", T1.SurveyQuestion_DiscountVoucherApplied, T1.SurveyQuestion_VoucherCode, T1.Su");
+            viewString.Append("rveyQuestion_DiscountVoucherID, T1.SurveyQuestion_RejectionReason, T1.SurveyQues");
+            viewString.Append("tion_ProjectedReach, T1.SurveyQuestion_ResultClicks, T1.SurveyQuestion_AgeRangeS");
+            viewString.Append("tart, T1.SurveyQuestion_AgeRangeEnd, T1.SurveyQuestion_Gender, T1.SurveyQuestion");
+            viewString.Append("_SubmissionDate, T1.SurveyQuestion_ParentSurveyId, T1.SurveyQuestion_Priority, T");
+            viewString.Append("1.SurveyQuestion_CompanyId)\r\n    FROM (\r\n        SELECT \r\n            T.SQID AS ");
+            viewString.Append("SurveyQuestion_SQID, \r\n            T.LanguageID AS SurveyQuestion_LanguageID, \r\n");
+            viewString.Append("            T.CountryID AS SurveyQuestion_CountryID, \r\n            T.Type AS Sur");
+            viewString.Append("veyQuestion_Type, \r\n            T.UserID AS SurveyQuestion_UserID, \r\n           ");
+            viewString.Append(" T.Status AS SurveyQuestion_Status, \r\n            T.Question AS SurveyQuestion_Q");
+            viewString.Append("uestion, \r\n            T.Description AS SurveyQuestion_Description, \r\n          ");
+            viewString.Append("  T.RepeatPeriod AS SurveyQuestion_RepeatPeriod, \r\n            T.DisplayQuestion");
+            viewString.Append(" AS SurveyQuestion_DisplayQuestion, \r\n            T.StartDate AS SurveyQuestion_");
+            viewString.Append("StartDate, \r\n            T.EndDate AS SurveyQuestion_EndDate, \r\n            T.Ap");
+            viewString.Append("proved AS SurveyQuestion_Approved, \r\n            T.ApprovedByUserID AS SurveyQue");
+            viewString.Append("stion_ApprovedByUserID, \r\n            T.ApprovalDate AS SurveyQuestion_ApprovalD");
+            viewString.Append("ate, \r\n            T.CreationDate AS SurveyQuestion_CreationDate, \r\n            ");
+            viewString.Append("T.ModifiedDate AS SurveyQuestion_ModifiedDate, \r\n            T.CreatedBy AS Surv");
+            viewString.Append("eyQuestion_CreatedBy, \r\n            T.ModifiedBy AS SurveyQuestion_ModifiedBy, \r");
+            viewString.Append("\n            T.LeftPicturePath AS SurveyQuestion_LeftPicturePath, \r\n            ");
+            viewString.Append("T.RightPicturePath AS SurveyQuestion_RightPicturePath, \r\n            T.DiscountV");
+            viewString.Append("oucherApplied AS SurveyQuestion_DiscountVoucherApplied, \r\n            T.VoucherC");
+            viewString.Append("ode AS SurveyQuestion_VoucherCode, \r\n            T.DiscountVoucherID AS SurveyQu");
+            viewString.Append("estion_DiscountVoucherID, \r\n            T.RejectionReason AS SurveyQuestion_Reje");
+            viewString.Append("ctionReason, \r\n            T.ProjectedReach AS SurveyQuestion_ProjectedReach, \r\n");
+            viewString.Append("            T.ResultClicks AS SurveyQuestion_ResultClicks, \r\n            T.AgeRa");
+            viewString.Append("ngeStart AS SurveyQuestion_AgeRangeStart, \r\n            T.AgeRangeEnd AS SurveyQ");
+            viewString.Append("uestion_AgeRangeEnd, \r\n            T.Gender AS SurveyQuestion_Gender, \r\n        ");
+            viewString.Append("    T.SubmissionDate AS SurveyQuestion_SubmissionDate, \r\n            T.ParentSur");
+            viewString.Append("veyId AS SurveyQuestion_ParentSurveyId, \r\n            T.Priority AS SurveyQuesti");
+            viewString.Append("on_Priority, \r\n            T.CompanyId AS SurveyQuestion_CompanyId, \r\n          ");
+            viewString.Append("  True AS _from0\r\n        FROM BaseDbContext.SurveyQuestions AS T\r\n    ) AS T1");
+            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.SurveyQuestion", viewString.ToString());
+        }
+        
+        /// <Summary>
+        /// return view for SMDModelStoreContainer.SurveyQuestionResponse
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView28()
+        {
+            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.SurveyQuestionResponse", @"
+    SELECT VALUE -- Constructing SurveyQuestionResponse
+        [SMDModel.Store.SurveyQuestionResponse](T1.SurveyQuestionResponse_SQResponseID, T1.SurveyQuestionResponse_SQID, T1.SurveyQuestionResponse_UserID, T1.SurveyQuestionResponse_ResoponseDateTime, T1.SurveyQuestionResponse_UserSelection, T1.SurveyQuestionResponse_SkipCount, T1.SurveyQuestionResponse_CompanyId)
+    FROM (
+        SELECT 
+            T.SQResponseID AS SurveyQuestionResponse_SQResponseID, 
+            T.SQID AS SurveyQuestionResponse_SQID, 
+            T.UserID AS SurveyQuestionResponse_UserID, 
+            T.ResoponseDateTime AS SurveyQuestionResponse_ResoponseDateTime, 
+            T.UserSelection AS SurveyQuestionResponse_UserSelection, 
+            T.SkipCount AS SurveyQuestionResponse_SkipCount, 
+            T.CompanyId AS SurveyQuestionResponse_CompanyId, 
+            True AS _from0
+        FROM BaseDbContext.SurveyQuestionResponses AS T
+    ) AS T1");
+        }
+        
+        /// <Summary>
+        /// return view for SMDModelStoreContainer.Company
         /// </Summary>
         private System.Collections.Generic.KeyValuePair<string, string> GetView29()
+        {
+            System.Text.StringBuilder viewString = new System.Text.StringBuilder(2164);
+            viewString.Append("\r\n    SELECT VALUE -- Constructing Company\r\n        [SMDModel.Store.Company](T1.");
+            viewString.Append("Company_CompanyId, T1.Company_CompanyName, T1.Company_ReplyEmail, T1.Company_Tel");
+            viewString.Append("1, T1.Company_Tel2, T1.Company_AddressLine1, T1.Company_AddressLine2, T1.Company");
+            viewString.Append("_State, T1.Company_CountryId, T1.Company_CityId, T1.Company_ZipCode, T1.Company_");
+            viewString.Append("TimeZone, T1.Company_Logo, T1.Company_StripeCustomerId, T1.Company_ChargeBeesubs");
+            viewString.Append("criptionID, T1.Company_RegisteredViaReferral, T1.Company_ReferringCompanyID, T1.");
+            viewString.Append("Company_PaypalCustomerId, T1.Company_GoogleWalletCustomerId, T1.Company_Preferre");
+            viewString.Append("dPayoutAccount, T1.Company_SalesEmail, T1.Company_ReferralCode, T1.Company_Afill");
+            viewString.Append("iatianStatus, T1.Company_WebsiteLink, T1.Company_CompanyType)\r\n    FROM (\r\n     ");
+            viewString.Append("   SELECT \r\n            T.CompanyId AS Company_CompanyId, \r\n            T.Compan");
+            viewString.Append("yName AS Company_CompanyName, \r\n            T.ReplyEmail AS Company_ReplyEmail, ");
+            viewString.Append("\r\n            T.Tel1 AS Company_Tel1, \r\n            T.Tel2 AS Company_Tel2, \r\n  ");
+            viewString.Append("          T.AddressLine1 AS Company_AddressLine1, \r\n            T.AddressLine2 A");
+            viewString.Append("S Company_AddressLine2, \r\n            T.State AS Company_State, \r\n            T.");
+            viewString.Append("CountryId AS Company_CountryId, \r\n            T.CityId AS Company_CityId, \r\n    ");
+            viewString.Append("        T.ZipCode AS Company_ZipCode, \r\n            T.TimeZone AS Company_TimeZo");
+            viewString.Append("ne, \r\n            T.Logo AS Company_Logo, \r\n            T.StripeCustomerId AS Co");
+            viewString.Append("mpany_StripeCustomerId, \r\n            T.ChargeBeesubscriptionID AS Company_Charg");
+            viewString.Append("eBeesubscriptionID, \r\n            T.RegisteredViaReferral AS Company_RegisteredV");
+            viewString.Append("iaReferral, \r\n            T.ReferringCompanyID AS Company_ReferringCompanyID, \r\n");
+            viewString.Append("            T.PaypalCustomerId AS Company_PaypalCustomerId, \r\n            T.Goog");
+            viewString.Append("leWalletCustomerId AS Company_GoogleWalletCustomerId, \r\n            T.PreferredP");
+            viewString.Append("ayoutAccount AS Company_PreferredPayoutAccount, \r\n            T.SalesEmail AS Co");
+            viewString.Append("mpany_SalesEmail, \r\n            T.ReferralCode AS Company_ReferralCode, \r\n      ");
+            viewString.Append("      T.AfilliatianStatus AS Company_AfilliatianStatus, \r\n            T.WebsiteL");
+            viewString.Append("ink AS Company_WebsiteLink, \r\n            T.CompanyType AS Company_CompanyType, ");
+            viewString.Append("\r\n            True AS _from0\r\n        FROM BaseDbContext.Companies AS T\r\n    ) A");
+            viewString.Append("S T1");
+            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.Company", viewString.ToString());
+        }
+        
+        /// <Summary>
+        /// return view for SMDModelStoreContainer.AspNetUserRoles
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView30()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.AspNetUserRoles", @"
     SELECT VALUE -- Constructing AspNetUserRoles
         [SMDModel.Store.AspNetUserRoles](T1.AspNetUserRoles_UserId, T1.AspNetUserRoles_RoleId)
     FROM (
         SELECT 
-            Key(T.AspNetUsers).Id AS AspNetUserRoles_UserId, 
-            Key(T.AspNetRoles).Id AS AspNetUserRoles_RoleId, 
+            Key(T.AspNetUser).Id AS AspNetUserRoles_UserId, 
+            Key(T.Role).Id AS AspNetUserRoles_RoleId, 
             True AS _from0
         FROM BaseDbContext.AspNetUserRoles AS T
     ) AS T1");
@@ -1097,7 +1139,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.Roles
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView30()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView31()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.Roles", @"
     SELECT VALUE -- Constructing Roles
@@ -1114,7 +1156,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.UserLogins
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView31()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView32()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.UserLogins", @"
     SELECT VALUE -- Constructing UserLogins
@@ -1127,70 +1169,6 @@ namespace Edm_EntityMappingGeneratedViews
             True AS _from0
         FROM SMDModelStoreContainer.AspNetUserLogins AS T
     ) AS T1");
-        }
-        
-        /// <Summary>
-        /// return view for BaseDbContext.Users
-        /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView32()
-        {
-            System.Text.StringBuilder viewString = new System.Text.StringBuilder(4347);
-            viewString.Append("\r\n    SELECT VALUE -- Constructing Users\r\n        [DomainModels.User](T1.User_Id");
-            viewString.Append(", T1.User_Email, T1.User_EmailConfirmed, T1.User_PasswordHash, T1.User_SecurityS");
-            viewString.Append("tamp, T1.User_PhoneNumber, T1.User_PhoneNumberConfirmed, T1.User_TwoFactorEnable");
-            viewString.Append("d, T1.User_LockoutEndDateUtc, T1.User_LockoutEnabled, T1.User_AccessFailedCount,");
-            viewString.Append(" T1.User_UserName, T1.User_FullName, T1.User_AlternateEmail, T1.User_IsEmailVeri");
-            viewString.Append("fied, T1.User_Status, T1.User_CreatedDateTime, T1.User_ModifiedDateTime, T1.User");
-            viewString.Append("_LastLoginTime, T1.User_Phone1, T1.User_Phone2, T1.User_Jobtitle, T1.User_Contac");
-            viewString.Append("tNotes, T1.User_IsSubscribed, T1.User_AppId, T1.User_CompanyName, T1.User_SalesE");
-            viewString.Append("mail, T1.User_CompanyRepresentative, T1.User_Address1, T1.User_Address2, T1.User");
-            viewString.Append("_CityId, T1.User_CountryId, T1.User_State, T1.User_ZipCode, T1.User_UserTimeZone");
-            viewString.Append(", T1.User_ReferralCode, T1.User_AfilliatianStatus, T1.User_ChargeBeesubscription");
-            viewString.Append("Id, T1.User_RegisteredViaReferral, T1.User_ReferringUserId, T1.User_Gender, T1.U");
-            viewString.Append("ser_StripeCustomerId, T1.User_LanguageId, T1.User_IndustryId, T1.User_EducationI");
-            viewString.Append("d, T1.User_ProfileImage, T1.User_UserCode, T1.User_SmsCode, T1.User_WebsiteLink,");
-            viewString.Append(" T1.User_AdvertisingContact, T1.User_AdvertisingContactPhoneNumber, T1.User_Adve");
-            viewString.Append("rtisingContactEmail, T1.User_PaypalCustomerId, T1.User_GoogleWalletCustomerId, T");
-            viewString.Append("1.User_PreferredPayoutAccount, T1.User_DOB)\r\n    FROM (\r\n        SELECT \r\n      ");
-            viewString.Append("      T.Id AS User_Id, \r\n            T.Email AS User_Email, \r\n            T.Emai");
-            viewString.Append("lConfirmed AS User_EmailConfirmed, \r\n            T.PasswordHash AS User_Password");
-            viewString.Append("Hash, \r\n            T.SecurityStamp AS User_SecurityStamp, \r\n            T.Phone");
-            viewString.Append("Number AS User_PhoneNumber, \r\n            T.PhoneNumberConfirmed AS User_PhoneNu");
-            viewString.Append("mberConfirmed, \r\n            T.TwoFactorEnabled AS User_TwoFactorEnabled, \r\n    ");
-            viewString.Append("        T.LockoutEndDateUtc AS User_LockoutEndDateUtc, \r\n            T.LockoutEn");
-            viewString.Append("abled AS User_LockoutEnabled, \r\n            T.AccessFailedCount AS User_AccessFa");
-            viewString.Append("iledCount, \r\n            T.UserName AS User_UserName, \r\n            T.FullName A");
-            viewString.Append("S User_FullName, \r\n            T.AlternateEmail AS User_AlternateEmail, \r\n      ");
-            viewString.Append("      T.IsEmailVerified AS User_IsEmailVerified, \r\n            T.Status AS User_");
-            viewString.Append("Status, \r\n            T.CreatedDateTime AS User_CreatedDateTime, \r\n            T");
-            viewString.Append(".ModifiedDateTime AS User_ModifiedDateTime, \r\n            T.LastLoginTime AS Use");
-            viewString.Append("r_LastLoginTime, \r\n            T.Phone1 AS User_Phone1, \r\n            T.Phone2 A");
-            viewString.Append("S User_Phone2, \r\n            T.Jobtitle AS User_Jobtitle, \r\n            T.Contac");
-            viewString.Append("tNotes AS User_ContactNotes, \r\n            T.IsSubscribed AS User_IsSubscribed, ");
-            viewString.Append("\r\n            T.AppID AS User_AppId, \r\n            T.CompanyName AS User_Company");
-            viewString.Append("Name, \r\n            T.SalesEmail AS User_SalesEmail, \r\n            T.CompanyRepr");
-            viewString.Append("esentative AS User_CompanyRepresentative, \r\n            T.Address1 AS User_Addre");
-            viewString.Append("ss1, \r\n            T.Address2 AS User_Address2, \r\n            T.CityID AS User_C");
-            viewString.Append("ityId, \r\n            T.CountryID AS User_CountryId, \r\n            T.State AS Use");
-            viewString.Append("r_State, \r\n            T.ZipCode AS User_ZipCode, \r\n            T.UserTimeZone A");
-            viewString.Append("S User_UserTimeZone, \r\n            T.ReferralCode AS User_ReferralCode, \r\n      ");
-            viewString.Append("      T.AfilliatianStatus AS User_AfilliatianStatus, \r\n            T.ChargeBeesu");
-            viewString.Append("bscriptionID AS User_ChargeBeesubscriptionId, \r\n            T.RegisteredViaRefer");
-            viewString.Append("ral AS User_RegisteredViaReferral, \r\n            T.ReferringUserID AS User_Refer");
-            viewString.Append("ringUserId, \r\n            T.Gender AS User_Gender, \r\n            T.StripeCustome");
-            viewString.Append("rId AS User_StripeCustomerId, \r\n            T.LanguageID AS User_LanguageId, \r\n ");
-            viewString.Append("           T.IndustryID AS User_IndustryId, \r\n            T.EducationId AS User_");
-            viewString.Append("EducationId, \r\n            T.ProfileImage AS User_ProfileImage, \r\n            T.");
-            viewString.Append("UserCode AS User_UserCode, \r\n            T.SmsCode AS User_SmsCode, \r\n          ");
-            viewString.Append("  T.WebsiteLink AS User_WebsiteLink, \r\n            T.AdvertisingContact AS User_");
-            viewString.Append("AdvertisingContact, \r\n            T.AdvertisingContactPhoneNumber AS User_Advert");
-            viewString.Append("isingContactPhoneNumber, \r\n            T.AdvertisingContactEmail AS User_Adverti");
-            viewString.Append("singContactEmail, \r\n            T.PaypalCustomerId AS User_PaypalCustomerId, \r\n ");
-            viewString.Append("           T.GoogleWalletCustomerId AS User_GoogleWalletCustomerId, \r\n          ");
-            viewString.Append("  T.PreferredPayoutAccount AS User_PreferredPayoutAccount, \r\n            T.DOB A");
-            viewString.Append("S User_DOB, \r\n            True AS _from0\r\n        FROM SMDModelStoreContainer.As");
-            viewString.Append("pNetUsers AS T\r\n    ) AS T1");
-            return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.Users", viewString.ToString());
         }
         
         /// <Summary>
@@ -1270,29 +1248,9 @@ namespace Edm_EntityMappingGeneratedViews
         }
         
         /// <Summary>
-        /// return view for BaseDbContext.ProfileQuestionUserAnswers
-        /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView36()
-        {
-            return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.ProfileQuestionUserAnswers", @"
-    SELECT VALUE -- Constructing ProfileQuestionUserAnswers
-        [DomainModels.ProfileQuestionUserAnswer](T1.ProfileQuestionUserAnswer_PquAnswerId, T1.ProfileQuestionUserAnswer_PqId, T1.ProfileQuestionUserAnswer_UserId, T1.ProfileQuestionUserAnswer_AnswerDateTime, T1.ProfileQuestionUserAnswer_PqAnswerId)
-    FROM (
-        SELECT 
-            T.PQUAnswerID AS ProfileQuestionUserAnswer_PquAnswerId, 
-            T.PQID AS ProfileQuestionUserAnswer_PqId, 
-            T.UserID AS ProfileQuestionUserAnswer_UserId, 
-            T.AnswerDateTime AS ProfileQuestionUserAnswer_AnswerDateTime, 
-            T.PQAnswerID AS ProfileQuestionUserAnswer_PqAnswerId, 
-            True AS _from0
-        FROM SMDModelStoreContainer.ProfileQuestionUserAnswer AS T
-    ) AS T1");
-        }
-        
-        /// <Summary>
         /// return view for BaseDbContext.UserClaims
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView37()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView36()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.UserClaims", @"
     SELECT VALUE -- Constructing UserClaims
@@ -1311,7 +1269,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.Countries
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView38()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView37()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.Countries", @"
     SELECT VALUE -- Constructing Countries
@@ -1329,7 +1287,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.Languages
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView39()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView38()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.Languages", @"
     SELECT VALUE -- Constructing Languages
@@ -1345,98 +1303,9 @@ namespace Edm_EntityMappingGeneratedViews
         }
         
         /// <Summary>
-        /// return view for BaseDbContext.AdCampaigns
-        /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView40()
-        {
-            System.Text.StringBuilder viewString = new System.Text.StringBuilder(4579);
-            viewString.Append("\r\n    SELECT VALUE -- Constructing AdCampaigns\r\n        [DomainModels.AdCampaign");
-            viewString.Append("](T1.AdCampaign_CampaignId, T1.AdCampaign_LanguageId, T1.AdCampaign_UserId, T1.A");
-            viewString.Append("dCampaign_SmdCampaign, T1.AdCampaign_CampaignName, T1.AdCampaign_CampaignDescrip");
-            viewString.Append("tion, T1.AdCampaign_Status, T1.AdCampaign_Archived, T1.AdCampaign_Approved, T1.A");
-            viewString.Append("dCampaign_ApprovedBy, T1.AdCampaign_ApprovalDateTime, T1.AdCampaign_StartDateTim");
-            viewString.Append("e, T1.AdCampaign_EndDateTime, T1.AdCampaign_MaxBudget, T1.AdCampaign_Type, T1.Ad");
-            viewString.Append("Campaign_ClickRate, T1.AdCampaign_SmdCredits, T1.AdCampaign_DisplayTitle, T1.AdC");
-            viewString.Append("ampaign_Description, T1.AdCampaign_ImagePath, T1.AdCampaign_LandingPageVideoLink");
-            viewString.Append(", T1.AdCampaign_VerifyQuestion, T1.AdCampaign_Answer1, T1.AdCampaign_Answer2, T1");
-            viewString.Append(".AdCampaign_Answer3, T1.AdCampaign_CorrectAnswer, T1.AdCampaign_CreatedDateTime,");
-            viewString.Append(" T1.AdCampaign_CreatedBy, T1.AdCampaign_ModifiedDateTime, T1.AdCampaign_Modified");
-            viewString.Append("By, T1.AdCampaign_AgeRangeStart, T1.AdCampaign_AgeRangeEnd, T1.AdCampaign_Gender");
-            viewString.Append(", T1.AdCampaign_RejectedReason, T1.AdCampaign_ProjectedReach, T1.AdCampaign_Resu");
-            viewString.Append("ltClicks, T1.AdCampaign_AmountSpent, T1.AdCampaign_RewardType, T1.AdCampaign_Vou");
-            viewString.Append("cher1Heading, T1.AdCampaign_Voucher1Description, T1.AdCampaign_Voucher1Value, T1");
-            viewString.Append(".AdCampaign_Voucher2Heading, T1.AdCampaign_Voucher2Description, T1.AdCampaign_Vo");
-            viewString.Append("ucher2Value, T1.AdCampaign_Voucher1ImagePath, T1.AdCampaign_Voucher2ImagePath, T");
-            viewString.Append("1.AdCampaign_VideoUrl, T1.AdCampaign_BuuyItLine1, T1.AdCampaign_BuyItLine2, T1.A");
-            viewString.Append("dCampaign_BuyItLine3, T1.AdCampaign_BuyItButtonLabel, T1.AdCampaign_BuyItImageUr");
-            viewString.Append("l)\r\n    FROM (\r\n        SELECT \r\n            T.CampaignID AS AdCampaign_Campaign");
-            viewString.Append("Id, \r\n            T.LanguageID AS AdCampaign_LanguageId, \r\n            T.UserID ");
-            viewString.Append("AS AdCampaign_UserId, \r\n            T.SMDCampaign AS AdCampaign_SmdCampaign, \r\n ");
-            viewString.Append("           T.CampaignName AS AdCampaign_CampaignName, \r\n            T.CampaignDe");
-            viewString.Append("scription AS AdCampaign_CampaignDescription, \r\n            T.Status AS AdCampaig");
-            viewString.Append("n_Status, \r\n            T.Archived AS AdCampaign_Archived, \r\n            T.Appro");
-            viewString.Append("ved AS AdCampaign_Approved, \r\n            T.ApprovedBy AS AdCampaign_ApprovedBy,");
-            viewString.Append(" \r\n            T.ApprovalDateTime AS AdCampaign_ApprovalDateTime, \r\n            ");
-            viewString.Append("T.StartDateTime AS AdCampaign_StartDateTime, \r\n            T.EndDateTime AS AdCa");
-            viewString.Append("mpaign_EndDateTime, \r\n            T.MaxBudget AS AdCampaign_MaxBudget, \r\n       ");
-            viewString.Append("     T.Type AS AdCampaign_Type, \r\n            T.ClickRate AS AdCampaign_ClickRat");
-            viewString.Append("e, \r\n            T.SMDCredits AS AdCampaign_SmdCredits, \r\n            T.DisplayT");
-            viewString.Append("itle AS AdCampaign_DisplayTitle, \r\n            T.Description AS AdCampaign_Descr");
-            viewString.Append("iption, \r\n            T.ImagePath AS AdCampaign_ImagePath, \r\n            T.Landi");
-            viewString.Append("ngPageVideoLink AS AdCampaign_LandingPageVideoLink, \r\n            T.VerifyQuesti");
-            viewString.Append("on AS AdCampaign_VerifyQuestion, \r\n            T.Answer1 AS AdCampaign_Answer1, ");
-            viewString.Append("\r\n            T.Answer2 AS AdCampaign_Answer2, \r\n            T.Answer3 AS AdCamp");
-            viewString.Append("aign_Answer3, \r\n            T.CorrectAnswer AS AdCampaign_CorrectAnswer, \r\n     ");
-            viewString.Append("       T.CreatedDateTime AS AdCampaign_CreatedDateTime, \r\n            T.CreatedB");
-            viewString.Append("y AS AdCampaign_CreatedBy, \r\n            T.ModifiedDateTime AS AdCampaign_Modifi");
-            viewString.Append("edDateTime, \r\n            T.ModifiedBy AS AdCampaign_ModifiedBy, \r\n            T");
-            viewString.Append(".AgeRangeStart AS AdCampaign_AgeRangeStart, \r\n            T.AgeRangeEnd AS AdCam");
-            viewString.Append("paign_AgeRangeEnd, \r\n            T.Gender AS AdCampaign_Gender, \r\n            T.");
-            viewString.Append("RejectedReason AS AdCampaign_RejectedReason, \r\n            T.ProjectedReach AS A");
-            viewString.Append("dCampaign_ProjectedReach, \r\n            T.ResultClicks AS AdCampaign_ResultClick");
-            viewString.Append("s, \r\n            T.AmountSpent AS AdCampaign_AmountSpent, \r\n            T.Reward");
-            viewString.Append("Type AS AdCampaign_RewardType, \r\n            T.Voucher1Heading AS AdCampaign_Vou");
-            viewString.Append("cher1Heading, \r\n            T.Voucher1Description AS AdCampaign_Voucher1Descript");
-            viewString.Append("ion, \r\n            T.Voucher1Value AS AdCampaign_Voucher1Value, \r\n            T.");
-            viewString.Append("Voucher2Heading AS AdCampaign_Voucher2Heading, \r\n            T.Voucher2Descripti");
-            viewString.Append("on AS AdCampaign_Voucher2Description, \r\n            T.Voucher2Value AS AdCampaig");
-            viewString.Append("n_Voucher2Value, \r\n            T.Voucher1ImagePath AS AdCampaign_Voucher1ImagePa");
-            viewString.Append("th, \r\n            T.Voucher2ImagePath AS AdCampaign_Voucher2ImagePath, \r\n       ");
-            viewString.Append("     T.VideoUrl AS AdCampaign_VideoUrl, \r\n            T.BuuyItLine1 AS AdCampaig");
-            viewString.Append("n_BuuyItLine1, \r\n            T.BuyItLine2 AS AdCampaign_BuyItLine2, \r\n          ");
-            viewString.Append("  T.BuyItLine3 AS AdCampaign_BuyItLine3, \r\n            T.BuyItButtonLabel AS AdC");
-            viewString.Append("ampaign_BuyItButtonLabel, \r\n            T.BuyItImageUrl AS AdCampaign_BuyItImage");
-            viewString.Append("Url, \r\n            True AS _from0\r\n        FROM SMDModelStoreContainer.AdCampaig");
-            viewString.Append("n AS T\r\n    ) AS T1");
-            return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.AdCampaigns", viewString.ToString());
-        }
-        
-        /// <Summary>
-        /// return view for BaseDbContext.AdCampaignResponses
-        /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView41()
-        {
-            return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.AdCampaignResponses", @"
-    SELECT VALUE -- Constructing AdCampaignResponses
-        [DomainModels.AdCampaignResponse](T1.AdCampaignResponse_ResponseId, T1.AdCampaignResponse_CampaignId, T1.AdCampaignResponse_CreatedDateTime, T1.AdCampaignResponse_UserId, T1.AdCampaignResponse_EndUserDollarAmount, T1.AdCampaignResponse_SkipCount, T1.AdCampaignResponse_UserSelection)
-    FROM (
-        SELECT 
-            T.ResponseID AS AdCampaignResponse_ResponseId, 
-            T.CampaignID AS AdCampaignResponse_CampaignId, 
-            T.CreatedDateTime AS AdCampaignResponse_CreatedDateTime, 
-            T.UserID AS AdCampaignResponse_UserId, 
-            T.EndUserDollarAmount AS AdCampaignResponse_EndUserDollarAmount, 
-            T.SkipCount AS AdCampaignResponse_SkipCount, 
-            T.UserSelection AS AdCampaignResponse_UserSelection, 
-            True AS _from0
-        FROM SMDModelStoreContainer.AdCampaignResponse AS T
-    ) AS T1");
-        }
-        
-        /// <Summary>
         /// return view for BaseDbContext.AdCampaignTargetLocations
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView42()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView39()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.AdCampaignTargetLocations", @"
     SELECT VALUE -- Constructing AdCampaignTargetLocations
@@ -1455,59 +1324,9 @@ namespace Edm_EntityMappingGeneratedViews
         }
         
         /// <Summary>
-        /// return view for BaseDbContext.SurveyQuestions
-        /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView43()
-        {
-            System.Text.StringBuilder viewString = new System.Text.StringBuilder(3201);
-            viewString.Append("\r\n    SELECT VALUE -- Constructing SurveyQuestions\r\n        [DomainModels.Survey");
-            viewString.Append("Question](T1.SurveyQuestion_SqId, T1.SurveyQuestion_LanguageId, T1.SurveyQuestio");
-            viewString.Append("n_CountryId, T1.SurveyQuestion_Type, T1.SurveyQuestion_UserId, T1.SurveyQuestion");
-            viewString.Append("_Question, T1.SurveyQuestion_Description, T1.SurveyQuestion_RepeatPeriod, T1.Sur");
-            viewString.Append("veyQuestion_DisplayQuestion, T1.SurveyQuestion_StartDate, T1.SurveyQuestion_EndD");
-            viewString.Append("ate, T1.SurveyQuestion_Approved, T1.SurveyQuestion_ApprovedByUserId, T1.SurveyQu");
-            viewString.Append("estion_ApprovalDate, T1.SurveyQuestion_CreationDate, T1.SurveyQuestion_ModifiedD");
-            viewString.Append("ate, T1.SurveyQuestion_CreatedBy, T1.SurveyQuestion_ModifiedBy, T1.SurveyQuestio");
-            viewString.Append("n_LeftPicturePath, T1.SurveyQuestion_RightPicturePath, T1.SurveyQuestion_Discoun");
-            viewString.Append("tVoucherApplied, T1.SurveyQuestion_VoucherCode, T1.SurveyQuestion_DiscountVouche");
-            viewString.Append("rId, T1.SurveyQuestion_RejectionReason, T1.SurveyQuestion_Status, T1.SurveyQuest");
-            viewString.Append("ion_ProjectedReach, T1.SurveyQuestion_ResultClicks, T1.SurveyQuestion_AgeRangeSt");
-            viewString.Append("art, T1.SurveyQuestion_AgeRangeEnd, T1.SurveyQuestion_Gender, T1.SurveyQuestion_");
-            viewString.Append("SubmissionDate, T1.SurveyQuestion_ParentSurveyId, T1.SurveyQuestion_Priority)\r\n ");
-            viewString.Append("   FROM (\r\n        SELECT \r\n            T.SQID AS SurveyQuestion_SqId, \r\n       ");
-            viewString.Append("     T.LanguageID AS SurveyQuestion_LanguageId, \r\n            T.CountryID AS Sur");
-            viewString.Append("veyQuestion_CountryId, \r\n            T.Type AS SurveyQuestion_Type, \r\n          ");
-            viewString.Append("  T.UserID AS SurveyQuestion_UserId, \r\n            T.Question AS SurveyQuestion_");
-            viewString.Append("Question, \r\n            T.Description AS SurveyQuestion_Description, \r\n         ");
-            viewString.Append("   T.RepeatPeriod AS SurveyQuestion_RepeatPeriod, \r\n            T.DisplayQuestio");
-            viewString.Append("n AS SurveyQuestion_DisplayQuestion, \r\n            T.StartDate AS SurveyQuestion");
-            viewString.Append("_StartDate, \r\n            T.EndDate AS SurveyQuestion_EndDate, \r\n            T.A");
-            viewString.Append("pproved AS SurveyQuestion_Approved, \r\n            T.ApprovedByUserID AS SurveyQu");
-            viewString.Append("estion_ApprovedByUserId, \r\n            T.ApprovalDate AS SurveyQuestion_Approval");
-            viewString.Append("Date, \r\n            T.CreationDate AS SurveyQuestion_CreationDate, \r\n           ");
-            viewString.Append(" T.ModifiedDate AS SurveyQuestion_ModifiedDate, \r\n            T.CreatedBy AS Sur");
-            viewString.Append("veyQuestion_CreatedBy, \r\n            T.ModifiedBy AS SurveyQuestion_ModifiedBy, ");
-            viewString.Append("\r\n            T.LeftPicturePath AS SurveyQuestion_LeftPicturePath, \r\n           ");
-            viewString.Append(" T.RightPicturePath AS SurveyQuestion_RightPicturePath, \r\n            T.Discount");
-            viewString.Append("VoucherApplied AS SurveyQuestion_DiscountVoucherApplied, \r\n            T.Voucher");
-            viewString.Append("Code AS SurveyQuestion_VoucherCode, \r\n            T.DiscountVoucherID AS SurveyQ");
-            viewString.Append("uestion_DiscountVoucherId, \r\n            T.RejectionReason AS SurveyQuestion_Rej");
-            viewString.Append("ectionReason, \r\n            T.Status AS SurveyQuestion_Status, \r\n            T.P");
-            viewString.Append("rojectedReach AS SurveyQuestion_ProjectedReach, \r\n            T.ResultClicks AS ");
-            viewString.Append("SurveyQuestion_ResultClicks, \r\n            T.AgeRangeStart AS SurveyQuestion_Age");
-            viewString.Append("RangeStart, \r\n            T.AgeRangeEnd AS SurveyQuestion_AgeRangeEnd, \r\n       ");
-            viewString.Append("     T.Gender AS SurveyQuestion_Gender, \r\n            T.SubmissionDate AS Survey");
-            viewString.Append("Question_SubmissionDate, \r\n            T.ParentSurveyId AS SurveyQuestion_Parent");
-            viewString.Append("SurveyId, \r\n            T.Priority AS SurveyQuestion_Priority, \r\n            Tru");
-            viewString.Append("e AS _from0\r\n        FROM SMDModelStoreContainer.SurveyQuestion AS T\r\n    ) AS T");
-            viewString.Append("1");
-            return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.SurveyQuestions", viewString.ToString());
-        }
-        
-        /// <Summary>
         /// return view for BaseDbContext.SurveyQuestionTargetCriterias
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView44()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView40()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.SurveyQuestionTargetCriterias", @"
     SELECT VALUE -- Constructing SurveyQuestionTargetCriterias
@@ -1533,7 +1352,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.SurveyQuestionTargetLocations
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView45()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView41()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.SurveyQuestionTargetLocations", @"
     SELECT VALUE -- Constructing SurveyQuestionTargetLocations
@@ -1552,30 +1371,9 @@ namespace Edm_EntityMappingGeneratedViews
         }
         
         /// <Summary>
-        /// return view for BaseDbContext.SurveyQuestionResponses
-        /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView46()
-        {
-            return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.SurveyQuestionResponses", @"
-    SELECT VALUE -- Constructing SurveyQuestionResponses
-        [DomainModels.SurveyQuestionResponse](T1.SurveyQuestionResponse_SqResponseId, T1.SurveyQuestionResponse_SqId, T1.SurveyQuestionResponse_UserId, T1.SurveyQuestionResponse_ResoponseDateTime, T1.SurveyQuestionResponse_UserSelection, T1.SurveyQuestionResponse_SkipCount)
-    FROM (
-        SELECT 
-            T.SQResponseID AS SurveyQuestionResponse_SqResponseId, 
-            T.SQID AS SurveyQuestionResponse_SqId, 
-            T.UserID AS SurveyQuestionResponse_UserId, 
-            T.ResoponseDateTime AS SurveyQuestionResponse_ResoponseDateTime, 
-            T.UserSelection AS SurveyQuestionResponse_UserSelection, 
-            T.SkipCount AS SurveyQuestionResponse_SkipCount, 
-            True AS _from0
-        FROM SMDModelStoreContainer.SurveyQuestionResponse AS T
-    ) AS T1");
-        }
-        
-        /// <Summary>
         /// return view for BaseDbContext.Cities
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView47()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView42()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.Cities", @"
     SELECT VALUE -- Constructing Cities
@@ -1596,7 +1394,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.Industries
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView48()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView43()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.Industries", @"
     SELECT VALUE -- Constructing Industries
@@ -1614,7 +1412,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.Currencies
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView49()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView44()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.Currencies", @"
     SELECT VALUE -- Constructing Currencies
@@ -1632,29 +1430,9 @@ namespace Edm_EntityMappingGeneratedViews
         }
         
         /// <Summary>
-        /// return view for BaseDbContext.Accounts
-        /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView50()
-        {
-            return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.Accounts", @"
-    SELECT VALUE -- Constructing Accounts
-        [DomainModels.Account](T1.Account_AccountId, T1.Account_AccountName, T1.Account_AccountType, T1.Account_AccountBalance, T1.Account_UserId)
-    FROM (
-        SELECT 
-            T.AccountId AS Account_AccountId, 
-            T.AccountName AS Account_AccountName, 
-            T.AccountType AS Account_AccountType, 
-            T.AccountBalance AS Account_AccountBalance, 
-            T.UserId AS Account_UserId, 
-            True AS _from0
-        FROM SMDModelStoreContainer.Account AS T
-    ) AS T1");
-        }
-        
-        /// <Summary>
         /// return view for BaseDbContext.Transactions
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView51()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView45()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.Transactions", @"
     SELECT VALUE -- Constructing Transactions
@@ -1682,40 +1460,9 @@ namespace Edm_EntityMappingGeneratedViews
         }
         
         /// <Summary>
-        /// return view for BaseDbContext.Invoices
-        /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView52()
-        {
-            return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.Invoices", @"
-    SELECT VALUE -- Constructing Invoices
-        [DomainModels.Invoice](T1.Invoice_InvoiceId, T1.Invoice_InvoiceDate, T1.Invoice_InvoiceDueDate, T1.Invoice_UserId, T1.Invoice_TaxPercentage, T1.Invoice_Total, T1.Invoice_NetTotal, T1.Invoice_TaxValue, T1.Invoice_CompanyName, T1.Invoice_Address1, T1.Invoice_Address2, T1.Invoice_City, T1.Invoice_State, T1.Invoice_Country, T1.Invoice_ZipCode, T1.Invoice_CreditCardRef)
-    FROM (
-        SELECT 
-            T.InvoiceId AS Invoice_InvoiceId, 
-            T.InvoiceDate AS Invoice_InvoiceDate, 
-            T.InvoiceDueDate AS Invoice_InvoiceDueDate, 
-            T.UserId AS Invoice_UserId, 
-            T.TaxPercentage AS Invoice_TaxPercentage, 
-            T.Total AS Invoice_Total, 
-            T.NetTotal AS Invoice_NetTotal, 
-            T.TaxValue AS Invoice_TaxValue, 
-            T.CompanyName AS Invoice_CompanyName, 
-            T.Address1 AS Invoice_Address1, 
-            T.Address2 AS Invoice_Address2, 
-            T.City AS Invoice_City, 
-            T.State AS Invoice_State, 
-            T.Country AS Invoice_Country, 
-            T.ZipCode AS Invoice_ZipCode, 
-            T.CreditCardRef AS Invoice_CreditCardRef, 
-            True AS _from0
-        FROM SMDModelStoreContainer.Invoice AS T
-    ) AS T1");
-        }
-        
-        /// <Summary>
         /// return view for BaseDbContext.InvoiceDetails
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView53()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView46()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.InvoiceDetails", @"
     SELECT VALUE -- Constructing InvoiceDetails
@@ -1740,7 +1487,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.Taxes
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView54()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView47()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.Taxes", @"
     SELECT VALUE -- Constructing Taxes
@@ -1759,7 +1506,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.Educations
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView55()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView48()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.Educations", @"
     SELECT VALUE -- Constructing Educations
@@ -1777,7 +1524,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.Products
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView56()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView49()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.Products", @"
     SELECT VALUE -- Constructing Products
@@ -1805,35 +1552,9 @@ namespace Edm_EntityMappingGeneratedViews
         }
         
         /// <Summary>
-        /// return view for BaseDbContext.AdCampaignTargetCriterias
-        /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView57()
-        {
-            return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.AdCampaignTargetCriterias", @"
-    SELECT VALUE -- Constructing AdCampaignTargetCriterias
-        [DomainModels.AdCampaignTargetCriteria](T1.AdCampaignTargetCriteria_CriteriaId, T1.AdCampaignTargetCriteria_CampaignId, T1.AdCampaignTargetCriteria_Type, T1.AdCampaignTargetCriteria_PqId, T1.AdCampaignTargetCriteria_PqAnswerId, T1.AdCampaignTargetCriteria_SqId, T1.AdCampaignTargetCriteria_SqAnswer, T1.AdCampaignTargetCriteria_IncludeorExclude, T1.AdCampaignTargetCriteria_LanguageId, T1.AdCampaignTargetCriteria_IndustryId, T1.AdCampaignTargetCriteria_EducationId)
-    FROM (
-        SELECT 
-            T.CriteriaID AS AdCampaignTargetCriteria_CriteriaId, 
-            T.CampaignID AS AdCampaignTargetCriteria_CampaignId, 
-            T.Type AS AdCampaignTargetCriteria_Type, 
-            T.PQID AS AdCampaignTargetCriteria_PqId, 
-            T.PQAnswerID AS AdCampaignTargetCriteria_PqAnswerId, 
-            T.SQID AS AdCampaignTargetCriteria_SqId, 
-            T.SQAnswer AS AdCampaignTargetCriteria_SqAnswer, 
-            T.IncludeorExclude AS AdCampaignTargetCriteria_IncludeorExclude, 
-            T.LanguageID AS AdCampaignTargetCriteria_LanguageId, 
-            T.IndustryID AS AdCampaignTargetCriteria_IndustryId, 
-            T.EducationID AS AdCampaignTargetCriteria_EducationId, 
-            True AS _from0
-        FROM SMDModelStoreContainer.AdCampaignTargetCriteria AS T
-    ) AS T1");
-        }
-        
-        /// <Summary>
         /// return view for BaseDbContext.TransactionLogs
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView58()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView50()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.TransactionLogs", @"
     SELECT VALUE -- Constructing TransactionLogs
@@ -1855,25 +1576,389 @@ namespace Edm_EntityMappingGeneratedViews
         }
         
         /// <Summary>
-        /// return view for BaseDbContext.AspNetUserRoles
+        /// return view for BaseDbContext.Accounts
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView51()
+        {
+            return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.Accounts", @"
+    SELECT VALUE -- Constructing Accounts
+        [DomainModels.Account](T1.Account_AccountId, T1.Account_AccountName, T1.Account_AccountType, T1.Account_AccountBalance, T1.Account_CompanyId)
+    FROM (
+        SELECT 
+            T.AccountId AS Account_AccountId, 
+            T.AccountName AS Account_AccountName, 
+            T.AccountType AS Account_AccountType, 
+            T.AccountBalance AS Account_AccountBalance, 
+            T.CompanyId AS Account_CompanyId, 
+            True AS _from0
+        FROM SMDModelStoreContainer.Account AS T
+    ) AS T1");
+        }
+        
+        /// <Summary>
+        /// return view for BaseDbContext.AdCampaigns
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView52()
+        {
+            System.Text.StringBuilder viewString = new System.Text.StringBuilder(5037);
+            viewString.Append("\r\n    SELECT VALUE -- Constructing AdCampaigns\r\n        [DomainModels.AdCampaign");
+            viewString.Append("](T1.AdCampaign_CampaignID, T1.AdCampaign_LanguageID, T1.AdCampaign_UserID, T1.A");
+            viewString.Append("dCampaign_SMDCampaign, T1.AdCampaign_CampaignName, T1.AdCampaign_CampaignDescrip");
+            viewString.Append("tion, T1.AdCampaign_Status, T1.AdCampaign_Archived, T1.AdCampaign_Approved, T1.A");
+            viewString.Append("dCampaign_ApprovedBy, T1.AdCampaign_ApprovalDateTime, T1.AdCampaign_StartDateTim");
+            viewString.Append("e, T1.AdCampaign_EndDateTime, T1.AdCampaign_MaxBudget, T1.AdCampaign_Type, T1.Ad");
+            viewString.Append("Campaign_ClickRate, T1.AdCampaign_SMDCredits, T1.AdCampaign_DisplayTitle, T1.AdC");
+            viewString.Append("ampaign_Description, T1.AdCampaign_ImagePath, T1.AdCampaign_LandingPageVideoLink");
+            viewString.Append(", T1.AdCampaign_VerifyQuestion, T1.AdCampaign_Answer1, T1.AdCampaign_Answer2, T1");
+            viewString.Append(".AdCampaign_Answer3, T1.AdCampaign_CorrectAnswer, T1.AdCampaign_CreatedDateTime,");
+            viewString.Append(" T1.AdCampaign_CreatedBy, T1.AdCampaign_ModifiedDateTime, T1.AdCampaign_Modified");
+            viewString.Append("By, T1.AdCampaign_AgeRangeStart, T1.AdCampaign_AgeRangeEnd, T1.AdCampaign_Gender");
+            viewString.Append(", T1.AdCampaign_RejectedReason, T1.AdCampaign_ProjectedReach, T1.AdCampaign_Resu");
+            viewString.Append("ltClicks, T1.AdCampaign_AmountSpent, T1.AdCampaign_RewardType, T1.AdCampaign_Vou");
+            viewString.Append("cher1Heading, T1.AdCampaign_Voucher1Description, T1.AdCampaign_Voucher1Value, T1");
+            viewString.Append(".AdCampaign_Voucher2Heading, T1.AdCampaign_Voucher2Description, T1.AdCampaign_Vo");
+            viewString.Append("ucher2Value, T1.AdCampaign_Voucher1ImagePath, T1.AdCampaign_Voucher2ImagePath, T");
+            viewString.Append("1.AdCampaign_VideoUrl, T1.AdCampaign_BuuyItLine1, T1.AdCampaign_BuyItLine2, T1.A");
+            viewString.Append("dCampaign_BuyItLine3, T1.AdCampaign_BuyItButtonLabel, T1.AdCampaign_BuyItImageUr");
+            viewString.Append("l, T1.AdCampaign_CouponSwapValue, T1.AdCampaign_CouponActualValue, T1.AdCampaign");
+            viewString.Append("_CouponTakenCount, T1.AdCampaign_CouponQuantity, T1.AdCampaign_CompanyId)\r\n    F");
+            viewString.Append("ROM (\r\n        SELECT \r\n            T.CampaignID AS AdCampaign_CampaignID, \r\n   ");
+            viewString.Append("         T.LanguageID AS AdCampaign_LanguageID, \r\n            T.UserID AS AdCamp");
+            viewString.Append("aign_UserID, \r\n            T.SMDCampaign AS AdCampaign_SMDCampaign, \r\n          ");
+            viewString.Append("  T.CampaignName AS AdCampaign_CampaignName, \r\n            T.CampaignDescription");
+            viewString.Append(" AS AdCampaign_CampaignDescription, \r\n            T.Status AS AdCampaign_Status,");
+            viewString.Append(" \r\n            T.Archived AS AdCampaign_Archived, \r\n            T.Approved AS Ad");
+            viewString.Append("Campaign_Approved, \r\n            T.ApprovedBy AS AdCampaign_ApprovedBy, \r\n      ");
+            viewString.Append("      T.ApprovalDateTime AS AdCampaign_ApprovalDateTime, \r\n            T.StartDa");
+            viewString.Append("teTime AS AdCampaign_StartDateTime, \r\n            T.EndDateTime AS AdCampaign_En");
+            viewString.Append("dDateTime, \r\n            T.MaxBudget AS AdCampaign_MaxBudget, \r\n            T.Ty");
+            viewString.Append("pe AS AdCampaign_Type, \r\n            T.ClickRate AS AdCampaign_ClickRate, \r\n    ");
+            viewString.Append("        T.SMDCredits AS AdCampaign_SMDCredits, \r\n            T.DisplayTitle AS A");
+            viewString.Append("dCampaign_DisplayTitle, \r\n            T.Description AS AdCampaign_Description, \r");
+            viewString.Append("\n            T.ImagePath AS AdCampaign_ImagePath, \r\n            T.LandingPageVid");
+            viewString.Append("eoLink AS AdCampaign_LandingPageVideoLink, \r\n            T.VerifyQuestion AS AdC");
+            viewString.Append("ampaign_VerifyQuestion, \r\n            T.Answer1 AS AdCampaign_Answer1, \r\n       ");
+            viewString.Append("     T.Answer2 AS AdCampaign_Answer2, \r\n            T.Answer3 AS AdCampaign_Answ");
+            viewString.Append("er3, \r\n            T.CorrectAnswer AS AdCampaign_CorrectAnswer, \r\n            T.");
+            viewString.Append("CreatedDateTime AS AdCampaign_CreatedDateTime, \r\n            T.CreatedBy AS AdCa");
+            viewString.Append("mpaign_CreatedBy, \r\n            T.ModifiedDateTime AS AdCampaign_ModifiedDateTim");
+            viewString.Append("e, \r\n            T.ModifiedBy AS AdCampaign_ModifiedBy, \r\n            T.AgeRange");
+            viewString.Append("Start AS AdCampaign_AgeRangeStart, \r\n            T.AgeRangeEnd AS AdCampaign_Age");
+            viewString.Append("RangeEnd, \r\n            T.Gender AS AdCampaign_Gender, \r\n            T.RejectedR");
+            viewString.Append("eason AS AdCampaign_RejectedReason, \r\n            T.ProjectedReach AS AdCampaign");
+            viewString.Append("_ProjectedReach, \r\n            T.ResultClicks AS AdCampaign_ResultClicks, \r\n    ");
+            viewString.Append("        T.AmountSpent AS AdCampaign_AmountSpent, \r\n            T.RewardType AS A");
+            viewString.Append("dCampaign_RewardType, \r\n            T.Voucher1Heading AS AdCampaign_Voucher1Head");
+            viewString.Append("ing, \r\n            T.Voucher1Description AS AdCampaign_Voucher1Description, \r\n  ");
+            viewString.Append("          T.Voucher1Value AS AdCampaign_Voucher1Value, \r\n            T.Voucher2H");
+            viewString.Append("eading AS AdCampaign_Voucher2Heading, \r\n            T.Voucher2Description AS AdC");
+            viewString.Append("ampaign_Voucher2Description, \r\n            T.Voucher2Value AS AdCampaign_Voucher");
+            viewString.Append("2Value, \r\n            T.Voucher1ImagePath AS AdCampaign_Voucher1ImagePath, \r\n   ");
+            viewString.Append("         T.Voucher2ImagePath AS AdCampaign_Voucher2ImagePath, \r\n            T.Vi");
+            viewString.Append("deoUrl AS AdCampaign_VideoUrl, \r\n            T.BuuyItLine1 AS AdCampaign_BuuyItL");
+            viewString.Append("ine1, \r\n            T.BuyItLine2 AS AdCampaign_BuyItLine2, \r\n            T.BuyIt");
+            viewString.Append("Line3 AS AdCampaign_BuyItLine3, \r\n            T.BuyItButtonLabel AS AdCampaign_B");
+            viewString.Append("uyItButtonLabel, \r\n            T.BuyItImageUrl AS AdCampaign_BuyItImageUrl, \r\n  ");
+            viewString.Append("          T.CouponSwapValue AS AdCampaign_CouponSwapValue, \r\n            T.Coupo");
+            viewString.Append("nActualValue AS AdCampaign_CouponActualValue, \r\n            T.CouponTakenCount A");
+            viewString.Append("S AdCampaign_CouponTakenCount, \r\n            T.CouponQuantity AS AdCampaign_Coup");
+            viewString.Append("onQuantity, \r\n            T.CompanyId AS AdCampaign_CompanyId, \r\n            Tru");
+            viewString.Append("e AS _from0\r\n        FROM SMDModelStoreContainer.AdCampaign AS T\r\n    ) AS T1");
+            return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.AdCampaigns", viewString.ToString());
+        }
+        
+        /// <Summary>
+        /// return view for BaseDbContext.AdCampaignResponses
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView53()
+        {
+            return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.AdCampaignResponses", @"
+    SELECT VALUE -- Constructing AdCampaignResponses
+        [DomainModels.AdCampaignResponse](T1.AdCampaignResponse_ResponseID, T1.AdCampaignResponse_CampaignID, T1.AdCampaignResponse_CreatedDateTime, T1.AdCampaignResponse_UserID, T1.AdCampaignResponse_EndUserDollarAmount, T1.AdCampaignResponse_SkipCount, T1.AdCampaignResponse_UserSelection, T1.AdCampaignResponse_CompanyId, T1.AdCampaignResponse_GameTime, T1.AdCampaignResponse_GameScore, T1.AdCampaignResponse_GameLevel, T1.AdCampaignResponse_GameId)
+    FROM (
+        SELECT 
+            T.ResponseID AS AdCampaignResponse_ResponseID, 
+            T.CampaignID AS AdCampaignResponse_CampaignID, 
+            T.CreatedDateTime AS AdCampaignResponse_CreatedDateTime, 
+            T.UserID AS AdCampaignResponse_UserID, 
+            T.EndUserDollarAmount AS AdCampaignResponse_EndUserDollarAmount, 
+            T.SkipCount AS AdCampaignResponse_SkipCount, 
+            T.UserSelection AS AdCampaignResponse_UserSelection, 
+            T.CompanyId AS AdCampaignResponse_CompanyId, 
+            T.GameTime AS AdCampaignResponse_GameTime, 
+            T.GameScore AS AdCampaignResponse_GameScore, 
+            T.GameLevel AS AdCampaignResponse_GameLevel, 
+            T.GameId AS AdCampaignResponse_GameId, 
+            True AS _from0
+        FROM SMDModelStoreContainer.AdCampaignResponse AS T
+    ) AS T1");
+        }
+        
+        /// <Summary>
+        /// return view for BaseDbContext.AdCampaignTargetCriterias
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView54()
+        {
+            return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.AdCampaignTargetCriterias", "\r\n    SELECT VALUE -- Constructing AdCampaignTargetCriterias\r\n        [DomainMode" +
+                    "ls.AdCampaignTargetCriteria](T1.AdCampaignTargetCriteria_CriteriaID, T1.AdCampai" +
+                    "gnTargetCriteria_CampaignID, T1.AdCampaignTargetCriteria_Type, T1.AdCampaignTarg" +
+                    "etCriteria_PQID, T1.AdCampaignTargetCriteria_PQAnswerID, T1.AdCampaignTargetCrit" +
+                    "eria_SQID, T1.AdCampaignTargetCriteria_SQAnswer, T1.AdCampaignTargetCriteria_Inc" +
+                    "ludeorExclude, T1.AdCampaignTargetCriteria_LanguageID, T1.AdCampaignTargetCriter" +
+                    "ia_IndustryID, T1.AdCampaignTargetCriteria_EducationID, T1.AdCampaignTargetCrite" +
+                    "ria_QuizCampaignId, T1.AdCampaignTargetCriteria_QuizAnswerId)\r\n    FROM (\r\n     " +
+                    "   SELECT \r\n            T.CriteriaID AS AdCampaignTargetCriteria_CriteriaID, \r\n " +
+                    "           T.CampaignID AS AdCampaignTargetCriteria_CampaignID, \r\n            T." +
+                    "Type AS AdCampaignTargetCriteria_Type, \r\n            T.PQID AS AdCampaignTargetC" +
+                    "riteria_PQID, \r\n            T.PQAnswerID AS AdCampaignTargetCriteria_PQAnswerID," +
+                    " \r\n            T.SQID AS AdCampaignTargetCriteria_SQID, \r\n            T.SQAnswer" +
+                    " AS AdCampaignTargetCriteria_SQAnswer, \r\n            T.IncludeorExclude AS AdCam" +
+                    "paignTargetCriteria_IncludeorExclude, \r\n            T.LanguageID AS AdCampaignTa" +
+                    "rgetCriteria_LanguageID, \r\n            T.IndustryID AS AdCampaignTargetCriteria_" +
+                    "IndustryID, \r\n            T.EducationID AS AdCampaignTargetCriteria_EducationID," +
+                    " \r\n            T.QuizCampaignId AS AdCampaignTargetCriteria_QuizCampaignId, \r\n  " +
+                    "          T.QuizAnswerId AS AdCampaignTargetCriteria_QuizAnswerId, \r\n           " +
+                    " True AS _from0\r\n        FROM SMDModelStoreContainer.AdCampaignTargetCriteria AS" +
+                    " T\r\n    ) AS T1");
+        }
+        
+        /// <Summary>
+        /// return view for BaseDbContext.AspNetUsers
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView55()
+        {
+            System.Text.StringBuilder viewString = new System.Text.StringBuilder(3662);
+            viewString.Append("\r\n    SELECT VALUE -- Constructing AspNetUsers\r\n        [DomainModels.AspNetUser");
+            viewString.Append("](T1.AspNetUser_Id, T1.AspNetUser_Email, T1.AspNetUser_EmailConfirmed, T1.AspNet");
+            viewString.Append("User_PasswordHash, T1.AspNetUser_SecurityStamp, T1.AspNetUser_PhoneNumber, T1.As");
+            viewString.Append("pNetUser_PhoneNumberConfirmed, T1.AspNetUser_TwoFactorEnabled, T1.AspNetUser_Loc");
+            viewString.Append("koutEndDateUtc, T1.AspNetUser_LockoutEnabled, T1.AspNetUser_AccessFailedCount, T");
+            viewString.Append("1.AspNetUser_UserName, T1.AspNetUser_FullName, T1.AspNetUser_AlternateEmail, T1.");
+            viewString.Append("AspNetUser_IsEmailVerified, T1.AspNetUser_Status, T1.AspNetUser_CreatedDateTime,");
+            viewString.Append(" T1.AspNetUser_ModifiedDateTime, T1.AspNetUser_LastLoginTime, T1.AspNetUser_Phon");
+            viewString.Append("e1, T1.AspNetUser_Phone2, T1.AspNetUser_Jobtitle, T1.AspNetUser_ContactNotes, T1");
+            viewString.Append(".AspNetUser_IsSubscribed, T1.AspNetUser_AppID, T1.AspNetUser_IsCompanyRepresenta");
+            viewString.Append("tive, T1.AspNetUser_Address1, T1.AspNetUser_Address2, T1.AspNetUser_CityID, T1.A");
+            viewString.Append("spNetUser_CountryID, T1.AspNetUser_State, T1.AspNetUser_ZipCode, T1.AspNetUser_U");
+            viewString.Append("serTimeZone, T1.AspNetUser_Gender, T1.AspNetUser_LanguageID, T1.AspNetUser_Indus");
+            viewString.Append("tryID, T1.AspNetUser_EducationId, T1.AspNetUser_ProfileImage, T1.AspNetUser_User");
+            viewString.Append("Code, T1.AspNetUser_SmsCode, T1.AspNetUser_WebsiteLink, T1.AspNetUser_DOB, T1.As");
+            viewString.Append("pNetUser_CompanyId)\r\n    FROM (\r\n        SELECT \r\n            T.Id AS AspNetUser");
+            viewString.Append("_Id, \r\n            T.Email AS AspNetUser_Email, \r\n            T.EmailConfirmed A");
+            viewString.Append("S AspNetUser_EmailConfirmed, \r\n            T.PasswordHash AS AspNetUser_Password");
+            viewString.Append("Hash, \r\n            T.SecurityStamp AS AspNetUser_SecurityStamp, \r\n            T");
+            viewString.Append(".PhoneNumber AS AspNetUser_PhoneNumber, \r\n            T.PhoneNumberConfirmed AS ");
+            viewString.Append("AspNetUser_PhoneNumberConfirmed, \r\n            T.TwoFactorEnabled AS AspNetUser_");
+            viewString.Append("TwoFactorEnabled, \r\n            T.LockoutEndDateUtc AS AspNetUser_LockoutEndDate");
+            viewString.Append("Utc, \r\n            T.LockoutEnabled AS AspNetUser_LockoutEnabled, \r\n            ");
+            viewString.Append("T.AccessFailedCount AS AspNetUser_AccessFailedCount, \r\n            T.UserName AS");
+            viewString.Append(" AspNetUser_UserName, \r\n            T.FullName AS AspNetUser_FullName, \r\n       ");
+            viewString.Append("     T.AlternateEmail AS AspNetUser_AlternateEmail, \r\n            T.IsEmailVerif");
+            viewString.Append("ied AS AspNetUser_IsEmailVerified, \r\n            T.Status AS AspNetUser_Status, ");
+            viewString.Append("\r\n            T.CreatedDateTime AS AspNetUser_CreatedDateTime, \r\n            T.M");
+            viewString.Append("odifiedDateTime AS AspNetUser_ModifiedDateTime, \r\n            T.LastLoginTime AS");
+            viewString.Append(" AspNetUser_LastLoginTime, \r\n            T.Phone1 AS AspNetUser_Phone1, \r\n      ");
+            viewString.Append("      T.Phone2 AS AspNetUser_Phone2, \r\n            T.Jobtitle AS AspNetUser_Jobt");
+            viewString.Append("itle, \r\n            T.ContactNotes AS AspNetUser_ContactNotes, \r\n            T.I");
+            viewString.Append("sSubscribed AS AspNetUser_IsSubscribed, \r\n            T.AppID AS AspNetUser_AppI");
+            viewString.Append("D, \r\n            T.IsCompanyRepresentative AS AspNetUser_IsCompanyRepresentative");
+            viewString.Append(", \r\n            T.Address1 AS AspNetUser_Address1, \r\n            T.Address2 AS A");
+            viewString.Append("spNetUser_Address2, \r\n            T.CityID AS AspNetUser_CityID, \r\n            T");
+            viewString.Append(".CountryID AS AspNetUser_CountryID, \r\n            T.State AS AspNetUser_State, \r");
+            viewString.Append("\n            T.ZipCode AS AspNetUser_ZipCode, \r\n            T.UserTimeZone AS As");
+            viewString.Append("pNetUser_UserTimeZone, \r\n            T.Gender AS AspNetUser_Gender, \r\n          ");
+            viewString.Append("  T.LanguageID AS AspNetUser_LanguageID, \r\n            T.IndustryID AS AspNetUse");
+            viewString.Append("r_IndustryID, \r\n            T.EducationId AS AspNetUser_EducationId, \r\n         ");
+            viewString.Append("   T.ProfileImage AS AspNetUser_ProfileImage, \r\n            T.UserCode AS AspNet");
+            viewString.Append("User_UserCode, \r\n            T.SmsCode AS AspNetUser_SmsCode, \r\n            T.We");
+            viewString.Append("bsiteLink AS AspNetUser_WebsiteLink, \r\n            T.DOB AS AspNetUser_DOB, \r\n  ");
+            viewString.Append("          T.CompanyId AS AspNetUser_CompanyId, \r\n            True AS _from0\r\n   ");
+            viewString.Append("     FROM SMDModelStoreContainer.AspNetUsers AS T\r\n    ) AS T1");
+            return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.AspNetUsers", viewString.ToString());
+        }
+        
+        /// <Summary>
+        /// return view for BaseDbContext.Invoices
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView56()
+        {
+            return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.Invoices", @"
+    SELECT VALUE -- Constructing Invoices
+        [DomainModels.Invoice](T1.Invoice_InvoiceId, T1.Invoice_InvoiceDate, T1.Invoice_InvoiceDueDate, T1.Invoice_TaxPercentage, T1.Invoice_Total, T1.Invoice_NetTotal, T1.Invoice_TaxValue, T1.Invoice_CompanyName, T1.Invoice_Address1, T1.Invoice_Address2, T1.Invoice_City, T1.Invoice_State, T1.Invoice_Country, T1.Invoice_ZipCode, T1.Invoice_CreditCardRef, T1.Invoice_CompanyId)
+    FROM (
+        SELECT 
+            T.InvoiceId AS Invoice_InvoiceId, 
+            T.InvoiceDate AS Invoice_InvoiceDate, 
+            T.InvoiceDueDate AS Invoice_InvoiceDueDate, 
+            T.TaxPercentage AS Invoice_TaxPercentage, 
+            T.Total AS Invoice_Total, 
+            T.NetTotal AS Invoice_NetTotal, 
+            T.TaxValue AS Invoice_TaxValue, 
+            T.CompanyName AS Invoice_CompanyName, 
+            T.Address1 AS Invoice_Address1, 
+            T.Address2 AS Invoice_Address2, 
+            T.City AS Invoice_City, 
+            T.State AS Invoice_State, 
+            T.Country AS Invoice_Country, 
+            T.ZipCode AS Invoice_ZipCode, 
+            T.CreditCardRef AS Invoice_CreditCardRef, 
+            T.CompanyId AS Invoice_CompanyId, 
+            True AS _from0
+        FROM SMDModelStoreContainer.Invoice AS T
+    ) AS T1");
+        }
+        
+        /// <Summary>
+        /// return view for BaseDbContext.ProfileQuestionUserAnswers
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView57()
+        {
+            return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.ProfileQuestionUserAnswers", @"
+    SELECT VALUE -- Constructing ProfileQuestionUserAnswers
+        [DomainModels.ProfileQuestionUserAnswer](T1.ProfileQuestionUserAnswer_PQUAnswerID, T1.ProfileQuestionUserAnswer_PQID, T1.ProfileQuestionUserAnswer_UserID, T1.ProfileQuestionUserAnswer_AnswerDateTime, T1.ProfileQuestionUserAnswer_PQAnswerID, T1.ProfileQuestionUserAnswer_CompanyId)
+    FROM (
+        SELECT 
+            T.PQUAnswerID AS ProfileQuestionUserAnswer_PQUAnswerID, 
+            T.PQID AS ProfileQuestionUserAnswer_PQID, 
+            T.UserID AS ProfileQuestionUserAnswer_UserID, 
+            T.AnswerDateTime AS ProfileQuestionUserAnswer_AnswerDateTime, 
+            T.PQAnswerID AS ProfileQuestionUserAnswer_PQAnswerID, 
+            T.CompanyId AS ProfileQuestionUserAnswer_CompanyId, 
+            True AS _from0
+        FROM SMDModelStoreContainer.ProfileQuestionUserAnswer AS T
+    ) AS T1");
+        }
+        
+        /// <Summary>
+        /// return view for BaseDbContext.SurveyQuestions
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView58()
+        {
+            System.Text.StringBuilder viewString = new System.Text.StringBuilder(3285);
+            viewString.Append("\r\n    SELECT VALUE -- Constructing SurveyQuestions\r\n        [DomainModels.Survey");
+            viewString.Append("Question](T1.SurveyQuestion_SQID, T1.SurveyQuestion_LanguageID, T1.SurveyQuestio");
+            viewString.Append("n_CountryID, T1.SurveyQuestion_Type, T1.SurveyQuestion_UserID, T1.SurveyQuestion");
+            viewString.Append("_Status, T1.SurveyQuestion_Question, T1.SurveyQuestion_Description, T1.SurveyQue");
+            viewString.Append("stion_RepeatPeriod, T1.SurveyQuestion_DisplayQuestion, T1.SurveyQuestion_StartDa");
+            viewString.Append("te, T1.SurveyQuestion_EndDate, T1.SurveyQuestion_Approved, T1.SurveyQuestion_App");
+            viewString.Append("rovedByUserID, T1.SurveyQuestion_ApprovalDate, T1.SurveyQuestion_CreationDate, T");
+            viewString.Append("1.SurveyQuestion_ModifiedDate, T1.SurveyQuestion_CreatedBy, T1.SurveyQuestion_Mo");
+            viewString.Append("difiedBy, T1.SurveyQuestion_LeftPicturePath, T1.SurveyQuestion_RightPicturePath,");
+            viewString.Append(" T1.SurveyQuestion_DiscountVoucherApplied, T1.SurveyQuestion_VoucherCode, T1.Sur");
+            viewString.Append("veyQuestion_DiscountVoucherID, T1.SurveyQuestion_RejectionReason, T1.SurveyQuest");
+            viewString.Append("ion_ProjectedReach, T1.SurveyQuestion_ResultClicks, T1.SurveyQuestion_AgeRangeSt");
+            viewString.Append("art, T1.SurveyQuestion_AgeRangeEnd, T1.SurveyQuestion_Gender, T1.SurveyQuestion_");
+            viewString.Append("SubmissionDate, T1.SurveyQuestion_ParentSurveyId, T1.SurveyQuestion_Priority, T1");
+            viewString.Append(".SurveyQuestion_CompanyId)\r\n    FROM (\r\n        SELECT \r\n            T.SQID AS S");
+            viewString.Append("urveyQuestion_SQID, \r\n            T.LanguageID AS SurveyQuestion_LanguageID, \r\n ");
+            viewString.Append("           T.CountryID AS SurveyQuestion_CountryID, \r\n            T.Type AS Surv");
+            viewString.Append("eyQuestion_Type, \r\n            T.UserID AS SurveyQuestion_UserID, \r\n            ");
+            viewString.Append("T.Status AS SurveyQuestion_Status, \r\n            T.Question AS SurveyQuestion_Qu");
+            viewString.Append("estion, \r\n            T.Description AS SurveyQuestion_Description, \r\n           ");
+            viewString.Append(" T.RepeatPeriod AS SurveyQuestion_RepeatPeriod, \r\n            T.DisplayQuestion ");
+            viewString.Append("AS SurveyQuestion_DisplayQuestion, \r\n            T.StartDate AS SurveyQuestion_S");
+            viewString.Append("tartDate, \r\n            T.EndDate AS SurveyQuestion_EndDate, \r\n            T.App");
+            viewString.Append("roved AS SurveyQuestion_Approved, \r\n            T.ApprovedByUserID AS SurveyQues");
+            viewString.Append("tion_ApprovedByUserID, \r\n            T.ApprovalDate AS SurveyQuestion_ApprovalDa");
+            viewString.Append("te, \r\n            T.CreationDate AS SurveyQuestion_CreationDate, \r\n            T");
+            viewString.Append(".ModifiedDate AS SurveyQuestion_ModifiedDate, \r\n            T.CreatedBy AS Surve");
+            viewString.Append("yQuestion_CreatedBy, \r\n            T.ModifiedBy AS SurveyQuestion_ModifiedBy, \r\n");
+            viewString.Append("            T.LeftPicturePath AS SurveyQuestion_LeftPicturePath, \r\n            T");
+            viewString.Append(".RightPicturePath AS SurveyQuestion_RightPicturePath, \r\n            T.DiscountVo");
+            viewString.Append("ucherApplied AS SurveyQuestion_DiscountVoucherApplied, \r\n            T.VoucherCo");
+            viewString.Append("de AS SurveyQuestion_VoucherCode, \r\n            T.DiscountVoucherID AS SurveyQue");
+            viewString.Append("stion_DiscountVoucherID, \r\n            T.RejectionReason AS SurveyQuestion_Rejec");
+            viewString.Append("tionReason, \r\n            T.ProjectedReach AS SurveyQuestion_ProjectedReach, \r\n ");
+            viewString.Append("           T.ResultClicks AS SurveyQuestion_ResultClicks, \r\n            T.AgeRan");
+            viewString.Append("geStart AS SurveyQuestion_AgeRangeStart, \r\n            T.AgeRangeEnd AS SurveyQu");
+            viewString.Append("estion_AgeRangeEnd, \r\n            T.Gender AS SurveyQuestion_Gender, \r\n         ");
+            viewString.Append("   T.SubmissionDate AS SurveyQuestion_SubmissionDate, \r\n            T.ParentSurv");
+            viewString.Append("eyId AS SurveyQuestion_ParentSurveyId, \r\n            T.Priority AS SurveyQuestio");
+            viewString.Append("n_Priority, \r\n            T.CompanyId AS SurveyQuestion_CompanyId, \r\n           ");
+            viewString.Append(" True AS _from0\r\n        FROM SMDModelStoreContainer.SurveyQuestion AS T\r\n    ) ");
+            viewString.Append("AS T1");
+            return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.SurveyQuestions", viewString.ToString());
+        }
+        
+        /// <Summary>
+        /// return view for BaseDbContext.SurveyQuestionResponses
         /// </Summary>
         private System.Collections.Generic.KeyValuePair<string, string> GetView59()
         {
+            return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.SurveyQuestionResponses", @"
+    SELECT VALUE -- Constructing SurveyQuestionResponses
+        [DomainModels.SurveyQuestionResponse](T1.SurveyQuestionResponse_SQResponseID, T1.SurveyQuestionResponse_SQID, T1.SurveyQuestionResponse_UserID, T1.SurveyQuestionResponse_ResoponseDateTime, T1.SurveyQuestionResponse_UserSelection, T1.SurveyQuestionResponse_SkipCount, T1.SurveyQuestionResponse_CompanyId)
+    FROM (
+        SELECT 
+            T.SQResponseID AS SurveyQuestionResponse_SQResponseID, 
+            T.SQID AS SurveyQuestionResponse_SQID, 
+            T.UserID AS SurveyQuestionResponse_UserID, 
+            T.ResoponseDateTime AS SurveyQuestionResponse_ResoponseDateTime, 
+            T.UserSelection AS SurveyQuestionResponse_UserSelection, 
+            T.SkipCount AS SurveyQuestionResponse_SkipCount, 
+            T.CompanyId AS SurveyQuestionResponse_CompanyId, 
+            True AS _from0
+        FROM SMDModelStoreContainer.SurveyQuestionResponse AS T
+    ) AS T1");
+        }
+        
+        /// <Summary>
+        /// return view for BaseDbContext.Companies
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView60()
+        {
+            System.Text.StringBuilder viewString = new System.Text.StringBuilder(2171);
+            viewString.Append("\r\n    SELECT VALUE -- Constructing Companies\r\n        [DomainModels.Company](T1.");
+            viewString.Append("Company_CompanyId, T1.Company_CompanyName, T1.Company_ReplyEmail, T1.Company_Tel");
+            viewString.Append("1, T1.Company_Tel2, T1.Company_AddressLine1, T1.Company_AddressLine2, T1.Company");
+            viewString.Append("_State, T1.Company_CountryId, T1.Company_CityId, T1.Company_ZipCode, T1.Company_");
+            viewString.Append("TimeZone, T1.Company_Logo, T1.Company_StripeCustomerId, T1.Company_ChargeBeesubs");
+            viewString.Append("criptionID, T1.Company_RegisteredViaReferral, T1.Company_ReferringCompanyID, T1.");
+            viewString.Append("Company_PaypalCustomerId, T1.Company_GoogleWalletCustomerId, T1.Company_Preferre");
+            viewString.Append("dPayoutAccount, T1.Company_SalesEmail, T1.Company_ReferralCode, T1.Company_Afill");
+            viewString.Append("iatianStatus, T1.Company_WebsiteLink, T1.Company_CompanyType)\r\n    FROM (\r\n     ");
+            viewString.Append("   SELECT \r\n            T.CompanyId AS Company_CompanyId, \r\n            T.Compan");
+            viewString.Append("yName AS Company_CompanyName, \r\n            T.ReplyEmail AS Company_ReplyEmail, ");
+            viewString.Append("\r\n            T.Tel1 AS Company_Tel1, \r\n            T.Tel2 AS Company_Tel2, \r\n  ");
+            viewString.Append("          T.AddressLine1 AS Company_AddressLine1, \r\n            T.AddressLine2 A");
+            viewString.Append("S Company_AddressLine2, \r\n            T.State AS Company_State, \r\n            T.");
+            viewString.Append("CountryId AS Company_CountryId, \r\n            T.CityId AS Company_CityId, \r\n    ");
+            viewString.Append("        T.ZipCode AS Company_ZipCode, \r\n            T.TimeZone AS Company_TimeZo");
+            viewString.Append("ne, \r\n            T.Logo AS Company_Logo, \r\n            T.StripeCustomerId AS Co");
+            viewString.Append("mpany_StripeCustomerId, \r\n            T.ChargeBeesubscriptionID AS Company_Charg");
+            viewString.Append("eBeesubscriptionID, \r\n            T.RegisteredViaReferral AS Company_RegisteredV");
+            viewString.Append("iaReferral, \r\n            T.ReferringCompanyID AS Company_ReferringCompanyID, \r\n");
+            viewString.Append("            T.PaypalCustomerId AS Company_PaypalCustomerId, \r\n            T.Goog");
+            viewString.Append("leWalletCustomerId AS Company_GoogleWalletCustomerId, \r\n            T.PreferredP");
+            viewString.Append("ayoutAccount AS Company_PreferredPayoutAccount, \r\n            T.SalesEmail AS Co");
+            viewString.Append("mpany_SalesEmail, \r\n            T.ReferralCode AS Company_ReferralCode, \r\n      ");
+            viewString.Append("      T.AfilliatianStatus AS Company_AfilliatianStatus, \r\n            T.WebsiteL");
+            viewString.Append("ink AS Company_WebsiteLink, \r\n            T.CompanyType AS Company_CompanyType, ");
+            viewString.Append("\r\n            True AS _from0\r\n        FROM SMDModelStoreContainer.Company AS T\r\n");
+            viewString.Append("    ) AS T1");
+            return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.Companies", viewString.ToString());
+        }
+        
+        /// <Summary>
+        /// return view for BaseDbContext.AspNetUserRoles
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView61()
+        {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.AspNetUserRoles", @"
     SELECT VALUE -- Constructing AspNetUserRoles
-        [DomainModels.AspNetUserRoles](T3.AspNetUserRoles_AspNetRoles, T3.AspNetUserRoles_AspNetUsers)
+        [DomainModels.AspNetUserRoles](T3.AspNetUserRoles_Role, T3.AspNetUserRoles_AspNetUser)
     FROM (
-        SELECT -- Constructing AspNetRoles
-            CreateRef(BaseDbContext.Roles, row(T2.AspNetUserRoles_AspNetRoles_Id), [DomainModels.Role]) AS AspNetUserRoles_AspNetRoles, 
-            T2.AspNetUserRoles_AspNetUsers
+        SELECT -- Constructing Role
+            CreateRef(BaseDbContext.Roles, row(T2.AspNetUserRoles_Role_Id), [DomainModels.Role]) AS AspNetUserRoles_Role, 
+            T2.AspNetUserRoles_AspNetUser
         FROM (
-            SELECT -- Constructing AspNetUsers
-                T1.AspNetUserRoles_AspNetRoles_Id, 
-                CreateRef(BaseDbContext.Users, row(T1.AspNetUserRoles_AspNetUsers_Id), [DomainModels.User]) AS AspNetUserRoles_AspNetUsers
+            SELECT -- Constructing AspNetUser
+                T1.AspNetUserRoles_Role_Id, 
+                CreateRef(BaseDbContext.AspNetUsers, row(T1.AspNetUserRoles_AspNetUser_Id), [DomainModels.AspNetUser]) AS AspNetUserRoles_AspNetUser
             FROM (
                 SELECT 
-                    T.RoleId AS AspNetUserRoles_AspNetRoles_Id, 
-                    T.UserId AS AspNetUserRoles_AspNetUsers_Id, 
+                    T.RoleId AS AspNetUserRoles_Role_Id, 
+                    T.UserId AS AspNetUserRoles_AspNetUser_Id, 
                     True AS _from0
                 FROM SMDModelStoreContainer.AspNetUserRoles AS T
             ) AS T1
@@ -1884,7 +1969,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for SMDModelStoreContainer.SystemMails
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView60()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView62()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.SystemMails", @"
     SELECT VALUE -- Constructing SystemMails
@@ -1906,7 +1991,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.SystemMails
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView61()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView63()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.SystemMails", @"
     SELECT VALUE -- Constructing SystemMails
@@ -1928,7 +2013,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for SMDModelStoreContainer.AuditLog
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView62()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView64()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.AuditLog", @"
     SELECT VALUE -- Constructing AuditLog
@@ -1950,7 +2035,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.AuditLogs
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView63()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView65()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.AuditLogs", @"
     SELECT VALUE -- Constructing AuditLogs
@@ -1972,7 +2057,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for SMDModelStoreContainer.CustomUrl
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView64()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView66()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.CustomUrl", @"
     SELECT VALUE -- Constructing CustomUrl
@@ -1991,7 +2076,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.CustomUrls
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView65()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView67()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.CustomUrls", @"
     SELECT VALUE -- Constructing CustomUrls
@@ -2010,7 +2095,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for SMDModelStoreContainer.Game
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView66()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView68()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.Game", @"
     SELECT VALUE -- Constructing Game
@@ -2033,7 +2118,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.Games
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView67()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView69()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.Games", @"
     SELECT VALUE -- Constructing Games

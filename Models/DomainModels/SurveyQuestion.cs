@@ -47,6 +47,7 @@ namespace SMD.Models.DomainModels
         public int? Gender { get; set; }
         public long? ParentSurveyId { get; set; }
         public int? Priority { get; set; }
+        public Nullable<int> CompanyId { get; set; }
         public virtual ICollection<AdCampaignTargetCriteria> AdCampaignTargetCriterias { get; set; }
         public virtual User User { get; set; }
         public virtual Country Country { get; set; }
@@ -57,6 +58,7 @@ namespace SMD.Models.DomainModels
         public virtual ICollection<SurveyQuestionResponse> SurveyQuestionResponses { get; set; }
 
         public virtual ICollection<InvoiceDetail> InvoiceDetails { get; set; }
+        public virtual Company Company { get; set; }
         //left image and right image not mapped bytes
         [NotMapped]
         public string LeftPictureBytes { get; set; }

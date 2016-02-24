@@ -61,6 +61,9 @@ namespace SMD.Models.DomainModels
         public string BuyItLine3 { get; set; }
         public string BuyItButtonLabel { get; set; }
         public string BuyItImageUrl { get; set; }
+        public int? CompanyId { get; set; }
+
+        public virtual Company Company { get; set; }
         public virtual Language Language { get; set; }
         public virtual ICollection<AdCampaignResponse> AdCampaignResponses { get; set; }
         public virtual ICollection<AdCampaignTargetCriteria> AdCampaignTargetCriterias { get; set; }

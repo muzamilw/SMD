@@ -105,7 +105,7 @@ namespace SMD.Implementation.Services
             if (user.Roles.Any(role => role.Name.ToLower().Equals("user")))
             {
                 // Make Stripe actual payment 
-                response = stripeService.ChargeCustomer((int?)amount, user.StripeCustomerId);
+                response = stripeService.ChargeCustomer((int?)amount, user.Company.StripeCustomerId);
                 isSystemUser = false;
             }
             else
