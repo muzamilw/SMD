@@ -19,7 +19,11 @@
         public static string Editor { get { return "SMD Editor"; } }
         public static string User { get { return "User"; } }
     }
-
+    public enum CompanyType
+    {
+        User = 2,
+        SMD = 1
+    }
     public enum RequestType
     {
         Xml = 0, 

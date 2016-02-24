@@ -42,6 +42,7 @@ namespace SMD.Repository
             unityContainer.RegisterType<ITransactionLogRepository, TransactionLogRepository>();
             unityContainer.RegisterType<ISurveyQuestionResponseRepository, SurveyQuestionResponseRepository>();
             unityContainer.RegisterType<IAdCampaignResponseRepository, AdCampaignResponseRepository>();
+            unityContainer.RegisterType<ICompanyRepository, CompanyRepository>();
         }
     }
 }

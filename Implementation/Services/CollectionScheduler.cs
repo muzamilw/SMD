@@ -28,19 +28,19 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Updates Accounts
         /// </summary>
-        private static void UpdateAccounts(User user, double? amount, long adCampaignId, BaseDbContext dbContext)
+        private static void UpdateAccounts(Company company, double? amount, long adCampaignId, BaseDbContext dbContext)
         {
             // Debit Advertiser
-            UpdateUsersStripeAccount(user, user, amount, adCampaignId, dbContext, false);
+            UpdateUsersStripeAccount(company, company, amount, adCampaignId, dbContext, false);
 
             // Credit Cash4Ads
-            UpdateCash4AdsStripeAccount(user, amount, adCampaignId, dbContext);
+            UpdateCash4AdsStripeAccount(company, amount, adCampaignId, dbContext);
         }
 
         /// <summary>
         /// Updates Cash4Ads Stripe Account and Adds Transaction for it
         /// </summary>
-        private static void UpdateCash4AdsStripeAccount(User transactionUser, double? amount, long adCampaignId, BaseDbContext dbContext)
+        private static void UpdateCash4AdsStripeAccount(Company transactionCompany, double? amount, long adCampaignId, BaseDbContext dbContext)
         {
             // Update Cash4Ads User Stripe Account
             var smdUser = dbContext.Users.FirstOrDefault(obj => obj.Email == SystemUsers.Cash4Ads);
@@ -50,16 +50,16 @@ namespace SMD.Implementation.Services
                     "Cash4Ads"));
             }
 
-            UpdateUsersStripeAccount(smdUser, transactionUser, amount, adCampaignId, dbContext);
+            UpdateUsersStripeAccount(smdUser.Company, transactionCompany, amount, adCampaignId, dbContext);
         }
 
         /// <summary>
         /// Updates Users Stripe Account and 
         /// </summary>
-        private static void UpdateUsersStripeAccount(User user, User transactionUser, double? amount, long adCampaignId,
+        private static void UpdateUsersStripeAccount(Company company, Company transactionCompany, double? amount, long adCampaignId,
             BaseDbContext dbContext, bool isCredit = true)
         {
-            Account usersStripeAccount = user.Accounts.FirstOrDefault(acc => acc.AccountType == (int)AccountType.Stripe);
+            Account usersStripeAccount = company.Accounts.FirstOrDefault(acc => acc.AccountType == (int)AccountType.Stripe);
             if (usersStripeAccount != null)
             {
                 if (!usersStripeAccount.AccountBalance.HasValue)
@@ -80,9 +80,9 @@ namespace SMD.Implementation.Services
                                                              {
                                                                  IsCompleted = true, 
                                                                  Amount = amount ?? 0, 
-                                                                 FromUser = transactionUser.FullName,
+                                                                 FromUser = transactionCompany.CompanyName,
                                                                  LogDate = DateTime.Now,
-                                                                 ToUser = user.FullName,
+                                                                 ToUser = company.CompanyName,
                                                                  Type = isCredit ? 1 : 2
                                                              }
                                                          }
@@ -107,9 +107,9 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Genereate Invoice
         /// </summary>
-        private static void GenerateInvoice(User user, double? amount, BaseDbContext dbContext, List<InvoiceDetail> invoiceDetails)
+        private static void GenerateInvoice(Company company, double? amount, BaseDbContext dbContext, List<InvoiceDetail> invoiceDetails)
         {
-            string userCountry = user.Country != null ? user.Country.CountryName : string.Empty;
+            string userCountry = company.Country != null ? company.Country.CountryName : string.Empty;
 
             // Add invoice data
             var invoice = new Invoice
@@ -119,8 +119,8 @@ namespace SMD.Implementation.Services
                 NetTotal = amount ?? 0,
                 InvoiceDate = DateTime.Now,
                 InvoiceDueDate = DateTime.Now.AddDays(7),
-                Address1 = user.Address1,
-                UserId = user.Id,
+                Address1 = company.AddressLine1,
+                CompanyId = company.CompanyId,
                 CompanyName = "Cash4Ads",
                 InvoiceDetails = new List<InvoiceDetail>()
             };
@@ -136,7 +136,7 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Create Transaction Logs with Invoice Details
         /// </summary>
-        private static void CreateTransactionLogWithInvoice(Transaction transaction, User user, BaseDbContext dbContext,
+        private static void CreateTransactionLogWithInvoice(Transaction transaction, Company company, BaseDbContext dbContext,
             List<InvoiceDetail> invoiceDetails)
         {
             transaction.isProcessed = true;
@@ -147,7 +147,7 @@ namespace SMD.Implementation.Services
             var transactionLog = new TransactionLog
             {
                 Amount = transaction.DebitAmount ?? 0,
-                FromUser = user.Email,
+                FromUser = company.ReplyEmail,
                 Type = 2, // debit 
                 IsCompleted = true,
                 LogDate = DateTime.Now,
@@ -254,25 +254,25 @@ namespace SMD.Implementation.Services
                             double? chargeAmount = debitAmount.HasValue ? debitAmount * 100 : 0; 
 
                             // Get User from which credit to debit 
-                            var user = dbContext.Users.Find(account.UserId);
-                            if (user == null)
+                            var company = dbContext.Companies.Find(account.CompanyId);
+                            if (company == null)
                             {
                                 throw new Exception(string.Format(CultureInfo.InvariantCulture,
                                     LanguageResources.CollectionService_UserNotFound,
-                                    account.UserId));
+                                    account.CompanyId));
                             }
 
                             string response = null;
-                            if (user.Roles.Any(role => role.Name.ToLower().Equals("user")))
+                            if (company.CompanyType == (int)CompanyType.User)
                             {
-                                if (string.IsNullOrEmpty(user.StripeCustomerId))
+                                if (string.IsNullOrEmpty(company.StripeCustomerId))
                                 {
                                     throw new Exception(string.Format(CultureInfo.InvariantCulture,
                                         LanguageResources.CollectionService_AccountNotRegistered,
-                                        account.UserId, "Stripe"));
+                                        account.CompanyId, "Stripe"));
                                 }
 
-                                response = StripeService.ChargeCustomer((int?)chargeAmount, user.StripeCustomerId);
+                                response = StripeService.ChargeCustomer((int?)chargeAmount, company.StripeCustomerId);
                                 isSystemUser = false;
                             }
                             // Stripe + Invoice Work 
@@ -280,32 +280,32 @@ namespace SMD.Implementation.Services
                             {
                                 // Success
                                 var invoiceDetails = new List<InvoiceDetail>();
-                                transactions.ForEach(transaction => CreateTransactionLogWithInvoice(transaction, user, dbContext, invoiceDetails));
+                                transactions.ForEach(transaction => CreateTransactionLogWithInvoice(transaction, company, dbContext, invoiceDetails));
 
                                 #region Update Accounts
 
                                 // Update User's Virtual and stripe account
-                                UpdateAccounts(user, debitAmount, adCampaign.Value, dbContext);
+                                UpdateAccounts(company, debitAmount, adCampaign.Value, dbContext);
 
                                 #endregion
 
                                 // Generate Invoice
                                 #region Add Invoice
 
-                                GenerateInvoice(user, debitAmount, dbContext, invoiceDetails);
+                                GenerateInvoice(company, debitAmount, dbContext, invoiceDetails);
 
                                 #endregion
                                 
                                 if (!isSystemUser)
                                 {
                                     // Email To User 
-                                    BackgroundEmailManagerService.SendCollectionRoutineEmail(dbContext, user.Id);
+                                    BackgroundEmailManagerService.SendCollectionRoutineEmail(dbContext, company.CompanyId);
                                 }
                             }
                         }
                         catch (Exception exp)
                         {
-                            LogError(exp, account.AspNetUser.FullName,
+                            LogError(exp, account.Company.CompanyName,
                                 "Cash4Ads", account.Transactions.FirstOrDefault().TxId, debitAmount ?? 0, dbContext);
                         }
 

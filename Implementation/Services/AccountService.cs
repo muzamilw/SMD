@@ -29,13 +29,13 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Adds four native accounts for new user 
         /// </summary>
-        public void AddAccountsForNewUser(string newUserId)
+        public void AddAccountsForNewUser(int newCompanyId)
         {
             #region Stripe
             // Adding Stripe account 
             accountRepository.Add(new Account
             {
-                UserId = newUserId,
+                CompanyId = newCompanyId,
                 AccountBalance = 0,
                 AccountName = "Stripe Account",
                 AccountType = (int?) AccountType.Stripe            });
@@ -45,7 +45,7 @@ namespace SMD.Implementation.Services
             // Adding PayPal Account
             accountRepository.Add(new Account
             {
-                UserId = newUserId,
+                CompanyId = newCompanyId,
                 AccountBalance = 0,
                 AccountName = "PayPal Account",
                 AccountType = (int?)AccountType.Paypal
@@ -56,7 +56,7 @@ namespace SMD.Implementation.Services
             // Adding Google Wallet
             accountRepository.Add(new Account
             {
-                UserId = newUserId,
+                CompanyId = newCompanyId,
                 AccountBalance = 0,
                 AccountName = "Google Wallet",
                 AccountType = (int?)AccountType.GoogleWallet
@@ -66,7 +66,7 @@ namespace SMD.Implementation.Services
             // Adding Virtual Account
             accountRepository.Add(new Account
             {
-                UserId = newUserId,
+                CompanyId = newCompanyId,
                 AccountBalance = 0,
                 AccountName = "Virtual Account",
                 AccountType = (int?)AccountType.VirtualAccount

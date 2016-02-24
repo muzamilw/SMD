@@ -14,10 +14,11 @@ namespace SMD.Models.DomainModels
         public string UserId { get; set; }
         public DateTime AnswerDateTime { get; set; }
         public int PqAnswerId { get; set; }
-
+        public Nullable<int> CompanyId { get; set; }
         public virtual User User { get; set; }
         public virtual ProfileQuestion ProfileQuestion { get; set; }
         public virtual ProfileQuestionAnswer ProfileQuestionAnswer { get; set; }
         public virtual ICollection<AdCampaignTargetCriteria> AdCampaignTargetCriterias { get; set; }
+        public virtual Company Company { get; set; }
     }
 }

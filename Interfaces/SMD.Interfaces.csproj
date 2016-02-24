@@ -78,6 +78,7 @@
     <Compile Include="Logger\IMPCLogWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\ICityService.cs" />
+    <Compile Include="Repository\ICompanyRepository.cs" />
     <Compile Include="Repository\ISurveyQuestionResponseRepository.cs" />
     <Compile Include="Repository\IEducationRepository.cs" />
     <Compile Include="Repository\IIndustryRepository.cs" />
@@ -107,6 +108,7 @@
     <Compile Include="Repository\IProfileQuestionRepository.cs" />
     <Compile Include="Services\IAdvertService.cs" />
     <Compile Include="Services\IAuditLogService.cs" />
+    <Compile Include="Services\ICompanyService.cs" />
     <Compile Include="Services\IEducationService.cs" />
     <Compile Include="Services\IEmailManagerService.cs" />
     <Compile Include="Services\IIndustryService.cs" />

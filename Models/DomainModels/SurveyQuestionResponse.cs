@@ -14,7 +14,9 @@ namespace SMD.Models.DomainModels
         public DateTime? ResoponseDateTime { get; set; }
         public int? UserSelection { get; set; }
         public int? SkipCount { get; set; }
+        public Nullable<int> CompanyId { get; set; }
         public virtual User User { get; set; }
         public virtual SurveyQuestion SurveyQuestion { get; set; }
+        public virtual Company Company { get; set; }
     }
 }

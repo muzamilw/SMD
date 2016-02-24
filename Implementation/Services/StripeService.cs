@@ -35,7 +35,7 @@ namespace SMD.Implementation.Services
                 throw new SMDException(LanguageResources.WebApiUserService_LoginInfoNotFound);
             }
 
-            user.StripeCustomerId = customerId;
+            user.Company.StripeCustomerId = customerId;
             await UserManager.UpdateAsync(user);
         }
 

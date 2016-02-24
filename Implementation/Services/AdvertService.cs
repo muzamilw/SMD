@@ -188,7 +188,7 @@ namespace SMD.Implementation.Services
                 objUC.EducationTitle = loggedInUser.Education != null ? loggedInUser.Education.Title : "";
                 objUC.IndustryName = loggedInUser.Industry != null ? loggedInUser.Industry.IndustryName : "";
                 objUC.LanguageName = loggedInUser.Language != null ? loggedInUser.Language.LanguageName : "";
-                objUC.isStripeIntegrated = String.IsNullOrEmpty(loggedInUser.StripeCustomerId) ? false : true;
+                objUC.isStripeIntegrated = String.IsNullOrEmpty(loggedInUser.Company.StripeCustomerId) ? false : true;
             }
             if (campaignProduct != null)
             {
@@ -476,7 +476,7 @@ namespace SMD.Implementation.Services
             if (user.Roles.Any(role => role.Name.ToLower().Equals("user")))
             {
                 // Make Stripe actual payment 
-                response = stripeService.ChargeCustomer((int?)amount, user.StripeCustomerId);
+                response = stripeService.ChargeCustomer((int?)amount, user.Company.StripeCustomerId);
                 isSystemUser = false;
             }
             else
@@ -497,7 +497,7 @@ namespace SMD.Implementation.Services
                     InvoiceDate = DateTime.Now,
                     InvoiceDueDate = DateTime.Now.AddDays(7),
                     Address1 = user.CountryId.ToString(),
-                    UserId = user.Id,
+                    CompanyId = user.Company.CompanyId,
                     CompanyName = "My Company",
                     CreditCardRef = response
                 };

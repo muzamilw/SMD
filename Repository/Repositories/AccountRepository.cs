@@ -46,9 +46,16 @@ namespace SMD.Repository.Repositories
         /// </summary>
         public Account GetByUserId(string userId, AccountType accountType)
         {
-            return DbSet.FirstOrDefault(account => account.UserId == userId && account.AccountType == (int)accountType);
+            var user = db.Users.Where(g => g.Id == userId).SingleOrDefault();
+            if (user != null && user.CompanyId.HasValue)
+                return DbSet.FirstOrDefault(account => account.CompanyId == user.CompanyId && account.AccountType == (int)accountType);
+            else
+                return null;
         }
-
+        public Account GetByCompanyId(int commpanyId, AccountType accountType)
+        {
+            return DbSet.FirstOrDefault(account => account.CompanyId == commpanyId && account.AccountType == (int)accountType);
+        }
         /// <summary>
         /// Get Account by name
         /// </summary>

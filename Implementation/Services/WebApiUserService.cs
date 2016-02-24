@@ -48,7 +48,7 @@ namespace SMD.Implementation.Services
         private readonly IProfileQuestionService profileQuestionService;
         private readonly IAdCampaignResponseRepository adCampaignResponseRepository;
         private readonly ISurveyQuestionResponseRepository surveyQuestionResponseRepository;
-
+        private readonly ICompanyRepository companyRepository;
         private ApplicationUserManager UserManager
         {
             get { return HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
@@ -140,7 +140,7 @@ namespace SMD.Implementation.Services
         /// <param name="adCampaign">Ad Campaign</param>
         /// <param name="adViewerUsedVoucher">If Ad Viewer Uses Voucher</param>
         private async Task PerformAdCampaignTransactions(AdViewedRequest request, Account advertisersAccount, double? adClickRate,
-            Account adViewersAccount, double? adViewersCut, User referringUser, double? smdsCut, Account affiliatesAccount,
+            Account adViewersAccount, double? adViewersCut, Company referringCompany, double? smdsCut, Account affiliatesAccount,
             Account smdAccount, AdCampaign adCampaign, bool adViewerUsedVoucher = false)
         {
             // Debit Advertiser
@@ -157,7 +157,7 @@ namespace SMD.Implementation.Services
                 PerformTransaction(request.AdCampaignId, null, adViewersAccount, adViewersCut, transactionSequence, TransactionType.AdClick);
 
                 // Credit Affiliate
-                smdsCut = PerformCreditTransactionForAffiliate(request, referringUser, smdsCut, affiliatesAccount, ref transactionSequence);
+                smdsCut = PerformCreditTransactionForAffiliate(request, referringCompany, smdsCut, affiliatesAccount, ref transactionSequence);
             }
             
             // Credit SMD
@@ -188,10 +188,10 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Credit Campaing Affiliate
         /// </summary>
-        private double? PerformCreditTransactionForAffiliate(AdViewedRequest request, User referringUser, double? smdsCut,
+        private double? PerformCreditTransactionForAffiliate(AdViewedRequest request, Company referringCompany, double? smdsCut,
             Account affiliatesAccount, ref int transactionSequence)
         {
-            if (referringUser != null)
+            if (referringCompany != null)
             {
                 // Credit Affiliate - if exists
                 double? affiliatesCut = ((smdsCut * 20) / 100);
@@ -373,7 +373,7 @@ namespace SMD.Implementation.Services
                 InvoiceDate = DateTime.Now,
                 InvoiceDueDate = DateTime.Now.AddDays(7),
                 Address1 = source.Country.CountryName,
-                UserId = source.UserId,
+                CompanyId = source.CompanyId,
                 CompanyName = "Cash4Ads",
                 CreditCardRef = stripeResponse
             };
@@ -655,7 +655,7 @@ namespace SMD.Implementation.Services
             ITaxRepository taxRepository, IProfileQuestionUserAnswerService profileQuestionAnswerService,
             ICountryRepository countryRepository, IIndustryRepository industryRepository,
             IProfileQuestionService profileQuestionService, IAdCampaignResponseRepository adCampaignResponseRepository,
-            ISurveyQuestionResponseRepository surveyQuestionResponseRepository, IEducationRepository educationRepository, ICityRepository cityRepository)
+            ISurveyQuestionResponseRepository surveyQuestionResponseRepository, IEducationRepository educationRepository, ICityRepository cityRepository, ICompanyRepository companyRepository)
         {
             if (emailManagerService == null)
             {
@@ -719,7 +719,9 @@ namespace SMD.Implementation.Services
             this.surveyQuestionResponseRepository = surveyQuestionResponseRepository;
             this.educationRepository = educationRepository;
             this.cityRepository = cityRepository;
+            this.companyRepository = companyRepository;
         }
+
 
         #endregion
 
@@ -803,17 +805,17 @@ namespace SMD.Implementation.Services
             var adCampaign = await ValidateAdCampaign(request);
 
             // Get Referral if any
-            User referringUser = null;
+            Company referringCompany = null;
             Account affiliatesAccount = null;
-            if (!string.IsNullOrEmpty(adViewer.ReferringUserId))
+            if ((adViewer.Company.ReferringCompanyID.HasValue))
             {
-                referringUser = await UserManager.FindByIdAsync(adViewer.ReferringUserId);
-                if (referringUser == null)
+                referringCompany = companyRepository.GetAll().Where(g=>g.CompanyId == adViewer.Company.ReferringCompanyID).SingleOrDefault();
+                if (referringCompany == null)
                 {
                     throw new SMDException(LanguageResources.WebApiUserService_ReferrerNotFound);
                 }
 
-                affiliatesAccount = accountRepository.GetByUserId(adViewer.ReferringUserId, AccountType.VirtualAccount);
+                affiliatesAccount = accountRepository.GetByCompanyId(referringCompany.CompanyId, AccountType.VirtualAccount);
                 if (affiliatesAccount == null)
                 {
                     throw new SMDException(string.Format(CultureInfo.InvariantCulture,
@@ -835,7 +837,7 @@ namespace SMD.Implementation.Services
             SetupAdCampaignTransaction(request, adCampaign, out adViewersAccount, out advertisersAccount, out smdAccount, cash4Ads.Id);
 
             // Perform Transactions
-            await PerformAdCampaignTransactions(request, advertisersAccount, adClickRate, adViewersAccount, adViewersCut, referringUser, smdsCut,
+            await PerformAdCampaignTransactions(request, advertisersAccount, adClickRate, adViewersAccount, adViewersCut, referringCompany, smdsCut,
                 affiliatesAccount, smdAccount, adCampaign);
 
             return new BaseApiResponse
@@ -1285,7 +1287,7 @@ namespace SMD.Implementation.Services
                 throw new SMDException(LanguageResources.WebApiUserService_LoginInfoNotFound);
             }
 
-            user.StripeCustomerId = customerId;
+            user.Company.StripeCustomerId = customerId;
             await UserManager.UpdateAsync(user);
         }
 
@@ -1300,7 +1302,7 @@ namespace SMD.Implementation.Services
                 throw new SMDException(LanguageResources.WebApiUserService_LoginInfoNotFound);
             }
 
-            return user.StripeCustomerId;
+            return user.Company.StripeCustomerId;
         }
 
 
@@ -1315,7 +1317,7 @@ namespace SMD.Implementation.Services
                 throw new SMDException("No such user with provided email address!");
             }
 
-            return user.StripeCustomerId;
+            return user.Company.StripeCustomerId;
         }
 
         /// <summary>
