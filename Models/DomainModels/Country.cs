@@ -20,5 +20,6 @@ namespace SMD.Models.DomainModels
         public virtual ICollection<Tax> Taxes { get; set; }
 
         public virtual ICollection<User> Users { get; set; }
+        public virtual ICollection<Company> Companies { get; set; }
     }
 }
