@@ -1720,7 +1720,7 @@
           </Key>
           <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AspNetUsers" Relationship="DomainModels.AspNetUserRoles" FromRole="Role" ToRole="AspNetUser" />
+          <NavigationProperty Name="Users" Relationship="DomainModels.AspNetUserRoles" FromRole="Role" ToRole="AspNetUser" />
         </EntityType>
         <EntityType Name="UserLogin">
           <Key>
@@ -1731,7 +1731,7 @@
           <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AspNetUser" Relationship="DomainModels.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="UserLogin" ToRole="AspNetUser" />
+          <NavigationProperty Name="User" Relationship="DomainModels.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="UserLogin" ToRole="AspNetUser" />
         </EntityType>
         <EntityContainer Name="BaseDbContext" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Roles" EntityType="DomainModels.Role" />
@@ -1897,7 +1897,7 @@
           <EntitySet Name="AdCampaigns" EntityType="DomainModels.AdCampaign" />
           <EntitySet Name="AdCampaignResponses" EntityType="DomainModels.AdCampaignResponse" />
           <EntitySet Name="AdCampaignTargetCriterias" EntityType="DomainModels.AdCampaignTargetCriteria" />
-          <EntitySet Name="AspNetUsers" EntityType="DomainModels.AspNetUser" />
+          <EntitySet Name="Users" EntityType="DomainModels.User" />
           <EntitySet Name="Invoices" EntityType="DomainModels.Invoice" />
           <EntitySet Name="ProfileQuestionUserAnswers" EntityType="DomainModels.ProfileQuestionUserAnswer" />
           <EntitySet Name="SurveyQuestions" EntityType="DomainModels.SurveyQuestion" />
@@ -1931,7 +1931,7 @@
             <End Role="AdCampaignResponse1" EntitySet="AdCampaignResponses" />
           </AssociationSet>
           <AssociationSet Name="FK_AdCampaignResponse_AspNetUsers" Association="DomainModels.FK_AdCampaignResponse_AspNetUsers">
-            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUser" EntitySet="Users" />
             <End Role="AdCampaignResponse" EntitySet="AdCampaignResponses" />
           </AssociationSet>
           <AssociationSet Name="FK_AdCampaignTargetCriteria_Education" Association="DomainModels.FK_AdCampaignTargetCriteria_Education">
@@ -1959,43 +1959,43 @@
             <End Role="AdCampaignTargetCriteria" EntitySet="AdCampaignTargetCriterias" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="DomainModels.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUser" EntitySet="Users" />
             <End Role="UserClaim" EntitySet="UserClaims" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="DomainModels.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUser" EntitySet="Users" />
             <End Role="UserLogin" EntitySet="UserLogins" />
           </AssociationSet>
           <AssociationSet Name="FK_AspNetUsers_City" Association="DomainModels.FK_AspNetUsers_City">
             <End Role="City" EntitySet="Cities" />
-            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUser" EntitySet="Users" />
           </AssociationSet>
           <AssociationSet Name="FK_AspNetUsers_Country" Association="DomainModels.FK_AspNetUsers_Country">
             <End Role="Country" EntitySet="Countries" />
-            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUser" EntitySet="Users" />
           </AssociationSet>
           <AssociationSet Name="FK_AspNetUsers_Education" Association="DomainModels.FK_AspNetUsers_Education">
             <End Role="Education" EntitySet="Educations" />
-            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUser" EntitySet="Users" />
           </AssociationSet>
           <AssociationSet Name="FK_AspNetUsers_Industry" Association="DomainModels.FK_AspNetUsers_Industry">
             <End Role="Industry" EntitySet="Industries" />
-            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUser" EntitySet="Users" />
           </AssociationSet>
           <AssociationSet Name="FK_AspNetUsers_Language" Association="DomainModels.FK_AspNetUsers_Language">
             <End Role="Language" EntitySet="Languages" />
-            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUser" EntitySet="Users" />
           </AssociationSet>
           <AssociationSet Name="FK_ProfileQuestionUserAnswer_AspNetUsers" Association="DomainModels.FK_ProfileQuestionUserAnswer_AspNetUsers">
-            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUser" EntitySet="Users" />
             <End Role="ProfileQuestionUserAnswer" EntitySet="ProfileQuestionUserAnswers" />
           </AssociationSet>
           <AssociationSet Name="FK_SurveyQuestion_AspNetUsers" Association="DomainModels.FK_SurveyQuestion_AspNetUsers">
-            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUser" EntitySet="Users" />
             <End Role="SurveyQuestion" EntitySet="SurveyQuestions" />
           </AssociationSet>
           <AssociationSet Name="FK_SurveyQuestionResponse_AspNetUsers" Association="DomainModels.FK_SurveyQuestionResponse_AspNetUsers">
-            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUser" EntitySet="Users" />
             <End Role="SurveyQuestionResponse" EntitySet="SurveyQuestionResponses" />
           </AssociationSet>
           <AssociationSet Name="FK_SurveyQuestion_Country" Association="DomainModels.FK_SurveyQuestion_Country">
@@ -2040,7 +2040,7 @@
           </AssociationSet>
           <AssociationSet Name="AspNetUserRoles" Association="DomainModels.AspNetUserRoles">
             <End Role="Role" EntitySet="Roles" />
-            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUser" EntitySet="Users" />
           </AssociationSet>
           <EntitySet Name="Companies" EntityType="DomainModels.Company" />
           <AssociationSet Name="FK_Account_Company" Association="DomainModels.FK_Account_Company">
@@ -2057,7 +2057,7 @@
           </AssociationSet>
           <AssociationSet Name="FK_AspNetUsers_Company" Association="DomainModels.FK_AspNetUsers_Company">
             <End Role="Company" EntitySet="Companies" />
-            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUser" EntitySet="Users" />
           </AssociationSet>
           <AssociationSet Name="FK_Company_City" Association="DomainModels.FK_Company_City">
             <End Role="City" EntitySet="Cities" />
@@ -2164,7 +2164,7 @@
           <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUser" Relationship="DomainModels.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="UserClaim" ToRole="AspNetUser" />
+          <NavigationProperty Name="User" Relationship="DomainModels.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="UserClaim" ToRole="AspNetUser" />
         </EntityType>
         <EntityType Name="Country">
           <Key>
@@ -2179,7 +2179,7 @@
           <NavigationProperty Name="Cities" Relationship="DomainModels.FK_City_Country" FromRole="Country" ToRole="City" />
           <NavigationProperty Name="Taxes" Relationship="DomainModels.FK_Tax_Country" FromRole="Country" ToRole="Tax" />
           <NavigationProperty Name="Products" Relationship="DomainModels.FK_SMDPrice_Country" FromRole="Country" ToRole="Product" />
-          <NavigationProperty Name="AspNetUsers" Relationship="DomainModels.FK_AspNetUsers_Country" FromRole="Country" ToRole="AspNetUser" />
+          <NavigationProperty Name="Users" Relationship="DomainModels.FK_AspNetUsers_Country" FromRole="Country" ToRole="AspNetUser" />
           <NavigationProperty Name="SurveyQuestions" Relationship="DomainModels.FK_SurveyQuestion_Country" FromRole="Country" ToRole="SurveyQuestion" />
           <NavigationProperty Name="Companies" Relationship="DomainModels.FK_Company_Country" FromRole="Country" ToRole="Company" />
         </EntityType>
@@ -2193,7 +2193,7 @@
           <NavigationProperty Name="SurveyQuestionTargetCriterias" Relationship="DomainModels.FK_SurveyQuestionTargetCriteria_Language" FromRole="Language" ToRole="SurveyQuestionTargetCriteria" />
           <NavigationProperty Name="AdCampaigns" Relationship="DomainModels.FK_AdCampaign_Language" FromRole="Language" ToRole="AdCampaign" />
           <NavigationProperty Name="AdCampaignTargetCriterias" Relationship="DomainModels.FK_AdCampaignTargetCriteria_Language" FromRole="Language" ToRole="AdCampaignTargetCriteria" />
-          <NavigationProperty Name="AspNetUsers" Relationship="DomainModels.FK_AspNetUsers_Language" FromRole="Language" ToRole="AspNetUser" />
+          <NavigationProperty Name="Users" Relationship="DomainModels.FK_AspNetUsers_Language" FromRole="Language" ToRole="AspNetUser" />
           <NavigationProperty Name="SurveyQuestions" Relationship="DomainModels.FK_SurveyQuestion_Language" FromRole="Language" ToRole="SurveyQuestion" />
         </EntityType>
         <Association Name="FK_ProfileQuestionGroup_Country">
@@ -2267,7 +2267,6 @@
           <Property Name="EducationId" Type="Int64" />
           <NavigationProperty Name="Education" Relationship="DomainModels.FK_SurveyQuestionTargetCriteria_Education" FromRole="SurveyQuestionTargetCriteria" ToRole="Education" />
           <NavigationProperty Name="SurveyQuestion" Relationship="DomainModels.FK_SurveyQuestionTargetCriteria_SurveyQuestion" FromRole="SurveyQuestionTargetCriteria" ToRole="SurveyQuestion" />
-          <NavigationProperty Name="SurveyQuestion1" Relationship="DomainModels.FK_SurveyQuestionTargetCriteria_SurveyQuestion1" FromRole="SurveyQuestionTargetCriteria" ToRole="SurveyQuestion" />
         </EntityType>
         <EntityType Name="SurveyQuestionTargetLocation">
           <Key>
@@ -2356,7 +2355,7 @@
           <NavigationProperty Name="AdCampaignTargetLocations" Relationship="DomainModels.FK_AdCampaignTargetLocation_City" FromRole="City" ToRole="AdCampaignTargetLocation" />
           <NavigationProperty Name="Country" Relationship="DomainModels.FK_City_Country" FromRole="City" ToRole="Country" />
           <NavigationProperty Name="SurveyQuestionTargetLocations" Relationship="DomainModels.FK_SurveyQuestionTargetLocation_City" FromRole="City" ToRole="SurveyQuestionTargetLocation" />
-          <NavigationProperty Name="AspNetUsers" Relationship="DomainModels.FK_AspNetUsers_City" FromRole="City" ToRole="AspNetUser" />
+          <NavigationProperty Name="Users" Relationship="DomainModels.FK_AspNetUsers_City" FromRole="City" ToRole="AspNetUser" />
           <NavigationProperty Name="Companies" Relationship="DomainModels.FK_Company_City" FromRole="City" ToRole="Company" />
         </EntityType>
         <Association Name="FK_AdCampaignTargetLocation_City">
@@ -2876,12 +2875,12 @@
         </EntityType>
         <EntityType Name="AdCampaign">
           <Key>
-            <PropertyRef Name="CampaignID" />
+            <PropertyRef Name="CampaignId" />
           </Key>
-          <Property Name="CampaignID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="LanguageID" Type="Int32" />
-          <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="SMDCampaign" Type="Boolean" />
+          <Property Name="CampaignId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LanguageId" Type="Int32" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="SmdCampaign" Type="Boolean" />
           <Property Name="CampaignName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="CampaignDescription" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" />
@@ -2894,7 +2893,7 @@
           <Property Name="MaxBudget" Type="Double" />
           <Property Name="Type" Type="Int32" />
           <Property Name="ClickRate" Type="Double" />
-          <Property Name="SMDCredits" Type="Int32" />
+          <Property Name="SmdCredits" Type="Int32" />
           <Property Name="DisplayTitle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="ImagePath" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
@@ -2944,12 +2943,12 @@
         </EntityType>
         <EntityType Name="AdCampaignResponse">
           <Key>
-            <PropertyRef Name="ResponseID" />
+            <PropertyRef Name="ResponseId" />
           </Key>
-          <Property Name="ResponseID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CampaignID" Type="Int64" />
+          <Property Name="ResponseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CampaignId" Type="Int64" />
           <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
-          <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="EndUserDollarAmount" Type="Double" />
           <Property Name="SkipCount" Type="Int32" />
           <Property Name="UserSelection" Type="Int32" />
@@ -2959,26 +2958,24 @@
           <Property Name="GameLevel" Type="Int32" />
           <Property Name="GameId" Type="Int32" />
           <NavigationProperty Name="AdCampaign" Relationship="DomainModels.FK_AdCampaignResponse_AdCampaign" FromRole="AdCampaignResponse" ToRole="AdCampaign" />
-          <NavigationProperty Name="AdCampaignResponse1" Relationship="DomainModels.FK_AdCampaignResponse_AdCampaignResponse" FromRole="AdCampaignResponse" ToRole="AdCampaignResponse1" />
-          <NavigationProperty Name="AdCampaignResponse2" Relationship="DomainModels.FK_AdCampaignResponse_AdCampaignResponse" FromRole="AdCampaignResponse1" ToRole="AdCampaignResponse" />
-          <NavigationProperty Name="AspNetUser" Relationship="DomainModels.FK_AdCampaignResponse_AspNetUsers" FromRole="AdCampaignResponse" ToRole="AspNetUser" />
+          <NavigationProperty Name="User" Relationship="DomainModels.FK_AdCampaignResponse_AspNetUsers" FromRole="AdCampaignResponse" ToRole="AspNetUser" />
           <NavigationProperty Name="Company" Relationship="DomainModels.FK_AdCampaignResponse_Company" FromRole="AdCampaignResponse" ToRole="Company" />
         </EntityType>
         <EntityType Name="AdCampaignTargetCriteria">
           <Key>
-            <PropertyRef Name="CriteriaID" />
+            <PropertyRef Name="CriteriaId" />
           </Key>
-          <Property Name="CriteriaID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CampaignID" Type="Int64" />
+          <Property Name="CriteriaId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CampaignId" Type="Int64" />
           <Property Name="Type" Type="Int32" />
-          <Property Name="PQID" Type="Int32" />
-          <Property Name="PQAnswerID" Type="Int32" />
-          <Property Name="SQID" Type="Int64" />
-          <Property Name="SQAnswer" Type="Int32" />
+          <Property Name="PqId" Type="Int32" />
+          <Property Name="PqAnswerId" Type="Int32" />
+          <Property Name="SqId" Type="Int64" />
+          <Property Name="SqAnswer" Type="Int32" />
           <Property Name="IncludeorExclude" Type="Boolean" />
-          <Property Name="LanguageID" Type="Int32" />
-          <Property Name="IndustryID" Type="Int32" />
-          <Property Name="EducationID" Type="Int64" />
+          <Property Name="LanguageId" Type="Int32" />
+          <Property Name="IndustryId" Type="Int32" />
+          <Property Name="EducationId" Type="Int64" />
           <Property Name="QuizCampaignId" Type="Int32" />
           <Property Name="QuizAnswerId" Type="Int32" />
           <NavigationProperty Name="AdCampaign" Relationship="DomainModels.FK_AdCampaignTargetCriteria_AdCampaign" FromRole="AdCampaignTargetCriteria" ToRole="AdCampaign" />
@@ -2989,7 +2986,7 @@
           <NavigationProperty Name="ProfileQuestionAnswer" Relationship="DomainModels.FK_AdCampaignTargetCriteria_ProfileQuestionAnswer" FromRole="AdCampaignTargetCriteria" ToRole="ProfileQuestionAnswer" />
           <NavigationProperty Name="SurveyQuestion" Relationship="DomainModels.FK_AdCampaignTargetCriteria_SurveyQuestion" FromRole="AdCampaignTargetCriteria" ToRole="SurveyQuestion" />
         </EntityType>
-        <EntityType Name="AspNetUser">
+        <EntityType Name="User">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -3021,14 +3018,14 @@
           <Property Name="IsCompanyRepresentative" Type="Boolean" />
           <Property Name="Address1" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Address2" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="CityID" Type="Int32" />
-          <Property Name="CountryID" Type="Int32" />
+          <Property Name="CityId" Type="Int32" />
+          <Property Name="CountryId" Type="Int32" />
           <Property Name="State" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="ZipCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="UserTimeZone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Gender" Type="Int32" />
-          <Property Name="LanguageID" Type="Int32" />
-          <Property Name="IndustryID" Type="Int32" />
+          <Property Name="LanguageId" Type="Int32" />
+          <Property Name="IndustryId" Type="Int32" />
           <Property Name="EducationId" Type="Int64" />
           <Property Name="ProfileImage" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="UserCode" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
@@ -3037,8 +3034,8 @@
           <Property Name="DOB" Type="DateTime" Precision="3" />
           <Property Name="CompanyId" Type="Int32" />
           <NavigationProperty Name="AdCampaignResponses" Relationship="DomainModels.FK_AdCampaignResponse_AspNetUsers" FromRole="AspNetUser" ToRole="AdCampaignResponse" />
-          <NavigationProperty Name="AspNetUserClaims" Relationship="DomainModels.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="UserClaim" />
-          <NavigationProperty Name="AspNetUserLogins" Relationship="DomainModels.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="UserLogin" />
+          <NavigationProperty Name="Claims" Relationship="DomainModels.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="UserClaim" />
+          <NavigationProperty Name="UserLogins" Relationship="DomainModels.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="UserLogin" />
           <NavigationProperty Name="City" Relationship="DomainModels.FK_AspNetUsers_City" FromRole="AspNetUser" ToRole="City" />
           <NavigationProperty Name="Country" Relationship="DomainModels.FK_AspNetUsers_Country" FromRole="AspNetUser" ToRole="Country" />
           <NavigationProperty Name="Education" Relationship="DomainModels.FK_AspNetUsers_Education" FromRole="AspNetUser" ToRole="Education" />
@@ -3047,7 +3044,7 @@
           <NavigationProperty Name="ProfileQuestionUserAnswers" Relationship="DomainModels.FK_ProfileQuestionUserAnswer_AspNetUsers" FromRole="AspNetUser" ToRole="ProfileQuestionUserAnswer" />
           <NavigationProperty Name="SurveyQuestions" Relationship="DomainModels.FK_SurveyQuestion_AspNetUsers" FromRole="AspNetUser" ToRole="SurveyQuestion" />
           <NavigationProperty Name="SurveyQuestionResponses" Relationship="DomainModels.FK_SurveyQuestionResponse_AspNetUsers" FromRole="AspNetUser" ToRole="SurveyQuestionResponse" />
-          <NavigationProperty Name="AspNetRoles" Relationship="DomainModels.AspNetUserRoles" FromRole="AspNetUser" ToRole="Role" />
+          <NavigationProperty Name="Roles" Relationship="DomainModels.AspNetUserRoles" FromRole="AspNetUser" ToRole="Role" />
           <NavigationProperty Name="Company" Relationship="DomainModels.FK_AspNetUsers_Company" FromRole="AspNetUser" ToRole="Company" />
         </EntityType>
         <EntityType Name="Invoice">
@@ -3075,28 +3072,28 @@
         </EntityType>
         <EntityType Name="ProfileQuestionUserAnswer">
           <Key>
-            <PropertyRef Name="PQUAnswerID" />
+            <PropertyRef Name="PquAnswerId" />
           </Key>
-          <Property Name="PQUAnswerID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PQID" Type="Int32" Nullable="false" />
-          <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="PquAnswerId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PqId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="AnswerDateTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="PQAnswerID" Type="Int32" Nullable="false" />
+          <Property Name="PqAnswerId" Type="Int32" Nullable="false" />
           <Property Name="CompanyId" Type="Int32" />
-          <NavigationProperty Name="AspNetUser" Relationship="DomainModels.FK_ProfileQuestionUserAnswer_AspNetUsers" FromRole="ProfileQuestionUserAnswer" ToRole="AspNetUser" />
+          <NavigationProperty Name="User" Relationship="DomainModels.FK_ProfileQuestionUserAnswer_AspNetUsers" FromRole="ProfileQuestionUserAnswer" ToRole="AspNetUser" />
           <NavigationProperty Name="ProfileQuestion" Relationship="DomainModels.FK_ProfileQuestionUserAnswer_ProfileQuestion" FromRole="ProfileQuestionUserAnswer" ToRole="ProfileQuestion" />
           <NavigationProperty Name="ProfileQuestionAnswer" Relationship="DomainModels.FK_ProfileQuestionUserAnswer_ProfileQuestionAnswer" FromRole="ProfileQuestionUserAnswer" ToRole="ProfileQuestionAnswer" />
           <NavigationProperty Name="Company" Relationship="DomainModels.FK_ProfileQuestionUserAnswer_Company" FromRole="ProfileQuestionUserAnswer" ToRole="Company" />
         </EntityType>
         <EntityType Name="SurveyQuestion">
           <Key>
-            <PropertyRef Name="SQID" />
+            <PropertyRef Name="SqId" />
           </Key>
-          <Property Name="SQID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="LanguageID" Type="Int32" />
-          <Property Name="CountryID" Type="Int32" />
+          <Property Name="SqId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LanguageId" Type="Int32" />
+          <Property Name="CountryId" Type="Int32" />
           <Property Name="Type" Type="Int32" />
-          <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" />
           <Property Name="Question" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
@@ -3105,7 +3102,7 @@
           <Property Name="StartDate" Type="DateTime" Precision="3" />
           <Property Name="EndDate" Type="DateTime" Precision="3" />
           <Property Name="Approved" Type="Boolean" />
-          <Property Name="ApprovedByUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ApprovedByUserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="ApprovalDate" Type="DateTime" Precision="3" />
           <Property Name="CreationDate" Type="DateTime" Precision="3" />
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
@@ -3115,7 +3112,7 @@
           <Property Name="RightPicturePath" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="DiscountVoucherApplied" Type="Boolean" />
           <Property Name="VoucherCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DiscountVoucherID" Type="Int64" />
+          <Property Name="DiscountVoucherId" Type="Int64" />
           <Property Name="RejectionReason" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="ProjectedReach" Type="Int64" />
           <Property Name="ResultClicks" Type="Int64" />
@@ -3127,28 +3124,27 @@
           <Property Name="Priority" Type="Int32" />
           <Property Name="CompanyId" Type="Int32" />
           <NavigationProperty Name="AdCampaignTargetCriterias" Relationship="DomainModels.FK_AdCampaignTargetCriteria_SurveyQuestion" FromRole="SurveyQuestion" ToRole="AdCampaignTargetCriteria" />
-          <NavigationProperty Name="AspNetUser" Relationship="DomainModels.FK_SurveyQuestion_AspNetUsers" FromRole="SurveyQuestion" ToRole="AspNetUser" />
+          <NavigationProperty Name="User" Relationship="DomainModels.FK_SurveyQuestion_AspNetUsers" FromRole="SurveyQuestion" ToRole="AspNetUser" />
           <NavigationProperty Name="Country" Relationship="DomainModels.FK_SurveyQuestion_Country" FromRole="SurveyQuestion" ToRole="Country" />
           <NavigationProperty Name="InvoiceDetails" Relationship="DomainModels.FK_InvoiceDetail_SurveyQuestion" FromRole="SurveyQuestion" ToRole="InvoiceDetail" />
           <NavigationProperty Name="Language" Relationship="DomainModels.FK_SurveyQuestion_Language" FromRole="SurveyQuestion" ToRole="Language" />
           <NavigationProperty Name="SurveyQuestionResponses" Relationship="DomainModels.FK_SurveyQuestionResponse_SurveyQuestion" FromRole="SurveyQuestion" ToRole="SurveyQuestionResponse" />
           <NavigationProperty Name="SurveyQuestionTargetCriterias" Relationship="DomainModels.FK_SurveyQuestionTargetCriteria_SurveyQuestion" FromRole="SurveyQuestion" ToRole="SurveyQuestionTargetCriteria" />
-          <NavigationProperty Name="SurveyQuestionTargetCriterias1" Relationship="DomainModels.FK_SurveyQuestionTargetCriteria_SurveyQuestion1" FromRole="SurveyQuestion" ToRole="SurveyQuestionTargetCriteria" />
           <NavigationProperty Name="SurveyQuestionTargetLocations" Relationship="DomainModels.FK_SurveyQuestionTargetLocation_SurveyQuestion" FromRole="SurveyQuestion" ToRole="SurveyQuestionTargetLocation" />
           <NavigationProperty Name="Company" Relationship="DomainModels.FK_SurveyQuestion_Company" FromRole="SurveyQuestion" ToRole="Company" />
         </EntityType>
         <EntityType Name="SurveyQuestionResponse">
           <Key>
-            <PropertyRef Name="SQResponseID" />
+            <PropertyRef Name="SqResponseId" />
           </Key>
-          <Property Name="SQResponseID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="SQID" Type="Int64" />
-          <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="SqResponseId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SqId" Type="Int64" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="ResoponseDateTime" Type="DateTime" Precision="3" />
           <Property Name="UserSelection" Type="Int32" />
           <Property Name="SkipCount" Type="Int32" />
           <Property Name="CompanyId" Type="Int32" />
-          <NavigationProperty Name="AspNetUser" Relationship="DomainModels.FK_SurveyQuestionResponse_AspNetUsers" FromRole="SurveyQuestionResponse" ToRole="AspNetUser" />
+          <NavigationProperty Name="User" Relationship="DomainModels.FK_SurveyQuestionResponse_AspNetUsers" FromRole="SurveyQuestionResponse" ToRole="AspNetUser" />
           <NavigationProperty Name="SurveyQuestion" Relationship="DomainModels.FK_SurveyQuestionResponse_SurveyQuestion" FromRole="SurveyQuestionResponse" ToRole="SurveyQuestion" />
           <NavigationProperty Name="Company" Relationship="DomainModels.FK_SurveyQuestionResponse_Company" FromRole="SurveyQuestionResponse" ToRole="Company" />
         </EntityType>
@@ -3172,7 +3168,7 @@
               <PropertyRef Name="LanguageId" />
             </Principal>
             <Dependent Role="AdCampaign">
-              <PropertyRef Name="LanguageID" />
+              <PropertyRef Name="LanguageId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3181,10 +3177,10 @@
           <End Type="DomainModels.AdCampaignResponse" Role="AdCampaignResponse" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AdCampaign">
-              <PropertyRef Name="CampaignID" />
+              <PropertyRef Name="CampaignId" />
             </Principal>
             <Dependent Role="AdCampaignResponse">
-              <PropertyRef Name="CampaignID" />
+              <PropertyRef Name="CampaignId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3193,10 +3189,10 @@
           <End Type="DomainModels.AdCampaignTargetCriteria" Role="AdCampaignTargetCriteria" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AdCampaign">
-              <PropertyRef Name="CampaignID" />
+              <PropertyRef Name="CampaignId" />
             </Principal>
             <Dependent Role="AdCampaignTargetCriteria">
-              <PropertyRef Name="CampaignID" />
+              <PropertyRef Name="CampaignId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3205,7 +3201,7 @@
           <End Type="DomainModels.AdCampaignTargetLocation" Role="AdCampaignTargetLocation" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AdCampaign">
-              <PropertyRef Name="CampaignID" />
+              <PropertyRef Name="CampaignId" />
             </Principal>
             <Dependent Role="AdCampaignTargetLocation">
               <PropertyRef Name="CampaignId" />
@@ -3217,7 +3213,7 @@
           <End Type="DomainModels.InvoiceDetail" Role="InvoiceDetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AdCampaign">
-              <PropertyRef Name="CampaignID" />
+              <PropertyRef Name="CampaignId" />
             </Principal>
             <Dependent Role="InvoiceDetail">
               <PropertyRef Name="CampaignId" />
@@ -3229,22 +3225,22 @@
           <End Type="DomainModels.AdCampaignResponse" Role="AdCampaignResponse1" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="AdCampaignResponse">
-              <PropertyRef Name="ResponseID" />
+              <PropertyRef Name="ResponseId" />
             </Principal>
             <Dependent Role="AdCampaignResponse1">
-              <PropertyRef Name="ResponseID" />
+              <PropertyRef Name="ResponseId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_AdCampaignResponse_AspNetUsers">
-          <End Type="DomainModels.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+          <End Type="DomainModels.User" Role="AspNetUser" Multiplicity="0..1" />
           <End Type="DomainModels.AdCampaignResponse" Role="AdCampaignResponse" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetUser">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="AdCampaignResponse">
-              <PropertyRef Name="UserID" />
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3256,7 +3252,7 @@
               <PropertyRef Name="EducationId" />
             </Principal>
             <Dependent Role="AdCampaignTargetCriteria">
-              <PropertyRef Name="EducationID" />
+              <PropertyRef Name="EducationId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3268,7 +3264,7 @@
               <PropertyRef Name="IndustryId" />
             </Principal>
             <Dependent Role="AdCampaignTargetCriteria">
-              <PropertyRef Name="IndustryID" />
+              <PropertyRef Name="IndustryId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3280,7 +3276,7 @@
               <PropertyRef Name="LanguageId" />
             </Principal>
             <Dependent Role="AdCampaignTargetCriteria">
-              <PropertyRef Name="LanguageID" />
+              <PropertyRef Name="LanguageId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3292,7 +3288,7 @@
               <PropertyRef Name="PqId" />
             </Principal>
             <Dependent Role="AdCampaignTargetCriteria">
-              <PropertyRef Name="PQID" />
+              <PropertyRef Name="PqId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3304,7 +3300,7 @@
               <PropertyRef Name="PqAnswerId" />
             </Principal>
             <Dependent Role="AdCampaignTargetCriteria">
-              <PropertyRef Name="PQAnswerID" />
+              <PropertyRef Name="PqAnswerId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3313,15 +3309,15 @@
           <End Type="DomainModels.AdCampaignTargetCriteria" Role="AdCampaignTargetCriteria" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="SurveyQuestion">
-              <PropertyRef Name="SQID" />
+              <PropertyRef Name="SqId" />
             </Principal>
             <Dependent Role="AdCampaignTargetCriteria">
-              <PropertyRef Name="SQID" />
+              <PropertyRef Name="SqId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-          <End Type="DomainModels.AspNetUser" Role="AspNetUser" Multiplicity="1">
+          <End Type="DomainModels.User" Role="AspNetUser" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
           <End Type="DomainModels.UserClaim" Role="UserClaim" Multiplicity="*" />
@@ -3335,7 +3331,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-          <End Type="DomainModels.AspNetUser" Role="AspNetUser" Multiplicity="1">
+          <End Type="DomainModels.User" Role="AspNetUser" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
           <End Type="DomainModels.UserLogin" Role="UserLogin" Multiplicity="*" />
@@ -3350,31 +3346,31 @@
         </Association>
         <Association Name="FK_AspNetUsers_City">
           <End Type="DomainModels.City" Role="City" Multiplicity="0..1" />
-          <End Type="DomainModels.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+          <End Type="DomainModels.User" Role="AspNetUser" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="City">
               <PropertyRef Name="CityId" />
             </Principal>
             <Dependent Role="AspNetUser">
-              <PropertyRef Name="CityID" />
+              <PropertyRef Name="CityId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_AspNetUsers_Country">
           <End Type="DomainModels.Country" Role="Country" Multiplicity="0..1" />
-          <End Type="DomainModels.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+          <End Type="DomainModels.User" Role="AspNetUser" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Country">
               <PropertyRef Name="CountryId" />
             </Principal>
             <Dependent Role="AspNetUser">
-              <PropertyRef Name="CountryID" />
+              <PropertyRef Name="CountryId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_AspNetUsers_Education">
           <End Type="DomainModels.Education" Role="Education" Multiplicity="0..1" />
-          <End Type="DomainModels.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+          <End Type="DomainModels.User" Role="AspNetUser" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Education">
               <PropertyRef Name="EducationId" />
@@ -3386,61 +3382,61 @@
         </Association>
         <Association Name="FK_AspNetUsers_Industry">
           <End Type="DomainModels.Industry" Role="Industry" Multiplicity="0..1" />
-          <End Type="DomainModels.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+          <End Type="DomainModels.User" Role="AspNetUser" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Industry">
               <PropertyRef Name="IndustryId" />
             </Principal>
             <Dependent Role="AspNetUser">
-              <PropertyRef Name="IndustryID" />
+              <PropertyRef Name="IndustryId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_AspNetUsers_Language">
           <End Type="DomainModels.Language" Role="Language" Multiplicity="0..1" />
-          <End Type="DomainModels.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+          <End Type="DomainModels.User" Role="AspNetUser" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Language">
               <PropertyRef Name="LanguageId" />
             </Principal>
             <Dependent Role="AspNetUser">
-              <PropertyRef Name="LanguageID" />
+              <PropertyRef Name="LanguageId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ProfileQuestionUserAnswer_AspNetUsers">
-          <End Type="DomainModels.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="DomainModels.User" Role="AspNetUser" Multiplicity="1" />
           <End Type="DomainModels.ProfileQuestionUserAnswer" Role="ProfileQuestionUserAnswer" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetUser">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="ProfileQuestionUserAnswer">
-              <PropertyRef Name="UserID" />
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SurveyQuestion_AspNetUsers">
-          <End Type="DomainModels.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+          <End Type="DomainModels.User" Role="AspNetUser" Multiplicity="0..1" />
           <End Type="DomainModels.SurveyQuestion" Role="SurveyQuestion" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetUser">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="SurveyQuestion">
-              <PropertyRef Name="UserID" />
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SurveyQuestionResponse_AspNetUsers">
-          <End Type="DomainModels.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+          <End Type="DomainModels.User" Role="AspNetUser" Multiplicity="0..1" />
           <End Type="DomainModels.SurveyQuestionResponse" Role="SurveyQuestionResponse" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetUser">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="SurveyQuestionResponse">
-              <PropertyRef Name="UserID" />
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3452,7 +3448,7 @@
               <PropertyRef Name="CountryId" />
             </Principal>
             <Dependent Role="SurveyQuestion">
-              <PropertyRef Name="CountryID" />
+              <PropertyRef Name="CountryId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3473,7 +3469,7 @@
           <End Type="DomainModels.InvoiceDetail" Role="InvoiceDetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="SurveyQuestion">
-              <PropertyRef Name="SQID" />
+              <PropertyRef Name="SqId" />
             </Principal>
             <Dependent Role="InvoiceDetail">
               <PropertyRef Name="SqId" />
@@ -3488,7 +3484,7 @@
               <PropertyRef Name="LanguageId" />
             </Principal>
             <Dependent Role="SurveyQuestion">
-              <PropertyRef Name="LanguageID" />
+              <PropertyRef Name="LanguageId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3500,7 +3496,7 @@
               <PropertyRef Name="PqId" />
             </Principal>
             <Dependent Role="ProfileQuestionUserAnswer">
-              <PropertyRef Name="PQID" />
+              <PropertyRef Name="PqId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3512,7 +3508,7 @@
               <PropertyRef Name="PqAnswerId" />
             </Principal>
             <Dependent Role="ProfileQuestionUserAnswer">
-              <PropertyRef Name="PQAnswerID" />
+              <PropertyRef Name="PqAnswerId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3521,10 +3517,10 @@
           <End Type="DomainModels.SurveyQuestionResponse" Role="SurveyQuestionResponse" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="SurveyQuestion">
-              <PropertyRef Name="SQID" />
+              <PropertyRef Name="SqId" />
             </Principal>
             <Dependent Role="SurveyQuestionResponse">
-              <PropertyRef Name="SQID" />
+              <PropertyRef Name="SqId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3533,7 +3529,7 @@
           <End Type="DomainModels.SurveyQuestionTargetCriteria" Role="SurveyQuestionTargetCriteria" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="SurveyQuestion">
-              <PropertyRef Name="SQID" />
+              <PropertyRef Name="SqId" />
             </Principal>
             <Dependent Role="SurveyQuestionTargetCriteria">
               <PropertyRef Name="SqId" />
@@ -3545,7 +3541,7 @@
           <End Type="DomainModels.SurveyQuestionTargetCriteria" Role="SurveyQuestionTargetCriteria" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="SurveyQuestion">
-              <PropertyRef Name="SQID" />
+              <PropertyRef Name="SqId" />
             </Principal>
             <Dependent Role="SurveyQuestionTargetCriteria">
               <PropertyRef Name="LinkedSqId" />
@@ -3557,7 +3553,7 @@
           <End Type="DomainModels.SurveyQuestionTargetLocation" Role="SurveyQuestionTargetLocation" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="SurveyQuestion">
-              <PropertyRef Name="SQID" />
+              <PropertyRef Name="SqId" />
             </Principal>
             <Dependent Role="SurveyQuestionTargetLocation">
               <PropertyRef Name="SqId" />
@@ -3566,7 +3562,7 @@
         </Association>
         <Association Name="AspNetUserRoles">
           <End Type="DomainModels.Role" Role="Role" Multiplicity="*" />
-          <End Type="DomainModels.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+          <End Type="DomainModels.User" Role="AspNetUser" Multiplicity="*" />
         </Association>
         <EntityType Name="Company">
           <Key>
@@ -3600,7 +3596,7 @@
           <NavigationProperty Name="Accounts" Relationship="DomainModels.FK_Account_Company" FromRole="Company" ToRole="Account" />
           <NavigationProperty Name="AdCampaigns" Relationship="DomainModels.FK_AdCampaign_Company" FromRole="Company" ToRole="AdCampaign" />
           <NavigationProperty Name="AdCampaignResponses" Relationship="DomainModels.FK_AdCampaignResponse_Company" FromRole="Company" ToRole="AdCampaignResponse" />
-          <NavigationProperty Name="AspNetUsers" Relationship="DomainModels.FK_AspNetUsers_Company" FromRole="Company" ToRole="AspNetUser" />
+          <NavigationProperty Name="Users" Relationship="DomainModels.FK_AspNetUsers_Company" FromRole="Company" ToRole="AspNetUser" />
           <NavigationProperty Name="City" Relationship="DomainModels.FK_Company_City" FromRole="Company" ToRole="City" />
           <NavigationProperty Name="Country" Relationship="DomainModels.FK_Company_Country" FromRole="Company" ToRole="Country" />
           <NavigationProperty Name="Invoices" Relationship="DomainModels.FK_Invoice_Company" FromRole="Company" ToRole="Invoice" />
@@ -3646,7 +3642,7 @@
         </Association>
         <Association Name="FK_AspNetUsers_Company">
           <End Type="DomainModels.Company" Role="Company" Multiplicity="0..1" />
-          <End Type="DomainModels.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+          <End Type="DomainModels.User" Role="AspNetUser" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Company">
               <PropertyRef Name="CompanyId" />
@@ -4218,7 +4214,7 @@
                 <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="DisplayTitle" ColumnName="DisplayTitle" />
-                <ScalarProperty Name="SMDCredits" ColumnName="SMDCredits" />
+                <ScalarProperty Name="SmdCredits" ColumnName="SMDCredits" />
                 <ScalarProperty Name="ClickRate" ColumnName="ClickRate" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="MaxBudget" ColumnName="MaxBudget" />
@@ -4231,10 +4227,10 @@
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="CampaignDescription" ColumnName="CampaignDescription" />
                 <ScalarProperty Name="CampaignName" ColumnName="CampaignName" />
-                <ScalarProperty Name="SMDCampaign" ColumnName="SMDCampaign" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="LanguageID" ColumnName="LanguageID" />
-                <ScalarProperty Name="CampaignID" ColumnName="CampaignID" />
+                <ScalarProperty Name="SmdCampaign" ColumnName="SMDCampaign" />
+                <ScalarProperty Name="UserId" ColumnName="UserID" />
+                <ScalarProperty Name="LanguageId" ColumnName="LanguageID" />
+                <ScalarProperty Name="CampaignId" ColumnName="CampaignID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -4249,10 +4245,10 @@
                 <ScalarProperty Name="UserSelection" ColumnName="UserSelection" />
                 <ScalarProperty Name="SkipCount" ColumnName="SkipCount" />
                 <ScalarProperty Name="EndUserDollarAmount" ColumnName="EndUserDollarAmount" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserId" ColumnName="UserID" />
                 <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
-                <ScalarProperty Name="CampaignID" ColumnName="CampaignID" />
-                <ScalarProperty Name="ResponseID" ColumnName="ResponseID" />
+                <ScalarProperty Name="CampaignId" ColumnName="CampaignID" />
+                <ScalarProperty Name="ResponseId" ColumnName="ResponseID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -4261,22 +4257,22 @@
               <MappingFragment StoreEntitySet="AdCampaignTargetCriteria">
                 <ScalarProperty Name="QuizAnswerId" ColumnName="QuizAnswerId" />
                 <ScalarProperty Name="QuizCampaignId" ColumnName="QuizCampaignId" />
-                <ScalarProperty Name="EducationID" ColumnName="EducationID" />
-                <ScalarProperty Name="IndustryID" ColumnName="IndustryID" />
-                <ScalarProperty Name="LanguageID" ColumnName="LanguageID" />
+                <ScalarProperty Name="EducationId" ColumnName="EducationID" />
+                <ScalarProperty Name="IndustryId" ColumnName="IndustryID" />
+                <ScalarProperty Name="LanguageId" ColumnName="LanguageID" />
                 <ScalarProperty Name="IncludeorExclude" ColumnName="IncludeorExclude" />
-                <ScalarProperty Name="SQAnswer" ColumnName="SQAnswer" />
-                <ScalarProperty Name="SQID" ColumnName="SQID" />
-                <ScalarProperty Name="PQAnswerID" ColumnName="PQAnswerID" />
-                <ScalarProperty Name="PQID" ColumnName="PQID" />
+                <ScalarProperty Name="SqAnswer" ColumnName="SQAnswer" />
+                <ScalarProperty Name="SqId" ColumnName="SQID" />
+                <ScalarProperty Name="PqAnswerId" ColumnName="PQAnswerID" />
+                <ScalarProperty Name="PqId" ColumnName="PQID" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="CampaignID" ColumnName="CampaignID" />
-                <ScalarProperty Name="CriteriaID" ColumnName="CriteriaID" />
+                <ScalarProperty Name="CampaignId" ColumnName="CampaignID" />
+                <ScalarProperty Name="CriteriaId" ColumnName="CriteriaID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="AspNetUsers">
-            <EntityTypeMapping TypeName="DomainModels.AspNetUser">
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="DomainModels.User">
               <MappingFragment StoreEntitySet="AspNetUsers">
                 <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
                 <ScalarProperty Name="DOB" ColumnName="DOB" />
@@ -4285,14 +4281,14 @@
                 <ScalarProperty Name="UserCode" ColumnName="UserCode" />
                 <ScalarProperty Name="ProfileImage" ColumnName="ProfileImage" />
                 <ScalarProperty Name="EducationId" ColumnName="EducationId" />
-                <ScalarProperty Name="IndustryID" ColumnName="IndustryID" />
-                <ScalarProperty Name="LanguageID" ColumnName="LanguageID" />
+                <ScalarProperty Name="IndustryId" ColumnName="IndustryID" />
+                <ScalarProperty Name="LanguageId" ColumnName="LanguageID" />
                 <ScalarProperty Name="Gender" ColumnName="Gender" />
                 <ScalarProperty Name="UserTimeZone" ColumnName="UserTimeZone" />
                 <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
                 <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
-                <ScalarProperty Name="CityID" ColumnName="CityID" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryID" />
+                <ScalarProperty Name="CityId" ColumnName="CityID" />
                 <ScalarProperty Name="Address2" ColumnName="Address2" />
                 <ScalarProperty Name="Address1" ColumnName="Address1" />
                 <ScalarProperty Name="IsCompanyRepresentative" ColumnName="IsCompanyRepresentative" />
@@ -4350,11 +4346,11 @@
             <EntityTypeMapping TypeName="DomainModels.ProfileQuestionUserAnswer">
               <MappingFragment StoreEntitySet="ProfileQuestionUserAnswer">
                 <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
-                <ScalarProperty Name="PQAnswerID" ColumnName="PQAnswerID" />
+                <ScalarProperty Name="PqAnswerId" ColumnName="PQAnswerID" />
                 <ScalarProperty Name="AnswerDateTime" ColumnName="AnswerDateTime" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="PQID" ColumnName="PQID" />
-                <ScalarProperty Name="PQUAnswerID" ColumnName="PQUAnswerID" />
+                <ScalarProperty Name="UserId" ColumnName="UserID" />
+                <ScalarProperty Name="PqId" ColumnName="PQID" />
+                <ScalarProperty Name="PquAnswerId" ColumnName="PQUAnswerID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -4371,7 +4367,7 @@
                 <ScalarProperty Name="ResultClicks" ColumnName="ResultClicks" />
                 <ScalarProperty Name="ProjectedReach" ColumnName="ProjectedReach" />
                 <ScalarProperty Name="RejectionReason" ColumnName="RejectionReason" />
-                <ScalarProperty Name="DiscountVoucherID" ColumnName="DiscountVoucherID" />
+                <ScalarProperty Name="DiscountVoucherId" ColumnName="DiscountVoucherID" />
                 <ScalarProperty Name="VoucherCode" ColumnName="VoucherCode" />
                 <ScalarProperty Name="DiscountVoucherApplied" ColumnName="DiscountVoucherApplied" />
                 <ScalarProperty Name="RightPicturePath" ColumnName="RightPicturePath" />
@@ -4381,7 +4377,7 @@
                 <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
                 <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
                 <ScalarProperty Name="ApprovalDate" ColumnName="ApprovalDate" />
-                <ScalarProperty Name="ApprovedByUserID" ColumnName="ApprovedByUserID" />
+                <ScalarProperty Name="ApprovedByUserId" ColumnName="ApprovedByUserID" />
                 <ScalarProperty Name="Approved" ColumnName="Approved" />
                 <ScalarProperty Name="EndDate" ColumnName="EndDate" />
                 <ScalarProperty Name="StartDate" ColumnName="StartDate" />
@@ -4390,11 +4386,11 @@
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Question" ColumnName="Question" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserId" ColumnName="UserID" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
-                <ScalarProperty Name="LanguageID" ColumnName="LanguageID" />
-                <ScalarProperty Name="SQID" ColumnName="SQID" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryID" />
+                <ScalarProperty Name="LanguageId" ColumnName="LanguageID" />
+                <ScalarProperty Name="SqId" ColumnName="SQID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -4405,9 +4401,9 @@
                 <ScalarProperty Name="SkipCount" ColumnName="SkipCount" />
                 <ScalarProperty Name="UserSelection" ColumnName="UserSelection" />
                 <ScalarProperty Name="ResoponseDateTime" ColumnName="ResoponseDateTime" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="SQID" ColumnName="SQID" />
-                <ScalarProperty Name="SQResponseID" ColumnName="SQResponseID" />
+                <ScalarProperty Name="UserId" ColumnName="UserID" />
+                <ScalarProperty Name="SqId" ColumnName="SQID" />
+                <ScalarProperty Name="SqResponseId" ColumnName="SQResponseID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

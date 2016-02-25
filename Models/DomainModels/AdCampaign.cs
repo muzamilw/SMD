@@ -62,7 +62,10 @@ namespace SMD.Models.DomainModels
         public string BuyItButtonLabel { get; set; }
         public string BuyItImageUrl { get; set; }
         public int? CompanyId { get; set; }
-
+        public string CouponSwapValue { get; set; }
+        public string CouponActualValue { get; set; }
+        public Nullable<int> CouponTakenCount { get; set; }
+        public Nullable<int> CouponQuantity { get; set; }
         public virtual Company Company { get; set; }
         public virtual Language Language { get; set; }
         public virtual ICollection<AdCampaignResponse> AdCampaignResponses { get; set; }

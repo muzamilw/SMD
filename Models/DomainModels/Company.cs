@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SMD.Models.IdentityModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -42,5 +43,8 @@ namespace SMD.Models.DomainModels
         public virtual City City { get; set; }
         public virtual Country Country { get; set; }
         public virtual ICollection<Account> Accounts { get; set; }
+        public virtual ICollection<User> Users { get; set; }
+        public virtual ICollection<AdCampaignResponse> AdCampaignResponses { get; set; }
+
     }
 }
