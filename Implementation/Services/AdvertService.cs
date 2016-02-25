@@ -188,7 +188,7 @@ namespace SMD.Implementation.Services
                 objUC.EducationTitle = loggedInUser.Education != null ? loggedInUser.Education.Title : "";
                 objUC.IndustryName = loggedInUser.Industry != null ? loggedInUser.Industry.IndustryName : "";
                 objUC.LanguageName = loggedInUser.Language != null ? loggedInUser.Language.LanguageName : "";
-                objUC.isStripeIntegrated = String.IsNullOrEmpty(loggedInUser.Company.StripeCustomerId) ? false : true;
+                objUC.isStripeIntegrated =loggedInUser.Company == null?false:( String.IsNullOrEmpty(loggedInUser.Company.StripeCustomerId) ? false : true);
             }
             if (campaignProduct != null)
             {
