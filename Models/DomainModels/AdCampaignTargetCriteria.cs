@@ -24,7 +24,8 @@ namespace SMD.Models.DomainModels
         public int? IndustryId { get; set; }
 
         public Nullable<long> EducationId { get; set; }
-    
+        public Nullable<int> QuizCampaignId { get; set; }
+        public Nullable<int> QuizAnswerId { get; set; }
         public virtual Industry Industry { get; set; }
         public virtual AdCampaign AdCampaign { get; set; }
         public virtual ProfileQuestion ProfileQuestion { get; set; }

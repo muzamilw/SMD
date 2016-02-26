@@ -52,7 +52,7 @@ namespace SMD.Implementation.Services
         }
         private string[] SaveImages(AdCampaign campaign)
         {
-            string[] savePaths = new string[3];
+            string[] savePaths = new string[4];
             string directoryPath = HttpContext.Current.Server.MapPath("~/SMD_Content/AdCampaign/" + campaign.CampaignId);
 
             if (directoryPath != null && !Directory.Exists(directoryPath))
@@ -101,8 +101,20 @@ namespace SMD.Implementation.Services
                 savePath = savePath.Substring(indexOf, savePath.Length - indexOf);
                 savePaths[2] = savePath;
             }
+            if (!string.IsNullOrEmpty(campaign.buyItImageBytes) )
+            {
+                string base64 = campaign.buyItImageBytes.Substring(campaign.buyItImageBytes.IndexOf(',') + 1);
+                base64 = base64.Trim('\0');
+                byte[] data = Convert.FromBase64String(base64);
+                string savePath = directoryPath + "\\buyIt1DefaultImage.jpg";
+                File.WriteAllBytes(savePath, data);
+                int indexOf = savePath.LastIndexOf("SMD_Content", StringComparison.Ordinal);
+                savePath = savePath.Substring(indexOf, savePath.Length - indexOf);
+                savePaths[3] = savePath;
+            }
             return savePaths;
         }
+
         #endregion
 
         #endregion
@@ -176,7 +188,7 @@ namespace SMD.Implementation.Services
                 objUC.EducationTitle = loggedInUser.Education != null ? loggedInUser.Education.Title : "";
                 objUC.IndustryName = loggedInUser.Industry != null ? loggedInUser.Industry.IndustryName : "";
                 objUC.LanguageName = loggedInUser.Language != null ? loggedInUser.Language.LanguageName : "";
-                objUC.isStripeIntegrated = String.IsNullOrEmpty(loggedInUser.StripeCustomerId) ? false : true;
+                objUC.isStripeIntegrated =loggedInUser.Company == null?false:( String.IsNullOrEmpty(loggedInUser.Company.StripeCustomerId) ? false : true);
             }
             if (campaignProduct != null)
             {
@@ -260,6 +272,10 @@ namespace SMD.Implementation.Services
                 {
                     campaignModel.Voucher1ImagePath = paths[2];
                 }
+                if (!string.IsNullOrEmpty(paths[3]))
+                {
+                    campaignModel.BuyItImageUrl = paths[3];
+                }
                 _adCampaignRepository.SaveChanges();
             }
         }
@@ -309,6 +325,10 @@ namespace SMD.Implementation.Services
                 if (!string.IsNullOrEmpty(paths[1]) && !paths[1].Contains("http:"))
                 {
                     campaignModel.LandingPageVideoLink = paths[1];
+                }
+                if (!string.IsNullOrEmpty(paths[3]))
+                {
+                    campaignModel.BuyItImageUrl = paths[3];
                 }
             }
             campaignModel.StartDateTime = campaignModel.StartDateTime.Value.Subtract(_adCampaignRepository.UserTimezoneOffSet);
@@ -456,7 +476,7 @@ namespace SMD.Implementation.Services
             if (user.Roles.Any(role => role.Name.ToLower().Equals("user")))
             {
                 // Make Stripe actual payment 
-                response = stripeService.ChargeCustomer((int?)amount, user.StripeCustomerId);
+                response = stripeService.ChargeCustomer((int?)amount, user.Company.StripeCustomerId);
                 isSystemUser = false;
             }
             else
@@ -477,7 +497,7 @@ namespace SMD.Implementation.Services
                     InvoiceDate = DateTime.Now,
                     InvoiceDueDate = DateTime.Now.AddDays(7),
                     Address1 = user.CountryId.ToString(),
-                    UserId = user.Id,
+                    CompanyId = user.Company.CompanyId,
                     CompanyName = "My Company",
                     CreditCardRef = response
                 };
@@ -516,7 +536,7 @@ namespace SMD.Implementation.Services
         {
             return new AdCampaignBaseResponse
             {
-                ProfileQuestions = _profileQuestionRepository.GetAll()
+                ProfileQuestions = _profileQuestionRepository.GetAll().Where(g=>g.Status != 0)
             };
         }
 

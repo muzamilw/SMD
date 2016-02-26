@@ -55,6 +55,18 @@ namespace SMD.Models.DomainModels
         public string Voucher2Description { get; set; }
         public string Voucher2Value { get; set; }
         public string Voucher2ImagePath { get; set; }
+        public string VideoUrl { get; set; }
+        public string BuuyItLine1 { get; set; }
+        public string BuyItLine2 { get; set; }
+        public string BuyItLine3 { get; set; }
+        public string BuyItButtonLabel { get; set; }
+        public string BuyItImageUrl { get; set; }
+        public int? CompanyId { get; set; }
+        public string CouponSwapValue { get; set; }
+        public string CouponActualValue { get; set; }
+        public Nullable<int> CouponTakenCount { get; set; }
+        public Nullable<int> CouponQuantity { get; set; }
+        public virtual Company Company { get; set; }
         public virtual Language Language { get; set; }
         public virtual ICollection<AdCampaignResponse> AdCampaignResponses { get; set; }
         public virtual ICollection<AdCampaignTargetCriteria> AdCampaignTargetCriterias { get; set; }
@@ -67,5 +79,7 @@ namespace SMD.Models.DomainModels
         public string CampaignTypeImagePath { get; set; }
         [NotMapped]
         public string VoucherImagePath { get; set; }
+        [NotMapped]
+        public string buyItImageBytes { get; set; }
     }
 }

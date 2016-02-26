@@ -171,6 +171,13 @@ namespace SMD.MIS
                 new { controller = "Industry" },
                 null,
                 null);
+            // Get Industry Custom route
+            config.Routes.MapHttpRoute(
+                "GenerateSMS",
+                "GenerateSMS/{AuthenticationToken}/",
+                new { controller = "GenerateSMS" },
+                null,
+                null);
         }
     }
 }

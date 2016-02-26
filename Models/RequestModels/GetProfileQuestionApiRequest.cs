@@ -21,4 +21,11 @@ namespace SMD.Models.RequestModels
         /// </summary>
         public string UserId { get; set; }
     }
+    public class GenerateSmsApiRequest 
+    {
+        /// <summary>
+        /// User Id
+        /// </summary>
+        public string UserId { get; set; }
+    }
 }

@@ -34,7 +34,7 @@ define("ads/ads.viewModel",
                     ageRange = ko.observableArray([]),
                     isNewCriteria = ko.observable(true),
                     isEnableVedioVerificationLink = ko.observable(false),
-                    campaignTypePlaceHolderValue = ko.observable('Enter a link'),
+                    campaignTypePlaceHolderValue = ko.observable('Enter in the YouTube video link'),
                     isEditCampaign = ko.observable(false),
                     canSubmitForApproval = ko.observable(true),
                     correctAnswers = ko.observableArray([{ id: 1, name: "Answer 1" }, { id: 2, name: "Answer 2" }]),
@@ -59,6 +59,7 @@ define("ads/ads.viewModel",
                      educations = ko.observableArray([]),
                       professions = ko.observableArray([]),
                       voucherQuestionStatus = ko.observable(false),
+                      buyItQuestionStatus = ko.observable(false),
                     getCampaignBaseContent = function () {
                         dataservice.getBaseData({
                             RequestId: 1,
@@ -76,7 +77,6 @@ define("ads/ads.viewModel",
                                         pricePerclick(pricePerclick() + UserAndCostDetail().AgeClausePrice);
                                     }
 
-                                    console.log(data.UserAndCostDetails);
 
                                     if (data.Languages != null) {
                                         langs.removeAll();
@@ -165,8 +165,8 @@ define("ads/ads.viewModel",
 
                         selectedCriteria();
 
-                        campaignModel().Gender('2');
-                        campaignModel().Type('2');
+                        campaignModel().Gender('1');
+                        campaignModel().Type('1');
                         campaignModel().MaxBudget('1');
                         campaignModel().AgeRangeEnd(80);
                         campaignModel().AgeRangeStart(13);
@@ -541,7 +541,6 @@ define("ads/ads.viewModel",
                                 _.each(data.ProfileQuestionAnswers, function (question) {
                                     question.PQID = item.PqId;
                                 });
-                                console.log(data.ProfileQuestionAnswers);
                                 ko.utils.arrayPushAll(profileAnswerList(), data.ProfileQuestionAnswers);
                                 profileAnswerList.valueHasMutated();
 
@@ -611,7 +610,6 @@ define("ads/ads.viewModel",
                         pricePerclick(pricePerclick() + UserAndCostDetail().LocationClausePrice);
                         isLocationPerClickPriceAdded(true);
                     }
-                    console.log(campaignModel().AdCampaignTargetLocations());
                 },
 
                 resetLocations = function () {
@@ -670,13 +668,14 @@ define("ads/ads.viewModel",
                 OnChangeCampaignType = function () {
                     if (campaignModel().Type() == "1") {
                         isEnableVedioVerificationLink(true);
-                        campaignTypePlaceHolderValue('Enter a video embed code');
+                        campaignTypePlaceHolderValue('Enter in the YouTube video link');
                     } else {
                         isEnableVedioVerificationLink(false);
                         if (campaignModel().Type() == "2") {
-                            campaignTypePlaceHolderValue('Enter a link');
+                            campaignTypePlaceHolderValue('Enter in your Web site landing Page link');
                         }
                         if (campaignModel().Type() == "3") {
+                            campaignTypePlaceHolderValue('Enter in your Web site landing Page link');
                             isEnableVedioVerificationLink(true);
                         }
                     }
@@ -714,11 +713,11 @@ define("ads/ads.viewModel",
 
                                     if (campaignModel().Type() == "1") {
                                         isEnableVedioVerificationLink(true);
-                                        campaignTypePlaceHolderValue('Enter a video embed code');
+                                        campaignTypePlaceHolderValue('Enter in the YouTube video link');
                                     } else {
                                         isEnableVedioVerificationLink(false);
                                         if (campaignModel().Type() == "2") {
-                                            campaignTypePlaceHolderValue('Enter a link');
+                                            campaignTypePlaceHolderValue('Enter in your Web site landing Page link');
                                         }
                                     }
 
@@ -775,7 +774,6 @@ define("ads/ads.viewModel",
                                         if (item.Type() == "1") { // profile
 
                                             if (profileQIds.indexOf(item.PQID()) == -1) {
-                                                console.log(profileQIds.indexOf(item.PQID()));
                                                 profileQIds.push(item.PQID());
                                                 if (UserAndCostDetail().OtherClausePrice != null) {
                                                     pricePerclick(pricePerclick() + UserAndCostDetail().OtherClausePrice);
@@ -815,12 +813,14 @@ define("ads/ads.viewModel",
                                         }
                                     });
                                     bindAudienceReachCount();
-                                    console.log(campaignModel());
                                     if (campaignModel().VoucherImagePath() != null || campaignModel().Voucher1Value() != null || campaignModel().Voucher1Description() != null || campaignModel().Voucher1Heading() != null)
                                     {
                                         voucherQuestionStatus(true);
                                     }
-
+                                    if (campaignModel().BuuyItLine1() != null || campaignModel().BuyItLine2() != null || campaignModel().BuyItLine3() != null || campaignModel().BuyItButtonLabel() != null) {
+                                        buyItQuestionStatus(true);
+                                    }
+                                    //buyItQuestionStatus
                                     // handle 2nd edit error 
                                     //  $(".modal-backdrop").remove();
                                     $.unblockUI(spinner);
@@ -952,7 +952,6 @@ define("ads/ads.viewModel",
                     var countryIds = '', cityIds = '', countryIdsExcluded = '', cityIdsExcluded = '';
                     var educationIds = '', educationIdsExcluded = '';
                     _.each(campaignModel().AdCampaignTargetLocations(), function (item) {
-                        console.log(item);
                         if (item.CityID() == 0 || item.CityID() == null) {
                             if (item.IncludeorExclude() == '0') {
                                 if (countryIdsExcluded == '') {
@@ -1180,7 +1179,6 @@ define("ads/ads.viewModel",
                             selectedQuestionCountryList.push({ id: country, name: name });
                         }
                     }
-                    console.log(selectedQuestionCountryList());
                 },
                 findLocationsInCountry = function (id) {
 
@@ -1198,6 +1196,9 @@ define("ads/ads.viewModel",
                  },
                 VoucherImageCallback = function (file, data) {
                     campaignModel().VoucherImagePath(data);
+                },
+                buyItImageCallback = function (file, data) {
+                    campaignModel().buyItImageBytes(data);
                 },
                 // Initialize the view model
                 initialize = function (specifiedView) {
@@ -1287,7 +1288,9 @@ define("ads/ads.viewModel",
                     VoucherImageCallback: VoucherImageCallback,
                     saveProfileQuestion: saveProfileQuestion,
                     updateProfileQuestion: updateProfileQuestion,
-                    updateSurveyCriteria: updateSurveyCriteria
+                    updateSurveyCriteria: updateSurveyCriteria,
+                    buyItQuestionStatus: buyItQuestionStatus,
+                    buyItImageCallback: buyItImageCallback
                 };
             })()
         };

@@ -349,6 +349,21 @@ define("pQuestion/pQuestion.viewModel",
                             return selectedQuestion().qId() !== temp.PqId;
                         });
                     }),
+                    // get sorted array of answers 
+                    getSortedAnswers = ko.computed(function () {
+                        if (selectedQuestion() == null)
+                            return null;
+                        return selectedQuestion().answers().sort(function (left, right) {
+                            var leftOrder = 100,rightOrder = 100;
+                            if (right.sortOrder() != null)
+                                rightOrder = right.sortOrder();
+                            if (left.sortOrder() != null)
+                                leftOrder = left.sortOrder();
+                            return leftOrder == rightOrder ?
+                                 null :
+                                 (leftOrder < rightOrder ? -1 : 1);
+                        });
+                    }),
                     // Initialize the view model
                     initialize = function (specifiedView) {
                         view = specifiedView;
@@ -395,7 +410,8 @@ define("pQuestion/pQuestion.viewModel",
                     onDeleteQuestionAnswer: onDeleteQuestionAnswer,
                     hasChangesOnQuestion: hasChangesOnQuestion,
                     CanAddAnswers: CanAddAnswers,
-                    filteredLinkedQuestions: filteredLinkedQuestions
+                    filteredLinkedQuestions: filteredLinkedQuestions,
+                    getSortedAnswers: getSortedAnswers
                 };
             })()
         };

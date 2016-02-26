@@ -1,8 +1,17 @@
 ﻿@{
     ViewBag.Title = "ManageCampaign";
+    string adminClasses = "";
+    string userClasses = "";
 }
 
-
+@if (!User.IsInRole("User"))
+{
+    userClasses = "displayNone";
+}
+else
+{
+    adminClasses = "displayNone";
+}
 <div data-bind="visible: $root.isEditorVisible()" style="display: none">
     <div class="col-lg-12">
         <div class="row">
@@ -161,24 +170,24 @@
                                         </div>
                                         <div class="col-lg-9" data-bind="visible: Type() == 1">
 
-                                            <textarea class="form-control" id="txtLinkOfCampaign" rows="2" placeholder="" data-bind="value: LandingPageVideoLink,validationTooltip:LandingPageVideoLink, validationOnElement: LandingPageVideoLink, attr:{placeholder : $root.campaignTypePlaceHolderValue}"></textarea>
-
+                                            <textarea class="form-control" id="txtLinkOfCampaign" rows="1" placeholder="" data-bind="value: LandingPageVideoLink,validationTooltip:LandingPageVideoLink, validationOnElement: LandingPageVideoLink, attr:{placeholder : $root.campaignTypePlaceHolderValue}"></textarea>
+                                            <textarea class="form-control" id="txtLinkOfCampaign" rows="1" placeholder="Enter in landing page link " data-bind="value: VideoUrl" style="margin-top:5px;"></textarea>
                                         </div>
 
 
 
                                     </div>
 
-                                    <div class="row">
+                                    <div class="row" data-bind="visible:   Type() ==3">
 
                                         <div class="radio col-lg-3">
                                             <input type="radio" name="optionsRadiosStoreType" id="optionsRadiosLink" value="2" data-bind="checked: Type, event:{ change: $root.OnChangeCampaignType }">
-                                            <label for="optionsRadiosLink">
+                                            <label for="optionsRadiosLink" style="display:none;">
                                                 URL
                                             </label>
                                             <span class="help-block text-right"></span>
                                         </div>
-                                        <div class="col-lg-9" data-bind="visible: Type() == 2 ||  Type() ==3">
+                                        <div class="col-lg-9" data-bind="visible: Type() == 2 ||  Type() ==3" style="    margin-bottom: 10px;">
 
                                             <textarea class="form-control" id="txtLinkOfCampaign" rows="1" placeholder="" data-bind="value: LandingPageVideoLink,validationTooltip:LandingPageVideoLink, validationOnElement: LandingPageVideoLink, attr:{placeholder : $root.campaignTypePlaceHolderValue}"></textarea>
 
@@ -226,7 +235,7 @@
                                         <div class="radio col-lg-5">
                                             <input type="radio" name="optionsRadiosStoreType" id="optionsRadiosGame" value="4" data-bind="checked: Type, event:{ change: $root.OnChangeCampaignType }">
                                             <label for="optionsRadiosGame">
-                                                Sponsored Games
+                                                Sponsor Games
                                             </label>
                                             <span class="help-block text-right"></span>
                                         </div>
@@ -418,7 +427,7 @@
                                         </div>
 
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group" style="display:none;">
                                         <div class="col-lg-3 text-right">
                                             <div class="bs-example-tooltips tooltip-float-width">
                                                 <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
@@ -501,7 +510,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-4" style="   margin-left: -33px;    width: 36%;    margin-top: 290px;">
+                                <div class="col-lg-4" style="   margin-left: -33px;    width: 36%;    margin-top: 233px;">
                                     <div class="aud_cnt_head" style=" display:none;">
                                         <h4 class="ad_h4" data-bind="visible: Type() == 1">Video</h4>
                                         <h4 class="ad_h4" data-bind="visible: Type() == 2">URL</h4>
@@ -704,7 +713,7 @@
                                 </div>
                             </div>
 
-                            <div class="clearfix col-lg-12">
+                            <div class="clearfix col-lg-12 @adminClasses">
                                 <header class="main-box-header clearfix" style="padding-right:0px;">
                                     <div class="filter-block pull-right">
                                         @*<a href="#" id="addTemplatePageBtn" class="btn btn-primary pull-right" style="display:none;" data-toggle="modal" data-target=".bs-example-modal-lg" data-bind="click: $root.addNewSurveyCriteria">
@@ -985,9 +994,9 @@
 
                                                 </div>
 
-                                                <div class="defaultImgUploadImageBtn">
+                                                <div class="defaultImgUploadImageBtn" style="width:100%;">
 
-                                                    <div class="col-lg-6" style="text-align:left;">
+                                                    <div class="col-lg-9" style="">
                                                         <div class="fileUpload btn btn-primary">
                                                             <span>Upload </span>
                                                             <input type="file" class="upload" id="Voucher_image_file" data-bind="files: { onLoaded: $root.VoucherImageCallback, fileFilter: 'image.*'}" />
@@ -998,14 +1007,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group text-right">
-                                        <label class="text-right">
-                                            we only charge you when viewers have correctly answered the quiz question OR completed a sponsored game.
-                                            <br />
-
-                                            We collect payment from your credit card every 4th day.
-                                        </label>
-                                    </div>
+                                  
                                     @*<div class="form-group">
                                             <div class="col-lg-4 text-right">
                                                 <div class="bs-example-tooltips tooltip-float-width">
@@ -1058,7 +1060,118 @@
 
                                 </div>
                             </div>
+                            <div class="form-group formcontrol-bg">
+                                <div class="col-lg-9">
+                                    <div class="form-group" style="margin-bottom:20px; margin-top:20px;">
+                                        <div class="col-lg-4 text-right" style="">
+                                            <div class="bs-example-tooltips tooltip-float-width" style="    margin-top: 10px;">
+                                                <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-original-title="" title="">
+                                                    <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                </a>
+                                            </div>
+                                            <label class="control-label text-right tooltip-float font20">Buy it button</label>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="onoffswitch">
+                                                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchAzB" data-bind="checked: $root.buyItQuestionStatus">
+                                                <label class="onoffswitch-label" for="switchAzB">
+                                                    <div class="onoffswitch-inner"></div>
+                                                    <div class="onoffswitch-switch"></div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
 
+                                    <div class="form-group" data-bind="visible: $root.buyItQuestionStatus()">
+                                        <div class="col-lg-4 text-right">
+
+                                            <label for="txtVoucher" class="control-label text-right tooltip-float">First Line</label>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <input type="text" class="form-control" id="txtVoucher" placeholder="Enter Description  (20 characters)" data-bind="value: BuuyItLine1">
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group" data-bind="visible: $root.buyItQuestionStatus() == 1 ">
+                                        <div class="col-lg-4 text-right">
+
+                                            <label for="txtVoucherDes" class="control-label text-right tooltip-float">Second Line</label>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <input type="text" class="form-control" id="txtVoucherDes" placeholder="Enter Description  (20 characters)" data-bind="value: BuyItLine2">
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group" data-bind="visible: $root.buyItQuestionStatus() == 1 ">
+                                        <div class="col-lg-4 text-right">
+
+                                            <label for="txtVoucherVal" class="control-label text-right tooltip-float">Third Line </label>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <input type="text" class="form-control" id="txtVoucherVal" placeholder="Enter Description  (20 characters)" data-bind="value: BuyItLine3">
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group" data-bind="visible: $root.buyItQuestionStatus() == 1 ">
+                                        <div class="col-lg-4 text-right">
+
+                                            <label for="txtVoucherVal" class="control-label text-right tooltip-float">Button Label </label>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <input type="text" class="form-control" id="txtVoucherVal" placeholder="Enter Description  (20 characters)" data-bind="value: BuyItButtonLabel">
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-lg-4 text-right" data-bind="visible: $root.buyItQuestionStatus() == 1 ">
+                                            <label for="txtVoucherVal" class="control-label text-right tooltip-float">Image </label>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <div class="col-lg-12" style="margin-left:-10px;" data-bind="visible: $root.buyItQuestionStatus() == 1 ">
+
+                                                <div>
+
+                                                    <div class="defaultImgUploadImage">
+
+                                                        <img style="width:auto;height:80px;max-width:200px;" data-bind="visible: buyItImageBytes() == '',attr: { src: '/' + BuyItImageUrl() }" src="/Content/Images/Company_Default.png" />
+                                                        <img style="width:auto;height:80px;max-width:200px;" data-bind="visible: buyItImageBytes() != '' ,attr: { src: buyItImageBytes }" />
+
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="defaultImgUploadImageBtn" style="width:100%;">
+
+                                                    <div class="col-lg-9" style="">
+                                                        <div class="fileUpload btn btn-primary">
+                                                            <span>Upload </span>
+                                                            <input type="file" class="upload" id="buyIt_image_file" data-bind="files: { onLoaded: $root.buyItImageCallback, fileFilter: 'image.*'}" />
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group text-right">
+                                        <label class="text-right">
+                                            we only charge you when viewers have correctly answered the quiz question OR completed a sponsored game.
+                                            <br />
+
+                                            We collect payment from your credit card every 4th day.
+                                        </label>
+                                    </div>
+                      
+                                </div>
+                                <div class="col-lg-2">
+                                    <img src="/Content/Images/5_Main_4.png" alt="" style="   margin-left: 10px; width: 120px;
+    margin-top: 23px;" />
+                                </div>
+                                <div class="clearfix">
+                                    &nbsp;
+
+                                </div>
+                            </div>
                         </div>
                         <div class="col-lg-1 col-md-1 col-sm-1">
                             &nbsp;

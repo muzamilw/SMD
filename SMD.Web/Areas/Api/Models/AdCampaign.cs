@@ -59,5 +59,11 @@ namespace SMD.MIS.Areas.Api.Models
 
         public string Voucher1ImagePath { get; set; }
         public string VoucherImagePath { get; set; }
+        public string VideoUrl { get; set; }
+        public string BuuyItLine1 { get; set; }
+        public string BuyItLine2 { get; set; }
+        public string BuyItLine3 { get; set; }
+        public string BuyItButtonLabel { get; set; }
+        public string BuyItImageUrl { get; set; }
     }
 }

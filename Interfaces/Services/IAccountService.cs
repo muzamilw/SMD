@@ -11,6 +11,6 @@ namespace SMD.Interfaces.Services
         /// <summary>
         /// Adds four native accounts for new user 
         /// </summary>
-        void AddAccountsForNewUser(string newUserId);
+        void AddAccountsForNewUser(int newCompanyId);
     }
 }

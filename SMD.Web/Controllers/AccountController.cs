@@ -30,7 +30,7 @@ namespace SMD.MIS.Controllers
         private IClaimsSecurityService claimsSecurityService;
         private IEmailManagerService emailManagerService;
         private readonly IAccountService accountService;
-
+        private readonly ICompanyService companyService;
         /// <summary>
         /// Adds Claims to generated identity
         /// </summary>
@@ -57,7 +57,7 @@ namespace SMD.MIS.Controllers
 
         #region Constructor
 
-        public AccountController(IClaimsSecurityService claimsSecurityService, IEmailManagerService emailManagerService, IAccountService account)
+        public AccountController(IClaimsSecurityService claimsSecurityService, IEmailManagerService emailManagerService, IAccountService account, ICompanyService companyService)
         {
             if (emailManagerService == null)
             {
@@ -66,6 +66,7 @@ namespace SMD.MIS.Controllers
 
             this.claimsSecurityService = claimsSecurityService;
             this.emailManagerService = emailManagerService;
+            this.companyService = companyService;
             accountService = account;
         }
 
@@ -288,7 +289,8 @@ namespace SMD.MIS.Controllers
             IdentityResult result = await UserManager.ConfirmEmailAsync(userId, code);
             if (result.Succeeded)
             {
-                CreateUserAccounts(userId);
+                int companyId = companyService.GetUserCompany(userId);
+                CreateUserAccounts(companyId);
                 return View("Login");
             }
             return View("Error");
@@ -498,7 +500,7 @@ namespace SMD.MIS.Controllers
                     {
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                         SetupUserClaims(info.ExternalIdentity);
-                        CreateUserAccounts(user.Id);
+                        CreateUserAccounts(user.CompanyId.Value);
                         return RedirectToLocal(returnUrl);
                     }
                 }
@@ -609,10 +611,10 @@ namespace SMD.MIS.Controllers
         /// <summary>
         /// Account Creater
         /// </summary>
-        private void CreateUserAccounts(string userId)
+        private void CreateUserAccounts(int companyId)
         {
             //Creates User Native Accounts
-            accountService.AddAccountsForNewUser(userId);
+            accountService.AddAccountsForNewUser(companyId);
         }
         #endregion
     }

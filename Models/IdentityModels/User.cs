@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using SMD.Models.DomainModels;
 using SMD.Models.RequestModels;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SMD.Models.IdentityModels
 {
@@ -19,59 +20,45 @@ namespace SMD.Models.IdentityModels
         public string PhoneNumber { get; set; }
         public bool PhoneNumberConfirmed { get; set; }
         public bool TwoFactorEnabled { get; set; }
-        public DateTime? LockoutEndDateUtc { get; set; }
+        public Nullable<System.DateTime> LockoutEndDateUtc { get; set; }
         public bool LockoutEnabled { get; set; }
         public int AccessFailedCount { get; set; }
         public string UserName { get; set; }
         public string FullName { get; set; }
         public string AlternateEmail { get; set; }
         public string IsEmailVerified { get; set; }
-        public int? Status { get; set; }
-        public DateTime? CreatedDateTime { get; set; }
-        public DateTime? ModifiedDateTime { get; set; }
-        public DateTime? LastLoginTime { get; set; }
+        public Nullable<int> Status { get; set; }
+        public Nullable<System.DateTime> CreatedDateTime { get; set; }
+        public Nullable<System.DateTime> ModifiedDateTime { get; set; }
+        public Nullable<System.DateTime> LastLoginTime { get; set; }
         public string Phone1 { get; set; }
         public string Phone2 { get; set; }
         public string Jobtitle { get; set; }
         public string ContactNotes { get; set; }
         public bool IsSubscribed { get; set; }
-        public int? AppId { get; set; }
-        public string CompanyName { get; set; }
-        public string SalesEmail { get; set; } // till here 
-        public string CompanyRepresentative { get; set; }
+        public Nullable<int> AppID { get; set; }
+        public Nullable<bool> IsCompanyRepresentative { get; set; }
         public string Address1 { get; set; }
         public string Address2 { get; set; }
-        public int? CityId { get; set; }
-        public int? CountryId { get; set; }
+        public Nullable<int> CityId { get; set; }
+        public Nullable<int> CountryId { get; set; }
         public string State { get; set; }
         public string ZipCode { get; set; }
         public string UserTimeZone { get; set; }
-        public string ReferralCode { get; set; }
-        public bool? AfilliatianStatus { get; set; }
-        public string StripeCustomerId { get; set; }
-        public string ChargeBeesubscriptionId { get; set; }
-        public bool? RegisteredViaReferral { get; set; }
-        public string ReferringUserId { get; set; }
-        public DateTime? DOB { get; set; }
-        public int? Gender { get; set; }
-        public int? LanguageId { get; set; }
-        public int? IndustryId { get; set; }
-        public long? EducationId { get; set; }
+        public Nullable<int> Gender { get; set; }
+        public Nullable<int> LanguageId { get; set; }
+        public Nullable<int> IndustryId { get; set; }
+        public Nullable<long> EducationId { get; set; }
         public string ProfileImage { get; set; }
         public string UserCode { get; set; }
         public string SmsCode { get; set; }
         public string WebsiteLink { get; set; }
-        public string AdvertisingContact { get; set; }
-        public string AdvertisingContactPhoneNumber { get; set; }
-        public string AdvertisingContactEmail { get; set; }
-
-        public string PaypalCustomerId { get; set; }
-        public string GoogleWalletCustomerId { get; set; }
-        public int? PreferredPayoutAccount { get; set; }
-        
+        public Nullable<System.DateTime> DOB { get; set; }
+        public Nullable<int> CompanyId { get; set; }
 
 
 
+        public virtual Company Company { get; set; }
         public virtual Industry Industry { get; set; }
         public virtual Language Language { get; set; }
         public virtual ICollection<UserLogin> UserLogins { get; set; }
@@ -92,7 +79,12 @@ namespace SMD.Models.IdentityModels
 
         public virtual City City { get; set; }
         public virtual Country Country { get; set; }
-        
+
+        //city name and country name
+        [NotMapped]
+        public string CountryName { get; set; }
+        [NotMapped]
+        public string CityName { get; set; }
         #endregion
 
         #region Public
@@ -131,11 +123,6 @@ namespace SMD.Models.IdentityModels
             if (!string.IsNullOrEmpty(source.JobTitle))
             {
                 Jobtitle = source.JobTitle;
-            }
-
-            if (!string.IsNullOrEmpty(source.CompanyName))
-            {
-                CompanyName = source.CompanyName;
             }
 
             if (!string.IsNullOrEmpty(source.ContactNotes))
@@ -187,33 +174,11 @@ namespace SMD.Models.IdentityModels
             {
                 UserTimeZone = source.TimeZone;
             }
-
-           
-
-            if (!string.IsNullOrEmpty(source.AdvertContact))
-            {
-                AdvertisingContact = source.AdvertContact;
-            }
-
-            if (!string.IsNullOrEmpty(source.AdvertContactEmail))
-            {
-                AdvertisingContactEmail = source.AdvertContactEmail;
-            }
-
-            if (!string.IsNullOrEmpty(source.AdvertContactPhone))
-            {
-                AdvertisingContactPhoneNumber = source.AdvertContactPhone;
-            }
-
             if (source.EducationId.HasValue)
             {
                 EducationId = source.EducationId;
             }
-
-            if (!string.IsNullOrEmpty(source.PayPal))
-            {
-                PaypalCustomerId = source.PayPal;
-            }
+           
         }
 
         #endregion

@@ -22,5 +22,7 @@ namespace SMD.Interfaces.Repository
         /// Get List of City Of a Country
         /// </summary>
         IEnumerable<City> GetAllCitiesOfCountry(long countryId);
+
+        int GetCityId(string name);
     }
 }

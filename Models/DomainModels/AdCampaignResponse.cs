@@ -15,8 +15,14 @@ namespace SMD.Models.DomainModels
         public double? EndUserDollarAmount { get; set; }
         public int? SkipCount { get; set; }
         public int? UserSelection { get; set; }
+        public int? CompanyId { get; set; }
+        public string GameTime { get; set; }
+        public int? GameScore { get; set; }
+        public int? GameLevel { get; set; }
+        public int? GameId { get; set; }
     
         public virtual AdCampaign AdCampaign { get; set; }
         public virtual User User { get; set; }
+        public virtual Company Company { get; set; }
     }
 }

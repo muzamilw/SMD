@@ -25,7 +25,7 @@ namespace SMD.MIS.Areas.Api.ModelMappers
                        UserId = source.Id,
                        FullName = source.FullName,
                        Address1 = source.Address1,
-                       CompanyName = source.CompanyName,
+                       CompanyName = source.Company.CompanyName,
                        Email = source.Email,
                        JobTitle = source.Jobtitle,
                        UserTimeZone = source.UserTimeZone,
@@ -42,14 +42,16 @@ namespace SMD.MIS.Areas.Api.ModelMappers
                        ZipCode= source.ZipCode,
                        ImageUrl = !string.IsNullOrEmpty(source.ProfileImage) ? HttpContext.Current.Request.Url.Scheme + "://" + 
                        HttpContext.Current.Request.Url.Host + "/" + source.ProfileImage + "?" + DateTime.Now : string.Empty,
-                       AdvertContact = source.AdvertisingContact,
-                       AdvertContactEmail = source.AdvertisingContactEmail,
-                       AdvertContactPhone = source.AdvertisingContactPhoneNumber,
+                       AdvertContact = source.Company.CompanyName,
+                       AdvertContactEmail = source.Company.ReplyEmail,
+                       AdvertContactPhone = source.Company.Tel1,
                        EducationId = source.EducationId,
-                       StripeId = source.StripeCustomerId,
-                       GoogleVallet = source.GoogleWalletCustomerId,
-                       PayPal = source.PaypalCustomerId,
-                       AccountBalance = CreateFromForAccount(source)
+                       StripeId = source.Company.StripeCustomerId,
+                       GoogleVallet = source.Company.GoogleWalletCustomerId,
+                       PayPal = source.Company.PaypalCustomerId,
+                       AccountBalance = CreateFromForAccount(source),
+                       CityName = source.CityName,
+                       CountryName = source.CountryName
                    };
 
             return user;

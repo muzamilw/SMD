@@ -19,6 +19,7 @@ using SMD.Models.DomainModels;
 using SMD.Models.IdentityModels;
 using SMD.Models.RequestModels;
 using SMD.Models.ResponseModels;
+using com.esendex.sdk.messaging;
 
 namespace SMD.Implementation.Services
 {
@@ -42,12 +43,12 @@ namespace SMD.Implementation.Services
         private readonly ICountryRepository countryRepository;
         private readonly IIndustryRepository industryRepository;
         private readonly IEducationRepository educationRepository;
-
+        private readonly ICityRepository cityRepository;
         private readonly IProfileQuestionUserAnswerService profileQuestionAnswerService;
         private readonly IProfileQuestionService profileQuestionService;
         private readonly IAdCampaignResponseRepository adCampaignResponseRepository;
         private readonly ISurveyQuestionResponseRepository surveyQuestionResponseRepository;
-
+        private readonly ICompanyRepository companyRepository;
         private ApplicationUserManager UserManager
         {
             get { return HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
@@ -139,7 +140,7 @@ namespace SMD.Implementation.Services
         /// <param name="adCampaign">Ad Campaign</param>
         /// <param name="adViewerUsedVoucher">If Ad Viewer Uses Voucher</param>
         private async Task PerformAdCampaignTransactions(AdViewedRequest request, Account advertisersAccount, double? adClickRate,
-            Account adViewersAccount, double? adViewersCut, User referringUser, double? smdsCut, Account affiliatesAccount,
+            Account adViewersAccount, double? adViewersCut, Company referringCompany, double? smdsCut, Account affiliatesAccount,
             Account smdAccount, AdCampaign adCampaign, bool adViewerUsedVoucher = false)
         {
             // Debit Advertiser
@@ -156,7 +157,7 @@ namespace SMD.Implementation.Services
                 PerformTransaction(request.AdCampaignId, null, adViewersAccount, adViewersCut, transactionSequence, TransactionType.AdClick);
 
                 // Credit Affiliate
-                smdsCut = PerformCreditTransactionForAffiliate(request, referringUser, smdsCut, affiliatesAccount, ref transactionSequence);
+                smdsCut = PerformCreditTransactionForAffiliate(request, referringCompany, smdsCut, affiliatesAccount, ref transactionSequence);
             }
             
             // Credit SMD
@@ -187,10 +188,10 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Credit Campaing Affiliate
         /// </summary>
-        private double? PerformCreditTransactionForAffiliate(AdViewedRequest request, User referringUser, double? smdsCut,
+        private double? PerformCreditTransactionForAffiliate(AdViewedRequest request, Company referringCompany, double? smdsCut,
             Account affiliatesAccount, ref int transactionSequence)
         {
-            if (referringUser != null)
+            if (referringCompany != null)
             {
                 // Credit Affiliate - if exists
                 double? affiliatesCut = ((smdsCut * 20) / 100);
@@ -372,7 +373,7 @@ namespace SMD.Implementation.Services
                 InvoiceDate = DateTime.Now,
                 InvoiceDueDate = DateTime.Now.AddDays(7),
                 Address1 = source.Country.CountryName,
-                UserId = source.UserId,
+                CompanyId = source.CompanyId,
                 CompanyName = "Cash4Ads",
                 CreditCardRef = stripeResponse
             };
@@ -654,7 +655,7 @@ namespace SMD.Implementation.Services
             ITaxRepository taxRepository, IProfileQuestionUserAnswerService profileQuestionAnswerService,
             ICountryRepository countryRepository, IIndustryRepository industryRepository,
             IProfileQuestionService profileQuestionService, IAdCampaignResponseRepository adCampaignResponseRepository,
-            ISurveyQuestionResponseRepository surveyQuestionResponseRepository, IEducationRepository educationRepository)
+            ISurveyQuestionResponseRepository surveyQuestionResponseRepository, IEducationRepository educationRepository, ICityRepository cityRepository, ICompanyRepository companyRepository)
         {
             if (emailManagerService == null)
             {
@@ -717,7 +718,10 @@ namespace SMD.Implementation.Services
             this.adCampaignResponseRepository = adCampaignResponseRepository;
             this.surveyQuestionResponseRepository = surveyQuestionResponseRepository;
             this.educationRepository = educationRepository;
+            this.cityRepository = cityRepository;
+            this.companyRepository = companyRepository;
         }
+
 
         #endregion
 
@@ -801,17 +805,17 @@ namespace SMD.Implementation.Services
             var adCampaign = await ValidateAdCampaign(request);
 
             // Get Referral if any
-            User referringUser = null;
+            Company referringCompany = null;
             Account affiliatesAccount = null;
-            if (!string.IsNullOrEmpty(adViewer.ReferringUserId))
+            if ((adViewer.Company.ReferringCompanyID.HasValue))
             {
-                referringUser = await UserManager.FindByIdAsync(adViewer.ReferringUserId);
-                if (referringUser == null)
+                referringCompany = companyRepository.GetAll().Where(g=>g.CompanyId == adViewer.Company.ReferringCompanyID).SingleOrDefault();
+                if (referringCompany == null)
                 {
                     throw new SMDException(LanguageResources.WebApiUserService_ReferrerNotFound);
                 }
 
-                affiliatesAccount = accountRepository.GetByUserId(adViewer.ReferringUserId, AccountType.VirtualAccount);
+                affiliatesAccount = accountRepository.GetByCompanyId(referringCompany.CompanyId, AccountType.VirtualAccount);
                 if (affiliatesAccount == null)
                 {
                     throw new SMDException(string.Format(CultureInfo.InvariantCulture,
@@ -833,7 +837,7 @@ namespace SMD.Implementation.Services
             SetupAdCampaignTransaction(request, adCampaign, out adViewersAccount, out advertisersAccount, out smdAccount, cash4Ads.Id);
 
             // Perform Transactions
-            await PerformAdCampaignTransactions(request, advertisersAccount, adClickRate, adViewersAccount, adViewersCut, referringUser, smdsCut,
+            await PerformAdCampaignTransactions(request, advertisersAccount, adClickRate, adViewersAccount, adViewersCut, referringCompany, smdsCut,
                 affiliatesAccount, smdAccount, adCampaign);
 
             return new BaseApiResponse
@@ -1010,26 +1014,23 @@ namespace SMD.Implementation.Services
                 throw new SMDException(LanguageResources.WebApiUserService_InvalidUserId);
             }
            
-            // update image 
-            //if(!String.IsNullOrEmpty( request.ProfileImageBytesString))
-            //{
-            //    string directoryPath = HttpContext.Current.Server.MapPath("~/SMD_Content/Users/" + user.Id);
 
-            //    string base64 = request.ProfileImageBytesString.Substring(request.ProfileImageBytesString.IndexOf(',') + 1);
-            //    base64 = base64.Trim('\0');
-            //    byte[] data = Convert.FromBase64String(base64);
-            //    string savePath = directoryPath + "\\profileImage.jpg";
-            //    File.WriteAllBytes(savePath, data);
-            //    int indexOf = savePath.LastIndexOf("SMD_Content", StringComparison.Ordinal);
-            //    savePath = savePath.Substring(indexOf, savePath.Length - indexOf);
-            //    user.ProfileImage = savePath;
-            //}
+            /// update country and city based on name
+            if (!string.IsNullOrEmpty(request.Country))
+            {
+                request.CountryId = countryRepository.GetCountryId(request.Country);
+            }
+            if (!string.IsNullOrEmpty(request.City))
+            {
+                request.CityId = cityRepository.GetCityId(request.City);
+            }
             // Update User
             user.Update(request);
             
             // Save Changes
            await UserManager.UpdateAsync(user);
-           await UpdateProfileImage(request);
+           if (!String.IsNullOrEmpty(request.ProfileImage))
+               await UpdateProfileImage(request);
 
             return new BaseApiResponse
             {
@@ -1176,7 +1177,11 @@ namespace SMD.Implementation.Services
                         Message = LanguageResources.WebApiUserService_LoginInfoNotFound
                     };
                 }
-
+                // update user name  and cuntry name for api 
+                if (user.Country != null)
+                    user.CountryName = user.Country.CountryName;
+                if (user.City != null)
+                    user.CityName = user.City.CityName;
                 UserLogin userLoginInfo = user.UserLogins.FirstOrDefault(
                     u => u.LoginProvider == request.LoginProvider && u.ProviderKey == request.LoginProviderKey);
 
@@ -1282,7 +1287,7 @@ namespace SMD.Implementation.Services
                 throw new SMDException(LanguageResources.WebApiUserService_LoginInfoNotFound);
             }
 
-            user.StripeCustomerId = customerId;
+            user.Company.StripeCustomerId = customerId;
             await UserManager.UpdateAsync(user);
         }
 
@@ -1297,7 +1302,7 @@ namespace SMD.Implementation.Services
                 throw new SMDException(LanguageResources.WebApiUserService_LoginInfoNotFound);
             }
 
-            return user.StripeCustomerId;
+            return user.Company.StripeCustomerId;
         }
 
 
@@ -1312,7 +1317,7 @@ namespace SMD.Implementation.Services
                 throw new SMDException("No such user with provided email address!");
             }
 
-            return user.StripeCustomerId;
+            return user.Company.StripeCustomerId;
         }
 
         /// <summary>
@@ -1342,7 +1347,21 @@ namespace SMD.Implementation.Services
                Educations = educationRepository.GetAllEducations().ToList()
             };
         }
-
+        public int generateAndSmsCode(string userId)
+        {
+            User user = UserManager.FindById(userId);
+            if (user == null)
+            {
+                throw new SMDException("No such user with provided user Id!");
+            }
+            Random _rdm = new Random(); 
+            int code = _rdm.Next(1000, 9999);
+            if (String.IsNullOrEmpty(user.Phone1))
+                return 0;
+            var messagingService = new MessagingService("omar.c@me.com", "DBVgYFGNCWwK");
+            messagingService.SendMessage(new SmsMessage(user.Phone1, "Your verification code for Cash4Ads profile update is " + code.ToString() + ". Please enter this code in Cash4Ads app to update your profile.", "EX0205631"));
+            return code;
+        }
         #endregion
 
         #endregion

@@ -81,14 +81,14 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Send Email when Collection scheduler run
         /// </summary>
-        public static void SendCollectionRoutineEmail(BaseDbContext context, string aspnetUserId)
+        public static void SendCollectionRoutineEmail(BaseDbContext context, int companyId)
         {
-            User oUser = context.Users.FirstOrDefault(user => user.Id == aspnetUserId);
+            Company oCompany = context.Companies.FirstOrDefault(user => user.CompanyId == companyId);
             SystemMail mail = context.SystemMails.FirstOrDefault(email => email.MailId == (int)EmailTypes.CollectionMade);
 
-            if (oUser != null && mail != null)
+            if (oCompany != null && mail != null)
             {
-                SendEmail(mail, new List<string> { oUser.Email });
+                SendEmail(mail, new List<string> { oCompany.ReplyEmail });
             }
             else
             {
@@ -100,14 +100,14 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Send Email when Payout scheduler run
         /// </summary>
-        public static void SendPayOutRoutineEmail(BaseDbContext context, string aspnetUserId)
+        public static void SendPayOutRoutineEmail(BaseDbContext context, int companyId)
         {
-            User oUser = context.Users.FirstOrDefault(user => user.Id == aspnetUserId);
+            Company oCompany = context.Companies.FirstOrDefault(user => user.CompanyId == companyId);
             SystemMail mail = context.SystemMails.FirstOrDefault(email => email.MailId == (int)EmailTypes.PayoutMade);
 
-            if (oUser != null && mail != null)
+            if (oCompany != null && mail != null)
             {
-                SendEmail(mail, new List<string> { oUser.Email });
+                SendEmail(mail, new List<string> { oCompany.ReplyEmail });
             }
             else
             {

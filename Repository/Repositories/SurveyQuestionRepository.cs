@@ -189,6 +189,7 @@ namespace SMD.Repository.Repositories
         {
             UserBaseData data = new UserBaseData();
             var usr = db.Users.Where(g => g.Id == LoggedInUserIdentity).SingleOrDefault();
+            
             if(usr!= null)
             {
                 bool isAdmin = false;
@@ -205,7 +206,7 @@ namespace SMD.Repository.Repositories
                  data.Education = usr.Education != null?usr.Education.Title : "";
                  data.Industry = usr.Industry != null?usr.Industry.IndustryName:"";
                  data.Language = usr.Language != null? usr.Language.LanguageName: "";
-                 data.isStripeIntegrated = String.IsNullOrEmpty(usr.StripeCustomerId) == true ? false : true;
+                data.isStripeIntegrated =usr.Company == null? false: String.IsNullOrEmpty(usr.Company.StripeCustomerId) == true ? false : true;
                  data.Latitude = usr.City != null ? usr.City.GeoLat : "";
                  data.Longitude = usr.City != null ? usr.City.GeoLong : "";
                  data.isUserAdmin = isAdmin;

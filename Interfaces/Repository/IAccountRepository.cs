@@ -11,8 +11,9 @@ namespace SMD.Interfaces.Repository
         /// <summary>
         /// Get Account By user id
         /// </summary>
-        Account GetByUserId(string userId, AccountType accountType);
+        Account GetByCompanyId(int commpanyId, AccountType accountType);
 
+        Account GetByUserId(string userId, AccountType accountType);
         /// <summary>
         /// Get Account By name
         /// </summary>

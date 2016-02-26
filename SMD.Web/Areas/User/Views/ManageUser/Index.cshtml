@@ -288,9 +288,14 @@
                                             <div class="form-group">
                                                 <div class="col-md-3" style="text-align:right;margin-left: 10px;">
                                                     <div class="fileUpload btn btn-primary">
-                                                        <span>Image / Logo </span>
+                                                        <span>Image / Logo </span> 
                                                         @*<input type="file" class="upload" id="image_files" data-bind="files: { onLoaded: $root.storeImageCallback, fileFilter: 'image.*'}" />*@
                                                         <input type="file" class="upload" id="image_files" onchange="readPhotoURL(this);" />
+                                                    </div>
+                                                    <div class="bs-example-tooltips tooltip-float-width" style="    margin-top: 10px;">
+                                                        <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-original-title="  760 pixels  by 200 pixels" title="  760 pixels  by 200 pixels">
+                                                            <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                        </a>
                                                     </div>
                                                 </div>
 

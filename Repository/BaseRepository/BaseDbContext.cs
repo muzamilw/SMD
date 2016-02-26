@@ -104,6 +104,10 @@ namespace SMD.Repository.BaseRepository
         /// </summary>
         public DbSet<Language> Languages { get; set; }
         /// <summary>
+        /// Companies
+        /// </summary>
+        public DbSet<Company> Companies { get; set; }
+        /// <summary>
         /// Educations
         /// </summary>
         public DbSet<Education> Educations { get; set; }
