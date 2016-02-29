@@ -12,7 +12,7 @@ else
 {
     adminClasses = "displayNone";
 }
-<div data-bind="visible: $root.isEditorVisible()" style="display: none">
+<div  style="display: none">
     <div class="col-lg-12">
         <div class="row">
             <div class="col-lg-12" id="topArea">
@@ -1398,481 +1398,515 @@ else
     </div>
 
 </div>
-<script id="answersTemplate" type="text/html">
-    <!--ko if:Type() != 3 && Type() != 4 && Type() != 5 -->
-    <tr>
 
-        <!--ko if:IncludeorExclude() == '0' -->
-        <td class="col-lg-2">
-            <!-- ko if:   Type() == "1" -->
-            <p style="margin-top: 5px;margin-left: 12px;" data-bind="text: '(Excluded) ' + questionString() + ' = ' + answerString()">
-            </p>
-            <!-- /ko -->
-            <!-- ko if:   Type()  == "2" -->
-            <p style="margin-top: 5px;margin-left: 12px;">
-                <span data-bind="text: '(Excluded) ' +  questionString() + ' = ' "></span>
-                <img data-bind="attr:{src: answerString()}" width="80" />
-            </p>
-            <!-- /ko -->
-        </td>
-        <!--/ko-->
-        <!--ko if:IncludeorExclude() == '1'-->
-        <td class="col-lg-2">
-            <!-- ko if:   Type() == "1" -->
-            <p style="margin-top: 5px;margin-left: 12px;" data-bind="text: '(Included) ' + questionString() + ' = ' + answerString()">
-            </p>
-            <!-- /ko -->
-            <!-- ko if:   Type()  == "2" -->
-            <p style="margin-top: 5px;margin-left: 12px;">
-                <span data-bind="text: '(Included) ' + questionString() + ' = ' "></span>
-                <img data-bind="attr:{src: answerString()}" width="80" />
-            </p>
-            <!-- /ko -->
-        </td>
-        <!--/ko-->
+@*reward your audience screen*@
+<div class="col-lg-12" data-bind="visible: $root.isEditorVisible()" style="display: none">
+    <div class="main-box no-header clearfix">
+        <div class="col-lg-12 form-horizontal"  style="padding: 20px;">
+            <div class="row">
+                <p style="font-size:23px;text-indent:26px;">Up to 50% of your spend goes to your target audience</p>
+            </div>
 
+            <div class="row" style="margin-top:15px;">
+                <span style="font-size: 12px;">Select an Ad Type below</span>
+            </div>
 
-        <td class="col-lg-1" style=" padding: 0px !important; text-align:right;">
-            <a class="table-link">
-                <span class="fa-stack">
-                    <i class="fa fa-square fa-stack-2x"></i>
-                    <i class="fa fa-pencil fa-stack-1x fa-inverse" data-bind="click:$root.onEditCriteria" data-toggle="modal" data-target=".bs-example-modal-lg"></i>
-                </span>
-
-            </a>
-        </td>
-        <td class="col-lg-1" style=" padding: 0px !important;">
-
-            <a class="table-link danger">
-                <span class="fa-stack">
-                    <i class="fa fa-square fa-stack-2x"></i>
-                    <i class="fa fa-trash-o fa-stack-1x fa-inverse" data-bind="click:$root.onDeleteCriteria"></i>
-                </span>
-
-            </a>
-        </td>
-    </tr>
-
-    <!--/ko-->
-</script>
-@*<script id="AdCampaignLocationTemplate" type="text/html">
-        <div class="count_city_newcnt">
-            <!--ko if:CityID() == 0 || CityID() == null-->
-            <span class="form-control lang_nr_box areaCity" data-bind="text:Country " style=" "></span>
-            <!--/ko-->
-            <!--ko if:CityID() != 0 && CityID() != null-->
-            <span class="form-control lang_nr_box areaCity" data-bind="text:City " style=" "></span>
-            <!--/ko-->
-            <!--ko if:Radius() != 0 && Radius() != null && Radius() != undefined-->
-            <!--ko if:IncludeorExclude() == '1'-->
-            <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'Included (' + Radius() +')' "></span>
-            <!--/ko-->
-            <!--ko if:IncludeorExclude() == '0' -->
-            <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'Excluded (' + Radius() +')' "></span>
-            <!--/ko-->
-            <!--/ko-->
-
-
-            <a id="" data-bind="click:$root.onRemoveLocation" title=" delete" class="lang_delSurvey"> <i class="fa fa-times "></i></a>
-        </div>
-        <div class="clear"></div>
-    </script>*@
-<script id="AdCampaignLanguageTemplate" type="text/html">
-    <div class="count_city_newcnt">
-        <!--ko if:Type() == 3 -->
-        <span class="form-control lang_nr_box areaCity" data-bind="text:Language() " style=" "></span>
-        <!--ko if:IncludeorExclude() == '1'-->
-        <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Included)' "></span>
-        <!--/ko-->
-        <!--ko if:IncludeorExclude() == '0' -->
-        <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Excluded)' "></span>
-        <!--/ko-->
-        <a id="" data-bind="click:$root.onRemoveLanguage" title=" delete" class="lang_delSurvey"> <i class="fa fa-times "></i></a>
-        <!--/ko-->
-    </div>
-    <div class="clear"></div>
-</script>
-<script id="AdCampaignIndustryTemplate" type="text/html">
-    <div class="count_city_newcnt">
-        <!--ko if:Type() == 4 -->
-        <span class="form-control lang_nr_box areaCity" data-bind="text:Industry() " style=" "></span>
-        <!--ko if:IncludeorExclude() == '1'-->
-        <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Included)' "></span>
-        <!--/ko-->
-        <!--ko if:IncludeorExclude() == '0' -->
-        <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Excluded)' "></span>
-        <!--/ko-->
-        <a id="" data-bind="click:$root.onRemoveIndustry" title=" delete" class="lang_delSurvey"> <i class="fa fa-times "></i></a>
-        <!--/ko-->
-    </div>
-    <div class="clear"></div>
-</script>
-<script id="targetCriteriasAudienceTemplate" type="text/html">
-    <!--ko if:Type() != 3 && Type() != 4 && Type() != 5 -->
-    <!--ko if:IncludeorExclude() == '0' -->
-    <li>
-        <!-- ko if:   Type() == "1" -->
-        <p class="aud_licontent" data-bind="text: '(Excluded) ' + questionString() + ' = ' + answerString()">
-        </p>
-        <!-- /ko -->
-        <!-- ko if:   Type()  == "2" -->
-        <p class="aud_licontent">
-            <span data-bind="text: '(Excluded) ' +  questionString() + ' = ' "></span>
-            <img data-bind="attr:{src: answerString()}" width="80" />
-        </p>
-        <!-- /ko -->
-    </li>
-    <!--/ko-->
-    <!--ko if:IncludeorExclude() == '1'-->
-    <li>
-        <!-- ko if:   Type() == "1" -->
-        <p class="aud_licontent" data-bind="text: '(Included) ' + questionString() + ' = ' + answerString()">
-        </p>
-        <!-- /ko -->
-        <!-- ko if:   Type()  == "2" -->
-        <p class="aud_licontent">
-            <span data-bind="text: '(Included) ' + questionString() + ' = ' "></span>
-            <img data-bind="attr:{src: answerString()}" width="80" />
-        </p>
-        <!-- /ko -->
-    </li>
-    <!--/ko-->
-    <!--/ko-->
-</script>
-<script id="targetIndustryAudienceTemplate" type="text/html">
-
-    <!--ko if:Type() == 4 -->
-    <li>
-        <!--ko if:IncludeorExclude() == '1'-->
-        <span class="aud_licontent" data-bind="text:'(Included)' + Industry() "></span>
-        <!--/ko-->
-        <!--ko if:IncludeorExclude() == '0' -->
-        <span class="aud_licontent" data-bind="text:'(Excluded)' + Industry() "></span>
-        <!--/ko-->
-    </li>
-    <!--/ko-->
-
-
-</script>
-<script id="targetEducationAudienceTemplate" type="text/html">
-
-    <!--ko if:Type() == 5 -->
-    <li>
-        <!--ko if:IncludeorExclude() == '1'-->
-        <span class="aud_licontent" data-bind="text:'(Included)' + Education() "></span>
-        <!--/ko-->
-        <!--ko if:IncludeorExclude() == '0' -->
-        <span class="aud_licontent" data-bind="text:'(Excluded)' + Education() "></span>
-        <!--/ko-->
-    </li>
-    <!--/ko-->
-
-
-</script>
-<script id="targetLanguageAudienceTemplate" type="text/html">
-
-
-    <!--ko if:Type() == 3 -->
-    <li>
-        <!--ko if:IncludeorExclude() == '1'-->
-        <span class="aud_licontent" data-bind="text:'(Included)' + Language()"></span>
-        <!--/ko-->
-        <!--ko if:IncludeorExclude() == '0' -->
-        <span class="aud_licontent" data-bind="text:'(Excluded)' + Language() "></span>
-        <!--/ko-->
-    </li>
-    <!--/ko-->
-
-
-
-</script>
-<script id="targetLocationAudienceTemplate" type="text/html">
-    <li>
-        <!--ko if:CityID() == 0 || CityID() == null-->
-        <!--ko if:Radius() != 0 && Radius() != null && Radius() != undefined-->
-        <!--ko if:IncludeorExclude() == '1'-->
-
-        <span class="aud_licontent" data-bind="text:'Included (' + Radius() +') ' + Country()"></span>
-
-        <!--/ko-->
-        <!--ko if:IncludeorExclude() == '0' -->
-
-        <span class="aud_licontent" data-bind="text:'Excluded (' + Radius() +') ' + Country()"></span>
-
-        <!--/ko-->
-        <!--/ko-->
-        <!--ko if:Radius() == null || Radius() == undefined-->
-        <!--ko if:IncludeorExclude() == '1'-->
-
-        <span class="aud_licontent" data-bind="text:'(Included) ' + Country()"></span>
-
-        <!--/ko-->
-        <!--ko if:IncludeorExclude() == '0' -->
-
-        <span class="aud_licontent" data-bind="text:'(Excluded) ' + Country()"></span>
-
-        <!--/ko-->
-        <!--/ko-->
-        <!--/ko-->
-        <!--ko if:CityID() != 0 && CityID() != null-->
-        <!--ko if:Radius() != 0 && Radius() != null && Radius() != undefined-->
-        <!--ko if:IncludeorExclude() == '1'-->
-
-        <span class="aud_licontent" data-bind="text:'Included (' + Radius() +') ' + City() "></span>
-
-        <!--/ko-->
-        <!--ko if:IncludeorExclude() == '0' -->
-
-        <span class="aud_licontent" data-bind="text:'Excluded (' + Radius() +') ' + City()"></span>
-
-        <!--/ko-->
-        <!--/ko-->
-        <!--ko if:Radius() == null || Radius() == undefined-->
-        <!--ko if:IncludeorExclude() == '1'-->
-
-        <span class="aud_licontent" data-bind="text:'(Included) ' + City() "></span>
-
-        <!--/ko-->
-        <!--ko if:IncludeorExclude() == '0' -->
-
-        <span class="aud_licontent" data-bind="text:'(Excluded) ' + City()"></span>
-
-        <!--/ko-->
-        <!--/ko-->
-        <!--/ko-->
-    </li>
-</script>
-<script id="AdCampaignEducationTemplate" type="text/html">
-    <div class="count_city_newcnt">
-        <!--ko if:Type() == 5 -->
-        <span class="form-control lang_nr_box areaCity" data-bind="text:Education() " style=" "></span>
-        <!--ko if:IncludeorExclude() == '1'-->
-        <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Included)' "></span>
-        <!--/ko-->
-        <!--ko if:IncludeorExclude() == '0' -->
-        <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Excluded)' "></span>
-        <!--/ko-->
-        <a id="" data-bind="click:$root.onRemoveEducation" title=" delete" class="lang_delSurvey"> <i class="fa fa-times "></i></a>
-        <!--/ko-->
-    </div>
-    <div class="clear"></div>
-</script>
-<script id="AdCampaignLocationTemplate" type="text/html">
-    <li>
-        <ul class="_53ga">
-            <li>
-                <div class="_53gb clearfix">
-                    <div class="_4bl8 _4bl7">
-                        <span class="_47la">
-                            <button type="button" title="Remove" class="_50zy _50zz _50z- _5upp _42ft" style="display:none;">
-                                <span>Remove</span>
-                            </button>
-                        </span>
-                    </div>
-                    <div class="_4bl9">
-                        <span class="_3bsr">
-                            <span class="_3bss" data-bind="text:name">
-
-                            </span><span></span>
-                        </span>
-                    </div>
+            <div class="row" style="margin-top:15px;">
+                <div class="col-lg-4">
+                    <button class="btn  btn-success btnAdsCampaign" id="btnSubmitForApproval">Game Banner Ad</button>
                 </div>
-            </li>
-            <li>
-                <ul>
-                    <!-- ko template: { name: 'SubAdCampaignLocationTemplate' , foreach: $root.findLocationsInCountry(id) } --><!-- /ko -->
+                <div class="col-lg-4">
+                    <button class="btn  btn-success btnAdsCampaign" id="btnSubmitForApproval">Flyers / Leaflet Ad</button>
+                </div>
+                <div class="col-lg-4">
+                    <button class="btn  btn-danger btnAdsCampaign" id="btnSubmitForApproval">YouTube Video Ad</button>
+                </div>
 
+                </div>
+
+              
+
+            </div>
+    </div>
+          
+
+
+        </div>
+        <script id="answersTemplate" type="text/html">
+            <!--ko if:Type() != 3 && Type() != 4 && Type() != 5 -->
+            <tr>
+
+                <!--ko if:IncludeorExclude() == '0' -->
+                <td class="col-lg-2">
+                    <!-- ko if:   Type() == "1" -->
+                    <p style="margin-top: 5px;margin-left: 12px;" data-bind="text: '(Excluded) ' + questionString() + ' = ' + answerString()">
+                    </p>
+                    <!-- /ko -->
+                    <!-- ko if:   Type()  == "2" -->
+                    <p style="margin-top: 5px;margin-left: 12px;">
+                        <span data-bind="text: '(Excluded) ' +  questionString() + ' = ' "></span>
+                        <img data-bind="attr:{src: answerString()}" width="80" />
+                    </p>
+                    <!-- /ko -->
+                </td>
+                <!--/ko-->
+                <!--ko if:IncludeorExclude() == '1'-->
+                <td class="col-lg-2">
+                    <!-- ko if:   Type() == "1" -->
+                    <p style="margin-top: 5px;margin-left: 12px;" data-bind="text: '(Included) ' + questionString() + ' = ' + answerString()">
+                    </p>
+                    <!-- /ko -->
+                    <!-- ko if:   Type()  == "2" -->
+                    <p style="margin-top: 5px;margin-left: 12px;">
+                        <span data-bind="text: '(Included) ' + questionString() + ' = ' "></span>
+                        <img data-bind="attr:{src: answerString()}" width="80" />
+                    </p>
+                    <!-- /ko -->
+                </td>
+                <!--/ko-->
+
+
+                <td class="col-lg-1" style=" padding: 0px !important; text-align:right;">
+                    <a class="table-link">
+                        <span class="fa-stack">
+                            <i class="fa fa-square fa-stack-2x"></i>
+                            <i class="fa fa-pencil fa-stack-1x fa-inverse" data-bind="click:$root.onEditCriteria" data-toggle="modal" data-target=".bs-example-modal-lg"></i>
+                        </span>
+
+                    </a>
+                </td>
+                <td class="col-lg-1" style=" padding: 0px !important;">
+
+                    <a class="table-link danger">
+                        <span class="fa-stack">
+                            <i class="fa fa-square fa-stack-2x"></i>
+                            <i class="fa fa-trash-o fa-stack-1x fa-inverse" data-bind="click:$root.onDeleteCriteria"></i>
+                        </span>
+
+                    </a>
+                </td>
+            </tr>
+
+            <!--/ko-->
+        </script>
+        @*<script id="AdCampaignLocationTemplate" type="text/html">
+                <div class="count_city_newcnt">
+                    <!--ko if:CityID() == 0 || CityID() == null-->
+                    <span class="form-control lang_nr_box areaCity" data-bind="text:Country " style=" "></span>
+                    <!--/ko-->
+                    <!--ko if:CityID() != 0 && CityID() != null-->
+                    <span class="form-control lang_nr_box areaCity" data-bind="text:City " style=" "></span>
+                    <!--/ko-->
+                    <!--ko if:Radius() != 0 && Radius() != null && Radius() != undefined-->
+                    <!--ko if:IncludeorExclude() == '1'-->
+                    <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'Included (' + Radius() +')' "></span>
+                    <!--/ko-->
+                    <!--ko if:IncludeorExclude() == '0' -->
+                    <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'Excluded (' + Radius() +')' "></span>
+                    <!--/ko-->
+                    <!--/ko-->
+
+
+                    <a id="" data-bind="click:$root.onRemoveLocation" title=" delete" class="lang_delSurvey"> <i class="fa fa-times "></i></a>
+                </div>
+                <div class="clear"></div>
+            </script>*@
+        <script id="AdCampaignLanguageTemplate" type="text/html">
+            <div class="count_city_newcnt">
+                <!--ko if:Type() == 3 -->
+                <span class="form-control lang_nr_box areaCity" data-bind="text:Language() " style=" "></span>
+                <!--ko if:IncludeorExclude() == '1'-->
+                <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Included)' "></span>
+                <!--/ko-->
+                <!--ko if:IncludeorExclude() == '0' -->
+                <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Excluded)' "></span>
+                <!--/ko-->
+                <a id="" data-bind="click:$root.onRemoveLanguage" title=" delete" class="lang_delSurvey"> <i class="fa fa-times "></i></a>
+                <!--/ko-->
+            </div>
+            <div class="clear"></div>
+        </script>
+        <script id="AdCampaignIndustryTemplate" type="text/html">
+            <div class="count_city_newcnt">
+                <!--ko if:Type() == 4 -->
+                <span class="form-control lang_nr_box areaCity" data-bind="text:Industry() " style=" "></span>
+                <!--ko if:IncludeorExclude() == '1'-->
+                <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Included)' "></span>
+                <!--/ko-->
+                <!--ko if:IncludeorExclude() == '0' -->
+                <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Excluded)' "></span>
+                <!--/ko-->
+                <a id="" data-bind="click:$root.onRemoveIndustry" title=" delete" class="lang_delSurvey"> <i class="fa fa-times "></i></a>
+                <!--/ko-->
+            </div>
+            <div class="clear"></div>
+        </script>
+        <script id="targetCriteriasAudienceTemplate" type="text/html">
+            <!--ko if:Type() != 3 && Type() != 4 && Type() != 5 -->
+            <!--ko if:IncludeorExclude() == '0' -->
+            <li>
+                <!-- ko if:   Type() == "1" -->
+                <p class="aud_licontent" data-bind="text: '(Excluded) ' + questionString() + ' = ' + answerString()">
+                </p>
+                <!-- /ko -->
+                <!-- ko if:   Type()  == "2" -->
+                <p class="aud_licontent">
+                    <span data-bind="text: '(Excluded) ' +  questionString() + ' = ' "></span>
+                    <img data-bind="attr:{src: answerString()}" width="80" />
+                </p>
+                <!-- /ko -->
+            </li>
+            <!--/ko-->
+            <!--ko if:IncludeorExclude() == '1'-->
+            <li>
+                <!-- ko if:   Type() == "1" -->
+                <p class="aud_licontent" data-bind="text: '(Included) ' + questionString() + ' = ' + answerString()">
+                </p>
+                <!-- /ko -->
+                <!-- ko if:   Type()  == "2" -->
+                <p class="aud_licontent">
+                    <span data-bind="text: '(Included) ' + questionString() + ' = ' "></span>
+                    <img data-bind="attr:{src: answerString()}" width="80" />
+                </p>
+                <!-- /ko -->
+            </li>
+            <!--/ko-->
+            <!--/ko-->
+        </script>
+        <script id="targetIndustryAudienceTemplate" type="text/html">
+
+            <!--ko if:Type() == 4 -->
+            <li>
+                <!--ko if:IncludeorExclude() == '1'-->
+                <span class="aud_licontent" data-bind="text:'(Included)' + Industry() "></span>
+                <!--/ko-->
+                <!--ko if:IncludeorExclude() == '0' -->
+                <span class="aud_licontent" data-bind="text:'(Excluded)' + Industry() "></span>
+                <!--/ko-->
+            </li>
+            <!--/ko-->
+
+
+        </script>
+        <script id="targetEducationAudienceTemplate" type="text/html">
+
+            <!--ko if:Type() == 5 -->
+            <li>
+                <!--ko if:IncludeorExclude() == '1'-->
+                <span class="aud_licontent" data-bind="text:'(Included)' + Education() "></span>
+                <!--/ko-->
+                <!--ko if:IncludeorExclude() == '0' -->
+                <span class="aud_licontent" data-bind="text:'(Excluded)' + Education() "></span>
+                <!--/ko-->
+            </li>
+            <!--/ko-->
+
+
+        </script>
+        <script id="targetLanguageAudienceTemplate" type="text/html">
+
+
+            <!--ko if:Type() == 3 -->
+            <li>
+                <!--ko if:IncludeorExclude() == '1'-->
+                <span class="aud_licontent" data-bind="text:'(Included)' + Language()"></span>
+                <!--/ko-->
+                <!--ko if:IncludeorExclude() == '0' -->
+                <span class="aud_licontent" data-bind="text:'(Excluded)' + Language() "></span>
+                <!--/ko-->
+            </li>
+            <!--/ko-->
+
+
+
+        </script>
+        <script id="targetLocationAudienceTemplate" type="text/html">
+            <li>
+                <!--ko if:CityID() == 0 || CityID() == null-->
+                <!--ko if:Radius() != 0 && Radius() != null && Radius() != undefined-->
+                <!--ko if:IncludeorExclude() == '1'-->
+
+                <span class="aud_licontent" data-bind="text:'Included (' + Radius() +') ' + Country()"></span>
+
+                <!--/ko-->
+                <!--ko if:IncludeorExclude() == '0' -->
+
+                <span class="aud_licontent" data-bind="text:'Excluded (' + Radius() +') ' + Country()"></span>
+
+                <!--/ko-->
+                <!--/ko-->
+                <!--ko if:Radius() == null || Radius() == undefined-->
+                <!--ko if:IncludeorExclude() == '1'-->
+
+                <span class="aud_licontent" data-bind="text:'(Included) ' + Country()"></span>
+
+                <!--/ko-->
+                <!--ko if:IncludeorExclude() == '0' -->
+
+                <span class="aud_licontent" data-bind="text:'(Excluded) ' + Country()"></span>
+
+                <!--/ko-->
+                <!--/ko-->
+                <!--/ko-->
+                <!--ko if:CityID() != 0 && CityID() != null-->
+                <!--ko if:Radius() != 0 && Radius() != null && Radius() != undefined-->
+                <!--ko if:IncludeorExclude() == '1'-->
+
+                <span class="aud_licontent" data-bind="text:'Included (' + Radius() +') ' + City() "></span>
+
+                <!--/ko-->
+                <!--ko if:IncludeorExclude() == '0' -->
+
+                <span class="aud_licontent" data-bind="text:'Excluded (' + Radius() +') ' + City()"></span>
+
+                <!--/ko-->
+                <!--/ko-->
+                <!--ko if:Radius() == null || Radius() == undefined-->
+                <!--ko if:IncludeorExclude() == '1'-->
+
+                <span class="aud_licontent" data-bind="text:'(Included) ' + City() "></span>
+
+                <!--/ko-->
+                <!--ko if:IncludeorExclude() == '0' -->
+
+                <span class="aud_licontent" data-bind="text:'(Excluded) ' + City()"></span>
+
+                <!--/ko-->
+                <!--/ko-->
+                <!--/ko-->
+            </li>
+        </script>
+        <script id="AdCampaignEducationTemplate" type="text/html">
+            <div class="count_city_newcnt">
+                <!--ko if:Type() == 5 -->
+                <span class="form-control lang_nr_box areaCity" data-bind="text:Education() " style=" "></span>
+                <!--ko if:IncludeorExclude() == '1'-->
+                <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Included)' "></span>
+                <!--/ko-->
+                <!--ko if:IncludeorExclude() == '0' -->
+                <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Excluded)' "></span>
+                <!--/ko-->
+                <a id="" data-bind="click:$root.onRemoveEducation" title=" delete" class="lang_delSurvey"> <i class="fa fa-times "></i></a>
+                <!--/ko-->
+            </div>
+            <div class="clear"></div>
+        </script>
+        <script id="AdCampaignLocationTemplate" type="text/html">
+            <li>
+                <ul class="_53ga">
+                    <li>
+                        <div class="_53gb clearfix">
+                            <div class="_4bl8 _4bl7">
+                                <span class="_47la">
+                                    <button type="button" title="Remove" class="_50zy _50zz _50z- _5upp _42ft" style="display:none;">
+                                        <span>Remove</span>
+                                    </button>
+                                </span>
+                            </div>
+                            <div class="_4bl9">
+                                <span class="_3bsr">
+                                    <span class="_3bss" data-bind="text:name">
+
+                                    </span><span></span>
+                                </span>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <ul>
+                            <!-- ko template: { name: 'SubAdCampaignLocationTemplate' , foreach: $root.findLocationsInCountry(id) } --><!-- /ko -->
+
+                        </ul>
+                    </li>
                 </ul>
             </li>
-        </ul>
-    </li>
-</script>
-<script id="SubAdCampaignLocationTemplate" type="text/html">
-    <div class="count_city_newcnt">
-        <!--ko if:CityID() == 0 || CityID() == null-->
-        <li class="_40m_">
-            <div class="clearfix">
-                <div class="_4bl7">
-                    <!--ko if:IncludeorExclude() == '1'-->
-                    <i class="_40n0 img sp_NQc91B1T0mb sx_d7a1cb" title="Included"></i>
-                    <!--/ko-->
-                    <!--ko if:IncludeorExclude() == '0' -->
-                    <i class="_40n0 img sp_NQc91B1T0mb sx_999ca6" title="Excluded"></i>
-                    <!--/ko-->
+        </script>
+        <script id="SubAdCampaignLocationTemplate" type="text/html">
+            <div class="count_city_newcnt">
+                <!--ko if:CityID() == 0 || CityID() == null-->
+                <li class="_40m_">
+                    <div class="clearfix">
+                        <div class="_4bl7">
+                            <!--ko if:IncludeorExclude() == '1'-->
+                            <i class="_40n0 img sp_NQc91B1T0mb sx_d7a1cb" title="Included"></i>
+                            <!--/ko-->
+                            <!--ko if:IncludeorExclude() == '0' -->
+                            <i class="_40n0 img sp_NQc91B1T0mb sx_999ca6" title="Excluded"></i>
+                            <!--/ko-->
 
-                </div>
-                <div class="_4bl8 _4bl7">
-                    <span class="_47la">
-                        <a title="Remove" class="lang_delSurvey _42ft" data-bind="click:$root.onRemoveLocation">
-                            <i class="fa fa-times "></i>
-                        </a>
-                    </span>
-                </div>
-                <div class="_4bl8 _4bl7">
-                    <div>
+                        </div>
+                        <div class="_4bl8 _4bl7">
+                            <span class="_47la">
+                                <a title="Remove" class="lang_delSurvey _42ft" data-bind="click:$root.onRemoveLocation">
+                                    <i class="fa fa-times "></i>
+                                </a>
+                            </span>
+                        </div>
+                        <div class="_4bl8 _4bl7">
+                            <div>
 
+                            </div>
+                        </div>
+                        <div class="_4bl9">
+                            <div class="fwb">
+                                <span class="_3bsr"><span class="_3bss" data-bind="text:Country "></span><span></span></span>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="_4bl9">
-                    <div class="fwb">
-                        <span class="_3bsr"><span class="_3bss" data-bind="text:Country "></span><span></span></span>
-                    </div>
-                </div>
-            </div>
-        </li>
-        <!--/ko-->
-        <!--ko if:CityID() != 0 && CityID() != null-->
-        <li class="_40m_">
-            <div class="clearfix">
-                <div class="_4bl7">
-                    <!--ko if:IncludeorExclude() == '1'-->
-                    <i class="_40n0 img sp_NQc91B1T0mb sx_d7a1cb" title="Included"></i>
-                    <!--/ko-->
-                    <!--ko if:IncludeorExclude() == '0' -->
-                    <i class="_40n0 img sp_NQc91B1T0mb sx_999ca6" title="Excluded"></i>
-                    <!--/ko-->
-                </div>
-                <div class="_4bl8 _4bl7">
-                    <span class="_47la">
-                        <a title="Remove" class="lang_delSurvey _42ft" data-bind="click:$root.onRemoveLocation">
-                            <i class="fa fa-times "></i>
-                        </a>
-                    </span>
-                </div>
-                <div class="_4bl9">
-                    <div class="fwb">
-                        <span class="_3bsr">
-                            <span style="float:left;">
-                                <span data-bind="text:City "></span>
-                                <span>
-                                    <span>, </span><span data-bind="text:Country "></span>
+                </li>
+                <!--/ko-->
+                <!--ko if:CityID() != 0 && CityID() != null-->
+                <li class="_40m_">
+                    <div class="clearfix">
+                        <div class="_4bl7">
+                            <!--ko if:IncludeorExclude() == '1'-->
+                            <i class="_40n0 img sp_NQc91B1T0mb sx_d7a1cb" title="Included"></i>
+                            <!--/ko-->
+                            <!--ko if:IncludeorExclude() == '0' -->
+                            <i class="_40n0 img sp_NQc91B1T0mb sx_999ca6" title="Excluded"></i>
+                            <!--/ko-->
+                        </div>
+                        <div class="_4bl8 _4bl7">
+                            <span class="_47la">
+                                <a title="Remove" class="lang_delSurvey _42ft" data-bind="click:$root.onRemoveLocation">
+                                    <i class="fa fa-times "></i>
+                                </a>
+                            </span>
+                        </div>
+                        <div class="_4bl9">
+                            <div class="fwb">
+                                <span class="_3bsr">
+                                    <span style="float:left;">
+                                        <span data-bind="text:City "></span>
+                                        <span>
+                                            <span>, </span><span data-bind="text:Country "></span>
+                                        </span>
+                                    </span>
+                                    <span style="float:left;">
+                                        <select class="form-control radius_ddp" data-bind="value: Radius">
+                                            <option value="0">No radius</option>
+                                            <option value="10">10 km</option>
+                                            <option value="25">25 km</option>
+                                            <option value="40">40 km</option>
+                                            <option value="100">100+ km</option>
+                                        </select>
+                                    </span>
                                 </span>
-                            </span>
-                            <span style="float:left;">
-                                <select class="form-control radius_ddp" data-bind="value: Radius">
-                                    <option value="0">No radius</option>
-                                    <option value="10">10 km</option>
-                                    <option value="25">25 km</option>
-                                    <option value="40">40 km</option>
-                                    <option value="100">100+ km</option>
-                                </select>
-                            </span>
-                        </span>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </li>
+                <!--/ko-->
+
+
+
             </div>
-        </li>
-        <!--/ko-->
+            <div class="clear"></div>
+        </script>
+        <script>
+            var map;
+            var center;
+            var circles = [];
+            function initializeMap(lat, long) {
+                // LOCATION IN LATITUDE AND LONGITUDE.
+                center = new google.maps.LatLng(long, lat);
+                // MAP ATTRIBUTES.
+                var mapAttr = {
+                    center: center,
+                    zoom: 5,
+                    mapTypeId: google.maps.MapTypeId.TERRAIN
+                };
+                var myLatLng = { lat: parseFloat(lat), lng: parseFloat(long) };
+                // THE MAP TO DISPLAY.
+
+                map = new google.maps.Map(document.getElementById("mapContainer"), mapAttr);
+                google.maps.event.addDomListener(window, 'load', initialize);
 
 
 
-    </div>
-    <div class="clear"></div>
-</script>
-<script>
-    var map;
-    var center;
-    var circles = [];
-    function initializeMap(lat, long) {
-        // LOCATION IN LATITUDE AND LONGITUDE.
-        center = new google.maps.LatLng(long, lat);
-        // MAP ATTRIBUTES.
-        var mapAttr = {
-            center: center,
-            zoom: 5,
-            mapTypeId: google.maps.MapTypeId.TERRAIN
-        };
-        var myLatLng = { lat: parseFloat(lat), lng: parseFloat(long) };
-        // THE MAP TO DISPLAY.
-
-        map = new google.maps.Map(document.getElementById("mapContainer"), mapAttr);
-        google.maps.event.addDomListener(window, 'load', initialize);
-
-
-
-    }
-    function addPointer(lat, long, place, radius, include) {
-        // LOCATION IN LATITUDE AND LONGITUDE.
-        center = new google.maps.LatLng(long, lat);
-        var marker = new google.maps.Marker({
-            position: center,
-            map: map,
-            title: place
-        });
-        addRadius(radius, include)
-    }
-    function addRadius(radius, include) {
-        var clr = '#3B5998';
-        if (!include)
-            clr = '#C82834';
-        var circle = new google.maps.Circle({
-            center: center,
-            map: map,
-            radius: parseInt(radius),          // IN METERS.
-            fillColor: clr,
-            fillOpacity: 0.3,
-            strokeColor: "#FFF",
-            strokeWeight: 0         // DON'T SHOW CIRCLE BORDER.
-        });
-        circles.push(circle);
-    }
-    function clearRadiuses() {
-        $.each(circles, function (key, value) {
-            if (value != null)
-                value.setMap(null);
-        });
-    }
-    function addCountryMarker(countryName) {
-        var code = new google.maps.Geocoder().geocode({ 'address': countryName }, function (results, status) {
-            if (status == google.maps.GeocoderStatus.OK) {
-                map.setCenter(results[0].geometry.location);
-                var marker = new google.maps.Marker({
-                    position: results[0].geometry.location,
-                    map: map,
-                    title: 'Click for more details'
-                });
-            } else {
-                console.log('Geocode was not successful for the following reason: ' + status);
             }
-        });
-    }
-    $(window).scroll(function () {
-        var scrollYpos = $(document).scrollTop();
-        if (scrollYpos >= 419) {
-            $("#reachTableContainer").css("position", "fixed");
-            $("#reachTableContainer").css("top", "10px");
-        } else {
-            $("#reachTableContainer").css("position", "absolute");
-            $("#reachTableContainer").css("top", "150px");
-        }
-    });
-</script>
+            function addPointer(lat, long, place, radius, include) {
+                // LOCATION IN LATITUDE AND LONGITUDE.
+                center = new google.maps.LatLng(long, lat);
+                var marker = new google.maps.Marker({
+                    position: center,
+                    map: map,
+                    title: place
+                });
+                addRadius(radius, include)
+            }
+            function addRadius(radius, include) {
+                var clr = '#3B5998';
+                if (!include)
+                    clr = '#C82834';
+                var circle = new google.maps.Circle({
+                    center: center,
+                    map: map,
+                    radius: parseInt(radius),          // IN METERS.
+                    fillColor: clr,
+                    fillOpacity: 0.3,
+                    strokeColor: "#FFF",
+                    strokeWeight: 0         // DON'T SHOW CIRCLE BORDER.
+                });
+                circles.push(circle);
+            }
+            function clearRadiuses() {
+                $.each(circles, function (key, value) {
+                    if (value != null)
+                        value.setMap(null);
+                });
+            }
+            function addCountryMarker(countryName) {
+                var code = new google.maps.Geocoder().geocode({ 'address': countryName }, function (results, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        map.setCenter(results[0].geometry.location);
+                        var marker = new google.maps.Marker({
+                            position: results[0].geometry.location,
+                            map: map,
+                            title: 'Click for more details'
+                        });
+                    } else {
+                        console.log('Geocode was not successful for the following reason: ' + status);
+                    }
+                });
+            }
+            $(window).scroll(function () {
+                var scrollYpos = $(document).scrollTop();
+                if (scrollYpos >= 419) {
+                    $("#reachTableContainer").css("position", "fixed");
+                    $("#reachTableContainer").css("top", "10px");
+                } else {
+                    $("#reachTableContainer").css("position", "absolute");
+                    $("#reachTableContainer").css("top", "150px");
+                }
+            });
+        </script>
 
-<script id="profileQuestionTiles" type="text/html">
-    <div class="list">
-        <div class="parent-list-title" data-bind="click:$root.onChangeProfileQuestion"><span data-bind="text:Question"></span></div>
-        <div class="listview set-border padding10 list-type-tiles chlidList" data-role="listview">
-            <!-- ko template: { name: 'profileQuestionAnsTiles' , foreach: $root.profileAnswerList } --><!-- /ko -->
+        <script id="profileQuestionTiles" type="text/html">
+            <div class="list">
+                <div class="parent-list-title" data-bind="click:$root.onChangeProfileQuestion"><span data-bind="text:Question"></span></div>
+                <div class="listview set-border padding10 list-type-tiles chlidList" data-role="listview">
+                    <!-- ko template: { name: 'profileQuestionAnsTiles' , foreach: $root.profileAnswerList } --><!-- /ko -->
 
-            <div class="clear-both"></div>
-        </div>
-        <div class="clear-both"></div>
-    </div>
-</script>
-<script id="profileQuestionAnsTiles" type="text/html">
-    <div class="list childList" data-bind="click:$root.saveProfileQuestion" data-dismiss="modal"> <span class="list-title" data-bind="text:Answer"></span> </div>
-</script>
-<script id="surveyQuestionTiles" type="text/html">
-    <div class="list">
-        <div class="parent-list-title"><span data-bind="text:DisplayQuestion"></span></div>
-        <div class="listview set-border padding10 list-type-tiles chlidList" data-role="listview">
-            <div class="list childList leftImg" data-bind="click:$root.saveCriteria.bind($data, 1)"> <img data-bind="attr: { src: LeftPicturePath }" class="list-icon" /></div>
-            <div class="list childList rightImg" data-bind="click:$root.saveCriteria.bind($data, 2)"> <img data-bind="attr: { src: RightPicturePath }" class="list-icon" /></div>
-            <div class="clear-both"></div>
-        </div>
-        <div class="clear-both"></div>
-    </div>
-</script>
-<script id="criteriaEditorTemplate" type="text/html">
-    <div class="list childList" data-bind="click:$root.updateProfileQuestion,css: { 'active': $root.selectedCriteria().PQAnswerID() == PqAnswerId }" data-dismiss="modal"> <span class="list-title" data-bind="text:Answer"></span> </div>
-</script>
+                    <div class="clear-both"></div>
+                </div>
+                <div class="clear-both"></div>
+            </div>
+        </script>
+        <script id="profileQuestionAnsTiles" type="text/html">
+            <div class="list childList" data-bind="click:$root.saveProfileQuestion" data-dismiss="modal"> <span class="list-title" data-bind="text:Answer"></span> </div>
+        </script>
+        <script id="surveyQuestionTiles" type="text/html">
+            <div class="list">
+                <div class="parent-list-title"><span data-bind="text:DisplayQuestion"></span></div>
+                <div class="listview set-border padding10 list-type-tiles chlidList" data-role="listview">
+                    <div class="list childList leftImg" data-bind="click:$root.saveCriteria.bind($data, 1)"> <img data-bind="attr: { src: LeftPicturePath }" class="list-icon" /></div>
+                    <div class="list childList rightImg" data-bind="click:$root.saveCriteria.bind($data, 2)"> <img data-bind="attr: { src: RightPicturePath }" class="list-icon" /></div>
+                    <div class="clear-both"></div>
+                </div>
+                <div class="clear-both"></div>
+            </div>
+        </script>
+        <script id="criteriaEditorTemplate" type="text/html">
+            <div class="list childList" data-bind="click:$root.updateProfileQuestion,css: { 'active': $root.selectedCriteria().PQAnswerID() == PqAnswerId }" data-dismiss="modal"> <span class="list-title" data-bind="text:Answer"></span> </div>
+        </script>
