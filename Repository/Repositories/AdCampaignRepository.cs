@@ -173,13 +173,13 @@ namespace SMD.Repository.Repositories
         {
             
             var query = from usr in db.Users.Include("Cities").Include("Countries")
-                        join prod in db.Products on usr.CountryId equals prod.CountryId
+                        join prod in db.Products on usr.Company.CountryId equals prod.CountryId
                         where usr.Id == LoggedInUserIdentity && prod.ProductId == 2 //&& prod.ProductCode == code
                         select new UserAndCostDetail
                         {
                             AgeClausePrice = prod.AgeClausePrice,
-                            CityId = usr.CityId,
-                            CountryId = usr.CountryId,
+                            CityId = usr.Company.CityId,
+                            CountryId = usr.Company.CountryId,
                             EducationClausePrice = prod.EducationClausePrice,
                             EducationId = usr.EducationId,
                             GenderClausePrice = prod.GenderClausePrice,

@@ -146,6 +146,6 @@ namespace SMD.MIS.Areas.Api.Models
 
         public string CountryName { get; set; }
         public string CityName { get; set; }
-
+        public int CompanyId { get; set; }
     }
 }

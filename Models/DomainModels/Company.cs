@@ -34,7 +34,7 @@ namespace SMD.Models.DomainModels
         public string ReferralCode { get; set; }
         public Nullable<bool> AfilliatianStatus { get; set; }
         public string WebsiteLink { get; set; }
-        public int CompanyType { get; set; }
+        public int? CompanyType { get; set; }
         public virtual ICollection<AdCampaign> AdCampaigns { get; set; }
         public virtual ICollection<Invoice> Invoices { get; set; }
         public virtual ICollection<ProfileQuestionUserAnswer> ProfileQuestionUserAnswers { get; set; }
