@@ -170,9 +170,9 @@ namespace SMD.Implementation.Services
             UserAndCostDetail objUC = new UserAndCostDetail();
             if (loggedInUser != null)
             {
-                campaignProduct = productRepository.GetProductByCountryId(Convert.ToInt32(loggedInUser.CountryId), code);
-                objUC.CountryId = loggedInUser.CountryId;
-                objUC.CityId = loggedInUser.CityId;
+                campaignProduct = productRepository.GetProductByCountryId(Convert.ToInt32(loggedInUser.Company.CountryId), code);
+                objUC.CountryId = loggedInUser.Company.CountryId;
+                objUC.CityId = loggedInUser.Company.CityId;
                 objUC.CityName = loggedInUser.City != null ? loggedInUser.City.CityName : "";
                 objUC.GeoLat = loggedInUser.City != null ? loggedInUser.City.GeoLat : "";
                 objUC.GeoLong = loggedInUser.City != null ? loggedInUser.City.GeoLong : "";
@@ -464,9 +464,9 @@ namespace SMD.Implementation.Services
             // User who added Campaign for approval 
             var user = webApiUserService.GetUserByUserId(source.UserId);
             // Get Current Product
-            var product = productRepository.GetProductByCountryId(user.CountryId, "Ad");
+            var product = productRepository.GetProductByCountryId(user.Company.CountryId, "Ad");
             // Tax Applied
-            var tax = taxRepository.GetTaxByCountryId(user.CountryId);
+            var tax = taxRepository.GetTaxByCountryId(user.Company.CountryId);
             // Total includes tax
             var amount = product.SetupPrice + tax.TaxValue;
             string response = null;
@@ -491,12 +491,12 @@ namespace SMD.Implementation.Services
                 // Add invoice data
                 var invoice = new Invoice
                 {
-                    Country = user.CountryId.ToString(),
+                    Country = user.Company.CountryId.ToString(),
                     Total = (double)amount,
                     NetTotal = (double)amount,
                     InvoiceDate = DateTime.Now,
                     InvoiceDueDate = DateTime.Now.AddDays(7),
-                    Address1 = user.CountryId.ToString(),
+                    Address1 = user.Company.CountryId.ToString(),
                     CompanyId = user.Company.CompanyId,
                     CompanyName = "My Company",
                     CreditCardRef = response

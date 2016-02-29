@@ -106,7 +106,7 @@ namespace SMD.MIS.ModelMappers
                 RejectionReason = source.RejectionReason,
                 SubmissionDate = source.SubmissionDate,
                 CreatedBy = source.User.FullName,
-                CreatorAddress = source.User.State + " " + source.User.Address1
+                CreatorAddress = source.User.Company.State + " " + source.User.Company.AddressLine1
 
             };
         }

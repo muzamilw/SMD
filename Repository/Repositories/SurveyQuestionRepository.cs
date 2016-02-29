@@ -195,9 +195,9 @@ namespace SMD.Repository.Repositories
                 bool isAdmin = false;
                 if (usr.Roles.FirstOrDefault().Name == Roles.Adminstrator)
                     isAdmin = true;
-                var country = 
-                 data.CityId = usr.CityId;
-                 data.CountryId = usr.CountryId;
+         
+                 data.CityId =usr.Company == null? null: usr.Company.CityId;
+                 data.CountryId = usr.Company == null ? null : usr.Company.CountryId; 
                  data.EducationId = usr.EducationId;
                  data.IndustryId = usr.IndustryId;
                  data.LanguageId = usr.LanguageId;
