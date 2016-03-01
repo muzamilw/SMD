@@ -77,8 +77,8 @@ namespace SMD.Models.IdentityModels
 
         public virtual Education Education { get; set; }
 
-        public virtual City City { get; set; }
-        public virtual Country Country { get; set; }
+        //public virtual City City { get; set; }
+        //public virtual Country Country { get; set; }
 
         //city name and country name
         [NotMapped]

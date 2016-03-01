@@ -51,5 +51,7 @@ namespace SMD.Models.RequestModels
         /// Ad Reward User Selection
         /// </summary>
         public int? AdRewardUserSelection { get; set; }
+
+        public int? companyId { get; set; }
     }
 }
