@@ -6,7 +6,7 @@
           Answer1, Answer2, Answer3, CorrectAnswer, AgeRangeStart, AgeRangeEnd, ResultClicks, AmountSpent
           , ImagePath, CampaignImagePath, CampaignTypeImagePath, Description, ClickRate,
           Voucher1Heading, Voucher1Description, Voucher1Value, Voucher2Heading, Voucher2Description, Voucher2Value,
-          Voucher1ImagePath, VoucherImagePath, CreatedBy, VideoUrl, BuuyItLine1, BuyItLine2, BuyItLine3, BuyItButtonLabel, BuyItImageUrl) {
+          Voucher1ImagePath, VoucherImagePath, CreatedBy, VideoUrl, BuuyItLine1, BuyItLine2, BuyItLine3, BuyItButtonLabel, BuyItImageUrl, AdViews) {
           var
               //type and userID will be set on server sside
               CampaignID = ko.observable(CampaignID),
@@ -101,6 +101,7 @@
               BuyItButtonLabel = ko.observable(BuyItButtonLabel),
               BuyItImageUrl = ko.observable(BuyItImageUrl),
               buyItImageBytes = ko.observable(''),
+              AdViews = ko.observable(AdViews),
                // Errors
                 errors = ko.validation.group({
                     CampaignName:CampaignName,
@@ -146,7 +147,8 @@
                   BuyItLine3: BuyItLine3,
                   BuyItButtonLabel: BuyItButtonLabel,
                   BuyItImageUrl: BuyItImageUrl,
-                  buyItImageBytes: buyItImageBytes
+                  buyItImageBytes: buyItImageBytes,
+                  AdViews: AdViews
               }),
               // Has Changes
               hasChanges = ko.computed(function () {
@@ -217,6 +219,7 @@
                       BuyItButtonLabel: BuyItButtonLabel(),
                       BuyItImageUrl: BuyItImageUrl(),
                       buyItImageBytes: buyItImageBytes(),
+                      AdViews: AdViews()
                   };
               };
           return {
@@ -272,7 +275,8 @@
               BuyItLine3: BuyItLine3,
               BuyItButtonLabel: BuyItButtonLabel,
               BuyItImageUrl: BuyItImageUrl,
-              buyItImageBytes: buyItImageBytes
+              buyItImageBytes: buyItImageBytes,
+              AdViews: AdViews
           };
       };
 
@@ -392,7 +396,7 @@
             , source.Type + "", source.DisplayTitle, source.LandingPageVideoLink, source.VerifyQuestion, source.Answer1, source.Answer2, source.Answer3,
             source.CorrectAnswer, source.AgeRangeStart, source.AgeRangeEnd, source.ResultClicks, source.AmountSpent, source.ImagePath, source.CampaignImagePath,
             source.CampaignTypeImagePath, source.Description, source.ClickRate, source.Voucher1Heading, source.Voucher1Description, source.Voucher1Value, source.Voucher2Heading, source.Voucher2Description,
-             source.Voucher2Value, source.Voucher1ImagePath, source.VoucherImagePath, source.CreatedBy, source.VideoUrl, source.BuuyItLine1, source.BuyItLine2, source.BuyItLine3, source.BuyItButtonLabel, source.BuyItImageUrl);
+             source.Voucher2Value, source.Voucher1ImagePath, source.VoucherImagePath, source.CreatedBy, source.VideoUrl, source.BuuyItLine1, source.BuyItLine2, source.BuyItLine3, source.BuyItButtonLabel, source.BuyItImageUrl,source.AdViews);
         _.each(source.AdCampaignTargetCriterias, function (item) {
             campaign.AdCampaignTargetCriterias.push(AdCampaignTargetCriteriasModel.Create(item));
         });

@@ -261,8 +261,22 @@ else
                 <span class="">&nbsp;</span>
             </td>
             <td class="col-sm-1"><span class="" data-bind="text: MaxBudget"></span></td>*@
-        <td class="col-sm-2"><span class="" data-bind="text: Type"></span></td>
-        <td class="col-sm-2"><span class="" data-bind="dateString: EndDateTime"></span></td>
+        <td class="col-sm-2">
+  
+            <!-- ko if: Type() == 1-->
+            <span class="">Video</span>
+            <!-- /ko -->
+            <!-- ko if: Type() == 2-->
+            <span class="">Link</span>
+            <!-- /ko -->
+            <!-- ko if: Type() == 3-->
+            <span class="">Upload Image</span>
+            <!-- /ko -->
+            <!-- ko if: Type() == 4-->
+            <span class="">Game</span>
+            <!-- /ko -->
+        </td>
+        <td class="col-sm-2"><span class="" data-bind="text: AdViews"></span></td>
         <td class="col-sm-2">
             <!-- ko if: Status() == 1-->
             <div class="text-left statusbg" style="background:#6D6EFA;    width: 47px;">

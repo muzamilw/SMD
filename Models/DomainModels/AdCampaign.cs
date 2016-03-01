@@ -81,5 +81,8 @@ namespace SMD.Models.DomainModels
         public string VoucherImagePath { get; set; }
         [NotMapped]
         public string buyItImageBytes { get; set; }
+
+        [NotMapped]
+        public int AdViews { get; set; }
     }
 }

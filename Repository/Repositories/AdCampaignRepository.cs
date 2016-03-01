@@ -115,17 +115,39 @@ namespace SMD.Repository.Repositories
                 rowCount = DbSet.Count();
                 if (isAdmin)
                 {
-                    return DbSet.OrderBy(g => g.CampaignId)
+                     IEnumerable<AdCampaign> adCampaigns = DbSet.OrderBy(g => g.CampaignId)
                             .Skip(fromRow)
                             .Take(toRow)
                             .ToList();
+
+                     if (adCampaigns != null && adCampaigns.Count() > 0)
+                     {
+                         foreach (var ad in adCampaigns)
+                         {
+                             ad.AdViews = db.AdCampaignResponses.Where(c => c.CampaignId == ad.CampaignId).Count();
+                         }
+
+                     }
+                     return adCampaigns;
+
+
                 }
                 else
                 {
-                    return DbSet.Where(g => g.UserId == LoggedInUserIdentity).OrderBy(g => g.CampaignId)
+                     IEnumerable<AdCampaign> adCampaigns = DbSet.Where(g => g.UserId == LoggedInUserIdentity).OrderBy(g => g.CampaignId)
                             .Skip(fromRow)
                             .Take(toRow)
                             .ToList();
+                     if (adCampaigns != null && adCampaigns.Count() > 0)
+                     {
+                         foreach (var ad in adCampaigns)
+                         {
+                             ad.AdViews = db.AdCampaignResponses.Where(c => c.CampaignId == ad.CampaignId).Count();
+                         }
+
+                     }
+                     return adCampaigns;
+
                 }
             } 
             else
@@ -140,10 +162,20 @@ namespace SMD.Repository.Repositories
 
 
                 rowCount = DbSet.Count(query);
-                return DbSet.Where(query).OrderBy(g => g.CampaignId)
+                IEnumerable<AdCampaign> adCampaigns = DbSet.Where(query).OrderBy(g => g.CampaignId)
                         .Skip(fromRow)
                         .Take(toRow)
                         .ToList();
+
+                if (adCampaigns != null && adCampaigns.Count() > 0)
+                {
+                    foreach(var ad in adCampaigns)
+                    {
+                        ad.AdViews = db.AdCampaignResponses.Where(c => c.CampaignId == ad.CampaignId).Count();
+                    }
+
+                }
+                return adCampaigns;
             }
         }
 
