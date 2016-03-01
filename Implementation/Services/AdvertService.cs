@@ -173,9 +173,9 @@ namespace SMD.Implementation.Services
                 campaignProduct = productRepository.GetProductByCountryId(Convert.ToInt32(loggedInUser.Company.CountryId), code);
                 objUC.CountryId = loggedInUser.Company.CountryId;
                 objUC.CityId = loggedInUser.Company.CityId;
-                objUC.CityName = loggedInUser.City != null ? loggedInUser.City.CityName : "";
-                objUC.GeoLat = loggedInUser.City != null ? loggedInUser.City.GeoLat : "";
-                objUC.GeoLong = loggedInUser.City != null ? loggedInUser.City.GeoLong : "";
+                objUC.CityName = loggedInUser.Company.City != null ? loggedInUser.Company.City.CityName : "";
+                objUC.GeoLat = loggedInUser.Company.City != null ? loggedInUser.Company.City.GeoLat : "";
+                objUC.GeoLong = loggedInUser.Company.City != null ? loggedInUser.Company.City.GeoLong : "";
 
 
                 objUC.EducationId = loggedInUser.EducationId;
@@ -184,7 +184,7 @@ namespace SMD.Implementation.Services
                 objUC.LanguageId = loggedInUser.LanguageId;
 
 
-                objUC.CountryName = loggedInUser.Country != null ? loggedInUser.Country.CountryName : "";
+                objUC.CountryName = loggedInUser.Company.Country != null ? loggedInUser.Company.Country.CountryName : "";
                 objUC.EducationTitle = loggedInUser.Education != null ? loggedInUser.Education.Title : "";
                 objUC.IndustryName = loggedInUser.Industry != null ? loggedInUser.Industry.IndustryName : "";
                 objUC.LanguageName = loggedInUser.Language != null ? loggedInUser.Language.LanguageName : "";
