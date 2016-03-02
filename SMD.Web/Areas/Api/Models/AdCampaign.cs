@@ -65,5 +65,6 @@ namespace SMD.MIS.Areas.Api.Models
         public string BuyItLine3 { get; set; }
         public string BuyItButtonLabel { get; set; }
         public string BuyItImageUrl { get; set; }
+        public int? CompanyId { get; set; }
     }
 }

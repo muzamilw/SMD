@@ -179,7 +179,7 @@ define("ads/ads.viewModel",
                         campaignModel().LanguageId(41);
                         campaignModel().CampaignName('New Campaign');
                         
-                       
+                        getAudienceCount();
                         bindAudienceReachCount();
                         selectedQuestionCountryList([]);
 
@@ -812,6 +812,7 @@ define("ads/ads.viewModel",
                                             }
                                         }
                                     });
+                                    getAudienceCount();
                                     bindAudienceReachCount();
                                     if (campaignModel().VoucherImagePath() != null || campaignModel().Voucher1Value() != null || campaignModel().Voucher1Description() != null || campaignModel().Voucher1Heading() != null)
                                     {

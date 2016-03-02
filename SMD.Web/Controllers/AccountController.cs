@@ -268,6 +268,7 @@ namespace SMD.MIS.Controllers
                     await
                         emailManagerService.SendAccountVerificationEmail(user, callbackUrl);
                     ViewBag.Link = callbackUrl;
+                    companyService.createUser(user.Id, model.Email, model.FullName);
                     return View("DisplayEmail");
                 }
                 AddErrors(result);

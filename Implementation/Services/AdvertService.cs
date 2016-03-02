@@ -44,7 +44,7 @@ namespace SMD.Implementation.Services
         private readonly IEducationRepository _educationRepository;
         private readonly IStripeService stripeService;
         private readonly WebApiUserService webApiUserService;
-
+        private readonly ICompanyRepository companyRepository;
         #region Private Funcs
         private ApplicationUserManager UserManager
         {
@@ -136,8 +136,8 @@ namespace SMD.Implementation.Services
             IProfileQuestionAnswerRepository profileQuestionAnswerRepository,
             ISurveyQuestionRepository surveyQuestionRepository, 
             IProductRepository productRepository, ITaxRepository taxRepository, IInvoiceRepository invoiceRepository, 
-            IInvoiceDetailRepository invoiceDetailRepository,IEducationRepository educationRepository, 
-            IStripeService stripeService, WebApiUserService webApiUserService)
+            IInvoiceDetailRepository invoiceDetailRepository,IEducationRepository educationRepository,
+            IStripeService stripeService, WebApiUserService webApiUserService, ICompanyRepository companyRepository)
         {
             this._adCampaignRepository = adCampaignRepository;
             this._languageRepository = languageRepository;
@@ -157,6 +157,7 @@ namespace SMD.Implementation.Services
             this._educationRepository = educationRepository;
             this.stripeService = stripeService;
             this.webApiUserService = webApiUserService;
+            this.companyRepository = companyRepository;
         }
         
         /// <summary>
@@ -249,6 +250,7 @@ namespace SMD.Implementation.Services
         public void CreateCampaign(AdCampaign campaignModel)
         {
             campaignModel.UserId = _adCampaignRepository.LoggedInUserIdentity;
+            campaignModel.CompanyId = companyRepository.GetUserCompany(_adCampaignRepository.LoggedInUserIdentity);
             var user = UserManager.Users.Where(g => g.Id == _adCampaignRepository.LoggedInUserIdentity).SingleOrDefault();
             if (user != null)
                 campaignModel.CreatedBy = user.FullName;
@@ -311,7 +313,7 @@ namespace SMD.Implementation.Services
         /// </summary>
         public void UpdateCampaign(AdCampaign campaignModel)
         {
-            campaignModel.UserId = _adCampaignRepository.LoggedInUserIdentity;
+           // campaignModel.UserId = _adCampaignRepository.LoggedInUserIdentity;
             var user = UserManager.Users.Where(g => g.Id == _adCampaignRepository.LoggedInUserIdentity).SingleOrDefault();
             if (user != null)
                 campaignModel.CreatedBy = user.FullName;
