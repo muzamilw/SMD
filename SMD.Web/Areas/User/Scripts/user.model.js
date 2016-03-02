@@ -4,7 +4,7 @@
       User = function (specifiedId, specifiedFullName, specifiedAddress1, specifiedCmpname, specifiedEmail,
           specifiedJTitle, specifiedTimeZone, specifiedGender, specifiedAddress2, specifiedAge, specifiedCityId,
           specifiedContNotes, specifiedCountryId,indsId, specifiedPhn1, specifiedPhn2, specifiedState, specifiedZip, specifiedImg,
-          advertisingContact, advertisingEmail, advertisingPhone, spcEduId, spcStripe, spcPayPal, spcGoogle, ProfileImageBytes) {
+          advertisingContact, advertisingEmail, advertisingPhone, spcEduId, spcStripe, spcPayPal, spcGoogle, ProfileImageBytes, CompanyId) {
           var
               id = ko.observable(specifiedId),
               fullName = ko.observable(specifiedFullName),
@@ -35,7 +35,7 @@
               advertEmail = ko.observable(advertisingEmail),
               advertPhone = ko.observable(advertisingPhone),
               educationId = ko.observable(spcEduId),
-
+              CompanyId = ko.observable(CompanyId),
               stripeId = ko.observable(spcStripe || 'undefined'),
               payPalId = ko.observable(spcPayPal || 'undefined'),
               googleValletId = ko.observable(spcGoogle || 'undefined'),
@@ -106,8 +106,8 @@
                       AdvertContactPhone: advertPhone(),
                       EducationId: educationId(),
                       PayPal: payPalId(),
-                      ProfileImageBytesString: ProfileImageBytes()
-
+                      ProfileImageBytesString: ProfileImageBytes(),
+                      CompanyId: CompanyId
                   };
               };
           return {
@@ -157,7 +157,8 @@
             itemFromServer.Address2, itemFromServer.DOB, itemFromServer.CityId, itemFromServer.ContactNotes, itemFromServer.CountryId,
             itemFromServer.IndustryId,itemFromServer.Phone1,itemFromServer.Phone2,itemFromServer.State,itemFromServer.ZipCode,
             itemFromServer.ImageUrl ,itemFromServer.AdvertContact,itemFromServer.AdvertContactEmail,itemFromServer.AdvertContactPhone,
-            itemFromServer.EducationId, itemFromServer.StripeId, itemFromServer.PayPal, itemFromServer.GoogleVallet,null);
+            itemFromServer.EducationId, itemFromServer.StripeId, itemFromServer.PayPal, itemFromServer.GoogleVallet, null,itemFromServer.CompanyId);
+     
     };
     
     // Function to attain cancel button functionality User

@@ -1033,7 +1033,7 @@ namespace SMD.Implementation.Services
             companyRepository.updateCompany(request);
             // Save Changes
            await UserManager.UpdateAsync(user);
-           if (!String.IsNullOrEmpty(request.ProfileImage))
+           if (request.ProfileImageBytes != null)
                await UpdateProfileImage(request);
 
             return new BaseApiResponse

@@ -143,6 +143,88 @@
                                 </div>
                             </div>
                         </div>
+                      
+                        <div class="col-lg-12 form-horizontal">
+                            <h3 class="group-header" style="margin-top:20px;">
+                                Company Info
+                            </h3>
+                            <div class="col-lg-9" style="margin-top: 12px;">
+                                <div class="col-lg-12">
+                                    @*<div class="form-group">
+                                        <div class="col-lg-4 text-right">
+                                           
+                                            <label class="control-label text-right tooltip-float">Advertising Contact</label>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <input type="text" class="form-control" data-bind="value: advert">
+                                        </div>
+                                    </div>*@
+                                    <div class="form-group">
+                                        <div class="col-lg-4 text-right">
+                                          
+                                            <label class="control-label text-right tooltip-float">Company Name</label>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <input type="text" class="form-control" data-bind="value: companyName">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <div class="col-lg-4 text-right">
+                                           
+                                            <label class="control-label text-right tooltip-float">Email</label>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <input type="text" class="form-control" data-bind="value: advertEmail">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <div class="col-lg-4 text-right">
+                                           
+                                            <label class="control-label text-right tooltip-float">Phone</label>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <input type="text" class="form-control" data-bind="value: advertPhone">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12" >
+                                  
+                                    <div class="form-group">
+                                        <div class="col-lg-4 text-right">
+                                      
+                                            <label class="control-label text-right tooltip-float">&nbsp;</label>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <div class="col-md-3" style="text-align:right;margin-left: 10px;">
+                                                    <div class="fileUpload btn btn-primary">
+                                                        <span>Image / Logo </span> 
+                                                        @*<input type="file" class="upload" id="image_files" data-bind="files: { onLoaded: $root.storeImageCallback, fileFilter: 'image.*'}" />*@
+                                                        <input type="file" class="upload" id="image_files" onchange="readPhotoURL(this);" />
+                                                    </div>
+                                                    <div class="bs-example-tooltips tooltip-float-width" style="    margin-top: 10px;">
+                                                        <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-original-title="  760 pixels  by 200 pixels" title="  760 pixels  by 200 pixels">
+                                                            <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    @*<img style="width: auto; height: 150px; max-width: 200px; min-width: 100px; border: 1px solid;" data-bind="visible:ProfileImageBytes()==null,attr: { src:  imageUrl }," src="/Images/select_image.jpg" />
+                                                    <img style="width:auto;height:80px;max-width:200px;" data-bind="visible:ProfileImageBytes!=null,attr: { src: ProfileImageBytes }" />*@
+                                                    <img id="vehicleImage" alt="" style="width: 120px;height:120px" data-bind="attr:{src:imageUrl }" />
+                                                    <h5><span></span></h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="col-lg-12 form-horizontal">
                             <h3 class="group-header" style="margin-top:20px;">
                                 Address Info
@@ -151,7 +233,7 @@
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <div class="col-lg-4 text-right">
-                                            
+
                                             <label class="control-label text-right tooltip-float">Address 1</label>
                                         </div>
                                         <div class="col-lg-6">
@@ -162,7 +244,7 @@
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <div class="col-lg-4 text-right">
-                                           
+
                                             <label class="control-label text-right tooltip-float">Address 2</label>
                                         </div>
                                         <div class="col-lg-6">
@@ -173,7 +255,7 @@
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <div class="col-lg-4 text-right">
-                                            
+
                                             <label class="control-label text-right tooltip-float">Country</label>
                                         </div>
                                         <div class="col-lg-6">
@@ -206,7 +288,7 @@
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <div class="col-lg-4 text-right">
-                                          
+
                                             <label class="control-label text-right tooltip-float">Zip Code</label>
                                         </div>
                                         <div class="col-lg-6">
@@ -217,95 +299,11 @@
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <div class="col-lg-4 text-right">
-                                          
+
                                             <label class="control-label text-right tooltip-float">Time Zone</label>
                                         </div>
                                         <div class="col-lg-6">
                                             <select class="form-control" data-bind="options: $root.timeZones, optionsText: 'TimeZoneName', optionsValue: 'TimeZoneId', optionsCaption: 'Select ...' , value:userTimeZone"></select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-12 form-horizontal">
-                            <h3 class="group-header" style="margin-top:20px;">
-                                Advertising Info
-                            </h3>
-                            <div class="col-lg-9" style="margin-top: 12px;">
-                                <div class="col-lg-12">
-                                    <div class="form-group">
-                                        <div class="col-lg-4 text-right">
-                                           
-                                            <label class="control-label text-right tooltip-float">Advertising Contact</label>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <input type="text" class="form-control" data-bind="value: advert">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12">
-                                    <div class="form-group">
-                                        <div class="col-lg-4 text-right">
-                                           
-                                            <label class="control-label text-right tooltip-float">Email</label>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <input type="text" class="form-control" data-bind="value: advertEmail">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12">
-                                    <div class="form-group">
-                                        <div class="col-lg-4 text-right">
-                                           
-                                            <label class="control-label text-right tooltip-float">Phone</label>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <input type="text" class="form-control" data-bind="value: advertPhone">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12" >
-                                    <div class="form-group">
-                                        <div class="col-lg-4 text-right">
-                                            @*<div class="bs-example-tooltips tooltip-float-width">
-                                                <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
-                                                    <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                </a>
-                                            </div>*@
-                                            <label class="control-label text-right tooltip-float">Company Name</label>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <input type="text" class="form-control" data-bind="value: companyName">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-lg-4 text-right">
-                                      
-                                            <label class="control-label text-right tooltip-float">&nbsp;</label>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <div class="col-md-3" style="text-align:right;margin-left: 10px;">
-                                                    <div class="fileUpload btn btn-primary">
-                                                        <span>Image / Logo </span> 
-                                                        @*<input type="file" class="upload" id="image_files" data-bind="files: { onLoaded: $root.storeImageCallback, fileFilter: 'image.*'}" />*@
-                                                        <input type="file" class="upload" id="image_files" onchange="readPhotoURL(this);" />
-                                                    </div>
-                                                    <div class="bs-example-tooltips tooltip-float-width" style="    margin-top: 10px;">
-                                                        <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-original-title="  760 pixels  by 200 pixels" title="  760 pixels  by 200 pixels">
-                                                            <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-6">
-                                                    @*<img style="width: auto; height: 150px; max-width: 200px; min-width: 100px; border: 1px solid;" data-bind="visible:ProfileImageBytes()==null,attr: { src:  imageUrl }," src="/Images/select_image.jpg" />
-                                                    <img style="width:auto;height:80px;max-width:200px;" data-bind="visible:ProfileImageBytes!=null,attr: { src: ProfileImageBytes }" />*@
-                                                    <img id="vehicleImage" alt="" style="width: 120px;height:120px" data-bind="attr:{src:imageUrl }" />
-                                                    <h5><span></span></h5>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
