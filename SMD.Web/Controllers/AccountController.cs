@@ -31,6 +31,7 @@ namespace SMD.MIS.Controllers
         private IEmailManagerService emailManagerService;
         private readonly IAccountService accountService;
         private readonly ICompanyService companyService;
+        private readonly IWebApiUserService userService;
         /// <summary>
         /// Adds Claims to generated identity
         /// </summary>
@@ -57,7 +58,7 @@ namespace SMD.MIS.Controllers
 
         #region Constructor
 
-        public AccountController(IClaimsSecurityService claimsSecurityService, IEmailManagerService emailManagerService, IAccountService account, ICompanyService companyService)
+        public AccountController(IClaimsSecurityService claimsSecurityService, IEmailManagerService emailManagerService, IAccountService account, ICompanyService companyService, IWebApiUserService userService)
         {
             if (emailManagerService == null)
             {
@@ -67,6 +68,7 @@ namespace SMD.MIS.Controllers
             this.claimsSecurityService = claimsSecurityService;
             this.emailManagerService = emailManagerService;
             this.companyService = companyService;
+            this.userService = userService;
             accountService = account;
         }
 
@@ -186,6 +188,30 @@ namespace SMD.MIS.Controllers
                 return RedirectToAction("Index","Ads", new { area = "Ads" });
             }
         }
+        //
+        // GET: /Account/AutoLogin
+        [AllowAnonymous]
+        public async Task<ActionResult> AutoLogin(string token)
+        {
+            User user = userService.getUserByAuthenticationToken(token);
+            if (user == null)
+            {
+              return Content("Invalid or expired authentication token!");
+            }
+            ClaimsIdentity identity = await user.GenerateUserIdentityAsync(UserManager, DefaultAuthenticationTypes.ApplicationCookie);
+            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
+            if (user != null)
+            {
+                if (!await UserManager.IsEmailConfirmedAsync(user.Id))
+                {
+                    return Content("Email not confirmed!");
+                }
+            }
+            SetupUserClaims(identity);
+            AuthenticationManager.SignIn(new AuthenticationProperties { IsPersistent = true }, identity);
+            return RedirectToLocal("");
+
+        }
 
         //
         // GET: /Account/VerifyCode
@@ -268,7 +294,7 @@ namespace SMD.MIS.Controllers
                     await
                         emailManagerService.SendAccountVerificationEmail(user, callbackUrl);
                     ViewBag.Link = callbackUrl;
-                    companyService.createUser(user.Id, model.Email, model.FullName);
+                    companyService.createUser(user.Id, model.Email, model.FullName,Guid.NewGuid().ToString());
                     return View("DisplayEmail");
                 }
                 AddErrors(result);

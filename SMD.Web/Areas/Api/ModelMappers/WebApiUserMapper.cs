@@ -52,7 +52,8 @@ namespace SMD.MIS.Areas.Api.ModelMappers
                        AccountBalance = CreateFromForAccount(source),
                        CityName = source.CityName,
                        CountryName = source.CountryName,
-                       CompanyId = source.Company.CompanyId
+                       CompanyId = source.Company.CompanyId,
+                       AuthenticationToken = source.AuthenticationToken
                    };
 
             return user;
@@ -99,8 +100,8 @@ namespace SMD.MIS.Areas.Api.ModelMappers
             {
                 Status = source.Status,
                 Message = source.Message,
-                User = source.User != null ? source.User.CreateFrom() : null,
-                AuthenticationToken = Guid.NewGuid()
+                User = source.User != null ? source.User.CreateFrom() : null//,
+                //AuthenticationToken = Guid.NewGuid()
             };
         }
 

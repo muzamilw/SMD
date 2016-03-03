@@ -35,9 +35,9 @@ namespace SMD.Implementation.Services
         {
            return companyRepository.GetUserCompany(userId);
         }
-        public bool createUser(string userId,string email, string fullName)
+        public bool createUser(string userId,string email, string fullName,string guid)
         {
-            return companyRepository.createCompany(userId, email, fullName);
+            return companyRepository.createCompany(userId, email, fullName,guid);
         }
         #endregion
     }

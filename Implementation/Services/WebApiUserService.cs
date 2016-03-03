@@ -1122,7 +1122,7 @@ namespace SMD.Implementation.Services
             {
                 throw new InvalidOperationException(string.Format("Failed to add user to role {0}", Roles.User));
             }
-            companyRepository.createCompany(user.Id, request.Email, request.FullName);
+            companyRepository.createCompany(user.Id, request.Email, request.FullName,Guid.NewGuid().ToString());
             var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
             var callbackUrl = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority +
                               "/Api_Mobile/Register/Confirm/?UserId=" + user.Id + "&Code=" + HttpUtility.UrlEncode(code);
@@ -1182,6 +1182,7 @@ namespace SMD.Implementation.Services
                         Message = LanguageResources.WebApiUserService_LoginInfoNotFound
                     };
                 }
+              
                 // update user name  and cuntry name for api 
                 if (user.Company.Country != null)
                     user.CountryName = user.Company.Country.CountryName;
@@ -1205,6 +1206,9 @@ namespace SMD.Implementation.Services
                         Message = LanguageResources.WebApiUserService_InactiveUser
                     };
                 }
+                // update GUID 
+                user.AuthenticationToken = Guid.NewGuid().ToString();
+                await UserManager.UpdateAsync(user);
 
                 // Login user
                 LoginUser(request.Email);
@@ -1255,7 +1259,9 @@ namespace SMD.Implementation.Services
                     Message = LanguageResources.WebApiUserService_InactiveUser
                 };
             }
-
+            // update GUID 
+            user.AuthenticationToken = Guid.NewGuid().ToString();
+            await UserManager.UpdateAsync(user);
             // Login user
             LoginUser(request.UserName);
 
@@ -1366,6 +1372,10 @@ namespace SMD.Implementation.Services
             var messagingService = new MessagingService("omar.c@me.com", "DBVgYFGNCWwK");
             messagingService.SendMessage(new SmsMessage(user.Phone1, "Your verification code for Cash4Ads profile update is " + code.ToString() + ". Please enter this code in Cash4Ads app to update your profile.", "EX0205631"));
             return code;
+        }
+        public User getUserByAuthenticationToken(string token)
+        {
+          return  companyRepository.getUserBasedOnAuthenticationToken(token);
         }
         #endregion
 
