@@ -12,7 +12,7 @@ else
 {
     adminClasses = "displayNone";
 }
-<div  style="display: none">
+<div data-bind="visible: $root.isEditorVisible()" style="display: none">
     <div class="col-lg-12">
         <div class="row">
             <div class="col-lg-12" id="topArea">
@@ -47,7 +47,7 @@ else
 
                     </div>
                 </div>
-                <div class="row" data-bind="with: $root.campaignModel" style="text-align:center;">
+                @*<div class="row" data-bind="with: $root.campaignModel" style="text-align:center;">
                     <div class=" center" style="margin-top:-9px;padding-right:0px;margin-top: -9px;padding-right: 0px; width:284px; margin: auto;    font-size: 17px;">
                         <div class="pull-left">
                             <label class="control-label">Status - </label>
@@ -57,47 +57,63 @@ else
                         </div>
                         <div class="clearfix"></div>
                     </div>
-                </div>
+                </div>*@
             </div>
         </div>
         <div class="row">
             <div class="col-lg-12">
                 <div class="main-box no-header clearfix">
                     <div class="col-lg-12 form-horizontal" data-bind="with: $root.campaignModel" style="padding: 20px;">
+                        <div class="col-lg-12">
+                            <div class="col-lg-5">
 
+                            </div>
+                            <div class="col-lg-2" style="text-align:center">
+                                <label class="control-label bold heading-style" data-bind="text:StatusValue()"></label>
+                            </div>
+                            <div class="col-lg-5">
+
+                            </div>
+                        </div>
                         <div class="col-lg-1 col-md-1 col-sm-1">
                             &nbsp;
                         </div>
                         <div class="col-lg-7">
+
+
                             <div class="form-group formcontrol-bg" style="margin-bottom:14px;">
 
                                 <div class="col-lg-3 text-campaign-left font20">
                                     Campaign Name
 
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-lg-9" style="padding-left:0px;">
                                     <input type="text" name="Campaign Name" class="form-control" id="txtCampaignName" placeholder="New Campaign" data-bind="value: CampaignName,validationTooltip: CampaignName, validationOnElement: CampaignName">
 
                                 </div>
 
                             </div>
-                            <div class="form-group formcontrol-bg" style="padding:0px !important; ">
-                                <div class="col-lg-9">
-                                    <div class="form-group " style="margin-bottom:20px; margin-top:20px;">
-                                        <div class="col-lg-7 text-campaign-left">
-                                            <div class="bs-example-tooltips tooltip-float-width" style="    margin-top: 10px;margin-left: 54px;">
+
+                            <div class="form-group formcontrol-bg form-horizontal">
+                                <div class="col-lg-7">
+                                    <div class="form-group" style="margin-top:10px;">
+                                        <div class="col-lg-8 text-campaign-left">
+                                            <div class="bs-example-tooltips tooltip-float-width margin-Top-0" style="margin-top: 10px;">
                                                 <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-original-title="" title="">
                                                     <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
                                                 </a>
                                             </div>
-                                            <label class="control-label text-right tooltip-float font20">Free Display Ad Details</label>
+                                            <label class="control-label text-right tooltip-float font20 floatNone">Free Display Ad Details</label>
                                         </div>
+                                        @*<div class="col-lg-4">
+                        <button class="btn  btn-success"  style="width:auto;" id="btnSubmitForApproval">Preview</button>
+                    </div>*@
 
                                     </div>
                                     <div class="form-group" style="margin-bottom:14px;">
-                                        <div class="col-lg-3 text-right" style="padding-top:12px;">
+                                        <div class="col-lg-3" style="padding-top:12px;">
 
-                                            <label for="txtCampaignDisplayName" class="control-label text-right tooltip-float">Ad Title</label>
+                                            <label for="txtCampaignDisplayName" class="control-label text-right tooltip-float floatNone">Ad Title</label>
                                         </div>
                                         <div class="col-lg-8">
                                             <input type="text" style="height:60px;" name="Campaign Display Name" class="form-control height60 font24px" id="txtCampaignDisplayName" placeholder="Ad title (30 characters)" data-bind="value: DisplayTitle,validationTooltip: DisplayTitle, validationOnElement: DisplayTitle">
@@ -105,9 +121,9 @@ else
                                         </div>
                                     </div>
                                     <div class="form-group" style="margin-bottom:25px;">
-                                        <div class="col-lg-3 text-right">
+                                        <div class="col-lg-3">
 
-                                            <label for="txtCampaignDesc" class="control-label text-right tooltip-float">First line </label>
+                                            <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone">First line </label>
                                         </div>
                                         <div class="col-lg-8">
                                             <textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="Enter Description (20 characters)" data-bind="value: Description" maxlength="50"></textarea>
@@ -115,9 +131,9 @@ else
                                         </div>
                                     </div>
                                     <div class="form-group" style="margin-bottom:25px;">
-                                        <div class="col-lg-3 text-right">
+                                        <div class="col-lg-3">
 
-                                            <label for="txtCampaignDesc" class="control-label text-right tooltip-float">Second Line</label>
+                                            <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone">Second Line</label>
                                         </div>
                                         <div class="col-lg-8">
                                             <textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="Enter Description (20 characters)" data-bind="value: CampaignDescription" maxlength="50"></textarea>
@@ -126,9 +142,9 @@ else
                                     </div>
                                 </div>
                                 <div class="col-lg-2">
-                                    <img src="/Content/Images/5_Main_4.png" alt="" style="    width: 120px;
-    margin-top: 23px;" />
-                                </div>
+                                    <img class="display-Mobile hidden-sm hidden-xs" src="/Content/Images/5_Main_4.png" alt="" style="    width: 120px;
+            margin-top: 23px;" />
+                                        </div>
                                 <div class="clearfix">
                                     &nbsp;
 
@@ -144,7 +160,7 @@ else
                                     <select id="ddpLanguage" class="form-control" data-bind="options: $root.langs, optionsText: 'LanguageName', optionsValue: 'LanguageId', value: LanguageId" disabled="disabled"></select>
                                 </div>
                             </div>
-                            <div class="form-group" style="margin-bottom:20px; margin-top:20px;">
+                            @*<div class="form-group" style="margin-bottom:20px; margin-top:20px;">
                                 <div class="col-lg-3 text-right">
                                     <div class="bs-example-tooltips tooltip-float-width" style="    margin-top: 10px;">
                                         <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-original-title="" title="">
@@ -154,124 +170,156 @@ else
                                     <label class="control-label text-right tooltip-float font20">Paid Ad Modes</label>
                                 </div>
 
-                            </div>
+                            </div>*@
                             <div class="form-group" style="margin-bottom:11px;">
-                                <div class="col-lg-1">
+                                @*<div class="col-lg-1">
                                     &nbsp;
-                                </div>
-                                <div class="col-lg-8">
-                                    <div class="row">
-
-                                        <div class="radio col-lg-3">
-                                            <input type="radio" name="optionsRadiosStoreType" id="optionsRadiosVideos" value="1" data-bind="checked: Type, event:{ change: $root.OnChangeCampaignType }">
-                                            <label for="optionsRadiosVideos">
-                                                Video
-                                            </label>
-                                        </div>
-                                        <div class="col-lg-9" data-bind="visible: Type() == 1">
-
-                                            <textarea class="form-control" id="txtLinkOfCampaign" rows="1" placeholder="" data-bind="value: LandingPageVideoLink,validationTooltip:LandingPageVideoLink, validationOnElement: LandingPageVideoLink, attr:{placeholder : $root.campaignTypePlaceHolderValue}"></textarea>
-                                            <textarea class="form-control" id="txtLinkOfCampaign" rows="1" placeholder="Enter in landing page link " data-bind="value: VideoUrl" style="margin-top:5px;"></textarea>
-                                        </div>
-
-
-
-                                    </div>
-
-                                    <div class="row" data-bind="visible:   Type() ==3">
-
-                                        <div class="radio col-lg-3">
-                                            <input type="radio" name="optionsRadiosStoreType" id="optionsRadiosLink" value="2" data-bind="checked: Type, event:{ change: $root.OnChangeCampaignType }">
-                                            <label for="optionsRadiosLink" style="display:none;">
-                                                URL
-                                            </label>
-                                            <span class="help-block text-right"></span>
-                                        </div>
-                                        <div class="col-lg-9" data-bind="visible: Type() == 2 ||  Type() ==3" style="    margin-bottom: 10px;">
-
-                                            <textarea class="form-control" id="txtLinkOfCampaign" rows="1" placeholder="" data-bind="value: LandingPageVideoLink,validationTooltip:LandingPageVideoLink, validationOnElement: LandingPageVideoLink, attr:{placeholder : $root.campaignTypePlaceHolderValue}"></textarea>
-
-                                        </div>
-
-
-
-                                    </div>
+                                </div>*@
+                                <div class="col-lg-9 padding23" >
+                                    <!-- ko if: $root.isNewCampaign -->
+                                    <!-- ko if: Type() == 3 ||  Type() == 2 -->
 
                                     <div class="row">
-
-                                        <div class="radio col-lg-4">
-                                            <input type="radio" name="optionsRadiosStoreType" id="optionsRadiosUploadImage" value="3" data-bind="checked: Type, event:{ change: $root.OnChangeCampaignType }">
-                                            <label for="optionsRadiosUploadImage">
-                                                Flyer / Leaflet
-                                            </label>
-                                            <span class="help-block text-right"></span>
-                                        </div>
-
-                                        <div class="col-lg-8" style="margin-left:-10px;" data-bind="visible: Type() == 3 ||  Type() == 2">
-
-                                            <div>
-
-                                                <div style="float:left;">
-
-                                                    <img style="width:auto;height:80px;max-width:200px;" data-bind="visible: CampaignTypeImagePath() == ''" src="/Content/Images/Company_Default.png" />
-                                                    <img style="width:auto;height:80px;max-width:200px;" data-bind="visible: CampaignTypeImagePath() != '' ,attr: { src: CampaignTypeImagePath }" />
-
+                                        <div class="form-group" style="margin-top:10px;">
+                                            <div class="col-lg-5 text-campaign-left" style="float:left;">
+                                                <div class="bs-example-tooltips tooltip-float-width margin-Top-0" style="margin-top: 10px;">
+                                                    <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-original-title="" title="">
+                                                        <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                    </a>
                                                 </div>
-                                                <div class="fileUpload btn btn-primary" style="    margin-top: 18px;margin-left: 20px;">
+                                                <label class="control-label text-right tooltip-float floatNone font16">Banner Image (600 x 150)</label>
+                                            </div>
+                                            <div class="col-lg-7" style="float:left;">
+                                                <div class="fileUpload btn btn-primary">
                                                     <span>Upload </span>
                                                     <input type="file" class="upload" id="campaignType_image_file" data-bind="files: { onLoaded: $root.campaignTypeImageCallback, fileFilter: 'image.*'}" />
                                                 </div>
+
+                                                @* <button class="btn  btn-success"  style="width:auto;" id="btnSubmitForApproval">Preview</button>*@
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <!-- /ko -->
+                                    <!-- /ko -->
+                                        <div class="row">
+
+                                            <div class="radio col-lg-3">
+
+                                               
+                                                <input type="radio" name="optionsRadiosStoreType" id="optionsRadiosVideos" value="1" data-bind="checked: Type, event:{ change: $root.OnChangeCampaignType }">
+                                                <label for="optionsRadiosVideos">
+                                                    Video
+                                                </label>
+                                                
+                                            </div>
+                                            <div class="col-lg-9" data-bind="visible: Type() == 1">
+
+                                                <textarea class="form-control" id="txtLinkOfCampaign" rows="1" placeholder="" data-bind="value: LandingPageVideoLink,validationTooltip:LandingPageVideoLink, validationOnElement: LandingPageVideoLink, attr:{placeholder : $root.campaignTypePlaceHolderValue}" style="margin-bottom:10px;"></textarea>
+                                                <textarea class="form-control" id="txtLinkOfCampaign" rows="1" placeholder="Enter in landing page link " data-bind="value: VideoUrl" style="margin-top:5px;"></textarea>
+                                            </div>
+
+
+
+                                        </div>
+
+                                        <div class="row" data-bind="visible:   Type() ==3">
+
+                                            <div class="radio col-lg-3">
+                                               
+                                                <input type="radio" name="optionsRadiosStoreType" id="optionsRadiosLink" value="2" data-bind="checked: Type, event:{ change: $root.OnChangeCampaignType }">
+                                                <label for="optionsRadiosLink" style="display:none;">
+                                                    URL
+                                                </label>
+                                                <span class="help-block text-right"></span>
+                                              
+                                            </div>
+                                            <div class="col-lg-9" data-bind="visible: Type() == 2 ||  Type() ==3" style="    margin-bottom: 10px;">
+
+                                                <textarea class="form-control" id="txtLinkOfCampaign" rows="1" placeholder="" data-bind="value: LandingPageVideoLink,validationTooltip:LandingPageVideoLink, validationOnElement: LandingPageVideoLink, attr:{placeholder : $root.campaignTypePlaceHolderValue}"></textarea>
+
+                                            </div>
+
+
+
+                                        </div>
+
+                                        <div class="row">
+
+                                            <div class="radio col-lg-4">
+                                              
+                                                <input type="radio" name="optionsRadiosStoreType" id="optionsRadiosUploadImage" value="3" data-bind="checked: Type, event:{ change: $root.OnChangeCampaignType }">
+                                                <label for="optionsRadiosUploadImage">
+                                                    Flyer / Leaflet
+                                                </label>
+                                                <span class="help-block text-right"></span>
+                                              
+                                            </div>
+
+                                            <div class="col-lg-8" style="margin-left:-10px;" data-bind="visible: Type() == 3 ||  Type() == 2">
+
+                                                <div>
+
+                                                    <div style="float:left;">
+
+                                                        <img style="width:100%;height:80px;" data-bind="visible: CampaignTypeImagePath() == ''" src="/Content/Images/Company_Default.png" />
+                                                        <img style="width:100%;height:80px;" data-bind="visible: CampaignTypeImagePath() != '' ,attr: { src: CampaignTypeImagePath }" />
+
+                                                    </div>
+                                                    <!-- ko if: !$root.isNewCampaign() -->
+                                                    <div class="fileUpload btn btn-primary" style="    margin-top: 18px;margin-left: 20px;">
+                                                        <span>Upload </span>
+                                                        <input type="file" class="upload" id="campaignType_image_file" data-bind="files: { onLoaded: $root.campaignTypeImageCallback, fileFilter: 'image.*'}" />
+                                                    </div>
+                                                    <!-- /ko -->
+                                                </div>
+
 
                                             </div>
 
 
                                         </div>
 
+                                        <div class="row">
 
-                                    </div>
+                                            <div class="radio col-lg-5">
+                                                
+                                                <input type="radio" name="optionsRadiosStoreType" id="optionsRadiosGame" value="4" data-bind="checked: Type, event:{ change: $root.OnChangeCampaignType }">
+                                                <label for="optionsRadiosGame">
+                                                    Sponsor Games
+                                                </label>
+                                                <span class="help-block text-right"></span>
+                                               
+                                            </div>
 
-                                    <div class="row">
-
-                                        <div class="radio col-lg-5">
-                                            <input type="radio" name="optionsRadiosStoreType" id="optionsRadiosGame" value="4" data-bind="checked: Type, event:{ change: $root.OnChangeCampaignType }">
-                                            <label for="optionsRadiosGame">
-                                                Sponsor Games
-                                            </label>
-                                            <span class="help-block text-right"></span>
                                         </div>
 
+
                                     </div>
-
-
-                                </div>
                                 <div class="col-lg-3">
-                                    <img src="/Content/Images/5_Main_4.png" alt="" style="    width: 120px;
+                                    <img class="hidden-sm hidden-xs" src="/Content/Images/5_Main_4.png" alt="" style="    width: 120px;
     " />
                                 </div>
 
                             </div>
 
-                            <div class="form-group formcontrol-bg" style="padding:0px !important; ">
+                            <div class="form-group formcontrol-bg">
                                 <div class="col-lg-8">
                                     <div class="form-group " style="margin-bottom:20px; margin-top:20px;">
                                         <div class="col-lg-8 text-campaign-left">
-                                            <div class="bs-example-tooltips tooltip-float-width" style="    margin-top: 10px;margin-left: 54px;">
+                                            <div class="bs-example-tooltips tooltip-float-width margin-Top-0" style="margin-top: 10px;">
                                                 <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-original-title="" title="">
                                                     <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
                                                 </a>
                                             </div>
-                                            <label class="control-label text-right tooltip-float font20">Target Audience Criteria</label>
+                                            <label class="control-label text-right tooltip-float font20 floatNone">Target Audience Criteria</label>
                                         </div>
 
                                     </div>
                                     <div class="form-group">
-                                        <div class="col-lg-3 text-right">
-                                            <div class="bs-example-tooltips tooltip-float-width">
-                                                <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
-                                                    <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                </a>
-                                            </div>
-                                            <label for="txtAge" class="control-label text-right tooltip-float">Age Range</label>
+                                        <div class="col-lg-3">
+                                          
+                                            <label for="txtAge" class="control-label text-right tooltip-float floatNone">Age Range</label>
                                         </div>
                                         <div class="col-lg-2" style=" padding: 0px !important;     margin-left: 8px;">
                                             <select class="form-control" data-bind="options: $root.ageRange, optionsText: 'text', optionsValue: 'value', value: AgeRangeStart"></select>
@@ -286,13 +334,9 @@ else
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <div class="col-lg-3 text-right">
-                                            <div class="bs-example-tooltips tooltip-float-width">
-                                                <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
-                                                    <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                </a>
-                                            </div>
-                                            <label for="txtGender" class="control-label text-right tooltip-float">Gender</label>
+                                        <div class="col-lg-3">
+                                          
+                                            <label for="txtGender" class="control-label text-right tooltip-float floatNone">Gender</label>
                                         </div>
                                         <div class="col-lg-8">
                                             <div class="radio col-lg-3">
@@ -318,13 +362,9 @@ else
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <div class="col-lg-3 text-right">
-                                            <div class="bs-example-tooltips tooltip-float-width">
-                                                <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
-                                                    <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                </a>
-                                            </div>
-                                            <label for="txtCountries" class="control-label text-right tooltip-float">Locations</label>
+                                        <div class="col-lg-3">
+                                           
+                                            <label for="txtCountries" class="control-label text-right tooltip-float floatNone">Locations</label>
                                         </div>
                                         <div class="col-lg-8">
 
@@ -387,13 +427,9 @@ else
 
                                     </div>
                                     <div class="form-group" style="display:none;">
-                                        <div class="col-lg-3 text-right">
-                                            <div class="bs-example-tooltips tooltip-float-width">
-                                                <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
-                                                    <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                </a>
-                                            </div>
-                                            <label for="txtLanguages" class="control-label text-right tooltip-float">Languages</label>
+                                        <div class="col-lg-3">
+                                           
+                                            <label for="txtLanguages" class="control-label text-right tooltip-float floatNone">Languages</label>
                                         </div>
                                         <div class="col-lg-8">
                                             <div>
@@ -428,13 +464,9 @@ else
 
                                     </div>
                                     <div class="form-group" style="display:none;">
-                                        <div class="col-lg-3 text-right">
-                                            <div class="bs-example-tooltips tooltip-float-width">
-                                                <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
-                                                    <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                </a>
-                                            </div>
-                                            <label for="txtLanguages" class="control-label text-right tooltip-float">Education</label>
+                                        <div class="col-lg-3">
+                                          
+                                            <label for="txtLanguages" class="control-label text-right tooltip-float floatNone">Education</label>
                                         </div>
                                         <div class="col-lg-8">
                                             <div>
@@ -469,13 +501,9 @@ else
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <div class="col-lg-3 text-right">
-                                            <div class="bs-example-tooltips tooltip-float-width">
-                                                <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
-                                                    <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                </a>
-                                            </div>
-                                            <label for="txtLanguages" class="control-label text-right tooltip-float">Profession</label>
+                                        <div class="col-lg-3">
+                                            
+                                            <label for="txtLanguages" class="control-label text-right tooltip-float floatNone">Profession</label>
                                         </div>
                                         <div class="col-lg-8">
                                             <div>
@@ -511,13 +539,13 @@ else
                                     </div>
                                 </div>
                                 <div class="col-lg-4" style="   margin-left: -33px;    width: 36%;    margin-top: 233px;">
-                                    <div class="aud_cnt_head" style=" display:none;">
+                                    <div class="aud_cnt_head hidden-sm hidden-xs" style=" display:none;">
                                         <h4 class="ad_h4" data-bind="visible: Type() == 1">Video</h4>
                                         <h4 class="ad_h4" data-bind="visible: Type() == 2">URL</h4>
                                         <h4 class="ad_h4" data-bind="visible: Type() == 3">Flyer / Leaflet</h4>
                                         <h4 class="ad_h4" data-bind="visible: Type() == 4">Sponsored game</h4>
                                     </div>
-                                    <div class="aud_cnt">
+                                    <div class="aud_cnt hidden-sm hidden-xs">
 
                                         <div class="clearfix _1gab VAGUE" style="display:none;">
                                             <div class="_1g9- lfloat">
@@ -628,9 +656,9 @@ else
                                             <div class="clearfix"> </div>
 
                                         </div>
-                                        <div style="    font-weight: bold;    padding-top: 0px;    font-size: 16px;"> 
+                                        <div style="    font-weight: bold;    padding-top: 0px;    font-size: 16px;">
                                             <div class="yourBudgtHeadingCnt">
-                                                
+
                                                 <span data-bind="text:$root.reachedAudience()">0</span> people
                                             </div>
                                             <div class="">
@@ -649,7 +677,7 @@ else
                                             <div class="clearfix"> </div>
 
                                         </div>
-                                   
+
 
 
                                     </div>
@@ -682,19 +710,19 @@ else
                                     </div>
                                 </div>*@
                             <div class="form-group" style="margin-bottom:20px; margin-top:20px;">
-                                <div class="col-lg-4 text-right">
-                                    <div class="bs-example-tooltips tooltip-float-width" style="    margin-top: 10px;">
+                                <div class="col-lg-4">
+                                    <div class="bs-example-tooltips tooltip-float-width margin-Top-0" style="margin-top: 10px;">
                                         <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-original-title="" title="">
                                             <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
                                         </a>
                                     </div>
-                                    <label class="control-label text-right tooltip-float font20">Campaign Schedule</label>
+                                    <label class="control-label text-right tooltip-float font20 floatNone">Campaign Schedule</label>
                                 </div>
 
                             </div>
                             <div class="form-group">
-                                <div class="col-lg-3 text-right">
-                                    <label for="validFromDate" class="control-label text-right tooltip-float">Start Date</label>
+                                <div class="col-lg-3">
+                                    <label for="validFromDate" class="control-label text-right tooltip-float floatNone">Start Date</label>
                                 </div>
                                 <div class="col-sm-6">
 
@@ -705,8 +733,8 @@ else
 
                             </div>
                             <div class="form-group">
-                                <div class="col-lg-3 text-right">
-                                    <label for="validUptoDate" class="control-label text-right tooltip-float">End Date</label>
+                                <div class="col-lg-3">
+                                    <label for="validUptoDate" class="control-label text-right tooltip-float floatNone">End Date</label>
                                 </div>
                                 <div class="col-sm-6">
                                     <input type="text" class="form-control" id="validUptoDate" data-bind="datetimepicker:EndDateTime,validationTooltip:EndDateTime, validationOnElement: EndDateTime">
@@ -851,23 +879,34 @@ else
                             <div class="clearfix">
 
                             </div>
-                            <div class="form-group formcontrol-bg" style="padding:0px !important; " data-bind="visible: $root.isEnableVedioVerificationLink">
+                            <div class="form-group formcontrol-bg" data-bind="visible: $root.isEnableVedioVerificationLink">
                                 <div class="col-lg-9">
-                                    <div class="form-group" style="margin-bottom:20px; margin-top:20px;">
+                                    @*<div class="form-group" style="margin-bottom:20px; margin-top:20px;">
                                         <div class="col-lg-4 text-right" style="    margin-left: 13px;">
-                                            <div class="bs-example-tooltips tooltip-float-width" style="    margin-top: 10px;">
+                                            <div class="bs-example-tooltips tooltip-float-width margin-Top-0" style="margin-top: 10px;">
                                                 <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-original-title="" title="">
                                                     <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
                                                 </a>
                                             </div>
-                                            <label class="control-label text-right tooltip-float font20">Quiz Question</label>
+                                            <label class="control-label text-right tooltip-float font20 floatNone">Quiz Question</label>
+                                        </div>
+
+                                    </div>*@
+                                    <div class="form-group " style="margin-bottom:20px; margin-top:20px;">
+                                        <div class="col-lg-5 text-campaign-left">
+                                            <div class="bs-example-tooltips tooltip-float-width margin-Top-0" style="margin-top: 10px;">
+                                                <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-original-title="" title="">
+                                                    <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                </a>
+                                            </div>
+                                            <label class="control-label text-right tooltip-float font20 floatNone">Quiz Question</label>
                                         </div>
 
                                     </div>
                                     <div class="form-group">
-                                        <div class="col-lg-4 text-right">
+                                        <div class="col-lg-4">
 
-                                            <label for="txtVerifyQuestion" class="control-label text-right tooltip-float">50/50 Quiz question</label>
+                                            <label for="txtVerifyQuestion" class="control-label text-right tooltip-float floatNone">50/50 Quiz question</label>
                                         </div>
                                         <div class="col-lg-8">
                                             <input type="text" class="form-control" id="txtVerifyQuestion" placeholder="Enter your question (30 characters)" data-bind="value: VerifyQuestion">
@@ -875,9 +914,9 @@ else
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <div class="col-lg-4 text-right">
+                                        <div class="col-lg-4">
 
-                                            <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float">Choice 1</label>
+                                            <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Choice 1</label>
                                         </div>
                                         <div class="col-lg-8">
                                             <input type="text" class="form-control" id="txtVerifyAnswer1" placeholder="Enter your answer 1 (10 characters)" data-bind="value: Answer1">
@@ -885,9 +924,9 @@ else
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <div class="col-lg-4 text-right">
+                                        <div class="col-lg-4">
 
-                                            <label for="txtVerifyAnswer2" class="control-label text-right tooltip-float">Choice 2</label>
+                                            <label for="txtVerifyAnswer2" class="control-label text-right floatNone">Choice 2</label>
                                         </div>
                                         <div class="col-lg-8">
                                             <input type="text" class="form-control" id="txtVerifyAnswer2" placeholder="Enter your answer 2 (10 characters)" data-bind="value: Answer2">
@@ -895,9 +934,9 @@ else
                                         </div>
                                     </div>
                                     <div class="form-group" style="display:none;">
-                                        <div class="col-lg-4 text-right">
+                                        <div class="col-lg-4">
 
-                                            <label for="txtVerifyAnswer3" class="control-label text-right tooltip-float">Answer 3</label>
+                                            <label for="txtVerifyAnswer3" class="control-label text-right tooltip-float floatNone">Answer 3</label>
                                         </div>
                                         <div class="col-lg-8">
                                             <input type="text" class="form-control" id="txtVerifyAnswer3" placeholder="Enter your answer 3" data-bind="value: Answer3">
@@ -905,16 +944,16 @@ else
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <div class="col-lg-4 text-right">
+                                        <div class="col-lg-4">
 
-                                            <label for="txtCorrectAnswer" class="control-label text-right tooltip-float">Correct Answer</label>
+                                            <label for="txtCorrectAnswer" class="control-label text-right tooltip-float floatNone">Correct Answer</label>
                                         </div>
                                         <div class="col-lg-8">
                                             <select class="form-control" id="ddpCorrectAns" data-bind="options: $root.correctAnswers, optionsText: 'name', optionsValue: 'id', value: CorrectAnswer"></select>
                                         </div>
                                     </div>
                                 </div><div class="col-lg-2">
-                                    <img src="/Content/Images/5_Main_4.png" alt="" style="    width: 120px;
+                                    <img class="hidden-sm hidden-xs"  src="/Content/Images/5_Main_4.png" alt="" style="    width: 120px;
     margin-top: 23px;" />
                                 </div>
                                 <div class="clearfix">
@@ -926,15 +965,15 @@ else
                             <div class="form-group formcontrol-bg">
                                 <div class="col-lg-9">
                                     <div class="form-group" style="margin-bottom:20px; margin-top:20px;">
-                                        <div class="col-lg-4 text-right" style="">
-                                            <div class="bs-example-tooltips tooltip-float-width" style="    margin-top: 10px;">
+                                        <div class="col-lg-5 Float-Left" style="">
+                                            <div class="bs-example-tooltips tooltip-float-width margin-Top-0" style="margin-top: 10px;">
                                                 <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-original-title="" title="">
                                                     <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
                                                 </a>
                                             </div>
-                                            <label class="control-label text-right tooltip-float font20">Show voucher</label>
+                                            <label class="control-label text-right tooltip-float font20 floatNone">Show voucher</label>
                                         </div>
-                                        <div class="col-lg-4">
+                                        <div class="col-lg-4 Float-Left" style="padding-top:3px;">
                                             <div class="onoffswitch">
                                                 <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchAB" data-bind="checked: $root.voucherQuestionStatus">
                                                 <label class="onoffswitch-label" for="switchAB">
@@ -946,9 +985,9 @@ else
                                     </div>
 
                                     <div class="form-group" data-bind="visible: $root.voucherQuestionStatus()">
-                                        <div class="col-lg-4 text-right">
+                                        <div class="col-lg-4">
 
-                                            <label for="txtVoucher" class="control-label text-right tooltip-float">Voucher Heading</label>
+                                            <label for="txtVoucher" class="control-label text-right tooltip-float floatNone">Voucher Heading</label>
                                         </div>
                                         <div class="col-lg-8">
                                             <input type="text" class="form-control" id="txtVoucher" placeholder="Enter your voucher detail  (10 characters)" data-bind="value: Voucher1Heading">
@@ -956,9 +995,9 @@ else
                                         </div>
                                     </div>
                                     <div class="form-group" data-bind="visible: $root.voucherQuestionStatus() == 1 ">
-                                        <div class="col-lg-4 text-right">
+                                        <div class="col-lg-4">
 
-                                            <label for="txtVoucherDes" class="control-label text-right tooltip-float">Voucher Description</label>
+                                            <label for="txtVoucherDes" class="control-label text-right tooltip-float floatNone">Voucher Description</label>
                                         </div>
                                         <div class="col-lg-8">
                                             <input type="text" class="form-control" id="txtVoucherDes" placeholder="Enter voucher description  (10 characters)" data-bind="value: Voucher1Description">
@@ -966,9 +1005,9 @@ else
                                         </div>
                                     </div>
                                     <div class="form-group" data-bind="visible: $root.voucherQuestionStatus() == 1 ">
-                                        <div class="col-lg-4 text-right">
+                                        <div class="col-lg-4">
 
-                                            <label for="txtVoucherVal" class="control-label text-right tooltip-float">Voucher Value Discount (£) </label>
+                                            <label for="txtVoucherVal" class="control-label text-right tooltip-float floatNone">Voucher Value Discount (£) </label>
                                         </div>
                                         <div class="col-lg-8">
                                             <input type="text" class="form-control" id="txtVoucherVal" placeholder="e.g. £1 or 15% off  (10 characters)" data-bind="value: Voucher1Value">
@@ -977,8 +1016,8 @@ else
                                     </div>
 
                                     <div class="form-group">
-                                        <div class="col-lg-4 text-right" data-bind="visible: $root.voucherQuestionStatus() == 1 ">
-                                            <label for="txtVoucherVal" class="control-label text-right tooltip-float">Voucher Email attachment </label>
+                                        <div class="col-lg-4" data-bind="visible: $root.voucherQuestionStatus() == 1 ">
+                                            <label for="txtVoucherVal" class="control-label text-right tooltip-float floatNone">Voucher Email attachment </label>
                                         </div>
                                         <div class="col-lg-8">
                                             <div class="col-lg-12" style="margin-left:-10px;" data-bind="visible: $root.voucherQuestionStatus() == 1 ">
@@ -1007,7 +1046,7 @@ else
                                             </div>
                                         </div>
                                     </div>
-                                  
+
                                     @*<div class="form-group">
                                             <div class="col-lg-4 text-right">
                                                 <div class="bs-example-tooltips tooltip-float-width">
@@ -1052,7 +1091,7 @@ else
                                         </div>*@
                                 </div>
                                 <div class="col-lg-2">
-                                    <img src="/Content/Images/5_Main_4.png" alt="" style="   margin-left: 10px; width: 120px;
+                                    <img src="/Content/Images/5_Main_4.png" class="hidden-sm hidden-xs" alt="" style="   margin-left: 10px; width: 120px;
     margin-top: 23px;" />
                                 </div>
                                 <div class="clearfix">
@@ -1063,15 +1102,15 @@ else
                             <div class="form-group formcontrol-bg">
                                 <div class="col-lg-9">
                                     <div class="form-group" style="margin-bottom:20px; margin-top:20px;">
-                                        <div class="col-lg-4 text-right" style="">
-                                            <div class="bs-example-tooltips tooltip-float-width" style="    margin-top: 10px;">
+                                        <div class="col-lg-4 Float-Left" style="">
+                                            <div class="bs-example-tooltips tooltip-float-width margin-Top-0" style="margin-top: 10px;">
                                                 <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-original-title="" title="">
                                                     <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
                                                 </a>
                                             </div>
-                                            <label class="control-label text-right tooltip-float font20">Buy it button</label>
+                                            <label class="control-label text-right tooltip-float font20 floatNone">Buy it button</label>
                                         </div>
-                                        <div class="col-lg-4">
+                                        <div class="col-lg-4 Float-Left" style="padding-top:3px;">
                                             <div class="onoffswitch">
                                                 <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchAzB" data-bind="checked: $root.buyItQuestionStatus">
                                                 <label class="onoffswitch-label" for="switchAzB">
@@ -1083,9 +1122,9 @@ else
                                     </div>
 
                                     <div class="form-group" data-bind="visible: $root.buyItQuestionStatus()">
-                                        <div class="col-lg-4 text-right">
+                                        <div class="col-lg-4">
 
-                                            <label for="txtVoucher" class="control-label text-right tooltip-float">First Line</label>
+                                            <label for="txtVoucher" class="control-label text-right tooltip-float floatNone">First Line</label>
                                         </div>
                                         <div class="col-lg-8">
                                             <input type="text" class="form-control" id="txtVoucher" placeholder="Enter Description  (20 characters)" data-bind="value: BuuyItLine1">
@@ -1093,9 +1132,9 @@ else
                                         </div>
                                     </div>
                                     <div class="form-group" data-bind="visible: $root.buyItQuestionStatus() == 1 ">
-                                        <div class="col-lg-4 text-right">
+                                        <div class="col-lg-4">
 
-                                            <label for="txtVoucherDes" class="control-label text-right tooltip-float">Second Line</label>
+                                            <label for="txtVoucherDes" class="control-label text-right tooltip-float floatNone">Second Line</label>
                                         </div>
                                         <div class="col-lg-8">
                                             <input type="text" class="form-control" id="txtVoucherDes" placeholder="Enter Description  (20 characters)" data-bind="value: BuyItLine2">
@@ -1103,9 +1142,9 @@ else
                                         </div>
                                     </div>
                                     <div class="form-group" data-bind="visible: $root.buyItQuestionStatus() == 1 ">
-                                        <div class="col-lg-4 text-right">
+                                        <div class="col-lg-4">
 
-                                            <label for="txtVoucherVal" class="control-label text-right tooltip-float">Third Line </label>
+                                            <label for="txtVoucherVal" class="control-label text-right tooltip-float floatNone">Third Line </label>
                                         </div>
                                         <div class="col-lg-8">
                                             <input type="text" class="form-control" id="txtVoucherVal" placeholder="Enter Description  (20 characters)" data-bind="value: BuyItLine3">
@@ -1113,9 +1152,9 @@ else
                                         </div>
                                     </div>
                                     <div class="form-group" data-bind="visible: $root.buyItQuestionStatus() == 1 ">
-                                        <div class="col-lg-4 text-right">
+                                        <div class="col-lg-4">
 
-                                            <label for="txtVoucherVal" class="control-label text-right tooltip-float">Button Label </label>
+                                            <label for="txtVoucherVal" class="control-label text-right tooltip-float floatNone">Button Label </label>
                                         </div>
                                         <div class="col-lg-8">
                                             <input type="text" class="form-control" id="txtVoucherVal" placeholder="Enter Description  (20 characters)" data-bind="value: BuyItButtonLabel">
@@ -1123,8 +1162,8 @@ else
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <div class="col-lg-4 text-right" data-bind="visible: $root.buyItQuestionStatus() == 1 ">
-                                            <label for="txtVoucherVal" class="control-label text-right tooltip-float">Image </label>
+                                        <div class="col-lg-4" data-bind="visible: $root.buyItQuestionStatus() == 1 ">
+                                            <label for="txtVoucherVal" class="control-label text-right tooltip-float floatNone">Image </label>
                                         </div>
                                         <div class="col-lg-8">
                                             <div class="col-lg-12" style="margin-left:-10px;" data-bind="visible: $root.buyItQuestionStatus() == 1 ">
@@ -1161,10 +1200,10 @@ else
                                             We collect payment from your credit card every 4th day.
                                         </label>
                                     </div>
-                      
+
                                 </div>
                                 <div class="col-lg-2">
-                                    <img src="/Content/Images/5_Main_4.png" alt="" style="   margin-left: 10px; width: 120px;
+                                    <img class="hidden-sm hidden-xs"  src="/Content/Images/5_Main_4.png" alt="" style="   margin-left: 10px; width: 120px;
     margin-top: 23px;" />
                                 </div>
                                 <div class="clearfix">
@@ -1216,7 +1255,7 @@ else
     padding: 20px;
     padding-bottom: 12px;">
                                     <div class="yourBudgtHeadingCnt">
-                                        <span>Cap your spend budget (£): </span>
+                                        <span>Cap your campaign spend (£): </span>
                                     </div>
                                     <div class="yourBudgtBoxCnt">
                                         <input type="number" name="Budget" class="form-control" id="txtBudget" data-bind="value: MaxBudget,validationTooltip:MaxBudget, validationOnElement: MaxBudget">
@@ -1224,7 +1263,6 @@ else
                                     <div class="clearfix"> </div>
 
                                 </div>
-                                <button class="btn  btn-success btnSubmitApproval" id="btnSubmitForApproval" data-bind="click:$root.submitCampaignData, visible: $root.canSubmitForApproval" style="width: 100%;">Submit for Approval</button>
                                 <br />
                                 <div style="    margin-bottom: 10px;">
                                     <div class="yourBudgtHeadingCnt">
@@ -1236,7 +1274,11 @@ else
                                     <div class="clearfix"> </div>
 
                                 </div>
-                                <div class="social-box col-lg-12 col-sm-12 col-xs-12  estimates" style="cursor:pointer;" title="Pending Estimates">
+                               
+                                <button class="btn  btn-success btnSubmitApproval" id="btnSubmitForApproval" data-bind="click:$root.submitCampaignData, visible: $root.canSubmitForApproval" style="width: 100%;">Submit for Approval</button>
+                                <br />
+                               
+                                <div class="social-box col-lg-12 col-sm-12 col-xs-12  estimates hidden-sm hidden-xs"  style="cursor:pointer;" title="Pending Estimates">
                                     <div style="    margin-bottom: 10px;">
                                         <div class="yourBudgtHeadingCnt">
                                             <span>Total Spent</span>
@@ -1259,8 +1301,8 @@ else
                                     </div>
                                 </div>
 
-                                <div class="social-box col-lg-12 col-sm-12 col-xs-12  facebook" style="cursor:pointer;background-color:#8284FB !important" title="Pending Orders">
-                                    <div style="    margin-bottom: 10px;">
+                                <div class="social-box col-lg-12 col-sm-12 col-xs-12  facebook hidden-sm hidden-xs" style="cursor:pointer;background-color:#8284FB !important" title="Pending Orders">
+                                    <div style="margin-bottom: 10px;">
                                         <div class="yourBudgtHeadingCnt" style="font-weight:bold;    font-size: 16px;">
                                             <span>Branding views</span>
                                         </div>
@@ -1302,7 +1344,7 @@ else
                                     </div>
                                 </div>
 
-                                <div class="social-box col-lg-12 col-sm-12 col-xs-12  twitter" style="cursor:pointer; background-color:#9093FB !important" title="In Production">
+                                <div class="social-box col-lg-12 col-sm-12 col-xs-12  twitter hidden-sm hidden-xs" style="cursor:pointer; background-color:#9093FB !important" title="In Production">
                                     <div style="    margin-bottom: 10px;">
                                         <div class="yourBudgtHeadingCnt" style="font-weight:bold;    font-size: 16px;">
                                             <span>Conversions</span>
@@ -1336,7 +1378,7 @@ else
 
                                 </div>
 
-                                <div class="social-box col-lg-12 col-sm-12 col-xs-12  google" style="cursor:pointer; background-color:#C19AFC !important" title="Completed">
+                                <div class="social-box col-lg-12 col-sm-12 col-xs-12  google hidden-sm hidden-xs" style="cursor:pointer; background-color:#C19AFC !important" title="Completed">
                                     <div style="    margin-bottom: 10px;">
                                         <div class="yourBudgtHeadingCnt" style="font-weight:bold;    font-size: 16px;">
                                             <span>Paid out</span>
@@ -1357,7 +1399,7 @@ else
                                         <div class="clearfix"> </div>
 
                                     </div>
-                                   
+
                                 </div>
                                 <div class="clear-fix">
                                     &nbsp;
@@ -1400,11 +1442,12 @@ else
 </div>
 
 @*reward your audience screen*@
-<div class="col-lg-12" data-bind="visible: $root.isEditorVisible()" style="display: none">
+<div class="col-lg-12" data-bind="visible: $root.isWelcomeScreenVisible()" style="display: none">
     <div class="main-box no-header clearfix">
-        <div class="col-lg-12 form-horizontal"  style="padding: 20px;">
+        <div class="col-lg-12 form-horizontal" style="padding: 20px;">
             <div class="row">
                 <p style="font-size:23px;text-indent:26px;">Up to 50% of your spend goes to your target audience</p>
+               
             </div>
 
             <div class="row" style="margin-top:15px;">
@@ -1413,25 +1456,33 @@ else
 
             <div class="row" style="margin-top:15px;">
                 <div class="col-lg-4">
-                    <button class="btn  btn-success btnAdsCampaign" id="btnSubmitForApproval">Game Banner Ad</button>
+                    <button class="btn  btn-success btnAdsCampaign ButtonWidth" id="btnSubmitForApproval" data-bind="click:$root.openEditScreen(4)">Game Banner Ad</button>
                 </div>
                 <div class="col-lg-4">
-                    <button class="btn  btn-success btnAdsCampaign" id="btnSubmitForApproval">Flyers / Leaflet Ad</button>
+                    <button class="btn  btn-success btnAdsCampaign ButtonWidth" id="btnSubmitForApproval" data-bind="click:$root.openEditScreen(2)">Flyers / Leaflet Ad</button>
                 </div>
                 <div class="col-lg-4">
-                    <button class="btn  btn-danger btnAdsCampaign" id="btnSubmitForApproval">YouTube Video Ad</button>
+                    <button class="btn  btn-danger btnAdsCampaign ButtonWidth" id="btnSubmitForApproval" data-bind="click:$root.openEditScreen(1)">YouTube Video Ad</button>
                 </div>
 
+            </div>
+            <div class="row" style="margin-top:15px;">
+                <div class="col-lg-6">
+                    
                 </div>
-
-              
+                <div class="col-lg-4">
+                    
+                </div>
+                <div class="col-lg-2">
+                    <button class="btn btn-default FloatRight" id="btnCancel" data-bind="click: $root.BackToAds">Back to Ads</button>
+                </div>
 
             </div>
     </div>
-          
 
 
-        </div>
+
+</div>
         <script id="answersTemplate" type="text/html">
             <!--ko if:Type() != 3 && Type() != 4 && Type() != 5 -->
             <tr>

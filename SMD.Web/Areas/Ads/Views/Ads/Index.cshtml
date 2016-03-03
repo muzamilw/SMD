@@ -18,52 +18,52 @@ else
     adminClasses = "displayNone";
 }
 <div class="row" id="adsBinding">
-    <div class="col-lg-12" data-bind="visible: !$root.isEditorVisible()">
+    <div class="col-lg-12" data-bind="visible: $root.isListVisible()">
         <div class="row">
             <div class="col-md-11" id="topArea" style=" margin-left: 4%;">
-              
+
                 <div style="margin-bottom:15px;">
                     <div class="row">
 
                         @*<div class="icon-box pull-right">
 
-                            <p class="graphControls">
-                                <span class="fc-button fc-button-month fc-state-default fc-corner-left fc-state-active">Daily</span>
-                                <span class="fc-button fc-button-agendaWeek fc-state-default"  >3 months</span>
-                                <span class="fc-button fc-button-agendaDay fc-state-default fc-corner-right" >6 months</span>
-                                <span class="fc-button fc-button-agendaDay fc-state-default fc-corner-right" >1 year</span>
-                                <span class="fc-button fc-button-agendaDay fc-state-lbl fc-corner-right">01 Dec - 07 Dec</span>
-                            </p>
-                        </div>*@
-                        <div class="col-sm-4">
+                                <p class="graphControls">
+                                    <span class="fc-button fc-button-month fc-state-default fc-corner-left fc-state-active">Daily</span>
+                                    <span class="fc-button fc-button-agendaWeek fc-state-default"  >3 months</span>
+                                    <span class="fc-button fc-button-agendaDay fc-state-default fc-corner-right" >6 months</span>
+                                    <span class="fc-button fc-button-agendaDay fc-state-default fc-corner-right" >1 year</span>
+                                    <span class="fc-button fc-button-agendaDay fc-state-lbl fc-corner-right">01 Dec - 07 Dec</span>
+                                </p>
+                            </div>*@
+                        <div class="col-sm-4" style="float:left;">
+
+
+                        </div>
+
+                        <div class="col-sm-4 paddingOuterdiv" style="float:left;">
+
+
+
+                            <button class="btn  btn-success btnAdsCampaign" style="float:left; width:33%;height:66px;margin-right:15px; white-space:normal;" id="btnSubmitForApproval">Ads Campaigns</button>
+
+
+                            <button class="btn  btn-warning" style="float:left;width:34%;height:66px;white-space:normal;">Coupon Promotions</button>
+
+
+
+
 
 
                         </div>
 
                         <div class="col-sm-4">
-                          
-                            
-                          
-                            <button class="btn  btn-success btnAdsCampaign" style="float:left; width:30%;height:66px;margin-right:15px; white-space:normal;" id="btnSubmitForApproval">Ads Campaigns</button>
 
-
-                                <button class="btn  btn-warning" style="float:left;width:30%;height:66px;white-space:normal;">Coupon Promotions</button>
-                        
-
-                           
-                             
-
-
-                            </div>
-                       
-                        <div class="col-sm-4">
-                           
                         </div>
 
                     </div>
                     <div class="row">
 
-                      
+
                         <div class="col-sm-3" style="float: left;">
 
                             <span style="font-size: 24px;">My Ads</span>
@@ -71,11 +71,11 @@ else
 
                         <div class="col-sm-3">
 
-                         
+
                         </div>
                         <div class="col-sm-3">
 
-                          
+
 
                         </div>
                         <div class="col-sm-3">
@@ -88,73 +88,73 @@ else
 
                         </div>
 
-                        
+
                     </div>
 
                     @*<div class="social-box col-lg-3 col-sm-6 col-xs-6  estimates" style="cursor:pointer;" title="Pending Estimates">
 
-                        <div class="socialCampaignLeft">
-                            <span class="social-count">Spend</span><br />
-                            <span class="social-action">£1024.00</span><br />
-                            <span class="social-count font10">All time spend</span>
-                        </div>
-                        <div class="socialCampaignRight">
-                            <span class="social-count">Ads delivered</span><br />
-                            <span class="social-action">34065</span><br />
-                            <span class="social-count font10">average PPC 3.6p </span>
-                        </div>
-                    </div>
-
-                    <div class="social-box col-lg-4 col-sm-6 col-xs-6  facebook" style="cursor:pointer;background-color:#8284FB !important" title="Pending Orders">
-
-                        <div class="socialCampaignLeft">
-                            <span class="social-count">Branding views</span><br />
-                            <span class="social-action">405</span><br />
-                            <span class="social-count font10">Games played</span>
-                        </div>
-                        <div class="socialCampaignLeft">
-                            <span class="social-count"> &nbsp;&nbsp;</span><br />
-                            <span class="social-action">40</span><br />
-                            <span class="social-count font10">Videos played</span>
-                        </div>
-                        <div class="socialCampaignRight">
-                            <span class="social-count">&nbsp;&nbsp;</span><br />
-                            <span class="social-action">440</span><br />
-                            <span class="social-count font10">Leaflets viewed</span>
-                        </div>
-                    </div>
-
-                    <div class="social-box col-lg-3 col-sm-6 col-xs-6  twitter" style="cursor:pointer; background-color:#9093FB !important" title="In Production">
-
-                        <div class="socialCampaignLeft">
-                            <span class="social-count">Conversions</span><br />
-                            <span class="social-action">44</span><br />
-                            <span class="social-count font10">Landing page hits</span>
-                        </div>
-                        <div class="socialCampaignLeft">
-                            <span class="social-count">&nbsp;&nbsp;</span><br />
-                            <span class="social-action">1999</span><br />
-                            <span class="social-count font10">Vouchers issued </span>
+                            <div class="socialCampaignLeft">
+                                <span class="social-count">Spend</span><br />
+                                <span class="social-action">£1024.00</span><br />
+                                <span class="social-count font10">All time spend</span>
+                            </div>
+                            <div class="socialCampaignRight">
+                                <span class="social-count">Ads delivered</span><br />
+                                <span class="social-action">34065</span><br />
+                                <span class="social-count font10">average PPC 3.6p </span>
+                            </div>
                         </div>
 
-                    </div>
+                        <div class="social-box col-lg-4 col-sm-6 col-xs-6  facebook" style="cursor:pointer;background-color:#8284FB !important" title="Pending Orders">
 
-                    <div class="social-box col-lg-2 col-sm-6 col-xs-6  google" style="cursor:pointer; background-color:#C19AFC !important" title="Completed">
-
-                        <div class="socialCampaignLeft">
-                            <span class="social-count">Paid out</span><br />
-                            <span class="social-action">£512.00</span><br />
-                            <span class="social-count font10">to happy clicks</span>
+                            <div class="socialCampaignLeft">
+                                <span class="social-count">Branding views</span><br />
+                                <span class="social-action">405</span><br />
+                                <span class="social-count font10">Games played</span>
+                            </div>
+                            <div class="socialCampaignLeft">
+                                <span class="social-count"> &nbsp;&nbsp;</span><br />
+                                <span class="social-action">40</span><br />
+                                <span class="social-count font10">Videos played</span>
+                            </div>
+                            <div class="socialCampaignRight">
+                                <span class="social-count">&nbsp;&nbsp;</span><br />
+                                <span class="social-action">440</span><br />
+                                <span class="social-count font10">Leaflets viewed</span>
+                            </div>
                         </div>
 
-                    </div>*@
+                        <div class="social-box col-lg-3 col-sm-6 col-xs-6  twitter" style="cursor:pointer; background-color:#9093FB !important" title="In Production">
+
+                            <div class="socialCampaignLeft">
+                                <span class="social-count">Conversions</span><br />
+                                <span class="social-action">44</span><br />
+                                <span class="social-count font10">Landing page hits</span>
+                            </div>
+                            <div class="socialCampaignLeft">
+                                <span class="social-count">&nbsp;&nbsp;</span><br />
+                                <span class="social-action">1999</span><br />
+                                <span class="social-count font10">Vouchers issued </span>
+                            </div>
+
+                        </div>
+
+                        <div class="social-box col-lg-2 col-sm-6 col-xs-6  google" style="cursor:pointer; background-color:#C19AFC !important" title="Completed">
+
+                            <div class="socialCampaignLeft">
+                                <span class="social-count">Paid out</span><br />
+                                <span class="social-action">£512.00</span><br />
+                                <span class="social-count font10">to happy clicks</span>
+                            </div>
+
+                        </div>*@
 
                 </div>
-              
+
             </div>
             @*<div style="    border-bottom: 2px solid #3DD2B5; margin-bottom: 20px;" class="col-md-12">
 
-            </div>*@
+                </div>*@
         </div>
         <div class="row">
             <div class="col-lg-11" style=" margin-left: 4%;">
@@ -176,9 +176,9 @@ else
                                             <th class="col-sm-3"><span>Name</span></th>
 
                                             @*<th class="col-sm-1"><span>Results</span></th>
-                                        <th class="col-sm-1"><span>Reach</span></th>
-                                        <th class="col-sm-1"><span>Cost</span></th>
-                                        <th class="col-sm-1"><span>Budget</span></th>*@
+                                                <th class="col-sm-1"><span>Reach</span></th>
+                                                <th class="col-sm-1"><span>Cost</span></th>
+                                                <th class="col-sm-1"><span>Budget</span></th>*@
                                             <th class="col-sm-2"><span></span></th>
                                             <th class="col-sm-2"><span>Views</span></th>
                                             <th class="col-sm-1"><span>Status</span></th>
@@ -217,24 +217,24 @@ else
 
             <div class="col-lg-3 col-sm-3" style="float:left;">
 
-               
+
             </div>
             <div class="col-lg-6 col-sm-6" style="float:left;padding-left:50px;">
 
                 <button class="btn  btn-success btnAdsCampaign" style="width:24%;float:left;padding:0px;" id="btnSubmitForApproval">Coupons</button>
-                <button class="btn  btn-success btnAdsCampaign" style="width:24%;float:left;padding:0px;" id="btnSubmitForApproval" >Manage Users</button>
+                <button class="btn  btn-success btnAdsCampaign" style="width:24%;float:left;padding:0px;" id="btnSubmitForApproval">Manage Users</button>
                 <button class="btn  btn-success btnAdsCampaign" style="width:24%;float:left;padding:0px;" id="btnSubmitForApproval">Marketing Info</button>
             </div>
-          
-           
+
+
             <div class="col-lg-2 col-sm-2" style="float:left;">
 
-               
+
             </div>
 
 
 
-            
+
 
 
         </div>
