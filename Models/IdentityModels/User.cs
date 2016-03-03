@@ -55,8 +55,7 @@ namespace SMD.Models.IdentityModels
         public string WebsiteLink { get; set; }
         public Nullable<System.DateTime> DOB { get; set; }
         public Nullable<int> CompanyId { get; set; }
-
-
+        public string AuthenticationToken { get; set; }
 
         public virtual Company Company { get; set; }
         public virtual Industry Industry { get; set; }

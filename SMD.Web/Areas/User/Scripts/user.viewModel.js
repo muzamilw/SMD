@@ -33,6 +33,7 @@ define("user/user.viewModel",
                         dataservice.getUserProfile(null,
                             {
                                 success: function (userProfile) {
+                                    console.log(userProfile);
                                     selectedUser(model.UserServertoClientMapper(userProfile));
                                     // Load Cities by Country
                                     updateCities(userProfile.CityId);

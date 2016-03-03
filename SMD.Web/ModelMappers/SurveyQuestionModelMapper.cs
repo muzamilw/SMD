@@ -106,8 +106,8 @@ namespace SMD.MIS.ModelMappers
                 RejectionReason = source.RejectionReason,
                 SubmissionDate = source.SubmissionDate,
                 CreatedBy = source.User.FullName,
-                CreatorAddress = source.User.Company.State + " " + source.User.Company.AddressLine1
-
+                CreatorAddress = source.User.Company.State + " " + source.User.Company.AddressLine1,
+                CompanyId = source.CompanyId
             };
         }
 
@@ -284,7 +284,8 @@ namespace SMD.MIS.ModelMappers
                 AgeRangeStart = source.AgeRangeStart,
                 Gender = source.Gender,
                 ParentSurveyId = source.ParentSurveyId,
-                Priority = source.Priority
+                Priority = source.Priority,
+                CompanyId = source.CompanyId
             };
         }
         public static List<SMD.MIS.Areas.Api.Models.SurveyQuestionTargetCriteria> GetSurveyQuestionTargetCriterias(this Models.DomainModels.SurveyQuestion source)

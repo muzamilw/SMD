@@ -67,6 +67,9 @@ namespace SMD.MIS.Areas.Api.Models
         public string BuyItButtonLabel { get; set; }
         public string BuyItImageUrl { get; set; }
         [NotMapped]
+        
         public int AdViews { get; set; }
+        
+        public int? CompanyId { get; set; }
     }
 }

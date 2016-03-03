@@ -116,5 +116,6 @@ namespace SMD.Interfaces.Services
         /// </summary>
         UserProfileBaseResponseModel GetBaseDataForUserProfile();
         int generateAndSmsCode(string userId);
+        User getUserByAuthenticationToken(string token);
     }
 }

@@ -197,6 +197,7 @@
           <Property Name="WebsiteLink" Type="nvarchar" MaxLength="100" />
           <Property Name="DOB" Type="datetime" />
           <Property Name="CompanyId" Type="int" />
+          <Property Name="authenticationToken" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="AuditLog">
           <Key>
@@ -3513,6 +3514,7 @@
           <NavigationProperty Name="SurveyQuestions" Relationship="DomainModels.FK_SurveyQuestion_AspNetUsers" FromRole="AspNetUser" ToRole="SurveyQuestion" />
           <NavigationProperty Name="SurveyQuestionResponses" Relationship="DomainModels.FK_SurveyQuestionResponse_AspNetUsers" FromRole="AspNetUser" ToRole="SurveyQuestionResponse" />
           <NavigationProperty Name="Roles" Relationship="DomainModels.AspNetUserRoles" FromRole="AspNetUser" ToRole="Role" />
+          <Property Name="AuthenticationToken" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_AdCampaignResponse_AspNetUsers">
           <End Type="DomainModels.User" Role="AspNetUser" Multiplicity="0..1" />
@@ -4310,6 +4312,7 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="DomainModels.User">
               <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="AuthenticationToken" ColumnName="authenticationToken" />
                 <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
                 <ScalarProperty Name="DOB" ColumnName="DOB" />
                 <ScalarProperty Name="WebsiteLink" ColumnName="WebsiteLink" />

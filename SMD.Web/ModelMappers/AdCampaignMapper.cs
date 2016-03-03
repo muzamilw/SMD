@@ -111,8 +111,8 @@ namespace SMD.MIS.ModelMappers
                 BuyItImageUrl = source.BuyItImageUrl,
                 BuyItLine2 = source.BuyItLine2,
                 BuyItLine3 = source.BuyItLine3,
-                AdViews = source.AdViews
-
+                AdViews = source.AdViews,
+                CompanyId = source.CompanyId
             };
 
 

@@ -174,7 +174,7 @@ define("ads/ads.viewModel",
 
 
                         //selectedCriteria();
-
+                        getAudienceCount();
                         //campaignModel().Gender('1');
                         //campaignModel().Type('1');
                         //campaignModel().MaxBudget('1');
@@ -918,6 +918,7 @@ define("ads/ads.viewModel",
                                             }
                                         }
                                     });
+                                    getAudienceCount();
                                     bindAudienceReachCount();
                                     if (campaignModel().VoucherImagePath() != null || campaignModel().Voucher1Value() != null || campaignModel().Voucher1Description() != null || campaignModel().Voucher1Heading() != null)
                                     {
