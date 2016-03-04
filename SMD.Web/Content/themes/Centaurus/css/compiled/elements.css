@@ -4971,7 +4971,7 @@ background: url(/Images/ads.png);
    font-size: 23px;
    padding-bottom: 15px;
 
-    color: green;
+    color: #3DD2B5;
 }
 
 .FloatRight{
@@ -4979,6 +4979,10 @@ background: url(/Images/ads.png);
 }
 .padding13{
     padding:13px;
+}
+.flyerButtonStyle{
+        background-color: #3DD2B5;
+     border-color: #3DD2B5;
 }
 @media (min-width:320px){
 .floatNone{
@@ -5009,6 +5013,10 @@ background: url(/Images/ads.png);
 .SurvyDescriptionMargin{
 
 }
+.loginMenu{
+    left:-203px !important;
+
+}
 }
 @media(min-width:481px){
 .floatNone{
@@ -5036,6 +5044,10 @@ background: url(/Images/ads.png);
     width: 44%;
 }
 .SurvyDescriptionMargin{
+
+}
+.loginMenu{
+    left:-203px !important;
 
 }
 }
@@ -5068,6 +5080,10 @@ background: url(/Images/ads.png);
 .SurvyDescriptionMargin{
 
 }
+.loginMenu{
+    left:0px !important;
+
+}
 }
 @media(min-width:996px){
 .floatNone{
@@ -5095,6 +5111,9 @@ background: url(/Images/ads.png);
 .SurvyDescriptionMargin{
      margin-left:27px !important;
 }
+.loginMenu{
+    left:0px !important;
+}
 }
 @media(min-width:1025px){
 .floatNone{
@@ -5121,5 +5140,8 @@ background: url(/Images/ads.png);
 }
 .SurvyDescriptionMargin{
     margin-left:27px !important;
+}
+.loginMenu{
+     left:0px !important;
 }
 }

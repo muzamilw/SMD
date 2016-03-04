@@ -95,7 +95,7 @@ else
                             </div>
 
                             <div class="form-group formcontrol-bg form-horizontal">
-                                <div class="col-lg-7">
+                                <div class="col-lg-9">
                                     <div class="form-group" style="margin-top:10px;">
                                         <div class="col-lg-8 text-campaign-left">
                                             <div class="bs-example-tooltips tooltip-float-width margin-Top-0" style="margin-top: 10px;">
@@ -103,7 +103,7 @@ else
                                                     <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
                                                 </a>
                                             </div>
-                                            <label class="control-label text-right tooltip-float font20 floatNone">Free Display Ad Details</label>
+                                            <label class="control-label text-right tooltip-float font20 floatNone" style="float:left !important;">Free Display Ad Details</label>
                                         </div>
                                         @*<div class="col-lg-4">
                         <button class="btn  btn-success"  style="width:auto;" id="btnSubmitForApproval">Preview</button>
@@ -206,12 +206,12 @@ else
 
                                             <div class="radio col-lg-3">
 
-                                               
+                                                <!-- ko if: !$root.isNewCampaign() -->
                                                 <input type="radio" name="optionsRadiosStoreType" id="optionsRadiosVideos" value="1" data-bind="checked: Type, event:{ change: $root.OnChangeCampaignType }">
                                                 <label for="optionsRadiosVideos">
                                                     Video
                                                 </label>
-                                                
+                                                <!-- /ko -->
                                             </div>
                                             <div class="col-lg-9" data-bind="visible: Type() == 1">
 
@@ -226,13 +226,13 @@ else
                                         <div class="row" data-bind="visible:   Type() ==3">
 
                                             <div class="radio col-lg-3">
-                                               
+                                                <!-- ko if: !$root.isNewCampaign() -->
                                                 <input type="radio" name="optionsRadiosStoreType" id="optionsRadiosLink" value="2" data-bind="checked: Type, event:{ change: $root.OnChangeCampaignType }">
                                                 <label for="optionsRadiosLink" style="display:none;">
                                                     URL
                                                 </label>
                                                 <span class="help-block text-right"></span>
-                                              
+                                                <!-- /ko -->
                                             </div>
                                             <div class="col-lg-9" data-bind="visible: Type() == 2 ||  Type() ==3" style="    margin-bottom: 10px;">
 
@@ -247,13 +247,13 @@ else
                                         <div class="row">
 
                                             <div class="radio col-lg-4">
-                                              
+                                                <!-- ko if: !$root.isNewCampaign() -->
                                                 <input type="radio" name="optionsRadiosStoreType" id="optionsRadiosUploadImage" value="3" data-bind="checked: Type, event:{ change: $root.OnChangeCampaignType }">
                                                 <label for="optionsRadiosUploadImage">
                                                     Flyer / Leaflet
                                                 </label>
                                                 <span class="help-block text-right"></span>
-                                              
+                                                <!-- /ko -->
                                             </div>
 
                                             <div class="col-lg-8" style="margin-left:-10px;" data-bind="visible: Type() == 3 ||  Type() == 2">
@@ -283,13 +283,13 @@ else
                                         <div class="row">
 
                                             <div class="radio col-lg-5">
-                                                
+                                                <!-- ko if: !$root.isNewCampaign() -->
                                                 <input type="radio" name="optionsRadiosStoreType" id="optionsRadiosGame" value="4" data-bind="checked: Type, event:{ change: $root.OnChangeCampaignType }">
                                                 <label for="optionsRadiosGame">
                                                     Sponsor Games
                                                 </label>
                                                 <span class="help-block text-right"></span>
-                                               
+                                                <!-- /ko -->
                                             </div>
 
                                         </div>
@@ -1459,7 +1459,7 @@ else
                     <button class="btn  btn-success btnAdsCampaign ButtonWidth" id="btnSubmitForApproval" data-bind="click:$root.openEditScreen(4)">Game Banner Ad</button>
                 </div>
                 <div class="col-lg-4">
-                    <button class="btn  btn-success btnAdsCampaign ButtonWidth" id="btnSubmitForApproval" data-bind="click:$root.openEditScreen(2)">Flyers / Leaflet Ad</button>
+                    <button class="btn  btn-success btnAdsCampaign ButtonWidth flyerButtonStyle" id="btnSubmitForApproval" data-bind="click:$root.openEditScreen(2)">Flyers / Leaflet Ad</button>
                 </div>
                 <div class="col-lg-4">
                     <button class="btn  btn-danger btnAdsCampaign ButtonWidth" id="btnSubmitForApproval" data-bind="click:$root.openEditScreen(1)">YouTube Video Ad</button>
