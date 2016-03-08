@@ -1252,15 +1252,17 @@ namespace SMD.Implementation.Services
                 };
             }
 
-            if (user.Status == (int)UserStatus.InActive)
-            {
-                return new LoginResponse
-                {
-                    Message = LanguageResources.WebApiUserService_InactiveUser
-                };
-            }
+            //if (user.Status == (int)UserStatus.InActive)
+            //{
+            //    return new LoginResponse
+            //    {
+            //        Message = LanguageResources.WebApiUserService_InactiveUser
+            //    };
+            //}  // always unarchive  user
+            user.Status = (int)UserStatus.Active;
             // update GUID 
             user.AuthenticationToken = Guid.NewGuid().ToString();
+           
             await UserManager.UpdateAsync(user);
             // Login user
             LoginUser(request.UserName);
