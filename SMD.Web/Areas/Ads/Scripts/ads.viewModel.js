@@ -46,6 +46,7 @@ define("ads/ads.viewModel",
                     isIndustoryPerClickPriceAdded = ko.observable(false),
                     isProfileSurveyPerClickPriceAdded = ko.observable(false),
                     isEducationPerClickPriceAdded = ko.observable(false),
+                    isDisplayCouponsAds = ko.observable(false),
                     selectedEducationIncludeExclude = ko.observable(true),
                     isListVisible = ko.observable(true),
                     isWelcomeScreenVisible = ko.observable(false),
@@ -58,6 +59,7 @@ define("ads/ads.viewModel",
                     totalAudience = ko.observable(0),
                     // audience reach mode 
                     audienceReachMode = ko.observable(1),
+                    MainHeading = ko.observable("My Ads"),
                     errorList = ko.observableArray([]),
                       // unique country list used to bind location dropdown
                     selectedQuestionCountryList = ko.observableArray([]),
@@ -115,7 +117,8 @@ define("ads/ads.viewModel",
                             CampaignId: 0,
                             PageSize: pager().pageSize(),
                             PageNo: pager().currentPage(),
-                            SearchText: searchFilterValue()
+                            SearchText: searchFilterValue(),
+                            ShowCoupons: isDisplayCouponsAds()
                         }, {
                             success: function (data) {
                                 if (data != null) {
@@ -164,8 +167,12 @@ define("ads/ads.viewModel",
                      // Add new Profile Question
                     addNewCampaign = function () {
 
-
-                        isWelcomeScreenVisible(true);
+                        if (isDisplayCouponsAds() == false) {
+                            isWelcomeScreenVisible(true);
+                        } else {
+                            openEditScreen(5);
+                            isFromEdit(true);
+                        }
                         isListVisible(false);
                         isNewCampaign(true);
                         //isEditorVisible(true);
@@ -174,7 +181,7 @@ define("ads/ads.viewModel",
 
 
                         //selectedCriteria();
-                        getAudienceCount();
+                    //    getAudienceCount();
                         //campaignModel().Gender('1');
                         //campaignModel().Type('1');
                         //campaignModel().MaxBudget('1');
@@ -228,7 +235,11 @@ define("ads/ads.viewModel",
                                     isListVisible(false);
                                     isWelcomeScreenVisible(true);
                                 }
-                                
+                               
+                                if (isDisplayCouponsAds() == true) {
+                                    isListVisible(true);
+                                    isWelcomeScreenVisible(false);
+                                }
                                 
                                 $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign").css("display", "none");
                                 $("#btnSubmitForApproval,#saveBtn,.table-link").css("display", "inline-block");
@@ -289,7 +300,7 @@ define("ads/ads.viewModel",
                       openEditScreen = function (mode) {
 
                           campaignModel(new model.Campaign());
-
+                          campaignModel().CampaignName('New Campaign');
                           if (mode == 1)
                           {
                               campaignModel().Type('1');
@@ -309,6 +320,8 @@ define("ads/ads.viewModel",
                           {
                               campaignModel().Type('4');
                               isEnableVedioVerificationLink(false);
+                          }else if (mode == 5) {
+                              campaignModel().CampaignName('New Coupon');
                           }
                           isWelcomeScreenVisible(false);
 
@@ -331,8 +344,8 @@ define("ads/ads.viewModel",
                           campaignModel().CampaignImagePath("");
                           campaignModel().VoucherImagePath("");
                           campaignModel().LanguageId(41);
-                          campaignModel().CampaignName('New Campaign');
-
+                          
+                          getAudienceCount();
 
                           bindAudienceReachCount();
                           selectedQuestionCountryList([]);
@@ -1254,7 +1267,7 @@ define("ads/ads.viewModel",
                         getAudienceCount();
                     });
                 },
-             buildMap = function () {
+                buildMap = function () {
                  $(".locMap").css("display", "none");
                  var initialized = false;
                  _.each(campaignModel().AdCampaignTargetLocations(), function (item) {
@@ -1294,7 +1307,7 @@ define("ads/ads.viewModel",
                     });
                     return list;
                 },
-                 ChangeVoucherSettings = function () {
+                ChangeVoucherSettings = function () {
                      if (voucherQuestionStatus() == false) {
                          voucherQuestionStatus(true);
                      } else {
@@ -1306,6 +1319,16 @@ define("ads/ads.viewModel",
                 },
                 buyItImageCallback = function (file, data) {
                     campaignModel().buyItImageBytes(data);
+                },
+                ShowCouponPromotions = function () {
+                    isDisplayCouponsAds(true);
+                    MainHeading("My Coupons");
+                    getAdCampaignGridContent();
+                },
+                ShowAdCampaigns = function () {
+                    isDisplayCouponsAds(false);
+                    MainHeading("My Ads");
+                    getAdCampaignGridContent();
                 },
                 // Initialize the view model
                 initialize = function (specifiedView) {
@@ -1404,7 +1427,11 @@ define("ads/ads.viewModel",
                     isDetailEditorVisible: isDetailEditorVisible,
                     isListVisible: isListVisible,
                     isNewCampaign: isNewCampaign,
-                    BackToAds: BackToAds
+                    BackToAds: BackToAds,
+                    MainHeading: MainHeading,
+                    ShowAdCampaigns: ShowAdCampaigns,
+                    ShowCouponPromotions: ShowCouponPromotions,
+                    isDisplayCouponsAds: isDisplayCouponsAds
                 };
             })()
         };
