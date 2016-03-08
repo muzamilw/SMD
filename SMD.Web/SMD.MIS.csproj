@@ -1502,6 +1502,7 @@
     <Content Include="Areas\User\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\User\Views\ManageUser\Index.cshtml" />
     <Content Include="Areas\ProfileQuestion\Views\Manage\test.cshtml" />
+    <Content Include="Areas\User\Views\ManageUser\ManageUsers.cshtml" />
     <None Include="Properties\PublishProfiles\SMD MIS Saqib.pubxml" />
     <None Include="Properties\PublishProfiles\SMD.pubxml" />
     <None Include="Scripts\amplify-vsdoc.js" />
