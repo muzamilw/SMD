@@ -183,7 +183,10 @@ else
                                                 <th class="col-sm-1"><span>Cost</span></th>
                                                 <th class="col-sm-1"><span>Budget</span></th>*@
                                             <th class="col-sm-2"><span></span></th>
-                                            <th class="col-sm-2"><span>Views</span></th>
+                                            <th class="col-sm-2">
+                                                <span data-bind="visible:!$root.isDisplayCouponsAds()">Views</span>
+                                                <span data-bind="visible:$root.isDisplayCouponsAds()">Taken Count</span>
+                                            </th>
                                             <th class="col-sm-1"><span>Status</span></th>
                                             @*<th class="col-sm-2"><span class="@userClasses">Spent</span><span class="@adminClasses">Created by</span></th>*@
 
@@ -282,7 +285,11 @@ else
             <span class="">Game</span>
             <!-- /ko -->
         </td>
-        <td class="col-sm-2"><span class="" data-bind="text: AdViews"></span></td>
+        <td class="col-sm-2">
+            <span class="" data-bind=""></span>
+            <span data-bind="visible:!$root.isDisplayCouponsAds(),text: AdViews"></span>
+            <span data-bind="visible:$root.isDisplayCouponsAds(),text: CouponTakenCount"></span>
+        </td>
         <td class="col-sm-2">
             <!-- ko if: Status() == 1-->
             <div class="text-left statusbg" style="background:#6D6EFA;    width: 47px;">

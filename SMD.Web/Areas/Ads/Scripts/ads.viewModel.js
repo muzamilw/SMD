@@ -322,6 +322,8 @@ define("ads/ads.viewModel",
                               isEnableVedioVerificationLink(false);
                           }else if (mode == 5) {
                               campaignModel().CampaignName('New Coupon');
+                              isEnableVedioVerificationLink(false);
+                              campaignModel().Type('5');
                           }
                           isWelcomeScreenVisible(false);
 
@@ -806,6 +808,7 @@ define("ads/ads.viewModel",
                 },
 
                 onEditCampaign = function (item) {
+                    console.log(item);
                     if (item.Status() == 1 || item.Status() == 2 || item.Status() == 3 || item.Status() == 4 || item.Status() == null) {
                         canSubmitForApproval(true);
                         dataservice.getCampaignData({
