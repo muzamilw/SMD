@@ -115,7 +115,7 @@ namespace SMD.Repository.Repositories
                 rowCount = DbSet.Count();
                 if (isAdmin)
                 {
-                     IEnumerable<AdCampaign> adCampaigns = DbSet.OrderBy(g => g.CampaignId)
+                     IEnumerable<AdCampaign> adCampaigns = DbSet.OrderBy(g => g.CampaignId).Where(c=>c.Type != 5)
                             .Skip(fromRow)
                             .Take(toRow)
                             .ToList();
@@ -134,7 +134,7 @@ namespace SMD.Repository.Repositories
                 }
                 else
                 {
-                     IEnumerable<AdCampaign> adCampaigns = DbSet.Where(g => g.UserId == LoggedInUserIdentity).OrderBy(g => g.CampaignId)
+                     IEnumerable<AdCampaign> adCampaigns = DbSet.Where(g => g.UserId == LoggedInUserIdentity && g.Type != 5).OrderBy(g => g.CampaignId)
                             .Skip(fromRow)
                             .Take(toRow)
                             .ToList();
@@ -162,10 +162,21 @@ namespace SMD.Repository.Repositories
 
 
                 rowCount = DbSet.Count(query);
-                IEnumerable<AdCampaign> adCampaigns = DbSet.Where(query).OrderBy(g => g.CampaignId)
+                IEnumerable<AdCampaign> adCampaigns = null;
+                if (request.ShowCoupons != null && request.ShowCoupons == true)
+                {
+                    adCampaigns = DbSet.Where(query).Where(g => g.Type == 5).OrderBy(g => g.CampaignId)
+                      .Skip(fromRow)
+                      .Take(toRow)
+                      .ToList();
+                }
+                else
+                {
+                   adCampaigns= DbSet.Where(query).Where(g => g.Type != 5).OrderBy(g => g.CampaignId)
                         .Skip(fromRow)
                         .Take(toRow)
                         .ToList();
+                }
 
                 if (adCampaigns != null && adCampaigns.Count() > 0)
                 {
