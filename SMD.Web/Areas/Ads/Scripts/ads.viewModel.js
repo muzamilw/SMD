@@ -45,6 +45,8 @@ define("ads/ads.viewModel",
                 //
                     isEditCampaign = ko.observable(false),
                     canSubmitForApproval = ko.observable(true),
+                    isNewCampaignVisible = ko.observable(false),
+                    isTerminateBtnVisible = ko.observable(false),
                     correctAnswers = ko.observableArray([{ id: 1, name: "Answer 1" }, { id: 2, name: "Answer 2" }]),
                     selectedIndustryIncludeExclude = ko.observable(true),
                     UserAndCostDetail = ko.observable(),
@@ -151,14 +153,15 @@ define("ads/ads.viewModel",
                     },
 
                     updateCampaignGridItem = function (item) {
+                    
                         canSubmitForApproval(false);
                         if (item.Status == 1) {
                             item.StatusValue = "Draft";
                             canSubmitForApproval(true);
                         } else if (item.Status == 2) {
-                            item.StatusValue = "Submitted for Approval"
+                            item.StatusValue = "Pending Approval"
                         } else if (item.Status == 3) {
-                            item.StatusValue = "Live"
+                            item.StatusValue = "Live";
                         } else if (item.Status == 4) {
                             item.StatusValue = "Paused"
                         } else if (item.Status == 5) {
@@ -183,6 +186,8 @@ define("ads/ads.viewModel",
                         }
                         isListVisible(false);
                         isNewCampaign(true);
+                        isTerminateBtnVisible(false);
+                        isNewCampaignVisible(false);
                         //isEditorVisible(true);
                         //canSubmitForApproval(true);
                         //campaignModel(new model.Campaign());
@@ -251,7 +256,7 @@ define("ads/ads.viewModel",
                                 
                                 $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign").css("display", "none");
                                 $("#btnSubmitForApproval,#saveBtn,.table-link").css("display", "inline-block");
-                                $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign").removeAttr('disabled');
+                                $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign,#btnStopAndTerminate,#btnCopyCampaign").removeAttr('disabled');
                             });
                             confirmation.afterCancel(function () {
 
@@ -282,7 +287,7 @@ define("ads/ads.viewModel",
 
                             $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign").css("display", "none");
                             $("#btnSubmitForApproval,#saveBtn,.table-link").css("display", "inline-block");
-                            $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign").removeAttr('disabled');
+                            $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign,#btnCopyCampaign,#btnStopAndTerminate").removeAttr('disabled');
                         }
                         isFromEdit(false);
                     },
@@ -822,7 +827,8 @@ define("ads/ads.viewModel",
                 },
 
                 onEditCampaign = function (item) {
-                    console.log(item);
+                    isTerminateBtnVisible(false);
+                    isNewCampaignVisible(false);
                     if (item.Status() == 1 || item.Status() == 2 || item.Status() == 3 || item.Status() == 4 || item.Status() == null) {
                         canSubmitForApproval(true);
                         dataservice.getCampaignData({
@@ -867,15 +873,19 @@ define("ads/ads.viewModel",
                                         $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,.lang_delSurvey,.table-link").css("display", "none");
                                         $("#saveBtn").css("display", "none");
                                         $("#btnPauseCampaign").css("display", "inline-block");
-                                        $("#btnCancel,#btnPauseCampaign").removeAttr('disabled');
+                                        $("#btnCancel,#btnPauseCampaign,#btnCopyCampaign,#btnStopAndTerminate").removeAttr('disabled');
                                         campaignModel().StatusValue("Live");
+                                        isTerminateBtnVisible(true);
+                                        isNewCampaignVisible(true);
                                     } else if (campaignModel().Status() == 4) {
                                         $("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
                                         $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,.lang_delSurvey,.table-link").css("display", "none");
                                         $("#saveBtn").css("display", "none");
                                         $("#btnResumeCampagin").css("display", "inline-block");
-                                        $("#btnCancel,#btnResumeCampagin").removeAttr('disabled');
+                                        $("#btnCancel,#btnResumeCampagin,#btnCopyCampaign,#btnStopAndTerminate").removeAttr('disabled');
                                         campaignModel().StatusValue("Paused");
+                                        isTerminateBtnVisible(true);
+                                        isNewCampaignVisible(true);
                                     } else if (campaignModel().Status() == 5) {
                                         campaignModel().StatusValue("Completed");
                                     } else if (campaignModel().Status() == 6) {
@@ -1416,6 +1426,8 @@ define("ads/ads.viewModel",
                     correctAnswers: correctAnswers,
                     onEditCampaign: onEditCampaign,
                     canSubmitForApproval: canSubmitForApproval,
+                    isTerminateBtnVisible: isTerminateBtnVisible,
+                    isNewCampaignVisible:isNewCampaignVisible,
                     submitCampaignData: submitCampaignData,
                     selectedIndustryIncludeExclude: selectedIndustryIncludeExclude,
                     addIndustry: addIndustry,

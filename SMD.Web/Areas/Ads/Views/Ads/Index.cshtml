@@ -231,7 +231,7 @@ else
             <div class="col-lg-6 col-sm-6" style="float:left;padding-left:50px;">
 
                 <button class="btn  btn-success btnAdsCampaign" style="width:24%;float:left;padding:0px;" id="btnSubmitForApproval" data-bind="click:$root.ShowCouponPromotions">Coupons</button>
-                <button class="btn  btn-success btnAdsCampaign" style="width:24%;float:left;padding:0px;" id="btnSubmitForApproval" data-bind="click:gotoManageUsers">Manage Users</button>
+                <button class="btn  btn-success btnAdsCampaign @adminClasses" style="width:24%;float:left;padding:0px;" id="btnSubmitForApproval" data-bind="click:gotoManageUsers">Manage Users</button>
                 <button class="btn  btn-success btnAdsCampaign" style="width:24%;float:left;padding:0px;" id="btnSubmitForApproval" data-bind="click:gotoProfile">Marketing Info</button>
             </div>
 
@@ -333,7 +333,7 @@ else
 
         <td class="col-sm-2">
 
-            <!-- ko if: Status() == 1 || Status() == 2|| Status() == 3 || Status() == 4-->
+            <!-- ko if: Status() == 1 ||  Status() == 3 || Status() == 4-->
             <a class="table-link" style="float: right">
                 <span class="fa-stack">
                     <i class="fa fa-square fa-stack-2x"></i>
