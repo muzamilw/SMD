@@ -1347,6 +1347,12 @@ define("ads/ads.viewModel",
                     MainHeading("My Ads");
                     getAdCampaignGridContent();
                 },
+                gotoProfile = function () {
+                    window.location.href = "/User/ManageUser/Index";
+                },
+                gotoManageUsers = function () {
+                    window.location.href = "/";
+                },
                 // Initialize the view model
                 initialize = function (specifiedView) {
                     view = specifiedView;
@@ -1454,7 +1460,9 @@ define("ads/ads.viewModel",
                     lblAdTitle:lblAdTitle,
                     lblFirstLine:lblFirstLine,
                     lbllSecondLine:lbllSecondLine,
-                    lblCampaignSchedule: lblCampaignSchedule
+                    lblCampaignSchedule: lblCampaignSchedule,
+                    gotoProfile: gotoProfile,
+                    gotoManageUsers:gotoManageUsers
                 };
             })()
         };
