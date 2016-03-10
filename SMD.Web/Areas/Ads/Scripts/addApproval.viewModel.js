@@ -19,6 +19,9 @@ define("addApproval/addApproval.viewModel",
                     sortIsAsc = ko.observable(true),
                     // Controlls editor visibility 
                     isEditorVisible = ko.observable(false),
+                    isShowCopounMode = ko.observable(false),
+                    // variables 
+                    lblPageTitle = ko.observable("Ad Campaigns For Approval"),
                     //selected AdCampaign
                     selectedCampaign = ko.observable(),
                     //Get AdCampaign
@@ -28,7 +31,8 @@ define("addApproval/addApproval.viewModel",
                                 PageSize: pager().pageSize(),
                                 PageNo: pager().currentPage(),
                                 SortBy: sortOn(),
-                                IsAsc: sortIsAsc()
+                                IsAsc: sortIsAsc(),
+                                ShowCoupons: isShowCopounMode()
                             },
                             {
                                 success: function(data) {
@@ -36,7 +40,6 @@ define("addApproval/addApproval.viewModel",
                                     _.each(data.AdCampaigns, function (item) {
                                         campaigns.push(model.AdCampaignServertoClientMapper(item));
                                     });
-                                    console.log(data.AdCampaigns);
                                     pager().totalCount(0);
                                     pager().totalCount(data.TotalCount);
                                 },
@@ -56,7 +59,7 @@ define("addApproval/addApproval.viewModel",
                         isEditorVisible(false);
                     },
                     // On editing of existing AdCampaign
-                    onEditCampaign = function(item) {
+                    onEditCampaign = function (item) {
                         selectedCampaign(item);
                         isEditorVisible(true);
                     },                  
@@ -101,7 +104,11 @@ define("addApproval/addApproval.viewModel",
                         view = specifiedView;
                         ko.applyBindings(view.viewModel, view.bindingRoot);
                         pager(pagination.Pagination({ PageSize: 10 }, campaigns, getCampaigns));
-                       
+                        var mode = getParameter(window.location.href, "mode"); 
+                        if (mode == 2) {
+                            lblPageTitle("Coupons For Approval");
+                            isShowCopounMode(true);
+                        }
                         // First request for LV
                         getCampaigns();
                     };
@@ -119,7 +126,9 @@ define("addApproval/addApproval.viewModel",
                     onSaveCampaign: onSaveCampaign,
                     onApproveCampaign : onApproveCampaign,
                     hasChangesOnCampaign: hasChangesOnCampaign,
-                    onRejectCampaign: onRejectCampaign
+                    onRejectCampaign: onRejectCampaign,
+                    lblPageTitle: lblPageTitle,
+                    isShowCopounMode: isShowCopounMode
                 };
             })()
         };

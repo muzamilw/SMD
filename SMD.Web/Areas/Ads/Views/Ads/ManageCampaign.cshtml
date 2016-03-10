@@ -83,9 +83,7 @@ else
 
                             <div class="form-group formcontrol-bg" style="margin-bottom:14px;">
 
-                                <div class="col-lg-3 text-campaign-left font20">
-                                    Campaign Name
-
+                                <div class="col-lg-3 text-campaign-left font20"> <span data-bind="text:$root.lblCampaignName">  Campaign Name</span>
                                 </div>
                                 <div class="col-lg-9" style="padding-left:0px;">
                                     <input type="text" name="Campaign Name" class="form-control" id="txtCampaignName" placeholder="New Campaign" data-bind="value: CampaignName,validationTooltip: CampaignName, validationOnElement: CampaignName">
@@ -103,7 +101,7 @@ else
                                                     <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
                                                 </a>
                                             </div>
-                                            <label class="control-label text-right tooltip-float font20 floatNone">Free Display Ad Details</label>
+                                            <label class="control-label text-right tooltip-float font20 floatNone" data-bind="text:$root.lblDetailsHeading">Free Display Ad Details</label>
                                         </div>
                                         @*<div class="col-lg-4">
                         <button class="btn  btn-success"  style="width:auto;" id="btnSubmitForApproval">Preview</button>
@@ -113,7 +111,7 @@ else
                                     <div class="form-group" style="margin-bottom:14px;">
                                         <div class="col-lg-3" style="padding-top:12px;">
 
-                                            <label for="txtCampaignDisplayName" class="control-label text-right tooltip-float floatNone">Ad Title</label>
+                                            <label for="txtCampaignDisplayName" class="control-label text-right tooltip-float floatNone" data-bind="text:$root.lblAdTitle">Ad Title</label>
                                         </div>
                                         <div class="col-lg-8">
                                             <input type="text" style="height:60px;" name="Campaign Display Name" class="form-control height60 font24px" id="txtCampaignDisplayName" placeholder="Ad title (30 characters)" data-bind="value: DisplayTitle,validationTooltip: DisplayTitle, validationOnElement: DisplayTitle">
@@ -123,7 +121,7 @@ else
                                     <div class="form-group" style="margin-bottom:25px;">
                                         <div class="col-lg-3">
 
-                                            <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone">First line </label>
+                                            <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone" data-bind="text:$root.lblFirstLine">First line </label>
                                         </div>
                                         <div class="col-lg-8">
                                             <textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="Enter Description (20 characters)" data-bind="value: Description" maxlength="50"></textarea>
@@ -133,7 +131,7 @@ else
                                     <div class="form-group" style="margin-bottom:25px;">
                                         <div class="col-lg-3">
 
-                                            <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone">Second Line</label>
+                                            <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone" data-bind="text:$root.lbllSecondLine">Second Line</label>
                                         </div>
                                         <div class="col-lg-8">
                                             <textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="Enter Description (20 characters)" data-bind="value: CampaignDescription" maxlength="50"></textarea>
@@ -762,7 +760,7 @@ else
                                             <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
                                         </a>
                                     </div>
-                                    <label class="control-label text-right tooltip-float font20 floatNone">Campaign Schedule</label>
+                                    <label class="control-label text-right tooltip-float font20 floatNone" data-bind="text:$root.lblCampaignSchedule">Campaign Schedule</label>
                                 </div>
 
                             </div>

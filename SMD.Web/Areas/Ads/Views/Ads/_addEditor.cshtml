@@ -4,15 +4,15 @@
 
 <div data-bind="visible: $root.isEditorVisible()" style="display: none">
     <div class="col-lg-12">
-        <div class="row">
+        @*<div class="row">
             <div class="col-lg-12">
                 <ol class="breadcrumb">
                     <li><a href="#" class="my-navigator">Home</a></li>
-                    <li><a href="#" class="my-navigator">Ad Campaign Approval</a></li>
+                    <li><a href="#" class="my-navigator" >Ad Campaign Approval</a></li>
                 </ol>
                
             </div>
-        </div>
+        </div>*@
         <div class="row" id="user-profile">
             <div class="col-lg-12 col-md-8 col-sm-8" style="padding-bottom: 10px;">
                 <div class="clearfix ">
@@ -31,10 +31,12 @@
                         <div class="tab-content">
                             <div class="tab-pane fade in active" data-bind="with: $root.selectedCampaign" id="tab-generalinfo">
                                 <div class="col-lg-12 form-horizontal">
-                                    <h3 class="group-header" style="margin-top:20px;">
+                                    <h3 class="group-header" style="margin-top:20px;" data-bind="visible:!$root.isShowCopounMode()">
                                         Ad Campaign General Info
                                     </h3>
-                                 
+                                    <h3 class="group-header" style="margin-top:20px;" data-bind="visible:$root.isShowCopounMode()">
+                                        Coupon General Info
+                                    </h3>
                                     <div class="col-lg-9">
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
@@ -43,7 +45,8 @@
                                                         <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
                                                     </a>
                                                 </div>
-                                                <label class="control-label text-right tooltip-float">Campaign Name</label>
+                                                <label class="control-label text-right tooltip-float" data-bind="visible:!$root.isShowCopounMode()">Campaign Name</label>
+                                                <label class="control-label text-right tooltip-float" data-bind="visible:$root.isShowCopounMode()">Coupon Name</label>
                                             </div>
                                             <div class="col-lg-6">
                                                 <input type="text" readonly class="form-control" data-bind="value:campaignName">
@@ -81,6 +84,51 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="col-lg-9" data-bind="visible:$root.isShowCopounMode()">
+                                        <div class="form-group">
+                                            <div class="col-lg-4 text-right">
+                                                <div class="bs-example-tooltips tooltip-float-width">
+                                                    <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
+                                                        <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                    </a>
+                                                </div>
+                                                <label class="control-label text-right tooltip-float">Purse Swap Value</label>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <input type="text" readonly class="form-control" data-bind="value: CouponSwapValue">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-9" data-bind="visible:$root.isShowCopounMode()">
+                                        <div class="form-group">
+                                            <div class="col-lg-4 text-right">
+                                                <div class="bs-example-tooltips tooltip-float-width">
+                                                    <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
+                                                        <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                    </a>
+                                                </div>
+                                                <label class="control-label text-right tooltip-float">Actual Value</label>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <input type="text" readonly class="form-control" data-bind="value: CouponActualValue">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-9" data-bind="visible:$root.isShowCopounMode()">
+                                        <div class="form-group">
+                                            <div class="col-lg-4 text-right">
+                                                <div class="bs-example-tooltips tooltip-float-width">
+                                                    <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
+                                                        <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                    </a>
+                                                </div>
+                                                <label class="control-label text-right tooltip-float">Quantity</label>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <input type="text" readonly class="form-control" data-bind="value: CouponQuantity">
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="col-lg-9 marginBottom12">
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
@@ -98,7 +146,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-9">
+                                    <div class="col-lg-9" data-bind="visible:!$root.isShowCopounMode()">
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
                                                 <div class="bs-example-tooltips tooltip-float-width">
@@ -113,7 +161,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-9">
+                                    <div class="col-lg-9" data-bind="visible:!$root.isShowCopounMode()">
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
                                                 <div class="bs-example-tooltips tooltip-float-width">
@@ -128,7 +176,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-9">
+                                    <div class="col-lg-9" data-bind="visible:!$root.isShowCopounMode()">
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
                                                 <div class="bs-example-tooltips tooltip-float-width">
@@ -143,7 +191,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-9">
+                                    <div class="col-lg-9" data-bind="visible:!$root.isShowCopounMode()">
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
                                                 <div class="bs-example-tooltips tooltip-float-width">
@@ -158,7 +206,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-9">
+                                    <div class="col-lg-9" data-bind="visible:!$root.isShowCopounMode()">
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
                                                 <div class="bs-example-tooltips tooltip-float-width">
@@ -173,7 +221,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-9">
+                                    <div class="col-lg-9" data-bind="visible:!$root.isShowCopounMode()">
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
                                                 <div class="bs-example-tooltips tooltip-float-width">
@@ -188,7 +236,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-9 marginBottom12">
+                                    <div class="col-lg-9 marginBottom12" data-bind="visible:!$root.isShowCopounMode()">
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
                                                 <div class="bs-example-tooltips tooltip-float-width">
