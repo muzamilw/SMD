@@ -366,4 +366,17 @@
         require(["user/user.view", "common/confirmation.view", "common/stripeChargeCustomer.view"]);
     </script>
 
+    <script>
+        function getParameter(url, param) {
+            if (url.indexOf('?') == -1)
+                return 1;
+            url = url.split('?');
+            var pattern = new RegExp(param + '=(.*?)(;|&|$)', 'gi');
+            return url[1].split(pattern)[1];
+        }
+    </script>
+
+
+
+
 }

@@ -91,7 +91,7 @@ else
         <tr style="cursor: pointer">
 
             <td>
-                <a href="#" class="store-user-link" data-bind="text: Name,click:$root.onEditSurvey"></a>
+                <a href="#" class="store-user-link" data-bind="text: Name,click:$root.onEditUser"></a>
             </td>
             <td>
                 <p style="margin-top:8px;" data-bind="text:Role"></p>
@@ -129,6 +129,16 @@ else
     <script type="text/javascript">
         require(["user/user.view", "common/confirmation.view"]);
     </script>
+<script>
+    function getParameter(url, param) {
+        if (url.indexOf('?') == -1)
+            return 1;
+        url = url.split('?');
+        var pattern = new RegExp(param + '=(.*?)(;|&|$)', 'gi');
+        return url[1].split(pattern)[1];
+    }
+</script>
+
 
 
 }

@@ -10,6 +10,10 @@ define("user/user.viewModel",
                 var view,
                      // Current User
                     selectedUser = ko.observable(),
+                     // is user ID
+                    isUserEdit = ko.observable(false),
+                    // selected userid
+                    selectedUserId = ko.observable(false),
                     // list of countries
                     countries = ko.observableArray([]),
                     // list of cities 
@@ -50,6 +54,29 @@ define("user/user.viewModel",
                                 }
                             });
                    },
+
+                    // Get User Profile For Editing 
+                   getUserProfileById = function () {
+                       dataservice.getUserProfileById({
+                           UserId: selectedUserId()
+                       },{
+                               success: function (userProfile) {
+                                   console.log(userProfile);
+                                   selectedUser(model.UserServertoClientMapper(userProfile));
+                                   // Load Cities by Country
+                                   updateCities(userProfile.CityId);
+                                   selectedUser().countryId.subscribe(function () {
+                                       updateCities();
+
+                                   });
+                                   selectedUser().reset();
+                               },
+                               error: function () {
+                                   toastr.error("Failed to load User's Profile!");
+                               }
+                           });
+                   },
+
                    // Update City DD on country change 
                    updateCities = function (cityId) {
                        if (!selectedUser().countryId()) {
@@ -96,7 +123,15 @@ define("user/user.viewModel",
                                     timeZones.valueHasMutated();
                                 }
                                 // Get Profile When Base data is loaded 
-                                getUserProfile();
+                                if (isUserEdit == true)
+                                {
+
+                                }
+                                else
+                                {
+                                    getUserProfile();
+                                }
+                               
                                 selectedUser().cityId(cityId);
                             },
                             error: function () {
@@ -104,6 +139,12 @@ define("user/user.viewModel",
                             }
                         });
                     },
+
+
+                  
+                    
+                   
+
                       hasChangesOnProfile = ko.computed(function () {
                           if (selectedUser() == undefined) {
                               return false;
@@ -140,6 +181,16 @@ define("user/user.viewModel",
                         });
                     },
 
+
+
+                       onEditUser = function (item) {
+                          
+                           //selectedUserId(item.UserId);
+                           window.location.href = "/User/ManageUser/Index?user=" + item.UserId;
+                         
+                       },
+
+
                     //Update Profile
                      //Get Base Data for Questions
                     updateProfile = function () {
@@ -167,17 +218,30 @@ define("user/user.viewModel",
                     initialize = function (specifiedView) {
                         view = specifiedView;
                         ko.applyBindings(view.viewModel, view.bindingRoot);
-                        if (view.bindingRootUser == undefined)
-                        {
-                            // Base data call
+
+
+                        var user = getParameter(window.location.href, "user");
+                        if (user != 1) {
+                           
+                            isUserEdit(true);
+                            selectedUserId(user);
                             getBasedata();
                         }
-                       
-
-                        if(view.bindingRootUser != undefined)
+                        else
                         {
-                            getDataforUser();
+                            if (view.bindingRootUser == undefined) {
+                                // Base data call
+                                getBasedata();
+                            }
+
+
+                            if (view.bindingRootUser != undefined) {
+                                getDataforUser();
+                            }
                         }
+
+
+                      
 
                     };
                 return {
@@ -193,7 +257,8 @@ define("user/user.viewModel",
                     timeZones: timeZones,
                     chargeCustomer: chargeCustomer,
                     hasChangesOnProfile: hasChangesOnProfile,
-                    userList: userList
+                    userList: userList,
+                    onEditUser: onEditUser
                 };
             })()
         };

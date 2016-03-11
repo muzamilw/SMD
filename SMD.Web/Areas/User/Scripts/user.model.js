@@ -169,12 +169,13 @@
     var ManageUsers = function (source) {
         var self
         if (source != undefined) {
+            UserId = ko.observable(source.UserId),
             Name = ko.observable(source.Name),
             Role = ko.observable(source.Role)
            
 
         } else {
-
+            UserId = ko.observable(),
             Name = ko.observable(),
            Role = ko.observable()
         
@@ -199,9 +200,9 @@
        };
 
         self = {
+            UserId: UserId(),
             Name: Name(),
             Role: Role(),
-          
             errors: errors,
             isValid: isValid,
             dirtyFlag: dirtyFlag,

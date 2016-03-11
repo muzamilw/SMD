@@ -15,6 +15,7 @@ namespace SMD.MIS.ModelMappers
 
             return new ManageUserRolesModel
             {
+                UserId = source.Id,
                 Name = source.FullName,
                 Role = source.Roles.Select(c => c.Name).FirstOrDefault()
             };

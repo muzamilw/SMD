@@ -51,6 +51,18 @@ namespace SMD.MIS.Areas.Api.Controllers
             return  response.CreateFrom();
         }
 
+        /// <summary>
+        /// Get User's Profile 
+        /// </summary>
+        public WebApiUser Get([FromUri] GetUserRequestModel request)
+        {
+            if (!ModelState.IsValid)
+            {
+                throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
+            }
+            var response = webApiUserService.GetLoggedInUser();
+            return response.CreateFrom();
+        }
 
         /// <summary>
         /// Update User Profile

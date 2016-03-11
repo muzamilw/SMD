@@ -40,6 +40,8 @@ namespace SMD.MIS.Areas.Api.Controllers
             var response=webApiUserService.GetBaseDataForUserProfile();
             return response.CreateFrom();
         }
+
+      
         #endregion
     }
 }

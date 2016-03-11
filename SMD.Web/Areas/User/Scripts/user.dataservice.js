@@ -17,7 +17,12 @@ define("user/user.dataservice", function () {
                         dataType: 'json',
                         type: 'GET'
                     });
-
+                    //Get User Profile Data's Base Data
+                    amplify.request.define('getUserProfileById', 'ajax', {
+                        url: '/Api/UpdateUserFromWeb',
+                        dataType: 'json',
+                        type: 'GET'
+                    });
                     //Get User Profile
                     amplify.request.define('getUserProfile', 'ajax', {
                         url: '/Api/UpdateUserFromWeb',
@@ -82,6 +87,16 @@ define("user/user.dataservice", function () {
             });
         },
 
+          // Get user data
+        getUserProfileById = function (params, callbacks) {
+            initialize();
+            return amplify.request({
+                resourceId: 'getUserProfileById',
+                success: callbacks.success,
+                error: callbacks.error,
+                data: params
+            });
+        },
           // Get manage users
         getDataforManageUser = function (params, callbacks) {
             initialize();
@@ -105,6 +120,7 @@ define("user/user.dataservice", function () {
            
         return {
             getBaseDataForUserProfile: getBaseDataForUserProfile,
+            getUserProfileById: getUserProfileById,
             getDataforManageUser: getDataforManageUser,
             getUserProfile: getUserProfile,
             saveUserProfile: saveUserProfile,
