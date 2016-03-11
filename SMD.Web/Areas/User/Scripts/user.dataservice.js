@@ -38,6 +38,13 @@ define("user/user.dataservice", function () {
                         dataType: 'json',
                         type: 'GET'
                     });
+                    // get Manage user list
+                    amplify.request.define('getDataforManageUser', 'ajax', {
+                        url: '/Api/ManageUsers',
+                        dataType: 'json',
+                        type: 'GET'
+                    });
+
                     isInitialized = true;
                 }
             },
@@ -74,6 +81,17 @@ define("user/user.dataservice", function () {
                 data: params
             });
         },
+
+          // Get manage users
+        getDataforManageUser = function (params, callbacks) {
+            initialize();
+            return amplify.request({
+                resourceId: 'getDataforManageUser',
+                success: callbacks.success,
+                error: callbacks.error,
+                data: params
+            });
+        },
              // Get Cities
         getCitiesByCountry = function (params, callbacks) {
             initialize();
@@ -87,6 +105,7 @@ define("user/user.dataservice", function () {
            
         return {
             getBaseDataForUserProfile: getBaseDataForUserProfile,
+            getDataforManageUser: getDataforManageUser,
             getUserProfile: getUserProfile,
             saveUserProfile: saveUserProfile,
             getCitiesByCountry: getCitiesByCountry

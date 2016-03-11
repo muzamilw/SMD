@@ -14,5 +14,9 @@ namespace SMD.MIS.Areas.User.Controllers
         {
             return View();
         }
+        public ActionResult ManageUsers()
+        {
+            return View();
+        }
 	}
 }

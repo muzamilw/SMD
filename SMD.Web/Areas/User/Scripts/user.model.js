@@ -166,9 +166,55 @@
         //todo
     };
    
+    var ManageUsers = function (source) {
+        var self
+        if (source != undefined) {
+            Name = ko.observable(source.Name),
+            Role = ko.observable(source.Role)
+           
 
+        } else {
+
+            Name = ko.observable(),
+           Role = ko.observable()
+        
+        }
+
+
+        errors = ko.validation.group({
+        }),
+        // Is Valid
+       isValid = ko.computed(function () {
+           return errors().length === 0;
+       }),
+       dirtyFlag = new ko.dirtyFlag({
+       }),
+        // Has Changes
+       hasChanges = ko.computed(function () {
+           return dirtyFlag.isDirty();
+       }),
+        // Reset
+       reset = function () {
+           dirtyFlag.reset();
+       };
+
+        self = {
+            Name: Name(),
+            Role: Role(),
+          
+            errors: errors,
+            isValid: isValid,
+            dirtyFlag: dirtyFlag,
+            hasChanges: hasChanges,
+            reset: reset,
+
+        };
+        return self;
+
+    }
     return {
         User: User,
-        UserServertoClientMapper: UserServertoClientMapper
+        UserServertoClientMapper: UserServertoClientMapper,
+        ManageUsers: ManageUsers
     };
 });

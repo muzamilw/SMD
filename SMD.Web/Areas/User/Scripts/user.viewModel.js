@@ -20,6 +20,8 @@ define("user/user.viewModel",
                     educations = ko.observableArray([]),
                     // list of Time Zones 
                     timeZones = ko.observableArray([]),
+                    // manage users
+                    userList = ko.observableArray([]),
                     // Gender list
                     genderList = ko.observableArray([{
                          id: 1,
@@ -108,6 +110,36 @@ define("user/user.viewModel",
                           }
                           return (selectedUser().hasChanges());
                       }),
+
+
+                     //Get Base Data for Questions
+                    getDataforUser = function () {
+                        dataservice.getDataforManageUser(null, {
+                            success: function (manageUsers) {
+                             
+                                if (manageUsers.length != 0) {
+                                    _.each(manageUsers, function (item) {
+
+                                        var users = model.ManageUsers(item);
+
+                                        userList.push(users);
+                                        //reportParamsList.push(model.ReportParam(item.param));
+
+                                        //_.each(item.ComboList, function (comb) {
+                                        //    paramComboList.push(model.ComboMapper(comb));
+                                        //});
+                                    });
+
+
+                                   
+                                }
+                            },
+                            error: function () {
+                                toastr.error("Failed to load user data!");
+                            }
+                        });
+                    },
+
                     //Update Profile
                      //Get Base Data for Questions
                     updateProfile = function () {
@@ -135,8 +167,18 @@ define("user/user.viewModel",
                     initialize = function (specifiedView) {
                         view = specifiedView;
                         ko.applyBindings(view.viewModel, view.bindingRoot);
-                        // Base data call
-                        getBasedata();
+                        if (view.bindingRootUser == undefined)
+                        {
+                            // Base data call
+                            getBasedata();
+                        }
+                       
+
+                        if(view.bindingRootUser != undefined)
+                        {
+                            getDataforUser();
+                        }
+
                     };
                 return {
                     initialize: initialize,
@@ -150,7 +192,8 @@ define("user/user.viewModel",
                     educations: educations,
                     timeZones: timeZones,
                     chargeCustomer: chargeCustomer,
-                    hasChangesOnProfile: hasChangesOnProfile
+                    hasChangesOnProfile: hasChangesOnProfile,
+                    userList: userList
                 };
             })()
         };

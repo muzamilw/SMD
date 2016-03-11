@@ -4984,6 +4984,8 @@ background: url(/Images/ads.png);
         background-color: #3DD2B5;
      border-color: #3DD2B5;
 }
+
+
 @media (min-width:320px){
 .floatNone{
     float:none !important;
@@ -5016,6 +5018,14 @@ background: url(/Images/ads.png);
 .loginMenu{
     left:-203px !important;
 
+}
+.manageUserHeading{
+    margin-left:13px;
+}
+.inviteButtonStyle{
+    float:right;
+    margin-right:0px;
+    margin-bottom:10px;
 }
 }
 @media(min-width:481px){
@@ -5050,6 +5060,15 @@ background: url(/Images/ads.png);
     left:-203px !important;
 
 }
+.manageUserHeading{
+    margin-left:13px;
+}
+.inviteButtonStyle{
+    float:right;
+    margin-right:0px;
+    margin-bottom:10px;
+}
+
 }
 @media(min-width:641px){
 .floatNone{
@@ -5084,6 +5103,15 @@ background: url(/Images/ads.png);
     left:0px !important;
 
 }
+.manageUserHeading{
+    margin-left:13px;
+}
+.inviteButtonStyle{
+    float:right;
+    margin-right:0px;
+    margin-bottom:10px;
+}
+
 }
 @media(min-width:996px){
 .floatNone{
@@ -5114,6 +5142,14 @@ background: url(/Images/ads.png);
 .loginMenu{
     left:0px !important;
 }
+.manageUserHeading{
+    margin-left:43px;
+}
+.inviteButtonStyle{
+    float:right;
+    margin-right:57px;
+    margin-bottom:10px;
+}
 }
 @media(min-width:1025px){
 .floatNone{
@@ -5143,5 +5179,13 @@ background: url(/Images/ads.png);
 }
 .loginMenu{
      left:0px !important;
+}
+.manageUserHeading{
+    margin-left:43px;
+}
+.inviteButtonStyle{
+    float:right;
+    margin-right:57px;
+    margin-bottom:10px;
 }
 }

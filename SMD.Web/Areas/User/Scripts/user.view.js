@@ -11,6 +11,8 @@ define("user/user.view",
                 viewModel = specifiedViewModel,
                 // Binding root used with knockout
                 bindingRoot = $("#userProfileScreen")[0],
+                // Binding root used with knockout
+                bindingRootUser = $("#manageUserBinding")[0],
                 // Initialize
                 initialize = function () {
                     if (!bindingRoot) {
@@ -20,11 +22,15 @@ define("user/user.view",
             initialize();
             return {
                 bindingRoot: bindingRoot,
+                bindingRootUser: bindingRootUser,
                 viewModel: viewModel
             };
         })(userViewModel);
         // Initialize the view model
         if (ist.userProfile.view.bindingRoot) {
+            userViewModel.initialize(ist.userProfile.view);
+        }
+        if (ist.userProfile.view.bindingRootUser) {
             userViewModel.initialize(ist.userProfile.view);
         }
         return ist.userProfile.view;

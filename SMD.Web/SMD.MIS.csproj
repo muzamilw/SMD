@@ -388,6 +388,7 @@
     <Compile Include="Areas\Api\Controllers\EducationController.cs" />
     <Compile Include="Areas\Api\Controllers\GenerateSMSController.cs" />
     <Compile Include="Areas\Api\Controllers\IndustryController.cs" />
+    <Compile Include="Areas\Api\Controllers\ManageUsersController.cs" />
     <Compile Include="Areas\Api\Controllers\PayoutController.cs" />
     <Compile Include="Areas\Api\Controllers\CreateStripeCustomerController.cs" />
     <Compile Include="Areas\Api\Controllers\CampaignController.cs" />
@@ -450,6 +451,7 @@
     <Compile Include="Areas\Api\Models\InvoiceDetail.cs" />
     <Compile Include="Areas\Api\Models\InvoiceSearchRequestResponse.cs" />
     <Compile Include="Areas\Api\Models\LoginResponse.cs" />
+    <Compile Include="Areas\Api\Models\ManageUserRolesModel.cs" />
     <Compile Include="Areas\Api\Models\ProductView.cs" />
     <Compile Include="Areas\Api\Models\ProductViewResponse.cs" />
     <Compile Include="Areas\Api\Models\ProfileQuestionAnswerView.cs" />
@@ -505,6 +507,7 @@
     <Compile Include="ModelMappers\LanguageMapper.cs" />
     <Compile Include="ModelMappers\CountryMapper.cs" />
     <Compile Include="ModelMappers\LocationMapper.cs" />
+    <Compile Include="ModelMappers\ManageUsersModelMapper.cs" />
     <Compile Include="ModelMappers\ProfileQuestionAnswerMapper.cs" />
     <Compile Include="ModelMappers\ProfileQuestionGroupMapper.cs" />
     <Compile Include="ModelMappers\ProfileQuestionMapper.cs" />

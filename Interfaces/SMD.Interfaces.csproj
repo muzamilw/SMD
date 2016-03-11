@@ -79,6 +79,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\ICityService.cs" />
     <Compile Include="Repository\ICompanyRepository.cs" />
+    <Compile Include="Repository\IManageUserRepository.cs" />
     <Compile Include="Repository\ISurveyQuestionResponseRepository.cs" />
     <Compile Include="Repository\IEducationRepository.cs" />
     <Compile Include="Repository\IIndustryRepository.cs" />
@@ -114,6 +115,7 @@
     <Compile Include="Services\IIndustryService.cs" />
     <Compile Include="Services\IInvoiceDetailService.cs" />
     <Compile Include="Services\IInvoiceService.cs" />
+    <Compile Include="Services\IManageUserService.cs" />
     <Compile Include="Services\IPaypalService.cs" />
     <Compile Include="Services\IAccountService.cs" />
     <Compile Include="Services\IProductService.cs" />
