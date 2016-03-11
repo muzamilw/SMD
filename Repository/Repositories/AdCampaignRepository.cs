@@ -84,7 +84,10 @@ namespace SMD.Repository.Repositories
             int fromRow = (request.PageNo - 1) * request.PageSize;
             int toRow = request.PageSize;
             Expression<Func<AdCampaign, bool>> query =
-                ad => ad.Status == (Int32)AdCampaignStatus.SubmitForApproval;
+                ad => ad.Status == (Int32)AdCampaignStatus.SubmitForApproval && ad.Type != (int)AdCampaignType.Coupon;
+
+            if(request.ShowCoupons.HasValue && request.ShowCoupons.Value == true)
+                query =ad => ad.Status == (Int32)AdCampaignStatus.SubmitForApproval && ad.Type == (int)AdCampaignType.Coupon;
 
             rowCount = DbSet.Count(query);
             return request.IsAsc

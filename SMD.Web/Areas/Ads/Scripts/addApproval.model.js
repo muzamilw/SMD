@@ -2,7 +2,8 @@
 
     var // ReSharper disable InconsistentNaming
       AdCampaign = function (sQId, spcName, spcDes, spcIsApproved, spcRejectionReason,
-          subDate, spcCreatedBy, spcType, spcPath, spcLink, spcrate, spcBudget, CampaignDescription, Voucher1Heading, Voucher1Description, Voucher1Value, Voucher1ImagePath) {
+          subDate, spcCreatedBy, spcType, spcPath, spcLink, spcrate, spcBudget, CampaignDescription, Voucher1Heading, Voucher1Description, Voucher1Value, Voucher1ImagePath,
+          CouponSwapValue, CouponActualValue, CouponQuantity, CouponTakenCount) {
           var
               id = ko.observable(sQId),
               campaignName = ko.observable(spcName),
@@ -22,6 +23,10 @@
              Voucher1Description = ko.observable(Voucher1Description),
              Voucher1Value = ko.observable(Voucher1Value),
              Voucher1ImagePath = ko.observable(Voucher1ImagePath),
+               CouponSwapValue = ko.observable(CouponSwapValue),
+              CouponActualValue = ko.observable(CouponActualValue),
+              CouponQuantity = ko.observable(CouponQuantity),
+              CouponTakenCount = ko.observable(CouponTakenCount),
               errors = ko.validation.group({
 
               }),
@@ -70,7 +75,11 @@
               Voucher1Heading: Voucher1Heading,
               Voucher1Description: Voucher1Description,
               Voucher1Value: Voucher1Value,
-              Voucher1ImagePath: Voucher1ImagePath
+              Voucher1ImagePath: Voucher1ImagePath,
+              CouponSwapValue: CouponSwapValue(),
+              CouponActualValue: CouponActualValue(),
+              CouponQuantity: CouponQuantity(),
+              CouponTakenCount: CouponTakenCount()
           };
       };
 
@@ -82,7 +91,10 @@
             itemFromServer.Approved, itemFromServer.RejectedReason,
             itemFromServer.CreatedDateTime, itemFromServer.CreatedBy, itemFromServer.Type, itemFromServer.ImagePath, itemFromServer.LandingPageVideoLink,
         itemFromServer.ClickRate, itemFromServer.MaxBudget, itemFromServer.CampaignDescription, itemFromServer.Voucher1Heading, itemFromServer.Voucher1Description,
-            itemFromServer.Voucher1Value, itemFromServer.Voucher1ImagePath);
+            itemFromServer.Voucher1Value, itemFromServer.Voucher1ImagePath, itemFromServer.CouponSwapValue == null ? "" : itemFromServer.CouponSwapValue,
+            itemFromServer.CouponActualValue == null ? "" : itemFromServer.CouponActualValue,
+            itemFromServer.CouponQuantity == null ? "" : itemFromServer.CouponQuantity,
+            itemFromServer.CouponTakenCount == null ? "" : itemFromServer.CouponTakenCount);
     };
     
     // Function to attain cancel button functionality AdCampaign

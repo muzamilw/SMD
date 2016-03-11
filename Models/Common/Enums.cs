@@ -55,7 +55,8 @@
     {
         Video = 1,
         Link = 2,
-        Other = 3
+        Other = 3,
+        Coupon = 5
     }
 
     public enum AdCampaignStatus 

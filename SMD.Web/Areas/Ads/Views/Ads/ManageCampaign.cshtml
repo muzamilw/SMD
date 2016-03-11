@@ -83,9 +83,7 @@ else
 
                             <div class="form-group formcontrol-bg" style="margin-bottom:14px;">
 
-                                <div class="col-lg-3 text-campaign-left font20">
-                                    Campaign Name
-
+                                <div class="col-lg-3 text-campaign-left font20"> <span data-bind="text:$root.lblCampaignName">  Campaign Name</span>
                                 </div>
                                 <div class="col-lg-9" style="padding-left:0px;">
                                     <input type="text" name="Campaign Name" class="form-control" id="txtCampaignName" placeholder="New Campaign" data-bind="value: CampaignName,validationTooltip: CampaignName, validationOnElement: CampaignName">
@@ -103,7 +101,7 @@ else
                                                     <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
                                                 </a>
                                             </div>
-                                            <label class="control-label text-right tooltip-float font20 floatNone" style="float:left !important;">Free Display Ad Details</label>
+                                            <label class="control-label text-right tooltip-float font20 floatNone" style="float:left !important; data-bind="text:$root.lblDetailsHeading">Free Display Ad Details</label>
                                         </div>
                                         @*<div class="col-lg-4">
                         <button class="btn  btn-success"  style="width:auto;" id="btnSubmitForApproval">Preview</button>
@@ -113,7 +111,7 @@ else
                                     <div class="form-group" style="margin-bottom:14px;">
                                         <div class="col-lg-3" style="padding-top:12px;">
 
-                                            <label for="txtCampaignDisplayName" class="control-label text-right tooltip-float floatNone">Ad Title</label>
+                                            <label for="txtCampaignDisplayName" class="control-label text-right tooltip-float floatNone" data-bind="text:$root.lblAdTitle">Ad Title</label>
                                         </div>
                                         <div class="col-lg-8">
                                             <input type="text" style="height:60px;" name="Campaign Display Name" class="form-control height60 font24px" id="txtCampaignDisplayName" placeholder="Ad title (30 characters)" data-bind="value: DisplayTitle,validationTooltip: DisplayTitle, validationOnElement: DisplayTitle">
@@ -123,7 +121,7 @@ else
                                     <div class="form-group" style="margin-bottom:25px;">
                                         <div class="col-lg-3">
 
-                                            <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone">First line </label>
+                                            <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone" data-bind="text:$root.lblFirstLine">First line </label>
                                         </div>
                                         <div class="col-lg-8">
                                             <textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="Enter Description (20 characters)" data-bind="value: Description" maxlength="50"></textarea>
@@ -133,7 +131,7 @@ else
                                     <div class="form-group" style="margin-bottom:25px;">
                                         <div class="col-lg-3">
 
-                                            <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone">Second Line</label>
+                                            <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone" data-bind="text:$root.lbllSecondLine">Second Line</label>
                                         </div>
                                         <div class="col-lg-8">
                                             <textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="Enter Description (20 characters)" data-bind="value: CampaignDescription" maxlength="50"></textarea>
@@ -175,7 +173,7 @@ else
                                 @*<div class="col-lg-1">
                                     &nbsp;
                                 </div>*@
-                                <div class="col-lg-9 padding23" >
+                                <div class="col-lg-9 padding23" data-bind="visible:!$root.isDisplayCouponsAds()">
                                     <!-- ko if: $root.isNewCampaign -->
                                     <!-- ko if: Type() == 3 ||  Type() == 2 -->
 
@@ -202,100 +200,146 @@ else
                                     </div>
                                     <!-- /ko -->
                                     <!-- /ko -->
-                                        <div class="row">
+                                    <div class="row">
 
-                                            <div class="radio col-lg-3">
+                                        <div class="radio col-lg-3">
 
                                                 <!-- ko if: !$root.isNewCampaign() -->
-                                                <input type="radio" name="optionsRadiosStoreType" id="optionsRadiosVideos" value="1" data-bind="checked: Type, event:{ change: $root.OnChangeCampaignType }">
-                                                <label for="optionsRadiosVideos">
-                                                    Video
-                                                </label>
+                                            <input type="radio" name="optionsRadiosStoreType" id="optionsRadiosVideos" value="1" data-bind="checked: Type, event:{ change: $root.OnChangeCampaignType }">
+                                            <label for="optionsRadiosVideos">
+                                                Video
+                                            </label>
                                                 <!-- /ko -->
-                                            </div>
-                                            <div class="col-lg-9" data-bind="visible: Type() == 1">
+                                        </div>
+                                        <div class="col-lg-9" data-bind="visible: Type() == 1">
 
-                                                <textarea class="form-control" id="txtLinkOfCampaign" rows="1" placeholder="" data-bind="value: LandingPageVideoLink,validationTooltip:LandingPageVideoLink, validationOnElement: LandingPageVideoLink, attr:{placeholder : $root.campaignTypePlaceHolderValue}" style="margin-bottom:10px;"></textarea>
-                                                <textarea class="form-control" id="txtLinkOfCampaign" rows="1" placeholder="Enter in landing page link " data-bind="value: VideoUrl" style="margin-top:5px;"></textarea>
-                                            </div>
+                                            <textarea class="form-control" id="txtLinkOfCampaign" rows="1" placeholder="" data-bind="value: LandingPageVideoLink,validationTooltip:LandingPageVideoLink, validationOnElement: LandingPageVideoLink, attr:{placeholder : $root.campaignTypePlaceHolderValue}" style="margin-bottom:10px;"></textarea>
+                                            <textarea class="form-control" id="txtLinkOfCampaign" rows="1" placeholder="Enter in landing page link " data-bind="value: VideoUrl" style="margin-top:5px;"></textarea>
+                                        </div>
 
 
+
+                                    </div>
+
+                                    <div class="row" data-bind="visible:   Type() ==3">
+
+                                        <div class="radio col-lg-3">
+                                                <!-- ko if: !$root.isNewCampaign() -->
+                                            <input type="radio" name="optionsRadiosStoreType" id="optionsRadiosLink" value="2" data-bind="checked: Type, event:{ change: $root.OnChangeCampaignType }">
+                                            <label for="optionsRadiosLink" style="display:none;">
+                                                URL
+                                            </label>
+                                            <span class="help-block text-right"></span>
+                                                <!-- /ko -->
+                                        </div>
+                                        <div class="col-lg-9" data-bind="visible: Type() == 2 ||  Type() ==3" style="    margin-bottom: 10px;">
+
+                                            <textarea class="form-control" id="txtLinkOfCampaign" rows="1" placeholder="" data-bind="value: LandingPageVideoLink,validationTooltip:LandingPageVideoLink, validationOnElement: LandingPageVideoLink, attr:{placeholder : $root.campaignTypePlaceHolderValue}"></textarea>
 
                                         </div>
 
-                                        <div class="row" data-bind="visible:   Type() ==3">
 
-                                            <div class="radio col-lg-3">
+
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="radio col-lg-4">
                                                 <!-- ko if: !$root.isNewCampaign() -->
-                                                <input type="radio" name="optionsRadiosStoreType" id="optionsRadiosLink" value="2" data-bind="checked: Type, event:{ change: $root.OnChangeCampaignType }">
-                                                <label for="optionsRadiosLink" style="display:none;">
-                                                    URL
-                                                </label>
-                                                <span class="help-block text-right"></span>
+                                            <input type="radio" name="optionsRadiosStoreType" id="optionsRadiosUploadImage" value="3" data-bind="checked: Type, event:{ change: $root.OnChangeCampaignType }">
+                                            <label for="optionsRadiosUploadImage">
+                                                Flyer / Leaflet
+                                            </label>
+                                            <span class="help-block text-right"></span>
                                                 <!-- /ko -->
-                                            </div>
-                                            <div class="col-lg-9" data-bind="visible: Type() == 2 ||  Type() ==3" style="    margin-bottom: 10px;">
-
-                                                <textarea class="form-control" id="txtLinkOfCampaign" rows="1" placeholder="" data-bind="value: LandingPageVideoLink,validationTooltip:LandingPageVideoLink, validationOnElement: LandingPageVideoLink, attr:{placeholder : $root.campaignTypePlaceHolderValue}"></textarea>
-
-                                            </div>
-
-
-
                                         </div>
 
-                                        <div class="row">
+                                        <div class="col-lg-8" style="margin-left:-10px;" data-bind="visible: Type() == 3 ||  Type() == 2">
 
-                                            <div class="radio col-lg-4">
-                                                <!-- ko if: !$root.isNewCampaign() -->
-                                                <input type="radio" name="optionsRadiosStoreType" id="optionsRadiosUploadImage" value="3" data-bind="checked: Type, event:{ change: $root.OnChangeCampaignType }">
-                                                <label for="optionsRadiosUploadImage">
-                                                    Flyer / Leaflet
-                                                </label>
-                                                <span class="help-block text-right"></span>
-                                                <!-- /ko -->
-                                            </div>
+                                            <div>
 
-                                            <div class="col-lg-8" style="margin-left:-10px;" data-bind="visible: Type() == 3 ||  Type() == 2">
+                                                <div style="float:left;">
 
-                                                <div>
+                                                    <img style="width:100%;height:80px;" data-bind="visible: CampaignTypeImagePath() == ''" src="/Content/Images/Company_Default.png" />
+                                                    <img style="width:100%;height:80px;" data-bind="visible: CampaignTypeImagePath() != '' ,attr: { src: CampaignTypeImagePath }" />
 
-                                                    <div style="float:left;">
-
-                                                        <img style="width:100%;height:80px;" data-bind="visible: CampaignTypeImagePath() == ''" src="/Content/Images/Company_Default.png" />
-                                                        <img style="width:100%;height:80px;" data-bind="visible: CampaignTypeImagePath() != '' ,attr: { src: CampaignTypeImagePath }" />
-
-                                                    </div>
-                                                    <!-- ko if: !$root.isNewCampaign() -->
-                                                    <div class="fileUpload btn btn-primary" style="    margin-top: 18px;margin-left: 20px;">
-                                                        <span>Upload </span>
-                                                        <input type="file" class="upload" id="campaignType_image_file" data-bind="files: { onLoaded: $root.campaignTypeImageCallback, fileFilter: 'image.*'}" />
-                                                    </div>
-                                                    <!-- /ko -->
                                                 </div>
-
-
-                                            </div>
-
-
-                                        </div>
-
-                                        <div class="row">
-
-                                            <div class="radio col-lg-5">
                                                 <!-- ko if: !$root.isNewCampaign() -->
-                                                <input type="radio" name="optionsRadiosStoreType" id="optionsRadiosGame" value="4" data-bind="checked: Type, event:{ change: $root.OnChangeCampaignType }">
-                                                <label for="optionsRadiosGame">
-                                                    Sponsor Games
-                                                </label>
-                                                <span class="help-block text-right"></span>
+                                                <div class="fileUpload btn btn-primary" style="    margin-top: 18px;margin-left: 20px;">
+                                                    <span>Upload </span>
+                                                    <input type="file" class="upload" id="campaignType_image_file" data-bind="files: { onLoaded: $root.campaignTypeImageCallback, fileFilter: 'image.*'}" />
+                                                </div>
                                                 <!-- /ko -->
                                             </div>
+
 
                                         </div>
 
 
                                     </div>
+
+                                    <div class="row">
+
+                                        <div class="radio col-lg-5">
+                                                <!-- ko if: !$root.isNewCampaign() -->
+                                            <input type="radio" name="optionsRadiosStoreType" id="optionsRadiosGame" value="4" data-bind="checked: Type, event:{ change: $root.OnChangeCampaignType }">
+                                            <label for="optionsRadiosGame">
+                                                Sponsor Games
+                                            </label>
+                                            <span class="help-block text-right"></span>
+                                                <!-- /ko -->
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+                                <div class="col-lg-9 padding23" data-bind="visible:$root.isDisplayCouponsAds()">
+                                    <div class="row">
+                                        <div class="form-group" style="margin-top:10px;">
+                                            <div class="col-lg-4">
+                                                <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Coupon Image</label>
+                                            </div>
+                                            <div class="col-lg-8" >
+                                                <div class="fileUpload btn btn-primary">
+                                                    <span>Upload </span>
+                                                    <input type="file" class="upload" id="campaignType_image_file1" data-bind="files: { onLoaded: $root.campaignImageCallback, fileFilter: 'image.*'}" />
+                                                </div><br />
+                                                <div style="margin-top:5px;">
+                                                    <img style="height:80px;" data-bind="visible: CampaignImagePath() == ''" src="/Content/Images/Company_Default.png" />
+                                                    <img style="height:80px;" data-bind="visible: CampaignImagePath() != '' ,attr: { src: CampaignImagePath }" />
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <div class="col-lg-4">
+                                                <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Purse Swap Value</label>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <input type="text" class="form-control" id="txtPurseValue" placeholder="Purse Swap Value" data-bind="value:CouponSwapValue">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-4">
+                                                <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Actual Value</label>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <input type="text" class="form-control" id="txtPurseValue" placeholder="Actual Value" data-bind="value:CouponActualValue">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-4">
+                                                <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Quantity</label>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <input type="text" class="form-control" id="txtPurseValue" placeholder="Quantity" data-bind="value:CouponQuantity">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="col-lg-3">
                                     <img class="hidden-sm hidden-xs" src="/Content/Images/5_Main_4.png" alt="" style="    width: 120px;
     " />
@@ -650,7 +694,7 @@ else
                                             <div class="yourBudgtHeadingCnt">
                                                 <span>Reach</span>
                                             </div>
-                                            <div class="">
+                                            <div class="" data-bind="visible:!$root.isDisplayCouponsAds()">
                                                 <span>PPC  </span>
                                             </div>
                                             <div class="clearfix"> </div>
@@ -661,7 +705,7 @@ else
 
                                                 <span data-bind="text:$root.reachedAudience()">0</span> people
                                             </div>
-                                            <div class="">
+                                            <div class="" data-bind="visible:!$root.isDisplayCouponsAds()">
                                                 <span data-bind="text: '£' + $root.pricePerclick()"></span>
                                             </div>
                                             <div class="clearfix"> </div>
@@ -716,7 +760,7 @@ else
                                             <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
                                         </a>
                                     </div>
-                                    <label class="control-label text-right tooltip-float font20 floatNone">Campaign Schedule</label>
+                                    <label class="control-label text-right tooltip-float font20 floatNone" data-bind="text:$root.lblCampaignSchedule">Campaign Schedule</label>
                                 </div>
 
                             </div>
@@ -879,7 +923,7 @@ else
                             <div class="clearfix">
 
                             </div>
-                            <div class="form-group formcontrol-bg" data-bind="visible: $root.isEnableVedioVerificationLink">
+                            <div class="form-group formcontrol-bg" data-bind="visible: $root.isEnableVedioVerificationLink" >
                                 <div class="col-lg-9">
                                     @*<div class="form-group" style="margin-bottom:20px; margin-top:20px;">
                                         <div class="col-lg-4 text-right" style="    margin-left: 13px;">
@@ -962,7 +1006,7 @@ else
                                 </div>
                             </div>
 
-                            <div class="form-group formcontrol-bg">
+                            <div class="form-group formcontrol-bg" data-bind="visible:!$root.isDisplayCouponsAds()">
                                 <div class="col-lg-9">
                                     <div class="form-group" style="margin-bottom:20px; margin-top:20px;">
                                         <div class="col-lg-5 Float-Left" style="">
@@ -1048,47 +1092,47 @@ else
                                     </div>
 
                                     @*<div class="form-group">
-                                            <div class="col-lg-4 text-right">
-                                                <div class="bs-example-tooltips tooltip-float-width">
-                                                    <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
-                                                        <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                    </a>
-                                                </div>
-                                                <label for="txtVerifyQuestion" class="control-label text-right tooltip-float">Voucher 2 Title</label>
-                                            </div>
-                                            <div class="col-lg-8">
-                                                <input type="text" class="form-control" id="txtVerifyQuestion" placeholder="Enter your voucher title" data-bind="value: Voucher2Heading">
+                    <div class="col-lg-4 text-right">
+                        <div class="bs-example-tooltips tooltip-float-width">
+                            <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
+                                <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                            </a>
+                        </div>
+                        <label for="txtVerifyQuestion" class="control-label text-right tooltip-float">Voucher 2 Title</label>
+                    </div>
+                    <div class="col-lg-8">
+                        <input type="text" class="form-control" id="txtVerifyQuestion" placeholder="Enter your voucher title" data-bind="value: Voucher2Heading">
 
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-lg-4 text-right">
-                                                <div class="bs-example-tooltips tooltip-float-width">
-                                                    <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
-                                                        <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                    </a>
-                                                </div>
-                                                <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float">Voucher 2 Description</label>
-                                            </div>
-                                            <div class="col-lg-8">
-                                                <input type="text" class="form-control" id="txtVerifyAnswer1" placeholder="Enter voucher description" data-bind="value: Voucher2Description">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-4 text-right">
+                        <div class="bs-example-tooltips tooltip-float-width">
+                            <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
+                                <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                            </a>
+                        </div>
+                        <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float">Voucher 2 Description</label>
+                    </div>
+                    <div class="col-lg-8">
+                        <input type="text" class="form-control" id="txtVerifyAnswer1" placeholder="Enter voucher description" data-bind="value: Voucher2Description">
 
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-lg-4 text-right">
-                                                <div class="bs-example-tooltips tooltip-float-width">
-                                                    <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
-                                                        <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                    </a>
-                                                </div>
-                                                <label for="txtVerifyAnswer2" class="control-label text-right tooltip-float">Voucher 2 Value</label>
-                                            </div>
-                                            <div class="col-lg-8">
-                                                <input type="text" class="form-control" id="txtVerifyAnswer2" placeholder="Enter Voucher Value" data-bind="value: Voucher2Value">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-4 text-right">
+                        <div class="bs-example-tooltips tooltip-float-width">
+                            <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="" data-original-title="" title="">
+                                <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                            </a>
+                        </div>
+                        <label for="txtVerifyAnswer2" class="control-label text-right tooltip-float">Voucher 2 Value</label>
+                    </div>
+                    <div class="col-lg-8">
+                        <input type="text" class="form-control" id="txtVerifyAnswer2" placeholder="Enter Voucher Value" data-bind="value: Voucher2Value">
 
-                                            </div>
-                                        </div>*@
+                    </div>
+                </div>*@
                                 </div>
                                 <div class="col-lg-2">
                                     <img src="/Content/Images/5_Main_4.png" class="hidden-sm hidden-xs" alt="" style="   margin-left: 10px; width: 120px;
@@ -1099,7 +1143,7 @@ else
 
                                 </div>
                             </div>
-                            <div class="form-group formcontrol-bg">
+                            <div class="form-group formcontrol-bg" data-bind="visible:!$root.isDisplayCouponsAds()">
                                 <div class="col-lg-9">
                                     <div class="form-group" style="margin-bottom:20px; margin-top:20px;">
                                         <div class="col-lg-4 Float-Left" style="">
@@ -1203,7 +1247,7 @@ else
 
                                 </div>
                                 <div class="col-lg-2">
-                                    <img class="hidden-sm hidden-xs"  src="/Content/Images/5_Main_4.png" alt="" style="   margin-left: 10px; width: 120px;
+                                    <img class="hidden-sm hidden-xs" src="/Content/Images/5_Main_4.png" alt="" style="   margin-left: 10px; width: 120px;
     margin-top: 23px;" />
                                 </div>
                                 <div class="clearfix">
@@ -1250,7 +1294,10 @@ else
                                 </div>
                             </div>
                             <br />
-                            <div>
+                            <div data-bind="visible:$root.isDisplayCouponsAds()">
+                                <button class="btn  btn-success btnSubmitApproval" id="btnSubmitForApproval2" data-bind="click:$root.submitCampaignData, visible: $root.canSubmitForApproval" style="width: 100%;">Submit for Approval</button>
+                            </div>
+                            <div data-bind="visible:!$root.isDisplayCouponsAds()">
                                 <div style="    background: #f4f3f3;
     padding: 20px;
     padding-bottom: 12px;">
@@ -1274,11 +1321,11 @@ else
                                     <div class="clearfix"> </div>
 
                                 </div>
-                               
+
                                 <button class="btn  btn-success btnSubmitApproval" id="btnSubmitForApproval" data-bind="click:$root.submitCampaignData, visible: $root.canSubmitForApproval" style="width: 100%;">Submit for Approval</button>
                                 <br />
-                               
-                                <div class="social-box col-lg-12 col-sm-12 col-xs-12  estimates hidden-sm hidden-xs"  style="cursor:pointer;" title="Pending Estimates">
+
+                                <div class="social-box col-lg-12 col-sm-12 col-xs-12  estimates hidden-sm hidden-xs" style="cursor:pointer;" title="Pending Estimates">
                                     <div style="    margin-bottom: 10px;">
                                         <div class="yourBudgtHeadingCnt">
                                             <span>Total Spent</span>

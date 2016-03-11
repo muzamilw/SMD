@@ -71,5 +71,9 @@ namespace SMD.MIS.Areas.Api.Models
         public int AdViews { get; set; }
         
         public int? CompanyId { get; set; }
+        public string CouponSwapValue { get; set; }
+        public string CouponActualValue { get; set; }
+        public Nullable<int> CouponTakenCount { get; set; }
+        public Nullable<int> CouponQuantity { get; set; }
     }
 }

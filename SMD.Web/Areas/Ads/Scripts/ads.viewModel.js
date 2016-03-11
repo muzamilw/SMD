@@ -34,7 +34,15 @@ define("ads/ads.viewModel",
                     ageRange = ko.observableArray([]),
                     isNewCriteria = ko.observable(true),
                     isEnableVedioVerificationLink = ko.observable(false),
+                    //caption variablels 
+                    lblCampaignName = ko.observable("Campaign Name"),
+                    lblDetailsHeading = ko.observable("Free Display Ad Details"),
+                    lblAdTitle = ko.observable("Ad Title"),
+                    lblFirstLine = ko.observable("First line"),
+                    lbllSecondLine = ko.observable("Second Line"),
+                    lblCampaignSchedule = ko.observable("Campaign Schedule"),
                     campaignTypePlaceHolderValue = ko.observable('Enter in the YouTube video link'),
+                //
                     isEditCampaign = ko.observable(false),
                     canSubmitForApproval = ko.observable(true),
                     correctAnswers = ko.observableArray([{ id: 1, name: "Answer 1" }, { id: 2, name: "Answer 2" }]),
@@ -322,6 +330,14 @@ define("ads/ads.viewModel",
                               isEnableVedioVerificationLink(false);
                           }else if (mode == 5) {
                               campaignModel().CampaignName('New Coupon');
+                              isEnableVedioVerificationLink(false);
+                              campaignModel().Type('5');
+                              lblCampaignName("Coupon Name");
+                              lblDetailsHeading("Coupon Display Details");
+                              lblAdTitle("Coupon Title");
+                              lblFirstLine("First line");
+                              lbllSecondLine("Second Line");
+                              lblCampaignSchedule("Coupon Schedule");
                           }
                           isWelcomeScreenVisible(false);
 
@@ -806,6 +822,7 @@ define("ads/ads.viewModel",
                 },
 
                 onEditCampaign = function (item) {
+                    console.log(item);
                     if (item.Status() == 1 || item.Status() == 2 || item.Status() == 3 || item.Status() == 4 || item.Status() == null) {
                         canSubmitForApproval(true);
                         dataservice.getCampaignData({
@@ -1330,6 +1347,12 @@ define("ads/ads.viewModel",
                     MainHeading("My Ads");
                     getAdCampaignGridContent();
                 },
+                gotoProfile = function () {
+                    window.location.href = "/User/ManageUser/Index";
+                },
+                gotoManageUsers = function () {
+                    window.location.href = "/";
+                },
                 // Initialize the view model
                 initialize = function (specifiedView) {
                     view = specifiedView;
@@ -1431,7 +1454,15 @@ define("ads/ads.viewModel",
                     MainHeading: MainHeading,
                     ShowAdCampaigns: ShowAdCampaigns,
                     ShowCouponPromotions: ShowCouponPromotions,
-                    isDisplayCouponsAds: isDisplayCouponsAds
+                    isDisplayCouponsAds: isDisplayCouponsAds,
+                    lblCampaignName :lblCampaignName,
+                    lblDetailsHeading :lblDetailsHeading,
+                    lblAdTitle:lblAdTitle,
+                    lblFirstLine:lblFirstLine,
+                    lbllSecondLine:lbllSecondLine,
+                    lblCampaignSchedule: lblCampaignSchedule,
+                    gotoProfile: gotoProfile,
+                    gotoManageUsers:gotoManageUsers
                 };
             })()
         };

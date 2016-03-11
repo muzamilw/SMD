@@ -10,7 +10,7 @@
                     <li><a href="~/Dashboard/Index">&nbsp;</a></li>
                 </ol>
                 <div class="clearfix">
-                    <h1 class="pull-left" style="padding-left:0px;">Ad Campaigns For Approval</h1>
+                    <h1 class="pull-left" style="padding-left:0px;" data-bind="text:$root.lblPageTitle">Ad Campaigns For Approval</h1>
                 </div>
             </div>
         </div>
@@ -23,9 +23,12 @@
                                 <thead>
                                     <tr>
                                         <th class="col-lg-2 th-pointer"><span id="4">Submitted By<span></span></span></th>
-                                        <th class="col-lg-2 th-pointer"><span id="1">Campaign Name<span ></span></span></th>
+                                        <th class="col-lg-2 th-pointer">
+                                            <span id="1" data-bind="visible:!$root.isShowCopounMode()">Campaign Name<span></span></span>
+                                            <span id="1" data-bind="visible:$root.isShowCopounMode()">Coupon Name<span></span></span>
+                                        </th>
                                         <th class="col-lg-2 th-pointer"><span id="5">Submission Date<span class="icon-up"></span></span></th>
-                                        <th class="col-lg-1 th-pointer"><span id="6">PPC<span></span></span></th>
+                                        <th class="col-lg-1 th-pointer" data-bind="visible:!$root.isShowCopounMode()"><span id="6">PPC<span></span></span></th>
                                         <th class="col-lg-1 th-pointer"><span id="3">Type<span></span></span></th>
                                         <th class="col-lg-1">&nbsp;</th>
                                     </tr>
@@ -61,11 +64,12 @@
                 <td>
                     <p data-bind="dateString:submissionDate,datePattern: 'DD/MM/YYYY'"></p>
                 </td>
-                <td>
+                <td data-bind="visible:!$root.isShowCopounMode()">
                     <p data-bind="text:clickRate"></p>
                 </td>
                 <td>
-                    <p data-bind="text:type()==1 ? 'Video':'Link'"></p>
+                    <p data-bind="text:type()==1 ? 'Video':'Link',visible:!$root.isShowCopounMode()"></p>
+                    <p data-bind="visible:$root.isShowCopounMode()">Coupon</p>
                 </td>
                 <td>
                     <a class="table-link" style="float: right">
@@ -88,6 +92,15 @@
 @section Scripts{
     <script type="text/javascript">
         require(["addApproval/addApproval.view", "common/confirmation.view"]);
+    </script>
+    <script>
+        function getParameter(url, param) {
+            if (url.indexOf('?') == -1)
+                return 1;
+            url = url.split('?');
+            var pattern = new RegExp(param + '=(.*?)(;|&|$)', 'gi');
+            return url[1].split(pattern)[1];
+        }
     </script>
 
 }
