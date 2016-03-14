@@ -38,12 +38,12 @@ namespace SMD.Models.IdentityModels
         public bool IsSubscribed { get; set; }
         public Nullable<int> AppID { get; set; }
         public Nullable<bool> IsCompanyRepresentative { get; set; }
-        public string Address1 { get; set; }
-        public string Address2 { get; set; }
-        public Nullable<int> CityId { get; set; }
-        public Nullable<int> CountryId { get; set; }
-        public string State { get; set; }
-        public string ZipCode { get; set; }
+        //public string Address1 { get; set; }
+        //public string Address2 { get; set; }
+        //public Nullable<int> CityId { get; set; }
+        //public Nullable<int> CountryId { get; set; }
+        //public string State { get; set; }
+        //public string ZipCode { get; set; }
         public string UserTimeZone { get; set; }
         public Nullable<int> Gender { get; set; }
         public Nullable<int> LanguageId { get; set; }
@@ -55,8 +55,7 @@ namespace SMD.Models.IdentityModels
         public string WebsiteLink { get; set; }
         public Nullable<System.DateTime> DOB { get; set; }
         public Nullable<int> CompanyId { get; set; }
-
-
+        public string AuthenticationToken { get; set; }
 
         public virtual Company Company { get; set; }
         public virtual Industry Industry { get; set; }
@@ -77,8 +76,8 @@ namespace SMD.Models.IdentityModels
 
         public virtual Education Education { get; set; }
 
-        public virtual City City { get; set; }
-        public virtual Country Country { get; set; }
+        //public virtual City City { get; set; }
+        //public virtual Country Country { get; set; }
 
         //city name and country name
         [NotMapped]
@@ -110,15 +109,15 @@ namespace SMD.Models.IdentityModels
                 Phone2 = source.Phone2;
             }
 
-            if (!string.IsNullOrEmpty(source.Address1))
-            {
-                Address1 = source.Address1;
-            }
+            //if (!string.IsNullOrEmpty(source.Address1))
+            //{
+            //    Address1 = source.Address1;
+            //}
 
-            if (!string.IsNullOrEmpty(source.Address2))
-            {
-                Address2 = source.Address2;
-            }
+            //if (!string.IsNullOrEmpty(source.Address2))
+            //{
+            //    Address2 = source.Address2;
+            //}
 
             if (!string.IsNullOrEmpty(source.JobTitle))
             {
@@ -130,30 +129,30 @@ namespace SMD.Models.IdentityModels
                 ContactNotes = source.ContactNotes;
             }
 
-            if (!string.IsNullOrEmpty(source.State))
-            {
-                State = source.State;
-            }
+            //if (!string.IsNullOrEmpty(source.State))
+            //{
+            //    State = source.State;
+            //}
 
-            if (!string.IsNullOrEmpty(source.ZipCode))
-            {
-                ZipCode = source.ZipCode;
-            }
+            //if (!string.IsNullOrEmpty(source.ZipCode))
+            //{
+            //    ZipCode = source.ZipCode;
+            //}
 
             if (source.DOB.HasValue)
             {
                 DOB = source.DOB;
             }
 
-            if (source.CityId.HasValue)
-            {
-                CityId = source.CityId;
-            }
+            //if (source.CityId.HasValue)
+            //{
+            //    CityId = source.CityId;
+            //}
 
-            if (source.CountryId.HasValue)
-            {
-                CountryId = source.CountryId;
-            }
+            //if (source.CountryId.HasValue)
+            //{
+            //    CountryId = source.CountryId;
+            //}
 
             if (source.Gender.HasValue)
             {

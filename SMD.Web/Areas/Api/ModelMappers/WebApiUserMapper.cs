@@ -24,23 +24,23 @@ namespace SMD.MIS.Areas.Api.ModelMappers
                    {
                        UserId = source.Id,
                        FullName = source.FullName,
-                       Address1 = source.Address1,
+                       Address1 = source.Company.AddressLine1,
                        CompanyName = source.Company.CompanyName,
                        Email = source.Email,
                        JobTitle = source.Jobtitle,
                        UserTimeZone = source.UserTimeZone,
                        Gender = source.Gender,
-                       Address2 = source.Address2,
+                       Address2 = source.Company.AddressLine2,
                        DOB =  source.DOB,
-                       CityId = source.CityId,
+                       CityId = source.Company.CityId,
                        ContactNotes = source.ContactNotes,
-                       CountryId = source.CountryId,
+                       CountryId = source.Company.CountryId,
                        IndustryId = source.IndustryId,
                        Phone1 = source.Phone1,
                        Phone2 = source.Phone2,
-                       State = source.State,
-                       ZipCode= source.ZipCode,
-                       ImageUrl = !string.IsNullOrEmpty(source.ProfileImage) ? HttpContext.Current.Request.Url.Scheme + "://" + 
+                       State = source.Company.State,
+                       ZipCode = source.Company.ZipCode,
+                       ImageUrl = !string.IsNullOrEmpty(source.Company.Logo) ? HttpContext.Current.Request.Url.Scheme + "://" + 
                        HttpContext.Current.Request.Url.Host + "/" + source.ProfileImage + "?" + DateTime.Now : string.Empty,
                        AdvertContact = source.Company.CompanyName,
                        AdvertContactEmail = source.Company.ReplyEmail,
@@ -50,8 +50,10 @@ namespace SMD.MIS.Areas.Api.ModelMappers
                        GoogleVallet = source.Company.GoogleWalletCustomerId,
                        PayPal = source.Company.PaypalCustomerId,
                        AccountBalance = CreateFromForAccount(source),
-                       CityName = source.CityName,
-                       CountryName = source.CountryName
+                       CityName = source.Company.City.CityName,
+                       CountryName = source.Company.Country.CountryName,
+                       CompanyId = source.Company.CompanyId,
+                       AuthenticationToken = source.AuthenticationToken
                    };
 
             return user;
@@ -80,7 +82,7 @@ namespace SMD.MIS.Areas.Api.ModelMappers
                 return null;
             }
 
-            Account account = source.Accounts.FirstOrDefault(acc => acc.AccountType == (int)AccountType.VirtualAccount);
+            Account account = source.Company.Accounts.FirstOrDefault(acc => acc.AccountType == (int)AccountType.VirtualAccount);
             if (account == null)
             {
                 return null;
@@ -98,8 +100,8 @@ namespace SMD.MIS.Areas.Api.ModelMappers
             {
                 Status = source.Status,
                 Message = source.Message,
-                User = source.User != null ? source.User.CreateFrom() : null,
-                AuthenticationToken = Guid.NewGuid()
+                User = source.User != null ? source.User.CreateFrom() : null//,
+                //AuthenticationToken = Guid.NewGuid()
             };
         }
 

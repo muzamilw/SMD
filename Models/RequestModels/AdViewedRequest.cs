@@ -14,5 +14,7 @@
         /// AdCampaign Id
         /// </summary>
         public long AdCampaignId { get; set; }
+
+        public int companyId { get; set; }
     }
 }

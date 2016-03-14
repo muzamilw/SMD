@@ -195,20 +195,20 @@ namespace SMD.Repository.Repositories
                 bool isAdmin = false;
                 if (usr.Roles.FirstOrDefault().Name == Roles.Adminstrator)
                     isAdmin = true;
-                var country = 
-                 data.CityId = usr.CityId;
-                 data.CountryId = usr.CountryId;
+         
+                 data.CityId =usr.Company == null? null: usr.Company.CityId;
+                 data.CountryId = usr.Company == null ? null : usr.Company.CountryId; 
                  data.EducationId = usr.EducationId;
                  data.IndustryId = usr.IndustryId;
                  data.LanguageId = usr.LanguageId;
-                 data.City = usr.City != null ? usr.City.CityName : "";
-                 data.Country = usr.Country != null ? usr.Country.CountryName : "";
+                 data.City = usr.Company.City != null ? usr.Company.City.CityName : "";
+                 data.Country = usr.Company.Country != null ? usr.Company.Country.CountryName : "";
                  data.Education = usr.Education != null?usr.Education.Title : "";
                  data.Industry = usr.Industry != null?usr.Industry.IndustryName:"";
                  data.Language = usr.Language != null? usr.Language.LanguageName: "";
                 data.isStripeIntegrated =usr.Company == null? false: String.IsNullOrEmpty(usr.Company.StripeCustomerId) == true ? false : true;
-                 data.Latitude = usr.City != null ? usr.City.GeoLat : "";
-                 data.Longitude = usr.City != null ? usr.City.GeoLong : "";
+                data.Latitude = usr.Company.City != null ? usr.Company.City.GeoLat : "";
+                data.Longitude = usr.Company.City != null ? usr.Company.City.GeoLong : "";
                  data.isUserAdmin = isAdmin;
             }
 

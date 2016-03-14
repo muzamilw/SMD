@@ -1,6 +1,7 @@
 ﻿using SMD.Models.DomainModels;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SMD.MIS.Areas.Api.Models
 {
@@ -65,5 +66,14 @@ namespace SMD.MIS.Areas.Api.Models
         public string BuyItLine3 { get; set; }
         public string BuyItButtonLabel { get; set; }
         public string BuyItImageUrl { get; set; }
+        [NotMapped]
+        
+        public int AdViews { get; set; }
+        
+        public int? CompanyId { get; set; }
+        public string CouponSwapValue { get; set; }
+        public string CouponActualValue { get; set; }
+        public Nullable<int> CouponTakenCount { get; set; }
+        public Nullable<int> CouponQuantity { get; set; }
     }
 }

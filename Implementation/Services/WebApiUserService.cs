@@ -172,8 +172,8 @@ namespace SMD.Implementation.Services
             adCampaign.AmountSpent += adClickRate;
 
             // Add Campaign Response 
-            PerformSkipOrUpdateUserAdSelection((int)request.AdCampaignId, request.UserId, 
-                (adViewerUsedVoucher ? (int)AdRewardType.Voucher : (int)AdRewardType.Cash), false, adViewersCut, false);
+            PerformSkipOrUpdateUserAdSelection((int)request.AdCampaignId, request.UserId,
+                (adViewerUsedVoucher ? (int)AdRewardType.Voucher : (int)AdRewardType.Cash), false, adViewersCut, request.companyId, false);
 
             // Save Changes
             transactionRepository.SaveChanges();
@@ -423,7 +423,7 @@ namespace SMD.Implementation.Services
         {
             string smdContentPath = ConfigurationManager.AppSettings["SMD_Content"];
             HttpServerUtility server = HttpContext.Current.Server;
-            string mapPath = server.MapPath(smdContentPath + "/Users/" + user.Id);
+            string mapPath = server.MapPath(smdContentPath + "/Users/" + user.CompanyId);
 
             // Create directory if not there
             if (!Directory.Exists(mapPath))
@@ -456,7 +456,8 @@ namespace SMD.Implementation.Services
                     {
                         ProfileQuestionAnswerIds = request.PqAnswerIds,
                         ProfileQuestionId = (int)request.ItemId.Value,
-                        UserId = request.UserId
+                        UserId = request.UserId,
+                        companyId = request.companyId.Value
                     });
             }
         }
@@ -474,7 +475,8 @@ namespace SMD.Implementation.Services
                     await UpdateTransactionOnViewingAd(new AdViewedRequest
                     {
                         AdCampaignId = request.ItemId.Value,
-                        UserId = request.UserId
+                        UserId = request.UserId,
+                        companyId = request.companyId.Value
                     });    
                 }
                 else if (request.AdRewardUserSelection.Value == (int)AdRewardType.Voucher)
@@ -482,7 +484,8 @@ namespace SMD.Implementation.Services
                     await UpdateTransactionOnViewingAdWithVoucher(new AdViewedRequest
                     {
                         AdCampaignId = request.ItemId.Value,
-                        UserId = request.UserId
+                        UserId = request.UserId,
+                        companyId = request.companyId.Value
                     }); 
                 }
             }
@@ -491,8 +494,8 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Skips Ad Campaign
         /// </summary>
-        private void PerformSkipOrUpdateUserAdSelection(int adCampaignId, string userId, int? userSelection, bool? isSkipped, 
-            double? endUserAmount, bool saveChanges = true)
+        private void PerformSkipOrUpdateUserAdSelection(int adCampaignId, string userId, int? userSelection, bool? isSkipped,
+            double? endUserAmount, int companyId, bool saveChanges = true)
         {
             AdCampaign adCampaign = adCampaignRepository.Find(adCampaignId);
             if (adCampaign == null)
@@ -503,7 +506,7 @@ namespace SMD.Implementation.Services
 
             AdCampaignResponse adCampaignResponse = adCampaignResponseRepository.GetByUserId(adCampaignId, userId) ??
                                                     CreateAdCampaignResponse(adCampaignId, userId, adCampaign);
-
+            adCampaignResponse.CompanyId = companyId;
             UpdateAdResponse(userSelection, isSkipped, endUserAmount, adCampaignResponse);
             
             if (!saveChanges)
@@ -556,7 +559,7 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Skips Survey Question
         /// </summary>
-        private void PerformSkipOrUserSurveySelection(int sqId, string userId, int? userSelection, bool? isSkipped)
+        private void PerformSkipOrUserSurveySelection(int sqId, string userId, int? userSelection, bool? isSkipped,int companyId)
         {
             SurveyQuestion surveyQuestion = surveyQuestionRepository.Find(sqId);
             if (surveyQuestion == null)
@@ -568,7 +571,7 @@ namespace SMD.Implementation.Services
             SurveyQuestionResponse sqResponse = surveyQuestionResponseRepository.GetByUserId(sqId, userId) ??
                                                 CreateSurveyQuestionResponse(sqId, userId, surveyQuestion);
             // Update User Response
-            UpdateProductsResponse(userSelection, isSkipped, sqResponse);
+            UpdateProductsResponse(userSelection, isSkipped, sqResponse,companyId);
             surveyQuestionRepository.SaveChanges();
         }
 
@@ -588,7 +591,7 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Update Users response for product
         /// </summary>
-        private void UpdateProductsResponse(int? userSelection, bool? isSkipped, SurveyQuestionResponse sqResponse)
+        private void UpdateProductsResponse(int? userSelection, bool? isSkipped, SurveyQuestionResponse sqResponse,int companyId)
         {
             if (isSkipped.HasValue && isSkipped.Value)
             {
@@ -604,7 +607,7 @@ namespace SMD.Implementation.Services
                 sqResponse.UserSelection = userSelection;
                 sqResponse.SkipCount = 0;
             }
-
+            sqResponse.CompanyId = companyId;
             sqResponse.ResoponseDateTime = DateTime.Now.Add(-(surveyQuestionRepository.UserTimezoneOffSet));
         }
 
@@ -629,12 +632,12 @@ namespace SMD.Implementation.Services
 
                 else if (request.Type.Value == (int)ProductType.Ad)
                 {
-                    PerformSkipOrUpdateUserAdSelection((int)request.ItemId.Value, request.UserId, null, true, null);
+                    PerformSkipOrUpdateUserAdSelection((int)request.ItemId.Value, request.UserId, null, true, null, request.companyId.Value, true);
                 }
 
                 else if (request.Type.Value == (int)ProductType.SurveyQuestion)
                 {
-                    PerformSkipOrUserSurveySelection((int)request.ItemId.Value, request.UserId, null, true);
+                    PerformSkipOrUserSurveySelection((int)request.ItemId.Value, request.UserId, null, true,request.companyId.Value);
                 }
             }
         }
@@ -951,7 +954,7 @@ namespace SMD.Implementation.Services
             // Update Survey User Selection
             if (request.Type.Value == (int)ProductType.SurveyQuestion && request.ItemId.HasValue && request.SqUserSelection.HasValue)
             {
-                PerformSkipOrUserSurveySelection((int)request.ItemId.Value, request.UserId, request.SqUserSelection, null);
+                PerformSkipOrUserSurveySelection((int)request.ItemId.Value, request.UserId, request.SqUserSelection, null,request.companyId.Value);
             }
 
             // Product Skipped
@@ -1026,10 +1029,11 @@ namespace SMD.Implementation.Services
             }
             // Update User
             user.Update(request);
-            
+            //update company
+            companyRepository.updateCompany(request);
             // Save Changes
            await UserManager.UpdateAsync(user);
-           if (!String.IsNullOrEmpty(request.ProfileImage))
+           if (request.ProfileImageBytes != null)
                await UpdateProfileImage(request);
 
             return new BaseApiResponse
@@ -1045,6 +1049,7 @@ namespace SMD.Implementation.Services
         public async Task<UpdateProfileImageResponse> UpdateProfileImage(UpdateUserProfileRequest request)
         {
             User user = await UserManager.FindByIdAsync(request.UserId);
+            
             if (user == null)
             {
                 throw new SMDException(LanguageResources.WebApiUserService_InvalidUserId);
@@ -1052,9 +1057,9 @@ namespace SMD.Implementation.Services
 
             // Update Profile Image
             UpdateProfileImage(request, user);
-
+            companyRepository.updateCompanyLogo(user.ProfileImage, user.CompanyId.Value);
             // Save Changes
-            await UserManager.UpdateAsync(user);
+           // await UserManager.UpdateAsync(user); // because now we will save profile image in company 
 
             return new UpdateProfileImageResponse
                    {
@@ -1117,7 +1122,7 @@ namespace SMD.Implementation.Services
             {
                 throw new InvalidOperationException(string.Format("Failed to add user to role {0}", Roles.User));
             }
-
+            companyRepository.createCompany(user.Id, request.Email, request.FullName,Guid.NewGuid().ToString());
             var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
             var callbackUrl = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority +
                               "/Api_Mobile/Register/Confirm/?UserId=" + user.Id + "&Code=" + HttpUtility.UrlEncode(code);
@@ -1177,11 +1182,12 @@ namespace SMD.Implementation.Services
                         Message = LanguageResources.WebApiUserService_LoginInfoNotFound
                     };
                 }
+              
                 // update user name  and cuntry name for api 
-                if (user.Country != null)
-                    user.CountryName = user.Country.CountryName;
-                if (user.City != null)
-                    user.CityName = user.City.CityName;
+                if (user.Company.Country != null)
+                    user.CountryName = user.Company.Country.CountryName;
+                if (user.Company.City != null)
+                    user.CityName = user.Company.City.CityName;
                 UserLogin userLoginInfo = user.UserLogins.FirstOrDefault(
                     u => u.LoginProvider == request.LoginProvider && u.ProviderKey == request.LoginProviderKey);
 
@@ -1200,6 +1206,9 @@ namespace SMD.Implementation.Services
                         Message = LanguageResources.WebApiUserService_InactiveUser
                     };
                 }
+                // update GUID 
+                user.AuthenticationToken = Guid.NewGuid().ToString();
+                await UserManager.UpdateAsync(user);
 
                 // Login user
                 LoginUser(request.Email);
@@ -1243,14 +1252,18 @@ namespace SMD.Implementation.Services
                 };
             }
 
-            if (user.Status == (int)UserStatus.InActive)
-            {
-                return new LoginResponse
-                {
-                    Message = LanguageResources.WebApiUserService_InactiveUser
-                };
-            }
-
+            //if (user.Status == (int)UserStatus.InActive)
+            //{
+            //    return new LoginResponse
+            //    {
+            //        Message = LanguageResources.WebApiUserService_InactiveUser
+            //    };
+            //}  // always unarchive  user
+            user.Status = (int)UserStatus.Active;
+            // update GUID 
+            user.AuthenticationToken = Guid.NewGuid().ToString();
+           
+            await UserManager.UpdateAsync(user);
             // Login user
             LoginUser(request.UserName);
 
@@ -1361,6 +1374,10 @@ namespace SMD.Implementation.Services
             var messagingService = new MessagingService("omar.c@me.com", "DBVgYFGNCWwK");
             messagingService.SendMessage(new SmsMessage(user.Phone1, "Your verification code for Cash4Ads profile update is " + code.ToString() + ". Please enter this code in Cash4Ads app to update your profile.", "EX0205631"));
             return code;
+        }
+        public User getUserByAuthenticationToken(string token)
+        {
+          return  companyRepository.getUserBasedOnAuthenticationToken(token);
         }
         #endregion
 

@@ -11,6 +11,6 @@ namespace SMD.MIS.Areas.Api.Models
     {
         public WebApiUser User { get; set; }
 
-        public Guid AuthenticationToken { get; set; }
+        //public Guid AuthenticationToken { get; set; }
     }
 }

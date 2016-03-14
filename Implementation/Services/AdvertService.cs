@@ -44,7 +44,7 @@ namespace SMD.Implementation.Services
         private readonly IEducationRepository _educationRepository;
         private readonly IStripeService stripeService;
         private readonly WebApiUserService webApiUserService;
-
+        private readonly ICompanyRepository companyRepository;
         #region Private Funcs
         private ApplicationUserManager UserManager
         {
@@ -136,8 +136,8 @@ namespace SMD.Implementation.Services
             IProfileQuestionAnswerRepository profileQuestionAnswerRepository,
             ISurveyQuestionRepository surveyQuestionRepository, 
             IProductRepository productRepository, ITaxRepository taxRepository, IInvoiceRepository invoiceRepository, 
-            IInvoiceDetailRepository invoiceDetailRepository,IEducationRepository educationRepository, 
-            IStripeService stripeService, WebApiUserService webApiUserService)
+            IInvoiceDetailRepository invoiceDetailRepository,IEducationRepository educationRepository,
+            IStripeService stripeService, WebApiUserService webApiUserService, ICompanyRepository companyRepository)
         {
             this._adCampaignRepository = adCampaignRepository;
             this._languageRepository = languageRepository;
@@ -157,6 +157,7 @@ namespace SMD.Implementation.Services
             this._educationRepository = educationRepository;
             this.stripeService = stripeService;
             this.webApiUserService = webApiUserService;
+            this.companyRepository = companyRepository;
         }
         
         /// <summary>
@@ -170,12 +171,12 @@ namespace SMD.Implementation.Services
             UserAndCostDetail objUC = new UserAndCostDetail();
             if (loggedInUser != null)
             {
-                campaignProduct = productRepository.GetProductByCountryId(Convert.ToInt32(loggedInUser.CountryId), code);
-                objUC.CountryId = loggedInUser.CountryId;
-                objUC.CityId = loggedInUser.CityId;
-                objUC.CityName = loggedInUser.City != null ? loggedInUser.City.CityName : "";
-                objUC.GeoLat = loggedInUser.City != null ? loggedInUser.City.GeoLat : "";
-                objUC.GeoLong = loggedInUser.City != null ? loggedInUser.City.GeoLong : "";
+                campaignProduct = productRepository.GetProductByCountryId(Convert.ToInt32(loggedInUser.Company.CountryId), code);
+                objUC.CountryId = loggedInUser.Company.CountryId;
+                objUC.CityId = loggedInUser.Company.CityId;
+                objUC.CityName = loggedInUser.Company.City != null ? loggedInUser.Company.City.CityName : "";
+                objUC.GeoLat = loggedInUser.Company.City != null ? loggedInUser.Company.City.GeoLat : "";
+                objUC.GeoLong = loggedInUser.Company.City != null ? loggedInUser.Company.City.GeoLong : "";
 
 
                 objUC.EducationId = loggedInUser.EducationId;
@@ -184,7 +185,7 @@ namespace SMD.Implementation.Services
                 objUC.LanguageId = loggedInUser.LanguageId;
 
 
-                objUC.CountryName = loggedInUser.Country != null ? loggedInUser.Country.CountryName : "";
+                objUC.CountryName = loggedInUser.Company.Country != null ? loggedInUser.Company.Country.CountryName : "";
                 objUC.EducationTitle = loggedInUser.Education != null ? loggedInUser.Education.Title : "";
                 objUC.IndustryName = loggedInUser.Industry != null ? loggedInUser.Industry.IndustryName : "";
                 objUC.LanguageName = loggedInUser.Language != null ? loggedInUser.Language.LanguageName : "";
@@ -249,6 +250,7 @@ namespace SMD.Implementation.Services
         public void CreateCampaign(AdCampaign campaignModel)
         {
             campaignModel.UserId = _adCampaignRepository.LoggedInUserIdentity;
+            campaignModel.CompanyId = companyRepository.GetUserCompany(_adCampaignRepository.LoggedInUserIdentity);
             var user = UserManager.Users.Where(g => g.Id == _adCampaignRepository.LoggedInUserIdentity).SingleOrDefault();
             if (user != null)
                 campaignModel.CreatedBy = user.FullName;
@@ -311,7 +313,7 @@ namespace SMD.Implementation.Services
         /// </summary>
         public void UpdateCampaign(AdCampaign campaignModel)
         {
-            campaignModel.UserId = _adCampaignRepository.LoggedInUserIdentity;
+           // campaignModel.UserId = _adCampaignRepository.LoggedInUserIdentity;
             var user = UserManager.Users.Where(g => g.Id == _adCampaignRepository.LoggedInUserIdentity).SingleOrDefault();
             if (user != null)
                 campaignModel.CreatedBy = user.FullName;
@@ -464,9 +466,9 @@ namespace SMD.Implementation.Services
             // User who added Campaign for approval 
             var user = webApiUserService.GetUserByUserId(source.UserId);
             // Get Current Product
-            var product = productRepository.GetProductByCountryId(user.CountryId, "Ad");
+            var product = productRepository.GetProductByCountryId(user.Company.CountryId, "Ad");
             // Tax Applied
-            var tax = taxRepository.GetTaxByCountryId(user.CountryId);
+            var tax = taxRepository.GetTaxByCountryId(user.Company.CountryId);
             // Total includes tax
             var amount = product.SetupPrice + tax.TaxValue;
             string response = null;
@@ -491,12 +493,12 @@ namespace SMD.Implementation.Services
                 // Add invoice data
                 var invoice = new Invoice
                 {
-                    Country = user.CountryId.ToString(),
+                    Country = user.Company.CountryId.ToString(),
                     Total = (double)amount,
                     NetTotal = (double)amount,
                     InvoiceDate = DateTime.Now,
                     InvoiceDueDate = DateTime.Now.AddDays(7),
-                    Address1 = user.CountryId.ToString(),
+                    Address1 = user.Company.CountryId.ToString(),
                     CompanyId = user.Company.CompanyId,
                     CompanyName = "My Company",
                     CreditCardRef = response

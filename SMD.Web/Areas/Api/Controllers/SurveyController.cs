@@ -53,11 +53,10 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// </summary>
         public bool Post(SMD.Models.DomainModels.SurveyQuestion surveyModel)
         {
-           // surveyModel.Status = (int)SurveyQuestionStatus.Draft; already assigned in ko based on stripe
             if (surveyModel.SqId == 0)
                 return _surveyQuestionService.Create(surveyModel);
             else
-                return _surveyQuestionService.Update(surveyModel);// have to write edit 
+                return _surveyQuestionService.Update(surveyModel);
         }
         #endregion
     }
