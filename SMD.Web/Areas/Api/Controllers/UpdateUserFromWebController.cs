@@ -9,6 +9,7 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
+using SMD.Models.IdentityModels;
 
 namespace SMD.MIS.Areas.Api.Controllers
 {
@@ -41,15 +42,15 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// <summary>
         /// Get User's Profile 
         /// </summary>
-        public WebApiUser Get()
-        {
-            if (!ModelState.IsValid)
-            {
-                throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
-            }
-            var response=  webApiUserService.GetLoggedInUser();
-            return  response.CreateFrom();
-        }
+        //public WebApiUser Get()
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
+        //    }
+        //    var response=  webApiUserService.GetLoggedInUser();
+        //    return  response.CreateFrom();
+        //}
 
         /// <summary>
         /// Get User's Profile 
@@ -60,8 +61,14 @@ namespace SMD.MIS.Areas.Api.Controllers
             {
                 throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
             }
-            var response = webApiUserService.GetLoggedInUser();
-            return response.CreateFrom();
+           
+           var response = webApiUserService.GetLoggedInUser(request.UserId);
+           WebApiUser apiuser =  response.CreateFrom();
+
+           return apiuser;
+           
+           
+          
         }
 
         /// <summary>

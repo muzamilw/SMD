@@ -14,6 +14,8 @@ define("user/user.viewModel",
                     isUserEdit = ko.observable(false),
                     // selected userid
                     selectedUserId = ko.observable(false),
+                    // selected roleid
+                    selectedRoleId = ko.observable(),
                     // list of countries
                     countries = ko.observableArray([]),
                     // list of cities 
@@ -24,6 +26,8 @@ define("user/user.viewModel",
                     educations = ko.observableArray([]),
                     // list of Time Zones 
                     timeZones = ko.observableArray([]),
+                       // roles
+                    roles = ko.observableArray([]),
                     // manage users
                     userList = ko.observableArray([]),
                     // Gender list
@@ -122,17 +126,24 @@ define("user/user.viewModel",
                                     ko.utils.arrayPushAll(timeZones(), baseDataFromServer.TimeZoneDropDowns);
                                     timeZones.valueHasMutated();
                                 }
-                                // Get Profile When Base data is loaded 
-                                if (isUserEdit == true)
-                                {
+                                if (baseDataFromServer != null && baseDataFromServer.UserRoles != null) {
+                                    roles.removeAll();
+                                    ko.utils.arrayPushAll(roles(), baseDataFromServer.UserRoles);
+                                    roles.valueHasMutated();
+                                }
 
+                                // Get Profile When Base data is loaded 
+                                if (isUserEdit() == true)
+                                {
+                                    getUserProfileById();
                                 }
                                 else
                                 {
-                                    getUserProfile();
+                                    selectedUserId(0);
+                                    getUserProfileById();
                                 }
                                
-                                selectedUser().cityId(cityId);
+                                //selectedUser().cityId(cityId);
                             },
                             error: function () {
                                 toastr.error("Failed to load base data!");
@@ -190,7 +201,9 @@ define("user/user.viewModel",
                          
                        },
 
-
+                         onCloseUserEdit = function () {
+                             window.location.href = "/user/ManageUser/ManageUsers";
+                         }
                     //Update Profile
                      //Get Base Data for Questions
                     updateProfile = function () {
@@ -219,7 +232,7 @@ define("user/user.viewModel",
                         view = specifiedView;
                         ko.applyBindings(view.viewModel, view.bindingRoot);
 
-
+                        isUserEdit(false);
                         var user = getParameter(window.location.href, "user");
                         if (user != 1) {
                            
@@ -258,7 +271,11 @@ define("user/user.viewModel",
                     chargeCustomer: chargeCustomer,
                     hasChangesOnProfile: hasChangesOnProfile,
                     userList: userList,
-                    onEditUser: onEditUser
+                    onEditUser: onEditUser,
+                    isUserEdit: isUserEdit,
+                    roles: roles,
+                    selectedRoleId: selectedRoleId,
+                    onCloseUserEdit: onCloseUserEdit
                 };
             })()
         };

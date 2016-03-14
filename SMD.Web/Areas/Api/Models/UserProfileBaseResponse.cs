@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 
+
+
 namespace SMD.MIS.Areas.Api.Models
 {
     public class UserProfileBaseResponse
@@ -28,5 +30,7 @@ namespace SMD.MIS.Areas.Api.Models
         /// List of time zones 
         /// </summary>
         public IEnumerable<TimeZoneDropDown> TimeZoneDropDowns { get; set; }
+
+        public IEnumerable<RoleDropDown> UserRoles { get; set; }
     }
 }

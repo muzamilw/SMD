@@ -455,6 +455,8 @@
     <Compile Include="Areas\Api\Models\ProductView.cs" />
     <Compile Include="Areas\Api\Models\ProductViewResponse.cs" />
     <Compile Include="Areas\Api\Models\ProfileQuestionAnswerView.cs" />
+    <Compile Include="Areas\Api\Models\Role.cs" />
+    <Compile Include="Areas\Api\Models\RoleDropDown.cs" />
     <Compile Include="Areas\Api\Models\SurveyForApiSearchResponse.cs" />
     <Compile Include="Areas\Api\Models\LocationDropDown.cs" />
     <Compile Include="Areas\Api\Models\ProfileQuestionAnswerApiModel.cs" />
@@ -511,6 +513,7 @@
     <Compile Include="ModelMappers\ProfileQuestionAnswerMapper.cs" />
     <Compile Include="ModelMappers\ProfileQuestionGroupMapper.cs" />
     <Compile Include="ModelMappers\ProfileQuestionMapper.cs" />
+    <Compile Include="ModelMappers\RoleMapper.cs" />
     <Compile Include="ModelMappers\SurveyQuestionModelMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />

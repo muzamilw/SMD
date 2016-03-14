@@ -53,7 +53,9 @@ namespace SMD.MIS.Areas.Api.ModelMappers
                        CityName = source.CityName,
                        CountryName = source.CountryName,
                        CompanyId = source.Company.CompanyId,
-                       AuthenticationToken = source.AuthenticationToken
+                       AuthenticationToken = source.AuthenticationToken,
+                       Password = source.PasswordHash,
+                       RoleId = source.Roles.Select(c => c.Id).FirstOrDefault()
                    };
 
             return user;
@@ -121,6 +123,7 @@ namespace SMD.MIS.Areas.Api.ModelMappers
                 CountryDropdowns = source.Countries.Select(country => country.CreateFrom()),
                 IndusteryDropdowns = source.Industries.Select(industery => industery.CreateForDd()),
                 EducationDropdowns = source.Educations.Select(edu => edu.CreateFromDd()),
+                UserRoles = source.UserRoles.Select(role => role.CreateFromDd()),
                 TimeZoneDropDowns = timeZones
             };
         }

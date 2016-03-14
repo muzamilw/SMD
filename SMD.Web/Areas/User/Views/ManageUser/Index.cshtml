@@ -7,6 +7,10 @@
         <div class="clearfix ">
             <div class="col-xs-12" style="text-align: right; padding-right:0;margin-bottom:10px;">
                 <button class="btn  btn-info" id="saveBtn" data-bind="click:$root.onUpdateProfile , enable: $root.hasChangesOnProfile, css: { 'btn-warning': $root.hasChangesOnProfile }">Update</button>
+                <!-- ko if: $root.isUserEdit() -->
+                <button class="btn  btn-default" id="saveBtn" data-bind="click:$root.onCloseUserEdit">Close</button>
+                <!-- /ko -->
+            
             </div>
         </div>
     </div>
@@ -89,18 +93,47 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <div class="col-lg-4 text-right">
+
+                                            <label class="control-label text-right tooltip-float">Password</label>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <input type="password" class="form-control" data-bind="value: Password">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <div class="col-lg-4 text-right">
+
+                                            <label class="control-label text-right tooltip-float">Confirm Password</label>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <input type="password" class="form-control" data-bind="value: ConfirmPassword">
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
-                          
+                            @*<div class="col-lg-12" >
+                                <div class="col-lg-9"></div>
+                                <div class="col-lg-3">
+                                    <button class="btn btn-info" style="float:right;" id="saveBtn">Change Password</button>
+                                </div>
+                            </div>*@
                         </div>
-                        <div class="col-lg-12 form-horizontal">
+                        <div class="col-lg-12 form-horizontal changepasswordTop">
                             <h3 class="group-header" style="margin-top:20px;">
                                 Contact Info
                             </h3>
+
                             <div class="col-lg-9" style="margin-top: 12px;">
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <div class="col-lg-4 text-right">
-                                           
+
                                             <label class="control-label text-right tooltip-float">Email</label>
                                         </div>
                                         <div class="col-lg-6">
@@ -111,7 +144,7 @@
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <div class="col-lg-4 text-right">
-                                          
+
                                             <label class="control-label text-right tooltip-float">Phone 1</label>
                                         </div>
                                         <div class="col-lg-6">
@@ -122,7 +155,7 @@
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <div class="col-lg-4 text-right">
-                                           
+
                                             <label class="control-label text-right tooltip-float">Phone 2</label>
                                         </div>
                                         <div class="col-lg-6">
@@ -133,7 +166,7 @@
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <div class="col-lg-4 text-right">
-                                            
+
                                             <label class="control-label text-right tooltip-float">Contact Notes</label>
                                         </div>
                                         <div class="col-lg-6">
@@ -141,9 +174,25 @@
                                         </div>
                                     </div>
                                 </div>
+                                <!-- ko if: $root.isUserEdit() -->
+                                <div class="col-lg-12">
+
+                                    <div class="form-group">
+                                        <div class="col-lg-4 text-right">
+
+                                            <label class="control-label text-right tooltip-float">Role</label>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <select class="form-control" data-bind="options: $root.roles, optionsText: 'RoleName', optionsValue: 'RoleId', value:RoleId"></select>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!-- /ko -->
                             </div>
                         </div>
                       
+                        <!-- ko if: !$root.isUserEdit() -->
                         <div class="col-lg-12 form-horizontal">
                             <h3 class="group-header" style="margin-top:20px;">
                                 Company Info
@@ -346,6 +395,7 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- /ko -->
                     </div>
                 </div>
             </div>

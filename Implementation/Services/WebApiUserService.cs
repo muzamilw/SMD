@@ -49,6 +49,7 @@ namespace SMD.Implementation.Services
         private readonly IAdCampaignResponseRepository adCampaignResponseRepository;
         private readonly ISurveyQuestionResponseRepository surveyQuestionResponseRepository;
         private readonly ICompanyRepository companyRepository;
+        private readonly IManageUserRepository manageUserRepository;
         private ApplicationUserManager UserManager
         {
             get { return HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
@@ -658,7 +659,7 @@ namespace SMD.Implementation.Services
             ITaxRepository taxRepository, IProfileQuestionUserAnswerService profileQuestionAnswerService,
             ICountryRepository countryRepository, IIndustryRepository industryRepository,
             IProfileQuestionService profileQuestionService, IAdCampaignResponseRepository adCampaignResponseRepository,
-            ISurveyQuestionResponseRepository surveyQuestionResponseRepository, IEducationRepository educationRepository, ICityRepository cityRepository, ICompanyRepository companyRepository)
+            ISurveyQuestionResponseRepository surveyQuestionResponseRepository, IEducationRepository educationRepository, ICityRepository cityRepository, ICompanyRepository companyRepository, IManageUserRepository manageUserRepository)
         {
             if (emailManagerService == null)
             {
@@ -723,6 +724,7 @@ namespace SMD.Implementation.Services
             this.educationRepository = educationRepository;
             this.cityRepository = cityRepository;
             this.companyRepository = companyRepository;
+            this.manageUserRepository = manageUserRepository;
         }
 
 
@@ -1036,6 +1038,11 @@ namespace SMD.Implementation.Services
            if (request.ProfileImageBytes != null)
                await UpdateProfileImage(request);
 
+            if(!string.IsNullOrEmpty(request.RoleId))
+            {
+                manageUserRepository.UpdateRoles(request.RoleId,request);
+            }
+
             return new BaseApiResponse
             {
                 Status = true,
@@ -1072,9 +1079,18 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Get Logged-In User profile 
         /// </summary>
-        public User GetLoggedInUser()
+        public User GetLoggedInUser(string userid)
         {
-            User user =  UserManager.FindById(productRepository.LoggedInUserIdentity);
+            User user = null;
+            if(userid != "0")
+            {
+                user = UserManager.FindById(userid);
+            }
+            else
+            {
+                user = UserManager.FindById(productRepository.LoggedInUserIdentity);
+            }
+           
             if (user == null)
             {
                 throw new SMDException(LanguageResources.WebApiUserService_InvalidUserId);
@@ -1357,7 +1373,8 @@ namespace SMD.Implementation.Services
             {
                Countries = countryRepository.GetAllCountries().ToList(),
                Industries = industryRepository.GetAll().ToList(),
-               Educations = educationRepository.GetAllEducations().ToList()
+               Educations = educationRepository.GetAllEducations().ToList(),
+               UserRoles = manageUserRepository.getUserRoles().ToList()
             };
         }
         public int generateAndSmsCode(string userId)
@@ -1379,8 +1396,12 @@ namespace SMD.Implementation.Services
         {
           return  companyRepository.getUserBasedOnAuthenticationToken(token);
         }
+
+
         #endregion
 
+
+       
         #endregion
     }
 }
