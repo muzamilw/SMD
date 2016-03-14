@@ -327,13 +327,31 @@ else
                 </span>
             </div>
             <!-- /ko -->
+            <!-- ko if: Status() == 7-->
+            <div class="text-left statusbg" style="background:red;">
+                <span data-bind="text: StatusValue">
+                </span>
+            </div>
+            <!-- /ko -->
+            <!-- ko if: Status() == 8-->
+            <div class="text-left statusbg" style="background:#fc0;">
+                <span data-bind="text: StatusValue">
+                </span>
+            </div>
+            <!-- /ko -->
+            <!-- ko if: Status() == 9-->
+            <div class="text-left statusbg" style="background:red;">
+                <span data-bind="text: StatusValue">
+                </span>
+            </div>
+            <!-- /ko -->
         </td>
         <td class="col-sm-1"><span class="@userClasses" data-bind="text: AmountSpent"></span><span class="@adminClasses" data-bind="text: CreatedBy"></span></td>
 
 
         <td class="col-sm-2">
 
-            <!-- ko if: Status() == 1 ||  Status() == 3 || Status() == 4-->
+            <!-- ko if: Status() == 1 ||  Status() == 3 || Status() == 4 || Status() == 7|| Status() == 9-->
             <a class="table-link" style="float: right">
                 <span class="fa-stack">
                     <i class="fa fa-square fa-stack-2x"></i>

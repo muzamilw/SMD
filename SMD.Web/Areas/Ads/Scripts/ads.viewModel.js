@@ -46,6 +46,7 @@ define("ads/ads.viewModel",
                     isEditCampaign = ko.observable(false),
                     canSubmitForApproval = ko.observable(true),
                     isNewCampaignVisible = ko.observable(false),
+                    isShowArchiveBtn = ko.observable(false),
                     isTerminateBtnVisible = ko.observable(false),
                     correctAnswers = ko.observableArray([{ id: 1, name: "Answer 1" }, { id: 2, name: "Answer 2" }]),
                     selectedIndustryIncludeExclude = ko.observable(true),
@@ -168,6 +169,12 @@ define("ads/ads.viewModel",
                             item.StatusValue = "Completed"
                         } else if (item.Status == 6) {
                             item.StatusValue = "Approval Rejected"
+                        } else if (item.Status == 7) {
+                            item.StatusValue= ("Terminated by user");
+                        } else if (item.Status == 9) {
+                            item.StatusValue = ("Completed");
+                        } else if (item.Status == 8) {
+                            item.StatusValue = ("Archived");
                         }
                         return item;
                     },
@@ -188,6 +195,7 @@ define("ads/ads.viewModel",
                         isNewCampaign(true);
                         isTerminateBtnVisible(false);
                         isNewCampaignVisible(false);
+                        isShowArchiveBtn(false);
                         //isEditorVisible(true);
                         //canSubmitForApproval(true);
                         //campaignModel(new model.Campaign());
@@ -399,7 +407,12 @@ define("ads/ads.viewModel",
                             toastr.error("Please fill the required feilds to continue.");
                         }
                     },
-
+                      terminateCampaign = function () {
+                          saveCampaign(7);
+                      },
+                      ArchiveCampaign = function () {
+                          saveCampaign(8);
+                      },
                     saveCampaign = function (mode) {
                         campaignModel().Status(mode);
                         campaignModel().ClickRate(pricePerclick());
@@ -829,7 +842,8 @@ define("ads/ads.viewModel",
                 onEditCampaign = function (item) {
                     isTerminateBtnVisible(false);
                     isNewCampaignVisible(false);
-                    if (item.Status() == 1 || item.Status() == 2 || item.Status() == 3 || item.Status() == 4 || item.Status() == null) {
+                    isShowArchiveBtn(false);
+                    if (item.Status() == 1 || item.Status() == 2 || item.Status() == 3 || item.Status() == 4 || item.Status() == null || item.Status() == 7 || item.Status() == 9) {
                         canSubmitForApproval(true);
                         dataservice.getCampaignData({
                             CampaignId: item.CampaignID(),
@@ -890,6 +904,26 @@ define("ads/ads.viewModel",
                                         campaignModel().StatusValue("Completed");
                                     } else if (campaignModel().Status() == 6) {
                                         campaignModel().StatusValue("Approval Rejected");
+                                    } else if (campaignModel().Status() == 7) {
+                                        campaignModel().StatusValue("Terminated by user");
+                                        $("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
+                                        $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,.lang_delSurvey,.table-link").css("display", "none");
+                                        $("#saveBtn").css("display", "none");
+                                        $("#btnPauseCampaign").css("display", "inline-block");
+                                        $("#btnCancel,#btnPauseCampaign,#btnCopyCampaign,#btnArchive").removeAttr('disabled');
+                                        isNewCampaignVisible(true);
+                                        isShowArchiveBtn(true);
+                                    } else if (item.Status == 9) {
+                                        item.StatusValue = ("Completed");
+                                    } else if (item.Status == 8) {
+                                        item.StatusValue = ("Archived");
+                                        $("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
+                                        $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,.lang_delSurvey,.table-link").css("display", "none");
+                                        $("#saveBtn").css("display", "none");
+                                        $("#btnPauseCampaign").css("display", "inline-block");
+                                        $("#btnCancel,#btnPauseCampaign,#btnCopyCampaign,#btnArchive").removeAttr('disabled');
+                                        isNewCampaignVisible(true);
+                                        isShowArchiveBtn(true);
                                     }
                                     isEditCampaign(true);
                                     isEditorVisible(true);
@@ -1363,6 +1397,9 @@ define("ads/ads.viewModel",
                 gotoManageUsers = function () {
                     window.location.href = "/";
                 },
+                copyCampaign = function () {
+
+                },
                 // Initialize the view model
                 initialize = function (specifiedView) {
                     view = specifiedView;
@@ -1427,8 +1464,10 @@ define("ads/ads.viewModel",
                     onEditCampaign: onEditCampaign,
                     canSubmitForApproval: canSubmitForApproval,
                     isTerminateBtnVisible: isTerminateBtnVisible,
-                    isNewCampaignVisible:isNewCampaignVisible,
+                    isNewCampaignVisible: isNewCampaignVisible,
+                    isShowArchiveBtn:isShowArchiveBtn,
                     submitCampaignData: submitCampaignData,
+                    terminateCampaign:terminateCampaign,
                     selectedIndustryIncludeExclude: selectedIndustryIncludeExclude,
                     addIndustry: addIndustry,
                     onRemoveIndustry: onRemoveIndustry,
@@ -1474,7 +1513,9 @@ define("ads/ads.viewModel",
                     lbllSecondLine:lbllSecondLine,
                     lblCampaignSchedule: lblCampaignSchedule,
                     gotoProfile: gotoProfile,
-                    gotoManageUsers:gotoManageUsers
+                    gotoManageUsers: gotoManageUsers,
+                    ArchiveCampaign: ArchiveCampaign,
+                    copyCampaign: copyCampaign
                 };
             })()
         };
