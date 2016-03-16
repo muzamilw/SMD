@@ -1298,9 +1298,14 @@ else
                                 <button class="btn  btn-success btnSubmitApproval" id="btnSubmitForApproval2" data-bind="click:$root.submitCampaignData, visible: $root.canSubmitForApproval" style="width: 100%;">Submit for Approval</button>
                             </div>
                             <div data-bind="visible:!$root.isDisplayCouponsAds()">
-                                <div style="    background: #f4f3f3;
-    padding: 20px;
-    padding-bottom: 12px;">
+                                <button class="btn  btn-info " id="btnCopyCampaign" data-bind=" click:$root.copyCampaign, visible: $root.isNewCampaignVisible " style=" width:100%;margin-bottom:10px;">Create Copy - New Campaign</button>
+                                <br />
+                                <button class="btn  btn-danger " id="btnStopAndTerminate" data-bind=" click:$root.terminateCampaign,visible: $root.isTerminateBtnVisible" style="width: 100%;margin-bottom:10px;">Stop & Terminate Early</button>
+                                <br />
+                                <button class="btn  btn-danger " id="btnArchive" data-bind=" click:$root.ArchiveCampaign,visible: $root.isShowArchiveBtn" style="width: 100%;margin-bottom:10px;">Archive Campaign</button>
+                                <br />
+                                <div style="background: #f4f3f3;padding: 20px;padding-bottom: 12px;">
+
                                     <div class="yourBudgtHeadingCnt">
                                         <span>Cap your campaign spend (£): </span>
                                     </div>

@@ -45,6 +45,9 @@ define("ads/ads.viewModel",
                 //
                     isEditCampaign = ko.observable(false),
                     canSubmitForApproval = ko.observable(true),
+                    isNewCampaignVisible = ko.observable(false),
+                    isShowArchiveBtn = ko.observable(false),
+                    isTerminateBtnVisible = ko.observable(false),
                     correctAnswers = ko.observableArray([{ id: 1, name: "Answer 1" }, { id: 2, name: "Answer 2" }]),
                     selectedIndustryIncludeExclude = ko.observable(true),
                     UserAndCostDetail = ko.observable(),
@@ -151,20 +154,27 @@ define("ads/ads.viewModel",
                     },
 
                     updateCampaignGridItem = function (item) {
+                    
                         canSubmitForApproval(false);
                         if (item.Status == 1) {
                             item.StatusValue = "Draft";
                             canSubmitForApproval(true);
                         } else if (item.Status == 2) {
-                            item.StatusValue = "Submitted for Approval"
+                            item.StatusValue = "Pending Approval"
                         } else if (item.Status == 3) {
-                            item.StatusValue = "Live"
+                            item.StatusValue = "Live";
                         } else if (item.Status == 4) {
                             item.StatusValue = "Paused"
                         } else if (item.Status == 5) {
                             item.StatusValue = "Completed"
                         } else if (item.Status == 6) {
                             item.StatusValue = "Approval Rejected"
+                        } else if (item.Status == 7) {
+                            item.StatusValue= ("Terminated by user");
+                        } else if (item.Status == 9) {
+                            item.StatusValue = ("Completed");
+                        } else if (item.Status == 8) {
+                            item.StatusValue = ("Archived");
                         }
                         return item;
                     },
@@ -183,6 +193,9 @@ define("ads/ads.viewModel",
                         }
                         isListVisible(false);
                         isNewCampaign(true);
+                        isTerminateBtnVisible(false);
+                        isNewCampaignVisible(false);
+                        isShowArchiveBtn(false);
                         //isEditorVisible(true);
                         //canSubmitForApproval(true);
                         //campaignModel(new model.Campaign());
@@ -251,7 +264,7 @@ define("ads/ads.viewModel",
                                 
                                 $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign").css("display", "none");
                                 $("#btnSubmitForApproval,#saveBtn,.table-link").css("display", "inline-block");
-                                $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign").removeAttr('disabled');
+                                $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign,#btnStopAndTerminate,#btnCopyCampaign").removeAttr('disabled');
                             });
                             confirmation.afterCancel(function () {
 
@@ -282,7 +295,7 @@ define("ads/ads.viewModel",
 
                             $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign").css("display", "none");
                             $("#btnSubmitForApproval,#saveBtn,.table-link").css("display", "inline-block");
-                            $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign").removeAttr('disabled');
+                            $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign,#btnCopyCampaign,#btnStopAndTerminate").removeAttr('disabled');
                         }
                         isFromEdit(false);
                     },
@@ -394,7 +407,12 @@ define("ads/ads.viewModel",
                             toastr.error("Please fill the required feilds to continue.");
                         }
                     },
-
+                      terminateCampaign = function () {
+                          saveCampaign(7);
+                      },
+                      ArchiveCampaign = function () {
+                          saveCampaign(8);
+                      },
                     saveCampaign = function (mode) {
                         campaignModel().Status(mode);
                         campaignModel().ClickRate(pricePerclick());
@@ -822,8 +840,10 @@ define("ads/ads.viewModel",
                 },
 
                 onEditCampaign = function (item) {
-                    console.log(item);
-                    if (item.Status() == 1 || item.Status() == 2 || item.Status() == 3 || item.Status() == 4 || item.Status() == null) {
+                    isTerminateBtnVisible(false);
+                    isNewCampaignVisible(false);
+                    isShowArchiveBtn(false);
+                    if (item.Status() == 1 || item.Status() == 2 || item.Status() == 3 || item.Status() == 4 || item.Status() == null || item.Status() == 7 || item.Status() == 9) {
                         canSubmitForApproval(true);
                         dataservice.getCampaignData({
                             CampaignId: item.CampaignID(),
@@ -867,19 +887,43 @@ define("ads/ads.viewModel",
                                         $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,.lang_delSurvey,.table-link").css("display", "none");
                                         $("#saveBtn").css("display", "none");
                                         $("#btnPauseCampaign").css("display", "inline-block");
-                                        $("#btnCancel,#btnPauseCampaign").removeAttr('disabled');
+                                        $("#btnCancel,#btnPauseCampaign,#btnCopyCampaign,#btnStopAndTerminate").removeAttr('disabled');
                                         campaignModel().StatusValue("Live");
+                                        isTerminateBtnVisible(true);
+                                        isNewCampaignVisible(true);
                                     } else if (campaignModel().Status() == 4) {
                                         $("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
                                         $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,.lang_delSurvey,.table-link").css("display", "none");
                                         $("#saveBtn").css("display", "none");
                                         $("#btnResumeCampagin").css("display", "inline-block");
-                                        $("#btnCancel,#btnResumeCampagin").removeAttr('disabled');
+                                        $("#btnCancel,#btnResumeCampagin,#btnCopyCampaign,#btnStopAndTerminate").removeAttr('disabled');
                                         campaignModel().StatusValue("Paused");
+                                        isTerminateBtnVisible(true);
+                                        isNewCampaignVisible(true);
                                     } else if (campaignModel().Status() == 5) {
                                         campaignModel().StatusValue("Completed");
                                     } else if (campaignModel().Status() == 6) {
                                         campaignModel().StatusValue("Approval Rejected");
+                                    } else if (campaignModel().Status() == 7) {
+                                        campaignModel().StatusValue("Terminated by user");
+                                        $("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
+                                        $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,.lang_delSurvey,.table-link").css("display", "none");
+                                        $("#saveBtn").css("display", "none");
+                                        $("#btnPauseCampaign").css("display", "inline-block");
+                                        $("#btnCancel,#btnPauseCampaign,#btnCopyCampaign,#btnArchive").removeAttr('disabled');
+                                        isNewCampaignVisible(true);
+                                        isShowArchiveBtn(true);
+                                    } else if (item.Status == 9) {
+                                        item.StatusValue = ("Completed");
+                                    } else if (item.Status == 8) {
+                                        item.StatusValue = ("Archived");
+                                        $("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
+                                        $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,.lang_delSurvey,.table-link").css("display", "none");
+                                        $("#saveBtn").css("display", "none");
+                                        $("#btnPauseCampaign").css("display", "inline-block");
+                                        $("#btnCancel,#btnPauseCampaign,#btnCopyCampaign,#btnArchive").removeAttr('disabled');
+                                        isNewCampaignVisible(true);
+                                        isShowArchiveBtn(true);
                                     }
                                     isEditCampaign(true);
                                     isEditorVisible(true);
@@ -1353,6 +1397,9 @@ define("ads/ads.viewModel",
                 gotoManageUsers = function () {
                     window.location.href = "/user/ManageUser/ManageUsers";
                 },
+                copyCampaign = function () {
+
+                },
                 // Initialize the view model
                 initialize = function (specifiedView) {
                     view = specifiedView;
@@ -1416,7 +1463,11 @@ define("ads/ads.viewModel",
                     correctAnswers: correctAnswers,
                     onEditCampaign: onEditCampaign,
                     canSubmitForApproval: canSubmitForApproval,
+                    isTerminateBtnVisible: isTerminateBtnVisible,
+                    isNewCampaignVisible: isNewCampaignVisible,
+                    isShowArchiveBtn:isShowArchiveBtn,
                     submitCampaignData: submitCampaignData,
+                    terminateCampaign:terminateCampaign,
                     selectedIndustryIncludeExclude: selectedIndustryIncludeExclude,
                     addIndustry: addIndustry,
                     onRemoveIndustry: onRemoveIndustry,
@@ -1462,7 +1513,9 @@ define("ads/ads.viewModel",
                     lbllSecondLine:lbllSecondLine,
                     lblCampaignSchedule: lblCampaignSchedule,
                     gotoProfile: gotoProfile,
-                    gotoManageUsers:gotoManageUsers
+                    gotoManageUsers: gotoManageUsers,
+                    ArchiveCampaign: ArchiveCampaign,
+                    copyCampaign: copyCampaign
                 };
             })()
         };

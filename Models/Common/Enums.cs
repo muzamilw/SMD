@@ -67,7 +67,10 @@
         Live = 3,
         Paused = 4,
         Completed = 5,
-        ApprovalRejected = 6
+        ApprovalRejected = 6,
+        TerminatedByUser = 7,
+        Archived = 8,
+        AutoComplete = 9
     }
     /// <summary>
     /// Object Status enum for profile question
