@@ -16,5 +16,7 @@ namespace SMD.Interfaces.Repository
         List<Role> getUserRoles();
 
         void UpdateRoles(string Id, UpdateUserProfileRequest SourceUser);
+
+        string getCompanyName(out string UserName, out int companyid);
     }
 }

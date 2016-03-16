@@ -16,6 +16,17 @@ define("user/user.viewModel",
                     selectedUserId = ko.observable(false),
                     // selected roleid
                     selectedRoleId = ko.observable(),
+
+                    isChangePasswordVisible = ko.observable(false),
+
+                    OldPassword = ko.observable(),
+
+                    NewPassword = ko.observable(),
+
+                    ConfirmPassword = ko.observable(),
+
+                     InviteEmail = ko.observable(),
+                    
                     // list of countries
                     countries = ko.observableArray([]),
                     // list of cities 
@@ -59,6 +70,52 @@ define("user/user.viewModel",
                             });
                    },
 
+
+                       // Get User Profile For Editing 
+                   ChangePassword = function () {
+                       view.showChangePassword();
+                   },
+
+                   ChangePasswordOk = function () {
+
+                       var oldPasswordLength = OldPassword();
+                       var newPasswordLength = NewPassword();
+                       if (OldPassword() == "" || OldPassword() == undefined) {
+                           toastr.error("Old Password is Required!");
+                           return;
+                       }
+                       else if (NewPassword() == "" || NewPassword() == undefined)
+                       {
+                           toastr.error("New Password is Required!");
+                           return;
+                       }else if (ConfirmPassword() == "" || ConfirmPassword() == undefined) {
+                           toastr.error("Confirm Password is Required!");
+                           return;
+                       }
+                       else if(oldPasswordLength.length < 6)
+                       {
+                           toastr.error("Old Password is not correct it should have minimum 6 characters!");
+                       }
+                       else if (newPasswordLength.length < 6) {
+                           toastr.error("New Password is required with minimum 6 characters!");
+                       }
+                       else if (NewPassword() != ConfirmPassword())
+                       {
+                           toastr.error("Password not matched!");
+                       }
+                       else {
+                           $.getJSON("/Account/ChangePassword?Password=" + NewPassword() + "&OldPassword=" + OldPassword() + "&UserId=" + selectedUser().id(),
+                                  function (xdata) {
+                                      toastr.success("Password Changed Successfully!");
+                                      view.hideChangePassword();
+                                  });
+                           toastr.success("Password Changed Successfully!");
+                           view.hideChangePassword();
+                       }
+                    
+                   },
+
+
                     // Get User Profile For Editing 
                    getUserProfileById = function () {
                        dataservice.getUserProfileById({
@@ -67,6 +124,9 @@ define("user/user.viewModel",
                                success: function (userProfile) {
                                    console.log(userProfile);
                                    selectedUser(model.UserServertoClientMapper(userProfile));
+
+                                   selectedUser().Password(undefined);
+                                   selectedUser().ConfirmPassword(undefined);
                                    // Load Cities by Country
                                    updateCities(userProfile.CityId);
                                    selectedUser().countryId.subscribe(function () {
@@ -211,14 +271,46 @@ define("user/user.viewModel",
                         var data = selectedUser().convertToServerData();
                         dataservice.saveUserProfile(
                             data, {
-                            success: function () {
-                                toastr.success("Profile updated!");
+
+   
+                                success: function () {
+                                  
+                                        toastr.success("Profile updated!");
+          
                             },
                             error: function () {
                                 toastr.error("Failed to update profile!");
                             }
                         });
                     },
+
+                
+                InviteUser = function () {
+
+                    view.showInviteUser();
+                },
+
+                 Invite = function () {
+
+                     dataservice.inviteUser({
+                         Email: InviteEmail()
+                     },{
+
+                               success: function () {
+
+                                   toastr.success("Profile updated!");
+
+                               },
+                               error: function () {
+                                   toastr.error("Failed to update profile!");
+                               }
+                           });
+
+                     view.hideChangePassword();
+                 },
+
+                
+
                     // Update Button handler
                     onUpdateProfile= function() {
                         updateProfile();
@@ -275,7 +367,16 @@ define("user/user.viewModel",
                     isUserEdit: isUserEdit,
                     roles: roles,
                     selectedRoleId: selectedRoleId,
-                    onCloseUserEdit: onCloseUserEdit
+                    OldPassword: OldPassword,
+                    onCloseUserEdit: onCloseUserEdit,
+                    ChangePassword: ChangePassword,
+                    isChangePasswordVisible: isChangePasswordVisible,
+                    NewPassword: NewPassword,
+                    ConfirmPassword: ConfirmPassword,
+                    ChangePasswordOk: ChangePasswordOk,
+                    InviteUser: InviteUser,
+                    Invite: Invite,
+                    InviteEmail: InviteEmail
                 };
             })()
         };

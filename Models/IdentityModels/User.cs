@@ -177,6 +177,10 @@ namespace SMD.Models.IdentityModels
             {
                 EducationId = source.EducationId;
             }
+            if (!string.IsNullOrEmpty(source.Password))
+            {
+                PasswordHash = source.Password;
+            }
            
         }
 

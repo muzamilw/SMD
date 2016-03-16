@@ -388,6 +388,7 @@
     <Compile Include="Areas\Api\Controllers\EducationController.cs" />
     <Compile Include="Areas\Api\Controllers\GenerateSMSController.cs" />
     <Compile Include="Areas\Api\Controllers\IndustryController.cs" />
+    <Compile Include="Areas\Api\Controllers\InviteUserController.cs" />
     <Compile Include="Areas\Api\Controllers\ManageUsersController.cs" />
     <Compile Include="Areas\Api\Controllers\PayoutController.cs" />
     <Compile Include="Areas\Api\Controllers\CreateStripeCustomerController.cs" />
@@ -1509,6 +1510,8 @@
     <Content Include="Areas\User\Views\ManageUser\Index.cshtml" />
     <Content Include="Areas\ProfileQuestion\Views\Manage\test.cshtml" />
     <Content Include="Areas\User\Views\ManageUser\ManageUsers.cshtml" />
+    <Content Include="Areas\User\Views\Shared\_ChangePassword.cshtml" />
+    <Content Include="Areas\User\Views\Shared\_InviteUser.cshtml" />
     <None Include="Properties\PublishProfiles\SMD MIS Saqib.pubxml" />
     <None Include="Properties\PublishProfiles\SMD.pubxml" />
     <None Include="Scripts\amplify-vsdoc.js" />

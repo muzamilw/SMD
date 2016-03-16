@@ -278,6 +278,8 @@ namespace SMD.MIS.Controllers
         {
             if (ModelState.IsValid)
             {
+              
+
                 var user = new User { UserName = model.Email, Email = model.Email, FullName = model.FullName };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
@@ -584,7 +586,18 @@ namespace SMD.MIS.Controllers
             return View(model);
         }
 
-        #endregion
+
+        [HttpGet]
+      
+        public async Task<bool> ChangePassword(string Password,string OldPassword,string UserId)
+        {
+
+            var result = await UserManager.ChangePasswordAsync(UserId, OldPassword, Password);
+
+            return result.Succeeded;
+        }
+
+   
 
         #region Helpers
 
@@ -643,6 +656,7 @@ namespace SMD.MIS.Controllers
             //Creates User Native Accounts
             accountService.AddAccountsForNewUser(companyId);
         }
+        #endregion
         #endregion
     }
 }

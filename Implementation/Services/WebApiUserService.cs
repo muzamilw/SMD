@@ -1030,6 +1030,7 @@ namespace SMD.Implementation.Services
                 request.CityId = cityRepository.GetCityId(request.City);
             }
             // Update User
+          
             user.Update(request);
             //update company
             companyRepository.updateCompany(request);
@@ -1397,10 +1398,14 @@ namespace SMD.Implementation.Services
           return  companyRepository.getUserBasedOnAuthenticationToken(token);
         }
 
+       
 
         #endregion
 
+        public void InviteUser()
+        {
 
+        }
        
         #endregion
     }

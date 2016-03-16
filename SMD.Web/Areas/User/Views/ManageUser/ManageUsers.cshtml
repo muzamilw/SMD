@@ -28,7 +28,7 @@ else
                 </p>
             </div>
             <div class="col-lg-3">
-                <button class="btn btn-success inviteButtonStyle" id="saveBtn" >Invite</button>
+                <button class="btn btn-success inviteButtonStyle" id="saveBtn" data-bind="click: $root.InviteUser" >Invite</button>
             </div>
         </div>
            
@@ -85,6 +85,7 @@ else
             </div>
         </div>
 
+    @Html.Partial("~/Areas/User/Views/Shared/_InviteUser.cshtml")
     <script id="ManageUserTemplate" type="text/html">
 
 

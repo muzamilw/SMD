@@ -114,5 +114,28 @@ namespace SMD.Repository.Repositories
            
               
         }
+
+        public string getCompanyName(out string UserName, out int companyid)
+        {
+            User user = db.Users.Where(c => c.Id == LoggedInUserIdentity).FirstOrDefault();
+
+            if(user != null)
+            {
+                UserName = user.FullName;
+                companyid = user.CompanyId ?? 0;
+                return db.Companies.Where(c => c.CompanyId == user.CompanyId).Select(c => c.CompanyName).FirstOrDefault();
+            }
+            else
+            {
+                UserName = string.Empty;
+                companyid = 0;
+                return string.Empty;
+            }
+            
+        }
+        public string getUserName()
+        {
+            return db.Users.Where(c => c.Id == LoggedInUserIdentity).Select(c => c.FullName).FirstOrDefault();
+        }
     }
 }

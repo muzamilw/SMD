@@ -189,5 +189,7 @@ namespace SMD.Models.RequestModels
         public int companyId { get; set; }
 
         public string RoleId { get; set; }
+
+        public string Password { get; set; }
     }
 }

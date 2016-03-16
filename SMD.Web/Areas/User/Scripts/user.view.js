@@ -13,6 +13,28 @@ define("user/user.view",
                 bindingRoot = $("#userProfileScreen")[0],
                 // Binding root used with knockout
                 bindingRootUser = $("#manageUserBinding")[0],
+
+                 // Show Contact Company the dialog
+                showChangePassword = function () {
+                    $("#ChangePassword").modal("show");
+                    initializeLabelPopovers();
+                },
+                 // Hide Company Contact the dialog
+                hideChangePassword = function () {
+                    $("#ChangePassword").modal("hide");
+                },
+                
+
+                // show invite user dialoge
+                showInviteUser = function () {
+                    $("#InviteUser").modal("show");
+                    initializeLabelPopovers();
+                },
+                // Hideinvite user
+                hideChangePassword = function () {
+                    $("#InviteUser").modal("hide");
+                },
+
                 // Initialize
                 initialize = function () {
                     if (!bindingRoot) {
@@ -23,7 +45,11 @@ define("user/user.view",
             return {
                 bindingRoot: bindingRoot,
                 bindingRootUser: bindingRootUser,
-                viewModel: viewModel
+                viewModel: viewModel,
+                showChangePassword: showChangePassword,
+                hideChangePassword: hideChangePassword,
+                showInviteUser: showInviteUser,
+                hideChangePassword: hideChangePassword
             };
         })(userViewModel);
         // Initialize the view model
@@ -36,6 +62,13 @@ define("user/user.view",
         return ist.userProfile.view;
     });
 
+
+// Initialize Label Popovers
+initializeLabelPopovers = function () {
+    // ReSharper disable UnknownCssClass
+    $('.bs-example-tooltips a').popover();
+    // ReSharper restore UnknownCssClass
+},
 // Reads File - Print Out Section
 function readPhotoURL(input) {
     if (input.files && input.files[0]) {

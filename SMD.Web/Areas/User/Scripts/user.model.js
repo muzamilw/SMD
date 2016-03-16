@@ -40,9 +40,10 @@
               payPalId = ko.observable(spcPayPal || 'undefined'),
               googleValletId = ko.observable(spcGoogle || 'undefined'),
               RoleId = ko.observable(RoleId),
-              Password = ko.observable(RoleId),
-              ConfirmPassword = ko.observable(Password).extend({ compareWith: password }),
+              Password = ko.observable(Password).extend({ required: { params: true, message: 'This field is required with minimum 6 characters!' }, minLength: 6 }),
+              ConfirmPassword = ko.observable(Password).extend({ compareWith: Password }),
               errors = ko.validation.group({
+                  Password: Password,
                   ConfirmPassword: ConfirmPassword
               }),
               // Is Valid
@@ -148,6 +149,7 @@
               payPalId :payPalId,
               googleValletId: googleValletId,
               RoleId: RoleId,
+              Password: Password,
               ConfirmPassword: ConfirmPassword,
               hasChanges: hasChanges,
               convertToServerData:convertToServerData,
@@ -166,7 +168,7 @@
             itemFromServer.Address2, itemFromServer.DOB, itemFromServer.CityId, itemFromServer.ContactNotes, itemFromServer.CountryId,
             itemFromServer.IndustryId,itemFromServer.Phone1,itemFromServer.Phone2,itemFromServer.State,itemFromServer.ZipCode,
             itemFromServer.ImageUrl ,itemFromServer.AdvertContact,itemFromServer.AdvertContactEmail,itemFromServer.AdvertContactPhone,
-            itemFromServer.EducationId, itemFromServer.StripeId, itemFromServer.PayPal, itemFromServer.GoogleVallet, null,itemFromServer.CompanyId,itemFromServer.RoleId);
+            itemFromServer.EducationId, itemFromServer.StripeId, itemFromServer.PayPal, itemFromServer.GoogleVallet, null, itemFromServer.CompanyId, itemFromServer.RoleId, itemFromServer.Password);
      
     };
     
