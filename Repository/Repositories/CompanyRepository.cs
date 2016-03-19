@@ -64,17 +64,26 @@ namespace SMD.Repository.Repositories
             }
             return false;
         }
-        public bool createCompany(string userId, string email, string fullname, string guid)
+        public bool createCompany(string userId, string email, string fullname, string guid,int companyid)
         {
-            Company company = new Company();
-            company.ReplyEmail = email;
-            company.CompanyName = fullname;
-            db.Companies.Add(company);
-            db.SaveChanges();
+            int CompanyId = 0;
+            if(companyid == 0)
+            {
+                Company company = new Company();
+                company.ReplyEmail = email;
+                company.CompanyName = fullname;
+                db.Companies.Add(company);
+                db.SaveChanges();
+                CompanyId = company.CompanyId;
+            }
+            else
+            {
+                CompanyId = companyid;
+            }
             var user = db.Users.Where(g => g.Id == userId).SingleOrDefault();
             if (user != null)
             {
-                user.CompanyId = company.CompanyId;
+                user.CompanyId = CompanyId;
                 user.AuthenticationToken = guid;
                 db.SaveChanges();
             }

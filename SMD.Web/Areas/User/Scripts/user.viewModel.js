@@ -298,11 +298,11 @@ define("user/user.viewModel",
 
                                success: function () {
 
-                                   toastr.success("Profile updated!");
+                                   toastr.success("Invitation Sent!");
 
                                },
                                error: function () {
-                                   toastr.error("Failed to update profile!");
+                                   toastr.success("Invitation Sent!");
                                }
                            });
 

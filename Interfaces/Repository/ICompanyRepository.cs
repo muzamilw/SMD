@@ -14,7 +14,7 @@ namespace SMD.Interfaces.Repository
         int GetUserCompany(string userId);
         bool updateCompanyLogo(string url, int companyId);
 
-        bool createCompany(string userId, string email, string fullname,string guid);
+        bool createCompany(string userId, string email, string fullname,string guid,int companyid);
         bool updateCompany(UpdateUserProfileRequest request);
 
         User getUserBasedOnAuthenticationToken(string token);
