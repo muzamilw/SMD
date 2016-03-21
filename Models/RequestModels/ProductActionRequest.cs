@@ -53,5 +53,6 @@ namespace SMD.Models.RequestModels
         public int? AdRewardUserSelection { get; set; }
 
         public int? companyId { get; set; }
+        public int? UserQuestionResponse { get; set; }
     }
 }

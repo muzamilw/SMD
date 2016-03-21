@@ -173,7 +173,7 @@ namespace SMD.Implementation.Services
 
             // Add Campaign Response 
             PerformSkipOrUpdateUserAdSelection((int)request.AdCampaignId, request.UserId,
-                (adViewerUsedVoucher ? (int)AdRewardType.Voucher : (int)AdRewardType.Cash), false, adViewersCut, request.companyId, false);
+                (adViewerUsedVoucher ? (int)AdRewardType.Voucher : (int)AdRewardType.Cash), false, adViewersCut, request.companyId,request.userQuizSelection.HasValue?request.userQuizSelection.Value:0, false);
 
             // Save Changes
             transactionRepository.SaveChanges();
@@ -476,7 +476,8 @@ namespace SMD.Implementation.Services
                     {
                         AdCampaignId = request.ItemId.Value,
                         UserId = request.UserId,
-                        companyId = request.companyId.Value
+                        companyId = request.companyId.Value,
+                        userQuizSelection = request.UserQuestionResponse 
                     });    
                 }
                 else if (request.AdRewardUserSelection.Value == (int)AdRewardType.Voucher)
@@ -485,7 +486,8 @@ namespace SMD.Implementation.Services
                     {
                         AdCampaignId = request.ItemId.Value,
                         UserId = request.UserId,
-                        companyId = request.companyId.Value
+                        companyId = request.companyId.Value,
+                        userQuizSelection =  request.UserQuestionResponse 
                     }); 
                 }
             }
@@ -495,7 +497,7 @@ namespace SMD.Implementation.Services
         /// Skips Ad Campaign
         /// </summary>
         private void PerformSkipOrUpdateUserAdSelection(int adCampaignId, string userId, int? userSelection, bool? isSkipped,
-            double? endUserAmount, int companyId, bool saveChanges = true)
+            double? endUserAmount, int companyId,int userQuizSelection, bool saveChanges = true)
         {
             AdCampaign adCampaign = adCampaignRepository.Find(adCampaignId);
             if (adCampaign == null)
@@ -507,6 +509,7 @@ namespace SMD.Implementation.Services
             AdCampaignResponse adCampaignResponse = adCampaignResponseRepository.GetByUserId(adCampaignId, userId) ??
                                                     CreateAdCampaignResponse(adCampaignId, userId, adCampaign);
             adCampaignResponse.CompanyId = companyId;
+            adCampaignResponse.UserQuestionResponse = userQuizSelection;
             UpdateAdResponse(userSelection, isSkipped, endUserAmount, adCampaignResponse);
             
             if (!saveChanges)
@@ -632,7 +635,7 @@ namespace SMD.Implementation.Services
 
                 else if (request.Type.Value == (int)ProductType.Ad)
                 {
-                    PerformSkipOrUpdateUserAdSelection((int)request.ItemId.Value, request.UserId, null, true, null, request.companyId.Value, true);
+                    PerformSkipOrUpdateUserAdSelection((int)request.ItemId.Value, request.UserId, null, true, null, request.companyId.Value,request.UserQuestionResponse.HasValue? request.UserQuestionResponse.Value:0, true);
                 }
 
                 else if (request.Type.Value == (int)ProductType.SurveyQuestion)
@@ -1182,12 +1185,20 @@ namespace SMD.Implementation.Services
                         Message = LanguageResources.WebApiUserService_LoginInfoNotFound
                     };
                 }
-              
-                // update user name  and cuntry name for api 
-                if (user.Company.Country != null)
-                    user.CountryName = user.Company.Country.CountryName;
-                if (user.Company.City != null)
-                    user.CityName = user.Company.City.CityName;
+                if (user.Company != null)
+                {
+                    // update user name  and cuntry name for api 
+                    if (user.Company.Country != null)
+                        user.CountryName = user.Company.Country.CountryName;
+                    if (user.Company.City != null)
+                        user.CityName = user.Company.City.CityName;
+                }
+                else
+                {
+                    user.AuthenticationToken = Guid.NewGuid().ToString();
+                    companyRepository.createCompany(user.Id, request.Email, request.FullName, user.AuthenticationToken);
+                    
+                }
                 UserLogin userLoginInfo = user.UserLogins.FirstOrDefault(
                     u => u.LoginProvider == request.LoginProvider && u.ProviderKey == request.LoginProviderKey);
 

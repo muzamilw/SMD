@@ -20,7 +20,7 @@ namespace SMD.Models.DomainModels
         public int? GameScore { get; set; }
         public int? GameLevel { get; set; }
         public int? GameId { get; set; }
-    
+        public int? UserQuestionResponse { get; set; }
         public virtual AdCampaign AdCampaign { get; set; }
         public virtual User User { get; set; }
         public virtual Company Company { get; set; }

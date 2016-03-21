@@ -49,7 +49,8 @@
     {
         ProfileQuestion = 1,
         SurveyQuestion = 2,
-        Language = 3
+        Language = 3,
+        QuizQustion = 6
     }
     public enum AdCampaignType
     {

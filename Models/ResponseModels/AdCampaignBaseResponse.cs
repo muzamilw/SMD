@@ -53,5 +53,7 @@ namespace SMD.Models.ResponseModels
         /// </summary>
         public IEnumerable<Education> Education { get; set; }
 
+        public IEnumerable<AdCampaign> AdCampaigns { get; set; }
+
     }
 }

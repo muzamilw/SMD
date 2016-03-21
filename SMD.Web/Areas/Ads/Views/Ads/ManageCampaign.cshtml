@@ -802,7 +802,7 @@ else
                                                         <h4 class="modal-title" id="gridSystemModalLabel">Add Criteria</h4>
                                                     </div>
                                                     <div class="modal-body" data-bind="with:$root.selectedCriteria">
-                                                        <div class="row">
+                                                        <div class="row" data-bind="visible: $root.AditionalCriteriaMode() != '1'">
                                                             <div class="col-lg-9 marginBottom12">
                                                                 <div class="form-group">
                                                                     <div class="col-lg-5 text-right">
@@ -829,9 +829,9 @@ else
                                                                 </div>
                                                             </div>
                                                             <div>
-                                                                <div class="col-lg-12 marginBottom12">
+                                                                <div class="col-lg-12 marginBottom12" >
                                                                     <div class="form-group" data-bind="visible:$root.isNewCriteria">
-                                                                        <div class="col-lg-8 pull-left">
+                                                                        <div class="col-lg-12 pull-left" data-bind="visible: $root.AditionalCriteriaMode() == '2'">
                                                                             <div class="row header">
                                                                                 <label class="control-label modelHeading">Profile Questions</label>
                                                                             </div>
@@ -842,12 +842,12 @@ else
                                                                             </div>
 
                                                                         </div>
-                                                                        <div class="col-lg-4 pull-left">
+                                                                        <div class="col-lg-12 pull-left" data-bind="visible: $root.AditionalCriteriaMode() == '3'">
                                                                             <div class="row header">
-                                                                                <label class="control-label modelHeading">Survey Questions</label>
+                                                                                <label class="control-label modelHeading">Your Quiz Questions</label>
                                                                             </div>
                                                                             <div class="listview parentList set-border padding10 list-type-tiles" data-role="listview" id="lv2">
-                                                                                <!-- ko template: { name: 'surveyQuestionTiles' , foreach: $root.surveyQuestionList} --><!-- /ko -->
+                                                                                <!-- ko template: { name: 'surveyQuestionTiles' , foreach: $root.myQuizQuestions} --><!-- /ko -->
 
                                                                                 <div class="clear-both"></div>
                                                                             </div>
@@ -864,9 +864,9 @@ else
                                                                                     <div class="list active">
                                                                                         <span data-bind="text:questionString"></span>
                                                                                         <div class="listview set-border padding10 list-type-tiles chlidList" data-role="listview">
-                                                                                            <!--ko if:Type() == 2 -->
-                                                                                            <div class="list childList leftImg" data-bind="click:$root.updateSurveyCriteria.bind($data, 1),css: { 'active': SQAnswer() ==1 }"> <img data-bind="attr: { src: surveyQuestLeftImageSrc }" class="list-icon" /></div>
-                                                                                            <div class="list childList rightImg" data-bind="click:$root.updateSurveyCriteria.bind($data, 2),css: { 'active': SQAnswer() ==2 }"> <img data-bind="attr: { src: surveyQuestRightImageSrc }" class="list-icon" /></div>
+                                                                                            <!--ko if:Type() == 6 -->
+                                                                                            <div class="list childList leftImg" data-bind="click:$root.updateSurveyCriteria.bind($data, 1),css: { 'active': QuizAnswerId() ==1 }"> <label data-bind="text:surveyQuestLeftImageSrc "></label> </div>
+                                                                                            <div class="list childList rightImg" data-bind="click:$root.updateSurveyCriteria.bind($data, 2),css: { 'active': QuizAnswerId() ==2 }"><label data-bind="text:surveyQuestRightImageSrc "></label></div>
                                                                                             <!--/ko-->
                                                                                             <!--ko if:Type() == 1 -->
                                                                                             <!-- ko template: { name: 'criteriaEditorTemplate' ,  foreach: $root.profileAnswerList} --><!-- /ko -->
@@ -890,6 +890,24 @@ else
                                                             </div>
 
                                                         </div>
+                                                        <div data-bind="visible: $root.AditionalCriteriaMode() == '1'" class="" style="">
+                                                            <div class="row" style="margin-top:15px;margin-left:15px;">
+                                                                <h4 class="modal-title" >Refine audience criteria using</h4>
+                                                            </div>
+
+                                                            <div class="row" style="margin-top:15px;margin-left:15px;">
+                                                                <div class="col-lg-6">
+                                                                    <button class="btn  btn-success btnAdsCampaign ButtonWidth" id="" data-bind="click:$root.showAdditionCriteria('2')">User profile answers</button>
+                                                                </div>
+                                                                <div class="col-lg-6">
+                                                                    <button class="btn  btn-success btnAdsCampaign ButtonWidth" id="" data-bind="click:$root.showAdditionCriteria('3')">Your quiz questions</button>
+                                                                </div>
+                                                                <div class="col-lg-4" style="display:none;">
+                                                                    <button class="btn  btn-success btnAdsCampaign ButtonWidth" id="" data-bind="click:$root.showAdditionCriteria('1')">Your quiz questions</button>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
                                                     </div>
 
                                                 </div>
@@ -909,7 +927,7 @@ else
 
                                                 </thead>*@
                                             <tbody>
-                                                <tr data-bind="visible: $root.visibleTargetAudience(1)  != 1 && $root.visibleTargetAudience(2)  != 1">
+                                                <tr data-bind="visible: $root.visibleTargetAudience(1)  != 1 && $root.visibleTargetAudience(2)  != 1&& $root.visibleTargetAudience(6)  != 1">
                                                     <td class="noCriteria"><span>No additional targeting criteria selected</span></td>
                                                 </tr>
                                                 <!-- ko template: { name: 'answersTemplate', foreach: AdCampaignTargetCriterias } -->
@@ -1541,30 +1559,28 @@ else
 
                 <!--ko if:IncludeorExclude() == '0' -->
                 <td class="col-lg-2">
-                    <!-- ko if:   Type() == "1" -->
                     <p style="margin-top: 5px;margin-left: 12px;" data-bind="text: '(Excluded) ' + questionString() + ' = ' + answerString()">
                     </p>
-                    <!-- /ko -->
-                    <!-- ko if:   Type()  == "2" -->
+                   
+                    @*<!-- ko if:   Type()  == "6" -->
                     <p style="margin-top: 5px;margin-left: 12px;">
                         <span data-bind="text: '(Excluded) ' +  questionString() + ' = ' "></span>
                         <img data-bind="attr:{src: answerString()}" width="80" />
                     </p>
-                    <!-- /ko -->
+                    <!-- /ko -->*@
                 </td>
                 <!--/ko-->
                 <!--ko if:IncludeorExclude() == '1'-->
                 <td class="col-lg-2">
-                    <!-- ko if:   Type() == "1" -->
+                
                     <p style="margin-top: 5px;margin-left: 12px;" data-bind="text: '(Included) ' + questionString() + ' = ' + answerString()">
                     </p>
-                    <!-- /ko -->
-                    <!-- ko if:   Type()  == "2" -->
+                    @*<!-- ko if:   Type()  == "6" -->
                     <p style="margin-top: 5px;margin-left: 12px;">
                         <span data-bind="text: '(Included) ' + questionString() + ' = ' "></span>
                         <img data-bind="attr:{src: answerString()}" width="80" />
                     </p>
-                    <!-- /ko -->
+                    <!-- /ko -->*@
                 </td>
                 <!--/ko-->
 
@@ -2001,10 +2017,10 @@ else
         </script>
         <script id="surveyQuestionTiles" type="text/html">
             <div class="list">
-                <div class="parent-list-title"><span data-bind="text:DisplayQuestion"></span></div>
+                <div class="parent-list-title"><span data-bind="text:VerifyQuestion"></span></div>
                 <div class="listview set-border padding10 list-type-tiles chlidList" data-role="listview">
-                    <div class="list childList leftImg" data-bind="click:$root.saveCriteria.bind($data, 1)"> <img data-bind="attr: { src: LeftPicturePath }" class="list-icon" /></div>
-                    <div class="list childList rightImg" data-bind="click:$root.saveCriteria.bind($data, 2)"> <img data-bind="attr: { src: RightPicturePath }" class="list-icon" /></div>
+                    <div class="list childList leftImg" data-bind="click:$root.saveCriteria.bind($data, 1)"><span class="list-title" data-bind="text:Answer1"></span> </div>
+                    <div class="list childList rightImg" data-bind="click:$root.saveCriteria.bind($data, 2)"> <span class="list-title" data-bind="text:Answer2"></span> </div>
                     <div class="clear-both"></div>
                 </div>
                 <div class="clear-both"></div>

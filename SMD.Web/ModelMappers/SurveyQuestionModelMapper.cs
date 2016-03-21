@@ -192,6 +192,16 @@ namespace SMD.MIS.ModelMappers
                 RightPicturePath = rightPath
             };
         }
+        public static AdCampaignDropDown CreateFromDropdown(this Models.DomainModels.AdCampaign source)
+        {
+            return new AdCampaignDropDown
+            {
+                CampaignId = source.CampaignId,
+                VerifyQuestion = source.VerifyQuestion,
+                Answer1 = source.Answer1,
+                Answer2 = source.Answer2
+            };
+        }
         public static SMD.MIS.Areas.Api.Models.UserBaseData CreateFrom(this Models.Common.UserBaseData source)
         {
             if (source != null)

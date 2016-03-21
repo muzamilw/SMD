@@ -371,7 +371,7 @@ namespace SMD.Implementation.Services
 
 
             // add or update target criterias
-            if (campaignModel.AdCampaignTargetLocations != null && campaignModel.AdCampaignTargetLocations.Count() > 0)
+            if (campaignModel.AdCampaignTargetCriterias != null && campaignModel.AdCampaignTargetCriterias.Count() > 0)
             {
                 foreach (AdCampaignTargetCriteria citem in campaignModel.AdCampaignTargetCriterias)
                 {
@@ -563,6 +563,13 @@ namespace SMD.Implementation.Services
                 SurveyQuestions = _surveyQuestionRepository.GetAll().Where(g => g.UserId == _surveyQuestionRepository.LoggedInUserIdentity)
             };
         }
+        public AdCampaignBaseResponse getQuizCampaigns()
+        {
+            return new AdCampaignBaseResponse
+            {
+                AdCampaigns = _adCampaignRepository.GetAll().Where(g => g.UserId == _adCampaignRepository.LoggedInUserIdentity && g.VerifyQuestion != null && g.VerifyQuestion != "")
+            };
+        }
 
         /// <summary>
         /// Get Ads For API  | baqer
@@ -583,6 +590,12 @@ namespace SMD.Implementation.Services
         public AdCampaign GetAdCampaignById(long campaignId)
         {
             return _adCampaignRepository.Find(campaignId);
+        }
+        public bool CopyCampaign(long campaignId)
+        {
+            bool result = false;
+
+            return result;
         }
         #endregion
     }

@@ -16,5 +16,6 @@
         public long AdCampaignId { get; set; }
 
         public int companyId { get; set; }
+        public int? userQuizSelection { get; set; }
     }
 }

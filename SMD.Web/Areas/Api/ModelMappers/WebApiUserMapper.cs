@@ -50,8 +50,8 @@ namespace SMD.MIS.Areas.Api.ModelMappers
                        GoogleVallet = source.Company.GoogleWalletCustomerId,
                        PayPal = source.Company.PaypalCustomerId,
                        AccountBalance = CreateFromForAccount(source),
-                       CityName = source.Company.City.CityName,
-                       CountryName = source.Company.Country.CountryName,
+                       CityName = source.Company.City == null?null: source.Company.City.CityName,
+                       CountryName = source.Company.Country == null?null: source.Company.Country.CountryName,
                        CompanyId = source.Company.CompanyId,
                        AuthenticationToken = source.AuthenticationToken
                    };
