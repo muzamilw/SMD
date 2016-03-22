@@ -18,8 +18,8 @@ define("survey/survey.viewModel",
                     pager = ko.observable(),
                     // Search Filter value 
                     filterValue = ko.observable(),
-                    langfilterValue = ko.observable(41),
-                    countryfilterValue = ko.observable(214),
+                    langfilterValue = ko.observable(0),
+                    countryfilterValue = ko.observable(0),
                     // Controlls editor visibility 
                     isEditorVisible = ko.observable(false),
                     ////selected Question

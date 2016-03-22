@@ -3,7 +3,7 @@
     var // ReSharper disable InconsistentNaming
         Survey = function (SQID, LanguageID, CountryID, UserID, Status, StatusValue, Question, Gender, Language, Country,
             Description, DisplayQuestion, StartDate, EndDate, ModifiedDate, LeftPicturePath, RightPicturePath, ProjectedReach, AgeRangeStart,
-            AgeRangeEnd, LeftPictureBytes, RightPictureBytes, ParentSurveyId, Priority, CreatedBy) {
+            AgeRangeEnd, LeftPictureBytes, RightPictureBytes, ParentSurveyId, Priority, CreatedBy,CompanyId) {
            
             var
                 //type and userID will be set on server sside
@@ -44,6 +44,7 @@
                 ProjectedReach = ko.observable(ProjectedReach),
                 AgeRangeStart = ko.observable(AgeRangeStart),
                 CreatedBy = ko.observable(CreatedBy),
+                CompanyId = ko.observable(CompanyId),
                 AgeRangeEnd = ko.observable(AgeRangeEnd).extend({
                     validation: {
                         validator: function (val, someOtherVal) {
@@ -145,7 +146,8 @@
                         RightPictureBytes: RightPictureBytes(),
                         SurveyQuestionTargetLocations: targetLocation,
                         ParentSurveyId: ParentSurveyId(),
-                        Priority: Priority()
+                        Priority: Priority(),
+                        CompanyId: CompanyId()
                     };
                 };
             return {
@@ -186,7 +188,8 @@
                 convertToServerData: convertToServerData,
                 ParentSurveyId: ParentSurveyId,
                 Priority: Priority,
-                CreatedBy: CreatedBy
+                CreatedBy: CreatedBy,
+                CompanyId: CompanyId
             };
         };
 
@@ -300,13 +303,14 @@
         var survey = new Survey(source.SqId, source.LanguageId, source.CountryId, source.UserId, source.Status, source.StatusValue, source.Question,
             source.Gender + "", source.Language, source.Country, source.Description, source.DisplayQuestion, source.StartDate, source.EndDate, source.ModifiedDate,
             source.LeftPicturePath, source.RightPicturePath, source.ProjectedReach, source.AgeRangeStart, source.AgeRangeEnd, source.LeftPictureBytes,
-            source.RightPictureBytes, source.ParentSurveyId, source.Priority,source.CreatedBy);
+            source.RightPictureBytes, source.ParentSurveyId, source.Priority,source.CreatedBy,source.CompanyId);
         _.each(source.SurveyQuestionTargetCriterias, function (item) {
             survey.SurveyQuestionTargetCriteria.push(SurveyQuestionTargetCriteria.Create(item));
         });
         _.each(source.SurveyQuestionTargetLocations, function (item) {
             survey.SurveyQuestionTargetLocation.push(SurveyQuestionTargetLocation.Create(item));
         });
+        console.log(source.CompanyId);
         return survey;
     };
     // Factory Method

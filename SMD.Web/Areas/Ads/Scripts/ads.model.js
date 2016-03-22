@@ -6,7 +6,8 @@
           Answer1, Answer2, Answer3, CorrectAnswer, AgeRangeStart, AgeRangeEnd, ResultClicks, AmountSpent
           , ImagePath, CampaignImagePath, CampaignTypeImagePath, Description, ClickRate,
           Voucher1Heading, Voucher1Description, Voucher1Value, Voucher2Heading, Voucher2Description, Voucher2Value,
-          Voucher1ImagePath, VoucherImagePath, CreatedBy, VideoUrl, BuuyItLine1, BuyItLine2, BuyItLine3, BuyItButtonLabel, BuyItImageUrl) {
+          Voucher1ImagePath, VoucherImagePath, CreatedBy, VideoUrl, BuuyItLine1, BuyItLine2, BuyItLine3, BuyItButtonLabel,
+          BuyItImageUrl, AdViews, CompanyId, CouponSwapValue, CouponActualValue, CouponQuantity, CouponTakenCount) {
           var
               //type and userID will be set on server sside
               CampaignID = ko.observable(CampaignID),
@@ -21,6 +22,10 @@
               Description = ko.observable(Description),
               Gender = ko.observable(Gender),
               Archived = ko.observable(Archived),
+              CouponSwapValue = ko.observable(CouponSwapValue),
+              CouponActualValue = ko.observable(CouponActualValue),
+              CouponQuantity = ko.observable(CouponQuantity),
+              CouponTakenCount = ko.observable(CouponTakenCount),
               StartDateTime = ko.observable((StartDateTime !== null && StartDateTime !== undefined) ? moment(StartDateTime).toDate() : undefined).extend({  // custom message
                   required: true
               }),//ko.observable(),
@@ -101,6 +106,8 @@
               BuyItButtonLabel = ko.observable(BuyItButtonLabel),
               BuyItImageUrl = ko.observable(BuyItImageUrl),
               buyItImageBytes = ko.observable(''),
+              AdViews = ko.observable(AdViews),
+              CompanyId = ko.observable(CompanyId),
                // Errors
                 errors = ko.validation.group({
                     CampaignName:CampaignName,
@@ -146,7 +153,11 @@
                   BuyItLine3: BuyItLine3,
                   BuyItButtonLabel: BuyItButtonLabel,
                   BuyItImageUrl: BuyItImageUrl,
-                  buyItImageBytes: buyItImageBytes
+                  buyItImageBytes: buyItImageBytes,
+                  AdViews: AdViews,
+                  CouponSwapValue: CouponSwapValue,
+                  CouponActualValue: CouponActualValue,
+                  CouponQuantity: CouponQuantity
               }),
               // Has Changes
               hasChanges = ko.computed(function () {
@@ -217,6 +228,12 @@
                       BuyItButtonLabel: BuyItButtonLabel(),
                       BuyItImageUrl: BuyItImageUrl(),
                       buyItImageBytes: buyItImageBytes(),
+                      AdViews: AdViews(),
+                      CompanyId: CompanyId(),
+                      CouponSwapValue: CouponSwapValue(),
+                      CouponActualValue: CouponActualValue(),
+                      CouponQuantity: CouponQuantity(),
+                      CouponTakenCount: CouponTakenCount()
                   };
               };
           return {
@@ -272,7 +289,13 @@
               BuyItLine3: BuyItLine3,
               BuyItButtonLabel: BuyItButtonLabel,
               BuyItImageUrl: BuyItImageUrl,
-              buyItImageBytes: buyItImageBytes
+              buyItImageBytes: buyItImageBytes,              
+              AdViews: AdViews,
+              CompanyId: CompanyId,
+              CouponSwapValue: CouponSwapValue,
+              CouponActualValue: CouponActualValue,
+              CouponQuantity: CouponQuantity,
+              CouponTakenCount: CouponTakenCount
           };
       };
 
@@ -392,7 +415,8 @@
             , source.Type + "", source.DisplayTitle, source.LandingPageVideoLink, source.VerifyQuestion, source.Answer1, source.Answer2, source.Answer3,
             source.CorrectAnswer, source.AgeRangeStart, source.AgeRangeEnd, source.ResultClicks, source.AmountSpent, source.ImagePath, source.CampaignImagePath,
             source.CampaignTypeImagePath, source.Description, source.ClickRate, source.Voucher1Heading, source.Voucher1Description, source.Voucher1Value, source.Voucher2Heading, source.Voucher2Description,
-             source.Voucher2Value, source.Voucher1ImagePath, source.VoucherImagePath, source.CreatedBy, source.VideoUrl, source.BuuyItLine1, source.BuyItLine2, source.BuyItLine3, source.BuyItButtonLabel, source.BuyItImageUrl);
+             source.Voucher2Value, source.Voucher1ImagePath, source.VoucherImagePath, source.CreatedBy, source.VideoUrl, source.BuuyItLine1, source.BuyItLine2, source.BuyItLine3, source.BuyItButtonLabel, source.BuyItImageUrl,source.AdViews,source.CompanyId,
+            source.CouponSwapValue, source.CouponActualValue,source.CouponQuantity,source.CouponTakenCount);
         _.each(source.AdCampaignTargetCriterias, function (item) {
             campaign.AdCampaignTargetCriterias.push(AdCampaignTargetCriteriasModel.Create(item));
         });

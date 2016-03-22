@@ -36,7 +36,7 @@
 
     <header class="navbar" id="header-navbar">
         <div class="col-md-12 col-lg-12 col-sm-12" style="height: 4px; background-color: #3dd2b5; position: absolute; margin-top: 100px;"></div>
-
+       
         <div class="container" style="height:100px;">
             <a href="~/" id="header" class="my-navigator navbar-brand logoAnchor" style="background-image: url(@Url.Content("~/Images/ads.png")); background-repeat: no-repeat;background-size: 42%;margin-top: 5px;margin-left: 5px;">
             </a>
@@ -56,13 +56,15 @@
 
                 <button class="navbar-toggle" data-target=".navbar-ex1-collapse" data-toggle="collapse" type="button">
                     <span class="sr-only">Toggle navigation</span>
-                    <span class="fa fa-bars"></span>
+                    @*<span class="fa fa-bars"></span>*@
                 </button>
                 <div class="nav-no-collapse navbar-left pull-left hidden-sm hidden-xs" style="margin-top:23px;">
+
+                    @*<span style="font-size: 3em;color:white;padding-left:200px;">Targeting Material</span>*@
                     <ul class="nav navbar-nav pull-left">
                         <li>
                             @if (!User.IsInRole("User"))
-                            { 
+                            {
                                 @*<a class="btn" id="make-small-nav">
                                     <i class="fa fa-bars"></i>
                                 </a>*@
@@ -78,6 +80,8 @@
 
 
                 <div class="nav-no-collapse pull-right" id="header-nav" style="margin-top:23px;">
+
+
                     <ul class="nav navbar-nav pull-right">
                         <li class="dropdown profile-dropdown @classesMenu" >
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -90,7 +94,7 @@
                                 <li><a href="">Approve/Reject </a></li>
                                 <li class="inlineMenuItem"><a href="~/Ads/Ads/AddAproval">&nbsp;&nbsp; Ad Campaigns</a></li>
                                 <li class="inlineMenuItem"><a href="~/Survey/SurveyQuestionApproval">&nbsp;&nbsp;User Suvey Slides</a></li>
-
+                                <li class="inlineMenuItem"><a href="~/Ads/Ads/AddAproval?mode=2">&nbsp;&nbsp;Coupons</a></li>
                                 <li><a href="">Edit</a></li>
                                 <li class="inlineMenuItem"><a href="~/ProfileQuestion/Manage/Index">&nbsp;&nbsp;Profile Questions</a></li>
                                 <li class="inlineMenuItem"><a href="~/survey">&nbsp;&nbsp;Survey Questions</a></li>
@@ -114,7 +118,7 @@
 
                                 </div>
                             </a>
-                            <ul class="dropdown-menu">
+                            <ul class="dropdown-menu loginMenu">
                                 <li><a href="~/User/ManageUser/Index">Edit my marketing profile/logo</a></li>
                                 <li><a href="">Ad Campaigns</a></li>
                                 <li class="inlineMenuItem"><a href="~/Ads/Ads">&nbsp;&nbsp;Create Ad Campaigns</a></li>

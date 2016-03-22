@@ -84,7 +84,10 @@ namespace SMD.Repository.Repositories
             int fromRow = (request.PageNo - 1) * request.PageSize;
             int toRow = request.PageSize;
             Expression<Func<AdCampaign, bool>> query =
-                ad => ad.Status == (Int32)AdCampaignStatus.SubmitForApproval;
+                ad => ad.Status == (Int32)AdCampaignStatus.SubmitForApproval && ad.Type != (int)AdCampaignType.Coupon;
+
+            if(request.ShowCoupons.HasValue && request.ShowCoupons.Value == true)
+                query =ad => ad.Status == (Int32)AdCampaignStatus.SubmitForApproval && ad.Type == (int)AdCampaignType.Coupon;
 
             rowCount = DbSet.Count(query);
             return request.IsAsc
@@ -115,17 +118,39 @@ namespace SMD.Repository.Repositories
                 rowCount = DbSet.Count();
                 if (isAdmin)
                 {
-                    return DbSet.OrderBy(g => g.CampaignId)
+                     IEnumerable<AdCampaign> adCampaigns = DbSet.OrderBy(g => g.CampaignId).Where(c=>c.Type != 5)
                             .Skip(fromRow)
                             .Take(toRow)
                             .ToList();
+
+                     if (adCampaigns != null && adCampaigns.Count() > 0)
+                     {
+                         foreach (var ad in adCampaigns)
+                         {
+                             ad.AdViews = db.AdCampaignResponses.Where(c => c.CampaignId == ad.CampaignId).Count();
+                         }
+
+                     }
+                     return adCampaigns;
+
+
                 }
                 else
                 {
-                    return DbSet.Where(g => g.UserId == LoggedInUserIdentity).OrderBy(g => g.CampaignId)
+                     IEnumerable<AdCampaign> adCampaigns = DbSet.Where(g => g.UserId == LoggedInUserIdentity && g.Type != 5).OrderBy(g => g.CampaignId)
                             .Skip(fromRow)
                             .Take(toRow)
                             .ToList();
+                     if (adCampaigns != null && adCampaigns.Count() > 0)
+                     {
+                         foreach (var ad in adCampaigns)
+                         {
+                             ad.AdViews = db.AdCampaignResponses.Where(c => c.CampaignId == ad.CampaignId).Count();
+                         }
+
+                     }
+                     return adCampaigns;
+
                 }
             } 
             else
@@ -140,10 +165,31 @@ namespace SMD.Repository.Repositories
 
 
                 rowCount = DbSet.Count(query);
-                return DbSet.Where(query).OrderBy(g => g.CampaignId)
+                IEnumerable<AdCampaign> adCampaigns = null;
+                if (request.ShowCoupons != null && request.ShowCoupons == true)
+                {
+                    adCampaigns = DbSet.Where(query).Where(g => g.Type == 5).OrderBy(g => g.CampaignId)
+                      .Skip(fromRow)
+                      .Take(toRow)
+                      .ToList();
+                }
+                else
+                {
+                   adCampaigns= DbSet.Where(query).Where(g => g.Type != 5).OrderBy(g => g.CampaignId)
                         .Skip(fromRow)
                         .Take(toRow)
                         .ToList();
+                }
+
+                if (adCampaigns != null && adCampaigns.Count() > 0)
+                {
+                    foreach(var ad in adCampaigns)
+                    {
+                        ad.AdViews = db.AdCampaignResponses.Where(c => c.CampaignId == ad.CampaignId).Count();
+                    }
+
+                }
+                return adCampaigns;
             }
         }
 

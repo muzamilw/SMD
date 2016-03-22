@@ -1,4 +1,5 @@
 ﻿using SMD.Models.DomainModels;
+using SMD.Models.IdentityModels;
 using SMD.Models.RequestModels;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,9 @@ namespace SMD.Interfaces.Repository
         int GetUserCompany(string userId);
         bool updateCompanyLogo(string url, int companyId);
 
-        bool createCompany(string userId, string email, string fullname);
+        bool createCompany(string userId, string email, string fullname,string guid,int companyid);
         bool updateCompany(UpdateUserProfileRequest request);
+
+        User getUserBasedOnAuthenticationToken(string token);
     }
 }

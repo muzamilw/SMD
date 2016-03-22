@@ -132,6 +132,11 @@ namespace SMD.Implementation.Services
         public string PasswordResetLink { get; set; }
         public string VoucherDescription { get; set; }
         public string VoucherValue { get; set; }
+
+        public string CompanyNameInviteUser { get; set; }
+
+        public string InviteURL { get; set; }
+
         /// <summary>
         /// Sends Email
         /// </summary>
@@ -167,6 +172,7 @@ namespace SMD.Implementation.Services
             smailsubject = smailsubject.Replace("++firstname++", Fname);
             smailsubject = smailsubject.Replace("++lastname++", Lname);
             smailsubject = smailsubject.Replace("++MailSubject++", Subj);
+            smailsubject = smailsubject.Replace("++companyname++", CompanyNameInviteUser);
             MBody = MBody.Replace("++username++", Muser);
             MBody = MBody.Replace("++firstname++", Fname);
             MBody = MBody.Replace("++lastname++", Lname);
@@ -180,6 +186,11 @@ namespace SMD.Implementation.Services
             {
                 MBody = MBody.Replace("++VoucherDescription++", VoucherDescription);
                 MBody = MBody.Replace("++VoucherValue++", VoucherValue);
+            }
+            if(Mid == (int)EmailTypes.InviteUsers)
+            {
+                MBody = MBody.Replace("++companyname++", CompanyNameInviteUser);
+                MBody = MBody.Replace("++inviteurl++", InviteURL);
             }
             MBody = MBody.Replace("++Fname++", Fname);
             oMailBody.IsBodyHtml = true;
@@ -318,7 +329,7 @@ namespace SMD.Implementation.Services
         }
 
         private readonly ISystemMailsRepository systemMailRepository;
-        
+        private readonly IManageUserRepository manageUserRepository;
         #endregion
 
 
@@ -327,13 +338,14 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Constructor
         /// </summary>
-        public EmailManagerService(ISystemMailsRepository systemMailRepository)
+        public EmailManagerService(ISystemMailsRepository systemMailRepository, IManageUserRepository manageUserRepository)
         {
             if (systemMailRepository == null)
             {
                 throw new ArgumentNullException("systemMailRepository");
             }
             this.systemMailRepository = systemMailRepository;
+            this.manageUserRepository = manageUserRepository;
             MMailto = new List<string>();
         }
 
@@ -634,6 +646,26 @@ namespace SMD.Implementation.Services
                 throw new Exception("Customer is null");
             }  
         }
+
+
+        /// <summary>
+        ///Invite User Email
+        /// </summary>
+        public async Task SendEmailToInviteUser(string email)
+        {
+
+                MMailto.Add(email);
+                Mid = (int)EmailTypes.InviteUsers;
+                string userName = string.Empty;
+                int companyid = 0;
+               
+                CompanyNameInviteUser = manageUserRepository.getCompanyName(out userName,out companyid);
+                Muser = userName;
+                InviteURL = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/Account/Register?CompanyID=" + companyid;
+                await SendEmail();
+           
+        }
+
         #endregion
 
     }

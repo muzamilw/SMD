@@ -44,7 +44,8 @@ namespace SMD.Implementation.Services
         private readonly IEducationRepository _educationRepository;
         private readonly IStripeService stripeService;
         private readonly WebApiUserService webApiUserService;
-
+        private readonly ICompanyRepository companyRepository;
+        private readonly IAdCampaignResponseRepository _adcampaignResponseRepository;
         #region Private Funcs
         private ApplicationUserManager UserManager
         {
@@ -136,8 +137,8 @@ namespace SMD.Implementation.Services
             IProfileQuestionAnswerRepository profileQuestionAnswerRepository,
             ISurveyQuestionRepository surveyQuestionRepository, 
             IProductRepository productRepository, ITaxRepository taxRepository, IInvoiceRepository invoiceRepository, 
-            IInvoiceDetailRepository invoiceDetailRepository,IEducationRepository educationRepository, 
-            IStripeService stripeService, WebApiUserService webApiUserService)
+            IInvoiceDetailRepository invoiceDetailRepository,IEducationRepository educationRepository,
+            IStripeService stripeService, WebApiUserService webApiUserService, ICompanyRepository companyRepository, IAdCampaignResponseRepository adcampaignResponseRepository)
         {
             this._adCampaignRepository = adCampaignRepository;
             this._languageRepository = languageRepository;
@@ -157,6 +158,8 @@ namespace SMD.Implementation.Services
             this._educationRepository = educationRepository;
             this.stripeService = stripeService;
             this.webApiUserService = webApiUserService;
+            this.companyRepository = companyRepository;
+            this._adcampaignResponseRepository = adcampaignResponseRepository;
         }
         
         /// <summary>
@@ -249,6 +252,7 @@ namespace SMD.Implementation.Services
         public void CreateCampaign(AdCampaign campaignModel)
         {
             campaignModel.UserId = _adCampaignRepository.LoggedInUserIdentity;
+            campaignModel.CompanyId = companyRepository.GetUserCompany(_adCampaignRepository.LoggedInUserIdentity);
             var user = UserManager.Users.Where(g => g.Id == _adCampaignRepository.LoggedInUserIdentity).SingleOrDefault();
             if (user != null)
                 campaignModel.CreatedBy = user.FullName;
@@ -311,7 +315,7 @@ namespace SMD.Implementation.Services
         /// </summary>
         public void UpdateCampaign(AdCampaign campaignModel)
         {
-            campaignModel.UserId = _adCampaignRepository.LoggedInUserIdentity;
+           // campaignModel.UserId = _adCampaignRepository.LoggedInUserIdentity;
             var user = UserManager.Users.Where(g => g.Id == _adCampaignRepository.LoggedInUserIdentity).SingleOrDefault();
             if (user != null)
                 campaignModel.CreatedBy = user.FullName;
@@ -582,6 +586,167 @@ namespace SMD.Implementation.Services
         {
             return _adCampaignRepository.Find(campaignId);
         }
+
+
+        public long CopyAddCampaigns(long CampaignId)
+        {
+            long NewCampaignID = 0;
+            AdCampaign source = _adCampaignRepository.GetAdCampaignById(CampaignId).FirstOrDefault();
+
+            // create new instance of add campaign
+            AdCampaign target = CreateNewCampaign();
+
+            // Clone
+            NewCampaignID = CloneCampaign(source, target);
+
+
+            return NewCampaignID;
+
+
+ 
+
+        }
+
+        /// <summary>
+        /// Creates New Item and assigns new generated code
+        /// </summary>
+        private AdCampaign CreateNewCampaign()
+        {
+            AdCampaign campaignTarget = _adCampaignRepository.Create();
+            _adCampaignRepository.Add(campaignTarget);
+
+            return campaignTarget;
+        }
+
+        /// <summary>
+        /// Creates Copy of Campaign
+        /// </summary>
+        private long CloneCampaign(AdCampaign source, AdCampaign target)
+        {
+            try
+            {
+                // Clone campaign
+                source.Clone(target);
+
+                // Clone campaign response
+                //CloneAdCampaignResponse(source, target);
+
+                // clone camapign target criterias
+                CloneAdCampaignTargetCriteria(source, target);
+
+
+                // Clone campaign target locations
+                CloneAdCampaignTargetLocation(source, target);
+
+                companyRepository.SaveChanges();
+
+                return target.CampaignId;
+
+
+
+
+
+
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+
+        ///// <summary>
+        ///// Copy campaign response
+        ///// </summary>
+        //public void CloneAdCampaignResponse(AdCampaign source, AdCampaign target)
+        //{
+
+        //    if (source.AdCampaignResponses == null)
+        //    {
+        //        return;
+        //    }
+
+        //    // Initialize List
+        //    if (target.AdCampaignResponses == null)
+        //    {
+        //        target.AdCampaignResponses = new List<AdCampaignResponse>();
+        //    }
+
+        //    foreach (AdCampaignResponse responses in source.AdCampaignResponses)
+        //    {
+        //        AdCampaignResponse targetResponse = _adcampaignResponseRepository.Create();
+        //        _adcampaignResponseRepository.Add(targetResponse);
+        //        targetResponse.CampaignId = target.CampaignId;
+        //        target.AdCampaignResponses.Add(targetResponse);
+        //        responses.Clone(targetResponse);
+
+
+
+        //    }
+
+
+        //}
+
+
+        /// <summary>
+        /// Copy campaign targets
+        /// </summary>
+        public void CloneAdCampaignTargetCriteria(AdCampaign source, AdCampaign target)
+        {
+
+            if (source.AdCampaignTargetCriterias == null)
+            {
+                return;
+            }
+
+            // Initialize List
+            if (target.AdCampaignTargetCriterias == null)
+            {
+                target.AdCampaignTargetCriterias = new List<AdCampaignTargetCriteria>();
+            }
+
+            foreach (AdCampaignTargetCriteria Criterias in source.AdCampaignTargetCriterias)
+            {
+                AdCampaignTargetCriteria targetCriteria = _adCampaignTargetCriteriaRepository.Create();
+                _adCampaignTargetCriteriaRepository.Add(targetCriteria);
+                targetCriteria.CampaignId = target.CampaignId;
+                target.AdCampaignTargetCriterias.Add(targetCriteria);
+                Criterias.Clone(targetCriteria);
+
+            }
+
+
+        }
+
+
+        public void CloneAdCampaignTargetLocation(AdCampaign source, AdCampaign target)
+        {
+
+            if (source.AdCampaignTargetLocations == null)
+            {
+                return;
+            }
+
+            // Initialize List
+            if (target.AdCampaignTargetLocations == null)
+            {
+                target.AdCampaignTargetLocations = new List<AdCampaignTargetLocation>();
+            }
+
+            foreach (AdCampaignTargetLocation location in source.AdCampaignTargetLocations)
+            {
+                AdCampaignTargetLocation targetLocation = _adCampaignTargetLocationRepository.Create();
+                _adCampaignTargetLocationRepository.Add(targetLocation);
+                targetLocation.CampaignId = target.CampaignId;
+                target.AdCampaignTargetLocations.Add(targetLocation);
+                location.Clone(targetLocation);
+
+            }
+
+
+        }
+
         #endregion
     }
 }

@@ -110,8 +110,13 @@ namespace SMD.MIS.ModelMappers
                 BuyItButtonLabel = source.BuyItButtonLabel,
                 BuyItImageUrl = source.BuyItImageUrl,
                 BuyItLine2 = source.BuyItLine2,
-                BuyItLine3 = source.BuyItLine3
-
+                BuyItLine3 = source.BuyItLine3,
+                AdViews = source.AdViews,
+                CompanyId = source.CompanyId,
+                CouponActualValue = source.CouponActualValue,
+                CouponQuantity = source.CouponQuantity,
+                CouponSwapValue = source.CouponSwapValue,
+                CouponTakenCount = source.CouponTakenCount
             };
 
 

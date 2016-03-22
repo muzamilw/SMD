@@ -43,7 +43,13 @@ namespace SMD.MIS.Areas.Api.ModelMappers
                        SqRightImagePercentage = source.SqRightImagePercentage,
                        AdvertisersLogoPath = source.AdvertisersLogoPath,
                        PqAnswers = source.PqAnswers != null ? source.PqAnswers.Select(pqa => pqa.CreateFromForProduct()).ToList() : 
-                       new List<ProfileQuestionAnswerView>()
+                       new List<ProfileQuestionAnswerView>(),
+                       BuyItButtonText = source.BuyItButtonText,
+                       BuyItImageUrl = source.BuyItImageUrl,
+                       BuyItLine1 = source.BuyItLine1,
+                       BuyItLine2 = source.BuyItLine2,
+                       BuyItLine3 = source.BuyItLine3,
+                       LandingPageUrl = source.LandingPageUrl
                    };
         }
 

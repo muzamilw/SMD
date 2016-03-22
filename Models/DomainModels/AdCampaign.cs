@@ -81,5 +81,94 @@ namespace SMD.Models.DomainModels
         public string VoucherImagePath { get; set; }
         [NotMapped]
         public string buyItImageBytes { get; set; }
+
+        [NotMapped]
+        public int AdViews { get; set; }
+
+
+        /// <summary>
+        /// Makes a copy of Campaign
+        /// </summary>
+        public void Clone(AdCampaign target)
+        {
+      
+            target.LanguageId = LanguageId;
+            target.UserId = UserId;
+            target.SmdCampaign = SmdCampaign;
+
+            target.CampaignName = CampaignName + "- Copy";
+            target.CampaignDescription = CampaignDescription;
+            target.Status = Status;
+
+
+            target.Archived = Archived;
+            target.Approved = Approved;
+            target.ApprovedBy = ApprovedBy;
+
+            target.ApprovalDateTime = ApprovalDateTime;
+            target.StartDateTime = StartDateTime;
+            target.EndDateTime = EndDateTime;
+
+            target.MaxBudget = MaxBudget;
+            target.Type = Type;
+            target.ClickRate = ClickRate;
+
+            target.SmdCredits = SmdCredits;
+            target.DisplayTitle = DisplayTitle;
+            target.Description = Description;
+
+            target.ImagePath = ImagePath;
+            target.LandingPageVideoLink = LandingPageVideoLink;
+            target.VerifyQuestion = VerifyQuestion;
+
+            target.Answer1 = Answer1;
+            target.Answer2 = Answer2;
+            target.Answer3 = Answer3;
+            target.CorrectAnswer = CorrectAnswer;
+
+            target.CreatedDateTime = CreatedDateTime;
+            target.CreatedBy = CreatedBy;
+            target.ModifiedDateTime = ModifiedDateTime;
+
+
+            target.ModifiedBy = ModifiedBy;
+            target.AgeRangeStart = AgeRangeStart;
+            target.AgeRangeEnd = AgeRangeEnd;
+
+            target.Gender = Gender;
+            target.RejectedReason = RejectedReason;
+            target.ProjectedReach = ProjectedReach;
+
+            target.ResultClicks = ResultClicks;
+            target.AmountSpent = AmountSpent;
+            target.RewardType = RewardType;
+
+            target.Voucher1Heading = Voucher1Heading;
+            target.Voucher1Description = Voucher1Description;
+            target.Voucher1Value = Voucher1Value;
+           
+
+            target.Voucher1ImagePath = Voucher1ImagePath;
+            target.Voucher2Heading = Voucher2Heading;
+            target.Voucher2Description = Voucher2Description;
+
+            target.Voucher2Value = Voucher2Value;
+            target.Voucher2ImagePath = Voucher2ImagePath;
+            target.VideoUrl = VideoUrl;
+
+            target.BuyItLine2 = BuyItLine2;
+            target.BuyItLine3 = BuyItLine3;
+
+
+            target.BuyItButtonLabel = BuyItButtonLabel;
+            target.BuyItImageUrl = BuyItImageUrl;
+            target.CompanyId = CompanyId;
+
+            target.CouponSwapValue = CouponSwapValue;
+            target.CouponActualValue = CouponActualValue;
+            target.CouponTakenCount = CouponTakenCount;
+            target.CouponQuantity = CouponQuantity;
+         
+        }
     }
 }

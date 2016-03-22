@@ -5,7 +5,7 @@
 }
 
 <link href="~/Content/metroUI/css/metro.css" rel="stylesheet" />
-
+<link href="~/Content/CSS/custom.css" rel="stylesheet" />
 <script src="~/Content/metroUI/js/metro.js"></script>
 <script src="~/Content/metroUI/js/prettify/run_prettify.js"></script>
 <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
@@ -18,92 +18,150 @@ else
     adminClasses = "displayNone";
 }
 <div class="row" id="adsBinding">
-    <div class="col-lg-12" data-bind="visible: !$root.isEditorVisible()">
+    <div class="col-lg-12" data-bind="visible: $root.isListVisible()">
         <div class="row">
             <div class="col-md-11" id="topArea" style=" margin-left: 4%;">
-              
-                <div class="social-box-wrapper">
+
+                <div style="margin-bottom:15px;">
                     <div class="row">
 
-                        <div class="icon-box pull-right">
+                        @*<div class="icon-box pull-right">
 
-                            <p class="graphControls">
-                                <span class="fc-button fc-button-month fc-state-default fc-corner-left fc-state-active">Daily</span>
-                                <span class="fc-button fc-button-agendaWeek fc-state-default"  >3 months</span>
-                                <span class="fc-button fc-button-agendaDay fc-state-default fc-corner-right" >6 months</span>
-                                <span class="fc-button fc-button-agendaDay fc-state-default fc-corner-right" >1 year</span>
-                                <span class="fc-button fc-button-agendaDay fc-state-lbl fc-corner-right">01 Dec - 07 Dec</span>
-                            </p>
-                        </div>
-                    </div>
+                                <p class="graphControls">
+                                    <span class="fc-button fc-button-month fc-state-default fc-corner-left fc-state-active">Daily</span>
+                                    <span class="fc-button fc-button-agendaWeek fc-state-default"  >3 months</span>
+                                    <span class="fc-button fc-button-agendaDay fc-state-default fc-corner-right" >6 months</span>
+                                    <span class="fc-button fc-button-agendaDay fc-state-default fc-corner-right" >1 year</span>
+                                    <span class="fc-button fc-button-agendaDay fc-state-lbl fc-corner-right">01 Dec - 07 Dec</span>
+                                </p>
+                            </div>*@
+                        <div class="col-sm-4" style="float:left;">
 
-                    <div class="social-box col-lg-3 col-sm-6 col-xs-6  estimates" style="cursor:pointer;" title="Pending Estimates">
 
-                        <div class="socialCampaignLeft">
-                            <span class="social-count">Spend</span><br />
-                            <span class="social-action">£1024.00</span><br />
-                            <span class="social-count font10">All time spend</span>
                         </div>
-                        <div class="socialCampaignRight">
-                            <span class="social-count">Ads delivered</span><br />
-                            <span class="social-action">34065</span><br />
-                            <span class="social-count font10">average PPC 3.6p </span>
-                        </div>
-                    </div>
 
-                    <div class="social-box col-lg-4 col-sm-6 col-xs-6  facebook" style="cursor:pointer;background-color:#8284FB !important" title="Pending Orders">
+                        <div class="col-sm-4 paddingOuterdiv" style="float:left;">
 
-                        <div class="socialCampaignLeft">
-                            <span class="social-count">Branding views</span><br />
-                            <span class="social-action">405</span><br />
-                            <span class="social-count font10">Games played</span>
-                        </div>
-                        <div class="socialCampaignLeft">
-                            <span class="social-count"> &nbsp;&nbsp;</span><br />
-                            <span class="social-action">40</span><br />
-                            <span class="social-count font10">Videos played</span>
-                        </div>
-                        <div class="socialCampaignRight">
-                            <span class="social-count">&nbsp;&nbsp;</span><br />
-                            <span class="social-action">440</span><br />
-                            <span class="social-count font10">Leaflets viewed</span>
-                        </div>
-                    </div>
 
-                    <div class="social-box col-lg-3 col-sm-6 col-xs-6  twitter" style="cursor:pointer; background-color:#9093FB !important" title="In Production">
 
-                        <div class="socialCampaignLeft">
-                            <span class="social-count">Conversions</span><br />
-                            <span class="social-action">44</span><br />
-                            <span class="social-count font10">Landing page hits</span>
+                            <button class="btn  btn-success btnAdsCampaign" style="float:left; width:33%;height:66px;margin-right:15px; white-space:normal;" id="btnSubmitForApproval" data-bind="click:$root.ShowAdCampaigns">Ads Campaigns</button>
+
+
+                            <button class="btn  btn-warning" style="float:left;width:34%;height:66px;white-space:normal;" data-bind="click:$root.ShowCouponPromotions">Coupon Promotions</button>
+
+
+
+
+
+
                         </div>
-                        <div class="socialCampaignLeft">
-                            <span class="social-count">&nbsp;&nbsp;</span><br />
-                            <span class="social-action">1999</span><br />
-                            <span class="social-count font10">Vouchers issued </span>
+
+                        <div class="col-sm-4">
+
                         </div>
 
                     </div>
+                    <div class="row">
 
-                    <div class="social-box col-lg-2 col-sm-6 col-xs-6  google" style="cursor:pointer; background-color:#C19AFC !important" title="Completed">
 
-                        <div class="socialCampaignLeft">
-                            <span class="social-count">Paid out</span><br />
-                            <span class="social-action">£512.00</span><br />
-                            <span class="social-count font10">to happy clicks</span>
+                        <div class="col-sm-3" style="float: left;">
+
+                            <span style="font-size: 24px;" data-bind="text:$root.MainHeading"></span>
                         </div>
 
+                        <div class="col-sm-3">
+
+
+                        </div>
+                        <div class="col-sm-3">
+
+
+
+                        </div>
+                        <div class="col-sm-3">
+
+                            <div class="btn-group" style="float:right;">
+                                <button class="btn ctCampaign" data-bind="click:$root.addNewCampaign,visible:!$root.isDisplayCouponsAds()">
+                                    Create New Campaign
+                                </button>
+                                <button class="btn ctCampaign" data-bind="click:$root.addNewCampaign,visible:$root.isDisplayCouponsAds()">
+                                    Create Coupon
+                                </button>
+                            </div>
+
+                        </div>
+
+
                     </div>
+
+                    @*<div class="social-box col-lg-3 col-sm-6 col-xs-6  estimates" style="cursor:pointer;" title="Pending Estimates">
+
+                            <div class="socialCampaignLeft">
+                                <span class="social-count">Spend</span><br />
+                                <span class="social-action">£1024.00</span><br />
+                                <span class="social-count font10">All time spend</span>
+                            </div>
+                            <div class="socialCampaignRight">
+                                <span class="social-count">Ads delivered</span><br />
+                                <span class="social-action">34065</span><br />
+                                <span class="social-count font10">average PPC 3.6p </span>
+                            </div>
+                        </div>
+
+                        <div class="social-box col-lg-4 col-sm-6 col-xs-6  facebook" style="cursor:pointer;background-color:#8284FB !important" title="Pending Orders">
+
+                            <div class="socialCampaignLeft">
+                                <span class="social-count">Branding views</span><br />
+                                <span class="social-action">405</span><br />
+                                <span class="social-count font10">Games played</span>
+                            </div>
+                            <div class="socialCampaignLeft">
+                                <span class="social-count"> &nbsp;&nbsp;</span><br />
+                                <span class="social-action">40</span><br />
+                                <span class="social-count font10">Videos played</span>
+                            </div>
+                            <div class="socialCampaignRight">
+                                <span class="social-count">&nbsp;&nbsp;</span><br />
+                                <span class="social-action">440</span><br />
+                                <span class="social-count font10">Leaflets viewed</span>
+                            </div>
+                        </div>
+
+                        <div class="social-box col-lg-3 col-sm-6 col-xs-6  twitter" style="cursor:pointer; background-color:#9093FB !important" title="In Production">
+
+                            <div class="socialCampaignLeft">
+                                <span class="social-count">Conversions</span><br />
+                                <span class="social-action">44</span><br />
+                                <span class="social-count font10">Landing page hits</span>
+                            </div>
+                            <div class="socialCampaignLeft">
+                                <span class="social-count">&nbsp;&nbsp;</span><br />
+                                <span class="social-action">1999</span><br />
+                                <span class="social-count font10">Vouchers issued </span>
+                            </div>
+
+                        </div>
+
+                        <div class="social-box col-lg-2 col-sm-6 col-xs-6  google" style="cursor:pointer; background-color:#C19AFC !important" title="Completed">
+
+                            <div class="socialCampaignLeft">
+                                <span class="social-count">Paid out</span><br />
+                                <span class="social-action">£512.00</span><br />
+                                <span class="social-count font10">to happy clicks</span>
+                            </div>
+
+                        </div>*@
 
                 </div>
-              
-            </div>
-            <div style="    border-bottom: 2px solid #3DD2B5; margin-bottom: 20px;" class="col-md-12">
 
             </div>
+            @*<div style="    border-bottom: 2px solid #3DD2B5; margin-bottom: 20px;" class="col-md-12">
+
+                </div>*@
         </div>
         <div class="row">
             <div class="col-lg-11" style=" margin-left: 4%;">
+
                 <!-- ko template: { name: 'filterTemplate' } -->
                 <!-- /ko -->
                 <div data-bind="visible: $root.campaignGridContent().length > 0">
@@ -121,13 +179,16 @@ else
                                             <th class="col-sm-3"><span>Name</span></th>
 
                                             @*<th class="col-sm-1"><span>Results</span></th>
-                                        <th class="col-sm-1"><span>Reach</span></th>
-                                        <th class="col-sm-1"><span>Cost</span></th>
-                                        <th class="col-sm-1"><span>Budget</span></th>*@
-                                            <th class="col-sm-2"><span>Start Date</span></th>
-                                            <th class="col-sm-2"><span>End Date</span></th>
+                                                <th class="col-sm-1"><span>Reach</span></th>
+                                                <th class="col-sm-1"><span>Cost</span></th>
+                                                <th class="col-sm-1"><span>Budget</span></th>*@
+                                            <th class="col-sm-2"><span></span></th>
+                                            <th class="col-sm-2">
+                                                <span data-bind="visible:!$root.isDisplayCouponsAds()">Views</span>
+                                                <span data-bind="visible:$root.isDisplayCouponsAds()">Taken Count</span>
+                                            </th>
                                             <th class="col-sm-1"><span>Status</span></th>
-                                            <th class="col-sm-2"><span class="@userClasses">Spent</span><span class="@adminClasses">Created by</span></th>
+                                            @*<th class="col-sm-2"><span class="@userClasses">Spent</span><span class="@adminClasses">Created by</span></th>*@
 
                                             <th class="col-sm-1">&nbsp;</th>
                                         </tr>
@@ -150,14 +211,42 @@ else
                     </div>
                 </div>
                 <div data-bind="visible: $root.campaignGridContent().length == 0" style="display:none;">
-                    <div class="main-box no-header clearfix" style="padding:20px;">
+                    <div class="main-box no-header clearfix" style="padding:20px;" data-bind="visible:!isDisplayCouponsAds()">
                         No campaigns found.
+                    </div>
+                    <div class="main-box no-header clearfix" style="padding:20px;" data-bind="visible:isDisplayCouponsAds()">
+                        No coupon found.
                     </div>
                 </div>
             </div>
 
         </div>
+        <div class="row">
 
+
+            <div class="col-lg-3 col-sm-3" style="float:left;">
+
+
+            </div>
+            <div class="col-lg-6 col-sm-6" style="float:left;padding-left:50px;">
+
+                <button class="btn  btn-success btnAdsCampaign" style="width:24%;float:left;padding:0px;" id="btnSubmitForApproval" data-bind="click:$root.ShowCouponPromotions">Coupons</button>
+                <button class="btn  btn-success btnAdsCampaign @adminClasses" style="width:24%;float:left;padding:0px;" id="btnSubmitForApproval" data-bind="click:gotoManageUsers">Manage Users</button>
+                <button class="btn  btn-success btnAdsCampaign" style="width:24%;float:left;padding:0px;" id="btnSubmitForApproval" data-bind="click:gotoProfile">Marketing Info</button>
+            </div>
+
+
+            <div class="col-lg-2 col-sm-2" style="float:left;">
+
+
+            </div>
+
+
+
+
+
+
+        </div>
 
     </div>
     @{
@@ -181,8 +270,26 @@ else
                 <span class="">&nbsp;</span>
             </td>
             <td class="col-sm-1"><span class="" data-bind="text: MaxBudget"></span></td>*@
-        <td class="col-sm-2"><span class="" data-bind="dateString: StartDateTime"></span></td>
-        <td class="col-sm-2"><span class="" data-bind="dateString: EndDateTime"></span></td>
+        <td class="col-sm-2">
+  
+            <!-- ko if: Type() == 1-->
+            <span class="">Video</span>
+            <!-- /ko -->
+            <!-- ko if: Type() == 2-->
+            <span class="">Link</span>
+            <!-- /ko -->
+            <!-- ko if: Type() == 3-->
+            <span class="">Upload Image</span>
+            <!-- /ko -->
+            <!-- ko if: Type() == 4-->
+            <span class="">Game</span>
+            <!-- /ko -->
+        </td>
+        <td class="col-sm-2">
+            <span class="" data-bind=""></span>
+            <span data-bind="visible:!$root.isDisplayCouponsAds(),text: AdViews"></span>
+            <span data-bind="visible:$root.isDisplayCouponsAds(),text: CouponTakenCount"></span>
+        </td>
         <td class="col-sm-2">
             <!-- ko if: Status() == 1-->
             <div class="text-left statusbg" style="background:#6D6EFA;    width: 47px;">
@@ -220,13 +327,31 @@ else
                 </span>
             </div>
             <!-- /ko -->
+            <!-- ko if: Status() == 7-->
+            <div class="text-left statusbg" style="background:red;">
+                <span data-bind="text: StatusValue">
+                </span>
+            </div>
+            <!-- /ko -->
+            <!-- ko if: Status() == 8-->
+            <div class="text-left statusbg" style="background:#fc0;">
+                <span data-bind="text: StatusValue">
+                </span>
+            </div>
+            <!-- /ko -->
+            <!-- ko if: Status() == 9-->
+            <div class="text-left statusbg" style="background:red;">
+                <span data-bind="text: StatusValue">
+                </span>
+            </div>
+            <!-- /ko -->
         </td>
         <td class="col-sm-1"><span class="@userClasses" data-bind="text: AmountSpent"></span><span class="@adminClasses" data-bind="text: CreatedBy"></span></td>
 
 
         <td class="col-sm-2">
 
-            <!-- ko if: Status() == 1 || Status() == 2|| Status() == 3 || Status() == 4-->
+            <!-- ko if: Status() == 1 ||  Status() == 3 || Status() == 4 || Status() == 7|| Status() == 9-->
             <a class="table-link" style="float: right">
                 <span class="fa-stack">
                     <i class="fa fa-square fa-stack-2x"></i>
@@ -242,11 +367,12 @@ else
 </script>
 @* Filter Template *@
 <script id="filterTemplate" type="text/html">
-    <div class="filter-body" id="filter">
-        <div class="col-lg-3">
-            <span style="    font-size: 24px;">My Ad Campaigns</span>
-        </div>
-        <div class="col-lg-3 text-left">
+    <div class="filter-body" id="filter" data-bind="visible:!isDisplayCouponsAds()">
+        @*<div class="col-sm-3">
+                <span style="font-size: 24px;">My Ad Campaigns</span>
+            </div>*@
+
+        <div class="col-sm-4" style="float:left;">
             <form data-bind="submit: $root.getCampaignByFilter">
                 <div class="filter-block" style="margin-right: -10px">
                     <div class="form-group ">
@@ -257,12 +383,19 @@ else
                 <div class="clearfix"></div>
             </form>
         </div>
-        <div class="col-lg-6 text-right">
-            <div class="btn-group">
-                <button class="btn ctCampaign" data-bind="click:$root.addNewCampaign">
-                    Create Campaign
-                </button>
-            </div>
+        <div class="col-sm-5">
+
+        </div>
+        <div class="col-sm-3" style="float:right;margin-top:2px;">
+            @*<div class="btn-group">
+                    <button class="btn ctCampaign" data-bind="click:$root.addNewCampaign">
+                        Create Campaign
+                    </button>
+                </div>*@
+            <select class="form-control" style="float:right;height:36px;">
+                <option value="0">All Value</option>
+
+            </select>
 
         </div>
         <div class="clearfix">

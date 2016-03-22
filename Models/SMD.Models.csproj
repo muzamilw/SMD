@@ -176,6 +176,8 @@
     </Compile>
     <Compile Include="Common\CampaignGridModel.cs" />
     <Compile Include="RequestModels\AdCampaignSearchRequest.cs" />
+    <Compile Include="RequestModels\GetUserRequestModel.cs" />
+    <Compile Include="RequestModels\InviteUserEmail.cs" />
     <Compile Include="RequestModels\UserBalanceInquiryRequest.cs" />
     <Compile Include="RequestModels\ProductActionRequest.cs" />
     <Compile Include="RequestModels\ApproveSurveyRequest.cs" />

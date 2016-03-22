@@ -9,6 +9,7 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
+using SMD.Models.IdentityModels;
 
 namespace SMD.MIS.Areas.Api.Controllers
 {
@@ -41,16 +42,34 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// <summary>
         /// Get User's Profile 
         /// </summary>
-        public WebApiUser Get()
+        //public WebApiUser Get()
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
+        //    }
+        //    var response=  webApiUserService.GetLoggedInUser();
+        //    return  response.CreateFrom();
+        //}
+
+        /// <summary>
+        /// Get User's Profile 
+        /// </summary>
+        public WebApiUser Get([FromUri] GetUserRequestModel request)
         {
             if (!ModelState.IsValid)
             {
                 throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
             }
-            var response=  webApiUserService.GetLoggedInUser();
-            return  response.CreateFrom();
-        }
+           
+           var response = webApiUserService.GetLoggedInUser(request.UserId);
+           WebApiUser apiuser =  response.CreateFrom();
 
+           return apiuser;
+           
+           
+          
+        }
 
         /// <summary>
         /// Update User Profile

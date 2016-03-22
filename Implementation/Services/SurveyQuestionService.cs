@@ -38,6 +38,7 @@ namespace SMD.Implementation.Services
         private readonly WebApiUserService webApiUserService;
         private readonly IEducationRepository _educationRepository;
         private readonly IIndustryRepository _industryRepository;
+        private readonly ICompanyRepository _companyRepository;
         private ApplicationUserManager UserManager
         {
             get { return HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
@@ -136,7 +137,7 @@ namespace SMD.Implementation.Services
         /// <summary>
         ///  Constructor
         /// </summary>
-        public SurveyQuestionService(ISurveyQuestionRepository _surveyQuestionRepository, ICountryRepository _countryRepository, ILanguageRepository _languageRepository, IEmailManagerService emailManagerService, ISurveyQuestionTargetCriteriaRepository _surveyQuestionTargtCriteriaRepository, ISurveyQuestionTargetLocationRepository _surveyQuestionTargetLocationRepository, IProductRepository productRepository, ITaxRepository taxRepository, IInvoiceRepository invoiceRepository, IInvoiceDetailRepository invoiceDetailRepository, IStripeService stripeService, WebApiUserService webApiUserService, IEducationRepository educationRepository, IIndustryRepository industryRepository)
+        public SurveyQuestionService(ISurveyQuestionRepository _surveyQuestionRepository, ICountryRepository _countryRepository, ILanguageRepository _languageRepository, IEmailManagerService emailManagerService, ISurveyQuestionTargetCriteriaRepository _surveyQuestionTargtCriteriaRepository, ISurveyQuestionTargetLocationRepository _surveyQuestionTargetLocationRepository, IProductRepository productRepository, ITaxRepository taxRepository, IInvoiceRepository invoiceRepository, IInvoiceDetailRepository invoiceDetailRepository, IStripeService stripeService, WebApiUserService webApiUserService, IEducationRepository educationRepository, IIndustryRepository industryRepository, ICompanyRepository companyRepository)
         {
             this.surveyQuestionRepository = _surveyQuestionRepository;
             this.languageRepository = _languageRepository;
@@ -152,6 +153,7 @@ namespace SMD.Implementation.Services
             this.surveyQuestionTargtCriteriaRepository = _surveyQuestionTargtCriteriaRepository;
             this._educationRepository = educationRepository;
             this._industryRepository = industryRepository;
+            this._companyRepository = companyRepository;
         }
 
         #endregion
@@ -250,6 +252,7 @@ namespace SMD.Implementation.Services
             try
             {
                 survey.UserId = surveyQuestionRepository.LoggedInUserIdentity;
+                survey.CompanyId = _companyRepository.GetUserCompany(surveyQuestionRepository.LoggedInUserIdentity);
                 survey.Type = (int)SurveyQuestionType.Advertiser;
                 survey.StartDate = survey.StartDate.Value.Subtract(surveyQuestionRepository.UserTimezoneOffSet);
                 survey.EndDate = survey.EndDate.Value.Subtract(surveyQuestionRepository.UserTimezoneOffSet);
@@ -277,6 +280,7 @@ namespace SMD.Implementation.Services
             {
                 survey.ModifiedDate = DateTime.Now;
                 survey.ModifiedBy = surveyQuestionRepository.LoggedInUserIdentity;
+             //   survey.CompanyId = _companyRepository.GetUserCompany(surveyQuestionRepository.LoggedInUserIdentity);
                 survey.StartDate = survey.StartDate.Value.Subtract(surveyQuestionRepository.UserTimezoneOffSet);
                 survey.EndDate = survey.EndDate.Value.Subtract(surveyQuestionRepository.UserTimezoneOffSet);
                 surveyQuestionRepository.Update(survey);

@@ -24,6 +24,8 @@
     <div class="input-group">
         <span class="input-group-addon" tabindex="-1"><i class="fa fa-key"></i></span>
         @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", placeholder = "Confirm Password" })
+
+        <input type="hidden" name="hiddenFieldcompany" id="hdnCompanyId" value="@Model.CompanyId" />
     </div>
     <div class="row">
         <div class="col-xs-12">
@@ -41,3 +43,29 @@
 <div class="row">
     @Html.Partial("~/Views/Shared/_ExternalLoginPartial.cshtml")
 </div>
+
+   
+<script src="~/Scripts/jquery-2.1.0.js"></script>
+    <script>
+        function getParameter(url, param) {
+            if (url.indexOf('?') == -1)
+                return 1;
+            url = url.split('?');
+            var pattern = new RegExp(param + '=(.*?)(;|&|$)', 'gi');
+            return url[1].split(pattern)[1];
+        }
+
+        $(document).ready(function () {
+            var value = getParameter(window.location.href, "CompanyId")
+            
+            $("#hdnCompanyId").val(value);
+
+        });
+
+
+    </script>
+
+
+
+
+

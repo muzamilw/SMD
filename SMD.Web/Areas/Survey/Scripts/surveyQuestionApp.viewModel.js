@@ -73,7 +73,7 @@ define("surveyQuestionApp/surveyQuestionApp.viewModel",
                                 isEditorVisible(false);
                             },
                             error: function () {
-                                toastr.error("Failed to delete!");
+                                toastr.error("Failed to update!");
                             }
                         });
                     },
@@ -92,6 +92,10 @@ define("surveyQuestionApp/surveyQuestionApp.viewModel",
                         }
                         onSaveQuestion();
                     },
+                     onApproveQuestion = function () {
+                         selectedQuestion().isApproved(true);
+                         onSaveQuestion();
+                     },
                     // Initialize the view model
                     initialize = function (specifiedView) {
                         view = specifiedView;
@@ -114,7 +118,8 @@ define("surveyQuestionApp/surveyQuestionApp.viewModel",
                     selectedQuestion: selectedQuestion,
                     onSaveQuestion: onSaveQuestion,
                     hasChangesOnQuestion: hasChangesOnQuestion,
-                    onRejectQuestion: onRejectQuestion
+                    onRejectQuestion: onRejectQuestion,
+                    onApproveQuestion: onApproveQuestion
                 };
             })()
         };

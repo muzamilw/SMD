@@ -50,9 +50,12 @@ namespace SMD.MIS.Areas.Api.ModelMappers
                        GoogleVallet = source.Company.GoogleWalletCustomerId,
                        PayPal = source.Company.PaypalCustomerId,
                        AccountBalance = CreateFromForAccount(source),
-                       CityName = source.CityName,
-                       CountryName = source.CountryName,
-                       CompanyId = source.Company.CompanyId
+                       CityName = source.Company.City.CityName,
+                       CountryName = source.Company.Country.CountryName,
+                       CompanyId = source.Company.CompanyId,
+                       AuthenticationToken = source.AuthenticationToken,
+                       Password = source.PasswordHash,
+                       RoleId = source.Roles.Select(c => c.Id).FirstOrDefault()
                    };
 
             return user;
@@ -99,8 +102,8 @@ namespace SMD.MIS.Areas.Api.ModelMappers
             {
                 Status = source.Status,
                 Message = source.Message,
-                User = source.User != null ? source.User.CreateFrom() : null,
-                AuthenticationToken = Guid.NewGuid()
+                User = source.User != null ? source.User.CreateFrom() : null//,
+                //AuthenticationToken = Guid.NewGuid()
             };
         }
 
@@ -120,6 +123,7 @@ namespace SMD.MIS.Areas.Api.ModelMappers
                 CountryDropdowns = source.Countries.Select(country => country.CreateFrom()),
                 IndusteryDropdowns = source.Industries.Select(industery => industery.CreateForDd()),
                 EducationDropdowns = source.Educations.Select(edu => edu.CreateFromDd()),
+                UserRoles = source.UserRoles.Select(role => role.CreateFromDd()),
                 TimeZoneDropDowns = timeZones
             };
         }

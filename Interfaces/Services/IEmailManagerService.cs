@@ -60,5 +60,7 @@ namespace SMD.Interfaces.Services
         ///Send Email when Payout scheduler run
         /// </summary>
         Task SendPayOutRoutineEmail(string aspnetUserId);
+
+        Task SendEmailToInviteUser(string email);
     }
 }

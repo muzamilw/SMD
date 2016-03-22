@@ -4958,3 +4958,238 @@ background: url(/Images/ads.png);
     margin: auto;
     background-repeat: no-repeat;
 }
+
+.padding23
+{
+    padding:23px;
+}
+.font16
+{
+   font-size:16px;
+}
+.heading-style {
+   font-size: 23px;
+   padding-bottom: 15px;
+
+    color: #3DD2B5;
+}
+
+.FloatRight{
+   float:right;
+}
+.padding13{
+    padding:13px;
+}
+.flyerButtonStyle{
+        background-color: #3DD2B5;
+     border-color: #3DD2B5;
+}
+.changepasswordTop{
+    
+    margin-top: -18px;
+
+}
+
+@media (min-width:320px){
+.floatNone{
+    float:none !important;
+
+}
+.margin-Top-0
+{
+    margin-top: 5px !important;
+}
+.display-Mobile
+{
+   display:none !important;
+}
+.paddingOuterdiv{
+    padding-left:64px !important;
+}
+.ButtonWidth{
+
+}
+.SurvyButtons
+{
+        display: inline-block;
+    float: left;
+    float: left !important;
+    width: 44%;
+}
+.SurvyDescriptionMargin{
+
+}
+.loginMenu{
+    left:-203px !important;
+
+}
+.manageUserHeading{
+    margin-left:13px;
+}
+.inviteButtonStyle{
+    float:right;
+    margin-right:0px;
+    margin-bottom:10px;
+}
+}
+@media(min-width:481px){
+.floatNone{
+    float:none !important;
+}
+.margin-Top-0
+{
+    margin-top: 5px !important;
+}
+.display-Mobile
+{
+   display:none !important;
+}
+.paddingOuterdiv{
+    padding-left:64px !important;
+}
+.ButtonWidth{
+
+}
+.SurvyButtons
+{
+        display: inline-block;
+    float: left;
+    float: left !important;
+    width: 44%;
+}
+.SurvyDescriptionMargin{
+
+}
+.loginMenu{
+    left:-203px !important;
+
+}
+.manageUserHeading{
+    margin-left:13px;
+}
+.inviteButtonStyle{
+    float:right;
+    margin-right:0px;
+    margin-bottom:10px;
+}
+
+}
+@media(min-width:641px){
+.floatNone{
+    float:none !important;
+}
+.margin-Top-0
+{
+    margin-top: 5px !important;
+}
+.display-Mobile
+{
+   display:none !important;
+}
+.floatLeft{
+    float:none !important;
+}
+.paddingOuterdiv{
+    padding-left:64px !important;
+}
+.ButtonWidth{
+
+}
+.SurvyButtons
+{
+        display: inline-block;
+   width:25%;
+}
+.SurvyDescriptionMargin{
+
+}
+.loginMenu{
+    left:0px !important;
+
+}
+.manageUserHeading{
+    margin-left:13px;
+}
+.inviteButtonStyle{
+    float:right;
+    margin-right:0px;
+    margin-bottom:10px;
+}
+
+}
+@media(min-width:996px){
+.floatNone{
+    float:right !important;
+}
+.margin-Top-0
+{
+    margin-top: 10px !important;
+}
+.display-Mobile
+{
+   display:block !important;
+}
+.paddingOuterdiv{
+    padding-left:30px !important;
+}
+.ButtonWidth{
+    width: 50% !important;
+}
+.SurvyButtons
+{
+     display: inline-block;
+   width:15%;
+}
+.SurvyDescriptionMargin{
+     margin-left:27px !important;
+}
+.loginMenu{
+    left:0px !important;
+}
+.manageUserHeading{
+    margin-left:43px;
+}
+.inviteButtonStyle{
+    float:right;
+    margin-right:57px;
+    margin-bottom:10px;
+}
+}
+@media(min-width:1025px){
+.floatNone{
+    float:right !important;
+}
+.margin-Top-0
+{
+    margin-top: 10px !important;
+}
+.display-Mobile
+{
+   display:block !important;
+}
+.paddingOuterdiv{
+    padding-left:30px !important;
+}
+.ButtonWidth{
+    width: 50% !important;
+}
+.SurvyButtons
+{
+        display: inline-block;
+        width:15%;
+}
+.SurvyDescriptionMargin{
+    margin-left:27px !important;
+}
+.loginMenu{
+     left:0px !important;
+}
+.manageUserHeading{
+    margin-left:43px;
+}
+.inviteButtonStyle{
+    float:right;
+    margin-right:57px;
+    margin-bottom:10px;
+}
+}

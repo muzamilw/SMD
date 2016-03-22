@@ -1,6 +1,7 @@
 ﻿using Microsoft.Practices.Unity;
 using SMD.Interfaces.Repository;
 using SMD.Models.DomainModels;
+using SMD.Models.IdentityModels;
 using SMD.Models.RequestModels;
 using SMD.Repository.BaseRepository;
 using System;
@@ -63,17 +64,27 @@ namespace SMD.Repository.Repositories
             }
             return false;
         }
-        public bool createCompany(string userId, string email, string fullname)
+        public bool createCompany(string userId, string email, string fullname, string guid,int companyid)
         {
-            Company company = new Company();
-            company.ReplyEmail = email;
-            company.CompanyName = fullname;
-            db.Companies.Add(company);
-            db.SaveChanges();
+            int CompanyId = 0;
+            if(companyid == 0)
+            {
+                Company company = new Company();
+                company.ReplyEmail = email;
+                company.CompanyName = fullname;
+                db.Companies.Add(company);
+                db.SaveChanges();
+                CompanyId = company.CompanyId;
+            }
+            else
+            {
+                CompanyId = companyid;
+            }
             var user = db.Users.Where(g => g.Id == userId).SingleOrDefault();
             if (user != null)
             {
-                user.CompanyId = company.CompanyId;
+                user.CompanyId = CompanyId;
+                user.AuthenticationToken = guid;
                 db.SaveChanges();
             }
             return true;
@@ -97,6 +108,11 @@ namespace SMD.Repository.Repositories
                 return true;
             }
             return false;
+        }
+        public User getUserBasedOnAuthenticationToken(string token)
+        {
+            return db.Users.Where(g => g.AuthenticationToken == token).SingleOrDefault();
+            
         }
         #endregion
     }
