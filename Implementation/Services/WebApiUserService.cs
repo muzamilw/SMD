@@ -49,6 +49,7 @@ namespace SMD.Implementation.Services
         private readonly IAdCampaignResponseRepository adCampaignResponseRepository;
         private readonly ISurveyQuestionResponseRepository surveyQuestionResponseRepository;
         private readonly ICompanyRepository companyRepository;
+        private readonly IManageUserRepository manageUserRepository;
         private ApplicationUserManager UserManager
         {
             get { return HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
@@ -661,7 +662,7 @@ namespace SMD.Implementation.Services
             ITaxRepository taxRepository, IProfileQuestionUserAnswerService profileQuestionAnswerService,
             ICountryRepository countryRepository, IIndustryRepository industryRepository,
             IProfileQuestionService profileQuestionService, IAdCampaignResponseRepository adCampaignResponseRepository,
-            ISurveyQuestionResponseRepository surveyQuestionResponseRepository, IEducationRepository educationRepository, ICityRepository cityRepository, ICompanyRepository companyRepository)
+            ISurveyQuestionResponseRepository surveyQuestionResponseRepository, IEducationRepository educationRepository, ICityRepository cityRepository, ICompanyRepository companyRepository, IManageUserRepository manageUserRepository)
         {
             if (emailManagerService == null)
             {
@@ -726,6 +727,7 @@ namespace SMD.Implementation.Services
             this.educationRepository = educationRepository;
             this.cityRepository = cityRepository;
             this.companyRepository = companyRepository;
+            this.manageUserRepository = manageUserRepository;
         }
 
 
@@ -1031,6 +1033,7 @@ namespace SMD.Implementation.Services
                 request.CityId = cityRepository.GetCityId(request.City);
             }
             // Update User
+          
             user.Update(request);
             //update company
             companyRepository.updateCompany(request);
@@ -1038,6 +1041,11 @@ namespace SMD.Implementation.Services
            await UserManager.UpdateAsync(user);
            if (request.ProfileImageBytes != null)
                await UpdateProfileImage(request);
+
+            if(!string.IsNullOrEmpty(request.RoleId))
+            {
+                manageUserRepository.UpdateRoles(request.RoleId,request);
+            }
 
             return new BaseApiResponse
             {
@@ -1075,9 +1083,18 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Get Logged-In User profile 
         /// </summary>
-        public User GetLoggedInUser()
+        public User GetLoggedInUser(string userid)
         {
-            User user =  UserManager.FindById(productRepository.LoggedInUserIdentity);
+            User user = null;
+            if(userid != "0")
+            {
+                user = UserManager.FindById(userid);
+            }
+            else
+            {
+                user = UserManager.FindById(productRepository.LoggedInUserIdentity);
+            }
+           
             if (user == null)
             {
                 throw new SMDException(LanguageResources.WebApiUserService_InvalidUserId);
@@ -1125,7 +1142,7 @@ namespace SMD.Implementation.Services
             {
                 throw new InvalidOperationException(string.Format("Failed to add user to role {0}", Roles.User));
             }
-            companyRepository.createCompany(user.Id, request.Email, request.FullName,Guid.NewGuid().ToString());
+            companyRepository.createCompany(user.Id, request.Email, request.FullName,Guid.NewGuid().ToString(),0);
             var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
             var callbackUrl = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority +
                               "/Api_Mobile/Register/Confirm/?UserId=" + user.Id + "&Code=" + HttpUtility.UrlEncode(code);
@@ -1196,7 +1213,7 @@ namespace SMD.Implementation.Services
                 else
                 {
                     user.AuthenticationToken = Guid.NewGuid().ToString();
-                    companyRepository.createCompany(user.Id, request.Email, request.FullName, user.AuthenticationToken);
+                    companyRepository.createCompany(user.Id, request.Email, request.FullName, user.AuthenticationToken,0);
                     
                 }
                 UserLogin userLoginInfo = user.UserLogins.FirstOrDefault(
@@ -1368,7 +1385,8 @@ namespace SMD.Implementation.Services
             {
                Countries = countryRepository.GetAllCountries().ToList(),
                Industries = industryRepository.GetAll().ToList(),
-               Educations = educationRepository.GetAllEducations().ToList()
+               Educations = educationRepository.GetAllEducations().ToList(),
+               UserRoles = manageUserRepository.getUserRoles().ToList()
             };
         }
         public int generateAndSmsCode(string userId)
@@ -1390,8 +1408,16 @@ namespace SMD.Implementation.Services
         {
           return  companyRepository.getUserBasedOnAuthenticationToken(token);
         }
+
+       
+
         #endregion
 
+        public void InviteUser()
+        {
+
+        }
+       
         #endregion
     }
 }

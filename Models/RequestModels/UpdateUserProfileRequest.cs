@@ -187,5 +187,9 @@ namespace SMD.Models.RequestModels
         public string PayPal { get; set; }
 
         public int companyId { get; set; }
+
+        public string RoleId { get; set; }
+
+        public string Password { get; set; }
     }
 }

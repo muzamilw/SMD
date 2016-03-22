@@ -24,5 +24,25 @@ namespace SMD.Models.DomainModels
         public virtual AdCampaign AdCampaign { get; set; }
         public virtual User User { get; set; }
         public virtual Company Company { get; set; }
+
+        /// <summary>
+        /// Makes a copy of Campaign response
+        /// </summary>
+        public void Clone(AdCampaignResponse target)
+        {
+
+            target.CreatedDateTime = CreatedDateTime;
+            target.UserId = UserId;
+            target.EndUserDollarAmount = EndUserDollarAmount;
+            target.SkipCount = SkipCount;
+            target.UserSelection = UserSelection;
+            target.CompanyId = CompanyId;
+            target.GameTime = GameTime;
+            target.GameScore = GameScore;
+            target.GameLevel = GameLevel;
+            target.GameId = GameId;
+
+        }
+
     }
 }

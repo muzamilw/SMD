@@ -148,5 +148,8 @@ namespace SMD.MIS.Areas.Api.Models
         public string CityName { get; set; }
         public int CompanyId { get; set; }
         public string AuthenticationToken { get; set; }
+
+        public string Password { get; set; }
+        public string RoleId { get; set; }
     }
 }

@@ -1,25 +1,29 @@
 ﻿using SMD.Interfaces.Services;
-using SMD.MIS.Areas.Api.ModelMappers;
-using SMD.MIS.Areas.Api.Models;
+using SMD.Models.RequestModels;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Web.Http;
 
 namespace SMD.MIS.Areas.Api.Controllers
 {
-    /// <summary>
-    /// Update Web User Profile Api Controller  | BASE DATA
-    /// </summary>
-    public class UpdateUserFromWebBaseController : ApiController
+    public class InviteUserController : ApiController
     {
-        #region Private
         private readonly IWebApiUserService webApiUserService;
+        private IEmailManagerService emailManagerService;
+
+        #region Private
+        
         #endregion
+
         #region Constructor
 
         /// <summary>
         /// Constructor
         /// </summary>
-        public UpdateUserFromWebBaseController(IWebApiUserService webApiUserService)
+        public InviteUserController(IWebApiUserService webApiUserService, IEmailManagerService emailManagerService)
         {
             if (webApiUserService == null)
             {
@@ -27,21 +31,26 @@ namespace SMD.MIS.Areas.Api.Controllers
             }
 
             this.webApiUserService = webApiUserService;
+            this.emailManagerService = emailManagerService;
         }
 
         #endregion
+
         #region Public
 
         /// <summary>
-        /// Get User's Profile 
+        ///invite user
         /// </summary>
-        public UserProfileBaseResponse Get()
+        
+
+        public bool Post(InviteUserEmail request)
         {
-            var response=webApiUserService.GetBaseDataForUserProfile();
-            return response.CreateFrom();
+
+            emailManagerService.SendEmailToInviteUser(request.Email);
+            return true;
+            
         }
 
-      
         #endregion
     }
 }

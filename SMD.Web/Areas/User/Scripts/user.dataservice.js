@@ -17,7 +17,12 @@ define("user/user.dataservice", function () {
                         dataType: 'json',
                         type: 'GET'
                     });
-
+                    //Get User Profile Data's Base Data
+                    amplify.request.define('getUserProfileById', 'ajax', {
+                        url: '/Api/UpdateUserFromWeb',
+                        dataType: 'json',
+                        type: 'GET'
+                    });
                     //Get User Profile
                     amplify.request.define('getUserProfile', 'ajax', {
                         url: '/Api/UpdateUserFromWeb',
@@ -37,6 +42,18 @@ define("user/user.dataservice", function () {
                         url: '/Api/GetCityByCountry',
                         dataType: 'json',
                         type: 'GET'
+                    });
+                    // get Manage user list
+                    amplify.request.define('getDataforManageUser', 'ajax', {
+                        url: '/Api/ManageUsers',
+                        dataType: 'json',
+                        type: 'GET'
+                    });
+                    // invite User
+                    amplify.request.define('inviteUser', 'ajax', {
+                        url: '/Api/InviteUser',
+                        dataType: 'json',
+                        type: 'POST'
                     });
                     isInitialized = true;
                 }
@@ -74,6 +91,37 @@ define("user/user.dataservice", function () {
                 data: params
             });
         },
+
+          // Get user data
+        getUserProfileById = function (params, callbacks) {
+            initialize();
+            return amplify.request({
+                resourceId: 'getUserProfileById',
+                success: callbacks.success,
+                error: callbacks.error,
+                data: params
+            });
+        },
+          // Get manage users
+        getDataforManageUser = function (params, callbacks) {
+            initialize();
+            return amplify.request({
+                resourceId: 'getDataforManageUser',
+                success: callbacks.success,
+                error: callbacks.error,
+                data: params
+            });
+        },
+       // invite user
+       inviteUser = function (params, callbacks) {
+                initialize();
+                return amplify.request({
+                    resourceId: 'inviteUser',
+                    success: callbacks.success,
+                    error: callbacks.error,
+                    data: params
+                });
+        },
              // Get Cities
         getCitiesByCountry = function (params, callbacks) {
             initialize();
@@ -83,13 +131,18 @@ define("user/user.dataservice", function () {
                 error: callbacks.error,
                 data: params
             });
+
         };
            
+
         return {
             getBaseDataForUserProfile: getBaseDataForUserProfile,
+            getUserProfileById: getUserProfileById,
+            getDataforManageUser: getDataforManageUser,
             getUserProfile: getUserProfile,
             saveUserProfile: saveUserProfile,
-            getCitiesByCountry: getCitiesByCountry
+            getCitiesByCountry: getCitiesByCountry,
+            inviteUser: inviteUser
         };
     })();
     return dataService;

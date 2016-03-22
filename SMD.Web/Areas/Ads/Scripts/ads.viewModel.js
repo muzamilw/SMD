@@ -1368,7 +1368,7 @@ define("ads/ads.viewModel",
                     window.location.href = "/User/ManageUser/Index";
                 },
                 gotoManageUsers = function () {
-                    window.location.href = "/";
+                    window.location.href = "/user/ManageUser/ManageUsers";
                 },
                 copyCampaign = function () {
 

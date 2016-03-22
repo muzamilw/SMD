@@ -19,6 +19,12 @@ namespace SMD.MIS.Areas.User
                 "User/{controller}/{action}/{id}",
                 new { action = "Index", id = UrlParameter.Optional }
             );
+
+            context.MapRoute(
+               "User_Manager",
+               "User/{controller}/{action}/{id}",
+               new { action = "ManageUsers", id = UrlParameter.Optional }
+           );
         }
     }
 }

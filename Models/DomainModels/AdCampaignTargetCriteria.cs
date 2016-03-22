@@ -35,5 +35,23 @@ namespace SMD.Models.DomainModels
         public virtual Language Language { get; set; }
         public virtual Education Education { get; set; }
         public virtual AdCampaign QuizCampaign { get; set; }
+        /// Makes a copy of Campaign response
+        /// </summary>
+        public void Clone(AdCampaignTargetCriteria target)
+        {
+
+            target.Type = Type;
+            target.PqId = PqId;
+            target.PqAnswerId = PqAnswerId;
+            target.SqId = SqId;
+            target.SqAnswer = SqAnswer;
+            target.IncludeorExclude = IncludeorExclude;
+            target.LanguageId = LanguageId;
+            target.IndustryId = IndustryId;
+            target.EducationId = EducationId;
+            target.QuizCampaignId = QuizCampaignId;
+            target.QuizAnswerId = QuizAnswerId;
+
+        }
     }
 }
