@@ -1376,6 +1376,12 @@ define("ads/ads.viewModel",
                 showAdditionCriteria = function (mode) {
                     AditionalCriteriaMode(mode);
                 },
+                showAdditionUserCriteria = function () {
+                    AditionalCriteriaMode(2);
+                },
+                showAdditionQuizCriteria = function () {
+                    AditionalCriteriaMode(3);
+                },
                 // Initialize the view model
                 initialize = function (specifiedView) {
                     view = specifiedView;
@@ -1493,7 +1499,9 @@ define("ads/ads.viewModel",
                     ArchiveCampaign: ArchiveCampaign,
                     copyCampaign: copyCampaign,
                     AditionalCriteriaMode: AditionalCriteriaMode,
-                    showAdditionCriteria: showAdditionCriteria
+                    showAdditionCriteria: showAdditionCriteria,
+                    showAdditionUserCriteria: showAdditionUserCriteria,
+                    showAdditionQuizCriteria: showAdditionQuizCriteria
                 };
             })()
         };
