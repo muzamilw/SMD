@@ -79,7 +79,7 @@ namespace SMD.MIS.Areas.Api.ModelMappers
         /// </summary>
         public static double? CreateFromForAccount(this SMD.Models.IdentityModels.User source)
         {
-            if (source.Accounts == null || !source.Accounts.Any())
+            if (source.Company.Accounts == null || !source.Company.Accounts.Any())
             {
                 return null;
             }
