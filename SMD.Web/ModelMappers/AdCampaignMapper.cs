@@ -42,8 +42,15 @@ namespace SMD.MIS.ModelMappers
             string LandingPageVideoLink = source.LandingPageVideoLink;
             if (source.Type == (int)AdCampaignType.Other && !string.IsNullOrEmpty(source.LandingPageVideoLink))
             {
-                LandingPageVideoLinkAsPath = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + source.LandingPageVideoLink;
-                LandingPageVideoLink = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + source.LandingPageVideoLink;
+                if (LandingPageVideoLink != null && !LandingPageVideoLink.Contains("http"))
+                {
+                    LandingPageVideoLinkAsPath = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + source.LandingPageVideoLink;
+                }
+                if (LandingPageVideoLink != null && !LandingPageVideoLink.Contains("http"))
+                {
+                    LandingPageVideoLink = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + source.LandingPageVideoLink;
+                }
+                
             }
 
 

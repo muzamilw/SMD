@@ -41,7 +41,7 @@ define("ads/ads.viewModel",
                     lblFirstLine = ko.observable("First line"),
                     lbllSecondLine = ko.observable("Second Line"),
                     lblCampaignSchedule = ko.observable("Campaign Schedule"),
-                    campaignTypePlaceHolderValue = ko.observable('Enter in the YouTube video link'),
+                    campaignTypePlaceHolderValue = ko.observable('Enter in the YouTube video link (20 characters)'),
                 //
                     isEditCampaign = ko.observable(false),
                     canSubmitForApproval = ko.observable(true),
@@ -791,7 +791,7 @@ define("ads/ads.viewModel",
                 OnChangeCampaignType = function () {
                     if (campaignModel().Type() == "1") {
                         isEnableVedioVerificationLink(true);
-                        campaignTypePlaceHolderValue('Enter in the YouTube video link');
+                        campaignTypePlaceHolderValue('Enter in the YouTube video link (20 characters)');
                     } else {
                         isEnableVedioVerificationLink(false);
                         if (campaignModel().Type() == "2") {
@@ -839,7 +839,7 @@ define("ads/ads.viewModel",
 
                                     if (campaignModel().Type() == "1") {
                                         isEnableVedioVerificationLink(true);
-                                        campaignTypePlaceHolderValue('Enter in the YouTube video link');
+                                        campaignTypePlaceHolderValue('Enter in the YouTube video link (20 characters)');
                                     } else {
                                         isEnableVedioVerificationLink(false);
                                         if (campaignModel().Type() == "2") {

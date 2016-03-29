@@ -101,6 +101,7 @@ namespace SMD.Implementation.Services
                 int indexOf = savePath.LastIndexOf("SMD_Content", StringComparison.Ordinal);
                 savePath = savePath.Substring(indexOf, savePath.Length - indexOf);
                 savePaths[2] = savePath;
+                campaign.Voucher1ImagePath = savePath;
             }
             if (!string.IsNullOrEmpty(campaign.buyItImageBytes) )
             {
