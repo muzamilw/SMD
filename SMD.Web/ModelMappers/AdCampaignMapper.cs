@@ -42,8 +42,15 @@ namespace SMD.MIS.ModelMappers
             string LandingPageVideoLink = source.LandingPageVideoLink;
             if (source.Type == (int)AdCampaignType.Other && !string.IsNullOrEmpty(source.LandingPageVideoLink))
             {
-                LandingPageVideoLinkAsPath = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + source.LandingPageVideoLink;
-                LandingPageVideoLink = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + source.LandingPageVideoLink;
+                if (LandingPageVideoLink != null && !LandingPageVideoLink.Contains("http"))
+                {
+                    LandingPageVideoLinkAsPath = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + source.LandingPageVideoLink;
+                }
+                if (LandingPageVideoLink != null && !LandingPageVideoLink.Contains("http"))
+                {
+                    LandingPageVideoLink = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + source.LandingPageVideoLink;
+                }
+                
             }
 
 
@@ -309,6 +316,17 @@ namespace SMD.MIS.ModelMappers
                     EducationName = source.Education.Title;
                 }
             }
+            else if (source.Type == (int)AdCampaignCriteriaType.QuizQustion)
+            {
+                if(source.QuizCampaign != null)
+                {
+                    QuestionString = source.QuizCampaign.VerifyQuestion;
+                    if (source.QuizAnswerId == 1)
+                        AnswerString = source.QuizCampaign.Answer1;
+                    if (source.QuizAnswerId == 2)
+                        AnswerString = source.QuizCampaign.Answer2;
+                }
+            }
             return new SMD.MIS.Areas.Api.Models.AdCampaignTargetCriteria
             {
                 CriteriaId = source.CriteriaId,
@@ -326,7 +344,9 @@ namespace SMD.MIS.ModelMappers
                 Language = LanguageName,
                 Industry = IndustryName,
                 EducationId = source.EducationId,
-                Education = EducationName
+                Education = EducationName,
+                QuizAnswerId = source.QuizAnswerId,
+                QuizCampaignId = source.QuizCampaignId
             };
         }
 

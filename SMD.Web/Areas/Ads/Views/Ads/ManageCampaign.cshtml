@@ -86,7 +86,7 @@ else
                                 <div class="col-lg-3 text-campaign-left font20"> <span data-bind="text:$root.lblCampaignName">  Campaign Name</span>
                                 </div>
                                 <div class="col-lg-9" style="padding-left:0px;">
-                                    <input type="text" name="Campaign Name" class="form-control" id="txtCampaignName" placeholder="New Campaign" data-bind="value: CampaignName,validationTooltip: CampaignName, validationOnElement: CampaignName">
+                                    <input type="text" name="Campaign Name" class="form-control" maxlength="36" id="txtCampaignName" placeholder="Campaign Name (30 characters)" data-bind="value: CampaignName,validationTooltip: CampaignName, validationOnElement: CampaignName">
 
                                 </div>
 
@@ -114,7 +114,7 @@ else
                                             <label for="txtCampaignDisplayName" class="control-label text-right tooltip-float floatNone" data-bind="text:$root.lblAdTitle">Ad Title</label>
                                         </div>
                                         <div class="col-lg-8">
-                                            <input type="text" style="height:60px;" name="Campaign Display Name" class="form-control height60 font24px" id="txtCampaignDisplayName" placeholder="Ad title (30 characters)" data-bind="value: DisplayTitle,validationTooltip: DisplayTitle, validationOnElement: DisplayTitle">
+                                            <input type="text" style="height:60px;" maxlength="36" name="Campaign Display Name" class="form-control height60 font24px" id="txtCampaignDisplayName" placeholder="Ad title (36 characters)" data-bind="value: DisplayTitle,validationTooltip: DisplayTitle, validationOnElement: DisplayTitle">
 
                                         </div>
                                     </div>
@@ -124,7 +124,7 @@ else
                                             <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone" data-bind="text:$root.lblFirstLine">First line </label>
                                         </div>
                                         <div class="col-lg-8">
-                                            <textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="Enter Description (20 characters)" data-bind="value: Description" maxlength="50"></textarea>
+                                            <textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="Enter Description (36 characters)" data-bind="value: Description" maxlength="36"></textarea>
 
                                         </div>
                                     </div>
@@ -134,7 +134,7 @@ else
                                             <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone" data-bind="text:$root.lbllSecondLine">Second Line</label>
                                         </div>
                                         <div class="col-lg-8">
-                                            <textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="Enter Description (20 characters)" data-bind="value: CampaignDescription" maxlength="50"></textarea>
+                                            <textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="Enter Description (36 characters)" data-bind="value: CampaignDescription" maxlength="36"></textarea>
 
                                         </div>
                                     </div>
@@ -185,7 +185,7 @@ else
                                                         <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
                                                     </a>
                                                 </div>
-                                                <label class="control-label text-right tooltip-float floatNone font16">Banner Image (600 x 150)</label>
+                                                <label class="control-label text-right tooltip-float floatNone font16">Banner Image (400 x 800)</label>
                                             </div>
                                             <div class="col-lg-7" style="float:left;">
                                                 <div class="fileUpload btn btn-primary">
@@ -214,7 +214,7 @@ else
                                         <div class="col-lg-9" data-bind="visible: Type() == 1">
 
                                             <textarea class="form-control" id="txtLinkOfCampaign" rows="1" placeholder="" data-bind="value: LandingPageVideoLink,validationTooltip:LandingPageVideoLink, validationOnElement: LandingPageVideoLink, attr:{placeholder : $root.campaignTypePlaceHolderValue}" style="margin-bottom:10px;"></textarea>
-                                            <textarea class="form-control" id="txtLinkOfCampaign" rows="1" placeholder="Enter in landing page link " data-bind="value: VideoUrl" style="margin-top:5px;"></textarea>
+                                            @*<textarea class="form-control" id="txtLinkOfCampaign" rows="1" placeholder="Enter in landing page link " data-bind="value: VideoUrl" style="margin-top:5px;"></textarea>*@
                                         </div>
 
 
@@ -232,7 +232,7 @@ else
                                             <span class="help-block text-right"></span>
                                                 <!-- /ko -->
                                         </div>
-                                        <div class="col-lg-9" data-bind="visible: Type() == 2 ||  Type() ==3" style="    margin-bottom: 10px;">
+                                        <div class="col-lg-9" data-bind="visible: Type() == 2" style="    margin-bottom: 10px;">
 
                                             <textarea class="form-control" id="txtLinkOfCampaign" rows="1" placeholder="" data-bind="value: LandingPageVideoLink,validationTooltip:LandingPageVideoLink, validationOnElement: LandingPageVideoLink, attr:{placeholder : $root.campaignTypePlaceHolderValue}"></textarea>
 
@@ -604,7 +604,7 @@ else
                                                             <span class="_1ga3">Broad</span>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div>yo
                                             </div>
                                             <div class="rfloat fsm _1ga4">
                                                 <p data-bind="visible: $root.audienceReachMode()  == 1">Your audience is too specific for your ads to be shown. Try making it broader.</p>
@@ -802,7 +802,7 @@ else
                                                         <h4 class="modal-title" id="gridSystemModalLabel">Add Criteria</h4>
                                                     </div>
                                                     <div class="modal-body" data-bind="with:$root.selectedCriteria">
-                                                        <div class="row">
+                                                        <div class="row" data-bind="visible: $root.AditionalCriteriaMode() != '1'">
                                                             <div class="col-lg-9 marginBottom12">
                                                                 <div class="form-group">
                                                                     <div class="col-lg-5 text-right">
@@ -829,9 +829,9 @@ else
                                                                 </div>
                                                             </div>
                                                             <div>
-                                                                <div class="col-lg-12 marginBottom12">
+                                                                <div class="col-lg-12 marginBottom12" >
                                                                     <div class="form-group" data-bind="visible:$root.isNewCriteria">
-                                                                        <div class="col-lg-8 pull-left">
+                                                                        <div class="col-lg-12 pull-left" data-bind="visible: $root.AditionalCriteriaMode() == '2'">
                                                                             <div class="row header">
                                                                                 <label class="control-label modelHeading">Profile Questions</label>
                                                                             </div>
@@ -842,12 +842,12 @@ else
                                                                             </div>
 
                                                                         </div>
-                                                                        <div class="col-lg-4 pull-left">
+                                                                        <div class="col-lg-12 pull-left" data-bind="visible: $root.AditionalCriteriaMode() == '3'">
                                                                             <div class="row header">
-                                                                                <label class="control-label modelHeading">Survey Questions</label>
+                                                                                <label class="control-label modelHeading">Your Quiz Questions</label>
                                                                             </div>
                                                                             <div class="listview parentList set-border padding10 list-type-tiles" data-role="listview" id="lv2">
-                                                                                <!-- ko template: { name: 'surveyQuestionTiles' , foreach: $root.surveyQuestionList} --><!-- /ko -->
+                                                                                <!-- ko template: { name: 'surveyQuestionTiles' , foreach: $root.myQuizQuestions} --><!-- /ko -->
 
                                                                                 <div class="clear-both"></div>
                                                                             </div>
@@ -864,9 +864,9 @@ else
                                                                                     <div class="list active">
                                                                                         <span data-bind="text:questionString"></span>
                                                                                         <div class="listview set-border padding10 list-type-tiles chlidList" data-role="listview">
-                                                                                            <!--ko if:Type() == 2 -->
-                                                                                            <div class="list childList leftImg" data-bind="click:$root.updateSurveyCriteria.bind($data, 1),css: { 'active': SQAnswer() ==1 }"> <img data-bind="attr: { src: surveyQuestLeftImageSrc }" class="list-icon" /></div>
-                                                                                            <div class="list childList rightImg" data-bind="click:$root.updateSurveyCriteria.bind($data, 2),css: { 'active': SQAnswer() ==2 }"> <img data-bind="attr: { src: surveyQuestRightImageSrc }" class="list-icon" /></div>
+                                                                                            <!--ko if:Type() == 6 -->
+                                                                                            <div class="list childList leftImg" data-bind="click:$root.updateSurveyCriteria.bind($data, 1),css: { 'active': QuizAnswerId() ==1 }"> <label data-bind="text:surveyQuestLeftImageSrc "></label> </div>
+                                                                                            <div class="list childList rightImg" data-bind="click:$root.updateSurveyCriteria.bind($data, 2),css: { 'active': QuizAnswerId() ==2 }"><label data-bind="text:surveyQuestRightImageSrc "></label></div>
                                                                                             <!--/ko-->
                                                                                             <!--ko if:Type() == 1 -->
                                                                                             <!-- ko template: { name: 'criteriaEditorTemplate' ,  foreach: $root.profileAnswerList} --><!-- /ko -->
@@ -890,6 +890,24 @@ else
                                                             </div>
 
                                                         </div>
+                                                        <div data-bind="visible: $root.AditionalCriteriaMode() == '1'" class="" style="">
+                                                            <div class="row" style="margin-top:15px;margin-left:15px;">
+                                                                <h4 class="modal-title" >Refine audience criteria using</h4>
+                                                            </div>
+
+                                                            <div class="row" style="margin-top:15px;margin-left:15px;">
+                                                                <div class="col-lg-6">
+                                                                    <button class="btn  btn-success btnAdsCampaign ButtonWidth" id="" data-bind="click:$root.showAdditionUserCriteria">User profile answers</button>
+                                                                </div>
+                                                                <div class="col-lg-6">
+                                                                    <button class="btn  btn-success btnAdsCampaign ButtonWidth" id="" data-bind="click:$root.showAdditionQuizCriteria">Your quiz questions</button>
+                                                                </div>
+                                                                @*<div class="col-lg-4" style="display:none;">
+                                                                    <button class="btn  btn-success btnAdsCampaign ButtonWidth" id="" data-bind="click:$root.showAdditionCriteria('1')">Your quiz questions</button>
+                                                                </div>*@
+
+                                                            </div>
+                                                        </div>
                                                     </div>
 
                                                 </div>
@@ -909,7 +927,7 @@ else
 
                                                 </thead>*@
                                             <tbody>
-                                                <tr data-bind="visible: $root.visibleTargetAudience(1)  != 1 && $root.visibleTargetAudience(2)  != 1">
+                                                <tr data-bind="visible: $root.visibleTargetAudience(1)  != 1 && $root.visibleTargetAudience(2)  != 1&& $root.visibleTargetAudience(6)  != 1">
                                                     <td class="noCriteria"><span>No additional targeting criteria selected</span></td>
                                                 </tr>
                                                 <!-- ko template: { name: 'answersTemplate', foreach: AdCampaignTargetCriterias } -->
@@ -953,7 +971,7 @@ else
                                             <label for="txtVerifyQuestion" class="control-label text-right tooltip-float floatNone">50/50 Quiz question</label>
                                         </div>
                                         <div class="col-lg-8">
-                                            <input type="text" class="form-control" id="txtVerifyQuestion" placeholder="Enter your question (30 characters)" data-bind="value: VerifyQuestion">
+                                            <input type="text" class="form-control" id="txtVerifyQuestion" placeholder="Enter your question (36 characters)" data-bind="value: VerifyQuestion" maxlength="36">
 
                                         </div>
                                     </div>
@@ -963,7 +981,7 @@ else
                                             <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Choice 1</label>
                                         </div>
                                         <div class="col-lg-8">
-                                            <input type="text" class="form-control" id="txtVerifyAnswer1" placeholder="Enter your answer 1 (10 characters)" data-bind="value: Answer1">
+                                            <input type="text" class="form-control" id="txtVerifyAnswer1" placeholder="Enter your answer 1 (50 characters)" data-bind="value: Answer1" maxlength="50">
 
                                         </div>
                                     </div>
@@ -973,7 +991,7 @@ else
                                             <label for="txtVerifyAnswer2" class="control-label text-right floatNone">Choice 2</label>
                                         </div>
                                         <div class="col-lg-8">
-                                            <input type="text" class="form-control" id="txtVerifyAnswer2" placeholder="Enter your answer 2 (10 characters)" data-bind="value: Answer2">
+                                            <input type="text" class="form-control" id="txtVerifyAnswer2" placeholder="Enter your answer 2 (50 characters)" data-bind="value: Answer2" maxlength="50">
 
                                         </div>
                                     </div>
@@ -1031,37 +1049,28 @@ else
                                     <div class="form-group" data-bind="visible: $root.voucherQuestionStatus()">
                                         <div class="col-lg-4">
 
-                                            <label for="txtVoucher" class="control-label text-right tooltip-float floatNone">Voucher Heading</label>
+                                            <label for="txtVoucher" class="control-label text-right tooltip-float floatNone">Voucher Line 1</label>
                                         </div>
                                         <div class="col-lg-8">
-                                            <input type="text" class="form-control" id="txtVoucher" placeholder="Enter your voucher detail  (10 characters)" data-bind="value: Voucher1Heading">
+                                            <input type="text" class="form-control" id="txtVoucher" placeholder="Enter your voucher Line 1  (20 characters)" data-bind="value: Voucher1Heading" maxlength="20">
 
                                         </div>
                                     </div>
-                                    <div class="form-group" data-bind="visible: $root.voucherQuestionStatus() == 1 ">
-                                        <div class="col-lg-4">
-
-                                            <label for="txtVoucherDes" class="control-label text-right tooltip-float floatNone">Voucher Description</label>
-                                        </div>
-                                        <div class="col-lg-8">
-                                            <input type="text" class="form-control" id="txtVoucherDes" placeholder="Enter voucher description  (10 characters)" data-bind="value: Voucher1Description">
-
-                                        </div>
-                                    </div>
+                           
                                     <div class="form-group" data-bind="visible: $root.voucherQuestionStatus() == 1 ">
                                         <div class="col-lg-4">
 
                                             <label for="txtVoucherVal" class="control-label text-right tooltip-float floatNone">Voucher Value Discount (£) </label>
                                         </div>
                                         <div class="col-lg-8">
-                                            <input type="text" class="form-control" id="txtVoucherVal" placeholder="e.g. £1 or 15% off  (10 characters)" data-bind="value: Voucher1Value">
+                                            <input type="text" class="form-control" id="txtVoucherVal" placeholder="e.g. £1 or 15% off  (20 characters)" data-bind="value: Voucher1Value" maxlength="20">
 
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <div class="col-lg-4" data-bind="visible: $root.voucherQuestionStatus() == 1 ">
-                                            <label for="txtVoucherVal" class="control-label text-right tooltip-float floatNone">Voucher Email attachment </label>
+                                            <label for="txtVoucherVal" class="control-label text-right tooltip-float floatNone">Voucher Email attachment (200 X 200) </label>
                                         </div>
                                         <div class="col-lg-8">
                                             <div class="col-lg-12" style="margin-left:-10px;" data-bind="visible: $root.voucherQuestionStatus() == 1 ">
@@ -1091,6 +1100,16 @@ else
                                         </div>
                                     </div>
 
+                                    <div class="form-group" data-bind="visible: $root.voucherQuestionStatus() == 1 ">
+                                        <div class="col-lg-4">
+
+                                            <label for="txtVoucherDes" class="control-label text-right tooltip-float floatNone">Voucher Email Description</label>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <input type="text" class="form-control" id="txtVoucherDes" placeholder="Enter voucher description  (20 characters)" data-bind="value: Voucher1Description" maxlength="20">
+
+                                        </div>
+                                    </div>
                                     @*<div class="form-group">
                     <div class="col-lg-4 text-right">
                         <div class="bs-example-tooltips tooltip-float-width">
@@ -1171,7 +1190,7 @@ else
                                             <label for="txtVoucher" class="control-label text-right tooltip-float floatNone">First Line</label>
                                         </div>
                                         <div class="col-lg-8">
-                                            <input type="text" class="form-control" id="txtVoucher" placeholder="Enter Description  (20 characters)" data-bind="value: BuuyItLine1">
+                                            <input type="text" class="form-control" id="txtVoucher" placeholder="Enter Description  (20 characters)" data-bind="value: BuuyItLine1" maxlength="20">
 
                                         </div>
                                     </div>
@@ -1181,7 +1200,7 @@ else
                                             <label for="txtVoucherDes" class="control-label text-right tooltip-float floatNone">Second Line</label>
                                         </div>
                                         <div class="col-lg-8">
-                                            <input type="text" class="form-control" id="txtVoucherDes" placeholder="Enter Description  (20 characters)" data-bind="value: BuyItLine2">
+                                            <input type="text" class="form-control" id="txtVoucherDes" placeholder="Enter Description  (20 characters)" data-bind="value: BuyItLine2" maxlength="20">
 
                                         </div>
                                     </div>
@@ -1191,7 +1210,17 @@ else
                                             <label for="txtVoucherVal" class="control-label text-right tooltip-float floatNone">Third Line </label>
                                         </div>
                                         <div class="col-lg-8">
-                                            <input type="text" class="form-control" id="txtVoucherVal" placeholder="Enter Description  (20 characters)" data-bind="value: BuyItLine3">
+                                            <input type="text" class="form-control" id="txtVoucherVal" placeholder="Enter Description  (20 characters)" data-bind="value: BuyItLine3" maxlength="20">
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group" data-bind="visible: $root.buyItQuestionStatus() == 1 ">
+                                        <div class="col-lg-4">
+
+                                            <label for="txtVoucherVal" class="control-label text-right tooltip-float floatNone">Url </label>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <textarea class="form-control" id="txtLinkOfCampaign" rows="1" placeholder="Enter in landing page link " data-bind="value: VideoUrl" style="margin-top:5px;" maxlength="30"></textarea>
 
                                         </div>
                                     </div>
@@ -1201,7 +1230,7 @@ else
                                             <label for="txtVoucherVal" class="control-label text-right tooltip-float floatNone">Button Label </label>
                                         </div>
                                         <div class="col-lg-8">
-                                            <input type="text" class="form-control" id="txtVoucherVal" placeholder="Enter Description  (20 characters)" data-bind="value: BuyItButtonLabel">
+                                            <input type="text" class="form-control" id="txtVoucherVal" placeholder="Enter Description  (20 characters)" data-bind="value: BuyItButtonLabel" maxlength="20">
 
                                         </div>
                                     </div>
@@ -1330,7 +1359,7 @@ else
                                 <button class="btn  btn-success btnSubmitApproval" id="btnSubmitForApproval" data-bind="click:$root.submitCampaignData, visible: $root.canSubmitForApproval" style="width: 100%;">Submit for Approval</button>
                                 <br />
 
-                                <div class="social-box col-lg-12 col-sm-12 col-xs-12  estimates hidden-sm hidden-xs" style="cursor:pointer;" title="Pending Estimates">
+                                <div class="social-box col-lg-12 col-sm-12 col-xs-12  estimates hidden-sm hidden-xs" style="cursor:pointer;display:none;" title="Pending Estimates">
                                     <div style="    margin-bottom: 10px;">
                                         <div class="yourBudgtHeadingCnt">
                                             <span>Total Spent</span>
@@ -1353,7 +1382,7 @@ else
                                     </div>
                                 </div>
 
-                                <div class="social-box col-lg-12 col-sm-12 col-xs-12  facebook hidden-sm hidden-xs" style="cursor:pointer;background-color:#8284FB !important" title="Pending Orders">
+                                <div class="social-box col-lg-12 col-sm-12 col-xs-12  facebook hidden-sm hidden-xs" style="cursor:pointer;background-color:#8284FB !important; display:none;" title="Pending Orders">
                                     <div style="margin-bottom: 10px;">
                                         <div class="yourBudgtHeadingCnt" style="font-weight:bold;    font-size: 16px;">
                                             <span>Branding views</span>
@@ -1396,7 +1425,7 @@ else
                                     </div>
                                 </div>
 
-                                <div class="social-box col-lg-12 col-sm-12 col-xs-12  twitter hidden-sm hidden-xs" style="cursor:pointer; background-color:#9093FB !important" title="In Production">
+                                <div class="social-box col-lg-12 col-sm-12 col-xs-12  twitter hidden-sm hidden-xs" style="cursor:pointer; background-color:#9093FB !important; display:none;" title="In Production">
                                     <div style="    margin-bottom: 10px;">
                                         <div class="yourBudgtHeadingCnt" style="font-weight:bold;    font-size: 16px;">
                                             <span>Conversions</span>
@@ -1430,7 +1459,7 @@ else
 
                                 </div>
 
-                                <div class="social-box col-lg-12 col-sm-12 col-xs-12  google hidden-sm hidden-xs" style="cursor:pointer; background-color:#C19AFC !important" title="Completed">
+                                <div class="social-box col-lg-12 col-sm-12 col-xs-12  google hidden-sm hidden-xs" style="cursor:pointer; background-color:#C19AFC !important; display:none;" title="Completed">
                                     <div style="    margin-bottom: 10px;">
                                         <div class="yourBudgtHeadingCnt" style="font-weight:bold;    font-size: 16px;">
                                             <span>Paid out</span>
@@ -1457,7 +1486,7 @@ else
                                     &nbsp;
                                 </div>
 
-                                <a href="http://pinkcards.com/" target="_blank">
+                                <a href="http://pinkcards.com/" target="_blank" style="display:none;">
                                     <div class="aud_cnt_head marketingGuru" style="background-color:#46448E; margin-top:10px;">
                                         <h4 class="ad_h4" style="    font-size: 0.6em;">Our digital Gurus are ready to help you</h4>
                                     </div>
@@ -1475,7 +1504,7 @@ else
                                         </div>
                                     </div>
                                 </a>
-                                <div class="aud_cnt" style="text-align:center;background-color:white;">
+                                <div class="aud_cnt" style="text-align:center;background-color:white;display:none;">
                                     <br /><span>100%</span><br />
                                     <span>Conversion Rate</span><br /><br />
                                     <span>upto 50% of PPC</span><br />
@@ -1541,30 +1570,28 @@ else
 
                 <!--ko if:IncludeorExclude() == '0' -->
                 <td class="col-lg-2">
-                    <!-- ko if:   Type() == "1" -->
                     <p style="margin-top: 5px;margin-left: 12px;" data-bind="text: '(Excluded) ' + questionString() + ' = ' + answerString()">
                     </p>
-                    <!-- /ko -->
-                    <!-- ko if:   Type()  == "2" -->
+                   
+                    @*<!-- ko if:   Type()  == "6" -->
                     <p style="margin-top: 5px;margin-left: 12px;">
                         <span data-bind="text: '(Excluded) ' +  questionString() + ' = ' "></span>
                         <img data-bind="attr:{src: answerString()}" width="80" />
                     </p>
-                    <!-- /ko -->
+                    <!-- /ko -->*@
                 </td>
                 <!--/ko-->
                 <!--ko if:IncludeorExclude() == '1'-->
                 <td class="col-lg-2">
-                    <!-- ko if:   Type() == "1" -->
+                
                     <p style="margin-top: 5px;margin-left: 12px;" data-bind="text: '(Included) ' + questionString() + ' = ' + answerString()">
                     </p>
-                    <!-- /ko -->
-                    <!-- ko if:   Type()  == "2" -->
+                    @*<!-- ko if:   Type()  == "6" -->
                     <p style="margin-top: 5px;margin-left: 12px;">
                         <span data-bind="text: '(Included) ' + questionString() + ' = ' "></span>
                         <img data-bind="attr:{src: answerString()}" width="80" />
                     </p>
-                    <!-- /ko -->
+                    <!-- /ko -->*@
                 </td>
                 <!--/ko-->
 
@@ -2001,10 +2028,10 @@ else
         </script>
         <script id="surveyQuestionTiles" type="text/html">
             <div class="list">
-                <div class="parent-list-title"><span data-bind="text:DisplayQuestion"></span></div>
+                <div class="parent-list-title"><span data-bind="text:VerifyQuestion"></span></div>
                 <div class="listview set-border padding10 list-type-tiles chlidList" data-role="listview">
-                    <div class="list childList leftImg" data-bind="click:$root.saveCriteria.bind($data, 1)"> <img data-bind="attr: { src: LeftPicturePath }" class="list-icon" /></div>
-                    <div class="list childList rightImg" data-bind="click:$root.saveCriteria.bind($data, 2)"> <img data-bind="attr: { src: RightPicturePath }" class="list-icon" /></div>
+                    <div class="list childList leftImg" data-bind="click:$root.saveCriteria.bind($data, 1)"><span class="list-title" data-bind="text:Answer1"></span> </div>
+                    <div class="list childList rightImg" data-bind="click:$root.saveCriteria.bind($data, 2)"> <span class="list-title" data-bind="text:Answer2"></span> </div>
                     <div class="clear-both"></div>
                 </div>
                 <div class="clear-both"></div>

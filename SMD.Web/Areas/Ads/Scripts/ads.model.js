@@ -301,7 +301,7 @@
 
     var // ReSharper disable InconsistentNaming
       AdCampaignTargetCriteriasModel = function (CriteriaID, CampaignID, Type, PQID, PQAnswerID, SQID, SQAnswer, IncludeorExclude, questionString,
-       answerString, surveyQuestLeftImageSrc, surveyQuestRightImageSrc, LanguageID, Language, IndustryID, Industry, EducationID, Education) {
+       answerString, surveyQuestLeftImageSrc, surveyQuestRightImageSrc, LanguageID, Language, IndustryID, Industry, EducationID, Education, QuizCampaignId, QuizAnswerId) {
 
           var
               //type and userID will be set on server sside
@@ -323,9 +323,11 @@
                Industry = ko.observable(Industry),
                Education = ko.observable(Education),
                EducationID = ko.observable(EducationID),
+               QuizCampaignId = ko.observable(QuizCampaignId),
+               QuizAnswerId = ko.observable(QuizAnswerId),
           // Convert to server data
           convertCriteriaToServerData = function () {
-           
+              
               return {
                   CriteriaId: CriteriaID(),
                   CampaignId: CampaignID(),
@@ -340,7 +342,9 @@
                   IndustryId: IndustryID(),
                   Industry: Industry(),
                   EducationId: EducationID(),
-                  Education: Education()
+                  Education: Education(),
+                  QuizCampaignId: QuizCampaignId(),
+                  QuizAnswerId: QuizAnswerId()
               };
           };
           return {
@@ -362,7 +366,9 @@
               Industry: Industry,
               EducationID: EducationID,
               Education: Education,
-              convertCriteriaToServerData: convertCriteriaToServerData
+              convertCriteriaToServerData: convertCriteriaToServerData,
+              QuizCampaignId: QuizCampaignId,
+              QuizAnswerId: QuizAnswerId
           };
       };
     var // ReSharper disable InconsistentNaming
@@ -409,7 +415,6 @@
     };
     // Factory Method
     Campaign.Create = function (source) {
-  
         var campaign = new Campaign(source.CampaignId, source.LanguageId, source.CampaignName, source.UserId, source.Status, source.StatusValue,
             source.CampaignDescription, source.Gender + "", source.Archived, source.StartDateTime, source.EndDateTime, source.MaxBudget
             , source.Type + "", source.DisplayTitle, source.LandingPageVideoLink, source.VerifyQuestion, source.Answer1, source.Answer2, source.Answer3,
@@ -429,7 +434,9 @@
     // Factory Method
     AdCampaignTargetCriteriasModel.Create = function (source) {
         
-        return new AdCampaignTargetCriteriasModel(source.CriteriaId, source.CampaignId, source.Type, source.PQId, source.PQAnswerId, source.SQId, source.SQAnswer, source.IncludeorExclude, source.questionString, source.answerString, source.surveyQuestLeftImageSrc, source.surveyQuestRightImageSrc, source.LanguageId, source.Language, source.IndustryId, source.Industry, source.EducationId, source.Education);
+        return new AdCampaignTargetCriteriasModel(source.CriteriaId, source.CampaignId, source.Type, source.PQId, source.PQAnswerId, source.SQId, source.SQAnswer,
+            source.IncludeorExclude, source.questionString, source.answerString, source.surveyQuestLeftImageSrc, source.surveyQuestRightImageSrc, source.LanguageId,
+            source.Language, source.IndustryId, source.Industry, source.EducationId, source.Education, source.QuizCampaignId, source.QuizAnswerId);
     };
     AdCampaignTargetLocation.Create = function (source) {
        

@@ -160,7 +160,8 @@ namespace SMD.Repository.Repositories
                 Expression<Func<AdCampaign, bool>> query =
                     campaign =>
                         (string.IsNullOrEmpty(request.SearchText) ||
-                         (campaign.DisplayTitle.Contains(request.SearchText)))
+                         (campaign.DisplayTitle.Contains(request.SearchText)) || (campaign.CampaignName.Contains(request.SearchText))
+                          || (campaign.Description.Contains(request.SearchText)) || (campaign.CampaignDescription.Contains(request.SearchText)))
                          && (campaign.UserId == LoggedInUserIdentity || isAdmin);
 
 

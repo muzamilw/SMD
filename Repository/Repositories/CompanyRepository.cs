@@ -66,7 +66,7 @@ namespace SMD.Repository.Repositories
         }
         public bool createCompany(string userId, string email, string fullname, string guid,int companyid)
         {
-            int CompanyId = 0;
+            int UserCompanyId = 0;
             if(companyid == 0)
             {
                 Company company = new Company();
@@ -74,16 +74,16 @@ namespace SMD.Repository.Repositories
                 company.CompanyName = fullname;
                 db.Companies.Add(company);
                 db.SaveChanges();
-                CompanyId = company.CompanyId;
+                UserCompanyId = company.CompanyId;
             }
             else
             {
-                CompanyId = companyid;
+                UserCompanyId = companyid;
             }
             var user = db.Users.Where(g => g.Id == userId).SingleOrDefault();
             if (user != null)
             {
-                user.CompanyId = CompanyId;
+                user.CompanyId = UserCompanyId;
                 user.AuthenticationToken = guid;
                 db.SaveChanges();
             }

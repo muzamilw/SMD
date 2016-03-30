@@ -4118,3 +4118,7 @@ ALTER TABLE dbo.AdCampaign SET (LOCK_ESCALATION = TABLE)
 GO
 COMMIT
 /*executed*/
+
+
+alter table adcampaignResponse 
+ add UserQuestionResponse int null 

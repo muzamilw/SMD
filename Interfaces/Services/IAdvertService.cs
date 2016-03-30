@@ -42,6 +42,6 @@ namespace SMD.Interfaces.Services
         AdCampaign GetAdCampaignById(long campaignId);
 
         long CopyAddCampaigns(long CampaignId);
-
+        AdCampaignBaseResponse getQuizCampaigns();
     }
 }
