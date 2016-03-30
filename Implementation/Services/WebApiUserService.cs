@@ -1389,7 +1389,7 @@ namespace SMD.Implementation.Services
                UserRoles = manageUserRepository.getUserRoles().ToList()
             };
         }
-        public int generateAndSmsCode(string userId)
+        public int generateAndSmsCode(string userId, string phone)
         {
             User user = UserManager.FindById(userId);
             if (user == null)
@@ -1401,7 +1401,14 @@ namespace SMD.Implementation.Services
             if (String.IsNullOrEmpty(user.Phone1))
                 return 0;
             var messagingService = new MessagingService("omar.c@me.com", "DBVgYFGNCWwK");
-            messagingService.SendMessage(new SmsMessage(user.Phone1, "Your verification code for Cash4Ads profile update is " + code.ToString() + ". Please enter this code in Cash4Ads app to update your profile.", "EX0205631"));
+            if (!string.IsNullOrEmpty(phone))
+            {
+                messagingService.SendMessage(new SmsMessage(phone, "Your verification code for Cash4Ads profile update is " + code.ToString() + ". Please enter this code in Cash4Ads app to update your profile.", "EX0205631"));
+            } else
+            {
+                messagingService.SendMessage(new SmsMessage(user.Phone1, "Your verification code for Cash4Ads profile update is " + code.ToString() + ". Please enter this code in Cash4Ads app to update your profile.", "EX0205631"));
+            }
+            
             return code;
         }
         public User getUserByAuthenticationToken(string token)

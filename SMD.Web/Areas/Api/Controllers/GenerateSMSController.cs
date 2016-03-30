@@ -40,7 +40,7 @@ namespace SMD.MIS.Areas.Api.Controllers
             {
                 throw new HttpException((int)HttpStatusCode.BadRequest, "Invalid Request");
             }
-            var resposne = webApiUserService.generateAndSmsCode(request.UserId);
+            var resposne = webApiUserService.generateAndSmsCode(request.UserId,request.phoneNo);
             return resposne;
         }
 
