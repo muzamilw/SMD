@@ -27,5 +27,6 @@ namespace SMD.Models.RequestModels
         /// User Id
         /// </summary>
         public string UserId { get; set; }
+        public string phoneNo { get; set; }
     }
 }
