@@ -43,7 +43,8 @@
         CollectionMade=12,
         PayoutMade=13,
         Voucher = 14,
-       InviteUsers = 15
+       InviteUsers = 15,
+       BuyItUsers = 16
     }
 
     public enum AdCampaignCriteriaType

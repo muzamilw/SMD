@@ -1,4 +1,5 @@
-﻿using SMD.Models.IdentityModels;
+﻿using SMD.Models.DomainModels;
+using SMD.Models.IdentityModels;
 using System.Threading.Tasks;
 
 namespace SMD.Interfaces.Services
@@ -62,5 +63,6 @@ namespace SMD.Interfaces.Services
         Task SendPayOutRoutineEmail(string aspnetUserId);
 
         Task SendEmailToInviteUser(string email);
+        Task SendBuyItEmailToUser(string aspnetUserId, AdCampaign oCampaign);
     }
 }

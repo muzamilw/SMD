@@ -178,6 +178,14 @@ namespace SMD.MIS
                 new { controller = "GenerateSMS" },
                 null,
                 null);
+
+            // Get Industry Custom route
+            config.Routes.MapHttpRoute(
+                "BuyItEmail",
+                "BuyItEmail/{AuthenticationToken}/",
+                new { controller = "BuyIt" },
+                null,
+                null);
         }
     }
 }
