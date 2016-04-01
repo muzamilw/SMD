@@ -186,6 +186,13 @@ namespace SMD.MIS
                 new { controller = "BuyIt" },
                 null,
                 null);
+            // Get Industry Custom route
+            config.Routes.MapHttpRoute(
+                "GetCoupons",
+                "GetCoupons/{AuthenticationToken}/",
+                new { controller = "GetCoupon" },
+                null,
+                null);
         }
     }
 }

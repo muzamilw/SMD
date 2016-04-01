@@ -62,13 +62,6 @@ define("user/user.view",
         return ist.userProfile.view;
     });
 
-
-// Initialize Label Popovers
-initializeLabelPopovers = function () {
-    // ReSharper disable UnknownCssClass
-    $('.bs-example-tooltips a').popover();
-    // ReSharper restore UnknownCssClass
-},
 // Reads File - Print Out Section
 function readPhotoURL(input) {
     if (input.files && input.files[0]) {
@@ -92,3 +85,10 @@ function readPhotoURL(input) {
         reader.readAsDataURL(input.files[0]);
     }
 }
+// Initialize Label Popovers
+initializeLabelPopovers = function () {
+    // ReSharper disable UnknownCssClass
+    $('.bs-example-tooltips a').popover();
+    // ReSharper restore UnknownCssClass
+}
+

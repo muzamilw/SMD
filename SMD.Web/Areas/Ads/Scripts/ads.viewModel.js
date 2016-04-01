@@ -1371,7 +1371,14 @@ define("ads/ads.viewModel",
                     window.location.href = "/user/ManageUser/ManageUsers";
                 },
                 copyCampaign = function () {
-
+                    dataservice.copyCampaignById({
+                        success: function (data) {
+                            
+                        },
+                        error: function (response) {
+                            toastr.error("Error while getting audience count.");
+                        }
+                    });
                 },
                 showAdditionCriteria = function (mode) {
                     AditionalCriteriaMode(mode);

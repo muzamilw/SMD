@@ -760,7 +760,10 @@ namespace SMD.Implementation.Services
 
 
         }
-
+        public List<Coupons> GetCoupons()
+        {
+            return _adCampaignRepository.GetCoupons();
+        }
         #endregion
     }
 }

@@ -46,6 +46,12 @@ define("ads/ads.dataservice", function () {
                         contentType: "application/json; charset=utf-8",
                         type: 'POST'
                     });
+
+                    amplify.request.define('copyCampaignById', 'ajax', {
+                        url: '/Api/CopyCampaign',
+                        dataType: 'json',
+                        type: 'GET'
+                    });
                 }
             };
 
@@ -90,6 +96,16 @@ define("ads/ads.dataservice", function () {
                  initialize();
                  return amplify.request({
                      resourceId: 'getAudienceData',
+                     data: params,
+                     success: callbacks.success,
+                     error: callbacks.error,
+                 });
+             },
+              // copy campaign
+             copyCampaignById = function (params, callbacks) {
+                 initialize();
+                 return amplify.request({
+                     resourceId: 'copyCampaignById',
                      data: params,
                      success: callbacks.success,
                      error: callbacks.error,
