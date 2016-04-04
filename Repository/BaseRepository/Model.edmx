@@ -1374,6 +1374,9 @@
           <Parameter Name="industryId" Type="int" Mode="In" />
           <Parameter Name="profileQuestionIds" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="GetCoupons" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserID" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="GetProducts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserID" Type="nvarchar" Mode="In" />
           <Parameter Name="FromRow" Type="int" Mode="In" />
@@ -2058,6 +2061,9 @@
             <End Role="Company" EntitySet="Companies" />
             <End Role="AdCampaignResponse" EntitySet="AdCampaignResponses" />
           </AssociationSet>
+          <FunctionImport Name="GetCoupons" ReturnType="Collection(DomainModels.GetCoupons_Result)">
+            <Parameter Name="UserID" Mode="In" Type="String" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="ProfileQuestion">
           <Key>
@@ -3685,6 +3691,16 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="GetCoupons_Result">
+          <Property Type="Int64" Name="CouponId" Nullable="false" />
+          <Property Type="String" Name="CouponName" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="CouponTitle" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Firstline" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="SecondLine" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="CouponImage" Nullable="true" MaxLength="227" />
+          <Property Type="String" Name="CouponSwapValue" Nullable="true" />
+          <Property Type="String" Name="CouponActualValue" Nullable="true" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4408,6 +4424,20 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetCoupons" FunctionName="SMDModel.Store.GetCoupons">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DomainModels.GetCoupons_Result">
+                <ScalarProperty Name="CouponId" ColumnName="CouponId" />
+                <ScalarProperty Name="CouponName" ColumnName="CouponName" />
+                <ScalarProperty Name="CouponTitle" ColumnName="CouponTitle" />
+                <ScalarProperty Name="Firstline" ColumnName="Firstline" />
+                <ScalarProperty Name="SecondLine" ColumnName="SecondLine" />
+                <ScalarProperty Name="CouponImage" ColumnName="CouponImage" />
+                <ScalarProperty Name="CouponSwapValue" ColumnName="CouponSwapValue" />
+                <ScalarProperty Name="CouponActualValue" ColumnName="CouponActualValue" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
