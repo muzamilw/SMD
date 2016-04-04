@@ -76,6 +76,7 @@
           <Property Name="CouponTakenCount" Type="int" />
           <Property Name="CouponQuantity" Type="int" />
           <Property Name="CompanyId" Type="int" />
+          <Property Name="priority" Type="int" />
         </EntityType>
         <EntityType Name="AdCampaignResponse">
           <Key>
@@ -2062,7 +2063,7 @@
             <End Role="AdCampaignResponse" EntitySet="AdCampaignResponses" />
           </AssociationSet>
           <FunctionImport Name="GetCoupons" ReturnType="Collection(DomainModels.GetCoupons_Result)">
-            <Parameter Name="UserID" Mode="In" Type="String" />
+          <Parameter Name="UserID" Mode="In" Type="String" />
           </FunctionImport>
           </EntityContainer>
         <EntityType Name="ProfileQuestion">
@@ -2850,6 +2851,7 @@
           <NavigationProperty Name="Company" Relationship="DomainModels.FK_AdCampaign_Company" FromRole="AdCampaign" ToRole="Company" />
           <NavigationProperty Name="AdCampaignTargetCriterias" Relationship="DomainModels.FK_AdCampaignTargetCriteria_AdCampaign" FromRole="AdCampaign" ToRole="AdCampaignTargetCriteria" />
           <NavigationProperty Name="AdCampaignResponses" Relationship="DomainModels.FK_AdCampaignResponse_AdCampaign" FromRole="AdCampaign" ToRole="AdCampaignResponse" />
+          <Property Name="priority" Type="Int32" />
         </EntityType>
         <EntityType Name="Invoice">
           <Key>
@@ -4078,6 +4080,7 @@
           <EntitySetMapping Name="AdCampaigns">
             <EntityTypeMapping TypeName="DomainModels.AdCampaign">
               <MappingFragment StoreEntitySet="AdCampaign">
+                <ScalarProperty Name="priority" ColumnName="priority" />
                 <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
                 <ScalarProperty Name="CouponQuantity" ColumnName="CouponQuantity" />
                 <ScalarProperty Name="CouponTakenCount" ColumnName="CouponTakenCount" />
