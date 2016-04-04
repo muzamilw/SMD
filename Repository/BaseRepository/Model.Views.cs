@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets5E7E0C7D3CCE5854C75846FDCBB74FA6C29CE39B927D4F59382AA680E8B63841))]
+[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets9BBFD42427D73F63FDF6DB41F2AEBC5D3E44448752449512BAF390AF57B0DECB))]
 
 namespace Edm_EntityMappingGeneratedViews
 {
@@ -17,18 +17,18 @@ namespace Edm_EntityMappingGeneratedViews
     /// <Summary>
     /// The type contains views for EntitySets and AssociationSets that were generated at design time.
     /// </Summary>
-    public sealed class ViewsForBaseEntitySets5E7E0C7D3CCE5854C75846FDCBB74FA6C29CE39B927D4F59382AA680E8B63841 : System.Data.Mapping.EntityViewContainer
+    public sealed class ViewsForBaseEntitySets9BBFD42427D73F63FDF6DB41F2AEBC5D3E44448752449512BAF390AF57B0DECB : System.Data.Mapping.EntityViewContainer
     {
         
         /// <Summary>
         /// The constructor stores the views for the extents and also the hash values generated based on the metadata and mapping closure and views.
         /// </Summary>
-        public ViewsForBaseEntitySets5E7E0C7D3CCE5854C75846FDCBB74FA6C29CE39B927D4F59382AA680E8B63841()
+        public ViewsForBaseEntitySets9BBFD42427D73F63FDF6DB41F2AEBC5D3E44448752449512BAF390AF57B0DECB()
         {
             this.EdmEntityContainerName = "BaseDbContext";
             this.StoreEntityContainerName = "SMDModelStoreContainer";
-            this.HashOverMappingClosure = "281fa5bbca454cbb983c09dde41586db04181ed4ff8eb3631eb1111c1cecf590";
-            this.HashOverAllExtentViews = "f4a30c6e7a8ddf223b4efce3f1bb5b752f8464b08965a470832694627b0c37e0";
+            this.HashOverMappingClosure = "5572333e932e00bdb02bd0399177745476ae50b8faed5928afc6dc0e4e7c1f6d";
+            this.HashOverAllExtentViews = "729ef32671e8a91b44ed3e9d1fc9ba938af0894658af09213977865e76102c5a";
             this.ViewCount = 70;
         }
         
@@ -780,7 +780,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// </Summary>
         private System.Collections.Generic.KeyValuePair<string, string> GetView21()
         {
-            System.Text.StringBuilder viewString = new System.Text.StringBuilder(5030);
+            System.Text.StringBuilder viewString = new System.Text.StringBuilder(5103);
             viewString.Append("\r\n    SELECT VALUE -- Constructing AdCampaign\r\n        [SMDModel.Store.AdCampaig");
             viewString.Append("n](T1.AdCampaign_CampaignID, T1.AdCampaign_LanguageID, T1.AdCampaign_UserID, T1.");
             viewString.Append("AdCampaign_SMDCampaign, T1.AdCampaign_CampaignName, T1.AdCampaign_CampaignDescri");
@@ -801,49 +801,50 @@ namespace Edm_EntityMappingGeneratedViews
             viewString.Append("T1.AdCampaign_VideoUrl, T1.AdCampaign_BuuyItLine1, T1.AdCampaign_BuyItLine2, T1.");
             viewString.Append("AdCampaign_BuyItLine3, T1.AdCampaign_BuyItButtonLabel, T1.AdCampaign_BuyItImageU");
             viewString.Append("rl, T1.AdCampaign_CouponSwapValue, T1.AdCampaign_CouponActualValue, T1.AdCampaig");
-            viewString.Append("n_CouponTakenCount, T1.AdCampaign_CouponQuantity, T1.AdCampaign_CompanyId)\r\n    ");
-            viewString.Append("FROM (\r\n        SELECT \r\n            T.CampaignId AS AdCampaign_CampaignID, \r\n  ");
-            viewString.Append("          T.LanguageId AS AdCampaign_LanguageID, \r\n            T.UserId AS AdCam");
-            viewString.Append("paign_UserID, \r\n            T.SmdCampaign AS AdCampaign_SMDCampaign, \r\n         ");
-            viewString.Append("   T.CampaignName AS AdCampaign_CampaignName, \r\n            T.CampaignDescriptio");
-            viewString.Append("n AS AdCampaign_CampaignDescription, \r\n            T.Status AS AdCampaign_Status");
-            viewString.Append(", \r\n            T.Archived AS AdCampaign_Archived, \r\n            T.Approved AS A");
-            viewString.Append("dCampaign_Approved, \r\n            T.ApprovedBy AS AdCampaign_ApprovedBy, \r\n     ");
-            viewString.Append("       T.ApprovalDateTime AS AdCampaign_ApprovalDateTime, \r\n            T.StartD");
-            viewString.Append("ateTime AS AdCampaign_StartDateTime, \r\n            T.EndDateTime AS AdCampaign_E");
-            viewString.Append("ndDateTime, \r\n            T.MaxBudget AS AdCampaign_MaxBudget, \r\n            T.T");
-            viewString.Append("ype AS AdCampaign_Type, \r\n            T.ClickRate AS AdCampaign_ClickRate, \r\n   ");
-            viewString.Append("         T.SmdCredits AS AdCampaign_SMDCredits, \r\n            T.DisplayTitle AS ");
-            viewString.Append("AdCampaign_DisplayTitle, \r\n            T.Description AS AdCampaign_Description, ");
-            viewString.Append("\r\n            T.ImagePath AS AdCampaign_ImagePath, \r\n            T.LandingPageVi");
-            viewString.Append("deoLink AS AdCampaign_LandingPageVideoLink, \r\n            T.VerifyQuestion AS Ad");
-            viewString.Append("Campaign_VerifyQuestion, \r\n            T.Answer1 AS AdCampaign_Answer1, \r\n      ");
-            viewString.Append("      T.Answer2 AS AdCampaign_Answer2, \r\n            T.Answer3 AS AdCampaign_Ans");
-            viewString.Append("wer3, \r\n            T.CorrectAnswer AS AdCampaign_CorrectAnswer, \r\n            T");
-            viewString.Append(".CreatedDateTime AS AdCampaign_CreatedDateTime, \r\n            T.CreatedBy AS AdC");
-            viewString.Append("ampaign_CreatedBy, \r\n            T.ModifiedDateTime AS AdCampaign_ModifiedDateTi");
-            viewString.Append("me, \r\n            T.ModifiedBy AS AdCampaign_ModifiedBy, \r\n            T.AgeRang");
-            viewString.Append("eStart AS AdCampaign_AgeRangeStart, \r\n            T.AgeRangeEnd AS AdCampaign_Ag");
-            viewString.Append("eRangeEnd, \r\n            T.Gender AS AdCampaign_Gender, \r\n            T.Rejected");
-            viewString.Append("Reason AS AdCampaign_RejectedReason, \r\n            T.ProjectedReach AS AdCampaig");
-            viewString.Append("n_ProjectedReach, \r\n            T.ResultClicks AS AdCampaign_ResultClicks, \r\n   ");
-            viewString.Append("         T.AmountSpent AS AdCampaign_AmountSpent, \r\n            T.RewardType AS ");
-            viewString.Append("AdCampaign_RewardType, \r\n            T.Voucher1Heading AS AdCampaign_Voucher1Hea");
-            viewString.Append("ding, \r\n            T.Voucher1Description AS AdCampaign_Voucher1Description, \r\n ");
-            viewString.Append("           T.Voucher1Value AS AdCampaign_Voucher1Value, \r\n            T.Voucher2");
-            viewString.Append("Heading AS AdCampaign_Voucher2Heading, \r\n            T.Voucher2Description AS Ad");
-            viewString.Append("Campaign_Voucher2Description, \r\n            T.Voucher2Value AS AdCampaign_Vouche");
-            viewString.Append("r2Value, \r\n            T.Voucher1ImagePath AS AdCampaign_Voucher1ImagePath, \r\n  ");
-            viewString.Append("          T.Voucher2ImagePath AS AdCampaign_Voucher2ImagePath, \r\n            T.V");
-            viewString.Append("ideoUrl AS AdCampaign_VideoUrl, \r\n            T.BuuyItLine1 AS AdCampaign_BuuyIt");
-            viewString.Append("Line1, \r\n            T.BuyItLine2 AS AdCampaign_BuyItLine2, \r\n            T.BuyI");
-            viewString.Append("tLine3 AS AdCampaign_BuyItLine3, \r\n            T.BuyItButtonLabel AS AdCampaign_");
-            viewString.Append("BuyItButtonLabel, \r\n            T.BuyItImageUrl AS AdCampaign_BuyItImageUrl, \r\n ");
-            viewString.Append("           T.CouponSwapValue AS AdCampaign_CouponSwapValue, \r\n            T.Coup");
-            viewString.Append("onActualValue AS AdCampaign_CouponActualValue, \r\n            T.CouponTakenCount ");
-            viewString.Append("AS AdCampaign_CouponTakenCount, \r\n            T.CouponQuantity AS AdCampaign_Cou");
-            viewString.Append("ponQuantity, \r\n            T.CompanyId AS AdCampaign_CompanyId, \r\n            Tr");
-            viewString.Append("ue AS _from0\r\n        FROM BaseDbContext.AdCampaigns AS T\r\n    ) AS T1");
+            viewString.Append("n_CouponTakenCount, T1.AdCampaign_CouponQuantity, T1.AdCampaign_CompanyId, T1.Ad");
+            viewString.Append("Campaign_priority)\r\n    FROM (\r\n        SELECT \r\n            T.CampaignId AS AdC");
+            viewString.Append("ampaign_CampaignID, \r\n            T.LanguageId AS AdCampaign_LanguageID, \r\n     ");
+            viewString.Append("       T.UserId AS AdCampaign_UserID, \r\n            T.SmdCampaign AS AdCampaign_");
+            viewString.Append("SMDCampaign, \r\n            T.CampaignName AS AdCampaign_CampaignName, \r\n        ");
+            viewString.Append("    T.CampaignDescription AS AdCampaign_CampaignDescription, \r\n            T.Sta");
+            viewString.Append("tus AS AdCampaign_Status, \r\n            T.Archived AS AdCampaign_Archived, \r\n   ");
+            viewString.Append("         T.Approved AS AdCampaign_Approved, \r\n            T.ApprovedBy AS AdCamp");
+            viewString.Append("aign_ApprovedBy, \r\n            T.ApprovalDateTime AS AdCampaign_ApprovalDateTime");
+            viewString.Append(", \r\n            T.StartDateTime AS AdCampaign_StartDateTime, \r\n            T.End");
+            viewString.Append("DateTime AS AdCampaign_EndDateTime, \r\n            T.MaxBudget AS AdCampaign_MaxB");
+            viewString.Append("udget, \r\n            T.Type AS AdCampaign_Type, \r\n            T.ClickRate AS AdC");
+            viewString.Append("ampaign_ClickRate, \r\n            T.SmdCredits AS AdCampaign_SMDCredits, \r\n      ");
+            viewString.Append("      T.DisplayTitle AS AdCampaign_DisplayTitle, \r\n            T.Description AS ");
+            viewString.Append("AdCampaign_Description, \r\n            T.ImagePath AS AdCampaign_ImagePath, \r\n   ");
+            viewString.Append("         T.LandingPageVideoLink AS AdCampaign_LandingPageVideoLink, \r\n          ");
+            viewString.Append("  T.VerifyQuestion AS AdCampaign_VerifyQuestion, \r\n            T.Answer1 AS AdCa");
+            viewString.Append("mpaign_Answer1, \r\n            T.Answer2 AS AdCampaign_Answer2, \r\n            T.A");
+            viewString.Append("nswer3 AS AdCampaign_Answer3, \r\n            T.CorrectAnswer AS AdCampaign_Correc");
+            viewString.Append("tAnswer, \r\n            T.CreatedDateTime AS AdCampaign_CreatedDateTime, \r\n      ");
+            viewString.Append("      T.CreatedBy AS AdCampaign_CreatedBy, \r\n            T.ModifiedDateTime AS A");
+            viewString.Append("dCampaign_ModifiedDateTime, \r\n            T.ModifiedBy AS AdCampaign_ModifiedBy,");
+            viewString.Append(" \r\n            T.AgeRangeStart AS AdCampaign_AgeRangeStart, \r\n            T.AgeR");
+            viewString.Append("angeEnd AS AdCampaign_AgeRangeEnd, \r\n            T.Gender AS AdCampaign_Gender, ");
+            viewString.Append("\r\n            T.RejectedReason AS AdCampaign_RejectedReason, \r\n            T.Pro");
+            viewString.Append("jectedReach AS AdCampaign_ProjectedReach, \r\n            T.ResultClicks AS AdCamp");
+            viewString.Append("aign_ResultClicks, \r\n            T.AmountSpent AS AdCampaign_AmountSpent, \r\n    ");
+            viewString.Append("        T.RewardType AS AdCampaign_RewardType, \r\n            T.Voucher1Heading A");
+            viewString.Append("S AdCampaign_Voucher1Heading, \r\n            T.Voucher1Description AS AdCampaign_");
+            viewString.Append("Voucher1Description, \r\n            T.Voucher1Value AS AdCampaign_Voucher1Value, ");
+            viewString.Append("\r\n            T.Voucher2Heading AS AdCampaign_Voucher2Heading, \r\n            T.V");
+            viewString.Append("oucher2Description AS AdCampaign_Voucher2Description, \r\n            T.Voucher2Va");
+            viewString.Append("lue AS AdCampaign_Voucher2Value, \r\n            T.Voucher1ImagePath AS AdCampaign");
+            viewString.Append("_Voucher1ImagePath, \r\n            T.Voucher2ImagePath AS AdCampaign_Voucher2Imag");
+            viewString.Append("ePath, \r\n            T.VideoUrl AS AdCampaign_VideoUrl, \r\n            T.BuuyItLi");
+            viewString.Append("ne1 AS AdCampaign_BuuyItLine1, \r\n            T.BuyItLine2 AS AdCampaign_BuyItLin");
+            viewString.Append("e2, \r\n            T.BuyItLine3 AS AdCampaign_BuyItLine3, \r\n            T.BuyItBu");
+            viewString.Append("ttonLabel AS AdCampaign_BuyItButtonLabel, \r\n            T.BuyItImageUrl AS AdCam");
+            viewString.Append("paign_BuyItImageUrl, \r\n            T.CouponSwapValue AS AdCampaign_CouponSwapVal");
+            viewString.Append("ue, \r\n            T.CouponActualValue AS AdCampaign_CouponActualValue, \r\n       ");
+            viewString.Append("     T.CouponTakenCount AS AdCampaign_CouponTakenCount, \r\n            T.CouponQu");
+            viewString.Append("antity AS AdCampaign_CouponQuantity, \r\n            T.CompanyId AS AdCampaign_Com");
+            viewString.Append("panyId, \r\n            T.priority AS AdCampaign_priority, \r\n            True AS _");
+            viewString.Append("from0\r\n        FROM BaseDbContext.AdCampaigns AS T\r\n    ) AS T1");
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.AdCampaign", viewString.ToString());
         }
         
@@ -1596,7 +1597,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// </Summary>
         private System.Collections.Generic.KeyValuePair<string, string> GetView52()
         {
-            System.Text.StringBuilder viewString = new System.Text.StringBuilder(5037);
+            System.Text.StringBuilder viewString = new System.Text.StringBuilder(5110);
             viewString.Append("\r\n    SELECT VALUE -- Constructing AdCampaigns\r\n        [DomainModels.AdCampaign");
             viewString.Append("](T1.AdCampaign_CampaignId, T1.AdCampaign_LanguageId, T1.AdCampaign_UserId, T1.A");
             viewString.Append("dCampaign_SmdCampaign, T1.AdCampaign_CampaignName, T1.AdCampaign_CampaignDescrip");
@@ -1617,49 +1618,50 @@ namespace Edm_EntityMappingGeneratedViews
             viewString.Append("1.AdCampaign_VideoUrl, T1.AdCampaign_BuuyItLine1, T1.AdCampaign_BuyItLine2, T1.A");
             viewString.Append("dCampaign_BuyItLine3, T1.AdCampaign_BuyItButtonLabel, T1.AdCampaign_BuyItImageUr");
             viewString.Append("l, T1.AdCampaign_CouponSwapValue, T1.AdCampaign_CouponActualValue, T1.AdCampaign");
-            viewString.Append("_CouponTakenCount, T1.AdCampaign_CouponQuantity, T1.AdCampaign_CompanyId)\r\n    F");
-            viewString.Append("ROM (\r\n        SELECT \r\n            T.CampaignID AS AdCampaign_CampaignId, \r\n   ");
-            viewString.Append("         T.LanguageID AS AdCampaign_LanguageId, \r\n            T.UserID AS AdCamp");
-            viewString.Append("aign_UserId, \r\n            T.SMDCampaign AS AdCampaign_SmdCampaign, \r\n          ");
-            viewString.Append("  T.CampaignName AS AdCampaign_CampaignName, \r\n            T.CampaignDescription");
-            viewString.Append(" AS AdCampaign_CampaignDescription, \r\n            T.Status AS AdCampaign_Status,");
-            viewString.Append(" \r\n            T.Archived AS AdCampaign_Archived, \r\n            T.Approved AS Ad");
-            viewString.Append("Campaign_Approved, \r\n            T.ApprovedBy AS AdCampaign_ApprovedBy, \r\n      ");
-            viewString.Append("      T.ApprovalDateTime AS AdCampaign_ApprovalDateTime, \r\n            T.StartDa");
-            viewString.Append("teTime AS AdCampaign_StartDateTime, \r\n            T.EndDateTime AS AdCampaign_En");
-            viewString.Append("dDateTime, \r\n            T.MaxBudget AS AdCampaign_MaxBudget, \r\n            T.Ty");
-            viewString.Append("pe AS AdCampaign_Type, \r\n            T.ClickRate AS AdCampaign_ClickRate, \r\n    ");
-            viewString.Append("        T.SMDCredits AS AdCampaign_SmdCredits, \r\n            T.DisplayTitle AS A");
-            viewString.Append("dCampaign_DisplayTitle, \r\n            T.Description AS AdCampaign_Description, \r");
-            viewString.Append("\n            T.ImagePath AS AdCampaign_ImagePath, \r\n            T.LandingPageVid");
-            viewString.Append("eoLink AS AdCampaign_LandingPageVideoLink, \r\n            T.VerifyQuestion AS AdC");
-            viewString.Append("ampaign_VerifyQuestion, \r\n            T.Answer1 AS AdCampaign_Answer1, \r\n       ");
-            viewString.Append("     T.Answer2 AS AdCampaign_Answer2, \r\n            T.Answer3 AS AdCampaign_Answ");
-            viewString.Append("er3, \r\n            T.CorrectAnswer AS AdCampaign_CorrectAnswer, \r\n            T.");
-            viewString.Append("CreatedDateTime AS AdCampaign_CreatedDateTime, \r\n            T.CreatedBy AS AdCa");
-            viewString.Append("mpaign_CreatedBy, \r\n            T.ModifiedDateTime AS AdCampaign_ModifiedDateTim");
-            viewString.Append("e, \r\n            T.ModifiedBy AS AdCampaign_ModifiedBy, \r\n            T.AgeRange");
-            viewString.Append("Start AS AdCampaign_AgeRangeStart, \r\n            T.AgeRangeEnd AS AdCampaign_Age");
-            viewString.Append("RangeEnd, \r\n            T.Gender AS AdCampaign_Gender, \r\n            T.RejectedR");
-            viewString.Append("eason AS AdCampaign_RejectedReason, \r\n            T.ProjectedReach AS AdCampaign");
-            viewString.Append("_ProjectedReach, \r\n            T.ResultClicks AS AdCampaign_ResultClicks, \r\n    ");
-            viewString.Append("        T.AmountSpent AS AdCampaign_AmountSpent, \r\n            T.RewardType AS A");
-            viewString.Append("dCampaign_RewardType, \r\n            T.Voucher1Heading AS AdCampaign_Voucher1Head");
-            viewString.Append("ing, \r\n            T.Voucher1Description AS AdCampaign_Voucher1Description, \r\n  ");
-            viewString.Append("          T.Voucher1Value AS AdCampaign_Voucher1Value, \r\n            T.Voucher2H");
-            viewString.Append("eading AS AdCampaign_Voucher2Heading, \r\n            T.Voucher2Description AS AdC");
-            viewString.Append("ampaign_Voucher2Description, \r\n            T.Voucher2Value AS AdCampaign_Voucher");
-            viewString.Append("2Value, \r\n            T.Voucher1ImagePath AS AdCampaign_Voucher1ImagePath, \r\n   ");
-            viewString.Append("         T.Voucher2ImagePath AS AdCampaign_Voucher2ImagePath, \r\n            T.Vi");
-            viewString.Append("deoUrl AS AdCampaign_VideoUrl, \r\n            T.BuuyItLine1 AS AdCampaign_BuuyItL");
-            viewString.Append("ine1, \r\n            T.BuyItLine2 AS AdCampaign_BuyItLine2, \r\n            T.BuyIt");
-            viewString.Append("Line3 AS AdCampaign_BuyItLine3, \r\n            T.BuyItButtonLabel AS AdCampaign_B");
-            viewString.Append("uyItButtonLabel, \r\n            T.BuyItImageUrl AS AdCampaign_BuyItImageUrl, \r\n  ");
-            viewString.Append("          T.CouponSwapValue AS AdCampaign_CouponSwapValue, \r\n            T.Coupo");
-            viewString.Append("nActualValue AS AdCampaign_CouponActualValue, \r\n            T.CouponTakenCount A");
-            viewString.Append("S AdCampaign_CouponTakenCount, \r\n            T.CouponQuantity AS AdCampaign_Coup");
-            viewString.Append("onQuantity, \r\n            T.CompanyId AS AdCampaign_CompanyId, \r\n            Tru");
-            viewString.Append("e AS _from0\r\n        FROM SMDModelStoreContainer.AdCampaign AS T\r\n    ) AS T1");
+            viewString.Append("_CouponTakenCount, T1.AdCampaign_CouponQuantity, T1.AdCampaign_CompanyId, T1.AdC");
+            viewString.Append("ampaign_priority)\r\n    FROM (\r\n        SELECT \r\n            T.CampaignID AS AdCa");
+            viewString.Append("mpaign_CampaignId, \r\n            T.LanguageID AS AdCampaign_LanguageId, \r\n      ");
+            viewString.Append("      T.UserID AS AdCampaign_UserId, \r\n            T.SMDCampaign AS AdCampaign_S");
+            viewString.Append("mdCampaign, \r\n            T.CampaignName AS AdCampaign_CampaignName, \r\n         ");
+            viewString.Append("   T.CampaignDescription AS AdCampaign_CampaignDescription, \r\n            T.Stat");
+            viewString.Append("us AS AdCampaign_Status, \r\n            T.Archived AS AdCampaign_Archived, \r\n    ");
+            viewString.Append("        T.Approved AS AdCampaign_Approved, \r\n            T.ApprovedBy AS AdCampa");
+            viewString.Append("ign_ApprovedBy, \r\n            T.ApprovalDateTime AS AdCampaign_ApprovalDateTime,");
+            viewString.Append(" \r\n            T.StartDateTime AS AdCampaign_StartDateTime, \r\n            T.EndD");
+            viewString.Append("ateTime AS AdCampaign_EndDateTime, \r\n            T.MaxBudget AS AdCampaign_MaxBu");
+            viewString.Append("dget, \r\n            T.Type AS AdCampaign_Type, \r\n            T.ClickRate AS AdCa");
+            viewString.Append("mpaign_ClickRate, \r\n            T.SMDCredits AS AdCampaign_SmdCredits, \r\n       ");
+            viewString.Append("     T.DisplayTitle AS AdCampaign_DisplayTitle, \r\n            T.Description AS A");
+            viewString.Append("dCampaign_Description, \r\n            T.ImagePath AS AdCampaign_ImagePath, \r\n    ");
+            viewString.Append("        T.LandingPageVideoLink AS AdCampaign_LandingPageVideoLink, \r\n           ");
+            viewString.Append(" T.VerifyQuestion AS AdCampaign_VerifyQuestion, \r\n            T.Answer1 AS AdCam");
+            viewString.Append("paign_Answer1, \r\n            T.Answer2 AS AdCampaign_Answer2, \r\n            T.An");
+            viewString.Append("swer3 AS AdCampaign_Answer3, \r\n            T.CorrectAnswer AS AdCampaign_Correct");
+            viewString.Append("Answer, \r\n            T.CreatedDateTime AS AdCampaign_CreatedDateTime, \r\n       ");
+            viewString.Append("     T.CreatedBy AS AdCampaign_CreatedBy, \r\n            T.ModifiedDateTime AS Ad");
+            viewString.Append("Campaign_ModifiedDateTime, \r\n            T.ModifiedBy AS AdCampaign_ModifiedBy, ");
+            viewString.Append("\r\n            T.AgeRangeStart AS AdCampaign_AgeRangeStart, \r\n            T.AgeRa");
+            viewString.Append("ngeEnd AS AdCampaign_AgeRangeEnd, \r\n            T.Gender AS AdCampaign_Gender, \r");
+            viewString.Append("\n            T.RejectedReason AS AdCampaign_RejectedReason, \r\n            T.Proj");
+            viewString.Append("ectedReach AS AdCampaign_ProjectedReach, \r\n            T.ResultClicks AS AdCampa");
+            viewString.Append("ign_ResultClicks, \r\n            T.AmountSpent AS AdCampaign_AmountSpent, \r\n     ");
+            viewString.Append("       T.RewardType AS AdCampaign_RewardType, \r\n            T.Voucher1Heading AS");
+            viewString.Append(" AdCampaign_Voucher1Heading, \r\n            T.Voucher1Description AS AdCampaign_V");
+            viewString.Append("oucher1Description, \r\n            T.Voucher1Value AS AdCampaign_Voucher1Value, \r");
+            viewString.Append("\n            T.Voucher2Heading AS AdCampaign_Voucher2Heading, \r\n            T.Vo");
+            viewString.Append("ucher2Description AS AdCampaign_Voucher2Description, \r\n            T.Voucher2Val");
+            viewString.Append("ue AS AdCampaign_Voucher2Value, \r\n            T.Voucher1ImagePath AS AdCampaign_");
+            viewString.Append("Voucher1ImagePath, \r\n            T.Voucher2ImagePath AS AdCampaign_Voucher2Image");
+            viewString.Append("Path, \r\n            T.VideoUrl AS AdCampaign_VideoUrl, \r\n            T.BuuyItLin");
+            viewString.Append("e1 AS AdCampaign_BuuyItLine1, \r\n            T.BuyItLine2 AS AdCampaign_BuyItLine");
+            viewString.Append("2, \r\n            T.BuyItLine3 AS AdCampaign_BuyItLine3, \r\n            T.BuyItBut");
+            viewString.Append("tonLabel AS AdCampaign_BuyItButtonLabel, \r\n            T.BuyItImageUrl AS AdCamp");
+            viewString.Append("aign_BuyItImageUrl, \r\n            T.CouponSwapValue AS AdCampaign_CouponSwapValu");
+            viewString.Append("e, \r\n            T.CouponActualValue AS AdCampaign_CouponActualValue, \r\n        ");
+            viewString.Append("    T.CouponTakenCount AS AdCampaign_CouponTakenCount, \r\n            T.CouponQua");
+            viewString.Append("ntity AS AdCampaign_CouponQuantity, \r\n            T.CompanyId AS AdCampaign_Comp");
+            viewString.Append("anyId, \r\n            T.priority AS AdCampaign_priority, \r\n            True AS _f");
+            viewString.Append("rom0\r\n        FROM SMDModelStoreContainer.AdCampaign AS T\r\n    ) AS T1");
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.AdCampaigns", viewString.ToString());
         }
         

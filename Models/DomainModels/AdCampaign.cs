@@ -72,7 +72,7 @@ namespace SMD.Models.DomainModels
         public virtual ICollection<AdCampaignTargetCriteria> AdCampaignTargetCriterias { get; set; }
         public virtual ICollection<AdCampaignTargetLocation> AdCampaignTargetLocations { get; set; }
         public virtual ICollection<InvoiceDetail> InvoiceDetails { get; set; }
-
+        public int? priority { get; set; }
         [NotMapped]
         public string CampaignImagePath { get; set; }
         [NotMapped]
