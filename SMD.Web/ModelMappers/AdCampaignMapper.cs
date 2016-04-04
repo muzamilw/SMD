@@ -123,7 +123,8 @@ namespace SMD.MIS.ModelMappers
                 CouponActualValue = source.CouponActualValue,
                 CouponQuantity = source.CouponQuantity,
                 CouponSwapValue = source.CouponSwapValue,
-                CouponTakenCount = source.CouponTakenCount
+                CouponTakenCount = source.CouponTakenCount,
+                priority = source.priority
             };
 
 

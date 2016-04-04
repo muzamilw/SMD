@@ -7,7 +7,7 @@
           , ImagePath, CampaignImagePath, CampaignTypeImagePath, Description, ClickRate,
           Voucher1Heading, Voucher1Description, Voucher1Value, Voucher2Heading, Voucher2Description, Voucher2Value,
           Voucher1ImagePath, VoucherImagePath, CreatedBy, VideoUrl, BuuyItLine1, BuyItLine2, BuyItLine3, BuyItButtonLabel,
-          BuyItImageUrl, AdViews, CompanyId, CouponSwapValue, CouponActualValue, CouponQuantity, CouponTakenCount) {
+          BuyItImageUrl, AdViews, CompanyId, CouponSwapValue, CouponActualValue, CouponQuantity, CouponTakenCount, priority) {
           var
               //type and userID will be set on server sside
               CampaignID = ko.observable(CampaignID),
@@ -26,6 +26,7 @@
               CouponActualValue = ko.observable(CouponActualValue),
               CouponQuantity = ko.observable(CouponQuantity),
               CouponTakenCount = ko.observable(CouponTakenCount),
+              priority = ko.observable(priority),
               StartDateTime = ko.observable((StartDateTime !== null && StartDateTime !== undefined) ? moment(StartDateTime).toDate() : undefined).extend({  // custom message
                   required: true
               }),//ko.observable(),
@@ -157,7 +158,8 @@
                   AdViews: AdViews,
                   CouponSwapValue: CouponSwapValue,
                   CouponActualValue: CouponActualValue,
-                  CouponQuantity: CouponQuantity
+                  CouponQuantity: CouponQuantity,
+                  priority: priority
               }),
               // Has Changes
               hasChanges = ko.computed(function () {
@@ -233,7 +235,8 @@
                       CouponSwapValue: CouponSwapValue(),
                       CouponActualValue: CouponActualValue(),
                       CouponQuantity: CouponQuantity(),
-                      CouponTakenCount: CouponTakenCount()
+                      CouponTakenCount: CouponTakenCount(),
+                      priority:priority()
                   };
               };
           return {
@@ -295,7 +298,8 @@
               CouponSwapValue: CouponSwapValue,
               CouponActualValue: CouponActualValue,
               CouponQuantity: CouponQuantity,
-              CouponTakenCount: CouponTakenCount
+              CouponTakenCount: CouponTakenCount,
+              priority: priority
           };
       };
 
@@ -421,7 +425,7 @@
             source.CorrectAnswer, source.AgeRangeStart, source.AgeRangeEnd, source.ResultClicks, source.AmountSpent, source.ImagePath, source.CampaignImagePath,
             source.CampaignTypeImagePath, source.Description, source.ClickRate, source.Voucher1Heading, source.Voucher1Description, source.Voucher1Value, source.Voucher2Heading, source.Voucher2Description,
              source.Voucher2Value, source.Voucher1ImagePath, source.VoucherImagePath, source.CreatedBy, source.VideoUrl, source.BuuyItLine1, source.BuyItLine2, source.BuyItLine3, source.BuyItButtonLabel, source.BuyItImageUrl,source.AdViews,source.CompanyId,
-            source.CouponSwapValue, source.CouponActualValue,source.CouponQuantity,source.CouponTakenCount);
+            source.CouponSwapValue, source.CouponActualValue,source.CouponQuantity,source.CouponTakenCount, source.priority);
         _.each(source.AdCampaignTargetCriterias, function (item) {
             campaign.AdCampaignTargetCriterias.push(AdCampaignTargetCriteriasModel.Create(item));
         });

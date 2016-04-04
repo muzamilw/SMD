@@ -168,7 +168,7 @@ namespace SMD.Models.DomainModels
             target.CouponActualValue = CouponActualValue;
             target.CouponTakenCount = CouponTakenCount;
             target.CouponQuantity = CouponQuantity;
-         
+            target.priority = priority;
         }
     }
 }
