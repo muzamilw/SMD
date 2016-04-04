@@ -240,25 +240,26 @@ namespace SMD.Repository.Repositories
             return query.FirstOrDefault();
         }
 
-        public List<Coupons> GetCoupons()
+        public List<GetCoupons_Result> GetCoupons(string UserId)
         {
+            return db.GetCoupons(UserId).ToList();
 
-            var query = from ad in db.AdCampaigns
-                        where ad.Type == 5 && (ad.CouponTakenCount == null || ad.CouponTakenCount < ad.CouponQuantity)
-                        && (ad.Archived == null || ad.Archived == false)
-                        select new Coupons
-                        {
-                            CouponId = ad.CampaignId,
-                            CouponActualValue = ad.CouponActualValue,
-                            CouponName = ad.CampaignName,
-                            CouponTitle = ad.DisplayTitle,
-                            Firstline = ad.Description,
-                            SecondLine = ad.CampaignDescription,
-                            CouponSwapValue = ad.CouponSwapValue,
-                            CouponImage = System.Web.HttpContext.Current.Request.Url.Scheme + "://" + System.Web.HttpContext.Current.Request.Url.Authority + "/" + ad.ImagePath
-                        };
+            //var query = from ad in db.AdCampaigns
+            //            where ad.Type == 5 && (ad.CouponTakenCount == null || ad.CouponTakenCount < ad.CouponQuantity)
+            //            && (ad.Archived == null || ad.Archived == false)
+            //            select new Coupons
+            //            {
+            //                CouponId = ad.CampaignId,
+            //                CouponActualValue = ad.CouponActualValue,
+            //                CouponName = ad.CampaignName,
+            //                CouponTitle = ad.DisplayTitle,
+            //                Firstline = ad.Description,
+            //                SecondLine = ad.CampaignDescription,
+            //                CouponSwapValue = ad.CouponSwapValue,
+            //                CouponImage = System.Web.HttpContext.Current.Request.Url.Scheme + "://" + System.Web.HttpContext.Current.Request.Url.Authority + "/" + ad.ImagePath
+            //            };
 
-            return query.ToList<Coupons>();
+            //return query.ToList<Coupons>();
         }
     }
 }

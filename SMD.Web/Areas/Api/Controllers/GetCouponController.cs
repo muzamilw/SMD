@@ -1,10 +1,12 @@
 ﻿using SMD.Interfaces.Services;
 using SMD.Models.Common;
+using SMD.Models.DomainModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web;
 using System.Web.Http;
 
 namespace SMD.MIS.Areas.Api.Controllers
@@ -37,9 +39,13 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// </summary>
 
 
-        public List<Coupons> Get()
+        public List<GetCoupons_Result> Get(string UserId)
         {
-            return _advertService.GetCoupons();            
+            if (string.IsNullOrEmpty(UserId))
+            {
+                throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
+            }
+            return _advertService.GetCoupons(UserId);            
         }
 
         #endregion

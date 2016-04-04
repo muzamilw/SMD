@@ -338,7 +338,9 @@ namespace SMD.Implementation.Services
             }
             campaignModel.StartDateTime = campaignModel.StartDateTime.Value.Subtract(_adCampaignRepository.UserTimezoneOffSet);
             campaignModel.EndDateTime = campaignModel.EndDateTime.Value.Subtract(_adCampaignRepository.UserTimezoneOffSet);
-
+            if(campaignModel.Status == 3){
+                campaignModel.Approved = true;
+            }
             _adCampaignRepository.Update(campaignModel);
             _adCampaignRepository.SaveChanges();
 
@@ -760,9 +762,9 @@ namespace SMD.Implementation.Services
 
 
         }
-        public List<Coupons> GetCoupons()
+        public List<GetCoupons_Result> GetCoupons(string UserId)
         {
-            return _adCampaignRepository.GetCoupons();
+            return _adCampaignRepository.GetCoupons(UserId);
         }
         #endregion
     }

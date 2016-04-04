@@ -583,154 +583,7 @@ else
                                     </div>
                                 </div>
                                 <div class="col-lg-4" style="   margin-left: -33px;    width: 36%;    margin-top: 233px;">
-                                    <div class="aud_cnt_head hidden-sm hidden-xs" style=" display:none;">
-                                        <h4 class="ad_h4" data-bind="visible: Type() == 1">Video</h4>
-                                        <h4 class="ad_h4" data-bind="visible: Type() == 2">URL</h4>
-                                        <h4 class="ad_h4" data-bind="visible: Type() == 3">Flyer / Leaflet</h4>
-                                        <h4 class="ad_h4" data-bind="visible: Type() == 4">Sponsored game</h4>
-                                    </div>
-                                    <div class="aud_cnt hidden-sm hidden-xs">
-
-                                        <div class="clearfix _1gab VAGUE" style="display:none;">
-                                            <div class="_1g9- lfloat">
-                                                <div class="_1g9_">
-                                                    <i class="_1ga0 broad_aud img sp_NQc91B1T0mb sx_f05cb6 meterPin"></i>
-                                                    <i class="_1ga1 img sp_NQc91B1T0mb3 sx_0eeab0"></i>
-                                                    <div class="_1ga2 clearfix">
-                                                        <div class="_ohe lfloat">
-                                                            <span class="_1ga3">Specific</span>
-                                                        </div>
-                                                        <div class="_ohf rfloat">
-                                                            <span class="_1ga3">Broad</span>
-                                                        </div>
-                                                    </div>
-                                                </div>yo
-                                            </div>
-                                            <div class="rfloat fsm _1ga4">
-                                                <p data-bind="visible: $root.audienceReachMode()  == 1">Your audience is too specific for your ads to be shown. Try making it broader.</p>
-                                                <p data-bind="visible: $root.audienceReachMode()  == 3">Your audience selection is fairly broad.</p>
-                                                <p data-bind="visible: $root.audienceReachMode()  == 2">Your audience is defined.</p>
-                                            </div>
-                                            <div class="clearfix">
-                                                &nbsp;
-                                            </div>
-                                        </div>
-                                        <div style="display:none;">
-                                            @*<span class="ad_h4_noborder">Audience Details:</span>*@
-
-                                            <ul style="display:none;">
-                                                <li class="li-audul" data-bind="visible: $root.campaignModel().AdCampaignTargetLocations().length > 0">
-                                                    <div class="fsm_bold">Locations:</div>
-
-                                                    <ul class="pad-11">
-                                                        <!-- ko template: { name: 'targetLocationAudienceTemplate' , foreach: AdCampaignTargetLocations } -->
-                                                        <!-- /ko -->
-
-
-                                                    </ul>
-                                                </li>
-                                                <li class="li-audul" data-bind="visible: $root.visibleTargetAudience(3)  == 1">
-                                                    <div class="fsm_bold">Languages:</div>
-                                                    <ul class="pad-11">
-                                                        <!-- ko template: { name: 'targetLanguageAudienceTemplate' , foreach: AdCampaignTargetCriterias } -->
-                                                        <!-- /ko -->
-
-                                                    </ul>
-                                                </li>
-                                                <li class="li-audul" data-bind="visible: $root.visibleTargetAudience(5)  == 1">
-                                                    <div class="fsm_bold">Education:</div>
-                                                    <ul class="pad-11">
-                                                        <!-- ko template: { name: 'targetEducationAudienceTemplate' , foreach: AdCampaignTargetCriterias } -->
-                                                        <!-- /ko -->
-
-                                                    </ul>
-                                                </li>
-                                                <li class="li-audul" data-bind="visible: $root.visibleTargetAudience(4)  == 1">
-                                                    <div class="fsm_bold">Profession:</div>
-                                                    <ul class="pad-11">
-                                                        <!-- ko template: { name: 'targetIndustryAudienceTemplate' , foreach: AdCampaignTargetCriterias } -->
-                                                        <!-- /ko -->
-
-                                                    </ul>
-                                                </li>
-
-                                                <li class="li-audul" data-bind="visible: $root.visibleTargetAudience(1) == 1 || $root.visibleTargetAudience(2)  == 1">
-                                                    <div class="fsm_bold">ADDITIONAL TARGETING CRITERIA'S:</div>
-
-                                                    <ul class="pad-11">
-                                                        <!-- ko template: { name: 'targetCriteriasAudienceTemplate', foreach: AdCampaignTargetCriterias } -->
-                                                        <!-- /ko -->
-                                                    </ul>
-                                                </li>
-
-                                                <li class="li-audul">
-                                                    <div class="fsm_bold">Age:</div>
-                                                    <ul class="pad-11">
-                                                        <li>
-                                                            <span data-bind="text: $root.campaignModel().AgeRangeStart() +' - '+ $root.campaignModel().AgeRangeEnd()"></span>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                <li class="li-audul">
-                                                    <div class="fsm_bold">Gender:</div>
-                                                    <ul class="pad-11">
-                                                        <li>
-                                                            <!--ko if:$root.campaignModel().Gender() == 1 -->
-                                                            <span class="aud_licontent">All</span>
-                                                            <!--/ko-->
-                                                            <!--ko if:$root.campaignModel().Gender() == 2 -->
-                                                            <span class="aud_licontent">Men</span>
-                                                            <!--/ko-->
-                                                            <!--ko if:$root.campaignModel().Gender() == 3 -->
-                                                            <span class="aud_licontent">Women</span>
-                                                            <!--/ko-->
-
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div>
-                                            <div class="yourBudgtHeadingCnt">
-                                                <span>Reach</span>
-                                            </div>
-                                            <div class="" data-bind="visible:!$root.isDisplayCouponsAds()">
-                                                <span>PPC  </span>
-                                            </div>
-                                            <div class="clearfix"> </div>
-
-                                        </div>
-                                        <div style="    font-weight: bold;    padding-top: 0px;    font-size: 16px;">
-                                            <div class="yourBudgtHeadingCnt">
-
-                                                <span data-bind="text:$root.reachedAudience()">0</span> people
-                                            </div>
-                                            <div class="" data-bind="visible:!$root.isDisplayCouponsAds()">
-                                                <span data-bind="text: '£' + $root.pricePerclick()"></span>
-                                            </div>
-                                            <div class="clearfix"> </div>
-
-                                        </div>
-                                        <div style="display:none;">
-                                            <div class="yourBudgtHeadingCnt">
-                                                <span>Max spend :</span>
-                                            </div>
-                                            <div class="">
-                                                <span data-bind="text: '£' + ($root.pricePerclick() * $root.reachedAudience() )"></span>
-                                            </div>
-                                            <div class="clearfix"> </div>
-
-                                        </div>
-
-
-
-                                    </div>
-                                    <div class="aud_cnt_foot" style="display:none;">
-                                        <span>This cap will deliver to </span><br />
-                                        <span data-bind="text:  (($root.pricePerclick() * $root.reachedAudience())/MaxBudget() ) +'%' " style="font-size:16px; font-weight:bold;">73 %</span><br />
-                                        <span>of your target audience</span><br />
-
-                                    </div>
+                                  
                                 </div>
                             </div>
 
@@ -1323,6 +1176,7 @@ else
                                 </div>
                             </div>
                             <br />
+                            
                             <div data-bind="visible:$root.isDisplayCouponsAds()">
                                 <button class="btn  btn-success btnSubmitApproval" id="btnSubmitForApproval2" data-bind="click:$root.submitCampaignData, visible: $root.canSubmitForApproval" style="width: 100%;">Submit for Approval</button>
                             </div>
@@ -1511,6 +1365,159 @@ else
                                     <span>shared with happy clickers</span>
                                 </div>
 
+                            </div>
+                            <div class="clearfix">
+
+                            </div>
+                            <div style="width:100%">
+                                <div class="aud_cnt_head hidden-sm hidden-xs" style=" display:none;">
+                                    <h4 class="ad_h4" data-bind="visible: Type() == 1">Video</h4>
+                                    <h4 class="ad_h4" data-bind="visible: Type() == 2">URL</h4>
+                                    <h4 class="ad_h4" data-bind="visible: Type() == 3">Flyer / Leaflet</h4>
+                                    <h4 class="ad_h4" data-bind="visible: Type() == 4">Sponsored game</h4>
+                                </div>
+                                <div class="aud_cnt hidden-sm hidden-xs">
+
+                                    <div class="clearfix _1gab VAGUE" style="display:none;">
+                                        <div class="_1g9- lfloat">
+                                            <div class="_1g9_">
+                                                <i class="_1ga0 broad_aud img sp_NQc91B1T0mb sx_f05cb6 meterPin"></i>
+                                                <i class="_1ga1 img sp_NQc91B1T0mb3 sx_0eeab0"></i>
+                                                <div class="_1ga2 clearfix">
+                                                    <div class="_ohe lfloat">
+                                                        <span class="_1ga3">Specific</span>
+                                                    </div>
+                                                    <div class="_ohf rfloat">
+                                                        <span class="_1ga3">Broad</span>
+                                                    </div>
+                                                </div>
+                                            </div>yo
+                                        </div>
+                                        <div class="rfloat fsm _1ga4">
+                                            <p data-bind="visible: $root.audienceReachMode()  == 1">Your audience is too specific for your ads to be shown. Try making it broader.</p>
+                                            <p data-bind="visible: $root.audienceReachMode()  == 3">Your audience selection is fairly broad.</p>
+                                            <p data-bind="visible: $root.audienceReachMode()  == 2">Your audience is defined.</p>
+                                        </div>
+                                        <div class="clearfix">
+                                            &nbsp;
+                                        </div>
+                                    </div>
+                                    <div style="display:none;">
+                                        @*<span class="ad_h4_noborder">Audience Details:</span>*@
+
+                                        <ul style="display:none;">
+                                            <li class="li-audul" data-bind="visible: $root.campaignModel().AdCampaignTargetLocations().length > 0">
+                                                <div class="fsm_bold">Locations:</div>
+
+                                                <ul class="pad-11">
+                                                    <!-- ko template: { name: 'targetLocationAudienceTemplate' , foreach: AdCampaignTargetLocations } -->
+                                                    <!-- /ko -->
+
+
+                                                </ul>
+                                            </li>
+                                            <li class="li-audul" data-bind="visible: $root.visibleTargetAudience(3)  == 1">
+                                                <div class="fsm_bold">Languages:</div>
+                                                <ul class="pad-11">
+                                                    <!-- ko template: { name: 'targetLanguageAudienceTemplate' , foreach: AdCampaignTargetCriterias } -->
+                                                    <!-- /ko -->
+
+                                                </ul>
+                                            </li>
+                                            <li class="li-audul" data-bind="visible: $root.visibleTargetAudience(5)  == 1">
+                                                <div class="fsm_bold">Education:</div>
+                                                <ul class="pad-11">
+                                                    <!-- ko template: { name: 'targetEducationAudienceTemplate' , foreach: AdCampaignTargetCriterias } -->
+                                                    <!-- /ko -->
+
+                                                </ul>
+                                            </li>
+                                            <li class="li-audul" data-bind="visible: $root.visibleTargetAudience(4)  == 1">
+                                                <div class="fsm_bold">Profession:</div>
+                                                <ul class="pad-11">
+                                                    <!-- ko template: { name: 'targetIndustryAudienceTemplate' , foreach: AdCampaignTargetCriterias } -->
+                                                    <!-- /ko -->
+
+                                                </ul>
+                                            </li>
+
+                                            <li class="li-audul" data-bind="visible: $root.visibleTargetAudience(1) == 1 || $root.visibleTargetAudience(2)  == 1">
+                                                <div class="fsm_bold">ADDITIONAL TARGETING CRITERIA'S:</div>
+
+                                                <ul class="pad-11">
+                                                    <!-- ko template: { name: 'targetCriteriasAudienceTemplate', foreach: AdCampaignTargetCriterias } -->
+                                                    <!-- /ko -->
+                                                </ul>
+                                            </li>
+
+                                            <li class="li-audul">
+                                                <div class="fsm_bold">Age:</div>
+                                                <ul class="pad-11">
+                                                    <li>
+                                                        <span data-bind="text: $root.campaignModel().AgeRangeStart() +' - '+ $root.campaignModel().AgeRangeEnd()"></span>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li class="li-audul">
+                                                <div class="fsm_bold">Gender:</div>
+                                                <ul class="pad-11">
+                                                    <li>
+                                                        <!--ko if:$root.campaignModel().Gender() == 1 -->
+                                                        <span class="aud_licontent">All</span>
+                                                        <!--/ko-->
+                                                        <!--ko if:$root.campaignModel().Gender() == 2 -->
+                                                        <span class="aud_licontent">Men</span>
+                                                        <!--/ko-->
+                                                        <!--ko if:$root.campaignModel().Gender() == 3 -->
+                                                        <span class="aud_licontent">Women</span>
+                                                        <!--/ko-->
+
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <div class="yourBudgtHeadingCnt">
+                                            <span>Reach</span>
+                                        </div>
+                                        <div class="" data-bind="visible:!$root.isDisplayCouponsAds()">
+                                            <span>PPC  </span>
+                                        </div>
+                                        <div class="clearfix"> </div>
+
+                                    </div>
+                                    <div style="    font-weight: bold;    padding-top: 0px;    font-size: 16px;">
+                                        <div class="yourBudgtHeadingCnt">
+
+                                            <span data-bind="text:$root.reachedAudience()">0</span> people
+                                        </div>
+                                        <div class="" data-bind="visible:!$root.isDisplayCouponsAds()">
+                                            <span data-bind="text: '£' + $root.pricePerclick()"></span>
+                                        </div>
+                                        <div class="clearfix"> </div>
+
+                                    </div>
+                                    <div style="display:none;">
+                                        <div class="yourBudgtHeadingCnt">
+                                            <span>Max spend :</span>
+                                        </div>
+                                        <div class="">
+                                            <span data-bind="text: '£' + ($root.pricePerclick() * $root.reachedAudience() )"></span>
+                                        </div>
+                                        <div class="clearfix"> </div>
+
+                                    </div>
+
+
+
+                                </div>
+                                <div class="aud_cnt_foot" style="display:none;">
+                                    <span>This cap will deliver to </span><br />
+                                    <span data-bind="text:  (($root.pricePerclick() * $root.reachedAudience())/MaxBudget() ) +'%' " style="font-size:16px; font-weight:bold;">73 %</span><br />
+                                    <span>of your target audience</span><br />
+
+                                </div>
                             </div>
                         </div>
 

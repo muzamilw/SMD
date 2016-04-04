@@ -28,6 +28,6 @@ namespace SMD.Interfaces.Repository
         IEnumerable<AdCampaign> GetAdCampaignById(long campaignId);
         UserAndCostDetail GetUserAndCostDetail();
         User GetUserById();
-        List<Coupons> GetCoupons();
+        List<GetCoupons_Result> GetCoupons(string UserId);
     }
 }

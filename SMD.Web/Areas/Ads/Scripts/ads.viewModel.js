@@ -304,9 +304,14 @@ define("ads/ads.viewModel",
                     saveCampaignData = function () {
 
                         if (campaignModel().isValid()) {
+                            if (campaignModel().Status() == 3) {
+                                saveCampaign(3);
 
-                            saveCampaign(1);
+                            } else {
+                                saveCampaign(1);
 
+                            }
+                            
 
                         } else {
                             campaignModel().errors.showAllMessages();
@@ -856,11 +861,11 @@ define("ads/ads.viewModel",
                                         $("#btnCancel,#btnPauseCampaign").removeAttr('disabled');
                                         campaignModel().StatusValue("Submitted for Approval");
                                     } else if (campaignModel().Status() == 3) {
-                                        $("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
-                                        $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,.lang_delSurvey,.table-link").css("display", "none");
-                                        $("#saveBtn").css("display", "none");
-                                        $("#btnPauseCampaign").css("display", "inline-block");
-                                        $("#btnCancel,#btnPauseCampaign,#btnCopyCampaign,#btnStopAndTerminate").removeAttr('disabled');
+                                        //$("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
+                                        //$("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,.lang_delSurvey,.table-link").css("display", "none");
+                                        //$("#saveBtn").css("display", "none");
+                                        //$("#btnPauseCampaign").css("display", "inline-block");
+                                        //$("#btnCancel,#btnPauseCampaign,#btnCopyCampaign,#btnStopAndTerminate").removeAttr('disabled');
                                         campaignModel().StatusValue("Live");
                                         isTerminateBtnVisible(true);
                                         isNewCampaignVisible(true);
