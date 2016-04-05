@@ -671,6 +671,7 @@ define("ads/ads.viewModel",
                                 });
                                 ko.utils.arrayPushAll(profileAnswerList(), data.ProfileQuestionAnswers);
                                 profileAnswerList.valueHasMutated();
+                         
 
                             }
 

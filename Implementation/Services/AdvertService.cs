@@ -259,6 +259,7 @@ namespace SMD.Implementation.Services
                 campaignModel.CreatedBy = user.FullName;
             campaignModel.StartDateTime = new DateTime(2005, 1, 1);//campaignModel.StartDateTime.Value.Subtract(_adCampaignRepository.UserTimezoneOffSet);
             campaignModel.EndDateTime = new DateTime(2040, 1, 1);//campaignModel.EndDateTime.Value.Subtract(_adCampaignRepository.UserTimezoneOffSet);
+            campaignModel.ClickRate = 0.02;
             _adCampaignRepository.Add(campaignModel);
             _adCampaignRepository.SaveChanges();
 
@@ -338,6 +339,7 @@ namespace SMD.Implementation.Services
             }
             campaignModel.StartDateTime = new DateTime(2005, 1, 1);//campaignModel.StartDateTime.Value.Subtract(_adCampaignRepository.UserTimezoneOffSet);
             campaignModel.EndDateTime = new DateTime(2040, 1, 1);//campaignModel.EndDateTime.Value.Subtract(_adCampaignRepository.UserTimezoneOffSet);
+            campaignModel.ClickRate = 0.02;
             if(campaignModel.Status == 3){
                 campaignModel.Approved = true;
             }
