@@ -114,8 +114,8 @@
                     CampaignName:CampaignName,
                     DisplayTitle: DisplayTitle,
                     LandingPageVideoLink: LandingPageVideoLink,
-                    StartDateTime: StartDateTime,
-                    EndDateTime: EndDateTime,
+                    //StartDateTime: StartDateTime,
+                    //EndDateTime: EndDateTime,
                     MaxBudget: MaxBudget,
                     AgeRangeEnd: AgeRangeEnd
                 }),
@@ -419,6 +419,7 @@
     };
     // Factory Method
     Campaign.Create = function (source) {
+        debugger;
         var campaign = new Campaign(source.CampaignId, source.LanguageId, source.CampaignName, source.UserId, source.Status, source.StatusValue,
             source.CampaignDescription, source.Gender + "", source.Archived, source.StartDateTime, source.EndDateTime, source.MaxBudget
             , source.Type + "", source.DisplayTitle, source.LandingPageVideoLink, source.VerifyQuestion, source.Answer1, source.Answer2, source.Answer3,

@@ -260,8 +260,8 @@ else
 
                                                 <div style="float:left;">
 
-                                                    <img style="width:100%;height:80px;" data-bind="visible: CampaignTypeImagePath() == ''" src="/Content/Images/Company_Default.png" />
-                                                    <img style="width:100%;height:80px;" data-bind="visible: CampaignTypeImagePath() != '' ,attr: { src: CampaignTypeImagePath }" />
+                                                    <img style="width:auto;height:250px;" data-bind="visible: CampaignTypeImagePath() == ''" src="/Content/Images/Company_Default.png" />
+                                                    <img style="width:auto;height:250px;" data-bind="visible: CampaignTypeImagePath() != '' ,attr: { src: CampaignTypeImagePath }" />
 
                                                 </div>
                                                 <!-- ko if: !$root.isNewCampaign() -->
@@ -1137,7 +1137,7 @@ else
 
                                 </div>
                             </div>
-                            <div class="form-group formcontrol-bg" style="margin-bottom:14px;">
+                            <div class="form-group formcontrol-bg" data-bind="visible:!$root.isDisplayCouponsAds()" style="margin-bottom:14px;">
 
                                 <div class="col-lg-3 text-campaign-left font20">
                                     <span>  Priority</span>
@@ -1194,7 +1194,7 @@ else
                                 </div>
                                 <div class="radio col-lg-4">
 
-                                    <input type="radio" name="optionsRadiosDeliver" id="optionsRadios3Day" >
+                                    <input type="radio" name="optionsRadiosDeliver" id="optionsRadios3Day" value="1">
                                     <label for="optionsRadios3Day">
                                         3 days
                                     </label>
@@ -1218,17 +1218,17 @@ else
                                     </div>
 
                             </div>
-                            <div data-bind="visible:$root.isDisplayCouponsAds()">
+                            <div data-bind="visible:$root.isDisplayCouponsAds()" style="margin-top: 16px;">
                                 <button class="btn  btn-success btnSubmitApproval" id="btnSubmitForApproval2" data-bind="click:$root.submitCampaignData, visible: $root.canSubmitForApproval" style="width: 100%;">Submit for Approval</button>
                             </div>
-                            <div data-bind="visible:!$root.isDisplayCouponsAds()">
+                            <div data-bind="visible:!$root.isDisplayCouponsAds()" style="margin-top: 16px;">
                                 <button class="btn  btn-info " id="btnCopyCampaign" data-bind=" click:$root.copyCampaign, visible: $root.isNewCampaignVisible " style=" width:100%;margin-bottom:10px;">Create Copy - New Campaign</button>
                                 <br />
                                 <button class="btn  btn-danger " id="btnStopAndTerminate" data-bind=" click:$root.terminateCampaign,visible: $root.isTerminateBtnVisible" style="width: 100%;margin-bottom:10px;">Stop & Terminate Early</button>
                                 <br />
                                 <button class="btn  btn-danger " id="btnArchive" data-bind=" click:$root.ArchiveCampaign,visible: $root.isShowArchiveBtn" style="width: 100%;margin-bottom:10px;">Archive Campaign</button>
                                 <br />
-                                <div style="background: #f4f3f3;padding: 20px;padding-bottom: 12px;    margin-top: 16px;">
+                                <div style="background: #f4f3f3;padding: 20px;padding-bottom: 12px; ">
 
                                     <div class="yourBudgtHeadingCnt">
                                         <span>Cap your campaign spend (£): </span>

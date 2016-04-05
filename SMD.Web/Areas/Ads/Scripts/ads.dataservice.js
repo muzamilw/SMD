@@ -116,7 +116,8 @@ define("ads/ads.dataservice", function () {
             getCampaignData: getCampaignData,
             addCampaignData: addCampaignData,
             UpdateCampaignCriteriaOrLocation: UpdateCampaignCriteriaOrLocation,
-            getAudienceData: getAudienceData
+            getAudienceData: getAudienceData,
+            copyCampaignById: copyCampaignById
         };
     })();
     return dataService;

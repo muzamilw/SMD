@@ -271,7 +271,7 @@ namespace SMD.Implementation.Services
                 }
                 if (!string.IsNullOrEmpty(paths[1]))
                 {
-                    campaignModel.LandingPageVideoLink = paths[1];
+                    campaignModel.LandingPageVideoLink = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + paths[1];
                 }
                 if (!string.IsNullOrEmpty(paths[2]))
                 {
@@ -329,7 +329,7 @@ namespace SMD.Implementation.Services
                 }
                 if (!string.IsNullOrEmpty(paths[1]) && !paths[1].Contains("http:"))
                 {
-                    campaignModel.LandingPageVideoLink = paths[1];
+                    campaignModel.LandingPageVideoLink = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" +  paths[1];
                 }
                 if (!string.IsNullOrEmpty(paths[3]))
                 {
@@ -615,6 +615,14 @@ namespace SMD.Implementation.Services
             // Clone
             NewCampaignID = CloneCampaign(source, target);
 
+            // Copy image url
+            // ImagePath
+            //Landing Page video link
+            //Voucher1imagepath
+            // Buy it imag url
+           
+
+
 
             return NewCampaignID;
 
@@ -654,15 +662,40 @@ namespace SMD.Implementation.Services
                 // Clone campaign target locations
                 CloneAdCampaignTargetLocation(source, target);
 
+               
+
+
                 companyRepository.SaveChanges();
 
+                string directoryPathToSaveImages = HttpContext.Current.Server.MapPath("~/SMD_Content/AdCampaign/" + target.CampaignId);
+                if (!Directory.Exists(directoryPathToSaveImages))
+                {
+                    Directory.CreateDirectory(directoryPathToSaveImages);
+                }
+                if (!string.IsNullOrEmpty(source.BuyItImageUrl))
+                {
+                    if (File.Exists(HttpContext.Current.Server.MapPath("~/" + source.BuyItImageUrl)))
+                    {
+
+                        File.Copy(System.Web.HttpContext.Current.Server.MapPath("~/" + source.BuyItImageUrl), System.Web.HttpContext.Current.Server.MapPath("~/SMD_Content/AdCampaign/" + target.CampaignId + "/buyItDefaultImage" + Path.GetExtension(source.BuyItImageUrl)), true);
+                        target.BuyItImageUrl = "SMD_Content/AdCampaign/" + target.CampaignId + "/buyItDefaultImage" + Path.GetExtension(source.BuyItImageUrl);
+                    }
+                }
+                if (!string.IsNullOrEmpty(source.Voucher1ImagePath))
+                {
+                    if (File.Exists(HttpContext.Current.Server.MapPath("~/" + source.Voucher1ImagePath)))
+                    {
+
+                        File.Copy(System.Web.HttpContext.Current.Server.MapPath("~/" + source.Voucher1ImagePath), System.Web.HttpContext.Current.Server.MapPath("~/SMD_Content/AdCampaign/" + target.CampaignId + "/guid_Voucher1DefaultImage" + Path.GetExtension(source.BuyItImageUrl)), true);
+                        target.Voucher1ImagePath = "SMD_Content/AdCampaign/" + target.CampaignId + "/guid_Voucher1DefaultImage" + Path.GetExtension(source.BuyItImageUrl);
+                    }
+                }
+
+
+                companyRepository.SaveChanges();
+
+
                 return target.CampaignId;
-
-
-
-
-
-
 
             }
             catch (Exception ex)

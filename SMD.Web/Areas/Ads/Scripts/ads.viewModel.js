@@ -375,7 +375,10 @@ define("ads/ads.viewModel",
                           view.initializeTypeahead();
                          
                           isEditCampaign(false);
-                          campaignModel().CampaignTypeImagePath("");
+
+                              campaignModel().CampaignTypeImagePath("");
+                          
+                          
                           campaignModel().CampaignImagePath("");
                           campaignModel().VoucherImagePath("");
                           campaignModel().LanguageId(41);
@@ -832,9 +835,11 @@ define("ads/ads.viewModel",
                                     // set languages drop down
                                     selectedCriteria();
                                     pricePerclick(0);
-
+                                    console.log("on edit");
+                                    console.log(data);
                                     campaignModel(model.Campaign.Create(data.Campaigns[0]));
                                     campaignModel().reset();
+                                    
                                     view.initializeTypeahead();
 
                                     selectedQuestionCountryList([]);
@@ -982,6 +987,8 @@ define("ads/ads.viewModel",
                                     //buyItQuestionStatus
                                     // handle 2nd edit error 
                                     //  $(".modal-backdrop").remove();
+                                    console.log("on edit campaignModel");
+                                    console.log(campaignModel());
                                     $.unblockUI(spinner);
 
                                 }
@@ -1375,8 +1382,9 @@ define("ads/ads.viewModel",
                 gotoManageUsers = function () {
                     window.location.href = "/user/ManageUser/ManageUsers";
                 },
-                copyCampaign = function () {
-                    dataservice.copyCampaignById({
+                copyCampaign = function (item) {
+                    debugger;
+                    dataservice.copyCampaignById({ CampaignId: item.CampaignID }, {
                         success: function (data) {
                             
                         },

@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Http;
 using SMD.Models.ResponseModels;
 using SMD.WebBase.Mvc;
+using System.Collections.Generic;
 
 namespace SMD.MIS.Areas.Api.Controllers
 {
@@ -56,6 +57,7 @@ namespace SMD.MIS.Areas.Api.Controllers
             }
 
             return webApiUserService.GetProducts(request).CreateFrom();
+            
         }
 
         /// <summary>
