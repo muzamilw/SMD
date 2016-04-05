@@ -93,19 +93,16 @@ namespace SMD.Implementation.Services
             }
             if (!string.IsNullOrEmpty(campaign.VoucherImagePath) && !campaign.VoucherImagePath.Contains("guid_Voucher1DefaultImage"))
             {
-                if (!string.IsNullOrEmpty(campaign.VoucherImagePath) && !campaign.VoucherImagePath.Contains("guid_Voucher1DefaultImage"))
-                {
-                    string base64 = campaign.VoucherImagePath.Substring(campaign.VoucherImagePath.IndexOf(',') + 1);
-                    base64 = base64.Trim('\0');
-                    byte[] data = Convert.FromBase64String(base64);
-                    string savePath = directoryPath + "\\guid_Voucher1DefaultImage.jpg";
-                    File.WriteAllBytes(savePath, data);
-                    int indexOf = savePath.LastIndexOf("SMD_Content", StringComparison.Ordinal);
-                    savePath = savePath.Substring(indexOf, savePath.Length - indexOf);
-                    savePaths[2] = savePath;
-                    campaign.Voucher1ImagePath = savePath;
-                }
-               
+
+                string base64 = campaign.VoucherImagePath.Substring(campaign.VoucherImagePath.IndexOf(',') + 1);
+                base64 = base64.Trim('\0');
+                byte[] data = Convert.FromBase64String(base64);
+                string savePath = directoryPath + "\\guid_Voucher1DefaultImage.jpg";
+                File.WriteAllBytes(savePath, data);
+                int indexOf = savePath.LastIndexOf("SMD_Content", StringComparison.Ordinal);
+                savePath = savePath.Substring(indexOf, savePath.Length - indexOf);
+                savePaths[2] = savePath;
+                campaign.Voucher1ImagePath = savePath;
             }
             if (!string.IsNullOrEmpty(campaign.buyItImageBytes) )
             {
