@@ -159,7 +159,8 @@
                   CouponSwapValue: CouponSwapValue,
                   CouponActualValue: CouponActualValue,
                   CouponQuantity: CouponQuantity,
-                  priority: priority
+                  priority: priority,
+                  VoucherImagePath: VoucherImagePath
               }),
               // Has Changes
               hasChanges = ko.computed(function () {
