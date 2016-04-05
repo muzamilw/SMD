@@ -91,7 +91,7 @@ namespace SMD.Implementation.Services
                 }
 
             }
-            if (!string.IsNullOrEmpty(campaign.VoucherImagePath) && !campaign.VoucherImagePath.Contains("guid_Voucher1DefaultImage"))
+            if (!string.IsNullOrEmpty(campaign.VoucherImagePath) && !campaign.VoucherImagePath.Contains("guid_Voucher1DefaultImage") && !campaign.VoucherImagePath.Contains("http://manage.cash4ads.com/"))
             {
 
                 string base64 = campaign.VoucherImagePath.Substring(campaign.VoucherImagePath.IndexOf(',') + 1);
