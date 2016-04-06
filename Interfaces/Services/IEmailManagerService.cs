@@ -63,6 +63,7 @@ namespace SMD.Interfaces.Services
         Task SendPayOutRoutineEmail(string aspnetUserId);
 
         Task SendEmailToInviteUser(string email);
+        Task SendEmailToInviteUser(string email, int companyId);
         Task SendBuyItEmailToUser(string aspnetUserId, AdCampaign oCampaign);
     }
 }

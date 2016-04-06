@@ -90,7 +90,7 @@ namespace SMD.Repository.Repositories
                 query = ad => ad.Status == (Int32)AdCampaignStatus.SubmitForApproval && ad.Type == (int)AdCampaignType.Coupon;
 
             rowCount = DbSet.Count(query);
-            return request.IsAsc
+            var res =  request.IsAsc
                 ? DbSet.Where(query)
                     .OrderBy(addCampaignByClause[request.AdCampaignOrderBy])
                     .Skip(fromRow)
@@ -100,6 +100,8 @@ namespace SMD.Repository.Repositories
                     .Skip(fromRow)
                     .Take(toRow)
                     .ToList();
+            res = res.OrderByDescending(g => g.priority);
+            return res;
         }
 
         /// <summary>

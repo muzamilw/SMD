@@ -193,6 +193,13 @@ namespace SMD.MIS
                 new { controller = "GetCoupon" },
                 null,
                 null);
+            // Get Industry Custom route
+            config.Routes.MapHttpRoute(
+                "InviteUser",
+                "InviteUser/{AuthenticationToken}/",
+                new { controller = "SendInviteUsingWeb" },
+                null,
+                null);
         }
     }
 }
