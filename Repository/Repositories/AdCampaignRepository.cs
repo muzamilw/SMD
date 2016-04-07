@@ -105,7 +105,7 @@ namespace SMD.Repository.Repositories
                     .OrderByDescending(g => g.priority);
             return res.Skip(fromRow)
                     .Take(toRow);
-                  
+
         }
 
         /// <summary>
@@ -266,6 +266,28 @@ namespace SMD.Repository.Repositories
             //            };
 
             //return query.ToList<Coupons>();
+        }
+
+        public List<Coupons> GetAllCoupons()
+        {
+            var query = from ad in db.AdCampaigns
+                        where ad.Type == 5 && (ad.CouponTakenCount == null || ad.CouponTakenCount < ad.CouponQuantity)
+                        && (ad.Archived == null || ad.Archived == false) && ad.Approved == true
+                        select new Coupons
+                        {
+                            CouponId = ad.CampaignId,
+                            CouponActualValue = ad.CouponActualValue,
+                            CouponName = ad.CampaignName,
+                            CouponTitle = ad.DisplayTitle,
+                            Firstline = ad.Description,
+                            SecondLine = ad.CampaignDescription,
+                            CouponSwapValue = ad.CouponSwapValue,
+                            CouponTakenValue = ad.CouponTakenCount ?? 0,
+                            CouponDiscountedValue = ad.CouponDiscountValue ?? 0,
+                            CouponImage = System.Web.HttpContext.Current.Request.Url.Scheme + "://" + System.Web.HttpContext.Current.Request.Url.Authority + "/" + ad.ImagePath
+                        };
+
+            return query.ToList<Coupons>();
         }
     }
 }

@@ -635,7 +635,20 @@
     </div>
 </section>
 <!-- end vodeo -->
+<script src="~/Scripts/jquery-2.1.4.min.js"></script>
 
 <script>
+   
+    $(document).ready(function () {
 
+        $.ajax({
+            dataType: "json",
+            url: 'http://smdpreview.com/Api_Mobile/GetAllCoupons/8667e1a9-60af-4d99-8013-a241b81fa550',
+            cache: false,
+            success: function (response) {
+                debugger;
+            }
+        });
+    });
+  
 </script>

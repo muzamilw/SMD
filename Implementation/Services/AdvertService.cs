@@ -802,6 +802,11 @@ namespace SMD.Implementation.Services
         {
             return _adCampaignRepository.GetCoupons(UserId);
         }
+
+        public List<Coupons> GetAllCoupons()
+        {
+            return _adCampaignRepository.GetAllCoupons();
+        }
         #endregion
     }
 }

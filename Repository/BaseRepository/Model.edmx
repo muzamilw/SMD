@@ -82,6 +82,7 @@
           <Property Name="CouponImage3" Type="nvarchar" MaxLength="300" />
           <Property Name="CouponImage4" Type="nvarchar" MaxLength="300" />
           <Property Name="CouponExpiryLabel" Type="nvarchar" MaxLength="300" />
+          <Property Name="CouponDiscountValue" Type="float" />
         </EntityType>
         <EntityType Name="AdCampaignResponse">
           <Key>
@@ -2976,6 +2977,7 @@
           <Property Name="CouponExpiryLabel" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CouponCodes" Relationship="DomainModels.FK_CouponCodes_AdCampaign" FromRole="AdCampaign" ToRole="CouponCode" />
           <NavigationProperty Name="CampaignCategories" Relationship="DomainModels.FK_CampaignCategories_AdCampaign" FromRole="AdCampaign" ToRole="CampaignCategory" />
+          <Property Name="CouponDiscountValue" Type="Double" />
         </EntityType>
         <EntityType Name="Invoice">
           <Key>
@@ -4284,6 +4286,7 @@
           <EntitySetMapping Name="AdCampaigns">
             <EntityTypeMapping TypeName="DomainModels.AdCampaign">
               <MappingFragment StoreEntitySet="AdCampaign">
+                <ScalarProperty Name="CouponDiscountValue" ColumnName="CouponDiscountValue" />
                 <ScalarProperty Name="CouponExpiryLabel" ColumnName="CouponExpiryLabel" />
                 <ScalarProperty Name="CouponImage4" ColumnName="CouponImage4" />
                 <ScalarProperty Name="CouponImage3" ColumnName="CouponImage3" />
