@@ -77,6 +77,11 @@
           <Property Name="CouponQuantity" Type="int" />
           <Property Name="CompanyId" Type="int" />
           <Property Name="priority" Type="int" />
+          <Property Name="couponSmdComission" Type="nvarchar" MaxLength="200" />
+          <Property Name="couponImage2" Type="nvarchar" MaxLength="300" />
+          <Property Name="CouponImage3" Type="nvarchar" MaxLength="300" />
+          <Property Name="CouponImage4" Type="nvarchar" MaxLength="300" />
+          <Property Name="CouponExpiryLabel" Type="nvarchar" MaxLength="300" />
         </EntityType>
         <EntityType Name="AdCampaignResponse">
           <Key>
@@ -213,6 +218,14 @@
           <Property Name="AuditEntityDescription" Type="nvarchar" MaxLength="500" />
           <Property Name="TableName" Type="nvarchar" MaxLength="200" />
         </EntityType>
+        <EntityType Name="CampaignCategories">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="CampaignId" Type="bigint" Nullable="false" />
+          <Property Name="CategoryId" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
         <EntityType Name="City">
           <Key>
             <PropertyRef Name="CityID" />
@@ -261,6 +274,24 @@
           <Property Name="CountryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CountryName" Type="nvarchar" MaxLength="200" />
           <Property Name="CountryCode" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="CouponCategory">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="300" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <EntityType Name="CouponCodes">
+          <Key>
+            <PropertyRef Name="CodeId" />
+          </Key>
+          <Property Name="CodeId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CampaignId" Type="bigint" />
+          <Property Name="Code" Type="nvarchar" MaxLength="300" />
+          <Property Name="IsTaken" Type="bit" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="Currency">
           <Key>
@@ -831,6 +862,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_CampaignCategories_AdCampaign">
+          <End Role="AdCampaign" Type="Self.AdCampaign" Multiplicity="1" />
+          <End Role="CampaignCategories" Type="Self.CampaignCategories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdCampaign">
+              <PropertyRef Name="CampaignID" />
+            </Principal>
+            <Dependent Role="CampaignCategories">
+              <PropertyRef Name="CampaignId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CampaignCategories_CouponCategory">
+          <End Role="CouponCategory" Type="Self.CouponCategory" Multiplicity="1" />
+          <End Role="CampaignCategories" Type="Self.CampaignCategories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CouponCategory">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="CampaignCategories">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_City_Country">
           <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
           <End Role="City" Type="Self.City" Multiplicity="*" />
@@ -864,6 +919,30 @@
             </Principal>
             <Dependent Role="Company">
               <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CouponCodes_AdCampaign">
+          <End Role="AdCampaign" Type="Self.AdCampaign" Multiplicity="0..1" />
+          <End Role="CouponCodes" Type="Self.CouponCodes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdCampaign">
+              <PropertyRef Name="CampaignID" />
+            </Principal>
+            <Dependent Role="CouponCodes">
+              <PropertyRef Name="CampaignId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CouponCodes_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="CouponCodes" Type="Self.CouponCodes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CouponCodes">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1416,9 +1495,12 @@
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AuditLog" EntityType="Self.AuditLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CampaignCategories" EntityType="Self.CampaignCategories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CouponCategory" EntityType="Self.CouponCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CouponCodes" EntityType="Self.CouponCodes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Currency" EntityType="Self.Currency" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CustomUrl" EntityType="Self.CustomUrl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Education" EntityType="Self.Education" Schema="dbo" store:Type="Tables" />
@@ -1528,6 +1610,14 @@
             <End Role="Language" EntitySet="Language" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <AssociationSet Name="FK_CampaignCategories_AdCampaign" Association="Self.FK_CampaignCategories_AdCampaign">
+            <End Role="AdCampaign" EntitySet="AdCampaign" />
+            <End Role="CampaignCategories" EntitySet="CampaignCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CampaignCategories_CouponCategory" Association="Self.FK_CampaignCategories_CouponCategory">
+            <End Role="CouponCategory" EntitySet="CouponCategory" />
+            <End Role="CampaignCategories" EntitySet="CampaignCategories" />
+          </AssociationSet>
           <AssociationSet Name="FK_City_Country" Association="Self.FK_City_Country">
             <End Role="Country" EntitySet="Country" />
             <End Role="City" EntitySet="City" />
@@ -1539,6 +1629,14 @@
           <AssociationSet Name="FK_Company_Country" Association="Self.FK_Company_Country">
             <End Role="Country" EntitySet="Country" />
             <End Role="Company" EntitySet="Company" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CouponCodes_AdCampaign" Association="Self.FK_CouponCodes_AdCampaign">
+            <End Role="AdCampaign" EntitySet="AdCampaign" />
+            <End Role="CouponCodes" EntitySet="CouponCodes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CouponCodes_AspNetUsers" Association="Self.FK_CouponCodes_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="CouponCodes" EntitySet="CouponCodes" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -2065,6 +2163,25 @@
           <FunctionImport Name="GetCoupons" ReturnType="Collection(DomainModels.GetCoupons_Result)">
           <Parameter Name="UserID" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="CouponCategories" EntityType="DomainModels.CouponCategory" />
+          <EntitySet Name="CouponCodes" EntityType="DomainModels.CouponCode" />
+          <AssociationSet Name="FK_CouponCodes_AdCampaign" Association="DomainModels.FK_CouponCodes_AdCampaign">
+            <End Role="AdCampaign" EntitySet="AdCampaigns" />
+            <End Role="CouponCode" EntitySet="CouponCodes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CouponCodes_AspNetUsers" Association="DomainModels.FK_CouponCodes_AspNetUsers">
+            <End Role="User" EntitySet="Users" />
+            <End Role="CouponCode" EntitySet="CouponCodes" />
+          </AssociationSet>
+          <EntitySet Name="CampaignCategories" EntityType="DomainModels.CampaignCategory" />
+          <AssociationSet Name="FK_CampaignCategories_AdCampaign" Association="DomainModels.FK_CampaignCategories_AdCampaign">
+            <End Role="AdCampaign" EntitySet="AdCampaigns" />
+            <End Role="CampaignCategory" EntitySet="CampaignCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CampaignCategories_CouponCategory" Association="DomainModels.FK_CampaignCategories_CouponCategory">
+            <End Role="CouponCategory" EntitySet="CouponCategories" />
+            <End Role="CampaignCategory" EntitySet="CampaignCategories" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="ProfileQuestion">
           <Key>
@@ -2852,6 +2969,13 @@
           <NavigationProperty Name="AdCampaignTargetCriterias" Relationship="DomainModels.FK_AdCampaignTargetCriteria_AdCampaign" FromRole="AdCampaign" ToRole="AdCampaignTargetCriteria" />
           <NavigationProperty Name="AdCampaignResponses" Relationship="DomainModels.FK_AdCampaignResponse_AdCampaign" FromRole="AdCampaign" ToRole="AdCampaignResponse" />
           <Property Name="priority" Type="Int32" />
+          <Property Name="couponSmdComission" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="couponImage2" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="CouponImage3" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="CouponImage4" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="CouponExpiryLabel" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CouponCodes" Relationship="DomainModels.FK_CouponCodes_AdCampaign" FromRole="AdCampaign" ToRole="CouponCode" />
+          <NavigationProperty Name="CampaignCategories" Relationship="DomainModels.FK_CampaignCategories_AdCampaign" FromRole="AdCampaign" ToRole="CampaignCategory" />
         </EntityType>
         <EntityType Name="Invoice">
           <Key>
@@ -3310,6 +3434,7 @@
           <NavigationProperty Name="Roles" Relationship="DomainModels.AspNetUserRoles" FromRole="AspNetUser" ToRole="Role" />
           <Property Name="AuthenticationToken" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AdCampaignResponses" Relationship="DomainModels.FK_AdCampaignResponse_AspNetUsers" FromRole="User" ToRole="AdCampaignResponse" />
+          <NavigationProperty Name="CouponCodes" Relationship="DomainModels.FK_CouponCodes_AspNetUsers" FromRole="User" ToRole="CouponCode" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Type="DomainModels.User" Role="AspNetUser" Multiplicity="1">
@@ -3703,6 +3828,85 @@
           <Property Type="String" Name="CouponSwapValue" Nullable="true" />
           <Property Type="String" Name="CouponActualValue" Nullable="true" />
         </ComplexType>
+        <EntityType Name="CouponCategory">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" />
+          <NavigationProperty Name="CampaignCategories" Relationship="DomainModels.FK_CampaignCategories_CouponCategory" FromRole="CouponCategory" ToRole="CampaignCategory" />
+        </EntityType>
+        <EntityType Name="CouponCode">
+          <Key>
+            <PropertyRef Name="CodeId" />
+          </Key>
+          <Property Name="CodeId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CampaignId" Type="Int64" />
+          <Property Name="Code" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="IsTaken" Type="Boolean" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AdCampaign" Relationship="DomainModels.FK_CouponCodes_AdCampaign" FromRole="CouponCode" ToRole="AdCampaign" />
+          <NavigationProperty Name="AspNetUser" Relationship="DomainModels.FK_CouponCodes_AspNetUsers" FromRole="CouponCode" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_CouponCodes_AdCampaign">
+          <End Type="DomainModels.AdCampaign" Role="AdCampaign" Multiplicity="0..1" />
+          <End Type="DomainModels.CouponCode" Role="CouponCode" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdCampaign">
+              <PropertyRef Name="CampaignId" />
+            </Principal>
+            <Dependent Role="CouponCode">
+              <PropertyRef Name="CampaignId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CouponCodes_AspNetUsers">
+          <End Type="DomainModels.User" Role="User" Multiplicity="0..1" />
+          <End Type="DomainModels.CouponCode" Role="CouponCode" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CouponCode">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CampaignCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="CampaignId" Type="Int64" Nullable="false" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="AdCampaign" Relationship="DomainModels.FK_CampaignCategories_AdCampaign" FromRole="CampaignCategory" ToRole="AdCampaign" />
+          <NavigationProperty Name="CouponCategory" Relationship="DomainModels.FK_CampaignCategories_CouponCategory" FromRole="CampaignCategory" ToRole="CouponCategory" />
+        </EntityType>
+        <Association Name="FK_CampaignCategories_AdCampaign">
+          <End Type="DomainModels.AdCampaign" Role="AdCampaign" Multiplicity="1" />
+          <End Type="DomainModels.CampaignCategory" Role="CampaignCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdCampaign">
+              <PropertyRef Name="CampaignId" />
+            </Principal>
+            <Dependent Role="CampaignCategory">
+              <PropertyRef Name="CampaignId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CampaignCategories_CouponCategory">
+          <End Type="DomainModels.CouponCategory" Role="CouponCategory" Multiplicity="1" />
+          <End Type="DomainModels.CampaignCategory" Role="CampaignCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CouponCategory">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="CampaignCategory">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4080,6 +4284,11 @@
           <EntitySetMapping Name="AdCampaigns">
             <EntityTypeMapping TypeName="DomainModels.AdCampaign">
               <MappingFragment StoreEntitySet="AdCampaign">
+                <ScalarProperty Name="CouponExpiryLabel" ColumnName="CouponExpiryLabel" />
+                <ScalarProperty Name="CouponImage4" ColumnName="CouponImage4" />
+                <ScalarProperty Name="CouponImage3" ColumnName="CouponImage3" />
+                <ScalarProperty Name="couponImage2" ColumnName="couponImage2" />
+                <ScalarProperty Name="couponSmdComission" ColumnName="couponSmdComission" />
                 <ScalarProperty Name="priority" ColumnName="priority" />
                 <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
                 <ScalarProperty Name="CouponQuantity" ColumnName="CouponQuantity" />
@@ -4441,6 +4650,35 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="CouponCategories">
+            <EntityTypeMapping TypeName="DomainModels.CouponCategory">
+              <MappingFragment StoreEntitySet="CouponCategory">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CouponCodes">
+            <EntityTypeMapping TypeName="DomainModels.CouponCode">
+              <MappingFragment StoreEntitySet="CouponCodes">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="IsTaken" ColumnName="IsTaken" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="CampaignId" ColumnName="CampaignId" />
+                <ScalarProperty Name="CodeId" ColumnName="CodeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CampaignCategories">
+            <EntityTypeMapping TypeName="DomainModels.CampaignCategory">
+              <MappingFragment StoreEntitySet="CampaignCategories">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="CampaignId" ColumnName="CampaignId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

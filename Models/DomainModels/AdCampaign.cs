@@ -66,13 +66,23 @@ namespace SMD.Models.DomainModels
         public string CouponActualValue { get; set; }
         public Nullable<int> CouponTakenCount { get; set; }
         public Nullable<int> CouponQuantity { get; set; }
+        public int? priority { get; set; }
+        public string couponSmdComission { get; set; }
+        public string couponImage2 { get; set; }
+        public string CouponImage3 { get; set; }
+        public string CouponImage4 { get; set; }
+        public string CouponExpiryLabel { get; set; }
+
+
         public virtual Company Company { get; set; }
         public virtual Language Language { get; set; }
         public virtual ICollection<AdCampaignResponse> AdCampaignResponses { get; set; }
         public virtual ICollection<AdCampaignTargetCriteria> AdCampaignTargetCriterias { get; set; }
         public virtual ICollection<AdCampaignTargetLocation> AdCampaignTargetLocations { get; set; }
         public virtual ICollection<InvoiceDetail> InvoiceDetails { get; set; }
-        public int? priority { get; set; }
+        public virtual ICollection<CouponCategory> CouponCategories { get; set; }
+        public virtual ICollection<CouponCode> CouponCodes { get; set; }
+        public virtual ICollection<CampaignCategory> CampaignCategories { get; set; }
         [NotMapped]
         public string CampaignImagePath { get; set; }
         [NotMapped]
