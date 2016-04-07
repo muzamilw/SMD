@@ -4122,3 +4122,106 @@ COMMIT
 
 alter table adcampaignResponse 
  add UserQuestionResponse int null 
+ 
+ /*07-04-2016*/
+ alter table adcampaign add couponSmdComission nvarchar(200),
+couponImage2 nvarchar(300),
+CouponImage3 nvarchar(300),
+CouponImage4 nvarchar(300),
+CouponExpiryLabel  nvarchar(300)
+
+
+
+
+
+/****** Object:  Table [dbo].[CouponCategory]    Script Date: 4/7/2016 9:33:48 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[CouponCategory](
+	[CategoryId] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](300) NULL,
+	[Status] [bit] NULL,
+ CONSTRAINT [PK_CouponCategory] PRIMARY KEY CLUSTERED 
+(
+	[CategoryId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+
+/****** Object:  Table [dbo].[CouponCodes]    Script Date: 4/7/2016 9:34:04 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[CouponCodes](
+	[CodeId] [bigint] IDENTITY(1,1) NOT NULL,
+	[CampaignId] [bigint] NULL,
+	[Code] [nvarchar](300) NULL,
+	[IsTaken] [bit] NULL,
+	[UserId] [nvarchar](128) NULL,
+ CONSTRAINT [PK_CouponCodes] PRIMARY KEY CLUSTERED 
+(
+	[CodeId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+ALTER TABLE [dbo].[CouponCodes]  WITH CHECK ADD  CONSTRAINT [FK_CouponCodes_AdCampaign] FOREIGN KEY([CampaignId])
+REFERENCES [dbo].[AdCampaign] ([CampaignID])
+GO
+
+ALTER TABLE [dbo].[CouponCodes] CHECK CONSTRAINT [FK_CouponCodes_AdCampaign]
+GO
+
+ALTER TABLE [dbo].[CouponCodes]  WITH CHECK ADD  CONSTRAINT [FK_CouponCodes_AspNetUsers] FOREIGN KEY([UserId])
+REFERENCES [dbo].[AspNetUsers] ([Id])
+GO
+
+ALTER TABLE [dbo].[CouponCodes] CHECK CONSTRAINT [FK_CouponCodes_AspNetUsers]
+GO
+
+
+
+/****** Object:  Table [dbo].[CampaignCategories]    Script Date: 4/7/2016 9:35:02 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[CampaignCategories](
+	[CampaignId] [bigint] NOT NULL,
+	[CategoryId] [int] NOT NULL,
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+ CONSTRAINT [PK_CampaignCategories] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+ALTER TABLE [dbo].[CampaignCategories]  WITH CHECK ADD  CONSTRAINT [FK_CampaignCategories_AdCampaign] FOREIGN KEY([CampaignId])
+REFERENCES [dbo].[AdCampaign] ([CampaignID])
+GO
+
+ALTER TABLE [dbo].[CampaignCategories] CHECK CONSTRAINT [FK_CampaignCategories_AdCampaign]
+GO
+
+ALTER TABLE [dbo].[CampaignCategories]  WITH CHECK ADD  CONSTRAINT [FK_CampaignCategories_CouponCategory] FOREIGN KEY([CategoryId])
+REFERENCES [dbo].[CouponCategory] ([CategoryId])
+GO
+
+ALTER TABLE [dbo].[CampaignCategories] CHECK CONSTRAINT [FK_CampaignCategories_CouponCategory]
+GO
+
+

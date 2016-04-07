@@ -62,7 +62,7 @@ namespace SMD.MIS.ModelMappers
             return new AdCampaign
             {
                 CampaignId = source.CampaignId,
-                CreatedBy = source.CreatedBy,
+                CreatedBy = source.Company != null? source.Company.CompanyName: source.CreatedBy,
                 LanguageId = source.LanguageId,
                 Type = source.Type,
                 Status = source.Status,

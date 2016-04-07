@@ -868,7 +868,7 @@ define("ads/ads.viewModel",
                                         campaignModel().StatusValue("Submitted for Approval");
                                     } else if (campaignModel().Status() == 3) {
                                         //$("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
-                                        //$("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,.lang_delSurvey,.table-link").css("display", "none");
+                                       $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,.lang_delSurvey,.table-link").css("display", "none");
                                         //$("#saveBtn").css("display", "none");
                                         //$("#btnPauseCampaign").css("display", "inline-block");
                                         //$("#btnCancel,#btnPauseCampaign,#btnCopyCampaign,#btnStopAndTerminate").removeAttr('disabled');

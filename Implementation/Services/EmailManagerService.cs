@@ -681,6 +681,20 @@ namespace SMD.Implementation.Services
             await SendEmail();
 
         }
+        // invite user from mobile api 
+        public async Task SendEmailToInviteUser(string email,int companyId)
+        {
+
+            MMailto.Add(email);
+            Mid = (int)EmailTypes.InviteUsers;
+            string userName = string.Empty;
+   
+            CompanyNameInviteUser = manageUserRepository.getCompanyName(out userName, companyId);
+            Muser = userName;
+            InviteURL = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/Account/Register?CompanyID=" + companyId;
+            await SendEmail();
+
+        }
         /// <summary>
         ///BuyIT User Email
         /// </summary>

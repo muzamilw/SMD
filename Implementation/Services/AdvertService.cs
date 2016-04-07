@@ -91,8 +91,9 @@ namespace SMD.Implementation.Services
                 }
 
             }
-            if (!string.IsNullOrEmpty(campaign.VoucherImagePath) && !campaign.VoucherImagePath.Contains("guid_Voucher1DefaultImage"))
+            if (!string.IsNullOrEmpty(campaign.VoucherImagePath) && !campaign.VoucherImagePath.Contains("guid_Voucher1DefaultImage") && !campaign.VoucherImagePath.Contains("http://manage.cash4ads.com/"))
             {
+
                 string base64 = campaign.VoucherImagePath.Substring(campaign.VoucherImagePath.IndexOf(',') + 1);
                 base64 = base64.Trim('\0');
                 byte[] data = Convert.FromBase64String(base64);
@@ -259,7 +260,7 @@ namespace SMD.Implementation.Services
                 campaignModel.CreatedBy = user.FullName;
             campaignModel.StartDateTime = new DateTime(2005, 1, 1);//campaignModel.StartDateTime.Value.Subtract(_adCampaignRepository.UserTimezoneOffSet);
             campaignModel.EndDateTime = new DateTime(2040, 1, 1);//campaignModel.EndDateTime.Value.Subtract(_adCampaignRepository.UserTimezoneOffSet);
-            campaignModel.ClickRate = 0.02;
+            campaignModel.ClickRate = 0.20;
             _adCampaignRepository.Add(campaignModel);
             _adCampaignRepository.SaveChanges();
 
@@ -339,7 +340,7 @@ namespace SMD.Implementation.Services
             }
             campaignModel.StartDateTime = new DateTime(2005, 1, 1);//campaignModel.StartDateTime.Value.Subtract(_adCampaignRepository.UserTimezoneOffSet);
             campaignModel.EndDateTime = new DateTime(2040, 1, 1);//campaignModel.EndDateTime.Value.Subtract(_adCampaignRepository.UserTimezoneOffSet);
-            campaignModel.ClickRate = 0.02;
+            campaignModel.ClickRate = 0.20;
             if(campaignModel.Status == 3){
                 campaignModel.Approved = true;
             }
