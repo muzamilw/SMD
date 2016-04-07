@@ -90,18 +90,22 @@ namespace SMD.Repository.Repositories
                 query = ad => ad.Status == (Int32)AdCampaignStatus.SubmitForApproval && ad.Type == (int)AdCampaignType.Coupon;
 
             rowCount = DbSet.Count(query);
-            var res =  request.IsAsc
-                ? DbSet.Where(query)
-                    .OrderBy(addCampaignByClause[request.AdCampaignOrderBy])
-                    .Skip(fromRow)
-                    .Take(toRow)
-                : DbSet.Where(query)
-                    .OrderByDescending(addCampaignByClause[request.AdCampaignOrderBy])
-                    .Skip(fromRow)
-                    .Take(toRow)
-                    .ToList();
-            res = res.OrderByDescending(g => g.priority);
-            return res;
+            //var res =  request.IsAsc
+            //    ? DbSet.Where(query)
+            //        .OrderBy(addCampaignByClause[request.AdCampaignOrderBy])
+            //        .Skip(fromRow)
+            //        .Take(toRow)
+            //    : DbSet.Where(query)
+            //        .OrderByDescending(addCampaignByClause[request.AdCampaignOrderBy])
+            //        .Skip(fromRow)
+            //        .Take(toRow)
+            //        .ToList();
+            //res = res.OrderByDescending(g => g.priority);
+            var res = DbSet.Where(query)
+                    .OrderByDescending(g => g.priority);
+            return res.Skip(fromRow)
+                    .Take(toRow);
+                  
         }
 
         /// <summary>
@@ -120,7 +124,7 @@ namespace SMD.Repository.Repositories
                 rowCount = DbSet.Count();
                 if (isAdmin)
                 {
-                    IEnumerable<AdCampaign> adCampaigns = DbSet.OrderBy(g => g.CampaignId).Where(c => c.Type != 5)
+                    IEnumerable<AdCampaign> adCampaigns = DbSet.OrderByDescending(g => g.priority).Where(c => c.Type != 5)
                            .Skip(fromRow)
                            .Take(toRow)
                            .ToList();
@@ -139,7 +143,7 @@ namespace SMD.Repository.Repositories
                 }
                 else
                 {
-                    IEnumerable<AdCampaign> adCampaigns = DbSet.Where(g => g.UserId == LoggedInUserIdentity && g.Type != 5).OrderBy(g => g.CampaignId)
+                    IEnumerable<AdCampaign> adCampaigns = DbSet.Where(g => g.UserId == LoggedInUserIdentity && g.Type != 5).OrderByDescending(g => g.priority)
                            .Skip(fromRow)
                            .Take(toRow)
                            .ToList();
@@ -171,14 +175,14 @@ namespace SMD.Repository.Repositories
                 IEnumerable<AdCampaign> adCampaigns = null;
                 if (request.ShowCoupons != null && request.ShowCoupons == true)
                 {
-                    adCampaigns = DbSet.Where(query).Where(g => g.Type == 5).OrderBy(g => g.CampaignId)
+                    adCampaigns = DbSet.Where(query).Where(g => g.Type == 5).OrderByDescending(g => g.priority)
                       .Skip(fromRow)
                       .Take(toRow)
                       .ToList();
                 }
                 else
                 {
-                    adCampaigns = DbSet.Where(query).Where(g => g.Type != 5).OrderBy(g => g.CampaignId)
+                    adCampaigns = DbSet.Where(query).Where(g => g.Type != 5).OrderByDescending(g => g.priority)
                          .Skip(fromRow)
                          .Take(toRow)
                          .ToList();
