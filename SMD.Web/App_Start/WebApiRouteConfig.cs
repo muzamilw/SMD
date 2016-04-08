@@ -200,6 +200,13 @@ namespace SMD.MIS
                 new { controller = "SendInviteUsingWeb" },
                 null,
                 null);
+            // Get transaction Custom route
+            config.Routes.MapHttpRoute(
+                "UserTransactionInquiry",
+                "Balance/Transactions/{AuthenticationToken}/",
+                new { controller = "Statement" },
+                null,
+                null);
         }
     }
 }

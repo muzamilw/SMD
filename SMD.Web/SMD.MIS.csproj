@@ -410,6 +410,7 @@
     <Compile Include="Areas\Api\Controllers\InvoiceDetailController.cs" />
     <Compile Include="Areas\Api\Controllers\InvoiceController.cs" />
     <Compile Include="Areas\Api\Controllers\SendInviteUsingWebController.cs" />
+    <Compile Include="Areas\Api\Controllers\StatementController.cs" />
     <Compile Include="Areas\Api\Controllers\UserBalanceInquiryController.cs" />
     <Compile Include="Areas\Api\Controllers\SurveyAudienceController.cs" />
     <Compile Include="Areas\Api\Controllers\SurveyQuestionEditorController.cs" />
