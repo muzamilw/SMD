@@ -213,6 +213,7 @@
     <Content Include="images\Cash4Ads_White_text.svg" />
     <Content Include="images\ctu-bullet.png" />
     <Content Include="images\ctu-stats-separator.png" />
+    <Content Include="images\ctu-strike.png" />
     <Content Include="images\ctu-sub-fade.jpg" />
     <Content Include="images\de.png" />
     <Content Include="images\Earn_Slider_1.png" />

@@ -3009,7 +3009,7 @@ div.payment-set div.a-gift .total-amount, .payment-set .item-gift .item-total-am
         .payment-set .ctu-discounted .ndod-price .ndod-currency {
             position: absolute;
             left: 0;
-            top: 0;
+            /*top: 0;*/
             font-size: 57%;
         }
 
@@ -4564,7 +4564,7 @@ html[xmlns] .slides {
     .ndod-discount .ndod-price .ndod-currency {
         position: absolute;
         left: 0;
-        top: 0;
+        /*top: 0;*/
         font-size: 57%;
     }
 
@@ -7046,7 +7046,7 @@ div.content .unit.ctu .slider {
     .ctu-discounted .ndod-price .ndod-currency {
         position: absolute;
         left: 0;
-        top: 0;
+        /*top: 0;*/
         font-size: 57%;
     }
 
@@ -15403,7 +15403,7 @@ div.content .JOIN .loginicon h1, .JOIN .form_container h1 {
 }
 
 div.content .unit.ctu h1 span {
-    color: #ec008c;
+    color: #33d3b4;
     background-color: white;
 }
 
@@ -15421,13 +15421,13 @@ div.content .unit.ctu h1 span {
 
 div.content .unit.ctu .ctu-stats, .ndod-view-mini .ndod-deal-footer, .bv_temp .head, .bv_temp .foot {
     background: #ec008c;
-    background: -moz-linear-gradient(top,#ec008c 0,#c1007c 100%);
-    background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,#ec008c),color-stop(100%,#c1007c));
-    background: -webkit-linear-gradient(top,#ec008c 0,#c1007c 100%);
-    background: -o-linear-gradient(top,#ec008c 0,#c1007c 100%);
-    background: -ms-linear-gradient(top,#ec008c 0,#c1007c 100%);
-    background: linear-gradient(to bottom,#ec008c 0,#c1007c 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#ec008c,endColorstr=#c1007c,GradientType=0);
+    background: -moz-linear-gradient(top,#33d3b4 0,#247C6B  100%);
+    background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,#33d3b4),color-stop(100%,#247C6B));
+    background: -webkit-linear-gradient(top,#33d3b4 0,#247C6B  100%);
+    background: -o-linear-gradient(top,#33d3b4 0,#247C6B  100%);
+    background: -ms-linear-gradient(top,#33d3b4 0,#247C6B  100%);
+    background: linear-gradient(to bottom,#33d3b4 0,#247C6B  100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#33d3b4,endColorstr=#247C6B ,GradientType=0);
     box-shadow: 1px 4px 5px #888888;
 }
 
