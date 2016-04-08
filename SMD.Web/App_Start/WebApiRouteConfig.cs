@@ -200,6 +200,13 @@ namespace SMD.MIS
                 new { controller = "SendInviteUsingWeb" },
                 null,
                 null);
+            //
+            config.Routes.MapHttpRoute(
+              "GetAllCoupons",
+              "GetAllCoupons/{AuthenticationToken}/",
+              new { controller = "GetCouponAndCategories" },
+              null,
+              null);
             // Get transaction Custom route
             config.Routes.MapHttpRoute(
                 "UserTransactionInquiry",
