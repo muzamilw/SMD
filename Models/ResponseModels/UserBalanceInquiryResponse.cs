@@ -25,7 +25,8 @@ namespace SMD.Models.ResponseModels
         /// <summary>
         /// Balance
         /// </summary>
-        public double? Amount { get; set; }
+        public double? DebitAmount { get; set; }
+        public double? CreditAmount { get; set; }
         public string PaymentMethod { get; set; }
         public string Date { get; set; }
     }

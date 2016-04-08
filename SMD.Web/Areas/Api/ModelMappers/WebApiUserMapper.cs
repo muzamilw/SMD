@@ -145,7 +145,8 @@ namespace SMD.MIS.Areas.Api.ModelMappers
                 accName = "Google Wallet";
             return new StatementTrasaction
             {
-               Amount  = source.DebitAmount,
+               DebitAmount  = source.DebitAmount,
+               CreditAmount = source.CreditAmount,
                 Date = source.TransactionDate.ToString(),
                PaymentMethod = accName,
                 //AuthenticationToken = Guid.NewGuid()
