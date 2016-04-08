@@ -29,5 +29,6 @@ namespace SMD.Interfaces.Repository
         UserAndCostDetail GetUserAndCostDetail();
         User GetUserById();
         List<GetCoupons_Result> GetCoupons(string UserId);
+        List<Coupons> GetAllCoupons();
     }
 }

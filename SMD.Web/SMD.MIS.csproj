@@ -390,6 +390,7 @@
     <Compile Include="Areas\Api\Controllers\CopyCampaignController.cs" />
     <Compile Include="Areas\Api\Controllers\EducationController.cs" />
     <Compile Include="Areas\Api\Controllers\GenerateSMSController.cs" />
+    <Compile Include="Areas\Api\Controllers\GetCouponAndCategoriesController.cs" />
     <Compile Include="Areas\Api\Controllers\GetCouponController.cs" />
     <Compile Include="Areas\Api\Controllers\IndustryController.cs" />
     <Compile Include="Areas\Api\Controllers\InviteUserController.cs" />

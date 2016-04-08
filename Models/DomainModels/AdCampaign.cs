@@ -72,7 +72,7 @@ namespace SMD.Models.DomainModels
         public string CouponImage3 { get; set; }
         public string CouponImage4 { get; set; }
         public string CouponExpiryLabel { get; set; }
-
+        public double? CouponDiscountValue { get; set; }
 
         public virtual Company Company { get; set; }
         public virtual Language Language { get; set; }
@@ -179,6 +179,7 @@ namespace SMD.Models.DomainModels
             target.CouponTakenCount = CouponTakenCount;
             target.CouponQuantity = CouponQuantity;
             target.priority = priority;
+            target.CouponDiscountValue = CouponDiscountValue;
         }
     }
 }
