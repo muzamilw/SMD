@@ -207,6 +207,13 @@ namespace SMD.MIS
               new { controller = "GetCouponAndCategories" },
               null,
               null);
+            // Get transaction Custom route
+            config.Routes.MapHttpRoute(
+                "UserTransactionInquiry",
+                "Balance/Transactions/{AuthenticationToken}/",
+                new { controller = "Statement" },
+                null,
+                null);
         }
     }
 }
