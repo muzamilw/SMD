@@ -104,6 +104,7 @@ namespace SMD.Repository.Repositories
                 company.Tel1 = request.AdvertContactPhone;
                 company.ReplyEmail = request.AdvertContactEmail;
                 company.PaypalCustomerId = request.PayPal;
+                company.PreferredPayoutAccount = 1;
                 db.SaveChanges();
                 return true;
             }

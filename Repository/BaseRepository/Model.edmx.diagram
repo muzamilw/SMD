@@ -101,12 +101,12 @@
         <AssociationConnector Association="DomainModels.FK_AdCampaignResponse_AdCampaignResponse" />
         <AssociationConnector Association="DomainModels.FK_AdCampaignResponse_AspNetUsers" />
         <AssociationConnector Association="DomainModels.FK_AdCampaignResponse_Company" />
-        <EntityTypeShape EntityType="DomainModels.CouponCategory" Width="1.5" PointX="3.375" PointY="0.75" />
         <EntityTypeShape EntityType="DomainModels.CouponCode" Width="1.5" PointX="32.125" PointY="16.625" />
         <AssociationConnector Association="DomainModels.FK_CouponCodes_AdCampaign" />
         <AssociationConnector Association="DomainModels.FK_CouponCodes_AspNetUsers" />
         <EntityTypeShape EntityType="DomainModels.CampaignCategory" Width="1.5" PointX="23" PointY="11" />
         <AssociationConnector Association="DomainModels.FK_CampaignCategories_AdCampaign" />
+        <EntityTypeShape EntityType="DomainModels.CouponCategory" Width="1.5" PointX="3.375" PointY="0.875" />
         <AssociationConnector Association="DomainModels.FK_CampaignCategories_CouponCategory" />
         </Diagram>
     </edmx:Diagrams>

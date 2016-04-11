@@ -2164,7 +2164,6 @@
           <FunctionImport Name="GetCoupons" ReturnType="Collection(DomainModels.GetCoupons_Result)">
           <Parameter Name="UserID" Mode="In" Type="String" />
           </FunctionImport>
-          <EntitySet Name="CouponCategories" EntityType="DomainModels.CouponCategory" />
           <EntitySet Name="CouponCodes" EntityType="DomainModels.CouponCode" />
           <AssociationSet Name="FK_CouponCodes_AdCampaign" Association="DomainModels.FK_CouponCodes_AdCampaign">
             <End Role="AdCampaign" EntitySet="AdCampaigns" />
@@ -2179,6 +2178,7 @@
             <End Role="AdCampaign" EntitySet="AdCampaigns" />
             <End Role="CampaignCategory" EntitySet="CampaignCategories" />
           </AssociationSet>
+          <EntitySet Name="CouponCategories" EntityType="DomainModels.CouponCategory" />
           <AssociationSet Name="FK_CampaignCategories_CouponCategory" Association="DomainModels.FK_CampaignCategories_CouponCategory">
             <End Role="CouponCategory" EntitySet="CouponCategories" />
             <End Role="CampaignCategory" EntitySet="CampaignCategories" />
@@ -3830,15 +3830,6 @@
           <Property Type="String" Name="CouponSwapValue" Nullable="true" />
           <Property Type="String" Name="CouponActualValue" Nullable="true" />
         </ComplexType>
-        <EntityType Name="CouponCategory">
-          <Key>
-            <PropertyRef Name="CategoryId" />
-          </Key>
-          <Property Name="CategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="Boolean" />
-          <NavigationProperty Name="CampaignCategories" Relationship="DomainModels.FK_CampaignCategories_CouponCategory" FromRole="CouponCategory" ToRole="CampaignCategory" />
-        </EntityType>
         <EntityType Name="CouponCode">
           <Key>
             <PropertyRef Name="CodeId" />
@@ -3897,6 +3888,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="CouponCategory">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" />
+          <NavigationProperty Name="CampaignCategories" Relationship="DomainModels.FK_CampaignCategories_CouponCategory" FromRole="CouponCategory" ToRole="CampaignCategory" />
+        </EntityType>
         <Association Name="FK_CampaignCategories_CouponCategory">
           <End Type="DomainModels.CouponCategory" Role="CouponCategory" Multiplicity="1" />
           <End Type="DomainModels.CampaignCategory" Role="CampaignCategory" Multiplicity="*" />
@@ -4653,15 +4653,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="CouponCategories">
-            <EntityTypeMapping TypeName="DomainModels.CouponCategory">
-              <MappingFragment StoreEntitySet="CouponCategory">
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="CouponCodes">
             <EntityTypeMapping TypeName="DomainModels.CouponCode">
               <MappingFragment StoreEntitySet="CouponCodes">
@@ -4679,6 +4670,15 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
                 <ScalarProperty Name="CampaignId" ColumnName="CampaignId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CouponCategories">
+            <EntityTypeMapping TypeName="DomainModels.CouponCategory">
+              <MappingFragment StoreEntitySet="CouponCategory">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

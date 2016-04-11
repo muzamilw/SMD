@@ -203,7 +203,7 @@ namespace SMD.Implementation.Services
         public static void SetDebitScheduler(Registry registry)
         {
             // Registration of Debit Process Scheduler Run after every 7 days 
-            registry.Schedule(PerformDebit).ToRunEvery(7).Days().At(23, 59);
+            registry.Schedule(PerformDebit).ToRunEvery(1).Days().At(23, 59);
         }
 
         /// <summary>

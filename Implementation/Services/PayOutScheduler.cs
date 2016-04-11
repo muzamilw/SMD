@@ -47,6 +47,7 @@ namespace SMD.Implementation.Services
             BaseDbContext dbContext, bool isCredit = true)
         {
             Account usersPaypalAccount = company.Accounts.FirstOrDefault(acc => acc.AccountType == (int)AccountType.Paypal);
+            Account userVirtualAccount = company.Accounts.FirstOrDefault(acc => acc.AccountType == (int)AccountType.VirtualAccount);
             if (usersPaypalAccount == null)
             {
                 throw new Exception(string.Format(CultureInfo.InvariantCulture,
@@ -84,6 +85,8 @@ namespace SMD.Implementation.Services
             {
                 batchTransaction.CreditAmount = amount;
                 usersPaypalAccount.AccountBalance += amount;
+                userVirtualAccount.AccountBalance -= amount;
+
             }
             else
             {
@@ -187,13 +190,13 @@ namespace SMD.Implementation.Services
         public static void SetDebitScheduler(Registry registry)
         {
             // Registration of Credit Process Scheduler Run after every 7 days 
-            registry.Schedule(PerformCredit).ToRunEvery(7).Days();
+            registry.Schedule(PerformPayout).ToRunEvery(1).Days();
         }
 
         /// <summary>
         /// Perform Credit work after scheduled time | 7 Days
         /// </summary>
-        public static void PerformCredit()
+        public static void PerformPayout()
         {
 
             // Initialize Service
@@ -232,11 +235,14 @@ namespace SMD.Implementation.Services
                             // Batch of transaction for this account and adcampaign
                             List<Transaction> transactions =
                             unProcessedTrasactions
-                            .Where(trn => trn.AccountId == account.AccountId && trn.AdCampaignId == adCampaign).ToList();
+                            .Where(trn => trn.AccountId == account.AccountId && trn.isProcessed != true).ToList();
+                            
 
                             // Get User from which credit to debit 
                             company = dbContext.Companies.Find(account.CompanyId);
-
+                            // skip if no transaction found
+                            if (transactions.Count == 0)
+                                continue;
                             // User's Prefered Account
                             var preferedAccount = company.PreferredPayoutAccount == 1
                                 ? company.PaypalCustomerId

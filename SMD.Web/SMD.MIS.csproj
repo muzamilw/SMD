@@ -388,6 +388,7 @@
     <Compile Include="Areas\Api\Controllers\BuyItController.cs" />
     <Compile Include="Areas\Api\Controllers\CopyAddCampaignsController.cs" />
     <Compile Include="Areas\Api\Controllers\CopyCampaignController.cs" />
+    <Compile Include="Areas\Api\Controllers\CouponCategoryController.cs" />
     <Compile Include="Areas\Api\Controllers\EducationController.cs" />
     <Compile Include="Areas\Api\Controllers\GenerateSMSController.cs" />
     <Compile Include="Areas\Api\Controllers\GetCouponAndCategoriesController.cs" />
@@ -510,6 +511,7 @@
     <Compile Include="Helper\CultureHelper.cs" />
     <Compile Include="ModelMappers\AdCampaignMapper.cs" />
     <Compile Include="ModelMappers\CityMapper.cs" />
+    <Compile Include="ModelMappers\CouponCategoryMapper.cs" />
     <Compile Include="ModelMappers\EducationMapper.cs" />
     <Compile Include="ModelMappers\IndustryMapper.cs" />
     <Compile Include="ModelMappers\InvoiceDetailMapper.cs" />

@@ -214,6 +214,14 @@ namespace SMD.MIS
                 new { controller = "Statement" },
                 null,
                 null);
+            // Get coupon categories route
+            config.Routes.MapHttpRoute(
+                "CouponCategories",
+                "CouponCategories/{AuthenticationToken}/",
+                new { controller = "CouponCategory" },
+                null,
+                null);
+
         }
     }
 }
