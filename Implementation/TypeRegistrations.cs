@@ -44,6 +44,7 @@ namespace SMD.Implementation
             unityContainer.RegisterType<IIndustryService, IndustryService>();
             unityContainer.RegisterType<ICompanyService, CompanyService>();
             unityContainer.RegisterType<IManageUserService, ManageUserService>();
+            unityContainer.RegisterType<ICouponCategoryService, CouponCategoryService>();
         }
     }
 }

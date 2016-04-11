@@ -1,6 +1,7 @@
 ﻿
 using System.Collections.Generic;
 using SMD.Models.ResponseModels;
+using System;
 
 namespace SMD.MIS.Areas.Api.Models
 {
@@ -28,9 +29,18 @@ namespace SMD.MIS.Areas.Api.Models
         /// </summary>
         public string Title { get; set; }
     }
+    public class CouponCategory
+    {
+        public int CategoryId { get; set; }
+        public string Name { get; set; }
 
+    }
     public class EducationResponse : BaseApiResponse
     {
         public IEnumerable<Education> Educations { get; set; }
+    }
+    public class CouponCategoryResponse : BaseApiResponse
+    {
+        public IEnumerable<CouponCategory> CouponCategories { get; set; }
     }
 }

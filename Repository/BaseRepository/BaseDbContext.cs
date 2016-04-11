@@ -230,6 +230,7 @@ namespace SMD.Repository.BaseRepository
         /// </summary>
         public DbSet<TransactionLog> TransactionLogs { get; set; }
 
+        public DbSet<CouponCategory> CouponCategory { get; set; }
         /// <summary>
         /// Get Ad-Campaigns for APIs | baqer
         /// </summary>
