@@ -25,6 +25,8 @@ namespace SMD.MIS.Areas.Api.Models
 
         public string Language { get; set; }
         public string Industry { get; set; }
-        public string Education { get; set; }  
+        public string Education { get; set; }
+        public Nullable<long> QuizCampaignId { get; set; }
+        public Nullable<int> QuizAnswerId { get; set; }
     }
 }

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySetsCB04B648B82517A5BCAF83211924C501E57A8896DB138CA98B1E46F6B4C1C855))]
+[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets6B158FAAC534598E071CF9829637BF976243AC99272E100E4BD5C448C0ED3EDD))]
 
 namespace Edm_EntityMappingGeneratedViews
 {
@@ -17,19 +17,19 @@ namespace Edm_EntityMappingGeneratedViews
     /// <Summary>
     /// The type contains views for EntitySets and AssociationSets that were generated at design time.
     /// </Summary>
-    public sealed class ViewsForBaseEntitySetsCB04B648B82517A5BCAF83211924C501E57A8896DB138CA98B1E46F6B4C1C855 : System.Data.Mapping.EntityViewContainer
+    public sealed class ViewsForBaseEntitySets6B158FAAC534598E071CF9829637BF976243AC99272E100E4BD5C448C0ED3EDD : System.Data.Mapping.EntityViewContainer
     {
         
         /// <Summary>
         /// The constructor stores the views for the extents and also the hash values generated based on the metadata and mapping closure and views.
         /// </Summary>
-        public ViewsForBaseEntitySetsCB04B648B82517A5BCAF83211924C501E57A8896DB138CA98B1E46F6B4C1C855()
+        public ViewsForBaseEntitySets6B158FAAC534598E071CF9829637BF976243AC99272E100E4BD5C448C0ED3EDD()
         {
             this.EdmEntityContainerName = "BaseDbContext";
             this.StoreEntityContainerName = "SMDModelStoreContainer";
-            this.HashOverMappingClosure = "49fb6ca8ae429178800229b71da8829e510dfc1eaceef18dc672914db315e4ae";
-            this.HashOverAllExtentViews = "9e179fad5a01de5e3a7686f2f19de48b0488bfe9d993eea23dce5b8627bc4bd3";
-            this.ViewCount = 70;
+            this.HashOverMappingClosure = "60d00f03d1dbabc571af2ac0c536207dadccc0ce48bb3419df2b332e1bfcf2e5";
+            this.HashOverAllExtentViews = "7d848c4abeb8931b3498c2621e240236227953215c2be85f4c271638b8f44c38";
+            this.ViewCount = 76;
         }
         
         /// <Summary>
@@ -316,6 +316,30 @@ namespace Edm_EntityMappingGeneratedViews
             if ((index == 69))
             {
                 return GetView69();
+            }
+            if ((index == 70))
+            {
+                return GetView70();
+            }
+            if ((index == 71))
+            {
+                return GetView71();
+            }
+            if ((index == 72))
+            {
+                return GetView72();
+            }
+            if ((index == 73))
+            {
+                return GetView73();
+            }
+            if ((index == 74))
+            {
+                return GetView74();
+            }
+            if ((index == 75))
+            {
+                return GetView75();
             }
             throw new System.IndexOutOfRangeException();
         }
@@ -780,7 +804,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// </Summary>
         private System.Collections.Generic.KeyValuePair<string, string> GetView21()
         {
-            System.Text.StringBuilder viewString = new System.Text.StringBuilder(5030);
+            System.Text.StringBuilder viewString = new System.Text.StringBuilder(5667);
             viewString.Append("\r\n    SELECT VALUE -- Constructing AdCampaign\r\n        [SMDModel.Store.AdCampaig");
             viewString.Append("n](T1.AdCampaign_CampaignID, T1.AdCampaign_LanguageID, T1.AdCampaign_UserID, T1.");
             viewString.Append("AdCampaign_SMDCampaign, T1.AdCampaign_CampaignName, T1.AdCampaign_CampaignDescri");
@@ -801,111 +825,64 @@ namespace Edm_EntityMappingGeneratedViews
             viewString.Append("T1.AdCampaign_VideoUrl, T1.AdCampaign_BuuyItLine1, T1.AdCampaign_BuyItLine2, T1.");
             viewString.Append("AdCampaign_BuyItLine3, T1.AdCampaign_BuyItButtonLabel, T1.AdCampaign_BuyItImageU");
             viewString.Append("rl, T1.AdCampaign_CouponSwapValue, T1.AdCampaign_CouponActualValue, T1.AdCampaig");
-            viewString.Append("n_CouponTakenCount, T1.AdCampaign_CouponQuantity, T1.AdCampaign_CompanyId)\r\n    ");
-            viewString.Append("FROM (\r\n        SELECT \r\n            T.CampaignId AS AdCampaign_CampaignID, \r\n  ");
-            viewString.Append("          T.LanguageId AS AdCampaign_LanguageID, \r\n            T.UserId AS AdCam");
-            viewString.Append("paign_UserID, \r\n            T.SmdCampaign AS AdCampaign_SMDCampaign, \r\n         ");
-            viewString.Append("   T.CampaignName AS AdCampaign_CampaignName, \r\n            T.CampaignDescriptio");
-            viewString.Append("n AS AdCampaign_CampaignDescription, \r\n            T.Status AS AdCampaign_Status");
-            viewString.Append(", \r\n            T.Archived AS AdCampaign_Archived, \r\n            T.Approved AS A");
-            viewString.Append("dCampaign_Approved, \r\n            T.ApprovedBy AS AdCampaign_ApprovedBy, \r\n     ");
-            viewString.Append("       T.ApprovalDateTime AS AdCampaign_ApprovalDateTime, \r\n            T.StartD");
-            viewString.Append("ateTime AS AdCampaign_StartDateTime, \r\n            T.EndDateTime AS AdCampaign_E");
-            viewString.Append("ndDateTime, \r\n            T.MaxBudget AS AdCampaign_MaxBudget, \r\n            T.T");
-            viewString.Append("ype AS AdCampaign_Type, \r\n            T.ClickRate AS AdCampaign_ClickRate, \r\n   ");
-            viewString.Append("         T.SmdCredits AS AdCampaign_SMDCredits, \r\n            T.DisplayTitle AS ");
-            viewString.Append("AdCampaign_DisplayTitle, \r\n            T.Description AS AdCampaign_Description, ");
-            viewString.Append("\r\n            T.ImagePath AS AdCampaign_ImagePath, \r\n            T.LandingPageVi");
-            viewString.Append("deoLink AS AdCampaign_LandingPageVideoLink, \r\n            T.VerifyQuestion AS Ad");
-            viewString.Append("Campaign_VerifyQuestion, \r\n            T.Answer1 AS AdCampaign_Answer1, \r\n      ");
-            viewString.Append("      T.Answer2 AS AdCampaign_Answer2, \r\n            T.Answer3 AS AdCampaign_Ans");
-            viewString.Append("wer3, \r\n            T.CorrectAnswer AS AdCampaign_CorrectAnswer, \r\n            T");
-            viewString.Append(".CreatedDateTime AS AdCampaign_CreatedDateTime, \r\n            T.CreatedBy AS AdC");
-            viewString.Append("ampaign_CreatedBy, \r\n            T.ModifiedDateTime AS AdCampaign_ModifiedDateTi");
-            viewString.Append("me, \r\n            T.ModifiedBy AS AdCampaign_ModifiedBy, \r\n            T.AgeRang");
-            viewString.Append("eStart AS AdCampaign_AgeRangeStart, \r\n            T.AgeRangeEnd AS AdCampaign_Ag");
-            viewString.Append("eRangeEnd, \r\n            T.Gender AS AdCampaign_Gender, \r\n            T.Rejected");
-            viewString.Append("Reason AS AdCampaign_RejectedReason, \r\n            T.ProjectedReach AS AdCampaig");
-            viewString.Append("n_ProjectedReach, \r\n            T.ResultClicks AS AdCampaign_ResultClicks, \r\n   ");
-            viewString.Append("         T.AmountSpent AS AdCampaign_AmountSpent, \r\n            T.RewardType AS ");
-            viewString.Append("AdCampaign_RewardType, \r\n            T.Voucher1Heading AS AdCampaign_Voucher1Hea");
-            viewString.Append("ding, \r\n            T.Voucher1Description AS AdCampaign_Voucher1Description, \r\n ");
-            viewString.Append("           T.Voucher1Value AS AdCampaign_Voucher1Value, \r\n            T.Voucher2");
-            viewString.Append("Heading AS AdCampaign_Voucher2Heading, \r\n            T.Voucher2Description AS Ad");
-            viewString.Append("Campaign_Voucher2Description, \r\n            T.Voucher2Value AS AdCampaign_Vouche");
-            viewString.Append("r2Value, \r\n            T.Voucher1ImagePath AS AdCampaign_Voucher1ImagePath, \r\n  ");
-            viewString.Append("          T.Voucher2ImagePath AS AdCampaign_Voucher2ImagePath, \r\n            T.V");
-            viewString.Append("ideoUrl AS AdCampaign_VideoUrl, \r\n            T.BuuyItLine1 AS AdCampaign_BuuyIt");
-            viewString.Append("Line1, \r\n            T.BuyItLine2 AS AdCampaign_BuyItLine2, \r\n            T.BuyI");
-            viewString.Append("tLine3 AS AdCampaign_BuyItLine3, \r\n            T.BuyItButtonLabel AS AdCampaign_");
-            viewString.Append("BuyItButtonLabel, \r\n            T.BuyItImageUrl AS AdCampaign_BuyItImageUrl, \r\n ");
-            viewString.Append("           T.CouponSwapValue AS AdCampaign_CouponSwapValue, \r\n            T.Coup");
-            viewString.Append("onActualValue AS AdCampaign_CouponActualValue, \r\n            T.CouponTakenCount ");
-            viewString.Append("AS AdCampaign_CouponTakenCount, \r\n            T.CouponQuantity AS AdCampaign_Cou");
-            viewString.Append("ponQuantity, \r\n            T.CompanyId AS AdCampaign_CompanyId, \r\n            Tr");
-            viewString.Append("ue AS _from0\r\n        FROM BaseDbContext.AdCampaigns AS T\r\n    ) AS T1");
+            viewString.Append("n_CouponTakenCount, T1.AdCampaign_CouponQuantity, T1.AdCampaign_CompanyId, T1.Ad");
+            viewString.Append("Campaign_priority, T1.AdCampaign_couponSmdComission, T1.AdCampaign_couponImage2,");
+            viewString.Append(" T1.AdCampaign_CouponImage3, T1.AdCampaign_CouponImage4, T1.AdCampaign_CouponExp");
+            viewString.Append("iryLabel, T1.AdCampaign_CouponDiscountValue)\r\n    FROM (\r\n        SELECT \r\n     ");
+            viewString.Append("       T.CampaignId AS AdCampaign_CampaignID, \r\n            T.LanguageId AS AdCa");
+            viewString.Append("mpaign_LanguageID, \r\n            T.UserId AS AdCampaign_UserID, \r\n            T.");
+            viewString.Append("SmdCampaign AS AdCampaign_SMDCampaign, \r\n            T.CampaignName AS AdCampaig");
+            viewString.Append("n_CampaignName, \r\n            T.CampaignDescription AS AdCampaign_CampaignDescri");
+            viewString.Append("ption, \r\n            T.Status AS AdCampaign_Status, \r\n            T.Archived AS ");
+            viewString.Append("AdCampaign_Archived, \r\n            T.Approved AS AdCampaign_Approved, \r\n        ");
+            viewString.Append("    T.ApprovedBy AS AdCampaign_ApprovedBy, \r\n            T.ApprovalDateTime AS A");
+            viewString.Append("dCampaign_ApprovalDateTime, \r\n            T.StartDateTime AS AdCampaign_StartDat");
+            viewString.Append("eTime, \r\n            T.EndDateTime AS AdCampaign_EndDateTime, \r\n            T.Ma");
+            viewString.Append("xBudget AS AdCampaign_MaxBudget, \r\n            T.Type AS AdCampaign_Type, \r\n    ");
+            viewString.Append("        T.ClickRate AS AdCampaign_ClickRate, \r\n            T.SmdCredits AS AdCam");
+            viewString.Append("paign_SMDCredits, \r\n            T.DisplayTitle AS AdCampaign_DisplayTitle, \r\n   ");
+            viewString.Append("         T.Description AS AdCampaign_Description, \r\n            T.ImagePath AS A");
+            viewString.Append("dCampaign_ImagePath, \r\n            T.LandingPageVideoLink AS AdCampaign_LandingP");
+            viewString.Append("ageVideoLink, \r\n            T.VerifyQuestion AS AdCampaign_VerifyQuestion, \r\n   ");
+            viewString.Append("         T.Answer1 AS AdCampaign_Answer1, \r\n            T.Answer2 AS AdCampaign_");
+            viewString.Append("Answer2, \r\n            T.Answer3 AS AdCampaign_Answer3, \r\n            T.CorrectA");
+            viewString.Append("nswer AS AdCampaign_CorrectAnswer, \r\n            T.CreatedDateTime AS AdCampaign");
+            viewString.Append("_CreatedDateTime, \r\n            T.CreatedBy AS AdCampaign_CreatedBy, \r\n         ");
+            viewString.Append("   T.ModifiedDateTime AS AdCampaign_ModifiedDateTime, \r\n            T.ModifiedBy");
+            viewString.Append(" AS AdCampaign_ModifiedBy, \r\n            T.AgeRangeStart AS AdCampaign_AgeRangeS");
+            viewString.Append("tart, \r\n            T.AgeRangeEnd AS AdCampaign_AgeRangeEnd, \r\n            T.Gen");
+            viewString.Append("der AS AdCampaign_Gender, \r\n            T.RejectedReason AS AdCampaign_RejectedR");
+            viewString.Append("eason, \r\n            T.ProjectedReach AS AdCampaign_ProjectedReach, \r\n          ");
+            viewString.Append("  T.ResultClicks AS AdCampaign_ResultClicks, \r\n            T.AmountSpent AS AdCa");
+            viewString.Append("mpaign_AmountSpent, \r\n            T.RewardType AS AdCampaign_RewardType, \r\n     ");
+            viewString.Append("       T.Voucher1Heading AS AdCampaign_Voucher1Heading, \r\n            T.Voucher1");
+            viewString.Append("Description AS AdCampaign_Voucher1Description, \r\n            T.Voucher1Value AS ");
+            viewString.Append("AdCampaign_Voucher1Value, \r\n            T.Voucher2Heading AS AdCampaign_Voucher2");
+            viewString.Append("Heading, \r\n            T.Voucher2Description AS AdCampaign_Voucher2Description, ");
+            viewString.Append("\r\n            T.Voucher2Value AS AdCampaign_Voucher2Value, \r\n            T.Vouch");
+            viewString.Append("er1ImagePath AS AdCampaign_Voucher1ImagePath, \r\n            T.Voucher2ImagePath ");
+            viewString.Append("AS AdCampaign_Voucher2ImagePath, \r\n            T.VideoUrl AS AdCampaign_VideoUrl");
+            viewString.Append(", \r\n            T.BuuyItLine1 AS AdCampaign_BuuyItLine1, \r\n            T.BuyItLi");
+            viewString.Append("ne2 AS AdCampaign_BuyItLine2, \r\n            T.BuyItLine3 AS AdCampaign_BuyItLine");
+            viewString.Append("3, \r\n            T.BuyItButtonLabel AS AdCampaign_BuyItButtonLabel, \r\n          ");
+            viewString.Append("  T.BuyItImageUrl AS AdCampaign_BuyItImageUrl, \r\n            T.CouponSwapValue A");
+            viewString.Append("S AdCampaign_CouponSwapValue, \r\n            T.CouponActualValue AS AdCampaign_Co");
+            viewString.Append("uponActualValue, \r\n            T.CouponTakenCount AS AdCampaign_CouponTakenCount");
+            viewString.Append(", \r\n            T.CouponQuantity AS AdCampaign_CouponQuantity, \r\n            T.C");
+            viewString.Append("ompanyId AS AdCampaign_CompanyId, \r\n            T.priority AS AdCampaign_priorit");
+            viewString.Append("y, \r\n            T.couponSmdComission AS AdCampaign_couponSmdComission, \r\n      ");
+            viewString.Append("      T.couponImage2 AS AdCampaign_couponImage2, \r\n            T.CouponImage3 AS");
+            viewString.Append(" AdCampaign_CouponImage3, \r\n            T.CouponImage4 AS AdCampaign_CouponImage");
+            viewString.Append("4, \r\n            T.CouponExpiryLabel AS AdCampaign_CouponExpiryLabel, \r\n        ");
+            viewString.Append("    T.CouponDiscountValue AS AdCampaign_CouponDiscountValue, \r\n            True ");
+            viewString.Append("AS _from0\r\n        FROM BaseDbContext.AdCampaigns AS T\r\n    ) AS T1");
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.AdCampaign", viewString.ToString());
-        }
-        
-        /// <Summary>
-        /// return view for SMDModelStoreContainer.AdCampaignResponse
-        /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView22()
-        {
-            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.AdCampaignResponse", @"
-    SELECT VALUE -- Constructing AdCampaignResponse
-        [SMDModel.Store.AdCampaignResponse](T1.AdCampaignResponse_ResponseID, T1.AdCampaignResponse_CampaignID, T1.AdCampaignResponse_CreatedDateTime, T1.AdCampaignResponse_UserID, T1.AdCampaignResponse_EndUserDollarAmount, T1.AdCampaignResponse_SkipCount, T1.AdCampaignResponse_UserSelection, T1.AdCampaignResponse_CompanyId, T1.AdCampaignResponse_GameTime, T1.AdCampaignResponse_GameScore, T1.AdCampaignResponse_GameLevel, T1.AdCampaignResponse_GameId)
-    FROM (
-        SELECT 
-            T.ResponseId AS AdCampaignResponse_ResponseID, 
-            T.CampaignId AS AdCampaignResponse_CampaignID, 
-            T.CreatedDateTime AS AdCampaignResponse_CreatedDateTime, 
-            T.UserId AS AdCampaignResponse_UserID, 
-            T.EndUserDollarAmount AS AdCampaignResponse_EndUserDollarAmount, 
-            T.SkipCount AS AdCampaignResponse_SkipCount, 
-            T.UserSelection AS AdCampaignResponse_UserSelection, 
-            T.CompanyId AS AdCampaignResponse_CompanyId, 
-            T.GameTime AS AdCampaignResponse_GameTime, 
-            T.GameScore AS AdCampaignResponse_GameScore, 
-            T.GameLevel AS AdCampaignResponse_GameLevel, 
-            T.GameId AS AdCampaignResponse_GameId, 
-            True AS _from0
-        FROM BaseDbContext.AdCampaignResponses AS T
-    ) AS T1");
-        }
-        
-        /// <Summary>
-        /// return view for SMDModelStoreContainer.AdCampaignTargetCriteria
-        /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView23()
-        {
-            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.AdCampaignTargetCriteria", "\r\n    SELECT VALUE -- Constructing AdCampaignTargetCriteria\r\n        [SMDModel.St" +
-                    "ore.AdCampaignTargetCriteria](T1.AdCampaignTargetCriteria_CriteriaID, T1.AdCampa" +
-                    "ignTargetCriteria_CampaignID, T1.AdCampaignTargetCriteria_Type, T1.AdCampaignTar" +
-                    "getCriteria_PQID, T1.AdCampaignTargetCriteria_PQAnswerID, T1.AdCampaignTargetCri" +
-                    "teria_SQID, T1.AdCampaignTargetCriteria_SQAnswer, T1.AdCampaignTargetCriteria_In" +
-                    "cludeorExclude, T1.AdCampaignTargetCriteria_LanguageID, T1.AdCampaignTargetCrite" +
-                    "ria_IndustryID, T1.AdCampaignTargetCriteria_EducationID, T1.AdCampaignTargetCrit" +
-                    "eria_QuizCampaignId, T1.AdCampaignTargetCriteria_QuizAnswerId)\r\n    FROM (\r\n    " +
-                    "    SELECT \r\n            T.CriteriaId AS AdCampaignTargetCriteria_CriteriaID, \r\n" +
-                    "            T.CampaignId AS AdCampaignTargetCriteria_CampaignID, \r\n            T" +
-                    ".Type AS AdCampaignTargetCriteria_Type, \r\n            T.PqId AS AdCampaignTarget" +
-                    "Criteria_PQID, \r\n            T.PqAnswerId AS AdCampaignTargetCriteria_PQAnswerID" +
-                    ", \r\n            T.SqId AS AdCampaignTargetCriteria_SQID, \r\n            T.SqAnswe" +
-                    "r AS AdCampaignTargetCriteria_SQAnswer, \r\n            T.IncludeorExclude AS AdCa" +
-                    "mpaignTargetCriteria_IncludeorExclude, \r\n            T.LanguageId AS AdCampaignT" +
-                    "argetCriteria_LanguageID, \r\n            T.IndustryId AS AdCampaignTargetCriteria" +
-                    "_IndustryID, \r\n            T.EducationId AS AdCampaignTargetCriteria_EducationID" +
-                    ", \r\n            T.QuizCampaignId AS AdCampaignTargetCriteria_QuizCampaignId, \r\n " +
-                    "           T.QuizAnswerId AS AdCampaignTargetCriteria_QuizAnswerId, \r\n          " +
-                    "  True AS _from0\r\n        FROM BaseDbContext.AdCampaignTargetCriterias AS T\r\n   " +
-                    " ) AS T1");
         }
         
         /// <Summary>
         /// return view for SMDModelStoreContainer.Invoice
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView24()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView22()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.Invoice", @"
     SELECT VALUE -- Constructing Invoice
@@ -936,7 +913,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for SMDModelStoreContainer.ProfileQuestionUserAnswer
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView25()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView23()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.ProfileQuestionUserAnswer", @"
     SELECT VALUE -- Constructing ProfileQuestionUserAnswer
@@ -957,7 +934,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for SMDModelStoreContainer.SurveyQuestion
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView26()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView24()
         {
             System.Text.StringBuilder viewString = new System.Text.StringBuilder(3278);
             viewString.Append("\r\n    SELECT VALUE -- Constructing SurveyQuestion\r\n        [SMDModel.Store.Surve");
@@ -1007,7 +984,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for SMDModelStoreContainer.SurveyQuestionResponse
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView27()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView25()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.SurveyQuestionResponse", @"
     SELECT VALUE -- Constructing SurveyQuestionResponse
@@ -1029,7 +1006,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for SMDModelStoreContainer.Company
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView28()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView26()
         {
             System.Text.StringBuilder viewString = new System.Text.StringBuilder(2164);
             viewString.Append("\r\n    SELECT VALUE -- Constructing Company\r\n        [SMDModel.Store.Company](T1.");
@@ -1066,7 +1043,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for SMDModelStoreContainer.AspNetUsers
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView29()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView27()
         {
             System.Text.StringBuilder viewString = new System.Text.StringBuilder(3325);
             viewString.Append("\r\n    SELECT VALUE -- Constructing AspNetUsers\r\n        [SMDModel.Store.AspNetUs");
@@ -1115,9 +1092,121 @@ namespace Edm_EntityMappingGeneratedViews
         }
         
         /// <Summary>
-        /// return view for SMDModelStoreContainer.AspNetUserRoles
+        /// return view for SMDModelStoreContainer.AdCampaignTargetCriteria
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView28()
+        {
+            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.AdCampaignTargetCriteria", "\r\n    SELECT VALUE -- Constructing AdCampaignTargetCriteria\r\n        [SMDModel.St" +
+                    "ore.AdCampaignTargetCriteria](T1.AdCampaignTargetCriteria_CriteriaID, T1.AdCampa" +
+                    "ignTargetCriteria_CampaignID, T1.AdCampaignTargetCriteria_Type, T1.AdCampaignTar" +
+                    "getCriteria_PQID, T1.AdCampaignTargetCriteria_PQAnswerID, T1.AdCampaignTargetCri" +
+                    "teria_SQID, T1.AdCampaignTargetCriteria_SQAnswer, T1.AdCampaignTargetCriteria_In" +
+                    "cludeorExclude, T1.AdCampaignTargetCriteria_LanguageID, T1.AdCampaignTargetCrite" +
+                    "ria_IndustryID, T1.AdCampaignTargetCriteria_EducationID, T1.AdCampaignTargetCrit" +
+                    "eria_QuizCampaignId, T1.AdCampaignTargetCriteria_QuizAnswerId)\r\n    FROM (\r\n    " +
+                    "    SELECT \r\n            T.CriteriaId AS AdCampaignTargetCriteria_CriteriaID, \r\n" +
+                    "            T.CampaignId AS AdCampaignTargetCriteria_CampaignID, \r\n            T" +
+                    ".Type AS AdCampaignTargetCriteria_Type, \r\n            T.PqId AS AdCampaignTarget" +
+                    "Criteria_PQID, \r\n            T.PqAnswerId AS AdCampaignTargetCriteria_PQAnswerID" +
+                    ", \r\n            T.SqId AS AdCampaignTargetCriteria_SQID, \r\n            T.SqAnswe" +
+                    "r AS AdCampaignTargetCriteria_SQAnswer, \r\n            T.IncludeorExclude AS AdCa" +
+                    "mpaignTargetCriteria_IncludeorExclude, \r\n            T.LanguageId AS AdCampaignT" +
+                    "argetCriteria_LanguageID, \r\n            T.IndustryId AS AdCampaignTargetCriteria" +
+                    "_IndustryID, \r\n            T.EducationId AS AdCampaignTargetCriteria_EducationID" +
+                    ", \r\n            T.QuizCampaignId AS AdCampaignTargetCriteria_QuizCampaignId, \r\n " +
+                    "           T.QuizAnswerId AS AdCampaignTargetCriteria_QuizAnswerId, \r\n          " +
+                    "  True AS _from0\r\n        FROM BaseDbContext.AdCampaignTargetCriterias AS T\r\n   " +
+                    " ) AS T1");
+        }
+        
+        /// <Summary>
+        /// return view for SMDModelStoreContainer.AdCampaignResponse
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView29()
+        {
+            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.AdCampaignResponse", @"
+    SELECT VALUE -- Constructing AdCampaignResponse
+        [SMDModel.Store.AdCampaignResponse](T1.AdCampaignResponse_ResponseID, T1.AdCampaignResponse_CampaignID, T1.AdCampaignResponse_CreatedDateTime, T1.AdCampaignResponse_UserID, T1.AdCampaignResponse_EndUserDollarAmount, T1.AdCampaignResponse_SkipCount, T1.AdCampaignResponse_UserSelection, T1.AdCampaignResponse_CompanyId, T1.AdCampaignResponse_GameTime, T1.AdCampaignResponse_GameScore, T1.AdCampaignResponse_GameLevel, T1.AdCampaignResponse_GameId, T1.AdCampaignResponse_UserQuestionResponse)
+    FROM (
+        SELECT 
+            T.ResponseId AS AdCampaignResponse_ResponseID, 
+            T.CampaignId AS AdCampaignResponse_CampaignID, 
+            T.CreatedDateTime AS AdCampaignResponse_CreatedDateTime, 
+            T.UserId AS AdCampaignResponse_UserID, 
+            T.EndUserDollarAmount AS AdCampaignResponse_EndUserDollarAmount, 
+            T.SkipCount AS AdCampaignResponse_SkipCount, 
+            T.UserSelection AS AdCampaignResponse_UserSelection, 
+            T.CompanyId AS AdCampaignResponse_CompanyId, 
+            T.GameTime AS AdCampaignResponse_GameTime, 
+            T.GameScore AS AdCampaignResponse_GameScore, 
+            T.GameLevel AS AdCampaignResponse_GameLevel, 
+            T.GameId AS AdCampaignResponse_GameId, 
+            T.UserQuestionResponse AS AdCampaignResponse_UserQuestionResponse, 
+            True AS _from0
+        FROM BaseDbContext.AdCampaignResponses AS T
+    ) AS T1");
+        }
+        
+        /// <Summary>
+        /// return view for SMDModelStoreContainer.CouponCodes
         /// </Summary>
         private System.Collections.Generic.KeyValuePair<string, string> GetView30()
+        {
+            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.CouponCodes", @"
+    SELECT VALUE -- Constructing CouponCodes
+        [SMDModel.Store.CouponCodes](T1.CouponCodes_CodeId, T1.CouponCodes_CampaignId, T1.CouponCodes_Code, T1.CouponCodes_IsTaken, T1.CouponCodes_UserId)
+    FROM (
+        SELECT 
+            T.CodeId AS CouponCodes_CodeId, 
+            T.CampaignId AS CouponCodes_CampaignId, 
+            T.Code AS CouponCodes_Code, 
+            T.IsTaken AS CouponCodes_IsTaken, 
+            T.UserId AS CouponCodes_UserId, 
+            True AS _from0
+        FROM BaseDbContext.CouponCodes AS T
+    ) AS T1");
+        }
+        
+        /// <Summary>
+        /// return view for SMDModelStoreContainer.CampaignCategories
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView31()
+        {
+            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.CampaignCategories", @"
+    SELECT VALUE -- Constructing CampaignCategories
+        [SMDModel.Store.CampaignCategories](T1.CampaignCategories_CampaignId, T1.CampaignCategories_CategoryId, T1.CampaignCategories_Id)
+    FROM (
+        SELECT 
+            T.CampaignId AS CampaignCategories_CampaignId, 
+            T.CategoryId AS CampaignCategories_CategoryId, 
+            T.Id AS CampaignCategories_Id, 
+            True AS _from0
+        FROM BaseDbContext.CampaignCategories AS T
+    ) AS T1");
+        }
+        
+        /// <Summary>
+        /// return view for SMDModelStoreContainer.CouponCategory
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView32()
+        {
+            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.CouponCategory", @"
+    SELECT VALUE -- Constructing CouponCategory
+        [SMDModel.Store.CouponCategory](T1.CouponCategory_CategoryId, T1.CouponCategory_Name, T1.CouponCategory_Status)
+    FROM (
+        SELECT 
+            T.CategoryId AS CouponCategory_CategoryId, 
+            T.Name AS CouponCategory_Name, 
+            T.Status AS CouponCategory_Status, 
+            True AS _from0
+        FROM BaseDbContext.CouponCategories AS T
+    ) AS T1");
+        }
+        
+        /// <Summary>
+        /// return view for SMDModelStoreContainer.AspNetUserRoles
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView33()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.AspNetUserRoles", @"
     SELECT VALUE -- Constructing AspNetUserRoles
@@ -1134,7 +1223,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.Roles
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView31()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView34()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.Roles", @"
     SELECT VALUE -- Constructing Roles
@@ -1151,7 +1240,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.UserLogins
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView32()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView35()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.UserLogins", @"
     SELECT VALUE -- Constructing UserLogins
@@ -1169,7 +1258,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.ProfileQuestions
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView33()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView36()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.ProfileQuestions", "\r\n    SELECT VALUE -- Constructing ProfileQuestions\r\n        [DomainModels.Profil" +
                     "eQuestion](T1.ProfileQuestion_PqId, T1.ProfileQuestion_LanguageId, T1.ProfileQue" +
@@ -1197,7 +1286,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.ProfileQuestionAnswers
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView34()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView37()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.ProfileQuestionAnswers", "\r\n    SELECT VALUE -- Constructing ProfileQuestionAnswers\r\n        [DomainModels." +
                     "ProfileQuestionAnswer](T1.ProfileQuestionAnswer_PqAnswerId, T1.ProfileQuestionAn" +
@@ -1225,7 +1314,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.ProfileQuestionGroups
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView35()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView38()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.ProfileQuestionGroups", @"
     SELECT VALUE -- Constructing ProfileQuestionGroups
@@ -1245,7 +1334,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.UserClaims
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView36()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView39()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.UserClaims", @"
     SELECT VALUE -- Constructing UserClaims
@@ -1264,7 +1353,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.Countries
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView37()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView40()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.Countries", @"
     SELECT VALUE -- Constructing Countries
@@ -1282,7 +1371,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.Languages
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView38()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView41()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.Languages", @"
     SELECT VALUE -- Constructing Languages
@@ -1300,7 +1389,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.AdCampaignTargetLocations
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView39()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView42()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.AdCampaignTargetLocations", @"
     SELECT VALUE -- Constructing AdCampaignTargetLocations
@@ -1321,7 +1410,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.SurveyQuestionTargetCriterias
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView40()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView43()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.SurveyQuestionTargetCriterias", @"
     SELECT VALUE -- Constructing SurveyQuestionTargetCriterias
@@ -1347,7 +1436,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.SurveyQuestionTargetLocations
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView41()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView44()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.SurveyQuestionTargetLocations", @"
     SELECT VALUE -- Constructing SurveyQuestionTargetLocations
@@ -1368,7 +1457,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.Cities
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView42()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView45()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.Cities", @"
     SELECT VALUE -- Constructing Cities
@@ -1389,7 +1478,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.Industries
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView43()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView46()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.Industries", @"
     SELECT VALUE -- Constructing Industries
@@ -1407,7 +1496,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.Currencies
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView44()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView47()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.Currencies", @"
     SELECT VALUE -- Constructing Currencies
@@ -1427,7 +1516,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.Transactions
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView45()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView48()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.Transactions", @"
     SELECT VALUE -- Constructing Transactions
@@ -1457,7 +1546,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.InvoiceDetails
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView46()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView49()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.InvoiceDetails", @"
     SELECT VALUE -- Constructing InvoiceDetails
@@ -1482,7 +1571,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.Taxes
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView47()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView50()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.Taxes", @"
     SELECT VALUE -- Constructing Taxes
@@ -1501,7 +1590,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.Educations
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView48()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView51()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.Educations", @"
     SELECT VALUE -- Constructing Educations
@@ -1519,7 +1608,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.Products
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView49()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView52()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.Products", @"
     SELECT VALUE -- Constructing Products
@@ -1549,7 +1638,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.TransactionLogs
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView50()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView53()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.TransactionLogs", @"
     SELECT VALUE -- Constructing TransactionLogs
@@ -1573,7 +1662,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.Accounts
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView51()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView54()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.Accounts", @"
     SELECT VALUE -- Constructing Accounts
@@ -1593,9 +1682,9 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.AdCampaigns
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView52()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView55()
         {
-            System.Text.StringBuilder viewString = new System.Text.StringBuilder(5037);
+            System.Text.StringBuilder viewString = new System.Text.StringBuilder(5674);
             viewString.Append("\r\n    SELECT VALUE -- Constructing AdCampaigns\r\n        [DomainModels.AdCampaign");
             viewString.Append("](T1.AdCampaign_CampaignId, T1.AdCampaign_LanguageId, T1.AdCampaign_UserId, T1.A");
             viewString.Append("dCampaign_SmdCampaign, T1.AdCampaign_CampaignName, T1.AdCampaign_CampaignDescrip");
@@ -1616,111 +1705,64 @@ namespace Edm_EntityMappingGeneratedViews
             viewString.Append("1.AdCampaign_VideoUrl, T1.AdCampaign_BuuyItLine1, T1.AdCampaign_BuyItLine2, T1.A");
             viewString.Append("dCampaign_BuyItLine3, T1.AdCampaign_BuyItButtonLabel, T1.AdCampaign_BuyItImageUr");
             viewString.Append("l, T1.AdCampaign_CouponSwapValue, T1.AdCampaign_CouponActualValue, T1.AdCampaign");
-            viewString.Append("_CouponTakenCount, T1.AdCampaign_CouponQuantity, T1.AdCampaign_CompanyId)\r\n    F");
-            viewString.Append("ROM (\r\n        SELECT \r\n            T.CampaignID AS AdCampaign_CampaignId, \r\n   ");
-            viewString.Append("         T.LanguageID AS AdCampaign_LanguageId, \r\n            T.UserID AS AdCamp");
-            viewString.Append("aign_UserId, \r\n            T.SMDCampaign AS AdCampaign_SmdCampaign, \r\n          ");
-            viewString.Append("  T.CampaignName AS AdCampaign_CampaignName, \r\n            T.CampaignDescription");
-            viewString.Append(" AS AdCampaign_CampaignDescription, \r\n            T.Status AS AdCampaign_Status,");
-            viewString.Append(" \r\n            T.Archived AS AdCampaign_Archived, \r\n            T.Approved AS Ad");
-            viewString.Append("Campaign_Approved, \r\n            T.ApprovedBy AS AdCampaign_ApprovedBy, \r\n      ");
-            viewString.Append("      T.ApprovalDateTime AS AdCampaign_ApprovalDateTime, \r\n            T.StartDa");
-            viewString.Append("teTime AS AdCampaign_StartDateTime, \r\n            T.EndDateTime AS AdCampaign_En");
-            viewString.Append("dDateTime, \r\n            T.MaxBudget AS AdCampaign_MaxBudget, \r\n            T.Ty");
-            viewString.Append("pe AS AdCampaign_Type, \r\n            T.ClickRate AS AdCampaign_ClickRate, \r\n    ");
-            viewString.Append("        T.SMDCredits AS AdCampaign_SmdCredits, \r\n            T.DisplayTitle AS A");
-            viewString.Append("dCampaign_DisplayTitle, \r\n            T.Description AS AdCampaign_Description, \r");
-            viewString.Append("\n            T.ImagePath AS AdCampaign_ImagePath, \r\n            T.LandingPageVid");
-            viewString.Append("eoLink AS AdCampaign_LandingPageVideoLink, \r\n            T.VerifyQuestion AS AdC");
-            viewString.Append("ampaign_VerifyQuestion, \r\n            T.Answer1 AS AdCampaign_Answer1, \r\n       ");
-            viewString.Append("     T.Answer2 AS AdCampaign_Answer2, \r\n            T.Answer3 AS AdCampaign_Answ");
-            viewString.Append("er3, \r\n            T.CorrectAnswer AS AdCampaign_CorrectAnswer, \r\n            T.");
-            viewString.Append("CreatedDateTime AS AdCampaign_CreatedDateTime, \r\n            T.CreatedBy AS AdCa");
-            viewString.Append("mpaign_CreatedBy, \r\n            T.ModifiedDateTime AS AdCampaign_ModifiedDateTim");
-            viewString.Append("e, \r\n            T.ModifiedBy AS AdCampaign_ModifiedBy, \r\n            T.AgeRange");
-            viewString.Append("Start AS AdCampaign_AgeRangeStart, \r\n            T.AgeRangeEnd AS AdCampaign_Age");
-            viewString.Append("RangeEnd, \r\n            T.Gender AS AdCampaign_Gender, \r\n            T.RejectedR");
-            viewString.Append("eason AS AdCampaign_RejectedReason, \r\n            T.ProjectedReach AS AdCampaign");
-            viewString.Append("_ProjectedReach, \r\n            T.ResultClicks AS AdCampaign_ResultClicks, \r\n    ");
-            viewString.Append("        T.AmountSpent AS AdCampaign_AmountSpent, \r\n            T.RewardType AS A");
-            viewString.Append("dCampaign_RewardType, \r\n            T.Voucher1Heading AS AdCampaign_Voucher1Head");
-            viewString.Append("ing, \r\n            T.Voucher1Description AS AdCampaign_Voucher1Description, \r\n  ");
-            viewString.Append("          T.Voucher1Value AS AdCampaign_Voucher1Value, \r\n            T.Voucher2H");
-            viewString.Append("eading AS AdCampaign_Voucher2Heading, \r\n            T.Voucher2Description AS AdC");
-            viewString.Append("ampaign_Voucher2Description, \r\n            T.Voucher2Value AS AdCampaign_Voucher");
-            viewString.Append("2Value, \r\n            T.Voucher1ImagePath AS AdCampaign_Voucher1ImagePath, \r\n   ");
-            viewString.Append("         T.Voucher2ImagePath AS AdCampaign_Voucher2ImagePath, \r\n            T.Vi");
-            viewString.Append("deoUrl AS AdCampaign_VideoUrl, \r\n            T.BuuyItLine1 AS AdCampaign_BuuyItL");
-            viewString.Append("ine1, \r\n            T.BuyItLine2 AS AdCampaign_BuyItLine2, \r\n            T.BuyIt");
-            viewString.Append("Line3 AS AdCampaign_BuyItLine3, \r\n            T.BuyItButtonLabel AS AdCampaign_B");
-            viewString.Append("uyItButtonLabel, \r\n            T.BuyItImageUrl AS AdCampaign_BuyItImageUrl, \r\n  ");
-            viewString.Append("          T.CouponSwapValue AS AdCampaign_CouponSwapValue, \r\n            T.Coupo");
-            viewString.Append("nActualValue AS AdCampaign_CouponActualValue, \r\n            T.CouponTakenCount A");
-            viewString.Append("S AdCampaign_CouponTakenCount, \r\n            T.CouponQuantity AS AdCampaign_Coup");
-            viewString.Append("onQuantity, \r\n            T.CompanyId AS AdCampaign_CompanyId, \r\n            Tru");
-            viewString.Append("e AS _from0\r\n        FROM SMDModelStoreContainer.AdCampaign AS T\r\n    ) AS T1");
+            viewString.Append("_CouponTakenCount, T1.AdCampaign_CouponQuantity, T1.AdCampaign_CompanyId, T1.AdC");
+            viewString.Append("ampaign_priority, T1.AdCampaign_couponSmdComission, T1.AdCampaign_couponImage2, ");
+            viewString.Append("T1.AdCampaign_CouponImage3, T1.AdCampaign_CouponImage4, T1.AdCampaign_CouponExpi");
+            viewString.Append("ryLabel, T1.AdCampaign_CouponDiscountValue)\r\n    FROM (\r\n        SELECT \r\n      ");
+            viewString.Append("      T.CampaignID AS AdCampaign_CampaignId, \r\n            T.LanguageID AS AdCam");
+            viewString.Append("paign_LanguageId, \r\n            T.UserID AS AdCampaign_UserId, \r\n            T.S");
+            viewString.Append("MDCampaign AS AdCampaign_SmdCampaign, \r\n            T.CampaignName AS AdCampaign");
+            viewString.Append("_CampaignName, \r\n            T.CampaignDescription AS AdCampaign_CampaignDescrip");
+            viewString.Append("tion, \r\n            T.Status AS AdCampaign_Status, \r\n            T.Archived AS A");
+            viewString.Append("dCampaign_Archived, \r\n            T.Approved AS AdCampaign_Approved, \r\n         ");
+            viewString.Append("   T.ApprovedBy AS AdCampaign_ApprovedBy, \r\n            T.ApprovalDateTime AS Ad");
+            viewString.Append("Campaign_ApprovalDateTime, \r\n            T.StartDateTime AS AdCampaign_StartDate");
+            viewString.Append("Time, \r\n            T.EndDateTime AS AdCampaign_EndDateTime, \r\n            T.Max");
+            viewString.Append("Budget AS AdCampaign_MaxBudget, \r\n            T.Type AS AdCampaign_Type, \r\n     ");
+            viewString.Append("       T.ClickRate AS AdCampaign_ClickRate, \r\n            T.SMDCredits AS AdCamp");
+            viewString.Append("aign_SmdCredits, \r\n            T.DisplayTitle AS AdCampaign_DisplayTitle, \r\n    ");
+            viewString.Append("        T.Description AS AdCampaign_Description, \r\n            T.ImagePath AS Ad");
+            viewString.Append("Campaign_ImagePath, \r\n            T.LandingPageVideoLink AS AdCampaign_LandingPa");
+            viewString.Append("geVideoLink, \r\n            T.VerifyQuestion AS AdCampaign_VerifyQuestion, \r\n    ");
+            viewString.Append("        T.Answer1 AS AdCampaign_Answer1, \r\n            T.Answer2 AS AdCampaign_A");
+            viewString.Append("nswer2, \r\n            T.Answer3 AS AdCampaign_Answer3, \r\n            T.CorrectAn");
+            viewString.Append("swer AS AdCampaign_CorrectAnswer, \r\n            T.CreatedDateTime AS AdCampaign_");
+            viewString.Append("CreatedDateTime, \r\n            T.CreatedBy AS AdCampaign_CreatedBy, \r\n          ");
+            viewString.Append("  T.ModifiedDateTime AS AdCampaign_ModifiedDateTime, \r\n            T.ModifiedBy ");
+            viewString.Append("AS AdCampaign_ModifiedBy, \r\n            T.AgeRangeStart AS AdCampaign_AgeRangeSt");
+            viewString.Append("art, \r\n            T.AgeRangeEnd AS AdCampaign_AgeRangeEnd, \r\n            T.Gend");
+            viewString.Append("er AS AdCampaign_Gender, \r\n            T.RejectedReason AS AdCampaign_RejectedRe");
+            viewString.Append("ason, \r\n            T.ProjectedReach AS AdCampaign_ProjectedReach, \r\n           ");
+            viewString.Append(" T.ResultClicks AS AdCampaign_ResultClicks, \r\n            T.AmountSpent AS AdCam");
+            viewString.Append("paign_AmountSpent, \r\n            T.RewardType AS AdCampaign_RewardType, \r\n      ");
+            viewString.Append("      T.Voucher1Heading AS AdCampaign_Voucher1Heading, \r\n            T.Voucher1D");
+            viewString.Append("escription AS AdCampaign_Voucher1Description, \r\n            T.Voucher1Value AS A");
+            viewString.Append("dCampaign_Voucher1Value, \r\n            T.Voucher2Heading AS AdCampaign_Voucher2H");
+            viewString.Append("eading, \r\n            T.Voucher2Description AS AdCampaign_Voucher2Description, \r");
+            viewString.Append("\n            T.Voucher2Value AS AdCampaign_Voucher2Value, \r\n            T.Vouche");
+            viewString.Append("r1ImagePath AS AdCampaign_Voucher1ImagePath, \r\n            T.Voucher2ImagePath A");
+            viewString.Append("S AdCampaign_Voucher2ImagePath, \r\n            T.VideoUrl AS AdCampaign_VideoUrl,");
+            viewString.Append(" \r\n            T.BuuyItLine1 AS AdCampaign_BuuyItLine1, \r\n            T.BuyItLin");
+            viewString.Append("e2 AS AdCampaign_BuyItLine2, \r\n            T.BuyItLine3 AS AdCampaign_BuyItLine3");
+            viewString.Append(", \r\n            T.BuyItButtonLabel AS AdCampaign_BuyItButtonLabel, \r\n           ");
+            viewString.Append(" T.BuyItImageUrl AS AdCampaign_BuyItImageUrl, \r\n            T.CouponSwapValue AS");
+            viewString.Append(" AdCampaign_CouponSwapValue, \r\n            T.CouponActualValue AS AdCampaign_Cou");
+            viewString.Append("ponActualValue, \r\n            T.CouponTakenCount AS AdCampaign_CouponTakenCount,");
+            viewString.Append(" \r\n            T.CouponQuantity AS AdCampaign_CouponQuantity, \r\n            T.Co");
+            viewString.Append("mpanyId AS AdCampaign_CompanyId, \r\n            T.priority AS AdCampaign_priority");
+            viewString.Append(", \r\n            T.couponSmdComission AS AdCampaign_couponSmdComission, \r\n       ");
+            viewString.Append("     T.couponImage2 AS AdCampaign_couponImage2, \r\n            T.CouponImage3 AS ");
+            viewString.Append("AdCampaign_CouponImage3, \r\n            T.CouponImage4 AS AdCampaign_CouponImage4");
+            viewString.Append(", \r\n            T.CouponExpiryLabel AS AdCampaign_CouponExpiryLabel, \r\n         ");
+            viewString.Append("   T.CouponDiscountValue AS AdCampaign_CouponDiscountValue, \r\n            True A");
+            viewString.Append("S _from0\r\n        FROM SMDModelStoreContainer.AdCampaign AS T\r\n    ) AS T1");
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.AdCampaigns", viewString.ToString());
-        }
-        
-        /// <Summary>
-        /// return view for BaseDbContext.AdCampaignResponses
-        /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView53()
-        {
-            return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.AdCampaignResponses", @"
-    SELECT VALUE -- Constructing AdCampaignResponses
-        [DomainModels.AdCampaignResponse](T1.AdCampaignResponse_ResponseId, T1.AdCampaignResponse_CampaignId, T1.AdCampaignResponse_CreatedDateTime, T1.AdCampaignResponse_UserId, T1.AdCampaignResponse_EndUserDollarAmount, T1.AdCampaignResponse_SkipCount, T1.AdCampaignResponse_UserSelection, T1.AdCampaignResponse_CompanyId, T1.AdCampaignResponse_GameTime, T1.AdCampaignResponse_GameScore, T1.AdCampaignResponse_GameLevel, T1.AdCampaignResponse_GameId)
-    FROM (
-        SELECT 
-            T.ResponseID AS AdCampaignResponse_ResponseId, 
-            T.CampaignID AS AdCampaignResponse_CampaignId, 
-            T.CreatedDateTime AS AdCampaignResponse_CreatedDateTime, 
-            T.UserID AS AdCampaignResponse_UserId, 
-            T.EndUserDollarAmount AS AdCampaignResponse_EndUserDollarAmount, 
-            T.SkipCount AS AdCampaignResponse_SkipCount, 
-            T.UserSelection AS AdCampaignResponse_UserSelection, 
-            T.CompanyId AS AdCampaignResponse_CompanyId, 
-            T.GameTime AS AdCampaignResponse_GameTime, 
-            T.GameScore AS AdCampaignResponse_GameScore, 
-            T.GameLevel AS AdCampaignResponse_GameLevel, 
-            T.GameId AS AdCampaignResponse_GameId, 
-            True AS _from0
-        FROM SMDModelStoreContainer.AdCampaignResponse AS T
-    ) AS T1");
-        }
-        
-        /// <Summary>
-        /// return view for BaseDbContext.AdCampaignTargetCriterias
-        /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView54()
-        {
-            return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.AdCampaignTargetCriterias", "\r\n    SELECT VALUE -- Constructing AdCampaignTargetCriterias\r\n        [DomainMode" +
-                    "ls.AdCampaignTargetCriteria](T1.AdCampaignTargetCriteria_CriteriaId, T1.AdCampai" +
-                    "gnTargetCriteria_CampaignId, T1.AdCampaignTargetCriteria_Type, T1.AdCampaignTarg" +
-                    "etCriteria_PqId, T1.AdCampaignTargetCriteria_PqAnswerId, T1.AdCampaignTargetCrit" +
-                    "eria_SqId, T1.AdCampaignTargetCriteria_SqAnswer, T1.AdCampaignTargetCriteria_Inc" +
-                    "ludeorExclude, T1.AdCampaignTargetCriteria_LanguageId, T1.AdCampaignTargetCriter" +
-                    "ia_IndustryId, T1.AdCampaignTargetCriteria_EducationId, T1.AdCampaignTargetCrite" +
-                    "ria_QuizCampaignId, T1.AdCampaignTargetCriteria_QuizAnswerId)\r\n    FROM (\r\n     " +
-                    "   SELECT \r\n            T.CriteriaID AS AdCampaignTargetCriteria_CriteriaId, \r\n " +
-                    "           T.CampaignID AS AdCampaignTargetCriteria_CampaignId, \r\n            T." +
-                    "Type AS AdCampaignTargetCriteria_Type, \r\n            T.PQID AS AdCampaignTargetC" +
-                    "riteria_PqId, \r\n            T.PQAnswerID AS AdCampaignTargetCriteria_PqAnswerId," +
-                    " \r\n            T.SQID AS AdCampaignTargetCriteria_SqId, \r\n            T.SQAnswer" +
-                    " AS AdCampaignTargetCriteria_SqAnswer, \r\n            T.IncludeorExclude AS AdCam" +
-                    "paignTargetCriteria_IncludeorExclude, \r\n            T.LanguageID AS AdCampaignTa" +
-                    "rgetCriteria_LanguageId, \r\n            T.IndustryID AS AdCampaignTargetCriteria_" +
-                    "IndustryId, \r\n            T.EducationID AS AdCampaignTargetCriteria_EducationId," +
-                    " \r\n            T.QuizCampaignId AS AdCampaignTargetCriteria_QuizCampaignId, \r\n  " +
-                    "          T.QuizAnswerId AS AdCampaignTargetCriteria_QuizAnswerId, \r\n           " +
-                    " True AS _from0\r\n        FROM SMDModelStoreContainer.AdCampaignTargetCriteria AS" +
-                    " T\r\n    ) AS T1");
         }
         
         /// <Summary>
         /// return view for BaseDbContext.Invoices
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView55()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView56()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.Invoices", @"
     SELECT VALUE -- Constructing Invoices
@@ -1751,7 +1793,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.ProfileQuestionUserAnswers
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView56()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView57()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.ProfileQuestionUserAnswers", @"
     SELECT VALUE -- Constructing ProfileQuestionUserAnswers
@@ -1772,7 +1814,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.SurveyQuestions
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView57()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView58()
         {
             System.Text.StringBuilder viewString = new System.Text.StringBuilder(3285);
             viewString.Append("\r\n    SELECT VALUE -- Constructing SurveyQuestions\r\n        [DomainModels.Survey");
@@ -1823,7 +1865,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.SurveyQuestionResponses
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView58()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView59()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.SurveyQuestionResponses", @"
     SELECT VALUE -- Constructing SurveyQuestionResponses
@@ -1845,7 +1887,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.Companies
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView59()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView60()
         {
             System.Text.StringBuilder viewString = new System.Text.StringBuilder(2171);
             viewString.Append("\r\n    SELECT VALUE -- Constructing Companies\r\n        [DomainModels.Company](T1.");
@@ -1882,7 +1924,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.Users
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView60()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView61()
         {
             System.Text.StringBuilder viewString = new System.Text.StringBuilder(2807);
             viewString.Append("\r\n    SELECT VALUE -- Constructing Users\r\n        [DomainModels.User](T1.User_Id");
@@ -1925,9 +1967,119 @@ namespace Edm_EntityMappingGeneratedViews
         }
         
         /// <Summary>
+        /// return view for BaseDbContext.AdCampaignTargetCriterias
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView62()
+        {
+            return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.AdCampaignTargetCriterias", "\r\n    SELECT VALUE -- Constructing AdCampaignTargetCriterias\r\n        [DomainMode" +
+                    "ls.AdCampaignTargetCriteria](T1.AdCampaignTargetCriteria_CriteriaId, T1.AdCampai" +
+                    "gnTargetCriteria_CampaignId, T1.AdCampaignTargetCriteria_Type, T1.AdCampaignTarg" +
+                    "etCriteria_PqId, T1.AdCampaignTargetCriteria_PqAnswerId, T1.AdCampaignTargetCrit" +
+                    "eria_SqId, T1.AdCampaignTargetCriteria_SqAnswer, T1.AdCampaignTargetCriteria_Inc" +
+                    "ludeorExclude, T1.AdCampaignTargetCriteria_LanguageId, T1.AdCampaignTargetCriter" +
+                    "ia_IndustryId, T1.AdCampaignTargetCriteria_EducationId, T1.AdCampaignTargetCrite" +
+                    "ria_QuizCampaignId, T1.AdCampaignTargetCriteria_QuizAnswerId)\r\n    FROM (\r\n     " +
+                    "   SELECT \r\n            T.CriteriaID AS AdCampaignTargetCriteria_CriteriaId, \r\n " +
+                    "           T.CampaignID AS AdCampaignTargetCriteria_CampaignId, \r\n            T." +
+                    "Type AS AdCampaignTargetCriteria_Type, \r\n            T.PQID AS AdCampaignTargetC" +
+                    "riteria_PqId, \r\n            T.PQAnswerID AS AdCampaignTargetCriteria_PqAnswerId," +
+                    " \r\n            T.SQID AS AdCampaignTargetCriteria_SqId, \r\n            T.SQAnswer" +
+                    " AS AdCampaignTargetCriteria_SqAnswer, \r\n            T.IncludeorExclude AS AdCam" +
+                    "paignTargetCriteria_IncludeorExclude, \r\n            T.LanguageID AS AdCampaignTa" +
+                    "rgetCriteria_LanguageId, \r\n            T.IndustryID AS AdCampaignTargetCriteria_" +
+                    "IndustryId, \r\n            T.EducationID AS AdCampaignTargetCriteria_EducationId," +
+                    " \r\n            T.QuizCampaignId AS AdCampaignTargetCriteria_QuizCampaignId, \r\n  " +
+                    "          T.QuizAnswerId AS AdCampaignTargetCriteria_QuizAnswerId, \r\n           " +
+                    " True AS _from0\r\n        FROM SMDModelStoreContainer.AdCampaignTargetCriteria AS" +
+                    " T\r\n    ) AS T1");
+        }
+        
+        /// <Summary>
+        /// return view for BaseDbContext.AdCampaignResponses
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView63()
+        {
+            return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.AdCampaignResponses", "\r\n    SELECT VALUE -- Constructing AdCampaignResponses\r\n        [DomainModels.AdC" +
+                    "ampaignResponse](T1.AdCampaignResponse_ResponseId, T1.AdCampaignResponse_Campaig" +
+                    "nId, T1.AdCampaignResponse_CreatedDateTime, T1.AdCampaignResponse_UserId, T1.AdC" +
+                    "ampaignResponse_EndUserDollarAmount, T1.AdCampaignResponse_SkipCount, T1.AdCampa" +
+                    "ignResponse_UserSelection, T1.AdCampaignResponse_CompanyId, T1.AdCampaignRespons" +
+                    "e_GameTime, T1.AdCampaignResponse_GameScore, T1.AdCampaignResponse_GameLevel, T1" +
+                    ".AdCampaignResponse_GameId, T1.AdCampaignResponse_UserQuestionResponse)\r\n    FRO" +
+                    "M (\r\n        SELECT \r\n            T.ResponseID AS AdCampaignResponse_ResponseId," +
+                    " \r\n            T.CampaignID AS AdCampaignResponse_CampaignId, \r\n            T.Cr" +
+                    "eatedDateTime AS AdCampaignResponse_CreatedDateTime, \r\n            T.UserID AS A" +
+                    "dCampaignResponse_UserId, \r\n            T.EndUserDollarAmount AS AdCampaignRespo" +
+                    "nse_EndUserDollarAmount, \r\n            T.SkipCount AS AdCampaignResponse_SkipCou" +
+                    "nt, \r\n            T.UserSelection AS AdCampaignResponse_UserSelection, \r\n       " +
+                    "     T.CompanyId AS AdCampaignResponse_CompanyId, \r\n            T.GameTime AS Ad" +
+                    "CampaignResponse_GameTime, \r\n            T.GameScore AS AdCampaignResponse_GameS" +
+                    "core, \r\n            T.GameLevel AS AdCampaignResponse_GameLevel, \r\n            T" +
+                    ".GameId AS AdCampaignResponse_GameId, \r\n            T.UserQuestionResponse AS Ad" +
+                    "CampaignResponse_UserQuestionResponse, \r\n            True AS _from0\r\n        FRO" +
+                    "M SMDModelStoreContainer.AdCampaignResponse AS T\r\n    ) AS T1");
+        }
+        
+        /// <Summary>
+        /// return view for BaseDbContext.CouponCodes
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView64()
+        {
+            return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.CouponCodes", @"
+    SELECT VALUE -- Constructing CouponCodes
+        [DomainModels.CouponCode](T1.CouponCode_CodeId, T1.CouponCode_CampaignId, T1.CouponCode_Code, T1.CouponCode_IsTaken, T1.CouponCode_UserId)
+    FROM (
+        SELECT 
+            T.CodeId AS CouponCode_CodeId, 
+            T.CampaignId AS CouponCode_CampaignId, 
+            T.Code AS CouponCode_Code, 
+            T.IsTaken AS CouponCode_IsTaken, 
+            T.UserId AS CouponCode_UserId, 
+            True AS _from0
+        FROM SMDModelStoreContainer.CouponCodes AS T
+    ) AS T1");
+        }
+        
+        /// <Summary>
+        /// return view for BaseDbContext.CampaignCategories
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView65()
+        {
+            return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.CampaignCategories", @"
+    SELECT VALUE -- Constructing CampaignCategories
+        [DomainModels.CampaignCategory](T1.CampaignCategory_CampaignId, T1.CampaignCategory_CategoryId, T1.CampaignCategory_Id)
+    FROM (
+        SELECT 
+            T.CampaignId AS CampaignCategory_CampaignId, 
+            T.CategoryId AS CampaignCategory_CategoryId, 
+            T.Id AS CampaignCategory_Id, 
+            True AS _from0
+        FROM SMDModelStoreContainer.CampaignCategories AS T
+    ) AS T1");
+        }
+        
+        /// <Summary>
+        /// return view for BaseDbContext.CouponCategories
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView66()
+        {
+            return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.CouponCategories", @"
+    SELECT VALUE -- Constructing CouponCategories
+        [DomainModels.CouponCategory](T1.CouponCategory_CategoryId, T1.CouponCategory_Name, T1.CouponCategory_Status)
+    FROM (
+        SELECT 
+            T.CategoryId AS CouponCategory_CategoryId, 
+            T.Name AS CouponCategory_Name, 
+            T.Status AS CouponCategory_Status, 
+            True AS _from0
+        FROM SMDModelStoreContainer.CouponCategory AS T
+    ) AS T1");
+        }
+        
+        /// <Summary>
         /// return view for BaseDbContext.AspNetUserRoles
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView61()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView67()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.AspNetUserRoles", @"
     SELECT VALUE -- Constructing AspNetUserRoles
@@ -1954,7 +2106,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for SMDModelStoreContainer.SystemMails
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView62()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView68()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.SystemMails", @"
     SELECT VALUE -- Constructing SystemMails
@@ -1976,7 +2128,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.SystemMails
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView63()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView69()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.SystemMails", @"
     SELECT VALUE -- Constructing SystemMails
@@ -1998,7 +2150,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for SMDModelStoreContainer.AuditLog
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView64()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView70()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.AuditLog", @"
     SELECT VALUE -- Constructing AuditLog
@@ -2020,7 +2172,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.AuditLogs
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView65()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView71()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.AuditLogs", @"
     SELECT VALUE -- Constructing AuditLogs
@@ -2042,7 +2194,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for SMDModelStoreContainer.CustomUrl
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView66()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView72()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.CustomUrl", @"
     SELECT VALUE -- Constructing CustomUrl
@@ -2061,7 +2213,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.CustomUrls
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView67()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView73()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.CustomUrls", @"
     SELECT VALUE -- Constructing CustomUrls
@@ -2080,7 +2232,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for SMDModelStoreContainer.Game
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView68()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView74()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.Game", @"
     SELECT VALUE -- Constructing Game
@@ -2103,7 +2255,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.Games
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView69()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView75()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.Games", @"
     SELECT VALUE -- Constructing Games

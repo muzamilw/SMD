@@ -4,7 +4,7 @@
       User = function (specifiedId, specifiedFullName, specifiedAddress1, specifiedCmpname, specifiedEmail,
           specifiedJTitle, specifiedTimeZone, specifiedGender, specifiedAddress2, specifiedAge, specifiedCityId,
           specifiedContNotes, specifiedCountryId,indsId, specifiedPhn1, specifiedPhn2, specifiedState, specifiedZip, specifiedImg,
-          advertisingContact, advertisingEmail, advertisingPhone, spcEduId, spcStripe, spcPayPal, spcGoogle, ProfileImageBytes, CompanyId) {
+          advertisingContact, advertisingEmail, advertisingPhone, spcEduId, spcStripe, spcPayPal, spcGoogle, ProfileImageBytes, CompanyId, RoleId, Password) {
           var
               id = ko.observable(specifiedId),
               fullName = ko.observable(specifiedFullName),
@@ -39,8 +39,12 @@
               stripeId = ko.observable(spcStripe || 'undefined'),
               payPalId = ko.observable(spcPayPal || 'undefined'),
               googleValletId = ko.observable(spcGoogle || 'undefined'),
-
+              RoleId = ko.observable(RoleId),
+              Password = ko.observable(Password).extend({ required: { params: true, message: 'This field is required with minimum 6 characters!' }, minLength: 6 }),
+              ConfirmPassword = ko.observable(Password).extend({ compareWith: Password }),
               errors = ko.validation.group({
+                  Password: Password,
+                  ConfirmPassword: ConfirmPassword
               }),
               // Is Valid
               isValid = ko.computed(function () {
@@ -68,7 +72,10 @@
                   advert: advert,
                   advertEmail: advertEmail,
                   advertPhone: advertPhone,
-                  educationId:educationId
+                  educationId: educationId,
+                  RoleId: RoleId,
+                  Password: Password,
+                  ConfirmPassword: ConfirmPassword
 
               }),
               // Has Changes
@@ -107,7 +114,9 @@
                       EducationId: educationId(),
                       PayPal: payPalId(),
                       ProfileImageBytesString: ProfileImageBytes(),
-                      CompanyId: CompanyId
+                      CompanyId: CompanyId,
+                      RoleId: RoleId(),
+                      Password: Password()
                   };
               };
           return {
@@ -135,11 +144,13 @@
               advertEmail: advertEmail,
               advertPhone: advertPhone,
               educationId:educationId,
-
+            
               stripeId :stripeId,
               payPalId :payPalId,
               googleValletId: googleValletId,
-
+              RoleId: RoleId,
+              Password: Password,
+              ConfirmPassword: ConfirmPassword,
               hasChanges: hasChanges,
               convertToServerData:convertToServerData,
               reset: reset,
@@ -157,7 +168,7 @@
             itemFromServer.Address2, itemFromServer.DOB, itemFromServer.CityId, itemFromServer.ContactNotes, itemFromServer.CountryId,
             itemFromServer.IndustryId,itemFromServer.Phone1,itemFromServer.Phone2,itemFromServer.State,itemFromServer.ZipCode,
             itemFromServer.ImageUrl ,itemFromServer.AdvertContact,itemFromServer.AdvertContactEmail,itemFromServer.AdvertContactPhone,
-            itemFromServer.EducationId, itemFromServer.StripeId, itemFromServer.PayPal, itemFromServer.GoogleVallet, null,itemFromServer.CompanyId);
+            itemFromServer.EducationId, itemFromServer.StripeId, itemFromServer.PayPal, itemFromServer.GoogleVallet, null, itemFromServer.CompanyId, itemFromServer.RoleId, itemFromServer.Password);
      
     };
     
@@ -166,9 +177,56 @@
         //todo
     };
    
+    var ManageUsers = function (source) {
+        var self
+        if (source != undefined) {
+            UserId = ko.observable(source.UserId),
+            Name = ko.observable(source.Name),
+            Role = ko.observable(source.Role)
+           
 
+        } else {
+            UserId = ko.observable(),
+            Name = ko.observable(),
+           Role = ko.observable()
+        
+        }
+
+
+        errors = ko.validation.group({
+        }),
+        // Is Valid
+       isValid = ko.computed(function () {
+           return errors().length === 0;
+       }),
+       dirtyFlag = new ko.dirtyFlag({
+       }),
+        // Has Changes
+       hasChanges = ko.computed(function () {
+           return dirtyFlag.isDirty();
+       }),
+        // Reset
+       reset = function () {
+           dirtyFlag.reset();
+       };
+
+        self = {
+            UserId: UserId(),
+            Name: Name(),
+            Role: Role(),
+            errors: errors,
+            isValid: isValid,
+            dirtyFlag: dirtyFlag,
+            hasChanges: hasChanges,
+            reset: reset,
+
+        };
+        return self;
+
+    }
     return {
         User: User,
-        UserServertoClientMapper: UserServertoClientMapper
+        UserServertoClientMapper: UserServertoClientMapper,
+        ManageUsers: ManageUsers
     };
 });

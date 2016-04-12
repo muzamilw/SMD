@@ -7,7 +7,8 @@
           , ImagePath, CampaignImagePath, CampaignTypeImagePath, Description, ClickRate,
           Voucher1Heading, Voucher1Description, Voucher1Value, Voucher2Heading, Voucher2Description, Voucher2Value,
           Voucher1ImagePath, VoucherImagePath, CreatedBy, VideoUrl, BuuyItLine1, BuyItLine2, BuyItLine3, BuyItButtonLabel,
-          BuyItImageUrl, AdViews, CompanyId, CouponSwapValue, CouponActualValue, CouponQuantity, CouponTakenCount) {
+          BuyItImageUrl, AdViews, CompanyId, CouponSwapValue, CouponActualValue, CouponQuantity, CouponTakenCount, priority,
+          CouponDiscountValue) {
           var
               //type and userID will be set on server sside
               CampaignID = ko.observable(CampaignID),
@@ -26,6 +27,8 @@
               CouponActualValue = ko.observable(CouponActualValue),
               CouponQuantity = ko.observable(CouponQuantity),
               CouponTakenCount = ko.observable(CouponTakenCount),
+              priority = ko.observable(priority),
+              CouponDiscountValue = ko.observable(CouponDiscountValue),
               StartDateTime = ko.observable((StartDateTime !== null && StartDateTime !== undefined) ? moment(StartDateTime).toDate() : undefined).extend({  // custom message
                   required: true
               }),//ko.observable(),
@@ -113,8 +116,8 @@
                     CampaignName:CampaignName,
                     DisplayTitle: DisplayTitle,
                     LandingPageVideoLink: LandingPageVideoLink,
-                    StartDateTime: StartDateTime,
-                    EndDateTime: EndDateTime,
+                    //StartDateTime: StartDateTime,
+                    //EndDateTime: EndDateTime,
                     MaxBudget: MaxBudget,
                     AgeRangeEnd: AgeRangeEnd
                 }),
@@ -157,7 +160,10 @@
                   AdViews: AdViews,
                   CouponSwapValue: CouponSwapValue,
                   CouponActualValue: CouponActualValue,
-                  CouponQuantity: CouponQuantity
+                  CouponQuantity: CouponQuantity,
+                  priority: priority,
+                  VoucherImagePath: VoucherImagePath,
+                  CouponDiscountValue: CouponDiscountValue
               }),
               // Has Changes
               hasChanges = ko.computed(function () {
@@ -233,7 +239,9 @@
                       CouponSwapValue: CouponSwapValue(),
                       CouponActualValue: CouponActualValue(),
                       CouponQuantity: CouponQuantity(),
-                      CouponTakenCount: CouponTakenCount()
+                      CouponTakenCount: CouponTakenCount(),
+                      priority: priority(),
+                      CouponDiscountValue:CouponDiscountValue()
                   };
               };
           return {
@@ -295,13 +303,15 @@
               CouponSwapValue: CouponSwapValue,
               CouponActualValue: CouponActualValue,
               CouponQuantity: CouponQuantity,
-              CouponTakenCount: CouponTakenCount
+              CouponTakenCount: CouponTakenCount,
+              priority: priority,
+              CouponDiscountValue: CouponDiscountValue
           };
       };
 
     var // ReSharper disable InconsistentNaming
       AdCampaignTargetCriteriasModel = function (CriteriaID, CampaignID, Type, PQID, PQAnswerID, SQID, SQAnswer, IncludeorExclude, questionString,
-       answerString, surveyQuestLeftImageSrc, surveyQuestRightImageSrc, LanguageID, Language, IndustryID, Industry, EducationID, Education) {
+       answerString, surveyQuestLeftImageSrc, surveyQuestRightImageSrc, LanguageID, Language, IndustryID, Industry, EducationID, Education, QuizCampaignId, QuizAnswerId) {
 
           var
               //type and userID will be set on server sside
@@ -323,9 +333,11 @@
                Industry = ko.observable(Industry),
                Education = ko.observable(Education),
                EducationID = ko.observable(EducationID),
+               QuizCampaignId = ko.observable(QuizCampaignId),
+               QuizAnswerId = ko.observable(QuizAnswerId),
           // Convert to server data
           convertCriteriaToServerData = function () {
-           
+              
               return {
                   CriteriaId: CriteriaID(),
                   CampaignId: CampaignID(),
@@ -340,7 +352,9 @@
                   IndustryId: IndustryID(),
                   Industry: Industry(),
                   EducationId: EducationID(),
-                  Education: Education()
+                  Education: Education(),
+                  QuizCampaignId: QuizCampaignId(),
+                  QuizAnswerId: QuizAnswerId()
               };
           };
           return {
@@ -362,7 +376,9 @@
               Industry: Industry,
               EducationID: EducationID,
               Education: Education,
-              convertCriteriaToServerData: convertCriteriaToServerData
+              convertCriteriaToServerData: convertCriteriaToServerData,
+              QuizCampaignId: QuizCampaignId,
+              QuizAnswerId: QuizAnswerId
           };
       };
     var // ReSharper disable InconsistentNaming
@@ -409,14 +425,13 @@
     };
     // Factory Method
     Campaign.Create = function (source) {
-  
         var campaign = new Campaign(source.CampaignId, source.LanguageId, source.CampaignName, source.UserId, source.Status, source.StatusValue,
             source.CampaignDescription, source.Gender + "", source.Archived, source.StartDateTime, source.EndDateTime, source.MaxBudget
             , source.Type + "", source.DisplayTitle, source.LandingPageVideoLink, source.VerifyQuestion, source.Answer1, source.Answer2, source.Answer3,
             source.CorrectAnswer, source.AgeRangeStart, source.AgeRangeEnd, source.ResultClicks, source.AmountSpent, source.ImagePath, source.CampaignImagePath,
             source.CampaignTypeImagePath, source.Description, source.ClickRate, source.Voucher1Heading, source.Voucher1Description, source.Voucher1Value, source.Voucher2Heading, source.Voucher2Description,
              source.Voucher2Value, source.Voucher1ImagePath, source.VoucherImagePath, source.CreatedBy, source.VideoUrl, source.BuuyItLine1, source.BuyItLine2, source.BuyItLine3, source.BuyItButtonLabel, source.BuyItImageUrl,source.AdViews,source.CompanyId,
-            source.CouponSwapValue, source.CouponActualValue,source.CouponQuantity,source.CouponTakenCount);
+            source.CouponSwapValue, source.CouponActualValue,source.CouponQuantity,source.CouponTakenCount, source.priority, source.CouponDiscountValue);
         _.each(source.AdCampaignTargetCriterias, function (item) {
             campaign.AdCampaignTargetCriterias.push(AdCampaignTargetCriteriasModel.Create(item));
         });
@@ -429,7 +444,9 @@
     // Factory Method
     AdCampaignTargetCriteriasModel.Create = function (source) {
         
-        return new AdCampaignTargetCriteriasModel(source.CriteriaId, source.CampaignId, source.Type, source.PQId, source.PQAnswerId, source.SQId, source.SQAnswer, source.IncludeorExclude, source.questionString, source.answerString, source.surveyQuestLeftImageSrc, source.surveyQuestRightImageSrc, source.LanguageId, source.Language, source.IndustryId, source.Industry, source.EducationId, source.Education);
+        return new AdCampaignTargetCriteriasModel(source.CriteriaId, source.CampaignId, source.Type, source.PQId, source.PQAnswerId, source.SQId, source.SQAnswer,
+            source.IncludeorExclude, source.questionString, source.answerString, source.surveyQuestLeftImageSrc, source.surveyQuestRightImageSrc, source.LanguageId,
+            source.Language, source.IndustryId, source.Industry, source.EducationId, source.Education, source.QuizCampaignId, source.QuizAnswerId);
     };
     AdCampaignTargetLocation.Create = function (source) {
        

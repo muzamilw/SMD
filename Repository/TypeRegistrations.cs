@@ -43,6 +43,8 @@ namespace SMD.Repository
             unityContainer.RegisterType<ISurveyQuestionResponseRepository, SurveyQuestionResponseRepository>();
             unityContainer.RegisterType<IAdCampaignResponseRepository, AdCampaignResponseRepository>();
             unityContainer.RegisterType<ICompanyRepository, CompanyRepository>();
+            unityContainer.RegisterType<IManageUserRepository, ManageUserRepository>();
+            unityContainer.RegisterType<ICouponCategoryRepository, CouponCategoryRepository>();
         }
     }
 }

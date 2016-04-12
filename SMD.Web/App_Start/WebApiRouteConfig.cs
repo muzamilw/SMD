@@ -178,6 +178,50 @@ namespace SMD.MIS
                 new { controller = "GenerateSMS" },
                 null,
                 null);
+
+            // Get Industry Custom route
+            config.Routes.MapHttpRoute(
+                "BuyItEmail",
+                "BuyItEmail/{AuthenticationToken}/",
+                new { controller = "BuyIt" },
+                null,
+                null);
+            // Get Industry Custom route
+            config.Routes.MapHttpRoute(
+                "GetCoupons",
+                "GetCoupons/{AuthenticationToken}/",
+                new { controller = "GetCoupon" },
+                null,
+                null);
+            // Get Industry Custom route
+            config.Routes.MapHttpRoute(
+                "InviteUser",
+                "InviteUser/{AuthenticationToken}/",
+                new { controller = "SendInviteUsingWeb" },
+                null,
+                null);
+            //
+            config.Routes.MapHttpRoute(
+              "GetAllCoupons",
+              "GetAllCoupons/{AuthenticationToken}/",
+              new { controller = "GetCouponAndCategories" },
+              null,
+              null);
+            // Get transaction Custom route
+            config.Routes.MapHttpRoute(
+                "UserTransactionInquiry",
+                "Balance/Transactions/{AuthenticationToken}/",
+                new { controller = "Statement" },
+                null,
+                null);
+            // Get coupon categories route
+            config.Routes.MapHttpRoute(
+                "CouponCategories",
+                "CouponCategories/{AuthenticationToken}/",
+                new { controller = "CouponCategory" },
+                null,
+                null);
+
         }
     }
 }

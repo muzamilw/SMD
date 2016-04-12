@@ -109,13 +109,13 @@ namespace SMD.Interfaces.Services
         /// <summary>
         /// Get Logged-In User profile 
         /// </summary>
-        User GetLoggedInUser();
+        User GetLoggedInUser(string userId);
 
         /// <summary>
         /// Base Data for User Profile 
         /// </summary>
         UserProfileBaseResponseModel GetBaseDataForUserProfile();
-        int generateAndSmsCode(string userId);
+        int generateAndSmsCode(string userId,string phone);
         User getUserByAuthenticationToken(string token);
     }
 }

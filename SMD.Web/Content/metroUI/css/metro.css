@@ -78,8 +78,10 @@
     }
 
     .listview.list-type-tiles .list .list-title {
-        margin-top: 8px;
-        display: block;
+          margin-top: 8px;
+    display: inline-block;
+    min-width: 140px;
+}
     }
 .parent-list-title{
       margin-top: 8px;

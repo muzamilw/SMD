@@ -103,6 +103,7 @@
     <Compile Include="Common\AccessRightClaimValue.cs" />
     <Compile Include="Common\ActiveModuleMenuItem.cs" />
     <Compile Include="Common\AdCampaignByColumn.cs" />
+    <Compile Include="Common\Coupons.cs" />
     <Compile Include="Common\InvoiceByColumn.cs" />
     <Compile Include="Common\SurveyQuestionByColumn.cs" />
     <Compile Include="Common\ProfileQuestionByColumn.cs" />
@@ -122,15 +123,19 @@
     <Compile Include="DomainModels\AdCampaignTargetCriteria.cs" />
     <Compile Include="DomainModels\AdCampaignTargetLocation.cs" />
     <Compile Include="DomainModels\AuditLog.cs" />
+    <Compile Include="DomainModels\CampaignCategory.cs" />
     <Compile Include="DomainModels\City.cs" />
     <Compile Include="DomainModels\Company.cs" />
     <Compile Include="DomainModels\Country.cs" />
+    <Compile Include="DomainModels\CouponCategory.cs" />
+    <Compile Include="DomainModels\CouponCode.cs" />
     <Compile Include="DomainModels\Currency.cs" />
     <Compile Include="DomainModels\CustomUrl.cs" />
     <Compile Include="DomainModels\Education.cs" />
     <Compile Include="DomainModels\Game.cs" />
     <Compile Include="DomainModels\GetAds_Result.cs" />
     <Compile Include="DomainModels\GetAudience_Result.cs" />
+    <Compile Include="DomainModels\GetCoupons_Result.cs" />
     <Compile Include="DomainModels\GetProducts_Result.cs" />
     <Compile Include="DomainModels\GetSurveys_Result.cs" />
     <Compile Include="DomainModels\Industry.cs" />
@@ -176,6 +181,9 @@
     </Compile>
     <Compile Include="Common\CampaignGridModel.cs" />
     <Compile Include="RequestModels\AdCampaignSearchRequest.cs" />
+    <Compile Include="RequestModels\BuyItModel.cs" />
+    <Compile Include="RequestModels\GetUserRequestModel.cs" />
+    <Compile Include="RequestModels\InviteUserEmail.cs" />
     <Compile Include="RequestModels\UserBalanceInquiryRequest.cs" />
     <Compile Include="RequestModels\ProductActionRequest.cs" />
     <Compile Include="RequestModels\ApproveSurveyRequest.cs" />

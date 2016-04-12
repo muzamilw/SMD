@@ -46,6 +46,12 @@ define("ads/ads.dataservice", function () {
                         contentType: "application/json; charset=utf-8",
                         type: 'POST'
                     });
+
+                    amplify.request.define('copyCampaignById', 'ajax', {
+                        url: '/Api/CopyCampaign',
+                        dataType: 'json',
+                        type: 'GET'
+                    });
                 }
             };
 
@@ -94,13 +100,24 @@ define("ads/ads.dataservice", function () {
                      success: callbacks.success,
                      error: callbacks.error,
                  });
+             },
+              // copy campaign
+             copyCampaignById = function (params, callbacks) {
+                 initialize();
+                 return amplify.request({
+                     resourceId: 'copyCampaignById',
+                     data: params,
+                     success: callbacks.success,
+                     error: callbacks.error,
+                 });
              }
         return {
             getBaseData: getBaseData,
             getCampaignData: getCampaignData,
             addCampaignData: addCampaignData,
             UpdateCampaignCriteriaOrLocation: UpdateCampaignCriteriaOrLocation,
-            getAudienceData: getAudienceData
+            getAudienceData: getAudienceData,
+            copyCampaignById: copyCampaignById
         };
     })();
     return dataService;

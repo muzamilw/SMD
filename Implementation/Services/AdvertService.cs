@@ -45,6 +45,7 @@ namespace SMD.Implementation.Services
         private readonly IStripeService stripeService;
         private readonly WebApiUserService webApiUserService;
         private readonly ICompanyRepository companyRepository;
+        private readonly IAdCampaignResponseRepository _adcampaignResponseRepository;
         #region Private Funcs
         private ApplicationUserManager UserManager
         {
@@ -90,8 +91,9 @@ namespace SMD.Implementation.Services
                 }
 
             }
-            if (!string.IsNullOrEmpty(campaign.VoucherImagePath) && !campaign.VoucherImagePath.Contains("guid_Voucher1DefaultImage"))
+            if (!string.IsNullOrEmpty(campaign.VoucherImagePath) && !campaign.VoucherImagePath.Contains("guid_Voucher1DefaultImage") && !campaign.VoucherImagePath.Contains("http://manage.cash4ads.com/"))
             {
+
                 string base64 = campaign.VoucherImagePath.Substring(campaign.VoucherImagePath.IndexOf(',') + 1);
                 base64 = base64.Trim('\0');
                 byte[] data = Convert.FromBase64String(base64);
@@ -100,6 +102,7 @@ namespace SMD.Implementation.Services
                 int indexOf = savePath.LastIndexOf("SMD_Content", StringComparison.Ordinal);
                 savePath = savePath.Substring(indexOf, savePath.Length - indexOf);
                 savePaths[2] = savePath;
+                campaign.Voucher1ImagePath = savePath;
             }
             if (!string.IsNullOrEmpty(campaign.buyItImageBytes) )
             {
@@ -137,7 +140,7 @@ namespace SMD.Implementation.Services
             ISurveyQuestionRepository surveyQuestionRepository, 
             IProductRepository productRepository, ITaxRepository taxRepository, IInvoiceRepository invoiceRepository, 
             IInvoiceDetailRepository invoiceDetailRepository,IEducationRepository educationRepository,
-            IStripeService stripeService, WebApiUserService webApiUserService, ICompanyRepository companyRepository)
+            IStripeService stripeService, WebApiUserService webApiUserService, ICompanyRepository companyRepository, IAdCampaignResponseRepository adcampaignResponseRepository)
         {
             this._adCampaignRepository = adCampaignRepository;
             this._languageRepository = languageRepository;
@@ -158,6 +161,7 @@ namespace SMD.Implementation.Services
             this.stripeService = stripeService;
             this.webApiUserService = webApiUserService;
             this.companyRepository = companyRepository;
+            this._adcampaignResponseRepository = adcampaignResponseRepository;
         }
         
         /// <summary>
@@ -254,8 +258,9 @@ namespace SMD.Implementation.Services
             var user = UserManager.Users.Where(g => g.Id == _adCampaignRepository.LoggedInUserIdentity).SingleOrDefault();
             if (user != null)
                 campaignModel.CreatedBy = user.FullName;
-            campaignModel.StartDateTime = campaignModel.StartDateTime.Value.Subtract(_adCampaignRepository.UserTimezoneOffSet);
-            campaignModel.EndDateTime = campaignModel.EndDateTime.Value.Subtract(_adCampaignRepository.UserTimezoneOffSet);
+            campaignModel.StartDateTime = new DateTime(2005, 1, 1);//campaignModel.StartDateTime.Value.Subtract(_adCampaignRepository.UserTimezoneOffSet);
+            campaignModel.EndDateTime = new DateTime(2040, 1, 1);//campaignModel.EndDateTime.Value.Subtract(_adCampaignRepository.UserTimezoneOffSet);
+            campaignModel.ClickRate = 0.20;
             _adCampaignRepository.Add(campaignModel);
             _adCampaignRepository.SaveChanges();
 
@@ -268,7 +273,7 @@ namespace SMD.Implementation.Services
                 }
                 if (!string.IsNullOrEmpty(paths[1]))
                 {
-                    campaignModel.LandingPageVideoLink = paths[1];
+                    campaignModel.LandingPageVideoLink = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + paths[1];
                 }
                 if (!string.IsNullOrEmpty(paths[2]))
                 {
@@ -326,16 +331,19 @@ namespace SMD.Implementation.Services
                 }
                 if (!string.IsNullOrEmpty(paths[1]) && !paths[1].Contains("http:"))
                 {
-                    campaignModel.LandingPageVideoLink = paths[1];
+                    campaignModel.LandingPageVideoLink = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" +  paths[1];
                 }
                 if (!string.IsNullOrEmpty(paths[3]))
                 {
                     campaignModel.BuyItImageUrl = paths[3];
                 }
             }
-            campaignModel.StartDateTime = campaignModel.StartDateTime.Value.Subtract(_adCampaignRepository.UserTimezoneOffSet);
-            campaignModel.EndDateTime = campaignModel.EndDateTime.Value.Subtract(_adCampaignRepository.UserTimezoneOffSet);
-
+            campaignModel.StartDateTime = new DateTime(2005, 1, 1);//campaignModel.StartDateTime.Value.Subtract(_adCampaignRepository.UserTimezoneOffSet);
+            campaignModel.EndDateTime = new DateTime(2040, 1, 1);//campaignModel.EndDateTime.Value.Subtract(_adCampaignRepository.UserTimezoneOffSet);
+            campaignModel.ClickRate = 0.20;
+            if(campaignModel.Status == 3){
+                campaignModel.Approved = true;
+            }
             _adCampaignRepository.Update(campaignModel);
             _adCampaignRepository.SaveChanges();
 
@@ -371,7 +379,7 @@ namespace SMD.Implementation.Services
 
 
             // add or update target criterias
-            if (campaignModel.AdCampaignTargetLocations != null && campaignModel.AdCampaignTargetLocations.Count() > 0)
+            if (campaignModel.AdCampaignTargetCriterias != null && campaignModel.AdCampaignTargetCriterias.Count() > 0)
             {
                 foreach (AdCampaignTargetCriteria citem in campaignModel.AdCampaignTargetCriterias)
                 {
@@ -563,6 +571,13 @@ namespace SMD.Implementation.Services
                 SurveyQuestions = _surveyQuestionRepository.GetAll().Where(g => g.UserId == _surveyQuestionRepository.LoggedInUserIdentity)
             };
         }
+        public AdCampaignBaseResponse getQuizCampaigns()
+        {
+            return new AdCampaignBaseResponse
+            {
+                AdCampaigns = _adCampaignRepository.GetAll().Where(g => g.UserId == _adCampaignRepository.LoggedInUserIdentity && g.VerifyQuestion != null && g.VerifyQuestion != "")
+            };
+        }
 
         /// <summary>
         /// Get Ads For API  | baqer
@@ -583,6 +598,214 @@ namespace SMD.Implementation.Services
         public AdCampaign GetAdCampaignById(long campaignId)
         {
             return _adCampaignRepository.Find(campaignId);
+        }
+        public bool CopyCampaign(long campaignId)
+        {
+            bool result = false;
+
+            return result;
+        }
+
+
+        public long CopyAddCampaigns(long CampaignId)
+        {
+            long NewCampaignID = 0;
+            AdCampaign source = _adCampaignRepository.GetAdCampaignById(CampaignId).FirstOrDefault();
+
+            // create new instance of add campaign
+            AdCampaign target = CreateNewCampaign();
+
+            // Clone
+            NewCampaignID = CloneCampaign(source, target);
+
+            // Copy image url
+            // ImagePath
+            //Landing Page video link
+            //Voucher1imagepath
+            // Buy it imag url
+           
+
+
+
+            return NewCampaignID;
+
+
+ 
+
+        }
+
+        /// <summary>
+        /// Creates New Item and assigns new generated code
+        /// </summary>
+        private AdCampaign CreateNewCampaign()
+        {
+            AdCampaign campaignTarget = _adCampaignRepository.Create();
+            _adCampaignRepository.Add(campaignTarget);
+
+            return campaignTarget;
+        }
+
+        /// <summary>
+        /// Creates Copy of Campaign
+        /// </summary>
+        private long CloneCampaign(AdCampaign source, AdCampaign target)
+        {
+            try
+            {
+                // Clone campaign
+                source.Clone(target);
+
+                // Clone campaign response
+                //CloneAdCampaignResponse(source, target);
+
+                // clone camapign target criterias
+                CloneAdCampaignTargetCriteria(source, target);
+
+
+                // Clone campaign target locations
+                CloneAdCampaignTargetLocation(source, target);
+
+               
+
+
+                companyRepository.SaveChanges();
+
+                string directoryPathToSaveImages = HttpContext.Current.Server.MapPath("~/SMD_Content/AdCampaign/" + target.CampaignId);
+                if (!Directory.Exists(directoryPathToSaveImages))
+                {
+                    Directory.CreateDirectory(directoryPathToSaveImages);
+                }
+                if (!string.IsNullOrEmpty(source.BuyItImageUrl))
+                {
+                    if (File.Exists(HttpContext.Current.Server.MapPath("~/" + source.BuyItImageUrl)))
+                    {
+
+                        File.Copy(System.Web.HttpContext.Current.Server.MapPath("~/" + source.BuyItImageUrl), System.Web.HttpContext.Current.Server.MapPath("~/SMD_Content/AdCampaign/" + target.CampaignId + "/buyItDefaultImage" + Path.GetExtension(source.BuyItImageUrl)), true);
+                        target.BuyItImageUrl = "SMD_Content/AdCampaign/" + target.CampaignId + "/buyItDefaultImage" + Path.GetExtension(source.BuyItImageUrl);
+                    }
+                }
+                if (!string.IsNullOrEmpty(source.Voucher1ImagePath))
+                {
+                    if (File.Exists(HttpContext.Current.Server.MapPath("~/" + source.Voucher1ImagePath)))
+                    {
+
+                        File.Copy(System.Web.HttpContext.Current.Server.MapPath("~/" + source.Voucher1ImagePath), System.Web.HttpContext.Current.Server.MapPath("~/SMD_Content/AdCampaign/" + target.CampaignId + "/guid_Voucher1DefaultImage" + Path.GetExtension(source.BuyItImageUrl)), true);
+                        target.Voucher1ImagePath = "SMD_Content/AdCampaign/" + target.CampaignId + "/guid_Voucher1DefaultImage" + Path.GetExtension(source.BuyItImageUrl);
+                    }
+                }
+
+
+                companyRepository.SaveChanges();
+
+
+                return target.CampaignId;
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+
+        ///// <summary>
+        ///// Copy campaign response
+        ///// </summary>
+        //public void CloneAdCampaignResponse(AdCampaign source, AdCampaign target)
+        //{
+
+        //    if (source.AdCampaignResponses == null)
+        //    {
+        //        return;
+        //    }
+
+        //    // Initialize List
+        //    if (target.AdCampaignResponses == null)
+        //    {
+        //        target.AdCampaignResponses = new List<AdCampaignResponse>();
+        //    }
+
+        //    foreach (AdCampaignResponse responses in source.AdCampaignResponses)
+        //    {
+        //        AdCampaignResponse targetResponse = _adcampaignResponseRepository.Create();
+        //        _adcampaignResponseRepository.Add(targetResponse);
+        //        targetResponse.CampaignId = target.CampaignId;
+        //        target.AdCampaignResponses.Add(targetResponse);
+        //        responses.Clone(targetResponse);
+
+
+
+        //    }
+
+
+        //}
+
+
+        /// <summary>
+        /// Copy campaign targets
+        /// </summary>
+        public void CloneAdCampaignTargetCriteria(AdCampaign source, AdCampaign target)
+        {
+
+            if (source.AdCampaignTargetCriterias == null)
+            {
+                return;
+            }
+
+            // Initialize List
+            if (target.AdCampaignTargetCriterias == null)
+            {
+                target.AdCampaignTargetCriterias = new List<AdCampaignTargetCriteria>();
+            }
+
+            foreach (AdCampaignTargetCriteria Criterias in source.AdCampaignTargetCriterias)
+            {
+                AdCampaignTargetCriteria targetCriteria = _adCampaignTargetCriteriaRepository.Create();
+                _adCampaignTargetCriteriaRepository.Add(targetCriteria);
+                targetCriteria.CampaignId = target.CampaignId;
+                target.AdCampaignTargetCriterias.Add(targetCriteria);
+                Criterias.Clone(targetCriteria);
+
+            }
+
+
+        }
+
+
+        public void CloneAdCampaignTargetLocation(AdCampaign source, AdCampaign target)
+        {
+
+            if (source.AdCampaignTargetLocations == null)
+            {
+                return;
+            }
+
+            // Initialize List
+            if (target.AdCampaignTargetLocations == null)
+            {
+                target.AdCampaignTargetLocations = new List<AdCampaignTargetLocation>();
+            }
+
+            foreach (AdCampaignTargetLocation location in source.AdCampaignTargetLocations)
+            {
+                AdCampaignTargetLocation targetLocation = _adCampaignTargetLocationRepository.Create();
+                _adCampaignTargetLocationRepository.Add(targetLocation);
+                targetLocation.CampaignId = target.CampaignId;
+                target.AdCampaignTargetLocations.Add(targetLocation);
+                location.Clone(targetLocation);
+
+            }
+
+
+        }
+        public List<GetCoupons_Result> GetCoupons(string UserId)
+        {
+            return _adCampaignRepository.GetCoupons(UserId);
+        }
+
+        public List<Coupons> GetAllCoupons()
+        {
+            return _adCampaignRepository.GetAllCoupons();
         }
         #endregion
     }

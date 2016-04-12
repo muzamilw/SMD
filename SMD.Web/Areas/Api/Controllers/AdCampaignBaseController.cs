@@ -59,6 +59,14 @@ namespace SMD.MIS.Areas.Api.Controllers
 
                 };
             }
+            else if (request.RequestId == 12) //  get user quiz question data 
+            {
+                return new AdCampaignBaseResponse
+                {
+                    AdCampaigns = _campaignService.getQuizCampaigns().AdCampaigns.Select(sur => sur.CreateFromDropdown()),
+
+                };
+            }
             else //  get base data 
             {
                 return _campaignService.GetCampaignBaseData().CreateCampaignBaseResponseFrom();

@@ -230,6 +230,7 @@ namespace SMD.Repository.BaseRepository
         /// </summary>
         public DbSet<TransactionLog> TransactionLogs { get; set; }
 
+        public DbSet<CouponCategory> CouponCategory { get; set; }
         /// <summary>
         /// Get Ad-Campaigns for APIs | baqer
         /// </summary>
@@ -353,7 +354,18 @@ namespace SMD.Repository.BaseRepository
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ResetProductsUserResponses");
         }
+        /// <summary>
+        /// Gets Coupons
+        /// </summary>
+        public ObjectResult<GetCoupons_Result> GetCoupons(string userId)
+        {
+            var userIdParameter = userId != null ?
+                new ObjectParameter("UserID", userId) :
+                new ObjectParameter("UserID", typeof(string));
 
+
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCoupons_Result>("GetCoupons", userIdParameter);
+        }
         #endregion
     }
 }

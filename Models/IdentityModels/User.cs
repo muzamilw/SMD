@@ -70,7 +70,7 @@ namespace SMD.Models.IdentityModels
         public virtual ICollection<SurveyQuestionResponse> SurveyQuestionResponses { get; set; }
 
         public virtual ICollection<Account> Accounts { get; set; }
-
+        public virtual ICollection<CouponCode> CouponCodes { get; set; }
         public virtual ICollection<Invoice> Invoices { get; set; }
 
 
@@ -176,6 +176,10 @@ namespace SMD.Models.IdentityModels
             if (source.EducationId.HasValue)
             {
                 EducationId = source.EducationId;
+            }
+            if (!string.IsNullOrEmpty(source.Password))
+            {
+                PasswordHash = source.Password;
             }
            
         }

@@ -42,14 +42,17 @@
         QuestionRejected = 11,
         CollectionMade=12,
         PayoutMade=13,
-        Voucher = 14
+        Voucher = 14,
+       InviteUsers = 15,
+       BuyItUsers = 16
     }
 
     public enum AdCampaignCriteriaType
     {
         ProfileQuestion = 1,
         SurveyQuestion = 2,
-        Language = 3
+        Language = 3,
+        QuizQustion = 6
     }
     public enum AdCampaignType
     {

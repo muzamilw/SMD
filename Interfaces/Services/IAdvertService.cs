@@ -1,4 +1,5 @@
-﻿using SMD.Models.DomainModels;
+﻿using SMD.Models.Common;
+using SMD.Models.DomainModels;
 using SMD.Models.RequestModels;
 using SMD.Models.ResponseModels;
 using System.Collections.Generic;
@@ -40,5 +41,10 @@ namespace SMD.Interfaces.Services
         /// Get Ad Campaign By Id
         /// </summary>
         AdCampaign GetAdCampaignById(long campaignId);
+
+        long CopyAddCampaigns(long CampaignId);
+        AdCampaignBaseResponse getQuizCampaigns();
+        List<GetCoupons_Result> GetCoupons(string UserId);
+        List<Coupons> GetAllCoupons();
     }
 }

@@ -49,9 +49,9 @@ namespace SMD.Implementation.Services
             set { developerDueDate = value; }
             get { return developerDueDate; }
         }
-        
+
         public string Assignedby { get; set; }
-        
+
         public string InstanceLink { get; set; }
 
         private string ticketId;
@@ -115,9 +115,9 @@ namespace SMD.Implementation.Services
         public string TotalAmount { get; set; }
 
         public string InVoiceCode { get; set; }
-        
+
         public string ReceiptBody { get; set; }
-        
+
         public string AccountManager { get; set; }
 
         public string AccountManagerNo { get; set; }
@@ -132,14 +132,27 @@ namespace SMD.Implementation.Services
         public string PasswordResetLink { get; set; }
         public string VoucherDescription { get; set; }
         public string VoucherValue { get; set; }
+
+        public string CompanyNameInviteUser { get; set; }
+        public string InviteURL { get; set; }
+        public string AdvertiserLogoURL { get; set; }
+
+        public string BuyItLogoURL { get; set; }
+
+        public string BuyItLine1 { get; set; }
+
+        public string BuyItLine2 { get; set; }
+
+        public string BuyItURL { get; set; }
+
         /// <summary>
         /// Sends Email
         /// </summary>
         private async Task SendEmail()
         {
-// ReSharper disable SuggestUseVarKeywordEvident
+            // ReSharper disable SuggestUseVarKeywordEvident
             MailMessage oMailBody = new MailMessage();
-// ReSharper restore SuggestUseVarKeywordEvident
+            // ReSharper restore SuggestUseVarKeywordEvident
 
             int id = Mid;
 
@@ -167,6 +180,7 @@ namespace SMD.Implementation.Services
             smailsubject = smailsubject.Replace("++firstname++", Fname);
             smailsubject = smailsubject.Replace("++lastname++", Lname);
             smailsubject = smailsubject.Replace("++MailSubject++", Subj);
+            smailsubject = smailsubject.Replace("++companyname++", CompanyNameInviteUser);
             MBody = MBody.Replace("++username++", Muser);
             MBody = MBody.Replace("++firstname++", Fname);
             MBody = MBody.Replace("++lastname++", Lname);
@@ -180,6 +194,19 @@ namespace SMD.Implementation.Services
             {
                 MBody = MBody.Replace("++VoucherDescription++", VoucherDescription);
                 MBody = MBody.Replace("++VoucherValue++", VoucherValue);
+            }
+            if (Mid == (int)EmailTypes.InviteUsers)
+            {
+                MBody = MBody.Replace("++companyname++", CompanyNameInviteUser);
+                MBody = MBody.Replace("++inviteurl++", InviteURL);
+            }
+            if (Mid == (int)EmailTypes.BuyItUsers)
+            {
+                MBody = MBody.Replace("++AdvertiserLogoURL++", AdvertiserLogoURL);
+                MBody = MBody.Replace("++BuyItLogoURL++", BuyItLogoURL);
+                MBody = MBody.Replace("++BuyItLine1++", BuyItLine1);
+                MBody = MBody.Replace("++BuyItLine2++", BuyItLine2);
+                MBody = MBody.Replace("++BuyItURL++", BuyItURL);
             }
             MBody = MBody.Replace("++Fname++", Fname);
             oMailBody.IsBodyHtml = true;
@@ -228,9 +255,9 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Send Email Non-Async
         /// </summary>
-// ReSharper disable UnusedMember.Local
+        // ReSharper disable UnusedMember.Local
         private bool SendEmailNoAsync()
-// ReSharper restore UnusedMember.Local
+        // ReSharper restore UnusedMember.Local
         {
             MailMessage oMailBody = new MailMessage();
 
@@ -318,7 +345,7 @@ namespace SMD.Implementation.Services
         }
 
         private readonly ISystemMailsRepository systemMailRepository;
-        
+        private readonly IManageUserRepository manageUserRepository;
         #endregion
 
 
@@ -327,13 +354,14 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Constructor
         /// </summary>
-        public EmailManagerService(ISystemMailsRepository systemMailRepository)
+        public EmailManagerService(ISystemMailsRepository systemMailRepository, IManageUserRepository manageUserRepository)
         {
             if (systemMailRepository == null)
             {
                 throw new ArgumentNullException("systemMailRepository");
             }
             this.systemMailRepository = systemMailRepository;
+            this.manageUserRepository = manageUserRepository;
             MMailto = new List<string>();
         }
 
@@ -352,7 +380,7 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Send Invoice
         /// </summary>
-       
+
 
         /// <summary>
         /// Send Error Log
@@ -393,7 +421,7 @@ namespace SMD.Implementation.Services
             if (oUser != null)
             {
                 MMailto.Add(oUser.Email);
-                Mid = (int) EmailTypes.VerifyAccount;
+                Mid = (int)EmailTypes.VerifyAccount;
                 Muser = oUser.Email;
                 Fname = oUser.FullName;
                 PhoneNo = oUser.PhoneNumber;
@@ -402,7 +430,7 @@ namespace SMD.Implementation.Services
             }
             else
             {
-                throw new Exception("Customer is null");    
+                throw new Exception("Customer is null");
             }
         }
         public bool SendInovice()
@@ -550,7 +578,7 @@ namespace SMD.Implementation.Services
                 throw new Exception("Customer is null");
             }
         }
-        
+
         /// <summary>
         /// Send Password Reset Email
         /// </summary>
@@ -585,7 +613,7 @@ namespace SMD.Implementation.Services
             else
             {
                 throw new Exception("Customer is null");
-            } 
+            }
         }
 
         /// <summary>
@@ -632,8 +660,66 @@ namespace SMD.Implementation.Services
             else
             {
                 throw new Exception("Customer is null");
-            }  
+            }
         }
+
+
+        /// <summary>
+        ///Invite User Email
+        /// </summary>
+        public async Task SendEmailToInviteUser(string email)
+        {
+
+            MMailto.Add(email);
+            Mid = (int)EmailTypes.InviteUsers;
+            string userName = string.Empty;
+            int companyid = 0;
+
+            CompanyNameInviteUser = manageUserRepository.getCompanyName(out userName, out companyid);
+            Muser = userName;
+            InviteURL = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/Account/Register?CompanyID=" + companyid;
+            await SendEmail();
+
+        }
+        // invite user from mobile api 
+        public async Task SendEmailToInviteUser(string email,int companyId)
+        {
+
+            MMailto.Add(email);
+            Mid = (int)EmailTypes.InviteUsers;
+            string userName = string.Empty;
+   
+            CompanyNameInviteUser = manageUserRepository.getCompanyName(out userName, companyId);
+            Muser = userName;
+            InviteURL = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/Account/Register?CompanyID=" + companyId;
+            await SendEmail();
+
+        }
+        /// <summary>
+        ///BuyIT User Email
+        /// </summary>
+        public async Task SendBuyItEmailToUser(string aspnetUserId, AdCampaign oCampaign)
+        {
+            User oUser = await UserManager.FindByIdAsync(aspnetUserId);
+
+            if (oUser != null)
+            {
+                MMailto.Add(oUser.Email);
+                Mid = (int)EmailTypes.BuyItUsers;
+                Muser = oUser.FullName;
+                AdvertiserLogoURL = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + "";
+                BuyItLine1 = oCampaign.BuuyItLine1;
+                BuyItLine2 = oCampaign.BuyItLine2;
+                BuyItLogoURL = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + oCampaign.BuyItImageUrl;
+                BuyItURL = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" +  oCampaign.LandingPageVideoLink;
+                await SendEmail();
+            }
+            else
+            {
+                throw new Exception("Customer is null");
+            }
+        }
+
         #endregion
 
     }

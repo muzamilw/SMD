@@ -254,8 +254,8 @@ namespace SMD.Implementation.Services
                 survey.UserId = surveyQuestionRepository.LoggedInUserIdentity;
                 survey.CompanyId = _companyRepository.GetUserCompany(surveyQuestionRepository.LoggedInUserIdentity);
                 survey.Type = (int)SurveyQuestionType.Advertiser;
-                survey.StartDate = survey.StartDate.Value.Subtract(surveyQuestionRepository.UserTimezoneOffSet);
-                survey.EndDate = survey.EndDate.Value.Subtract(surveyQuestionRepository.UserTimezoneOffSet);
+                survey.StartDate = new DateTime(2005, 1, 1); //survey.StartDate.Value.Subtract(surveyQuestionRepository.UserTimezoneOffSet);
+                survey.EndDate = new DateTime(2040, 1, 1); //survey.EndDate.Value.Subtract(surveyQuestionRepository.UserTimezoneOffSet);
                 survey.SubmissionDate = DateTime.Now;
                 surveyQuestionRepository.Add(survey);
                 surveyQuestionRepository.SaveChanges();
@@ -281,8 +281,8 @@ namespace SMD.Implementation.Services
                 survey.ModifiedDate = DateTime.Now;
                 survey.ModifiedBy = surveyQuestionRepository.LoggedInUserIdentity;
              //   survey.CompanyId = _companyRepository.GetUserCompany(surveyQuestionRepository.LoggedInUserIdentity);
-                survey.StartDate = survey.StartDate.Value.Subtract(surveyQuestionRepository.UserTimezoneOffSet);
-                survey.EndDate = survey.EndDate.Value.Subtract(surveyQuestionRepository.UserTimezoneOffSet);
+                survey.StartDate = new DateTime(2005, 1, 1); //survey.StartDate.Value.Subtract(surveyQuestionRepository.UserTimezoneOffSet);
+                survey.EndDate = new DateTime(2040, 1, 1); //survey.EndDate.Value.Subtract(surveyQuestionRepository.UserTimezoneOffSet);
                 surveyQuestionRepository.Update(survey);
                 surveyQuestionRepository.SaveChanges();
                 string[] paths = SaveSurveyImages(survey);

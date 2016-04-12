@@ -176,7 +176,7 @@ else
                                     <thead>
                                         <tr>
 
-                                            <th class="col-sm-3"><span>Name</span></th>
+                                            <th class="col-sm-3"><span>Campaign Name</span></th>
 
                                             @*<th class="col-sm-1"><span>Results</span></th>
                                                 <th class="col-sm-1"><span>Reach</span></th>
@@ -228,7 +228,7 @@ else
 
 
             </div>
-            <div class="col-lg-6 col-sm-6" style="float:left;padding-left:50px;">
+            <div class="col-lg-6 col-sm-6" style="float:left;padding-left:50px; display:none;">
 
                 <button class="btn  btn-success btnAdsCampaign" style="width:24%;float:left;padding:0px;" id="btnSubmitForApproval" data-bind="click:$root.ShowCouponPromotions">Coupons</button>
                 <button class="btn  btn-success btnAdsCampaign @adminClasses" style="width:24%;float:left;padding:0px;" id="btnSubmitForApproval" data-bind="click:gotoManageUsers">Manage Users</button>
@@ -258,7 +258,7 @@ else
     <tr style="cursor: pointer">
 
         <td class="col-sm-3">
-            <a href="#" class="store-user-link" data-bind="text: DisplayTitle,click:$root.onEditCampaign"></a>
+            <a href="#" class="store-user-link" data-bind="text: CampaignName,click:$root.onEditCampaign"></a>
 
         </td>
 
