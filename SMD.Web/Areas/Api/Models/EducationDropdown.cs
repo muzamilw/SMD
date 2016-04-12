@@ -43,4 +43,11 @@ namespace SMD.MIS.Areas.Api.Models
     {
         public IEnumerable<CouponCategory> CouponCategories { get; set; }
     }
+
+    public class CouponCategoryModel
+    {
+        public int CategoryId { get; set; }
+        public string Name { get; set; }
+        public bool IsSelected { get; set; }
+    }
 }

@@ -77,5 +77,7 @@ namespace SMD.MIS.Areas.Api.Models
         public Nullable<int> CouponQuantity { get; set; }
         public Nullable<int> priority { get; set; }
         public Nullable<double> CouponDiscountValue { get; set; }
+
+        public List<CouponCategory> CouponCategories { get; set; }
     }
 }

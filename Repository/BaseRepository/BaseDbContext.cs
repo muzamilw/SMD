@@ -226,6 +226,11 @@ namespace SMD.Repository.BaseRepository
         public DbSet<CustomUrl> CustomUrls { get; set; }
 
         /// <summary>
+        /// Transaction
+        /// </summary>
+        public DbSet<CampaignCategory> CampaignCategories { get; set; }
+
+        /// <summary>
         /// Transaction Log
         /// </summary>
         public DbSet<TransactionLog> TransactionLogs { get; set; }

@@ -405,6 +405,7 @@
           <Property Name="OtherClausePrice" Type="float" />
           <Property Name="ProfessionClausePrice" Type="float" />
           <Property Name="EducationClausePrice" Type="float" />
+          <Property Name="BuyItClausePrice" Type="float" />
         </EntityType>
         <EntityType Name="ProfileQuestion">
           <Key>
@@ -2775,6 +2776,7 @@
           <NavigationProperty Name="Country" Relationship="DomainModels.FK_SMDPrice_Country" FromRole="Product" ToRole="Country" />
           <NavigationProperty Name="Currency" Relationship="DomainModels.FK_SMDPrice_Currency" FromRole="Product" ToRole="Currency" />
           <NavigationProperty Name="InvoiceDetails" Relationship="DomainModels.FK_InvoiceDetail_Products" FromRole="Product" ToRole="InvoiceDetail" />
+          <Property Name="BuyItClausePrice" Type="Double" />
         </EntityType>
         <Association Name="FK_SMDPrice_Country">
           <End Type="DomainModels.Country" Role="Country" Multiplicity="0..1" />
@@ -4189,6 +4191,7 @@
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="DomainModels.Product">
               <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="BuyItClausePrice" ColumnName="BuyItClausePrice" />
                 <ScalarProperty Name="EducationClausePrice" ColumnName="EducationClausePrice" />
                 <ScalarProperty Name="ProfessionClausePrice" ColumnName="ProfessionClausePrice" />
                 <ScalarProperty Name="OtherClausePrice" ColumnName="OtherClausePrice" />

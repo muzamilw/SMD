@@ -46,6 +46,9 @@ namespace SMD.Implementation.Services
         private readonly WebApiUserService webApiUserService;
         private readonly ICompanyRepository companyRepository;
         private readonly IAdCampaignResponseRepository _adcampaignResponseRepository;
+        private readonly ICouponCategoryRepository _couponCategoryRepository;
+        private readonly ICouponCategoryRepository _companyRepository;
+        private readonly ICampaignCategoriesRepository _campaignCategoriesRepository;
         #region Private Funcs
         private ApplicationUserManager UserManager
         {
@@ -140,7 +143,9 @@ namespace SMD.Implementation.Services
             ISurveyQuestionRepository surveyQuestionRepository, 
             IProductRepository productRepository, ITaxRepository taxRepository, IInvoiceRepository invoiceRepository, 
             IInvoiceDetailRepository invoiceDetailRepository,IEducationRepository educationRepository,
-            IStripeService stripeService, WebApiUserService webApiUserService, ICompanyRepository companyRepository, IAdCampaignResponseRepository adcampaignResponseRepository)
+            IStripeService stripeService, WebApiUserService webApiUserService, ICompanyRepository companyRepository, IAdCampaignResponseRepository adcampaignResponseRepository
+            ,ICouponCategoryRepository couponCategoryRepository
+            , ICampaignCategoriesRepository campaignCategoriesRepository)
         {
             this._adCampaignRepository = adCampaignRepository;
             this._languageRepository = languageRepository;
@@ -162,6 +167,8 @@ namespace SMD.Implementation.Services
             this.webApiUserService = webApiUserService;
             this.companyRepository = companyRepository;
             this._adcampaignResponseRepository = adcampaignResponseRepository;
+            this._couponCategoryRepository = couponCategoryRepository;
+            this._campaignCategoriesRepository = campaignCategoriesRepository;
         }
         
         /// <summary>
@@ -203,13 +210,16 @@ namespace SMD.Implementation.Services
                 objUC.OtherClausePrice = campaignProduct.OtherClausePrice;
                 objUC.ProfessionClausePrice = campaignProduct.ProfessionClausePrice;
                 objUC.GenderClausePrice = campaignProduct.GenderClausePrice;
+                objUC.BuyItClausePrice = campaignProduct.BuyItClausePrice;
             }
+
             return new AdCampaignBaseResponse
             {
                 Languages = _languageRepository.GetAllLanguages(),
                 Education = _educationRepository.GetAll(),
                 UserAndCostDetails = objUC,
-                Industry = _industryRepository.GetAll()
+                Industry = _industryRepository.GetAll(),
+                CouponCategory = _couponCategoryRepository.GetAllCoupons()
             };
         }
 
@@ -260,7 +270,7 @@ namespace SMD.Implementation.Services
                 campaignModel.CreatedBy = user.FullName;
             campaignModel.StartDateTime = new DateTime(2005, 1, 1);//campaignModel.StartDateTime.Value.Subtract(_adCampaignRepository.UserTimezoneOffSet);
             campaignModel.EndDateTime = new DateTime(2040, 1, 1);//campaignModel.EndDateTime.Value.Subtract(_adCampaignRepository.UserTimezoneOffSet);
-            campaignModel.ClickRate = 0.20;
+           // campaignModel.ClickRate = 0.20;
             _adCampaignRepository.Add(campaignModel);
             _adCampaignRepository.SaveChanges();
 
@@ -284,6 +294,22 @@ namespace SMD.Implementation.Services
                     campaignModel.BuyItImageUrl = paths[3];
                 }
                 _adCampaignRepository.SaveChanges();
+            }
+
+            if (campaignModel.CouponCategories != null && campaignModel.CouponCategories.Count() > 0)
+            {
+                foreach (CouponCategory item in campaignModel.CouponCategories)
+                {
+                    CampaignCategory oModel = new CampaignCategory();
+
+                    oModel.CampaignId = campaignModel.CampaignId;
+                    oModel.CategoryId = item.CategoryId;
+                    _campaignCategoriesRepository.Add(oModel);
+
+
+                }
+                _campaignCategoriesRepository.SaveChanges();
+
             }
         }
         public CampaignResponseModel GetCampaigns(AdCampaignSearchRequest request)
@@ -340,7 +366,7 @@ namespace SMD.Implementation.Services
             }
             campaignModel.StartDateTime = new DateTime(2005, 1, 1);//campaignModel.StartDateTime.Value.Subtract(_adCampaignRepository.UserTimezoneOffSet);
             campaignModel.EndDateTime = new DateTime(2040, 1, 1);//campaignModel.EndDateTime.Value.Subtract(_adCampaignRepository.UserTimezoneOffSet);
-            campaignModel.ClickRate = 0.20;
+            //campaignModel.ClickRate = 0.20;
             if(campaignModel.Status == 3){
                 campaignModel.Approved = true;
             }
@@ -407,6 +433,26 @@ namespace SMD.Implementation.Services
                 _adCampaignTargetCriteriaRepository.RemoveAll(listOfCriteriasToDelete);
             }
 
+
+            // remove categories if campaign has and add again
+            List<CampaignCategory> listOfCouponCatsToDelete = _campaignCategoriesRepository.GetAll().Where(c => c.CampaignId == campaignModel.CampaignId).ToList();
+            _campaignCategoriesRepository.RemoveAll(listOfCouponCatsToDelete);
+            // add or update target locations
+            if (campaignModel.CouponCategories != null && campaignModel.CouponCategories.Count() > 0)
+            {
+                foreach (CouponCategory item in campaignModel.CouponCategories)
+                {
+                    CampaignCategory oModel = new CampaignCategory();
+
+                    oModel.CampaignId = campaignModel.CampaignId;
+                    oModel.CategoryId = item.CategoryId;
+                    _campaignCategoriesRepository.Add(oModel);
+                   
+
+                }
+                _campaignCategoriesRepository.SaveChanges();
+              
+            }
         }
         #endregion
         #region Public

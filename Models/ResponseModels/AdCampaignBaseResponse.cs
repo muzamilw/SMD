@@ -55,5 +55,6 @@ namespace SMD.Models.ResponseModels
 
         public IEnumerable<AdCampaign> AdCampaigns { get; set; }
 
+        public IEnumerable<CouponCategory> CouponCategory { get; set; }
     }
 }
