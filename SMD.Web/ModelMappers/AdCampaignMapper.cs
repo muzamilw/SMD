@@ -129,6 +129,8 @@ namespace SMD.MIS.ModelMappers
                  CouponDiscountValue = source.CouponDiscountValue,
                  CouponExpiryLabel = source.CouponExpiryLabel,
                 couponImage2 = source.couponImage2,
+                CouponCategories = source.CampaignCategories != null ? source.CampaignCategories.Select(x => x.CouponCategory.CreateFrom()).ToList() : null,
+
                  couponSmdComission = source.couponSmdComission,
                 CouponImage3 = source.CouponImage3,
                 CouponImage4 = source.CouponImage4
@@ -421,7 +423,8 @@ namespace SMD.MIS.ModelMappers
                 Language = source.LanguageName,
                 isStripeIntegrated = source.isStripeIntegrated,
                 GeoLat = source.GeoLat,
-                GeoLong = source.GeoLong
+                GeoLong = source.GeoLong,
+                BuyItClausePrice = source.BuyItClausePrice
             };
 
 
@@ -437,7 +440,8 @@ namespace SMD.MIS.ModelMappers
                 Languages = source.Languages.Select(lang => lang.CreateFrom()),
                 UserAndCostDetails = source.UserAndCostDetails.CreateFrom(),
                 Educations = source.Education.Select(edu => edu.CreateFrom()),
-                Professions = source.Industry.Select(ind => ind.CreateFrom())
+                Professions = source.Industry.Select(ind => ind.CreateFrom()),
+                CouponCategories = source.CouponCategory.Select(cc => cc.CreateFromForCategories(false))
             };
         }
     }

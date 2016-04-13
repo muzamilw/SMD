@@ -24,5 +24,14 @@ namespace SMD.MIS.ModelMappers
                 Name = source.Name
             };
         }
+        public static CouponCategoryModel CreateFromForCategories(this Models.DomainModels.CouponCategory source, bool isSelected)
+        {
+            return new CouponCategoryModel
+            {
+                CategoryId = source.CategoryId,
+                Name = source.Name,
+                IsSelected = isSelected
+            };
+        }
     }
 }

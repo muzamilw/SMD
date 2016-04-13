@@ -45,6 +45,7 @@ namespace SMD.Repository
             unityContainer.RegisterType<ICompanyRepository, CompanyRepository>();
             unityContainer.RegisterType<IManageUserRepository, ManageUserRepository>();
             unityContainer.RegisterType<ICouponCategoryRepository, CouponCategoryRepository>();
+            unityContainer.RegisterType<ICampaignCategoriesRepository, CampaignCategoriesRepository>();
         }
     }
 }

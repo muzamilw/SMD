@@ -19,6 +19,8 @@ namespace SMD.Models.Common
         public Nullable<double> OtherClausePrice { get; set; }
         public Nullable<double> ProfessionClausePrice { get; set; }
         public Nullable<double> EducationClausePrice { get; set; }
+        public Nullable<double> BuyItClausePrice { get; set; }
+
 
         public string CityName { get; set; }
         public string CountryName { get; set; }

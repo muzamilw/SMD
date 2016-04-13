@@ -79,6 +79,8 @@ namespace SMD.MIS.Areas.Api.Models
         public Nullable<double> CouponDiscountValue { get; set; }
         public string couponSmdComission { get; set; }
         public string couponImage2 { get; set; }
+
+        public List<CouponCategory> CouponCategories { get; set; }
         public string CouponImage3 { get; set; }
         public string CouponImage4 { get; set; }
         public string CouponExpiryLabel { get; set; }

@@ -8,7 +8,8 @@
           Voucher1Heading, Voucher1Description, Voucher1Value, Voucher2Heading, Voucher2Description, Voucher2Value,
           Voucher1ImagePath, VoucherImagePath, CreatedBy, VideoUrl, BuuyItLine1, BuyItLine2, BuyItLine3, BuyItButtonLabel,
           BuyItImageUrl, AdViews, CompanyId, CouponSwapValue, CouponActualValue, CouponQuantity, CouponTakenCount, priority,
-          CouponDiscountValue, couponImage2, CouponImage3, CouponImage4, CouponExpiryLabel, couponSmdComission) {
+          CouponDiscountValue, couponImage2, CouponImage3, CouponImage4, CouponExpiryLabel, couponSmdComission,CouponDiscountValue, CouponCategories) {
+       
           var
               //type and userID will be set on server sside
               CampaignID = ko.observable(CampaignID),
@@ -29,6 +30,7 @@
               CouponTakenCount = ko.observable(CouponTakenCount),
               priority = ko.observable(priority),
               CouponDiscountValue = ko.observable(CouponDiscountValue),
+              CouponCategories = ko.observableArray([]),
               StartDateTime = ko.observable((StartDateTime !== null && StartDateTime !== undefined) ? moment(StartDateTime).toDate() : undefined).extend({  // custom message
                   required: true
               }),//ko.observable(),
@@ -180,6 +182,7 @@
               },
               // Convert to server data
               convertToServerData = function () {
+                  debugger;
                   var targetCriteria = [];
                   _.each(AdCampaignTargetCriterias(), function (item) {
                       console.log(item);
@@ -190,6 +193,11 @@
                   _.each(AdCampaignTargetLocations(), function (item) {
                    
                       LocationtargetCriteria.push(item.convertToServerData());
+                  });
+                  var selectedCoupons = [];
+                  _.each(CouponCategories(), function (item) {
+
+                      selectedCoupons.push(item.convertToServerData());
                   });
                   return {
                       CampaignID: CampaignID(),
@@ -251,7 +259,8 @@
                       CouponQuantity: CouponQuantity(),
                       CouponTakenCount: CouponTakenCount(),
                       priority: priority(),
-                      CouponDiscountValue:CouponDiscountValue()
+                      CouponDiscountValue: CouponDiscountValue(),
+                      CouponCategories: selectedCoupons
                   };
               };
           return {
@@ -320,7 +329,8 @@
               CouponQuantity: CouponQuantity,
               CouponTakenCount: CouponTakenCount,
               priority: priority,
-              CouponDiscountValue: CouponDiscountValue
+              CouponDiscountValue: CouponDiscountValue,
+              CouponCategories: CouponCategories
           };
       };
 
@@ -438,6 +448,28 @@
             Longitude: Longitude
         };
     };
+
+    selectedCouponCategory = function (CategoryId, Name) {
+
+        var
+            //type and userID will be set on server sside
+            CategoryId = ko.observable(CategoryId),
+            Name = ko.observable(Name),
+            IsSelected = ko.observable(),
+            // Convert to server data
+            convertToServerData = function () {
+                return {
+                    CategoryId: CategoryId(),
+                    Name: Name()
+                };
+            };
+        return {
+            CategoryId: CategoryId,
+            Name: Name,
+            IsSelected:IsSelected,
+            convertToServerData: convertToServerData
+        };
+    };
     // Factory Method
     Campaign.Create = function (source) {
         var campaign = new Campaign(source.CampaignId, source.LanguageId, source.CampaignName, source.UserId, source.Status, source.StatusValue,
@@ -456,6 +488,10 @@
             
             campaign.AdCampaignTargetLocations.push(AdCampaignTargetLocation.Create(item));
         });
+        _.each(source.CouponCategories, function (item) {
+
+            campaign.CouponCategories.push(selectedCouponCategory.Create(item));
+        });
         return campaign;
     };
     // Factory Method
@@ -469,10 +505,15 @@
        
         return new AdCampaignTargetLocation(source.Id, source.CampaignId, source.CountryId, source.CityId, source.Radius, source.Country, source.City, source.IncludeorExclude, source.Latitude, source.Longitude);
     };
+    // Factory Method
+    selectedCouponCategory.Create = function (source) {
 
+        return new selectedCouponCategory(source.CategoryId, source.Name);
+    };
     return {
         Campaign: Campaign,
         AdCampaignTargetCriteriasModel: AdCampaignTargetCriteriasModel,
-        AdCampaignTargetLocation: AdCampaignTargetLocation
+        AdCampaignTargetLocation: AdCampaignTargetLocation,
+        selectedCouponCategory: selectedCouponCategory
     };
 });
