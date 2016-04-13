@@ -9,438 +9,201 @@
    <!-- COLOR STYLE CSS -->
 <link rel="stylesheet" href="~/content/green.css">
 }
-  <section style="background:#33d3b4;    padding-top: 100px;" class="text-blue">
-    <div id="sense" class="container text-blue">
-        <div class="row clearfix">
-            <div class="col-md-12 column p_title">
-                <div class="cld">
 
-                    <div class="ndod-aside aside standard-container">
+@Html.Partial("~/Views/Shared/voucherbar.cshtml")
+
+
+  <section style="background:#33d3b4;    padding-top: 10px;" class="text-blue">
+    <div id="sense" class="container text-blue">
+        <div class="row clearfix inner-bottom-md">
+
+
+            <div class="col-sm-12">
+                <h1 class="main_title text-white" style="margin-bottom:0px;">Swap your in App Cash for <b>Vouchers</b></h1>
+            </div>
+
+            <div class="row inner-top-xs">
+
+                <div class=" col-sm-3" >
+
+                    <div class="input-group col-md-12" style="padding-left:0px;padding-right:0px;">
+
+
+
+                        <input type="text" class="form-control input-lg" placeholder="Search" style="font-size:22px;" />
+                        <span class="input-group-btn">
+                            <button class="btn btn-default btn-lg" type="button">
+                                <i class="glyphicon glyphicon-search"></i>
+                            </button>
+                        </span>
+                    </div>
+
+                    <div class="input-group col-md-12 " style="padding-top:10px;padding-left:0px;">
+                        <label class="clabel">
+                            <select class="cselect" id="selcat">
+                                <option selected>All Categories</option>
+                              
+                            </select>
+                        </label>
+
+                    </div>
+
+
+
+
+                    <div class="standard-container">
                         <div id="bonus-deals-side">
 
 
-                    </div>                 
-                       </div>
+                        </div>
+                    </div>
 
-                    <div class="content-main-deals content">
-                        
+                </div>
 
-                        <div class="standard-container">
-
-                            <div class="unit ctu  js-main-deal selector-620648" data-om=";620648;" data-dealid="620648">
-                                <h1 class="mvtest_header_v2 cld" id="couponMainHeading">
-                                   
-                                </h1>
+                <div class="col-sm-9 content-main-deals content">
 
 
-                                <div class="cld pos-r main-deal-data parent-container">
-                                    <div class="slider">
-                                        <div class="">
-                                            <ul class="slides">
-                                                <li  class="clone" style="width: 100%; float: left; display: block;">
+                    <div class="standard-container">
 
-                                                    <a class="main-deal-image-link" href="/payment/620648" style="cursor: pointer;">
-                                                        <img id="voucMainSliderImg" src="https://static.wowcher.co.uk/images/deal/620648/154352.jpg" width="778" height="521" class="picture-slides-image deal-detail-img top" alt="£289 for a PDO threadlift on eye bags, £489 for one facial area of your choice or £985 for the full face at Harley Street Elite Clinic - save up to 59%" title="£289 for a PDO threadlift on eye bags, £489 for one facial area of your choice or £985 for the full face at Harley Street Elite Clinic - save up to 59%">
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
+                        <div class="unit ctu  js-main-deal selector-620648" data-om=";620648;" data-dealid="620648">
+                            <h1 class="mvtest_header_v2 cld" id="couponMainHeading"></h1>
+
+
+                            <div class="cld pos-r main-deal-data parent-container">
+                                <div class="slider">
+                                    <div class="">
+                                        <ul class="slides">
+                                            <li class="clone" style="width: 100%; float: left; display: block;">
+
+                                                <a class="main-deal-image-link" href="/payment/620648" style="cursor: pointer;">
+                                                    <img id="voucMainSliderImg" src="https://static.wowcher.co.uk/images/deal/620648/154352.jpg" width="778" height="521" class="picture-slides-image deal-detail-img top" alt="£289 for a PDO threadlift on eye bags, £489 for one facial area of your choice or £985 for the full face at Harley Street Elite Clinic - save up to 59%" title="£289 for a PDO threadlift on eye bags, £489 for one facial area of your choice or £985 for the full face at Harley Street Elite Clinic - save up to 59%">
+                                                </a>
+                                            </li>
+                                        </ul>
                                     </div>
+                                </div>
 
-                                    <div id="deal-of-day-esi" class="flt-r">
+                                <div id="deal-of-day-esi" class="flt-r">
 
-                                        <div class="corner-container ctu-redeem-now main-deal-data"></div>
-                                        <div class="ctu-pointsCollect main-deal-data">
-                                            <span style="color:white">
-                                                Collect 28,900
-                                                Club Wowcher points when you buy this deal
+                                    <div class="corner-container ctu-redeem-now main-deal-data"></div>
+                                    <div class="ctu-pointsCollect main-deal-data">
+                                        <span style="color:white">
+                                            Collect 28,900
+                                            Club Wowcher points when you buy this deal
+                                        </span>
+                                    </div>
+                                    <div class="ctu-discounted main-deal-data">
+                                        <div class="ndod-multiprice" style="padding-top: 35.5px ; ">
+                                            <span class="innerColour">
+
+                                                FROM
                                             </span>
                                         </div>
-                                        <div class="ctu-discounted main-deal-data">
-                                            <div class="ndod-multiprice" style="padding-top: 35.5px ; ">
-                                                <span class="innerColour">
+                                        <div class="ndod-price" style="font-size: 64px; margin: 5.5px 0; letter-spacing: -3px">
+                                            <span class="inner innerColour">
+                                                <span class="ndod-currency">£</span><span id="couDiscountedVal" class="ndod-amount">289</span>
+                                            </span>
+                                        </div>
+                                        <a href="http://harleystreeteliteclinic.com/tear-trough/" target="_blank" class="price-link" rel="nofollow">
+                                            <del class="ndod-original-price"><span class="ndod-currency">£</span><span id="couActualVal" class="ndod-amount">700</span></del>
+                                        </a>
+                                    </div><div class="main-deal-data-wrapper">
+                                        <div class="ctu-stats-md-topbg"></div>
+                                        <div class="ctu-stats main-deal-data">
 
-                                                    FROM
-                                                </span>
-                                            </div>
-                                            <div class="ndod-price" style="font-size: 64px; margin: 5.5px 0; letter-spacing: -3px">
-                                                <span class="inner innerColour">
-                                                    <span class="ndod-currency">£</span><span id="couDiscountedVal" class="ndod-amount">289</span>
-                                                </span>
-                                            </div>
-                                            <a href="http://harleystreeteliteclinic.com/tear-trough/" target="_blank" class="price-link" rel="nofollow">
-                                                <del class="ndod-original-price"><span class="ndod-currency">£</span><span id="couActualVal" class="ndod-amount">700</span></del>
-                                            </a>
-                                        </div><div class="main-deal-data-wrapper">
-                                            <div class="ctu-stats-md-topbg"></div>
-                                            <div class="ctu-stats main-deal-data">
+                                            <table class="ctu-stats-table ctu-stats-table-full-width">
+                                                <tbody>
+                                                    <tr>
 
-                                                <table class="ctu-stats-table ctu-stats-table-full-width">
-                                                    <tbody>
-                                                        <tr>
+                                                        <td>
+                                                            <div class="stat-bought"><span class="innerColour">Bought</span><strong style="font-size:55px;line-height:48px" id="coupBought">0</strong></div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="stat-save">
+                                                                <span class="innerColour">Save </span><span class="innerColour">up to </span><strong style="font-size:52px;line-height:48px" id="coupPerct">59%</strong>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="deal-detail-timer timer-620648">
 
-                                                            <td>
-                                                                <div class="stat-bought"><span class="innerColour">Bought</span><strong style="font-size:55px;line-height:48px" id="coupBought">0</strong></div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="stat-save">
-                                                                    <span class="innerColour">Save </span><span class="innerColour">up to </span><strong style="font-size:52px;line-height:48px" id="coupPerct">59%</strong>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="deal-detail-timer timer-620648">
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
 
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
+                                            <a title="Buy this deal" class="ctu-buy-big waMultiPrice" data-multibuy="true" href="/payment/620648" id="mainDealBuy">BUY!</a>
 
-                                                <a title="Buy this deal" class="ctu-buy-big waMultiPrice" data-multibuy="true" href="/payment/620648" id="mainDealBuy">BUY!</a>
+                                            @*<a class="waBuyAsGift js-buy-gift-button-track ctu-buy-gift" href="/payment/620648?gift=1">BUY AS A GIFT</a>*@
 
-                                                @*<a class="waBuyAsGift js-buy-gift-button-track ctu-buy-gift" href="/payment/620648?gift=1">BUY AS A GIFT</a>*@
+                                        </div>
 
-                                            </div>
+                                        <div class="ctu-stats-md-btmbg"></div>
+                                    </div><!-- main-deal-data-wrapper END -->
 
-                                            <div class="ctu-stats-md-btmbg"></div>
-                                        </div><!-- main-deal-data-wrapper END -->
-
-                                    </div>
                                 </div>
-
                             </div>
 
+                        </div>
 
-                            <div class="ctu-details">
-                                <div class="twocol">
-                                    <h2>Highlights</h2>
-                                    <ul>
-                                        <li>Feel fantastic with a PDO threadlift.</li>
-                                        <li>Treat eye bags, cheeks, forehead, lower face, neck or the full face.</li>
-                                        <li>Aims to help reduce the appearance of unwanted fine lines and wrinkles.</li>
-                                        <li>Non-surgical treatment carried out by a qualified doctor.</li>
-                                        <li>Includes pre-treatment consultation.</li>
-                                        <li>Open seven days a week (see below). Based on world-famous Harley Street. </li>
-                                    </ul>
-                                </div>
-                                <div class="twocol">
-                                    <h2>The Fine Print</h2>
-                                    <ul>
-                                        <li>One per person.</li>
-                                        <li>May buy multiples as gifts.</li>
-                                        <li>Voucher valid until 10th Jul 2016.</li>
-                                        <li>New Harley Street Elite Clinic customers only.</li>
-                                        <li>If deemed medically unsuitable, a full refund will be given.</li>
-                                        <li>48-hour cancellation policy applies.</li>
-                                        <li>Appointments subject to availability.</li>
-                                    </ul>
-                                </div>
-                                <br class="clearing">
 
-                                <div id="deal-detail-fullview" class="cld pos-r pink-star-bullet " style="display: block;">
-                                    <h2>Full Details</h2>
-                                    <p>If you're woeful about wrinkles and baffled by bags under your eyes, fret not - follow the <i>thread</i> of today's deal...</p>
-
-                                    <p>We're offering you a <b>PDO threadlift for eye bags</b> for <b>£289</b>, <b>on the cheeks, forehead line, lower face or neck</b> for <b>£489</b> or <b>your full face</b> for just <b>£985</b>, saving you <b>up to 59% off</b> <a href="http://harleystreeteliteclinic.com/" rel="nofollow" target="_blank">Harley Street Elite Clinic's</a> prices.</p>
-
-                                    <p>Based in central London, the experienced and friendly professionals at Harley Street Elite Clinic are on a mission to help you look and feel great! With today’s deal, you’ll get a non-surgical PDO threadlift treatment on your eye bags, full face, or a choice of either the cheeks, forehead, lower part of the face or neck. With a full consultation included, the total treatment time takes just up to an hour for one area and up to two hours for a full face session. Perfect!</p>
-
-                                    <p><b>Opening Hours</b></p>
-
-                                    <p></p><ul>
-                                        <li>
-                                            Monday-Friday: 10am-9pm<p></p>
-                                            <p></p>
-                                        </li>
-                                        <li>Saturday-Sunday; 10am-5.30pm</li>
-                                    </ul>
-
-                                </div>
-                                <div class="deal-detail-fullview-btmbg"></div>
+                        <div class="ctu-details">
+                            <div class="twocol">
+                                <h2>Highlights</h2>
+                                <ul>
+                                    <li>Feel fantastic with a PDO threadlift.</li>
+                                    <li>Treat eye bags, cheeks, forehead, lower face, neck or the full face.</li>
+                                    <li>Aims to help reduce the appearance of unwanted fine lines and wrinkles.</li>
+                                    <li>Non-surgical treatment carried out by a qualified doctor.</li>
+                                    <li>Includes pre-treatment consultation.</li>
+                                    <li>Open seven days a week (see below). Based on world-famous Harley Street. </li>
+                                </ul>
                             </div>
-                        </div>
-                            
+                            <div class="twocol">
+                                <h2>The Fine Print</h2>
+                                <ul>
+                                    <li>One per person.</li>
+                                    <li>May buy multiples as gifts.</li>
+                                    <li>Voucher valid until 10th Jul 2016.</li>
+                                    <li>New Harley Street Elite Clinic customers only.</li>
+                                    <li>If deemed medically unsuitable, a full refund will be given.</li>
+                                    <li>48-hour cancellation policy applies.</li>
+                                    <li>Appointments subject to availability.</li>
+                                </ul>
+                            </div>
+                            <br class="clearing">
 
+                            <div id="deal-detail-fullview" class="cld pos-r pink-star-bullet " style="display: block;">
+                                <h2>Full Details</h2>
+                                <p>If you're woeful about wrinkles and baffled by bags under your eyes, fret not - follow the <i>thread</i> of today's deal...</p>
+
+                                <p>We're offering you a <b>PDO threadlift for eye bags</b> for <b>£289</b>, <b>on the cheeks, forehead line, lower face or neck</b> for <b>£489</b> or <b>your full face</b> for just <b>£985</b>, saving you <b>up to 59% off</b> <a href="http://harleystreeteliteclinic.com/" rel="nofollow" target="_blank">Harley Street Elite Clinic's</a> prices.</p>
+
+                                <p>Based in central London, the experienced and friendly professionals at Harley Street Elite Clinic are on a mission to help you look and feel great! With today’s deal, you’ll get a non-surgical PDO threadlift treatment on your eye bags, full face, or a choice of either the cheeks, forehead, lower part of the face or neck. With a full consultation included, the total treatment time takes just up to an hour for one area and up to two hours for a full face session. Perfect!</p>
+
+                                <p><b>Opening Hours</b></p>
+
+                                <p></p><ul>
+                                    <li>
+                                        Monday-Friday: 10am-9pm<p></p>
+                                        <p></p>
+                                    </li>
+                                    <li>Saturday-Sunday; 10am-5.30pm</li>
+                                </ul>
+
+                            </div>
+                            <div class="deal-detail-fullview-btmbg"></div>
                         </div>
-                        
                     </div>
+
+
                 </div>
+
+            </div>
             </div>
         </div>
 </section>
   <!-- Header -->
-<section id="header" style="padding-top: 0px !important;" class="container-fluid text-white">
-    <div class="container">
-        <div class="row clearfix">
-
-            <div class="row clearfix text-center">
-
-                <h1 class="main_title" style="margin-bottom:0px;">Get paid to watch Ads - $$<br /><br /></h1>
-
-                <a class="popup-youtube" href="http://www.youtube.com/watch?v=i3i1Ne4qyZI" style="font-size:30px;">
-                    <i class="fa fa-play-circle-o fa-3x" style="color:white;"></i>
-                </a>
-
-            </div>
-
-
-            <div class="row clearfix staff">
-                <div class="col-xs-6 col-md-3 column text-center">
-                    <img class="img-circle" alt="140x140" src="~/images/team_01.png" />
-                    <h3 class="" style="color:black">Cash Pay Out</h3>
-                    <span>
-                        Minimum pay out of 10p to watch
-                        a video or click to a website
-
-                    </span>
-                </div>
-                <div class="col-xs-6 col-md-3 column text-center">
-                    <img class="img-circle" alt="140x140" src="~/images/team_03.png" />
-                    <h3 class="" style="color:black">Discount Vouchers</h3>
-                    <span>
-                        Choose higher value voucher offers
-                        instead of cash pay outs
-
-                    </span>
-                </div>
-                <div class="col-xs-6 col-md-3 column text-center">
-                    <img class="img-circle" alt="140x140" src="~/images/team_02.png" />
-                    <h3 class="" style="color:black">Play Games</h3>
-                    <span>
-                        Get paid to play games
-                        and train your brain
-
-                    </span>
-                </div>
-                <div class="col-xs-6 col-md-3 column text-center">
-                    <img class="img-circle" alt="140x140" src="~/images/team_04.png" />
-                    <h3 class="" style="color:black">Get Matched</h3>
-                    <span>
-                        Increase your value and get
-                        paid more from advertisers
-
-
-
-                    </span>
-                </div>
-            </div>
-
-
-
-            <div class="row clearfix text-center inner-top-xs">
-
-                <p class="text-center lead">
-                    We pay directly into your account for every ad you watch.
-                </p>
-
-                <h1 class="main_title">Free App</h1>
-
-                <a href="#download" class="btn btn-lg btn-submit"><span class="fa fa-android"></span> Download App</a>
-
-                <a href="http://mobile.cash4ads.com" class="btn btn-lg btn-submit"><span class="fa fa-apple"></span> Coming Soon</a>
-
-            </div>
-
-        </div>
-    </div><!-- /container  -->
-</section>
-
-<section id="feature" class="text-blue">
-    <div id="sense" class="container text-blue">
-        <div class="row clearfix">
-            <div class="col-md-12 column p_title">
-                <h2 class="text-center">
-                    Share the love<br />
-                </h2>
-                <p class="lead text-center">Advertisers pay 50% of their advertising spend on Cash 4 Ads to the people that watch their Ads.</p>
-                <p class="lead text-center"><span class="fa fa-heart" style="color:red"></span> </p>
-                <p class="lead text-center">This sharing approach allows local advertisers to promote their businesses and give back to the local community.</p>
-            </div>
-        </div>
-    </div>
-    </section>
-
-
-  <!-- Image -->
-<section id="image" class="container-fluid text-blue inner-bottom">
-    <div class="container">
-        <div class="row clearfix">
-            <div class="col-sm-12 col-md-6 column">
-                <img alt="Friends" class="img-responsive" src="~/images/friends.png" />
-            </div>
-            <div class="col-sm-12 col-md-6">
-                <div class="row">
-                    <div class="col-sm-12 col-md-12 p_title">
-                        <h2>
-                            Train your Brain with paid games<br />
-                        </h2>
-                        <p class="lead text-left">
-                            We’re aiming to deliver Ads from advertisers to you on a regular basis. In the meantime play games and complete simple puzzles.
-                        </p>
-                        <p class="lead text-left">
-                            All games and puzzles are designed to help train your brain and improve memory mapping techniques.
-                        </p>
-                      
-                    </div>
-                    <div class="scroll col-sm-12 col-sm-12 col-md-8">
-                        <a href="#download" class="btn btn-lg btn-submit"><span class="fa fa-android"></span> Download App</a>
-
-                        <a href="http://mobile.cash4ads.com" class="btn btn-lg btn-submit"><span class="fa fa-apple"></span> Coming Soon</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> <!-- /container -->
-</section>
-<!-- end image -->
-
-    <!-- Feature -->
-    <section id="feature" class="text-blue">
-        <div class="container">
-            <div class="row clearfix">
-                <div class="col-md-12 column p_title">
-                    <h2 class="text-center">Increase your value.</h2>
-                    <p class="text-center lead">Build up your profile by answering questions and playing brain training games.
-
-</p>
-                </div>
-                <div class="col-md-12 column">
-                    <div class="row clearfix">
-                        <!-- RIGHT COLUMN -->
-                        <div class="col-sm-4 col-md-4 column text-center">
-
-                            <!-- #1 -->
-                            <div class="item-icon ">
-                                <i class="fa fa-bicycle fa-2x"></i>
-                            </div>
-
-                            <h3>Get paid per Ad</h3>
-
-                            <p>
-                                Your data is out there, why not get paid for it!
-                            </p>
-
-                            <!-- #2 -->
-                            <div class="item-icon ">
-                                <i class="fa fa-cubes fa-2x"></i>
-                            </div>
-
-                            <h3>Paid Online</h3>
-
-                            <p>
-                                We pay directly into your  PayPal or Google account.
-                            </p>
-
-                            <!-- #3 -->
-                            <div class="item-icon ">
-                                <i class="fa fa-line-chart fa-2x"></i>
-                            </div>
-
-                            <h3>Increase Your Value</h3>
-
-                            <p>
-                                Build up your profile and get targeted today.
-                            </p>
-
-                        </div>
-
-
-                        <!-- IPHONE IMAGE -->
-                        <div class="col-sm-4 col-md-4 column ">
-                            <img alt="iPhone" class="img-responsive" src="~/images/iPhone.png" />
-                        </div>
-
-                        <!-- LEFT COLUMN -->
-                        <div class="col-sm-4 col-md-4 column text-center">
-
-                            <!-- #1 -->
-                            <div class="item-icon ">
-                                <i class="fa fa-life-ring fa-2x"></i>
-                            </div>
-
-                            <h3>Play Brain Games</h3>
-
-                            <p>
-                                Cash rewards for completing puzzles.
-                            </p>
-
-                            <!-- #2 -->
-                            <div class="item-icon ">
-                                <i class="fa fa-laptop fa-2x"></i>
-                            </div>
-
-                            <h3>No Spamming</h3>
-
-                            <p>
-                                Your data is never disclosed or shared with third parties.
-                            </p>
-
-                            <!-- #3 -->
-                            <div class="item-icon ">
-                                <i class="fa fa-users fa-2x"></i>
-                            </div>
-
-                            <h3>Cash or Vouchers</h3>
-
-                            <p>
-                               Opt for higher value voucher rewards from advertisers.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> <!-- /container -->
-    </section>
-    <!-- end feature -->
-       <!-- Video -->
-<section id="video" class="container-fluid text-blue">
-    <div class="container">
-        <div class="row clearfix">
-            <div class="col-md-12 column p_title">
-                <h2 class="text-center">Get matched with Advertisers. <br /></h2>
-                <p class="lead text-center">
-                    Earn more per ad by answering your profile questions.
-                    <br /><br />
-                    <span class="fa fa-heart" style="color:white"></span>
-                    <br /><br />
-                    We allow advertisers to run campaigns that match user profiles.  The more targeted their matching criteria, the more they pay out.
-                    <br /><br />
-
-
-                </p>
-            </div>
-
-        </div>
-    </div>
-</section>
-<!-- end vodeo -->
-
-    <div id="about" class="container text-blue">
-       
-        <div class="row clearfix staff">
-            <div class="col-xs-6 col-md-3 column text-center">
-                <img class="img-circle" alt="140x140" src="~/images/team_01.png" />
-                <h3 class="">Cash 4 Ads</h3>
-                <span>Get paid for watching relevant Ads.</span>
-            </div>
-            <div class="col-xs-6 col-md-3 column text-center">
-                <img class="img-circle" alt="140x140" src="~/images/team_03.png" />
-                <h3 class="">Get Targeted</h3>
-                <span>Increase your value by building your profile</span>
-            </div>
-            <div class="col-xs-6 col-md-3 column text-center">
-                <img class="img-circle" alt="140x140" src="~/images/team_02.png" />
-                <h3 class="">Play Games</h3>
-                <span>Cash rewards for completing games and puzzles.</span>
-            </div>
-            <div class="col-xs-6 col-md-3 column text-center">
-                <img class="img-circle" alt="140x140" src="~/images/team_04.png" />
-                <h3 class="">Cash or Vouchers</h3>
-                <span>Opt for higher value voucher rewards from advertisers.</span>
-            </div>
-        </div>
-    </div> <!-- container -->
-    <!-- end about -->
 
 
 
@@ -454,10 +217,10 @@
 <div id="testimonial" class="container text-blue" style="padding-top:20px;">
    
     <div class="row">
-        <div class='col-md-12 text-center p_title'>
+        @*<div class='col-md-12 text-center p_title'>
             <h2>Happy Clickers</h2>
            
-        </div>
+        </div>*@
     </div>
     <div class='row'>
         <div class=' col-md-12'>
@@ -580,6 +343,7 @@
 <script>
     var Coupons = [];
     $(document).ready(function () {
+        GetCategories();
         var couponFId = 0;
         $.ajax({
             dataType: "json",
@@ -603,6 +367,28 @@
         });
        
     });
+
+    function GetCategories()
+    {
+
+        $.ajax({
+            dataType: "json",
+            url: 'http://manage.cash4ads.com/Api_Mobile/CouponCategories/8667e1a9-60af-4d99-8013-a241b81fa550',
+            cache: false,
+            success: function (response) {
+
+                var selcat = $("#selcat");
+                Coupons = response;
+             
+                $(response.CouponCategories).each(function (i, val) {
+
+                    selcat.append('<option value="' + val.CagtegoryId + '">' + val.Name + '</option>');
+                    //$("#bonus-deals-side").append(' <div class="ndod-view-mini ndod-view-mini-nodesc"><div class="ndod-deal-header"><h2>' + val.CouponTitle + '</h2>               </div><div class="ndod-deal-content"><a class="" href="#"><img class="ndod-deal-image  js-show" data-original="' + val.CouponImage + '" src="' + val.CouponImage + '" alt="" /></a><div class="ndod-redeem-now"></div><div class="ndod-business-logo-wrapper"><div class="ndod-business-logo"><img class="" data-original="http://manage.cash4ads.com/images/vLogo.png" src="http://manage.cash4ads.com/images/vLogo.png" width="70" height="28" /> </div><div class="btm-header-bg-business-logo"></div></div><div class="ndod-discount"><div class="ndod-multiprice" style="padding-top: 22.0px ; "><span class="innerColour">NOW</span></div><div class="ndod-price" style="font-size: 36px; margin: 2.0px 0 -1.0px;"><span class="inner innerColour"><span class="ndod-currency">£</span><span class="ndod-amount">' + val.CouponDiscountedValue + '</span></span></div><del class="ndod-original-price"><span class="ndod-currency">£</span><span class="ndod-amount">' + val.CouponActualValue + '</span></del></div></div><div class="ndod-deal-footer-wrapper">  <div class="ndod-deal-footer cld"> <p class="ndod-bought bonus-bought"><span class="ndod-label innerColour">Bought</span><span class="ndod-amount">' + val.CouponTakenValue + '</span>      </p><p class="ndod-savings"><span class="ndod-label innerColour">Save <span>up to </span></span><span class="ndod-abount">' + discountedValPer + '<span class="ndod-percent-sign">%</span></span>            </p><a href="#" onclick="LoadSelectedVoucher(' + val.CouponId + ')" class="ndod-button-small waViewButton">    <span class="outer"><span class="inner">VIEW!</span></span>     </a>        </div>         <div class="ndod-deal-footer-btmbg"></div>    </div>    </div></div>');
+                });
+               
+            }
+        });
+    }
   
     function LoadSelectedVoucher(CouponId) {
       

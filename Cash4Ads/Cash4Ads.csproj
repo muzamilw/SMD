@@ -239,6 +239,7 @@
     <Content Include="images\team_03.png" />
     <Content Include="images\team_04.png" />
     <Content Include="images\uk.png" />
+    <Content Include="images\United-Kingdom-icon.png" />
     <Content Include="images\us.png" />
     <Content Include="images\White_wallet.svg" />
     <Content Include="Scripts\bootstrap.js" />
@@ -307,6 +308,8 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\advertisers.cshtml" />
     <Content Include="Views\Home\afilliates.cshtml" />
+    <Content Include="Views\Home\get_paid_watch_ads.cshtml" />
+    <Content Include="Views\Shared\voucherbar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

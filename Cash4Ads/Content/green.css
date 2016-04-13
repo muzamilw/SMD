@@ -98,3 +98,52 @@ fieldset[disabled] .btn-lead.active {
 .btn-link:hover {
   color: #08aa89 !important;
 }
+
+
+
+
+
+.btn-leadActive {
+  color: #ffffff;
+  background-color: #4c8e8c;
+  border-color: #4c8e8c;
+  transition: all 0.25s ease-in-out;
+  -moz-transition: all 0.25s ease-in-out;
+  -webkit-transition: all 0.25s ease-in-out;
+}
+.btn-leadActive:hover,
+.btn-leadActive:focus,
+.btn-leadActive:active,
+.btn-leadActive.active,
+.open .dropdown-toggle.btn-leadActive {
+  color: #ffffff;
+  background-color: #53e0c4;
+  border-color: #53e0c4;
+}
+.btn-leadActive:active,
+.btn-leadActive.active,
+.open .dropdown-toggle.btn-leadActive {
+  background-image: none;
+}
+.btn-leadActive.disabled,
+.btn-leadActive[disabled],
+fieldset[disabled] .btn-leadActive,
+.btn-leadActive.disabled:hover,
+.btn-leadActive[disabled]:hover,
+fieldset[disabled] .btn-leadActive:hover,
+.btn-leadActive.disabled:focus,
+.btn-leadActive[disabled]:focus,
+fieldset[disabled] .btn-leadActive:focus,
+.btn-leadActive.disabled:active,
+.btn-leadActive[disabled]:active,
+fieldset[disabled] .btn-leadActive:active,
+.btn-leadActive.disabled.active,
+.btn-leadActive[disabled].active,
+fieldset[disabled] .btn-leadActive.active {
+  background-color: #4c8e8c;
+  border-color: #4c8e8c;
+}
+.btn-leadActive .badge {
+  color: #4c8e8c;
+  background-color: #ffffff;
+}

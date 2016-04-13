@@ -30,6 +30,12 @@ namespace Cash4Ads.Controllers
             return View();
         }
 
+
+        public ActionResult get_paid_watch_ads()
+        {
+            return View();
+        }
+
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
