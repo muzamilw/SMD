@@ -88,6 +88,7 @@
               },
               // Convert to server data
               convertToServerData = function () {
+                  debugger;
                   return {
                       UserId: id(),
                       FullName: fullName(),

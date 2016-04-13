@@ -69,7 +69,7 @@ namespace SMD.MIS.Areas.Api.Models
         [NotMapped]
         
         public int AdViews { get; set; }
-        
+         
         public int? CompanyId { get; set; }
         public string CouponSwapValue { get; set; }
         public string CouponActualValue { get; set; }
@@ -77,5 +77,12 @@ namespace SMD.MIS.Areas.Api.Models
         public Nullable<int> CouponQuantity { get; set; }
         public Nullable<int> priority { get; set; }
         public Nullable<double> CouponDiscountValue { get; set; }
+        public string couponSmdComission { get; set; }
+        public string couponImage2 { get; set; }
+
+        public List<CouponCategory> CouponCategories { get; set; }
+        public string CouponImage3 { get; set; }
+        public string CouponImage4 { get; set; }
+        public string CouponExpiryLabel { get; set; }
     }
 }

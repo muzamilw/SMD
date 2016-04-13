@@ -8,7 +8,8 @@
           Voucher1Heading, Voucher1Description, Voucher1Value, Voucher2Heading, Voucher2Description, Voucher2Value,
           Voucher1ImagePath, VoucherImagePath, CreatedBy, VideoUrl, BuuyItLine1, BuyItLine2, BuyItLine3, BuyItButtonLabel,
           BuyItImageUrl, AdViews, CompanyId, CouponSwapValue, CouponActualValue, CouponQuantity, CouponTakenCount, priority,
-          CouponDiscountValue) {
+          CouponDiscountValue, couponImage2, CouponImage3, CouponImage4, CouponExpiryLabel, couponSmdComission,CouponDiscountValue, CouponCategories) {
+       
           var
               //type and userID will be set on server sside
               CampaignID = ko.observable(CampaignID),
@@ -29,6 +30,7 @@
               CouponTakenCount = ko.observable(CouponTakenCount),
               priority = ko.observable(priority),
               CouponDiscountValue = ko.observable(CouponDiscountValue),
+              CouponCategories = ko.observableArray([]),
               StartDateTime = ko.observable((StartDateTime !== null && StartDateTime !== undefined) ? moment(StartDateTime).toDate() : undefined).extend({  // custom message
                   required: true
               }),//ko.observable(),
@@ -96,6 +98,11 @@
               AmountSpent = ko.observable(AmountSpent),
               ImagePath = ko.observable(ImagePath),
               CampaignImagePath = ko.observable(CampaignImagePath),
+              couponImage2 = ko.observable(couponImage2),
+              CouponImage3 = ko.observable(CouponImage3),
+              CouponImage4 = ko.observable(CouponImage4),
+              CouponExpiryLabel = ko.observable(CouponExpiryLabel),
+              couponSmdComission = ko.observable(couponSmdComission),
               CampaignTypeImagePath = ko.observable(CampaignTypeImagePath),
               ClickRate = ko.observable(ClickRate),
               Voucher1ImagePath = ko.observable(Voucher1ImagePath),
@@ -175,6 +182,7 @@
               },
               // Convert to server data
               convertToServerData = function () {
+                  debugger;
                   var targetCriteria = [];
                   _.each(AdCampaignTargetCriterias(), function (item) {
                       console.log(item);
@@ -185,6 +193,11 @@
                   _.each(AdCampaignTargetLocations(), function (item) {
                    
                       LocationtargetCriteria.push(item.convertToServerData());
+                  });
+                  var selectedCoupons = [];
+                  _.each(CouponCategories(), function (item) {
+
+                      selectedCoupons.push(item.convertToServerData());
                   });
                   return {
                       CampaignID: CampaignID(),
@@ -214,6 +227,11 @@
                       AmountSpent: AmountSpent(),
                       ImagePath: ImagePath(),
                       CampaignImagePath: CampaignImagePath(),
+                      couponImage2: couponImage2(),
+                      CouponImage3: CouponImage3(),
+                      CouponImage4: CouponImage4(),
+                      CouponExpiryLabel: CouponExpiryLabel(),
+                      couponSmdComission: couponSmdComission(),
                       CampaignTypeImagePath: CampaignTypeImagePath(),
                       ClickRate:ClickRate(),
                       AdCampaignTargetCriterias: targetCriteria,
@@ -241,7 +259,8 @@
                       CouponQuantity: CouponQuantity(),
                       CouponTakenCount: CouponTakenCount(),
                       priority: priority(),
-                      CouponDiscountValue:CouponDiscountValue()
+                      CouponDiscountValue: CouponDiscountValue(),
+                      CouponCategories: selectedCoupons
                   };
               };
           return {
@@ -272,6 +291,11 @@
               AmountSpent: AmountSpent,
               ImagePath: ImagePath,
               CampaignImagePath: CampaignImagePath,
+              couponImage2: couponImage2,
+              CouponImage3: CouponImage3,
+              CouponImage4: CouponImage4,
+              CouponExpiryLabel: CouponExpiryLabel,
+              couponSmdComission: couponSmdComission,
               CampaignTypeImagePath: CampaignTypeImagePath,
               ClickRate:ClickRate,
               AdCampaignTargetCriterias: AdCampaignTargetCriterias,
@@ -305,7 +329,8 @@
               CouponQuantity: CouponQuantity,
               CouponTakenCount: CouponTakenCount,
               priority: priority,
-              CouponDiscountValue: CouponDiscountValue
+              CouponDiscountValue: CouponDiscountValue,
+              CouponCategories: CouponCategories
           };
       };
 
@@ -423,6 +448,28 @@
             Longitude: Longitude
         };
     };
+
+    selectedCouponCategory = function (CategoryId, Name) {
+
+        var
+            //type and userID will be set on server sside
+            CategoryId = ko.observable(CategoryId),
+            Name = ko.observable(Name),
+            IsSelected = ko.observable(),
+            // Convert to server data
+            convertToServerData = function () {
+                return {
+                    CategoryId: CategoryId(),
+                    Name: Name()
+                };
+            };
+        return {
+            CategoryId: CategoryId,
+            Name: Name,
+            IsSelected:IsSelected,
+            convertToServerData: convertToServerData
+        };
+    };
     // Factory Method
     Campaign.Create = function (source) {
         var campaign = new Campaign(source.CampaignId, source.LanguageId, source.CampaignName, source.UserId, source.Status, source.StatusValue,
@@ -431,13 +478,19 @@
             source.CorrectAnswer, source.AgeRangeStart, source.AgeRangeEnd, source.ResultClicks, source.AmountSpent, source.ImagePath, source.CampaignImagePath,
             source.CampaignTypeImagePath, source.Description, source.ClickRate, source.Voucher1Heading, source.Voucher1Description, source.Voucher1Value, source.Voucher2Heading, source.Voucher2Description,
              source.Voucher2Value, source.Voucher1ImagePath, source.VoucherImagePath, source.CreatedBy, source.VideoUrl, source.BuuyItLine1, source.BuyItLine2, source.BuyItLine3, source.BuyItButtonLabel, source.BuyItImageUrl,source.AdViews,source.CompanyId,
-            source.CouponSwapValue, source.CouponActualValue,source.CouponQuantity,source.CouponTakenCount, source.priority, source.CouponDiscountValue);
+            source.CouponSwapValue, source.CouponActualValue,source.CouponQuantity,source.CouponTakenCount, source.priority, source.CouponDiscountValue,
+             source.couponImage2, source.CouponImage3, source.CouponImage4, source.CouponExpiryLabel, source.couponSmdComission);
+        
         _.each(source.AdCampaignTargetCriterias, function (item) {
             campaign.AdCampaignTargetCriterias.push(AdCampaignTargetCriteriasModel.Create(item));
         });
         _.each(source.AdCampaignTargetLocations, function (item) {
             
             campaign.AdCampaignTargetLocations.push(AdCampaignTargetLocation.Create(item));
+        });
+        _.each(source.CouponCategories, function (item) {
+
+            campaign.CouponCategories.push(selectedCouponCategory.Create(item));
         });
         return campaign;
     };
@@ -452,10 +505,15 @@
        
         return new AdCampaignTargetLocation(source.Id, source.CampaignId, source.CountryId, source.CityId, source.Radius, source.Country, source.City, source.IncludeorExclude, source.Latitude, source.Longitude);
     };
+    // Factory Method
+    selectedCouponCategory.Create = function (source) {
 
+        return new selectedCouponCategory(source.CategoryId, source.Name);
+    };
     return {
         Campaign: Campaign,
         AdCampaignTargetCriteriasModel: AdCampaignTargetCriteriasModel,
-        AdCampaignTargetLocation: AdCampaignTargetLocation
+        AdCampaignTargetLocation: AdCampaignTargetLocation,
+        selectedCouponCategory: selectedCouponCategory
     };
 });

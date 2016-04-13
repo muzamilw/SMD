@@ -195,6 +195,15 @@
         GoogleWallet=3,
         VirtualAccount=4
     }
+
+    /// <summary>
+    /// User payment mehtod  Types
+    /// </summary>
+    public enum PaymentMethod
+    {
+        Paypal = 1,
+        Coupon = 3
+    }
     public enum ProductType
     {
         Ad = 1,

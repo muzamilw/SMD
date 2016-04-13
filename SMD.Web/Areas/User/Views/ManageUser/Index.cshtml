@@ -278,7 +278,7 @@
                                                 <div class="col-md-6">
                                                     @*<img style="width: auto; height: 150px; max-width: 200px; min-width: 100px; border: 1px solid;" data-bind="visible:ProfileImageBytes()==null,attr: { src:  imageUrl }," src="/Images/select_image.jpg" />
                                                     <img style="width:auto;height:80px;max-width:200px;" data-bind="visible:ProfileImageBytes!=null,attr: { src: ProfileImageBytes }" />*@
-                                                    <img id="vehicleImage" alt="" style="width: 120px;height:120px" data-bind="attr:{src:imageUrl }" />
+                                                    <img id="vehicleImage" alt="" style="width: auto;height:120px" data-bind="attr:{src:imageUrl }" />
                                                     <h5><span></span></h5>
                                                 </div>
                                             </div>
@@ -387,12 +387,12 @@
                                         <button class="btn  btn-info" id="saveBtn" data-bind="click: $root.chargeCustomer, text:stripeId() =='undefined' ? 'Configure':'Update' ">Processing...</button>
                                     </div>
                                 </div>
-                                <div class="form-group" style="display:none;">
+                                <div class="form-group" style="">
                                     <div class="col-lg-4 text-right">
                                         <label class="control-label text-right tooltip-float">PayPal Account</label>
                                     </div>
                                     <div class="col-lg-4">
-                                        <input type="text"  class="form-control" data-bind="value: payPalId() ">
+                                        <input type="text"  class="form-control" data-bind="value: payPalId ">
                                     </div>
                                 </div>
                                 <div class="form-group" style="display:none;">
