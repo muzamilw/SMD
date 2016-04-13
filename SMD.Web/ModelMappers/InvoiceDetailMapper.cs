@@ -15,7 +15,7 @@ namespace SMD.MIS.ModelMappers
                 InvoiceDetailId = source.InvoiceDetailId,
                 ItemAmount = source.ItemAmount,
                 ItemGrossAmount = source.ItemGrossAmount,
-                ItemName = source.Product.ProductName
+                ItemName = source.Product != null? source.Product.ProductName: ""
             };
         }
     }

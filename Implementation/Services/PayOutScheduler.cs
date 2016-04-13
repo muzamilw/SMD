@@ -298,6 +298,16 @@ namespace SMD.Implementation.Services
         {
             //if (mode == (int)PaymentMethod.Coupon)
             // Initialize Service
+
+            // if coupon 
+                // get money from user virtual account 
+                // add it to smd and users virtual account 
+                // send user voucher email 
+            // if paypal 
+                // get money from smd virtual account 
+                // add money to user payapl account 
+                // add a debit to smd paypal account 
+                // add a debit transaction to user virtual account 
             PaypalService = UnityConfig.UnityContainer.Resolve<IPaypalService>();
 
             // Using Base DB Context

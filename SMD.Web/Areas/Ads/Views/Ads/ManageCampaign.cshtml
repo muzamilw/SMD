@@ -39,6 +39,7 @@ else
                     <div class="pull-right top-page-ui" style="margin-right:5px;margin-bottom:5px;">
 
                         <div class="col-xs-12" style="text-align: right; padding-right:0;margin-bottom:10px;">
+                            <button class="btn  btn-info " id="btnCopyCampaign" data-bind=" click:$root.copyCampaign, visible: $root.isNewCampaignVisible " >Create Copy - New Campaign</button>
                             <button class="btn  btn-success" id="btnPauseCampaign" data-bind="click:$root.changeStatus(4)" style="display:none;">Pause</button>
                             <button class="btn  btn-success" id="btnResumeCampagin" data-bind="click:$root.changeStatus(3)" style="display:none;">Resume</button>
                             <button class="btn  btn-warning" id="saveBtn" data-bind="click:$root.saveCampaignData, enable: $root.hasChangesOnQuestion, css: { 'btn-warning': $root.hasChangesOnQuestion }">Save</button>
@@ -1124,7 +1125,7 @@ else
                                             <label for="txtVoucher" class="control-label text-right tooltip-float floatNone">First Line</label>
                                         </div>
                                         <div class="col-lg-8">
-                                            <input type="text" class="form-control" id="txtVoucher" placeholder="Enter Description  (20 characters)" data-bind="value: BuuyItLine1" maxlength="20">
+                                            <input type="text" class="form-control" id="txtVoucher" placeholder="Enter Description  (36 characters)" data-bind="value: BuuyItLine1" maxlength="36">
 
                                         </div>
                                     </div>
@@ -1134,7 +1135,7 @@ else
                                             <label for="txtVoucherDes" class="control-label text-right tooltip-float floatNone">Second Line</label>
                                         </div>
                                         <div class="col-lg-8">
-                                            <input type="text" class="form-control" id="txtVoucherDes" placeholder="Enter Description  (20 characters)" data-bind="value: BuyItLine2" maxlength="20">
+                                            <input type="text" class="form-control" id="txtVoucherDes" placeholder="Enter Description  (36 characters)" data-bind="value: BuyItLine2" maxlength="36">
 
                                         </div>
                                     </div>
@@ -1144,7 +1145,7 @@ else
                                             <label for="txtVoucherVal" class="control-label text-right tooltip-float floatNone">Third Line </label>
                                         </div>
                                         <div class="col-lg-8">
-                                            <input type="text" class="form-control" id="txtVoucherVal" placeholder="Enter Description  (20 characters)" data-bind="value: BuyItLine3" maxlength="20">
+                                            <input type="text" class="form-control" id="txtVoucherVal" placeholder="Enter Description  (36 characters)" data-bind="value: BuyItLine3" maxlength="36">
 
                                         </div>
                                     </div>
@@ -1154,7 +1155,7 @@ else
                                             <label for="txtVoucherVal" class="control-label text-right tooltip-float floatNone">Url </label>
                                         </div>
                                         <div class="col-lg-8">
-                                            <textarea class="form-control" id="txtLinkOfCampaign" rows="1" placeholder="Enter in landing page link " data-bind="value: VideoUrl" style="margin-top:5px;" maxlength="30"></textarea>
+                                            <textarea class="form-control" id="txtLinkOfCampaign" rows="1" placeholder="Enter in landing page link " data-bind="value: VideoUrl" style="margin-top:5px;" maxlength="36"></textarea>
 
                                         </div>
                                     </div>
@@ -1164,7 +1165,7 @@ else
                                             <label for="txtVoucherVal" class="control-label text-right tooltip-float floatNone">Button Label </label>
                                         </div>
                                         <div class="col-lg-8">
-                                            <input type="text" class="form-control" id="txtVoucherVal" placeholder="Enter Description  (20 characters)" data-bind="value: BuyItButtonLabel" maxlength="20">
+                                            <input type="text" class="form-control" id="txtVoucherVal" placeholder="Enter Description  (36 characters)" data-bind="value: BuyItButtonLabel" maxlength="36">
 
                                         </div>
                                     </div>
@@ -1269,7 +1270,7 @@ else
                                 </div>
                             </div>
                             <br />
-                            <div style="width:100%; height:66px;">
+                            <div style="width:100%; height:103px; margin-bottom:20px;">
                                 <div class="radio col-lg-12">
                                     <span>Deliver in:</span>
                                 </div>
@@ -1303,7 +1304,7 @@ else
                                 <button class="btn  btn-success btnSubmitApproval" id="btnSubmitForApproval2" data-bind="click:$root.submitCampaignData, visible: $root.canSubmitForApproval" style="width: 100%;">Submit for Approval</button>
                             </div>
                             <div data-bind="visible:!$root.isDisplayCouponsAds()" style="margin-top: 16px;">
-                                <button class="btn  btn-info " id="btnCopyCampaign" data-bind=" click:$root.copyCampaign, visible: $root.isNewCampaignVisible " style=" width:100%;margin-bottom:10px;">Create Copy - New Campaign</button>
+                              
                                 <br />
                                 <button class="btn  btn-danger " id="btnStopAndTerminate" data-bind=" click:$root.terminateCampaign,visible: $root.isTerminateBtnVisible" style="width: 100%;margin-bottom:10px;">Stop & Terminate Early</button>
                                 <br />
@@ -1321,7 +1322,7 @@ else
 
                                 </div>
                                 <br />
-                                <div style="    margin-bottom: 10px;">
+                                <div style="    margin-bottom: 10px; display:none;">
                                     <div class="yourBudgtHeadingCnt">
                                         <span>Start date :</span>
                                     </div>
@@ -2131,12 +2132,12 @@ else
         }
         $(window).scroll(function () {
             var scrollYpos = $(document).scrollTop();
-            if (scrollYpos >= 419) {
-                $("#reachTableContainer").css("position", "fixed");
-                $("#reachTableContainer").css("top", "10px");
+            if (scrollYpos >= 620) {
+                $(".aud_cnt").css("position", "fixed");
+                $(".aud_cnt").css("top", "10px");
             } else {
-                $("#reachTableContainer").css("position", "absolute");
-                $("#reachTableContainer").css("top", "150px");
+                $(".aud_cnt").css("position", "absolute");
+                $(".aud_cnt").css("top", "324px");
             }
         });
     </script>
