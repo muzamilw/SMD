@@ -126,7 +126,12 @@ namespace SMD.MIS.ModelMappers
                 CouponSwapValue = source.CouponSwapValue,
                 CouponTakenCount = source.CouponTakenCount,
                 priority = source.priority,
-                 CouponDiscountValue = source.CouponDiscountValue
+                 CouponDiscountValue = source.CouponDiscountValue,
+                 CouponExpiryLabel = source.CouponExpiryLabel,
+                couponImage2 = source.couponImage2,
+                 couponSmdComission = source.couponSmdComission,
+                CouponImage3 = source.CouponImage3,
+                CouponImage4 = source.CouponImage4
             };
 
 

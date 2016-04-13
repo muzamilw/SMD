@@ -8,7 +8,7 @@
           Voucher1Heading, Voucher1Description, Voucher1Value, Voucher2Heading, Voucher2Description, Voucher2Value,
           Voucher1ImagePath, VoucherImagePath, CreatedBy, VideoUrl, BuuyItLine1, BuyItLine2, BuyItLine3, BuyItButtonLabel,
           BuyItImageUrl, AdViews, CompanyId, CouponSwapValue, CouponActualValue, CouponQuantity, CouponTakenCount, priority,
-          CouponDiscountValue) {
+          CouponDiscountValue, couponImage2, CouponImage3, CouponImage4, CouponExpiryLabel, couponSmdComission) {
           var
               //type and userID will be set on server sside
               CampaignID = ko.observable(CampaignID),
@@ -96,6 +96,11 @@
               AmountSpent = ko.observable(AmountSpent),
               ImagePath = ko.observable(ImagePath),
               CampaignImagePath = ko.observable(CampaignImagePath),
+              couponImage2 = ko.observable(couponImage2),
+              CouponImage3 = ko.observable(CouponImage3),
+              CouponImage4 = ko.observable(CouponImage4),
+              CouponExpiryLabel = ko.observable(CouponExpiryLabel),
+              couponSmdComission = ko.observable(couponSmdComission),
               CampaignTypeImagePath = ko.observable(CampaignTypeImagePath),
               ClickRate = ko.observable(ClickRate),
               Voucher1ImagePath = ko.observable(Voucher1ImagePath),
@@ -214,6 +219,11 @@
                       AmountSpent: AmountSpent(),
                       ImagePath: ImagePath(),
                       CampaignImagePath: CampaignImagePath(),
+                      couponImage2: couponImage2(),
+                      CouponImage3: CouponImage3(),
+                      CouponImage4: CouponImage4(),
+                      CouponExpiryLabel: CouponExpiryLabel(),
+                      couponSmdComission: couponSmdComission(),
                       CampaignTypeImagePath: CampaignTypeImagePath(),
                       ClickRate:ClickRate(),
                       AdCampaignTargetCriterias: targetCriteria,
@@ -272,6 +282,11 @@
               AmountSpent: AmountSpent,
               ImagePath: ImagePath,
               CampaignImagePath: CampaignImagePath,
+              couponImage2: couponImage2,
+              CouponImage3: CouponImage3,
+              CouponImage4: CouponImage4,
+              CouponExpiryLabel: CouponExpiryLabel,
+              couponSmdComission: couponSmdComission,
               CampaignTypeImagePath: CampaignTypeImagePath,
               ClickRate:ClickRate,
               AdCampaignTargetCriterias: AdCampaignTargetCriterias,
@@ -431,7 +446,9 @@
             source.CorrectAnswer, source.AgeRangeStart, source.AgeRangeEnd, source.ResultClicks, source.AmountSpent, source.ImagePath, source.CampaignImagePath,
             source.CampaignTypeImagePath, source.Description, source.ClickRate, source.Voucher1Heading, source.Voucher1Description, source.Voucher1Value, source.Voucher2Heading, source.Voucher2Description,
              source.Voucher2Value, source.Voucher1ImagePath, source.VoucherImagePath, source.CreatedBy, source.VideoUrl, source.BuuyItLine1, source.BuyItLine2, source.BuyItLine3, source.BuyItButtonLabel, source.BuyItImageUrl,source.AdViews,source.CompanyId,
-            source.CouponSwapValue, source.CouponActualValue,source.CouponQuantity,source.CouponTakenCount, source.priority, source.CouponDiscountValue);
+            source.CouponSwapValue, source.CouponActualValue,source.CouponQuantity,source.CouponTakenCount, source.priority, source.CouponDiscountValue,
+             source.couponImage2, source.CouponImage3, source.CouponImage4, source.CouponExpiryLabel, source.couponSmdComission);
+        
         _.each(source.AdCampaignTargetCriterias, function (item) {
             campaign.AdCampaignTargetCriterias.push(AdCampaignTargetCriteriasModel.Create(item));
         });

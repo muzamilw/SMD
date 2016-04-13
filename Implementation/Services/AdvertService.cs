@@ -115,6 +115,45 @@ namespace SMD.Implementation.Services
                 savePath = savePath.Substring(indexOf, savePath.Length - indexOf);
                 savePaths[3] = savePath;
             }
+            if (!string.IsNullOrEmpty(campaign.couponImage2) && !campaign.couponImage2.Contains("guid_Voucher2DefaultImage") && !campaign.couponImage2.Contains("http://manage.cash4ads.com/"))
+            {
+
+                string base64 = campaign.couponImage2.Substring(campaign.couponImage2.IndexOf(',') + 1);
+                base64 = base64.Trim('\0');
+                byte[] data = Convert.FromBase64String(base64);
+                string savePath = directoryPath + "\\guid_Voucher2DefaultImage.jpg";
+                File.WriteAllBytes(savePath, data);
+                int indexOf = savePath.LastIndexOf("SMD_Content", StringComparison.Ordinal);
+                savePath = savePath.Substring(indexOf, savePath.Length - indexOf);
+                savePaths[2] = savePath;
+                campaign.couponImage2 = savePath;
+            }
+            if (!string.IsNullOrEmpty(campaign.CouponImage3) && !campaign.CouponImage3.Contains("guid_Coupon3DefaultImage") && !campaign.CouponImage3.Contains("http://manage.cash4ads.com/"))
+            {
+
+                string base64 = campaign.CouponImage3.Substring(campaign.CouponImage3.IndexOf(',') + 1);
+                base64 = base64.Trim('\0');
+                byte[] data = Convert.FromBase64String(base64);
+                string savePath = directoryPath + "\\guid_Coupon3DefaultImage.jpg";
+                File.WriteAllBytes(savePath, data);
+                int indexOf = savePath.LastIndexOf("SMD_Content", StringComparison.Ordinal);
+                savePath = savePath.Substring(indexOf, savePath.Length - indexOf);
+                savePaths[2] = savePath;
+                campaign.CouponImage3 = savePath;
+            }
+            if (!string.IsNullOrEmpty(campaign.CouponImage4) && !campaign.CouponImage4.Contains("guid_Voucher4DefaultImage") && !campaign.CouponImage4.Contains("http://manage.cash4ads.com/"))
+            {
+
+                string base64 = campaign.CouponImage4.Substring(campaign.CouponImage4.IndexOf(',') + 1);
+                base64 = base64.Trim('\0');
+                byte[] data = Convert.FromBase64String(base64);
+                string savePath = directoryPath + "\\guid_Voucher4DefaultImage.jpg";
+                File.WriteAllBytes(savePath, data);
+                int indexOf = savePath.LastIndexOf("SMD_Content", StringComparison.Ordinal);
+                savePath = savePath.Substring(indexOf, savePath.Length - indexOf);
+                savePaths[2] = savePath;
+                campaign.CouponImage4 = savePath;
+            }
             return savePaths;
         }
 
@@ -337,6 +376,19 @@ namespace SMD.Implementation.Services
                 {
                     campaignModel.BuyItImageUrl = paths[3];
                 }
+
+            }
+            if (!string.IsNullOrEmpty(campaignModel.couponImage2) && !campaignModel.couponImage2.Contains("http:"))
+            {
+                campaignModel.couponImage2 = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + campaignModel.couponImage2;
+            }
+            if (!string.IsNullOrEmpty(campaignModel.CouponImage3) && !campaignModel.CouponImage3.Contains("http:"))
+            {
+                campaignModel.CouponImage3 = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + campaignModel.CouponImage3;
+            }
+            if (!string.IsNullOrEmpty(campaignModel.CouponImage4) && !campaignModel.CouponImage4.Contains("http:"))
+            {
+                campaignModel.CouponImage4 = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + campaignModel.CouponImage4;
             }
             campaignModel.StartDateTime = new DateTime(2005, 1, 1);//campaignModel.StartDateTime.Value.Subtract(_adCampaignRepository.UserTimezoneOffSet);
             campaignModel.EndDateTime = new DateTime(2040, 1, 1);//campaignModel.EndDateTime.Value.Subtract(_adCampaignRepository.UserTimezoneOffSet);

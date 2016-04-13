@@ -311,12 +311,82 @@ else
                                         </div>
                                     </div>
                                     <div class="row">
+                                        <div class="form-group" style="margin-top:10px;">
+                                            <div class="col-lg-4">
+                                                <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Coupon Image 2</label>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <div class="fileUpload btn btn-primary">
+                                                    <span>Upload </span>
+                                                    <input type="file" class="upload" id="campaignType_image_file1" data-bind="files: { onLoaded: $root.couponImage2Callback, fileFilter: 'image.*'}" />
+                                                </div><br />
+                                                <div style="margin-top:5px;">
+                                                    <img style="height:80px;" data-bind="visible: couponImage2() == ''" src="/Content/Images/Company_Default.png" />
+                                                    <img style="height:80px;" data-bind="visible: couponImage2() != '' ,attr: { src: couponImage2 }" />
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group" style="margin-top:10px;">
+                                            <div class="col-lg-4">
+                                                <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Coupon Image 3</label>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <div class="fileUpload btn btn-primary">
+                                                    <span>Upload </span>
+                                                    <input type="file" class="upload" id="campaignType_image_file1" data-bind="files: { onLoaded: $root.CouponImage3Callback, fileFilter: 'image.*'}" />
+                                                </div><br />
+                                                <div style="margin-top:5px;">
+                                                    <img style="height:80px;" data-bind="visible: CouponImage3() == ''" src="/Content/Images/Company_Default.png" />
+                                                    <img style="height:80px;" data-bind="visible: CouponImage3() != '' ,attr: { src: CouponImage3 }" />
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group" style="margin-top:10px;">
+                                            <div class="col-lg-4">
+                                                <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Coupon Image 4</label>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <div class="fileUpload btn btn-primary">
+                                                    <span>Upload </span>
+                                                    <input type="file" class="upload" id="campaignType_image_file1" data-bind="files: { onLoaded: $root.CouponImage4Callback, fileFilter: 'image.*'}" />
+                                                </div><br />
+                                                <div style="margin-top:5px;">
+                                                    <img style="height:80px;" data-bind="visible: CouponImage4() == ''" src="/Content/Images/Company_Default.png" />
+                                                    <img style="height:80px;" data-bind="visible: CouponImage4() != '' ,attr: { src: CouponImage4 }" />
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="row">
                                         <div class="form-group">
                                             <div class="col-lg-4">
                                                 <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Purse Swap Value</label>
                                             </div>
                                             <div class="col-lg-8">
                                                 <input type="text" class="form-control" id="txtPurseValue" placeholder="Purse Swap Value" data-bind="value:CouponSwapValue">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-4">
+                                                <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Coupon Expiry Label</label>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <input type="text" class="form-control" id="txtPurseValue" placeholder="Coupon Expiry Label" data-bind="value:CouponExpiryLabel">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-4">
+                                                <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Coupon Smd Comission</label>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <input type="text" class="form-control" id="txtPurseValue" placeholder="Coupon Smd Comission" data-bind="value:couponSmdComission">
                                             </div>
                                         </div>
                                         <div class="form-group">

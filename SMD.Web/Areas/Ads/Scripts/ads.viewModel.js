@@ -820,7 +820,15 @@ define("ads/ads.viewModel",
                 campaignImageCallback = function (file, data) {
                     campaignModel().CampaignImagePath(data);
                 },
-
+                couponImage2Callback = function (file, data) {
+                    campaignModel().couponImage2(data);
+                },
+                CouponImage3Callback = function (file, data) {
+                    campaignModel().CouponImage3(data);
+                },
+                CouponImage4Callback = function (file, data) {
+                    campaignModel().CouponImage4(data);
+                },
                 onEditCampaign = function (item) {
                     isTerminateBtnVisible(false);
                     isNewCampaignVisible(false);
@@ -1463,6 +1471,9 @@ define("ads/ads.viewModel",
                     OnChangeCampaignType: OnChangeCampaignType,
                     campaignTypeImageCallback: campaignTypeImageCallback,
                     campaignImageCallback: campaignImageCallback,
+                    CouponImage4Callback: CouponImage4Callback,
+                    CouponImage3Callback: CouponImage3Callback,
+                    couponImage2Callback:couponImage2Callback,
                     correctAnswers: correctAnswers,
                     onEditCampaign: onEditCampaign,
                     canSubmitForApproval: canSubmitForApproval,

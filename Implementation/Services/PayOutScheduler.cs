@@ -294,7 +294,105 @@ namespace SMD.Implementation.Services
                 }
             }
         }
-        
+        public static bool PerformUserPayout(int companyId, int CouponId, int mode)
+        {
+            //if (mode == (int)PaymentMethod.Coupon)
+            // Initialize Service
+            PaypalService = UnityConfig.UnityContainer.Resolve<IPaypalService>();
+
+            // Using Base DB Context
+            using (var dbContext = new BaseDbContext())
+            {
+                // Get UnProcessed Credit Trasactions
+                var unProcessedTrasactions = dbContext.Transactions.
+                    Where(trans => trans.DebitAmount == null && trans.CreditAmount != null
+                && (trans.isProcessed == null || trans.isProcessed == false) ).ToList();
+
+                // Get Distinct AdCampaign to process transactions
+                // in a batch for each adcampaign
+                List<long?> adCampaigns =
+                        unProcessedTrasactions
+                        .Select(trn => trn.AdCampaignId).Distinct().ToList();
+
+                // Process transactions for each account
+                foreach (long? adCampaign in adCampaigns)
+                {
+                    // Get Distinct Accounts so that transactions 
+                    // for an account should be processed in a batch
+                    List<Account> accounts =
+                        unProcessedTrasactions
+                            .Where(trn => trn.AdCampaignId == adCampaign)
+                            .Select(trn => trn.Account).Distinct().Where(g=>g.CompanyId == companyId).ToList();
+
+                    double? creditAmount = 0;
+                    Company company = null;
+                    foreach (Account account in accounts)
+                    {
+                        try
+                        {
+                            // Batch of transaction for this account and adcampaign
+                            List<Transaction> transactions =
+                            unProcessedTrasactions
+                            .Where(trn => trn.AccountId == account.AccountId && trn.isProcessed != true).ToList();
+
+
+                            // Get User from which credit to debit 
+                            company = dbContext.Companies.Find(account.CompanyId);
+                            // skip if no transaction found
+                            if (transactions.Count == 0)
+                                continue;
+                            // User's Prefered Account
+                            var preferedAccount = company.PreferredPayoutAccount == 1
+                                ? company.PaypalCustomerId
+                                : company.GoogleWalletCustomerId;
+
+                            var smdUser = GetCash4AdsUser(dbContext);
+
+                            CheckAccounts(smdUser, preferedAccount, account);
+
+                            creditAmount = transactions.Sum(trn => trn.CreditAmount);
+                            // Check if Payout amount has reached a limit e.g. $20 then process it.
+                            var payoutLimit = ConfigurationManager.AppSettings["PayoutLimit"];
+                            if (payoutLimit != null && creditAmount < Convert.ToDouble(payoutLimit))
+                            {
+                                continue;
+                            }
+
+                            // PayPal Request Model 
+                            var requestModel = new MakePaypalPaymentRequest
+                            {
+                                Amount = (decimal)creditAmount,
+                                RecieverEmails = new List<string> { preferedAccount },
+                                SenderEmail = smdUser.Company.PaypalCustomerId
+                            };
+
+                            // Stripe + Invoice Work 
+                            PaypalService.MakeAdaptiveImplicitPayment(requestModel);
+
+                            // Update Transactions
+                            transactions.ForEach(tran => UpdateTransactions(tran, creditAmount, requestModel, dbContext));
+
+                            // Update Accounts
+                            UpdateAccounts(company, smdUser.Company, creditAmount.Value, adCampaign, dbContext);
+
+                            // Save Changes
+                            dbContext.SaveChanges();
+
+                            // Email To User 
+                            BackgroundEmailManagerService.SendPayOutRoutineEmail(dbContext, company.CompanyId);
+                        }
+                        catch (Exception exp)
+                        {
+
+                            var transaction = account.Transactions.FirstOrDefault();
+                            LogError(exp, company != null ? company.CompanyName : string.Empty,
+                                "Cash4Ads", transaction != null ? transaction.TxId : 0, creditAmount.Value, dbContext);
+                        }
+                    }
+                }
+            }
+            return true;
+        }
         #endregion
     }
 }
