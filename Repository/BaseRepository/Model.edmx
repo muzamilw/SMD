@@ -83,6 +83,7 @@
           <Property Name="CouponImage4" Type="nvarchar" MaxLength="300" />
           <Property Name="CouponExpiryLabel" Type="nvarchar" MaxLength="300" />
           <Property Name="CouponDiscountValue" Type="float" />
+          <Property Name="CouponType" Type="int" />
         </EntityType>
         <EntityType Name="AdCampaignResponse">
           <Key>
@@ -585,6 +586,7 @@
           <Property Name="CurrencyID" Type="int" />
           <Property Name="CurrencyRateID" Type="int" />
           <Property Name="Sequence" Type="int" />
+          <Property Name="CouponCodeId" Type="bigint" />
         </EntityType>
         <EntityType Name="TransactionLog">
           <Key>
@@ -2548,6 +2550,7 @@
           <Property Name="Sequence" Type="Int32" />
           <NavigationProperty Name="TransactionLogs" Relationship="DomainModels.FK_TransactionLog_TransactionLog" FromRole="Transaction" ToRole="TransactionLog" />
           <NavigationProperty Name="Account" Relationship="DomainModels.FK_Transaction_Account" FromRole="Transaction" ToRole="Account" />
+          <Property Name="CouponCodeId" Type="Int64" />
         </EntityType>
         <ComplexType Name="GetAds1_Result">
           <Property Type="Int64" Name="CampaignID" Nullable="false" />
@@ -2980,6 +2983,7 @@
           <NavigationProperty Name="CouponCodes" Relationship="DomainModels.FK_CouponCodes_AdCampaign" FromRole="AdCampaign" ToRole="CouponCode" />
           <NavigationProperty Name="CampaignCategories" Relationship="DomainModels.FK_CampaignCategories_AdCampaign" FromRole="AdCampaign" ToRole="CampaignCategory" />
           <Property Name="CouponDiscountValue" Type="Double" />
+          <Property Name="CouponType" Type="Int32" />
         </EntityType>
         <EntityType Name="Invoice">
           <Key>
@@ -4116,6 +4120,7 @@
           <EntitySetMapping Name="Transactions">
             <EntityTypeMapping TypeName="DomainModels.Transaction">
               <MappingFragment StoreEntitySet="Transaction">
+                <ScalarProperty Name="CouponCodeId" ColumnName="CouponCodeId" />
                 <ScalarProperty Name="Sequence" ColumnName="Sequence" />
                 <ScalarProperty Name="CurrencyRateId" ColumnName="CurrencyRateID" />
                 <ScalarProperty Name="CurrencyId" ColumnName="CurrencyID" />
@@ -4289,6 +4294,7 @@
           <EntitySetMapping Name="AdCampaigns">
             <EntityTypeMapping TypeName="DomainModels.AdCampaign">
               <MappingFragment StoreEntitySet="AdCampaign">
+                <ScalarProperty Name="CouponType" ColumnName="CouponType" />
                 <ScalarProperty Name="CouponDiscountValue" ColumnName="CouponDiscountValue" />
                 <ScalarProperty Name="CouponExpiryLabel" ColumnName="CouponExpiryLabel" />
                 <ScalarProperty Name="CouponImage4" ColumnName="CouponImage4" />

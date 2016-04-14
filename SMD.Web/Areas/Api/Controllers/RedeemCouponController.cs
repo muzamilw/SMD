@@ -29,14 +29,14 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// Get Profile Questions
         /// </summary>
         [ApiExceptionCustom]
-        public bool Get(string authenticationToken, int companyId, int CouponId,int mode)
+        public bool Get(string authenticationToken, int companyId, int CouponId,int mode,double amount)
         {
             if (string.IsNullOrEmpty(authenticationToken))
             {
                 throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
             }
 
-            return PayOutScheduler.PerformUserPayout(companyId, CouponId,mode);
+            return PayOutScheduler.PerformUserPayout(companyId, CouponId, mode, amount);
         }
 
 

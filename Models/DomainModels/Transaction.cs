@@ -20,7 +20,7 @@ namespace SMD.Models.DomainModels
         public int? CurrencyId { get; set; }
         public int? CurrencyRateId { get; set; }
         public int? Sequence { get; set; }
-
+        public long? CouponCodeId { get; set; }
         public virtual Account Account { get; set; }
         public virtual ICollection<TransactionLog> TransactionLogs { get; set; }
     }

@@ -268,11 +268,17 @@ namespace SMD.Repository.Repositories
             //return query.ToList<Coupons>();
         }
 
-        public List<Coupons> GetAllCoupons()
+        public List<Coupons> GetAllCoupons(int categoryId, int type , int size, string keywords, int pageNo)
         {
+            CouponCategory cc = new CouponCategory();
+            if(categoryId != 0)
+                cc = db.CouponCategory.Where(g=>g.CategoryId == categoryId).SingleOrDefault();
+
             var query = from ad in db.AdCampaigns
                         where ad.Type == 5 && (ad.CouponTakenCount == null || ad.CouponTakenCount < ad.CouponQuantity)
-                        && (ad.Archived == null || ad.Archived == false) && ad.Approved == true
+                        && (ad.Archived == null || ad.Archived == false) && ad.Approved == true && (ad.CouponType == type || type == 0)
+                        && (ad.DisplayTitle.Contains(keywords) || keywords == "\"\"")
+                        
                         select new Coupons
                         {
                             CouponId = ad.CampaignId,
@@ -287,7 +293,7 @@ namespace SMD.Repository.Repositories
                             CouponImage = System.Web.HttpContext.Current.Request.Url.Scheme + "://" + System.Web.HttpContext.Current.Request.Url.Authority + "/" + ad.ImagePath
                         };
 
-            return query.ToList<Coupons>();
+            return query.ToList<Coupons>().Skip(pageNo - 1 * size).Take(size).ToList();
         }
     }
 }
