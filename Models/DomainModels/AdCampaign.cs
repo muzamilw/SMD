@@ -73,7 +73,7 @@ namespace SMD.Models.DomainModels
         public string CouponImage4 { get; set; }
         public string CouponExpiryLabel { get; set; }
         public double? CouponDiscountValue { get; set; }
-
+        public Nullable<int> CouponType { get; set; }
         public virtual Company Company { get; set; }
         public virtual Language Language { get; set; }
         public virtual ICollection<AdCampaignResponse> AdCampaignResponses { get; set; }
