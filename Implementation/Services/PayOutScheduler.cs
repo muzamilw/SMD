@@ -81,7 +81,7 @@ namespace SMD.Implementation.Services
               updateUsersVirtualAccount(smdCompany, smdValue, dbContext, 2);
               // update smd users  virutal accont credit 
               updateUsersVirtualAccount(coupon.Company, VoucherSellerValue, dbContext, 2);
-              return "";
+              return couponCode.Code;
           }
         // used by new payout scheduler 
         private static void UpdateAccountsNew(Company company, Company smdCompany, double amount,
