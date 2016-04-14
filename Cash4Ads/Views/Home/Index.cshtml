@@ -1,6 +1,28 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
+    
+     var vtype = Request.QueryString["type"];
+
+    if (string.IsNullOrEmpty(vtype))
+    { 
+        vtype = "1";
+    }
+    
+    var heading ="";
+    
+    if ( vtype == "1")
+    {
+        heading = "Swap your in App Cash for <b>Vouchers</b>";
+    }
+    else if ( vtype == "2")
+    {
+        heading = "Purchase any 2-4-1 Offer for <b>£1</b> using your cash balance";
+    }
 }
+
+
+
+
 
 
 @section COLOR
@@ -8,6 +30,9 @@
 
    <!-- COLOR STYLE CSS -->
 <link rel="stylesheet" href="~/content/green.css">
+
+
+
 }
 
 @Html.Partial("~/Views/Shared/voucherbar.cshtml")
@@ -19,18 +44,21 @@
 
 
             <div class="col-sm-12">
-                <h1 class="main_title text-white" style="margin-bottom:0px;">Swap your in App Cash for <b>Vouchers</b></h1>
+                <h1 class="main_title text-white" style="margin-bottom:0px;">
+
+                   @Html.Raw(heading)
+                </h1>
             </div>
 
-            <div class="row inner-top-xs">
+            <div class="row inner-top-xs" id="couponsContains">
 
-                <div class=" col-sm-3" >
+                <div class="col-lg-4  col-md-4 col-sm-12 col-xs-12" >
 
-                    <div class="input-group col-md-12" style="padding-left:0px;padding-right:0px;">
+                    <div class="input-group col-md-12 formcontrol" style="padding-left:0px;padding-right:0px;">
 
 
 
-                        <input type="text" class="form-control input-lg" placeholder="Search" style="font-size:22px;" />
+                        <input type="text" id="txtKeyword" class="form-control input-lg" placeholder="Search" style="font-size:22px;" />
                         <span class="input-group-btn">
                             <button class="btn btn-default btn-lg" type="button">
                                 <i class="glyphicon glyphicon-search"></i>
@@ -38,11 +66,11 @@
                         </span>
                     </div>
 
-                    <div class="input-group col-md-12 " style="padding-top:10px;padding-left:0px;">
+                    <div class="input-group col-md-12 formcontrol" style="padding-top:10px;padding-left:0px;">
                         <label class="clabel">
                             <select class="cselect" id="selcat">
-                                <option selected>All Categories</option>
-                              
+                                <option selected value="0">All Categories</option>
+
                             </select>
                         </label>
 
@@ -51,7 +79,7 @@
 
 
 
-                    <div class="standard-container">
+                    <div class="standard-container extraMargingStandardContainer" style="margin-top:17px;padding-left:20px;padding-right:20px">
                         <div id="bonus-deals-side">
 
 
@@ -60,10 +88,10 @@
 
                 </div>
 
-                <div class="col-sm-9 content-main-deals content">
+                <div class="col-lg-8 col-md-8 col-sm-6 hidden-xs hidden-sm content-main-deals content">
 
 
-                    <div class="standard-container">
+                    <div class="standard-container" style="padding:0px;">
 
                         <div class="unit ctu  js-main-deal selector-620648" data-om=";620648;" data-dealid="620648">
                             <h1 class="mvtest_header_v2 cld" id="couponMainHeading"></h1>
@@ -200,6 +228,13 @@
                 </div>
 
             </div>
+
+
+            <div class="row inner-top-xs " id="couponsNotFound" style="display:none">
+                <div class=" col-xs-12">
+                    <h3 class="text-white text-center">No Coupons found based on your search and selection criteria. Please try again by changing search and filtering criteria.</h3>
+                    </div>
+                </div>
             </div>
         </div>
 </section>
@@ -339,34 +374,91 @@
 
 <!-- end vodeo -->
 <script src="~/Scripts/jquery-2.1.4.min.js"></script>
+<script src="~/Scripts/jquery.loader.min.js"></script>
 
 <script>
+
+    //$.LoadingOverlaySetup({
+    //    color           : "rgba(0, 0, 0, 0.4)",
+    //    image           : "images/ajax-loader.gif",
+    //    maxSize         : "80px",
+    //    minSize         : "20px",
+    //    resizeInterval  : 0,
+    //    size            : "50%"
+    //});
+
+    $(document).ajaxStart(function(){
+           
+        $.LoadingOverlay("show", {
+            image       : "",
+            fontawesome : "fa fa-spinner fa-spin"
+        });
+      
+    });
+
+    $(document).ajaxStop(function(){
+        $.LoadingOverlay("hide");
+    });
+
+
+   
+
     var Coupons = [];
     $(document).ready(function () {
+        $.LoadingOverlay("");
+
+       
+
         GetCategories();
+        
+
+       
+    });
+
+
+    function getCoupons()
+    {
+        
+        var categoryId = $("#selcat option:selected").val();
+        var keywords = $("#txtKeyword").val();
+        var vtype = @vtype;
         var couponFId = 0;
         $.ajax({
             dataType: "json",
-            url: 'http://manage.cash4ads.com/Api_Mobile/GetAllCoupons/8667e1a9-60af-4d99-8013-a241b81fa550',
+            url: 'http://manage.cash4ads.com/Api_Mobile/GetAllCoupons/8667e1a9-60af-4d99-8013-a241b81fa550?CategoryId=' + categoryId + '&Type='+vtype+'&keywords="'+keywords+'"&PageNo=1&size=30',
             cache: false,
             success: function (response) {
-               
 
-                Coupons = response;
-                if (couponFId == 0) {
-                    couponFId = response[0].CouponId;
+                if ( response.length > 0)
+                {
+                    Coupons = response;
+                    if (couponFId == 0) {
+                        couponFId = response[0].CouponId;
+                    }
+                    var htmlToBindAllVoucher = [];
+                    $(response).each(function (i, val) {
+
+                        var discountedValPer = 100 - parseInt((parseFloat(val.CouponDiscountedValue) / parseFloat(val.CouponActualValue)) * 100);
+                        $("#bonus-deals-side").append(' <div class="ndod-view-mini ndod-view-mini-nodesc"><div class="ndod-deal-header"><h2>' + val.CouponTitle + '</h2>               </div><div class="ndod-deal-content"><a class="" href="#"><img class="ndod-deal-image  js-show" data-original="' + val.CouponImage + '" src="' + val.CouponImage + '" alt="" /></a><div class="ndod-redeem-now"></div><div class="ndod-business-logo-wrapper"><div class="ndod-business-logo"><img class="" data-original="http://manage.cash4ads.com/images/vLogo.png" src="http://manage.cash4ads.com/images/vLogo.png" width="70" height="28" /> </div><div class="btm-header-bg-business-logo"></div></div><div class="ndod-discount"><div class="ndod-multiprice" style="padding-top: 22.0px ; "><span class="innerColour">NOW</span></div><div class="ndod-price" style="font-size: 36px; margin: 2.0px 0 -1.0px;"><span class="inner innerColour"><span class="ndod-currency">£</span><span class="ndod-amount">' + val.CouponDiscountedValue + '</span></span></div><del class="ndod-original-price"><span class="ndod-currency">£</span><span class="ndod-amount">' + val.CouponActualValue + '</span></del></div></div><div class="ndod-deal-footer-wrapper">  <div class="ndod-deal-footer cld"> <p class="ndod-bought bonus-bought"><span class="ndod-label innerColour">Bought</span><span class="ndod-amount">' + val.CouponTakenValue + '</span>      </p><p class="ndod-savings"><span class="ndod-label innerColour">Save <span>up to </span></span><span class="ndod-abount">' + discountedValPer + '<span class="ndod-percent-sign">%</span></span>            </p><a href="#" onclick="LoadSelectedVoucher(' + val.CouponId + ')" class="ndod-button-small waViewButton">    <span class="outer"><span class="inner">VIEW!</span></span>     </a>        </div>         <div class="ndod-deal-footer-btmbg"></div>    </div>    </div></div>');
+                    });
+                    LoadSelectedVoucher(couponFId);
+
                 }
-                var htmlToBindAllVoucher = [];
-                $(response).each(function (i, val) {
-                   
-                    var discountedValPer = 100 - parseInt((parseFloat(val.CouponDiscountedValue) / parseFloat(val.CouponActualValue)) * 100);
-                    $("#bonus-deals-side").append(' <div class="ndod-view-mini ndod-view-mini-nodesc"><div class="ndod-deal-header"><h2>' + val.CouponTitle + '</h2>               </div><div class="ndod-deal-content"><a class="" href="#"><img class="ndod-deal-image  js-show" data-original="' + val.CouponImage + '" src="' + val.CouponImage + '" alt="" /></a><div class="ndod-redeem-now"></div><div class="ndod-business-logo-wrapper"><div class="ndod-business-logo"><img class="" data-original="http://manage.cash4ads.com/images/vLogo.png" src="http://manage.cash4ads.com/images/vLogo.png" width="70" height="28" /> </div><div class="btm-header-bg-business-logo"></div></div><div class="ndod-discount"><div class="ndod-multiprice" style="padding-top: 22.0px ; "><span class="innerColour">NOW</span></div><div class="ndod-price" style="font-size: 36px; margin: 2.0px 0 -1.0px;"><span class="inner innerColour"><span class="ndod-currency">£</span><span class="ndod-amount">' + val.CouponDiscountedValue + '</span></span></div><del class="ndod-original-price"><span class="ndod-currency">£</span><span class="ndod-amount">' + val.CouponActualValue + '</span></del></div></div><div class="ndod-deal-footer-wrapper">  <div class="ndod-deal-footer cld"> <p class="ndod-bought bonus-bought"><span class="ndod-label innerColour">Bought</span><span class="ndod-amount">' + val.CouponTakenValue + '</span>      </p><p class="ndod-savings"><span class="ndod-label innerColour">Save <span>up to </span></span><span class="ndod-abount">' + discountedValPer + '<span class="ndod-percent-sign">%</span></span>            </p><a href="#" onclick="LoadSelectedVoucher(' + val.CouponId + ')" class="ndod-button-small waViewButton">    <span class="outer"><span class="inner">VIEW!</span></span>     </a>        </div>         <div class="ndod-deal-footer-btmbg"></div>    </div>    </div></div>');
-                });
-                LoadSelectedVoucher(couponFId);
+                else
+                {
+                    $('#couponsNotFound').show();
+                    $('#couponsContains').hide();
+                }
+
+            },
+            error : function()
+            {
+                
+                $.LoadingOverlay("hide");
             }
         });
-       
-    });
+
+    }
 
     function GetCategories()
     {
@@ -385,10 +477,17 @@
                     selcat.append('<option value="' + val.CagtegoryId + '">' + val.Name + '</option>');
                     //$("#bonus-deals-side").append(' <div class="ndod-view-mini ndod-view-mini-nodesc"><div class="ndod-deal-header"><h2>' + val.CouponTitle + '</h2>               </div><div class="ndod-deal-content"><a class="" href="#"><img class="ndod-deal-image  js-show" data-original="' + val.CouponImage + '" src="' + val.CouponImage + '" alt="" /></a><div class="ndod-redeem-now"></div><div class="ndod-business-logo-wrapper"><div class="ndod-business-logo"><img class="" data-original="http://manage.cash4ads.com/images/vLogo.png" src="http://manage.cash4ads.com/images/vLogo.png" width="70" height="28" /> </div><div class="btm-header-bg-business-logo"></div></div><div class="ndod-discount"><div class="ndod-multiprice" style="padding-top: 22.0px ; "><span class="innerColour">NOW</span></div><div class="ndod-price" style="font-size: 36px; margin: 2.0px 0 -1.0px;"><span class="inner innerColour"><span class="ndod-currency">£</span><span class="ndod-amount">' + val.CouponDiscountedValue + '</span></span></div><del class="ndod-original-price"><span class="ndod-currency">£</span><span class="ndod-amount">' + val.CouponActualValue + '</span></del></div></div><div class="ndod-deal-footer-wrapper">  <div class="ndod-deal-footer cld"> <p class="ndod-bought bonus-bought"><span class="ndod-label innerColour">Bought</span><span class="ndod-amount">' + val.CouponTakenValue + '</span>      </p><p class="ndod-savings"><span class="ndod-label innerColour">Save <span>up to </span></span><span class="ndod-abount">' + discountedValPer + '<span class="ndod-percent-sign">%</span></span>            </p><a href="#" onclick="LoadSelectedVoucher(' + val.CouponId + ')" class="ndod-button-small waViewButton">    <span class="outer"><span class="inner">VIEW!</span></span>     </a>        </div>         <div class="ndod-deal-footer-btmbg"></div>    </div>    </div></div>');
                 });
+
+                getCoupons();
                
             }
         });
     }
+
+
+    $('#selcat').on('change', function() {
+        getCoupons();
+    });
   
     function LoadSelectedVoucher(CouponId) {
       

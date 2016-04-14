@@ -42,5 +42,10 @@ namespace Cash4Ads.Controllers
 
             return View();
         }
+
+        public ActionResult cashout()
+        {
+            return View();
+        }
     }
 }
