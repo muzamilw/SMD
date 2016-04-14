@@ -292,7 +292,7 @@ namespace SMD.Repository.Repositories
                             CouponDiscountedValue = ad.CouponDiscountValue ?? 0,
                             CouponImage = System.Web.HttpContext.Current.Request.Url.Scheme + "://" + System.Web.HttpContext.Current.Request.Url.Authority + "/" + ad.ImagePath
                         };
-
+            
             return query.ToList<Coupons>().Skip(pageNo - 1 * size).Take(size).ToList();
         }
     }

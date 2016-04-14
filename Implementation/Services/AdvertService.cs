@@ -311,7 +311,7 @@ namespace SMD.Implementation.Services
             campaignModel.EndDateTime = new DateTime(2040, 1, 1);//campaignModel.EndDateTime.Value.Subtract(_adCampaignRepository.UserTimezoneOffSet);
            // campaignModel.ClickRate = 0.20;
             _adCampaignRepository.Add(campaignModel);
-            _adCampaignRepository.SaveChanges();
+            
 
             string[] paths = SaveImages(campaignModel);
             if (paths != null && paths.Count() > 0)
@@ -334,7 +334,7 @@ namespace SMD.Implementation.Services
                 }
                 _adCampaignRepository.SaveChanges();
             }
-
+            _adCampaignRepository.SaveChanges();
             if (campaignModel.CouponCategories != null && campaignModel.CouponCategories.Count() > 0)
             {
                 foreach (CouponCategory item in campaignModel.CouponCategories)
