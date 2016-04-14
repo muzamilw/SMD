@@ -585,6 +585,7 @@
           <Property Name="CurrencyID" Type="int" />
           <Property Name="CurrencyRateID" Type="int" />
           <Property Name="Sequence" Type="int" />
+          <Property Name="CouponCodeId" Type="bigint" />
         </EntityType>
         <EntityType Name="TransactionLog">
           <Key>
@@ -2548,6 +2549,7 @@
           <Property Name="Sequence" Type="Int32" />
           <NavigationProperty Name="TransactionLogs" Relationship="DomainModels.FK_TransactionLog_TransactionLog" FromRole="Transaction" ToRole="TransactionLog" />
           <NavigationProperty Name="Account" Relationship="DomainModels.FK_Transaction_Account" FromRole="Transaction" ToRole="Account" />
+          <Property Name="CouponCodeId" Type="Int64" />
         </EntityType>
         <ComplexType Name="GetAds1_Result">
           <Property Type="Int64" Name="CampaignID" Nullable="false" />
@@ -4116,6 +4118,7 @@
           <EntitySetMapping Name="Transactions">
             <EntityTypeMapping TypeName="DomainModels.Transaction">
               <MappingFragment StoreEntitySet="Transaction">
+                <ScalarProperty Name="CouponCodeId" ColumnName="CouponCodeId" />
                 <ScalarProperty Name="Sequence" ColumnName="Sequence" />
                 <ScalarProperty Name="CurrencyRateId" ColumnName="CurrencyRateID" />
                 <ScalarProperty Name="CurrencyId" ColumnName="CurrencyID" />

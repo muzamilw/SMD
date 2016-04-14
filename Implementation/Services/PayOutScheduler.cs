@@ -33,13 +33,172 @@ namespace SMD.Implementation.Services
         private static void UpdateAccounts(Company company, Company smdCompany, double amount, 
             long? adCampaignId, BaseDbContext dbContext)
         {
-            // Update users virtual account and add to paypal account
+            // Update users  add to paypal account
             UpdateUsersPaypalAccount(company, amount, adCampaignId, dbContext);
 
             // Update Cash4ads accounts
             UpdateUsersPaypalAccount(smdCompany, amount, adCampaignId, dbContext, false);
-        }
 
+        } //UpdateCouponAccounts
+          private static void UpdateAccounts(Company company, Company smdCompany, double amount,
+           BaseDbContext dbContext)
+        {
+            // Update users virtual account and add to paypal account
+            UpdateUsersPaypalAccountNew(company, amount,  dbContext);
+
+            // Update Cash4ads accounts
+            UpdateUsersPaypalAccountNew(smdCompany, amount, dbContext, false);
+
+            // update users  virutal accont debit 
+            updateUsersVirtualAccount(company, amount, dbContext,1, false);
+            // update smd users  virutal accont debit 
+            updateUsersVirtualAccount(smdCompany, amount, dbContext,1);
+
+        }
+          private static string UpdateCouponAccounts(Company company, Company smdCompany, long couponId,
+           BaseDbContext dbContext)
+          {
+              // if coupon 
+              // get money from user virtual account 
+              // add it to smd and users virtual account 
+              // send user voucher email 
+              var coupon = dbContext.AdCampaigns.Where(g => g.CampaignId == couponId).SingleOrDefault();
+              if (coupon == null)
+                  return "";
+              double totalAmount = Convert.ToDouble( coupon.CouponSwapValue);
+              double smdValue = totalAmount * (Convert.ToDouble(coupon.couponSmdComission) / 100);
+              double VoucherSellerValue = totalAmount - smdValue;
+
+              var couponCode = dbContext.CouponCode.Where(g => g.CampaignId == couponId && g.IsTaken != true).SingleOrDefault();
+              couponCode.IsTaken = true;
+              
+              
+          
+
+              // update users  virutal accont debit 
+              updateUsersVirtualAccount(company, totalAmount, dbContext,2, false);
+              // update smd users  virutal accont credit 
+              updateUsersVirtualAccount(smdCompany, smdValue, dbContext, 2);
+              // update smd users  virutal accont credit 
+              updateUsersVirtualAccount(coupon.Company, VoucherSellerValue, dbContext, 2);
+              return "";
+          }
+        // used by new payout scheduler 
+        private static void UpdateAccountsNew(Company company, Company smdCompany, double amount,
+           BaseDbContext dbContext)
+        {
+            // Update users virtual account and add to paypal account
+            UpdateUsersPaypalAccountNew(company, amount,  dbContext);
+
+            // Update Cash4ads accounts
+            UpdateUsersPaypalAccountNew(smdCompany, amount, dbContext, false);
+
+            // update users  virutal accont debit 
+            updateUsersVirtualAccount(company, amount, dbContext,1, false);
+            // update smd users  virutal accont debit 
+            updateUsersVirtualAccount(smdCompany, amount, dbContext, 1);
+
+        }
+        private static void UpdateUsersPaypalAccountNew(Company company, double amount,  BaseDbContext dbContext, bool isCredit = true)
+        {
+            Account usersPaypalAccount = company.Accounts.FirstOrDefault(acc => acc.AccountType == (int)AccountType.Paypal);
+            Account userVirtualAccount = company.Accounts.FirstOrDefault(acc => acc.AccountType == (int)AccountType.VirtualAccount);
+            if (usersPaypalAccount == null)
+            {
+                throw new Exception(string.Format(CultureInfo.InvariantCulture,
+                    LanguageResources.CollectionService_AccountNotRegistered,
+                    company.CompanyId, "Paypal"));
+            }
+
+            if (!usersPaypalAccount.AccountBalance.HasValue)
+            {
+                usersPaypalAccount.AccountBalance = 0;
+            }
+
+            var batchTransaction = new Transaction
+            {
+                AccountId = usersPaypalAccount.AccountId,
+                Type = 1,
+               // AdCampaignId = adCampaignId,
+                isProcessed = true,
+                TransactionDate = DateTime.Now,
+                TransactionLogs = new List<TransactionLog>
+                                                         {
+                                                             new TransactionLog
+                                                             {
+                                                                 IsCompleted = true, 
+                                                                 Amount = amount, 
+                                                                 FromUser = "Cash4Ads",
+                                                                 LogDate = DateTime.Now,
+                                                                 ToUser = company.CompanyName,
+                                                                 Type = isCredit ? 1 : 2
+                                                             }
+                                                         }
+            };
+
+            if (isCredit)
+            {
+                batchTransaction.CreditAmount = amount;
+                usersPaypalAccount.AccountBalance += amount;
+                userVirtualAccount.AccountBalance -= amount;
+
+            }
+            else
+            {
+                batchTransaction.DebitAmount = amount;
+                usersPaypalAccount.AccountBalance -= amount;
+            }
+
+            usersPaypalAccount.Transactions.Add(batchTransaction);
+            dbContext.Transactions.Add(batchTransaction);
+        }
+        private static void updateUsersVirtualAccount(Company company, double amount, BaseDbContext dbContext,int type, bool isCredit = true)
+        {
+            Account userVirtualAccount = company.Accounts.FirstOrDefault(acc => acc.AccountType == (int)AccountType.VirtualAccount);
+            if (userVirtualAccount == null)
+            {
+                throw new Exception(string.Format(CultureInfo.InvariantCulture,
+                    LanguageResources.CollectionService_AccountNotRegistered,
+                    company.CompanyId, "Virtual"));
+            }
+            var batchTransaction = new Transaction
+            {
+                AccountId = userVirtualAccount.AccountId,
+                Type = 1,
+                // AdCampaignId = adCampaignId,
+                isProcessed = true,
+                TransactionDate = DateTime.Now,
+                TransactionLogs = new List<TransactionLog>
+                                                         {
+                                                             new TransactionLog
+                                                             {
+                                                                 IsCompleted = true, 
+                                                                 Amount = amount, 
+                                                                 FromUser = "Cash4Ads",
+                                                                 LogDate = DateTime.Now,
+                                                                 ToUser = company.CompanyName,
+                                                                 Type = isCredit ? 1 : 2
+                                                             }
+                                                         }
+            };
+            if (isCredit)
+            {
+                batchTransaction.CreditAmount = amount;
+                //usersPaypalAccount.AccountBalance += amount;
+                //userVirtualAccount.AccountBalance -= amount;
+                if (type == 2)
+                    userVirtualAccount.AccountBalance += amount;
+            }
+            else
+            {
+                batchTransaction.DebitAmount = amount;
+                //usersPaypalAccount.AccountBalance -= amount;
+                if (type == 2)
+                    userVirtualAccount.AccountBalance -= amount;
+            }
+            userVirtualAccount.Transactions.Add(batchTransaction);
+            dbContext.Transactions.Add(batchTransaction);
+        }
         /// <summary>
         /// Updates Users Paypal Account
         /// </summary>
@@ -294,8 +453,74 @@ namespace SMD.Implementation.Services
                 }
             }
         }
-        public static bool PerformUserPayout(int companyId, int CouponId, int mode)
+        public static bool PerformUserPayout(int companyId, int CouponId, int mode,double amount)
         {
+            PaypalService = UnityConfig.UnityContainer.Resolve<IPaypalService>();
+            using (var dbContext = new BaseDbContext())
+            {
+                Company company = null;
+                // Get User from which credit to debit 
+                company = dbContext.Companies.Find(companyId);
+                if (company == null)
+                    return false;
+                var smdUser = GetCash4AdsUser(dbContext);
+                if (smdUser == null || smdUser.Company == null)
+                    return false;
+                // User's Prefered Account
+                var preferedAccount = company.PreferredPayoutAccount == 1
+                    ? company.PaypalCustomerId
+                    : company.GoogleWalletCustomerId;
+
+                List<Account> accounts = dbContext.Accounts.Where(g => g.CompanyId == companyId).ToList();
+                if (mode == (int)PaymentMethod.Coupon)
+                {
+                    var userVirtualAccount = accounts.Where(g => g.AccountType == (int)AccountType.VirtualAccount).FirstOrDefault();
+                    if (amount < userVirtualAccount.AccountBalance)
+                    {
+                       
+                        // Update Accounts
+                        string codeCode = UpdateCouponAccounts(company, smdUser.Company,CouponId , dbContext);
+
+                        // Save Changes
+                        dbContext.SaveChanges();
+
+                        // Email To User coupon code 
+                       // BackgroundEmailManagerService.SendPayOutRoutineEmail(dbContext, company.CompanyId);
+                    }
+                    else
+                    {
+                        return false;// insufficent balance 
+                    }
+                }
+                else
+                {
+                    var userVirtualAccount = accounts.Where(g => g.AccountType == (int)AccountType.VirtualAccount).FirstOrDefault();
+                    if (amount < userVirtualAccount.AccountBalance)
+                    {
+                        // PayPal Request Model 
+                        var requestModel = new MakePaypalPaymentRequest
+                        {
+                            Amount = (decimal)amount,
+                            RecieverEmails = new List<string> { preferedAccount },
+                            SenderEmail = smdUser.Company.PaypalCustomerId
+                        };
+
+                        // Stripe + Invoice Work 
+                        PaypalService.MakeAdaptiveImplicitPayment(requestModel);
+                        // Update Accounts
+                        UpdateAccountsNew(company, smdUser.Company, amount, dbContext);
+
+                        // Save Changes
+                        dbContext.SaveChanges();
+
+                        // Email To User 
+                        BackgroundEmailManagerService.SendPayOutRoutineEmail(dbContext, company.CompanyId);
+                    } else
+                    {
+                        return false;// insufficent balance 
+                    }
+                }
+            }
             //if (mode == (int)PaymentMethod.Coupon)
             // Initialize Service
 
@@ -308,99 +533,8 @@ namespace SMD.Implementation.Services
                 // add money to user payapl account 
                 // add a debit to smd paypal account 
                 // add a debit transaction to user virtual account 
-            PaypalService = UnityConfig.UnityContainer.Resolve<IPaypalService>();
+           
 
-            // Using Base DB Context
-            using (var dbContext = new BaseDbContext())
-            {
-                // Get UnProcessed Credit Trasactions
-                var unProcessedTrasactions = dbContext.Transactions.
-                    Where(trans => trans.DebitAmount == null && trans.CreditAmount != null
-                && (trans.isProcessed == null || trans.isProcessed == false) ).ToList();
-
-                // Get Distinct AdCampaign to process transactions
-                // in a batch for each adcampaign
-                List<long?> adCampaigns =
-                        unProcessedTrasactions
-                        .Select(trn => trn.AdCampaignId).Distinct().ToList();
-
-                // Process transactions for each account
-                foreach (long? adCampaign in adCampaigns)
-                {
-                    // Get Distinct Accounts so that transactions 
-                    // for an account should be processed in a batch
-                    List<Account> accounts =
-                        unProcessedTrasactions
-                            .Where(trn => trn.AdCampaignId == adCampaign)
-                            .Select(trn => trn.Account).Distinct().Where(g=>g.CompanyId == companyId).ToList();
-
-                    double? creditAmount = 0;
-                    Company company = null;
-                    foreach (Account account in accounts)
-                    {
-                        try
-                        {
-                            // Batch of transaction for this account and adcampaign
-                            List<Transaction> transactions =
-                            unProcessedTrasactions
-                            .Where(trn => trn.AccountId == account.AccountId && trn.isProcessed != true).ToList();
-
-
-                            // Get User from which credit to debit 
-                            company = dbContext.Companies.Find(account.CompanyId);
-                            // skip if no transaction found
-                            if (transactions.Count == 0)
-                                continue;
-                            // User's Prefered Account
-                            var preferedAccount = company.PreferredPayoutAccount == 1
-                                ? company.PaypalCustomerId
-                                : company.GoogleWalletCustomerId;
-
-                            var smdUser = GetCash4AdsUser(dbContext);
-
-                            CheckAccounts(smdUser, preferedAccount, account);
-
-                            creditAmount = transactions.Sum(trn => trn.CreditAmount);
-                            // Check if Payout amount has reached a limit e.g. $20 then process it.
-                            var payoutLimit = ConfigurationManager.AppSettings["PayoutLimit"];
-                            if (payoutLimit != null && creditAmount < Convert.ToDouble(payoutLimit))
-                            {
-                                continue;
-                            }
-
-                            // PayPal Request Model 
-                            var requestModel = new MakePaypalPaymentRequest
-                            {
-                                Amount = (decimal)creditAmount,
-                                RecieverEmails = new List<string> { preferedAccount },
-                                SenderEmail = smdUser.Company.PaypalCustomerId
-                            };
-
-                            // Stripe + Invoice Work 
-                            PaypalService.MakeAdaptiveImplicitPayment(requestModel);
-
-                            // Update Transactions
-                            transactions.ForEach(tran => UpdateTransactions(tran, creditAmount, requestModel, dbContext));
-
-                            // Update Accounts
-                            UpdateAccounts(company, smdUser.Company, creditAmount.Value, adCampaign, dbContext);
-
-                            // Save Changes
-                            dbContext.SaveChanges();
-
-                            // Email To User 
-                            BackgroundEmailManagerService.SendPayOutRoutineEmail(dbContext, company.CompanyId);
-                        }
-                        catch (Exception exp)
-                        {
-
-                            var transaction = account.Transactions.FirstOrDefault();
-                            LogError(exp, company != null ? company.CompanyName : string.Empty,
-                                "Cash4Ads", transaction != null ? transaction.TxId : 0, creditAmount.Value, dbContext);
-                        }
-                    }
-                }
-            }
             return true;
         }
         #endregion
