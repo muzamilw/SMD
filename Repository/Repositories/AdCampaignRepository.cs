@@ -246,9 +246,18 @@ namespace SMD.Repository.Repositories
             return query.FirstOrDefault();
         }
 
-        public List<GetCoupons_Result> GetCoupons(string UserId)
+        public List<GetCoupons_Result> GetCoupons(string UserId, int CategoryId, string Keyword, int Type, int PageNo, int PageSize)
         {
-            return db.GetCoupons(UserId).ToList();
+            int? catId = null;
+            if (CategoryId > 0) {
+                catId = CategoryId;
+            }
+            int? typeId = null;
+            if (Type > 0)
+            {
+                typeId = Type;
+            }
+            return db.GetCoupons(UserId, typeId, catId, Keyword, PageNo, PageSize).ToList();
 
             //var query = from ad in db.AdCampaigns
             //            where ad.Type == 5 && (ad.CouponTakenCount == null || ad.CouponTakenCount < ad.CouponQuantity)

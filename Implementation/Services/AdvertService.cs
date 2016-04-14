@@ -896,9 +896,9 @@ namespace SMD.Implementation.Services
 
 
         }
-        public List<GetCoupons_Result> GetCoupons(string UserId)
+        public List<GetCoupons_Result> GetCoupons(string UserId, int CategoryId, string Keyword, int Type, int PageNo, int PageSize)
         {
-            return _adCampaignRepository.GetCoupons(UserId);
+            return _adCampaignRepository.GetCoupons(UserId, CategoryId, Keyword, Type, PageNo, PageSize);
         }
 
         public List<Coupons> GetAllCoupons()

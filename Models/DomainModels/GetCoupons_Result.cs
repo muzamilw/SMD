@@ -16,5 +16,6 @@ namespace SMD.Models.DomainModels
         public string CouponImage { get; set; }
         public string CouponSwapValue { get; set; }
         public string CouponActualValue { get; set; }
+        public Nullable<int> CouponType { get; set; }
     }
 }
