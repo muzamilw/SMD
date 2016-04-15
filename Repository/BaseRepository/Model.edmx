@@ -84,6 +84,7 @@
           <Property Name="CouponExpiryLabel" Type="nvarchar" MaxLength="300" />
           <Property Name="CouponDiscountValue" Type="float" />
           <Property Name="CouponType" Type="int" />
+          <Property Name="DeliveryDays" Type="int" />
         </EntityType>
         <EntityType Name="AdCampaignResponse">
           <Key>
@@ -407,6 +408,10 @@
           <Property Name="ProfessionClausePrice" Type="float" />
           <Property Name="EducationClausePrice" Type="float" />
           <Property Name="BuyItClausePrice" Type="float" />
+          <Property Name="QuizQuestionClausePrice" Type="float" />
+          <Property Name="TenDayDeliveryClausePrice" Type="float" />
+          <Property Name="FiveDayDeliveryClausePrice" Type="float" />
+          <Property Name="ThreeDayDeliveryClausePrice" Type="float" />
         </EntityType>
         <EntityType Name="ProfileQuestion">
           <Key>
@@ -2780,6 +2785,10 @@
           <NavigationProperty Name="Currency" Relationship="DomainModels.FK_SMDPrice_Currency" FromRole="Product" ToRole="Currency" />
           <NavigationProperty Name="InvoiceDetails" Relationship="DomainModels.FK_InvoiceDetail_Products" FromRole="Product" ToRole="InvoiceDetail" />
           <Property Name="BuyItClausePrice" Type="Double" />
+          <Property Name="QuizQuestionClausePrice" Type="Double" />
+          <Property Name="TenDayDeliveryClausePrice" Type="Double" />
+          <Property Name="FiveDayDeliveryClausePrice" Type="Double" />
+          <Property Name="ThreeDayDeliveryClausePrice" Type="Double" />
         </EntityType>
         <Association Name="FK_SMDPrice_Country">
           <End Type="DomainModels.Country" Role="Country" Multiplicity="0..1" />
@@ -3730,6 +3739,7 @@
           <NavigationProperty Name="CampaignCategories" Relationship="DomainModels.FK_CampaignCategories_AdCampaign" FromRole="AdCampaign" ToRole="CampaignCategory" />
           <NavigationProperty Name="CouponCodes" Relationship="DomainModels.FK_CouponCodes_AdCampaign" FromRole="AdCampaign" ToRole="CouponCode" />
           <NavigationProperty Name="InvoiceDetails" Relationship="DomainModels.FK_InvoiceDetail_AdCampaign" FromRole="AdCampaign" ToRole="InvoiceDetail" />
+          <Property Name="DeliveryDays" Type="Int32" />
         </EntityType>
         <Association Name="FK_AdCampaign_Company">
           <End Type="DomainModels.Company" Role="Company" Multiplicity="0..1" />
@@ -3843,7 +3853,7 @@
           <Property Type="Int64" Name="ItemId" Nullable="true" />
           <Property Type="String" Name="ItemName" Nullable="true" MaxLength="500" />
           <Property Type="String" Name="Type" Nullable="false" MaxLength="8" />
-          <Property Type="String" Name="Description" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="description" Nullable="true" MaxLength="1502" />
           <Property Type="Int32" Name="ItemType" Nullable="true" />
           <Property Type="Double" Name="AdClickRate" Nullable="true" />
           <Property Type="String" Name="AdImagePath" Nullable="true" MaxLength="200" />
@@ -3912,6 +3922,7 @@
           <Property Type="String" Name="BuyItLine3" Nullable="true" />
           <Property Type="String" Name="BuyItButtonText" Nullable="true" />
           <Property Type="String" Name="BuyItImageUrl" Nullable="true" MaxLength="227" />
+          <Property Type="String" Name="VoucherImagePath" Nullable="true" MaxLength="227" />
           <Property Type="Int32" Name="TotalItems" Nullable="true" />
         </ComplexType>
         </Schema>
@@ -4195,6 +4206,10 @@
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="DomainModels.Product">
               <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="ThreeDayDeliveryClausePrice" ColumnName="ThreeDayDeliveryClausePrice" />
+                <ScalarProperty Name="FiveDayDeliveryClausePrice" ColumnName="FiveDayDeliveryClausePrice" />
+                <ScalarProperty Name="TenDayDeliveryClausePrice" ColumnName="TenDayDeliveryClausePrice" />
+                <ScalarProperty Name="QuizQuestionClausePrice" ColumnName="QuizQuestionClausePrice" />
                 <ScalarProperty Name="BuyItClausePrice" ColumnName="BuyItClausePrice" />
                 <ScalarProperty Name="EducationClausePrice" ColumnName="EducationClausePrice" />
                 <ScalarProperty Name="ProfessionClausePrice" ColumnName="ProfessionClausePrice" />
@@ -4543,6 +4558,7 @@
           <EntitySetMapping Name="AdCampaigns">
             <EntityTypeMapping TypeName="DomainModels.AdCampaign">
               <MappingFragment StoreEntitySet="AdCampaign">
+                <ScalarProperty Name="DeliveryDays" ColumnName="DeliveryDays" />
                 <ScalarProperty Name="CouponType" ColumnName="CouponType" />
                 <ScalarProperty Name="CouponDiscountValue" ColumnName="CouponDiscountValue" />
                 <ScalarProperty Name="CouponExpiryLabel" ColumnName="CouponExpiryLabel" />
@@ -4617,7 +4633,7 @@
                 <ScalarProperty Name="ItemId" ColumnName="ItemId" />
                 <ScalarProperty Name="ItemName" ColumnName="ItemName" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="description" ColumnName="description" />
                 <ScalarProperty Name="ItemType" ColumnName="ItemType" />
                 <ScalarProperty Name="AdClickRate" ColumnName="AdClickRate" />
                 <ScalarProperty Name="AdImagePath" ColumnName="AdImagePath" />
@@ -4686,6 +4702,7 @@
                 <ScalarProperty Name="BuyItLine3" ColumnName="BuyItLine3" />
                 <ScalarProperty Name="BuyItButtonText" ColumnName="BuyItButtonText" />
                 <ScalarProperty Name="BuyItImageUrl" ColumnName="BuyItImageUrl" />
+                <ScalarProperty Name="VoucherImagePath" ColumnName="VoucherImagePath" />
                 <ScalarProperty Name="TotalItems" ColumnName="TotalItems" />
               </ComplexTypeMapping>
             </ResultMapping>
