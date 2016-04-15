@@ -322,7 +322,7 @@ namespace SMD.Implementation.Services
             {
                 if (!string.IsNullOrEmpty(paths[0]))
                 {
-                    campaignModel.ImagePath = paths[0];
+                    campaignModel.ImagePath = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + paths[0];
                 }
                 if (!string.IsNullOrEmpty(paths[1]))
                 {
@@ -408,7 +408,8 @@ namespace SMD.Implementation.Services
             {
                 if (!string.IsNullOrEmpty(paths[0]) && !paths[0].Contains("http:"))
                 {
-                    campaignModel.ImagePath = paths[0];
+                    if (!paths[0].ToLower().Contains(HttpContext.Current.Request.Url.Authority.ToLower()))
+                    campaignModel.ImagePath = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + paths[0];
                 }
                 if (!string.IsNullOrEmpty(paths[1]) && !paths[1].Contains("http:"))
                 {
@@ -420,15 +421,18 @@ namespace SMD.Implementation.Services
                 }
                 if (!string.IsNullOrEmpty(paths[4]))
                 {
-                    campaignModel.couponImage2 = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + paths[4];
+                    if (!paths[4].ToLower().Contains(HttpContext.Current.Request.Url.Authority.ToLower()))
+                        campaignModel.couponImage2 = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + paths[4];
                 }
                 if (!string.IsNullOrEmpty(paths[5]))
                 {
-                    campaignModel.CouponImage3 = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + paths[5];
+                    if (!paths[5].ToLower().Contains(HttpContext.Current.Request.Url.Authority.ToLower()))
+                        campaignModel.CouponImage3 = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + paths[5];
                 }
                 if (!string.IsNullOrEmpty(paths[6]))
                 {
-                    campaignModel.CouponImage4 = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + paths[6];
+                    if (!paths[6].ToLower().Contains(HttpContext.Current.Request.Url.Authority.ToLower()))
+                        campaignModel.CouponImage4 = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + paths[6];
                 }
 
             }

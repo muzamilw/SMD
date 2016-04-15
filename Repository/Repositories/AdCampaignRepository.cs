@@ -291,10 +291,17 @@ namespace SMD.Repository.Repositories
                             CouponSwapValue = ad.CouponSwapValue,
                             CouponTakenValue = ad.CouponTakenCount ?? 0,
                             CouponDiscountedValue = ad.CouponDiscountValue ?? 0,
-                            CouponImage = System.Web.HttpContext.Current.Request.Url.Scheme + "://" + System.Web.HttpContext.Current.Request.Url.Authority + "/" + ad.ImagePath
+                            CouponImage =  ad.ImagePath
                         };
             
-            return query.ToList<Coupons>().Skip(pageNo - 1 * size).Take(size).ToList();
+            var res =  query.ToList<Coupons>().Skip(pageNo - 1 * size).Take(size).ToList();
+            foreach (var item in res)
+            {
+                if (!item.CouponImage.ToLower().Contains(System.Web.HttpContext.Current.Request.Url.Authority.ToLower()))
+                    item.CouponImage = System.Web.HttpContext.Current.Request.Url.Scheme + "://" + System.Web.HttpContext.Current.Request.Url.Authority + "/" + item.CouponImage;
+                //System.Web.HttpContext.Current.Request.Url.Scheme + "://" + System.Web.HttpContext.Current.Request.Url.Authority + "/" +
+            }
+            return res; 
         }
     }
 }
