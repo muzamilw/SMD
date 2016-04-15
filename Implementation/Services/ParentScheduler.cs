@@ -14,10 +14,10 @@ namespace SMD.Implementation.Services
         public ParentScheduler() //Action<Exception> unhandledExceptionHandler
         {
             // Debit Scheduler 
-             CollectionScheduler.SetDebitScheduler(this);
+           //  CollectionScheduler.SetDebitScheduler(this);
 
             // Credit Scheduler
-             PayOutScheduler.SetDebitScheduler(this);
+           //  PayOutScheduler.SetDebitScheduler(this);
 
             // Ad more Schedulers here ...
         }
