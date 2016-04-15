@@ -2076,72 +2076,72 @@ else
         <div class="clear"></div>
     </script>
     <script>
-        var map;
-        var center;
-        var circles = [];
-        function initializeMap(lat, long) {
-            // LOCATION IN LATITUDE AND LONGITUDE.
-            center = new google.maps.LatLng(long, lat);
-            // MAP ATTRIBUTES.
-            var mapAttr = {
-                center: center,
-                zoom: 5,
-                mapTypeId: google.maps.MapTypeId.TERRAIN
-            };
-            var myLatLng = { lat: parseFloat(lat), lng: parseFloat(long) };
-            // THE MAP TO DISPLAY.
+        //var map;
+        //var center;
+        //var circles = [];
+        //function initializeMap(lat, long) {
+        //    // LOCATION IN LATITUDE AND LONGITUDE.
+        //    center = new google.maps.LatLng(long, lat);
+        //    // MAP ATTRIBUTES.
+        //    var mapAttr = {
+        //        center: center,
+        //        zoom: 5,
+        //        mapTypeId: google.maps.MapTypeId.TERRAIN
+        //    };
+        //    var myLatLng = { lat: parseFloat(lat), lng: parseFloat(long) };
+        //    // THE MAP TO DISPLAY.
 
-            map = new google.maps.Map(document.getElementById("mapContainer"), mapAttr);
-            google.maps.event.addDomListener(window, 'load', initialize);
+        //    map = new google.maps.Map(document.getElementById("mapContainer"), mapAttr);
+        //    google.maps.event.addDomListener(window, 'load', initialize);
 
 
 
-        }
-        function addPointer(lat, long, place, radius, include) {
-            // LOCATION IN LATITUDE AND LONGITUDE.
-            center = new google.maps.LatLng(long, lat);
-            var marker = new google.maps.Marker({
-                position: center,
-                map: map,
-                title: place
-            });
-            addRadius(radius, include)
-        }
-        function addRadius(radius, include) {
-            var clr = '#3B5998';
-            if (!include)
-                clr = '#C82834';
-            var circle = new google.maps.Circle({
-                center: center,
-                map: map,
-                radius: parseInt(radius),          // IN METERS.
-                fillColor: clr,
-                fillOpacity: 0.3,
-                strokeColor: "#FFF",
-                strokeWeight: 0         // DON'T SHOW CIRCLE BORDER.
-            });
-            circles.push(circle);
-        }
-        function clearRadiuses() {
-            $.each(circles, function (key, value) {
-                if (value != null)
-                    value.setMap(null);
-            });
-        }
-        function addCountryMarker(countryName) {
-            var code = new google.maps.Geocoder().geocode({ 'address': countryName }, function (results, status) {
-                if (status == google.maps.GeocoderStatus.OK) {
-                    map.setCenter(results[0].geometry.location);
-                    var marker = new google.maps.Marker({
-                        position: results[0].geometry.location,
-                        map: map,
-                        title: 'Click for more details'
-                    });
-                } else {
-                    console.log('Geocode was not successful for the following reason: ' + status);
-                }
-            });
-        }
+        //}
+        //function addPointer(lat, long, place, radius, include) {
+        //    // LOCATION IN LATITUDE AND LONGITUDE.
+        //    center = new google.maps.LatLng(long, lat);
+        //    var marker = new google.maps.Marker({
+        //        position: center,
+        //        map: map,
+        //        title: place
+        //    });
+        //    addRadius(radius, include)
+        //}
+        //function addRadius(radius, include) {
+        //    var clr = '#3B5998';
+        //    if (!include)
+        //        clr = '#C82834';
+        //    var circle = new google.maps.Circle({
+        //        center: center,
+        //        map: map,
+        //        radius: parseInt(radius),          // IN METERS.
+        //        fillColor: clr,
+        //        fillOpacity: 0.3,
+        //        strokeColor: "#FFF",
+        //        strokeWeight: 0         // DON'T SHOW CIRCLE BORDER.
+        //    });
+        //    circles.push(circle);
+        //}
+        //function clearRadiuses() {
+        //    $.each(circles, function (key, value) {
+        //        if (value != null)
+        //            value.setMap(null);
+        //    });
+        //}
+        //function addCountryMarker(countryName) {
+        //    var code = new google.maps.Geocoder().geocode({ 'address': countryName }, function (results, status) {
+        //        if (status == google.maps.GeocoderStatus.OK) {
+        //            map.setCenter(results[0].geometry.location);
+        //            var marker = new google.maps.Marker({
+        //                position: results[0].geometry.location,
+        //                map: map,
+        //                title: 'Click for more details'
+        //            });
+        //        } else {
+        //            console.log('Geocode was not successful for the following reason: ' + status);
+        //        }
+        //    });
+        //}
         $(window).scroll(function () {
             var scrollYpos = $(document).scrollTop();
             if (scrollYpos >= 620) {

@@ -773,6 +773,7 @@ define("ads/ads.viewModel",
                 },
                 //add location
                 onAddLocation = function (item) {
+                    debugger
                     selectedLocation().Radius = (selectedLocationRadius);
                     selectedLocation().IncludeorExclude = (selectedLocationIncludeExclude);
                     campaignModel().AdCampaignTargetLocations.push(new model.AdCampaignTargetLocation.Create({
@@ -973,7 +974,7 @@ define("ads/ads.viewModel",
                                     isListVisible(false);
                                     isFromEdit(true);
                                     isNewCampaign(false);
-                                    buildMap();
+                                  //  buildMap();
                                     var profileQIds = [];
                                     var surveyQIds = [];
                                     if (campaignModel().AdCampaignTargetLocations() != null && campaignModel().AdCampaignTargetLocations().length > 0) {
@@ -1069,7 +1070,7 @@ define("ads/ads.viewModel",
                                         });
 
                                     });
-                                    debugger;
+                                  
                                     if (campaignModel().DeliveryDays() != null) {
                                         if (campaignModel().DeliveryDays() == 3) {
                                             if (UserAndCostDetail().ThreeDayDeliveryClausePrice != null) {
@@ -1499,32 +1500,32 @@ define("ads/ads.viewModel",
                     });
                     campaignModel().AdCampaignTargetLocations.subscribe(function (value) {
                         getAudienceCount();
-                        buildMap();
+                      //  buildMap();
                     });
                     campaignModel().AdCampaignTargetCriterias.subscribe(function (value) {
                         getAudienceCount();
                     });
                 },
                 buildMap = function () {
-                 $(".locMap").css("display", "none");
-                 var initialized = false;
-                 _.each(campaignModel().AdCampaignTargetLocations(), function (item) {
-                    // $(".locMap").css("display", "inline-block");
-                     clearRadiuses();
-                     if (item.CityID() == 0 || item.CityID() == null) {
-                         addCountryMarker(item.Country());
-                     } else {
-                         if (!initialized)
-                             initializeMap(parseFloat(item.Longitude()), parseFloat(item.Latitude()));
-                         initialized = true;
-                         var included = true;
-                         if (item.IncludeorExclude() == '0') {
-                             included = false;
-                         }
-                         addPointer(parseFloat(item.Longitude()), parseFloat(item.Latitude()), item.City(), parseFloat(item.Radius()), included);
-                     }
-                 });
-             }
+                 //$(".locMap").css("display", "none");
+                 //var initialized = false;
+                 //_.each(campaignModel().AdCampaignTargetLocations(), function (item) {
+                 //   // $(".locMap").css("display", "inline-block");
+                 //    clearRadiuses();
+                 //    if (item.CityID() == 0 || item.CityID() == null) {
+                 //        addCountryMarker(item.Country());
+                 //    } else {
+                 //        if (!initialized)
+                 //            initializeMap(parseFloat(item.Longitude()), parseFloat(item.Latitude()));
+                 //        initialized = true;
+                 //        var included = true;
+                 //        if (item.IncludeorExclude() == '0') {
+                 //            included = false;
+                 //        }
+                 //        addPointer(parseFloat(item.Longitude()), parseFloat(item.Latitude()), item.City(), parseFloat(item.Radius()), included);
+                 //    }
+                 //});
+             },
                 addCountryToCountryList = function (country, name) {
                     if (country != undefined) {
 
