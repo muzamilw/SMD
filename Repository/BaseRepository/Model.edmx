@@ -3853,7 +3853,7 @@
           <Property Type="Int64" Name="ItemId" Nullable="true" />
           <Property Type="String" Name="ItemName" Nullable="true" MaxLength="500" />
           <Property Type="String" Name="Type" Nullable="false" MaxLength="8" />
-          <Property Type="String" Name="description" Nullable="true" MaxLength="1502" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="1502" />
           <Property Type="Int32" Name="ItemType" Nullable="true" />
           <Property Type="Double" Name="AdClickRate" Nullable="true" />
           <Property Type="String" Name="AdImagePath" Nullable="true" MaxLength="200" />
@@ -4633,7 +4633,7 @@
                 <ScalarProperty Name="ItemId" ColumnName="ItemId" />
                 <ScalarProperty Name="ItemName" ColumnName="ItemName" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="Description" ColumnName="description" />
                 <ScalarProperty Name="ItemType" ColumnName="ItemType" />
                 <ScalarProperty Name="AdClickRate" ColumnName="AdClickRate" />
                 <ScalarProperty Name="AdImagePath" ColumnName="AdImagePath" />
