@@ -1217,14 +1217,31 @@ namespace SMD.Implementation.Services
                     
                 }
                 UserLogin userLoginInfo = user.UserLogins.FirstOrDefault(
-                    u => u.LoginProvider == request.LoginProvider && u.ProviderKey == request.LoginProviderKey);
+                    u => u.LoginProvider == request.LoginProvider);
 
+
+                //provider did not match hence creating the provider profile.
                 if (userLoginInfo == null)
                 {
-                    return new LoginResponse
+
+                    UserLogin oLogin = new UserLogin();
+                    oLogin.LoginProvider = request.LoginProvider;
+                    oLogin.ProviderKey = request.LoginProviderKey;
+                    oLogin.UserId = user.Id;
+
+                    user.UserLogins.Add(oLogin);
+                    await UserManager.UpdateAsync(user);
+                }
+                else// we have the provider already now checking for the API key
+                {
+                    if ( userLoginInfo.ProviderKey !=  request.LoginProviderKey)
                     {
-                        Message = LanguageResources.WebApiUserService_ProviderKeyInvalid
-                    };
+                        return new LoginResponse
+                        {
+                            Message = LanguageResources.WebApiUserService_ProviderKeyInvalid
+                        };
+                    }  
+                       
                 }
 
                 if (user.Status == (int)UserStatus.InActive)
