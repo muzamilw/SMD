@@ -78,9 +78,9 @@
           <Property Name="CompanyId" Type="int" />
           <Property Name="priority" Type="int" />
           <Property Name="couponSmdComission" Type="nvarchar" MaxLength="200" />
-          <Property Name="couponImage2" Type="nvarchar" MaxLength="300" />
-          <Property Name="CouponImage3" Type="nvarchar" MaxLength="300" />
-          <Property Name="CouponImage4" Type="nvarchar" MaxLength="300" />
+          <Property Name="couponImage2" Type="nvarchar(max)" />
+          <Property Name="CouponImage3" Type="nvarchar(max)" />
+          <Property Name="CouponImage4" Type="nvarchar(max)" />
           <Property Name="CouponExpiryLabel" Type="nvarchar" MaxLength="300" />
           <Property Name="CouponDiscountValue" Type="float" />
           <Property Name="CouponType" Type="int" />
@@ -1974,7 +1974,6 @@
           </FunctionImport>
           <FunctionImport Name="ResetProductsUserResponses" />
           <EntitySet Name="Accounts" EntityType="DomainModels.Account" />
-          <EntitySet Name="AdCampaigns" EntityType="DomainModels.AdCampaign" />
           <EntitySet Name="Invoices" EntityType="DomainModels.Invoice" />
           <EntitySet Name="ProfileQuestionUserAnswers" EntityType="DomainModels.ProfileQuestionUserAnswer" />
           <EntitySet Name="SurveyQuestions" EntityType="DomainModels.SurveyQuestion" />
@@ -1982,18 +1981,6 @@
           <AssociationSet Name="FK_Transaction_Account" Association="DomainModels.FK_Transaction_Account">
             <End Role="Account" EntitySet="Accounts" />
             <End Role="Transaction" EntitySet="Transactions" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AdCampaign_Language" Association="DomainModels.FK_AdCampaign_Language">
-            <End Role="Language" EntitySet="Languages" />
-            <End Role="AdCampaign" EntitySet="AdCampaigns" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AdCampaignTargetLocation_AdCampaign" Association="DomainModels.FK_AdCampaignTargetLocation_AdCampaign">
-            <End Role="AdCampaign" EntitySet="AdCampaigns" />
-            <End Role="AdCampaignTargetLocation" EntitySet="AdCampaignTargetLocations" />
-          </AssociationSet>
-          <AssociationSet Name="FK_InvoiceDetail_AdCampaign" Association="DomainModels.FK_InvoiceDetail_AdCampaign">
-            <End Role="AdCampaign" EntitySet="AdCampaigns" />
-            <End Role="InvoiceDetail" EntitySet="InvoiceDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_SurveyQuestion_Country" Association="DomainModels.FK_SurveyQuestion_Country">
             <End Role="Country" EntitySet="Countries" />
@@ -2039,10 +2026,6 @@
           <AssociationSet Name="FK_Account_Company" Association="DomainModels.FK_Account_Company">
             <End Role="Company" EntitySet="Companies" />
             <End Role="Account" EntitySet="Accounts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AdCampaign_Company" Association="DomainModels.FK_AdCampaign_Company">
-            <End Role="Company" EntitySet="Companies" />
-            <End Role="AdCampaign" EntitySet="AdCampaigns" />
           </AssociationSet>
           <AssociationSet Name="FK_Company_City" Association="DomainModels.FK_Company_City">
             <End Role="City" EntitySet="Cities" />
@@ -2115,14 +2098,6 @@
             <Parameter Name="ToRow" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="AdCampaignTargetCriterias" EntityType="DomainModels.AdCampaignTargetCriteria" />
-          <AssociationSet Name="FK_AdCampaignTargetCriteria_AdCampaign" Association="DomainModels.FK_AdCampaignTargetCriteria_AdCampaign">
-            <End Role="AdCampaign" EntitySet="AdCampaigns" />
-            <End Role="AdCampaignTargetCriteria" EntitySet="AdCampaignTargetCriterias" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AdCampaignTargetCriteria_AdCampaign1" Association="DomainModels.FK_AdCampaignTargetCriteria_AdCampaign1">
-            <End Role="AdCampaign" EntitySet="AdCampaigns" />
-            <End Role="AdCampaignTargetCriteria" EntitySet="AdCampaignTargetCriterias" />
-          </AssociationSet>
           <AssociationSet Name="FK_AdCampaignTargetCriteria_Education" Association="DomainModels.FK_AdCampaignTargetCriteria_Education">
             <End Role="Education" EntitySet="Educations" />
             <End Role="AdCampaignTargetCriteria" EntitySet="AdCampaignTargetCriterias" />
@@ -2148,10 +2123,6 @@
             <End Role="AdCampaignTargetCriteria" EntitySet="AdCampaignTargetCriterias" />
           </AssociationSet>
           <EntitySet Name="AdCampaignResponses" EntityType="DomainModels.AdCampaignResponse" />
-          <AssociationSet Name="FK_AdCampaignResponse_AdCampaign" Association="DomainModels.FK_AdCampaignResponse_AdCampaign">
-            <End Role="AdCampaign" EntitySet="AdCampaigns" />
-            <End Role="AdCampaignResponse" EntitySet="AdCampaignResponses" />
-          </AssociationSet>
           <AssociationSet Name="FK_AdCampaignResponse_AdCampaignResponse" Association="DomainModels.FK_AdCampaignResponse_AdCampaignResponse">
             <End Role="AdCampaignResponse" EntitySet="AdCampaignResponses" />
             <End Role="AdCampaignResponse1" EntitySet="AdCampaignResponses" />
@@ -2168,23 +2139,52 @@
           <Parameter Name="UserID" Mode="In" Type="String" />
           </FunctionImport>
           <EntitySet Name="CouponCodes" EntityType="DomainModels.CouponCode" />
-          <AssociationSet Name="FK_CouponCodes_AdCampaign" Association="DomainModels.FK_CouponCodes_AdCampaign">
-            <End Role="AdCampaign" EntitySet="AdCampaigns" />
-            <End Role="CouponCode" EntitySet="CouponCodes" />
-          </AssociationSet>
           <AssociationSet Name="FK_CouponCodes_AspNetUsers" Association="DomainModels.FK_CouponCodes_AspNetUsers">
             <End Role="User" EntitySet="Users" />
             <End Role="CouponCode" EntitySet="CouponCodes" />
           </AssociationSet>
           <EntitySet Name="CampaignCategories" EntityType="DomainModels.CampaignCategory" />
-          <AssociationSet Name="FK_CampaignCategories_AdCampaign" Association="DomainModels.FK_CampaignCategories_AdCampaign">
-            <End Role="AdCampaign" EntitySet="AdCampaigns" />
-            <End Role="CampaignCategory" EntitySet="CampaignCategories" />
-          </AssociationSet>
           <EntitySet Name="CouponCategories" EntityType="DomainModels.CouponCategory" />
           <AssociationSet Name="FK_CampaignCategories_CouponCategory" Association="DomainModels.FK_CampaignCategories_CouponCategory">
             <End Role="CouponCategory" EntitySet="CouponCategories" />
             <End Role="CampaignCategory" EntitySet="CampaignCategories" />
+          </AssociationSet>
+          <EntitySet Name="AdCampaigns" EntityType="DomainModels.AdCampaign" />
+          <AssociationSet Name="FK_AdCampaign_Company" Association="DomainModels.FK_AdCampaign_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="AdCampaign" EntitySet="AdCampaigns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AdCampaign_Language" Association="DomainModels.FK_AdCampaign_Language">
+            <End Role="Language" EntitySet="Languages" />
+            <End Role="AdCampaign" EntitySet="AdCampaigns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AdCampaignResponse_AdCampaign" Association="DomainModels.FK_AdCampaignResponse_AdCampaign">
+            <End Role="AdCampaign" EntitySet="AdCampaigns" />
+            <End Role="AdCampaignResponse" EntitySet="AdCampaignResponses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AdCampaignTargetCriteria_AdCampaign" Association="DomainModels.FK_AdCampaignTargetCriteria_AdCampaign">
+            <End Role="AdCampaign" EntitySet="AdCampaigns" />
+            <End Role="AdCampaignTargetCriteria" EntitySet="AdCampaignTargetCriterias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AdCampaignTargetCriteria_AdCampaign1" Association="DomainModels.FK_AdCampaignTargetCriteria_AdCampaign1">
+            <End Role="AdCampaign" EntitySet="AdCampaigns" />
+            <End Role="AdCampaignTargetCriteria" EntitySet="AdCampaignTargetCriterias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AdCampaignTargetLocation_AdCampaign" Association="DomainModels.FK_AdCampaignTargetLocation_AdCampaign">
+            <End Role="AdCampaign" EntitySet="AdCampaigns" />
+            <End Role="AdCampaignTargetLocation" EntitySet="AdCampaignTargetLocations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CampaignCategories_AdCampaign" Association="DomainModels.FK_CampaignCategories_AdCampaign">
+            <End Role="AdCampaign" EntitySet="AdCampaigns" />
+            <End Role="CampaignCategory" EntitySet="CampaignCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CouponCodes_AdCampaign" Association="DomainModels.FK_CouponCodes_AdCampaign">
+            <End Role="AdCampaign" EntitySet="AdCampaigns" />
+            <End Role="CouponCode" EntitySet="CouponCodes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InvoiceDetail_AdCampaign" Association="DomainModels.FK_InvoiceDetail_AdCampaign">
+            <End Role="AdCampaign" EntitySet="AdCampaigns" />
+            <End Role="InvoiceDetail" EntitySet="InvoiceDetails" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="ProfileQuestion">
@@ -2293,10 +2293,10 @@
           <Property Name="LanguageName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="NativeName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="SurveyQuestionTargetCriterias" Relationship="DomainModels.FK_SurveyQuestionTargetCriteria_Language" FromRole="Language" ToRole="SurveyQuestionTargetCriteria" />
-          <NavigationProperty Name="AdCampaigns" Relationship="DomainModels.FK_AdCampaign_Language" FromRole="Language" ToRole="AdCampaign" />
           <NavigationProperty Name="SurveyQuestions" Relationship="DomainModels.FK_SurveyQuestion_Language" FromRole="Language" ToRole="SurveyQuestion" />
           <NavigationProperty Name="Users" Relationship="DomainModels.FK_AspNetUsers_Language" FromRole="Language" ToRole="AspNetUser" />
           <NavigationProperty Name="AdCampaignTargetCriterias" Relationship="DomainModels.FK_AdCampaignTargetCriteria_Language" FromRole="Language" ToRole="AdCampaignTargetCriteria" />
+          <NavigationProperty Name="AdCampaigns" Relationship="DomainModels.FK_AdCampaign_Language" FromRole="Language" ToRole="AdCampaign" />
         </EntityType>
         <Association Name="FK_ProfileQuestionGroup_Country">
           <End Type="DomainModels.Country" Role="Country" Multiplicity="0..1" />
@@ -2720,9 +2720,9 @@
           <Property Name="SqId" Type="Int64" />
           <Property Name="ProductId" Type="Int32" />
           <NavigationProperty Name="Product" Relationship="DomainModels.FK_InvoiceDetail_Products" FromRole="InvoiceDetail" ToRole="Product" />
-          <NavigationProperty Name="AdCampaign" Relationship="DomainModels.FK_InvoiceDetail_AdCampaign" FromRole="InvoiceDetail" ToRole="AdCampaign" />
           <NavigationProperty Name="Invoice" Relationship="DomainModels.FK_InvoiceDetail_Invoice" FromRole="InvoiceDetail" ToRole="Invoice" />
           <NavigationProperty Name="SurveyQuestion" Relationship="DomainModels.FK_InvoiceDetail_SurveyQuestion" FromRole="InvoiceDetail" ToRole="SurveyQuestion" />
+          <NavigationProperty Name="AdCampaign" Relationship="DomainModels.FK_InvoiceDetail_AdCampaign" FromRole="InvoiceDetail" ToRole="AdCampaign" />
         </EntityType>
         <EntityType Name="Tax">
           <Key>
@@ -2907,84 +2907,6 @@
           <Property Name="CompanyId" Type="Int32" />
           <NavigationProperty Name="Company" Relationship="DomainModels.FK_Account_Company" FromRole="Account" ToRole="Company" />
         </EntityType>
-        <EntityType Name="AdCampaign">
-          <Key>
-            <PropertyRef Name="CampaignId" />
-          </Key>
-          <Property Name="CampaignId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="LanguageId" Type="Int32" />
-          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="SmdCampaign" Type="Boolean" />
-          <Property Name="CampaignName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="CampaignDescription" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="Int32" />
-          <Property Name="Archived" Type="Boolean" />
-          <Property Name="Approved" Type="Boolean" />
-          <Property Name="ApprovedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="ApprovalDateTime" Type="DateTime" Precision="3" />
-          <Property Name="StartDateTime" Type="DateTime" Precision="3" />
-          <Property Name="EndDateTime" Type="DateTime" Precision="3" />
-          <Property Name="MaxBudget" Type="Double" />
-          <Property Name="Type" Type="Int32" />
-          <Property Name="ClickRate" Type="Double" />
-          <Property Name="SmdCredits" Type="Int32" />
-          <Property Name="DisplayTitle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="ImagePath" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="LandingPageVideoLink" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="VerifyQuestion" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Answer1" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Answer2" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Answer3" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="CorrectAnswer" Type="Int32" />
-          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
-          <Property Name="CreatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="ModifiedDateTime" Type="DateTime" Precision="3" />
-          <Property Name="ModifiedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="AgeRangeStart" Type="Int32" />
-          <Property Name="AgeRangeEnd" Type="Int32" />
-          <Property Name="Gender" Type="Int32" />
-          <Property Name="RejectedReason" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="ProjectedReach" Type="Int64" />
-          <Property Name="ResultClicks" Type="Int64" />
-          <Property Name="AmountSpent" Type="Double" />
-          <Property Name="RewardType" Type="Int32" />
-          <Property Name="Voucher1Heading" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Voucher1Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Voucher1Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Voucher2Heading" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Voucher2Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Voucher2Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Voucher1ImagePath" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Voucher2ImagePath" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="VideoUrl" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="BuuyItLine1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="BuyItLine2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="BuyItLine3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="BuyItButtonLabel" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="BuyItImageUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="CouponSwapValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="CouponActualValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="CouponTakenCount" Type="Int32" />
-          <Property Name="CouponQuantity" Type="Int32" />
-          <Property Name="CompanyId" Type="Int32" />
-          <NavigationProperty Name="Language" Relationship="DomainModels.FK_AdCampaign_Language" FromRole="AdCampaign" ToRole="Language" />
-          <NavigationProperty Name="AdCampaignTargetLocations" Relationship="DomainModels.FK_AdCampaignTargetLocation_AdCampaign" FromRole="AdCampaign" ToRole="AdCampaignTargetLocation" />
-          <NavigationProperty Name="InvoiceDetails" Relationship="DomainModels.FK_InvoiceDetail_AdCampaign" FromRole="AdCampaign" ToRole="InvoiceDetail" />
-          <NavigationProperty Name="Company" Relationship="DomainModels.FK_AdCampaign_Company" FromRole="AdCampaign" ToRole="Company" />
-          <NavigationProperty Name="AdCampaignTargetCriterias" Relationship="DomainModels.FK_AdCampaignTargetCriteria_AdCampaign" FromRole="AdCampaign" ToRole="AdCampaignTargetCriteria" />
-          <NavigationProperty Name="AdCampaignResponses" Relationship="DomainModels.FK_AdCampaignResponse_AdCampaign" FromRole="AdCampaign" ToRole="AdCampaignResponse" />
-          <Property Name="priority" Type="Int32" />
-          <Property Name="couponSmdComission" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="couponImage2" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
-          <Property Name="CouponImage3" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
-          <Property Name="CouponImage4" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
-          <Property Name="CouponExpiryLabel" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="CouponCodes" Relationship="DomainModels.FK_CouponCodes_AdCampaign" FromRole="AdCampaign" ToRole="CouponCode" />
-          <NavigationProperty Name="CampaignCategories" Relationship="DomainModels.FK_CampaignCategories_AdCampaign" FromRole="AdCampaign" ToRole="CampaignCategory" />
-          <Property Name="CouponDiscountValue" Type="Double" />
-          <Property Name="CouponType" Type="Int32" />
-        </EntityType>
         <EntityType Name="Invoice">
           <Key>
             <PropertyRef Name="InvoiceId" />
@@ -3095,42 +3017,6 @@
             </Principal>
             <Dependent Role="Transaction">
               <PropertyRef Name="AccountId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_AdCampaign_Language">
-          <End Type="DomainModels.Language" Role="Language" Multiplicity="0..1" />
-          <End Type="DomainModels.AdCampaign" Role="AdCampaign" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Language">
-              <PropertyRef Name="LanguageId" />
-            </Principal>
-            <Dependent Role="AdCampaign">
-              <PropertyRef Name="LanguageId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_AdCampaignTargetLocation_AdCampaign">
-          <End Type="DomainModels.AdCampaign" Role="AdCampaign" Multiplicity="0..1" />
-          <End Type="DomainModels.AdCampaignTargetLocation" Role="AdCampaignTargetLocation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AdCampaign">
-              <PropertyRef Name="CampaignId" />
-            </Principal>
-            <Dependent Role="AdCampaignTargetLocation">
-              <PropertyRef Name="CampaignId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_InvoiceDetail_AdCampaign">
-          <End Type="DomainModels.AdCampaign" Role="AdCampaign" Multiplicity="0..1" />
-          <End Type="DomainModels.InvoiceDetail" Role="InvoiceDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AdCampaign">
-              <PropertyRef Name="CampaignId" />
-            </Principal>
-            <Dependent Role="InvoiceDetail">
-              <PropertyRef Name="CampaignId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3284,7 +3170,6 @@
           <Property Name="WebsiteLink" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="CompanyType" Type="Int32" />
           <NavigationProperty Name="Accounts" Relationship="DomainModels.FK_Account_Company" FromRole="Company" ToRole="Account" />
-          <NavigationProperty Name="AdCampaigns" Relationship="DomainModels.FK_AdCampaign_Company" FromRole="Company" ToRole="AdCampaign" />
           <NavigationProperty Name="City" Relationship="DomainModels.FK_Company_City" FromRole="Company" ToRole="City" />
           <NavigationProperty Name="Country" Relationship="DomainModels.FK_Company_Country" FromRole="Company" ToRole="Country" />
           <NavigationProperty Name="Invoices" Relationship="DomainModels.FK_Invoice_Company" FromRole="Company" ToRole="Invoice" />
@@ -3293,6 +3178,7 @@
           <NavigationProperty Name="SurveyQuestionResponses" Relationship="DomainModels.FK_SurveyQuestionResponse_Company" FromRole="Company" ToRole="SurveyQuestionResponse" />
           <NavigationProperty Name="Users" Relationship="DomainModels.FK_AspNetUsers_Company" FromRole="Company" ToRole="AspNetUser" />
           <NavigationProperty Name="AdCampaignResponses" Relationship="DomainModels.FK_AdCampaignResponse_Company" FromRole="Company" ToRole="AdCampaignResponse" />
+          <NavigationProperty Name="AdCampaigns" Relationship="DomainModels.FK_AdCampaign_Company" FromRole="Company" ToRole="AdCampaign" />
         </EntityType>
         <Association Name="FK_Account_Company">
           <End Type="DomainModels.Company" Role="Company" Multiplicity="0..1" />
@@ -3302,18 +3188,6 @@
               <PropertyRef Name="CompanyId" />
             </Principal>
             <Dependent Role="Account">
-              <PropertyRef Name="CompanyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_AdCampaign_Company">
-          <End Type="DomainModels.Company" Role="Company" Multiplicity="0..1" />
-          <End Type="DomainModels.AdCampaign" Role="AdCampaign" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Company">
-              <PropertyRef Name="CompanyId" />
-            </Principal>
-            <Dependent Role="AdCampaign">
               <PropertyRef Name="CompanyId" />
             </Dependent>
           </ReferentialConstraint>
@@ -3652,39 +3526,14 @@
           <Property Name="EducationId" Type="Int64" />
           <Property Name="QuizCampaignId" Type="Int64" />
           <Property Name="QuizAnswerId" Type="Int32" />
-          <NavigationProperty Name="AdCampaign" Relationship="DomainModels.FK_AdCampaignTargetCriteria_AdCampaign" FromRole="AdCampaignTargetCriteria" ToRole="AdCampaign" />
-          <NavigationProperty Name="QuizCampaign" Relationship="DomainModels.FK_AdCampaignTargetCriteria_AdCampaign1" FromRole="AdCampaignTargetCriteria" ToRole="AdCampaign" />
           <NavigationProperty Name="Education" Relationship="DomainModels.FK_AdCampaignTargetCriteria_Education" FromRole="AdCampaignTargetCriteria" ToRole="Education" />
           <NavigationProperty Name="Industry" Relationship="DomainModels.FK_AdCampaignTargetCriteria_Industry" FromRole="AdCampaignTargetCriteria" ToRole="Industry" />
           <NavigationProperty Name="Language" Relationship="DomainModels.FK_AdCampaignTargetCriteria_Language" FromRole="AdCampaignTargetCriteria" ToRole="Language" />
           <NavigationProperty Name="ProfileQuestion" Relationship="DomainModels.FK_AdCampaignTargetCriteria_ProfileQuestion" FromRole="AdCampaignTargetCriteria" ToRole="ProfileQuestion" />
           <NavigationProperty Name="ProfileQuestionAnswer" Relationship="DomainModels.FK_AdCampaignTargetCriteria_ProfileQuestionAnswer" FromRole="AdCampaignTargetCriteria" ToRole="ProfileQuestionAnswer" />
           <NavigationProperty Name="SurveyQuestion" Relationship="DomainModels.FK_AdCampaignTargetCriteria_SurveyQuestion" FromRole="AdCampaignTargetCriteria" ToRole="SurveyQuestion" />
-        </EntityType>
-        <Association Name="FK_AdCampaignTargetCriteria_AdCampaign">
-          <End Type="DomainModels.AdCampaign" Role="AdCampaign" Multiplicity="0..1" />
-          <End Type="DomainModels.AdCampaignTargetCriteria" Role="AdCampaignTargetCriteria" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AdCampaign">
-              <PropertyRef Name="CampaignId" />
-            </Principal>
-            <Dependent Role="AdCampaignTargetCriteria">
-              <PropertyRef Name="CampaignId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_AdCampaignTargetCriteria_AdCampaign1">
-          <End Type="DomainModels.AdCampaign" Role="AdCampaign" Multiplicity="0..1" />
-          <End Type="DomainModels.AdCampaignTargetCriteria" Role="AdCampaignTargetCriteria" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AdCampaign">
-              <PropertyRef Name="CampaignId" />
-            </Principal>
-            <Dependent Role="AdCampaignTargetCriteria">
-              <PropertyRef Name="QuizCampaignId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+          <NavigationProperty Name="AdCampaign" Relationship="DomainModels.FK_AdCampaignTargetCriteria_AdCampaign" FromRole="AdCampaignTargetCriteria" ToRole="AdCampaign" />
+          </EntityType>
         <Association Name="FK_AdCampaignTargetCriteria_Education">
           <End Type="DomainModels.Education" Role="Education" Multiplicity="0..1" />
           <End Type="DomainModels.AdCampaignTargetCriteria" Role="AdCampaignTargetCriteria" Multiplicity="*" />
@@ -3774,22 +3623,10 @@
           <Property Name="GameLevel" Type="Int32" />
           <Property Name="GameId" Type="Int32" />
           <Property Name="UserQuestionResponse" Type="Int32" />
-          <NavigationProperty Name="AdCampaign" Relationship="DomainModels.FK_AdCampaignResponse_AdCampaign" FromRole="AdCampaignResponse" ToRole="AdCampaign" />
           <NavigationProperty Name="User" Relationship="DomainModels.FK_AdCampaignResponse_AspNetUsers" FromRole="AdCampaignResponse" ToRole="User" />
           <NavigationProperty Name="Company" Relationship="DomainModels.FK_AdCampaignResponse_Company" FromRole="AdCampaignResponse" ToRole="Company" />
+          <NavigationProperty Name="AdCampaign" Relationship="DomainModels.FK_AdCampaignResponse_AdCampaign" FromRole="AdCampaignResponse" ToRole="AdCampaign" />
         </EntityType>
-        <Association Name="FK_AdCampaignResponse_AdCampaign">
-          <End Type="DomainModels.AdCampaign" Role="AdCampaign" Multiplicity="0..1" />
-          <End Type="DomainModels.AdCampaignResponse" Role="AdCampaignResponse" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AdCampaign">
-              <PropertyRef Name="CampaignId" />
-            </Principal>
-            <Dependent Role="AdCampaignResponse">
-              <PropertyRef Name="CampaignId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_AdCampaignResponse_AdCampaignResponse">
           <End Type="DomainModels.AdCampaignResponse" Role="AdCampaignResponse" Multiplicity="1" />
           <End Type="DomainModels.AdCampaignResponse" Role="AdCampaignResponse1" Multiplicity="0..1" />
@@ -3845,21 +3682,9 @@
           <Property Name="Code" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="IsTaken" Type="Boolean" />
           <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AdCampaign" Relationship="DomainModels.FK_CouponCodes_AdCampaign" FromRole="CouponCode" ToRole="AdCampaign" />
           <NavigationProperty Name="AspNetUser" Relationship="DomainModels.FK_CouponCodes_AspNetUsers" FromRole="CouponCode" ToRole="User" />
+          <NavigationProperty Name="AdCampaign" Relationship="DomainModels.FK_CouponCodes_AdCampaign" FromRole="CouponCode" ToRole="AdCampaign" />
         </EntityType>
-        <Association Name="FK_CouponCodes_AdCampaign">
-          <End Type="DomainModels.AdCampaign" Role="AdCampaign" Multiplicity="0..1" />
-          <End Type="DomainModels.CouponCode" Role="CouponCode" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AdCampaign">
-              <PropertyRef Name="CampaignId" />
-            </Principal>
-            <Dependent Role="CouponCode">
-              <PropertyRef Name="CampaignId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_CouponCodes_AspNetUsers">
           <End Type="DomainModels.User" Role="User" Multiplicity="0..1" />
           <End Type="DomainModels.CouponCode" Role="CouponCode" Multiplicity="*" />
@@ -3879,21 +3704,9 @@
           <Property Name="CampaignId" Type="Int64" Nullable="false" />
           <Property Name="CategoryId" Type="Int32" Nullable="false" />
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="AdCampaign" Relationship="DomainModels.FK_CampaignCategories_AdCampaign" FromRole="CampaignCategory" ToRole="AdCampaign" />
           <NavigationProperty Name="CouponCategory" Relationship="DomainModels.FK_CampaignCategories_CouponCategory" FromRole="CampaignCategory" ToRole="CouponCategory" />
+          <NavigationProperty Name="AdCampaign" Relationship="DomainModels.FK_CampaignCategories_AdCampaign" FromRole="CampaignCategory" ToRole="AdCampaign" />
         </EntityType>
-        <Association Name="FK_CampaignCategories_AdCampaign">
-          <End Type="DomainModels.AdCampaign" Role="AdCampaign" Multiplicity="1" />
-          <End Type="DomainModels.CampaignCategory" Role="CampaignCategory" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AdCampaign">
-              <PropertyRef Name="CampaignId" />
-            </Principal>
-            <Dependent Role="CampaignCategory">
-              <PropertyRef Name="CampaignId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="CouponCategory">
           <Key>
             <PropertyRef Name="CategoryId" />
@@ -3912,6 +3725,192 @@
             </Principal>
             <Dependent Role="CampaignCategory">
               <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="AdCampaign">
+          <Key>
+            <PropertyRef Name="CampaignId" />
+          </Key>
+          <Property Name="CampaignId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LanguageId" Type="Int32" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="SmdCampaign" Type="Boolean" />
+          <Property Name="CampaignName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CampaignDescription" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="Archived" Type="Boolean" />
+          <Property Name="Approved" Type="Boolean" />
+          <Property Name="ApprovedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ApprovalDateTime" Type="DateTime" Precision="3" />
+          <Property Name="StartDateTime" Type="DateTime" Precision="3" />
+          <Property Name="EndDateTime" Type="DateTime" Precision="3" />
+          <Property Name="MaxBudget" Type="Double" />
+          <Property Name="Type" Type="Int32" />
+          <Property Name="ClickRate" Type="Double" />
+          <Property Name="SmdCredits" Type="Int32" />
+          <Property Name="DisplayTitle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ImagePath" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LandingPageVideoLink" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="VerifyQuestion" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Answer1" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Answer2" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Answer3" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CorrectAnswer" Type="Int32" />
+          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="AgeRangeStart" Type="Int32" />
+          <Property Name="AgeRangeEnd" Type="Int32" />
+          <Property Name="Gender" Type="Int32" />
+          <Property Name="RejectedReason" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="ProjectedReach" Type="Int64" />
+          <Property Name="ResultClicks" Type="Int64" />
+          <Property Name="AmountSpent" Type="Double" />
+          <Property Name="RewardType" Type="Int32" />
+          <Property Name="Voucher1Heading" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Voucher1Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Voucher1Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Voucher2Heading" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Voucher2Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Voucher2Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Voucher1ImagePath" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Voucher2ImagePath" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="VideoUrl" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="BuuyItLine1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BuyItLine2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BuyItLine3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BuyItButtonLabel" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BuyItImageUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CouponSwapValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CouponActualValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CouponTakenCount" Type="Int32" />
+          <Property Name="CouponQuantity" Type="Int32" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="priority" Type="Int32" />
+          <Property Name="couponSmdComission" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="couponImage2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CouponImage3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CouponImage4" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CouponExpiryLabel" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="CouponDiscountValue" Type="Double" />
+          <Property Name="CouponType" Type="Int32" />
+          <NavigationProperty Name="Company" Relationship="DomainModels.FK_AdCampaign_Company" FromRole="AdCampaign" ToRole="Company" />
+          <NavigationProperty Name="Language" Relationship="DomainModels.FK_AdCampaign_Language" FromRole="AdCampaign" ToRole="Language" />
+          <NavigationProperty Name="AdCampaignResponses" Relationship="DomainModels.FK_AdCampaignResponse_AdCampaign" FromRole="AdCampaign" ToRole="AdCampaignResponse" />
+          <NavigationProperty Name="AdCampaignTargetCriterias" Relationship="DomainModels.FK_AdCampaignTargetCriteria_AdCampaign" FromRole="AdCampaign" ToRole="AdCampaignTargetCriteria" />
+          <NavigationProperty Name="AdCampaignTargetLocations" Relationship="DomainModels.FK_AdCampaignTargetLocation_AdCampaign" FromRole="AdCampaign" ToRole="AdCampaignTargetLocation" />
+          <NavigationProperty Name="CampaignCategories" Relationship="DomainModels.FK_CampaignCategories_AdCampaign" FromRole="AdCampaign" ToRole="CampaignCategory" />
+          <NavigationProperty Name="CouponCodes" Relationship="DomainModels.FK_CouponCodes_AdCampaign" FromRole="AdCampaign" ToRole="CouponCode" />
+          <NavigationProperty Name="InvoiceDetails" Relationship="DomainModels.FK_InvoiceDetail_AdCampaign" FromRole="AdCampaign" ToRole="InvoiceDetail" />
+        </EntityType>
+        <Association Name="FK_AdCampaign_Company">
+          <End Type="DomainModels.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="DomainModels.AdCampaign" Role="AdCampaign" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="AdCampaign">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AdCampaign_Language">
+          <End Type="DomainModels.Language" Role="Language" Multiplicity="0..1" />
+          <End Type="DomainModels.AdCampaign" Role="AdCampaign" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Language">
+              <PropertyRef Name="LanguageId" />
+            </Principal>
+            <Dependent Role="AdCampaign">
+              <PropertyRef Name="LanguageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AdCampaignResponse_AdCampaign">
+          <End Type="DomainModels.AdCampaign" Role="AdCampaign" Multiplicity="0..1" />
+          <End Type="DomainModels.AdCampaignResponse" Role="AdCampaignResponse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdCampaign">
+              <PropertyRef Name="CampaignId" />
+            </Principal>
+            <Dependent Role="AdCampaignResponse">
+              <PropertyRef Name="CampaignId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AdCampaignTargetCriteria_AdCampaign">
+          <End Type="DomainModels.AdCampaign" Role="AdCampaign" Multiplicity="0..1" />
+          <End Type="DomainModels.AdCampaignTargetCriteria" Role="AdCampaignTargetCriteria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdCampaign">
+              <PropertyRef Name="CampaignId" />
+            </Principal>
+            <Dependent Role="AdCampaignTargetCriteria">
+              <PropertyRef Name="CampaignId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AdCampaignTargetCriteria_AdCampaign1">
+          <End Type="DomainModels.AdCampaign" Role="AdCampaign" Multiplicity="0..1" />
+          <End Type="DomainModels.AdCampaignTargetCriteria" Role="AdCampaignTargetCriteria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdCampaign">
+              <PropertyRef Name="CampaignId" />
+            </Principal>
+            <Dependent Role="AdCampaignTargetCriteria">
+              <PropertyRef Name="QuizCampaignId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AdCampaignTargetLocation_AdCampaign">
+          <End Type="DomainModels.AdCampaign" Role="AdCampaign" Multiplicity="0..1" />
+          <End Type="DomainModels.AdCampaignTargetLocation" Role="AdCampaignTargetLocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdCampaign">
+              <PropertyRef Name="CampaignId" />
+            </Principal>
+            <Dependent Role="AdCampaignTargetLocation">
+              <PropertyRef Name="CampaignId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CampaignCategories_AdCampaign">
+          <End Type="DomainModels.AdCampaign" Role="AdCampaign" Multiplicity="1" />
+          <End Type="DomainModels.CampaignCategory" Role="CampaignCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdCampaign">
+              <PropertyRef Name="CampaignId" />
+            </Principal>
+            <Dependent Role="CampaignCategory">
+              <PropertyRef Name="CampaignId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CouponCodes_AdCampaign">
+          <End Type="DomainModels.AdCampaign" Role="AdCampaign" Multiplicity="0..1" />
+          <End Type="DomainModels.CouponCode" Role="CouponCode" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdCampaign">
+              <PropertyRef Name="CampaignId" />
+            </Principal>
+            <Dependent Role="CouponCode">
+              <PropertyRef Name="CampaignId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InvoiceDetail_AdCampaign">
+          <End Type="DomainModels.AdCampaign" Role="AdCampaign" Multiplicity="0..1" />
+          <End Type="DomainModels.InvoiceDetail" Role="InvoiceDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdCampaign">
+              <PropertyRef Name="CampaignId" />
+            </Principal>
+            <Dependent Role="InvoiceDetail">
+              <PropertyRef Name="CampaignId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4291,77 +4290,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="AdCampaigns">
-            <EntityTypeMapping TypeName="DomainModels.AdCampaign">
-              <MappingFragment StoreEntitySet="AdCampaign">
-                <ScalarProperty Name="CouponType" ColumnName="CouponType" />
-                <ScalarProperty Name="CouponDiscountValue" ColumnName="CouponDiscountValue" />
-                <ScalarProperty Name="CouponExpiryLabel" ColumnName="CouponExpiryLabel" />
-                <ScalarProperty Name="CouponImage4" ColumnName="CouponImage4" />
-                <ScalarProperty Name="CouponImage3" ColumnName="CouponImage3" />
-                <ScalarProperty Name="couponImage2" ColumnName="couponImage2" />
-                <ScalarProperty Name="couponSmdComission" ColumnName="couponSmdComission" />
-                <ScalarProperty Name="priority" ColumnName="priority" />
-                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
-                <ScalarProperty Name="CouponQuantity" ColumnName="CouponQuantity" />
-                <ScalarProperty Name="CouponTakenCount" ColumnName="CouponTakenCount" />
-                <ScalarProperty Name="CouponActualValue" ColumnName="CouponActualValue" />
-                <ScalarProperty Name="CouponSwapValue" ColumnName="CouponSwapValue" />
-                <ScalarProperty Name="BuyItImageUrl" ColumnName="BuyItImageUrl" />
-                <ScalarProperty Name="BuyItButtonLabel" ColumnName="BuyItButtonLabel" />
-                <ScalarProperty Name="BuyItLine3" ColumnName="BuyItLine3" />
-                <ScalarProperty Name="BuyItLine2" ColumnName="BuyItLine2" />
-                <ScalarProperty Name="BuuyItLine1" ColumnName="BuuyItLine1" />
-                <ScalarProperty Name="VideoUrl" ColumnName="VideoUrl" />
-                <ScalarProperty Name="Voucher2ImagePath" ColumnName="Voucher2ImagePath" />
-                <ScalarProperty Name="Voucher1ImagePath" ColumnName="Voucher1ImagePath" />
-                <ScalarProperty Name="Voucher2Value" ColumnName="Voucher2Value" />
-                <ScalarProperty Name="Voucher2Description" ColumnName="Voucher2Description" />
-                <ScalarProperty Name="Voucher2Heading" ColumnName="Voucher2Heading" />
-                <ScalarProperty Name="Voucher1Value" ColumnName="Voucher1Value" />
-                <ScalarProperty Name="Voucher1Description" ColumnName="Voucher1Description" />
-                <ScalarProperty Name="Voucher1Heading" ColumnName="Voucher1Heading" />
-                <ScalarProperty Name="RewardType" ColumnName="RewardType" />
-                <ScalarProperty Name="AmountSpent" ColumnName="AmountSpent" />
-                <ScalarProperty Name="ResultClicks" ColumnName="ResultClicks" />
-                <ScalarProperty Name="ProjectedReach" ColumnName="ProjectedReach" />
-                <ScalarProperty Name="RejectedReason" ColumnName="RejectedReason" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="AgeRangeEnd" ColumnName="AgeRangeEnd" />
-                <ScalarProperty Name="AgeRangeStart" ColumnName="AgeRangeStart" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="ModifiedDateTime" ColumnName="ModifiedDateTime" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
-                <ScalarProperty Name="CorrectAnswer" ColumnName="CorrectAnswer" />
-                <ScalarProperty Name="Answer3" ColumnName="Answer3" />
-                <ScalarProperty Name="Answer2" ColumnName="Answer2" />
-                <ScalarProperty Name="Answer1" ColumnName="Answer1" />
-                <ScalarProperty Name="VerifyQuestion" ColumnName="VerifyQuestion" />
-                <ScalarProperty Name="LandingPageVideoLink" ColumnName="LandingPageVideoLink" />
-                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="DisplayTitle" ColumnName="DisplayTitle" />
-                <ScalarProperty Name="SmdCredits" ColumnName="SMDCredits" />
-                <ScalarProperty Name="ClickRate" ColumnName="ClickRate" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="MaxBudget" ColumnName="MaxBudget" />
-                <ScalarProperty Name="EndDateTime" ColumnName="EndDateTime" />
-                <ScalarProperty Name="StartDateTime" ColumnName="StartDateTime" />
-                <ScalarProperty Name="ApprovalDateTime" ColumnName="ApprovalDateTime" />
-                <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
-                <ScalarProperty Name="Approved" ColumnName="Approved" />
-                <ScalarProperty Name="Archived" ColumnName="Archived" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="CampaignDescription" ColumnName="CampaignDescription" />
-                <ScalarProperty Name="CampaignName" ColumnName="CampaignName" />
-                <ScalarProperty Name="SmdCampaign" ColumnName="SMDCampaign" />
-                <ScalarProperty Name="UserId" ColumnName="UserID" />
-                <ScalarProperty Name="LanguageId" ColumnName="LanguageID" />
-                <ScalarProperty Name="CampaignId" ColumnName="CampaignID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Invoices">
             <EntityTypeMapping TypeName="DomainModels.Invoice">
               <MappingFragment StoreEntitySet="Invoice">
@@ -4688,6 +4616,77 @@
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AdCampaigns">
+            <EntityTypeMapping TypeName="DomainModels.AdCampaign">
+              <MappingFragment StoreEntitySet="AdCampaign">
+                <ScalarProperty Name="CouponType" ColumnName="CouponType" />
+                <ScalarProperty Name="CouponDiscountValue" ColumnName="CouponDiscountValue" />
+                <ScalarProperty Name="CouponExpiryLabel" ColumnName="CouponExpiryLabel" />
+                <ScalarProperty Name="CouponImage4" ColumnName="CouponImage4" />
+                <ScalarProperty Name="CouponImage3" ColumnName="CouponImage3" />
+                <ScalarProperty Name="couponImage2" ColumnName="couponImage2" />
+                <ScalarProperty Name="couponSmdComission" ColumnName="couponSmdComission" />
+                <ScalarProperty Name="priority" ColumnName="priority" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="CouponQuantity" ColumnName="CouponQuantity" />
+                <ScalarProperty Name="CouponTakenCount" ColumnName="CouponTakenCount" />
+                <ScalarProperty Name="CouponActualValue" ColumnName="CouponActualValue" />
+                <ScalarProperty Name="CouponSwapValue" ColumnName="CouponSwapValue" />
+                <ScalarProperty Name="BuyItImageUrl" ColumnName="BuyItImageUrl" />
+                <ScalarProperty Name="BuyItButtonLabel" ColumnName="BuyItButtonLabel" />
+                <ScalarProperty Name="BuyItLine3" ColumnName="BuyItLine3" />
+                <ScalarProperty Name="BuyItLine2" ColumnName="BuyItLine2" />
+                <ScalarProperty Name="BuuyItLine1" ColumnName="BuuyItLine1" />
+                <ScalarProperty Name="VideoUrl" ColumnName="VideoUrl" />
+                <ScalarProperty Name="Voucher2ImagePath" ColumnName="Voucher2ImagePath" />
+                <ScalarProperty Name="Voucher1ImagePath" ColumnName="Voucher1ImagePath" />
+                <ScalarProperty Name="Voucher2Value" ColumnName="Voucher2Value" />
+                <ScalarProperty Name="Voucher2Description" ColumnName="Voucher2Description" />
+                <ScalarProperty Name="Voucher2Heading" ColumnName="Voucher2Heading" />
+                <ScalarProperty Name="Voucher1Value" ColumnName="Voucher1Value" />
+                <ScalarProperty Name="Voucher1Description" ColumnName="Voucher1Description" />
+                <ScalarProperty Name="Voucher1Heading" ColumnName="Voucher1Heading" />
+                <ScalarProperty Name="RewardType" ColumnName="RewardType" />
+                <ScalarProperty Name="AmountSpent" ColumnName="AmountSpent" />
+                <ScalarProperty Name="ResultClicks" ColumnName="ResultClicks" />
+                <ScalarProperty Name="ProjectedReach" ColumnName="ProjectedReach" />
+                <ScalarProperty Name="RejectedReason" ColumnName="RejectedReason" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="AgeRangeEnd" ColumnName="AgeRangeEnd" />
+                <ScalarProperty Name="AgeRangeStart" ColumnName="AgeRangeStart" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDateTime" ColumnName="ModifiedDateTime" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="CorrectAnswer" ColumnName="CorrectAnswer" />
+                <ScalarProperty Name="Answer3" ColumnName="Answer3" />
+                <ScalarProperty Name="Answer2" ColumnName="Answer2" />
+                <ScalarProperty Name="Answer1" ColumnName="Answer1" />
+                <ScalarProperty Name="VerifyQuestion" ColumnName="VerifyQuestion" />
+                <ScalarProperty Name="LandingPageVideoLink" ColumnName="LandingPageVideoLink" />
+                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DisplayTitle" ColumnName="DisplayTitle" />
+                <ScalarProperty Name="SmdCredits" ColumnName="SMDCredits" />
+                <ScalarProperty Name="ClickRate" ColumnName="ClickRate" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="MaxBudget" ColumnName="MaxBudget" />
+                <ScalarProperty Name="EndDateTime" ColumnName="EndDateTime" />
+                <ScalarProperty Name="StartDateTime" ColumnName="StartDateTime" />
+                <ScalarProperty Name="ApprovalDateTime" ColumnName="ApprovalDateTime" />
+                <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
+                <ScalarProperty Name="Approved" ColumnName="Approved" />
+                <ScalarProperty Name="Archived" ColumnName="Archived" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CampaignDescription" ColumnName="CampaignDescription" />
+                <ScalarProperty Name="CampaignName" ColumnName="CampaignName" />
+                <ScalarProperty Name="SmdCampaign" ColumnName="SMDCampaign" />
+                <ScalarProperty Name="UserId" ColumnName="UserID" />
+                <ScalarProperty Name="LanguageId" ColumnName="LanguageID" />
+                <ScalarProperty Name="CampaignId" ColumnName="CampaignID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
