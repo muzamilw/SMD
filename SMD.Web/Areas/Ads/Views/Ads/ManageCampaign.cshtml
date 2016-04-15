@@ -899,13 +899,25 @@ else
 
                                         </div>*@
                                     <div class="form-group" style="margin-top:10px; margin-left:-8px;">
-                                        <div class="col-lg-8 text-campaign-left">
-
+                 
+                                        <div class="col-lg-5 text-campaign-left Float-Left" style="margin-left:6px;">
                                             <label class="control-label text-right tooltip-float font20 floatNone" style="float:left !important; ">Quiz Question</label>
+                                        </div>
+                                        <div class="col-lg-4 Float-Left" style="padding-top:3px;">
+                                            <div class="onoffswitch">
+                                                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchQZZ" data-bind="checked: $root.quizQuestionStatus, event: { click: $root.addQuizQuestPrice}">
+                                                <label class="onoffswitch-label" for="switchQZZ">
+                                                    <div class="onoffswitch-inner"></div>
+                                                    <div class="onoffswitch-switch"></div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2 text-campaign-left Float-Left" style="margin-left:6px;">
+                                            <span class="control-label text-right tooltip-float font20 floatNone" style="float:left !important; " data-bind="text: $root.quizPriceLbl()"></span>
                                         </div>
                                     </div>
                                   
-                                    <div class="form-group">
+                                    <div class="form-group" data-bind="visible: $root.quizQuestionStatus()">
                                         <div class="col-lg-4">
 
                                             <label for="txtVerifyQuestion" class="control-label text-right tooltip-float floatNone">50/50 Quiz question</label>
@@ -915,7 +927,7 @@ else
 
                                         </div>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group" data-bind="visible: $root.quizQuestionStatus()">
                                         <div class="col-lg-4">
 
                                             <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Choice 1</label>
@@ -925,7 +937,7 @@ else
 
                                         </div>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group" data-bind="visible: $root.quizQuestionStatus()">
                                         <div class="col-lg-4">
 
                                             <label for="txtVerifyAnswer2" class="control-label text-right floatNone">Choice 2</label>
@@ -945,7 +957,7 @@ else
 
                                         </div>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group" data-bind="visible: $root.quizQuestionStatus()">
                                         <div class="col-lg-4">
 
                                             <label for="txtCorrectAnswer" class="control-label text-right tooltip-float floatNone">Correct Answer</label>
@@ -1110,8 +1122,8 @@ else
                                      
                                         <div class="col-lg-4 Float-Left" style="padding-top:3px;">
                                             <div class="onoffswitch">
-                                                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchAzB" data-bind="checked: $root.buyItQuestionStatus, event: { click: $root.addBuyItPrice }">
-                                                <label class="onoffswitch-label" for="switchAzB">
+                                                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchVoucherONOFf" data-bind="checked: $root.buyItQuestionStatus, event: { click: $root.addBuyItPrice}">
+                                                <label class="onoffswitch-label" for="switchVoucherONOFf">
                                                     <div class="onoffswitch-inner"></div>
                                                     <div class="onoffswitch-switch"></div>
                                                 </label>
@@ -1276,8 +1288,8 @@ else
                                 </div>
                                 <div class="radio col-lg-12 row" style="margin-left: 10px;">
 
-                                    <input type="radio" name="optionsRadiosDeliver" id="optionsRadios3Day" value="1">
-                                    <label for="optionsRadios3Day">
+                                    <input type="radio" name="optionsRadiosDeliver" id="optionsRadios3Day" value="3" data-bind="checked: DeliveryDays, event: { click:$root.addDeliveryPrice }">
+                                    <label for="optionsRadios3Day" data-bind="text: $root.threePriceLbl()">
                                         3 days
                                     </label>
 
@@ -1285,15 +1297,15 @@ else
                                 <div class="radio col-lg-12 row" style="margin-left: 10px;">
 
 
-                                    <input type="radio" name="optionsRadiosDeliver" id="optionsRadios5Day">
-                                    <label for="optionsRadios5Day">
+                                    <input type="radio" name="optionsRadiosDeliver" id="optionsRadios5Day" value="5" data-bind="checked: DeliveryDays, event: { click:$root.addDeliveryPrice }">
+                                    <label for="optionsRadios5Day" data-bind="text: $root.fivePriceLbl()">
                                         5 days
                                     </label>
                                 </div>
                                 <div class="radio col-lg-12 row" style="margin-left: 10px;">
 
-                                    <input type="radio" name="optionsRadiosDeliver" id="optionsRadios10Day">
-                                    <label for="optionsRadios10Day">
+                                    <input type="radio" name="optionsRadiosDeliver" id="optionsRadios10Day" value="10" data-bind="checked: DeliveryDays, event: { click:$root.addDeliveryPrice }">
+                                    <label for="optionsRadios10Day" data-bind="text: $root.tenPriceLbl()">
                                         10 days
                                     </label>
 
@@ -1456,7 +1468,7 @@ else
                                                 <span data-bind="text:$root.reachedAudience()">0</span> people
                                             </div>
                                             <div class="" data-bind="visible:!$root.isDisplayCouponsAds()">
-                                                <span data-bind="text: '£' + $root.pricePerclick()" style="font-size: 18px;"></span>
+                                                <span data-bind="text: '£' + $root.pricePerclick().toFixed(2)" style="font-size: 18px;"></span>
                                             </div>
                                             <div class="clearfix"> </div>
 
@@ -1466,7 +1478,7 @@ else
                                                 <span>Max spend :</span>
                                             </div>
                                             <div class="">
-                                                <span data-bind="text: '£' + ($root.pricePerclick() * $root.reachedAudience() )"></span>
+                                                <span data-bind="text: '£' + ($root.pricePerclick().toFixed(2) * $root.reachedAudience() )"></span>
                                             </div>
                                             <div class="clearfix"> </div>
 

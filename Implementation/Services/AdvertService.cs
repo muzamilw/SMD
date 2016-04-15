@@ -250,6 +250,10 @@ namespace SMD.Implementation.Services
                 objUC.ProfessionClausePrice = campaignProduct.ProfessionClausePrice;
                 objUC.GenderClausePrice = campaignProduct.GenderClausePrice;
                 objUC.BuyItClausePrice = campaignProduct.BuyItClausePrice;
+                objUC.QuizQuestionClausePrice = campaignProduct.QuizQuestionClausePrice;
+                objUC.TenDayDeliveryClausePrice = campaignProduct.TenDayDeliveryClausePrice;
+                objUC.ThreeDayDeliveryClausePrice = campaignProduct.ThreeDayDeliveryClausePrice;
+                objUC.FiveDayDeliveryClausePrice = campaignProduct.FiveDayDeliveryClausePrice;
             }
 
             return new AdCampaignBaseResponse

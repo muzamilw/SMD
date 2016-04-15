@@ -25,6 +25,10 @@ namespace SMD.Models.DomainModels
         public Nullable<double> ProfessionClausePrice { get; set; }
         public Nullable<double> EducationClausePrice { get; set; }
         public Nullable<double> BuyItClausePrice { get; set; }
+        public Nullable<double> QuizQuestionClausePrice { get; set; }
+        public Nullable<double> TenDayDeliveryClausePrice { get; set; }
+        public Nullable<double> FiveDayDeliveryClausePrice { get; set; }
+        public Nullable<double> ThreeDayDeliveryClausePrice { get; set; }
         public virtual Country Country { get; set; }
         public virtual Currency Currency { get; set; }
 

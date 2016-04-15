@@ -827,3 +827,66 @@ fieldset[disabled] .btn-submit.active {
 
 
 }
+
+/*@media (min-width: 320px)
+{   
+    .cselect {
+      width: 233px !important;
+    }
+}
+@media (min-width: 375px)
+{   
+    .cselect {
+      width: 275px !important;
+    }
+}
+@media (min-width: 360px)
+{   
+    .cselect {
+      width: 360px !important;
+    }
+}
+@media (min-width: 411px)
+{
+   .cselect {
+     width: 305px !important;
+    }
+}
+@media (min-width: 435px)
+{
+   .cselect {
+     width: 322px !important;
+    }
+}
+@media (min-width: 481px)
+{
+   .cselect {
+      width: 100% !important;
+    }
+}
+@media (min-width: 661px)
+{
+       .cselect {
+      width: 100% !important;
+    }
+}
+@media (min-width: 768px)
+{
+       .cselect {
+      width: 572px !important;
+    }
+}
+@media (min-width: 992px)
+{
+
+    .cselect {
+      width: 100% !important;
+    }
+}
+@media (min-width: 1025px)
+{
+
+    .cselect {
+      width: 100% !important;
+    }
+}*/

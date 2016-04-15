@@ -51,7 +51,7 @@ namespace SMD.MIS.ModelMappers
                 //{
                 //    LandingPageVideoLink = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + source.LandingPageVideoLink;
                 //}
-                
+
             }
 
 
@@ -62,7 +62,7 @@ namespace SMD.MIS.ModelMappers
             return new AdCampaign
             {
                 CampaignId = source.CampaignId,
-                CreatedBy = source.Company != null? source.Company.CompanyName: source.CreatedBy,
+                CreatedBy = source.Company != null ? source.Company.CompanyName : source.CreatedBy,
                 LanguageId = source.LanguageId,
                 Type = source.Type,
                 Status = source.Status,
@@ -113,7 +113,7 @@ namespace SMD.MIS.ModelMappers
                 Voucher2Value = source.Voucher2Value,
                 Voucher1ImagePath = source.Voucher1ImagePath,
                 VoucherImagePath = Voucherpath,
-                VideoUrl  = source.VideoUrl,
+                VideoUrl = source.VideoUrl,
                 BuuyItLine1 = source.BuuyItLine1,
                 BuyItButtonLabel = source.BuyItButtonLabel,
                 BuyItImageUrl = source.BuyItImageUrl,
@@ -126,12 +126,12 @@ namespace SMD.MIS.ModelMappers
                 CouponSwapValue = source.CouponSwapValue,
                 CouponTakenCount = source.CouponTakenCount,
                 priority = source.priority,
-                 CouponDiscountValue = source.CouponDiscountValue,
-                 CouponExpiryLabel = source.CouponExpiryLabel,
+                CouponDiscountValue = source.CouponDiscountValue,
+                CouponExpiryLabel = source.CouponExpiryLabel,
                 couponImage2 = source.couponImage2,
                 CouponCategories = source.CampaignCategories != null ? source.CampaignCategories.Select(x => x.CouponCategory.CreateFrom()).ToList() : null,
 
-                 couponSmdComission = source.couponSmdComission,
+                couponSmdComission = source.couponSmdComission,
                 CouponImage3 = source.CouponImage3,
                 CouponImage4 = source.CouponImage4
             };
@@ -328,7 +328,7 @@ namespace SMD.MIS.ModelMappers
             }
             else if (source.Type == (int)AdCampaignCriteriaType.QuizQustion)
             {
-                if(source.QuizCampaign != null)
+                if (source.QuizCampaign != null)
                 {
                     QuestionString = source.QuizCampaign.VerifyQuestion;
                     if (source.QuizAnswerId == 1)
@@ -424,7 +424,11 @@ namespace SMD.MIS.ModelMappers
                 isStripeIntegrated = source.isStripeIntegrated,
                 GeoLat = source.GeoLat,
                 GeoLong = source.GeoLong,
-                BuyItClausePrice = source.BuyItClausePrice
+                BuyItClausePrice = source.BuyItClausePrice,
+                FiveDayDeliveryClausePrice = source.FiveDayDeliveryClausePrice,
+                QuizQuestionClausePrice = source.QuizQuestionClausePrice,
+                TenDayDeliveryClausePrice = source.TenDayDeliveryClausePrice,
+                ThreeDayDeliveryClausePrice = source.ThreeDayDeliveryClausePrice
             };
 
 

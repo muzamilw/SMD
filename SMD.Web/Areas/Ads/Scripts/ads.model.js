@@ -8,7 +8,8 @@
           Voucher1Heading, Voucher1Description, Voucher1Value, Voucher2Heading, Voucher2Description, Voucher2Value,
           Voucher1ImagePath, VoucherImagePath, CreatedBy, VideoUrl, BuuyItLine1, BuyItLine2, BuyItLine3, BuyItButtonLabel,
           BuyItImageUrl, AdViews, CompanyId, CouponSwapValue, CouponActualValue, CouponQuantity, CouponTakenCount, priority,
-          CouponDiscountValue, couponImage2, CouponImage3, CouponImage4, CouponExpiryLabel, couponSmdComission,CouponDiscountValue, CouponCategories) {
+          CouponDiscountValue, couponImage2, CouponImage3, CouponImage4, CouponExpiryLabel,
+          couponSmdComission, CouponCategories, DeliveryDays) {
        
           var
               //type and userID will be set on server sside
@@ -118,6 +119,7 @@
               buyItImageBytes = ko.observable(''),
               AdViews = ko.observable(AdViews),
               CompanyId = ko.observable(CompanyId),
+              DeliveryDays = ko.observable(DeliveryDays),
                // Errors
                 errors = ko.validation.group({
                     CampaignName:CampaignName,
@@ -170,7 +172,8 @@
                   CouponQuantity: CouponQuantity,
                   priority: priority,
                   VoucherImagePath: VoucherImagePath,
-                  CouponDiscountValue: CouponDiscountValue
+                  CouponDiscountValue: CouponDiscountValue,
+                  DeliveryDays: DeliveryDays
               }),
               // Has Changes
               hasChanges = ko.computed(function () {
@@ -182,7 +185,7 @@
               },
               // Convert to server data
               convertToServerData = function () {
-                  debugger;
+                  
                   var targetCriteria = [];
                   _.each(AdCampaignTargetCriterias(), function (item) {
                       console.log(item);
@@ -260,7 +263,8 @@
                       CouponTakenCount: CouponTakenCount(),
                       priority: priority(),
                       CouponDiscountValue: CouponDiscountValue(),
-                      CouponCategories: selectedCoupons
+                      CouponCategories: selectedCoupons,
+                      DeliveryDays: DeliveryDays()
                   };
               };
           return {
@@ -330,7 +334,8 @@
               CouponTakenCount: CouponTakenCount,
               priority: priority,
               CouponDiscountValue: CouponDiscountValue,
-              CouponCategories: CouponCategories
+              CouponCategories: CouponCategories,
+              DeliveryDays: DeliveryDays
           };
       };
 
@@ -479,7 +484,7 @@
             source.CampaignTypeImagePath, source.Description, source.ClickRate, source.Voucher1Heading, source.Voucher1Description, source.Voucher1Value, source.Voucher2Heading, source.Voucher2Description,
              source.Voucher2Value, source.Voucher1ImagePath, source.VoucherImagePath, source.CreatedBy, source.VideoUrl, source.BuuyItLine1, source.BuyItLine2, source.BuyItLine3, source.BuyItButtonLabel, source.BuyItImageUrl,source.AdViews,source.CompanyId,
             source.CouponSwapValue, source.CouponActualValue,source.CouponQuantity,source.CouponTakenCount, source.priority, source.CouponDiscountValue,
-             source.couponImage2, source.CouponImage3, source.CouponImage4, source.CouponExpiryLabel, source.couponSmdComission);
+             source.couponImage2, source.CouponImage3, source.CouponImage4, source.CouponExpiryLabel, source.couponSmdComission, source.DeliveryDays);
         
         _.each(source.AdCampaignTargetCriterias, function (item) {
             campaign.AdCampaignTargetCriterias.push(AdCampaignTargetCriteriasModel.Create(item));
