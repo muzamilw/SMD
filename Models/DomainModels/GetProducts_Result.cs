@@ -86,7 +86,7 @@ namespace SMD.Models.DomainModels
         public string BuyItButtonText { get; set; }
         public string BuyItImageUrl { get; set; }
 
-
+        public string VoucherImagePath { get; set; }
         /// <summary>
         /// Profile Question Answers
         /// </summary>

@@ -6,15 +6,19 @@
     { 
         vtype = "1";
     }
-
+    var colorOfBakV = "background:#33d3b4;padding-bottom: 20px;";
     var cashoutclass = vtype == "3" ? "btn-leadActive" : "btn-lead";
     var swapclass = vtype == "1"  ? "btn-leadActive" : "btn-lead";
     var offerclass = vtype == "2" ? "btn-leadActive" : "btn-lead";
     
     
-
+    if (vtype == "2")
+    {
+        colorOfBakV = "background:#31abe2;padding-bottom: 20px;";
+        
+    }
 }
-<section style="background:#33d3b4;">
+<section style="@colorOfBakV">
 
     <div class="container">
 

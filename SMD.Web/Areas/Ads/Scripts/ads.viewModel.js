@@ -81,16 +81,28 @@ define("ads/ads.viewModel",
                     buyItQuestionStatus = ko.observable(false),
                     AditionalCriteriaMode = ko.observable("1"), //1 = main buttons, 2 = profile questions , 3 = ad linked questions
                     couponCategories = ko.observableArray([]),
+                    quizQuestionStatus = ko.observable(false),
+                    quizPriceLbl = ko.observable("1"),
+                    tenPriceLbl = ko.observable("1"),
+                    fivePriceLbl = ko.observable("1"),
+                    threePriceLbl = ko.observable("1"),
+                    alreadyAddedDeliveryValue = ko.observable(false),
+                    isQuizQPerClickPriceAdded = ko.observable(false),
                     getCampaignBaseContent = function () {
                         dataservice.getBaseData({
                             RequestId: 1,
                             QuestionId: 0,
                         }, {
                             success: function (data) {
-
+                             
                                 if (data != null) {
-
+                                    
                                     UserAndCostDetail(data.UserAndCostDetails);
+                                    quizPriceLbl(UserAndCostDetail().QuizQuestionClausePrice + "p");
+                                    tenPriceLbl("10 days " + UserAndCostDetail().TenDayDeliveryClausePrice + "p");
+
+                                    threePriceLbl("3 days " + UserAndCostDetail().ThreeDayDeliveryClausePrice + "p");
+                                    fivePriceLbl("5 days " + UserAndCostDetail().FiveDayDeliveryClausePrice + "p");
                                     if (UserAndCostDetail().GenderClausePrice != null) {
                                         pricePerclick(pricePerclick() + UserAndCostDetail().GenderClausePrice);
                                     }
@@ -195,7 +207,7 @@ define("ads/ads.viewModel",
                     },
                      // Add new Profile Question
                     addNewCampaign = function () {
-                       
+                      
                         if (isDisplayCouponsAds() == false) {
                             isWelcomeScreenVisible(true);
                         } else {
@@ -211,7 +223,7 @@ define("ads/ads.viewModel",
                         //canSubmitForApproval(true);
                         //campaignModel(new model.Campaign());
 
-
+                   
                         //selectedCriteria();
                     //    getAudienceCount();
                         //campaignModel().Gender('1');
@@ -248,6 +260,9 @@ define("ads/ads.viewModel",
                         //    selectedLocation(objCity);
                         //    onAddLocation();
                         //}
+
+
+
                     },
 
                     closeNewCampaignDialog = function () {
@@ -392,7 +407,16 @@ define("ads/ads.viewModel",
                           campaignModel().CampaignImagePath("");
                           campaignModel().VoucherImagePath("");
                           campaignModel().LanguageId(41);
+                          campaignModel().DeliveryDays('10');
                           
+                          if (UserAndCostDetail() != null || UserAndCostDetail() != undefined) {
+                              alreadyAddedDeliveryValue(10);
+                              quizQuestionStatus(true);
+                              isQuizQPerClickPriceAdded(true);
+                              pricePerclick(pricePerclick() + UserAndCostDetail().QuizQuestionClausePrice);
+                              pricePerclick(pricePerclick() + UserAndCostDetail().TenDayDeliveryClausePrice);
+                          }
+                         
                           getAudienceCount();
 
                           bindAudienceReachCount();
@@ -433,7 +457,7 @@ define("ads/ads.viewModel",
                           saveCampaign(8);
                       },
                     saveCampaign = function (mode) {
-                      
+                    
                         if (isDisplayCouponsAds() == true) {
                             var selectedCouponCategories = $.grep(couponCategories(), function (n, i) {
                                 return (n.IsSelected == true);
@@ -749,6 +773,7 @@ define("ads/ads.viewModel",
                 },
                 //add location
                 onAddLocation = function (item) {
+                    debugger
                     selectedLocation().Radius = (selectedLocationRadius);
                     selectedLocation().IncludeorExclude = (selectedLocationIncludeExclude);
                     campaignModel().AdCampaignTargetLocations.push(new model.AdCampaignTargetLocation.Create({
@@ -867,7 +892,7 @@ define("ads/ads.viewModel",
                         }, {
                             success: function (data) {
                                 if (data != null) {
-                                    
+                                    debugger;
                                     // set languages drop down
                                     selectedCriteria();
                                     pricePerclick(0);
@@ -949,10 +974,10 @@ define("ads/ads.viewModel",
                                     isListVisible(false);
                                     isFromEdit(true);
                                     isNewCampaign(false);
-                                    buildMap();
+                                  //  buildMap();
                                     var profileQIds = [];
                                     var surveyQIds = [];
-                                    if (campaignModel().AdCampaignTargetLocations() != null || campaignModel().AdCampaignTargetLocations().length > 0) {
+                                    if (campaignModel().AdCampaignTargetLocations() != null && campaignModel().AdCampaignTargetLocations().length > 0) {
                                         if (UserAndCostDetail().LocationClausePrice != null && isLocationPerClickPriceAdded() == false) {
                                             pricePerclick(pricePerclick() + UserAndCostDetail().LocationClausePrice);
                                             isLocationPerClickPriceAdded(true);
@@ -1011,8 +1036,7 @@ define("ads/ads.viewModel",
                                             }
                                         }
                                     });
-                                    getAudienceCount();
-                                    bindAudienceReachCount();
+                                  
                                
                                     if (campaignModel().VoucherImagePath() != null || campaignModel().Voucher1Value() != null || campaignModel().Voucher1Description() != null || campaignModel().Voucher1Heading() != null)
                                     {
@@ -1026,7 +1050,12 @@ define("ads/ads.viewModel",
                                         
 
                                     }
-                                    
+                             
+                                    if (campaignModel().VerifyQuestion() != null || campaignModel().Answer1() != null || campaignModel().Answer2() != null || campaignModel().Answer3() != null) {
+                                        quizQuestionStatus(true);
+                                        pricePerclick(pricePerclick() + UserAndCostDetail().QuizQuestionClausePrice);
+                                        isQuizQPerClickPriceAdded(true);
+                                    }
                                     //buyItQuestionStatus
                                     // handle 2nd edit error 
                                     //  $(".modal-backdrop").remove();
@@ -1042,12 +1071,37 @@ define("ads/ads.viewModel",
 
                                     });
                                   
+                                    if (campaignModel().DeliveryDays() != null) {
+                                        if (campaignModel().DeliveryDays() == 3) {
+                                            if (UserAndCostDetail().ThreeDayDeliveryClausePrice != null) {
+                                                pricePerclick(pricePerclick() + UserAndCostDetail().ThreeDayDeliveryClausePrice);
+
+                                            }
+                                        } else if (campaignModel().DeliveryDays() == 5) {
+                                            if (UserAndCostDetail().FiveDayDeliveryClausePrice != null) {
+                                                pricePerclick(pricePerclick() + UserAndCostDetail().FiveDayDeliveryClausePrice);
+
+                                            }
+                                        } else if (campaignModel().DeliveryDays() == 10) {
+                                            if (UserAndCostDetail().TenDayDeliveryClausePrice != null) {
+                                                pricePerclick(pricePerclick() + UserAndCostDetail().TenDayDeliveryClausePrice);
+                                            }
+                                        }
+                                        alreadyAddedDeliveryValue(campaignModel().DeliveryDays());
+                                    } else {
+                                        campaignModel().DeliveryDays('10');
+                                        alreadyAddedDeliveryValue(10);
+                                        pricePerclick(pricePerclick() + UserAndCostDetail().TenDayDeliveryClausePrice);
+                                    }
+
+
                                     var arrayOfUpdatedList = couponCategories().clone();
                                     couponCategories.removeAll();
                                     ko.utils.arrayPushAll(couponCategories(), arrayOfUpdatedList);
                                     couponCategories.valueHasMutated();
                               
-                                    console.log(couponCategories());
+                                    getAudienceCount();
+                                    bindAudienceReachCount();
                                     $.unblockUI(spinner);
 
                                 }
@@ -1083,11 +1137,85 @@ define("ads/ads.viewModel",
                         isIndustoryPerClickPriceAdded(true);
                     }
                 },
-                addBuyItPrice = function (item) {
-                    if (UserAndCostDetail().BuyItClausePrice != null && isBuyItPerClickPriceAdded() == false) {
-                        pricePerclick(pricePerclick() + UserAndCostDetail().BuyItClausePrice);
-                        isBuyItPerClickPriceAdded(true);
+                addQuizQuestPrice = function () {
+                    debugger
+                    if (quizQuestionStatus() == false) {
+                        if (UserAndCostDetail().QuizQuestionClausePrice != null && isQuizQPerClickPriceAdded() == true) {
+
+
+                            pricePerclick(pricePerclick() - UserAndCostDetail().QuizQuestionClausePrice);
+                            isQuizQPerClickPriceAdded(false);
+
+                          }
+                      } else {
+
+                        if (UserAndCostDetail().QuizQuestionClausePrice != null && isQuizQPerClickPriceAdded() == false) {
+
+
+                            pricePerclick(pricePerclick() + UserAndCostDetail().QuizQuestionClausePrice);
+                            isQuizQPerClickPriceAdded(true);
+
+                          }
+                      }
+
+                      return true;
+                },
+                addBuyItPrice = function () {
+                   
+                    if (buyItQuestionStatus() == false) {
+                        if (UserAndCostDetail().BuyItClausePrice != null && isBuyItPerClickPriceAdded() == true) {
+
+
+                            pricePerclick(pricePerclick() - UserAndCostDetail().BuyItClausePrice);
+                            isBuyItPerClickPriceAdded(false);
+
+                        }
+                    } else {
+
+                        if (UserAndCostDetail().BuyItClausePrice != null && isBuyItPerClickPriceAdded() == false) {
+
+
+                            pricePerclick(pricePerclick() + UserAndCostDetail().BuyItClausePrice);
+                            isBuyItPerClickPriceAdded(true);
+
+                        }
                     }
+                 
+                    return true;
+                },
+                addDeliveryPrice = function () {
+                   
+                    if (alreadyAddedDeliveryValue() == 3) {
+                        pricePerclick(pricePerclick() - UserAndCostDetail().ThreeDayDeliveryClausePrice);
+
+                        
+                    } else if (alreadyAddedDeliveryValue() == 5) {
+                       
+                        pricePerclick(pricePerclick() - UserAndCostDetail().FiveDayDeliveryClausePrice);
+                       
+                    } else if (alreadyAddedDeliveryValue() == 10) {
+
+                        pricePerclick(pricePerclick() - UserAndCostDetail().TenDayDeliveryClausePrice);
+                        
+                    }
+
+                    alreadyAddedDeliveryValue(campaignModel().DeliveryDays());
+                    if (campaignModel().DeliveryDays() == 3) {
+                        if (UserAndCostDetail().ThreeDayDeliveryClausePrice != null) {
+                            pricePerclick(pricePerclick() + UserAndCostDetail().ThreeDayDeliveryClausePrice);
+
+                        }
+                    } else if (campaignModel().DeliveryDays() == 5) {
+                        if (UserAndCostDetail().FiveDayDeliveryClausePrice != null) {
+                            pricePerclick(pricePerclick() + UserAndCostDetail().FiveDayDeliveryClausePrice);
+
+                        }
+                    } else if (campaignModel().DeliveryDays() == 10) {
+                        if (UserAndCostDetail().TenDayDeliveryClausePrice != null) {
+                            pricePerclick(pricePerclick() + UserAndCostDetail().TenDayDeliveryClausePrice);
+                        }
+                    }
+                    return true;
                 },
                 onRemoveIndustry = function (item) {
                     // Ask for confirmation
@@ -1372,32 +1500,32 @@ define("ads/ads.viewModel",
                     });
                     campaignModel().AdCampaignTargetLocations.subscribe(function (value) {
                         getAudienceCount();
-                        buildMap();
+                      //  buildMap();
                     });
                     campaignModel().AdCampaignTargetCriterias.subscribe(function (value) {
                         getAudienceCount();
                     });
                 },
                 buildMap = function () {
-                 $(".locMap").css("display", "none");
-                 var initialized = false;
-                 _.each(campaignModel().AdCampaignTargetLocations(), function (item) {
-                    // $(".locMap").css("display", "inline-block");
-                     clearRadiuses();
-                     if (item.CityID() == 0 || item.CityID() == null) {
-                         addCountryMarker(item.Country());
-                     } else {
-                         if (!initialized)
-                             initializeMap(parseFloat(item.Longitude()), parseFloat(item.Latitude()));
-                         initialized = true;
-                         var included = true;
-                         if (item.IncludeorExclude() == '0') {
-                             included = false;
-                         }
-                         addPointer(parseFloat(item.Longitude()), parseFloat(item.Latitude()), item.City(), parseFloat(item.Radius()), included);
-                     }
-                 });
-             }
+                 //$(".locMap").css("display", "none");
+                 //var initialized = false;
+                 //_.each(campaignModel().AdCampaignTargetLocations(), function (item) {
+                 //   // $(".locMap").css("display", "inline-block");
+                 //    clearRadiuses();
+                 //    if (item.CityID() == 0 || item.CityID() == null) {
+                 //        addCountryMarker(item.Country());
+                 //    } else {
+                 //        if (!initialized)
+                 //            initializeMap(parseFloat(item.Longitude()), parseFloat(item.Latitude()));
+                 //        initialized = true;
+                 //        var included = true;
+                 //        if (item.IncludeorExclude() == '0') {
+                 //            included = false;
+                 //        }
+                 //        addPointer(parseFloat(item.Longitude()), parseFloat(item.Latitude()), item.City(), parseFloat(item.Radius()), included);
+                 //    }
+                 //});
+             },
                 addCountryToCountryList = function (country, name) {
                     if (country != undefined) {
 
@@ -1596,7 +1724,14 @@ define("ads/ads.viewModel",
                     showAdditionQuizCriteria: showAdditionQuizCriteria,
                     addBuyItPrice: addBuyItPrice,
                     couponCategories: couponCategories,
-                    openProductCategoryDialog: openProductCategoryDialog
+                    openProductCategoryDialog: openProductCategoryDialog,
+                    quizQuestionStatus: quizQuestionStatus,
+                    quizPriceLbl :quizPriceLbl,
+                    tenPriceLbl :tenPriceLbl,
+                    fivePriceLbl :fivePriceLbl,
+                    threePriceLbl: threePriceLbl,
+                    addDeliveryPrice: addDeliveryPrice,
+                    addQuizQuestPrice: addQuizQuestPrice
                 };
             })()
         };

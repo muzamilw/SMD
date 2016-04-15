@@ -19,6 +19,10 @@ namespace SMD.MIS.Areas.Api.Models
         public Nullable<double> ProfessionClausePrice { get; set; }
         public Nullable<double> EducationClausePrice { get; set; }
         public Nullable<double> BuyItClausePrice { get; set; }
+        public Nullable<double> QuizQuestionClausePrice { get; set; }
+        public Nullable<double> TenDayDeliveryClausePrice { get; set; }
+        public Nullable<double> FiveDayDeliveryClausePrice { get; set; }
+        public Nullable<double> ThreeDayDeliveryClausePrice { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
         public string Language { get; set; }

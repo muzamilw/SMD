@@ -1,21 +1,22 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var colorOfBak = "background:#33d3b4;padding-top: 10px; ";
+    var vtype = Request.QueryString["type"];
     
-     var vtype = Request.QueryString["type"];
-
     if (string.IsNullOrEmpty(vtype))
-    { 
+    {
         vtype = "1";
     }
-    
-    var heading ="";
-    
-    if ( vtype == "1")
+
+    var heading = "";
+
+    if (vtype == "1")
     {
         heading = "Swap your in App Cash for <b>Vouchers</b>";
     }
-    else if ( vtype == "2")
+    else if (vtype == "2")
     {
+        colorOfBak = "background:#31abe2;padding-top: 10px; ";
         heading = "Purchase any 2-4-1 Offer for <b>£1</b> using your cash balance";
     }
 }
@@ -28,8 +29,8 @@
 @section COLOR
 {
 
-   <!-- COLOR STYLE CSS -->
-<link rel="stylesheet" href="~/content/green.css">
+    <!-- COLOR STYLE CSS -->
+    <link rel="stylesheet" href="~/content/green.css">
 
 
 
@@ -38,224 +39,215 @@
 @Html.Partial("~/Views/Shared/voucherbar.cshtml")
 
 
-  <section style="background:#33d3b4;    padding-top: 10px;" class="text-blue">
+<section style="@colorOfBak " class="text-blue">
     <div id="sense" class="container text-blue">
         <div class="row clearfix inner-bottom-md">
 
 
-            <div class="col-sm-12">
+            <div class="col-md-12">
                 <h1 class="main_title text-white" style="margin-bottom:0px;">
 
-                   @Html.Raw(heading)
+                    @Html.Raw(heading)
                 </h1>
-            </div>
 
-            <div class="row inner-top-xs" id="couponsContains">
+</div>
+                <div class=" inner-top-xs" id="couponsContains">
 
-                <div class="col-lg-4  col-md-4 col-sm-12 col-xs-12" >
+                    <div class="col-lg-4  col-md-4 col-sm-12 col-xs-12">
 
-                    <div class="input-group col-md-12 formcontrol" style="padding-left:0px;padding-right:0px;">
-
-
-
-                        <input type="text" id="txtKeyword" class="form-control input-lg" placeholder="Search" style="font-size:22px;" />
-                        <span class="input-group-btn">
-                            <button class="btn btn-default btn-lg" type="button">
-                                <i class="glyphicon glyphicon-search"></i>
-                            </button>
-                        </span>
-                    </div>
-
-                    <div class="input-group col-md-12 formcontrol" style="padding-top:10px;padding-left:0px;">
-                        <label class="clabel">
-                            <select class="cselect" id="selcat">
-                                <option selected value="0">All Categories</option>
-
-                            </select>
-                        </label>
-
-                    </div>
+                        <div class="input-group col-md-12 formcontrol" style="padding-left:0px;padding-right:0px;">
 
 
 
+                            <input type="text" id="txtKeyword" class="form-control input-lg" placeholder="Search" style="font-size:22px;" />
+                            <span class="input-group-btn">
+                                <button class="btn btn-default btn-lg" type="button">
+                                    <i class="glyphicon glyphicon-search"></i>
+                                </button>
+                            </span>
+                        </div>
 
-                    <div class="standard-container extraMargingStandardContainer" style="margin-top:17px;padding-left:20px;padding-right:20px">
-                        <div id="bonus-deals-side">
+                        <div class="input-group col-md-12 formcontrol" style="padding-top:10px;padding-left:0px;padding-right:0px;margin-right:0px;">
+                            <label class="clabel">
+                                <select class="cselect col-md-12" id="selcat">
+                                    <option selected value="0">All Categories</option>
 
+                                </select>
+                            </label>
 
                         </div>
+
+
+
+
+                        <div class="standard-container extraMargingStandardContainer" style="margin-top:17px;padding-left:20px;padding-right:20px">
+                            <div id="bonus-deals-side">
+
+
+                            </div>
+                        </div>
+
                     </div>
 
-                </div>
-
-                <div class="col-lg-8 col-md-8 col-sm-6 hidden-xs hidden-sm content-main-deals content">
+                    <div class="col-lg-8 col-md-8 col-sm-6 hidden-xs hidden-sm content-main-deals content">
 
 
-                    <div class="standard-container" style="padding:0px;">
+                        <div class="standard-container" style="padding:0px;">
 
-                        <div class="unit ctu  js-main-deal selector-620648" data-om=";620648;" data-dealid="620648">
-                            <h1 class="mvtest_header_v2 cld" id="couponMainHeading"></h1>
+                            <div class="unit ctu  js-main-deal selector-620648" data-om=";620648;" data-dealid="620648">
+                                <h1 class="mvtest_header_v2 cld" id="couponMainHeading"></h1>
 
 
-                            <div class="cld pos-r main-deal-data parent-container">
-                                <div class="slider">
-                                    <div class="">
-                                        <ul class="slides">
-                                            <li class="clone" style="width: 100%; float: left; display: block;">
+                                <div class="cld pos-r main-deal-data parent-container">
+                                    <div class="slider">
+                                        <div class="">
+                                            <ul class="slides">
+                                                <li class="clone" style="width: 100%; float: left; display: block;">
 
-                                                <a class="main-deal-image-link" href="/payment/620648" style="cursor: pointer;">
-                                                    <img id="voucMainSliderImg" src="https://static.wowcher.co.uk/images/deal/620648/154352.jpg" width="778" height="521" class="picture-slides-image deal-detail-img top" alt="£289 for a PDO threadlift on eye bags, £489 for one facial area of your choice or £985 for the full face at Harley Street Elite Clinic - save up to 59%" title="£289 for a PDO threadlift on eye bags, £489 for one facial area of your choice or £985 for the full face at Harley Street Elite Clinic - save up to 59%">
-                                                </a>
-                                            </li>
-                                        </ul>
+                                                    <a class="main-deal-image-link" href="/payment/620648" style="cursor: pointer;">
+                                                        <img id="voucMainSliderImg" src="https://static.wowcher.co.uk/images/deal/620648/154352.jpg" width="778" height="521" class="picture-slides-image deal-detail-img top" alt="£289 for a PDO threadlift on eye bags, £489 for one facial area of your choice or £985 for the full face at Harley Street Elite Clinic - save up to 59%" title="£289 for a PDO threadlift on eye bags, £489 for one facial area of your choice or £985 for the full face at Harley Street Elite Clinic - save up to 59%">
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <div id="deal-of-day-esi" class="flt-r">
+
+                                        <div class="corner-container ctu-redeem-now main-deal-data"></div>
+                                        <div class="ctu-pointsCollect main-deal-data">
+                                            <span style="color:white">
+                                                Collect 28,900
+                                                Club Wowcher points when you buy this deal
+                                            </span>
+                                        </div>
+                                        <div class="ctu-discounted main-deal-data">
+                                            <div class="ndod-multiprice" style="padding-top: 35.5px ; ">
+                                                <span class="innerColour">
+
+                                                    FROM
+                                                </span>
+                                            </div>
+                                            <div class="ndod-price" style="font-size: 64px; margin: 5.5px 0; letter-spacing: -3px">
+                                                <span class="inner innerColour">
+                                                    <span class="ndod-currency">£</span><span id="couDiscountedVal" class="ndod-amount">289</span>
+                                                </span>
+                                            </div>
+                                            <a href="http://harleystreeteliteclinic.com/tear-trough/" target="_blank" class="price-link" rel="nofollow">
+                                                <del class="ndod-original-price"><span class="ndod-currency">£</span><span id="couActualVal" class="ndod-amount">700</span></del>
+                                            </a>
+                                        </div><div class="main-deal-data-wrapper">
+                                            <div class="ctu-stats-md-topbg"></div>
+                                            <div class="ctu-stats main-deal-data">
+
+                                                <table class="ctu-stats-table ctu-stats-table-full-width">
+                                                    <tbody>
+                                                        <tr>
+
+                                                            <td>
+                                                                <div class="stat-bought"><span class="innerColour">Bought</span><strong style="font-size:55px;line-height:48px" id="coupBought">0</strong></div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="stat-save">
+                                                                    <span class="innerColour">Save </span><span class="innerColour">up to </span><strong style="font-size:52px;line-height:48px" id="coupPerct">59%</strong>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="deal-detail-timer timer-620648">
+
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+
+                                                <a title="Buy this deal" class="ctu-buy-big waMultiPrice" data-multibuy="true" href="/payment/620648" id="mainDealBuy">BUY!</a>
+
+                                                @*<a class="waBuyAsGift js-buy-gift-button-track ctu-buy-gift" href="/payment/620648?gift=1">BUY AS A GIFT</a>*@
+
+                                            </div>
+
+                                            <div class="ctu-stats-md-btmbg"></div>
+                                        </div><!-- main-deal-data-wrapper END -->
+
                                     </div>
                                 </div>
 
-                                <div id="deal-of-day-esi" class="flt-r">
+                            </div>
 
-                                    <div class="corner-container ctu-redeem-now main-deal-data"></div>
-                                    <div class="ctu-pointsCollect main-deal-data">
-                                        <span style="color:white">
-                                            Collect 28,900
-                                            Club Wowcher points when you buy this deal
-                                        </span>
-                                    </div>
-                                    <div class="ctu-discounted main-deal-data">
-                                        <div class="ndod-multiprice" style="padding-top: 35.5px ; ">
-                                            <span class="innerColour">
 
-                                                FROM
-                                            </span>
-                                        </div>
-                                        <div class="ndod-price" style="font-size: 64px; margin: 5.5px 0; letter-spacing: -3px">
-                                            <span class="inner innerColour">
-                                                <span class="ndod-currency">£</span><span id="couDiscountedVal" class="ndod-amount">289</span>
-                                            </span>
-                                        </div>
-                                        <a href="http://harleystreeteliteclinic.com/tear-trough/" target="_blank" class="price-link" rel="nofollow">
-                                            <del class="ndod-original-price"><span class="ndod-currency">£</span><span id="couActualVal" class="ndod-amount">700</span></del>
-                                        </a>
-                                    </div><div class="main-deal-data-wrapper">
-                                        <div class="ctu-stats-md-topbg"></div>
-                                        <div class="ctu-stats main-deal-data">
+                            <div class="ctu-details">
+                                <div class="twocol">
+                                    <h2>Highlights</h2>
+                                    <ul>
+                                        <li>Feel fantastic with a PDO threadlift.</li>
+                                        <li>Treat eye bags, cheeks, forehead, lower face, neck or the full face.</li>
+                                        <li>Aims to help reduce the appearance of unwanted fine lines and wrinkles.</li>
+                                        <li>Non-surgical treatment carried out by a qualified doctor.</li>
+                                        <li>Includes pre-treatment consultation.</li>
+                                        <li>Open seven days a week (see below). Based on world-famous Harley Street. </li>
+                                    </ul>
+                                </div>
+                                <div class="twocol">
+                                    <h2>The Fine Print</h2>
+                                    <ul>
+                                        <li>One per person.</li>
+                                        <li>May buy multiples as gifts.</li>
+                                        <li>Voucher valid until 10th Jul 2016.</li>
+                                        <li>New Harley Street Elite Clinic customers only.</li>
+                                        <li>If deemed medically unsuitable, a full refund will be given.</li>
+                                        <li>48-hour cancellation policy applies.</li>
+                                        <li>Appointments subject to availability.</li>
+                                    </ul>
+                                </div>
+                                <br class="clearing">
 
-                                            <table class="ctu-stats-table ctu-stats-table-full-width">
-                                                <tbody>
-                                                    <tr>
+                                <div id="deal-detail-fullview" class="cld pos-r pink-star-bullet " style="display: block;">
+                                    <h2>Full Details</h2>
+                                    <p>If you're woeful about wrinkles and baffled by bags under your eyes, fret not - follow the <i>thread</i> of today's deal...</p>
 
-                                                        <td>
-                                                            <div class="stat-bought"><span class="innerColour">Bought</span><strong style="font-size:55px;line-height:48px" id="coupBought">0</strong></div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="stat-save">
-                                                                <span class="innerColour">Save </span><span class="innerColour">up to </span><strong style="font-size:52px;line-height:48px" id="coupPerct">59%</strong>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="deal-detail-timer timer-620648">
+                                    <p>We're offering you a <b>PDO threadlift for eye bags</b> for <b>£289</b>, <b>on the cheeks, forehead line, lower face or neck</b> for <b>£489</b> or <b>your full face</b> for just <b>£985</b>, saving you <b>up to 59% off</b> <a href="http://harleystreeteliteclinic.com/" rel="nofollow" target="_blank">Harley Street Elite Clinic's</a> prices.</p>
 
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
+                                    <p>Based in central London, the experienced and friendly professionals at Harley Street Elite Clinic are on a mission to help you look and feel great! With today’s deal, you’ll get a non-surgical PDO threadlift treatment on your eye bags, full face, or a choice of either the cheeks, forehead, lower part of the face or neck. With a full consultation included, the total treatment time takes just up to an hour for one area and up to two hours for a full face session. Perfect!</p>
 
-                                            <a title="Buy this deal" class="ctu-buy-big waMultiPrice" data-multibuy="true" href="/payment/620648" id="mainDealBuy">BUY!</a>
+                                    <p><b>Opening Hours</b></p>
 
-                                            @*<a class="waBuyAsGift js-buy-gift-button-track ctu-buy-gift" href="/payment/620648?gift=1">BUY AS A GIFT</a>*@
-
-                                        </div>
-
-                                        <div class="ctu-stats-md-btmbg"></div>
-                                    </div><!-- main-deal-data-wrapper END -->
+                                    <p></p><ul>
+                                        <li>
+                                            Monday-Friday: 10am-9pm<p></p>
+                                            <p></p>
+                                        </li>
+                                        <li>Saturday-Sunday; 10am-5.30pm</li>
+                                    </ul>
 
                                 </div>
+                                <div class="deal-detail-fullview-btmbg"></div>
                             </div>
-
                         </div>
 
 
-                        <div class="ctu-details">
-                            <div class="twocol">
-                                <h2>Highlights</h2>
-                                <ul>
-                                    <li>Feel fantastic with a PDO threadlift.</li>
-                                    <li>Treat eye bags, cheeks, forehead, lower face, neck or the full face.</li>
-                                    <li>Aims to help reduce the appearance of unwanted fine lines and wrinkles.</li>
-                                    <li>Non-surgical treatment carried out by a qualified doctor.</li>
-                                    <li>Includes pre-treatment consultation.</li>
-                                    <li>Open seven days a week (see below). Based on world-famous Harley Street. </li>
-                                </ul>
-                            </div>
-                            <div class="twocol">
-                                <h2>The Fine Print</h2>
-                                <ul>
-                                    <li>One per person.</li>
-                                    <li>May buy multiples as gifts.</li>
-                                    <li>Voucher valid until 10th Jul 2016.</li>
-                                    <li>New Harley Street Elite Clinic customers only.</li>
-                                    <li>If deemed medically unsuitable, a full refund will be given.</li>
-                                    <li>48-hour cancellation policy applies.</li>
-                                    <li>Appointments subject to availability.</li>
-                                </ul>
-                            </div>
-                            <br class="clearing">
-
-                            <div id="deal-detail-fullview" class="cld pos-r pink-star-bullet " style="display: block;">
-                                <h2>Full Details</h2>
-                                <p>If you're woeful about wrinkles and baffled by bags under your eyes, fret not - follow the <i>thread</i> of today's deal...</p>
-
-                                <p>We're offering you a <b>PDO threadlift for eye bags</b> for <b>£289</b>, <b>on the cheeks, forehead line, lower face or neck</b> for <b>£489</b> or <b>your full face</b> for just <b>£985</b>, saving you <b>up to 59% off</b> <a href="http://harleystreeteliteclinic.com/" rel="nofollow" target="_blank">Harley Street Elite Clinic's</a> prices.</p>
-
-                                <p>Based in central London, the experienced and friendly professionals at Harley Street Elite Clinic are on a mission to help you look and feel great! With today’s deal, you’ll get a non-surgical PDO threadlift treatment on your eye bags, full face, or a choice of either the cheeks, forehead, lower part of the face or neck. With a full consultation included, the total treatment time takes just up to an hour for one area and up to two hours for a full face session. Perfect!</p>
-
-                                <p><b>Opening Hours</b></p>
-
-                                <p></p><ul>
-                                    <li>
-                                        Monday-Friday: 10am-9pm<p></p>
-                                        <p></p>
-                                    </li>
-                                    <li>Saturday-Sunday; 10am-5.30pm</li>
-                                </ul>
-
-                            </div>
-                            <div class="deal-detail-fullview-btmbg"></div>
-                        </div>
                     </div>
-
 
                 </div>
 
-            </div>
 
-
-            <div class="row inner-top-xs " id="couponsNotFound" style="display:none">
-                <div class=" col-xs-12">
-                    <h3 class="text-white text-center">No Coupons found based on your search and selection criteria. Please try again by changing search and filtering criteria.</h3>
+                <div class="row inner-top-xs " id="couponsNotFound" style="display:none">
+                    <div class=" col-xs-12">
+                        <h3 class="text-white text-center">No Coupons found based on your search and selection criteria. Please try again by changing search and filtering criteria.</h3>
                     </div>
                 </div>
             </div>
-        </div>
+    </div>
 </section>
-  <!-- Header -->
-
-
-
-
-
-
-
-
-
-        <!-- Testimonial -->
+<!-- Header -->
+<!-- Testimonial -->
 <div id="testimonial" class="container text-blue" style="padding-top:20px;">
-   
+
     <div class="row">
         @*<div class='col-md-12 text-center p_title'>
-            <h2>Happy Clickers</h2>
-           
-        </div>*@
+                <h2>Happy Clickers</h2>
+
+            </div>*@
     </div>
     <div class='row'>
         <div class=' col-md-12'>
@@ -352,15 +344,13 @@
     </div>
 </div>
 <!-- end testimonial -->
-
-
-    <!-- Video -->
+<!-- Video -->
 <section id="video" class="container-fluid text-blue" style="display:none">
     <div class="container">
         <div class="row clearfix">
             <div class="col-md-12 column p_title">
                 <h2 class="text-center">Lets get Disruptive</h2>
-                
+
             </div>
             <div class="col-md-offset-2 col-md-8 ipad">
                 <a class="popup-youtube" href="http://www.youtube.com/watch?v=sE_YY8E1JMs">
@@ -387,13 +377,17 @@
     //    size            : "50%"
     //});
 
+    $(document).ready(function(){
+    
+    });
+
     $(document).ajaxStart(function(){
-           
+
         $.LoadingOverlay("show", {
             image       : "",
             fontawesome : "fa fa-spinner fa-spin"
         });
-      
+
     });
 
     $(document).ajaxStop(function(){
@@ -401,24 +395,24 @@
     });
 
 
-   
+
 
     var Coupons = [];
     $(document).ready(function () {
         $.LoadingOverlay("");
 
-       
+
 
         GetCategories();
-        
 
-       
+
+
     });
 
 
     function getCoupons()
     {
-        
+
         var categoryId = $("#selcat option:selected").val();
         var keywords = $("#txtKeyword").val();
         var vtype = @vtype;
@@ -453,7 +447,7 @@
             },
             error : function()
             {
-                
+
                 $.LoadingOverlay("hide");
             }
         });
@@ -471,7 +465,7 @@
 
                 var selcat = $("#selcat");
                 Coupons = response;
-             
+
                 $(response.CouponCategories).each(function (i, val) {
 
                     selcat.append('<option value="' + val.CagtegoryId + '">' + val.Name + '</option>');
@@ -479,7 +473,7 @@
                 });
 
                 getCoupons();
-               
+
             }
         });
     }
@@ -488,9 +482,9 @@
     $('#selcat').on('change', function() {
         getCoupons();
     });
-  
+
     function LoadSelectedVoucher(CouponId) {
-      
+
         var couponObj = $.grep(Coupons, function (n, i) {
             return (n.CouponId == CouponId);
         });
@@ -504,6 +498,6 @@
             $("#coupPerct").text(100 - parseInt((parseFloat(couponObj[0].CouponDiscountedValue) / parseFloat(couponObj[0].CouponActualValue)) * 100) + '%');
             $("#coupBought").text(couponObj[0].CouponTakenValue);
         }
-      
+
     }
 </script>
