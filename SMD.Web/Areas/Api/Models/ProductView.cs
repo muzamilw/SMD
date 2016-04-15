@@ -37,5 +37,6 @@ namespace SMD.MIS.Areas.Api.Models
         public string BuyItLine3 { get; set; }
         public string BuyItButtonText { get; set; }
         public string BuyItImageUrl { get; set; }
+        public string VoucherImagePath { get; set; }
     }
 }

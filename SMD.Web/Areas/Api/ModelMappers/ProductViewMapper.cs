@@ -49,7 +49,8 @@ namespace SMD.MIS.Areas.Api.ModelMappers
                        BuyItLine1 = source.BuyItLine1,
                        BuyItLine2 = source.BuyItLine2,
                        BuyItLine3 = source.BuyItLine3,
-                       LandingPageUrl = source.LandingPageUrl
+                       LandingPageUrl = source.LandingPageUrl,
+                       VoucherImagePath = source.VoucherImagePath
                    };
         }
 
