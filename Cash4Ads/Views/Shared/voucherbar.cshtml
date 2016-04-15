@@ -1,4 +1,19 @@
-﻿
+﻿@{
+
+    var vtype = Request.QueryString["type"];
+
+    if (string.IsNullOrEmpty(vtype))
+    { 
+        vtype = "1";
+    }
+
+    var cashoutclass = vtype == "3" ? "btn-leadActive" : "btn-lead";
+    var swapclass = vtype == "1"  ? "btn-leadActive" : "btn-lead";
+    var offerclass = vtype == "2" ? "btn-leadActive" : "btn-lead";
+    
+    
+
+}
 <section style="background:#33d3b4;">
 
     <div class="container">
@@ -8,10 +23,12 @@
             <div style="font-size:22px;font-weight:bold">  £ Sign In</div>
         </div>
 
-        <div id="nav" class=" pull-right inner-top-xs" style="padding-right:60px;">
-            <button type="button" class="btn btn-lead btn-lg">Cash Out</button>
-            <button type="button" class="btn btn-leadActive btn-lg">Swap 4 Vouchers</button>
-            <button type="button" class="btn btn-lead btn-lg">2-4-1 Offers</button>
+        <div id="nav" class=" pull-right inner-top-xs" style="">
+
+
+            <a href="@Url.Action("cashout", "Home", new { type = 3 })" class=" btn @cashoutclass btn-xlg ">Cash Out</a>
+            <a href="@Url.Action("Index", "Home", new { type = 1 })" class="btn @swapclass btn-xlg">Swap 4 Vouchers</a>
+            <a href="@Url.Action("Index", "Home", new { type = 2 })" class="btn @offerclass btn-xlg ">2-4-1 Offers</a>
 
         </div>
     </div>

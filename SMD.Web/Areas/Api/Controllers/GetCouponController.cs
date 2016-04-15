@@ -39,13 +39,13 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// </summary>
 
 
-        public List<GetCoupons_Result> Get(string UserId, int CategoryId, string Keyword, int Type, int PageNo, int PageSize)
+        public List<GetCoupons_Result> Get(string UserId)
         {
             if (string.IsNullOrEmpty(UserId))
             {
                 throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
             }
-            return _advertService.GetCoupons(UserId, CategoryId, Keyword, Type, PageNo, PageSize);            
+            return _advertService.GetCoupons(UserId);            
         }
 
         #endregion

@@ -363,30 +363,15 @@ namespace SMD.Repository.BaseRepository
         /// <summary>
         /// Gets Coupons
         /// </summary>
-        public ObjectResult<GetCoupons_Result> GetCoupons(string userId, int? TypeId, int? CategoryId, string Keyword, int FromRow, int ToRow)
+        public ObjectResult<GetCoupons_Result> GetCoupons(string userId)
         {
             var userIdParameter = userId != null ?
                 new ObjectParameter("UserID", userId) :
                 new ObjectParameter("UserID", typeof(string));
 
-            var TypeIdParameter = TypeId.HasValue ?
-                new ObjectParameter("TypeId", TypeId) :
-                new ObjectParameter("TypeId", typeof(int));
+           
 
-            var CategoryIdParameter = CategoryId.HasValue ?
-                new ObjectParameter("CategoryId", CategoryId) :
-                new ObjectParameter("CategoryId", typeof(int));
-
-            var KeywordParameter = Keyword != null ?
-              new ObjectParameter("Keyword", Keyword) :
-              new ObjectParameter("Keyword", typeof(string));
-
-            var FromRowParameter = new ObjectParameter("FromRow", FromRow) ;
-
-            var ToRowParameter =
-             new ObjectParameter("ToRow", ToRow);
-
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCoupons_Result>("GetCoupons", userIdParameter, TypeIdParameter, CategoryIdParameter, KeywordParameter, FromRowParameter, ToRowParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCoupons_Result>("GetCoupons", userIdParameter);
         }
         #endregion
     }

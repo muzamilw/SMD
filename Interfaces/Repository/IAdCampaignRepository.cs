@@ -28,7 +28,8 @@ namespace SMD.Interfaces.Repository
         IEnumerable<AdCampaign> GetAdCampaignById(long campaignId);
         UserAndCostDetail GetUserAndCostDetail();
         User GetUserById();
-        List<GetCoupons_Result> GetCoupons(string UserId, int CategoryId, string Keyword, int Type, int PageNo, int PageSize);
-        List<Coupons> GetAllCoupons();
+      
+        List<GetCoupons_Result> GetCoupons(string UserId);
+        List<Coupons> GetAllCoupons(int categoryId, int type, int size, string keywords, int pageNo);
     }
 }

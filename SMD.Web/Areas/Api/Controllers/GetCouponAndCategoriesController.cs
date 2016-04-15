@@ -35,10 +35,10 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// </summary>
 
 
-        public List<Coupons> Get()
+        public List<Coupons> Get(int categoryId, int type, int size, string keywords, int pageNo)
         {
             
-            return _advertService.GetAllCoupons();            
+            return  _advertService.GetAllCoupons(categoryId,type,size,keywords,pageNo);            
         }
 
         #endregion

@@ -82,9 +82,9 @@ div.ndod-content {
 }
 
 .content-main-deals {
-    float: left;
-    margin: 0 0 0 14px;
-    width: 65%;
+   
+  
+    
     padding: 16px;
     padding-top: 0px;
 }
@@ -6939,9 +6939,16 @@ div.content .unit.ctu h1 {
     padding: 8px 16px 0 16px;
     position: relative;
     top: -19px;
-    width: 650px;
+    
     word-wrap: break-word;
     z-index: 4;
+}
+
+@media (min-width: 1024px) {
+
+    div.content .unit.ctu h1 {
+        width: 650px;
+    }
 }
 
 .btm-header-bg {
@@ -6995,7 +7002,7 @@ div.content .unit.ctu .slider {
 .ctu .ctu-discounted {
     position: absolute;
     top: 121px;
-    left: 435px;
+    right: 3%;
     height: 184px;
     width: 182px;
     z-index: 4;
@@ -7010,11 +7017,23 @@ div.content .unit.ctu .slider {
     color: #fff;
     position: absolute;
     top: 25px;
-    left: 404px;
+   
     z-index: 4;
     font-size: 11px;
     text-align: center;
     line-height: 1.5em;
+}
+
+@media (min-width: 768px) {
+    .ctu .ctu-pointsCollect {
+        right: 4px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .ctu .ctu-pointsCollect {
+        right: 22px;
+    }
 }
 
     .ctu .ctu-pointsCollect span {
@@ -7078,15 +7097,27 @@ div.content .unit.ctu .slider {
     z-index: 40;
     float: right;
 }
-
-.ctu .ctu-stats-table {
-    font-weight: 700;
-    margin-right: 192px;
-    text-align: center;
+@media (min-width: 768px) {
+    .ctu .ctu-stats-table {
+        font-weight: 700;
+        margin-right: 86px;
+        text-align: center;
+    }
 }
 
-.ctu .ctu-stats-table-full-width {
-    width: 485px;
+@media (min-width: 1200px) {
+    .ctu .ctu-stats-table {
+        font-weight: 700;
+        margin-right: 192px;
+        text-align: center;
+    }
+}
+
+@media (min-width: 1024px) {
+
+    .ctu .ctu-stats-table-full-width {
+        width: 485px;
+    }
 }
 
 .ctu .ctu-stats-table-sold-out-over {
@@ -7179,19 +7210,40 @@ div.content .unit.ctu .slider {
     padding: 0 16px;
 }
 
-.ctu .ctu-buy-big {
-    font-size: 2.8em;
-    font-weight: 700;
-    height: 85px;
-    padding-top: 16px;
-    position: absolute;
-    right: 32px;
-    text-align: center;
-    text-decoration: none;
-    top: -16px;
-    width: 157px;
-    z-index: 6;
+@media (min-width: 768px){
+
+    .ctu .ctu-buy-big {
+        font-size: 1.8em;
+        font-weight: 700;
+        height: 68px;
+        padding-top: 16px;
+        position: absolute;
+        right: 17px;
+        text-align: center;
+        text-decoration: none;
+        top: -16px;
+        width: 115px;
+        z-index: 6;
+    }
 }
+
+@media (min-width: 1200px){
+    .ctu .ctu-buy-big {
+        font-size: 2.8em;
+        font-weight: 700;
+        height: 85px;
+        padding-top: 16px;
+        position: absolute;
+        right: 32px;
+        text-align: center;
+        text-decoration: none;
+        top: -16px;
+        width: 157px;
+        z-index: 6;
+    }
+}
+
+
 
 .expressBuyContainer .ctu-buy-big {
     display: block;
@@ -8967,7 +9019,7 @@ body .login-join-page h1 {
     .ndod-view-mini .ndod-deal-image {
         display: block;
         width: 100%;
-        height: 182px;
+        height: 225px;
     }
 
     .ndod-view-mini .ndod-ending-soon {
@@ -14835,9 +14887,11 @@ a {
 
 .standard-container {
     background-color: #fff;
-    -moz-box-shadow: 0 0 4px #bbb;
-    -webkit-box-shadow: 0 0 4px #bbb;
-    box-shadow: 0 0 4px #bbb;
+    -moz-box-shadow: 0 0 6px #555353;
+    -webkit-box-shadow: 0 0 6px #555353;
+    box-shadow: 0 0 6px #555353;
+        padding: 16px 16px 0 16px;
+      
 }
 
 .grad-unit {
@@ -17597,3 +17651,33 @@ div.content .unit.ctu .ctu-sponsor div {
     -webkit-box-shadow: 0 0 4px #bbb;
     box-shadow: 0 0 4px #bbb;
 }
+
+@media (min-width: 768px) {
+    .extraMargingStandardContainer {
+        margin-left:10%;
+        margin-right:10%;
+    }
+}
+
+@media (min-width: 1200px) {
+    .extraMargingStandardContainer {
+        margin-left:0px;
+        margin-right:0px;
+    }
+}
+
+
+
+    .formcontrol {
+        margin-left:10%;
+        margin-right:10%;
+    }
+
+
+@media (min-width: 1200px) {
+    .formcontrol {
+        margin-left:0px;
+        margin-right:0px;
+    }
+}
+

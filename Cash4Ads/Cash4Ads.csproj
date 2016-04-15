@@ -176,6 +176,7 @@
     <Content Include="Content\flexslider.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\green.css" />
+    <Content Include="Content\jquery.loader.min.css" />
     <Content Include="Content\magnific-popup.css" />
     <Content Include="Content\orange.css" />
     <Content Include="Content\owl.carousel.css" />
@@ -183,6 +184,7 @@
     <Content Include="Content\sky.css" />
     <Content Include="Content\style.css" />
     <Content Include="Content\voucher.css" />
+    <Content Include="css\font-awesome.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\fontawesome-webfont_svgv=4_1.svg" />
@@ -205,6 +207,7 @@
     <Content Include="images\Affiliate_SLider_1.png" />
     <Content Include="images\Affiliate_Slider_2.png" />
     <Content Include="images\Affiliate_Slider_3.png" />
+    <Content Include="images\ajax-loader.gif" />
     <Content Include="images\au.png" />
     <Content Include="images\bg-grad-unit-top.png" />
     <Content Include="images\brand-icons-sprite1.png" />
@@ -249,7 +252,9 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
     <None Include="Properties\PublishProfiles\Cash4Ads.pubxml" />
+    <None Include="Properties\PublishProfiles\Mz Cash4 website.pubxml" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
@@ -257,6 +262,7 @@
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.flexslider-min.js" />
     <Content Include="Scripts\jquery.isotope.min.js" />
+    <Content Include="Scripts\jquery.loader.min.js" />
     <Content Include="Scripts\jquery.magnific-popup.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -310,6 +316,7 @@
     <Content Include="Views\Home\afilliates.cshtml" />
     <Content Include="Views\Home\get_paid_watch_ads.cshtml" />
     <Content Include="Views\Shared\voucherbar.cshtml" />
+    <Content Include="Views\Home\cashout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

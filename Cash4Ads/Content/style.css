@@ -759,7 +759,7 @@ fieldset[disabled] .btn-submit.active {
     cursor:pointer;
     font-size:22px;
     padding-left:20px;
-    width:270px;
+    width:100%;
 }
 
 /* Targetting Webkit browsers only. FF will show the dropdown arrow with so much padding. */
@@ -774,7 +774,7 @@ fieldset[disabled] .btn-submit.active {
     margin: 0;
     padding: 0px 0px 0 0;
     text-align: right;
-    width: 257px;
+    width: 100%;
 }
 .clabel:after {
     content:'<>';
@@ -798,4 +798,32 @@ fieldset[disabled] .btn-submit.active {
     position:absolute;
     pointer-events:none;
     display:block;
+}
+
+
+
+
+.btn-xlg {
+    padding: 20px 39px;
+    font-size: 24px;
+    line-height: 1.33;
+    border-radius: 30px;
+    font-weight:normal;
+    
+}
+
+
+@media (max-width: 767px)
+{
+
+    .btn-xlg {
+    padding: 13px 10px;
+    font-size: 14px;
+    line-height: 1.33;
+    border-radius: 20px;
+    font-weight: normal;
+    margin-left: 2px;
+}
+
+
 }

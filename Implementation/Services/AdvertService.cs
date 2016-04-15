@@ -896,14 +896,14 @@ namespace SMD.Implementation.Services
 
 
         }
-        public List<GetCoupons_Result> GetCoupons(string UserId, int CategoryId, string Keyword, int Type, int PageNo, int PageSize)
+        public List<GetCoupons_Result> GetCoupons(string UserId)
         {
-            return _adCampaignRepository.GetCoupons(UserId, CategoryId, Keyword, Type, PageNo, PageSize);
+            return _adCampaignRepository.GetCoupons(UserId);
         }
 
-        public List<Coupons> GetAllCoupons()
+        public List<Coupons> GetAllCoupons(int categoryId, int type, int size, string keywords, int pageNo)
         {
-            return _adCampaignRepository.GetAllCoupons();
+            return _adCampaignRepository.GetAllCoupons(categoryId,type,size,keywords,pageNo);
         }
         #endregion
     }

@@ -23,6 +23,9 @@
     <link rel="stylesheet" href="~/content/style.css">
 
 
+    <link rel="stylesheet" href="~/content/font-awesome.min.css">
+
+
     @RenderSection("COLOR", required: false)
  
 
@@ -80,7 +83,7 @@
                     <li><a class="scroll-link" href="@Url.Action("advertisers", "Home")">Want to Advertise</a></li>
                    
                     <li><img src="~/images/United-Kingdom-icon.png" style="padding-top:22px;" /></li>
-                    <li><a class="scroll-link" href="http://manage.cash4ads.com">Sign In</a></li>
+                    <li><i class="fa fa-user fa-lg text-white" style="    padding-top: 30px;    font-size: 23px;    margin-left: 12px;"></i></li>
 
                 </ul>
             </div>
@@ -154,8 +157,8 @@
 
 
 
-                <script src="~/scripts/jquery-2.1.4.min.js"></script>
-                <script>window.jQuery || document.write('<script src="~/scripts/jquery-2.1.4.min.js"><\/script>')</script>
+                @*<script src="~/scripts/jquery-2.1.4.min.js"></script>*@
+                @*<script>window.jQuery || document.write('<script src="~/scripts/jquery-2.1.4.min.js"><\/script>')</script>*@
 
                 <script src="~/scripts/bootstrap.min.js"></script>
 
