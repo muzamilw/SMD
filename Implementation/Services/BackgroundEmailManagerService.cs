@@ -85,7 +85,7 @@ namespace SMD.Implementation.Services
         {
             Company oCompany = context.Companies.FirstOrDefault(user => user.CompanyId == companyId);
             SystemMail mail = context.SystemMails.FirstOrDefault(email => email.MailId == (int)EmailTypes.CollectionMade);
-
+           
             if (oCompany != null && mail != null)
             {
                 SendEmail(mail, new List<string> { oCompany.ReplyEmail });
@@ -105,6 +105,26 @@ namespace SMD.Implementation.Services
             Company oCompany = context.Companies.FirstOrDefault(user => user.CompanyId == companyId);
             SystemMail mail = context.SystemMails.FirstOrDefault(email => email.MailId == (int)EmailTypes.PayoutMade);
 
+            if (oCompany != null && mail != null)
+            {
+                SendEmail(mail, new List<string> { oCompany.ReplyEmail });
+            }
+            else
+            {
+                throw new Exception("Customer is null");
+            }
+        }
+
+        /// <summary>
+        /// Send Email when Payout scheduler run
+        /// </summary>
+        public static void SendVoucherCodeEmail(BaseDbContext context, int companyId, string couponCode)
+        {
+            Company oCompany = context.Companies.FirstOrDefault(user => user.CompanyId == companyId);
+            User oUser = context.Users.FirstOrDefault(user => user.CompanyId == companyId);
+            SystemMail mail = context.SystemMails.FirstOrDefault(email => email.MailId == (int)EmailTypes.VoucherPaymentEmail);
+            mail.Subject = mail.Subject.Replace("++username++", oUser.FullName);
+            mail.Subject = mail.Subject.Replace("++couponcode++", couponCode);
             if (oCompany != null && mail != null)
             {
                 SendEmail(mail, new List<string> { oCompany.ReplyEmail });

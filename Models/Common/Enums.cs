@@ -44,7 +44,8 @@
         PayoutMade=13,
         Voucher = 14,
        InviteUsers = 15,
-       BuyItUsers = 16
+       BuyItUsers = 16,
+       VoucherPaymentEmail = 14,
     }
 
     public enum AdCampaignCriteriaType
