@@ -773,7 +773,7 @@ define("ads/ads.viewModel",
                 },
                 //add location
                 onAddLocation = function (item) {
-                    debugger
+               
                     selectedLocation().Radius = (selectedLocationRadius);
                     selectedLocation().IncludeorExclude = (selectedLocationIncludeExclude);
                     campaignModel().AdCampaignTargetLocations.push(new model.AdCampaignTargetLocation.Create({
