@@ -434,6 +434,12 @@ namespace SMD.Implementation.Services
 
             user.ProfileImage = ImageHelper.Save(mapPath, user.ProfileImage, string.Empty, request.ProfileImageName,
                 request.ProfileImage, request.ProfileImageBytes);
+             string imgExt = Path.GetExtension(user.ProfileImage);
+             string sourcePath = HttpContext.Current.Server.MapPath("~/"+user.ProfileImage);
+             string[] results = sourcePath.Split(new string[] { imgExt }, StringSplitOptions.None);
+             string res = results[0];
+             string destPath = res + "_thumb" + imgExt;
+             ImageHelper.GenerateThumbNail(sourcePath, sourcePath, 200);
         }
         
         #region Product Response Actions

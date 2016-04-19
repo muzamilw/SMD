@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.IO;
 using System.Web;
 
@@ -66,5 +67,77 @@ namespace SMD.Common
             imageurl = imageurl.Substring(indexOf, imageurl.Length - indexOf);
             return imageurl;
         }
+
+        public static void GenerateThumbNail(string sourcefile, string destinationfile, int width)
+        {
+            System.Drawing.Image image = null;
+            int ThumbnailSizeWidth = 200;
+            int ThumbnailSizeHeight = 200;
+            Bitmap bmp = null;
+            try
+            {
+
+                using (image = System.Drawing.Image.FromFile(sourcefile))
+                {
+                    int srcWidth = image.Width;
+                    int srcHeight = image.Height;
+                    int thumbWidth = width;
+                    int thumbHeight;
+                    float WidthPer, HeightPer;
+
+
+                    int NewWidth, NewHeight;
+
+                    if (srcWidth > srcHeight)
+                    {
+                        NewWidth = ThumbnailSizeWidth;
+                        WidthPer = (float)ThumbnailSizeWidth / srcWidth;
+                        NewHeight = Convert.ToInt32(srcHeight * WidthPer);
+                    }
+                    else
+                    {
+                        NewHeight = ThumbnailSizeHeight;
+                        HeightPer = (float)ThumbnailSizeHeight / srcHeight;
+                        NewWidth = Convert.ToInt32(srcWidth * HeightPer);
+                    }
+                    thumbWidth = NewWidth;
+                    thumbHeight = NewHeight;
+                    bmp = new Bitmap(thumbWidth, thumbHeight);
+                    System.Drawing.Graphics gr = System.Drawing.Graphics.FromImage(bmp);
+                    gr.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+                    gr.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
+                    gr.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.High;
+                    System.Drawing.Rectangle rectDestination =
+                           new System.Drawing.Rectangle(0, 0, thumbWidth, thumbHeight);
+                    gr.DrawImage(image, rectDestination, 0, 0, srcWidth, srcHeight, GraphicsUnit.Pixel);
+                    
+                }
+                if (image != null)
+                {
+                    image.Dispose();
+                }
+                if (bmp != null)
+                {
+                    bmp.Save(destinationfile);
+                }
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                if (bmp != null)
+                {
+                    bmp.Dispose();
+                }
+                if (image != null)
+                {
+                    image.Dispose();
+                }
+            }
+        }
+
     }
 }

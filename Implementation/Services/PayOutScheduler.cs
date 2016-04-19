@@ -485,7 +485,14 @@ namespace SMD.Implementation.Services
                         dbContext.SaveChanges();
 
                         // Email To User coupon code 
-                        BackgroundEmailManagerService.SendVoucherCodeEmail(dbContext, company.CompanyId, codeCode);
+                        try
+                        {
+                            BackgroundEmailManagerService.SendVoucherCodeEmail(dbContext, company.CompanyId, codeCode);
+                        }
+                        catch (Exception ex)
+                        {
+                            
+                        }
                     }
                     else
                     {
