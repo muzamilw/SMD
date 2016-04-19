@@ -70,22 +70,20 @@ else
 
 
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-2">
 
 
 
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-4" style="text-align:right !important;">
 
-                            <div class="btn-group" style="float:right;">
-                                <button class="btn ctCampaign" data-bind="click:$root.addNewCampaign,visible:!$root.isDisplayCouponsAds()">
+                                <button class="btn btn-primary" data-bind="click:$root.addNewCampaign,visible:!$root.isDisplayCouponsAds()">
                                     Create New Campaign
                                 </button>
-                                <button class="btn ctCampaign" data-bind="click:$root.addNewCampaign,visible:$root.isDisplayCouponsAds()">
+                                <button class="btn btn-primary" style="display:none;" data-bind="click:$root.addNewCampaign,visible:$root.isDisplayCouponsAds()">
                                     Create Coupon
                                 </button>
-                            </div>
-
+                        
                         </div>
 
 

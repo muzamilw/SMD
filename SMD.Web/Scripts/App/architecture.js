@@ -994,6 +994,22 @@ require(["ko", "knockout-validation"], function (ko) {
 
         }
     };
+
+    // number formatting setting the text property of an element
+    ko.bindingHandlers.NewCampaignBinding = {
+        update: function (element, valueAccessor, allBindingsAccessor) {
+            var value = valueAccessor(),
+                allBindings = allBindingsAccessor();
+            var valueUnwrapped = ko.utils.unwrapObservable(value);
+            if (valueUnwrapped == '') {
+                $(element).text("New Campaign");
+            }
+            else {
+                $(element).text(valueUnwrapped);
+            }
+
+        }
+    };
 });
 
 

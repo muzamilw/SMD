@@ -20,11 +20,18 @@ else
                     <li><a href="~/Dashboard/Index">&nbsp;</a></li>
                 </ol>
                 <div class="clearfix" data-bind="with: $root.campaignModel">
-                    <h1 class="pull-left" style="padding-left:0px;" data-bind="text: CampaignName">Add Campaign</h1>
+                    <span class="pull-left" style="padding-left:0px;font-size:28px;color:rgb(52, 152, 219)" data-bind="NewCampaignBinding: CampaignName,visible:$root.isDisplayCouponsAds()">New Coupon</span>
+                    <span class="pull-left" style="padding-left:0px;font-size:28px;color:rgb(52, 152, 219)" data-bind="NewCampaignBinding: CampaignName,visible:!$root.isDisplayCouponsAds()">New Campaign</span>
+
                 </div>
                 <div class="row" style="margin-bottom:15px;">
                     <div class="col-xs-6 pull-left validationSummaryContainer">
-                        <a class="validationSummaryLink" data-bind="visible: $root.errorList().length > 0, bootstrapPopover: { html: true, title: 'Please fix following errors', elementNode: 'validationSummaryPopupForStore', popoverId: 'validationSummaryPopoverBodyForStore' }" style="display: none">Invalid data: Click here to see details.</a>
+                        <ul data-bind="foreach: $root.errorList">
+                            <li>
+                                <a><span data-bind="text: name"></span></a>
+                            </li>
+                        </ul>
+                        @*<a class="validationSummaryLink" data-bind="visible: $root.errorList().length > 0, bootstrapPopover: { html: true, title: 'Please fix following errors', elementNode: 'validationSummaryPopupForStore', popoverId: 'validationSummaryPopoverBodyForStore' }" style="display: none">Invalid data: Click here to see details.</a>
                         <div class="well well-small validationSummaryModal" id="validationSummaryPopupForStore" style="display: none">
                             <div id="validationSummaryPopoverBodyForStore">
                                 <ul data-bind="foreach: $root.errorList">
@@ -33,7 +40,7 @@ else
                                     </li>
                                 </ul>
                             </div>
-                        </div>
+                        </div>*@
                     </div>
 
                     <div class="pull-right top-page-ui" style="margin-right:5px;margin-bottom:5px;">
@@ -84,11 +91,11 @@ else
 
                             <div class="form-group formcontrol-bg" style="margin-bottom:14px;">
                                 <div class="col-lg-11" style="padding-right:0px;">
-                                    <div class="col-lg-3 text-campaign-left font20">
+                                    <div class="col-lg-3 text-campaign-left font19">
                                         <span data-bind="text:$root.lblCampaignName">  Campaign Name</span>
                                     </div>
                                     <div class="col-lg-9" style="padding-left:0px;padding-right:0px;">
-                                        <input type="text" name="Campaign Name" class="form-control" maxlength="36" id="txtCampaignName" placeholder="New Campaign" data-bind="value: CampaignName,validationTooltip: CampaignName, validationOnElement: CampaignName">
+                                        <input type="text" name="Campaign Name" class="form-control" maxlength="36" id="txtCampaignName" placeholder="Campaign Name (36 characters)" data-bind="value: CampaignName,validationTooltip: CampaignName, validationOnElement: CampaignName, attr:{placeholder : $root.campaignNamePlaceHolderValue}">
 
                                     </div>
                                 </div>
@@ -99,7 +106,7 @@ else
                                     <div class="form-group" style="margin-top:10px; margin-left:-8px;">
                                         <div class="col-lg-8 text-campaign-left">
 
-                                            <label class="control-label text-right tooltip-float font20 floatNone" style="float:left !important; data-bind=" text:$root.lbldetailsheading">Free Display Ad Details</label>
+                                            <label class="control-label text-right tooltip-float font20 floatNone" style="float:left !important; data-bind="text:$root.lbldetailsheading">Free Display Ad Details</label>
                                         </div>
                                         @*<div class="col-lg-4">
                                                 <button class="btn  btn-success"  style="width:auto;" id="btnSubmitForApproval">Preview</button>
@@ -212,7 +219,7 @@ else
                                         <!-- /ko -->
                                         <!-- ko if: $root.isNewCampaign() -->
                                         <div class="col-lg-3 text-right control-label" data-bind="visible: Type() == 1">
-                                            <span>  Enter Link</span>
+                                            <span>  Enter Video Link</span>
                                         </div>
                                         <!-- /ko -->
                                         <div class="col-lg-9" data-bind="visible: Type() == 1">
@@ -301,53 +308,39 @@ else
                                 <div class="col-lg-11 padding23" data-bind="visible:$root.isDisplayCouponsAds()">
                                     <div class="row">
                                         <div class="form-group" style="margin-top:10px;">
-                                            <div class="col-lg-4">
-                                                <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Coupon Image (200 x 200)</label>
+                                            <div class="col-lg-3">
+                                                <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Coupon Image 1 (200px x 200px)</label>
                                             </div>
                                             <div class="col-lg-8">
-                                                <div class="fileUpload btn btn-primary">
-                                                    <span>Upload </span>
-                                                    <input type="file" class="upload" id="campaignType_image_file1" data-bind="files: { onLoaded: $root.campaignImageCallback, fileFilter: 'image.*'}" />
-                                                </div><br />
+                                             
                                                 <div style="margin-top:5px;">
                                                     <img style="height:80px;" data-bind="visible: CampaignImagePath() == ''" src="/Content/Images/Company_Default.png" />
                                                     <img style="height:80px;" data-bind="visible: CampaignImagePath() != '' ,attr: { src: CampaignImagePath }" />
                                                 </div>
+                                                <br />
+                                                <div class="fileUpload btn btn-primary">
+                                                    <span>Upload </span>
+                                                    <input type="file" class="upload" id="campaignType_image_file1" data-bind="files: { onLoaded: $root.campaignImageCallback, fileFilter: 'image.*'}" />
+                                                </div>
                                             </div>
 
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group" style="margin-top:10px;">
-                                            <div class="col-lg-4">
-                                                <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Coupon Image 2 (200 x 200)</label>
+                                            <div class="col-lg-3">
+                                                <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Coupon Image 2 (200px x 200px)</label>
                                             </div>
                                             <div class="col-lg-8">
-                                                <div class="fileUpload btn btn-primary">
-                                                    <span>Upload </span>
-                                                    <input type="file" class="upload" id="campaignType_image_file1" data-bind="files: { onLoaded: $root.couponImage2Callback, fileFilter: 'image.*'}" />
-                                                </div><br />
+                                               
                                                 <div style="margin-top:5px;">
                                                     <img style="height:80px;" data-bind="visible: couponImage2() == ''" src="/Content/Images/Company_Default.png" />
                                                     <img style="height:80px;" data-bind="visible: couponImage2() != '' ,attr: { src: couponImage2 }" />
                                                 </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group" style="margin-top:10px;">
-                                            <div class="col-lg-4">
-                                                <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Coupon Image 3 (200 x 200)</label>
-                                            </div>
-                                            <div class="col-lg-8">
+                                                <br />
                                                 <div class="fileUpload btn btn-primary">
                                                     <span>Upload </span>
-                                                    <input type="file" class="upload" id="campaignType_image_file1" data-bind="files: { onLoaded: $root.CouponImage3Callback, fileFilter: 'image.*'}" />
-                                                </div><br />
-                                                <div style="margin-top:5px;">
-                                                    <img style="height:80px;" data-bind="visible: CouponImage3() == ''" src="/Content/Images/Company_Default.png" />
-                                                    <img style="height:80px;" data-bind="visible: CouponImage3() != '' ,attr: { src: CouponImage3 }" />
+                                                    <input type="file" class="upload" id="campaignType_image_file1" data-bind="files: { onLoaded: $root.couponImage2Callback, fileFilter: 'image.*'}" />
                                                 </div>
                                             </div>
 
@@ -355,73 +348,56 @@ else
                                     </div>
                                     <div class="row">
                                         <div class="form-group" style="margin-top:10px;">
-                                            <div class="col-lg-4">
-                                                <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Coupon Image 4 (200 x 200)</label>
+                                            <div class="col-lg-3">
+                                                <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Coupon Image 3 (200px x 200px)</label>
                                             </div>
                                             <div class="col-lg-8">
+                                               
+                                                <div style="margin-top:5px;">
+                                                    <img style="height:80px;" data-bind="visible: CouponImage3() == ''" src="/Content/Images/Company_Default.png" />
+                                                    <img style="height:80px;" data-bind="visible: CouponImage3() != '' ,attr: { src: CouponImage3 }" />
+                                                </div> 
+                                                <br />
                                                 <div class="fileUpload btn btn-primary">
                                                     <span>Upload </span>
-                                                    <input type="file" class="upload" id="campaignType_image_file1" data-bind="files: { onLoaded: $root.CouponImage4Callback, fileFilter: 'image.*'}" />
-                                                </div><br />
+                                                    <input type="file" class="upload" id="campaignType_image_file1" data-bind="files: { onLoaded: $root.CouponImage3Callback, fileFilter: 'image.*'}" />
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group" style="margin-top:10px;">
+                                            <div class="col-lg-3">
+                                                <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Coupon Image 4 (200px x 200px)</label>
+                                            </div>
+                                            <div class="col-lg-8">
+                                              
                                                 <div style="margin-top:5px;">
                                                     <img style="height:80px;" data-bind="visible: CouponImage4() == ''" src="/Content/Images/Company_Default.png" />
                                                     <img style="height:80px;" data-bind="visible: CouponImage4() != '' ,attr: { src: CouponImage4 }" />
                                                 </div>
+                                                <br />
+                                                <div class="fileUpload btn btn-primary">
+                                                    <span>Upload </span>
+                                                    <input type="file" class="upload" id="campaignType_image_file1" data-bind="files: { onLoaded: $root.CouponImage4Callback, fileFilter: 'image.*'}" />
+                                                </div>
                                             </div>
 
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group">
-                                            <div class="col-lg-4">
-                                                <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Purse Swap Value (£)</label>
+                                            <div class="col-lg-3">
+                                                <label for="txtSelectCategories" class="control-label text-right tooltip-float floatNone">&nbsp;</label>
                                             </div>
                                             <div class="col-lg-8">
-                                                <input type="text" class="form-control" id="txtPurseValue" placeholder="Purse Swap Value" data-bind="value:CouponSwapValue">
+                                                <!-- ko template: { name: 'ListOfSelectedCouponCats' , foreach: $root.couponCategories() } -->
+                                                <!-- /ko -->
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <div class="col-lg-4">
-                                                <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Coupon Expiry Label </label>
-                                            </div>
-                                            <div class="col-lg-8">
-                                                <input type="text" class="form-control" id="txtPurseValue" placeholder="Coupon Expiry Label" data-bind="value:CouponExpiryLabel">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-lg-4">
-                                                <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Coupon Comission</label>
-                                            </div>
-                                            <div class="col-lg-8">
-                                                <input type="text" class="form-control" id="txtPurseValue" placeholder="Coupon Smd Comission" data-bind="value:couponSmdComission">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-lg-4">
-                                                <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Actual Value (£)</label>
-                                            </div>
-                                            <div class="col-lg-8">
-                                                <input type="text" class="form-control" id="txtPurseValue" placeholder="Actual Value" data-bind="value:CouponActualValue">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-lg-4">
-                                                <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Coupon Quantity</label>
-                                            </div>
-                                            <div class="col-lg-8">
-                                                <input type="text" class="form-control" id="txtPurseValue" placeholder="Quantity" data-bind="value:CouponQuantity">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-lg-4">
-                                                <label for="txtCouponQtyValue" class="control-label text-right tooltip-float floatNone">Coupon Discounted Value (£)</label>
-                                            </div>
-                                            <div class="col-lg-8">
-                                                <input type="text" class="form-control" id="txtCouponQtyValue" placeholder="Coupon Discounted Value" data-bind="value:CouponDiscountValue">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-lg-4">
+                                            <div class="col-lg-3">
                                                 <label for="txtSelectCategories" class="control-label text-right tooltip-float floatNone">&nbsp;</label>
                                             </div>
                                             <div class="col-lg-8">
@@ -430,15 +406,81 @@ else
                                                 </a>
                                             </div>
                                         </div>
+                                     
                                         <div class="form-group">
-                                            <div class="col-lg-4">
-                                                <label for="txtSelectCategories" class="control-label text-right tooltip-float floatNone">&nbsp;</label>
+                                            <div class="col-lg-3">
+                                                <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Actual Value</label>
                                             </div>
-                                            <div class="col-lg-8">
-                                                <!-- ko template: { name: 'ListOfSelectedCouponCats' , foreach: $root.couponCategories() } -->
-                                                <!-- /ko -->
+                                            <div class="col-lg-4">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">£</span>
+                                                    <input type="number" class="form-control" id="txtActValue" placeholder="Actual Value" data-bind="value:CouponActualValue">
+                                                    <span class="input-group-addon">.000</span>
+                                                </div>
+                                                
                                             </div>
                                         </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-3">
+                                                
+                                                <label for="txtCouponQtyValue" class="control-label text-right tooltip-float floatNone">Coupon Discounted Value (£)</label>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">£</span>
+                                                    <input type="number" class="form-control" id="txtCouponQtyValue" placeholder="Coupon Discounted Value" data-bind="value:CouponDiscountValue">
+                                                    <span class="input-group-addon">.000</span>
+                                                </div>
+                                               
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-3">
+                                                <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Purse Swap Value (£)</label>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">£</span>
+                                                    <input type="number" class="form-control" id="txtPurseValue" placeholder="Purse Swap Value" data-bind="value:CouponSwapValue">
+                                                    <span class="input-group-addon">.000</span>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-3">
+                                                <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Coupon Quantity</label>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <input type="number" class="form-control" id="txtPurseValue" placeholder="Quantity" data-bind="value:CouponQuantity">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-3">
+                                                <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Coupon Expiry Label </label>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <input type="text" class="form-control" id="txtPurseValue" placeholder="Coupon Expiry Label" data-bind="value:CouponExpiryLabel">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-3">
+                                                <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Coupon Comission</label>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">£</span>
+                                                    <input type="number" class="form-control" id="txtPurseValue" placeholder="Coupon Cash4Ads Comission" data-bind="value:couponSmdComission">
+                                                    <span class="input-group-addon">.000</span>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                       
+                                       
+                                       
+                                        
+           
                                     </div>
                                 </div>
                                 <div class="col-lg-3" style="display:none;">
@@ -475,13 +517,18 @@ else
                                             <select class="form-control" data-bind="options: $root.ageRange, optionsText: 'text', optionsValue: 'value', value: AgeRangeEnd,validationTooltip: AgeRangeEnd, validationOnElement: AgeRangeEnd"></select>
 
                                         </div>
+                                        <div class="col-lg-4" style=" padding: 0px !important;      margin-left: 24px;  text-align: right;
+    font-size: 17px;
+    color: red;">
+                                            <span data-bind="text: $root.genderppc()"></span>
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="col-lg-3">
 
                                             <label for="txtGender" class="control-label text-right tooltip-float floatNone">Gender</label>
                                         </div>
-                                        <div class="col-lg-8">
+                                        <div class="col-lg-9">
                                             <div class="radio col-lg-3">
                                                 <input type="radio" name="optionsRadiosGender" id="optionsRadiosGenderAll" value="1" data-bind="checked: Gender">
                                                 <label for="optionsRadiosGenderAll">
@@ -495,12 +542,17 @@ else
                                                 </label>
                                                 <span class="help-block text-right"></span>
                                             </div>
-                                            <div class="radio col-lg-5">
+                                            <div class="radio col-lg-3">
                                                 <input type="radio" name="optionsRadiosGender" id="optionsRadiosGenderWMEn" value="3" data-bind="checked: Gender">
                                                 <label for="optionsRadiosGenderWMEn">
                                                     Women
                                                 </label>
                                                 <span class="help-block text-right"></span>
+                                            </div>
+                                            <div class="col-lg-3" style=" padding: 0px !important;    text-align: right;
+    font-size: 17px;
+    color: red;">
+                                                <span data-bind="text: $root.ageppc()"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -551,7 +603,7 @@ else
                                                     <button data-bind="click:$root.onAddLocation" class="locVisibility btn btn-info">Add Location</button>
 
                                                 </div>
-
+                                               
                                             </div><div class="clearfix"></div>
                                             <div class="count_token_opt_cnt_map locMap">
                                                 <div id="mapContainer" style="width: 100%; height: 200px;"></div>
@@ -567,7 +619,11 @@ else
 
                                             </div>
                                         </div>
-
+                                        <div class="col-lg-1" style="  text-align: right;
+    font-size: 17px;
+    color: red;">
+                                            <span >(0p)</span>
+                                        </div>
                                     </div>
                                     <div class="form-group" style="display:none;">
                                         <div class="col-lg-3">
@@ -678,6 +734,11 @@ else
 
                                             </div>
 
+                                        </div>
+                                        <div class="col-lg-1" style="  text-align: right;
+    font-size: 17px;
+    color: red;">
+                                            <span data-bind="text: $root.professionppc()"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -906,10 +967,10 @@ else
                                         </div>*@
                                     <div class="form-group" style="margin-top:10px; margin-left:-8px;">
                  
-                                        <div class="col-lg-5 text-campaign-left Float-Left" style="margin-left:6px;">
+                                        <div class="col-lg-4 text-campaign-left Float-Left" style="margin-left:6px;">
                                             <label class="control-label text-right tooltip-float font20 floatNone" style="float:left !important; ">Quiz Question</label>
                                         </div>
-                                        <div class="col-lg-4 Float-Left" style="padding-top:3px;">
+                                        <div class="col-lg-4 Float-Left" style="padding-top:3px;padding-left:0px;">
                                             <div class="onoffswitch">
                                                 <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchQZZ" data-bind="checked: $root.quizQuestionStatus, event: { click: $root.addQuizQuestPrice}">
                                                 <label class="onoffswitch-label" for="switchQZZ">
@@ -987,11 +1048,11 @@ else
                                 <div class="col-lg-11">
                                     <div class="form-group" style="margin-bottom:20px; margin-top:20px;">
                                       
-                                        <div class="col-lg-5 text-campaign-left Float-Left" style="margin-left:6px;">
+                                        <div class="col-lg-4 text-campaign-left Float-Left" style="margin-left:6px;">
 
                                             <label class="control-label text-right tooltip-float font20 floatNone" style="float:left !important; ">Show voucher</label>
                                         </div>
-                                        <div class="col-lg-4 Float-Left" style="padding-top:3px;">
+                                        <div class="col-lg-4 Float-Left" style="padding-top:3px;padding-left:0px;">
                                             <div class="onoffswitch">
                                                 <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchAB" data-bind="checked: $root.voucherQuestionStatus">
                                                 <label class="onoffswitch-label" for="switchAB">
@@ -1110,8 +1171,7 @@ else
                                         </div>*@
                                 </div>
                                 <div class="col-lg-2" style="display:none;">
-                                    <img src="/Content/Images/5_Main_4.png" class="hidden-sm hidden-xs" alt="" style="   margin-left: 10px; width: 120px;
-    margin-top: 23px;" />
+                                    <img src="/Content/Images/5_Main_4.png" class="hidden-sm hidden-xs" alt="" style="   margin-left: 10px; width: 120px;   margin-top: 23px;" />
                                 </div>
                                 <div class="clearfix">
                                     &nbsp;
@@ -1121,7 +1181,7 @@ else
                             <div class="form-group formcontrol-bg" data-bind="visible:!$root.isDisplayCouponsAds()">
                                 <div class="col-lg-11">
                                     <div class="form-group" style="margin-bottom:20px; margin-top:20px;">
-                                        <div class="col-lg-5 text-campaign-left  Float-Left">
+                                        <div class="col-lg-4 text-campaign-left  Float-Left">
 
                                             <label class="control-label text-right tooltip-float font20 floatNone" style="float:left !important;    margin-left: 6px; ">Buy it button</label>
                                         </div>
@@ -1140,50 +1200,50 @@ else
                                     <div class="form-group" data-bind="visible: $root.buyItQuestionStatus()">
                                         <div class="col-lg-4">
 
-                                            <label for="txtVoucher" class="control-label text-right tooltip-float floatNone">First Line</label>
+                                            <label for="txtBuyItLine1" class="control-label text-right tooltip-float floatNone">First Line</label>
                                         </div>
                                         <div class="col-lg-8">
-                                            <input type="text" class="form-control" id="txtVoucher" placeholder="Enter Description  (36 characters)" data-bind="value: BuuyItLine1" maxlength="36">
+                                            <input type="text" class="form-control" id="txtBuyItLine1" placeholder="Enter Description  (36 characters)" data-bind="value: BuuyItLine1" maxlength="36">
 
                                         </div>
                                     </div>
                                     <div class="form-group" data-bind="visible: $root.buyItQuestionStatus() == 1 ">
                                         <div class="col-lg-4">
 
-                                            <label for="txtVoucherDes" class="control-label text-right tooltip-float floatNone">Second Line</label>
+                                            <label for="txtBuyItLine2" class="control-label text-right tooltip-float floatNone">Second Line</label>
                                         </div>
                                         <div class="col-lg-8">
-                                            <input type="text" class="form-control" id="txtVoucherDes" placeholder="Enter Description  (36 characters)" data-bind="value: BuyItLine2" maxlength="36">
+                                            <input type="text" class="form-control" id="txtBuyItLine2" placeholder="Enter Description  (36 characters)" data-bind="value: BuyItLine2" maxlength="36">
 
                                         </div>
                                     </div>
                                     <div class="form-group" data-bind="visible: $root.buyItQuestionStatus() == 1 ">
                                         <div class="col-lg-4">
 
-                                            <label for="txtVoucherVal" class="control-label text-right tooltip-float floatNone">Third Line </label>
+                                            <label for="txtBuyItLine3" class="control-label text-right tooltip-float floatNone">Third Line </label>
                                         </div>
                                         <div class="col-lg-8">
-                                            <input type="text" class="form-control" id="txtVoucherVal" placeholder="Enter Description  (36 characters)" data-bind="value: BuyItLine3" maxlength="36">
+                                            <input type="text" class="form-control" id="txtBuyItLine3" placeholder="Enter Description  (36 characters)" data-bind="value: BuyItLine3" maxlength="36">
 
                                         </div>
                                     </div>
                                     <div class="form-group" data-bind="visible: $root.buyItQuestionStatus() == 1 ">
                                         <div class="col-lg-4">
 
-                                            <label for="txtVoucherVal" class="control-label text-right tooltip-float floatNone">Url </label>
+                                            <label for="txtBuyItUrl" class="control-label text-right tooltip-float floatNone">Url </label>
                                         </div>
                                         <div class="col-lg-8">
-                                            <textarea class="form-control" id="txtLinkOfCampaign" rows="1" placeholder="Enter in landing page link " data-bind="value: VideoUrl" style="margin-top:5px;" maxlength="36"></textarea>
+                                            <textarea class="form-control" id="txtBuyItUrl" rows="1" placeholder="Enter in landing page link " data-bind="value: VideoUrl" style="margin-top:5px;" maxlength="36"></textarea>
 
                                         </div>
                                     </div>
                                     <div class="form-group" data-bind="visible: $root.buyItQuestionStatus() == 1 ">
                                         <div class="col-lg-4">
 
-                                            <label for="txtVoucherVal" class="control-label text-right tooltip-float floatNone">Button Label </label>
+                                            <label for="txtBuyItlbl" class="control-label text-right tooltip-float floatNone">Button Label </label>
                                         </div>
                                         <div class="col-lg-8">
-                                            <input type="text" class="form-control" id="txtVoucherVal" placeholder="Enter Description  (36 characters)" data-bind="value: BuyItButtonLabel" maxlength="36">
+                                            <input type="text" class="form-control" id="txtBuyItlbl" placeholder="Enter Description  (36 characters)" data-bind="value: BuyItButtonLabel" maxlength="36">
 
                                         </div>
                                     </div>
@@ -1198,7 +1258,7 @@ else
 
                                                     <div class="defaultImgUploadImage">
 
-                                                        <img style="width:auto;height:80px;max-width:200px;" data-bind="visible: buyItImageBytes() == '',attr: { src: '/' + BuyItImageUrl() }" src="/Content/Images/Company_Default.png" />
+                                                        <img style="width:auto;height:80px;max-width:200px;" data-bind="visible: buyItImageBytes() == ''" src="/Content/Images/Company_Default.png" />
                                                         <img style="width:auto;height:80px;max-width:200px;" data-bind="visible: buyItImageBytes() != '' ,attr: { src: buyItImageBytes }" />
 
                                                     </div>
@@ -1469,8 +1529,13 @@ else
                                         </div>
                                         <div style="    font-weight: bold;    padding-top: 0px;    font-size: 16px;">
                                             <div class="yourBudgtHeadingCnt">
-
-                                                <span data-bind="text:$root.reachedAudience()">0</span> people
+                                                <div style="float:left;">
+                                                    <span data-bind="text:$root.reachedAudience()">0</span> people
+                                                </div>
+                                                <div style="float:left;">
+                                                    <div id="spinnerAudience" style="display: none;">
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="" data-bind="visible:!$root.isDisplayCouponsAds()">
                                                 <span data-bind="text: '£' + $root.pricePerclick().toFixed(2)" style="font-size: 18px;"></span>
