@@ -5193,3 +5193,16 @@ background: url(/Images/ads.png);
     margin-bottom:10px;
 }
 }
+
+.radioDelv  label:before, .radioDelv  label:after{
+        margin-top: 4px;
+
+}
+.delvPricetxt{
+
+    color:red;    font-size: 17px;
+}
+.defaultImgUploadImage{
+
+    width:260px;text-align:center;
+}

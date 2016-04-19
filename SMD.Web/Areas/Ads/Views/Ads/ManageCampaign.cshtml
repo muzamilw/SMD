@@ -83,16 +83,16 @@ else
 
 
                             <div class="form-group formcontrol-bg" style="margin-bottom:14px;">
+                                <div class="col-lg-11" style="padding-right:0px;">
+                                    <div class="col-lg-3 text-campaign-left font20">
+                                        <span data-bind="text:$root.lblCampaignName">  Campaign Name</span>
+                                    </div>
+                                    <div class="col-lg-9" style="padding-left:0px;padding-right:0px;">
+                                        <input type="text" name="Campaign Name" class="form-control" maxlength="36" id="txtCampaignName" placeholder="New Campaign" data-bind="value: CampaignName,validationTooltip: CampaignName, validationOnElement: CampaignName">
 
-                                <div class="col-lg-3 text-campaign-left font20">
-                                    <span data-bind="text:$root.lblCampaignName">  Campaign Name</span>
+                                    </div>
                                 </div>
-                                <div class="col-lg-9" style="padding-left:0px;">
-                                    <input type="text" name="Campaign Name" class="form-control" maxlength="36" id="txtCampaignName" placeholder="Campaign Name (30 characters)" data-bind="value: CampaignName,validationTooltip: CampaignName, validationOnElement: CampaignName">
-
                                 </div>
-
-                            </div>
 
                             <div class="form-group formcontrol-bg form-horizontal">
                                 <div class="col-lg-11">
@@ -171,7 +171,7 @@ else
                                 @*<div class="col-lg-1">
                                         &nbsp;
                                     </div>*@
-                                <div class="col-lg-9 padding23" data-bind="visible:!$root.isDisplayCouponsAds()">
+                                <div class="col-lg-11 padding23" data-bind="visible:!$root.isDisplayCouponsAds()">
                                     <!-- ko if: $root.isNewCampaign -->
                                     <!-- ko if: Type() == 3 ||  Type() == 2 -->
 
@@ -199,16 +199,22 @@ else
                                     <!-- /ko -->
                                     <!-- /ko -->
                                     <div class="row">
-
+                                        <!-- ko if: !$root.isNewCampaign() -->
                                         <div class="radio col-lg-3">
 
-                                            <!-- ko if: !$root.isNewCampaign() -->
+                                            
                                             <input type="radio" name="optionsRadiosStoreType" id="optionsRadiosVideos" value="1" data-bind="checked: Type, event:{ change: $root.OnChangeCampaignType }">
                                             <label for="optionsRadiosVideos">
                                                 Video
                                             </label>
-                                            <!-- /ko -->
+                                           
                                         </div>
+                                        <!-- /ko -->
+                                        <!-- ko if: $root.isNewCampaign() -->
+                                        <div class="col-lg-3 text-right control-label" data-bind="visible: Type() == 1">
+                                            <span>  Enter Link</span>
+                                        </div>
+                                        <!-- /ko -->
                                         <div class="col-lg-9" data-bind="visible: Type() == 1">
 
                                             <textarea class="form-control" id="txtLinkOfCampaign" rows="1" placeholder="" data-bind="value: LandingPageVideoLink,validationTooltip:LandingPageVideoLink, validationOnElement: LandingPageVideoLink, attr:{placeholder : $root.campaignTypePlaceHolderValue}" style="margin-bottom:10px;"></textarea>
@@ -296,7 +302,7 @@ else
                                     <div class="row">
                                         <div class="form-group" style="margin-top:10px;">
                                             <div class="col-lg-4">
-                                                <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Coupon Image</label>
+                                                <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Coupon Image (200 x 200)</label>
                                             </div>
                                             <div class="col-lg-8">
                                                 <div class="fileUpload btn btn-primary">
@@ -314,7 +320,7 @@ else
                                     <div class="row">
                                         <div class="form-group" style="margin-top:10px;">
                                             <div class="col-lg-4">
-                                                <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Coupon Image 2</label>
+                                                <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Coupon Image 2 (200 x 200)</label>
                                             </div>
                                             <div class="col-lg-8">
                                                 <div class="fileUpload btn btn-primary">
@@ -332,7 +338,7 @@ else
                                     <div class="row">
                                         <div class="form-group" style="margin-top:10px;">
                                             <div class="col-lg-4">
-                                                <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Coupon Image 3</label>
+                                                <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Coupon Image 3 (200 x 200)</label>
                                             </div>
                                             <div class="col-lg-8">
                                                 <div class="fileUpload btn btn-primary">
@@ -350,7 +356,7 @@ else
                                     <div class="row">
                                         <div class="form-group" style="margin-top:10px;">
                                             <div class="col-lg-4">
-                                                <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Coupon Image 4</label>
+                                                <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Coupon Image 4 (200 x 200)</label>
                                             </div>
                                             <div class="col-lg-8">
                                                 <div class="fileUpload btn btn-primary">
@@ -368,7 +374,7 @@ else
                                     <div class="row">
                                         <div class="form-group">
                                             <div class="col-lg-4">
-                                                <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Purse Swap Value</label>
+                                                <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Purse Swap Value (£)</label>
                                             </div>
                                             <div class="col-lg-8">
                                                 <input type="text" class="form-control" id="txtPurseValue" placeholder="Purse Swap Value" data-bind="value:CouponSwapValue">
@@ -376,7 +382,7 @@ else
                                         </div>
                                         <div class="form-group">
                                             <div class="col-lg-4">
-                                                <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Coupon Expiry Label</label>
+                                                <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Coupon Expiry Label </label>
                                             </div>
                                             <div class="col-lg-8">
                                                 <input type="text" class="form-control" id="txtPurseValue" placeholder="Coupon Expiry Label" data-bind="value:CouponExpiryLabel">
@@ -384,7 +390,7 @@ else
                                         </div>
                                         <div class="form-group">
                                             <div class="col-lg-4">
-                                                <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Coupon Smd Comission</label>
+                                                <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Coupon Comission</label>
                                             </div>
                                             <div class="col-lg-8">
                                                 <input type="text" class="form-control" id="txtPurseValue" placeholder="Coupon Smd Comission" data-bind="value:couponSmdComission">
@@ -392,7 +398,7 @@ else
                                         </div>
                                         <div class="form-group">
                                             <div class="col-lg-4">
-                                                <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Actual Value</label>
+                                                <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Actual Value (£)</label>
                                             </div>
                                             <div class="col-lg-8">
                                                 <input type="text" class="form-control" id="txtPurseValue" placeholder="Actual Value" data-bind="value:CouponActualValue">
@@ -408,7 +414,7 @@ else
                                         </div>
                                         <div class="form-group">
                                             <div class="col-lg-4">
-                                                <label for="txtCouponQtyValue" class="control-label text-right tooltip-float floatNone">Coupon Discounted Value</label>
+                                                <label for="txtCouponQtyValue" class="control-label text-right tooltip-float floatNone">Coupon Discounted Value (£)</label>
                                             </div>
                                             <div class="col-lg-8">
                                                 <input type="text" class="form-control" id="txtCouponQtyValue" placeholder="Coupon Discounted Value" data-bind="value:CouponDiscountValue">
@@ -913,7 +919,7 @@ else
                                             </div>
                                         </div>
                                         <div class="col-lg-2 text-campaign-left Float-Left" style="margin-left:6px;">
-                                            <span class="control-label text-right tooltip-float font20 floatNone" style="float:left !important; " data-bind="text: $root.quizPriceLbl()"></span>
+                                            <span class="control-label text-right tooltip-float font20 floatNone" style="float:left !important;color:red; " data-bind="text: '(' +  $root.quizPriceLbl() + ')'"></span>
                                         </div>
                                     </div>
                                   
@@ -1036,14 +1042,13 @@ else
 
                                                 </div>
 
-                                                <div class="defaultImgUploadImageBtn" style="width:100%;">
+                                                <div class="defaultImgUploadImageBtn" style="width:260px;">
 
-                                                    <div class="col-lg-9" style="">
                                                         <div class="fileUpload btn btn-primary">
                                                             <span>Upload </span>
                                                             <input type="file" class="upload" id="Voucher_image_file" data-bind="files: { onLoaded: $root.VoucherImageCallback, fileFilter: 'image.*'}" />
                                                         </div>
-                                                    </div>
+                                                    
 
                                                 </div>
                                             </div>
@@ -1056,7 +1061,8 @@ else
                                             <label for="txtVoucherDes" class="control-label text-right tooltip-float floatNone">Voucher Email Description</label>
                                         </div>
                                         <div class="col-lg-8">
-                                            <input type="text" class="form-control" id="txtVoucherDes" placeholder="Enter voucher description  (20 characters)" data-bind="value: Voucher1Description" maxlength="20">
+                                            <textarea class="form-control" id="txtVoucherDes" rows="2" placeholder="Enter voucher description  (500 characters)" data-bind="value: Voucher1Description" ></textarea>
+                                            @*<input type="text" class="form-control" id="txtVoucherDes" placeholder="Enter voucher description  (500 characters)" data-bind="value: Voucher1Description" maxlength="500">*@
 
                                         </div>
                                     </div>
@@ -1199,27 +1205,25 @@ else
 
                                                 </div>
 
-                                                <div class="defaultImgUploadImageBtn" style="width:100%;">
+                                                <div class="defaultImgUploadImageBtn" style="width:260px;">
 
-                                                    <div class="col-lg-9" style="">
                                                         <div class="fileUpload btn btn-primary">
                                                             <span>Upload </span>
                                                             <input type="file" class="upload" id="buyIt_image_file" data-bind="files: { onLoaded: $root.buyItImageCallback, fileFilter: 'image.*'}" />
                                                         </div>
-                                                    </div>
-
+                                                  
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group text-right">
+                                    @*<div class="form-group text-right">
                                         <label class="text-right">
                                             we only charge you when viewers have correctly answered the quiz question OR completed a sponsored game.
                                             <br />
 
                                             We collect payment from your credit card every 4th day.
                                         </label>
-                                    </div>
+                                    </div>*@
 
                                 </div>
                                 <div class="col-lg-2" style="display:none;">
@@ -1282,31 +1286,31 @@ else
                                 </div>
                             </div>
                             <br />
-                            <div style="width:100%; height:103px; margin-bottom:20px;">
+                            <div data-bind="visible:!$root.isDisplayCouponsAds()" style="width:100%; height:103px; margin-bottom:20px;">
                                 <div class="radio col-lg-12">
                                     <span>Deliver in:</span>
                                 </div>
-                                <div class="radio col-lg-12 row" style="margin-left: 10px;">
+                                <div class="radio col-lg-12 row radioDelv" style="margin-left: 10px;">
 
                                     <input type="radio" name="optionsRadiosDeliver" id="optionsRadios3Day" value="3" data-bind="checked: DeliveryDays, event: { click:$root.addDeliveryPrice }">
-                                    <label for="optionsRadios3Day" data-bind="text: $root.threePriceLbl()">
-                                        3 days
+                                    <label for="optionsRadios3Day">
+                                        3 days <span class="delvPricetxt" data-bind="text: $root.threePriceLbl()" style=""></span>
                                     </label>
 
                                 </div>
-                                <div class="radio col-lg-12 row" style="margin-left: 10px;">
+                                <div class="radio col-lg-12 row radioDelv" style="margin-left: 10px;">
 
 
                                     <input type="radio" name="optionsRadiosDeliver" id="optionsRadios5Day" value="5" data-bind="checked: DeliveryDays, event: { click:$root.addDeliveryPrice }">
-                                    <label for="optionsRadios5Day" data-bind="text: $root.fivePriceLbl()">
-                                        5 days
+                                    <label for="optionsRadios5Day">
+                                        5 days <span data-bind="text: $root.fivePriceLbl()" class="delvPricetxt"></span>
                                     </label>
                                 </div>
-                                <div class="radio col-lg-12 row" style="margin-left: 10px;">
+                                <div class="radio col-lg-12 row radioDelv" style="margin-left: 10px;">
 
                                     <input type="radio" name="optionsRadiosDeliver" id="optionsRadios10Day" value="10" data-bind="checked: DeliveryDays, event: { click:$root.addDeliveryPrice }">
-                                    <label for="optionsRadios10Day" data-bind="text: $root.tenPriceLbl()">
-                                        10 days
+                                    <label for="optionsRadios10Day">
+                                        10 days <span data-bind="text: $root.tenPriceLbl()" class="delvPricetxt"></span>
                                     </label>
 
                                 </div>
@@ -1328,7 +1332,8 @@ else
                                         <span>Cap your campaign spend (£): </span>
                                     </div>
                                     <div class="yourBudgtBoxCnt">
-                                        <input type="number" name="Budget" class="form-control" id="txtBudget" data-bind="value: MaxBudget,validationTooltip:MaxBudget, validationOnElement: MaxBudget">
+                                        @*<span style="font-size:20px;" data-bind="numberInput: MaxBudget"></span>*@
+                                        <input type="text" name="Budget" class="form-control" id="txtBudget" data-bind="value: MaxBudget,validationTooltip:MaxBudget, validationOnElement: MaxBudget">
                                     </div>
                                     <div class="clearfix"> </div>
 
@@ -1712,7 +1717,9 @@ else
 
             <!--ko if:IncludeorExclude() == '0' -->
             <td class="col-lg-2">
-                <p style="margin-top: 5px;margin-left: 12px;" data-bind="text: '(Excluded) ' + questionString() + ' = ' + answerString()">
+                <p style="margin-top: 5px;margin-left: 12px;" >
+                
+                    <span data-bind="text: '(Excluded) ' + questionString() + ' = ' + answerString()"></span><span style="color:red;" data-bind="text:' (' + criteriaPrice() + 'p)'"></span>
                 </p>
 
                 @*<!-- ko if:   Type()  == "6" -->
@@ -1726,7 +1733,8 @@ else
             <!--ko if:IncludeorExclude() == '1'-->
             <td class="col-lg-2">
 
-                <p style="margin-top: 5px;margin-left: 12px;" data-bind="text: '(Included) ' + questionString() + ' = ' + answerString()">
+                <p style="margin-top: 5px;margin-left: 12px;" >
+                    <span data-bind="text: '(Included) ' + questionString() + ' = ' + answerString() "></span><span style="color:red;" data-bind="text:' (' + criteriaPrice() + 'p)'"></span>
                 </p>
                 @*<!-- ko if:   Type()  == "6" -->
                     <p style="margin-top: 5px;margin-left: 12px;">
@@ -2146,10 +2154,12 @@ else
             var scrollYpos = $(document).scrollTop();
             if (scrollYpos >= 620) {
                 $(".aud_cnt").css("position", "fixed");
-                $(".aud_cnt").css("top", "90px");
+                $(".aud_cnt").css("top", "60px");
+                $(".aud_cnt").css("width", "23%");
             } else {
                 $(".aud_cnt").css("position", "absolute");
-                $(".aud_cnt").css("top", "324px");
+                $(".aud_cnt").css("top", "360px");
+                $(".aud_cnt").css("width", "95%");
             }
         });
     </script>

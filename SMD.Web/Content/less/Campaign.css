@@ -117,11 +117,7 @@ div.Tokenize ul.Dropdown {
 .tt-dropdown-menu {
   width: 286px !important;
 }
-.defaultImgUploadImage {
-  width: 260px;
-  float: left;
-  text-align: center;
-}
+
 .defaultImgUploadImageBtn {
   margin-top: 15px;
   text-align: center;
@@ -247,7 +243,7 @@ i.img {
   padding-left: 10px;
 }
 .aud_cnt {
-  width: 303px;
+
   background: #6B6AFE;
   padding: 10px;
   border: 5px;

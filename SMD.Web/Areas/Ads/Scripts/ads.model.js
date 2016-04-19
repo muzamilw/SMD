@@ -341,7 +341,8 @@
 
     var // ReSharper disable InconsistentNaming
       AdCampaignTargetCriteriasModel = function (CriteriaID, CampaignID, Type, PQID, PQAnswerID, SQID, SQAnswer, IncludeorExclude, questionString,
-       answerString, surveyQuestLeftImageSrc, surveyQuestRightImageSrc, LanguageID, Language, IndustryID, Industry, EducationID, Education, QuizCampaignId, QuizAnswerId) {
+       answerString, surveyQuestLeftImageSrc, surveyQuestRightImageSrc, LanguageID, Language, IndustryID, Industry, EducationID, Education, QuizCampaignId, QuizAnswerId
+       , criteriaPrice) {
 
           var
               //type and userID will be set on server sside
@@ -365,6 +366,7 @@
                EducationID = ko.observable(EducationID),
                QuizCampaignId = ko.observable(QuizCampaignId),
                QuizAnswerId = ko.observable(QuizAnswerId),
+               criteriaPrice = ko.observable(criteriaPrice)
           // Convert to server data
           convertCriteriaToServerData = function () {
               
@@ -408,7 +410,8 @@
               Education: Education,
               convertCriteriaToServerData: convertCriteriaToServerData,
               QuizCampaignId: QuizCampaignId,
-              QuizAnswerId: QuizAnswerId
+              QuizAnswerId: QuizAnswerId,
+              criteriaPrice: criteriaPrice
           };
       };
     var // ReSharper disable InconsistentNaming
@@ -477,6 +480,8 @@
     };
     // Factory Method
     Campaign.Create = function (source) {
+        //var profileQIdsAdded = [];
+        //var qQIdsAdded = [];
         var campaign = new Campaign(source.CampaignId, source.LanguageId, source.CampaignName, source.UserId, source.Status, source.StatusValue,
             source.CampaignDescription, source.Gender + "", source.Archived, source.StartDateTime, source.EndDateTime, source.MaxBudget
             , source.Type + "", source.DisplayTitle, source.LandingPageVideoLink, source.VerifyQuestion, source.Answer1, source.Answer2, source.Answer3,
@@ -487,6 +492,19 @@
              source.couponImage2, source.CouponImage3, source.CouponImage4, source.CouponExpiryLabel, source.couponSmdComission, source.DeliveryDays);
         
         _.each(source.AdCampaignTargetCriterias, function (item) {
+            //debugger;
+            //if (item.Type == 1) {
+            //    if (profileQIdsAdded.indexOf(item.PQID()) == -1) {
+            //        profileQIdsAdded.push(item.PQID());
+
+            //    }
+            //} else {
+            //    if (profileQIdsAdded.indexOf(item.PQID()) == -1) {
+            //        profileQIdsAdded.push(item.PQID());
+
+            //    }
+            //}
+          
             campaign.AdCampaignTargetCriterias.push(AdCampaignTargetCriteriasModel.Create(item));
         });
         _.each(source.AdCampaignTargetLocations, function (item) {
@@ -504,7 +522,7 @@
         
         return new AdCampaignTargetCriteriasModel(source.CriteriaId, source.CampaignId, source.Type, source.PQId, source.PQAnswerId, source.SQId, source.SQAnswer,
             source.IncludeorExclude, source.questionString, source.answerString, source.surveyQuestLeftImageSrc, source.surveyQuestRightImageSrc, source.LanguageId,
-            source.Language, source.IndustryId, source.Industry, source.EducationId, source.Education, source.QuizCampaignId, source.QuizAnswerId);
+            source.Language, source.IndustryId, source.Industry, source.EducationId, source.Education, source.QuizCampaignId, source.QuizAnswerId, source.criteriaPrice);
     };
     AdCampaignTargetLocation.Create = function (source) {
        

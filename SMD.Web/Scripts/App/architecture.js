@@ -977,6 +977,23 @@ require(["ko", "knockout-validation"], function (ko) {
     var options = { insertMessages: false, decorateElement: true, errorElementClass: 'errorFill', messagesOnModified: true, registerExtenders: true };
     ko.validation.init(options);
 
+    // number formatting setting the text property of an element
+    ko.bindingHandlers.numberInput = {
+        update: function (element, valueAccessor, allBindingsAccessor) {
+            var value = valueAccessor(),
+                allBindings = allBindingsAccessor();
+            var valueUnwrapped = ko.utils.unwrapObservable(value);
+            var pattern = allBindings.format || ist.numberFormat;
+            if (valueUnwrapped !== undefined && valueUnwrapped !== null) {
+                var formattedValue = numeral(valueUnwrapped).format(pattern);
+                $(element).text(formattedValue);
+            }
+            else {
+                $(element).text("");
+            }
+
+        }
+    };
 });
 
 
