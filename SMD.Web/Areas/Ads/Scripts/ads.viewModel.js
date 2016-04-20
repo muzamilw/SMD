@@ -903,9 +903,9 @@ define("ads/ads.viewModel",
                 },
 
                 deleteLocation = function (item) {
-                    if (item.CountryID() == UserAndCostDetail().CountryId && item.CityID() == UserAndCostDetail().CityId) {
-                        toastr.error("You cannot remove your home town or country!");
-                    } else {
+                    //if (item.CountryID() == UserAndCostDetail().CountryId && item.CityID() == UserAndCostDetail().CityId) {
+                    //    toastr.error("You cannot remove your home town or country!");
+                    //} else {
                         campaignModel().AdCampaignTargetLocations.remove(item);
 
                         if (campaignModel().AdCampaignTargetLocations() == null || campaignModel().AdCampaignTargetLocations().length == 0) {
@@ -917,7 +917,7 @@ define("ads/ads.viewModel",
                             addCountryToCountryList(item.CountryID(), item.Country());
                         });
                         toastr.success("Removed Successfully!");
-                    }
+                   // }
 
                 },
                 //add location
