@@ -26,14 +26,14 @@
 .coun_in_ex_cnt {
   width: 30%;
   float: left;
-  border: 1px solid #e7ebee !important;
-  border-right: 0px !important;
+  /*border: 1px solid #e7ebee !important;
+    border-right: 0px !important;*/
 }
 .count_token_opt_cnt {
   float: left;
-  width: 69%;
-  border: 1px solid #e7ebee !important;
-  border-left: 0px !important;
+  width: 69.7%;
+  /*border: 1px solid #e7ebee !important;
+    border-left: 0px !important;*/
 }
 #searchCampaignLocations {
   width: 280px!important;
@@ -86,7 +86,7 @@ div.Tokenize ul.Dropdown {
   border-bottom: none;
 }
 #count_edt {
-  border: 1px solid #e7ebee;
+  /*border: 1px solid #e7ebee;*/
   padding-left: 0px;
   padding-right: 0px;
   border-radius: 4px;
@@ -130,7 +130,6 @@ div.Tokenize ul.Dropdown {
 .tt-dropdown-menu {
   width: 286px !important;
 }
-
 .defaultImgUploadImageBtn {
   margin-top: 15px;
   text-align: center;
@@ -256,10 +255,9 @@ i.img {
   padding-left: 10px;
 }
 .aud_cnt {
-  
   background: #6B6AFE;
-  padding: 10px;
-  border: 5px;
+  /*padding: 10px;
+    border: 5px;*/
   /* position: fixed; */
   /*top: 200px;*/
   color: white;
@@ -480,17 +478,14 @@ ul {
 .coun_in_ex_cnt {
   width: 30%;
   float: left;
-  border: 1px solid #e7ebee;
 }
 .count_token_opt_cnt {
   float: left;
-  width: 69%;
-  border: 1px solid #e7ebee;
+  width: 69.7%;
 }
 .count_token_opt_prof_cnt {
   float: left;
   width: 100% !important;
-  border: 1px solid #e7ebee;
 }
 #searchSurveyLocations {
   width: 280px !important;
