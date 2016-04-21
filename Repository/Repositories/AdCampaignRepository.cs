@@ -121,7 +121,7 @@ namespace SMD.Repository.Repositories
             {
                 const int fromRow = 0;
                 const int toRow = 10;
-                rowCount = DbSet.Count();
+                rowCount = DbSet.Where(c => c.Type != 5).Count();
                 if (isAdmin)
                 {
                     IEnumerable<AdCampaign> adCampaigns = DbSet.OrderByDescending(g => g.priority).Where(c => c.Type != 5)
@@ -171,10 +171,11 @@ namespace SMD.Repository.Repositories
                          && (campaign.UserId == LoggedInUserIdentity || isAdmin);
 
 
-                rowCount = DbSet.Count(query);
+                rowCount = DbSet.Where(c => c.Type != 5).Count(query);
                 IEnumerable<AdCampaign> adCampaigns = null;
                 if (request.ShowCoupons != null && request.ShowCoupons == true)
                 {
+                    rowCount = DbSet.Where(c => c.Type == 5).Count();
                     adCampaigns = DbSet.Where(query).Where(g => g.Type == 5).OrderByDescending(g => g.priority)
                       .Skip(fromRow)
                       .Take(toRow)
