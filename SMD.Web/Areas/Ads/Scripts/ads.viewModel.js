@@ -157,6 +157,7 @@ define("ads/ads.viewModel",
                     },
 
                     getAdCampaignGridContent = function () {
+                       
                         dataservice.getCampaignData({
                             CampaignId: 0,
                             PageSize: pager().pageSize(),
@@ -166,7 +167,7 @@ define("ads/ads.viewModel",
                         }, {
                             success: function (data) {
                                 if (data != null) {
-
+                                    
                                     // set grid content
                                     campaignGridContent.removeAll();
                                     _.each(data.Campaigns, function (item) {
@@ -174,7 +175,6 @@ define("ads/ads.viewModel",
                                         campaignGridContent.push(model.Campaign.Create(updateCampaignGridItem(item)));
                                     });
                                     pager().totalCount(data.TotalCount);
-
 
                                 }
 

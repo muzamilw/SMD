@@ -10,6 +10,7 @@ namespace Cash4Ads.Controllers
     {
         public ActionResult Index()
         {
+           
             return View();
         }
 
@@ -46,6 +47,12 @@ namespace Cash4Ads.Controllers
         public ActionResult cashout()
         {
             return View();
+        }
+
+        public ActionResult logOut()
+        {
+            Session["User"] = null;
+            return RedirectToAction("Index","Home");
         }
     }
 }

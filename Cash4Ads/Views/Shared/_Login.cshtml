@@ -1,0 +1,270 @@
+﻿
+<div class="popUpOuterLayer" style="display:none;">
+    <div class="innerLayer">
+
+        <div class="apollo" style="z-index: 999999 ; margin-top:10%;">
+            <div class="apollo-container clearfix">
+                
+                <h3 class="appollo_heading">Login <i class="fa fa-times close_popp" aria-hidden="true" onclick="closePopUp();"></i></h3>
+                <div class="apollo-login">
+                    <div class="popUpinsideloaderOuterLayer" style="display:none;">
+                        <img />
+                        </div>
+                        <div class="form-signin" id="apollo-login-form">
+                            <div class="form-group apollo-error-cnt" style="display:none;">
+                                <span id="lblloginerorrs"></span>
+                            </div>
+                            <button class="btn btn-block btn-facebook btn-lg" onclick="loginInWithfaceBook()">Signin with <strong>Facebook</strong></button>
+                            <div id="gplusCnt">
+                                <div class="g-signin2" data-onsuccess="onSignIn" style=""></div>
+                            </div>
+                            <p class="apollo-seperator"> or </p>
+                            <div class="form-group" id="registerfullNamecnt" style="display:none;">
+                                <input type="text" value="" class="form-control" id="txtfullName" placeholder="Full name">
+                            </div>
+
+                            <div class="form-group">
+                                <input type="text" value="" class="form-control email" id="loginEmailtxt" placeholder="Email address" />
+                            </div>
+
+                            <div class="form-group">
+                                <input type="password" value="" class="form-control" id="loginPasswordtxt" placeholder="Password" />
+                            </div>
+                            <button class="btn btn-lg btn-signin btn-block" type="button" style="display:none;" id="registerBtn" onclick="submitRegisterForm();">Register</button>
+                            <button class="btn btn-lg btn-signin btn-block" type="button" id="loginBtn" onclick="submitLoginForm();">Sign in</button>
+                        </div>
+
+                        @*<button class="btn btn-block btn-google btn-lg">Signin with <strong>Google</strong></button>*@
+                        <p class="apollo-register-account">
+                            <a onclick="LoadRegisterForm();" id="registerhylink" class="register-link">Need an account? <strong>Register here </strong><i class="icon-arrow-right"></i></a>
+                            <a onclick="LoadLoginForm();" style="display:none;" id="loginhylink" class="register-link">Already have an account? <strong>Login here </strong><i class="icon-arrow-right"></i></a>
+                            <br><a href="#" class="password-link"><small>Forgot your password?</small></a>
+                        </p>
+                        <p class="apollo-change-account"> <a href="#"><i class="icon-arrow-left"></i><strong>Not you?</strong> Sign in as a different user</a> </p>
+                    </div>
+
+                <div class="apollo-forgotten-password">
+                    <div class="form-signin" id="apollo-forgotten-password-form">
+                        <div class="form-group">
+                            <input type="text" value="" class="form-control email" placeholder="Email address">
+                        </div>
+                        <button class="btn btn-lg btn-block btn-primary" type="submit">Reset password</button>
+                    </div>
+
+                    <p class="apollo-back"> <a href="#"><i class="icon-arrow-left"></i> back to login</a> </p>
+                </div>
+
+                <div class="apollo-logging-in">
+                    <h2>Welcome back<span class="user-name"></span>!</h2>
+                    <p><strong>Please wait whilst we securely log you in…</strong></p>
+
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus dignissim enim suscipit massa ornare rutrum.</p>
+                </div>
+
+                <div class="apollo-registering">
+                    <h2>Thanks<span class="user-name"></span>!</h2>
+                    <p><strong>We've sent you an activation email, blah blah...</strong></p>
+                    <p>Nullam ac erat nunc. Donec in orci purus, vel tempor tortor. Integer tincidunt ipsum sed ipsum scelerisque malesuada.</p>
+                </div>
+
+                <div class="apollo-password-reset">
+                    <h2>Check your email</h2>
+                    <p><strong>We've sent you a link, blah blah...</strong></p>
+                    <p>Nullam ac erat nunc. Donec in orci purus, vel tempor tortor. Integer tincidunt ipsum sed ipsum scelerisque malesuada.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script>
+    window.fbAsyncInit = function () {
+        FB.init({
+            appId: '986633918046235',
+            xfbml: true,
+            version: 'v2.5'
+        });
+    };
+
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) { return; }
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+    $(".g-signin2").on("click", onSignIn);
+    window.onbeforeunload = function (e) {
+        gapi.auth.signOut();
+    };
+    function onSignIn(googleUser) {
+        if (googleUser != null)
+        {
+            var profile = googleUser.getBasicProfile();
+            console.log(profile.getEmail());
+            $.ajax({
+                dataType: "json",
+                url: 'http://smd.saleflow.com/Api_Mobile/' + 'Login/External/?Email=' + profile.getEmail() + '&LoginProvider=Google&LoginProviderKey=' + profile.getId() + '&FullName=' + profile.getName(),
+                cache: false,
+                success: function (response) {
+                    if (response.Message == "Success") {
+                        
+                        $.ajax({
+                            url: '/Account/Login',
+                            type: 'POST',
+                            // we set cache: false because GET requests are often cached by browsers
+                            // IE is particularly aggressive in that respect
+                            cache: false,
+                            data: { oUser: response.User },
+                            success: function (response2) {
+                                
+                                if (response2 == "Success") {
+                                    $("#lblloginerorrs").text("You are logged in successfully.");
+                                    $("#lblloginerorrs").parent().css("display", "block");
+                                }
+                            }
+                        });
+
+                    } else {
+                        $("#lblloginerorrs").text(response.Message);
+                        $("#lblloginerorrs").parent().css("display", "block");
+                    }
+                }
+            });
+        }
+    }
+
+    function loginInWithfaceBook(){
+    
+     FB.login(function (response) {
+         if (response.authResponse) {
+             
+             FB.api('/me?fields=name,email', function (response) {
+                 console.log(response);
+                 $.ajax({
+                     dataType: "json",
+                     url: 'http://smd.saleflow.com/Api_Mobile/' + 'Login/External/?Email=' + response.email + '&LoginProvider=Facebook&LoginProviderKey=' + response.id + '&FullName=' + response.name,
+                     cache: false,
+                     success: function (response) {
+                         if (response.Message == "Success") {
+
+                             $.ajax({
+                                 url: '/Account/Login',
+                                 type: 'POST',
+                                 // we set cache: false because GET requests are often cached by browsers
+                                 // IE is particularly aggressive in that respect
+                                 cache: false,
+                                 data: { oUser: response.User },
+                                 success: function (response2) {
+                                     if (response2 == "Success") {
+                                         window.location.reload();
+                                     }
+                                 }
+                             });
+
+                         } else {
+                             $("#lblloginerorrs").text(response.Message);
+                             $("#lblloginerorrs").parent().css("display", "block");
+                         }
+                     }
+                 });
+             });
+         } else {
+                                   
+         }
+     });
+    }
+</script>
+
+<script>
+    
+    function submitLoginForm() {
+
+        $.ajax({
+            dataType: "json",
+            url: 'http://smd.saleflow.com/Api_Mobile/' + 'Login/Standard/?UserName=' + $("#loginEmailtxt").val() + '&Password=' + $("#loginPasswordtxt").val() + '',
+            cache: false,
+            success: function (response) {
+               
+                if (response.Message == "Success") {
+                   
+                    $.ajax({
+                        url: '/Account/Login',
+                        type: 'POST',
+                        // we set cache: false because GET requests are often cached by browsers
+                        // IE is particularly aggressive in that respect
+                        cache: false,
+                        data: { oUser: response.User },
+                        success: function (response2) {
+                            if (response2 == "Success") {
+                                window.location.reload();
+                            }
+                        }
+                    });
+
+                } else {
+                    $("#lblloginerorrs").text(response.Message);
+                    $("#lblloginerorrs").parent().css("display", "block");
+                }
+            }
+        });
+
+
+    }
+    function submitRegisterForm() {
+
+        $.ajax({
+            dataType: "json",
+            url: 'http://smd.saleflow.com/Api_Mobile/' + 'Register/Custom/?FullName=' + $("#txtfullName").val() + '&Email=' + $("#loginEmailtxt").val() + '&Password=' + $("#loginPasswordtxt").val() + '',
+            cache: false,
+            success: function (response) {
+
+                if (response.Message == "Success") {
+
+                    $.ajax({
+                        url: '/Account/Login',
+                        type: 'POST',
+                        // we set cache: false because GET requests are often cached by browsers
+                        // IE is particularly aggressive in that respect
+                        cache: false,
+                        data: { oUser: response.User },
+                        success: function (response2) {
+                            if (response2 == "Success") {
+                                window.location.reload();
+                                //$("#lblloginerorrs").text("You are logged in successfully.");
+                                //$("#lblloginerorrs").parent().css("display", "block");
+                            }
+                        }
+                    });
+
+                } else {
+                    $("#lblloginerorrs").text(response.Message);
+                    $("#lblloginerorrs").parent().css("display", "block");
+                }
+            }
+        });
+
+
+    }
+    function openLoginDialog() {
+        $(".popUpOuterLayer").css("display", "block");
+    }
+    function closePopUp() {
+        $(".popUpOuterLayer").css("display", "none");
+    }
+    function LoadRegisterForm() {
+        $("#loginBtn").css("display", "none");
+        $("#registerBtn").css("display", "block");
+        $("#registerfullNamecnt").css("display", "block");  
+        $("#registerhylink").css("display", "none");
+        $("#loginhylink").css("display", "block");
+    }
+
+    function LoadLoginForm() {
+        $("#loginBtn").css("display", "block");
+        $("#registerBtn").css("display", "none");
+        $("#registerfullNamecnt").css("display", "none");
+        $("#registerhylink").css("display", "block");
+        $("#loginhylink").css("display", "none");
+    }
+</script>

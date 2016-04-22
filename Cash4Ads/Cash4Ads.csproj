@@ -167,6 +167,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -317,6 +318,7 @@
     <Content Include="Views\Home\get_paid_watch_ads.cshtml" />
     <Content Include="Views\Shared\voucherbar.cshtml" />
     <Content Include="Views\Home\cashout.cshtml" />
+    <Content Include="Views\Shared\_Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
