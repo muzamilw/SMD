@@ -87,6 +87,31 @@ namespace SMD.Models.DomainModels
         public string BuyItImageUrl { get; set; }
 
         public string VoucherImagePath { get; set; }
+
+        public int? PQA1LinkedQ3 { get; set; }
+        public int? PQA1LinkedQ4 { get; set; }
+        public int? PQA1LinkedQ5 { get; set; }
+        public int? PQA1LinkedQ6 { get; set; }
+        public int? PQA2LinkedQ3 { get; set; }
+        public int? PQA2LinkedQ4 { get; set; }
+        public int? PQA2LinkedQ5 { get; set; }
+        public int? PQA2LinkedQ6 { get; set; }
+        public int? PQA3LinkedQ3 { get; set; }
+        public int? PQA3LinkedQ4 { get; set; }
+        public int? PQA3LinkedQ5 { get; set; }
+        public int? PQA3LinkedQ6 { get; set; }
+        public int? PQA4LinkedQ3 { get; set; }
+        public int? PQA4LinkedQ4 { get; set; }
+        public int? PQA4LinkedQ5 { get; set; }
+        public int? PQA4LinkedQ6 { get; set; }
+        public int? PQA5LinkedQ3 { get; set; }
+        public int? PQA5LinkedQ4 { get; set; }
+        public int? PQA5LinkedQ5 { get; set; }
+        public int? PQA5LinkedQ6 { get; set; }
+        public int? PQA6LinkedQ3 { get; set; }
+        public int? PQA6LinkedQ4 { get; set; }
+        public int? PQA6LinkedQ5 { get; set; }
+        public int? PQA6LinkedQ6 { get; set; }
         /// <summary>
         /// Profile Question Answers
         /// </summary>
@@ -109,6 +134,10 @@ namespace SMD.Models.DomainModels
                         PqId = (int)ItemId,
                         LinkedQuestion1Id = PqA1LinkedQ1,
                         LinkedQuestion2Id = PqA1LinkedQ2,
+                        LinkedQuestion3Id = PQA1LinkedQ3,
+                        LinkedQuestion4Id = PQA1LinkedQ4,
+                        LinkedQuestion5Id = PQA1LinkedQ5,
+                        LinkedQuestion6Id = PQA1LinkedQ6,
                         Type = PqA1Type,
                         SortOrder = PqA1SortOrder,
                         ImagePath = PqA1ImagePath
@@ -123,6 +152,10 @@ namespace SMD.Models.DomainModels
                         PqId = (int)ItemId,
                         LinkedQuestion1Id = PqA2LinkedQ1,
                         LinkedQuestion2Id = PqA2LinkedQ2,
+                        LinkedQuestion3Id = PQA2LinkedQ3,
+                        LinkedQuestion4Id = PQA2LinkedQ4,
+                        LinkedQuestion5Id = PQA2LinkedQ5,
+                        LinkedQuestion6Id = PQA2LinkedQ6,
                         Type = PqA2Type,
                         SortOrder = PqA2SortOrder,
                         ImagePath = PqA2ImagePath
@@ -137,6 +170,10 @@ namespace SMD.Models.DomainModels
                         PqId = (int)ItemId,
                         LinkedQuestion1Id = PqA3LinkedQ1,
                         LinkedQuestion2Id = PqA3LinkedQ2,
+                        LinkedQuestion3Id = PQA3LinkedQ3,
+                        LinkedQuestion4Id = PQA3LinkedQ4,
+                        LinkedQuestion5Id = PQA3LinkedQ5,
+                        LinkedQuestion6Id = PQA3LinkedQ6,
                         Type = PqA3Type,
                         SortOrder = PqA3SortOrder,
                         ImagePath = PqA3ImagePath
@@ -151,6 +188,10 @@ namespace SMD.Models.DomainModels
                         PqId = (int)ItemId,
                         LinkedQuestion1Id = PqA4LinkedQ1,
                         LinkedQuestion2Id = PqA4LinkedQ2,
+                        LinkedQuestion3Id = PQA4LinkedQ3,
+                        LinkedQuestion4Id = PQA4LinkedQ4,
+                        LinkedQuestion5Id = PQA4LinkedQ5,
+                        LinkedQuestion6Id = PQA4LinkedQ6,
                         Type = PqA4Type,
                         SortOrder = PqA4SortOrder,
                         ImagePath = PqA4ImagePath
@@ -165,6 +206,10 @@ namespace SMD.Models.DomainModels
                         PqId = (int)ItemId,
                         LinkedQuestion1Id = PqA5LinkedQ1,
                         LinkedQuestion2Id = PqA5LinkedQ2,
+                        LinkedQuestion3Id = PQA5LinkedQ3,
+                        LinkedQuestion4Id = PQA5LinkedQ4,
+                        LinkedQuestion5Id = PQA5LinkedQ5,
+                        LinkedQuestion6Id = PQA5LinkedQ6,
                         Type = PqA5Type,
                         SortOrder = PqA5SortOrder,
                         ImagePath = PqA5ImagePath
@@ -179,6 +224,10 @@ namespace SMD.Models.DomainModels
                         PqId = (int)ItemId,
                         LinkedQuestion1Id = PqA6LinkedQ1,
                         LinkedQuestion2Id = PqA6LinkedQ2,
+                        LinkedQuestion3Id = PQA6LinkedQ3,
+                        LinkedQuestion4Id = PQA6LinkedQ4,
+                        LinkedQuestion5Id = PQA6LinkedQ5,
+                        LinkedQuestion6Id = PQA6LinkedQ6,
                         Type = PqA6Type,
                         SortOrder = PqA6SortOrder,
                         ImagePath = PqA6ImagePath
