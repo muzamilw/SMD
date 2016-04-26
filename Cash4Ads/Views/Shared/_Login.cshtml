@@ -1,12 +1,19 @@
-﻿
+﻿@{
+    
+    var sessionVar = Session["User"];
+}
 <div class="popUpOuterLayer" style="display:none;">
     <div class="innerLayer">
 
-        <div class="apollo" style="z-index: 999999 ; margin-top:10%;">
+        <div class="apollo" style="z-index: 999999 ; margin-top:5%;">
             <div class="apollo-container clearfix">
                 
                 <h3 class="appollo_heading">Login <i class="fa fa-times close_popp" aria-hidden="true" onclick="closePopUp();"></i></h3>
                 <div class="apollo-login">
+                    <div id="loginOverlayCnt" class="loadingoverlay" style="display: none; flex-direction: column; align-items: center; justify-content: center; position: fixed; top: 0px; left: 0px; width: 100%; height: 100%; background-color: rgba(255, 255, 255, 0.8); background-size: 100px;">
+                    <div class="loadingoverlay_fontawesome fa fa-spinner fa-spin" style="font-size: 100px;">
+                        </div>
+                    </div>
                     <div class="popUpinsideloaderOuterLayer" style="display:none;">
                         <img />
                         </div>
@@ -78,6 +85,20 @@
 
 </div>
 <script>
+    var getUrlParameter = function getUrlParameter(sParam) {
+        var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+            sURLVariables = sPageURL.split('&'),
+            sParameterName,
+            i;
+
+        for (i = 0; i < sURLVariables.length; i++) {
+            sParameterName = sURLVariables[i].split('=');
+
+            if (sParameterName[0] === sParam) {
+                return sParameterName[1] === undefined ? true : sParameterName[1];
+            }
+        }
+    };
     window.fbAsyncInit = function () {
         FB.init({
             appId: '986633918046235',
@@ -98,56 +119,58 @@
         gapi.auth.signOut();
     };
     function onSignIn(googleUser) {
-        if (googleUser != null)
-        {
-            var profile = googleUser.getBasicProfile();
-            console.log(profile.getEmail());
-            $.ajax({
-                dataType: "json",
-                url: 'http://smd.saleflow.com/Api_Mobile/' + 'Login/External/?Email=' + profile.getEmail() + '&LoginProvider=Google&LoginProviderKey=' + profile.getId() + '&FullName=' + profile.getName(),
-                cache: false,
-                success: function (response) {
-                    if (response.Message == "Success") {
-                        
-                        $.ajax({
-                            url: '/Account/Login',
-                            type: 'POST',
-                            // we set cache: false because GET requests are often cached by browsers
-                            // IE is particularly aggressive in that respect
-                            cache: false,
-                            data: { oUser: response.User },
-                            success: function (response2) {
-                                
-                                if (response2 == "Success") {
-                                    $("#lblloginerorrs").text("You are logged in successfully.");
-                                    $("#lblloginerorrs").parent().css("display", "block");
-                                }
-                            }
-                        });
+        if (getUrlParameter('signedIn') != "1") {
+            if (googleUser != null) {
+                var profile = googleUser.getBasicProfile();
+                console.log(profile.getEmail());
+                $.ajax({
+                    dataType: "json",
+                    url: 'http://smd.saleflow.com/Api_Mobile/' + 'Login/External/?Email=' + profile.getEmail() + '&LoginProvider=Google&LoginProviderKey=' + profile.getId() + '&FullName=' + profile.getName(),
+                    cache: false,
+                    success: function (response) {
+                        if (response.Message == "Success") {
 
-                    } else {
-                        $("#lblloginerorrs").text(response.Message);
-                        $("#lblloginerorrs").parent().css("display", "block");
+                            $.ajax({
+                                url: '/Account/Login',
+                                type: 'POST',
+                                // we set cache: false because GET requests are often cached by browsers
+                                // IE is particularly aggressive in that respect
+                                cache: false,
+                                data: { oUser: response.User },
+                                success: function (response2) {
+
+                                    if (response2 == "Success") {
+                                        window.location.href = window.location.href + "?signedIn=1";
+                                    }
+                                }
+                            });
+
+                        } else {
+                            $("#lblloginerorrs").text(response.Message);
+                            $("#lblloginerorrs").parent().css("display", "block");
+                        }
                     }
-                }
-            });
+                });
+            }
+
         }
+        
     }
 
     function loginInWithfaceBook(){
-    
+        $("#loginOverlayCnt").css("display", "flex");
      FB.login(function (response) {
          if (response.authResponse) {
              
              FB.api('/me?fields=name,email', function (response) {
-                 console.log(response);
+                 $("#loginOverlayCnt").css("display", "none");
                  $.ajax({
                      dataType: "json",
                      url: 'http://smd.saleflow.com/Api_Mobile/' + 'Login/External/?Email=' + response.email + '&LoginProvider=Facebook&LoginProviderKey=' + response.id + '&FullName=' + response.name,
                      cache: false,
                      success: function (response) {
                          if (response.Message == "Success") {
-
+                            
                              $.ajax({
                                  url: '/Account/Login',
                                  type: 'POST',
@@ -163,6 +186,7 @@
                              });
 
                          } else {
+                             $("#loginOverlayCnt").css("display", "none");
                              $("#lblloginerorrs").text(response.Message);
                              $("#lblloginerorrs").parent().css("display", "block");
                          }
@@ -179,7 +203,7 @@
 <script>
     
     function submitLoginForm() {
-
+        $("#loginOverlayCnt").css("display", "flex");
         $.ajax({
             dataType: "json",
             url: 'http://smd.saleflow.com/Api_Mobile/' + 'Login/Standard/?UserName=' + $("#loginEmailtxt").val() + '&Password=' + $("#loginPasswordtxt").val() + '',
@@ -203,6 +227,7 @@
                     });
 
                 } else {
+                    $("#loginOverlayCnt").css("display", "none");
                     $("#lblloginerorrs").text(response.Message);
                     $("#lblloginerorrs").parent().css("display", "block");
                 }
@@ -212,7 +237,7 @@
 
     }
     function submitRegisterForm() {
-
+        $("#loginOverlayCnt").css("display", "flex");
         $.ajax({
             dataType: "json",
             url: 'http://smd.saleflow.com/Api_Mobile/' + 'Register/Custom/?FullName=' + $("#txtfullName").val() + '&Email=' + $("#loginEmailtxt").val() + '&Password=' + $("#loginPasswordtxt").val() + '',
@@ -238,6 +263,7 @@
                     });
 
                 } else {
+                    $("#loginOverlayCnt").css("display", "none");
                     $("#lblloginerorrs").text(response.Message);
                     $("#lblloginerorrs").parent().css("display", "block");
                 }
@@ -247,7 +273,9 @@
 
     }
     function openLoginDialog() {
+       
         $(".popUpOuterLayer").css("display", "block");
+
     }
     function closePopUp() {
         $(".popUpOuterLayer").css("display", "none");

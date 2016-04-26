@@ -52,6 +52,7 @@ namespace Cash4Ads.Controllers
         public ActionResult logOut()
         {
             Session["User"] = null;
+            Session.Abandon();
             return RedirectToAction("Index","Home");
         }
     }
