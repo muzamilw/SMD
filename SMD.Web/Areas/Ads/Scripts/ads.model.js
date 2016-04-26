@@ -120,6 +120,7 @@
               AdViews = ko.observable(AdViews),
               CompanyId = ko.observable(CompanyId),
               DeliveryDays = ko.observable(DeliveryDays),
+              CouponCodes = ko.observableArray([]),
                // Errors
                 errors = ko.validation.group({
                     CampaignName:CampaignName,
@@ -173,7 +174,8 @@
                   priority: priority,
                   VoucherImagePath: VoucherImagePath,
                   CouponDiscountValue: CouponDiscountValue,
-                  DeliveryDays: DeliveryDays
+                  DeliveryDays: DeliveryDays,
+                  CouponCodes: CouponCodes
               }),
               // Has Changes
               hasChanges = ko.computed(function () {
@@ -188,7 +190,7 @@
                   
                   var targetCriteria = [];
                   _.each(AdCampaignTargetCriterias(), function (item) {
-                      console.log(item);
+                      
                       targetCriteria.push(item.convertCriteriaToServerData());
                   });
                   var LocationtargetCriteria = [];
@@ -201,6 +203,11 @@
                   _.each(CouponCategories(), function (item) {
 
                       selectedCoupons.push(item.convertToServerData());
+                  });
+                  var targetCouponCodes = [];
+                  _.each(CouponCodes(), function (item) {
+                      console.log(item);
+                      targetCouponCodes.push(item.convertToServerData());
                   });
                   return {
                       CampaignID: CampaignID(),
@@ -264,7 +271,8 @@
                       priority: priority(),
                       CouponDiscountValue: CouponDiscountValue(),
                       CouponCategories: selectedCoupons,
-                      DeliveryDays: DeliveryDays()
+                      DeliveryDays: DeliveryDays(),
+                      CouponCodes: targetCouponCodes
                   };
               };
           return {
@@ -335,7 +343,8 @@
               priority: priority,
               CouponDiscountValue: CouponDiscountValue,
               CouponCategories: CouponCategories,
-              DeliveryDays: DeliveryDays
+              DeliveryDays: DeliveryDays,
+              CouponCodes: CouponCodes
           };
       };
 
@@ -478,6 +487,37 @@
             convertToServerData: convertToServerData
         };
     };
+
+    var // ReSharper disable InconsistentNaming
+  AdCampaignCouponCodes = function (CodeId, CampaignId, Code, IsTaken, UserId) {
+
+      var
+          //type and userID will be set on server sside
+          CodeId = ko.observable(CodeId),
+          CampaignId = ko.observable(CampaignId),
+          Code = ko.observable(Code),
+          IsTaken = ko.observable(IsTaken),
+          UserId = ko.observable(UserId)
+          // Convert to server data
+          convertToServerData = function () {
+              return {
+                  CodeId: CodeId(),
+                  CampaignId: CampaignId(),
+                  Code: Code(),
+                  IsTaken: IsTaken(),
+                  UserId: UserId()
+              };
+          };
+      return {
+          CodeId: CodeId,
+          CampaignId: CampaignId,
+          Code: Code,
+          IsTaken: IsTaken,
+          UserId: UserId,
+          convertToServerData: convertToServerData
+      };
+  };
+
     // Factory Method
     Campaign.Create = function (source) {
         //var profileQIdsAdded = [];
@@ -492,18 +532,6 @@
              source.couponImage2, source.CouponImage3, source.CouponImage4, source.CouponExpiryLabel, source.couponSmdComission, source.DeliveryDays);
         
         _.each(source.AdCampaignTargetCriterias, function (item) {
-            //debugger;
-            //if (item.Type == 1) {
-            //    if (profileQIdsAdded.indexOf(item.PQID()) == -1) {
-            //        profileQIdsAdded.push(item.PQID());
-
-            //    }
-            //} else {
-            //    if (profileQIdsAdded.indexOf(item.PQID()) == -1) {
-            //        profileQIdsAdded.push(item.PQID());
-
-            //    }
-            //}
           
             campaign.AdCampaignTargetCriterias.push(AdCampaignTargetCriteriasModel.Create(item));
         });
@@ -533,10 +561,15 @@
 
         return new selectedCouponCategory(source.CategoryId, source.Name);
     };
+    AdCampaignCouponCodes.Create = function (source) {
+
+        return new AdCampaignCouponCodes(source.CodeId, source.CampaignId, source.Code, source.IsTaken, source.UserId);
+    };
     return {
         Campaign: Campaign,
         AdCampaignTargetCriteriasModel: AdCampaignTargetCriteriasModel,
         AdCampaignTargetLocation: AdCampaignTargetLocation,
-        selectedCouponCategory: selectedCouponCategory
+        selectedCouponCategory: selectedCouponCategory,
+        AdCampaignCouponCodes: AdCampaignCouponCodes
     };
 });

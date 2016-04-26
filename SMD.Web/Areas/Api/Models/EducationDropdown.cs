@@ -35,6 +35,11 @@ namespace SMD.MIS.Areas.Api.Models
         public string Name { get; set; }
 
     }
+    public class CouponCodeModel
+    {
+        public string code { get; set; }
+
+    }
     public class EducationResponse : BaseApiResponse
     {
         public IEnumerable<Education> Educations { get; set; }

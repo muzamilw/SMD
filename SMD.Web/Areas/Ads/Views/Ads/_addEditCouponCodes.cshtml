@@ -1,0 +1,55 @@
+﻿<div class="modal fade my-modal" id="couponCodesDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Add/Edit Coupon Codes</h4>
+            </div>
+            <div class="col-lg-12">
+                <div class="row liveExample">
+
+                    <form data-bind="submit:addItemToCouponCodeList">
+                        <div class="form-group">
+                            <div class="col-lg-3">
+                                <label for="txtnewcouponcode" class="control-label text-right tooltip-float floatNone" style="margin-top: 7px;">Coupon code</label>
+                            </div>
+                            <div class="col-lg-5">
+                                <input type="text" class="form-control" data-bind='value:BetterListitemToAdd, valueUpdate: "afterkeydown"' placeholder="Enter unique coupon code" />
+                             
+                                <p id="alreadyaddedCodeError" style=" display:none;font-size: 12px;    color: red;    margin-top: 2px;">This code is already added to list!</p>
+                            </div>
+                            <div class="col-lg-4">
+                                <button type="submit" data-bind="enable: BetterListitemToAdd().length > 0" class="btn btn-primary">Add</button>
+                            </div>
+                        </div>
+                      
+                       
+                    </form>
+                    <br />
+                 
+                    <div class="text-right" style="width: 100%; "><button class="btn  btn-danger " data-bind="click: removeSelectedCouponCodeItem, enable: selectedCouponCodeItems().length > 0">Remove</button>
+</div>
+                    <!-- ko if: $root.campaignModel() != null -->
+                    <!-- ko if: ($root.campaignModel().CouponQuantity() - allCouponCodeItems().length) < 0 -->
+                    <div class="" style="width: 100%;">
+                        <span style="font-size:12px; color:red;" data-bind="text:'Coupon codes exceed the maximum length, maximum code length is ' + ($root.campaignModel().CouponQuantity())"></span>
+                    </div>
+                    <!-- /ko -->
+                    <!-- ko if: ($root.campaignModel().CouponQuantity() - allCouponCodeItems().length)  >= 0 -->
+                    <div class="" style="width: 100%;">
+                        <span data-bind="text: ($root.campaignModel().CouponQuantity() - allCouponCodeItems().length) + ' coupon code(s) left'"></span>
+                    </div>
+                    <!-- /ko -->
+                  
+                    <!-- /ko -->
+                   
+                    <select multiple="multiple" height="10" data-bind="options:allCouponCodeItems, selectedOptions:selectedCouponCodeItems"> </select>
+
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Save & Close</button>
+            </div>
+        </div>
+    </div>
+</div>

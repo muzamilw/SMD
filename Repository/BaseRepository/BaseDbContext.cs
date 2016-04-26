@@ -224,7 +224,7 @@ namespace SMD.Repository.BaseRepository
         /// Taxes
         /// </summary>
         public DbSet<CustomUrl> CustomUrls { get; set; }
-        public DbSet<CouponCode> CouponCode { get; set; }
+        public DbSet<CouponCode> CouponCodes { get; set; }
 
         /// <summary>
         /// Transaction

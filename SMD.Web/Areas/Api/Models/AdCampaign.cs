@@ -84,5 +84,6 @@ namespace SMD.MIS.Areas.Api.Models
         public string CouponImage3 { get; set; }
         public string CouponImage4 { get; set; }
         public string CouponExpiryLabel { get; set; }
+        public List<CouponCodeModel> CouponCodes { get; set; }
     }
 }

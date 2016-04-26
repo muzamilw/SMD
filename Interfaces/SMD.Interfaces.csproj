@@ -81,6 +81,7 @@
     <Compile Include="Repository\ICityService.cs" />
     <Compile Include="Repository\ICompanyRepository.cs" />
     <Compile Include="Repository\ICouponCategoryRepository.cs" />
+    <Compile Include="Repository\ICouponCodeRepository.cs" />
     <Compile Include="Repository\IManageUserRepository.cs" />
     <Compile Include="Repository\ISurveyQuestionResponseRepository.cs" />
     <Compile Include="Repository\IEducationRepository.cs" />

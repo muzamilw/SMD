@@ -1523,6 +1523,7 @@
     <Content Include="Areas\User\Views\Shared\_ChangePassword.cshtml" />
     <Content Include="Areas\User\Views\Shared\_InviteUser.cshtml" />
     <Content Include="Areas\Ads\Views\Ads\_addEditCouponCategories.cshtml" />
+    <Content Include="Areas\Ads\Views\Ads\_addEditCouponCodes.cshtml" />
     <None Include="Properties\PublishProfiles\SMD MIS Saqib.pubxml" />
     <None Include="Properties\PublishProfiles\SMD.pubxml" />
     <None Include="Scripts\amplify-vsdoc.js" />

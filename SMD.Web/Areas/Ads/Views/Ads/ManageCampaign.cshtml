@@ -454,6 +454,16 @@ else
                                             <div class="col-lg-5">
                                                 <input type="number" class="form-control" id="txtPurseValue" placeholder="Quantity" data-bind="value:CouponQuantity">
                                             </div>
+                                            <div class="col-lg-3">
+                                                <a href="#" id="couponCodeSelectorLink" style="margin-left:0px;" data-bind="click: $root.opencouponCodesDialog">
+                                                    <i class="fa fa-lg"></i>&nbsp;Add Coupon Codes
+                                                </a>
+                                                @*<br />
+                                                <div class="fileUpload">
+                                                    <span>Upload CSV file </span>
+                                                    <input type="file" class="upload" id="campaignType_image_csvFile" data-bind="files: { onLoaded: $root.campaignCSVCallback}" />
+                                                </div>*@
+                                            </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="col-lg-3">
@@ -1736,6 +1746,7 @@ else
         </div>
     </div>
     @Html.Partial("~/Areas/Ads/Views/Ads/_addEditCouponCategories.cshtml")
+    @Html.Partial("~/Areas/Ads/Views/Ads/_addEditCouponCodes.cshtml")
 </div>
 
 @*reward your audience screen*@

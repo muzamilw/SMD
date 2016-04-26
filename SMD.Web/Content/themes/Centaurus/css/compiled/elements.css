@@ -5228,3 +5228,13 @@ div#spinnerAudience {
     border-top-color: #2eaef0;
     margin-left:10px;
 }
+
+.liveExample { padding: 1em; font-size: 14px;  }
+.liveExample input { font-family: Arial; }
+.liveExample b { font-weight: bold; }
+.liveExample p { margin-top: 0.9em; margin-bottom: 0.9em; }
+.liveExample select[multiple] { width: 100%; height: 8em; }
+.liveExample h2 { margin-top: 0.4em; }
+.errorOutline {
+color:red !important;
+}

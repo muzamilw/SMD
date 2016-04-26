@@ -69,7 +69,7 @@ namespace SMD.Implementation.Services
               double smdValue = totalAmount - (Convert.ToDouble(coupon.couponSmdComission));
               double VoucherSellerValue = totalAmount - smdValue;
 
-              var couponCode = dbContext.CouponCode.Where(g => g.CampaignId == couponId && g.IsTaken != true).SingleOrDefault();
+              var couponCode = dbContext.CouponCodes.Where(g => g.CampaignId == couponId && g.IsTaken != true).SingleOrDefault();
               couponCode.IsTaken = true;
               
               

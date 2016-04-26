@@ -33,5 +33,12 @@ namespace SMD.MIS.ModelMappers
                 IsSelected = isSelected
             };
         }
+        public static CouponCodeModel CreateFrom(this Models.DomainModels.CouponCode source)
+        {
+            return new CouponCodeModel
+            {
+                code = source.Code
+            };
+        }
     }
 }
