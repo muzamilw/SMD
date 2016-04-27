@@ -16,29 +16,31 @@ namespace SMD.MIS.Reports
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            try
-            {
-                if (!IsPostBack)
-                {
-                  
-                    if (Request.QueryString["UserId"] != null)
-                    {
-                        string userId = Request.QueryString["UserId"].ToString();
-                        rvDataViewer.Reset();
-                        StringBuilder sb = new StringBuilder("");
-                        DataTable dt = ConvertListToDataTable(getRecords(userId));
-                        rvDataViewer.LocalReport.ReportPath = "Report/Users.rdlc";
-                        rvDataViewer.LocalReport.DataSources.Clear();
-                        rvDataViewer.LocalReport.DataSources.Add(new ReportDataSource("EmpDataSet", dt));
-                        rvDataViewer.DataBind();
-                        rvDataViewer.LocalReport.Refresh();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
+            //rvDataViewer.ProcessingMode = ProcessingMode.Local;
 
-            }
+            //try
+            //{
+            //    if (!IsPostBack)
+            //    {
+                  
+            //        if (Request.QueryString["UserId"] != null)
+            //        {
+            //            string userId = Request.QueryString["UserId"].ToString();
+            //            rvDataViewer.Reset();
+            //            StringBuilder sb = new StringBuilder("");
+            //            DataTable dt = ConvertListToDataTable(getRecords(userId));
+            //            rvDataViewer.LocalReport.ReportPath = "Report/Users.rdlc";
+            //            rvDataViewer.LocalReport.DataSources.Clear();
+            //            rvDataViewer.LocalReport.DataSources.Add(new ReportDataSource("EmpDataSet", dt));
+            //            rvDataViewer.DataBind();
+            //            rvDataViewer.LocalReport.Refresh();
+            //        }
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+
+            //}
         }
         static List<vw_GetUserTransactions>  getRecords(string userId) 
         {

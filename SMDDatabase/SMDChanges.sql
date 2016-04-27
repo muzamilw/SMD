@@ -5231,29 +5231,27 @@ END
 GO
 /* Added By  (26 April 2016) - End */
 
-/****** Object:  View [dbo].[vw_GetUserTransactions]    Script Date: 4/26/2016 4:50:53 PM ******/
+
+/****** Object:  View [dbo].[vw_GetUserTransactions]    Script Date: 4/27/2016 2:08:06 PM ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
-/*and AdCampaignResponse.EndUserDollarAmount != 0 */
 CREATE VIEW [dbo].[vw_GetUserTransactions]
 AS
-SELECT        dbo.AdCampaignResponse.CreatedDateTime AS TDate, dbo.AdCampaignResponse.EndUserDollarAmount AS Deposit, NULL AS Withdrawal, 'Viewed - ' + dbo.AdCampaign.DisplayTitle AS [Transaction], 
-                         dbo.AdCampaignResponse.UserID AS userId
+SELECT        dbo.AdCampaignResponse.ResponseID AS tid, dbo.AdCampaignResponse.CreatedDateTime AS TDate, dbo.AdCampaignResponse.EndUserDollarAmount AS Deposit, NULL AS Withdrawal, 
+                         'Viewed - ' + dbo.AdCampaign.DisplayTitle AS [Transaction], dbo.AdCampaignResponse.UserID AS userId
 FROM            dbo.AdCampaign INNER JOIN
                          dbo.AdCampaignResponse ON dbo.AdCampaignResponse.CampaignID = dbo.AdCampaign.CampaignID
 WHERE        (dbo.AdCampaignResponse.EndUserDollarAmount IS NOT NULL)
-Union
-select [Transaction].TransactionDate as TDate,
-null as Deposit, [Transaction].DebitAmount as Withdrawal,
-'Paypal Withdrawal ' as [Transaction],
-AspNetUsers.Id as userId
-from [Transaction] join Account on Account.AccountId = [Transaction].AccountID 
-join AspNetUsers on Account.CompanyId = AspNetUsers.CompanyId
-where  [Transaction].DebitAmount is not null
+UNION
+SELECT         [Transaction].txId AS tid, [Transaction].TransactionDate AS TDate, NULL AS Deposit, [Transaction].DebitAmount AS Withdrawal, 'Paypal Withdrawal ' AS [Transaction], AspNetUsers.Id AS userId
+FROM            [Transaction] JOIN
+                         Account ON Account.AccountId = [Transaction].AccountID JOIN
+                         AspNetUsers ON Account.CompanyId = AspNetUsers.CompanyId
+WHERE        [Transaction].DebitAmount IS NOT NULL
 
 GO
 
