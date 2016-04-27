@@ -535,6 +535,13 @@
       <DependentUpon>UserReportViewer.aspx</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
+    <Compile Include="ReportViewers\User.aspx.cs">
+      <DependentUpon>User.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportViewers\User.aspx.designer.cs">
+      <DependentUpon>User.aspx</DependentUpon>
+    </Compile>
     <Compile Include="TypeRegistrations.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -2595,6 +2602,7 @@
     <Content Include="Scripts\underscore-min.js" />
     <Content Include="Scripts\underscore.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="ReportViewers\User.aspx" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

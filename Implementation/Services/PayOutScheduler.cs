@@ -538,7 +538,7 @@ namespace SMD.Implementation.Services
             List<vw_GetUserTransactions> result = new List<vw_GetUserTransactions>();
             using (var dbContext = new BaseDbContext())
             {
-                dbContext.vw_GetUserTransactions.ToList();
+                result = dbContext.vw_GetUserTransactions.ToList();
             }
             return result;
         }
