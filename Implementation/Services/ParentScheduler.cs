@@ -19,7 +19,7 @@ namespace SMD.Implementation.Services
            // CollectionScheduler.SetDebitScheduler(this);
 
             // Credit Scheduler
-           //  PayOutScheduler.SetDebitScheduler(this);
+            PayOutScheduler.SetDebitScheduler(this);
 
             // Ad more Schedulers here ...
         }

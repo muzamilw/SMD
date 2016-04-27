@@ -323,6 +323,29 @@
           <Property Name="Title" Type="nvarchar" MaxLength="200" />
           <Property Name="Status" Type="int" />
         </EntityType>
+        <EntityType Name="EmailQueue">
+          <Key>
+            <PropertyRef Name="EmailQueueId" />
+          </Key>
+          <Property Name="EmailQueueId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="To" Type="varchar" MaxLength="200" />
+          <Property Name="Cc" Type="varchar" MaxLength="200" />
+          <Property Name="EmailFrom" Type="varchar" MaxLength="200" />
+          <Property Name="Type" Type="smallint" />
+          <Property Name="Subject" Type="varchar" MaxLength="200" />
+          <Property Name="Body" Type="text" />
+          <Property Name="Images" Type="text" />
+          <Property Name="SendDateTime" Type="datetime" />
+          <Property Name="IsDeliverd" Type="tinyint" />
+          <Property Name="SMTPUserName" Type="varchar" MaxLength="50" />
+          <Property Name="SMTPPassword" Type="varchar" MaxLength="50" />
+          <Property Name="SMTPServer" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ErrorResponse" Type="nvarchar(max)" />
+          <Property Name="FileAttachment" Type="nvarchar(max)" />
+          <Property Name="AttemptCount" Type="int" />
+          <Property Name="ToName" Type="varchar" MaxLength="100" />
+          <Property Name="FromName" Type="varchar" MaxLength="100" />
+        </EntityType>
         <EntityType Name="Game">
           <Key>
             <PropertyRef Name="GameId" />
@@ -1526,6 +1549,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_GetUserTransactions' does not have a
           <EntitySet Name="Currency" EntityType="Self.Currency" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CustomUrl" EntityType="Self.CustomUrl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Education" EntityType="Self.Education" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmailQueue" EntityType="Self.EmailQueue" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Game" EntityType="Self.Game" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Industry" EntityType="Self.Industry" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Invoice" EntityType="Self.Invoice" Schema="dbo" store:Type="Tables" />
@@ -2215,6 +2239,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_GetUserTransactions' does not have a
             <Parameter Name="ToRow" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="vw_GetUserTransactions" EntityType="DomainModels.vw_GetUserTransactions" />
+          <EntitySet Name="EmailQueues" EntityType="DomainModels.EmailQueue" />
           </EntityContainer>
         <EntityType Name="ProfileQuestion">
           <Key>
@@ -3985,6 +4010,29 @@ warning 6002: The table/view 'SMDDev.dbo.vw_GetUserTransactions' does not have a
           <Property Name="Transaction" Type="String" MaxLength="209" FixedLength="false" Unicode="true" />
           <Property Name="userId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="EmailQueue">
+          <Key>
+            <PropertyRef Name="EmailQueueId" />
+          </Key>
+          <Property Name="EmailQueueId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="To" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Cc" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="EmailFrom" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Type" Type="Int16" />
+          <Property Name="Subject" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Body" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Images" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="SendDateTime" Type="DateTime" Precision="3" />
+          <Property Name="IsDeliverd" Type="Byte" />
+          <Property Name="SMTPUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SMTPPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SMTPServer" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ErrorResponse" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FileAttachment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AttemptCount" Type="Int32" />
+          <Property Name="ToName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FromName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4800,6 +4848,30 @@ warning 6002: The table/view 'SMDDev.dbo.vw_GetUserTransactions' does not have a
                 <ScalarProperty Name="Deposit" ColumnName="Deposit" />
                 <ScalarProperty Name="TDate" ColumnName="TDate" />
                 <ScalarProperty Name="tid" ColumnName="tid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmailQueues">
+            <EntityTypeMapping TypeName="DomainModels.EmailQueue">
+              <MappingFragment StoreEntitySet="EmailQueue">
+                <ScalarProperty Name="FromName" ColumnName="FromName" />
+                <ScalarProperty Name="ToName" ColumnName="ToName" />
+                <ScalarProperty Name="AttemptCount" ColumnName="AttemptCount" />
+                <ScalarProperty Name="FileAttachment" ColumnName="FileAttachment" />
+                <ScalarProperty Name="ErrorResponse" ColumnName="ErrorResponse" />
+                <ScalarProperty Name="SMTPServer" ColumnName="SMTPServer" />
+                <ScalarProperty Name="SMTPPassword" ColumnName="SMTPPassword" />
+                <ScalarProperty Name="SMTPUserName" ColumnName="SMTPUserName" />
+                <ScalarProperty Name="IsDeliverd" ColumnName="IsDeliverd" />
+                <ScalarProperty Name="SendDateTime" ColumnName="SendDateTime" />
+                <ScalarProperty Name="Images" ColumnName="Images" />
+                <ScalarProperty Name="Body" ColumnName="Body" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="EmailFrom" ColumnName="EmailFrom" />
+                <ScalarProperty Name="Cc" ColumnName="Cc" />
+                <ScalarProperty Name="To" ColumnName="To" />
+                <ScalarProperty Name="EmailQueueId" ColumnName="EmailQueueId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -147,6 +147,11 @@ namespace SMD.Repository.BaseRepository
         public DbSet<SystemMail> SystemMails { get; set; }
 
         /// <summary>
+        /// System Mails
+        /// </summary>
+        public DbSet<EmailQueue> EmailQueues { get; set; }
+
+        /// <summary>
         /// Ad Campaigns
         /// </summary>
         public DbSet<AdCampaign> AdCampaigns { get; set; }

@@ -5258,3 +5258,53 @@ where  [Transaction].DebitAmount is not null
 GO
 
 
+/*********************************************/
+
+
+
+CREATE TABLE [dbo].[EmailQueue](
+	[EmailQueueId] [int] IDENTITY(1,1) NOT NULL,
+	[To] [varchar](200) NULL,
+	[Cc] [varchar](200) NULL,
+	[EmailFrom] [varchar](200) NULL,
+	[Type] [smallint] NULL,
+	[Subject] [varchar](200) NULL,
+	[Body] [text] NULL,
+	[Images] [text] NULL,
+	[SendDateTime] [datetime] NULL,
+	[IsDeliverd] [tinyint] NULL,
+	[SMTPUserName] [varchar](50) NULL,
+	[SMTPPassword] [varchar](50) NULL,
+	[SMTPServer] [varchar](50) NOT NULL,
+	[ErrorResponse] [nvarchar](max) NULL,
+	[FileAttachment] [nvarchar](max) NULL,
+	[AttemptCount] [int] NULL,
+	[ToName] [varchar](100) NULL,
+	[FromName] [varchar](100) NULL,
+ CONSTRAINT [PK_tbl_MailBox] PRIMARY KEY CLUSTERED 
+(
+	[EmailQueueId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [dbo].[EmailQueue] ADD  CONSTRAINT [DF_tbl_Emails_MailBox_SendDateTime]  DEFAULT (getdate()) FOR [SendDateTime]
+GO
+
+ALTER TABLE [dbo].[EmailQueue] ADD  CONSTRAINT [DF_tbl_MailBox_IsDevliverd]  DEFAULT (0) FOR [IsDeliverd]
+GO
+
+ALTER TABLE [dbo].[EmailQueue] ADD  CONSTRAINT [DF_tbl_Emails_MailBox_SMTPUserName]  DEFAULT ('') FOR [SMTPUserName]
+GO
+
+ALTER TABLE [dbo].[EmailQueue] ADD  CONSTRAINT [DF_tbl_Emails_MailBox_SMTPPassword]  DEFAULT ('') FOR [SMTPPassword]
+GO
+
+ALTER TABLE [dbo].[EmailQueue] ADD  CONSTRAINT [DF_tbl_Emails_MailBox_SMTPServer]  DEFAULT ('') FOR [SMTPServer]
+GO
+
+
