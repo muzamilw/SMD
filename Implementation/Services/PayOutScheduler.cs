@@ -531,6 +531,17 @@ namespace SMD.Implementation.Services
 
             return true;
         }
+
+
+        public static List<vw_GetUserTransactions> GetUserTransactions()
+        {
+            List<vw_GetUserTransactions> result = new List<vw_GetUserTransactions>();
+            using (var dbContext = new BaseDbContext())
+            {
+                dbContext.vw_GetUserTransactions.ToList();
+            }
+            return result;
+        }
         #endregion
     }
 }
