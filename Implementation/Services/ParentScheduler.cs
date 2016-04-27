@@ -13,8 +13,10 @@ namespace SMD.Implementation.Services
         /// </summary>
         public ParentScheduler() //Action<Exception> unhandledExceptionHandler
         {
+            EmailScheduler.UserTrainingEmailAfterThreeDays(this);
+            EmailScheduler.MonitorQueue(this);
             // Debit Scheduler 
-           //  CollectionScheduler.SetDebitScheduler(this);
+            //CollectionScheduler.SetDebitScheduler(this);
 
             // Credit Scheduler
            //  PayOutScheduler.SetDebitScheduler(this);
