@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySetsBE3C7E6FF9D1129D3185F34BE07DF9B9FD61F18C7C358709B59BFFC648DB8D0D))]
+[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySetsBB9AE8CEDE1FC84C169CB4779A4647DF18C453C736768893186C58207F1F0C03))]
 
 namespace Edm_EntityMappingGeneratedViews
 {
@@ -17,19 +17,19 @@ namespace Edm_EntityMappingGeneratedViews
     /// <Summary>
     /// The type contains views for EntitySets and AssociationSets that were generated at design time.
     /// </Summary>
-    public sealed class ViewsForBaseEntitySetsBE3C7E6FF9D1129D3185F34BE07DF9B9FD61F18C7C358709B59BFFC648DB8D0D : System.Data.Mapping.EntityViewContainer
+    public sealed class ViewsForBaseEntitySetsBB9AE8CEDE1FC84C169CB4779A4647DF18C453C736768893186C58207F1F0C03 : System.Data.Mapping.EntityViewContainer
     {
         
         /// <Summary>
         /// The constructor stores the views for the extents and also the hash values generated based on the metadata and mapping closure and views.
         /// </Summary>
-        public ViewsForBaseEntitySetsBE3C7E6FF9D1129D3185F34BE07DF9B9FD61F18C7C358709B59BFFC648DB8D0D()
+        public ViewsForBaseEntitySetsBB9AE8CEDE1FC84C169CB4779A4647DF18C453C736768893186C58207F1F0C03()
         {
             this.EdmEntityContainerName = "BaseDbContext";
             this.StoreEntityContainerName = "SMDModelStoreContainer";
-            this.HashOverMappingClosure = "dad53673c4628e16237a8fe25d5e3985eb15a41a6486514b6bfa0953dc813f12";
-            this.HashOverAllExtentViews = "6bf5f7dc20981e075470d0d3c71db3041c408a5cdb4a8c32c8a71a4d5645076a";
-            this.ViewCount = 76;
+            this.HashOverMappingClosure = "5df230c7089537f214fa80ecf34efa4a7935e1a7db1fc4463f3250962ddfb630";
+            this.HashOverAllExtentViews = "c3446304c9ded745fa7ccbda8ce15e9c8412b74cdf058aa47cf4220cd9f86ed2";
+            this.ViewCount = 78;
         }
         
         /// <Summary>
@@ -340,6 +340,14 @@ namespace Edm_EntityMappingGeneratedViews
             if ((index == 75))
             {
                 return GetView75();
+            }
+            if ((index == 76))
+            {
+                return GetView76();
+            }
+            if ((index == 77))
+            {
+                return GetView77();
             }
             throw new System.IndexOutOfRangeException();
         }
@@ -2290,6 +2298,48 @@ namespace Edm_EntityMappingGeneratedViews
             T.GameUrl AS Game_GameUrl, 
             True AS _from0
         FROM SMDModelStoreContainer.Game AS T
+    ) AS T1");
+        }
+        
+        /// <Summary>
+        /// return view for SMDModelStoreContainer.vw_GetUserTransactions
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView76()
+        {
+            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.vw_GetUserTransactions", @"
+    SELECT VALUE -- Constructing vw_GetUserTransactions
+        [SMDModel.Store.vw_GetUserTransactions](T1.[vw_GetUserTransactions.tid], T1.[vw_GetUserTransactions.TDate], T1.[vw_GetUserTransactions.Deposit], T1.[vw_GetUserTransactions.Withdrawal], T1.[vw_GetUserTransactions.Transaction], T1.[vw_GetUserTransactions.userId])
+    FROM (
+        SELECT 
+            T.tid AS [vw_GetUserTransactions.tid], 
+            T.TDate AS [vw_GetUserTransactions.TDate], 
+            T.Deposit AS [vw_GetUserTransactions.Deposit], 
+            T.Withdrawal AS [vw_GetUserTransactions.Withdrawal], 
+            T.Transaction AS [vw_GetUserTransactions.Transaction], 
+            T.userId AS [vw_GetUserTransactions.userId], 
+            True AS _from0
+        FROM BaseDbContext.vw_GetUserTransactions AS T
+    ) AS T1");
+        }
+        
+        /// <Summary>
+        /// return view for BaseDbContext.vw_GetUserTransactions
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView77()
+        {
+            return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.vw_GetUserTransactions", @"
+    SELECT VALUE -- Constructing vw_GetUserTransactions
+        [DomainModels.vw_GetUserTransactions](T1.[vw_GetUserTransactions.tid], T1.[vw_GetUserTransactions.TDate], T1.[vw_GetUserTransactions.Deposit], T1.[vw_GetUserTransactions.Withdrawal], T1.[vw_GetUserTransactions.Transaction], T1.[vw_GetUserTransactions.userId])
+    FROM (
+        SELECT 
+            T.tid AS [vw_GetUserTransactions.tid], 
+            T.TDate AS [vw_GetUserTransactions.TDate], 
+            T.Deposit AS [vw_GetUserTransactions.Deposit], 
+            T.Withdrawal AS [vw_GetUserTransactions.Withdrawal], 
+            T.Transaction AS [vw_GetUserTransactions.Transaction], 
+            T.userId AS [vw_GetUserTransactions.userId], 
+            True AS _from0
+        FROM SMDModelStoreContainer.vw_GetUserTransactions AS T
     ) AS T1");
         }
     }

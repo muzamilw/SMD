@@ -46,6 +46,11 @@ namespace SMD.Repository.Repositories
             return DbSet.Where(trans => trans.DebitAmount != null && trans.CreditAmount == null 
                 && (trans.isProcessed == null || trans.isProcessed == false)).ToList();
         }
+
+        public List<vw_GetUserTransactions> GetUserTransactions()
+        {
+            return db.vw_GetUserTransactions.ToList();
+        }
         #endregion 
     }
 }

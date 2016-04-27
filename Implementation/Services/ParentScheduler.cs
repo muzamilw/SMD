@@ -16,7 +16,7 @@ namespace SMD.Implementation.Services
             EmailScheduler.UserTrainingEmailAfterThreeDays(this);
             EmailScheduler.MonitorQueue(this);
             // Debit Scheduler 
-            //CollectionScheduler.SetDebitScheduler(this);
+           // CollectionScheduler.SetDebitScheduler(this);
 
             // Credit Scheduler
            //  PayOutScheduler.SetDebitScheduler(this);

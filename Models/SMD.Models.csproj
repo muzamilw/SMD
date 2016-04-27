@@ -155,6 +155,7 @@
     <Compile Include="DomainModels\Tax.cs" />
     <Compile Include="DomainModels\Transaction.cs" />
     <Compile Include="DomainModels\TransactionLog.cs" />
+    <Compile Include="DomainModels\vw_GetUserTransactions.cs" />
     <Compile Include="IdentityModels\Role.cs" />
     <Compile Include="IdentityModels\Role`.cs" />
     <Compile Include="IdentityModels\User.cs" />

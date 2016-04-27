@@ -5229,5 +5229,32 @@ END
 /* Added By Khurram (02 Feb 2016) - End */
 
 GO
+/* Added By  (26 April 2016) - End */
+
+/****** Object:  View [dbo].[vw_GetUserTransactions]    Script Date: 4/26/2016 4:50:53 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+/*and AdCampaignResponse.EndUserDollarAmount != 0 */
+CREATE VIEW [dbo].[vw_GetUserTransactions]
+AS
+SELECT        dbo.AdCampaignResponse.CreatedDateTime AS TDate, dbo.AdCampaignResponse.EndUserDollarAmount AS Deposit, NULL AS Withdrawal, 'Viewed - ' + dbo.AdCampaign.DisplayTitle AS [Transaction], 
+                         dbo.AdCampaignResponse.UserID AS userId
+FROM            dbo.AdCampaign INNER JOIN
+                         dbo.AdCampaignResponse ON dbo.AdCampaignResponse.CampaignID = dbo.AdCampaign.CampaignID
+WHERE        (dbo.AdCampaignResponse.EndUserDollarAmount IS NOT NULL)
+Union
+select [Transaction].TransactionDate as TDate,
+null as Deposit, [Transaction].DebitAmount as Withdrawal,
+'Paypal Withdrawal ' as [Transaction],
+AspNetUsers.Id as userId
+from [Transaction] join Account on Account.AccountId = [Transaction].AccountID 
+join AspNetUsers on Account.CompanyId = AspNetUsers.CompanyId
+where  [Transaction].DebitAmount is not null
+
+GO
 
 

@@ -37,6 +37,10 @@ namespace SMD.Implementation.Services
         {
             return transactionRepository.GetUnprocessedTransactionsForDebit();
         }
+        public List<vw_GetUserTransactions> GetUserTransactions()
+        {
+            return transactionRepository.GetUserTransactions();
+        }
         #endregion
     }
 }

@@ -237,6 +237,8 @@ namespace SMD.Repository.BaseRepository
         public DbSet<TransactionLog> TransactionLogs { get; set; }
 
         public DbSet<CouponCategory> CouponCategory { get; set; }
+
+        public DbSet<vw_GetUserTransactions> vw_GetUserTransactions { get; set; }
         /// <summary>
         /// Get Ad-Campaigns for APIs | baqer
         /// </summary>

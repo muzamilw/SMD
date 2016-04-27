@@ -607,6 +607,19 @@
           <Property Name="IsCompleted" Type="bit" />
           <Property Name="Description" Type="nvarchar" MaxLength="500" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SMDDev.dbo.vw_GetUserTransactions' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_GetUserTransactions">
+          <Key>
+            <PropertyRef Name="tid" />
+          </Key>
+          <Property Name="tid" Type="bigint" Nullable="false" />
+          <Property Name="TDate" Type="datetime" />
+          <Property Name="Deposit" Type="float" />
+          <Property Name="Withdrawal" Type="float" />
+          <Property Name="Transaction" Type="nvarchar" MaxLength="209" />
+          <Property Name="userId" Type="nvarchar" MaxLength="128" />
+        </EntityType>
         <Association Name="FK_Account_Company">
           <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
           <End Role="Account" Type="Self.Account" Multiplicity="*" />
@@ -1531,6 +1544,16 @@
           <EntitySet Name="Tax" EntityType="Self.Tax" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Transaction" EntityType="Self.Transaction" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TransactionLog" EntityType="Self.TransactionLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vw_GetUserTransactions" EntityType="Self.vw_GetUserTransactions" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_GetUserTransactions].[tid] AS [tid], 
+    [vw_GetUserTransactions].[TDate] AS [TDate], 
+    [vw_GetUserTransactions].[Deposit] AS [Deposit], 
+    [vw_GetUserTransactions].[Withdrawal] AS [Withdrawal], 
+    [vw_GetUserTransactions].[Transaction] AS [Transaction], 
+    [vw_GetUserTransactions].[userId] AS [userId]
+    FROM [dbo].[vw_GetUserTransactions] AS [vw_GetUserTransactions]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_Account_Company" Association="Self.FK_Account_Company">
             <End Role="Company" EntitySet="Company" />
             <End Role="Account" EntitySet="Account" />
@@ -2191,6 +2214,7 @@
             <Parameter Name="FromRow" Mode="In" Type="Int32" />
             <Parameter Name="ToRow" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="vw_GetUserTransactions" EntityType="DomainModels.vw_GetUserTransactions" />
           </EntityContainer>
         <EntityType Name="ProfileQuestion">
           <Key>
@@ -3950,6 +3974,17 @@
           <Property Type="String" Name="VoucherImagePath" Nullable="true" MaxLength="227" />
           <Property Type="Int32" Name="TotalItems" Nullable="true" />
         </ComplexType>
+        <EntityType Name="vw_GetUserTransactions">
+          <Key>
+            <PropertyRef Name="tid" />
+          </Key>
+          <Property Name="tid" Type="Int64" Nullable="false" />
+          <Property Name="TDate" Type="DateTime" Precision="3" />
+          <Property Name="Deposit" Type="Double" />
+          <Property Name="Withdrawal" Type="Double" />
+          <Property Name="Transaction" Type="String" MaxLength="209" FixedLength="false" Unicode="true" />
+          <Property Name="userId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4756,6 +4791,18 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="vw_GetUserTransactions">
+            <EntityTypeMapping TypeName="DomainModels.vw_GetUserTransactions">
+              <MappingFragment StoreEntitySet="vw_GetUserTransactions">
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="Transaction" ColumnName="Transaction" />
+                <ScalarProperty Name="Withdrawal" ColumnName="Withdrawal" />
+                <ScalarProperty Name="Deposit" ColumnName="Deposit" />
+                <ScalarProperty Name="TDate" ColumnName="TDate" />
+                <ScalarProperty Name="tid" ColumnName="tid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
