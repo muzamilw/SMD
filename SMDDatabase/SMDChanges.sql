@@ -5306,3 +5306,34 @@ ALTER TABLE [dbo].[EmailQueue] ADD  CONSTRAINT [DF_tbl_Emails_MailBox_SMTPServer
 GO
 
 
+alter table [transaction] add AccountBalance float null
+alter table CouponCodes add TakenDateTime datetime null
+
+
+
+/****** Object:  View [dbo].[vw_GetUserTransactions]    Script Date: 4/27/2016 2:37:18 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER VIEW [dbo].[vw_GetUserTransactions]
+AS
+SELECT         [Transaction].txId AS tid, [Transaction].TransactionDate AS TDate, [Transaction].CreditAmount AS Deposit, null AS Withdrawal,
+ 'Viewed - ' + dbo.AdCampaign.DisplayTitle AS [Transaction], AspNetUsers.Id AS userId,[Transaction].AccountBalance as AccountBalance
+FROM            [Transaction] JOIN AdCampaign on [Transaction].AdCampaignID =  AdCampaign.CampaignID JOIN
+                         Account ON Account.AccountId = [Transaction].AccountID JOIN
+                         AspNetUsers ON Account.CompanyId = AspNetUsers.CompanyId
+WHERE        [Transaction].CreditAmount IS NOT NULL and Account.AccountType = 4
+UNION
+SELECT         [Transaction].txId AS tid, [Transaction].TransactionDate AS TDate, NULL AS Deposit, 
+[Transaction].DebitAmount AS Withdrawal, 'Paypal Withdrawal ' AS [Transaction], AspNetUsers.Id AS userId,[Transaction].AccountBalance as AccountBalance
+FROM            [Transaction] JOIN
+                         Account ON Account.AccountId = [Transaction].AccountID JOIN
+                         AspNetUsers ON Account.CompanyId = AspNetUsers.CompanyId
+WHERE        [Transaction].DebitAmount IS NOT NULL and Account.AccountType = 2
+
+GO
+
+

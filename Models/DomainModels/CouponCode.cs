@@ -14,7 +14,7 @@ namespace SMD.Models.DomainModels
         public string Code { get; set; }
         public Nullable<bool> IsTaken { get; set; }
         public string UserId { get; set; }
-
+        public DateTime? TakenDateTime { get; set; }
         public virtual AdCampaign AdCampaign { get; set; }
         public virtual User AspNetUser { get; set; }
     }

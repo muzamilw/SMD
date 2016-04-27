@@ -295,6 +295,7 @@
           <Property Name="Code" Type="nvarchar" MaxLength="300" />
           <Property Name="IsTaken" Type="bit" />
           <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+          <Property Name="TakenDateTime" Type="datetime" />
         </EntityType>
         <EntityType Name="Currency">
           <Key>
@@ -615,6 +616,7 @@
           <Property Name="CurrencyRateID" Type="int" />
           <Property Name="Sequence" Type="int" />
           <Property Name="CouponCodeId" Type="bigint" />
+          <Property Name="AccountBalance" Type="float" />
         </EntityType>
         <EntityType Name="TransactionLog">
           <Key>
@@ -635,13 +637,15 @@ warning 6002: The table/view 'SMDDev.dbo.vw_GetUserTransactions' does not have a
         <EntityType Name="vw_GetUserTransactions">
           <Key>
             <PropertyRef Name="tid" />
+            
           </Key>
           <Property Name="tid" Type="bigint" Nullable="false" />
           <Property Name="TDate" Type="datetime" />
           <Property Name="Deposit" Type="float" />
           <Property Name="Withdrawal" Type="float" />
           <Property Name="Transaction" Type="nvarchar" MaxLength="209" />
-          <Property Name="userId" Type="nvarchar" MaxLength="128" />
+          <Property Name="userId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="AccountBalance" Type="float" />
         </EntityType>
         <Association Name="FK_Account_Company">
           <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
@@ -1575,7 +1579,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_GetUserTransactions' does not have a
     [vw_GetUserTransactions].[Deposit] AS [Deposit], 
     [vw_GetUserTransactions].[Withdrawal] AS [Withdrawal], 
     [vw_GetUserTransactions].[Transaction] AS [Transaction], 
-    [vw_GetUserTransactions].[userId] AS [userId]
+    [vw_GetUserTransactions].[userId] AS [userId], 
+    [vw_GetUserTransactions].[AccountBalance] AS [AccountBalance]
     FROM [dbo].[vw_GetUserTransactions] AS [vw_GetUserTransactions]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_Account_Company" Association="Self.FK_Account_Company">
@@ -2605,6 +2610,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_GetUserTransactions' does not have a
           <NavigationProperty Name="TransactionLogs" Relationship="DomainModels.FK_TransactionLog_TransactionLog" FromRole="Transaction" ToRole="TransactionLog" />
           <NavigationProperty Name="Account" Relationship="DomainModels.FK_Transaction_Account" FromRole="Transaction" ToRole="Account" />
           <Property Name="CouponCodeId" Type="Int64" />
+          <Property Name="AccountBalance" Type="Double" />
         </EntityType>
         <ComplexType Name="GetAds1_Result">
           <Property Type="Int64" Name="CampaignID" Nullable="false" />
@@ -3570,6 +3576,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_GetUserTransactions' does not have a
           <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUser" Relationship="DomainModels.FK_CouponCodes_AspNetUsers" FromRole="CouponCode" ToRole="User" />
           <NavigationProperty Name="AdCampaign" Relationship="DomainModels.FK_CouponCodes_AdCampaign" FromRole="CouponCode" ToRole="AdCampaign" />
+          <Property Name="TakenDateTime" Type="DateTime" Precision="3" />
         </EntityType>
         <Association Name="FK_CouponCodes_AspNetUsers">
           <End Type="DomainModels.User" Role="User" Multiplicity="0..1" />
@@ -4008,7 +4015,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_GetUserTransactions' does not have a
           <Property Name="Deposit" Type="Double" />
           <Property Name="Withdrawal" Type="Double" />
           <Property Name="Transaction" Type="String" MaxLength="209" FixedLength="false" Unicode="true" />
-          <Property Name="userId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="userId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AccountBalance" Type="Double" />
         </EntityType>
         <EntityType Name="EmailQueue">
           <Key>
@@ -4238,6 +4246,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_GetUserTransactions' does not have a
           <EntitySetMapping Name="Transactions">
             <EntityTypeMapping TypeName="DomainModels.Transaction">
               <MappingFragment StoreEntitySet="Transaction">
+                <ScalarProperty Name="AccountBalance" ColumnName="AccountBalance" />
                 <ScalarProperty Name="CouponCodeId" ColumnName="CouponCodeId" />
                 <ScalarProperty Name="Sequence" ColumnName="Sequence" />
                 <ScalarProperty Name="CurrencyRateId" ColumnName="CurrencyRateID" />
@@ -4618,6 +4627,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_GetUserTransactions' does not have a
           <EntitySetMapping Name="CouponCodes">
             <EntityTypeMapping TypeName="DomainModels.CouponCode">
               <MappingFragment StoreEntitySet="CouponCodes">
+                <ScalarProperty Name="TakenDateTime" ColumnName="TakenDateTime" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="IsTaken" ColumnName="IsTaken" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
@@ -4842,6 +4852,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_GetUserTransactions' does not have a
           <EntitySetMapping Name="vw_GetUserTransactions">
             <EntityTypeMapping TypeName="DomainModels.vw_GetUserTransactions">
               <MappingFragment StoreEntitySet="vw_GetUserTransactions">
+                <ScalarProperty Name="AccountBalance" ColumnName="AccountBalance" />
                 <ScalarProperty Name="userId" ColumnName="userId" />
                 <ScalarProperty Name="Transaction" ColumnName="Transaction" />
                 <ScalarProperty Name="Withdrawal" ColumnName="Withdrawal" />

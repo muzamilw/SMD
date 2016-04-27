@@ -14,5 +14,6 @@ namespace SMD.Models.DomainModels
         public Nullable<double> Withdrawal { get; set; }
         public string Transaction { get; set; }
         public string userId { get; set; }
+        public Nullable<double> AccountBalance { get; set; }
     }
 }
