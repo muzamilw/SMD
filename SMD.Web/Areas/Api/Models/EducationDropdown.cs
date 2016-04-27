@@ -37,7 +37,12 @@ namespace SMD.MIS.Areas.Api.Models
     }
     public class CouponCodeModel
     {
-        public string code { get; set; }
+        public long CodeId { get; set; }
+        public long CampaignId { get; set; }
+        public string Code { get; set; }
+        public bool IsTaken { get; set; }
+        public string UserId { get; set; }
+        public string UserName { get; set; }
 
     }
     public class EducationResponse : BaseApiResponse

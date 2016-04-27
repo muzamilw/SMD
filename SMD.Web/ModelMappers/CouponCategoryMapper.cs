@@ -13,7 +13,7 @@ namespace SMD.MIS.ModelMappers
             return new CouponCategoryResponse
             {
                 CouponCategories = source != null ? source.Select(edu => edu.CreateFrom()) : new List<CouponCategory>(),
-                Status= true
+                Status = true
             };
         }
         public static CouponCategory CreateFrom(this Models.DomainModels.CouponCategory source)
@@ -37,7 +37,13 @@ namespace SMD.MIS.ModelMappers
         {
             return new CouponCodeModel
             {
-                code = source.Code
+                Code = source.Code,
+                CampaignId = source.CampaignId ?? 0,
+                CodeId = source.CodeId,
+                IsTaken = source.IsTaken == null ? false : true,
+                UserId = source.UserId,
+                UserName = source.AspNetUser == null ? "" : source.AspNetUser.FullName
+
             };
         }
     }

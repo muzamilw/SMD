@@ -489,7 +489,7 @@
     };
 
     var // ReSharper disable InconsistentNaming
-  AdCampaignCouponCodes = function (CodeId, CampaignId, Code, IsTaken, UserId) {
+  AdCampaignCouponCodes = function (CodeId, CampaignId, Code, IsTaken, UserId, UserName) {
 
       var
           //type and userID will be set on server sside
@@ -497,7 +497,8 @@
           CampaignId = ko.observable(CampaignId),
           Code = ko.observable(Code),
           IsTaken = ko.observable(IsTaken),
-          UserId = ko.observable(UserId)
+          UserId = ko.observable(UserId),
+          UserName = ko.observable(UserName),
           // Convert to server data
           convertToServerData = function () {
               return {
@@ -514,6 +515,7 @@
           Code: Code,
           IsTaken: IsTaken,
           UserId: UserId,
+          UserName:UserName,
           convertToServerData: convertToServerData
       };
   };
@@ -543,6 +545,11 @@
 
             campaign.CouponCategories.push(selectedCouponCategory.Create(item));
         });
+
+        _.each(source.CouponCodes, function (item) {
+
+            campaign.CouponCodes.push(AdCampaignCouponCodes.Create(item));
+        });
         return campaign;
     };
     // Factory Method
@@ -563,7 +570,7 @@
     };
     AdCampaignCouponCodes.Create = function (source) {
 
-        return new AdCampaignCouponCodes(source.CodeId, source.CampaignId, source.Code, source.IsTaken, source.UserId);
+        return new AdCampaignCouponCodes(source.CodeId, source.CampaignId, source.Code, source.IsTaken, source.UserId, source.UserName);
     };
     return {
         Campaign: Campaign,

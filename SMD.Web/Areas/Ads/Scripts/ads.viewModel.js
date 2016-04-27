@@ -577,16 +577,16 @@ define("ads/ads.viewModel",
                                 }));
                             });
 
-                            _.each(allCouponCodeItems(), function (coupcode) {
+                            //_.each(allCouponCodeItems(), function (coupcode) {
                               
-                                campaignModel().CouponCodes.push(new model.AdCampaignCouponCodes.Create({
-                                    CodeId: 0,
-                                    CampaignId: campaignModel().CampaignID(),
-                                    Code: coupcode,
-                                    IsTaken: null,
-                                    UserId: null
-                                }));
-                            });
+                            //    campaignModel().CouponCodes.push(new model.AdCampaignCouponCodes.Create({
+                            //        CodeId: 0,
+                            //        CampaignId: campaignModel().CampaignID(),
+                            //        Code: coupcode,
+                            //        IsTaken: null,
+                            //        UserId: null
+                            //    }));
+                            //});
                         }
 
                         campaignModel().Status(mode);
@@ -1083,6 +1083,7 @@ define("ads/ads.viewModel",
                             SearchText: ""
                         }, {
                             success: function (data) {
+                                
                                 if (data != null) {
                                     
                                     // set languages drop down
@@ -1096,8 +1097,10 @@ define("ads/ads.viewModel",
                                  
                                     _.each(data.Campaigns[0].CouponCodes, function (cc) {
                                         
-                                        allCouponCodeItems.push(cc.code);
+                                        allCouponCodeItems.push(cc.Code);
                                     });
+
+                                    console.log(allCouponCodeItems());
                                     campaignModel(model.Campaign.Create(data.Campaigns[0]));
 
                                     _.each(clonedVersofCariterias, function (cclist) {
@@ -1894,14 +1897,30 @@ define("ads/ads.viewModel",
                         if (this.BetterListitemToAdd().indexOf(',') > 0) {
                            
                             _.each(this.BetterListitemToAdd().split(','), function (item) {
-                                if(this.allCouponCodeItems.indexOf(item) < 0){
+                               
+                                if (this.allCouponCodeItems.indexOf(item) < 0) {
                                     this.allCouponCodeItems.push(item);
+                                    campaignModel().CouponCodes.push(new model.AdCampaignCouponCodes.Create({
+                                        CodeId: 0,
+                                        CampaignId: campaignModel().CampaignID(),
+                                        Code: item,
+                                        IsTaken: false,
+                                        UserId: "",
+                                        UserName:""
+                                    }));
                                 }
                             });
                            
                         } else {
                             this.allCouponCodeItems.push(this.BetterListitemToAdd());
-                            
+                            campaignModel().CouponCodes.push(new model.AdCampaignCouponCodes.Create({
+                                CodeId: 0,
+                                CampaignId: campaignModel().CampaignID(),
+                                Code: this.BetterListitemToAdd(),
+                                IsTaken: false,
+                                UserId: "",
+                                UserName: ""
+                            }));
                         }
                         BetterListitemToAdd(""); // Clear the text box
                       
@@ -1911,12 +1930,44 @@ define("ads/ads.viewModel",
                         
                         $("#alreadyaddedCodeError").css("display", "block");
                     }
-                    
+                    campaignModel().CouponQuantity(allCouponCodeItems().length);
                 },
-                removeSelectedCouponCodeItem = function () {
-                    this.allCouponCodeItems.removeAll(this.selectedCouponCodeItems());
-                    this.selectedCouponCodeItems([]); // Clear selection
+                removeSelectedCouponCodeItem = function (item) {
+          
+                    //console.log(allCouponCodeItems().remove(item.Code()));
+                    allCouponCodeItems.removeAll();
+                    selectedCouponCodeItems([]); // Clear selection
+
+                    campaignModel().CouponCodes.remove(item);
+                    _.each(campaignModel().CouponCodes(), function (cc) {
+
+                        allCouponCodeItems.push(cc.Code);
+                    });
+                    console.log(allCouponCodeItems());
+                    campaignModel().CouponQuantity(allCouponCodeItems().length);
                 },
+                 updateExistingCodeVal = function (item) {
+                     
+                     if (event.which == 13) {
+                         if ((item.Code() != "") && (allCouponCodeItems.indexOf(item.Code()) < 0)) {
+                             campaignModel().CouponCodes.remove(item);
+                             campaignModel().CouponCodes.push(new model.AdCampaignCouponCodes.Create({
+                                 CodeId: item.CodeId(),
+                                 CampaignId: campaignModel().CampaignID(),
+                                 Code: item.Code(),
+                                 IsTaken: item.IsTaken(),
+                                 UserId: item.UserId(),
+                                 UserName: item.UserName()
+                             }));
+                             campaignModel().CouponQuantity(allCouponCodeItems().length);
+                             $("#gridupdateCodeError").css("display", "none");
+                         } else {
+                             $("#gridupdateCodeError").css("display", "block");
+                         }
+                         
+                     }
+                     return true;
+                 },
                 // Initialize the view model
                 initialize = function (specifiedView) {
                     view = specifiedView;
@@ -2061,7 +2112,8 @@ define("ads/ads.viewModel",
                     addItemToCouponCodeList: addItemToCouponCodeList,
                     removeSelectedCouponCodeItem: removeSelectedCouponCodeItem,
                     opencouponCodesDialog: opencouponCodesDialog,
-                    campaignCSVCallback: campaignCSVCallback
+                    campaignCSVCallback: campaignCSVCallback,
+                    updateExistingCodeVal: updateExistingCodeVal
                 };
             })()
         };
