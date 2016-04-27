@@ -25,15 +25,26 @@ namespace SMD.MIS.test
 
                     if (Request.QueryString["UserId"] != null)
                     {
-                        string userId = Request.QueryString["UserId"].ToString();
-                        rvDataViewer.Reset();
-                        StringBuilder sb = new StringBuilder("");
-                        DataTable dt = ConvertListToDataTable(getRecords(userId));
-                        rvDataViewer.LocalReport.ReportPath = "Reports/Users.rdlc";
-                        rvDataViewer.LocalReport.DataSources.Clear();
-                        rvDataViewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt));
-                        rvDataViewer.DataBind();
-                        rvDataViewer.LocalReport.Refresh();
+                        if (Request.QueryString["StartDate"] != null && Request.QueryString["EndDate"] != null)
+                        {
+                            string userId = Request.QueryString["UserId"].ToString();
+                            string sDate = Request.QueryString["StartDate"].ToString().Replace("-","/");
+                            string eDate = Request.QueryString["EndDate"].ToString().Replace("-","/");
+                            rvDataViewer.Reset();
+                            StringBuilder sb = new StringBuilder("");
+                            DateTime startDate = Convert.ToDateTime(sDate);
+                            DateTime endDate = Convert.ToDateTime(eDate);
+                            DataTable dt = ConvertListToDataTable(getRecords(userId, startDate, endDate));
+                            rvDataViewer.LocalReport.ReportPath = "Reports/Users.rdlc";
+                            rvDataViewer.LocalReport.DataSources.Clear();
+                            rvDataViewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt));
+                            rvDataViewer.DataBind();
+                            rvDataViewer.LocalReport.Refresh();
+                        }
+                        else
+                        {
+                            ShowDateSelector.Visible = true;
+                        }
                     }
                 }
             }
@@ -42,9 +53,9 @@ namespace SMD.MIS.test
 
             }
         }
-        static List<vw_GetUserTransactions> getRecords(string userId)
+        static List<vw_GetUserTransactions> getRecords(string userId, DateTime startDate, DateTime endDate)
         {
-            return PayOutScheduler.GetUserTransactions().Where(g => g.userId == userId).ToList();
+            return PayOutScheduler.GetUserTransactions().Where(g => g.userId == userId && g.TDate >= startDate && g.TDate <= endDate).ToList();
         }
         static DataTable ConvertListToDataTable(List<vw_GetUserTransactions> list)
         {
@@ -55,11 +66,27 @@ namespace SMD.MIS.test
             table.Columns.Add("Deposit");
             table.Columns.Add("Withdrawal");
             table.Columns.Add("TDate");
+            table.Columns.Add("AccountBalance");
 
             for (int i = 0; i < list.Count; i++)
-                table.Rows.Add(list[i].Transaction, list[i].Deposit, list[i].Withdrawal, list[i].TDate);
+                table.Rows.Add(list[i].Transaction, list[i].Deposit, list[i].Withdrawal, list[i].TDate.HasValue? list[i].TDate.Value.ToString("dd MMM yyyy hh:mm:ss"):"", list[i].AccountBalance);
 
             return table;
+        }
+
+        protected void Filter_Click(object sender, EventArgs e)
+        {
+            string userId = Request.QueryString["UserId"].ToString();
+            rvDataViewer.Reset();
+            StringBuilder sb = new StringBuilder("");
+            DateTime startDate = Convert.ToDateTime(ReleaseDate.Value);
+            DateTime endDate = Convert.ToDateTime(EndDate.Value);
+            DataTable dt = ConvertListToDataTable(getRecords(userId, startDate, endDate));
+            rvDataViewer.LocalReport.ReportPath = "Reports/Users.rdlc";
+            rvDataViewer.LocalReport.DataSources.Clear();
+            rvDataViewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt));
+            rvDataViewer.DataBind();
+            rvDataViewer.LocalReport.Refresh();
         }
     }
 }
