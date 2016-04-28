@@ -6,6 +6,7 @@ using SMD.Models.DomainModels;
 using SMD.Repository.BaseRepository;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -22,7 +23,8 @@ namespace SMD.Implementation.Services
         {
 
             // Registration of Debit Process Scheduler Run after every 7 days 
-           // registry.Schedule(UserTrainingEmail).ToRunEvery(1).Days();
+         //   registry.Schedule(UserTrainingEmail).ToRunEvery(1).Days();
+           // registry.Schedule(UserTrainingEmail).ToRunNow().AndEvery(1).Minutes();
         }
 
         public static void MonitorQueue(Registry registry)
@@ -33,7 +35,13 @@ namespace SMD.Implementation.Services
         }
         public static void UserTrainingEmail()
         {
-            
+            //HttpWebRequest myRequest = (HttpWebRequest)WebRequest.Create("http://smdpreview.com/reportViewers/user.aspx?userID=6CFEBEED-B8A0-403F-891E-FB53AB64DE3C&StartDate=04/06/2016&EndDate=04/30/2016&mode=email");
+            //myRequest.Method = "GET";
+            //WebResponse myResponse = myRequest.GetResponse();
+            //StreamReader sr = new StreamReader(myResponse.GetResponseStream(), System.Text.Encoding.UTF8);
+            //string result = sr.ReadToEnd();
+            //sr.Close();
+            //myResponse.Close();
         }
         public static void SendEmailFromQueue()
         {

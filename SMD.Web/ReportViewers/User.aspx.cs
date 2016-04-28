@@ -4,6 +4,7 @@ using SMD.Models.DomainModels;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Web;
@@ -40,6 +41,17 @@ namespace SMD.MIS.test
                             rvDataViewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt));
                             rvDataViewer.DataBind();
                             rvDataViewer.LocalReport.Refresh();
+
+                            if ( Request.QueryString["mode"] == "email")
+                            {
+                                SavePDF(rvDataViewer);
+                            //rvDataViewer.LocalReport.Render()
+
+                            //    StringWriter stringWriter = new StringWriter();
+                            //    HtmlTextWriter htw = new HtmlTextWriter(stringWriter);
+                            //    rvDataViewer.RenderControl(htw);
+                            }
+                          
                         }
                         else
                         {
@@ -87,6 +99,16 @@ namespace SMD.MIS.test
             rvDataViewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt));
             rvDataViewer.DataBind();
             rvDataViewer.LocalReport.Refresh();
+          
+        }
+        public void SavePDF(ReportViewer viewer)
+        {
+            byte[] Bytes = viewer.LocalReport.Render(format: "PDF", deviceInfo: "");
+
+            using (FileStream stream = new FileStream(HttpContext.Current.Server.MapPath("~/SMD_Content/EmailAttachments/pdfofu1.pdf"), FileMode.Create))
+            {
+                stream.Write(Bytes, 0, Bytes.Length);
+            }
         }
     }
 }
