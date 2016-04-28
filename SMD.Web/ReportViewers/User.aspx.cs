@@ -67,9 +67,9 @@ namespace SMD.MIS.test
             table.Columns.Add("Withdrawal");
             table.Columns.Add("TDate");
             table.Columns.Add("AccountBalance");
-
+            table.Columns.Add("CurentBalance");
             for (int i = 0; i < list.Count; i++)
-                table.Rows.Add(list[i].Transaction, list[i].Deposit, list[i].Withdrawal, list[i].TDate.HasValue? list[i].TDate.Value.ToString("dd MMM yyyy hh:mm:ss"):"", list[i].AccountBalance);
+                table.Rows.Add(list[i].Transaction, list[i].Deposit, list[i].Withdrawal, list[i].TDate.HasValue ? list[i].TDate.Value.ToString("dd MMM yyyy hh:mm:ss") : "", list[i].AccountBalance, list[i].CurentBalance);
 
             return table;
         }

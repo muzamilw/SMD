@@ -646,6 +646,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_GetUserTransactions' does not have a
           <Property Name="Transaction" Type="nvarchar" MaxLength="209" />
           <Property Name="userId" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="AccountBalance" Type="float" />
+          <Property Name="CurentBalance" Type="float" />
         </EntityType>
         <Association Name="FK_Account_Company">
           <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
@@ -1580,7 +1581,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_GetUserTransactions' does not have a
     [vw_GetUserTransactions].[Withdrawal] AS [Withdrawal], 
     [vw_GetUserTransactions].[Transaction] AS [Transaction], 
     [vw_GetUserTransactions].[userId] AS [userId], 
-    [vw_GetUserTransactions].[AccountBalance] AS [AccountBalance]
+    [vw_GetUserTransactions].[AccountBalance] AS [AccountBalance], 
+    [vw_GetUserTransactions].[CurentBalance] AS [CurentBalance]
     FROM [dbo].[vw_GetUserTransactions] AS [vw_GetUserTransactions]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_Account_Company" Association="Self.FK_Account_Company">
@@ -4017,6 +4019,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_GetUserTransactions' does not have a
           <Property Name="Transaction" Type="String" MaxLength="209" FixedLength="false" Unicode="true" />
           <Property Name="userId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="AccountBalance" Type="Double" />
+          <Property Name="CurentBalance" Type="Double" />
         </EntityType>
         <EntityType Name="EmailQueue">
           <Key>
@@ -4852,6 +4855,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_GetUserTransactions' does not have a
           <EntitySetMapping Name="vw_GetUserTransactions">
             <EntityTypeMapping TypeName="DomainModels.vw_GetUserTransactions">
               <MappingFragment StoreEntitySet="vw_GetUserTransactions">
+                <ScalarProperty Name="CurentBalance" ColumnName="CurentBalance" />
                 <ScalarProperty Name="AccountBalance" ColumnName="AccountBalance" />
                 <ScalarProperty Name="userId" ColumnName="userId" />
                 <ScalarProperty Name="Transaction" ColumnName="Transaction" />
