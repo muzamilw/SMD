@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets7DEEA1DCD2564605D3296061FC1D5DBB8DB7EAA718C5DC6808590E33F54A756D))]
+[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets3C0CA216280A6EE3A8D9D8DF22C3BD13AAB3323766ADF4FB2A1EF5DF2F242C32))]
 
 namespace Edm_EntityMappingGeneratedViews
 {
@@ -17,18 +17,18 @@ namespace Edm_EntityMappingGeneratedViews
     /// <Summary>
     /// The type contains views for EntitySets and AssociationSets that were generated at design time.
     /// </Summary>
-    public sealed class ViewsForBaseEntitySets7DEEA1DCD2564605D3296061FC1D5DBB8DB7EAA718C5DC6808590E33F54A756D : System.Data.Mapping.EntityViewContainer
+    public sealed class ViewsForBaseEntitySets3C0CA216280A6EE3A8D9D8DF22C3BD13AAB3323766ADF4FB2A1EF5DF2F242C32 : System.Data.Mapping.EntityViewContainer
     {
         
         /// <Summary>
         /// The constructor stores the views for the extents and also the hash values generated based on the metadata and mapping closure and views.
         /// </Summary>
-        public ViewsForBaseEntitySets7DEEA1DCD2564605D3296061FC1D5DBB8DB7EAA718C5DC6808590E33F54A756D()
+        public ViewsForBaseEntitySets3C0CA216280A6EE3A8D9D8DF22C3BD13AAB3323766ADF4FB2A1EF5DF2F242C32()
         {
             this.EdmEntityContainerName = "BaseDbContext";
             this.StoreEntityContainerName = "SMDModelStoreContainer";
-            this.HashOverMappingClosure = "d94f1ebdd86cb8321195f075c0d9af79c86b991f9c16352bb9d0f2b6f0ee21ca";
-            this.HashOverAllExtentViews = "46b01ea146d812ad83c8564efe83ac0b80a59cbb6a3c6df52e1af0b5065f8ebb";
+            this.HashOverMappingClosure = "9afe7ecb557fc3fb0e027f32d3eb0c3546352e2f0d6e97d27e16c97c5842ecaa";
+            this.HashOverAllExtentViews = "3104aa718bfb8afac31e3c73a53b0696b167896f75265f8172ef27434e9be073";
             this.ViewCount = 80;
         }
         
@@ -2310,7 +2310,7 @@ namespace Edm_EntityMappingGeneratedViews
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.vw_GetUserTransactions", @"
     SELECT VALUE -- Constructing vw_GetUserTransactions
-        [SMDModel.Store.vw_GetUserTransactions](T1.[vw_GetUserTransactions.tid], T1.[vw_GetUserTransactions.TDate], T1.[vw_GetUserTransactions.Deposit], T1.[vw_GetUserTransactions.Withdrawal], T1.[vw_GetUserTransactions.Transaction], T1.[vw_GetUserTransactions.userId], T1.[vw_GetUserTransactions.AccountBalance])
+        [SMDModel.Store.vw_GetUserTransactions](T1.[vw_GetUserTransactions.tid], T1.[vw_GetUserTransactions.TDate], T1.[vw_GetUserTransactions.Deposit], T1.[vw_GetUserTransactions.Withdrawal], T1.[vw_GetUserTransactions.Transaction], T1.[vw_GetUserTransactions.userId], T1.[vw_GetUserTransactions.AccountBalance], T1.[vw_GetUserTransactions.CurentBalance])
     FROM (
         SELECT 
             T.tid AS [vw_GetUserTransactions.tid], 
@@ -2320,6 +2320,7 @@ namespace Edm_EntityMappingGeneratedViews
             T.Transaction AS [vw_GetUserTransactions.Transaction], 
             T.userId AS [vw_GetUserTransactions.userId], 
             T.AccountBalance AS [vw_GetUserTransactions.AccountBalance], 
+            T.CurentBalance AS [vw_GetUserTransactions.CurentBalance], 
             True AS _from0
         FROM BaseDbContext.vw_GetUserTransactions AS T
     ) AS T1");
@@ -2332,7 +2333,7 @@ namespace Edm_EntityMappingGeneratedViews
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.vw_GetUserTransactions", @"
     SELECT VALUE -- Constructing vw_GetUserTransactions
-        [DomainModels.vw_GetUserTransactions](T1.[vw_GetUserTransactions.tid], T1.[vw_GetUserTransactions.TDate], T1.[vw_GetUserTransactions.Deposit], T1.[vw_GetUserTransactions.Withdrawal], T1.[vw_GetUserTransactions.Transaction], T1.[vw_GetUserTransactions.userId], T1.[vw_GetUserTransactions.AccountBalance])
+        [DomainModels.vw_GetUserTransactions](T1.[vw_GetUserTransactions.tid], T1.[vw_GetUserTransactions.TDate], T1.[vw_GetUserTransactions.Deposit], T1.[vw_GetUserTransactions.Withdrawal], T1.[vw_GetUserTransactions.Transaction], T1.[vw_GetUserTransactions.userId], T1.[vw_GetUserTransactions.AccountBalance], T1.[vw_GetUserTransactions.CurentBalance])
     FROM (
         SELECT 
             T.tid AS [vw_GetUserTransactions.tid], 
@@ -2342,6 +2343,7 @@ namespace Edm_EntityMappingGeneratedViews
             T.Transaction AS [vw_GetUserTransactions.Transaction], 
             T.userId AS [vw_GetUserTransactions.userId], 
             T.AccountBalance AS [vw_GetUserTransactions.AccountBalance], 
+            T.CurentBalance AS [vw_GetUserTransactions.CurentBalance], 
             True AS _from0
         FROM SMDModelStoreContainer.vw_GetUserTransactions AS T
     ) AS T1");
