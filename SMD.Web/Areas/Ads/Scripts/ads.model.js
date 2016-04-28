@@ -489,7 +489,7 @@
     };
 
     var // ReSharper disable InconsistentNaming
-  AdCampaignCouponCodes = function (CodeId, CampaignId, Code, IsTaken, UserId, UserName) {
+  AdCampaignCouponCodes = function (CodeId, CampaignId, Code, IsTaken, UserId, UserName, TakenDateTime) {
 
       var
           //type and userID will be set on server sside
@@ -499,6 +499,7 @@
           IsTaken = ko.observable(IsTaken),
           UserId = ko.observable(UserId),
           UserName = ko.observable(UserName),
+          TakenDateTime = ko.observable(TakenDateTime),
           // Convert to server data
           convertToServerData = function () {
               return {
@@ -506,7 +507,8 @@
                   CampaignId: CampaignId(),
                   Code: Code(),
                   IsTaken: IsTaken(),
-                  UserId: UserId()
+                  UserId: UserId(),
+                  TakenDateTime: TakenDateTime
               };
           };
       return {
@@ -515,7 +517,8 @@
           Code: Code,
           IsTaken: IsTaken,
           UserId: UserId,
-          UserName:UserName,
+          UserName: UserName,
+          TakenDateTime:TakenDateTime,
           convertToServerData: convertToServerData
       };
   };
@@ -570,7 +573,7 @@
     };
     AdCampaignCouponCodes.Create = function (source) {
 
-        return new AdCampaignCouponCodes(source.CodeId, source.CampaignId, source.Code, source.IsTaken, source.UserId, source.UserName);
+        return new AdCampaignCouponCodes(source.CodeId, source.CampaignId, source.Code, source.IsTaken, source.UserId, source.UserName, source.TakenDateTime);
     };
     return {
         Campaign: Campaign,

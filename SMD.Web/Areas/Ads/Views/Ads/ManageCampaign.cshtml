@@ -449,7 +449,7 @@ else
                                         </div>
                                         <div class="form-group">
                                             <div class="col-lg-3">
-                                                <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Coupon Quantity</label>
+                                                <label for="txtccqty" class="control-label text-right tooltip-float floatNone">Coupon Quantity</label>
                                             </div>
                                             <div class="col-lg-5" style="padding-top:8px;">
                                                 <span data-bind="text: CouponQuantity"></span>
@@ -464,6 +464,15 @@ else
                                                     <span>Upload CSV file </span>
                                                     <input type="file" class="upload" id="campaignType_image_csvFile" data-bind="files: { onLoaded: $root.campaignCSVCallback}" />
                                                 </div>*@
+                                            </div>
+                                        </div>
+                                        <div class="form-group" data-bind="visible: $root.UsedCouponQuantity() != 0">
+                                            <div class="col-lg-3">
+                                                <label for="ccusedqty" class="control-label text-right tooltip-float floatNone">Used Coupon Quantity</label>
+                                            </div>
+                                            <div class="col-lg-5" style="padding-top:8px;">
+                                                <span data-bind="text: $root.UsedCouponQuantity()"></span>
+
                                             </div>
                                         </div>
                                         <div class="form-group">

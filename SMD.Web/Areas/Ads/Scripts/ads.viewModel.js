@@ -96,7 +96,7 @@ define("ads/ads.viewModel",
                     BetterListitemToAdd = ko.observable("");
                     allCouponCodeItems = ko.observableArray([]); // Initial items
                     selectedCouponCodeItems = ko.observableArray([]);                                // Initial selection
-
+                    UsedCouponQuantity = ko.observable(0),
                 getCampaignBaseContent = function () {
                     dataservice.getBaseData({
                         RequestId: 1,
@@ -1100,7 +1100,6 @@ define("ads/ads.viewModel",
                                         allCouponCodeItems.push(cc.Code);
                                     });
 
-                                    console.log(allCouponCodeItems());
                                     campaignModel(model.Campaign.Create(data.Campaigns[0]));
 
                                     _.each(clonedVersofCariterias, function (cclist) {
@@ -1180,8 +1179,6 @@ define("ads/ads.viewModel",
 
 
                                     campaignModel().reset();
-
-                                    console.log(campaignModel());
 
 
                                     view.initializeTypeahead();
@@ -1381,8 +1378,12 @@ define("ads/ads.viewModel",
                                         alreadyAddedDeliveryValue(10);
                                         pricePerclick(pricePerclick() + UserAndCostDetail().TenDayDeliveryClausePrice);
                                     }
+                               
+                                    var takenCouponCodes = $.grep(campaignModel().CouponCodes(), function (n, i) {
+                                        return (n.IsTaken() == true);
+                                    });
 
-
+                                    UsedCouponQuantity(takenCouponCodes.length);
                                     var arrayOfUpdatedList = couponCategories().clone();
                                     couponCategories.removeAll();
                                     ko.utils.arrayPushAll(couponCategories(), arrayOfUpdatedList);
@@ -1906,7 +1907,8 @@ define("ads/ads.viewModel",
                                         Code: item,
                                         IsTaken: false,
                                         UserId: "",
-                                        UserName:""
+                                        UserName: "",
+                                        TakenDateTime: null
                                     }));
                                 }
                             });
@@ -1919,7 +1921,8 @@ define("ads/ads.viewModel",
                                 Code: this.BetterListitemToAdd(),
                                 IsTaken: false,
                                 UserId: "",
-                                UserName: ""
+                                UserName: "",
+                                TakenDateTime: null
                             }));
                         }
                         BetterListitemToAdd(""); // Clear the text box
@@ -1948,7 +1951,7 @@ define("ads/ads.viewModel",
                 },
                  updateExistingCodeVal = function (item) {
                      
-                     if (event.which == 13) {
+                     if (event.which == 13 || event.which == 0) {
                          if ((item.Code() != "") && (allCouponCodeItems.indexOf(item.Code()) < 0)) {
                              campaignModel().CouponCodes.remove(item);
                              campaignModel().CouponCodes.push(new model.AdCampaignCouponCodes.Create({
@@ -2113,7 +2116,8 @@ define("ads/ads.viewModel",
                     removeSelectedCouponCodeItem: removeSelectedCouponCodeItem,
                     opencouponCodesDialog: opencouponCodesDialog,
                     campaignCSVCallback: campaignCSVCallback,
-                    updateExistingCodeVal: updateExistingCodeVal
+                    updateExistingCodeVal: updateExistingCodeVal,
+                    UsedCouponQuantity: UsedCouponQuantity
                 };
             })()
         };

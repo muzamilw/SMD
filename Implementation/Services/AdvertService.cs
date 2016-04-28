@@ -566,17 +566,22 @@ namespace SMD.Implementation.Services
 
             // remove coupon codes if campaign has and add again
             List<CouponCode> listOfCouponCodesToDelete = _couponCodeRepository.GetAll().Where(c => c.CampaignId == campaignModel.CampaignId).ToList();
+            listOfCouponCodesToDelete = listOfCouponCodesToDelete.Where(c => c.IsTaken != true).ToList();
             _couponCodeRepository.RemoveAll(listOfCouponCodesToDelete);
             // add or update target locations
             if (campaignModel.CouponCodes != null && campaignModel.CouponCodes.Count() > 0)
             {
                 foreach (CouponCode item in campaignModel.CouponCodes)
                 {
-                    CouponCode oModel = new CouponCode();
+                    if(item.IsTaken != true){
+                        CouponCode oModel = new CouponCode();
 
-                    oModel.CampaignId = campaignModel.CampaignId;
-                    oModel.Code = item.Code;
-                    _couponCodeRepository.Add(oModel);
+                        oModel.CampaignId = campaignModel.CampaignId;
+                        oModel.Code = item.Code;
+                        _couponCodeRepository.Add(oModel);
+
+                    }
+             
 
 
                 }

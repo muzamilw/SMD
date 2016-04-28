@@ -43,6 +43,7 @@ namespace SMD.MIS.Areas.Api.Models
         public bool IsTaken { get; set; }
         public string UserId { get; set; }
         public string UserName { get; set; }
+        public DateTime? TakenDateTime { get; set; }
 
     }
     public class EducationResponse : BaseApiResponse

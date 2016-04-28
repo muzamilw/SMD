@@ -20,12 +20,13 @@
                             <div class="col-lg-4">
                                 <button type="submit" data-bind="enable: BetterListitemToAdd().length > 0" class="btn btn-primary">Add</button>
                             </div>
+                            <div class="clearfix">
+
+                            </div>
                         </div>
                       
                        
                     </form>
-                    <br />
-                 
                     @*<div class="text-right" style="width: 100%; "><button class="btn  btn-danger " data-bind="click: removeSelectedCouponCodeItem, enable: selectedCouponCodeItems().length > 0">Remove</button>
 </div>*@
                    <!-- ko if: $root.campaignModel() != null -->
@@ -35,7 +36,7 @@
     </div>
     <!-- /ko -->*@
                     <!-- ko if: ($root.campaignModel().CouponQuantity() - allCouponCodeItems().length)  >= 0 -->
-                    <div class="" style="width: 100%; padding-left:20px; font-size:12px;">
+                    <div class="" style="width: 100%; padding-left:28px; font-size:12px;">
                         <span data-bind="text: ' Coupon Quantity = '  + (allCouponCodeItems().length)"></span>
                     </div>
                     <p id="gridupdateCodeError" style=" display:none;font-size: 12px;      padding-left: 20px;  color: red;    margin-top: 2px;">Please enter unique code.</p>
@@ -62,11 +63,11 @@
                                                         <span>User Name</span>
                                                        
                                                     </th>
-                                                    <th class="col-sm-2">
+                                                    <th class="col-sm-1">
                                                         
-                                                        <span>Taken Count</span>
+                                                        <span>Taken</span>
                                                     </th>
-                                                    <th class="col-sm-1"><span>Date</span></th>
+                                                    <th class="col-sm-2"><span>Date</span></th>
                                                     <th class="col-sm-1">&nbsp;</th>
                                                 </tr>
                                             </thead>
@@ -109,7 +110,7 @@
 
         <td class="col-sm-3">
             <!-- ko if: IsTaken() == 0-->
-            <input type="text" class="form-control" data-bind="value: Code,event: {keypress: updateExistingCodeVal}" />
+            <input type="text" class="form-control" data-bind="value: Code,event: {keypress: updateExistingCodeVal, blur: updateExistingCodeVal}" />
             <!-- /ko -->
             <!-- ko if: IsTaken() == 1-->
             <span data-bind="text: Code"></span>
@@ -125,7 +126,7 @@
             <!-- /ko -->
 
         </td>
-        <td class="col-sm-2">
+        <td class="col-sm-1">
 
             <!-- ko if: IsTaken() == 1-->
             <span >Yes</span>
@@ -135,11 +136,15 @@
             <!-- /ko -->
 
         </td>
-        <td class="col-sm-1">
+        <td class="col-sm-2">
 
-           
-            <span class="">--</span>
-          
+            
+            <!-- ko if: TakenDateTime() == null-->
+            <span>--</span>
+            <!-- /ko -->
+            <!-- ko if: TakenDateTime() != null-->
+            <span data-bind="text: TakenDateTime"></span>
+            <!-- /ko -->
          
         </td>
       

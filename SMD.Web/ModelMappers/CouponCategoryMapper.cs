@@ -42,7 +42,8 @@ namespace SMD.MIS.ModelMappers
                 CodeId = source.CodeId,
                 IsTaken = source.IsTaken == null ? false : true,
                 UserId = source.UserId,
-                UserName = source.AspNetUser == null ? "" : source.AspNetUser.FullName
+                UserName = source.AspNetUser == null ? "" : source.AspNetUser.FullName,
+                TakenDateTime = source.TakenDateTime
 
             };
         }
