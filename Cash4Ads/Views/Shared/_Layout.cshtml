@@ -1,6 +1,6 @@
 ﻿@{
     Layout = null;
-    var sessionVar = Session["User"];
+    var sessionVar = Session["User"] as Cash4Ads.Models.User;
 }
 <!DOCTYPE html>
 
@@ -95,7 +95,7 @@
                     }
                     else
                     {
-                        <li><a class="scroll-link" href="@Url.Action("logOut", "Home")">My Account Activity</a></li>
+                        <li><a class="scroll-link" href="http://smdpreview.com/reportViewers/user.aspx?userID=@sessionVar.UserId" target="_blank">My Account Activity</a></li>
                         <li><a class="scroll-link" href="@Url.Action("logOut", "Home")">Sign out</a></li>
 
                     }
