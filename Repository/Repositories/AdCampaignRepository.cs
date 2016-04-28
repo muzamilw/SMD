@@ -231,17 +231,17 @@ namespace SMD.Repository.Repositories
                         where usr.Id == LoggedInUserIdentity && prod.ProductId == 2 //&& prod.ProductCode == code
                         select new UserAndCostDetail
                         {
-                            AgeClausePrice = prod.AgeClausePrice,
+                            AgeClausePrice = prod.AgeClausePrice ?? 0,
                             CityId = usr.Company.CityId,
                             CountryId = usr.Company.CountryId,
-                            EducationClausePrice = prod.EducationClausePrice,
+                            EducationClausePrice = prod.EducationClausePrice ?? 0,
                             EducationId = usr.EducationId,
-                            GenderClausePrice = prod.GenderClausePrice,
+                            GenderClausePrice = prod.GenderClausePrice ?? 0,
                             IndustryId = usr.IndustryId,
                             LanguageId = usr.LanguageId,
-                            LocationClausePrice = prod.LocationClausePrice,
-                            OtherClausePrice = prod.OtherClausePrice,
-                            ProfessionClausePrice = prod.ProfessionClausePrice
+                            LocationClausePrice = prod.LocationClausePrice ?? 0,
+                            OtherClausePrice = prod.OtherClausePrice ?? 0,
+                            ProfessionClausePrice = prod.ProfessionClausePrice ?? 0
                         };
 
             return query.FirstOrDefault();

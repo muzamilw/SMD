@@ -246,17 +246,17 @@ namespace SMD.Implementation.Services
             }
             if (campaignProduct != null)
             {
-                objUC.AgeClausePrice = campaignProduct.AgeClausePrice;
-                objUC.EducationClausePrice = campaignProduct.EducationClausePrice;
-                objUC.LocationClausePrice = campaignProduct.LocationClausePrice;
-                objUC.OtherClausePrice = campaignProduct.OtherClausePrice;
-                objUC.ProfessionClausePrice = campaignProduct.ProfessionClausePrice;
-                objUC.GenderClausePrice = campaignProduct.GenderClausePrice;
-                objUC.BuyItClausePrice = campaignProduct.BuyItClausePrice;
-                objUC.QuizQuestionClausePrice = campaignProduct.QuizQuestionClausePrice;
-                objUC.TenDayDeliveryClausePrice = campaignProduct.TenDayDeliveryClausePrice;
-                objUC.ThreeDayDeliveryClausePrice = campaignProduct.ThreeDayDeliveryClausePrice;
-                objUC.FiveDayDeliveryClausePrice = campaignProduct.FiveDayDeliveryClausePrice;
+                objUC.AgeClausePrice = campaignProduct.AgeClausePrice ?? 0;
+                objUC.EducationClausePrice = campaignProduct.EducationClausePrice ?? 0;
+                objUC.LocationClausePrice = campaignProduct.LocationClausePrice ?? 0;
+                objUC.OtherClausePrice = campaignProduct.OtherClausePrice ?? 0;
+                objUC.ProfessionClausePrice = campaignProduct.ProfessionClausePrice ?? 0;
+                objUC.GenderClausePrice = campaignProduct.GenderClausePrice ?? 0;
+                objUC.BuyItClausePrice = campaignProduct.BuyItClausePrice ?? 0;
+                objUC.QuizQuestionClausePrice = campaignProduct.QuizQuestionClausePrice ?? 0;
+                objUC.TenDayDeliveryClausePrice = campaignProduct.TenDayDeliveryClausePrice ?? 0;
+                objUC.ThreeDayDeliveryClausePrice = campaignProduct.ThreeDayDeliveryClausePrice ?? 0;
+                objUC.FiveDayDeliveryClausePrice = campaignProduct.FiveDayDeliveryClausePrice ?? 0;
             }
 
             return new AdCampaignBaseResponse
