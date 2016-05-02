@@ -542,6 +542,15 @@ namespace SMD.Implementation.Services
             }
             return result;
         }
+        public static List<vw_PublisherTransaction> GetPublisherTransactions()
+        {
+            List<vw_PublisherTransaction> result = new List<vw_PublisherTransaction>();
+            using (var dbContext = new BaseDbContext())
+            {
+                result = dbContext.vw_PublisherTransaction.ToList();
+            }
+            return result;
+        }
         #endregion
     }
 }

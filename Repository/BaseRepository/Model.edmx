@@ -648,6 +648,24 @@ warning 6002: The table/view 'SMDDev.dbo.vw_GetUserTransactions' does not have a
           <Property Name="AccountBalance" Type="float" />
           <Property Name="CurentBalance" Type="float" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_PublisherTransaction">
+          <Key>
+            <PropertyRef Name="tid" />
+            <PropertyRef Name="userId" />
+            <PropertyRef Name="CampaignID" />
+          </Key>
+          <Property Name="tid" Type="bigint" Nullable="false" />
+          <Property Name="TDate" Type="datetime" />
+          <Property Name="Deposit" Type="int" />
+          <Property Name="Withdrawal" Type="float" />
+          <Property Name="Transaction" Type="nvarchar" MaxLength="209" />
+          <Property Name="userId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ownerCompanyId" Type="int" />
+          <Property Name="CurentBalance" Type="float" />
+          <Property Name="CampaignID" Type="bigint" Nullable="false" />
+        </EntityType>
         <Association Name="FK_Account_Company">
           <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
           <End Role="Account" Type="Self.Account" Multiplicity="*" />
@@ -1585,6 +1603,19 @@ warning 6002: The table/view 'SMDDev.dbo.vw_GetUserTransactions' does not have a
     [vw_GetUserTransactions].[CurentBalance] AS [CurentBalance]
     FROM [dbo].[vw_GetUserTransactions] AS [vw_GetUserTransactions]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="vw_PublisherTransaction" EntityType="Self.vw_PublisherTransaction" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_PublisherTransaction].[tid] AS [tid], 
+    [vw_PublisherTransaction].[TDate] AS [TDate], 
+    [vw_PublisherTransaction].[Deposit] AS [Deposit], 
+    [vw_PublisherTransaction].[Withdrawal] AS [Withdrawal], 
+    [vw_PublisherTransaction].[Transaction] AS [Transaction], 
+    [vw_PublisherTransaction].[userId] AS [userId], 
+    [vw_PublisherTransaction].[ownerCompanyId] AS [ownerCompanyId], 
+    [vw_PublisherTransaction].[CurentBalance] AS [CurentBalance], 
+    [vw_PublisherTransaction].[CampaignID] AS [CampaignID]
+    FROM [dbo].[vw_PublisherTransaction] AS [vw_PublisherTransaction]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_Account_Company" Association="Self.FK_Account_Company">
             <End Role="Company" EntitySet="Company" />
             <End Role="Account" EntitySet="Account" />
@@ -2247,6 +2278,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_GetUserTransactions' does not have a
           </FunctionImport>
           <EntitySet Name="vw_GetUserTransactions" EntityType="DomainModels.vw_GetUserTransactions" />
           <EntitySet Name="EmailQueues" EntityType="DomainModels.EmailQueue" />
+          <EntitySet Name="vw_PublisherTransaction" EntityType="DomainModels.vw_PublisherTransaction" />
           </EntityContainer>
         <EntityType Name="ProfileQuestion">
           <Key>
@@ -4044,6 +4076,22 @@ warning 6002: The table/view 'SMDDev.dbo.vw_GetUserTransactions' does not have a
           <Property Name="ToName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="FromName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="vw_PublisherTransaction">
+          <Key>
+            <PropertyRef Name="tid" />
+            <PropertyRef Name="userId" />
+            <PropertyRef Name="CampaignID" />
+          </Key>
+          <Property Name="tid" Type="Int64" Nullable="false" />
+          <Property Name="TDate" Type="DateTime" Precision="3" />
+          <Property Name="Deposit" Type="Int32" />
+          <Property Name="Withdrawal" Type="Double" />
+          <Property Name="Transaction" Type="String" MaxLength="209" FixedLength="false" Unicode="true" />
+          <Property Name="userId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ownerCompanyId" Type="Int32" />
+          <Property Name="CurentBalance" Type="Double" />
+          <Property Name="CampaignID" Type="Int64" Nullable="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4887,6 +4935,21 @@ warning 6002: The table/view 'SMDDev.dbo.vw_GetUserTransactions' does not have a
                 <ScalarProperty Name="Cc" ColumnName="Cc" />
                 <ScalarProperty Name="To" ColumnName="To" />
                 <ScalarProperty Name="EmailQueueId" ColumnName="EmailQueueId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_PublisherTransaction">
+            <EntityTypeMapping TypeName="DomainModels.vw_PublisherTransaction">
+              <MappingFragment StoreEntitySet="vw_PublisherTransaction">
+                <ScalarProperty Name="CampaignID" ColumnName="CampaignID" />
+                <ScalarProperty Name="CurentBalance" ColumnName="CurentBalance" />
+                <ScalarProperty Name="ownerCompanyId" ColumnName="ownerCompanyId" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="Transaction" ColumnName="Transaction" />
+                <ScalarProperty Name="Withdrawal" ColumnName="Withdrawal" />
+                <ScalarProperty Name="Deposit" ColumnName="Deposit" />
+                <ScalarProperty Name="TDate" ColumnName="TDate" />
+                <ScalarProperty Name="tid" ColumnName="tid" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

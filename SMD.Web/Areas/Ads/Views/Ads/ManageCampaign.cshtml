@@ -1281,7 +1281,7 @@ else
 
                                                     <div class="defaultImgUploadImage">
 
-                                                        <img style="width:auto;height:80px;max-width:200px;" data-bind="visible: buyItImageBytes() == ''" src="/Content/Images/Company_Default.png" />
+                                                        <img style="width:auto;height:80px;max-width:200px;" data-bind="visible: buyItImageBytes() == '',attr: { src: BuyItImageUrl == ''?'/Content/Images/Company_Default.png':'/'+BuyItImageUrl() }" src="/Content/Images/Company_Default.png" />
                                                         <img style="width:auto;height:80px;max-width:200px;" data-bind="visible: buyItImageBytes() != '' ,attr: { src: buyItImageBytes }" />
 
                                                     </div>
