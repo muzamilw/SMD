@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Cash4Ads.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -54,6 +55,26 @@ namespace Cash4Ads.Controllers
             Session["User"] = null;
             Session.Abandon();
             return RedirectToAction("Index","Home");
+        }
+        public ActionResult reportViewer(int reportType)
+        {
+            string source = "http://manage.cash4ads.com/reportViewers/";
+            User objUser =  Session["User"] as User;
+            if(objUser == null)
+                return RedirectToAction("Index", "Home");
+            if (reportType == 1)
+            {
+                DateTime todayDate = DateTime.Today;
+
+                DateTime LastMonthStartDT = todayDate.AddMonths(-1);
+                source += "user.aspx?userID=" + objUser.UserId + "&StartDate=" + DateTime.Now.AddMonths(-1).ToString("M-d-yyyy") + "&EndDate=" + DateTime.Now.ToString("M-d-yyyy"); //11-01-2015 //12-26-2016
+            }
+            else if (reportType == 2)
+            {
+                source += "publisher.aspx?CompanyId=" + objUser.CompanyId;
+            }
+            ViewBag.src = source;
+            return View();
         }
     }
 }

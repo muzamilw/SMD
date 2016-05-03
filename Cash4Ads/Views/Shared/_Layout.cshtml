@@ -95,7 +95,8 @@
                     }
                     else
                     {
-                        <li><a class="scroll-link" href="http://manage.cash4ads.com/reportViewers/user.aspx?userID=@sessionVar.UserId" target="_blank">My Account Activity</a></li>
+                        <li><a class="scroll-link" href="~/Home/reportViewer?reporttype=1" target="_blank">My Account Activity</a></li>
+                        <li><a class="scroll-link" href="~/Home/reportViewer?reporttype=2" target="_blank">My Campaign Activity</a></li>
                         <li><a class="scroll-link" href="@Url.Action("logOut", "Home")">Sign out</a></li>
 
                     }
