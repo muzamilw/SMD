@@ -102,7 +102,7 @@ namespace SMD.MIS
 
             // Background Tasks Init
             TaskManager.UnobservedTaskException += TaskManager_UnobservedTaskException;
-            TaskManager.Initialize(new ParentScheduler());
+            TaskManager.Initialize(new ParentScheduler(HttpContext.Current));
 
             // Set MVC resolver
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));

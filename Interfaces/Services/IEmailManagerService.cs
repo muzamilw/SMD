@@ -65,5 +65,7 @@ namespace SMD.Interfaces.Services
         Task SendEmailToInviteUser(string email);
         Task SendEmailToInviteUser(string email, int companyId);
         Task SendBuyItEmailToUser(string aspnetUserId, AdCampaign oCampaign);
+        Task SendCampaignApprovalEmail(string aspnetUserId, string campaignName, int? Type);
+        Task SendCampaignRejectionEmail(string aspnetUserId, string campaignName, string RReason, int? Type);
     }
 }

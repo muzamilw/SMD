@@ -620,8 +620,7 @@ namespace SMD.Implementation.Services
                     dbAd.ApprovalDateTime = DateTime.Now;
                     dbAd.ApprovedBy = _adCampaignRepository.LoggedInUserIdentity;
                     dbAd.Status = (Int32)AdCampaignStatus.Live;
-                    emailManagerService.SendQuestionApprovalEmail(dbAd.UserId);
-
+                   
                     // Stripe payment + Invoice Generation
                     // Muzi bhai said we will see it on latter stage 
                    //  MakeStripePaymentandAddInvoiceForCampaign(dbAd);
@@ -638,6 +637,18 @@ namespace SMD.Implementation.Services
                 dbAd.ModifiedBy = _adCampaignRepository.LoggedInUserIdentity;
 
                 _adCampaignRepository.SaveChanges();
+
+                if (source.Approved == true)
+                {
+                    emailManagerService.SendCampaignApprovalEmail(dbAd.UserId, dbAd.CampaignName, dbAd.Type);
+
+                }
+                else 
+                {
+                    emailManagerService.SendCampaignRejectionEmail(dbAd.UserId, dbAd.CampaignName, source.RejectedReason, dbAd.Type);
+
+                }
+                
                 return _adCampaignRepository.Find(source.CampaignId);
             }
             return new AdCampaign();

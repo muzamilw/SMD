@@ -3,13 +3,18 @@ using Microsoft.Practices.Unity;
 using SMD.Implementation.Identity;
 using SMD.Interfaces.Services;
 using SMD.Models.DomainModels;
+using SMD.Models.IdentityModels;
 using SMD.Repository.BaseRepository;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Net.Mail;
+using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,29 +24,83 @@ namespace SMD.Implementation.Services
     {
         [Dependency]
         private static IEmailManagerService EmailManagerService { get; set; }
-        public static void UserTrainingEmailAfterThreeDays(Registry registry)
+        private static string SiteUrl { get; set; }
+        private static System.Web.HttpContext RequestContext { get; set; }
+        public static void UserAccountDetailScheduler(Registry registry, System.Web.HttpContext context)
         {
-
+            RequestContext = context;
+            if (context.Handler != null)
+            {
+                SiteUrl = context.Request.Url.Scheme + "://" + context.Request.Url.Host;
+            }
+            else 
+            {
+                SiteUrl = "http://manage.cash4ads.com";
+            }
+           
             // Registration of Debit Process Scheduler Run after every 7 days 
          //   registry.Schedule(UserTrainingEmail).ToRunEvery(1).Days();
-           // registry.Schedule(UserTrainingEmail).ToRunNow().AndEvery(1).Minutes();
+            registry.Schedule(MonthlyAccountDetailsOfUser).ToRunNow().AndEvery(1).Months();
         }
 
         public static void MonitorQueue(Registry registry)
         {
 
             // Registration of Debit Process Scheduler Run after every 7 days 
-            registry.Schedule(SendEmailFromQueue).ToRunNow().AndEvery(1).Minutes();
+            registry.Schedule(SendEmailFromQueue).ToRunNow().AndEvery(5).Minutes();
         }
-        public static void UserTrainingEmail()
+        public static void MonthlyAccountDetailsOfUser()
         {
-            //HttpWebRequest myRequest = (HttpWebRequest)WebRequest.Create("http://smdpreview.com/reportViewers/user.aspx?userID=6CFEBEED-B8A0-403F-891E-FB53AB64DE3C&StartDate=04/06/2016&EndDate=04/30/2016&mode=email");
-            //myRequest.Method = "GET";
-            //WebResponse myResponse = myRequest.GetResponse();
-            //StreamReader sr = new StreamReader(myResponse.GetResponseStream(), System.Text.Encoding.UTF8);
-            //string result = sr.ReadToEnd();
-            //sr.Close();
-            //myResponse.Close();
+            List<User> allUsers = null;
+            DateTime todayDate = DateTime.Today;
+            DateTime LastMoth = new DateTime(todayDate.Year, todayDate.Month, 1);
+            DateTime LastMonthStartDT = LastMoth.AddMonths(-1);
+            DateTime LastMonthEndDT = LastMoth.AddDays(-1);
+            string StartDate = LastMonthStartDT.Month < 10 ? "0" + LastMonthStartDT.Month : LastMonthStartDT.Month.ToString();
+            StartDate = StartDate + "/" + "0" + LastMonthStartDT.Day + "/" + LastMonthStartDT.Year;
+            string LastDate = LastMonthEndDT.Month < 10 ? "0" + LastMonthEndDT.Month : LastMonthEndDT.Month.ToString();
+            LastDate = LastDate + "/" + LastMonthEndDT.Day + "/" + LastMonthEndDT.Year;
+            string FileName = "";
+            Random randgn = new Random();
+            using (var db = new BaseDbContext())
+            {
+                db.Configuration.LazyLoadingEnabled = false;
+                allUsers = db.Users.ToList();
+
+                if (allUsers != null)
+                {
+                    foreach (User user in allUsers)
+                    {
+                        FileName = user.FullName + randgn.Next(4) + ".pdf";
+                        using (var client = new HttpClient())
+                        {
+                            client.BaseAddress = new Uri(SiteUrl);
+                            client.DefaultRequestHeaders.Accept.Clear();
+                            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                            string url = "reportViewers/user.aspx?userID=" + user.Id + "&StartDate=" + StartDate + "&EndDate=" + LastDate + "&mode=email&FileName=" + FileName;
+                            var response = client.GetAsync(url);
+                            if (response.Result.IsSuccessStatusCode)
+                            {
+                                EmailQueue eqobj = new EmailQueue();
+                                eqobj.Body = "<p> Hi " + user.FullName + ",  </p><p> Please review your attached Cash4Ads account e-Statement. </p>";
+                                eqobj.Subject = "";
+                                eqobj.To = user.Email;
+                                eqobj.ToName = user.FullName;
+                                eqobj.FromName = "Cash4Ads Team";
+                                eqobj.EmailFrom = "info@myprintcloud.com";
+                                eqobj.SMTPUserName = ConfigurationManager.AppSettings["SMTPUser"];
+                                eqobj.SMTPServer = ConfigurationManager.AppSettings["SMTPServer"];
+                                eqobj.SMTPPassword = ConfigurationManager.AppSettings["SMTPPassword"];
+                                eqobj.SendDateTime = DateTime.Now;
+                                eqobj.FileAttachment = "/SMD_Content/EmailAttachments/" + FileName + "|";
+                                db.EmailQueues.Add(eqobj);
+                                db.SaveChanges();
+                            }
+                        }
+                    }
+                }
+            }
         }
         public static void SendEmailFromQueue()
         {
@@ -52,7 +111,7 @@ namespace SMD.Implementation.Services
                     bool res = false;
 
                     List<EmailQueue> allrecords = (from c in db.EmailQueues
-                                                   where c.IsDeliverd == 0 && c.AttemptCount < 5
+                                                   where c.IsDeliverd != 1 && c.AttemptCount != 5
                                                    select c).ToList();
 
                     if (allrecords != null)
@@ -73,6 +132,18 @@ namespace SMD.Implementation.Services
                             {
                                 if (SendEmail(record, out ErrorMsg))
                                 {
+                                    if (record.FileAttachment != null)
+                                    {
+                                        string filePath = string.Empty;
+                                        string[] Allfiles = record.FileAttachment.Split('|');
+                                        foreach (var file in Allfiles)
+                                        {
+                                            filePath = RequestContext.Server.MapPath(file);
+                                            if (File.Exists(filePath))
+                                                File.Delete(filePath);
+                                        }
+                                    }
+
                                     db.EmailQueues.Remove(record);
                                     db.SaveChanges();
                                 }
@@ -118,40 +189,83 @@ namespace SMD.Implementation.Services
 
 
                 Attachment data = null;
-
-
-                SmtpClient objSmtpClient = new SmtpClient(smtp);
-                objSmtpClient.Credentials = new NetworkCredential(SmtpUserName, SenderPassword);
-                objMail.From = new MailAddress(FromEmail, FromName);
-                objMail.To.Add(new MailAddress(MailTo, ToName));
-                if (!string.IsNullOrEmpty(CC))
+                if (oEmailBody.FileAttachment != null)
                 {
-                    if (!string.IsNullOrWhiteSpace(CC))
-                        objMail.CC.Add(new MailAddress(CC));
+                    string[] Allfiles = oEmailBody.FileAttachment.Split('|');
+                    foreach (string temp in Allfiles)
+                    {
+                        if (temp != "")
+                        {
+                            string fname = temp;
+                            if (temp.Contains('_'))
+                            {
+                                string[] abc = temp.Split('_');
+                                fname = abc[abc.Length - 1];
+                            }
+                            else
+                            {
+                                string[] abc = temp.Split('/');
+                                fname = abc[abc.Length - 1];
+                            }
+
+                            string FilePath = RequestContext.Server.MapPath(temp);
+                            if (File.Exists(FilePath))
+                            {
+                                data = new Attachment(FilePath, MediaTypeNames.Application.Octet);
+                                ContentDisposition disposition = data.ContentDisposition;
+                                disposition.CreationDate = System.IO.File.GetCreationTime(FilePath);
+                                disposition.ModificationDate = System.IO.File.GetLastWriteTime(FilePath);
+                                disposition.ReadDate = System.IO.File.GetLastAccessTime(FilePath);
+                                disposition.FileName = fname;
+                                objMail.Attachments.Add(data);
+                            }
+                            else
+                            {
+                                isFileExists = false;
+                            }
+                        }
+                    }
                 }
 
-                objMail.IsBodyHtml = true;
-                objMail.Body = oEmailBody.Body;
-                objMail.Subject = oEmailBody.Subject;
-
-                objSmtpClient.Send(objMail);
-
-                if (data != null)
+                if (isFileExists == true)
                 {
-                    objMail.Attachments.Remove(data);
-                    data.Dispose();
+                    SmtpClient objSmtpClient = new SmtpClient(smtp);
+                    objSmtpClient.Credentials = new NetworkCredential(SmtpUserName, SenderPassword);
+                    objMail.From = new MailAddress(FromEmail, FromName);
+                    objMail.To.Add(new MailAddress(MailTo, ToName));
+                    if (!string.IsNullOrEmpty(CC))
+                    {
+                        if (!string.IsNullOrWhiteSpace(CC))
+                            objMail.CC.Add(new MailAddress(CC));
+                    }
+
+                    objMail.IsBodyHtml = true;
+                    objMail.Body = oEmailBody.Body;
+                    objMail.Subject = oEmailBody.Subject;
+
+                    objSmtpClient.Send(objMail);
+
+                    if (data != null)
+                    {
+                        objMail.Attachments.Remove(data);
+                        data.Dispose();
+                    }
+                    retVal = true;
+                    ErrorMsg = "";
+
+
+                    objMail.Dispose();
+                    if (objMail != null)
+                        objMail = null;
+
+                    return retVal;
+
                 }
-                retVal = true;
-                ErrorMsg = "";
-
-
-                objMail.Dispose();
-                if (objMail != null)
-                    objMail = null;
-
-                return retVal;
-
-
+                else
+                {
+                    ErrorMsg = "Attachment not found.";
+                    return false;
+                }
 
             }
             catch (Exception ex)

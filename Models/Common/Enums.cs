@@ -46,6 +46,8 @@
        InviteUsers = 15,
        BuyItUsers = 16,
        VoucherPaymentEmail = 14,
+       CampaignApproved = 17,
+       CampaignReject = 18,
     }
 
     public enum AdCampaignCriteriaType

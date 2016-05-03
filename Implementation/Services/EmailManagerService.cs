@@ -144,7 +144,9 @@ namespace SMD.Implementation.Services
         public string BuyItLine2 { get; set; }
 
         public string BuyItURL { get; set; }
-
+        public string CampaignName { get; set; }
+        public string RejectionReason { get; set; }
+        public string CampaignLabel { get; set; }
         /// <summary>
         /// Sends Email
         /// </summary>
@@ -180,10 +182,13 @@ namespace SMD.Implementation.Services
             smailsubject = smailsubject.Replace("++firstname++", Fname);
             smailsubject = smailsubject.Replace("++lastname++", Lname);
             smailsubject = smailsubject.Replace("++MailSubject++", Subj);
-            smailsubject = smailsubject.Replace("++companyname++", CompanyNameInviteUser);
+            smailsubject = smailsubject.Replace("++companyname++", CompanyNameInviteUser); 
             MBody = MBody.Replace("++username++", Muser);
             MBody = MBody.Replace("++firstname++", Fname);
             MBody = MBody.Replace("++lastname++", Lname);
+            MBody = MBody.Replace("++campaignname++", CampaignName);
+            MBody = MBody.Replace("++rejectionreason++", RejectionReason);
+            MBody = MBody.Replace("++campaignlabel++", CampaignLabel);
             MBody = MBody.Replace("++CurrentDateTime++", DateTime.Now.ToLongDateString() + " " + DateTime.Now.ToLongTimeString() + " GMT");
             MBody = MBody.Replace("++EmailConfirmationLink++", EmailConfirmationLink);
             if (Mid == (int)EmailTypes.ResetPassword)
@@ -719,7 +724,57 @@ namespace SMD.Implementation.Services
                 throw new Exception("Customer is null");
             }
         }
+        public async Task SendCampaignApprovalEmail(string aspnetUserId, string campaignName, int? Type)
+        {
+            var oUser = await UserManager.FindByIdAsync(aspnetUserId);
 
+            if (oUser != null)
+            {
+                MMailto.Add(oUser.Email);
+                Mid = (int)EmailTypes.CampaignApproved;
+                Muser = oUser.FullName;
+                if(Type == 5)
+                {
+                    CampaignLabel = "Coupon";
+                }
+                if (Type == 3)
+                {
+                    CampaignLabel = "Campaign";
+                }
+                CampaignName = campaignName;
+                await SendEmail();
+            }
+            else
+            {
+                throw new Exception("Email could not be sent!");
+            }
+        }
+        public async Task SendCampaignRejectionEmail(string aspnetUserId, string campaignName, string RReason, int? Type)
+        {
+            var oUser = await UserManager.FindByIdAsync(aspnetUserId);
+
+            if (oUser != null)
+            {
+                MMailto.Add(oUser.Email);
+                Mid = (int)EmailTypes.CampaignApproved;
+                Muser = oUser.FullName;
+                RejectionReason = RReason;
+                CampaignName = campaignName;
+                if (Type == 5)
+                {
+                    CampaignLabel = "Coupon";
+                }
+                if (Type == 3)
+                {
+                    CampaignLabel = "Campaign";
+                }
+                await SendEmail();
+            }
+            else
+            {
+                throw new Exception("Email could not be sent!");
+            }
+        }
         #endregion
 
     }

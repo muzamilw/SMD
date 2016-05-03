@@ -11,9 +11,9 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Constructor 
         /// </summary>
-        public ParentScheduler() //Action<Exception> unhandledExceptionHandler
+        public ParentScheduler(System.Web.HttpContext context) //Action<Exception> unhandledExceptionHandler
         {
-            EmailScheduler.UserTrainingEmailAfterThreeDays(this);
+            EmailScheduler.UserAccountDetailScheduler(this, context);
             EmailScheduler.MonitorQueue(this);
             // Debit Scheduler 
            // CollectionScheduler.SetDebitScheduler(this);

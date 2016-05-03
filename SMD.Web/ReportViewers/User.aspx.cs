@@ -42,16 +42,10 @@ namespace SMD.MIS.test
                             rvDataViewer.DataBind();
                             rvDataViewer.LocalReport.Refresh();
 
-                            if ( Request.QueryString["mode"] == "email")
+                            if (!string.IsNullOrEmpty(Request.QueryString["mode"]) && Request.QueryString["mode"] == "email")
                             {
-                                SavePDF(rvDataViewer);
-                            //rvDataViewer.LocalReport.Render()
-
-                            //    StringWriter stringWriter = new StringWriter();
-                            //    HtmlTextWriter htw = new HtmlTextWriter(stringWriter);
-                            //    rvDataViewer.RenderControl(htw);
+                                SavePDF(rvDataViewer, Request.QueryString["FileName"]);
                             }
-                          
                         }
                         else
                         {
@@ -101,11 +95,11 @@ namespace SMD.MIS.test
             rvDataViewer.LocalReport.Refresh();
           
         }
-        public void SavePDF(ReportViewer viewer)
+        public void SavePDF(ReportViewer viewer, string FileName)
         {
             byte[] Bytes = viewer.LocalReport.Render(format: "PDF", deviceInfo: "");
 
-            using (FileStream stream = new FileStream(HttpContext.Current.Server.MapPath("~/SMD_Content/EmailAttachments/pdfofu1.pdf"), FileMode.Create))
+            using (FileStream stream = new FileStream(HttpContext.Current.Server.MapPath("~/SMD_Content/EmailAttachments/"+ FileName), FileMode.Create))
             {
                 stream.Write(Bytes, 0, Bytes.Length);
             }
