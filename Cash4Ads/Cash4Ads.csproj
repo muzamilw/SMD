@@ -319,6 +319,7 @@
     <Content Include="Views\Shared\voucherbar.cshtml" />
     <Content Include="Views\Home\cashout.cshtml" />
     <Content Include="Views\Shared\_Login.cshtml" />
+    <Content Include="Views\Home\reportViewer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
