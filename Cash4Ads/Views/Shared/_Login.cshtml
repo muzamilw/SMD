@@ -118,7 +118,11 @@
     $(".g-signin2").on("click", onSignIn);
  
     function onSignIn(googleUser) {
-        if (getUrlParameter('signedIn') != "1" && getUrlParameter('signedIn') != "0" && logoutparam != true) {
+        debugger;
+        if ((getUrlParameter('signedIn') == "0") && this.className == "g-signin2") {
+            window.location.href = "/";
+        }
+        if ((getUrlParameter('signedIn') != "1" && getUrlParameter('signedIn') != "0") || this.className == "g-signin2") {
             if (googleUser != null) {
                 var profile = googleUser.getBasicProfile();
                 console.log(profile.getEmail());
