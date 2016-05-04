@@ -153,5 +153,11 @@ namespace SMD.Repository.Repositories
         {
             return db.Users.Where(c => c.Id == LoggedInUserIdentity).Select(c => c.FullName).FirstOrDefault();
         }
+
+        public User GetByUserId(string userId)
+        {
+            var user = db.Users.Where(g => g.Id == userId).SingleOrDefault();
+            return user;
+        }
     }
 }

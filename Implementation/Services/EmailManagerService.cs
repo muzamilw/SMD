@@ -257,6 +257,113 @@ namespace SMD.Implementation.Services
             }
         }
 
+        private void SendEmailNotAysnc()
+        {
+            // ReSharper disable SuggestUseVarKeywordEvident
+            MailMessage oMailBody = new MailMessage();
+            // ReSharper restore SuggestUseVarKeywordEvident
+
+            int id = Mid;
+
+            if (id == 0)
+            {
+                throw new Exception("MailId must be assigned");
+            }
+
+            if (MMailto.Count < 1)
+            {
+                throw new Exception("Provide an email Address");
+            }
+
+            SystemMail email = systemMailRepository.Find(id);
+
+            if (email != null)
+            {
+                sfname = email.FromName;
+                sfemail = email.FromEmail;
+                smailsubject = email.Subject;
+                MBody = email.Body;
+            }
+
+            smailsubject = smailsubject.Replace("++username++", Muser);
+            smailsubject = smailsubject.Replace("++firstname++", Fname);
+            smailsubject = smailsubject.Replace("++lastname++", Lname);
+            smailsubject = smailsubject.Replace("++MailSubject++", Subj);
+            smailsubject = smailsubject.Replace("++companyname++", CompanyNameInviteUser);
+            MBody = MBody.Replace("++username++", Muser);
+            MBody = MBody.Replace("++firstname++", Fname);
+            MBody = MBody.Replace("++lastname++", Lname);
+            MBody = MBody.Replace("++campaignname++", CampaignName);
+            MBody = MBody.Replace("++rejectionreason++", RejectionReason);
+            MBody = MBody.Replace("++campaignlabel++", CampaignLabel);
+            MBody = MBody.Replace("++CurrentDateTime++", DateTime.Now.ToLongDateString() + " " + DateTime.Now.ToLongTimeString() + " GMT");
+            MBody = MBody.Replace("++EmailConfirmationLink++", EmailConfirmationLink);
+            if (Mid == (int)EmailTypes.ResetPassword)
+            {
+                MBody = MBody.Replace("++PasswordResetLink++", PasswordResetLink);
+            }
+            if (Mid == (int)EmailTypes.Voucher)
+            {
+                MBody = MBody.Replace("++VoucherDescription++", VoucherDescription);
+                MBody = MBody.Replace("++VoucherValue++", VoucherValue);
+            }
+            if (Mid == (int)EmailTypes.InviteUsers)
+            {
+                MBody = MBody.Replace("++companyname++", CompanyNameInviteUser);
+                MBody = MBody.Replace("++inviteurl++", InviteURL);
+            }
+            if (Mid == (int)EmailTypes.BuyItUsers)
+            {
+                MBody = MBody.Replace("++AdvertiserLogoURL++", AdvertiserLogoURL);
+                MBody = MBody.Replace("++BuyItLogoURL++", BuyItLogoURL);
+                MBody = MBody.Replace("++BuyItLine1++", BuyItLine1);
+                MBody = MBody.Replace("++BuyItLine2++", BuyItLine2);
+                MBody = MBody.Replace("++BuyItURL++", BuyItURL);
+            }
+            MBody = MBody.Replace("++Fname++", Fname);
+            oMailBody.IsBodyHtml = true;
+            oMailBody.From = new MailAddress(sfemail, sfname);
+            oMailBody.Subject = smailsubject;
+            oMailBody.Body = MBody;
+
+            if (id != 17)
+            {
+                oMailBody.To.Clear();
+                foreach (var elememnt in MMailto)
+                {
+                    oMailBody.To.Add(new MailAddress(elememnt, sfname + " " + Slname));
+                }
+            }
+            else
+            {
+                oMailBody.To.Clear();
+                foreach (var elememnt in MMailto)
+                {
+                    oMailBody.To.Add(elememnt);
+                }
+            }
+
+            oMailBody.Priority = MailPriority.Normal;
+            string smtp = ConfigurationManager.AppSettings["SMTPServer"];
+            string mailAddress = ConfigurationManager.AppSettings["SMTPUser"];
+            string mailPassword = ConfigurationManager.AppSettings["SMTPPassword"];
+            // ReSharper disable SuggestUseVarKeywordEvident
+            SmtpClient objSmtpClient = new SmtpClient(smtp);
+            NetworkCredential mailAuthentication = new NetworkCredential(mailAddress, mailPassword);
+            objSmtpClient.EnableSsl = true;
+            objSmtpClient.UseDefaultCredentials = false;
+            objSmtpClient.Credentials = mailAuthentication;
+            MMailto.Clear();
+            try
+            {
+                objSmtpClient.Send(oMailBody);
+            }
+            catch (Exception)
+            {
+                throw new SMDException(LanguageResources.EmailManagerService_FailedToSendEmail);
+            }
+        }
+
         /// <summary>
         /// Send Email Non-Async
         /// </summary>
@@ -724,9 +831,9 @@ namespace SMD.Implementation.Services
                 throw new Exception("Customer is null");
             }
         }
-        public async Task SendCampaignApprovalEmail(string aspnetUserId, string campaignName, int? Type)
+        public void SendCampaignApprovalEmail(string aspnetUserId, string campaignName, int? Type)
         {
-            var oUser = await UserManager.FindByIdAsync(aspnetUserId);
+            var oUser = manageUserRepository.GetByUserId(aspnetUserId);
 
             if (oUser != null)
             {
@@ -742,16 +849,16 @@ namespace SMD.Implementation.Services
                     CampaignLabel = "Campaign";
                 }
                 CampaignName = campaignName;
-                await SendEmail();
+                SendEmailNotAysnc();
             }
             else
             {
                 throw new Exception("Email could not be sent!");
             }
         }
-        public async Task SendCampaignRejectionEmail(string aspnetUserId, string campaignName, string RReason, int? Type)
+        public void SendCampaignRejectionEmail(string aspnetUserId, string campaignName, string RReason, int? Type)
         {
-            var oUser = await UserManager.FindByIdAsync(aspnetUserId);
+            var oUser = manageUserRepository.GetByUserId(aspnetUserId);
 
             if (oUser != null)
             {
@@ -768,7 +875,7 @@ namespace SMD.Implementation.Services
                 {
                     CampaignLabel = "Campaign";
                 }
-                await SendEmail();
+                SendEmailNotAysnc();
             }
             else
             {

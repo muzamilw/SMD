@@ -9,6 +9,8 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 
+using SMD.MIS.Areas.Api.Models;
+using SMD.MIS.ModelMappers;
 namespace SMD.MIS.Areas.Api.Controllers
 {
     public class BuyItController : ApiController
@@ -53,7 +55,7 @@ namespace SMD.MIS.Areas.Api.Controllers
                 throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
             }
 
-            AdCampaign oCampaignRecord = _advertService.GetAdCampaignById(CampaignId);
+            SMD.Models.DomainModels.AdCampaign oCampaignRecord = _advertService.GetAdCampaignById(CampaignId);
             if (oCampaignRecord != null)
             {
                 emailManagerService.SendBuyItEmailToUser(UserId, oCampaignRecord);
@@ -64,7 +66,15 @@ namespace SMD.MIS.Areas.Api.Controllers
                 throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
             }
         }
+        public SMD.MIS.Areas.Api.Models.AdCampaign Post(SMD.MIS.Areas.Api.Models.AdCampaign campaign)
+        {
+            if (campaign == null || !ModelState.IsValid)
+            {
+                throw new HttpException((int)HttpStatusCode.BadRequest, "Invalid Request");
+            }
+            return _advertService.SendApprovalRejectionEmail(campaign.CreateFrom()).CreateFrom();
 
+        }
         #endregion
     }
 }

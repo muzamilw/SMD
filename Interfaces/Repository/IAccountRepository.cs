@@ -1,5 +1,6 @@
 ﻿using SMD.Models.Common;
 using SMD.Models.DomainModels;
+using SMD.Models.IdentityModels;
 
 namespace SMD.Interfaces.Repository
 {

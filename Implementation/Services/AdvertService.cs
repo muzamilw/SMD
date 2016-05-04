@@ -641,6 +641,26 @@ namespace SMD.Implementation.Services
                
                 
                 AdCampaign campaignupdatedrec = _adCampaignRepository.Find(source.CampaignId);
+                //if (dbAd.Approved == true)
+                //{
+                //    emailManagerService.SendCampaignApprovalEmail(dbAd.UserId, dbAd.CampaignName, dbAd.Type);
+
+                //}
+                //else
+                //{
+                //    emailManagerService.SendCampaignRejectionEmail(dbAd.UserId, dbAd.CampaignName, dbAd.RejectedReason, dbAd.Type);
+
+                //}
+                return campaignupdatedrec;
+            }
+            return new AdCampaign();
+        }
+        public AdCampaign SendApprovalRejectionEmail(AdCampaign source)
+        {
+            var dbAd = _adCampaignRepository.Find(source.CampaignId);
+            // Update 
+            if (dbAd != null)
+            {
                 if (dbAd.Approved == true)
                 {
                     emailManagerService.SendCampaignApprovalEmail(dbAd.UserId, dbAd.CampaignName, dbAd.Type);
@@ -651,11 +671,10 @@ namespace SMD.Implementation.Services
                     emailManagerService.SendCampaignRejectionEmail(dbAd.UserId, dbAd.CampaignName, dbAd.RejectedReason, dbAd.Type);
 
                 }
-                return campaignupdatedrec;
+             
             }
             return new AdCampaign();
         }
-
 
         /// <summary>
         /// Makes Payment From Stripe & Add Invoice | baqer

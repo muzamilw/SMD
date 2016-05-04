@@ -64,15 +64,31 @@ define("addApproval/addApproval.viewModel",
                         isEditorVisible(true);
                     },                  
                     // Save AdCampaign 
-                    onSaveCampaign = function() {
+                    onSaveCampaign = function () {
+                        var campId = selectedCampaign().CampaignId();
                         dataservice.saveAdCampaign(selectedCampaign().convertToServerData(), {
-                            success: function(obj) {
-                                var newObjtodelete = campaigns.find(function(temp) {
-                                    return obj.CampaignId == temp.id();
+                            success: function (obj) {
+                                debugger
+                                dataservice.sendApprovalRejectionEmail(selectedCampaign().convertToServerData(), {
+                                    success: function (obj) {
+                                        debugger
+                                        var newObjtodelete = campaigns.find(function (temp) {
+                                            return campId == temp.id();
+                                        });
+                                        campaigns.remove(newObjtodelete);
+                                        //  toastr.success("You are Good!");
+                                        isEditorVisible(false);
+                                    },
+                                    error: function () {
+                                        toastr.error("Failed to save!");
+                                    }
                                 });
-                                campaigns.remove(newObjtodelete);
-                              //  toastr.success("You are Good!");
-                                isEditorVisible(false);
+                              //  var newObjtodelete = campaigns.find(function(temp) {
+                              //      return obj.CampaignId == temp.id();
+                              //  });
+                              //  campaigns.remove(newObjtodelete);
+                              ////  toastr.success("You are Good!");
+                              //  isEditorVisible(false);
                             },
                             error: function() {
                                 toastr.error("Failed to save!");

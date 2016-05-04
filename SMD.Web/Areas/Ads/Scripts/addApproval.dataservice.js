@@ -25,6 +25,13 @@ define("addApproval/addApproval.dataservice", function () {
                         dataType: 'json',
                         type: 'POST'
                     });
+
+                    // Send Mail
+                    amplify.request.define('sendApprovalRejectionEmail', 'ajax', {
+                        url: '/Api/BuyIt',
+                        dataType: 'json',
+                        type: 'POST'
+                    });
                     isInitialized = true;
                 }
             },       
@@ -40,7 +47,16 @@ define("addApproval/addApproval.dataservice", function () {
             },
             
 
-            
+             // Search Ad Campaigns
+            sendApprovalRejectionEmail = function (params, callbacks) {
+                initialize();
+                return amplify.request({
+                    resourceId: 'sendApprovalRejectionEmail',
+                    success: callbacks.success,
+                    error: callbacks.error,
+                    data: params
+                });
+            },
             // Save Ad Campaign edit
             saveAdCampaign = function (params, callbacks) {
                 initialize();
@@ -54,7 +70,8 @@ define("addApproval/addApproval.dataservice", function () {
 
         return {
             saveAdCampaign: saveAdCampaign,
-            searchAdCampaigns: searchAdCampaigns
+            searchAdCampaigns: searchAdCampaigns,
+            sendApprovalRejectionEmail: sendApprovalRejectionEmail
         };
     })();
     return dataService;

@@ -5,6 +5,7 @@ using SMD.Models.Common;
 using SMD.Models.DomainModels;
 using SMD.Repository.BaseRepository;
 using System.Data.Entity;
+using SMD.Models.IdentityModels;
 
 namespace SMD.Repository.Repositories
 {
@@ -72,6 +73,8 @@ namespace SMD.Repository.Repositories
         {
             return DbSet.FirstOrDefault(account => account.AccountId == accountId);
         }
+
+       
         #endregion
 
         
