@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Web;
 using System.Web.Mvc;
 
@@ -52,9 +54,22 @@ namespace Cash4Ads.Controllers
 
         public ActionResult logOut()
         {
+            //using (var client = new HttpClient())
+            //{
+            //    client.BaseAddress = new Uri("https://accounts.google.com/");
+            //    client.DefaultRequestHeaders.Accept.Clear();
+            //    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            //    string url = "o/oauth2/revoke?token=584729032378-al3tomni29c6uqh54kuph83dhdtl6lk4.apps.googleusercontent.com";
+            //    var response = client.GetAsync(url);
+            //    if (response.Result.IsSuccessStatusCode)
+            //    {
+                    
+            //    }
+            //}
             Session["User"] = null;
             Session.Abandon();
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index", "Home", new { signedIn = 0 });
         }
         public ActionResult reportViewer(int reportType)
         {

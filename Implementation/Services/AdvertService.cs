@@ -638,18 +638,20 @@ namespace SMD.Implementation.Services
 
                 _adCampaignRepository.SaveChanges();
 
-                if (source.Approved == true)
+               
+                
+                AdCampaign campaignupdatedrec = _adCampaignRepository.Find(source.CampaignId);
+                if (dbAd.Approved == true)
                 {
                     emailManagerService.SendCampaignApprovalEmail(dbAd.UserId, dbAd.CampaignName, dbAd.Type);
 
                 }
-                else 
+                else
                 {
-                    emailManagerService.SendCampaignRejectionEmail(dbAd.UserId, dbAd.CampaignName, source.RejectedReason, dbAd.Type);
+                    emailManagerService.SendCampaignRejectionEmail(dbAd.UserId, dbAd.CampaignName, dbAd.RejectedReason, dbAd.Type);
 
                 }
-                
-                return _adCampaignRepository.Find(source.CampaignId);
+                return campaignupdatedrec;
             }
             return new AdCampaign();
         }

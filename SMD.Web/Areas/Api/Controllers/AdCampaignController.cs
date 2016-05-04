@@ -15,14 +15,16 @@ namespace SMD.MIS.Areas.Api.Controllers
     {
         #region Public
         private readonly IAdvertService _advertService;
+        private readonly IEmailManagerService _emailManagerService;
         #endregion
         #region Constructor
         /// <summary>
         /// Constuctor 
         /// </summary>
-        public AdCampaignController(IAdvertService advertService)
+        public AdCampaignController(IAdvertService advertService, IEmailManagerService emailManagerService)
         {
             _advertService = advertService;
+            _emailManagerService = emailManagerService;
         }
 
         #endregion
@@ -51,6 +53,7 @@ namespace SMD.MIS.Areas.Api.Controllers
                 throw new HttpException((int)HttpStatusCode.BadRequest, "Invalid Request");
             }
             return _advertService.UpdateAdCampaign(campaign.CreateFrom()).CreateFrom();
+           
         }
         #endregion
     }

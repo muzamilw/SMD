@@ -85,6 +85,7 @@
 
 </div>
 <script>
+    var logoutparam = false;
     var getUrlParameter = function getUrlParameter(sParam) {
         var sPageURL = decodeURIComponent(window.location.search.substring(1)),
             sURLVariables = sPageURL.split('&'),
@@ -115,11 +116,9 @@
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
     $(".g-signin2").on("click", onSignIn);
-    window.onbeforeunload = function (e) {
-        gapi.auth.signOut();
-    };
+ 
     function onSignIn(googleUser) {
-        if (getUrlParameter('signedIn') != "1") {
+        if (getUrlParameter('signedIn') != "1" && getUrlParameter('signedIn') != "0" && logoutparam != true) {
             if (googleUser != null) {
                 var profile = googleUser.getBasicProfile();
                 console.log(profile.getEmail());

@@ -730,7 +730,7 @@ namespace SMD.Implementation.Services
 
             if (oUser != null)
             {
-                MMailto.Add(oUser.Email);
+                MMailto.Add("iqra@myprintcloud.com");
                 Mid = (int)EmailTypes.CampaignApproved;
                 Muser = oUser.FullName;
                 if(Type == 5)
@@ -755,7 +755,7 @@ namespace SMD.Implementation.Services
 
             if (oUser != null)
             {
-                MMailto.Add(oUser.Email);
+                MMailto.Add("iqra@myprintcloud.com");
                 Mid = (int)EmailTypes.CampaignApproved;
                 Muser = oUser.FullName;
                 RejectionReason = RReason;

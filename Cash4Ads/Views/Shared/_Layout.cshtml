@@ -97,7 +97,7 @@
                     {
                         <li><a class="scroll-link" href="~/Home/reportViewer?reporttype=1" target="_blank">My Account Activity</a></li>
                         <li><a class="scroll-link" href="~/Home/reportViewer?reporttype=2" target="_blank">My Campaign Activity</a></li>
-                        <li><a class="scroll-link" href="@Url.Action("logOut", "Home")">Sign out</a></li>
+                        <li><a class="scroll-link" onclick="logOutFromGoogle();" href="@Url.Action("logOut", "Home")">Sign out</a></li>
 
                     }
                    
@@ -192,7 +192,41 @@
                 <!-- Isotope JS file -->
                 <script src="~/scripts/jquery.isotope.min.js"></script>
 
-
+    <script>
+        function logOutFromGoogle(){
+            debugger
+            logoutparam = true;
+            //window.open("https://mail.google.com/mail/u/0/?logout&hl=en", "_blank");
+            //var token = gapi.auth2.getToken();
+            //if (token) {
+            //    var accessToken = gapi.auth2.getToken().access_token;
+            //    if (accessToken) {
+            //        // make http get request towards: 'https://accounts.google.com/o/oauth2/revoke?token=' + accessToken
+            //        // In angular you can do it like this:
+            //        // $http({
+            //        //   method: 'GET',
+            //        //   url: 'https://accounts.google.com/o/oauth2/revoke?token=' + accessToken
+            //        // });
+            //    }
+            //}
+            //gapi.auth2.setToken(null);
+            //gapi.auth2.signOut();
+            //$.ajax({
+            //    type: 'GET',
+            //    url: 'https://mail.google.com/mail/u/0/?logout&hl=en',
+            //    async: false,
+            //    contentType: 'application/json',
+            //    dataType: 'jsonp',
+            //    success: function (result) {
+            //        debugger
+            //        window.location.href = "/Home/logOut";
+            //    },
+            //    error: function (e) {
+            //        console.log(e);
+            //    }
+            //});
+        }
+    </script>
 
 </body>
 </html>
