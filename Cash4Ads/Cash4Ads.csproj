@@ -256,6 +256,7 @@
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <None Include="Properties\PublishProfiles\Cash4Ads.pubxml" />
     <None Include="Properties\PublishProfiles\Mz Cash4 website.pubxml" />
+    <None Include="Properties\PublishProfiles\Saqib Cash4ads.pubxml" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
