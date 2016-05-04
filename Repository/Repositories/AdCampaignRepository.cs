@@ -298,9 +298,12 @@ namespace SMD.Repository.Repositories
             var res =  query.ToList<Coupons>().Skip(pageNo - 1 * size).Take(size).ToList();
             foreach (var item in res)
             {
-                if (!item.CouponImage.ToLower().Contains(System.Web.HttpContext.Current.Request.Url.Authority.ToLower()))
-                    item.CouponImage = System.Web.HttpContext.Current.Request.Url.Scheme + "://" + System.Web.HttpContext.Current.Request.Url.Authority + "/" + item.CouponImage;
-                //System.Web.HttpContext.Current.Request.Url.Scheme + "://" + System.Web.HttpContext.Current.Request.Url.Authority + "/" +
+                if (item.CouponImage != null)
+                {
+                    if (!item.CouponImage.ToLower().Contains(System.Web.HttpContext.Current.Request.Url.Authority.ToLower()))
+                        item.CouponImage = System.Web.HttpContext.Current.Request.Url.Scheme + "://" + System.Web.HttpContext.Current.Request.Url.Authority + "/" + item.CouponImage;
+                }
+               
             }
             return res; 
         }

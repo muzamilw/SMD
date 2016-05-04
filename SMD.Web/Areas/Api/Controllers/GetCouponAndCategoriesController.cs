@@ -37,7 +37,10 @@ namespace SMD.MIS.Areas.Api.Controllers
 
         public List<Coupons> Get(int categoryId, int type, int size, string keywords, int pageNo)
         {
-            
+            if (keywords == "null" || keywords == null)
+            {
+                keywords = "";
+            }
             return  _advertService.GetAllCoupons(categoryId,type,size,keywords,pageNo);            
         }
 

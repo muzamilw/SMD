@@ -23,7 +23,7 @@
                             </div>
                             <button class="btn btn-block btn-facebook btn-lg" onclick="loginInWithfaceBook()">Signin with <strong>Facebook</strong></button>
                             <div id="gplusCnt">
-                                <div class="g-signin2" data-onsuccess="onSignIn" style=""></div>
+                                <div class="g-signin2" data-onsuccess="onSignIn" style=""><span class="buttonText">Sign in with Google</span></div>
                             </div>
                             <p class="apollo-seperator"> or </p>
                             <div class="form-group" id="registerfullNamecnt" style="display:none;">
@@ -118,7 +118,7 @@
     $(".g-signin2").on("click", onSignIn);
  
     function onSignIn(googleUser) {
-        debugger;
+        
         if ((getUrlParameter('signedIn') == "0") && this.className == "g-signin2") {
             window.location.href = "/";
         }
@@ -128,7 +128,7 @@
                 console.log(profile.getEmail());
                 $.ajax({
                     dataType: "json",
-                    url: 'http://smd.saleflow.com/Api_Mobile/' + 'Login/External/?Email=' + profile.getEmail() + '&LoginProvider=Google&LoginProviderKey=' + profile.getId() + '&FullName=' + profile.getName(),
+                    url: 'http://manage.cash4ads.com/Api_Mobile/' + 'Login/External/?Email=' + profile.getEmail() + '&LoginProvider=Google&LoginProviderKey=' + profile.getId() + '&FullName=' + profile.getName(),
                     cache: false,
                     success: function (response) {
                         if (response.Message == "Success") {
@@ -143,7 +143,17 @@
                                 success: function (response2) {
 
                                     if (response2 == "Success") {
-                                        window.location.href = window.location.href + "?signedIn=1";
+                                        debugger
+                                        if (Request.QueryString != undefined) {
+                                            if (Request.QueryString["type"] != "") {
+                                                window.location.href = window.location.href + "&signedIn=1";
+                                            } else {
+                                                window.location.href = window.location.href + "?signedIn=1";
+
+                                            }
+                                        }
+                                        
+                                       
                                     }
                                 }
                             });
@@ -169,7 +179,7 @@
                  $("#loginOverlayCnt").css("display", "none");
                  $.ajax({
                      dataType: "json",
-                     url: 'http://smd.saleflow.com/Api_Mobile/' + 'Login/External/?Email=' + response.email + '&LoginProvider=Facebook&LoginProviderKey=' + response.id + '&FullName=' + response.name,
+                     url: 'http://manage.cash4ads.com/Api_Mobile/' + 'Login/External/?Email=' + response.email + '&LoginProvider=Facebook&LoginProviderKey=' + response.id + '&FullName=' + response.name,
                      cache: false,
                      success: function (response) {
                          if (response.Message == "Success") {
@@ -298,4 +308,9 @@
         $("#registerhylink").css("display", "block");
         $("#loginhylink").css("display", "none");
     }
+
+    $(document).ready(function () {
+        
+    });
+
 </script>

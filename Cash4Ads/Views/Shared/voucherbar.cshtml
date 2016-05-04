@@ -1,7 +1,8 @@
 ﻿@{
 
     var vtype = Request.QueryString["type"];
-
+    var vtypeSigned = Request.QueryString["signedIn"];
+    
     if (string.IsNullOrEmpty(vtype))
     { 
         vtype = "1";
@@ -30,9 +31,9 @@
         <div id="nav" class=" pull-right inner-top-xs" style="">
 
 
-            <a href="@Url.Action("cashout", "Home", new { type = 3 })" class=" btn @cashoutclass btn-xlg ">Cash Out</a>
-            <a href="@Url.Action("Index", "Home", new { type = 1 })" class="btn @swapclass btn-xlg">Swap 4 Vouchers</a>
-            <a href="@Url.Action("Index", "Home", new { type = 2 })" class="btn @offerclass btn-xlg ">2-4-1 Offers</a>
+            <a href="@Url.Action("cashout", "Home", new { type = 3, signedIn = @vtypeSigned })" class=" btn @cashoutclass btn-xlg ">Cash Out</a>
+            <a href="@Url.Action("Index", "Home", new { type = 1, signedIn = @vtypeSigned })" class="btn @swapclass btn-xlg">Swap 4 Vouchers</a>
+            <a href="@Url.Action("Index", "Home", new { type = 2, signedIn = @vtypeSigned })" class="btn @offerclass btn-xlg ">2-4-1 Offers</a>
 
         </div>
     </div>

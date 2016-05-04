@@ -415,9 +415,14 @@
         var keywords = $("#txtKeyword").val();
         var vtype = @vtype;
         var couponFId = 0;
+        var urlofcoup = 'http://manage.cash4ads.com/Api_Mobile/GetAllCoupons/8667e1a9-60af-4d99-8013-a241b81fa550?CategoryId=' + categoryId + '&Type='+vtype+'&keywords=null&PageNo=1&size=30';
+        if(keywords == ""){
+            urlofcoup = 'http://manage.cash4ads.com/Api_Mobile/GetAllCoupons/8667e1a9-60af-4d99-8013-a241b81fa550?CategoryId=' + categoryId + '&Type='+vtype+'&keywords='+  keywords +'&PageNo=1&size=30';
+        }
+        
         $.ajax({
             dataType: "json",
-            url: 'http://manage.cash4ads.com/Api_Mobile/GetAllCoupons/8667e1a9-60af-4d99-8013-a241b81fa550?CategoryId=' + categoryId + '&Type='+vtype+'&keywords="'+keywords+'"&PageNo=1&size=30',
+            url: urlofcoup,
             cache: false,
             success: function (response) {
 
