@@ -40,14 +40,14 @@ namespace SMD.Implementation.Services
            
             // Registration of Debit Process Scheduler Run after every 7 days 
          //   registry.Schedule(UserTrainingEmail).ToRunEvery(1).Days();
-            registry.Schedule(MonthlyAccountDetailsOfUser).ToRunNow().AndEvery(1).Months();
+          //  registry.Schedule(MonthlyAccountDetailsOfUser).AndEvery(1).Months();
         }
 
         public static void MonitorQueue(Registry registry)
         {
 
             // Registration of Debit Process Scheduler Run after every 7 days 
-            registry.Schedule(SendEmailFromQueue).ToRunNow().AndEvery(10).Minutes();
+          //  registry.Schedule(SendEmailFromQueue).ToRunNow().AndEvery(10).Minutes();
         }
         public static void MonthlyAccountDetailsOfUser()
         {
