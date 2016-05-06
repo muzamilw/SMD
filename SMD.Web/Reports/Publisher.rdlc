@@ -61,7 +61,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Earned</Value>
+                              <Value>Viewer Email</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -195,14 +195,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Deposit">
+                    <Textbox Name="Email">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!Deposit.Value</Value>
+                              <Value>=Fields!Email.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -211,7 +211,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Deposit</rd:DefaultName>
+                      <rd:DefaultName>Email</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -513,7 +513,7 @@
     <Height>2in</Height>
     <Style />
   </Body>
-  <Width>7.95707in</Width>
+  <Width>10.1029in</Width>
   <Page>
     <LeftMargin>1in</LeftMargin>
     <RightMargin>1in</RightMargin>
@@ -530,11 +530,18 @@
       </ConnectionProperties>
       <rd:DataSourceID>8be7f096-9b6e-4d04-9bc7-9dfa3e0ec23b</rd:DataSourceID>
     </DataSource>
+    <DataSource Name="SMDImplementationServices1">
+      <ConnectionProperties>
+        <DataProvider>System.Data.DataSet</DataProvider>
+        <ConnectString>/* Local Connection */</ConnectString>
+      </ConnectionProperties>
+      <rd:DataSourceID>6dcff74a-8530-44ca-af18-26a7951355bd</rd:DataSourceID>
+    </DataSource>
   </DataSources>
   <DataSets>
     <DataSet Name="DataSet1">
       <Query>
-        <DataSourceName>SMDImplementationServices</DataSourceName>
+        <DataSourceName>SMDImplementationServices1</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <Fields>
@@ -548,7 +555,7 @@
         </Field>
         <Field Name="Deposit">
           <DataField>Deposit</DataField>
-          <rd:TypeName>System.Nullable`1[[System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+          <rd:TypeName>System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
         </Field>
         <Field Name="Withdrawal">
           <DataField>Withdrawal</DataField>
@@ -562,19 +569,27 @@
           <DataField>userId</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="ownerCompanyId">
+          <DataField>ownerCompanyId</DataField>
+          <rd:TypeName>System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+        </Field>
         <Field Name="CurentBalance">
           <DataField>CurentBalance</DataField>
           <rd:TypeName>System.Nullable`1[[System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
         </Field>
-        <Field Name="AccountBalance">
-          <DataField>AccountBalance</DataField>
-          <rd:TypeName>System.Nullable`1[[System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+        <Field Name="CampaignID">
+          <DataField>CampaignID</DataField>
+          <rd:TypeName>System.Int64</rd:TypeName>
+        </Field>
+        <Field Name="Email">
+          <DataField>Email</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>SMD.Implementation.Services</rd:DataSetName>
         <rd:TableName>PayOutScheduler</rd:TableName>
-        <rd:ObjectDataSourceSelectMethod>GetUserTransactions</rd:ObjectDataSourceSelectMethod>
+        <rd:ObjectDataSourceSelectMethod>GetPublisherTransactions</rd:ObjectDataSourceSelectMethod>
         <rd:ObjectDataSourceType>SMD.Implementation.Services.PayOutScheduler, SMD.Implementation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
       </rd:DataSetInfo>
     </DataSet>

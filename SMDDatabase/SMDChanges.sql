@@ -5680,3 +5680,56 @@ WHERE        (dbo.[Transaction].DebitAmount IS NOT NULL) AND (dbo.Account.Accoun
 GO
 
 
+
+/****** Object:  View [dbo].[vw_Cash4AdsReport]    Script Date: 5/6/2016 5:28:23 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE VIEW [dbo].[vw_Cash4AdsReport]
+AS
+SELECT        [Transaction].txId AS tid, 
+[Transaction].TransactionDate AS TDate, 
+NULL AS Deposit, 
+[Transaction].DebitAmount AS Withdrawal,
+ 'Paypal Withdrawal ' AS [Transaction], 
+ AspNetUsers.Id AS userId, 
+                         [Transaction].AccountBalance AS AccountBalance, 
+						 NULL AS CurentBalance, 
+						  dbo.AdCampaign.CampaignID,
+						 AdCampaign.CampaignName as VoucherTitle,
+						 dbo.AspNetUsers.Email as Email
+FROM            [Transaction] 
+						 JOIN Account ON Account.AccountId = [Transaction].AccountID 
+						 JOIN AspNetUsers ON Account.CompanyId = AspNetUsers.CompanyId
+						 LEFT JOIN CouponCodes ON [Transaction].CouponCodeId = CouponCodes.CodeId
+						 JOIN AdCampaign ON CouponCodes.CampaignId = AdCampaign.CampaignID
+WHERE        [Transaction].DebitAmount IS NOT NULL AND Account.AccountType = 2
+
+UNION
+
+
+SELECT        dbo.[Transaction].TxID AS tid,
+ dbo.[Transaction].TransactionDate AS TDate,
+  NULL AS Deposit,
+   dbo.[Transaction].DebitAmount AS Withdrawal, 
+   'Viewed - ' + dbo.AdCampaign.DisplayTitle AS [Transaction], 
+                         dbo.AspNetUsers.Id AS userId,
+						  dbo.AdCampaign.CompanyId AS ownerCompanyId, 
+						  dbo.Account.AccountBalance AS CurentBalance,
+						   dbo.AdCampaign.CampaignID,
+						   '' as VoucherTitle,
+						   dbo.AspNetUsers.Email as Email
+FROM            dbo.[Transaction] INNER JOIN
+                         dbo.AdCampaign ON dbo.[Transaction].AdCampaignID = dbo.AdCampaign.CampaignID INNER JOIN
+                         dbo.Account ON dbo.Account.AccountId = dbo.[Transaction].AccountID INNER JOIN
+                         dbo.AspNetUsers ON dbo.Account.CompanyId = dbo.AspNetUsers.CompanyId
+WHERE        (dbo.[Transaction].DebitAmount IS NOT NULL) AND (dbo.Account.AccountType = 4)
+
+
+GO
+
+

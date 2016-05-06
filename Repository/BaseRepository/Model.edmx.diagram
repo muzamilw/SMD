@@ -111,6 +111,7 @@
         <EntityTypeShape EntityType="DomainModels.vw_GetUserTransactions" Width="1.5" PointX="14.375" PointY="7.75" />
         <EntityTypeShape EntityType="DomainModels.EmailQueue" Width="1.5" PointX="15.375" PointY="0.75" />
         <EntityTypeShape EntityType="DomainModels.vw_PublisherTransaction" Width="1.5" PointX="3.375" PointY="16.75" />
+        <EntityTypeShape EntityType="DomainModels.vw_Cash4AdsReport" Width="1.5" PointX="5.375" PointY="16.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
