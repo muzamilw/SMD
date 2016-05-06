@@ -237,7 +237,7 @@ namespace SMD.Implementation.Services
                 objUC.IndustryId = loggedInUser.IndustryId;
                 objUC.LanguageId = loggedInUser.LanguageId;
 
-
+                objUC.UserProfileImage = loggedInUser.ProfileImage;
                 objUC.CountryName = loggedInUser.Company.Country != null ? loggedInUser.Company.Country.CountryName : "";
                 objUC.EducationTitle = loggedInUser.Education != null ? loggedInUser.Education.Title : "";
                 objUC.IndustryName = loggedInUser.Industry != null ? loggedInUser.Industry.IndustryName : "";

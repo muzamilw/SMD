@@ -31,5 +31,6 @@ namespace SMD.MIS.Areas.Api.Models
         public bool isStripeIntegrated { get; set; }
         public string GeoLat { get; set; }
         public string GeoLong { get; set; }
+        public string UserProfileImage { get; set; }
     }
 }

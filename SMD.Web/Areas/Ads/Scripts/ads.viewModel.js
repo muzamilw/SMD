@@ -93,20 +93,22 @@ define("ads/ads.viewModel",
                     genderppc = ko.observable(),
                     professionppc = ko.observable(),
                     ageppc = ko.observable(),
-                    BetterListitemToAdd = ko.observable("");
-                    allCouponCodeItems = ko.observableArray([]); // Initial items
-                    selectedCouponCodeItems = ko.observableArray([]);                                // Initial selection
+                    BetterListitemToAdd = ko.observable(""),
+                    allCouponCodeItems = ko.observableArray([]),// Initial items
+                    selectedCouponCodeItems = ko.observableArray([]),                            // Initial selection
                     UsedCouponQuantity = ko.observable(0),
-                getCampaignBaseContent = function () {
-                    dataservice.getBaseData({
-                        RequestId: 1,
-                        QuestionId: 0,
-                    }, {
+                    advertiserLogo = ko.observable("");
+                    getCampaignBaseContent = function () {
+                        dataservice.getBaseData({
+                            RequestId: 1,
+                            QuestionId: 0,
+                        }, {
                         success: function (data) {
 
                             if (data != null) {
-
+                                debugger
                                 UserAndCostDetail(data.UserAndCostDetails);
+                                advertiserLogo(UserAndCostDetail().UserProfileImage);
                                 buyItPriceLbl(UserAndCostDetail().BuyItClausePrice + "p");
                                 quizPriceLbl(UserAndCostDetail().QuizQuestionClausePrice + "p");
                                 tenPriceLbl(" (" + UserAndCostDetail().TenDayDeliveryClausePrice + "p)");
@@ -2117,7 +2119,8 @@ define("ads/ads.viewModel",
                     opencouponCodesDialog: opencouponCodesDialog,
                     campaignCSVCallback: campaignCSVCallback,
                     updateExistingCodeVal: updateExistingCodeVal,
-                    UsedCouponQuantity: UsedCouponQuantity
+                    UsedCouponQuantity: UsedCouponQuantity,
+                    advertiserLogo: advertiserLogo
                 };
             })()
         };

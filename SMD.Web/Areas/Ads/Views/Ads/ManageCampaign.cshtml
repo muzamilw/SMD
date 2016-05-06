@@ -32,21 +32,21 @@ else
                             </li>
                         </ul>
                         @*<a class="validationSummaryLink" data-bind="visible: $root.errorList().length > 0, bootstrapPopover: { html: true, title: 'Please fix following errors', elementNode: 'validationSummaryPopupForStore', popoverId: 'validationSummaryPopoverBodyForStore' }" style="display: none">Invalid data: Click here to see details.</a>
-                        <div class="well well-small validationSummaryModal" id="validationSummaryPopupForStore" style="display: none">
-                            <div id="validationSummaryPopoverBodyForStore">
-                                <ul data-bind="foreach: $root.errorList">
-                                    <li>
-                                        <a><span data-bind="text: name"></span></a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>*@
+                            <div class="well well-small validationSummaryModal" id="validationSummaryPopupForStore" style="display: none">
+                                <div id="validationSummaryPopoverBodyForStore">
+                                    <ul data-bind="foreach: $root.errorList">
+                                        <li>
+                                            <a><span data-bind="text: name"></span></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>*@
                     </div>
 
                     <div class="pull-right top-page-ui" style="margin-right:5px;margin-bottom:5px;">
 
                         <div class="col-xs-12" style="text-align: right; padding-right:0;margin-bottom:10px;">
-                            <button class="btn  btn-info " id="btnCopyCampaign" data-bind=" click:$root.copyCampaign, visible: $root.isNewCampaignVisible " >Create Copy - New Campaign</button>
+                            <button class="btn  btn-info " id="btnCopyCampaign" data-bind=" click:$root.copyCampaign, visible: $root.isNewCampaignVisible ">Create Copy - New Campaign</button>
                             <button class="btn  btn-success" id="btnPauseCampaign" data-bind="click:$root.changeStatus(4)" style="display:none;">Pause</button>
                             <button class="btn  btn-success" id="btnResumeCampagin" data-bind="click:$root.changeStatus(3)" style="display:none;">Resume</button>
                             <button class="btn  btn-warning" id="saveBtn" data-bind="click:$root.saveCampaignData, enable: $root.hasChangesOnQuestion, css: { 'btn-warning': $root.hasChangesOnQuestion }">Save</button>
@@ -99,14 +99,14 @@ else
 
                                     </div>
                                 </div>
-                                </div>
+                            </div>
 
                             <div class="form-group formcontrol-bg form-horizontal">
                                 <div class="col-lg-11">
                                     <div class="form-group" style="margin-top:10px; margin-left:-8px;">
                                         <div class="col-lg-8 text-campaign-left">
 
-                                            <label class="control-label text-right tooltip-float font20 floatNone" style="float:left !important; data-bind="text:$root.lbldetailsheading">Free Display Ad Details</label>
+                                            <label class="control-label text-right tooltip-float font20 floatNone" style="float:left !important; data-bind=" text:$root.lbldetailsheading">Free Display Ad Details</label>
                                         </div>
                                         @*<div class="col-lg-4">
                                                 <button class="btn  btn-success"  style="width:auto;" id="btnSubmitForApproval">Preview</button>
@@ -209,12 +209,12 @@ else
                                         <!-- ko if: !$root.isNewCampaign() -->
                                         <div class="radio col-lg-3">
 
-                                            
+
                                             <input type="radio" name="optionsRadiosStoreType" id="optionsRadiosVideos" value="1" data-bind="checked: Type, event:{ change: $root.OnChangeCampaignType }">
                                             <label for="optionsRadiosVideos">
                                                 Video
                                             </label>
-                                           
+
                                         </div>
                                         <!-- /ko -->
                                         <!-- ko if: $root.isNewCampaign() -->
@@ -312,7 +312,7 @@ else
                                                 <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Coupon Image 1 (200px x 200px)</label>
                                             </div>
                                             <div class="col-lg-8">
-                                             
+
                                                 <div style="margin-top:5px;">
                                                     <img style="height:80px;" data-bind="visible: CampaignImagePath() == ''" src="/Content/Images/Company_Default.png" />
                                                     <img style="height:80px;" data-bind="visible: CampaignImagePath() != '' ,attr: { src: CampaignImagePath }" />
@@ -332,7 +332,7 @@ else
                                                 <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Coupon Image 2 (200px x 200px)</label>
                                             </div>
                                             <div class="col-lg-8">
-                                               
+
                                                 <div style="margin-top:5px;">
                                                     <img style="height:80px;" data-bind="visible: couponImage2() == ''" src="/Content/Images/Company_Default.png" />
                                                     <img style="height:80px;" data-bind="visible: couponImage2() != '' ,attr: { src: couponImage2 }" />
@@ -352,11 +352,11 @@ else
                                                 <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Coupon Image 3 (200px x 200px)</label>
                                             </div>
                                             <div class="col-lg-8">
-                                               
+
                                                 <div style="margin-top:5px;">
                                                     <img style="height:80px;" data-bind="visible: CouponImage3() == ''" src="/Content/Images/Company_Default.png" />
                                                     <img style="height:80px;" data-bind="visible: CouponImage3() != '' ,attr: { src: CouponImage3 }" />
-                                                </div> 
+                                                </div>
                                                 <br />
                                                 <div class="fileUpload btn btn-primary">
                                                     <span>Upload </span>
@@ -372,7 +372,7 @@ else
                                                 <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Coupon Image 4 (200px x 200px)</label>
                                             </div>
                                             <div class="col-lg-8">
-                                              
+
                                                 <div style="margin-top:5px;">
                                                     <img style="height:80px;" data-bind="visible: CouponImage4() == ''" src="/Content/Images/Company_Default.png" />
                                                     <img style="height:80px;" data-bind="visible: CouponImage4() != '' ,attr: { src: CouponImage4 }" />
@@ -406,7 +406,7 @@ else
                                                 </a>
                                             </div>
                                         </div>
-                                     
+
                                         <div class="form-group">
                                             <div class="col-lg-3">
                                                 <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Actual Value</label>
@@ -417,12 +417,12 @@ else
                                                     <input type="number" class="form-control" id="txtActValue" placeholder="Actual Value" data-bind="value:CouponActualValue">
                                                     @*<span class="input-group-addon">.000</span>*@
                                                 </div>
-                                                
+
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="col-lg-3">
-                                                
+
                                                 <label for="txtCouponQtyValue" class="control-label text-right tooltip-float floatNone">Coupon Discounted Value</label>
                                             </div>
                                             <div class="col-lg-5">
@@ -431,7 +431,7 @@ else
                                                     <input type="number" class="form-control" id="txtCouponQtyValue" placeholder="Coupon Discounted Value" data-bind="value:CouponDiscountValue">
                                                     @*<span class="input-group-addon">.000</span>*@
                                                 </div>
-                                               
+
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -444,7 +444,7 @@ else
                                                     <input type="number" class="form-control" id="txtPurseValue" placeholder="Purse Swap Value" data-bind="value:CouponSwapValue">
                                                     @*<span class="input-group-addon">.000</span>*@
                                                 </div>
-                                                
+
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -460,10 +460,10 @@ else
                                                     <i class="fa fa-lg"></i>&nbsp;Manage Coupon Codes
                                                 </a>
                                                 @*<br />
-                                                <div class="fileUpload">
-                                                    <span>Upload CSV file </span>
-                                                    <input type="file" class="upload" id="campaignType_image_csvFile" data-bind="files: { onLoaded: $root.campaignCSVCallback}" />
-                                                </div>*@
+                                                    <div class="fileUpload">
+                                                        <span>Upload CSV file </span>
+                                                        <input type="file" class="upload" id="campaignType_image_csvFile" data-bind="files: { onLoaded: $root.campaignCSVCallback}" />
+                                                    </div>*@
                                             </div>
                                         </div>
                                         <div class="form-group" data-bind="visible: $root.UsedCouponQuantity() != 0">
@@ -493,14 +493,14 @@ else
                                                     <input type="number" class="form-control" id="txtPurseValue" placeholder="Coupon Cash4Ads Comission" data-bind="value:couponSmdComission">
                                                     @*<span class="input-group-addon">.000</span>*@
                                                 </div>
-                                                
+
                                             </div>
                                         </div>
-                                       
-                                       
-                                       
-                                        
-           
+
+
+
+
+
                                     </div>
                                 </div>
                                 <div class="col-lg-3" style="display:none;">
@@ -623,7 +623,7 @@ else
                                                     <button data-bind="click:$root.onAddLocation" class="locVisibility btn btn-info">Add Location</button>
 
                                                 </div>
-                                               
+
                                             </div><div class="clearfix"></div>
                                             <div class="count_token_opt_cnt_map locMap">
                                                 <div id="mapContainer" style="width: 100%; height: 200px;"></div>
@@ -986,7 +986,7 @@ else
 
                                         </div>*@
                                     <div class="form-group" style="margin-top:10px; margin-left:-8px;">
-                 
+
                                         <div class="col-lg-4 text-campaign-left Float-Left" style="margin-left:6px;">
                                             <label class="control-label text-right tooltip-float font20 floatNone" style="float:left !important; ">Quiz Question</label>
                                         </div>
@@ -1008,7 +1008,7 @@ else
                                             </a>
                                         </div>
                                     </div>
-                                  
+
                                     <div class="form-group" data-bind="visible: $root.quizQuestionStatus()">
                                         <div class="col-lg-4">
 
@@ -1072,7 +1072,7 @@ else
                             <div class="form-group formcontrol-bg" data-bind="visible:!$root.isDisplayCouponsAds()">
                                 <div class="col-lg-11">
                                     <div class="form-group" style="margin-bottom:20px; margin-top:20px;">
-                                      
+
                                         <div class="col-lg-4 text-campaign-left Float-Left" style="margin-left:6px;">
 
                                             <label class="control-label text-right tooltip-float font20 floatNone" style="float:left !important; ">Show voucher</label>
@@ -1130,11 +1130,11 @@ else
 
                                                 <div class="defaultImgUploadImageBtn" style="width:260px;">
 
-                                                        <div class="fileUpload btn btn-primary">
-                                                            <span>Upload </span>
-                                                            <input type="file" class="upload" id="Voucher_image_file" data-bind="files: { onLoaded: $root.VoucherImageCallback, fileFilter: 'image.*'}" />
-                                                        </div>
-                                                    
+                                                    <div class="fileUpload btn btn-primary">
+                                                        <span>Upload </span>
+                                                        <input type="file" class="upload" id="Voucher_image_file" data-bind="files: { onLoaded: $root.VoucherImageCallback, fileFilter: 'image.*'}" />
+                                                    </div>
+
 
                                                 </div>
                                             </div>
@@ -1147,7 +1147,7 @@ else
                                             <label for="txtVoucherDes" class="control-label text-right tooltip-float floatNone">Voucher Email Description</label>
                                         </div>
                                         <div class="col-lg-8">
-                                            <textarea class="form-control" id="txtVoucherDes" rows="2" placeholder="Enter voucher description  (500 characters)" data-bind="value: Voucher1Description" ></textarea>
+                                            <textarea class="form-control" id="txtVoucherDes" rows="2" placeholder="Enter voucher description  (500 characters)" data-bind="value: Voucher1Description"></textarea>
                                             @*<input type="text" class="form-control" id="txtVoucherDes" placeholder="Enter voucher description  (500 characters)" data-bind="value: Voucher1Description" maxlength="500">*@
 
                                         </div>
@@ -1210,7 +1210,7 @@ else
 
                                             <label class="control-label text-right tooltip-float font20 floatNone" style="float:left !important;    margin-left: 6px; ">Buy it button</label>
                                         </div>
-                                     
+
                                         <div class="col-lg-4 Float-Left" style="padding-top:3px;">
                                             <div class="onoffswitch">
                                                 <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchVoucherONOFf" data-bind="checked: $root.buyItQuestionStatus, event: { click: $root.addBuyItPrice}">
@@ -1295,23 +1295,23 @@ else
 
                                                 <div class="defaultImgUploadImageBtn" style="width:260px;">
 
-                                                        <div class="fileUpload btn btn-primary">
-                                                            <span>Upload </span>
-                                                            <input type="file" class="upload" id="buyIt_image_file" data-bind="files: { onLoaded: $root.buyItImageCallback, fileFilter: 'image.*'}" />
-                                                        </div>
-                                                  
+                                                    <div class="fileUpload btn btn-primary">
+                                                        <span>Upload </span>
+                                                        <input type="file" class="upload" id="buyIt_image_file" data-bind="files: { onLoaded: $root.buyItImageCallback, fileFilter: 'image.*'}" />
+                                                    </div>
+
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     @*<div class="form-group text-right">
-                                        <label class="text-right">
-                                            we only charge you when viewers have correctly answered the quiz question OR completed a sponsored game.
-                                            <br />
+                                            <label class="text-right">
+                                                we only charge you when viewers have correctly answered the quiz question OR completed a sponsored game.
+                                                <br />
 
-                                            We collect payment from your credit card every 4th day.
-                                        </label>
-                                    </div>*@
+                                                We collect payment from your credit card every 4th day.
+                                            </label>
+                                        </div>*@
 
                                 </div>
                                 <div class="col-lg-2" style="display:none;">
@@ -1408,7 +1408,7 @@ else
                                 <button class="btn  btn-success btnSubmitApproval" id="btnSubmitForApproval2" data-bind="click:$root.submitCampaignData, visible: $root.canSubmitForApproval" style="width: 100%;">Submit for Approval</button>
                             </div>
                             <div data-bind="visible:!$root.isDisplayCouponsAds()" style="margin-top: 16px;">
-                              
+
                                 <br />
                                 <button class="btn  btn-danger " id="btnStopAndTerminate" data-bind=" click:$root.terminateCampaign,visible: $root.isTerminateBtnVisible" style="width: 100%;margin-bottom:10px;">Stop & Terminate Early</button>
                                 <br />
@@ -1582,16 +1582,16 @@ else
 
                                             </div>
                                         </div>
-                                        <div style="background-color:white;color:black;padding: 10px; border: 5px;" >
+                                        <div style="background-color:white;color:black;padding: 10px; border: 5px;">
                                             <span>Possible Campaign spend  :  </span>
                                             <span data-bind="text:  '£ ' +(($root.pricePerclick() * $root.reachedAudience()).toFixed(2)) +'' " style="font-size:16px; font-weight:bold;">73 %</span><br />
                                             <span>Plus </span>
-                                            <span  style="font-size:16px; font-weight:bold;">£10.00 </span><span> Submission fee </span><br />
+                                            <span style="font-size:16px; font-weight:bold;">£10.00 </span><span> Submission fee </span><br />
 
                                         </div>
 
                                     </div>
-                                   
+
                                 </div>
                                 <button class="btn  btn-success btnSubmitApproval" id="btnSubmitForApproval" data-bind="click:$root.submitCampaignData, visible: $root.canSubmitForApproval" style="width: 100%;">Submit for Approval</button>
                                 <br />
@@ -1767,27 +1767,43 @@ else
         <div class="modal-dialog" style="    width: 400px !important;">
             <div class="modal-content">
                 <div class="col-lg-12">
-                    <div class="row" >
+                    <div class="row">
                         <img src="~/Images/topbarph.png" width="100%" />
 
                     </div>
-                    <div class="row" style="padding-top: 15px;">
-                        
+                    <div class="row" style="padding-top: 15px;  text-align: center;">
+                        <img data-bind="attr:{src: '/' + $root.advertiserLogo()}" style="    width: 100px;
+    margin-bottom: 20px;" />
                     </div>
                     <div style="    text-align: center;">
-                        <span data-bind="text: 'Quiz - Win ' +  ($root.quizPriceLbl()) + 'p'" style="    font-size: 20px;    color: #bb1923;"></span><br />
-                        <span data-bind="value: $root.campaignModel().VerifyQuestion"></span><br />
-                        <span>Select from below</span>
-                        <div data-bind="text: $root.campaignModel().Answer1">
+                        <span data-bind="text: 'Quiz - Win ' +  ($root.quizPriceLbl()) + 'p'" style="    font-size: 15px;    color: #bb1923;"></span><br /><br />
+                        <span data-bind="text: $root.campaignModel().VerifyQuestion" style="font-size: 20px;    color: green;"></span><br /><br />
+                        <span style="    font-size: 12px;    color: gray;">Select from below</span>
+                        <div data-bind="text: $root.campaignModel().Answer1" style="    width: 70%;
+    margin: auto;
+    padding: 7px;
+    background: #bb1923;
+    color: white;
+    font-size: 20px;
+    border-radius: 5px;
+    margin-top: 20px;">
 
                         </div>
-                        <div data-bind="text: $root.campaignModel().Answer2">
+                        <div data-bind="text: $root.campaignModel().Answer2" style="    width: 70%;
+    margin: auto;
+    padding: 7px;
+    background: #bb1923;
+    color: white;
+    font-size: 20px;
+    border-radius: 5px;
+    margin-top: 20px; margin-bottom: 20px;">
 
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer" style="    text-align: center;">
                     <span>Show Ad again :)</span>
+                    <br />
                 </div>
             </div>
         </div>
@@ -1838,379 +1854,379 @@ else
 
     </div>
 </div>
-    <script id="answersTemplate" type="text/html">
-        <!--ko if:Type() != 3 && Type() != 4 && Type() != 5 -->
-        <tr>
+<script id="answersTemplate" type="text/html">
+    <!--ko if:Type() != 3 && Type() != 4 && Type() != 5 -->
+    <tr>
 
-            <!--ko if:IncludeorExclude() == '0' -->
-            <td class="col-lg-2">
-                <p style="margin-top: 5px;margin-left: 12px;" >
-                
-                    <span data-bind="text: '(Excluded) ' + questionString() + ' = ' + answerString()"></span><span style="color:red;" data-bind="text:' (' + criteriaPrice() + 'p)'"></span>
-                </p>
-
-                @*<!-- ko if:   Type()  == "6" -->
-                    <p style="margin-top: 5px;margin-left: 12px;">
-                        <span data-bind="text: '(Excluded) ' +  questionString() + ' = ' "></span>
-                        <img data-bind="attr:{src: answerString()}" width="80" />
-                    </p>
-                    <!-- /ko -->*@
-            </td>
-            <!--/ko-->
-            <!--ko if:IncludeorExclude() == '1'-->
-            <td class="col-lg-2">
-
-                <p style="margin-top: 5px;margin-left: 12px;" >
-                    <span data-bind="text: '(Included) ' + questionString() + ' = ' + answerString() "></span><span style="color:red;" data-bind="text:' (' + criteriaPrice() + 'p)'"></span>
-                </p>
-                @*<!-- ko if:   Type()  == "6" -->
-                    <p style="margin-top: 5px;margin-left: 12px;">
-                        <span data-bind="text: '(Included) ' + questionString() + ' = ' "></span>
-                        <img data-bind="attr:{src: answerString()}" width="80" />
-                    </p>
-                    <!-- /ko -->*@
-            </td>
-            <!--/ko-->
-
-
-            <td class="col-lg-1" style=" padding: 0px !important; text-align:right;">
-                <a class="table-link">
-                    <span class="fa-stack">
-                        <i class="fa fa-square fa-stack-2x"></i>
-                        <i class="fa fa-pencil fa-stack-1x fa-inverse" data-bind="click:$root.onEditCriteria" data-toggle="modal" data-target=".bs-example-modal-lg"></i>
-                    </span>
-
-                </a>
-            </td>
-            <td class="col-lg-1" style=" padding: 0px !important;">
-
-                <a class="table-link danger">
-                    <span class="fa-stack">
-                        <i class="fa fa-square fa-stack-2x"></i>
-                        <i class="fa fa-trash-o fa-stack-1x fa-inverse" data-bind="click:$root.onDeleteCriteria"></i>
-                    </span>
-
-                </a>
-            </td>
-        </tr>
-
-        <!--/ko-->
-    </script>
-    @*<script id="AdCampaignLocationTemplate" type="text/html">
-            <div class="count_city_newcnt">
-                <!--ko if:CityID() == 0 || CityID() == null-->
-                <span class="form-control lang_nr_box areaCity" data-bind="text:Country " style=" "></span>
-                <!--/ko-->
-                <!--ko if:CityID() != 0 && CityID() != null-->
-                <span class="form-control lang_nr_box areaCity" data-bind="text:City " style=" "></span>
-                <!--/ko-->
-                <!--ko if:Radius() != 0 && Radius() != null && Radius() != undefined-->
-                <!--ko if:IncludeorExclude() == '1'-->
-                <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'Included (' + Radius() +')' "></span>
-                <!--/ko-->
-                <!--ko if:IncludeorExclude() == '0' -->
-                <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'Excluded (' + Radius() +')' "></span>
-                <!--/ko-->
-                <!--/ko-->
-
-
-                <a id="" data-bind="click:$root.onRemoveLocation" title=" delete" class="lang_delSurvey"> <i class="fa fa-times "></i></a>
-            </div>
-            <div class="clear"></div>
-        </script>*@
-    <script id="AdCampaignLanguageTemplate" type="text/html">
-        <div class="count_city_newcnt">
-            <!--ko if:Type() == 3 -->
-            <span class="form-control lang_nr_box areaCity" data-bind="text:Language() " style=" "></span>
-            <!--ko if:IncludeorExclude() == '1'-->
-            <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Included)' "></span>
-            <!--/ko-->
-            <!--ko if:IncludeorExclude() == '0' -->
-            <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Excluded)' "></span>
-            <!--/ko-->
-            <a id="" data-bind="click:$root.onRemoveLanguage" title=" delete" class="lang_delSurvey"> <i class="fa fa-times "></i></a>
-            <!--/ko-->
-        </div>
-        <div class="clear"></div>
-    </script>
-    <script id="AdCampaignIndustryTemplate" type="text/html">
-        <div class="count_city_newcnt">
-            <!--ko if:Type() == 4 -->
-            <span class="form-control lang_nr_box areaCity" data-bind="text:Industry() " style=" "></span>
-            <!--ko if:IncludeorExclude() == '1'-->
-            <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Included)' "></span>
-            <!--/ko-->
-            <!--ko if:IncludeorExclude() == '0' -->
-            <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Excluded)' "></span>
-            <!--/ko-->
-            <a id="" data-bind="click:$root.onRemoveIndustry" title=" delete" class="lang_delSurvey"> <i class="fa fa-times "></i></a>
-            <!--/ko-->
-        </div>
-        <div class="clear"></div>
-    </script>
-    <script id="targetCriteriasAudienceTemplate" type="text/html">
-        <!--ko if:Type() != 3 && Type() != 4 && Type() != 5 -->
         <!--ko if:IncludeorExclude() == '0' -->
-        <li>
-            <!-- ko if:   Type() == "1" -->
-            <p class="aud_licontent" data-bind="text: '(Excluded) ' + questionString() + ' = ' + answerString()">
+        <td class="col-lg-2">
+            <p style="margin-top: 5px;margin-left: 12px;">
+
+                <span data-bind="text: '(Excluded) ' + questionString() + ' = ' + answerString()"></span><span style="color:red;" data-bind="text:' (' + criteriaPrice() + 'p)'"></span>
             </p>
-            <!-- /ko -->
-            <!-- ko if:   Type()  == "2" -->
-            <p class="aud_licontent">
-                <span data-bind="text: '(Excluded) ' +  questionString() + ' = ' "></span>
-                <img data-bind="attr:{src: answerString()}" width="80" />
-            </p>
-            <!-- /ko -->
-        </li>
+
+            @*<!-- ko if:   Type()  == "6" -->
+                <p style="margin-top: 5px;margin-left: 12px;">
+                    <span data-bind="text: '(Excluded) ' +  questionString() + ' = ' "></span>
+                    <img data-bind="attr:{src: answerString()}" width="80" />
+                </p>
+                <!-- /ko -->*@
+        </td>
         <!--/ko-->
         <!--ko if:IncludeorExclude() == '1'-->
-        <li>
-            <!-- ko if:   Type() == "1" -->
-            <p class="aud_licontent" data-bind="text: '(Included) ' + questionString() + ' = ' + answerString()">
-            </p>
-            <!-- /ko -->
-            <!-- ko if:   Type()  == "2" -->
-            <p class="aud_licontent">
-                <span data-bind="text: '(Included) ' + questionString() + ' = ' "></span>
-                <img data-bind="attr:{src: answerString()}" width="80" />
-            </p>
-            <!-- /ko -->
-        </li>
-        <!--/ko-->
-        <!--/ko-->
-    </script>
-    <script id="targetIndustryAudienceTemplate" type="text/html">
+        <td class="col-lg-2">
 
-        <!--ko if:Type() == 4 -->
-        <li>
+            <p style="margin-top: 5px;margin-left: 12px;">
+                <span data-bind="text: '(Included) ' + questionString() + ' = ' + answerString() "></span><span style="color:red;" data-bind="text:' (' + criteriaPrice() + 'p)'"></span>
+            </p>
+            @*<!-- ko if:   Type()  == "6" -->
+                <p style="margin-top: 5px;margin-left: 12px;">
+                    <span data-bind="text: '(Included) ' + questionString() + ' = ' "></span>
+                    <img data-bind="attr:{src: answerString()}" width="80" />
+                </p>
+                <!-- /ko -->*@
+        </td>
+        <!--/ko-->
+
+
+        <td class="col-lg-1" style=" padding: 0px !important; text-align:right;">
+            <a class="table-link">
+                <span class="fa-stack">
+                    <i class="fa fa-square fa-stack-2x"></i>
+                    <i class="fa fa-pencil fa-stack-1x fa-inverse" data-bind="click:$root.onEditCriteria" data-toggle="modal" data-target=".bs-example-modal-lg"></i>
+                </span>
+
+            </a>
+        </td>
+        <td class="col-lg-1" style=" padding: 0px !important;">
+
+            <a class="table-link danger">
+                <span class="fa-stack">
+                    <i class="fa fa-square fa-stack-2x"></i>
+                    <i class="fa fa-trash-o fa-stack-1x fa-inverse" data-bind="click:$root.onDeleteCriteria"></i>
+                </span>
+
+            </a>
+        </td>
+    </tr>
+
+    <!--/ko-->
+</script>
+@*<script id="AdCampaignLocationTemplate" type="text/html">
+        <div class="count_city_newcnt">
+            <!--ko if:CityID() == 0 || CityID() == null-->
+            <span class="form-control lang_nr_box areaCity" data-bind="text:Country " style=" "></span>
+            <!--/ko-->
+            <!--ko if:CityID() != 0 && CityID() != null-->
+            <span class="form-control lang_nr_box areaCity" data-bind="text:City " style=" "></span>
+            <!--/ko-->
+            <!--ko if:Radius() != 0 && Radius() != null && Radius() != undefined-->
             <!--ko if:IncludeorExclude() == '1'-->
-            <span class="aud_licontent" data-bind="text:'(Included)' + Industry() "></span>
+            <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'Included (' + Radius() +')' "></span>
             <!--/ko-->
             <!--ko if:IncludeorExclude() == '0' -->
-            <span class="aud_licontent" data-bind="text:'(Excluded)' + Industry() "></span>
+            <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'Excluded (' + Radius() +')' "></span>
             <!--/ko-->
-        </li>
-        <!--/ko-->
-
-
-    </script>
-    <script id="targetEducationAudienceTemplate" type="text/html">
-
-        <!--ko if:Type() == 5 -->
-        <li>
-            <!--ko if:IncludeorExclude() == '1'-->
-            <span class="aud_licontent" data-bind="text:'(Included)' + Education() "></span>
             <!--/ko-->
-            <!--ko if:IncludeorExclude() == '0' -->
-            <span class="aud_licontent" data-bind="text:'(Excluded)' + Education() "></span>
-            <!--/ko-->
-        </li>
-        <!--/ko-->
 
 
-    </script>
-    <script id="targetLanguageAudienceTemplate" type="text/html">
-
-
+            <a id="" data-bind="click:$root.onRemoveLocation" title=" delete" class="lang_delSurvey"> <i class="fa fa-times "></i></a>
+        </div>
+        <div class="clear"></div>
+    </script>*@
+<script id="AdCampaignLanguageTemplate" type="text/html">
+    <div class="count_city_newcnt">
         <!--ko if:Type() == 3 -->
-        <li>
-            <!--ko if:IncludeorExclude() == '1'-->
-            <span class="aud_licontent" data-bind="text:'(Included)' + Language()"></span>
-            <!--/ko-->
-            <!--ko if:IncludeorExclude() == '0' -->
-            <span class="aud_licontent" data-bind="text:'(Excluded)' + Language() "></span>
-            <!--/ko-->
+        <span class="form-control lang_nr_box areaCity" data-bind="text:Language() " style=" "></span>
+        <!--ko if:IncludeorExclude() == '1'-->
+        <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Included)' "></span>
+        <!--/ko-->
+        <!--ko if:IncludeorExclude() == '0' -->
+        <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Excluded)' "></span>
+        <!--/ko-->
+        <a id="" data-bind="click:$root.onRemoveLanguage" title=" delete" class="lang_delSurvey"> <i class="fa fa-times "></i></a>
+        <!--/ko-->
+    </div>
+    <div class="clear"></div>
+</script>
+<script id="AdCampaignIndustryTemplate" type="text/html">
+    <div class="count_city_newcnt">
+        <!--ko if:Type() == 4 -->
+        <span class="form-control lang_nr_box areaCity" data-bind="text:Industry() " style=" "></span>
+        <!--ko if:IncludeorExclude() == '1'-->
+        <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Included)' "></span>
+        <!--/ko-->
+        <!--ko if:IncludeorExclude() == '0' -->
+        <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Excluded)' "></span>
+        <!--/ko-->
+        <a id="" data-bind="click:$root.onRemoveIndustry" title=" delete" class="lang_delSurvey"> <i class="fa fa-times "></i></a>
+        <!--/ko-->
+    </div>
+    <div class="clear"></div>
+</script>
+<script id="targetCriteriasAudienceTemplate" type="text/html">
+    <!--ko if:Type() != 3 && Type() != 4 && Type() != 5 -->
+    <!--ko if:IncludeorExclude() == '0' -->
+    <li>
+        <!-- ko if:   Type() == "1" -->
+        <p class="aud_licontent" data-bind="text: '(Excluded) ' + questionString() + ' = ' + answerString()">
+        </p>
+        <!-- /ko -->
+        <!-- ko if:   Type()  == "2" -->
+        <p class="aud_licontent">
+            <span data-bind="text: '(Excluded) ' +  questionString() + ' = ' "></span>
+            <img data-bind="attr:{src: answerString()}" width="80" />
+        </p>
+        <!-- /ko -->
+    </li>
+    <!--/ko-->
+    <!--ko if:IncludeorExclude() == '1'-->
+    <li>
+        <!-- ko if:   Type() == "1" -->
+        <p class="aud_licontent" data-bind="text: '(Included) ' + questionString() + ' = ' + answerString()">
+        </p>
+        <!-- /ko -->
+        <!-- ko if:   Type()  == "2" -->
+        <p class="aud_licontent">
+            <span data-bind="text: '(Included) ' + questionString() + ' = ' "></span>
+            <img data-bind="attr:{src: answerString()}" width="80" />
+        </p>
+        <!-- /ko -->
+    </li>
+    <!--/ko-->
+    <!--/ko-->
+</script>
+<script id="targetIndustryAudienceTemplate" type="text/html">
+
+    <!--ko if:Type() == 4 -->
+    <li>
+        <!--ko if:IncludeorExclude() == '1'-->
+        <span class="aud_licontent" data-bind="text:'(Included)' + Industry() "></span>
+        <!--/ko-->
+        <!--ko if:IncludeorExclude() == '0' -->
+        <span class="aud_licontent" data-bind="text:'(Excluded)' + Industry() "></span>
+        <!--/ko-->
+    </li>
+    <!--/ko-->
+
+
+</script>
+<script id="targetEducationAudienceTemplate" type="text/html">
+
+    <!--ko if:Type() == 5 -->
+    <li>
+        <!--ko if:IncludeorExclude() == '1'-->
+        <span class="aud_licontent" data-bind="text:'(Included)' + Education() "></span>
+        <!--/ko-->
+        <!--ko if:IncludeorExclude() == '0' -->
+        <span class="aud_licontent" data-bind="text:'(Excluded)' + Education() "></span>
+        <!--/ko-->
+    </li>
+    <!--/ko-->
+
+
+</script>
+<script id="targetLanguageAudienceTemplate" type="text/html">
+
+
+    <!--ko if:Type() == 3 -->
+    <li>
+        <!--ko if:IncludeorExclude() == '1'-->
+        <span class="aud_licontent" data-bind="text:'(Included)' + Language()"></span>
+        <!--/ko-->
+        <!--ko if:IncludeorExclude() == '0' -->
+        <span class="aud_licontent" data-bind="text:'(Excluded)' + Language() "></span>
+        <!--/ko-->
+    </li>
+    <!--/ko-->
+
+
+
+</script>
+<script id="targetLocationAudienceTemplate" type="text/html">
+    <li>
+        <!--ko if:CityID() == 0 || CityID() == null-->
+        <!--ko if:Radius() != 0 && Radius() != null && Radius() != undefined-->
+        <!--ko if:IncludeorExclude() == '1'-->
+
+        <span class="aud_licontent" data-bind="text:'Included (' + Radius() +') ' + Country()"></span>
+
+        <!--/ko-->
+        <!--ko if:IncludeorExclude() == '0' -->
+
+        <span class="aud_licontent" data-bind="text:'Excluded (' + Radius() +') ' + Country()"></span>
+
+        <!--/ko-->
+        <!--/ko-->
+        <!--ko if:Radius() == null || Radius() == undefined-->
+        <!--ko if:IncludeorExclude() == '1'-->
+
+        <span class="aud_licontent" data-bind="text:'(Included) ' + Country()"></span>
+
+        <!--/ko-->
+        <!--ko if:IncludeorExclude() == '0' -->
+
+        <span class="aud_licontent" data-bind="text:'(Excluded) ' + Country()"></span>
+
+        <!--/ko-->
+        <!--/ko-->
+        <!--/ko-->
+        <!--ko if:CityID() != 0 && CityID() != null-->
+        <!--ko if:Radius() != 0 && Radius() != null && Radius() != undefined-->
+        <!--ko if:IncludeorExclude() == '1'-->
+
+        <span class="aud_licontent" data-bind="text:'Included (' + Radius() +') ' + City() "></span>
+
+        <!--/ko-->
+        <!--ko if:IncludeorExclude() == '0' -->
+
+        <span class="aud_licontent" data-bind="text:'Excluded (' + Radius() +') ' + City()"></span>
+
+        <!--/ko-->
+        <!--/ko-->
+        <!--ko if:Radius() == null || Radius() == undefined-->
+        <!--ko if:IncludeorExclude() == '1'-->
+
+        <span class="aud_licontent" data-bind="text:'(Included) ' + City() "></span>
+
+        <!--/ko-->
+        <!--ko if:IncludeorExclude() == '0' -->
+
+        <span class="aud_licontent" data-bind="text:'(Excluded) ' + City()"></span>
+
+        <!--/ko-->
+        <!--/ko-->
+        <!--/ko-->
+    </li>
+</script>
+<script id="AdCampaignEducationTemplate" type="text/html">
+    <div class="count_city_newcnt">
+        <!--ko if:Type() == 5 -->
+        <span class="form-control lang_nr_box areaCity" data-bind="text:Education() " style=" "></span>
+        <!--ko if:IncludeorExclude() == '1'-->
+        <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Included)' "></span>
+        <!--/ko-->
+        <!--ko if:IncludeorExclude() == '0' -->
+        <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Excluded)' "></span>
+        <!--/ko-->
+        <a id="" data-bind="click:$root.onRemoveEducation" title=" delete" class="lang_delSurvey"> <i class="fa fa-times "></i></a>
+        <!--/ko-->
+    </div>
+    <div class="clear"></div>
+</script>
+<script id="AdCampaignLocationTemplate" type="text/html">
+    <li>
+        <ul class="_53ga">
+            <li>
+                <div class="_53gb clearfix">
+                    <div class="_4bl8 _4bl7">
+                        <span class="_47la">
+                            <button type="button" title="Remove" class="_50zy _50zz _50z- _5upp _42ft" style="display:none;">
+                                <span>Remove</span>
+                            </button>
+                        </span>
+                    </div>
+                    <div class="_4bl9">
+                        <span class="_3bsr">
+                            <span class="_3bss" data-bind="text:name">
+
+                            </span><span></span>
+                        </span>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <ul>
+                    <!-- ko template: { name: 'SubAdCampaignLocationTemplate' , foreach: $root.findLocationsInCountry(id) } --><!-- /ko -->
+
+                </ul>
+            </li>
+        </ul>
+    </li>
+</script>
+<script id="SubAdCampaignLocationTemplate" type="text/html">
+    <div class="count_city_newcnt">
+        <!--ko if:CityID() == 0 || CityID() == null-->
+        <li class="_40m_">
+            <div class="clearfix">
+                <div class="_4bl7">
+                    <!--ko if:IncludeorExclude() == '1'-->
+                    <i class="_40n0 img sp_NQc91B1T0mb sx_d7a1cb" title="Included"></i>
+                    <!--/ko-->
+                    <!--ko if:IncludeorExclude() == '0' -->
+                    <i class="_40n0 img sp_NQc91B1T0mb sx_999ca6" title="Excluded"></i>
+                    <!--/ko-->
+
+                </div>
+                <div class="_4bl8 _4bl7">
+                    <span class="_47la">
+                        <a title="Remove" class="lang_delSurvey _42ft" data-bind="click:$root.onRemoveLocation">
+                            <i class="fa fa-times "></i>
+                        </a>
+                    </span>
+                </div>
+                <div class="_4bl8 _4bl7">
+                    <div>
+
+                    </div>
+                </div>
+                <div class="_4bl9">
+                    <div class="fwb">
+                        <span class="_3bsr"><span class="_3bss" data-bind="text:Country "></span><span></span></span>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <!--/ko-->
+        <!--ko if:CityID() != 0 && CityID() != null-->
+        <li class="_40m_">
+            <div class="clearfix">
+                <div class="_4bl7">
+                    <!--ko if:IncludeorExclude() == '1'-->
+                    <i class="_40n0 img sp_NQc91B1T0mb sx_d7a1cb" title="Included"></i>
+                    <!--/ko-->
+                    <!--ko if:IncludeorExclude() == '0' -->
+                    <i class="_40n0 img sp_NQc91B1T0mb sx_999ca6" title="Excluded"></i>
+                    <!--/ko-->
+                </div>
+                <div class="_4bl8 _4bl7">
+                    <span class="_47la">
+                        <a title="Remove" class="lang_delSurvey _42ft" data-bind="click:$root.onRemoveLocation">
+                            <i class="fa fa-times "></i>
+                        </a>
+                    </span>
+                </div>
+                <div class="_4bl9">
+                    <div class="fwb">
+                        <span class="_3bsr">
+                            <span style="float:left;">
+                                <span data-bind="text:City "></span>
+                                <span>
+                                    <span>, </span><span data-bind="text:Country "></span>
+                                </span>
+                            </span>
+                            <span style="float:left;">
+                                <select class="form-control radius_ddp" data-bind="value: Radius">
+                                    <option value="0">No radius</option>
+                                    <option value="10">10 km</option>
+                                    <option value="25">25 km</option>
+                                    <option value="40">40 km</option>
+                                    <option value="100">100+ km</option>
+                                </select>
+                            </span>
+                        </span>
+                    </div>
+                </div>
+            </div>
         </li>
         <!--/ko-->
 
 
 
-    </script>
-    <script id="targetLocationAudienceTemplate" type="text/html">
-        <li>
-            <!--ko if:CityID() == 0 || CityID() == null-->
-            <!--ko if:Radius() != 0 && Radius() != null && Radius() != undefined-->
-            <!--ko if:IncludeorExclude() == '1'-->
-
-            <span class="aud_licontent" data-bind="text:'Included (' + Radius() +') ' + Country()"></span>
-
-            <!--/ko-->
-            <!--ko if:IncludeorExclude() == '0' -->
-
-            <span class="aud_licontent" data-bind="text:'Excluded (' + Radius() +') ' + Country()"></span>
-
-            <!--/ko-->
-            <!--/ko-->
-            <!--ko if:Radius() == null || Radius() == undefined-->
-            <!--ko if:IncludeorExclude() == '1'-->
-
-            <span class="aud_licontent" data-bind="text:'(Included) ' + Country()"></span>
-
-            <!--/ko-->
-            <!--ko if:IncludeorExclude() == '0' -->
-
-            <span class="aud_licontent" data-bind="text:'(Excluded) ' + Country()"></span>
-
-            <!--/ko-->
-            <!--/ko-->
-            <!--/ko-->
-            <!--ko if:CityID() != 0 && CityID() != null-->
-            <!--ko if:Radius() != 0 && Radius() != null && Radius() != undefined-->
-            <!--ko if:IncludeorExclude() == '1'-->
-
-            <span class="aud_licontent" data-bind="text:'Included (' + Radius() +') ' + City() "></span>
-
-            <!--/ko-->
-            <!--ko if:IncludeorExclude() == '0' -->
-
-            <span class="aud_licontent" data-bind="text:'Excluded (' + Radius() +') ' + City()"></span>
-
-            <!--/ko-->
-            <!--/ko-->
-            <!--ko if:Radius() == null || Radius() == undefined-->
-            <!--ko if:IncludeorExclude() == '1'-->
-
-            <span class="aud_licontent" data-bind="text:'(Included) ' + City() "></span>
-
-            <!--/ko-->
-            <!--ko if:IncludeorExclude() == '0' -->
-
-            <span class="aud_licontent" data-bind="text:'(Excluded) ' + City()"></span>
-
-            <!--/ko-->
-            <!--/ko-->
-            <!--/ko-->
-        </li>
-    </script>
-    <script id="AdCampaignEducationTemplate" type="text/html">
-        <div class="count_city_newcnt">
-            <!--ko if:Type() == 5 -->
-            <span class="form-control lang_nr_box areaCity" data-bind="text:Education() " style=" "></span>
-            <!--ko if:IncludeorExclude() == '1'-->
-            <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Included)' "></span>
-            <!--/ko-->
-            <!--ko if:IncludeorExclude() == '0' -->
-            <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Excluded)' "></span>
-            <!--/ko-->
-            <a id="" data-bind="click:$root.onRemoveEducation" title=" delete" class="lang_delSurvey"> <i class="fa fa-times "></i></a>
-            <!--/ko-->
-        </div>
-        <div class="clear"></div>
-    </script>
-    <script id="AdCampaignLocationTemplate" type="text/html">
-        <li>
-            <ul class="_53ga">
-                <li>
-                    <div class="_53gb clearfix">
-                        <div class="_4bl8 _4bl7">
-                            <span class="_47la">
-                                <button type="button" title="Remove" class="_50zy _50zz _50z- _5upp _42ft" style="display:none;">
-                                    <span>Remove</span>
-                                </button>
-                            </span>
-                        </div>
-                        <div class="_4bl9">
-                            <span class="_3bsr">
-                                <span class="_3bss" data-bind="text:name">
-
-                                </span><span></span>
-                            </span>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <ul>
-                        <!-- ko template: { name: 'SubAdCampaignLocationTemplate' , foreach: $root.findLocationsInCountry(id) } --><!-- /ko -->
-
-                    </ul>
-                </li>
-            </ul>
-        </li>
-    </script>
-    <script id="SubAdCampaignLocationTemplate" type="text/html">
-        <div class="count_city_newcnt">
-            <!--ko if:CityID() == 0 || CityID() == null-->
-            <li class="_40m_">
-                <div class="clearfix">
-                    <div class="_4bl7">
-                        <!--ko if:IncludeorExclude() == '1'-->
-                        <i class="_40n0 img sp_NQc91B1T0mb sx_d7a1cb" title="Included"></i>
-                        <!--/ko-->
-                        <!--ko if:IncludeorExclude() == '0' -->
-                        <i class="_40n0 img sp_NQc91B1T0mb sx_999ca6" title="Excluded"></i>
-                        <!--/ko-->
-
-                    </div>
-                    <div class="_4bl8 _4bl7">
-                        <span class="_47la">
-                            <a title="Remove" class="lang_delSurvey _42ft" data-bind="click:$root.onRemoveLocation">
-                                <i class="fa fa-times "></i>
-                            </a>
-                        </span>
-                    </div>
-                    <div class="_4bl8 _4bl7">
-                        <div>
-
-                        </div>
-                    </div>
-                    <div class="_4bl9">
-                        <div class="fwb">
-                            <span class="_3bsr"><span class="_3bss" data-bind="text:Country "></span><span></span></span>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <!--/ko-->
-            <!--ko if:CityID() != 0 && CityID() != null-->
-            <li class="_40m_">
-                <div class="clearfix">
-                    <div class="_4bl7">
-                        <!--ko if:IncludeorExclude() == '1'-->
-                        <i class="_40n0 img sp_NQc91B1T0mb sx_d7a1cb" title="Included"></i>
-                        <!--/ko-->
-                        <!--ko if:IncludeorExclude() == '0' -->
-                        <i class="_40n0 img sp_NQc91B1T0mb sx_999ca6" title="Excluded"></i>
-                        <!--/ko-->
-                    </div>
-                    <div class="_4bl8 _4bl7">
-                        <span class="_47la">
-                            <a title="Remove" class="lang_delSurvey _42ft" data-bind="click:$root.onRemoveLocation">
-                                <i class="fa fa-times "></i>
-                            </a>
-                        </span>
-                    </div>
-                    <div class="_4bl9">
-                        <div class="fwb">
-                            <span class="_3bsr">
-                                <span style="float:left;">
-                                    <span data-bind="text:City "></span>
-                                    <span>
-                                        <span>, </span><span data-bind="text:Country "></span>
-                                    </span>
-                                </span>
-                                <span style="float:left;">
-                                    <select class="form-control radius_ddp" data-bind="value: Radius">
-                                        <option value="0">No radius</option>
-                                        <option value="10">10 km</option>
-                                        <option value="25">25 km</option>
-                                        <option value="40">40 km</option>
-                                        <option value="100">100+ km</option>
-                                    </select>
-                                </span>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <!--/ko-->
-
-
-
-        </div>
-        <div class="clear"></div>
-    </script>
-    <script>
+    </div>
+    <div class="clear"></div>
+</script>
+<script>
         //var map;
         //var center;
         //var circles = [];
@@ -2289,45 +2305,45 @@ else
                 $(".aud_cnt").css("width", "95%");
             }
         });
-    </script>
+</script>
 
-    <script id="profileQuestionTiles" type="text/html">
-        <div class="list">
-            <div class="parent-list-title" data-bind="click:$root.onChangeProfileQuestion"><span data-bind="text:Question"></span></div>
-            <div class="listview set-border padding10 list-type-tiles chlidList" data-role="listview">
-                <!-- ko template: { name: 'profileQuestionAnsTiles' , foreach: $root.profileAnswerList } --><!-- /ko -->
+<script id="profileQuestionTiles" type="text/html">
+    <div class="list">
+        <div class="parent-list-title" data-bind="click:$root.onChangeProfileQuestion"><span data-bind="text:Question"></span></div>
+        <div class="listview set-border padding10 list-type-tiles chlidList" data-role="listview">
+            <!-- ko template: { name: 'profileQuestionAnsTiles' , foreach: $root.profileAnswerList } --><!-- /ko -->
 
-                <div class="clear-both"></div>
-            </div>
             <div class="clear-both"></div>
         </div>
-    </script>
-    <script id="profileQuestionAnsTiles" type="text/html">
-        <div class="list childList" data-bind="click:$root.saveProfileQuestion" data-dismiss="modal"> <span class="list-title" data-bind="text:Answer"></span> </div>
-    </script>
-    <script id="surveyQuestionTiles" type="text/html">
-        <div class="list">
-            <div class="parent-list-title"><span data-bind="text:VerifyQuestion"></span></div>
-            <div class="listview set-border padding10 list-type-tiles chlidList" data-role="listview">
-                <div class="list childList leftImg" data-bind="click:$root.saveCriteria.bind($data, 1)"><span class="list-title" data-bind="text:Answer1"></span> </div>
-                <div class="list childList rightImg" data-bind="click:$root.saveCriteria.bind($data, 2)"> <span class="list-title" data-bind="text:Answer2"></span> </div>
-                <div class="clear-both"></div>
-            </div>
+        <div class="clear-both"></div>
+    </div>
+</script>
+<script id="profileQuestionAnsTiles" type="text/html">
+    <div class="list childList" data-bind="click:$root.saveProfileQuestion" data-dismiss="modal"> <span class="list-title" data-bind="text:Answer"></span> </div>
+</script>
+<script id="surveyQuestionTiles" type="text/html">
+    <div class="list">
+        <div class="parent-list-title"><span data-bind="text:VerifyQuestion"></span></div>
+        <div class="listview set-border padding10 list-type-tiles chlidList" data-role="listview">
+            <div class="list childList leftImg" data-bind="click:$root.saveCriteria.bind($data, 1)"><span class="list-title" data-bind="text:Answer1"></span> </div>
+            <div class="list childList rightImg" data-bind="click:$root.saveCriteria.bind($data, 2)"> <span class="list-title" data-bind="text:Answer2"></span> </div>
             <div class="clear-both"></div>
         </div>
-    </script>
-    <script id="criteriaEditorTemplate" type="text/html">
-        <div class="list childList" data-bind="click:$root.updateProfileQuestion,css: { 'active': $root.selectedCriteria().PQAnswerID() == PqAnswerId }" data-dismiss="modal"> <span class="list-title" data-bind="text:Answer"></span> </div>
-    </script>
-    
-    
-    <script id="ListOfSelectedCouponCats" type="text/html">
-        <!--ko if:IsSelected == true-->
-        <span data-bind="text: Name">
+        <div class="clear-both"></div>
+    </div>
+</script>
+<script id="criteriaEditorTemplate" type="text/html">
+    <div class="list childList" data-bind="click:$root.updateProfileQuestion,css: { 'active': $root.selectedCriteria().PQAnswerID() == PqAnswerId }" data-dismiss="modal"> <span class="list-title" data-bind="text:Answer"></span> </div>
+</script>
 
-        </span>
-        <span>, </span>
-        <!--/ko-->
-       
-    </script>
-    
+
+<script id="ListOfSelectedCouponCats" type="text/html">
+    <!--ko if:IsSelected == true-->
+    <span data-bind="text: Name">
+
+    </span>
+    <span>, </span>
+    <!--/ko-->
+
+</script>
+

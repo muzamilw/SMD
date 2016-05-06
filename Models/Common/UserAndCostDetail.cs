@@ -34,5 +34,7 @@ namespace SMD.Models.Common
 
         public string GeoLat { get; set; }
         public string GeoLong { get; set; }
+
+        public string UserProfileImage { get; set; }
     }
 }

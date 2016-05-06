@@ -430,7 +430,8 @@ namespace SMD.MIS.ModelMappers
                 FiveDayDeliveryClausePrice = source.FiveDayDeliveryClausePrice,
                 QuizQuestionClausePrice = source.QuizQuestionClausePrice,
                 TenDayDeliveryClausePrice = source.TenDayDeliveryClausePrice,
-                ThreeDayDeliveryClausePrice = source.ThreeDayDeliveryClausePrice
+                ThreeDayDeliveryClausePrice = source.ThreeDayDeliveryClausePrice,
+                UserProfileImage = source.UserProfileImage 
             };
 
 
