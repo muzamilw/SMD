@@ -17,5 +17,6 @@ namespace SMD.Models.DomainModels
         public Nullable<int> ownerCompanyId { get; set; }
         public Nullable<double> CurentBalance { get; set; }
         public long CampaignID { get; set; }
+        public string Email { get; set; }
     }
 }

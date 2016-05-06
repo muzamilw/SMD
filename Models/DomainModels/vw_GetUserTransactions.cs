@@ -16,5 +16,6 @@ namespace SMD.Models.DomainModels
         public string userId { get; set; }
         public Nullable<double> CurentBalance { get; set; }
         public Nullable<double> AccountBalance { get; set; }
+        public string VoucherTitle { get; set; }
     }
 }
