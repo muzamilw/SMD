@@ -633,6 +633,26 @@
           <Property Name="Description" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'SMDDev.dbo.vw_Cash4AdsReport' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_Cash4AdsReport">
+          <Key>
+            <PropertyRef Name="tid" />
+            <PropertyRef Name="userId" />
+            <PropertyRef Name="CampaignID" />
+          </Key>
+          <Property Name="tid" Type="bigint" Nullable="false" />
+          <Property Name="TDate" Type="datetime" />
+          <Property Name="Deposit" Type="int" />
+          <Property Name="Withdrawal" Type="float" />
+          <Property Name="Transaction" Type="nvarchar" MaxLength="209" />
+          <Property Name="userId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="AccountBalance" Type="float" />
+          <Property Name="CurentBalance" Type="float" />
+          <Property Name="CampaignID" Type="bigint" Nullable="false" />
+          <Property Name="VoucherTitle" Type="nvarchar" MaxLength="200" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'SMDDev.dbo.vw_GetUserTransactions' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vw_GetUserTransactions">
           <Key>
@@ -647,6 +667,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_GetUserTransactions' does not have a
           <Property Name="userId" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="AccountBalance" Type="float" />
           <Property Name="CurentBalance" Type="float" />
+          <Property Name="VoucherTitle" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -665,6 +686,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Property Name="ownerCompanyId" Type="int" />
           <Property Name="CurentBalance" Type="float" />
           <Property Name="CampaignID" Type="bigint" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
         </EntityType>
         <Association Name="FK_Account_Company">
           <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
@@ -1591,6 +1613,21 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <EntitySet Name="Tax" EntityType="Self.Tax" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Transaction" EntityType="Self.Transaction" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TransactionLog" EntityType="Self.TransactionLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vw_Cash4AdsReport" EntityType="Self.vw_Cash4AdsReport" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_Cash4AdsReport].[tid] AS [tid], 
+    [vw_Cash4AdsReport].[TDate] AS [TDate], 
+    [vw_Cash4AdsReport].[Deposit] AS [Deposit], 
+    [vw_Cash4AdsReport].[Withdrawal] AS [Withdrawal], 
+    [vw_Cash4AdsReport].[Transaction] AS [Transaction], 
+    [vw_Cash4AdsReport].[userId] AS [userId], 
+    [vw_Cash4AdsReport].[AccountBalance] AS [AccountBalance], 
+    [vw_Cash4AdsReport].[CurentBalance] AS [CurentBalance], 
+    [vw_Cash4AdsReport].[CampaignID] AS [CampaignID], 
+    [vw_Cash4AdsReport].[VoucherTitle] AS [VoucherTitle], 
+    [vw_Cash4AdsReport].[Email] AS [Email]
+    FROM [dbo].[vw_Cash4AdsReport] AS [vw_Cash4AdsReport]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="vw_GetUserTransactions" EntityType="Self.vw_GetUserTransactions" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [vw_GetUserTransactions].[tid] AS [tid], 
@@ -1600,7 +1637,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
     [vw_GetUserTransactions].[Transaction] AS [Transaction], 
     [vw_GetUserTransactions].[userId] AS [userId], 
     [vw_GetUserTransactions].[AccountBalance] AS [AccountBalance], 
-    [vw_GetUserTransactions].[CurentBalance] AS [CurentBalance]
+    [vw_GetUserTransactions].[CurentBalance] AS [CurentBalance], 
+    [vw_GetUserTransactions].[VoucherTitle] AS [VoucherTitle]
     FROM [dbo].[vw_GetUserTransactions] AS [vw_GetUserTransactions]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vw_PublisherTransaction" EntityType="Self.vw_PublisherTransaction" store:Type="Views" store:Schema="dbo">
@@ -1613,7 +1651,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
     [vw_PublisherTransaction].[userId] AS [userId], 
     [vw_PublisherTransaction].[ownerCompanyId] AS [ownerCompanyId], 
     [vw_PublisherTransaction].[CurentBalance] AS [CurentBalance], 
-    [vw_PublisherTransaction].[CampaignID] AS [CampaignID]
+    [vw_PublisherTransaction].[CampaignID] AS [CampaignID], 
+    [vw_PublisherTransaction].[Email] AS [Email]
     FROM [dbo].[vw_PublisherTransaction] AS [vw_PublisherTransaction]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_Account_Company" Association="Self.FK_Account_Company">
@@ -2279,6 +2318,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <EntitySet Name="vw_GetUserTransactions" EntityType="DomainModels.vw_GetUserTransactions" />
           <EntitySet Name="EmailQueues" EntityType="DomainModels.EmailQueue" />
           <EntitySet Name="vw_PublisherTransaction" EntityType="DomainModels.vw_PublisherTransaction" />
+          <EntitySet Name="vw_Cash4AdsReport" EntityType="DomainModels.vw_Cash4AdsReport" />
           </EntityContainer>
         <EntityType Name="ProfileQuestion">
           <Key>
@@ -4052,6 +4092,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Property Name="userId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="AccountBalance" Type="Double" />
           <Property Name="CurentBalance" Type="Double" />
+          <Property Name="VoucherTitle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="EmailQueue">
           <Key>
@@ -4091,6 +4132,25 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Property Name="ownerCompanyId" Type="Int32" />
           <Property Name="CurentBalance" Type="Double" />
           <Property Name="CampaignID" Type="Int64" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="vw_Cash4AdsReport">
+          <Key>
+            <PropertyRef Name="tid" />
+            <PropertyRef Name="userId" />
+            <PropertyRef Name="CampaignID" />
+          </Key>
+          <Property Name="tid" Type="Int64" Nullable="false" />
+          <Property Name="TDate" Type="DateTime" Precision="3" />
+          <Property Name="Deposit" Type="Int32" />
+          <Property Name="Withdrawal" Type="Double" />
+          <Property Name="Transaction" Type="String" MaxLength="209" FixedLength="false" Unicode="true" />
+          <Property Name="userId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="AccountBalance" Type="Double" />
+          <Property Name="CurentBalance" Type="Double" />
+          <Property Name="CampaignID" Type="Int64" Nullable="false" />
+          <Property Name="VoucherTitle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -4903,6 +4963,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <EntitySetMapping Name="vw_GetUserTransactions">
             <EntityTypeMapping TypeName="DomainModels.vw_GetUserTransactions">
               <MappingFragment StoreEntitySet="vw_GetUserTransactions">
+                <ScalarProperty Name="VoucherTitle" ColumnName="VoucherTitle" />
                 <ScalarProperty Name="CurentBalance" ColumnName="CurentBalance" />
                 <ScalarProperty Name="AccountBalance" ColumnName="AccountBalance" />
                 <ScalarProperty Name="userId" ColumnName="userId" />
@@ -4941,9 +5002,27 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <EntitySetMapping Name="vw_PublisherTransaction">
             <EntityTypeMapping TypeName="DomainModels.vw_PublisherTransaction">
               <MappingFragment StoreEntitySet="vw_PublisherTransaction">
+                <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="CampaignID" ColumnName="CampaignID" />
                 <ScalarProperty Name="CurentBalance" ColumnName="CurentBalance" />
                 <ScalarProperty Name="ownerCompanyId" ColumnName="ownerCompanyId" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="Transaction" ColumnName="Transaction" />
+                <ScalarProperty Name="Withdrawal" ColumnName="Withdrawal" />
+                <ScalarProperty Name="Deposit" ColumnName="Deposit" />
+                <ScalarProperty Name="TDate" ColumnName="TDate" />
+                <ScalarProperty Name="tid" ColumnName="tid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_Cash4AdsReport">
+            <EntityTypeMapping TypeName="DomainModels.vw_Cash4AdsReport">
+              <MappingFragment StoreEntitySet="vw_Cash4AdsReport">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="VoucherTitle" ColumnName="VoucherTitle" />
+                <ScalarProperty Name="CampaignID" ColumnName="CampaignID" />
+                <ScalarProperty Name="CurentBalance" ColumnName="CurentBalance" />
+                <ScalarProperty Name="AccountBalance" ColumnName="AccountBalance" />
                 <ScalarProperty Name="userId" ColumnName="userId" />
                 <ScalarProperty Name="Transaction" ColumnName="Transaction" />
                 <ScalarProperty Name="Withdrawal" ColumnName="Withdrawal" />
