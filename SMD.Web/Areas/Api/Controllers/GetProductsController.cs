@@ -49,15 +49,28 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// Get Ads, Surveys, Questions
         /// </summary>
         [ApiExceptionCustom]
-        public ProductViewResponse Get(string authenticationToken,[FromUri] GetProductsRequest request)
+        public ProductViewResponse Get(string authenticationToken, [FromUri] GetProductsRequest request)
         {
             if (string.IsNullOrEmpty(authenticationToken) || request == null || !ModelState.IsValid)
             {
                 throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
             }
 
-            return webApiUserService.GetProducts(request).CreateFrom();
-            
+            ProductViewResponse response = null;
+
+            try
+            {
+                response = webApiUserService.GetProducts(request).CreateFrom();
+            }
+            catch (Exception e)
+            {
+                response = new ProductViewResponse();
+                response.ErrorMessage = e.ToString();
+                
+            }
+
+            return response;
+
         }
 
         /// <summary>

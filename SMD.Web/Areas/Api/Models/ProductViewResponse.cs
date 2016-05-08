@@ -17,5 +17,7 @@ namespace SMD.MIS.Areas.Api.Models
         /// Total number of Products
         /// </summary>
         public int TotalCount { get; set; }
+
+        public string ErrorMessage { get; set; }
     }
 }
