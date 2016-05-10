@@ -551,6 +551,15 @@ namespace SMD.Implementation.Services
             }
             return result;
         }
+        public static List<vw_Cash4AdsReport> GetSmdReport()
+        {
+            List<vw_Cash4AdsReport> result = new List<vw_Cash4AdsReport>();
+            using (var dbContext = new BaseDbContext())
+            {
+                result = dbContext.vw_Cash4AdsReport.ToList();
+            }
+            return result;
+        }
         #endregion
     }
 }

@@ -245,6 +245,7 @@ namespace SMD.Repository.BaseRepository
 
         public DbSet<vw_GetUserTransactions> vw_GetUserTransactions { get; set; }
         public DbSet<vw_PublisherTransaction> vw_PublisherTransaction { get; set; }
+        public DbSet<vw_Cash4AdsReport> vw_Cash4AdsReport { get; set; }
         /// <summary>
         /// Get Ad-Campaigns for APIs | baqer
         /// </summary>

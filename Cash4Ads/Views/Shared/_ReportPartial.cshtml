@@ -6,9 +6,8 @@
         Cash4Ads.Models.User sessionVar = Session["User"] as Cash4Ads.Models.User;
         
             DateTime todayDate = DateTime.Today;
-
-            DateTime LastMonthStartDT = todayDate.AddMonths(-1);
-            userRptSrc = "http://manage.cash4ads.com/reportViewers/user.aspx?userID=" + sessionVar.UserId + "&StartDate=" + DateTime.Now.AddMonths(-1).ToString("M-d-yyyy") + "&EndDate=" + DateTime.Now.ToString("M-d-yyyy"); //11-01-2015 //12-26-2016
+            DateTime nextMonth = todayDate.AddMonths(1);
+            userRptSrc = "http://manage.cash4ads.com/reportViewers/user.aspx?userID=" + sessionVar.UserId + "&StartDate=" + DateTime.Now.AddMonths(-1).ToString("M-d-yyyy") + "&EndDate=" + DateTime.Now.AddMonths(1).ToString("M-d-yyyy"); //11-01-2015 //12-26-2016
         
             publisherRptSrc = "http://manage.cash4ads.com/reportViewers/publisher.aspx?CompanyId=" + sessionVar.CompanyId;
        
@@ -34,7 +33,10 @@
         var top = parseInt((bws.height - 550) / 2);
         if (rptType == 1)
         {
-            $("#frameRptViewr").attr("src", "@userRptSrc");
+            var str = "@userRptSrc";
+            str = str.replace("&amp;", "&");
+            str = str.replace("&amp;", "&");
+            $("#frameRptViewr").attr("src", str);
             $("#reportHeadin").text("My Account Activity");
         }
         else if (rptType == 2)
