@@ -84,20 +84,22 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="top-navbar-1">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a class="scroll-link" href="@Url.Action("get_paid_watch_ads", "Home")">Get paid to watch Ads</a></li>
-                    <li><a class="scroll-link" href="@Url.Action("advertisers", "Home")">Want to Advertise</a></li>
-                   
-                    <li><img src="~/images/United-Kingdom-icon.png" style="padding-top:22px;" /></li>
+                    
                     @if (sessionVar == null)
                     {
+                        <li><a class="scroll-link" href="@Url.Action("get_paid_watch_ads", "Home")">Get paid to watch Ads</a></li>
+                        <li><a class="scroll-link" href="@Url.Action("advertisers", "Home")">Want to Advertise</a></li>
+
+                        <li><img src="~/images/United-Kingdom-icon.png" style="padding-top:22px;" /></li>
                         <li><i class="fa fa-user fa-lg text-white " onclick="openLoginDialog();" style="    padding-top: 30px;    font-size: 23px;    margin-left: 12px;"></i></li>
 
                     }
                     else
                     {
-                        <li><a class="scroll-link" href="~/Home/reportViewer?reporttype=1" target="_blank">My Account Activity</a></li>
-                        <li><a class="scroll-link" href="~/Home/reportViewer?reporttype=2" target="_blank">My Campaign Activity</a></li>
+                        <li><a class="scroll-link" onclick="openRptViewer(1);" >My Account Activity</a></li>
+                        <li><a class="scroll-link" onclick="openRptViewer(2);" >My Campaign Activity</a></li>
                         <li><a class="scroll-link" onclick="logOutFromGoogle();" href="@Url.Action("logOut", "Home")">Sign out</a></li>
+                        <li><img src="~/images/United-Kingdom-icon.png" style="padding-top:22px;" /></li>
 
                     }
                    
@@ -161,18 +163,16 @@
                         Copyright © 2016 Cash4Ads.com Inc. All rights reserved.
                     </p>
                     <p>
-                        <a href="#">Privacy Policy</a>&nbsp;&nbsp;&nbsp;&nbsp;        <a href="#">Terms of Use</a>&nbsp;&nbsp;&nbsp;&nbsp;     <a href="#">Contact Us</a>&nbsp;&nbsp;&nbsp;&nbsp;       <a href="#">Help Center</a> &nbsp;&nbsp;&nbsp;&nbsp;<a href="http://blog.cash4ads.com" target="_blank">Blog</a> &nbsp;&nbsp;&nbsp;&nbsp;    <a href="#">Language</a>
+                        <a href="@Url.Action("get_paid_watch_ads", "Home")">Get paid to watch Ads</a>&nbsp;&nbsp;&nbsp;&nbsp; <a href="@Url.Action("advertisers", "Home")">Want to Advertise</a>&nbsp;&nbsp;&nbsp;&nbsp; <a href="#">Privacy Policy</a>&nbsp;&nbsp;&nbsp;&nbsp;        <a href="#">Terms of Use</a>&nbsp;&nbsp;&nbsp;&nbsp;     <a href="#">Contact Us</a>&nbsp;&nbsp;&nbsp;&nbsp;       <a href="#">Help Center</a> &nbsp;&nbsp;&nbsp;&nbsp;<a href="http://blog.cash4ads.com" target="_blank">Blog</a> &nbsp;&nbsp;&nbsp;&nbsp;    <a href="#">Language</a>
 </p>
                 </div>
             </div>
         </div>
     </section>
-
-             
     @Html.Partial("_Login")
 
-
-
+    @Html.Partial("_ReportPartial")
+  
                 @*<script src="~/scripts/jquery-2.1.4.min.js"></script>*@
                 @*<script>window.jQuery || document.write('<script src="~/scripts/jquery-2.1.4.min.js"><\/script>')</script>*@
 
@@ -193,9 +193,26 @@
                 <script src="~/scripts/jquery.isotope.min.js"></script>
 
     <script>
+       
+        function getBrowserHeight() {
+            var intH = 0;
+            var intW = 0;
+            if (typeof window.innerWidth == 'number') {
+                intH = window.innerHeight;
+                intW = window.innerWidth;
+            }
+            else if (document.documentElement && (document.documentElement.clientWidth || document.documentElement.clientHeight)) {
+                intH = document.documentElement.clientHeight;
+                intW = document.documentElement.clientWidth;
+            }
+            else if (document.body && (document.body.clientWidth || document.body.clientHeight)) {
+                intH = document.body.clientHeight;
+                intW = document.body.clientWidth;
+            }
+            return { width: parseInt(intW), height: parseInt(intH) };
+        }
         function logOutFromGoogle(){
-            debugger
-            logoutparam = true;
+                        logoutparam = true;
             //window.open("https://mail.google.com/mail/u/0/?logout&hl=en", "_blank");
             //var token = gapi.auth2.getToken();
             //if (token) {
@@ -227,6 +244,8 @@
             //});
         }
     </script>
+
+
 
 </body>
 </html>

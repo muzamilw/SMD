@@ -1238,3 +1238,26 @@ font-size:19px !important;
 .loadingoverlay {
 z-index:999999;
 }
+.apollo_rptViewer {
+  margin: 0 auto;
+  max-width: 70%;
+  /*border: 12px solid rgba(0, 0, 0, 0.45);*/
+  /*border-radius: 5px;*/
+  position: relative;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+      background: white;
+}
+.appollo_rptViewrheading {
+    margin: 0 auto;
+    max-width: 70%;
+    box-sizing: border-box;
+    font-size: 20px;
+    padding: 10px;
+    color: gray;
+    background-color: #ffffff;
+    font-weight: 700;
+    position: relative;
+    text-align: left;
+}

@@ -110,7 +110,7 @@ define("ads/ads.viewModel",
                                 UserAndCostDetail(data.UserAndCostDetails);
                                 advertiserLogo(UserAndCostDetail().UserProfileImage);
                                 buyItPriceLbl(UserAndCostDetail().BuyItClausePrice + "p");
-                                quizPriceLbl(UserAndCostDetail().QuizQuestionClausePrice + "p");
+                                quizPriceLbl(UserAndCostDetail().QuizQuestionClausePrice);
                                 tenPriceLbl(" (" + UserAndCostDetail().TenDayDeliveryClausePrice + "p)");
 
                                 threePriceLbl(" (" + UserAndCostDetail().ThreeDayDeliveryClausePrice + "p)");

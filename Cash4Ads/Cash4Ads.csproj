@@ -321,6 +321,7 @@
     <Content Include="Views\Home\cashout.cshtml" />
     <Content Include="Views\Shared\_Login.cshtml" />
     <Content Include="Views\Home\reportViewer.cshtml" />
+    <Content Include="Views\Shared\_ReportPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
