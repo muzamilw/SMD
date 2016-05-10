@@ -5238,3 +5238,90 @@ div#spinnerAudience {
 .errorOutline {
 color:red !important;
 }
+.preview_screen_advtlogo{
+
+        width: 150px;    margin-bottom: 20px;
+}
+.preview_screen_vouchrRWlbl{
+    font-size: 18px;    color: red;
+}
+.preview_screen_vouchrcnt{
+      text-align: center;
+    width: 95%;
+    margin: auto;
+}
+.preview_screen_CashCnt{
+       float: left;
+    width: 48%;
+    padding: 10px;
+    background: #37a670;
+    color: white;    line-height: 2;margin-right:10px;height: 240px;
+}
+
+.preview_screen_voucherCntRight{
+         float: left;
+    width: 48%;
+    padding: 10px;
+    background: #3b5999;
+    color: white;    line-height: 2;    padding-top: 15px;height: 240px;
+}
+.preview_screen_advtlogoCnt{
+    width: 85px;    margin: auto;
+    background: white;
+    border-radius: 85px;
+    height: 85px;
+}
+.preview_screen_quizAns1{
+      width: 90%;
+    margin: auto;
+    padding: 7px;
+    background: #bb1923;
+    color: white;
+    font-size: 20px;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+.preview_screen_quizAns2{
+       width: 90%;
+    margin: auto;
+    padding: 7px;
+    background: #bb1923;
+    color: white;
+    font-size: 20px;
+    border-radius: 5px;
+    margin-top: 20px; margin-bottom: 40px;
+}
+
+.preview_screen_buyIt2{
+       width: 90%;
+    margin: auto;
+    padding: 7px;
+    background: #339966;
+    color: white;
+    font-size: 20px;
+    border-radius: 5px;
+    margin-top: 20px; margin-bottom: 20px;
+    text-align:center;
+}
+.preview_screen_skipbtn {
+      width: 60px;
+    height: 60px;
+    background: #b6e1e9;
+    color: white;
+    border-radius: 60px;
+    margin: auto;
+    padding-top: 16px;
+    font-size: 18px;
+    padding-left: 3px;
+}
+.preview_screen_playbtn {
+    width: 60px;
+    height: 60px;
+    background: #b6e1e9;
+    color: white;
+    border-radius: 60px;
+   
+    padding-top: 16px;
+    font-size: 18px;
+    padding-left: 3px;
+}

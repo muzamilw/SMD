@@ -962,6 +962,7 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Images\1_Splash_screen_1.png" />
     <Content Include="Images\accent.png" />
     <Content Include="Images\ads.png" />
     <Content Include="Images\bullet.png" />

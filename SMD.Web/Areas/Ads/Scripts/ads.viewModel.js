@@ -1891,6 +1891,9 @@ define("ads/ads.viewModel",
                 openProductCategoryDialog = function () {
                     $("#productCategoryDialog").modal("show");
                 },
+                 openVideoDialog = function () {
+                     debugger
+                 },
                 opencouponCodesDialog = function () {
                        $("#couponCodesDialog").modal("show");
                 },
@@ -2120,7 +2123,8 @@ define("ads/ads.viewModel",
                     campaignCSVCallback: campaignCSVCallback,
                     updateExistingCodeVal: updateExistingCodeVal,
                     UsedCouponQuantity: UsedCouponQuantity,
-                    advertiserLogo: advertiserLogo
+                    advertiserLogo: advertiserLogo,
+                    openVideoDialog: openVideoDialog
                 };
             })()
         };
