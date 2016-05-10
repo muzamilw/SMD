@@ -534,6 +534,13 @@
     <Compile Include="ReportViewers\Publisher.aspx.designer.cs">
       <DependentUpon>Publisher.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ReportViewers\SMDReport.aspx.cs">
+      <DependentUpon>SMDReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportViewers\SMDReport.aspx.designer.cs">
+      <DependentUpon>SMDReport.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
     <Compile Include="ReportViewers\User.aspx.cs">
       <DependentUpon>User.aspx</DependentUpon>
@@ -984,6 +991,7 @@
     <Content Include="Images\select_image.jpg" />
     <Content Include="Images\topbarph.png" />
     <Content Include="ReportViewers\Publisher.aspx" />
+    <Content Include="ReportViewers\SMDReport.aspx" />
     <Content Include="RichTextEditor\adapters\jquery.js" />
     <Content Include="RichTextEditor\build-config.js" />
     <Content Include="RichTextEditor\ckeditor.js" />
@@ -2712,6 +2720,7 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Publisher.rdlc" />
+    <EmbeddedResource Include="Reports\SMDReport.rdlc" />
     <EmbeddedResource Include="Reports\Users.rdlc" />
   </ItemGroup>
   <PropertyGroup>
