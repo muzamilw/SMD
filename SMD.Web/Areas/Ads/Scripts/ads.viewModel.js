@@ -98,6 +98,7 @@ define("ads/ads.viewModel",
                     selectedCouponCodeItems = ko.observableArray([]),                            // Initial selection
                     UsedCouponQuantity = ko.observable(0),
                     advertiserLogo = ko.observable("");
+                    previewVideoTagUrl = ko.observable("");
                     getCampaignBaseContent = function () {
                         dataservice.getBaseData({
                             RequestId: 1,
@@ -106,7 +107,7 @@ define("ads/ads.viewModel",
                         success: function (data) {
 
                             if (data != null) {
-                                debugger
+                                
                                 UserAndCostDetail(data.UserAndCostDetails);
                                 advertiserLogo(UserAndCostDetail().UserProfileImage);
                                 buyItPriceLbl(UserAndCostDetail().BuyItClausePrice + "p");
@@ -364,22 +365,22 @@ define("ads/ads.viewModel",
                      isListVisible(true);
                  },
                   openEditScreen = function (mode) {
-
+                      
                       campaignModel(new model.Campaign());
                       // campaignModel().CampaignName('New Campaign');
-                      if (mode == 1) {
+                      if (mode == 1) { // video
                           campaignModel().Type('1');
                           isEnableVedioVerificationLink(true);
                       }
-                      else if (mode == 2) {
+                      else if (mode == 2) { 
                           campaignModel().Type('3');
                           isEnableVedioVerificationLink(true);
                       }
-                      else if (mode == 3) {
+                      else if (mode == 3) { // flyer
                           campaignModel().Type('3');
                           isEnableVedioVerificationLink(true);
                       }
-                      else if (mode == 4) {
+                      else if (mode == 4) { // game
                           campaignModel().Type('4');
                           isEnableVedioVerificationLink(false);
                       } else if (mode == 5) {
@@ -475,28 +476,32 @@ define("ads/ads.viewModel",
                     var isPopulateErrorList = false;
                     if (isDisplayCouponsAds() == false) {
 
-                        if (quizQuestionStatus() == true) {
-                            if ((campaignModel().VerifyQuestion() == null || campaignModel().VerifyQuestion() == '') || (campaignModel().Answer1() == null || campaignModel().Answer1() == '') || (campaignModel().Answer2() == null || campaignModel().Answer2() == '')) {
-                                isPopulateErrorList = true;
-                            }
-                            if (campaignModel().VerifyQuestion() == null || campaignModel().VerifyQuestion() == '') {
-                                $("#txtVerifyQuestion").addClass("errorFill");
-                            } else {
-                                $("#txtVerifyQuestion").removeClass("errorFill");
-                            }
-                            if (campaignModel().Answer1() == null || campaignModel().Answer1() == '') {
-                                $("#txtVerifyAnswer1").addClass("errorFill");
-                            } else {
-                                $("#txtVerifyAnswer1").removeClass("errorFill");
-                            }
-                            if (campaignModel().Answer2() == null || campaignModel().Answer2() == '') {
-                                $("#txtVerifyAnswer2").addClass("errorFill");
-                            } else {
-                                $("#txtVerifyAnswer2").removeClass("errorFill");
-                            }
+                        if (campaignModel().Type() != 4) {
+
+                            if (quizQuestionStatus() == true) {
+                                if ((campaignModel().VerifyQuestion() == null || campaignModel().VerifyQuestion() == '') || (campaignModel().Answer1() == null || campaignModel().Answer1() == '') || (campaignModel().Answer2() == null || campaignModel().Answer2() == '')) {
+                                    isPopulateErrorList = true;
+                                }
+                                if (campaignModel().VerifyQuestion() == null || campaignModel().VerifyQuestion() == '') {
+                                    $("#txtVerifyQuestion").addClass("errorFill");
+                                } else {
+                                    $("#txtVerifyQuestion").removeClass("errorFill");
+                                }
+                                if (campaignModel().Answer1() == null || campaignModel().Answer1() == '') {
+                                    $("#txtVerifyAnswer1").addClass("errorFill");
+                                } else {
+                                    $("#txtVerifyAnswer1").removeClass("errorFill");
+                                }
+                                if (campaignModel().Answer2() == null || campaignModel().Answer2() == '') {
+                                    $("#txtVerifyAnswer2").addClass("errorFill");
+                                } else {
+                                    $("#txtVerifyAnswer2").removeClass("errorFill");
+                                }
 
 
+                            }
                         }
+                     
 
 
                         if (buyItQuestionStatus() == true) {
@@ -1892,7 +1897,12 @@ define("ads/ads.viewModel",
                     $("#productCategoryDialog").modal("show");
                 },
                  openVideoDialog = function () {
-                     debugger
+                     
+                     if (campaignModel().Type() == 1) {
+                         var videoLink = campaignModel().LandingPageVideoLink();
+                         videoLink = videoLink.replace('watch?v=', 'embed/');
+                         previewVideoTagUrl(videoLink);
+                     }
                  },
                 opencouponCodesDialog = function () {
                        $("#couponCodesDialog").modal("show");
@@ -2124,7 +2134,8 @@ define("ads/ads.viewModel",
                     updateExistingCodeVal: updateExistingCodeVal,
                     UsedCouponQuantity: UsedCouponQuantity,
                     advertiserLogo: advertiserLogo,
-                    openVideoDialog: openVideoDialog
+                    openVideoDialog: openVideoDialog,
+                    previewVideoTagUrl: previewVideoTagUrl
                 };
             })()
         };

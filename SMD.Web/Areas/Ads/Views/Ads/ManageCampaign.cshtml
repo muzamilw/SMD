@@ -1006,7 +1006,7 @@ else
                                         <div class="col-lg-2 text-campaign-left Float-Left" style="margin-left:6px;">
                                             <span class="control-label text-right tooltip-float font20 floatNone" style="float:left !important;color:red; " data-bind="text: '(' +  $root.quizPriceLbl() + 'p )'"></span>
                                         </div>
-                                        <div class="col-lg-2 Float-Left" style="margin-left:6px;">
+                                        <div class="col-lg-3 Float-Left" style="margin-left:40px;" data-bind="visible: $root.quizQuestionStatus()">
                                             <a href="#" id="idpreviewquizscreen" class="btn btn-primary pull-right" data-toggle="modal" data-target=".model_quizQ_ph">
                                                 Preview
                                             </a>
@@ -1093,7 +1093,7 @@ else
                                         <div class="col-lg-2 Float-Left">
                                             &nbsp;
                                         </div>
-                                        <div class="col-lg-2 Float-Left" style="margin-left:6px;">
+                                        <div class="col-lg-3 Float-Left" style="margin-left:40px;" data-bind="visible: $root.voucherQuestionStatus()">
                                             <a href="#" id="idpreviewvoucherscreen" class="btn btn-primary pull-right" data-toggle="modal" data-target=".model_vucherQ_ph">
                                                 Preview
                                             </a>
@@ -1235,8 +1235,8 @@ else
                                         <div class="col-lg-2 text-campaign-left Float-Left" style="margin-left:6px;">
                                             <span class="control-label text-right tooltip-float font20 floatNone" style="float:left !important;color:red; " data-bind="text: '(' +  $root.buyItPriceLbl() + ')'"></span>
                                         </div>
-                                        <div class="col-lg-2 Float-Left" style="margin-left:6px;">
-                                            <a href="#" id="idpreviewquizscreen" class="btn btn-primary pull-right" data-toggle="modal" data-target=".model_BuyItQ_ph">
+                                        <div class="col-lg-3 Float-Left" style="margin-left:40px;">
+                                            <a href="#" id="idpreviewquizscreen" class="btn btn-primary pull-right" data-toggle="modal" data-target=".model_BuyItQ_ph" data-bind="visible: $root.buyItQuestionStatus()">
                                                 Preview
                                             </a>
                                         </div>
@@ -1832,7 +1832,7 @@ else
                         <div class="preview_screen_CashCnt">
                             <div>
                                 <span style="    font-size: 18px;">Bank Cash</span><br />
-                                <span style="font-size: 23px;    font-weight: bold;">10 p</span><br />
+                                <span style="font-size: 23px;    font-weight: bold;" data-bind="text: (($root.campaignModel().ClickRate() * 100)/2).toFixed(1) + 'p'"></span><br />
                                 <span style="    font-size: 18px;">In Wallet</span><br />
                                 <img src="~/Images/1_Splash_screen_1.png" style="    width: 83px;" />
                             </div>
@@ -1922,14 +1922,31 @@ else
                         <span data-bind="text: $root.campaignModel().CampaignDescription" style="font-size: 13px;    color: gray; "></span>
 
                     </div>
-                    <div class="row" style="text-align: center;">
-                        <object data="http://www.youtube.com/embed/klDDHU8HZp4"
+                    <div class="row" style="text-align: center;" data-bind="visible: $root.campaignModel().Type() == 1">
+                        <object data-bind="attr:{data: $root.previewVideoTagUrl()}"
                                 width="300" height="200"></object>
-                       
+
+                    </div>
+                    <div data-bind="visible: $root.campaignModel().Type() == 3 ||  $root.campaignModel().Type() == 2">
+
+                        <div style="height: 160px;    padding: 5px;    background: #CECECE;    text-align: center;position:relative;">
+                            <div class="preview_screen_viewFlyer">
+                                VIEW FLAYER AND ANSWER QUIZ
+                            </div>
+                            <img style="width:auto;height:160px;" data-bind="visible: $root.campaignModel().CampaignTypeImagePath() == ''" src="/Content/Images/Company_Default.png" />
+                            <img style="width:auto;height:160px;" data-bind="visible: $root.campaignModel().CampaignTypeImagePath() != '' ,attr: { src: $root.campaignModel().CampaignTypeImagePath }" />
+                          
+                        </div>
+
+
+                    </div>
+                    <div class="row" style="text-align: center;" data-bind="visible: $root.campaignModel().Type() == 4">
+
+                        <img src="~/Images/preview_game.jpg" style="    width: 100%;"/>
                     </div>
                     <br />
                     
-                    <div style="  width: 85%;    margin: auto;  text-align: center;    margin-bottom: 20px;">
+                    <div style="  width: 85%;    margin: auto;  text-align: center;    margin-bottom: 20px;" data-bind="visible: $root.campaignModel().Type() != 4">
                         <div style="float:left;margin-top: 20px;    margin-right: 20px; color:#b6e1e9;font-size: 18px;">
                             Cash Out
                         </div>
@@ -1942,9 +1959,10 @@ else
                         <div class="clearfix">
 
                         </div>
+                        <br />
+                        <br />
                     </div>
-                    <br />
-                    <br />
+                    
                 </div>
 
             </div>
@@ -2437,6 +2455,7 @@ else
     //    });
     //}
     $(window).scroll(function () {
+        debugger
         var scrollYpos = $(document).scrollTop();
         if (scrollYpos >= 620) {
             $(".aud_cnt").css("position", "fixed");

@@ -5240,7 +5240,7 @@ color:red !important;
 }
 .preview_screen_advtlogo{
 
-        width: 150px;    margin-bottom: 20px;
+        width: 120px;    margin-bottom: 20px;
 }
 .preview_screen_vouchrRWlbl{
     font-size: 18px;    color: red;
@@ -5324,4 +5324,17 @@ color:red !important;
     padding-top: 16px;
     font-size: 18px;
     padding-left: 3px;
+}
+.preview_screen_viewFlyer {
+    width: 240px;
+    margin: auto;
+    padding: 7px;
+    background: #0E8C0E;
+    color: white;
+    font-size: 14px;
+    border-radius: 5px;
+    text-align: center;
+        margin-top: 60px;
+    margin-left: 32px;
+    position:absolute;
 }
