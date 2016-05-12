@@ -1240,7 +1240,7 @@ z-index:999999;
 }
 .apollo_rptViewer {
   margin: 0 auto;
-  max-width: 70%;
+  max-width: 71%;
   /*border: 12px solid rgba(0, 0, 0, 0.45);*/
   /*border-radius: 5px;*/
   position: relative;
@@ -1251,7 +1251,7 @@ z-index:999999;
 }
 .appollo_rptViewrheading {
     margin: 0 auto;
-    max-width: 70%;
+    max-width: 71%;
     box-sizing: border-box;
     font-size: 20px;
     padding: 10px;

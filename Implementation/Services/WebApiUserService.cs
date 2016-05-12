@@ -114,12 +114,16 @@ namespace SMD.Implementation.Services
             if (isCredit)
             {
                 transaction.CreditAmount = transactionAmount;
+                transaction.AccountBalance = (account.AccountBalance ?? 0) + transactionAmount;
                 account.AccountBalance += transactionAmount;
+              
             }
             else
             {
                 transaction.DebitAmount = transactionAmount;
+                transaction.AccountBalance = (account.AccountBalance ?? 0) - transactionAmount;
                 account.AccountBalance -= transactionAmount;
+                
             }
 
             // Add Transcation to repository

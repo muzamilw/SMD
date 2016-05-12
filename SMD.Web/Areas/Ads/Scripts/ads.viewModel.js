@@ -1902,11 +1902,19 @@ define("ads/ads.viewModel",
                          var videoLink = campaignModel().LandingPageVideoLink();
                          videoLink = videoLink.replace('watch?v=', 'embed/');
                          previewVideoTagUrl(videoLink);
+                        // $("#objVideoLink").attr("data", videoLink);
+                         $('#appendVideoTag').append('  <object id="objVideoLink" data="' + videoLink + '" width="100%" height="150"></object>');
                      }
                  },
                 opencouponCodesDialog = function () {
                        $("#couponCodesDialog").modal("show");
                 },
+                  closePreviewDialog = function () {
+                      
+                      if (campaignModel().Type() == 1) {
+                          $('#appendVideoTag').empty();
+                      }
+                  },
                 addItemToCouponCodeList = function () {
               
                     if ((this.BetterListitemToAdd() != "") && (this.allCouponCodeItems.indexOf(this.BetterListitemToAdd()) < 0)) {
@@ -2135,7 +2143,8 @@ define("ads/ads.viewModel",
                     UsedCouponQuantity: UsedCouponQuantity,
                     advertiserLogo: advertiserLogo,
                     openVideoDialog: openVideoDialog,
-                    previewVideoTagUrl: previewVideoTagUrl
+                    previewVideoTagUrl: previewVideoTagUrl,
+                    closePreviewDialog: closePreviewDialog
                 };
             })()
         };
