@@ -498,6 +498,8 @@
     <Compile Include="Areas\Billing\Controllers\ManageController.cs" />
     <Compile Include="Areas\Common\CommonAreaRegistration.cs" />
     <Compile Include="Areas\ProfileQuestion\Controllers\ManageController.cs" />
+    <Compile Include="Areas\Report\Controllers\ReportController.cs" />
+    <Compile Include="Areas\Report\ReportAreaRegistration.cs" />
     <Compile Include="Areas\User\Controllers\ManageUserController.cs" />
     <Compile Include="Areas\User\UserAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -1553,6 +1555,10 @@
     <Content Include="Areas\User\Views\Shared\_InviteUser.cshtml" />
     <Content Include="Areas\Ads\Views\Ads\_addEditCouponCategories.cshtml" />
     <Content Include="Areas\Ads\Views\Ads\_addEditCouponCodes.cshtml" />
+    <Content Include="Areas\Report\Views\web.config" />
+    <Content Include="Areas\Report\Views\Report\TransactionReport.cshtml" />
+    <Content Include="Areas\Report\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Report\Views\_ViewStart.cshtml" />
     <None Include="Properties\PublishProfiles\mz profile.pubxml" />
     <None Include="Properties\PublishProfiles\SMD MIS Saqib.pubxml" />
     <None Include="Properties\PublishProfiles\SMD.pubxml" />
@@ -2670,6 +2676,7 @@
     <Folder Include="Areas\Billing\Models\" />
     <Folder Include="Areas\Common\Controllers\" />
     <Folder Include="Areas\Common\Models\" />
+    <Folder Include="Areas\Report\Models\" />
     <Folder Include="Areas\Survey\Models\" />
     <Folder Include="Content\themes\base\minified\images\" />
     <Folder Include="Models\" />

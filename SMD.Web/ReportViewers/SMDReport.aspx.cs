@@ -63,14 +63,5 @@ namespace SMD.MIS.ReportViewers
         }
 
       
-        public void SavePDF(ReportViewer viewer, string FileName)
-        {
-            byte[] Bytes = viewer.LocalReport.Render(format: "PDF", deviceInfo: "");
-
-            using (FileStream stream = new FileStream(HttpContext.Current.Server.MapPath("~/SMD_Content/EmailAttachments/"+ FileName), FileMode.Create))
-            {
-                stream.Write(Bytes, 0, Bytes.Length);
-            }
-        }
     }
 }
