@@ -69,19 +69,28 @@ namespace SMD.Implementation.Services
               double smdValue = totalAmount - (Convert.ToDouble(coupon.couponSmdComission));
               double VoucherSellerValue = totalAmount - smdValue;
 
-              var couponCode = dbContext.CouponCodes.Where(g => g.CampaignId == couponId && g.IsTaken != true).SingleOrDefault();
-              couponCode.IsTaken = true;
-              
-              
-          
+              var couponCode = dbContext.CouponCodes.Where(g => g.CampaignId == couponId && g.IsTaken != true).FirstOrDefault();
 
-              // update users  virutal accont debit 
-              updateUsersVirtualAccount(company, totalAmount, dbContext,2, false);
-              // update smd users  virutal accont credit 
-              updateUsersVirtualAccount(smdCompany, smdValue, dbContext, 2);
-              // update smd users  virutal accont credit 
-              updateUsersVirtualAccount(coupon.Company, VoucherSellerValue, dbContext, 2);
-              return couponCode.Code;
+              if (couponCode != null)
+              {
+                  couponCode.IsTaken = true;
+
+
+
+
+                  // update users  virutal accont debit 
+                  updateUsersVirtualAccount(company, totalAmount, dbContext, 2, false, couponCode.CodeId, couponId);
+                  // update smd users  virutal accont credit 
+                  updateUsersVirtualAccount(smdCompany, smdValue, dbContext, 2, true, couponCode.CodeId, couponId);
+                  // update smd users  virutal accont credit 
+                  updateUsersVirtualAccount(coupon.Company, VoucherSellerValue, dbContext, 2, true, couponCode.CodeId, couponId);
+                  return couponCode.Code;
+              }
+              else 
+              {
+                  return "";
+              }
+            
           }
         // used by new payout scheduler 
         private static void UpdateAccountsNew(Company company, Company smdCompany, double amount,
@@ -152,7 +161,7 @@ namespace SMD.Implementation.Services
             usersPaypalAccount.Transactions.Add(batchTransaction);
             dbContext.Transactions.Add(batchTransaction);
         }
-        private static void updateUsersVirtualAccount(Company company, double amount, BaseDbContext dbContext,int type, bool isCredit = true)
+        private static void updateUsersVirtualAccount(Company company, double amount, BaseDbContext dbContext, int type, bool isCredit = true, long? CouponCodeId = null, long? CampaignId = null)
         {
             Account userVirtualAccount = company.Accounts.FirstOrDefault(acc => acc.AccountType == (int)AccountType.VirtualAccount);
             if (userVirtualAccount == null)
@@ -168,6 +177,8 @@ namespace SMD.Implementation.Services
                 // AdCampaignId = adCampaignId,
                 isProcessed = true,
                 TransactionDate = DateTime.Now,
+                CouponCodeId = CouponCodeId,
+                AdCampaignId = CampaignId,
                 TransactionLogs = new List<TransactionLog>
                                                          {
                                                              new TransactionLog
@@ -480,19 +491,26 @@ namespace SMD.Implementation.Services
                        
                         // Update Accounts
                         string codeCode = UpdateCouponAccounts(company, smdUser.Company,CouponId , dbContext);
-
-                        // Save Changes
-                        dbContext.SaveChanges();
-
-                        // Email To User coupon code 
-                        try
+                        if (!string.IsNullOrEmpty(codeCode)) 
                         {
-                            BackgroundEmailManagerService.SendVoucherCodeEmail(dbContext, company.CompanyId, codeCode);
+                            // Save Changes
+                            dbContext.SaveChanges();
+
+                            // Email To User coupon code 
+                            try
+                            {
+                                BackgroundEmailManagerService.SendVoucherCodeEmail(dbContext, company.CompanyId, codeCode);
+                            }
+                            catch (Exception ex)
+                            {
+
+                            }
                         }
-                        catch (Exception ex)
+                        else
                         {
-                            
+                            return false;// coupon already redeemed
                         }
+                      
                     }
                     else
                     {
