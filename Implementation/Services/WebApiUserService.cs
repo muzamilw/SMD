@@ -161,13 +161,16 @@ namespace SMD.Implementation.Services
                 transactionSequence += 1;
                 PerformTransaction(request.AdCampaignId, null, adViewersAccount, adViewersCut, transactionSequence, TransactionType.AdClick);
 
+                
                 // Credit Affiliate
-                smdsCut = PerformCreditTransactionForAffiliate(request, referringCompany, smdsCut, affiliatesAccount, ref transactionSequence);
+                //todo pilot: Commenting Smd Transaction
+                //smdsCut = PerformCreditTransactionForAffiliate(request, referringCompany, smdsCut, affiliatesAccount, ref transactionSequence);
             }
             
             // Credit SMD
-            transactionSequence += 1;
-            PerformTransaction(request.AdCampaignId, null, smdAccount, smdsCut, transactionSequence, TransactionType.AdClick, true, true);
+            //todo pilot: Commenting Smd Transaction
+           // transactionSequence += 1;
+           // PerformTransaction(request.AdCampaignId, null, smdAccount, smdsCut, transactionSequence, TransactionType.AdClick, true, true);
 
             // Update AdCampaign Amount Spent
             if (!adCampaign.AmountSpent.HasValue)
@@ -843,8 +846,8 @@ namespace SMD.Implementation.Services
             // Begin Transaction
             // Ad Viewer will get 50% and other 50% will be divided b/w SMD (30%), Affiliate(20%) (Referrer) if exists
             double? adClickRate = adCampaign.ClickRate ?? 0;
-            double? adViewersCut = ((adClickRate * 50) / 100);
-            double? smdsCut = adViewersCut;
+            double? adViewersCut = adClickRate; // commenting for pilot launch, now smd hace no percentage and all the money will go to user account from advertiser account. So there will be 2 transactions now advertiser debit transaction and user credit transaction ((adClickRate * 50) / 100); 
+            double? smdsCut = 0; //adViewersCut;
             Account adViewersAccount;
             Account advertisersAccount;
             Account smdAccount;

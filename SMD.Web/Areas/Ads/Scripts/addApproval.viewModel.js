@@ -65,7 +65,7 @@ define("addApproval/addApproval.viewModel",
                     },                  
                     // Save AdCampaign 
                     onSaveCampaign = function () {
-                        var campId = selectedCampaign().CampaignId();
+                        var campId = selectedCampaign().CampaignId;
                         dataservice.saveAdCampaign(selectedCampaign().convertToServerData(), {
                             success: function (obj) {
                                 debugger

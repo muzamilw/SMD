@@ -320,7 +320,11 @@ namespace SMD.Implementation.Services
             {
                 campaignModel.MaxBudget = Math.Round(Convert.ToDouble(campaignModel.MaxBudget), 2);
             }
-            // campaignModel.ClickRate = 0.20;
+
+            //todo pilot: harcoding ClickRate = 1 for every campaign
+             campaignModel.ClickRate = 0.20;
+
+
             _adCampaignRepository.Add(campaignModel);
             _adCampaignRepository.SaveChanges();
 
@@ -472,7 +476,10 @@ namespace SMD.Implementation.Services
             }
             campaignModel.StartDateTime = new DateTime(2005, 1, 1);//campaignModel.StartDateTime.Value.Subtract(_adCampaignRepository.UserTimezoneOffSet);
             campaignModel.EndDateTime = new DateTime(2040, 1, 1);//campaignModel.EndDateTime.Value.Subtract(_adCampaignRepository.UserTimezoneOffSet);
-            //campaignModel.ClickRate = 0.20;
+
+            //todo pilot: harcoding ClickRate = 1 for every campaign
+            campaignModel.ClickRate = 1;
+            
             if(campaignModel.Status == 3){
                 campaignModel.Approved = true;
             }
@@ -620,10 +627,13 @@ namespace SMD.Implementation.Services
                     dbAd.ApprovalDateTime = DateTime.Now;
                     dbAd.ApprovedBy = _adCampaignRepository.LoggedInUserIdentity;
                     dbAd.Status = (Int32)AdCampaignStatus.Live;
-                   
+                    dbAd.StartDateTime = DateTime.Now;
+                    dbAd.EndDateTime = DateTime.Now.AddDays(30);
                     // Stripe payment + Invoice Generation
                     // Muzi bhai said we will see it on latter stage 
-                   //  MakeStripePaymentandAddInvoiceForCampaign(dbAd);
+
+                    //todo pilot: unCommenting Stripe payment code on Ads approval
+                     MakeStripePaymentandAddInvoiceForCampaign(dbAd);
                 }
                 // Rejection 
                 else
