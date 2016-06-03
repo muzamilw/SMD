@@ -327,28 +327,29 @@ require(["ko", "knockout-validation"], function (ko) {
 
 
     ko.bindingHandlers.editor = {
+       
         init: function (element, valueAccessor, allBindingsAccessor, viewModel) {
+            
             var value = valueAccessor();
             var valueUnwrapped = ko.unwrap(value);
             var allBindings = allBindingsAccessor();
             var $element = $(element);
             var droppable = allBindingsAccessor().drop;
-            CKEDITOR.basePath = ist.siteUrl + "/RichTextEditor/";
-            var myinstance = CKEDITOR.instances['content'];
+            CKEDITOR.basePath = ist.siteUrl + "RichTextEditor/";
+            var myinstance = CKEDITOR.instances['couponAddInfoCK'];
             //check if my instance already exist
             if (myinstance !== undefined) {
                 CKEDITOR.remove(myinstance);
             }
-            if (allBindingsAccessor().openFrom() === "Campaign" || allBindingsAccessor().openFrom() === "SecondaryPage") {
+
                 CKEDITOR.config.toolbar = [
                     ['Source', 'Bold', 'Italic', 'Underline', 'SpellChecker', 'TextColor', 'BGColor', 'Undo', 'Redo', 'Link', 'Unlink', '-', 'Format'],
                     '/', ['NumberedList', 'BulletedList', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'Font', 'FontSize']
                 ];
-            } else {
-                CKEDITOR.config.toolbar = 'Full';
-            }
+            
+              
             CKEDITOR.replace(element).setData(valueUnwrapped || $element.html());
-            var instance = CKEDITOR.instances['content'];
+            var instance = CKEDITOR.instances['couponAddInfoCK'];
             if (ko.isObservable(value)) {
                 var isSubscriberChange = false;
                 var isEditorChange = true;
@@ -367,35 +368,37 @@ require(["ko", "knockout-validation"], function (ko) {
                 };
                 // Handles typing changes 
                 instance.on('contentDom', function () {
+                    
                     instance.document.on('keyup', function (event) {
                         handleAfterCommandExec(event);
                     });
                 });
                
-             
+                instance.on('blur', function () {
+                    ist.Ads.viewModel.campaignModel().Voucher2Description(instance.getData());
+                });
                 function handleAfterCommandExec(event) {
-                    if (ist.stores.viewModel.selectedSecondaryPage() !== undefined && ist.stores.viewModel.selectedSecondaryPage() !== null) {
-                        if (instance.getData() === ist.stores.viewModel.selectedSecondaryPage().pageHTML()) {
-                            return;
+                    
+                    if (ist.Ads.viewModel.campaignModel() !== undefined && ist.Ads.viewModel.campaignModel() !== null) {
+                        if (ist.Ads.viewModel.campaignModel().Voucher2Description() !== undefined && ist.Ads.viewModel.campaignModel().Voucher2Description() !== null) {
+                            if (instance.getData() === ist.Ads.viewModel.campaignModel().Voucher2Description()) {
+                                return;
+                            }
+                        
                         }
-                        ist.stores.viewModel.selectedSecondaryPage().isEditorDirty(new Date());
                     }
-                    if (ist.stores.viewModel.selectedEmail() !== undefined && ist.stores.viewModel.selectedEmail() !== null) {
-                        if (instance.getData() === ist.stores.viewModel.selectedEmail().hTMLMessageA()) {
-                            return;
-                        }
-                        ist.stores.viewModel.selectedEmail().isEditorDirty(new Date());
-                    }
+                   
                 }
-
+               
                 // Handles styling changes 
                 instance.on('afterCommandExec', handleAfterCommandExec);
                 // Handles styling Drop down changes like font size, font family 
                 instance.on('selectionChange', handleAfterCommandExec);
 
-
+                
                 value.subscribe(function (newValue) {
                     if (!isEditorChange) {
+                    
                         isSubscriberChange = true;
                         $element.html(newValue);
                         isSubscriberChange = false;
@@ -404,12 +407,14 @@ require(["ko", "knockout-validation"], function (ko) {
             }
         },
         update: function (element, valueAccessor, allBindingsAccessor, viewModel) {
-            //handle programmatic updates to the observable
+                        //handle programmatic updates to the observable
             var existingEditor = CKEDITOR.instances && CKEDITOR.instances[element.id];
             if (existingEditor) {
+               
                 existingEditor.setData(ko.utils.unwrapObservable(valueAccessor()), function () {
                     this.checkDirty(); // true
                 });
+               
             }
         }
     }

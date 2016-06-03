@@ -595,7 +595,7 @@ define("ads/ads.viewModel",
                             //    }));
                             //});
                         }
-
+                        debugger
                         campaignModel().Status(mode);
                         campaignModel().ClickRate(pricePerclick());
 
@@ -1090,7 +1090,7 @@ define("ads/ads.viewModel",
                             SearchText: ""
                         }, {
                             success: function (data) {
-                                
+                                debugger
                                 if (data != null) {
                                     
                                     // set languages drop down

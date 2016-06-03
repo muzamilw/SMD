@@ -85,6 +85,7 @@
           <Property Name="CouponDiscountValue" Type="float" />
           <Property Name="CouponType" Type="int" />
           <Property Name="DeliveryDays" Type="int" />
+          <Property Name="IsUseFilter" Type="bit" />
         </EntityType>
         <EntityType Name="AdCampaignResponse">
           <Key>
@@ -3773,6 +3774,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <NavigationProperty Name="InvoiceDetails" Relationship="DomainModels.FK_InvoiceDetail_AdCampaign" FromRole="AdCampaign" ToRole="InvoiceDetail" />
           <Property Name="DeliveryDays" Type="Int32" />
           <NavigationProperty Name="AdCampaignTargetCriterias" Relationship="DomainModels.FK_AdCampaignTargetCriteria_AdCampaign" FromRole="AdCampaign" ToRole="AdCampaignTargetCriteria" />
+          <Property Name="IsUseFilter" Type="Boolean" />
         </EntityType>
         <Association Name="FK_AdCampaign_Company">
           <End Type="DomainModels.Company" Role="Company" Multiplicity="0..1" />
@@ -4768,6 +4770,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <EntitySetMapping Name="AdCampaigns">
             <EntityTypeMapping TypeName="DomainModels.AdCampaign">
               <MappingFragment StoreEntitySet="AdCampaign">
+                <ScalarProperty Name="IsUseFilter" ColumnName="IsUseFilter" />
                 <ScalarProperty Name="DeliveryDays" ColumnName="DeliveryDays" />
                 <ScalarProperty Name="CouponType" ColumnName="CouponType" />
                 <ScalarProperty Name="CouponDiscountValue" ColumnName="CouponDiscountValue" />

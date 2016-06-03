@@ -135,7 +135,7 @@ namespace SMD.MIS.ModelMappers
                 CouponImage3 = source.CouponImage3,
                 CouponImage4 = source.CouponImage4,
                 CouponCodes = source.CouponCodes != null ? source.CouponCodes.Select(x => x.CreateFrom()).ToList() : null,
-
+                IsUseFilter = source.IsUseFilter == true ? 1 : 0,
             };
 
 

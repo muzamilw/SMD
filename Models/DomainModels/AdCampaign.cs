@@ -77,6 +77,7 @@ namespace SMD.Models.DomainModels
         public virtual Company Company { get; set; }
         public virtual Language Language { get; set; }
         public Nullable<int> DeliveryDays { get; set; }
+        public Nullable<bool> IsUseFilter { get; set; }
         public virtual ICollection<AdCampaignResponse> AdCampaignResponses { get; set; }
         public virtual ICollection<AdCampaignTargetCriteria> AdCampaignTargetCriterias { get; set; }
         public virtual ICollection<AdCampaignTargetLocation> AdCampaignTargetLocations { get; set; }
