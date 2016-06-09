@@ -4369,7 +4369,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
+/*
 ALTER FUNCTION [dbo].[GetUserSurveys]
 (	
 	-- Add the parameters for the function here
@@ -4485,7 +4485,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 
-
+/*
 ALTER FUNCTION [dbo].[GetUserProfileQuestions] 
 (	
 	-- Add the parameters for the function here
@@ -5766,7 +5766,7 @@ COMMIT
 BEGIN TRANSACTION
 GO
 ALTER TABLE dbo.AdCampaign ADD
-	CampaignImagePath nvarchar(200) NULL,
+	MainImagePath nvarchar(200) NULL,
 	VoucherAdditionalInfo nvarchar(MAX) NULL
 GO
 ALTER TABLE dbo.AdCampaign SET (LOCK_ESCALATION = TABLE)

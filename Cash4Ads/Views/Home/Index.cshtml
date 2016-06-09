@@ -20,7 +20,7 @@
         heading = "Purchase any 2-4-1 Offer for <b>£1</b> using your cash balance";
         
     }
-   
+    var sessionVar = Session["User"] as Cash4Ads.Models.User;
 }
 
 
@@ -160,7 +160,7 @@
                                                     </tbody>
                                                 </table>
 
-                                                <a title="Buy this deal" class="ctu-buy-big waMultiPrice" data-multibuy="true" href="/payment/620648" id="mainDealBuy">BUY!</a>
+                                                <a title="Buy this deal" class="ctu-buy-big waMultiPrice" data-multibuy="true" onclick="BuyCoupon();" id="mainDealBuy">BUY!</a>
 
                                                 @*<a class="waBuyAsGift js-buy-gift-button-track ctu-buy-gift" href="/payment/620648?gift=1">BUY AS A GIFT</a>*@
 
@@ -377,7 +377,7 @@
     //});
 
     $(document).ready(function(){
-        
+
     });
 
     $(document).ajaxStart(function(){
@@ -390,7 +390,7 @@
     });
 
     $(document).ajaxStop(function(){
-     $.LoadingOverlay("hide");
+        $.LoadingOverlay("hide");
     });
 
 
@@ -403,7 +403,7 @@
 
 
         GetCategories();
-     
+
 
     });
 
@@ -419,7 +419,7 @@
         if(keywords == ""){
             urlofcoup = 'http://manage.cash4ads.com/Api_Mobile/GetAllCoupons/8667e1a9-60af-4d99-8013-a241b81fa550?CategoryId=' + categoryId + '&Type='+vtype+'&keywords='+  keywords +'&PageNo=1&size=30';
         }
-        
+
         $.ajax({
             dataType: "json",
             url: urlofcoup,
@@ -500,6 +500,28 @@
 
             $("#coupPerct").text(100 - parseInt((parseFloat(couponObj[0].CouponDiscountedValue) / parseFloat(couponObj[0].CouponActualValue)) * 100) + '%');
             $("#coupBought").text(couponObj[0].CouponTakenValue);
+            $("#mainDealBuy").attr('data-couponId', couponObj[0].CouponId);
+        }
+
+    }
+    function BuyCoupon(){
+        if("@sessionVar" == null){
+            alert("Please login to buy voucher.");
+
+        }else{
+            var urlToSite = 'http://manage.cash4ads.com/Api/RedeemCoupon?authenticationToken='+ @sessionVar.UserId +'&companyId='+ @sessionVar.CompanyId +'&CouponId='+ $("#mainDealBuy").attr('data-couponId') +'&mode=3&amount='+ $("#couDiscountedVal").text() +'';
+            $.ajax({
+                dataType: "json",
+                url: urlToSite,
+                cache: false,
+                success: function (response) {
+                    if(response == false){
+                        alert("Can't purchase voucher because balance is not sufficient.");
+                    }else{
+                        alert("Voucher redeemed successfully.");
+                    }
+                }
+            });
         }
 
     }

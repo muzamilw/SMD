@@ -418,7 +418,7 @@ define("ads/ads.viewModel",
 
                       campaignModel().CampaignTypeImagePath("");
 
-
+                      campaignModel().IsUseFilter('0');
                       campaignModel().CampaignImagePath("");
                       campaignModel().VoucherImagePath("");
                       campaignModel().LanguageId(41);
@@ -1090,9 +1090,9 @@ define("ads/ads.viewModel",
                             SearchText: ""
                         }, {
                             success: function (data) {
-                                debugger
+                                
                                 if (data != null) {
-                                    
+                                    debugger
                                     // set languages drop down
                                     var profileQIds = [];
                                     var surveyQIds = [];
@@ -1856,6 +1856,9 @@ define("ads/ads.viewModel",
                 buyItImageCallback = function (file, data) {
                     campaignModel().buyItImageBytes(data);
                 },
+                 LogoUrlImageCallback = function (file, data) {
+                     campaignModel().LogoImageBytes(data);
+                 },
                 ShowCouponPromotions = function () {
                     isDisplayCouponsAds(true);
                     MainHeading("My Coupons");
@@ -2144,7 +2147,8 @@ define("ads/ads.viewModel",
                     advertiserLogo: advertiserLogo,
                     openVideoDialog: openVideoDialog,
                     previewVideoTagUrl: previewVideoTagUrl,
-                    closePreviewDialog: closePreviewDialog
+                    closePreviewDialog: closePreviewDialog,
+                    LogoUrlImageCallback: LogoUrlImageCallback
                 };
             })()
         };

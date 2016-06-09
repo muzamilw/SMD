@@ -9,7 +9,7 @@
           Voucher1ImagePath, VoucherImagePath, CreatedBy, VideoUrl, BuuyItLine1, BuyItLine2, BuyItLine3, BuyItButtonLabel,
           BuyItImageUrl, AdViews, CompanyId, CouponSwapValue, CouponActualValue, CouponQuantity, CouponTakenCount, priority,
           CouponDiscountValue, couponImage2, CouponImage3, CouponImage4, CouponExpiryLabel,
-          couponSmdComission, CouponCategories, DeliveryDays, IsUseFilter) {
+          couponSmdComission, CouponCategories, DeliveryDays, IsUseFilter, LogoUrl, VoucherAdditionalInfo) {
        
           var
               //type and userID will be set on server sside
@@ -122,6 +122,9 @@
               DeliveryDays = ko.observable(DeliveryDays),
               CouponCodes = ko.observableArray([]),
               IsUseFilter = ko.observable(IsUseFilter),
+              LogoUrl = ko.observable(LogoUrl),
+              VoucherAdditionalInfo = ko.observable(VoucherAdditionalInfo),
+              LogoImageBytes = ko.observable(''),
                // Errors
                 errors = ko.validation.group({
                     CampaignName:CampaignName,
@@ -178,6 +181,7 @@
                   DeliveryDays: DeliveryDays,
                   CouponCodes: CouponCodes,
                   IsUseFilter: IsUseFilter,
+
               }),
               // Has Changes
               hasChanges = ko.computed(function () {
@@ -275,7 +279,10 @@
                       CouponCategories: selectedCoupons,
                       DeliveryDays: DeliveryDays(),
                       CouponCodes: targetCouponCodes,
-                      IsUseFilter: IsUseFilter()
+                      IsUseFilter: IsUseFilter(),
+                      LogoUrl: LogoUrl(),
+                      VoucherAdditionalInfo: VoucherAdditionalInfo(),
+                      LogoImageBytes: LogoImageBytes()
                   };
               };
           return {
@@ -348,7 +355,10 @@
               CouponCategories: CouponCategories,
               DeliveryDays: DeliveryDays,
               CouponCodes: CouponCodes,
-              IsUseFilter: IsUseFilter
+              IsUseFilter: IsUseFilter,
+              LogoUrl: LogoUrl,
+              VoucherAdditionalInfo: VoucherAdditionalInfo,
+              LogoImageBytes: LogoImageBytes
           };
       };
 
@@ -529,10 +539,7 @@
 
     // Factory Method
     Campaign.Create = function (source) {
-        //var profileQIdsAdded = [];
-        //var qQIdsAdded = [];
-        debugger
-        console.log(source.IsUseFilter);
+     
         var campaign = new Campaign(source.CampaignId, source.LanguageId, source.CampaignName, source.UserId, source.Status, source.StatusValue,
             source.CampaignDescription, source.Gender + "", source.Archived, source.StartDateTime, source.EndDateTime, source.MaxBudget
             , source.Type + "", source.DisplayTitle, source.LandingPageVideoLink, source.VerifyQuestion, source.Answer1, source.Answer2, source.Answer3,
@@ -540,7 +547,7 @@
             source.CampaignTypeImagePath, source.Description, source.ClickRate, source.Voucher1Heading, source.Voucher1Description, source.Voucher1Value, source.Voucher2Heading, source.Voucher2Description,
              source.Voucher2Value, source.Voucher1ImagePath, source.VoucherImagePath, source.CreatedBy, source.VideoUrl, source.BuuyItLine1, source.BuyItLine2, source.BuyItLine3, source.BuyItButtonLabel, source.BuyItImageUrl,source.AdViews,source.CompanyId,
             source.CouponSwapValue, source.CouponActualValue,source.CouponQuantity,source.CouponTakenCount, source.priority, source.CouponDiscountValue,
-             source.couponImage2, source.CouponImage3, source.CouponImage4, source.CouponExpiryLabel, source.couponSmdComission,null, source.DeliveryDays, source.IsUseFilter + "");
+             source.couponImage2, source.CouponImage3, source.CouponImage4, source.CouponExpiryLabel, source.couponSmdComission, null, source.DeliveryDays, source.IsUseFilter + "", source.LogoUrl, source.VoucherAdditionalInfo);
         
         _.each(source.AdCampaignTargetCriterias, function (item) {
           

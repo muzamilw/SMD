@@ -221,6 +221,12 @@ namespace SMD.MIS
                 new { controller = "CouponCategory" },
                 null,
                 null);
+            config.Routes.MapHttpRoute(
+               "InviteUserByEmail",
+               "InviteUserByEmail/{AuthenticationToken}/",
+               new { controller = "InviteUser" },
+               null,
+               null);
 
         }
     }

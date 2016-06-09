@@ -375,13 +375,18 @@ require(["ko", "knockout-validation"], function (ko) {
                 });
                
                 instance.on('blur', function () {
-                    ist.Ads.viewModel.campaignModel().Voucher2Description(instance.getData());
+                    if (ist.Ads.viewModel.campaignModel() !== undefined && ist.Ads.viewModel.campaignModel() !== null) {
+                        if (ist.Ads.viewModel.campaignModel().VoucherAdditionalInfo() !== undefined && ist.Ads.viewModel.campaignModel().VoucherAdditionalInfo() !== null) {
+                            ist.Ads.viewModel.campaignModel().VoucherAdditionalInfo(instance.getData());
+                        }
+                    }
+                   
                 });
                 function handleAfterCommandExec(event) {
                     
                     if (ist.Ads.viewModel.campaignModel() !== undefined && ist.Ads.viewModel.campaignModel() !== null) {
-                        if (ist.Ads.viewModel.campaignModel().Voucher2Description() !== undefined && ist.Ads.viewModel.campaignModel().Voucher2Description() !== null) {
-                            if (instance.getData() === ist.Ads.viewModel.campaignModel().Voucher2Description()) {
+                        if (ist.Ads.viewModel.campaignModel().VoucherAdditionalInfo() !== undefined && ist.Ads.viewModel.campaignModel().VoucherAdditionalInfo() !== null) {
+                            if (instance.getData() === ist.Ads.viewModel.campaignModel().VoucherAdditionalInfo()) {
                                 return;
                             }
                         

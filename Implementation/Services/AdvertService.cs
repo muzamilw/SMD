@@ -57,14 +57,14 @@ namespace SMD.Implementation.Services
         }
         private string[] SaveImages(AdCampaign campaign)
         {
-            string[] savePaths = new string[7];
+            string[] savePaths = new string[8];
             string directoryPath = HttpContext.Current.Server.MapPath("~/SMD_Content/AdCampaign/" + campaign.CampaignId);
 
             if (directoryPath != null && !Directory.Exists(directoryPath))
             {
                 Directory.CreateDirectory(directoryPath);
             }
-            if (!string.IsNullOrEmpty(campaign.CampaignImagePath) && !campaign.CampaignImagePath.Contains("guid_CampaignDefaultImage"))
+            if (!string.IsNullOrEmpty(campaign.CampaignImagePath) && !campaign.CampaignImagePath.Contains("guid_CampaignDefaultImage") && !campaign.CampaignImagePath.Contains("http"))
             {
                 string base64 = campaign.CampaignImagePath.Substring(campaign.CampaignImagePath.IndexOf(',') + 1);
                 base64 = base64.Trim('\0');
@@ -157,6 +157,17 @@ namespace SMD.Implementation.Services
                 savePath = savePath.Substring(indexOf, savePath.Length - indexOf);
                 savePaths[6] = savePath;
                 campaign.CouponImage4 = savePath;
+            }
+            if (!string.IsNullOrEmpty(campaign.LogoImageBytes))
+            {
+                string base64 = campaign.LogoImageBytes.Substring(campaign.LogoImageBytes.IndexOf(',') + 1);
+                base64 = base64.Trim('\0');
+                byte[] data = Convert.FromBase64String(base64);
+                string savePath = directoryPath + "\\guid_CampaignLogoImage.jpg";
+                File.WriteAllBytes(savePath, data);
+                int indexOf = savePath.LastIndexOf("SMD_Content", StringComparison.Ordinal);
+                savePath = savePath.Substring(indexOf, savePath.Length - indexOf);
+                savePaths[7] = savePath;
             }
             return savePaths;
         }
@@ -359,6 +370,10 @@ namespace SMD.Implementation.Services
                 {
                     campaignModel.CouponImage4 = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + paths[6];
                 }
+                if (!string.IsNullOrEmpty(paths[7]))
+                {
+                    campaignModel.LogoUrl = paths[7];
+                }
                 _adCampaignRepository.SaveChanges();
             }
             
@@ -460,7 +475,10 @@ namespace SMD.Implementation.Services
                     if (!paths[6].ToLower().Contains(HttpContext.Current.Request.Url.Authority.ToLower()))
                         campaignModel.CouponImage4 = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + paths[6];
                 }
-
+                if (!string.IsNullOrEmpty(paths[7]))
+                {
+                    campaignModel.LogoUrl = paths[7];
+                }
             }
             if (!string.IsNullOrEmpty(campaignModel.couponImage2) && !campaignModel.couponImage2.Contains("http:"))
             {
@@ -692,7 +710,9 @@ namespace SMD.Implementation.Services
         private void MakeStripePaymentandAddInvoiceForCampaign(AdCampaign source)
         {
             #region Stripe Payment
-
+            string response = null;
+            Boolean isSystemUser = false;
+            double amount = 0;
             // User who added Campaign for approval 
             var user = webApiUserService.GetUserByUserId(source.UserId);
             // Get Current Product
@@ -700,23 +720,26 @@ namespace SMD.Implementation.Services
             // Tax Applied
             var tax = taxRepository.GetTaxByCountryId(user.Company.CountryId);
             // Total includes tax
-            var amount = product.SetupPrice + tax.TaxValue;
-            string response = null;
-            Boolean isSystemUser;
+            if (product != null) 
+            {
+                amount = product.SetupPrice ?? 0 + tax.TaxValue ?? 0;
+               
 
-            // If It is not System User then make transation 
-            if (user.Roles.Any(role => role.Name.ToLower().Equals("user")))
-            {
-                // Make Stripe actual payment 
-                response = stripeService.ChargeCustomer((int?)amount, user.Company.StripeCustomerId);
-                isSystemUser = false;
+                // If It is not System User then make transation 
+                if (user.Roles.Any(role => role.Name.ToLower().Equals("user")))
+                {
+                    // Make Stripe actual payment 
+                    response = stripeService.ChargeCustomer((int?)amount, user.Company.StripeCustomerId);
+                    isSystemUser = false;
+                }
+                else
+                {
+                    isSystemUser = true;
+                }
             }
-            else
-            {
-                isSystemUser = true;
-            }
+            
             #endregion
-            if (isSystemUser || (response != "failed"))
+            if (isSystemUser || (response != "failed" && response != null))
             {
                 #region Add Invoice
 

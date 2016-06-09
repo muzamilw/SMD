@@ -41,7 +41,13 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// <summary>
         ///invite user
         /// </summary>
-        
+        public bool Get(string Email,string UserId)
+        {
+
+            emailManagerService.SendEmailToInviteUser(Email, UserId);
+            return true;
+
+        }
 
         public bool Post(InviteUserEmail request)
         {

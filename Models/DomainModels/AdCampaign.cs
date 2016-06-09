@@ -78,6 +78,8 @@ namespace SMD.Models.DomainModels
         public virtual Language Language { get; set; }
         public Nullable<int> DeliveryDays { get; set; }
         public Nullable<bool> IsUseFilter { get; set; }
+        public string LogoUrl { get; set; }
+        public string VoucherAdditionalInfo { get; set; }
         public virtual ICollection<AdCampaignResponse> AdCampaignResponses { get; set; }
         public virtual ICollection<AdCampaignTargetCriteria> AdCampaignTargetCriterias { get; set; }
         public virtual ICollection<AdCampaignTargetLocation> AdCampaignTargetLocations { get; set; }
@@ -93,6 +95,8 @@ namespace SMD.Models.DomainModels
         public string VoucherImagePath { get; set; }
         [NotMapped]
         public string buyItImageBytes { get; set; }
+        [NotMapped]
+        public string LogoImageBytes { get; set; }
 
         [NotMapped]
         public int AdViews { get; set; }
@@ -182,6 +186,11 @@ namespace SMD.Models.DomainModels
             target.CouponQuantity = CouponQuantity;
             target.priority = priority;
             target.CouponDiscountValue = CouponDiscountValue;
+            target.IsUseFilter = IsUseFilter;
+            target.CouponType = CouponType;
+            target.DeliveryDays = DeliveryDays;
+            target.VoucherAdditionalInfo = VoucherAdditionalInfo;
+              
         }
     }
 }

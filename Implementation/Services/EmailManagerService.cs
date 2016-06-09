@@ -781,7 +781,6 @@ namespace SMD.Implementation.Services
         /// </summary>
         public async Task SendEmailToInviteUser(string email)
         {
-
             MMailto.Add(email);
             Mid = (int)EmailTypes.InviteUsers;
             string userName = string.Empty;
@@ -791,6 +790,7 @@ namespace SMD.Implementation.Services
             Muser = userName;
             InviteURL = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/Account/Register?CompanyID=" + companyid;
             await SendEmail();
+
 
         }
         // invite user from mobile api 
@@ -844,7 +844,7 @@ namespace SMD.Implementation.Services
                 {
                     CampaignLabel = "Coupon";
                 }
-                if (Type == 3)
+                if (Type == 3 || Type == 1)
                 {
                     CampaignLabel = "Campaign";
                 }
@@ -863,7 +863,7 @@ namespace SMD.Implementation.Services
             if (oUser != null)
             {
                 MMailto.Add(oUser.Email);
-                Mid = (int)EmailTypes.CampaignApproved;
+                Mid = (int)EmailTypes.CampaignReject;
                 Muser = oUser.FullName;
                 RejectionReason = RReason;
                 CampaignName = campaignName;
@@ -871,7 +871,7 @@ namespace SMD.Implementation.Services
                 {
                     CampaignLabel = "Coupon";
                 }
-                if (Type == 3)
+                if (Type == 3 || Type == 1)
                 {
                     CampaignLabel = "Campaign";
                 }
@@ -881,6 +881,23 @@ namespace SMD.Implementation.Services
             {
                 throw new Exception("Email could not be sent!");
             }
+        }
+        public async Task SendEmailToInviteUser(string email, string UserId)
+        {
+            var oUser = manageUserRepository.GetByUserId(UserId);
+
+            if (oUser != null)
+            {
+                MMailto.Add(email);
+                Mid = (int)EmailTypes.InviteUsers;
+
+                int companyid = 0;
+                Muser = oUser.FullName;
+                InviteURL = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/Account/Register?CompanyID=" + oUser.CompanyId;
+                SendEmailNotAysnc();
+            }
+
+
         }
         #endregion
 

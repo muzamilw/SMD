@@ -86,5 +86,7 @@ namespace SMD.MIS.Areas.Api.Models
         public string CouponExpiryLabel { get; set; }
         public List<CouponCodeModel> CouponCodes { get; set; }
         public int IsUseFilter { get; set; }
+        public string LogoUrl { get; set; }
+        public string VoucherAdditionalInfo { get; set; }
     }
 }
