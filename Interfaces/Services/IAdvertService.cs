@@ -23,7 +23,7 @@ namespace SMD.Interfaces.Services
         /// <summary>
         /// Update Ad CAmpaign  | baqer
         /// </summary>
-        AdCampaign UpdateAdCampaign(AdCampaign source);
+        //AdCampaign UpdateAdCampaign(AdCampaign source);
 
         /// <summary>
         /// Get Ads For API  | baqer
@@ -48,5 +48,6 @@ namespace SMD.Interfaces.Services
         List<GetCoupons_Result> GetCoupons(string UserId);
         List<Coupons> GetAllCoupons(int categoryId, int type, int size, string keywords, int pageNo);
         AdCampaign SendApprovalRejectionEmail(AdCampaign source);
+        string UpdateAdApprovalCampaign(AdCampaign source);
     }
 }

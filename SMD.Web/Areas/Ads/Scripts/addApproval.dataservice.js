@@ -21,7 +21,7 @@ define("addApproval/addApproval.dataservice", function () {
 
                     // Edit AdCampaign
                     amplify.request.define('saveAdCampaign', 'ajax', {
-                        url: '/Api/AdCampaign',
+                        url: '/Api/AdCampaignApproval',
                         dataType: 'json',
                         type: 'POST'
                     });

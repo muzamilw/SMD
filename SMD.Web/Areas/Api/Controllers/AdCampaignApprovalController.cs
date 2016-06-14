@@ -8,12 +8,9 @@ using System.Web.Http;
 
 namespace SMD.MIS.Areas.Api.Controllers
 {
-    /// <summary>
-    /// Ad Campaign Api Controller 
-    /// </summary>
-    public class AdCampaignController : ApiController
+    public class AdCampaignApprovalController : ApiController
     {
-        #region Public
+           #region Public
         private readonly IAdvertService _advertService;
         private readonly IEmailManagerService _emailManagerService;
         #endregion
@@ -21,7 +18,7 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// <summary>
         /// Constuctor 
         /// </summary>
-        public AdCampaignController(IAdvertService advertService, IEmailManagerService emailManagerService)
+        public AdCampaignApprovalController(IAdvertService advertService, IEmailManagerService emailManagerService)
         {
             _advertService = advertService;
             _emailManagerService = emailManagerService;
@@ -29,19 +26,6 @@ namespace SMD.MIS.Areas.Api.Controllers
 
         #endregion
         #region Public
-
-        /// <summary>
-        /// Get Add Campaigns
-        /// </summary>
-        public AdCampaignResposneModelForAproval Get([FromUri] AdCampaignSearchRequest request)
-        {
-            if (request == null || !ModelState.IsValid)
-            {
-                throw new HttpException((int)HttpStatusCode.BadRequest, "Invalid Request");
-            }
-            return _advertService.GetAdCampaignForAproval(request).CreateFrom();
-        }
-
 
         /// <summary>
         /// Update Ad Campaign 

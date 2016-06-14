@@ -383,6 +383,7 @@
     <Compile Include="Areas\Ads\AdsAreaRegistration.cs" />
     <Compile Include="Areas\Ads\Controllers\AdsController.cs" />
     <Compile Include="Areas\Api\ApiAreaRegistration.cs" />
+    <Compile Include="Areas\Api\Controllers\AdCampaignApprovalController.cs" />
     <Compile Include="Areas\Api\Controllers\AdCampaignBaseController.cs" />
     <Compile Include="Areas\Api\Controllers\ApproveSurveyController.cs" />
     <Compile Include="Areas\Api\Controllers\BuyItController.cs" />

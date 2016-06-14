@@ -53,12 +53,14 @@ namespace SMD.Implementation.Services
         {
             if (amount <= 0)
             {
-                throw new ArgumentException("Amount");    
+                //throw new ArgumentException("Amount");
+                return "Failed, Amount is not sufficient!"; 
             }
 
             if (string.IsNullOrEmpty(customerStripeId))
             {
-                throw new ArgumentException("customerStripeId");
+                //throw new ArgumentException("customerStripeId");
+                return "Failed, Account not configured!";  
             }
 
             // Verify If Credit Card is not expired
@@ -66,7 +68,8 @@ namespace SMD.Implementation.Services
             var customer = customerService.Get(customerStripeId);
             if (customer == null)
             {
-                throw new SMDException("Customer Not Found!");
+               // throw new SMDException("Customer Not Found!");
+                return "Failed, Customer Not Found!";  
             }
 
             // If Card has been expired then skip payment
@@ -76,7 +79,8 @@ namespace SMD.Implementation.Services
                 if (defaultStripeCard != null && (Convert.ToInt32(defaultStripeCard.ExpirationMonth) < DateTime.Now.Month ||
                     Convert.ToInt32(defaultStripeCard.ExpirationYear) < DateTime.Now.Year))
                 {
-                    throw new SMDException("Card Expired!");
+                    //throw new SMDException("Card Expired!");
+                    return "Failed, Card Expired!";  
                 }
             }
 
@@ -94,7 +98,7 @@ namespace SMD.Implementation.Services
             {
                 return resposne.BalanceTransactionId;
             }
-            return "failed";  
+            return "Failed";  
         }
 
 

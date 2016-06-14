@@ -65,30 +65,30 @@ define("addApproval/addApproval.viewModel",
                     },                  
                     // Save AdCampaign 
                     onSaveCampaign = function () {
-                        var campId = selectedCampaign().CampaignId;
+                        
+                        var campId = selectedCampaign().id();
                         dataservice.saveAdCampaign(selectedCampaign().convertToServerData(), {
-                            success: function (obj) {
-                                debugger
-                                dataservice.sendApprovalRejectionEmail(selectedCampaign().convertToServerData(), {
-                                    success: function (obj) {
-                                        debugger
-                                        var newObjtodelete = campaigns.find(function (temp) {
-                                            return campId == temp.id();
-                                        });
-                                        campaigns.remove(newObjtodelete);
-                                        //  toastr.success("You are Good!");
-                                        isEditorVisible(false);
-                                    },
-                                    error: function () {
-                                        toastr.error("Failed to save!");
-                                    }
-                                });
-                              //  var newObjtodelete = campaigns.find(function(temp) {
-                              //      return obj.CampaignId == temp.id();
-                              //  });
-                              //  campaigns.remove(newObjtodelete);
-                              ////  toastr.success("You are Good!");
-                              //  isEditorVisible(false);
+                            success: function (response) {
+                                
+                                if (response.indexOf("Failed") == -1) {
+                                    dataservice.sendApprovalRejectionEmail(selectedCampaign().convertToServerData(), {
+                                        success: function (obj) {
+                                            getCampaigns();
+                                            //var existingCampaigntodelete = $.grep(campaigns(), function (n, i) {
+                                            //    return (n.id() == campId);
+                                            //});
+
+                                            //campaigns.remove(existingCampaigntodelete);
+                                            
+                                            isEditorVisible(false);
+                                        },
+                                        error: function () {
+                                            toastr.error("Failed to save!");
+                                        }
+                                    });
+                                } else {
+                                    toastr.error(response);
+                                }
                             },
                             error: function() {
                                 toastr.error("Failed to save!");

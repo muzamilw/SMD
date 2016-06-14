@@ -641,57 +641,48 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Update Ad CAmpaign | baqer
         /// </summary>
-        public AdCampaign UpdateAdCampaign(AdCampaign source)
-        {
-            var dbAd = _adCampaignRepository.Find(source.CampaignId);
-            // Update 
-            if (dbAd != null)
-            {
-                // Approval
-                if (source.Approved == true)
-                {
-                    dbAd.Approved = true;
-                    dbAd.ApprovalDateTime = DateTime.Now;
-                    dbAd.ApprovedBy = _adCampaignRepository.LoggedInUserIdentity;
-                    dbAd.Status = (Int32)AdCampaignStatus.Live;
-                    dbAd.StartDateTime = DateTime.Now;
-                    dbAd.EndDateTime = DateTime.Now.AddDays(30);
-                    // Stripe payment + Invoice Generation
-                    // Muzi bhai said we will see it on latter stage 
+        //public AdCampaign UpdateAdCampaign(AdCampaign source)
+        //{
+        //    var dbAd = _adCampaignRepository.Find(source.CampaignId);
+        //    // Update 
+        //    if (dbAd != null)
+        //    {
+        //        // Approval
+        //        if (source.Approved == true)
+        //        {
+        //            dbAd.Approved = true;
+        //            dbAd.ApprovalDateTime = DateTime.Now;
+        //            dbAd.ApprovedBy = _adCampaignRepository.LoggedInUserIdentity;
+        //            dbAd.Status = (Int32)AdCampaignStatus.Live;
+        //            dbAd.StartDateTime = DateTime.Now;
+        //            dbAd.EndDateTime = DateTime.Now.AddDays(30);
+        //            // Stripe payment + Invoice Generation
+        //            // Muzi bhai said we will see it on latter stage 
 
-                    //todo pilot: unCommenting Stripe payment code on Ads approval
-                     MakeStripePaymentandAddInvoiceForCampaign(dbAd);
-                }
-                // Rejection 
-                else
-                {
-                    dbAd.Status = (Int32)AdCampaignStatus.ApprovalRejected;
-                    dbAd.Approved = false;
-                    dbAd.RejectedReason = source.RejectedReason;
-                    emailManagerService.SendQuestionRejectionEmail(dbAd.UserId);
-                }
-                dbAd.ModifiedDateTime = DateTime.Now;
-                dbAd.ModifiedBy = _adCampaignRepository.LoggedInUserIdentity;
+        //            //todo pilot: unCommenting Stripe payment code on Ads approval
+        //             MakeStripePaymentandAddInvoiceForCampaign(dbAd);
+        //        }
+        //        // Rejection 
+        //        else
+        //        {
+        //            dbAd.Status = (Int32)AdCampaignStatus.ApprovalRejected;
+        //            dbAd.Approved = false;
+        //            dbAd.RejectedReason = source.RejectedReason;
+        //            emailManagerService.SendQuestionRejectionEmail(dbAd.UserId);
+        //        }
+        //        dbAd.ModifiedDateTime = DateTime.Now;
+        //        dbAd.ModifiedBy = _adCampaignRepository.LoggedInUserIdentity;
 
-                _adCampaignRepository.SaveChanges();
+        //        _adCampaignRepository.SaveChanges();
 
                
                 
-                AdCampaign campaignupdatedrec = _adCampaignRepository.Find(source.CampaignId);
-                //if (dbAd.Approved == true)
-                //{
-                //    emailManagerService.SendCampaignApprovalEmail(dbAd.UserId, dbAd.CampaignName, dbAd.Type);
-
-                //}
-                //else
-                //{
-                //    emailManagerService.SendCampaignRejectionEmail(dbAd.UserId, dbAd.CampaignName, dbAd.RejectedReason, dbAd.Type);
-
-                //}
-                return campaignupdatedrec;
-            }
-            return new AdCampaign();
-        }
+        //        AdCampaign campaignupdatedrec = _adCampaignRepository.Find(source.CampaignId);
+             
+        //        return campaignupdatedrec;
+        //    }
+        //    return new AdCampaign();
+        //}
         public AdCampaign SendApprovalRejectionEmail(AdCampaign source)
         {
             var dbAd = _adCampaignRepository.Find(source.CampaignId);
@@ -716,7 +707,7 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Makes Payment From Stripe & Add Invoice | baqer
         /// </summary>
-        private void MakeStripePaymentandAddInvoiceForCampaign(AdCampaign source)
+        private string MakeStripePaymentandAddInvoiceForCampaign(AdCampaign source)
         {
             #region Stripe Payment
             string response = null;
@@ -748,47 +739,52 @@ namespace SMD.Implementation.Services
             }
             
             #endregion
-            if (isSystemUser || (response != "failed" && response != null))
+           
+            if (response != null && !response.Contains("Failed"))
             {
-                #region Add Invoice
-
-                // Add invoice data
-                var invoice = new Invoice
+                if (isSystemUser)
                 {
-                    Country = user.Company.CountryId.ToString(),
-                    Total = (double)amount,
-                    NetTotal = (double)amount,
-                    InvoiceDate = DateTime.Now,
-                    InvoiceDueDate = DateTime.Now.AddDays(7),
-                    Address1 = user.Company.CountryId.ToString(),
-                    CompanyId = user.Company.CompanyId,
-                    CompanyName = "My Company",
-                    CreditCardRef = response
-                };
-                invoiceRepository.Add(invoice);
+                    #region Add Invoice
 
-                #endregion
-                #region Add Invoice Detail
+                    // Add invoice data
+                    var invoice = new Invoice
+                    {
+                        Country = user.Company.CountryId.ToString(),
+                        Total = (double)amount,
+                        NetTotal = (double)amount,
+                        InvoiceDate = DateTime.Now,
+                        InvoiceDueDate = DateTime.Now.AddDays(7),
+                        Address1 = user.Company.CountryId.ToString(),
+                        CompanyId = user.Company.CompanyId,
+                        CompanyName = "My Company",
+                        CreditCardRef = response
+                    };
+                    invoiceRepository.Add(invoice);
 
-                // Add Invoice Detail Data 
-                var invoiceDetail = new InvoiceDetail
-                {
-                    InvoiceId = invoice.InvoiceId,
-                    SqId = null,
-                    ProductId = product.ProductId,
-                    ItemName = "Ad Campaign",
-                    ItemAmount = (double)amount,
-                    ItemTax = (double)tax.TaxValue,
-                    ItemDescription = "This is description!",
-                    ItemGrossAmount = (double)amount,
-                    CampaignId = source.CampaignId,
+                    #endregion
+                    #region Add Invoice Detail
 
-                };
-                invoiceDetailRepository.Add(invoiceDetail);
-                invoiceDetailRepository.SaveChanges();
+                    // Add Invoice Detail Data 
+                    var invoiceDetail = new InvoiceDetail
+                    {
+                        InvoiceId = invoice.InvoiceId,
+                        SqId = null,
+                        ProductId = product.ProductId,
+                        ItemName = "Ad Campaign",
+                        ItemAmount = (double)amount,
+                        ItemTax = (double)tax.TaxValue,
+                        ItemDescription = "This is description!",
+                        ItemGrossAmount = (double)amount,
+                        CampaignId = source.CampaignId,
 
-                #endregion
+                    };
+                    invoiceDetailRepository.Add(invoiceDetail);
+                    invoiceDetailRepository.SaveChanges();
+
+                    #endregion
+                }
             }
+            return response;
         }
 
 
@@ -1060,6 +1056,52 @@ namespace SMD.Implementation.Services
         public List<Coupons> GetAllCoupons(int categoryId, int type, int size, string keywords, int pageNo)
         {
             return _adCampaignRepository.GetAllCoupons(categoryId,type,size,keywords,pageNo);
+        }
+
+        /// <summary>
+        /// Update Approval campaign
+        /// </summary>
+        public string UpdateAdApprovalCampaign(AdCampaign source)
+        {
+            string respMesg = "True";
+            var dbAd = _adCampaignRepository.Find(source.CampaignId);
+            // Update 
+            if (dbAd != null)
+            {
+                // Approval
+                if (source.Approved == true)
+                {
+                    dbAd.Approved = true;
+                    dbAd.ApprovalDateTime = DateTime.Now;
+                    dbAd.ApprovedBy = _adCampaignRepository.LoggedInUserIdentity;
+                    dbAd.Status = (Int32)AdCampaignStatus.Live;
+                    dbAd.StartDateTime = DateTime.Now;
+                    dbAd.EndDateTime = DateTime.Now.AddDays(30);
+                    // Stripe payment + Invoice Generation
+                    // Muzi bhai said we will see it on latter stage 
+
+                    //todo pilot: unCommenting Stripe payment code on Ads approval
+                    respMesg = MakeStripePaymentandAddInvoiceForCampaign(dbAd);
+                    if (respMesg.Contains("Failed"))
+                    {
+                        return respMesg;
+                    }
+                }
+                // Rejection 
+                else
+                {
+                    dbAd.Status = (Int32)AdCampaignStatus.ApprovalRejected;
+                    dbAd.Approved = false;
+                    dbAd.RejectedReason = source.RejectedReason;
+                    emailManagerService.SendQuestionRejectionEmail(dbAd.UserId);
+                }
+                dbAd.ModifiedDateTime = DateTime.Now;
+                dbAd.ModifiedBy = _adCampaignRepository.LoggedInUserIdentity;
+
+                _adCampaignRepository.SaveChanges();
+
+            }
+            return respMesg;
         }
         #endregion
     }

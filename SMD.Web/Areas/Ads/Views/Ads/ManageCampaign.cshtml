@@ -1169,7 +1169,7 @@ else
                                                     <div class="defaultImgUploadImage">
 
                                                         <img style="width:auto;height:80px;max-width:200px;" data-bind="visible: VoucherImagePath() == ''" src="/Content/Images/Company_Default.png" />
-                                                        <img style="width:auto;height:80px;max-width:200px;" data-bind="visible: VoucherImagePath() != '' ,attr: { src: VoucherImagePath }" />
+                                                        <img style="width:auto;height:80px;max-width:200px;" data-bind="visible: VoucherImagePath() != '' ,attr: { src: VoucherImagePath() + $root.randonNumber() }" />
 
                                                     </div>
 
@@ -1338,8 +1338,8 @@ else
 
                                                     <div class="defaultImgUploadImage">
 
-                                                        <img style="width:auto;height:80px;max-width:200px;" data-bind="visible: buyItImageBytes() == '',attr: { src: BuyItImageUrl == ''?'/Content/Images/Company_Default.png':'/'+BuyItImageUrl() }" src="/Content/Images/Company_Default.png" />
-                                                        <img style="width:auto;height:80px;max-width:200px;" data-bind="visible: buyItImageBytes() != '' ,attr: { src: buyItImageBytes }" />
+                                                        <img style="width:auto;height:80px;max-width:200px;" data-bind="visible: buyItImageBytes() == '',attr: { src: BuyItImageUrl == ''?'/Content/Images/Company_Default.png':'/'+BuyItImageUrl() + $root.randonNumber()  }" src="/Content/Images/Company_Default.png" />
+                                                        <img style="width:auto;height:80px;max-width:200px;" data-bind="visible: buyItImageBytes() != '' ,attr: { src: buyItImageBytes() }" />
 
                                                     </div>
 
@@ -1400,7 +1400,7 @@ else
 
                                         <div style="width:210px;text-align:center;">
                                             <img style="width:auto;height:80px;max-width:200px;" data-bind="visible:CampaignImagePath() == ''" src="/Content/Images/Company_Default.png" />
-                                            <img style="width:auto;height:80px;max-width:200px;" data-bind="visible:CampaignImagePath() != '' ,attr: { src: CampaignImagePath }" />
+                                            <img style="width:auto;height:80px;max-width:200px;" data-bind="visible:CampaignImagePath() != '' ,attr: { src: CampaignImagePath() + $root.randonNumber() }" />
 
                                         </div>
 
