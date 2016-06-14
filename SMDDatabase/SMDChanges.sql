@@ -5766,7 +5766,7 @@ COMMIT
 BEGIN TRANSACTION
 GO
 ALTER TABLE dbo.AdCampaign ADD
-	MainImagePath nvarchar(200) NULL,
+	LogoUrl nvarchar(200) NULL,
 	VoucherAdditionalInfo nvarchar(MAX) NULL
 GO
 ALTER TABLE dbo.AdCampaign SET (LOCK_ESCALATION = TABLE)

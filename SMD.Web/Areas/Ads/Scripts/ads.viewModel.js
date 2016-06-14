@@ -98,7 +98,8 @@ define("ads/ads.viewModel",
                     selectedCouponCodeItems = ko.observableArray([]),                            // Initial selection
                     UsedCouponQuantity = ko.observable(0),
                     advertiserLogo = ko.observable("");
-                    previewVideoTagUrl = ko.observable("");
+                previewVideoTagUrl = ko.observable("");
+                randonNumber = ko.observable("?r=0");
                     getCampaignBaseContent = function () {
                         dataservice.getBaseData({
                             RequestId: 1,
@@ -368,6 +369,7 @@ define("ads/ads.viewModel",
                       
                       campaignModel(new model.Campaign());
                       // campaignModel().CampaignName('New Campaign');
+
                       if (mode == 1) { // video
                           campaignModel().Type('1');
                           isEnableVedioVerificationLink(true);
@@ -423,7 +425,8 @@ define("ads/ads.viewModel",
                       campaignModel().VoucherImagePath("");
                       campaignModel().LanguageId(41);
                       campaignModel().DeliveryDays('10');
-
+                      campaignModel().LogoUrl('Content/Images/Company_Default.png');
+                      
                       if (UserAndCostDetail() != null || UserAndCostDetail() != undefined) {
                           alreadyAddedDeliveryValue(10);
                           quizQuestionStatus(true);
@@ -595,10 +598,19 @@ define("ads/ads.viewModel",
                             //    }));
                             //});
                         }
+                        
                         debugger
+                        if (campaignModel().IsUseFilter() == "0") {
+                            campaignModel().IsUseFilter(0);
+                        } else {
+                            campaignModel().IsUseFilter(1);
+                        }
+
+
                         campaignModel().Status(mode);
                         campaignModel().ClickRate(pricePerclick());
 
+                       
                         var campignServerObj = campaignModel().convertToServerData();
 
                         dataservice.addCampaignData(campignServerObj, {
@@ -1395,11 +1407,11 @@ define("ads/ads.viewModel",
                                     couponCategories.removeAll();
                                     ko.utils.arrayPushAll(couponCategories(), arrayOfUpdatedList);
                                     couponCategories.valueHasMutated();
-
+                                    randonNumber("?r=" + Math.floor(Math.random() * (20 - 1 + 1)) + 1);
                                     getAudienceCount();
                                     bindAudienceReachCount();
                                     $.unblockUI(spinner);
-
+                                   
                                 }
 
                             },
@@ -2148,7 +2160,8 @@ define("ads/ads.viewModel",
                     openVideoDialog: openVideoDialog,
                     previewVideoTagUrl: previewVideoTagUrl,
                     closePreviewDialog: closePreviewDialog,
-                    LogoUrlImageCallback: LogoUrlImageCallback
+                    LogoUrlImageCallback: LogoUrlImageCallback,
+                    randonNumber: randonNumber
                 };
             })()
         };

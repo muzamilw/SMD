@@ -505,11 +505,14 @@
 
     }
     function BuyCoupon(){
-        if("@sessionVar" == null){
+        if("@sessionVar" == ""){
             alert("Please login to buy voucher.");
 
         }else{
-            var urlToSite = 'http://manage.cash4ads.com/Api/RedeemCoupon?authenticationToken='+ @sessionVar.UserId +'&companyId='+ @sessionVar.CompanyId +'&CouponId='+ $("#mainDealBuy").attr('data-couponId') +'&mode=3&amount='+ $("#couDiscountedVal").text() +'';
+            var urlToSite = "";
+            urlToSite = 'http://smdpreview.com/Api/RedeemCoupon?authenticationToken='+ '@ViewBag.userid' +'&companyId='+ '@ViewBag.companyid' +'&CouponId='+ $("#mainDealBuy").attr('data-couponId') +'&mode=3&amount='+ $("#couDiscountedVal").text() +'';
+           
+           
             $.ajax({
                 dataType: "json",
                 url: urlToSite,

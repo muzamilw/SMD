@@ -65,8 +65,11 @@ namespace SMD.Implementation.Services
               var coupon = dbContext.AdCampaigns.Where(g => g.CampaignId == couponId).SingleOrDefault();
               if (coupon == null)
                   return "";
-              double totalAmount = Convert.ToDouble( coupon.CouponSwapValue);
-              double smdValue = totalAmount - (Convert.ToDouble(coupon.couponSmdComission));
+
+              string swapVal = coupon.CouponSwapValue.Replace("£", "");
+              double totalAmount = Convert.ToDouble(swapVal);
+              string cmisnVal = coupon.couponSmdComission.Replace("£", "");
+              double smdValue = totalAmount - (Convert.ToDouble(cmisnVal));
               double VoucherSellerValue = totalAmount - smdValue;
 
               var couponCode = dbContext.CouponCodes.Where(g => g.CampaignId == couponId && g.IsTaken != true).FirstOrDefault();
