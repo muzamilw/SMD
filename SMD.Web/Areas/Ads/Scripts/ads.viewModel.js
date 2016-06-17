@@ -58,6 +58,7 @@ define("ads/ads.viewModel",
                     isProfileSurveyPerClickPriceAdded = ko.observable(false),
                     isEducationPerClickPriceAdded = ko.observable(false),
                     isBuyItPerClickPriceAdded = ko.observable(false),
+                    isVoucherPerClickPriceAdded = ko.observable(false),
                     isDisplayCouponsAds = ko.observable(false),
                     selectedEducationIncludeExclude = ko.observable(true),
                     isListVisible = ko.observable(true),
@@ -87,6 +88,7 @@ define("ads/ads.viewModel",
                     fivePriceLbl = ko.observable("1"),
                     threePriceLbl = ko.observable("1"),
                     buyItPriceLbl = ko.observable("1"),
+                    voucherPriceLbl = ko.observable("1"),
                     alreadyAddedDeliveryValue = ko.observable(false),
                     isQuizQPerClickPriceAdded = ko.observable(false),
                     campaignNamePlaceHolderValue = ko.observable('Campaign Name (36 characters)'),
@@ -98,8 +100,9 @@ define("ads/ads.viewModel",
                     selectedCouponCodeItems = ko.observableArray([]),                            // Initial selection
                     UsedCouponQuantity = ko.observable(0),
                     advertiserLogo = ko.observable("");
-                previewVideoTagUrl = ko.observable("");
-                randonNumber = ko.observable("?r=0");
+                    previewVideoTagUrl = ko.observable("");
+                    randonNumber = ko.observable("?r=0");
+                    vouchers = ko.observableArray();
                     getCampaignBaseContent = function () {
                         dataservice.getBaseData({
                             RequestId: 1,
@@ -114,7 +117,7 @@ define("ads/ads.viewModel",
                                 buyItPriceLbl(UserAndCostDetail().BuyItClausePrice + "p");
                                 quizPriceLbl(UserAndCostDetail().QuizQuestionClausePrice);
                                 tenPriceLbl(" (" + UserAndCostDetail().TenDayDeliveryClausePrice + "p)");
-
+                                voucherPriceLbl(UserAndCostDetail().VoucherClausePrice);
                                 threePriceLbl(" (" + UserAndCostDetail().ThreeDayDeliveryClausePrice + "p)");
                                 fivePriceLbl(" (" + UserAndCostDetail().FiveDayDeliveryClausePrice + "p)");
                                 if (UserAndCostDetail().GenderClausePrice != null) {
@@ -154,7 +157,13 @@ define("ads/ads.viewModel",
                                     ko.utils.arrayPushAll(couponCategories(), data.CouponCategories);
                                     couponCategories.valueHasMutated();
                                 }
-
+                                debugger
+                                if (data.DiscountVouchers != null) {
+                                    vouchers.removeAll();
+                                    ko.utils.arrayPushAll(vouchers(), data.DiscountVouchers);
+                                    vouchers.valueHasMutated();
+                                }
+                                
                             }
 
                         },
@@ -599,7 +608,7 @@ define("ads/ads.viewModel",
                             //});
                         }
                         
-                        debugger
+                        
                         if (campaignModel().IsUseFilter() == "0") {
                             campaignModel().IsUseFilter(0);
                         } else {
@@ -1104,7 +1113,7 @@ define("ads/ads.viewModel",
                             success: function (data) {
                                 
                                 if (data != null) {
-                                    debugger
+                                    
                                     // set languages drop down
                                     var profileQIds = [];
                                     var surveyQIds = [];
@@ -2161,7 +2170,9 @@ define("ads/ads.viewModel",
                     previewVideoTagUrl: previewVideoTagUrl,
                     closePreviewDialog: closePreviewDialog,
                     LogoUrlImageCallback: LogoUrlImageCallback,
-                    randonNumber: randonNumber
+                    randonNumber: randonNumber,
+                    vouchers:vouchers,
+                    voucherPriceLbl: voucherPriceLbl
                 };
             })()
         };

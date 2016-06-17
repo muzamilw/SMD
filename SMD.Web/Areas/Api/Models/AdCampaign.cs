@@ -88,5 +88,6 @@ namespace SMD.MIS.Areas.Api.Models
         public int IsUseFilter { get; set; }
         public string LogoUrl { get; set; }
         public string VoucherAdditionalInfo { get; set; }
+        public long CouponId { get; set; }
     }
 }

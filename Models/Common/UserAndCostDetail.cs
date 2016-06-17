@@ -25,6 +25,7 @@ namespace SMD.Models.Common
         public double TenDayDeliveryClausePrice { get; set; }
         public double FiveDayDeliveryClausePrice { get; set; }
         public double ThreeDayDeliveryClausePrice { get; set; }
+        public double VoucherClausePrice { get; set; }
         public string CityName { get; set; }
         public string CountryName { get; set; }
         public string LanguageName { get; set; }

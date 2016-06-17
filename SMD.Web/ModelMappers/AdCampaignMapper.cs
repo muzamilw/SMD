@@ -137,7 +137,8 @@ namespace SMD.MIS.ModelMappers
                 CouponCodes = source.CouponCodes != null ? source.CouponCodes.Select(x => x.CreateFrom()).ToList() : null,
                 IsUseFilter = source.IsUseFilter == true ? 1 : 0,
                 LogoUrl = source.LogoUrl == null ? "" : source.LogoUrl,
-                VoucherAdditionalInfo = source.VoucherAdditionalInfo == null ? "" : source.VoucherAdditionalInfo
+                VoucherAdditionalInfo = source.VoucherAdditionalInfo == null ? "" : source.VoucherAdditionalInfo,
+                CouponId = source.CouponId ?? 0
             };
 
 
@@ -189,7 +190,7 @@ namespace SMD.MIS.ModelMappers
                 StartDateTime = source.StartDateTime,
                 UserId = source.UserId,
                 VerifyQuestion = source.VerifyQuestion,
-
+                 
             };
 
 
@@ -433,7 +434,8 @@ namespace SMD.MIS.ModelMappers
                 QuizQuestionClausePrice = source.QuizQuestionClausePrice,
                 TenDayDeliveryClausePrice = source.TenDayDeliveryClausePrice,
                 ThreeDayDeliveryClausePrice = source.ThreeDayDeliveryClausePrice,
-                UserProfileImage = source.UserProfileImage
+                UserProfileImage = source.UserProfileImage,
+                VoucherClausePrice = source.VoucherClausePrice
             };
 
 
@@ -450,7 +452,8 @@ namespace SMD.MIS.ModelMappers
                 UserAndCostDetails = source.UserAndCostDetails.CreateFrom(),
                 Educations = source.Education.Select(edu => edu.CreateFrom()),
                 Professions = source.Industry.Select(ind => ind.CreateFrom()),
-                CouponCategories = source.CouponCategory.Select(cc => cc.CreateFromForCategories(false))
+                CouponCategories = source.CouponCategory.Select(cc => cc.CreateFromForCategories(false)),
+                DiscountVouchers = source.DiscountVouchers.Select(dv => dv.CreateFromDiscountVoucher())
             };
         }
     }

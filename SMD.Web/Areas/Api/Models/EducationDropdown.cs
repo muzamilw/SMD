@@ -61,4 +61,10 @@ namespace SMD.MIS.Areas.Api.Models
         public string Name { get; set; }
         public bool IsSelected { get; set; }
     }
+    public class DiscountVoucher
+    {
+        public long CouponId { get; set; }
+        public string Name { get; set; }
+
+    }
 }

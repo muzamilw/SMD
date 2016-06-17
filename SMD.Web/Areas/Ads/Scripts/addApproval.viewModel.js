@@ -37,6 +37,8 @@ define("addApproval/addApproval.viewModel",
                             {
                                 success: function(data) {
                                     campaigns.removeAll();
+                                    console.log("approval campaign");
+                                    console.log(data.AdCampaigns);
                                     _.each(data.AdCampaigns, function (item) {
                                         campaigns.push(model.AdCampaignServertoClientMapper(item));
                                     });

@@ -268,6 +268,7 @@ namespace SMD.Implementation.Services
                 objUC.TenDayDeliveryClausePrice = campaignProduct.TenDayDeliveryClausePrice ?? 0;
                 objUC.ThreeDayDeliveryClausePrice = campaignProduct.ThreeDayDeliveryClausePrice ?? 0;
                 objUC.FiveDayDeliveryClausePrice = campaignProduct.FiveDayDeliveryClausePrice ?? 0;
+                objUC.VoucherClausePrice = campaignProduct.VoucherClausePrice ?? 0;
             }
 
             return new AdCampaignBaseResponse
@@ -276,7 +277,8 @@ namespace SMD.Implementation.Services
                 Education = _educationRepository.GetAll(),
                 UserAndCostDetails = objUC,
                 Industry = _industryRepository.GetAll(),
-                CouponCategory = _couponCategoryRepository.GetAllCoupons()
+                CouponCategory = _couponCategoryRepository.GetAllCoupons(),
+                DiscountVouchers = _adCampaignRepository.GetCouponsByUserIdWithoutFilter(loggedInUser.Id)
             };
         }
 
@@ -374,6 +376,11 @@ namespace SMD.Implementation.Services
                 {
                     campaignModel.LogoUrl = paths[7];
                 }
+                else if (campaignModel.LogoUrl.Contains("Content/Images"))
+                {
+                    campaignModel.LogoUrl = null;
+                }
+
                 _adCampaignRepository.SaveChanges();
             }
             
@@ -478,6 +485,10 @@ namespace SMD.Implementation.Services
                 if (!string.IsNullOrEmpty(paths[7]))
                 {
                     campaignModel.LogoUrl = paths[7];
+                }
+                else if (campaignModel.LogoUrl.Contains("Content/Images"))
+                {
+                    campaignModel.LogoUrl = null;
                 }
             }
             if (!string.IsNullOrEmpty(campaignModel.couponImage2) && !campaignModel.couponImage2.Contains("http:"))
@@ -943,7 +954,15 @@ namespace SMD.Implementation.Services
                         target.Voucher1ImagePath = "SMD_Content/AdCampaign/" + target.CampaignId + "/guid_Voucher1DefaultImage" + Path.GetExtension(source.BuyItImageUrl);
                     }
                 }
+                if (!string.IsNullOrEmpty(source.LogoUrl))
+                {
+                    if (File.Exists(HttpContext.Current.Server.MapPath("~/" + source.LogoUrl)))
+                    {
 
+                        File.Copy(System.Web.HttpContext.Current.Server.MapPath("~/" + source.LogoUrl), System.Web.HttpContext.Current.Server.MapPath("~/SMD_Content/AdCampaign/" + target.CampaignId + "/guid_CampaignLogoImage" + Path.GetExtension(source.LogoUrl)), true);
+                        target.LogoUrl = "SMD_Content/AdCampaign/" + target.CampaignId + "/guid_CampaignLogoImage" + Path.GetExtension(source.LogoUrl);
+                    }
+                }
 
                 companyRepository.SaveChanges();
 

@@ -179,6 +179,24 @@ else
                                     <select id="ddpLanguage" class="form-control" data-bind="options: $root.langs, optionsText: 'LanguageName', optionsValue: 'LanguageId', value: LanguageId" disabled="disabled"></select>
                                 </div>
                             </div>
+                            <div class="form-group formcontrol-bg" data-bind="visible:!$root.isDisplayCouponsAds()">
+                                <div class="col-lg-12">
+
+                                    <div class="form-group" style="margin-top:10px; margin-left:-8px;">
+
+                                        <div class="col-lg-3 text-campaign-left Float-Left">
+                                            <label class="control-label text-right tooltip-float font20 floatNone" style="float:left !important;     padding-top: 2px;!important;  ">Discount Voucher</label>
+                                        </div>
+                                        <div class="col-lg-7 text-campaign-left Float-Left">
+                                            <select class="form-control" id="ddpDiscountV" data-bind="options: $root.vouchers, optionsText: 'Name', optionsValue: 'CouponId', value: CouponId" style="    margin-left: -12px;"></select>
+                                        </div>
+                                        <div class="col-lg-1 text-campaign-left Float-Left" style="margin-left:6px;">
+                                            <span class="control-label text-right tooltip-float font20 floatNone" style="float:left !important;color:red; " data-bind="text: '(' +  $root.voucherPriceLbl() + 'p )'"></span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
                             @*<div class="form-group" style="margin-bottom:20px; margin-top:20px;">
                 <div class="col-lg-3 text-right">
                     <div class="bs-example-tooltips tooltip-float-width" style="    margin-top: 10px;">
@@ -1011,19 +1029,11 @@ else
                             <div class="clearfix">
 
                             </div>
+                           
+
                             <div class="form-group formcontrol-bg" data-bind="visible: $root.isEnableVedioVerificationLink">
                                 <div class="col-lg-11">
-                                    @*<div class="form-group" style="margin-bottom:20px; margin-top:20px;">
-                        <div class="col-lg-4 text-right" style="    margin-left: 13px;">
-                            <div class="bs-example-tooltips tooltip-float-width margin-Top-0" style="margin-top: 10px;">
-                                <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-original-title="" title="">
-                                    <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                </a>
-                            </div>
-                            <label class="control-label text-right tooltip-float font20 floatNone">Quiz Question</label>
-                        </div>
-
-                    </div>*@
+                                
                                     <div class="form-group" style="margin-top:10px; margin-left:-8px;">
 
                                         <div class="col-lg-4 text-campaign-left Float-Left" style="margin-left:6px;">

@@ -307,5 +307,21 @@ namespace SMD.Repository.Repositories
             }
             return res; 
         }
+        public IEnumerable<Coupons> GetCouponsByUserIdWithoutFilter(string UserId)
+        {
+
+
+            var query = from ad in db.AdCampaigns
+                        where ad.Type == 5 && (ad.CouponTakenCount == null || ad.CouponTakenCount < ad.CouponQuantity)
+                        && (ad.Archived == null || ad.Archived == false)
+                        select new Coupons()
+                        {
+                            CouponId = ad.CampaignId,
+                            CouponName = ad.CampaignName,
+                            CouponTitle = ad.DisplayTitle
+                        };
+
+            return query.ToList<Coupons>();
+        }
     }
 }

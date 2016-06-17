@@ -47,5 +47,13 @@ namespace SMD.MIS.ModelMappers
 
             };
         }
+        public static DiscountVoucher CreateFromDiscountVoucher(this Models.Common.Coupons source)
+        {
+            return new DiscountVoucher
+            {
+                CouponId = source.CouponId,
+                Name = source.CouponTitle
+            };
+        }
     }
 }

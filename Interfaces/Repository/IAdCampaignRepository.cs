@@ -31,5 +31,6 @@ namespace SMD.Interfaces.Repository
       
         List<GetCoupons_Result> GetCoupons(string UserId);
         List<Coupons> GetAllCoupons(int categoryId, int type, int size, string keywords, int pageNo);
+        IEnumerable<Coupons> GetCouponsByUserIdWithoutFilter(string UserId);
     }
 }

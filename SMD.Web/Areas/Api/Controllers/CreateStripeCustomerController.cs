@@ -59,6 +59,10 @@ namespace SMD.MIS.Areas.Api.Controllers
             {
                 await stripeService.CreateCustomer(request);
             }
+            else 
+            {
+                await stripeService.UpdateCustomer(request, customerId);
+            }
         }
         
         #endregion

@@ -88,6 +88,7 @@
           <Property Name="IsUseFilter" Type="bit" />
           <Property Name="LogoUrl" Type="nvarchar" MaxLength="200" />
           <Property Name="VoucherAdditionalInfo" Type="nvarchar(max)" />
+          <Property Name="CouponId" Type="bigint" />
         </EntityType>
         <EntityType Name="AdCampaignResponse">
           <Key>
@@ -439,6 +440,7 @@
           <Property Name="TenDayDeliveryClausePrice" Type="float" />
           <Property Name="FiveDayDeliveryClausePrice" Type="float" />
           <Property Name="ThreeDayDeliveryClausePrice" Type="float" />
+          <Property Name="VoucherClausePrice" Type="float" />
         </EntityType>
         <EntityType Name="ProfileQuestion">
           <Key>
@@ -2921,6 +2923,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Property Name="TenDayDeliveryClausePrice" Type="Double" />
           <Property Name="FiveDayDeliveryClausePrice" Type="Double" />
           <Property Name="ThreeDayDeliveryClausePrice" Type="Double" />
+          <Property Name="VoucherClausePrice" Type="Double" />
         </EntityType>
         <Association Name="FK_SMDPrice_Country">
           <End Type="DomainModels.Country" Role="Country" Multiplicity="0..1" />
@@ -3779,6 +3782,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Property Name="IsUseFilter" Type="Boolean" />
           <Property Name="LogoUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="VoucherAdditionalInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CouponId" Type="Int64" />
         </EntityType>
         <Association Name="FK_AdCampaign_Company">
           <End Type="DomainModels.Company" Role="Company" Multiplicity="0..1" />
@@ -4440,6 +4444,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="DomainModels.Product">
               <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="VoucherClausePrice" ColumnName="VoucherClausePrice" />
                 <ScalarProperty Name="ThreeDayDeliveryClausePrice" ColumnName="ThreeDayDeliveryClausePrice" />
                 <ScalarProperty Name="FiveDayDeliveryClausePrice" ColumnName="FiveDayDeliveryClausePrice" />
                 <ScalarProperty Name="TenDayDeliveryClausePrice" ColumnName="TenDayDeliveryClausePrice" />
@@ -4774,6 +4779,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <EntitySetMapping Name="AdCampaigns">
             <EntityTypeMapping TypeName="DomainModels.AdCampaign">
               <MappingFragment StoreEntitySet="AdCampaign">
+                <ScalarProperty Name="CouponId" ColumnName="CouponId" />
                 <ScalarProperty Name="VoucherAdditionalInfo" ColumnName="VoucherAdditionalInfo" />
                 <ScalarProperty Name="LogoUrl" ColumnName="LogoUrl" />
                 <ScalarProperty Name="IsUseFilter" ColumnName="IsUseFilter" />

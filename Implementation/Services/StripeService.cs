@@ -76,8 +76,8 @@ namespace SMD.Implementation.Services
             if (customer.SourceList != null && customer.SourceList.Data != null && customer.DefaultSourceId != null)
             {
                 var defaultStripeCard = customer.SourceList.Data.FirstOrDefault(card => card.Id == customer.DefaultSourceId);
-                if (defaultStripeCard != null && (Convert.ToInt32(defaultStripeCard.ExpirationMonth) < DateTime.Now.Month ||
-                    Convert.ToInt32(defaultStripeCard.ExpirationYear) < DateTime.Now.Year))
+                if (defaultStripeCard != null && Convert.ToInt32(defaultStripeCard.ExpirationYear) < DateTime.Now.Year
+                 && (Convert.ToInt32(defaultStripeCard.ExpirationYear) == DateTime.Now.Year && Convert.ToInt32(defaultStripeCard.ExpirationMonth) < DateTime.Now.Month))
                 {
                     //throw new SMDException("Card Expired!");
                     return "Failed, Card Expired!";  
@@ -120,6 +120,36 @@ namespace SMD.Implementation.Services
             try
             {
                 var stripeCustomer = customerService.Create(myCustomer);
+                // Save Customer For Later Use
+                await SaveStripeCustomerId(stripeCustomer.Id);
+                // Return Customer Id
+                return stripeCustomer.Id;
+            }
+            catch (Exception exp)
+            {
+                throw new SMDException(exp.Message);
+            }
+        }
+
+        /// <summary>
+        /// uPDATE Charge With Token
+        /// </summary>
+        public async Task<string> UpdateCustomer(StripeChargeCustomerRequest request, string CustomerId)
+        {
+            // Create the charge on Stripe's servers - this will charge the user's card
+            var stripeSourceOptions = new StripeSourceOptions { TokenId = request.Token };
+
+            // Create Customer For Later Use
+            var myCustomer = new StripeCustomerUpdateOptions
+            {
+                Email = request.Email,
+                Source = stripeSourceOptions,
+                
+            };
+            var customerService = new StripeCustomerService();
+            try
+            {
+                var stripeCustomer = customerService.Update(CustomerId, myCustomer);
                 // Save Customer For Later Use
                 await SaveStripeCustomerId(stripeCustomer.Id);
                 // Return Customer Id

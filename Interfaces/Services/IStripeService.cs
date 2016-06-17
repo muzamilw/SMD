@@ -17,5 +17,6 @@ namespace SMD.Interfaces.Services
         /// Create Charge With Token
         /// </summary>
         Task<string> CreateCustomer(StripeChargeCustomerRequest request);
+        Task<string> UpdateCustomer(StripeChargeCustomerRequest request, string CustomerId);
     }
 }

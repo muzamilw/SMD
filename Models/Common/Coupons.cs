@@ -19,4 +19,5 @@ namespace SMD.Models.Common
         public int CouponTakenValue { get; set; }
         public double CouponDiscountedValue { get; set; }
     }
+ 
 }

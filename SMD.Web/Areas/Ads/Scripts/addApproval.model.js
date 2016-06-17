@@ -87,9 +87,11 @@
     ///////////////////////////////////////////////////////// Ad-Campaign
     //server to client mapper For AdCampaign
     var AdCampaignServertoClientMapper = function (itemFromServer) {
+        var videoLink = itemFromServer.LandingPageVideoLink;
+        videoLink = videoLink.replace('watch?v=', 'embed/');
         return new AdCampaign(itemFromServer.CampaignId, itemFromServer.CampaignName, itemFromServer.Description,
             itemFromServer.Approved, itemFromServer.RejectedReason,
-            itemFromServer.CreatedDateTime, itemFromServer.CreatedBy, itemFromServer.Type, itemFromServer.ImagePath, itemFromServer.LandingPageVideoLink,
+            itemFromServer.CreatedDateTime, itemFromServer.CreatedBy, itemFromServer.Type, itemFromServer.LogoUrl, videoLink,
         itemFromServer.ClickRate, itemFromServer.MaxBudget, itemFromServer.CampaignDescription, itemFromServer.Voucher1Heading, itemFromServer.Voucher1Description,
             itemFromServer.Voucher1Value, itemFromServer.Voucher1ImagePath, itemFromServer.CouponSwapValue == null ? "" : itemFromServer.CouponSwapValue,
             itemFromServer.CouponActualValue == null ? "" : itemFromServer.CouponActualValue,
