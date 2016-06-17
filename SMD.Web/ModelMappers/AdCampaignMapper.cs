@@ -138,7 +138,9 @@ namespace SMD.MIS.ModelMappers
                 IsUseFilter = source.IsUseFilter == true ? 1 : 0,
                 LogoUrl = source.LogoUrl == null ? "" : source.LogoUrl,
                 VoucherAdditionalInfo = source.VoucherAdditionalInfo == null ? "" : source.VoucherAdditionalInfo,
-                CouponId = source.CouponId ?? 0
+                CouponId = source.CouponId ?? 0,
+                IsShowVoucherSetting = source.IsShowVoucherSetting ?? false,
+                VideoLink2 = source.VideoLink2
             };
 
 

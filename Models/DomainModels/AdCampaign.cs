@@ -80,7 +80,9 @@ namespace SMD.Models.DomainModels
         public Nullable<bool> IsUseFilter { get; set; }
         public string LogoUrl { get; set; }
         public string VoucherAdditionalInfo { get; set; }
-        public long? CouponId { get; set; }
+        public Nullable<long> CouponId { get; set; }
+        public Nullable<bool> IsShowVoucherSetting { get; set; }
+        public string VideoLink2 { get; set; }
         public virtual ICollection<AdCampaignResponse> AdCampaignResponses { get; set; }
         public virtual ICollection<AdCampaignTargetCriteria> AdCampaignTargetCriterias { get; set; }
         public virtual ICollection<AdCampaignTargetLocation> AdCampaignTargetLocations { get; set; }

@@ -179,24 +179,7 @@ else
                                     <select id="ddpLanguage" class="form-control" data-bind="options: $root.langs, optionsText: 'LanguageName', optionsValue: 'LanguageId', value: LanguageId" disabled="disabled"></select>
                                 </div>
                             </div>
-                            <div class="form-group formcontrol-bg" data-bind="visible:!$root.isDisplayCouponsAds()">
-                                <div class="col-lg-12">
-
-                                    <div class="form-group" style="margin-top:10px; margin-left:-8px;">
-
-                                        <div class="col-lg-3 text-campaign-left Float-Left">
-                                            <label class="control-label text-right tooltip-float font20 floatNone" style="float:left !important;     padding-top: 2px;!important;  ">Discount Voucher</label>
-                                        </div>
-                                        <div class="col-lg-7 text-campaign-left Float-Left">
-                                            <select class="form-control" id="ddpDiscountV" data-bind="options: $root.vouchers, optionsText: 'Name', optionsValue: 'CouponId', value: CouponId" style="    margin-left: -12px;"></select>
-                                        </div>
-                                        <div class="col-lg-1 text-campaign-left Float-Left" style="margin-left:6px;">
-                                            <span class="control-label text-right tooltip-float font20 floatNone" style="float:left !important;color:red; " data-bind="text: '(' +  $root.voucherPriceLbl() + 'p )'"></span>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
+                            
                             @*<div class="form-group" style="margin-bottom:20px; margin-top:20px;">
                 <div class="col-lg-3 text-right">
                     <div class="bs-example-tooltips tooltip-float-width" style="    margin-top: 10px;">
@@ -259,6 +242,7 @@ else
                                         <div class="col-lg-9" data-bind="visible: Type() == 1">
 
                                             <textarea class="form-control" id="txtLinkOfCampaign" rows="1" placeholder="" data-bind="value: LandingPageVideoLink,validationTooltip:LandingPageVideoLink, validationOnElement: LandingPageVideoLink, attr:{placeholder : $root.campaignTypePlaceHolderValue}" style="margin-bottom:10px;"></textarea>
+                                            <textarea class="form-control" id="txtVideoLink2" rows="1" placeholder="Enter Video Link 2" data-bind="value: VideoLink2" style="margin-bottom:10px;"></textarea>
                                             @*<textarea class="form-control" id="txtLinkOfCampaign" rows="1" placeholder="Enter in landing page link " data-bind="value: VideoUrl" style="margin-top:5px;"></textarea>*@
                                         </div>
 
@@ -1030,7 +1014,43 @@ else
 
                             </div>
                            
+                            <div class="form-group formcontrol-bg" data-bind="visible:!$root.isDisplayCouponsAds()">
+                                <div class="col-lg-11">
 
+                                    <div class="form-group" style="margin-top:10px; margin-left:-8px;">
+
+                                        <div class="col-lg-4 text-campaign-left Float-Left" style="margin-left:6px;">
+                                            <label class="control-label text-right tooltip-float font20 floatNone" style="float:left !important; ">Discount Voucher</label>
+                                        </div>
+                                        <div class="col-lg-2 Float-Left" style="padding-top:3px;padding-left:0px;">
+                                            <div class="onoffswitch">
+                                                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchDicV" data-bind="checked: IsShowVoucherSetting, event: { click: $root.addVoucherClickRate}">
+                                                <label class="onoffswitch-label" for="switchDicV">
+                                                    <div class="onoffswitch-inner"></div>
+                                                    <div class="onoffswitch-switch"></div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2 text-campaign-left Float-Left" style="margin-left:6px;">
+                                            <span class="control-label text-right tooltip-float font20 floatNone" style="float:left !important;color:red; " data-bind="text: '(' +  $root.voucherPriceLbl() + 'p )'"></span>
+                                        </div>
+                                      
+                                    </div>
+
+                                 
+                                  
+                                    <div class="form-group" data-bind="visible: IsShowVoucherSetting">
+
+                                        <div class="col-lg-4">
+
+                                            <label for="txtCorrectAnswer" class="control-label text-right tooltip-float floatNone">Select Voucher</label>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <select class="form-control" id="ddpDiscountV" data-bind="options: $root.vouchers, optionsText: 'Name', optionsValue: 'CouponId', value: CouponId" style="    margin-left: -12px;"></select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="form-group formcontrol-bg" data-bind="visible: $root.isEnableVedioVerificationLink">
                                 <div class="col-lg-11">
                                 

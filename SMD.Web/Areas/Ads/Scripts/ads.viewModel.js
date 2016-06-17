@@ -157,7 +157,7 @@ define("ads/ads.viewModel",
                                     ko.utils.arrayPushAll(couponCategories(), data.CouponCategories);
                                     couponCategories.valueHasMutated();
                                 }
-                                debugger
+                                
                                 if (data.DiscountVouchers != null) {
                                     vouchers.removeAll();
                                     ko.utils.arrayPushAll(vouchers(), data.DiscountVouchers);
@@ -435,7 +435,7 @@ define("ads/ads.viewModel",
                       campaignModel().LanguageId(41);
                       campaignModel().DeliveryDays('10');
                       campaignModel().LogoUrl('Content/Images/Company_Default.png');
-                      
+                      campaignModel().IsShowVoucherSetting(false);
                       if (UserAndCostDetail() != null || UserAndCostDetail() != undefined) {
                           alreadyAddedDeliveryValue(10);
                           quizQuestionStatus(true);
@@ -1406,7 +1406,12 @@ define("ads/ads.viewModel",
                                         alreadyAddedDeliveryValue(10);
                                         pricePerclick(pricePerclick() + UserAndCostDetail().TenDayDeliveryClausePrice);
                                     }
-                               
+
+                                    if ((campaignModel().IsShowVoucherSetting() != null && campaignModel().IsShowVoucherSetting() != true)) {
+                                        pricePerclick(pricePerclick() + UserAndCostDetail().VoucherClausePrice);
+                                        isVoucherPerClickPriceAdded(true);
+                                    }
+
                                     var takenCouponCodes = $.grep(campaignModel().CouponCodes(), function (n, i) {
                                         return (n.IsTaken() == true);
                                     });
@@ -1995,6 +2000,29 @@ define("ads/ads.viewModel",
                     });
                     console.log(allCouponCodeItems());
                     campaignModel().CouponQuantity(allCouponCodeItems().length);
+                },
+                addVoucherClickRate = function () {
+
+                    if (campaignModel().IsShowVoucherSetting() == false) {
+                        if (UserAndCostDetail().VoucherClausePrice != null && isVoucherPerClickPriceAdded() == true) {
+
+
+                            pricePerclick(pricePerclick() - UserAndCostDetail().VoucherClausePrice);
+                            isVoucherPerClickPriceAdded(false);
+
+                        }
+                    } else {
+
+                        if (UserAndCostDetail().VoucherClausePrice != null && isVoucherPerClickPriceAdded() == false) {
+
+
+                            pricePerclick(pricePerclick() + UserAndCostDetail().VoucherClausePrice);
+                            isVoucherPerClickPriceAdded(true);
+
+                        }
+                    }
+
+                    
                 },
                  updateExistingCodeVal = function (item) {
                      

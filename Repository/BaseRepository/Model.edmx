@@ -89,6 +89,8 @@
           <Property Name="LogoUrl" Type="nvarchar" MaxLength="200" />
           <Property Name="VoucherAdditionalInfo" Type="nvarchar(max)" />
           <Property Name="CouponId" Type="bigint" />
+          <Property Name="IsShowVoucherSetting" Type="bit" />
+          <Property Name="VideoLink2" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="AdCampaignResponse">
           <Key>
@@ -3783,6 +3785,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Property Name="LogoUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="VoucherAdditionalInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CouponId" Type="Int64" />
+          <Property Name="IsShowVoucherSetting" Type="Boolean" />
+          <Property Name="VideoLink2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_AdCampaign_Company">
           <End Type="DomainModels.Company" Role="Company" Multiplicity="0..1" />
@@ -4779,6 +4783,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <EntitySetMapping Name="AdCampaigns">
             <EntityTypeMapping TypeName="DomainModels.AdCampaign">
               <MappingFragment StoreEntitySet="AdCampaign">
+                <ScalarProperty Name="VideoLink2" ColumnName="VideoLink2" />
+                <ScalarProperty Name="IsShowVoucherSetting" ColumnName="IsShowVoucherSetting" />
                 <ScalarProperty Name="CouponId" ColumnName="CouponId" />
                 <ScalarProperty Name="VoucherAdditionalInfo" ColumnName="VoucherAdditionalInfo" />
                 <ScalarProperty Name="LogoUrl" ColumnName="LogoUrl" />

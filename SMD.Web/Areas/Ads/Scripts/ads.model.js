@@ -9,7 +9,7 @@
           Voucher1ImagePath, VoucherImagePath, CreatedBy, VideoUrl, BuuyItLine1, BuyItLine2, BuyItLine3, BuyItButtonLabel,
           BuyItImageUrl, AdViews, CompanyId, CouponSwapValue, CouponActualValue, CouponQuantity, CouponTakenCount, priority,
           CouponDiscountValue, couponImage2, CouponImage3, CouponImage4, CouponExpiryLabel,
-          couponSmdComission, CouponCategories, DeliveryDays, IsUseFilter, LogoUrl, VoucherAdditionalInfo, CouponId) {
+          couponSmdComission, CouponCategories, DeliveryDays, IsUseFilter, LogoUrl, VoucherAdditionalInfo, CouponId, IsShowVoucherSetting, VideoLink2) {
        
           var
               //type and userID will be set on server sside
@@ -125,7 +125,9 @@
               LogoUrl = ko.observable(LogoUrl),
               VoucherAdditionalInfo = ko.observable(VoucherAdditionalInfo),
               LogoImageBytes = ko.observable(''),
-              CouponId = ko.observable(CouponId)
+              CouponId = ko.observable(CouponId),
+              IsShowVoucherSetting = ko.observable(IsShowVoucherSetting),
+              VideoLink2 = ko.observable(VideoLink2),
                // Errors
                 errors = ko.validation.group({
                     CampaignName:CampaignName,
@@ -284,8 +286,9 @@
                       LogoUrl: LogoUrl(),
                       VoucherAdditionalInfo: VoucherAdditionalInfo(),
                       LogoImageBytes: LogoImageBytes(),
-                      CouponId: CouponId()
-
+                      CouponId: CouponId(),
+                      IsShowVoucherSetting: IsShowVoucherSetting(),
+                      VideoLink2: VideoLink2()
                   };
               };
           return {
@@ -362,7 +365,9 @@
               LogoUrl: LogoUrl,
               VoucherAdditionalInfo: VoucherAdditionalInfo,
               LogoImageBytes: LogoImageBytes,
-              CouponId: CouponId
+              CouponId: CouponId,
+              IsShowVoucherSetting:IsShowVoucherSetting,
+              VideoLink2: VideoLink2
           };
       };
 
@@ -551,7 +556,7 @@
             source.CampaignTypeImagePath, source.Description, source.ClickRate, source.Voucher1Heading, source.Voucher1Description, source.Voucher1Value, source.Voucher2Heading, source.Voucher2Description,
              source.Voucher2Value, source.Voucher1ImagePath, source.VoucherImagePath, source.CreatedBy, source.VideoUrl, source.BuuyItLine1, source.BuyItLine2, source.BuyItLine3, source.BuyItButtonLabel, source.BuyItImageUrl,source.AdViews,source.CompanyId,
             source.CouponSwapValue, source.CouponActualValue,source.CouponQuantity,source.CouponTakenCount, source.priority, source.CouponDiscountValue,
-             source.couponImage2, source.CouponImage3, source.CouponImage4, source.CouponExpiryLabel, source.couponSmdComission, null, source.DeliveryDays, source.IsUseFilter + "", source.LogoUrl, source.VoucherAdditionalInfo, source.CouponId);
+             source.couponImage2, source.CouponImage3, source.CouponImage4, source.CouponExpiryLabel, source.couponSmdComission, null, source.DeliveryDays, source.IsUseFilter + "", source.LogoUrl, source.VoucherAdditionalInfo, source.CouponId,source.IsShowVoucherSetting, source.VideoLink2);
         
         _.each(source.AdCampaignTargetCriterias, function (item) {
           

@@ -66,6 +66,8 @@ namespace SMD.MIS.Areas.Api.Models
         public string BuyItLine3 { get; set; }
         public string BuyItButtonLabel { get; set; }
         public string BuyItImageUrl { get; set; }
+        public bool IsShowVoucherSetting { get; set; }
+        public string VideoLink2 { get; set; }
         [NotMapped]
         
         public int AdViews { get; set; }
