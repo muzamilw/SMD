@@ -2317,15 +2317,15 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
             <End Role="SurveyQuestion" EntitySet="SurveyQuestions" />
             <End Role="AdCampaignTargetCriteria" EntitySet="AdCampaignTargetCriterias" />
           </AssociationSet>
+          <EntitySet Name="vw_GetUserTransactions" EntityType="DomainModels.vw_GetUserTransactions" />
+          <EntitySet Name="EmailQueues" EntityType="DomainModels.EmailQueue" />
+          <EntitySet Name="vw_PublisherTransaction" EntityType="DomainModels.vw_PublisherTransaction" />
+          <EntitySet Name="vw_Cash4AdsReport" EntityType="DomainModels.vw_Cash4AdsReport" />
           <FunctionImport Name="GetProducts" ReturnType="Collection(DomainModels.GetProducts_Result)">
             <Parameter Name="UserID" Mode="In" Type="String" />
             <Parameter Name="FromRow" Mode="In" Type="Int32" />
             <Parameter Name="ToRow" Mode="In" Type="Int32" />
           </FunctionImport>
-          <EntitySet Name="vw_GetUserTransactions" EntityType="DomainModels.vw_GetUserTransactions" />
-          <EntitySet Name="EmailQueues" EntityType="DomainModels.EmailQueue" />
-          <EntitySet Name="vw_PublisherTransaction" EntityType="DomainModels.vw_PublisherTransaction" />
-          <EntitySet Name="vw_Cash4AdsReport" EntityType="DomainModels.vw_Cash4AdsReport" />
           </EntityContainer>
         <EntityType Name="ProfileQuestion">
           <Key>
@@ -3994,6 +3994,78 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="vw_GetUserTransactions">
+          <Key>
+            <PropertyRef Name="tid" />
+          </Key>
+          <Property Name="tid" Type="Int64" Nullable="false" />
+          <Property Name="TDate" Type="DateTime" Precision="3" />
+          <Property Name="Deposit" Type="Double" />
+          <Property Name="Withdrawal" Type="Double" />
+          <Property Name="Transaction" Type="String" MaxLength="209" FixedLength="false" Unicode="true" />
+          <Property Name="userId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AccountBalance" Type="Double" />
+          <Property Name="CurentBalance" Type="Double" />
+          <Property Name="VoucherTitle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="EmailQueue">
+          <Key>
+            <PropertyRef Name="EmailQueueId" />
+          </Key>
+          <Property Name="EmailQueueId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="To" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Cc" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="EmailFrom" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Type" Type="Int16" />
+          <Property Name="Subject" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Body" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Images" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="SendDateTime" Type="DateTime" Precision="3" />
+          <Property Name="IsDeliverd" Type="Byte" />
+          <Property Name="SMTPUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SMTPPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SMTPServer" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ErrorResponse" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FileAttachment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AttemptCount" Type="Int32" />
+          <Property Name="ToName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FromName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="vw_PublisherTransaction">
+          <Key>
+            <PropertyRef Name="tid" />
+            <PropertyRef Name="userId" />
+            <PropertyRef Name="CampaignID" />
+          </Key>
+          <Property Name="tid" Type="Int64" Nullable="false" />
+          <Property Name="TDate" Type="DateTime" Precision="3" />
+          <Property Name="Deposit" Type="Int32" />
+          <Property Name="Withdrawal" Type="Double" />
+          <Property Name="Transaction" Type="String" MaxLength="209" FixedLength="false" Unicode="true" />
+          <Property Name="userId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ownerCompanyId" Type="Int32" />
+          <Property Name="CurentBalance" Type="Double" />
+          <Property Name="CampaignID" Type="Int64" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="vw_Cash4AdsReport">
+          <Key>
+            <PropertyRef Name="tid" />
+            <PropertyRef Name="userId" />
+            <PropertyRef Name="CampaignID" />
+          </Key>
+          <Property Name="tid" Type="Int64" Nullable="false" />
+          <Property Name="TDate" Type="DateTime" Precision="3" />
+          <Property Name="Deposit" Type="Int32" />
+          <Property Name="Withdrawal" Type="Double" />
+          <Property Name="Transaction" Type="String" MaxLength="209" FixedLength="false" Unicode="true" />
+          <Property Name="userId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="AccountBalance" Type="Double" />
+          <Property Name="CurentBalance" Type="Double" />
+          <Property Name="CampaignID" Type="Int64" Nullable="false" />
+          <Property Name="VoucherTitle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
         <ComplexType Name="GetProducts_Result">
           <Property Type="Int64" Name="ItemId" Nullable="true" />
           <Property Type="String" Name="ItemName" Nullable="true" MaxLength="500" />
@@ -4092,80 +4164,10 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Property Type="String" Name="BuyItButtonText" Nullable="true" />
           <Property Type="String" Name="BuyItImageUrl" Nullable="true" MaxLength="227" />
           <Property Type="String" Name="VoucherImagePath" Nullable="true" MaxLength="227" />
+          <Property Type="String" Name="VideoLink2" Nullable="true" />
+          <Property Type="Boolean" Name="IsShowVoucherSetting" Nullable="true" />
           <Property Type="Int32" Name="TotalItems" Nullable="true" />
         </ComplexType>
-        <EntityType Name="vw_GetUserTransactions">
-          <Key>
-            <PropertyRef Name="tid" />
-          </Key>
-          <Property Name="tid" Type="Int64" Nullable="false" />
-          <Property Name="TDate" Type="DateTime" Precision="3" />
-          <Property Name="Deposit" Type="Double" />
-          <Property Name="Withdrawal" Type="Double" />
-          <Property Name="Transaction" Type="String" MaxLength="209" FixedLength="false" Unicode="true" />
-          <Property Name="userId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="AccountBalance" Type="Double" />
-          <Property Name="CurentBalance" Type="Double" />
-          <Property Name="VoucherTitle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="EmailQueue">
-          <Key>
-            <PropertyRef Name="EmailQueueId" />
-          </Key>
-          <Property Name="EmailQueueId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="To" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Cc" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="EmailFrom" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Type" Type="Int16" />
-          <Property Name="Subject" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Body" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Images" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="SendDateTime" Type="DateTime" Precision="3" />
-          <Property Name="IsDeliverd" Type="Byte" />
-          <Property Name="SMTPUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="SMTPPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="SMTPServer" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ErrorResponse" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="FileAttachment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="AttemptCount" Type="Int32" />
-          <Property Name="ToName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="FromName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="vw_PublisherTransaction">
-          <Key>
-            <PropertyRef Name="tid" />
-            <PropertyRef Name="userId" />
-            <PropertyRef Name="CampaignID" />
-          </Key>
-          <Property Name="tid" Type="Int64" Nullable="false" />
-          <Property Name="TDate" Type="DateTime" Precision="3" />
-          <Property Name="Deposit" Type="Int32" />
-          <Property Name="Withdrawal" Type="Double" />
-          <Property Name="Transaction" Type="String" MaxLength="209" FixedLength="false" Unicode="true" />
-          <Property Name="userId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="ownerCompanyId" Type="Int32" />
-          <Property Name="CurentBalance" Type="Double" />
-          <Property Name="CampaignID" Type="Int64" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="vw_Cash4AdsReport">
-          <Key>
-            <PropertyRef Name="tid" />
-            <PropertyRef Name="userId" />
-            <PropertyRef Name="CampaignID" />
-          </Key>
-          <Property Name="tid" Type="Int64" Nullable="false" />
-          <Property Name="TDate" Type="DateTime" Precision="3" />
-          <Property Name="Deposit" Type="Int32" />
-          <Property Name="Withdrawal" Type="Double" />
-          <Property Name="Transaction" Type="String" MaxLength="209" FixedLength="false" Unicode="true" />
-          <Property Name="userId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="AccountBalance" Type="Double" />
-          <Property Name="CurentBalance" Type="Double" />
-          <Property Name="CampaignID" Type="Int64" Nullable="false" />
-          <Property Name="VoucherTitle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4877,6 +4879,78 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="vw_GetUserTransactions">
+            <EntityTypeMapping TypeName="DomainModels.vw_GetUserTransactions">
+              <MappingFragment StoreEntitySet="vw_GetUserTransactions">
+                <ScalarProperty Name="VoucherTitle" ColumnName="VoucherTitle" />
+                <ScalarProperty Name="CurentBalance" ColumnName="CurentBalance" />
+                <ScalarProperty Name="AccountBalance" ColumnName="AccountBalance" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="Transaction" ColumnName="Transaction" />
+                <ScalarProperty Name="Withdrawal" ColumnName="Withdrawal" />
+                <ScalarProperty Name="Deposit" ColumnName="Deposit" />
+                <ScalarProperty Name="TDate" ColumnName="TDate" />
+                <ScalarProperty Name="tid" ColumnName="tid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmailQueues">
+            <EntityTypeMapping TypeName="DomainModels.EmailQueue">
+              <MappingFragment StoreEntitySet="EmailQueue">
+                <ScalarProperty Name="FromName" ColumnName="FromName" />
+                <ScalarProperty Name="ToName" ColumnName="ToName" />
+                <ScalarProperty Name="AttemptCount" ColumnName="AttemptCount" />
+                <ScalarProperty Name="FileAttachment" ColumnName="FileAttachment" />
+                <ScalarProperty Name="ErrorResponse" ColumnName="ErrorResponse" />
+                <ScalarProperty Name="SMTPServer" ColumnName="SMTPServer" />
+                <ScalarProperty Name="SMTPPassword" ColumnName="SMTPPassword" />
+                <ScalarProperty Name="SMTPUserName" ColumnName="SMTPUserName" />
+                <ScalarProperty Name="IsDeliverd" ColumnName="IsDeliverd" />
+                <ScalarProperty Name="SendDateTime" ColumnName="SendDateTime" />
+                <ScalarProperty Name="Images" ColumnName="Images" />
+                <ScalarProperty Name="Body" ColumnName="Body" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="EmailFrom" ColumnName="EmailFrom" />
+                <ScalarProperty Name="Cc" ColumnName="Cc" />
+                <ScalarProperty Name="To" ColumnName="To" />
+                <ScalarProperty Name="EmailQueueId" ColumnName="EmailQueueId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_PublisherTransaction">
+            <EntityTypeMapping TypeName="DomainModels.vw_PublisherTransaction">
+              <MappingFragment StoreEntitySet="vw_PublisherTransaction">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="CampaignID" ColumnName="CampaignID" />
+                <ScalarProperty Name="CurentBalance" ColumnName="CurentBalance" />
+                <ScalarProperty Name="ownerCompanyId" ColumnName="ownerCompanyId" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="Transaction" ColumnName="Transaction" />
+                <ScalarProperty Name="Withdrawal" ColumnName="Withdrawal" />
+                <ScalarProperty Name="Deposit" ColumnName="Deposit" />
+                <ScalarProperty Name="TDate" ColumnName="TDate" />
+                <ScalarProperty Name="tid" ColumnName="tid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_Cash4AdsReport">
+            <EntityTypeMapping TypeName="DomainModels.vw_Cash4AdsReport">
+              <MappingFragment StoreEntitySet="vw_Cash4AdsReport">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="VoucherTitle" ColumnName="VoucherTitle" />
+                <ScalarProperty Name="CampaignID" ColumnName="CampaignID" />
+                <ScalarProperty Name="CurentBalance" ColumnName="CurentBalance" />
+                <ScalarProperty Name="AccountBalance" ColumnName="AccountBalance" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="Transaction" ColumnName="Transaction" />
+                <ScalarProperty Name="Withdrawal" ColumnName="Withdrawal" />
+                <ScalarProperty Name="Deposit" ColumnName="Deposit" />
+                <ScalarProperty Name="TDate" ColumnName="TDate" />
+                <ScalarProperty Name="tid" ColumnName="tid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="GetProducts" FunctionName="SMDModel.Store.GetProducts">
             <ResultMapping>
               <ComplexTypeMapping TypeName="DomainModels.GetProducts_Result">
@@ -4977,82 +5051,12 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
                 <ScalarProperty Name="BuyItButtonText" ColumnName="BuyItButtonText" />
                 <ScalarProperty Name="BuyItImageUrl" ColumnName="BuyItImageUrl" />
                 <ScalarProperty Name="VoucherImagePath" ColumnName="VoucherImagePath" />
+                <ScalarProperty Name="VideoLink2" ColumnName="VideoLink2" />
+                <ScalarProperty Name="IsShowVoucherSetting" ColumnName="IsShowVoucherSetting" />
                 <ScalarProperty Name="TotalItems" ColumnName="TotalItems" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="vw_GetUserTransactions">
-            <EntityTypeMapping TypeName="DomainModels.vw_GetUserTransactions">
-              <MappingFragment StoreEntitySet="vw_GetUserTransactions">
-                <ScalarProperty Name="VoucherTitle" ColumnName="VoucherTitle" />
-                <ScalarProperty Name="CurentBalance" ColumnName="CurentBalance" />
-                <ScalarProperty Name="AccountBalance" ColumnName="AccountBalance" />
-                <ScalarProperty Name="userId" ColumnName="userId" />
-                <ScalarProperty Name="Transaction" ColumnName="Transaction" />
-                <ScalarProperty Name="Withdrawal" ColumnName="Withdrawal" />
-                <ScalarProperty Name="Deposit" ColumnName="Deposit" />
-                <ScalarProperty Name="TDate" ColumnName="TDate" />
-                <ScalarProperty Name="tid" ColumnName="tid" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="EmailQueues">
-            <EntityTypeMapping TypeName="DomainModels.EmailQueue">
-              <MappingFragment StoreEntitySet="EmailQueue">
-                <ScalarProperty Name="FromName" ColumnName="FromName" />
-                <ScalarProperty Name="ToName" ColumnName="ToName" />
-                <ScalarProperty Name="AttemptCount" ColumnName="AttemptCount" />
-                <ScalarProperty Name="FileAttachment" ColumnName="FileAttachment" />
-                <ScalarProperty Name="ErrorResponse" ColumnName="ErrorResponse" />
-                <ScalarProperty Name="SMTPServer" ColumnName="SMTPServer" />
-                <ScalarProperty Name="SMTPPassword" ColumnName="SMTPPassword" />
-                <ScalarProperty Name="SMTPUserName" ColumnName="SMTPUserName" />
-                <ScalarProperty Name="IsDeliverd" ColumnName="IsDeliverd" />
-                <ScalarProperty Name="SendDateTime" ColumnName="SendDateTime" />
-                <ScalarProperty Name="Images" ColumnName="Images" />
-                <ScalarProperty Name="Body" ColumnName="Body" />
-                <ScalarProperty Name="Subject" ColumnName="Subject" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="EmailFrom" ColumnName="EmailFrom" />
-                <ScalarProperty Name="Cc" ColumnName="Cc" />
-                <ScalarProperty Name="To" ColumnName="To" />
-                <ScalarProperty Name="EmailQueueId" ColumnName="EmailQueueId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="vw_PublisherTransaction">
-            <EntityTypeMapping TypeName="DomainModels.vw_PublisherTransaction">
-              <MappingFragment StoreEntitySet="vw_PublisherTransaction">
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="CampaignID" ColumnName="CampaignID" />
-                <ScalarProperty Name="CurentBalance" ColumnName="CurentBalance" />
-                <ScalarProperty Name="ownerCompanyId" ColumnName="ownerCompanyId" />
-                <ScalarProperty Name="userId" ColumnName="userId" />
-                <ScalarProperty Name="Transaction" ColumnName="Transaction" />
-                <ScalarProperty Name="Withdrawal" ColumnName="Withdrawal" />
-                <ScalarProperty Name="Deposit" ColumnName="Deposit" />
-                <ScalarProperty Name="TDate" ColumnName="TDate" />
-                <ScalarProperty Name="tid" ColumnName="tid" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="vw_Cash4AdsReport">
-            <EntityTypeMapping TypeName="DomainModels.vw_Cash4AdsReport">
-              <MappingFragment StoreEntitySet="vw_Cash4AdsReport">
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="VoucherTitle" ColumnName="VoucherTitle" />
-                <ScalarProperty Name="CampaignID" ColumnName="CampaignID" />
-                <ScalarProperty Name="CurentBalance" ColumnName="CurentBalance" />
-                <ScalarProperty Name="AccountBalance" ColumnName="AccountBalance" />
-                <ScalarProperty Name="userId" ColumnName="userId" />
-                <ScalarProperty Name="Transaction" ColumnName="Transaction" />
-                <ScalarProperty Name="Withdrawal" ColumnName="Withdrawal" />
-                <ScalarProperty Name="Deposit" ColumnName="Deposit" />
-                <ScalarProperty Name="TDate" ColumnName="TDate" />
-                <ScalarProperty Name="tid" ColumnName="tid" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

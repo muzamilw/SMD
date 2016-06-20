@@ -313,7 +313,7 @@ namespace SMD.Repository.Repositories
 
             var query = from ad in db.AdCampaigns
                         where ad.Type == 5 && (ad.CouponTakenCount == null || ad.CouponTakenCount < ad.CouponQuantity)
-                        && (ad.Archived == null || ad.Archived == false)
+                        && (ad.Archived == null || ad.Archived == false) && ad.UserId == UserId
                         select new Coupons()
                         {
                             CouponId = ad.CampaignId,

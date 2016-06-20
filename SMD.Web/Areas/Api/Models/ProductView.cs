@@ -38,5 +38,7 @@ namespace SMD.MIS.Areas.Api.Models
         public string BuyItButtonText { get; set; }
         public string BuyItImageUrl { get; set; }
         public string VoucherImagePath { get; set; }
+        public string VideoLink2 { get; set; }
+        public bool IsShowVoucherSetting { get; set; }
     }
 }

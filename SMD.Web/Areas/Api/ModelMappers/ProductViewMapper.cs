@@ -50,7 +50,9 @@ namespace SMD.MIS.Areas.Api.ModelMappers
                        BuyItLine2 = source.BuyItLine2,
                        BuyItLine3 = source.BuyItLine3,
                        LandingPageUrl = source.LandingPageUrl,
-                       VoucherImagePath = source.VoucherImagePath
+                       VoucherImagePath = source.VoucherImagePath,
+                       VideoLink2 = source.VideoLink2,
+                       IsShowVoucherSetting = source.IsShowVoucherSetting ?? false
                    };
         }
 
