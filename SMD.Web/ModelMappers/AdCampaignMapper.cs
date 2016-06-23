@@ -140,7 +140,8 @@ namespace SMD.MIS.ModelMappers
                 VoucherAdditionalInfo = source.VoucherAdditionalInfo == null ? "" : source.VoucherAdditionalInfo,
                 CouponId = source.CouponId ?? 0,
                 IsShowVoucherSetting = source.IsShowVoucherSetting ?? false,
-                VideoLink2 = source.VideoLink2
+                VideoLink2 = source.VideoLink2,
+                CouponType = source.CouponType ?? 1
             };
 
 

@@ -516,15 +516,15 @@ namespace SMD.Implementation.Services
             {
                 campaignModel.MaxBudget = Math.Round(Convert.ToDouble(campaignModel.MaxBudget), 2);
             }
-            if (campaignModel.Type == 5)
-            {
-                AdCampaign exisitngCampaign = _adCampaignRepository.GetAdCampaignById(campaignModel.CampaignId).FirstOrDefault();
-                if (exisitngCampaign != null) 
-                {
-                    campaignModel.CouponType = exisitngCampaign.CouponType;
-                }
+            //if (campaignModel.Type == 5)
+            //{
+            //    AdCampaign exisitngCampaign = _adCampaignRepository.GetAdCampaignById(campaignModel.CampaignId).FirstOrDefault();
+            //    if (exisitngCampaign != null) 
+            //    {
+            //        campaignModel.CouponType = exisitngCampaign.CouponType;
+            //    }
 
-            }
+            //}
             _adCampaignRepository.Update(campaignModel);
             _adCampaignRepository.SaveChanges();
 

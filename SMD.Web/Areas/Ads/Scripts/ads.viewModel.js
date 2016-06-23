@@ -445,7 +445,7 @@ define("ads/ads.viewModel",
                       }
 
                       getAudienceCount();
-
+                      debugger
                       bindAudienceReachCount();
                       selectedQuestionCountryList([]);
 
@@ -1113,7 +1113,7 @@ define("ads/ads.viewModel",
                             success: function (data) {
                                 
                                 if (data != null) {
-                                    
+                                    debugger
                                     // set languages drop down
                                     var profileQIds = [];
                                     var surveyQIds = [];

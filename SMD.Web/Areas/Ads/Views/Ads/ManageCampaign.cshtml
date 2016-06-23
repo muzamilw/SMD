@@ -103,7 +103,30 @@ else
                                     </div>
                                 </div>
                             </div>
+                            <div class="form-group" style="margin-bottom:11px;text-align: right;">
+                                <div class="col-lg-11 padding23" data-bind="visible:$root.isDisplayCouponsAds()">
+                                    <div class="row">
+                                        <div class="radio col-lg-5">
 
+                                            <input type="radio" name="optionsRadiosCouponTypes" value="1" id="optionsRadiosSwapVouchers" data-bind="checked: CouponType">
+                                            <label for="optionsRadiosSwapVouchers">
+                                                Swap 4 Vouchers
+                                            </label>
+                                            <span class="help-block text-right"></span>
+
+                                        </div>
+                                        <div class="radio col-lg-5">
+
+                                            <input type="radio" name="optionsRadiosCouponTypes" value="2" id="optionsRadiosOffers" data-bind="checked: CouponType">
+                                            <label for="optionsRadiosOffers">
+                                                2-4-1 Offers
+                                            </label>
+                                            <span class="help-block text-right"></span>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="form-group formcontrol-bg form-horizontal">
                                 <div class="col-lg-11">
                                     <div class="form-group" style="margin-top:10px; margin-left:-8px;">
@@ -527,6 +550,7 @@ else
                                 </div>
 
                             </div>
+                           
                             <div class="form-group" style="margin-bottom:11px;text-align: right;">
                                 <div class="col-lg-11 padding23" data-bind="visible:!$root.isDisplayCouponsAds()">
                                     <div class="row">
@@ -1883,7 +1907,8 @@ else
 
                     </div>
                     <div class="row" style="padding-top: 15px;  text-align: center;">
-                        <img data-bind="attr:{src: '/' + $root.advertiserLogo()}" class="preview_screen_advtlogo" />
+                        <img data-bind="visible: $root.campaignModel().LogoUrl() != '', attr:{src: '/' + $root.campaignModel().LogoUrl() + $root.randonNumber()}" class="preview_screen_advtlogo" />
+                        <img data-bind="visible: $root.campaignModel().LogoUrl() == '', attr:{src: '/' + $root.advertiserLogo()+ $root.randonNumber()}" class="preview_screen_advtlogo" />
                     </div>
                     <div style="    text-align: center;">
                         <span data-bind="text: 'Quiz - Win ' +  (($root.campaignModel().ClickRate() * 100)/2).toFixed() + 'p'" style="    font-size: 15px;      font-weight: bold;  color: #bb1923;"></span><br /><br />
@@ -1915,7 +1940,9 @@ else
                         <img src="~/Images/topbarph.png" width="100%" />
                     </div>
                     <div class="row" style="padding-top: 15px;  text-align: center;">
-                        <img data-bind="attr:{src: '/' + $root.advertiserLogo()}" class="preview_screen_advtlogo" />
+                        
+                        <img data-bind="visible: $root.campaignModel().LogoUrl() != '', attr:{src: '/' + $root.campaignModel().LogoUrl()+ $root.randonNumber()}" class="preview_screen_advtlogo" />
+                        <img data-bind="visible: $root.campaignModel().LogoUrl() == '', attr:{src: '/' + $root.advertiserLogo()+ $root.randonNumber()}" class="preview_screen_advtlogo" />
                     </div>
                     <div class="text-center">
 
@@ -1978,7 +2005,8 @@ else
 
                 </div>
                 <div class="row" style="padding-top: 15px;  text-align: center;">
-                    <img data-bind="attr:{src: '/' + $root.advertiserLogo()}" class="preview_screen_advtlogo" />
+                    <img data-bind="visible: $root.campaignModel().LogoUrl() != '', attr:{src: '/' + $root.campaignModel().LogoUrl()+ $root.randonNumber()}" class="preview_screen_advtlogo" />
+                    <img data-bind="visible: $root.campaignModel().LogoUrl() == '', attr:{src: '/' + $root.advertiserLogo()+ $root.randonNumber()}" class="preview_screen_advtlogo" />
                 </div>
                 <div class="row" style="text-align: center;">
                     @*<img style="   width: 85%;    max-height: 150px;" data-bind="visible: $root.campaignModel().buyItImageBytes() == ''" src="/Content/Images/Company_Default.png" />
@@ -2020,7 +2048,8 @@ else
 
                 </div>
                 <div class="row" style="padding-top: 15px;  text-align: center;">
-                    <img data-bind="attr:{src: '/' + $root.advertiserLogo()}" class="preview_screen_advtlogo" />
+                    <img data-bind="visible: $root.campaignModel().LogoUrl() != '', attr:{src: '/' + $root.campaignModel().LogoUrl()+ $root.randonNumber()}" class="preview_screen_advtlogo" />
+                    <img data-bind="visible: $root.campaignModel().LogoUrl() == '', attr:{src: '/' + $root.advertiserLogo()+ $root.randonNumber()}" class="preview_screen_advtlogo" />
                 </div>
                 <div style="width: 83%;      margin: 5px auto 15px;" data-bind="visible: $root.campaignModel().Type() != 4">
                     <span data-bind="text: $root.campaignModel().DisplayTitle" style=" font-size: 15px;    color: red;"></span><br />

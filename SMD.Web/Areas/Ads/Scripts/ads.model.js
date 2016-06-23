@@ -9,7 +9,7 @@
           Voucher1ImagePath, VoucherImagePath, CreatedBy, VideoUrl, BuuyItLine1, BuyItLine2, BuyItLine3, BuyItButtonLabel,
           BuyItImageUrl, AdViews, CompanyId, CouponSwapValue, CouponActualValue, CouponQuantity, CouponTakenCount, priority,
           CouponDiscountValue, couponImage2, CouponImage3, CouponImage4, CouponExpiryLabel,
-          couponSmdComission, CouponCategories, DeliveryDays, IsUseFilter, LogoUrl, VoucherAdditionalInfo, CouponId, IsShowVoucherSetting, VideoLink2) {
+          couponSmdComission, CouponCategories, DeliveryDays, IsUseFilter, LogoUrl, VoucherAdditionalInfo, CouponId, IsShowVoucherSetting, VideoLink2,CouponType) {
        
           var
               //type and userID will be set on server sside
@@ -128,6 +128,7 @@
               CouponId = ko.observable(CouponId),
               IsShowVoucherSetting = ko.observable(IsShowVoucherSetting),
               VideoLink2 = ko.observable(VideoLink2),
+              CouponType = ko.observable(CouponType),
                // Errors
                 errors = ko.validation.group({
                     CampaignName:CampaignName,
@@ -184,6 +185,7 @@
                   DeliveryDays: DeliveryDays,
                   CouponCodes: CouponCodes,
                   IsUseFilter: IsUseFilter,
+                  CouponType: CouponType
 
               }),
               // Has Changes
@@ -288,7 +290,8 @@
                       LogoImageBytes: LogoImageBytes(),
                       CouponId: CouponId(),
                       IsShowVoucherSetting: IsShowVoucherSetting(),
-                      VideoLink2: VideoLink2()
+                      VideoLink2: VideoLink2(),
+                      CouponType: CouponType()
                   };
               };
           return {
@@ -367,7 +370,8 @@
               LogoImageBytes: LogoImageBytes,
               CouponId: CouponId,
               IsShowVoucherSetting:IsShowVoucherSetting,
-              VideoLink2: VideoLink2
+              VideoLink2: VideoLink2,
+              CouponType: CouponType
           };
       };
 
@@ -556,7 +560,7 @@
             source.CampaignTypeImagePath, source.Description, source.ClickRate, source.Voucher1Heading, source.Voucher1Description, source.Voucher1Value, source.Voucher2Heading, source.Voucher2Description,
              source.Voucher2Value, source.Voucher1ImagePath, source.VoucherImagePath, source.CreatedBy, source.VideoUrl, source.BuuyItLine1, source.BuyItLine2, source.BuyItLine3, source.BuyItButtonLabel, source.BuyItImageUrl,source.AdViews,source.CompanyId,
             source.CouponSwapValue, source.CouponActualValue,source.CouponQuantity,source.CouponTakenCount, source.priority, source.CouponDiscountValue,
-             source.couponImage2, source.CouponImage3, source.CouponImage4, source.CouponExpiryLabel, source.couponSmdComission, null, source.DeliveryDays, source.IsUseFilter + "", source.LogoUrl, source.VoucherAdditionalInfo, source.CouponId,source.IsShowVoucherSetting, source.VideoLink2);
+             source.couponImage2, source.CouponImage3, source.CouponImage4, source.CouponExpiryLabel, source.couponSmdComission, null, source.DeliveryDays, source.IsUseFilter + "", source.LogoUrl, source.VoucherAdditionalInfo, source.CouponId,source.IsShowVoucherSetting, source.VideoLink2, source.CouponType + "");
         
         _.each(source.AdCampaignTargetCriterias, function (item) {
           
