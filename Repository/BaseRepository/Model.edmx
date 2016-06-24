@@ -91,6 +91,7 @@
           <Property Name="CouponId" Type="bigint" />
           <Property Name="IsShowVoucherSetting" Type="bit" />
           <Property Name="VideoLink2" Type="nvarchar(max)" />
+          <Property Name="IsSavedCoupon" Type="bit" />
         </EntityType>
         <EntityType Name="AdCampaignResponse">
           <Key>
@@ -275,6 +276,7 @@
           <Property Name="AfilliatianStatus" Type="bit" />
           <Property Name="WebsiteLink" Type="nvarchar" MaxLength="100" />
           <Property Name="CompanyType" Type="int" />
+          <Property Name="VoucherSecretKey" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Country">
           <Key>
@@ -302,6 +304,9 @@
           <Property Name="IsTaken" Type="bit" />
           <Property Name="UserId" Type="nvarchar" MaxLength="128" />
           <Property Name="TakenDateTime" Type="datetime" />
+          <Property Name="IsUsed" Type="bit" />
+          <Property Name="UsedDateTime" Type="datetime" />
+          <Property Name="UsageInfo" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="Currency">
           <Key>
@@ -3325,6 +3330,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <NavigationProperty Name="Users" Relationship="DomainModels.FK_AspNetUsers_Company" FromRole="Company" ToRole="AspNetUser" />
           <NavigationProperty Name="AdCampaignResponses" Relationship="DomainModels.FK_AdCampaignResponse_Company" FromRole="Company" ToRole="AdCampaignResponse" />
           <NavigationProperty Name="AdCampaigns" Relationship="DomainModels.FK_AdCampaign_Company" FromRole="Company" ToRole="AdCampaign" />
+          <Property Name="VoucherSecretKey" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_Account_Company">
           <End Type="DomainModels.Company" Role="Company" Multiplicity="0..1" />
@@ -3659,6 +3665,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <NavigationProperty Name="AspNetUser" Relationship="DomainModels.FK_CouponCodes_AspNetUsers" FromRole="CouponCode" ToRole="User" />
           <NavigationProperty Name="AdCampaign" Relationship="DomainModels.FK_CouponCodes_AdCampaign" FromRole="CouponCode" ToRole="AdCampaign" />
           <Property Name="TakenDateTime" Type="DateTime" Precision="3" />
+          <Property Name="IsUsed" Type="Boolean" />
+          <Property Name="UsedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="UsageInfo" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_CouponCodes_AspNetUsers">
           <End Type="DomainModels.User" Role="User" Multiplicity="0..1" />
@@ -3787,6 +3796,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Property Name="CouponId" Type="Int64" />
           <Property Name="IsShowVoucherSetting" Type="Boolean" />
           <Property Name="VideoLink2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsSavedCoupon" Type="Boolean" />
         </EntityType>
         <Association Name="FK_AdCampaign_Company">
           <End Type="DomainModels.Company" Role="Company" Multiplicity="0..1" />
@@ -4640,6 +4650,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <EntitySetMapping Name="Companies">
             <EntityTypeMapping TypeName="DomainModels.Company">
               <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="VoucherSecretKey" ColumnName="VoucherSecretKey" />
                 <ScalarProperty Name="CompanyType" ColumnName="CompanyType" />
                 <ScalarProperty Name="WebsiteLink" ColumnName="WebsiteLink" />
                 <ScalarProperty Name="AfilliatianStatus" ColumnName="AfilliatianStatus" />
@@ -4755,6 +4766,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <EntitySetMapping Name="CouponCodes">
             <EntityTypeMapping TypeName="DomainModels.CouponCode">
               <MappingFragment StoreEntitySet="CouponCodes">
+                <ScalarProperty Name="UsageInfo" ColumnName="UsageInfo" />
+                <ScalarProperty Name="UsedDateTime" ColumnName="UsedDateTime" />
+                <ScalarProperty Name="IsUsed" ColumnName="IsUsed" />
                 <ScalarProperty Name="TakenDateTime" ColumnName="TakenDateTime" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="IsTaken" ColumnName="IsTaken" />
@@ -4785,6 +4799,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <EntitySetMapping Name="AdCampaigns">
             <EntityTypeMapping TypeName="DomainModels.AdCampaign">
               <MappingFragment StoreEntitySet="AdCampaign">
+                <ScalarProperty Name="IsSavedCoupon" ColumnName="IsSavedCoupon" />
                 <ScalarProperty Name="VideoLink2" ColumnName="VideoLink2" />
                 <ScalarProperty Name="IsShowVoucherSetting" ColumnName="IsShowVoucherSetting" />
                 <ScalarProperty Name="CouponId" ColumnName="CouponId" />

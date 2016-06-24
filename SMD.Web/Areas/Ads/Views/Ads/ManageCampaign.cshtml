@@ -129,7 +129,7 @@ else
                             </div>
                             <div class="form-group formcontrol-bg form-horizontal">
                                 <div class="col-lg-11">
-                                    <div class="form-group" style="margin-top:10px; margin-left:-8px;">
+                                    <div class="form-group" style="margin-top:10px; margin-left:-8px;" data-bind="visible:!$root.isDisplayCouponsAds()">
                                         <div class="col-lg-8 text-campaign-left">
 
                                             <label class="control-label text-right tooltip-float font20 floatNone" style="float:left !important;" data-bind="text:$root.lbldetailsheading">Free Display Ad Details</label>
@@ -142,6 +142,26 @@ else
 
                                         </div>
 
+                                    </div>
+                                    <div class="form-group" style="margin-top:10px; margin-left:-8px;" data-bind="visible:$root.isDisplayCouponsAds()">
+                                        <div class="col-lg-7 text-campaign-left">
+                                            &nbsp;
+                                        </div>
+                                        <div class="col-lg-3">
+
+                                            <label class="control-label text-right tooltip-float">Save Coupon? </label>
+                                        </div>
+                                        <div class="col-lg-2">
+
+
+                                            <div class="onoffswitch">
+                                                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchSavedCoupon" data-bind="checked: IsSavedCoupon">
+                                                <label class="onoffswitch-label" for="switchSavedCoupon">
+                                                    <div class="onoffswitch-inner"></div>
+                                                    <div class="onoffswitch-switch"></div>
+                                                </label>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="form-group" style="margin-bottom:14px;">
                                         <div class="col-lg-3" style="padding-top:12px;">
