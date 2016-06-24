@@ -49,5 +49,6 @@ namespace SMD.Interfaces.Services
         List<Coupons> GetAllCoupons(int categoryId, int type, int size, string keywords, int pageNo);
         AdCampaign SendApprovalRejectionEmail(AdCampaign source);
         string UpdateAdApprovalCampaign(AdCampaign source);
+        IEnumerable<UserFavouriteCoupon> GetAllFavouriteCouponByUserId(string UserId);
     }
 }

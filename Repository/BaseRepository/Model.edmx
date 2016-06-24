@@ -644,6 +644,14 @@
           <Property Name="IsCompleted" Type="bit" />
           <Property Name="Description" Type="nvarchar" MaxLength="500" />
         </EntityType>
+        <EntityType Name="UserFavouriteCoupon">
+          <Key>
+            <PropertyRef Name="FavouriteCouponId" />
+          </Key>
+          <Property Name="FavouriteCouponId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CouponId" Type="bigint" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'SMDDev.dbo.vw_Cash4AdsReport' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vw_Cash4AdsReport">
@@ -1625,6 +1633,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <EntitySet Name="Tax" EntityType="Self.Tax" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Transaction" EntityType="Self.Transaction" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TransactionLog" EntityType="Self.TransactionLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserFavouriteCoupon" EntityType="Self.UserFavouriteCoupon" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="vw_Cash4AdsReport" EntityType="Self.vw_Cash4AdsReport" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [vw_Cash4AdsReport].[tid] AS [tid], 
@@ -2331,6 +2340,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
             <Parameter Name="FromRow" Mode="In" Type="Int32" />
             <Parameter Name="ToRow" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="UserFavouriteCoupons" EntityType="DomainModels.UserFavouriteCoupon" />
           </EntityContainer>
         <EntityType Name="ProfileQuestion">
           <Key>
@@ -4178,6 +4188,14 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Property Type="Boolean" Name="IsShowVoucherSetting" Nullable="true" />
           <Property Type="Int32" Name="TotalItems" Nullable="true" />
         </ComplexType>
+        <EntityType Name="UserFavouriteCoupon">
+          <Key>
+            <PropertyRef Name="FavouriteCouponId" />
+          </Key>
+          <Property Name="FavouriteCouponId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CouponId" Type="Int64" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5072,6 +5090,15 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="UserFavouriteCoupons">
+            <EntityTypeMapping TypeName="DomainModels.UserFavouriteCoupon">
+              <MappingFragment StoreEntitySet="UserFavouriteCoupon">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CouponId" ColumnName="CouponId" />
+                <ScalarProperty Name="FavouriteCouponId" ColumnName="FavouriteCouponId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

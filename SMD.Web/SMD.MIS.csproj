@@ -394,6 +394,7 @@
     <Compile Include="Areas\Api\Controllers\GenerateSMSController.cs" />
     <Compile Include="Areas\Api\Controllers\GetCouponAndCategoriesController.cs" />
     <Compile Include="Areas\Api\Controllers\GetCouponController.cs" />
+    <Compile Include="Areas\Api\Controllers\GetFavouriteCouponController.cs" />
     <Compile Include="Areas\Api\Controllers\IndustryController.cs" />
     <Compile Include="Areas\Api\Controllers\InviteUserController.cs" />
     <Compile Include="Areas\Api\Controllers\ManageUsersController.cs" />
@@ -457,6 +458,7 @@
     <Compile Include="Areas\Api\Models\AdCampaignResposneModelForAproval.cs" />
     <Compile Include="Areas\Api\Models\CityDropDown.cs" />
     <Compile Include="Areas\Api\Models\EducationDropdown.cs" />
+    <Compile Include="Areas\Api\Models\FavouriteCouponResponse.cs" />
     <Compile Include="Areas\Api\Models\IndusteryDropdown.cs" />
     <Compile Include="Areas\Api\Models\Invoice.cs" />
     <Compile Include="Areas\Api\Models\InvoiceDetail.cs" />

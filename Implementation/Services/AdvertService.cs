@@ -50,6 +50,7 @@ namespace SMD.Implementation.Services
         private readonly ICouponCategoryRepository _companyRepository;
         private readonly ICampaignCategoriesRepository _campaignCategoriesRepository;
         private readonly ICouponCodeRepository _couponCodeRepository;
+        private readonly IUserFavouriteCouponRepository _userFavouriteCouponRepository;
         #region Private Funcs
         private ApplicationUserManager UserManager
         {
@@ -197,7 +198,8 @@ namespace SMD.Implementation.Services
             IStripeService stripeService, WebApiUserService webApiUserService, ICompanyRepository companyRepository, IAdCampaignResponseRepository adcampaignResponseRepository
             ,ICouponCategoryRepository couponCategoryRepository
             , ICampaignCategoriesRepository campaignCategoriesRepository
-            , ICouponCodeRepository couponCodeRepository)
+            , ICouponCodeRepository couponCodeRepository
+            , IUserFavouriteCouponRepository userFavouriteCouponRepository)
         {
             this._adCampaignRepository = adCampaignRepository;
             this._languageRepository = languageRepository;
@@ -222,6 +224,7 @@ namespace SMD.Implementation.Services
             this._couponCategoryRepository = couponCategoryRepository;
             this._campaignCategoriesRepository = campaignCategoriesRepository;
             this._couponCodeRepository = couponCodeRepository;
+            this._userFavouriteCouponRepository = userFavouriteCouponRepository;
         }
         
         /// <summary>
@@ -414,6 +417,14 @@ namespace SMD.Implementation.Services
                 _couponCodeRepository.SaveChanges();
 
             }
+            if (campaignModel.Type == 5 && campaignModel.IsSavedCoupon == true)
+            {
+                UserFavouriteCoupon oFav = new UserFavouriteCoupon();
+                oFav.CouponId = campaignModel.CampaignId;
+                oFav.UserId = _adCampaignRepository.LoggedInUserIdentity;
+                _userFavouriteCouponRepository.Add(oFav);
+                _userFavouriteCouponRepository.SaveChanges();
+            }
         }
         public CampaignResponseModel GetCampaigns(AdCampaignSearchRequest request)
         {
@@ -516,15 +527,7 @@ namespace SMD.Implementation.Services
             {
                 campaignModel.MaxBudget = Math.Round(Convert.ToDouble(campaignModel.MaxBudget), 2);
             }
-            //if (campaignModel.Type == 5)
-            //{
-            //    AdCampaign exisitngCampaign = _adCampaignRepository.GetAdCampaignById(campaignModel.CampaignId).FirstOrDefault();
-            //    if (exisitngCampaign != null) 
-            //    {
-            //        campaignModel.CouponType = exisitngCampaign.CouponType;
-            //    }
-
-            //}
+          
             _adCampaignRepository.Update(campaignModel);
             _adCampaignRepository.SaveChanges();
 
@@ -606,7 +609,21 @@ namespace SMD.Implementation.Services
 
                 }
                 _campaignCategoriesRepository.SaveChanges();
-              
+
+                UserFavouriteCoupon oFav = _userFavouriteCouponRepository.GetByCouponId(campaignModel.CampaignId);
+                if (campaignModel.Type == 5 && campaignModel.IsSavedCoupon == true && oFav == null)
+                {
+                    oFav = new UserFavouriteCoupon();
+                    oFav.CouponId = campaignModel.CampaignId;
+                    oFav.UserId = _adCampaignRepository.LoggedInUserIdentity;
+                    _userFavouriteCouponRepository.Add(oFav);
+                    _userFavouriteCouponRepository.SaveChanges();
+                }
+                else if (campaignModel.Type == 5 && campaignModel.IsSavedCoupon == false && oFav != null)
+                {
+                    _userFavouriteCouponRepository.Delete(oFav);
+                    _userFavouriteCouponRepository.SaveChanges();
+                }
             }
 
             // remove coupon codes if campaign has and add again
@@ -1121,6 +1138,11 @@ namespace SMD.Implementation.Services
 
             }
             return respMesg;
+        }
+
+        public IEnumerable<UserFavouriteCoupon> GetAllFavouriteCouponByUserId(string UserId)
+        {
+            return _userFavouriteCouponRepository.GetAllFavouriteCouponByUserId(UserId);
         }
         #endregion
     }

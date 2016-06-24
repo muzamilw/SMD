@@ -227,7 +227,12 @@ namespace SMD.MIS
                new { controller = "InviteUser" },
                null,
                null);
-
+            config.Routes.MapHttpRoute(
+               "FavouriteCoupon",
+               "UserFavouriteCoupon/{AuthenticationToken}/",
+               new { controller = "GetFavouriteCoupon" },
+               null,
+               null);
         }
     }
 }

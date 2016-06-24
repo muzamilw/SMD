@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySetsECE7E20D912304352245D0B68B4247DC02BC058048D5762B672188B1CEAB9927))]
+[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets56F2AD32BFFF5977EEFB7CB6D7E4142F5DDADA3B5AB6D7B5CEED4AEAB4BCF14B))]
 
 namespace Edm_EntityMappingGeneratedViews
 {
@@ -17,19 +17,19 @@ namespace Edm_EntityMappingGeneratedViews
     /// <Summary>
     /// The type contains views for EntitySets and AssociationSets that were generated at design time.
     /// </Summary>
-    public sealed class ViewsForBaseEntitySetsECE7E20D912304352245D0B68B4247DC02BC058048D5762B672188B1CEAB9927 : System.Data.Mapping.EntityViewContainer
+    public sealed class ViewsForBaseEntitySets56F2AD32BFFF5977EEFB7CB6D7E4142F5DDADA3B5AB6D7B5CEED4AEAB4BCF14B : System.Data.Mapping.EntityViewContainer
     {
         
         /// <Summary>
         /// The constructor stores the views for the extents and also the hash values generated based on the metadata and mapping closure and views.
         /// </Summary>
-        public ViewsForBaseEntitySetsECE7E20D912304352245D0B68B4247DC02BC058048D5762B672188B1CEAB9927()
+        public ViewsForBaseEntitySets56F2AD32BFFF5977EEFB7CB6D7E4142F5DDADA3B5AB6D7B5CEED4AEAB4BCF14B()
         {
             this.EdmEntityContainerName = "BaseDbContext";
             this.StoreEntityContainerName = "SMDModelStoreContainer";
-            this.HashOverMappingClosure = "4f641853b1e5b1ed9eea18820c4429c774314edfcddb93a51ba2aa1e7f954111";
-            this.HashOverAllExtentViews = "7c698b2b955006ea58afb18fc8de4e06fc49dde07e886bcd2afc71d4d7cb7a7c";
-            this.ViewCount = 84;
+            this.HashOverMappingClosure = "20aff477a09db20d8bc48a2f80e368579d3e79834c80ff24a7bffe8ca2761707";
+            this.HashOverAllExtentViews = "89d428720763be280e530d45fe65cacd65deddb9eebb12b1f974e27a4519ef00";
+            this.ViewCount = 86;
         }
         
         /// <Summary>
@@ -372,6 +372,14 @@ namespace Edm_EntityMappingGeneratedViews
             if ((index == 83))
             {
                 return GetView83();
+            }
+            if ((index == 84))
+            {
+                return GetView84();
+            }
+            if ((index == 85))
+            {
+                return GetView85();
             }
             throw new System.IndexOutOfRangeException();
         }
@@ -2549,6 +2557,42 @@ namespace Edm_EntityMappingGeneratedViews
             T.Email AS [vw_Cash4AdsReport.Email], 
             True AS _from0
         FROM SMDModelStoreContainer.vw_Cash4AdsReport AS T
+    ) AS T1");
+        }
+        
+        /// <Summary>
+        /// return view for SMDModelStoreContainer.UserFavouriteCoupon
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView84()
+        {
+            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.UserFavouriteCoupon", @"
+    SELECT VALUE -- Constructing UserFavouriteCoupon
+        [SMDModel.Store.UserFavouriteCoupon](T1.UserFavouriteCoupon_FavouriteCouponId, T1.UserFavouriteCoupon_CouponId, T1.UserFavouriteCoupon_UserId)
+    FROM (
+        SELECT 
+            T.FavouriteCouponId AS UserFavouriteCoupon_FavouriteCouponId, 
+            T.CouponId AS UserFavouriteCoupon_CouponId, 
+            T.UserId AS UserFavouriteCoupon_UserId, 
+            True AS _from0
+        FROM BaseDbContext.UserFavouriteCoupons AS T
+    ) AS T1");
+        }
+        
+        /// <Summary>
+        /// return view for BaseDbContext.UserFavouriteCoupons
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView85()
+        {
+            return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.UserFavouriteCoupons", @"
+    SELECT VALUE -- Constructing UserFavouriteCoupons
+        [DomainModels.UserFavouriteCoupon](T1.UserFavouriteCoupon_FavouriteCouponId, T1.UserFavouriteCoupon_CouponId, T1.UserFavouriteCoupon_UserId)
+    FROM (
+        SELECT 
+            T.FavouriteCouponId AS UserFavouriteCoupon_FavouriteCouponId, 
+            T.CouponId AS UserFavouriteCoupon_CouponId, 
+            T.UserId AS UserFavouriteCoupon_UserId, 
+            True AS _from0
+        FROM SMDModelStoreContainer.UserFavouriteCoupon AS T
     ) AS T1");
         }
     }
