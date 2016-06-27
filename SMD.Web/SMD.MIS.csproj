@@ -391,6 +391,7 @@
     <Compile Include="Areas\Api\Controllers\CopyCampaignController.cs" />
     <Compile Include="Areas\Api\Controllers\CouponCategoryController.cs" />
     <Compile Include="Areas\Api\Controllers\EducationController.cs" />
+    <Compile Include="Areas\Api\Controllers\GenerateCouponController.cs" />
     <Compile Include="Areas\Api\Controllers\GenerateSMSController.cs" />
     <Compile Include="Areas\Api\Controllers\GetCouponAndCategoriesController.cs" />
     <Compile Include="Areas\Api\Controllers\GetCouponController.cs" />

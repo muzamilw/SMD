@@ -1144,6 +1144,47 @@ namespace SMD.Implementation.Services
         {
             return _userFavouriteCouponRepository.GetAllFavouriteCouponByUserId(UserId);
         }
+        public List<CouponCode> GenerateCouponCodes(int numbers, long CampaignId)
+        {
+            var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            List<string> alreadyAddedCodes = _couponCodeRepository.GetUserCoupons(_adCampaignRepository.LoggedInUserIdentity);
+            List<CouponCode> codesList = new List<CouponCode>();
+            CouponCode oCode = null;
+            bool isAddCode = false;
+            for (int i = 0; i < numbers; i++)
+            {
+                string uCode = new string(chars.OrderBy(o => Guid.NewGuid()).Take(6).ToArray());
+                if (alreadyAddedCodes != null && alreadyAddedCodes.Contains(uCode))
+                {
+                    isAddCode = false;
+                }
+                else 
+                {
+                    isAddCode = true;
+                }
+                if (isAddCode) 
+                {
+                    oCode = new CouponCode();
+                    oCode.Code = uCode;
+                    oCode.CampaignId = CampaignId;
+                    oCode.UserId = _adCampaignRepository.LoggedInUserIdentity;
+                    codesList.Add(oCode); 
+                    _couponCodeRepository.Add(oCode);
+                
+                }
+            }
+            AdCampaign ocoupon = _adCampaignRepository.Find(CampaignId);
+     
+            ocoupon.CouponQuantity = alreadyAddedCodes.Count + codesList.Count;
+            _couponCodeRepository.SaveChanges();
+            _adCampaignRepository.SaveChanges();
+            return codesList;
+        }
+
+        public string UpdateCouponSettings(string VoucherCode, string SecretKey, string UserId)
+        {
+            return _couponCodeRepository.UpdateCouponSettings(VoucherCode, SecretKey, UserId);
+        }
         #endregion
     }
 }

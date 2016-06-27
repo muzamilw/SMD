@@ -103,6 +103,7 @@ define("ads/ads.viewModel",
                     previewVideoTagUrl = ko.observable("");
                     randonNumber = ko.observable("?r=0");
                     vouchers = ko.observableArray();
+                    numberOFCouponsToGenerate = ko.observable(0),
                     getCampaignBaseContent = function () {
                         dataservice.getBaseData({
                             RequestId: 1,
@@ -378,7 +379,7 @@ define("ads/ads.viewModel",
                       
                       campaignModel(new model.Campaign());
                       // campaignModel().CampaignName('New Campaign');
-                      debugger
+                      
                       if (mode == 1) { // video
                           campaignModel().Type('1');
                           isEnableVedioVerificationLink(true);
@@ -408,6 +409,7 @@ define("ads/ads.viewModel",
                           campaignModel().couponImage2("");
                           campaignModel().CouponImage3("");
                           campaignModel().CouponImage4("");
+                          campaignModel().CouponType('1');
                       }
                       isWelcomeScreenVisible(false);
 
@@ -445,7 +447,7 @@ define("ads/ads.viewModel",
                       }
 
                       getAudienceCount();
-                      debugger
+                      
                       bindAudienceReachCount();
                       selectedQuestionCountryList([]);
 
@@ -1113,7 +1115,7 @@ define("ads/ads.viewModel",
                             success: function (data) {
                                 
                                 if (data != null) {
-                                    debugger
+                                    
                                     // set languages drop down
                                     var profileQIds = [];
                                     var surveyQIds = [];
@@ -1958,7 +1960,7 @@ define("ads/ads.viewModel",
                       }
                   },
                 addItemToCouponCodeList = function () {
-              debugger
+              
                     if ((this.BetterListitemToAdd() != "") && (allCouponCodeItems.indexOf(this.BetterListitemToAdd()) < 0)) {
                         if (this.BetterListitemToAdd().indexOf(',') > 0) {
                            
@@ -2058,6 +2060,37 @@ define("ads/ads.viewModel",
                          
                      }
                      return true;
+                 },
+                 generateCouponCodes = function () {
+                     
+                     var gData = {
+                         CampaignId: campaignModel().CampaignID(),
+                         number: numberOFCouponsToGenerate()
+                     };
+                     dataservice.generateCouponCodes(gData, {
+                         success: function (data) {
+                             debugger
+                             _.each(data, function (item) {
+                                 allCouponCodeItems.push(item.Code);
+                                 campaignModel().CouponCodes.push(new model.AdCampaignCouponCodes.Create({
+                                     CodeId: item.CodeId,
+                                     CampaignId: item.CampaignId,
+                                     Code: item.Code,
+                                     IsTaken: false,
+                                     UserId: item.UserId,
+                                     UserName: "",
+                                     TakenDateTime: null
+                                 }));
+                             });
+                             var cQty = parseInt(campaignModel().CouponQuantity()) + parseInt(numberOFCouponsToGenerate());
+                             campaignModel().CouponQuantity(cQty);
+                             numberOFCouponsToGenerate(0);
+                             toastr.success("Codes generated successfully.");
+                         },
+                         error: function (response) {
+                             toastr.error("Error while generating codes.");
+                         }
+                     });
                  },
                 // Initialize the view model
                 initialize = function (specifiedView) {
@@ -2213,7 +2246,8 @@ define("ads/ads.viewModel",
                     LogoUrlImageCallback: LogoUrlImageCallback,
                     randonNumber: randonNumber,
                     vouchers:vouchers,
-                    voucherPriceLbl: voucherPriceLbl
+                    voucherPriceLbl: voucherPriceLbl,
+                    numberOFCouponsToGenerate:numberOFCouponsToGenerate
                 };
             })()
         };

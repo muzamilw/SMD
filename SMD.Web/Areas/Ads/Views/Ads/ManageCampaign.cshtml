@@ -510,22 +510,28 @@ else
                                         </div>
                                         <div class="form-group">
                                             <div class="col-lg-3">
+                                               &nbsp;
+                                            </div>
+                                            <div class="col-lg-8" style="padding-top:8px;">
+                                                <button class="btn  btn-success" id="couponCodeSelectorLink" data-bind="click:$root.opencouponCodesDialog">Manage Coupon Codes</button>
+                                                <a data-toggle="modal" data-target=".model_generateCodes">
+                                                    <button class="btn  btn-success" id="btnGenerateCodes">Generate Coupon Codes</button>
+
+
+                                                </a>
+                                               
+                                            </div>
+                                           
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-3">
                                                 <label for="txtccqty" class="control-label text-right tooltip-float floatNone">Coupon Quantity</label>
                                             </div>
                                             <div class="col-lg-5" style="padding-top:8px;">
                                                 <span data-bind="text: CouponQuantity"></span>
                                                 @*<input type="number" class="form-control" id="txtPurseValue" placeholder="Quantity" data-bind="value:CouponQuantity">*@
                                             </div>
-                                            <div class="col-lg-3">
-                                                <a href="#" id="couponCodeSelectorLink" style="margin-left:0px;" data-bind="click: $root.opencouponCodesDialog">
-                                                    <i class="fa fa-lg"></i>&nbsp;Manage Coupon Codes
-                                                </a>
-                                                @*<br />
-                                <div class="fileUpload">
-                                    <span>Upload CSV file </span>
-                                    <input type="file" class="upload" id="campaignType_image_csvFile" data-bind="files: { onLoaded: $root.campaignCSVCallback}" />
-                                </div>*@
-                                            </div>
+                                           
                                         </div>
                                         <div class="form-group" data-bind="visible: $root.UsedCouponQuantity() != 0">
                                             <div class="col-lg-3">
@@ -2120,6 +2126,43 @@ else
 
             </div>
 
+        </div>
+    </div>
+    <div class="modal fade my-modal model_generateCodes" id="mdGenerateCC" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Generate Coupon Codes</h4>
+                </div>
+                <div class="col-lg-12">
+                    <div class="row liveExample">
+
+                        <form data-bind="submit:generateCouponCodes">
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    <label for="txtCouponNumb" class="control-label text-right tooltip-float floatNone" style="margin-top: 7px;">Coupon Number</label>
+                                </div>
+                                <div class="col-lg-5">
+                                    <input type="number" class="form-control" data-bind='value:numberOFCouponsToGenerate, valueUpdate: "afterkeydown"' placeholder="Enter number" />
+
+                                </div>
+                                <div class="col-lg-4">
+                                    <button type="submit" data-bind="enable: numberOFCouponsToGenerate() > 0" class="btn btn-primary">Generate</button>
+                                </div>
+                                <div class="clearfix">
+
+                                </div>
+                            </div>
+
+
+                        </form>
+                       
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
         </div>
     </div>
 

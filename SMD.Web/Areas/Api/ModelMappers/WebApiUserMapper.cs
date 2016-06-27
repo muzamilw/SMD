@@ -56,7 +56,8 @@ namespace SMD.MIS.Areas.Api.ModelMappers
                        CompanyId = source.Company.CompanyId,
                        AuthenticationToken = source.AuthenticationToken,
                        Password = source.PasswordHash,
-                       RoleId = source.Roles.Select(c => c.Id).FirstOrDefault()
+                       RoleId = source.Roles.Select(c => c.Id).FirstOrDefault(),
+                       VoucherSecretKey = source.Company.VoucherSecretKey
                    };
 
             return user;

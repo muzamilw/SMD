@@ -4,7 +4,8 @@
       User = function (specifiedId, specifiedFullName, specifiedAddress1, specifiedCmpname, specifiedEmail,
           specifiedJTitle, specifiedTimeZone, specifiedGender, specifiedAddress2, specifiedAge, specifiedCityId,
           specifiedContNotes, specifiedCountryId,indsId, specifiedPhn1, specifiedPhn2, specifiedState, specifiedZip, specifiedImg,
-          advertisingContact, advertisingEmail, advertisingPhone, spcEduId, spcStripe, spcPayPal, spcGoogle, ProfileImageBytes, CompanyId, RoleId, Password) {
+          advertisingContact, advertisingEmail, advertisingPhone, spcEduId, spcStripe, spcPayPal, spcGoogle
+          , ProfileImageBytes, CompanyId, RoleId, Password, VoucherSecretKey) {
           var
               id = ko.observable(specifiedId),
               fullName = ko.observable(specifiedFullName),
@@ -40,6 +41,7 @@
               payPalId = ko.observable(spcPayPal || 'undefined'),
               googleValletId = ko.observable(spcGoogle || 'undefined'),
               RoleId = ko.observable(RoleId),
+              VoucherSecretKey = ko.observable(VoucherSecretKey),
               Password = ko.observable(Password).extend({ required: { params: true, message: 'This field is required with minimum 6 characters!' }, minLength: 6 }),
               ConfirmPassword = ko.observable(Password).extend({ compareWith: Password }),
               errors = ko.validation.group({
@@ -75,7 +77,8 @@
                   educationId: educationId,
                   RoleId: RoleId,
                   Password: Password,
-                  ConfirmPassword: ConfirmPassword
+                  ConfirmPassword: ConfirmPassword,
+                  VoucherSecretKey: VoucherSecretKey
 
               }),
               // Has Changes
@@ -117,7 +120,8 @@
                       ProfileImageBytesString: ProfileImageBytes(),
                       CompanyId: CompanyId,
                       RoleId: RoleId(),
-                      Password: Password()
+                      Password: Password(),
+                      VoucherSecretKey: VoucherSecretKey()
                   };
               };
           return {
@@ -157,7 +161,8 @@
               reset: reset,
               isValid: isValid,
               errors: errors,
-              ProfileImageBytes: ProfileImageBytes
+              ProfileImageBytes: ProfileImageBytes,
+              VoucherSecretKey: VoucherSecretKey
           };
       };
 
@@ -169,7 +174,7 @@
             itemFromServer.Address2, itemFromServer.DOB, itemFromServer.CityId, itemFromServer.ContactNotes, itemFromServer.CountryId,
             itemFromServer.IndustryId,itemFromServer.Phone1,itemFromServer.Phone2,itemFromServer.State,itemFromServer.ZipCode,
             itemFromServer.ImageUrl ,itemFromServer.AdvertContact,itemFromServer.AdvertContactEmail,itemFromServer.AdvertContactPhone,
-            itemFromServer.EducationId, itemFromServer.StripeId, itemFromServer.PayPal, itemFromServer.GoogleVallet, null, itemFromServer.CompanyId, itemFromServer.RoleId, itemFromServer.Password);
+            itemFromServer.EducationId, itemFromServer.StripeId, itemFromServer.PayPal, itemFromServer.GoogleVallet, null, itemFromServer.CompanyId, itemFromServer.RoleId, itemFromServer.Password, itemFromServer.VoucherSecretKey);
      
     };
     

@@ -47,7 +47,7 @@ namespace SMD.MIS.Areas.Api.Controllers
             }
             return _advertService.GetCoupons(UserId);            
         }
-
+    
         #endregion
     }
 }

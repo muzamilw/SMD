@@ -191,5 +191,6 @@ namespace SMD.Models.RequestModels
         public string RoleId { get; set; }
 
         public string Password { get; set; }
+        public string VoucherSecretKey { get; set; }
     }
 }

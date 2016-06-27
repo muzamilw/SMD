@@ -233,6 +233,12 @@ namespace SMD.MIS
                new { controller = "GetFavouriteCoupon" },
                null,
                null);
+            config.Routes.MapHttpRoute(
+            "IsValidCoupon",
+            "IsValidCoupon/{AuthenticationToken}/",
+            new { controller = "GenerateCoupon" },
+            null,
+            null);
         }
     }
 }
