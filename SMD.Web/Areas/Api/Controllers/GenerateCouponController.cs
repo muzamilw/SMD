@@ -32,10 +32,14 @@ namespace SMD.MIS.Areas.Api.Controllers
 
         #region Public
 
-        public IEnumerable<CouponCodeModel> Get(long CampaignId, int number)
+        public CouponCodeQuantityModel Get(long CampaignId, int number)
         {
 
-            return _advertService.GenerateCouponCodes(number, CampaignId).Select(i => i.CreateFrom());
+            var response = _advertService.GenerateCouponCodes(number, CampaignId);
+            CouponCodeQuantityModel oResp = new CouponCodeQuantityModel();
+            oResp.CouponList = response.CouponList.Select(i => i.CreateFrom());
+            oResp.CouponQuantity = response.CouponQuantity;
+            return oResp;
         }
 
         public BaseApiResponse Post(string VoucherCode, string SecretKey, string UserId)

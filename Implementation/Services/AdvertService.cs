@@ -1144,10 +1144,11 @@ namespace SMD.Implementation.Services
         {
             return _userFavouriteCouponRepository.GetAllFavouriteCouponByUserId(UserId);
         }
-        public List<CouponCode> GenerateCouponCodes(int numbers, long CampaignId)
+        public CouponCodeModel GenerateCouponCodes(int numbers, long CampaignId)
         {
+            CouponCodeModel oModel = new CouponCodeModel();
             var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            List<string> alreadyAddedCodes = _couponCodeRepository.GetUserCoupons(_adCampaignRepository.LoggedInUserIdentity);
+            List<string> alreadyAddedCodes = _couponCodeRepository.GetCampaignCoupons(CampaignId).Select(c => c.Code).ToList();
             List<CouponCode> codesList = new List<CouponCode>();
             CouponCode oCode = null;
             bool isAddCode = false;
@@ -1178,7 +1179,9 @@ namespace SMD.Implementation.Services
             ocoupon.CouponQuantity = alreadyAddedCodes.Count + codesList.Count;
             _couponCodeRepository.SaveChanges();
             _adCampaignRepository.SaveChanges();
-            return codesList;
+            oModel.CouponList = codesList;
+            oModel.CouponQuantity = alreadyAddedCodes.Count + codesList.Count;
+            return oModel;
         }
 
         public string UpdateCouponSettings(string VoucherCode, string SecretKey, string UserId)

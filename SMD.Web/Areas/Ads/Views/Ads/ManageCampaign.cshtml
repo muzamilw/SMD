@@ -514,12 +514,16 @@ else
                                             </div>
                                             <div class="col-lg-8" style="padding-top:8px;">
                                                 <button class="btn  btn-success" id="couponCodeSelectorLink" data-bind="click:$root.opencouponCodesDialog">Manage Coupon Codes</button>
+                                                <!--ko if: $root.isNewCampaign() == false -->
                                                 <a data-toggle="modal" data-target=".model_generateCodes">
                                                     <button class="btn  btn-success" id="btnGenerateCodes">Generate Coupon Codes</button>
-
-
                                                 </a>
+                                                <!--/ko-->
+                                                <!--ko if: $root.isNewCampaign() == true -->
                                                
+                                                <button class="btn  btn-success" id="btnGenerateCodes" data-bind="click:$root.showCouponGenerationWarning">Generate Coupon Codes</button>
+                                             
+                                                <!--/ko-->
                                             </div>
                                            
                                         </div>

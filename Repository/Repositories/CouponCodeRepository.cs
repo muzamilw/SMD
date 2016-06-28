@@ -45,11 +45,14 @@ namespace SMD.Repository.Repositories
         {
             return db.CouponCodes.Where(c => c.Code == Code).FirstOrDefault() != null ? true : false;
         }
-        public List<string> GetUserCoupons(string UserId)
+        public List<CouponCode> GetUserCoupons(string UserId)
         {
-            return db.CouponCodes.Where(c => c.UserId == UserId).Select(c => c.Code).ToList();
+            return db.CouponCodes.Where(c => c.UserId == UserId).ToList();
         }
-
+        public List<CouponCode> GetCampaignCoupons(long CampaignId)
+        {
+            return db.CouponCodes.Where(c => c.CampaignId == CampaignId).ToList();
+        }
         public string UpdateCouponSettings(string VoucherCode, string SecretKey, string UserId)
         {
             User loggedInUser = db.Users.Where(u => u.Id == UserId).SingleOrDefault();

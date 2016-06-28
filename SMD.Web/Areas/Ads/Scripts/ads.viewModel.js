@@ -2070,7 +2070,7 @@ define("ads/ads.viewModel",
                      dataservice.generateCouponCodes(gData, {
                          success: function (data) {
                              debugger
-                             _.each(data, function (item) {
+                             _.each(data.CouponList, function (item) {
                                  allCouponCodeItems.push(item.Code);
                                  campaignModel().CouponCodes.push(new model.AdCampaignCouponCodes.Create({
                                      CodeId: item.CodeId,
@@ -2082,8 +2082,8 @@ define("ads/ads.viewModel",
                                      TakenDateTime: null
                                  }));
                              });
-                             var cQty = parseInt(campaignModel().CouponQuantity()) + parseInt(numberOFCouponsToGenerate());
-                             campaignModel().CouponQuantity(cQty);
+                             //var cQty = parseInt(campaignModel().CouponQuantity()) + parseInt(numberOFCouponsToGenerate());
+                             campaignModel().CouponQuantity(data.CouponQuantity);
                              numberOFCouponsToGenerate(0);
                              toastr.success("Codes generated successfully.");
                          },
@@ -2092,6 +2092,9 @@ define("ads/ads.viewModel",
                          }
                      });
                  },
+                showCouponGenerationWarning = function () {
+                    toastr.warning("Please first save the coupon.");
+                },
                 // Initialize the view model
                 initialize = function (specifiedView) {
                     view = specifiedView;
@@ -2247,7 +2250,8 @@ define("ads/ads.viewModel",
                     randonNumber: randonNumber,
                     vouchers:vouchers,
                     voucherPriceLbl: voucherPriceLbl,
-                    numberOFCouponsToGenerate:numberOFCouponsToGenerate
+                    numberOFCouponsToGenerate: numberOFCouponsToGenerate,
+                    showCouponGenerationWarning: showCouponGenerationWarning
                 };
             })()
         };
