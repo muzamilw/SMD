@@ -610,20 +610,7 @@ namespace SMD.Implementation.Services
                 }
                 _campaignCategoriesRepository.SaveChanges();
 
-                UserFavouriteCoupon oFav = _userFavouriteCouponRepository.GetByCouponId(campaignModel.CampaignId);
-                if (campaignModel.Type == 5 && campaignModel.IsSavedCoupon == true && oFav == null)
-                {
-                    oFav = new UserFavouriteCoupon();
-                    oFav.CouponId = campaignModel.CampaignId;
-                    oFav.UserId = _adCampaignRepository.LoggedInUserIdentity;
-                    _userFavouriteCouponRepository.Add(oFav);
-                    _userFavouriteCouponRepository.SaveChanges();
-                }
-                else if (campaignModel.Type == 5 && campaignModel.IsSavedCoupon == false && oFav != null)
-                {
-                    _userFavouriteCouponRepository.Delete(oFav);
-                    _userFavouriteCouponRepository.SaveChanges();
-                }
+               
             }
 
             // remove coupon codes if campaign has and add again
@@ -648,6 +635,21 @@ namespace SMD.Implementation.Services
 
                 }
                 _couponCodeRepository.SaveChanges();
+            }
+
+            UserFavouriteCoupon oFav = _userFavouriteCouponRepository.GetByCouponId(campaignModel.CampaignId);
+            if (campaignModel.Type == 5 && campaignModel.IsSavedCoupon == true && oFav == null)
+            {
+                oFav = new UserFavouriteCoupon();
+                oFav.CouponId = campaignModel.CampaignId;
+                oFav.UserId = _adCampaignRepository.LoggedInUserIdentity;
+                _userFavouriteCouponRepository.Add(oFav);
+                _userFavouriteCouponRepository.SaveChanges();
+            }
+            else if (campaignModel.Type == 5 && campaignModel.IsSavedCoupon == false && oFav != null)
+            {
+                _userFavouriteCouponRepository.Delete(oFav);
+                _userFavouriteCouponRepository.SaveChanges();
             }
         }
         #endregion
