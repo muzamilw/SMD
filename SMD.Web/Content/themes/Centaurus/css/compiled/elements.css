@@ -5204,7 +5204,8 @@ background: url(/Images/ads.png);
 }
 .defaultImgUploadImage{
 
-    width:260px;text-align:center;
+    width:200px;text-align:left;    background: #f3f3f3;
+    padding: 16px;
 }
 div#spinnerAudience {
  
