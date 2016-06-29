@@ -376,9 +376,9 @@ else
                                 </div>
                                 <div  data-bind="visible:$root.isDisplayCouponsAds()">
                                     <div class="col-lg-4">
-                                        <div style="margin-top:5px;    text-align: center;">
-                                            <img style="height:90px;" data-bind="visible: CampaignImagePath() == ''" src="/Content/Images/placeholder.png" onclick="showCouponDialog1();" />
-                                            <img style="height:90px;" data-bind="visible: CampaignImagePath() != '' ,attr: { src: CampaignImagePath }" onclick="showCouponDialog1();" />
+                                        <div style="margin-top:5px;    text-align: center;cursor:pointer;">
+                                            <img style="height:90px;" data-bind="visible: CampaignImagePath() == '' || CampaignImagePath() == null" src="/Content/Images/placeholder.png" onclick="showCouponDialog1();" />
+                                            <img style="height:90px;" data-bind="visible: CampaignImagePath() != '' &&  CampaignImagePath() != null ,attr: { src: CampaignImagePath }" onclick="showCouponDialog1();" />
                                             <div style="    padding-top: 10px;    text-align: center;    font-size: 12px;    color: gray;">
                                                 (200 x 200 pixels)
                                             </div>
@@ -390,9 +390,9 @@ else
                                         </div>
                                     </div>
                                     <div class="col-lg-4">
-                                        <div style="margin-top:5px;    text-align: center;" >
-                                            <img style="height:90px;" data-bind="visible: couponImage2() == ''" src="/Content/Images/placeholder.png" onclick="showCouponDialog2();" />
-                                            <img style="height:90px;" data-bind="visible: couponImage2() != '' ,attr: { src: couponImage2 }" onclick="showCouponDialog2();" />
+                                        <div style="margin-top:5px;    text-align: center;cursor:pointer;" >
+                                            <img style="height:90px;" data-bind="visible: couponImage2() == '' || couponImage2() == null" src="/Content/Images/placeholder.png" onclick="showCouponDialog2();" />
+                                            <img style="height:90px;" data-bind="visible: couponImage2() != '' && couponImage2() != null ,attr: { src: couponImage2 }" onclick="showCouponDialog2();" />
                                             <div style="    padding-top: 10px;    text-align: center;    font-size: 12px;    color: gray;">
                                                 (200 x 200 pixels)
                                             </div>
@@ -404,9 +404,9 @@ else
                                         </div>
                                     </div>
                                     <div class="col-lg-4">
-                                        <div style="margin-top:5px;    text-align: center;">
-                                            <img style="height:90px;" data-bind="visible: CouponImage3() == ''" src="/Content/Images/placeholder.png" onclick="showCouponDialog3();" />
-                                            <img style="height:90px;" data-bind="visible: CouponImage3() != '' ,attr: { src: CouponImage3 }" onclick="showCouponDialog3();" />
+                                        <div style="margin-top:5px;    text-align: center;cursor:pointer;">
+                                            <img style="height:90px;" data-bind="visible: CouponImage3() == '' || CouponImage3() == null" src="/Content/Images/placeholder.png" onclick="showCouponDialog3();" />
+                                            <img style="height:90px;" data-bind="visible: CouponImage3() != '' && CouponImage3() != null,attr: { src: CouponImage3 }" onclick="showCouponDialog3();" />
                                             <div style="    padding-top: 10px;    text-align: center;    font-size: 12px;    color: gray;">
                                                 (200 x 200 pixels)
                                             </div>
