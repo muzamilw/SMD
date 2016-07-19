@@ -52,6 +52,15 @@ define("ads/ads.dataservice", function () {
                         dataType: 'json',
                         type: 'GET'
                     });
+
+                    // 
+                    amplify.request.define('generateCouponCodes', 'ajax', {
+                        url: '/Api/GenerateCoupon',
+                        dataType: 'json',
+                        ////dataMap: JSON.stringify,
+                        //contentType: "application/json; charset=utf-8",
+                        type: 'Get'
+                    });
                 }
             };
 
@@ -110,6 +119,15 @@ define("ads/ads.dataservice", function () {
                      success: callbacks.success,
                      error: callbacks.error,
                  });
+             },
+        generateCouponCodes = function (params, callbacks) {
+                 initialize();
+                 return amplify.request({
+                     resourceId: 'generateCouponCodes',
+                     data: params,
+                     success: callbacks.success,
+                     error: callbacks.error,
+                 });
              }
         return {
             getBaseData: getBaseData,
@@ -117,7 +135,8 @@ define("ads/ads.dataservice", function () {
             addCampaignData: addCampaignData,
             UpdateCampaignCriteriaOrLocation: UpdateCampaignCriteriaOrLocation,
             getAudienceData: getAudienceData,
-            copyCampaignById: copyCampaignById
+            copyCampaignById: copyCampaignById,
+            generateCouponCodes: generateCouponCodes
         };
     })();
     return dataService;

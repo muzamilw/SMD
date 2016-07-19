@@ -40,7 +40,7 @@ define("ads/ads.viewModel",
                     lblAdTitle = ko.observable("Ad Title"),
                     lblFirstLine = ko.observable("First line"),
                     lbllSecondLine = ko.observable("Second Line"),
-                    lblCampaignSchedule = ko.observable("Campaign Schedule"),
+                    lblCampaignSchedule = ko.observable("Schedule"),
                     campaignTypePlaceHolderValue = ko.observable('Enter in the YouTube video link'),
                 //
                     isEditCampaign = ko.observable(false),
@@ -48,7 +48,7 @@ define("ads/ads.viewModel",
                     isNewCampaignVisible = ko.observable(false),
                     isShowArchiveBtn = ko.observable(false),
                     isTerminateBtnVisible = ko.observable(false),
-                    correctAnswers = ko.observableArray([{ id: 1, name: "Answer 1" }, { id: 2, name: "Answer 2" }, { id: 0, name: "Ask User Suggestion" }]),
+                    correctAnswers = ko.observableArray([{ id: 1, name: "Choice 1" }, { id: 2, name: "Choice 2" }, { id: 3, name: "Choice 3" }, { id: 0, name: "Ask User Suggestion" }]),
                     selectedIndustryIncludeExclude = ko.observable(true),
                     UserAndCostDetail = ko.observable(),
                     pricePerclick = ko.observable(0),
@@ -103,6 +103,7 @@ define("ads/ads.viewModel",
                     previewVideoTagUrl = ko.observable("");
                     randonNumber = ko.observable("?r=0");
                     vouchers = ko.observableArray();
+                    numberOFCouponsToGenerate = ko.observable(0),
                     getCampaignBaseContent = function () {
                         dataservice.getBaseData({
                             RequestId: 1,
@@ -378,7 +379,7 @@ define("ads/ads.viewModel",
                       
                       campaignModel(new model.Campaign());
                       // campaignModel().CampaignName('New Campaign');
-                      debugger
+                      
                       if (mode == 1) { // video
                           campaignModel().Type('1');
                           isEnableVedioVerificationLink(true);
@@ -396,18 +397,19 @@ define("ads/ads.viewModel",
                           isEnableVedioVerificationLink(false);
                       } else if (mode == 5) {
                           //campaignModel().CampaignName('New Coupon');
-                          campaignNamePlaceHolderValue('New Coupon');
+                          campaignNamePlaceHolderValue('New Voucher');
                           isEnableVedioVerificationLink(false);
                           campaignModel().Type('5');
-                          lblCampaignName("Coupon Name");
-                          lblDetailsHeading("Coupon Display Details");
-                          lblAdTitle("Coupon Title");
+                          lblCampaignName("Voucher Name");
+                          lblDetailsHeading("Voucher Display Details");
+                          lblAdTitle("Voucher Title");
                           lblFirstLine("First line");
                           lbllSecondLine("Second Line");
-                          lblCampaignSchedule("Coupon Schedule");
+                          lblCampaignSchedule("Schedule");
                           campaignModel().couponImage2("");
                           campaignModel().CouponImage3("");
                           campaignModel().CouponImage4("");
+                          campaignModel().CouponType('1');
                       }
                       isWelcomeScreenVisible(false);
 
@@ -445,7 +447,7 @@ define("ads/ads.viewModel",
                       }
 
                       getAudienceCount();
-
+                      
                       bindAudienceReachCount();
                       selectedQuestionCountryList([]);
 
@@ -1426,12 +1428,12 @@ define("ads/ads.viewModel",
                                     if (campaignModel().Type() == 5) {
                                         campaignNamePlaceHolderValue('New Coupon');
                                      
-                                        lblCampaignName("Coupon Name");
-                                        lblDetailsHeading("Coupon Display Details");
-                                        lblAdTitle("Coupon Title");
+                                        lblCampaignName("Voucher Name");
+                                        lblDetailsHeading("voucher Display Details");
+                                        lblAdTitle("Voucher Title");
                                         lblFirstLine("First line");
                                         lbllSecondLine("Second Line");
-                                        lblCampaignSchedule("Coupon Schedule");
+                                        lblCampaignSchedule("Schedule");
                                     }
 
 
@@ -1900,7 +1902,7 @@ define("ads/ads.viewModel",
                  },
                 ShowCouponPromotions = function () {
                     isDisplayCouponsAds(true);
-                    MainHeading("My Coupons");
+                    MainHeading("My Vouchers");
                     getAdCampaignGridContent();
                 },
                 ShowAdCampaigns = function () {
@@ -1958,7 +1960,7 @@ define("ads/ads.viewModel",
                       }
                   },
                 addItemToCouponCodeList = function () {
-              debugger
+              
                     if ((this.BetterListitemToAdd() != "") && (allCouponCodeItems.indexOf(this.BetterListitemToAdd()) < 0)) {
                         if (this.BetterListitemToAdd().indexOf(',') > 0) {
                            
@@ -2059,6 +2061,40 @@ define("ads/ads.viewModel",
                      }
                      return true;
                  },
+                 generateCouponCodes = function () {
+                     
+                     var gData = {
+                         CampaignId: campaignModel().CampaignID(),
+                         number: numberOFCouponsToGenerate()
+                     };
+                     dataservice.generateCouponCodes(gData, {
+                         success: function (data) {
+                             debugger
+                             _.each(data.CouponList, function (item) {
+                                 allCouponCodeItems.push(item.Code);
+                                 campaignModel().CouponCodes.push(new model.AdCampaignCouponCodes.Create({
+                                     CodeId: item.CodeId,
+                                     CampaignId: item.CampaignId,
+                                     Code: item.Code,
+                                     IsTaken: false,
+                                     UserId: item.UserId,
+                                     UserName: "",
+                                     TakenDateTime: null
+                                 }));
+                             });
+                             //var cQty = parseInt(campaignModel().CouponQuantity()) + parseInt(numberOFCouponsToGenerate());
+                             campaignModel().CouponQuantity(data.CouponQuantity);
+                             numberOFCouponsToGenerate(0);
+                             toastr.success("Codes generated successfully.");
+                         },
+                         error: function (response) {
+                             toastr.error("Error while generating codes.");
+                         }
+                     });
+                 },
+                showCouponGenerationWarning = function () {
+                    toastr.warning("Please first save the coupon.");
+                },
                 // Initialize the view model
                 initialize = function (specifiedView) {
                     view = specifiedView;
@@ -2213,7 +2249,9 @@ define("ads/ads.viewModel",
                     LogoUrlImageCallback: LogoUrlImageCallback,
                     randonNumber: randonNumber,
                     vouchers:vouchers,
-                    voucherPriceLbl: voucherPriceLbl
+                    voucherPriceLbl: voucherPriceLbl,
+                    numberOFCouponsToGenerate: numberOFCouponsToGenerate,
+                    showCouponGenerationWarning: showCouponGenerationWarning
                 };
             })()
         };

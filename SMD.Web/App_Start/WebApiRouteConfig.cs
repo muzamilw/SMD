@@ -227,7 +227,7 @@ namespace SMD.MIS
                new { controller = "InviteUser" },
                null,
                null);
-
+           
             config.Routes.MapHttpRoute(
             "SearchCoupons",
             "SearchCoupons/",
@@ -235,6 +235,19 @@ namespace SMD.MIS
             null,
             routeHandlers);
 
+            config.Routes.MapHttpRoute(
+               "FavouriteCoupon",
+               "UserFavouriteCoupon/{AuthenticationToken}/",
+               new { controller = "GetFavouriteCoupon" },
+               null,
+               null);
+
+            config.Routes.MapHttpRoute(
+            "IsValidCoupon",
+            "IsValidCoupon/{AuthenticationToken}/",
+            new { controller = "GenerateCoupon" },
+            null,
+            null);
         }
     }
 }

@@ -118,6 +118,7 @@ define("user/user.viewModel",
 
                     // Get User Profile For Editing 
                    getUserProfileById = function () {
+                       debugger
                        dataservice.getUserProfileById({
                            UserId: selectedUserId()
                        },{

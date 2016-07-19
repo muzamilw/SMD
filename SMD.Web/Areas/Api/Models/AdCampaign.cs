@@ -91,5 +91,7 @@ namespace SMD.MIS.Areas.Api.Models
         public string LogoUrl { get; set; }
         public string VoucherAdditionalInfo { get; set; }
         public long CouponId { get; set; }
+        public int CouponType { get; set; }
+        public bool IsSavedCoupon { get; set; }
     }
 }

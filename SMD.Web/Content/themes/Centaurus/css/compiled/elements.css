@@ -5204,7 +5204,8 @@ background: url(/Images/ads.png);
 }
 .defaultImgUploadImage{
 
-    width:260px;text-align:center;
+    width:200px;text-align:left;    background: #f3f3f3;
+    padding: 16px;
 }
 div#spinnerAudience {
  
@@ -5239,7 +5240,7 @@ div#spinnerAudience {
 color:red !important;
 }
 .preview_screen_advtlogo{
-    width: 65px;
+    width: 150px;
     margin-bottom: 10px;
 }
 .preview_screen_vouchrRWlbl{

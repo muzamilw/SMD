@@ -75,6 +75,7 @@ namespace SMD.MIS.Controllers
         [SiteAuthorize]
         public ActionResult Welcome()
         {
+
             if (UserManager.LoggedInUserRole != (string)Roles.User)
             {
                 ViewBag.isUser = false;

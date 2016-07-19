@@ -5889,3 +5889,77 @@ GO
 ALTER TABLE dbo.AdCampaign SET (LOCK_ESCALATION = TABLE)
 GO
 COMMIT
+/* To prevent any potential data loss issues, you should review this script in detail before running it outside the context of the database designer.*/
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.CouponCodes ADD
+	IsUsed bit NULL,
+	UsedDateTime datetime NULL,
+	UsageInfo nvarchar(500) NULL
+GO
+ALTER TABLE dbo.CouponCodes SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+/* To prevent any potential data loss issues, you should review this script in detail before running it outside the context of the database designer.*/
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.Company ADD
+	VoucherSecretKey nvarchar(MAX) NULL
+GO
+ALTER TABLE dbo.Company SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+/* To prevent any potential data loss issues, you should review this script in detail before running it outside the context of the database designer.*/
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.AdCampaign ADD
+	IsSavedCoupon bit NULL
+GO
+ALTER TABLE dbo.AdCampaign SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+/****** Object:  Table [dbo].[UserFavouriteCoupon]    Script Date: 6/24/2016 11:24:13 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[UserFavouriteCoupon](
+	[FavouriteCouponId] [bigint] IDENTITY(1,1) NOT NULL,
+	[CouponId] [bigint] NULL,
+	[UserId] [nvarchar](128) NULL,
+ CONSTRAINT [PK_UserFavouriteCoupon] PRIMARY KEY CLUSTERED 
+(
+	[FavouriteCouponId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO

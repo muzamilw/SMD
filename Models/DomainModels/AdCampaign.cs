@@ -84,6 +84,7 @@ namespace SMD.Models.DomainModels
         public Nullable<bool> IsShowVoucherSetting { get; set; }
         public string VideoLink2 { get; set; }
 
+        public Nullable<bool> IsSavedCoupon { get; set; }
         public string VoucherHighlightLine1 { get; set; }
 	public string VoucherHighlightLine2 { get; set; }
 	public string VoucherHighlightLine3 { get; set; }

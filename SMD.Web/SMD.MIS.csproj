@@ -391,12 +391,14 @@
     <Compile Include="Areas\Api\Controllers\CopyCampaignController.cs" />
     <Compile Include="Areas\Api\Controllers\CouponCategoryController.cs" />
     <Compile Include="Areas\Api\Controllers\EducationController.cs" />
+    <Compile Include="Areas\Api\Controllers\GenerateCouponController.cs" />
     <Compile Include="Areas\Api\Controllers\GenerateSMSController.cs" />
     <Compile Include="Areas\Api\Controllers\SearchCouponsController.cs" />
     <Compile Include="Areas\Api\Controllers\GetCouponAndCategoriesController.cs" />
     <Compile Include="Areas\Api\Controllers\GetCouponByCompanyIdController.cs" />
     <Compile Include="Areas\Api\Controllers\GetCouponByIdController.cs" />
     <Compile Include="Areas\Api\Controllers\GetCouponController.cs" />
+    <Compile Include="Areas\Api\Controllers\GetFavouriteCouponController.cs" />
     <Compile Include="Areas\Api\Controllers\IndustryController.cs" />
     <Compile Include="Areas\Api\Controllers\InviteUserController.cs" />
     <Compile Include="Areas\Api\Controllers\ManageUsersController.cs" />
@@ -461,6 +463,7 @@
     <Compile Include="Areas\Api\Models\AdCampaignResposneModelForAproval.cs" />
     <Compile Include="Areas\Api\Models\CityDropDown.cs" />
     <Compile Include="Areas\Api\Models\EducationDropdown.cs" />
+    <Compile Include="Areas\Api\Models\FavouriteCouponResponse.cs" />
     <Compile Include="Areas\Api\Models\IndusteryDropdown.cs" />
     <Compile Include="Areas\Api\Models\Invoice.cs" />
     <Compile Include="Areas\Api\Models\InvoiceDetail.cs" />
@@ -679,6 +682,7 @@
     <Content Include="Content\Images\imageplaceholder.png" />
     <Content Include="Content\Images\meter.png" />
     <Content Include="Content\Images\pin.png" />
+    <Content Include="Content\Images\placeholder.png" />
     <Content Include="Content\Images\ReportControlbg.jpg" />
     <Content Include="Content\Images\up-arrow-small.png" />
     <Content Include="Content\layout.css" />

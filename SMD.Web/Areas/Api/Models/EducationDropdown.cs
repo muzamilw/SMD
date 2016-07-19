@@ -67,4 +67,10 @@ namespace SMD.MIS.Areas.Api.Models
         public string Name { get; set; }
 
     }
+
+    public class CouponCodeQuantityModel
+    {
+        public int CouponQuantity { get; set; }
+        public IEnumerable<CouponCodeModel> CouponList { get; set; }
+    }
 }

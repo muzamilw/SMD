@@ -132,7 +132,7 @@ div.Tokenize ul.Dropdown {
 }
 .defaultImgUploadImageBtn {
   margin-top: 15px;
-  text-align: center;
+  text-align: left;
   padding-right: 0px;
   float: left;
 }
@@ -389,7 +389,7 @@ ul {
 }
 .yourBudgtHeadingCnt {
   float: left;
-  width: 64%;
+  width: 100%;
 }
 .yourBudgtBoxCnt {
   float: left;

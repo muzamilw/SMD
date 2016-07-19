@@ -10,5 +10,9 @@ namespace SMD.Interfaces.Repository
     public interface ICouponCodeRepository : IBaseRepository<CouponCode, long>
     {
         void RemoveAll(List<CouponCode> categories);
+        bool IsCodeExist(string Code);
+        List<CouponCode> GetUserCoupons(string UserId);
+        string UpdateCouponSettings(string VoucherCode, string SecretKey, string UserId);
+        List<CouponCode> GetCampaignCoupons(long CampaignId);
     }
 }

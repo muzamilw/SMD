@@ -110,6 +110,7 @@
     <Compile Include="Repository\ICountryRepository.cs" />
     <Compile Include="Repository\ISystemMailsRepository.cs" />
     <Compile Include="Repository\IProfileQuestionRepository.cs" />
+    <Compile Include="Repository\IUserFavouriteCouponRepository.cs" />
     <Compile Include="Services\IAdvertService.cs" />
     <Compile Include="Services\IAuditLogService.cs" />
     <Compile Include="Services\ICompanyService.cs" />

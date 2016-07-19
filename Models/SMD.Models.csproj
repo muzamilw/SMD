@@ -104,6 +104,7 @@
     <Compile Include="Common\ActiveModuleMenuItem.cs" />
     <Compile Include="Common\AdCampaignByColumn.cs" />
     <Compile Include="Common\CouponDetails.cs" />
+    <Compile Include="Common\CouponCodeModel.cs" />
     <Compile Include="Common\Coupons.cs" />
     <Compile Include="Common\InvoiceByColumn.cs" />
     <Compile Include="Common\SurveyQuestionByColumn.cs" />
@@ -159,6 +160,7 @@
     <Compile Include="DomainModels\Tax.cs" />
     <Compile Include="DomainModels\Transaction.cs" />
     <Compile Include="DomainModels\TransactionLog.cs" />
+    <Compile Include="DomainModels\UserFavouriteCoupon.cs" />
     <Compile Include="DomainModels\vw_Cash4AdsReport.cs" />
     <Compile Include="DomainModels\vw_GetUserTransactions.cs" />
     <Compile Include="DomainModels\vw_PublisherTransaction.cs" />
