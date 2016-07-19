@@ -392,7 +392,10 @@
     <Compile Include="Areas\Api\Controllers\CouponCategoryController.cs" />
     <Compile Include="Areas\Api\Controllers\EducationController.cs" />
     <Compile Include="Areas\Api\Controllers\GenerateSMSController.cs" />
+    <Compile Include="Areas\Api\Controllers\SearchCouponsController.cs" />
     <Compile Include="Areas\Api\Controllers\GetCouponAndCategoriesController.cs" />
+    <Compile Include="Areas\Api\Controllers\GetCouponByCompanyIdController.cs" />
+    <Compile Include="Areas\Api\Controllers\GetCouponByIdController.cs" />
     <Compile Include="Areas\Api\Controllers\GetCouponController.cs" />
     <Compile Include="Areas\Api\Controllers\IndustryController.cs" />
     <Compile Include="Areas\Api\Controllers\InviteUserController.cs" />
@@ -443,6 +446,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LanguageResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\Api\ModelMappers\SearchCouponsViewMapper.cs" />
     <Compile Include="Areas\Api\ModelMappers\ProductViewMapper.cs" />
     <Compile Include="Areas\Api\ModelMappers\WebApiUserMapper.cs" />
     <Compile Include="Areas\Api\Models\AdCampaign.cs" />
@@ -468,6 +472,7 @@
     <Compile Include="Areas\Api\Models\ProfileQuestionAnswerView.cs" />
     <Compile Include="Areas\Api\Models\Role.cs" />
     <Compile Include="Areas\Api\Models\RoleDropDown.cs" />
+    <Compile Include="Areas\Api\Models\SearchCouponsViewResponse.cs" />
     <Compile Include="Areas\Api\Models\SurveyForApiSearchResponse.cs" />
     <Compile Include="Areas\Api\Models\LocationDropDown.cs" />
     <Compile Include="Areas\Api\Models\ProfileQuestionAnswerApiModel.cs" />

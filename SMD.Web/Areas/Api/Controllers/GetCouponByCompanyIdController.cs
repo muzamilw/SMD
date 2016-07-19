@@ -11,7 +11,7 @@ using System.Web.Http;
 
 namespace SMD.MIS.Areas.Api.Controllers
 {
-    public class GetCouponController : ApiController
+    public class GetCouponByCompanyIdController : ApiController
     {
          
         
@@ -24,7 +24,7 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// <summary>
         /// Constructor
         /// </summary>
-        public GetCouponController(IAdvertService advertService)
+        public GetCouponByCompanyIdController(IAdvertService advertService)
         {
             
             this._advertService = advertService;
@@ -39,16 +39,14 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// </summary>
 
 
-        public List<GetCoupons_Result> Get(string UserId)
+        public List<GetCouponsByCompanyId_Result> Get(string CompanyId)
         {
-            if (string.IsNullOrEmpty(UserId))
+            if (string.IsNullOrEmpty(CompanyId))
             {
                 throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
             }
-            return _advertService.GetCoupons(UserId);            
+            return _advertService.GetCouponsByCompanyId(CompanyId);
         }
-
-
 
         #endregion
     }

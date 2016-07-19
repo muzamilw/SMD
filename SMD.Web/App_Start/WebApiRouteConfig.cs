@@ -228,6 +228,13 @@ namespace SMD.MIS
                null,
                null);
 
+            config.Routes.MapHttpRoute(
+            "SearchCoupons",
+            "SearchCoupons/",
+            new { controller = "SearchCoupons" },
+            null,
+            routeHandlers);
+
         }
     }
 }

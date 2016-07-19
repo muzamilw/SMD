@@ -18,6 +18,10 @@ namespace SMD.Models.Common
         public string CouponActualValue { get; set; }
         public int CouponTakenValue { get; set; }
         public double CouponDiscountedValue { get; set; }
+
+        public int CompanyId { get; set; }
+        public string AdvertisersLogoPath { get; set; }
+        
     }
  
 }

@@ -83,6 +83,35 @@ namespace SMD.Models.DomainModels
         public Nullable<long> CouponId { get; set; }
         public Nullable<bool> IsShowVoucherSetting { get; set; }
         public string VideoLink2 { get; set; }
+
+        public string VoucherHighlightLine1 { get; set; }
+	public string VoucherHighlightLine2 { get; set; }
+	public string VoucherHighlightLine3 { get; set; }
+	public string VoucherHighlightLine4 { get; set; }
+	public string VoucherHighlightLine5 { get; set; }
+	public string VoucherFinePrintLine1 { get; set; }
+	public string VoucherFinePrintLine2 { get; set; }
+	public string VoucherFinePrintLine3 { get; set; }
+	public string VoucherFinePrintLine4 { get; set; }
+	public string VoucherFinePrintLine5 { get; set; }
+	public string VoucherLocationLine1 { get; set; }
+	public string VoucherLocationLine2 { get; set; }
+	public string VoucherLocationLine3 { get; set; }
+	public string VoucherLocationLine4 { get; set; }
+	public string VoucherLocationLine5 { get; set; }
+	public string VoucherHowToRedeemLine1 { get; set; }
+	public string VoucherHowToRedeemLine2 { get; set; }
+	public string VoucherHowToRedeemLine3 { get; set; }
+	public string VoucherHowToRedeemLine4 { get; set; }
+	public string VoucherHowToRedeemLine5 { get; set; }
+	public string VoucherRedemptionPhone { get; set; }
+	public string VoucherLocationLAT { get; set; }
+    public string VoucherLocationLON { get; set; }
+
+
+
+
+
         public virtual ICollection<AdCampaignResponse> AdCampaignResponses { get; set; }
         public virtual ICollection<AdCampaignTargetCriteria> AdCampaignTargetCriterias { get; set; }
         public virtual ICollection<AdCampaignTargetLocation> AdCampaignTargetLocations { get; set; }

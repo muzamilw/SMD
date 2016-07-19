@@ -40,5 +40,9 @@ namespace SMD.MIS.Areas.Api.Models
         public string VoucherImagePath { get; set; }
         public string VideoLink2 { get; set; }
         public bool IsShowVoucherSetting { get; set; }
+
+
+        //this contains the vouchers associated with the author of Ads.
+        public int VouchersCount { get; set; }
     }
 }
