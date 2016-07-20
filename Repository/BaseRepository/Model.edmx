@@ -4251,6 +4251,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Property Type="String" Name="VideoLink2" Nullable="true" />
           <Property Type="Boolean" Name="IsShowVoucherSetting" Nullable="true" />
           <Property Type="Int32" Name="TotalItems" Nullable="true" />
+          <Property Type="Int32" Name="VoucherCount" Nullable="true" />
+          <Property Type="Int32" Name="CompanyId" Nullable="true" />
         </ComplexType>
         <ComplexType Name="GetCouponsByCompanyId_Result">
           <Property Type="Int64" Name="CouponId" Nullable="false" />
@@ -4258,9 +4260,10 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Property Type="String" Name="CouponTitle" Nullable="true" MaxLength="200" />
           <Property Type="String" Name="Firstline" Nullable="true" MaxLength="500" />
           <Property Type="String" Name="SecondLine" Nullable="true" MaxLength="1000" />
-          <Property Type="String" Name="CouponImage" Nullable="true" MaxLength="227" />
+          <Property Type="String" Name="CouponImage" Nullable="true" MaxLength="200" />
           <Property Type="String" Name="CouponSwapValue" Nullable="true" />
           <Property Type="String" Name="CouponActualValue" Nullable="true" />
+          <Property Type="String" Name="AdvertisersLogoPath" Nullable="true" MaxLength="227" />
         </ComplexType>
         <ComplexType Name="SearchCoupons_Result">
           <Property Type="Int64" Name="CouponId" Nullable="false" />
@@ -5191,6 +5194,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
                 <ScalarProperty Name="VideoLink2" ColumnName="VideoLink2" />
                 <ScalarProperty Name="IsShowVoucherSetting" ColumnName="IsShowVoucherSetting" />
                 <ScalarProperty Name="TotalItems" ColumnName="TotalItems" />
+                <ScalarProperty Name="VoucherCount" ColumnName="VoucherCount" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -5205,6 +5210,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
                 <ScalarProperty Name="CouponImage" ColumnName="CouponImage" />
                 <ScalarProperty Name="CouponSwapValue" ColumnName="CouponSwapValue" />
                 <ScalarProperty Name="CouponActualValue" ColumnName="CouponActualValue" />
+                <ScalarProperty Name="AdvertisersLogoPath" ColumnName="AdvertisersLogoPath" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

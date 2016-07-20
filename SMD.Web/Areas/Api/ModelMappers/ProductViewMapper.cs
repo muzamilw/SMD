@@ -52,7 +52,10 @@ namespace SMD.MIS.Areas.Api.ModelMappers
                        LandingPageUrl = source.LandingPageUrl,
                        VoucherImagePath = source.VoucherImagePath,
                        VideoLink2 = source.VideoLink2,
-                       IsShowVoucherSetting = source.IsShowVoucherSetting ?? false
+                       IsShowVoucherSetting = source.IsShowVoucherSetting ?? false,
+                       VouchersCount = source.VoucherCount.HasValue == true? source.VoucherCount.Value:0,
+                       CompanyId = source.CompanyId.HasValue == true? source.CompanyId.Value:0
+                       
                    };
         }
 

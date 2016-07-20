@@ -259,6 +259,16 @@ namespace SMD.MIS
             routeHandlers);
 
             
+            
+              config.Routes.MapHttpRoute(
+            "GetCouponByCompanyId",
+            "GetCouponByCompanyId/",
+            new { controller = "GetCouponByCompanyId" },
+            null,
+            routeHandlers);
+
+
+            
         }
     }
 }
