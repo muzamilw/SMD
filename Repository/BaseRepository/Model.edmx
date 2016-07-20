@@ -269,6 +269,18 @@
           <Property Name="GeoLONG" Type="nvarchar" MaxLength="100" />
           <Property Name="GeoLAT" Type="nvarchar" MaxLength="100" />
         </EntityType>
+        <EntityType Name="CompaniesAspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyId" Type="int" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="Status" Type="int" />
+          <Property Name="InvitationCode" Type="nvarchar" MaxLength="500" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" />
+        </EntityType>
         <EntityType Name="Company">
           <Key>
             <PropertyRef Name="CompanyId" />
@@ -691,6 +703,24 @@ warning 6002: The table/view 'SMDDev.dbo.vw_Cash4AdsReport' does not have a prim
           <Property Name="Email" Type="nvarchar" MaxLength="256" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'SMDDev.dbo.vw_CompanyUsers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_CompanyUsers">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="FullName" />
+            <PropertyRef Name="RoleName" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="256" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="status" Type="varchar" MaxLength="15" />
+          <Property Name="companyid" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'SMDDev.dbo.vw_GetUserTransactions' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vw_GetUserTransactions">
           <Key>
@@ -1023,6 +1053,42 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
             </Principal>
             <Dependent Role="City">
               <PropertyRef Name="CountryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompaniesAspNetUsers_AspNetRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="0..1" />
+          <End Role="CompaniesAspNetUsers" Type="Self.CompaniesAspNetUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CompaniesAspNetUsers">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompaniesAspNetUsers_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="CompaniesAspNetUsers" Type="Self.CompaniesAspNetUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CompaniesAspNetUsers">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompaniesAspNetUsers_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="CompaniesAspNetUsers" Type="Self.CompaniesAspNetUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="CompaniesAspNetUsers">
+              <PropertyRef Name="CompanyId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1639,6 +1705,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <EntitySet Name="AuditLog" EntityType="Self.AuditLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CampaignCategories" EntityType="Self.CampaignCategories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompaniesAspNetUsers" EntityType="Self.CompaniesAspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CouponCategory" EntityType="Self.CouponCategory" Schema="dbo" store:Type="Tables" />
@@ -1680,6 +1747,18 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
     [vw_Cash4AdsReport].[VoucherTitle] AS [VoucherTitle], 
     [vw_Cash4AdsReport].[Email] AS [Email]
     FROM [dbo].[vw_Cash4AdsReport] AS [vw_Cash4AdsReport]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vw_CompanyUsers" EntityType="Self.vw_CompanyUsers" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_CompanyUsers].[id] AS [id], 
+    [vw_CompanyUsers].[UserId] AS [UserId], 
+    [vw_CompanyUsers].[email] AS [email], 
+    [vw_CompanyUsers].[FullName] AS [FullName], 
+    [vw_CompanyUsers].[RoleName] AS [RoleName], 
+    [vw_CompanyUsers].[CreatedOn] AS [CreatedOn], 
+    [vw_CompanyUsers].[status] AS [status], 
+    [vw_CompanyUsers].[companyid] AS [companyid]
+    FROM [dbo].[vw_CompanyUsers] AS [vw_CompanyUsers]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vw_GetUserTransactions" EntityType="Self.vw_GetUserTransactions" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -1807,6 +1886,18 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <AssociationSet Name="FK_City_Country" Association="Self.FK_City_Country">
             <End Role="Country" EntitySet="Country" />
             <End Role="City" EntitySet="City" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompaniesAspNetUsers_AspNetRoles" Association="Self.FK_CompaniesAspNetUsers_AspNetRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="CompaniesAspNetUsers" EntitySet="CompaniesAspNetUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompaniesAspNetUsers_AspNetUsers" Association="Self.FK_CompaniesAspNetUsers_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="CompaniesAspNetUsers" EntitySet="CompaniesAspNetUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompaniesAspNetUsers_Company" Association="Self.FK_CompaniesAspNetUsers_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="CompaniesAspNetUsers" EntitySet="CompaniesAspNetUsers" />
           </AssociationSet>
           <AssociationSet Name="FK_Company_City" Association="Self.FK_Company_City">
             <End Role="City" EntitySet="City" />
@@ -1988,6 +2079,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Users" Relationship="DomainModels.AspNetUserRoles" FromRole="Role" ToRole="AspNetUser" />
+          <NavigationProperty Name="CompaniesAspNetUsers" Relationship="DomainModels.FK_CompaniesAspNetUsers_AspNetRoles" FromRole="Role" ToRole="CompaniesAspNetUser" />
         </EntityType>
         <EntityType Name="UserLogin">
           <Key>
@@ -2387,6 +2479,20 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
             <Parameter Name="ToRow" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="UserFavouriteCoupons" EntityType="DomainModels.UserFavouriteCoupon" />
+          <EntitySet Name="CompaniesAspNetUsers" EntityType="DomainModels.CompaniesAspNetUser" />
+          <AssociationSet Name="FK_CompaniesAspNetUsers_AspNetRoles" Association="DomainModels.FK_CompaniesAspNetUsers_AspNetRoles">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="CompaniesAspNetUser" EntitySet="CompaniesAspNetUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompaniesAspNetUsers_AspNetUsers" Association="DomainModels.FK_CompaniesAspNetUsers_AspNetUsers">
+            <End Role="User" EntitySet="Users" />
+            <End Role="CompaniesAspNetUser" EntitySet="CompaniesAspNetUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompaniesAspNetUsers_Company" Association="DomainModels.FK_CompaniesAspNetUsers_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="CompaniesAspNetUser" EntitySet="CompaniesAspNetUsers" />
+          </AssociationSet>
+          <EntitySet Name="vw_CompanyUsers" EntityType="DomainModels.vw_CompanyUsers" />
           </EntityContainer>
         <EntityType Name="ProfileQuestion">
           <Key>
@@ -3386,6 +3492,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <NavigationProperty Name="Users" Relationship="DomainModels.FK_AspNetUsers_Company" FromRole="Company" ToRole="AspNetUser" />
           <NavigationProperty Name="AdCampaignResponses" Relationship="DomainModels.FK_AdCampaignResponse_Company" FromRole="Company" ToRole="AdCampaignResponse" />
           <NavigationProperty Name="AdCampaigns" Relationship="DomainModels.FK_AdCampaign_Company" FromRole="Company" ToRole="AdCampaign" />
+          <NavigationProperty Name="CompaniesAspNetUsers" Relationship="DomainModels.FK_CompaniesAspNetUsers_Company" FromRole="Company" ToRole="CompaniesAspNetUser" />
         </EntityType>
         <Association Name="FK_Account_Company">
           <End Type="DomainModels.Company" Role="Company" Multiplicity="0..1" />
@@ -3524,6 +3631,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Property Name="AuthenticationToken" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AdCampaignResponses" Relationship="DomainModels.FK_AdCampaignResponse_AspNetUsers" FromRole="User" ToRole="AdCampaignResponse" />
           <NavigationProperty Name="CouponCodes" Relationship="DomainModels.FK_CouponCodes_AspNetUsers" FromRole="User" ToRole="CouponCode" />
+          <NavigationProperty Name="CompaniesAspNetUsers" Relationship="DomainModels.FK_CompaniesAspNetUsers_AspNetUsers" FromRole="User" ToRole="CompaniesAspNetUser" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Type="DomainModels.User" Role="AspNetUser" Multiplicity="1">
@@ -4284,6 +4392,73 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Property Name="FavouriteCouponId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CouponId" Type="Int64" />
           <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="CompaniesAspNetUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="InvitationCode" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="RoleId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetRole" Relationship="DomainModels.FK_CompaniesAspNetUsers_AspNetRoles" FromRole="CompaniesAspNetUser" ToRole="Role" />
+          <NavigationProperty Name="AspNetUser" Relationship="DomainModels.FK_CompaniesAspNetUsers_AspNetUsers" FromRole="CompaniesAspNetUser" ToRole="User" />
+          <NavigationProperty Name="Company" Relationship="DomainModels.FK_CompaniesAspNetUsers_Company" FromRole="CompaniesAspNetUser" ToRole="Company" />
+        </EntityType>
+        <Association Name="FK_CompaniesAspNetUsers_AspNetRoles">
+          <End Type="DomainModels.Role" Role="Role" Multiplicity="0..1" />
+          <End Type="DomainModels.CompaniesAspNetUser" Role="CompaniesAspNetUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CompaniesAspNetUser">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompaniesAspNetUsers_AspNetUsers">
+          <End Type="DomainModels.User" Role="User" Multiplicity="0..1" />
+          <End Type="DomainModels.CompaniesAspNetUser" Role="CompaniesAspNetUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CompaniesAspNetUser">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompaniesAspNetUsers_Company">
+          <End Type="DomainModels.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="DomainModels.CompaniesAspNetUser" Role="CompaniesAspNetUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="CompaniesAspNetUser">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="vw_CompanyUsers">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="FullName" />
+            <PropertyRef Name="RoleName" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="FullName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="status" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="companyid" Type="Int32" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -5236,6 +5411,33 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="CouponId" ColumnName="CouponId" />
                 <ScalarProperty Name="FavouriteCouponId" ColumnName="FavouriteCouponId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompaniesAspNetUsers">
+            <EntityTypeMapping TypeName="DomainModels.CompaniesAspNetUser">
+              <MappingFragment StoreEntitySet="CompaniesAspNetUsers">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="InvitationCode" ColumnName="InvitationCode" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_CompanyUsers">
+            <EntityTypeMapping TypeName="DomainModels.vw_CompanyUsers">
+              <MappingFragment StoreEntitySet="vw_CompanyUsers">
+                <ScalarProperty Name="companyid" ColumnName="companyid" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -6272,3 +6272,489 @@ from
 END
 
 /* Added By Khurram (02 Feb 2016) - End */
+
+
+
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[GetCoupons]    Script Date: 7/19/2016 4:20:00 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+alter PROCEDURE [dbo].[SearchCoupons]
+--   EXEC [dbo].[SearchCoupons] 		@categoryId = 12,		@type = 1,		@keywords = N'1',		@distance = 1,		@Lat = N'1',		@Lon = N'1',		@UserId = N'1',		@FromRow = 1,		@ToRow = 100
+
+	-- Add the parameters for the stored procedure here
+	@categoryId INT = 1 ,
+	@type as int = 0,
+	@keywords as nvarchar(500),
+	@distance as int = 0,
+	@Lat as nvarchar(50),
+	@Lon as nvarchar(50),
+	@UserId as nvarchar(128) = 0 ,
+	@FromRow int = 0,
+	@ToRow int = 0
+
+AS
+BEGIN
+	DECLARE @dob AS DateTime
+	DECLARE @age AS INT
+	DECLARE @gender AS INT
+	DECLARE @currentDate AS DateTime
+	DECLARE @countryId AS INT
+	DECLARE @cityId AS INT
+	DECLARE @industryId AS INT
+	SELECT @dob = DOB FROM AspNetUsers where id=@UserID
+	SELECT @gender = gender FROM AspNetUsers where id=@UserID
+	SET @currentDate = getDate()
+	SET @age = DATEDIFF(year, @dob, @currentDate)
+	SELECT @countryId = NULL--countryId FROM Company where @companyId=@companyId
+	SELECT @cityId = NULL--cityId FROM Company where @companyId=@companyId
+	SELECT @industryId = industryId FROM AspNetUsers where id=@UserID
+
+
+	select *, COUNT(*) OVER() AS TotalItems
+	from (
+
+
+	select vchr.campaignid as CouponId, CampaignName as CouponName, DisplayTitle as CouponTitle,
+	[Description]  as  Firstline, CampaignDescription as SecondLine, 
+	
+	ImagePath as  CouponImage,
+	(select 
+	CASE
+		WHEN vchr.LogoUrl is null or vchr.LogoUrl = ''
+		THEN 'http://manage.cash4ads.com/' + c.Logo
+		WHEN c.Logo is not null
+		THEN 'http://manage.cash4ads.com/' + vchr.LogoUrl
+	END as AdvertisersLogoPath from company c
+	 where c.CompanyId = vchr.CompanyId) as AdvertisersLogoPath,
+	CouponSwapValue, CouponActualValue,CompanyId
+	
+	from adcampaign vchr
+	inner join CampaignCategories cc on cc.CampaignId = vchr.CampaignID and cc.CategoryId = @categoryId
+	where (
+		((@age is null) or (vchr.AgeRangeEnd >= @age and  @age >= vchr.AgeRangeStart))
+		and
+		((@gender is null) or (vchr.Gender = @gender))
+		and
+		((@industryId is null) or ((select count(*) from AdCampaignTargetCriteria MyCampaignCrit
+			 where MyCampaignCrit.CampaignID = vchr.CampaignID and 
+			 MyCampaignCrit.IndustryID=@industryId) > 0 ))
+		--and
+		--(adcampaign.EndDateTime >= @currentDate and @currentDate >= adcampaign.StartDateTime)
+		and
+		(vchr.Approved = 1)
+		and
+		(vchr.Type = 5) -- coupon
+		
+		and
+		((@countryId is null or @cityId is null) or ((select count(*) from AdCampaignTargetLocation MyCampaignLoc
+			 where MyCampaignLoc.CampaignID=vchr.CampaignID and MyCampaignLoc.CountryID=@countryId and
+			 MyCampaignLoc.CityID=@cityId) > 0))
+		)
+		group by vchr.campaignid, CampaignName,DisplayTitle,[Description],CampaignDescription,vchr.ImagePath,LogoUrl,CouponSwapValue,CouponActualValue,CompanyId
+		)as items
+	order by CouponActualValue
+	OFFSET @FromRow ROWS
+	FETCH NEXT @TORow ROWS ONLY
+		
+END
+
+
+
+
+/****** Object:  StoredProcedure [dbo].[GetCouponsByCompanyId]    Script Date: 7/20/2016 1:09:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE [dbo].[GetCouponsByCompanyId]
+--  exec [GetCouponsByCompanyId] 165
+
+	-- Add the parameters for the stored procedure here
+	@CompanyId nvarchar(128) = 0 
+AS
+BEGIN
+	DECLARE @dob AS DateTime
+	DECLARE @age AS INT
+	DECLARE @gender AS INT
+	DECLARE @currentDate AS DateTime
+	DECLARE @countryId AS INT
+	DECLARE @cityId AS INT
+	DECLARE @industryId AS INT
+	--SELECT @dob = DOB FROM AspNetUsers where id=@UserID
+	--SELECT @gender = gender FROM AspNetUsers where id=@UserID
+	SET @currentDate = getDate()
+	SET @age = DATEDIFF(year, @dob, @currentDate)
+	SELECT @countryId = NULL--countryId FROM Company where @companyId=@companyId
+	SELECT @cityId = NULL--cityId FROM Company where @companyId=@companyId
+	--SELECT @industryId = industryId FROM AspNetUsers where id=@UserID
+	select campaignid as CouponId, CampaignName as CouponName, DisplayTitle as CouponTitle,
+	[Description]  as  Firstline, CampaignDescription as SecondLine, ImagePath as  CouponImage,
+	CouponSwapValue, CouponActualValue,
+		(select 
+	CASE
+		WHEN adcampaign.LogoUrl is null or adcampaign.LogoUrl = ''
+		THEN 'http://manage.cash4ads.com/' + c.Logo
+		WHEN c.Logo is not null
+		THEN 'http://manage.cash4ads.com/' + adcampaign.LogoUrl
+	END as AdvertisersLogoPath from company c
+	 where c.CompanyId = adcampaign.CompanyId) as AdvertisersLogoPath
+	
+	from adcampaign
+	where (
+		((@age is null) or (adcampaign.AgeRangeEnd >= @age and  @age >= adcampaign.AgeRangeStart))
+		and
+		((@gender is null) or (adcampaign.Gender = @gender))
+		and
+		((@industryId is null) or ((select count(*) from AdCampaignTargetCriteria MyCampaignCrit
+			 where MyCampaignCrit.CampaignID = adcampaign.CampaignID and 
+			 MyCampaignCrit.IndustryID=@industryId) > 0 ))
+		--and
+		--(adcampaign.EndDateTime >= @currentDate and @currentDate >= adcampaign.StartDateTime)
+		and
+		(adcampaign.Approved = 1)
+		and
+		(adcampaign.Type = 5) -- coupon
+		and
+		((@countryId is null or @cityId is null) or ((select count(*) from AdCampaignTargetLocation MyCampaignLoc
+			 where MyCampaignLoc.CampaignID=adcampaign.CampaignID and MyCampaignLoc.CountryID=@countryId and
+			 MyCampaignLoc.CityID=@cityId) > 0))
+		)
+END
+
+
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[GetProducts]    Script Date: 7/18/2016 2:37:11 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+ALTER PROCEDURE [dbo].[GetProducts] 
+
+
+-- exec [dbo].[GetProducts] 		@UserID = N'b8a3884f-73f3-41ec-9926-293ea919a5e1', 		@FromRow = 0, 		@ToRow = 100
+	-- Add the parameters for the stored procedure here
+	@UserID nvarchar(128) = 0 ,
+	@FromRow int = 0,
+	@ToRow int = 0
+
+AS
+BEGIN
+DECLARE @dob AS DateTime
+DECLARE @age AS INT
+DECLARE @gender AS INT
+DECLARE @countryId AS INT
+DECLARE @cityId AS INT
+DECLARE @languageId AS INT
+DECLARE @industryId AS INT
+DECLARE @currentDate AS DateTime
+DECLARE @companyId AS INT
+        -- Setting local variables
+		   SELECT @dob = DOB FROM AspNetUsers where id=@UserID
+		   SELECT @gender = gender FROM AspNetUsers where id=@UserID
+		     SELECT @countryId = NULL--countryId FROM Company where @companyId=@companyId
+		   SELECT @cityId = NULL--cityId FROM Company where @companyId=@companyId
+		   SELECT @languageId = LanguageID FROM AspNetUsers where id=@UserID
+		   SELECT @industryId = industryId FROM AspNetUsers where id=@UserID
+		   SET @currentDate = getDate()
+		   SET @age = DATEDIFF(year, @age, @currentDate)
+
+select *, COUNT(*) OVER() AS TotalItems
+from
+(	select adcampaign.campaignid as ItemId, adcampaign.DisplayTitle ItemName, 'Ad' Type, 
+    adcampaign.Description +'\n' + adcampaign.CampaignDescription as description,
+	Case 
+	    when adcampaign.Type = 3  -- Flyer
+		THEN
+		  2
+		when adcampaign.Type = 4
+		THEN
+		    3
+		when adcampaign.Type = 1
+		THEN
+		    1
+		END as
+	  ItemType, 
+	((adcampaign.ClickRate * 50) / 100) as AdClickRate,  -- Amount AdViewer will get
+	adcampaign.ImagePath as AdImagePath, 
+	Case 
+	    when adcampaign.Type = 3  -- Flyer
+		THEN
+		  adcampaign.LandingPageVideoLink--'http://manage.cash4ads.com/' +   LandingPageVideoLink -- 'http://manage.cash4ads.com/Ads/Ads/Content/' + CONVERT(NVARCHAR, CampaignID)
+		when adcampaign.Type != 3
+		THEN
+		    adcampaign.LandingPageVideoLink
+	END as AdVideoLink,
+	adcampaign.Answer1 as AdAnswer1, adcampaign.Answer2 as AdAnswer2, adcampaign.Answer3 as AdAnswer3, adcampaign.CorrectAnswer as AdCorrectAnswer, adcampaign.VerifyQuestion as AdVerifyQuestion, 
+	adcampaign.RewardType as AdRewardType,
+	adcampaign.Voucher1Heading as AdVoucher1Heading, adcampaign.Voucher1Description as AdVoucher1Description,
+	adcampaign.Voucher1Value as AdVoucher1Value, NULL as SqLeftImagePath, NULL as SqRightImagePath,
+	Case 
+	    when adcampaign.Type = 4  -- Game
+		THEN
+		    (select top 1 GameUrl from Game ORDER BY NEWID())
+		when adcampaign.Type != 4
+		THEN
+		    NULL
+	END as GameUrl, 
+	NULL as PqAnswer1Id, NULL as PqAnswer1, NULL as PqA1LinkedQ1, NULL as PqA1LinkedQ2, 
+	NULL as	PQA1LinkedQ3,NULL as PQA1LinkedQ4,NULL as PQA1LinkedQ5,NULL as PQA1LinkedQ6,
+	NULL as PqA1Type, NULL as PqA1SortOrder, NULL as PqA1ImagePath,
+	NULL as PqAnswer2Id, NULL as PqAnswer2, NULL as PqA2LinkedQ1, NULL as PqA2LinkedQ2,
+	NULL as PQA2LinkedQ3,NULL as  PQA2LinkedQ4,NULL as  PQA2LinkedQ5,NULL as PQA2LinkedQ6,
+	NULL as PqA2Type, NULL as PqA2SortOrder, NULL as PqA2ImagePath,
+	NULL as PqAnswer3Id, NULL as PqAnswer3, NULL as PqA3LinkedQ1, NULL as PqA3LinkedQ2,
+	NULL as PQA3LinkedQ3,NULL as  PQA3LinkedQ4,NULL as  PQA3LinkedQ5,NULL as PQA3LinkedQ6,
+	NULL as PqA3Type, NULL as PqA3SortOrder, NULL as PqA3ImagePath, 
+	NULL as PqAnswer4Id, NULL as PqAnswer4, NULL as PqA4LinkedQ1, NULL as PqA4LinkedQ2,
+	NULL as PQA4LinkedQ3,NULL as  PQA4LinkedQ4,NULL as  PQA4LinkedQ5,NULL as PQA4LinkedQ6,
+	NULL as PqA4Type, NULL as PqA4SortOrder, NULL as PqA4ImagePath,
+	NULL as PqAnswer5Id, NULL as PqAnswer5, NULL as PqA5LinkedQ1, NULL as PqA5LinkedQ2,
+	NULL as PQA5LinkedQ3,NULL as  PQA5LinkedQ4,NULL as  PQA5LinkedQ5,NULL as PQA5LinkedQ6,
+	NULL as PqA5Type, NULL as PqA5SortOrder, NULL as PqA5ImagePath,
+	NULL as PqAnswer6Id, NULL as PqAnswer6, NULL as PqA6LinkedQ1, NULL as PqA6LinkedQ2,
+	NULL as PQA6LinkedQ3,NULL as  PQA6LinkedQ4,NULL as  PQA6LinkedQ5,NULL as PQA6LinkedQ6,
+	NULL as PqA6Type, NULL as PqA6SortOrder, NULL as PqA6ImagePath,
+
+	((row_number() over (order by ABS(CHECKSUM(NewId())) % 100 desc) * 100) + 1) Weightage,
+	NULL as SqLeftImagePercentage, NULL as SqRightImagePercentage,
+	(select 
+	CASE
+		WHEN adcampaign.LogoUrl is null or adcampaign.LogoUrl = ''
+		THEN 'http://manage.cash4ads.com/' + usr.ProfileImage
+		WHEN usr.ProfileImage is not null
+		THEN 'http://manage.cash4ads.com/' + adcampaign.LogoUrl
+	END as AdvertisersLogoPath from AspNetUsers usr where usr.Id = adcampaign.UserID) as AdvertisersLogoPath,
+	adcampaign.VideoUrl as LandingPageUrl,
+	adcampaign.BuuyItLine1 as BuyItLine1,
+	adcampaign.BuyItLine2 as BuyItLine2,
+	 adcampaign.BuyItLine3 as BuyItLine3,
+	adcampaign.BuyItButtonLabel as BuyItButtonText, 
+	 'http://manage.cash4ads.com/' +adcampaign.BuyItImageUrl as BuyItImageUrl,
+	'http://manage.cash4ads.com/' + adcampaign.Voucher1ImagePath as VoucherImagePath,
+	(select count(*) from adcampaign v where AdCampaign.CompanyId = v.CompanyId and v.Type = 5 and v.Status = 3) as VoucherCount,
+	AdCampaign.CompanyId,VideoLink2,IsShowVoucherSetting
+	from adcampaign
+	--- voucher join for the same company.
+	
+	where (
+		((@age is null) or (adcampaign.AgeRangeEnd >= @age and  @age >= adcampaign.AgeRangeStart))
+		and
+		((@gender is null) or (adcampaign.Gender = @gender))
+		and
+		((@languageId is null) or (adcampaign.LanguageId = @languageId))
+		and
+		(adcampaign.EndDateTime >= @currentDate and @currentDate >= adcampaign.StartDateTime)
+		and
+		(adcampaign.Approved = 1)
+		and
+		(adcampaign.Status = 3) -- live
+		and
+		((adcampaign.AmountSpent is null) or (adcampaign.MaxBudget > adcampaign.AmountSpent))
+		and
+		((@countryId is null or @cityId is null) or ((select count(*) from AdCampaignTargetLocation MyCampaignLoc
+			 where MyCampaignLoc.CampaignID=adcampaign.CampaignID and MyCampaignLoc.CountryID=@countryId and
+			 MyCampaignLoc.CityID=@cityId) > 0))
+	    and
+		((@languageId is null or @industryId is null) or ((select count(*) from AdCampaignTargetCriteria MyCampaignCrit
+			 where MyCampaignCrit.CampaignID = adcampaign.CampaignID and 
+			 MyCampaignCrit.LanguageID=@languageId and MyCampaignCrit.IndustryID=@industryId) > 0 ))
+		and
+		(((select count(*) from AdCampaignResponse adResponse where  
+			adResponse.CampaignID = adcampaign.CampaignID and adResponse.UserID = @UserID and datepart(day,getdate()) = datepart(day,adResponse.CreatedDateTime) and datepart(month,getdate()) = datepart(month,adResponse.CreatedDateTime) ) = 0)
+		 or
+		 ((select top 1 adResponse.UserSelection from AdCampaignResponse adResponse 
+			where adResponse.CampaignID = adcampaign.CampaignID and adResponse.UserID = @UserID) 
+			is null)
+		)
+	)
+	
+	
+
+	--------------------- survey questions
+	union
+	select *, NULL as AdvertisersLogoPath,
+	null as LandingPageUrl,
+	null as BuyItLine1,
+	null as BuyItLine2,
+	 null as BuyItLine3,
+	null as BuyItButtonText, 
+	null as BuyItImageUrl,
+	null as VoucherImagePath,
+	null as VoucherCount,
+	null as CompanyId,
+	null as VideoLink2,
+	null as IsShowVoucherSetting
+	  from [GetUserSurveys](@UserID)
+	  
+	  
+	  
+	  -------------------profile questions
+	union
+	select pqid, question, 'Question', 
+	NULL, Type QuestionType, NULL, NULL, NULL,
+	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+	NULL, NULL,NULL, NULL, 
+	PQAnswerID1, PQAnswer1, PQA1LinkedQ1, PQA1LinkedQ2, PQA1LinkedQ3, PQA1LinkedQ4, PQA1LinkedQ5,PQA1LinkedQ6, PQA1Type, PQA1SortOrder, PQA1ImagePath,
+	PQAnswerID2, PQAnswer2, PQA2LinkedQ1, PQA2LinkedQ2, PQA2LinkedQ3, PQA2LinkedQ4, PQA2LinkedQ5,PQA2LinkedQ6, PQA2Type, PQA2SortOrder, PQA2ImagePath,
+	PQAnswerID3, PQAnswer3, PQA3LinkedQ1, PQA3LinkedQ2, PQA3LinkedQ3, PQA3LinkedQ4, PQA3LinkedQ5,PQA3LinkedQ6, PQA3Type, PQA3SortOrder, PQA3ImagePath,
+	PQAnswerID4, PQAnswer4, PQA4LinkedQ1, PQA4LinkedQ2, PQA4LinkedQ3, PQA4LinkedQ4, PQA4LinkedQ5,PQA4LinkedQ6, PQA4Type, PQA4SortOrder, PQA4ImagePath,
+	PQAnswerID5, PQAnswer5, PQA5LinkedQ1, PQA5LinkedQ2, PQA5LinkedQ3, PQA5LinkedQ4, PQA5LinkedQ5,PQA5LinkedQ6, PQA5Type, PQA5SortOrder, PQA5ImagePath,
+	PQAnswerID6, PQAnswer6, PQA6LinkedQ1, PQA6LinkedQ2, PQA6LinkedQ3, PQA6LinkedQ4, PQA6LinkedQ5,PQA6LinkedQ6, PQA6Type, PQA6SortOrder, PQA6ImagePath,
+	Weightage,
+	NULL as SqLeftImagePercentage, NULL as SqRightImagePercentage, 
+	NULL as AdvertisersLogoPath ,
+	null as LandingPageUrl,
+	null as BuyItLine1,
+	null as BuyItLine2,
+	 null as BuyItLine3,
+	null as BuyItButtonText, 
+	null as BuyItImageUrl,
+	null as VoucherImagePath,
+	null as VoucherCount,
+	null as CompanyId,
+	null as VideoLink2,
+	null as IsShowVoucherSetting
+	from [GetUserProfileQuestions](@UserID, @countryId)
+	--pqz where pqz.pqid  NOT in  ( select  LinkedQuestion1ID  from ProfileQuestionAnswer where PQAnswerID in 
+  --(select PQAnswerID from ProfileQuestionUserAnswer where
+  -- UserID = @UserID) and LinkedQuestion1ID IS NOT NULL) and 
+   -- pqz.pqid  NOT in  ( select  LinkedQuestion2ID  from ProfileQuestionAnswer where PQAnswerID in 
+  --(select PQAnswerID from ProfileQuestionUserAnswer where
+  -- UserID = @UserID) and LinkedQuestion2ID IS NOT NULL) and 
+  --  pqz.pqid  NOT in  ( select  LinkedQuestion3ID  from ProfileQuestionAnswer where PQAnswerID in 
+  --(select PQAnswerID from ProfileQuestionUserAnswer where
+  -- UserID = @UserID) and LinkedQuestion3ID IS NOT NULL) and 
+  --  pqz.pqid  NOT in  ( select  LinkedQuestion4ID  from ProfileQuestionAnswer where PQAnswerID in 
+  --(select PQAnswerID from ProfileQuestionUserAnswer where
+  -- UserID = @UserID) and LinkedQuestion4ID IS NOT NULL) and 
+  --  pqz.pqid  NOT in  ( select  LinkedQuestion5ID  from ProfileQuestionAnswer where PQAnswerID in 
+  --(select PQAnswerID from ProfileQuestionUserAnswer where
+  -- UserID = @UserID) and LinkedQuestion5ID IS NOT NULL) and 
+  --  pqz.pqid  NOT in  ( select  LinkedQuestion6ID  from ProfileQuestionAnswer where PQAnswerID in 
+  --(select PQAnswerID from ProfileQuestionUserAnswer where
+  -- UserID = @UserID) and LinkedQuestion6ID IS NOT NULL)
+	) as items
+	order by Weightage
+	OFFSET @FromRow ROWS
+	FETCH NEXT @TORow ROWS ONLY
+END
+
+/* Added By Khurram (02 Feb 2016) - End */
+
+
+
+
+------------new tables
+
+
+/* To prevent any potential data loss issues, you should review this script in detail before running it outside the context of the database designer.*/
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.Company SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.AspNetUsers SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.AspNetRoles SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+BEGIN TRANSACTION
+GO
+CREATE TABLE dbo.CompaniesAspNetUsers
+	(
+	Id bigint NOT NULL IDENTITY (1, 1),
+	CompanyId int NULL,
+	UserId nvarchar(128) NULL,
+	CreatedOn datetime NULL,
+	Status int NULL,
+	InvitationCode nvarchar(500) NULL,
+	RoleId nvarchar(128) NULL
+	)  ON [PRIMARY]
+GO
+ALTER TABLE dbo.CompaniesAspNetUsers ADD CONSTRAINT
+	PK_CompaniesAspNetUsers PRIMARY KEY CLUSTERED 
+	(
+	Id
+	) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+
+GO
+ALTER TABLE dbo.CompaniesAspNetUsers ADD CONSTRAINT
+	FK_CompaniesAspNetUsers_Company FOREIGN KEY
+	(
+	CompanyId
+	) REFERENCES dbo.Company
+	(
+	CompanyId
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+	
+GO
+ALTER TABLE dbo.CompaniesAspNetUsers ADD CONSTRAINT
+	FK_CompaniesAspNetUsers_AspNetUsers FOREIGN KEY
+	(
+	UserId
+	) REFERENCES dbo.AspNetUsers
+	(
+	Id
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+	
+GO
+ALTER TABLE dbo.CompaniesAspNetUsers ADD CONSTRAINT
+	FK_CompaniesAspNetUsers_AspNetRoles FOREIGN KEY
+	(
+	RoleId
+	) REFERENCES dbo.AspNetRoles
+	(
+	Id
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+	
+GO
+ALTER TABLE dbo.CompaniesAspNetUsers SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+
+
+
+GO
+
+/****** Object:  View [dbo].[vw_CompanyUsers]    Script Date: 7/20/2016 4:50:57 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+create VIEW [dbo].[vw_CompanyUsers]
+AS
+
+select cu.id,u.id as UserId, u.email, u.FullName, r.Name as RoleName, cu.CreatedOn, (case  when cu.status = 1 then 'Invitation Sent' when cu.status = 2 then 'Active' end) status, cu.companyid from dbo.CompaniesAspNetUsers  cu
+inner join   dbo.AspNetRoles r on r.Id = roleid
+inner join AspNetUsers u on u.Id = cu.userid
+
+
+GO

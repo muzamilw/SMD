@@ -45,19 +45,13 @@ namespace SMD.Repository.Repositories
         }
         #endregion
 
-        public List<User> getManageUsers()
+        public List<vw_CompanyUsers> getManageUsers(int CompanyId)
         {
 
-            User user = db.Users.Where(c => c.Id == LoggedInUserIdentity).FirstOrDefault();
+            //User user = db.Users.Where(c => c.Id == LoggedInUserIdentity).FirstOrDefault();
 
-            if (user != null)
-            {
-                return db.Users.Where(c => c.CompanyId == user.CompanyId).ToList();
-            }
-            else
-            {
-                return null;
-            }
+            
+                return db.vw_CompanyUsers.Where(c => c.CompanyId == CompanyId).ToList();
            
         }
 

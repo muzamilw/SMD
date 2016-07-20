@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SMD.Models.IdentityModels;
+using SMD.Models.DomainModels;
 
 namespace SMD.Implementation.Services
 {
@@ -31,9 +32,9 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// List of Country's Cities
         /// </summary>
-        public List<User> GetManageUsersList()
+        public List<vw_CompanyUsers> GetManageUsersList(int CompanyId)
         {
-            return managerUserRepository.getManageUsers();
+            return managerUserRepository.getManageUsers(CompanyId);
         }
        
         #endregion
