@@ -248,6 +248,17 @@ namespace SMD.MIS
             new { controller = "GenerateCoupon" },
             null,
             null);
+
+
+
+              config.Routes.MapHttpRoute(
+            "GetCouponById",
+            "GetCouponById/",
+            new { controller = "GetCouponById" },
+            null,
+            routeHandlers);
+
+            
         }
     }
 }

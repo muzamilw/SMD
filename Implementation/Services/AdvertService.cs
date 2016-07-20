@@ -1098,12 +1098,14 @@ namespace SMD.Implementation.Services
         }
 
 
-        public CouponDetails GetCouponById(string CouponId)
+        public AdCampaign GetCouponById(string CouponId)
         {
 
-            var coupon = _adCampaignRepository.GetAdCampaignById(Convert.ToInt64(CouponId));
+           return _adCampaignRepository.GetAdCampaignById(Convert.ToInt64(CouponId)).FirstOrDefault();
 
-            return null;
+            
+
+            
 
         }
 

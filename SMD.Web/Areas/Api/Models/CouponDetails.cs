@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SMD.Models.Common
+namespace SMD.MIS.Areas.Api.Models
 {
     public class CouponDetails
     {

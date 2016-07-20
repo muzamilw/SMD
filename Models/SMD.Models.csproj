@@ -103,7 +103,6 @@
     <Compile Include="Common\AccessRightClaimValue.cs" />
     <Compile Include="Common\ActiveModuleMenuItem.cs" />
     <Compile Include="Common\AdCampaignByColumn.cs" />
-    <Compile Include="Common\CouponDetails.cs" />
     <Compile Include="Common\CouponCodeModel.cs" />
     <Compile Include="Common\Coupons.cs" />
     <Compile Include="Common\InvoiceByColumn.cs" />
