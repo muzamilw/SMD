@@ -270,6 +270,12 @@ namespace SMD.Repository.Repositories
             //return query.ToList<Coupons>();
         }
 
+        public List<GetCouponsByCompanyId_Result> GetCouponsByCompanyId(string CompanyId)
+    {
+        
+        return db.GetCouponsByCompanyId(CompanyId).ToList();
+    }
+
         public List<Coupons> GetAllCoupons(int categoryId, int type , int size, string keywords, int pageNo)
         {
             CouponCategory cc = new CouponCategory();
@@ -322,6 +328,14 @@ namespace SMD.Repository.Repositories
                         };
 
             return query.ToList<Coupons>();
+        }
+
+
+        public IEnumerable<SearchCoupons_Result> SearchCoupons(int categoryId, int type, int size, string keywords, int pageNo, int distance, string Lat, string Lon,string UserId)
+        {
+            int? fromRow = (pageNo - 1) * PageSizeForProducts;
+            int? toRow = PageSizeForProducts;
+            return db.SearchCoupons(categoryId,type,keywords,distance,Lat,Lon, UserId, fromRow, toRow);
         }
     }
 }

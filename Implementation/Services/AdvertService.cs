@@ -1091,10 +1091,44 @@ namespace SMD.Implementation.Services
             return _adCampaignRepository.GetCoupons(UserId);
         }
 
+
+        public List<GetCouponsByCompanyId_Result> GetCouponsByCompanyId(string CompanyId)
+        {
+            return _adCampaignRepository.GetCouponsByCompanyId(CompanyId);
+        }
+
+
+        public AdCampaign GetCouponById(string CouponId)
+        {
+
+           return _adCampaignRepository.GetAdCampaignById(Convert.ToInt64(CouponId)).FirstOrDefault();
+
+            
+
+            
+
+        }
+
         public List<Coupons> GetAllCoupons(int categoryId, int type, int size, string keywords, int pageNo)
         {
             return _adCampaignRepository.GetAllCoupons(categoryId,type,size,keywords,pageNo);
         }
+
+
+        public SearchCouponsResponse SearchCoupons(int categoryId, int type, int size, string keywords, int pageNo, int distance, string Lat, string Lon,string UserId)
+        {
+            List<SearchCoupons_Result> coupons = _adCampaignRepository.SearchCoupons(categoryId,type,size,keywords,pageNo,distance,Lat,Lon,UserId).ToList();
+            return new SearchCouponsResponse
+            {
+                Status = true,
+                Message = LanguageResources.Success,
+                Coupons = coupons,
+                TotalCount = coupons.Any() && coupons[0].TotalItems.HasValue ? coupons[0].TotalItems.Value : 0
+            };
+        }
+
+
+
 
         /// <summary>
         /// Update Approval campaign

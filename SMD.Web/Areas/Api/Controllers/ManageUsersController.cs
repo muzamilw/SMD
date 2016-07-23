@@ -6,6 +6,7 @@ using SMD.MIS.ModelMappers;
 using System.Net;
 using System.Web;
 using System.Web.Http;
+using System;
 
 namespace SMD.MIS.Areas.Api.Controllers
 {
@@ -29,11 +30,21 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// <summary>
         /// Get Profile Questions
         /// </summary>
-        public IEnumerable<ManageUserRolesModel> Get()
+        //public IEnumerable<ManageUserRolesModel> Get()
+        //{
+
+        //    var domainList = _manageUserService.GetManageUsersList();
+        //    return domainList.Select(a => a.CreateFrom()).ToList();
+        //}
+
+
+        public IEnumerable<ManageUserRolesModel> Get(string CompanyId)
         {
-           
-            var domainList = _manageUserService.GetManageUsersList();
-            return domainList.Select(a => a.CreateFrom()).ToList();
+
+            var domainList = _manageUserService.GetManageUsersList(Convert.ToInt32(CompanyId));
+           // return domainList.Select(a => a.CreateFrom()).ToList();
+
+            return null;
         }
         #endregion
     }

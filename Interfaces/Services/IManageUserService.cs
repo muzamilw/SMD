@@ -1,4 +1,5 @@
-﻿using SMD.Models.IdentityModels;
+﻿using SMD.Models.DomainModels;
+using SMD.Models.IdentityModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace SMD.Interfaces.Services
 {
     public interface IManageUserService
     {
-        List<User> GetManageUsersList();
+        List<vw_CompanyUsers> GetManageUsersList(int CompanyId);
     }
 }

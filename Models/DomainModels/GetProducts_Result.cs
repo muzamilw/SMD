@@ -114,6 +114,11 @@ namespace SMD.Models.DomainModels
         public int? PQA6LinkedQ6 { get; set; }
         public bool? IsShowVoucherSetting { get; set; }
         public string VideoLink2 { get; set; }
+
+        public int? VoucherCount { get; set; }
+
+        public int? CompanyId { get; set; }
+            
         /// <summary>
         /// Profile Question Answers
         /// </summary>

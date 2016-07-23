@@ -113,6 +113,11 @@
         <EntityTypeShape EntityType="DomainModels.vw_PublisherTransaction" Width="1.5" PointX="3.375" PointY="16.75" />
         <EntityTypeShape EntityType="DomainModels.vw_Cash4AdsReport" Width="1.5" PointX="5.375" PointY="16.75" />
         <EntityTypeShape EntityType="DomainModels.UserFavouriteCoupon" Width="1.5" PointX="16.375" PointY="6.75" />
+        <EntityTypeShape EntityType="DomainModels.CompaniesAspNetUser" Width="4.125" PointX="33.125" PointY="20" />
+        <AssociationConnector Association="DomainModels.FK_CompaniesAspNetUsers_AspNetRoles" />
+        <AssociationConnector Association="DomainModels.FK_CompaniesAspNetUsers_AspNetUsers" />
+        <AssociationConnector Association="DomainModels.FK_CompaniesAspNetUsers_Company" />
+        <EntityTypeShape EntityType="DomainModels.vw_CompanyUsers" Width="1.5" PointX="16.375" PointY="9.875" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

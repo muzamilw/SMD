@@ -118,12 +118,14 @@
     <Compile Include="Common\UserBaseData.cs" />
     <Compile Include="Common\UserIdentityModel.cs" />
     <Compile Include="Common\Utility.cs" />
+    <Compile Include="DomainModels\vw_CompanyUsers.cs" />
     <Compile Include="DomainModels\Account.cs" />
     <Compile Include="DomainModels\AdCampaign.cs" />
     <Compile Include="DomainModels\AdCampaignResponse.cs" />
     <Compile Include="DomainModels\AdCampaignTargetCriteria.cs" />
     <Compile Include="DomainModels\AdCampaignTargetLocation.cs" />
     <Compile Include="DomainModels\AuditLog.cs" />
+    <Compile Include="DomainModels\CompaniesAspNetUser.cs" />
     <Compile Include="DomainModels\CampaignCategory.cs" />
     <Compile Include="DomainModels\City.cs" />
     <Compile Include="DomainModels\Company.cs" />
@@ -137,6 +139,8 @@
     <Compile Include="DomainModels\Game.cs" />
     <Compile Include="DomainModels\GetAds_Result.cs" />
     <Compile Include="DomainModels\GetAudience_Result.cs" />
+    <Compile Include="DomainModels\SearchCoupons_Result.cs" />
+    <Compile Include="DomainModels\GetCouponsByCompanyId_Result.cs" />
     <Compile Include="DomainModels\GetCoupons_Result.cs" />
     <Compile Include="DomainModels\GetProducts_Result.cs" />
     <Compile Include="DomainModels\GetSurveys_Result.cs" />
@@ -217,6 +221,7 @@
     <Compile Include="ResponseModels\AdCampaignResposneModelForAproval.cs" />
     <Compile Include="ResponseModels\AdCampaignApiSearchRequestResponse.cs" />
     <Compile Include="ResponseModels\BaseApiResponse.cs" />
+    <Compile Include="ResponseModels\SearchCouponsResponse.cs" />
     <Compile Include="ResponseModels\IndustryResponse.cs" />
     <Compile Include="ResponseModels\GetProductsResponse.cs" />
     <Compile Include="ResponseModels\InvoiceSearchRequestResponse.cs" />

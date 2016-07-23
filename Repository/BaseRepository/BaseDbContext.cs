@@ -247,6 +247,11 @@ namespace SMD.Repository.BaseRepository
         public DbSet<vw_GetUserTransactions> vw_GetUserTransactions { get; set; }
         public DbSet<vw_PublisherTransaction> vw_PublisherTransaction { get; set; }
         public DbSet<vw_Cash4AdsReport> vw_Cash4AdsReport { get; set; }
+
+
+        public DbSet<CompaniesAspNetUser> CompaniesAspNetUsers { get; set; }
+
+        public DbSet<vw_CompanyUsers> vw_CompanyUsers { get; set; }
         /// <summary>
         /// Get Ad-Campaigns for APIs | baqer
         /// </summary>
@@ -383,6 +388,71 @@ namespace SMD.Repository.BaseRepository
 
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCoupons_Result>("GetCoupons", userIdParameter);
         }
+
+
+
+        public ObjectResult<GetCouponsByCompanyId_Result> GetCouponsByCompanyId(string CompanyId)
+        {
+            var userIdParameter = CompanyId != null ?
+                new ObjectParameter("CompanyId", CompanyId) :
+                new ObjectParameter("CompanyId", typeof(string));
+
+
+
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCouponsByCompanyId_Result>("GetCouponsByCompanyId", userIdParameter);
+        }
+
+
+
+
+        public ObjectResult<SearchCoupons_Result> SearchCoupons(int categoryId, int type, string keywords, int distance, string Lat, string Lon,string userId, int? fromRow, int? toRow)
+        {
+            var categoryIdParameter = categoryId != null ?
+                new ObjectParameter("categoryId", categoryId) :
+                new ObjectParameter("categoryId", typeof(int));
+
+
+            var typeIdParameter = type != null ?
+               new ObjectParameter("type", type) :
+               new ObjectParameter("type", typeof(int));
+
+            var keywordsParameter = keywords != null ?
+            new ObjectParameter("keywords", keywords) :
+            new ObjectParameter("keywords", typeof(string));
+
+            var distanceParameter = distance != null ?
+          new ObjectParameter("distance", distance) :
+          new ObjectParameter("distance", typeof(int));
+
+
+            var LatParameter = Lat != null ?
+      new ObjectParameter("Lat", Lat) :
+      new ObjectParameter("Lat", typeof(string));
+
+
+            var LonParameter = Lon != null ?
+      new ObjectParameter("Lon", Lon) :
+      new ObjectParameter("Lon", typeof(string));
+
+
+            var userIdParameter = userId != null ?
+             new ObjectParameter("userId", userId) :
+             new ObjectParameter("userId", typeof(string));
+
+
+            var fromRowParameter = fromRow.HasValue ?
+                new ObjectParameter("FromRow", fromRow) :
+                new ObjectParameter("FromRow", typeof(int));
+
+            var toRowParameter = toRow.HasValue ?
+                new ObjectParameter("ToRow", toRow) :
+                new ObjectParameter("ToRow", typeof(int));
+
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SearchCoupons_Result>("SearchCoupons", categoryIdParameter, typeIdParameter, keywordsParameter, distanceParameter, LatParameter, LonParameter, userIdParameter, fromRowParameter, toRowParameter);
+        }
+
+
+
         #endregion
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SMD.Models.DomainModels
 {
-    public class GetCoupons_Result
+    public class SearchCoupons_Result
     {
         public long CouponId { get; set; }
         public string CouponName { get; set; }
@@ -16,10 +16,12 @@ namespace SMD.Models.DomainModels
         public string CouponImage { get; set; }
         public string CouponSwapValue { get; set; }
         public string CouponActualValue { get; set; }
-        public Nullable<int> CouponType { get; set; }
 
+        public int CompanyId { get; set; }
 
         public string AdvertisersLogoPath { get; set; }
+
+        public Nullable<int> TotalItems { get; set; }
         
     }
 }

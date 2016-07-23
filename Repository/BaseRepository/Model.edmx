@@ -91,7 +91,29 @@
           <Property Name="CouponId" Type="bigint" />
           <Property Name="IsShowVoucherSetting" Type="bit" />
           <Property Name="VideoLink2" Type="nvarchar(max)" />
-          <Property Name="IsSavedCoupon" Type="bit" />
+          <Property Name="VoucherHighlightLine1" Type="nvarchar" MaxLength="500" />
+          <Property Name="VoucherHighlightLine2" Type="nvarchar" MaxLength="500" />
+          <Property Name="VoucherHighlightLine3" Type="nvarchar" MaxLength="500" />
+          <Property Name="VoucherHighlightLine4" Type="nvarchar" MaxLength="500" />
+          <Property Name="VoucherHighlightLine5" Type="nvarchar" MaxLength="500" />
+          <Property Name="VoucherFinePrintLine1" Type="nvarchar" MaxLength="500" />
+          <Property Name="VoucherFinePrintLine2" Type="nvarchar" MaxLength="500" />
+          <Property Name="VoucherFinePrintLine3" Type="nvarchar" MaxLength="500" />
+          <Property Name="VoucherFinePrintLine4" Type="nvarchar" MaxLength="500" />
+          <Property Name="VoucherFinePrintLine5" Type="nvarchar" MaxLength="500" />
+          <Property Name="VoucherLocationLine1" Type="nvarchar" MaxLength="500" />
+          <Property Name="VoucherLocationLine2" Type="nvarchar" MaxLength="500" />
+          <Property Name="VoucherLocationLine3" Type="nvarchar" MaxLength="500" />
+          <Property Name="VoucherLocationLine4" Type="nvarchar" MaxLength="500" />
+          <Property Name="VoucherLocationLine5" Type="nvarchar" MaxLength="500" />
+          <Property Name="VoucherHowToRedeemLine1" Type="nvarchar" MaxLength="500" />
+          <Property Name="VoucherHowToRedeemLine2" Type="nvarchar" MaxLength="500" />
+          <Property Name="VoucherHowToRedeemLine3" Type="nvarchar" MaxLength="500" />
+          <Property Name="VoucherHowToRedeemLine4" Type="nvarchar" MaxLength="500" />
+          <Property Name="VoucherHowToRedeemLine5" Type="nvarchar" MaxLength="500" />
+          <Property Name="VoucherRedemptionPhone" Type="nvarchar" MaxLength="500" />
+          <Property Name="VoucherLocationLAT" Type="nvarchar" MaxLength="50" />
+          <Property Name="VoucherLocationLON" Type="nchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="AdCampaignResponse">
           <Key>
@@ -247,6 +269,18 @@
           <Property Name="GeoLONG" Type="nvarchar" MaxLength="100" />
           <Property Name="GeoLAT" Type="nvarchar" MaxLength="100" />
         </EntityType>
+        <EntityType Name="CompaniesAspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyId" Type="int" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="Status" Type="int" />
+          <Property Name="InvitationCode" Type="nvarchar" MaxLength="500" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" />
+        </EntityType>
         <EntityType Name="Company">
           <Key>
             <PropertyRef Name="CompanyId" />
@@ -276,7 +310,6 @@
           <Property Name="AfilliatianStatus" Type="bit" />
           <Property Name="WebsiteLink" Type="nvarchar" MaxLength="100" />
           <Property Name="CompanyType" Type="int" />
-          <Property Name="VoucherSecretKey" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Country">
           <Key>
@@ -304,9 +337,6 @@
           <Property Name="IsTaken" Type="bit" />
           <Property Name="UserId" Type="nvarchar" MaxLength="128" />
           <Property Name="TakenDateTime" Type="datetime" />
-          <Property Name="IsUsed" Type="bit" />
-          <Property Name="UsedDateTime" Type="datetime" />
-          <Property Name="UsageInfo" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="Currency">
           <Key>
@@ -673,6 +703,24 @@ warning 6002: The table/view 'SMDDev.dbo.vw_Cash4AdsReport' does not have a prim
           <Property Name="Email" Type="nvarchar" MaxLength="256" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'SMDDev.dbo.vw_CompanyUsers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_CompanyUsers">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="FullName" />
+            <PropertyRef Name="RoleName" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="256" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="status" Type="varchar" MaxLength="15" />
+          <Property Name="companyid" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'SMDDev.dbo.vw_GetUserTransactions' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vw_GetUserTransactions">
           <Key>
@@ -1005,6 +1053,42 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
             </Principal>
             <Dependent Role="City">
               <PropertyRef Name="CountryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompaniesAspNetUsers_AspNetRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="0..1" />
+          <End Role="CompaniesAspNetUsers" Type="Self.CompaniesAspNetUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CompaniesAspNetUsers">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompaniesAspNetUsers_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="CompaniesAspNetUsers" Type="Self.CompaniesAspNetUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CompaniesAspNetUsers">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompaniesAspNetUsers_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="CompaniesAspNetUsers" Type="Self.CompaniesAspNetUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="CompaniesAspNetUsers">
+              <PropertyRef Name="CompanyId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1567,6 +1651,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
         <Function Name="GetCoupons" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserID" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="GetCouponsByCompanyId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CompanyId" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="GetProducts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserID" Type="nvarchar" Mode="In" />
           <Parameter Name="FromRow" Type="int" Mode="In" />
@@ -1578,6 +1665,17 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Parameter Name="ToRow" Type="int" Mode="In" />
         </Function>
         <Function Name="ResetProductsUserResponses" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SearchCoupons" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="categoryId" Type="int" Mode="In" />
+          <Parameter Name="type" Type="int" Mode="In" />
+          <Parameter Name="keywords" Type="nvarchar" Mode="In" />
+          <Parameter Name="distance" Type="int" Mode="In" />
+          <Parameter Name="Lat" Type="nvarchar" Mode="In" />
+          <Parameter Name="Lon" Type="nvarchar" Mode="In" />
+          <Parameter Name="UserId" Type="nvarchar" Mode="In" />
+          <Parameter Name="FromRow" Type="int" Mode="In" />
+          <Parameter Name="ToRow" Type="int" Mode="In" />
+        </Function>
         <Function Name="spGetProfileQuestion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserID" Type="nvarchar" Mode="In" />
           <Parameter Name="questioncount" Type="int" Mode="In" />
@@ -1607,6 +1705,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <EntitySet Name="AuditLog" EntityType="Self.AuditLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CampaignCategories" EntityType="Self.CampaignCategories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompaniesAspNetUsers" EntityType="Self.CompaniesAspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CouponCategory" EntityType="Self.CouponCategory" Schema="dbo" store:Type="Tables" />
@@ -1648,6 +1747,18 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
     [vw_Cash4AdsReport].[VoucherTitle] AS [VoucherTitle], 
     [vw_Cash4AdsReport].[Email] AS [Email]
     FROM [dbo].[vw_Cash4AdsReport] AS [vw_Cash4AdsReport]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vw_CompanyUsers" EntityType="Self.vw_CompanyUsers" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_CompanyUsers].[id] AS [id], 
+    [vw_CompanyUsers].[UserId] AS [UserId], 
+    [vw_CompanyUsers].[email] AS [email], 
+    [vw_CompanyUsers].[FullName] AS [FullName], 
+    [vw_CompanyUsers].[RoleName] AS [RoleName], 
+    [vw_CompanyUsers].[CreatedOn] AS [CreatedOn], 
+    [vw_CompanyUsers].[status] AS [status], 
+    [vw_CompanyUsers].[companyid] AS [companyid]
+    FROM [dbo].[vw_CompanyUsers] AS [vw_CompanyUsers]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vw_GetUserTransactions" EntityType="Self.vw_GetUserTransactions" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -1775,6 +1886,18 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <AssociationSet Name="FK_City_Country" Association="Self.FK_City_Country">
             <End Role="Country" EntitySet="Country" />
             <End Role="City" EntitySet="City" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompaniesAspNetUsers_AspNetRoles" Association="Self.FK_CompaniesAspNetUsers_AspNetRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="CompaniesAspNetUsers" EntitySet="CompaniesAspNetUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompaniesAspNetUsers_AspNetUsers" Association="Self.FK_CompaniesAspNetUsers_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="CompaniesAspNetUsers" EntitySet="CompaniesAspNetUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompaniesAspNetUsers_Company" Association="Self.FK_CompaniesAspNetUsers_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="CompaniesAspNetUsers" EntitySet="CompaniesAspNetUsers" />
           </AssociationSet>
           <AssociationSet Name="FK_Company_City" Association="Self.FK_Company_City">
             <End Role="City" EntitySet="City" />
@@ -1956,6 +2079,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Users" Relationship="DomainModels.AspNetUserRoles" FromRole="Role" ToRole="AspNetUser" />
+          <NavigationProperty Name="CompaniesAspNetUsers" Relationship="DomainModels.FK_CompaniesAspNetUsers_AspNetRoles" FromRole="Role" ToRole="CompaniesAspNetUser" />
         </EntityType>
         <EntityType Name="UserLogin">
           <Key>
@@ -2340,7 +2464,35 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
             <Parameter Name="FromRow" Mode="In" Type="Int32" />
             <Parameter Name="ToRow" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="GetCouponsByCompanyId" ReturnType="Collection(DomainModels.GetCouponsByCompanyId_Result)">
+          <Parameter Name="CompanyId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SearchCoupons" ReturnType="Collection(DomainModels.SearchCoupons_Result)">
+            <Parameter Name="categoryId" Mode="In" Type="Int32" />
+            <Parameter Name="type" Mode="In" Type="Int32" />
+            <Parameter Name="keywords" Mode="In" Type="String" />
+            <Parameter Name="distance" Mode="In" Type="Int32" />
+            <Parameter Name="Lat" Mode="In" Type="String" />
+            <Parameter Name="Lon" Mode="In" Type="String" />
+            <Parameter Name="UserId" Mode="In" Type="String" />
+            <Parameter Name="FromRow" Mode="In" Type="Int32" />
+            <Parameter Name="ToRow" Mode="In" Type="Int32" />
+          </FunctionImport>
           <EntitySet Name="UserFavouriteCoupons" EntityType="DomainModels.UserFavouriteCoupon" />
+          <EntitySet Name="CompaniesAspNetUsers" EntityType="DomainModels.CompaniesAspNetUser" />
+          <AssociationSet Name="FK_CompaniesAspNetUsers_AspNetRoles" Association="DomainModels.FK_CompaniesAspNetUsers_AspNetRoles">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="CompaniesAspNetUser" EntitySet="CompaniesAspNetUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompaniesAspNetUsers_AspNetUsers" Association="DomainModels.FK_CompaniesAspNetUsers_AspNetUsers">
+            <End Role="User" EntitySet="Users" />
+            <End Role="CompaniesAspNetUser" EntitySet="CompaniesAspNetUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompaniesAspNetUsers_Company" Association="DomainModels.FK_CompaniesAspNetUsers_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="CompaniesAspNetUser" EntitySet="CompaniesAspNetUsers" />
+          </AssociationSet>
+          <EntitySet Name="vw_CompanyUsers" EntityType="DomainModels.vw_CompanyUsers" />
           </EntityContainer>
         <EntityType Name="ProfileQuestion">
           <Key>
@@ -3340,7 +3492,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <NavigationProperty Name="Users" Relationship="DomainModels.FK_AspNetUsers_Company" FromRole="Company" ToRole="AspNetUser" />
           <NavigationProperty Name="AdCampaignResponses" Relationship="DomainModels.FK_AdCampaignResponse_Company" FromRole="Company" ToRole="AdCampaignResponse" />
           <NavigationProperty Name="AdCampaigns" Relationship="DomainModels.FK_AdCampaign_Company" FromRole="Company" ToRole="AdCampaign" />
-          <Property Name="VoucherSecretKey" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CompaniesAspNetUsers" Relationship="DomainModels.FK_CompaniesAspNetUsers_Company" FromRole="Company" ToRole="CompaniesAspNetUser" />
         </EntityType>
         <Association Name="FK_Account_Company">
           <End Type="DomainModels.Company" Role="Company" Multiplicity="0..1" />
@@ -3479,6 +3631,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Property Name="AuthenticationToken" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AdCampaignResponses" Relationship="DomainModels.FK_AdCampaignResponse_AspNetUsers" FromRole="User" ToRole="AdCampaignResponse" />
           <NavigationProperty Name="CouponCodes" Relationship="DomainModels.FK_CouponCodes_AspNetUsers" FromRole="User" ToRole="CouponCode" />
+          <NavigationProperty Name="CompaniesAspNetUsers" Relationship="DomainModels.FK_CompaniesAspNetUsers_AspNetUsers" FromRole="User" ToRole="CompaniesAspNetUser" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Type="DomainModels.User" Role="AspNetUser" Multiplicity="1">
@@ -3675,9 +3828,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <NavigationProperty Name="AspNetUser" Relationship="DomainModels.FK_CouponCodes_AspNetUsers" FromRole="CouponCode" ToRole="User" />
           <NavigationProperty Name="AdCampaign" Relationship="DomainModels.FK_CouponCodes_AdCampaign" FromRole="CouponCode" ToRole="AdCampaign" />
           <Property Name="TakenDateTime" Type="DateTime" Precision="3" />
-          <Property Name="IsUsed" Type="Boolean" />
-          <Property Name="UsedDateTime" Type="DateTime" Precision="3" />
-          <Property Name="UsageInfo" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_CouponCodes_AspNetUsers">
           <End Type="DomainModels.User" Role="User" Multiplicity="0..1" />
@@ -3806,7 +3956,29 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Property Name="CouponId" Type="Int64" />
           <Property Name="IsShowVoucherSetting" Type="Boolean" />
           <Property Name="VideoLink2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="IsSavedCoupon" Type="Boolean" />
+          <Property Name="VoucherHighlightLine1" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="VoucherHighlightLine2" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="VoucherHighlightLine3" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="VoucherHighlightLine4" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="VoucherHighlightLine5" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="VoucherFinePrintLine1" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="VoucherFinePrintLine2" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="VoucherFinePrintLine3" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="VoucherFinePrintLine4" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="VoucherFinePrintLine5" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="VoucherLocationLine1" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="VoucherLocationLine2" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="VoucherLocationLine3" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="VoucherLocationLine4" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="VoucherLocationLine5" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="VoucherHowToRedeemLine1" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="VoucherHowToRedeemLine2" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="VoucherHowToRedeemLine3" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="VoucherHowToRedeemLine4" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="VoucherHowToRedeemLine5" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="VoucherRedemptionPhone" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="VoucherLocationLAT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="VoucherLocationLON" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
         </EntityType>
         <Association Name="FK_AdCampaign_Company">
           <End Type="DomainModels.Company" Role="Company" Multiplicity="0..1" />
@@ -4187,6 +4359,31 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Property Type="String" Name="VideoLink2" Nullable="true" />
           <Property Type="Boolean" Name="IsShowVoucherSetting" Nullable="true" />
           <Property Type="Int32" Name="TotalItems" Nullable="true" />
+          <Property Type="Int32" Name="VoucherCount" Nullable="true" />
+          <Property Type="Int32" Name="CompanyId" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetCouponsByCompanyId_Result">
+          <Property Type="Int64" Name="CouponId" Nullable="false" />
+          <Property Type="String" Name="CouponName" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="CouponTitle" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Firstline" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="SecondLine" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="CouponImage" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="CouponSwapValue" Nullable="true" />
+          <Property Type="String" Name="CouponActualValue" Nullable="true" />
+          <Property Type="String" Name="AdvertisersLogoPath" Nullable="true" MaxLength="227" />
+        </ComplexType>
+        <ComplexType Name="SearchCoupons_Result">
+          <Property Type="Int64" Name="CouponId" Nullable="false" />
+          <Property Type="String" Name="CouponName" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="CouponTitle" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Firstline" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="SecondLine" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="CouponImage" Nullable="true" MaxLength="227" />
+          <Property Type="String" Name="AdvertisersLogoPath" Nullable="true" MaxLength="227" />
+          <Property Type="String" Name="CouponSwapValue" Nullable="true" />
+          <Property Type="String" Name="CouponActualValue" Nullable="true" />
+          <Property Type="Int32" Name="TotalItems" Nullable="true" />
         </ComplexType>
         <EntityType Name="UserFavouriteCoupon">
           <Key>
@@ -4195,6 +4392,73 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Property Name="FavouriteCouponId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CouponId" Type="Int64" />
           <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="CompaniesAspNetUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="InvitationCode" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="RoleId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetRole" Relationship="DomainModels.FK_CompaniesAspNetUsers_AspNetRoles" FromRole="CompaniesAspNetUser" ToRole="Role" />
+          <NavigationProperty Name="AspNetUser" Relationship="DomainModels.FK_CompaniesAspNetUsers_AspNetUsers" FromRole="CompaniesAspNetUser" ToRole="User" />
+          <NavigationProperty Name="Company" Relationship="DomainModels.FK_CompaniesAspNetUsers_Company" FromRole="CompaniesAspNetUser" ToRole="Company" />
+        </EntityType>
+        <Association Name="FK_CompaniesAspNetUsers_AspNetRoles">
+          <End Type="DomainModels.Role" Role="Role" Multiplicity="0..1" />
+          <End Type="DomainModels.CompaniesAspNetUser" Role="CompaniesAspNetUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CompaniesAspNetUser">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompaniesAspNetUsers_AspNetUsers">
+          <End Type="DomainModels.User" Role="User" Multiplicity="0..1" />
+          <End Type="DomainModels.CompaniesAspNetUser" Role="CompaniesAspNetUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CompaniesAspNetUser">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompaniesAspNetUsers_Company">
+          <End Type="DomainModels.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="DomainModels.CompaniesAspNetUser" Role="CompaniesAspNetUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="CompaniesAspNetUser">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="vw_CompanyUsers">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="FullName" />
+            <PropertyRef Name="RoleName" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="FullName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="status" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="companyid" Type="Int32" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -4668,7 +4932,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <EntitySetMapping Name="Companies">
             <EntityTypeMapping TypeName="DomainModels.Company">
               <MappingFragment StoreEntitySet="Company">
-                <ScalarProperty Name="VoucherSecretKey" ColumnName="VoucherSecretKey" />
                 <ScalarProperty Name="CompanyType" ColumnName="CompanyType" />
                 <ScalarProperty Name="WebsiteLink" ColumnName="WebsiteLink" />
                 <ScalarProperty Name="AfilliatianStatus" ColumnName="AfilliatianStatus" />
@@ -4784,9 +5047,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <EntitySetMapping Name="CouponCodes">
             <EntityTypeMapping TypeName="DomainModels.CouponCode">
               <MappingFragment StoreEntitySet="CouponCodes">
-                <ScalarProperty Name="UsageInfo" ColumnName="UsageInfo" />
-                <ScalarProperty Name="UsedDateTime" ColumnName="UsedDateTime" />
-                <ScalarProperty Name="IsUsed" ColumnName="IsUsed" />
                 <ScalarProperty Name="TakenDateTime" ColumnName="TakenDateTime" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="IsTaken" ColumnName="IsTaken" />
@@ -4817,7 +5077,29 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <EntitySetMapping Name="AdCampaigns">
             <EntityTypeMapping TypeName="DomainModels.AdCampaign">
               <MappingFragment StoreEntitySet="AdCampaign">
-                <ScalarProperty Name="IsSavedCoupon" ColumnName="IsSavedCoupon" />
+                <ScalarProperty Name="VoucherLocationLON" ColumnName="VoucherLocationLON" />
+                <ScalarProperty Name="VoucherLocationLAT" ColumnName="VoucherLocationLAT" />
+                <ScalarProperty Name="VoucherRedemptionPhone" ColumnName="VoucherRedemptionPhone" />
+                <ScalarProperty Name="VoucherHowToRedeemLine5" ColumnName="VoucherHowToRedeemLine5" />
+                <ScalarProperty Name="VoucherHowToRedeemLine4" ColumnName="VoucherHowToRedeemLine4" />
+                <ScalarProperty Name="VoucherHowToRedeemLine3" ColumnName="VoucherHowToRedeemLine3" />
+                <ScalarProperty Name="VoucherHowToRedeemLine2" ColumnName="VoucherHowToRedeemLine2" />
+                <ScalarProperty Name="VoucherHowToRedeemLine1" ColumnName="VoucherHowToRedeemLine1" />
+                <ScalarProperty Name="VoucherLocationLine5" ColumnName="VoucherLocationLine5" />
+                <ScalarProperty Name="VoucherLocationLine4" ColumnName="VoucherLocationLine4" />
+                <ScalarProperty Name="VoucherLocationLine3" ColumnName="VoucherLocationLine3" />
+                <ScalarProperty Name="VoucherLocationLine2" ColumnName="VoucherLocationLine2" />
+                <ScalarProperty Name="VoucherLocationLine1" ColumnName="VoucherLocationLine1" />
+                <ScalarProperty Name="VoucherFinePrintLine5" ColumnName="VoucherFinePrintLine5" />
+                <ScalarProperty Name="VoucherFinePrintLine4" ColumnName="VoucherFinePrintLine4" />
+                <ScalarProperty Name="VoucherFinePrintLine3" ColumnName="VoucherFinePrintLine3" />
+                <ScalarProperty Name="VoucherFinePrintLine2" ColumnName="VoucherFinePrintLine2" />
+                <ScalarProperty Name="VoucherFinePrintLine1" ColumnName="VoucherFinePrintLine1" />
+                <ScalarProperty Name="VoucherHighlightLine5" ColumnName="VoucherHighlightLine5" />
+                <ScalarProperty Name="VoucherHighlightLine4" ColumnName="VoucherHighlightLine4" />
+                <ScalarProperty Name="VoucherHighlightLine3" ColumnName="VoucherHighlightLine3" />
+                <ScalarProperty Name="VoucherHighlightLine2" ColumnName="VoucherHighlightLine2" />
+                <ScalarProperty Name="VoucherHighlightLine1" ColumnName="VoucherHighlightLine1" />
                 <ScalarProperty Name="VideoLink2" ColumnName="VideoLink2" />
                 <ScalarProperty Name="IsShowVoucherSetting" ColumnName="IsShowVoucherSetting" />
                 <ScalarProperty Name="CouponId" ColumnName="CouponId" />
@@ -5087,6 +5369,39 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
                 <ScalarProperty Name="VideoLink2" ColumnName="VideoLink2" />
                 <ScalarProperty Name="IsShowVoucherSetting" ColumnName="IsShowVoucherSetting" />
                 <ScalarProperty Name="TotalItems" ColumnName="TotalItems" />
+                <ScalarProperty Name="VoucherCount" ColumnName="VoucherCount" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetCouponsByCompanyId" FunctionName="SMDModel.Store.GetCouponsByCompanyId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DomainModels.GetCouponsByCompanyId_Result">
+                <ScalarProperty Name="CouponId" ColumnName="CouponId" />
+                <ScalarProperty Name="CouponName" ColumnName="CouponName" />
+                <ScalarProperty Name="CouponTitle" ColumnName="CouponTitle" />
+                <ScalarProperty Name="Firstline" ColumnName="Firstline" />
+                <ScalarProperty Name="SecondLine" ColumnName="SecondLine" />
+                <ScalarProperty Name="CouponImage" ColumnName="CouponImage" />
+                <ScalarProperty Name="CouponSwapValue" ColumnName="CouponSwapValue" />
+                <ScalarProperty Name="CouponActualValue" ColumnName="CouponActualValue" />
+                <ScalarProperty Name="AdvertisersLogoPath" ColumnName="AdvertisersLogoPath" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SearchCoupons" FunctionName="SMDModel.Store.SearchCoupons">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DomainModels.SearchCoupons_Result">
+                <ScalarProperty Name="CouponId" ColumnName="CouponId" />
+                <ScalarProperty Name="CouponName" ColumnName="CouponName" />
+                <ScalarProperty Name="CouponTitle" ColumnName="CouponTitle" />
+                <ScalarProperty Name="Firstline" ColumnName="Firstline" />
+                <ScalarProperty Name="SecondLine" ColumnName="SecondLine" />
+                <ScalarProperty Name="CouponImage" ColumnName="CouponImage" />
+                <ScalarProperty Name="AdvertisersLogoPath" ColumnName="AdvertisersLogoPath" />
+                <ScalarProperty Name="CouponSwapValue" ColumnName="CouponSwapValue" />
+                <ScalarProperty Name="CouponActualValue" ColumnName="CouponActualValue" />
+                <ScalarProperty Name="TotalItems" ColumnName="TotalItems" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -5096,6 +5411,33 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="CouponId" ColumnName="CouponId" />
                 <ScalarProperty Name="FavouriteCouponId" ColumnName="FavouriteCouponId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompaniesAspNetUsers">
+            <EntityTypeMapping TypeName="DomainModels.CompaniesAspNetUser">
+              <MappingFragment StoreEntitySet="CompaniesAspNetUsers">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="InvitationCode" ColumnName="InvitationCode" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_CompanyUsers">
+            <EntityTypeMapping TypeName="DomainModels.vw_CompanyUsers">
+              <MappingFragment StoreEntitySet="vw_CompanyUsers">
+                <ScalarProperty Name="companyid" ColumnName="companyid" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
