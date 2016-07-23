@@ -126,7 +126,7 @@ else
 
                                         <div class="ads-numbering-box" style="background: rgb(104,179,89);">
 
-                                            <img src="~/Content/Images/AD_Campaign_mobileStencil.png" />
+                                            <img src="~/Content/Images/AD_Campaign_mobileStencil.png"  width="20px"/>
                                         </div>
 
                                         <br />
@@ -139,16 +139,16 @@ else
                         </div>
                         <div class="main-box" style="padding: 20px;">
                             <div class="adsubHeading" data-bind="visible: $root.previewScreenNumber() == 1">
-                                Show your video ads to a targeted audience
+                                Upload your video ad and FREE banner text.
                             </div>
                             <div class="adsubHeading" data-bind="visible: $root.previewScreenNumber() == 2">
-                                Reduce your ad spend by targeting better
+                                Define your target audience
                             </div>
                             <div class="adsubHeading" data-bind="visible: $root.previewScreenNumber() == 4">
-                                Its all about conversions :)
+                                Ask the user some useful info and then reward them.
                             </div>
                             <div class="adsubHeading" data-bind="visible: $root.previewScreenNumber() == 3">
-                                Create surveys for future campaigns
+                                How do you want to deliver your video ads …
                             </div>
                             <div class="col-lg-11" style="margin:auto;float:none !important;    height: 690px;" data-bind="visible: $root.previewScreenNumber() == 1">
                                 <div class="form-group">
@@ -189,7 +189,8 @@ else
                                     </div>
                                     <div class="col-lg-2">
                                         <div class="bs-example-tooltips tooltip-float-width">
-                                            <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-original-title="" title="">
+                                            <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;"
+                                               data-container="body" data-toggle="popover" data-placement="right" data-original-title="" title="" data-content="Add a city">
                                                 <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
                                             </a>
                                         </div>
@@ -352,6 +353,7 @@ else
                                         <textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="Enter Description (36 characters)" data-bind="value: CampaignDescription" maxlength="36"></textarea>
                                     </div>
                                 </div>
+                             
                             </div>
                             <div class="col-lg-11" style="margin:auto;float:none !important;  display:none;  height: 690px;">
                                 <div class="form-group" style="margin-top:10px; margin-left:-8px;display:none;">
@@ -561,10 +563,10 @@ else
                                     </div>
                                     <div class="col-lg-7">
                                         <div>
-                                            <button class="btn  btn-danger btnAdsCampaign ButtonWidth" id="" data-toggle="modal" data-target=".bs-example-modal-lg" data-bind="click:$root.showAdditionUserCriteria">User profile answers</button>
+                                            <button class="btn  btn-danger btnAdsCampaign ButtonWidth" id="" data-toggle="modal" data-target=".bs-example-modal-lg" data-bind="click:$root.showAdditionUserCriteria">Profle card matches</button>
                                         </div>
                                         <div>
-                                            <button class="btn  btn-danger btnAdsCampaign ButtonWidth" id="" data-toggle="modal" data-target=".bs-example-modal-lg" data-bind="click:$root.showAdditionQuizCriteria">Your quiz questions</button>
+                                            <button class="btn  btn-danger btnAdsCampaign ButtonWidth" id="" data-toggle="modal" data-target=".bs-example-modal-lg" data-bind="click:$root.showAdditionQuizCriteria">Quiz answer matches</button>
                                         </div>
                                         <div>
                                             <div class="table-responsive">
@@ -730,6 +732,7 @@ else
                                 </div>
 
                             </div>
+                       
                             <div class="clearfix">
 
                             </div>
@@ -753,6 +756,24 @@ else
 
                                     </div>
                                 </div>
+
+                            </div>
+                            <div class="clearfix">
+
+                            </div>
+                            <div class="adBottomHeading" data-bind="visible: $root.previewScreenNumber() == 1">
+                                Advertising to mobile users has overtaken all other forms<br />
+                                of advertising.
+
+                            </div>
+                            <div class="adBottomHeading" data-bind="visible: $root.previewScreenNumber() == 2">
+                                Increase conversions by targeting more accurately.
+                            </div>
+                            <div class="adBottomHeading" data-bind="visible: $root.previewScreenNumber() == 4">
+                                Quiz answers can be used in future ad campaigns <br /> to tighten your messaging
+                            </div>
+                            <div class="adBottomHeading" data-bind="visible: $root.previewScreenNumber() == 3">
+                                Your only billed AFTER users have watched your video in full<br /> And correctly answered your survey question.
 
                             </div>
                             <div class="clearfix">

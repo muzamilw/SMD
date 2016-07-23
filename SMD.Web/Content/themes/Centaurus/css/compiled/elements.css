@@ -4361,13 +4361,14 @@ input[type="radio"] {
     }
 
 .label.label-circle-question {
-    border-radius: 50%;
+border-radius: 50%;
     padding: 1px !important;
-    background-color: #e7ebee;
+    background-color: #68b359;
     margin-left: 3px;
     cursor: pointer;
-    color: green !important;
+    color: white !important;
     font-weight: bolder;
+
 }
 
 .table-products .smallname {

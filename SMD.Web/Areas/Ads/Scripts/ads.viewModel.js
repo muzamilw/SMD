@@ -1465,6 +1465,7 @@ define("ads/ads.viewModel",
                     $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign").removeAttr('disabled');
                 }, 
                 nextPreviewScreen = function () {
+                    toastr.error("Validation.");
                     if (previewScreenNumber() < 5) {
                         previewScreenNumber(previewScreenNumber() + 1);
                     }

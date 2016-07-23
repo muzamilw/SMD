@@ -38,7 +38,7 @@
     height: 37px;
 }
 #searchCampaignLocations {
-  width: 166px !important;
+  width: 247px !important;
   border-top-left-radius: 0px !important;
   border-top-right-radius: 0px !important;
   border: none;
@@ -945,4 +945,20 @@ div#spinner {
 }
 .tt-suggestion p {
   margin: 0;
+}
+
+
+.adsubHeading {
+    color: rgb(52,152,219) !important;
+        font-size: 22px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+.adBottomHeading{
+     color: rgb(52,152,219) !important;
+        font-size: 22px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    text-align:center;
+    background-image:url(../../Content/Images/Back_Footer_Tab.png);
 }

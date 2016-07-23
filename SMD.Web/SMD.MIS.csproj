@@ -659,11 +659,13 @@
     <Content Include="Content\CSS\supr-theme\jquery.ui.theme.css" />
     <Content Include="Content\CSS\toastr.css" />
     <Content Include="Content\Images\5_Main_4.png" />
+    <Content Include="Content\Images\AD_Campaign_mobileStencil.png" />
     <Content Include="Content\Images\arrow-down-small.png" />
     <Content Include="Content\Images\arrow-down.png" />
     <Content Include="Content\Images\arrow-right.jpg" />
     <Content Include="Content\Images\arrow-up-small.png" />
     <Content Include="Content\Images\arrow-up.png" />
+    <Content Include="Content\Images\Back_Footer_Tab.png" />
     <Content Include="Content\Images\colorpicker_background.png" />
     <Content Include="Content\Images\colorpicker_hex.png" />
     <Content Include="Content\Images\colorpicker_hsb_b.png" />
@@ -689,6 +691,7 @@
     <Content Include="Content\Images\pin.png" />
     <Content Include="Content\Images\placeholder.png" />
     <Content Include="Content\Images\ReportControlbg.jpg" />
+    <Content Include="Content\Images\UK-Union-Flag.png" />
     <Content Include="Content\Images\up-arrow-small.png" />
     <Content Include="Content\layout.css" />
     <Content Include="Content\less\Campaign.css">

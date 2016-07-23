@@ -224,6 +224,7 @@ namespace SMD.Models.DomainModels
             target.CouponType = CouponType;
             target.DeliveryDays = DeliveryDays;
             target.VoucherAdditionalInfo = VoucherAdditionalInfo;
+            target.ChannelType = ChannelType;
               
         }
     }
