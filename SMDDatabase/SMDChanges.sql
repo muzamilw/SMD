@@ -6428,13 +6428,16 @@ END
 
 
 
-
+USE [SMDv2]
 GO
-/****** Object:  StoredProcedure [dbo].[GetProducts]    Script Date: 7/18/2016 2:37:11 PM ******/
+
+/****** Object:  StoredProcedure [dbo].[GetProducts]    Script Date: 7/22/2016 10:29:14 AM ******/
 SET ANSI_NULLS ON
 GO
+
 SET QUOTED_IDENTIFIER ON
 GO
+
 
 
 ALTER PROCEDURE [dbo].[GetProducts] 
@@ -6556,6 +6559,8 @@ from
 		and
 		(adcampaign.Approved = 1)
 		and
+		(adcampaign.Type  <> 5)		-- do not load coupons
+		and
 		(adcampaign.Status = 3) -- live
 		and
 		((adcampaign.AmountSpent is null) or (adcampaign.MaxBudget > adcampaign.AmountSpent))
@@ -6649,6 +6654,10 @@ from
 END
 
 /* Added By Khurram (02 Feb 2016) - End */
+
+GO
+
+
 
 
 

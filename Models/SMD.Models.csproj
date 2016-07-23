@@ -106,6 +106,7 @@
     <Compile Include="Common\CouponCodeModel.cs" />
     <Compile Include="Common\Coupons.cs" />
     <Compile Include="Common\InvoiceByColumn.cs" />
+    <Compile Include="Common\CompanyIdClaimValue.cs" />
     <Compile Include="Common\SurveyQuestionByColumn.cs" />
     <Compile Include="Common\ProfileQuestionByColumn.cs" />
     <Compile Include="Common\SecurityRoles.cs" />

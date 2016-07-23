@@ -12,5 +12,8 @@ namespace SMD.Models.DomainModels
         public string Name { get; set; }
 
         public virtual ICollection<User> Users { get; set; }
+
+        public virtual ICollection<CompaniesAspNetUser> CompaniesAspNetUsers { get; set; }
+
     }
 }

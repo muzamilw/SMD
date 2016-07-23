@@ -1,4 +1,5 @@
 ﻿using SMD.MIS.Areas.Api.Models;
+using SMD.Models.DomainModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,16 +11,16 @@ namespace SMD.MIS.ModelMappers
     { /// <summary>
         /// Domain To Web Model 
         /// </summary>
-        public static ManageUserRolesModel CreateFrom(this Models.IdentityModels.User source)
-        {
+        //public static ManageUserRolesModel CreateFrom(this vw_CompanyUsers source)
+        //{
 
-            return new ManageUserRolesModel
-            {
-                UserId = source.Id,
-                Name = source.FullName,
-                Role = source.Roles.Select(c => c.Name).FirstOrDefault()
-            };
-        }
+        //    return new ManageUserRolesModel
+        //    {
+        //        Id = source.Id,
+                
+            
+        //    };
+        //}
 
 
 

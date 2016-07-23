@@ -1,0 +1,20 @@
+﻿@model List<SMD.Models.DomainModels.vw_CompanyUsers>
+
+@{
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+
+
+    }
+<h3>You have access to following Companies, select one to proceed and login.</h3>
+<table>
+    @{
+        foreach (var company in Model)
+        {
+            <tr>
+                <td>@company.CompanyName</td>
+                <td>@company.RoleName</td>
+                <td><button><a href='@Url.Action("SetCompany", "Account", new { companyid= company.companyid, Role = company.RoleName,Companyname = company.CompanyName }, Request.Url.Scheme)'>Login</a> </button></td>
+            </tr>
+        }
+    }
+</table>

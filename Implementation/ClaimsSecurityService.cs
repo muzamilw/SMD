@@ -25,6 +25,21 @@ namespace SMD.Implementation
         public void AddClaimsToIdentity(UserIdentityModel userIdentity, ClaimsIdentity identity)
         {
             identity.AddClaim(new Claim(SmdClaimTypes.UserTimezoneOffset, userIdentity.TimezoneOffset.ToString()));
+
+          
+        }
+
+
+
+
+        public void AddCompanyIdClaimToIdentity(ClaimsIdentity identity, int CompanyId, string CompanyName)
+        {
+            Claim claim = new Claim(SmdClaimTypes.CompanyId,
+                // ReSharper restore SuggestUseVarKeywordEvident
+                                        ClaimHelper.Serialize(
+                                            new CompanyIdClaimValue { CompanyId = CompanyId, CompanyName = CompanyName }),
+                                        typeof(CompanyIdClaimValue).AssemblyQualifiedName);
+            identity.AddClaim(claim);
         }
         #endregion
     }

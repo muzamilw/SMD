@@ -47,5 +47,7 @@ namespace SMD.Models.DomainModels
         public virtual ICollection<User> Users { get; set; }
         public virtual ICollection<AdCampaignResponse> AdCampaignResponses { get; set; }
 
+        public virtual CompaniesAspNetUser CompaniesAspNetUsers { get; set; }
+
     }
 }

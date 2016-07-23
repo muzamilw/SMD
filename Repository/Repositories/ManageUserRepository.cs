@@ -51,8 +51,19 @@ namespace SMD.Repository.Repositories
             //User user = db.Users.Where(c => c.Id == LoggedInUserIdentity).FirstOrDefault();
 
             
-                return db.vw_CompanyUsers.Where(c => c.CompanyId == CompanyId).ToList();
+                return db.vw_CompanyUsers.Where(c => c.companyid == CompanyId).ToList();
            
+        }
+
+
+        public List<vw_CompanyUsers> GetCompaniesByUserId(string UserId)
+        {
+            var query = from c in db.vw_CompanyUsers
+                      
+                        where c.UserId == UserId
+                        select c;
+
+            return query.ToList();
         }
 
 

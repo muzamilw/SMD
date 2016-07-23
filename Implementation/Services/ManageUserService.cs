@@ -15,15 +15,19 @@ namespace SMD.Implementation.Services
          #region Private
 
         private readonly IManageUserRepository managerUserRepository;
+        private readonly IWebApiUserService userService;
+        private readonly ICompanyService companyService;
 
         #endregion 
         #region Constructor
         /// <summary>
         /// Constructor 
         /// </summary>
-        public ManageUserService(IManageUserRepository managerUserRepository)
+        public ManageUserService(IManageUserRepository managerUserRepository, IWebApiUserService userService, ICompanyService companyService)
         {
             this.managerUserRepository = managerUserRepository;
+            this.userService = userService;
+            this.companyService = companyService;
         }
 
         #endregion
@@ -35,6 +39,35 @@ namespace SMD.Implementation.Services
         public List<vw_CompanyUsers> GetManageUsersList(int CompanyId)
         {
             return managerUserRepository.getManageUsers(CompanyId);
+        }
+
+
+        public List<vw_CompanyUsers> GetCompaniesByUserId(string UserId)
+        {
+            //special case of getting the main company of this user
+            var usr = userService.GetUserByUserId(UserId);
+
+            var company = companyService.GetCompanyById(usr.CompanyId.Value);
+
+            var result = managerUserRepository.GetCompaniesByUserId(UserId);
+
+            //addding the main company to the result.
+            var rec = new vw_CompanyUsers{
+        id = -999,
+        companyid = company.CompanyId,
+        CompanyName = company.CompanyName,
+        CreatedOn = usr.CreatedDateTime.HasValue == true ? usr.CreatedDateTime.Value:DateTime.Now,
+        email = usr.Email,
+        FullName = usr.FullName,
+        RoleName = "Administrator",
+        status = "active",
+        UserId = UserId
+            
+        };
+
+            result.Add(rec);
+
+            return result;
         }
        
         #endregion

@@ -17,6 +17,7 @@ using System.Web.Mvc;
 using SMD.Models.IdentityModels;
 using Microsoft.AspNet.Identity.Owin;
 using ClaimsIdentity = System.Security.Claims.ClaimsIdentity;
+using SMD.Models.DomainModels;
 
 namespace SMD.MIS.Controllers
 {
@@ -32,6 +33,7 @@ namespace SMD.MIS.Controllers
         private readonly IAccountService accountService;
         private readonly ICompanyService companyService;
         private readonly IWebApiUserService userService;
+        private readonly IManageUserService manageUserService;
         /// <summary>
         /// Adds Claims to generated identity
         /// </summary>
@@ -49,16 +51,19 @@ namespace SMD.MIS.Controllers
                     timeZoneOffSetValue = TimeSpan.FromMinutes(offsetMinutes);
                 }
             }
-            //claimsSecurityService.AddClaimsToIdentity(new UserIdentityModel { TimezoneOffset = timeZoneOffSetValue },
-            //    identity);
+            claimsSecurityService.AddClaimsToIdentity(new UserIdentityModel { TimezoneOffset = timeZoneOffSetValue },
+                identity);
             Session["UserTimezoneOffset"] = timeZoneOffSetValue;
         }
+
+
+
         
         #endregion
 
         #region Constructor
 
-        public AccountController(IClaimsSecurityService claimsSecurityService, IEmailManagerService emailManagerService, IAccountService account, ICompanyService companyService, IWebApiUserService userService)
+        public AccountController(IClaimsSecurityService claimsSecurityService, IEmailManagerService emailManagerService, IAccountService account, ICompanyService companyService, IWebApiUserService userService, IManageUserService userManageService)
         {
             if (emailManagerService == null)
             {
@@ -70,6 +75,7 @@ namespace SMD.MIS.Controllers
             this.companyService = companyService;
             this.userService = userService;
             accountService = account;
+            this.manageUserService = userManageService;
         }
 
         #endregion
@@ -147,9 +153,13 @@ namespace SMD.MIS.Controllers
             {
                 case SignInStatus.Success:
                     {
+                        
+
                         SetupUserClaims(identity);
                         AuthenticationManager.SignIn(new AuthenticationProperties { IsPersistent = true }, identity);
-                        return RedirectToLocal(returnUrl);
+                        //return RedirectToLocal(returnUrl);
+
+                        return RedirectToAction("SelectCompany");
                     }
                 case SignInStatus.LockedOut:
                     {
@@ -600,6 +610,47 @@ namespace SMD.MIS.Controllers
 
             return result.Succeeded;
         }
+
+
+         [HttpGet]
+        public ActionResult SelectCompany()
+        {
+
+         
+             
+
+            List<vw_CompanyUsers> comapnies = manageUserService.GetCompaniesByUserId(User.Identity.GetUserId());
+
+            if (comapnies != null && comapnies.Count > 0)
+                return View("SelectCompany", comapnies);
+            else
+            {
+                return RedirectToLocal("");
+            }
+        }
+
+
+         [HttpGet]
+         public async Task<ActionResult> SetCompany(string CompanyId, string Role, string CompanyName)
+         {
+             User user = UserManager.FindById(User.Identity.GetUserId());
+             ClaimsIdentity identity = await user.GenerateUserIdentityAsync(UserManager, DefaultAuthenticationTypes.ApplicationCookie);
+             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
+             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+
+
+             if (identity != null)
+             {
+                 SetupUserClaims(identity);
+                 claimsSecurityService.AddCompanyIdClaimToIdentity(identity, Convert.ToInt32(CompanyId), CompanyName);
+                 AuthenticationManager.SignIn(new AuthenticationProperties { IsPersistent = true }, identity);
+                 return RedirectToLocal("");
+             }
+             else
+             {
+                 return RedirectToLocal("");
+             }
+         }
 
    
 

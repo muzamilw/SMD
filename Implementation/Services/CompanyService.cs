@@ -1,5 +1,6 @@
 ﻿using SMD.Interfaces.Repository;
 using SMD.Interfaces.Services;
+using SMD.Models.DomainModels;
 using SMD.Models.IdentityModels;
 using System;
 using System.Collections.Generic;
@@ -35,9 +36,17 @@ namespace SMD.Implementation.Services
         {
            return companyRepository.GetUserCompany(userId);
         }
+
+
         public bool createUser(string userId,string email, string fullName,string guid,int companyid)
         {
             return companyRepository.createCompany(userId, email, fullName, guid, companyid);
+        }
+
+
+        public Company GetCompanyById(int CompanyId)
+        {
+            return companyRepository.Find(CompanyId);
         }
         #endregion
     }

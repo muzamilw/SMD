@@ -719,6 +719,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_CompanyUsers' does not have a primar
           <Property Name="CreatedOn" Type="datetime" />
           <Property Name="status" Type="varchar" MaxLength="15" />
           <Property Name="companyid" Type="int" />
+          <Property Name="CompanyName" Type="nvarchar(max)" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'SMDDev.dbo.vw_GetUserTransactions' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -1757,7 +1758,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
     [vw_CompanyUsers].[RoleName] AS [RoleName], 
     [vw_CompanyUsers].[CreatedOn] AS [CreatedOn], 
     [vw_CompanyUsers].[status] AS [status], 
-    [vw_CompanyUsers].[companyid] AS [companyid]
+    [vw_CompanyUsers].[companyid] AS [companyid], 
+    [vw_CompanyUsers].[CompanyName] AS [CompanyName]
     FROM [dbo].[vw_CompanyUsers] AS [vw_CompanyUsers]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vw_GetUserTransactions" EntityType="Self.vw_GetUserTransactions" store:Type="Views" store:Schema="dbo">
@@ -4459,6 +4461,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Property Name="CreatedOn" Type="DateTime" Precision="3" />
           <Property Name="status" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="companyid" Type="Int32" />
+          <Property Name="CompanyName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -5430,6 +5433,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <EntitySetMapping Name="vw_CompanyUsers">
             <EntityTypeMapping TypeName="DomainModels.vw_CompanyUsers">
               <MappingFragment StoreEntitySet="vw_CompanyUsers">
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
                 <ScalarProperty Name="companyid" ColumnName="companyid" />
                 <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
