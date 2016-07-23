@@ -31,12 +31,14 @@
 }
 .count_token_opt_cnt {
   float: left;
-  width: 69.7%;
-  /*border: 1px solid #e7ebee !important;
-    border-left: 0px !important;*/
+    width: 42.7%;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #e7ebee;
+    height: 37px;
 }
 #searchCampaignLocations {
-  width: 280px!important;
+  width: 166px !important;
   border-top-left-radius: 0px !important;
   border-top-right-radius: 0px !important;
   border: none;
@@ -131,10 +133,8 @@ div.Tokenize ul.Dropdown {
   width: 286px !important;
 }
 .defaultImgUploadImageBtn {
-  margin-top: 15px;
-  text-align: left;
-  padding-right: 0px;
-  float: left;
+   margin-left:15px;text-align:left;padding-right:0px;float:left;color:rgb(52,152,219) !important;
+    font-weight:bold;
 }
 .mright60 {
   margin-right: 60px;
@@ -293,7 +293,7 @@ i.img {
 }
 ._53gb {
   color: #9197a3;
-  padding: 0 0 0 12px;
+  padding: 0 0 0 0px;
   position: relative;
 }
 ._4bl7,
@@ -377,7 +377,7 @@ ul {
   margin: 5px;
 }
 #coun_token_cnt li {
-  list-style: none;
+  list-style: none;    border-bottom: 1px solid #f3f3f3;    padding-left: 5px;
 }
 #ui-datepicker-div {
   z-index: 999999999 !important;
@@ -480,8 +480,12 @@ ul {
   float: left;
 }
 .count_token_opt_cnt {
-  float: left;
-  width: 69.7%;
+ float: left;
+    width: 42.7%;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #e7ebee;
+    height: 37px;
 }
 .count_token_opt_prof_cnt {
   float: left;
@@ -540,7 +544,7 @@ div.Tokenize ul.Dropdown {
   border-bottom: none;
 }
 #count_edt {
-  border: 1px solid #e7ebee;
+  
   padding-left: 0px;
   padding-right: 0px;
   border-radius: 4px;

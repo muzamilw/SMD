@@ -142,7 +142,8 @@ namespace SMD.MIS.ModelMappers
                 IsShowVoucherSetting = source.IsShowVoucherSetting ?? false,
                 VideoLink2 = source.VideoLink2,
                 CouponType = source.CouponType ?? 1,
-                IsSavedCoupon = source.IsSavedCoupon ?? false
+                IsSavedCoupon = source.IsSavedCoupon ?? false,
+                DeliveryDays = source.DeliveryDays ?? 1
             };
 
 

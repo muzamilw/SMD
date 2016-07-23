@@ -48,7 +48,7 @@ namespace SMD.Models.DomainModels
         public double? AmountSpent { get; set; }
         public int? RewardType { get; set; }
         public string Voucher1Heading { get; set; }
-        public string Voucher1Description { get; set; } 
+        public string Voucher1Description { get; set; }
         public string Voucher1Value { get; set; }
         public string Voucher1ImagePath { get; set; }
         public string Voucher2Heading { get; set; }
@@ -84,6 +84,7 @@ namespace SMD.Models.DomainModels
         public Nullable<bool> IsShowVoucherSetting { get; set; }
         public string VideoLink2 { get; set; }
         public Nullable<bool> IsSavedCoupon { get; set; }
+        public Nullable<int> ChannelType { get; set; }
         public virtual ICollection<AdCampaignResponse> AdCampaignResponses { get; set; }
         public virtual ICollection<AdCampaignTargetCriteria> AdCampaignTargetCriterias { get; set; }
         public virtual ICollection<AdCampaignTargetLocation> AdCampaignTargetLocations { get; set; }
@@ -111,7 +112,7 @@ namespace SMD.Models.DomainModels
         /// </summary>
         public void Clone(AdCampaign target)
         {
-      
+
             target.LanguageId = LanguageId;
             target.UserId = UserId;
             target.SmdCampaign = SmdCampaign;
@@ -166,7 +167,7 @@ namespace SMD.Models.DomainModels
             target.Voucher1Heading = Voucher1Heading;
             target.Voucher1Description = Voucher1Description;
             target.Voucher1Value = Voucher1Value;
-           
+
 
             target.Voucher1ImagePath = Voucher1ImagePath;
             target.Voucher2Heading = Voucher2Heading;
@@ -194,7 +195,7 @@ namespace SMD.Models.DomainModels
             target.CouponType = CouponType;
             target.DeliveryDays = DeliveryDays;
             target.VoucherAdditionalInfo = VoucherAdditionalInfo;
-              
+
         }
     }
 }

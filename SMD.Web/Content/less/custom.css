@@ -1,0 +1,398 @@
+html {
+    height: 100%;
+}
+
+
+
+body {
+    background: #fff;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    /*background: url(../images/patterns/5.png) repeat;*/
+    height: 100%;
+}
+
+.sidenav {
+    width: 100%;
+    margin-left: 0;
+}
+
+.errorMsgText {
+    color: red !important;
+    cursor: pointer !important;
+}
+
+.trial-description {
+    top: 0;
+    position: fixed;
+    left: 42%;
+    z-index: 10000;
+    background-color: white;
+    border-radius: 4px;
+    -webkit-box-shadow: 0px 0px 8px 2px gray;
+    -moz-box-shadow: 0px 0px 8px 2px gray;
+    box-shadow: 0px 0px 8px 2px gray;
+}
+
+.myprintcloud-help {
+    position: fixed;
+    background-color: white;
+    width: 350px;
+    left: 41%;
+    border: 1px solid #dedede;
+    border-radius: 7px;
+    font-family: Arial;
+    z-index: 129000;
+}
+
+
+
+.disabled-div {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    display: block;
+    background-color: black;
+    top: 0;
+    left: 0;
+    z-index: 119000;
+    opacity: 0.8;
+}
+
+.right-arrow {
+    content: "";
+    position: absolute;
+    height: 0;
+    width: 0;
+    right: 104%;
+    top: 35%;
+    border: 24px solid transparent;
+    border-right: 15px solid gray;
+}
+
+.left-arrow {
+    content: "";
+    position: absolute;
+    height: 0;
+    width: 0;
+    left: 104%;
+    top: 35%;
+    border: 24px solid transparent;
+    border-left: 15px solid gray;
+}
+
+.bottom-arrow {
+    content: "";
+    position: absolute;
+    height: 0;
+    width: 0;
+    top: 107%;
+    left: 42%;
+    border: 24px solid transparent;
+    border-top: 15px solid gray;
+}
+
+.top-arrow {
+    content: "";
+    position: absolute;
+    height: 0;
+    width: 0;
+    bottom: 107%;
+    left: 42%;
+    border: 24px solid transparent;
+    border-bottom: 15px solid gray;
+}
+
+.help-divs {
+    border-bottom: 1px solid #dedede;
+}
+
+.help-description {
+    border-bottom: 1px solid #dedede;
+    padding: 10px;
+}
+
+#header {
+    text-align: center;
+}
+
+
+.machineDetailsHeader {
+    border: 1px solid silver;
+    box-shadow: 1px 1px 1px silver;
+}
+
+.col-padding {
+    padding-left: 5px !important;
+    padding-right: 3px !important;
+}
+
+.aligndivs {
+    display: inline;
+    float: left;
+    margin-right: 2px;
+    width: 66px;
+}
+
+.aligndivsFisrt {
+    /*text-align:right;*/
+    width: 230px;
+    display: inline;
+    float: left;
+    margin-right: 40px;
+}
+
+.textboxwidth {
+    width: 66px !important;
+}
+
+.aligndivsCurr {
+    display: inline;
+    float: left;
+    margin-right: 2px;
+    width: 100px;
+}
+
+.marginR10 {
+    margin-right: 10px !important;
+}
+
+.marginR7 {
+    margin-right: 7px !important;
+}
+
+.iconplus {
+    background: url(OperatorIcons.png) -3px -3px no-repeat;
+}
+
+.iconsubtract {
+    background: url(OperatorIcons.png) -25px -4px no-repeat;
+}
+
+.iconmultiply {
+    background: url(OperatorIcons.png) -47px -4px no-repeat;
+}
+
+.icondivide {
+    background: url(OperatorIcons.png) -71px -3px no-repeat;
+}
+
+.iconif {
+    background: url(OperatorIcons.png) -94px -4px no-repeat;
+}
+
+.iconifelse {
+    background: url(OperatorIcons.png) -117px -4px no-repeat;
+}
+
+.iconmode {
+    background: url(OperatorIcons.png) -181px -4px no-repeat;
+}
+
+.iconpercent {
+    background: url(OperatorIcons.png) -224px -4px no-repeat;
+}
+
+.iconstartbrace {
+    background: url(OperatorIcons.png) -247px -4px no-repeat;
+}
+
+.iconendbrace {
+    background: url(OperatorIcons.png) -271px -4px no-repeat;
+}
+
+.iconFormulaCost {
+    height: 21px;
+    width: 23px;
+    margin: 6px 0 0 5px;
+    cursor: pointer;
+}
+
+.dashboardcounters23 {
+    font-size: 23px;
+    font-weight: 600;
+}
+
+.font24px {
+    font-size: 24px;
+}
+
+.selectedReport {
+    background: none repeat scroll 0 0 #E5E5ED !important;
+}
+
+
+
+.ThoumbnailCostCenter {
+    color: lightgray;
+    font-size: 0.875em;
+    margin-top: 43px;
+}
+
+.selectedRow {
+    background: none repeat scroll 0 0 #E5E5ED !important;
+}
+
+a.reportAnchor a:hover {
+    text-decoration: underline;
+}
+
+
+.height60 {
+    height: 60px;
+}
+
+.btn-yellow {
+    background-color: #ffdd0c;
+    border-color: #FFD400;
+    color: #FFFFFF;
+}
+
+    .btn-yellow:hover, .btn-yellow:focus, .btn-yellow:active, .btn-yellow.active, .open .dropdown-toggle.btn-yellow {
+        background-color: #FF7F00;
+        color: #FFFFFF;
+    }
+
+.bigcheckbox {
+    float: left;
+    margin: 0px !important;
+    width: 20px;
+    height: 20px;
+}
+
+.notes {
+    background-color: #FCFBB6;
+}
+
+
+.imgtext {
+    position: absolute;
+    top: 61px;
+    left: 1px;
+    background: transparent;
+    border: none;
+    width: 120px;
+}
+
+.margintop10 {
+    margin-top: 10px;
+}
+
+.signaturemodify {
+    margin-left: 15px;
+    bottom: 20px;
+    position: absolute;
+}
+
+.group-header-Shortdescription {
+    padding-left: 8px;
+    font-size: 0.8em;
+    margin-top: -5px;
+    margin-bottom: 20px;
+}
+.box-shadow-all {
+    box-shadow: 0 0 5px #CCCCCC !important;
+}
+.jobdescription{
+    width:75%;float:left;height:34px
+}
+.marginR5 {margin-right: 5px!important ;}
+.marginR10{margin-right: 10px!important ;}
+.marginT5 {margin-top:5px!important;}
+.marginT10{margin-top:10px!important;}
+.marginB5 {margin-bottom: 5px;}
+.marginB10 {margin-bottom: 10px;}
+.marginL5 {margin-left: 5px;}
+.marginL10 {margin-left: 10px;}
+.margin10 {margin: 10px;}
+
+.addressbox{
+    border: 1px solid rgb(238, 238, 238)!important;
+    padding: 35px!important;
+    margin-bottom: 24px!important;
+}
+.redcolor{
+    color:red;
+}
+.bluecolor{
+    color:blue;
+}
+.sectionmultiplier {
+    bottom: 63px;
+    margin-left: 10%;
+    position: absolute;
+}
+.sectionmultiplierindex {
+    bottom: 43px;
+    margin-left: 10%;
+    position: absolute;
+}
+.bold {
+    font-weight:bold;
+}
+.removeMenuMargin {
+    margin-left:0px !important;
+}
+.displayNone{
+    display:none !important;
+}
+.fc-state-lbl {
+        border: 1px solid #e1e1e1;
+    box-shadow: none;
+    color: #3498db;
+    padding: 4px 14px;
+    height: auto;
+
+}
+.socialCampaignLeft {
+        display: inline-block;
+    float: left;
+    font-size:11px;
+}
+.socialCampaignRight {
+        display: inline-block;
+    float: right;
+    font-size:11px;
+}
+.font10 {
+    font-size:10px !important;
+        margin-left: 5px;
+}
+.social-box .social-count {
+    clear: both;
+}
+.font19 {
+    font-size:19px;
+}
+.font20 {
+    font-size:20px;
+}
+.inlineMenuItem{
+       padding-left: 10px;
+    font-size: 12px;
+}
+.btnAdsCampaign{
+ 
+    width:50%;
+    height:40px;
+    margin-bottom:10px;
+    white-space:normal;
+}
+.defaultThemeTxtClr {
+        color: rgb(52,152,219) !important;
+   
+}
+.adsubHeading {
+        font-size: 20px;
+    margin-bottom: 20px;
+    font-style: italic;
+}
+.gtild-color {
+        border-color: rgb(16,179,148) !important;    background-color: rgb(45,217,184) !important;    padding: 6px 20px !important;
+}
+.crossbtn {
+    background: none;
+    border: none;
+    font-size: 31px;
+    color: white;
+}
