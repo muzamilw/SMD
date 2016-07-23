@@ -20,5 +20,8 @@ namespace SMD.Interfaces.Repository
         string getCompanyName(out string UserName, out int companyid);
         string getCompanyName(out string UserName,  int companyid);
         User GetByUserId(string userId);
+
+
+        List<vw_CompanyUsers> GetCompaniesByUserId(string UserId);
     }
 }

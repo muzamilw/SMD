@@ -117,7 +117,7 @@
         <AssociationConnector Association="DomainModels.FK_CompaniesAspNetUsers_AspNetRoles" />
         <AssociationConnector Association="DomainModels.FK_CompaniesAspNetUsers_AspNetUsers" />
         <AssociationConnector Association="DomainModels.FK_CompaniesAspNetUsers_Company" />
-        <EntityTypeShape EntityType="DomainModels.vw_CompanyUsers" Width="1.5" PointX="16.375" PointY="9.875" />
+        <EntityTypeShape EntityType="DomainModels.vw_CompanyUsers" Width="2.875" PointX="17.875" PointY="9.875" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

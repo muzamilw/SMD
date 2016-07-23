@@ -186,15 +186,26 @@
     var ManageUsers = function (source) {
         var self
         if (source != undefined) {
+            id = ko.observable(source.id),
             UserId = ko.observable(source.UserId),
-            Name = ko.observable(source.Name),
-            Role = ko.observable(source.Role)
+            email = ko.observable(source.email),
+            status = ko.observable(source.status),
+            FullName = ko.observable(source.FullName),
+            RoleName = ko.observable(source.RoleName),
+            CreatedOn = ko.observable(source.CreatedOn),
+            companyid = ko.observable(source.companyid)
+
            
 
         } else {
+            id = ko.observable(),
             UserId = ko.observable(),
-            Name = ko.observable(),
-           Role = ko.observable()
+            email = ko.observable(),
+           status = ko.observable(),
+            FullName = ko.observable(),
+            RoleName = ko.observable(),
+            CreatedOn = ko.observable(),
+            companyid = ko.observable()
         
         }
 

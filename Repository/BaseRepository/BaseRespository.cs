@@ -10,6 +10,8 @@ using System.Web;
 using Microsoft.AspNet.Identity;
 using Microsoft.Practices.Unity;
 using SMD.Interfaces.Repository;
+using SMD.Models.Common;
+using SMD.Common;
 
 namespace SMD.Repository.BaseRepository
 {
@@ -151,6 +153,26 @@ namespace SMD.Repository.BaseRepository
             get
             {
                 return HttpContext.Current.User.Identity.GetUserId();
+            }
+        }
+
+
+        public int CompanyId
+        {
+            get
+            {
+                IEnumerable<CompanyIdClaimValue> companyClaimValues = ClaimHelper.GetClaimsByType<CompanyIdClaimValue>(SmdClaimTypes.CompanyId);
+                return companyClaimValues != null && companyClaimValues.Any() ? companyClaimValues.ElementAt(0).CompanyId : 0;
+            }
+        }
+
+
+        public string CompanyName
+        {
+            get
+            {
+                IEnumerable<CompanyIdClaimValue> companyClaimValues = ClaimHelper.GetClaimsByType<CompanyIdClaimValue>(SmdClaimTypes.CompanyId);
+                return companyClaimValues != null && companyClaimValues.Any() ? companyClaimValues.ElementAt(0).CompanyName : "";
             }
         }
 

@@ -1,6 +1,17 @@
-﻿@{ 
+﻿@using SMD.Models.Common
+@using SMD.Common
+
+@{ 
+    
+    
     string classes = "";
     string classesMenu = "";
+
+
+    IEnumerable<CompanyIdClaimValue> companyClaimValues = ClaimHelper.GetClaimsByType<CompanyIdClaimValue>(SmdClaimTypes.CompanyId);
+    string CompanyName = companyClaimValues!= null && companyClaimValues.Any() ? companyClaimValues.ElementAt(0).CompanyName : "Claim not found";
+    
+    
 }
 <!DOCTYPE html>
 <html>
@@ -81,8 +92,11 @@
 
                 <div class="nav-no-collapse pull-right" id="header-nav" style="margin-top:23px;">
 
+                    <div class="pull-left">Managing @CompanyName</div>
 
                     <ul class="nav navbar-nav pull-right">
+
+                        <!-- MPC Admin Menu-->
                         <li class="dropdown profile-dropdown @classesMenu" >
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <span class="hidden-xs"> Admin Options  </span> <b class="caret"></b>
@@ -107,6 +121,7 @@
                                 <li><a href="~/Report/Report/TransactionReport">Cash4Ads Transaction Report</a></li>
                             </ul>
                         </li>
+                        <!-- Normal Menu-->
                         <li class="dropdown profile-dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <span class="hidden-xs">

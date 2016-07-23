@@ -113,12 +113,20 @@ namespace SMD.Repository.Repositories
         /// </summary>
         public IEnumerable<AdCampaign> SearchCampaign(AdCampaignSearchRequest request, out int rowCount)
         {
+
+            
+
+
             bool isAdmin = false;
             var users = db.Users.Where(g => g.Id == LoggedInUserIdentity).SingleOrDefault();
             if (users.Roles.FirstOrDefault().Name == Roles.Adminstrator)
                 isAdmin = true;
             if (request == null)
             {
+
+
+             
+                
                 const int fromRow = 0;
                 const int toRow = 10;
                 rowCount = DbSet.Where(c => c.Type != 5).Count();

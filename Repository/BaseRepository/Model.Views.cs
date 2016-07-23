@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets5BC9EBB26965E6BDA5833DB24A487F887C62CA4D0113F3AC70BE6A71075C3DDC))]
+[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets0CE7CB82E9DDCD8A5E5E904279005E7680FA293D2C659064C9D79AE695CC44A1))]
 
 namespace Edm_EntityMappingGeneratedViews
 {
@@ -17,18 +17,18 @@ namespace Edm_EntityMappingGeneratedViews
     /// <Summary>
     /// The type contains views for EntitySets and AssociationSets that were generated at design time.
     /// </Summary>
-    public sealed class ViewsForBaseEntitySets5BC9EBB26965E6BDA5833DB24A487F887C62CA4D0113F3AC70BE6A71075C3DDC : System.Data.Mapping.EntityViewContainer
+    public sealed class ViewsForBaseEntitySets0CE7CB82E9DDCD8A5E5E904279005E7680FA293D2C659064C9D79AE695CC44A1 : System.Data.Mapping.EntityViewContainer
     {
         
         /// <Summary>
         /// The constructor stores the views for the extents and also the hash values generated based on the metadata and mapping closure and views.
         /// </Summary>
-        public ViewsForBaseEntitySets5BC9EBB26965E6BDA5833DB24A487F887C62CA4D0113F3AC70BE6A71075C3DDC()
+        public ViewsForBaseEntitySets0CE7CB82E9DDCD8A5E5E904279005E7680FA293D2C659064C9D79AE695CC44A1()
         {
             this.EdmEntityContainerName = "BaseDbContext";
             this.StoreEntityContainerName = "SMDModelStoreContainer";
-            this.HashOverMappingClosure = "ca4701bd8a316ff1045cd26a3eaedc99f37d0a67734faf2b27408c12014672e3";
-            this.HashOverAllExtentViews = "da0ec7507b92f2d9023a4ace0cc6b545e02399bdd293fe07cd3a676359812d22";
+            this.HashOverMappingClosure = "73a1056973538eed4a906ac5919415df630a28acb460aa9144fbd1cda79e024a";
+            this.HashOverAllExtentViews = "16006817e47314375fa0c0ba4cffe5fa35f2b8680ac648eb1a2effca307f89df";
             this.ViewCount = 90;
         }
         
@@ -2717,7 +2717,7 @@ namespace Edm_EntityMappingGeneratedViews
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.vw_CompanyUsers", @"
     SELECT VALUE -- Constructing vw_CompanyUsers
-        [SMDModel.Store.vw_CompanyUsers](T1.[vw_CompanyUsers.id], T1.[vw_CompanyUsers.UserId], T1.[vw_CompanyUsers.email], T1.[vw_CompanyUsers.FullName], T1.[vw_CompanyUsers.RoleName], T1.[vw_CompanyUsers.CreatedOn], T1.[vw_CompanyUsers.status], T1.[vw_CompanyUsers.companyid])
+        [SMDModel.Store.vw_CompanyUsers](T1.[vw_CompanyUsers.id], T1.[vw_CompanyUsers.UserId], T1.[vw_CompanyUsers.email], T1.[vw_CompanyUsers.FullName], T1.[vw_CompanyUsers.RoleName], T1.[vw_CompanyUsers.CreatedOn], T1.[vw_CompanyUsers.status], T1.[vw_CompanyUsers.companyid], T1.[vw_CompanyUsers.CompanyName])
     FROM (
         SELECT 
             T.id AS [vw_CompanyUsers.id], 
@@ -2728,6 +2728,7 @@ namespace Edm_EntityMappingGeneratedViews
             T.CreatedOn AS [vw_CompanyUsers.CreatedOn], 
             T.status AS [vw_CompanyUsers.status], 
             T.companyid AS [vw_CompanyUsers.companyid], 
+            T.CompanyName AS [vw_CompanyUsers.CompanyName], 
             True AS _from0
         FROM BaseDbContext.vw_CompanyUsers AS T
     ) AS T1");
@@ -2740,7 +2741,7 @@ namespace Edm_EntityMappingGeneratedViews
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.vw_CompanyUsers", @"
     SELECT VALUE -- Constructing vw_CompanyUsers
-        [DomainModels.vw_CompanyUsers](T1.[vw_CompanyUsers.id], T1.[vw_CompanyUsers.UserId], T1.[vw_CompanyUsers.email], T1.[vw_CompanyUsers.FullName], T1.[vw_CompanyUsers.RoleName], T1.[vw_CompanyUsers.CreatedOn], T1.[vw_CompanyUsers.status], T1.[vw_CompanyUsers.companyid])
+        [DomainModels.vw_CompanyUsers](T1.[vw_CompanyUsers.id], T1.[vw_CompanyUsers.UserId], T1.[vw_CompanyUsers.email], T1.[vw_CompanyUsers.FullName], T1.[vw_CompanyUsers.RoleName], T1.[vw_CompanyUsers.CreatedOn], T1.[vw_CompanyUsers.status], T1.[vw_CompanyUsers.companyid], T1.[vw_CompanyUsers.CompanyName])
     FROM (
         SELECT 
             T.id AS [vw_CompanyUsers.id], 
@@ -2751,6 +2752,7 @@ namespace Edm_EntityMappingGeneratedViews
             T.CreatedOn AS [vw_CompanyUsers.CreatedOn], 
             T.status AS [vw_CompanyUsers.status], 
             T.companyid AS [vw_CompanyUsers.companyid], 
+            T.CompanyName AS [vw_CompanyUsers.CompanyName], 
             True AS _from0
         FROM SMDModelStoreContainer.vw_CompanyUsers AS T
     ) AS T1");

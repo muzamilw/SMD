@@ -7,9 +7,13 @@ namespace SMD.MIS.Areas.Api.Models
 {
     public class ManageUserRolesModel
     {
+        public long Id { get; set; }
         public string UserId { get; set; }
-        public string Name { get; set; }
+        public string email { get; set; }
+        public string FullName { get; set; }
+        public string RoleName { get; set; }
 
-        public string Role { get; set; }
+        public DateTime CreatedOn { get; set; }
+        public string status { get; set; }
     }
 }

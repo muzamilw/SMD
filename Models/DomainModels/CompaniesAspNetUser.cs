@@ -17,7 +17,7 @@ namespace SMD.Models.DomainModels
         public string UserId { get; set; }
 
         public DateTime CreatedOn { get; set; }
-        public long Status { get; set; }
+        public int Status { get; set; }
 
 
         public string InvitationCode { get; set; }

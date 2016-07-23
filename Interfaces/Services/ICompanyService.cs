@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SMD.Models.DomainModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,5 +11,7 @@ namespace SMD.Interfaces.Services
     {
         int GetUserCompany(string userId);
         bool createUser(string userId, string email, string fullName, string guid,int companyid);
+
+        Company GetCompanyById(int CompanyId);
     }
 }
