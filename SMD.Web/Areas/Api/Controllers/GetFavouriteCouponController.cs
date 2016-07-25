@@ -1,6 +1,7 @@
 ﻿using SMD.Interfaces.Services;
 using SMD.MIS.Areas.Api.Models;
 using SMD.Models.DomainModels;
+using SMD.Models.ResponseModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,6 +53,31 @@ namespace SMD.MIS.Areas.Api.Controllers
             }
 
             return response;
+        }
+
+
+        public BaseApiResponse Post(string UserId, long CouponId, bool mode)
+        {
+            if (string.IsNullOrEmpty(UserId))
+            {
+                throw new HttpException((int)HttpStatusCode.BadRequest, "Invalid Request");
+            }
+            var response = new BaseApiResponse { Message = "Success", Status = true };
+            var result = false;
+
+            try
+            {
+                result = _advertService.SetFavoriteCoupon(UserId, CouponId, mode);
+            }
+            catch (Exception e)
+            {
+
+                response.Status = false;
+                response.Message = e.Message;
+            }
+
+            return response;
+
         }
         #endregion
     }
