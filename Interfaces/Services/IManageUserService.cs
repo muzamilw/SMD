@@ -10,7 +10,7 @@ namespace SMD.Interfaces.Services
 {
     public interface IManageUserService
     {
-        List<vw_CompanyUsers> GetManageUsersList(int CompanyId);
+        List<vw_CompanyUsers> GetManageUsersList();
 
         List<vw_CompanyUsers> GetCompaniesByUserId(string UserId);
     }

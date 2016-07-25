@@ -11,7 +11,7 @@ namespace SMD.Interfaces.Repository
 {
     public interface IManageUserRepository : IBaseRepository<User, int>
     {
-        List<vw_CompanyUsers> getManageUsers(int CompanyId);
+        List<vw_CompanyUsers> getManageUsers();
 
         List<Role> getUserRoles();
 

@@ -36,9 +36,9 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// List of Country's Cities
         /// </summary>
-        public List<vw_CompanyUsers> GetManageUsersList(int CompanyId)
+        public List<vw_CompanyUsers> GetManageUsersList()
         {
-            return managerUserRepository.getManageUsers(CompanyId);
+            return managerUserRepository.getManageUsers();
         }
 
 

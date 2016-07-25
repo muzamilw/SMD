@@ -326,7 +326,8 @@ namespace SMD.Implementation.Services
         public void CreateCampaign(AdCampaign campaignModel)
         {
             campaignModel.UserId = _adCampaignRepository.LoggedInUserIdentity;
-            campaignModel.CompanyId = companyRepository.GetUserCompany(_adCampaignRepository.LoggedInUserIdentity);
+            campaignModel.CompanyId = _adCampaignRepository.CompanyId;
+            //campaignModel.CompanyId = companyRepository.GetUserCompany(_adCampaignRepository.LoggedInUserIdentity);
             var user = UserManager.Users.Where(g => g.Id == _adCampaignRepository.LoggedInUserIdentity).SingleOrDefault();
             if (user != null)
                 campaignModel.CreatedBy = user.FullName;

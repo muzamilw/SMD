@@ -254,6 +254,19 @@ define("user/user.viewModel",
                     },
 
 
+                    //remove user from management screen
+                    onRemoveUser = function (item) {
+
+                        //selectedUserId(item.UserId);
+                        //window.location.href = "/User/ManageUser/Index?user=" + item.UserId;
+
+                        alert(item.cid);
+
+                    },
+
+                       
+
+
 
                        onEditUser = function (item) {
                           
@@ -377,7 +390,8 @@ define("user/user.viewModel",
                     ChangePasswordOk: ChangePasswordOk,
                     InviteUser: InviteUser,
                     Invite: Invite,
-                    InviteEmail: InviteEmail
+                    InviteEmail: InviteEmail,
+                    onRemoveUser: onRemoveUser
                 };
             })()
         };

@@ -621,8 +621,13 @@ namespace SMD.MIS.Controllers
 
             List<vw_CompanyUsers> comapnies = manageUserService.GetCompaniesByUserId(User.Identity.GetUserId());
 
-            if (comapnies != null && comapnies.Count > 0)
+            if (comapnies != null && comapnies.Count > 1)
                 return View("SelectCompany", comapnies);
+            else if  (comapnies != null && comapnies.Count == 1)
+            {
+                var company = comapnies.First();
+                return RedirectToAction("SetCompany", "Account", "CompanyId=" + company.companyid + "&Role=" + company.RoleName + "&CompanyName=" + company.CompanyName);
+            }
             else
             {
                 return RedirectToLocal("");
