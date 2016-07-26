@@ -66,56 +66,46 @@ else
                         <div class="main-box" style="padding: 20px;">
                             <div class="col-lg-11" style="margin:auto;float:none !important">
                                 <div class="pull-left ads-numbering-main">
-                                    <div class="ads-numbering-box" data-bind="css: $root.previewScreenNumber() >= 1 ? 'ads-selected-numbering-box' : ''">
+                                    <div class="ads-numbering-box" data-bind="css: $root.previewScreenNumber() == 1 ? 'ads-selected-numbering-box' : '',click: $root.gotoScreen.bind(null,1)">
                                         1
                                     </div>
 
                                     <br />
-                                    <span data-bind="css: $root.previewScreenNumber() >= 1 ? 'ads-selected-numbering-text' : ''">Upload Video</span>
+                                    <span data-bind="css: $root.previewScreenNumber() == 1 ? 'ads-selected-numbering-text' : ''">Upload Video</span>
                                 </div>
-                                <div style="display:none;" class="pull-left ads-numbering-linebar" data-bind="css: $root.previewScreenNumber() >= 2 ? 'ads-selected-numbering-box' : ''">
+                                <div class="pull-left ads-numbering-linebar" data-bind="css: $root.previewScreenNumber() == 6 ? 'ads-selected-numbering-box' : ''">
 
+                              
                                 </div>
-                                <div class="pull-left ads-numbering-main" style="display:none;">
-                                    <div class="ads-numbering-box" data-bind="css: $root.previewScreenNumber() >= 2 ? 'ads-selected-numbering-box' : ''">
+                                <div class="pull-left ads-numbering-main">
+                                    <div class="ads-numbering-box" data-bind="css: $root.previewScreenNumber() == 2 ? 'ads-selected-numbering-box' : '',click: $root.gotoScreen.bind(null,2)">
                                         2
                                     </div>
 
                                     <br />
-                                    <span data-bind="css: $root.previewScreenNumber() >= 2 ? 'ads-selected-numbering-text' : ''">Free Banner</span>
+                                    <span data-bind="css: $root.previewScreenNumber() == 2 ? 'ads-selected-numbering-text' : ''">Target Audience</span>
                                 </div>
-                                <div class="pull-left ads-numbering-linebar" data-bind="css: $root.previewScreenNumber() >= 3 ? 'ads-selected-numbering-box' : ''">
+                                <div class="pull-left ads-numbering-linebar" data-bind="css: $root.previewScreenNumber() == 6 ? 'ads-selected-numbering-box' : ''">
 
                                 </div>
                                 <div class="pull-left ads-numbering-main">
-                                    <div class="ads-numbering-box" data-bind="css: $root.previewScreenNumber() >= 2 ? 'ads-selected-numbering-box' : ''">
-                                        2
-                                    </div>
-
-                                    <br />
-                                    <span data-bind="css: $root.previewScreenNumber() >= 2 ? 'ads-selected-numbering-text' : ''">Target Audience</span>
-                                </div>
-                                <div class="pull-left ads-numbering-linebar" data-bind="css: $root.previewScreenNumber() >= 4 ? 'ads-selected-numbering-box' : ''">
-
-                                </div>
-                                <div class="pull-left ads-numbering-main">
-                                    <div class="ads-numbering-box" data-bind="css: $root.previewScreenNumber() >= 3 ? 'ads-selected-numbering-box' : ''">
+                                    <div class="ads-numbering-box" data-bind="css: $root.previewScreenNumber() == 3 ? 'ads-selected-numbering-box' : '',click: $root.gotoScreen.bind(null,3)">
                                         3
                                     </div>
 
                                     <br />
-                                    <span data-bind="css: $root.previewScreenNumber() >= 3  ? 'ads-selected-numbering-text' : ''">Quiz Question</span>
+                                    <span data-bind="css: $root.previewScreenNumber() == 3  ? 'ads-selected-numbering-text' : ''">Quiz Question</span>
                                 </div>
-                                <div class="pull-left ads-numbering-linebar" data-bind="css: $root.previewScreenNumber() >= 5 ? 'ads-selected-numbering-box' : ''">
+                                <div class="pull-left ads-numbering-linebar" data-bind="css: $root.previewScreenNumber() == 6 ? 'ads-selected-numbering-box' : ''">
 
                                 </div>
                                 <div class="pull-left ads-numbering-main">
-                                    <div class="ads-numbering-box" data-bind="css: $root.previewScreenNumber() >= 4 ? 'ads-selected-numbering-box' : ''">
+                                    <div class="ads-numbering-box" data-bind="css: $root.previewScreenNumber() == 4 ? 'ads-selected-numbering-box' : '',click: $root.gotoScreen.bind(null,4)">
                                         4
                                     </div>
 
                                     <br />
-                                    <span data-bind="css: $root.previewScreenNumber() >= 4 ? 'ads-selected-numbering-text' : ''">Delivery Mode</span>
+                                    <span data-bind="css: $root.previewScreenNumber() == 4 ? 'ads-selected-numbering-text' : ''">Delivery Mode</span>
                                 </div>
                                 <div class="pull-left" style="width: 245px;">
                                     &nbsp;
@@ -2342,13 +2332,13 @@ else
             </div>
             <div class="row" style="margin-top:15px;">
                 <div class="col-lg-4">
-                    <button class="btn  btn-success btnAdsCampaign ButtonWidth" id="btnSubmitForApproval" data-bind="click:$root.openEditScreen(4)">Game Banner Ad</button>
+                    <button class="btn  btn-success btnAdsCampaign ButtonWidth" id="btnSubmitForApproval" data-bind="click:$root.openEditScreen.bind(4)">Game Banner Ad</button>
                 </div>
                 <div class="col-lg-4">
-                    <button class="btn  btn-success btnAdsCampaign ButtonWidth flyerButtonStyle" id="btnSubmitForApproval" data-bind="click:$root.openEditScreen(2)">Flyers / Leaflet Ad</button>
+                    <button class="btn  btn-success btnAdsCampaign ButtonWidth flyerButtonStyle" id="btnSubmitForApproval" data-bind="click:$root.openEditScreen.bind(2)">Flyers / Leaflet Ad</button>
                 </div>
                 <div class="col-lg-4">
-                    <button class="btn  btn-danger btnAdsCampaign ButtonWidth" id="btnSubmitForApproval" data-bind="click:$root.openEditScreen(1)">YouTube Video Ad</button>
+                    <button class="btn  btn-danger btnAdsCampaign ButtonWidth" id="btnSubmitForApproval" data-bind="click:$root.openEditScreen.bind(1)">YouTube Video Ad</button>
                 </div>
             </div>
             <div class="row" style="margin-top:15px;">

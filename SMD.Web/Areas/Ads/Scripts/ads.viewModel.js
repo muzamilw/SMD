@@ -238,7 +238,7 @@ define("ads/ads.viewModel",
                 },
                 // Add new Profile Question
                 addNewCampaign = function () {
-
+               
                     //if (isDisplayCouponsAds() == false) {
                     //    isWelcomeScreenVisible(true);
                     //} else {
@@ -1471,6 +1471,7 @@ define("ads/ads.viewModel",
                     }
                     
                 },
+                
                  backScreen = function () {
                      console.log(previewScreenNumber());
                      if (previewScreenNumber() > 1) {
@@ -2170,6 +2171,12 @@ define("ads/ads.viewModel",
                 showCouponGenerationWarning = function () {
                     toastr.warning("Please first save the coupon.");
                 },
+                 gotoScreen = function (number) {
+                     //  toastr.error("Validation.");
+                     debugger;
+                     previewScreenNumber(number);
+
+                 },
                 // Initialize the view model
                 initialize = function (specifiedView) {
                     view = specifiedView;
@@ -2329,6 +2336,7 @@ define("ads/ads.viewModel",
                     showCouponGenerationWarning: showCouponGenerationWarning,
                     previewScreenNumber: previewScreenNumber,
                     nextPreviewScreen: nextPreviewScreen,
+                    gotoScreen:gotoScreen,
                     backScreen: backScreen,
                     CurrPage: CurrPage,
                     MaxPage: MaxPage
