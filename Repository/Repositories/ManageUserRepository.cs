@@ -67,35 +67,38 @@ namespace SMD.Repository.Repositories
         }
 
 
-        public List<Role> getUserRoles()
-        {
-            List<Role> roles = new List<Role>();
+        //public List<Role> getUserRoles()
+        //{
 
-            Role role1 = new Role();
-            role1.Id = "useradmin";
-            role1.Name = "User Administrator";
+            
 
+        //    List<Role> roles = new List<Role>();
 
-            Role role2 = new Role();
-            role2.Id = "userapprovers";
-            role2.Name = "User Approvers";
-
-            Role role3 = new Role();
-            role3.Id = "usereditors";
-            role3.Name = "User Editor";
+        //    Role role1 = new Role();
+        //    role1.Id = "useradmin";
+        //    role1.Name = "User Administrator";
 
 
-            Role role4 = new Role();
-            role4.Id = "usermarketing";
-            role4.Name = "User Marketing";
+        //    Role role2 = new Role();
+        //    role2.Id = "userapprovers";
+        //    role2.Name = "User Approvers";
 
-            roles.Add(role1);
-            roles.Add(role2);
-            roles.Add(role3);
-            roles.Add(role4);
+        //    Role role3 = new Role();
+        //    role3.Id = "usereditors";
+        //    role3.Name = "User Editor";
 
-            return roles;
-        }
+
+        //    Role role4 = new Role();
+        //    role4.Id = "usermarketing";
+        //    role4.Name = "User Marketing";
+
+        //    roles.Add(role1);
+        //    roles.Add(role2);
+        //    roles.Add(role3);
+        //    roles.Add(role4);
+
+        //    return roles;
+        //}
 
         public void UpdateRoles(string Id, UpdateUserProfileRequest SourceUser)
         {
@@ -164,5 +167,7 @@ namespace SMD.Repository.Repositories
             var user = db.Users.Where(g => g.Id == userId).SingleOrDefault();
             return user;
         }
+
+
     }
 }

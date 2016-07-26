@@ -17,17 +17,21 @@ namespace SMD.Implementation.Services
         private readonly IManageUserRepository managerUserRepository;
         private readonly IWebApiUserService userService;
         private readonly ICompanyService companyService;
+        private readonly ICompanyAspNetUsersRepository companyAspNetUsersRepository;
+        private IEmailManagerService emailManagerService;
 
         #endregion 
         #region Constructor
         /// <summary>
         /// Constructor 
         /// </summary>
-        public ManageUserService(IManageUserRepository managerUserRepository, IWebApiUserService userService, ICompanyService companyService)
+        public ManageUserService(IManageUserRepository managerUserRepository, IWebApiUserService userService, ICompanyService companyService, ICompanyAspNetUsersRepository companyAspNetUsersRepository, IEmailManagerService emailManagerService)
         {
             this.managerUserRepository = managerUserRepository;
             this.userService = userService;
             this.companyService = companyService;
+            this.companyAspNetUsersRepository = companyAspNetUsersRepository;
+            this.emailManagerService = emailManagerService;
         }
 
         #endregion
@@ -69,7 +73,63 @@ namespace SMD.Implementation.Services
 
             return result;
         }
-       
+
+
+        public bool RemoveManagedUser(string id)
+        {
+            return companyAspNetUsersRepository.RemoveManagedUser(id);
+        }
+
+
+
+        public vw_CompanyUsers ComanyUserExists(string email)
+        {
+            return companyAspNetUsersRepository.CompanyUserExists(email);
+        }
+
+
+        public CompaniesAspNetUser AddUserInvitation(string email, string RoleId)
+        {
+
+            var user = userService.GetUserByEmail(email);
+
+            var invitteuser = new CompaniesAspNetUser { CompanyId = companyAspNetUsersRepository.CompanyId, CreatedOn = DateTime.Now, InvitationCode= Guid.NewGuid().ToString(), RoleId = RoleId, Status = 1};
+
+            if ( user != null)
+            {
+                invitteuser.UserId = user.Id;
+                
+            }
+            else
+            {
+                invitteuser.InvitationEmail =  email;
+            }
+
+            companyAspNetUsersRepository.Add(invitteuser);
+            companyAspNetUsersRepository.SaveChanges();
+
+
+
+            if ( user != null)
+            {
+                //send simple email with acceptance link
+                emailManagerService.SendEmailToInviteUser(email, invitteuser.InvitationCode,true,invitteuser.AspNetRole.Name);
+            }
+            else
+            {
+
+                //send email with acceptance link on registration page.
+                emailManagerService.SendEmailToInviteUser(email, invitteuser.InvitationCode, false, invitteuser.AspNetRole.Name);
+            }
+            return invitteuser;
+
+        }
+
+
+        //public bool AcceptInvitation(string invitationcode)
+        //{
+        //    rer
+        //}
         #endregion
     }
 }

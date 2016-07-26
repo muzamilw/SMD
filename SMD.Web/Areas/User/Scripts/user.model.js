@@ -186,7 +186,7 @@
     var ManageUsers = function (source) {
         var self
         if (source != undefined) {
-            id = ko.observable(source.id),
+            id = ko.observable(source.Id),
             UserId = ko.observable(source.UserId),
             email = ko.observable(source.email),
             Status = ko.observable(source.status),

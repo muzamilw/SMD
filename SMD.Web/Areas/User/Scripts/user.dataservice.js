@@ -55,6 +55,12 @@ define("user/user.dataservice", function () {
                         dataType: 'json',
                         type: 'POST'
                     });
+                    // remove User
+                    amplify.request.define('removeUser', 'ajax', {
+                        url: '/Api/Manageusers',
+                        dataType: 'json',
+                        type: 'DELETE'
+                    });
                     isInitialized = true;
                 }
             },
@@ -121,7 +127,17 @@ define("user/user.dataservice", function () {
                     error: callbacks.error,
                     data: params
                 });
-        },
+       },
+        // remove user
+       removeUser = function (params, callbacks) {
+           initialize();
+           return amplify.request({
+               resourceId: 'removeUser',
+               success: callbacks.success,
+               error: callbacks.error,
+               data: params
+           });
+       },
              // Get Cities
         getCitiesByCountry = function (params, callbacks) {
             initialize();
@@ -142,7 +158,8 @@ define("user/user.dataservice", function () {
             getUserProfile: getUserProfile,
             saveUserProfile: saveUserProfile,
             getCitiesByCountry: getCitiesByCountry,
-            inviteUser: inviteUser
+            inviteUser: inviteUser,
+            removeUser: removeUser
         };
     })();
     return dataService;

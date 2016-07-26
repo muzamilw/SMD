@@ -13,7 +13,7 @@ namespace SMD.Interfaces.Repository
     {
         List<vw_CompanyUsers> getManageUsers();
 
-        List<Role> getUserRoles();
+        //List<Role> getUserRoles();
 
         void UpdateRoles(string Id, UpdateUserProfileRequest SourceUser);
 

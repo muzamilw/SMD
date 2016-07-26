@@ -41,7 +41,7 @@ namespace SMD.Repository.Repositories
 
         public CompaniesAspNetUser Find(int id)
         {
-            throw new NotImplementedException();
+            return db.CompaniesAspNetUsers.Where(g => g.Id == id).SingleOrDefault();
         }
 
         /// <summary>
@@ -50,6 +50,31 @@ namespace SMD.Repository.Repositories
         public IEnumerable<CompaniesAspNetUser> GetUsersByCompanyId(int CompanyId)
         {
             return DbSet.Where( g=> g.CompanyId == CompanyId).ToList();
+        }
+
+
+
+        public bool RemoveManagedUser(string id)
+        {
+
+            var mUser = this.Find(Convert.ToInt32(id));
+            if (mUser != null)
+            {
+
+                this.Delete(mUser);
+                this.SaveChanges();
+                return true;
+            }
+            else
+                return false;
+        }
+
+
+
+        public vw_CompanyUsers CompanyUserExists(string Email)
+        {
+
+            return db.vw_CompanyUsers.Where(g => g.email.Contains(Email)).FirstOrDefault();
         }
 
         #endregion

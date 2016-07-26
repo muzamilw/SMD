@@ -61,8 +61,8 @@ namespace SMD.Interfaces.Services
         ///Send Email when Payout scheduler run
         /// </summary>
         Task SendPayOutRoutineEmail(string aspnetUserId);
-        Task SendEmailToInviteUser(string email);
-        Task SendEmailToInviteUser(string email, string UserId);
+        Task SendEmailToInviteUser(string email, string InvitationCode, bool mode, string RoleName);
+        //Task SendEmailToInviteUser(string email, string UserId);
         Task SendEmailToInviteUser(string email, int companyId);
         Task SendBuyItEmailToUser(string aspnetUserId, AdCampaign oCampaign);
         void SendCampaignApprovalEmail(string aspnetUserId, string campaignName, int? Type);

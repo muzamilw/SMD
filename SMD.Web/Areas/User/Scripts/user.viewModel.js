@@ -2,8 +2,8 @@
     Module with the view model for the User
 */
 define("user/user.viewModel",
-    ["jquery", "amplify", "ko", "user/user.dataservice", "user/user.model", "common/stripeChargeCustomer.viewModel"],
-    function ($, amplify, ko, dataservice, model, stripeChargeCustomer) {
+    ["jquery", "amplify", "ko", "user/user.dataservice", "user/user.model","common/confirmation.viewModel", "common/stripeChargeCustomer.viewModel"],
+    function ($, amplify, ko, dataservice, model,confirmation, stripeChargeCustomer) {
         var ist = window.ist || {};
         ist.userProfile = {
             viewModel: (function() {
@@ -256,11 +256,35 @@ define("user/user.viewModel",
 
                     //remove user from management screen
                     onRemoveUser = function (item) {
+                        confirmation.messageText("Are you sure to remove user " + item.Name + " ?");
+                        confirmation.afterProceed(function () {
 
+                            dataservice.removeUser(
+                            {Id:item.mid}, {
+                                success: function () {
+
+                                    toastr.success("User successfully removed!");
+                                    getDataforUser();
+
+                                },
+                                error: function () {
+                                    toastr.error("Error removing the user");
+                                }
+                            });
+
+
+
+
+                        });
+                        confirmation.afterCancel(function () {
+                            
+                        });
+                        confirmation.show();
+                        return;
                         //selectedUserId(item.UserId);
                         //window.location.href = "/User/ManageUser/Index?user=" + item.UserId;
 
-                        alert(item.cid);
+                     
 
                     },
 
@@ -307,7 +331,7 @@ define("user/user.viewModel",
                  Invite = function () {
 
                      dataservice.inviteUser({
-                         Email: InviteEmail()
+                         Email: InviteEmail(), RoleId: selectedRoleId()
                      },{
 
                                success: function () {
@@ -355,6 +379,7 @@ define("user/user.viewModel",
 
 
                             if (view.bindingRootUser != undefined) {
+                                getBasedata();
                                 getDataforUser();
                             }
                         }

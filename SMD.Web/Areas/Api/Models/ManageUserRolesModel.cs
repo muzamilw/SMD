@@ -15,5 +15,7 @@ namespace SMD.MIS.Areas.Api.Models
 
         public DateTime CreatedOn { get; set; }
         public string status { get; set; }
+
+        public int CompanyId { get; set; }
     }
 }

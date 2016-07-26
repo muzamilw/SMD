@@ -9,6 +9,7 @@ using System.Web.Http;
 using System;
 using AutoMapper;
 using SMD.Models.DomainModels;
+using SMD.Models.RequestModels;
 
 namespace SMD.MIS.Areas.Api.Controllers
 {
@@ -50,6 +51,12 @@ namespace SMD.MIS.Areas.Api.Controllers
             return domainList.Select(a => Mapper.Map<vw_CompanyUsers, ManageUserRolesModel>(a)).ToList();
 
           
+        }
+
+
+        public void Delete(RemoveUserRequest request)
+        {
+            _manageUserService.RemoveManagedUser(request.Id);
         }
         #endregion
     }
