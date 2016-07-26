@@ -186,10 +186,10 @@
     var ManageUsers = function (source) {
         var self
         if (source != undefined) {
-            id = ko.observable(source.id),
+            id = ko.observable(source.Id),
             UserId = ko.observable(source.UserId),
             email = ko.observable(source.email),
-            status = ko.observable(source.status),
+            Status = ko.observable(source.status),
             FullName = ko.observable(source.FullName),
             RoleName = ko.observable(source.RoleName),
             CreatedOn = ko.observable(source.CreatedOn),
@@ -201,7 +201,7 @@
             id = ko.observable(),
             UserId = ko.observable(),
             email = ko.observable(),
-           status = ko.observable(),
+           Status = ko.observable(),
             FullName = ko.observable(),
             RoleName = ko.observable(),
             CreatedOn = ko.observable(),
@@ -229,8 +229,10 @@
 
         self = {
             UserId: UserId(),
-            Name: Name(),
-            Role: Role(),
+            Name: FullName(),
+            Role: RoleName(),
+            cid: companyid(),
+            mid: id(),
             errors: errors,
             isValid: isValid,
             dirtyFlag: dirtyFlag,

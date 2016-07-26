@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets0CE7CB82E9DDCD8A5E5E904279005E7680FA293D2C659064C9D79AE695CC44A1))]
+[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySetsAE5839966DC5A9574E8834131144CA973C8D101B9A86B611D7D59F95068CD814))]
 
 namespace Edm_EntityMappingGeneratedViews
 {
@@ -17,18 +17,18 @@ namespace Edm_EntityMappingGeneratedViews
     /// <Summary>
     /// The type contains views for EntitySets and AssociationSets that were generated at design time.
     /// </Summary>
-    public sealed class ViewsForBaseEntitySets0CE7CB82E9DDCD8A5E5E904279005E7680FA293D2C659064C9D79AE695CC44A1 : System.Data.Mapping.EntityViewContainer
+    public sealed class ViewsForBaseEntitySetsAE5839966DC5A9574E8834131144CA973C8D101B9A86B611D7D59F95068CD814 : System.Data.Mapping.EntityViewContainer
     {
         
         /// <Summary>
         /// The constructor stores the views for the extents and also the hash values generated based on the metadata and mapping closure and views.
         /// </Summary>
-        public ViewsForBaseEntitySets0CE7CB82E9DDCD8A5E5E904279005E7680FA293D2C659064C9D79AE695CC44A1()
+        public ViewsForBaseEntitySetsAE5839966DC5A9574E8834131144CA973C8D101B9A86B611D7D59F95068CD814()
         {
             this.EdmEntityContainerName = "BaseDbContext";
             this.StoreEntityContainerName = "SMDModelStoreContainer";
-            this.HashOverMappingClosure = "73a1056973538eed4a906ac5919415df630a28acb460aa9144fbd1cda79e024a";
-            this.HashOverAllExtentViews = "16006817e47314375fa0c0ba4cffe5fa35f2b8680ac648eb1a2effca307f89df";
+            this.HashOverMappingClosure = "21392ae2264d30ea0f3afa689c8a700e9adcd93154a6d9601c3f367566c0944b";
+            this.HashOverAllExtentViews = "a236622a2762a69674ce438aa74b5a28f6c121bbd6939ba21d74c145667ba25c";
             this.ViewCount = 90;
         }
         
@@ -1316,7 +1316,7 @@ namespace Edm_EntityMappingGeneratedViews
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.CompaniesAspNetUsers", @"
     SELECT VALUE -- Constructing CompaniesAspNetUsers
-        [SMDModel.Store.CompaniesAspNetUsers](T1.CompaniesAspNetUsers_Id, T1.CompaniesAspNetUsers_CompanyId, T1.CompaniesAspNetUsers_UserId, T1.CompaniesAspNetUsers_CreatedOn, T1.CompaniesAspNetUsers_Status, T1.CompaniesAspNetUsers_InvitationCode, T1.CompaniesAspNetUsers_RoleId)
+        [SMDModel.Store.CompaniesAspNetUsers](T1.CompaniesAspNetUsers_Id, T1.CompaniesAspNetUsers_CompanyId, T1.CompaniesAspNetUsers_UserId, T1.CompaniesAspNetUsers_CreatedOn, T1.CompaniesAspNetUsers_Status, T1.CompaniesAspNetUsers_InvitationCode, T1.CompaniesAspNetUsers_RoleId, T1.CompaniesAspNetUsers_InvitationEmail)
     FROM (
         SELECT 
             T.Id AS CompaniesAspNetUsers_Id, 
@@ -1326,6 +1326,7 @@ namespace Edm_EntityMappingGeneratedViews
             T.Status AS CompaniesAspNetUsers_Status, 
             T.InvitationCode AS CompaniesAspNetUsers_InvitationCode, 
             T.RoleId AS CompaniesAspNetUsers_RoleId, 
+            T.InvitationEmail AS CompaniesAspNetUsers_InvitationEmail, 
             True AS _from0
         FROM BaseDbContext.CompaniesAspNetUsers AS T
     ) AS T1");
@@ -2256,7 +2257,7 @@ namespace Edm_EntityMappingGeneratedViews
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.CompaniesAspNetUsers", @"
     SELECT VALUE -- Constructing CompaniesAspNetUsers
-        [DomainModels.CompaniesAspNetUser](T1.CompaniesAspNetUser_Id, T1.CompaniesAspNetUser_CompanyId, T1.CompaniesAspNetUser_UserId, T1.CompaniesAspNetUser_CreatedOn, T1.CompaniesAspNetUser_Status, T1.CompaniesAspNetUser_InvitationCode, T1.CompaniesAspNetUser_RoleId)
+        [DomainModels.CompaniesAspNetUser](T1.CompaniesAspNetUser_Id, T1.CompaniesAspNetUser_CompanyId, T1.CompaniesAspNetUser_UserId, T1.CompaniesAspNetUser_CreatedOn, T1.CompaniesAspNetUser_Status, T1.CompaniesAspNetUser_InvitationCode, T1.CompaniesAspNetUser_RoleId, T1.CompaniesAspNetUser_InvitationEmail)
     FROM (
         SELECT 
             T.Id AS CompaniesAspNetUser_Id, 
@@ -2266,6 +2267,7 @@ namespace Edm_EntityMappingGeneratedViews
             T.Status AS CompaniesAspNetUser_Status, 
             T.InvitationCode AS CompaniesAspNetUser_InvitationCode, 
             T.RoleId AS CompaniesAspNetUser_RoleId, 
+            T.InvitationEmail AS CompaniesAspNetUser_InvitationEmail, 
             True AS _from0
         FROM SMDModelStoreContainer.CompaniesAspNetUsers AS T
     ) AS T1");

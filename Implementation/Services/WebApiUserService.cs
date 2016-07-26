@@ -55,6 +55,13 @@ namespace SMD.Implementation.Services
             get { return HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
         }
 
+        private ApplicationRoleManager RoleManager
+        {
+            get { return HttpContext.Current.GetOwinContext().Get<ApplicationRoleManager>(); }
+        }
+
+        
+
         /// <summary>
         /// Throws Exception if registreation fails
         /// </summary>
@@ -1405,6 +1412,15 @@ namespace SMD.Implementation.Services
         }
 
 
+        public User GetUserByEmail(string email)
+        {
+            User user = UserManager.FindByEmail(email);
+           
+
+            return user;
+        }
+
+
         /// <summary>
         /// Base Data for User Profile 
         /// </summary>
@@ -1415,7 +1431,7 @@ namespace SMD.Implementation.Services
                Countries = countryRepository.GetAllCountries().ToList(),
                Industries = industryRepository.GetAll().ToList(),
                Educations = educationRepository.GetAllEducations().ToList(),
-               UserRoles = manageUserRepository.getUserRoles().ToList()
+               UserRoles =  this.RoleManager.Roles.Where(g => g.Id.StartsWith("cust")).ToList() //   manageUserRepository.getUserRoles().ToList()
             };
         }
         public int generateAndSmsCode(string userId, string phone)

@@ -326,7 +326,8 @@ namespace SMD.Implementation.Services
         public void CreateCampaign(AdCampaign campaignModel)
         {
             campaignModel.UserId = _adCampaignRepository.LoggedInUserIdentity;
-            campaignModel.CompanyId = companyRepository.GetUserCompany(_adCampaignRepository.LoggedInUserIdentity);
+            campaignModel.CompanyId = _adCampaignRepository.CompanyId;
+            //campaignModel.CompanyId = companyRepository.GetUserCompany(_adCampaignRepository.LoggedInUserIdentity);
             var user = UserManager.Users.Where(g => g.Id == _adCampaignRepository.LoggedInUserIdentity).SingleOrDefault();
             if (user != null)
                 campaignModel.CreatedBy = user.FullName;
@@ -1180,6 +1181,39 @@ namespace SMD.Implementation.Services
         {
             return _userFavouriteCouponRepository.GetAllFavouriteCouponByUserId(UserId);
         }
+
+
+
+        /// <summary>
+        /// Setting of favorite coupons
+        /// </summary>
+        /// <param name="UserId"></param>
+        /// <param name="CouponId"></param>
+        /// <param name="mode"></param>
+        /// <returns></returns>
+        public bool SetFavoriteCoupon(string UserId, long CouponId, bool mode)
+        {
+            //inserting the favorite coupon 
+            if (mode == true)
+            {
+                var favCoupon = new UserFavouriteCoupon { UserId = UserId, CouponId = CouponId };
+
+                _userFavouriteCouponRepository.Add(favCoupon);
+                _userFavouriteCouponRepository.SaveChanges();
+            }
+            else // removing the favorite
+            {
+                var removeCoupon = _userFavouriteCouponRepository.GetByCouponId(CouponId);
+                _userFavouriteCouponRepository.Delete(removeCoupon);
+                _userFavouriteCouponRepository.SaveChanges();
+
+            }
+            
+
+            return true;
+        }
+
+
         public CouponCodeModel GenerateCouponCodes(int numbers, long CampaignId)
         {
             CouponCodeModel oModel = new CouponCodeModel();

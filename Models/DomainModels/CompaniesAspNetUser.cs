@@ -24,6 +24,8 @@ namespace SMD.Models.DomainModels
 
         public string RoleId { get; set; }
 
+        public string InvitationEmail { get; set; }
+
 
 
         public virtual User AspNetUser { get; set; }

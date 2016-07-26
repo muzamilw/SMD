@@ -117,5 +117,8 @@ namespace SMD.Interfaces.Services
         UserProfileBaseResponseModel GetBaseDataForUserProfile();
         int generateAndSmsCode(string userId,string phone);
         User getUserByAuthenticationToken(string token);
+
+
+        User GetUserByEmail(string email);
     }
 }

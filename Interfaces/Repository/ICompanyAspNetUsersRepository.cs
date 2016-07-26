@@ -10,5 +10,10 @@ namespace SMD.Interfaces.Repository
     public interface ICompanyAspNetUsersRepository : IBaseRepository<CompaniesAspNetUser, long>
     {
         IEnumerable<CompaniesAspNetUser> GetUsersByCompanyId(int CompanyId);
+
+        bool RemoveManagedUser(string id);
+
+
+        vw_CompanyUsers CompanyUserExists(string Email);
     }
 }

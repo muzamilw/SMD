@@ -9,6 +9,7 @@ using System.Web.Http;
 using System;
 using AutoMapper;
 using SMD.Models.DomainModels;
+using SMD.Models.RequestModels;
 
 namespace SMD.MIS.Areas.Api.Controllers
 {
@@ -40,16 +41,22 @@ namespace SMD.MIS.Areas.Api.Controllers
         //}
 
 
-        public IEnumerable<ManageUserRolesModel> Get(string CompanyId)
+        public IEnumerable<ManageUserRolesModel> Get()
         {
             Mapper.Initialize(cfg => cfg.CreateMap<vw_CompanyUsers, ManageUserRolesModel>());
 
            
 
-            var domainList = _manageUserService.GetManageUsersList(Convert.ToInt32(CompanyId));
+            var domainList = _manageUserService.GetManageUsersList();
             return domainList.Select(a => Mapper.Map<vw_CompanyUsers, ManageUserRolesModel>(a)).ToList();
 
           
+        }
+
+
+        public void Delete(RemoveUserRequest request)
+        {
+            _manageUserService.RemoveManagedUser(request.Id);
         }
         #endregion
     }

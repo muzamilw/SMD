@@ -62,6 +62,10 @@ namespace SMD.Interfaces.Services
         AdCampaign SendApprovalRejectionEmail(AdCampaign source);
         string UpdateAdApprovalCampaign(AdCampaign source);
         IEnumerable<UserFavouriteCoupon> GetAllFavouriteCouponByUserId(string UserId);
+
+
+        bool SetFavoriteCoupon(string UserId, long CouponId, bool mode);
+
         CouponCodeModel GenerateCouponCodes(int numbers, long CampaignId);
         string UpdateCouponSettings(string VoucherCode, string SecretKey, string UserId);
     }

@@ -151,7 +151,7 @@ namespace SMD.Repository.Repositories
                 }
                 else
                 {
-                    IEnumerable<AdCampaign> adCampaigns = DbSet.Where(g => g.UserId == LoggedInUserIdentity && g.Type != 5).OrderByDescending(g => g.priority)
+                    IEnumerable<AdCampaign> adCampaigns = DbSet.Where(g => g.CompanyId == CompanyId && g.Type != 5).OrderByDescending(g => g.priority)
                            .Skip(fromRow)
                            .Take(toRow)
                            .ToList();
@@ -167,7 +167,7 @@ namespace SMD.Repository.Repositories
 
                 }
             }
-            else
+            else   //searching mode
             {
                 int fromRow = (request.PageNo - 1) * request.PageSize;
                 int toRow = request.PageSize;
@@ -176,7 +176,7 @@ namespace SMD.Repository.Repositories
                         (string.IsNullOrEmpty(request.SearchText) ||
                          (campaign.DisplayTitle.Contains(request.SearchText)) || (campaign.CampaignName.Contains(request.SearchText))
                           || (campaign.Description.Contains(request.SearchText)) || (campaign.CampaignDescription.Contains(request.SearchText)))
-                         && (campaign.UserId == LoggedInUserIdentity || isAdmin);
+                         && (campaign.CompanyId == CompanyId || isAdmin);
 
 
                 rowCount = DbSet.Where(c => c.Type != 5).Count(query);

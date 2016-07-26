@@ -37,7 +37,12 @@
     @Styles.Render("~/Bundles/BaseCss")
     @Styles.Render("~/Content/themes/base/css")
     <link type="image/x-icon" href="favicon.png" rel="shortcut icon" />
-    <link href='//fonts.googleapis.com/css?family=Open+Sans:400,600,700,300|Titillium+Web:200,300,400' rel='stylesheet' type='text/css'>
+
+    @if (HttpContext.Current.Request.IsLocal == false)
+    {
+        <link href='//fonts.googleapis.com/css?family=Open+Sans:400,600,700,300|Titillium+Web:200,300,400' rel='stylesheet' type='text/css'>
+    
+    }
     <!--[if lt IE 9]>
         <script src="js/html5shiv.js"></script>
         <script src="js/respond.min.js"></script>
@@ -148,7 +153,7 @@
                                 
                                 <li class="inlineMenuItem"><a href="">&nbsp;&nbsp;Payment Methods</a></li>
                                 <li class="inlineMenuItem"><a href="">&nbsp;&nbsp;Delete My Account</a></li>
-                                <li class="@classesMenu"><a href="~/user/ManageUser/ManageUsers">Manage users </a></li>
+                                <li class=""><a href="~/user/ManageUser/ManageUsers">Manage users </a></li>
                                 <li><a href="~/User/ManageUser/Index">Edit my marketing profile/logo</a></li>
                                 <li><a href="~/">Analytics</a></li>
                                 <li><a href="~/Account/LogOff"><i class="fa fa-power-off"></i>Logout</a></li>

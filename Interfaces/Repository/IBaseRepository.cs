@@ -59,5 +59,12 @@ namespace SMD.Interfaces.Repository
         /// Returns User Timezone Offset
         /// </summary>
         TimeSpan UserTimezoneOffSet { get; }
+
+        /// <summary>
+        /// currrent CompanyId
+        /// </summary>
+        int CompanyId { get; }
+
+        string CompanyName { get; }
     }
 }

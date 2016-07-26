@@ -621,8 +621,13 @@ namespace SMD.MIS.Controllers
 
             List<vw_CompanyUsers> comapnies = manageUserService.GetCompaniesByUserId(User.Identity.GetUserId());
 
-            if (comapnies != null && comapnies.Count > 0)
+            if (comapnies != null && comapnies.Count > 1)
                 return View("SelectCompany", comapnies);
+            else if  (comapnies != null && comapnies.Count == 1)
+            {
+                var company = comapnies.First();
+                return RedirectToAction("SetCompany", "Account", "CompanyId=" + company.companyid + "&Role=" + company.RoleName + "&CompanyName=" + company.CompanyName);
+            }
             else
             {
                 return RedirectToLocal("");
@@ -652,7 +657,25 @@ namespace SMD.MIS.Controllers
              }
          }
 
-   
+
+
+         //[AllowAnonymous]
+         //public async Task<ActionResult> AcceptInvitation(string code)
+         //{
+         //    // Require that the user has already logged in via username/password or external login
+         //    //if (!await SignInManager.HasBeenVerifiedAsync())
+         //    //{
+         //    //    return View("Error");
+         //    //}
+         //    //var user = await UserManager.FindByIdAsync(await SignInManager.GetVerifiedUserIdAsync());
+         //    //if (user != null)
+         //    //{
+         //    //    ViewBag.Status = "For DEMO purposes the current " + provider + " code is: " +
+         //    //                     await UserManager.GenerateTwoFactorTokenAsync(user.Id, provider);
+         //    //}
+         //    //return View(new VerifyCodeViewModel { Provider = provider, ReturnUrl = returnUrl });
+         //}
+
 
         #region Helpers
 

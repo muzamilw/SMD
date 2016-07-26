@@ -13,6 +13,7 @@ namespace SMD.MIS.Areas.Api.Controllers
     {
         private readonly IWebApiUserService webApiUserService;
         private IEmailManagerService emailManagerService;
+        private IManageUserService manageUserService;
 
         #region Private
         
@@ -23,7 +24,7 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// <summary>
         /// Constructor
         /// </summary>
-        public InviteUserController(IWebApiUserService webApiUserService, IEmailManagerService emailManagerService)
+        public InviteUserController(IWebApiUserService webApiUserService, IEmailManagerService emailManagerService, IManageUserService manageUserService)
         {
             if (webApiUserService == null)
             {
@@ -32,6 +33,7 @@ namespace SMD.MIS.Areas.Api.Controllers
 
             this.webApiUserService = webApiUserService;
             this.emailManagerService = emailManagerService;
+            this.manageUserService = manageUserService;
         }
 
         #endregion
@@ -41,19 +43,32 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// <summary>
         ///invite user
         /// </summary>
-        public bool Get(string Email,string UserId)
+        //public bool Get(string Email,string UserId)
+        //{
+
+        //    emailManagerService.SendEmailToInviteUser(Email, UserId);
+        //    return true;
+
+        //}
+
+
+        //inviting the new user
+        public bool Post(InviteUserRequest request)
         {
 
-            emailManagerService.SendEmailToInviteUser(Email, UserId);
-            return true;
+            var User = manageUserService.ComanyUserExists(request.Email);
+            if (User == null) // user does not exists
+            {
 
-        }
+                var userr = manageUserService.AddUserInvitation(request.Email, request.RoleId);
 
-        public bool Post(InviteUserEmail request)
-        {
+               
+                return true;
 
-            emailManagerService.SendEmailToInviteUser(request.Email);
-            return true;
+            }
+            else
+                return false;
+            
             
         }
 

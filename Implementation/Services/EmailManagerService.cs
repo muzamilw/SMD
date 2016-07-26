@@ -147,6 +147,8 @@ namespace SMD.Implementation.Services
         public string CampaignName { get; set; }
         public string RejectionReason { get; set; }
         public string CampaignLabel { get; set; }
+
+        public string RoleName { get; set; }
         /// <summary>
         /// Sends Email
         /// </summary>
@@ -204,6 +206,7 @@ namespace SMD.Implementation.Services
             {
                 MBody = MBody.Replace("++companyname++", CompanyNameInviteUser);
                 MBody = MBody.Replace("++inviteurl++", InviteURL);
+                MBody = MBody.Replace("++rolename++", RoleName);
             }
             if (Mid == (int)EmailTypes.BuyItUsers)
             {
@@ -779,16 +782,22 @@ namespace SMD.Implementation.Services
         /// <summary>
         ///Invite User Email
         /// </summary>
-        public async Task SendEmailToInviteUser(string email)
+        public async Task SendEmailToInviteUser(string email, string InvitationCode, bool mode, string RoleName)
         {
             MMailto.Add(email);
             Mid = (int)EmailTypes.InviteUsers;
             string userName = string.Empty;
             int companyid = 0;
 
-            CompanyNameInviteUser = manageUserRepository.getCompanyName(out userName, out companyid);
+            CompanyNameInviteUser =   manageUserRepository.getCompanyName(out userName, out companyid);
             Muser = userName;
-            InviteURL = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/Account/Register?CompanyID=" + companyid;
+
+            if ( mode == true)
+                InviteURL = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/Account/Register?AcceptInvitation?code=" + InvitationCode;
+            else
+                InviteURL = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/Account/AcceptInvitation?code=" + InvitationCode;
+
+
             await SendEmail();
 
 
@@ -882,23 +891,23 @@ namespace SMD.Implementation.Services
                 throw new Exception("Email could not be sent!");
             }
         }
-        public async Task SendEmailToInviteUser(string email, string UserId)
-        {
-            var oUser = manageUserRepository.GetByUserId(UserId);
+        //public async Task SendEmailToInviteUser(string email, string UserId)
+        //{
+        //    var oUser = manageUserRepository.GetByUserId(UserId);
 
-            if (oUser != null)
-            {
-                MMailto.Add(email);
-                Mid = (int)EmailTypes.InviteUsers;
+        //    if (oUser != null)
+        //    {
+        //        MMailto.Add(email);
+        //        Mid = (int)EmailTypes.InviteUsers;
 
-                int companyid = 0;
-                Muser = oUser.FullName;
-                InviteURL = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/Account/Register?CompanyID=" + oUser.CompanyId;
-                SendEmailNotAysnc();
-            }
+        //        int companyid = 0;
+        //        Muser = oUser.FullName;
+        //        InviteURL = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/Account/Register?CompanyID=" + oUser.CompanyId;
+        //        SendEmailNotAysnc();
+        //    }
 
 
-        }
+        //}
         #endregion
 
     }

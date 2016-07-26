@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 
 namespace SMD.Models.RequestModels
 {
-    public class InviteUserEmail
+    public class InviteUserRequest
     {
         /// <summary>
         /// email
         /// </summary>
         public string Email { get; set; }
+
+        public string RoleId { get; set; }
 
     }
     public class InviteUserWebEmail
@@ -22,5 +24,12 @@ namespace SMD.Models.RequestModels
         public string Email { get; set; }
         public int CompanyId { get; set; }
 
+    }
+
+
+
+    public class RemoveUserRequest
+    {
+        public string Id { get; set; }
     }
 }

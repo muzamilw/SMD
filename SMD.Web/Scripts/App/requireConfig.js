@@ -14,6 +14,7 @@
         paths: {
             "sammy": "/Scripts/sammy-0.7.5.min",
             "common":  "/Areas/Common/Scripts",
+
             // SMD 
             "pQuestion": "/Areas/ProfileQuestion/Scripts",
             "ads": "/Areas/Ads/Scripts",

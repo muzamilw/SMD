@@ -24,6 +24,15 @@
                                     <input type="text" class="form-control" data-bind="value: $root.InviteEmail">
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <div class="col-lg-4 text-right">
+
+                                    <label class="control-label text-right tooltip-float">Role</label>
+                                </div>
+                                <div class="col-lg-6">
+                                    <select class="form-control" data-bind="options: $root.roles, optionsText: 'RoleName', optionsValue: 'RoleId', value:selectedRoleId"></select>
+                                </div>
+                            </div>
                         </div>
                      
                     </div>
