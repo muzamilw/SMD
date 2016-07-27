@@ -992,7 +992,6 @@
     <Content Include="Images\1_Splash_screen_1.png" />
     <Content Include="Images\accent.png" />
     <Content Include="Images\ads.png" />
-    <Content Include="Images\beta.jpg" />
     <Content Include="Images\bullet.png" />
     <Content Include="Images\Cash4ads_logo.png" />
     <Content Include="Images\Cash4Ads_White_pink.png" />
@@ -1001,7 +1000,6 @@
     <Content Include="Images\guru.png" />
     <Content Include="Images\heroAccent.png" />
     <Content Include="Images\iphoneStencil.png" />
-    <Content Include="Images\New_Register_Image.png" />
     <Content Include="Images\orderedList0.png" />
     <Content Include="Images\orderedList1.png" />
     <Content Include="Images\orderedList2.png" />
@@ -1012,10 +1010,8 @@
     <Content Include="Images\orderedList7.png" />
     <Content Include="Images\orderedList8.png" />
     <Content Include="Images\orderedList9.png" />
-    <Content Include="Images\Phones4u.png" />
     <Content Include="Images\preview_game.jpg" />
     <Content Include="Images\select_image.jpg" />
-    <Content Include="Images\Sign_In_Image.png" />
     <Content Include="Images\topbarph.png" />
     <Content Include="ReportViewers\Publisher.aspx" />
     <Content Include="ReportViewers\SMDReport.aspx" />

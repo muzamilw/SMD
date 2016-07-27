@@ -36,21 +36,21 @@
         })();
 
         (function (b) { (function (a) { "__CF" in b && "DJS" in b.__CF ? b.__CF.DJS.push(a) : "addEventListener" in b ? b.addEventListener("load", a, !1) : b.attachEvent("onload", a) })(function () { "FB" in b && "Event" in FB && "subscribe" in FB.Event && (FB.Event.subscribe("edge.create", function (a) { _gaq.push(["_trackSocial", "facebook", "like", a]) }), FB.Event.subscribe("edge.remove", function (a) { _gaq.push(["_trackSocial", "facebook", "unlike", a]) }), FB.Event.subscribe("message.send", function (a) { _gaq.push(["_trackSocial", "facebook", "send", a]) })); "twttr" in b && "events" in twttr && "bind" in twttr.events && twttr.events.bind("tweet", function (a) { if (a) { var b; if (a.target && a.target.nodeName == "IFRAME") a: { if (a = a.target.src) { a = a.split("#")[0].match(/[^?=&]+=([^&]*)?/g); b = 0; for (var c; c = a[b]; ++b) if (c.indexOf("url") === 0) { b = unescape(c.split("=")[1]); break a } } b = void 0 } _gaq.push(["_trackSocial", "twitter", "tweet", b]) } }) }) })(window);
-        /* ]]> */
+    /* ]]> */
     </script>
     @* Get Local Time Zone and Keep in Cache *@
     <script type="text/javascript">
-        function cookieExists(name) {
-            var nameToFind = name + "=";
-            var cookies = document.cookie.split(';');
-            for (var i = 0; i < cookies.length; i++) {
-                if (cookies[i].trim().indexOf(nameToFind) === 0) return true;
-            }
-            return false;
+    function cookieExists(name) {
+        var nameToFind = name + "=";
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            if (cookies[i].trim().indexOf(nameToFind) === 0) return true;
         }
-        function addTimeZoneOffSetCookie() {
-            if (!cookieExists("_timeZoneOffset") && '@HttpContext.Current.Request.Url.Authority' != "localhost" &&
-                '@HttpContext.Current.Request.Url.Authority' != "smd" && '@HttpContext.Current.Request.Url.Authority' != "smdpreview.com") {
+        return false;
+    }
+    function addTimeZoneOffSetCookie() {
+        if (!cookieExists("_timeZoneOffset") && '@HttpContext.Current.Request.Url.Authority' != "localhost" &&
+            '@HttpContext.Current.Request.Url.Authority' != "smd" && '@HttpContext.Current.Request.Url.Authority' != "smdpreview.com") {
                 var now = new Date();
                 var timeZoneOffset = -now.getTimezoneOffset();  // in minutes
                 now.setTime(now.getTime() + 10 * 24 * 60 * 60 * 1000); // keep it for 10 days
@@ -66,21 +66,22 @@
     <div id="login-full-wrapper">
         <div class="container">
             <div class="row">
-                <div class="col-xs-4  col-xs-offset-1">
+                <div class="col-xs-12">
                     <div id="login-box">
                         <div class="row">
                             <div class="col-xs-12">
                                 <header id="login-header">
-                                    <div id="login-logo" style="">
-                                        <a href="~/" id="beta" style="         background-image: url(/Images/beta.jpg);
+                                    <div id="login-logo" style="position:relative;">
+                                        <a href="~/" id="beta" style="
+        background-image: url(/Images/beta.jpg);
     background-repeat: no-repeat;
     background-size: 63%;
-    margin-top: 32px;
+    margin-top: 5px;
     margin-left: 5px;
     width: 72px;
     height: 18px;
     position: absolute;
-    left: 200px;z-index:100;">
+    left: 200px;">
 
                                         </a>
                                         <div class="login-logo-bakImg">
@@ -95,11 +96,7 @@
                             </div>
                         </div>
                     </div>
-
-                   
-
                 </div>
-                <div class="col-xs-6">@RenderSection("Sidebar", required: false)</div>
             </div>
         </div>
     </div>
@@ -110,3 +107,4 @@
     @Scripts.Render("~/bundles/jqueryval")
 </body>
 </html>
+

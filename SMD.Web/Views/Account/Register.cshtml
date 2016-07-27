@@ -9,8 +9,6 @@
     @Html.AntiForgeryToken()
     @Html.ValidationSummary()
 
-    <h4>Sharing is caring</h4>
-
     <div class="input-group">
         <span class="input-group-addon" tabindex="-1"><i class="fa fa-user"></i></span>
         @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Email address" })
@@ -27,7 +25,7 @@
         <span class="input-group-addon" tabindex="-1"><i class="fa fa-key"></i></span>
         @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", placeholder = "Confirm Password" })
 
-
+        
     </div>
     <div class="row">
         <div class="col-xs-12">
@@ -45,31 +43,8 @@
 <div class="row">
     @Html.Partial("~/Views/Shared/_ExternalLoginPartial.cshtml")
 </div>
-<br />
-<div class="row">
-    <div class="col-xs-12">
-        <div class="create-account text-center">
-            <p>
-               Already have an account ?&nbsp; @Html.ActionLink("Login", "Login","Account")
-            </p>
-        </div>
-    </div>
-</div>
 
-@section Sidebar{
-    
-    <div style="margin-top:120px;text-align:center" id="registersidebar">
-        <h1>Advertise for FREE!<br />It's as easy as ...</h1>
-        <img style="width:500px;margin-top:60px;" src="~/Images/New_Register_Image.png" />
-        <p style="font-style:italic; color:black;margin-top:60px;font-size:1.6em;">We don't do BOTS - people to people advertising platform</p>
-    </div>
-}
-
-
-
-
-
-
+   
 @*<script src="~/Scripts/jquery-2.1.0.js"></script>
     <script>
         function getParameter(url, param) {
@@ -82,7 +57,7 @@
 
         $(document).ready(function () {
             var value = getParameter(window.location.href, "CompanyId")
-
+            
             $("#hdnCompanyId").val(value);
 
         });
