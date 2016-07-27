@@ -10,7 +10,8 @@
           BuyItImageUrl, AdViews, CompanyId, CouponSwapValue, CouponActualValue, CouponQuantity, CouponTakenCount, priority,
           CouponDiscountValue, couponImage2, CouponImage3, CouponImage4, CouponExpiryLabel,
           couponSmdComission, CouponCategories, DeliveryDays, IsUseFilter, LogoUrl,
-          VoucherAdditionalInfo, CouponId, IsShowVoucherSetting, VideoLink2, CouponType, IsSavedCoupon) {
+          VoucherAdditionalInfo, CouponId, IsShowVoucherSetting, VideoLink2, CouponType, IsSavedCoupon,
+          ChannelType) {
        
           var
               //type and userID will be set on server sside
@@ -131,6 +132,7 @@
               VideoLink2 = ko.observable(VideoLink2),
               CouponType = ko.observable(CouponType),
               IsSavedCoupon = ko.observable(IsSavedCoupon),
+              ChannelType = ko.observable(ChannelType),
                // Errors
                 errors = ko.validation.group({
                     CampaignName:CampaignName,
@@ -188,7 +190,8 @@
                   CouponCodes: CouponCodes,
                   IsUseFilter: IsUseFilter,
                   CouponType: CouponType,
-                  IsSavedCoupon: IsSavedCoupon
+                  IsSavedCoupon: IsSavedCoupon,
+                  ChannelType: ChannelType
 
               }),
               // Has Changes
@@ -295,7 +298,8 @@
                       IsShowVoucherSetting: IsShowVoucherSetting(),
                       VideoLink2: VideoLink2(),
                       CouponType: CouponType(),
-                      IsSavedCoupon: IsSavedCoupon()
+                      IsSavedCoupon: IsSavedCoupon(),
+                      ChannelType: ChannelType()
                   };
               };
           return {
@@ -376,7 +380,8 @@
               IsShowVoucherSetting:IsShowVoucherSetting,
               VideoLink2: VideoLink2,
               CouponType: CouponType,
-              IsSavedCoupon: IsSavedCoupon
+              IsSavedCoupon: IsSavedCoupon,
+              ChannelType: ChannelType
           };
       };
 
@@ -557,7 +562,7 @@
 
     // Factory Method
     Campaign.Create = function (source) {
-     
+     debugger
         var campaign = new Campaign(source.CampaignId, source.LanguageId, source.CampaignName, source.UserId, source.Status, source.StatusValue,
             source.CampaignDescription, source.Gender + "", source.Archived, source.StartDateTime, source.EndDateTime, source.MaxBudget
             , source.Type + "", source.DisplayTitle, source.LandingPageVideoLink, source.VerifyQuestion, source.Answer1, source.Answer2, source.Answer3,
@@ -565,7 +570,7 @@
             source.CampaignTypeImagePath, source.Description, source.ClickRate, source.Voucher1Heading, source.Voucher1Description, source.Voucher1Value, source.Voucher2Heading, source.Voucher2Description,
              source.Voucher2Value, source.Voucher1ImagePath, source.VoucherImagePath, source.CreatedBy, source.VideoUrl, source.BuuyItLine1, source.BuyItLine2, source.BuyItLine3, source.BuyItButtonLabel, source.BuyItImageUrl,source.AdViews,source.CompanyId,
             source.CouponSwapValue, source.CouponActualValue,source.CouponQuantity,source.CouponTakenCount, source.priority, source.CouponDiscountValue,
-             source.couponImage2, source.CouponImage3, source.CouponImage4, source.CouponExpiryLabel, source.couponSmdComission, null, source.DeliveryDays, source.IsUseFilter + "", source.LogoUrl, source.VoucherAdditionalInfo, source.CouponId,source.IsShowVoucherSetting, source.VideoLink2, source.CouponType + "", source.IsSavedCoupon);
+             source.couponImage2, source.CouponImage3, source.CouponImage4, source.CouponExpiryLabel, source.couponSmdComission, null, source.DeliveryDays + "", source.IsUseFilter + "", source.LogoUrl, source.VoucherAdditionalInfo, source.CouponId,source.IsShowVoucherSetting, source.VideoLink2, source.CouponType + "", source.IsSavedCoupon, source.ChannelType + "");
         
         _.each(source.AdCampaignTargetCriterias, function (item) {
           

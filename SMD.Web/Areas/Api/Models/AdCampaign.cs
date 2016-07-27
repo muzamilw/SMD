@@ -69,9 +69,9 @@ namespace SMD.MIS.Areas.Api.Models
         public bool IsShowVoucherSetting { get; set; }
         public string VideoLink2 { get; set; }
         [NotMapped]
-        
+
         public int AdViews { get; set; }
-         
+
         public int? CompanyId { get; set; }
         public string CouponSwapValue { get; set; }
         public string CouponActualValue { get; set; }
@@ -93,5 +93,7 @@ namespace SMD.MIS.Areas.Api.Models
         public long CouponId { get; set; }
         public int CouponType { get; set; }
         public bool IsSavedCoupon { get; set; }
+        public int DeliveryDays { get; set; }
+        public int ChannelType { get; set; }
     }
 }

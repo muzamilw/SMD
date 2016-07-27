@@ -113,6 +113,7 @@ namespace SMD.Models.DomainModels
 
 
 
+        public Nullable<int> ChannelType { get; set; }
         public virtual ICollection<AdCampaignResponse> AdCampaignResponses { get; set; }
         public virtual ICollection<AdCampaignTargetCriteria> AdCampaignTargetCriterias { get; set; }
         public virtual ICollection<AdCampaignTargetLocation> AdCampaignTargetLocations { get; set; }
@@ -223,6 +224,7 @@ namespace SMD.Models.DomainModels
             target.CouponType = CouponType;
             target.DeliveryDays = DeliveryDays;
             target.VoucherAdditionalInfo = VoucherAdditionalInfo;
+            target.ChannelType = ChannelType;
               
         }
     }
