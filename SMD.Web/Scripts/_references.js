@@ -817,6 +817,7 @@
 /// <reference path="plugins/forms/tiny_mce/themes/advanced/langs/en.js" />
 /// <reference path="plugins/forms/tiny_mce/themes/advanced/langs/en_dlg.js" />
 /// <reference path="plugins/forms/tiny_mce/themes/simple/langs/en.js" />
+/// <reference path="../areas/ads/scripts/baselibs.js" />
 <<<<<<< HEAD
 =======
 /// <reference path="plugins/forms/timeentry/langs/jquery.timeentry-ca.js" />
