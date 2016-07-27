@@ -242,7 +242,7 @@ define("ads/ads.viewModel",
                     //if (isDisplayCouponsAds() == false) {
                     //    isWelcomeScreenVisible(true);
                     //} else {
-                        openEditScreen(5);
+                        openEditScreen(1);
                         isFromEdit(true);
                   //  }
                     isListVisible(false);
@@ -381,7 +381,7 @@ define("ads/ads.viewModel",
                      isListVisible(true);
                  },
                   openEditScreen = function (mode) {
-                      
+             
                       campaignModel(new model.Campaign());
                       // campaignModel().CampaignName('New Campaign');
                       

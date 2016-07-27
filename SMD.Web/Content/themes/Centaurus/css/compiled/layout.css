@@ -4,7 +4,7 @@ html,body {
 }
 
 body {
-    color: white;
+  color: #344644;
     background: #2c3e50;
 }
 
@@ -51,12 +51,12 @@ h5 {
 }
 
 a {
-    color: white;
+   color: #3498db;
     outline: none!important;
 }
 
 a:hover,a:focus {
-    color: #001d8f;
+    color: #3498db;
 }
 
 @media (max-width: 420px) {

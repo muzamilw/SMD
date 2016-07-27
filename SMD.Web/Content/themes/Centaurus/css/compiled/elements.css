@@ -5382,6 +5382,7 @@ color:red !important;
 .ads-numbering-main {
     width: 60px;
     text-align: center;
+    cursor:pointer;
 }
 .ads-numbering-box {
         background: rgb(220,220,220);

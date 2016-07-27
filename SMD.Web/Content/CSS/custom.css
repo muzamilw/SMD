@@ -379,3 +379,6 @@ a.reportAnchor a:hover {
     white-space: normal;
     margin-bottom: 10px;
 }
+#btnNext,#btnBack{
+        width: 100px;
+}
