@@ -108,20 +108,36 @@ namespace SMD.Implementation.Services
             companyAspNetUsersRepository.Add(invitteuser);
             companyAspNetUsersRepository.SaveChanges();
 
+            string RoleName = userService.GetRoleNameByRoleId(RoleId);
 
-
-            if ( user != null)
+            if ( user == null)
             {
+              
+
                 //send simple email with acceptance link
-                emailManagerService.SendEmailToInviteUser(email, invitteuser.InvitationCode,true,invitteuser.AspNetRole.Name);
+               emailManagerService.SendEmailToInviteUser(email, invitteuser.InvitationCode, true, RoleName);
             }
             else
             {
 
                 //send email with acceptance link on registration page.
-                emailManagerService.SendEmailToInviteUser(email, invitteuser.InvitationCode, false, invitteuser.AspNetRole.Name);
+                emailManagerService.SendEmailToInviteUser(email, invitteuser.InvitationCode, false, RoleName);
             }
             return invitteuser;
+
+        }
+
+
+        public bool AcceptInvitation(string InvitationCode)
+        {
+            var verifyResult = companyAspNetUsersRepository.VerifyInvitationCode(InvitationCode);
+            if (verifyResult)
+            {
+                companyAspNetUsersRepository.AcceptInvitationCode(InvitationCode);
+                return true;
+            }
+            else
+                return false;
 
         }
 

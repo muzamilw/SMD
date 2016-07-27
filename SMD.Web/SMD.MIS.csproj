@@ -2677,6 +2677,7 @@
     <Content Include="Views\Shared\_LoginMain.cshtml" />
     <Content Include="Views\Shared\_ExternalLoginPartial.cshtml" />
     <Content Include="Views\Account\SelectCompany.cshtml" />
+    <Content Include="Views\Account\AcceptInvitation.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

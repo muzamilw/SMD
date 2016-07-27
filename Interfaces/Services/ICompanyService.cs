@@ -10,7 +10,7 @@ namespace SMD.Interfaces.Services
     public interface ICompanyService
     {
         int GetUserCompany(string userId);
-        bool createUser(string userId, string email, string fullName, string guid,int companyid);
+        bool createCompany(string userId, string email, string fullName, string guid);
 
         Company GetCompanyById(int CompanyId);
     }

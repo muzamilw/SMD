@@ -120,5 +120,7 @@ namespace SMD.Interfaces.Services
 
 
         User GetUserByEmail(string email);
+
+        string GetRoleNameByRoleId(string RoleId);
     }
 }

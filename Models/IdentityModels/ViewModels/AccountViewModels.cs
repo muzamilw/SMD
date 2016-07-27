@@ -81,7 +81,7 @@ namespace SMD.Models.IdentityModels.ViewModels
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
-        public string CompanyId { get; set; }
+        public string code { get; set; }
     }
 
     public class ResetPasswordViewModel

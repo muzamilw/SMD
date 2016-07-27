@@ -314,6 +314,7 @@ namespace SMD.Implementation.Services
             {
                 MBody = MBody.Replace("++companyname++", CompanyNameInviteUser);
                 MBody = MBody.Replace("++inviteurl++", InviteURL);
+                MBody = MBody.Replace("++rolename++", RoleName);
             }
             if (Mid == (int)EmailTypes.BuyItUsers)
             {
@@ -782,7 +783,7 @@ namespace SMD.Implementation.Services
         /// <summary>
         ///Invite User Email
         /// </summary>
-        public async Task SendEmailToInviteUser(string email, string InvitationCode, bool mode, string RoleName)
+        public void SendEmailToInviteUser(string email, string InvitationCode, bool mode, string RoleName)
         {
             MMailto.Add(email);
             Mid = (int)EmailTypes.InviteUsers;
@@ -793,12 +794,13 @@ namespace SMD.Implementation.Services
             Muser = userName;
 
             if ( mode == true)
-                InviteURL = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/Account/Register?AcceptInvitation?code=" + InvitationCode;
+                InviteURL = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/Account/Register?code=" + InvitationCode;
             else
                 InviteURL = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/Account/AcceptInvitation?code=" + InvitationCode;
 
 
-            await SendEmail();
+             SendEmailNotAysnc();
+             
 
 
         }

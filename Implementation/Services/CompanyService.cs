@@ -38,9 +38,9 @@ namespace SMD.Implementation.Services
         }
 
 
-        public bool createUser(string userId,string email, string fullName,string guid,int companyid)
+        public bool createCompany(string userId, string email, string fullName, string guid)
         {
-            return companyRepository.createCompany(userId, email, fullName, guid, companyid);
+            return companyRepository.createCompany(userId, email, fullName, guid);
         }
 
 

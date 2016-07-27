@@ -1161,7 +1161,7 @@ namespace SMD.Implementation.Services
             {
                 throw new InvalidOperationException(string.Format("Failed to add user to role {0}", Roles.User));
             }
-            companyRepository.createCompany(user.Id, request.Email, request.FullName,Guid.NewGuid().ToString(),0);
+            companyRepository.createCompany(user.Id, request.Email, request.FullName,Guid.NewGuid().ToString());
             var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
             var callbackUrl = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority +
                               "/Api_Mobile/Register/Confirm/?UserId=" + user.Id + "&Code=" + HttpUtility.UrlEncode(code);
@@ -1232,7 +1232,7 @@ namespace SMD.Implementation.Services
                 else
                 {
                     user.AuthenticationToken = Guid.NewGuid().ToString();
-                    companyRepository.createCompany(user.Id, request.Email, request.FullName, user.AuthenticationToken,0);
+                    companyRepository.createCompany(user.Id, request.Email, request.FullName, user.AuthenticationToken);
                     
                 }
                 UserLogin userLoginInfo = user.UserLogins.FirstOrDefault(
@@ -1461,14 +1461,19 @@ namespace SMD.Implementation.Services
           return  companyRepository.getUserBasedOnAuthenticationToken(token);
         }
 
+
+        public string GetRoleNameByRoleId(string RoleId)
+        {
+
+            return this.RoleManager.Roles.Where(g => g.Id == RoleId).SingleOrDefault().Name; //   manageUserRepository.getUserRoles().ToList()
+           
+        }
+
        
 
         #endregion
 
-        public void InviteUser()
-        {
-
-        }
+     
        
         #endregion
     }

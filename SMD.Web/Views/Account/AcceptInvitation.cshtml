@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "Accept Invitation";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+
+}
+
+<h2>@ViewBag.Title.</h2>
+<div>
+
+    @if (ViewBag.acceptResult == true)
+    {
+
+        <p>
+            Thank you for accepting Invitation. Please @Html.ActionLink("Click here to Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
+        </p>
+
+    }
+    else
+    {
+        <p style="color:red">
+           Invitation code already used or invalid code. Please @Html.ActionLink("Click here to Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
+        </p>
+    }
+</div>

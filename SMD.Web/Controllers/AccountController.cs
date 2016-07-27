@@ -274,9 +274,15 @@ namespace SMD.MIS.Controllers
         //
         // GET: /Account/Register
         [AllowAnonymous]
-        public ActionResult Register()
+        public ActionResult Register(string code)
         {
-            return View(new RegisterViewModel());
+
+            var model = new RegisterViewModel();
+            if (code!=null)
+                model.code = code;
+
+
+            return View(model);
         }
 
         //
@@ -289,7 +295,7 @@ namespace SMD.MIS.Controllers
             if (ModelState.IsValid)
             {
 
-                int companyid = 0;
+               
                 var user = new User { UserName = model.Email, Email = model.Email, FullName = model.FullName };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
@@ -306,11 +312,17 @@ namespace SMD.MIS.Controllers
                     await
                         emailManagerService.SendAccountVerificationEmail(user, callbackUrl);
                     ViewBag.Link = callbackUrl;
-                    if (!string.IsNullOrEmpty(model.CompanyId))
+                    
+                    companyService.createCompany(user.Id, model.Email, model.FullName, Guid.NewGuid().ToString());
+
+                    //process the invitation code if not null
+                    if (!string.IsNullOrEmpty(model.code))
                     {
-                        companyid = Convert.ToInt32(model.CompanyId);
+                        manageUserService.AcceptInvitation(model.code);
+                        
                     }
-                    companyService.createUser(user.Id, model.Email, model.FullName, Guid.NewGuid().ToString(), companyid);
+
+
                     return View("DisplayEmail");
                 }
                 AddErrors(result);
@@ -626,7 +638,7 @@ namespace SMD.MIS.Controllers
             else if  (comapnies != null && comapnies.Count == 1)
             {
                 var company = comapnies.First();
-                return RedirectToAction("SetCompany", "Account", "CompanyId=" + company.companyid + "&Role=" + company.RoleName + "&CompanyName=" + company.CompanyName);
+                return RedirectToAction("SetCompany", "Account", new {CompanyId= company.companyid ,Role=company.RoleName ,CompanyName=company.CompanyName});
             }
             else
             {
@@ -659,22 +671,26 @@ namespace SMD.MIS.Controllers
 
 
 
-         //[AllowAnonymous]
-         //public async Task<ActionResult> AcceptInvitation(string code)
-         //{
-         //    // Require that the user has already logged in via username/password or external login
-         //    //if (!await SignInManager.HasBeenVerifiedAsync())
-         //    //{
-         //    //    return View("Error");
-         //    //}
-         //    //var user = await UserManager.FindByIdAsync(await SignInManager.GetVerifiedUserIdAsync());
-         //    //if (user != null)
-         //    //{
-         //    //    ViewBag.Status = "For DEMO purposes the current " + provider + " code is: " +
-         //    //                     await UserManager.GenerateTwoFactorTokenAsync(user.Id, provider);
-         //    //}
-         //    //return View(new VerifyCodeViewModel { Provider = provider, ReturnUrl = returnUrl });
-         //}
+         [AllowAnonymous]
+         public async Task<ActionResult> AcceptInvitation(string code)
+         {
+
+
+             ViewBag.acceptResult = manageUserService.AcceptInvitation(code);
+             return View();
+             // Require that the user has already logged in via username/password or external login
+             //if (!await SignInManager.HasBeenVerifiedAsync())
+             //{
+             //    return View("Error");
+             //}
+             //var user = await UserManager.FindByIdAsync(await SignInManager.GetVerifiedUserIdAsync());
+             //if (user != null)
+             //{
+             //    ViewBag.Status = "For DEMO purposes the current " + provider + " code is: " +
+             //                     await UserManager.GenerateTwoFactorTokenAsync(user.Id, provider);
+             //}
+             //return View(new VerifyCodeViewModel { Provider = provider, ReturnUrl = returnUrl });
+         }
 
 
         #region Helpers

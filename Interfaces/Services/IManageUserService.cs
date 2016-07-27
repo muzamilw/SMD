@@ -22,5 +22,7 @@ namespace SMD.Interfaces.Services
 
 
         CompaniesAspNetUser AddUserInvitation(string email, string RoleId);
+
+        bool AcceptInvitation(string InvitationCode);
     }
 }

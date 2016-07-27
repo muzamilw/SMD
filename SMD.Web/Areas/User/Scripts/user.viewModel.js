@@ -118,7 +118,7 @@ define("user/user.viewModel",
 
                     // Get User Profile For Editing 
                    getUserProfileById = function () {
-                       debugger
+                       
                        dataservice.getUserProfileById({
                            UserId: selectedUserId()
                        },{
@@ -337,10 +337,11 @@ define("user/user.viewModel",
                                success: function () {
 
                                    toastr.success("Invitation Sent!");
+                                   getDataforUser();
 
                                },
                                error: function () {
-                                   toastr.success("Invitation Sent!");
+                                   toastr.error("Error Invitation Sent!");
                                }
                            });
 

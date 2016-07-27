@@ -77,6 +77,45 @@ namespace SMD.Repository.Repositories
             return db.vw_CompanyUsers.Where(g => g.email.Contains(Email)).FirstOrDefault();
         }
 
+
+        public bool VerifyInvitationCode(string InvitationCode)
+        {
+            var invite = db.CompaniesAspNetUsers.Where(g => g.InvitationCode == InvitationCode).SingleOrDefault();
+
+            if (invite != null)
+                return true;
+            else
+                return false;
+        }
+
+
+
+        public bool AcceptInvitationCode(string InvitationCode)
+        {
+            var invite = db.CompaniesAspNetUsers.Where(g => g.InvitationCode == InvitationCode).SingleOrDefault();
+
+            invite.Status = 2;
+            invite.InvitationCode = null;
+
+            db.SaveChanges();
+
+            return true;
+        }
+
+
+        public bool AcceptInvitationCode(string InvitationCode, string UserId)
+        {
+            var invite = db.CompaniesAspNetUsers.Where(g => g.InvitationCode == InvitationCode).SingleOrDefault();
+
+            invite.Status = 2;
+            invite.InvitationCode = null;
+            invite.UserId = UserId;
+
+            db.SaveChanges();
+
+            return true;
+        }
+
         #endregion
     }
 }

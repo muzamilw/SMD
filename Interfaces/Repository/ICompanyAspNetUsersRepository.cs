@@ -15,5 +15,10 @@ namespace SMD.Interfaces.Repository
 
 
         vw_CompanyUsers CompanyUserExists(string Email);
+
+        bool VerifyInvitationCode(string InvitationCode);
+
+        bool AcceptInvitationCode(string InvitationCode);
+        bool AcceptInvitationCode(string InvitationCode, string UserId);
     }
 }
