@@ -49,6 +49,7 @@ define("user/user.viewModel",
                          id: 2,
                          name: 'Female'
                      }]),
+                         SelectedMangeUser = ko.observable(),
                     // Get User Profile For Editing 
                    getUserProfile = function () {
                         dataservice.getUserProfile(null,
@@ -212,12 +213,7 @@ define("user/user.viewModel",
                         });
                     },
 
-
-                  
-                    
-                   
-
-                      hasChangesOnProfile = ko.computed(function () {
+                    hasChangesOnProfile = ko.computed(function () {
                           if (selectedUser() == undefined) {
                               return false;
                           }
@@ -262,7 +258,7 @@ define("user/user.viewModel",
                             dataservice.removeUser(
                             {Id:item.mid}, {
                                 success: function () {
-
+                                    userList.removeAll();
                                     toastr.success("User successfully removed!");
                                     getDataforUser();
 
@@ -288,20 +284,40 @@ define("user/user.viewModel",
 
                     },
 
+                    onEditManagedUser = function (item)
+                    {
+                        SelectedMangeUser( item);
+                        view.showEditManagedUserPopup();
+                    },
                        
+                    UpdateManagedUserRole = function (item)
+                    {
 
+                        dataservice.updateManagedUser({ Id: item.mid, RoleId: item.RoleId },
+                           {
+                               success: function (serverData) {
+                                 
+                                   toastr.error("User updated Successfully");
+                                   hideEditManagedUserPopup();
 
+                               },
+                               error: function () {
+                                   toastr.error("Failed to update User");
+                               }
+                           });
 
-                       onEditUser = function (item) {
+                    }
+
+                    onEditUser = function (item) {
                           
-                           //selectedUserId(item.UserId);
-                           window.location.href = "/User/ManageUser/Index?user=" + item.UserId;
+                        //selectedUserId(item.UserId);
+                        window.location.href = "/User/ManageUser/Index?user=" + item.UserId;
                          
-                       },
+                    },
 
-                         onCloseUserEdit = function () {
-                             window.location.href = "/user/ManageUser/ManageUsers";
-                         }
+                    onCloseUserEdit = function () {
+                        window.location.href = "/user/ManageUser/ManageUsers";
+                    }
                     //Update Profile
                      //Get Base Data for Questions
                     updateProfile = function () {
@@ -323,19 +339,19 @@ define("user/user.viewModel",
                     },
 
                 
-                InviteUser = function () {
+                    InviteUser = function () {
 
-                    view.showInviteUser();
-                },
+                        view.showInviteUser();
+                    },
 
-                 Invite = function () {
+                    Invite = function () {
 
                      dataservice.inviteUser({
                          Email: InviteEmail(), RoleId: selectedRoleId()
                      },{
 
                                success: function () {
-
+                                   userList.removeAll();
                                    toastr.success("Invitation Sent!");
                                    getDataforUser();
 
@@ -417,7 +433,9 @@ define("user/user.viewModel",
                     InviteUser: InviteUser,
                     Invite: Invite,
                     InviteEmail: InviteEmail,
-                    onRemoveUser: onRemoveUser
+                    onRemoveUser: onRemoveUser,
+                    onEditManagedUser : onEditManagedUser,
+                    SelectedMangeUser: SelectedMangeUser
                 };
             })()
         };

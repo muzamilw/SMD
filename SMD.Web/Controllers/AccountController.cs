@@ -306,24 +306,43 @@ namespace SMD.MIS.Controllers
                         throw new InvalidOperationException(string.Format("Failed to add user to role {0}", Roles.User));
                     }
 
-                    var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code },
-                        protocol: Request.Url.Scheme);
-                    await
-                        emailManagerService.SendAccountVerificationEmail(user, callbackUrl);
-                    ViewBag.Link = callbackUrl;
+
+                  
+
+                        var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                        var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code },
+                            protocol: Request.Url.Scheme);
+
+                        //if code is empty then do the confirmation
+                        if (string.IsNullOrEmpty(model.code))
+                        {
+                        await
+                            emailManagerService.SendAccountVerificationEmail(user, callbackUrl);
+                        ViewBag.Link = callbackUrl;
+
+                    }
                     
-                    companyService.createCompany(user.Id, model.Email, model.FullName, Guid.NewGuid().ToString());
+                    int CompanyId = companyService.createCompany(user.Id, model.Email, model.FullName, Guid.NewGuid().ToString());
 
                     //process the invitation code if not null
                     if (!string.IsNullOrEmpty(model.code))
                     {
-                        manageUserService.AcceptInvitation(model.code);
-                        
+                        manageUserService.AcceptInvitation(model.code,user.Id);
+
+                        IdentityResult cresult = await UserManager.ConfirmEmailAsync(user.Id, code);
+                        if (cresult.Succeeded)
+                        {
+
+                            CreateUserAccounts(CompanyId);
+                            return RedirectToAction("Login","Account");
+                        }
+
                     }
-
-
-                    return View("DisplayEmail");
+                    else
+                    {
+                        //perform email verification
+                        return View("DisplayEmail");
+                    }
                 }
                 AddErrors(result);
             }

@@ -89,15 +89,16 @@ else
         </div>
 
     @Html.Partial("~/Areas/User/Views/Shared/_InviteUser.cshtml")
+    @Html.Partial("~/Areas/User/Views/Shared/_EditManagedUser.cshtml")
     <script id="ManageUserTemplate" type="text/html">
 
 
         <tr style="cursor: pointer">
             <td>
-                <a href="#" class="store-user-link" data-bind="text: email,click:$root.onEditUser"></a>
+                <a href="#" class="store-user-link" data-bind="text: email,click:$root.onEditManagedUser"></a>
             </td>
             <td>
-                <a href="#" class="store-user-link" data-bind="text: FullName,click:$root.onEditUser">ddddd</a>
+                <p href="#" class="store-user-link" data-bind="text: FullName"></p>
             </td>
             <td>
                 <p style="margin-top:8px;" data-bind="text:RoleName"></p>

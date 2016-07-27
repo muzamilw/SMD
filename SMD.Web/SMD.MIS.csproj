@@ -1577,6 +1577,7 @@
     <Content Include="Areas\Report\Views\Report\TransactionReport.cshtml" />
     <Content Include="Areas\Report\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Report\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\User\Views\Shared\_EditManagedUser.cshtml" />
     <None Include="Properties\PublishProfiles\mz profile.pubxml" />
     <None Include="Properties\PublishProfiles\SMD MIS Saqib.pubxml" />
     <None Include="Properties\PublishProfiles\SMD.pubxml" />

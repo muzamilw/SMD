@@ -10,6 +10,7 @@ using System;
 using AutoMapper;
 using SMD.Models.DomainModels;
 using SMD.Models.RequestModels;
+using SMD.Models.ResponseModels;
 
 namespace SMD.MIS.Areas.Api.Controllers
 {
@@ -51,6 +52,15 @@ namespace SMD.MIS.Areas.Api.Controllers
             return domainList.Select(a => Mapper.Map<vw_CompanyUsers, ManageUserRolesModel>(a)).ToList();
 
           
+        }
+
+
+        public BaseApiResponse Post(UpdateManagedUserRequest request)
+        {
+
+            var result = _manageUserService.UpdateManagedUser(request.Id, request.RoleId);
+            return new BaseApiResponse { Status = true, Message = "Success" };
+
         }
 
 

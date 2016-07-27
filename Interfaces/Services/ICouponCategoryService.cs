@@ -10,6 +10,6 @@ namespace SMD.Interfaces.Services
 
     public interface ICouponCategoryService
     {
-        IEnumerable<CouponCategory> GetAllCoupons();
+        IEnumerable<CouponCategory> GetAllCategories();
     }
 }

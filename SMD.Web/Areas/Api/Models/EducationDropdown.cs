@@ -34,6 +34,10 @@ namespace SMD.MIS.Areas.Api.Models
         public int CategoryId { get; set; }
         public string Name { get; set; }
 
+        public string ImagePath { get; set; }
+
+        public int SortOrder { get; set; }
+
     }
     public class CouponCodeModel
     {

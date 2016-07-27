@@ -61,6 +61,11 @@ define("user/user.dataservice", function () {
                         dataType: 'json',
                         type: 'DELETE'
                     });
+                    amplify.request.define('updateManagedUser', 'ajax', {
+                        url: '/Api/Manageusers',
+                        dataType: 'json',
+                        type: 'POST'
+                    });
                     isInitialized = true;
                 }
             },
@@ -138,6 +143,16 @@ define("user/user.dataservice", function () {
                data: params
            });
        },
+
+       updateManagedUser = function (params, callbacks) {
+           initialize();
+           return amplify.request({
+               resourceId: 'updateManagedUser',
+               success: callbacks.success,
+               error: callbacks.error,
+               data: params
+           });
+       },
              // Get Cities
         getCitiesByCountry = function (params, callbacks) {
             initialize();
@@ -159,7 +174,8 @@ define("user/user.dataservice", function () {
             saveUserProfile: saveUserProfile,
             getCitiesByCountry: getCitiesByCountry,
             inviteUser: inviteUser,
-            removeUser: removeUser
+            removeUser: removeUser,
+            updateManagedUser: updateManagedUser
         };
     })();
     return dataService;

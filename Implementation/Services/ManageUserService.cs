@@ -81,6 +81,23 @@ namespace SMD.Implementation.Services
         }
 
 
+        public bool UpdateManagedUser(string id, string RoleId)
+        {
+
+            var recordtoUpate = companyAspNetUsersRepository.Find(Convert.ToInt64(id));
+            if (recordtoUpate != null)
+            {
+                recordtoUpate.RoleId = RoleId;
+                companyAspNetUsersRepository.Update(recordtoUpate);
+                companyAspNetUsersRepository.SaveChanges();
+                return true;
+            }
+            else
+                return false;
+            
+
+        }
+
 
         public vw_CompanyUsers ComanyUserExists(string email)
         {
@@ -134,6 +151,20 @@ namespace SMD.Implementation.Services
             if (verifyResult)
             {
                 companyAspNetUsersRepository.AcceptInvitationCode(InvitationCode);
+                return true;
+            }
+            else
+                return false;
+
+        }
+
+
+        public bool AcceptInvitation(string InvitationCode, string UserId)
+        {
+            var verifyResult = companyAspNetUsersRepository.VerifyInvitationCode(InvitationCode);
+            if (verifyResult)
+            {
+                companyAspNetUsersRepository.AcceptInvitationCode(InvitationCode,UserId);
                 return true;
             }
             else

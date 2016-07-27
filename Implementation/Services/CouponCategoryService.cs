@@ -32,9 +32,9 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// List of Country's Cities
         /// </summary>
-        public IEnumerable<CouponCategory> GetAllCoupons()
+        public IEnumerable<CouponCategory> GetAllCategories()
         {
-            return couponRepository.GetAllCoupons().Where(g=>g.Status == true).ToList();
+            return couponRepository.GetAllCoupons().Where(g=>g.Status == true).OrderBy( g=> g.SortOrder).ToList();
         }
         #endregion
     }

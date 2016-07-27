@@ -64,7 +64,7 @@ namespace SMD.Repository.Repositories
             }
             return false;
         }
-        public bool createCompany(string userId, string email, string fullname, string guid)
+        public int createCompany(string userId, string email, string fullname, string guid)
         {
             int UserCompanyId = 0;
            
@@ -82,7 +82,7 @@ namespace SMD.Repository.Repositories
                 user.AuthenticationToken = guid;
                 db.SaveChanges();
             }
-            return true;
+            return UserCompanyId;
         }
         public bool updateCompany(UpdateUserProfileRequest request)
         {

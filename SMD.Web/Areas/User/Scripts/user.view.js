@@ -34,7 +34,15 @@ define("user/user.view",
                 hideChangePassword = function () {
                     $("#InviteUser").modal("hide");
                 },
-
+                 // show edit managed user dialoge
+                showEditManagedUserPopup = function () {
+                    $("#EditManagedUser").modal("show");
+                    initializeLabelPopovers();
+                },
+                 // Hideinvite user
+                hideEditManagedUserPopup = function () {
+                    $("#EditManagedUser").modal("hide");
+                },
                 // Initialize
                 initialize = function () {
                     if (!bindingRoot) {
@@ -49,7 +57,10 @@ define("user/user.view",
                 showChangePassword: showChangePassword,
                 hideChangePassword: hideChangePassword,
                 showInviteUser: showInviteUser,
-                hideChangePassword: hideChangePassword
+                hideChangePassword: hideChangePassword,
+                showEditManagedUserPopup: showEditManagedUserPopup,
+                hideEditManagedUserPopup: hideEditManagedUserPopup
+
             };
         })(userViewModel);
         // Initialize the view model

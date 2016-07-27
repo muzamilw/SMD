@@ -6752,22 +6752,38 @@ COMMIT
 
 GO
 
-/****** Object:  View [dbo].[vw_CompanyUsers]    Script Date: 7/20/2016 4:50:57 PM ******/
+
+GO
+
+/****** Object:  View [dbo].[vw_CompanyUsers]    Script Date: 7/27/2016 4:02:59 PM ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
-create VIEW [dbo].[vw_CompanyUsers]
+
+
+
+ALTER VIEW [dbo].[vw_CompanyUsers]
 AS
 
-select cu.id,u.id as UserId, u.email, u.FullName, r.Name as RoleName, cu.CreatedOn, (case  when cu.status = 1 then 'Invitation Sent' when cu.status = 2 then 'Active' end) status, cu.companyid from dbo.CompaniesAspNetUsers  cu
+select cu.id,u.id as UserId, 
+
+(case when u.email is null then cu.InvitationEmail else u.email end) as email
+
+
+, u.FullName, r.Name as RoleName, cu.CreatedOn, (case  when cu.status = 1 then 'Invitation Sent' when cu.status = 2 then 'Active' end) status, cu.companyid , c.CompanyName, cu.RoleId
+from dbo.CompaniesAspNetUsers  cu
 inner join   dbo.AspNetRoles r on r.Id = roleid
-inner join AspNetUsers u on u.Id = cu.userid
+left outer join AspNetUsers u on u.Id = cu.userid
+inner join Company c on cu.CompanyId = c.CompanyId
+
+
 
 
 GO
+
 
 
 
@@ -6790,5 +6806,48 @@ ALTER TABLE dbo.CompaniesAspNetUsers ADD
 	InvitationEmail nvarchar(500) NULL
 GO
 ALTER TABLE dbo.CompaniesAspNetUsers SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+
+
+
+
+/* To prevent any potential data loss issues, you should review this script in detail before running it outside the context of the database designer.*/
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.CouponCategory ADD
+	ImagePath nvarchar(500) NULL
+GO
+ALTER TABLE dbo.CouponCategory SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+
+
+
+/* To prevent any potential data loss issues, you should review this script in detail before running it outside the context of the database designer.*/
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.CouponCategory ADD
+	SortOrder int NULL
+GO
+ALTER TABLE dbo.CouponCategory SET (LOCK_ESCALATION = TABLE)
 GO
 COMMIT

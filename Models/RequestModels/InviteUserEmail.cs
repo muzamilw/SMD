@@ -32,4 +32,14 @@ namespace SMD.Models.RequestModels
     {
         public string Id { get; set; }
     }
+
+
+
+
+    public class UpdateManagedUserRequest
+    {
+        public string Id { get; set; }
+
+        public string RoleId { get; set; }
+    }
 }

@@ -193,7 +193,8 @@
             FullName = ko.observable(source.FullName),
             RoleName = ko.observable(source.RoleName),
             CreatedOn = ko.observable(source.CreatedOn),
-            companyid = ko.observable(source.companyid)
+            companyid = ko.observable(source.companyid),
+            roleId = ko.observable(source.RoleId)
 
            
 
@@ -205,7 +206,8 @@
             FullName = ko.observable(),
             RoleName = ko.observable(),
             CreatedOn = ko.observable(),
-            companyid = ko.observable()
+            companyid = ko.observable(),
+            roleId = ko.observable()
         
         }
 
@@ -232,7 +234,9 @@
             Name: FullName(),
             Role: RoleName(),
             cid: companyid(),
+            email : email(),
             mid: id(),
+            RoleId: roleId(),
             errors: errors,
             isValid: isValid,
             dirtyFlag: dirtyFlag,

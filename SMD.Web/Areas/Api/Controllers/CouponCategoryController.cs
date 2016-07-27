@@ -35,7 +35,7 @@ namespace SMD.MIS.Areas.Api.Controllers
                 throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
             }
 
-            return couponCategoryService.GetAllCoupons().CreateFrom();
+            return couponCategoryService.GetAllCategories().CreateFrom();
         }
 
 

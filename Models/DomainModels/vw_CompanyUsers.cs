@@ -20,6 +20,8 @@ namespace SMD.Models.DomainModels
 
         public string CompanyName { get; set; }
 
+        public string RoleId { get; set; }
+
 
     }
 }

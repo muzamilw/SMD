@@ -17,5 +17,7 @@ namespace SMD.MIS.Areas.Api.Models
         public string status { get; set; }
 
         public int CompanyId { get; set; }
+
+        public string RoleId { get; set; }
     }
 }
