@@ -18,6 +18,7 @@ namespace SMD.MIS.Areas.Api.Controllers
         
         #region Private
         private readonly IAdvertService _advertService;
+        private readonly ICompanyService _companyService;
         #endregion
 
         #region Constructor
@@ -25,10 +26,11 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// <summary>
         /// Constructor
         /// </summary>
-        public GetCouponByIdController(IAdvertService advertService)
+        public GetCouponByIdController(IAdvertService advertService,ICompanyService _companyService)
         {
             
             this._advertService = advertService;
+            this._companyService = _companyService;
         }
 
         #endregion
@@ -47,6 +49,18 @@ namespace SMD.MIS.Areas.Api.Controllers
                 throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
             }
             var coupon =  _advertService.GetCouponById(CouponId);
+
+            if ( coupon.LogoUrl == null)
+            {
+                var company = this._companyService.GetCompanyById(coupon.CompanyId.Value);
+
+                coupon.LogoUrl = "http://manage.cash4ads.com/" + company.Logo;
+
+            }
+            else
+            {
+                coupon.LogoUrl = "http://manage.cash4ads.com/" + coupon.LogoUrl;
+            }
 
             var retCoupon = new CouponDetails
             {

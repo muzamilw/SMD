@@ -211,6 +211,7 @@
     <Content Include="images\ajax-loader.gif" />
     <Content Include="images\au.png" />
     <Content Include="images\bg-grad-unit-top.png" />
+    <Content Include="images\blue-circle.svg" />
     <Content Include="images\brand-icons-sprite1.png" />
     <Content Include="images\branding-sprite2-v2.png" />
     <Content Include="images\Cash4ads_logo.png" />
@@ -238,6 +239,7 @@
     <Content Include="images\mockup-iphone6_2.png" />
     <Content Include="images\beta.jpg" />
     <Content Include="images\ndod-view-mini-footer-separator.png" />
+    <Content Include="images\orange-circle.svg" />
     <Content Include="images\team_01.png" />
     <Content Include="images\team_02.png" />
     <Content Include="images\team_03.png" />
@@ -322,6 +324,9 @@
     <Content Include="Views\Shared\_Login.cshtml" />
     <Content Include="Views\Home\reportViewer.cshtml" />
     <Content Include="Views\Shared\_ReportPartial.cshtml" />
+    <Content Include="Views\Home\vouchers.cshtml" />
+    <Content Include="Views\Home\advertisers - Copy.cshtml" />
+    <Content Include="Views\Home\get_paid_watch_ads - Copy.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

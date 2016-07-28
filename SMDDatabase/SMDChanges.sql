@@ -6753,6 +6753,26 @@ COMMIT
 GO
 
 
+
+/* To prevent any potential data loss issues, you should review this script in detail before running it outside the context of the database designer.*/
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.CompaniesAspNetUsers ADD
+	InvitationEmail nvarchar(500) NULL
+GO
+ALTER TABLE dbo.CompaniesAspNetUsers SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+
 GO
 
 /****** Object:  View [dbo].[vw_CompanyUsers]    Script Date: 7/27/2016 4:02:59 PM ******/
@@ -6788,26 +6808,6 @@ GO
 
 
 
-
-
-/* To prevent any potential data loss issues, you should review this script in detail before running it outside the context of the database designer.*/
-BEGIN TRANSACTION
-SET QUOTED_IDENTIFIER ON
-SET ARITHABORT ON
-SET NUMERIC_ROUNDABORT OFF
-SET CONCAT_NULL_YIELDS_NULL ON
-SET ANSI_NULLS ON
-SET ANSI_PADDING ON
-SET ANSI_WARNINGS ON
-COMMIT
-BEGIN TRANSACTION
-GO
-ALTER TABLE dbo.CompaniesAspNetUsers ADD
-	InvitationEmail nvarchar(500) NULL
-GO
-ALTER TABLE dbo.CompaniesAspNetUsers SET (LOCK_ESCALATION = TABLE)
-GO
-COMMIT
 
 
 
@@ -6851,3 +6851,66 @@ GO
 ALTER TABLE dbo.CouponCategory SET (LOCK_ESCALATION = TABLE)
 GO
 COMMIT
+
+
+
+USE [SMDv2]
+GO
+/****** Object:  StoredProcedure [dbo].[GetCouponsByCompanyId]    Script Date: 7/28/2016 7:53:16 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE [dbo].[GetCouponsByCompanyId]
+	-- Add the parameters for the stored procedure here
+	-- [GetCouponsByCompanyId] 93
+	@CompanyId nvarchar(128) = 0 
+AS
+BEGIN
+	DECLARE @dob AS DateTime
+	DECLARE @age AS INT
+	DECLARE @gender AS INT
+	DECLARE @currentDate AS DateTime
+	DECLARE @countryId AS INT
+	DECLARE @cityId AS INT
+	DECLARE @industryId AS INT
+	--SELECT @dob = DOB FROM AspNetUsers where id=@UserID
+	--SELECT @gender = gender FROM AspNetUsers where id=@UserID
+	SET @currentDate = getDate()
+	SET @age = DATEDIFF(year, @dob, @currentDate)
+	SELECT @countryId = NULL--countryId FROM Company where @companyId=@companyId
+	SELECT @cityId = NULL--cityId FROM Company where @companyId=@companyId
+	--SELECT @industryId = industryId FROM AspNetUsers where id=@UserID
+	select campaignid as CouponId, CampaignName as CouponName, DisplayTitle as CouponTitle,
+	[Description]  as  Firstline, CampaignDescription as SecondLine, 'http://manage.cash4ads.com/' + ImagePath as  CouponImage,
+	CouponSwapValue, CouponActualValue, 
+	(select 
+	CASE
+		WHEN adcampaign.LogoUrl is null or adcampaign.LogoUrl = ''
+		THEN 'http://manage.cash4ads.com/' + usr.Logo
+		WHEN usr.Logo is not null
+		THEN 'http://manage.cash4ads.com/' + adcampaign.LogoUrl
+	END as AdvertisersLogoPath from company usr where usr.CompanyId = adcampaign.CompanyId) as AdvertisersLogoPath
+	
+	from adcampaign
+	where (
+		((@age is null) or (adcampaign.AgeRangeEnd >= @age and  @age >= adcampaign.AgeRangeStart))
+		and
+		((@gender is null) or (adcampaign.Gender = @gender))
+		and
+		((@industryId is null) or ((select count(*) from AdCampaignTargetCriteria MyCampaignCrit
+			 where MyCampaignCrit.CampaignID = adcampaign.CampaignID and 
+			 MyCampaignCrit.IndustryID=@industryId) > 0 ))
+		--and
+		--(adcampaign.EndDateTime >= @currentDate and @currentDate >= adcampaign.StartDateTime)
+		and
+		(adcampaign.Approved = 1)
+		and
+		(adcampaign.Type = 5) -- coupon
+		and
+		((@countryId is null or @cityId is null) or ((select count(*) from AdCampaignTargetLocation MyCampaignLoc
+			 where MyCampaignLoc.CampaignID=adcampaign.CampaignID and MyCampaignLoc.CountryID=@countryId and
+			 MyCampaignLoc.CityID=@cityId) > 0))
+		)
+		and AdCampaign.companyid = @companyid
+END

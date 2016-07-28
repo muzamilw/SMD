@@ -1719,8 +1719,16 @@ input[type="radio"] {
     background-color: #e7ebee;
 }
 
+
+#login-page-full a {
+
+    color:white;
+}
+
+
 #login-page-full {
     background-color: #2faae3;
+    color:white;
 }
 
 #login-box {

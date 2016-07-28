@@ -76,8 +76,8 @@
                     <span class="icon-bar"></span>
                 </button>
 
-                <a href="/"><img src="~/images/Cash4ads_logo.png" style="height:127px;position:absolute;top:13px"/></a>
-                <a href="/"><img src="~/images/beta.jpg" style="height:20px;position:relative;top:13px;left:100px;" /></a>
+                <a href="/"><img src="~/images/Cash4ads_logo.png" style="" class="logocash" /></a>
+                <a href="/"><img src="~/images/beta.jpg" style="" class="logocashbeta" /></a>
 
                 @*<a class="navbar-brand" href="/">Logo</a>*@
             </div>
@@ -87,11 +87,11 @@
                     
                     @if (sessionVar == null)
                     {
-                        <li><a class="scroll-link" href="@Url.Action("get_paid_watch_ads", "Home")">Get paid to watch Ads</a></li>
-                        <li><a class="scroll-link" href="@Url.Action("advertisers", "Home")">Want to Advertise</a></li>
+                        <li><a class="scroll-link" href="@Url.Action("get_paid_watch_ads", "Home")">Get paid to watch ads</a></li>
+                        <li><a class="scroll-link" href="@Url.Action("advertisers", "Home")">Advertise for free</a></li>
 
                         <li><img src="~/images/United-Kingdom-icon.png" style="padding-top:22px;" /></li>
-                        <li><i class="fa fa-user fa-lg text-white " onclick="openLoginDialog();" style="    padding-top: 30px;    font-size: 23px;    margin-left: 12px;"></i></li>
+                        <li><a href="http://manage.cash4ads.com" title="Login" style="    padding-top: 30px;    font-size: 23px;    margin-left: 12px;"><i class="fa fa-user fa-lg text-white "></i></a></li>
 
                     }
                     else
@@ -163,18 +163,18 @@
                         Copyright © 2016 Cash4Ads.com Inc. All rights reserved.
                     </p>
                     <p>
-                        <a href="@Url.Action("get_paid_watch_ads", "Home")">Get paid to watch Ads</a>&nbsp;&nbsp;&nbsp;&nbsp; <a href="@Url.Action("advertisers", "Home")">Want to Advertise</a>&nbsp;&nbsp;&nbsp;&nbsp; <a href="#">Privacy Policy</a>&nbsp;&nbsp;&nbsp;&nbsp;        <a href="#">Terms of Use</a>&nbsp;&nbsp;&nbsp;&nbsp;     <a href="#">Contact Us</a>&nbsp;&nbsp;&nbsp;&nbsp;       <a href="#">Help Center</a> &nbsp;&nbsp;&nbsp;&nbsp;<a href="http://blog.cash4ads.com" target="_blank">Blog</a> &nbsp;&nbsp;&nbsp;&nbsp;    <a href="#">Language</a>
+                        <a href="@Url.Action("get_paid_watch_ads", "Home")">Get paid to watch Ads</a>&nbsp;&nbsp;&nbsp;&nbsp; <a href="@Url.Action("advertisers", "Home")">Advertise for free</a>&nbsp;&nbsp;&nbsp;&nbsp; <a href="#">Privacy Policy</a>&nbsp;&nbsp;&nbsp;&nbsp;        <a href="#">Terms of Use</a>&nbsp;&nbsp;&nbsp;&nbsp;     <a href="@Url.Action("contact", "Home")">Contact Us</a>&nbsp;&nbsp;&nbsp;&nbsp;       <a href="@Url.Action("About", "Home")" ">About Us</a> &nbsp;&nbsp;&nbsp;&nbsp;<a href="http://blog.cash4ads.com" target="_blank">Blog</a> &nbsp;&nbsp;&nbsp;&nbsp;    <a href="#">Language</a>
 </p>
                 </div>
             </div>
         </div>
     </section>
-    @Html.Partial("_Login")
+    @*@Html.Partial("_Login")*@
 
-    @Html.Partial("_ReportPartial")
+    @*@Html.Partial("_ReportPartial")*@
   
-                @*<script src="~/scripts/jquery-2.1.4.min.js"></script>*@
-                @*<script>window.jQuery || document.write('<script src="~/scripts/jquery-2.1.4.min.js"><\/script>')</script>*@
+                <script src="~/scripts/jquery-2.1.4.min.js"></script>
+                <script>window.jQuery || document.write('<script src="~/scripts/jquery-2.1.4.min.js"><\/script>')</script>
 
                 <script src="~/scripts/bootstrap.min.js"></script>
 
