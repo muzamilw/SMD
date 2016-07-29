@@ -1,17 +1,17 @@
 ﻿@using SMD.Models.Common
 @using SMD.Common
 
-@{ 
-    
-    
+@{
+
+
     string classes = "";
     string classesMenu = "";
 
 
     IEnumerable<CompanyIdClaimValue> companyClaimValues = ClaimHelper.GetClaimsByType<CompanyIdClaimValue>(SmdClaimTypes.CompanyId);
-    string CompanyName = companyClaimValues!= null && companyClaimValues.Any() ? companyClaimValues.ElementAt(0).CompanyName : "Claim not found";
-    
-    
+    string CompanyName = companyClaimValues != null && companyClaimValues.Any() ? companyClaimValues.ElementAt(0).CompanyName : "Claim not found";
+
+
 }
 <!DOCTYPE html>
 <html>
@@ -41,7 +41,7 @@
     @if (HttpContext.Current.Request.IsLocal == false)
     {
         <link href='//fonts.googleapis.com/css?family=Open+Sans:400,600,700,300|Titillium+Web:200,300,400' rel='stylesheet' type='text/css'>
-    
+
     }
     <!--[if lt IE 9]>
         <script src="js/html5shiv.js"></script>
@@ -51,29 +51,22 @@
 <body class="theme-blue-gradient">
 
     <header class="navbar" id="header-navbar">
-        <div class="col-md-12 col-lg-12 col-sm-12" style="height: 4px; background-color: #3dd2b5; position: absolute; margin-top: 100px;"></div>
-       
-        <div class="container" style="height:100px;">
-            <a href="~/" id="header" class="my-navigator navbar-brand logoAnchor" style="background-image: url(@Url.Content("~/Images/ads.png")); background-repeat: no-repeat;background-size: 42%;margin-top: 5px;margin-left: 5px;">
-            </a>
-            <a href="~/" id="beta" style="
-        background-image: url(/Images/beta.jpg);
-    background-repeat: no-repeat;
-    background-size: 63%;
-    margin-top: 5px;
-    margin-left: 5px;
-    width: 72px;
-    height: 18px;
-    position: absolute;
-    left: 73px;">
+        <div class="col-md-12 col-lg-12 col-sm-12" style="height: 4px; background-color: black; position: absolute; margin-top: 100px;"></div>
 
-            </a>
+        <div class="container" style="height:100px;">
+            <a href="~/" id="header" class="cashlogox my-navigator navbar-brand logoAnchor " style="background-image: url(@Url.Content("~/Images/ads.png"))"></a>
+            <a href="~/" id="beta" class="cashbeta"></a>
             <div class="clearfix">
 
                 <button class="navbar-toggle" data-target=".navbar-ex1-collapse" data-toggle="collapse" type="button">
                     <span class="sr-only">Toggle navigation</span>
                     @*<span class="fa fa-bars"></span>*@
                 </button>
+
+                <div>
+                    <h3>Dashboard For :</h3>
+                    <div class="pull-left" style="color:white">@CompanyName</div>
+                </div>
                 <div class="nav-no-collapse navbar-left pull-left hidden-sm hidden-xs" style="margin-top:23px;">
 
                     @*<span style="font-size: 3em;color:white;padding-left:200px;">Targeting Material</span>*@
@@ -82,12 +75,12 @@
                             @if (!User.IsInRole("User"))
                             {
                                 @*<a class="btn" id="make-small-nav">
-                                    <i class="fa fa-bars"></i>
-                                </a>*@
+                                        <i class="fa fa-bars"></i>
+                                    </a>*@
                             }
                             else
                             {
-                              //  classes = "removeMenuMargin";
+                                //  classes = "removeMenuMargin";
                                 classesMenu = "displayNone";
                             }
                         </li>
@@ -95,14 +88,19 @@
                 </div>
 
 
+
+
+
+
+
                 <div class="nav-no-collapse pull-right" id="header-nav" style="margin-top:23px;">
 
-                    <div class="pull-left">Managing @CompanyName</div>
+                    
 
                     <ul class="nav navbar-nav pull-right">
 
                         <!-- MPC Admin Menu-->
-                        <li class="dropdown profile-dropdown @classesMenu" >
+                        <li class="dropdown profile-dropdown @classesMenu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <span class="hidden-xs"> Admin Options  </span> <b class="caret"></b>
                                 <div class="user-positioner" style="position:fixed;">
@@ -140,17 +138,17 @@
                                 </div>
                             </a>
                             <ul class="dropdown-menu loginMenu">
-                               
+
                                 <li><a href="">Ad Campaigns</a></li>
                                 <li class="inlineMenuItem" style="display:none;"><a href="~/Ads/Ads">&nbsp;&nbsp;Create Ad Campaigns</a></li>
                                 <li class="inlineMenuItem"><a href="~/Ads/Ads">&nbsp;&nbsp;View Ad Campaigns</a></li>
                                 <li><a href="">Survey Slides</a></li>
                                 <li class="inlineMenuItem" style="display:none;"><a href="~/survey">&nbsp;&nbsp;Create Survey Slides</a></li>
                                 <li class="inlineMenuItem"><a href="~/survey">&nbsp;&nbsp;View Survey Slides</a></li>
-                               
+
                                 <li><a href="">Billing</a></li>
                                 <li class="inlineMenuItem"><a href="~/Billing/Manage/Invoice">&nbsp;&nbsp;View Statements </a></li>
-                                
+
                                 <li class="inlineMenuItem"><a href="">&nbsp;&nbsp;Payment Methods</a></li>
                                 <li class="inlineMenuItem"><a href="">&nbsp;&nbsp;Delete My Account</a></li>
                                 <li class=""><a href="~/user/ManageUser/ManageUsers">Manage users </a></li>
@@ -174,9 +172,9 @@
     <div id="page-wrapper" class="container">
 
         <div class="row">
-      
-            
-            <div id="nav-col"  style="display:none;">
+
+
+            <div id="nav-col" style="display:none;">
 
 
                 @*<a id="menu-logo" href="~/Dashboard/Index">
@@ -192,12 +190,7 @@
 
                             @* left menue starts here*@
                             <div class="collapse navbar-collapse navbar-ex1-collapse" id="sidebar-nav">
-                                <ul class="nav nav-pills nav-stacked" id="Navigation-bar">
-
-                                 
-                            
-
-                                </ul>
+                                <ul class="nav nav-pills nav-stacked" id="Navigation-bar"></ul>
                             </div>
                             @* Left menue ends here*@
 
@@ -206,7 +199,7 @@
                 </section>
 
             </div>
-            
+
             @*content wrapper goes here*@
             <div id="content-wrapper" class="removeMenuMargin">
                 @RenderBody()

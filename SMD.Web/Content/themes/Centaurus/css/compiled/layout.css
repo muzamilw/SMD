@@ -171,11 +171,11 @@ blockquote.pull-right:before {
     right: 50px;
 }
 
-.container {
+/*.container {
     margin: 0;
     max-width: 1920px;
     width: 100%;
-}
+}*/
 
 .navbar-toggle {
     border: medium none;

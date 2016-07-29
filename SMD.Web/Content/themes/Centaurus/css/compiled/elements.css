@@ -4036,7 +4036,7 @@ input[type="radio"] {
 }
 
 .theme-blue-gradient #header-navbar, #config-tool #skin-colors li a.skin-changer.blue-gradient {
-    background: #3dd2b5 !important;
+    background: black !important;
     background: -moz-linear-gradient(top,#3498db 0%,#2980b9 100%);
     background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,#3498db),color-stop(100%,#2980b9));
     background: -webkit-linear-gradient(top,#3498db 0%,#2980b9 100%);
@@ -5415,3 +5415,35 @@ color:red !important;
     color: rgb(52,152,219) !important;
 }
 
+
+
+
+.cashlogox{
+       
+    background-repeat: no-repeat !important;
+    background-size: 42% !important;
+    margin-top: 5px !important;
+   
+    background-position: center !important;
+    text-align: center !important;
+    position: absolute !important;
+    left: 0 !important;
+    right: 0 !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+
+.cashbeta{
+        background-image: url(/Images/beta.jpg);
+    background-repeat: no-repeat;
+    background-size: 63%;
+    margin-top: 5px;
+    margin-left: auto;
+    width: 72px;
+    height: 18px;
+    position: absolute;
+    left: 97px;
+    right: 0;
+    margin-right: auto;
+}
