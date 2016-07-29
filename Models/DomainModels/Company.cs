@@ -49,5 +49,10 @@ namespace SMD.Models.DomainModels
 
         public virtual CompaniesAspNetUser CompaniesAspNetUsers { get; set; }
 
+        public virtual ICollection<CompanyBranch> CompanyBranches { get; set; }
+        public virtual ICollection<Coupon> Coupons { get; set; }
+
+        public virtual ICollection<BranchCategory> BranchCategories { get; set; }
+
     }
 }

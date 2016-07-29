@@ -21,7 +21,9 @@ namespace SMD.MIS.ModelMappers
             return new CouponCategory
             {
                 CategoryId = source.CategoryId,
-                Name = source.Name
+                Name = source.Name,
+                ImagePath = source.ImagePath,
+                SortOrder = source.SortOrder
             };
         }
         public static CouponCategoryModel CreateFromForCategories(this Models.DomainModels.CouponCategory source, bool isSelected)

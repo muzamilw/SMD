@@ -250,6 +250,14 @@
           <Property Name="AuditEntityDescription" Type="nvarchar" MaxLength="500" />
           <Property Name="TableName" Type="nvarchar" MaxLength="200" />
         </EntityType>
+        <EntityType Name="BranchCategory">
+          <Key>
+            <PropertyRef Name="BranchCategoryId" />
+          </Key>
+          <Property Name="BranchCategoryId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BranchCategoryName" Type="nvarchar" MaxLength="100" />
+          <Property Name="CompanyId" Type="int" />
+        </EntityType>
         <EntityType Name="CampaignCategories">
           <Key>
             <PropertyRef Name="Id" />
@@ -312,6 +320,23 @@
           <Property Name="WebsiteLink" Type="nvarchar" MaxLength="100" />
           <Property Name="CompanyType" Type="int" />
         </EntityType>
+        <EntityType Name="CompanyBranch">
+          <Key>
+            <PropertyRef Name="BranchId" />
+          </Key>
+          <Property Name="BranchId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BranchTitle" Type="nvarchar" MaxLength="100" />
+          <Property Name="BranchAddressLine1" Type="nvarchar" MaxLength="100" />
+          <Property Name="BranchAddressLine2" Type="nvarchar" MaxLength="100" />
+          <Property Name="BranchCity" Type="nvarchar" MaxLength="50" />
+          <Property Name="BranchState" Type="nvarchar" MaxLength="50" />
+          <Property Name="BranchZipCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="BranchPhone" Type="nvarchar" MaxLength="50" />
+          <Property Name="BranchLocationLat" Type="nvarchar" MaxLength="50" />
+          <Property Name="BranchLocationLong" Type="nvarchar" MaxLength="50" />
+          <Property Name="BranchCategoryId" Type="bigint" />
+          <Property Name="CompanyId" Type="int" />
+        </EntityType>
         <EntityType Name="Country">
           <Key>
             <PropertyRef Name="CountryID" />
@@ -319,6 +344,79 @@
           <Property Name="CountryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CountryName" Type="nvarchar" MaxLength="200" />
           <Property Name="CountryCode" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Coupon">
+          <Key>
+            <PropertyRef Name="CouponId" />
+          </Key>
+          <Property Name="CouponId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LanguageId" Type="int" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+          <Property Name="CouponTitle" Type="nvarchar" MaxLength="200" />
+          <Property Name="SearchKeywords" Type="nvarchar(max)" />
+          <Property Name="Status" Type="int" />
+          <Property Name="Archived" Type="bit" />
+          <Property Name="Approved" Type="bit" />
+          <Property Name="ApprovedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="ApprovalDateTime" Type="datetime" />
+          <Property Name="CreatedDateTime" Type="datetime" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="100" />
+          <Property Name="ModifiedDateTime" Type="datetime" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="100" />
+          <Property Name="RejectedReason" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Rejecteddatetime" Type="datetime" />
+          <Property Name="RejectedBy" Type="nvarchar" MaxLength="100" />
+          <Property Name="CurrencyId" Type="int" />
+          <Property Name="Price" Type="float" />
+          <Property Name="Savings" Type="float" />
+          <Property Name="SwapCost" Type="float" />
+          <Property Name="CouponViewCount" Type="int" />
+          <Property Name="CouponIssuedCount" Type="int" />
+          <Property Name="CouponRedeemedCount" Type="int" />
+          <Property Name="CouponQtyPerUser" Type="int" />
+          <Property Name="CouponListingMode" Type="int" />
+          <Property Name="CompanyId" Type="int" />
+          <Property Name="CouponActiveMonth" Type="int" />
+          <Property Name="CouponActiveYear" Type="int" />
+          <Property Name="CouponExpirydate" Type="datetime" />
+          <Property Name="couponImage1" Type="nvarchar(max)" />
+          <Property Name="CouponImage2" Type="nvarchar(max)" />
+          <Property Name="CouponImage3" Type="nvarchar(max)" />
+          <Property Name="LogoUrl" Type="nvarchar" MaxLength="200" />
+          <Property Name="HighlightLine1" Type="nvarchar" MaxLength="100" />
+          <Property Name="HighlightLine2" Type="nvarchar" MaxLength="100" />
+          <Property Name="HighlightLine3" Type="nvarchar" MaxLength="100" />
+          <Property Name="HighlightLine4" Type="nvarchar" MaxLength="100" />
+          <Property Name="HighlightLine5" Type="nvarchar" MaxLength="100" />
+          <Property Name="FinePrintLine1" Type="nvarchar" MaxLength="100" />
+          <Property Name="FinePrintLine2" Type="nvarchar" MaxLength="100" />
+          <Property Name="FinePrintLine3" Type="nvarchar" MaxLength="100" />
+          <Property Name="FinePrintLine4" Type="nvarchar" MaxLength="100" />
+          <Property Name="FinePrintLine5" Type="nvarchar" MaxLength="100" />
+          <Property Name="LocationBranchId" Type="bigint" />
+          <Property Name="LocationTitle" Type="nvarchar" MaxLength="500" />
+          <Property Name="LocationLine1" Type="nvarchar" MaxLength="500" />
+          <Property Name="LocationLine2" Type="nvarchar" MaxLength="500" />
+          <Property Name="LocationCity" Type="nvarchar" MaxLength="500" />
+          <Property Name="LocationState" Type="nvarchar" MaxLength="500" />
+          <Property Name="LocationZipCode" Type="nvarchar" MaxLength="500" />
+          <Property Name="LocationLAT" Type="nvarchar" MaxLength="50" />
+          <Property Name="LocationLON" Type="nvarchar" MaxLength="50" />
+          <Property Name="LocationPhone" Type="nvarchar" MaxLength="200" />
+          <Property Name="GeographyColumn" Type="geography" StoreGeneratedPattern="Computed" />
+          <Property Name="HowToRedeemLine1" Type="nvarchar" MaxLength="500" />
+          <Property Name="HowToRedeemLine2" Type="nvarchar" MaxLength="500" />
+          <Property Name="HowToRedeemLine3" Type="nvarchar" MaxLength="500" />
+          <Property Name="HowToRedeemLine4" Type="nvarchar" MaxLength="500" />
+          <Property Name="HowToRedeemLine5" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="CouponCategories">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryId" Type="int" />
+          <Property Name="CouponId" Type="bigint" />
         </EntityType>
         <EntityType Name="CouponCategory">
           <Key>
@@ -1023,6 +1121,18 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_BranchCategory_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="BranchCategory" Type="Self.BranchCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="BranchCategory">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CampaignCategories_AdCampaign">
           <End Role="AdCampaign" Type="Self.AdCampaign" Multiplicity="1" />
           <End Role="CampaignCategories" Type="Self.CampaignCategories" Multiplicity="*" />
@@ -1116,6 +1226,90 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
             </Principal>
             <Dependent Role="Company">
               <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyBranch_BranchCategory">
+          <End Role="BranchCategory" Type="Self.BranchCategory" Multiplicity="0..1" />
+          <End Role="CompanyBranch" Type="Self.CompanyBranch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BranchCategory">
+              <PropertyRef Name="BranchCategoryId" />
+            </Principal>
+            <Dependent Role="CompanyBranch">
+              <PropertyRef Name="BranchCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyBranch_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="CompanyBranch" Type="Self.CompanyBranch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="CompanyBranch">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Coupon_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="Coupon" Type="Self.Coupon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="Coupon">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Coupon_CompanyBranch">
+          <End Role="CompanyBranch" Type="Self.CompanyBranch" Multiplicity="0..1" />
+          <End Role="Coupon" Type="Self.Coupon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyBranch">
+              <PropertyRef Name="BranchId" />
+            </Principal>
+            <Dependent Role="Coupon">
+              <PropertyRef Name="LocationBranchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Coupon_Language">
+          <End Role="Language" Type="Self.Language" Multiplicity="0..1" />
+          <End Role="Coupon" Type="Self.Coupon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Language">
+              <PropertyRef Name="LanguageID" />
+            </Principal>
+            <Dependent Role="Coupon">
+              <PropertyRef Name="LanguageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CouponCategories_Coupon">
+          <End Role="Coupon" Type="Self.Coupon" Multiplicity="0..1" />
+          <End Role="CouponCategories" Type="Self.CouponCategories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Coupon">
+              <PropertyRef Name="CouponId" />
+            </Principal>
+            <Dependent Role="CouponCategories">
+              <PropertyRef Name="CouponId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CouponCategories_CouponCategory">
+          <End Role="CouponCategory" Type="Self.CouponCategory" Multiplicity="0..1" />
+          <End Role="CouponCategories" Type="Self.CouponCategories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CouponCategory">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="CouponCategories">
+              <PropertyRef Name="CategoryId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1706,11 +1900,15 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AuditLog" EntityType="Self.AuditLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BranchCategory" EntityType="Self.BranchCategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CampaignCategories" EntityType="Self.CampaignCategories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CompaniesAspNetUsers" EntityType="Self.CompaniesAspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompanyBranch" EntityType="Self.CompanyBranch" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Coupon" EntityType="Self.Coupon" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CouponCategories" EntityType="Self.CouponCategories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CouponCategory" EntityType="Self.CouponCategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CouponCodes" EntityType="Self.CouponCodes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Currency" EntityType="Self.Currency" Schema="dbo" store:Type="Tables" />
@@ -1880,6 +2078,10 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
             <End Role="Language" EntitySet="Language" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <AssociationSet Name="FK_BranchCategory_Company" Association="Self.FK_BranchCategory_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="BranchCategory" EntitySet="BranchCategory" />
+          </AssociationSet>
           <AssociationSet Name="FK_CampaignCategories_AdCampaign" Association="Self.FK_CampaignCategories_AdCampaign">
             <End Role="AdCampaign" EntitySet="AdCampaign" />
             <End Role="CampaignCategories" EntitySet="CampaignCategories" />
@@ -1911,6 +2113,34 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <AssociationSet Name="FK_Company_Country" Association="Self.FK_Company_Country">
             <End Role="Country" EntitySet="Country" />
             <End Role="Company" EntitySet="Company" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyBranch_BranchCategory" Association="Self.FK_CompanyBranch_BranchCategory">
+            <End Role="BranchCategory" EntitySet="BranchCategory" />
+            <End Role="CompanyBranch" EntitySet="CompanyBranch" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyBranch_Company" Association="Self.FK_CompanyBranch_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="CompanyBranch" EntitySet="CompanyBranch" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Coupon_Company" Association="Self.FK_Coupon_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Coupon" EntitySet="Coupon" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Coupon_CompanyBranch" Association="Self.FK_Coupon_CompanyBranch">
+            <End Role="CompanyBranch" EntitySet="CompanyBranch" />
+            <End Role="Coupon" EntitySet="Coupon" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Coupon_Language" Association="Self.FK_Coupon_Language">
+            <End Role="Language" EntitySet="Language" />
+            <End Role="Coupon" EntitySet="Coupon" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CouponCategories_Coupon" Association="Self.FK_CouponCategories_Coupon">
+            <End Role="Coupon" EntitySet="Coupon" />
+            <End Role="CouponCategories" EntitySet="CouponCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CouponCategories_CouponCategory" Association="Self.FK_CouponCategories_CouponCategory">
+            <End Role="CouponCategory" EntitySet="CouponCategory" />
+            <End Role="CouponCategories" EntitySet="CouponCategories" />
           </AssociationSet>
           <AssociationSet Name="FK_CouponCodes_AdCampaign" Association="Self.FK_CouponCodes_AdCampaign">
             <End Role="AdCampaign" EntitySet="AdCampaign" />
@@ -2498,6 +2728,42 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
             <End Role="CompaniesAspNetUser" EntitySet="CompaniesAspNetUsers" />
           </AssociationSet>
           <EntitySet Name="vw_CompanyUsers" EntityType="DomainModels.vw_CompanyUsers" />
+          <EntitySet Name="BranchCategories" EntityType="DomainModels.BranchCategory" />
+          <EntitySet Name="CompanyBranches" EntityType="DomainModels.CompanyBranch" />
+          <EntitySet Name="Coupons" EntityType="DomainModels.Coupon" />
+          <AssociationSet Name="FK_BranchCategory_Company" Association="DomainModels.FK_BranchCategory_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="BranchCategory" EntitySet="BranchCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyBranch_BranchCategory" Association="DomainModels.FK_CompanyBranch_BranchCategory">
+            <End Role="BranchCategory" EntitySet="BranchCategories" />
+            <End Role="CompanyBranch" EntitySet="CompanyBranches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyBranch_Company" Association="DomainModels.FK_CompanyBranch_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="CompanyBranch" EntitySet="CompanyBranches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Coupon_Company" Association="DomainModels.FK_Coupon_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Coupon" EntitySet="Coupons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Coupon_CompanyBranch" Association="DomainModels.FK_Coupon_CompanyBranch">
+            <End Role="CompanyBranch" EntitySet="CompanyBranches" />
+            <End Role="Coupon" EntitySet="Coupons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Coupon_Language" Association="DomainModels.FK_Coupon_Language">
+            <End Role="Language" EntitySet="Languages" />
+            <End Role="Coupon" EntitySet="Coupons" />
+          </AssociationSet>
+          <EntitySet Name="CouponCategories1" EntityType="DomainModels.CouponCategories" />
+          <AssociationSet Name="FK_CouponCategories_Coupon" Association="DomainModels.FK_CouponCategories_Coupon">
+            <End Role="Coupon" EntitySet="Coupons" />
+            <End Role="CouponCategories" EntitySet="CouponCategories1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CouponCategories_CouponCategory" Association="DomainModels.FK_CouponCategories_CouponCategory">
+            <End Role="CouponCategory" EntitySet="CouponCategories" />
+            <End Role="CouponCategories" EntitySet="CouponCategories1" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="ProfileQuestion">
           <Key>
@@ -2609,6 +2875,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <NavigationProperty Name="Users" Relationship="DomainModels.FK_AspNetUsers_Language" FromRole="Language" ToRole="AspNetUser" />
           <NavigationProperty Name="AdCampaigns" Relationship="DomainModels.FK_AdCampaign_Language" FromRole="Language" ToRole="AdCampaign" />
           <NavigationProperty Name="AdCampaignTargetCriterias" Relationship="DomainModels.FK_AdCampaignTargetCriteria_Language" FromRole="Language" ToRole="AdCampaignTargetCriteria" />
+          <NavigationProperty Name="Coupons" Relationship="DomainModels.FK_Coupon_Language" FromRole="Language" ToRole="Coupon" />
         </EntityType>
         <Association Name="FK_ProfileQuestionGroup_Country">
           <End Type="DomainModels.Country" Role="Country" Multiplicity="0..1" />
@@ -3498,6 +3765,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <NavigationProperty Name="AdCampaignResponses" Relationship="DomainModels.FK_AdCampaignResponse_Company" FromRole="Company" ToRole="AdCampaignResponse" />
           <NavigationProperty Name="AdCampaigns" Relationship="DomainModels.FK_AdCampaign_Company" FromRole="Company" ToRole="AdCampaign" />
           <NavigationProperty Name="CompaniesAspNetUsers" Relationship="DomainModels.FK_CompaniesAspNetUsers_Company" FromRole="Company" ToRole="CompaniesAspNetUser" />
+          <NavigationProperty Name="BranchCategories" Relationship="DomainModels.FK_BranchCategory_Company" FromRole="Company" ToRole="BranchCategory" />
+          <NavigationProperty Name="CompanyBranches" Relationship="DomainModels.FK_CompanyBranch_Company" FromRole="Company" ToRole="CompanyBranch" />
+          <NavigationProperty Name="Coupons" Relationship="DomainModels.FK_Coupon_Company" FromRole="Company" ToRole="Coupon" />
         </EntityType>
         <Association Name="FK_Account_Company">
           <End Type="DomainModels.Company" Role="Company" Multiplicity="0..1" />
@@ -3866,6 +4136,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <NavigationProperty Name="CampaignCategories" Relationship="DomainModels.FK_CampaignCategories_CouponCategory" FromRole="CouponCategory" ToRole="CampaignCategory" />
           <Property Name="ImagePath" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="SortOrder" Type="Int32" />
+          <NavigationProperty Name="CouponCategories" Relationship="DomainModels.FK_CouponCategories_CouponCategory" FromRole="CouponCategory" ToRole="CouponCategories" />
         </EntityType>
         <Association Name="FK_CampaignCategories_CouponCategory">
           <End Type="DomainModels.CouponCategory" Role="CouponCategory" Multiplicity="1" />
@@ -4468,6 +4739,211 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Property Name="CompanyName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="RoleId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="BranchCategory">
+          <Key>
+            <PropertyRef Name="BranchCategoryId" />
+          </Key>
+          <Property Name="BranchCategoryId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BranchCategoryName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyId" Type="Int32" />
+          <NavigationProperty Name="Company" Relationship="DomainModels.FK_BranchCategory_Company" FromRole="BranchCategory" ToRole="Company" />
+          <NavigationProperty Name="CompanyBranches" Relationship="DomainModels.FK_CompanyBranch_BranchCategory" FromRole="BranchCategory" ToRole="CompanyBranch" />
+        </EntityType>
+        <EntityType Name="CompanyBranch">
+          <Key>
+            <PropertyRef Name="BranchId" />
+          </Key>
+          <Property Name="BranchId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BranchTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="BranchAddressLine1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="BranchAddressLine2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="BranchCity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BranchState" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BranchZipCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BranchPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BranchLocationLat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BranchLocationLong" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BranchCategoryId" Type="Int64" />
+          <Property Name="CompanyId" Type="Int32" />
+          <NavigationProperty Name="BranchCategory" Relationship="DomainModels.FK_CompanyBranch_BranchCategory" FromRole="CompanyBranch" ToRole="BranchCategory" />
+          <NavigationProperty Name="Company" Relationship="DomainModels.FK_CompanyBranch_Company" FromRole="CompanyBranch" ToRole="Company" />
+          <NavigationProperty Name="Coupons" Relationship="DomainModels.FK_Coupon_CompanyBranch" FromRole="CompanyBranch" ToRole="Coupon" />
+        </EntityType>
+        <EntityType Name="Coupon">
+          <Key>
+            <PropertyRef Name="CouponId" />
+          </Key>
+          <Property Name="CouponId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LanguageId" Type="Int32" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CouponTitle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="SearchKeywords" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="Archived" Type="Boolean" />
+          <Property Name="Approved" Type="Boolean" />
+          <Property Name="ApprovedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ApprovalDateTime" Type="DateTime" Precision="3" />
+          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="RejectedReason" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Rejecteddatetime" Type="DateTime" Precision="3" />
+          <Property Name="RejectedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CurrencyId" Type="Int32" />
+          <Property Name="Price" Type="Double" />
+          <Property Name="Savings" Type="Double" />
+          <Property Name="SwapCost" Type="Double" />
+          <Property Name="CouponViewCount" Type="Int32" />
+          <Property Name="CouponIssuedCount" Type="Int32" />
+          <Property Name="CouponRedeemedCount" Type="Int32" />
+          <Property Name="CouponQtyPerUser" Type="Int32" />
+          <Property Name="CouponListingMode" Type="Int32" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="CouponActiveMonth" Type="Int32" />
+          <Property Name="CouponActiveYear" Type="Int32" />
+          <Property Name="CouponExpirydate" Type="DateTime" Precision="3" />
+          <Property Name="couponImage1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CouponImage2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CouponImage3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LogoUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="HighlightLine1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="HighlightLine2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="HighlightLine3" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="HighlightLine4" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="HighlightLine5" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FinePrintLine1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FinePrintLine2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FinePrintLine3" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FinePrintLine4" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FinePrintLine5" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LocationBranchId" Type="Int64" />
+          <Property Name="LocationTitle" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="LocationLine1" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="LocationLine2" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="LocationCity" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="LocationState" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="LocationZipCode" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="LocationLAT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LocationLON" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LocationPhone" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="GeographyColumn" Type="Geography" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="HowToRedeemLine1" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="HowToRedeemLine2" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="HowToRedeemLine3" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="HowToRedeemLine4" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="HowToRedeemLine5" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Company" Relationship="DomainModels.FK_Coupon_Company" FromRole="Coupon" ToRole="Company" />
+          <NavigationProperty Name="CompanyBranch" Relationship="DomainModels.FK_Coupon_CompanyBranch" FromRole="Coupon" ToRole="CompanyBranch" />
+          <NavigationProperty Name="Language" Relationship="DomainModels.FK_Coupon_Language" FromRole="Coupon" ToRole="Language" />
+          <NavigationProperty Name="CouponCategories" Relationship="DomainModels.FK_CouponCategories_Coupon" FromRole="Coupon" ToRole="CouponCategories" />
+        </EntityType>
+        <Association Name="FK_BranchCategory_Company">
+          <End Type="DomainModels.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="DomainModels.BranchCategory" Role="BranchCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="BranchCategory">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyBranch_BranchCategory">
+          <End Type="DomainModels.BranchCategory" Role="BranchCategory" Multiplicity="0..1" />
+          <End Type="DomainModels.CompanyBranch" Role="CompanyBranch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BranchCategory">
+              <PropertyRef Name="BranchCategoryId" />
+            </Principal>
+            <Dependent Role="CompanyBranch">
+              <PropertyRef Name="BranchCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyBranch_Company">
+          <End Type="DomainModels.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="DomainModels.CompanyBranch" Role="CompanyBranch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="CompanyBranch">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Coupon_Company">
+          <End Type="DomainModels.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="DomainModels.Coupon" Role="Coupon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="Coupon">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Coupon_CompanyBranch">
+          <End Type="DomainModels.CompanyBranch" Role="CompanyBranch" Multiplicity="0..1" />
+          <End Type="DomainModels.Coupon" Role="Coupon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyBranch">
+              <PropertyRef Name="BranchId" />
+            </Principal>
+            <Dependent Role="Coupon">
+              <PropertyRef Name="LocationBranchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Coupon_Language">
+          <End Type="DomainModels.Language" Role="Language" Multiplicity="0..1" />
+          <End Type="DomainModels.Coupon" Role="Coupon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Language">
+              <PropertyRef Name="LanguageId" />
+            </Principal>
+            <Dependent Role="Coupon">
+              <PropertyRef Name="LanguageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CouponCategories">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryId" Type="Int32" />
+          <Property Name="CouponId" Type="Int64" />
+          <NavigationProperty Name="Coupon" Relationship="DomainModels.FK_CouponCategories_Coupon" FromRole="CouponCategories" ToRole="Coupon" />
+          <NavigationProperty Name="CouponCategory" Relationship="DomainModels.FK_CouponCategories_CouponCategory" FromRole="CouponCategories" ToRole="CouponCategory" />
+        </EntityType>
+        <Association Name="FK_CouponCategories_Coupon">
+          <End Type="DomainModels.Coupon" Role="Coupon" Multiplicity="0..1" />
+          <End Type="DomainModels.CouponCategories" Role="CouponCategories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Coupon">
+              <PropertyRef Name="CouponId" />
+            </Principal>
+            <Dependent Role="CouponCategories">
+              <PropertyRef Name="CouponId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CouponCategories_CouponCategory">
+          <End Type="DomainModels.CouponCategory" Role="CouponCategory" Multiplicity="0..1" />
+          <End Type="DomainModels.CouponCategories" Role="CouponCategories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CouponCategory">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="CouponCategories">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5454,6 +5930,108 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="BranchCategories">
+            <EntityTypeMapping TypeName="DomainModels.BranchCategory">
+              <MappingFragment StoreEntitySet="BranchCategory">
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="BranchCategoryName" ColumnName="BranchCategoryName" />
+                <ScalarProperty Name="BranchCategoryId" ColumnName="BranchCategoryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompanyBranches">
+            <EntityTypeMapping TypeName="DomainModels.CompanyBranch">
+              <MappingFragment StoreEntitySet="CompanyBranch">
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="BranchCategoryId" ColumnName="BranchCategoryId" />
+                <ScalarProperty Name="BranchLocationLong" ColumnName="BranchLocationLong" />
+                <ScalarProperty Name="BranchLocationLat" ColumnName="BranchLocationLat" />
+                <ScalarProperty Name="BranchPhone" ColumnName="BranchPhone" />
+                <ScalarProperty Name="BranchZipCode" ColumnName="BranchZipCode" />
+                <ScalarProperty Name="BranchState" ColumnName="BranchState" />
+                <ScalarProperty Name="BranchCity" ColumnName="BranchCity" />
+                <ScalarProperty Name="BranchAddressLine2" ColumnName="BranchAddressLine2" />
+                <ScalarProperty Name="BranchAddressLine1" ColumnName="BranchAddressLine1" />
+                <ScalarProperty Name="BranchTitle" ColumnName="BranchTitle" />
+                <ScalarProperty Name="BranchId" ColumnName="BranchId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Coupons">
+            <EntityTypeMapping TypeName="DomainModels.Coupon">
+              <MappingFragment StoreEntitySet="Coupon">
+                <ScalarProperty Name="HowToRedeemLine5" ColumnName="HowToRedeemLine5" />
+                <ScalarProperty Name="HowToRedeemLine4" ColumnName="HowToRedeemLine4" />
+                <ScalarProperty Name="HowToRedeemLine3" ColumnName="HowToRedeemLine3" />
+                <ScalarProperty Name="HowToRedeemLine2" ColumnName="HowToRedeemLine2" />
+                <ScalarProperty Name="HowToRedeemLine1" ColumnName="HowToRedeemLine1" />
+                <ScalarProperty Name="GeographyColumn" ColumnName="GeographyColumn" />
+                <ScalarProperty Name="LocationPhone" ColumnName="LocationPhone" />
+                <ScalarProperty Name="LocationLON" ColumnName="LocationLON" />
+                <ScalarProperty Name="LocationLAT" ColumnName="LocationLAT" />
+                <ScalarProperty Name="LocationZipCode" ColumnName="LocationZipCode" />
+                <ScalarProperty Name="LocationState" ColumnName="LocationState" />
+                <ScalarProperty Name="LocationCity" ColumnName="LocationCity" />
+                <ScalarProperty Name="LocationLine2" ColumnName="LocationLine2" />
+                <ScalarProperty Name="LocationLine1" ColumnName="LocationLine1" />
+                <ScalarProperty Name="LocationTitle" ColumnName="LocationTitle" />
+                <ScalarProperty Name="LocationBranchId" ColumnName="LocationBranchId" />
+                <ScalarProperty Name="FinePrintLine5" ColumnName="FinePrintLine5" />
+                <ScalarProperty Name="FinePrintLine4" ColumnName="FinePrintLine4" />
+                <ScalarProperty Name="FinePrintLine3" ColumnName="FinePrintLine3" />
+                <ScalarProperty Name="FinePrintLine2" ColumnName="FinePrintLine2" />
+                <ScalarProperty Name="FinePrintLine1" ColumnName="FinePrintLine1" />
+                <ScalarProperty Name="HighlightLine5" ColumnName="HighlightLine5" />
+                <ScalarProperty Name="HighlightLine4" ColumnName="HighlightLine4" />
+                <ScalarProperty Name="HighlightLine3" ColumnName="HighlightLine3" />
+                <ScalarProperty Name="HighlightLine2" ColumnName="HighlightLine2" />
+                <ScalarProperty Name="HighlightLine1" ColumnName="HighlightLine1" />
+                <ScalarProperty Name="LogoUrl" ColumnName="LogoUrl" />
+                <ScalarProperty Name="CouponImage3" ColumnName="CouponImage3" />
+                <ScalarProperty Name="CouponImage2" ColumnName="CouponImage2" />
+                <ScalarProperty Name="couponImage1" ColumnName="couponImage1" />
+                <ScalarProperty Name="CouponExpirydate" ColumnName="CouponExpirydate" />
+                <ScalarProperty Name="CouponActiveYear" ColumnName="CouponActiveYear" />
+                <ScalarProperty Name="CouponActiveMonth" ColumnName="CouponActiveMonth" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="CouponListingMode" ColumnName="CouponListingMode" />
+                <ScalarProperty Name="CouponQtyPerUser" ColumnName="CouponQtyPerUser" />
+                <ScalarProperty Name="CouponRedeemedCount" ColumnName="CouponRedeemedCount" />
+                <ScalarProperty Name="CouponIssuedCount" ColumnName="CouponIssuedCount" />
+                <ScalarProperty Name="CouponViewCount" ColumnName="CouponViewCount" />
+                <ScalarProperty Name="SwapCost" ColumnName="SwapCost" />
+                <ScalarProperty Name="Savings" ColumnName="Savings" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="CurrencyId" ColumnName="CurrencyId" />
+                <ScalarProperty Name="RejectedBy" ColumnName="RejectedBy" />
+                <ScalarProperty Name="Rejecteddatetime" ColumnName="Rejecteddatetime" />
+                <ScalarProperty Name="RejectedReason" ColumnName="RejectedReason" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDateTime" ColumnName="ModifiedDateTime" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="ApprovalDateTime" ColumnName="ApprovalDateTime" />
+                <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
+                <ScalarProperty Name="Approved" ColumnName="Approved" />
+                <ScalarProperty Name="Archived" ColumnName="Archived" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="SearchKeywords" ColumnName="SearchKeywords" />
+                <ScalarProperty Name="CouponTitle" ColumnName="CouponTitle" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
+                <ScalarProperty Name="CouponId" ColumnName="CouponId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CouponCategories1">
+            <EntityTypeMapping TypeName="DomainModels.CouponCategories">
+              <MappingFragment StoreEntitySet="CouponCategories">
+                <ScalarProperty Name="CouponId" ColumnName="CouponId" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -5468,7 +6046,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

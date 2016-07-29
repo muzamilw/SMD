@@ -14,6 +14,8 @@ namespace SMD.Models.DomainModels
         public virtual ICollection<AdCampaign> AdCampaigns { get; set; }
         public virtual ICollection<CampaignCategory> CampaignCategories { get; set; }
 
+        public virtual ICollection<CouponCategories> CouponCategories { get; set; }
+
         public string ImagePath { get; set; }
 
         public int SortOrder { get; set; }

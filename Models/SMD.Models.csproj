@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
@@ -64,6 +68,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -119,6 +124,10 @@
     <Compile Include="Common\UserBaseData.cs" />
     <Compile Include="Common\UserIdentityModel.cs" />
     <Compile Include="Common\Utility.cs" />
+    <Compile Include="DomainModels\BranchCategory.cs" />
+    <Compile Include="DomainModels\CompanyBranch.cs" />
+    <Compile Include="DomainModels\Coupon.cs" />
+    <Compile Include="DomainModels\CouponCategories.cs" />
     <Compile Include="DomainModels\vw_CompanyUsers.cs" />
     <Compile Include="DomainModels\Account.cs" />
     <Compile Include="DomainModels\AdCampaign.cs" />

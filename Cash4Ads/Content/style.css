@@ -28,7 +28,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .lead {
 }
 
 .navbar{
-
+    background-color:#58267b   ;
     margin-bottom:0px;
     -o-transition: all .3s; -moz-transition: all .3s; -webkit-transition: all .3s; -ms-transition: all .3s; transition: all .3s;
 }

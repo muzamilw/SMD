@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b9d0f1d6e4b74ac08101f8f1f3928af5" Name="Diagram1">
+        <EntityTypeShape EntityType="SMDDevModel.Account" Width="1.5" PointX="10.5" PointY="44.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMDDevModel.AdCampaign" Width="1.5" PointX="17.5" PointY="39.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMDDevModel.AdCampaignResponse" Width="1.5" PointX="19.75" PointY="47.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMDDevModel.AdCampaignTargetCriteria" Width="1.5" PointX="22.75" PointY="51.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMDDevModel.AdCampaignTargetLocation" Width="1.5" PointX="5.25" PointY="48.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMDDevModel.App" Width="1.5" PointX="8.25" PointY="42.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMDDevModel.AspNetRole" Width="1.5" PointX="8.25" PointY="55.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMDDevModel.AspNetUserClaim" Width="1.5" PointX="12.75" PointY="51.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMDDevModel.AspNetUserLogin" Width="1.5" PointX="12.75" PointY="54.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMDDevModel.AspNetUser" Width="1.5" PointX="10.5" PointY="48.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMDDevModel.AuditLog" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMDDevModel.BranchCategory" Width="1.5" PointX="10.5" PointY="70.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMDDevModel.CampaignCategory" Width="1.5" PointX="22.75" PointY="48.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMDDevModel.Category" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMDDevModel.CategoryLog" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMDDevModel.City" Width="1.5" PointX="3" PointY="47.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMDDevModel.CompaniesAspNetUser" Width="1.5" PointX="19.75" PointY="52.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMDDevModel.Company" Width="1.5" PointX="8.25" PointY="45.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMDDevModel.CompanyBranch" Width="1.5" PointX="12.75" PointY="57.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMDDevModel.Country" Width="1.5" PointX="0.75" PointY="48.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMDDevModel.Coupon" Width="1.5" PointX="15" PointY="48.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMDDevModel.CouponCode" Width="1.5" PointX="22.75" PointY="45.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMDDevModel.Currency" Width="1.5" PointX="0.75" PointY="54" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMDDevModel.CustomUrl" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMDDevModel.DiscountVoucher" Width="1.5" PointX="5.25" PointY="53.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMDDevModel.Education" Width="1.5" PointX="8.25" PointY="63.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMDDevModel.EmailQueue" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMDDevModel.Game" Width="1.5" PointX="4.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMDDevModel.Industry" Width="1.5" PointX="8.25" PointY="66.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMDDevModel.Invoice" Width="1.5" PointX="10.5" PointY="85" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMDDevModel.InvoiceDetail" Width="1.5" PointX="19.75" PointY="62.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMDDevModel.Language" Width="1.5" PointX="15.25" PointY="40.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMDDevModel.Log" Width="1.5" PointX="0.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMDDevModel.Notification" Width="1.5" PointX="6.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMDDevModel.Product" Width="1.5" PointX="3" PointY="52.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMDDevModel.ProfileQuestion" Width="1.5" PointX="5.25" PointY="58.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMDDevModel.ProfileQuestionAnswer" Width="1.5" PointX="7.5" PointY="58.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMDDevModel.ProfileQuestionGroup" Width="1.5" PointX="3" PointY="59.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMDDevModel.ProfileQuestionUserAnswer" Width="1.5" PointX="19.75" PointY="56.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMDDevModel.SurveyQuestion" Width="1.5" PointX="22.75" PointY="57.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMDDevModel.SurveyQuestionResponse" Width="1.5" PointX="25" PointY="54.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMDDevModel.SurveyQuestionTargetCriteria" Width="1.5" PointX="25" PointY="60.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMDDevModel.SurveyQuestionTargetLocation" Width="1.5" PointX="28" PointY="54.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMDDevModel.sysdiagram" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMDDevModel.SystemMail" Width="1.5" PointX="8.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMDDevModel.Tax" Width="1.5" PointX="3" PointY="64" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMDDevModel.Transaction" Width="1.5" PointX="12.75" PointY="43.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMDDevModel.TransactionLog" Width="1.5" PointX="15" PointY="44.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SMDDevModel.UserFavouriteCoupon" Width="1.5" PointX="8.75" PointY="7.75" IsExpanded="true" />
+        <AssociationConnector Association="SMDDevModel.FK_Account_Company" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_Transaction_Account" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_AdCampaign_Company" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_AdCampaign_Language" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_AdCampaignResponse_AdCampaign" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_AdCampaignTargetCriteria_AdCampaign" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_AdCampaignTargetCriteria_AdCampaignQuiz" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_AdCampaignTargetLocation_AdCampaign" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_CampaignCategories_AdCampaign" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_CouponCodes_AdCampaign" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_InvoiceDetail_AdCampaign" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_AdCampaignResponse_AdCampaignResponse" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_AdCampaignResponse_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_AdCampaignResponse_Company" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_AdCampaignTargetCriteria_Education" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_AdCampaignTargetCriteria_Industry" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_AdCampaignTargetCriteria_Language" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_AdCampaignTargetCriteria_ProfileQuestion" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_AdCampaignTargetCriteria_ProfileQuestionAnswer" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_AdCampaignTargetCriteria_SurveyQuestion" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_AdCampaignTargetLocation_City" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_AdCampaignTargetLocation_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_CompaniesAspNetUsers_AspNetRoles" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_AspNetUsers_Company" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_AspNetUsers_Education" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_AspNetUsers_Industry" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_AspNetUsers_Language" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_CompaniesAspNetUsers_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_CouponCodes_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_ProfileQuestionUserAnswer_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_SurveyQuestion_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_SurveyQuestionResponse_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_BranchCategory_Company" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_CompanyBranch_BranchCategory" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_CategoryLog_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_CategoryLog_Log" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_City_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_Company_City" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_SurveyQuestionTargetLocation_City" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_CompaniesAspNetUsers_Company" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_Company_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_CompanyBranch_Company" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_Coupon_Company" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_Invoice_Company" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_ProfileQuestionUserAnswer_Company" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_SurveyQuestion_Company" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_SurveyQuestionResponse_Company" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_Coupon_CompanyBranch" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_ProfileQuestionGroup_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_SMDPrice_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_SurveyQuestion_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_SurveyQuestionTargetLocation_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_Tax_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_Coupon_Language" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_SMDPrice_Currency" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_DiscountVoucher_Products" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_SurveyQuestionTargetCriteria_Education" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_SurveyQuestionTargetCriteria_Industry" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_InvoiceDetail_Invoice" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_InvoiceDetail_Products" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_InvoiceDetail_SurveyQuestion" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_SurveyQuestion_Language" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_SurveyQuestionTargetCriteria_Language" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_ProfileQuestionAnswer_ProfileQuestion" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_ProfileQuestionGroup_ProfileQuestion" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_ProfileQuestionUserAnswer_ProfileQuestion" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_SurveyQuestionTargetCriteria_ProfileQuestion" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_ProfileQuestionUserAnswer_ProfileQuestionAnswer" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_SurveyQuestionTargetCriteria_ProfileQuestionAnswer" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_SurveyQuestionResponse_SurveyQuestion" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_SurveyQuestionTargetCriteria_SurveyQuestion" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_SurveyQuestionTargetCriteria_SurveyQuestion1" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_SurveyQuestionTargetLocation_SurveyQuestion" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.FK_TransactionLog_TransactionLog" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.AspNetUserRoles" ManuallyRouted="false" />
+        <AssociationConnector Association="SMDDevModel.UserApps" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="SMDDevModel.CouponCategories" Width="1.5" PointX="17.25" PointY="61.375" />
+        <AssociationConnector Association="SMDDevModel.FK_CouponCategories_Coupon" />
+        <EntityTypeShape EntityType="SMDDevModel.CouponCategory1" Width="1.5" PointX="3.375" PointY="11" />
+        <AssociationConnector Association="SMDDevModel.FK_CampaignCategories_CouponCategory" />
+        <AssociationConnector Association="SMDDevModel.FK_CouponCategories_CouponCategory" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

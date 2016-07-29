@@ -6914,3 +6914,476 @@ BEGIN
 		)
 		and AdCampaign.companyid = @companyid
 END
+
+
+
+
+
+
+
+GO
+
+/****** Object:  StoredProcedure [dbo].[SearchCoupons]    Script Date: 7/29/2016 6:15:46 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER PROCEDURE [dbo].[SearchCoupons]
+--   EXEC [dbo].[SearchCoupons] 		@categoryId = 8,		@type = 1,		@keywords = N'1',		@distance = 1,		@Lat = N'1',		@Lon = N'1',		@UserId = N'1',		@FromRow = 1,		@ToRow = 100
+
+	-- Add the parameters for the stored procedure here
+	@categoryId INT = 1 ,
+	@type as int = 0,
+	@keywords as nvarchar(500),
+	@distance as int = 0,
+	@Lat as nvarchar(50),
+	@Lon as nvarchar(50),
+	@UserId as nvarchar(128) = 0 ,
+	@FromRow int = 0,
+	@ToRow int = 0
+
+AS
+BEGIN
+
+	select *, COUNT(*) OVER() AS TotalItems
+	from (
+	
+	select vchr.campaignid as CouponId, CampaignName as CouponName, DisplayTitle as CouponTitle,
+	[Description]  as  Firstline, CampaignDescription as SecondLine, 
+	
+	ImagePath as  CouponImage,
+	(select 
+	CASE
+		WHEN vchr.LogoUrl is null or vchr.LogoUrl = ''
+		THEN 'http://manage.cash4ads.com/' + c.Logo
+		WHEN c.Logo is not null
+		THEN 'http://manage.cash4ads.com/' + vchr.LogoUrl
+	END as AdvertisersLogoPath from company c
+	 where c.CompanyId = vchr.CompanyId) as AdvertisersLogoPath,
+	CouponSwapValue, CouponActualValue,CompanyId
+	
+	from adcampaign vchr
+	inner join CampaignCategories cc on cc.CampaignId = vchr.CampaignID and cc.CategoryId = @categoryId
+	where (
+		
+		--and
+		--(adcampaign.EndDateTime >= @currentDate and @currentDate >= adcampaign.StartDateTime)
+		
+		(vchr.Approved = 1) and status = 3
+		and
+		(vchr.Type = 5) -- coupon
+		
+		)
+		group by vchr.campaignid, CampaignName,DisplayTitle,[Description],CampaignDescription,vchr.ImagePath,LogoUrl,CouponSwapValue,CouponActualValue,CompanyId
+		)as items
+	order by CouponActualValue
+	OFFSET @FromRow ROWS
+	FETCH NEXT @TORow ROWS ONLY
+		
+END
+
+GO
+
+
+
+
+
+USE [SMDDev]
+GO
+
+/****** Object:  Table [dbo].[Coupon]    Script Date: 7/29/2016 12:17:25 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Coupon](
+	[CouponID] [bigint] IDENTITY(1,1) NOT NULL,
+	[LanguageID] [int] NULL,
+	[UserID] [nvarchar](128) NULL,
+
+	[CouponTitle] [nvarchar](200) NULL,
+	[SearchKeywords] [nvarchar](max) NULL,
+	[Status] [int] NULL,
+	[Archived] [bit] NULL,
+	[Approved] [bit] NULL,
+	[ApprovedBy] [nvarchar](128) NULL,
+	[ApprovalDateTime] [datetime] NULL,
+
+	[CreatedDateTime] [datetime] NULL,
+	[CreatedBy] [nvarchar](100) NULL,
+	[ModifiedDateTime] [datetime] NULL,
+	[ModifiedBy] [nvarchar](100) NULL,
+	
+	[RejectedReason] [nvarchar](1000) NULL,
+	[Rejecteddatetime] [datetime] NULL,
+	[RejectedBy] [nvarchar](100) NULL,
+	
+	[CurrencyId] [Int] NULL,
+	[Price] [float] NULL,
+	[Savings] [float] NULL,
+	[SwapCost] [float] NULL,
+
+	[CouponViewCount] [int] NULL,
+	
+	[CouponIssuedCount] [int] NULL,
+	[CouponRedeemedCount] [int] NULL,
+
+
+	[CouponQtyPerUser] [int] NULL,
+	[CouponListingMode] [int] NULL,
+	[CompanyId] [int] NULL,
+	[CouponActiveMonth] [int] NULL,
+	[CouponActiveYear] [int] NULL,
+	[CouponExpirydate] [datetime] NULL,
+	[couponImage1] [nvarchar](max) NULL,
+	[CouponImage2] [nvarchar](max) NULL,
+	[CouponImage3] [nvarchar](max) NULL,
+	
+	
+	
+	[LogoUrl] [nvarchar](200) NULL,
+	
+	[HighlightLine1] [nvarchar](100) NULL,
+	[HighlightLine2] [nvarchar](100) NULL,
+	[HighlightLine3] [nvarchar](100) NULL,
+	[HighlightLine4] [nvarchar](100) NULL,
+	[HighlightLine5] [nvarchar](100) NULL,
+
+	[FinePrintLine1] [nvarchar](100) NULL,
+	[FinePrintLine2] [nvarchar](100) NULL,
+	[FinePrintLine3] [nvarchar](100) NULL,
+	[FinePrintLine4] [nvarchar](100) NULL,
+	[FinePrintLine5] [nvarchar](100) NULL,
+
+	[LocationBranchId] int NULL,
+	[LocationTitle] [nvarchar](500) NULL,
+	[LocationLine1] [nvarchar](500) NULL,
+	[LocationLine2] [nvarchar](500) NULL,
+	[LocationCity] [nvarchar](500) NULL,
+	[LocationState] [nvarchar](500) NULL,
+	[LocationZipCode] [nvarchar](500) NULL,
+	[LocationLAT] [nvarchar](50) NULL,
+	[LocationLON] [nvarchar](50) NULL,
+	[LocationPhone] [nvarchar](200) NULL,
+
+	GeographyColumn as geography::STGeomFromText('POINT('+convert(varchar(20),LocationLON)+' '+convert(varchar(20),LocationLAT)+')',4326),
+
+
+	[HowToRedeemLine1] [nvarchar](500) NULL,
+	[HowToRedeemLine2] [nvarchar](500) NULL,
+	[HowToRedeemLine3] [nvarchar](500) NULL,
+	[HowToRedeemLine4] [nvarchar](500) NULL,
+	[HowToRedeemLine5] [nvarchar](500) NULL,
+
+
+ CONSTRAINT [PK_Coupon] PRIMARY KEY CLUSTERED 
+(
+	[CouponID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+
+ALTER TABLE [dbo].[Coupon]  WITH CHECK ADD  CONSTRAINT [FK_Coupon_Company] FOREIGN KEY([CompanyId])
+REFERENCES [dbo].[Company] ([CompanyId])
+GO
+
+ALTER TABLE [dbo].[Coupon] CHECK CONSTRAINT [FK_Coupon_Company]
+GO
+
+ALTER TABLE [dbo].[Coupon]  WITH CHECK ADD  CONSTRAINT [FK_Coupon_Language] FOREIGN KEY([LanguageID])
+REFERENCES [dbo].[Language] ([LanguageID])
+GO
+
+ALTER TABLE [dbo].[Coupon] CHECK CONSTRAINT [FK_Coupon_Language]
+GO
+
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'1- Draft , 2 - Submitted for Approval, 3 - Live, 4 Paused, 5 - Completed, 6 - Approval Rejected' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Coupon', @level2type=N'COLUMN',@level2name=N'Status'
+GO
+
+
+
+/* To prevent any potential data loss issues, you should review this script in detail before running it outside the context of the database designer.*/
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.Coupon
+	DROP CONSTRAINT FK_Coupon_Language
+GO
+ALTER TABLE dbo.Language SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.CouponCategory SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.Coupon
+	DROP CONSTRAINT FK_Coupon_Company
+GO
+ALTER TABLE dbo.Company SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+BEGIN TRANSACTION
+GO
+CREATE TABLE dbo.BranchCategory
+	(
+	BranchCategoryId bigint NOT NULL IDENTITY (1, 1),
+	BranchCategoryName nvarchar(100) NULL,
+	CompanyId int NULL
+	)  ON [PRIMARY]
+GO
+ALTER TABLE dbo.BranchCategory ADD CONSTRAINT
+	PK_BranchCategory PRIMARY KEY CLUSTERED 
+	(
+	BranchCategoryId
+	) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+
+GO
+ALTER TABLE dbo.BranchCategory ADD CONSTRAINT
+	FK_BranchCategory_Company FOREIGN KEY
+	(
+	CompanyId
+	) REFERENCES dbo.Company
+	(
+	CompanyId
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+	
+GO
+ALTER TABLE dbo.BranchCategory SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+BEGIN TRANSACTION
+GO
+CREATE TABLE dbo.CompanyBranch
+	(
+	BranchId bigint NOT NULL IDENTITY (1, 1),
+	BranchTitle nvarchar(100) NULL,
+	BranchAddressLine1 nvarchar(100) NULL,
+	BranchAddressLine2 nvarchar(100) NULL,
+	BranchCity nvarchar(50) NULL,
+	BranchState nvarchar(50) NULL,
+	BranchZipCode nvarchar(50) NULL,
+	BranchPhone nvarchar(50) NULL,
+	BranchLocationLat nvarchar(50) NULL,
+	BranchLocationLong nvarchar(50) NULL,
+	BranchCategoryId bigint NULL,
+	CompanyId int NULL
+	)  ON [PRIMARY]
+GO
+ALTER TABLE dbo.CompanyBranch ADD CONSTRAINT
+	PK_CompanyBranch PRIMARY KEY CLUSTERED 
+	(
+	BranchId
+	) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+
+GO
+ALTER TABLE dbo.CompanyBranch ADD CONSTRAINT
+	FK_CompanyBranch_BranchCategory FOREIGN KEY
+	(
+	BranchCategoryId
+	) REFERENCES dbo.BranchCategory
+	(
+	BranchCategoryId
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+	
+GO
+ALTER TABLE dbo.CompanyBranch ADD CONSTRAINT
+	FK_CompanyBranch_Company FOREIGN KEY
+	(
+	CompanyId
+	) REFERENCES dbo.Company
+	(
+	CompanyId
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+	
+GO
+ALTER TABLE dbo.CompanyBranch SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+BEGIN TRANSACTION
+GO
+CREATE TABLE dbo.Tmp_Coupon
+	(
+	CouponId bigint NOT NULL IDENTITY (1, 1),
+	LanguageId int NULL,
+	UserId nvarchar(128) NULL,
+	CouponTitle nvarchar(200) NULL,
+	SearchKeywords nvarchar(MAX) NULL,
+	Status int NULL,
+	Archived bit NULL,
+	Approved bit NULL,
+	ApprovedBy nvarchar(128) NULL,
+	ApprovalDateTime datetime NULL,
+	CreatedDateTime datetime NULL,
+	CreatedBy nvarchar(100) NULL,
+	ModifiedDateTime datetime NULL,
+	ModifiedBy nvarchar(100) NULL,
+	RejectedReason nvarchar(1000) NULL,
+	Rejecteddatetime datetime NULL,
+	RejectedBy nvarchar(100) NULL,
+	CurrencyId int NULL,
+	Price float(53) NULL,
+	Savings float(53) NULL,
+	SwapCost float(53) NULL,
+	CouponViewCount int NULL,
+	CouponIssuedCount int NULL,
+	CouponRedeemedCount int NULL,
+	CouponQtyPerUser int NULL,
+	CouponListingMode int NULL,
+	CompanyId int NULL,
+	CouponActiveMonth int NULL,
+	CouponActiveYear int NULL,
+	CouponExpirydate datetime NULL,
+	couponImage1 nvarchar(MAX) NULL,
+	CouponImage2 nvarchar(MAX) NULL,
+	CouponImage3 nvarchar(MAX) NULL,
+	LogoUrl nvarchar(200) NULL,
+	HighlightLine1 nvarchar(100) NULL,
+	HighlightLine2 nvarchar(100) NULL,
+	HighlightLine3 nvarchar(100) NULL,
+	HighlightLine4 nvarchar(100) NULL,
+	HighlightLine5 nvarchar(100) NULL,
+	FinePrintLine1 nvarchar(100) NULL,
+	FinePrintLine2 nvarchar(100) NULL,
+	FinePrintLine3 nvarchar(100) NULL,
+	FinePrintLine4 nvarchar(100) NULL,
+	FinePrintLine5 nvarchar(100) NULL,
+	LocationBranchId bigint NULL,
+	LocationTitle nvarchar(500) NULL,
+	LocationLine1 nvarchar(500) NULL,
+	LocationLine2 nvarchar(500) NULL,
+	LocationCity nvarchar(500) NULL,
+	LocationState nvarchar(500) NULL,
+	LocationZipCode nvarchar(500) NULL,
+	LocationLAT nvarchar(50) NULL,
+	LocationLON nvarchar(50) NULL,
+	LocationPhone nvarchar(200) NULL,
+	GeographyColumn  AS ([geography]::STGeomFromText(((('POINT('+CONVERT([varchar](20),[LocationLON]))+' ')+CONVERT([varchar](20),[LocationLAT]))+')',(4326))),
+	HowToRedeemLine1 nvarchar(500) NULL,
+	HowToRedeemLine2 nvarchar(500) NULL,
+	HowToRedeemLine3 nvarchar(500) NULL,
+	HowToRedeemLine4 nvarchar(500) NULL,
+	HowToRedeemLine5 nvarchar(500) NULL
+	)  ON [PRIMARY]
+	 TEXTIMAGE_ON [PRIMARY]
+GO
+ALTER TABLE dbo.Tmp_Coupon SET (LOCK_ESCALATION = TABLE)
+GO
+DECLARE @v sql_variant 
+SET @v = N'1- Draft , 2 - Submitted for Approval, 3 - Live, 4 Paused, 5 - Completed, 6 - Approval Rejected'
+EXECUTE sp_addextendedproperty N'MS_Description', @v, N'SCHEMA', N'dbo', N'TABLE', N'Tmp_Coupon', N'COLUMN', N'Status'
+GO
+SET IDENTITY_INSERT dbo.Tmp_Coupon ON
+GO
+IF EXISTS(SELECT * FROM dbo.Coupon)
+	 EXEC('INSERT INTO dbo.Tmp_Coupon (CouponId, LanguageId, UserId, CouponTitle, SearchKeywords, Status, Archived, Approved, ApprovedBy, ApprovalDateTime, CreatedDateTime, CreatedBy, ModifiedDateTime, ModifiedBy, RejectedReason, Rejecteddatetime, RejectedBy, CurrencyId, Price, Savings, SwapCost, CouponViewCount, CouponIssuedCount, CouponRedeemedCount, CouponQtyPerUser, CouponListingMode, CompanyId, CouponActiveMonth, CouponActiveYear, CouponExpirydate, couponImage1, CouponImage2, CouponImage3, LogoUrl, HighlightLine1, HighlightLine2, HighlightLine3, HighlightLine4, HighlightLine5, FinePrintLine1, FinePrintLine2, FinePrintLine3, FinePrintLine4, FinePrintLine5, LocationBranchId, LocationTitle, LocationLine1, LocationLine2, LocationCity, LocationState, LocationZipCode, LocationLAT, LocationLON, LocationPhone, HowToRedeemLine1, HowToRedeemLine2, HowToRedeemLine3, HowToRedeemLine4, HowToRedeemLine5)
+		SELECT CouponID, LanguageID, UserID, CouponTitle, SearchKeywords, Status, Archived, Approved, ApprovedBy, ApprovalDateTime, CreatedDateTime, CreatedBy, ModifiedDateTime, ModifiedBy, RejectedReason, Rejecteddatetime, RejectedBy, CurrencyId, Price, Savings, SwapCost, CouponViewCount, CouponIssuedCount, CouponRedeemedCount, CouponQtyPerUser, CouponListingMode, CompanyId, CouponActiveMonth, CouponActiveYear, CouponExpirydate, couponImage1, CouponImage2, CouponImage3, LogoUrl, HighlightLine1, HighlightLine2, HighlightLine3, HighlightLine4, HighlightLine5, FinePrintLine1, FinePrintLine2, FinePrintLine3, FinePrintLine4, FinePrintLine5, CONVERT(bigint, LocationBranchId), LocationTitle, LocationLine1, LocationLine2, LocationCity, LocationState, LocationZipCode, LocationLAT, LocationLON, LocationPhone, HowToRedeemLine1, HowToRedeemLine2, HowToRedeemLine3, HowToRedeemLine4, HowToRedeemLine5 FROM dbo.Coupon WITH (HOLDLOCK TABLOCKX)')
+GO
+SET IDENTITY_INSERT dbo.Tmp_Coupon OFF
+GO
+DROP TABLE dbo.Coupon
+GO
+EXECUTE sp_rename N'dbo.Tmp_Coupon', N'Coupon', 'OBJECT' 
+GO
+ALTER TABLE dbo.Coupon ADD CONSTRAINT
+	PK_Coupon PRIMARY KEY CLUSTERED 
+	(
+	CouponId
+	) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+
+GO
+ALTER TABLE dbo.Coupon ADD CONSTRAINT
+	FK_Coupon_Company FOREIGN KEY
+	(
+	CompanyId
+	) REFERENCES dbo.Company
+	(
+	CompanyId
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+	
+GO
+ALTER TABLE dbo.Coupon ADD CONSTRAINT
+	FK_Coupon_Language FOREIGN KEY
+	(
+	LanguageId
+	) REFERENCES dbo.Language
+	(
+	LanguageID
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+	
+GO
+ALTER TABLE dbo.Coupon ADD CONSTRAINT
+	FK_Coupon_CompanyBranch FOREIGN KEY
+	(
+	LocationBranchId
+	) REFERENCES dbo.CompanyBranch
+	(
+	BranchId
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+	
+GO
+COMMIT
+BEGIN TRANSACTION
+GO
+CREATE TABLE dbo.CouponCategories
+	(
+	Id bigint NOT NULL IDENTITY (1, 1),
+	CategoryId int NULL,
+	CouponId bigint NULL
+	)  ON [PRIMARY]
+GO
+ALTER TABLE dbo.CouponCategories ADD CONSTRAINT
+	PK_CouponCategories PRIMARY KEY CLUSTERED 
+	(
+	Id
+	) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+
+GO
+ALTER TABLE dbo.CouponCategories ADD CONSTRAINT
+	FK_CouponCategories_CouponCategory FOREIGN KEY
+	(
+	CategoryId
+	) REFERENCES dbo.CouponCategory
+	(
+	CategoryId
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+	
+GO
+ALTER TABLE dbo.CouponCategories ADD CONSTRAINT
+	FK_CouponCategories_Coupon FOREIGN KEY
+	(
+	CouponId
+	) REFERENCES dbo.Coupon
+	(
+	CouponId
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+	
+GO
+ALTER TABLE dbo.CouponCategories SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+
+
