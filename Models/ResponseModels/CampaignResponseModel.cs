@@ -16,7 +16,8 @@ namespace SMD.Models.ResponseModels
         ///  Profile Questions List
         /// </summary>
         public IEnumerable<AdCampaign> Campaign { get; set; }
-     
+        public IEnumerable<Coupon> Coupon { get; set; }
+        
       
         /// <summary>
         /// Total Count of  Profile Questions

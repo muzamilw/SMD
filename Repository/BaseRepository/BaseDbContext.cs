@@ -155,7 +155,7 @@ namespace SMD.Repository.BaseRepository
         /// Ad Campaigns
         /// </summary>
         public DbSet<AdCampaign> AdCampaigns { get; set; }
-
+        public DbSet<Coupon> Coupons { get; set; }
         /// <summary>
         /// Profile Question Answers
         /// </summary>
@@ -230,7 +230,7 @@ namespace SMD.Repository.BaseRepository
         /// </summary>
         public DbSet<CustomUrl> CustomUrls { get; set; }
         public DbSet<CouponCode> CouponCodes { get; set; }
-
+     
         /// <summary>
         /// Transaction
         /// </summary>

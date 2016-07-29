@@ -202,6 +202,7 @@
     <Compile Include="Repositories\CompanyAspNetUsersRepository.cs" />
     <Compile Include="Repositories\CouponCategoryRepository.cs" />
     <Compile Include="Repositories\CouponCodeRepository.cs" />
+    <Compile Include="Repositories\CouponRepository.cs" />
     <Compile Include="Repositories\ManageUserRepository.cs" />
     <Compile Include="Repositories\SurveyQuestionResponseRepository.cs" />
     <Compile Include="Repositories\EducationRepository.cs" />

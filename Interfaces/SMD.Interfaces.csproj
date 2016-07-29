@@ -83,6 +83,7 @@
     <Compile Include="Repository\ICompanyAspNetUsersRepository.cs" />
     <Compile Include="Repository\ICouponCategoryRepository.cs" />
     <Compile Include="Repository\ICouponCodeRepository.cs" />
+    <Compile Include="Repository\ICouponRepository.cs" />
     <Compile Include="Repository\IManageUserRepository.cs" />
     <Compile Include="Repository\ISurveyQuestionResponseRepository.cs" />
     <Compile Include="Repository\IEducationRepository.cs" />
@@ -116,6 +117,7 @@
     <Compile Include="Services\IAuditLogService.cs" />
     <Compile Include="Services\ICompanyService.cs" />
     <Compile Include="Services\ICouponCategoryService.cs" />
+    <Compile Include="Services\ICouponService.cs" />
     <Compile Include="Services\IEducationService.cs" />
     <Compile Include="Services\IEmailManagerService.cs" />
     <Compile Include="Services\IIndustryService.cs" />

@@ -210,7 +210,8 @@ namespace SMD.MIS.ModelMappers
             return new CampaignRequestResponseModel
             {
                 TotalCount = source.TotalCount,
-                Campaigns = source.Campaign.Select(campaign => campaign.CreateFrom()),
+                Campaigns =source.Campaign != null? source.Campaign.Select(campaign => campaign.CreateFrom()):null,
+                Coupon = source.Coupon != null? source.Coupon.Select(coupon =>coupon.CreateFrom()):null
                 //LanguageDropdowns = source.Languages.Select(lang => lang.CreateFrom()),
                 //UserAndCostDetails = source.UserAndCostDetails.CreateFrom()
             };
@@ -460,6 +461,103 @@ namespace SMD.MIS.ModelMappers
                 CouponCategories = source.CouponCategory.Select(cc => cc.CreateFromForCategories(false)),
                 DiscountVouchers = source.DiscountVouchers.Select(dv => dv.CreateFromDiscountVoucher())
             };
+        }
+
+        public static SMD.MIS.Areas.Api.Models.Coupon CreateFrom(this Models.DomainModels.Coupon source)
+        {
+            //string path = source.ImagePath;
+
+            //string Voucherpath = "";
+            //if (source.ImagePath != null && !source.ImagePath.Contains("http"))
+            //{
+            //    path = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + source.ImagePath;
+            //}
+            //string LandingPageVideoLinkAsPath = "";
+            //string LandingPageVideoLink = source.LandingPageVideoLink;
+            //if (source.Type == (int)AdCampaignType.Other && !string.IsNullOrEmpty(source.LandingPageVideoLink))
+            //{
+            //    LandingPageVideoLinkAsPath = source.LandingPageVideoLink;
+            //    //if (LandingPageVideoLink != null && !LandingPageVideoLink.Contains("http"))
+            //    //{
+            //    //    LandingPageVideoLinkAsPath = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + source.LandingPageVideoLink;
+            //    //}
+            //    //if (LandingPageVideoLink != null && !LandingPageVideoLink.Contains("http"))
+            //    //{
+            //    //    LandingPageVideoLink = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + source.LandingPageVideoLink;
+            //    //}
+
+            //}
+
+
+            //if (source.Voucher1ImagePath != null && !source.Voucher1ImagePath.Contains("http"))
+            //{
+            //    Voucherpath = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + source.Voucher1ImagePath;
+            //}
+            return new SMD.MIS.Areas.Api.Models.Coupon
+            {
+                ApprovalDateTime = source.ApprovalDateTime,
+                Approved = source.Approved,
+                ApprovedBy = source.ApprovedBy,
+                Archived = source.Archived,
+                CompanyId = source.CompanyId,
+                CouponActiveMonth = source.CouponActiveMonth,
+                CouponActiveYear = source.CouponActiveYear,
+                CouponExpirydate = source.CouponExpirydate,
+                CouponId = source.CouponId,
+                couponImage1 = source.couponImage1,
+                CouponImage2 = source.CouponImage2,
+                CouponImage3 = source.CouponImage3,
+                CouponIssuedCount = source.CouponIssuedCount,
+                CouponListingMode = source.CouponListingMode,
+                CouponQtyPerUser = source.CouponQtyPerUser,
+                CouponRedeemedCount = source.CouponRedeemedCount,
+                CouponTitle = source.CouponTitle,
+                CouponViewCount = source.CouponViewCount,
+                CreatedBy = source.CreatedBy,
+                CreatedDateTime = source.CreatedDateTime,
+                CurrencyId = source.CurrencyId,
+                FinePrintLine1 = source.FinePrintLine1,
+                FinePrintLine2 = source.FinePrintLine2,
+                FinePrintLine3 = source.FinePrintLine3,
+                FinePrintLine4 = source.FinePrintLine4,
+                FinePrintLine5 = source.FinePrintLine5,
+                GeographyColumn = source.GeographyColumn,
+                HighlightLine1 = source.HighlightLine1,
+                HighlightLine2 = source.HighlightLine2,
+                HighlightLine3 = source.HighlightLine3,
+                HighlightLine4 = source.HighlightLine4,
+                HighlightLine5 = source.HighlightLine5,
+                HowToRedeemLine1 = source.HowToRedeemLine1,
+                HowToRedeemLine2 = source.HowToRedeemLine2,
+                HowToRedeemLine3 = source.HowToRedeemLine3,
+                HowToRedeemLine4 = source.HowToRedeemLine4,
+                HowToRedeemLine5 = source.HowToRedeemLine5,
+                LanguageId = source.LanguageId,
+                LocationBranchId = source.LocationBranchId,
+                LocationCity = source.LocationCity,
+                LocationLAT = source.LocationLAT,
+                LocationLine1 = source.LocationLine1,
+                LocationLine2 = source.LocationLine2,
+                LocationLON = source.LocationLON,
+                LocationPhone = source.LocationPhone,
+                LocationState = source.LocationState,
+                LocationTitle = source.LocationTitle,
+                LocationZipCode = source.LocationZipCode,
+                LogoUrl = source.LogoUrl,
+                ModifiedBy = source.ModifiedBy,
+                ModifiedDateTime = source.ModifiedDateTime,
+                Price = source.Price,
+                RejectedBy = source.RejectedBy,
+                Rejecteddatetime = source.Rejecteddatetime,
+                RejectedReason = source.RejectedReason,
+                Savings = source.Savings,
+                SearchKeywords = source.SearchKeywords,
+                Status = source.Status,
+                SwapCost = source.SwapCost,
+                UserId = source.UserId,
+              };
+
+
         }
     }
 }

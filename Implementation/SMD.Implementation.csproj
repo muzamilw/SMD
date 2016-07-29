@@ -167,6 +167,7 @@
     <Compile Include="Services\BackgroundEmailManagerService.cs" />
     <Compile Include="Services\CompanyService.cs" />
     <Compile Include="Services\CouponCategoryService.cs" />
+    <Compile Include="Services\CouponService.cs" />
     <Compile Include="Services\EducationService.cs" />
     <Compile Include="Services\EmailScheduler.cs" />
     <Compile Include="Services\IndustryService.cs" />

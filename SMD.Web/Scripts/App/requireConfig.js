@@ -22,7 +22,8 @@
             "survey": "/Areas/Survey/Scripts",
             "surveyQuestionApp": "/Areas/Survey/Scripts",
             "invoice":"/Areas/Billing/Scripts",
-            "user": "/Areas/User/Scripts"
+            "user": "/Areas/User/Scripts",
+            "Coupons": "/Areas/Coupons/Scripts"
         }
     });
 

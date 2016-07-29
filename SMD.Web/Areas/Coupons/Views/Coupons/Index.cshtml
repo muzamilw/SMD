@@ -17,7 +17,7 @@ else
 {
     adminClasses = "displayNone";
 }
-<div class="row" id="adsBinding">
+<div class="row" id="CouponsBinding">
     <div class="col-lg-12" data-bind="visible: $root.isListVisible()">
         <div class="row" id="topArea" style="margin-bottom:15px;">
            
@@ -26,10 +26,8 @@ else
                 <div class="row">
 
                     <div class="col-sm-4 " style="float:left;">
-
-                        <button class="btn  btn-success btnAdsCampaign" style="float:left; width:33%;height:66px;margin-right:15px; white-space:normal;" id="btnSubmitForApproval" data-bind="click:$root.ShowAdCampaigns">Video Campaigns</button>
-                        
-                        <button class="btn  btn-warning" style="float:left;width:34%;height:66px;white-space:normal;" data-bind="click:$root.ShowCouponPromotions">Coupon Promotions</button>
+                        <button class="btn  btn-success btnAdsCampaign" style="float: left; width: 33%; height: 66px; margin-right: 15px; white-space: normal; display: inline-block;" id="btnSubmitForApproval" data-bind="click:$root.ShowAdCampaigns">Video Campaigns</button>
+                       <button class="btn  btn-warning" style="float:left;width:34%;height:66px;white-space:normal;" data-bind="click:$root.ShowCouponPromotions">Coupon Promotions</button>
 
                     </div>
 
@@ -45,14 +43,15 @@ else
         </div>
         <div class="row">
             <div class="col-lg-12" style="padding-left:0px;padding-right:0px;">
+              
                 <!-- heading-->
                 <div class="row filter-body">
 
 
                     <div class="col-sm-3" style="float: left;">
 
-                        <span style="font-size: 24px;" data-bind="text:$root.MainHeading"></span><br />
-                        <span style="font-size: 14px;" data-bind="text:$root.SubHeading"></span>
+                        <span style="font-size: 24px;">Coupon Promotions</span><br />
+                        <span style="font-size: 14px;">Paid coupon promotions are listed for whole one calendar month. Submission fee includes unlimited issuing and redemption at all branches.</span>
                     </div>
 
                     <div class="col-sm-3">
@@ -66,10 +65,7 @@ else
                     </div>
                     <div class="col-sm-4" style="text-align:right !important;">
 
-                        <button class="btn btn-primary" data-bind="click:$root.addNewCampaign,visible:!$root.isDisplayCouponsAds()">
-                            Create New Campaign
-                        </button>
-                        <button class="btn btn-primary" style="display:none;" data-bind="click:$root.addNewCampaign,visible:$root.isDisplayCouponsAds()">
+                     <button class="btn btn-primary" data-bind="click:$root.addNewCampaign">
                             Create Coupon
                         </button>
 
@@ -100,8 +96,8 @@ else
                                                 <th class="col-sm-1"><span>Budget</span></th>*@
                                             <th class="col-sm-2"><span></span></th>
                                             <th class="col-sm-2">
-                                                <span data-bind="visible:!$root.isDisplayCouponsAds()">Views</span>
-                                                <span data-bind="visible:$root.isDisplayCouponsAds()">Taken Count</span>
+                                                <span >Views</span>
+                                                <span >Taken Count</span>
                                             </th>
                                             <th class="col-sm-1"><span>Status</span></th>
                                             @*<th class="col-sm-2"><span class="@userClasses">Spent</span><span class="@adminClasses">Created by</span></th>*@
@@ -127,10 +123,7 @@ else
                     </div>
                 </div>
                 <div data-bind="visible: $root.campaignGridContent().length == 0" style="display:none;">
-                    <div class="main-box no-header clearfix" style="padding:20px;" data-bind="visible:!isDisplayCouponsAds()">
-                        No campaigns found.
-                    </div>
-                    <div class="main-box no-header clearfix" style="padding:20px;" data-bind="visible:isDisplayCouponsAds()">
+                   <div class="main-box no-header clearfix" style="padding:20px;" >
                         No coupon found.
                     </div>
                 </div>
@@ -166,7 +159,7 @@ else
 
     </div>
     @{
-        Html.RenderPartial("~/Areas/Ads/Views/Ads/ManageCampaign.cshtml");
+        Html.RenderPartial("~/Areas/Coupons/Views/Coupons/ManageCoupon.cshtml");
     }
 </div>
 
@@ -203,8 +196,7 @@ else
         </td>
         <td class="col-sm-2">
             <span class="" data-bind=""></span>
-            <span data-bind="visible:!$root.isDisplayCouponsAds(),text: AdViews"></span>
-            <span data-bind="visible:$root.isDisplayCouponsAds(),text: CouponTakenCount"></span>
+            <span data-bind="text: CouponTakenCount"></span>
         </td>
         <td class="col-sm-2">
             <!-- ko if: Status() == 1-->
@@ -283,41 +275,7 @@ else
 </script>
 @* Filter Template *@
 <script id="filterTemplate" type="text/html">
-    <div class="filter-body" id="filter" data-bind="visible:!isDisplayCouponsAds()">
-        @*<div class="col-sm-3">
-                <span style="font-size: 24px;">My Ad Campaigns</span>
-            </div>*@
-
-        <div class="col-sm-4" style="float:left;">
-            <form data-bind="submit: $root.getCampaignByFilter">
-                <div class="filter-block" style="margin-right: -10px">
-                    <div class="form-group ">
-                        <input type="text" class="form-control" placeholder="Search..." data-bind="value: $root.searchFilterValue">
-                        <i class="fa fa-search search-icon" data-bind="click: $root.getCampaignByFilter"></i>
-                    </div>
-                </div>
-                <div class="clearfix"></div>
-            </form>
-        </div>
-        <div class="col-sm-5">
-
-        </div>
-        <div class="col-sm-3" style="float:right;margin-top:2px;">
-            @*<div class="btn-group">
-                    <button class="btn ctCampaign" data-bind="click:$root.addNewCampaign">
-                        Create Campaign
-                    </button>
-                </div>*@
-            <select class="form-control" style="float:right;height:36px;">
-                <option value="0">All Value</option>
-
-            </select>
-
-        </div>
-        <div class="clearfix">
-
-        </div>
-    </div>
+   
 </script>
 <!-- ko stopBinding: true -->
 @Html.Partial("~/Areas/Common/Views/Shared/_ConfirmationDialog.cshtml")
@@ -328,7 +286,7 @@ else
 @section Scripts{
     <script src="~/Scripts/jquery.tokenize.js"></script>
     <script type="text/javascript">
-        require(["ads/ads.view", "common/stripeChargeCustomer.view", "common/confirmation.view", ]);
+        require(["Coupons/Coupons.view", "common/stripeChargeCustomer.view", "common/confirmation.view", ]);
 
     </script>
 

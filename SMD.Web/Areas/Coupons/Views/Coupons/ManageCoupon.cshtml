@@ -19,8 +19,7 @@ else
                     <li><a href="~/Dashboard/Index">&nbsp;</a></li>
                 </ol>
                 <div class="clearfix" data-bind="with: $root.campaignModel">
-                    <span class="pull-left" style="padding-left:0px;font-size:28px;color:rgb(52, 152, 219)" data-bind="NewCampaignBinding: CampaignName,visible:$root.isDisplayCouponsAds()">New Coupon</span>
-                    <span class="pull-left" style="padding-left:0px;font-size:28px;color:rgb(52, 152, 219)" data-bind="NewCampaignBinding: CampaignName,visible:!$root.isDisplayCouponsAds()">New Campaign</span>
+                    <span class="pull-left" style="padding-left:0px;font-size:28px;color:rgb(52, 152, 219)" data-bind="NewCampaignBinding: CampaignName">New Coupon</span>
                     <span class="control-label bold heading-style pull-left" style="    margin-top: 6px;    margin-left: 40px;" data-bind="text:StatusValue()"></span>
                 </div>
                 <div class="row" style="margin-bottom:15px;">
@@ -162,84 +161,14 @@ else
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group" style="margin-bottom:25px;" data-bind="visible:!$root.isDisplayCouponsAds()">
-                                    <div class="col-lg-2">
-                                        <label for="txtUploadVideo" class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn">Upload Video</label>
-                                    </div>
-                                    <div class="col-lg-7">
-                                        <div class="defaultImgUploadImage pull-left" style="cursor:pointer;">
-                                            <div style="width:100%;height:110px;"></div>
-
-                                            <div style="    padding-top: 10px;    text-align: center;    font-size: 12px;    color: gray;">
-                                                max length 20 sec
-                                            </div>
-                                        </div>
-                                        <div class="defaultImgUploadImageBtn" style="width:75px;">
-                                            <div class="fileUpload">
-                                                <span>change </span>
-                                                <input type="file" class="upload" id="logo_image_file" data-bind="files: { onLoaded: $root.LogoUrlImageCallback, fileFilter: 'image.*'}" />
-                                            </div>
-                                        </div>
-                                        <div class="clearfix">
-                                            &nbsp;
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-1" data-bind="visible:!$root.isDisplayCouponsAds()" style="  text-align: right;
-    font-size: 17px;
-    color: red;">
-                                        <span>&nbsp;</span>
-                                    </div>
-                                    <div class="col-lg-2">
-                                        <div class="bs-example-tooltips tooltip-float-width">
-                                            <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Unique code for the Webstore, creates a unique URL (No Hyphens or Spaces) ABC Print = abcprint" data-original-title="" title="">
-                                                <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group" style="margin-bottom:25px;" data-bind="visible:!$root.isDisplayCouponsAds()">
-                                    <div class="col-lg-2">
-                                        <label for="txtUploadLogo" class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn">Upload Logo</label>
-                                    </div>
-                                    <div class="col-lg-7">
-                                        <div class="defaultImgUploadImage pull-left" style="cursor:pointer;">
-                                            <img style="width:auto;height:110px;max-width:170px;" data-bind="visible: $root.campaignModel().LogoImageBytes() != '',attr: { src: $root.campaignModel().LogoImageBytes  }" src="/Content/Images/Company_Default.png" onclick="showUploadDialog();" />
-                                            <img style="width:auto;height:110px;max-width:170px;" data-bind="visible: LogoUrl() != '' ,attr: { src: '/' +  LogoUrl() + $root.randonNumber() }" onclick="showUploadDialog();" />
-                                            <div style="width:100%;height:110px;" onclick="showUploadDialog();" data-bind="visible: LogoUrl() == '' &&   $root.campaignModel().LogoImageBytes() == ''"></div>
-
-                                            <div style="    padding-top: 10px;    text-align: center;    font-size: 12px;    color: gray;">
-                                                (200 x 200 pixels)
-                                            </div>
-                                        </div>
-                                        <div class="defaultImgUploadImageBtn" style="width:75px;">
-                                            <div class="fileUpload">
-                                                <span>change </span>
-                                                <input type="file" class="upload" id="logo_image_file" data-bind="files: { onLoaded: $root.LogoUrlImageCallback, fileFilter: 'image.*'}" />
-                                            </div>
-                                        </div>
-                                        <div class="clearfix">
-                                            &nbsp;
-                                        </div>
-                                    </div>
-                                    @*<div class="col-lg-3">
-
-                                        <a href="#" id="idpreviewAdsscreen" class="btn btn-primary" data-toggle="modal" data-target=".model_AdsQ_ph" data-bind="click: $root.openVideoDialog">
-                                        Preview
-                                        </a>
-                                        </div>*@
-                                </div>
-                                <div class="form-group" style="margin-bottom:14px;">
+                               <div class="form-group" style="margin-bottom:14px;">
                                     <div class="col-lg-2" style="padding-top:12px;">
-                                        <label for="txtCampaignDisplayName" class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn" data-bind="text:$root.lblAdTitle">Ad Title</label>
+                                        <label for="txtCampaignDisplayName" class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn" >Voucher Title</label>
                                     </div>
                                     <div class="col-lg-7">
                                         <input type="text" style="height:60px;" maxlength="36" name="Campaign Display Name" class="form-control height60 font24px" id="txtCampaignDisplayName" placeholder="Ad title (36 characters)" data-bind="value: DisplayTitle,validationTooltip: DisplayTitle, validationOnElement: DisplayTitle">
                                     </div>
-                                    <div class="col-lg-1" data-bind="visible:!$root.isDisplayCouponsAds()" style="  text-align: right;
-    font-size: 17px;
-    color: red;">
-                                        <span>&nbsp;</span>
-                                    </div>
+                                
                                     <div class="col-lg-2">
                                         <div class="bs-example-tooltips tooltip-float-width">
                                             <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-original-title="" title="">
@@ -250,7 +179,7 @@ else
                                 </div>
                                 <div class="form-group" style="margin-bottom:25px;">
                                     <div class="col-lg-2">
-                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone" data-bind="text:$root.lblFirstLine">First line </label>
+                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone" >First line </label>
                                     </div>
                                     <div class="col-lg-7">
                                         <textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="Enter Description (36 characters)" data-bind="value: Description" maxlength="36"></textarea>
@@ -258,7 +187,7 @@ else
                                 </div>
                                 <div class="form-group" style="margin-bottom:25px;">
                                     <div class="col-lg-2">
-                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone" data-bind="text:$root.lbllSecondLine">Second Line</label>
+                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone" >Second Line</label>
                                     </div>
                                     <div class="col-lg-7">
                                         <textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="Enter Description (36 characters)" data-bind="value: CampaignDescription" maxlength="36"></textarea>
@@ -268,12 +197,11 @@ else
                             </div>
                             <div class="col-lg-11" style="margin:auto;float:none !important;  display:none;  height: 690px;">
                                 <div class="form-group" style="margin-top:10px; margin-left:-8px;display:none;">
-                                    @*data-bind="visible:!$root.isDisplayCouponsAds()"*@
-                                    <div class="col-lg-8 text-campaign-left">
+                                   <div class="col-lg-8 text-campaign-left">
                                         <label class="control-label text-right tooltip-float font20 floatNone" style="float:left !important;">Free Advert title</label>
                                     </div>
                                 </div>
-                                <div class="form-group" style="margin-top:10px; margin-left:-8px;" data-bind="visible:$root.isDisplayCouponsAds()">
+                                <div class="form-group" style="margin-top:10px; margin-left:-8px;" >
                                     <div class="col-lg-7 text-campaign-left">
                                         &nbsp;
                                     </div>
@@ -292,7 +220,7 @@ else
                                     </div>
                                 </div>
 
-                                <div class="form-group" style="margin-bottom:25px;" data-bind="visible:$root.isDisplayCouponsAds()">
+                                <div class="form-group" style="margin-bottom:25px;" >
                                     <div class="col-lg-2">
                                         <label for="txtAdditionalVouchrInfo" class="control-label text-right tooltip-float floatNone" data-bind="">Additional Coupon Information</label>
                                     </div>
@@ -343,9 +271,7 @@ else
                                         <div class="clearfix"></div>
 
                                     </div>
-                                    <div class="col-lg-1" data-bind="visible:!$root.isDisplayCouponsAds()" style="  text-align: right;font-size: 17px; color: red;">
-                                        <span>(0p)</span>
-                                    </div>
+                                   
                                     <div class="col-lg-2">
                                         <div class="bs-example-tooltips tooltip-float-width">
                                             <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;"
@@ -405,10 +331,7 @@ else
                                         </div>
                                     </div>
 
-                                    <div class="col-lg-1" data-bind="visible:!$root.isDisplayCouponsAds()" style=" padding: 0px !important;       text-align: left;    font-size: 17px;    color: red;">
-                                        <span data-bind="text: $root.genderppc()"></span>
-                                    </div>
-
+                                   
                                     <div class="col-lg-2">
                                         <div class="bs-example-tooltips tooltip-float-width">
                                             <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-original-title="" title="">
@@ -444,11 +367,7 @@ else
                                         </div>
 
                                     </div>
-                                    <div class="col-lg-3" data-bind="visible:!$root.isDisplayCouponsAds()" style=" padding: 0px !important;    text-align: left;
-    font-size: 17px;
-    color: red;">
-                                        <span data-bind="text: $root.ageppc()"></span>
-                                    </div>
+                                  
                                 </div>
 
                                 <div class="form-group" style="display:none;">
@@ -539,11 +458,7 @@ else
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-3" data-bind="visible:!$root.isDisplayCouponsAds()" style="  text-align: left;    padding: 0px !important;
-    font-size: 17px;
-    color: red;">
-                                        <span data-bind="text: $root.professionppc()"></span>
-                                    </div>
+                                  
                                 </div>
                                 <div class="form-group">
                                     <div class="col-lg-2">
@@ -571,11 +486,7 @@ else
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-1" data-bind="visible:!$root.isDisplayCouponsAds()" style="  text-align: right;
-    font-size: 17px;
-    color: red;">
-                                        <span>&nbsp;</span>
-                                    </div>
+                                   
                                     <div class="col-lg-2">
                                         <div class="bs-example-tooltips tooltip-float-width">
                                             <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-original-title="" title="">
@@ -683,13 +594,10 @@ else
 
                             </div>
                             <div class="col-lg-11" style="margin:auto;float:none !important;   " data-bind="visible: $root.previewScreenNumber() == 4">
-                                <span class=" adBottomHeadingtext-campaign-left defaultThemeTxtClr" data-bind="visible:!$root.isDisplayCouponsAds()" style="    color: rgb(52,152,219) !important;"> Select your ad campaign delivery mode:</span>
                                 <div class="clearfix">
                                     
                                 </div><br />
-                                @*<div class="col-lg-3" data-bind="visible:!$root.isDisplayCouponsAds()">
-                                    &nbsp;
-                                    </div>*@
+                                
                                 <div class="radio col-lg-12" style="text-align: left;">
                                     <input type="radio" name="optionsRadiosDelvTypes" value="1" id="optionsRadiosApplyFilterFree" data-bind="checked: DeliveryDays">
                                     <label for="optionsRadiosApplyFilterFree">
@@ -924,179 +832,10 @@ else
                     <div class="col-lg-12 form-horizontal" data-bind="with: $root.campaignModel" style="padding: 20px;">
 
                         <div class="col-lg-7">
-                            @*<div class="form-group formcontrol-bg" style="margin-bottom:14px;display:none;">
-                                <div class="col-lg-11" style="padding-right:0px;">
-                                <div class="col-lg-3 text-campaign-left font19">
-                                <span data-bind="text:$root.lblCampaignName">  Campaign Name</span>
-                                </div>
-                                <div class="col-lg-9" style="padding-left:0px;padding-right:0px;">
-                                <input type="text" name="Campaign Name" class="form-control" maxlength="36" id="txtCampaignName" placeholder="Campaign Name (36 characters)" data-bind="value: CampaignName,validationTooltip: CampaignName, validationOnElement: CampaignName, attr:{placeholder : $root.campaignNamePlaceHolderValue}">
-
-                                </div>
-                                </div>
-                                </div>*@
-
-                            @*<div class="form-group formcontrol-bg form-horizontal">
-                                <div class="col-lg-11">
-                                ad title area old
-
-                                </div>
-                                <div class="col-lg-2" style="display:none;">
-                                <img class="display-Mobile hidden-sm hidden-xs" src="/Content/Images/5_Main_4.png" alt="" style="    width: 120px;            margin-top: 23px;" />
-                                </div>
-                                <div class="clearfix">
-                                &nbsp;
-
-                                </div>
-                                </div>*@
-                            @*<div class="form-group" style="display:none;">
-                                <div class="col-lg-3 text-right">
-
-                                <label for="ddpLanguage" class="control-label text-right tooltip-float">Select Language</label>
-                                </div>
-                                <div class="col-lg-6">
-                                <select id="ddpLanguage" class="form-control" data-bind="options: $root.langs, optionsText: 'LanguageName', optionsValue: 'LanguageId', value: LanguageId" disabled="disabled"></select>
-                                </div>
-                                </div>*@
-
+                          
                             <div class="form-group" style="margin-bottom:11px;">
-                                @*<span class="text-campaign-left font19" data-bind="visible:!$root.isDisplayCouponsAds()"> Advert Content Type</span>
-                                    <div class="clearfix">
-                                    &nbsp;
-                                    </div>
-                                    <div class="col-lg-3" data-bind="visible:!$root.isDisplayCouponsAds()">
-                                    &nbsp;
-                                    </div>
-                                    <div class="col-lg-9" data-bind="visible:!$root.isDisplayCouponsAds()">
-                                    <!-- ko if: $root.isNewCampaign -->
-                                    <!-- ko if: Type() == 3 ||  Type() == 2 -->
-                                    <div class="row">
-                                    <div class="form-group" style="margin-top:10px;">
-                                    <div class="col-lg-5 text-campaign-left" style="float:left;">
-                                    <div class="bs-example-tooltips tooltip-float-width margin-Top-0" style="margin-top: 10px;">
-                                    <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-original-title="" title="">
-                                    <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                    </a>
-                                    </div>
-                                    <label class="control-label text-right tooltip-float floatNone font16">Banner Image (400 x 800)</label>
-                                    </div>
-                                    <div class="col-lg-7" style="float:left;">
-                                    <div class="fileUpload btn btn-primary">
-                                    <span>Upload </span>
-                                    <input type="file" class="upload" id="campaignType_image_file" data-bind="files: { onLoaded: $root.campaignTypeImageCallback, fileFilter: 'image.*'}" />
-                                    </div>
-
-                                    </div>
-
-                                    </div>
-                                    </div>
-                                    <!-- /ko -->
-                                    <!-- /ko -->
-                                    <div class="row">
-                                    <!-- ko if: !$root.isNewCampaign() -->
-                                    <div class="radio col-lg-3">
-
-
-                                    <input type="radio" name="optionsRadiosStoreType" id="optionsRadiosVideos" value="1" data-bind="checked: Type, event:{ change: $root.OnChangeCampaignType }">
-                                    <label for="optionsRadiosVideos">
-                                    Video
-                                    </label>
-
-                                    </div>
-                                    <!-- /ko -->
-                                    <!-- ko if: $root.isNewCampaign() -->
-                                    <div class="col-lg-3 text-right control-label" data-bind="visible: Type() == 1">
-                                    <span>  Enter Video Link</span>
-                                    </div>
-                                    <!-- /ko -->
-                                    <div class="col-lg-9" data-bind="visible: Type() == 1">
-
-                                    <textarea class="form-control" id="txtLinkOfCampaign" rows="1" placeholder="" data-bind="value: LandingPageVideoLink,validationTooltip:LandingPageVideoLink, validationOnElement: LandingPageVideoLink, attr:{placeholder : $root.campaignTypePlaceHolderValue}" style="margin-bottom:10px;"></textarea>
-                                    <textarea class="form-control" id="txtVideoLink2" rows="1" placeholder="Enter Video Link 2" data-bind="value: VideoLink2" style="margin-bottom:10px;"></textarea>
-
-                                    </div>
-
-
-
-                                    </div>
-
-                                    <div class="row" data-bind="visible:   Type() ==3">
-
-                                    <div class="radio col-lg-3">
-                                    <!-- ko if: !$root.isNewCampaign() -->
-                                    <input type="radio" name="optionsRadiosStoreType" id="optionsRadiosLink" value="2" data-bind="checked: Type, event:{ change: $root.OnChangeCampaignType }">
-                                    <label for="optionsRadiosLink" style="display:none;">
-                                    URL
-                                    </label>
-                                    <span class="help-block text-right"></span>
-                                    <!-- /ko -->
-                                    </div>
-                                    <div class="col-lg-9" data-bind="visible: Type() == 2" style="    margin-bottom: 10px;">
-
-                                    <textarea class="form-control" id="txtLinkOfCampaign" rows="1" placeholder="" data-bind="value: LandingPageVideoLink,validationTooltip:LandingPageVideoLink, validationOnElement: LandingPageVideoLink, attr:{placeholder : $root.campaignTypePlaceHolderValue}"></textarea>
-
-                                    </div>
-
-
-
-                                    </div>
-
-                                    <div class="row">
-
-                                    <div class="radio col-lg-4">
-                                    <!-- ko if: !$root.isNewCampaign() -->
-                                    <input type="radio" name="optionsRadiosStoreType" id="optionsRadiosUploadImage" value="3" data-bind="checked: Type, event:{ change: $root.OnChangeCampaignType }">
-                                    <label for="optionsRadiosUploadImage">
-                                    Flyer / Leaflet
-                                    </label>
-                                    <span class="help-block text-right"></span>
-                                    <!-- /ko -->
-                                    </div>
-
-                                    <div class="col-lg-8" style="margin-left:-10px;" data-bind="visible: Type() == 3 ||  Type() == 2">
-
-                                    <div>
-
-                                    <div style="float:left;">
-
-                                    <img style="width:auto;height:250px;" data-bind="visible: CampaignTypeImagePath() == ''" src="/Content/Images/Company_Default.png" />
-                                    <img style="width:auto;    max-height: 250px;    max-width: 250px;" data-bind="visible: CampaignTypeImagePath() != '' ,attr: { src: CampaignTypeImagePath }" />
-
-                                    </div>
-                                    <!-- ko if: !$root.isNewCampaign() -->
-                                    <div class="fileUpload btn btn-primary" style="    margin-top: 18px;margin-left: 20px;">
-                                    <span>Upload </span>
-                                    <input type="file" class="upload" id="campaignType_image_file" data-bind="files: { onLoaded: $root.campaignTypeImageCallback, fileFilter: 'image.*'}" />
-                                    </div>
-                                    <!-- /ko -->
-                                    </div>
-
-
-                                    </div>
-
-
-                                    </div>
-
-                                    <div class="row">
-
-                                    <div class="radio col-lg-5">
-                                    <!-- ko if: !$root.isNewCampaign() -->
-                                    <input type="radio" name="optionsRadiosStoreType" id="optionsRadiosGame" value="4" data-bind="checked: Type, event:{ change: $root.OnChangeCampaignType }">
-                                    <label for="optionsRadiosGame">
-                                    Sponsor Games
-                                    </label>
-                                    <span class="help-block text-right"></span>
-                                    <!-- /ko -->
-                                    </div>
-
-                                    </div>
-
-
-                                    </div>
-                                    <div class="clearfix">
-                                    &nbsp;
-                                    </div>*@
-                                <div data-bind="visible:$root.isDisplayCouponsAds()">
+                                
+                                <div >
                                     <div class="col-lg-4">
                                         <div style="margin-top:5px;    text-align: center;cursor:pointer;">
                                             <img style="height:90px;" data-bind="visible: CampaignImagePath() == '' || CampaignImagePath() == null" src="/Content/Images/placeholder.png" onclick="showCouponDialog1();" />
@@ -1140,26 +879,6 @@ else
                                         </div>
                                     </div>
 
-                                    @*<div class="row">
-                                        <div class="form-group" style="margin-top:10px;">
-                                        <div class="col-lg-3">
-                                        <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Coupon Image 4 (200px x 200px)</label>
-                                        </div>
-                                        <div class="col-lg-8">
-
-                                        <div style="margin-top:5px;">
-                                        <img style="height:80px;" data-bind="visible: CouponImage4() == ''" src="/Content/Images/Company_Default.png" />
-                                        <img style="height:80px;" data-bind="visible: CouponImage4() != '' ,attr: { src: CouponImage4 }" />
-                                        </div>
-                                        <br />
-                                        <div class="fileUpload btn btn-primary">
-                                        <span>Upload </span>
-                                        <input type="file" class="upload" id="campaignType_image_file1" data-bind="files: { onLoaded: $root.CouponImage4Callback, fileFilter: 'image.*'}" />
-                                        </div>
-                                        </div>
-
-                                        </div>
-                                        </div>*@
                                     <span class="text-campaign-left font19"> Voucher Type</span>
                                     <div class="clearfix">
                                         &nbsp;
@@ -1442,229 +1161,15 @@ else
                                 </header>
 
                             </div>
-                            @*<div class="clearfix" data-bind="visible:!$root.isDisplayCouponsAds()">
-                                &nbsp;
-                                </div>*@
                             <div>
-                                @*<span class="text-campaign-left font19" data-bind="text:$root.lblCampaignSchedule,visible:!$root.isDisplayCouponsAds()">Schedule</span>
-                                    <div class="clearfix" data-bind="visible:!$root.isDisplayCouponsAds()">
-                                    &nbsp;
-                                    </div>
-                                    <div class="col-lg-3" data-bind="visible:!$root.isDisplayCouponsAds()">
-                                    &nbsp;
-                                    </div>*@
-                                <div class="col-lg-9" data-bind="visible:!$root.isDisplayCouponsAds()">
-                                    <div class="row">
-                                        @*<div class="col-lg-6">
-                                            <div class="row" style="margin-bottom:10px;">
-                                            <div class="col-lg-4">
-                                            <label for="validFromDate" class="control-label text-left">Start Date</label>
-                                            </div>
-                                            <div class="col-sm-8">
-
-                                            <input type="text" class="form-control" id="validFromDate" data-bind="datetimepicker:StartDateTime">
-
-
-                                            </div>
-                                            </div>
-                                            <div class="row">
-                                            <div class="col-lg-4">
-                                            <label for="validUptoDate" class="control-label text-left">End Date</label>
-                                            </div>
-                                            <div class="col-sm-8">
-                                            <input type="text" class="form-control" id="validUptoDate" data-bind="datetimepicker:EndDateTime,validationTooltip:EndDateTime, validationOnElement: EndDateTime">
-                                            </div>
-                                            </div>
-
-                                            </div>
-                                            <div class="col-lg-2">
-                                            &nbsp;
-                                            </div>*@
-                                        <div class="col-lg-4">
-                                            <div style="width:100%">
-                                                @*<div class="aud_cnt_head hidden-sm hidden-xs" style=" display:none;">
-                                                    <h4 class="ad_h4" data-bind="visible: Type() == 1">Video</h4>
-                                                    <h4 class="ad_h4" data-bind="visible: Type() == 2">URL</h4>
-                                                    <h4 class="ad_h4" data-bind="visible: Type() == 3">Flyer / Leaflet</h4>
-                                                    <h4 class="ad_h4" data-bind="visible: Type() == 4">Sponsored game</h4>
-                                                    </div>*@
-                                                <div class="aud_cnt hidden-sm hidden-xs">
-                                                    <div style="padding: 10px; border: 5px;">
-                                                        <div class="clearfix _1gab VAGUE" style="display:none;">
-                                                            <div class="_1g9- lfloat">
-                                                                <div class="_1g9_">
-                                                                    <i class="_1ga0 broad_aud img sp_NQc91B1T0mb sx_f05cb6 meterPin"></i>
-                                                                    <i class="_1ga1 img sp_NQc91B1T0mb3 sx_0eeab0"></i>
-                                                                    <div class="_1ga2 clearfix">
-                                                                        <div class="_ohe lfloat">
-                                                                            <span class="_1ga3">Specific</span>
-                                                                        </div>
-                                                                        <div class="_ohf rfloat">
-                                                                            <span class="_1ga3">Broad</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>yo
-                                                            </div>
-                                                            <div class="rfloat fsm _1ga4">
-                                                                <p data-bind="visible: $root.audienceReachMode()  == 1">Your audience is too specific for your ads to be shown. Try making it broader.</p>
-                                                                <p data-bind="visible: $root.audienceReachMode()  == 3">Your audience selection is fairly broad.</p>
-                                                                <p data-bind="visible: $root.audienceReachMode()  == 2">Your audience is defined.</p>
-                                                            </div>
-                                                            <div class="clearfix">
-                                                                &nbsp;
-                                                            </div>
-                                                        </div>
-                                                        <div style="display:none;">
-                                                            @*<span class="ad_h4_noborder">Audience Details:</span>*@
-                                                            <ul style="display:none;">
-                                                                <li class="li-audul" data-bind="visible: $root.campaignModel().AdCampaignTargetLocations().length > 0">
-                                                                    <div class="fsm_bold">Locations:</div>
-                                                                    <ul class="pad-11">
-                                                                        <!-- ko template: { name: 'targetLocationAudienceTemplate' , foreach: AdCampaignTargetLocations } -->
-                                                                        <!-- /ko -->
-
-                                                                    </ul>
-                                                                </li>
-                                                                <li class="li-audul" data-bind="visible: $root.visibleTargetAudience(3)  == 1">
-                                                                    <div class="fsm_bold">Languages:</div>
-                                                                    <ul class="pad-11">
-                                                                        <!-- ko template: { name: 'targetLanguageAudienceTemplate' , foreach: AdCampaignTargetCriterias } -->
-                                                                        <!-- /ko -->
-                                                                    </ul>
-                                                                </li>
-                                                                <li class="li-audul" data-bind="visible: $root.visibleTargetAudience(5)  == 1">
-                                                                    <div class="fsm_bold">Education:</div>
-                                                                    <ul class="pad-11">
-                                                                        <!-- ko template: { name: 'targetEducationAudienceTemplate' , foreach: AdCampaignTargetCriterias } -->
-                                                                        <!-- /ko -->
-                                                                    </ul>
-                                                                </li>
-                                                                <li class="li-audul" data-bind="visible: $root.visibleTargetAudience(4)  == 1">
-                                                                    <div class="fsm_bold">Profession:</div>
-                                                                    <ul class="pad-11">
-                                                                        <!-- ko template: { name: 'targetIndustryAudienceTemplate' , foreach: AdCampaignTargetCriterias } -->
-                                                                        <!-- /ko -->
-                                                                    </ul>
-                                                                </li>
-                                                                <li class="li-audul" data-bind="visible: $root.visibleTargetAudience(1) == 1 || $root.visibleTargetAudience(2)  == 1">
-                                                                    <div class="fsm_bold">ADDITIONAL TARGETING CRITERIA'S:</div>
-                                                                    <ul class="pad-11">
-                                                                        <!-- ko template: { name: 'targetCriteriasAudienceTemplate', foreach: AdCampaignTargetCriterias } -->
-                                                                        <!-- /ko -->
-                                                                    </ul>
-                                                                </li>
-                                                                <li class="li-audul">
-                                                                    <div class="fsm_bold">Age:</div>
-                                                                    <ul class="pad-11">
-                                                                        <li>
-                                                                            <span data-bind="text: $root.campaignModel().AgeRangeStart() +' - '+ $root.campaignModel().AgeRangeEnd()"></span>
-                                                                        </li>
-                                                                    </ul>
-                                                                </li>
-                                                                <li class="li-audul">
-                                                                    <div class="fsm_bold">Gender:</div>
-                                                                    <ul class="pad-11">
-                                                                        <li>
-                                                                            <!--ko if:$root.campaignModel().Gender() == 1 -->
-                                                                            <span class="aud_licontent">All</span>
-                                                                            <!--/ko-->
-                                                                            <!--ko if:$root.campaignModel().Gender() == 2 -->
-                                                                            <span class="aud_licontent">Men</span>
-                                                                            <!--/ko-->
-                                                                            <!--ko if:$root.campaignModel().Gender() == 3 -->
-                                                                            <span class="aud_licontent">Women</span>
-                                                                            <!--/ko-->
-                                                                        </li>
-                                                                    </ul>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                        <div>
-
-                                                            @*<div class="" data-bind="visible:!$root.isDisplayCouponsAds()">
-                                                                <span>PPC  </span>
-                                                                </div>*@
-                                                            <div class="clearfix"> </div>
-                                                        </div>
-                                                        <div style=" display:none;   font-weight: bold;    padding-top: 0px;    font-size: 16px;">
-                                                            <div class="yourBudgtHeadingCnt">
-                                                                <div style="float:left;">
-
-                                                                </div>
-                                                                <div style="float:left;">
-                                                                    <div id="spinnerAudience" style="display: none;">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            @*<div class="" data-bind="visible:!$root.isDisplayCouponsAds()">
-                                                                <span data-bind="text: '£' + $root.pricePerclick().toFixed(2)" style="font-size: 18px;"></span>
-                                                                <span data-bind="text: '£1'" style="font-size: 18px;"></span>
-                                                                </div>*@
-                                                            <div class="clearfix"> </div>
-                                                        </div>
-                                                        <div style="display:none;">
-
-                                                        </div>
-                                                    </div>
-                                                    <div style="background-color:white;color:black;padding: 10px; border: 5px;display:none;">
-                                                        <span>Possible Campaign spend  :  </span>
-                                                        <span data-bind="text:  '£ ' +(($root.pricePerclick() * $root.reachedAudience()).toFixed(2)) +'' " style="font-size:16px; font-weight:bold;">73 %</span><br />
-                                                        <span>Plus </span>
-                                                        <span style="font-size:16px; font-weight:bold;">£10.00 </span><span> Submission fee </span><br />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                @*<div class="clearfix" data-bind="visible:!$root.isDisplayCouponsAds()">
-                                    &nbsp;
-                                    </div>*@
+                             
 
                             </div>
 
-                            @*<div class="form-group formcontrol-bg" data-bind="visible:!$root.isDisplayCouponsAds()">
-                                <div class="col-lg-11">
-
-                                <div class="form-group" style="margin-top:10px; margin-left:-8px;">
-
-                                <div class="col-lg-4 text-campaign-left Float-Left" style="margin-left:6px;">
-                                <label class="control-label text-right tooltip-float font20 floatNone" style="float:left !important; ">Discount Voucher</label>
-                                </div>
-                                <div class="col-lg-2 Float-Left" style="padding-top:3px;padding-left:0px;">
-                                <div class="onoffswitch">
-                                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchDicV" data-bind="checked: IsShowVoucherSetting, event: { click: $root.addVoucherClickRate}">
-                                <label class="onoffswitch-label" for="switchDicV">
-                                <div class="onoffswitch-inner"></div>
-                                <div class="onoffswitch-switch"></div>
-                                </label>
-                                </div>
-                                </div>
-                                <div class="col-lg-2 text-campaign-left Float-Left" style="margin-left:6px;">
-                                <span class="control-label text-right tooltip-float font20 floatNone" style="float:left !important;color:red; " data-bind="text: '(' +  $root.voucherPriceLbl() + 'p )'"></span>
-                                </div>
-
-                                </div>
-
-
-
-                                <div class="form-group" data-bind="visible: IsShowVoucherSetting">
-
-                                <div class="col-lg-4">
-
-                                <label for="txtCorrectAnswer" class="control-label text-right tooltip-float floatNone">Select Voucher</label>
-                                </div>
-                                <div class="col-lg-8">
-                                <select class="form-control" id="ddpDiscountV" data-bind="options: $root.vouchers, optionsText: 'Name', optionsValue: 'CouponId', value: CouponId" style="    margin-left: -12px;"></select>
-                                </div>
-                                </div>
-                                </div>
-                                </div>*@
+                        
 
                             <div class="form-group formcontrol-bg" style="display:none;">
-                                @*data-bind="visible:!$root.isDisplayCouponsAds()"*@
-                                <div class="col-lg-11">
+                               <div class="col-lg-11">
                                     <div class="form-group" style="margin-bottom:20px; margin-top:20px;">
                                         <div class="col-lg-4 text-campaign-left Float-Left" style="margin-left:6px;">
                                             <label class="control-label text-right tooltip-float font20 floatNone" style="float:left !important; ">Show voucher</label>
@@ -1785,7 +1290,7 @@ else
 
                                 </div>
                             </div>
-                            <div class="form-group formcontrol-bg" data-bind="visible:$root.isDisplayCouponsAds()">
+                            <div class="form-group formcontrol-bg" >
                                 <div class="col-lg-11">
                                     <div class="form-group" style="margin-bottom:20px; margin-top:20px;">
                                         <div class="col-lg-4 text-campaign-left  Float-Left">
@@ -1888,18 +1393,7 @@ else
 
                                 </div>
                             </div>
-                            @*<div class="form-group formcontrol-bg" data-bind="visible:!$root.isDisplayCouponsAds()" style="margin-bottom:14px;">
-
-                                <div class="col-lg-4 text-campaign-left font20">
-                                <span>  Priority</span>
-                                </div>
-                                <div class="col-lg-8" style="padding-left:0px;">
-                                <input type="text" name="Priority" class="form-control" maxlength="36" id="txtPriority" placeholder="Priority" data-bind="value: priority" style="    margin-left: -15px;
-                                width: 91% !important;">
-
-                                </div>
-
-                                </div>*@
+                       
                         </div>
                         <div class="col-lg-1 col-md-1 col-sm-1" style="display:none;">
                             &nbsp;
@@ -1931,179 +1425,6 @@ else
                                 </div>
                             </div>
                             <br />
-
-                            <div data-bind="visible:!$root.isDisplayCouponsAds()" style="width:100%;clear:both; margin-bottom:20px;">
-                                <div class="radio col-lg-12">
-                                    <span>Deliver in:</span>
-                                </div>
-                                <div class="radio col-lg-12 row radioDelv" style="margin-left: 10px;">
-                                    <input type="radio" name="optionsRadiosDeliver" id="optionsRadios3Day" value="3" data-bind="checked: DeliveryDays, event: { click:$root.addDeliveryPrice }">
-                                    <label for="optionsRadios3Day">
-                                        3 days <span class="delvPricetxt" data-bind="text: $root.threePriceLbl()" style=""></span>
-                                    </label>
-                                </div>
-                                <div class="radio col-lg-12 row radioDelv" style="margin-left: 10px;">
-
-                                    <input type="radio" name="optionsRadiosDeliver" id="optionsRadios5Day" value="5" data-bind="checked: DeliveryDays, event: { click:$root.addDeliveryPrice }">
-                                    <label for="optionsRadios5Day">
-                                        5 days <span data-bind="text: $root.fivePriceLbl()" class="delvPricetxt"></span>
-                                    </label>
-                                </div>
-                                <div class="radio col-lg-12 row radioDelv" style="margin-left: 10px;">
-                                    <input type="radio" name="optionsRadiosDeliver" id="optionsRadios10Day" value="10" data-bind="checked: DeliveryDays, event: { click:$root.addDeliveryPrice }">
-                                    <label for="optionsRadios10Day">
-                                        10 days <span data-bind="text: $root.tenPriceLbl()" class="delvPricetxt"></span>
-                                    </label>
-                                </div>
-                            </div>
-                            <div data-bind="visible:!$root.isDisplayCouponsAds()" style="margin-top: 16px;clear:both;">
-
-                                <div style="    margin-bottom: 10px; display:none;">
-                                    <div class="yourBudgtHeadingCnt">
-                                        <span>Start date :</span>
-                                    </div>
-                                    <div class="">
-                                        <span data-bind="dateString:  StartDateTime"></span>
-                                    </div>
-                                    <div class="clearfix"> </div>
-                                </div>
-                                <button class="btn  btn-success btnSubmitApproval" id="btnSubmitForApproval" data-bind="click:$root.submitCampaignData, visible: $root.canSubmitForApproval" style="width: 100%;">Submit for Approval</button>
-                                <br />
-                                <div class="social-box col-lg-12 col-sm-12 col-xs-12  estimates hidden-sm hidden-xs" style="cursor:pointer;display:none;" title="Pending Estimates">
-                                    <div style="    margin-bottom: 10px;">
-                                        <div class="yourBudgtHeadingCnt">
-                                            <span>Total Spent</span>
-                                        </div>
-                                        <div class="">
-                                            <span>£1024.00</span>
-                                        </div>
-                                        <div class="clearfix"> </div>
-                                    </div>
-                                    <div style="    margin-bottom: 10px;">
-                                        <div class="yourBudgtHeadingCnt">
-                                            <span>Ads delivered</span>
-                                        </div>
-                                        <div class="">
-                                            <span>34065</span>
-                                        </div>
-                                        <div class="clearfix"> </div>
-                                    </div>
-                                </div>
-                                <div class="social-box col-lg-12 col-sm-12 col-xs-12  facebook hidden-sm hidden-xs" style="cursor:pointer;background-color:#8284FB !important; display:none;" title="Pending Orders">
-                                    <div style="margin-bottom: 10px;">
-                                        <div class="yourBudgtHeadingCnt" style="font-weight:bold;    font-size: 16px;">
-                                            <span>Branding views</span>
-                                        </div>
-                                        <div class="">
-                                            <span>&nbsp;</span>
-                                        </div>
-                                        <div class="clearfix"> </div>
-                                    </div>
-                                    <div style="    margin-bottom: 10px;">
-                                        <div class="yourBudgtHeadingCnt">
-                                            <span>Games played</span>
-                                        </div>
-                                        <div class="">
-                                            <span>405</span>
-                                        </div>
-                                        <div class="clearfix"> </div>
-                                    </div>
-                                    <div style="    margin-bottom: 10px;">
-                                        <div class="yourBudgtHeadingCnt">
-                                            <span>Videos played</span>
-                                        </div>
-                                        <div class="">
-                                            <span>40</span>
-                                        </div>
-                                        <div class="clearfix"> </div>
-                                    </div>
-                                    <div style="    margin-bottom: 10px;">
-                                        <div class="yourBudgtHeadingCnt">
-                                            <span>Leaflets viewed</span>
-                                        </div>
-                                        <div class="">
-                                            <span>440</span>
-                                        </div>
-                                        <div class="clearfix"> </div>
-                                    </div>
-                                </div>
-                                <div class="social-box col-lg-12 col-sm-12 col-xs-12  twitter hidden-sm hidden-xs" style="cursor:pointer; background-color:#9093FB !important; display:none;" title="In Production">
-                                    <div style="    margin-bottom: 10px;">
-                                        <div class="yourBudgtHeadingCnt" style="font-weight:bold;    font-size: 16px;">
-                                            <span>Conversions</span>
-                                        </div>
-                                        <div class="">
-                                            <span>&nbsp;</span>
-                                        </div>
-                                        <div class="clearfix"> </div>
-                                    </div>
-                                    <div style="    margin-bottom: 10px;">
-                                        <div class="yourBudgtHeadingCnt">
-                                            <span>Landing page hits</span>
-                                        </div>
-                                        <div class="">
-                                            <span>405</span>
-                                        </div>
-                                        <div class="clearfix"> </div>
-                                    </div>
-                                    <div style="    margin-bottom: 10px;">
-                                        <div class="yourBudgtHeadingCnt">
-                                            <span>Vouchers issued </span>
-                                        </div>
-                                        <div class="">
-                                            <span>1999</span>
-                                        </div>
-                                        <div class="clearfix"> </div>
-                                    </div>
-                                </div>
-                                <div class="social-box col-lg-12 col-sm-12 col-xs-12  google hidden-sm hidden-xs" style="cursor:pointer; background-color:#C19AFC !important; display:none;" title="Completed">
-                                    <div style="    margin-bottom: 10px;">
-                                        <div class="yourBudgtHeadingCnt" style="font-weight:bold;    font-size: 16px;">
-                                            <span>Paid out</span>
-                                        </div>
-                                        <div class="">
-                                            <span>&nbsp;</span>
-                                        </div>
-                                        <div class="clearfix"> </div>
-                                    </div>
-                                    <div style="    margin-bottom: 10px;">
-                                        <div class="yourBudgtHeadingCnt">
-                                            <span>To Target Audience</span>
-                                        </div>
-                                        <div class="">
-                                            <span>£512.00</span>
-                                        </div>
-                                        <div class="clearfix"> </div>
-                                    </div>
-                                </div>
-                                <div class="clear-fix">
-                                    &nbsp;
-                                </div>
-                                <a href="http://pinkcards.com/" target="_blank" style="display:none;">
-                                    <div class="aud_cnt_head marketingGuru" style="background-color:#46448E; margin-top:10px;">
-                                        <h4 class="ad_h4" style="    font-size: 0.6em;">Our digital Gurus are ready to help you</h4>
-                                    </div>
-                                    <div class="aud_cnt_head marketingGuru" style="height: 94px; ">
-                                        <div class="">
-                                            <div class="col-lg-4">
-                                                <img src="~/Images/guru.png" height="70px" />
-                                            </div>
-                                            <div class="col-lg-8" style="text-align:left;font-size: 0.7em;">
-                                                <span>Make Video or flyer</span><br />
-                                                <span>Create and manage your</span><br />
-                                                <span>Ad Campaign & survey</span><br />
-                                                <span>Find a digital guru</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                                <div class="aud_cnt" style="text-align:center;background-color:white;display:none;">
-                                    <br /><span>100%</span><br />
-                                    <span>Conversion Rate</span><br /><br />
-                                    <span>upto 50% of PPC</span><br />
-                                    <span>shared with happy clickers</span>
-                                </div>
-                            </div>
                             <div class="clearfix">
                             </div>
                         </div>
@@ -2112,8 +1433,8 @@ else
             </div>
         </div>
     </div>
-    @Html.Partial("~/Areas/Ads/Views/Ads/_addEditCouponCategories.cshtml")
-    @Html.Partial("~/Areas/Ads/Views/Ads/_addEditCouponCodes.cshtml")
+    @*@Html.Partial("~/Areas/Ads/Views/Ads/_addEditCouponCategories.cshtml")
+    @Html.Partial("~/Areas/Ads/Views/Ads/_addEditCouponCodes.cshtml")*@
     <!-- ko if: $root.campaignModel() != null -->
     <div class="modal fade my-modal model_quizQ_ph" id="phQuizDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog" style=" width:700px;  ">

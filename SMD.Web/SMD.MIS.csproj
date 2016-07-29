@@ -384,6 +384,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\SecurityConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Api\Controllers\CouponController.cs" />
+    <Compile Include="Areas\Coupons\CouponsAreaRegistration.cs" />
+    <Compile Include="Areas\Coupons\Controllers\CouponsController.cs" />
     <Compile Include="Areas\Ads\AdsAreaRegistration.cs" />
     <Compile Include="Areas\Ads\Controllers\AdsController.cs" />
     <Compile Include="Areas\Api\ApiAreaRegistration.cs" />
@@ -568,6 +571,10 @@
     <Compile Include="TypeRegistrations.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Coupons\Scripts\Coupons.dataservice.js" />
+    <Content Include="Areas\Coupons\Scripts\Coupons.model.js" />
+    <Content Include="Areas\Coupons\Scripts\Coupons.view.js" />
+    <Content Include="Areas\Coupons\Scripts\Coupons.viewModel.js" />
     <Content Include="Areas\Ads\Scripts\ads.dataservice.js" />
     <Content Include="Areas\Ads\Scripts\ads.model.js" />
     <Content Include="Areas\Ads\Scripts\ads.view.js" />
@@ -1584,6 +1591,11 @@
     <Content Include="Areas\Report\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Report\Views\_ViewStart.cshtml" />
     <Content Include="Areas\User\Views\Shared\_EditManagedUser.cshtml" />
+    <Content Include="Areas\Coupons\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Coupons\Views\Coupons\Index.cshtml" />
+    <Content Include="Areas\Coupons\Views\Coupons\ManageCoupon.cshtml" />
+    <Content Include="Areas\Coupons\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Coupons\Views\web.config" />
     <None Include="Properties\PublishProfiles\mz profile.pubxml" />
     <None Include="Properties\PublishProfiles\SMD MIS Saqib.pubxml" />
     <None Include="Properties\PublishProfiles\SMD.pubxml" />
@@ -2703,6 +2715,7 @@
     <Folder Include="Areas\Billing\Models\" />
     <Folder Include="Areas\Common\Controllers\" />
     <Folder Include="Areas\Common\Models\" />
+    <Folder Include="Areas\Coupons\Models\" />
     <Folder Include="Areas\Report\Models\" />
     <Folder Include="Areas\Survey\Models\" />
     <Folder Include="Content\themes\base\minified\images\" />

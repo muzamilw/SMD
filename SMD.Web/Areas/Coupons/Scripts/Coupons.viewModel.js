@@ -1,11 +1,12 @@
 ﻿/*
     Module with the view model for the Profile Questions
 */
-define("ads/ads.viewModel",
-    ["jquery", "amplify", "ko", "ads/ads.dataservice", "ads/ads.model", "common/pagination", "common/confirmation.viewModel", "common/stripeChargeCustomer.viewModel"],
+define("Coupons/Coupons.viewModel",
+    ["jquery", "amplify", "ko", "Coupons/Coupons.dataservice", "Coupons/Coupons.model", "common/pagination", "common/confirmation.viewModel",
+        "common/stripeChargeCustomer.viewModel"],
     function ($, amplify, ko, dataservice, model, pagination, confirmation, stripeChargeCustomer) {
         var ist = window.ist || {};
-        ist.Ads = {
+        ist.Coupons = {
             viewModel: (function () {
                 var view,
                     campaignGridContent = ko.observableArray([]),
@@ -35,13 +36,7 @@ define("ads/ads.viewModel",
                     isNewCriteria = ko.observable(true),
                     isEnableVedioVerificationLink = ko.observable(false),
                     //caption variablels 
-                    lblCampaignName = ko.observable("Campaign Name"),
-                    lblDetailsHeading = ko.observable("Free Display Ad Details"),
-                    lblAdTitle = ko.observable("Ad Title"),
-                    lblFirstLine = ko.observable("First line"),
-                    lbllSecondLine = ko.observable("Second Line"),
-                    lblCampaignSchedule = ko.observable("Schedule"),
-                    campaignTypePlaceHolderValue = ko.observable('Enter in the YouTube video link'),
+                   
                 //
                     isEditCampaign = ko.observable(false),
                     canSubmitForApproval = ko.observable(true),
@@ -59,7 +54,7 @@ define("ads/ads.viewModel",
                     isEducationPerClickPriceAdded = ko.observable(false),
                     isBuyItPerClickPriceAdded = ko.observable(false),
                     isVoucherPerClickPriceAdded = ko.observable(false),
-                    isDisplayCouponsAds = ko.observable(false),
+                  
                     selectedEducationIncludeExclude = ko.observable(true),
                     isListVisible = ko.observable(true),
                     isWelcomeScreenVisible = ko.observable(false),
@@ -72,8 +67,6 @@ define("ads/ads.viewModel",
                     totalAudience = ko.observable(0),
                     // audience reach mode 
                     audienceReachMode = ko.observable("1"),
-                    MainHeading = ko.observable("Video Campaigns"),
-                    SubHeading = ko.observable("Video campaigns can be paused and terminated at any time. Increase your conversions and reduce your spend by using profile filters."),
                     errorList = ko.observableArray([]),
                       // unique country list used to bind location dropdown
                     selectedQuestionCountryList = ko.observableArray([]),
@@ -185,7 +178,7 @@ define("ads/ads.viewModel",
                         PageSize: pager().pageSize(),
                         PageNo: pager().currentPage(),
                         SearchText: searchFilterValue(),
-                        ShowCoupons: isDisplayCouponsAds()
+                        ShowCoupons:true
                     }, {
                         success: function (data) {
                             if (data != null) {
@@ -237,15 +230,9 @@ define("ads/ads.viewModel",
                 getCampaignByFilter = function () {
                     getAdCampaignGridContent();
                 },
-                // Add new Profile Question
                 addNewCampaign = function () {
-               
-                    //if (isDisplayCouponsAds() == false) {
-                    //    isWelcomeScreenVisible(true);
-                    //} else {
-                        openEditScreen(1);
-                        isFromEdit(true);
-                  //  }
+                    openEditScreen(5);
+                    isFromEdit(true);
                     isListVisible(false);
                     isNewCampaign(true);
                     isTerminateBtnVisible(false);
@@ -253,50 +240,7 @@ define("ads/ads.viewModel",
                     isShowArchiveBtn(false);
                     campaignModel().DeliveryDays("1");
                     campaignModel().ChannelType("1");
-                    //isEditorVisible(true);
-                    //canSubmitForApproval(true);
-                    //campaignModel(new model.Campaign());
-
-
-                    //selectedCriteria();
-                    //    getAudienceCount();
-                    //campaignModel().Gender('1');
-                    //campaignModel().Type('1');
-                    //campaignModel().MaxBudget('1');
-                    //campaignModel().AgeRangeEnd(80);
-                    //campaignModel().AgeRangeStart(13);
-                    //view.initializeTypeahead();
-                    //isEnableVedioVerificationLink(false);
-                    //isEditCampaign(false);
-                    //campaignModel().CampaignTypeImagePath("");
-                    //campaignModel().CampaignImagePath("");
-                    //campaignModel().VoucherImagePath("");
-                    //campaignModel().LanguageId(41);
-                    //campaignModel().CampaignName('New Campaign');
-
-
-                    //bindAudienceReachCount();
-                    //selectedQuestionCountryList([]);
-
-                    // above lines
-
-                    //if (UserAndCostDetail().CountryId != null && UserAndCostDetail().CityId != null) {
-
-                    //    var objCity = {
-                    //        CountryID: UserAndCostDetail().CountryId,
-                    //        CityID: UserAndCostDetail().CityId,
-                    //        Radius: 0,
-                    //        Country: UserAndCostDetail().Country,
-                    //        City: UserAndCostDetail().City,
-                    //        Latitude: UserAndCostDetail().GeoLat,
-                    //        Longitude: UserAndCostDetail().GeoLong
-                    //    }
-                    //    selectedLocation(objCity);
-                    //    onAddLocation();
-                    //}
-
-
-
+                    
                 },
 
                 closeNewCampaignDialog = function () {
@@ -315,11 +259,9 @@ define("ads/ads.viewModel",
                                 isWelcomeScreenVisible(true);
                             }
 
-                            if (isDisplayCouponsAds() == true) {
-                                isListVisible(true);
-                                isWelcomeScreenVisible(false);
-                            }
-
+                            isListVisible(true);
+                            isWelcomeScreenVisible(false);
+                          
                             $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign").css("display", "none");
                             $("#btnSubmitForApproval,#saveBtn,.table-link").css("display", "inline-block");
                             $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign,#btnStopAndTerminate,#btnCopyCampaign").removeAttr('disabled');
@@ -384,39 +326,13 @@ define("ads/ads.viewModel",
                   openEditScreen = function (mode) {
              
                       campaignModel(new model.Campaign());
-                      // campaignModel().CampaignName('New Campaign');
-                      
-                      if (mode == 1) { // video
-                          campaignModel().Type('1');
-                          isEnableVedioVerificationLink(true);
-                      }
-                      else if (mode == 2) { 
-                          campaignModel().Type('3');
-                          isEnableVedioVerificationLink(true);
-                      }
-                      else if (mode == 3) { // flyer
-                          campaignModel().Type('3');
-                          isEnableVedioVerificationLink(true);
-                      }
-                      else if (mode == 4) { // game
-                          campaignModel().Type('4');
-                          isEnableVedioVerificationLink(false);
-                      } else if (mode == 5) {
-                          //campaignModel().CampaignName('New Coupon');
-                          campaignNamePlaceHolderValue('New Voucher');
-                          isEnableVedioVerificationLink(false);
-                          campaignModel().Type('5');
-                          lblCampaignName("Voucher Name");
-                          lblDetailsHeading("Voucher Display Details");
-                          lblAdTitle("Voucher Title");
-                          lblFirstLine("First line");
-                          lbllSecondLine("Second Line");
-                          lblCampaignSchedule("Schedule");
-                          campaignModel().couponImage2("");
-                          campaignModel().CouponImage3("");
-                          campaignModel().CouponImage4("");
-                          campaignModel().CouponType('1');
-                      }
+                      campaignNamePlaceHolderValue('New Voucher');
+                      isEnableVedioVerificationLink(false);
+                      campaignModel().Type('5');
+                      campaignModel().couponImage2("");
+                      campaignModel().CouponImage3("");
+                      campaignModel().CouponImage4("");
+                      campaignModel().CouponType('1');
                       isWelcomeScreenVisible(false);
 
                       isEditorVisible(true);
@@ -494,136 +410,29 @@ define("ads/ads.viewModel",
                 saveCampaign = function (mode) {
             
                     var isPopulateErrorList = false;
-                    if (isDisplayCouponsAds() == false) {
-
-                        if (campaignModel().Type() != 4) {
-                            isPopulateErrorList = true;
-                            //if (quizQuestionStatus() == true) {
-                            //    if ((campaignModel().VerifyQuestion() == null || campaignModel().VerifyQuestion() == '') || (campaignModel().Answer1() == null || campaignModel().Answer1() == '') || (campaignModel().Answer2() == null || campaignModel().Answer2() == '')) {
-                            //        isPopulateErrorList = true;
-                            //    }
-                            //    if (campaignModel().VerifyQuestion() == null || campaignModel().VerifyQuestion() == '') {
-                            //        $("#txtVerifyQuestion").addClass("errorFill");
-                            //    } else {
-                            //        $("#txtVerifyQuestion").removeClass("errorFill");
-                            //    }
-                            //    if (campaignModel().Answer1() == null || campaignModel().Answer1() == '') {
-                            //        $("#txtVerifyAnswer1").addClass("errorFill");
-                            //    } else {
-                            //        $("#txtVerifyAnswer1").removeClass("errorFill");
-                            //    }
-                            //    if (campaignModel().Answer2() == null || campaignModel().Answer2() == '') {
-                            //        $("#txtVerifyAnswer2").addClass("errorFill");
-                            //    } else {
-                            //        $("#txtVerifyAnswer2").removeClass("errorFill");
-                            //    }
-
-
-                            //}
-                        }
-                     
-
-
-                        if (buyItQuestionStatus() == true) {
-
-                            //if ((campaignModel().BuuyItLine1() == null || campaignModel().BuuyItLine1() == '') || (campaignModel().BuyItLine2() == null || campaignModel().BuyItLine2() == '') || (campaignModel().BuyItLine3() == null || campaignModel().BuyItLine3() == '') || (campaignModel().VideoUrl() == null || campaignModel().VideoUrl() == '') || (campaignModel().BuyItButtonLabel() == null || campaignModel().BuyItButtonLabel() == '')) {
-                            //    isPopulateErrorList = true;
-                            //}
-                            //if (campaignModel().BuuyItLine1() == null || campaignModel().BuuyItLine1() == '') {
-                            //    $("#txtBuyItLine1").addClass("errorFill");
-                            //} else {
-                            //    $("#txtBuyItLine1").removeClass("errorFill");
-                            //}
-                            //if (campaignModel().BuyItLine2() == null || campaignModel().BuyItLine2() == '') {
-                            //    $("#txtBuyItLine2").addClass("errorFill");
-                            //} else {
-                            //    $("#txtBuyItLine2").removeClass("errorFill");
-                            //}
-                            //if (campaignModel().BuyItLine3() == null || campaignModel().BuyItLine3() == '') {
-                            //    $("#txtBuyItLine3").addClass("errorFill");
-                            //} else {
-                            //    $("#txtBuyItLine3").removeClass("errorFill");
-                            //}
-                            //if (campaignModel().VideoUrl() == null || campaignModel().VideoUrl() == '') {
-                            //    $("#txtBuyItUrl").addClass("errorFill");
-                            //} else {
-                            //    $("#txtBuyItUrl").removeClass("errorFill");
-                            //}
-                            //if (campaignModel().BuyItButtonLabel() == null || campaignModel().BuyItButtonLabel() == '') {
-                            //    $("#txtBuyItlbl").addClass("errorFill");
-                            //} else {
-                            //    $("#txtBuyItlbl").removeClass("errorFill");
-                            //}
-                        }
-
-                    }
-                    
-
-                    
-                  
-                    //if (isPopulateErrorList == true) {
-                    //    errorList.removeAll();
-                    //    errorList.push({ name: "Please fill the required feilds to continue." });
-                    //} else {
-                    //    errorList.removeAll();
-                    //    if (isDisplayCouponsAds() == true) {
-                    //        if (campaignModel().CouponQuantity() != null &&  parseInt(campaignModel().CouponQuantity()) > 0) {
-                    //            if (allCouponCodeItems() == null || allCouponCodeItems().length == 0) {
-                    //                errorList.push({ name: "Please add coupon codes to proceed." });
-                    //                $("#couponCodeSelectorLink").addClass("errorOutline");
-                    //            }
-                    //            else if (parseInt(campaignModel().CouponQuantity()) != allCouponCodeItems().length) {
-                    //                errorList.push({ name: "Please add coupon codes equals to codes quantity to proceed." });
-                    //                $("#couponCodeSelectorLink").addClass("errorOutline");
-                    //            }
-                    //        } 
-                            
-                    //    }
-                    //}
-
-                    //if (errorList().length > 0) {
-                    //    return false;
-                    //} else {
+                 
                         if (quizQuestionStatus() == false) {
                             campaignModel().VerifyQuestion('');
                             campaignModel().Answer1('');
                             campaignModel().Answer2('');
 
                         }
-                        if (isDisplayCouponsAds() == true) {
+                        var selectedCouponCategories = $.grep(couponCategories(), function (n, i) {
+                            return (n.IsSelected == true);
+                        });
 
-                            var selectedCouponCategories = $.grep(couponCategories(), function (n, i) {
-                                return (n.IsSelected == true);
-                            });
+                        _.each(selectedCouponCategories, function (coup) {
 
-                            _.each(selectedCouponCategories, function (coup) {
-
-                                campaignModel().CouponCategories.push(new model.selectedCouponCategory.Create({
-                                    CategoryId: coup.CategoryId,
-                                    Name: coup.Name
-                                }));
-                            });
-
-                            //_.each(allCouponCodeItems(), function (coupcode) {
-                              
-                            //    campaignModel().CouponCodes.push(new model.AdCampaignCouponCodes.Create({
-                            //        CodeId: 0,
-                            //        CampaignId: campaignModel().CampaignID(),
-                            //        Code: coupcode,
-                            //        IsTaken: null,
-                            //        UserId: null
-                            //    }));
-                            //});
-                        }
-                        
-                        
+                            campaignModel().CouponCategories.push(new model.selectedCouponCategory.Create({
+                                CategoryId: coup.CategoryId,
+                                Name: coup.Name
+                            }));
+                        });
                         if (campaignModel().IsUseFilter() == "0") {
                             campaignModel().IsUseFilter(0);
                         } else {
                             campaignModel().IsUseFilter(1);
                         }
-
-
                         campaignModel().Status(mode);
                         campaignModel().ClickRate(pricePerclick());
 
@@ -657,56 +466,7 @@ define("ads/ads.viewModel",
 
                 }
                 // Add new profile Criteria
-                addNewProfileCriteria = function () {
-
-                    //isNewCriteria(true);
-                    //AditionalCriteriaMode("1");
-                    //var objProfileCriteria = new model.AdCampaignTargetCriteriasModel();
-
-                    //objProfileCriteria.Type("1");
-                    //objProfileCriteria.IncludeorExclude("1");
-                    //criteriaCount(criteriaCount() + 1);
-                    //objProfileCriteria.CriteriaID(criteriaCount());
-                    //selectedCriteria(objProfileCriteria);
-
-
-                    //if (profileQuestionList().length == 0) {
-                    //    dataservice.getBaseData({
-                    //        RequestId: 2,
-                    //        QuestionId: 0,
-                    //    }, {
-                    //        success: function (data) {
-                    //            if (data != null) {
-                    //                profileQuestionList([]);
-                    //                ko.utils.arrayPushAll(profileQuestionList(), data.ProfileQuestions);
-                    //                profileQuestionList.valueHasMutated();
-                    //            }
-
-                    //        },
-                    //        error: function (response) {
-
-                    //        }
-                    //    });
-                    //}
-                    //if (myQuizQuestions().length == 0) {
-                    //    dataservice.getBaseData({
-                    //        RequestId: 12,
-                    //        QuestionId: 0,
-                    //    }, {
-                    //        success: function (data) {
-                    //            if (data != null) {
-                    //                myQuizQuestions([]);
-                    //                ko.utils.arrayPushAll(myQuizQuestions(), data.AdCampaigns);
-                    //                myQuizQuestions.valueHasMutated();
-                    //            }
-
-                    //        },
-                    //        error: function (response) {
-
-                    //        }
-                    //    });
-                    //}
-                },
+                addNewProfileCriteria = function () {},
                   saveProfileQuestion = function (item) {
 
                       var selectedQuestionstring = $(".active .parent-list-title").text();
@@ -902,32 +662,6 @@ define("ads/ads.viewModel",
                     pricePerclick(pricePerclick() - item.criteriaPrice());
                     campaignModel().AdCampaignTargetCriterias.remove(item);
 
-                    //if (item.Type() == "1") {
-                    //    var matchedProfileCriteria = ko.utils.arrayFirst(campaignModel().AdCampaignTargetCriterias(), function (arrayitem) {
-
-                    //        return arrayitem.PQID() == item.PQID()
-                    //    });
-
-                    //    if (matchedProfileCriteria == null) {
-                    //        if (UserAndCostDetail().OtherClausePrice != null) {
-                    //            pricePerclick(pricePerclick() - UserAndCostDetail().OtherClausePrice);
-
-                    //        }
-                    //    }
-                    //} else if (item.Type() == "2") {
-                    //    var matchedSurveyCriteria = ko.utils.arrayFirst(campaignModel().AdCampaignTargetCriterias(), function (arrayitem) {
-
-                    //        return arrayitem.SQID() == item.SQID();
-                    //    });
-
-                    //    if (matchedSurveyCriteria == null) {
-                    //        if (UserAndCostDetail().OtherClausePrice != null) {
-                    //            pricePerclick(pricePerclick() - UserAndCostDetail().OtherClausePrice);
-
-                    //        }
-                    //    }
-                    //}
-
                 },
 
                 onChangeProfileQuestion = function (item) {
@@ -961,15 +695,6 @@ define("ads/ads.viewModel",
                 },
 
                 onChangeSurveyQuestion = function (item) {
-                    //var selectedSurveyQuestionId = $("#ddsurveyQuestion").val();
-                    //var matchSurveyQuestion = ko.utils.arrayFirst(surveyQuestionList(), function (item) {
-                    //    return item.SQID == selectedSurveyQuestionId;
-                    //});
-                    //item.SQAnswer("1");
-                    //item.surveyQuestLeftImageSrc(matchSurveyQuestion.LeftPicturePath);
-                    //item.surveyQuestRightImageSrc(matchSurveyQuestion.RightPicturePath);
-                    //$("#surveyAnswersContainer").show();
-                    //isShowSurveyAns(true);
                 },
 
                 onRemoveLocation = function (item) {
@@ -979,9 +704,6 @@ define("ads/ads.viewModel",
                 },
 
                 deleteLocation = function (item) {
-                    //if (item.CountryID() == UserAndCostDetail().CountryId && item.CityID() == UserAndCostDetail().CityId) {
-                    //    toastr.error("You cannot remove your home town or country!");
-                    //} else {
                     campaignModel().AdCampaignTargetLocations.remove(item);
 
                     if (campaignModel().AdCampaignTargetLocations() == null || campaignModel().AdCampaignTargetLocations().length == 0) {
@@ -993,8 +715,6 @@ define("ads/ads.viewModel",
                         addCountryToCountryList(item.CountryID(), item.Country());
                     });
                     toastr.success("Removed Successfully!");
-                    // }
-
                 },
                 //add location
                 onAddLocation = function (item) {
@@ -1073,21 +793,7 @@ define("ads/ads.viewModel",
                     return (campaignModel().hasChanges());
                 }),
 
-                OnChangeCampaignType = function () {
-                    if (campaignModel().Type() == "1") {
-                        isEnableVedioVerificationLink(true);
-                        campaignTypePlaceHolderValue('Enter in the YouTube video link (20 characters)');
-                    } else {
-                        isEnableVedioVerificationLink(false);
-                        if (campaignModel().Type() == "2") {
-                            campaignTypePlaceHolderValue('Enter in your Web site landing Page link');
-                        }
-                        if (campaignModel().Type() == "3") {
-                            campaignTypePlaceHolderValue('Enter in your Web site landing Page link');
-                            isEnableVedioVerificationLink(true);
-                        }
-                    }
-                },
+                
 
                 campaignTypeImageCallback = function (file, data) {
                     campaignModel().CampaignTypeImagePath(data);
@@ -1225,15 +931,7 @@ define("ads/ads.viewModel",
                                         addCountryToCountryList(item.CountryID(), item.Country());
                                     });
 
-                                    if (campaignModel().Type() == "1") {
-                                        isEnableVedioVerificationLink(true);
-                                        campaignTypePlaceHolderValue('Enter in the YouTube video link (20 characters)');
-                                    } else {
-                                        isEnableVedioVerificationLink(false);
-                                        if (campaignModel().Type() == "2") {
-                                            campaignTypePlaceHolderValue('Enter in your Web site landing Page link');
-                                        }
-                                    }
+                                   
 
                                     if (campaignModel().Status() == 1) {
                                         campaignModel().StatusValue("Draft");
@@ -1431,17 +1129,6 @@ define("ads/ads.viewModel",
                                     ko.utils.arrayPushAll(couponCategories(), arrayOfUpdatedList);
                                     couponCategories.valueHasMutated();
                                     randonNumber("?r=" + Math.floor(Math.random() * (20 - 1 + 1)) + 1);
-
-                                    if (campaignModel().Type() == 5) {
-                                        campaignNamePlaceHolderValue('New Coupon');
-                                     
-                                        lblCampaignName("Voucher Name");
-                                        lblDetailsHeading("voucher Display Details");
-                                        lblAdTitle("Voucher Title");
-                                        lblFirstLine("First line");
-                                        lbllSecondLine("Second Line");
-                                        lblCampaignSchedule("Schedule");
-                                    }
 
 
                                     getAudienceCount();
@@ -1922,17 +1609,10 @@ define("ads/ads.viewModel",
                      campaignModel().LogoImageBytes(data);
                  },
                 ShowCouponPromotions = function () {
-                    window.location.href = "/Coupons/Coupons";
-                    //isDisplayCouponsAds(true);
-                    //MainHeading("Coupon Promotions");
-                    //SubHeading("Paid coupon promotions are listed for whole one calendar month. Submission fee includes unlimited issuing and redemption at all branches.");
-                    //getAdCampaignGridContent();
+                   getAdCampaignGridContent();
                 },
                 ShowAdCampaigns = function () {
-                    isDisplayCouponsAds(false);
-                    MainHeading("Video Campaigns");
-                    SubHeading("Video campaigns can be paused and terminated at any time. Increase your conversions and reduce your spend by using profile filters.");
-                    getAdCampaignGridContent();
+                    window.location.href = "/Ads/Ads";
                 },
                 gotoProfile = function () {
                     window.location.href = "/User/ManageUser/Index";
@@ -2237,8 +1917,6 @@ define("ads/ads.viewModel",
                     ageRange: ageRange,
                     isNewCriteria: isNewCriteria,
                     isEnableVedioVerificationLink: isEnableVedioVerificationLink,
-                    campaignTypePlaceHolderValue: campaignTypePlaceHolderValue,
-                    OnChangeCampaignType: OnChangeCampaignType,
                     campaignTypeImageCallback: campaignTypeImageCallback,
                     campaignImageCallback: campaignImageCallback,
                     CouponImage4Callback: CouponImage4Callback,
@@ -2286,17 +1964,8 @@ define("ads/ads.viewModel",
                     isListVisible: isListVisible,
                     isNewCampaign: isNewCampaign,
                     BackToAds: BackToAds,
-                    MainHeading: MainHeading,
-                    SubHeading: SubHeading,
                     ShowAdCampaigns: ShowAdCampaigns,
                     ShowCouponPromotions: ShowCouponPromotions,
-                    isDisplayCouponsAds: isDisplayCouponsAds,
-                    lblCampaignName: lblCampaignName,
-                    lblDetailsHeading: lblDetailsHeading,
-                    lblAdTitle: lblAdTitle,
-                    lblFirstLine: lblFirstLine,
-                    lbllSecondLine: lbllSecondLine,
-                    lblCampaignSchedule: lblCampaignSchedule,
                     gotoProfile: gotoProfile,
                     gotoManageUsers: gotoManageUsers,
                     ArchiveCampaign: ArchiveCampaign,
@@ -2348,5 +2017,5 @@ define("ads/ads.viewModel",
                 };
             })()
         };
-        return ist.Ads.viewModel;
+        return ist.Coupons.viewModel;
     });
