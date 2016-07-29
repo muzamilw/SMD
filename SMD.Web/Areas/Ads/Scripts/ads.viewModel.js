@@ -72,7 +72,8 @@ define("ads/ads.viewModel",
                     totalAudience = ko.observable(0),
                     // audience reach mode 
                     audienceReachMode = ko.observable("1"),
-                    MainHeading = ko.observable("My Ads"),
+                    MainHeading = ko.observable("Video Campaigns"),
+                    SubHeading = ko.observable("Video campaigns can be paused and terminated at any time. Increase your conversions and reduce your spend by using profile filters."),
                     errorList = ko.observableArray([]),
                       // unique country list used to bind location dropdown
                     selectedQuestionCountryList = ko.observableArray([]),
@@ -1922,12 +1923,14 @@ define("ads/ads.viewModel",
                  },
                 ShowCouponPromotions = function () {
                     isDisplayCouponsAds(true);
-                    MainHeading("My Vouchers");
+                    MainHeading("Coupon Promotions");
+                    SubHeading("Paid coupon promotions are listed for whole one calendar month. Submission fee includes unlimited issuing and redemption at all branches.");
                     getAdCampaignGridContent();
                 },
                 ShowAdCampaigns = function () {
                     isDisplayCouponsAds(false);
-                    MainHeading("My Ads");
+                    MainHeading("Video Campaigns");
+                    SubHeading("Video campaigns can be paused and terminated at any time. Increase your conversions and reduce your spend by using profile filters.");
                     getAdCampaignGridContent();
                 },
                 gotoProfile = function () {
@@ -2283,6 +2286,7 @@ define("ads/ads.viewModel",
                     isNewCampaign: isNewCampaign,
                     BackToAds: BackToAds,
                     MainHeading: MainHeading,
+                    SubHeading: SubHeading,
                     ShowAdCampaigns: ShowAdCampaigns,
                     ShowCouponPromotions: ShowCouponPromotions,
                     isDisplayCouponsAds: isDisplayCouponsAds,

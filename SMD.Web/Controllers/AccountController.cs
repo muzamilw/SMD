@@ -656,8 +656,11 @@ namespace SMD.MIS.Controllers
                 return View("SelectCompany", comapnies);
             else if  (comapnies != null && comapnies.Count == 1)
             {
-                var company = comapnies.First();
-                return RedirectToAction("SetCompany", "Account", new {CompanyId= company.companyid ,Role=company.RoleName ,CompanyName=company.CompanyName});
+                 var company = comapnies.First();
+                 var companyrec = companyService.GetCompanyById(company.companyid);
+
+
+                 return RedirectToAction("SetCompany", "Account", new { CompanyId = company.companyid, Role = company.RoleName, CompanyName = company.CompanyName, CompanyLogo = companyrec.Logo });
             }
             else
             {
@@ -667,7 +670,7 @@ namespace SMD.MIS.Controllers
 
 
          [HttpGet]
-         public async Task<ActionResult> SetCompany(string CompanyId, string Role, string CompanyName)
+         public async Task<ActionResult> SetCompany(string CompanyId, string Role, string CompanyName, string CompanyLogo)
          {
              User user = UserManager.FindById(User.Identity.GetUserId());
              ClaimsIdentity identity = await user.GenerateUserIdentityAsync(UserManager, DefaultAuthenticationTypes.ApplicationCookie);
@@ -678,7 +681,7 @@ namespace SMD.MIS.Controllers
              if (identity != null)
              {
                  SetupUserClaims(identity);
-                 claimsSecurityService.AddCompanyIdClaimToIdentity(identity, Convert.ToInt32(CompanyId), CompanyName);
+                 claimsSecurityService.AddCompanyIdClaimToIdentity(identity, Convert.ToInt32(CompanyId), CompanyName,CompanyLogo);
                  AuthenticationManager.SignIn(new AuthenticationProperties { IsPersistent = true }, identity);
                  return RedirectToLocal("");
              }

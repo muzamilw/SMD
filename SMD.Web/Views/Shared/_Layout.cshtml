@@ -9,7 +9,8 @@
 
 
     IEnumerable<CompanyIdClaimValue> companyClaimValues = ClaimHelper.GetClaimsByType<CompanyIdClaimValue>(SmdClaimTypes.CompanyId);
-    string CompanyName = companyClaimValues != null && companyClaimValues.Any() ? companyClaimValues.ElementAt(0).CompanyName : "Claim not found";
+    string CompanyName = companyClaimValues != null && companyClaimValues.Any() ? companyClaimValues.ElementAt(0).CompanyName : "Company Not Loaded";
+    string CompanyLogo = companyClaimValues != null && companyClaimValues.Any() ? companyClaimValues.ElementAt(0).CompanyLogo : "Claim not found";
 
 
 }
@@ -63,9 +64,15 @@
                     @*<span class="fa fa-bars"></span>*@
                 </button>
 
-                <div>
-                    <h3>Dashboard For :</h3>
-                    <div class="pull-left" style="color:white">@CompanyName</div>
+                <div style="display:inline-block;margin-top:20px;">
+                    <div class="pull-left" style="width:65px;height:65px;background-color:white;"><img style="width:63px;height:63px;" src="~/@CompanyLogo" /></div>
+                    <div class="pull-left" style="color:white;margin-left:10px;">
+                        <p  style="box-shadow: inset 0 0px 0 white, inset 0 -1px 0 white;margin-bottom:3px;display:inline-block">
+                            Dashboard for</p>
+
+                        <p style="font-size:38px;">@CompanyName</p>
+                    </div>
+
                 </div>
                 <div class="nav-no-collapse navbar-left pull-left hidden-sm hidden-xs" style="margin-top:23px;">
 
