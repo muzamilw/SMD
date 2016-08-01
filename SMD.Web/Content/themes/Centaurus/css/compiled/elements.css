@@ -5492,21 +5492,18 @@ color:red !important;
 }
 
 .tooltip .tooltiptext {
-    visibility: hidden;
+      visibility: hidden;
     width: 120px;
-    background-color: #68b359;
-    color: #fff;
+    background-color: #FFFBB6;
+    color: black;
     text-align: center;
     border-radius: 6px;
     padding: 5px 0;
-
-    /* Position the tooltip */
     position: absolute;
     z-index: 1;
     right: 0px;
-    top: 27px;
+    top: 30px;
 }
-
 .tooltip:hover .tooltiptext {
     visibility: visible;
 }
@@ -5515,4 +5512,8 @@ color:red !important;
 }
 .tooltip:hover .fa-chevron-up {
     visibility: visible;
+}
+.tooltip-float {
+    width:100%;
+        font-size: 13px;
 }

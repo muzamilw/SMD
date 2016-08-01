@@ -18,7 +18,7 @@ define("Coupons/Coupons.viewModel",
                     countoryidList = [],
                     cityidList = [],
                     langidList = [],
-                    campaignModel = ko.observable(),
+                    couponModel = ko.observable(),
                     selectedCriteria = ko.observable(),
                     profileQuestionList = ko.observable([]),
                     myQuizQuestions = ko.observableArray([]),
@@ -185,9 +185,9 @@ define("Coupons/Coupons.viewModel",
 
                                 // set grid content
                                 campaignGridContent.removeAll();
-                                _.each(data.Campaigns, function (item) {
+                                _.each(data.Coupon, function (item) {
 
-                                    campaignGridContent.push(model.Campaign.Create(updateCampaignGridItem(item)));
+                                    campaignGridContent.push(model.Coupon.Create(updateCampaignGridItem(item)));
                                 });
                                 pager().totalCount(data.TotalCount);
 
@@ -238,13 +238,11 @@ define("Coupons/Coupons.viewModel",
                     isTerminateBtnVisible(false);
                     isNewCampaignVisible(false);
                     isShowArchiveBtn(false);
-                    campaignModel().DeliveryDays("1");
-                    campaignModel().ChannelType("1");
                     
                 },
 
                 closeNewCampaignDialog = function () {
-                    //if (campaignModel().hasChanges() && (campaignModel().Status() == null || campaignModel().Status() == 1)) {
+                    //if (couponModel().hasChanges() && (couponModel().Status() == null || couponModel().Status() == 1)) {
                         confirmation.messageText("Do you want to save changes?");
                         confirmation.afterProceed(function () {
                             saveCampaignData();
@@ -268,7 +266,7 @@ define("Coupons/Coupons.viewModel",
                         });
                         confirmation.afterCancel(function () {
 
-                            campaignModel();
+                            couponModel();
                             selectedCriteria();
                             isEditorVisible(false);
                             if (isFromEdit() == true) {
@@ -302,8 +300,8 @@ define("Coupons/Coupons.viewModel",
 
                 saveCampaignData = function () {
 
-                    //if (campaignModel().isValid()) {
-                        if (campaignModel().Status() == 3) {
+                    //if (couponModel().isValid()) {
+                        if (couponModel().Status() == 3) {
                             saveCampaign(3);
 
                         } else {
@@ -313,7 +311,7 @@ define("Coupons/Coupons.viewModel",
 
 
                     //} else {
-                    //    campaignModel().errors.showAllMessages();
+                    //    couponModel().errors.showAllMessages();
                     //    toastr.error("Please fill the required feilds to continue.");
                     //}
                 },
@@ -325,14 +323,14 @@ define("Coupons/Coupons.viewModel",
                  },
                   openEditScreen = function (mode) {
              
-                      campaignModel(new model.Campaign());
+                      couponModel(new model.Coupon());
                       campaignNamePlaceHolderValue('New Voucher');
                       isEnableVedioVerificationLink(false);
-                      campaignModel().Type('5');
-                      campaignModel().couponImage2("");
-                      campaignModel().CouponImage3("");
-                      campaignModel().CouponImage4("");
-                      campaignModel().CouponType('1');
+                 
+                      //couponModel().couponImage2("");
+                      //couponModel().CouponImage3("");
+                      //couponModel().CouponImage4("");
+                     
                       isWelcomeScreenVisible(false);
 
                       isEditorVisible(true);
@@ -340,44 +338,40 @@ define("Coupons/Coupons.viewModel",
 
 
 
-                      selectedCriteria();
+                      //selectedCriteria();
 
-                      campaignModel().Gender('1');
-
-                      campaignModel().MaxBudget('1');
-                      campaignModel().AgeRangeEnd(80);
-                      campaignModel().AgeRangeStart(13);
+                
                       view.initializeTypeahead();
 
                       isEditCampaign(false);
 
-                      campaignModel().CampaignTypeImagePath("");
+                      //couponModel().CampaignTypeImagePath("");
 
-                      campaignModel().IsUseFilter('0');
-                      campaignModel().CampaignImagePath("");
-                      campaignModel().VoucherImagePath("");
-                      campaignModel().LanguageId(41);
-                      campaignModel().DeliveryDays('10');
-                      campaignModel().LogoUrl('Content/Images/Company_Default.png');
-                      campaignModel().IsShowVoucherSetting(false);
-                      if (UserAndCostDetail() != null || UserAndCostDetail() != undefined) {
-                          alreadyAddedDeliveryValue(10);
-                          quizQuestionStatus(true);
-                          isQuizQPerClickPriceAdded(true);
-                          pricePerclick(pricePerclick() + UserAndCostDetail().QuizQuestionClausePrice);
-                          pricePerclick(pricePerclick() + UserAndCostDetail().TenDayDeliveryClausePrice);
-                      }
+                      //couponModel().IsUseFilter('0');
+                      //couponModel().CampaignImagePath("");
+                      //couponModel().VoucherImagePath("");
+                      //couponModel().LanguageId(41);
+                      //couponModel().DeliveryDays('10');
+                      //couponModel().LogoUrl('Content/Images/Company_Default.png');
+                      //couponModel().IsShowVoucherSetting(false);
+                      //if (UserAndCostDetail() != null || UserAndCostDetail() != undefined) {
+                      //    alreadyAddedDeliveryValue(10);
+                      //    quizQuestionStatus(true);
+                      //    isQuizQPerClickPriceAdded(true);
+                      //    pricePerclick(pricePerclick() + UserAndCostDetail().QuizQuestionClausePrice);
+                      //    pricePerclick(pricePerclick() + UserAndCostDetail().TenDayDeliveryClausePrice);
+                      //}
 
-                      getAudienceCount();
+                      //getAudienceCount();
                       
-                      bindAudienceReachCount();
-                      selectedQuestionCountryList([]);
+                      //bindAudienceReachCount();
+                      //selectedQuestionCountryList([]);
 
                   },
 
 
                 submitCampaignData = function () {
-                    //if (campaignModel().isValid()) {
+                    //if (couponModel().isValid()) {
                         if (reachedAudience() > 0) {
                             if (UserAndCostDetail().isStripeIntegrated == false) {
                                 stripeChargeCustomer.show(function () {
@@ -397,7 +391,7 @@ define("Coupons/Coupons.viewModel",
 
 
                     //} else {
-                    //    campaignModel().errors.showAllMessages();
+                    //    couponModel().errors.showAllMessages();
                     //    toastr.error("Please fill the required feilds to continue.");
                     //}
                 },
@@ -412,9 +406,9 @@ define("Coupons/Coupons.viewModel",
                     var isPopulateErrorList = false;
                  
                         if (quizQuestionStatus() == false) {
-                            campaignModel().VerifyQuestion('');
-                            campaignModel().Answer1('');
-                            campaignModel().Answer2('');
+                            couponModel().VerifyQuestion('');
+                            couponModel().Answer1('');
+                            couponModel().Answer2('');
 
                         }
                         var selectedCouponCategories = $.grep(couponCategories(), function (n, i) {
@@ -423,21 +417,21 @@ define("Coupons/Coupons.viewModel",
 
                         _.each(selectedCouponCategories, function (coup) {
 
-                            campaignModel().CouponCategories.push(new model.selectedCouponCategory.Create({
+                            couponModel().CouponCategories.push(new model.selectedCouponCategory.Create({
                                 CategoryId: coup.CategoryId,
                                 Name: coup.Name
                             }));
                         });
-                        if (campaignModel().IsUseFilter() == "0") {
-                            campaignModel().IsUseFilter(0);
+                        if (couponModel().IsUseFilter() == "0") {
+                            couponModel().IsUseFilter(0);
                         } else {
-                            campaignModel().IsUseFilter(1);
+                            couponModel().IsUseFilter(1);
                         }
-                        campaignModel().Status(mode);
-                        campaignModel().ClickRate(pricePerclick());
+                        couponModel().Status(mode);
+                        couponModel().ClickRate(pricePerclick());
 
                        
-                        var campignServerObj = campaignModel().convertToServerData();
+                        var campignServerObj = couponModel().convertToServerData();
 
                         dataservice.addCampaignData(campignServerObj, {
                             success: function (data) {
@@ -477,7 +471,7 @@ define("Coupons/Coupons.viewModel",
                       selectedCriteria().PQAnswerID(item.PqAnswerId);
 
 
-                      var matchedProfileCriteriaRec = ko.utils.arrayFirst(campaignModel().AdCampaignTargetCriterias(), function (arrayitem) {
+                      var matchedProfileCriteriaRec = ko.utils.arrayFirst(couponModel().AdCampaignTargetCriterias(), function (arrayitem) {
 
                           return arrayitem.PQID() == item.PQID
                       });
@@ -487,7 +481,7 @@ define("Coupons/Coupons.viewModel",
                               pricePerclick(pricePerclick() + UserAndCostDetail().OtherClausePrice);
 
                           }
-                          campaignModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
+                          couponModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
                               Type: 1,
                               PQId: selectedCriteria().PQID(),
                               PQAnswerId: selectedCriteria().PQAnswerID(),
@@ -496,11 +490,11 @@ define("Coupons/Coupons.viewModel",
                               questionString: selectedCriteria().questionString(),
                               answerString: selectedCriteria().answerString(),
                               IncludeorExclude: selectedCriteria().IncludeorExclude(),
-                              CampaignId: campaignModel().CampaignID,
+                              CampaignId: couponModel().CampaignID,
                               criteriaPrice: UserAndCostDetail().OtherClausePrice
                           }));
                       } else {
-                          campaignModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
+                          couponModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
                               Type: 1,
                               PQId: selectedCriteria().PQID(),
                               PQAnswerId: selectedCriteria().PQAnswerID(),
@@ -509,7 +503,7 @@ define("Coupons/Coupons.viewModel",
                               questionString: selectedCriteria().questionString(),
                               answerString: selectedCriteria().answerString(),
                               IncludeorExclude: selectedCriteria().IncludeorExclude(),
-                              CampaignId: campaignModel().CampaignID,
+                              CampaignId: couponModel().CampaignID,
                               criteriaPrice: 0
                           }));
                       }
@@ -543,7 +537,7 @@ define("Coupons/Coupons.viewModel",
 
                     var matchedSurveyCriteriaRec = null;
 
-                    _.each(campaignModel().AdCampaignTargetCriterias(), function (itemarry) {
+                    _.each(couponModel().AdCampaignTargetCriterias(), function (itemarry) {
 
                         if (itemarry.QuizCampaignId() == item.CampaignId) {
 
@@ -559,7 +553,7 @@ define("Coupons/Coupons.viewModel",
 
                             }
 
-                            campaignModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
+                            couponModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
                                 Type: 6,
                                 PQId: selectedCriteria().PQID(),
                                 PQAnswerId: selectedCriteria().PQAnswerID(),
@@ -568,14 +562,14 @@ define("Coupons/Coupons.viewModel",
                                 questionString: selectedCriteria().questionString(),
                                 answerString: selectedCriteria().answerString(),
                                 IncludeorExclude: selectedCriteria().IncludeorExclude(),
-                                CampaignId: campaignModel().CampaignID,
+                                CampaignId: couponModel().CampaignID,
                                 criteriaPrice: UserAndCostDetail().OtherClausePrice
                             }));
 
                         } else {
 
 
-                            campaignModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
+                            couponModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
                                 Type: 6,
                                 PQId: selectedCriteria().PQID(),
                                 PQAnswerId: selectedCriteria().PQAnswerID(),
@@ -584,7 +578,7 @@ define("Coupons/Coupons.viewModel",
                                 questionString: selectedCriteria().questionString(),
                                 answerString: selectedCriteria().answerString(),
                                 IncludeorExclude: selectedCriteria().IncludeorExclude(),
-                                CampaignId: campaignModel().CampaignID,
+                                CampaignId: couponModel().CampaignID,
                                 criteriaPrice: 0
                             }));
 
@@ -660,7 +654,7 @@ define("Coupons/Coupons.viewModel",
                 onDeleteCriteria = function (item) {
 
                     pricePerclick(pricePerclick() - item.criteriaPrice());
-                    campaignModel().AdCampaignTargetCriterias.remove(item);
+                    couponModel().AdCampaignTargetCriterias.remove(item);
 
                 },
 
@@ -704,14 +698,14 @@ define("Coupons/Coupons.viewModel",
                 },
 
                 deleteLocation = function (item) {
-                    campaignModel().AdCampaignTargetLocations.remove(item);
+                    couponModel().AdCampaignTargetLocations.remove(item);
 
-                    if (campaignModel().AdCampaignTargetLocations() == null || campaignModel().AdCampaignTargetLocations().length == 0) {
+                    if (couponModel().AdCampaignTargetLocations() == null || couponModel().AdCampaignTargetLocations().length == 0) {
                         isLocationPerClickPriceAdded(false);
                         pricePerclick(pricePerclick() - UserAndCostDetail().LocationClausePrice);
                     }
                     selectedQuestionCountryList([]);
-                    _.each(campaignModel().AdCampaignTargetLocations(), function (item) {
+                    _.each(couponModel().AdCampaignTargetLocations(), function (item) {
                         addCountryToCountryList(item.CountryID(), item.Country());
                     });
                     toastr.success("Removed Successfully!");
@@ -721,14 +715,14 @@ define("Coupons/Coupons.viewModel",
 
                     selectedLocation().Radius = (selectedLocationRadius);
                     selectedLocation().IncludeorExclude = (selectedLocationIncludeExclude);
-                    campaignModel().AdCampaignTargetLocations.push(new model.AdCampaignTargetLocation.Create({
+                    couponModel().AdCampaignTargetLocations.push(new model.AdCampaignTargetLocation.Create({
                         CountryId: selectedLocation().CountryID,
                         CityId: selectedLocation().CityID,
                         Radius: selectedLocation().Radius(),
                         Country: selectedLocation().Country,
                         City: selectedLocation().City,
                         IncludeorExclude: selectedLocation().IncludeorExclude(),
-                        CampaignId: campaignModel().CampaignID(),
+                        CampaignId: couponModel().CampaignID(),
                         Latitude: selectedLocation().Latitude,
                         Longitude: selectedLocation().Longitude,
                     }));
@@ -747,13 +741,13 @@ define("Coupons/Coupons.viewModel",
 
                 addLanguage = function (selected) {
 
-                    campaignModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
+                    couponModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
                         Language: selected.LanguageName,
                         LanguageId: selected.LanguageId,
                         IncludeorExclude: parseInt(selectedLangIncludeExclude()),
                         Type: 3,
                         CriteriaId: 0,
-                        CampaignId: campaignModel().CampaignID()
+                        CampaignId: couponModel().CampaignID()
                     }));
                     $("#searchLanguages").val("");
                     if (UserAndCostDetail().OtherClausePrice != null && isLanguagePerClickPriceAdded() == false) {
@@ -771,9 +765,9 @@ define("Coupons/Coupons.viewModel",
 
                 deleteLanguage = function (item) {
 
-                    campaignModel().AdCampaignTargetCriterias.remove(item);
+                    couponModel().AdCampaignTargetCriterias.remove(item);
 
-                    var matchedLanguageCriterias = ko.utils.arrayFirst(campaignModel().AdCampaignTargetCriterias(), function (arrayitem) {
+                    var matchedLanguageCriterias = ko.utils.arrayFirst(couponModel().AdCampaignTargetCriterias(), function (arrayitem) {
 
                         return arrayitem.Type() == item.Type();
                     });
@@ -787,29 +781,29 @@ define("Coupons/Coupons.viewModel",
                 },
                 // Has Changes
                 hasChangesOnQuestion = ko.computed(function () {
-                    if (campaignModel() == undefined) {
+                    if (couponModel() == undefined) {
                         return false;
                     }
-                    return (campaignModel().hasChanges());
+                    return (couponModel().hasChanges());
                 }),
 
                 
 
                 campaignTypeImageCallback = function (file, data) {
-                    campaignModel().CampaignTypeImagePath(data);
+                    couponModel().CampaignTypeImagePath(data);
                 },
 
                 campaignImageCallback = function (file, data) {
-                    campaignModel().CampaignImagePath(data);
+                    couponModel().CampaignImagePath(data);
                 },
                 couponImage2Callback = function (file, data) {
-                    campaignModel().couponImage2(data);
+                    couponModel().couponImage2(data);
                 },
                 CouponImage3Callback = function (file, data) {
-                    campaignModel().CouponImage3(data);
+                    couponModel().CouponImage3(data);
                 },
                 CouponImage4Callback = function (file, data) {
-                    campaignModel().CouponImage4(data);
+                    couponModel().CouponImage4(data);
                 },
                   campaignCSVCallback = function (file, data) {
                     
@@ -835,22 +829,22 @@ define("Coupons/Coupons.viewModel",
                                     selectedCriteria();
                                     pricePerclick(0);
 
-                                    var clonedVersofCariterias = data.Campaigns[0].AdCampaignTargetCriterias.clone();
-                                    data.Campaigns[0].AdCampaignTargetCriterias = null;
+                                    var clonedVersofCariterias = data.Coupon[0].AdCampaignTargetCriterias.clone();
+                                    data.Coupon[0].AdCampaignTargetCriterias = null;
                                  
-                                    _.each(data.Campaigns[0].CouponCodes, function (cc) {
+                                    _.each(data.Coupon[0].CouponCodes, function (cc) {
                                         
                                         allCouponCodeItems.push(cc.Code);
                                     });
 
-                                    campaignModel(model.Campaign.Create(data.Campaigns[0]));
+                                    couponModel(model.Coupon.Create(data.Coupon[0]));
 
                                     _.each(clonedVersofCariterias, function (cclist) {
                                         if (cclist.Type == 1) {
 
                                             if (profileQIds.indexOf(cclist.PQId) == -1) {
                                                 profileQIds.push(cclist.PQId);
-                                                campaignModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
+                                                couponModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
 
                                                     Type: cclist.Type,
                                                     PQId: cclist.PQId,
@@ -865,7 +859,7 @@ define("Coupons/Coupons.viewModel",
                                                     CriteriaId: cclist.CriteriaId
                                                 }));
                                             } else {
-                                                campaignModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
+                                                couponModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
 
                                                     Type: cclist.Type,
                                                     PQId: cclist.PQId,
@@ -885,7 +879,7 @@ define("Coupons/Coupons.viewModel",
                                         } else if (cclist.Type == 6) {
                                             if (surveyQIds.indexOf(cclist.QuizCampaignId) == -1) {
                                                 surveyQIds.push(cclist.QuizCampaignId);
-                                                campaignModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
+                                                couponModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
 
                                                     Type: cclist.Type,
                                                     PQId: cclist.PQId,
@@ -900,7 +894,7 @@ define("Coupons/Coupons.viewModel",
                                                     CriteriaId: cclist.CriteriaId
                                                 }));
                                             } else {
-                                                campaignModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
+                                                couponModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
 
                                                     Type: cclist.Type,
                                                     PQId: cclist.PQId,
@@ -921,50 +915,50 @@ define("Coupons/Coupons.viewModel",
 
 
 
-                                    campaignModel().reset();
+                                    couponModel().reset();
 
 
                                     view.initializeTypeahead();
 
                                     selectedQuestionCountryList([]);
-                                    _.each(campaignModel().AdCampaignTargetLocations(), function (item) {
+                                    _.each(couponModel().AdCampaignTargetLocations(), function (item) {
                                         addCountryToCountryList(item.CountryID(), item.Country());
                                     });
 
                                    
 
-                                    if (campaignModel().Status() == 1) {
-                                        campaignModel().StatusValue("Draft");
-                                    } else if (campaignModel().Status() == 2) {
+                                    if (couponModel().Status() == 1) {
+                                        couponModel().StatusValue("Draft");
+                                    } else if (couponModel().Status() == 2) {
                                         $("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
                                         $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,#btnPauseCampaign,.lang_delSurvey,.table-link").css("display", "none");
                                         $("#saveBtn").css("display", "none")
                                         $("#btnCancel,#btnPauseCampaign").removeAttr('disabled');
-                                        campaignModel().StatusValue("Submitted for Approval");
-                                    } else if (campaignModel().Status() == 3) {
+                                        couponModel().StatusValue("Submitted for Approval");
+                                    } else if (couponModel().Status() == 3) {
                                         //$("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
                                         $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,.lang_delSurvey,.table-link").css("display", "none");
                                         //$("#saveBtn").css("display", "none");
                                         //$("#btnPauseCampaign").css("display", "inline-block");
                                         //$("#btnCancel,#btnPauseCampaign,#btnCopyCampaign,#btnStopAndTerminate").removeAttr('disabled');
-                                        campaignModel().StatusValue("Live");
+                                        couponModel().StatusValue("Live");
                                         isTerminateBtnVisible(true);
                                         isNewCampaignVisible(true);
-                                    } else if (campaignModel().Status() == 4) {
+                                    } else if (couponModel().Status() == 4) {
                                         $("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
                                         $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,.lang_delSurvey,.table-link").css("display", "none");
                                         $("#saveBtn").css("display", "none");
                                         $("#btnResumeCampagin").css("display", "inline-block");
                                         $("#btnCancel,#btnResumeCampagin,#btnCopyCampaign,#btnStopAndTerminate").removeAttr('disabled');
-                                        campaignModel().StatusValue("Paused");
+                                        couponModel().StatusValue("Paused");
                                         isTerminateBtnVisible(true);
                                         isNewCampaignVisible(true);
-                                    } else if (campaignModel().Status() == 5) {
-                                        campaignModel().StatusValue("Completed");
-                                    } else if (campaignModel().Status() == 6) {
-                                        campaignModel().StatusValue("Approval Rejected");
-                                    } else if (campaignModel().Status() == 7) {
-                                        campaignModel().StatusValue("Terminated by user");
+                                    } else if (couponModel().Status() == 5) {
+                                        couponModel().StatusValue("Completed");
+                                    } else if (couponModel().Status() == 6) {
+                                        couponModel().StatusValue("Approval Rejected");
+                                    } else if (couponModel().Status() == 7) {
+                                        couponModel().StatusValue("Terminated by user");
                                         $("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
                                         $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,.lang_delSurvey,.table-link").css("display", "none");
                                         $("#saveBtn").css("display", "none");
@@ -991,7 +985,7 @@ define("Coupons/Coupons.viewModel",
                                     isNewCampaign(false);
                                     //  buildMap();
 
-                                    if (campaignModel().AdCampaignTargetLocations() != null && campaignModel().AdCampaignTargetLocations().length > 0) {
+                                    if (couponModel().AdCampaignTargetLocations() != null && couponModel().AdCampaignTargetLocations().length > 0) {
                                         if (UserAndCostDetail().LocationClausePrice != null && isLocationPerClickPriceAdded() == false) {
                                             pricePerclick(pricePerclick() + UserAndCostDetail().LocationClausePrice);
                                             isLocationPerClickPriceAdded(true);
@@ -1007,7 +1001,7 @@ define("Coupons/Coupons.viewModel",
                                         pricePerclick(pricePerclick() + UserAndCostDetail().AgeClausePrice);
                                     }
 
-                                    _.each(campaignModel().AdCampaignTargetCriterias(), function (item) {
+                                    _.each(couponModel().AdCampaignTargetCriterias(), function (item) {
 
                                         if (item.Type() == 1) { // profile
                                             if (item.criteriaPrice() != null) {
@@ -1056,10 +1050,10 @@ define("Coupons/Coupons.viewModel",
                                     });
 
 
-                                    if (campaignModel().VoucherImagePath() != null || campaignModel().Voucher1Value() != null || campaignModel().Voucher1Description() != null || campaignModel().Voucher1Heading() != null) {
+                                    if (couponModel().VoucherImagePath() != null || couponModel().Voucher1Value() != null || couponModel().Voucher1Description() != null || couponModel().Voucher1Heading() != null) {
                                         voucherQuestionStatus(true);
                                     }
-                                    if (campaignModel().BuuyItLine1() != null || campaignModel().BuyItLine2() != null || campaignModel().BuyItLine3() != null || campaignModel().BuyItButtonLabel() != null) {
+                                    if (couponModel().BuuyItLine1() != null || couponModel().BuyItLine2() != null || couponModel().BuyItLine3() != null || couponModel().BuyItButtonLabel() != null) {
                                         buyItQuestionStatus(true);
 
                                         pricePerclick(pricePerclick() + UserAndCostDetail().BuyItClausePrice);
@@ -1068,7 +1062,7 @@ define("Coupons/Coupons.viewModel",
 
                                     }
 
-                                    if ((campaignModel().VerifyQuestion() != null && campaignModel().VerifyQuestion() != '') || (campaignModel().Answer1() != null && campaignModel().Answer1() != '') || (campaignModel().Answer2() != null && campaignModel().Answer2() != '')) {
+                                    if ((couponModel().VerifyQuestion() != null && couponModel().VerifyQuestion() != '') || (couponModel().Answer1() != null && couponModel().Answer1() != '') || (couponModel().Answer2() != null && couponModel().Answer2() != '')) {
                                         quizQuestionStatus(true);
                                         pricePerclick(pricePerclick() + UserAndCostDetail().QuizQuestionClausePrice);
                                         isQuizQPerClickPriceAdded(true);
@@ -1080,7 +1074,7 @@ define("Coupons/Coupons.viewModel",
                                     // handle 2nd edit error 
                                     //  $(".modal-backdrop").remove();
 
-                                    _.each(campaignModel().CouponCategories(), function (coup) {
+                                    _.each(couponModel().CouponCategories(), function (coup) {
                                         _.each(couponCategories(), function (coupcc) {
 
                                             if (coupcc.CategoryId == coup.CategoryId()) {
@@ -1091,35 +1085,13 @@ define("Coupons/Coupons.viewModel",
 
                                     });
 
-                                    if (campaignModel().DeliveryDays() != null) {
-                                        if (campaignModel().DeliveryDays() == 3) {
-                                            if (UserAndCostDetail().ThreeDayDeliveryClausePrice != null) {
-                                                pricePerclick(pricePerclick() + UserAndCostDetail().ThreeDayDeliveryClausePrice);
-
-                                            }
-                                        } else if (campaignModel().DeliveryDays() == 5) {
-                                            if (UserAndCostDetail().FiveDayDeliveryClausePrice != null) {
-                                                pricePerclick(pricePerclick() + UserAndCostDetail().FiveDayDeliveryClausePrice);
-
-                                            }
-                                        } else if (campaignModel().DeliveryDays() == 10) {
-                                            if (UserAndCostDetail().TenDayDeliveryClausePrice != null) {
-                                                pricePerclick(pricePerclick() + UserAndCostDetail().TenDayDeliveryClausePrice);
-                                            }
-                                        }
-                                        alreadyAddedDeliveryValue(campaignModel().DeliveryDays());
-                                    } else {
-                                        campaignModel().DeliveryDays('10');
-                                        alreadyAddedDeliveryValue(10);
-                                        pricePerclick(pricePerclick() + UserAndCostDetail().TenDayDeliveryClausePrice);
-                                    }
-
-                                    if ((campaignModel().IsShowVoucherSetting() != null && campaignModel().IsShowVoucherSetting() != true)) {
+                                    
+                                    if ((couponModel().IsShowVoucherSetting() != null && couponModel().IsShowVoucherSetting() != true)) {
                                         pricePerclick(pricePerclick() + UserAndCostDetail().VoucherClausePrice);
                                         isVoucherPerClickPriceAdded(true);
                                     }
 
-                                    var takenCouponCodes = $.grep(campaignModel().CouponCodes(), function (n, i) {
+                                    var takenCouponCodes = $.grep(couponModel().CouponCodes(), function (n, i) {
                                         return (n.IsTaken() == true);
                                     });
 
@@ -1145,7 +1117,7 @@ define("Coupons/Coupons.viewModel",
                     }
                 },
                 changeStatus = function (status) {
-                    if (campaignModel() != undefined)
+                    if (couponModel() != undefined)
                         saveCampaign(status);
 
                     $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign").css("display", "none");
@@ -1168,12 +1140,12 @@ define("Coupons/Coupons.viewModel",
                  },
                 addIndustry = function (selected) {
 
-                    campaignModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
+                    couponModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
                         Industry: selected.IndustryName,
                         IndustryId: selected.IndustryId,
                         IncludeorExclude: true,//parseInt(selected.IndustryIncludeExclude),
                         Type: 4,
-                        CampaignId: campaignModel().CampaignID()
+                        CampaignId: couponModel().CampaignID()
                     }));
 
                     $("#searchIndustries").val("");
@@ -1230,43 +1202,13 @@ define("Coupons/Coupons.viewModel",
                 },
                 addDeliveryPrice = function () {
 
-                    if (alreadyAddedDeliveryValue() == 3) {
-                        pricePerclick(pricePerclick() - UserAndCostDetail().ThreeDayDeliveryClausePrice);
-
-
-                    } else if (alreadyAddedDeliveryValue() == 5) {
-
-                        pricePerclick(pricePerclick() - UserAndCostDetail().FiveDayDeliveryClausePrice);
-
-                    } else if (alreadyAddedDeliveryValue() == 10) {
-
-                        pricePerclick(pricePerclick() - UserAndCostDetail().TenDayDeliveryClausePrice);
-
-                    }
-
-                    alreadyAddedDeliveryValue(campaignModel().DeliveryDays());
-                    if (campaignModel().DeliveryDays() == 3) {
-                        if (UserAndCostDetail().ThreeDayDeliveryClausePrice != null) {
-                            pricePerclick(pricePerclick() + UserAndCostDetail().ThreeDayDeliveryClausePrice);
-
-                        }
-                    } else if (campaignModel().DeliveryDays() == 5) {
-                        if (UserAndCostDetail().FiveDayDeliveryClausePrice != null) {
-                            pricePerclick(pricePerclick() + UserAndCostDetail().FiveDayDeliveryClausePrice);
-
-                        }
-                    } else if (campaignModel().DeliveryDays() == 10) {
-                        if (UserAndCostDetail().TenDayDeliveryClausePrice != null) {
-                            pricePerclick(pricePerclick() + UserAndCostDetail().TenDayDeliveryClausePrice);
-                        }
-                    }
                     return true;
                 },
                 onRemoveIndustry = function (item) {
                     // Ask for confirmation
 
-                    campaignModel().AdCampaignTargetCriterias.remove(item);
-                    var matchedIndustoryCriterias = ko.utils.arrayFirst(campaignModel().AdCampaignTargetCriterias(), function (arrayitem) {
+                    couponModel().AdCampaignTargetCriterias.remove(item);
+                    var matchedIndustoryCriterias = ko.utils.arrayFirst(couponModel().AdCampaignTargetCriterias(), function (arrayitem) {
 
                         return arrayitem.Type() == item.Type();
                     });
@@ -1281,7 +1223,7 @@ define("Coupons/Coupons.viewModel",
                 visibleTargetAudience = function (mode) {
 
                     if (mode != undefined) {
-                        var matcharry = ko.utils.arrayFirst(campaignModel().AdCampaignTargetCriterias(), function (item) {
+                        var matcharry = ko.utils.arrayFirst(couponModel().AdCampaignTargetCriterias(), function (item) {
 
                             return item.Type() == mode;
                         });
@@ -1297,12 +1239,12 @@ define("Coupons/Coupons.viewModel",
                     }
                 },
                 addEducation = function (selected) {
-                    campaignModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
+                    couponModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
                         Education: selected.Title,
                         EducationId: selected.EducationId,
                         IncludeorExclude: parseInt(selectedEducationIncludeExclude()),
                         Type: 5,
-                        CampaignId: campaignModel().CampaignID()
+                        CampaignId: couponModel().CampaignID()
                     }));
 
                     $("#searchEducations").val("");
@@ -1339,8 +1281,8 @@ define("Coupons/Coupons.viewModel",
                 onRemoveEducation = function (item) {
                     // Ask for confirmation
 
-                    campaignModel().AdCampaignTargetCriterias.remove(item);
-                    var matchedEducationCriterias = ko.utils.arrayFirst(campaignModel().AdCampaignTargetCriterias(), function (arrayitem) {
+                    couponModel().AdCampaignTargetCriterias.remove(item);
+                    var matchedEducationCriterias = ko.utils.arrayFirst(couponModel().AdCampaignTargetCriterias(), function (arrayitem) {
 
                         return arrayitem.Type() == item.Type();
                     });
@@ -1355,7 +1297,7 @@ define("Coupons/Coupons.viewModel",
                 getAudienceCount = function () {
                     var countryIds = '', cityIds = '', countryIdsExcluded = '', cityIdsExcluded = '';
                     var educationIds = '', educationIdsExcluded = '';
-                    _.each(campaignModel().AdCampaignTargetLocations(), function (item) {
+                    _.each(couponModel().AdCampaignTargetLocations(), function (item) {
                         if (item.CityID() == 0 || item.CityID() == null) {
                             if (item.IncludeorExclude() == '0') {
                                 if (countryIdsExcluded == '') {
@@ -1390,7 +1332,7 @@ define("Coupons/Coupons.viewModel",
                         industryIdsExcluded = '', profileQuestionIds = '', profileAnswerIds = '',
                         surveyQuestionIds = '', surveyAnswerIds = '', profileQuestionIdsExcluded = '', profileAnswerIdsExcluded = '',
                         surveyQuestionIdsExcluded = '', surveyAnswerIdsExcluded = '';
-                    _.each(campaignModel().AdCampaignTargetCriterias(), function (item) {
+                    _.each(couponModel().AdCampaignTargetCriterias(), function (item) {
                         if (item.Type() == 1) {
                             if (item.IncludeorExclude() == '0') {
                                 if (profileQuestionIdsExcluded == '') {
@@ -1485,9 +1427,9 @@ define("Coupons/Coupons.viewModel",
                         }
                     });
                     var campData = {
-                        ageFrom: campaignModel().AgeRangeStart(),
-                        ageTo: campaignModel().AgeRangeEnd(),
-                        gender: campaignModel().Gender(),
+                        ageFrom: couponModel().AgeRangeStart(),
+                        ageTo: couponModel().AgeRangeEnd(),
+                        gender: couponModel().Gender(),
                         countryIds: countryIds,
                         cityIds: cityIds,
                         languageIds: languageIds,
@@ -1535,43 +1477,24 @@ define("Coupons/Coupons.viewModel",
                     });
                 },
                 bindAudienceReachCount = function () {
-                    campaignModel().AgeRangeStart.subscribe(function (value) {
+                    couponModel().AgeRangeStart.subscribe(function (value) {
                         getAudienceCount();
                     });
-                    campaignModel().AgeRangeEnd.subscribe(function (value) {
+                    couponModel().AgeRangeEnd.subscribe(function (value) {
                         getAudienceCount();
                     });
-                    campaignModel().Gender.subscribe(function (value) {
+                    couponModel().Gender.subscribe(function (value) {
                         getAudienceCount();
                     });
-                    campaignModel().AdCampaignTargetLocations.subscribe(function (value) {
+                    couponModel().AdCampaignTargetLocations.subscribe(function (value) {
                         getAudienceCount();
                         //  buildMap();
                     });
-                    campaignModel().AdCampaignTargetCriterias.subscribe(function (value) {
+                    couponModel().AdCampaignTargetCriterias.subscribe(function (value) {
                         getAudienceCount();
                     });
                 },
-                buildMap = function () {
-                    //$(".locMap").css("display", "none");
-                    //var initialized = false;
-                    //_.each(campaignModel().AdCampaignTargetLocations(), function (item) {
-                    //   // $(".locMap").css("display", "inline-block");
-                    //    clearRadiuses();
-                    //    if (item.CityID() == 0 || item.CityID() == null) {
-                    //        addCountryMarker(item.Country());
-                    //    } else {
-                    //        if (!initialized)
-                    //            initializeMap(parseFloat(item.Longitude()), parseFloat(item.Latitude()));
-                    //        initialized = true;
-                    //        var included = true;
-                    //        if (item.IncludeorExclude() == '0') {
-                    //            included = false;
-                    //        }
-                    //        addPointer(parseFloat(item.Longitude()), parseFloat(item.Latitude()), item.City(), parseFloat(item.Radius()), included);
-                    //    }
-                    //});
-                },
+                buildMap = function () { },
                 addCountryToCountryList = function (country, name) {
                     if (country != undefined) {
 
@@ -1587,7 +1510,7 @@ define("Coupons/Coupons.viewModel",
                 },
                 findLocationsInCountry = function (id) {
 
-                    var list = ko.utils.arrayFilter(campaignModel().AdCampaignTargetLocations(), function (prod) {
+                    var list = ko.utils.arrayFilter(couponModel().AdCampaignTargetLocations(), function (prod) {
                         return prod.CountryID() == id;
                     });
                     return list;
@@ -1600,13 +1523,13 @@ define("Coupons/Coupons.viewModel",
                     }
                 },
                 VoucherImageCallback = function (file, data) {
-                    campaignModel().VoucherImagePath(data);
+                    couponModel().VoucherImagePath(data);
                 },
                 buyItImageCallback = function (file, data) {
-                    campaignModel().buyItImageBytes(data);
+                    couponModel().buyItImageBytes(data);
                 },
                  LogoUrlImageCallback = function (file, data) {
-                     campaignModel().LogoImageBytes(data);
+                     couponModel().LogoImageBytes(data);
                  },
                 ShowCouponPromotions = function () {
                    getAdCampaignGridContent();
@@ -1701,8 +1624,8 @@ define("Coupons/Coupons.viewModel",
                 },
                  openVideoDialog = function () {
                      
-                     if (campaignModel().Type() == 1) {
-                         var videoLink = campaignModel().LandingPageVideoLink();
+                     if (couponModel().Type() == 1) {
+                         var videoLink = couponModel().LandingPageVideoLink();
                          videoLink = videoLink.replace('watch?v=', 'embed/');
                          previewVideoTagUrl(videoLink);
                         // $("#objVideoLink").attr("data", videoLink);
@@ -1714,7 +1637,7 @@ define("Coupons/Coupons.viewModel",
                 },
                   closePreviewDialog = function () {
                       
-                      if (campaignModel().Type() == 1) {
+                      if (couponModel().Type() == 1) {
                           $('#appendVideoTag').empty();
                       }
                   },
@@ -1727,9 +1650,9 @@ define("Coupons/Coupons.viewModel",
                                
                                 if (allCouponCodeItems.indexOf(item) < 0) {
                                     allCouponCodeItems.push(item);
-                                    campaignModel().CouponCodes.push(new model.AdCampaignCouponCodes.Create({
+                                    couponModel().CouponCodes.push(new model.AdCampaignCouponCodes.Create({
                                         CodeId: 0,
-                                        CampaignId: campaignModel().CampaignID(),
+                                        CampaignId: couponModel().CampaignID(),
                                         Code: item,
                                         IsTaken: false,
                                         UserId: "",
@@ -1741,9 +1664,9 @@ define("Coupons/Coupons.viewModel",
                            
                         } else {
                             allCouponCodeItems.push(this.BetterListitemToAdd());
-                            campaignModel().CouponCodes.push(new model.AdCampaignCouponCodes.Create({
+                            couponModel().CouponCodes.push(new model.AdCampaignCouponCodes.Create({
                                 CodeId: 0,
-                                CampaignId: campaignModel().CampaignID(),
+                                CampaignId: couponModel().CampaignID(),
                                 Code: this.BetterListitemToAdd(),
                                 IsTaken: false,
                                 UserId: "",
@@ -1759,7 +1682,7 @@ define("Coupons/Coupons.viewModel",
                         
                         $("#alreadyaddedCodeError").css("display", "block");
                     }
-                    campaignModel().CouponQuantity(allCouponCodeItems().length);
+                    couponModel().CouponQuantity(allCouponCodeItems().length);
                 },
                 removeSelectedCouponCodeItem = function (item) {
           
@@ -1767,17 +1690,17 @@ define("Coupons/Coupons.viewModel",
                     allCouponCodeItems.removeAll();
                     selectedCouponCodeItems([]); // Clear selection
 
-                    campaignModel().CouponCodes.remove(item);
-                    _.each(campaignModel().CouponCodes(), function (cc) {
+                    couponModel().CouponCodes.remove(item);
+                    _.each(couponModel().CouponCodes(), function (cc) {
 
                         allCouponCodeItems.push(cc.Code);
                     });
                     console.log(allCouponCodeItems());
-                    campaignModel().CouponQuantity(allCouponCodeItems().length);
+                    couponModel().CouponQuantity(allCouponCodeItems().length);
                 },
                 addVoucherClickRate = function () {
 
-                    if (campaignModel().IsShowVoucherSetting() == false) {
+                    if (couponModel().IsShowVoucherSetting() == false) {
                         if (UserAndCostDetail().VoucherClausePrice != null && isVoucherPerClickPriceAdded() == true) {
 
 
@@ -1802,16 +1725,16 @@ define("Coupons/Coupons.viewModel",
                      
                      if (event.which == 13 || event.which == 0) {
                          if ((item.Code() != "") && (allCouponCodeItems.indexOf(item.Code()) < 0)) {
-                             campaignModel().CouponCodes.remove(item);
-                             campaignModel().CouponCodes.push(new model.AdCampaignCouponCodes.Create({
+                             couponModel().CouponCodes.remove(item);
+                             couponModel().CouponCodes.push(new model.AdCampaignCouponCodes.Create({
                                  CodeId: item.CodeId(),
-                                 CampaignId: campaignModel().CampaignID(),
+                                 CampaignId: couponModel().CampaignID(),
                                  Code: item.Code(),
                                  IsTaken: item.IsTaken(),
                                  UserId: item.UserId(),
                                  UserName: item.UserName()
                              }));
-                             campaignModel().CouponQuantity(allCouponCodeItems().length);
+                             couponModel().CouponQuantity(allCouponCodeItems().length);
                              $("#gridupdateCodeError").css("display", "none");
                          } else {
                              $("#gridupdateCodeError").css("display", "block");
@@ -1824,7 +1747,7 @@ define("Coupons/Coupons.viewModel",
                  generateCouponCodes = function () {
                      
                      var gData = {
-                         CampaignId: campaignModel().CampaignID(),
+                         CampaignId: couponModel().CampaignID(),
                          number: numberOFCouponsToGenerate()
                      };
                      dataservice.generateCouponCodes(gData, {
@@ -1832,7 +1755,7 @@ define("Coupons/Coupons.viewModel",
                              debugger
                              _.each(data.CouponList, function (item) {
                                  allCouponCodeItems.push(item.Code);
-                                 campaignModel().CouponCodes.push(new model.AdCampaignCouponCodes.Create({
+                                 couponModel().CouponCodes.push(new model.AdCampaignCouponCodes.Create({
                                      CodeId: item.CodeId,
                                      CampaignId: item.CampaignId,
                                      Code: item.Code,
@@ -1842,8 +1765,8 @@ define("Coupons/Coupons.viewModel",
                                      TakenDateTime: null
                                  }));
                              });
-                             //var cQty = parseInt(campaignModel().CouponQuantity()) + parseInt(numberOFCouponsToGenerate());
-                             campaignModel().CouponQuantity(data.CouponQuantity);
+                             //var cQty = parseInt(couponModel().CouponQuantity()) + parseInt(numberOFCouponsToGenerate());
+                             couponModel().CouponQuantity(data.CouponQuantity);
                              numberOFCouponsToGenerate(0);
                              toastr.success("Codes generated successfully.");
                          },
@@ -1885,7 +1808,7 @@ define("Coupons/Coupons.viewModel",
                     campaignGridContent: campaignGridContent,
                     addNewCampaign: addNewCampaign,
                     langs: langs,
-                    campaignModel: campaignModel,
+                    couponModel: couponModel,
                     saveCampaignData: saveCampaignData,
                     closeNewCampaignDialog: closeNewCampaignDialog,
                     selectedCriteria: selectedCriteria,

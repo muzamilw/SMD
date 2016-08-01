@@ -1,198 +1,141 @@
 ﻿define(["ko", "underscore", "underscore-ko"], function (ko) {
   
     var // ReSharper disable InconsistentNaming
-      Campaign = function (CampaignID, LanguageID, CampaignName, UserID, Status, StatusValue, CampaignDescription, Gender,
-          Archived, StartDateTime, EndDateTime, MaxBudget, Type, DisplayTitle, LandingPageVideoLink, VerifyQuestion,
-          Answer1, Answer2, Answer3, CorrectAnswer, AgeRangeStart, AgeRangeEnd, ResultClicks, AmountSpent
-          , ImagePath, CampaignImagePath, CampaignTypeImagePath, Description, ClickRate,
-          Voucher1Heading, Voucher1Description, Voucher1Value, Voucher2Heading, Voucher2Description, Voucher2Value,
-          Voucher1ImagePath, VoucherImagePath, CreatedBy, VideoUrl, BuuyItLine1, BuyItLine2, BuyItLine3, BuyItButtonLabel,
-          BuyItImageUrl, AdViews, CompanyId, CouponSwapValue, CouponActualValue, CouponQuantity, CouponTakenCount, priority,
-          CouponDiscountValue, couponImage2, CouponImage3, CouponImage4, CouponExpiryLabel,
-          couponSmdComission, CouponCategories, DeliveryDays, IsUseFilter, LogoUrl,
-          VoucherAdditionalInfo, CouponId, IsShowVoucherSetting, VideoLink2, CouponType, IsSavedCoupon,
-          ChannelType) {
+      Coupon = function (FinePrintLine1, FinePrintLine2, FinePrintLine3, FinePrintLine4, FinePrintLine5, GeographyColumn, HighlightLine1, HighlightLine2, HighlightLine3, HighlightLine4,
+            HighlightLine5, HowToRedeemLine1, HowToRedeemLine2, HowToRedeemLine3, HowToRedeemLine4, HowToRedeemLine5, LanguageId, LocationBranchId, LocationCity, LocationLAT,
+            LocationLine1, LocationLine2, LocationLON, LocationPhone, LocationState, LocationTitle, LocationZipCode, LogoUrl, ModifiedBy, ModifiedDateTime, Price, RejectedBy,
+            Rejecteddatetime, RejectedReason, Savings, SearchKeywords, Status, SwapCost, UserId
+          ) {
        
           var
               //type and userID will be set on server sside
-              CampaignID = ko.observable(CampaignID),
-              LanguageID = ko.observable(LanguageID),
-              CampaignName = ko.observable(CampaignName).extend({  // custom message
-                  required: true
-              }),
-              UserID = ko.observable(UserID),
-              Status = ko.observable(Status),
-              StatusValue = ko.observable(StatusValue),
-              CampaignDescription = ko.observable(CampaignDescription),
-              Description = ko.observable(Description),
-              Gender = ko.observable(Gender),
+              ApprovalDateTime = ko.observable(ApprovalDateTime),
+              Approved = ko.observable(Approved),
+              ApprovedBy = ko.observable(ApprovedBy),
               Archived = ko.observable(Archived),
-              CouponSwapValue = ko.observable(CouponSwapValue),
-              CouponActualValue = ko.observable(CouponActualValue),
-              CouponQuantity = ko.observable(CouponQuantity),
-              CouponTakenCount = ko.observable(CouponTakenCount),
-              priority = ko.observable(priority),
-              CouponDiscountValue = ko.observable(CouponDiscountValue),
-              CouponCategories = ko.observableArray([]),
-              StartDateTime = ko.observable((StartDateTime !== null && StartDateTime !== undefined) ? moment(StartDateTime).toDate() : undefined).extend({  // custom message
-                  required: true
-              }),//ko.observable(),
-              EndDateTime = ko.observable((EndDateTime !== null && EndDateTime !== undefined) ? moment(EndDateTime).toDate() : undefined).extend({  // custom message
-                  required: true
-              }).extend({
-                  validation: {
-                      validator: function (val, someOtherVal) {
-                      
-                          return moment(val).toDate() > moment(StartDateTime()).toDate();
-                      },
-                      message: 'End date must be greater than start date',
-                  }
-              }),// ko.observable(EndDateTime),
-              MaxBudget = ko.observable(MaxBudget).extend({ required: true, number: true, min: 1}),
-              Type = ko.observable(Type),
-              DisplayTitle = ko.observable(DisplayTitle).extend({  // custom message
-                  required: true
-              }),
-              LandingPageVideoLink = ko.observable(LandingPageVideoLink).extend({
-                  required: {
-                      onlyIf: function () {
-                          if (Type() == "2" || Type() == "1") {
-                              return true;
-                          } else {
-                              return false;
-                          }
-                      }
-                  }
-              }).extend({
-                  pattern: {
-                      message: 'Please enter valid web url.',
-                      params: /^(?:(?:https?|ftp):\/\/)(?:\S+(?::\S*)?@)?(?:(?!10(?:\.\d{1,3}){3})(?!127(?:\.\d{1,3}){3})(?!169\.254(?:\.\d{1,3}){2})(?!192\.168(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/[^\s]*)?$/i,
-                      onlyIf: function () {
-                          if (Type() == "2") {
-                              return true;
-                          } else {
-                              return false;
-                          }
-                      }
-                  }
-              }),
-              VerifyQuestion = ko.observable(VerifyQuestion),
-              Voucher1Heading = ko.observable(Voucher1Heading),
-              Voucher1Description = ko.observable(Voucher1Description),
-              Voucher1Value = ko.observable(Voucher1Value),
-              Voucher2Heading = ko.observable(Voucher2Heading),
-              Voucher2Description = ko.observable(Voucher2Description),
-              Voucher2Value = ko.observable(Voucher2Value),
-              Answer1 = ko.observable(Answer1),
-              Answer2 = ko.observable(Answer2),
-              Answer3 = ko.observable(Answer3),
-              CreatedBy = ko.observable(CreatedBy),
-              CorrectAnswer = ko.observable(CorrectAnswer),
-              AgeRangeStart = ko.observable(AgeRangeStart),
-              AgeRangeEnd = ko.observable(AgeRangeEnd).extend({
-                  validation: {
-                      validator: function (val, someOtherVal) {
-                          return val > AgeRangeStart();
-                      },
-                      message: 'Age end range must be greater than start range',
-                  }
-              }),
-              ResultClicks = ko.observable(ResultClicks),
-              AmountSpent = ko.observable(AmountSpent),
-              ImagePath = ko.observable(ImagePath),
-              CampaignImagePath = ko.observable(CampaignImagePath),
-              couponImage2 = ko.observable(couponImage2),
-              CouponImage3 = ko.observable(CouponImage3),
-              CouponImage4 = ko.observable(CouponImage4),
-              CouponExpiryLabel = ko.observable(CouponExpiryLabel),
-              couponSmdComission = ko.observable(couponSmdComission),
-              CampaignTypeImagePath = ko.observable(CampaignTypeImagePath),
-              ClickRate = ko.observable(ClickRate),
-              Voucher1ImagePath = ko.observable(Voucher1ImagePath),
-              VoucherImagePath = ko.observable(VoucherImagePath),
-              AdCampaignTargetCriterias = ko.observableArray([]),
-              AdCampaignTargetLocations = ko.observableArray([]),
-              VideoUrl = ko.observable(VideoUrl),
-              BuuyItLine1 = ko.observable(BuuyItLine1),
-              BuyItLine2 = ko.observable(BuyItLine2),
-              BuyItLine3 = ko.observable(BuyItLine3),
-              BuyItButtonLabel = ko.observable(BuyItButtonLabel),
-              BuyItImageUrl = ko.observable(BuyItImageUrl),
-              buyItImageBytes = ko.observable(''),
-              AdViews = ko.observable(AdViews),
               CompanyId = ko.observable(CompanyId),
-              DeliveryDays = ko.observable(DeliveryDays),
-              CouponCodes = ko.observableArray([]),
-              IsUseFilter = ko.observable(IsUseFilter),
-              LogoUrl = ko.observable(LogoUrl),
-              VoucherAdditionalInfo = ko.observable(VoucherAdditionalInfo),
-              LogoImageBytes = ko.observable(''),
+              CouponActiveMonth = ko.observable(CouponActiveMonth),
+              CouponActiveYear = ko.observable(CouponActiveYear),
+              CouponExpirydate = ko.observable(CouponExpirydate),
               CouponId = ko.observable(CouponId),
-              IsShowVoucherSetting = ko.observable(IsShowVoucherSetting),
-              VideoLink2 = ko.observable(VideoLink2),
-              CouponType = ko.observable(CouponType),
-              IsSavedCoupon = ko.observable(IsSavedCoupon),
-              ChannelType = ko.observable(ChannelType),
+              couponImage1 = ko.observable(couponImage1),
+              CouponImage2 = ko.observable(CouponImage2),
+              CouponImage3 = ko.observable(CouponImage3),
+              CouponIssuedCount = ko.observable(CouponIssuedCount),
+              CouponListingMode = ko.observable(CouponListingMode),
+              CouponQtyPerUser = ko.observable(CouponQtyPerUser),
+              CouponRedeemedCount = ko.observable(CouponRedeemedCount),
+              CouponTitle = ko.observable(CouponTitle),
+              CouponViewCount = ko.observable(CouponViewCount),
+              CreatedBy = ko.observable(CreatedBy),
+              CreatedDateTime = ko.observable(CreatedDateTime),
+              CurrencyId = ko.observable(CurrencyId),
+              FinePrintLine1 = ko.observable(FinePrintLine1),
+              FinePrintLine2 = ko.observable(FinePrintLine2),
+              FinePrintLine3 = ko.observable(FinePrintLine3),
+              FinePrintLine4 = ko.observable(FinePrintLine4),
+              FinePrintLine5 = ko.observable(FinePrintLine5),
+              GeographyColumn = ko.observable(GeographyColumn),
+              HighlightLine1 = ko.observable(HighlightLine1),
+              HighlightLine2 = ko.observable(HighlightLine2),
+              HighlightLine3 = ko.observable(HighlightLine3),
+              HighlightLine4 = ko.observable(HighlightLine4),
+              HighlightLine5 = ko.observable(HighlightLine5),
+              HowToRedeemLine1 = ko.observable(HowToRedeemLine1),
+              HowToRedeemLine2 = ko.observable(HowToRedeemLine2),
+              HowToRedeemLine3 = ko.observable(HowToRedeemLine3),
+              HowToRedeemLine4 = ko.observable(HowToRedeemLine4),
+              HowToRedeemLine5 = ko.observable(HowToRedeemLine5),
+              LanguageId = ko.observable(LanguageId),
+              LocationBranchId = ko.observable(LocationBranchId),
+              LocationCity = ko.observable(LocationCity),
+              LocationLAT = ko.observable(LocationLAT),
+              LocationLine1 = ko.observable(LocationLine1),
+              LocationLine2 = ko.observable(LocationLine2),
+              LocationLON = ko.observable(LocationLON),
+              LocationPhone = ko.observable(LocationPhone),
+              LocationState = ko.observable(LocationState),
+              LocationTitle = ko.observable(LocationTitle),
+              LocationZipCode = ko.observable(LocationZipCode),
+              LogoUrl = ko.observable(LogoUrl),
+              ModifiedBy = ko.observable(ModifiedBy),
+              ModifiedDateTime = ko.observable(ModifiedDateTime),
+              Price = ko.observable(Price),
+              RejectedBy = ko.observable(RejectedBy),
+              Rejecteddatetime = ko.observable(Rejecteddatetime),
+              RejectedReason = ko.observable(RejectedReason),
+              Savings = ko.observable(Savings),
+              SearchKeywords = ko.observable(SearchKeywords),
+              Status = ko.observable(Status),
+              SwapCost = ko.observable(SwapCost),
+              UserId = ko.observable(UserId),
                // Errors
-                errors = ko.validation.group({
-                    CampaignName:CampaignName,
-                    DisplayTitle: DisplayTitle,
-                    LandingPageVideoLink: LandingPageVideoLink,
-                    //StartDateTime: StartDateTime,
-                    //EndDateTime: EndDateTime,
-                    MaxBudget: MaxBudget,
-                    AgeRangeEnd: AgeRangeEnd
-                }),
+              errors = ko.validation.group({ }),
                 // Is Valid 
-                isValid = ko.computed(function () {
+             isValid = ko.computed(function () {
                     return errors().length === 0 ? true : false;
-                }),
-              dirtyFlag = new ko.dirtyFlag({
-                  CampaignName: CampaignName,
-                  CampaignDescription: CampaignDescription,
-                  Description:Description,
-                  StartDateTime: StartDateTime,
-                  EndDateTime: EndDateTime,
-                  MaxBudget: MaxBudget,
-                  Type: Type,
-                  DisplayTitle: DisplayTitle,
-                  LandingPageVideoLink: LandingPageVideoLink,
-                  VerifyQuestion: VerifyQuestion,
-                  Answer1: Answer1,
-                  Answer2: Answer2,
-                  Answer3: Answer3,
-                  CorrectAnswer: CorrectAnswer,
-                  AgeRangeStart: AgeRangeStart,
-                  AgeRangeEnd: AgeRangeEnd,
-                  AdCampaignTargetCriterias: AdCampaignTargetCriterias,
-                  AdCampaignTargetLocations: AdCampaignTargetLocations,
-                  Voucher1Heading:Voucher1Heading,
-                  Voucher1Description:Voucher1Description,
-                  Voucher1Value:Voucher1Value,
-                  Voucher2Heading:Voucher2Heading,
-                  Voucher2Description:Voucher2Description,
-                  Voucher2Value: Voucher2Value,
-                  VideoUrl: VideoUrl,
-                  BuuyItLine1: BuuyItLine1,
-                  BuyItLine2: BuyItLine2,
-                  BuyItLine3: BuyItLine3,
-                  BuyItButtonLabel: BuyItButtonLabel,
-                  BuyItImageUrl: BuyItImageUrl,
-                  buyItImageBytes: buyItImageBytes,
-                  AdViews: AdViews,
-                  CouponSwapValue: CouponSwapValue,
-                  CouponActualValue: CouponActualValue,
-                  CouponQuantity: CouponQuantity,
-                  priority: priority,
-                  VoucherImagePath: VoucherImagePath,
-                  CouponDiscountValue: CouponDiscountValue,
-                  DeliveryDays: DeliveryDays,
-                  CouponCodes: CouponCodes,
-                  IsUseFilter: IsUseFilter,
-                  CouponType: CouponType,
-                  IsSavedCoupon: IsSavedCoupon,
-                  ChannelType: ChannelType
-
+             }),
+             dirtyFlag = new ko.dirtyFlag({
+                 ApprovalDateTime : (ApprovalDateTime),
+                 Approved : (Approved),
+                 ApprovedBy : (ApprovedBy),
+                 Archived : (Archived),
+                 CompanyId : (CompanyId),
+                 CouponActiveMonth : (CouponActiveMonth),
+                 CouponActiveYear : (CouponActiveYear),
+                 CouponExpirydate : (CouponExpirydate),
+                 CouponId : (CouponId),
+                 couponImage1 : (couponImage1),
+                 CouponImage2 : (CouponImage2),
+                 CouponImage3 : (CouponImage3),
+                 CouponIssuedCount : (CouponIssuedCount),
+                 CouponListingMode : (CouponListingMode),
+                 CouponQtyPerUser : (CouponQtyPerUser),
+                 CouponRedeemedCount : (CouponRedeemedCount),
+                 CouponTitle : (CouponTitle),
+                 CouponViewCount : (CouponViewCount),
+                 CreatedBy : (CreatedBy),
+                 CreatedDateTime : (CreatedDateTime),
+                 CurrencyId : (CurrencyId),
+                 FinePrintLine1 : (FinePrintLine1),
+                 FinePrintLine2 : (FinePrintLine2),
+                 FinePrintLine3 : (FinePrintLine3),
+                 FinePrintLine4 : (FinePrintLine4),
+                 FinePrintLine5 : (FinePrintLine5),
+                 GeographyColumn : (GeographyColumn),
+                 HighlightLine1 : (HighlightLine1),
+                 HighlightLine2 : (HighlightLine2),
+                 HighlightLine3 : (HighlightLine3),
+                 HighlightLine4 : (HighlightLine4),
+                 HighlightLine5 : (HighlightLine5),
+                 HowToRedeemLine1 : (HowToRedeemLine1),
+                 HowToRedeemLine2 : (HowToRedeemLine2),
+                 HowToRedeemLine3 : (HowToRedeemLine3),
+                 HowToRedeemLine4 : (HowToRedeemLine4),
+                 HowToRedeemLine5 : (HowToRedeemLine5),
+                 LanguageId : (LanguageId),
+                 LocationBranchId : (LocationBranchId),
+                 LocationCity : (LocationCity),
+                 LocationLAT : (LocationLAT),
+                 LocationLine1 : (LocationLine1),
+                 LocationLine2 : (LocationLine2),
+                 LocationLON : (LocationLON),
+                 LocationPhone : (LocationPhone),
+                 LocationState : (LocationState),
+                 LocationTitle : (LocationTitle),
+                 LocationZipCode : (LocationZipCode),
+                 LogoUrl : (LogoUrl),
+                 ModifiedBy : (ModifiedBy),
+                 ModifiedDateTime : (ModifiedDateTime),
+                 Price : (Price),
+                 RejectedBy : (RejectedBy),
+                 Rejecteddatetime : (Rejecteddatetime),
+                 RejectedReason : (RejectedReason),
+                 Savings : (Savings),
+                 SearchKeywords : (SearchKeywords),
+                 Status : (Status),
+                 SwapCost : (SwapCost),
+                 UserId : (UserId)
               }),
               // Has Changes
               hasChanges = ko.computed(function () {
@@ -227,395 +170,151 @@
                       targetCouponCodes.push(item.convertToServerData());
                   });
                   return {
-                      CampaignID: CampaignID(),
-                      LanguageID: LanguageID(),
-                      CampaignName: CampaignName(),
-                      UserID: UserID(),
-                      Status: Status(),
-                      StatusValue: StatusValue(),
-                      CampaignDescription: CampaignDescription(),
-                      Description:Description(),
-                      Gender: Gender(),
+                      ApprovalDateTime: ApprovalDateTime(),
+                      Approved: Approved(),
+                      ApprovedBy: ApprovedBy(),
                       Archived: Archived(),
-                      StartDateTime: moment(StartDateTime()).format(ist.utcFormat) + 'Z',//StartDateTime(),
-                      EndDateTime: moment(EndDateTime()).format(ist.utcFormat) + 'Z',// EndDateTime(),
-                      MaxBudget: MaxBudget(),
-                      Type: Type(),
-                      DisplayTitle: DisplayTitle(),
-                      LandingPageVideoLink: LandingPageVideoLink(),
-                      VerifyQuestion: VerifyQuestion(),
-                      Answer1: Answer1(),
-                      Answer2: Answer2(),
-                      Answer3: Answer3(),
-                      CorrectAnswer: CorrectAnswer(),
-                      AgeRangeStart: AgeRangeStart(),
-                      AgeRangeEnd: AgeRangeEnd(),
-                      ResultClicks: ResultClicks(),
-                      AmountSpent: AmountSpent(),
-                      ImagePath: ImagePath(),
-                      CampaignImagePath: CampaignImagePath(),
-                      couponImage2: couponImage2(),
-                      CouponImage3: CouponImage3(),
-                      CouponImage4: CouponImage4(),
-                      CouponExpiryLabel: CouponExpiryLabel(),
-                      couponSmdComission: couponSmdComission(),
-                      CampaignTypeImagePath: CampaignTypeImagePath(),
-                      ClickRate:ClickRate(),
-                      AdCampaignTargetCriterias: targetCriteria,
-                      AdCampaignTargetLocations: LocationtargetCriteria,
-                      Voucher1Heading: Voucher1Heading(),
-                      Voucher1Description: Voucher1Description(),
-                      Voucher1Value: Voucher1Value(),
-                      Voucher2Heading: Voucher2Heading(),
-                      Voucher2Description: Voucher2Description(),
-                      Voucher2Value: Voucher2Value(),
-                      Voucher1ImagePath:Voucher1ImagePath(),
-                      VoucherImagePath: VoucherImagePath(),
-                      CreatedBy: CreatedBy(),
-                      VideoUrl: VideoUrl(),
-                      BuuyItLine1: BuuyItLine1(),
-                      BuyItLine2: BuyItLine2(),
-                      BuyItLine3: BuyItLine3(),
-                      BuyItButtonLabel: BuyItButtonLabel(),
-                      BuyItImageUrl: BuyItImageUrl(),
-                      buyItImageBytes: buyItImageBytes(),
-                      AdViews: AdViews(),
                       CompanyId: CompanyId(),
-                      CouponSwapValue: CouponSwapValue(),
-                      CouponActualValue: CouponActualValue(),
-                      CouponQuantity: CouponQuantity(),
-                      CouponTakenCount: CouponTakenCount(),
-                      priority: priority(),
-                      CouponDiscountValue: CouponDiscountValue(),
-                      CouponCategories: selectedCoupons,
-                      DeliveryDays: DeliveryDays(),
-                      CouponCodes: targetCouponCodes,
-                      IsUseFilter: IsUseFilter(),
-                      LogoUrl: LogoUrl(),
-                      VoucherAdditionalInfo: VoucherAdditionalInfo(),
-                      LogoImageBytes: LogoImageBytes(),
+                      CouponActiveMonth: CouponActiveMonth(),
+                      CouponActiveYear: CouponActiveYear(),
+                      CouponExpirydate: CouponExpirydate(),
                       CouponId: CouponId(),
-                      IsShowVoucherSetting: IsShowVoucherSetting(),
-                      VideoLink2: VideoLink2(),
-                      CouponType: CouponType(),
-                      IsSavedCoupon: IsSavedCoupon(),
-                      ChannelType: ChannelType()
+                      couponImage1: couponImage1(),
+                      CouponImage2: CouponImage2(),
+                      CouponImage3: CouponImage3(),
+                      CouponIssuedCount: CouponIssuedCount(),
+                      CouponListingMode: CouponListingMode(),
+                      CouponQtyPerUser: CouponQtyPerUser(),
+                      CouponRedeemedCount: CouponRedeemedCount(),
+                      CouponTitle: CouponTitle(),
+                      CouponViewCount: CouponViewCount(),
+                      CreatedBy: CreatedBy(),
+                      CreatedDateTime: CreatedDateTime(),
+                      CurrencyId: CurrencyId(),
+                      FinePrintLine1: FinePrintLine1(),
+                      FinePrintLine2: FinePrintLine2(),
+                      FinePrintLine3: FinePrintLine3(),
+                      FinePrintLine4: FinePrintLine4(),
+                      FinePrintLine5: FinePrintLine5(),
+                      GeographyColumn: GeographyColumn(),
+                      HighlightLine1: HighlightLine1(),
+                      HighlightLine2: HighlightLine2(),
+                      HighlightLine3: HighlightLine3(),
+                      HighlightLine4: HighlightLine4(),
+                      HighlightLine5: HighlightLine5(),
+                      HowToRedeemLine1: HowToRedeemLine1(),
+                      HowToRedeemLine2: HowToRedeemLine2(),
+                      HowToRedeemLine3: HowToRedeemLine3(),
+                      HowToRedeemLine4: HowToRedeemLine4(),
+                      HowToRedeemLine5: HowToRedeemLine5(),
+                      LanguageId: LanguageId(),
+                      LocationBranchId: LocationBranchId(),
+                      LocationCity: LocationCity(),
+                      LocationLAT: LocationLAT(),
+                      LocationLine1: LocationLine1(),
+                      LocationLine2: LocationLine2(),
+                      LocationLON: LocationLON(),
+                      LocationPhone: LocationPhone(),
+                      LocationState: LocationState(),
+                      LocationTitle: LocationTitle(),
+                      LocationZipCode: LocationZipCode(),
+                      LogoUrl: LogoUrl(),
+                      ModifiedBy: ModifiedBy(),
+                      ModifiedDateTime: ModifiedDateTime(),
+                      Price: Price(),
+                      RejectedBy: RejectedBy(),
+                      Rejecteddatetime: Rejecteddatetime(),
+                      RejectedReason: RejectedReason(),
+                      Savings: Savings(),
+                      SearchKeywords: SearchKeywords(),
+                      Status: Status(),
+                      SwapCost: SwapCost(),
+                      UserId: UserId(),
+                      hasChanges: hasChanges()
                   };
               };
           return {
-              CampaignID: CampaignID,
-              LanguageId: LanguageID,
-              CampaignName: CampaignName,
-              UserID: UserID,
-              Status: Status,
-              StatusValue: StatusValue,
-              CampaignDescription: CampaignDescription,
-              Description:Description,
-              Gender: Gender,
-              Archived: Archived,
-              StartDateTime: StartDateTime,
-              EndDateTime: EndDateTime,
-              MaxBudget: MaxBudget,
-              Type: Type,
-              DisplayTitle: DisplayTitle,
-              LandingPageVideoLink: LandingPageVideoLink,
-              VerifyQuestion: VerifyQuestion,
-              Answer1: Answer1,
-              Answer2: Answer2,
-              Answer3: Answer3,
-              CorrectAnswer: CorrectAnswer,
-              AgeRangeStart: AgeRangeStart,
-              AgeRangeEnd: AgeRangeEnd,
-              ResultClicks: ResultClicks,
-              AmountSpent: AmountSpent,
-              ImagePath: ImagePath,
-              CampaignImagePath: CampaignImagePath,
-              couponImage2: couponImage2,
-              CouponImage3: CouponImage3,
-              CouponImage4: CouponImage4,
-              CouponExpiryLabel: CouponExpiryLabel,
-              couponSmdComission: couponSmdComission,
-              CampaignTypeImagePath: CampaignTypeImagePath,
-              ClickRate:ClickRate,
-              AdCampaignTargetCriterias: AdCampaignTargetCriterias,
-              AdCampaignTargetLocations: AdCampaignTargetLocations,
-              convertToServerData:convertToServerData,
-              hasChanges: hasChanges,
-              reset: reset,
-              isValid: isValid,
-              dirtyFlag:dirtyFlag,
-              errors: errors,
-              Voucher1Heading: Voucher1Heading,
-              Voucher1Description: Voucher1Description,
-              Voucher1Value: Voucher1Value,
-              Voucher2Heading: Voucher2Heading,
-              Voucher2Description: Voucher2Description,
-              Voucher2Value: Voucher2Value,
-              Voucher1ImagePath: Voucher1ImagePath,
-              VoucherImagePath: VoucherImagePath,
-              CreatedBy: CreatedBy,
-              VideoUrl: VideoUrl,
-              BuuyItLine1: BuuyItLine1,
-              BuyItLine2: BuyItLine2,
-              BuyItLine3: BuyItLine3,
-              BuyItButtonLabel: BuyItButtonLabel,
-              BuyItImageUrl: BuyItImageUrl,
-              buyItImageBytes: buyItImageBytes,              
-              AdViews: AdViews,
-              CompanyId: CompanyId,
-              CouponSwapValue: CouponSwapValue,
-              CouponActualValue: CouponActualValue,
-              CouponQuantity: CouponQuantity,
-              CouponTakenCount: CouponTakenCount,
-              priority: priority,
-              CouponDiscountValue: CouponDiscountValue,
-              CouponCategories: CouponCategories,
-              DeliveryDays: DeliveryDays,
-              CouponCodes: CouponCodes,
-              IsUseFilter: IsUseFilter,
-              LogoUrl: LogoUrl,
-              VoucherAdditionalInfo: VoucherAdditionalInfo,
-              LogoImageBytes: LogoImageBytes,
-              CouponId: CouponId,
-              IsShowVoucherSetting:IsShowVoucherSetting,
-              VideoLink2: VideoLink2,
-              CouponType: CouponType,
-              IsSavedCoupon: IsSavedCoupon,
-              ChannelType: ChannelType
+              ApprovalDateTime: (ApprovalDateTime),
+              Approved: (Approved),
+              ApprovedBy: (ApprovedBy),
+              Archived: (Archived),
+              CompanyId: (CompanyId),
+              CouponActiveMonth: (CouponActiveMonth),
+              CouponActiveYear: (CouponActiveYear),
+              CouponExpirydate: (CouponExpirydate),
+              CouponId: (CouponId),
+              couponImage1: (couponImage1),
+              CouponImage2: (CouponImage2),
+              CouponImage3: (CouponImage3),
+              CouponIssuedCount: (CouponIssuedCount),
+              CouponListingMode: (CouponListingMode),
+              CouponQtyPerUser: (CouponQtyPerUser),
+              CouponRedeemedCount: (CouponRedeemedCount),
+              CouponTitle: (CouponTitle),
+              CouponViewCount: (CouponViewCount),
+              CreatedBy: (CreatedBy),
+              CreatedDateTime: (CreatedDateTime),
+              CurrencyId: (CurrencyId),
+              FinePrintLine1: (FinePrintLine1),
+              FinePrintLine2: (FinePrintLine2),
+              FinePrintLine3: (FinePrintLine3),
+              FinePrintLine4: (FinePrintLine4),
+              FinePrintLine5: (FinePrintLine5),
+              GeographyColumn: (GeographyColumn),
+              HighlightLine1: (HighlightLine1),
+              HighlightLine2: (HighlightLine2),
+              HighlightLine3: (HighlightLine3),
+              HighlightLine4: (HighlightLine4),
+              HighlightLine5: (HighlightLine5),
+              HowToRedeemLine1: (HowToRedeemLine1),
+              HowToRedeemLine2: (HowToRedeemLine2),
+              HowToRedeemLine3: (HowToRedeemLine3),
+              HowToRedeemLine4: (HowToRedeemLine4),
+              HowToRedeemLine5: (HowToRedeemLine5),
+              LanguageId: (LanguageId),
+              LocationBranchId: (LocationBranchId),
+              LocationCity: (LocationCity),
+              LocationLAT: (LocationLAT),
+              LocationLine1: (LocationLine1),
+              LocationLine2: (LocationLine2),
+              LocationLON: (LocationLON),
+              LocationPhone: (LocationPhone),
+              LocationState: (LocationState),
+              LocationTitle: (LocationTitle),
+              LocationZipCode: (LocationZipCode),
+              LogoUrl: (LogoUrl),
+              ModifiedBy: (ModifiedBy),
+              ModifiedDateTime: (ModifiedDateTime),
+              Price: (Price),
+              RejectedBy: (RejectedBy),
+              Rejecteddatetime: (Rejecteddatetime),
+              RejectedReason: (RejectedReason),
+              Savings: (Savings),
+              SearchKeywords: (SearchKeywords),
+              Status: (Status),
+              SwapCost: (SwapCost),
+              UserId: (UserId),
+              hasChanges: hasChanges
           };
       };
 
-    var // ReSharper disable InconsistentNaming
-      AdCampaignTargetCriteriasModel = function (CriteriaID, CampaignID, Type, PQID, PQAnswerID, SQID, SQAnswer, IncludeorExclude, questionString,
-       answerString, surveyQuestLeftImageSrc, surveyQuestRightImageSrc, LanguageID, Language, IndustryID, Industry, EducationID, Education, QuizCampaignId, QuizAnswerId
-       , criteriaPrice) {
-
-          var
-              //type and userID will be set on server sside
-               CriteriaID = ko.observable(CriteriaID),
-               CampaignID = ko.observable(CampaignID),
-               Type = ko.observable(Type),
-               PQID = ko.observable(PQID),
-               PQAnswerID = ko.observable(PQAnswerID),
-               SQID = ko.observable(SQID),
-               SQAnswer = ko.observable(SQAnswer),
-               IncludeorExclude = ko.observable(IncludeorExclude == true ? "1" : "0"),
-               questionString = ko.observable(questionString),
-               answerString = ko.observable(answerString),
-               surveyQuestLeftImageSrc = ko.observable(surveyQuestLeftImageSrc),
-               surveyQuestRightImageSrc = ko.observable(surveyQuestRightImageSrc),
-               LanguageID = ko.observable(LanguageID),
-               Language = ko.observable(Language),
-               IndustryID = ko.observable(IndustryID),
-               Industry = ko.observable(Industry),
-               Education = ko.observable(Education),
-               EducationID = ko.observable(EducationID),
-               QuizCampaignId = ko.observable(QuizCampaignId),
-               QuizAnswerId = ko.observable(QuizAnswerId),
-               criteriaPrice = ko.observable(criteriaPrice)
-          // Convert to server data
-          convertCriteriaToServerData = function () {
-              
-              return {
-                  CriteriaId: CriteriaID(),
-                  CampaignId: CampaignID(),
-                  Type: Type(),
-                  PQId: PQID(),
-                  PQAnswerId: PQAnswerID(),
-                  SQId: SQID(),
-                  SQAnswer: SQAnswer(),
-                  IncludeorExclude: IncludeorExclude() == 1 ? true : false,
-                  LanguageId: LanguageID(),
-                  Language: Language(),
-                  IndustryId: IndustryID(),
-                  Industry: Industry(),
-                  EducationId: EducationID(),
-                  Education: Education(),
-                  QuizCampaignId: QuizCampaignId(),
-                  QuizAnswerId: QuizAnswerId()
-              };
-          };
-          return {
-              CriteriaID: CriteriaID,
-              CampaignID: CampaignID,
-              Type: Type,
-              PQID: PQID,
-              PQAnswerID: PQAnswerID,
-              SQID: SQID,
-              SQAnswer: SQAnswer,
-              IncludeorExclude: IncludeorExclude,
-              questionString: questionString,
-              answerString: answerString,
-              surveyQuestLeftImageSrc: surveyQuestLeftImageSrc,
-              surveyQuestRightImageSrc: surveyQuestRightImageSrc,
-              LanguageID: LanguageID,
-              Language: Language,
-              IndustryID: IndustryID,
-              Industry: Industry,
-              EducationID: EducationID,
-              Education: Education,
-              convertCriteriaToServerData: convertCriteriaToServerData,
-              QuizCampaignId: QuizCampaignId,
-              QuizAnswerId: QuizAnswerId,
-              criteriaPrice: criteriaPrice
-          };
-      };
-    var // ReSharper disable InconsistentNaming
-    AdCampaignTargetLocation = function (ID, CampaignID, CountryID, CityID, Radius, Country, City, IncludeorExclude, Latitude, Longitude) {
-      
-        var
-            //type and userID will be set on server sside
-            ID = ko.observable(ID),
-            CampaignID = ko.observable(CampaignID),
-            CountryID = ko.observable(CountryID),
-            CityID = ko.observable(CityID),
-            Radius = ko.observable(Radius),
-            Country = ko.observable(Country),
-            City = ko.observable(City),
-            IncludeorExclude = ko.observable(IncludeorExclude == true ? "1" : "0"),
-                     Latitude = ko.observable(Latitude),
-           Longitude = ko.observable(Longitude),
-            // Convert to server data
-            convertToServerData = function () {
-                return {
-                    Id: ID(),
-                    CampaignId: CampaignID(),
-                    CountryId: CountryID(),
-                    CityId: CityID(),
-                    Radius: Radius(),
-                    Country: Country(),
-                    City: City(),
-                    IncludeorExclude: IncludeorExclude() == 1 ? true : false
-                };
-            };
-        return {
-            ID: ID,
-            CampaignID: CampaignID,
-            CountryID: CountryID,
-            CityID: CityID,
-            Radius: Radius,
-            Country: Country,
-            City: City,
-            IncludeorExclude:IncludeorExclude,
-            convertToServerData: convertToServerData,
-            Latitude: Latitude,
-            Longitude: Longitude
-        };
-    };
-
-    selectedCouponCategory = function (CategoryId, Name) {
-
-        var
-            //type and userID will be set on server sside
-            CategoryId = ko.observable(CategoryId),
-            Name = ko.observable(Name),
-            IsSelected = ko.observable(),
-            // Convert to server data
-            convertToServerData = function () {
-                return {
-                    CategoryId: CategoryId(),
-                    Name: Name()
-                };
-            };
-        return {
-            CategoryId: CategoryId,
-            Name: Name,
-            IsSelected:IsSelected,
-            convertToServerData: convertToServerData
-        };
-    };
-
-    var // ReSharper disable InconsistentNaming
-  AdCampaignCouponCodes = function (CodeId, CampaignId, Code, IsTaken, UserId, UserName, TakenDateTime) {
-
-      var
-          //type and userID will be set on server sside
-          CodeId = ko.observable(CodeId),
-          CampaignId = ko.observable(CampaignId),
-          Code = ko.observable(Code),
-          IsTaken = ko.observable(IsTaken),
-          UserId = ko.observable(UserId),
-          UserName = ko.observable(UserName),
-          TakenDateTime = ko.observable(TakenDateTime),
-          // Convert to server data
-          convertToServerData = function () {
-              return {
-                  CodeId: CodeId(),
-                  CampaignId: CampaignId(),
-                  Code: Code(),
-                  IsTaken: IsTaken(),
-                  UserId: UserId(),
-                  TakenDateTime: TakenDateTime
-              };
-          };
-      return {
-          CodeId: CodeId,
-          CampaignId: CampaignId,
-          Code: Code,
-          IsTaken: IsTaken,
-          UserId: UserId,
-          UserName: UserName,
-          TakenDateTime:TakenDateTime,
-          convertToServerData: convertToServerData
-      };
-  };
-
+   
     // Factory Method
-    Campaign.Create = function (source) {
+    Coupon.Create = function (source) {
      
-        var campaign = new Campaign(source.CampaignId, source.LanguageId, source.CampaignName, source.UserId, source.Status, source.StatusValue,
-            source.CampaignDescription, source.Gender + "", source.Archived, source.StartDateTime, source.EndDateTime, source.MaxBudget
-            , source.Type + "", source.DisplayTitle, source.LandingPageVideoLink, source.VerifyQuestion, source.Answer1, source.Answer2, source.Answer3,
-            source.CorrectAnswer, source.AgeRangeStart, source.AgeRangeEnd, source.ResultClicks, source.AmountSpent, source.ImagePath, source.CampaignImagePath,
-            source.CampaignTypeImagePath, source.Description, source.ClickRate, source.Voucher1Heading, source.Voucher1Description, source.Voucher1Value, source.Voucher2Heading, source.Voucher2Description,
-             source.Voucher2Value, source.Voucher1ImagePath, source.VoucherImagePath, source.CreatedBy, source.VideoUrl, source.BuuyItLine1, source.BuyItLine2, source.BuyItLine3, source.BuyItButtonLabel, source.BuyItImageUrl,source.AdViews,source.CompanyId,
-            source.CouponSwapValue, source.CouponActualValue,source.CouponQuantity,source.CouponTakenCount, source.priority, source.CouponDiscountValue,
-             source.couponImage2, source.CouponImage3, source.CouponImage4, source.CouponExpiryLabel, source.couponSmdComission, null, source.DeliveryDays + "", source.IsUseFilter + "", source.LogoUrl, source.VoucherAdditionalInfo, source.CouponId,source.IsShowVoucherSetting, source.VideoLink2, source.CouponType + "", source.IsSavedCoupon, source.ChannelType + "");
+        var coupon = new Coupon(source.FinePrintLine1, source.FinePrintLine2, source.FinePrintLine3, source.FinePrintLine4, source.FinePrintLine5,
+            source.GeographyColumn, source.HighlightLine1, source.HighlightLine2, source.HighlightLine3, source.HighlightLine4,
+            source.HighlightLine5, source.HowToRedeemLine1, source.HowToRedeemLine2, source.HowToRedeemLine3, source.HowToRedeemLine4,
+            source.HowToRedeemLine5, source.LanguageId, source.LocationBranchId, source.LocationCity, source.LocationLAT,
+            source.LocationLine1, source.LocationLine2, source.LocationLON, source.LocationPhone, source.LocationState,
+            source.LocationTitle, source.LocationZipCode, source.LogoUrl, source.ModifiedBy, source.ModifiedDateTime, source.Price, source.RejectedBy,
+            source.Rejecteddatetime, source.RejectedReason, source.Savings, source.SearchKeywords, source.Status, source.SwapCost, source.UserId);
         
-        _.each(source.AdCampaignTargetCriterias, function (item) {
-          
-            campaign.AdCampaignTargetCriterias.push(AdCampaignTargetCriteriasModel.Create(item));
-        });
-        _.each(source.AdCampaignTargetLocations, function (item) {
-            
-            campaign.AdCampaignTargetLocations.push(AdCampaignTargetLocation.Create(item));
-        });
-        _.each(source.CouponCategories, function (item) {
-
-            campaign.CouponCategories.push(selectedCouponCategory.Create(item));
-        });
-
-        _.each(source.CouponCodes, function (item) {
-
-            campaign.CouponCodes.push(AdCampaignCouponCodes.Create(item));
-        });
-        return campaign;
-    };
-    // Factory Method
-    AdCampaignTargetCriteriasModel.Create = function (source) {
-        
-        return new AdCampaignTargetCriteriasModel(source.CriteriaId, source.CampaignId, source.Type, source.PQId, source.PQAnswerId, source.SQId, source.SQAnswer,
-            source.IncludeorExclude, source.questionString, source.answerString, source.surveyQuestLeftImageSrc, source.surveyQuestRightImageSrc, source.LanguageId,
-            source.Language, source.IndustryId, source.Industry, source.EducationId, source.Education, source.QuizCampaignId, source.QuizAnswerId, source.criteriaPrice);
-    };
-    AdCampaignTargetLocation.Create = function (source) {
        
-        return new AdCampaignTargetLocation(source.Id, source.CampaignId, source.CountryId, source.CityId, source.Radius, source.Country, source.City, source.IncludeorExclude, source.Latitude, source.Longitude);
+        return coupon;
     };
-    // Factory Method
-    selectedCouponCategory.Create = function (source) {
-
-        return new selectedCouponCategory(source.CategoryId, source.Name);
-    };
-    AdCampaignCouponCodes.Create = function (source) {
-
-        return new AdCampaignCouponCodes(source.CodeId, source.CampaignId, source.Code, source.IsTaken, source.UserId, source.UserName, source.TakenDateTime);
-    };
+ 
     return {
-        Campaign: Campaign,
-        AdCampaignTargetCriteriasModel: AdCampaignTargetCriteriasModel,
-        AdCampaignTargetLocation: AdCampaignTargetLocation,
-        selectedCouponCategory: selectedCouponCategory,
-        AdCampaignCouponCodes: AdCampaignCouponCodes
+        Coupon: Coupon
     };
 });
