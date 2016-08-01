@@ -4417,14 +4417,20 @@ input[type="radio"] {
     }
 
 .label.label-circle-question {
-border-radius: 50%;
+/*border-radius: 50%;
     padding:4px 2px 2px 2px !important;
     background-color: #68b359;
     margin-left: 3px;
     cursor: pointer;
     color: white !important;
+    font-weight: bolder;*/
+/*border-radius: 50%; */
+    padding: 1px !important;
+    /* background-color: #68b359; */
+    /* margin-left: 3px; */
+    cursor: pointer;
+    color: white !important;
     font-weight: bolder;
-
 }
 
 .table-products .smallname {
@@ -4472,12 +4478,18 @@ border-radius: 50%;
 
 .tooltip-float-width {
     float: right;
-    width: 35px;
+    width: 25px;
     margin-top: 5px;
+    background-color: #68b359!important;
+    text-align: center;
+    height: 25px;
+    border-radius: 25px;
 }
 
 .tooltip-float {
-    float: right;
+      width: 25px;
+    padding: 0px;
+    padding-top: 5px;
 }
 
 /* styles for section detail popup */
@@ -5471,4 +5483,36 @@ color:red !important;
     left: 97px;
     right: 0;
     margin-right: auto;
+}
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+    opacity: 1 !important;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #68b359;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    right: 0px;
+    top: 27px;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+.fa-chevron-up {
+    visibility: hidden;
+}
+.tooltip:hover .fa-chevron-up {
+    visibility: visible;
 }
