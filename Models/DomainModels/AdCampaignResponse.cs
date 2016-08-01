@@ -21,6 +21,13 @@ namespace SMD.Models.DomainModels
         public int? GameLevel { get; set; }
         public int? GameId { get; set; }
         public int? UserQuestionResponse { get; set; }
+
+        public string UserLocationLat { get; set; }
+        public string UserLocationLong { get; set; }
+        public string UserLocationCity { get; set; }
+        public string UserLocationCountry { get; set; }
+        public string UserLocationAddress { get; set; }
+
         public virtual AdCampaign AdCampaign { get; set; }
         public virtual User User { get; set; }
         public virtual Company Company { get; set; }
@@ -41,6 +48,12 @@ namespace SMD.Models.DomainModels
             target.GameScore = GameScore;
             target.GameLevel = GameLevel;
             target.GameId = GameId;
+            target.UserQuestionResponse = UserQuestionResponse;
+            target.UserLocationAddress = UserLocationAddress;
+            target.UserLocationCity = UserLocationCity;
+            target.UserLocationCountry = UserLocationCountry;
+            target.UserLocationLat = UserLocationLat;
+            target.UserLocationLong = UserLocationLong;
 
         }
 

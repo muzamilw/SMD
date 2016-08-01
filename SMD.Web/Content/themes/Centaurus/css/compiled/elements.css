@@ -83,6 +83,31 @@ h1 small, h2 small, h3 small, h1 .small, h2 .small, h3 .small {
     outline: none;
 }
 
+.btn-gray {
+    background-color: #95a5a6;
+    border-color: #7f8c8d;
+    color: #fff;
+    height:60px;
+    font-size:1.3em;
+    width:130px;
+    white-space:normal;
+    margin-right:15px;
+}
+
+.btn-selected {
+    background-color: #2ecc71;
+    border-color: #27ae60;
+     height:60px;
+      color: #fff;
+    height:60px;
+    font-size:1.3em;
+    width:130px;
+    white-space:normal;
+}
+
+
+
+
 .btn-default, .wizard-cancel, .wizard-back {
     background-color: #95a5a6;
     border-color: #7f8c8d;

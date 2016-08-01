@@ -27,6 +27,11 @@ namespace DomainModelProject
         public Nullable<int> GameLevel { get; set; }
         public Nullable<int> GameId { get; set; }
         public Nullable<int> UserQuestionResponse { get; set; }
+        public string UserLocationLat { get; set; }
+        public string UserLocationLong { get; set; }
+        public string UserLocationCity { get; set; }
+        public string UserLocationCountry { get; set; }
+        public string UserLocationAddress { get; set; }
     
         public virtual AdCampaign AdCampaign { get; set; }
         public virtual AdCampaignResponse AdCampaignResponse1 { get; set; }

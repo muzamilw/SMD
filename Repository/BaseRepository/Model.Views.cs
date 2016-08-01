@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySetsDA3EBAE34A52D4BEED2BE5111F59D3EE5C2B06B0D28E73824A079D377CB07AF5))]
+[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySetsD844E78B50C883E59297576C1E56BAE00673480908F3544AABBC411052435522))]
 
 namespace Edm_EntityMappingGeneratedViews
 {
@@ -17,18 +17,18 @@ namespace Edm_EntityMappingGeneratedViews
     /// <Summary>
     /// The type contains views for EntitySets and AssociationSets that were generated at design time.
     /// </Summary>
-    public sealed class ViewsForBaseEntitySetsDA3EBAE34A52D4BEED2BE5111F59D3EE5C2B06B0D28E73824A079D377CB07AF5 : System.Data.Mapping.EntityViewContainer
+    public sealed class ViewsForBaseEntitySetsD844E78B50C883E59297576C1E56BAE00673480908F3544AABBC411052435522 : System.Data.Mapping.EntityViewContainer
     {
         
         /// <Summary>
         /// The constructor stores the views for the extents and also the hash values generated based on the metadata and mapping closure and views.
         /// </Summary>
-        public ViewsForBaseEntitySetsDA3EBAE34A52D4BEED2BE5111F59D3EE5C2B06B0D28E73824A079D377CB07AF5()
+        public ViewsForBaseEntitySetsD844E78B50C883E59297576C1E56BAE00673480908F3544AABBC411052435522()
         {
             this.EdmEntityContainerName = "BaseDbContext";
             this.StoreEntityContainerName = "SMDModelStoreContainer";
-            this.HashOverMappingClosure = "1e77b1cb0b1ab61030d3daac520c40cd1fad5b21120a85d18f3ad96def234527";
-            this.HashOverAllExtentViews = "3f70727b307c606f3b0ee07a0d72d3e1914006b6c73b1dbb123e95eb68ca4c43";
+            this.HashOverMappingClosure = "b68a384205477f865bde70d689ceeba5e8eaa0be68d6ceeb8104ff4c61c94106";
+            this.HashOverAllExtentViews = "747b99087616bcf6912c40d6d9826ae79312f7849f966ab1da3118daa9d2c5b9";
             this.ViewCount = 98;
         }
         
@@ -1112,27 +1112,34 @@ namespace Edm_EntityMappingGeneratedViews
         /// </Summary>
         private System.Collections.Generic.KeyValuePair<string, string> GetView27()
         {
-            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.AdCampaignResponse", @"
-    SELECT VALUE -- Constructing AdCampaignResponse
-        [SMDModel.Store.AdCampaignResponse](T1.AdCampaignResponse_ResponseID, T1.AdCampaignResponse_CampaignID, T1.AdCampaignResponse_CreatedDateTime, T1.AdCampaignResponse_UserID, T1.AdCampaignResponse_EndUserDollarAmount, T1.AdCampaignResponse_SkipCount, T1.AdCampaignResponse_UserSelection, T1.AdCampaignResponse_CompanyId, T1.AdCampaignResponse_GameTime, T1.AdCampaignResponse_GameScore, T1.AdCampaignResponse_GameLevel, T1.AdCampaignResponse_GameId, T1.AdCampaignResponse_UserQuestionResponse)
-    FROM (
-        SELECT 
-            T.ResponseId AS AdCampaignResponse_ResponseID, 
-            T.CampaignId AS AdCampaignResponse_CampaignID, 
-            T.CreatedDateTime AS AdCampaignResponse_CreatedDateTime, 
-            T.UserId AS AdCampaignResponse_UserID, 
-            T.EndUserDollarAmount AS AdCampaignResponse_EndUserDollarAmount, 
-            T.SkipCount AS AdCampaignResponse_SkipCount, 
-            T.UserSelection AS AdCampaignResponse_UserSelection, 
-            T.CompanyId AS AdCampaignResponse_CompanyId, 
-            T.GameTime AS AdCampaignResponse_GameTime, 
-            T.GameScore AS AdCampaignResponse_GameScore, 
-            T.GameLevel AS AdCampaignResponse_GameLevel, 
-            T.GameId AS AdCampaignResponse_GameId, 
-            T.UserQuestionResponse AS AdCampaignResponse_UserQuestionResponse, 
-            True AS _from0
-        FROM BaseDbContext.AdCampaignResponses AS T
-    ) AS T1");
+            System.Text.StringBuilder viewString = new System.Text.StringBuilder(2075);
+            viewString.Append("\r\n    SELECT VALUE -- Constructing AdCampaignResponse\r\n        [SMDModel.Store.A");
+            viewString.Append("dCampaignResponse](T1.AdCampaignResponse_ResponseID, T1.AdCampaignResponse_Campa");
+            viewString.Append("ignID, T1.AdCampaignResponse_CreatedDateTime, T1.AdCampaignResponse_UserID, T1.A");
+            viewString.Append("dCampaignResponse_EndUserDollarAmount, T1.AdCampaignResponse_SkipCount, T1.AdCam");
+            viewString.Append("paignResponse_UserSelection, T1.AdCampaignResponse_CompanyId, T1.AdCampaignRespo");
+            viewString.Append("nse_GameTime, T1.AdCampaignResponse_GameScore, T1.AdCampaignResponse_GameLevel, ");
+            viewString.Append("T1.AdCampaignResponse_GameId, T1.AdCampaignResponse_UserQuestionResponse, T1.AdC");
+            viewString.Append("ampaignResponse_UserLocationLat, T1.AdCampaignResponse_UserLocationLong, T1.AdCa");
+            viewString.Append("mpaignResponse_UserLocationCity, T1.AdCampaignResponse_UserLocationCountry, T1.A");
+            viewString.Append("dCampaignResponse_UserLocationAddress)\r\n    FROM (\r\n        SELECT \r\n           ");
+            viewString.Append(" T.ResponseId AS AdCampaignResponse_ResponseID, \r\n            T.CampaignId AS Ad");
+            viewString.Append("CampaignResponse_CampaignID, \r\n            T.CreatedDateTime AS AdCampaignRespon");
+            viewString.Append("se_CreatedDateTime, \r\n            T.UserId AS AdCampaignResponse_UserID, \r\n     ");
+            viewString.Append("       T.EndUserDollarAmount AS AdCampaignResponse_EndUserDollarAmount, \r\n      ");
+            viewString.Append("      T.SkipCount AS AdCampaignResponse_SkipCount, \r\n            T.UserSelection");
+            viewString.Append(" AS AdCampaignResponse_UserSelection, \r\n            T.CompanyId AS AdCampaignRes");
+            viewString.Append("ponse_CompanyId, \r\n            T.GameTime AS AdCampaignResponse_GameTime, \r\n    ");
+            viewString.Append("        T.GameScore AS AdCampaignResponse_GameScore, \r\n            T.GameLevel A");
+            viewString.Append("S AdCampaignResponse_GameLevel, \r\n            T.GameId AS AdCampaignResponse_Gam");
+            viewString.Append("eId, \r\n            T.UserQuestionResponse AS AdCampaignResponse_UserQuestionResp");
+            viewString.Append("onse, \r\n            T.UserLocationLat AS AdCampaignResponse_UserLocationLat, \r\n ");
+            viewString.Append("           T.UserLocationLong AS AdCampaignResponse_UserLocationLong, \r\n        ");
+            viewString.Append("    T.UserLocationCity AS AdCampaignResponse_UserLocationCity, \r\n            T.U");
+            viewString.Append("serLocationCountry AS AdCampaignResponse_UserLocationCountry, \r\n            T.Us");
+            viewString.Append("erLocationAddress AS AdCampaignResponse_UserLocationAddress, \r\n            True ");
+            viewString.Append("AS _from0\r\n        FROM BaseDbContext.AdCampaignResponses AS T\r\n    ) AS T1");
+            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.AdCampaignResponse", viewString.ToString());
         }
         
         /// <Summary>
@@ -2191,25 +2198,35 @@ namespace Edm_EntityMappingGeneratedViews
         /// </Summary>
         private System.Collections.Generic.KeyValuePair<string, string> GetView66()
         {
-            return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.AdCampaignResponses", "\r\n    SELECT VALUE -- Constructing AdCampaignResponses\r\n        [DomainModels.AdC" +
-                    "ampaignResponse](T1.AdCampaignResponse_ResponseId, T1.AdCampaignResponse_Campaig" +
-                    "nId, T1.AdCampaignResponse_CreatedDateTime, T1.AdCampaignResponse_UserId, T1.AdC" +
-                    "ampaignResponse_EndUserDollarAmount, T1.AdCampaignResponse_SkipCount, T1.AdCampa" +
-                    "ignResponse_UserSelection, T1.AdCampaignResponse_CompanyId, T1.AdCampaignRespons" +
-                    "e_GameTime, T1.AdCampaignResponse_GameScore, T1.AdCampaignResponse_GameLevel, T1" +
-                    ".AdCampaignResponse_GameId, T1.AdCampaignResponse_UserQuestionResponse)\r\n    FRO" +
-                    "M (\r\n        SELECT \r\n            T.ResponseID AS AdCampaignResponse_ResponseId," +
-                    " \r\n            T.CampaignID AS AdCampaignResponse_CampaignId, \r\n            T.Cr" +
-                    "eatedDateTime AS AdCampaignResponse_CreatedDateTime, \r\n            T.UserID AS A" +
-                    "dCampaignResponse_UserId, \r\n            T.EndUserDollarAmount AS AdCampaignRespo" +
-                    "nse_EndUserDollarAmount, \r\n            T.SkipCount AS AdCampaignResponse_SkipCou" +
-                    "nt, \r\n            T.UserSelection AS AdCampaignResponse_UserSelection, \r\n       " +
-                    "     T.CompanyId AS AdCampaignResponse_CompanyId, \r\n            T.GameTime AS Ad" +
-                    "CampaignResponse_GameTime, \r\n            T.GameScore AS AdCampaignResponse_GameS" +
-                    "core, \r\n            T.GameLevel AS AdCampaignResponse_GameLevel, \r\n            T" +
-                    ".GameId AS AdCampaignResponse_GameId, \r\n            T.UserQuestionResponse AS Ad" +
-                    "CampaignResponse_UserQuestionResponse, \r\n            True AS _from0\r\n        FRO" +
-                    "M SMDModelStoreContainer.AdCampaignResponse AS T\r\n    ) AS T1");
+            System.Text.StringBuilder viewString = new System.Text.StringBuilder(2082);
+            viewString.Append("\r\n    SELECT VALUE -- Constructing AdCampaignResponses\r\n        [DomainModels.Ad");
+            viewString.Append("CampaignResponse](T1.AdCampaignResponse_ResponseId, T1.AdCampaignResponse_Campai");
+            viewString.Append("gnId, T1.AdCampaignResponse_CreatedDateTime, T1.AdCampaignResponse_UserId, T1.Ad");
+            viewString.Append("CampaignResponse_EndUserDollarAmount, T1.AdCampaignResponse_SkipCount, T1.AdCamp");
+            viewString.Append("aignResponse_UserSelection, T1.AdCampaignResponse_CompanyId, T1.AdCampaignRespon");
+            viewString.Append("se_GameTime, T1.AdCampaignResponse_GameScore, T1.AdCampaignResponse_GameLevel, T");
+            viewString.Append("1.AdCampaignResponse_GameId, T1.AdCampaignResponse_UserQuestionResponse, T1.AdCa");
+            viewString.Append("mpaignResponse_UserLocationLat, T1.AdCampaignResponse_UserLocationLong, T1.AdCam");
+            viewString.Append("paignResponse_UserLocationCity, T1.AdCampaignResponse_UserLocationCountry, T1.Ad");
+            viewString.Append("CampaignResponse_UserLocationAddress)\r\n    FROM (\r\n        SELECT \r\n            ");
+            viewString.Append("T.ResponseID AS AdCampaignResponse_ResponseId, \r\n            T.CampaignID AS AdC");
+            viewString.Append("ampaignResponse_CampaignId, \r\n            T.CreatedDateTime AS AdCampaignRespons");
+            viewString.Append("e_CreatedDateTime, \r\n            T.UserID AS AdCampaignResponse_UserId, \r\n      ");
+            viewString.Append("      T.EndUserDollarAmount AS AdCampaignResponse_EndUserDollarAmount, \r\n       ");
+            viewString.Append("     T.SkipCount AS AdCampaignResponse_SkipCount, \r\n            T.UserSelection ");
+            viewString.Append("AS AdCampaignResponse_UserSelection, \r\n            T.CompanyId AS AdCampaignResp");
+            viewString.Append("onse_CompanyId, \r\n            T.GameTime AS AdCampaignResponse_GameTime, \r\n     ");
+            viewString.Append("       T.GameScore AS AdCampaignResponse_GameScore, \r\n            T.GameLevel AS");
+            viewString.Append(" AdCampaignResponse_GameLevel, \r\n            T.GameId AS AdCampaignResponse_Game");
+            viewString.Append("Id, \r\n            T.UserQuestionResponse AS AdCampaignResponse_UserQuestionRespo");
+            viewString.Append("nse, \r\n            T.UserLocationLat AS AdCampaignResponse_UserLocationLat, \r\n  ");
+            viewString.Append("          T.UserLocationLong AS AdCampaignResponse_UserLocationLong, \r\n         ");
+            viewString.Append("   T.UserLocationCity AS AdCampaignResponse_UserLocationCity, \r\n            T.Us");
+            viewString.Append("erLocationCountry AS AdCampaignResponse_UserLocationCountry, \r\n            T.Use");
+            viewString.Append("rLocationAddress AS AdCampaignResponse_UserLocationAddress, \r\n            True A");
+            viewString.Append("S _from0\r\n        FROM SMDModelStoreContainer.AdCampaignResponse AS T\r\n    ) AS ");
+            viewString.Append("T1");
+            return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.AdCampaignResponses", viewString.ToString());
         }
         
         /// <Summary>

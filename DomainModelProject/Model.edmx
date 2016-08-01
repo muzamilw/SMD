@@ -132,6 +132,11 @@
           <Property Name="GameLevel" Type="int" />
           <Property Name="GameId" Type="int" />
           <Property Name="UserQuestionResponse" Type="int" />
+          <Property Name="UserLocationLat" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserLocationLong" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserLocationCity" Type="nvarchar" MaxLength="100" />
+          <Property Name="UserLocationCountry" Type="nvarchar" MaxLength="100" />
+          <Property Name="UserLocationAddress" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="AdCampaignTargetCriteria">
           <Key>
@@ -2410,6 +2415,11 @@
           <NavigationProperty Name="AdCampaignResponse2" Relationship="Self.FK_AdCampaignResponse_AdCampaignResponse" FromRole="AdCampaignResponse1" ToRole="AdCampaignResponse" />
           <NavigationProperty Name="AspNetUser" Relationship="Self.FK_AdCampaignResponse_AspNetUsers" FromRole="AdCampaignResponse" ToRole="AspNetUsers" />
           <NavigationProperty Name="Company" Relationship="Self.FK_AdCampaignResponse_Company" FromRole="AdCampaignResponse" ToRole="Company" />
+          <Property Name="UserLocationLat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserLocationLong" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserLocationCity" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="UserLocationCountry" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="UserLocationAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="AdCampaignTargetCriteria">
           <Key>
@@ -4738,6 +4748,11 @@
           <EntitySetMapping Name="AdCampaignResponses">
             <EntityTypeMapping TypeName="SMDDevModel.AdCampaignResponse">
               <MappingFragment StoreEntitySet="AdCampaignResponse">
+                <ScalarProperty Name="UserLocationAddress" ColumnName="UserLocationAddress" />
+                <ScalarProperty Name="UserLocationCountry" ColumnName="UserLocationCountry" />
+                <ScalarProperty Name="UserLocationCity" ColumnName="UserLocationCity" />
+                <ScalarProperty Name="UserLocationLong" ColumnName="UserLocationLong" />
+                <ScalarProperty Name="UserLocationLat" ColumnName="UserLocationLat" />
                 <ScalarProperty Name="ResponseID" ColumnName="ResponseID" />
                 <ScalarProperty Name="CampaignID" ColumnName="CampaignID" />
                 <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />

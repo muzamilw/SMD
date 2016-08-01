@@ -132,6 +132,11 @@
           <Property Name="GameLevel" Type="int" />
           <Property Name="GameId" Type="int" />
           <Property Name="UserQuestionResponse" Type="int" />
+          <Property Name="UserLocationLat" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserLocationLong" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserLocationCity" Type="nvarchar" MaxLength="100" />
+          <Property Name="UserLocationCountry" Type="nvarchar" MaxLength="100" />
+          <Property Name="UserLocationAddress" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="AdCampaignTargetCriteria">
           <Key>
@@ -4044,6 +4049,11 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <NavigationProperty Name="User" Relationship="DomainModels.FK_AdCampaignResponse_AspNetUsers" FromRole="AdCampaignResponse" ToRole="User" />
           <NavigationProperty Name="Company" Relationship="DomainModels.FK_AdCampaignResponse_Company" FromRole="AdCampaignResponse" ToRole="Company" />
           <NavigationProperty Name="AdCampaign" Relationship="DomainModels.FK_AdCampaignResponse_AdCampaign" FromRole="AdCampaignResponse" ToRole="AdCampaign" />
+          <Property Name="UserLocationLat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserLocationLong" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserLocationCity" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="UserLocationCountry" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="UserLocationAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_AdCampaignResponse_AdCampaignResponse">
           <End Type="DomainModels.AdCampaignResponse" Role="AdCampaignResponse" Multiplicity="1" />
@@ -5498,6 +5508,11 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <EntitySetMapping Name="AdCampaignResponses">
             <EntityTypeMapping TypeName="DomainModels.AdCampaignResponse">
               <MappingFragment StoreEntitySet="AdCampaignResponse">
+                <ScalarProperty Name="UserLocationAddress" ColumnName="UserLocationAddress" />
+                <ScalarProperty Name="UserLocationCountry" ColumnName="UserLocationCountry" />
+                <ScalarProperty Name="UserLocationCity" ColumnName="UserLocationCity" />
+                <ScalarProperty Name="UserLocationLong" ColumnName="UserLocationLong" />
+                <ScalarProperty Name="UserLocationLat" ColumnName="UserLocationLat" />
                 <ScalarProperty Name="UserQuestionResponse" ColumnName="UserQuestionResponse" />
                 <ScalarProperty Name="GameId" ColumnName="GameId" />
                 <ScalarProperty Name="GameLevel" ColumnName="GameLevel" />
