@@ -111,10 +111,10 @@ else
                             <div class="adsubHeading" data-bind="visible: $root.previewScreenNumber() == 2">
                                 Customers can redeem in store or in person
                             </div>
-                            <div class="adsubHeading" data-bind="visible: $root.previewScreenNumber() == 4">
+                            <div class="adsubHeading" data-bind="visible: $root.previewScreenNumber() == 3">
                                 Stipulate your terms
                             </div>
-                            <div class="adsubHeading" data-bind="visible: $root.previewScreenNumber() == 3">
+                            <div class="adsubHeading" data-bind="visible: $root.previewScreenNumber() == 4">
                                Its all about image
                             </div>
                             <div class="col-lg-11" style="margin:auto;float:none !important;" data-bind="visible: $root.previewScreenNumber() == 1">
@@ -365,8 +365,145 @@ else
                                 <div class="clearfix">
                                     
                                 </div><br />
-                                
-                               
+                                <div class="row">
+                                    <div class="form-group" style="margin-top:10px;">
+                                        <div class="col-lg-2">
+                                            <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Banner Images</label>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <div class="col-lg-4">
+                                                <div style="margin-top:5px;    text-align: center;cursor:pointer;">
+                                                    <img style="height:90px;" data-bind="visible: couponImage1() == '' || couponImage1() == null"  src="/Content/Images/placeholder.png" onclick="showCouponDialog4();" />
+                                                    <img style="height:90px;" data-bind="visible: couponImage1() != '' ,attr: { src: couponImage1 }" onclick="showCouponDialog4();" />
+                                                    <div style="    padding-top: 10px;    text-align: center;    font-size: 12px;    color: gray;">
+                                                        (200 x 200 pixels)
+                                                    </div>
+                                                </div>
+                                                <br />
+                                                <div class="fileUpload btn btn-primary" style="display:none;">
+                                                    <span>Upload </span>
+                                                    <input type="file" class="upload" id="campaignType_image_file1" data-bind="files: { onLoaded: $root.couponImage1Callback, fileFilter: 'image.*'}" />
+                                                </div>
+                                            </div>
+                                          
+                                            <div class="col-lg-4">
+                                                <div style="margin-top:5px;    text-align: center;cursor:pointer;">
+                                                    <img style="height:90px;" data-bind="visible: CouponImage2() == '' || CouponImage2() == null" src="/Content/Images/placeholder.png" onclick="showCouponDialog2();" />
+                                                    <img style="height:90px;" data-bind="visible: CouponImage2() != '' && CouponImage2() != null ,attr: { src: CouponImage2 }" onclick="showCouponDialog2();" />
+                                                    <div style="    padding-top: 10px;    text-align: center;    font-size: 12px;    color: gray;">
+                                                        (200 x 200 pixels)
+                                                    </div>
+                                                </div>
+                                                <br />
+                                                <div class="fileUpload btn btn-primary" style="display:none;">
+                                                    <span>Upload </span>
+                                                    <input type="file" class="upload" id="campaignType_coupon_file2" data-bind="files: { onLoaded: $root.CouponImage2Callback, fileFilter: 'image.*'}" />
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div style="margin-top:5px;    text-align: center;cursor:pointer;">
+                                                    <img style="height:90px;" data-bind="visible: CouponImage3() == '' || CouponImage3() == null" src="/Content/Images/placeholder.png" onclick="showCouponDialog3();" />
+                                                    <img style="height:90px;" data-bind="visible: CouponImage3() != '' && CouponImage3() != null,attr: { src: CouponImage3 }" onclick="showCouponDialog3();" />
+                                                    <div style="    padding-top: 10px;    text-align: center;    font-size: 12px;    color: gray;">
+                                                        (200 x 200 pixels)
+                                                    </div>
+                                                </div>
+                                                <br />
+                                                <div class="fileUpload btn btn-primary" style="display:none;">
+                                                    <span>Upload </span>
+                                                    <input type="file" class="upload" id="campaignType_coupon_file3" data-bind="files: { onLoaded: $root.CouponImage3Callback, fileFilter: 'image.*'}" />
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="form-group" style="margin-top:10px;">
+                                        <div class="col-lg-2">
+                                            <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Upload Logo</label>
+                                        </div>
+                                        <div class="col-lg-8">
+                                              <div class="col-lg-4">
+                                                <div style="margin-top:5px;    text-align: center;cursor:pointer;">
+                                                    <img style="height:90px;" data-bind="visible: LogoUrl() == '' || LogoUrl() == null" src="/Content/Images/placeholder.png" onclick="showCouponDialog1();" />
+                                                    <img style="height:90px;" data-bind="visible: LogoUrl() != '' &&  LogoUrl() != null ,attr: { src: LogoUrl }" onclick="showCouponDialog1();" />
+                                                    <div style="    padding-top: 10px;    text-align: center;    font-size: 12px;    color: gray;">
+                                                        (200 x 200 pixels)
+                                                    </div>
+                                                </div>
+                                                <br />
+                                                <div class="fileUpload btn btn-primary" style="display:none;">
+                                                    <span>Upload </span>
+                                                    <input type="file" class="upload" id="campaignType_coupon_file1" data-bind="files: { onLoaded: $root.campaignImageCallback, fileFilter: 'image.*'}" />
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+
+                                    </div>
+                                </div>
+                               <div class="row">
+                                   <div class="form-group">
+                                       <div class="col-lg-2">
+                                           <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone">Branch Address </label>
+                                       </div>
+                                       <div class="col-lg-7">
+                                           <textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: LocationLine1" maxlength="36"></textarea>
+                                       </div>
+                                   </div>
+                                   <div class="form-group">
+                                       <div class="col-lg-2">
+                                           <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone">optional </label>
+                                       </div>
+                                       <div class="col-lg-7">
+                                           <textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: LocationLine2" maxlength="36"></textarea>
+                                       </div>
+                                   </div>
+                                   <div class="form-group">
+                                       <div class="col-lg-2">
+                                           <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone">City </label>
+                                       </div>
+                                       <div class="col-lg-7">
+                                           <textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: LocationCity" maxlength="36"></textarea>
+                                       </div>
+                                   </div>
+                                   <div class="form-group">
+                                       <div class="col-lg-2">
+                                           <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone">State </label>
+                                       </div>
+                                       <div class="col-lg-7">
+                                           <textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: LocationState" maxlength="36"></textarea>
+                                       </div>
+                                   </div>
+                                   <div class="form-group">
+                                       <div class="col-lg-2">
+                                           <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone">Zip </label>
+                                       </div>
+                                       <div class="col-lg-7">
+                                           <textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: LocationZipCode" maxlength="36"></textarea>
+                                       </div>
+                                   </div>
+                                   <div class="form-group">
+                                       <div class="col-lg-2">
+                                           <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone">Geo location</label>
+                                       </div>
+                                       <div class="col-lg-7">
+                                           <textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: LocationLAT" ></textarea>
+                                       </div>
+                                   </div>
+                                   <div class="form-group">
+                                       <div class="col-lg-2">
+                                           <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone">Phone no </label>
+                                       </div>
+                                       <div class="col-lg-7">
+                                           <textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: LocationPhone" ></textarea>
+                                       </div>
+                                   </div>
+                               </div>
 
                             </div>
                        
@@ -423,99 +560,11 @@ else
                             <button class="crossbtn pull-right" id="btnCancel" data-bind="click: $root.closeNewCampaignDialog">X</button>
                             <div class="clearfix"></div>
                         </div>
-                        <div class="col-xs-12" style="line-height: 3;">
-
-
-                            <span class=" pull-left">Minimum PPCV :</span>
-
-                            <span class="pull-right" data-bind="text: '£' + ($root.pricePerclick().toFixed(2) * $root.reachedAudience() )"></span>
-
-                            <div class="clearfix"> </div>
-                            <span class=" pull-left" style="color:red;">Matches profiles:</span>
-                            <span class="pull-right" style="color:red;" data-bind="text:$root.reachedAudience()">0</span>
-                            <div class="clearfix">
-
-                            </div>
-                        </div>
-                        <div class="col-xs-12" style="text-align: left;margin-bottom: 20px; padding-right:0;margin-top:20px;" data-bind="with: $root.couponModel">
-
-
-                            <div>Bid more to increaseviewing priority.</div>
-                            <div>50% of PPCV is rewarded to viewer.</div>
-
-                        </div>
+                      
                       
                         <div class="clearfix">
                         </div>
-                        <div class="col-lg-11" data-bind="visible: !$root.isNewCampaign()" style="      background: white;
-    padding: 20px;
-    padding-top: 10px;
-    /* vertical-align: -webkit-baseline-middle; */
-    position: absolute;
-    bottom: 15px;
-    margin-left: -5px;">
-                            <span style="    font-weight: bold;
-    line-height: 3;">Campaign Summary</span><br />
-                            <span class=" pull-left" style="color:red;">Matches profiles:</span>
-                            <span class="pull-right" style="color:red;" data-bind="text:$root.reachedAudience()">0</span>
-                            <div class="clearfix">
-                            </div>
-                            <div style="    margin-top: 20px;
-    background: #f3f3f3;
-    padding: 5px;
-    font-size: 12px">
-                                <span>Period</span><br />
-                                <span>21st May 2017 to <bold style="color:red;">CURRENT</bold></span>
-                                <br />
-                                <br />
-                                <span>Quiz answer 1 : 3000 times</span><br />
-                                <span>Quiz answer 2 : 3000 times</span><br />
-                                <span>Quiz answer 3 : 3000 times</span>
-                                <br />
-                                <br />
-                                <span>26 coupons were swapped after quiz question card</span>
-                                <br /><br />
-                                <span>PPCV to date : £1234.00 </span>
-                                <br />
-                                <br />
-                                <button class="btn  btn-success gtild-color pull-right" id="btnChart">Chart</button>
-                                <div class="clearfix"></div>
-                            </div>
-                        </div>
-                        <div class="col-lg-11" data-bind="visible: $root.isNewCampaign()" style="        position: absolute;
-    bottom: 15px;
-    margin-left: -10px;">
-                            <div style="    background: rgb(69,68,142);
-    color: white;
-    padding: 13px;
-    text-align: center;">
-                                Our Digital Gurus are ready to help you
-                            </div>
-                            <div style="    background: rgb(107,106,254);
-    color: white;
-    font-size: 12px;
-    line-height: 2;">
-                                <div class="pull-left">
-                                    <img src="~/Content/Images/AD_Campaign_cartoon.png" style="    width: 64px;
-    margin-top: -3px;
-    margin-left: 20px;" />
-                                </div>
-                                <div class="pull-left" style="margin-left: 20px;">
-                                    <span>Make video Ads</span><br /><br />
-                                    <span>Create and Manage your </span><br />
-                                    <span>Ad Campaigns and Surveys</span>
-                                </div>
-                                <div class="clearfix">
-
-                                </div>
-                            </div>
-                            <div style="    background: rgb(69,68,142);
-    color: white;
-    padding: 13px;
-    text-align: center;">
-                                +44 800 1234 567
-                            </div>
-                        </div>
+                       
 
                     </div>
                     <div class="clearfix">
@@ -527,523 +576,9 @@ else
          
         </div>
     </div>
-    @*@Html.Partial("~/Areas/Ads/Views/Ads/_addEditCouponCategories.cshtml")
-    @Html.Partial("~/Areas/Ads/Views/Ads/_addEditCouponCodes.cshtml")*@
-    <!-- ko if: $root.couponModel() != null -->
-    @*popup codes*@
-    <!-- /ko -->
+
 </div>
-@*reward your audience screen*@
-<div class="col-lg-12" data-bind="visible: $root.isWelcomeScreenVisible()" style="display: none">
-    <div class="main-box no-header clearfix">
-        <div class="col-lg-12 form-horizontal" style="padding: 20px;">
-            <div class="row">
-                <p style="font-size:23px;text-indent:26px;">Up to 50% of your spend goes to your target audience</p>
-            </div>
-            <div class="row" style="margin-top:15px;">
-                <span style="font-size: 12px;">Select an Ad Type below</span>
-            </div>
-            <div class="row" style="margin-top:15px;">
-                <div class="col-lg-4">
-                    <button class="btn  btn-success btnAdsCampaign ButtonWidth" id="btnSubmitForApproval" data-bind="click:$root.openEditScreen.bind(4)">Game Banner Ad</button>
-                </div>
-                <div class="col-lg-4">
-                    <button class="btn  btn-success btnAdsCampaign ButtonWidth flyerButtonStyle" id="btnSubmitForApproval" data-bind="click:$root.openEditScreen.bind(2)">Flyers / Leaflet Ad</button>
-                </div>
-                <div class="col-lg-4">
-                    <button class="btn  btn-danger btnAdsCampaign ButtonWidth" id="btnSubmitForApproval" data-bind="click:$root.openEditScreen.bind(1)">YouTube Video Ad</button>
-                </div>
-            </div>
-            <div class="row" style="margin-top:15px;">
-                <div class="col-lg-6">
-                </div>
-                <div class="col-lg-4">
-                </div>
-                <div class="col-lg-2">
-                    <button class="btn btn-default FloatRight" id="btnCancel" data-bind="click: $root.BackToAds">Back to Ads</button>
-                </div>
-            </div>
-        </div>
 
-    </div>
-</div>
-<script id="answersTemplate" type="text/html">
-    <!--ko if:Type() != 3 && Type() != 4 && Type() != 5 -->
-    <tr>
-        <!--ko if:IncludeorExclude() == '0' -->
-        <td class="col-lg-2">
-            <p style="margin-top: 5px;margin-left: 12px;">
-                <span data-bind="text: '(Excluded) ' + questionString() + ' = ' + answerString()"></span><span style="color:red;" data-bind="text:' (' + criteriaPrice() + 'p)'"></span>
-            </p>
-            @*<!-- ko if:   Type()  == "6" -->
-                <p style="margin-top: 5px;margin-left: 12px;">
-                <span data-bind="text: '(Excluded) ' +  questionString() + ' = ' "></span>
-                <img data-bind="attr:{src: answerString()}" width="80" />
-                </p>
-                <!-- /ko -->*@
-        </td>
-        <!--/ko-->
-        <!--ko if:IncludeorExclude() == '1'-->
-        <td class="col-lg-2">
-            <p style="margin-top: 5px;margin-left: 12px;">
-                <span data-bind="text: '(Included) ' + questionString() + ' = ' + answerString() "></span><span style="color:red;" data-bind="text:' (' + criteriaPrice() + 'p)'"></span>
-            </p>
-            @*<!-- ko if:   Type()  == "6" -->
-                <p style="margin-top: 5px;margin-left: 12px;">
-                <span data-bind="text: '(Included) ' + questionString() + ' = ' "></span>
-                <img data-bind="attr:{src: answerString()}" width="80" />
-                </p>
-                <!-- /ko -->*@
-        </td>
-        <!--/ko-->
-
-        <td class="col-lg-1" style=" padding: 0px !important; text-align:right;">
-            <a class="table-link">
-                <span class="fa-stack">
-                    <i class="fa fa-square fa-stack-2x"></i>
-                    <i class="fa fa-pencil fa-stack-1x fa-inverse" data-bind="click:$root.onEditCriteria" data-toggle="modal" data-target=".bs-example-modal-lg"></i>
-                </span>
-            </a>
-        </td>
-        <td class="col-lg-1" style=" padding: 0px !important;">
-            <a class="table-link danger">
-                <span class="fa-stack">
-                    <i class="fa fa-square fa-stack-2x"></i>
-                    <i class="fa fa-trash-o fa-stack-1x fa-inverse" data-bind="click:$root.onDeleteCriteria"></i>
-                </span>
-            </a>
-        </td>
-    </tr>
-    <!--/ko-->
-</script>
-@*<script id="AdCampaignLocationTemplate" type="text/html">
-    <div class="count_city_newcnt">
-    <!--ko if:CityID() == 0 || CityID() == null-->
-    <span class="form-control lang_nr_box areaCity" data-bind="text:Country " style=" "></span>
-    <!--/ko-->
-    <!--ko if:CityID() != 0 && CityID() != null-->
-    <span class="form-control lang_nr_box areaCity" data-bind="text:City " style=" "></span>
-    <!--/ko-->
-    <!--ko if:Radius() != 0 && Radius() != null && Radius() != undefined-->
-    <!--ko if:IncludeorExclude() == '1'-->
-    <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'Included (' + Radius() +')' "></span>
-    <!--/ko-->
-    <!--ko if:IncludeorExclude() == '0' -->
-    <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'Excluded (' + Radius() +')' "></span>
-    <!--/ko-->
-    <!--/ko-->
-    <a id="" data-bind="click:$root.onRemoveLocation" title=" delete" class="lang_delSurvey"> <i class="fa fa-times "></i></a>
-    </div>
-    <div class="clear"></div>
-    </script>*@
-<script id="AdCampaignLanguageTemplate" type="text/html">
-    <div class="count_city_newcnt">
-        <!--ko if:Type() == 3 -->
-        <span class="form-control lang_nr_box areaCity" data-bind="text:Language() " style=" "></span>
-        <!--ko if:IncludeorExclude() == '1'-->
-        <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Included)' "></span>
-        <!--/ko-->
-        <!--ko if:IncludeorExclude() == '0' -->
-        <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Excluded)' "></span>
-        <!--/ko-->
-        <a id="" data-bind="click:$root.onRemoveLanguage" title=" delete" class="lang_delSurvey"> <i class="fa fa-times "></i></a>
-        <!--/ko-->
-    </div>
-    <div class="clear"></div>
-</script>
-<script id="AdCampaignIndustryTemplate" type="text/html">
-    <div class="count_city_newcnt">
-        <!--ko if:Type() == 4 -->
-        <span class="form-control lang_nr_box areaCity" data-bind="text:Industry() " style=" "></span>
-        <!--ko if:IncludeorExclude() == '1'-->
-        <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Included)' "></span>
-        <!--/ko-->
-        <!--ko if:IncludeorExclude() == '0' -->
-        <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Excluded)' "></span>
-        <!--/ko-->
-        <a id="" data-bind="click:$root.onRemoveIndustry" title=" delete" class="lang_delSurvey"> <i class="fa fa-times "></i></a>
-        <!--/ko-->
-    </div>
-    <div class="clear"></div>
-</script>
-<script id="targetCriteriasAudienceTemplate" type="text/html">
-    <!--ko if:Type() != 3 && Type() != 4 && Type() != 5 -->
-    <!--ko if:IncludeorExclude() == '0' -->
-    <li>
-        <!-- ko if:   Type() == "1" -->
-        <p class="aud_licontent" data-bind="text: '(Excluded) ' + questionString() + ' = ' + answerString()">
-        </p>
-        <!-- /ko -->
-        <!-- ko if:   Type()  == "2" -->
-        <p class="aud_licontent">
-            <span data-bind="text: '(Excluded) ' +  questionString() + ' = ' "></span>
-            <img data-bind="attr:{src: answerString()}" width="80" />
-        </p>
-        <!-- /ko -->
-    </li>
-    <!--/ko-->
-    <!--ko if:IncludeorExclude() == '1'-->
-    <li>
-        <!-- ko if:   Type() == "1" -->
-        <p class="aud_licontent" data-bind="text: '(Included) ' + questionString() + ' = ' + answerString()">
-        </p>
-        <!-- /ko -->
-        <!-- ko if:   Type()  == "2" -->
-        <p class="aud_licontent">
-            <span data-bind="text: '(Included) ' + questionString() + ' = ' "></span>
-            <img data-bind="attr:{src: answerString()}" width="80" />
-        </p>
-        <!-- /ko -->
-    </li>
-    <!--/ko-->
-    <!--/ko-->
-</script>
-<script id="targetIndustryAudienceTemplate" type="text/html">
-    <!--ko if:Type() == 4 -->
-    <li>
-        <!--ko if:IncludeorExclude() == '1'-->
-        <span class="aud_licontent" data-bind="text:'(Included)' + Industry() "></span>
-        <!--/ko-->
-        <!--ko if:IncludeorExclude() == '0' -->
-        <span class="aud_licontent" data-bind="text:'(Excluded)' + Industry() "></span>
-        <!--/ko-->
-    </li>
-    <!--/ko-->
-
-</script>
-<script id="targetEducationAudienceTemplate" type="text/html">
-    <!--ko if:Type() == 5 -->
-    <li>
-        <!--ko if:IncludeorExclude() == '1'-->
-        <span class="aud_licontent" data-bind="text:'(Included)' + Education() "></span>
-        <!--/ko-->
-        <!--ko if:IncludeorExclude() == '0' -->
-        <span class="aud_licontent" data-bind="text:'(Excluded)' + Education() "></span>
-        <!--/ko-->
-    </li>
-    <!--/ko-->
-
-</script>
-<script id="targetLanguageAudienceTemplate" type="text/html">
-
-    <!--ko if:Type() == 3 -->
-    <li>
-        <!--ko if:IncludeorExclude() == '1'-->
-        <span class="aud_licontent" data-bind="text:'(Included)' + Language()"></span>
-        <!--/ko-->
-        <!--ko if:IncludeorExclude() == '0' -->
-        <span class="aud_licontent" data-bind="text:'(Excluded)' + Language() "></span>
-        <!--/ko-->
-    </li>
-    <!--/ko-->
-
-</script>
-<script id="targetLocationAudienceTemplate" type="text/html">
-    <li>
-        <!--ko if:CityID() == 0 || CityID() == null-->
-        <!--ko if:Radius() != 0 && Radius() != null && Radius() != undefined-->
-        <!--ko if:IncludeorExclude() == '1'-->
-        <span class="aud_licontent" data-bind="text:'Included (' + Radius() +') ' + Country()"></span>
-        <!--/ko-->
-        <!--ko if:IncludeorExclude() == '0' -->
-        <span class="aud_licontent" data-bind="text:'Excluded (' + Radius() +') ' + Country()"></span>
-        <!--/ko-->
-        <!--/ko-->
-        <!--ko if:Radius() == null || Radius() == undefined-->
-        <!--ko if:IncludeorExclude() == '1'-->
-        <span class="aud_licontent" data-bind="text:'(Included) ' + Country()"></span>
-        <!--/ko-->
-        <!--ko if:IncludeorExclude() == '0' -->
-        <span class="aud_licontent" data-bind="text:'(Excluded) ' + Country()"></span>
-        <!--/ko-->
-        <!--/ko-->
-        <!--/ko-->
-        <!--ko if:CityID() != 0 && CityID() != null-->
-        <!--ko if:Radius() != 0 && Radius() != null && Radius() != undefined-->
-        <!--ko if:IncludeorExclude() == '1'-->
-        <span class="aud_licontent" data-bind="text:'Included (' + Radius() +') ' + City() "></span>
-        <!--/ko-->
-        <!--ko if:IncludeorExclude() == '0' -->
-        <span class="aud_licontent" data-bind="text:'Excluded (' + Radius() +') ' + City()"></span>
-        <!--/ko-->
-        <!--/ko-->
-        <!--ko if:Radius() == null || Radius() == undefined-->
-        <!--ko if:IncludeorExclude() == '1'-->
-        <span class="aud_licontent" data-bind="text:'(Included) ' + City() "></span>
-        <!--/ko-->
-        <!--ko if:IncludeorExclude() == '0' -->
-        <span class="aud_licontent" data-bind="text:'(Excluded) ' + City()"></span>
-        <!--/ko-->
-        <!--/ko-->
-        <!--/ko-->
-    </li>
-</script>
-<script id="AdCampaignEducationTemplate" type="text/html">
-    <div class="count_city_newcnt">
-        <!--ko if:Type() == 5 -->
-        <span class="form-control lang_nr_box areaCity" data-bind="text:Education() " style=" "></span>
-        <!--ko if:IncludeorExclude() == '1'-->
-        <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Included)' "></span>
-        <!--/ko-->
-        <!--ko if:IncludeorExclude() == '0' -->
-        <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Excluded)' "></span>
-        <!--/ko-->
-        <a id="" data-bind="click:$root.onRemoveEducation" title=" delete" class="lang_delSurvey"> <i class="fa fa-times "></i></a>
-        <!--/ko-->
-    </div>
-    <div class="clear"></div>
-</script>
-<script id="AdCampaignLocationTemplate" type="text/html">
-    <li>
-        <ul class="_53ga">
-            <li>
-                <div class="_53gb clearfix">
-                    <div class="_4bl8 _4bl7">
-                        <span class="_47la">
-                            <button type="button" title="Remove" class="_50zy _50zz _50z- _5upp _42ft" style="display:none;">
-                                <span>Remove</span>
-                            </button>
-                        </span>
-                    </div>
-                    <div class="_4bl9">
-                        <span class="_3bsr">
-                            <span class="_3bss" data-bind="text:name">
-                            </span><span></span>
-                        </span>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <ul>
-                    <!-- ko template: { name: 'SubAdCampaignLocationTemplate' , foreach: $root.findLocationsInCountry(id) } --><!-- /ko -->
-                </ul>
-            </li>
-        </ul>
-    </li>
-</script>
-<script id="SubAdCampaignLocationTemplate" type="text/html">
-    <div class="count_city_newcnt">
-        <!--ko if:CityID() == 0 || CityID() == null-->
-        <li class="_40m_">
-            <div class="clearfix">
-                <div class="_4bl7">
-                    <!--ko if:IncludeorExclude() == '1'-->
-                    <i class="_40n0 img sp_NQc91B1T0mb sx_d7a1cb" title="Included"></i>
-                    <!--/ko-->
-                    <!--ko if:IncludeorExclude() == '0' -->
-                    <i class="_40n0 img sp_NQc91B1T0mb sx_999ca6" title="Excluded"></i>
-                    <!--/ko-->
-                </div>
-                <div class="_4bl8 _4bl7">
-                    <span class="_47la">
-                        <a title="Remove" class="lang_delSurvey _42ft" data-bind="click:$root.onRemoveLocation">
-                            <i class="fa fa-times "></i>
-                        </a>
-                    </span>
-                </div>
-                <div class="_4bl8 _4bl7">
-                    <div>
-                    </div>
-                </div>
-                <div class="_4bl9">
-                    <div class="fwb">
-                        <span class="_3bsr"><span class="_3bss" data-bind="text:Country "></span><span></span></span>
-                    </div>
-                </div>
-            </div>
-        </li>
-        <!--/ko-->
-        <!--ko if:CityID() != 0 && CityID() != null-->
-        <li class="_40m_">
-            <div class="clearfix">
-                <div class="_4bl7">
-                    <!--ko if:IncludeorExclude() == '1'-->
-                    <i class="_40n0 img sp_NQc91B1T0mb sx_d7a1cb" title="Included"></i>
-                    <!--/ko-->
-                    <!--ko if:IncludeorExclude() == '0' -->
-                    <i class="_40n0 img sp_NQc91B1T0mb sx_999ca6" title="Excluded"></i>
-                    <!--/ko-->
-                </div>
-                <div class="_4bl8 _4bl7">
-                    <span class="_47la">
-                        <a title="Remove" class="lang_delSurvey _42ft" data-bind="click:$root.onRemoveLocation">
-                            <i class="fa fa-times "></i>
-                        </a>
-                    </span>
-                </div>
-                <div class="_4bl9">
-                    <div class="fwb">
-                        <span class="_3bsr">
-                            <span style="float:left;">
-                                <span data-bind="text:City "></span>
-                                <span>
-                                    <span>, </span><span data-bind="text:Country "></span>
-                                </span>
-                            </span>
-                            <span style="float:left;">
-                                <select class="form-control radius_ddp" data-bind="value: Radius">
-                                    <option value="0">No radius</option>
-                                    <option value="10">10 km</option>
-                                    <option value="25">25 km</option>
-                                    <option value="40">40 km</option>
-                                    <option value="100">100+ km</option>
-                                </select>
-                            </span>
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </li>
-        <!--/ko-->
-
-    </div>
-    <div class="clear"></div>
-</script>
-<script>
-    //var map;
-    //var center;
-    //var circles = [];
-    //function initializeMap(lat, long) {
-    //    // LOCATION IN LATITUDE AND LONGITUDE.
-    //    center = new google.maps.LatLng(long, lat);
-    //    // MAP ATTRIBUTES.
-    //    var mapAttr = {
-    //        center: center,
-    //        zoom: 5,
-    //        mapTypeId: google.maps.MapTypeId.TERRAIN
-    //    };
-    //    var myLatLng = { lat: parseFloat(lat), lng: parseFloat(long) };
-    //    // THE MAP TO DISPLAY.
-
-    //    map = new google.maps.Map(document.getElementById("mapContainer"), mapAttr);
-    //    google.maps.event.addDomListener(window, 'load', initialize);
-
-
-
-    //}
-    //function addPointer(lat, long, place, radius, include) {
-    //    // LOCATION IN LATITUDE AND LONGITUDE.
-    //    center = new google.maps.LatLng(long, lat);
-    //    var marker = new google.maps.Marker({
-    //        position: center,
-    //        map: map,
-    //        title: place
-    //    });
-    //    addRadius(radius, include)
-    //}
-    //function addRadius(radius, include) {
-    //    var clr = '#3B5998';
-    //    if (!include)
-    //        clr = '#C82834';
-    //    var circle = new google.maps.Circle({
-    //        center: center,
-    //        map: map,
-    //        radius: parseInt(radius),          // IN METERS.
-    //        fillColor: clr,
-    //        fillOpacity: 0.3,
-    //        strokeColor: "#FFF",
-    //        strokeWeight: 0         // DON'T SHOW CIRCLE BORDER.
-    //    });
-    //    circles.push(circle);
-    //}
-    //function clearRadiuses() {
-    //    $.each(circles, function (key, value) {
-    //        if (value != null)
-    //            value.setMap(null);
-    //    });
-    //}
-    //function addCountryMarker(countryName) {
-    //    var code = new google.maps.Geocoder().geocode({ 'address': countryName }, function (results, status) {
-    //        if (status == google.maps.GeocoderStatus.OK) {
-    //            map.setCenter(results[0].geometry.location);
-    //            var marker = new google.maps.Marker({
-    //                position: results[0].geometry.location,
-    //                map: map,
-    //                title: 'Click for more details'
-    //            });
-    //        } else {
-    //            console.log('Geocode was not successful for the following reason: ' + status);
-    //        }
-    //    });
-    //}
-    $(window).scroll(function () {
-
-        //var scrollYpos = $(document).scrollTop();
-        //if (scrollYpos >= 620) {
-        //    $(".aud_cnt").css("position", "fixed");
-        //    $(".aud_cnt").css("top", "60px");
-        //    $(".aud_cnt").css("width", "23%");
-        //} else {
-        //    $(".aud_cnt").css("position", "absolute");
-        //    $(".aud_cnt").css("top", "530px");
-        //    $(".aud_cnt").css("width", "95%");
-        //}
-
-    });
-    $(document).ready(function () {
-
-        var bws = getBrowserHeight();
-        var top = parseInt((bws.height - 637) / 2);
-        $("#phAdsDialog").css("top", top + "px");
-    });
-    function getBrowserHeight() {
-        var intH = 0;
-        var intW = 0;
-        if (typeof window.innerWidth == 'number') {
-            intH = window.innerHeight;
-            intW = window.innerWidth;
-        }
-        else if (document.documentElement && (document.documentElement.clientWidth || document.documentElement.clientHeight)) {
-            intH = document.documentElement.clientHeight;
-            intW = document.documentElement.clientWidth;
-        }
-        else if (document.body && (document.body.clientWidth || document.body.clientHeight)) {
-            intH = document.body.clientHeight;
-            intW = document.body.clientWidth;
-        }
-        return { width: parseInt(intW), height: parseInt(intH) };
-    }
-
-
-    function closePreviewDialog() {
-
-    }
-</script>
-<script id="profileQuestionTiles" type="text/html">
-    <div class="list">
-        <div class="parent-list-title" data-bind="click:$root.onChangeProfileQuestion"><span data-bind="text:Question"></span></div>
-        <div class="listview set-border padding10 list-type-tiles chlidList" data-role="listview">
-            <!-- ko template: { name: 'profileQuestionAnsTiles' , foreach: $root.profileAnswerList } --><!-- /ko -->
-            <div class="clear-both"></div>
-        </div>
-        <div class="clear-both"></div>
-    </div>
-</script>
-<script id="profileQuestionAnsTiles" type="text/html">
-    <div class="list childList" data-bind="click:$root.saveProfileQuestion" data-dismiss="modal"> <span class="list-title" data-bind="text:Answer"></span> </div>
-</script>
-<script id="surveyQuestionTiles" type="text/html">
-    <div class="list">
-        <div class="parent-list-title"><span data-bind="text:VerifyQuestion"></span></div>
-        <div class="listview set-border padding10 list-type-tiles chlidList" data-role="listview">
-            <div class="list childList leftImg" data-bind="click:$root.saveCriteria.bind($data, 1)"><span class="list-title" data-bind="text:Answer1"></span> </div>
-            <div class="list childList rightImg" data-bind="click:$root.saveCriteria.bind($data, 2)"> <span class="list-title" data-bind="text:Answer2"></span> </div>
-            <div class="clear-both"></div>
-        </div>
-        <div class="clear-both"></div>
-    </div>
-</script>
-<script id="criteriaEditorTemplate" type="text/html">
-    <div class="list childList" data-bind="click:$root.updateProfileQuestion,css: { 'active': $root.selectedCriteria().PQAnswerID() == PqAnswerId }" data-dismiss="modal"> <span class="list-title" data-bind="text:Answer"></span> </div>
-</script>
-
-<script id="ListOfSelectedCouponCats" type="text/html">
-    <!--ko if:IsSelected == true-->
-    <span data-bind="text: Name">
-    </span>
-    <span>, </span>
-    <!--/ko-->
-</script>
 <script>
     function showUploadDialog() {
         $("#logo_image_file").click();
@@ -1059,6 +594,10 @@ else
     }
     function showCouponDialog3() {
         $("#campaignType_coupon_file3").click();
+
+    }
+    function showCouponDialog4() {
+        $("#campaignType_image_file1").click();
 
     }
 </script>

@@ -327,9 +327,9 @@ define("Coupons/Coupons.viewModel",
                       campaignNamePlaceHolderValue('New Voucher');
                       isEnableVedioVerificationLink(false);
                  
-                      //couponModel().couponImage2("");
+                      //couponModel().CouponImage2("");
                       //couponModel().CouponImage3("");
-                      //couponModel().CouponImage4("");
+                      //couponModel().couponImage1("");
                      
                       isWelcomeScreenVisible(false);
 
@@ -345,55 +345,12 @@ define("Coupons/Coupons.viewModel",
 
                       isEditCampaign(false);
 
-                      //couponModel().CampaignTypeImagePath("");
-
-                      //couponModel().IsUseFilter('0');
-                      //couponModel().CampaignImagePath("");
-                      //couponModel().VoucherImagePath("");
-                      //couponModel().LanguageId(41);
-                      //couponModel().DeliveryDays('10');
-                      //couponModel().LogoUrl('Content/Images/Company_Default.png');
-                      //couponModel().IsShowVoucherSetting(false);
-                      //if (UserAndCostDetail() != null || UserAndCostDetail() != undefined) {
-                      //    alreadyAddedDeliveryValue(10);
-                      //    quizQuestionStatus(true);
-                      //    isQuizQPerClickPriceAdded(true);
-                      //    pricePerclick(pricePerclick() + UserAndCostDetail().QuizQuestionClausePrice);
-                      //    pricePerclick(pricePerclick() + UserAndCostDetail().TenDayDeliveryClausePrice);
-                      //}
-
-                      //getAudienceCount();
-                      
-                      //bindAudienceReachCount();
-                      //selectedQuestionCountryList([]);
-
                   },
 
 
                 submitCampaignData = function () {
-                    //if (couponModel().isValid()) {
-                        if (reachedAudience() > 0) {
-                            if (UserAndCostDetail().isStripeIntegrated == false) {
-                                stripeChargeCustomer.show(function () {
-                                    UserAndCostDetail().isStripeIntegrated = true;
-
-                                }, 2000, 'Enter your details');
-                            } else {
-
-                                saveCampaign(2);
-
-
-
-                            }
-                        } else {
-                            toastr.error("You have no audience against the specified criteria please broad your audience definition.");
-                        }
-
-
-                    //} else {
-                    //    couponModel().errors.showAllMessages();
-                    //    toastr.error("Please fill the required feilds to continue.");
-                    //}
+                    
+                        saveCampaign(2);
                 },
                   terminateCampaign = function () {
                       saveCampaign(7);
@@ -405,50 +362,33 @@ define("Coupons/Coupons.viewModel",
             
                     var isPopulateErrorList = false;
                  
-                        if (quizQuestionStatus() == false) {
-                            couponModel().VerifyQuestion('');
-                            couponModel().Answer1('');
-                            couponModel().Answer2('');
+                      
+                        //var selectedCouponCategories = $.grep(couponCategories(), function (n, i) {
+                        //    return (n.IsSelected == true);
+                        //});
 
-                        }
-                        var selectedCouponCategories = $.grep(couponCategories(), function (n, i) {
-                            return (n.IsSelected == true);
-                        });
+                        //_.each(selectedCouponCategories, function (coup) {
 
-                        _.each(selectedCouponCategories, function (coup) {
-
-                            couponModel().CouponCategories.push(new model.selectedCouponCategory.Create({
-                                CategoryId: coup.CategoryId,
-                                Name: coup.Name
-                            }));
-                        });
-                        if (couponModel().IsUseFilter() == "0") {
-                            couponModel().IsUseFilter(0);
-                        } else {
-                            couponModel().IsUseFilter(1);
-                        }
+                        //    couponModel().CouponCategories.push(new model.selectedCouponCategory.Create({
+                        //        CategoryId: coup.CategoryId,
+                        //        Name: coup.Name
+                        //    }));
+                        //});
+                      
                         couponModel().Status(mode);
-                        couponModel().ClickRate(pricePerclick());
-
+                        
                        
                         var campignServerObj = couponModel().convertToServerData();
 
                         dataservice.addCampaignData(campignServerObj, {
                             success: function (data) {
 
-                                criteriaCount(0);
-                                pricePerclick(0);
                                 isEditorVisible(false);
                                 getAdCampaignGridContent();
-                                isLocationPerClickPriceAdded(false);
-                                isLanguagePerClickPriceAdded(false);
-                                isIndustoryPerClickPriceAdded(false);
-                                isProfileSurveyPerClickPriceAdded(false);
-                                isEducationPerClickPriceAdded(false);
                                 isListVisible(true);
                                 isWelcomeScreenVisible(false);
                                 toastr.success("Successfully saved.");
-                                allCouponCodeItems.removeAll();
+                             //   allCouponCodeItems.removeAll();
                             },
                             error: function (response) {
 
@@ -794,16 +734,16 @@ define("Coupons/Coupons.viewModel",
                 },
 
                 campaignImageCallback = function (file, data) {
-                    couponModel().CampaignImagePath(data);
+                    couponModel().LogoUrl(data);
                 },
-                couponImage2Callback = function (file, data) {
-                    couponModel().couponImage2(data);
+                CouponImage2Callback = function (file, data) {
+                    couponModel().CouponImage2(data);
                 },
                 CouponImage3Callback = function (file, data) {
                     couponModel().CouponImage3(data);
                 },
-                CouponImage4Callback = function (file, data) {
-                    couponModel().CouponImage4(data);
+                couponImage1Callback = function (file, data) {
+                    couponModel().couponImage1(data);
                 },
                   campaignCSVCallback = function (file, data) {
                     
@@ -816,114 +756,18 @@ define("Coupons/Coupons.viewModel",
                     if (item.Status() == 1 || item.Status() == 2 || item.Status() == 3 || item.Status() == 4 || item.Status() == null || item.Status() == 7 || item.Status() == 9) {
                         canSubmitForApproval(true);
                         dataservice.getCampaignData({
-                            CampaignId: item.CampaignID(),
+                            CampaignId: item.CouponId(),
                             SearchText: ""
                         }, {
                             success: function (data) {
                                 
                                 if (data != null) {
                                     
-                                    // set languages drop down
-                                    var profileQIds = [];
-                                    var surveyQIds = [];
-                                    selectedCriteria();
-                                    pricePerclick(0);
 
-                                    var clonedVersofCariterias = data.Coupon[0].AdCampaignTargetCriterias.clone();
-                                    data.Coupon[0].AdCampaignTargetCriterias = null;
-                                 
-                                    _.each(data.Coupon[0].CouponCodes, function (cc) {
-                                        
-                                        allCouponCodeItems.push(cc.Code);
-                                    });
 
                                     couponModel(model.Coupon.Create(data.Coupon[0]));
-
-                                    _.each(clonedVersofCariterias, function (cclist) {
-                                        if (cclist.Type == 1) {
-
-                                            if (profileQIds.indexOf(cclist.PQId) == -1) {
-                                                profileQIds.push(cclist.PQId);
-                                                couponModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
-
-                                                    Type: cclist.Type,
-                                                    PQId: cclist.PQId,
-                                                    PQAnswerId: cclist.PQAnswerId,
-                                                    QuizCampaignId: cclist.QuizCampaignId,
-                                                    QuizAnswerId: cclist.QuizAnswerId,
-                                                    questionString: cclist.questionString,
-                                                    answerString: cclist.answerString,
-                                                    IncludeorExclude: cclist.IncludeorExclude,
-                                                    CampaignId: cclist.CampaignId,
-                                                    criteriaPrice: UserAndCostDetail().OtherClausePrice,
-                                                    CriteriaId: cclist.CriteriaId
-                                                }));
-                                            } else {
-                                                couponModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
-
-                                                    Type: cclist.Type,
-                                                    PQId: cclist.PQId,
-                                                    PQAnswerId: cclist.PQAnswerId,
-                                                    QuizCampaignId: cclist.QuizCampaignId,
-                                                    QuizAnswerId: cclist.QuizAnswerId,
-                                                    questionString: cclist.questionString,
-                                                    answerString: cclist.answerString,
-                                                    IncludeorExclude: cclist.IncludeorExclude,
-                                                    CampaignId: cclist.CampaignId,
-                                                    criteriaPrice: 0,
-                                                    CriteriaId: cclist.CriteriaId
-                                                }));
-                                            }
-
-
-                                        } else if (cclist.Type == 6) {
-                                            if (surveyQIds.indexOf(cclist.QuizCampaignId) == -1) {
-                                                surveyQIds.push(cclist.QuizCampaignId);
-                                                couponModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
-
-                                                    Type: cclist.Type,
-                                                    PQId: cclist.PQId,
-                                                    PQAnswerId: cclist.PQAnswerId,
-                                                    QuizCampaignId: cclist.QuizCampaignId,
-                                                    QuizAnswerId: cclist.QuizAnswerId,
-                                                    questionString: cclist.questionString,
-                                                    answerString: cclist.answerString,
-                                                    IncludeorExclude: cclist.IncludeorExclude,
-                                                    CampaignId: cclist.CampaignId,
-                                                    criteriaPrice: UserAndCostDetail().OtherClausePrice,
-                                                    CriteriaId: cclist.CriteriaId
-                                                }));
-                                            } else {
-                                                couponModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
-
-                                                    Type: cclist.Type,
-                                                    PQId: cclist.PQId,
-                                                    PQAnswerId: cclist.PQAnswerId,
-                                                    QuizCampaignId: cclist.QuizCampaignId,
-                                                    QuizAnswerId: cclist.QuizAnswerId,
-                                                    questionString: cclist.questionString,
-                                                    answerString: cclist.answerString,
-                                                    IncludeorExclude: cclist.IncludeorExclude,
-                                                    CampaignId: cclist.CampaignId,
-                                                    criteriaPrice: 0,
-                                                    CriteriaId: cclist.CriteriaId
-                                                }));
-                                            }
-                                        }
-
-                                    });
-
-
-
-                                    couponModel().reset();
-
-
+                                   
                                     view.initializeTypeahead();
-
-                                    selectedQuestionCountryList([]);
-                                    _.each(couponModel().AdCampaignTargetLocations(), function (item) {
-                                        addCountryToCountryList(item.CountryID(), item.Country());
-                                    });
 
                                    
 
@@ -1752,7 +1596,6 @@ define("Coupons/Coupons.viewModel",
                      };
                      dataservice.generateCouponCodes(gData, {
                          success: function (data) {
-                             debugger
                              _.each(data.CouponList, function (item) {
                                  allCouponCodeItems.push(item.Code);
                                  couponModel().CouponCodes.push(new model.AdCampaignCouponCodes.Create({
@@ -1779,8 +1622,6 @@ define("Coupons/Coupons.viewModel",
                     toastr.warning("Please first save the coupon.");
                 },
                  gotoScreen = function (number) {
-                     //  toastr.error("Validation.");
-                     debugger;
                      previewScreenNumber(number);
 
                  },
@@ -1842,9 +1683,9 @@ define("Coupons/Coupons.viewModel",
                     isEnableVedioVerificationLink: isEnableVedioVerificationLink,
                     campaignTypeImageCallback: campaignTypeImageCallback,
                     campaignImageCallback: campaignImageCallback,
-                    CouponImage4Callback: CouponImage4Callback,
+                    couponImage1Callback: couponImage1Callback,
                     CouponImage3Callback: CouponImage3Callback,
-                    couponImage2Callback: couponImage2Callback,
+                    CouponImage2Callback: CouponImage2Callback,
                     correctAnswers: correctAnswers,
                     onEditCampaign: onEditCampaign,
                     canSubmitForApproval: canSubmitForApproval,

@@ -14,7 +14,8 @@ namespace SMD.Models.DomainModels
         public Coupon()
         {
             this.CouponCategories = new HashSet<CouponCategory>();
-        } 
+        }
+     
 
         public long CouponId { get; set; }
         public Nullable<int> LanguageId { get; set; }
@@ -84,5 +85,7 @@ namespace SMD.Models.DomainModels
 
         [NotMapped]
         public int DaysLeft { get; set; }
+        [NotMapped]
+        public string LogoImageBytes { get; set; }
     }
 }

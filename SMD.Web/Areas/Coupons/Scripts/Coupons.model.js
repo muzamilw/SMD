@@ -67,8 +67,10 @@
               Savings = ko.observable(Savings),
               SearchKeywords = ko.observable(SearchKeywords),
               Status = ko.observable(Status),
+              StatusValue = ko.observable(""),
               SwapCost = ko.observable(SwapCost),
               UserId = ko.observable(UserId),
+                LogoImageBytes = ko.observable(''),
                // Errors
               errors = ko.validation.group({ }),
                 // Is Valid 
@@ -133,9 +135,11 @@
                  RejectedReason : (RejectedReason),
                  Savings : (Savings),
                  SearchKeywords : (SearchKeywords),
-                 Status : (Status),
+                 Status: (Status),
+                 StatusValue :StatusValue ,
                  SwapCost : (SwapCost),
-                 UserId : (UserId)
+                 UserId: (UserId),
+                 LogoImageBytes: LogoImageBytes
               }),
               // Has Changes
               hasChanges = ko.computed(function () {
@@ -148,27 +152,27 @@
               // Convert to server data
               convertToServerData = function () {
                   
-                  var targetCriteria = [];
-                  _.each(AdCampaignTargetCriterias(), function (item) {
+                  //var targetCriteria = [];
+                  //_.each(AdCampaignTargetCriterias(), function (item) {
                       
-                      targetCriteria.push(item.convertCriteriaToServerData());
-                  });
-                  var LocationtargetCriteria = [];
+                  //    targetCriteria.push(item.convertCriteriaToServerData());
+                  //});
+                  //var LocationtargetCriteria = [];
                  
-                  _.each(AdCampaignTargetLocations(), function (item) {
+                  //_.each(AdCampaignTargetLocations(), function (item) {
                    
-                      LocationtargetCriteria.push(item.convertToServerData());
-                  });
-                  var selectedCoupons = [];
-                  _.each(CouponCategories(), function (item) {
+                  //    LocationtargetCriteria.push(item.convertToServerData());
+                  //});
+                  //var selectedCoupons = [];
+                  //_.each(CouponCategories(), function (item) {
 
-                      selectedCoupons.push(item.convertToServerData());
-                  });
-                  var targetCouponCodes = [];
-                  _.each(CouponCodes(), function (item) {
-                      console.log(item);
-                      targetCouponCodes.push(item.convertToServerData());
-                  });
+                  //    selectedCoupons.push(item.convertToServerData());
+                  //});
+                  //var targetCouponCodes = [];
+                  //_.each(CouponCodes(), function (item) {
+                  //    console.log(item);
+                  //    targetCouponCodes.push(item.convertToServerData());
+                  //});
                   return {
                       ApprovalDateTime: ApprovalDateTime(),
                       Approved: Approved(),
@@ -228,8 +232,10 @@
                       Savings: Savings(),
                       SearchKeywords: SearchKeywords(),
                       Status: Status(),
+                      StatusValue :StatusValue (),
                       SwapCost: SwapCost(),
                       UserId: UserId(),
+                      LogoImageBytes: LogoImageBytes(),
                       hasChanges: hasChanges()
                   };
               };
@@ -292,9 +298,12 @@
               Savings: (Savings),
               SearchKeywords: (SearchKeywords),
               Status: (Status),
+              StatusValue :StatusValue ,
               SwapCost: (SwapCost),
               UserId: (UserId),
-              hasChanges: hasChanges
+              LogoImageBytes: LogoImageBytes(),
+              hasChanges: hasChanges,
+              convertToServerData: convertToServerData
           };
       };
 

@@ -1,13 +1,21 @@
-﻿using SMD.Interfaces.Repository;
+﻿using System.Globalization;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using SMD.ExceptionHandling;
+using SMD.Implementation.Identity;
+using SMD.Interfaces.Repository;
 using SMD.Interfaces.Services;
+using SMD.Models.Common;
 using SMD.Models.DomainModels;
+using SMD.Models.IdentityModels;
 using SMD.Models.RequestModels;
 using SMD.Models.ResponseModels;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
+using Stripe;
 
 namespace SMD.Implementation.Services
 {
@@ -17,7 +25,72 @@ namespace SMD.Implementation.Services
 
         private readonly ICouponRepository couponRepository;
         private readonly IUserFavouriteCouponRepository _userFavouriteCouponRepository;
+        private ApplicationUserManager UserManager
+        {
+            get { return HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
+        }
+        private string[] SaveImages(Coupon campaign)
+        {
+            string[] savePaths = new string[8];
+            string directoryPath = HttpContext.Current.Server.MapPath("~/SMD_Content/Coupons/" + campaign.CouponId);
 
+            if (directoryPath != null && !Directory.Exists(directoryPath))
+            {
+                Directory.CreateDirectory(directoryPath);
+            }
+           
+            if (!string.IsNullOrEmpty(campaign.CouponImage2) && !campaign.CouponImage2.Contains("guid_Voucher2DefaultImage") && !campaign.CouponImage2.Contains("http://manage.cash4ads.com/"))
+            {
+
+                string base64 = campaign.CouponImage2.Substring(campaign.CouponImage2.IndexOf(',') + 1);
+                base64 = base64.Trim('\0');
+                byte[] data = Convert.FromBase64String(base64);
+                string savePath = directoryPath + "\\guid_Voucher2DefaultImage.jpg";
+                File.WriteAllBytes(savePath, data);
+                int indexOf = savePath.LastIndexOf("SMD_Content", StringComparison.Ordinal);
+                savePath = savePath.Substring(indexOf, savePath.Length - indexOf);
+                savePaths[4] = savePath;
+                campaign.CouponImage2 = savePath;
+            }
+            if (!string.IsNullOrEmpty(campaign.CouponImage3) && !campaign.CouponImage3.Contains("guid_Coupon3DefaultImage") && !campaign.CouponImage3.Contains("http://manage.cash4ads.com/"))
+            {
+
+                string base64 = campaign.CouponImage3.Substring(campaign.CouponImage3.IndexOf(',') + 1);
+                base64 = base64.Trim('\0');
+                byte[] data = Convert.FromBase64String(base64);
+                string savePath = directoryPath + "\\guid_Coupon3DefaultImage.jpg";
+                File.WriteAllBytes(savePath, data);
+                int indexOf = savePath.LastIndexOf("SMD_Content", StringComparison.Ordinal);
+                savePath = savePath.Substring(indexOf, savePath.Length - indexOf);
+                savePaths[5] = savePath;
+                campaign.CouponImage3 = savePath;
+            }
+            if (!string.IsNullOrEmpty(campaign.couponImage1) && !campaign.couponImage1.Contains("guid_Voucher4DefaultImage") && !campaign.couponImage1.Contains("http://manage.cash4ads.com/"))
+            {
+
+                string base64 = campaign.couponImage1.Substring(campaign.couponImage1.IndexOf(',') + 1);
+                base64 = base64.Trim('\0');
+                byte[] data = Convert.FromBase64String(base64);
+                string savePath = directoryPath + "\\guid_Voucher4DefaultImage.jpg";
+                File.WriteAllBytes(savePath, data);
+                int indexOf = savePath.LastIndexOf("SMD_Content", StringComparison.Ordinal);
+                savePath = savePath.Substring(indexOf, savePath.Length - indexOf);
+                savePaths[6] = savePath;
+                campaign.couponImage1 = savePath;
+            }
+            if (!string.IsNullOrEmpty(campaign.LogoImageBytes))
+            {
+                string base64 = campaign.LogoImageBytes.Substring(campaign.LogoImageBytes.IndexOf(',') + 1);
+                base64 = base64.Trim('\0');
+                byte[] data = Convert.FromBase64String(base64);
+                string savePath = directoryPath + "\\guid_CampaignLogoImage.jpg";
+                File.WriteAllBytes(savePath, data);
+                int indexOf = savePath.LastIndexOf("SMD_Content", StringComparison.Ordinal);
+                savePath = savePath.Substring(indexOf, savePath.Length - indexOf);
+                savePaths[7] = savePath;
+            }
+            return savePaths;
+        }
 
         #endregion
         #region Constructor
@@ -49,7 +122,7 @@ namespace SMD.Implementation.Services
                 Coupon = couponRepository.SearchCampaign(request, out rowCount),
                 //Languages = _languageRepository.GetAllLanguages(),
                 TotalCount = rowCount
-                // UserAndCostDetails = _adCampaignRepository.GetUserAndCostDetail()
+                // UserAndCostDetails = couponRepository.GetUserAndCostDetail()
             };
         }
 
@@ -130,6 +203,98 @@ namespace SMD.Implementation.Services
             };
         }
 
+
+
+        public void CreateCampaign(Coupon couponModel)
+        {
+            couponModel.UserId = couponRepository.LoggedInUserIdentity;
+            couponModel.CompanyId = couponRepository.CompanyId;
+            //couponModel.CompanyId = companyRepository.GetUserCompany(couponRepository.LoggedInUserIdentity);
+            var user = UserManager.Users.Where(g => g.Id == couponRepository.LoggedInUserIdentity).SingleOrDefault();
+            if (user != null)
+                couponModel.CreatedBy = user.FullName;
+           
+
+            couponRepository.Add(couponModel);
+            couponRepository.SaveChanges();
+
+            string[] paths = SaveImages(couponModel);
+            if (paths != null && paths.Count() > 0)
+            {
+                
+                if (!string.IsNullOrEmpty(paths[4]))
+                {
+                    couponModel.CouponImage2 = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + paths[4];
+                }
+                if (!string.IsNullOrEmpty(paths[5]))
+                {
+                    couponModel.CouponImage3 = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + paths[5];
+                }
+                if (!string.IsNullOrEmpty(paths[6]))
+                {
+                    couponModel.couponImage1 = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + paths[6];
+                }
+                if (!string.IsNullOrEmpty(paths[7]))
+                {
+                    couponModel.LogoUrl = paths[7];
+                }
+                else if (couponModel != null && couponModel.LogoUrl.Contains("Content/Images"))
+                {
+                    couponModel.LogoUrl = null;
+                }
+
+                couponRepository.SaveChanges();
+            }
+
+          
+        }
+
+        public void UpdateCampaign(Coupon couponModel)
+        {
+            // couponModel.UserId = couponRepository.LoggedInUserIdentity;
+            var user = UserManager.Users.Where(g => g.Id == couponRepository.LoggedInUserIdentity).SingleOrDefault();
+            if (user != null)
+                couponModel.CreatedBy = user.FullName;
+            string[] paths = SaveImages(couponModel);
+            if (paths != null && paths.Count() > 0)
+            {
+              
+                if (!string.IsNullOrEmpty(paths[4]))
+                {
+                    if (!paths[4].ToLower().Contains(HttpContext.Current.Request.Url.Authority.ToLower()))
+                        couponModel.CouponImage2 = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + paths[4];
+                }
+                if (!string.IsNullOrEmpty(paths[5]))
+                {
+                    if (!paths[5].ToLower().Contains(HttpContext.Current.Request.Url.Authority.ToLower()))
+                        couponModel.CouponImage3 = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + paths[5];
+                }
+                if (!string.IsNullOrEmpty(paths[6]))
+                {
+                    if (!paths[6].ToLower().Contains(HttpContext.Current.Request.Url.Authority.ToLower()))
+                        couponModel.couponImage1 = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + paths[6];
+                }
+                if (!string.IsNullOrEmpty(paths[7]))
+                {
+                    couponModel.LogoUrl = paths[7];
+                }
+                else if (couponModel.LogoUrl.Contains("Content/Images"))
+                {
+                    couponModel.LogoUrl = null;
+                }
+            }
+          
+            if (couponModel.Status == 3)
+            {
+                couponModel.Approved = true;
+            }
+            couponRepository.Update(couponModel);
+            couponRepository.SaveChanges();
+
+        
+
+            
+        }
 
         #endregion
     }
