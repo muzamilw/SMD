@@ -50,6 +50,8 @@ namespace SMD.Repository
             unityContainer.RegisterType<IUserFavouriteCouponRepository, UserFavouriteCouponRepository>();
             unityContainer.RegisterType<ICompanyAspNetUsersRepository, CompanyAspNetUsersRepository>();
             unityContainer.RegisterType<ICouponRepository, CouponRepository>();
+            unityContainer.RegisterType<ISectionRepository, SectionRepository>();
+            unityContainer.RegisterType<IPhraseRepository, PhraseRepository>();
         }
     }
 }

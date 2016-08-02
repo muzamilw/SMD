@@ -1,5 +1,7 @@
-﻿using SMD.Interfaces.Services;
+﻿using AutoMapper;
+using SMD.Interfaces.Services;
 using SMD.MIS.Areas.Api.Models;
+using SMD.Models.Common;
 using SMD.Models.DomainModels;
 using SMD.Models.ResponseModels;
 using System;
@@ -12,18 +14,20 @@ using System.Web.Http;
 
 namespace SMD.MIS.Areas.Api.Controllers
 {
-    public class GetFavouriteCouponController : ApiController
+    public class UserFavouriteCouponController : ApiController
     {
         #region Public
         private readonly IAdvertService _advertService;
+        private readonly ICouponService _couponService;
         #endregion
         #region Constructor
         /// <summary>
         /// Constuctor 
         /// </summary>
-        public GetFavouriteCouponController(IAdvertService advertService)
+        public UserFavouriteCouponController(IAdvertService advertService, ICouponService couponService)
         {
             _advertService = advertService;
+            _couponService = couponService;
         }
 
         #endregion
@@ -32,7 +36,7 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// <summary>
         /// Get Add Campaigns
         /// </summary>
-        public FavouriteCouponResponse Get(string UserId)
+        public FavouriteCouponResponse Get(string authenticationToken,string UserId)
         {
             if (string.IsNullOrEmpty(UserId))
             {
@@ -42,7 +46,19 @@ namespace SMD.MIS.Areas.Api.Controllers
 
             try
             {
-                response.FavouriteCoupon = _advertService.GetAllFavouriteCouponByUserId(UserId);
+                 Mapper.Initialize(cfg => cfg.CreateMap<SMD.Models.DomainModels.Coupon, Coupons>());
+
+           
+
+            var favs = _couponService.GetAllFavouriteCouponByUserId(UserId);
+            response.FavouriteCoupon = favs.Select(a => Mapper.Map<SMD.Models.DomainModels.Coupon, Coupons>(a)).ToList();
+
+
+
+
+                
+
+               
                 response.Status = true;
             }
             catch (Exception e)
@@ -56,7 +72,7 @@ namespace SMD.MIS.Areas.Api.Controllers
         }
 
 
-        public BaseApiResponse Post(string UserId, long CouponId, bool mode)
+        public BaseApiResponse Post(string authenticationToken,string UserId, long CouponId, bool mode)
         {
             if (string.IsNullOrEmpty(UserId))
             {
@@ -67,7 +83,7 @@ namespace SMD.MIS.Areas.Api.Controllers
 
             try
             {
-                result = _advertService.SetFavoriteCoupon(UserId, CouponId, mode);
+                result = _couponService.SetFavoriteCoupon(UserId, CouponId, mode);
             }
             catch (Exception e)
             {

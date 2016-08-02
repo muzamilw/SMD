@@ -236,9 +236,9 @@ namespace SMD.MIS
             routeHandlers);
 
             config.Routes.MapHttpRoute(
-               "FavouriteCoupon",
+               "UserFavouriteCoupon",
                "UserFavouriteCoupon/{AuthenticationToken}/",
-               new { controller = "GetFavouriteCoupon" },
+               new { controller = "UserFavouriteCoupon" },
                null,
                null);
 
@@ -267,6 +267,15 @@ namespace SMD.MIS
             null,
             routeHandlers);
 
+
+
+
+              config.Routes.MapHttpRoute(
+            "RedeemCoupon",
+            "RedeemCoupon/{AuthenticationToken}/",
+            new { controller = "RedeemCoupon" },
+            null,
+            routeHandlers);
 
             
         }

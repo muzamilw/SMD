@@ -1,5 +1,6 @@
 ﻿using Microsoft.Practices.Unity;
 using SMD.Interfaces.Repository;
+
 using SMD.Models.DomainModels;
 using SMD.Repository.BaseRepository;
 using System;
@@ -39,9 +40,18 @@ namespace SMD.Repository.Repositories
         {
             return DbSet.FirstOrDefault(i => i.CouponId == CouponId);
         }
-        public IEnumerable<UserFavouriteCoupon> GetAllFavouriteCouponByUserId(string UserId)
+        public IEnumerable<Coupon> GetAllFavouriteCouponByUserId(string UserId)
         {
-            return DbSet.Where(i => i.UserId == UserId).ToList();
+
+            var result = from c in db.Coupons
+                          join uc in db.UserFavouriteCoupons on c.CouponId equals uc.CouponId
+                          where uc.UserId == UserId
+                            
+                          select c;
+
+
+            return result.ToList();
+            //return DbSet.Where(i => i.UserId == UserId).ToList();
         }
         #endregion
 

@@ -559,6 +559,15 @@
           <Property Name="LanguageName" Type="nvarchar" MaxLength="100" />
           <Property Name="NativeName" Type="nvarchar" MaxLength="150" />
         </EntityType>
+        <EntityType Name="Phrase">
+          <Key>
+            <PropertyRef Name="PhraseId" />
+          </Key>
+          <Property Name="PhraseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PhraseName" Type="varchar" MaxLength="50" />
+          <Property Name="SectionId" Type="int" />
+          <Property Name="SortOrder" Type="int" />
+        </EntityType>
         <EntityType Name="Products">
           <Key>
             <PropertyRef Name="ProductID" />
@@ -644,6 +653,14 @@
           <Property Name="AnswerDateTime" Type="datetime" Nullable="false" />
           <Property Name="PQAnswerID" Type="int" Nullable="false" />
           <Property Name="CompanyId" Type="int" />
+        </EntityType>
+        <EntityType Name="Section">
+          <Key>
+            <PropertyRef Name="SectionId" />
+          </Key>
+          <Property Name="SectionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SectionName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="SecOrder" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="SurveyQuestion">
           <Key>
@@ -1542,6 +1559,18 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_sectionId">
+          <End Role="Section" Type="Self.Section" Multiplicity="0..1" />
+          <End Role="Phrase" Type="Self.Phrase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Section">
+              <PropertyRef Name="SectionId" />
+            </Principal>
+            <Dependent Role="Phrase">
+              <PropertyRef Name="SectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_SMDPrice_Country">
           <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
           <End Role="Products" Type="Self.Products" Multiplicity="*" />
@@ -1925,11 +1954,13 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <EntitySet Name="Invoice" EntityType="Self.Invoice" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InvoiceDetail" EntityType="Self.InvoiceDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Language" EntityType="Self.Language" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Phrase" EntityType="Self.Phrase" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProfileQuestion" EntityType="Self.ProfileQuestion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProfileQuestionAnswer" EntityType="Self.ProfileQuestionAnswer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProfileQuestionGroup" EntityType="Self.ProfileQuestionGroup" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProfileQuestionUserAnswer" EntityType="Self.ProfileQuestionUserAnswer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Section" EntityType="Self.Section" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SurveyQuestion" EntityType="Self.SurveyQuestion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SurveyQuestionResponse" EntityType="Self.SurveyQuestionResponse" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SurveyQuestionTargetCriteria" EntityType="Self.SurveyQuestionTargetCriteria" Schema="dbo" store:Type="Tables" />
@@ -2218,6 +2249,10 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <AssociationSet Name="FK_ProfileQuestionUserAnswer_ProfileQuestionAnswer" Association="Self.FK_ProfileQuestionUserAnswer_ProfileQuestionAnswer">
             <End Role="ProfileQuestionAnswer" EntitySet="ProfileQuestionAnswer" />
             <End Role="ProfileQuestionUserAnswer" EntitySet="ProfileQuestionUserAnswer" />
+          </AssociationSet>
+          <AssociationSet Name="fk_sectionId" Association="Self.fk_sectionId">
+            <End Role="Section" EntitySet="Section" />
+            <End Role="Phrase" EntitySet="Phrase" />
           </AssociationSet>
           <AssociationSet Name="FK_SMDPrice_Country" Association="Self.FK_SMDPrice_Country">
             <End Role="Country" EntitySet="Country" />
@@ -2768,6 +2803,12 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <AssociationSet Name="FK_CouponCategories_CouponCategory" Association="DomainModels.FK_CouponCategories_CouponCategory">
             <End Role="CouponCategory" EntitySet="CouponCategories" />
             <End Role="CouponCategories" EntitySet="CouponCategories1" />
+          </AssociationSet>
+          <EntitySet Name="Phrases" EntityType="DomainModels.Phrase" />
+          <EntitySet Name="Sections" EntityType="DomainModels.Section" />
+          <AssociationSet Name="fk_sectionId" Association="DomainModels.fk_sectionId">
+            <End Role="Section" EntitySet="Sections" />
+            <End Role="Phrase" EntitySet="Phrases" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="ProfileQuestion">
@@ -4954,6 +4995,37 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Phrase">
+          <Key>
+            <PropertyRef Name="PhraseId" />
+          </Key>
+          <Property Name="PhraseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PhraseName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SectionId" Type="Int32" />
+          <Property Name="SortOrder" Type="Int32" />
+          <NavigationProperty Name="Section" Relationship="DomainModels.fk_sectionId" FromRole="Phrase" ToRole="Section" />
+        </EntityType>
+        <EntityType Name="Section">
+          <Key>
+            <PropertyRef Name="SectionId" />
+          </Key>
+          <Property Name="SectionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SectionName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="SecOrder" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Phrases" Relationship="DomainModels.fk_sectionId" FromRole="Section" ToRole="Phrase" />
+        </EntityType>
+        <Association Name="fk_sectionId">
+          <End Type="DomainModels.Section" Role="Section" Multiplicity="0..1" />
+          <End Type="DomainModels.Phrase" Role="Phrase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Section">
+              <PropertyRef Name="SectionId" />
+            </Principal>
+            <Dependent Role="Phrase">
+              <PropertyRef Name="SectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -6047,6 +6119,25 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Phrases">
+            <EntityTypeMapping TypeName="DomainModels.Phrase">
+              <MappingFragment StoreEntitySet="Phrase">
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="SectionId" ColumnName="SectionId" />
+                <ScalarProperty Name="PhraseName" ColumnName="PhraseName" />
+                <ScalarProperty Name="PhraseId" ColumnName="PhraseId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sections">
+            <EntityTypeMapping TypeName="DomainModels.Section">
+              <MappingFragment StoreEntitySet="Section">
+                <ScalarProperty Name="SecOrder" ColumnName="SecOrder" />
+                <ScalarProperty Name="SectionName" ColumnName="SectionName" />
+                <ScalarProperty Name="SectionId" ColumnName="SectionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -6061,7 +6152,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

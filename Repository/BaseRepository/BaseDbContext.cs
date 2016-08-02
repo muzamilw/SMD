@@ -252,6 +252,13 @@ namespace SMD.Repository.BaseRepository
         public DbSet<CompaniesAspNetUser> CompaniesAspNetUsers { get; set; }
 
         public DbSet<vw_CompanyUsers> vw_CompanyUsers { get; set; }
+
+        public DbSet<Phrase> Phrase { get; set; }
+
+        public DbSet<Section> Section { get; set; }
+
+     
+
         /// <summary>
         /// Get Ad-Campaigns for APIs | baqer
         /// </summary>

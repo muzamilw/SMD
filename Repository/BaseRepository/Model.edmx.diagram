@@ -130,6 +130,9 @@
         <EntityTypeShape EntityType="DomainModels.CouponCategories" Width="2.875" PointX="27.875" PointY="83.375" />
         <AssociationConnector Association="DomainModels.FK_CouponCategories_Coupon" />
         <AssociationConnector Association="DomainModels.FK_CouponCategories_CouponCategory" />
+        <EntityTypeShape EntityType="DomainModels.Phrase" Width="1.5" PointX="9.625" PointY="8.875" />
+        <EntityTypeShape EntityType="DomainModels.Section" Width="1.5" PointX="7.375" PointY="9" />
+        <AssociationConnector Association="DomainModels.fk_sectionId" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

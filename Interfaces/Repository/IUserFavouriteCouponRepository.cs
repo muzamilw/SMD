@@ -1,4 +1,5 @@
-﻿using SMD.Models.DomainModels;
+﻿using SMD.Models.Common;
+using SMD.Models.DomainModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,6 @@ namespace SMD.Interfaces.Repository
     public interface IUserFavouriteCouponRepository : IBaseRepository<UserFavouriteCoupon, long>
     {
         UserFavouriteCoupon GetByCouponId(long CouponId);
-        IEnumerable<UserFavouriteCoupon> GetAllFavouriteCouponByUserId(string UserId);
+        IEnumerable<Coupon> GetAllFavouriteCouponByUserId(string UserId);
     }
 }

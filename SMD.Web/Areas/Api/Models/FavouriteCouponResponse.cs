@@ -1,4 +1,5 @@
-﻿using SMD.Models.DomainModels;
+﻿using SMD.Models.Common;
+using SMD.Models.DomainModels;
 using SMD.Models.ResponseModels;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,6 @@ namespace SMD.MIS.Areas.Api.Models
 {
     public class FavouriteCouponResponse : BaseApiResponse
     {
-        public IEnumerable<UserFavouriteCoupon> FavouriteCoupon { get; set; }
+        public IEnumerable<Coupons> FavouriteCoupon { get; set; }
     }
 }

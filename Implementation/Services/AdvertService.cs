@@ -1177,41 +1177,6 @@ namespace SMD.Implementation.Services
             return respMesg;
         }
 
-        public IEnumerable<UserFavouriteCoupon> GetAllFavouriteCouponByUserId(string UserId)
-        {
-            return _userFavouriteCouponRepository.GetAllFavouriteCouponByUserId(UserId);
-        }
-
-
-
-        /// <summary>
-        /// Setting of favorite coupons
-        /// </summary>
-        /// <param name="UserId"></param>
-        /// <param name="CouponId"></param>
-        /// <param name="mode"></param>
-        /// <returns></returns>
-        public bool SetFavoriteCoupon(string UserId, long CouponId, bool mode)
-        {
-            //inserting the favorite coupon 
-            if (mode == true)
-            {
-                var favCoupon = new UserFavouriteCoupon { UserId = UserId, CouponId = CouponId };
-
-                _userFavouriteCouponRepository.Add(favCoupon);
-                _userFavouriteCouponRepository.SaveChanges();
-            }
-            else // removing the favorite
-            {
-                var removeCoupon = _userFavouriteCouponRepository.GetByCouponId(CouponId);
-                _userFavouriteCouponRepository.Delete(removeCoupon);
-                _userFavouriteCouponRepository.SaveChanges();
-
-            }
-            
-
-            return true;
-        }
 
 
         public CouponCodeModel GenerateCouponCodes(int numbers, long CampaignId)
