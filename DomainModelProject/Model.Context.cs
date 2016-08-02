@@ -76,5 +76,7 @@ namespace DomainModelProject
         public virtual DbSet<UserFavouriteCoupon> UserFavouriteCoupons { get; set; }
         public virtual DbSet<CouponCategories> CouponCategories { get; set; }
         public virtual DbSet<CouponCategory1> CouponCategories1 { get; set; }
+        public virtual DbSet<Phrase> Phrases { get; set; }
+        public virtual DbSet<Section> Sections { get; set; }
     }
 }

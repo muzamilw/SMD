@@ -14,10 +14,12 @@ namespace SMD.Models.Common
         public string Firstline { get; set; }
         public string SecondLine { get; set; }
         public string CouponImage { get; set; }
-        public string CouponSwapValue { get; set; }
-        public string CouponActualValue { get; set; }
-        public int CouponTakenValue { get; set; }
-        public double CouponDiscountedValue { get; set; }
+     
+        public double Price { get; set; }
+        public double Savings { get; set; }
+        public double SwapCost { get; set; }
+
+        public int DaysLeft { get; set; }
 
         public int CompanyId { get; set; }
         public string AdvertisersLogoPath { get; set; }

@@ -405,7 +405,7 @@
     <Compile Include="Areas\Api\Controllers\GetCouponByCompanyIdController.cs" />
     <Compile Include="Areas\Api\Controllers\GetCouponByIdController.cs" />
     <Compile Include="Areas\Api\Controllers\GetCouponController.cs" />
-    <Compile Include="Areas\Api\Controllers\GetFavouriteCouponController.cs" />
+    <Compile Include="Areas\Api\Controllers\UserFavouriteCouponController.cs" />
     <Compile Include="Areas\Api\Controllers\IndustryController.cs" />
     <Compile Include="Areas\Api\Controllers\InviteUserController.cs" />
     <Compile Include="Areas\Api\Controllers\ManageUsersController.cs" />

@@ -16,5 +16,9 @@ namespace SMD.Interfaces.Services
         CampaignResponseModel GetCouponById(long CampaignId);
 
         CampaignResponseModel GetCoupons(AdCampaignSearchRequest request);
+
+        IEnumerable<Coupon> GetAllFavouriteCouponByUserId(string UserId);
+
+        bool SetFavoriteCoupon(string UserId, long CouponId, bool mode);
     }
 }

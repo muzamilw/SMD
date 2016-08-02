@@ -298,14 +298,14 @@ namespace SMD.Repository.Repositories
                         select new Coupons
                         {
                             CouponId = ad.CampaignId,
-                            CouponActualValue = ad.CouponActualValue,
+                            Price = Convert.ToDouble( ad.CouponActualValue),
                             CouponName = ad.CampaignName,
                             CouponTitle = ad.DisplayTitle,
                             Firstline = ad.Description,
                             SecondLine = ad.CampaignDescription,
-                            CouponSwapValue = ad.CouponSwapValue,
-                            CouponTakenValue = ad.CouponTakenCount ?? 0,
-                            CouponDiscountedValue = ad.CouponDiscountValue ?? 0,
+                            SwapCost = Convert.ToDouble( ad.CouponSwapValue),
+                           
+                            Savings = ad.CouponDiscountValue ?? 0,
                             CouponImage =  ad.ImagePath
                         };
             

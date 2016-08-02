@@ -5,6 +5,7 @@ using SMD.MIS.ModelMappers;
 using SMD.Models.DomainModels;
 using SMD.Models.ResponseModels;
 using SMD.Models.Common;
+using System;
 
 namespace SMD.MIS.Areas.Api.ModelMappers
 {
@@ -26,8 +27,9 @@ namespace SMD.MIS.Areas.Api.ModelMappers
         Firstline = source.Firstline,
         SecondLine = source.SecondLine,
         CouponImage = source.CouponImage,
-        CouponSwapValue = source.CouponSwapValue,
-        CouponActualValue = source.CouponActualValue,
+        SwapCost = Convert.ToDouble( source.CouponSwapValue),
+        Price = Convert.ToDouble( source.CouponActualValue),
+        Savings = Convert.ToDouble( source.CouponActualValue),
 
         CompanyId = source.CompanyId,
 

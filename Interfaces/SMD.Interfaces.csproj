@@ -78,6 +78,8 @@
     <Compile Include="Logger\IMPCLogWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\ICampaignCategoriesRepository.cs" />
+    <Compile Include="Repository\ISectionRepository.cs" />
+    <Compile Include="Repository\IPhraseRepository.cs" />
     <Compile Include="Repository\ICityService.cs" />
     <Compile Include="Repository\ICompanyRepository.cs" />
     <Compile Include="Repository\ICompanyAspNetUsersRepository.cs" />

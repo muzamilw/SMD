@@ -6990,7 +6990,7 @@ GO
 
 
 
-USE [SMDDev]
+
 GO
 
 /****** Object:  Table [dbo].[Coupon]    Script Date: 7/29/2016 12:17:25 PM ******/
@@ -7411,3 +7411,193 @@ GO
 ALTER TABLE dbo.AdCampaignResponse SET (LOCK_ESCALATION = TABLE)
 GO
 COMMIT
+
+
+
+
+
+--migration script
+
+USE [SMDv2]
+GO
+
+
+UPDATE adcampaign
+set
+ CouponActualValue  =REPLACE(CouponActualValue, '£', '')
+	, CouponDiscountValue = REPLACE(CouponDiscountValue, '£', '')
+	,CouponSwapValue 		=REPLACE(CouponSwapValue, '£', '')
+
+	
+SET ANSI_WARNINGS  OFF;
+INSERT INTO [dbo].[Coupon]
+           ([LanguageId]
+           ,[UserId]
+           ,[CouponTitle]
+           ,[SearchKeywords]
+           ,[Status]
+           ,[Archived]
+           ,[Approved]
+           ,[ApprovedBy]
+           ,[ApprovalDateTime]
+           ,[CreatedDateTime]
+           ,[CreatedBy]
+           ,[ModifiedDateTime]
+           ,[ModifiedBy]
+           ,[RejectedReason]
+           ,[Rejecteddatetime]
+           ,[RejectedBy]
+           ,[CurrencyId]
+           ,[Price]
+           ,[Savings]
+           ,[SwapCost]
+           ,[CouponViewCount]
+           ,[CouponIssuedCount]
+           ,[CouponRedeemedCount]
+           ,[CouponQtyPerUser]
+           ,[CouponListingMode]
+           ,[CompanyId]
+           ,[CouponActiveMonth]
+           ,[CouponActiveYear]
+           ,[CouponExpirydate]
+           ,[couponImage1]
+           ,[CouponImage2]
+           ,[CouponImage3]
+           ,[LogoUrl]
+           ,[HighlightLine1]
+           ,[HighlightLine2]
+           ,[HighlightLine3]
+           ,[HighlightLine4]
+           ,[HighlightLine5]
+           ,[FinePrintLine1]
+           ,[FinePrintLine2]
+           ,[FinePrintLine3]
+           ,[FinePrintLine4]
+           ,[FinePrintLine5]
+           ,[LocationBranchId]
+           ,[LocationTitle]
+           ,[LocationLine1]
+           ,[LocationLine2]
+           ,[LocationCity]
+           ,[LocationState]
+           ,[LocationZipCode]
+           ,[LocationLAT]
+           ,[LocationLON]
+           ,[LocationPhone]
+           ,[HowToRedeemLine1]
+           ,[HowToRedeemLine2]
+           ,[HowToRedeemLine3]
+           ,[HowToRedeemLine4]
+           ,[HowToRedeemLine5])
+    
+
+
+	select    
+	
+	languageid,userid,DisplayTitle,'',
+	3,0,1,'',getdate(),getdate(),'insertqry',
+	getdate(),'','no reson',getdate(),null,
+	1 --currencyid
+	, cast(CouponActualValue as float)  --price
+	, cast(CouponDiscountValue as float) --[Savings]
+	,cast (CouponSwapValue as float)		-- swapcpost
+
+
+
+	,0,0,0,10,1,companyid,1,6,'2016-12-31'
+	,ImagePath, couponImage2,couponImage3, LogoUrl,
+	
+	VoucherHighlightLine1
+	
+
+           ,[VoucherHighlightLine2]
+           ,[VoucherHighlightLine3]
+           ,[VoucherHighlightLine4]
+           ,[VoucherHighlightLine5]
+           ,[VoucherFinePrintLine1]
+           ,[VoucherFinePrintLine2]
+           ,[VoucherFinePrintLine3]
+           ,[VoucherFinePrintLine4]
+           ,[VoucherFinePrintLine5]
+           ,null -- branch
+           ,VoucherLocationLine1
+           ,[VoucherLocationLine1]
+           ,[VoucherLocationLine2]
+           ,[VoucherLocationLine3]
+           ,[VoucherLocationLine4]
+           ,[VoucherLocationLine5]
+           ,[VoucherLocationLAT]
+           ,[VoucherLocationLON]
+           ,VoucherRedemptionPhone
+           ,[VoucherHowToRedeemLine1]
+           ,[VoucherHowToRedeemLine2]
+           ,[VoucherHowToRedeemLine3]
+           ,[VoucherHowToRedeemLine4]
+           ,[VoucherHowToRedeemLine5]
+		   
+		   from AdCampaign a where type = 5 and status = 3 order by campaignid
+SET ANSI_WARNINGS ON;
+
+
+
+
+
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[Section](
+ [SectionId] [int] NOT NULL  IDENTITY (1, 1),
+ [SectionName] [varchar](100) NOT NULL,
+ [SecOrder] [int] NOT NULL
+ 
+ 
+ CONSTRAINT [PK_section] PRIMARY KEY CLUSTERED 
+(
+ [SectionId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+
+
+CREATE TABLE [dbo].[Phrase](
+ [PhraseId] [int] IDENTITY(1,1) NOT NULL,
+ [PhraseName] [varchar](50) NULL,
+ [SectionId] [int] NULL,
+ [SortOrder] [int] NULL
+ 
+ CONSTRAINT [PK_Phrase_fields] PRIMARY KEY CLUSTERED 
+(
+ [PhraseId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [dbo].[Phrase]  WITH CHECK ADD  CONSTRAINT [fk_sectionId] FOREIGN KEY([SectionId])
+REFERENCES [dbo].[Section] ([SectionId])
+GO
+

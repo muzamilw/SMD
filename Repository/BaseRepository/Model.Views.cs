@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySetsD844E78B50C883E59297576C1E56BAE00673480908F3544AABBC411052435522))]
+[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySetsCC7B63D522A981808221073C29C3751C229DAF614A485E679A1339583FDE65CD))]
 
 namespace Edm_EntityMappingGeneratedViews
 {
@@ -17,19 +17,19 @@ namespace Edm_EntityMappingGeneratedViews
     /// <Summary>
     /// The type contains views for EntitySets and AssociationSets that were generated at design time.
     /// </Summary>
-    public sealed class ViewsForBaseEntitySetsD844E78B50C883E59297576C1E56BAE00673480908F3544AABBC411052435522 : System.Data.Mapping.EntityViewContainer
+    public sealed class ViewsForBaseEntitySetsCC7B63D522A981808221073C29C3751C229DAF614A485E679A1339583FDE65CD : System.Data.Mapping.EntityViewContainer
     {
         
         /// <Summary>
         /// The constructor stores the views for the extents and also the hash values generated based on the metadata and mapping closure and views.
         /// </Summary>
-        public ViewsForBaseEntitySetsD844E78B50C883E59297576C1E56BAE00673480908F3544AABBC411052435522()
+        public ViewsForBaseEntitySetsCC7B63D522A981808221073C29C3751C229DAF614A485E679A1339583FDE65CD()
         {
             this.EdmEntityContainerName = "BaseDbContext";
             this.StoreEntityContainerName = "SMDModelStoreContainer";
-            this.HashOverMappingClosure = "b68a384205477f865bde70d689ceeba5e8eaa0be68d6ceeb8104ff4c61c94106";
-            this.HashOverAllExtentViews = "747b99087616bcf6912c40d6d9826ae79312f7849f966ab1da3118daa9d2c5b9";
-            this.ViewCount = 98;
+            this.HashOverMappingClosure = "44521fa4d05667fbaf68fe3216a0d88fd6c27778d5256b1f29e95f29d9ca62c4";
+            this.HashOverAllExtentViews = "338119993eb59a0bc10e4893b125a2369096c887f4aaae0d7b4f8746c9c6d4c7";
+            this.ViewCount = 102;
         }
         
         /// <Summary>
@@ -428,6 +428,22 @@ namespace Edm_EntityMappingGeneratedViews
             if ((index == 97))
             {
                 return GetView97();
+            }
+            if ((index == 98))
+            {
+                return GetView98();
+            }
+            if ((index == 99))
+            {
+                return GetView99();
+            }
+            if ((index == 100))
+            {
+                return GetView100();
+            }
+            if ((index == 101))
+            {
+                return GetView101();
             }
             throw new System.IndexOutOfRangeException();
         }
@@ -3080,6 +3096,80 @@ namespace Edm_EntityMappingGeneratedViews
             T.RoleId AS [vw_CompanyUsers.RoleId], 
             True AS _from0
         FROM SMDModelStoreContainer.vw_CompanyUsers AS T
+    ) AS T1");
+        }
+        
+        /// <Summary>
+        /// return view for SMDModelStoreContainer.Phrase
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView98()
+        {
+            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.Phrase", @"
+    SELECT VALUE -- Constructing Phrase
+        [SMDModel.Store.Phrase](T1.Phrase_PhraseId, T1.Phrase_PhraseName, T1.Phrase_SectionId, T1.Phrase_SortOrder)
+    FROM (
+        SELECT 
+            T.PhraseId AS Phrase_PhraseId, 
+            T.PhraseName AS Phrase_PhraseName, 
+            T.SectionId AS Phrase_SectionId, 
+            T.SortOrder AS Phrase_SortOrder, 
+            True AS _from0
+        FROM BaseDbContext.Phrases AS T
+    ) AS T1");
+        }
+        
+        /// <Summary>
+        /// return view for SMDModelStoreContainer.Section
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView99()
+        {
+            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.Section", @"
+    SELECT VALUE -- Constructing Section
+        [SMDModel.Store.Section](T1.Section_SectionId, T1.Section_SectionName, T1.Section_SecOrder)
+    FROM (
+        SELECT 
+            T.SectionId AS Section_SectionId, 
+            T.SectionName AS Section_SectionName, 
+            T.SecOrder AS Section_SecOrder, 
+            True AS _from0
+        FROM BaseDbContext.Sections AS T
+    ) AS T1");
+        }
+        
+        /// <Summary>
+        /// return view for BaseDbContext.Phrases
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView100()
+        {
+            return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.Phrases", @"
+    SELECT VALUE -- Constructing Phrases
+        [DomainModels.Phrase](T1.Phrase_PhraseId, T1.Phrase_PhraseName, T1.Phrase_SectionId, T1.Phrase_SortOrder)
+    FROM (
+        SELECT 
+            T.PhraseId AS Phrase_PhraseId, 
+            T.PhraseName AS Phrase_PhraseName, 
+            T.SectionId AS Phrase_SectionId, 
+            T.SortOrder AS Phrase_SortOrder, 
+            True AS _from0
+        FROM SMDModelStoreContainer.Phrase AS T
+    ) AS T1");
+        }
+        
+        /// <Summary>
+        /// return view for BaseDbContext.Sections
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView101()
+        {
+            return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.Sections", @"
+    SELECT VALUE -- Constructing Sections
+        [DomainModels.Section](T1.Section_SectionId, T1.Section_SectionName, T1.Section_SecOrder)
+    FROM (
+        SELECT 
+            T.SectionId AS Section_SectionId, 
+            T.SectionName AS Section_SectionName, 
+            T.SecOrder AS Section_SecOrder, 
+            True AS _from0
+        FROM SMDModelStoreContainer.Section AS T
     ) AS T1");
         }
     }

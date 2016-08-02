@@ -137,6 +137,9 @@
         <EntityTypeShape EntityType="SMDDevModel.CouponCategory1" Width="1.5" PointX="3.375" PointY="11" />
         <AssociationConnector Association="SMDDevModel.FK_CampaignCategories_CouponCategory" />
         <AssociationConnector Association="SMDDevModel.FK_CouponCategories_CouponCategory" />
+        <EntityTypeShape EntityType="SMDDevModel.Phrase" Width="1.5" PointX="7.625" PointY="10.875" />
+        <EntityTypeShape EntityType="SMDDevModel.Section" Width="1.5" PointX="5.375" PointY="11" />
+        <AssociationConnector Association="SMDDevModel.fk_sectionId" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
