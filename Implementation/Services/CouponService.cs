@@ -18,6 +18,7 @@ namespace SMD.Implementation.Services
         private readonly ICouponRepository couponRepository;
         private readonly IUserFavouriteCouponRepository _userFavouriteCouponRepository;
 
+
         #endregion
         #region Constructor
         /// <summary>
@@ -72,10 +73,21 @@ namespace SMD.Implementation.Services
 
         public IEnumerable<Coupon> GetAllFavouriteCouponByUserId(string UserId)
         {
-            return _userFavouriteCouponRepository.GetAllFavouriteCouponByUserId(UserId);
+            var result = _userFavouriteCouponRepository.GetAllFavouriteCouponByUserId(UserId);
+            foreach (var item in result)
+            {
+                var differ = new DateTime(item.CouponActiveYear.Value,item.CouponActiveMonth.Value,DateTime.DaysInMonth(item.CouponActiveYear.Value, item.CouponActiveMonth.Value)) - DateTime.Today;
+                item.DaysLeft = Convert.ToInt32( differ.TotalDays);
+
+            }
+
+            return result;
+
+          
+
         }
 
-
+ 
 
         /// <summary>
         /// Setting of favorite coupons
@@ -104,6 +116,18 @@ namespace SMD.Implementation.Services
 
 
             return true;
+        }
+
+        public SearchCouponsResponse SearchCoupons(int categoryId, int type, int size, string keywords, int pageNo, int distance, string Lat, string Lon, string UserId)
+        {
+            List<SearchCoupons_Result> coupons = couponRepository.SearchCoupons(categoryId, type, size, keywords, pageNo, distance, Lat, Lon, UserId).ToList();
+            return new SearchCouponsResponse
+            {
+                Status = true,
+                Message = LanguageResources.Success,
+                Coupons = coupons,
+                TotalCount = coupons.Any() && coupons[0].TotalItems.HasValue ? coupons[0].TotalItems.Value : 0
+            };
         }
 
 

@@ -20,5 +20,7 @@ namespace SMD.Interfaces.Services
         IEnumerable<Coupon> GetAllFavouriteCouponByUserId(string UserId);
 
         bool SetFavoriteCoupon(string UserId, long CouponId, bool mode);
+
+        SearchCouponsResponse SearchCoupons(int categoryId, int type, int size, string keywords, int pageNo, int distance, string Lat, string Lon, string UserId);
     }
 }

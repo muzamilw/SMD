@@ -158,6 +158,16 @@ namespace SMD.Repository.Repositories
 
             return DbSet.Where(query);
         }
+
+
+
+
+        public IEnumerable<SearchCoupons_Result> SearchCoupons(int categoryId, int type, int size, string keywords, int pageNo, int distance, string Lat, string Lon, string UserId)
+        {
+            int? fromRow = (pageNo - 1) * size;
+            int? toRow = size;
+            return db.SearchCoupons(categoryId, type, keywords, distance, Lat, Lon, UserId, fromRow, toRow);
+        }
         #endregion
     }
 }

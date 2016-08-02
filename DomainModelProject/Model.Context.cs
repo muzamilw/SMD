@@ -12,6 +12,8 @@ namespace DomainModelProject
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class SMDDevEntities : DbContext
     {
@@ -78,5 +80,46 @@ namespace DomainModelProject
         public virtual DbSet<CouponCategory1> CouponCategories1 { get; set; }
         public virtual DbSet<Phrase> Phrases { get; set; }
         public virtual DbSet<Section> Sections { get; set; }
+    
+        public virtual ObjectResult<SearchCoupons_Result> SearchCoupons(Nullable<int> categoryId, Nullable<int> type, string keywords, Nullable<int> distance, string lat, string lon, string userId, Nullable<int> fromRow, Nullable<int> toRow)
+        {
+            var categoryIdParameter = categoryId.HasValue ?
+                new ObjectParameter("categoryId", categoryId) :
+                new ObjectParameter("categoryId", typeof(int));
+    
+            var typeParameter = type.HasValue ?
+                new ObjectParameter("type", type) :
+                new ObjectParameter("type", typeof(int));
+    
+            var keywordsParameter = keywords != null ?
+                new ObjectParameter("keywords", keywords) :
+                new ObjectParameter("keywords", typeof(string));
+    
+            var distanceParameter = distance.HasValue ?
+                new ObjectParameter("distance", distance) :
+                new ObjectParameter("distance", typeof(int));
+    
+            var latParameter = lat != null ?
+                new ObjectParameter("Lat", lat) :
+                new ObjectParameter("Lat", typeof(string));
+    
+            var lonParameter = lon != null ?
+                new ObjectParameter("Lon", lon) :
+                new ObjectParameter("Lon", typeof(string));
+    
+            var userIdParameter = userId != null ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(string));
+    
+            var fromRowParameter = fromRow.HasValue ?
+                new ObjectParameter("FromRow", fromRow) :
+                new ObjectParameter("FromRow", typeof(int));
+    
+            var toRowParameter = toRow.HasValue ?
+                new ObjectParameter("ToRow", toRow) :
+                new ObjectParameter("ToRow", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SearchCoupons_Result>("SearchCoupons", categoryIdParameter, typeParameter, keywordsParameter, distanceParameter, latParameter, lonParameter, userIdParameter, fromRowParameter, toRowParameter);
+        }
     }
 }

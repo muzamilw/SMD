@@ -53,11 +53,6 @@ namespace SMD.MIS.Areas.Api.Controllers
             var favs = _couponService.GetAllFavouriteCouponByUserId(UserId);
             response.FavouriteCoupon = favs.Select(a => Mapper.Map<SMD.Models.DomainModels.Coupon, Coupons>(a)).ToList();
 
-
-
-
-                
-
                
                 response.Status = true;
             }

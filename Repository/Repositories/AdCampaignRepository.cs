@@ -284,66 +284,9 @@ namespace SMD.Repository.Repositories
         return db.GetCouponsByCompanyId(CompanyId).ToList();
     }
 
-        public List<Coupons> GetAllCoupons(int categoryId, int type , int size, string keywords, int pageNo)
-        {
-            CouponCategory cc = new CouponCategory();
-            if(categoryId != 0)
-                cc = db.CouponCategory.Where(g=>g.CategoryId == categoryId).SingleOrDefault();
-
-            var query = from ad in db.AdCampaigns
-                        where ad.Type == 5 && (ad.CouponTakenCount == null || ad.CouponTakenCount < ad.CouponQuantity)
-                        && (ad.Archived == null || ad.Archived == false) && ad.Approved == true && (ad.CouponType == type || type == 0)
-                        && (ad.DisplayTitle.Contains(keywords) || keywords == "\"\"")
-                        
-                        select new Coupons
-                        {
-                            CouponId = ad.CampaignId,
-                            Price = Convert.ToDouble( ad.CouponActualValue),
-                            CouponName = ad.CampaignName,
-                            CouponTitle = ad.DisplayTitle,
-                            Firstline = ad.Description,
-                            SecondLine = ad.CampaignDescription,
-                            SwapCost = Convert.ToDouble( ad.CouponSwapValue),
-                           
-                            Savings = ad.CouponDiscountValue ?? 0,
-                            CouponImage =  ad.ImagePath
-                        };
-            
-            var res =  query.ToList<Coupons>().Skip(pageNo - 1 * size).Take(size).ToList();
-            foreach (var item in res)
-            {
-                if (item.CouponImage != null)
-                {
-                    if (!item.CouponImage.ToLower().Contains(System.Web.HttpContext.Current.Request.Url.Authority.ToLower()))
-                        item.CouponImage = System.Web.HttpContext.Current.Request.Url.Scheme + "://" + System.Web.HttpContext.Current.Request.Url.Authority + "/" + item.CouponImage;
-                }
-               
-            }
-            return res; 
-        }
-        public IEnumerable<Coupons> GetCouponsByUserIdWithoutFilter(string UserId)
-        {
+    
+       
 
 
-            var query = from ad in db.AdCampaigns
-                        where ad.Type == 5 && (ad.CouponTakenCount == null || ad.CouponTakenCount < ad.CouponQuantity)
-                        && (ad.Archived == null || ad.Archived == false) && ad.UserId == UserId
-                        select new Coupons()
-                        {
-                            CouponId = ad.CampaignId,
-                            CouponName = ad.CampaignName,
-                            CouponTitle = ad.DisplayTitle
-                        };
-
-            return query.ToList<Coupons>();
-        }
-
-
-        public IEnumerable<SearchCoupons_Result> SearchCoupons(int categoryId, int type, int size, string keywords, int pageNo, int distance, string Lat, string Lon,string UserId)
-        {
-            int? fromRow = (pageNo - 1) * PageSizeForProducts;
-            int? toRow = PageSizeForProducts;
-            return db.SearchCoupons(categoryId,type,keywords,distance,Lat,Lon, UserId, fromRow, toRow);
-        }
     }
 }

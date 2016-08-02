@@ -1910,6 +1910,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="SearchCoupons" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="categoryId" Type="int" Mode="In" />
+          <Parameter Name="type" Type="int" Mode="In" />
+          <Parameter Name="keywords" Type="nvarchar" Mode="In" />
+          <Parameter Name="distance" Type="int" Mode="In" />
+          <Parameter Name="Lat" Type="nvarchar" Mode="In" />
+          <Parameter Name="Lon" Type="nvarchar" Mode="In" />
+          <Parameter Name="UserId" Type="nvarchar" Mode="In" />
+          <Parameter Name="FromRow" Type="int" Mode="In" />
+          <Parameter Name="ToRow" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="SMDDevModelStoreContainer">
           <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AdCampaign" EntityType="Self.AdCampaign" Schema="dbo" store:Type="Tables" />
@@ -4609,6 +4620,17 @@
             <End Role="Section" EntitySet="Sections" />
             <End Role="Phrase" EntitySet="Phrases" />
           </AssociationSet>
+          <FunctionImport Name="SearchCoupons" ReturnType="Collection(SMDDevModel.SearchCoupons_Result)">
+            <Parameter Name="categoryId" Mode="In" Type="Int32" />
+            <Parameter Name="type" Mode="In" Type="Int32" />
+            <Parameter Name="keywords" Mode="In" Type="String" />
+            <Parameter Name="distance" Mode="In" Type="Int32" />
+            <Parameter Name="Lat" Mode="In" Type="String" />
+            <Parameter Name="Lon" Mode="In" Type="String" />
+            <Parameter Name="UserId" Mode="In" Type="String" />
+            <Parameter Name="FromRow" Mode="In" Type="Int32" />
+            <Parameter Name="ToRow" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="CouponCategories">
           <Key>
@@ -4699,6 +4721,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="SearchCoupons_Result">
+          <Property Type="Int64" Name="CouponId" Nullable="false" />
+          <Property Type="String" Name="CouponTitle" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="CouponImage1" Nullable="true" />
+          <Property Type="String" Name="LogoUrl" Nullable="true" MaxLength="227" />
+          <Property Type="Double" Name="Price" Nullable="true" />
+          <Property Type="Double" Name="Savings" Nullable="true" />
+          <Property Type="Double" Name="SwapCost" Nullable="true" />
+          <Property Type="Int32" Name="CompanyId" Nullable="true" />
+          <Property Type="Int32" Name="CouponActiveMonth" Nullable="true" />
+          <Property Type="Int32" Name="CouponActiveYear" Nullable="true" />
+          <Property Type="Int32" Name="TotalItems" Nullable="true" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5645,6 +5680,23 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SearchCoupons" FunctionName="SMDDevModel.Store.SearchCoupons">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SMDDevModel.SearchCoupons_Result">
+                <ScalarProperty Name="CouponId" ColumnName="CouponId" />
+                <ScalarProperty Name="CouponTitle" ColumnName="CouponTitle" />
+                <ScalarProperty Name="CouponImage1" ColumnName="CouponImage1" />
+                <ScalarProperty Name="LogoUrl" ColumnName="LogoUrl" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Savings" ColumnName="Savings" />
+                <ScalarProperty Name="SwapCost" ColumnName="SwapCost" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="CouponActiveMonth" ColumnName="CouponActiveMonth" />
+                <ScalarProperty Name="CouponActiveYear" ColumnName="CouponActiveYear" />
+                <ScalarProperty Name="TotalItems" ColumnName="TotalItems" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
