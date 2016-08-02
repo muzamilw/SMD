@@ -1596,6 +1596,9 @@
     <Content Include="Areas\Coupons\Views\Coupons\ManageCoupon.cshtml" />
     <Content Include="Areas\Coupons\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Coupons\Views\web.config" />
+    <None Include="config\Web.connectionstrings - Copy.configx" />
+    <None Include="config\Web.connectionstrings.config" />
+    <None Include="config\Web.connectionstrings.default.config" />
     <None Include="Properties\PublishProfiles\mz profile.pubxml" />
     <None Include="Properties\PublishProfiles\SMD MIS Saqib.pubxml" />
     <None Include="Properties\PublishProfiles\SMD.pubxml" />
