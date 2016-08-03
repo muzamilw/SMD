@@ -4,7 +4,7 @@
       Coupon = function (FinePrintLine1, FinePrintLine2, FinePrintLine3, FinePrintLine4, FinePrintLine5, GeographyColumn, HighlightLine1, HighlightLine2, HighlightLine3, HighlightLine4,
             HighlightLine5, HowToRedeemLine1, HowToRedeemLine2, HowToRedeemLine3, HowToRedeemLine4, HowToRedeemLine5, LanguageId, LocationBranchId, LocationCity, LocationLAT,
             LocationLine1, LocationLine2, LocationLON, LocationPhone, LocationState, LocationTitle, LocationZipCode, LogoUrl, ModifiedBy, ModifiedDateTime, Price, RejectedBy,
-            Rejecteddatetime, RejectedReason, Savings, SearchKeywords, Status, SwapCost, UserId
+            Rejecteddatetime, RejectedReason, Savings, SearchKeywords, Status, SwapCost, UserId, CouponTitle, CouponExpirydate, CouponQtyPerUser, CouponId, couponImage1, CouponImage2, CouponImage3
           ) {
        
           var
@@ -222,7 +222,7 @@
                       LocationState: LocationState(),
                       LocationTitle: LocationTitle(),
                       LocationZipCode: LocationZipCode(),
-                      LogoUrl: LogoUrl(),
+                  //    LogoUrl: LogoUrl(),
                       ModifiedBy: ModifiedBy(),
                       ModifiedDateTime: ModifiedDateTime(),
                       Price: Price(),
@@ -301,7 +301,7 @@
               StatusValue :StatusValue ,
               SwapCost: (SwapCost),
               UserId: (UserId),
-              LogoImageBytes: LogoImageBytes(),
+              LogoImageBytes: LogoImageBytes,
               hasChanges: hasChanges,
               convertToServerData: convertToServerData
           };
@@ -316,8 +316,9 @@
             source.HighlightLine5, source.HowToRedeemLine1, source.HowToRedeemLine2, source.HowToRedeemLine3, source.HowToRedeemLine4,
             source.HowToRedeemLine5, source.LanguageId, source.LocationBranchId, source.LocationCity, source.LocationLAT,
             source.LocationLine1, source.LocationLine2, source.LocationLON, source.LocationPhone, source.LocationState,
-            source.LocationTitle, source.LocationZipCode, source.LogoUrl, source.ModifiedBy, source.ModifiedDateTime, source.Price, source.RejectedBy,
-            source.Rejecteddatetime, source.RejectedReason, source.Savings, source.SearchKeywords, source.Status, source.SwapCost, source.UserId);
+            source.LocationTitle, source.LocationZipCode, "/" + source.LogoUrl, source.ModifiedBy, source.ModifiedDateTime, source.Price, source.RejectedBy,
+            source.Rejecteddatetime, source.RejectedReason, source.Savings, source.SearchKeywords, source.Status, source.SwapCost, source.UserId,source.CouponTitle,source.CouponExpirydate,
+            source.CouponQtyPerUser, source.CouponId, source.couponImage1, source.CouponImage2, source.CouponImage3);
         
        
         return coupon;

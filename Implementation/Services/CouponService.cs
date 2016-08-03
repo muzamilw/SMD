@@ -244,7 +244,7 @@ namespace SMD.Implementation.Services
                 {
                     couponModel.LogoUrl = paths[7];
                 }
-                else if (couponModel != null && couponModel.LogoUrl.Contains("Content/Images"))
+                else if (couponModel != null && couponModel.LogoUrl != null && couponModel.LogoUrl.Contains("Content/Images"))
                 {
                     couponModel.LogoUrl = null;
                 }
@@ -257,7 +257,8 @@ namespace SMD.Implementation.Services
 
         public void UpdateCampaign(Coupon couponModel)
         {
-            // couponModel.UserId = couponRepository.LoggedInUserIdentity;
+            couponModel.CompanyId = couponRepository.CompanyId;
+            couponModel.UserId = couponRepository.LoggedInUserIdentity;
             var user = UserManager.Users.Where(g => g.Id == couponRepository.LoggedInUserIdentity).SingleOrDefault();
             if (user != null)
                 couponModel.CreatedBy = user.FullName;
