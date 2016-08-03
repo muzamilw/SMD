@@ -87,5 +87,7 @@ namespace SMD.Models.DomainModels
         public int DaysLeft { get; set; }
         [NotMapped]
         public string LogoImageBytes { get; set; }
+
+        public virtual ICollection<UserPurchasedCoupon> UserPurchasedCoupons { get; set; }
     }
 }

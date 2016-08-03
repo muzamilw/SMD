@@ -894,6 +894,19 @@
           <Property Name="CouponId" Type="bigint" />
           <Property Name="UserId" Type="nvarchar" MaxLength="128" />
         </EntityType>
+        <EntityType Name="UserPurchasedCoupon">
+          <Key>
+            <PropertyRef Name="CouponPurchaseId" />
+          </Key>
+          <Property Name="CouponPurchaseId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CouponId" Type="bigint" />
+          <Property Name="PurchaseDateTime" Type="datetime" />
+          <Property Name="PurchaseAmount" Type="float" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+          <Property Name="IsRedeemed" Type="bit" />
+          <Property Name="RedemptionDateTime" Type="datetime" />
+          <Property Name="RedemptionOperator" Type="nvarchar" MaxLength="500" />
+        </EntityType>
         <Association Name="FK_Account_Company">
           <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
           <End Role="Account" Type="Self.Account" Multiplicity="*" />
@@ -1910,6 +1923,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_UserPurchasedCoupon_Coupon">
+          <End Role="Coupon" Type="Self.Coupon" Multiplicity="0..1" />
+          <End Role="UserPurchasedCoupon" Type="Self.UserPurchasedCoupon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Coupon">
+              <PropertyRef Name="CouponId" />
+            </Principal>
+            <Dependent Role="UserPurchasedCoupon">
+              <PropertyRef Name="CouponId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="SearchCoupons" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="categoryId" Type="int" Mode="In" />
           <Parameter Name="type" Type="int" Mode="In" />
@@ -1977,6 +2002,7 @@
           <EntitySet Name="TransactionLog" EntityType="Self.TransactionLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserApps" EntityType="Self.UserApps" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserFavouriteCoupon" EntityType="Self.UserFavouriteCoupon" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserPurchasedCoupon" EntityType="Self.UserPurchasedCoupon" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Account_Company" Association="Self.FK_Account_Company">
             <End Role="Company" EntitySet="Company" />
             <End Role="Account" EntitySet="Account" />
@@ -2312,6 +2338,10 @@
           <AssociationSet Name="FK_UserApps_AspNetUsers" Association="Self.FK_UserApps_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="UserApps" EntitySet="UserApps" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserPurchasedCoupon_Coupon" Association="Self.FK_UserPurchasedCoupon_Coupon">
+            <End Role="Coupon" EntitySet="Coupon" />
+            <End Role="UserPurchasedCoupon" EntitySet="UserPurchasedCoupon" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -2832,6 +2862,7 @@
           <NavigationProperty Name="CompanyBranch" Relationship="Self.FK_Coupon_CompanyBranch" FromRole="Coupon" ToRole="CompanyBranch" />
           <NavigationProperty Name="Language" Relationship="Self.FK_Coupon_Language" FromRole="Coupon" ToRole="Language" />
           <NavigationProperty Name="CouponCategories" Relationship="SMDDevModel.FK_CouponCategories_Coupon" FromRole="Coupon" ToRole="CouponCategories" />
+          <NavigationProperty Name="UserPurchasedCoupons" Relationship="SMDDevModel.FK_UserPurchasedCoupon_Coupon" FromRole="Coupon" ToRole="UserPurchasedCoupon" />
         </EntityType>
         <EntityType Name="CouponCode">
           <Key>
@@ -4631,6 +4662,11 @@
             <Parameter Name="FromRow" Mode="In" Type="Int32" />
             <Parameter Name="ToRow" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="UserPurchasedCoupons" EntityType="SMDDevModel.UserPurchasedCoupon" />
+          <AssociationSet Name="FK_UserPurchasedCoupon_Coupon" Association="SMDDevModel.FK_UserPurchasedCoupon_Coupon">
+            <End Role="Coupon" EntitySet="Coupons" />
+            <End Role="UserPurchasedCoupon" EntitySet="UserPurchasedCoupons" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="CouponCategories">
           <Key>
@@ -4734,6 +4770,32 @@
           <Property Type="Int32" Name="CouponActiveYear" Nullable="true" />
           <Property Type="Int32" Name="TotalItems" Nullable="true" />
         </ComplexType>
+        <EntityType Name="UserPurchasedCoupon">
+          <Key>
+            <PropertyRef Name="CouponPurchaseId" />
+          </Key>
+          <Property Name="CouponPurchaseId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CouponId" Type="Int64" />
+          <Property Name="PurchaseDateTime" Type="DateTime" Precision="3" />
+          <Property Name="PurchaseAmount" Type="Double" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IsRedeemed" Type="Boolean" />
+          <Property Name="RedemptionDateTime" Type="DateTime" Precision="3" />
+          <Property Name="RedemptionOperator" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Coupon" Relationship="SMDDevModel.FK_UserPurchasedCoupon_Coupon" FromRole="UserPurchasedCoupon" ToRole="Coupon" />
+        </EntityType>
+        <Association Name="FK_UserPurchasedCoupon_Coupon">
+          <End Type="SMDDevModel.Coupon" Role="Coupon" Multiplicity="0..1" />
+          <End Type="SMDDevModel.UserPurchasedCoupon" Role="UserPurchasedCoupon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Coupon">
+              <PropertyRef Name="CouponId" />
+            </Principal>
+            <Dependent Role="UserPurchasedCoupon">
+              <PropertyRef Name="CouponId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5697,6 +5759,20 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="UserPurchasedCoupons">
+            <EntityTypeMapping TypeName="SMDDevModel.UserPurchasedCoupon">
+              <MappingFragment StoreEntitySet="UserPurchasedCoupon">
+                <ScalarProperty Name="RedemptionOperator" ColumnName="RedemptionOperator" />
+                <ScalarProperty Name="RedemptionDateTime" ColumnName="RedemptionDateTime" />
+                <ScalarProperty Name="IsRedeemed" ColumnName="IsRedeemed" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="PurchaseAmount" ColumnName="PurchaseAmount" />
+                <ScalarProperty Name="PurchaseDateTime" ColumnName="PurchaseDateTime" />
+                <ScalarProperty Name="CouponId" ColumnName="CouponId" />
+                <ScalarProperty Name="CouponPurchaseId" ColumnName="CouponPurchaseId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

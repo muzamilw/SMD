@@ -12,4 +12,10 @@ namespace SMD.MIS.Areas.Api.Models
     {
         public IEnumerable<Coupons> FavouriteCoupon { get; set; }
     }
+
+
+    public class UserPurchasedCouponResponse : BaseApiResponse
+    {
+        public IEnumerable<Coupons> PurchasedCoupon { get; set; }
+    }
 }

@@ -233,6 +233,7 @@
     <Compile Include="Repositories\CountryRepository.cs" />
     <Compile Include="Repositories\RoleStore.cs" />
     <Compile Include="Repositories\ProfileQuestionRepository.cs" />
+    <Compile Include="Repositories\UserPurchasedCouponRepository.cs" />
     <Compile Include="Repositories\UserFavouriteCouponRepository.cs" />
     <Compile Include="Repositories\UserStore.cs" />
     <Compile Include="TypeRegistrations.cs" />

@@ -22,6 +22,10 @@ namespace SMD.Models.Common
 
         public int CompanyId { get; set; }
         public string LogoUrl { get; set; }
+
+     
+
+        public string LocationPhone { get; set; }
         
     }
  

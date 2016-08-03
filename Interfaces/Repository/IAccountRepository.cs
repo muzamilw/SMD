@@ -1,6 +1,7 @@
 ﻿using SMD.Models.Common;
 using SMD.Models.DomainModels;
 using SMD.Models.IdentityModels;
+using System.Collections.Generic;
 
 namespace SMD.Interfaces.Repository
 {
@@ -24,5 +25,8 @@ namespace SMD.Interfaces.Repository
         /// Get Account By ID
         /// </summary>
         Account GetById(long accountId);
+
+
+        List<Account> GetByUserId(string UserId);
     }
 }

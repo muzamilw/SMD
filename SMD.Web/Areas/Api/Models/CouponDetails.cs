@@ -9,7 +9,7 @@ namespace SMD.MIS.Areas.Api.Models
     public class CouponDetails
     {
         public long CouponId { get; set; }
-        public string CouponName { get; set; }
+      
         public string CouponTitle { get; set; }
 
 
@@ -26,12 +26,15 @@ namespace SMD.MIS.Areas.Api.Models
         public string FinePrintLine4 { get; set; }
         public string FinePrintLine5 { get; set; }
 
-
+        public string LocationTitle { get; set; }
         public string LocationLine1 { get; set; }
         public string LocationLine2 { get; set; }
-        public string LocationLine3 { get; set; }
-        public string LocationLine4 { get; set; }
-        public string LocationLine5 { get; set; }
+        public string LocationCity { get; set; }
+        public string LocationState { get; set; }
+        public string LocationZipCode { get; set; }
+        public string LocationLAT { get; set; }
+        public string LocationLON { get; set; }
+        public string LocationPhone { get; set; }
 
 
         public string HowToRedeemLine1 { get; set; }
@@ -43,25 +46,24 @@ namespace SMD.MIS.Areas.Api.Models
         public string CouponImage1 { get; set; }
         public string CouponImage2 { get; set; }
         public string CouponImage3 { get; set; }
-        public string CouponImage4 { get; set; }
-        public string CouponSwapValue { get; set; }
-        public string CouponActualValue { get; set; }
-        public int CouponTakenValue { get; set; }
-        public double CouponDiscountedValue { get; set; }
-
+     
+        public double Price { get; set; }
+        public double Savings { get; set; }
+        public double SwapCost { get; set; }
+        
 
         public int DaysLeft { get; set; }
 
         public string Country { get; set; }
 
-        public string City { get; set; }
+        public bool FlaggedByCurrentUser { get; set; }
 
-        public string LocationLAT { get; set; }
-        public string LocationLON { get; set; }
+    
 
-        public string Phone { get; set; }
 
-        public string AdvertisersLogoPath { get; set; }
+    
+
+        public string LogoUrl { get; set; }
         
     }
  

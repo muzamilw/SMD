@@ -7612,3 +7612,143 @@ INSERT INTO [dbo].[CouponCategories]
 select distinct cc.CategoryId,c.couponid from AdCampaign a
 inner join CampaignCategories cc on a.CampaignID = cc.CampaignId
 inner join Coupon c on a.DisplayTitle = c.CouponTitle
+
+
+
+
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[SearchCoupons]    Script Date: 8/2/2016 6:12:34 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER PROCEDURE [dbo].[SearchCoupons]
+--   EXEC [dbo].[SearchCoupons] 		@categoryId = 8,		@type = 1,		@keywords = N'1',		@distance = 1,		@Lat = N'1',		@Lon = N'1',		@UserId = N'1',		@FromRow = 1,		@ToRow = 100
+
+	-- Add the parameters for the stored procedure here
+	@categoryId INT = 1 ,
+	@type as int = 0,
+	@keywords as nvarchar(500),
+	@distance as int = 0,
+	@Lat as nvarchar(50),
+	@Lon as nvarchar(50),
+	@UserId as nvarchar(128) = 0 ,
+	@FromRow int = 0,
+	@ToRow int = 0
+
+AS
+BEGIN
+
+	select *, COUNT(*) OVER() AS TotalItems
+	from (
+	
+	select vchr.CouponId as CouponId, CouponTitle,
+	
+	
+	CouponImage1,
+	(select 
+	CASE
+		WHEN vchr.LogoUrl is null or vchr.LogoUrl = ''
+		THEN 'http://manage.cash4ads.com/' + c.Logo
+		WHEN c.Logo is not null
+		THEN 'http://manage.cash4ads.com/' + vchr.LogoUrl
+	END as AdvertisersLogoPath from company c
+	 where c.CompanyId = vchr.CompanyId) as LogoUrl,
+	Price, Savings,SwapCost, CompanyId, CouponActiveMonth,CouponActiveYear
+	
+	from Coupon vchr
+	inner join CouponCategories cc on cc.CouponId = vchr.CouponId and cc.CategoryId = @categoryId
+	where (
+		
+		--and
+		--(adcampaign.EndDateTime >= @currentDate and @currentDate >= adcampaign.StartDateTime)
+		
+		(vchr.Approved = 1) and status = 3
+	
+		
+		)
+		group by vchr.CouponId, CouponTitle,vchr.CouponImage1,LogoUrl,Price, Savings,SwapCost,CompanyId,CouponActiveMonth,CouponActiveYear
+		)as items
+	order by Savings
+	OFFSET @FromRow ROWS
+	FETCH NEXT @TORow ROWS ONLY
+		
+END
+
+
+
+
+GO
+
+/****** Object:  Table [dbo].[UserPurchasedCoupon]    Script Date: 8/3/2016 2:45:25 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[UserPurchasedCoupon](
+	[CouponPurchaseId] [bigint] IDENTITY(1,1) NOT NULL,
+	[CouponId] [bigint] NULL,
+	[PurchaseDateTime] [datetime] NULL,
+	[PurchaseAmount] [float] NULL,
+	[UserId] [nvarchar](128) NULL,
+	[IsRedeemed] [bit] NULL,
+	[RedemptionDateTime] [datetime] NULL,
+	[RedemptionOperator] [nvarchar](500) NULL,
+ CONSTRAINT [PK_UserPurchasedCoupon] PRIMARY KEY CLUSTERED 
+(
+	[CouponPurchaseId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+ALTER TABLE [dbo].[UserPurchasedCoupon]  WITH CHECK ADD  CONSTRAINT [FK_UserPurchasedCoupon_UserPurchasedCoupon] FOREIGN KEY([CouponPurchaseId])
+REFERENCES [dbo].[UserPurchasedCoupon] ([CouponPurchaseId])
+GO
+
+ALTER TABLE [dbo].[UserPurchasedCoupon] CHECK CONSTRAINT [FK_UserPurchasedCoupon_UserPurchasedCoupon]
+GO
+
+
+
+/* To prevent any potential data loss issues, you should review this script in detail before running it outside the context of the database designer.*/
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.Coupon SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.UserPurchasedCoupon
+	DROP CONSTRAINT FK_UserPurchasedCoupon_UserPurchasedCoupon
+GO
+ALTER TABLE dbo.UserPurchasedCoupon ADD CONSTRAINT
+	FK_UserPurchasedCoupon_Coupon FOREIGN KEY
+	(
+	CouponId
+	) REFERENCES dbo.Coupon
+	(
+	CouponId
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+	
+GO
+ALTER TABLE dbo.UserPurchasedCoupon SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+
+

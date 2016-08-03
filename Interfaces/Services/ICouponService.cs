@@ -23,5 +23,15 @@ namespace SMD.Interfaces.Services
         void CreateCampaign(Coupon couponModel);
         void UpdateCampaign(Coupon couponModel);
         SearchCouponsResponse SearchCoupons(int categoryId, int type, int size, string keywords, int pageNo, int distance, string Lat, string Lon, string UserId);
+
+
+        Coupon GetCouponByIdDefault(long CouponId);
+
+        bool CheckCouponFlaggedByUser(long CouponId, string UserId);
+
+        List<Coupon> GetPurchasedCouponByUserId(string UserId);
+
+        bool PurchaseCoupon(string UserId, long CouponId, double PurchaseAmount);
+
     }
 }

@@ -6,6 +6,7 @@ using SMD.Models.DomainModels;
 using SMD.Repository.BaseRepository;
 using System.Data.Entity;
 using SMD.Models.IdentityModels;
+using System.Collections.Generic;
 
 namespace SMD.Repository.Repositories
 {
@@ -53,6 +54,18 @@ namespace SMD.Repository.Repositories
             else
                 return null;
         }
+
+        public List<Account> GetByUserId(string UserId)
+        {
+            var result = from a in db.Accounts
+                         join c in db.Companies on a.CompanyId equals c.CompanyId
+                         join u in db.Users on c.CompanyId equals u.CompanyId
+                         where u.Id == UserId
+                         select a;
+
+            return result.ToList();
+        }
+
         public Account GetByCompanyId(int commpanyId, AccountType accountType)
         {
             return DbSet.FirstOrDefault(account => account.CompanyId == commpanyId && account.AccountType == (int)accountType);

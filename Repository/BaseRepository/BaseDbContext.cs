@@ -244,6 +244,10 @@ namespace SMD.Repository.BaseRepository
         public DbSet<CouponCategory> CouponCategory { get; set; }
         public DbSet<UserFavouriteCoupon> UserFavouriteCoupons { get; set; }
 
+        public DbSet<UserPurchasedCoupon> UserPurchasedCoupon { get; set; }
+
+        
+
         public DbSet<vw_GetUserTransactions> vw_GetUserTransactions { get; set; }
         public DbSet<vw_PublisherTransaction> vw_PublisherTransaction { get; set; }
         public DbSet<vw_Cash4AdsReport> vw_Cash4AdsReport { get; set; }
