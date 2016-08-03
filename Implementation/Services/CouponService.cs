@@ -25,6 +25,9 @@ namespace SMD.Implementation.Services
 
         private readonly ICouponRepository couponRepository;
         private readonly IUserFavouriteCouponRepository _userFavouriteCouponRepository;
+        private readonly IUserPurchasedCouponRepository _userPurchasedCouponRepository;
+        private readonly ICompanyService _companyService;
+        private readonly IAccountRepository _accountRepository;
         private ApplicationUserManager UserManager
         {
             get { return HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
@@ -97,10 +100,13 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Constructor 
         /// </summary>
-        public CouponService(ICouponRepository couponRepository, IUserFavouriteCouponRepository userFavouriteCouponRepository)
+        public CouponService(ICouponRepository couponRepository, IUserFavouriteCouponRepository userFavouriteCouponRepository, ICompanyService _companyService, IUserPurchasedCouponRepository _userPurchasedCouponRepository, IAccountRepository _accountRepository)
         {
             this.couponRepository = couponRepository;
             this._userFavouriteCouponRepository = userFavouriteCouponRepository;
+            this._companyService = _companyService;
+            this._userPurchasedCouponRepository = _userPurchasedCouponRepository;
+            this._accountRepository = _accountRepository;
         }
 
         #endregion
@@ -295,6 +301,93 @@ namespace SMD.Implementation.Services
 
             
         }
+
+
+        public Coupon GetCouponByIdDefault(long CouponId)
+        {
+
+            var coupon = couponRepository.GetCouponById(CouponId).SingleOrDefault();
+
+            if (coupon.LogoUrl == null)
+            {
+                var company = this._companyService.GetCompanyById(coupon.CompanyId.Value);
+
+                coupon.LogoUrl = "http://manage.cash4ads.com/" + company.Logo;
+
+            }
+            else
+            {
+                coupon.LogoUrl = "http://manage.cash4ads.com/" + coupon.LogoUrl;
+            }
+
+            coupon.DaysLeft =Convert.ToInt32( (new DateTime(coupon.CouponActiveYear.Value, coupon.CouponActiveMonth.Value, DateTime.DaysInMonth(coupon.CouponActiveYear.Value, coupon.CouponActiveMonth.Value)) - DateTime.Today).TotalDays);
+
+            //checking if its already flagged by user or not.
+
+
+            return coupon;
+
+
+        }
+
+          public bool CheckCouponFlaggedByUser(long CouponId, string UserId)
+        {
+
+            return _userFavouriteCouponRepository.CheckCouponFlaggedByUser(CouponId, UserId);
+        }
+
+
+
+          public List<Coupon> GetPurchasedCouponByUserId(string UserId)
+          {
+              var result = _userPurchasedCouponRepository.GetPurchasedCouponByUserId(UserId);
+             
+
+              return result.ToList();
+
+          }
+
+
+
+        public bool PurchaseCoupon(string UserId, long CouponId, double PurchaseAmount)
+          {
+
+              List<Account> accounts = _accountRepository.GetByUserId(UserId);
+
+              var userVirtualAccount = accounts.Where(g => g.AccountType == (int)AccountType.VirtualAccount).FirstOrDefault();
+              if (PurchaseAmount < userVirtualAccount.AccountBalance)
+              {
+
+                  // Update Accounts
+                  ////string codeCode = UpdateCouponAccounts(company, smdUser.Company, CouponId, dbContext);
+                  ////if (!string.IsNullOrEmpty(codeCode))
+                  ////{
+                  ////    // Save Changes
+                  ////    dbContext.SaveChanges();
+
+                  ////    // Email To User coupon code 
+                  ////    try
+                  ////    {
+                  ////        BackgroundEmailManagerService.SendVoucherCodeEmail(dbContext, company.CompanyId, codeCode);
+                  ////    }
+                  ////    catch (Exception ex)
+                  ////    {
+
+                  ////    }
+                  ////}
+                  ////else
+                  ////{
+                  ////    return false;// coupon already redeemed
+                  ////}
+
+                  return true;
+
+              }
+              else
+              {
+                  return false;// insufficent balance 
+              }
+          }
 
         #endregion
     }

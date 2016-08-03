@@ -140,6 +140,8 @@
         <EntityTypeShape EntityType="SMDDevModel.Phrase" Width="1.5" PointX="7.625" PointY="10.875" />
         <EntityTypeShape EntityType="SMDDevModel.Section" Width="1.5" PointX="5.375" PointY="11" />
         <AssociationConnector Association="SMDDevModel.fk_sectionId" />
+        <EntityTypeShape EntityType="SMDDevModel.UserPurchasedCoupon" Width="1.5" PointX="17.25" PointY="65" />
+        <AssociationConnector Association="SMDDevModel.FK_UserPurchasedCoupon_Coupon" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -12,5 +12,7 @@ namespace SMD.Interfaces.Repository
     {
         UserFavouriteCoupon GetByCouponId(long CouponId);
         IEnumerable<Coupon> GetAllFavouriteCouponByUserId(string UserId);
+
+        bool CheckCouponFlaggedByUser(long CouponId, string UserId);
     }
 }

@@ -130,6 +130,7 @@
     <Compile Include="DomainModels\CouponCategories.cs" />
     <Compile Include="DomainModels\Phrase.cs" />
     <Compile Include="DomainModels\Section.cs" />
+    <Compile Include="DomainModels\UserPurchasedCoupon.cs" />
     <Compile Include="DomainModels\vw_CompanyUsers.cs" />
     <Compile Include="DomainModels\Account.cs" />
     <Compile Include="DomainModels\AdCampaign.cs" />

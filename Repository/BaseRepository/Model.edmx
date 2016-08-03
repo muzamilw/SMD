@@ -805,6 +805,19 @@
           <Property Name="CouponId" Type="bigint" />
           <Property Name="UserId" Type="nvarchar" MaxLength="128" />
         </EntityType>
+        <EntityType Name="UserPurchasedCoupon">
+          <Key>
+            <PropertyRef Name="CouponPurchaseId" />
+          </Key>
+          <Property Name="CouponPurchaseId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CouponId" Type="bigint" />
+          <Property Name="PurchaseDateTime" Type="datetime" />
+          <Property Name="PurchaseAmount" Type="float" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+          <Property Name="IsRedeemed" Type="bit" />
+          <Property Name="RedemptionDateTime" Type="datetime" />
+          <Property Name="RedemptionOperator" Type="nvarchar" MaxLength="500" />
+        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'SMDDev.dbo.vw_Cash4AdsReport' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vw_Cash4AdsReport">
@@ -1835,6 +1848,18 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_UserPurchasedCoupon_Coupon">
+          <End Role="Coupon" Type="Self.Coupon" Multiplicity="0..1" />
+          <End Role="UserPurchasedCoupon" Type="Self.UserPurchasedCoupon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Coupon">
+              <PropertyRef Name="CouponId" />
+            </Principal>
+            <Dependent Role="UserPurchasedCoupon">
+              <PropertyRef Name="CouponId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="GetAds" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserID" Type="nvarchar" Mode="In" />
           <Parameter Name="FromRow" Type="int" Mode="In" />
@@ -1970,6 +1995,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <EntitySet Name="Transaction" EntityType="Self.Transaction" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TransactionLog" EntityType="Self.TransactionLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserFavouriteCoupon" EntityType="Self.UserFavouriteCoupon" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserPurchasedCoupon" EntityType="Self.UserPurchasedCoupon" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="vw_Cash4AdsReport" EntityType="Self.vw_Cash4AdsReport" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [vw_Cash4AdsReport].[tid] AS [tid], 
@@ -2341,6 +2367,10 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <AssociationSet Name="FK_TransactionLog_TransactionLog" Association="Self.FK_TransactionLog_TransactionLog">
             <End Role="Transaction" EntitySet="Transaction" />
             <End Role="TransactionLog" EntitySet="TransactionLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserPurchasedCoupon_Coupon" Association="Self.FK_UserPurchasedCoupon_Coupon">
+            <End Role="Coupon" EntitySet="Coupon" />
+            <End Role="UserPurchasedCoupon" EntitySet="UserPurchasedCoupon" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -2809,6 +2839,11 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <AssociationSet Name="fk_sectionId" Association="DomainModels.fk_sectionId">
             <End Role="Section" EntitySet="Sections" />
             <End Role="Phrase" EntitySet="Phrases" />
+          </AssociationSet>
+          <EntitySet Name="UserPurchasedCoupons" EntityType="DomainModels.UserPurchasedCoupon" />
+          <AssociationSet Name="FK_UserPurchasedCoupon_Coupon" Association="DomainModels.FK_UserPurchasedCoupon_Coupon">
+            <End Role="Coupon" EntitySet="Coupons" />
+            <End Role="UserPurchasedCoupon" EntitySet="UserPurchasedCoupons" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="ProfileQuestion">
@@ -4889,6 +4924,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <NavigationProperty Name="CompanyBranch" Relationship="DomainModels.FK_Coupon_CompanyBranch" FromRole="Coupon" ToRole="CompanyBranch" />
           <NavigationProperty Name="Language" Relationship="DomainModels.FK_Coupon_Language" FromRole="Coupon" ToRole="Language" />
           <NavigationProperty Name="CouponCategories" Relationship="DomainModels.FK_CouponCategories_Coupon" FromRole="Coupon" ToRole="CouponCategories" />
+          <NavigationProperty Name="UserPurchasedCoupons" Relationship="DomainModels.FK_UserPurchasedCoupon_Coupon" FromRole="Coupon" ToRole="UserPurchasedCoupon" />
         </EntityType>
         <Association Name="FK_BranchCategory_Company">
           <End Type="DomainModels.Company" Role="Company" Multiplicity="0..1" />
@@ -5024,6 +5060,32 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
             </Principal>
             <Dependent Role="Phrase">
               <PropertyRef Name="SectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="UserPurchasedCoupon">
+          <Key>
+            <PropertyRef Name="CouponPurchaseId" />
+          </Key>
+          <Property Name="CouponPurchaseId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CouponId" Type="Int64" />
+          <Property Name="PurchaseDateTime" Type="DateTime" Precision="3" />
+          <Property Name="PurchaseAmount" Type="Double" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IsRedeemed" Type="Boolean" />
+          <Property Name="RedemptionDateTime" Type="DateTime" Precision="3" />
+          <Property Name="RedemptionOperator" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Coupon" Relationship="DomainModels.FK_UserPurchasedCoupon_Coupon" FromRole="UserPurchasedCoupon" ToRole="Coupon" />
+        </EntityType>
+        <Association Name="FK_UserPurchasedCoupon_Coupon">
+          <End Type="DomainModels.Coupon" Role="Coupon" Multiplicity="0..1" />
+          <End Type="DomainModels.UserPurchasedCoupon" Role="UserPurchasedCoupon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Coupon">
+              <PropertyRef Name="CouponId" />
+            </Principal>
+            <Dependent Role="UserPurchasedCoupon">
+              <PropertyRef Name="CouponId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -6137,6 +6199,20 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
                 <ScalarProperty Name="SecOrder" ColumnName="SecOrder" />
                 <ScalarProperty Name="SectionName" ColumnName="SectionName" />
                 <ScalarProperty Name="SectionId" ColumnName="SectionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserPurchasedCoupons">
+            <EntityTypeMapping TypeName="DomainModels.UserPurchasedCoupon">
+              <MappingFragment StoreEntitySet="UserPurchasedCoupon">
+                <ScalarProperty Name="RedemptionOperator" ColumnName="RedemptionOperator" />
+                <ScalarProperty Name="RedemptionDateTime" ColumnName="RedemptionDateTime" />
+                <ScalarProperty Name="IsRedeemed" ColumnName="IsRedeemed" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="PurchaseAmount" ColumnName="PurchaseAmount" />
+                <ScalarProperty Name="PurchaseDateTime" ColumnName="PurchaseDateTime" />
+                <ScalarProperty Name="CouponId" ColumnName="CouponId" />
+                <ScalarProperty Name="CouponPurchaseId" ColumnName="CouponPurchaseId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

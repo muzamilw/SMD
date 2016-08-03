@@ -271,9 +271,9 @@ namespace SMD.MIS
 
 
               config.Routes.MapHttpRoute(
-            "RedeemCoupon",
-            "RedeemCoupon/{AuthenticationToken}/",
-            new { controller = "RedeemCoupon" },
+            "UserPurchasedCoupon",
+            "UserPurchasedCoupon/{AuthenticationToken}/",
+            new { controller = "UserPurchasedCoupon" },
             null,
             routeHandlers);
 

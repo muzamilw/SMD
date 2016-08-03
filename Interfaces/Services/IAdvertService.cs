@@ -48,7 +48,6 @@ namespace SMD.Interfaces.Services
         List<GetCoupons_Result> GetCoupons(string UserId);
 
 
-        AdCampaign GetCouponById(string CouponId);
 
         List<GetCouponsByCompanyId_Result> GetCouponsByCompanyId(string CompanyId);
 

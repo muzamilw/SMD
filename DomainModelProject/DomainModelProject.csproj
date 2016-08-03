@@ -229,6 +229,9 @@
     <Compile Include="UserFavouriteCoupon.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="UserPurchasedCoupon.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="Model.edmx">

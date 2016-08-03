@@ -80,6 +80,7 @@ namespace DomainModelProject
         public virtual DbSet<CouponCategory1> CouponCategories1 { get; set; }
         public virtual DbSet<Phrase> Phrases { get; set; }
         public virtual DbSet<Section> Sections { get; set; }
+        public virtual DbSet<UserPurchasedCoupon> UserPurchasedCoupons { get; set; }
     
         public virtual ObjectResult<SearchCoupons_Result> SearchCoupons(Nullable<int> categoryId, Nullable<int> type, string keywords, Nullable<int> distance, string lat, string lon, string userId, Nullable<int> fromRow, Nullable<int> toRow)
         {
