@@ -822,6 +822,10 @@
 /// <reference path="underscore-ko-1.6.0.js" />
 /// <reference path="underscore-min.js" />
 /// <reference path="underscore.js" />
+/// <reference path="../areas/common/scripts/phraselibrary.model.js" />
+/// <reference path="../areas/common/scripts/phraselibrary.view.js" />
+/// <reference path="../areas/common/scripts/phraselibrary.viewmodel.js" />
+/// <reference path="../areas/common/scripts/phraselibrary.dataservice.js" />
 <<<<<<< HEAD
 =======
 /// <reference path="plugins/forms/timeentry/langs/jquery.timeentry-ca.js" />

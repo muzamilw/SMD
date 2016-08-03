@@ -50,13 +50,10 @@ namespace SMD.Repository.Repositories
             return DbSet.Find(id);
         }
 
-      
-
-        
-
-
-
-       
+        public List<Section> GetAllSections()
+        {
+            return db.Section.ToList();
+        }
         #endregion
     }
 }

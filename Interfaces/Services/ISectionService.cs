@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SMD.Interfaces.Repository
+namespace SMD.Interfaces.Services
 {
-    public interface ISectionRepository : IBaseRepository<Section, int>
+    public interface ISectionService
     {
         List<Section> GetAllSections();
     }

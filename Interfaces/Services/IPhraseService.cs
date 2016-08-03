@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SMD.Interfaces.Repository
+namespace SMD.Interfaces.Services
 {
-    public interface IPhraseRepository : IBaseRepository<Phrase, int>
+    public interface IPhraseService
     {
+      
         List<Phrase> GetAllPhrasesByID(long Id);
         bool CreatePhrase(Phrase phrase);
         bool EditPhrase(Phrase phrase);

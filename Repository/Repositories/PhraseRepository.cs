@@ -19,9 +19,6 @@ namespace SMD.Repository.Repositories
     public class PhraseRepository : BaseRepository<Phrase>, IPhraseRepository
     {
       
-
-
-        
         #region Constructor
         /// <summary>
         /// Constructor 
@@ -49,14 +46,43 @@ namespace SMD.Repository.Repositories
         {
             return DbSet.Find(id);
         }
+        public List<Phrase> GetAllPhrasesByID(long Id)
+        {
+            return db.Phrase.Where(i => i.PhraseId == Id).ToList();
+        }
+        public bool CreatePhrase(Phrase phrase)
+        {
+            bool result=false;
+            Phrase newPhrase = new Phrase();
+            newPhrase.PhraseName=phrase.PhraseName;
+            newPhrase.SectionId=phrase.SectionId;
+            newPhrase.SortOrder = phrase.SortOrder;
+            db.Phrase.Add(newPhrase);
+            if (db.SaveChanges() > 0)
+            {
+                result = true;
+            }
+            return result;
+        }
 
-      
+        public bool EditPhrase(Phrase phrase)
+        {
+            bool result = false;
+            Phrase newPhrase = new Phrase();
+            newPhrase.PhraseName = phrase.PhraseName;
+            newPhrase.SectionId = phrase.SectionId;
+            newPhrase.SortOrder = phrase.SortOrder;
+            db.Phrase.Attach(newPhrase);
+            db.Entry(newPhrase).State = EntityState.Modified;
+            if (db.SaveChanges() > 0)
+            {
+                result = true;
+            }
+
+            return result;
+        }
 
         
-
-
-
-       
         #endregion
     }
 }

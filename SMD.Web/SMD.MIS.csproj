@@ -385,6 +385,9 @@
     <Compile Include="App_Start\SecurityConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Api\Controllers\CouponController.cs" />
+    <Compile Include="Areas\Api\Controllers\PhaseLibraryController.cs" />
+    <Compile Include="Areas\Api\Models\Phrase.cs" />
+    <Compile Include="Areas\Api\Models\Section.cs" />
     <Compile Include="Areas\Coupons\CouponsAreaRegistration.cs" />
     <Compile Include="Areas\Coupons\Controllers\CouponsController.cs" />
     <Compile Include="Areas\Ads\AdsAreaRegistration.cs" />
@@ -571,6 +574,10 @@
     <Compile Include="TypeRegistrations.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Common\Scripts\phraseLibrary.dataservice.js" />
+    <Content Include="Areas\Common\Scripts\phraseLibrary.model.js" />
+    <Content Include="Areas\Common\Scripts\phraseLibrary.view.js" />
+    <Content Include="Areas\Common\Scripts\phraseLibrary.viewModel.js" />
     <Content Include="Areas\Coupons\Scripts\Coupons.dataservice.js" />
     <Content Include="Areas\Coupons\Scripts\Coupons.model.js" />
     <Content Include="Areas\Coupons\Scripts\Coupons.view.js" />
@@ -1596,6 +1603,8 @@
     <Content Include="Areas\Coupons\Views\Coupons\ManageCoupon.cshtml" />
     <Content Include="Areas\Coupons\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Coupons\Views\web.config" />
+    <Content Include="Areas\Common\Views\Shared\_phraseLibraryDialog.cshtml" />
+    <Content Include="Areas\Common\Views\Shared\_phraseLibrary.cshtml" />
     <None Include="config\Web.connectionstrings - Copy.configx" />
     <None Include="config\Web.connectionstrings.config" />
     <None Include="config\Web.connectionstrings.default.config" />

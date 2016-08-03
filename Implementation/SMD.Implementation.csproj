@@ -178,8 +178,10 @@
     <Compile Include="Services\InvoiceService.cs" />
     <Compile Include="Services\ParentScheduler.cs" />
     <Compile Include="Services\PaypalService.cs" />
+    <Compile Include="Services\PhraseService.cs" />
     <Compile Include="Services\ProfileQuestionAnswerService .cs" />
     <Compile Include="Services\ProfileQuestionUserAnswerService.cs" />
+    <Compile Include="Services\SectionService.cs" />
     <Compile Include="Services\StripeService.cs" />
     <Compile Include="Services\CollectionScheduler.cs" />
     <Compile Include="Services\TransactionLogService.cs" />
