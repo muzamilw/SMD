@@ -53,12 +53,6 @@ namespace SMD.Interfaces.Services
         List<GetCouponsByCompanyId_Result> GetCouponsByCompanyId(string CompanyId);
 
 
-        List<Coupons> GetAllCoupons(int categoryId, int type, int size, string keywords, int pageNo);
-
-
-        SearchCouponsResponse SearchCoupons(int categoryId, int type, int size, string keywords, int pageNo, int distance, string Lat, string Lon, string UserId);
-
-
         AdCampaign SendApprovalRejectionEmail(AdCampaign source);
         string UpdateAdApprovalCampaign(AdCampaign source);
 

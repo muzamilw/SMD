@@ -16,7 +16,7 @@ namespace SMD.MIS.Areas.Api.Controllers
     public class SearchCouponsController : ApiController
     {
         #region Private
-        private readonly IAdvertService _advertService;
+        private readonly ICouponService _couponService;
         #endregion
 
         #region Constructor
@@ -24,10 +24,10 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// <summary>
         /// Constructor
         /// </summary>
-        public SearchCouponsController(IAdvertService advertService)
+        public SearchCouponsController(ICouponService couponService)
         {
-            
-            this._advertService = advertService;
+
+            this._couponService = couponService;
         }
 
         #endregion
@@ -58,7 +58,7 @@ namespace SMD.MIS.Areas.Api.Controllers
                 {
                     keywords = "";
                 }
-                response = _advertService.SearchCoupons(Convert.ToInt32(categoryId), Convert.ToInt32(ctype), Convert.ToInt32(size), keywords, Convert.ToInt32(pageNo), Convert.ToInt32(distance), Lat, Lon, UserId).CreateFrom();
+                response = _couponService.SearchCoupons(Convert.ToInt32(categoryId), Convert.ToInt32(ctype), Convert.ToInt32(size), keywords, Convert.ToInt32(pageNo), Convert.ToInt32(distance), Lat, Lon, UserId).CreateFrom();
 
 
 

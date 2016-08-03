@@ -281,7 +281,7 @@ namespace SMD.Implementation.Services
                 UserAndCostDetails = objUC,
                 Industry = _industryRepository.GetAll(),
                 CouponCategory = _couponCategoryRepository.GetAllCoupons(),
-                DiscountVouchers = _adCampaignRepository.GetCouponsByUserIdWithoutFilter(loggedInUser.Id)
+                //DiscountVouchers = _adCampaignRepository.GetCouponsByUserIdWithoutFilter(loggedInUser.Id)
             };
         }
 
@@ -1110,23 +1110,9 @@ namespace SMD.Implementation.Services
 
         }
 
-        public List<Coupons> GetAllCoupons(int categoryId, int type, int size, string keywords, int pageNo)
-        {
-            return _adCampaignRepository.GetAllCoupons(categoryId,type,size,keywords,pageNo);
-        }
 
 
-        public SearchCouponsResponse SearchCoupons(int categoryId, int type, int size, string keywords, int pageNo, int distance, string Lat, string Lon,string UserId)
-        {
-            List<SearchCoupons_Result> coupons = _adCampaignRepository.SearchCoupons(categoryId,type,size,keywords,pageNo,distance,Lat,Lon,UserId).ToList();
-            return new SearchCouponsResponse
-            {
-                Status = true,
-                Message = LanguageResources.Success,
-                Coupons = coupons,
-                TotalCount = coupons.Any() && coupons[0].TotalItems.HasValue ? coupons[0].TotalItems.Value : 0
-            };
-        }
+       
 
 
 

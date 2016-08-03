@@ -22,18 +22,18 @@ namespace SMD.MIS.Areas.Api.ModelMappers
             return new Coupons
                    {
                          CouponId = source.CouponId,
-        CouponName = source.CouponName,
+      
         CouponTitle = source.CouponTitle,
-        Firstline = source.Firstline,
-        SecondLine = source.SecondLine,
-        CouponImage = source.CouponImage,
-        SwapCost = Convert.ToDouble( source.CouponSwapValue),
-        Price = Convert.ToDouble( source.CouponActualValue),
-        Savings = Convert.ToDouble( source.CouponActualValue),
+      
+        CouponImage1 = source.CouponImage1,
+        SwapCost = source.SwapCost.Value,
+        Price = source.Price.Value,
+        Savings = source.Savings.Value,
 
-        CompanyId = source.CompanyId,
+        CompanyId = source.CompanyId.Value,
 
-        AdvertisersLogoPath = source.AdvertisersLogoPath,
+        LogoUrl = source.LogoUrl,
+        DaysLeft = Convert.ToInt32((new DateTime(source.CouponActiveYear.Value,source.CouponActiveMonth.Value,DateTime.DaysInMonth(source.CouponActiveYear.Value, source.CouponActiveMonth.Value)) - DateTime.Today).TotalDays)
 
       
                    };

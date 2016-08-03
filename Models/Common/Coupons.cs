@@ -9,11 +9,10 @@ namespace SMD.Models.Common
     public class Coupons
     {
         public long CouponId { get; set; }
-        public string CouponName { get; set; }
+       
         public string CouponTitle { get; set; }
-        public string Firstline { get; set; }
-        public string SecondLine { get; set; }
-        public string CouponImage { get; set; }
+
+        public string CouponImage1 { get; set; }
      
         public double Price { get; set; }
         public double Savings { get; set; }
@@ -22,7 +21,7 @@ namespace SMD.Models.Common
         public int DaysLeft { get; set; }
 
         public int CompanyId { get; set; }
-        public string AdvertisersLogoPath { get; set; }
+        public string LogoUrl { get; set; }
         
     }
  

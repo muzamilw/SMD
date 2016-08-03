@@ -33,10 +33,8 @@ namespace SMD.Interfaces.Repository
 
         List<GetCouponsByCompanyId_Result> GetCouponsByCompanyId(string CompanyId);
         
-        List<Coupons> GetAllCoupons(int categoryId, int type, int size, string keywords, int pageNo);
-        IEnumerable<Coupons> GetCouponsByUserIdWithoutFilter(string UserId);
+    
 
 
-        IEnumerable<SearchCoupons_Result> SearchCoupons(int categoryId, int type, int size, string keywords, int pageNo, int distance, string Lat, string Lon, string UserId);
     }
 }

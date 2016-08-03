@@ -14,5 +14,9 @@ namespace SMD.Interfaces.Repository
         Coupon Find(long id);
         IEnumerable<Coupon> SearchCampaign(AdCampaignSearchRequest request, out int rowCount);
         IEnumerable<Coupon> GetCouponById(long campaignId);
+
+
+
+        IEnumerable<SearchCoupons_Result> SearchCoupons(int categoryId, int type, int size, string keywords, int pageNo, int distance, string Lat, string Lon, string UserId);
     }
 }

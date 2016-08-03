@@ -1,6 +1,7 @@
 ﻿using SMD.Interfaces.Services;
 using SMD.MIS.Areas.Api.Models;
 using SMD.MIS.ModelMappers;
+using SMD.Models.Common;
 using SMD.Models.RequestModels;
 using System.Net;
 using System.Web;
@@ -50,19 +51,19 @@ namespace SMD.MIS.Areas.Api.Controllers
         }
 
 
-        public void Post(SMD.Models.DomainModels.AdCampaign campaignModel)
+        public void Post(SMD.Models.DomainModels.Coupon couponModel)
         {
-            //campaignModel.Status = (int)AdCampaignStatus.Draft;
-            //if (campaignModel.CampaignId > 0)
-            //{
-            //    _campaignService.UpdateCampaign(campaignModel);
+            couponModel.Status = (int)AdCampaignStatus.Draft;
+            if (couponModel.CouponId > 0)
+            {
+                _couponService.UpdateCampaign(couponModel);
 
-            //}
-            //else 
-            //{
-            //    _campaignService.CreateCampaign(campaignModel);
+            }
+            else
+            {
+                _couponService.CreateCampaign(couponModel);
 
-            //}
+            }
            
         }
         #endregion

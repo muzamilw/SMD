@@ -44,10 +44,10 @@ namespace SMD.Repository.Repositories
         {
 
             var result = from c in db.Coupons
-                          join uc in db.UserFavouriteCoupons on c.CouponId equals uc.CouponId
-                          where uc.UserId == UserId
-                            
-                          select c;
+                         join uc in db.UserFavouriteCoupons on c.CouponId equals uc.CouponId
+                         where uc.UserId == UserId
+                        select c;
+                         //select new Coupon { CouponId = c.CouponId, CouponTitle = c.CouponTitle, couponImage1 = c.couponImage1, Price = c.Price, Savings = c.Savings, SwapCost = c.SwapCost, DaysLeft = (DateTime.Today - new DateTime(c.CouponActiveYear.Value, c.CouponActiveMonth.Value, 30)).Days, CompanyId= c.CompanyId, LogoUrl = c.LogoUrl };
 
 
             return result.ToList();

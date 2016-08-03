@@ -7601,3 +7601,14 @@ ALTER TABLE [dbo].[Phrase]  WITH CHECK ADD  CONSTRAINT [fk_sectionId] FOREIGN KE
 REFERENCES [dbo].[Section] ([SectionId])
 GO
 
+
+
+--data fix query for coupons.
+INSERT INTO [dbo].[CouponCategories]
+           ([CategoryId]
+           ,[CouponId])
+
+
+select distinct cc.CategoryId,c.couponid from AdCampaign a
+inner join CampaignCategories cc on a.CampaignID = cc.CampaignId
+inner join Coupon c on a.DisplayTitle = c.CouponTitle

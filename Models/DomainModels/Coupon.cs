@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SMD.Models.DomainModels
 {
@@ -14,6 +15,7 @@ namespace SMD.Models.DomainModels
         {
             this.CouponCategories = new HashSet<CouponCategory>();
         }
+     
 
         public long CouponId { get; set; }
         public Nullable<int> LanguageId { get; set; }
@@ -80,5 +82,10 @@ namespace SMD.Models.DomainModels
         public virtual CompanyBranch CompanyBranch { get; set; }
         public virtual Language Language { get; set; }
         public virtual ICollection<CouponCategory> CouponCategories { get; set; }
+
+        [NotMapped]
+        public int DaysLeft { get; set; }
+        [NotMapped]
+        public string LogoImageBytes { get; set; }
     }
 }
