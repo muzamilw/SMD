@@ -1512,7 +1512,6 @@ define("ads/ads.viewModel",
                 },
 
                  backScreen = function () {
-                     console.log(previewScreenNumber());
                      if (previewScreenNumber() > 1) {
                          previewScreenNumber(previewScreenNumber() - 1);
                      }
@@ -2130,7 +2129,6 @@ define("ads/ads.viewModel",
 
                         allCouponCodeItems.push(cc.Code);
                     });
-                    console.log(allCouponCodeItems());
                     campaignModel().CouponQuantity(allCouponCodeItems().length);
                 },
                 addVoucherClickRate = function () {

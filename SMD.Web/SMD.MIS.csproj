@@ -598,6 +598,10 @@
     <Content Include="Areas\Common\Scripts\stripeChargeCustomer.viewModel.js" />
     <Content Include="Areas\Common\Scripts\confirmation.viewModel.js" />
     <Content Include="Areas\Common\Scripts\pagination.js" />
+    <Content Include="Areas\Coupons\Scripts\Layout.dataService.js" />
+    <Content Include="Areas\Coupons\Scripts\Layout.model.js" />
+    <Content Include="Areas\Coupons\Scripts\Layout.view.js" />
+    <Content Include="Areas\Coupons\Scripts\Layout.viewModel.js" />
     <Content Include="Areas\ProfileQuestion\Scripts\pQuestion.dataservice.js" />
     <Content Include="Areas\ProfileQuestion\Scripts\pQuestion.model.js" />
     <Content Include="Areas\ProfileQuestion\Scripts\paypalExample.view.js" />
@@ -1596,6 +1600,7 @@
     <Content Include="Areas\Coupons\Views\Coupons\ManageCoupon.cshtml" />
     <Content Include="Areas\Coupons\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Coupons\Views\web.config" />
+    <Content Include="Areas\Coupons\Views\Shared\_BranchDetails.cshtml" />
     <None Include="Properties\PublishProfiles\mz profile.pubxml" />
     <None Include="Properties\PublishProfiles\SMD MIS Saqib.pubxml" />
     <None Include="Properties\PublishProfiles\SMD.pubxml" />
