@@ -11,6 +11,9 @@ namespace SMD.Interfaces.Repository
     public interface IUserFavouriteCouponRepository : IBaseRepository<UserFavouriteCoupon, long>
     {
         UserFavouriteCoupon GetByCouponId(long CouponId);
+
+        UserFavouriteCoupon GetByCouponId(long CouponId,string UserId);
+
         IEnumerable<Coupon> GetAllFavouriteCouponByUserId(string UserId);
 
         bool CheckCouponFlaggedByUser(long CouponId, string UserId);

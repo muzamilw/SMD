@@ -1,4 +1,5 @@
-﻿using SMD.Interfaces.Services;
+﻿using AutoMapper;
+using SMD.Interfaces.Services;
 using SMD.Models.Common;
 using SMD.Models.DomainModels;
 using System;
@@ -16,7 +17,7 @@ namespace SMD.MIS.Areas.Api.Controllers
          
         
         #region Private
-        private readonly IAdvertService _advertService;
+        private readonly ICouponService _couponService;
         #endregion
 
         #region Constructor
@@ -24,10 +25,10 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// <summary>
         /// Constructor
         /// </summary>
-        public GetCouponByCompanyIdController(IAdvertService advertService)
+        public GetCouponByCompanyIdController(ICouponService _couponService)
         {
-            
-            this._advertService = advertService;
+
+            this._couponService = _couponService;
         }
 
         #endregion
@@ -39,13 +40,22 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// </summary>
 
 
-        public List<GetCouponsByCompanyId_Result> Get(string CompanyId)
+        public List<Coupons> Get(string CompanyId)
         {
             if (string.IsNullOrEmpty(CompanyId))
             {
                 throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
             }
-            return _advertService.GetCouponsByCompanyId(CompanyId);
+
+
+            Mapper.Initialize(cfg => cfg.CreateMap<SMD.Models.DomainModels.Coupon, Coupons>());
+
+
+
+            var compcoupons = _couponService.GetCouponsByCompanyId(Convert.ToInt32(CompanyId));
+            return compcoupons.Select(a => Mapper.Map<SMD.Models.DomainModels.Coupon, Coupons>(a)).ToList();
+
+            //return _advertService.GetCouponsByCompanyId(CompanyId);
         }
 
         #endregion

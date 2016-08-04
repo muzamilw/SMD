@@ -31,7 +31,7 @@ namespace SMD.Interfaces.Repository
       
         List<GetCoupons_Result> GetCoupons(string UserId);
 
-        List<GetCouponsByCompanyId_Result> GetCouponsByCompanyId(string CompanyId);
+
         
     
 

@@ -16,6 +16,6 @@ namespace SMD.MIS.Areas.Api.Models
 
     public class UserPurchasedCouponResponse : BaseApiResponse
     {
-        public IEnumerable<Coupons> PurchasedCoupon { get; set; }
+        public List<PurchasedCoupons> PurchasedCoupon { get; set; }
     }
 }

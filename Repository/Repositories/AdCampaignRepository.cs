@@ -278,14 +278,6 @@ namespace SMD.Repository.Repositories
             //return query.ToList<Coupons>();
         }
 
-        public List<GetCouponsByCompanyId_Result> GetCouponsByCompanyId(string CompanyId)
-    {
-        
-        return db.GetCouponsByCompanyId(CompanyId).ToList();
-    }
-
-    
-       
 
 
     }

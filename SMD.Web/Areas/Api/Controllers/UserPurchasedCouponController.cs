@@ -44,12 +44,12 @@ namespace SMD.MIS.Areas.Api.Controllers
 
               var response = new UserPurchasedCouponResponse { Message = "Success", Status = true };
 
-              Mapper.Initialize(cfg => cfg.CreateMap<SMD.Models.DomainModels.Coupon, SMD.Models.Common.Coupons>());
+              Mapper.Initialize(cfg => cfg.CreateMap<SMD.Models.DomainModels.Coupon, SMD.Models.Common.PurchasedCoupons>());
               try
               {
                   var res = _couponService.GetPurchasedCouponByUserId(UserId);
                   //Mapper.Map<SMD.Models.DomainModels.Coupon, CouponDetails>(coupon)
-                  response.PurchasedCoupon = res.Select(a => Mapper.Map<SMD.Models.DomainModels.Coupon, SMD.Models.Common.Coupons>(a)).ToList();
+                  response.PurchasedCoupon = res;//.Select(a => Mapper.Map<SMD.Models.DomainModels.Coupon, SMD.Models.Common.PurchasedCoupons>(a));
                   //response.PurchasedCoupon = 
                       
               }
@@ -70,14 +70,22 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// Purchase a Coupon
         /// </summary>
         [ApiExceptionCustom]
-        public bool Post(string authenticationToken, int companyId, int CouponId,int mode,double amount)
+          public BaseApiResponse Post(string authenticationToken, string UserId, int CouponId, double SwapCost)
         {
+            var response = new BaseApiResponse { Message = "Success", Status = true };
             if (string.IsNullOrEmpty(authenticationToken))
             {
                 throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
             }
 
-            return PayOutScheduler.PerformUserPayout(companyId, CouponId, mode, amount);
+            if (_couponService.PurchaseCoupon(UserId, CouponId, SwapCost))
+                return response;
+            else
+            {
+                response.Status = false;
+                response.Message = "Error in purchasing coupon";
+                return response;
+            }
         }
 
 
