@@ -177,7 +177,7 @@
 
                             <a class="btn btn-default btn-gray" data-bind="click:showBranchDialoge" style="" href="#">Branch Locations</a>
                             <a class="btn btn-default btn-gray" style="" href="/Coupons/Coupons">Image Library</a>
-                            <a class="btn btn-default btn-gray" style="" href="/Coupons/Coupons">Phrase Library</a>
+                            <a class="btn btn-default btn-gray" data-bind="click:showphraseLibraryDialog" >Phrase Library</a>
                         </div>
                     </div>
 
@@ -190,8 +190,11 @@
                     @{
                         Html.RenderPartial("~/Areas/Coupons/Views/Shared/_BranchDetails.cshtml");
 
+                        Html.RenderPartial("~/Areas/Common/Views/Shared/_phraseLibrary.cshtml");
+
                     }
                 </div>
+                
                 <div id="spinner" style="display: none">
                 </div>
                 <div id="siteUrl">
@@ -223,7 +226,6 @@
                 $("#header-logo").toggle();
                 $("#menu-logo").toggle();
             });
-
 
         });
     </script>

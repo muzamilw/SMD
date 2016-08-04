@@ -9,6 +9,10 @@
                       showBranchDialoge = function () {
                           view.showBranchCategoryDialog();
                       },
+                       showphraseLibraryDialog = function () {
+                            view.showphraseLibraryDialog();
+                           
+                       },
                 // Initialize the view model
                  initialize = function (specifiedView) {
                      view = specifiedView;
@@ -19,7 +23,8 @@
                 return {
 
                     initialize: initialize,
-                    showBranchDialoge: showBranchDialoge
+                    showBranchDialoge: showBranchDialoge,
+                    showphraseLibraryDialog: showphraseLibraryDialog
 
                 };
 

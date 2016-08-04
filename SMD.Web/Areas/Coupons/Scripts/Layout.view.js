@@ -2,6 +2,7 @@
     ["jquery", "Layout/Layout.viewModel"], function ($, branchViewModel) {
         var ist = window.ist || {};
         // View 
+        
         ist.Layout.view = (function (specifiedViewModel) {
             var // View model 
                 viewModel = specifiedViewModel,
@@ -16,12 +17,23 @@
                 hideBranchCategoryDialog = function () {
                     $("#branchCategoryDialog").modal("hide");
                 };
+            // Show BranchCategory dialog
+            showphraseLibraryDialog = function () {
+                $("#phraseLibraryDialog").modal("show");
+            },
+            // Hide BranchCategory dialog
+            HidephraseLibraryDialog = function () {
+                $("#phraseLibraryDialog").modal("hide");
+            };
+
             return {
                 bindingRoot: bindingRoot,
                 bindingPartial : bindingPartial,
                 viewModel: viewModel,
                 showBranchCategoryDialog: showBranchCategoryDialog,
                 hideBranchCategoryDialog: hideBranchCategoryDialog,
+                showphraseLibraryDialog: showphraseLibraryDialog,
+                HidephraseLibraryDialog: HidephraseLibraryDialog
             };
         })(branchViewModel);
 
