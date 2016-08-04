@@ -48,10 +48,6 @@ namespace SMD.Interfaces.Services
         List<GetCoupons_Result> GetCoupons(string UserId);
 
 
-
-        List<GetCouponsByCompanyId_Result> GetCouponsByCompanyId(string CompanyId);
-
-
         AdCampaign SendApprovalRejectionEmail(AdCampaign source);
         string UpdateAdApprovalCampaign(AdCampaign source);
 

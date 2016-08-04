@@ -40,6 +40,11 @@ namespace SMD.Repository.Repositories
         {
             return DbSet.FirstOrDefault(i => i.CouponId == CouponId);
         }
+
+        public UserFavouriteCoupon GetByCouponId(long CouponId, string UserId)
+        {
+            return DbSet.FirstOrDefault(i => i.CouponId == CouponId && i.UserId == UserId);
+        }
         public IEnumerable<Coupon> GetAllFavouriteCouponByUserId(string UserId)
         {
 

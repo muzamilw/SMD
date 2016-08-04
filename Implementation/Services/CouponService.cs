@@ -158,6 +158,19 @@ namespace SMD.Implementation.Services
                 var differ = new DateTime(item.CouponActiveYear.Value,item.CouponActiveMonth.Value,DateTime.DaysInMonth(item.CouponActiveYear.Value, item.CouponActiveMonth.Value)) - DateTime.Today;
                 item.DaysLeft = Convert.ToInt32( differ.TotalDays);
 
+                if (item.LogoUrl == null)
+                {
+                    var company = this._companyService.GetCompanyById(item.CompanyId.Value);
+
+                    item.LogoUrl = "http://manage.cash4ads.com/" + company.Logo;
+
+                }
+                else
+                {
+                    item.LogoUrl = "http://manage.cash4ads.com/" + item.LogoUrl;
+                }
+
+
             }
 
             return result;
@@ -180,10 +193,14 @@ namespace SMD.Implementation.Services
             //inserting the favorite coupon 
             if (mode == true)
             {
-                var favCoupon = new UserFavouriteCoupon { UserId = UserId, CouponId = CouponId };
+                //checking if its not alrady marked
+                if (_userFavouriteCouponRepository.GetByCouponId(CouponId, UserId) == null)
+                {
+                    var favCoupon = new UserFavouriteCoupon { UserId = UserId, CouponId = CouponId };
 
-                _userFavouriteCouponRepository.Add(favCoupon);
-                _userFavouriteCouponRepository.SaveChanges();
+                    _userFavouriteCouponRepository.Add(favCoupon);
+                    _userFavouriteCouponRepository.SaveChanges();
+                }
             }
             else // removing the favorite
             {
@@ -244,7 +261,7 @@ namespace SMD.Implementation.Services
                 {
                     couponModel.LogoUrl = paths[7];
                 }
-                else if (couponModel != null && couponModel.LogoUrl.Contains("Content/Images"))
+                else if (couponModel != null && couponModel.LogoUrl != null && couponModel.LogoUrl.Contains("Content/Images"))
                 {
                     couponModel.LogoUrl = null;
                 }
@@ -257,7 +274,8 @@ namespace SMD.Implementation.Services
 
         public void UpdateCampaign(Coupon couponModel)
         {
-            // couponModel.UserId = couponRepository.LoggedInUserIdentity;
+            couponModel.CompanyId = couponRepository.CompanyId;
+            couponModel.UserId = couponRepository.LoggedInUserIdentity;
             var user = UserManager.Users.Where(g => g.Id == couponRepository.LoggedInUserIdentity).SingleOrDefault();
             if (user != null)
                 couponModel.CreatedBy = user.FullName;
@@ -338,10 +356,25 @@ namespace SMD.Implementation.Services
 
 
 
-          public List<Coupon> GetPurchasedCouponByUserId(string UserId)
+          public List<PurchasedCoupons> GetPurchasedCouponByUserId(string UserId)
           {
               var result = _userPurchasedCouponRepository.GetPurchasedCouponByUserId(UserId);
-             
+
+              foreach (var coupon in result)
+              {
+                  if (coupon.LogoUrl == null)
+                  {
+                      var company = this._companyService.GetCompanyById(coupon.CompanyId);
+
+                      coupon.LogoUrl = "http://manage.cash4ads.com/" + company.Logo;
+
+                  }
+                  else
+                  {
+                      coupon.LogoUrl = "http://manage.cash4ads.com/" + coupon.LogoUrl;
+                  }
+
+              }
 
               return result.ToList();
 
@@ -358,27 +391,29 @@ namespace SMD.Implementation.Services
               if (PurchaseAmount < userVirtualAccount.AccountBalance)
               {
 
-                  // Update Accounts
-                  ////string codeCode = UpdateCouponAccounts(company, smdUser.Company, CouponId, dbContext);
-                  ////if (!string.IsNullOrEmpty(codeCode))
-                  ////{
-                  ////    // Save Changes
-                  ////    dbContext.SaveChanges();
+                   //Update Accounts
+                  PayOutScheduler.UpdateCouponAccounts(CouponId, PurchaseAmount, userVirtualAccount.CompanyId.Value);
 
-                  ////    // Email To User coupon code 
-                  ////    try
-                  ////    {
-                  ////        BackgroundEmailManagerService.SendVoucherCodeEmail(dbContext, company.CompanyId, codeCode);
-                  ////    }
-                  ////    catch (Exception ex)
-                  ////    {
 
-                  ////    }
-                  ////}
-                  ////else
-                  ////{
-                  ////    return false;// coupon already redeemed
-                  ////}
+                  //enter the entry for purchased coupon,
+                  var newPurchasedCoupon = new UserPurchasedCoupon{ CouponId = CouponId, IsRedeemed = false, PurchaseAmount = PurchaseAmount, PurchaseDateTime = DateTime.Now, RedemptionOperator = null, UserId = UserId};
+
+                  _userPurchasedCouponRepository.Add(newPurchasedCoupon);
+                  _userPurchasedCouponRepository.SaveChanges();
+                
+
+                 
+
+                      // Email To User coupon code 
+                      try
+                      {
+                          //BackgroundEmailManagerService.SendVoucherCodeEmail(dbContext, company.CompanyId, codeCode);
+                      }
+                      catch (Exception ex)
+                      {
+
+                      }
+                
 
                   return true;
 
@@ -388,6 +423,17 @@ namespace SMD.Implementation.Services
                   return false;// insufficent balance 
               }
           }
+
+
+        public List<Coupon> GetCouponsByCompanyId(int CompanyId)
+        {
+            var res =couponRepository.GetCouponsByCompanyId(CompanyId);
+            foreach (var coupon in res)
+	        {
+		        coupon.DaysLeft =Convert.ToInt32( (new DateTime(coupon.CouponActiveYear.Value, coupon.CouponActiveMonth.Value, DateTime.DaysInMonth(coupon.CouponActiveYear.Value, coupon.CouponActiveMonth.Value)) - DateTime.Today).TotalDays);
+            }
+            return res;
+        }
 
         #endregion
     }
