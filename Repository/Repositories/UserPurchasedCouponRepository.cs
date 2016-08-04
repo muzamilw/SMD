@@ -50,7 +50,7 @@ namespace SMD.Repository.Repositories
                          where uc.UserId == UserId && c.CouponExpirydate > endDate && (uc.IsRedeemed == false || uc.IsRedeemed == null)
                          orderby uc.PurchaseDateTime
 
-                         select new PurchasedCoupons { CouponId = c.CouponId, CouponTitle = c.CouponTitle, CouponImage1 = c.couponImage1, Price = c.Price.Value, Savings = c.Savings.Value, SwapCost = c.SwapCost.Value, DaysLeft = (DateTime.Today - new DateTime(c.CouponActiveYear.Value, c.CouponActiveMonth.Value, 30)).Days, CompanyId = c.CompanyId.Value, LogoUrl = c.LogoUrl, CouponPurchaseId = uc.CouponPurchaseId, LocationPhone = c.LocationPhone  };
+                         select new PurchasedCoupons { CouponId = c.CouponId, CouponTitle = c.CouponTitle, CouponImage1 = c.couponImage1, Price = c.Price.Value, Savings = c.Savings.Value, SwapCost = c.SwapCost.Value, CompanyId = c.CompanyId.Value, LogoUrl = c.LogoUrl, CouponPurchaseId = uc.CouponPurchaseId, LocationPhone = c.LocationPhone  };
 
 
             return result.ToList();

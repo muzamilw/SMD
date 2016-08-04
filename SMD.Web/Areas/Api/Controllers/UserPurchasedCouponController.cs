@@ -44,7 +44,7 @@ namespace SMD.MIS.Areas.Api.Controllers
 
               var response = new UserPurchasedCouponResponse { Message = "Success", Status = true };
 
-              Mapper.Initialize(cfg => cfg.CreateMap<SMD.Models.DomainModels.Coupon, SMD.Models.Common.PurchasedCoupons>());
+              //Mapper.Initialize(cfg => cfg.CreateMap<SMD.Models.DomainModels.Coupon, SMD.Models.Common.PurchasedCoupons>());
               try
               {
                   var res = _couponService.GetPurchasedCouponByUserId(UserId);

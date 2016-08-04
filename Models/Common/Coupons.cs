@@ -33,6 +33,11 @@ namespace SMD.Models.Common
 
     public class PurchasedCoupons
     {
+        public PurchasedCoupons()
+        {
+
+        }
+
         public long CouponPurchaseId { get; set; }
         public long CouponId { get; set; }
 
