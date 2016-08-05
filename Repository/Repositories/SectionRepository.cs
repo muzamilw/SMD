@@ -52,6 +52,7 @@ namespace SMD.Repository.Repositories
 
         public List<Section> GetAllSections()
         {
+            db.Configuration.LazyLoadingEnabled = false;
             return db.Section.ToList();
         }
         #endregion

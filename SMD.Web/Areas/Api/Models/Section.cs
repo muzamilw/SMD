@@ -7,7 +7,12 @@ namespace SMD.MIS.Areas.Api.Models
 {
     public class Section
     {
-       
+        public Section()
+        {
+            this.Phrases = new HashSet<Phrase>();
+        }
+    
+    
         public int SectionId { get; set; }
         public string SectionName { get; set; }
         public int SecOrder { get; set; }
