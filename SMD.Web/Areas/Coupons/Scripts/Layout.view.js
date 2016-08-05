@@ -2,8 +2,12 @@
     ["jquery", "Layout/Layout.viewModel"], function ($, branchViewModel) {
         var ist = window.ist || {};
         // View 
+<<<<<<< HEAD
         
         ist.Layout.view = (function (specifiedViewModel) {
+=======
+        ist.Layout.view = (function (specifiedViewModel) {
+>>>>>>> origin/dev
             var // View model 
                 viewModel = specifiedViewModel,
                 // Binding root used with knockout
@@ -17,6 +21,7 @@
                 hideBranchCategoryDialog = function () {
                     $("#branchCategoryDialog").modal("hide");
                 };
+<<<<<<< HEAD
             // Show BranchCategory dialog
             showphraseLibraryDialog = function () {
                 $("#phraseLibraryDialog").modal("show");
@@ -27,14 +32,22 @@
             };
 
             return {
+=======
+            return {
+>>>>>>> origin/dev
                 bindingRoot: bindingRoot,
                 bindingPartial : bindingPartial,
                 viewModel: viewModel,
                 showBranchCategoryDialog: showBranchCategoryDialog,
+<<<<<<< HEAD
                 hideBranchCategoryDialog: hideBranchCategoryDialog,
                 showphraseLibraryDialog: showphraseLibraryDialog,
                 HidephraseLibraryDialog: HidephraseLibraryDialog
             };
+=======
+                hideBranchCategoryDialog: hideBranchCategoryDialog,
+            };
+>>>>>>> origin/dev
         })(branchViewModel);
 
         // Initialize the view model
@@ -43,3 +56,4 @@
         }
         return ist.Layout.view;
     });
+    
