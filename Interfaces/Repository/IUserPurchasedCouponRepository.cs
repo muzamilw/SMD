@@ -13,8 +13,8 @@ namespace SMD.Interfaces.Repository
 
 
          UserPurchasedCoupon GetPurchasedCouponById(long CouponPurchaseId);
-     
-        IEnumerable<Coupon> GetPurchasedCouponByUserId(string UserId);
+
+         IEnumerable<PurchasedCoupons> GetPurchasedCouponByUserId(string UserId);
 
      
     }

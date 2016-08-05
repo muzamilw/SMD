@@ -1,4 +1,5 @@
-﻿using SMD.Models.DomainModels;
+﻿using SMD.Models.Common;
+using SMD.Models.DomainModels;
 using SMD.Models.RequestModels;
 using SMD.Models.ResponseModels;
 using System;
@@ -29,9 +30,11 @@ namespace SMD.Interfaces.Services
 
         bool CheckCouponFlaggedByUser(long CouponId, string UserId);
 
-        List<Coupon> GetPurchasedCouponByUserId(string UserId);
+        List<PurchasedCoupons> GetPurchasedCouponByUserId(string UserId);
 
         bool PurchaseCoupon(string UserId, long CouponId, double PurchaseAmount);
+
+        List<Coupon> GetCouponsByCompanyId(int CompanyId);
 
     }
 }

@@ -1093,10 +1093,7 @@ namespace SMD.Implementation.Services
         }
 
 
-        public List<GetCouponsByCompanyId_Result> GetCouponsByCompanyId(string CompanyId)
-        {
-            return _adCampaignRepository.GetCouponsByCompanyId(CompanyId);
-        }
+    
 
 
      

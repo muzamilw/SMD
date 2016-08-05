@@ -168,6 +168,16 @@ namespace SMD.Repository.Repositories
             int? toRow = size;
             return db.SearchCoupons(categoryId, type, keywords, distance, Lat, Lon, UserId, fromRow, toRow);
         }
+
+
+        public List<Coupon> GetCouponsByCompanyId(int CompanyId)
+        {
+
+            return db.Coupons.Where(g => g.CompanyId == CompanyId).ToList(); //.GetCouponsByCompanyId(CompanyId).ToList();
+        }
+
+    
+       
         #endregion
     }
 }

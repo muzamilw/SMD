@@ -39,7 +39,7 @@ namespace SMD.Implementation.Services
             // Update Cash4ads accounts
             UpdateUsersPaypalAccount(smdCompany, amount, adCampaignId, dbContext, false);
 
-        } //UpdateCouponAccounts
+        } 
           private static void UpdateAccounts(Company company, Company smdCompany, double amount,
            BaseDbContext dbContext)
         {
@@ -55,43 +55,33 @@ namespace SMD.Implementation.Services
             updateUsersVirtualAccount(smdCompany, amount, dbContext,1);
 
         }
-          private static string UpdateCouponAccounts(Company company, Company smdCompany, long couponId,
-           BaseDbContext dbContext)
+
+
+          public static bool UpdateCouponAccounts(long couponId, double SwapCost, int CompanyId)
           {
-              // if coupon 
-              // get money from user virtual account 
-              // add it to smd and users virtual account 
-              // send user voucher email 
-              var coupon = dbContext.AdCampaigns.Where(g => g.CampaignId == couponId).SingleOrDefault();
-              if (coupon == null)
-                  return "";
 
-              string swapVal = coupon.CouponSwapValue.Replace("£", "");
-              double totalAmount = Convert.ToDouble(swapVal);
-              string cmisnVal = coupon.couponSmdComission.Replace("£", "");
-              double smdValue = totalAmount - (Convert.ToDouble(cmisnVal));
-              double VoucherSellerValue = totalAmount - smdValue;
-
-              var couponCode = dbContext.CouponCodes.Where(g => g.CampaignId == couponId && g.IsTaken != true).FirstOrDefault();
-
-              if (couponCode != null)
+              using (var dbContext = new BaseDbContext())
               {
-                  couponCode.IsTaken = true;
+
+                  var userCompany = dbContext.Companies.Where(g => g.CompanyId == CompanyId).SingleOrDefault();
+
+                  var smdCompany = GetCash4AdsUser(dbContext).Company;
 
 
-
+                  // if coupon 
+                  // get money from user virtual account 
+                  // add it to smd and users virtual account 
+                  // send user voucher email 
 
                   // update users  virutal accont debit 
-                  updateUsersVirtualAccount(company, totalAmount, dbContext, 2, false, couponCode.CodeId, couponId);
+                  updateUsersVirtualAccount(userCompany, SwapCost, dbContext, 2, false, null, couponId);
                   // update smd users  virutal accont credit 
-                  updateUsersVirtualAccount(smdCompany, smdValue, dbContext, 2, true, couponCode.CodeId, couponId);
+                  updateUsersVirtualAccount(smdCompany, SwapCost, dbContext, 2, true, null, couponId);
                   // update smd users  virutal accont credit 
-                  updateUsersVirtualAccount(coupon.Company, VoucherSellerValue, dbContext, 2, true, couponCode.CodeId, couponId);
-                  return couponCode.Code;
-              }
-              else 
-              {
-                  return "";
+                  //updateUsersVirtualAccount(coupon.Company, SwapCost, dbContext, 2, true, null, couponId);
+
+                  dbContext.SaveChanges();
+                  return true;
               }
             
           }
@@ -467,6 +457,7 @@ namespace SMD.Implementation.Services
                 }
             }
         }
+
         public static bool PerformUserPayout(int companyId, int CouponId, int mode,double amount)
         {
             PaypalService = UnityConfig.UnityContainer.Resolve<IPaypalService>();
@@ -488,37 +479,37 @@ namespace SMD.Implementation.Services
                 List<Account> accounts = dbContext.Accounts.Where(g => g.CompanyId == companyId).ToList();
                 if (mode == (int)PaymentMethod.Coupon)
                 {
-                    var userVirtualAccount = accounts.Where(g => g.AccountType == (int)AccountType.VirtualAccount).FirstOrDefault();
-                    if (amount < userVirtualAccount.AccountBalance)
-                    {
+                    //var userVirtualAccount = accounts.Where(g => g.AccountType == (int)AccountType.VirtualAccount).FirstOrDefault();
+                    //if (amount < userVirtualAccount.AccountBalance)
+                    //{
                        
-                        // Update Accounts
-                        string codeCode = UpdateCouponAccounts(company, smdUser.Company,CouponId , dbContext);
-                        if (!string.IsNullOrEmpty(codeCode)) 
-                        {
-                            // Save Changes
-                            dbContext.SaveChanges();
+                    //    // Update Accounts
+                    //    string codeCode = UpdateCouponAccounts(company, smdUser.Company,CouponId , dbContext);
+                    //    if (!string.IsNullOrEmpty(codeCode)) 
+                    //    {
+                    //        // Save Changes
+                    //        dbContext.SaveChanges();
 
-                            // Email To User coupon code 
-                            try
-                            {
-                                BackgroundEmailManagerService.SendVoucherCodeEmail(dbContext, company.CompanyId, codeCode);
-                            }
-                            catch (Exception ex)
-                            {
+                    //        // Email To User coupon code 
+                    //        try
+                    //        {
+                    //            BackgroundEmailManagerService.SendVoucherCodeEmail(dbContext, company.CompanyId, codeCode);
+                    //        }
+                    //        catch (Exception ex)
+                    //        {
 
-                            }
-                        }
-                        else
-                        {
-                            return false;// coupon already redeemed
-                        }
+                    //        }
+                    //    }
+                    //    else
+                    //    {
+                    //        return false;// coupon already redeemed
+                    //    }
                       
-                    }
-                    else
-                    {
-                        return false;// insufficent balance 
-                    }
+                    //}
+                    //else
+                    //{
+                    //    return false;// insufficent balance 
+                    //}
                 }
                 else
                 {
