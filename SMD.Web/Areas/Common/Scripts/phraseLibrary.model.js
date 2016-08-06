@@ -2,7 +2,7 @@
     var
 
     //Section view Entity
-    Section = function (specifiedSectionId, specifiedName, specifiedSectionOrder) {
+    Section = function (specifiedSectionId, specifiedName,specifiedSectionOrder) {
         var
             self,
             //Unique ID
@@ -27,18 +27,17 @@
             sectionId: sectionId,
             isExpanded: isExpanded,
             name: name,
-            sectionOrder: sectionOrder,
+            sectionOrder:sectionOrder,
             convertToServerData: convertToServerData,
         };
         return self;
     };
 
     Section.Create = function (source) {
-        
         return new Section(source.SectionId, source.SectionName);
     }
-
-
+    
+  
 
     //Phrase Entity
     Phrase = function (specifiedPhraseId, specifiedPhrase1, specifiedSectionId) {
@@ -51,9 +50,9 @@
             //Field Id
             SectionId = ko.observable(specifiedSectionId),
             //Flag For deleted phrase
-
+          
            //Is phrase checkbox is checked
-
+            
 
              // Errors
             errors = ko.validation.group({
@@ -120,7 +119,7 @@
 
     return {
         Section: Section,
-        
+        PhraseField: PhraseField,
         Phrase: Phrase,
         PhraseLibrarySaveModel: PhraseLibrarySaveModel,
     };

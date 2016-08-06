@@ -44,14 +44,12 @@ namespace SMD.MIS.Areas.Api.Controllers
 
         public IEnumerable<ManageUserRolesModel> Get()
         {
-            Mapper.Initialize(cfg => cfg.CreateMap<vw_CompanyUsers, ManageUserRolesModel>());
 
-           
+            Mapper.Initialize(cfg => cfg.CreateMap<vw_CompanyUsers, ManageUserRolesModel>());
 
             var domainList = _manageUserService.GetManageUsersList();
             return domainList.Select(a => Mapper.Map<vw_CompanyUsers, ManageUserRolesModel>(a)).ToList();
 
-          
         }
 
 

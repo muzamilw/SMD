@@ -47,9 +47,7 @@ namespace SMD.MIS.Areas.Api.Controllers
                 {
                     return _couponService.GetCoupons(request).CreateCampaignFrom();
                 }
-               
             }
-           
         }
 
 

@@ -130,9 +130,11 @@
     <Compile Include="Services\IManageUserService.cs" />
     <Compile Include="Services\IPaypalService.cs" />
     <Compile Include="Services\IAccountService.cs" />
+    <Compile Include="Services\IPhraseService.cs" />
     <Compile Include="Services\IProductService.cs" />
     <Compile Include="Services\IProfileQuestionAnswerService.cs" />
     <Compile Include="Services\IProfileQuestionUserAnswerService.cs" />
+    <Compile Include="Services\ISectionService.cs" />
     <Compile Include="Services\IStripeService.cs" />
     <Compile Include="Services\ITransactionLogService.cs" />
     <Compile Include="Services\ITransactionService.cs" />
