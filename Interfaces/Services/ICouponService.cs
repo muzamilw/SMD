@@ -34,6 +34,9 @@ namespace SMD.Interfaces.Services
 
         bool PurchaseCoupon(string UserId, long CouponId, double PurchaseAmount);
 
+
+        int RedeemPurchasedCoupon(string UserId, long couponPurchaseId, string pinCode, string operatorId);
+
         List<Coupon> GetCouponsByCompanyId(int CompanyId);
 
     }

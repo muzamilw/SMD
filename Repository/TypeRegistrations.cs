@@ -53,6 +53,8 @@ namespace SMD.Repository
             unityContainer.RegisterType<ISectionRepository, SectionRepository>();
             unityContainer.RegisterType<IPhraseRepository, PhraseRepository>();
             unityContainer.RegisterType<IUserPurchasedCouponRepository, UserPurchasedCouponRepository>();
+            unityContainer.RegisterType<ICurrencyRepository, CurrencyRepository>();
+            
         }
     }
 }

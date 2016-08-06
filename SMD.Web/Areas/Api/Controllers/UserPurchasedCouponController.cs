@@ -72,18 +72,32 @@ namespace SMD.MIS.Areas.Api.Controllers
         [ApiExceptionCustom]
           public BaseApiResponse Post(string authenticationToken, string UserId, int CouponId, double SwapCost)
         {
+            
             var response = new BaseApiResponse { Message = "Success", Status = true };
-            if (string.IsNullOrEmpty(authenticationToken))
+            try
             {
-                throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
-            }
 
-            if (_couponService.PurchaseCoupon(UserId, CouponId, SwapCost))
-                return response;
-            else
+
+
+                if (string.IsNullOrEmpty(authenticationToken))
+                {
+                    throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
+                }
+
+                if (_couponService.PurchaseCoupon(UserId, CouponId, SwapCost))
+                    return response;
+                else
+                {
+                    response.Status = false;
+                    response.Message = "Error in purchasing coupon";
+                    return response;
+                }
+            }
+            catch (Exception e)
             {
+
                 response.Status = false;
-                response.Message = "Error in purchasing coupon";
+                response.Message = e.ToString();
                 return response;
             }
         }

@@ -278,6 +278,14 @@ namespace SMD.MIS
             routeHandlers);
 
             
+              config.Routes.MapHttpRoute(
+            "RedeemPurchasedCoupon",
+            "RedeemPurchasedCoupon/{AuthenticationToken}/",
+            new { controller = "RedeemPurchasedCoupon" },
+            null,
+            routeHandlers);
+
+            
         }
     }
 }

@@ -200,6 +200,7 @@
     <Compile Include="Repositories\CampaignCategoriesRepository.cs" />
     <Compile Include="Repositories\CompanyRepository.cs" />
     <Compile Include="Repositories\CompanyAspNetUsersRepository.cs" />
+    <Compile Include="Repositories\CurrencyRepository.cs" />
     <Compile Include="Repositories\CouponCategoryRepository.cs" />
     <Compile Include="Repositories\CouponCodeRepository.cs" />
     <Compile Include="Repositories\CouponRepository.cs" />

@@ -50,6 +50,7 @@ namespace SMD.Implementation.Services
         private readonly ISurveyQuestionResponseRepository surveyQuestionResponseRepository;
         private readonly ICompanyRepository companyRepository;
         private readonly IManageUserRepository manageUserRepository;
+        private readonly IAccountService accountService;
         private ApplicationUserManager UserManager
         {
             get { return HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
@@ -682,7 +683,7 @@ namespace SMD.Implementation.Services
             ITaxRepository taxRepository, IProfileQuestionUserAnswerService profileQuestionAnswerService,
             ICountryRepository countryRepository, IIndustryRepository industryRepository,
             IProfileQuestionService profileQuestionService, IAdCampaignResponseRepository adCampaignResponseRepository,
-            ISurveyQuestionResponseRepository surveyQuestionResponseRepository, IEducationRepository educationRepository, ICityRepository cityRepository, ICompanyRepository companyRepository, IManageUserRepository manageUserRepository)
+            ISurveyQuestionResponseRepository surveyQuestionResponseRepository, IEducationRepository educationRepository, ICityRepository cityRepository, ICompanyRepository companyRepository, IManageUserRepository manageUserRepository, IAccountService accountService)
         {
             if (emailManagerService == null)
             {
@@ -748,6 +749,7 @@ namespace SMD.Implementation.Services
             this.cityRepository = cityRepository;
             this.companyRepository = companyRepository;
             this.manageUserRepository = manageUserRepository;
+            this.accountService = accountService;
         }
 
 
@@ -1161,12 +1163,16 @@ namespace SMD.Implementation.Services
             {
                 throw new InvalidOperationException(string.Format("Failed to add user to role {0}", Roles.User));
             }
-            companyRepository.createCompany(user.Id, request.Email, request.FullName,Guid.NewGuid().ToString());
+            int companyId = companyRepository.createCompany(user.Id, request.Email, request.FullName,Guid.NewGuid().ToString());
             var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
             var callbackUrl = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority +
                               "/Api_Mobile/Register/Confirm/?UserId=" + user.Id + "&Code=" + HttpUtility.UrlEncode(code);
             await
                 emailManagerService.SendAccountVerificationEmail(user, callbackUrl);
+
+
+            accountService.AddAccountsForNewUser(companyId);
+            
 
             return new LoginResponse
             {
@@ -1194,6 +1200,18 @@ namespace SMD.Implementation.Services
             {
                 return ThrowRegisterUserErrors(result);
             }
+
+            var addUserToRoleResult = await UserManager.AddToRoleAsync(user.Id, Roles.User); // Only Type 'User' Role will be registered from app
+            if (!addUserToRoleResult.Succeeded)
+            {
+                throw new InvalidOperationException(string.Format("Failed to add user to role {0}", Roles.User));
+            }
+            int companyId = companyRepository.createCompany(user.Id, request.Email, request.FullName, Guid.NewGuid().ToString());
+            
+
+
+            accountService.AddAccountsForNewUser(companyId);
+
 
             // Login user
             LoginUser(request.Email);

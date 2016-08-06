@@ -28,6 +28,8 @@ namespace SMD.Implementation.Services
         private readonly IUserPurchasedCouponRepository _userPurchasedCouponRepository;
         private readonly ICompanyService _companyService;
         private readonly IAccountRepository _accountRepository;
+        private readonly IWebApiUserService _userService;
+        private readonly ICurrencyRepository _currencyRrepository;
         private ApplicationUserManager UserManager
         {
             get { return HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
@@ -100,13 +102,15 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Constructor 
         /// </summary>
-        public CouponService(ICouponRepository couponRepository, IUserFavouriteCouponRepository userFavouriteCouponRepository, ICompanyService _companyService, IUserPurchasedCouponRepository _userPurchasedCouponRepository, IAccountRepository _accountRepository)
+        public CouponService(ICouponRepository couponRepository, IUserFavouriteCouponRepository userFavouriteCouponRepository, ICompanyService _companyService, IUserPurchasedCouponRepository _userPurchasedCouponRepository, IAccountRepository _accountRepository, IWebApiUserService _userService, ICurrencyRepository _currencyRrepository)
         {
             this.couponRepository = couponRepository;
             this._userFavouriteCouponRepository = userFavouriteCouponRepository;
             this._companyService = _companyService;
             this._userPurchasedCouponRepository = _userPurchasedCouponRepository;
             this._accountRepository = _accountRepository;
+            this._userService = _userService;
+            this._currencyRrepository = _currencyRrepository;
         }
 
         #endregion
@@ -339,6 +343,14 @@ namespace SMD.Implementation.Services
             }
 
             coupon.DaysLeft =Convert.ToInt32( (new DateTime(coupon.CouponActiveYear.Value, coupon.CouponActiveMonth.Value, DateTime.DaysInMonth(coupon.CouponActiveYear.Value, coupon.CouponActiveMonth.Value)) - DateTime.Today).TotalDays);
+            
+
+            //get the currency and its exchange rate.
+            var currency = _currencyRrepository.Find(coupon.CurrencyId.Value);
+
+            double swapcost = (coupon.Savings.Value / currency.SMDCreditRatio.Value) / 100;
+
+            coupon.SwapCost = swapcost > 0.50 ? swapcost : 0.50;
 
             //checking if its already flagged by user or not.
 
@@ -400,8 +412,15 @@ namespace SMD.Implementation.Services
 
                   _userPurchasedCouponRepository.Add(newPurchasedCoupon);
                   _userPurchasedCouponRepository.SaveChanges();
-                
 
+
+                  //incrementing the Issues/Purchased count 
+
+                  var oCoupon = couponRepository.Find(CouponId);
+                  oCoupon.CouponIssuedCount += 1;
+
+                  couponRepository.Update(oCoupon);
+                  couponRepository.SaveChanges();
                  
 
                       // Email To User coupon code 
@@ -424,6 +443,56 @@ namespace SMD.Implementation.Services
               }
           }
 
+
+        public int RedeemPurchasedCoupon(string UserId, long couponPurchaseId, string pinCode, string operatorId)
+          {
+
+              var user = _userService.GetUserByUserId(UserId);
+
+            
+
+            var purchasedCoupon = _userPurchasedCouponRepository.Find(couponPurchaseId);
+
+            var company = _companyService.GetCompanyById(user.CompanyId.Value);
+
+
+            if (purchasedCoupon != null && purchasedCoupon.UserId == UserId && company.VoucherSecretKey == pinCode && (purchasedCoupon.IsRedeemed == null || purchasedCoupon.IsRedeemed == false))
+            {
+                purchasedCoupon.IsRedeemed = true;
+                purchasedCoupon.RedemptionDateTime = DateTime.Now;
+                purchasedCoupon.RedemptionOperator = operatorId;
+
+                _userPurchasedCouponRepository.Update(purchasedCoupon);
+
+                _userPurchasedCouponRepository.SaveChanges();
+
+                //incrementing the redeemed count 
+
+                var oCoupon = couponRepository.Find(purchasedCoupon.CouponId.Value);
+                oCoupon.CouponRedeemedCount += 1;
+
+                couponRepository.Update(oCoupon);
+                couponRepository.SaveChanges();
+
+                return 1;
+            
+
+            }
+              else if ( company.VoucherSecretKey != pinCode)
+              {
+                  return 3;// incorrect pincode
+              }
+            else if (purchasedCoupon.IsRedeemed == true)
+            {
+                return 4;// already redeemed
+            }
+              
+              else 
+              {
+                  return 2;// incorrect settings
+              }
+          }
+       
 
         public List<Coupon> GetCouponsByCompanyId(int CompanyId)
         {

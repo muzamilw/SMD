@@ -385,6 +385,7 @@
     <Compile Include="App_Start\SecurityConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Api\Controllers\CouponController.cs" />
+    <Compile Include="Areas\Api\Controllers\RedeemPurchasedCouponController.cs" />
     <Compile Include="Areas\Coupons\CouponsAreaRegistration.cs" />
     <Compile Include="Areas\Coupons\Controllers\CouponsController.cs" />
     <Compile Include="Areas\Ads\AdsAreaRegistration.cs" />

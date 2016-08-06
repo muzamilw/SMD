@@ -324,6 +324,7 @@
           <Property Name="AfilliatianStatus" Type="bit" />
           <Property Name="WebsiteLink" Type="nvarchar" MaxLength="100" />
           <Property Name="CompanyType" Type="int" />
+          <Property Name="VoucherSecretKey" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="CompanyBranch">
           <Key>
@@ -3849,6 +3850,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <NavigationProperty Name="BranchCategories" Relationship="DomainModels.FK_BranchCategory_Company" FromRole="Company" ToRole="BranchCategory" />
           <NavigationProperty Name="CompanyBranches" Relationship="DomainModels.FK_CompanyBranch_Company" FromRole="Company" ToRole="CompanyBranch" />
           <NavigationProperty Name="Coupons" Relationship="DomainModels.FK_Coupon_Company" FromRole="Company" ToRole="Coupon" />
+          <Property Name="VoucherSecretKey" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_Account_Company">
           <End Type="DomainModels.Company" Role="Company" Multiplicity="0..1" />
@@ -5561,6 +5563,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <EntitySetMapping Name="Companies">
             <EntityTypeMapping TypeName="DomainModels.Company">
               <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="VoucherSecretKey" ColumnName="VoucherSecretKey" />
                 <ScalarProperty Name="CompanyType" ColumnName="CompanyType" />
                 <ScalarProperty Name="WebsiteLink" ColumnName="WebsiteLink" />
                 <ScalarProperty Name="AfilliatianStatus" ColumnName="AfilliatianStatus" />

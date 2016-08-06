@@ -100,6 +100,7 @@ namespace SMD.Repository.Repositories
                 company.ReplyEmail = request.AdvertContactEmail;
                 company.PaypalCustomerId = request.PayPal;
                 company.PreferredPayoutAccount = 1;
+                company.VoucherSecretKey = request.VoucherSecretKey;
                 db.SaveChanges();
                 return true;
             }
