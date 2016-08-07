@@ -27,6 +27,7 @@ namespace SMD.Implementation.Services
         /// Private members
         /// </summary>
         private readonly IAdCampaignRepository _adCampaignRepository;
+        private readonly ICurrencyRepository _currencyRepository;
         private readonly ILanguageRepository _languageRepository;
         private readonly ICountryRepository _countryRepository;
         private readonly ICityRepository _cityRepository;
@@ -109,7 +110,7 @@ namespace SMD.Implementation.Services
                 savePaths[2] = savePath;
                 campaign.Voucher1ImagePath = savePath;
             }
-            if (!string.IsNullOrEmpty(campaign.buyItImageBytes) )
+            if (!string.IsNullOrEmpty(campaign.buyItImageBytes))
             {
                 string base64 = campaign.buyItImageBytes.Substring(campaign.buyItImageBytes.IndexOf(',') + 1);
                 base64 = base64.Trim('\0');
@@ -192,14 +193,14 @@ namespace SMD.Implementation.Services
             IAdCampaignTargetCriteriaRepository adCampaignTargetCriteriaRepository,
             IProfileQuestionRepository profileQuestionRepository,
             IProfileQuestionAnswerRepository profileQuestionAnswerRepository,
-            ISurveyQuestionRepository surveyQuestionRepository, 
-            IProductRepository productRepository, ITaxRepository taxRepository, IInvoiceRepository invoiceRepository, 
-            IInvoiceDetailRepository invoiceDetailRepository,IEducationRepository educationRepository,
+            ISurveyQuestionRepository surveyQuestionRepository,
+            IProductRepository productRepository, ITaxRepository taxRepository, IInvoiceRepository invoiceRepository,
+            IInvoiceDetailRepository invoiceDetailRepository, IEducationRepository educationRepository,
             IStripeService stripeService, WebApiUserService webApiUserService, ICompanyRepository companyRepository, IAdCampaignResponseRepository adcampaignResponseRepository
-            ,ICouponCategoryRepository couponCategoryRepository
+            , ICouponCategoryRepository couponCategoryRepository
             , ICampaignCategoriesRepository campaignCategoriesRepository
             , ICouponCodeRepository couponCodeRepository
-            , IUserFavouriteCouponRepository userFavouriteCouponRepository)
+            , IUserFavouriteCouponRepository userFavouriteCouponRepository, ICurrencyRepository currencyRepository)
         {
             this._adCampaignRepository = adCampaignRepository;
             this._languageRepository = languageRepository;
@@ -225,8 +226,9 @@ namespace SMD.Implementation.Services
             this._campaignCategoriesRepository = campaignCategoriesRepository;
             this._couponCodeRepository = couponCodeRepository;
             this._userFavouriteCouponRepository = userFavouriteCouponRepository;
+            this._currencyRepository = currencyRepository;
         }
-        
+
         /// <summary>
         /// Get Base Data 
         /// </summary>
@@ -256,7 +258,7 @@ namespace SMD.Implementation.Services
                 objUC.EducationTitle = loggedInUser.Education != null ? loggedInUser.Education.Title : "";
                 objUC.IndustryName = loggedInUser.Industry != null ? loggedInUser.Industry.IndustryName : "";
                 objUC.LanguageName = loggedInUser.Language != null ? loggedInUser.Language.LanguageName : "";
-                objUC.isStripeIntegrated =loggedInUser.Company == null?false:( String.IsNullOrEmpty(loggedInUser.Company.StripeCustomerId) ? false : true);
+                objUC.isStripeIntegrated = loggedInUser.Company == null ? false : (String.IsNullOrEmpty(loggedInUser.Company.StripeCustomerId) ? false : true);
             }
             if (campaignProduct != null)
             {
@@ -281,6 +283,7 @@ namespace SMD.Implementation.Services
                 UserAndCostDetails = objUC,
                 Industry = _industryRepository.GetAll(),
                 CouponCategory = _couponCategoryRepository.GetAllCoupons(),
+                Currencies = _currencyRepository.GetAllCurrencies()
                 //DiscountVouchers = _adCampaignRepository.GetCouponsByUserIdWithoutFilter(loggedInUser.Id)
             };
         }
@@ -333,13 +336,13 @@ namespace SMD.Implementation.Services
                 campaignModel.CreatedBy = user.FullName;
             campaignModel.StartDateTime = new DateTime(2005, 1, 1);//campaignModel.StartDateTime.Value.Subtract(_adCampaignRepository.UserTimezoneOffSet);
             campaignModel.EndDateTime = new DateTime(2040, 1, 1);//campaignModel.EndDateTime.Value.Subtract(_adCampaignRepository.UserTimezoneOffSet);
-            if(campaignModel.MaxBudget != null)
+            if (campaignModel.MaxBudget != null)
             {
                 campaignModel.MaxBudget = Math.Round(Convert.ToDouble(campaignModel.MaxBudget), 2);
             }
 
             //todo pilot: harcoding ClickRate = 1 for every campaign
-             campaignModel.ClickRate = 0.20;
+            campaignModel.ClickRate = 0.20;
 
 
             _adCampaignRepository.Add(campaignModel);
@@ -387,7 +390,7 @@ namespace SMD.Implementation.Services
 
                 _adCampaignRepository.SaveChanges();
             }
-            
+
             if (campaignModel.CouponCategories != null && campaignModel.CouponCategories.Count() > 0)
             {
                 foreach (CouponCategory item in campaignModel.CouponCategories)
@@ -459,7 +462,7 @@ namespace SMD.Implementation.Services
         /// </summary>
         public void UpdateCampaign(AdCampaign campaignModel)
         {
-           // campaignModel.UserId = _adCampaignRepository.LoggedInUserIdentity;
+            // campaignModel.UserId = _adCampaignRepository.LoggedInUserIdentity;
             var user = UserManager.Users.Where(g => g.Id == _adCampaignRepository.LoggedInUserIdentity).SingleOrDefault();
             if (user != null)
                 campaignModel.CreatedBy = user.FullName;
@@ -469,11 +472,11 @@ namespace SMD.Implementation.Services
                 if (!string.IsNullOrEmpty(paths[0]) && !paths[0].Contains("http:"))
                 {
                     if (!paths[0].ToLower().Contains(HttpContext.Current.Request.Url.Authority.ToLower()))
-                    campaignModel.ImagePath = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + paths[0];
+                        campaignModel.ImagePath = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + paths[0];
                 }
                 if (!string.IsNullOrEmpty(paths[1]) && !paths[1].Contains("http:"))
                 {
-                    campaignModel.LandingPageVideoLink = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" +  paths[1];
+                    campaignModel.LandingPageVideoLink = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + paths[1];
                 }
                 if (!string.IsNullOrEmpty(paths[3]))
                 {
@@ -520,15 +523,16 @@ namespace SMD.Implementation.Services
 
             //todo pilot: harcoding ClickRate = 1 for every campaign
             campaignModel.ClickRate = 1;
-            
-            if(campaignModel.Status == 3){
+
+            if (campaignModel.Status == 3)
+            {
                 campaignModel.Approved = true;
             }
             if (campaignModel.MaxBudget != null)
             {
                 campaignModel.MaxBudget = Math.Round(Convert.ToDouble(campaignModel.MaxBudget), 2);
             }
-          
+
             _adCampaignRepository.Update(campaignModel);
             _adCampaignRepository.SaveChanges();
 
@@ -606,12 +610,12 @@ namespace SMD.Implementation.Services
                     oModel.CampaignId = campaignModel.CampaignId;
                     oModel.CategoryId = item.CategoryId;
                     _campaignCategoriesRepository.Add(oModel);
-                   
+
 
                 }
                 _campaignCategoriesRepository.SaveChanges();
 
-               
+
             }
 
             // remove coupon codes if campaign has and add again
@@ -623,7 +627,8 @@ namespace SMD.Implementation.Services
             {
                 foreach (CouponCode item in campaignModel.CouponCodes)
                 {
-                    if(item.IsTaken != true){
+                    if (item.IsTaken != true)
+                    {
                         CouponCode oModel = new CouponCode();
 
                         oModel.CampaignId = campaignModel.CampaignId;
@@ -631,7 +636,7 @@ namespace SMD.Implementation.Services
                         _couponCodeRepository.Add(oModel);
 
                     }
-             
+
 
 
                 }
@@ -706,10 +711,10 @@ namespace SMD.Implementation.Services
 
         //        _adCampaignRepository.SaveChanges();
 
-               
-                
+
+
         //        AdCampaign campaignupdatedrec = _adCampaignRepository.Find(source.CampaignId);
-             
+
         //        return campaignupdatedrec;
         //    }
         //    return new AdCampaign();
@@ -730,7 +735,7 @@ namespace SMD.Implementation.Services
                     emailManagerService.SendCampaignRejectionEmail(dbAd.UserId, dbAd.CampaignName, dbAd.RejectedReason, dbAd.Type);
 
                 }
-             
+
             }
             return new AdCampaign();
         }
@@ -751,10 +756,10 @@ namespace SMD.Implementation.Services
             // Tax Applied
             var tax = taxRepository.GetTaxByCountryId(user.Company.CountryId);
             // Total includes tax
-            if (product != null) 
+            if (product != null)
             {
                 amount = product.SetupPrice ?? 0 + tax.TaxValue ?? 0;
-               
+
 
                 // If It is not System User then make transation 
                 if (user.Roles.Any(role => role.Name.ToLower().Equals("user")))
@@ -768,9 +773,9 @@ namespace SMD.Implementation.Services
                     isSystemUser = true;
                 }
             }
-            
+
             #endregion
-           
+
             if (response != null && !response.Contains("Failed"))
             {
                 if (isSystemUser)
@@ -827,7 +832,7 @@ namespace SMD.Implementation.Services
         {
             return new AdCampaignBaseResponse
             {
-                ProfileQuestions = _profileQuestionRepository.GetAll().Where(g=>g.Status != 0)
+                ProfileQuestions = _profileQuestionRepository.GetAll().Where(g => g.Status != 0)
             };
         }
 
@@ -904,14 +909,14 @@ namespace SMD.Implementation.Services
             //Landing Page video link
             //Voucher1imagepath
             // Buy it imag url
-           
+
 
 
 
             return NewCampaignID;
 
 
- 
+
 
         }
 
@@ -946,7 +951,7 @@ namespace SMD.Implementation.Services
                 // Clone campaign target locations
                 CloneAdCampaignTargetLocation(source, target);
 
-               
+
 
 
                 companyRepository.SaveChanges();
@@ -1093,14 +1098,14 @@ namespace SMD.Implementation.Services
         }
 
 
-    
-
-
-     
 
 
 
-       
+
+
+
+
+
 
 
 
@@ -1168,23 +1173,23 @@ namespace SMD.Implementation.Services
                 {
                     isAddCode = false;
                 }
-                else 
+                else
                 {
                     isAddCode = true;
                 }
-                if (isAddCode) 
+                if (isAddCode)
                 {
                     oCode = new CouponCode();
                     oCode.Code = uCode;
                     oCode.CampaignId = CampaignId;
                     oCode.UserId = _adCampaignRepository.LoggedInUserIdentity;
-                    codesList.Add(oCode); 
+                    codesList.Add(oCode);
                     _couponCodeRepository.Add(oCode);
-                
+
                 }
             }
             AdCampaign ocoupon = _adCampaignRepository.Find(CampaignId);
-     
+
             ocoupon.CouponQuantity = alreadyAddedCodes.Count + codesList.Count;
             _couponCodeRepository.SaveChanges();
             _adCampaignRepository.SaveChanges();

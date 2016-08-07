@@ -459,7 +459,8 @@ namespace SMD.MIS.ModelMappers
                 Educations = source.Education.Select(edu => edu.CreateFrom()),
                 Professions = source.Industry.Select(ind => ind.CreateFrom()),
                 CouponCategories = source.CouponCategory.Select(cc => cc.CreateFromForCategories(false)),
-                DiscountVouchers = source.DiscountVouchers.Select(dv => dv.CreateFromDiscountVoucher())
+                DiscountVouchers = source.DiscountVouchers == null? null: source.DiscountVouchers.Select(dv => dv.CreateFromDiscountVoucher()),
+                Currencies = source.Currencies == null? null: source.Currencies.Select(cr =>cr.CreateFrom())
             };
         }
 

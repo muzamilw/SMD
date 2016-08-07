@@ -28,6 +28,7 @@ namespace SMD.Implementation.Services
         private readonly IUserPurchasedCouponRepository _userPurchasedCouponRepository;
         private readonly ICompanyService _companyService;
         private readonly IAccountRepository _accountRepository;
+        private readonly ICouponCategoryRepository _couponCategoryRepository;
         private readonly IWebApiUserService _userService;
         private readonly ICurrencyRepository _currencyRrepository;
         private ApplicationUserManager UserManager
@@ -102,7 +103,8 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Constructor 
         /// </summary>
-        public CouponService(ICouponRepository couponRepository, IUserFavouriteCouponRepository userFavouriteCouponRepository, ICompanyService _companyService, IUserPurchasedCouponRepository _userPurchasedCouponRepository, IAccountRepository _accountRepository, IWebApiUserService _userService, ICurrencyRepository _currencyRrepository)
+        public CouponService(ICouponRepository couponRepository, IUserFavouriteCouponRepository userFavouriteCouponRepository, ICompanyService _companyService,
+            IUserPurchasedCouponRepository _userPurchasedCouponRepository, IAccountRepository _accountRepository, ICouponCategoryRepository _couponCategoryRepository)
         {
             this.couponRepository = couponRepository;
             this._userFavouriteCouponRepository = userFavouriteCouponRepository;
@@ -111,6 +113,7 @@ namespace SMD.Implementation.Services
             this._accountRepository = _accountRepository;
             this._userService = _userService;
             this._currencyRrepository = _currencyRrepository;
+            this._couponCategoryRepository = _couponCategoryRepository;
         }
 
         #endregion
@@ -168,7 +171,7 @@ namespace SMD.Implementation.Services
 
                     item.LogoUrl = "http://manage.cash4ads.com/" + company.Logo;
 
-                }
+            }
                 else
                 {
                     item.LogoUrl = "http://manage.cash4ads.com/" + item.LogoUrl;
@@ -200,11 +203,11 @@ namespace SMD.Implementation.Services
                 //checking if its not alrady marked
                 if (_userFavouriteCouponRepository.GetByCouponId(CouponId, UserId) == null)
                 {
-                    var favCoupon = new UserFavouriteCoupon { UserId = UserId, CouponId = CouponId };
+                var favCoupon = new UserFavouriteCoupon { UserId = UserId, CouponId = CouponId };
 
-                    _userFavouriteCouponRepository.Add(favCoupon);
-                    _userFavouriteCouponRepository.SaveChanges();
-                }
+                _userFavouriteCouponRepository.Add(favCoupon);
+                _userFavouriteCouponRepository.SaveChanges();
+            }
             }
             else // removing the favorite
             {
@@ -272,7 +275,21 @@ namespace SMD.Implementation.Services
 
                 couponRepository.SaveChanges();
             }
+            //if (couponModel.CouponCategories != null && couponModel.CouponCategories.Count() > 0)
+            //{
+            //    foreach (CouponCategory item in couponModel.CouponCategories)
+            //    {
+            //        CouponCategories oModel = new CouponCategories();
 
+            //        oModel.CouponId = couponModel.CouponId;
+            //        oModel.CategoryId = item.CategoryId;
+            //        _couponCategoryRepository.Add(oModel);
+          
+          
+            //    }
+            //    _couponCategoryRepository.SaveChanges();
+
+            //}
           
         }
 
@@ -283,6 +300,14 @@ namespace SMD.Implementation.Services
             var user = UserManager.Users.Where(g => g.Id == couponRepository.LoggedInUserIdentity).SingleOrDefault();
             if (user != null)
                 couponModel.CreatedBy = user.FullName;
+
+            if(couponModel.LogoUrl != null)
+            {
+                if(couponModel.LogoUrl[0] == '/')
+                {
+                    couponModel.LogoUrl = couponModel.LogoUrl.Substring(1, couponModel.LogoUrl.Length-1);
+                }
+            }
             string[] paths = SaveImages(couponModel);
             if (paths != null && paths.Count() > 0)
             {
@@ -306,7 +331,7 @@ namespace SMD.Implementation.Services
                 {
                     couponModel.LogoUrl = paths[7];
                 }
-                else if (couponModel.LogoUrl.Contains("Content/Images"))
+                else if (couponModel.LogoUrl != null && couponModel.LogoUrl.Contains("Content/Images"))
                 {
                     couponModel.LogoUrl = null;
                 }
@@ -343,7 +368,7 @@ namespace SMD.Implementation.Services
             }
 
             coupon.DaysLeft =Convert.ToInt32( (new DateTime(coupon.CouponActiveYear.Value, coupon.CouponActiveMonth.Value, DateTime.DaysInMonth(coupon.CouponActiveYear.Value, coupon.CouponActiveMonth.Value)) - DateTime.Today).TotalDays);
-            
+
 
             //get the currency and its exchange rate.
             var currency = _currencyRrepository.Find(coupon.CurrencyId.Value);
@@ -371,7 +396,7 @@ namespace SMD.Implementation.Services
           public List<PurchasedCoupons> GetPurchasedCouponByUserId(string UserId)
           {
               var result = _userPurchasedCouponRepository.GetPurchasedCouponByUserId(UserId);
-
+             
               foreach (var coupon in result)
               {
                   if (coupon.LogoUrl == null)
@@ -388,13 +413,15 @@ namespace SMD.Implementation.Services
 
               }
 
+                
+
               return result.ToList();
 
           }
 
 
 
-        public bool PurchaseCoupon(string UserId, long CouponId, double PurchaseAmount)
+          public bool PurchaseCoupon(string UserId, long CouponId, double PurchaseAmount)
           {
 
               List<Account> accounts = _accountRepository.GetByUserId(UserId);
@@ -403,12 +430,12 @@ namespace SMD.Implementation.Services
               if (PurchaseAmount < userVirtualAccount.AccountBalance)
               {
 
-                   //Update Accounts
+                  //Update Accounts
                   PayOutScheduler.UpdateCouponAccounts(CouponId, PurchaseAmount, userVirtualAccount.CompanyId.Value);
 
 
                   //enter the entry for purchased coupon,
-                  var newPurchasedCoupon = new UserPurchasedCoupon{ CouponId = CouponId, IsRedeemed = false, PurchaseAmount = PurchaseAmount, PurchaseDateTime = DateTime.Now, RedemptionOperator = null, UserId = UserId};
+                  var newPurchasedCoupon = new UserPurchasedCoupon { CouponId = CouponId, IsRedeemed = false, PurchaseAmount = PurchaseAmount, PurchaseDateTime = DateTime.Now, RedemptionOperator = null, UserId = UserId };
 
                   _userPurchasedCouponRepository.Add(newPurchasedCoupon);
                   _userPurchasedCouponRepository.SaveChanges();
@@ -421,29 +448,26 @@ namespace SMD.Implementation.Services
 
                   couponRepository.Update(oCoupon);
                   couponRepository.SaveChanges();
-                 
 
-                      // Email To User coupon code 
-                      try
-                      {
-                          //BackgroundEmailManagerService.SendVoucherCodeEmail(dbContext, company.CompanyId, codeCode);
-                      }
-                      catch (Exception ex)
-                      {
 
-                      }
-                
+                  // Email To User coupon code 
+                  try
+                  {
+                      //BackgroundEmailManagerService.SendVoucherCodeEmail(dbContext, company.CompanyId, codeCode);
+                  }
+                  catch (Exception ex)
+                  {
 
-                  return true;
+
+
+                      return true;
+
+                  }
 
               }
-              else
-              {
-                  return false;// insufficent balance 
-              }
+              return false;
+
           }
-
-
         public int RedeemPurchasedCoupon(string UserId, long couponPurchaseId, string pinCode, string operatorId)
           {
 
@@ -502,7 +526,7 @@ namespace SMD.Implementation.Services
 		        coupon.DaysLeft =Convert.ToInt32( (new DateTime(coupon.CouponActiveYear.Value, coupon.CouponActiveMonth.Value, DateTime.DaysInMonth(coupon.CouponActiveYear.Value, coupon.CouponActiveMonth.Value)) - DateTime.Today).TotalDays);
             }
             return res;
-        }
+          }
 
         #endregion
     }

@@ -4,9 +4,9 @@
       Coupon = function (FinePrintLine1, FinePrintLine2, FinePrintLine3, FinePrintLine4, FinePrintLine5, GeographyColumn, HighlightLine1, HighlightLine2, HighlightLine3, HighlightLine4,
             HighlightLine5, HowToRedeemLine1, HowToRedeemLine2, HowToRedeemLine3, HowToRedeemLine4, HowToRedeemLine5, LanguageId, LocationBranchId, LocationCity, LocationLAT,
             LocationLine1, LocationLine2, LocationLON, LocationPhone, LocationState, LocationTitle, LocationZipCode, LogoUrl, ModifiedBy, ModifiedDateTime, Price, RejectedBy,
-            Rejecteddatetime, RejectedReason, Savings, SearchKeywords, Status, SwapCost, UserId, CouponTitle, CouponExpirydate, CouponQtyPerUser, CouponId, couponImage1, CouponImage2, CouponImage3
+            Rejecteddatetime, RejectedReason, Savings, SearchKeywords, Status, SwapCost, UserId, CouponTitle, CouponExpirydate, CouponQtyPerUser, CouponId, couponImage1, CouponImage2, CouponImage3,
+            CurrencyId, CouponListingMode, CouponActiveMonth
           ) {
-       
           var
               //type and userID will be set on server sside
               ApprovalDateTime = ko.observable(ApprovalDateTime),
@@ -14,9 +14,10 @@
               ApprovedBy = ko.observable(ApprovedBy),
               Archived = ko.observable(Archived),
               CompanyId = ko.observable(CompanyId),
+              CouponCategories = ko.observableArray([]),
               CouponActiveMonth = ko.observable(CouponActiveMonth),
               CouponActiveYear = ko.observable(CouponActiveYear),
-              CouponExpirydate = ko.observable(CouponExpirydate),
+              CouponExpirydate = ko.observable((CouponExpirydate !== null && CouponExpirydate !== undefined) ? moment(CouponExpirydate).toDate() : undefined),//ko.observable(),
               CouponId = ko.observable(CouponId),
               couponImage1 = ko.observable(couponImage1),
               CouponImage2 = ko.observable(CouponImage2),
@@ -70,7 +71,7 @@
               StatusValue = ko.observable(""),
               SwapCost = ko.observable(SwapCost),
               UserId = ko.observable(UserId),
-                LogoImageBytes = ko.observable(''),
+                LogoImageBytes = ko.observable(LogoUrl),
                // Errors
               errors = ko.validation.group({ }),
                 // Is Valid 
@@ -163,11 +164,11 @@
                    
                   //    LocationtargetCriteria.push(item.convertToServerData());
                   //});
-                  //var selectedCoupons = [];
-                  //_.each(CouponCategories(), function (item) {
+                  var selectedCoupons = [];
+                  _.each(CouponCategories(), function (item) {
 
-                  //    selectedCoupons.push(item.convertToServerData());
-                  //});
+                      selectedCoupons.push(item.convertToServerData());
+                  });
                   //var targetCouponCodes = [];
                   //_.each(CouponCodes(), function (item) {
                   //    console.log(item);
@@ -222,7 +223,7 @@
                       LocationState: LocationState(),
                       LocationTitle: LocationTitle(),
                       LocationZipCode: LocationZipCode(),
-                  //    LogoUrl: LogoUrl(),
+                      LogoUrl: LogoUrl(),
                       ModifiedBy: ModifiedBy(),
                       ModifiedDateTime: ModifiedDateTime(),
                       Price: Price(),
@@ -236,7 +237,8 @@
                       SwapCost: SwapCost(),
                       UserId: UserId(),
                       LogoImageBytes: LogoImageBytes(),
-                      hasChanges: hasChanges()
+                      hasChanges: hasChanges(),
+                      CouponCategories: selectedCoupons,
                   };
               };
           return {
@@ -303,7 +305,8 @@
               UserId: (UserId),
               LogoImageBytes: LogoImageBytes,
               hasChanges: hasChanges,
-              convertToServerData: convertToServerData
+              convertToServerData: convertToServerData,
+              CouponCategories: CouponCategories,
           };
       };
 
@@ -318,13 +321,43 @@
             source.LocationLine1, source.LocationLine2, source.LocationLON, source.LocationPhone, source.LocationState,
             source.LocationTitle, source.LocationZipCode, "/" + source.LogoUrl, source.ModifiedBy, source.ModifiedDateTime, source.Price, source.RejectedBy,
             source.Rejecteddatetime, source.RejectedReason, source.Savings, source.SearchKeywords, source.Status, source.SwapCost, source.UserId,source.CouponTitle,source.CouponExpirydate,
-            source.CouponQtyPerUser, source.CouponId, source.couponImage1, source.CouponImage2, source.CouponImage3);
-        
-       
+            source.CouponQtyPerUser, source.CouponId, source.couponImage1, source.CouponImage2, source.CouponImage3,source.CurrencyId,source.CouponListingMode,source.CouponActiveMonth
+            );
+        _.each(source.CouponCategories, function (item) {
+
+            coupon.CouponCategories.push(selectedCouponCategory.Create(item));
+        });
+
         return coupon;
     };
- 
+    selectedCouponCategory = function (CategoryId, Name) {
+
+        var
+            //type and userID will be set on server sside
+            CategoryId = ko.observable(CategoryId),
+            Name = ko.observable(Name),
+            IsSelected = ko.observable(),
+            // Convert to server data
+            convertToServerData = function () {
+                return {
+                    CategoryId: CategoryId(),
+                    Name: Name()
+                };
+            };
+        return {
+            CategoryId: CategoryId,
+            Name: Name,
+            IsSelected: IsSelected,
+            convertToServerData: convertToServerData
+        };
+    };
+    // Factory Method
+    selectedCouponCategory.Create = function (source) {
+
+        return new selectedCouponCategory(source.CategoryId, source.Name);
+    };
     return {
-        Coupon: Coupon
+        Coupon: Coupon,
+        selectedCouponCategory: selectedCouponCategory,
     };
 });

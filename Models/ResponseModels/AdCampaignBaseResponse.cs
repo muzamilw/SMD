@@ -14,7 +14,7 @@ namespace SMD.Models.ResponseModels
         /// Langs
         /// </summary>
         public IEnumerable<Language> Languages { get; set; }
-
+        public IEnumerable<Currency> Currencies { get; set; }
         /// <summary>
         /// User and Cost detail
         /// </summary>

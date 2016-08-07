@@ -608,7 +608,9 @@
     <Content Include="Areas\Common\Scripts\pagination.js" />
     <Content Include="Areas\Coupons\Scripts\Layout.dataService.js" />
     <Content Include="Areas\Coupons\Scripts\Layout.model.js" />
+    <Content Include="Areas\Coupons\Scripts\__Layout.view .js" />
     <Content Include="Areas\Coupons\Scripts\Layout.view.js" />
+    <Content Include="Areas\Coupons\Scripts\__Layout.viewModel .js" />
     <Content Include="Areas\Coupons\Scripts\Layout.viewModel.js" />
     <Content Include="Areas\ProfileQuestion\Scripts\pQuestion.dataservice.js" />
     <Content Include="Areas\ProfileQuestion\Scripts\pQuestion.model.js" />
@@ -1038,6 +1040,7 @@
     <Content Include="Images\select_image.jpg" />
     <Content Include="Images\Sign_In_Image.png" />
     <Content Include="Images\topbarph.png" />
+    <Content Include="Images\youtube_play.JPG" />
     <Content Include="ReportViewers\Publisher.aspx" />
     <Content Include="ReportViewers\SMDReport.aspx" />
     <Content Include="RichTextEditor\adapters\jquery.js" />
@@ -1611,10 +1614,10 @@
     <Content Include="Areas\Common\Views\Shared\_phraseLibraryDialog.cshtml" />
     <Content Include="Areas\Coupons\Views\Shared\_BranchDetails.cshtml" />
     <Content Include="Areas\Common\Views\Shared\_phraseLibrary.cshtml" />
+    <Content Include="Areas\Coupons\Views\Coupons\_addEditCouponCategories.cshtml" />
     <None Include="config\Web.connectionstrings - Copy.configx" />
     <None Include="config\Web.connectionstrings.config" />
     <None Include="config\Web.connectionstrings.default.config" />
-    <Content Include="Areas\Coupons\Views\Shared\_BranchDetails.cshtml" />
     <None Include="Properties\PublishProfiles\mz profile.pubxml" />
     <None Include="Properties\PublishProfiles\SMD MIS Saqib.pubxml" />
     <None Include="Properties\PublishProfiles\SMD.pubxml" />
@@ -2719,6 +2722,7 @@
     <Content Include="Views\Shared\_ExternalLoginPartial.cshtml" />
     <Content Include="Views\Account\SelectCompany.cshtml" />
     <Content Include="Views\Account\AcceptInvitation.cshtml" />
+    <Content Include="Views\Shared\_Layout - Copy.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

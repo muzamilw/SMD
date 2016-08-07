@@ -181,11 +181,7 @@ else
                                         <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Currency Symbol </label>
                                     </div>
                                     <div class="col-lg-7">
-                                        <select class="form-control" id="ddpCorrectAns" data-bind="">
-                                            <option value="1">Choice 1</option>
-                                            <option value="2">Choice 2</option>
-                                            <option value="3">Choice 3</option>
-                                        </select>
+                                        <select class="form-control" id="ddpCorrectAns" data-bind="options: $root.CurrencyDropDown, optionsText: 'CurrencyName', optionsValue: 'CurrencyId', value: CurrencyId"></select>
                                     </div>
                                 </div>
                                 <div class="form-group" >
@@ -209,7 +205,8 @@ else
                                         <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn"> Coupon expiry date</label>
                                     </div>
                                     <div class="col-lg-7">
-                                        <textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: CouponExpirydate" ></textarea>
+                                        <input type="text" class="form-control" id="validFromDate" data-bind="datepicker:CouponExpirydate">
+                                        @*<textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="datetimepicker:StartDateTime"  data-bind="value: CouponExpirydate"></textarea>*@
                                     </div>
                                 </div>
                             </div>
@@ -220,11 +217,17 @@ else
                                         <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn"> Coupon category</label>
                                     </div>
                                     <div class="col-lg-7">
-                                        <select class="form-control" id="ddpCorrectAns" data-bind="">
-                                            <option value="1">Choice 1</option>
-                                            <option value="2">Choice 2</option>
-                                            <option value="3">Choice 3</option>
-                                        </select>
+                                        <div class="row">
+                                            <div>
+                                                <a href="#" id="couponCategorySelectorLink" class="btn btn-warning" style="margin-left:0px;" data-bind="click: $root.openProductCategoryDialog">
+                                                    <i class="fa fa-lg"></i>&nbsp;Select Coupon Categories
+                                                </a>
+                                            </div>
+                                            <div>
+                                                <!-- ko template: { name: 'ListOfSelectedCouponCats' , foreach: $root.couponCategories() } -->
+                                                <!-- /ko -->
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group" >
@@ -264,13 +267,13 @@ else
                                             </label>
                                             <span class="help-block text-right"></span>
                                         </div>
-                                        <div class="radio col-lg-12" style="text-align: left;">
-                                            <input type="radio" name="optionsRadiosDelvTypes" value="3" id="optionsRadiosNoFilterDaily" data-bind="checked: CouponListingMode">
-                                            <label for="optionsRadiosNoFilterDaily">
+                                        <div class=" col-lg-12" style="text-align: left;    padding-left: 35px;">
+                                         
+                                            <label for="">
                                                 <span class="defaultThemeTxtClr"></span>Select month any year to list this coupon
-                                                <br />
-                                                <select class="form-control" id="ddpCorrectAns" data-bind="">
-                                                <option value="1">Choice 1</option><option value="2">Choice 2</option><option value="3">Choice 3</option></select>
+                                                <br /><br />   
+                                                <select class="form-control" id="yearDropDown" data-bind="options: $root.YearRangeDropDown, optionsText: 'name', optionsValue: 'id', value: CouponActiveMonth"></select> 
+
                                             </label>
                                             <span class="help-block text-right"></span>
                                         </div>
@@ -429,8 +432,8 @@ else
                                         <div class="col-lg-8">
                                               <div class="col-lg-4">
                                                 <div style="margin-top:5px;    text-align: center;cursor:pointer;">
-                                                    <img style="height:90px;" data-bind="visible: LogoUrl() == '' || LogoUrl() == null" src="/Content/Images/placeholder.png" onclick="showCouponDialog1();" />
-                                                    <img style="height:90px;" data-bind="visible: LogoUrl() != '' &&  LogoUrl() != null ,attr: { src: LogoUrl }" onclick="showCouponDialog1();" />
+                                                    <img style="height:90px;" data-bind="visible: LogoImageBytes() == '' || LogoImageBytes() == null" src="/Content/Images/placeholder.png" onclick="showCouponDialog1();" />
+                                                    <img style="height:90px;" data-bind="visible: LogoImageBytes() != '' &&  LogoImageBytes() != null ,attr: { src: LogoImageBytes() }" onclick="showCouponDialog1();" />
                                                     <div style="    padding-top: 10px;    text-align: center;    font-size: 12px;    color: gray;">
                                                         (200 x 200 pixels)
                                                     </div>
@@ -573,12 +576,19 @@ else
                 </div>
 
             </div>
-         
+       
         </div>
     </div>
 
 </div>
-
+@Html.Partial("~/Areas/Coupons/Views/Coupons/_addEditCouponCategories.cshtml")
+<script id="ListOfSelectedCouponCats" type="text/html">
+    <!--ko if:IsSelected == true-->
+    <span data-bind="text: Name">
+    </span>
+    <span>, </span>
+    <!--/ko-->
+</script>
 <script>
     function showUploadDialog() {
         $("#logo_image_file").click();
