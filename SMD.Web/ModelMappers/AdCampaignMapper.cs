@@ -556,9 +556,19 @@ namespace SMD.MIS.ModelMappers
                 Status = source.Status,
                 SwapCost = source.SwapCost,
                 UserId = source.UserId,
+                CouponCategories = source.CouponCategories != null ? source.CouponCategories.Select(coupon => coupon.CreateFrom()) : null
               };
 
 
+        }
+        public static SMD.MIS.Areas.Api.Models.CouponCategories CreateFrom(this Models.DomainModels.CouponCategories source)
+        {
+            return new SMD.MIS.Areas.Api.Models.CouponCategories
+            {
+                CategoryId = source.CategoryId,
+                CouponId = source.CouponId,
+                Id = source.Id
+            };
         }
     }
 }

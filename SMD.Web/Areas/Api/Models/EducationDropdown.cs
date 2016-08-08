@@ -39,6 +39,13 @@ namespace SMD.MIS.Areas.Api.Models
         public int SortOrder { get; set; }
 
     }
+    public partial class CouponCategories
+    {
+        public long Id { get; set; }
+        public Nullable<int> CategoryId { get; set; }
+        public Nullable<long> CouponId { get; set; }
+
+    }
     public class CouponCodeModel
     {
         public long CodeId { get; set; }

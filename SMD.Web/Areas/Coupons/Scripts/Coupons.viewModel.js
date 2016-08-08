@@ -21,6 +21,7 @@ define("Coupons/Coupons.viewModel",
                     couponModel = ko.observable(),
                     selectedCriteria = ko.observable(),
                     profileQuestionList = ko.observable([]),
+                    branchLocations = ko.observable([]),
                     myQuizQuestions = ko.observableArray([]),
                     profileAnswerList = ko.observable([]),
                     criteriaCount = ko.observable(0),
@@ -122,7 +123,7 @@ define("Coupons/Coupons.viewModel",
                                 }
                                 if (data.CouponCategories != null) {
                                     couponCategories.removeAll();
-                                    ko.utils.arrayPushAll(couponCategories(), data.CouponCategories);
+                                    ko.utils.arrayPushAll(couponCategories, data.CouponCategories);
                                     couponCategories.valueHasMutated();
                                 }
                                 
@@ -132,7 +133,25 @@ define("Coupons/Coupons.viewModel",
                         error: function (response) {
 
                         }
-                    });
+                        });
+                        dataservice.getBaseData({
+                            RequestId: 13,
+                            QuestionId: 0,
+                        }, {
+                            success: function (data) {
+                                if (data != null) {
+                                    console.log(data);
+                                    branchLocations([]);
+                                    ko.utils.arrayPushAll(branchLocations(), data.listBranches);
+                                    branchLocations.valueHasMutated();
+                                   
+                                }
+
+                            },
+                            error: function (response) {
+
+                            }
+                        });
                 },
 
                 getAdCampaignGridContent = function () {
@@ -328,7 +347,7 @@ define("Coupons/Coupons.viewModel",
                         var selectedCouponCategories = $.grep(couponCategories(), function (n, i) {
                             return (n.IsSelected == true);
                         });
-
+                        couponModel().CouponCategories.removeAll();
                         _.each(selectedCouponCategories, function (coup) {
 
                             couponModel().CouponCategories.push(new model.selectedCouponCategory.Create({
@@ -1510,7 +1529,7 @@ define("Coupons/Coupons.viewModel",
 
                  },
                  updateCouponCategories = function () {
-                     couponCategories.valueHasMutated();
+                   
                  },
                 // Initialize the view model
                 initialize = function (specifiedView) {
@@ -1541,6 +1560,7 @@ define("Coupons/Coupons.viewModel",
                     closeNewCampaignDialog: closeNewCampaignDialog,
                     selectedCriteria: selectedCriteria,
                     profileQuestionList: profileQuestionList,
+                    branchLocations:branchLocations,
                     profileAnswerList: profileAnswerList,
                     saveCriteria: saveCriteria,
                     onDeleteCriteria: onDeleteCriteria,

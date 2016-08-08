@@ -107,6 +107,7 @@ namespace SMD.Repository.BaseRepository
         /// Companies
         /// </summary>
         public DbSet<Company> Companies { get; set; }
+        public DbSet<CompanyBranch> CompanyBranches { get; set; }
         /// <summary>
         /// Educations
         /// </summary>

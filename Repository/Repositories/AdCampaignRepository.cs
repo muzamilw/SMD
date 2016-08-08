@@ -278,7 +278,17 @@ namespace SMD.Repository.Repositories
             //return query.ToList<Coupons>();
         }
 
-
+        public IEnumerable<CompanyBranch> GetAllBranches()
+        {
+            var user = db.Users.Where(g => g.Id == LoggedInUserIdentity).SingleOrDefault();
+            if (user == null)
+                return null;
+            var comp = db.Companies.Where(g => g.CompanyId == user.CompanyId).SingleOrDefault();
+            if (comp == null)
+                return null;
+            var branches = db.CompanyBranches.Where(g => g.CompanyId == comp.CompanyId);
+            return branches;
+        }
 
     }
 }

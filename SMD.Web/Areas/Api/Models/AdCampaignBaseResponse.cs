@@ -51,6 +51,8 @@ namespace SMD.MIS.Areas.Api.Models
         public IEnumerable<Models.Education> Educations { get; set; }
         public IEnumerable<AdCampaignDropDown> AdCampaigns { get; set; }
         public IEnumerable<CouponCategoryModel> CouponCategories { get; set; }
+        
         public IEnumerable<DiscountVoucher> DiscountVouchers { get; set; }
+        public IEnumerable<CompanyBranch> listBranches { get; set; }
     }
 }
