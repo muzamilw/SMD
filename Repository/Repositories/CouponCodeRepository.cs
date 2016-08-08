@@ -12,88 +12,88 @@ using System.Threading.Tasks;
 
 namespace SMD.Repository.Repositories
 {
-    public class CouponCodeRepository : BaseRepository<CouponCode>, ICouponCodeRepository
-    {
-         #region Private
+    //public class CouponCodeRepository : BaseRepository<CouponCode>, ICouponCodeRepository
+    //{
+    //     #region Private
        
-        #endregion
-        #region Constructor
-        /// <summary>
-        /// Constructor 
-        /// </summary>
-        public CouponCodeRepository(IUnityContainer container)
-            : base(container)
-        {
+    //    #endregion
+    //    #region Constructor
+    //    /// <summary>
+    //    /// Constructor 
+    //    /// </summary>
+    //    public CouponCodeRepository(IUnityContainer container)
+    //        : base(container)
+    //    {
 
-        }
+    //    }
 
-        /// <summary>
-        /// Primary database set
-        /// </summary>
-        protected override IDbSet<CouponCode> DbSet
-        {
-            get { return db.CouponCodes; }
-        }
+    //    /// <summary>
+    //    /// Primary database set
+    //    /// </summary>
+    //    protected override IDbSet<CouponCode> DbSet
+    //    {
+    //        get { return db.CouponCodes; }
+    //    }
 
-        public void RemoveAll(List<CouponCode> categories)
-        {
-            db.CouponCodes.RemoveRange(categories);
-            db.SaveChanges();
+    //    public void RemoveAll(List<CouponCode> categories)
+    //    {
+    //        db.CouponCodes.RemoveRange(categories);
+    //        db.SaveChanges();
 
-        }
-        public bool IsCodeExist(string Code)
-        {
-            return db.CouponCodes.Where(c => c.Code == Code).FirstOrDefault() != null ? true : false;
-        }
-        public List<CouponCode> GetUserCoupons(string UserId)
-        {
-            return db.CouponCodes.Where(c => c.UserId == UserId).ToList();
-        }
-        public List<CouponCode> GetCampaignCoupons(long CampaignId)
-        {
-            return db.CouponCodes.Where(c => c.CampaignId == CampaignId).ToList();
-        }
-        public string UpdateCouponSettings(string VoucherCode, string SecretKey, string UserId)
-        {
-            User loggedInUser = db.Users.Where(u => u.Id == UserId).SingleOrDefault();
-            if (loggedInUser != null)
-            {
-                Company userCompany = null;
-                if (loggedInUser.Company != null)
-                {
-                    userCompany = loggedInUser.Company;
-                }
-                else 
-                {
-                    userCompany = db.Companies.Where(c => c.CompanyId == loggedInUser.CompanyId).SingleOrDefault();
-                }
+    //    }
+    //    public bool IsCodeExist(string Code)
+    //    {
+    //        return db.CouponCodes.Where(c => c.Code == Code).FirstOrDefault() != null ? true : false;
+    //    }
+    //    public List<CouponCode> GetUserCoupons(string UserId)
+    //    {
+    //        return db.CouponCodes.Where(c => c.UserId == UserId).ToList();
+    //    }
+    //    public List<CouponCode> GetCampaignCoupons(long CampaignId)
+    //    {
+    //        return db.CouponCodes.Where(c => c.CampaignId == CampaignId).ToList();
+    //    }
+    //    public string UpdateCouponSettings(string VoucherCode, string SecretKey, string UserId)
+    //    {
+    //        User loggedInUser = db.Users.Where(u => u.Id == UserId).SingleOrDefault();
+    //        if (loggedInUser != null)
+    //        {
+    //            Company userCompany = null;
+    //            if (loggedInUser.Company != null)
+    //            {
+    //                userCompany = loggedInUser.Company;
+    //            }
+    //            else 
+    //            {
+    //                userCompany = db.Companies.Where(c => c.CompanyId == loggedInUser.CompanyId).SingleOrDefault();
+    //            }
 
-                if (userCompany != null && userCompany.VoucherSecretKey == SecretKey)
-                {
-                    CouponCode takenCoupon = db.CouponCodes.Where(c => c.Code == VoucherCode && c.IsTaken == true && c.UserId == UserId).FirstOrDefault();
-                    if (takenCoupon != null) 
-                    {
-                        takenCoupon.IsUsed = true;
-                        takenCoupon.UsedDateTime = DateTime.Now;
-                        db.SaveChanges();
-                        return "Success";
-                    }
-                    else
-                    {
-                        return "Failed! Invalid Voucher Code.";
-                    }
-                }
-                else
-                {
-                    return "Failed! Invalid Secret key.";
-                }
-            }
-            else 
-            {
-                return "Failed! User not exists.";
-            }
-        }
-        #endregion
+    //            if (userCompany != null && userCompany.VoucherSecretKey == SecretKey)
+    //            {
+    //                CouponCode takenCoupon = db.CouponCodes.Where(c => c.Code == VoucherCode && c.IsTaken == true && c.UserId == UserId).FirstOrDefault();
+    //                if (takenCoupon != null) 
+    //                {
+    //                    takenCoupon.IsUsed = true;
+    //                    takenCoupon.UsedDateTime = DateTime.Now;
+    //                    db.SaveChanges();
+    //                    return "Success";
+    //                }
+    //                else
+    //                {
+    //                    return "Failed! Invalid Voucher Code.";
+    //                }
+    //            }
+    //            else
+    //            {
+    //                return "Failed! Invalid Secret key.";
+    //            }
+    //        }
+    //        else 
+    //        {
+    //            return "Failed! User not exists.";
+    //        }
+    //    }
+    //    #endregion
 
-    }
+    //}
 }

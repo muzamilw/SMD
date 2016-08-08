@@ -119,7 +119,7 @@ namespace SMD.Models.DomainModels
         public virtual ICollection<AdCampaignTargetLocation> AdCampaignTargetLocations { get; set; }
         public virtual ICollection<InvoiceDetail> InvoiceDetails { get; set; }
         public virtual ICollection<CouponCategory> CouponCategories { get; set; }
-        public virtual ICollection<CouponCode> CouponCodes { get; set; }
+    
         public virtual ICollection<CampaignCategory> CampaignCategories { get; set; }
         [NotMapped]
         public string CampaignImagePath { get; set; }

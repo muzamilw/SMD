@@ -86,8 +86,6 @@
         <AssociationConnector Association="DomainModels.FK_AdCampaignResponse_AdCampaignResponse" />
         <AssociationConnector Association="DomainModels.FK_AdCampaignResponse_AspNetUsers" />
         <AssociationConnector Association="DomainModels.FK_AdCampaignResponse_Company" />
-        <EntityTypeShape EntityType="DomainModels.CouponCode" Width="1.5" PointX="25.75" PointY="69.75" />
-        <AssociationConnector Association="DomainModels.FK_CouponCodes_AspNetUsers" />
         <EntityTypeShape EntityType="DomainModels.CampaignCategory" Width="1.5" PointX="22.75" PointY="64.625" />
         <EntityTypeShape EntityType="DomainModels.CouponCategory" Width="3.25" PointX="20.5" PointY="54.375" />
         <AssociationConnector Association="DomainModels.FK_CampaignCategories_CouponCategory" />
@@ -97,7 +95,6 @@
         <AssociationConnector Association="DomainModels.FK_AdCampaignResponse_AdCampaign" />
         <AssociationConnector Association="DomainModels.FK_AdCampaignTargetLocation_AdCampaign" />
         <AssociationConnector Association="DomainModels.FK_CampaignCategories_AdCampaign" />
-        <AssociationConnector Association="DomainModels.FK_CouponCodes_AdCampaign" />
         <AssociationConnector Association="DomainModels.FK_InvoiceDetail_AdCampaign" />
         <EntityTypeShape EntityType="DomainModels.AdCampaignTargetCriteria" Width="3.25" PointX="15.75" PointY="52" />
         <AssociationConnector Association="DomainModels.FK_AdCampaignTargetCriteria_AdCampaign" />

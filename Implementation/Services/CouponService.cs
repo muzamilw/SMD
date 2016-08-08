@@ -28,9 +28,9 @@ namespace SMD.Implementation.Services
         private readonly IUserPurchasedCouponRepository _userPurchasedCouponRepository;
         private readonly ICompanyService _companyService;
         private readonly IAccountRepository _accountRepository;
-        private readonly ICouponCategoryRepository _couponCategoryRepository;
+        private readonly ICouponCategoriesRepository _couponCategoriesRepository;
         private readonly IWebApiUserService _userService;
-        private readonly ICurrencyRepository _currencyRrepository;
+        private readonly ICurrencyRepository _currencyRepository;
         private ApplicationUserManager UserManager
         {
             get { return HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
@@ -104,7 +104,7 @@ namespace SMD.Implementation.Services
         /// Constructor 
         /// </summary>
         public CouponService(ICouponRepository couponRepository, IUserFavouriteCouponRepository userFavouriteCouponRepository, ICompanyService _companyService,
-            IUserPurchasedCouponRepository _userPurchasedCouponRepository, IAccountRepository _accountRepository, ICouponCategoryRepository _couponCategoryRepository)
+            IUserPurchasedCouponRepository _userPurchasedCouponRepository, IAccountRepository _accountRepository, ICouponCategoriesRepository _couponCategoriesRepository,ICurrencyRepository _currencyRepository)
         {
             this.couponRepository = couponRepository;
             this._userFavouriteCouponRepository = userFavouriteCouponRepository;
@@ -112,8 +112,8 @@ namespace SMD.Implementation.Services
             this._userPurchasedCouponRepository = _userPurchasedCouponRepository;
             this._accountRepository = _accountRepository;
             this._userService = _userService;
-            this._currencyRrepository = _currencyRrepository;
-            this._couponCategoryRepository = _couponCategoryRepository;
+            this._currencyRepository = _currencyRepository;
+            this._couponCategoriesRepository = _couponCategoriesRepository;
         }
 
         #endregion
@@ -224,6 +224,9 @@ namespace SMD.Implementation.Services
         public SearchCouponsResponse SearchCoupons(int categoryId, int type, int size, string keywords, int pageNo, int distance, string Lat, string Lon, string UserId)
         {
             List<SearchCoupons_Result> coupons = couponRepository.SearchCoupons(categoryId, type, size, keywords, pageNo, distance, Lat, Lon, UserId).ToList();
+
+           
+
             return new SearchCouponsResponse
             {
                 Status = true,
@@ -275,19 +278,23 @@ namespace SMD.Implementation.Services
 
                 couponRepository.SaveChanges();
             }
+
+
+            //savint the categories if any. do we need it ?
+
             //if (couponModel.CouponCategories != null && couponModel.CouponCategories.Count() > 0)
             //{
-            //    foreach (CouponCategory item in couponModel.CouponCategories)
+            //    foreach (var item in couponModel.CouponCategories)
             //    {
             //        CouponCategories oModel = new CouponCategories();
 
             //        oModel.CouponId = couponModel.CouponId;
             //        oModel.CategoryId = item.CategoryId;
-            //        _couponCategoryRepository.Add(oModel);
-          
-          
+            //        _couponCategoriesRepository.Add(oModel);
+
+
             //    }
-            //    _couponCategoryRepository.SaveChanges();
+            //    _couponCategoriesRepository.SaveChanges();
 
             //}
           
@@ -341,6 +348,24 @@ namespace SMD.Implementation.Services
             {
                 couponModel.Approved = true;
             }
+
+
+            if (couponModel.CouponCategories != null && couponModel.CouponCategories.Count() > 0)
+            {
+                foreach (var item in couponModel.CouponCategories)
+                {
+                    CouponCategories oModel = new CouponCategories();
+
+                    oModel.CouponId = couponModel.CouponId;
+                    oModel.CategoryId = item.CategoryId;
+                    _couponCategoriesRepository.Add(oModel);
+
+
+                }
+                _couponCategoriesRepository.SaveChanges();
+
+            }
+
             couponRepository.Update(couponModel);
             couponRepository.SaveChanges();
 
@@ -371,7 +396,7 @@ namespace SMD.Implementation.Services
 
 
             //get the currency and its exchange rate.
-            var currency = _currencyRrepository.Find(coupon.CurrencyId.Value);
+            var currency = _currencyRepository.Find(coupon.CurrencyId.Value);
 
             double swapcost = (coupon.Savings.Value / currency.SMDCreditRatio.Value) / 100;
 
@@ -443,26 +468,28 @@ namespace SMD.Implementation.Services
 
                   //incrementing the Issues/Purchased count 
 
-                  var oCoupon = couponRepository.Find(CouponId);
+                  var oCoupon = couponRepository.GetCouponByIdSingle(CouponId);
                   oCoupon.CouponIssuedCount += 1;
 
                   couponRepository.Update(oCoupon);
                   couponRepository.SaveChanges();
 
 
-                  // Email To User coupon code 
-                  try
-                  {
-                      //BackgroundEmailManagerService.SendVoucherCodeEmail(dbContext, company.CompanyId, codeCode);
-                  }
-                  catch (Exception ex)
-                  {
+                  //// Email To User coupon code 
+                  //try
+                  //{
+                  //    //BackgroundEmailManagerService.SendVoucherCodeEmail(dbContext, company.CompanyId, codeCode);
+                  //}
+                  //catch (Exception ex)
+                  //{
 
 
 
-                      return true;
+                  //    return true;
 
-                  }
+                  //}
+
+                  return true;
 
               }
               return false;
@@ -492,7 +519,7 @@ namespace SMD.Implementation.Services
 
                 //incrementing the redeemed count 
 
-                var oCoupon = couponRepository.Find(purchasedCoupon.CouponId.Value);
+                var oCoupon = couponRepository.GetCouponByIdSingle(purchasedCoupon.CouponId.Value);
                 oCoupon.CouponRedeemedCount += 1;
 
                 couponRepository.Update(oCoupon);

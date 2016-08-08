@@ -46,7 +46,7 @@ namespace SMD.Repository
             unityContainer.RegisterType<IManageUserRepository, ManageUserRepository>();
             unityContainer.RegisterType<ICouponCategoryRepository, CouponCategoryRepository>();
             unityContainer.RegisterType<ICampaignCategoriesRepository, CampaignCategoriesRepository>();
-            unityContainer.RegisterType<ICouponCodeRepository, CouponCodeRepository>();
+          
             unityContainer.RegisterType<IUserFavouriteCouponRepository, UserFavouriteCouponRepository>();
             unityContainer.RegisterType<ICompanyAspNetUsersRepository, CompanyAspNetUsersRepository>();
             unityContainer.RegisterType<ICouponRepository, CouponRepository>();
@@ -54,6 +54,8 @@ namespace SMD.Repository
             unityContainer.RegisterType<IPhraseRepository, PhraseRepository>();
             unityContainer.RegisterType<IUserPurchasedCouponRepository, UserPurchasedCouponRepository>();
             unityContainer.RegisterType<ICurrencyRepository, CurrencyRepository>();
+
+            unityContainer.RegisterType<ICouponCategoriesRepository, CouponCategoriesRepository>();
             
         }
     }

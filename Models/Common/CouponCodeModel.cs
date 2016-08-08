@@ -7,9 +7,5 @@ using System.Threading.Tasks;
 
 namespace SMD.Models.Common
 {
-    public class CouponCodeModel
-    {
-        public int CouponQuantity { get; set; }
-        public List<CouponCode> CouponList { get; set; }
-    }
+
 }

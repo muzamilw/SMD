@@ -134,7 +134,7 @@ namespace SMD.MIS.ModelMappers
                 couponSmdComission = source.couponSmdComission,
                 CouponImage3 = source.CouponImage3,
                 CouponImage4 = source.CouponImage4,
-                CouponCodes = source.CouponCodes != null ? source.CouponCodes.Select(x => x.CreateFrom()).ToList() : null,
+               // CouponCodes = source.CouponCodes != null ? source.CouponCodes.Select(x => x.CreateFrom()).ToList() : null,
                 IsUseFilter = source.IsUseFilter == true ? 1 : 0,
                 LogoUrl = source.LogoUrl == null ? "" : source.LogoUrl,
                 VoucherAdditionalInfo = source.VoucherAdditionalInfo == null ? "" : source.VoucherAdditionalInfo,

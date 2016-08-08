@@ -229,7 +229,7 @@ namespace SMD.Repository.BaseRepository
         /// Taxes
         /// </summary>
         public DbSet<CustomUrl> CustomUrls { get; set; }
-        public DbSet<CouponCode> CouponCodes { get; set; }
+        //public DbSet<CouponCode> CouponCodes { get; set; }
      
         /// <summary>
         /// Transaction
@@ -242,6 +242,9 @@ namespace SMD.Repository.BaseRepository
         public DbSet<TransactionLog> TransactionLogs { get; set; }
 
         public DbSet<CouponCategory> CouponCategory { get; set; }
+
+
+        public DbSet<CouponCategories> CouponCategories { get; set; }
         public DbSet<UserFavouriteCoupon> UserFavouriteCoupons { get; set; }
 
         public DbSet<UserPurchasedCoupon> UserPurchasedCoupon { get; set; }

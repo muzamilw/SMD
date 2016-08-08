@@ -50,7 +50,7 @@ namespace SMD.Implementation.Services
         private readonly ICouponCategoryRepository _couponCategoryRepository;
         private readonly ICouponCategoryRepository _companyRepository;
         private readonly ICampaignCategoriesRepository _campaignCategoriesRepository;
-        private readonly ICouponCodeRepository _couponCodeRepository;
+     
         private readonly IUserFavouriteCouponRepository _userFavouriteCouponRepository;
         #region Private Funcs
         private ApplicationUserManager UserManager
@@ -199,8 +199,7 @@ namespace SMD.Implementation.Services
             IStripeService stripeService, WebApiUserService webApiUserService, ICompanyRepository companyRepository, IAdCampaignResponseRepository adcampaignResponseRepository
             , ICouponCategoryRepository couponCategoryRepository
             , ICampaignCategoriesRepository campaignCategoriesRepository
-            , ICouponCodeRepository couponCodeRepository
-            , IUserFavouriteCouponRepository userFavouriteCouponRepository, ICurrencyRepository currencyRepository)
+            ,  IUserFavouriteCouponRepository userFavouriteCouponRepository, ICurrencyRepository currencyRepository)
         {
             this._adCampaignRepository = adCampaignRepository;
             this._languageRepository = languageRepository;
@@ -224,7 +223,7 @@ namespace SMD.Implementation.Services
             this._adcampaignResponseRepository = adcampaignResponseRepository;
             this._couponCategoryRepository = couponCategoryRepository;
             this._campaignCategoriesRepository = campaignCategoriesRepository;
-            this._couponCodeRepository = couponCodeRepository;
+           
             this._userFavouriteCouponRepository = userFavouriteCouponRepository;
             this._currencyRepository = currencyRepository;
         }
@@ -406,21 +405,7 @@ namespace SMD.Implementation.Services
                 _campaignCategoriesRepository.SaveChanges();
 
             }
-            if (campaignModel.CouponCodes != null && campaignModel.CouponCodes.Count() > 0)
-            {
-                foreach (CouponCode item in campaignModel.CouponCodes)
-                {
-                    CouponCode oModel = new CouponCode();
-
-                    oModel.CampaignId = campaignModel.CampaignId;
-                    oModel.Code = item.Code;
-                    _couponCodeRepository.Add(oModel);
-
-
-                }
-                _couponCodeRepository.SaveChanges();
-
-            }
+            
             if (campaignModel.Type == 5 && campaignModel.IsSavedCoupon == true)
             {
                 UserFavouriteCoupon oFav = new UserFavouriteCoupon();
@@ -618,30 +603,6 @@ namespace SMD.Implementation.Services
 
             }
 
-            // remove coupon codes if campaign has and add again
-            List<CouponCode> listOfCouponCodesToDelete = _couponCodeRepository.GetAll().Where(c => c.CampaignId == campaignModel.CampaignId).ToList();
-            listOfCouponCodesToDelete = listOfCouponCodesToDelete.Where(c => c.IsTaken != true).ToList();
-            _couponCodeRepository.RemoveAll(listOfCouponCodesToDelete);
-            // add or update target locations
-            if (campaignModel.CouponCodes != null && campaignModel.CouponCodes.Count() > 0)
-            {
-                foreach (CouponCode item in campaignModel.CouponCodes)
-                {
-                    if (item.IsTaken != true)
-                    {
-                        CouponCode oModel = new CouponCode();
-
-                        oModel.CampaignId = campaignModel.CampaignId;
-                        oModel.Code = item.Code;
-                        _couponCodeRepository.Add(oModel);
-
-                    }
-
-
-
-                }
-                _couponCodeRepository.SaveChanges();
-            }
 
             UserFavouriteCoupon oFav = _userFavouriteCouponRepository.GetByCouponId(campaignModel.CampaignId);
             if (campaignModel.Type == 5 && campaignModel.IsSavedCoupon == true && oFav == null)
@@ -1158,50 +1119,50 @@ namespace SMD.Implementation.Services
 
 
 
-        public CouponCodeModel GenerateCouponCodes(int numbers, long CampaignId)
-        {
-            CouponCodeModel oModel = new CouponCodeModel();
-            var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            List<string> alreadyAddedCodes = _couponCodeRepository.GetCampaignCoupons(CampaignId).Select(c => c.Code).ToList();
-            List<CouponCode> codesList = new List<CouponCode>();
-            CouponCode oCode = null;
-            bool isAddCode = false;
-            for (int i = 0; i < numbers; i++)
-            {
-                string uCode = new string(chars.OrderBy(o => Guid.NewGuid()).Take(6).ToArray());
-                if (alreadyAddedCodes != null && alreadyAddedCodes.Contains(uCode))
-                {
-                    isAddCode = false;
-                }
-                else
-                {
-                    isAddCode = true;
-                }
-                if (isAddCode)
-                {
-                    oCode = new CouponCode();
-                    oCode.Code = uCode;
-                    oCode.CampaignId = CampaignId;
-                    oCode.UserId = _adCampaignRepository.LoggedInUserIdentity;
-                    codesList.Add(oCode);
-                    _couponCodeRepository.Add(oCode);
+        //public CouponCodeModel GenerateCouponCodes(int numbers, long CampaignId)
+        //{
+        //    CouponCodeModel oModel = new CouponCodeModel();
+        //    var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        //    List<string> alreadyAddedCodes = _couponCodeRepository.GetCampaignCoupons(CampaignId).Select(c => c.Code).ToList();
+        //    List<CouponCode> codesList = new List<CouponCode>();
+        //    CouponCode oCode = null;
+        //    bool isAddCode = false;
+        //    for (int i = 0; i < numbers; i++)
+        //    {
+        //        string uCode = new string(chars.OrderBy(o => Guid.NewGuid()).Take(6).ToArray());
+        //        if (alreadyAddedCodes != null && alreadyAddedCodes.Contains(uCode))
+        //        {
+        //            isAddCode = false;
+        //        }
+        //        else
+        //        {
+        //            isAddCode = true;
+        //        }
+        //        if (isAddCode)
+        //        {
+        //            oCode = new CouponCode();
+        //            oCode.Code = uCode;
+        //            oCode.CampaignId = CampaignId;
+        //            oCode.UserId = _adCampaignRepository.LoggedInUserIdentity;
+        //            codesList.Add(oCode);
+        //            _couponCodeRepository.Add(oCode);
 
-                }
-            }
-            AdCampaign ocoupon = _adCampaignRepository.Find(CampaignId);
+        //        }
+        //    }
+        //    AdCampaign ocoupon = _adCampaignRepository.Find(CampaignId);
 
-            ocoupon.CouponQuantity = alreadyAddedCodes.Count + codesList.Count;
-            _couponCodeRepository.SaveChanges();
-            _adCampaignRepository.SaveChanges();
-            oModel.CouponList = codesList;
-            oModel.CouponQuantity = alreadyAddedCodes.Count + codesList.Count;
-            return oModel;
-        }
+        //    ocoupon.CouponQuantity = alreadyAddedCodes.Count + codesList.Count;
+        //    _couponCodeRepository.SaveChanges();
+        //    _adCampaignRepository.SaveChanges();
+        //    oModel.CouponList = codesList;
+        //    oModel.CouponQuantity = alreadyAddedCodes.Count + codesList.Count;
+        //    return oModel;
+        //}
 
-        public string UpdateCouponSettings(string VoucherCode, string SecretKey, string UserId)
-        {
-            return _couponCodeRepository.UpdateCouponSettings(VoucherCode, SecretKey, UserId);
-        }
+        //public string UpdateCouponSettings(string VoucherCode, string SecretKey, string UserId)
+        //{
+        //    return _couponCodeRepository.UpdateCouponSettings(VoucherCode, SecretKey, UserId);
+        //}
         #endregion
     }
 }

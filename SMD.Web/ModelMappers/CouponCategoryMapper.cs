@@ -35,20 +35,7 @@ namespace SMD.MIS.ModelMappers
                 IsSelected = isSelected
             };
         }
-        public static CouponCodeModel CreateFrom(this Models.DomainModels.CouponCode source)
-        {
-            return new CouponCodeModel
-            {
-                Code = source.Code,
-                CampaignId = source.CampaignId ?? 0,
-                CodeId = source.CodeId,
-                IsTaken = source.IsTaken == null ? false : true,
-                UserId = source.UserId,
-                UserName = source.AspNetUser == null ? "" : source.AspNetUser.FullName,
-                TakenDateTime = source.TakenDateTime
-
-            };
-        }
+       
         public static DiscountVoucher CreateFromDiscountVoucher(this Models.Common.Coupons source)
         {
             return new DiscountVoucher

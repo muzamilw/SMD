@@ -434,17 +434,6 @@
           <Property Name="ImagePath" Type="nvarchar" MaxLength="500" />
           <Property Name="SortOrder" Type="int" />
         </EntityType>
-        <EntityType Name="CouponCodes">
-          <Key>
-            <PropertyRef Name="CodeId" />
-          </Key>
-          <Property Name="CodeId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="CampaignId" Type="bigint" />
-          <Property Name="Code" Type="nvarchar" MaxLength="300" />
-          <Property Name="IsTaken" Type="bit" />
-          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
-          <Property Name="TakenDateTime" Type="datetime" />
-        </EntityType>
         <EntityType Name="Currency">
           <Key>
             <PropertyRef Name="CurrencyID" />
@@ -1349,30 +1338,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_CouponCodes_AdCampaign">
-          <End Role="AdCampaign" Type="Self.AdCampaign" Multiplicity="0..1" />
-          <End Role="CouponCodes" Type="Self.CouponCodes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AdCampaign">
-              <PropertyRef Name="CampaignID" />
-            </Principal>
-            <Dependent Role="CouponCodes">
-              <PropertyRef Name="CampaignId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CouponCodes_AspNetUsers">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
-          <End Role="CouponCodes" Type="Self.CouponCodes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="CouponCodes">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -1970,7 +1935,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <EntitySet Name="Coupon" EntityType="Self.Coupon" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CouponCategories" EntityType="Self.CouponCategories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CouponCategory" EntityType="Self.CouponCategory" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="CouponCodes" EntityType="Self.CouponCodes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Currency" EntityType="Self.Currency" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CustomUrl" EntityType="Self.CustomUrl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Education" EntityType="Self.Education" Schema="dbo" store:Type="Tables" />
@@ -2204,14 +2168,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <AssociationSet Name="FK_CouponCategories_CouponCategory" Association="Self.FK_CouponCategories_CouponCategory">
             <End Role="CouponCategory" EntitySet="CouponCategory" />
             <End Role="CouponCategories" EntitySet="CouponCategories" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CouponCodes_AdCampaign" Association="Self.FK_CouponCodes_AdCampaign">
-            <End Role="AdCampaign" EntitySet="AdCampaign" />
-            <End Role="CouponCodes" EntitySet="CouponCodes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CouponCodes_AspNetUsers" Association="Self.FK_CouponCodes_AspNetUsers">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="CouponCodes" EntitySet="CouponCodes" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -2688,11 +2644,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <FunctionImport Name="GetCoupons" ReturnType="Collection(DomainModels.GetCoupons_Result)">
           <Parameter Name="UserID" Mode="In" Type="String" />
           </FunctionImport>
-          <EntitySet Name="CouponCodes" EntityType="DomainModels.CouponCode" />
-          <AssociationSet Name="FK_CouponCodes_AspNetUsers" Association="DomainModels.FK_CouponCodes_AspNetUsers">
-            <End Role="User" EntitySet="Users" />
-            <End Role="CouponCode" EntitySet="CouponCodes" />
-          </AssociationSet>
           <EntitySet Name="CampaignCategories" EntityType="DomainModels.CampaignCategory" />
           <EntitySet Name="CouponCategories" EntityType="DomainModels.CouponCategory" />
           <AssociationSet Name="FK_CampaignCategories_CouponCategory" Association="DomainModels.FK_CampaignCategories_CouponCategory">
@@ -2719,10 +2670,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <AssociationSet Name="FK_CampaignCategories_AdCampaign" Association="DomainModels.FK_CampaignCategories_AdCampaign">
             <End Role="AdCampaign" EntitySet="AdCampaigns" />
             <End Role="CampaignCategory" EntitySet="CampaignCategories" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CouponCodes_AdCampaign" Association="DomainModels.FK_CouponCodes_AdCampaign">
-            <End Role="AdCampaign" EntitySet="AdCampaigns" />
-            <End Role="CouponCode" EntitySet="CouponCodes" />
           </AssociationSet>
           <AssociationSet Name="FK_InvoiceDetail_AdCampaign" Association="DomainModels.FK_InvoiceDetail_AdCampaign">
             <End Role="AdCampaign" EntitySet="AdCampaigns" />
@@ -3988,7 +3935,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <NavigationProperty Name="Roles" Relationship="DomainModels.AspNetUserRoles" FromRole="AspNetUser" ToRole="Role" />
           <Property Name="AuthenticationToken" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AdCampaignResponses" Relationship="DomainModels.FK_AdCampaignResponse_AspNetUsers" FromRole="User" ToRole="AdCampaignResponse" />
-          <NavigationProperty Name="CouponCodes" Relationship="DomainModels.FK_CouponCodes_AspNetUsers" FromRole="User" ToRole="CouponCode" />
           <NavigationProperty Name="CompaniesAspNetUsers" Relationship="DomainModels.FK_CompaniesAspNetUsers_AspNetUsers" FromRole="User" ToRole="CompaniesAspNetUser" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
@@ -4179,31 +4125,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Property Type="String" Name="CouponSwapValue" Nullable="true" />
           <Property Type="String" Name="CouponActualValue" Nullable="true" />
         </ComplexType>
-        <EntityType Name="CouponCode">
-          <Key>
-            <PropertyRef Name="CodeId" />
-          </Key>
-          <Property Name="CodeId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CampaignId" Type="Int64" />
-          <Property Name="Code" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
-          <Property Name="IsTaken" Type="Boolean" />
-          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUser" Relationship="DomainModels.FK_CouponCodes_AspNetUsers" FromRole="CouponCode" ToRole="User" />
-          <NavigationProperty Name="AdCampaign" Relationship="DomainModels.FK_CouponCodes_AdCampaign" FromRole="CouponCode" ToRole="AdCampaign" />
-          <Property Name="TakenDateTime" Type="DateTime" Precision="3" />
-        </EntityType>
-        <Association Name="FK_CouponCodes_AspNetUsers">
-          <End Type="DomainModels.User" Role="User" Multiplicity="0..1" />
-          <End Type="DomainModels.CouponCode" Role="CouponCode" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="CouponCode">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="CampaignCategory">
           <Key>
             <PropertyRef Name="Id" />
@@ -4312,7 +4233,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <NavigationProperty Name="AdCampaignResponses" Relationship="DomainModels.FK_AdCampaignResponse_AdCampaign" FromRole="AdCampaign" ToRole="AdCampaignResponse" />
           <NavigationProperty Name="AdCampaignTargetLocations" Relationship="DomainModels.FK_AdCampaignTargetLocation_AdCampaign" FromRole="AdCampaign" ToRole="AdCampaignTargetLocation" />
           <NavigationProperty Name="CampaignCategories" Relationship="DomainModels.FK_CampaignCategories_AdCampaign" FromRole="AdCampaign" ToRole="CampaignCategory" />
-          <NavigationProperty Name="CouponCodes" Relationship="DomainModels.FK_CouponCodes_AdCampaign" FromRole="AdCampaign" ToRole="CouponCode" />
           <NavigationProperty Name="InvoiceDetails" Relationship="DomainModels.FK_InvoiceDetail_AdCampaign" FromRole="AdCampaign" ToRole="InvoiceDetail" />
           <Property Name="DeliveryDays" Type="Int32" />
           <NavigationProperty Name="AdCampaignTargetCriterias" Relationship="DomainModels.FK_AdCampaignTargetCriteria_AdCampaign" FromRole="AdCampaign" ToRole="AdCampaignTargetCriteria" />
@@ -4402,18 +4322,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
               <PropertyRef Name="CampaignId" />
             </Principal>
             <Dependent Role="CampaignCategory">
-              <PropertyRef Name="CampaignId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CouponCodes_AdCampaign">
-          <End Type="DomainModels.AdCampaign" Role="AdCampaign" Multiplicity="0..1" />
-          <End Type="DomainModels.CouponCode" Role="CouponCode" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AdCampaign">
-              <PropertyRef Name="CampaignId" />
-            </Principal>
-            <Dependent Role="CouponCode">
               <PropertyRef Name="CampaignId" />
             </Dependent>
           </ReferentialConstraint>
@@ -5681,18 +5589,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="CouponCodes">
-            <EntityTypeMapping TypeName="DomainModels.CouponCode">
-              <MappingFragment StoreEntitySet="CouponCodes">
-                <ScalarProperty Name="TakenDateTime" ColumnName="TakenDateTime" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="IsTaken" ColumnName="IsTaken" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="CampaignId" ColumnName="CampaignId" />
-                <ScalarProperty Name="CodeId" ColumnName="CodeId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="CampaignCategories">
             <EntityTypeMapping TypeName="DomainModels.CampaignCategory">
               <MappingFragment StoreEntitySet="CampaignCategories">

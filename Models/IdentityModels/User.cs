@@ -70,7 +70,7 @@ namespace SMD.Models.IdentityModels
         public virtual ICollection<SurveyQuestionResponse> SurveyQuestionResponses { get; set; }
 
         public virtual ICollection<Account> Accounts { get; set; }
-        public virtual ICollection<CouponCode> CouponCodes { get; set; }
+       
         public virtual ICollection<Invoice> Invoices { get; set; }
 
         public virtual ICollection<CompaniesAspNetUser> CompaniesAspNetUsers { get; set; }

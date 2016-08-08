@@ -52,7 +52,7 @@ namespace SMD.Interfaces.Services
         string UpdateAdApprovalCampaign(AdCampaign source);
 
 
-        CouponCodeModel GenerateCouponCodes(int numbers, long CampaignId);
-        string UpdateCouponSettings(string VoucherCode, string SecretKey, string UserId);
+        //CouponCodeModel GenerateCouponCodes(int numbers, long CampaignId);
+        
     }
 }

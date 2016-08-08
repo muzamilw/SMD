@@ -26,7 +26,7 @@ namespace SMD.MIS.Areas.Api.ModelMappers
         CouponTitle = source.CouponTitle,
       
         CouponImage1 = source.CouponImage1,
-        SwapCost = source.SwapCost.Value,
+        SwapCost = 0,
         Price = source.Price.Value,
         Savings = source.Savings.Value,
 

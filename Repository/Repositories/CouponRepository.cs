@@ -161,6 +161,13 @@ namespace SMD.Repository.Repositories
 
 
 
+        public Coupon GetCouponByIdSingle(long couponId)
+        {
+
+
+            return DbSet.Where(g => g.CouponId == couponId).SingleOrDefault();
+        }
+
 
         public IEnumerable<SearchCoupons_Result> SearchCoupons(int categoryId, int type, int size, string keywords, int pageNo, int distance, string Lat, string Lon, string UserId)
         {

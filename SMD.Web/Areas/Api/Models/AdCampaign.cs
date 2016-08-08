@@ -159,5 +159,8 @@ namespace SMD.MIS.Areas.Api.Models
         public string HowToRedeemLine3 { get; set; }
         public string HowToRedeemLine4 { get; set; }
         public string HowToRedeemLine5 { get; set; }
+
+
+        public virtual ICollection<CouponCategories> CouponCategories { get; set; }
     }
 }

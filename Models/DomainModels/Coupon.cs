@@ -13,7 +13,7 @@ namespace SMD.Models.DomainModels
     {
         public Coupon()
         {
-            this.CouponCategories = new HashSet<CouponCategory>();
+            this.CouponCategories = new HashSet<CouponCategories>();
         }
      
 
@@ -81,7 +81,7 @@ namespace SMD.Models.DomainModels
         public virtual Company Company { get; set; }
         public virtual CompanyBranch CompanyBranch { get; set; }
         public virtual Language Language { get; set; }
-        public virtual ICollection<CouponCategory> CouponCategories { get; set; }
+        public virtual ICollection<CouponCategories> CouponCategories { get; set; }
 
         [NotMapped]
         public int DaysLeft { get; set; }
