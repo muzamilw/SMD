@@ -50,7 +50,6 @@ namespace SMD.Implementation.Services
         private readonly ICouponCategoryRepository _couponCategoryRepository;
         private readonly ICouponCategoryRepository _companyRepository;
         private readonly ICampaignCategoriesRepository _campaignCategoriesRepository;
-     
         private readonly IUserFavouriteCouponRepository _userFavouriteCouponRepository;
         #region Private Funcs
         private ApplicationUserManager UserManager
@@ -823,6 +822,13 @@ namespace SMD.Implementation.Services
             return new AdCampaignBaseResponse
             {
                 AdCampaigns = _adCampaignRepository.GetAll().Where(g => g.UserId == _adCampaignRepository.LoggedInUserIdentity && g.VerifyQuestion != null && g.VerifyQuestion != "")
+            };
+        }
+        public AdCampaignBaseResponse getCompanyBranches()
+        {
+            return new AdCampaignBaseResponse
+            {
+                listBranches = _adCampaignRepository.GetAllBranches()
             };
         }
 

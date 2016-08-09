@@ -30,6 +30,7 @@ namespace SMD.Interfaces.Repository
         User GetUserById();
       
         List<GetCoupons_Result> GetCoupons(string UserId);
+        IEnumerable<CompanyBranch> GetAllBranches();
 
 
         

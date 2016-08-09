@@ -161,6 +161,6 @@ namespace SMD.MIS.Areas.Api.Models
         public string HowToRedeemLine5 { get; set; }
 
 
-        public virtual ICollection<CouponCategories> CouponCategories { get; set; }
+        public virtual IEnumerable<SMD.MIS.Areas.Api.Models.CouponCategories> CouponCategories { get; set; }
     }
 }

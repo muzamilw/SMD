@@ -57,5 +57,6 @@ namespace SMD.Models.ResponseModels
 
         public IEnumerable<CouponCategory> CouponCategory { get; set; }
         public IEnumerable<Coupons> DiscountVouchers { get; set; }
+        public IEnumerable<CompanyBranch> listBranches { get; set; }
     }
 }

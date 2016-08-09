@@ -282,21 +282,21 @@ namespace SMD.Implementation.Services
 
             //savint the categories if any. do we need it ?
 
-            //if (couponModel.CouponCategories != null && couponModel.CouponCategories.Count() > 0)
-            //{
-            //    foreach (var item in couponModel.CouponCategories)
-            //    {
-            //        CouponCategories oModel = new CouponCategories();
+            if (couponModel.CouponCategories != null && couponModel.CouponCategories.Count() > 0)
+            {
+                foreach (var item in couponModel.CouponCategories)
+                {
+                    CouponCategories oModel = new CouponCategories();
 
-            //        oModel.CouponId = couponModel.CouponId;
-            //        oModel.CategoryId = item.CategoryId;
-            //        _couponCategoriesRepository.Add(oModel);
+                    oModel.CouponId = couponModel.CouponId;
+                    oModel.CategoryId = item.CategoryId;
+                    _couponCategoriesRepository.Add(oModel);
 
 
-            //    }
-            //    _couponCategoriesRepository.SaveChanges();
+                }
+                _couponCategoriesRepository.SaveChanges();
 
-            //}
+            }
           
         }
 
@@ -349,7 +349,10 @@ namespace SMD.Implementation.Services
                 couponModel.Approved = true;
             }
 
-
+            foreach(var couponCategory in _couponCategoriesRepository.GetAll().Where(g=>g.CouponId == couponModel.CouponId).ToList())
+            {
+                _couponCategoriesRepository.Delete(couponCategory);
+            }
             if (couponModel.CouponCategories != null && couponModel.CouponCategories.Count() > 0)
             {
                 foreach (var item in couponModel.CouponCategories)

@@ -67,6 +67,15 @@ namespace SMD.MIS.Areas.Api.Controllers
 
                 };
             }
+            else if (request.RequestId == 13) // get branch addresses 
+            {
+
+                return new AdCampaignBaseResponse
+                {
+                    listBranches = _campaignService.getCompanyBranches().listBranches.Select(sur => sur.CreateFromDropdown()),
+
+                };
+            }
             else //  get base data 
             {
                 return _campaignService.GetCampaignBaseData().CreateCampaignBaseResponseFrom();

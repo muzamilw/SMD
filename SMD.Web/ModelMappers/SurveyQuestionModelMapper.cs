@@ -202,6 +202,24 @@ namespace SMD.MIS.ModelMappers
                 Answer2 = source.Answer2
             };
         }
+        public static SMD.MIS.Areas.Api.Models.CompanyBranch CreateFromDropdown(this Models.DomainModels.CompanyBranch source)
+        {
+            return new SMD.MIS.Areas.Api.Models.CompanyBranch
+            {
+                BranchAddressLine1 = source.BranchAddressLine1,
+                BranchAddressLine2 = source.BranchAddressLine2,
+                BranchCategoryId = source.BranchCategoryId,
+                BranchCity = source.BranchCity,
+                BranchId = source.BranchId,
+                BranchLocationLat = source.BranchLocationLat,
+                BranchLocationLong = source.BranchLocationLong,
+                BranchPhone = source.BranchPhone,
+                BranchState = source.BranchState,
+                BranchTitle = source.BranchTitle,
+                BranchZipCode = source.BranchZipCode,
+                CompanyId = source.CompanyId
+            };
+        }
         public static SMD.MIS.Areas.Api.Models.UserBaseData CreateFrom(this Models.Common.UserBaseData source)
         {
             if (source != null)

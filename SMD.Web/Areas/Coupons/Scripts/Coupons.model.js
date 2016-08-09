@@ -153,27 +153,11 @@
               // Convert to server data
               convertToServerData = function () {
                   
-                  //var targetCriteria = [];
-                  //_.each(AdCampaignTargetCriterias(), function (item) {
-                      
-                  //    targetCriteria.push(item.convertCriteriaToServerData());
-                  //});
-                  //var LocationtargetCriteria = [];
-                 
-                  //_.each(AdCampaignTargetLocations(), function (item) {
-                   
-                  //    LocationtargetCriteria.push(item.convertToServerData());
-                  //});
                   var selectedCoupons = [];
                   _.each(CouponCategories(), function (item) {
 
                       selectedCoupons.push(item.convertToServerData());
                   });
-                  //var targetCouponCodes = [];
-                  //_.each(CouponCodes(), function (item) {
-                  //    console.log(item);
-                  //    targetCouponCodes.push(item.convertToServerData());
-                  //});
                   return {
                       ApprovalDateTime: ApprovalDateTime(),
                       Approved: Approved(),
