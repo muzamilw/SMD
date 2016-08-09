@@ -86,17 +86,17 @@ namespace SMD.Implementation.Services
             
           }
         // used by new payout scheduler 
-        private static void UpdateAccountsNew(Company company, Company smdCompany, double amount,
+        private static void UpdateAccountsUserPayout(Company Usercompany, Company smdCompany, double amount,
            BaseDbContext dbContext)
         {
             // Update users virtual account and add to paypal account
-            UpdateUsersPaypalAccountNew(company, amount,  dbContext);
+            UpdateUsersPaypalAccountNew(Usercompany, amount, dbContext);
 
             // Update Cash4ads accounts
             UpdateUsersPaypalAccountNew(smdCompany, amount, dbContext, false);
 
             // update users  virutal accont debit 
-            updateUsersVirtualAccount(company, amount, dbContext,1, false);
+            updateUsersVirtualAccount(Usercompany, amount, dbContext, 1, false);
             // update smd users  virutal accont debit 
             updateUsersVirtualAccount(smdCompany, amount, dbContext, 1);
 
@@ -403,6 +403,8 @@ namespace SMD.Implementation.Services
 
                             // Get User from which credit to debit 
                             company = dbContext.Companies.Find(account.CompanyId);
+                            var user = dbContext.Users.Where(g => g.CompanyId == company.CompanyId).FirstOrDefault();
+
                             // skip if no transaction found
                             if (transactions.Count == 0)
                                 continue;
@@ -444,7 +446,7 @@ namespace SMD.Implementation.Services
                             dbContext.SaveChanges();
 
                             // Email To User 
-                            BackgroundEmailManagerService.SendPayOutRoutineEmail(dbContext, company.CompanyId);
+                            BackgroundEmailManagerService.EmailNotificationPayOutToUser(dbContext, user);
                         }
                         catch (Exception exp)
                         {
@@ -458,12 +460,21 @@ namespace SMD.Implementation.Services
             }
         }
 
-        public static bool PerformUserPayout(int companyId, int CouponId, int mode,double amount)
+        /// <summary>
+        /// Deducting the amount from account only and not performing the paypal transaction. this will be enabled later on.
+        /// </summary>
+        /// <param name="companyId"></param>
+        /// <param name="amount"></param>
+        /// <returns></returns>
+        public static bool PerformUserPayout(string UserId,int companyId,double amount)
         {
-            PaypalService = UnityConfig.UnityContainer.Resolve<IPaypalService>();
+            //PaypalService = UnityConfig.UnityContainer.Resolve<IPaypalService>();
             using (var dbContext = new BaseDbContext())
             {
                 Company company = null;
+
+                var user = dbContext.Users.Where(g => g.Id == UserId).SingleOrDefault();
+
                 // Get User from which credit to debit 
                 company = dbContext.Companies.Find(companyId);
                 if (company == null)
@@ -477,42 +488,8 @@ namespace SMD.Implementation.Services
                     : company.GoogleWalletCustomerId;
 
                 List<Account> accounts = dbContext.Accounts.Where(g => g.CompanyId == companyId).ToList();
-                if (mode == (int)PaymentMethod.Coupon)
-                {
-                    //var userVirtualAccount = accounts.Where(g => g.AccountType == (int)AccountType.VirtualAccount).FirstOrDefault();
-                    //if (amount < userVirtualAccount.AccountBalance)
-                    //{
-                       
-                    //    // Update Accounts
-                    //    string codeCode = UpdateCouponAccounts(company, smdUser.Company,CouponId , dbContext);
-                    //    if (!string.IsNullOrEmpty(codeCode)) 
-                    //    {
-                    //        // Save Changes
-                    //        dbContext.SaveChanges();
-
-                    //        // Email To User coupon code 
-                    //        try
-                    //        {
-                    //            BackgroundEmailManagerService.SendVoucherCodeEmail(dbContext, company.CompanyId, codeCode);
-                    //        }
-                    //        catch (Exception ex)
-                    //        {
-
-                    //        }
-                    //    }
-                    //    else
-                    //    {
-                    //        return false;// coupon already redeemed
-                    //    }
-                      
-                    //}
-                    //else
-                    //{
-                    //    return false;// insufficent balance 
-                    //}
-                }
-                else
-                {
+                
+            
                     var userVirtualAccount = accounts.Where(g => g.AccountType == (int)AccountType.VirtualAccount).FirstOrDefault();
                     if (amount < userVirtualAccount.AccountBalance)
                     {
@@ -525,20 +502,22 @@ namespace SMD.Implementation.Services
                         };
 
                         // Stripe + Invoice Work 
-                        PaypalService.MakeAdaptiveImplicitPayment(requestModel);
+                        //PaypalService.MakeAdaptiveImplicitPayment(requestModel);
                         // Update Accounts
-                        UpdateAccountsNew(company, smdUser.Company, amount, dbContext);
+                        UpdateAccountsUserPayout(company, smdUser.Company, amount, dbContext);
 
                         // Save Changes
                         dbContext.SaveChanges();
 
                         // Email To User 
-                        BackgroundEmailManagerService.SendPayOutRoutineEmail(dbContext, company.CompanyId);
+                        BackgroundEmailManagerService.EmailNotificationPayOutToUser(dbContext, user);
+                        //email to smd admin
+                        BackgroundEmailManagerService.EmailNotificationPayOutToAdmin(dbContext,user,company,amount);
                     } else
                     {
                         return false;// insufficent balance 
                     }
-                }
+                
             }
 
             return true;

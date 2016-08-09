@@ -472,7 +472,7 @@ namespace SMD.Implementation.Services
                   //incrementing the Issues/Purchased count 
 
                   var oCoupon = couponRepository.GetCouponByIdSingle(CouponId);
-                  oCoupon.CouponIssuedCount += 1;
+                  oCoupon.CouponIssuedCount = (oCoupon.CouponIssuedCount == null ? 0 : oCoupon.CouponIssuedCount ) + 1;
 
                   couponRepository.Update(oCoupon);
                   couponRepository.SaveChanges();
@@ -523,7 +523,7 @@ namespace SMD.Implementation.Services
                 //incrementing the redeemed count 
 
                 var oCoupon = couponRepository.GetCouponByIdSingle(purchasedCoupon.CouponId.Value);
-                oCoupon.CouponRedeemedCount += 1;
+                oCoupon.CouponRedeemedCount =   (oCoupon.CouponRedeemedCount == null ? 0 : oCoupon.CouponRedeemedCount) +  1;
 
                 couponRepository.Update(oCoupon);
                 couponRepository.SaveChanges();

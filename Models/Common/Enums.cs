@@ -48,6 +48,7 @@
        VoucherPaymentEmail = 14,
        CampaignApproved = 17,
        CampaignReject = 18,
+       PayoutNotificationToAdmin = 19,
     }
 
     public enum AdCampaignCriteriaType

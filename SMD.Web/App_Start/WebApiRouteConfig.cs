@@ -277,6 +277,13 @@ namespace SMD.MIS
             null,
             routeHandlers);
 
+              config.Routes.MapHttpRoute(
+         "CashoutController",
+         "CashoutController/{AuthenticationToken}/",
+         new { controller = "CashoutController" },
+         null,
+         routeHandlers);
+
             
               config.Routes.MapHttpRoute(
             "RedeemPurchasedCoupon",
@@ -284,6 +291,11 @@ namespace SMD.MIS
             new { controller = "RedeemPurchasedCoupon" },
             null,
             routeHandlers);
+
+
+             
+
+            
 
             
         }

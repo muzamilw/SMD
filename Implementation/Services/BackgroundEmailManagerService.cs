@@ -100,19 +100,31 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Send Email when Payout scheduler run
         /// </summary>
-        public static void SendPayOutRoutineEmail(BaseDbContext context, int companyId)
+        public static void EmailNotificationPayOutToUser(BaseDbContext context, User user)
         {
-            Company oCompany = context.Companies.FirstOrDefault(user => user.CompanyId == companyId);
+           
             SystemMail mail = context.SystemMails.FirstOrDefault(email => email.MailId == (int)EmailTypes.PayoutMade);
 
-            if (oCompany != null && mail != null)
-            {
-                SendEmail(mail, new List<string> { oCompany.ReplyEmail });
-            }
-            else
-            {
-                throw new Exception("Customer is null");
-            }
+            SendEmail(mail, new List<string> { user.Email });
+           
+        }
+
+
+
+        public static void EmailNotificationPayOutToAdmin(BaseDbContext context, User user, Company company, double amount)
+        {
+            var adminemails = ConfigurationManager.AppSettings["PayOutNotificationAdminEmails"];
+
+           
+            SystemMail mail = context.SystemMails.FirstOrDefault(email => email.MailId == (int)EmailTypes.PayoutNotificationToAdmin);
+
+            mail.Body = mail.Body.Replace("++email++", user.Email);
+            mail.Body = mail.Body.Replace("++payoutamount++", amount.ToString());
+            mail.Body = mail.Body.Replace("++datetime++", DateTime.Now.ToLongDateString());
+
+
+            SendEmail(mail,  adminemails.Split(',').ToList() );
+           
         }
 
         /// <summary>
