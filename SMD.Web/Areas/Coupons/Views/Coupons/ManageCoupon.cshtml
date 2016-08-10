@@ -452,10 +452,18 @@ else
                                <div class="row">
                                    <div class="form-group">
                                        <div class="col-lg-2">
+                                           <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone">Select Branch Address </label>
+                                       </div>
+                                       <div class="col-lg-7">
+                                           <select class="form-control" id="yearDropDown" data-bind="options: $root.branchLocations, optionsText: 'BranchTitle', optionsValue: 'BranchId', value: LocationBranchId, event:{ change: $root.locationChanged}"></select>
+                                       </div>
+                                   </div>
+                                   <div class="form-group">
+                                       <div class="col-lg-2">
                                            <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone">Branch Address </label>
                                        </div>
                                        <div class="col-lg-7">
-                                           <textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: LocationLine1" maxlength="36"></textarea>
+                                           <textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: LocationLine1" maxlength="36" readonly="readonly"></textarea>
                                        </div>
                                    </div>
                                    <div class="form-group">
@@ -463,7 +471,7 @@ else
                                            <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone">optional </label>
                                        </div>
                                        <div class="col-lg-7">
-                                           <textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: LocationLine2" maxlength="36"></textarea>
+                                           <textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: LocationLine2" maxlength="36" readonly="readonly"></textarea>
                                        </div>
                                    </div>
                                    <div class="form-group">
@@ -471,7 +479,7 @@ else
                                            <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone">City </label>
                                        </div>
                                        <div class="col-lg-7">
-                                           <textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: LocationCity" maxlength="36"></textarea>
+                                           <textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: LocationCity" maxlength="36" readonly="readonly"></textarea>
                                        </div>
                                    </div>
                                    <div class="form-group">
@@ -479,7 +487,7 @@ else
                                            <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone">State </label>
                                        </div>
                                        <div class="col-lg-7">
-                                           <textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: LocationState" maxlength="36"></textarea>
+                                           <textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: LocationState" maxlength="36" readonly="readonly"></textarea>
                                        </div>
                                    </div>
                                    <div class="form-group">
@@ -487,15 +495,23 @@ else
                                            <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone">Zip </label>
                                        </div>
                                        <div class="col-lg-7">
-                                           <textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: LocationZipCode" maxlength="36"></textarea>
+                                           <textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: LocationZipCode" maxlength="36" readonly="readonly"></textarea>
                                        </div>
                                    </div>
                                    <div class="form-group">
                                        <div class="col-lg-2">
-                                           <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone">Geo location</label>
+                                           <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone">Geo location Lat</label>
                                        </div>
                                        <div class="col-lg-7">
-                                           <textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: LocationLAT" ></textarea>
+                                           <textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: LocationLAT" readonly="readonly"></textarea>
+                                       </div>
+                                   </div>
+                                   <div class="form-group">
+                                       <div class="col-lg-2">
+                                           <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone">Geo location Long</label>
+                                       </div>
+                                       <div class="col-lg-7">
+                                           <textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: LocationLON" readonly="readonly"></textarea>
                                        </div>
                                    </div>
                                    <div class="form-group">
@@ -503,7 +519,7 @@ else
                                            <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone">Phone no </label>
                                        </div>
                                        <div class="col-lg-7">
-                                           <textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: LocationPhone" ></textarea>
+                                           <textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: LocationPhone" readonly="readonly"></textarea>
                                        </div>
                                    </div>
                                </div>
