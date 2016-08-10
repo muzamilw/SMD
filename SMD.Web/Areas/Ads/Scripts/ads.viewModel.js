@@ -243,6 +243,9 @@ define("ads/ads.viewModel",
                 //if (isDisplayCouponsAds() == false) {
                 //    isWelcomeScreenVisible(true);
                 //} else {
+                //show the main menu;
+                collapseMainMenu();
+
                 openEditScreen(1);
                 isFromEdit(true);
                 //  }
@@ -323,6 +326,8 @@ define("ads/ads.viewModel",
                     $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign").css("display", "none");
                     $("#btnSubmitForApproval,#saveBtn,.table-link").css("display", "inline-block");
                     $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign,#btnStopAndTerminate,#btnCopyCampaign").removeAttr('disabled');
+                    //show the main menu;
+                    showMainMenu();
                 });
                 confirmation.afterCancel(function () {
 
@@ -337,8 +342,12 @@ define("ads/ads.viewModel",
                         isListVisible(false);
                         isWelcomeScreenVisible(true);
                     }
+                    //show the main menu;
+                    showMainMenu();
                 });
                 confirmation.show();
+
+             
                 return;
                 //} else {
                 //    isEditorVisible(false);
@@ -382,7 +391,7 @@ define("ads/ads.viewModel",
                  isListVisible(true);
              },
               openEditScreen = function (mode) {
-
+                
                   campaignModel(new model.Campaign());
                   // campaignModel().CampaignName('New Campaign');
 
@@ -1109,6 +1118,10 @@ define("ads/ads.viewModel",
 
                   },
                 onEditCampaign = function (item) {
+
+                    //hiding the main menu
+                    collapseMainMenu();
+
                     previewScreenNumber(1);
                     isTerminateBtnVisible(false);
                     isNewCampaignVisible(false);

@@ -159,7 +159,7 @@
 
             @*content wrapper goes here*@
             <div id="content-wrapper" class="removeMenuMargin" >
-                <button class="btn" data-toggle="collapse" data-target="#topArea">Collapsible</button>
+               
                 <div class="row" id="topArea" style="margin-bottom:15px;">
                     <div class="row">
                         <div class="col-sm-5 pull-left">
@@ -219,6 +219,18 @@
             $("#siteUrl").val("@(Request.ApplicationPath == " / " ? " / " : Request.ApplicationPath)");
         })($);
 
+
+        function collapseMainMenu() {
+           
+            $('#topArea').collapse('hide');
+        }
+
+
+        function showMainMenu() {
+
+            $('#topArea').collapse('show');
+        }
+
     </script>
     @Scripts.Render("~/Bundle/BaseLibs")
     <script src="~/Content/themes/Centaurus/js/fullcalendar.min.js"></script>
@@ -234,6 +246,8 @@
                 $("#header-logo").toggle();
                 $("#menu-logo").toggle();
             });
+
+            $('#topArea').collapse();
 
         });
     </script>
