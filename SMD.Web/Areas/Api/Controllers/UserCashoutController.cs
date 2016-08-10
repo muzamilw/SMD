@@ -17,7 +17,7 @@ using SMD.Implementation.Services;
 
 namespace SMD.MIS.Areas.Api.Controllers
 {
-    public class CashoutController : ApiController
+    public class UserCashoutController : ApiController
     {
         #region Public
      
@@ -27,7 +27,7 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// <summary>
         /// Constuctor 
         /// </summary>
-        public CashoutController( IWebApiUserService _userService)
+        public UserCashoutController( IWebApiUserService _userService)
         {
            
             this._userService = _userService;
@@ -62,16 +62,30 @@ namespace SMD.MIS.Areas.Api.Controllers
                     throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
                 }
 
+                var cashoutResult = PayOutScheduler.PerformUserPayout(UserId, user.CompanyId.Value, Convert.ToDouble( PayoutAmount));
 
-
-                if (PayOutScheduler.PerformUserPayout(UserId, user.CompanyId.Value, Convert.ToDouble( PayoutAmount)))
+                if (cashoutResult == 1)//success
                     return response;
-                else
+                    
+                else if (cashoutResult == 2 ) //insufficient balance
                 {
                     response.Status = false;
                     response.Message = "Insufficient balance to payout";
                     return response;
                 }
+                else if (cashoutResult == 3) //amount less than min limit
+                {
+                    response.Status = false;
+                    response.Message = "Amount must be higher than minimum cashout limit";
+                    return response;
+                }
+                else
+                {
+                    response.Status = false;
+                    response.Message = "Data Error";
+                    return response;
+                }
+
 
 
               

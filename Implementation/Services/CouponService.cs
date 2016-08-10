@@ -104,7 +104,7 @@ namespace SMD.Implementation.Services
         /// Constructor 
         /// </summary>
         public CouponService(ICouponRepository couponRepository, IUserFavouriteCouponRepository userFavouriteCouponRepository, ICompanyService _companyService,
-            IUserPurchasedCouponRepository _userPurchasedCouponRepository, IAccountRepository _accountRepository, ICouponCategoriesRepository _couponCategoriesRepository,ICurrencyRepository _currencyRepository)
+            IUserPurchasedCouponRepository _userPurchasedCouponRepository, IAccountRepository _accountRepository, ICouponCategoriesRepository _couponCategoriesRepository, ICurrencyRepository _currencyRepository, IWebApiUserService _userService)
         {
             this.couponRepository = couponRepository;
             this._userFavouriteCouponRepository = userFavouriteCouponRepository;
@@ -503,11 +503,22 @@ namespace SMD.Implementation.Services
 
               var user = _userService.GetUserByUserId(UserId);
 
-            
+              if (user == null)
+                  throw new Exception("User is null");
 
             var purchasedCoupon = _userPurchasedCouponRepository.Find(couponPurchaseId);
 
+            if (purchasedCoupon == null)
+                throw new Exception("purchased coupon is null");
+
+
+            if (user.CompanyId.HasValue == false)
+                throw new Exception("user companyid  is null");
+
             var company = _companyService.GetCompanyById(user.CompanyId.Value);
+
+            if (company == null)
+                throw new Exception("COMPANY is null");
 
 
             if (purchasedCoupon != null && purchasedCoupon.UserId == UserId && company.VoucherSecretKey == pinCode && (purchasedCoupon.IsRedeemed == null || purchasedCoupon.IsRedeemed == false))
@@ -523,6 +534,10 @@ namespace SMD.Implementation.Services
                 //incrementing the redeemed count 
 
                 var oCoupon = couponRepository.GetCouponByIdSingle(purchasedCoupon.CouponId.Value);
+
+                if (oCoupon == null)
+                    throw new Exception("Coupon is null");
+
                 oCoupon.CouponRedeemedCount =   (oCoupon.CouponRedeemedCount == null ? 0 : oCoupon.CouponRedeemedCount) +  1;
 
                 couponRepository.Update(oCoupon);

@@ -465,9 +465,16 @@ namespace SMD.Implementation.Services
         /// </summary>
         /// <param name="companyId"></param>
         /// <param name="amount"></param>
-        /// <returns></returns>
-        public static bool PerformUserPayout(string UserId,int companyId,double amount)
+        /// <returns>1 for success, 2 for balance insufficient, 3 for amount less than minimum limit, 0 for error</returns>
+        public static int PerformUserPayout(string UserId,int companyId,double amount)
         {
+
+            var cashoutMinLimit = ConfigurationManager.AppSettings["CashoutMinLimit"];
+
+            if (amount < (Convert.ToDouble(cashoutMinLimit)))
+                return 3;
+
+
             //PaypalService = UnityConfig.UnityContainer.Resolve<IPaypalService>();
             using (var dbContext = new BaseDbContext())
             {
@@ -478,10 +485,10 @@ namespace SMD.Implementation.Services
                 // Get User from which credit to debit 
                 company = dbContext.Companies.Find(companyId);
                 if (company == null)
-                    return false;
+                    return 0;
                 var smdUser = GetCash4AdsUser(dbContext);
                 if (smdUser == null || smdUser.Company == null)
-                    return false;
+                    return 0;
                 // User's Prefered Account
                 var preferedAccount = company.PreferredPayoutAccount == 1
                     ? company.PaypalCustomerId
@@ -513,14 +520,14 @@ namespace SMD.Implementation.Services
                         BackgroundEmailManagerService.EmailNotificationPayOutToUser(dbContext, user);
                         //email to smd admin
                         BackgroundEmailManagerService.EmailNotificationPayOutToAdmin(dbContext,user,company,amount);
+                        return 1;
                     } else
                     {
-                        return false;// insufficent balance 
+                        return 2;// insufficent balance 
                     }
                 
             }
 
-            return true;
         }
 
 

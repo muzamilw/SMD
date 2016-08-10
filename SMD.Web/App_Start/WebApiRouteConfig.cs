@@ -278,9 +278,9 @@ namespace SMD.MIS
             routeHandlers);
 
               config.Routes.MapHttpRoute(
-         "CashoutController",
-         "CashoutController/{AuthenticationToken}/",
-         new { controller = "CashoutController" },
+         "UserCashout",
+         "UserCashout/{AuthenticationToken}/",
+         new { controller = "UserCashout" },
          null,
          routeHandlers);
 

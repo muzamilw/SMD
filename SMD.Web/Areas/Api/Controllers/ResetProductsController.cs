@@ -40,9 +40,10 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// Get Ads, Surveys, Questions
         /// </summary>
         [ApiExceptionCustom]
-        public void Get()
+        public string Get()
         {
             webApiUserService.ResetProductsResponses();
+            return "Data reset complete";
         }
         
         #endregion
