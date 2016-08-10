@@ -11,6 +11,7 @@ namespace SMD.Models.DomainModels
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations.Schema;
     
     public partial class Phrase
     {
@@ -20,5 +21,7 @@ namespace SMD.Models.DomainModels
         public Nullable<int> SortOrder { get; set; }
     
         public virtual Section Section { get; set; }
+        [NotMapped]
+        public bool IsDeleted { get; set; }
     }
 }

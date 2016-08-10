@@ -18,22 +18,14 @@
                     $("#branchCategoryDialog").modal("hide");
                 };
             // Show BranchCategory dialog
-            showphraseLibraryDialog = function () {
-                $("#phraseLibraryDialog").modal("show");
-            },
-            // Hide BranchCategory dialog
-            HidephraseLibraryDialog = function () {
-                $("#phraseLibraryDialog").modal("hide");
-            };
-
+          
             return {
                 bindingRoot: bindingRoot,
                 bindingPartial: bindingPartial,
                 viewModel: viewModel,
                 showBranchCategoryDialog: showBranchCategoryDialog,
-                hideBranchCategoryDialog: hideBranchCategoryDialog,
-                showphraseLibraryDialog: showphraseLibraryDialog,
-                HidephraseLibraryDialog: HidephraseLibraryDialog
+                hideBranchCategoryDialog: hideBranchCategoryDialog
+                
             };
         })(branchViewModel);
 

@@ -208,6 +208,9 @@
             </div>
         </div>
     </div>
+    <!-- ko stopBinding: true -->
+    @Html.Partial("~/Areas/Common/Views/Shared/_ConfirmationDialog.cshtml")
+    <!-- /ko -->
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     <script>
@@ -221,7 +224,11 @@
     <script src="~/Content/themes/Centaurus/js/fullcalendar.min.js"></script>
     @Scripts.Render("~/Bundle/CentaurusLibs")
     <script>
-        require(["Layout/Layout.view"]);
+
+        require(["common/confirmation.view"]);
+
+        require(["PhraseLibrary/phraseLibrary.view"]);
+      
         $(document).ready(function () {
             $("#make-small-nav").click(function () {
                 $("#header-logo").toggle();

@@ -24,7 +24,8 @@
             "invoice":"/Areas/Billing/Scripts",
             "user": "/Areas/User/Scripts",
             "Coupons": "/Areas/Coupons/Scripts",
-            "Layout": "/Areas/Coupons/Scripts"
+            "Layout": "/Areas/Coupons/Scripts",
+            "PhraseLibrary": "/Areas/Common/Scripts"
         }
     });
 

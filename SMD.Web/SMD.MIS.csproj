@@ -389,6 +389,7 @@
     <Compile Include="Areas\Api\Controllers\PhaseLibraryController.cs" />
     <Compile Include="Areas\Api\Controllers\UserCashoutController.cs" />
     <Compile Include="Areas\Api\Models\Phrase.cs" />
+    <Compile Include="Areas\Api\Models\PhraseResponseModel.cs" />
     <Compile Include="Areas\Api\Models\Section.cs" />
     <Compile Include="Areas\Coupons\CouponsAreaRegistration.cs" />
     <Compile Include="Areas\Coupons\Controllers\CouponsController.cs" />

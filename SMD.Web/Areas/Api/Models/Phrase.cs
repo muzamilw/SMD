@@ -11,6 +11,7 @@ namespace SMD.MIS.Areas.Api.Models
         public string PhraseName { get; set; }
         public Nullable<int> SectionId { get; set; }
         public Nullable<int> SortOrder { get; set; }
-        public virtual Section Section { get; set; }
+        
+        public bool IsDeleted { get; set; }
     }
 }

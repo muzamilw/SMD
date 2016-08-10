@@ -11,14 +11,7 @@
                       showBranchDialoge = function () {
                           view.showBranchCategoryDialog();
                       },
-                       showphraseLibraryDialog = function () {
-                           
-                           view.showphraseLibraryDialog();
-                           Phrases.removeAll();
-                           sections.removeAll();
-                           IsDisplayAddPhBtn(false);
-                           getAllSections();
-                       },
+                       
                 sections = ko.observableArray([]),
                
                 isOpenFromPhraseLibrary = ko.observable(true),
@@ -37,6 +30,14 @@
                 IsDisplayAddPhBtn = ko.observable(false),
                 SelectedPhrasecolor = ko.observable('#000000'),
                 IsPharsesAvailiable = ko.observable(false),
+                showphraseLibraryDialog = function () {
+
+                    view.showphraseLibraryDialog();
+                    Phrases.removeAll();
+                    sections.removeAll();
+                    IsDisplayAddPhBtn(false);
+                    getAllSections();
+                },
                   templateToUse = function () {
 
                       if (isOpenFromPhraseLibrary()) {
