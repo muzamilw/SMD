@@ -212,6 +212,10 @@ define("Coupons/Coupons.viewModel",
                     getAdCampaignGridContent();
                 },
                 addNewCampaign = function () {
+
+                    //show the main menu;
+                    collapseMainMenu();
+
                     openEditScreen(5);
                     isFromEdit(true);
                     isListVisible(false);
@@ -244,6 +248,8 @@ define("Coupons/Coupons.viewModel",
                             $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign").css("display", "none");
                             $("#btnSubmitForApproval,#saveBtn,.table-link").css("display", "inline-block");
                             $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign,#btnStopAndTerminate,#btnCopyCampaign").removeAttr('disabled');
+                    //show the main menu;
+                    showMainMenu();
                         });
                         confirmation.afterCancel(function () {
 
@@ -258,6 +264,8 @@ define("Coupons/Coupons.viewModel",
                                 isListVisible(false);
                                 isWelcomeScreenVisible(true);
                             }
+                            //show the main menu;
+                            showMainMenu();
                         });
                         confirmation.show();
                         return;
@@ -731,6 +739,10 @@ define("Coupons/Coupons.viewModel",
                     
                   },
                 onEditCampaign = function (item) {
+
+                    //hide the main menu;
+                    collapseMainMenu();
+
                     previewScreenNumber(1);
                     isTerminateBtnVisible(false);
                     isNewCampaignVisible(false);
