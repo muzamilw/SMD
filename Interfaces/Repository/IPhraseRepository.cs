@@ -12,5 +12,6 @@ namespace SMD.Interfaces.Repository
         List<Phrase> GetAllPhrasesByID(long Id);
         bool CreatePhrase(Phrase phrase);
         bool EditPhrase(Phrase phrase);
+        bool DeletePhrase(long phraseId);
     }
 }

@@ -2,7 +2,7 @@
     var
 
     //Section view Entity
-    Section = function (specifiedSectionId, specifiedName,specifiedSectionOrder) {
+    Section = function (specifiedSectionId, specifiedName, specifiedSectionOrder) {
         var
             self,
             //Unique ID
@@ -15,9 +15,11 @@
            //Section Order
             sectionOrder = ko.observable(specifiedSectionOrder),
             //Convert To Server
+            Phrases = ko.observableArray([]),
+
             convertToServerData = function (source) {
                 var result = {};
-                // result.SectionId = source.sectionId();
+               //result.SectionId = source.sectionId();
                 result.SectionId = source.SectionId();
                 result.SectionName = source.SectionName();
                 result.SecOrder = source.SecOrder();
@@ -27,35 +29,38 @@
             sectionId: sectionId,
             isExpanded: isExpanded,
             name: name,
-            sectionOrder:sectionOrder,
+            sectionOrder: sectionOrder,
             convertToServerData: convertToServerData,
+            Phrases: Phrases,
         };
         return self;
     };
 
     Section.Create = function (source) {
+
         return new Section(source.SectionId, source.SectionName);
     }
-    
-  
+
+
 
     //Phrase Entity
-    Phrase = function (specifiedPhraseId, specifiedPhrase1, specifiedSectionId) {
+    Phrase = function (specifiedPhraseId, specifiedPhrase1, specifiedSectionId, IsDeleted) {
         var
             self,
             //Unique ID
             phraseId = ko.observable(specifiedPhraseId),
             //Field Text
-            phraseText = ko.observable(specifiedPhrase1),
+            phraseText = ko.observable(specifiedPhrase1).extend({ required: true }),
             //Field Id
             SectionId = ko.observable(specifiedSectionId),
             //Flag For deleted phrase
-          
+            IsDeleted = ko.observable(false),
            //Is phrase checkbox is checked
-            
+
 
              // Errors
             errors = ko.validation.group({
+                phraseText: phraseText
             }),
             // Is Valid 
             isValid = ko.computed(function () {
@@ -66,8 +71,7 @@
             dirtyFlag = new ko.dirtyFlag({
                 phraseId: phraseId,
                 phraseText: phraseText,
-                fieldId: fieldId,
-                isDeleted: isDeleted,
+                
             }),
              // Has Changes
             hasChanges = ko.computed(function () {
@@ -76,51 +80,54 @@
 
             //Convert To Server
             convertToServerData = function (source) {
+                
                 var result = {};
                 result.PhraseId = source.phraseId();
-                result.Phrase1 = source.phraseText();
-                result.FieldId = source.fieldId();
-                result.IsDeleted = source.isDeleted();
+                result.PhraseName = source.phraseText();
+                //  result.FieldId = source.fieldId();
+                result.SectionId = source.SectionId();
+                result.IsDeleted = source.IsDeleted;
+               // result.IsDeleted = source.isDeleted();
                 return result;
             };
         self = {
             phraseId: phraseId,
             phraseText: phraseText,
-            fieldId: fieldId,
-            isDeleted: isDeleted,
+            SectionId:SectionId,
             convertToServerData: convertToServerData,
             isValid: isValid,
             errors: errors,
             dirtyFlag: dirtyFlag,
             hasChanges: hasChanges,
-            isPhraseChecked: isPhraseChecked,
+            IsDeleted: IsDeleted
         };
         return self;
     };
     Phrase.Create = function (source) {
-        return new Phrase(source.PhraseId, source.Phrase1, source.FieldId);
+        return new Phrase(source.PhraseId, source.PhraseName, source.SectionId, source.IsDeleted);
     }
 
-    //Phrase Library Save Model Entity
+  
+
     PhraseLibrarySaveModel = function () {
         var
             self,
                //Convert To Server
-            convertToServerData = function (source) {
-                var result = {};
-                result.Sections = [];
-                return result;
-            };
+           PhrasesList = [];
         self = {
-            convertToServerData: convertToServerData,
+            PhrasesList: PhrasesList
         };
         return self;
     };
 
+
+
+
+
     return {
         Section: Section,
-        PhraseField: PhraseField,
+
         Phrase: Phrase,
-        PhraseLibrarySaveModel: PhraseLibrarySaveModel,
+        PhraseLibrarySaveModel: PhraseLibrarySaveModel
     };
 });

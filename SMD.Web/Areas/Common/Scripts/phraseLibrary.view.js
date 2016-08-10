@@ -1,43 +1,53 @@
-﻿/*
-    View for Phrase Library. Used to keep the viewmodel clear of UI related logic
-*/
-define("common/phraseLibrary.view",
-    ["jquery", "common/phraseLibrary.viewModel"], function ($) {
-
+﻿define("PhraseLibrary/phraseLibrary.view",
+    ["jquery", "PhraseLibrary/phraseLibrary.viewModel"], function ($, branchViewModel) {
         var ist = window.ist || {};
         // View 
-        ist.phraseLibrary.view = (function (specifiedViewModel) {
+
+        ist.Layout.view = (function (specifiedViewModel) {
+
             var // View model 
                 viewModel = specifiedViewModel,
                 // Binding root used with knockout
-                bindingRoot = $("#phraseLibraryDialog")[0],
-                     // Show Activity the dialog
-                showPhraseLibraryDialog = function () {
-                    $("#phraseLibraryDialog").modal("show");
+                bindingRoot = $("#branchBinding")[0],
+                bindingPartial = $("#bindingPartialViews")[0],
+                     // Show BranchCategory dialog
+                showBranchCategoryDialog = function () {
+                    $("#branchCategoryDialog").modal("show");
                 },
-                // Hide Activity the dialog
-                hidePhraseLibraryDialog = function () {
-                    $("#phraseLibraryDialog").modal("hide");
-                },
-            showEditJobTitleModalDialog = function () {
-                $("#editJobTitleModal").modal("show");
+                // Hide BranchCategory dialog
+                hideBranchCategoryDialog = function () {
+                    $("#branchCategoryDialog").modal("hide");
+                };
+
+            // Show BranchCategory dialog
+            showphraseLibraryDialog = function () {
+                $("#phraseLibraryDialog").modal("show");
             },
-            // Hide Activity the dialog
-               hideEditJobTitleDialog = function () {
-                   $("#editJobTitleModal").modal("hide");
-               };
-            return {
-                bindingRoot: bindingRoot,
-                viewModel: viewModel,
-                showPhraseLibraryDialog: showPhraseLibraryDialog,
-                hidePhraseLibraryDialog: hidePhraseLibraryDialog,
-                showEditJobTitleModalDialog: showEditJobTitleModalDialog,
-                hideEditJobTitleDialog: hideEditJobTitleDialog,
+            // Hide BranchCategory dialog
+            HidephraseLibraryDialog = function () {
+                $("#phraseLibraryDialog").modal("hide");
             };
-        })(ist.phraseLibrary.viewModel);
+
+            return {
+
+                bindingRoot: bindingRoot,
+                bindingPartial: bindingPartial,
+                viewModel: viewModel,
+                showBranchCategoryDialog: showBranchCategoryDialog,
+
+                hideBranchCategoryDialog: hideBranchCategoryDialog,
+                showphraseLibraryDialog: showphraseLibraryDialog,
+                HidephraseLibraryDialog: HidephraseLibraryDialog,
+
+                hideBranchCategoryDialog: hideBranchCategoryDialog
+
+            };
+
+        })(branchViewModel);
 
         // Initialize the view model
-        if (ist.phraseLibrary.view.bindingRoot) {
-            ist.phraseLibrary.viewModel.initialize(ist.phraseLibrary.view);
+        if (ist.Layout.view.bindingRoot) {
+            branchViewModel.initialize(ist.Layout.view);
         }
+        return ist.Layout.view;
     });

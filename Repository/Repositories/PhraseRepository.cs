@@ -48,37 +48,83 @@ namespace SMD.Repository.Repositories
         }
         public List<Phrase> GetAllPhrasesByID(long Id)
         {
-            return db.Phrase.Where(i => i.PhraseId == Id).ToList();
+            try
+            {
+                db.Configuration.LazyLoadingEnabled = false;
+                return DbSet.Where(i => i.SectionId == Id).ToList();
+            }
+            catch (Exception ex)
+            {
+                
+                throw ex;
+            }
         }
         public bool CreatePhrase(Phrase phrase)
         {
-            bool result=false;
-            Phrase newPhrase = new Phrase();
-            newPhrase.PhraseName=phrase.PhraseName;
-            newPhrase.SectionId=phrase.SectionId;
-            newPhrase.SortOrder = phrase.SortOrder;
-            db.Phrase.Add(newPhrase);
-            if (db.SaveChanges() > 0)
+            try
             {
-                result = true;
+                bool result = false;
+                Phrase newPhrase = new Phrase();
+                newPhrase.PhraseName = phrase.PhraseName;
+                newPhrase.SectionId = phrase.SectionId;
+                newPhrase.SortOrder = phrase.SortOrder;
+                db.Phrase.Add(newPhrase);
+                if (db.SaveChanges() > 0)
+                {
+                    result = true;
+                }
+                return result;
             }
-            return result;
+            catch (Exception ex)
+            {
+                
+                throw ex;
+            }
+           
         }
 
         public bool EditPhrase(Phrase phrase)
         {
-            bool result = false;
-            Phrase newPhrase = new Phrase();
-            newPhrase.PhraseName = phrase.PhraseName;
-            newPhrase.SectionId = phrase.SectionId;
-            newPhrase.SortOrder = phrase.SortOrder;
-            db.Phrase.Attach(newPhrase);
-            db.Entry(newPhrase).State = EntityState.Modified;
-            if (db.SaveChanges() > 0)
-            {
-                result = true;
-            }
 
+            try
+            {
+                bool result = false;
+                Phrase TobeUpdated = db.Phrase.Where(i => i.PhraseId == phrase.PhraseId).FirstOrDefault();
+
+                TobeUpdated.PhraseName = phrase.PhraseName;
+                TobeUpdated.SectionId = phrase.SectionId;
+                TobeUpdated.SortOrder = phrase.SortOrder;
+                db.Phrase.Attach(TobeUpdated);
+
+                db.Entry(TobeUpdated).State = EntityState.Modified;
+                if (db.SaveChanges() > 0)
+                {
+                    result = true;
+                }
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+                  
+        }
+
+        public bool DeletePhrase(long phraseId)
+        {
+
+            bool result = false;
+            Phrase TobeDeleted = db.Phrase.Where(i => i.PhraseId == phraseId).FirstOrDefault();
+            if (TobeDeleted != null)
+            {
+                db.Phrase.Remove(TobeDeleted);
+                if (db.SaveChanges() > 0)
+                {
+                    result = true;
+                }
+            }
             return result;
         }
 

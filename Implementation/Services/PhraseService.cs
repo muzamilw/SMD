@@ -30,5 +30,10 @@ namespace SMD.Implementation.Services
         {
             return _phraseRepository.EditPhrase(phrase);
         }
+        public bool DeletePhrase(long phraseId)
+        {
+            return _phraseRepository.DeletePhrase(phraseId);
+        
+        }
     }
 }

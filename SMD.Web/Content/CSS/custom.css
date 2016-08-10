@@ -382,3 +382,8 @@ a.reportAnchor a:hover {
 #btnNext,#btnBack{
         width: 100px;
 }
+
+
+.selectedRow {
+    background: none repeat scroll 0 0 #afafaf !important;
+}

@@ -1,438 +1,321 @@
-﻿/*
-    Module with the view model for Phrase Library
-*/
-define("common/phraseLibrary.viewModel",
-    ["jquery", "amplify", "ko", "common/phraseLibrary.dataservice", "common/phraseLibrary.model", "common/confirmation.viewModel"],
-    function ($, amplify, ko, dataservice, model, confirmation) {
+﻿define("PhraseLibrary/phraseLibrary.viewModel",
+    ["jquery", "amplify", "ko", "PhraseLibrary/phraseLibrary.dataService", "PhraseLibrary/phraseLibrary.model", "common/confirmation.viewModel"],
+
+    function ($, amplify, ko, dataService, model, confirmation) {
+
         var ist = window.ist || {};
-        ist.phraseLibrary = {
+        ist.Layout = {
             viewModel: (function () {
                 var // The view 
-                    view,
-                    //Active Section (Category)
-                    selectedSection = ko.observable(),
-                    //select Phrase Field
-                    selectedPhraseField = ko.observable(),
-                    //Flag for open from Phrase Library
-                    isOpenFromPhraseLibrary = ko.observable(true),
-                    // Open default section according to 
-                    defaultOpenSectionId = ko.observable(),
-                    defaultOpenPhraseFieldName = ko.observable(),
-                    //selected Phrase
-                    selectedPhrase = ko.observable(false),
-                    //Sections
-                    sections = ko.observableArray([]),
-                    //Phrase List
-                    phrases = ko.observableArray([]),
-                    //job Titles List
-                    jobTitles = ko.observableArray([]),
-                    // True, if new 
-                    AddEditDeleteFlag = ko.observable(false),
-                    //#endregion
-                    //get All Sections
-                    getAllSections = function () {
-                        dataservice.getSections({
-                            success: function (data) {
-                                sections.removeAll();
-                                _.each(data, function (item) {
-
-                                    var section = new model.Section.Create(item);
-                                    _.each(item.PhrasesFields, function (phraseFieldItem) {
-                                        var phraseField = new model.PhraseField.Create(phraseFieldItem);
-                                        section.phrasesFields.push(phraseField);
-                                    });
-                                    sections.push(section);
-                                });
-                                selectDefaultSectionForProduct();
-                            },
-                            error: function () {
-                                toastr.error("Failed to phrase library.");
-                            }
-                        });
-                    },
-                    //Get Phrases By Phrase Id
-                    getPhrasesByPhraseFieldId = function (fieldId, resetTreeExpensionAfterSave1) {
-                        dataservice.getPhrasesByPhraseFieldId({
-                            fieldId: fieldId
-                        }, {
-                            success: function (data) {
-                                phrases.removeAll();
-                                selectedPhraseField().phrases.removeAll();
-                                _.each(data, function (phraseItem) {
-                                    var phrase = new model.Phrase.Create(phraseItem);
-                                    selectedPhraseField().phrases.push(phrase);
-                                });
-                                ko.utils.arrayPushAll(phrases, selectedPhraseField().phrases());
-                                phrases.valueHasMutated();
-                                if (resetTreeExpensionAfterSave1) {
-                                    resetTreeExpensionAfterSave(selectedSection());
-
-                                }
-
-                            },
-                            error: function (response) {
-                                isLoadingStores(false);
-                                toastr.error("Failed to Load Stores . Error: " + response);
-                            }
-                        });
-                    },
-                   //select Section(Category)
-                   selectSection = function (section) {
-                       if (section.phrasesFields().length > 0) {
-                           resetTreeExpension(section);
-                       } else {
-                           getPhraseFields(section);
-                       }
-                   },
-                   //Get Phrase Fields By Setcion Id
-                   getPhraseFields = function (section, afterSaveRefreshListFlag) {
-                       dataservice.getPhraseFiledsBySectionId({
-                           sectionId: section.sectionId(),
-                       }, {
-                           success: function (data) {
-                               if (data != null) {
-                                   section.phrasesFields.removeAll();
-                                   _.each(data, function (phraseFieldItem) {
-                                       var phraseField1 = new model.PhraseField.Create(phraseFieldItem);
-                                       section.phrasesFields.push(phraseField1);
-                                   });
-
-                                  
-
-                                   // true, Refresh The Phrase Fields as well as Phrases
-                                   if (afterSaveRefreshListFlag) {
-                                       var sectionFilter = _.filter(sections(), function (sectionItem) {
-                                           return sectionItem.sectionId() === selectedPhraseField().sectionId();
-                                       });
-                                       if (sectionFilter.length > 0) {
-                                           var phraseField = _.filter(sectionFilter[0].phrasesFields(), function (phrase) {
-                                               return phrase.fieldId() === selectedPhraseField().fieldId();
-                                           });
-                                           if (phraseField.length > 0) {
-                                               selectedPhraseField(phraseField[0]);
-                                               getPhrasesByPhraseFieldId(selectedPhraseField().fieldId(), true);
-                                           }
-                                       }
-                                   }
-                                   else {
-                                       resetTreeExpension(section);
-                                   }
-                               }
-                           },
-                           error: function (response) {
-                               toastr.error("Failed to load Phrase Fileds . Error: ");
-                           }
-                       });
-                   },
-
-                   resetTreeExpension = function (section) {
-                       //old menu collapse
-                       if (selectedSection() !== undefined) {
-                           selectedSection().isExpanded(false);
-                       }
-                       //new selected section expand
-                       section.isExpanded(true);
-                       selectedSection(section);
-                     //  selectedPhraseField(undefined);
-                       phrases.removeAll();
-
-                       if (section.phrasesFields().length > 0) {
-
-
-                           if (defaultOpenPhraseFieldName() !== undefined)
-                           {
-                               var defaultPhraseFieldOpenSection = section.phrasesFields().find(function (phraseField) {
-                                   return phraseField.fieldName() === defaultOpenPhraseFieldName();
-                               });
-
-
-                               selectPhraseField(defaultPhraseFieldOpenSection);
-                               //defaultOpenPhraseFieldName(undefined);
-                           }
-                           else
-                           {
-                               selectedPhraseField(section.phrasesFields()[0]);
-                           }
+                   view,
+                      showBranchDialoge = function () {
+                          view.showBranchCategoryDialog();
+                      },
+                       showphraseLibraryDialog = function () {
                            
+                           view.showphraseLibraryDialog();
+                           Phrases.removeAll();
+                           sections.removeAll();
+                           IsDisplayAddPhBtn(false);
+                           getAllSections();
+                       },
+                sections = ko.observableArray([]),
+               
+                isOpenFromPhraseLibrary = ko.observable(true),
+                selectedPhraseField = ko.observable(),
+                selectedSection = ko.observable(),
+                 selectedPhrase = ko.observable(false),
+                AddEditDeleteFlag = ko.observable(false),
+                Phrases = ko.observableArray([]),
+                SelectedSectionId = ko.observable(0),
+                PhrasesSavingList = ko.observableArray([]),
+                SectionModel = ko.observable(),
+                IntialLength = ko.observable(0),
+                PhraseModel = ko.observable(),
+                SectionList = ko.observableArray([]),
+                PreviousSection = ko.observable(),
+                IsDisplayAddPhBtn = ko.observable(false),
+                SelectedPhrasecolor = ko.observable('#000000'),
+                IsPharsesAvailiable = ko.observable(false),
+                  templateToUse = function () {
 
-                           //selectedPhraseField(section.phrasesFields()[0]);
-                           getPhrasesByPhraseFieldId(selectedPhraseField().fieldId(), true);
-                       }
-                   },
-
-                //select Phrase Field
-                selectPhraseField = function (phraseField) {
-                    phrases.removeAll();
-                    selectedPhraseField(phraseField);
-                    if (phraseField.phrases().length > 0) {
-                        ko.utils.arrayPushAll(phrases, phraseField.phrases());
-                        phrases.valueHasMutated();
-                    } else {
-                        getPhrasesByPhraseFieldId(phraseField.fieldId());
-                    }
-
-                    ////If open from other than phase library secreen like Product
-                    //if (!isOpenFromPhraseLibrary()) {
-                    //    if (phraseField.sectionId() === 4) {
-                    //        selectedPhraseField(phraseField);
-                    //        if (phraseField.phrases().length > 0) {
-                    //            ko.utils.arrayPushAll(phrases, phraseField.phrases());
-                    //            phrases.valueHasMutated();
-                    //        } else {
-                    //            getPhrasesByPhraseFieldId(phraseField.fieldId());
-                    //        }
-                    //    }
-                    //}
-                    //    //If Open From Phase Library Screen
-                    //else {
-                    //    selectedPhraseField(phraseField);
-                    //    if (phraseField.phrases().length > 0) {
-                    //        ko.utils.arrayPushAll(phrases, phraseField.phrases());
-                    //        phrases.valueHasMutated();
-                    //    } else {
-                    //        getPhrasesByPhraseFieldId(phraseField.fieldId());
-                    //    }
-                    //}
-
-                    if (!selectedPhraseField()) {
-                        return;
-                    }
-
-                    // Reset Checked State for Phrases
-                    selectedPhraseField().phrases.each(function (phrase) {
-                        phrase.isPhraseChecked(false);
-                    });
-                },
-                //Delete Phrase
-                deletePhrase = function (phrase) {
-                    confirmation.messageText("WARNING - This item will be removed from the system and you won’t be able to recover.  There is no undo");
-                    confirmation.afterProceed(function () {
-                        phrase.isDeleted(true);
-                    });
-                    confirmation.show();
-
-                },
-                //Save Phrase Library
-                savePhraseLibrary = function (phraseLibrary,applyFlag) {
-                    var flagForSave = false;
-                    var phraseLibrarySaveModel = model.PhraseLibrarySaveModel();
-                    var severModel = phraseLibrarySaveModel.convertToServerData(phraseLibrarySaveModel);
-                    _.each(sections(), function (item) {
-                        if (item.phrasesFields().length > 0) {
-                            var section = item.convertToServerData(item);
-                            _.each(item.phrasesFields(), function (phraseFiledItem) {
-                                var phraseField = phraseFiledItem.convertToServerData(phraseFiledItem);
-                                if (phraseFiledItem.phrases().length > 0) {
-                                    _.each(phraseFiledItem.phrases(), function (phraseItem) {
-                                        if (phraseItem.hasChanges()) {
-                                            phraseField.Phrases.push(phraseItem.convertToServerData(phraseItem));
-                                            flagForSave = true;
-                                        }
-                                    });
-                                }
-                               
-                                section.PhrasesFields.push(phraseField);
-                            });
-                            severModel.Sections.push(section);
-                        }
-                    });
-                    if (flagForSave) {
-                        saveLibrary(severModel);
-                    } else {
-                        if (applyFlag!==true) {
-                           // toastr.error("There is no phrase for save.");
-                        }
-                       
-                    }
-
-                },
-                //
-                saveLibrary = function (phaseLibrary) {
-                    dataservice.savePhaseLibrary(
-                            phaseLibrary, {
-                                success: function (data) {
-                                    refershPhraseLibraryAfterSave();
-                                    toastr.success("Successfully save.");
-                                },
-                                error: function (response) {
-                                    toastr.error("Failed to Save . Error: " + response);
-                                }
-                            });
-                },
-
-                  // refresh list after save phrase library
-                 refershPhraseLibraryAfterSave = function () {
-                     if (selectedSection() !== undefined) {
-                         getPhraseFields(selectedSection(), true);
-                     }
-                 },
-                  resetTreeExpensionAfterSave = function (section) {
-                      section.isExpanded(true);
+                      if (isOpenFromPhraseLibrary()) {
+                          return 'phraseEditItemTemplate';
+                      } else {
+                          return 'phraseItemTemplate';
+                      }
                   },
-                //Add Phrase
-                addPhrase = function () {
-                    if (selectedPhraseField() != undefined) {
-                        selectedPhraseField().phrases.splice(0, 0, model.Phrase(0, "", selectedPhraseField().fieldId()));
-                        phrases.splice(0, 0, selectedPhraseField().phrases()[0]);
+                 addPhrase = function () {
+                         var NewPhrase = {
+                             PhraseName: '',
+                             SectionId: SelectedSectionId
+                         };
+                         IsPharsesAvailiable(false);
+                         var phrase = new model.Phrase.Create(NewPhrase);
+                         Phrases.push(phrase);
+                 },
+               FinalSaveCall = function (section) {
+
+                   var IsArrayChanges = false;
+                   PhraseModel = model.PhraseLibrarySaveModel();
+                   var SectionList = PhraseModel.Sections;
+
+                   _.each(Phrases(), function (item) {
+
+                       if (item.hasChanges() && item.isValid() || item.IsDeleted() == true) {
+                          // alert(item.phraseText() + '' + item.isValid());
+                           PhraseModel.PhrasesList.push(item.convertToServerData(item));
+                           IsArrayChanges = true;
+                       }
+                   });
+
+                   if (Phrases().length > IntialLength || IsArrayChanges == true) {
+                       if (PhraseModel.PhrasesList.length > 0) {
+                          
+                               savePhraseLibrary(PhraseModel, section);
+                       }
+                       else {
+                           BindSectionFields(section);
+                       }
+                   }
+
+                   else {
+
+                       BindSectionFields(section);
+                   }
+
+                   confirmation.afterCancel(function () {
+
+                       BindSectionFields(section);
+
+                   });
+
+
+               },
+                onSelectSection = function (section) {
+                    //selectedSection = section;
+                    selectedSection(section);
+                    SelectedSectionId = section.sectionId();
+                    if (selectedSection != null) {
+                        IsDisplayAddPhBtn(true);
                     }
-                },
-                //Edit Job Title (open edit job title dialog)
-                editJobTitle = function () {
-                    jobTitles.removeAll();
-                    _.each(sections(), function (section) {
-                        if (section.sectionId() === 4) {
-                            ko.utils.arrayPushAll(jobTitles(), section.phrasesFields());
-                            jobTitles.valueHasMutated();
+                    closeNewCampaignDialog(section);
+                }
+
+                closeNewCampaignDialog = function (section) {
+                    
+                    var IsArrayChanges = false;
+                    PhraseModel = model.PhraseLibrarySaveModel();
+                    var SectionList = PhraseModel.Sections;
+              
+                    _.each(Phrases(), function (item) {
+                        
+                        if (item.hasChanges() && item.isValid() || item.IsDeleted() == true)
+                        {
+                            PhraseModel.PhrasesList.push(item.convertToServerData(item));
+                            IsArrayChanges = true;
                         }
                     });
-                    view.showEditJobTitleModalDialog();
+                   
+                    if (Phrases().length > IntialLength || IsArrayChanges==true) {
+                        if (PhraseModel.PhrasesList.length > 0) {
+                            confirmation.messageText("Do you want to save changes?");
+
+                            confirmation.afterProceed(function () {
+                                savePhraseLibrary(PhraseModel, section);
+                            });
+                            confirmation.show();
+                        }
+                        else {
+                            BindSectionFields(section);
+                        }
+                    }
+
+                    else {
+                       
+                        BindSectionFields(section);
+                    }
+                    
+                    confirmation.afterCancel(function () {
+
+                        BindSectionFields(section);
+                       
+                    });
+
+              
                 },
-                //Close Edit job Title Dialog
-                closeEditJobDialog = function () {
-                    view.hideEditJobTitleDialog();
-                },
-                //Template To Use
-                 templateToUse = function () {
-                     if (isOpenFromPhraseLibrary()) {
-                         return 'phraseEditItemTemplate';
-                     } else {
-                         return 'phraseItemTemplate';
-                     }
-                 },
-                //Select Phrase
-                 selectPhrase = function (phrase) {
-                     if (afterSelectPhrase && typeof afterSelectPhrase === "function") {
-                         //if (phrase.phraseId() === undefined || phrase.phraseId() === 0) {
-                         //    toastr.error("Please First save the phrase.");
-                         //    //phrase.isPhraseChecked(false);
-                         //} else {
-                         //    afterSelectPhrase(phrase.phraseText());
-                         //    afterSelectPhrase = null;
-                         //    view.hidePhraseLibraryDialog();
-                         //}
-                         savePhraseLibrary(null,true);
-                         afterSelectPhrase(phrase.phraseText());
-                         afterSelectPhrase = null;
-                         view.hidePhraseLibraryDialog();
-                     }
-                     //va
-                     //if (phrase.isPhraseChecked()) {
-                     //    if (afterSelectPhrase && typeof afterSelectPhrase === "function") {
-                     //        if (phrase.phraseId() === undefined || phrase.phraseId() === 0) {
-                     //            toastr.error("First save the phrase.");
-                     //            phrase.isPhraseChecked(false);
-                     //        } else {
-                     //            afterSelectPhrase(phrase.phraseText());
-                     //            afterSelectPhrase = null;
-                     //            view.hidePhraseLibraryDialog();
-                     //        }
-                     //    }
-                     //var phraseLibrarySaveModel = model.PhraseLibrarySaveModel();
-                     //var severModel = phraseLibrarySaveModel.convertToServerData(phraseLibrarySaveModel);
-                     //_.each(sections(), function (item) {
-                     //    if (item.sectionId() === 4) {
-                     //        var section = item.convertToServerData(item);
-                     //        _.each(item.phrasesFields(), function (phraseFiledItem) {
-                     //            var phraseField = phraseFiledItem.convertToServerData(phraseFiledItem);
-                     //            if (phraseFiledItem.phrases().length > 0) {
-                     //                _.each(phraseFiledItem.phrases(), function (phraseItem) {
-                     //                    if (phraseItem.hasChanges()) {
-                     //                        phraseField.Phrases.push(phraseItem.convertToServerData(phraseItem));
-                     //                    }
-                     //                });
-                     //            }
-                     //            if (phraseFiledItem.hasChanges() || phraseField.Phrases.length > 0) {
-                     //                section.PhrasesFields.push(phraseField);
-                     //            }
-                     //        });
-                     //        if (section.PhrasesFields.length > 0)
-                     //            severModel.Sections.push(section);
-                     //    }
-                     //});
+                       //PhaseLibrary Concerned!
+                        getAllSections = function () {
+                            dataService.getSections(null, {
+                                success: function (data) {
+                                    
+                                    _.each(data, function (item) {
+                                        var section = new model.Section.Create(item);
+                                        sections.push(section);
+                                    });
+                                    Phrases.removeAll();
+                                },
+                                error: function () {
+                                    toastr.error("Failed to phrase library.");
+                                }
+                            });
+                        },
+                        deletePhrase = function (phrase) {
 
-                     //if (severModel.Sections.length > 0) {
-                     //    saveLibrary(severModel);
-                     //}
-                     // }
-                 },
-                // after selection
-                 afterSelectPhrase = null,
-                // select default section for product
-                 selectDefaultSectionForProduct = function () {
-                     if (!isOpenFromPhraseLibrary() && defaultOpenSectionId() !== undefined) {
-                         // Select defailt sections
-                         var defaultOpenSection = sections.find(function (section) {
-                             return section.sectionId() === defaultOpenSectionId();
-                         });
 
-                         if (defaultOpenSection) {
-                             selectedSection(defaultOpenSection);
-                             selectSection(defaultOpenSection);
-                             if (selectedSection() && selectedSection().phrasesFields().length > 0) {
+                            confirmation.messageText("Do you want to delete phrase?");
 
-                                 var defaultPhraseFieldOpenSection = selectedSection().phrasesFields().find(function (phraseField) {
-                                     return phraseField.fieldName() === defaultOpenPhraseFieldName();
+                            confirmation.afterProceed(function () {
+
+                                phrase.IsDeleted(true);
+
+
+                            });
+                            confirmation.afterCancel(function () {
+
+                                confirmation.hide();
+
+                            });
+                            confirmation.show();
+                            
+                        },
+                       PhraseLibraryPopUpClose = function ()
+                       {
+                           Phrases.removeAll();
+                           sections.removeAll();
+                          // window.location.reload();
+                       },
+                         getPhraseFields = function (section, SectionID) {
+                            
+                             //IsDisplayAddPhraseBtn(true);
+                             if (SectionID > 0) {
+                                 dataService.getPhraseBySectionID({
+                                     PhraseID: SectionID,
+                                 }, {
+                                     success: function (data) {
+                                         Phrases.removeAll();
+                                         _.each(data, function (phrases) {
+      
+                                             var phrase = new model.Phrase.Create(phrases);
+                                             Phrases.push(phrase);
+                                         });
+                                         // 
+                                         
+                                         IntialLength = Phrases().length;
+                                         if (IntialLength > 0) {
+                                             IsPharsesAvailiable(false);
+                                         }
+                                         else {
+                                             IsPharsesAvailiable(true);
+                                         }
+                                     },
+                                     error: function (response) {
+                                         toastr.error("Failed to load Phrase Fileds . Error: ");
+                                     }
+                                 });
+                             }
+                             else {
+                                 dataService.getPhraseBySectionID({
+                                     PhraseID: section.sectionId(),
+                                 }, {
+                                     success: function (data) {
+                                         Phrases.removeAll();
+                                         _.each(data, function (phrases) {
+
+                                             var phrase = new model.Phrase.Create(phrases);
+                                             Phrases.push(phrase);
+                                         });
+
+                                         IntialLength = Phrases().length;
+                                         if (IntialLength > 0) {
+                                             IsPharsesAvailiable(false);
+                                         }
+                                         else {
+                                             IsPharsesAvailiable(true);
+                                         }
+                                              
+                                         
+                                     },
+                                     error: function (response) {
+                                         toastr.error("Failed to load Phrase Fileds . Error: ");
+                                     }
                                  });
 
-
-                                 selectPhraseField(defaultPhraseFieldOpenSection);
-                                // selectPhraseField(selectedSection().phrasesFields()[0]);
                              }
-                         }
-                     }
-                 },
-                // Show
-                 show = function (afterSelectPhraseCallback) {
-                     //old menu collapse
-                     if (selectedSection() !== undefined) {
-                         selectedSection().isExpanded(false);
-                     }
-                     selectedSection(new model.Section());
-                     view.showPhraseLibraryDialog();
-                     //if (sections().length === 0) {
-                     //    getAllSections();
-                     //}
-                     //else {
-                     //    selectDefaultSectionForProduct();
-                     //}
+                         },
 
-                     getAllSections();
-                     afterSelectPhrase = afterSelectPhraseCallback;
-                 },
+                         savePhraseLibrary = function (model,section) {
+                             
+                             saveLibrary(model, section);
+
+                         },
+                         savePhraseData = function () {
+
+                            // closeNewCampaignDialog(selectedSection);
+                             FinalSaveCall(selectedSection);
+                         },
+                             saveLibrary = function (PhraseModel,section) {
+
+                                 dataService.savePhaseLibrary(
+
+                                 PhraseModel, {
+                                     success: function (data) {
+                                         
+                                              //   refershPhraseLibraryAfterSave();
+                                                 toastr.success("Successfully save.");
+                                                // alert(section.sectionId());
+                                                 getPhraseFields(null, data);
+                                             },
+                                             error: function (response) {
+                                                 toastr.error("Failed to Save . Error: " + response);
+                                             }
+                                         });
+                             },
+                       
+                        BindSectionFields = function (Section) {
+                            getPhraseFields(Section);
+                        };
+
                 // Initialize the view model
                  initialize = function (specifiedView) {
                      view = specifiedView;
                      ko.applyBindings(view.viewModel, view.bindingRoot);
-                     getAllSections();
+                     ko.applyBindings(view.viewModel, view.bindingPartial);
+                    
                  };
-
                 return {
-                    selectedSection: selectedSection,
-                    selectedPhraseField: selectedPhraseField,
-                    isOpenFromPhraseLibrary: isOpenFromPhraseLibrary,
-                    selectedPhrase: selectedPhrase,
-                    //Arrays
-                    sections: sections,
-                    phrases: phrases,
-                    //Utilities
+
                     initialize: initialize,
-                    selectSection: selectSection,
-                    selectPhraseField: selectPhraseField,
-                    deletePhrase: deletePhrase,
-                    savePhraseLibrary: savePhraseLibrary,
+                    showBranchDialoge: showBranchDialoge,
+                    showphraseLibraryDialog: showphraseLibraryDialog,
+                    getAllSections: getAllSections,
+                    sections: sections,
+                    onSelectSection: onSelectSection,
+                    isOpenFromPhraseLibrary: isOpenFromPhraseLibrary,
                     addPhrase: addPhrase,
-                    editJobTitle: editJobTitle,
-                    closeEditJobDialog: closeEditJobDialog,
+                    selectedPhraseField: selectedPhraseField,
                     templateToUse: templateToUse,
-                    selectPhrase: selectPhrase,
-                    jobTitles: jobTitles,
-                    show: show,
-                    defaultOpenSectionId: defaultOpenSectionId,
-                    defaultOpenPhraseFieldName: defaultOpenPhraseFieldName
+                    selectedPhrase: selectedPhrase,
+                    AddEditDeleteFlag: AddEditDeleteFlag,
+                    Phrases: Phrases,
+                    deletePhrase: deletePhrase,
+                    selectedSection: selectedSection,
+                    savePhraseLibrary: savePhraseLibrary,
+                    saveLibrary: saveLibrary,
+                    PhrasesSavingList: PhrasesSavingList,
+                    closeNewCampaignDialog: closeNewCampaignDialog,
+                    savePhraseData: savePhraseData,
+                    PhraseLibraryPopUpClose: PhraseLibraryPopUpClose,
+                    IsDisplayAddPhBtn: IsDisplayAddPhBtn,
+                    SelectedPhrasecolor: SelectedPhrasecolor,
+                    IsPharsesAvailiable: IsPharsesAvailiable
                 };
+
             })()
         };
 
-        return ist.phraseLibrary.viewModel;
-    });
+        return ist.Layout.viewModel;
+
+});
+
 
