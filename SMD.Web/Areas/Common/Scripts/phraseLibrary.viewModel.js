@@ -17,7 +17,7 @@
                 isOpenFromPhraseLibrary = ko.observable(true),
                 selectedPhraseField = ko.observable(),
                 selectedSection = ko.observable(),
-                 selectedPhrase = ko.observable(false),
+                selectedPhrase = ko.observable(false),
                 AddEditDeleteFlag = ko.observable(false),
                 Phrases = ko.observableArray([]),
                 SelectedSectionId = ko.observable(0),
@@ -31,7 +31,8 @@
                 SelectedPhrasecolor = ko.observable('#000000'),
                 IsPharsesAvailiable = ko.observable(false),
                 IsSaveChanges = ko.observable(false),
-                TemporarySection=ko.observable();
+                TemporarySection = ko.observable(),
+                TemporarySecEvent = ko.observable(),
                 showphraseLibraryDialog = function () {
 
                     view.showphraseLibraryDialog();
@@ -75,7 +76,7 @@
                    if (IsArrayChanges) {
                        if (PhraseModel.PhrasesList.length > 0) {
                           
-                               savePhraseLibrary(PhraseModel, section,flag);
+                               savePhraseLibrary(PhraseModel,section,flag);
                        }
                        else {
                            BindSectionFields(section);
@@ -94,19 +95,34 @@
                    });
 
                },
-                onSelectSection = function (section) {
+                onSelectSection = function (section, event) {
                     //selectedSection = section;
                     //  if (setselectdsection != null) {
-                  //  TemporarySection(section);
-                         selectedSection(section);
+                      TemporarySection(section);
                     
+                       TemporarySecEvent(event);
+                   
                         SelectedSectionId = section.sectionId();
                         if (selectedSection != null) {
                             IsDisplayAddPhBtn(true);
                         }
-                        closeNewCampaignDialog(section);
+                        closeNewCampaignDialog(section,event);
                 },
-                closeNewCampaignDialog = function (section) {
+                SetSelectedIndex = function (event)
+                {
+
+                    if (event.target.classList.contains("dd-handle")) {
+                       // event.target.classList.remove("fa-chevron-circle-right");
+                        //event.target.classList.add("dd-handle");
+                        //event.target.classList.add("selectedRow");
+                        alert('contains');
+                    }
+
+                    // $(event.target).closest('li')[0]
+
+                },
+
+                closeNewCampaignDialog = function (section,event) {
                     
                     var IsArrayChanges = false;
                     PhraseModel = model.PhraseLibrarySaveModel();
@@ -127,22 +143,23 @@
                             confirmation.messageText("Do you want to save changes?");
 
                             confirmation.afterProceed(function () {
-                                savePhraseLibrary(PhraseModel, section);
+                                savePhraseLibrary(PhraseModel, section,null,event);
                             });
                             confirmation.show();
                         }
                         else {
+                            selectedSection(section);
                             BindSectionFields(section);
                         }
                     }
 
                     else {
-                       
+                        selectedSection(section);
                         BindSectionFields(section);
                     }
                     
                     confirmation.afterCancel(function () {
-
+                        selectedSection(section);
                         BindSectionFields(section);
                        
                     });
@@ -248,9 +265,9 @@
                              }
                          },
 
-                         savePhraseLibrary = function (model,section,flag) {
+                         savePhraseLibrary = function (model,section,flag,event) {
                            
-                             saveLibrary(model, section, flag);
+                             saveLibrary(model, section, flag,event);
 
                          },
                          savePhraseData = function () {
@@ -258,20 +275,26 @@
                             // closeNewCampaignDialog(selectedSection);
                              FinalSaveCall(selectedSection,false);
                          },
-                             saveLibrary = function (PhraseModel,section,refreshphrases) {
+                             saveLibrary = function (PhraseModel,section,refreshphrases,event) {
 
                                  dataService.savePhaseLibrary(
 
                                  PhraseModel, {
                                      success: function (data) {
-                                         IsSaveChanges = true;
+                                         
                                              
                                                  toastr.success("Successfully save.");
                                          
                                                  var setSelectedSection = new model.Section.Create(data);
                                                  
                                                  getPhraseFields(null, setSelectedSection.sectionId());
-                                               
+                                                // selectedSection(null);
+                                               //  selectedSection(section);
+                                              //   SetSelectedIndex(event);
+                                              //   if (setSelectedSection.sectionId() == SelectedSectionId) {
+                                                 //    alert('sdasa');
+                                                   //  SetSelectedIndex(TemporarySecEvent);
+                                                 //}
                                              },
                                              error: function (response) {
                                                  toastr.error("Failed to Save . Error: " + response);
