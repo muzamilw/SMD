@@ -28,6 +28,10 @@ namespace SMD.Models.RequestModels
                 SortBy = (short)value;
             }
         }
+
+
+        public int status { get; set; }
+
         public bool? ShowCoupons { get; set; }
     }
 }

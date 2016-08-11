@@ -55,6 +55,7 @@ namespace DomainModelProject
         public Nullable<bool> AfilliatianStatus { get; set; }
         public string WebsiteLink { get; set; }
         public Nullable<int> CompanyType { get; set; }
+        public string VoucherSecretKey { get; set; }
     
         public virtual ICollection<Account> Accounts { get; set; }
         public virtual ICollection<AdCampaign> AdCampaigns { get; set; }

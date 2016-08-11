@@ -114,6 +114,7 @@
           <Property Name="VoucherRedemptionPhone" Type="nvarchar" MaxLength="500" />
           <Property Name="VoucherLocationLAT" Type="nvarchar" MaxLength="50" />
           <Property Name="VoucherLocationLON" Type="nchar" MaxLength="10" />
+          <Property Name="MaxDailyBudget" Type="float" />
         </EntityType>
         <EntityType Name="AdCampaignResponse">
           <Key>
@@ -348,6 +349,7 @@
           <Property Name="AfilliatianStatus" Type="bit" />
           <Property Name="WebsiteLink" Type="nvarchar" MaxLength="100" />
           <Property Name="CompanyType" Type="int" />
+          <Property Name="VoucherSecretKey" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="CompanyBranch">
           <Key>
@@ -1935,6 +1937,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="SearchCampaigns" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Status" Type="int" Mode="In" />
+          <Parameter Name="keyword" Type="nvarchar" Mode="In" />
+          <Parameter Name="comanyId" Type="int" Mode="In" />
+          <Parameter Name="fromRow" Type="int" Mode="In" />
+          <Parameter Name="toRow" Type="int" Mode="In" />
+          <Parameter Name="adminMode" Type="bit" Mode="In" />
+        </Function>
         <Function Name="SearchCoupons" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="categoryId" Type="int" Mode="In" />
           <Parameter Name="type" Type="int" Mode="In" />
@@ -2468,6 +2478,7 @@
           <NavigationProperty Name="CampaignCategories" Relationship="Self.FK_CampaignCategories_AdCampaign" FromRole="AdCampaign" ToRole="CampaignCategories" />
           <NavigationProperty Name="CouponCodes" Relationship="Self.FK_CouponCodes_AdCampaign" FromRole="AdCampaign" ToRole="CouponCodes" />
           <NavigationProperty Name="InvoiceDetails" Relationship="Self.FK_InvoiceDetail_AdCampaign" FromRole="AdCampaign" ToRole="InvoiceDetail" />
+          <Property Name="MaxDailyBudget" Type="Double" />
         </EntityType>
         <EntityType Name="AdCampaignResponse">
           <Key>
@@ -2757,6 +2768,7 @@
           <NavigationProperty Name="ProfileQuestionUserAnswers" Relationship="Self.FK_ProfileQuestionUserAnswer_Company" FromRole="Company" ToRole="ProfileQuestionUserAnswer" />
           <NavigationProperty Name="SurveyQuestions" Relationship="Self.FK_SurveyQuestion_Company" FromRole="Company" ToRole="SurveyQuestion" />
           <NavigationProperty Name="SurveyQuestionResponses" Relationship="Self.FK_SurveyQuestionResponse_Company" FromRole="Company" ToRole="SurveyQuestionResponse" />
+          <Property Name="VoucherSecretKey" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="CompanyBranch">
           <Key>
@@ -4667,6 +4679,14 @@
             <End Role="Coupon" EntitySet="Coupons" />
             <End Role="UserPurchasedCoupon" EntitySet="UserPurchasedCoupons" />
           </AssociationSet>
+          <FunctionImport Name="SearchCampaigns" ReturnType="Collection(SMDDevModel.SearchCampaigns_Result)">
+            <Parameter Name="Status" Mode="In" Type="Int32" />
+            <Parameter Name="keyword" Mode="In" Type="String" />
+            <Parameter Name="comanyId" Mode="In" Type="Int32" />
+            <Parameter Name="fromRow" Mode="In" Type="Int32" />
+            <Parameter Name="toRow" Mode="In" Type="Int32" />
+            <Parameter Name="adminMode" Mode="In" Type="Boolean" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="CouponCategories">
           <Key>
@@ -4796,6 +4816,23 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="SearchCampaigns_Result">
+          <Property Type="Int64" Name="CampaignID" Nullable="false" />
+          <Property Type="String" Name="CampaignName" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="viewCountToday" Nullable="true" />
+          <Property Type="Int32" Name="viewCountYesterday" Nullable="true" />
+          <Property Type="Int32" Name="viewCountAllTime" Nullable="true" />
+          <Property Type="String" Name="Locationss" Nullable="true" />
+          <Property Type="DateTime" Name="StartDateTime" Nullable="true" Precision="23" />
+          <Property Type="Double" Name="MaxBudget" Nullable="true" />
+          <Property Type="Double" Name="MaxDailyBudget" Nullable="true" />
+          <Property Type="Double" Name="AmountSpent" Nullable="true" />
+          <Property Type="Int32" Name="Status" Nullable="true" />
+          <Property Type="DateTime" Name="ApprovalDateTime" Nullable="true" Precision="23" />
+          <Property Type="Double" Name="ClickRate" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedDateTime" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="TotalItems" Nullable="true" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4816,6 +4853,7 @@
           <EntitySetMapping Name="AdCampaigns">
             <EntityTypeMapping TypeName="SMDDevModel.AdCampaign">
               <MappingFragment StoreEntitySet="AdCampaign">
+                <ScalarProperty Name="MaxDailyBudget" ColumnName="MaxDailyBudget" />
                 <ScalarProperty Name="CampaignID" ColumnName="CampaignID" />
                 <ScalarProperty Name="LanguageID" ColumnName="LanguageID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
@@ -5126,6 +5164,7 @@
           <EntitySetMapping Name="Companies">
             <EntityTypeMapping TypeName="SMDDevModel.Company">
               <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="VoucherSecretKey" ColumnName="VoucherSecretKey" />
                 <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
                 <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
                 <ScalarProperty Name="ReplyEmail" ColumnName="ReplyEmail" />
@@ -5773,6 +5812,27 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SearchCampaigns" FunctionName="SMDDevModel.Store.SearchCampaigns">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SMDDevModel.SearchCampaigns_Result">
+                <ScalarProperty Name="CampaignID" ColumnName="CampaignID" />
+                <ScalarProperty Name="CampaignName" ColumnName="CampaignName" />
+                <ScalarProperty Name="viewCountToday" ColumnName="viewCountToday" />
+                <ScalarProperty Name="viewCountYesterday" ColumnName="viewCountYesterday" />
+                <ScalarProperty Name="viewCountAllTime" ColumnName="viewCountAllTime" />
+                <ScalarProperty Name="Locationss" ColumnName="Locationss" />
+                <ScalarProperty Name="StartDateTime" ColumnName="StartDateTime" />
+                <ScalarProperty Name="MaxBudget" ColumnName="MaxBudget" />
+                <ScalarProperty Name="MaxDailyBudget" ColumnName="MaxDailyBudget" />
+                <ScalarProperty Name="AmountSpent" ColumnName="AmountSpent" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ApprovalDateTime" ColumnName="ApprovalDateTime" />
+                <ScalarProperty Name="ClickRate" ColumnName="ClickRate" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="TotalItems" ColumnName="TotalItems" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -209,6 +209,12 @@ namespace SMD.Repository.Repositories
             }
         }
 
+
+
+        public IEnumerable<SearchCampaigns_Result> SearchCampaigns(AdCampaignSearchRequest request, out int rowCount)
+        {
+            return db.SearchCampaigns(request.status, request.SearchString);
+        }
         /// <summary>
         /// Get Ad Campaign by id
         /// </summary>

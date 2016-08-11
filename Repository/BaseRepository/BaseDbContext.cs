@@ -468,6 +468,38 @@ namespace SMD.Repository.BaseRepository
 
 
 
+        public ObjectResult<SearchCampaigns_Result> SearchCampaigns(int status, string keyword, int companyId, int fromRow, int toRow, bool adminMode)
+        {
+            var statusParameter = status != null ?
+                new ObjectParameter("status", status) :
+                new ObjectParameter("status", typeof(int));
+
+            var keywordParameter = keyword != null ?
+               new ObjectParameter("keyword", keyword) :
+               new ObjectParameter("keyword", typeof(string));
+
+            var companyIdParameter = status != null ?
+               new ObjectParameter("companyId", companyId) :
+               new ObjectParameter("companyId", typeof(int));
+
+
+            var fromRowParameter = fromRow != 0 ?
+             new ObjectParameter("FromRow", fromRow) :
+             new ObjectParameter("FromRow", typeof(int));
+
+            var toRowParameter = toRow  != 0?
+                new ObjectParameter("ToRow", toRow) :
+                new ObjectParameter("ToRow", typeof(int));
+
+
+            var adminModeParameter = new ObjectParameter("adminMode", adminMode);
+               
+
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SearchCampaigns_Result>("SearchCampaigns", statusParameter, keywordParameter, companyIdParameter, fromRowParameter, toRowParameter,adminModeParameter);
+        }
+
+
+
         #endregion
     }
 }
