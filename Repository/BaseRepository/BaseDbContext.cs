@@ -412,7 +412,7 @@ namespace SMD.Repository.BaseRepository
                 new ObjectParameter("CompanyId", CompanyId) :
                 new ObjectParameter("CompanyId", typeof(string));
 
-
+            
 
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCouponsByCompanyId_Result>("GetCouponsByCompanyId", userIdParameter);
         }

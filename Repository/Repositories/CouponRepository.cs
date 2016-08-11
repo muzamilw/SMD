@@ -153,10 +153,16 @@ namespace SMD.Repository.Repositories
         public IEnumerable<Coupon> GetCouponById(long campaignId)
         {
 
+
+            db.Database.ExecuteSqlCommand("update coupon set CouponViewcount = CouponViewcount + 1 where CouponId=" + campaignId);
+
             Expression<Func<Coupon, bool>> query =
                 ad => ad.CouponId == campaignId;
 
             return DbSet.Where(query);
+
+
+
         }
 
 
