@@ -10,5 +10,6 @@ namespace SMD.Interfaces.Repository
     public interface ISectionRepository : IBaseRepository<Section, int>
     {
         List<Section> GetAllSections();
+        Section GetSectionbyID(int sectionID);
     }
 }

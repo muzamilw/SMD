@@ -46,9 +46,11 @@ namespace SMD.MIS.Areas.Common.Controllers
             
         }
 
-        public int Post(PhraseResponseModel Phrases)
+        public Section Post(PhraseResponseModel Phrases)
         {
+           
             int SectionID = 0;
+            
             //FormCollection
             if (!ModelState.IsValid)
             {
@@ -84,7 +86,15 @@ namespace SMD.MIS.Areas.Common.Controllers
                     }
                 }
             }
-            return SectionID;
+            if (SectionID > 0)
+            {
+                Mapper.Initialize(cfg => cfg.CreateMap<DomainModel.Section, ApiModel.Section>());
+                var obj= _sectionService.GetSectionbyID(SectionID);
+                return Mapper.Map<DomainModel.Section, ApiModel.Section>(obj);
+            }
+
+            else
+            return null;
         }
 
 
