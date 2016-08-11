@@ -10,5 +10,6 @@ namespace SMD.Interfaces.Services
     public interface ISectionService
     {
         List<Section> GetAllSections();
+        Section GetSectionbyID(int sectionID);
     }
 }

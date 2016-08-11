@@ -20,6 +20,11 @@ namespace SMD.Implementation.Services
       {
           return _sectionRepository.GetAllSections();
       }
+      public  Section GetSectionbyID(int sectionID)
+      {
 
+          return _sectionRepository.GetSectionbyID(sectionID);
+
+      }
     }
 }

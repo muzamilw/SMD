@@ -55,6 +55,12 @@ namespace SMD.Repository.Repositories
             db.Configuration.LazyLoadingEnabled = false;
             return db.Section.ToList();
         }
+
+        public Section GetSectionbyID(int sectionID)
+        {
+            db.Configuration.LazyLoadingEnabled = false;
+            return db.Section.Where(i => i.SectionId == sectionID).FirstOrDefault();
+        }
         #endregion
     }
 }

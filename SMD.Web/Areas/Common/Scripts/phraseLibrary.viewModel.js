@@ -30,6 +30,8 @@
                 IsDisplayAddPhBtn = ko.observable(false),
                 SelectedPhrasecolor = ko.observable('#000000'),
                 IsPharsesAvailiable = ko.observable(false),
+                IsSaveChanges = ko.observable(false),
+                TemporarySection=ko.observable();
                 showphraseLibraryDialog = function () {
 
                     view.showphraseLibraryDialog();
@@ -55,7 +57,7 @@
                          var phrase = new model.Phrase.Create(NewPhrase);
                          Phrases.push(phrase);
                  },
-               FinalSaveCall = function (section) {
+               FinalSaveCall = function (section,flag) {
 
                    var IsArrayChanges = false;
                    PhraseModel = model.PhraseLibrarySaveModel();
@@ -70,10 +72,10 @@
                        }
                    });
 
-                   if (Phrases().length > IntialLength || IsArrayChanges == true) {
+                   if (IsArrayChanges) {
                        if (PhraseModel.PhrasesList.length > 0) {
                           
-                               savePhraseLibrary(PhraseModel, section);
+                               savePhraseLibrary(PhraseModel, section,flag);
                        }
                        else {
                            BindSectionFields(section);
@@ -91,34 +93,36 @@
 
                    });
 
-
                },
                 onSelectSection = function (section) {
                     //selectedSection = section;
-                    selectedSection(section);
-                    SelectedSectionId = section.sectionId();
-                    if (selectedSection != null) {
-                        IsDisplayAddPhBtn(true);
-                    }
-                    closeNewCampaignDialog(section);
-                }
-
+                    //  if (setselectdsection != null) {
+                  //  TemporarySection(section);
+                         selectedSection(section);
+                    
+                        SelectedSectionId = section.sectionId();
+                        if (selectedSection != null) {
+                            IsDisplayAddPhBtn(true);
+                        }
+                        closeNewCampaignDialog(section);
+                },
                 closeNewCampaignDialog = function (section) {
                     
                     var IsArrayChanges = false;
                     PhraseModel = model.PhraseLibrarySaveModel();
                     var SectionList = PhraseModel.Sections;
-              
+                    
                     _.each(Phrases(), function (item) {
                         
                         if (item.hasChanges() && item.isValid() || item.IsDeleted() == true)
                         {
                             PhraseModel.PhrasesList.push(item.convertToServerData(item));
                             IsArrayChanges = true;
+                            
                         }
                     });
                    
-                    if (Phrases().length > IntialLength || IsArrayChanges==true) {
+                    if (IsArrayChanges) {
                         if (PhraseModel.PhrasesList.length > 0) {
                             confirmation.messageText("Do you want to save changes?");
 
@@ -200,7 +204,6 @@
                                              var phrase = new model.Phrase.Create(phrases);
                                              Phrases.push(phrase);
                                          });
-                                         // 
                                          
                                          IntialLength = Phrases().length;
                                          if (IntialLength > 0) {
@@ -245,27 +248,30 @@
                              }
                          },
 
-                         savePhraseLibrary = function (model,section) {
-                             
-                             saveLibrary(model, section);
+                         savePhraseLibrary = function (model,section,flag) {
+                           
+                             saveLibrary(model, section, flag);
 
                          },
                          savePhraseData = function () {
 
                             // closeNewCampaignDialog(selectedSection);
-                             FinalSaveCall(selectedSection);
+                             FinalSaveCall(selectedSection,false);
                          },
-                             saveLibrary = function (PhraseModel,section) {
+                             saveLibrary = function (PhraseModel,section,refreshphrases) {
 
                                  dataService.savePhaseLibrary(
 
                                  PhraseModel, {
                                      success: function (data) {
-                                         
-                                              //   refershPhraseLibraryAfterSave();
+                                         IsSaveChanges = true;
+                                             
                                                  toastr.success("Successfully save.");
-                                                // alert(section.sectionId());
-                                                 getPhraseFields(null, data);
+                                         
+                                                 var setSelectedSection = new model.Section.Create(data);
+                                                 
+                                                 getPhraseFields(null, setSelectedSection.sectionId());
+                                               
                                              },
                                              error: function (response) {
                                                  toastr.error("Failed to Save . Error: " + response);
