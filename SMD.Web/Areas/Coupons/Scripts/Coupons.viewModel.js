@@ -1541,8 +1541,23 @@ define("Coupons/Coupons.viewModel",
 
                  },
                  updateCouponCategories = function () {
-                   
+                    
                  },
+                locationChanged = function (item) {
+                    var matchedItem = ko.utils.arrayFirst(branchLocations(), function (arrayitem) {
+
+                        return arrayitem.BranchId == item.LocationBranchId();
+                    });
+                    console.log(matchedItem);
+                    item.LocationLine1(matchedItem.BranchAddressLine1);
+                    item.LocationLine2(matchedItem.BranchAddressLine2);
+                    item.LocationCity(matchedItem.BranchCity);
+                    item.LocationState(matchedItem.BranchState);
+                    item.LocationZipCode(matchedItem.BranchZipCode);
+                    item.LocationLAT(matchedItem.BranchLocationLat);
+                    item.LocationLON(matchedItem.BranchLocationLong);//
+                    item.LocationPhone(matchedItem.BranchPhone);
+                },
                 // Initialize the view model
                 initialize = function (specifiedView) {
                     view = specifiedView;
@@ -1698,7 +1713,8 @@ define("Coupons/Coupons.viewModel",
                     backScreen: backScreen,
                     CurrPage: CurrPage,
                     MaxPage: MaxPage,
-                    updateCouponCategories: updateCouponCategories
+                    updateCouponCategories: updateCouponCategories,
+                    locationChanged: locationChanged
                 };
             })()
         };
