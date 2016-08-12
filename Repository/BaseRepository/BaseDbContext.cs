@@ -483,13 +483,10 @@ namespace SMD.Repository.BaseRepository
                new ObjectParameter("companyId", typeof(int));
 
 
-            var fromRowParameter = fromRow != 0 ?
-             new ObjectParameter("fromRow", fromRow) :
-             new ObjectParameter("fromRow", typeof(int));
+            var fromRowParameter = new ObjectParameter("fromRoww", fromRow);
 
-            var toRowParameter = toRow  != 0?
-                new ObjectParameter("toRow", toRow) :
-                new ObjectParameter("toRow", typeof(int));
+
+            var toRowParameter = new ObjectParameter("toRow", toRow);
 
 
             var adminModeParameter = new ObjectParameter("adminMode", adminMode);

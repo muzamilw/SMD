@@ -41,7 +41,7 @@ else
 
                                             <th class="col-sm-3" style="vertical-align:top"><span>Campaign Name</span></th>
                                             <th class="col-sm-1" style="vertical-align:top"><span>Type</span></th>
-                                            <th class="col-sm-1" style="vertical-align:top"><span>Locations</span></th>
+                                            <th class="col-sm-2" style="vertical-align:top"><span>Locations</span></th>
 
                                             <th class="col-sm-1" style="vertical-align:top"><span>PPCV</span></th>
 
@@ -157,7 +157,7 @@ else
                 <span class="">Game</span>
                 <!-- /ko -->
 </td>
-        <td class="col-sm-1">
+        <td class="col-sm-2">
             <span data-bind="text: Locationss"></span>
 </td>
         <td class="col-sm-1">
@@ -165,9 +165,9 @@ else
 </td>
 <td class="col-sm-2">
             
-    <span data-bind="text: viewCountToday"></span>
-    <span data-bind="text: viewCountYesterday"></span>
-    <span data-bind="text: viewCountAllTime"></span>
+    <span data-bind="text: viewCountToday" style="display:inline-block;width:35px;"></span>
+    <span data-bind="text: viewCountYesterday" style="display:inline-block;width:60px;"></span>
+    <span data-bind="text: viewCountAllTime" style="display:inline-block;width:47px;"></span>
 
     
             
@@ -288,8 +288,8 @@ else
                 </div>
 
                 <div class="col-sm-3" style="float:left;">
-                    <select class="form-control" style="float:right;height:36px;">
-                        <option value="0">All Value</option>
+                    <select id="ddlStatus" class="form-control" style="float:right;height:36px;">
+                        <option value="0">All Statuses</option>
 
                     </select>
                 </div>
