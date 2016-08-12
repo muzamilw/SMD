@@ -26,7 +26,9 @@ namespace SMD.Models.DomainModels
         public Nullable<int> Status { get; set; }
         public Nullable<System.DateTime> ApprovalDateTime { get; set; }
         public Nullable<double> ClickRate { get; set; }
-
+        public Nullable<System.DateTime> CreatedDateTime { get; set; }
         public Nullable<int> TotalItems { get; set; }
+
+        public Nullable<int> Type { get; set; }
     }
 }

@@ -7773,3 +7773,94 @@ GO
 ALTER TABLE dbo.AdCampaign SET (LOCK_ESCALATION = TABLE)
 GO
 COMMIT
+
+
+
+USE [SMDDev]
+GO
+/****** Object:  StoredProcedure [dbo].[SearchCoupons]    Script Date: 8/12/2016 11:53:43 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER PROCEDURE [dbo].[SearchCoupons]
+--   EXEC [dbo].[SearchCoupons] 		@categoryId =2,		@type = 1,		@keywords = N'romantic',		@distance = 1,		@Lat = N'1',		@Lon = N'1',		@UserId = N'7e166b59-f848-4290-9d86-96207dcf1227',		@FromRow = 0,		@ToRow = 100
+
+	-- Add the parameters for the stored procedure here
+	@categoryId INT = 1 ,
+	@type as int = 0,
+	@keywords as nvarchar(500),
+	@distance as int = 0,
+	@Lat as nvarchar(50),
+	@Lon as nvarchar(50),
+	@UserId as nvarchar(128) = 0 ,
+	@FromRow int = 0,
+	@ToRow int = 0
+
+AS
+BEGIN
+
+declare @currentDate datetime
+set @currentDate =  getdate()
+
+	select *, COUNT(*) OVER() AS TotalItems
+	from (
+	
+	select vchr.CouponId as CouponId, CouponTitle,
+	
+	
+	CouponImage1,
+	(select 
+	CASE
+		WHEN vchr.LogoUrl is null or vchr.LogoUrl = ''
+		THEN 'http://manage.cash4ads.com/' + c.Logo
+		WHEN vchr.LogoUrl is not null
+		THEN 'http://manage.cash4ads.com/' + vchr.LogoUrl
+	END as AdvertisersLogoPath from company c
+	 where c.CompanyId = vchr.CompanyId) as LogoUrl,
+	Price, Savings,SwapCost, CompanyId, CouponActiveMonth,CouponActiveYear
+	,DATEFROMPARTS(vchr.CouponActiveYear, vchr.CouponActiveMonth,day(EOMONTH ( DATEFROMPARTS(vchr.CouponActiveYear, vchr.CouponActiveMonth,1)))) eod,
+	DATEFROMPARTS(vchr.CouponActiveYear, vchr.CouponActiveMonth,1) strt
+
+	
+	from Coupon vchr
+	inner join CouponCategories cc on cc.CouponId = vchr.CouponId and cc.CategoryId = @categoryId
+	--left outer join [dbo].[UserPurchasedCoupon] upc on upc.couponID = vchr.couponid
+	where (
+		
+		--and
+		--(adcampaign.EndDateTime >= @currentDate and @currentDate >= adcampaign.StartDateTime)
+		
+		(vchr.Approved = 1) and vchr.status = 3
+
+		
+		and 
+		(--unlimited listing 
+		( CouponListingMode = 2 and @currentDate between DATEFROMPARTS(vchr.CouponActiveYear, vchr.CouponActiveMonth,1) and DATEFROMPARTS(vchr.CouponActiveYear, vchr.CouponActiveMonth,day(EOMONTH ( DATEFROMPARTS(vchr.CouponActiveYear, vchr.CouponActiveMonth,1))))
+			and  vchr.CouponQtyPerUser > (select count(*) from [dbo].[UserPurchasedCoupon] upc where upc.couponID = vchr.couponid and upc.userId = @UserId) 
+		)
+			--
+		or
+		--free more
+		(
+			CouponListingMode = 1 and @currentDate  between DATEFROMPARTS(vchr.CouponActiveYear, vchr.CouponActiveMonth,1) and DATEFROMPARTS(vchr.CouponActiveYear, vchr.CouponActiveMonth,5))
+			and vchr.CouponIssuedCount < 10
+		)
+		and -- keyword search
+		(
+			@keywords IS NULL OR (vchr.SearchKeywords like '%'+@keywords+'%' or vchr.CouponTitle like '%'+@keywords+'%' or LocationTitle like '%'+@keywords+'%' or LocationLine1 like '%'+@keywords+'%')
+		)
+		
+
+		
+		)
+		group by vchr.CouponId, CouponTitle,vchr.CouponImage1,LogoUrl,Price, Savings,SwapCost,CompanyId,CouponActiveMonth,CouponActiveYear
+		)as items
+	order by Savings
+	OFFSET @FromRow ROWS
+	FETCH NEXT @TORow ROWS ONLY
+		
+END
+
+

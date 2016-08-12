@@ -123,7 +123,7 @@ namespace DomainModelProject
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SearchCoupons_Result>("SearchCoupons", categoryIdParameter, typeParameter, keywordsParameter, distanceParameter, latParameter, lonParameter, userIdParameter, fromRowParameter, toRowParameter);
         }
     
-        public virtual ObjectResult<SearchCampaigns_Result> SearchCampaigns(Nullable<int> status, string keyword, Nullable<int> comanyId, Nullable<int> fromRow, Nullable<int> toRow, Nullable<bool> adminMode)
+        public virtual ObjectResult<SearchCampaigns_Result> SearchCampaigns(Nullable<int> status, string keyword, Nullable<int> companyId, Nullable<int> fromRow, Nullable<int> toRow, Nullable<bool> adminMode)
         {
             var statusParameter = status.HasValue ?
                 new ObjectParameter("Status", status) :
@@ -133,9 +133,9 @@ namespace DomainModelProject
                 new ObjectParameter("keyword", keyword) :
                 new ObjectParameter("keyword", typeof(string));
     
-            var comanyIdParameter = comanyId.HasValue ?
-                new ObjectParameter("comanyId", comanyId) :
-                new ObjectParameter("comanyId", typeof(int));
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
     
             var fromRowParameter = fromRow.HasValue ?
                 new ObjectParameter("fromRow", fromRow) :
@@ -149,7 +149,7 @@ namespace DomainModelProject
                 new ObjectParameter("adminMode", adminMode) :
                 new ObjectParameter("adminMode", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SearchCampaigns_Result>("SearchCampaigns", statusParameter, keywordParameter, comanyIdParameter, fromRowParameter, toRowParameter, adminModeParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SearchCampaigns_Result>("SearchCampaigns", statusParameter, keywordParameter, companyIdParameter, fromRowParameter, toRowParameter, adminModeParameter);
         }
     }
 }

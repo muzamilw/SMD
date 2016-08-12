@@ -95,6 +95,17 @@ namespace SMD.MIS.Areas.Api.Models
         public bool IsSavedCoupon { get; set; }
         public int DeliveryDays { get; set; }
         public int ChannelType { get; set; }
+
+
+        public Nullable<int> viewCountToday { get; set; }
+        public Nullable<int> viewCountYesterday { get; set; }
+        public Nullable<int> viewCountAllTime { get; set; }
+        public string Locationss { get; set; }
+        public Nullable<double> MaxDailyBudget { get; set; }
+
+    
+
+
     }
     public class Coupon
     {

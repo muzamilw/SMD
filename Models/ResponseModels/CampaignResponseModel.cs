@@ -25,4 +25,20 @@ namespace SMD.Models.ResponseModels
         public int TotalCount { get; set; }
         #endregion
     }
+
+
+    public class CampaignSearchResponseModel
+    {
+        #region Public
+        /// <summary>
+        ///  Profile Questions List
+        /// </summary>
+        public IEnumerable<SearchCampaigns_Result> Campaign { get; set; }
+
+        /// <summary>
+        /// Total Count of  Profile Questions
+        /// </summary>
+        public int TotalCount { get; set; }
+        #endregion
+    }
 }

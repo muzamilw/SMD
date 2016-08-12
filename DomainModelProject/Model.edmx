@@ -1940,7 +1940,7 @@
         <Function Name="SearchCampaigns" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Status" Type="int" Mode="In" />
           <Parameter Name="keyword" Type="nvarchar" Mode="In" />
-          <Parameter Name="comanyId" Type="int" Mode="In" />
+          <Parameter Name="companyId" Type="int" Mode="In" />
           <Parameter Name="fromRow" Type="int" Mode="In" />
           <Parameter Name="toRow" Type="int" Mode="In" />
           <Parameter Name="adminMode" Type="bit" Mode="In" />
@@ -4682,7 +4682,7 @@
           <FunctionImport Name="SearchCampaigns" ReturnType="Collection(SMDDevModel.SearchCampaigns_Result)">
             <Parameter Name="Status" Mode="In" Type="Int32" />
             <Parameter Name="keyword" Mode="In" Type="String" />
-            <Parameter Name="comanyId" Mode="In" Type="Int32" />
+            <Parameter Name="companyId" Mode="In" Type="Int32" />
             <Parameter Name="fromRow" Mode="In" Type="Int32" />
             <Parameter Name="toRow" Mode="In" Type="Int32" />
             <Parameter Name="adminMode" Mode="In" Type="Boolean" />

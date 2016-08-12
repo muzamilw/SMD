@@ -40,6 +40,7 @@ else
                                         <tr style="height:25px;">
 
                                             <th class="col-sm-3" style="vertical-align:top"><span>Campaign Name</span></th>
+                                            <th class="col-sm-1" style="vertical-align:top"><span>Type</span></th>
                                             <th class="col-sm-1" style="vertical-align:top"><span>Locations</span></th>
 
                                             <th class="col-sm-1" style="vertical-align:top"><span>PPCV</span></th>
@@ -127,7 +128,9 @@ else
     <tr style="cursor: pointer">
 
         <td class="col-sm-3">
-            <a href="#" class="store-user-link" data-bind="text: CampaignName,click:$root.onEditCampaign"></a>
+            <a href="#" class="store-user-link" data-bind="text: CampaignName() ,click:$root.onEditCampaign"></a>
+            <br />
+            <span style="color:darkgray;font-size:11px;" data-bind="text:  ApprovalDateTime() ? 'Start Date : ' + ApprovalDateTime() : 'Not Started'"></span>
 
         </td>
 
@@ -139,83 +142,98 @@ else
                 <span class="">&nbsp;</span>
             </td>
             <td class="col-sm-1"><span class="" data-bind="text: MaxBudget"></span></td>*@
-        <td class="col-sm-2">
-  
-            <!-- ko if: Type() == 1-->
-            <span class="">Video</span>
-            <!-- /ko -->
-            <!-- ko if: Type() == 2-->
-            <span class="">Link</span>
-            <!-- /ko -->
-            <!-- ko if: Type() == 3-->
-            <span class="">Upload Image</span>
-            <!-- /ko -->
-            <!-- ko if: Type() == 4-->
-            <span class="">Game</span>
-            <!-- /ko -->
+        <td class="col-sm-1">
+          
+                <!-- ko if: Type() == 1-->
+                <span class="">Video</span>
+                <!-- /ko -->
+                <!-- ko if: Type() == 2-->
+                <span class="">Link</span>
+                <!-- /ko -->
+                <!-- ko if: Type() == 3-->
+                <span class="">Upload Image</span>
+                <!-- /ko -->
+                <!-- ko if: Type() == 4-->
+                <span class="">Game</span>
+                <!-- /ko -->
+</td>
+        <td class="col-sm-1">
+            <span data-bind="text: Locationss"></span>
+</td>
+        <td class="col-sm-1">
+            <span data-bind="text: ClickRate().toFixed(2)"></span>
+</td>
+<td class="col-sm-2">
+            
+    <span data-bind="text: viewCountToday"></span>
+    <span data-bind="text: viewCountYesterday"></span>
+    <span data-bind="text: viewCountAllTime"></span>
+
+    
+            
         </td>
-        <td class="col-sm-2">
-            <span class="" data-bind=""></span>
-            <span data-bind="visible:!$root.isDisplayCouponsAds(),text: AdViews"></span>
-            <span data-bind="visible:$root.isDisplayCouponsAds(),text: CouponTakenCount"></span>
+        <td class="col-sm-1">
+            <span data-bind="text: MaxDailyBudget"></span>
         </td>
+        <td class="col-sm-1"><span class="@userClasses" data-bind="text: AmountSpent() ? AmountSpent().toFixed(2) : 0"></span></td>
         <td class="col-sm-2">
             <!-- ko if: Status() == 1-->
-            <div class="text-left statusbg" style="background:#6D6EFA;    width: 47px;">
+            <div class="text-left statusbg" style="background:#6D6EFA;    width: 125px;">
                 <span data-bind="text: StatusValue">
                 </span>
             </div>
             <!-- /ko -->
             <!-- ko if: Status() == 2-->
-            <div class="text-left statusbg" style="background:#fc0;">
+            <div class="text-left statusbg" style="background:#fc0;width: 125px">
                 <span data-bind="text: StatusValue">
                 </span>
             </div>
             <!-- /ko -->
             <!-- ko if:  Status() == 3-->
-            <div class="text-left statusbg" style="background:#37c675;    width: 47px;">
+            <div class="text-left statusbg" style="background:#37c675;    width: 125px;">
                 <span data-bind="text: StatusValue">
                 </span>
             </div>
             <!-- /ko -->
             <!-- ko if: Status() == 4-->
-            <div class="text-left statusbg" style="background:#fd008e;">
+            <div class="text-left statusbg" style="background:#fd008e;width: 125px">
                 <span data-bind="text: StatusValue">
                 </span>
             </div>
             <!-- /ko -->
             <!-- ko if: Status() == 5-->
-            <div class="text-left statusbg" style="background:#c8e392;">
+            <div class="text-left statusbg" style="background:#c8e392;width: 125px">
                 <span data-bind="text: StatusValue">
                 </span>
             </div>
             <!-- /ko -->
             <!-- ko if: Status() == 6-->
-            <div class="text-left statusbg" style="background:red;">
+            <div class="text-left statusbg" style="background:red;width: 125px">
                 <span data-bind="text: StatusValue">
                 </span>
             </div>
             <!-- /ko -->
             <!-- ko if: Status() == 7-->
-            <div class="text-left statusbg" style="background:red;">
+            <div class="text-left statusbg" style="background:red;width: 125px">
                 <span data-bind="text: StatusValue">
                 </span>
             </div>
             <!-- /ko -->
             <!-- ko if: Status() == 8-->
-            <div class="text-left statusbg" style="background:#fc0;">
+            <div class="text-left statusbg" style="background:#fc0;width: 125px">
                 <span data-bind="text: StatusValue">
                 </span>
             </div>
             <!-- /ko -->
             <!-- ko if: Status() == 9-->
-            <div class="text-left statusbg" style="background:red;">
+            <div class="text-left statusbg" style="background:red;width: 125px">
                 <span data-bind="text: StatusValue">
                 </span>
             </div>
             <!-- /ko -->
+            <span class="@adminClasses" data-bind="text: CreatedBy"></span>
         </td>
-        <td class="col-sm-1"><span class="@userClasses" data-bind="text: AmountSpent"></span><span class="@adminClasses" data-bind="text: CreatedBy"></span></td>
+        
 
 
         <td class="col-sm-2">

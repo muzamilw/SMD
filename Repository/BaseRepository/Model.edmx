@@ -1891,7 +1891,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
         <Function Name="SearchCampaigns" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Status" Type="int" Mode="In" />
           <Parameter Name="keyword" Type="nvarchar" Mode="In" />
-          <Parameter Name="comanyId" Type="int" Mode="In" />
+          <Parameter Name="companyId" Type="int" Mode="In" />
           <Parameter Name="fromRow" Type="int" Mode="In" />
           <Parameter Name="toRow" Type="int" Mode="In" />
           <Parameter Name="adminMode" Type="bit" Mode="In" />
@@ -2805,7 +2805,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <FunctionImport Name="SearchCampaigns" ReturnType="Collection(DomainModels.SearchCampaigns_Result)">
             <Parameter Name="Status" Mode="In" Type="Int32" />
             <Parameter Name="keyword" Mode="In" Type="String" />
-            <Parameter Name="comanyId" Mode="In" Type="Int32" />
+            <Parameter Name="companyId" Mode="In" Type="Int32" />
             <Parameter Name="fromRow" Mode="In" Type="Int32" />
             <Parameter Name="toRow" Mode="In" Type="Int32" />
             <Parameter Name="adminMode" Mode="In" Type="Boolean" />
@@ -5031,6 +5031,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Property Type="Int32" Name="Status" Nullable="true" />
           <Property Type="DateTime" Name="ApprovalDateTime" Nullable="true" Precision="23" />
           <Property Type="Double" Name="ClickRate" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedDateTime" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="TotalItems" Nullable="true" />
+          <Property Type="Int32" Name="Type" Nullable="true" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -6165,6 +6168,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="ApprovalDateTime" ColumnName="ApprovalDateTime" />
                 <ScalarProperty Name="ClickRate" ColumnName="ClickRate" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="TotalItems" ColumnName="TotalItems" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

@@ -110,6 +110,10 @@ namespace SMD.Models.DomainModels
     public string VoucherLocationLON { get; set; }
 
 
+    public double? MaxDailyBudget { get; set; }
+        
+
+
 
 
 

@@ -105,7 +105,10 @@ define("ads/ads.viewModel",
                     randonNumber = ko.observable("?r=0"),
                     vouchers = ko.observableArray(),
                     numberOFCouponsToGenerate = ko.observable(0),
-                    previewScreenNumber = ko.observable(1);
+                    previewScreenNumber = ko.observable(1)
+
+
+                ;
                 CurrPage = ko.observable(9);
                 MaxPage = ko.observable(12);
                 getCampaignBaseContent = function () {
@@ -225,7 +228,7 @@ define("ads/ads.viewModel",
                 } else if (item.Status == 6) {
                     item.StatusValue = "Approval Rejected"
                 } else if (item.Status == 7) {
-                    item.StatusValue = ("Terminated by user");
+                    item.StatusValue = ("Terminated");
                 } else if (item.Status == 9) {
                     item.StatusValue = ("Completed");
                 } else if (item.Status == 8) {
