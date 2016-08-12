@@ -7864,3 +7864,91 @@ set @currentDate =  getdate()
 END
 
 
+
+
+
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[SearchCampaigns]    Script Date: 8/12/2016 11:28:51 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Mz
+-- Create date: 8 dec 2015
+-- Description:	
+-- =============================================
+create PROCEDURE [dbo].[SearchCampaigns] 
+--  exec [SearchCampaigns] 0,null,0,0,10,0
+	-- Add the parameters for the stored procedure here
+	@Status int,
+	@keyword nvarchar(100),
+	@companyId int,
+	@fromRoww int,
+	@toRow int,
+	@adminMode bit
+	
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+	--select @toRow, @fromRow
+	--return
+
+
+	select *, COUNT(*) OVER() AS TotalItems
+	from (
+
+    -- Insert statements for procedure here
+	select  a.CampaignID, a.CampaignName,
+	(select count (*) from adcampaignresponse cr where cr.campaignid = a.campaignid and  cast(CreatedDateTime as DATE)  = cast (GETDATE() as DATE) ) viewCountToday,
+	(select count (*) from adcampaignresponse cr where cr.campaignid = a.campaignid and cast(CreatedDateTime as date) = cast(getdate()-1 as date)) viewCountYesterday,
+	(select count (*) from adcampaignresponse cr where cr.campaignid = a.campaignid) viewCountAllTime,
+	left(( select
+			stuff((
+					select ', ' + c1.CountryName, ', ' + ci.CityName
+					from [AdCampaignTargetLocation] l1 
+					left outer join country c1 on l1.countryid = c1.countryid
+					left outer join city ci on l1.CityID = ci.CityID
+					where l1.campaignid = l.campaignid
+					order by c1.CountryName
+					for xml path('')
+				),1,1,'') as name_csv
+			from [AdCampaignTargetLocation] l 
+			where CampaignID = a.CampaignID
+			group by l.campaignid  
+		),30) +'..' Locationss,
+		
+		 StartDateTime, MaxBudget, MaxDailyBudget,AmountSpent,
+		Status, ApprovalDateTime, ClickRate, a.CreatedDateTime, a.Type, a.priority
+		
+		
+		
+	
+	 from AdCampaign a
+	 
+	--inner join AspNetUsers u on 
+	
+	
+	--left outer join AdCampaignResponse aResp on a.CampaignID = aResp.CampaignID 
+	where 
+	(
+		(@keyword is null or (a.CampaignName like '%'+ @keyword +'%' or a.DisplayTitle like '%'+ @keyword +'%'  ))
+		and 
+		( @Status = 0 or a.[status] = @Status)
+
+	)
+	
+
+
+	group by CampaignID, CampaignName,StartDateTime,MaxBudget,MaxDailyBudget,AmountSpent,Status, ApprovalDateTime, ClickRate, a.CreatedDateTime, a.Type, a.priority
+		)as items
+	order by priority desc
+	OFFSET @fromRoww ROWS
+	FETCH NEXT @toRow ROWS ONLY
+	
+END
