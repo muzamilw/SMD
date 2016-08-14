@@ -63,7 +63,7 @@
                         <p style="box-shadow: inset 0 0px 0 white, inset 0 -1px 0 white;margin-bottom:3px;display:inline-block">
                             Dashboard for
                         </p>
-                        <p style="font-size:38px;">@CompanyName</p>
+                        <p style="font-size:33px;">@CompanyName</p>
                     </div>
                 </div>
                 <div class="nav-no-collapse navbar-left pull-left hidden-sm hidden-xs" style="margin-top:23px;">
@@ -91,7 +91,7 @@
 
                     <ul class="nav navbar-nav pull-right">
                         <!-- MPC Admin Menu-->
-                        <li class="dropdown profile-dropdown @classesMenu">
+                        <li class="dropdown profile-dropdown @classesMenu" style="display:none;">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <span class="hidden-xs"> Admin Options  </span> <b class="caret"></b>
                                 <div class="user-positioner" style="position:fixed;">
@@ -125,24 +125,40 @@
                                 </div>
                             </a>
                             <ul class="dropdown-menu loginMenu">
-                                <li><a href="">Ad Campaigns</a></li>
+                                @*<li><a href="">Ad Campaigns</a></li>
                                 <li class="inlineMenuItem" style="display:none;"><a href="~/Ads/Ads">&nbsp;&nbsp;Create Ad Campaigns</a></li>
                                 <li class="inlineMenuItem"><a href="~/Ads/Ads">&nbsp;&nbsp;View Ad Campaigns</a></li>
                                 <li><a href="">Survey Slides</a></li>
                                 <li class="inlineMenuItem" style="display:none;"><a href="~/survey">&nbsp;&nbsp;Create Survey Slides</a></li>
-                                <li class="inlineMenuItem"><a href="~/survey">&nbsp;&nbsp;View Survey Slides</a></li>
+                                <li class="inlineMenuItem"><a href="~/survey">&nbsp;&nbsp;View Survey Slides</a></li>*@
                                 <li><a href="">Billing</a></li>
                                 <li class="inlineMenuItem"><a href="~/Billing/Manage/Invoice">&nbsp;&nbsp;View Statements </a></li>
                                 <li class="inlineMenuItem"><a href="">&nbsp;&nbsp;Payment Methods</a></li>
                                 <li class="inlineMenuItem"><a href="">&nbsp;&nbsp;Delete My Account</a></li>
-                                <li class=""><a href="~/user/ManageUser/ManageUsers">Manage users </a></li>
+                                @*<li class=""><a href="~/user/ManageUser/ManageUsers">Invite users </a></li>*@
                                 <li><a href="~/User/ManageUser/Index">Edit my marketing profile/logo</a></li>
                                 <li><a href="~/">Analytics</a></li>
                                 <li><a href="~/Account/LogOff"><i class="fa fa-power-off"></i>Logout</a></li>
                             </ul>
                         </li>
+                        <li class="dropdown profile-dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <span class="hidden-xs">
+                                    <i class="fa fa-question"></i>
+                                </span> <b class="caret"></b>
+                              
+                            </a>
+                            <ul class="dropdown-menu loginMenu">
+                                <li><a href="">Startup Guide</a></li>
+                                <li><a href="">Training Videos</a></li>
+                                <li><a href="">Help Center</a></li>
+                                <li><a href="">Contact Us</a></li>
+                            </ul>
+                        </li>
+
+                   
                         <li class="hidden-xxs">
-                            <a class="btn" href="~/Account/LogOff">
+                            <a class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="fa fa-power-off"></i>
                             </a>
                         </li>
@@ -164,21 +180,16 @@
                     <div class="row">
                         <div class="col-sm-5 pull-left">
                             <a class="btn  btn-default btn-gray" style="float:left; width:33%;height:66px;margin-right:15px; white-space:normal;" id="btncampaigns" href="/Ads/Ads">Video Campaigns</a>
-                            <a class="btn  btn-default btn-gray" style="float:left;width:34%;height:66px;white-space:normal;" href="/Coupons/Coupons">Coupon Promotions</a>
+                            <a class="btn  btn-default btn-gray" style="float:left;width:34%;height:66px;white-space:normal;" href="/Coupons/Coupons" id="btnCoupons">Coupon Promotions</a>
 
 
                         </div>
                         <div class="col-sm-7 pull-right text-right" id="branchBinding">
-                            <div style="font-size:11px;width:120px;display:inline-block;height:60px;vertical-align:middle;text-align:left">
-                                <a href="#">Startup Guide</a><br />
-                                <a href="#">Training Videos</a><br />
-                                <a href="#">Help Center</a><br />
-                                <a href="#">Contact Us</a>
-                            </div>
-
-                            <a class="btn btn-default btn-gray" data-bind="click:showBranchDialoge" style="" href="#">Branch Locations</a>
-                            <a class="btn btn-default btn-gray" style="" href="/Coupons/Coupons">Image Library</a>
-                            <a class="btn btn-default btn-gray" data-bind="click:showphraseLibraryDialog">Phrase Library</a>
+                          
+                            <a class="btn btn-default btn-gray " style="    width: 100px;" href="~/user/ManageUser/ManageUsers">Invite<br /> Users</a>
+                            <a class="btn btn-default btn-gray btnSmall" data-bind="click:showBranchDialoge" style="    width: 100px;" href="#">Branch Locations</a>
+                            <a class="btn btn-default btn-gray btnSmall" style="    width: 100px;" href="/Coupons/Coupons">Image Library</a>
+                            <a class="btn btn-default btn-gray btnSmall" style="    width: 100px;" data-bind="click:showphraseLibraryDialog">Phrase Library</a>
                         </div>
                     </div>
 

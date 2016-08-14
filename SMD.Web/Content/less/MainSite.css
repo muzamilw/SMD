@@ -962,3 +962,12 @@ div#spinner {
     text-align:center;
     background-image:url(../../Content/Images/Back_Footer_Tab.png);
 }
+.btnSmall {
+    width:110px;
+}
+.rightAlign {
+    float:right;
+}
+.store-user-link{
+    font-weight:bold;
+}

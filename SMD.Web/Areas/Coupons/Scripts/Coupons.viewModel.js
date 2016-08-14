@@ -3,8 +3,8 @@
 */
 define("Coupons/Coupons.viewModel",
     ["jquery", "amplify", "ko", "Coupons/Coupons.dataservice", "Coupons/Coupons.model", "common/pagination", "common/confirmation.viewModel",
-        "common/stripeChargeCustomer.viewModel"],
-    function ($, amplify, ko, dataservice, model, pagination, confirmation, stripeChargeCustomer) {
+        "common/stripeChargeCustomer.viewModel","PhraseLibrary/phraseLibrary.viewModel"],
+    function ($, amplify, ko, dataservice, model, pagination, confirmation, stripeChargeCustomer, phraseLibrary) {
         var ist = window.ist || {};
         ist.Coupons = {
             viewModel: (function () {
@@ -25,6 +25,7 @@ define("Coupons/Coupons.viewModel",
                     myQuizQuestions = ko.observableArray([]),
                     profileAnswerList = ko.observable([]),
                     criteriaCount = ko.observable(0),
+                   
                     isShowSurveyAns = ko.observable(false),
                      // selected location 
                     selectedLocation = ko.observable(),
@@ -36,6 +37,7 @@ define("Coupons/Coupons.viewModel",
                     ageRange = ko.observableArray([]),
                     isNewCriteria = ko.observable(true),
                     isEnableVedioVerificationLink = ko.observable(false),
+                    SelectedTextField = ko.observable(),
                     //caption variablels 
                    
                 //
@@ -102,7 +104,11 @@ define("Coupons/Coupons.viewModel",
                     previewVideoTagUrl = ko.observable(""),
                     randonNumber = ko.observable("?r=0"),
                     vouchers = ko.observableArray(),
+                    selectedJobDescription = ko.observableArray(),
                     numberOFCouponsToGenerate = ko.observable(0),
+                    numberOFCouponsToGenerate = ko.observable(0),
+                    TempSelectedObj = ko.observable(),
+                    
                     previewScreenNumber = ko.observable(1);
                 CurrPage = ko.observable(9);
                 MaxPage = ko.observable(12);
@@ -153,7 +159,7 @@ define("Coupons/Coupons.viewModel",
                             }
                         });
                 },
-
+               
                 getAdCampaignGridContent = function () {
 
                     dataservice.getCampaignData({
@@ -252,7 +258,7 @@ define("Coupons/Coupons.viewModel",
                     showMainMenu();
                         });
                         confirmation.afterCancel(function () {
-
+                            
                             couponModel();
                             selectedCriteria();
                             isEditorVisible(false);
@@ -264,6 +270,8 @@ define("Coupons/Coupons.viewModel",
                                 isListVisible(false);
                                 isWelcomeScreenVisible(true);
                             }
+                            
+                            phraseLibrary.RefreshPhraseLibrary();
                             //show the main menu;
                             showMainMenu();
                         });
@@ -1555,9 +1563,90 @@ define("Coupons/Coupons.viewModel",
                     item.LocationState(matchedItem.BranchState);
                     item.LocationZipCode(matchedItem.BranchZipCode);
                     item.LocationLAT(matchedItem.BranchLocationLat);
-                    item.LocationLON(matchedItem.BranchLocationLong);//
+                    item.LocationLON(matchedItem.BranchLocationLong);
                     item.LocationPhone(matchedItem.BranchPhone);
                 },
+                 openPhraseLibrary = function () {
+                     
+                      phraseLibrary.PhraseLibraryPopUpClose();
+                      phraseLibrary.isOpenFromPhraseLibrary(false);
+                      phraseLibrary.show(function (phrase) {
+                          phraseLibrary.isOpenFromPhraseLibrary(false);
+                          
+                          if (selectedJobDescription() === 'highlightedfield1')
+                             
+                              TempSelectedObj().HighlightLine1(phrase);
+                          else if (selectedJobDescription() === 'highlightedfield2')
+                              
+                              TempSelectedObj().HighlightLine2(phrase);
+                          else if (selectedJobDescription() === 'highlightedfield3')
+                             
+                              TempSelectedObj().HighlightLine3(phrase);
+                          else if (selectedJobDescription() === 'highlightedfield4')
+                             
+                              TempSelectedObj().HighlightLine4(phrase);
+                          else if (selectedJobDescription() === 'highlightedfield5')
+                         
+                              TempSelectedObj().HighlightLine5(phrase);
+
+                          else if (selectedJobDescription() === 'txtCampaignDisplayName')
+
+                              TempSelectedObj().CouponTitle(phrase);
+                          //fineprint
+                          else if (selectedJobDescription() === 'fineprint1')
+
+                              TempSelectedObj().FinePrintLine1(phrase);
+
+                          else if (selectedJobDescription() === 'fineprint2')
+
+                              TempSelectedObj().FinePrintLine2(phrase);
+                          else if (selectedJobDescription() === 'fineprint3')
+
+                              TempSelectedObj().FinePrintLine3(phrase);
+                          else if (selectedJobDescription() === 'fineprint4')
+
+                              TempSelectedObj().FinePrintLine4(phrase);
+
+                          else if (selectedJobDescription() === 'fineprint5')
+
+                              TempSelectedObj().FinePrintLine5(phrase);
+
+                          ////reedline
+                          else if (selectedJobDescription() === 'redeemline1')
+
+                              TempSelectedObj().HowToRedeemLine1(phrase);
+                          else if (selectedJobDescription() === 'redeemline2')
+
+                              TempSelectedObj().HowToRedeemLine2(phrase);
+                          else if (selectedJobDescription() === 'redeemline3')
+
+                              TempSelectedObj().HowToRedeemLine3(phrase);
+                          else if (selectedJobDescription() === 'redeemline4')
+
+                              TempSelectedObj().HowToRedeemLine4(phrase);
+                          else if (selectedJobDescription() === 'redeemline5')
+
+                              //locations
+                              TempSelectedObj().HowToRedeemLine5(phrase);
+
+                          else if (selectedJobDescription() === 'geolocation')
+                             
+                              TempSelectedObj().LocationLAT(phrase);
+                          else if (selectedJobDescription() === 'geolocationlong')
+
+                              TempSelectedObj().LocationLON(phrase);
+                     });
+                 },
+                selectedField = function (Fieldvalue,event)
+                {
+
+                    
+                    SelectedTextField(Fieldvalue);
+                },
+                  selectJobDescription = function (jobDescription, e) {
+                      selectedJobDescription(e.currentTarget.id);
+                      TempSelectedObj(jobDescription);
+                  },
                 // Initialize the view model
                 initialize = function (specifiedView) {
                     view = specifiedView;
@@ -1714,7 +1803,13 @@ define("Coupons/Coupons.viewModel",
                     CurrPage: CurrPage,
                     MaxPage: MaxPage,
                     updateCouponCategories: updateCouponCategories,
-                    locationChanged: locationChanged
+                    locationChanged: locationChanged,
+                    openPhraseLibrary: openPhraseLibrary,
+                    SelectedTextField: SelectedTextField,
+                    selectedField: selectedField,
+                    TempSelectedObj: TempSelectedObj,
+                    selectedJobDescription: selectedJobDescription,
+                    selectJobDescription: selectJobDescription
                 };
             })()
         };

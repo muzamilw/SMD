@@ -11,6 +11,7 @@
                       showBranchDialoge = function () {
                           view.showBranchCategoryDialog();
                       },
+                      
                        
                 sections = ko.observableArray([]),
                
@@ -40,7 +41,16 @@
                     sections.removeAll();
                     IsDisplayAddPhBtn(false);
                     getAllSections();
+                    IsPharsesAvailiable(false);
                 },
+                RefreshPhraseLibrary = function () {
+                    Phrases.removeAll();
+                    sections.removeAll();
+                    IsDisplayAddPhBtn(false);
+                    IsPharsesAvailiable(false);
+                    isOpenFromPhraseLibrary(true)
+                }
+                ,
                   templateToUse = function () {
 
                       if (isOpenFromPhraseLibrary()) {
@@ -59,15 +69,15 @@
                          Phrases.push(phrase);
                  },
                FinalSaveCall = function (section,flag) {
-
+                   debugger;
                    var IsArrayChanges = false;
                    PhraseModel = model.PhraseLibrarySaveModel();
                    var SectionList = PhraseModel.Sections;
 
                    _.each(Phrases(), function (item) {
-
+                      // alert(item.phraseText() + '' + item.isValid() + 'has changes' + item.hasChanges());
                        if (item.hasChanges() && item.isValid() || item.IsDeleted() == true) {
-                          // alert(item.phraseText() + '' + item.isValid());
+                           
                            PhraseModel.PhrasesList.push(item.convertToServerData(item));
                            IsArrayChanges = true;
                        }
@@ -79,17 +89,18 @@
                                savePhraseLibrary(PhraseModel,section,flag);
                        }
                        else {
+                           selectedSection(section);
                            BindSectionFields(section);
                        }
                    }
 
                    else {
-
+                       selectedSection(section);
                        BindSectionFields(section);
                    }
 
                    confirmation.afterCancel(function () {
-
+                       selectedSection(section);
                        BindSectionFields(section);
 
                    });
@@ -103,11 +114,13 @@
                        TemporarySecEvent(event);
                    
                         SelectedSectionId = section.sectionId();
-                        if (selectedSection != null) {
-                            IsDisplayAddPhBtn(true);
-                        }
+                        //if (SelectedSectionId>0) {
+                        //    IsDisplayAddPhBtn(true);
+                        //}
                         closeNewCampaignDialog(section,event);
                 },
+
+
                 SetSelectedIndex = function (event)
                 {
 
@@ -148,12 +161,14 @@
                             confirmation.show();
                         }
                         else {
+
                             selectedSection(section);
                             BindSectionFields(section);
                         }
                     }
 
                     else {
+                        
                         selectedSection(section);
                         BindSectionFields(section);
                     }
@@ -182,13 +197,31 @@
                                 }
                             });
                         },
-                        deletePhrase = function (phrase) {
+                        selectPhrase = function (phrase) {
+                          //  alert(phrase.phraseText());
+                          //  SelectPhraseforcustomUpdate(phrase.phraseText());
+                            if (afterSelectPhrase && typeof afterSelectPhrase === "function") {
+                                //if (phrase.phraseId() === undefined || phrase.phraseId() === 0) {
+                                //    toastr.error("Please First save the phrase.");
+                                //    //phrase.isPhraseChecked(false);
+                                //} else {
+                                //    afterSelectPhrase(phrase.phraseText());
+                                //    afterSelectPhrase = null;
+                                //    view.hidePhraseLibraryDialog();
+                                //}
+                               // savePhraseLibrary(null, true);
 
+                                afterSelectPhrase(phrase.phraseText());
+                                afterSelectPhrase = null;
+                                view.HidephraseLibraryDialog();
+                            }
+                        },
+                        deletePhrase = function (phrase) {
 
                             confirmation.messageText("Do you want to delete phrase?");
 
                             confirmation.afterProceed(function () {
-
+                                
                                 phrase.IsDeleted(true);
 
 
@@ -207,6 +240,22 @@
                            sections.removeAll();
                           // window.location.reload();
                        },
+                         show = function (afterSelectPhraseCallback) {
+                             //old menu collapse
+                             //if (selectedSection() !== undefined) {
+                             //    selectedSection().isExpanded(false);
+                             //}
+                             selectedSection(new model.Section());
+                             view.showphraseLibraryDialog();
+                             //if (sections().length === 0) {
+                             //    getAllSections();
+                             //}
+                             //else {
+                             //    selectDefaultSectionForProduct();
+                             //}
+                             getAllSections();
+                             afterSelectPhrase = afterSelectPhraseCallback;
+                         },
                          getPhraseFields = function (section, SectionID) {
                             
                              //IsDisplayAddPhraseBtn(true);
@@ -229,6 +278,8 @@
                                          else {
                                              IsPharsesAvailiable(true);
                                          }
+                                         
+                                         IsDisplayAddPhBtn(true);
                                      },
                                      error: function (response) {
                                          toastr.error("Failed to load Phrase Fileds . Error: ");
@@ -236,6 +287,7 @@
                                  });
                              }
                              else {
+                                 
                                  dataService.getPhraseBySectionID({
                                      PhraseID: section.sectionId(),
                                  }, {
@@ -255,6 +307,7 @@
                                              IsPharsesAvailiable(true);
                                          }
                                               
+                                         IsDisplayAddPhBtn(true);
                                          
                                      },
                                      error: function (response) {
@@ -338,7 +391,10 @@
                     PhraseLibraryPopUpClose: PhraseLibraryPopUpClose,
                     IsDisplayAddPhBtn: IsDisplayAddPhBtn,
                     SelectedPhrasecolor: SelectedPhrasecolor,
-                    IsPharsesAvailiable: IsPharsesAvailiable
+                    IsPharsesAvailiable: IsPharsesAvailiable,
+                    show: show,
+                    selectPhrase: selectPhrase,
+                    RefreshPhraseLibrary: RefreshPhraseLibrary
                 };
 
             })()

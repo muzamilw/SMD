@@ -1486,14 +1486,14 @@ define("ads/ads.viewModel",
                             noErrors = false;
                             toastr.error("Please enter ad Title.");
                         }
-                        if (campaignModel().Description() == "" || campaignModel().Description() == undefined) {
-                            noErrors = false;
-                            toastr.error("Please enter first line.");
-                        }
-                        if (campaignModel().CampaignDescription() == "" || campaignModel().CampaignDescription() == undefined) {
-                            noErrors = false;
-                            toastr.error("Please enter second line.");
-                        }
+                        //if (campaignModel().Description() == "" || campaignModel().Description() == undefined) {
+                        //    noErrors = false;
+                        //    toastr.error("Please enter first line.");
+                        //}
+                        //if (campaignModel().CampaignDescription() == "" || campaignModel().CampaignDescription() == undefined) {
+                        //    noErrors = false;
+                        //    toastr.error("Please enter second line.");
+                        //}
                     }
 
                     if (previewScreenNumber() == 3) {
