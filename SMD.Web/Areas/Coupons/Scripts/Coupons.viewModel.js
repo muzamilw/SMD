@@ -895,6 +895,7 @@ define("Coupons/Coupons.viewModel",
                         return;
                     if (previewScreenNumber() < 5) {
                         previewScreenNumber(previewScreenNumber() + 1);
+                        $('html, body').animate({ scrollTop: 0 }, 800);
                     }
                     
                 },
@@ -903,6 +904,7 @@ define("Coupons/Coupons.viewModel",
                      
                      if (previewScreenNumber() > 1) {
                          previewScreenNumber(previewScreenNumber() - 1);
+                         $('html, body').animate({ scrollTop: 0 }, 800);
                      }
                  },
                 addIndustry = function (selected) {
