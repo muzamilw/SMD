@@ -114,6 +114,7 @@
           <Property Name="VoucherRedemptionPhone" Type="nvarchar" MaxLength="500" />
           <Property Name="VoucherLocationLAT" Type="nvarchar" MaxLength="50" />
           <Property Name="VoucherLocationLON" Type="nchar" MaxLength="10" />
+          <Property Name="MaxDailyBudget" Type="float" />
         </EntityType>
         <EntityType Name="AdCampaignResponse">
           <Key>
@@ -1887,6 +1888,14 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Parameter Name="ToRow" Type="int" Mode="In" />
         </Function>
         <Function Name="ResetProductsUserResponses" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SearchCampaigns" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Status" Type="int" Mode="In" />
+          <Parameter Name="keyword" Type="nvarchar" Mode="In" />
+          <Parameter Name="companyId" Type="int" Mode="In" />
+          <Parameter Name="fromRow" Type="int" Mode="In" />
+          <Parameter Name="toRow" Type="int" Mode="In" />
+          <Parameter Name="adminMode" Type="bit" Mode="In" />
+        </Function>
         <Function Name="SearchCoupons" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="categoryId" Type="int" Mode="In" />
           <Parameter Name="type" Type="int" Mode="In" />
@@ -2793,6 +2802,14 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
             <End Role="Coupon" EntitySet="Coupons" />
             <End Role="UserPurchasedCoupon" EntitySet="UserPurchasedCoupons" />
           </AssociationSet>
+          <FunctionImport Name="SearchCampaigns" ReturnType="Collection(DomainModels.SearchCampaigns_Result)">
+            <Parameter Name="Status" Mode="In" Type="Int32" />
+            <Parameter Name="keyword" Mode="In" Type="String" />
+            <Parameter Name="companyId" Mode="In" Type="Int32" />
+            <Parameter Name="fromRow" Mode="In" Type="Int32" />
+            <Parameter Name="toRow" Mode="In" Type="Int32" />
+            <Parameter Name="adminMode" Mode="In" Type="Boolean" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="ProfileQuestion">
           <Key>
@@ -4265,6 +4282,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Property Name="VoucherRedemptionPhone" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="VoucherLocationLAT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="VoucherLocationLON" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="MaxDailyBudget" Type="Double" />
         </EntityType>
         <Association Name="FK_AdCampaign_Company">
           <End Type="DomainModels.Company" Role="Company" Multiplicity="0..1" />
@@ -4999,6 +5017,24 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="SearchCampaigns_Result">
+          <Property Type="Int64" Name="CampaignID" Nullable="false" />
+          <Property Type="String" Name="CampaignName" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="viewCountToday" Nullable="true" />
+          <Property Type="Int32" Name="viewCountYesterday" Nullable="true" />
+          <Property Type="Int32" Name="viewCountAllTime" Nullable="true" />
+          <Property Type="String" Name="Locationss" Nullable="true" />
+          <Property Type="DateTime" Name="StartDateTime" Nullable="true" Precision="23" />
+          <Property Type="Double" Name="MaxBudget" Nullable="true" />
+          <Property Type="Double" Name="MaxDailyBudget" Nullable="true" />
+          <Property Type="Double" Name="AmountSpent" Nullable="true" />
+          <Property Type="Int32" Name="Status" Nullable="true" />
+          <Property Type="DateTime" Name="ApprovalDateTime" Nullable="true" Precision="23" />
+          <Property Type="Double" Name="ClickRate" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedDateTime" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="TotalItems" Nullable="true" />
+          <Property Type="Int32" Name="Type" Nullable="true" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5612,6 +5648,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <EntitySetMapping Name="AdCampaigns">
             <EntityTypeMapping TypeName="DomainModels.AdCampaign">
               <MappingFragment StoreEntitySet="AdCampaign">
+                <ScalarProperty Name="MaxDailyBudget" ColumnName="MaxDailyBudget" />
                 <ScalarProperty Name="VoucherLocationLON" ColumnName="VoucherLocationLON" />
                 <ScalarProperty Name="VoucherLocationLAT" ColumnName="VoucherLocationLAT" />
                 <ScalarProperty Name="VoucherRedemptionPhone" ColumnName="VoucherRedemptionPhone" />
@@ -6115,6 +6152,28 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SearchCampaigns" FunctionName="SMDModel.Store.SearchCampaigns">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DomainModels.SearchCampaigns_Result">
+                <ScalarProperty Name="CampaignID" ColumnName="CampaignID" />
+                <ScalarProperty Name="CampaignName" ColumnName="CampaignName" />
+                <ScalarProperty Name="viewCountToday" ColumnName="viewCountToday" />
+                <ScalarProperty Name="viewCountYesterday" ColumnName="viewCountYesterday" />
+                <ScalarProperty Name="viewCountAllTime" ColumnName="viewCountAllTime" />
+                <ScalarProperty Name="Locationss" ColumnName="Locationss" />
+                <ScalarProperty Name="StartDateTime" ColumnName="StartDateTime" />
+                <ScalarProperty Name="MaxBudget" ColumnName="MaxBudget" />
+                <ScalarProperty Name="MaxDailyBudget" ColumnName="MaxDailyBudget" />
+                <ScalarProperty Name="AmountSpent" ColumnName="AmountSpent" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ApprovalDateTime" ColumnName="ApprovalDateTime" />
+                <ScalarProperty Name="ClickRate" ColumnName="ClickRate" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="TotalItems" ColumnName="TotalItems" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

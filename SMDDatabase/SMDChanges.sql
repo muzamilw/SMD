@@ -7752,3 +7752,203 @@ GO
 COMMIT
 
 
+
+
+
+/* To prevent any potential data loss issues, you should review this script in detail before running it outside the context of the database designer.*/
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.AdCampaign ADD
+	MaxDailyBudget float(53) NULL
+GO
+ALTER TABLE dbo.AdCampaign SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+
+
+
+USE [SMDDev]
+GO
+/****** Object:  StoredProcedure [dbo].[SearchCoupons]    Script Date: 8/12/2016 11:53:43 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER PROCEDURE [dbo].[SearchCoupons]
+--   EXEC [dbo].[SearchCoupons] 		@categoryId =2,		@type = 1,		@keywords = N'romantic',		@distance = 1,		@Lat = N'1',		@Lon = N'1',		@UserId = N'7e166b59-f848-4290-9d86-96207dcf1227',		@FromRow = 0,		@ToRow = 100
+
+	-- Add the parameters for the stored procedure here
+	@categoryId INT = 1 ,
+	@type as int = 0,
+	@keywords as nvarchar(500),
+	@distance as int = 0,
+	@Lat as nvarchar(50),
+	@Lon as nvarchar(50),
+	@UserId as nvarchar(128) = 0 ,
+	@FromRow int = 0,
+	@ToRow int = 0
+
+AS
+BEGIN
+
+declare @currentDate datetime
+set @currentDate =  getdate()
+
+	select *, COUNT(*) OVER() AS TotalItems
+	from (
+	
+	select vchr.CouponId as CouponId, CouponTitle,
+	
+	
+	CouponImage1,
+	(select 
+	CASE
+		WHEN vchr.LogoUrl is null or vchr.LogoUrl = ''
+		THEN 'http://manage.cash4ads.com/' + c.Logo
+		WHEN vchr.LogoUrl is not null
+		THEN 'http://manage.cash4ads.com/' + vchr.LogoUrl
+	END as AdvertisersLogoPath from company c
+	 where c.CompanyId = vchr.CompanyId) as LogoUrl,
+	Price, Savings,SwapCost, CompanyId, CouponActiveMonth,CouponActiveYear
+	,DATEFROMPARTS(vchr.CouponActiveYear, vchr.CouponActiveMonth,day(EOMONTH ( DATEFROMPARTS(vchr.CouponActiveYear, vchr.CouponActiveMonth,1)))) eod,
+	DATEFROMPARTS(vchr.CouponActiveYear, vchr.CouponActiveMonth,1) strt
+
+	
+	from Coupon vchr
+	inner join CouponCategories cc on cc.CouponId = vchr.CouponId and cc.CategoryId = @categoryId
+	--left outer join [dbo].[UserPurchasedCoupon] upc on upc.couponID = vchr.couponid
+	where (
+		
+		--and
+		--(adcampaign.EndDateTime >= @currentDate and @currentDate >= adcampaign.StartDateTime)
+		
+		(vchr.Approved = 1) and vchr.status = 3
+
+		
+		and 
+		(--unlimited listing 
+		( CouponListingMode = 2 and @currentDate between DATEFROMPARTS(vchr.CouponActiveYear, vchr.CouponActiveMonth,1) and DATEFROMPARTS(vchr.CouponActiveYear, vchr.CouponActiveMonth,day(EOMONTH ( DATEFROMPARTS(vchr.CouponActiveYear, vchr.CouponActiveMonth,1))))
+			and  vchr.CouponQtyPerUser > (select count(*) from [dbo].[UserPurchasedCoupon] upc where upc.couponID = vchr.couponid and upc.userId = @UserId) 
+		)
+			--
+		or
+		--free more
+		(
+			CouponListingMode = 1 and @currentDate  between DATEFROMPARTS(vchr.CouponActiveYear, vchr.CouponActiveMonth,1) and DATEFROMPARTS(vchr.CouponActiveYear, vchr.CouponActiveMonth,5))
+			and vchr.CouponIssuedCount < 10
+		)
+		and -- keyword search
+		(
+			@keywords IS NULL OR (vchr.SearchKeywords like '%'+@keywords+'%' or vchr.CouponTitle like '%'+@keywords+'%' or LocationTitle like '%'+@keywords+'%' or LocationLine1 like '%'+@keywords+'%')
+		)
+		
+
+		
+		)
+		group by vchr.CouponId, CouponTitle,vchr.CouponImage1,LogoUrl,Price, Savings,SwapCost,CompanyId,CouponActiveMonth,CouponActiveYear
+		)as items
+	order by Savings
+	OFFSET @FromRow ROWS
+	FETCH NEXT @TORow ROWS ONLY
+		
+END
+
+
+
+
+
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[SearchCampaigns]    Script Date: 8/12/2016 11:28:51 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Mz
+-- Create date: 8 dec 2015
+-- Description:	
+-- =============================================
+create PROCEDURE [dbo].[SearchCampaigns] 
+--  exec [SearchCampaigns] 0,null,0,0,10,0
+	-- Add the parameters for the stored procedure here
+	@Status int,
+	@keyword nvarchar(100),
+	@companyId int,
+	@fromRoww int,
+	@toRow int,
+	@adminMode bit
+	
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+	--select @toRow, @fromRow
+	--return
+
+
+	select *, COUNT(*) OVER() AS TotalItems
+	from (
+
+    -- Insert statements for procedure here
+	select  a.CampaignID, a.CampaignName,
+	(select count (*) from adcampaignresponse cr where cr.campaignid = a.campaignid and  cast(CreatedDateTime as DATE)  = cast (GETDATE() as DATE) ) viewCountToday,
+	(select count (*) from adcampaignresponse cr where cr.campaignid = a.campaignid and cast(CreatedDateTime as date) = cast(getdate()-1 as date)) viewCountYesterday,
+	(select count (*) from adcampaignresponse cr where cr.campaignid = a.campaignid) viewCountAllTime,
+	left(( select
+			stuff((
+					select ', ' + c1.CountryName, ', ' + ci.CityName
+					from [AdCampaignTargetLocation] l1 
+					left outer join country c1 on l1.countryid = c1.countryid
+					left outer join city ci on l1.CityID = ci.CityID
+					where l1.campaignid = l.campaignid
+					order by c1.CountryName
+					for xml path('')
+				),1,1,'') as name_csv
+			from [AdCampaignTargetLocation] l 
+			where CampaignID = a.CampaignID
+			group by l.campaignid  
+		),30) +'..' Locationss,
+		
+		 StartDateTime, MaxBudget, MaxDailyBudget,AmountSpent,
+		Status, ApprovalDateTime, ClickRate, a.CreatedDateTime, a.Type, a.priority
+		
+		
+		
+	
+	 from AdCampaign a
+	 
+	--inner join AspNetUsers u on 
+	
+	
+	--left outer join AdCampaignResponse aResp on a.CampaignID = aResp.CampaignID 
+	where 
+	(
+		(@keyword is null or (a.CampaignName like '%'+ @keyword +'%' or a.DisplayTitle like '%'+ @keyword +'%'  ))
+		and 
+		( @Status = 0 or a.[status] = @Status)
+
+	)
+	
+
+
+	group by CampaignID, CampaignName,StartDateTime,MaxBudget,MaxDailyBudget,AmountSpent,Status, ApprovalDateTime, ClickRate, a.CreatedDateTime, a.Type, a.priority
+		)as items
+	order by priority desc
+	OFFSET @fromRoww ROWS
+	FETCH NEXT @toRow ROWS ONLY
+	
+END

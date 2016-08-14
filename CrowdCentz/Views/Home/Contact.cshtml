@@ -1,0 +1,73 @@
+﻿@{
+    ViewBag.Title = "Contact";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section COLOR
+{
+
+    <!-- COLOR STYLE CSS -->
+    <link rel="stylesheet" href="~/content/sky.css">
+
+}
+
+
+<!-- Header -->
+<section id="header" class="container-fluid text-white">
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-md-6 column">
+                <h1 class="text-left">
+                    <i id="logo" class="fa fa-map-marker"></i>
+                </h1>
+                <h1 class="main_title">Contact us</h1>
+                <p class="text-left lead">
+                    Let's get disruptive in advertising.
+                </p>
+                @*<a href="https://creativemarket.com/marcodedo/58811-Ultimate-Flat-Bootstrap-Template" class="btn btn-lg btn-lead"><span class="glyphicon glyphicon-cloud-download"></span> Download Now</a>
+
+                <a href="https://creativemarket.com/marcodedo/58811-Ultimate-Flat-Bootstrap-Template" class="btn btn-lg btn-link"><span class="glyphicon glyphicon-circle-arrow-right"></span> Learn More</a>*@
+            </div>
+            <div class="col-md-6 column">
+                <section id="contact-form" style="margin-top:24px;">
+
+                   
+
+                    <form action="/Contact" class="" method="post" role="forms contact-form">
+                        <div class="text-success"></div>
+                        <input name="__RequestVerificationToken" type="hidden" value="2CgJswd_-j4PdHltSt3C826Y2uBRVtioSU4HlsxaK0VaT45vCBJ81eKAbVApl2CPYoO5GphZSzwdVDe_rr7JiFNWs6bHA5Rwsy7MQY5jEtWNtTfIZd8ggDP9BEj1o3rQ_4IuSw2" /><div class="validation-summary-valid text-danger" data-valmsg-summary="true">
+                            <ul>
+                                <li style="display:none"></li>
+                            </ul>
+                        </div>                    <div class="row">
+                            <div class="col-sm-6 name-field">
+
+                                <input placeholder="Name (Required)" class="defaultText required name" data-val="true" data-val-required="The Full Name field is required." id="Name" name="Name" type="text" value="" />
+                            </div><!-- /.col -->
+                        </div><!-- /.row -->
+                        <div class="row">
+                            <div class="col-sm-6 email-field">
+
+                                <input placeholder="Email (Required)" class="defaultText required email" data-val="true" data-val-email="The Email field is not a valid e-mail address." data-val-required="The Email field is required." id="Email" name="Email" type="text" value="" />
+                            </div><!-- /.col -->
+                        </div><!-- /.row -->
+                        <div class="row">
+                            <div class="col-sm-6 subject-field">
+
+                                <input placeholder="Phone (Required)" class="defaultText subject required" data-val="true" data-val-required="The Phone field is required." id="Phone" name="Phone" type="text" value="" />
+                            </div><!-- /.col -->
+                        </div><!-- /.row -->
+                        <div class="row">
+                            <div class="col-sm-6  subject-field">
+
+                                <textarea placeholder="Enter your message (Required)" class="defaultText message required" cols="20" data-val="true" data-val-required="The Message field is required." id="Message" name="Message" rows="2"></textarea>
+                            </div><!-- /.message-field -->
+                        </div><!-- /.row -->
+                            <button type="submit" class="btn btn-default btn-submit">Submit message</button>
+</form>
+                </section>
+
+            </div>
+        </div>
+    </div><!-- /container  -->
+</section>
+<!-- end header -->

@@ -426,6 +426,20 @@ namespace SMD.Implementation.Services
             };
         }
 
+
+
+        public CampaignSearchResponseModel SearchCampaigns(AdCampaignSearchRequest request)
+        {
+            int rowCount;
+            return new CampaignSearchResponseModel
+            {
+                Campaign = _adCampaignRepository.SearchCampaigns(request, out rowCount),
+                //Languages = _languageRepository.GetAllLanguages(),
+                TotalCount = rowCount
+                // UserAndCostDetails = _adCampaignRepository.GetUserAndCostDetail()
+            };
+        }
+
         public CampaignResponseModel GetCampaignById(long CampaignId)
         {
             var campaignEnumarable = _adCampaignRepository.GetAdCampaignById(CampaignId);
@@ -629,7 +643,7 @@ namespace SMD.Implementation.Services
             int rowCount;
             return new AdCampaignResposneModelForAproval
             {
-                AdCampaigns = _adCampaignRepository.SearchAdCampaigns(request, out rowCount),
+                AdCampaigns = _adCampaignRepository.SearchAdCampaignsForApproval(request, out rowCount),
                 TotalCount = rowCount
             };
         }

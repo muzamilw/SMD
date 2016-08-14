@@ -193,6 +193,9 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SearchCampaigns_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="SearchCoupons_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

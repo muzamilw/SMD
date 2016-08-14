@@ -9,7 +9,7 @@ using System.Web.Http;
 namespace SMD.MIS.Areas.Api.Controllers
 {
     /// <summary>
-    /// Ad Campaign Api Controller 
+    /// Ad Campaign approval API controller
     /// </summary>
     public class AdCampaignController : ApiController
     {

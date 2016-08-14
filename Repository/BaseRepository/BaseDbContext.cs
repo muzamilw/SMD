@@ -412,7 +412,7 @@ namespace SMD.Repository.BaseRepository
                 new ObjectParameter("CompanyId", CompanyId) :
                 new ObjectParameter("CompanyId", typeof(string));
 
-
+            
 
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCouponsByCompanyId_Result>("GetCouponsByCompanyId", userIdParameter);
         }
@@ -464,6 +464,35 @@ namespace SMD.Repository.BaseRepository
                 new ObjectParameter("ToRow", typeof(int));
 
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SearchCoupons_Result>("SearchCoupons", categoryIdParameter, typeIdParameter, keywordsParameter, distanceParameter, LatParameter, LonParameter, userIdParameter, fromRowParameter, toRowParameter);
+        }
+
+
+
+        public ObjectResult<SearchCampaigns_Result> SearchCampaigns(int status, string keyword, int companyId, int fromRow, int toRow, bool adminMode)
+        {
+            var statusParameter = status != null ?
+                new ObjectParameter("status", status) :
+                new ObjectParameter("status", typeof(int));
+
+            var keywordParameter = keyword != null ?
+               new ObjectParameter("keyword", keyword) :
+               new ObjectParameter("keyword", typeof(string));
+
+            var companyIdParameter = status != null ?
+               new ObjectParameter("companyId", companyId) :
+               new ObjectParameter("companyId", typeof(int));
+
+
+            var fromRowParameter = new ObjectParameter("fromRoww", fromRow);
+
+
+            var toRowParameter = new ObjectParameter("toRow", toRow);
+
+
+            var adminModeParameter = new ObjectParameter("adminMode", adminMode);
+               
+
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SearchCampaigns_Result>("SearchCampaigns", statusParameter, keywordParameter, companyIdParameter, fromRowParameter, toRowParameter,adminModeParameter);
         }
 
 

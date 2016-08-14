@@ -79,7 +79,7 @@ namespace SMD.Repository.Repositories
         /// <summary>
         /// Get Ad Campaigns
         /// </summary>
-        public IEnumerable<AdCampaign> SearchAdCampaigns(AdCampaignSearchRequest request, out int rowCount)
+        public IEnumerable<AdCampaign> SearchAdCampaignsForApproval(AdCampaignSearchRequest request, out int rowCount)
         {
             int fromRow = (request.PageNo - 1) * request.PageSize;
             int toRow = request.PageSize;
@@ -209,6 +209,23 @@ namespace SMD.Repository.Repositories
             }
         }
 
+
+
+        public IEnumerable<SearchCampaigns_Result> SearchCampaigns(AdCampaignSearchRequest request, out int rowCount)
+        {
+            var results =  db.SearchCampaigns(request.status, request.SearchString, this.CompanyId, (request.PageNo - 1) * request.PageSize, request.PageSize, false).ToList();
+
+            if (results.Count() > 0)
+            {
+                var firstrec = results.First();
+                rowCount = firstrec.TotalItems.Value;
+            }
+            else
+                rowCount = 0;
+
+            rowCount = 211;
+            return results;
+        }
         /// <summary>
         /// Get Ad Campaign by id
         /// </summary>

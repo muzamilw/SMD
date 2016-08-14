@@ -21,9 +21,13 @@ namespace SMD.Interfaces.Repository
         /// <summary>
         /// Get Ad Campaigns
         /// </summary>
-        IEnumerable<AdCampaign> SearchAdCampaigns(AdCampaignSearchRequest request, out int rowCount);
+        IEnumerable<AdCampaign> SearchAdCampaignsForApproval(AdCampaignSearchRequest request, out int rowCount);
 
         IEnumerable<AdCampaign> SearchCampaign(AdCampaignSearchRequest request, out int rowCount);
+
+
+        IEnumerable<SearchCampaigns_Result> SearchCampaigns(AdCampaignSearchRequest request, out int rowCount);
+        
 
         IEnumerable<AdCampaign> GetAdCampaignById(long campaignId);
         UserAndCostDetail GetUserAndCostDetail();

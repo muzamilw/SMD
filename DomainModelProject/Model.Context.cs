@@ -122,5 +122,34 @@ namespace DomainModelProject
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SearchCoupons_Result>("SearchCoupons", categoryIdParameter, typeParameter, keywordsParameter, distanceParameter, latParameter, lonParameter, userIdParameter, fromRowParameter, toRowParameter);
         }
+    
+        public virtual ObjectResult<SearchCampaigns_Result> SearchCampaigns(Nullable<int> status, string keyword, Nullable<int> companyId, Nullable<int> fromRow, Nullable<int> toRow, Nullable<bool> adminMode)
+        {
+            var statusParameter = status.HasValue ?
+                new ObjectParameter("Status", status) :
+                new ObjectParameter("Status", typeof(int));
+    
+            var keywordParameter = keyword != null ?
+                new ObjectParameter("keyword", keyword) :
+                new ObjectParameter("keyword", typeof(string));
+    
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            var fromRowParameter = fromRow.HasValue ?
+                new ObjectParameter("fromRow", fromRow) :
+                new ObjectParameter("fromRow", typeof(int));
+    
+            var toRowParameter = toRow.HasValue ?
+                new ObjectParameter("toRow", toRow) :
+                new ObjectParameter("toRow", typeof(int));
+    
+            var adminModeParameter = adminMode.HasValue ?
+                new ObjectParameter("adminMode", adminMode) :
+                new ObjectParameter("adminMode", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SearchCampaigns_Result>("SearchCampaigns", statusParameter, keywordParameter, companyIdParameter, fromRowParameter, toRowParameter, adminModeParameter);
+        }
     }
 }
