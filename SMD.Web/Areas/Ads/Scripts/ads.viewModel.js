@@ -105,7 +105,8 @@ define("ads/ads.viewModel",
                     randonNumber = ko.observable("?r=0"),
                     vouchers = ko.observableArray(),
                     numberOFCouponsToGenerate = ko.observable(0),
-                    previewScreenNumber = ko.observable(1)
+                    previewScreenNumber = ko.observable(1),
+                    SearchSelectedStatus = ko.observable()
 
 
                 ;
@@ -185,6 +186,7 @@ define("ads/ads.viewModel",
 
                 dataservice.getCampaignData({
                     CampaignId: 0,
+                    status : SearchSelectedStatus(),
                     PageSize: pager().pageSize(),
                     PageNo: pager().currentPage(),
                     SearchText: searchFilterValue(),
@@ -2237,6 +2239,53 @@ define("ads/ads.viewModel",
                      previewScreenNumber(number);
 
                  },
+                // BindStatusDD();
+
+                BindStatusDD =function () {
+                    var data = [
+                        {
+                            "id": "2",
+                            "name": "Pending Approval"
+                        },
+                    {
+                        "id": "3",
+                        "name": "Live"
+                    },
+                        {
+                            "id": "4",
+                            "name": "Paused"
+                        },
+                            {
+                                "id": "5",
+                                "name": "Completed"
+                            },
+                                {
+                                    "id": "6",
+                                    "name": "Approval Rejected"
+                                },
+                                    {
+                                        "id": "7",
+                                        "name": "Terminated"
+                                    },
+                                        {
+                                            "id": "8",
+                                            "name": "Archived"
+                                        },
+                                            {
+                                                "id": "9",
+                                                "name": "Completed"
+                                            }
+
+
+                    ];
+                    var Status = $("#ddlStatus");
+                    Status.html('');
+                    Status.append($('<option/>').attr("value", 0).text('All'));
+                    $.each(data, function (i, option) {
+                        Status.append($('<option/>').attr("value", option.id).text(option.name));
+                    });
+                    Status[0].selectedIndex = 0;
+                },
                 // Initialize the view model
                 initialize = function (specifiedView) {
                     view = specifiedView;
@@ -2247,6 +2296,7 @@ define("ads/ads.viewModel",
                             text += "+";
                         ageRange.push({ value: i.toString(), text: text });
                     }
+                    BindStatusDD();
                     ageRange.push({ value: 120, text: "80+" });
                     pager(pagination.Pagination({ PageSize: 10 }, campaignGridContent, getAdCampaignGridContent));
                     getAdCampaignGridContent();
@@ -2400,7 +2450,8 @@ define("ads/ads.viewModel",
                     gotoScreen: gotoScreen,
                     backScreen: backScreen,
                     CurrPage: CurrPage,
-                    MaxPage: MaxPage
+                    MaxPage: MaxPage,
+                    SearchSelectedStatus : SearchSelectedStatus
                 };
             })()
         };

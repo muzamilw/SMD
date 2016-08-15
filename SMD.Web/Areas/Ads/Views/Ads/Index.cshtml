@@ -288,7 +288,7 @@ else
                 </div>
 
                 <div class="col-sm-3" style="float:left;">
-                    <select id="ddlStatus" class="form-control" style="float:right;height:36px;">
+                    <select id="ddlStatus" class="form-control" style="float:right;height:36px;" data-bind="value : SearchSelectedStatus, event:{ change: $root.getCampaignByFilter}">
                         <option value="0">All Statuses</option>
 
                     </select>
