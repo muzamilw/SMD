@@ -133,7 +133,7 @@ div.Tokenize ul.Dropdown {
   width: 286px !important;
 }
 .defaultImgUploadImageBtn {
-   margin-left:15px;text-align:left;padding-right:0px;float:left;color:rgb(52,152,219) !important;
+   margin-left:15px;text-align:left;padding-right:0px;float:left;color:#58267b!important;
     font-weight:bold;
 }
 .mright60 {
@@ -978,5 +978,5 @@ div#spinner {
     font-size:14px !important;
 }
 .tooltips { 
-    z-index:1030 !important;
+    z-index
 }

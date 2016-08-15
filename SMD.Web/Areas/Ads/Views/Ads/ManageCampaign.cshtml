@@ -547,7 +547,7 @@ else
                                 </div>
                                 <div class="form-group">
                                     <div class="col-lg-2">
-                                        <label for="txtadditionalCrit" class="control-label text-right tooltip-float floatNone">Advanced matching options</label>
+                                        <label for="txtadditionalCrit" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Advanced matching options</label>
                                     </div>
                                     <div class="col-lg-10">
                                         <div>
@@ -607,7 +607,7 @@ else
                                 </div>
                                 <div class="form-group">
                                     <div class="col-lg-2">
-                                        <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Choice 1</label>
+                                        <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Choice 1</label>
                                     </div>
                                     <div class="col-lg-4">
                                         <input type="text" class="form-control" id="txtVerifyAnswer1" placeholder="Enter your answer 1 (50 characters)" data-bind="value: Answer1" maxlength="50">
@@ -615,7 +615,7 @@ else
                                 </div>
                                 <div class="form-group">
                                     <div class="col-lg-2">
-                                        <label for="txtVerifyAnswer2" class="control-label text-right floatNone">Choice 2</label>
+                                        <label for="txtVerifyAnswer2" class="control-label text-right floatNone defaultImgUploadImageBtn">Choice 2</label>
                                     </div>
                                     <div class="col-lg-4">
                                         <input type="text" class="form-control" id="txtVerifyAnswer2" placeholder="Enter your answer 2 (50 characters)" data-bind="value: Answer2" maxlength="50">
@@ -623,7 +623,7 @@ else
                                 </div>
                                 <div class="form-group">
                                     <div class="col-lg-2">
-                                        <label for="txtVerifyAnswer3" class="control-label text-right tooltip-float floatNone">Choice 3</label>
+                                        <label for="txtVerifyAnswer3" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Choice 3</label>
                                     </div>
                                     <div class="col-lg-4">
                                         <input type="text" class="form-control" id="txtVerifyAnswer3" placeholder="Enter your answer 3" data-bind="value: Answer3">
@@ -637,7 +637,7 @@ else
                                 <div class="form-group">
                                     @*data-bind="visible: $root.quizQuestionStatus()">*@
                                     <div class="col-lg-2">
-                                        <label for="txtCorrectAnswer" class="control-label text-right tooltip-float floatNone" style="color:red;">Correct Answer</label>
+                                        <label for="txtCorrectAnswer" class="control-label text-right tooltip-float floatNone" style="color:red;font-weight:bold;">Correct Answer</label>
                                     </div>
                                     <div class="col-lg-4">
                                         <select class="form-control" id="ddpCorrectAns" data-bind="options: $root.correctAnswers, optionsText: 'name', optionsValue: 'id', value: CorrectAnswer"></select>
