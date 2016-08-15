@@ -20,14 +20,9 @@ else
 <div class="row" id="CouponsBinding">
     <div class="col-lg-12" data-bind="visible: $root.isListVisible()">
         <div class="row" id="topArea" style="margin-bottom:15px;">
-           
         </div>
-        
         <div class="row">
             <div class="col-lg-12" style="padding-left:0px;padding-right:0px;">
-              
-            
-
                 <!-- ko template: { name: 'filterTemplate' } -->
                 <!-- /ko -->
                 <div data-bind="visible: $root.campaignGridContent().length > 0">
@@ -42,17 +37,31 @@ else
                                     <thead>
                                         <tr>
 
-                                            <th class="col-sm-4"><span>Coupon Name</span></th>
+                                            <th class="col-sm-3"><span>Coupon Name</span></th>
 
-                                            <th class="col-sm-2"><span>Month Listed
-                                                </span></th>
                                             <th class="col-sm-2">
-                                                <span >Viewed</span>
+                                                <span>
+                                                    Month Listed
+                                                </span>
+                                            </th>
+                                            <th class="col-sm-2">
+                                                <span>
+                                                    Participating Branches
+                                                </span>
+                                            </th>
+                                            <th class="col-sm-1">
+                                                <span>Viewed</span>
+                                            </th>
+                                            <th class="col-sm-1">
+                                                <span>Issued</span>
+                                            </th>
+                                            <th class="col-sm-1">
+                                                <span>Redeemed</span>
                                             </th>
                                             <th class="col-sm-1"><span>Status</span></th>
-                                            @*<th class="col-sm-2"><span class="@userClasses">Spent</span><span class="@adminClasses">Created by</span></th>*@
+                                            <th class="col-sm-1"></th>
 
-                                            <th class="col-sm-1">&nbsp;</th>
+                                           
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -73,7 +82,7 @@ else
                     </div>
                 </div>
                 <div data-bind="visible: $root.campaignGridContent().length == 0" style="display:none;">
-                   <div class="main-box no-header clearfix" style="padding:20px;" >
+                    <div class="main-box no-header clearfix" style="padding:20px;">
                         No coupon found.
                     </div>
                 </div>
@@ -96,15 +105,7 @@ else
 
 
             <div class="col-lg-2 col-sm-2" style="float:left;">
-
-
             </div>
-
-
-
-
-
-
         </div>
 
     </div>
@@ -116,77 +117,95 @@ else
 <script id="advertsTemplate" type="text/html">
     <tr style="cursor: pointer">
 
-        <td class="col-sm-4">
+        <td class="col-sm-3">
             <a href="#" class="store-user-link" data-bind="text: CouponTitle,click:$root.onEditCampaign"></a>
 
         </td>
 
         <td class="col-sm-2">
-            <span data-bind="text: CouponExpirydate"></span>
+            <span data-bind="text: CouponActiveMonthName"></span> <span data-bind="text: CouponActiveYear"></span>
         </td>
         <td class="col-sm-2">
+            <span>Special Branches : 1</span>
+        </td>
+        <td class="col-sm-1">
+            <span data-bind="text: CouponViewCount"></span>
+        </td>
+        <td class="col-sm-1">
             <span data-bind="text: CouponIssuedCount"></span>
         </td>
-        <td class="col-sm-2">
+        <td class="col-sm-1">
+            <span data-bind="text: CouponRedeemedCount"></span>
+        </td>
+        <td class="col-sm-1">
             <!-- ko if: Status() === 1-->
             <div class="text-left statusbg" style="background:#6D6EFA;    width: 47px;">
-                <span >Draft
+                <span>
+                    Draft
                 </span>
             </div>
             <!-- /ko -->
             <!-- ko if: Status() === 2-->
             <div class="text-left statusbg" style="background:#fc0;">
-                <span >Pending Approval
+                <span>
+                    Pending Approval
                 </span>
             </div>
             <!-- /ko -->
             <!-- ko if:  Status() === 3-->
             <div class="text-left statusbg" style="background:#37c675;    width: 47px;">
-                <span >Live
+                <span>
+                    Live
                 </span>
             </div>
             <!-- /ko -->
             <!-- ko if: Status() === 4-->
             <div class="text-left statusbg" style="background:#fd008e;">
-                <span >Paused
+                <span>
+                    Paused
                 </span>
             </div>
             <!-- /ko -->
             <!-- ko if: Status() === 5-->
             <div class="text-left statusbg" style="background:#c8e392;">
-                <span >Completed
+                <span>
+                    Completed
                 </span>
             </div>
             <!-- /ko -->
             <!-- ko if: Status() === 6-->
             <div class="text-left statusbg" style="background:red;">
-                <span >Approval Rejected
+                <span>
+                    Approval Rejected
                 </span>
             </div>
             <!-- /ko -->
             <!-- ko if: Status() === 7-->
             <div class="text-left statusbg" style="background:red;">
-                <span >Terminated by user
+                <span>
+                    Terminated by user
                 </span>
             </div>
             <!-- /ko -->
             <!-- ko if: Status() === 8-->
             <div class="text-left statusbg" style="background:#fc0;">
-                <span >Completed
+                <span>
+                    Completed
                 </span>
             </div>
             <!-- /ko -->
             <!-- ko if: Status() === 9-->
             <div class="text-left statusbg" style="background:red;">
-                <span >Archived
+                <span>
+                    Archived
                 </span>
             </div>
             <!-- /ko -->
         </td>
-        <td class="col-sm-1"><span class="@userClasses" data-bind=""></span><span class="@adminClasses" data-bind="text: CreatedBy"></span></td>
+        
 
 
-        <td class="col-sm-2">
+        <td class="col-sm-1">
 
             <!-- ko if: Status() == 1 ||  Status() == 3 || Status() == 4 || Status() == 7|| Status() == 9-->
             <a class="table-link" style="float: right">
@@ -212,20 +231,20 @@ else
 
         <div class="col-sm-4" style="text-align:right !important;">
 
-            
+
 
         </div>
 
 
     </div>
 
-    <div class="filter-body" id="filter" >
+    <div class="filter-body" id="filter">
 
         <div class="row">
             <div class="col-sm-12" style="float: left; margin-bottom:20px;">
                 <br />
                 <span style="font-size: 24px;">Coupon Promotions </span><br />
-                
+
                 <span style="font-size: 14px;">Paid coupon promotions are listed for whole one calendar month. Submission fee includes unlimited issuing and redemption at all branches. &nbsp; &nbsp; &nbsp; <span class="red bold rightAlign"> Watch Video <img src="/Images/youtube_play.JPG" height="25px" /> </span>   </span><br />
             </div>
         </div>
@@ -272,7 +291,6 @@ else
 <!-- ko stopBinding: true -->
 @Html.Partial("~/Areas/Common/Views/Shared/_StripeChargeCustomerDialog.cshtml")
 <!-- /ko -->
-
 @section Scripts{
     <script src="~/Scripts/jquery.tokenize.js"></script>
     <script type="text/javascript">

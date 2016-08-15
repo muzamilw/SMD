@@ -1649,6 +1649,14 @@ define("Coupons/Coupons.viewModel",
                       selectedJobDescription(e.currentTarget.id);
                       TempSelectedObj(jobDescription);
                   },
+                getMonthName = function(month) {
+                    var monthNames = ["January", "February", "March", "April", "May", "June",
+                        "July", "August", "September", "October", "November", "December"
+                    ];
+
+                    return monthNames[month];
+
+                },
                 // Initialize the view model
                 initialize = function (specifiedView) {
                     view = specifiedView;
