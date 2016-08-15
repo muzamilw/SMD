@@ -1003,6 +1003,7 @@ define("survey/survey.viewModel",
                             $("#btnResumeCampagin").css("display", "inline-block");
                             $("#btnResumeCampagin").removeAttr('disabled');
                         }
+                        $("#topArea a").removeAttr('disabled');
                     },
                     enableControls = function(mode)
                     {
