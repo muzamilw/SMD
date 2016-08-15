@@ -7776,7 +7776,7 @@ COMMIT
 
 
 
-USE [SMDDev]
+
 GO
 /****** Object:  StoredProcedure [dbo].[SearchCoupons]    Script Date: 8/12/2016 11:53:43 AM ******/
 SET ANSI_NULLS ON
