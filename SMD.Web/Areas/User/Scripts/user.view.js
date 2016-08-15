@@ -10,9 +10,9 @@ define("user/user.view",
                 // View model 
                 viewModel = specifiedViewModel,
                 // Binding root used with knockout
-                bindingRoot = $("#userProfileScreen")[0],
+                bindingRoot = $("#manageUserBinding")[0],
                 // Binding root used with knockout
-                bindingRootUser = $("#manageUserBinding")[0],
+                //bindingRootUser = $("#manageUserBinding")[0],
 
                  // Show Contact Company the dialog
                 showChangePassword = function () {
@@ -52,7 +52,7 @@ define("user/user.view",
             initialize();
             return {
                 bindingRoot: bindingRoot,
-                bindingRootUser: bindingRootUser,
+                //bindingRootUser: bindingRootUser,
                 viewModel: viewModel,
                 showChangePassword: showChangePassword,
                 hideChangePassword: hideChangePassword,
@@ -67,9 +67,9 @@ define("user/user.view",
         if (ist.userProfile.view.bindingRoot) {
             userViewModel.initialize(ist.userProfile.view);
         }
-        if (ist.userProfile.view.bindingRootUser) {
-            userViewModel.initialize(ist.userProfile.view);
-        }
+        //if (ist.userProfile.view.bindingRootUser) {
+        //    userViewModel.initialize(ist.userProfile.view);
+        //}
         return ist.userProfile.view;
     });
 

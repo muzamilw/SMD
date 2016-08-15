@@ -195,15 +195,15 @@ define("user/user.viewModel",
                                 }
 
                                 // Get Profile When Base data is loaded 
-                                if (isUserEdit() == true)
-                                {
-                                    getUserProfileById();
-                                }
-                                else
-                                {
-                                    selectedUserId(0);
-                                    getUserProfileById();
-                                }
+                                //if (isUserEdit() == true)
+                                //{
+                                //    getUserProfileById();
+                                //}
+                                //else
+                                //{
+                                //    selectedUserId(0);
+                                //    getUserProfileById();
+                                //}
                                
                                 //selectedUser().cityId(cityId);
                             },
@@ -222,7 +222,9 @@ define("user/user.viewModel",
 
 
                      //Get Base Data for Questions
-                    getDataforUser = function () {
+                    getManagedUsers = function () {
+
+                        
                         dataservice.getDataforManageUser(null, {
                             success: function (manageUsers) {
                              
@@ -260,7 +262,7 @@ define("user/user.viewModel",
                                 success: function () {
                                     userList.removeAll();
                                     toastr.success("User successfully removed!");
-                                    getDataforUser();
+                                    getManagedUsers();
 
                                 },
                                 error: function () {
@@ -341,6 +343,7 @@ define("user/user.viewModel",
                 
                     InviteUser = function () {
 
+                        
                         view.showInviteUser();
                     },
 
@@ -353,7 +356,7 @@ define("user/user.viewModel",
                                success: function () {
                                    userList.removeAll();
                                    toastr.success("Invitation Sent!");
-                                   getDataforUser();
+                                   getManagedUsers();
 
                                },
                                error: function () {
@@ -389,15 +392,15 @@ define("user/user.viewModel",
                         }
                         else
                         {
-                            if (view.bindingRootUser == undefined) {
-                                // Base data call
-                                getBasedata();
-                            }
+                            //if (view.bindingRootUser == undefined) {
+                            //    // Base data call
+                            //    getBasedata();
+                            //}
 
 
-                            if (view.bindingRootUser != undefined) {
+                            if (view.bindingRoot != undefined) {
                                 getBasedata();
-                                getDataforUser();
+                                getManagedUsers();
                             }
                         }
 

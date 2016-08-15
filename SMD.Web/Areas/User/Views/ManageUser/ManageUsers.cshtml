@@ -11,82 +11,81 @@
 
 <script src="~/Content/metroUI/js/metro.js"></script>
 <script src="~/Content/metroUI/js/prettify/run_prettify.js"></script>
-@if (!User.IsInRole("User"))
-{
-    userClasses = "displayNone";
-}
-else
-{
-    adminClasses = "displayNone";
-}
+
 <div class="row" id="manageUserBinding">
     <div class="col-lg-12">
-        <div class="row manageUserHeading">
-            <div class="col-lg-9">
-                <p style=" font-size:23px;">
-                    Invite collegues to manage your marketing campaigns
-                </p>
-            </div>
-            <div class="col-lg-3">
-                <button class="btn btn-success inviteButtonStyle" id="saveBtn" data-bind="click: $root.InviteUser" >Invite</button>
-            </div>
-        </div>
-           
-            @*<div class="row">
+        <div class="row">
+            <div class="col-lg-12" style="padding-left:0px;padding-right:0px;">
 
 
+                <div class="filter-body" id="filter">
 
-                <div class="col-lg-11" style=" margin-left: 4%;">
-                    <ol class="breadcrumb">
-                        <li><a href="/Dashboard/Index">&nbsp;</a></li>
-                    </ol>
-                    <div class="clearfix Float-Left">
-                        <h1 class="pull-left" style="padding-left:0px;">My Survey Questions</h1>
+                    <div class="row">
+
+
+                        <div class="col-sm-12" style="float: left; margin-bottom:20px;">
+                            <br />
+                            <span style="font-size: 24px;"> Invite collegues to manage your marketing campaigns</span><br />
+                            <span style="font-size: 14px;"></span>  &nbsp; &nbsp; &nbsp; <span class="red bold rightAlign"> Watch Video <img src="/Images/youtube_play.JPG" height="25px" /> </span>   </span><br />
+                        </div>
+
+
                     </div>
-                    <button class="btn btn-primary btnclick FloatRight" data-bind="click:$root.addNewSurvey">
-                        Create Survey
-                    </button>
 
-                </div>
-            </div>*@
-            <div class="row">
-                <div class="col-lg-11" style=" margin-left: 4%;">
-                    @*<!-- ko template: { name: 'filterTemplate' } -->
-                    <!-- /ko -->*@
-                    <div class="main-box no-header clearfix" style="padding-top:0px;">
-                        <div class="main-box-body clearfix" style="padding-left:20px;padding-right:22px;">
-                            <div class="tabsdescriptions" style="margin-left:0px;">
-                                <p class="group-header-description"></p>
-                            </div>
-                            <div class="table-responsive" style="margin-right:-4px;">
-                                <table class="table table-striped table-hover" id="surveyQuestionLVTable">
-                                    <thead>
-                                        <tr>
-                                            <th class="col-sm-2 th-pointer"><span>Email</span></th>
-                                            <th class="col-sm-2 th-pointer"><span>Name</span></th>
-                                            <th class="col-sm-2 th-pointer"><span>Role</span></th>
-                                            <th class="col-sm-2 th-pointer"><span>Status</span></th>
-                                            <th class="col-sm-2 th-pointer"><span>Added On</span></th>
-                                            <th class="col-sm-2 th-pointer"><span>&nbsp; </span></th>
-                                           
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <!-- ko template: { name: 'ManageUserTemplate' , foreach: userList() } -->
-                                        <!-- /ko -->
-                                    </tbody>
-                                </table>
-                            </div>
+                    <div class="row">
+                        <div class="col-sm-3" style="float:left;">
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="col-sm-3" style="float:left;">
+                        </div>
+                        <div class="col-sm-3" style="float:right;margin-top:2px; text-align:right">
+                            <button class="btn btn-primary" id="saveBtn" data-bind="click: $root.InviteUser">Invite User</button>
+                        </div>
+                        <div class="clearfix">
                         </div>
                     </div>
-                    <div id="pagerDivForStore" class="pull-right">
-                        @*<!-- ko with: pager -->
-                        @Html.Partial("~/Areas/Common/Views/Shared/_Pager.cshtml")
-                        <!-- /ko -->*@
+                </div>
+
+
+
+                <div class="main-box no-header clearfix" style="padding-top:0px;">
+                    <div class="main-box-body clearfix" style="padding-left:20px;padding-right:22px;">
+                        <div class="tabsdescriptions" style="margin-left:0px;">
+                            <p class="group-header-description"></p>
+                        </div>
+                        <div class="table-responsive" style="margin-right:-4px;">
+                            <table class="table table-striped table-hover" id="surveyQuestionLVTable">
+                                <thead>
+                                    <tr>
+                                        <th class="col-sm-2 th-pointer"><span>Email</span></th>
+                                        <th class="col-sm-2 th-pointer"><span>Name</span></th>
+                                        <th class="col-sm-2 th-pointer"><span>Role</span></th>
+                                        <th class="col-sm-2 th-pointer"><span>Status</span></th>
+                                        <th class="col-sm-2 th-pointer"><span>Added On</span></th>
+                                        <th class="col-sm-2 th-pointer"><span>&nbsp; </span></th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- ko template: { name: 'ManageUserTemplate' , foreach: userList() } -->
+                                    <!-- /ko -->
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
+                <div id="pagerDivForStore" class="pull-right">
+
+                </div>
+            </div>
+            <div class="col-lg-3">
             </div>
         </div>
+
+
+           
+           
+    </div>
 
     @Html.Partial("~/Areas/User/Views/Shared/_InviteUser.cshtml")
     @Html.Partial("~/Areas/User/Views/Shared/_EditManagedUser.cshtml")
@@ -110,31 +109,21 @@ else
                 <p style="margin-top:8px;" data-bind="dateString: CreatedOn, datePattern: 'DD/MM/YYYY'"></p>
             </td>
             <td>
-                <button class="btn btn-danger" id="removeBtn" data-bind="click:$root.onRemoveUser">Remove</button>
+               
+
+                <a class="table-link danger" style="float: right" title="Remove User">
+                    <span class="fa-stack">
+                        <i class="fa fa-square fa-stack-2x"></i>
+                        <i class="fa fa-pencil fa-stack-1x fa-inverse" data-bind="click:$root.onRemoveUser"></i>
+                    </span>
+                </a>
             </td>
-          
-            @*<td>
-                <!--ko if:Status() == 6 -->
-                <p class="bold red" data-bind="text:StatusValue "></p>
-                <!--/ko-->
-                <!--ko if:Status() != 6 -->
-                <p class="bold" data-bind="text:StatusValue "></p>
-                <!--/ko-->
-
-            </td>*@
-
 
         </tr>
     </script>
-   
-    @*@{
-        Html.RenderPartial("~/Areas/Survey/Views/Shared/_AddEditSurvey.cshtml");
-    }*@
+
 </div>
-@*<!-- ko stopBinding: true -->
-    @Html.Partial("~/Areas/Common/Views/Shared/_StripeChargeCustomerDialog.cshtml")
-    <!-- /ko -->*@
-<!-- ko stopBinding: true -->
+
 @Html.Partial("~/Areas/Common/Views/Shared/_ConfirmationDialog.cshtml")
 <!-- /ko -->
 @section Scripts{
@@ -142,16 +131,15 @@ else
     <script type="text/javascript">
         require(["user/user.view", "common/confirmation.view"]);
     </script>
-<script>
-    function getParameter(url, param) {
-        if (url.indexOf('?') == -1)
-            return 1;
-        url = url.split('?');
-        var pattern = new RegExp(param + '=(.*?)(;|&|$)', 'gi');
-        return url[1].split(pattern)[1];
-    }
-</script>
+    <script>
+        function getParameter(url, param) {
+            if (url.indexOf('?') == -1)
+                return 1;
+            url = url.split('?');
+            var pattern = new RegExp(param + '=(.*?)(;|&|$)', 'gi');
+            return url[1].split(pattern)[1];
+        }
 
-
-
+        $("#btninviteusers").css("background-color", "#58267b");
+    </script>
 }

@@ -154,7 +154,7 @@ h1 small, h2 small, h3 small, h1 .small, h2 .small, h3 .small {
     }
 
 .btn-success {
-    background-color: #2ecc71;
+    background-color: #5fb761;
     border-color: #27ae60;
 }
 
@@ -1752,7 +1752,7 @@ input[type="radio"] {
 
 
 #login-page-full {
-    background-color: #2faae3;
+    background-color: #7a539b;
     color:white;
 }
 
@@ -1805,7 +1805,7 @@ input[type="radio"] {
 
 #login-box-inner {
     padding: 60px 25px;
-    background-color:#2b92bf;
+    background-color:#6c3d8f;
 }
 
 
@@ -1830,7 +1830,7 @@ input[type="radio"] {
 }
 
 #login-logo {
-    background: none repeat scroll 0 0 #000;
+    background: none repeat scroll 0 0 #572a79;
     color: #fff;
     display: block;
     font-size: 2em;
@@ -5019,15 +5019,15 @@ input[type="radio"] {
     height:100px !important;
 }
 .login-logo-bakImg {
-background: url(/Images/ads.png);
-    width: 117px;
-    height: 117px;
+background: url(/Images/crowdcentz_logo.png);
+    width: 210px;
+    height: 40px;
     background-size: 100%;
     /* background-position-x: 125px; */
     margin: auto;
     background-repeat: no-repeat;
     position:relative;
-    top:32px;
+    top:34px;
 }
 
 .padding23
@@ -5458,7 +5458,7 @@ color:red !important;
 .cashlogox{
        
     background-repeat: no-repeat !important;
-    background-size: 42% !important;
+    background-size: 100% !important;
     margin-top: 5px !important;
    
     background-position: center !important;
@@ -5468,6 +5468,8 @@ color:red !important;
     right: 0 !important;
     margin-left: auto !important;
     margin-right: auto !important;
+      background-image: url(/Images/crowdcentz_logo.png) !important;
+    
 }
 
 
@@ -5475,12 +5477,12 @@ color:red !important;
         background-image: url(/Images/beta.jpg);
     background-repeat: no-repeat;
     background-size: 63%;
-    margin-top: 5px;
+    margin-top: 25px;
     margin-left: auto;
     width: 72px;
     height: 18px;
     position: absolute;
-    left: 97px;
+    left: 267px;
     right: 0;
     margin-right: auto;
 }
