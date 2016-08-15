@@ -120,14 +120,18 @@ else
                             <div class="col-lg-11" style="margin:auto;float:none !important;" data-bind="visible: $root.previewScreenNumber() == 1">
                               
                               
-                               <div class="form-group" style="margin-bottom:14px;">
-                                    <div class="col-lg-2" style="padding-top:12px;">
+                               <div class="form-group" >
+                                    <div class="col-lg-2" >
                                         <label for="txtCampaignDisplayName" class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn" >Coupon Title</label>
                                     </div>
                                     <div class="col-lg-7">
-                                        <input type="text" style="height:60px;" maxlength="36" name="Coupon Display Name" class="form-control height60 font24px" id="txtCampaignDisplayName" placeholder="Coupon title (80 characters)" data-bind="value: CouponTitle">
-                                    </div>
-                                
+                                        <textarea maxlength="36" style="height:34px;" name="Coupon Display Name" class="form-control  " id="txtCampaignDisplayName" placeholder="Coupon title (80 characters)" data-bind="value: CouponTitle,click: $root.selectJobDescription"></textarea>
+</div>
+                                   <div class="col-lg-1">
+                                       <a id="P0" data-bind="visible:$root.selectedJobDescription()=== 'txtCampaignDisplayName',click:$root.openPhraseLibrary" style="padding: 4px 8px;display:none;" class="btn btn-primary pull-right">
+                                           <i class="fa fa-lg"></i>&nbsp;....
+                                       </a>
+                                   </div>
                                     <div class="col-lg-2">
                                         <div class="bs-example-tooltips tooltip-float-width">
                                             <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-original-title="" title="">
@@ -138,42 +142,68 @@ else
                                 </div>
                                 <div class="form-group" >
                                     <div class="col-lg-2">
-                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone" >Highlight # 1 </label>
+                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Highlight # 1 </label>
                                     </div>
                                     <div class="col-lg-7">
-                                        <textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: HighlightLine1" maxlength="36"></textarea>
+                                        <textarea class="form-control" id="highlightedfield1" rows="1" placeholder="max 36 characters" data-bind="value:HighlightLine1, click: $root.selectJobDescription" maxlength="36"></textarea>
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <a id="P1" data-bind="visible:$root.selectedJobDescription()=== 'highlightedfield1',click:$root.openPhraseLibrary" style="padding: 4px 8px;display:none;" class="btn btn-primary pull-right">
+                                            <i class="fa fa-lg"></i>&nbsp;....
+                                        </a>
+                                    </div>
+                                    
+                                </div>
+                                <div class="form-group" >
+                                    <div class="col-lg-2">
+                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Highlight # 2 </label>
+                                    </div>
+                                    <div class="col-lg-7">
+                                        <textarea class="form-control" id="highlightedfield2" rows="1" placeholder="max 36 characters" data-bind="value: HighlightLine2, click: $root.selectJobDescription"  maxlength=" 36"></textarea>
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <a id="P2" data-bind="visible:$root.selectedJobDescription()=== 'highlightedfield2',click:$root.openPhraseLibrary" style="padding: 4px 8px;display:none;" class="btn btn-primary pull-right">
+                                            <i class="fa fa-lg"></i>&nbsp;....
+                                        </a>
                                     </div>
                                 </div>
                                 <div class="form-group" >
                                     <div class="col-lg-2">
-                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone">Highlight # 2 </label>
+                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Highlight # 3 </label>
                                     </div>
                                     <div class="col-lg-7">
-                                        <textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: HighlightLine2" maxlength="36"></textarea>
+                                        <textarea class="form-control" id="highlightedfield3" rows="1" placeholder="max 36 characters" data-bind="value: HighlightLine3, click: $root.selectJobDescription" maxlength=" 36"></textarea>
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <a id="P3" data-bind="visible:$root.selectedJobDescription()=== 'highlightedfield3',click:$root.openPhraseLibrary" style="padding: 4px 8px;display:none;" class="btn btn-primary pull-right">
+                                            <i class="fa fa-lg"></i>&nbsp;....
+                                        </a>
                                     </div>
                                 </div>
                                 <div class="form-group" >
                                     <div class="col-lg-2">
-                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone">Highlight # 3 </label>
+                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Highlight # 4 </label>
                                     </div>
                                     <div class="col-lg-7">
-                                        <textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: HighlightLine3" maxlength="36"></textarea>
+                                        <textarea class="form-control" id="highlightedfield4" rows="1" placeholder="max 36 characters" data-bind="value: HighlightLine4, click: $root.selectJobDescription" maxlength=" 36"></textarea>
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <a id="P4" data-bind="visible:$root.selectedJobDescription()=== 'highlightedfield4',click:$root.openPhraseLibrary" style="padding: 4px 8px;display:none;" class="btn btn-primary pull-right">
+                                            <i class="fa fa-lg"></i>&nbsp;....
+                                        </a>
                                     </div>
                                 </div>
                                 <div class="form-group" >
                                     <div class="col-lg-2">
-                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone">Highlight # 4 </label>
+                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Highlight # 5 </label>
                                     </div>
                                     <div class="col-lg-7">
-                                        <textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: HighlightLine4" maxlength="36"></textarea>
+                                        <textarea class="form-control" id="highlightedfield5" rows="1" placeholder="max 36 characters" data-bind="value: HighlightLine5, click: $root.selectJobDescription" maxlength=" 36"></textarea>
                                     </div>
-                                </div>
-                                <div class="form-group" >
-                                    <div class="col-lg-2">
-                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone">Highlight # 5 </label>
-                                    </div>
-                                    <div class="col-lg-7">
-                                        <textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: HighlightLine5" maxlength="36"></textarea>
+                                    <div class="col-lg-1">
+                                        <a id="P5" data-bind="visible:$root.selectedJobDescription()=== 'highlightedfield5',click:$root.openPhraseLibrary" style="padding: 4px 8px;" class="btn btn-primary pull-right">
+                                            <i class="fa fa-lg"></i>&nbsp;....
+                                        </a>
                                     </div>
                                 </div>
                                 <div class="form-group" >
@@ -285,82 +315,132 @@ else
                                     <div class="col-lg-11">*@
                                 <div class="form-group" >
                                     <div class="col-lg-2">
-                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone">Fine print # 1 </label>
+                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Fine print # 1 </label>
                                     </div>
                                     <div class="col-lg-7">
-                                        <textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: FinePrintLine1" maxlength="36"></textarea>
+                                        <textarea class="form-control" id="fineprint1" rows="1" placeholder="max 36 characters" data-bind="value: FinePrintLine1,click:$root.selectJobDescription" maxlength=" 36"></textarea>
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <a id="P0" data-bind="visible:$root.selectedJobDescription()=== 'fineprint1',click:$root.openPhraseLibrary" style="padding: 4px 8px;" class="btn btn-primary pull-right">
+                                            <i class="fa fa-lg"></i>&nbsp;....
+                                        </a>
                                     </div>
                                 </div>
                                 <div class="form-group" >
                                     <div class="col-lg-2">
-                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone">Fine print # 2 </label>
+                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Fine print # 2 </label>
                                     </div>
                                     <div class="col-lg-7">
-                                        <textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: FinePrintLine2" maxlength="36"></textarea>
+                                        <textarea class="form-control" id="fineprint2" rows="1" placeholder="max 36 characters" data-bind="value: FinePrintLine2,click:$root.selectJobDescription" maxlength="36"></textarea>
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <a id="P1" data-bind="visible:$root.selectedJobDescription()=== 'fineprint2',click:$root.openPhraseLibrary" style="padding: 4px 8px;" class="btn btn-primary pull-right">
+                                            <i class="fa fa-lg"></i>&nbsp;....
+                                        </a>
                                     </div>
                                 </div>
                                 <div class="form-group" >
                                     <div class="col-lg-2">
-                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone">Fine print # 3 </label>
+                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Fine print # 3 </label>
                                     </div>
                                     <div class="col-lg-7">
-                                        <textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: FinePrintLine3" maxlength="36"></textarea>
+                                        <textarea class="form-control" id="fineprint3" rows="1" placeholder="max 36 characters" data-bind="value: FinePrintLine3,click:$root.selectJobDescription" maxlength="36"></textarea>
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <a id="P2" data-bind="visible:$root.selectedJobDescription()=== 'fineprint3',click:$root.openPhraseLibrary" style="padding: 4px 8px;" class="btn btn-primary pull-right">
+                                            <i class="fa fa-lg"></i>&nbsp;....
+                                        </a>
                                     </div>
                                 </div>
                                 <div class="form-group" >
                                     <div class="col-lg-2">
-                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone">Fine print # 4 </label>
+                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Fine print # 4 </label>
                                     </div>
                                     <div class="col-lg-7">
-                                        <textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: FinePrintLine4" maxlength="36"></textarea>
+                                        <textarea class="form-control" id="fineprint4" rows="1" placeholder="max 36 characters" data-bind="value: FinePrintLine4,click:$root.selectJobDescription" maxlength="36"></textarea>
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <a id="P3" data-bind="visible:$root.selectedJobDescription()=== 'fineprint4',click:$root.openPhraseLibrary" style="padding: 4px 8px;" class="btn btn-primary pull-right">
+                                            <i class="fa fa-lg"></i>&nbsp;....
+                                        </a>
                                     </div>
                                 </div>
                                 <div class="form-group" >
                                     <div class="col-lg-2">
-                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone">Fine print # 5 </label>
+                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Fine print # 5 </label>
                                     </div>
                                     <div class="col-lg-7">
-                                        <textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: FinePrintLine5" maxlength="36"></textarea>
+                                        <textarea class="form-control" id="fineprint5" rows="1" placeholder="max 36 characters" data-bind="value: FinePrintLine5,click:$root.selectJobDescription" maxlength="36"></textarea>
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <a id="P4" data-bind="visible:$root.selectedJobDescription()=== 'fineprint5',click:$root.openPhraseLibrary" style="padding: 4px 8px;" class="btn btn-primary pull-right">
+                                            <i class="fa fa-lg"></i>&nbsp;....
+                                        </a>
                                     </div>
                                 </div>
                                 <div class="form-group" >
                                     <div class="col-lg-2">
-                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone" style=" font-size: 12px; ">How to redeem # 1 </label>
+                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn" style=" font-size: 12px; ">How to redeem # 1 </label>
                                     </div>
                                     <div class="col-lg-7">
-                                        <textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: HowToRedeemLine1" maxlength="36"></textarea>
+                                        <textarea class="form-control" id="redeemline1" rows="1" placeholder="max 36 characters" data-bind="value: HowToRedeemLine1,click:$root.selectJobDescription" maxlength="36"></textarea>
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <a id="P5" data-bind="visible:$root.selectedJobDescription()=== 'redeemline1',click:$root.openPhraseLibrary" style="padding: 4px 8px;" class="btn btn-primary pull-right">
+                                            <i class="fa fa-lg"></i>&nbsp;....
+                                        </a>
                                     </div>
                                 </div>
                                 <div class="form-group" >
                                     <div class="col-lg-2">
-                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone" style=" font-size: 12px; ">How to redeem # 2 </label>
+                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn" style=" font-size: 12px; ">How to redeem # 2 </label>
                                     </div>
                                     <div class="col-lg-7">
-                                        <textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: HowToRedeemLine2" maxlength="36"></textarea>
+                                        <textarea class="form-control" id="redeemline2" rows="1" placeholder="max 36 characters" data-bind="value: HowToRedeemLine2,click:$root.selectJobDescription" maxlength="36"></textarea>
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <a id="P6" data-bind="visible:$root.selectedJobDescription()=== 'redeemline2',click:$root.openPhraseLibrary" style="padding: 4px 8px;" class="btn btn-primary pull-right">
+                                            <i class="fa fa-lg"></i>&nbsp;....
+                                        </a>
                                     </div>
                                 </div>
                                 <div class="form-group" >
                                     <div class="col-lg-2">
-                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone" style=" font-size: 12px; ">How to redeem # 3 </label>
+                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn" style=" font-size: 12px; ">How to redeem # 3 </label>
                                     </div>
                                     <div class="col-lg-7">
-                                        <textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: HowToRedeemLine3" maxlength="36"></textarea>
+                                        <textarea class="form-control" id="redeemline3" rows="1" placeholder="max 36 characters" data-bind="value: HowToRedeemLine3,click:$root.selectJobDescription" maxlength="36"></textarea>
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <a id="P7" data-bind="visible:$root.selectedJobDescription()=== 'redeemline3',click:$root.openPhraseLibrary" style="padding: 4px 8px;" class="btn btn-primary pull-right">
+                                            <i class="fa fa-lg"></i>&nbsp;....
+                                        </a>
                                     </div>
                                 </div>
                                 <div class="form-group" >
                                     <div class="col-lg-2">
-                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone" style=" font-size: 12px; ">How to redeem # 4 </label>
+                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn" style=" font-size: 12px; ">How to redeem # 4 </label>
                                     </div>
                                     <div class="col-lg-7">
-                                        <textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: HowToRedeemLine4" maxlength="36"></textarea>
+                                        <textarea class="form-control" id="redeemline4" rows="1" placeholder="max 36 characters" data-bind="value: HowToRedeemLine4,click:$root.selectJobDescription" maxlength="36"></textarea>
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <a id="P8" data-bind="visible:$root.selectedJobDescription()=== 'redeemline4',click:$root.openPhraseLibrary" style="padding: 4px 8px;" class="btn btn-primary pull-right">
+                                            <i class="fa fa-lg"></i>&nbsp;....
+                                        </a>
                                     </div>
                                 </div>
                                 <div class="form-group" >
                                     <div class="col-lg-2">
-                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone" style=" font-size: 12px; ">How to redeem # 5 </label>
+                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn" style=" font-size: 12px; ">How to redeem # 5 </label>
                                     </div>
                                     <div class="col-lg-7">
-                                        <textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: HowToRedeemLine5" maxlength="36"></textarea>
+                                        <textarea class="form-control" id="redeemline5" rows="1" placeholder="max 36 characters" data-bind="value: HowToRedeemLine5,click:$root.selectJobDescription" maxlength="36"></textarea>
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <a id="P8" data-bind="visible:$root.selectedJobDescription()=== 'redeemline5',click:$root.openPhraseLibrary" style="padding: 4px 8px;" class="btn btn-primary pull-right">
+                                            <i class="fa fa-lg"></i>&nbsp;....
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -371,7 +451,7 @@ else
                                 <div class="row">
                                     <div class="form-group" style="margin-top:10px;">
                                         <div class="col-lg-2">
-                                            <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Banner Images</label>
+                                            <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Banner Images</label>
                                         </div>
                                         <div class="col-lg-8">
                                             <div class="col-lg-4">
@@ -427,7 +507,7 @@ else
                                 <div class="row">
                                     <div class="form-group" style="margin-top:10px;">
                                         <div class="col-lg-2">
-                                            <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone">Upload Logo</label>
+                                            <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Upload Logo</label>
                                         </div>
                                         <div class="col-lg-8">
                                               <div class="col-lg-4">
@@ -452,15 +532,18 @@ else
                                <div class="row">
                                    <div class="form-group">
                                        <div class="col-lg-2">
-                                           <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone">Select Branch Address </label>
+                                           <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Select Branch Address </label>
                                        </div>
                                        <div class="col-lg-7">
                                            <select class="form-control" id="yearDropDown" data-bind="options: $root.branchLocations, optionsText: 'BranchTitle', optionsValue: 'BranchId', value: LocationBranchId, event:{ change: $root.locationChanged}"></select>
                                        </div>
+                                       <div class="col-lg-2">
+                                          
+                                       </div>
                                    </div>
                                    <div class="form-group">
                                        <div class="col-lg-2">
-                                           <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone">Branch Address </label>
+                                           <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Branch Address </label>
                                        </div>
                                        <div class="col-lg-7">
                                            <textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: LocationLine1" maxlength="36" readonly="readonly"></textarea>
@@ -468,7 +551,7 @@ else
                                    </div>
                                    <div class="form-group">
                                        <div class="col-lg-2">
-                                           <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone">optional </label>
+                                           <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">optional </label>
                                        </div>
                                        <div class="col-lg-7">
                                            <textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: LocationLine2" maxlength="36" readonly="readonly"></textarea>
@@ -476,7 +559,7 @@ else
                                    </div>
                                    <div class="form-group">
                                        <div class="col-lg-2">
-                                           <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone">City </label>
+                                           <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">City </label>
                                        </div>
                                        <div class="col-lg-7">
                                            <textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: LocationCity" maxlength="36" readonly="readonly"></textarea>
@@ -484,7 +567,7 @@ else
                                    </div>
                                    <div class="form-group">
                                        <div class="col-lg-2">
-                                           <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone">State </label>
+                                           <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">State </label>
                                        </div>
                                        <div class="col-lg-7">
                                            <textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: LocationState" maxlength="36" readonly="readonly"></textarea>
@@ -492,7 +575,7 @@ else
                                    </div>
                                    <div class="form-group">
                                        <div class="col-lg-2">
-                                           <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone">Zip </label>
+                                           <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Zip </label>
                                        </div>
                                        <div class="col-lg-7">
                                            <textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: LocationZipCode" maxlength="36" readonly="readonly"></textarea>
@@ -500,23 +583,26 @@ else
                                    </div>
                                    <div class="form-group">
                                        <div class="col-lg-2">
-                                           <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone">Geo location Lat</label>
+                                           <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Geo location Lat</label>
                                        </div>
                                        <div class="col-lg-7">
-                                           <textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: LocationLAT" readonly="readonly"></textarea>
+                                           <textarea class="form-control" id="geolocation" rows="1" placeholder="max 36 characters" data-bind="value: LocationLAT" readonly="readonly"></textarea>
                                        </div>
+                                    
+
                                    </div>
                                    <div class="form-group">
                                        <div class="col-lg-2">
-                                           <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone">Geo location Long</label>
+                                           <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Geo location Long</label>
                                        </div>
                                        <div class="col-lg-7">
-                                           <textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: LocationLON" readonly="readonly"></textarea>
+                                           <textarea class="form-control" id="geolocationlong" rows="1" placeholder="max 36 characters" data-bind="value: LocationLON" readonly="readonly"></textarea>
                                        </div>
+                                   
                                    </div>
                                    <div class="form-group">
                                        <div class="col-lg-2">
-                                           <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone">Phone no </label>
+                                           <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Phone no </label>
                                        </div>
                                        <div class="col-lg-7">
                                            <textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 36 characters" data-bind="value: LocationPhone" readonly="readonly"></textarea>
@@ -598,6 +684,8 @@ else
 
 </div>
 @Html.Partial("~/Areas/Coupons/Views/Coupons/_addEditCouponCategories.cshtml")
+
+
 <script id="ListOfSelectedCouponCats" type="text/html">
     <!--ko if:IsSelected == true-->
     <span data-bind="text: Name">
@@ -606,6 +694,9 @@ else
     <!--/ko-->
 </script>
 <script>
+
+    
+
     function showUploadDialog() {
         $("#logo_image_file").click();
 

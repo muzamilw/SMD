@@ -222,11 +222,11 @@ else
     <div class="filter-body" id="filter" >
 
         <div class="row">
-            <div class="col-sm-12" style="float: left; margin-bottom:15px;">
-
+            <div class="col-sm-12" style="float: left; margin-bottom:20px;">
+                <br />
                 <span style="font-size: 24px;">Coupon Promotions </span><br />
                 
-                <span style="font-size: 14px;">Paid coupon promotions are listed for whole one calendar month. Submission fee includes unlimited issuing and redemption at all branches. &nbsp; &nbsp; &nbsp; <span class="red bold"> Watch Video </span> <img src="/Images/youtube_play.JPG" height="25px" />  </span><br />
+                <span style="font-size: 14px;">Paid coupon promotions are listed for whole one calendar month. Submission fee includes unlimited issuing and redemption at all branches. &nbsp; &nbsp; &nbsp; <span class="red bold rightAlign"> Watch Video <img src="/Images/youtube_play.JPG" height="25px" /> </span>   </span><br />
             </div>
         </div>
 
@@ -272,12 +272,11 @@ else
 <!-- ko stopBinding: true -->
 @Html.Partial("~/Areas/Common/Views/Shared/_StripeChargeCustomerDialog.cshtml")
 <!-- /ko -->
+
 @section Scripts{
     <script src="~/Scripts/jquery.tokenize.js"></script>
     <script type="text/javascript">
-        require(["Coupons/Coupons.view", "common/stripeChargeCustomer.view", "common/confirmation.view", ]);
-
+        require(["Coupons/Coupons.view", "common/stripeChargeCustomer.view", "common/confirmation.view", "PhraseLibrary/phraseLibrary.view"]);
+        $("#btnCoupons").css("background-color", "#58267b");
     </script>
-
-
 }

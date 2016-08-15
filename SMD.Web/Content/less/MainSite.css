@@ -133,7 +133,7 @@ div.Tokenize ul.Dropdown {
   width: 286px !important;
 }
 .defaultImgUploadImageBtn {
-   margin-left:15px;text-align:left;padding-right:0px;float:left;color:rgb(52,152,219) !important;
+   margin-left:15px;text-align:left;padding-right:0px;float:left;color:#58267b!important;
     font-weight:bold;
 }
 .mright60 {
@@ -961,4 +961,22 @@ div#spinner {
     padding-top: 20px;
     text-align:center;
     background-image:url(../../Content/Images/Back_Footer_Tab.png);
+}
+.btnSmall {
+    width:110px;
+}
+.rightAlign {
+    float:right;
+}
+.store-user-link{
+    font-weight:bold;
+}
+.ads-numbering-main {
+        color: gainsboro;
+}
+.font14 {
+    font-size:14px !important;
+}
+.tooltips { 
+    z-index
 }

@@ -50,7 +50,7 @@
             //Unique ID
             phraseId = ko.observable(specifiedPhraseId),
             //Field Text
-            phraseText = ko.observable(specifiedPhrase1).extend({ required: true, maxLength: 3 }),
+            phraseText = ko.observable(specifiedPhrase1).extend({ required: true}),
             //Field Id
             SectionId = ko.observable(specifiedSectionId),
             //Flag For deleted phrase

@@ -5,7 +5,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             
-            <div class="modal-content partial-contents" style="background-color:#FFFFFF;border-radius:5px;width:600px;" id="phraseLibraryDialog">
+            <div class="modal-content partial-contents" style="background-color:#FFFFFF;border-radius:5px;width:790px;margin-left:-116px;margin-top:-1px;" id="phraseLibraryDialog">
                 <div class="modal-header" id="child-dialog-title">
                     <span class="modal-title" style="font-size:12pt;">Edit Phrase Library</span>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
@@ -141,12 +141,12 @@
 </script>
 
 <script id="phraseItemTemplate" type="text/html">
-    <tr class="phraseHover">
+    <tr class="phraseHover" data-bind="visible:!IsDeleted()">
         @*<td style="width:50px;" data-bind="click :$root.selectPhrase">
-                <span>&nbsp;&nbsp;</span>
-            </td>*@
+            <span>&nbsp;&nbsp;</span>
+        </td>*@
         <td class="col-lg-6">
-            <input type="text" class="form-control" placeholder="Enter Phrase Name" data-bind="value:phraseTextv">
+            <input type="text" class="form-control" placeholder="Enter Phrase Name" data-bind="value:phraseText">
         </td>
         <td class="text-right col-lg-5">
             <!-- ko template: { name: 'phraseActionTemplateDelete' } -->
@@ -200,31 +200,31 @@
 
 
 
-        page = Request.QueryString("status").toString();
+        //page = Request.QueryString("status").toString();
 
-        if (page != null) {
-            if (page == 'phraselibrary') {
+        //if (page != null) {
+        //    if (page == 'phraselibrary') {
 
-                $(".partial-contents").addClass("main-box-body clearfix");
-                $(".partial-contents").removeClass("modal-content");
+        //        $(".partial-contents").addClass("main-box-body clearfix");
+        //        $(".partial-contents").removeClass("modal-content");
 
-                $("#child-dialog-title").hide();
+        //        $("#child-dialog-title").hide();
 
-                $("#phrase-libraryCloseButton").css("visibility", "hidden");
-            }
-            else if (page == 'null') {
-
-
-                $(".partial-contents").removeClass("main-box-body clearfix");
-                $(".partial-contents").addClass("modal-content");
-
-                $("#child-dialog-title").show();
-
-                $("#phrase-libraryCloseButton").css("visibility", "visible");
+        //        $("#phrase-libraryCloseButton").css("visibility", "hidden");
+        //    }
+        //    else if (page == 'null') {
 
 
-            }
-        }
+        //        $(".partial-contents").removeClass("main-box-body clearfix");
+        //        $(".partial-contents").addClass("modal-content");
+
+        //        $("#child-dialog-title").show();
+
+        //        $("#phrase-libraryCloseButton").css("visibility", "visible");
+
+
+        //    }
+        //}
     });
 
     function visibleDelApply() {

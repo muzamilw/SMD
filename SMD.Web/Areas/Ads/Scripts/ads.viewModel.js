@@ -1489,14 +1489,16 @@ define("ads/ads.viewModel",
                             noErrors = false;
                             toastr.error("Please enter ad Title.");
                         }
-                        if (campaignModel().Description() == "" || campaignModel().Description() == undefined) {
-                            noErrors = false;
-                            toastr.error("Please enter first line.");
-                        }
-                        if (campaignModel().CampaignDescription() == "" || campaignModel().CampaignDescription() == undefined) {
-                            noErrors = false;
-                            toastr.error("Please enter second line.");
-                        }
+                        //if (campaignModel().Description() == "" || campaignModel().Description() == undefined) {
+                        //    noErrors = false;
+                        //    toastr.error("Please enter first line.");
+                        //}
+                        //if (campaignModel().CampaignDescription() == "" || campaignModel().CampaignDescription() == undefined) {
+                        //    noErrors = false;
+                        //    toastr.error("Please enter second line.");
+                        //}
+                        
+                      
                     }
 
                     if (previewScreenNumber() == 3) {
@@ -1521,6 +1523,7 @@ define("ads/ads.viewModel",
 
                         if (previewScreenNumber() < 5) {
                             previewScreenNumber(previewScreenNumber() + 1);
+                            $('html, body').animate({ scrollTop: 0 }, 800);
                         }
 
                     }
@@ -1531,6 +1534,7 @@ define("ads/ads.viewModel",
                      if (previewScreenNumber() > 1) {
                          previewScreenNumber(previewScreenNumber() - 1);
                      }
+                     $('html, body').animate({ scrollTop: 0 }, 800);
                  },
                 addIndustry = function (selected) {
 
