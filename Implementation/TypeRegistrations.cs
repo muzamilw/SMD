@@ -48,6 +48,8 @@ namespace SMD.Implementation
             unityContainer.RegisterType<ICouponService, CouponService>();
             unityContainer.RegisterType<ISectionService, SectionService>();
             unityContainer.RegisterType<IPhraseService, PhraseService>();
+            unityContainer.RegisterType<IBrachCategoryService, BrachCategoryService>();
+            unityContainer.RegisterType<ICompanyBranchService, CompanyBranchService>();
         }
     }
 }

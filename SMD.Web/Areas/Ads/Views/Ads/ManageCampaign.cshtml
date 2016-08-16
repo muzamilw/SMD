@@ -570,14 +570,14 @@ else
                                             </div>
                                         </div>
                                     </div>
-                                  
-                  
+
+
                                 </div>
                                 @*</div>
                                     </div>*@
                             </div>
                             <div class="col-lg-11" style="margin:auto;float:none !important;" data-bind="visible: $root.previewScreenNumber() == 3">
-                              
+
                                 <div class="form-group" style="margin-top:10px; margin-left:-8px;display:none;">
                                     <div class="col-lg-4 text-campaign-left Float-Left" style="margin-left:6px;">
                                         <label class="control-label text-right tooltip-float font20 floatNone defaultThemeTxtClr " style="float:left !important; ">Quiz Question</label>
@@ -661,7 +661,7 @@ else
                                         </div>
                                     </div>
                                 </div>
-                             
+
                                 <div class="form-group">
                                     <div class="col-lg-11">
                                         <div class="form-group" style="margin-bottom:20px; margin-top:20px;">
@@ -686,7 +686,7 @@ else
                                                 </a>
                                             </div>
                                         </div>
-                                       
+
 
                                     </div>
                                     <div class="form-group" data-bind="visible: $root.buyItQuestionStatus()">
@@ -865,8 +865,8 @@ else
                             <div>Bid more to increaseviewing priority.</div>
                             <div>50% of PPCV is rewarded to viewer.</div>
                         </div>
-                        <div class="col-xs-12" style="text-align: left; padding-right:0;margin-bottom:10px;" data-bind="with: $root.campaignModel">
-                            <span class="text-campaign-left control-label pull-left" style="    margin-top: 6px;">Pay Per Confirmed View (£) </span>
+                        <div class="col-xs-12" style="text-align: left; padding-right:0;margin-bottom:10px;font-size:0.9em;" data-bind="with: $root.campaignModel">
+                            <span class="text-campaign-left control-label pull-left" style="    margin-top: 6px;">PPVC ($) </span>
                             <input type="text" class="pull-right" style="  color:red;
     width: 77px;
     margin-top: 6px;
@@ -875,13 +875,23 @@ else
     font-size: 18px; " name="Budget" class="form-control" id="txtPerClick" data-bind="value: MaxBudget,validationTooltip:MaxBudget, validationOnElement: MaxBudget">
                             <div class="clearfix">
                             </div>
-                            <span class="text-campaign-left control-label pull-left" style="    margin-top: 6px;">Cap your daily spend (£) </span>
+                            <span class="text-campaign-left control-label pull-left" style="    margin-top: 6px;">Cap your daily spend ($) </span>
                             <input type="text" class="pull-right" style="     color: rgb(104,179,89);
     width: 77px;
     margin-top: 6px;
     margin-left: 10px;
     font-weight: bold;
-    font-size: 18px; " name="Budget" class="form-control" id="txtBudget" data-bind="value: MaxBudget,validationTooltip:MaxBudget, validationOnElement: MaxBudget">
+    font-size: 18px; " name="Budget" class="form-control" id="txtBudget" data-bind="value: MaxDailyBudget,validationTooltip:MaxDailyBudget, validationOnElement: MaxDailyBudget">
+
+                            <div class="clearfix">
+                            </div>
+                            <span class="text-campaign-left control-label pull-left" style="    margin-top: 6px;">Campaign budget ($) </span>
+                            <input type="text" class="pull-right" style="     color: rgb(104,179,89);
+    width: 77px;
+    margin-top: 6px;
+    margin-left: 10px;
+    font-weight: bold;
+    font-size: 18px; " name="Budget" class="form-control" id="txtCampaignBudget" data-bind="value: MaxBudget,validationTooltip:MaxBudget, validationOnElement: MaxBudget">
 
                             <div class="clearfix">
                             </div>
@@ -962,7 +972,7 @@ else
                     </div>
                 </div>
             </div>
-            <div class="col-lg-12" >
+            <div class="col-lg-12">
                 <div class="main-box no-header clearfix">
                     <div class="col-lg-12 form-horizontal" data-bind="with: $root.campaignModel" style="padding: 20px;">
                         <div class="col-lg-7">
@@ -1804,7 +1814,7 @@ else
                                 </div>
                             </div>
                             <div class="form-group formcontrol-bg" data-bind="visible:$root.isDisplayCouponsAds()">
-                               
+
                                 <div class="col-lg-2" style="display:none;">
                                     <img class="hidden-sm hidden-xs" src="/Content/Images/5_Main_4.png" alt="" style="   margin-left: 10px; width: 120px;
     margin-top: 23px;" />

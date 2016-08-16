@@ -265,6 +265,9 @@ namespace SMD.Repository.BaseRepository
 
         public DbSet<Section> Section { get; set; }
 
+        public DbSet<BranchCategory> BranchCategories { get; set; }
+       
+
      
 
         /// <summary>

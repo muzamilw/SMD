@@ -1,69 +1,156 @@
 ﻿<div class="modal fade my-modal" id="branchCategoryDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog" style="width:900px; ">
         <div class="modal-content">
-            <div class="modal-header">
+            <div>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Edit Role and Rights</h4>
+                <h1> Branch Locations</h1>
+                <p style="margin-left:15px;">Branch locations are used for coupons only.Create coupons with multiple participating branches by assigning saved branch locations</p>
+            </div>
+            <div class="" style="padding-right:30px;">
+                <div class="filter-block pull-right" title="Add Branch">
+                    <button data-bind="click:$root.AddNewCategory" class="btn btn-primary">
+                        New Category
+                    </button>
+                    <button data-bind="click:$root.CreateNewBranchLocation" class="btn btn-primary">
+                        New Branch Location
+                    </button>
+                </div>
             </div>
             <div class="row">
-                <div class="col-lg-12 form-horizontal outerDiv-Padding">
-                    <div class="form-group">
-                        <div class="col-sm-3 text-right">
-                            <label class="control-label text-right tooltip-float">Role Title</label>
-                        </div>
-                        <div class="col-sm-6">
-                            <input type="text" class="form-control" id="roleTitle" placeholder="Enter Role Title" />
+                <p style="margin-left:20px; font-size:large">Select region Category & branch</p>
+                <p style="margin-left:20px;">Organize your branches by geography or store type.</p>
+
+                <div class="col-lg-4" style="margin-top:10px;padding-left:10px;">
+
+                    <div class="table-responsive">
+                        <table class="table" id="phrase-section-table">
+                            <thead>
+                                <tr>
+                                    <th style="border-bottom-width: 0px;padding-bottom: 3px; padding-left:10px">
+                                        <span id="phrase-header-phrase ">SELECT CATEGORY & BRANCH</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="border:none;padding-top:7px;">
+                                        <div class="category" id="nestable2" style="margin-top: 0px; border-top-width: 1px;">
+                                            <ol class="dd-list" id="child-phrase">
+                                                <!-- ko template: { name: 'sectionItemTemplate', foreach: $root.branchCategory }-->
+                                                <!-- /ko -->
+                                            </ol>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+                <div class="col-lg-3 text-right ">
+                    <div class="table-responsive" style="margin-top:18px;" data-bind="with: $root.selectedBranch">
+                        <span style=" font-weight :bold;">
+                            Branch Address Details
+                        </span>
+                        <label for="brachtitle" class="lablelColour">Branch Title</label>
+                        <label for="address1" class="labelNewline">Address line 1</label>
+                        <label for="address2" class="labelNewline">Address line 2</label>
+                        <label for="city" class="labelNewline">City</label>
+                        <label for="state" class="labelNewline">State</label>
+                        <label for="postCode" class="labelNewline">Zip/Post Code</label>
+                        <label for="branchSale" class="labelNewlineTel">Branch Sales Tel #</label>
+                        <label for="geoX" class="labelNewlineGeoX">GEO X</label>
+                        <label for="geoY" class="labelNewlineGeoY">GEO Y</label>
+                        <label for="parentCategory" class="lablelColour">Select parent Category</label>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="text-left table-responsive margin-top" style="margin-top:35px" data-bind="with: $root.selectedBranch">
+                        <div class="col-xs-10">
+                            <input data-bind="value:branchTitle" class="form-control" id="brachtitle" type="text">
+                            <input data-bind="value:branchAddressline1" class="form-control" id="address1" type="text">
+                            <input data-bind="value:branchAddressline2" class="form-control" id="address2" type="text">
+                            <input data-bind="value:branchCity" class="form-control" id="city" type="text">
+                            <input data-bind="value:branchState" class="form-control" id="state" type="text">
+                            <input data-bind="value:branchZipCode" class="form-control" id="postCode" type="text">
+                            <input data-bind="value:branchPhone" class="form-control" id="branchSale" type="text">
+                            <input data-bind="value:branchLocationLat" class="form-control" style="width:70%" id="geoX" type="text">
+                            <input data-bind="value:branchLocationLon" class="form-control" style="width:70%" id="geoY" type="text">
+                            <select class="form-control" id="ddpCorrectAns" style="width:70%" data-bind="options:$root.branchDdlist, optionsText: 'name', optionsValue:'categoryId', value:branchCategoryId"></select>
+
+
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="col-sm-3 text-right">
-                            <label class="control-label text-right tooltip-float">Description</label>
-                        </div>
-                        <div class="col-sm-6">
-                            <textarea class="form-control" rows="3" id="txtDesc" placeholder="Enter Description"></textarea>
-                        </div>
-                    </div>
-                    <div class="form-group" style="margin-bottom: 0; padding-left: 0">
-                        <div class="col-sm-1">
-                        </div>
-                        <div class="col-sm-5" style="padding-left: 0">
-                            <label>Select Rights</label>
-                        </div>
-                        <div class="col-sm-5 text-right" style="padding-right: 44px;">
-                            <input type="checkbox" class="bigcheckbox" style="float:right;" />
-                        </div>
-                        <div class="col-sm-1">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-1 col-lg-1"></div>
-                        <div id="nestable2" class="col-sm-10 col-lg-10" style="border:1px solid #eeeeee;padding-right:15px;padding-left:15px; padding-bottom:20px;min-height:175px; max-height:200px;overflow-y:scroll;">
-                            <ol id="productCategoryDialogCategories" class="dd-list">
-                               
-                            </ol>
-                        </div>
-                        <div class="col-sm-1 col-lg-1"></div>
-                    </div>
+
+                </div>
+                <div class="col-lg-1">
+
+
                 </div>
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Save</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" data-bind="click: $root.SaveChanges" class=" btn btn-primary">Save Changes</button>
+                <button type="button" data-bind="click:$root.hideBranchCategoryDialog" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" data-bind="click: $root.DeleteBranch" class="btn btn-danger">Delete this Branch</button>
             </div>
         </div>
     </div>
 </div>
-@* Role Rights Template Template *@
-<script id="roleRightsTemplate" type="text/html">
-    <li class="dd-item dd-item-list" >
-        <div class="dd-handle-list"><i class="fa fa-chevron-circle-right cursorShape"></i></div>
-        <div class="dd-handle">
-            <div>
-                <span>
-                </span>
-                <input type="checkbox" class="bigcheckbox" style="float:right"  />
+
+@*TEMPLATE FOR SELECT CATEGORY & BRANCH*@
+<script id="sectionItemTemplate" type="text/html">
+    <li class="dd-item dd-item-list" data-id="15">
+        <div class="dd-handle-list" style="cursor: pointer;height:38px"><i class=" fa fa-chevron-circle-right" data-bind="event:{click:$root.selectCategory},css: { selectedRow: $root.selectedCategory() === $data }"></i></div>
+        <div class="dd-handle" id="SectionName" style="cursor: pointer;height:40px" data-bind="event: { dblclick :$root.EditCategory },css: { selectedRow: $root.selectedCategory() === $data }">
+
+            <div class="col-sm-12" style="padding:0">
+                <div class="col-sm-9" style="padding:0">
+                    <span id=" sectionnamespan" data-bind="text:name,visible:!isEditMode()">
+                    </span>
+                    <input data-bind="value:name,visible:isEditMode,event:{focusout:$root.SaveCategory}" autofocus class="form-control" style="width:98%;height:28px" type="text">
+                </div>
+                <div class="col-sm-1 pull-right" style="padding:0">
+
+                    <a href="#" class="table-link danger" data-bind="click:$root.DeleteCategory,visible:isVisibleDelete()" title="Delete">
+                        <span class="fa-stack">
+                            <i class="fa fa-square fa-stack-2x"></i>
+                            <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                </div>
+                <div class="col-sm-1" data-bind="visible:isEditMode()&& isVisibleDelete()">
+                    <a href="#" class="table-link success" data-bind="click:$root.SaveCategory,visible:isEditMode()" title="Save">
+                        <span class="fa-stack">
+                            <i class="fa fa-square fa-stack-2x"></i>
+                            <i class="fa fa-save fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+        <ol class="dd-list" data-bind="visible:isExpanded()">
+            <!-- ko template: { name: 'childSectionIemTemplate',foreach:brachFeilds}-->
+            <!-- /ko -->
+        </ol>
+
+    </li>
+</script>
+@*Template for Branch Field*@
+<script id="childSectionIemTemplate" type="text/html">
+    <li class="dd-item dd-item-list" data-id="16" style=" cursor:pointer;" data-bind="click: $root.selectbranchField,css: { selectedRow: $root.selectedCategory() === $data }">
+        <div class="dd-handle-list"><i class="fa fa-minus-square"></i></div>
+        <div class="dd-handle txt-blue-hover" data-bind="click: $root.selectbranchField,css: { selectedRow: $root.selectedCategory() === $data }">
+            <span data-bind=" text:branchTitle">
+            </span>
+            <div class="nested-links">
             </div>
         </div>
     </li>
 </script>
+
+
+
+

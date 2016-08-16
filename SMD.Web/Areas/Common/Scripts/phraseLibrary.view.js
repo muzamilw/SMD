@@ -8,8 +8,8 @@
             var // View model 
                 viewModel = specifiedViewModel,
                 // Binding root used with knockout
-                bindingRoot = $("#branchBinding")[0],
-                bindingPartial = $("#bindingPartialViews")[0],
+                bindingRoot = $("#phraseLibraryBinding")[0],
+                bindingPartial = $("#bindingPhrasePartialViews")[0],
                      // Show BranchCategory dialog
                 showBranchCategoryDialog = function () {
                     $("#branchCategoryDialog").modal("show");

@@ -7952,3 +7952,15 @@ BEGIN
 	FETCH NEXT @toRow ROWS ONLY
 	
 END
+
+
+alter table Company
+ADD 
+BillingAddressLine1 nvarchar(150) NULL,
+	BillingAddressLine2 nvarchar(150) NULL,
+	BillingState nvarchar(50) NULL,
+	BillingCountryId int NULL,
+	BillingCityId int NULL,
+	BillingZipCode nvarchar(50) NULL,
+	BillingPhone nvarchar(50) NULL,
+	BillingEmail nvarchar(200) NULL
