@@ -2,7 +2,7 @@
     <div class="modal-dialog" style="width:900px; ">
         <div class="modal-content">
             <div>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <button type="button" class="close" data-bind="click:$root.hideBranchCategoryDialog" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h1> Branch Locations</h1>
                 <p style="margin-left:15px;">Branch locations are used for coupons only.Create coupons with multiple participating branches by assigning saved branch locations</p>
             </div>
@@ -48,42 +48,133 @@
 
                 </div>
 
-                <div class="col-lg-3 text-right ">
-                    <div class="table-responsive" style="margin-top:18px;" data-bind="with: $root.selectedBranch">
-                        <span style=" font-weight :bold;">
-                            Branch Address Details
-                        </span>
-                        <label for="brachtitle" class="lablelColour">Branch Title</label>
-                        <label for="address1" class="labelNewline">Address line 1</label>
-                        <label for="address2" class="labelNewline">Address line 2</label>
-                        <label for="city" class="labelNewline">City</label>
-                        <label for="state" class="labelNewline">State</label>
-                        <label for="postCode" class="labelNewline">Zip/Post Code</label>
-                        <label for="branchSale" class="labelNewlineTel">Branch Sales Tel #</label>
-                        <label for="geoX" class="labelNewlineGeoX">GEO X</label>
-                        <label for="geoY" class="labelNewlineGeoY">GEO Y</label>
-                        <label for="parentCategory" class="lablelColour">Select parent Category</label>
-                    </div>
+                <div class="col-lg-8 form-horizontal" data-bind="with: $root.selectedBranch" >
+                    <div class=" form-group">
+                        <label for="branchTitle" class="labelFontBranch">Branch Address Details</label>
                 </div>
-                <div class="col-lg-4">
-                    <div class="text-left table-responsive margin-top" style="margin-top:35px" data-bind="with: $root.selectedBranch">
-                        <div class="col-xs-10">
-                            <input data-bind="value:branchTitle" class="form-control" id="brachtitle" type="text">
-                            <input data-bind="value:branchAddressline1" class="form-control" id="address1" type="text">
-                            <input data-bind="value:branchAddressline2" class="form-control" id="address2" type="text">
-                            <input data-bind="value:branchCity" class="form-control" id="city" type="text">
-                            <input data-bind="value:branchState" class="form-control" id="state" type="text">
-                            <input data-bind="value:branchZipCode" class="form-control" id="postCode" type="text">
-                            <input data-bind="value:branchPhone" class="form-control" id="branchSale" type="text">
-                            <input data-bind="value:branchLocationLat" class="form-control" style="width:70%" id="geoX" type="text">
-                            <input data-bind="value:branchLocationLon" class="form-control" style="width:70%" id="geoY" type="text">
-                            <select class="form-control" id="ddpCorrectAns" style="width:70%" data-bind="options:$root.branchDdlist, optionsText: 'name', optionsValue:'categoryId', value:branchCategoryId"></select>
-
-
+                    <div class="form-group ">
+                        <div class="col-lg-3 text-right">
+                            <label for="branchTitle" class="col-form-label labelColour ">Branch Title</label>
+                        </div>
+                        <div class="col-lg-5">
+                            <input class="form-control" data-bind="value:branchTitle" type="text" id="branchTitle">
                         </div>
                     </div>
-
+                    <div class="form-group ">
+                        <div class="col-lg-3 text-right">
+                            <label for="branaddress1" class="col-form-label">Address Line 1</label>
+                        </div>
+                        <div class="col-lg-5">
+                            <input class="form-control" data-bind="value:branchAddressline1" type="text" id="branaddress1">
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <div class="col-lg-3 text-right">
+                            <label for="branaddress2" class="col-form-label">Address Line 2</label>
+                        </div>
+                        <div class="col-lg-5">
+                            <input class="form-control" data-bind="value:branchAddressline2" type="text" id="branaddress2">
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <div class="col-lg-3 text-right">
+                            <label for="city" class="col-form-label">City</label>
+                        </div>
+                        <div class="col-lg-5">
+                            <input class="form-control" data-bind="value:branchCity" type="text" id="city">
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <div class="col-lg-3 text-right">
+                            <label for="state" class="col-form-label">State</label>
+                        </div>
+                        <div class="col-lg-5">
+                            <input class="form-control" data-bind="value:branchState" type="text" id="state">
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <div class="col-lg-3 text-right">
+                            <label for="zipCode" class="col-form-label">Zip/Post Code</label>
+                        </div>
+                        <div class="col-lg-5">
+                            <input class="form-control" data-bind="value:branchZipCode" type="text" id="zipCode">
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <div class="col-lg-3 text-right">
+                            <label for="phnNo" class="col-form-label labelColour">Branch Sales Tel #</label>
+                        </div>
+                        <div class="col-lg-5">
+                            <input class="form-control" data-bind="value:branchPhone" type="text" id="phnNo">
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <div class="col-lg-3 text-right">
+                            <label for="geoX" class="col-form-label labelColour">GEO X</label>
+                        </div>
+                        <div class="col-lg-5">
+                            <input class="form-control" data-bind="value:branchLocationLat" type="text" style="width:70%" id="geoX">
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <div class="col-lg-3 text-right">
+                            <label for="geoy" class="col-form-label labelColour">GEO Y</label>
+                        </div>
+                        <div class="col-lg-5">
+                            <input class="form-control" data-bind="value:branchLocationLon" type="text" style="width:70%" id="geoy">
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <div class="col-lg-3 text-right">
+                            <label for="pCategory" class="col-form-label labelColour">Select parent Category</label>
+                        </div>
+                        <div class="col-lg-5">
+                            <select class="form-control" data-bind="options:$root.branchDdlist, optionsText: 'name', optionsValue:'categoryId', value:branchCategoryId" id="pCategory" style="width:70%"></select>
+                        </div>
+                    </div>
                 </div>
+
+
+
+
+
+
+                @*<div class="col-lg-3 text-right ">
+                        <div class="table-responsive" style="margin-top:18px;" data-bind="with: $root.selectedBranch">
+                            <span style=" font-weight :bold;">
+                                Branch Address Details
+                            </span>
+                            <label for="brachtitle" class="lablelColour">Branch Title</label>
+                            <label for="address1" class="labelNewline">Address line 1</label>
+                            <label for="address2" class="labelNewline">Address line 2</label>
+                            <label for="city" class="labelNewline">City</label>
+                            <label for="state" class="labelNewline">State</label>
+                            <label for="postCode" class="labelNewline">Zip/Post Code</label>
+                            <label for="branchSale" class="labelNewlineTel">Branch Sales Tel #</label>
+                            <label for="geoX" class="labelNewlineGeoX">GEO X</label>
+                            <label for="geoY" class="labelNewlineGeoY">GEO Y</label>
+                            <label for="parentCategory" class="lablelColour">Select parent Category</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="text-left table-responsive margin-top" style="margin-top:35px" data-bind="with: $root.selectedBranch">
+                            <div class="col-xs-10">
+                                <input data-bind="value:branchTitle" class="form-control" id="brachtitle" type="text">
+                                <input data-bind="value:branchAddressline1" class="form-control" id="address1" type="text">
+                                <input data-bind="value:branchAddressline2" class="form-control" id="address2" type="text">
+                                <input data-bind="value:branchCity" class="form-control" id="city" type="text">
+                                <input data-bind="value:branchState" class="form-control" id="state" type="text">
+                                <input data-bind="value:branchZipCode" class="form-control" id="postCode" type="text">
+                                <input data-bind="value:branchPhone" class="form-control" id="branchSale" type="text">
+                                <input data-bind="value:branchLocationLat" class="form-control" style="width:70%" id="geoX" type="text">
+                                <input data-bind="value:branchLocationLon" class="form-control" style="width:70%" id="geoY" type="text">
+                                <select class="form-control" id="ddpCorrectAns" style="width:70%" data-bind="options:$root.branchDdlist, optionsText: 'name', optionsValue:'categoryId', value:branchCategoryId"></select>
+
+
+                            </div>
+                        </div>
+
+                    </div>*@
                 <div class="col-lg-1">
 
 
@@ -91,9 +182,10 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" data-bind="click: $root.SaveChanges" class=" btn btn-primary">Save Changes</button>
+
+                <button type="button" data-bind="click: $root.DeleteBranch,visible:$root.isSaveChangesEnable()" class="btn btn-danger">Delete this Branch</button>
+                <button type="button" data-bind="click: $root.SaveChanges,enable:$root.isSaveChangesEnable()" class=" btn btn-primary">Save Changes</button>
                 <button type="button" data-bind="click:$root.hideBranchCategoryDialog" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" data-bind="click: $root.DeleteBranch" class="btn btn-danger">Delete this Branch</button>
             </div>
         </div>
     </div>

@@ -1625,12 +1625,12 @@
     <Content Include="Areas\Coupons\Views\Shared\_BranchDetails.cshtml" />
     <Content Include="Areas\Common\Views\Shared\_phraseLibrary.cshtml" />
     <Content Include="Areas\Coupons\Views\Coupons\_addEditCouponCategories.cshtml" />
-    <None Include="config\Web.connectionstrings - Copy.configx" />
-    <None Include="config\Web.connectionstrings.config" />
-    <None Include="config\Web.connectionstrings.default.config" />
     <Content Include="Content\less\MainSite.css.map">
       <DependentUpon>MainSite.css</DependentUpon>
     </Content>
+    <None Include="config\Web.connectionstrings - Copy.configx" />
+    <None Include="config\Web.connectionstrings.config" />
+    <None Include="config\Web.connectionstrings.default.config" />
     <None Include="Properties\PublishProfiles\mz profile.pubxml" />
     <None Include="Properties\PublishProfiles\SMD MIS Saqib.pubxml" />
     <None Include="Properties\PublishProfiles\SMD.pubxml" />
