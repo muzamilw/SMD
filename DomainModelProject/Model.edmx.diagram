@@ -142,6 +142,8 @@
         <AssociationConnector Association="SMDDevModel.fk_sectionId" />
         <EntityTypeShape EntityType="SMDDevModel.UserPurchasedCoupon" Width="1.5" PointX="17.25" PointY="65" />
         <AssociationConnector Association="SMDDevModel.FK_UserPurchasedCoupon_Coupon" />
+        <EntityTypeShape EntityType="SMDDevModel.DamImage" Width="1.5" PointX="10.5" PointY="40.875" />
+        <AssociationConnector Association="SMDDevModel.FK_DamImages_Company" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
