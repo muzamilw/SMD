@@ -387,3 +387,12 @@ a.reportAnchor a:hover {
 .selectedRow {
     background: none repeat scroll 0 0 #afafaf !important;
 }
+.GridHeaderFont_size {
+    font-size:11px!important;
+}
+.Theme_standard_clr {
+    color: #58267b!important;
+}
+.Theme_subheading-Clr {
+   color: #7f8c8d!important;
+}

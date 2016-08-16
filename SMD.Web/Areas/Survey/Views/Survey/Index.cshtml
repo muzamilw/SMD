@@ -34,11 +34,11 @@ else
                             <table class="table table-striped table-hover" id="surveyQuestionLVTable">
                                 <thead>
                                     <tr>
-                                        <th class="col-sm-2 th-pointer"><span>Survey Name</span></th>
-                                        <th class="col-sm-3 th-pointer"><span>Question</span></th>
-                                        <th class="col-sm-2 th-pointer"><span>Start Date</span></th>
-                                        <th class="col-sm-2 th-pointer"><span class="@userClasses">End Date</span><span class="@adminClasses">Created by</span> </th>
-                                        <th class="col-sm-2 th-pointer"><span>Status </span></th>
+                                        <th class="col-sm-2 th-pointer"><span class="GridHeaderFont_size">Survey Name</span></th>
+                                        <th class="col-sm-3 th-pointer" style="display:none;"><span class="GridHeaderFont_size">Question</span></th>
+                                        <th class="col-sm-2 th-pointer"><span class="GridHeaderFont_size">Start Date</span></th>
+                                        <th class="col-sm-2 th-pointer"><span class="@userClasses">End Date</span><span class="@adminClasses GridHeaderFont_size">Delivered %</span></th>
+                                        <th class="col-sm-2 th-pointer"><span class="GridHeaderFont_size">Status</spanclass=""></th>
                                         <th class="col-sm-2 th-pointer"><span>&nbsp; </span></th>
                                     </tr>
                                 </thead>
@@ -67,7 +67,7 @@ else
             <td>
                 <a href="#" class="store-user-link" data-bind="text: Question,click:$root.onEditSurvey"></a>
             </td>
-            <td>
+            <td style="display:none;">
                 <p data-bind="text:DisplayQuestion"></p>
             </td>
             <td>
@@ -78,10 +78,17 @@ else
             </td>
             <td>
                 <!--ko if:Status() == 6 -->
-                <p class="bold red" data-bind="text:StatusValue "></p>
+                <div class="text-left statusbg" style="background:red;width: 125px">
+                    <span data-bind="text: StatusValue">
+                    </span>
+                </div>
+
                 <!--/ko-->
                 <!--ko if:Status() != 6 -->
-                <p class="bold" data-bind="text:StatusValue "></p>
+                <div class="text-left statusbg" style="background: #37c675;width: 125px">
+                    <span data-bind="text: StatusValue">
+                    </span>
+                </div>
                 <!--/ko-->
                 
             </td>
@@ -105,8 +112,8 @@ else
 
                 <div class="col-sm-12" style="float: left; margin-bottom:20px;">
                     <br />
-                    <span style="font-size: 24px;" >Survey Questions</span><br />
-                    <span style="font-size: 14px;">survey description</span>  &nbsp; &nbsp; &nbsp; <span class="red bold rightAlign" style=" margin-right: 14px;"> Watch Video <img src="/Images/youtube_play.JPG" height="25px" /> </span>   </span><br />
+                    <span style="font-size: 24px;" class="Theme_standard_clr">Survey Questions</span><br />
+                       <span class="red bold rightAlign" style=" margin-right: 14px;"> Watch Video <img src="/Images/youtube_play.JPG" height="25px" /> </span> <span style="font-size: 14px;margin-right:8px;" class="Theme_standard_clr rightAlign">survey description</span>&nbsp; &nbsp; &nbsp;<br />
                 </div>
 
 
@@ -161,7 +168,7 @@ else
 <script src="~/Scripts/jquery.tokenize.js"></script>
     <script type="text/javascript">
         require(["survey/survey.view", "common/confirmation.view", "common/stripeChargeCustomer.view"]);
-        $("#btnSurveys").css("background-color", "rgb(146, 190, 71)");
+        $("#btnSurvey").css("background-color", "#93bf47");
     </script>
 
 

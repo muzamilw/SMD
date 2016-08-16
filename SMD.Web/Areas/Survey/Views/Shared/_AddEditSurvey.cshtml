@@ -58,7 +58,7 @@
                                     <div class="form-group" style="margin-bottom:14px;">
                                         <div class="col-lg-2">
 
-                                            <label for="txtSurveyTtile" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Survey Title</label>
+                                            <label for="txtSurveyTtile" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Survey Name</label>
                                         </div>
                                         <div class="col-lg-7">
                                             <input type="text" name="Campaign Name" class="form-control" id="txtSurveyTtile" placeholder="Enter Survey title" data-bind="value: Question,validationTooltip: Question, validationOnElement: Question">
@@ -77,12 +77,12 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="adsubHeading " style=" color: #58267b !important ;margin-bottom:20px; margin-top:20px;">
+                                    <div class="adsubHeading " style=" color: #58267b !important ;margin-bottom:20px; margin-top:20px;display:none;">
                                         Survey Description
                                     </div>
                                    
-                                    <div class="form-group" style="margin-bottom:14px;">
-                                        <div class="col-lg-2" style="padding-top:12px;">
+                                    <div class="form-group" style="margin-bottom:14px;display:none;">
+                                        <div class="col-lg-2" style="padding-top:12px;" style="display:none;">
                                             <label for="txtDisplayQuestion" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Survey Display Question</label>
                                         </div>
                                         <div class="col-lg-7">
@@ -101,7 +101,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group" style="margin-bottom:25px;">
+                                    <div class="form-group" style="margin-bottom:25px;display:none;">
                                         <div class="col-lg-2" style="padding-top:12px;">
                                             <label for="txtSurveyDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Survey Description</label>
                                         </div>
@@ -123,7 +123,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group" style="margin-bottom:25px;">
+                                    <div class="form-group" style="margin-bottom:25px;display:none;">
                                      
                                         <div class="col-lg-6">
                                             <div class="col-lg-4" style="padding-top:12px;     margin-left: -13px;">
@@ -138,8 +138,8 @@
                                                         @*<div data-bind="visible:LeftPictureBytes()==null,attr: { backgroundImage:  LeftPicturePath() }" class="surveyLeftImagePc">
 
                                         </div>*@
-                                                        <img style="width:auto;height:200px;max-width:200px;" data-bind="visible:LeftPictureBytes()==null,attr: { src:  LeftPicturePath() }" src="/Images/select_image.jpg" />
-                                                        <img style="width:auto;height:80px;max-width:200px;" data-bind="visible:LeftPictureBytes()!=null,attr: { src: LeftPictureBytes }" />
+                                                        <img style="width:150px;height:300px;" data-bind="visible:LeftPictureBytes()==null,attr: { src:  LeftPicturePath() }" src="/Images/select_image.jpg" />
+                                                        <img style="width:150px;height:300px;" data-bind="visible:LeftPictureBytes()!=null,attr: { src: LeftPictureBytes }" />
 
                                                     </div>
 
@@ -178,8 +178,8 @@
                                                         @*<div data-bind="visible:RightPictureBytes()==null" class="surveyLeftImagePc">
 
                                         </div>*@
-                                                        <img style="width:auto;height:200px;max-width:200px;" data-bind="visible:RightPictureBytes()==null,attr: { src:  RightPicturePath() }," src="/Images/select_image.jpg" />
-                                                        <img style="width:auto;height:80px;max-width:200px;" data-bind="visible:RightPictureBytes()!=null,attr: { src: RightPictureBytes }" />
+                                                        <img style="width:150px;height:300px;" data-bind="visible:RightPictureBytes()==null,attr: { src:  RightPicturePath() }," src="/Images/select_image.jpg" />
+                                                        <img style="width:150px;height:300px;" data-bind="visible:RightPictureBytes()!=null,attr: { src: RightPictureBytes }" />
                                                     </div>
 
                                                 </div>
@@ -490,7 +490,7 @@
                                                         <div class="modal-content">
                                                             <div class="modal-header">
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                                <h4 class="modal-title" id="gridSystemModalLabel" data-bind="text:$root.editCriteriaHeading()">Add Criteria</h4>
+                                                                <h4 class="modal-title Theme_standard_clr" id="gridSystemModalLabel" data-bind="text:$root.editCriteriaHeading()">Add Criteria</h4>
                                                             </div>
                                                             <div class="modal-body" data-bind="with:$root.selectedCriteria">
                                                                 <div class="row">
@@ -524,7 +524,7 @@
                                                                             <div class="form-group" data-bind="visible:$root.isNewCriteria">
                                                                                 <div class="col-lg-8 pull-left">
                                                                                     <div class="row header">
-                                                                                        <label class="control-label modelHeading">Profile Questions</label>
+                                                                                        <label class="control-label modelHeading Theme_subheading-Clr {">Profile Questions</label>
                                                                                     </div>
                                                                                     <div class="listview parentList set-border padding10 list-type-tiles" data-role="listview" id="lv1">
                                                                                         <!-- ko template: { name: 'profileQuestionTiles' , foreach: $root.profileQuestionList} --><!-- /ko -->
@@ -535,7 +535,7 @@
                                                                                 </div>
                                                                                 <div class="col-lg-4 pull-left">
                                                                                     <div class="row header">
-                                                                                        <label class="control-label modelHeading">Survey Questions</label>
+                                                                                        <label class="control-label modelHeading Theme_subheading-Clr ">Survey Questions</label>
                                                                                     </div>
                                                                                     <div class="listview parentList set-border padding10 list-type-tiles" data-role="listview" id="lv2">
                                                                                         <!-- ko template: { name: 'surveyQuestionTiles' , foreach: $root.surveyQuestionList} --><!-- /ko -->
@@ -600,7 +600,7 @@
                                     </thead>*@
                                                     <tbody>
                                                         <tr data-bind="visible: $root.visibleTargetAudience(1)  != 1 && $root.visibleTargetAudience(2)  != 1">
-                                                            <td class="noCriteria"><span>No additional targeting criteria selected</span></td>
+                                                            <td class="noCriteria"><span class="Theme_subheading-Clr">No additional targeting criteria selected</span></td>
                                                         </tr>
                                                         <!-- ko template: { name: 'answersTemplate', foreach: SurveyQuestionTargetCriteria } -->
                                                         <!-- /ko -->
@@ -615,7 +615,7 @@
                                     </div>
                                     <div class="col-lg-9">
                                        
-                                        <div class="form-group">
+                                        <div class="form-group" style="display:none;">
                                             <div class="col-lg-3">
                                              
                                                 <label for="txtVerifyQuestion" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Parent Survey Question</label>
