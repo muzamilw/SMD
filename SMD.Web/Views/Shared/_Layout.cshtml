@@ -186,12 +186,17 @@
 
 
                         </div>
-                        <div class="col-sm-6 pull-right text-right" id="branchBinding">
+                        <div class="col-sm-6 pull-right text-right" >
                           
-                            <a class="btn btn-default btn-gray" id="btninviteusers" style="    width: 100px;" href="~/user/ManageUser/ManageUsers">Invite<br /> Users</a>
-                            <a class="btn btn-default btn-gray btnSmall" data-bind="click:showBranchDialoge" style="    width: 100px;" href="#" id="btnBranchLocations">Branch Locations</a>
-                            <a class="btn btn-default btn-gray btnSmall" style="    width: 100px;" href="/Coupons/Coupons" id="btnImageLibrary">Image Library</a>
-                            <a class="btn btn-default btn-gray btnSmall" id="btnPhraseLibrary" style="    width: 100px;" data-bind="click:showphraseLibraryDialog">Phrase Library</a>
+                            <a class="btn btn-default btn-gray float-right" id="btninviteusers" style="    width: 100px;" href="~/user/ManageUser/ManageUsers">Invite<br /> Users</a>
+                            <div id="branchBinding" class=" float-right">
+                                <a class="btn btn-default btn-gray btnSmall" data-bind="click:showBranchDialoge" style="    width: 100px;" href="#" id="btnBranchLocations">Branch Locations</a>
+                            </div>
+                            <a class="btn btn-default btn-gray btnSmall float-right" style="    width: 100px;" href="/Coupons/Coupons" id="btnImageLibrary">Image Library</a>
+                            <div id="phraseLibraryBinding" class="float-right">
+                                <a class="btn btn-default btn-gray btnSmall" id="btnPhraseLibrary" style="    width: 100px;" data-bind="click:showphraseLibraryDialog">Phrase Library</a>
+
+                            </div>
                         </div>
                     </div>
 
@@ -203,22 +208,24 @@
                 <div id="bindingPartialViews">
                     @{
                         Html.RenderPartial("~/Areas/Coupons/Views/Shared/_BranchDetails.cshtml");
-
+                    }
+                </div>
+                <div id="bindingPhrasePartialViews">
+                    @{
                         Html.RenderPartial("~/Areas/Common/Views/Shared/_phraseLibrary.cshtml");
-
                     }
                 </div>
 
-                <div id="spinner" style="display: none">
+                    <div id="spinner" style="display: none">
+                    </div>
+                    <div id="siteUrl">
+                    </div>
+                    <footer id="footer-bar" class="row">
+                        <p id="footer-copyright" class="col-xs-12">
+                            &copy; @DateTime.Now.Year Powered by Crowdcentz
+                        </p>
+                    </footer>
                 </div>
-                <div id="siteUrl">
-                </div>
-                <footer id="footer-bar" class="row">
-                    <p id="footer-copyright" class="col-xs-12">
-                        &copy; @DateTime.Now.Year Powered by Crowdcentz
-                    </p>
-                </footer>
-            </div>
         </div>
     </div>
     <!-- ko stopBinding: true -->
@@ -251,7 +258,7 @@
     <script>
 
         require(["common/confirmation.view"]);
-
+        require(["Layout/Layout.view"]);
         require(["PhraseLibrary/phraseLibrary.view"]);
       
         $(document).ready(function () {

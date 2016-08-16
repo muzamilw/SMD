@@ -4,6 +4,7 @@
         // View 
 
         ist.Layout.view = (function (specifiedViewModel) {
+
             var // View model 
                 viewModel = specifiedViewModel,
                 // Binding root used with knockout
@@ -17,16 +18,17 @@
                 hideBranchCategoryDialog = function () {
                     $("#branchCategoryDialog").modal("hide");
                 };
-            // Show BranchCategory dialog
-          
+
             return {
+
                 bindingRoot: bindingRoot,
-                bindingPartial: bindingPartial,
+                bindingPartial : bindingPartial,
                 viewModel: viewModel,
                 showBranchCategoryDialog: showBranchCategoryDialog,
                 hideBranchCategoryDialog: hideBranchCategoryDialog
-                
+
             };
+
         })(branchViewModel);
 
         // Initialize the view model
@@ -35,3 +37,4 @@
         }
         return ist.Layout.view;
     });
+    

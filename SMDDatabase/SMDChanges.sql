@@ -7952,3 +7952,25 @@ BEGIN
 	FETCH NEXT @toRow ROWS ONLY
 	
 END
+
+
+alter table Company
+ADD 
+BillingAddressLine1 nvarchar(150) NULL,
+	BillingAddressLine2 nvarchar(150) NULL,
+	BillingState nvarchar(50) NULL,
+	BillingCountryId int NULL,
+	BillingCityId int NULL,
+	BillingZipCode nvarchar(50) NULL,
+	BillingPhone nvarchar(50) NULL,
+	BillingEmail nvarchar(200) NULL
+
+
+
+	GO
+
+	ALTER TABLE dbo.Company ADD
+	TwitterHandle nvarchar(200) NULL,
+	FacebookHandle nvarchar(200) NULL,
+	InstagramHandle nvarchar(200) NULL,
+	PinterestHandle nvarchar(200) NULL

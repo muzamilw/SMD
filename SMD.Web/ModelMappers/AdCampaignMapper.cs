@@ -143,7 +143,8 @@ namespace SMD.MIS.ModelMappers
                 VideoLink2 = source.VideoLink2,
                 CouponType = source.CouponType ?? 1,
                 IsSavedCoupon = source.IsSavedCoupon ?? false,
-                DeliveryDays = source.DeliveryDays ?? 1
+                DeliveryDays = source.DeliveryDays ?? 1,
+                MaxDailyBudget = source.MaxDailyBudget ?? 0
             };
 
 

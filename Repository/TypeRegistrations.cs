@@ -56,6 +56,10 @@ namespace SMD.Repository
             unityContainer.RegisterType<ICurrencyRepository, CurrencyRepository>();
 
             unityContainer.RegisterType<ICouponCategoriesRepository, CouponCategoriesRepository>();
+
+
+            unityContainer.RegisterType<IBranchCategoryRepository, BranchCategoryRepository>();
+            unityContainer.RegisterType<ICompanyBranchRepository, CompanyBranchRepository>();
             
         }
     }

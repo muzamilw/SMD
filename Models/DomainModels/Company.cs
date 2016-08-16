@@ -36,6 +36,20 @@ namespace SMD.Models.DomainModels
         public string WebsiteLink { get; set; }
         public int? CompanyType { get; set; }
         public string VoucherSecretKey { get; set; }
+
+        public string BillingAddressLine1 { get; set; }
+        public string BillingAddressLine2 { get; set; }
+        public string BillingState { get; set; }
+        public Nullable<int> BillingCountryId { get; set; }
+        public Nullable<int> BillingCityId { get; set; }
+        public string BillingZipCode { get; set; }
+        public string BillingPhone { get; set; }
+        public string BillingEmail { get; set; }
+        public string TwitterHandle { get; set; }
+        public string FacebookHandle { get; set; }
+        public string InstagramHandle { get; set; }
+        public string PinterestHandle { get; set; }
+
         public virtual ICollection<AdCampaign> AdCampaigns { get; set; }
         public virtual ICollection<Invoice> Invoices { get; set; }
         public virtual ICollection<ProfileQuestionUserAnswer> ProfileQuestionUserAnswers { get; set; }

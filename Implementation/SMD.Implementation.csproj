@@ -163,8 +163,10 @@
     <Compile Include="Services\AccountService.cs" />
     <Compile Include="Services\AdvertService.cs" />
     <Compile Include="Services\AuditLogService.cs" />
+    <Compile Include="Services\BrachCategoryService.cs" />
     <Compile Include="Services\CityService.cs" />
     <Compile Include="Services\BackgroundEmailManagerService.cs" />
+    <Compile Include="Services\CompanyBranchService.cs" />
     <Compile Include="Services\CompanyService.cs" />
     <Compile Include="Services\CouponCategoryService.cs" />
     <Compile Include="Services\CouponService.cs" />
