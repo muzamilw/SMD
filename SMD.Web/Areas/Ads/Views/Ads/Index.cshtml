@@ -161,7 +161,7 @@ else
             <span data-bind="text: Locationss"></span>
 </td>
         <td class="col-sm-1">
-            <span data-bind="text: ClickRate().toFixed(2)"></span>
+            <span data-bind="text: '$'+ ClickRate().toFixed(2)"></span>
 </td>
 <td class="col-sm-2">
             
@@ -175,7 +175,7 @@ else
         <td class="col-sm-1">
             <span data-bind="text: MaxDailyBudget"></span>
         </td>
-        <td class="col-sm-1"><span class="@userClasses" data-bind="text: AmountSpent() ? AmountSpent().toFixed(2) : 0"></span></td>
+        <td class="col-sm-1"><span class="@userClasses" data-bind="text: AmountSpent() ? '$'+ AmountSpent().toFixed(2) : '$'+ 0"></span></td>
         <td class="col-sm-2">
             <!-- ko if: Status() == 1-->
             <div class="text-left statusbg" style="background:#6D6EFA;    width: 125px;">
