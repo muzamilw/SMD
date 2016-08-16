@@ -58,12 +58,12 @@
                     @*<span class="fa fa-bars"></span>*@
                 </button>
                 <div style="display:inline-block;margin-top:20px;">
-                    <div class="pull-left" style="width:65px;height:65px;background-color:white;"><img style="width:63px;height:63px;" src="~/@CompanyLogo" /></div>
+                    <div class="pull-left" style="width:100px;height:50px;background-color:white;"><img style="width:100px;height:50px;" src="~/@CompanyLogo" /></div>
                     <div class="pull-left" style="color:white;margin-left:10px;">
                         <p style="box-shadow: inset 0 0px 0 white, inset 0 -1px 0 white;margin-bottom:3px;display:inline-block">
                             Dashboard for
                         </p>
-                        <p style="font-size:33px;">@CompanyName</p>
+                        <p style="font-size:24px;">@CompanyName</p>
                     </div>
                 </div>
                 <div class="nav-no-collapse navbar-left pull-left hidden-sm hidden-xs" style="margin-top:23px;">
@@ -144,7 +144,7 @@
                         <li class="dropdown profile-dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <span class="hidden-xs">
-                                    <i class="fa fa-question"></i>
+                                    <i class="fa fa-life-ring"></i>
                                 </span> <b class="caret"></b>
                               
                             </a>
@@ -168,7 +168,7 @@
         </div>
     </header>
     <div id="page-wrapper" class="container">
-        <div class="row">
+        <div class="row topMenuBtns">
 
 
             @RenderSection("leftmenue", required: false)
@@ -181,17 +181,17 @@
                         <div class="col-sm-6 pull-left">
                             <a class="btn  btn-default btn-gray" style="float:left; width:20%;height:66px;margin-right:15px; white-space:normal;" id="btncampaigns" href="/Ads/Ads">Video Campaigns</a>
                             <a class="btn  btn-default btn-gray" style="float:left;width:20%;height:66px;white-space:normal;" href="/Coupons/Coupons" id="btnCoupons">Coupon <br /> Promotions</a>
-                            <a class="btn  btn-default btn-gray" style="float:left;width:20%;height:66px;white-space:normal;" href="/Survey/">Survey Cards</a>
-                            <a class="btn  btn-default btn-gray" style="float:left;width:20%;height:66px;white-space:normal;" href="~/ProfileQuestion/Manage/Index">Profile Questions</a>
+                            <a class="btn  btn-default btn-gray" style="float:left;width:20%;height:66px;white-space:normal;" href="/Survey/" id="btnSurvey">Survey Cards</a>
+                            <a class="btn  btn-default btn-gray" style="float:left;width:20%;height:66px;white-space:normal;" href="~/ProfileQuestion/Manage/Index" id="btnProQuestions">Profile Questions</a>
 
 
                         </div>
                         <div class="col-sm-6 pull-right text-right" id="branchBinding">
                           
                             <a class="btn btn-default btn-gray" id="btninviteusers" style="    width: 100px;" href="~/user/ManageUser/ManageUsers">Invite<br /> Users</a>
-                            <a class="btn btn-default btn-gray btnSmall" data-bind="click:showBranchDialoge" style="    width: 100px;" href="#">Branch Locations</a>
-                            <a class="btn btn-default btn-gray btnSmall" style="    width: 100px;" href="/Coupons/Coupons">Image Library</a>
-                            <a class="btn btn-default btn-gray btnSmall" style="    width: 100px;" data-bind="click:showphraseLibraryDialog">Phrase Library</a>
+                            <a class="btn btn-default btn-gray btnSmall" data-bind="click:showBranchDialoge" style="    width: 100px;" href="#" id="btnBranchLocations">Branch Locations</a>
+                            <a class="btn btn-default btn-gray btnSmall" style="    width: 100px;" href="/Coupons/Coupons" id="btnImageLibrary">Image Library</a>
+                            <a class="btn btn-default btn-gray btnSmall" id="btnPhraseLibrary" style="    width: 100px;" data-bind="click:showphraseLibraryDialog">Phrase Library</a>
                         </div>
                     </div>
 
@@ -261,7 +261,20 @@
             });
 
             $('#topArea').collapse();
-
+            
+            $("#btnPhraseLibrary").click(function () {
+                $("#btnPhraseLibrary").css("background-color", "#93bf47");
+            });
+          
+            $("#phrase-libraryCloseButton").click(function () {
+                $("#btnPhraseLibrary").css("background-color", "#7f8c8d");
+                $("#btnPhraseLibrary").css("border-color", "#5c6667");
+            });
+            $(".close").click(function () {
+                $("#btnPhraseLibrary").css("background-color", "#7f8c8d");
+                $("#btnPhraseLibrary").css("border-color", "#5c6667");
+            });
+            
         });
     </script>
     @RenderSection("scripts", required: false)
