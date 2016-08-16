@@ -349,6 +349,18 @@
           <Property Name="AfilliatianStatus" Type="bit" />
           <Property Name="WebsiteLink" Type="nvarchar" MaxLength="100" />
           <Property Name="CompanyType" Type="int" />
+          <Property Name="BillingAddressLine1" Type="nvarchar" MaxLength="150" />
+          <Property Name="BillingAddressLine2" Type="nvarchar" MaxLength="150" />
+          <Property Name="BillingState" Type="nvarchar" MaxLength="50" />
+          <Property Name="BillingCountryId" Type="int" />
+          <Property Name="BillingCityId" Type="int" />
+          <Property Name="BillingZipCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="BillingPhone" Type="nvarchar" MaxLength="50" />
+          <Property Name="BillingEmail" Type="nvarchar" MaxLength="200" />
+          <Property Name="TwitterHandle" Type="nvarchar" MaxLength="200" />
+          <Property Name="FacebookHandle" Type="nvarchar" MaxLength="200" />
+          <Property Name="InstagramHandle" Type="nvarchar" MaxLength="200" />
+          <Property Name="PinterestHandle" Type="nvarchar" MaxLength="200" />
           <Property Name="VoucherSecretKey" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="CompanyBranch">
@@ -2769,6 +2781,18 @@
           <NavigationProperty Name="SurveyQuestions" Relationship="Self.FK_SurveyQuestion_Company" FromRole="Company" ToRole="SurveyQuestion" />
           <NavigationProperty Name="SurveyQuestionResponses" Relationship="Self.FK_SurveyQuestionResponse_Company" FromRole="Company" ToRole="SurveyQuestionResponse" />
           <Property Name="VoucherSecretKey" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BillingAddressLine1" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="BillingAddressLine2" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="BillingState" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BillingCountryId" Type="Int32" />
+          <Property Name="BillingCityId" Type="Int32" />
+          <Property Name="BillingZipCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BillingPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BillingEmail" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="TwitterHandle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="FacebookHandle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="InstagramHandle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="PinterestHandle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="CompanyBranch">
           <Key>
@@ -5164,6 +5188,18 @@
           <EntitySetMapping Name="Companies">
             <EntityTypeMapping TypeName="SMDDevModel.Company">
               <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="PinterestHandle" ColumnName="PinterestHandle" />
+                <ScalarProperty Name="InstagramHandle" ColumnName="InstagramHandle" />
+                <ScalarProperty Name="FacebookHandle" ColumnName="FacebookHandle" />
+                <ScalarProperty Name="TwitterHandle" ColumnName="TwitterHandle" />
+                <ScalarProperty Name="BillingEmail" ColumnName="BillingEmail" />
+                <ScalarProperty Name="BillingPhone" ColumnName="BillingPhone" />
+                <ScalarProperty Name="BillingZipCode" ColumnName="BillingZipCode" />
+                <ScalarProperty Name="BillingCityId" ColumnName="BillingCityId" />
+                <ScalarProperty Name="BillingCountryId" ColumnName="BillingCountryId" />
+                <ScalarProperty Name="BillingState" ColumnName="BillingState" />
+                <ScalarProperty Name="BillingAddressLine2" ColumnName="BillingAddressLine2" />
+                <ScalarProperty Name="BillingAddressLine1" ColumnName="BillingAddressLine1" />
                 <ScalarProperty Name="VoucherSecretKey" ColumnName="VoucherSecretKey" />
                 <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
                 <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />

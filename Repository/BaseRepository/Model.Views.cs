@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets34383D4040BF3B5AE6B98ABAEB4731AC10D88495EE51CE7023D399E0A728C17C))]
+[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets027CA8AA748CB35C2861C6810323C1A44CE5A9A4B92677CD765B66BB17B20EE1))]
 
 namespace Edm_EntityMappingGeneratedViews
 {
@@ -17,18 +17,18 @@ namespace Edm_EntityMappingGeneratedViews
     /// <Summary>
     /// The type contains views for EntitySets and AssociationSets that were generated at design time.
     /// </Summary>
-    public sealed class ViewsForBaseEntitySets34383D4040BF3B5AE6B98ABAEB4731AC10D88495EE51CE7023D399E0A728C17C : System.Data.Mapping.EntityViewContainer
+    public sealed class ViewsForBaseEntitySets027CA8AA748CB35C2861C6810323C1A44CE5A9A4B92677CD765B66BB17B20EE1 : System.Data.Mapping.EntityViewContainer
     {
         
         /// <Summary>
         /// The constructor stores the views for the extents and also the hash values generated based on the metadata and mapping closure and views.
         /// </Summary>
-        public ViewsForBaseEntitySets34383D4040BF3B5AE6B98ABAEB4731AC10D88495EE51CE7023D399E0A728C17C()
+        public ViewsForBaseEntitySets027CA8AA748CB35C2861C6810323C1A44CE5A9A4B92677CD765B66BB17B20EE1()
         {
             this.EdmEntityContainerName = "BaseDbContext";
             this.StoreEntityContainerName = "SMDModelStoreContainer";
-            this.HashOverMappingClosure = "0902e55951ff37d2e8492bdae5b3d74cb5c0331ac590d4e97dbd8ea270025cbe";
-            this.HashOverAllExtentViews = "bb21d97680c03ce2b8e924e326d198932608cd3259814e453e0a54b0a6cc63e9";
+            this.HashOverMappingClosure = "d34a39ebe33848b067d858cad9a58c07815eb7f127fbf0f12b0964b704d527f4";
+            this.HashOverAllExtentViews = "22f8b01918dbda61083252f62092287111931ba1478025c4839287f2fe5f84fe";
             this.ViewCount = 102;
         }
         
@@ -1036,47 +1036,9 @@ namespace Edm_EntityMappingGeneratedViews
         }
         
         /// <Summary>
-        /// return view for SMDModelStoreContainer.Company
-        /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView25()
-        {
-            System.Text.StringBuilder viewString = new System.Text.StringBuilder(2255);
-            viewString.Append("\r\n    SELECT VALUE -- Constructing Company\r\n        [SMDModel.Store.Company](T1.");
-            viewString.Append("Company_CompanyId, T1.Company_CompanyName, T1.Company_ReplyEmail, T1.Company_Tel");
-            viewString.Append("1, T1.Company_Tel2, T1.Company_AddressLine1, T1.Company_AddressLine2, T1.Company");
-            viewString.Append("_State, T1.Company_CountryId, T1.Company_CityId, T1.Company_ZipCode, T1.Company_");
-            viewString.Append("TimeZone, T1.Company_Logo, T1.Company_StripeCustomerId, T1.Company_ChargeBeesubs");
-            viewString.Append("criptionID, T1.Company_RegisteredViaReferral, T1.Company_ReferringCompanyID, T1.");
-            viewString.Append("Company_PaypalCustomerId, T1.Company_GoogleWalletCustomerId, T1.Company_Preferre");
-            viewString.Append("dPayoutAccount, T1.Company_SalesEmail, T1.Company_ReferralCode, T1.Company_Afill");
-            viewString.Append("iatianStatus, T1.Company_WebsiteLink, T1.Company_CompanyType, T1.Company_Voucher");
-            viewString.Append("SecretKey)\r\n    FROM (\r\n        SELECT \r\n            T.CompanyId AS Company_Comp");
-            viewString.Append("anyId, \r\n            T.CompanyName AS Company_CompanyName, \r\n            T.Reply");
-            viewString.Append("Email AS Company_ReplyEmail, \r\n            T.Tel1 AS Company_Tel1, \r\n           ");
-            viewString.Append(" T.Tel2 AS Company_Tel2, \r\n            T.AddressLine1 AS Company_AddressLine1, \r");
-            viewString.Append("\n            T.AddressLine2 AS Company_AddressLine2, \r\n            T.State AS Co");
-            viewString.Append("mpany_State, \r\n            T.CountryId AS Company_CountryId, \r\n            T.Cit");
-            viewString.Append("yId AS Company_CityId, \r\n            T.ZipCode AS Company_ZipCode, \r\n           ");
-            viewString.Append(" T.TimeZone AS Company_TimeZone, \r\n            T.Logo AS Company_Logo, \r\n       ");
-            viewString.Append("     T.StripeCustomerId AS Company_StripeCustomerId, \r\n            T.ChargeBeesu");
-            viewString.Append("bscriptionID AS Company_ChargeBeesubscriptionID, \r\n            T.RegisteredViaRe");
-            viewString.Append("ferral AS Company_RegisteredViaReferral, \r\n            T.ReferringCompanyID AS C");
-            viewString.Append("ompany_ReferringCompanyID, \r\n            T.PaypalCustomerId AS Company_PaypalCus");
-            viewString.Append("tomerId, \r\n            T.GoogleWalletCustomerId AS Company_GoogleWalletCustomerI");
-            viewString.Append("d, \r\n            T.PreferredPayoutAccount AS Company_PreferredPayoutAccount, \r\n ");
-            viewString.Append("           T.SalesEmail AS Company_SalesEmail, \r\n            T.ReferralCode AS C");
-            viewString.Append("ompany_ReferralCode, \r\n            T.AfilliatianStatus AS Company_AfilliatianSta");
-            viewString.Append("tus, \r\n            T.WebsiteLink AS Company_WebsiteLink, \r\n            T.Company");
-            viewString.Append("Type AS Company_CompanyType, \r\n            T.VoucherSecretKey AS Company_Voucher");
-            viewString.Append("SecretKey, \r\n            True AS _from0\r\n        FROM BaseDbContext.Companies AS");
-            viewString.Append(" T\r\n    ) AS T1");
-            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.Company", viewString.ToString());
-        }
-        
-        /// <Summary>
         /// return view for SMDModelStoreContainer.AspNetUsers
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView26()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView25()
         {
             System.Text.StringBuilder viewString = new System.Text.StringBuilder(3325);
             viewString.Append("\r\n    SELECT VALUE -- Constructing AspNetUsers\r\n        [SMDModel.Store.AspNetUs");
@@ -1127,7 +1089,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for SMDModelStoreContainer.AdCampaignResponse
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView27()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView26()
         {
             System.Text.StringBuilder viewString = new System.Text.StringBuilder(2075);
             viewString.Append("\r\n    SELECT VALUE -- Constructing AdCampaignResponse\r\n        [SMDModel.Store.A");
@@ -1162,7 +1124,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for SMDModelStoreContainer.CampaignCategories
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView28()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView27()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.CampaignCategories", @"
     SELECT VALUE -- Constructing CampaignCategories
@@ -1180,7 +1142,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for SMDModelStoreContainer.CouponCategory
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView29()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView28()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.CouponCategory", @"
     SELECT VALUE -- Constructing CouponCategory
@@ -1200,7 +1162,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for SMDModelStoreContainer.AdCampaign
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView30()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView29()
         {
             System.Text.StringBuilder viewString = new System.Text.StringBuilder(9023);
             viewString.Append("\r\n    SELECT VALUE -- Constructing AdCampaign\r\n        [SMDModel.Store.AdCampaig");
@@ -1322,7 +1284,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for SMDModelStoreContainer.AdCampaignTargetCriteria
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView31()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView30()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.AdCampaignTargetCriteria", "\r\n    SELECT VALUE -- Constructing AdCampaignTargetCriteria\r\n        [SMDModel.St" +
                     "ore.AdCampaignTargetCriteria](T1.AdCampaignTargetCriteria_CriteriaID, T1.AdCampa" +
@@ -1350,7 +1312,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for SMDModelStoreContainer.CompaniesAspNetUsers
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView32()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView31()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.CompaniesAspNetUsers", @"
     SELECT VALUE -- Constructing CompaniesAspNetUsers
@@ -1373,7 +1335,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for SMDModelStoreContainer.BranchCategory
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView33()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView32()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.BranchCategory", @"
     SELECT VALUE -- Constructing BranchCategory
@@ -1391,7 +1353,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for SMDModelStoreContainer.CompanyBranch
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView34()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView33()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.CompanyBranch", @"
     SELECT VALUE -- Constructing CompanyBranch
@@ -1418,7 +1380,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for SMDModelStoreContainer.Coupon
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView35()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView34()
         {
             System.Text.StringBuilder viewString = new System.Text.StringBuilder(4946);
             viewString.Append("\r\n    SELECT VALUE -- Constructing Coupon\r\n        [SMDModel.Store.Coupon](T1.Co");
@@ -1489,7 +1451,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for SMDModelStoreContainer.CouponCategories
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView36()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView35()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.CouponCategories", @"
     SELECT VALUE -- Constructing CouponCategories
@@ -1507,7 +1469,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for SMDModelStoreContainer.UserPurchasedCoupon
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView37()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView36()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.UserPurchasedCoupon", @"
     SELECT VALUE -- Constructing UserPurchasedCoupon
@@ -1525,6 +1487,57 @@ namespace Edm_EntityMappingGeneratedViews
             True AS _from0
         FROM BaseDbContext.UserPurchasedCoupons AS T
     ) AS T1");
+        }
+        
+        /// <Summary>
+        /// return view for SMDModelStoreContainer.Company
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView37()
+        {
+            System.Text.StringBuilder viewString = new System.Text.StringBuilder(3293);
+            viewString.Append("\r\n    SELECT VALUE -- Constructing Company\r\n        [SMDModel.Store.Company](T1.");
+            viewString.Append("Company_CompanyId, T1.Company_CompanyName, T1.Company_ReplyEmail, T1.Company_Tel");
+            viewString.Append("1, T1.Company_Tel2, T1.Company_AddressLine1, T1.Company_AddressLine2, T1.Company");
+            viewString.Append("_State, T1.Company_CountryId, T1.Company_CityId, T1.Company_ZipCode, T1.Company_");
+            viewString.Append("TimeZone, T1.Company_Logo, T1.Company_StripeCustomerId, T1.Company_ChargeBeesubs");
+            viewString.Append("criptionID, T1.Company_RegisteredViaReferral, T1.Company_ReferringCompanyID, T1.");
+            viewString.Append("Company_PaypalCustomerId, T1.Company_GoogleWalletCustomerId, T1.Company_Preferre");
+            viewString.Append("dPayoutAccount, T1.Company_SalesEmail, T1.Company_ReferralCode, T1.Company_Afill");
+            viewString.Append("iatianStatus, T1.Company_WebsiteLink, T1.Company_CompanyType, T1.Company_Billing");
+            viewString.Append("AddressLine1, T1.Company_BillingAddressLine2, T1.Company_BillingState, T1.Compan");
+            viewString.Append("y_BillingCountryId, T1.Company_BillingCityId, T1.Company_BillingZipCode, T1.Comp");
+            viewString.Append("any_BillingPhone, T1.Company_BillingEmail, T1.Company_TwitterHandle, T1.Company_");
+            viewString.Append("FacebookHandle, T1.Company_InstagramHandle, T1.Company_PinterestHandle, T1.Compa");
+            viewString.Append("ny_VoucherSecretKey)\r\n    FROM (\r\n        SELECT \r\n            T.CompanyId AS Co");
+            viewString.Append("mpany_CompanyId, \r\n            T.CompanyName AS Company_CompanyName, \r\n         ");
+            viewString.Append("   T.ReplyEmail AS Company_ReplyEmail, \r\n            T.Tel1 AS Company_Tel1, \r\n ");
+            viewString.Append("           T.Tel2 AS Company_Tel2, \r\n            T.AddressLine1 AS Company_Addre");
+            viewString.Append("ssLine1, \r\n            T.AddressLine2 AS Company_AddressLine2, \r\n            T.S");
+            viewString.Append("tate AS Company_State, \r\n            T.CountryId AS Company_CountryId, \r\n       ");
+            viewString.Append("     T.CityId AS Company_CityId, \r\n            T.ZipCode AS Company_ZipCode, \r\n ");
+            viewString.Append("           T.TimeZone AS Company_TimeZone, \r\n            T.Logo AS Company_Logo,");
+            viewString.Append(" \r\n            T.StripeCustomerId AS Company_StripeCustomerId, \r\n            T.C");
+            viewString.Append("hargeBeesubscriptionID AS Company_ChargeBeesubscriptionID, \r\n            T.Regis");
+            viewString.Append("teredViaReferral AS Company_RegisteredViaReferral, \r\n            T.ReferringComp");
+            viewString.Append("anyID AS Company_ReferringCompanyID, \r\n            T.PaypalCustomerId AS Company");
+            viewString.Append("_PaypalCustomerId, \r\n            T.GoogleWalletCustomerId AS Company_GoogleWalle");
+            viewString.Append("tCustomerId, \r\n            T.PreferredPayoutAccount AS Company_PreferredPayoutAc");
+            viewString.Append("count, \r\n            T.SalesEmail AS Company_SalesEmail, \r\n            T.Referra");
+            viewString.Append("lCode AS Company_ReferralCode, \r\n            T.AfilliatianStatus AS Company_Afil");
+            viewString.Append("liatianStatus, \r\n            T.WebsiteLink AS Company_WebsiteLink, \r\n           ");
+            viewString.Append(" T.CompanyType AS Company_CompanyType, \r\n            T.BillingAddressLine1 AS Co");
+            viewString.Append("mpany_BillingAddressLine1, \r\n            T.BillingAddressLine2 AS Company_Billin");
+            viewString.Append("gAddressLine2, \r\n            T.BillingState AS Company_BillingState, \r\n         ");
+            viewString.Append("   T.BillingCountryId AS Company_BillingCountryId, \r\n            T.BillingCityId");
+            viewString.Append(" AS Company_BillingCityId, \r\n            T.BillingZipCode AS Company_BillingZipC");
+            viewString.Append("ode, \r\n            T.BillingPhone AS Company_BillingPhone, \r\n            T.Billi");
+            viewString.Append("ngEmail AS Company_BillingEmail, \r\n            T.TwitterHandle AS Company_Twitte");
+            viewString.Append("rHandle, \r\n            T.FacebookHandle AS Company_FacebookHandle, \r\n           ");
+            viewString.Append(" T.InstagramHandle AS Company_InstagramHandle, \r\n            T.PinterestHandle A");
+            viewString.Append("S Company_PinterestHandle, \r\n            T.VoucherSecretKey AS Company_VoucherSe");
+            viewString.Append("cretKey, \r\n            True AS _from0\r\n        FROM BaseDbContext.Companies AS T");
+            viewString.Append("\r\n    ) AS T1");
+            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.Company", viewString.ToString());
         }
         
         /// <Summary>
@@ -2132,47 +2145,9 @@ namespace Edm_EntityMappingGeneratedViews
         }
         
         /// <Summary>
-        /// return view for BaseDbContext.Companies
-        /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView64()
-        {
-            System.Text.StringBuilder viewString = new System.Text.StringBuilder(2262);
-            viewString.Append("\r\n    SELECT VALUE -- Constructing Companies\r\n        [DomainModels.Company](T1.");
-            viewString.Append("Company_CompanyId, T1.Company_CompanyName, T1.Company_ReplyEmail, T1.Company_Tel");
-            viewString.Append("1, T1.Company_Tel2, T1.Company_AddressLine1, T1.Company_AddressLine2, T1.Company");
-            viewString.Append("_State, T1.Company_CountryId, T1.Company_CityId, T1.Company_ZipCode, T1.Company_");
-            viewString.Append("TimeZone, T1.Company_Logo, T1.Company_StripeCustomerId, T1.Company_ChargeBeesubs");
-            viewString.Append("criptionID, T1.Company_RegisteredViaReferral, T1.Company_ReferringCompanyID, T1.");
-            viewString.Append("Company_PaypalCustomerId, T1.Company_GoogleWalletCustomerId, T1.Company_Preferre");
-            viewString.Append("dPayoutAccount, T1.Company_SalesEmail, T1.Company_ReferralCode, T1.Company_Afill");
-            viewString.Append("iatianStatus, T1.Company_WebsiteLink, T1.Company_CompanyType, T1.Company_Voucher");
-            viewString.Append("SecretKey)\r\n    FROM (\r\n        SELECT \r\n            T.CompanyId AS Company_Comp");
-            viewString.Append("anyId, \r\n            T.CompanyName AS Company_CompanyName, \r\n            T.Reply");
-            viewString.Append("Email AS Company_ReplyEmail, \r\n            T.Tel1 AS Company_Tel1, \r\n           ");
-            viewString.Append(" T.Tel2 AS Company_Tel2, \r\n            T.AddressLine1 AS Company_AddressLine1, \r");
-            viewString.Append("\n            T.AddressLine2 AS Company_AddressLine2, \r\n            T.State AS Co");
-            viewString.Append("mpany_State, \r\n            T.CountryId AS Company_CountryId, \r\n            T.Cit");
-            viewString.Append("yId AS Company_CityId, \r\n            T.ZipCode AS Company_ZipCode, \r\n           ");
-            viewString.Append(" T.TimeZone AS Company_TimeZone, \r\n            T.Logo AS Company_Logo, \r\n       ");
-            viewString.Append("     T.StripeCustomerId AS Company_StripeCustomerId, \r\n            T.ChargeBeesu");
-            viewString.Append("bscriptionID AS Company_ChargeBeesubscriptionID, \r\n            T.RegisteredViaRe");
-            viewString.Append("ferral AS Company_RegisteredViaReferral, \r\n            T.ReferringCompanyID AS C");
-            viewString.Append("ompany_ReferringCompanyID, \r\n            T.PaypalCustomerId AS Company_PaypalCus");
-            viewString.Append("tomerId, \r\n            T.GoogleWalletCustomerId AS Company_GoogleWalletCustomerI");
-            viewString.Append("d, \r\n            T.PreferredPayoutAccount AS Company_PreferredPayoutAccount, \r\n ");
-            viewString.Append("           T.SalesEmail AS Company_SalesEmail, \r\n            T.ReferralCode AS C");
-            viewString.Append("ompany_ReferralCode, \r\n            T.AfilliatianStatus AS Company_AfilliatianSta");
-            viewString.Append("tus, \r\n            T.WebsiteLink AS Company_WebsiteLink, \r\n            T.Company");
-            viewString.Append("Type AS Company_CompanyType, \r\n            T.VoucherSecretKey AS Company_Voucher");
-            viewString.Append("SecretKey, \r\n            True AS _from0\r\n        FROM SMDModelStoreContainer.Com");
-            viewString.Append("pany AS T\r\n    ) AS T1");
-            return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.Companies", viewString.ToString());
-        }
-        
-        /// <Summary>
         /// return view for BaseDbContext.Users
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView65()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView64()
         {
             System.Text.StringBuilder viewString = new System.Text.StringBuilder(2807);
             viewString.Append("\r\n    SELECT VALUE -- Constructing Users\r\n        [DomainModels.User](T1.User_Id");
@@ -2217,7 +2192,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.AdCampaignResponses
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView66()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView65()
         {
             System.Text.StringBuilder viewString = new System.Text.StringBuilder(2082);
             viewString.Append("\r\n    SELECT VALUE -- Constructing AdCampaignResponses\r\n        [DomainModels.Ad");
@@ -2253,7 +2228,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.CampaignCategories
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView67()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView66()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.CampaignCategories", @"
     SELECT VALUE -- Constructing CampaignCategories
@@ -2271,7 +2246,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.CouponCategories
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView68()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView67()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.CouponCategories", @"
     SELECT VALUE -- Constructing CouponCategories
@@ -2291,7 +2266,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.AdCampaigns
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView69()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView68()
         {
             System.Text.StringBuilder viewString = new System.Text.StringBuilder(9030);
             viewString.Append("\r\n    SELECT VALUE -- Constructing AdCampaigns\r\n        [DomainModels.AdCampaign");
@@ -2413,7 +2388,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.AdCampaignTargetCriterias
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView70()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView69()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.AdCampaignTargetCriterias", "\r\n    SELECT VALUE -- Constructing AdCampaignTargetCriterias\r\n        [DomainMode" +
                     "ls.AdCampaignTargetCriteria](T1.AdCampaignTargetCriteria_CriteriaId, T1.AdCampai" +
@@ -2441,7 +2416,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.CompaniesAspNetUsers
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView71()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView70()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.CompaniesAspNetUsers", @"
     SELECT VALUE -- Constructing CompaniesAspNetUsers
@@ -2464,7 +2439,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.BranchCategories
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView72()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView71()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.BranchCategories", @"
     SELECT VALUE -- Constructing BranchCategories
@@ -2482,7 +2457,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.CompanyBranches
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView73()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView72()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.CompanyBranches", @"
     SELECT VALUE -- Constructing CompanyBranches
@@ -2509,7 +2484,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.Coupons
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView74()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView73()
         {
             System.Text.StringBuilder viewString = new System.Text.StringBuilder(4953);
             viewString.Append("\r\n    SELECT VALUE -- Constructing Coupons\r\n        [DomainModels.Coupon](T1.Cou");
@@ -2580,7 +2555,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.CouponCategories1
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView75()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView74()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.CouponCategories1", @"
     SELECT VALUE -- Constructing CouponCategories1
@@ -2598,7 +2573,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// <Summary>
         /// return view for BaseDbContext.UserPurchasedCoupons
         /// </Summary>
-        private System.Collections.Generic.KeyValuePair<string, string> GetView76()
+        private System.Collections.Generic.KeyValuePair<string, string> GetView75()
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.UserPurchasedCoupons", @"
     SELECT VALUE -- Constructing UserPurchasedCoupons
@@ -2616,6 +2591,57 @@ namespace Edm_EntityMappingGeneratedViews
             True AS _from0
         FROM SMDModelStoreContainer.UserPurchasedCoupon AS T
     ) AS T1");
+        }
+        
+        /// <Summary>
+        /// return view for BaseDbContext.Companies
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView76()
+        {
+            System.Text.StringBuilder viewString = new System.Text.StringBuilder(3300);
+            viewString.Append("\r\n    SELECT VALUE -- Constructing Companies\r\n        [DomainModels.Company](T1.");
+            viewString.Append("Company_CompanyId, T1.Company_CompanyName, T1.Company_ReplyEmail, T1.Company_Tel");
+            viewString.Append("1, T1.Company_Tel2, T1.Company_AddressLine1, T1.Company_AddressLine2, T1.Company");
+            viewString.Append("_State, T1.Company_CountryId, T1.Company_CityId, T1.Company_ZipCode, T1.Company_");
+            viewString.Append("TimeZone, T1.Company_Logo, T1.Company_StripeCustomerId, T1.Company_ChargeBeesubs");
+            viewString.Append("criptionID, T1.Company_RegisteredViaReferral, T1.Company_ReferringCompanyID, T1.");
+            viewString.Append("Company_PaypalCustomerId, T1.Company_GoogleWalletCustomerId, T1.Company_Preferre");
+            viewString.Append("dPayoutAccount, T1.Company_SalesEmail, T1.Company_ReferralCode, T1.Company_Afill");
+            viewString.Append("iatianStatus, T1.Company_WebsiteLink, T1.Company_CompanyType, T1.Company_Billing");
+            viewString.Append("AddressLine1, T1.Company_BillingAddressLine2, T1.Company_BillingState, T1.Compan");
+            viewString.Append("y_BillingCountryId, T1.Company_BillingCityId, T1.Company_BillingZipCode, T1.Comp");
+            viewString.Append("any_BillingPhone, T1.Company_BillingEmail, T1.Company_TwitterHandle, T1.Company_");
+            viewString.Append("FacebookHandle, T1.Company_InstagramHandle, T1.Company_PinterestHandle, T1.Compa");
+            viewString.Append("ny_VoucherSecretKey)\r\n    FROM (\r\n        SELECT \r\n            T.CompanyId AS Co");
+            viewString.Append("mpany_CompanyId, \r\n            T.CompanyName AS Company_CompanyName, \r\n         ");
+            viewString.Append("   T.ReplyEmail AS Company_ReplyEmail, \r\n            T.Tel1 AS Company_Tel1, \r\n ");
+            viewString.Append("           T.Tel2 AS Company_Tel2, \r\n            T.AddressLine1 AS Company_Addre");
+            viewString.Append("ssLine1, \r\n            T.AddressLine2 AS Company_AddressLine2, \r\n            T.S");
+            viewString.Append("tate AS Company_State, \r\n            T.CountryId AS Company_CountryId, \r\n       ");
+            viewString.Append("     T.CityId AS Company_CityId, \r\n            T.ZipCode AS Company_ZipCode, \r\n ");
+            viewString.Append("           T.TimeZone AS Company_TimeZone, \r\n            T.Logo AS Company_Logo,");
+            viewString.Append(" \r\n            T.StripeCustomerId AS Company_StripeCustomerId, \r\n            T.C");
+            viewString.Append("hargeBeesubscriptionID AS Company_ChargeBeesubscriptionID, \r\n            T.Regis");
+            viewString.Append("teredViaReferral AS Company_RegisteredViaReferral, \r\n            T.ReferringComp");
+            viewString.Append("anyID AS Company_ReferringCompanyID, \r\n            T.PaypalCustomerId AS Company");
+            viewString.Append("_PaypalCustomerId, \r\n            T.GoogleWalletCustomerId AS Company_GoogleWalle");
+            viewString.Append("tCustomerId, \r\n            T.PreferredPayoutAccount AS Company_PreferredPayoutAc");
+            viewString.Append("count, \r\n            T.SalesEmail AS Company_SalesEmail, \r\n            T.Referra");
+            viewString.Append("lCode AS Company_ReferralCode, \r\n            T.AfilliatianStatus AS Company_Afil");
+            viewString.Append("liatianStatus, \r\n            T.WebsiteLink AS Company_WebsiteLink, \r\n           ");
+            viewString.Append(" T.CompanyType AS Company_CompanyType, \r\n            T.BillingAddressLine1 AS Co");
+            viewString.Append("mpany_BillingAddressLine1, \r\n            T.BillingAddressLine2 AS Company_Billin");
+            viewString.Append("gAddressLine2, \r\n            T.BillingState AS Company_BillingState, \r\n         ");
+            viewString.Append("   T.BillingCountryId AS Company_BillingCountryId, \r\n            T.BillingCityId");
+            viewString.Append(" AS Company_BillingCityId, \r\n            T.BillingZipCode AS Company_BillingZipC");
+            viewString.Append("ode, \r\n            T.BillingPhone AS Company_BillingPhone, \r\n            T.Billi");
+            viewString.Append("ngEmail AS Company_BillingEmail, \r\n            T.TwitterHandle AS Company_Twitte");
+            viewString.Append("rHandle, \r\n            T.FacebookHandle AS Company_FacebookHandle, \r\n           ");
+            viewString.Append(" T.InstagramHandle AS Company_InstagramHandle, \r\n            T.PinterestHandle A");
+            viewString.Append("S Company_PinterestHandle, \r\n            T.VoucherSecretKey AS Company_VoucherSe");
+            viewString.Append("cretKey, \r\n            True AS _from0\r\n        FROM SMDModelStoreContainer.Compa");
+            viewString.Append("ny AS T\r\n    ) AS T1");
+            return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.Companies", viewString.ToString());
         }
         
         /// <Summary>

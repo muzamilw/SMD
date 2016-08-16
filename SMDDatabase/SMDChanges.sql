@@ -7964,3 +7964,13 @@ BillingAddressLine1 nvarchar(150) NULL,
 	BillingZipCode nvarchar(50) NULL,
 	BillingPhone nvarchar(50) NULL,
 	BillingEmail nvarchar(200) NULL
+
+
+
+	GO
+
+	ALTER TABLE dbo.Company ADD
+	TwitterHandle nvarchar(200) NULL,
+	FacebookHandle nvarchar(200) NULL,
+	InstagramHandle nvarchar(200) NULL,
+	PinterestHandle nvarchar(200) NULL
