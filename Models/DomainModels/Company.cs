@@ -61,12 +61,15 @@ namespace SMD.Models.DomainModels
         public virtual ICollection<User> Users { get; set; }
         public virtual ICollection<AdCampaignResponse> AdCampaignResponses { get; set; }
 
-        public virtual CompaniesAspNetUser CompaniesAspNetUsers { get; set; }
+        //public virtual CompaniesAspNetUser CompaniesAspNetUsers { get; set; }
+        public virtual ICollection<User> AspNetUsers { get; set; }
 
         public virtual ICollection<CompanyBranch> CompanyBranches { get; set; }
         public virtual ICollection<Coupon> Coupons { get; set; }
 
         public virtual ICollection<BranchCategory> BranchCategories { get; set; }
+
+        public virtual ICollection<CompaniesAspNetUser> CompaniesAspNetUsers { get; set; }
 
     }
 }
