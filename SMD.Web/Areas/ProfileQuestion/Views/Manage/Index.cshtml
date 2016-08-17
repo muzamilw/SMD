@@ -19,6 +19,8 @@
                                 <tr>
                                     <th class="col-lg-7 th-pointer"><span id="2">Question<span></span></span></th>
                                     <th class="col-lg-2 th-pointer"><span id="1">Group<span class="icon-up"></span></span></th>
+                                    <th class="col-lg-2 th-pointer"><span id="1">Answered</span></th>
+                                    <th class="col-lg-2 th-pointer"><span id="1">Delivered%</span></th>
                                     <th class="col-lg-2 th-pointer"><span id="1">Status</span></th>
                                     <th class="col-lg-1 th-pointer" style="display:none;"><span id="3">Priority<span></span></span></th>
                                     <th id="hasLinkedtableHeader" style="display:none;" class="col-lg-1 th-pointer"><span id="4">Has Link Q<span></span></span></th>
@@ -48,6 +50,31 @@
                 <td style="padding-left:9px;">
                     <p data-bind="text:profileGroupName"></p>
                 </td>
+                <td style="padding-left:9px;">
+                   <p>Answered</p>
+                </td>
+                <td style="padding-left:9px;">
+                    <p data-bind="text:createdBy"></p>
+                </td>
+                <td style="padding-left:9px;">
+                    <!--ko if:status() == 6 -->
+                    <div class="text-left statusbg" style="background:red;width: 125px">
+                        <span data-bind="text:statusValue">
+                        </span>
+                    </div>
+
+                    <!--/ko-->
+                    <!--ko if:status() != 6 -->
+                    <div class="text-left statusbg" style="background: #37c675;width: 125px">
+                        <span data-bind="text:statusValue">
+                        </span>
+                    </div>
+                    <!--/ko-->
+
+
+
+                </td>
+
                 <td style="display:none;">
                     <p data-bind="text:priority"></p>
                 </td>

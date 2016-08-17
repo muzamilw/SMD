@@ -2,7 +2,7 @@
 
     var // ReSharper disable InconsistentNaming
         question = function (questionId, spcQuestion, pr,linkQ,gName, langId, countId, groupId, spcType,
-        spcRefreshtime,spcSkipped, spcCreationD, spcModDate,penality,spcStatus) {
+        spcRefreshtime, spcSkipped, spcCreationD, spcModDate, penality, spcStatus, CreatedBy, StatusValue) {
             var 
                 qId = ko.observable(questionId),
                 questionString = ko.observable(spcQuestion).extend({ required: true }),
@@ -14,12 +14,13 @@
                 countryId = ko.observable(countId),
                 profileGroupId = ko.observable(groupId).extend({ required: true }),
                 type = ko.observable(spcType).extend({ required: true }),
-
+                statusValue = ko.observable(StatusValue),
+                
                 refreshTime = ko.observable(spcRefreshtime),
                 skippedCount = ko.observable(spcSkipped),
                 creationDate = ko.observable(spcCreationD),
                 modifiedDate = ko.observable(spcModDate),
-                
+                createdBy = ko.observable(CreatedBy),
                 penalityForNotAnswering = ko.observable(penality),
                 status = ko.observable(spcStatus || 1),
                 answers = ko.observableArray([]),
@@ -50,7 +51,9 @@
 
                     penalityForNotAnswering: penalityForNotAnswering,
                     status: status,
-                    answers: answers
+                    answers: answers,
+                    createdBy: createdBy,
+                    statusValue: statusValue
                 }),
                 // Has Changes
                 hasChanges = ko.computed(function() {
@@ -98,12 +101,13 @@
                 penalityForNotAnswering :penalityForNotAnswering,
                 status: status,
                 answers: answers,
-
+                createdBy:createdBy,
                 hasChanges: hasChanges,
                 reset: reset,
                 dirtyFlag:dirtyFlag,
                 convertToServerData: convertToServerData,
                 isValid: isValid,
+                statusValue: statusValue,
                 errors: errors
             };
         };
@@ -247,9 +251,10 @@
     /////////////////////////////////////////////////////////QUESTION
     //server to client mapper For QUESTION
     var questionServertoClientMapper = function (itemFromServer) {
+       
         return new question(itemFromServer.PqId, itemFromServer.Question, itemFromServer.Priority,
             itemFromServer.HasLinkedQuestions, itemFromServer.ProfileGroupName, itemFromServer.LanguageId, itemFromServer.CountryId, itemFromServer.ProfileGroupId, itemFromServer.Type, itemFromServer.RefreshTime
-        , itemFromServer.SkippedCount, moment(itemFromServer.CreationDate), itemFromServer.ModifiedDate, itemFromServer.PenalityForNotAnswering, itemFromServer.Status);
+        , itemFromServer.SkippedCount, moment(itemFromServer.CreationDate), itemFromServer.ModifiedDate, itemFromServer.PenalityForNotAnswering, itemFromServer.Status, itemFromServer.CreatedBy, itemFromServer.StatusValue);
     };
     
     // Function to attain cancel button functionality QUESTION

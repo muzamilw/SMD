@@ -46,6 +46,7 @@ define("pQuestion/pQuestion.viewModel",
                     selectedQuestion = editorViewModel.itemForEditing,
                      //selected Answer
                     selectedAnswer = ko.observable(),
+                    GetObj = ko.observable(),
                     // Random number
                     randomIdForNewObjects= -1,
                     //Get Questions
@@ -64,15 +65,38 @@ define("pQuestion/pQuestion.viewModel",
                             {
                                 success: function (data) {
                                     questions.removeAll();
-                                     _.each(data.ProfileQuestions, function (item) {
-                                        questions.push(model.questionServertoClientMapper(item));
+                                    _.each(data.ProfileQuestions, function (item) {
+                                        
+
+                                        questions.push(model.questionServertoClientMapper(SetStatusForQuestion(item)));
+                                      
                                     });
+                                   
                                     pager().totalCount(data.TotalCount);
                                 },
                                 error: function () {
                                     toastr.error("Failed to load profile questions!");
                                 }
                             });
+                    },
+                    SetStatusForQuestion = function (item)
+                    {
+                       
+                        
+                        if (item.Status == 1) {
+                            item.StatusValue = "Draft";
+                        } else if (item.status == 2) {
+                            item.StatusValue = "Submitted for Approval";// canSubmitForApproval(false);
+                        } else if (item.Status == 3) {
+                            item.StatusValue = "Live";// canSubmitForApproval(false);
+                        } else if (item.Status == 4) {
+                            item.StatusValue = "Paused"; //canSubmitForApproval(false);
+                        } else if (item.Status == 5) {
+                            item.StatusValue = "Completed"; //canSubmitForApproval(false);
+                        } else if (item.Status == 6) {
+                            item.StatusValue = "Approval Rejected"; //canSubmitForApproval(true);
+                        }
+                        return item;
                     },
                      //Get Base Data for Questions
                     getBasedata = function () {
@@ -417,7 +441,8 @@ define("pQuestion/pQuestion.viewModel",
                     CanAddAnswers: CanAddAnswers,
                     filteredLinkedQuestions: filteredLinkedQuestions,
                     getSortedAnswers: getSortedAnswers,
-                    getQuestionsByFilter: getQuestionsByFilter
+                    getQuestionsByFilter: getQuestionsByFilter,
+                    SetStatusForQuestion: SetStatusForQuestion
                 };
             })()
         };
