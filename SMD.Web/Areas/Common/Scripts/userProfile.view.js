@@ -20,7 +20,7 @@ define("common/userProfile.view",
                     $("#userProfileDialog").modal("show");
                 },
                 CloseUserProfileDialog = function () {
-                    alert();
+
                     $("#userProfileDialog").modal("hide");
                 },
                  // Show Contact Company the dialog
@@ -60,9 +60,10 @@ define("common/userProfile.view",
         if (ist.userProfile.view.bindingRoot) {
             userViewModel.initialize(ist.userProfile.view);
         }
-        //if (ist.userProfile.view.bindingRootUser) {
-        //    userViewModel.initialize(ist.userProfile.view);
-        //}
+
+        if (ist.userProfile.view.bindingPartial) {
+            userViewModel.initialize(ist.userProfile.view);
+        }
         return ist.userProfile.view;
     });
 

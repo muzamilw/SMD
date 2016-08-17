@@ -54,12 +54,56 @@ define("common/userProfile.viewModel",
                          view.showUserProfileDialog();
                          getUserProfile();
                      },
-
+                     //closing
                      onCloseUserProfileDialog = function () {
-                         view.CloseUserProfileDialog();
+                       
+                         if (selectedUser().hasChanges()) {    //&& (campaignModel().Status() == null || campaignModel().Status() == 1)
+                             confirmation.messageText("Do you want to save changes?");
+                             confirmation.afterProceed(function () {
+
+                                 var data = selectedUser().convertToServerData();
+                                 dataservice.saveUserProfile(
+                                     data, {
+                                         success: function () {
+                                             toastr.success("Profile updated!");
+                                         },
+                                         error: function () {
+                                             toastr.error("Failed to update profile!");
+                                         }
+                                     });
+                             });
+                             confirmation.afterCancel(function () {
+                                 view.CloseUserProfileDialog();
+                             });
+                             confirmation.show();
+                         }
+                         else {
+
+                             view.CloseUserProfileDialog();
+                         }
+                        
                      },
 
-                         SelectedMangeUser = ko.observable(),
+                    //Update Profile
+                     //Get Base Data for Questions
+                    updateProfile = function () {
+
+                        var data = selectedUser().convertToServerData();
+                        dataservice.saveUserProfile(
+                            data, {
+                                success: function () {
+                                    selectedUser().reset();
+                                    toastr.success("Profile updated!");
+                                    view.CloseUserProfileDialog();
+                                },
+                                error: function () {
+                                    toastr.error("Failed to update profile!");
+                                }
+                            });
+
+                    },
+
+                    
                     // Get User Profile For Editing 
                    getUserProfile = function () {
                         dataservice.getUserProfile(null,
@@ -161,18 +205,6 @@ define("common/userProfile.viewModel",
                                     roles.valueHasMutated();
                                 }
 
-                                // Get Profile When Base data is loaded 
-                                //if (isUserEdit() == true)
-                                //{
-                                //    getUserProfileById();
-                                //}
-                                //else
-                                //{
-                                //    selectedUserId(0);
-                                //    getUserProfileById();
-                                //}
-                               
-                                //selectedUser().cityId(cityId);
                             },
                             error: function () {
                                 toastr.error("Failed to load base data!");
@@ -188,26 +220,7 @@ define("common/userProfile.viewModel",
                       }),
 
 
-                     
-                    //Update Profile
-                     //Get Base Data for Questions
-                    updateProfile = function () {
-                      
-                        var data = selectedUser().convertToServerData();
-                        dataservice.saveUserProfile(
-                            data, {
-
-   
-                                success: function () {
-                                  
-                                        toastr.success("Profile updated!");
-          
-                            },
-                            error: function () {
-                                toastr.error("Failed to update profile!");
-                            }
-                        });
-                    },
+                 
 
                 
 
@@ -225,34 +238,11 @@ define("common/userProfile.viewModel",
                     initialize = function (specifiedView) {
                         view = specifiedView;
                         ko.applyBindings(view.viewModel, view.bindingRoot);
-
+                        ko.applyBindings(view.viewModel, view.bindingPartial);
                        
                         getBasedata();
                         isUserEdit(true);
 
-                        //var user = getParameter(window.location.href, "user");
-                        //if (user != 1) {
-                           
-                        //    isUserEdit(true);
-                        //    selectedUserId(user);
-                        //    getBasedata();
-                        //}
-                        //else
-                        //{
-                        //    //if (view.bindingRootUser == undefined) {
-                        //    //    // Base data call
-                        //    //    getBasedata();
-                        //    //}
-
-
-                        //    if (view.bindingRoot != undefined) {
-                        //        getBasedata();
-                        //        getManagedUsers();
-                        //    }
-                        //}
-
-
-                      
 
                     };
                 return {
@@ -281,7 +271,7 @@ define("common/userProfile.viewModel",
                     ConfirmPassword: ConfirmPassword,
                     ChangePasswordOk: ChangePasswordOk,
                   
-                    SelectedMangeUser: SelectedMangeUser,
+                    
                     showUserProfileDialog: showUserProfileDialog,
                     onCloseUserProfileDialog: onCloseUserProfileDialog
                 };
