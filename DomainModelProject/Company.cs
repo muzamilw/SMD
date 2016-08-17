@@ -28,6 +28,7 @@ namespace DomainModelProject
             this.ProfileQuestionUserAnswers = new HashSet<ProfileQuestionUserAnswer>();
             this.SurveyQuestions = new HashSet<SurveyQuestion>();
             this.SurveyQuestionResponses = new HashSet<SurveyQuestionResponse>();
+            this.DamImages = new HashSet<DamImage>();
         }
     
         public int CompanyId { get; set; }
@@ -83,5 +84,6 @@ namespace DomainModelProject
         public virtual ICollection<ProfileQuestionUserAnswer> ProfileQuestionUserAnswers { get; set; }
         public virtual ICollection<SurveyQuestion> SurveyQuestions { get; set; }
         public virtual ICollection<SurveyQuestionResponse> SurveyQuestionResponses { get; set; }
+        public virtual ICollection<DamImage> DamImages { get; set; }
     }
 }

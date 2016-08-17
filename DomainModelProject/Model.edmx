@@ -501,6 +501,17 @@
           <Property Name="ActualUrl" Type="nvarchar" MaxLength="250" />
           <Property Name="UserId" Type="bigint" />
         </EntityType>
+        <EntityType Name="DamImages">
+          <Key>
+            <PropertyRef Name="ImageId" />
+          </Key>
+          <Property Name="ImageId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ImageTitle" Type="nvarchar" MaxLength="500" />
+          <Property Name="ImageFileName" Type="nvarchar" MaxLength="500" />
+          <Property Name="ImageCategory" Type="int" />
+          <Property Name="CreatedDateTime" Type="nchar" MaxLength="10" />
+          <Property Name="CompanyId" Type="int" />
+        </EntityType>
         <EntityType Name="DiscountVoucher">
           <Key>
             <PropertyRef Name="DiscountVoucherId" />
@@ -1425,6 +1436,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DamImages_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="DamImages" Type="Self.DamImages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="DamImages">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -1996,6 +2019,7 @@
           <EntitySet Name="CouponCodes" EntityType="Self.CouponCodes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Currency" EntityType="Self.Currency" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CustomUrl" EntityType="Self.CustomUrl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DamImages" EntityType="Self.DamImages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DiscountVoucher" EntityType="Self.DiscountVoucher" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Education" EntityType="Self.Education" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmailQueue" EntityType="Self.EmailQueue" Schema="dbo" store:Type="Tables" />
@@ -2192,6 +2216,10 @@
           <AssociationSet Name="FK_CouponCodes_AspNetUsers" Association="Self.FK_CouponCodes_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="CouponCodes" EntitySet="CouponCodes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DamImages_Company" Association="Self.FK_DamImages_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="DamImages" EntitySet="DamImages" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -2793,6 +2821,7 @@
           <Property Name="FacebookHandle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="InstagramHandle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="PinterestHandle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DamImages" Relationship="SMDDevModel.FK_DamImages_Company" FromRole="Company" ToRole="DamImage" />
         </EntityType>
         <EntityType Name="CompanyBranch">
           <Key>
@@ -4711,6 +4740,11 @@
             <Parameter Name="toRow" Mode="In" Type="Int32" />
             <Parameter Name="adminMode" Mode="In" Type="Boolean" />
           </FunctionImport>
+          <EntitySet Name="DamImages" EntityType="SMDDevModel.DamImage" />
+          <AssociationSet Name="FK_DamImages_Company" Association="SMDDevModel.FK_DamImages_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="DamImage" EntitySet="DamImages" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="CouponCategories">
           <Key>
@@ -4857,6 +4891,30 @@
           <Property Type="DateTime" Name="CreatedDateTime" Nullable="true" Precision="23" />
           <Property Type="Int32" Name="TotalItems" Nullable="true" />
         </ComplexType>
+        <EntityType Name="DamImage">
+          <Key>
+            <PropertyRef Name="ImageId" />
+          </Key>
+          <Property Name="ImageId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ImageTitle" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ImageFileName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ImageCategory" Type="Int32" />
+          <Property Name="CreatedDateTime" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="CompanyId" Type="Int32" />
+          <NavigationProperty Name="Company" Relationship="SMDDevModel.FK_DamImages_Company" FromRole="DamImage" ToRole="Company" />
+        </EntityType>
+        <Association Name="FK_DamImages_Company">
+          <End Type="SMDDevModel.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="SMDDevModel.DamImage" Role="DamImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="DamImage">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5869,6 +5927,18 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="DamImages">
+            <EntityTypeMapping TypeName="SMDDevModel.DamImage">
+              <MappingFragment StoreEntitySet="DamImages">
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="ImageCategory" ColumnName="ImageCategory" />
+                <ScalarProperty Name="ImageFileName" ColumnName="ImageFileName" />
+                <ScalarProperty Name="ImageTitle" ColumnName="ImageTitle" />
+                <ScalarProperty Name="ImageId" ColumnName="ImageId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

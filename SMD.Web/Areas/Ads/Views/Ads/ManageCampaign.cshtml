@@ -15,14 +15,18 @@ else
     <div class="col-lg-12">
         <div class="row">
             <div class="col-lg-12" id="topArea">
+
                 <ol class="breadcrumb">
-                    <li><a href="~/Dashboard/Index">&nbsp;</a></li>
+                    <li><a href="~/Dashboard/Index" class="my-navigator">Home</a></li>
+                    <li><a data-bind="click: $root.closeNewCampaignDialog" class="my-navigator">Video Campaigns</a></li>
                 </ol>
                 <div class="clearfix" data-bind="with: $root.campaignModel">
                     <span class="pull-left" style="padding-left:0px;font-size:28px;color:rgb(52, 152, 219)" data-bind="NewCampaignBinding: CampaignName,visible:$root.isDisplayCouponsAds()">New Coupon</span>
                     <span class="pull-left" style="padding-left:0px;font-size:28px;color:rgb(52, 152, 219)" data-bind="NewCampaignBinding: CampaignName,visible:!$root.isDisplayCouponsAds()">New Campaign</span>
                     <span class="control-label bold heading-style pull-left" style="    margin-top: 6px;    margin-left: 40px;" data-bind="text:StatusValue()"></span>
+                    <div style="float:right"><button data-bind="click: $root.closeNewCampaignDialog" class="btn btn-default">Close</button></div>
                 </div>
+                
                 <div class="row" style="margin-bottom:15px;">
                     <div class="col-xs-6 pull-left validationSummaryContainer">
                         <ul data-bind="foreach: $root.errorList">
@@ -30,36 +34,17 @@ else
                                 <a><span data-bind="text: name"></span></a>
                             </li>
                         </ul>
-                        @*<a class="validationSummaryLink" data-bind="visible: $root.errorList().length > 0, bootstrapPopover: { html: true, title: 'Please fix following errors', elementNode: 'validationSummaryPopupForStore', popoverId: 'validationSummaryPopoverBodyForStore' }" style="display: none">Invalid data: Click here to see details.</a>
-                            <div class="well well-small validationSummaryModal" id="validationSummaryPopupForStore" style="display: none">
-                            <div id="validationSummaryPopoverBodyForStore">
-                            <ul data-bind="foreach: $root.errorList">
-                            <li>
-                            <a><span data-bind="text: name"></span></a>
-                            </li>
-                            </ul>
-                            </div>
-                            </div>*@
+
                     </div>
                     <div class="pull-right top-page-ui" style="margin-right:5px;margin-bottom:5px;">
                     </div>
                 </div>
-                @*<div class="row" data-bind="with: $root.campaignModel" style="text-align:center;">
-                    <div class=" center" style="margin-top:-9px;padding-right:0px;margin-top: -9px;padding-right: 0px; width:284px; margin: auto;    font-size: 17px;">
-                    <div class="pull-left">
-                    <label class="control-label">Status - </label>
-                    </div>
-                    <div class="pull-left">
-                    <label class="control-label bold" data-bind="text:StatusValue()"></label>
-                    </div>
-                    <div class="clearfix"></div>
-                    </div>
-                    </div>*@
+
             </div>
         </div>
         <div class="row">
             <div class="col-lg-12">
-                <div style="background:rgb(220,220,220)">
+                <div >
                     <div class="no-header clearfix col-lg-9 form-horizontal" data-bind="with: $root.campaignModel">
                         <div class="main-box" style="padding: 20px;">
                             <div class="col-lg-11" style="margin:auto;float:none !important">
@@ -162,7 +147,7 @@ else
                                             </div>
                                         </div>
                                         <div class="defaultImgUploadImageBtn" style="width:75px;">
-                                            <div class="fileUpload">
+                                            <div class="fileUpload" style="margin-top:8px;">
                                                 <span>change </span>
                                                 <input type="file" class="upload" id="logo_image_file" data-bind="files: { onLoaded: $root.LogoUrlImageCallback, fileFilter: 'image.*'}" />
                                             </div>
@@ -230,7 +215,7 @@ else
                                         <label for="txtCampaignDisplayName" class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn" data-bind="text:$root.lblAdTitle">Ad Title</label>
                                     </div>
                                     <div class="col-lg-7">
-                                        <input type="text" style="height:60px;" maxlength="36" name="Campaign Display Name" class="form-control height60 font24px" id="txtCampaignDisplayName" placeholder="Ad title (36 characters)" data-bind="value: DisplayTitle,validationTooltip: DisplayTitle, validationOnElement: DisplayTitle">
+                                        <input type="text" maxlength="36" name="Campaign Display Name" class="form-control" id="txtCampaignDisplayName" placeholder="Ad title (36 characters)" data-bind="value: DisplayTitle,validationTooltip: DisplayTitle, validationOnElement: DisplayTitle">
                                     </div>
                                     <div class="col-lg-1" data-bind="visible:!$root.isDisplayCouponsAds()" style="  text-align: right;
     font-size: 17px;
@@ -652,7 +637,7 @@ else
                                 <div class="form-group">
                                     @*data-bind="visible: $root.quizQuestionStatus()">*@
                                     <div class="col-lg-2">
-                                        <label for="txtCorrectAnswer" class="control-label text-right tooltip-float floatNone" style="color:red;font-weight:bold;">Correct Answer</label>
+                                        <label for="txtCorrectAnswer" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn" style="">Correct Answer</label>
                                     </div>
                                     <div class="col-lg-4">
                                         <select class="form-control" id="ddpCorrectAns" data-bind="options: $root.correctAnswers, optionsText: 'name', optionsValue: 'id', value: CorrectAnswer"></select>
@@ -862,7 +847,7 @@ else
                                 <button class="btn  btn-success" id="btnResumeCampagin" data-bind="click:$root.changeStatus(3)" style="display:none;">Resume</button>
                             </div>
                             @*<button class="btn  btn-warning" id="saveBtn" data-bind="click:$root.saveCampaignData, enable: $root.hasChangesOnQuestion, css: { 'btn-warning': $root.hasChangesOnQuestion }">Save</button>*@
-                            <button class="crossbtn pull-right" id="btnCancel" data-bind="click: $root.closeNewCampaignDialog">X</button>
+                           
                             <div class="clearfix"></div>
                         </div>
                         <div class="col-xs-12" style="line-height: 3;">
@@ -887,7 +872,7 @@ else
     margin-top: 6px;
     margin-left: 10px;
     font-weight: bold;
-    font-size: 18px; " name="Budget" class="form-control" id="txtPerClick" data-bind="value: MaxBudget,validationTooltip:MaxBudget, validationOnElement: MaxBudget">
+    font-size: 18px; " name="Budget" class="form-control" id="txtPerClick" data-bind="value: ClickRate,validationTooltip:ClickRate, validationOnElement: ClickRate">
                             <div class="clearfix">
                             </div>
                             <span class="text-campaign-left control-label pull-left" style="    margin-top: 6px;">Cap your daily spend ($) </span>

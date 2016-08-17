@@ -71,5 +71,7 @@ namespace SMD.Models.DomainModels
 
         public virtual ICollection<CompaniesAspNetUser> CompaniesAspNetUsers { get; set; }
 
+        public virtual ICollection<DamImage> DamImages { get; set; }
+
     }
 }

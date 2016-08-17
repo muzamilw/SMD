@@ -132,7 +132,7 @@ a:hover,a:focus {
     }
 
     .breadcrumb {
-        padding-left: 6px;
+        padding-left: 0px !important;
     }
 }
 
@@ -1171,6 +1171,7 @@ svg {
 .breadcrumb {
     background: none;
     margin-bottom: 0;
+     padding-left: 0px !important;
 }
 
 .breadcrumb>li {
@@ -1332,4 +1333,13 @@ svg {
 #sidebar-nav .nav li .submenu>li>a
 {
     padding-left: 45px;
+}
+
+
+
+
+.adsubHeading {
+    color: #58267b !important;
+    font-size:24px;
+    margin-bottom:20px;
 }

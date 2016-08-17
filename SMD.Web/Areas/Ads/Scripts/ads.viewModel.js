@@ -308,7 +308,7 @@ define("ads/ads.viewModel",
             },
 
             closeNewCampaignDialog = function () {
-                //if (campaignModel().hasChanges() && (campaignModel().Status() == null || campaignModel().Status() == 1)) {
+                if (campaignModel().hasChanges()) {    //&& (campaignModel().Status() == null || campaignModel().Status() == 1)
                 confirmation.messageText("Do you want to save changes?");
                 confirmation.afterProceed(function () {
                     saveCampaignData();
@@ -354,7 +354,25 @@ define("ads/ads.viewModel",
 
              
                 return;
-                //} else {
+                } else { // no changes go close it
+                    campaignModel();
+                    selectedCriteria();
+                    isEditorVisible(false);
+                    if (isFromEdit() == true) {
+                        isListVisible(true);
+                        isWelcomeScreenVisible(false);
+                    }
+                    else {
+                        isListVisible(false);
+                        isWelcomeScreenVisible(true);
+                    }
+                    //show the main menu;
+                    showMainMenu();
+
+
+
+
+
                 //    isEditorVisible(false);
                 //    if (isFromEdit() == true) {
                 //        isListVisible(true);
@@ -368,7 +386,7 @@ define("ads/ads.viewModel",
                 //    $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign").css("display", "none");
                 //    $("#btnSubmitForApproval,#saveBtn,.table-link").css("display", "inline-block");
                 //    $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign,#btnCopyCampaign,#btnStopAndTerminate").removeAttr('disabled');
-                //}
+                }
                 isFromEdit(false);
             },
 
@@ -2207,7 +2225,7 @@ define("ads/ads.viewModel",
                      };
                      dataservice.generateCouponCodes(gData, {
                          success: function (data) {
-                             debugger
+                             
                              _.each(data.CouponList, function (item) {
                                  allCouponCodeItems.push(item.Code);
                                  campaignModel().CouponCodes.push(new model.AdCampaignCouponCodes.Create({
