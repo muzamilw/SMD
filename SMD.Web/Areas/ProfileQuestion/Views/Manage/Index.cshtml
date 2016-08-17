@@ -4,73 +4,54 @@
 
 <div class="row" id="ProfileQuestionBindingSpot">
     <div class="col-lg-12" data-bind="visible: !$root.isEditorVisible()">
-        <div class="row">
-            <div class="col-lg-12">
-                <ol class="breadcrumb">
-                    <li><a href="~/Dashboard/Index">&nbsp;</a></li>
-                </ol>
-                <div class="clearfix">
-                    <h1 class="pull-left" style="padding-left:0px;">Profile Questions</h1>
-                </div>
-                <div class="row" style="margin-bottom:15px;">
-                    <div class="pull-right top-page-ui" style="margin-right:5px;">
-                        <button class="btn btn-primary" style="margin-right: 6px;" data-bind="click:$root.addNewProfileQuestion">
-                            Add New
-                        </button>
+        
+        <!-- ko stopBinding: true -->
+        @Html.Partial("~/Areas/Common/Views/Shared/_StripeChargeCustomerDialog.cshtml")
+        <!-- /ko -->
+        <!-- ko template: { name: 'filterTemplate' } -->
+        <!-- /ko -->
+        <div class="col-lg-12">
+            <div class="row main-box no-header clearfix">
+                <div class="main-box-body clearfix">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover" id="profileQuestionLVTable">
+                            <thead>
+                                <tr>
+                                    <th class="col-lg-7 th-pointer"><span id="2">Question<span></span></span></th>
+                                    <th class="col-lg-2 th-pointer"><span id="1">Group<span class="icon-up"></span></span></th>
+                                    <th class="col-lg-2 th-pointer"><span id="1">Status</span></th>
+                                    <th class="col-lg-1 th-pointer" style="display:none;"><span id="3">Priority<span></span></span></th>
+                                    <th id="hasLinkedtableHeader" style="display:none;" class="col-lg-1 th-pointer"><span id="4">Has Link Q<span></span></span></th>
+                                    <th class="col-lg-1">&nbsp;</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- ko template: { name: 'ProfileQuestionTemplate' , foreach: questions } -->
+                                <!-- /ko -->
+                            </tbody>
+                        </table>
                     </div>
-                  
                 </div>
-                <!-- ko stopBinding: true -->
-                @Html.Partial("~/Areas/Common/Views/Shared/_StripeChargeCustomerDialog.cshtml")
-                <!-- /ko -->
-                <!-- ko template: { name: 'filterTemplate' } -->
+            </div>
+            <div id="pagerDivForStore" class="pull-right">
+                <!-- ko with: pager -->
+                @Html.Partial("~/Areas/Common/Views/Shared/_Pager.cshtml")
                 <!-- /ko -->
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="main-box no-header clearfix">
-                    <div class="main-box-body clearfix">
-                        <div class="table-responsive">
-                            <table class="table table-striped table-hover" id="profileQuestionLVTable">
-                                <thead>
-                                    <tr>
-                                        <th class="col-lg-2 th-pointer"><span id="1">Group<span class="icon-up"></span></span></th>
-                                        <th class="col-lg-7 th-pointer"><span id="2">Question<span></span></span></th>
-                                        <th class="col-lg-1 th-pointer"><span id="3">Priority<span></span></span></th>
-                                        <th id="hasLinkedtableHeader" class="col-lg-1 th-pointer"><span id="4">Has Link Q<span></span></span></th>
-                                        <th class="col-lg-1">&nbsp;</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <!-- ko template: { name: 'ProfileQuestionTemplate' , foreach: questions } -->
-                                    <!-- /ko -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div id="pagerDivForStore" class="pull-right">
-                    <!-- ko with: pager -->
-                    @Html.Partial("~/Areas/Common/Views/Shared/_Pager.cshtml")
-                    <!-- /ko -->
-                </div>
-            </div>
-        </div>
-
 
         <script id="ProfileQuestionTemplate" type="text/html">
             <tr style="cursor: pointer">
                 <td>
+                    <a data-bind="text:questionString,click:$root.onEditProfileQuestion"></a>
+                </td>
+                <td style="padding-left:9px;">
                     <p data-bind="text:profileGroupName"></p>
                 </td>
-                <td>
-                    <p data-bind="text:questionString"></p>
-                </td>
-                <td>
+                <td style="display:none;">
                     <p data-bind="text:priority"></p>
                 </td>
-                <td>
+                <td style="display:none;" class="hasLinkedQuestions">
                     <div class="type">
                         <span data-bind="text:hasLinkedQuestions()==true ? 'YES' : 'NO',css: { 'label-success': hasLinkedQuestions(), 'label-danger': !hasLinkedQuestions() }" class="label">YES</span>
                     </div>
@@ -79,13 +60,16 @@
                     <p id="IsLInkedQuestionParah" data-bind="text:hasLinkedQuestions()==true ? 'YES' : 'NO',css: { 'label-success': hasLinkedQuestions(), 'label-danger': !hasLinkedQuestions() }"></p>
                 </td>*@
                 <td>
+                    @*<p data-bind="text:Status"></p>*@
+                </td>
+                <td>
                     <a class="table-link danger" style="float: right">
                         <span class="fa-stack">
                             <i class="fa fa-square fa-stack-2x"></i>
                             <i class="fa fa-trash-o fa-stack-1x fa-inverse " data-bind="click:$root.onDeleteProfileQuestion"></i>
                         </span>
                     </a>
-                    <a class="table-link fa fa-stack" style="float: right">
+                    <a class="table-link fa fa-stack" style="float: right;display:none;">
                         <span class="fa-stack">
                             <i class="fa fa-square fa-stack-2x"></i>
                             <i class="fa fa-pencil fa-stack-1x fa-inverse" data-bind="click:$root.onEditProfileQuestion"></i>
@@ -96,31 +80,58 @@
                 </td>
             </tr>
         </script>
+        
+
         <script id="filterTemplate" type="text/html">
-            <div class="row filter-body" style=" margin-bottom: 8px;">
-                <form data-bind="submit:$root.filterProfileQuestion">
-                    <div class="filter-block">
-                        <div class="form-group">
-                            <div class="col-xs-2">
-                                <input type="text" class="form-control" placeholder="Search..." data-bind="value:$root.filterValue">
-                                <i data-bind="click:$root.filterProfileQuestion" class="fa fa-search search-icon" style=" margin-right: 8px;"></i>
-                            </div>
-                            <div class="col-xs-2">
-                                <select class="form-control" data-bind="options: $root.qGroup, optionsText: 'ProfileGroupName', optionsValue: 'ProfileGroupId', optionsCaption: '&lt;' + 'All'+ '&gt;' , value:$root.qGroupfilterValue"></select>
-                            </div>
-                            @*<div class="col-xs-2">
-                                <select class="form-control" data-bind="options: $root.countries, optionsText: 'CountryName', optionsValue: 'CountryId', optionsCaption: '&lt;' + 'Select Country'+ '&gt;' , value:$root.countryfilterValue"></select>
-                            </div>
-                            <div class="col-xs-2">
-                                <select class="form-control" data-bind="options: $root.langs, optionsText: 'LanguageName', optionsValue: 'LanguageId', optionsCaption: '&lt;' + 'Select Language'+ '&gt;' , value:$root.langfilterValue"></select>
-                            </div>*@
-                            <div class="col-xs-2">
-                                <button class="btn  btn-info" id="saveBtn" data-bind="click:$root.filterProfileQuestion">Search</button>
-                                <button class="btn btn-default" id="saveBtn" data-bind="click:$root.clearFilters">Reset</button>
-                            </div>
-                        </div>
+            <div class="filter-body" id="filter" >
+
+                <div class="row">
+
+
+                    <div class="col-sm-12" style="float: left; margin-bottom:20px;">
+                        <br />
+                        <span style="font-size: 24px;" class="Theme_standard_clr" >Profile Questions</span><br />
+                        <span style="font-size: 14px;" class="Theme_subheading-Clr">Video campaigns can be paused and terminated at any time. Increase your conversions and reduce your spend by using profile filters.</span>  &nbsp; &nbsp; &nbsp; <span class="red bold rightAlign"> Watch Video <img src="/Images/youtube_play.JPG" height="25px" /> </span>   </span><br />
                     </div>
-                </form>
+
+
+                </div>
+
+                <div class="row">
+
+
+                    <form data-bind="submit:$root.filterProfileQuestion">
+                        <div class="col-sm-3" style="float:left;">
+
+                            <div class="filter-block" style="margin-right: -10px">
+                                <div class="form-group ">
+                                    <input type="text" class="form-control " placeholder="Search..." data-bind="value: $root.filterValue">
+                                    <i class="fa fa-search search-icon" data-bind="click: $root.filterProfileQuestion"></i>
+                                </div>
+
+
+                            </div>
+                            <div class="clearfix"></div>
+
+                        </div>
+
+                        <div class="col-sm-3" style="float:left;">
+                            <select id="ddlStatus" class="form-control" style="float:right;height:36px;margin-top:2px;" data-bind="options: $root.qGroup, optionsText: 'ProfileGroupName', optionsValue: 'ProfileGroupId', optionsCaption:'All' , value:$root.qGroupfilterValue,event:{ change: $root.getQuestionsByFilter}">
+                                @*<option value="0">All Statuses</option>*@
+                            </select>
+                        </div>
+                    </form>
+                    <div class="col-sm-3" style="float:right;margin-top:2px; text-align:right">
+                        <button class="btn btn-primary" data-bind="click:$root.addNewProfileQuestion">
+                            Create Profile Questions 
+                        </button>
+                     
+                    </div>
+                    <div class="clearfix">
+
+                    </div>
+                </div>
+
             </div>
         </script>
     </div>
