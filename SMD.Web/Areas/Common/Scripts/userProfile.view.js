@@ -19,6 +19,10 @@ define("common/userProfile.view",
                  
                     $("#userProfileDialog").modal("show");
                 },
+                CloseUserProfileDialog = function () {
+                    alert();
+                    $("#userProfileDialog").modal("hide");
+                },
                  // Show Contact Company the dialog
                 showChangePassword = function () {
                     $("#ChangePassword").modal("show");
@@ -42,7 +46,8 @@ define("common/userProfile.view",
                 bindingRoot: bindingRoot,
                 bindingPartial: bindingPartial,
                 viewModel: viewModel,
-                showUserProfileDialog:showUserProfileDialog,
+                showUserProfileDialog: showUserProfileDialog,
+                CloseUserProfileDialog : CloseUserProfileDialog,
                 showChangePassword: showChangePassword,
                 hideChangePassword: hideChangePassword,
                

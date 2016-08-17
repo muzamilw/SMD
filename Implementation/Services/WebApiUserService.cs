@@ -1107,7 +1107,7 @@ namespace SMD.Implementation.Services
         public User GetLoggedInUser(string userid)
         {
             User user = null;
-            if(userid != "0")
+            if (!string.IsNullOrEmpty(userid) && userid != "0")
             {
                 user = UserManager.FindById(userid);
             }

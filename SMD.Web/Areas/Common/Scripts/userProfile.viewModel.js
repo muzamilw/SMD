@@ -52,6 +52,11 @@ define("common/userProfile.viewModel",
 
                      showUserProfileDialog = function () {
                          view.showUserProfileDialog();
+                         getUserProfile();
+                     },
+
+                     onCloseUserProfileDialog = function () {
+                         view.CloseUserProfileDialog();
                      },
 
                          SelectedMangeUser = ko.observable(),
@@ -63,11 +68,11 @@ define("common/userProfile.viewModel",
                                     console.log(userProfile);
                                     selectedUser(model.UserServertoClientMapper(userProfile));
                                     // Load Cities by Country
-                                    updateCities(userProfile.CityId);
-                                    selectedUser().countryId.subscribe(function() {
-                                        updateCities();
+                                    //updateCities(userProfile.CityId);
+                                    //selectedUser().countryId.subscribe(function() {
+                                    //    updateCities();
                                        
-                                    });
+                                    //});
                                     selectedUser().reset();
                                 },
                                 error: function () {
@@ -122,31 +127,7 @@ define("common/userProfile.viewModel",
                    },
 
 
-                    // Get User Profile For Editing 
-                   getUserProfileById = function () {
-                       
-                       dataservice.getUserProfileById({
-                           UserId: selectedUserId()
-                       },{
-                               success: function (userProfile) {
-                                   console.log(userProfile);
-                                   selectedUser(model.UserServertoClientMapper(userProfile));
-
-                                   selectedUser().Password(undefined);
-                                   selectedUser().ConfirmPassword(undefined);
-                                   // Load Cities by Country
-                                   updateCities(userProfile.CityId);
-                                   selectedUser().countryId.subscribe(function () {
-                                       updateCities();
-
-                                   });
-                                   selectedUser().reset();
-                               },
-                               error: function () {
-                                   toastr.error("Failed to load User's Profile!");
-                               }
-                           });
-                   },
+                  
 
                   
                     //Get Base Data for Questions
@@ -276,7 +257,7 @@ define("common/userProfile.viewModel",
                     };
                 return {
                     initialize: initialize,
-                    getInvoices: getUserProfile,
+                    getUserProfile: getUserProfile,
                     selectedUser: selectedUser,
                     countries: countries,
                     cities: cities,
@@ -301,7 +282,8 @@ define("common/userProfile.viewModel",
                     ChangePasswordOk: ChangePasswordOk,
                   
                     SelectedMangeUser: SelectedMangeUser,
-                    showUserProfileDialog: showUserProfileDialog
+                    showUserProfileDialog: showUserProfileDialog,
+                    onCloseUserProfileDialog: onCloseUserProfileDialog
                 };
             })()
         };
