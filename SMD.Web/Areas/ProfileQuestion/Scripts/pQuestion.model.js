@@ -2,14 +2,15 @@
 
     var // ReSharper disable InconsistentNaming
         question = function (questionId, spcQuestion, pr,linkQ,gName, langId, countId, groupId, spcType,
-        spcRefreshtime, spcSkipped, spcCreationD, spcModDate, penality, spcStatus, CreatedBy, StatusValue) {
+        spcRefreshtime, spcSkipped, spcCreationD, spcModDate, penality, spcStatus, CreatedBy, StatusValue, AnswerNeeded, AnswerCount) {
             var 
                 qId = ko.observable(questionId),
                 questionString = ko.observable(spcQuestion).extend({ required: true }),
                 priority = ko.observable(pr),
                 hasLinkedQuestions = ko.observable(linkQ),
                 profileGroupName = ko.observable(gName),
-                
+                answerNeeded = ko.observable(AnswerNeeded),
+                answerCount = ko.observable(AnswerCount),
                 languageId = ko.observable(langId),
                 countryId = ko.observable(countId),
                 profileGroupId = ko.observable(groupId).extend({ required: true }),
@@ -53,7 +54,9 @@
                     status: status,
                     answers: answers,
                     createdBy: createdBy,
-                    statusValue: statusValue
+                    statusValue: statusValue,
+                    answerCount: answerCount,
+                    answerNeeded: answerNeeded
                 }),
                 // Has Changes
                 hasChanges = ko.computed(function() {
@@ -108,6 +111,8 @@
                 convertToServerData: convertToServerData,
                 isValid: isValid,
                 statusValue: statusValue,
+                answerNeeded: answerNeeded,
+                answerCount:answerCount,
                 errors: errors
             };
         };
@@ -254,7 +259,7 @@
        
         return new question(itemFromServer.PqId, itemFromServer.Question, itemFromServer.Priority,
             itemFromServer.HasLinkedQuestions, itemFromServer.ProfileGroupName, itemFromServer.LanguageId, itemFromServer.CountryId, itemFromServer.ProfileGroupId, itemFromServer.Type, itemFromServer.RefreshTime
-        , itemFromServer.SkippedCount, moment(itemFromServer.CreationDate), itemFromServer.ModifiedDate, itemFromServer.PenalityForNotAnswering, itemFromServer.Status, itemFromServer.CreatedBy, itemFromServer.StatusValue);
+        , itemFromServer.SkippedCount, moment(itemFromServer.CreationDate), itemFromServer.ModifiedDate, itemFromServer.PenalityForNotAnswering, itemFromServer.Status, itemFromServer.CreatedBy, itemFromServer.StatusValue, itemFromServer.AnswerNeeded,itemFromServer.AsnswerCount);
     };
     
     // Function to attain cancel button functionality QUESTION
