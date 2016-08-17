@@ -56,7 +56,7 @@ else
 
                                             </th>
                                             <th class="col-sm-1" style="vertical-align:top"><span class="GridHeaderFont_size">Daily Cap</span></th>
-                                            <th class="col-sm-1" style="vertical-align:top"><span class="GridHeaderFont_size">Total Spent</span></th>
+                                            <th class="col-sm-1" style="vertical-align:top"><span style="white-space:nowrap;" class="GridHeaderFont_size">Total Spent</span></th>
                                             <th class="col-sm-1" style="vertical-align:top"><span class="GridHeaderFont_size">Status</span></th>
                                             @*<th class="col-sm-2"><span class="@userClasses">Spent</span><span class="@adminClasses">Created by</span></th>*@
 
@@ -127,7 +127,7 @@ else
 <script id="advertsTemplate" type="text/html">
     <tr style="cursor: pointer">
 
-        <td class="col-sm-3">
+        <td class="col-sm-3" >
             <a href="#" class="store-user-link" data-bind="text: CampaignName() ,click:$root.onEditCampaign"></a>
             <br />
             <span style="color:darkgray;font-size:11px;" data-bind="text:  ApprovalDateTime() ? 'Start Date : ' +  ApprovalDateTime() : 'Not Started'"></span>
@@ -236,7 +236,7 @@ else
 
 
 
-        <td class="col-sm-2">
+        <td class="col-sm-2" style="padding-top:23px;">
 
             <!-- ko if: Status() == 1 ||  Status() == 3 || Status() == 4 || Status() == 7|| Status() == 9-->
             <a class="table-link" style="float: right">
