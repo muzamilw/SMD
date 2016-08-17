@@ -235,6 +235,13 @@
                 },
                 hideBranchCategoryDialog = function () {
 
+                    if (selectedBranch() == undefined)
+                    {
+                        view.hideBranchCategoryDialog();
+                        selectedBranch(null);
+                        isSaveChangesEnable(false);
+                    }
+
                     if (selectedBranch().hasChanges()) {
                         confirmation.messageText("Do you want to save changes?");
                         confirmation.show();
