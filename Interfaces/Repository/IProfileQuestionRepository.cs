@@ -34,6 +34,7 @@ namespace SMD.Interfaces.Repository
         /// Get Answered Questions count 
         /// </summary>
         int GetCountOfUnAnsweredQuestionsByGroupId(double groupId, string userId);
+        IEnumerable<ProfileQuestion> UpdateQuestionsCompanyID(IEnumerable<ProfileQuestion> ProfileQuestions);
 
     }
 }

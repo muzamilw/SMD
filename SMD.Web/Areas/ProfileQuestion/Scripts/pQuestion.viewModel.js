@@ -79,6 +79,11 @@ define("pQuestion/pQuestion.viewModel",
                                 }
                             });
                     },
+                     DilveredPercentage = function (item)
+                     {
+                        // var Percent=
+
+                         },
                     SetStatusForQuestion = function (item)
                     {
                        
@@ -96,8 +101,11 @@ define("pQuestion/pQuestion.viewModel",
                         } else if (item.Status == 6) {
                             item.StatusValue = "Approval Rejected"; //canSubmitForApproval(true);
                         }
+
+
                         return item;
                     },
+                    
                      //Get Base Data for Questions
                     getBasedata = function () {
                         dataservice.getBaseData(null, {

@@ -90,7 +90,8 @@ namespace SMD.Repository.Repositories
                     .OrderByDescending(_profileQuestionOrderByClause[request.ProfileQuestionOrderBy])
                     .Skip(fromRow)
                     .Take(toRow)
-                    .ToList(); 
+                    .ToList();
+          
         }
 
         /// <summary>
@@ -141,7 +142,26 @@ namespace SMD.Repository.Repositories
             return unAnsweredQuestions;
         }
 
-       
+        public IEnumerable<ProfileQuestion> UpdateQuestionsCompanyID(IEnumerable<ProfileQuestion> ProfileQuestions)
+        {
+           ///////Setting CompanyId against question if he is user else setting null means these question related to admin
+            if(this.CompanyId>0)
+            {
+                foreach (var Question in ProfileQuestions)
+                {
+                    if (Question.CompanyId == null || Question.CompanyId == 0)
+                    {
+                        Question.CompanyId = this.CompanyId;
+
+                        db.ProfileQuestions.Attach(Question);
+
+                        db.Entry(Question).State = EntityState.Modified;
+                    }
+                }
+                db.SaveChanges();
+            }
+            return ProfileQuestions;
+        }
         #endregion
     }
 }
