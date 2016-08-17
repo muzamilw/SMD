@@ -24,7 +24,8 @@ namespace SMD.MIS.Areas.Api.Models
         public string ModifiedBy { get; set; }
         public bool? HasLinkedQuestions { get; set; }
         public int? PenalityForNotAnswering { get; set; }
-
+        public Nullable<int> AnswerNeeded { get; set; }
+        public Nullable<int> AsnswerCount { get; set; }
         public int? Status { get; set; }
 
         public ICollection<ProfileQuestionAnswer> ProfileQuestionAnswers { get; set; }

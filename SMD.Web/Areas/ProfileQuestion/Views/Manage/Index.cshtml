@@ -17,13 +17,16 @@
                         <table class="table table-striped table-hover" id="profileQuestionLVTable">
                             <thead>
                                 <tr>
-                                    <th class="col-lg-7 th-pointer"><span id="2">Question<span></span></span></th>
-                                    <th class="col-lg-2 th-pointer"><span id="1">Group<span class="icon-up"></span></span></th>
-                                    <th class="col-lg-2 th-pointer"><span id="1">Answered</span></th>
-                                    <th class="col-lg-2 th-pointer"><span id="1">Delivered%</span></th>
-                                    <th class="col-lg-2 th-pointer"><span id="1">Status</span></th>
-                                    <th class="col-lg-1 th-pointer" style="display:none;"><span id="3">Priority<span></span></span></th>
-                                    <th id="hasLinkedtableHeader" style="display:none;" class="col-lg-1 th-pointer"><span id="4">Has Link Q<span></span></span></th>
+                                    <th class="col-lg-7 th-pointer"><span class="GridHeaderFont_size" id="2">Question<span></span></span></th>
+                                    <th class="col-lg-2 th-pointer"><span class="GridHeaderFont_size" id="1">Group<span class="icon-up"></span></span></th>
+                                    <th class="col-lg-2 th-pointer"><span class="GridHeaderFont_size" id="1">Answered</span></th>
+                                    <th class="col-lg-2 th-pointer"><span class="GridHeaderFont_size" id="1">Delivered%</span></th>
+                                    <th class="col-lg-2 th-pointer"><span class="GridHeaderFont_size" id="1">SkippedCount</span></th>
+                                    <th class="col-lg-2 th-pointer"><span class="GridHeaderFont_size" id="1">Status</span></th>
+                                    
+
+                                    <th class="col-lg-1 th-pointer" style="display:none;"><span class="GridHeaderFont_size" id="3">Priority<span></span></span></th>
+                                    <th id="hasLinkedtableHeader" style="display:none;" class="col-lg-1 th-pointer"><span class="GridHeaderFont_size" id="4">Has Link Q<span></span></span></th>
                                     <th class="col-lg-1">&nbsp;</th>
                                 </tr>
                             </thead>
@@ -51,12 +54,15 @@
                     <p data-bind="text:profileGroupName"></p>
                 </td>
                 <td style="padding-left:9px;">
-                   <p>Answered</p>
+                    <p data-bind="text:answerCount"></p>
                 </td>
                 <td style="padding-left:9px;">
                     <p data-bind="text:createdBy"></p>
                 </td>
-                <td style="padding-left:9px;">
+                <td style="padding-left:11px;">
+                    <p data-bind="text:skippedCount"></p>
+                </td>
+                <td style="padding-left:11px;">
                     <!--ko if:status() == 6 -->
                     <div class="text-left statusbg" style="background:red;width: 125px">
                         <span data-bind="text:statusValue">
@@ -74,6 +80,7 @@
 
 
                 </td>
+                
 
                 <td style="display:none;">
                     <p data-bind="text:priority"></p>
@@ -89,7 +96,7 @@
                 <td>
                     @*<p data-bind="text:Status"></p>*@
                 </td>
-                <td>
+                <td style="display:none;">
                     <a class="table-link danger" style="float: right">
                         <span class="fa-stack">
                             <i class="fa fa-square fa-stack-2x"></i>

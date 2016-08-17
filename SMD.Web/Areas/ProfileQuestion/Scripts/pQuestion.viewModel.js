@@ -79,10 +79,17 @@ define("pQuestion/pQuestion.viewModel",
                                 }
                             });
                     },
+                       DilveredPercentage = function (item)
+                       {
+                           var percent = 0.0;
+                           if (item.AsnswerCount != null && item.AsnswerCount > 0 && item.AnswerNeeded != null && item.AnswerNeeded > 0) {
+                               Percent = (item.AsnswerCount / item.AnswerNeeded) * 100;
+                           }
+                           return  Math.round(Percent);
+                         },
                     SetStatusForQuestion = function (item)
                     {
                        
-                        
                         if (item.Status == 1) {
                             item.StatusValue = "Draft";
                         } else if (item.status == 2) {
@@ -96,8 +103,10 @@ define("pQuestion/pQuestion.viewModel",
                         } else if (item.Status == 6) {
                             item.StatusValue = "Approval Rejected"; //canSubmitForApproval(true);
                         }
+                        item.CreatedBy=DilveredPercentage(item);
                         return item;
                     },
+                    
                      //Get Base Data for Questions
                     getBasedata = function () {
                         dataservice.getBaseData(null, {

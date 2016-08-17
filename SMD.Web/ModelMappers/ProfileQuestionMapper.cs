@@ -47,7 +47,9 @@ namespace SMD.MIS.ModelMappers
                 CreationDate = source.CreationDate,
                 ModifiedDate = source.ModifiedDate,
                 PenalityForNotAnswering = source.PenalityForNotAnswering,
-                Status = source.Status
+                Status = source.Status,
+                AnswerNeeded=source.AnswerNeeded,
+                AsnswerCount=source.AsnswerCount
             };
         }
 
