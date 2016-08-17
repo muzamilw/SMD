@@ -14,7 +14,7 @@
                 branchDdlist = ko.observableArray([]),
                 selectedCategory = ko.observable(),
                 selectedBranchField = ko.observable(),
-                isSaveChangesEnable =ko.observable(false),
+                isSaveChangesEnable = ko.observable(false),
                 counter = ko.observable(0),
                 defaultOpenBranchFieldName = ko.observable(),
                 viewBranchDialog = function () {
@@ -130,7 +130,7 @@
                          selectedCategory().isExpanded(false);
                          isSaveChangesEnable(false);
                          selectedBranch(null);
-                         
+
                      }
                  },
                 AddNewCategory = function () {
@@ -153,7 +153,7 @@
 
                 },
                 DeleteBranch = function () {
-                   
+
                     confirmation.messageText("Do you want to delete Branch?");
                     if (selectedBranch() != undefined) {
                         confirmation.show();
@@ -184,7 +184,7 @@
                                      }
                                  });
                     });
-                     
+
                 },
                 DeleteCategory = function (category) {
                     confirmation.messageText("Please delete or move all branches from this category to delete it.");
@@ -222,9 +222,9 @@
                 },
                 CreateNewBranchLocation = function () {
 
-                    var newBranchLocation = selectedBranch(new model.Branch());
-                    isSaveChangesEnable(true);
-
+                    var newBranchLocation = model.Branch({});
+                    selectedBranch(undefined)
+                    selectedBranch(newBranchLocation);
                 },
                 resetTreeExpensionAfterSave = function (category) {
                     category.isExpanded(true);
@@ -233,11 +233,29 @@
                     getBranchCategories(viewBranchDialog);
                 },
                 hideBranchCategoryDialog = function () {
-                    view.hideBranchCategoryDialog();
-                    selectedBranch(null);
-                    isSaveChangesEnable(false);
 
+                    if (selectedBranch().hasChanges()) {
+                        confirmation.messageText("Do you want to save changes?");
+                        
+                    }
+                    confirmation.afterCancel(function () {
+                        view.hideBranchCategoryDialog();
+                        selectedBranch(null);
+                        isSaveChangesEnable(false);
+                        confirmation.hide();
+                        
+                    });
+                    confirmation.afterProceed(function () {
+                        SaveChanges();
+                        view.hideBranchCategoryDialog();
+                        selectedBranch(null);
+                        isSaveChangesEnable(false);
 
+                    });
+                    confirmation.show();
+                    //view.hideBranchCategoryDialog();
+                    //selectedBranch(null);
+                    //isSaveChangesEnable(false);
 
                 },
                 resetTreeExpension = function (category) {
@@ -350,7 +368,7 @@
                     EditCategory: EditCategory,
                     SaveCategory: SaveCategory,
                     DeleteCategory: DeleteCategory,
-                    isSaveChangesEnable:isSaveChangesEnable,
+                    isSaveChangesEnable: isSaveChangesEnable,
                     hideBranchCategoryDialog: hideBranchCategoryDialog,
                     branchDdlist: branchDdlist
                 };

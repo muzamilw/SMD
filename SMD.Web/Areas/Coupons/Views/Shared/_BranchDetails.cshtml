@@ -129,52 +129,10 @@
                             <label for="pCategory" class="col-form-label labelColour">Select parent Category</label>
                         </div>
                         <div class="col-lg-5">
-                            <select class="form-control" data-bind="options:$root.branchDdlist, optionsText: 'name', optionsValue:'categoryId', value:branchCategoryId" id="pCategory" style="width:70%"></select>
+                            <select class="form-control" data-bind="options:$root.branchDdlist, optionsText: 'name', optionsValue:'categoryId',optionsCaption: 'Choose...', value:branchCategoryId" id="pCategory" style="width:70%"></select>
                         </div>
                     </div>
                 </div>
-
-
-
-
-
-
-                @*<div class="col-lg-3 text-right ">
-                        <div class="table-responsive" style="margin-top:18px;" data-bind="with: $root.selectedBranch">
-                            <span style=" font-weight :bold;">
-                                Branch Address Details
-                            </span>
-                            <label for="brachtitle" class="lablelColour">Branch Title</label>
-                            <label for="address1" class="labelNewline">Address line 1</label>
-                            <label for="address2" class="labelNewline">Address line 2</label>
-                            <label for="city" class="labelNewline">City</label>
-                            <label for="state" class="labelNewline">State</label>
-                            <label for="postCode" class="labelNewline">Zip/Post Code</label>
-                            <label for="branchSale" class="labelNewlineTel">Branch Sales Tel #</label>
-                            <label for="geoX" class="labelNewlineGeoX">GEO X</label>
-                            <label for="geoY" class="labelNewlineGeoY">GEO Y</label>
-                            <label for="parentCategory" class="lablelColour">Select parent Category</label>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="text-left table-responsive margin-top" style="margin-top:35px" data-bind="with: $root.selectedBranch">
-                            <div class="col-xs-10">
-                                <input data-bind="value:branchTitle" class="form-control" id="brachtitle" type="text">
-                                <input data-bind="value:branchAddressline1" class="form-control" id="address1" type="text">
-                                <input data-bind="value:branchAddressline2" class="form-control" id="address2" type="text">
-                                <input data-bind="value:branchCity" class="form-control" id="city" type="text">
-                                <input data-bind="value:branchState" class="form-control" id="state" type="text">
-                                <input data-bind="value:branchZipCode" class="form-control" id="postCode" type="text">
-                                <input data-bind="value:branchPhone" class="form-control" id="branchSale" type="text">
-                                <input data-bind="value:branchLocationLat" class="form-control" style="width:70%" id="geoX" type="text">
-                                <input data-bind="value:branchLocationLon" class="form-control" style="width:70%" id="geoY" type="text">
-                                <select class="form-control" id="ddpCorrectAns" style="width:70%" data-bind="options:$root.branchDdlist, optionsText: 'name', optionsValue:'categoryId', value:branchCategoryId"></select>
-
-
-                            </div>
-                        </div>
-
-                    </div>*@
                 <div class="col-lg-1">
 
 
@@ -184,8 +142,8 @@
             <div class="modal-footer">
 
                 <button type="button" data-bind="click: $root.DeleteBranch,visible:$root.isSaveChangesEnable()" class="btn btn-danger">Delete this Branch</button>
-                <button type="button" data-bind="click: $root.SaveChanges,enable:$root.isSaveChangesEnable()" class=" btn btn-primary">Save Changes</button>
-                <button type="button" data-bind="click:$root.hideBranchCategoryDialog" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" data-bind="click: $root.SaveChanges,visible:$root.isSaveChangesEnable()" class=" btn btn-primary">Save Changes</button>
+                <button type="button" data-bind="click:$root.hideBranchCategoryDialog" class="btn btn-default">Close</button>
             </div>
         </div>
     </div>
