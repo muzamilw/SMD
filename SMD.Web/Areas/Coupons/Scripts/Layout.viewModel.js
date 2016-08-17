@@ -225,6 +225,7 @@
                     var newBranchLocation = model.Branch({});
                     selectedBranch(undefined)
                     selectedBranch(newBranchLocation);
+                    isSaveChangesEnable(true);
                 },
                 resetTreeExpensionAfterSave = function (category) {
                     category.isExpanded(true);
@@ -236,7 +237,14 @@
 
                     if (selectedBranch().hasChanges()) {
                         confirmation.messageText("Do you want to save changes?");
-                        
+                        confirmation.show();
+
+                    }
+                    else {
+                        view.hideBranchCategoryDialog();
+                        selectedBranch(null);
+                        isSaveChangesEnable(false);
+
                     }
                     confirmation.afterCancel(function () {
                         view.hideBranchCategoryDialog();
@@ -252,10 +260,6 @@
                         isSaveChangesEnable(false);
 
                     });
-                    confirmation.show();
-                    //view.hideBranchCategoryDialog();
-                    //selectedBranch(null);
-                    //isSaveChangesEnable(false);
 
                 },
                 resetTreeExpension = function (category) {
