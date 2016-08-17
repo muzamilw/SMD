@@ -235,16 +235,12 @@
                 },
                 hideBranchCategoryDialog = function () {
 
-                    if (selectedBranch() == undefined)
-                    {
-                        
-                    }
-                    confirmation.afterCancel(function () {
+                    if (selectedBranch() == undefined) {
                         view.hideBranchCategoryDialog();
                         selectedBranch(null);
                         isSaveChangesEnable(false);
                     }
-                        
+
                     if (selectedBranch().hasChanges()) {
                         confirmation.messageText("Do you want to save changes?");
                         confirmation.show();
@@ -261,7 +257,7 @@
                         selectedBranch(null);
                         isSaveChangesEnable(false);
                         confirmation.hide();
-                        
+
                     });
                     confirmation.afterProceed(function () {
                         SaveChanges();
