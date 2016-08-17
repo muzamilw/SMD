@@ -14,6 +14,7 @@
                 branchDdlist = ko.observableArray([]),
                 selectedCategory = ko.observable(),
                 selectedBranchField = ko.observable(),
+                isSaveChangesEnable = ko.observable(false),
                 counter = ko.observable(0),
                 defaultOpenBranchFieldName = ko.observable(),
                 viewBranchDialog = function () {
@@ -52,7 +53,8 @@
                             success: function (data) {
                                 var branch = new model.Branch.Create(data);
                                 selectedBranch(branch);
-                              
+                                isSaveChangesEnable(true);
+
                                 //}
 
                             },
@@ -73,6 +75,7 @@
                                              if (item.categoryId() == selectedBranch().branchCategoryId()) {
                                                  item.brachFeilds.push(selectedBranch());
                                                  selectedBranch(null);
+                                                 isSaveChangesEnable(false);
 
                                              }
                                          })
@@ -95,7 +98,7 @@
                              });
                 },
                 SaveCategory = function () {
- 
+
                     dataService.SaveCategory(
 
                          selectedCategory().convertToServerData(), {
@@ -107,7 +110,7 @@
                                  else {
                                      selectedCategory().isEditMode(false);
                                  }
-                   
+
                              },
                              error: function (response) {
                                  toastr.error("Failed to Save . Error: " + response);
@@ -125,6 +128,9 @@
                          event.target.classList.remove("fa-chevron-circle-down");
                          event.target.classList.add("fa-chevron-circle-right");
                          selectedCategory().isExpanded(false);
+                         isSaveChangesEnable(false);
+                         selectedBranch(null);
+
                      }
                  },
                 AddNewCategory = function () {
@@ -147,37 +153,59 @@
 
                 },
                 DeleteBranch = function () {
-                    dataService.DeleteCurrentBranch(
 
-                             selectedBranch().convertToServerData(), {
-                                 success: function (data) {
+                    confirmation.messageText("Do you want to delete Branch?");
+                    if (selectedBranch() != undefined) {
+                        confirmation.show();
 
-                                     _.each(selectedCategory().brachFeilds(), function (item) {
-                                         if (item.branchId() == selectedBranch().branchId()) {
-                                             selectedCategory().brachFeilds.remove(item);
-                                             selectedBranch(null);
-                                         }
-                                     })
-                                 },
-                                 error: function (response) {
-                                     toastr.error("Failed to Delete Branch . Error: " + response);
-                                 }
-                             });
+                    }
+
+                    confirmation.afterCancel(function () {
+                        confirmation.hide();
+                    });
+                    confirmation.afterProceed(function () {
+                        dataService.DeleteCurrentBranch(
+                                 selectedBranch().convertToServerData(), {
+                                     success: function (data) {
+
+                                         _.each(selectedCategory().brachFeilds(), function (item) {
+                                             if (item.branchId() == selectedBranch().branchId()) {
+                                                 selectedCategory().brachFeilds.remove(item);
+                                                 selectedCategory().isExpanded(false);
+                                                 selectedBranch(null);
+                                                 isSaveChangesEnable(false);
+
+
+                                             }
+                                         })
+                                     },
+                                     error: function (response) {
+                                         toastr.error("Failed to Delete Branch . Error: " + response);
+                                     }
+                                 });
+                    });
+
                 },
                 DeleteCategory = function (category) {
-                    selectedCategory(category);
-                    dataService.DeleteCurrentCategory(
-                                category.convertToServerData(), {
-                                    success: function (data) {
-                                        if (data == true)
-                                            branchCategory.remove(selectedCategory());
+                    confirmation.messageText("Please delete or move all branches from this category to delete it.");
+                    confirmation.afterProceed(function () {
+                        selectedCategory(category);
+                        dataService.DeleteCurrentCategory(
+                                    category.convertToServerData(), {
+                                        success: function (data) {
+                                            if (data == true)
+                                                branchCategory.remove(selectedCategory());
+                                        },
+                                        error: function (response) {
+                                            toastr.error("Failed to Delete Category . Error: " + response);
+                                        }
+                                    });
+                    });
 
-
-                                    },
-                                    error: function (response) {
-                                        toastr.error("Failed to Delete Category . Error: " + response);
-                                    }
-                                });
+                    confirmation.afterCancel(function () {
+                        confirmation.hide();
+                    });
+                    confirmation.show();
                 },
                 EditCategory = function (category) {
                     selectedCategory(category)
@@ -194,8 +222,9 @@
                 },
                 CreateNewBranchLocation = function () {
 
-                    var newBranchLocation = selectedBranch(new model.Branch());
-
+                    var newBranchLocation = model.Branch({});
+                    selectedBranch(undefined)
+                    selectedBranch(newBranchLocation);
                 },
                 resetTreeExpensionAfterSave = function (category) {
                     category.isExpanded(true);
@@ -204,9 +233,29 @@
                     getBranchCategories(viewBranchDialog);
                 },
                 hideBranchCategoryDialog = function () {
-                    view.hideBranchCategoryDialog();
-                    selectedBranch(null);
 
+                    if (selectedBranch().hasChanges()) {
+                        confirmation.messageText("Do you want to save changes?");
+                        
+                    }
+                    confirmation.afterCancel(function () {
+                        view.hideBranchCategoryDialog();
+                        selectedBranch(null);
+                        isSaveChangesEnable(false);
+                        confirmation.hide();
+                        
+                    });
+                    confirmation.afterProceed(function () {
+                        SaveChanges();
+                        view.hideBranchCategoryDialog();
+                        selectedBranch(null);
+                        isSaveChangesEnable(false);
+
+                    });
+                    confirmation.show();
+                    //view.hideBranchCategoryDialog();
+                    //selectedBranch(null);
+                    //isSaveChangesEnable(false);
 
                 },
                 resetTreeExpension = function (category) {
@@ -234,16 +283,16 @@
                         }
                         else {
                             selectedBranchField(category.brachFeilds()[0]);
-                        } 
+                        }
                     }
                 },
                 selectbranchField = function (brachFeilds) {
                     // branches.removeAll();
                     selectedBranchField(brachFeilds);
                     getBranchesByBranchFieldId(brachFeilds.branchId());
-                  
+
                 },
-                selectCategory = function (category,event) {
+                selectCategory = function (category, event) {
 
                     branchCategory()[0].isEditMode(false);
 
@@ -278,7 +327,7 @@
                                 // true, Refresh The Phrase Fields as well as Phrases
                                 if (afterSaveRefreshListFlag) {
                                     alert("test");
-  
+
                                 }
                                 else {
                                     resetTreeExpension(category);
@@ -319,6 +368,7 @@
                     EditCategory: EditCategory,
                     SaveCategory: SaveCategory,
                     DeleteCategory: DeleteCategory,
+                    isSaveChangesEnable: isSaveChangesEnable,
                     hideBranchCategoryDialog: hideBranchCategoryDialog,
                     branchDdlist: branchDdlist
                 };

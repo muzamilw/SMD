@@ -123,9 +123,9 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group" style="margin-bottom:25px;display:none;">
+                                    <div class="form-group" style="margin-bottom:25px;">
                                      
-                                        <div class="col-lg-6">
+                                        <div class="col-lg-5" style="padding-left:48px;">
                                             <div class="col-lg-4" style="padding-top:12px;     margin-left: -13px;">
 
                                                 <label for="txtSurveyDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Left Answer</label>
@@ -134,7 +134,7 @@
 
                                                 <div class="col-lg-12">
 
-                                                    <div style="width:210px;text-align:center;">
+                                                    <div style="width:210px">
                                                         @*<div data-bind="visible:LeftPictureBytes()==null,attr: { backgroundImage:  LeftPicturePath() }" class="surveyLeftImagePc">
 
                                         </div>*@
@@ -145,7 +145,7 @@
 
                                                 </div>
 
-                                                <div class="col-lg-12" style="margin-top:15px;text-align:center;width:240px;padding-right:0px;">
+                                                <div class="col-lg-12" style="margin-top:15px;width:240px;padding-right:0px;">
                                                     <div class="col-lg-2" style="padding-right:10px;">
                                                         @*<div class="bs-example-tooltips tooltip-float-width">
                                             <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="left" data-html="true" data-content="" data-original-title="" title="">
@@ -165,8 +165,8 @@
 
                                             </div>
                                         </div>
-                                        <div class="col-lg-6">
-                                            <div class="col-lg-3" style="padding-top:12px;">
+                                        <div class="col-lg-5" style="padding-right:53px;">
+                                            <div class="col-lg-4" style="padding-top:12px;">
 
                                                 <label for="txtSurveyDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Right Answer</label>
                                             </div>
@@ -174,7 +174,7 @@
 
                                                 <div class="col-lg-12">
 
-                                                    <div style="width:210px;text-align:center;">
+                                                    <div style="width:210px;">
                                                         @*<div data-bind="visible:RightPictureBytes()==null" class="surveyLeftImagePc">
 
                                         </div>*@
@@ -184,7 +184,7 @@
 
                                                 </div>
 
-                                                <div class="col-lg-12" style="margin-top:15px;text-align:center;width:240px;padding-right:0px;">
+                                                <div class="col-lg-12" style="margin-top:15px;width:240px;padding-right:0px;">
                                                     <div class="col-lg-2" style="padding-right:10px;">
                                                         @*<div class="bs-example-tooltips tooltip-float-width">
                                             <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="left" data-html="true" data-content="" data-original-title="" title="">
@@ -610,7 +610,7 @@
                                         </div>
 
                                     </div>
-                                    <div class="adsubHeading " style=" color: #58267b !important ;margin-bottom:20px; margin-top:20px;">
+                                    <div class="adsubHeading " style=" color: #58267b !important ;margin-bottom:20px; margin-top:20px;display:none;">
                                         Link with another Survey Question
                                     </div>
                                     <div class="col-lg-9">
@@ -624,7 +624,7 @@
                                                 <select class="form-control" data-bind="options:$root.surveyQuestionList, optionsText: 'DisplayQuestion', optionsValue: 'SQID', optionsCaption: '&lt;' + 'Select Question'+ '&gt;' , value: ParentSurveyId"></select>
                                             </div>
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group" style="display:none;">
                                             <div class="col-lg-3">
                                            
                                                 <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Priority</label>

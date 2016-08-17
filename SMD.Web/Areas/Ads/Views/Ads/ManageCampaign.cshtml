@@ -100,16 +100,16 @@ else
                             </div>
                         </div>
                         <div class="main-box" style="padding: 20px;">
-                            <div class="adsubHeading" data-bind="visible: $root.previewScreenNumber() == 1">
+                            <div class="adsubHeading Theme_standard_clr" data-bind="visible: $root.previewScreenNumber() == 1">
                                 Upload your video ad and FREE banner text.
                             </div>
-                            <div class="adsubHeading" data-bind="visible: $root.previewScreenNumber() == 2">
+                            <div class="adsubHeading Theme_standard_clr" data-bind="visible: $root.previewScreenNumber() == 2">
                                 Define your target audience
                             </div>
-                            <div class="adsubHeading" data-bind="visible: $root.previewScreenNumber() == 4">
+                            <div class="adsubHeading Theme_standard_clr" data-bind="visible: $root.previewScreenNumber() == 4">
                                 Ask the user some useful info and then reward them.
                             </div>
-                            <div class="adsubHeading" data-bind="visible: $root.previewScreenNumber() == 3">
+                            <div class="adsubHeading Theme_standard_clr" data-bind="visible: $root.previewScreenNumber() == 3">
                                 How do you want to deliver your video ads …
                             </div>
                             <div class="col-lg-11" style="margin:auto;float:none !important;" data-bind="visible: $root.previewScreenNumber() == 1">
@@ -143,7 +143,7 @@ else
                                         <div class="defaultImgUploadImage pull-left" style="cursor:pointer;">
                                             <div style="width:100%;height:110px;"></div>
                                             <div style="    padding-top: 10px;    text-align: center;    font-size: 12px;    color: gray;">
-                                                max length 20 sec
+                                                max length 30 sec
                                             </div>
                                         </div>
                                         <div class="defaultImgUploadImageBtn" style="width:75px;">
@@ -185,12 +185,12 @@ else
                                         <label for="txtUploadLogo" class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn">Upload Logo</label>
                                     </div>
                                     <div class="col-lg-7">
-                                        <div class="defaultImgUploadImage pull-left" style="cursor:pointer;">
-                                            <img style="width:auto;height:110px;max-width:170px;" data-bind="visible: $root.campaignModel().LogoImageBytes() != '',attr: { src: $root.campaignModel().LogoImageBytes  }" src="/Content/Images/Company_Default.png" onclick="showUploadDialog();" />
-                                            <img style="width:auto;height:110px;max-width:170px;" data-bind="visible: LogoUrl() != '' ,attr: { src: '/' +  LogoUrl() + $root.randonNumber() }" onclick="showUploadDialog();" />
+                                        <div class="defaultImgUploadImage pull-left" style="cursor:pointer;text-align:center">
+                                            <img style="width:auto;max-width:170px;" data-bind="visible: $root.campaignModel().LogoImageBytes() != '',attr: { src: $root.campaignModel().LogoImageBytes  }" src="/Content/Images/Company_Default.png" onclick="showUploadDialog();" />
+                                            <img style="width:auto;max-width:170px;" data-bind="visible: LogoUrl() != '' ,attr: { src: '/' +  LogoUrl() + $root.randonNumber() }" onclick="showUploadDialog();" />
                                             <div style="width:100%;height:110px;" onclick="showUploadDialog();" data-bind="visible: LogoUrl() == '' &&   $root.campaignModel().LogoImageBytes() == ''"></div>
                                             <div style="    padding-top: 10px;    text-align: center;    font-size: 12px;    color: gray;">
-                                                (200 x 200 pixels)
+                                                (300 x 150 pixels)
                                             </div>
                                         </div>
                                         <div class="defaultImgUploadImageBtn" style="width:75px;">
@@ -211,7 +211,7 @@ else
                                         </div>*@
                                 </div>
                                 <div class="form-group" style="margin-bottom:14px;">
-                                    <div class="col-lg-2" style="padding-top:12px;">
+                                    <div class="col-lg-2" >
                                         <label for="txtCampaignDisplayName" class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn" data-bind="text:$root.lblAdTitle">Ad Title</label>
                                     </div>
                                     <div class="col-lg-7">
@@ -534,13 +534,28 @@ else
                                     <div class="col-lg-2">
                                         <label for="txtadditionalCrit" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Advanced matching options</label>
                                     </div>
-                                    <div class="col-lg-10">
-                                        <div>
-                                            <button class="btn  btn-danger btnAdsCampaign ButtonWidth" id="" data-toggle="modal" data-target=".bs-example-modal-lg" data-bind="click:$root.showAdditionUserCriteria">Profle card matches</button>
+                                    <div class="col-lg-10" style="padding:0px;">
+                                        <div class="col-lg-4">
+                                            <div>
+                                                <button class="btn  btn-danger btnAdsCampaign ButtonWidth" style="width:100%!important;" id="" data-toggle="modal" data-target=".bs-example-modal-lg" data-bind="click:$root.showAdditionUserCriteria">Profle card matches</button>
+                                            </div>
+                                            <div>
+                                                <button class="btn  btn-danger btnAdsCampaign ButtonWidth" style="width:100%!important;" id="" data-toggle="modal" data-target=".bs-example-modal-lg" data-bind="click:$root.showAdditionQuizCriteria">Quiz answer matches</button>
+                                            </div>
+
                                         </div>
-                                        <div>
-                                            <button class="btn  btn-danger btnAdsCampaign ButtonWidth" id="" data-toggle="modal" data-target=".bs-example-modal-lg" data-bind="click:$root.showAdditionQuizCriteria">Quiz answer matches</button>
+                                        
+                                        <div class="col-lg-4">
+                                            <div>
+                                                <button class="btn  btn-danger btnAdsCampaign ButtonWidth" style="width:100%!important;" id="" data-toggle="modal" data-target=".bs-example-modal-lg" >My Profile cards</button>
+                                            </div>
+                                            <div>
+                                                <button class="btn  btn-danger btnAdsCampaign ButtonWidth" style="width:100%!important;" id="" data-toggle="modal" data-target=".bs-example-modal-lg" >My Profile Questions</button>
+                                            </div>
+
                                         </div>
+                                        
+
                                         <div>
                                             <div class="table-responsive">
                                                 <table class="table table-striped table-hover">
@@ -827,7 +842,7 @@ else
 
                                 <button class="btn  btn-info " id="btnStopAndTerminate" data-bind=" click:$root.terminateCampaign,visible: $root.isTerminateBtnVisible " style="width: 80%;margin-bottom:10px;">Stop & Terminate Early</button>
                                 <button class="btn  btn-danger " id="btnArchive" data-bind=" click:$root.ArchiveCampaign,visible: $root.isShowArchiveBtn " style="width: 80%;margin-bottom:10px;">Archive Campaign</button>
-                                <button class="btn  btn-info " id="btnCopyCampaign" data-bind=" click:$root.copyCampaign  " style="display:none;">Create Copy - New Campaign</button>@*visible: $root.isNewCampaignVisible*@
+                                <button class="btn  btn-info Theme_standard_clr" id="btnCopyCampaign" data-bind=" click:$root.copyCampaign  " style="display:none;">Create Copy - New Campaign</button>@*visible: $root.isNewCampaignVisible*@
                                 <button class="btn  btn-success" id="btnPauseCampaign" data-bind="click:$root.changeStatus(4)" style="display:none;">Pause</button>
                                 <button class="btn  btn-success" id="btnResumeCampagin" data-bind="click:$root.changeStatus(3)" style="display:none;">Resume</button>
                             </div>
@@ -1890,7 +1905,7 @@ else
                                 <div class="social-box col-lg-12 col-sm-12 col-xs-12  estimates hidden-sm hidden-xs" style="cursor:pointer;display:none;" title="Pending Estimates">
                                     <div style="    margin-bottom: 10px;">
                                         <div class="yourBudgtHeadingCnt">
-                                            <span>Total Spent</span>
+                                            <span style="white-space:nowrap;">Total Spent</span>
                                         </div>
                                         <div class="">
                                             <span>£1024.00</span>
