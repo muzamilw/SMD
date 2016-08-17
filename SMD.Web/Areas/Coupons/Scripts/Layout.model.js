@@ -48,26 +48,41 @@
         var
             self,
             branchId = ko.observable(specifiedbranchId),
-            branchTitle = ko.observable(specifiedbranchTitle),
-            branchAddressline1 = ko.observable(specifiedAddressline1),
+            branchTitle = ko.observable(specifiedbranchTitle).extend({ required: true}),
+            branchAddressline1 = ko.observable(specifiedAddressline1).extend({ required: true}),
             branchAddressline2 = ko.observable(specifiedAddressline2),
-            branchCity = ko.observable(specifiedCity),
-            branchState = ko.observable(specifiedState),
-            branchZipCode = ko.observable(specifiedZipcode),
-            branchPhone = ko.observable(specifiedPhone),
-            branchLocationLat = ko.observable(specifiedLocationLat),
-            branchLocationLon = ko.observable(specifiedLocationLong),
-            branchCategoryId = ko.observable(specifiedBranchCategoryId),
+            branchCity = ko.observable(specifiedCity).extend({ required: true }),
+            branchState = ko.observable(specifiedState).extend({ required: true }),
+            branchZipCode = ko.observable(specifiedZipcode).extend({ required: true }),
+            branchPhone = ko.observable(specifiedPhone).extend({ required: true}),
+            branchLocationLat = ko.observable(specifiedLocationLat).extend({ required: true}),
+            branchLocationLon = ko.observable(specifiedLocationLong).extend({ required: true}),
+            branchCategoryId = ko.observable(specifiedBranchCategoryId).extend({ required: true }),
             isDeleted = ko.observable(false),
             isBranchChecked = ko.observable(false),
 
              // Errors
             errors = ko.validation.group({
+                branchTitle: branchTitle,
+                branchAddressline1: branchAddressline1,
+                branchPhone: branchPhone,
+                branchCity: branchCity,
+                branchState: branchState,
+                branchZipCode: branchZipCode,
+                branchLocationLat: branchLocationLat,
+                branchLocationLon: branchLocationLon,
+                branchCategoryId: branchCategoryId,
             }),
             // Is Valid 
             isValid = ko.computed(function () {
                 return errors().length === 0 ? true : false;
             }),
+               showAllErrors = function () {
+                   // Show Item Errors
+                   errors.showAllMessages();
+                   // Show Item Stock Option Errors
+                   
+               },
 
             // ReSharper disable InconsistentNaming
             dirtyFlag = new ko.dirtyFlag({
@@ -130,6 +145,7 @@
             errors: errors,
             dirtyFlag: dirtyFlag,
             hasChanges: hasChanges,
+            showAllErrors:showAllErrors,
             isBranchChecked: isBranchChecked,
         };
         return self;
