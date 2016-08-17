@@ -134,6 +134,7 @@
         <AssociationConnector Association="DomainModels.FK_SurveyQuestionResponse_Company" />
         <EntityTypeShape EntityType="DomainModels.DamImage" Width="1.5" PointX="8.125" PointY="73.5" />
         <AssociationConnector Association="DomainModels.FK_DamImages_Company" />
+        <AssociationConnector Association="DomainModels.FK_ProfileQuestion_Company" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

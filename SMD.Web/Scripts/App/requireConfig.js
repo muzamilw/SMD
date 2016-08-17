@@ -26,6 +26,7 @@
             "Coupons": "/Areas/Coupons/Scripts",
             "Layout": "/Areas/Coupons/Scripts",
             "PhraseLibrary": "/Areas/Common/Scripts"
+            
         }
     });
 

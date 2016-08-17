@@ -710,6 +710,9 @@
           <Property Name="HasLinkedQuestions" Type="bit" />
           <Property Name="PenalityForNotAnswering" Type="int" />
           <Property Name="Status" Type="int" />
+          <Property Name="CompanyId" Type="int" />
+          <Property Name="AnswerNeeded" Type="int" />
+          <Property Name="AsnswerCount" Type="int" />
         </EntityType>
         <EntityType Name="ProfileQuestionAnswer">
           <Key>
@@ -1576,6 +1579,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ProfileQuestion_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="ProfileQuestion" Type="Self.ProfileQuestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="ProfileQuestion">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ProfileQuestionAnswer_ProfileQuestion">
           <End Role="ProfileQuestion" Type="Self.ProfileQuestion" Multiplicity="0..1" />
           <End Role="ProfileQuestionAnswer" Type="Self.ProfileQuestionAnswer" Multiplicity="*" />
@@ -2261,6 +2276,10 @@
             <End Role="SurveyQuestion" EntitySet="SurveyQuestion" />
             <End Role="InvoiceDetail" EntitySet="InvoiceDetail" />
           </AssociationSet>
+          <AssociationSet Name="FK_ProfileQuestion_Company" Association="Self.FK_ProfileQuestion_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="ProfileQuestion" EntitySet="ProfileQuestion" />
+          </AssociationSet>
           <AssociationSet Name="FK_ProfileQuestionAnswer_ProfileQuestion" Association="Self.FK_ProfileQuestionAnswer_ProfileQuestion">
             <End Role="ProfileQuestion" EntitySet="ProfileQuestion" />
             <End Role="ProfileQuestionAnswer" EntitySet="ProfileQuestionAnswer" />
@@ -2822,6 +2841,7 @@
           <Property Name="InstagramHandle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="PinterestHandle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="DamImages" Relationship="SMDDevModel.FK_DamImages_Company" FromRole="Company" ToRole="DamImage" />
+          <NavigationProperty Name="ProfileQuestions" Relationship="SMDDevModel.FK_ProfileQuestion_Company" FromRole="Company" ToRole="ProfileQuestion" />
         </EntityType>
         <EntityType Name="CompanyBranch">
           <Key>
@@ -3180,6 +3200,10 @@
           <NavigationProperty Name="ProfileQuestionGroup" Relationship="Self.FK_ProfileQuestionGroup_ProfileQuestion" FromRole="ProfileQuestion" ToRole="ProfileQuestionGroup" />
           <NavigationProperty Name="ProfileQuestionUserAnswers" Relationship="Self.FK_ProfileQuestionUserAnswer_ProfileQuestion" FromRole="ProfileQuestion" ToRole="ProfileQuestionUserAnswer" />
           <NavigationProperty Name="SurveyQuestionTargetCriterias" Relationship="Self.FK_SurveyQuestionTargetCriteria_ProfileQuestion" FromRole="ProfileQuestion" ToRole="SurveyQuestionTargetCriteria" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="AnswerNeeded" Type="Int32" />
+          <Property Name="AsnswerCount" Type="Int32" />
+          <NavigationProperty Name="Company" Relationship="SMDDevModel.FK_ProfileQuestion_Company" FromRole="ProfileQuestion" ToRole="Company" />
         </EntityType>
         <EntityType Name="ProfileQuestionAnswer">
           <Key>
@@ -4745,6 +4769,10 @@
             <End Role="Company" EntitySet="Companies" />
             <End Role="DamImage" EntitySet="DamImages" />
           </AssociationSet>
+          <AssociationSet Name="FK_ProfileQuestion_Company" Association="SMDDevModel.FK_ProfileQuestion_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="ProfileQuestion" EntitySet="ProfileQuestions" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="CouponCategories">
           <Key>
@@ -4911,6 +4939,18 @@
               <PropertyRef Name="CompanyId" />
             </Principal>
             <Dependent Role="DamImage">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfileQuestion_Company">
+          <End Type="SMDDevModel.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="SMDDevModel.ProfileQuestion" Role="ProfileQuestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="ProfileQuestion">
               <PropertyRef Name="CompanyId" />
             </Dependent>
           </ReferentialConstraint>
@@ -5596,6 +5636,9 @@
           <EntitySetMapping Name="ProfileQuestions">
             <EntityTypeMapping TypeName="SMDDevModel.ProfileQuestion">
               <MappingFragment StoreEntitySet="ProfileQuestion">
+                <ScalarProperty Name="AsnswerCount" ColumnName="AsnswerCount" />
+                <ScalarProperty Name="AnswerNeeded" ColumnName="AnswerNeeded" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
                 <ScalarProperty Name="PQID" ColumnName="PQID" />
                 <ScalarProperty Name="LanguageID" ColumnName="LanguageID" />
                 <ScalarProperty Name="CountryID" ColumnName="CountryID" />
