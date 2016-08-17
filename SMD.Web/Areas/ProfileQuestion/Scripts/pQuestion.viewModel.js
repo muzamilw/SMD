@@ -106,6 +106,11 @@ define("pQuestion/pQuestion.viewModel",
                         pager().reset();
                         getQuestions();
                     },
+                    getQuestionsByFilter = function ()
+                    {
+                        pager().reset();
+                        getQuestions();
+                    },
                     // Add new Profile Question
                     addNewProfileQuestion = function () {
                         selectedQuestion(new model.question());
@@ -411,7 +416,8 @@ define("pQuestion/pQuestion.viewModel",
                     hasChangesOnQuestion: hasChangesOnQuestion,
                     CanAddAnswers: CanAddAnswers,
                     filteredLinkedQuestions: filteredLinkedQuestions,
-                    getSortedAnswers: getSortedAnswers
+                    getSortedAnswers: getSortedAnswers,
+                    getQuestionsByFilter: getQuestionsByFilter
                 };
             })()
         };
