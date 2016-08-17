@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets8FEDCC0487C548C40E8F78DC45170A0FBA07D4260F8D15EF7512E381C176B1B5))]
+[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets00F867E6EECB99C14BA6BC804C75E588C6ECA9EECC023843D99DC04674DAE64C))]
 
 namespace Edm_EntityMappingGeneratedViews
 {
@@ -17,18 +17,18 @@ namespace Edm_EntityMappingGeneratedViews
     /// <Summary>
     /// The type contains views for EntitySets and AssociationSets that were generated at design time.
     /// </Summary>
-    public sealed class ViewsForBaseEntitySets8FEDCC0487C548C40E8F78DC45170A0FBA07D4260F8D15EF7512E381C176B1B5 : System.Data.Mapping.EntityViewContainer
+    public sealed class ViewsForBaseEntitySets00F867E6EECB99C14BA6BC804C75E588C6ECA9EECC023843D99DC04674DAE64C : System.Data.Mapping.EntityViewContainer
     {
         
         /// <Summary>
         /// The constructor stores the views for the extents and also the hash values generated based on the metadata and mapping closure and views.
         /// </Summary>
-        public ViewsForBaseEntitySets8FEDCC0487C548C40E8F78DC45170A0FBA07D4260F8D15EF7512E381C176B1B5()
+        public ViewsForBaseEntitySets00F867E6EECB99C14BA6BC804C75E588C6ECA9EECC023843D99DC04674DAE64C()
         {
             this.EdmEntityContainerName = "BaseDbContext";
             this.StoreEntityContainerName = "SMDModelStoreContainer";
-            this.HashOverMappingClosure = "4d9f99555abab7ec19263f2df23af555771abaa9573c3eb83b9e2b5a983a3ac1";
-            this.HashOverAllExtentViews = "66a0b89058cb6e981676058975eb39ee180ae71f14556bc34f84dc0ba307ed50";
+            this.HashOverMappingClosure = "8af6ddc465466018d8ecab20861f36cc93df4b992acb31e5cf44f342c05cbf68";
+            this.HashOverAllExtentViews = "ff9a141e1a01915e0f139bcdae10baf4c6a76ce7c62c24dc29f3ca2941290aa9";
             this.ViewCount = 104;
         }
         
@@ -503,20 +503,24 @@ namespace Edm_EntityMappingGeneratedViews
                     "shTime, T1.ProfileQuestion_SkippedCount, T1.ProfileQuestion_CreationDate, T1.Pro" +
                     "fileQuestion_CreatedBy, T1.ProfileQuestion_ModifiedDate, T1.ProfileQuestion_Modi" +
                     "fiedBy, T1.ProfileQuestion_HasLinkedQuestions, T1.ProfileQuestion_PenalityForNot" +
-                    "Answering, T1.ProfileQuestion_Status)\r\n    FROM (\r\n        SELECT \r\n            " +
-                    "T.PqId AS ProfileQuestion_PQID, \r\n            T.LanguageId AS ProfileQuestion_La" +
-                    "nguageID, \r\n            T.CountryId AS ProfileQuestion_CountryID, \r\n            " +
-                    "T.ProfileGroupId AS ProfileQuestion_ProfileGroupID, \r\n            T.Priority AS " +
-                    "ProfileQuestion_Priority, \r\n            T.Type AS ProfileQuestion_Type, \r\n      " +
-                    "      T.Question AS ProfileQuestion_Question, \r\n            T.RefreshTime AS Pro" +
-                    "fileQuestion_RefreshTime, \r\n            T.SkippedCount AS ProfileQuestion_Skippe" +
-                    "dCount, \r\n            T.CreationDate AS ProfileQuestion_CreationDate, \r\n        " +
-                    "    T.CreatedBy AS ProfileQuestion_CreatedBy, \r\n            T.ModifiedDate AS Pr" +
-                    "ofileQuestion_ModifiedDate, \r\n            T.ModifiedBy AS ProfileQuestion_Modifi" +
-                    "edBy, \r\n            T.HasLinkedQuestions AS ProfileQuestion_HasLinkedQuestions, " +
-                    "\r\n            T.PenalityForNotAnswering AS ProfileQuestion_PenalityForNotAnsweri" +
-                    "ng, \r\n            T.Status AS ProfileQuestion_Status, \r\n            True AS _fro" +
-                    "m0\r\n        FROM BaseDbContext.ProfileQuestions AS T\r\n    ) AS T1");
+                    "Answering, T1.ProfileQuestion_Status, T1.ProfileQuestion_CompanyId, T1.ProfileQu" +
+                    "estion_AnswerNeeded, T1.ProfileQuestion_AsnswerCount)\r\n    FROM (\r\n        SELEC" +
+                    "T \r\n            T.PqId AS ProfileQuestion_PQID, \r\n            T.LanguageId AS Pr" +
+                    "ofileQuestion_LanguageID, \r\n            T.CountryId AS ProfileQuestion_CountryID" +
+                    ", \r\n            T.ProfileGroupId AS ProfileQuestion_ProfileGroupID, \r\n          " +
+                    "  T.Priority AS ProfileQuestion_Priority, \r\n            T.Type AS ProfileQuestio" +
+                    "n_Type, \r\n            T.Question AS ProfileQuestion_Question, \r\n            T.Re" +
+                    "freshTime AS ProfileQuestion_RefreshTime, \r\n            T.SkippedCount AS Profil" +
+                    "eQuestion_SkippedCount, \r\n            T.CreationDate AS ProfileQuestion_Creation" +
+                    "Date, \r\n            T.CreatedBy AS ProfileQuestion_CreatedBy, \r\n            T.Mo" +
+                    "difiedDate AS ProfileQuestion_ModifiedDate, \r\n            T.ModifiedBy AS Profil" +
+                    "eQuestion_ModifiedBy, \r\n            T.HasLinkedQuestions AS ProfileQuestion_HasL" +
+                    "inkedQuestions, \r\n            T.PenalityForNotAnswering AS ProfileQuestion_Penal" +
+                    "ityForNotAnswering, \r\n            T.Status AS ProfileQuestion_Status, \r\n        " +
+                    "    T.CompanyId AS ProfileQuestion_CompanyId, \r\n            T.AnswerNeeded AS Pr" +
+                    "ofileQuestion_AnswerNeeded, \r\n            T.AsnswerCount AS ProfileQuestion_Asns" +
+                    "werCount, \r\n            True AS _from0\r\n        FROM BaseDbContext.ProfileQuesti" +
+                    "ons AS T\r\n    ) AS T1");
         }
         
         /// <Summary>
@@ -1633,20 +1637,24 @@ namespace Edm_EntityMappingGeneratedViews
                     "hTime, T1.ProfileQuestion_SkippedCount, T1.ProfileQuestion_CreationDate, T1.Prof" +
                     "ileQuestion_CreatedBy, T1.ProfileQuestion_ModifiedDate, T1.ProfileQuestion_Modif" +
                     "iedBy, T1.ProfileQuestion_HasLinkedQuestions, T1.ProfileQuestion_PenalityForNotA" +
-                    "nswering, T1.ProfileQuestion_Status)\r\n    FROM (\r\n        SELECT \r\n            T" +
-                    ".PQID AS ProfileQuestion_PqId, \r\n            T.LanguageID AS ProfileQuestion_Lan" +
-                    "guageId, \r\n            T.CountryID AS ProfileQuestion_CountryId, \r\n            T" +
-                    ".ProfileGroupID AS ProfileQuestion_ProfileGroupId, \r\n            T.Priority AS P" +
-                    "rofileQuestion_Priority, \r\n            T.Type AS ProfileQuestion_Type, \r\n       " +
-                    "     T.Question AS ProfileQuestion_Question, \r\n            T.RefreshTime AS Prof" +
-                    "ileQuestion_RefreshTime, \r\n            T.SkippedCount AS ProfileQuestion_Skipped" +
-                    "Count, \r\n            T.CreationDate AS ProfileQuestion_CreationDate, \r\n         " +
-                    "   T.CreatedBy AS ProfileQuestion_CreatedBy, \r\n            T.ModifiedDate AS Pro" +
-                    "fileQuestion_ModifiedDate, \r\n            T.ModifiedBy AS ProfileQuestion_Modifie" +
-                    "dBy, \r\n            T.HasLinkedQuestions AS ProfileQuestion_HasLinkedQuestions, \r" +
-                    "\n            T.PenalityForNotAnswering AS ProfileQuestion_PenalityForNotAnswerin" +
-                    "g, \r\n            T.Status AS ProfileQuestion_Status, \r\n            True AS _from" +
-                    "0\r\n        FROM SMDModelStoreContainer.ProfileQuestion AS T\r\n    ) AS T1");
+                    "nswering, T1.ProfileQuestion_Status, T1.ProfileQuestion_CompanyId, T1.ProfileQue" +
+                    "stion_AnswerNeeded, T1.ProfileQuestion_AsnswerCount)\r\n    FROM (\r\n        SELECT" +
+                    " \r\n            T.PQID AS ProfileQuestion_PqId, \r\n            T.LanguageID AS Pro" +
+                    "fileQuestion_LanguageId, \r\n            T.CountryID AS ProfileQuestion_CountryId," +
+                    " \r\n            T.ProfileGroupID AS ProfileQuestion_ProfileGroupId, \r\n           " +
+                    " T.Priority AS ProfileQuestion_Priority, \r\n            T.Type AS ProfileQuestion" +
+                    "_Type, \r\n            T.Question AS ProfileQuestion_Question, \r\n            T.Ref" +
+                    "reshTime AS ProfileQuestion_RefreshTime, \r\n            T.SkippedCount AS Profile" +
+                    "Question_SkippedCount, \r\n            T.CreationDate AS ProfileQuestion_CreationD" +
+                    "ate, \r\n            T.CreatedBy AS ProfileQuestion_CreatedBy, \r\n            T.Mod" +
+                    "ifiedDate AS ProfileQuestion_ModifiedDate, \r\n            T.ModifiedBy AS Profile" +
+                    "Question_ModifiedBy, \r\n            T.HasLinkedQuestions AS ProfileQuestion_HasLi" +
+                    "nkedQuestions, \r\n            T.PenalityForNotAnswering AS ProfileQuestion_Penali" +
+                    "tyForNotAnswering, \r\n            T.Status AS ProfileQuestion_Status, \r\n         " +
+                    "   T.CompanyId AS ProfileQuestion_CompanyId, \r\n            T.AnswerNeeded AS Pro" +
+                    "fileQuestion_AnswerNeeded, \r\n            T.AsnswerCount AS ProfileQuestion_Asnsw" +
+                    "erCount, \r\n            True AS _from0\r\n        FROM SMDModelStoreContainer.Profi" +
+                    "leQuestion AS T\r\n    ) AS T1");
         }
         
         /// <Summary>

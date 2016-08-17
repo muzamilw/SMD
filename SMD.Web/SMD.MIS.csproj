@@ -586,6 +586,10 @@
     <Content Include="Areas\Common\Scripts\phraseLibrary.model.js" />
     <Content Include="Areas\Common\Scripts\phraseLibrary.view.js" />
     <Content Include="Areas\Common\Scripts\phraseLibrary.viewModel.js" />
+    <Content Include="Areas\Common\Scripts\userProfile.viewModel.js" />
+    <Content Include="Areas\Common\Scripts\userProfile.dataservice.js" />
+    <Content Include="Areas\Common\Scripts\userProfile.model.js" />
+    <Content Include="Areas\Common\Scripts\userProfile.view.js" />
     <Content Include="Areas\Coupons\Scripts\Coupons.dataservice.js" />
     <Content Include="Areas\Coupons\Scripts\Coupons.model.js" />
     <Content Include="Areas\Coupons\Scripts\Coupons.view.js" />
@@ -1625,6 +1629,7 @@
     <Content Include="Areas\Coupons\Views\Shared\_BranchDetails.cshtml" />
     <Content Include="Areas\Common\Views\Shared\_phraseLibrary.cshtml" />
     <Content Include="Areas\Coupons\Views\Coupons\_addEditCouponCategories.cshtml" />
+    <Content Include="Areas\Common\Views\Shared\_UserProfile.cshtml" />
     <None Include="config\Web.connectionstrings - Copy.configx" />
     <None Include="config\Web.connectionstrings.config" />
     <None Include="config\Web.connectionstrings.default.config" />

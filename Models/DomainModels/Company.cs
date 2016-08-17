@@ -73,5 +73,7 @@ namespace SMD.Models.DomainModels
 
         public virtual ICollection<DamImage> DamImages { get; set; }
 
+        public virtual ICollection<ProfileQuestion> ProfileQuestions { get; set; }
+
     }
 }

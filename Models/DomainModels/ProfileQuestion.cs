@@ -25,10 +25,18 @@ namespace SMD.Models.DomainModels
         public int? PenalityForNotAnswering { get; set; }
         public int? Status { get; set; }
 
+        public Nullable<int> CompanyId { get; set; }
+        public Nullable<int> AnswerNeeded { get; set; }
+        public Nullable<int> AsnswerCount { get; set; }
+
         public virtual ICollection<ProfileQuestionAnswer> ProfileQuestionAnswers { get; set; }
         public virtual ICollection<ProfileQuestionUserAnswer> ProfileQuestionUserAnswers { get; set; }
         public virtual ProfileQuestionGroup ProfileQuestionGroup { get; set; }
         public virtual ICollection<AdCampaignTargetCriteria> AdCampaignTargetCriterias { get; set; }
         public virtual ICollection<SurveyQuestionTargetCriteria> SurveyQuestionTargetCriterias { get; set; }
+
+        public virtual Company Company { get; set; }
+
+        
     }
 }

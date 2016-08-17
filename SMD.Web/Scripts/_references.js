@@ -832,6 +832,10 @@
 /// <reference path="plugins/forms/tiny_mce/themes/advanced/langs/en.js" />
 /// <reference path="plugins/forms/tiny_mce/themes/advanced/langs/en_dlg.js" />
 /// <reference path="plugins/forms/tiny_mce/themes/simple/langs/en.js" />
+/// <reference path="../areas/common/scripts/userprofile.view.js" />
+/// <reference path="../areas/common/scripts/userprofile.model.js" />
+/// <reference path="../areas/common/scripts/userprofile.dataservice.js" />
+/// <reference path="../areas/common/scripts/userprofile.viewmodel.js" />
 <<<<<<< HEAD
 =======
 /// <reference path="plugins/forms/timeentry/langs/jquery.timeentry-ca.js" />

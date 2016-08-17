@@ -62,7 +62,7 @@
                     </div>
                     <div class="form-group ">
                         <div class="col-lg-3 text-right">
-                            <label for="branaddress1" class="col-form-label">Address Line 1</label>
+                            <label for="branaddress1" class="col-form-label labelColour">Address Line 1</label>
                         </div>
                         <div class="col-lg-5">
                             <input class="form-control" data-bind="value:branchAddressline1" type="text" id="branaddress1">
@@ -78,7 +78,7 @@
                     </div>
                     <div class="form-group ">
                         <div class="col-lg-3 text-right">
-                            <label for="city" class="col-form-label">City</label>
+                            <label for="city" class="col-form-label labelColour">City</label>
                         </div>
                         <div class="col-lg-5">
                             <input class="form-control" data-bind="value:branchCity" type="text" id="city">
@@ -86,7 +86,7 @@
                     </div>
                     <div class="form-group ">
                         <div class="col-lg-3 text-right">
-                            <label for="state" class="col-form-label">State</label>
+                            <label for="state" class="col-form-label labelColour">State</label>
                         </div>
                         <div class="col-lg-5">
                             <input class="form-control" data-bind="value:branchState" type="text" id="state">
@@ -94,7 +94,7 @@
                     </div>
                     <div class="form-group ">
                         <div class="col-lg-3 text-right">
-                            <label for="zipCode" class="col-form-label">Zip/Post Code</label>
+                            <label for="zipCode" class="col-form-label labelColour">Zip/Post Code</label>
                         </div>
                         <div class="col-lg-5">
                             <input class="form-control" data-bind="value:branchZipCode" type="text" id="zipCode">
@@ -141,7 +141,7 @@
             </div>
             <div class="modal-footer">
 
-                <button type="button" data-bind="click: $root.DeleteBranch,visible:$root.isSaveChangesEnable()" class="btn btn-danger">Delete this Branch</button>
+                <button type="button" data-bind="click: $root.DeleteBranch,visible:$root.isSaveChangesEnable() && $root.isdeleteEnable()" class="btn btn-danger">Delete this Branch</button>
                 <button type="button" data-bind="click: $root.SaveChanges,visible:$root.isSaveChangesEnable()" class=" btn btn-primary">Save Changes</button>
                 <button type="button" data-bind="click:$root.hideBranchCategoryDialog" class="btn btn-default">Close</button>
             </div>

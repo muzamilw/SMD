@@ -628,6 +628,9 @@
           <Property Name="HasLinkedQuestions" Type="bit" />
           <Property Name="PenalityForNotAnswering" Type="int" />
           <Property Name="Status" Type="int" />
+          <Property Name="CompanyId" Type="int" />
+          <Property Name="AnswerNeeded" Type="int" />
+          <Property Name="AsnswerCount" Type="int" />
         </EntityType>
         <EntityType Name="ProfileQuestionAnswer">
           <Key>
@@ -1490,6 +1493,18 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ProfileQuestion_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="ProfileQuestion" Type="Self.ProfileQuestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="ProfileQuestion">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ProfileQuestionAnswer_ProfileQuestion">
           <End Role="ProfileQuestion" Type="Self.ProfileQuestion" Multiplicity="0..1" />
           <End Role="ProfileQuestionAnswer" Type="Self.ProfileQuestionAnswer" Multiplicity="*" />
@@ -2254,6 +2269,10 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
             <End Role="SurveyQuestion" EntitySet="SurveyQuestion" />
             <End Role="InvoiceDetail" EntitySet="InvoiceDetail" />
           </AssociationSet>
+          <AssociationSet Name="FK_ProfileQuestion_Company" Association="Self.FK_ProfileQuestion_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="ProfileQuestion" EntitySet="ProfileQuestion" />
+          </AssociationSet>
           <AssociationSet Name="FK_ProfileQuestionAnswer_ProfileQuestion" Association="Self.FK_ProfileQuestionAnswer_ProfileQuestion">
             <End Role="ProfileQuestion" EntitySet="ProfileQuestion" />
             <End Role="ProfileQuestionAnswer" EntitySet="ProfileQuestionAnswer" />
@@ -2855,6 +2874,10 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
             <End Role="Company" EntitySet="Companies" />
             <End Role="DamImage" EntitySet="DamImages" />
           </AssociationSet>
+          <AssociationSet Name="FK_ProfileQuestion_Company" Association="DomainModels.FK_ProfileQuestion_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="ProfileQuestion" EntitySet="ProfileQuestions" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="ProfileQuestion">
           <Key>
@@ -2881,6 +2904,10 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <NavigationProperty Name="SurveyQuestionTargetCriterias" Relationship="DomainModels.FK_SurveyQuestionTargetCriteria_ProfileQuestion" FromRole="ProfileQuestion" ToRole="SurveyQuestionTargetCriteria" />
           <NavigationProperty Name="ProfileQuestionUserAnswers" Relationship="DomainModels.FK_ProfileQuestionUserAnswer_ProfileQuestion" FromRole="ProfileQuestion" ToRole="ProfileQuestionUserAnswer" />
           <NavigationProperty Name="AdCampaignTargetCriterias" Relationship="DomainModels.FK_AdCampaignTargetCriteria_ProfileQuestion" FromRole="ProfileQuestion" ToRole="AdCampaignTargetCriteria" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="AnswerNeeded" Type="Int32" />
+          <Property Name="AsnswerCount" Type="Int32" />
+          <NavigationProperty Name="Company" Relationship="DomainModels.FK_ProfileQuestion_Company" FromRole="ProfileQuestion" ToRole="Company" />
         </EntityType>
         <EntityType Name="ProfileQuestionAnswer">
           <Key>
@@ -4924,6 +4951,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <NavigationProperty Name="SurveyQuestions" Relationship="DomainModels.FK_SurveyQuestion_Company" FromRole="Company" ToRole="SurveyQuestion" />
           <NavigationProperty Name="SurveyQuestionResponses" Relationship="DomainModels.FK_SurveyQuestionResponse_Company" FromRole="Company" ToRole="SurveyQuestionResponse" />
           <NavigationProperty Name="DamImages" Relationship="DomainModels.FK_DamImages_Company" FromRole="Company" ToRole="DamImage" />
+          <NavigationProperty Name="ProfileQuestions" Relationship="DomainModels.FK_ProfileQuestion_Company" FromRole="Company" ToRole="ProfileQuestion" />
         </EntityType>
         <Association Name="FK_Account_Company">
           <End Type="DomainModels.Company" Role="Company" Multiplicity="0..1" />
@@ -5117,6 +5145,18 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ProfileQuestion_Company">
+          <End Type="DomainModels.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="DomainModels.ProfileQuestion" Role="ProfileQuestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="ProfileQuestion">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5143,6 +5183,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <EntitySetMapping Name="ProfileQuestions">
             <EntityTypeMapping TypeName="DomainModels.ProfileQuestion">
               <MappingFragment StoreEntitySet="ProfileQuestion">
+                <ScalarProperty Name="AsnswerCount" ColumnName="AsnswerCount" />
+                <ScalarProperty Name="AnswerNeeded" ColumnName="AnswerNeeded" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="PenalityForNotAnswering" ColumnName="PenalityForNotAnswering" />
                 <ScalarProperty Name="HasLinkedQuestions" ColumnName="HasLinkedQuestions" />
