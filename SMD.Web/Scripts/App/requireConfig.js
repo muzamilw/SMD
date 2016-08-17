@@ -25,8 +25,8 @@
             "user": "/Areas/User/Scripts",
             "Coupons": "/Areas/Coupons/Scripts",
             "Layout": "/Areas/Coupons/Scripts",
-            "PhraseLibrary": "/Areas/Common/Scripts"
-            
+            "PhraseLibrary": "/Areas/Common/Scripts",
+            "DAM": "/Areas/DAM/Scripts"
         }
     });
 
