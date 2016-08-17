@@ -128,6 +128,7 @@
     <Compile Include="DomainModels\CompanyBranch.cs" />
     <Compile Include="DomainModels\Coupon.cs" />
     <Compile Include="DomainModels\CouponCategories.cs" />
+    <Compile Include="DomainModels\DamImage.cs" />
     <Compile Include="DomainModels\Phrase.cs" />
     <Compile Include="DomainModels\SearchCampaigns_Result.cs" />
     <Compile Include="DomainModels\Section.cs" />

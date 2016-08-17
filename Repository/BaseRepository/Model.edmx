@@ -466,6 +466,17 @@
           <Property Name="ActualUrl" Type="nvarchar" MaxLength="250" />
           <Property Name="UserId" Type="bigint" />
         </EntityType>
+        <EntityType Name="DamImages">
+          <Key>
+            <PropertyRef Name="ImageId" />
+          </Key>
+          <Property Name="ImageId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ImageTitle" Type="nvarchar" MaxLength="500" />
+          <Property Name="ImageFileName" Type="nvarchar" MaxLength="500" />
+          <Property Name="ImageCategory" Type="int" />
+          <Property Name="CreatedDateTime" Type="nchar" MaxLength="10" />
+          <Property Name="CompanyId" Type="int" />
+        </EntityType>
         <EntityType Name="Education">
           <Key>
             <PropertyRef Name="EducationId" />
@@ -1351,6 +1362,18 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DamImages_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="DamImages" Type="Self.DamImages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="DamImages">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -1958,6 +1981,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <EntitySet Name="CouponCategory" EntityType="Self.CouponCategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Currency" EntityType="Self.Currency" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CustomUrl" EntityType="Self.CustomUrl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DamImages" EntityType="Self.DamImages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Education" EntityType="Self.Education" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmailQueue" EntityType="Self.EmailQueue" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Game" EntityType="Self.Game" Schema="dbo" store:Type="Tables" />
@@ -2189,6 +2213,10 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <AssociationSet Name="FK_CouponCategories_CouponCategory" Association="Self.FK_CouponCategories_CouponCategory">
             <End Role="CouponCategory" EntitySet="CouponCategory" />
             <End Role="CouponCategories" EntitySet="CouponCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DamImages_Company" Association="Self.FK_DamImages_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="DamImages" EntitySet="DamImages" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -2821,6 +2849,11 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <AssociationSet Name="FK_SurveyQuestionResponse_Company" Association="DomainModels.FK_SurveyQuestionResponse_Company">
             <End Role="Company" EntitySet="Companies" />
             <End Role="SurveyQuestionResponse" EntitySet="SurveyQuestionResponses" />
+          </AssociationSet>
+          <EntitySet Name="DamImages" EntityType="DomainModels.DamImage" />
+          <AssociationSet Name="FK_DamImages_Company" Association="DomainModels.FK_DamImages_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="DamImage" EntitySet="DamImages" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="ProfileQuestion">
@@ -4890,6 +4923,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <NavigationProperty Name="ProfileQuestionUserAnswers" Relationship="DomainModels.FK_ProfileQuestionUserAnswer_Company" FromRole="Company" ToRole="ProfileQuestionUserAnswer" />
           <NavigationProperty Name="SurveyQuestions" Relationship="DomainModels.FK_SurveyQuestion_Company" FromRole="Company" ToRole="SurveyQuestion" />
           <NavigationProperty Name="SurveyQuestionResponses" Relationship="DomainModels.FK_SurveyQuestionResponse_Company" FromRole="Company" ToRole="SurveyQuestionResponse" />
+          <NavigationProperty Name="DamImages" Relationship="DomainModels.FK_DamImages_Company" FromRole="Company" ToRole="DamImage" />
         </EntityType>
         <Association Name="FK_Account_Company">
           <End Type="DomainModels.Company" Role="Company" Multiplicity="0..1" />
@@ -5055,6 +5089,30 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
               <PropertyRef Name="CompanyId" />
             </Principal>
             <Dependent Role="SurveyQuestionResponse">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DamImage">
+          <Key>
+            <PropertyRef Name="ImageId" />
+          </Key>
+          <Property Name="ImageId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ImageTitle" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ImageFileName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ImageCategory" Type="Int32" />
+          <Property Name="CreatedDateTime" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="CompanyId" Type="Int32" />
+          <NavigationProperty Name="Company" Relationship="DomainModels.FK_DamImages_Company" FromRole="DamImage" ToRole="Company" />
+        </EntityType>
+        <Association Name="FK_DamImages_Company">
+          <End Type="DomainModels.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="DomainModels.DamImage" Role="DamImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="DamImage">
               <PropertyRef Name="CompanyId" />
             </Dependent>
           </ReferentialConstraint>
@@ -6207,6 +6265,18 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
                 <ScalarProperty Name="ReplyEmail" ColumnName="ReplyEmail" />
                 <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
                 <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DamImages">
+            <EntityTypeMapping TypeName="DomainModels.DamImage">
+              <MappingFragment StoreEntitySet="DamImages">
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="ImageCategory" ColumnName="ImageCategory" />
+                <ScalarProperty Name="ImageFileName" ColumnName="ImageFileName" />
+                <ScalarProperty Name="ImageTitle" ColumnName="ImageTitle" />
+                <ScalarProperty Name="ImageId" ColumnName="ImageId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -129,6 +129,9 @@
     <Compile Include="CustomUrl.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="DamImage.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="DiscountVoucher.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
