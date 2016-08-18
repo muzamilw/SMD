@@ -28,7 +28,7 @@ namespace SMD.Implementation.Services
         private readonly ILanguageRepository _languageRepository;
         private readonly IProfileQuestionGroupRepository _profileQuestionGroupRepository;
         private readonly IProfileQuestionAnswerRepository _profileQuestionAnswerRepository;
-        
+        private readonly IIndustryRepository _industoryRepository;
         #endregion
         #region Constructor
         /// <summary>
@@ -36,14 +36,15 @@ namespace SMD.Implementation.Services
         /// </summary>
 
         public ProfileQuestionService(IProfileQuestionRepository profileQuestionRepository, ICountryRepository countryRepository, 
-            ILanguageRepository languageRepository, IProfileQuestionGroupRepository profileQuestionGroupRepository, 
-            IProfileQuestionAnswerRepository profileQuestionAnswerRepository)
+            ILanguageRepository languageRepository, IProfileQuestionGroupRepository profileQuestionGroupRepository,
+            IProfileQuestionAnswerRepository profileQuestionAnswerRepository, IIndustryRepository industoryRepository)
         {
             _profileQuestionRepository = profileQuestionRepository;
             _countryRepository = countryRepository;
             _languageRepository = languageRepository;
             _profileQuestionGroupRepository = profileQuestionGroupRepository;
             _profileQuestionAnswerRepository = profileQuestionAnswerRepository;
+            _industoryRepository = industoryRepository;
         }
 
         #endregion
@@ -78,10 +79,12 @@ namespace SMD.Implementation.Services
         /// </summary>
         public ProfileQuestionSearchRequestResponse GetProfileQuestions(ProfileQuestionSearchRequest request)
         {
+           
             int rowCount;
             return new ProfileQuestionSearchRequestResponse
             {
                 ProfileQuestions = _profileQuestionRepository.UpdateQuestionsCompanyID(_profileQuestionRepository.SearchProfileQuestions(request, out rowCount)),
+                Professions = _industoryRepository.GetAll(),
                 TotalCount = rowCount
             };
         }

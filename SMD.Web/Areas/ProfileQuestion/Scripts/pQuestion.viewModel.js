@@ -17,7 +17,20 @@ define("pQuestion/pQuestion.viewModel",
                     langs = ko.observableArray([]),
                     countries = ko.observableArray([]),
                     qGroup = ko.observableArray([]),
-                    priorityList = ko.observableArray([0,1,2,3,4,5,6,7,8,9]),
+                    selectedQuestionCountryList = ko.observableArray([]),
+                    professions = ko.observableArray([]),
+                    ageRange = ko.observableArray([]),
+                    AgeRangeEnd=ko.observable(80),
+                    AgeRangeStart=ko.observable(13),
+                    Gender = ko.observable('1'),
+                    selectedLocationLong = ko.observable(0),
+                    selectedLocationLat = ko.observable(0),
+                    genderppc = ko.observable(),
+                    selectedLocationRadius = ko.observable(),
+                    HeaderText = ko.observable(),
+                    StatusText = ko.observable(),
+                    priorityList = ko.observableArray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]),
+                    selectedLocationIncludeExclude = ko.observable(true),
                     questiontype = ko.observableArray([{
                         typeId: 1,
                         typeName:'Single Choice'
@@ -46,7 +59,9 @@ define("pQuestion/pQuestion.viewModel",
                     selectedQuestion = editorViewModel.itemForEditing,
                      //selected Answer
                     selectedAnswer = ko.observable(),
+                    ageppc= ko.observable(),
                     GetObj = ko.observable(),
+                    previewScreenNumber = ko.observable(0),
                     // Random number
                     randomIdForNewObjects= -1,
                     //Get Questions
@@ -69,7 +84,9 @@ define("pQuestion/pQuestion.viewModel",
                                         
 
                                         questions.push(model.questionServertoClientMapper(SetStatusForQuestion(item)));
-                                      
+                                        professions.removeAll();
+                                        ko.utils.arrayPushAll(professions(), data.Professions);
+                                        professions.valueHasMutated();
                                     });
                                    
                                     pager().totalCount(data.TotalCount);
@@ -169,9 +186,19 @@ define("pQuestion/pQuestion.viewModel",
                     },
                     // On editing of existing PQ
                     onEditProfileQuestion = function (item) {
+
                         getQuestionAnswer(item.qId());
                         selectedQuestion(item);
                         isEditorVisible(true);
+                        gotoScreen(1);
+                        HeaderText(item.questionString());
+                        StatusText(item.statusValue());
+                        isTerminateBtnVisible(false);
+                        isShowArchiveBtn(false);
+                        if (item.Status() == 1 || item.Status() == 2 || item.Status() == 3 || item.Status() == 4 || item.Status() == null || item.Status() == 7 || item.Status() == 9) {
+                            canSubmitForApproval(true);
+                        }
+
                     },
                     // On Edit PQ, Get PQ Answer & linked Question 
                     getQuestionAnswer= function(profileQuestionId) {
@@ -192,7 +219,18 @@ define("pQuestion/pQuestion.viewModel",
                                }
                            });
                     },
-                   
+                            addNewProfessionCriteria = function () {
+                                //if ($("#ddpIndustory").val() != "") {
+
+                                //    var matchedprofessionRec = ko.utils.arrayFirst(professions(), function (arrayitem) {
+
+                                //        return arrayitem.IndustryId == $("#ddpIndustory").val();
+                                //    });
+                                //    if (matchedprofessionRec != null) {
+                                //        addIndustry(matchedprofessionRec);
+                                //    }
+                                //}
+                            },
                     // Delete Handler PQ
                     onDeleteProfileQuestion = function(item) {
                         // Ask for confirmation
@@ -240,6 +278,12 @@ define("pQuestion/pQuestion.viewModel",
                     onEditQuestionAnswer= function(item) {
                         selectedAnswer(item);
                     },
+                      gotoScreen = function (number) {
+                          //  toastr.error("Validation.");
+                          debugger;
+                          previewScreenNumber(number);
+
+                      },
                     doBeforeSaveAnswer = function () {
                         var isValid = true;
                         if (!selectedAnswer().isValid()) {
@@ -411,6 +455,14 @@ define("pQuestion/pQuestion.viewModel",
                         getBasedata();
                         // First request for LV
                         getQuestions(214, 41);
+                        for (var i = 10; i < 81; i++) {
+                            var text = i.toString();
+                            if (i == 110)
+                                text += "+";
+                            ageRange.push({ value: i.toString(), text: text });
+                        }
+                       
+                        ageRange.push({ value: 120, text: "80+" });
                     };
                 return {
                     initialize: initialize,
@@ -451,7 +503,24 @@ define("pQuestion/pQuestion.viewModel",
                     filteredLinkedQuestions: filteredLinkedQuestions,
                     getSortedAnswers: getSortedAnswers,
                     getQuestionsByFilter: getQuestionsByFilter,
-                    SetStatusForQuestion: SetStatusForQuestion
+                    SetStatusForQuestion: SetStatusForQuestion,
+                    previewScreenNumber: previewScreenNumber,
+                    gotoScreen: gotoScreen,
+                    selectedQuestionCountryList: selectedQuestionCountryList,
+                    ageRange: ageRange,
+                    AgeRangeStart: AgeRangeStart,
+                    AgeRangeEnd:AgeRangeEnd,
+                    Gender: Gender,
+                    selectedLocationIncludeExclude: selectedLocationIncludeExclude,
+                    selectedLocationRadius: selectedLocationRadius,
+                    selectedLocationLat: selectedLocationLat,
+                    selectedLocationLong: selectedLocationLong,
+                    genderppc: genderppc,
+                    ageppc: ageppc,
+                    addNewProfessionCriteria: addNewProfessionCriteria,
+                    professions: professions,
+                    HeaderText: HeaderText,
+                    StatusText: StatusText
                 };
             })()
         };
