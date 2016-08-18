@@ -18,7 +18,7 @@
                 </div>
                 <div class="clearfix" style="float:right;">
                     <div class="col-xs-12" style="text-align: right; padding-right:0;margin-bottom:10px;">
-                        <button class="btn  btn-info" id="saveBtn" data-bind="click:$root.onSaveProfileQuestion, enable: $root.hasChangesOnQuestion, css: { 'btn-warning': $root.hasChangesOnQuestion }">Save</button>
+                        <button style="display:none;" class="btn  btn-info" id="saveBtn" data-bind="click:$root.onSaveProfileQuestion, enable: $root.hasChangesOnQuestion, css: { 'btn-warning': $root.hasChangesOnQuestion }">Save</button>
                         <button class="btn btn-default" id="saveBtn" data-bind="click: $root.closeEditDialog">Close</button>
                     </div>
                 </div>
@@ -873,12 +873,8 @@
                     </div>
                     <div class="col-xs-12" style="text-align: left; padding-right:0;margin-bottom:10px;font-size:0.9em;">
                         <span class="text-campaign-left control-label pull-left" style="    margin-top: 6px;">PPVC ($) </span>
-                        <input type="text" class="pull-right" style="  color:red;
-    width: 77px;
-    margin-top: 6px;
-    margin-left: 10px;
-    font-weight: bold;
-    font-size: 18px; " name="Budget" class="form-control" id="txtPerClick">
+                        <input type="text" class="pull-right" style="  color:red;width: 77px;margin-top: 6px;margin-left: 10px;font-weight: bold;font-size: 18px; " data-bind="value:$root.SelectedPvcVal" name="Budget" class="form-control" id="txtPerClick">
+    
                         <div class="clearfix">
                         </div>
                         <span class="text-campaign-left control-label pull-left" style="margin-top: 6px;display:none;">Cap your daily spend ($) </span>

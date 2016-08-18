@@ -21,7 +21,8 @@ define("pQuestion/pQuestion.viewModel",
                     professions = ko.observableArray([]),
                     ageRange = ko.observableArray([]),
                     AgeRangeEnd=ko.observable(80),
-                    AgeRangeStart=ko.observable(13),
+                    AgeRangeStart = ko.observable(13),
+                    SelectedPvcVal = ko.observable(0),
                     Gender = ko.observable('1'),
                     selectedLocationLong = ko.observable(0),
                     selectedLocationLat = ko.observable(0),
@@ -31,6 +32,8 @@ define("pQuestion/pQuestion.viewModel",
                     StatusText = ko.observable(),
                     priorityList = ko.observableArray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]),
                     selectedLocationIncludeExclude = ko.observable(true),
+                    isShowArchiveBtn = ko.observable(true),
+                    canSubmitForApproval = ko.observable(true),
                     questiontype = ko.observableArray([{
                         typeId: 1,
                         typeName:'Single Choice'
@@ -61,6 +64,7 @@ define("pQuestion/pQuestion.viewModel",
                     selectedAnswer = ko.observable(),
                     ageppc= ko.observable(),
                     GetObj = ko.observable(),
+                    isTerminateBtnVisible = ko.observable(true),
                     previewScreenNumber = ko.observable(0),
                     // Random number
                     randomIdForNewObjects= -1,
@@ -195,10 +199,13 @@ define("pQuestion/pQuestion.viewModel",
                         StatusText(item.statusValue());
                         isTerminateBtnVisible(false);
                         isShowArchiveBtn(false);
-                        if (item.Status() == 1 || item.Status() == 2 || item.Status() == 3 || item.Status() == 4 || item.Status() == null || item.Status() == 7 || item.Status() == 9) {
+                        if (item.status() == 1 || item.status() == 2 || item.status() == 3 || item.status() == 4 || item.status() == null || item.status() == 7 || item.status() == 9) {
                             canSubmitForApproval(true);
                         }
-
+                      
+                       
+                        SelectedPvcVal(item.answerNeeded());
+                        
                     },
                     // On Edit PQ, Get PQ Answer & linked Question 
                     getQuestionAnswer= function(profileQuestionId) {
@@ -520,7 +527,11 @@ define("pQuestion/pQuestion.viewModel",
                     addNewProfessionCriteria: addNewProfessionCriteria,
                     professions: professions,
                     HeaderText: HeaderText,
-                    StatusText: StatusText
+                    StatusText: StatusText,
+                    SelectedPvcVal: SelectedPvcVal,
+                    isTerminateBtnVisible: isTerminateBtnVisible,
+                    isShowArchiveBtn: isShowArchiveBtn,
+                    canSubmitForApproval: canSubmitForApproval
                 };
             })()
         };
