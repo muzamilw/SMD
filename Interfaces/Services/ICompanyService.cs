@@ -13,5 +13,7 @@ namespace SMD.Interfaces.Services
         int createCompany(string userId, string email, string fullName, string guid);
 
         Company GetCompanyById(int CompanyId);
+
+        Company GetCurrentCompany();
     }
 }

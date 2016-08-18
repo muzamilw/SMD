@@ -1,37 +1,29 @@
 ﻿/*
     View for the User. Used to keep the viewmodel clear of UI related logic
 */
-define("common/userProfile.view",
-    ["jquery", "common/userProfile.viewModel"], function ($, userViewModel) {
+define("common/companyProfile.view",
+    ["jquery", "common/companyProfile.viewModel"], function ($, companyViewModel) {
         var ist = window.ist || {};
         // View 
-        ist.userProfile.view = (function (specifiedViewModel) {
+        ist.companyProfile.view = (function (specifiedViewModel) {
             var
                 // View model 
                 viewModel = specifiedViewModel,
                 // Binding root used with knockout
-                bindingRoot = $("#userProfileBinding")[0],
-                bindingPartial = $("#bindingUserProfilePartialViews")[0],
+                bindingRoot = $("#companyProfileBinding")[0],
+                bindingPartial = $("#bindingCompanyProfilePartialViews")[0],
                 // Binding root used with knockout
                 //bindingRootUser = $("#manageUserBinding")[0],
                 // Show BranchCategory dialog
-                showUserProfileDialog = function () {
+                showCompanyProfileDialog = function () {
                  
-                    $("#userProfileDialog").modal("show");
+                    $("#companyProfileDialog").modal("show");
                 },
-                CloseUserProfileDialog = function () {
+                CloseCompanyProfileDialog = function () {
 
-                    $("#userProfileDialog").modal("hide");
+                    $("#companyProfileDialog").modal("hide");
                 },
-                 // Show Contact Company the dialog
-                showChangePassword = function () {
-                    $("#ChangePassword").modal("show");
-                    initializeLabelPopovers();
-                },
-                 // Hide Company Contact the dialog
-                hideChangePassword = function () {
-                    $("#ChangePassword").modal("hide");
-                },
+                
                 
 
             
@@ -46,23 +38,20 @@ define("common/userProfile.view",
                 bindingRoot: bindingRoot,
                 bindingPartial: bindingPartial,
                 viewModel: viewModel,
-                showUserProfileDialog: showUserProfileDialog,
-                CloseUserProfileDialog : CloseUserProfileDialog,
-                showChangePassword: showChangePassword,
-                hideChangePassword: hideChangePassword,
-               
-                hideChangePassword: hideChangePassword,
+                showCompanyProfileDialog: showCompanyProfileDialog,
+                CloseCompanyProfileDialog: CloseCompanyProfileDialog,
+            
              
 
             };
-        })(userViewModel);
+        })(companyViewModel);
         // Initialize the view model
-        if (ist.userProfile.view.bindingRoot) {
-            userViewModel.initialize(ist.userProfile.view);
+        if (ist.companyProfile.view.bindingRoot) {
+            companyViewModel.initialize(ist.companyProfile.view);
         }
 
        
-        return ist.userProfile.view;
+        return ist.companyProfile.view;
     });
 
 // Reads File - Print Out Section
@@ -83,7 +72,7 @@ function readPhotoURL(input) {
                 }
             };
             img.src = reader.result;
-            ist.userProfile.viewModel.selectedUser().imageUrl(img.src);
+            ist.companyProfile.viewModel.selectedUser().imageUrl(img.src);
         };
         reader.readAsDataURL(input.files[0]);
     }

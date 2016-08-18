@@ -836,6 +836,10 @@
 /// <reference path="../areas/common/scripts/userprofile.model.js" />
 /// <reference path="../areas/common/scripts/userprofile.dataservice.js" />
 /// <reference path="../areas/common/scripts/userprofile.viewmodel.js" />
+/// <reference path="../areas/common/scripts/companyprofile.viewmodel.js" />
+/// <reference path="../areas/common/scripts/companyprofile.view.js" />
+/// <reference path="../areas/common/scripts/companyprofile.model.js" />
+/// <reference path="../areas/common/scripts/companyprofile.dataservice.js" />
 <<<<<<< HEAD
 =======
 /// <reference path="plugins/forms/timeentry/langs/jquery.timeentry-ca.js" />
