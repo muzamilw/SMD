@@ -1,88 +1,68 @@
 ﻿define(["ko", "underscore", "underscore-ko"], function(ko) {
 
     var // ReSharper disable InconsistentNaming
-      User = function (specifiedId, specifiedFullName, specifiedAddress1, specifiedCmpname, specifiedEmail,
-          specifiedJTitle, specifiedTimeZone, specifiedGender, specifiedAddress2, specifiedAge, specifiedCityId,
-          ContactNotes, specifiedCountryId, indsId, specifiedPhn1, specifiedPhn2, specifiedState, specifiedZip, specifiedImg,
-          advertisingContact, advertisingEmail, advertisingPhone, spcEduId, spcStripe, spcPayPal, spcGoogle
-          , LogoImageBytes, CompanyId, RoleId, Password, VoucherSecretKey) {
+      User = function (CompanyId, CompanyName, Tel1, Tel2, Logo,
+          StripeCustomerId, SalesEmail, WebsiteLink, VoucherSecretKey, BillingAddressLine1, BillingAddressLine2,
+          BillingState, BillingCountryId, BillingCityId, BillingZipCode, BillingPhone, BillingEmail, TwitterHandle, FacebookHandle,
+          InstagramHandle, PinterestHandle, Logo, LogoImageBytes) {
           var
-              id = ko.observable(specifiedId),
-              fullName = ko.observable(specifiedFullName).extend({ required: true }),
-              address1 = ko.observable(specifiedAddress1),
-              companyName = ko.observable(specifiedCmpname),
-              email = ko.observable(specifiedEmail),
 
-              jobTitle = ko.observable(specifiedJTitle).extend({ required: true }),
-              userTimeZone = ko.observable(specifiedTimeZone),
-              gender = ko.observable(specifiedGender),
-              address2 = ko.observable(specifiedAddress2),
+                CompanyId = ko.observable(CompanyId),
+                CompanyName = ko.observable(CompanyName),
+                Tel1 = ko.observable(Tel1),
+                Tel2 = ko.observable(Tel2),
+                Logo = ko.observable(Logo),
+                StripeCustomerId = ko.observable(StripeCustomerId || 'undefined'),
+                SalesEmail = ko.observable(SalesEmail),
+                WebsiteLink = ko.observable(WebsiteLink),
+                VoucherSecretKey = ko.observable(VoucherSecretKey),
+                BillingAddressLine1 = ko.observable(BillingAddressLine1),
+                BillingAddressLine2 = ko.observable(BillingAddressLine2),
+                BillingState = ko.observable(BillingState),
+                BillingCountryId = ko.observable(BillingCountryId),
+                BillingCityId = ko.observable(BillingCityId),
+                BillingZipCode = ko.observable(BillingZipCode),
+                BillingPhone = ko.observable(BillingPhone),
+                BillingEmail = ko.observable(BillingEmail),
+                TwitterHandle = ko.observable(TwitterHandle),
+                FacebookHandle = ko.observable(FacebookHandle),
+                InstagramHandle = ko.observable(InstagramHandle),
+                PinterestHandle = ko.observable(PinterestHandle),
+                Logo = ko.observable(Logo),
+                LogoImageBytes = ko.observable(LogoImageBytes),
 
-              dob = ko.observable(specifiedAge ? moment(specifiedAge).toDate() : undefined).extend({ required: true }),
-              cityId = ko.observable(specifiedCityId),
-              ContactNotes = ko.observable(ContactNotes),
-              countryId = ko.observable(specifiedCountryId),
 
-              industeryId = ko.observable(indsId).extend({ required: true }),
 
-              phone1 = ko.observable(specifiedPhn1).extend({ required: true }),
-              phone2 = ko.observable(specifiedPhn2),
-              state = ko.observable(specifiedState),
-              zipCode = ko.observable(specifiedZip),
-
-              Logo = ko.observable(specifiedImg),
-              LogoImageBytes = ko.observable(LogoImageBytes),
-              advert = ko.observable(advertisingContact),
-              advertEmail = ko.observable(advertisingEmail),
-              advertPhone = ko.observable(advertisingPhone),
-              educationId = ko.observable(spcEduId).extend({ required: true }),
-              CompanyId = ko.observable(CompanyId),
-              stripeId = ko.observable(spcStripe || 'undefined'),
-              payPalId = ko.observable(spcPayPal || 'undefined'),
-              googleValletId = ko.observable(spcGoogle || 'undefined'),
-              RoleId = ko.observable(RoleId),
-              VoucherSecretKey = ko.observable(VoucherSecretKey),
-              Password = ko.observable(Password).extend({ required: { params: true, message: 'This field is required with minimum 6 characters!' }, minLength: 6 }),
-              ConfirmPassword = ko.observable(Password).extend({ compareWith: Password }),
               errors = ko.validation.group({
-                  Password: Password,
-                  ConfirmPassword: ConfirmPassword,
-                  fullName: fullName,
-                  dob: dob,
-                  industeryId: industeryId,
-                  educationId: educationId
+                  CompanyName: CompanyName
               }),
               // Is Valid
               isValid = ko.computed(function () {
                   return errors().length === 0;
               }),
               dirtyFlag = new ko.dirtyFlag({
-                  fullName: fullName,
-                  address1: address1,
-                  companyName: companyName,
-                  email: email,
-                  jobTitle: jobTitle,
-                  userTimeZone: userTimeZone,
-                  gender: gender,
-                  address2: address2,
-                  dob: dob,
-                  cityId: cityId,
-                  ContactNotes: ContactNotes,
-                  countryId: countryId,
-                  industeryId:industeryId,
-                  phone1: phone1,
-                  phone2: phone2,
-                  state: state,
-                  zipCode: zipCode,
+
+                  CompanyName: CompanyName,
+                  Tel1: Tel1,
+                  Tel2: Tel2,
                   Logo: Logo,
-                  advert: advert,
-                  advertEmail: advertEmail,
-                  advertPhone: advertPhone,
-                  educationId: educationId,
-                  RoleId: RoleId,
-                  Password: Password,
-                  ConfirmPassword: ConfirmPassword,
-                  VoucherSecretKey: VoucherSecretKey
+                  StripeCustomerId: StripeCustomerId,
+                  SalesEmail: SalesEmail,
+                  WebsiteLink: WebsiteLink,
+                  VoucherSecretKey: VoucherSecretKey,
+                  BillingAddressLine1: BillingAddressLine1,
+                  BillingAddressLine2: BillingAddressLine2,
+                  BillingState: BillingState,
+                  BillingCountryId: BillingCountryId,
+                  BillingCityId: BillingCityId,
+                  BillingZipCode: BillingZipCode,
+                  BillingPhone: BillingPhone,
+                  BillingEmail: BillingEmail,
+                  TwitterHandle: TwitterHandle,
+                  FacebookHandle: FacebookHandle,
+                  InstagramHandle: InstagramHandle,
+                  PinterestHandle: PinterestHandle,
+                  LogoImageBytes: LogoImageBytes
 
               }),
               // Has Changes
@@ -92,93 +72,49 @@
               // Reset
               reset = function () {
                   dirtyFlag.reset();
-              },
-              // Convert to server data
-              convertToServerData = function () {
-                  debugger;
-                  return {
-                      UserId: id(),
-                      FullName: fullName(),
-                      Address1: address1(),
-                      CompanyName: companyName(),
-                      Email: email(),
-                      JobTitle: jobTitle(),
-                      TimeZone: userTimeZone(),
-                      Gender: gender(),
-                      Address2: address2(),
-                      DOB: dob() ? moment(dob()).format(ist.utcFormat) + 'Z' :  undefined,
-                      CityId: cityId(),
-                      ContactNotes: ContactNotes(),
-                      CountryId: countryId(),
-                      IndustryId: industeryId(),
-                      Phone1: phone1(),
-                      Phone2: phone2(),
-                      State: state(),
-                      ZipCode: zipCode(),
-                      ProfileImage: Logo(),
-                      AdvertContact: advert(),
-                      AdvertContactEmail: advertEmail(),
-                      AdvertContactPhone: advertPhone(),
-                      EducationId: educationId(),
-                      PayPal: payPalId(),
-                      LogoImageBytesString: LogoImageBytes(),
-                      CompanyId: CompanyId,
-                      RoleId: RoleId(),
-                      Password: Password(),
-                      VoucherSecretKey: VoucherSecretKey()
-                  };
               };
-          return {
-              id:id,
-              fullName: fullName,
-              address1: address1,
-              companyName: companyName,
-              email: email,
-              jobTitle: jobTitle,
-              userTimeZone: userTimeZone,
-              gender: gender,
-              address2: address2,
-              dob: dob,
-              cityId: cityId,
-              ContactNotes: ContactNotes,
-              countryId: countryId,
-              industeryId: industeryId,
-              phone1:phone1,
-              phone2: phone2,
-              state: state,
-              zipCode: zipCode,
-              Logo: Logo,
 
-              advert: advert,
-              advertEmail: advertEmail,
-              advertPhone: advertPhone,
-              educationId:educationId,
-            
-              stripeId :stripeId,
-              payPalId :payPalId,
-              googleValletId: googleValletId,
-              RoleId: RoleId,
-              Password: Password,
-              ConfirmPassword: ConfirmPassword,
+          return {
+              CompanyId:CompanyId,
+              CompanyName: CompanyName,
+              Tel1: Tel1,
+              Tel2: Tel2,
+              Logo: Logo,
+              StripeCustomerId: StripeCustomerId,
+              SalesEmail: SalesEmail,
+              WebsiteLink: WebsiteLink,
+              VoucherSecretKey: VoucherSecretKey,
+              BillingAddressLine1: BillingAddressLine1,
+              BillingAddressLine2: BillingAddressLine2,
+              BillingState: BillingState,
+              BillingCountryId: BillingCountryId,
+              BillingCityId: BillingCityId,
+              BillingZipCode: BillingZipCode,
+              BillingPhone: BillingPhone,
+              BillingEmail: BillingEmail,
+              TwitterHandle: TwitterHandle,
+              FacebookHandle: FacebookHandle,
+              InstagramHandle: InstagramHandle,
+              PinterestHandle: PinterestHandle,
+              LogoImageBytes: LogoImageBytes,
+
+
               hasChanges: hasChanges,
               convertToServerData:convertToServerData,
               reset: reset,
               isValid: isValid,
-              errors: errors,
-              LogoImageBytes: LogoImageBytes,
-              VoucherSecretKey: VoucherSecretKey
+              errors: errors
+            
           };
       };
 
     ////=================================== User
     //Server to Client mapper For User
-    var UserServertoClientMapper = function (itemFromServer) {
-        return new User(itemFromServer.UserId,itemFromServer.FullName,itemFromServer.Address1,itemFromServer.CompanyName,
-            itemFromServer.Email,itemFromServer.JobTitle,itemFromServer.UserTimeZone,itemFromServer.Gender,
-            itemFromServer.Address2, itemFromServer.DOB, itemFromServer.CityId, itemFromServer.ContactNotes, itemFromServer.CountryId,
-            itemFromServer.IndustryId,itemFromServer.Phone1,itemFromServer.Phone2,itemFromServer.State,itemFromServer.ZipCode,
-            itemFromServer.Logo ,itemFromServer.AdvertContact,itemFromServer.AdvertContactEmail,itemFromServer.AdvertContactPhone,
-            itemFromServer.EducationId, itemFromServer.StripeId, itemFromServer.PayPal, itemFromServer.GoogleVallet, null, itemFromServer.CompanyId, itemFromServer.RoleId, itemFromServer.Password, itemFromServer.VoucherSecretKey);
+    var UserServertoClientMapper = function (objSrv) {
+        return new User(objSrv.CompanyId, objSrv.CompanyName, objSrv.Tel1, objSrv.Tel2, objSrv.Logo,
+          objSrv.StripeCustomerId, objSrv.SalesEmail, objSrv.WebsiteLink, objSrv.VoucherSecretKey, objSrv.BillingAddressLine1, objSrv.BillingAddressLine2,
+          objSrv.BillingState, objSrv.BillingCountryId, objSrv.BillingCityId, objSrv.BillingZipCode, objSrv.BillingPhone, objSrv.BillingEmail, objSrv.TwitterHandle, objSrv.FacebookHandle,
+          objSrv.InstagramHandle, objSrv.PinterestHandle, objSrv.Logo, objSrv.LogoImageBytes);
      
     };
     
