@@ -5,7 +5,7 @@
           specifiedJTitle, specifiedTimeZone, specifiedGender, specifiedAddress2, specifiedAge, specifiedCityId,
           ContactNotes, specifiedCountryId, indsId, specifiedPhn1, specifiedPhn2, specifiedState, specifiedZip, specifiedImg,
           advertisingContact, advertisingEmail, advertisingPhone, spcEduId, spcStripe, spcPayPal, spcGoogle
-          , ProfileImageBytes, CompanyId, RoleId, Password, VoucherSecretKey) {
+          , LogoImageBytes, CompanyId, RoleId, Password, VoucherSecretKey) {
           var
               id = ko.observable(specifiedId),
               fullName = ko.observable(specifiedFullName).extend({ required: true }),
@@ -30,8 +30,8 @@
               state = ko.observable(specifiedState),
               zipCode = ko.observable(specifiedZip),
 
-              imageUrl = ko.observable(specifiedImg),
-              ProfileImageBytes = ko.observable(ProfileImageBytes),
+              Logo = ko.observable(specifiedImg),
+              LogoImageBytes = ko.observable(LogoImageBytes),
               advert = ko.observable(advertisingContact),
               advertEmail = ko.observable(advertisingEmail),
               advertPhone = ko.observable(advertisingPhone),
@@ -74,7 +74,7 @@
                   phone2: phone2,
                   state: state,
                   zipCode: zipCode,
-                  imageUrl: imageUrl,
+                  Logo: Logo,
                   advert: advert,
                   advertEmail: advertEmail,
                   advertPhone: advertPhone,
@@ -115,13 +115,13 @@
                       Phone2: phone2(),
                       State: state(),
                       ZipCode: zipCode(),
-                      ProfileImage: imageUrl(),
+                      ProfileImage: Logo(),
                       AdvertContact: advert(),
                       AdvertContactEmail: advertEmail(),
                       AdvertContactPhone: advertPhone(),
                       EducationId: educationId(),
                       PayPal: payPalId(),
-                      ProfileImageBytesString: ProfileImageBytes(),
+                      LogoImageBytesString: LogoImageBytes(),
                       CompanyId: CompanyId,
                       RoleId: RoleId(),
                       Password: Password(),
@@ -147,7 +147,7 @@
               phone2: phone2,
               state: state,
               zipCode: zipCode,
-              imageUrl: imageUrl,
+              Logo: Logo,
 
               advert: advert,
               advertEmail: advertEmail,
@@ -165,7 +165,7 @@
               reset: reset,
               isValid: isValid,
               errors: errors,
-              ProfileImageBytes: ProfileImageBytes,
+              LogoImageBytes: LogoImageBytes,
               VoucherSecretKey: VoucherSecretKey
           };
       };
@@ -177,7 +177,7 @@
             itemFromServer.Email,itemFromServer.JobTitle,itemFromServer.UserTimeZone,itemFromServer.Gender,
             itemFromServer.Address2, itemFromServer.DOB, itemFromServer.CityId, itemFromServer.ContactNotes, itemFromServer.CountryId,
             itemFromServer.IndustryId,itemFromServer.Phone1,itemFromServer.Phone2,itemFromServer.State,itemFromServer.ZipCode,
-            itemFromServer.ImageUrl ,itemFromServer.AdvertContact,itemFromServer.AdvertContactEmail,itemFromServer.AdvertContactPhone,
+            itemFromServer.Logo ,itemFromServer.AdvertContact,itemFromServer.AdvertContactEmail,itemFromServer.AdvertContactPhone,
             itemFromServer.EducationId, itemFromServer.StripeId, itemFromServer.PayPal, itemFromServer.GoogleVallet, null, itemFromServer.CompanyId, itemFromServer.RoleId, itemFromServer.Password, itemFromServer.VoucherSecretKey);
      
     };

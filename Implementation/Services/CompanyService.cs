@@ -48,6 +48,12 @@ namespace SMD.Implementation.Services
         {
             return companyRepository.Find(CompanyId);
         }
+
+
+        public Company GetCurrentCompany()
+        {
+            return companyRepository.Find(companyRepository.CompanyId);
+        }
         #endregion
     }
 }
