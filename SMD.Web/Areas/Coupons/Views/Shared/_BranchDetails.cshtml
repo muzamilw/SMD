@@ -1,5 +1,5 @@
 ﻿<div class="modal fade my-modal" id="branchCategoryDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog" style="width:900px; ">
+    <div class="modal-dialog" style="width:1000px; ">
         <div class="modal-content">
             <div>
                 <button type="button" class="close" data-bind="click:$root.hideBranchCategoryDialog" aria-hidden="true">&times;</button>
@@ -48,93 +48,99 @@
 
                 </div>
 
-                <div class="col-lg-8 form-horizontal" data-bind="with: $root.selectedBranch" >
+                <div class="col-lg-5 form-horizontal" data-bind="with: $root.selectedBranch" >
                     <div class=" form-group">
                         <label for="branchTitle" class="labelFontBranch">Branch Address Details</label>
                 </div>
                     <div class="form-group ">
-                        <div class="col-lg-3 text-right">
+                        <div class="col-lg-4 text-right">
                             <label for="branchTitle" class="col-form-label labelColour ">Branch Title</label>
                         </div>
-                        <div class="col-lg-5">
+                        <div class="col-lg-8">
                             <input class="form-control" data-bind="value:branchTitle" type="text" id="branchTitle">
                         </div>
                     </div>
                     <div class="form-group ">
-                        <div class="col-lg-3 text-right">
+                        <div class="col-lg-4 text-right">
                             <label for="branaddress1" class="col-form-label labelColour">Address Line 1</label>
                         </div>
-                        <div class="col-lg-5">
+                        <div class="col-lg-8">
                             <input class="form-control" data-bind="value:branchAddressline1" type="text" id="branaddress1">
                         </div>
                     </div>
                     <div class="form-group ">
-                        <div class="col-lg-3 text-right">
+                        <div class="col-lg-4 text-right">
                             <label for="branaddress2" class="col-form-label">Address Line 2</label>
                         </div>
-                        <div class="col-lg-5">
+                        <div class="col-lg-8">
                             <input class="form-control" data-bind="value:branchAddressline2" type="text" id="branaddress2">
                         </div>
                     </div>
                     <div class="form-group ">
-                        <div class="col-lg-3 text-right">
+                        <div class="col-lg-4 text-right">
                             <label for="city" class="col-form-label labelColour">City</label>
                         </div>
-                        <div class="col-lg-5">
+                        <div class="col-lg-8">
                             <input class="form-control" data-bind="value:branchCity" type="text" id="city">
                         </div>
                     </div>
                     <div class="form-group ">
-                        <div class="col-lg-3 text-right">
+                        <div class="col-lg-4 text-right">
                             <label for="state" class="col-form-label labelColour">State</label>
                         </div>
-                        <div class="col-lg-5">
+                        <div class="col-lg-8">
                             <input class="form-control" data-bind="value:branchState" type="text" id="state">
                         </div>
                     </div>
                     <div class="form-group ">
-                        <div class="col-lg-3 text-right">
+                        <div class="col-lg-4 text-right">
                             <label for="zipCode" class="col-form-label labelColour">Zip/Post Code</label>
                         </div>
-                        <div class="col-lg-5">
+                        <div class="col-lg-8">
                             <input class="form-control" data-bind="value:branchZipCode" type="text" id="zipCode">
                         </div>
                     </div>
                     <div class="form-group ">
-                        <div class="col-lg-3 text-right">
+                        <div class="col-lg-4 text-right">
                             <label for="phnNo" class="col-form-label labelColour">Branch Sales Tel #</label>
                         </div>
-                        <div class="col-lg-5">
+                        <div class="col-lg-8">
                             <input class="form-control" data-bind="value:branchPhone" type="text" id="phnNo">
                         </div>
                     </div>
                     <div class="form-group ">
-                        <div class="col-lg-3 text-right">
+                        <div class="col-lg-4 text-right">
                             <label for="geoX" class="col-form-label labelColour">GEO X</label>
                         </div>
-                        <div class="col-lg-5">
+                        <div class="col-lg-8">
                             <input class="form-control" data-bind="value:branchLocationLat" type="text" style="width:70%" id="geoX">
                         </div>
                     </div>
                     <div class="form-group ">
-                        <div class="col-lg-3 text-right">
+                        <div class="col-lg-4 text-right">
                             <label for="geoy" class="col-form-label labelColour">GEO Y</label>
                         </div>
-                        <div class="col-lg-5">
+                        <div class="col-lg-8">
                             <input class="form-control" data-bind="value:branchLocationLon" type="text" style="width:70%" id="geoy">
                         </div>
                     </div>
                     <div class="form-group ">
-                        <div class="col-lg-3 text-right">
+                        <div class="col-lg-4 text-right">
                             <label for="pCategory" class="col-form-label labelColour">Select parent Category</label>
                         </div>
-                        <div class="col-lg-5">
+                        <div class="col-lg-8">
                             <select class="form-control" data-bind="options:$root.branchDdlist, optionsText: 'name', optionsValue:'categoryId',optionsCaption: 'Choose...', value:branchCategoryId" id="pCategory" style="width:70%"></select>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-1">
-
+                <div class="col-lg-3 pull-left">
+                    <a href="#" class="table-link danger" data-bind="click: $root.CodeAddressonMap" style="margin-top:50px">
+                        <span class="fa-stack">
+                            <i class="fa fa-square fa-stack-2x"></i>
+                            <i class="fa fa-location-arrow fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                    <div style="width:95%;height:239px; border:2px solid" id="map-canvas"></div>
 
                 </div>
 
@@ -199,6 +205,9 @@
             </div>
         </div>
     </li>
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAshmxzIMvxrBiDUnyifinFi-A5rhx-djg" type="text/javascript"></script>
+<script>
 </script>
 
 
