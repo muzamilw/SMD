@@ -19,6 +19,10 @@ define("common/userProfile.view",
                  
                     $("#userProfileDialog").modal("show");
                 },
+                CloseUserProfileDialog = function () {
+
+                    $("#userProfileDialog").modal("hide");
+                },
                  // Show Contact Company the dialog
                 showChangePassword = function () {
                     $("#ChangePassword").modal("show");
@@ -42,7 +46,8 @@ define("common/userProfile.view",
                 bindingRoot: bindingRoot,
                 bindingPartial: bindingPartial,
                 viewModel: viewModel,
-                showUserProfileDialog:showUserProfileDialog,
+                showUserProfileDialog: showUserProfileDialog,
+                CloseUserProfileDialog : CloseUserProfileDialog,
                 showChangePassword: showChangePassword,
                 hideChangePassword: hideChangePassword,
                
@@ -55,9 +60,8 @@ define("common/userProfile.view",
         if (ist.userProfile.view.bindingRoot) {
             userViewModel.initialize(ist.userProfile.view);
         }
-        //if (ist.userProfile.view.bindingRootUser) {
-        //    userViewModel.initialize(ist.userProfile.view);
-        //}
+
+       
         return ist.userProfile.view;
     });
 

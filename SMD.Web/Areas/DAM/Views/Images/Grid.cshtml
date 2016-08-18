@@ -1,0 +1,68 @@
+﻿@{
+    ViewBag.Title = "Manage Images";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+@model SMD.MIS.Areas.DAM.Models.ImagesModel
+<div class="row" id="DamGridBinding">
+    <div class="col-lg-12">
+        <div class="row">
+            <div class="col-lg-12" style="padding-left:0px;padding-right:0px;">
+                <div class="filter-body" id="filter">
+
+                    <div class="row">
+                        <div class="col-sm-12" style="float: left; margin-bottom:20px;">
+                            <br />
+                            <span style="font-size: 24px;" class="Theme_standard_clr">Your Image Library</span><br />
+                            <span class="red bold rightAlign" style=" margin-right: 14px;"> Watch Video <img src="/Images/youtube_play.JPG" height="25px" /> </span> <span style="font-size: 14px;margin-right:8px;" class="Theme_subheading-Clr">DAM description</span>&nbsp; &nbsp; &nbsp;<br />
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="filter-block">
+                            <div class="form-group">
+                                <div class="col-xs-3">
+                                    <select class="form-control" id="CategoryType">
+                                        <option value="1">Logo</option>
+                                        <option value="2">Banner Image</option>
+                                        <option value="3">Buy It Image</option>
+                                        <option value="4">Survey</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-xs-6">
+                                    <button class="btn  btn-info SurvyButtons" id="changeCategory" style="width: 121px;">Load Category</button>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="clearfix">
+
+                        </div>
+                    </div>
+                    <div class="row">
+                       <iframe src="~/DamImages?mode=1" id="iframeContent" style="width:100%;height:400px;border:none;"></iframe>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+@section Scripts{
+    <script type="text/javascript">
+        $("#btnDAM").css("background-color", "#93bf47");
+        
+        $("#changeCategory").click(function () {
+            alert();
+            $("#iframeContent").attr("src", "/DamImages?mode=" + $("#CategoryType").val());
+        })
+    </script>
+
+
+}

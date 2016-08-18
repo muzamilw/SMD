@@ -11,7 +11,7 @@ namespace SMD.Interfaces.Repository
         /// <summary>
         /// Get List of Coutries 
         /// </summary>
-       
+        List<DamImage> getAllImages(int mode);
      
     }
 }

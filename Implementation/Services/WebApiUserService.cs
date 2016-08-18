@@ -1107,7 +1107,7 @@ namespace SMD.Implementation.Services
         public User GetLoggedInUser(string userid)
         {
             User user = null;
-            if(userid != "0")
+            if (!string.IsNullOrEmpty(userid) && userid != "0")
             {
                 user = UserManager.FindById(userid);
             }
@@ -1239,6 +1239,7 @@ namespace SMD.Implementation.Services
                         Message = LanguageResources.WebApiUserService_LoginInfoNotFound
                     };
                 }
+
                 if (user.Company != null)
                 {
                     // update user name  and cuntry name for api 
@@ -1250,9 +1251,11 @@ namespace SMD.Implementation.Services
                 else
                 {
                     user.AuthenticationToken = Guid.NewGuid().ToString();
-                    companyRepository.createCompany(user.Id, request.Email, request.FullName, user.AuthenticationToken);
+                    var CompanyId = companyRepository.createCompany(user.Id, request.Email, request.FullName, user.AuthenticationToken);
+                    accountService.AddAccountsForNewUser(CompanyId);
                     
                 }
+
                 UserLogin userLoginInfo = user.UserLogins.FirstOrDefault(
                     u => u.LoginProvider == request.LoginProvider);
 

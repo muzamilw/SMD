@@ -50,6 +50,7 @@ namespace SMD.Implementation
             unityContainer.RegisterType<IPhraseService, PhraseService>();
             unityContainer.RegisterType<IBrachCategoryService, BrachCategoryService>();
             unityContainer.RegisterType<ICompanyBranchService, CompanyBranchService>();
+            unityContainer.RegisterType<IDamImageService, DamImageService>();
         }
     }
 }

@@ -21,6 +21,7 @@
 /// <reference path="jquery-ui-timepicker-addon.js" />
 /// <reference path="jquery.blockui.js" />
 /// <reference path="jquery.form.js" />
+/// <reference path="jquery.imgareaselect.js" />
 /// <reference path="jquery.sortable.js" />
 /// <reference path="jquery.tokenize.js" />
 /// <reference path="jquery.unobtrusive-ajax.js" />
@@ -177,6 +178,10 @@
 /// <reference path="../areas/common/scripts/stripechargecustomer.dataservice.js" />
 /// <reference path="../areas/common/scripts/stripechargecustomer.view.js" />
 /// <reference path="../areas/common/scripts/stripechargecustomer.viewmodel.js" />
+/// <reference path="../areas/common/scripts/userprofile.dataservice.js" />
+/// <reference path="../areas/common/scripts/userprofile.model.js" />
+/// <reference path="../areas/common/scripts/userprofile.view.js" />
+/// <reference path="../areas/common/scripts/userprofile.viewmodel.js" />
 /// <reference path="../areas/coupons/scripts/__layout.view .js" />
 /// <reference path="../areas/coupons/scripts/__layout.viewmodel .js" />
 /// <reference path="../areas/coupons/scripts/coupons.dataservice.js" />
@@ -187,6 +192,10 @@
 /// <reference path="../areas/coupons/scripts/layout.model.js" />
 /// <reference path="../areas/coupons/scripts/layout.view.js" />
 /// <reference path="../areas/coupons/scripts/layout.viewmodel.js" />
+/// <reference path="../areas/dam/scripts/damgrid.dataservice.js" />
+/// <reference path="../areas/dam/scripts/damgrid.model.js" />
+/// <reference path="../areas/dam/scripts/damgrid.view.js" />
+/// <reference path="../areas/dam/scripts/damgrid.viewmodel.js" />
 /// <reference path="../areas/profilequestion/scripts/paypalexample.view.js" />
 /// <reference path="../areas/profilequestion/scripts/paypalexample.viewmodel.js" />
 /// <reference path="../areas/profilequestion/scripts/pquestion.dataservice.js" />
@@ -832,10 +841,10 @@
 /// <reference path="plugins/forms/tiny_mce/themes/advanced/langs/en.js" />
 /// <reference path="plugins/forms/tiny_mce/themes/advanced/langs/en_dlg.js" />
 /// <reference path="plugins/forms/tiny_mce/themes/simple/langs/en.js" />
-/// <reference path="../areas/common/scripts/userprofile.view.js" />
-/// <reference path="../areas/common/scripts/userprofile.model.js" />
-/// <reference path="../areas/common/scripts/userprofile.dataservice.js" />
-/// <reference path="../areas/common/scripts/userprofile.viewmodel.js" />
+/// <reference path="../areas/common/scripts/companyprofile.viewmodel.js" />
+/// <reference path="../areas/common/scripts/companyprofile.view.js" />
+/// <reference path="../areas/common/scripts/companyprofile.model.js" />
+/// <reference path="../areas/common/scripts/companyprofile.dataservice.js" />
 <<<<<<< HEAD
 =======
 /// <reference path="plugins/forms/timeentry/langs/jquery.timeentry-ca.js" />

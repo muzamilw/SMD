@@ -128,6 +128,7 @@
     <Compile Include="Services\ICompanyService.cs" />
     <Compile Include="Services\ICouponCategoryService.cs" />
     <Compile Include="Services\ICouponService.cs" />
+    <Compile Include="Services\IDamImageService.cs" />
     <Compile Include="Services\IEducationService.cs" />
     <Compile Include="Services\IEmailManagerService.cs" />
     <Compile Include="Services\IIndustryService.cs" />
