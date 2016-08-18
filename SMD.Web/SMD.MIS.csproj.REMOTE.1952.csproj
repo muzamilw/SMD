@@ -1652,13 +1652,15 @@
     <Content Include="Areas\DAM\Views\Shared\_DAMGrid.cshtml" />
     <Content Include="Areas\DAM\Views\Images\Index.cshtml" />
     <Content Include="Areas\DAM\Views\Images\Grid.cshtml" />
+    <None Include="config\Web.connectionstrings - Copy.configx" />
+    <None Include="config\Web.connectionstrings.config" />
+    <None Include="config\Web.connectionstrings.default.config" />
     <Content Include="Content\less\MainSite.css.map">
       <DependentUpon>MainSite.css</DependentUpon>
     </Content>
     <Content Include="Content\less\Campaign.css.map">
       <DependentUpon>Campaign.css</DependentUpon>
     </Content>
-    <None Include="config\Web.connectionstrings.config" />
     <None Include="Properties\PublishProfiles\mz profile.pubxml" />
     <None Include="Properties\PublishProfiles\SMD MIS Saqib.pubxml" />
     <None Include="Properties\PublishProfiles\SMD.pubxml" />

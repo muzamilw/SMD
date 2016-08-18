@@ -3,29 +3,29 @@
     var // ReSharper disable InconsistentNaming
       User = function (specifiedId, specifiedFullName, specifiedAddress1, specifiedCmpname, specifiedEmail,
           specifiedJTitle, specifiedTimeZone, specifiedGender, specifiedAddress2, specifiedAge, specifiedCityId,
-          specifiedContNotes, specifiedCountryId,indsId, specifiedPhn1, specifiedPhn2, specifiedState, specifiedZip, specifiedImg,
+          ContactNotes, specifiedCountryId, indsId, specifiedPhn1, specifiedPhn2, specifiedState, specifiedZip, specifiedImg,
           advertisingContact, advertisingEmail, advertisingPhone, spcEduId, spcStripe, spcPayPal, spcGoogle
           , ProfileImageBytes, CompanyId, RoleId, Password, VoucherSecretKey) {
           var
               id = ko.observable(specifiedId),
-              fullName = ko.observable(specifiedFullName),
+              fullName = ko.observable(specifiedFullName).extend({ required: true }),
               address1 = ko.observable(specifiedAddress1),
               companyName = ko.observable(specifiedCmpname),
               email = ko.observable(specifiedEmail),
 
-              jobTitle = ko.observable(specifiedJTitle),
+              jobTitle = ko.observable(specifiedJTitle).extend({ required: true }),
               userTimeZone = ko.observable(specifiedTimeZone),
               gender = ko.observable(specifiedGender),
               address2 = ko.observable(specifiedAddress2),
 
-              dob = ko.observable(specifiedAge ? moment(specifiedAge).toDate() : undefined),
+              dob = ko.observable(specifiedAge ? moment(specifiedAge).toDate() : undefined).extend({ required: true }),
               cityId = ko.observable(specifiedCityId),
-              contactNotes = ko.observable(specifiedContNotes),
+              ContactNotes = ko.observable(ContactNotes),
               countryId = ko.observable(specifiedCountryId),
 
-              industeryId = ko.observable(indsId),
+              industeryId = ko.observable(indsId).extend({ required: true }),
 
-              phone1 = ko.observable(specifiedPhn1),
+              phone1 = ko.observable(specifiedPhn1).extend({ required: true }),
               phone2 = ko.observable(specifiedPhn2),
               state = ko.observable(specifiedState),
               zipCode = ko.observable(specifiedZip),
@@ -35,7 +35,7 @@
               advert = ko.observable(advertisingContact),
               advertEmail = ko.observable(advertisingEmail),
               advertPhone = ko.observable(advertisingPhone),
-              educationId = ko.observable(spcEduId),
+              educationId = ko.observable(spcEduId).extend({ required: true }),
               CompanyId = ko.observable(CompanyId),
               stripeId = ko.observable(spcStripe || 'undefined'),
               payPalId = ko.observable(spcPayPal || 'undefined'),
@@ -46,7 +46,11 @@
               ConfirmPassword = ko.observable(Password).extend({ compareWith: Password }),
               errors = ko.validation.group({
                   Password: Password,
-                  ConfirmPassword: ConfirmPassword
+                  ConfirmPassword: ConfirmPassword,
+                  fullName: fullName,
+                  dob: dob,
+                  industeryId: industeryId,
+                  educationId: educationId
               }),
               // Is Valid
               isValid = ko.computed(function () {
@@ -63,7 +67,7 @@
                   address2: address2,
                   dob: dob,
                   cityId: cityId,
-                  contactNotes: contactNotes,
+                  ContactNotes: ContactNotes,
                   countryId: countryId,
                   industeryId:industeryId,
                   phone1: phone1,
@@ -104,7 +108,7 @@
                       Address2: address2(),
                       DOB: dob() ? moment(dob()).format(ist.utcFormat) + 'Z' :  undefined,
                       CityId: cityId(),
-                      ContactNotes: contactNotes(),
+                      ContactNotes: ContactNotes(),
                       CountryId: countryId(),
                       IndustryId: industeryId(),
                       Phone1: phone1(),
@@ -136,7 +140,7 @@
               address2: address2,
               dob: dob,
               cityId: cityId,
-              contactNotes: contactNotes,
+              ContactNotes: ContactNotes,
               countryId: countryId,
               industeryId: industeryId,
               phone1:phone1,

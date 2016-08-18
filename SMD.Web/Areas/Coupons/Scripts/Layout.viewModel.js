@@ -90,7 +90,7 @@
                                                           _.each(selectedCategory().brachFeilds(), function (item) {
                                                               if (item.branchId() == selectedBranch().branchId()) {
                                                                   item.branchTitle(selectedBranch().branchTitle());
-                                                                  selectedBranch(null);
+                                                                //  selectedBranch(null);
                                                                   toastr.success("Successfully updated.");
                                                                   selectedCategory().isExpanded(false);
                                                                   isSaveChangesEnable(false);
@@ -98,6 +98,7 @@
 
                                                               }
                                                           })
+                                                          selectedBranch(null);
 
                                                       }
 
@@ -265,14 +266,14 @@
                 },
                 hideBranchCategoryDialog = function () {
 
-                    if (selectedBranch() == undefined) {
+                    if (selectedBranch() == undefined || selectedBranch() == null) {
                         view.hideBranchCategoryDialog();
                         selectedBranch(null);
                         isSaveChangesEnable(false);
                         isdeleteEnable(false);
                     }
 
-                    if (selectedBranch().hasChanges()) {
+                   else if(selectedBranch() != null && selectedBranch() != undefined && selectedBranch().hasChanges()) {
                         confirmation.messageText("Do you want to save changes?");
                         confirmation.show();
 

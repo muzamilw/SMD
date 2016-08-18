@@ -52,9 +52,58 @@ define("common/userProfile.viewModel",
 
                      showUserProfileDialog = function () {
                          view.showUserProfileDialog();
+                         getUserProfile();
+                     },
+                     //closing
+                     onCloseUserProfileDialog = function () {
+                       
+                         if (selectedUser().hasChanges()) {    //&& (campaignModel().Status() == null || campaignModel().Status() == 1)
+                             confirmation.messageText("Do you want to save changes?");
+                             confirmation.afterProceed(function () {
+
+                                 var data = selectedUser().convertToServerData();
+                                 dataservice.saveUserProfile(
+                                     data, {
+                                         success: function () {
+                                             toastr.success("Profile updated!");
+                                         },
+                                         error: function () {
+                                             toastr.error("Failed to update profile!");
+                                         }
+                                     });
+                             });
+                             confirmation.afterCancel(function () {
+                                 view.CloseUserProfileDialog();
+                             });
+                             confirmation.show();
+                         }
+                         else {
+
+                             view.CloseUserProfileDialog();
+                         }
+                        
                      },
 
-                         SelectedMangeUser = ko.observable(),
+                    //Update Profile
+                     //Get Base Data for Questions
+                    updateProfile = function () {
+
+                        var data = selectedUser().convertToServerData();
+                        dataservice.saveUserProfile(
+                            data, {
+                                success: function () {
+                                    selectedUser().reset();
+                                    toastr.success("Profile updated!");
+                                    view.CloseUserProfileDialog();
+                                },
+                                error: function () {
+                                    toastr.error("Failed to update profile!");
+                                }
+                            });
+
+                    },
+
+                    
                     // Get User Profile For Editing 
                    getUserProfile = function () {
                         dataservice.getUserProfile(null,
@@ -63,11 +112,11 @@ define("common/userProfile.viewModel",
                                     console.log(userProfile);
                                     selectedUser(model.UserServertoClientMapper(userProfile));
                                     // Load Cities by Country
-                                    updateCities(userProfile.CityId);
-                                    selectedUser().countryId.subscribe(function() {
-                                        updateCities();
+                                    //updateCities(userProfile.CityId);
+                                    //selectedUser().countryId.subscribe(function() {
+                                    //    updateCities();
                                        
-                                    });
+                                    //});
                                     selectedUser().reset();
                                 },
                                 error: function () {
@@ -122,31 +171,7 @@ define("common/userProfile.viewModel",
                    },
 
 
-                    // Get User Profile For Editing 
-                   getUserProfileById = function () {
-                       
-                       dataservice.getUserProfileById({
-                           UserId: selectedUserId()
-                       },{
-                               success: function (userProfile) {
-                                   console.log(userProfile);
-                                   selectedUser(model.UserServertoClientMapper(userProfile));
-
-                                   selectedUser().Password(undefined);
-                                   selectedUser().ConfirmPassword(undefined);
-                                   // Load Cities by Country
-                                   updateCities(userProfile.CityId);
-                                   selectedUser().countryId.subscribe(function () {
-                                       updateCities();
-
-                                   });
-                                   selectedUser().reset();
-                               },
-                               error: function () {
-                                   toastr.error("Failed to load User's Profile!");
-                               }
-                           });
-                   },
+                  
 
                   
                     //Get Base Data for Questions
@@ -180,18 +205,6 @@ define("common/userProfile.viewModel",
                                     roles.valueHasMutated();
                                 }
 
-                                // Get Profile When Base data is loaded 
-                                //if (isUserEdit() == true)
-                                //{
-                                //    getUserProfileById();
-                                //}
-                                //else
-                                //{
-                                //    selectedUserId(0);
-                                //    getUserProfileById();
-                                //}
-                               
-                                //selectedUser().cityId(cityId);
                             },
                             error: function () {
                                 toastr.error("Failed to load base data!");
@@ -207,26 +220,7 @@ define("common/userProfile.viewModel",
                       }),
 
 
-                     
-                    //Update Profile
-                     //Get Base Data for Questions
-                    updateProfile = function () {
-                      
-                        var data = selectedUser().convertToServerData();
-                        dataservice.saveUserProfile(
-                            data, {
-
-   
-                                success: function () {
-                                  
-                                        toastr.success("Profile updated!");
-          
-                            },
-                            error: function () {
-                                toastr.error("Failed to update profile!");
-                            }
-                        });
-                    },
+                 
 
                 
 
@@ -244,39 +238,16 @@ define("common/userProfile.viewModel",
                     initialize = function (specifiedView) {
                         view = specifiedView;
                         ko.applyBindings(view.viewModel, view.bindingRoot);
-
+                        ko.applyBindings(view.viewModel, view.bindingPartial);
                        
                         getBasedata();
                         isUserEdit(true);
 
-                        //var user = getParameter(window.location.href, "user");
-                        //if (user != 1) {
-                           
-                        //    isUserEdit(true);
-                        //    selectedUserId(user);
-                        //    getBasedata();
-                        //}
-                        //else
-                        //{
-                        //    //if (view.bindingRootUser == undefined) {
-                        //    //    // Base data call
-                        //    //    getBasedata();
-                        //    //}
-
-
-                        //    if (view.bindingRoot != undefined) {
-                        //        getBasedata();
-                        //        getManagedUsers();
-                        //    }
-                        //}
-
-
-                      
 
                     };
                 return {
                     initialize: initialize,
-                    getInvoices: getUserProfile,
+                    getUserProfile: getUserProfile,
                     selectedUser: selectedUser,
                     countries: countries,
                     cities: cities,
@@ -300,8 +271,9 @@ define("common/userProfile.viewModel",
                     ConfirmPassword: ConfirmPassword,
                     ChangePasswordOk: ChangePasswordOk,
                   
-                    SelectedMangeUser: SelectedMangeUser,
-                    showUserProfileDialog: showUserProfileDialog
+                    
+                    showUserProfileDialog: showUserProfileDialog,
+                    onCloseUserProfileDialog: onCloseUserProfileDialog
                 };
             })()
         };
