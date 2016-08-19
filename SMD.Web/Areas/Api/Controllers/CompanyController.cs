@@ -88,14 +88,16 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// Update User Profile
         /// </summary>
         [ApiExceptionCustom]
-        public async Task<BaseApiResponse> Post(UpdateUserProfileRequest request)
+        public async Task<BaseApiResponse> Post(CompanyApiModel request)
         {
             if (request == null || !ModelState.IsValid)
             {
                 throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
             }
 
-            return await webApiUserService.UpdateProfile(request); 
+            //return await webApiUserService.UpdateProfile(request); 
+
+            return new BaseApiResponse();
         }
 
         #endregion

@@ -6,34 +6,20 @@ namespace SMD.MIS.Areas.Api.Models
     /// CompanyApiModel  
     /// </summary>
     public class CompanyApiModel
-    {
-
+    { 
 
         public int CompanyId { get; set; }
         public string CompanyName { get; set; }
-        public string ReplyEmail { get; set; }
         public string Tel1 { get; set; }
         public string Tel2 { get; set; }
-        public string AddressLine1 { get; set; }
-        public string AddressLine2 { get; set; }
-        public string State { get; set; }
-        public Nullable<int> CountryId { get; set; }
-        public Nullable<int> CityId { get; set; }
-        public string ZipCode { get; set; }
-        public string TimeZone { get; set; }
+       
         public string Logo { get; set; }
         public string StripeCustomerId { get; set; }
-        public string ChargeBeesubscriptionID { get; set; }
-        public Nullable<bool> RegisteredViaReferral { get; set; }
-        public int? ReferringCompanyID { get; set; }
-        public string PaypalCustomerId { get; set; }
-        public string GoogleWalletCustomerId { get; set; }
-        public Nullable<int> PreferredPayoutAccount { get; set; }
+       
         public string SalesEmail { get; set; }
-        public string ReferralCode { get; set; }
-        public Nullable<bool> AfilliatianStatus { get; set; }
+      
         public string WebsiteLink { get; set; }
-        public int? CompanyType { get; set; }
+     
         public string VoucherSecretKey { get; set; }
 
         public string BillingAddressLine1 { get; set; }
@@ -49,10 +35,41 @@ namespace SMD.MIS.Areas.Api.Models
         public string InstagramHandle { get; set; }
         public string PinterestHandle { get; set; }
 
-        
-        /// <summary>
-        /// Image Url
-        /// </summary>
+        public byte[] LogoImageBytes
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(Logo))
+                {
+                    return null;
+                }
+
+                int firtsAppearingCommaIndex = Logo.IndexOf(',');
+
+                if (firtsAppearingCommaIndex < 0)
+                {
+                    return null;
+                }
+
+                if (Logo.Length < firtsAppearingCommaIndex + 1)
+                {
+                    return null;
+                }
+
+                string sourceSubString = Logo.Substring(firtsAppearingCommaIndex + 1);
+
+                try
+                {
+                    return Convert.FromBase64String(sourceSubString.Trim('\0'));
+                }
+                catch (FormatException)
+                {
+                    return null;
+                }
+            }
+
+        }
+
      
 
     }
