@@ -11,6 +11,7 @@ namespace SMD.Interfaces.Repository
 {
     public interface ISurveyQuestionRepository : IBaseRepository<SurveyQuestion, long>
     {
+        IEnumerable<SurveyQuestion> UpdateQuestionsListCompanyID(IEnumerable<SurveyQuestion> SurveyQuestions);
         IEnumerable<SurveyQuestion> SearchSurveyQuestions(SurveySearchRequest request, out int rowCount);
 
         /// <summary>

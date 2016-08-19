@@ -164,7 +164,8 @@ namespace SMD.Implementation.Services
             int rowCount;
             return new SurveyQuestionResponseModel
             {
-                SurveyQuestions = surveyQuestionRepository.SearchSurveyQuestions(request, out rowCount),
+                SurveyQuestions =surveyQuestionRepository.SearchSurveyQuestions(request, out rowCount),
+
                 Countries = new List<Country>(),
                 Languages = new List<Language>(),
                 TotalCount = rowCount,

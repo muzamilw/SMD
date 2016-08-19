@@ -160,8 +160,19 @@ define("survey/survey.viewModel",
                         } else if (item.Status == 6) {
                             item.StatusValue = "Approval Rejected"; canSubmitForApproval(true);
                         }
+                        item.CreatedBy = DilveredPercentage(item);
+                        if (item.ResultClicks == null)
+                            item.ResultClicks = 0;
                         return item;
+                    },
+                 DilveredPercentage = function (item) {
+                     var percent = 0.0;
+
+                     if (item.AnswerNeeded != null && item.AnswerNeeded > 0 && item.ResultClicks != null && item.ResultClicks > 0) {
+                         percent = (item.ResultClicks / item.AnswerNeeded) * 100;
                     }
+                    return Math.round(percent);
+                },
                     // Search Filter 
                     filterSurveyQuestion = function () {
                         getQuestions();
@@ -176,7 +187,12 @@ define("survey/survey.viewModel",
                     },
                     // Add new Profile Question
                     addNewSurvey = function () {
-                        titleText("Add new survey");
+                        selectedQuestionCountryList([]);
+                        gotoScreen(1);
+                        isTerminateBtnVisible(false);
+                        isShowArchiveBtn(false);
+                        HeaderText("Add new survey");
+                        StatusValue('');
                         selectedQuestion(new model.Survey());
                         selectedQuestion().Gender("1");
                         selectedQuestion().LeftPicturePath("/Images/select_image.jpg");

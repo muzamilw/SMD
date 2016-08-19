@@ -78,25 +78,67 @@ else
                 <p data-bind="dateString:EndDate" class="@userClasses"></p>
             </td>*@
             <td>
-                <p>Answered</p>
+                
+                <p data-bind="text:resultClicks"></p>
             </td>
             <td>
                 <p data-bind="text:CreatedBy" class="@adminClasses"></p>
             </td>
             <td>
-                <!--ko if:Status() == 6 -->
+                <!-- ko if: Status() == 1-->
+                <div class="text-left statusbg" style="background:#6D6EFA;    width: 125px;">
+                    <span data-bind="text: StatusValue">
+                    </span>
+                </div>
+                <!-- /ko -->
+                <!-- ko if: Status() == 2-->
+                <div class="text-left statusbg" style="background:#fc0;width: 125px">
+                    <span data-bind="text: StatusValue">
+                    </span>
+                </div>
+                <!-- /ko -->
+                <!-- ko if:  Status() == 3-->
+                <div class="text-left statusbg" style="background:#37c675;    width: 125px;">
+                    <span data-bind="text: StatusValue">
+                    </span>
+                </div>
+                <!-- /ko -->
+                <!-- ko if: Status() == 4-->
+                <div class="text-left statusbg" style="background:#fd008e;width: 125px">
+                    <span data-bind="text: StatusValue">
+                    </span>
+                </div>
+                <!-- /ko -->
+                <!-- ko if: Status() == 5-->
+                <div class="text-left statusbg" style="background:#c8e392;width: 125px">
+                    <span data-bind="text: StatusValue">
+                    </span>
+                </div>
+                <!-- /ko -->
+                <!-- ko if: Status() == 6-->
                 <div class="text-left statusbg" style="background:red;width: 125px">
                     <span data-bind="text: StatusValue">
                     </span>
                 </div>
-
-                <!--/ko-->
-                <!--ko if:Status() != 6 -->
-                <div class="text-left statusbg" style="background: #37c675;width: 125px">
+                <!-- /ko -->
+                <!-- ko if: Status() == 7-->
+                <div class="text-left statusbg" style="background:red;width: 125px">
                     <span data-bind="text: StatusValue">
                     </span>
                 </div>
-                <!--/ko-->
+                <!-- /ko -->
+                <!-- ko if: Status() == 8-->
+                <div class="text-left statusbg" style="background:#fc0;width: 125px">
+                    <span data-bind="text: StatusValue">
+                    </span>
+                </div>
+                <!-- /ko -->
+                <!-- ko if: Status() == 9-->
+                <div class="text-left statusbg" style="background:red;width: 125px">
+                    <span data-bind="text: StatusValue">
+                    </span>
+                </div>
+                <!-- /ko -->
                 
             </td>
             

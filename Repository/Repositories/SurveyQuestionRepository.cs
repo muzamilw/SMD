@@ -91,7 +91,7 @@ namespace SMD.Repository.Repositories
                          && (request.CountryFilter == 0 ||  question.CountryId == request.CountryFilter)
                          && (isAdmin || question.UserId == LoggedInUserIdentity)
                          && (request.LanguageFilter == 0 || question.LanguageId == request.LanguageFilter)
-                         && (request.Status == 0 || question.Status == request.Status);
+                         && (request.Status == 0 || question.Status == request.Status)&&(question.CompanyId==this.CompanyId);
 
 
                 rowCount = DbSet.Count(query);
@@ -214,5 +214,27 @@ namespace SMD.Repository.Repositories
 
             return data;
         }
+        public IEnumerable<SurveyQuestion> UpdateQuestionsListCompanyID(IEnumerable<SurveyQuestion> SurveyQuestions)
+        {
+
+            if (this.CompanyId > 0)
+            {
+                foreach (var Question in SurveyQuestions)
+                {
+                    if (Question.CompanyId == null || Question.CompanyId == 0)
+                    {
+                        Question.CompanyId = this.CompanyId;
+
+                        db.SurveyQuestions.Attach(Question);
+
+                        db.Entry(Question).State = EntityState.Modified;
+                    }
+                }
+                db.SaveChanges();
+            }
+            return SurveyQuestions;
+        
+        }
+
     }
 }

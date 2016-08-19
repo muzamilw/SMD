@@ -83,7 +83,7 @@ namespace SMD.Implementation.Services
             int rowCount;
             return new ProfileQuestionSearchRequestResponse
             {
-                ProfileQuestions = _profileQuestionRepository.UpdateQuestionsCompanyID(_profileQuestionRepository.SearchProfileQuestions(request, out rowCount)),
+                ProfileQuestions = _profileQuestionRepository.SearchProfileQuestions(request, out rowCount),
                 Professions = _industoryRepository.GetAll(),
                 TotalCount = rowCount
             };
