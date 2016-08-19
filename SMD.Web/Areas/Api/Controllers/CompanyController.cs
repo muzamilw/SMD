@@ -75,7 +75,8 @@ namespace SMD.MIS.Areas.Api.Controllers
             var response = companyService.GetCurrentCompany();
             CompanyApiModel apicompany = Mapper.Map<Company, CompanyApiModel>(response);
 
-            apicompany.Logo = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Host + "/" + apicompany.Logo + "?" + DateTime.Now;
+            if (!string.IsNullOrEmpty(apicompany.Logo))
+                apicompany.Logo = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Host + "/" + apicompany.Logo + "?" + DateTime.Now;
 
 
            return apicompany;
@@ -95,9 +96,15 @@ namespace SMD.MIS.Areas.Api.Controllers
                 throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
             }
 
-            //return await webApiUserService.UpdateProfile(request); 
 
-            return new BaseApiResponse();
+            Mapper.Initialize(cfg => cfg.CreateMap<CompanyApiModel,Company>());
+            var company = Mapper.Map<CompanyApiModel,Company>(request);
+
+            
+
+            companyService.UpdateCompany(company, request.LogoImageBytes);
+
+            return new BaseApiResponse {  Status = true, Message = "Success"};
         }
 
         #endregion

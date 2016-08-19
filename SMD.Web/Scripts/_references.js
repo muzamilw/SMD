@@ -165,6 +165,10 @@
 /// <reference path="../areas/billing/scripts/invoice.view.js" />
 /// <reference path="../areas/billing/scripts/invoice.viewmodel.js" />
 /// <reference path="../areas/common/scripts/clientsidepagination.js" />
+/// <reference path="../areas/common/scripts/companyprofile.dataservice.js" />
+/// <reference path="../areas/common/scripts/companyprofile.model.js" />
+/// <reference path="../areas/common/scripts/companyprofile.view.js" />
+/// <reference path="../areas/common/scripts/companyprofile.viewmodel.js" />
 /// <reference path="../areas/common/scripts/confirmation.view.js" />
 /// <reference path="../areas/common/scripts/confirmation.viewmodel.js" />
 /// <reference path="../areas/common/scripts/pagination.js" />
@@ -841,10 +845,6 @@
 /// <reference path="plugins/forms/tiny_mce/themes/advanced/langs/en.js" />
 /// <reference path="plugins/forms/tiny_mce/themes/advanced/langs/en_dlg.js" />
 /// <reference path="plugins/forms/tiny_mce/themes/simple/langs/en.js" />
-/// <reference path="../areas/common/scripts/companyprofile.viewmodel.js" />
-/// <reference path="../areas/common/scripts/companyprofile.view.js" />
-/// <reference path="../areas/common/scripts/companyprofile.model.js" />
-/// <reference path="../areas/common/scripts/companyprofile.dataservice.js" />
 <<<<<<< HEAD
 =======
 /// <reference path="plugins/forms/timeentry/langs/jquery.timeentry-ca.js" />

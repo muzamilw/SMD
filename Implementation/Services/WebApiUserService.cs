@@ -1057,7 +1057,7 @@ namespace SMD.Implementation.Services
           
             user.Update(request);
             //update company
-            companyRepository.updateCompany(request);
+            //companyRepository.updateCompany(request);
             // Save Changes
            await UserManager.UpdateAsync(user);
            if (request.ProfileImageBytes != null)
