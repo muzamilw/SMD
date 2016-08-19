@@ -78,13 +78,13 @@
                                                           _.each(branchCategory(), function (item) {
                                                               if (item.categoryId() == selectedBranch().branchCategoryId()) {
                                                                   item.brachFeilds.push(selectedBranch());
-                                                                  selectedBranch(null);
                                                                   isSaveChangesEnable(false);
                                                                   isdeleteEnable(false);
                                                                   toastr.success("Successfully saved.");
 
                                                               }
                                                           })
+
                                                       }
                                                       else {
                                                           _.each(selectedCategory().brachFeilds(), function (item) {
@@ -201,13 +201,13 @@
                                              if (item.branchId() == selectedBranch().branchId()) {
                                                  selectedCategory().brachFeilds.remove(item);
                                                  selectedCategory().isExpanded(false);
-                                                 selectedBranch(null);
                                                  isSaveChangesEnable(false);
                                                  isdeleteEnable(false);
 
 
                                              }
                                          })
+                                         selectedBranch(null);
                                      },
                                      error: function (response) {
                                          toastr.error("Failed to Delete Branch . Error: " + response);
@@ -373,14 +373,16 @@
 
                }
                 codeAddress = function () {
-                    var address = selectedBranch().branchAddressline1() + ',' + selectedBranch().branchCity() + ',' + selectedBranch().branchZipCode() + ',' + selectedBranch().branchState();
+                   // var address = selectedBranch().branchAddressline1().toLowerCase() + ',' + selectedBranch().branchCity().toLowerCase() + ',' + selectedBranch().branchZipCode() + ',' + selectedBranch().branchState().toLowerCase();
+                    var address = selectedBranch().branchAddressline1().toLowerCase() + ' ' + selectedBranch().branchCity().toLowerCase() + ' ' + selectedBranch().branchZipCode() + ' ' + selectedBranch().branchState().toLowerCase();
                     geocoder.geocode({
                         'address': address
                     }, function (results, status) {
                         if (status == google.maps.GeocoderStatus.OK) {
                             selectedBranch().branchLocationLat(results[0].geometry.location.lat());
                             selectedBranch().branchLocationLon(results[0].geometry.location.lng());
-                            map.setCenter(results[0].geometry.location);
+                           map.setCenter(results[0].geometry.location);
+      
                             var marker = new google.maps.Marker({
                                 map: map,
                                 position: results[0].geometry.location
@@ -429,9 +431,6 @@
                      var geocoder;
                      var map;
                      initializeGEO();
-
-
-
                      ko.applyBindings(view.viewModel, view.bindingRoot);
                      ko.applyBindings(view.viewModel, view.bindingPartial);
                  };
