@@ -17,8 +17,10 @@ define("common/confirmation.viewModel",
                     // default confirmation text
                     defaultConfirmationText = "Do you want to proceed with the request?",
                     // Message Text
+                  
                     messageText = ko.observable(defaultConfirmationText),
 
+                    
                     defaultButtonTextYes = "Yes",
                     yesBtnText = ko.observable(defaultButtonTextYes),
 
@@ -118,6 +120,10 @@ define("common/confirmation.viewModel",
                         isLoading(true);
                         view.showWarningPopup();
                     },
+                  showOKpopup = function () {
+                      isLoading(true);
+                      view.showOKpopup();
+                  },
                     showUpgradePopup = function () {
                         isLoading(true);
                         view.showUpgradePopup();
@@ -137,6 +143,12 @@ define("common/confirmation.viewModel",
                         view.hideWarningPopup();
                         view.hide();
                     },
+                   hideshowOKpopup = function () {
+                       // Reset Call Backs
+                       resetDialog();
+                       view.hideshowOKpopup();
+                       view.hide();
+                   },
 
                      // Hide the dialog
                     hideActionPopup = function () {
@@ -204,6 +216,8 @@ define("common/confirmation.viewModel",
                     IsCancelVisible: IsCancelVisible,
                     hide: hide,
                     showWarningPopup: showWarningPopup,
+                    showOKpopup: showOKpopup,
+                    hideshowOKpopup:hideshowOKpopup,
                     hideWarningPopup: hideWarningPopup,
                     showUpgradePopup: showUpgradePopup,
                     showActionPopup: showActionPopup,
