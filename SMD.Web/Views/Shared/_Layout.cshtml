@@ -206,6 +206,9 @@
 
 
                 @RenderBody()
+                <!-- ko stopBinding: true -->
+                @Html.Partial("~/Areas/Common/Views/Shared/_ConfirmationDialog.cshtml")
+                <!-- /ko -->
                 <div id="bindingPartialViews">
                     @{
                         Html.RenderPartial("~/Areas/Coupons/Views/Shared/_BranchDetails.cshtml");
@@ -241,9 +244,9 @@
                 </div>
         </div>
     </div>
-    <!-- ko stopBinding: true -->
+    @*<!-- ko stopBinding: true -->
     @Html.Partial("~/Areas/Common/Views/Shared/_ConfirmationDialog.cshtml")
-    <!-- /ko -->
+    <!-- /ko -->*@
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     <script>

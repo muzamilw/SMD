@@ -108,7 +108,7 @@
                             <input class="form-control" data-bind="value:branchPhone" type="text" id="phnNo">
                         </div>
                     </div>
-                    <div class="form-group ">
+                    <div class="form-group" data-bind="visible:false">
                         <div class="col-lg-4 text-right">
                             <label for="geoX" class="col-form-label labelColour">GEO X</label>
                         </div>
@@ -116,10 +116,10 @@
                             <input class="form-control" readonly="readonly" data-bind="value:branchLocationLat" type="text" style="width:70%" id="geoX">
                         </div>
                     </div>
-                    <div class="form-group ">
-                        <div class="col-lg-4 text-right">
-                            <label for="geoy" class="col-form-label labelColour">GEO Y</label>
-                        </div>
+                    <div class="form-group" data-bind="visible:false">
+                        <div class=" col-lg-4 text-right">
+                        <label for="geoy" class="col-form-label labelColour">GEO Y</label>
+                    </div>
                         <div class="col-lg-8">
                             <input class="form-control" readonly="readonly" data-bind="value:branchLocationLon" type="text" style="width:70%" id="geoy">
                         </div>
@@ -133,14 +133,15 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 pull-left">
-                    <a href="#" class="table-link danger" data-bind="click: $root.CodeAddressonMap" style="margin-top:50px">
-                        <span class="fa-stack">
-                            <i class="fa fa-square fa-stack-2x"></i>
-                            <i class="fa fa-location-arrow fa-stack-1x fa-inverse"></i>
-                        </span>
+                <div class="col-lg-3 pull-left" data-bind="visible:$root.isMapVisible()">
+                    <a href="#" class="table-link danger" data-bind="click: $root.CodeAddressonMap,visible:$root.isAddressFilled" style="margin-top:50px">
+                        Locate on Map
+                        @*<span class="fa-stack">
+                <i class="fa fa-square fa-stack-2x"></i>
+                <i class="fa fa-location-arrow fa-stack-1x fa-inverse"></i>
+            </span>*@
                     </a>
-                    <div style="width:95%;height:239px; border:2px solid" id="map-canvas"></div>
+                    <div data-bind="visible:$root.isAddressFilled" style="width:95%;height:239px; border:2px solid" id="map-canvas"></div>
 
                 </div>
 
@@ -148,7 +149,7 @@
             <div class="modal-footer">
 
                 <button type="button" data-bind="click: $root.DeleteBranch,visible:$root.isSaveChangesEnable() && $root.isdeleteEnable()" class="btn btn-danger">Delete this Branch</button>
-                <button type="button" data-bind="click: $root.SaveChanges,visible:$root.isSaveChangesEnable()" class=" btn btn-primary">Save Changes</button>
+                <button type="button" data-bind="click: $root.SaveChanges,visible:$root.isSaveChangesEnable(),enable:$root.isAddressFilled" class=" btn btn-primary">Save Changes</button>
                 <button type="button" data-bind="click:$root.hideBranchCategoryDialog" class="btn btn-default">Close</button>
             </div>
         </div>
