@@ -42,21 +42,29 @@ define("survey/survey.viewModel",
                     titleText = ko.observable("Add new survey"),
                     isNewCriteria = ko.observable(true),
                     canSubmitForApproval = ko.observable(true),
+                    isTerminateBtnVisible = ko.observable(true),
                     // age list 
                     ageRange = ko.observableArray([]),
                     //audience reach
                     reachedAudience = ko.observable(0),
                     //total audience
                     totalAudience = ko.observable(0),
+                    selectedQuestionCountryList = ko.observableArray([]),
                     // audience reach mode 
                     audienceReachMode = ko.observable(1),
                     userBaseData = ko.observable({ CurrencySymbol: '', isStripeIntegrated: false }),
                     setupPrice = ko.observable(0),
                     // unique country list used to bind location dropdown
-                    selectedQuestionCountryList = ko.observableArray([]),
+                    
                     errorList = ko.observableArray([]),
                       educations = ko.observableArray([]),
                       professions = ko.observableArray([]),
+                    previewScreenNumber = ko.observable(0),
+                    isShowArchiveBtn = ko.observable(true),
+                    canSubmitForApproval = ko.observable(true),
+                    SelectedPvcVal = ko.observable(0),
+                    HeaderText = ko.observable(0),
+                    StatusValue = ko.observable(0),
                     qStatuses = ko.observableArray([{ id: 0, value: 'All' }, { id: 1, value: 'Draft' }, { id: 2, value: 'Submitted for Approval' }, { id: 3, value: 'Live' }, { id: 4, value: 'Paused' }, { id: 5, value: 'Completed' }, { id: 6, value: 'Rejected' }]);
                     statusFilterValue = ko.observable();
                     //Get Questions
@@ -207,17 +215,24 @@ define("survey/survey.viewModel",
                     },
                     SurveyQuestionsByFilter=function()
                     {
-                       
-                        //clearFilters();
                         getQuestions();
-                    }
-                   , // On editing of existing PQ
+                    },
+                gotoScreen = function (number) {
+                    
+                    previewScreenNumber(number);
+
+                },
+                    // On editing of existing PQ
                     onEditSurvey = function (item) {
-                        titleText("Edit survey");
-                        //   if (item.Status() == 1 || item.Status() == null) {
-                        
+                        selectedQuestionCountryList([]);
+                        gotoScreen(1);
+                        isTerminateBtnVisible(false);
+                        isShowArchiveBtn(false);
+                        if (item.Status() == 1 || item.Status() == 2 || item.Status() == 3 || item.Status() == 4 || item.Status() == null || item.Status() == 7 || item.Status() == 9) {
                             canSubmitForApproval(true);
-                            //call function to edit survey
+                        }
+                        HeaderText(item.Question());
+                        StatusValue(item.StatusValue());
                             dataservice.getSurveyQuestion(
                                {
                                    SqId: item.SQID(),
@@ -1141,7 +1156,16 @@ define("survey/survey.viewModel",
                     saveProfileQuestion: saveProfileQuestion,
                     updateProfileQuestion: updateProfileQuestion,
                     updateSurveyCriteria: updateSurveyCriteria,
-                    SurveyQuestionsByFilter: SurveyQuestionsByFilter
+                    SurveyQuestionsByFilter: SurveyQuestionsByFilter,
+                    gotoScreen: gotoScreen,
+                    previewScreenNumber: previewScreenNumber,
+                   
+                    isShowArchiveBtn:isShowArchiveBtn,
+                    canSubmitForApproval: canSubmitForApproval,
+                    isTerminateBtnVisible: isTerminateBtnVisible,
+                    SelectedPvcVal: SelectedPvcVal,
+                    HeaderText: HeaderText,
+                    StatusValue: StatusValue
                 };
             })()
         };
