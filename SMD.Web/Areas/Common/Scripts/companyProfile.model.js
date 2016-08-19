@@ -8,22 +8,22 @@
           var
 
                 CompanyId = ko.observable(CompanyId),
-                CompanyName = ko.observable(CompanyName),
-                Tel1 = ko.observable(Tel1),
+                CompanyName = ko.observable(CompanyName).extend({ required: true }),
+                Tel1 = ko.observable(Tel1).extend({ required: true }),
                 Tel2 = ko.observable(Tel2),
                 Logo = ko.observable(Logo),
                 StripeCustomerId = ko.observable(StripeCustomerId || 'undefined'),
-                SalesEmail = ko.observable(SalesEmail),
+                SalesEmail = ko.observable(SalesEmail).extend({ required: true }),
                 WebsiteLink = ko.observable(WebsiteLink),
-                VoucherSecretKey = ko.observable(VoucherSecretKey),
-                BillingAddressLine1 = ko.observable(BillingAddressLine1),
+                VoucherSecretKey = ko.observable(VoucherSecretKey).extend({ required: true }),
+                BillingAddressLine1 = ko.observable(BillingAddressLine1).extend({ required: true }),
                 BillingAddressLine2 = ko.observable(BillingAddressLine2),
-                BillingState = ko.observable(BillingState),
-                BillingCountryId = ko.observable(BillingCountryId),
-                BillingCityId = ko.observable(BillingCityId),
-                BillingZipCode = ko.observable(BillingZipCode),
-                BillingPhone = ko.observable(BillingPhone),
-                BillingEmail = ko.observable(BillingEmail),
+                BillingState = ko.observable(BillingState).extend({ required: true }),
+                BillingCountryId = ko.observable(BillingCountryId).extend({ required: true }),
+                BillingCityId = ko.observable(BillingCityId),//.extend({ required: true }),
+                BillingZipCode = ko.observable(BillingZipCode).extend({ required: true }),
+                BillingPhone = ko.observable(BillingPhone).extend({ required: true }),
+                BillingEmail = ko.observable(BillingEmail).extend({ required: true }),
                 TwitterHandle = ko.observable(TwitterHandle),
                 FacebookHandle = ko.observable(FacebookHandle),
                 InstagramHandle = ko.observable(InstagramHandle),
@@ -34,7 +34,19 @@
 
 
               errors = ko.validation.group({
-                  CompanyName: CompanyName
+                  CompanyName: CompanyName,
+                  Tel1: Tel1,
+                  SalesEmail: SalesEmail,
+                  VoucherSecretKey: VoucherSecretKey,
+                  BillingAddressLine1: BillingAddressLine1,
+                  
+                  BillingState: BillingState,
+                  BillingCountryId: BillingCountryId,
+                  //BillingCityId: BillingCityId,
+                  BillingZipCode: BillingZipCode,
+                  BillingPhone: BillingPhone,
+                  BillingEmail: BillingEmail
+
               }),
               // Is Valid
               isValid = ko.computed(function () {
@@ -100,7 +112,7 @@
 
 
               hasChanges: hasChanges,
-              convertToServerData:convertToServerData,
+             
               reset: reset,
               isValid: isValid,
               errors: errors
@@ -110,7 +122,7 @@
 
     ////=================================== User
     //Server to Client mapper For User
-    var UserServertoClientMapper = function (objSrv) {
+    var CompanyServertoClientMapper = function (objSrv) {
         return new User(objSrv.CompanyId, objSrv.CompanyName, objSrv.Tel1, objSrv.Tel2, objSrv.Logo,
           objSrv.StripeCustomerId, objSrv.SalesEmail, objSrv.WebsiteLink, objSrv.VoucherSecretKey, objSrv.BillingAddressLine1, objSrv.BillingAddressLine2,
           objSrv.BillingState, objSrv.BillingCountryId, objSrv.BillingCityId, objSrv.BillingZipCode, objSrv.BillingPhone, objSrv.BillingEmail, objSrv.TwitterHandle, objSrv.FacebookHandle,
@@ -125,7 +137,7 @@
    
     return {
         User: User,
-        UserServertoClientMapper: UserServertoClientMapper,
+        CompanyServertoClientMapper: CompanyServertoClientMapper,
       
     };
 });
