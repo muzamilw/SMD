@@ -205,7 +205,13 @@ define("survey/survey.viewModel",
                     closeEditDialog = function () {
                         isEditorVisible(false); enableControls();
                     },
-                    // On editing of existing PQ
+                    SurveyQuestionsByFilter=function()
+                    {
+                       
+                        //clearFilters();
+                        getQuestions();
+                    }
+                   , // On editing of existing PQ
                     onEditSurvey = function (item) {
                         titleText("Edit survey");
                         //   if (item.Status() == 1 || item.Status() == null) {
@@ -1134,7 +1140,8 @@ define("survey/survey.viewModel",
                     qStatuses: qStatuses,
                     saveProfileQuestion: saveProfileQuestion,
                     updateProfileQuestion: updateProfileQuestion,
-                    updateSurveyCriteria: updateSurveyCriteria
+                    updateSurveyCriteria: updateSurveyCriteria,
+                    SurveyQuestionsByFilter: SurveyQuestionsByFilter
                 };
             })()
         };

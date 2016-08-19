@@ -12,6 +12,7 @@ namespace SMD.MIS.Areas.Api.Models
         ///  Profile Questions List
         /// </summary>
         public IEnumerable<ProfileQuestion> ProfileQuestions { get; set; }
+        public IEnumerable<Models.Industry> Professions { get; set; }
 
         /// <summary>
         /// Total Count of  Profile Questions

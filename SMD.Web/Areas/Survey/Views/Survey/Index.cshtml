@@ -79,21 +79,21 @@ else
             <td>
                 <!--ko if:Status() == 6 -->
                 <div class="text-left statusbg" style="background:red;width: 125px">
-                    <span data-bind="text: statusValue">
+                    <span data-bind="text: StatusValue">
                     </span>
                 </div>
 
                 <!--/ko-->
                 <!--ko if:Status() != 6 -->
                 <div class="text-left statusbg" style="background: #37c675;width: 125px">
-                    <span data-bind="text: statusValue">
+                    <span data-bind="text: StatusValue">
                     </span>
                 </div>
                 <!--/ko-->
                 
             </td>
             
-            <td>
+            <td style="display:none;">
                 <a class="table-link" style="float: right">
                     <span class="fa-stack">
                         <i class="fa fa-square fa-stack-2x"></i>
@@ -131,14 +131,14 @@ else
                                 <i data-bind="click:$root.filterSurveyQuestion" class="fa fa-search search-icon" style=" margin-right: 8px;"></i>
                             </div>
                             <div class="col-xs-3">
-                                <select class="form-control" data-bind="options: $root.qStatuses, optionsText: 'value', optionsValue: 'id', optionsCaption: '&lt;' + 'Select Status'+ '&gt;' , value:$root.statusFilterValue"></select>
+                                <select class="form-control" data-bind="options: $root.qStatuses, optionsText: 'value', optionsValue: 'id',value:$root.statusFilterValue,event:{ change: $root.SurveyQuestionsByFilter}"></select>
                             </div>
 
                             <div class="col-xs-6">
-                                <button class="btn  btn-info SurvyButtons" id="saveBtn" data-bind="click:$root.filterProfileQuestion">Search</button>
-                                <button class="btn btn-default SurvyButtons" id="saveBtn" data-bind="click:$root.clearFilters">Reset</button>
+                                @*<button class="btn  btn-info SurvyButtons" id="saveBtn" data-bind="click:$root.filterProfileQuestion" style="display:none!important;">Search</button>
+                                <button class="btn btn-default SurvyButtons" id="saveBtn" data-bind="click:$root.clearFilters" style="display:none!important;">Reset</button>*@
                                 <button class="btn btn-primary btnclick FloatRight" data-bind="click:$root.addNewSurvey" style="float:right;margin-top:2px; text-align:right">
-                                    Create Survey
+                                    Create Survey Card
                                 </button>
                             </div>
                            

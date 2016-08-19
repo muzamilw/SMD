@@ -21,6 +21,7 @@ namespace SMD.MIS.ModelMappers
             return new ProfileQuestionSearchRequestResponse
             {
                 TotalCount = source.TotalCount,
+                Professions = source.Professions.Select(profession => profession.CreateFrom()),
                 ProfileQuestions = source.ProfileQuestions.Select(question => question.CreateFrom())
             };
         }
