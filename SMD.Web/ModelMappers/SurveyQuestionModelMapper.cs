@@ -107,7 +107,9 @@ namespace SMD.MIS.ModelMappers
                 SubmissionDate = source.SubmissionDate,
                 CreatedBy = source.User.FullName,
                 CreatorAddress = source.User.Company.State + " " + source.User.Company.AddressLine1,
-                CompanyId = source.CompanyId
+                CompanyId = source.CompanyId,
+                AnswerNeeded=source.AnswerNeeded,
+                ResultClicks=source.ResultClicks
             };
         }
 

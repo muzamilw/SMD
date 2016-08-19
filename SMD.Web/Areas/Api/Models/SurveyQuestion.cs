@@ -43,6 +43,8 @@ namespace SMD.MIS.Areas.Api.Models
         public long? ParentSurveyId { get; set; }
         public int? Priority { get; set; }
         public int? CompanyId { get; set; }
+        public int? AnswerNeeded { get; set; }
+        public long? ResultClicks { get; set; }
     }
     public class SurveyQuestionTargetCriteria
     {

@@ -214,5 +214,27 @@ namespace SMD.Repository.Repositories
 
             return data;
         }
+        public IEnumerable<SurveyQuestion> UpdateQuestionsListCompanyID(IEnumerable<SurveyQuestion> SurveyQuestions)
+        {
+
+            if (this.CompanyId > 0)
+            {
+                foreach (var Question in SurveyQuestions)
+                {
+                    if (Question.CompanyId == null || Question.CompanyId == 0)
+                    {
+                        Question.CompanyId = this.CompanyId;
+
+                        db.SurveyQuestions.Attach(Question);
+
+                        db.Entry(Question).State = EntityState.Modified;
+                    }
+                }
+                db.SaveChanges();
+            }
+            return SurveyQuestions;
+        
+        }
+
     }
 }
