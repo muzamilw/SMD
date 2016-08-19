@@ -396,3 +396,6 @@ a.reportAnchor a:hover {
 .Theme_subheading-Clr {
    color: #7f8c8d!important;
 }
+.tooltip {
+    z-index:0!important;
+}

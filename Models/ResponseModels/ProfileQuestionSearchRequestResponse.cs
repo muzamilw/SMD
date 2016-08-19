@@ -13,7 +13,7 @@ namespace SMD.Models.ResponseModels
         ///  Profile Questions List
         /// </summary>
         public IEnumerable<ProfileQuestion> ProfileQuestions { get; set; }
-
+        public IEnumerable<Industry> Professions { get; set; }
         /// <summary>
         /// Total Count of  Profile Questions
         /// </summary>

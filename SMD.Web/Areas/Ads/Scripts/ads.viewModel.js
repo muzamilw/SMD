@@ -2291,7 +2291,7 @@ define("ads/ads.viewModel",
                                         },
                                             {
                                                 "id": "9",
-                                                "name": "Completed"
+                                                "name": "Draft"
                                             }
 
 
