@@ -48,6 +48,12 @@ namespace SMD.Models.DomainModels
         public long? ParentSurveyId { get; set; }
         public int? Priority { get; set; }
         public Nullable<int> CompanyId { get; set; }
+
+
+        public int? AnswerNeeded { get; set; }
+        
+
+
         public virtual ICollection<AdCampaignTargetCriteria> AdCampaignTargetCriterias { get; set; }
         public virtual User User { get; set; }
         public virtual Country Country { get; set; }

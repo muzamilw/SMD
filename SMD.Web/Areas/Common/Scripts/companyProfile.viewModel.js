@@ -79,7 +79,7 @@ define("common/companyProfile.viewModel",
                             {
                                 success: function (companyProfile) {
                                     //console.log(userProfile);
-                                    selectedCompany(model.UserServertoClientMapper(companyProfile));
+                                    selectedCompany(model.CompanyServertoClientMapper(companyProfile));
                                     // Load Cities by Country
                                     //updateCities(userProfile.CityId);
                                     //selectedCompany().countryId.subscribe(function() {
@@ -96,6 +96,7 @@ define("common/companyProfile.viewModel",
 
                      LogoUrlImageCallback = function (file, data) {
                          selectedCompany().LogoImageBytes(data);
+                         selectedCompany().Logo('');
                      },
                       randonNumber = ko.observable("?r=0"),
                   

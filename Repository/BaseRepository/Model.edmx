@@ -717,6 +717,7 @@
           <Property Name="ParentSurveyId" Type="bigint" />
           <Property Name="Priority" Type="int" />
           <Property Name="CompanyId" Type="int" />
+          <Property Name="AnswerNeeded" Type="int" />
         </EntityType>
         <EntityType Name="SurveyQuestionResponse">
           <Key>
@@ -3695,6 +3696,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <NavigationProperty Name="User" Relationship="DomainModels.FK_SurveyQuestion_AspNetUsers" FromRole="SurveyQuestion" ToRole="AspNetUser" />
           <NavigationProperty Name="AdCampaignTargetCriterias" Relationship="DomainModels.FK_AdCampaignTargetCriteria_SurveyQuestion" FromRole="SurveyQuestion" ToRole="AdCampaignTargetCriteria" />
           <NavigationProperty Name="Company" Relationship="DomainModels.FK_SurveyQuestion_Company" FromRole="SurveyQuestion" ToRole="Company" />
+          <Property Name="AnswerNeeded" Type="Int32" />
         </EntityType>
         <EntityType Name="SurveyQuestionResponse">
           <Key>
@@ -5579,6 +5581,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <EntitySetMapping Name="SurveyQuestions">
             <EntityTypeMapping TypeName="DomainModels.SurveyQuestion">
               <MappingFragment StoreEntitySet="SurveyQuestion">
+                <ScalarProperty Name="AnswerNeeded" ColumnName="AnswerNeeded" />
                 <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
                 <ScalarProperty Name="Priority" ColumnName="Priority" />
                 <ScalarProperty Name="ParentSurveyId" ColumnName="ParentSurveyId" />

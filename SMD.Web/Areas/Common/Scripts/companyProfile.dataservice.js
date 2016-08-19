@@ -27,7 +27,7 @@ define("common/companyProfile.dataservice", function () {
                     
                     //Update User Profile
                     amplify.request.define('saveCompanyProfile', 'ajax', {
-                        url: '/Api/UpdateUserFromWeb',
+                        url: '/Api/Company',
                         dataType: 'json',
                         type: 'POST'
                     });
