@@ -91,7 +91,7 @@ namespace SMD.Repository.Repositories
                          && (request.CountryFilter == 0 ||  question.CountryId == request.CountryFilter)
                          && (isAdmin || question.UserId == LoggedInUserIdentity)
                          && (request.LanguageFilter == 0 || question.LanguageId == request.LanguageFilter)
-                         && (request.Status == 0 || question.Status == request.Status);
+                         && (request.Status == 0 || question.Status == request.Status)&&(question.CompanyId==this.CompanyId);
 
 
                 rowCount = DbSet.Count(query);

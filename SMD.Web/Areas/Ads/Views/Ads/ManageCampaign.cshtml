@@ -21,8 +21,8 @@ else
                     <li><a data-bind="click: $root.closeNewCampaignDialog" class="my-navigator">Video Campaigns</a></li>
                 </ol>
                 <div class="clearfix" data-bind="with: $root.campaignModel">
-                    <span class="pull-left" style="padding-left:0px;font-size:28px;color:rgb(52, 152, 219)" data-bind="NewCampaignBinding: CampaignName,visible:$root.isDisplayCouponsAds()">New Coupon</span>
-                    <span class="pull-left" style="padding-left:0px;font-size:28px;color:rgb(52, 152, 219)" data-bind="NewCampaignBinding: CampaignName,visible:!$root.isDisplayCouponsAds()">New Campaign</span>
+                    <span class="pull-left Theme_standard_clr" style="padding-left:0px;font-size:28px;" data-bind="NewCampaignBinding: CampaignName,visible:$root.isDisplayCouponsAds()">New Coupon</span>
+                    <span class="pull-left Theme_standard_clr" style="padding-left:0px;font-size:28px;" data-bind="NewCampaignBinding: CampaignName,visible:!$root.isDisplayCouponsAds()">New Campaign</span>
                     <span class="control-label bold heading-style pull-left" style="    margin-top: 6px;    margin-left: 40px;" data-bind="text:StatusValue()"></span>
                     <div style="float:right"><button data-bind="click: $root.closeNewCampaignDialog" class="btn btn-default">Close</button></div>
                 </div>

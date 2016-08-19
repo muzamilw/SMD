@@ -187,7 +187,12 @@ define("survey/survey.viewModel",
                     },
                     // Add new Profile Question
                     addNewSurvey = function () {
-                        titleText("Add new survey");
+                        selectedQuestionCountryList([]);
+                        gotoScreen(1);
+                        isTerminateBtnVisible(false);
+                        isShowArchiveBtn(false);
+                        HeaderText("Add new survey");
+                        StatusValue('');
                         selectedQuestion(new model.Survey());
                         selectedQuestion().Gender("1");
                         selectedQuestion().LeftPicturePath("/Images/select_image.jpg");
