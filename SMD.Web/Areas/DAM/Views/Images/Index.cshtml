@@ -9,7 +9,7 @@
 <link href="~/Content/DAM/ImageArea.css" rel="stylesheet" />
 <section id="main">
     <div class="row">
-        @using (Html.BeginForm("UploadImage", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        @using (Html.BeginForm("UploadImage", "DamImage", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
             @Html.HiddenFor(model => model.X)
             @Html.HiddenFor(model => model.Y)
@@ -17,10 +17,7 @@
             @Html.HiddenFor(model => model.Height)
             <div id="upload-choices">
                 <div class="editor-row">
-                    <div class="editor-label">
-                        @Html.EditorFor(model => model.IsFile)
-                        @Html.LabelFor(model => model.File)
-                    </div><div class="editor-field">
+                  <div class="editor-field">
                         @Html.FileFor(model => model.File)
                         @Html.ValidationMessageFor(model => model.File)
                     </div>
@@ -57,6 +54,10 @@
 
 @section Scripts{
    
+
+
+}
+<script src="~/Scripts/jquery-2.1.0.js"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
 <script src="@Url.Content("~/Scripts/jquery.imgareaselect.js")"></script>
@@ -67,14 +68,23 @@
 
         //Get the preview image and set the onload event handler
         var preview = $('#preview').load(function () {
-            setPreview();
-            ias.setOptions({
-                x1: 0,
-                y1: 0,
-                x2: $(this).width(),
-                y2: $(this).height(),
-                show: true
-            });
+            
+            var coords;
+            var height = (this.width / ratioX) * ratioY;
+            if (height <= this.height) {
+                var diff = (this.height - height) / 2;
+                coords = { x1: 0, y1: diff, x2: this.width, y2: height + diff, show: true };
+            }
+            else { // if new height out of bounds, scale width instead
+                var width = (this.height / ratioY) * ratioX;
+                var diff = (this.width - width) / 2;
+                coords = { x1: diff, y1: 0, x2: width + diff, y2: this.height, show: true };
+            }
+            //ias.imgAreaSelect(coords);
+            ias.setOptions(coords);
+            var scale = preview[0].naturalWidth / preview.width();
+            var _f = Math.floor;
+            setPreview(_f(scale * coords.x1), _f(scale * coords.y1), _f(scale * coords.width), _f(scale * coords.height));
         });
 
         //Set the 4 coordinates for the cropping
@@ -84,16 +94,38 @@
             $('#Width').val(w || preview[0].naturalWidth);
             $('#Height').val(h || preview[0].naturalHeight);
         };
-
+        var mode = GetURLParameter("mode");
+        var aspectRatio = "2:1",minheight = 200, minWidth = 400;
+        var ratioX = 2, ratioY = 1;
+        if(mode == 2) {
+            aspectRatio = "8:5";
+            minheight = 250;
+            minWidth = 400
+        } else  if(mode == 3) {
+            aspectRatio = "8:5";
+            minheight = 250;
+            minWidth = 400
+        } else if (mode == 4) {
+            minheight =400;
+            minWidth = 200
+            aspectRatio = "1:2";
+        }
         //Initialize the image area select plugin
         var ias = preview.imgAreaSelect({
             handles: true,
+
+            minHeight: minheight,
+            minWidth: minWidth,
+            aspectRatio:aspectRatio,
             instance: true,
             parent: 'body',
             onSelectEnd: function (s, e) {
                 var scale = preview[0].naturalWidth / preview.width();
                 var _f = Math.floor;
                 setPreview(_f(scale * e.x1), _f(scale * e.y1), _f(scale * e.width), _f(scale * e.height));
+            },
+            onInit: function () {
+               
             }
         });
 
@@ -107,45 +139,9 @@
         //Initial state of X, Y, Width and Height is 0 0 1 1
         setPreview(0, 0, 1, 1);
 
-        //Fetch Flickr images
-        var fetchImages = function (query) {
-            $.getJSON('http://www.flickr.com/services/feeds/photos_public.gne?jsoncallback=?', {
-                tags: query,
-                tagmode: "any",
-                format: "json"
-            }, function (data) {
-                var screen = $('<div />').addClass('waitScreen').click(function () {
-                    $(this).remove();
-                }).appendTo('body');
-                var box = $('<div />').addClass('flickrImages').appendTo(screen);
-                $.each(data.items, function (i, v) {
-                    console.log(data.items[i]);
-                    $('<img />').addClass('flickrImage').attr('src', data.items[i].media.m).click(function () {
-                        $('#Flickr').val(this.src).change();
-                        screen.remove();
-                    }).appendTo(box);
-                });
-            });
-        };
-
-        //Flickr
-        $('#FlickrQuery').change(function () {
-            fetchImages(this.value);
-        });
-
-        $('#Flickr').change(function () {
-            setBox('#IsFlickr');
-            preview.attr('src', this.value);
-        });
-
-        //What happens if the URL changes?
-        $('#Url').change(function () {
-            setBox('#IsUrl');
-            preview.attr('src', this.value);
-        });
-
         //What happens if the File changes?
         $('#File').change(function (evt) {
+   
             var f = evt.target.files[0];
             var reader = new FileReader();
 
@@ -155,7 +151,10 @@
             }
 
             setBox('#IsFile');
-            reader.onload = function (e) { preview.attr('src', e.target.result); };
+            reader.onload = function (e) {
+                preview.attr('src', e.target.result);
+              
+            };
             reader.readAsDataURL(f);
         });
 
@@ -170,6 +169,17 @@
             $('button').attr('disabled', true).text('Please wait ...');
         });
     });
+    function GetURLParameter(sParam)
+    {
+        var sPageURL = window.location.search.substring(1);
+        var sURLVariables = sPageURL.split('&');
+        for (var i = 0; i < sURLVariables.length; i++) 
+        {
+            var sParameterName = sURLVariables[i].split('=');
+            if (sParameterName[0] == sParam) 
+            {
+                return sParameterName[1];
+            }
+        }
+    }
 </script>
-
-}
