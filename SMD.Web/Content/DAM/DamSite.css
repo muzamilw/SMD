@@ -215,12 +215,11 @@ div#title {
 /* Styles for the image uploader
 -----------------------------------------------------------*/
 #upload-choices {
-    width: 450px;
+   
     float: left;
 }
 
 #upload-cut {
-    margin-left: 480px;
     padding-top: 10px;
     min-width: 150px;
 }
@@ -265,4 +264,7 @@ div#title {
 
 .flickrImage {
     height: 96px; margin: 4px; float: left; cursor: pointer;
+}
+.row {
+    margin:0px 0px 0px 0px !important;
 }

@@ -7,48 +7,69 @@
 @model SMD.MIS.Areas.DAM.Models.ImagesModel
 <link href="~/content/dam/damsite.css" rel="stylesheet" />
 <link href="~/Content/DAM/ImageArea.css" rel="stylesheet" />
+<link href="~/Content/themes/Centaurus/css/bootstrap/bootstrap.min.css" rel="stylesheet" />
 <section id="main">
     <div class="row">
-        @using (Html.BeginForm("UploadImage", "DamImage", FormMethod.Post, new { enctype = "multipart/form-data" }))
-        {
-            @Html.HiddenFor(model => model.X)
-            @Html.HiddenFor(model => model.Y)
-            @Html.HiddenFor(model => model.Width)
-            @Html.HiddenFor(model => model.Height)
-            <div id="upload-choices">
-                <div class="editor-row">
-                  <div class="editor-field">
-                        @Html.FileFor(model => model.File)
-                        @Html.ValidationMessageFor(model => model.File)
-                    </div>
+      
+            <div class="row" style="padding-left:0px;min-height:400px;">
+                <div class="pull-left" style="width:68%">
+                    @if (Model != null && Model.Images.Count > 0)
+                    {
+                        <div class="imageContainer">
+                            @foreach (var img in Model.Images)
+                            {
+                                <div class="imageBox">
+                                    <img src="@img.ImageFileName" alt="Image" class="imagePreview" />
+                                </div>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="imageCenter">
+                            No images have been uploaded so far.
+                        </div>
+                    }
                 </div>
-                
+                <div class=" pull-left" style="width:28%">
+                    @using (Html.BeginForm("UploadImage", "Images", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.HiddenFor(model => model.X)
+                        @Html.HiddenFor(model => model.Y)
+                        @Html.HiddenFor(model => model.Width)
+                        @Html.HiddenFor(model => model.Height)
+                        @Html.HiddenFor(model => model.CompanyId)
+                        @Html.HiddenFor(model => model.mode)
+                        <div >
+                            <div class="editor-row" style="text-align:center;">
+                                -OR- <br />
+                                <button class="btn  btn-success " id="uploadFileMain" style="width:80%;margin-bottom:4px;">Upload an Image</button>
+                            </div>
+                            <div id="upload-choices">
+                                <div class="editor-row">
+                                    <div class="editor-field" style="display:none;">
+                                        @Html.FileFor(model => model.File)
+                                        @Html.ValidationMessageFor(model => model.File)
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div id="upload-cut" >
+                                <img alt="Field for image cutting" id="preview" src="@Url.Content("~/Content/DAM/empty.png")" style="height:300px;" /><br />
+                                <div class="clear" style="text-align:center;">
+                                    <button type="submit" class="btn  btn-primary " id="btnSave">Crop & Upload</button>
+                                </div>
+                            </div>
+                           
+                        </div>
+                    }
+                </div>
+               
             </div>
-            <div id="upload-cut">
-                <img alt="Field for image cutting" id="preview" src="@Url.Content("~/Content/DAM/empty.png")" />
-            </div>
-            <div class="clear">
-                <button type="submit">Upload</button>
-            </div>
-        }
+        
+        
     </div>
-    @if (Model != null && Model.Images.Count > 0)
-    {
-        <div class="imageContainer">
-            @foreach (var img in Model.Images)
-            {
-                <div class="imageBox">
-                    <a href="" target="_blank"><img src="@img.ImageFileName" alt="Image" class="imagePreview" /></a>
-                </div>
-            }
-        </div>
-    }
-    else
-    {
-        <div class="imageCenter">
-            No images have been uploaded so far.
-        </div>
-    }
+   
 </section>
 
 
@@ -64,7 +85,7 @@
 <script>
     $(document).ready(function () {
         //Get the checkboxes and disable them
-        var boxes = $('input[type=checkbox]').attr('disabled', true);
+        //var boxes = $('input[type=checkbox]').attr('disabled', true);
 
         //Get the preview image and set the onload event handler
         var preview = $('#preview').load(function () {
@@ -81,7 +102,8 @@
                 coords = { x1: diff, y1: 0, x2: width + diff, y2: this.height, show: true };
             }
             //ias.imgAreaSelect(coords);
-            ias.setOptions(coords);
+            if (ias != undefined)
+                ias.setOptions(coords);
             var scale = preview[0].naturalWidth / preview.width();
             var _f = Math.floor;
             setPreview(_f(scale * coords.x1), _f(scale * coords.y1), _f(scale * coords.width), _f(scale * coords.height));
@@ -113,9 +135,6 @@
         //Initialize the image area select plugin
         var ias = preview.imgAreaSelect({
             handles: true,
-
-            minHeight: minheight,
-            minWidth: minWidth,
             aspectRatio:aspectRatio,
             instance: true,
             parent: 'body',
@@ -131,9 +150,9 @@
 
         //Check one of the checkboxes
         var setBox = function (filter) {
-            $('button').attr('disabled', false);
-            boxes.attr('checked', false)
-            .filter(filter).attr({ 'checked': true, 'disabled': false });
+            $('#btnSave').attr('disabled', false);
+         //   boxes.attr('checked', false)
+           // .filter(filter).attr({ 'checked': true, 'disabled': false });
         };
 
         //Initial state of X, Y, Width and Height is 0 0 1 1
@@ -159,15 +178,20 @@
         });
 
         //What happens if any checkbox is checked ?!
-        boxes.change(function () {
-            setBox(this);
-            $('#' + this.id.substr(2)).change();
-        });
+        //boxes.change(function () {
+        //    setBox(this);
+        //    $('#' + this.id.substr(2)).change();
+        //});
 
-        $('button').attr('disabled', true);
+        
         $('form').submit(function () {
-            $('button').attr('disabled', true).text('Please wait ...');
+            $('#btnSave').attr('disabled', true).text('Please wait ...');
         });
+        $("#uploadFileMain").click(function () {
+            $('#File').click();
+            return false;
+        });
+        $('#btnSave').attr('disabled', true);
     });
     function GetURLParameter(sParam)
     {
@@ -181,5 +205,13 @@
                 return sParameterName[1];
             }
         }
+    }
+    window.onload = function () {
+        try {
+            parent.iframeLoaded();
+        } catch (e) {
+
+        }
+        
     }
 </script>

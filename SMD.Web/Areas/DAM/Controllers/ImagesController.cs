@@ -47,7 +47,14 @@ namespace SMD.MIS.Areas.DAM.Controllers
                 return View();
             }
             var images = new ImagesModel();
-            images.Images = damImageService.getAllImages(mode);
+            int companyId = 0;
+            images.Images = damImageService.getAllImages(mode,out companyId);
+            foreach (var img in images.Images)
+            {
+                img.ImageFileName = "/SMD_Content/DamImages/" + companyId + "/" + mode + "/" + img.ImageFileName;
+            }
+            images.mode = mode;
+            images.CompanyId = companyId;
             return View(images);
         }
         public ActionResult Grid()
@@ -81,11 +88,19 @@ namespace SMD.MIS.Areas.DAM.Controllers
                     var img = CreateImage(original, model.X, model.Y, model.Width, model.Height);
 
                     //Demo purposes only - save image in the file system
-                    var fn = Server.MapPath("~/Content/img/" + name + ".png");
+                    if (!Directory.Exists(Server.MapPath("~/SMD_Content/DamImages/" + model.CompanyId + "/" + model.mode + "/")))
+                        Directory.CreateDirectory(Server.MapPath("~/SMD_Content/DamImages/" + model.CompanyId + "/" + model.mode + "/"));
+                    var fn = Server.MapPath("~/SMD_Content/DamImages/" + model.CompanyId + "/" + model.mode + "/" + name + ".png");
                     img.Save(fn, System.Drawing.Imaging.ImageFormat.Png);
-
+                    DamImage damImg = new DamImage();
+                    damImg.CompanyId = model.CompanyId;
+                  //  damImg.CreatedDateTime = DateTime.Now.ToString();
+                    damImg.ImageCategory = model.mode;
+                    damImg.ImageFileName = name + ".png";
+                    damImg.ImageTitle = name;
+                    damImageService.addImage(damImg);
                     //Redirect to index
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Index","Images",new {mode = model.mode});
                 }
                 else //Otherwise we add an error and return to the (previous) view with the model data
                     ModelState.AddModelError(errorField, "Your upload did not seem valid. Please try again using only correct images!");

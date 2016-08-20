@@ -13,7 +13,6 @@ namespace SMD.MIS.Areas.DAM.Models
    
         public List<DamImage> Images { get; set; }
 
-       
         [Display(Name = "Local file")]
         public HttpPostedFileBase File { get; set; }
 
@@ -30,5 +29,9 @@ namespace SMD.MIS.Areas.DAM.Models
 
         [Range(1, int.MaxValue)]
         public int Height { get; set; }
+
+        public int CompanyId { get; set; }
+
+        public int mode { get; set; }
     }
 }

@@ -32,9 +32,15 @@ namespace SMD.Implementation.Services
 
         #endregion
         #region public
-        public List<DamImage> getAllImages(int mode)
+        public List<DamImage> getAllImages(int mode, out int companyId)
         {
-            return damRepository.getAllImages(mode);
+            return damRepository.getAllImages(mode,out companyId);
+        }
+        public bool addImage(DamImage img)
+        {
+            damRepository.Add(img);
+            damRepository.SaveChanges();
+            return true;
         }
         #endregion
     }
