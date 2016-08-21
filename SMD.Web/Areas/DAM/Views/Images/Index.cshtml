@@ -54,7 +54,7 @@
                                 </div>
 
                             </div>
-                            <div id="upload-cut" >
+                            <div id="upload-cut" class="uploadPreview" style="display:none;">
                                 <img alt="Field for image cutting" id="preview" src="@Url.Content("~/Content/DAM/empty.png")" style="height:300px;" /><br />
                                 <div class="clear" style="text-align:center;">
                                     <button type="submit" class="btn  btn-primary " id="btnSave">Crop & Upload</button>
@@ -172,6 +172,7 @@
             setBox('#IsFile');
             reader.onload = function (e) {
                 preview.attr('src', e.target.result);
+                $(".uploadPreview").css("display","block");
               
             };
             reader.readAsDataURL(f);

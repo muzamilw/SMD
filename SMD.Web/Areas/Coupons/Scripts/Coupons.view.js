@@ -189,7 +189,8 @@ define("Coupons/Coupons.view",
                                   }
                               });
 
-                  },
+                },
+            
                 // Initialize
                 initialize = function () {
                     if (!bindingRoot) {

@@ -387,6 +387,7 @@
     <Compile Include="Areas\Api\Controllers\BranchCategoryController.cs" />
     <Compile Include="Areas\Api\Controllers\CategoryController.cs" />
     <Compile Include="Areas\Api\Controllers\CouponController.cs" />
+    <Compile Include="Areas\Api\Controllers\DownloadImageController.cs" />
     <Compile Include="Areas\Api\Controllers\RedeemPurchasedCouponController.cs" />
     <Compile Include="Areas\Api\Controllers\PhaseLibraryController.cs" />
     <Compile Include="Areas\Api\Controllers\CompanyController.cs" />
@@ -663,7 +664,6 @@
     <Content Include="Content\CSS\bootstrap\bootstrap.css" />
     <Content Include="Content\CSS\bootstrap\bootstrap.min.css" />
     <Content Include="Content\CSS\custom.css" />
-    <Content Include="Content\CSS\DAM.css" />
     <Content Include="Content\CSS\fonts\broccolidry.svg" />
     <Content Include="Content\CSS\fonts\cuticons.svg" />
     <Content Include="Content\CSS\fonts\ecoico.svg" />
