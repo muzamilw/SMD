@@ -323,11 +323,11 @@ define("Coupons/Coupons.viewModel",
                       couponModel(new model.Coupon());
                       campaignNamePlaceHolderValue('New Voucher');
                       isEnableVedioVerificationLink(false);
-                 
-                      //couponModel().CouponImage2("");
-                      //couponModel().CouponImage3("");
-                      //couponModel().couponImage1("");
-                     
+                       
+                      couponModel().CouponImage2("/images/default-placeholder.png");
+                      couponModel().CouponImage3("/images/default-placeholder.png");
+                      couponModel().couponImage1("/images/default-placeholder.png");
+                      couponModel().LogoUrl("/images/default-placeholder.png");
                       isWelcomeScreenVisible(false);
 
                       isEditorVisible(true);
