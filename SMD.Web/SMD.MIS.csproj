@@ -439,7 +439,7 @@
     <Compile Include="Areas\Api\Controllers\AdViewedController.cs" />
     <Compile Include="Areas\Api\Controllers\InvoiceDetailController.cs" />
     <Compile Include="Areas\Api\Controllers\InvoiceController.cs" />
-    <Compile Include="Areas\Api\Controllers\SendInviteUsingWebController.cs" />
+    <Compile Include="Areas\Api\Controllers\ReferUsersController.cs" />
     <Compile Include="Areas\Api\Controllers\StatementController.cs" />
     <Compile Include="Areas\Api\Controllers\UserBalanceInquiryController.cs" />
     <Compile Include="Areas\Api\Controllers\SurveyAudienceController.cs" />
@@ -587,6 +587,13 @@
       <DependentUpon>User.aspx</DependentUpon>
     </Compile>
     <Compile Include="TypeRegistrations.cs" />
+    <Compile Include="Views\EmailTester.aspx.cs">
+      <DependentUpon>EmailTester.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\EmailTester.aspx.designer.cs">
+      <DependentUpon>EmailTester.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Common\Scripts\phraseLibrary.dataservice.js" />
@@ -2731,6 +2738,7 @@
     <Content Include="Scripts\underscore.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="ReportViewers\User.aspx" />
+    <Content Include="Views\EmailTester.aspx" />
     <Content Include="Views\Home\-------Login.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

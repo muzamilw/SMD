@@ -105,7 +105,7 @@ namespace SMD.Implementation.Services
         }
 
 
-        public CompaniesAspNetUser AddUserInvitation(string email, string RoleId)
+        public CompaniesAspNetUser AddManageUserInvitation(string email, string RoleId)
         {
 
             var user = userService.GetUserByEmail(email);
@@ -132,13 +132,13 @@ namespace SMD.Implementation.Services
               
 
                 //send simple email with acceptance link
-               emailManagerService.SendEmailToInviteUser(email, invitteuser.InvitationCode, true, RoleName);
+               emailManagerService.SendEmailInviteToUserManage(email, invitteuser.InvitationCode, true, RoleName);
             }
             else
             {
 
                 //send email with acceptance link on registration page.
-                emailManagerService.SendEmailToInviteUser(email, invitteuser.InvitationCode, false, RoleName);
+                emailManagerService.SendEmailInviteToUserManage(email, invitteuser.InvitationCode, false, RoleName);
             }
             return invitteuser;
 

@@ -9,7 +9,7 @@ using System.Web.Http;
 
 namespace SMD.MIS.Areas.Api.Controllers
 {
-    public class SendInviteUsingWebController : ApiController
+    public class ReferUsersController : ApiController
     {
         private readonly IWebApiUserService webApiUserService;
         private IEmailManagerService emailManagerService;
@@ -23,7 +23,7 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// <summary>
         /// Constructor
         /// </summary>
-        public SendInviteUsingWebController(IWebApiUserService webApiUserService, IEmailManagerService emailManagerService)
+        public ReferUsersController(IWebApiUserService webApiUserService, IEmailManagerService emailManagerService)
         {
             if (webApiUserService == null)
             {
@@ -43,11 +43,19 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// </summary>
 
 
-        public bool Get(string Email, int CompanyId)
+        public bool Post(string email, int companyId, string mode)
         {
             try
             {
-                emailManagerService.SendEmailToInviteUser(Email, CompanyId);
+
+                if (mode == "business")
+                {
+                    emailManagerService.SendEmailInviteBusiness(email, companyId);
+                }
+                else if (mode == "advertiser")
+                {
+                    emailManagerService.SendEmailInviteAdvertiser(email, companyId);
+                }
                 return true;
             } catch (Exception ex)
             {

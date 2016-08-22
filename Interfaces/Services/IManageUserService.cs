@@ -21,7 +21,7 @@ namespace SMD.Interfaces.Services
         vw_CompanyUsers ComanyUserExists(string email);
 
 
-        CompaniesAspNetUser AddUserInvitation(string email, string RoleId);
+        CompaniesAspNetUser AddManageUserInvitation(string email, string RoleId);
 
         bool AcceptInvitation(string InvitationCode);
 

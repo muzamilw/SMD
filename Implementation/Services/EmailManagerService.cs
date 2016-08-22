@@ -301,6 +301,7 @@ namespace SMD.Implementation.Services
             MBody = MBody.Replace("++campaignlabel++", CampaignLabel);
             MBody = MBody.Replace("++CurrentDateTime++", DateTime.Now.ToLongDateString() + " " + DateTime.Now.ToLongTimeString() + " GMT");
             MBody = MBody.Replace("++EmailConfirmationLink++", EmailConfirmationLink);
+            MBody = MBody.Replace("++inviteurl++", InviteURL);
             if (Mid == (int)EmailTypes.ResetPassword)
             {
                 MBody = MBody.Replace("++PasswordResetLink++", PasswordResetLink);
@@ -462,6 +463,8 @@ namespace SMD.Implementation.Services
 
         private readonly ISystemMailsRepository systemMailRepository;
         private readonly IManageUserRepository manageUserRepository;
+        private readonly ICompanyService companyService;
+
         #endregion
 
 
@@ -470,7 +473,7 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Constructor
         /// </summary>
-        public EmailManagerService(ISystemMailsRepository systemMailRepository, IManageUserRepository manageUserRepository)
+        public EmailManagerService(ISystemMailsRepository systemMailRepository, IManageUserRepository manageUserRepository, ICompanyService companyService)
         {
             if (systemMailRepository == null)
             {
@@ -478,6 +481,9 @@ namespace SMD.Implementation.Services
             }
             this.systemMailRepository = systemMailRepository;
             this.manageUserRepository = manageUserRepository;
+            this.companyService = companyService;
+        
+
             MMailto = new List<string>();
         }
 
@@ -783,7 +789,7 @@ namespace SMD.Implementation.Services
         /// <summary>
         ///Invite User Email
         /// </summary>
-        public void SendEmailToInviteUser(string email, string InvitationCode, bool mode, string RoleName)
+        public void SendEmailInviteToUserManage(string email, string InvitationCode, bool mode, string RoleName)
         {
             MMailto.Add(email);
             Mid = (int)EmailTypes.InviteUsers;
@@ -804,20 +810,60 @@ namespace SMD.Implementation.Services
 
 
         }
-        // invite user from mobile api 
-        public async Task SendEmailToInviteUser(string email,int companyId)
+        ////// invite user from mobile api 
+        ////public async Task SendEmailToInviteUser(string email,int companyId)
+        ////{
+
+        ////    MMailto.Add(email);
+        ////    Mid = (int)EmailTypes.InviteUsers;
+        ////    string userName = string.Empty;
+   
+        ////    CompanyNameInviteUser = manageUserRepository.getCompanyName(out userName, companyId);
+        ////    Muser = userName;
+        ////    InviteURL = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/Account/Register?CompanyID=" + companyId;
+        ////    await SendEmail();
+
+        ////}
+
+
+
+
+        public async Task SendEmailInviteBusiness(string email, int companyId)
         {
 
             MMailto.Add(email);
-            Mid = (int)EmailTypes.InviteUsers;
+            Mid = (int)EmailTypes.InviteBusiness;
             string userName = string.Empty;
-   
-            CompanyNameInviteUser = manageUserRepository.getCompanyName(out userName, companyId);
+
+            //CompanyNameInviteUser = manageUserRepository.getCompanyName(out userName, companyId);
+            var company = companyService.GetCompanyById(companyId);
+            CompanyNameInviteUser = company.CompanyName;
+
             Muser = userName;
-            InviteURL = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/Account/Register?CompanyID=" + companyId;
-            await SendEmail();
+            InviteURL = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/Account/RegisterBusiness?ReferralCode=" + company.ReferralCode;
+            SendEmailNotAysnc();
 
         }
+
+
+        public async Task SendEmailInviteAdvertiser(string email, int companyId)
+        {
+
+            MMailto.Add(email);
+            Mid = (int)EmailTypes.InviteAdvertiser;
+            string userName = string.Empty;
+            var company = companyService.GetCompanyById(companyId);
+            CompanyNameInviteUser = CompanyNameInviteUser = company.CompanyName;
+            Muser = userName;
+            InviteURL = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/Account/RegisterAdvertiser?ReferralCode=" + company.ReferralCode;
+            SendEmailNotAysnc();
+
+        }
+
+
+
+
+
         /// <summary>
         ///BuyIT User Email
         /// </summary>
