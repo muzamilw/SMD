@@ -534,6 +534,8 @@
     <Compile Include="Areas\ProfileQuestion\Controllers\ManageController.cs" />
     <Compile Include="Areas\Report\Controllers\ReportController.cs" />
     <Compile Include="Areas\Report\ReportAreaRegistration.cs" />
+    <Compile Include="Areas\SuperNovaDashboard\Controllers\IndexController.cs" />
+    <Compile Include="Areas\SuperNovaDashboard\SuperNovaDashboardAreaRegistration.cs" />
     <Compile Include="Areas\User\Controllers\ManageUserController.cs" />
     <Compile Include="Areas\User\UserAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -1676,6 +1678,9 @@
     <Content Include="Content\less\Campaign.css.map">
       <DependentUpon>Campaign.css</DependentUpon>
     </Content>
+    <Content Include="Areas\SuperNovaDashboard\Views\web.config" />
+    <Content Include="Areas\SuperNovaDashboard\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\SuperNovaDashboard\Views\Index\Index.cshtml" />
     <None Include="config\Web.connectionstrings.config" />
     <None Include="Properties\PublishProfiles\mz profile.pubxml" />
     <None Include="Properties\PublishProfiles\SMD MIS Saqib.pubxml" />
@@ -2800,6 +2805,7 @@
     <Folder Include="Areas\Common\Models\" />
     <Folder Include="Areas\Coupons\Models\" />
     <Folder Include="Areas\Report\Models\" />
+    <Folder Include="Areas\SuperNovaDashboard\Models\" />
     <Folder Include="Areas\Survey\Models\" />
     <Folder Include="Content\themes\base\minified\images\" />
     <Folder Include="Models\" />
