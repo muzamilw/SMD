@@ -23,7 +23,7 @@ else
                     <span class="pull-left Theme_standard_clr" style="padding-left:0px;font-size:28px;" data-bind="NewCampaignBinding: CampaignName,visible:$root.isDisplayCouponsAds()">New Coupon</span>
                     <span class="pull-left Theme_standard_clr" style="padding-left:0px;font-size:28px;" data-bind="NewCampaignBinding: CampaignName,visible:!$root.isDisplayCouponsAds()">New Campaign</span>
                     <span class="control-label bold heading-style pull-left" style="    margin-top: 6px;    margin-left: 40px;" data-bind="text:StatusValue()"></span>
-                    <div style="float:right"><button data-bind="click: $root.closeNewCampaignDialog" class="btn btn-default">Close</button></div>
+                    <div style="float:right;margin-top:-5px;"><button data-bind="click: $root.closeNewCampaignDialog" class="btn btn-default">Close</button></div>
                 </div>
 
                 <div class="row" style="margin-bottom:15px;">
@@ -158,8 +158,9 @@ else
                                         <label for="txtUploadVideo" class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn">Upload Video</label>
                                     </div>
                                     <div class="col-lg-7">
-                                        <div class="defaultImgUploadImage pull-left" style="cursor:pointer;">
-                                            <div style="width:100%;height:110px;"></div>
+                                        <div class="defaultImgUploadImage pull-left" style="cursor:pointer;text-align:center;width:335px!important;">
+                                            @*<div style="width:100%;height:110px;"></div>*@
+                                            <img style="width:300px;height:150px;" src="/Content/Images/updatedMovie_lg.png" />
                                             <div style="    padding-top: 10px;    text-align: center;    font-size: 12px;    color: gray;">
                                                 max length 30 sec
                                             </div>
@@ -201,16 +202,16 @@ else
                                             <label for="txtUploadLogo" class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn">Upload Logo</label>
                                         </div>
                                         <div class="col-lg-7">
-                                            <div class="defaultImgUploadImage pull-left" style="cursor:pointer;text-align:center">
-                                                <img style="width:auto;max-width:170px;" data-bind="visible: $root.campaignModel().LogoImageBytes() != '',attr: { src: $root.campaignModel().LogoImageBytes  }" src="/Content/Images/Company_Default.png" onclick="showUploadDialog();" />
-                                                <img style="width:auto;max-width:170px;" data-bind="visible: LogoUrl() != '' ,attr: { src: '/' +  LogoUrl() + $root.randonNumber() }" onclick="showUploadDialog();" />
-                                                <div style="width:100%;height:110px;" onclick="showUploadDialog();" data-bind="visible: LogoUrl() == '' &&   $root.campaignModel().LogoImageBytes() == ''"></div>
-                                                <div style="    padding-top: 10px;    text-align: center;    font-size: 12px;    color: gray;">
+                                            <div class="defaultImgUploadImage pull-left" style="cursor:pointer;text-align:center;width:335px!important;">
+                                                <img style="width:300px;height:150px;" data-bind="visible: $root.campaignModel().LogoImageBytes() != '',attr: { src: $root.campaignModel().LogoImageBytes  }" src="/Content/Images/Company_Default.png" onclick="showUploadDialog();" />
+                                                <img style="width:300px;height:150px;" data-bind="visible: LogoUrl() != '' ,attr: { src: '/' +  LogoUrl() + $root.randonNumber() }" onclick="showUploadDialog();" />
+                                                <img style="width:300px;height:150px;" onclick="showUploadDialog();" src="/Content/Images/CompanyLogo.png" data-bind="visible: LogoUrl() == '' &&   $root.campaignModel().LogoImageBytes() == ''" />
+                                                <div style="padding-top: 10px;    text-align: center;    font-size: 12px;    color: gray;">
                                                     (300 x 150 pixels)
                                                 </div>
                                             </div>
                                             <div class="defaultImgUploadImageBtn" style="width:75px;">
-                                                <div class="fileUpload">
+                                                <div class="fileUpload" style="width:75px;margin-top:8px;">
                                                     <span>change </span>
                                                     <input type="file" class="upload" id="logo_image_file" data-bind="files: { onLoaded: $root.LogoUrlImageCallback, fileFilter: 'image.*'}" />
                                                 </div>
@@ -231,7 +232,7 @@ else
                                             <label for="txtCampaignDisplayName" class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn" data-bind="text:$root.lblAdTitle">Ad Title</label>
                                         </div>
                                         <div class="col-lg-7">
-                                            <input type="text" maxlength="36" name="Campaign Display Name" class="form-control" id="txtCampaignDisplayName" placeholder="Ad title (36 characters)" data-bind="value: CampaignName,validationTooltip: DisplayTitle, validationOnElement: DisplayTitle">
+                                            <input type="text" maxlength="72" name="Campaign Display Name" class="form-control" id="txtCampaignDisplayName" placeholder="Ad title (72 characters)" data-bind="value: CampaignName,validationTooltip: DisplayTitle, validationOnElement: DisplayTitle">
                                         </div>
                                         <div class="col-lg-1" data-bind="visible:!$root.isDisplayCouponsAds()" style="  text-align: right;
     font-size: 17px;
@@ -609,7 +610,7 @@ else
                                         <label for="txtVerifyQuestion" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">50/50 Quiz question</label>
                                     </div>
                                     <div class="col-lg-7">
-                                        <input type="text" class="form-control" id="txtVerifyQuestion" placeholder="Enter your question (36 characters)" data-bind="value: VerifyQuestion" maxlength="36">
+                                        <input type="text" class="form-control" id="txtVerifyQuestion" placeholder="Enter your question (72 characters)" data-bind="value: VerifyQuestion" maxlength="72">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -617,7 +618,7 @@ else
                                         <label for="txtVerifyAnswer1" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Choice 1</label>
                                     </div>
                                     <div class="col-lg-4">
-                                        <input type="text" class="form-control" id="txtVerifyAnswer1" placeholder="Enter your answer 1 (50 characters)" data-bind="value: Answer1" maxlength="50">
+                                        <input type="text" class="form-control" id="txtVerifyAnswer1" placeholder="Enter your answer 1 (36 characters)" data-bind="value: Answer1" maxlength="36">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -625,7 +626,7 @@ else
                                         <label for="txtVerifyAnswer2" class="control-label text-right floatNone defaultImgUploadImageBtn">Choice 2</label>
                                     </div>
                                     <div class="col-lg-4">
-                                        <input type="text" class="form-control" id="txtVerifyAnswer2" placeholder="Enter your answer 2 (50 characters)" data-bind="value: Answer2" maxlength="50">
+                                        <input type="text" class="form-control" id="txtVerifyAnswer2" placeholder="Enter your answer 2 (36 characters)" data-bind="value: Answer2" maxlength="36">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -633,7 +634,7 @@ else
                                         <label for="txtVerifyAnswer3" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Choice 3</label>
                                     </div>
                                     <div class="col-lg-4">
-                                        <input type="text" class="form-control" id="txtVerifyAnswer3" placeholder="Enter your answer 3" data-bind="value: Answer3">
+                                        <input type="text" class="form-control" id="txtVerifyAnswer3" placeholder="Enter your answer 3 (36 characters)" data-bind="value: Answer3" maxlength="36">
                                     </div>
                                     <div class="col-lg-3">
                                         @*<a href="#" id="idpreviewquizscreen" class="btn btn-primary " data-toggle="modal" data-target=".model_quizQ_ph">
@@ -671,7 +672,7 @@ else
                                     <div class="col-lg-11">
                                         <div class="form-group" style="margin-bottom:20px; margin-top:20px;">
                                             <div class="col-lg-4 text-campaign-left  Float-Left">
-                                                <label class="control-label text-right tooltip-float font20 floatNone" style="float:left !important;    margin-left: 6px; ">Voucher Buy it</label>
+                                                <label class="control-label text-right tooltip-float font20 floatNone" style="float:left !important;    margin-left: 6px; ">Coupon Buy it</label>
                                             </div>
                                             <div class="col-lg-2 Float-Left" style="padding-top:3px;">
                                                 <div class="onoffswitch">
@@ -698,23 +699,24 @@ else
                                             <label for="txtBuyItLine1" class="control-label text-right tooltip-float floatNone">First Line</label>
                                         </div>
                                         <div class="col-lg-8">
-                                            <input type="text" class="form-control" id="txtBuyItLine1" placeholder="Enter Description  (36 characters)" data-bind="value: BuuyItLine1" maxlength="36">
+                                            <input type="text" class="form-control" id="txtBuyItLine1" placeholder="Enter Description  (72 characters)" data-bind="value: BuuyItLine1" maxlength="72">
                                         </div>
                                     </div>
-                                    <div class="form-group" data-bind="visible: $root.buyItQuestionStatus() == 1 ">
+                                    <div class="form-group displyNone" data-bind="visible: $root.buyItQuestionStatus() == 1 " style="display:none!important;">
                                         <div class="col-lg-2">
                                             <label for="txtBuyItLine2" class="control-label text-right tooltip-float floatNone">Second Line</label>
                                         </div>
                                         <div class="col-lg-8">
-                                            <input type="text" class="form-control" id="txtBuyItLine2" placeholder="Enter Description  (36 characters)" data-bind="value: BuyItLine2" maxlength="36">
+                                            <input type="text" class="form-control" id="txtBuyItLine2" placeholder="Enter Description  (72 characters)" data-bind="value: BuyItLine2" maxlength="72">
                                         </div>
                                     </div>
-                                    <div class="form-group" data-bind="visible: $root.buyItQuestionStatus() == 1 ">
+
+                                    <div class="form-group displyNone" data-bind="visible: $root.buyItQuestionStatus() == 1 " style="display:none!important;">
                                         <div class="col-lg-2">
                                             <label for="txtBuyItLine3" class="control-label text-right tooltip-float floatNone">Third Line </label>
                                         </div>
                                         <div class="col-lg-8">
-                                            <input type="text" class="form-control" id="txtBuyItLine3" placeholder="Enter Description  (36 characters)" data-bind="value: BuyItLine3" maxlength="36">
+                                            <input type="text" class="form-control" id="txtBuyItLine3" placeholder="Enter Description  (72 characters)" data-bind="value: BuyItLine3" maxlength="72">
                                         </div>
                                     </div>
                                     <div class="form-group" data-bind="visible: $root.buyItQuestionStatus() == 1 ">
@@ -722,7 +724,7 @@ else
                                             <label for="txtBuyItUrl" class="control-label text-right tooltip-float floatNone">Url </label>
                                         </div>
                                         <div class="col-lg-8">
-                                            <textarea class="form-control" id="txtBuyItUrl" rows="1" placeholder="Enter in landing page link " data-bind="value: VideoUrl" style="margin-top:5px;" maxlength="36"></textarea>
+                                            <textarea class="form-control" id="txtBuyItUrl" rows="1" placeholder="Enter in landing page link (72 characters) " data-bind="value: VideoUrl" style="margin-top:5px;" maxlength="72"></textarea>
                                         </div>
                                     </div>
                                     <div class="form-group" data-bind="visible: $root.buyItQuestionStatus() == 1 ">
@@ -730,7 +732,7 @@ else
                                             <label for="txtBuyItlbl" class="control-label text-right tooltip-float floatNone">Button Label </label>
                                         </div>
                                         <div class="col-lg-8">
-                                            <input type="text" class="form-control" id="txtBuyItlbl" placeholder="Enter Description  (36 characters)" data-bind="value: BuyItButtonLabel" maxlength="36">
+                                            <input type="text" class="form-control" id="txtBuyItlbl" placeholder="Enter Description  (72 characters)" data-bind="value: BuyItButtonLabel" maxlength="72">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -2744,7 +2746,7 @@ else
 </script>
 <script>
     function showUploadDialog() {
-        $("#logo_image_file").click();
+       $("#logo_image_file").click();
 
     }
     function showCouponDialog1() {
