@@ -13,6 +13,7 @@
                 selectedBranch = ko.observable(),
                 branchDdlist = ko.observableArray([]),
                 selectedCategory = ko.observable(),
+                afterBranchSelect = null,
                 selectedBranchField = ko.observable(),
                 isSaveChangesEnable = ko.observable(false),
                 isMapVisible = ko.observable(false);
@@ -41,6 +42,7 @@
                             if (callback && typeof callback === "function") {
                                 callback();
                             }
+                            
                         },
                         error: function () {
                             toastr.error("Failed to load branchCategory.");
@@ -104,7 +106,9 @@
                                                               }
                                                           })
                                                           selectedBranch(null);
-
+                                                      }
+                                                      if (afterBranchSelect && typeof afterBranchSelect === "function") {
+                                                          afterBranchSelect();
                                                       }
 
                                                   },
@@ -213,6 +217,9 @@
                                              }
                                          })
                                          selectedBranch(null);
+                                         if (afterBranchSelect && typeof afterBranchSelect === "function") {
+                                             afterBranchSelect();
+                                         }
                                      },
                                      error: function (response) {
                                          toastr.error("Failed to Delete Branch . Error: " + response);
@@ -297,7 +304,8 @@
                 resetTreeExpensionAfterSave = function (category) {
                     category.isExpanded(true);
                 },
-                showBranchDialoge = function () {
+                showBranchDialoge = function (callback) {
+                    afterBranchSelect = callback;
                     getBranchCategories(viewBranchDialog);
                 },
                 hideBranchCategoryDialog = function () {

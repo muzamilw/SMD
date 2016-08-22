@@ -27,6 +27,7 @@ namespace SMD.Implementation.Services
         {
             try
             {
+                branch.CompanyId = _companybranchrepository.CompanyId;
                 _companybranchrepository.Update(branch);
                 _companybranchrepository.SaveChanges();
                 return 0; ;
