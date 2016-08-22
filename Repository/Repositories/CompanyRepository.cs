@@ -84,23 +84,34 @@ namespace SMD.Repository.Repositories
             }
             return UserCompanyId;
         }
-        public bool updateCompany(UpdateUserProfileRequest request)
+        public bool updateCompany(Company request)
         {
-            var company = db.Companies.Where(g => g.CompanyId == request.companyId).SingleOrDefault();
+            var company = db.Companies.Where(g => g.CompanyId == request.CompanyId).SingleOrDefault();
             if(company != null)
             {
-                company.CompanyName = request.CompanyName;
-                company.AddressLine1 = request.Address1;
-                company.AddressLine2 = request.Address2;
-                company.CityId = request.CityId;
-                company.CountryId = request.CountryId;
-                company.State = request.State;
-                company.ZipCode = request.ZipCode;
-                company.Tel1 = request.AdvertContactPhone;
-                company.ReplyEmail = request.AdvertContactEmail;
-                company.PaypalCustomerId = request.PayPal;
-                company.PreferredPayoutAccount = 1;
-                company.VoucherSecretKey = request.VoucherSecretKey;
+
+              company.CompanyName= request.CompanyName;
+              company.Tel1= request.Tel1;
+              company.Tel2= request.Tel2;
+              
+              company.StripeCustomerId= request.StripeCustomerId;
+              company.SalesEmail= request.SalesEmail;
+              company.WebsiteLink= request.WebsiteLink;
+              company.VoucherSecretKey= request.VoucherSecretKey;
+              company.BillingAddressLine1= request.BillingAddressLine1;
+              company.BillingAddressLine2= request.BillingAddressLine2;
+              company.BillingState= request.BillingState;
+              company.BillingCountryId= request.BillingCountryId;
+              company.BillingCityId= request.BillingCityId;
+              company.BillingZipCode= request.BillingZipCode;
+              company.BillingPhone= request.BillingPhone;
+              company.BillingEmail= request.BillingEmail;
+              company.TwitterHandle= request.TwitterHandle;
+              company.FacebookHandle= request.FacebookHandle;
+              company.InstagramHandle= request.InstagramHandle;
+              company.PinterestHandle= request.PinterestHandle;
+
+
                 db.SaveChanges();
                 return true;
             }

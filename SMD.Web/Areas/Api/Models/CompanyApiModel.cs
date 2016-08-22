@@ -35,28 +35,30 @@ namespace SMD.MIS.Areas.Api.Models
         public string InstagramHandle { get; set; }
         public string PinterestHandle { get; set; }
 
+
+        public string LogoImageBase64 { get; set; }
         public byte[] LogoImageBytes
         {
             get
             {
-                if (string.IsNullOrEmpty(Logo))
+                if (string.IsNullOrEmpty(LogoImageBase64))
                 {
                     return null;
                 }
 
-                int firtsAppearingCommaIndex = Logo.IndexOf(',');
+                int firtsAppearingCommaIndex = LogoImageBase64.IndexOf(',');
 
                 if (firtsAppearingCommaIndex < 0)
                 {
                     return null;
                 }
 
-                if (Logo.Length < firtsAppearingCommaIndex + 1)
+                if (LogoImageBase64.Length < firtsAppearingCommaIndex + 1)
                 {
                     return null;
                 }
 
-                string sourceSubString = Logo.Substring(firtsAppearingCommaIndex + 1);
+                string sourceSubString = LogoImageBase64.Substring(firtsAppearingCommaIndex + 1);
 
                 try
                 {

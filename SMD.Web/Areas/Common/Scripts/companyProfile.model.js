@@ -4,7 +4,7 @@
       User = function (CompanyId, CompanyName, Tel1, Tel2, Logo,
           StripeCustomerId, SalesEmail, WebsiteLink, VoucherSecretKey, BillingAddressLine1, BillingAddressLine2,
           BillingState, BillingCountryId, BillingCityId, BillingZipCode, BillingPhone, BillingEmail, TwitterHandle, FacebookHandle,
-          InstagramHandle, PinterestHandle, Logo, LogoImageBytes) {
+          InstagramHandle, PinterestHandle, Logo, LogoImageBase64) {
           var
 
                 CompanyId = ko.observable(CompanyId),
@@ -29,7 +29,7 @@
                 InstagramHandle = ko.observable(InstagramHandle),
                 PinterestHandle = ko.observable(PinterestHandle),
                 Logo = ko.observable(Logo),
-                LogoImageBytes = ko.observable(LogoImageBytes),
+                LogoImageBase64 = ko.observable(LogoImageBase64),
 
 
 
@@ -74,7 +74,7 @@
                   FacebookHandle: FacebookHandle,
                   InstagramHandle: InstagramHandle,
                   PinterestHandle: PinterestHandle,
-                  LogoImageBytes: LogoImageBytes
+                  LogoImageBase64: LogoImageBase64
 
               }),
               // Has Changes
@@ -84,7 +84,35 @@
               // Reset
               reset = function () {
                   dirtyFlag.reset();
+              },
+          convertToServerData = function () {
+              
+              return {
+                  CompanyId:CompanyId(),
+                  CompanyName: CompanyName(),
+                  Tel1: Tel1(),
+                  Tel2: Tel2(),
+                  Logo: Logo(),
+                  StripeCustomerId: StripeCustomerId(),
+                  SalesEmail: SalesEmail(),
+                  WebsiteLink: WebsiteLink(),
+                  VoucherSecretKey: VoucherSecretKey(),
+                  BillingAddressLine1: BillingAddressLine1(),
+                  BillingAddressLine2: BillingAddressLine2(),
+                  BillingState: BillingState(),
+                  BillingCountryId: BillingCountryId(),
+                  BillingCityId: BillingCityId(),
+                  BillingZipCode: BillingZipCode(),
+                  BillingPhone: BillingPhone(),
+                  BillingEmail: BillingEmail(),
+                  TwitterHandle: TwitterHandle(),
+                  FacebookHandle: FacebookHandle(),
+                  InstagramHandle: InstagramHandle(),
+                  PinterestHandle: PinterestHandle(),
+                  LogoImageBase64: LogoImageBase64()
               };
+          };
+
 
           return {
               CompanyId:CompanyId,
@@ -108,9 +136,9 @@
               FacebookHandle: FacebookHandle,
               InstagramHandle: InstagramHandle,
               PinterestHandle: PinterestHandle,
-              LogoImageBytes: LogoImageBytes,
+              LogoImageBase64: LogoImageBase64,
 
-
+              convertToServerData:convertToServerData,
               hasChanges: hasChanges,
              
               reset: reset,
@@ -126,7 +154,7 @@
         return new User(objSrv.CompanyId, objSrv.CompanyName, objSrv.Tel1, objSrv.Tel2, objSrv.Logo,
           objSrv.StripeCustomerId, objSrv.SalesEmail, objSrv.WebsiteLink, objSrv.VoucherSecretKey, objSrv.BillingAddressLine1, objSrv.BillingAddressLine2,
           objSrv.BillingState, objSrv.BillingCountryId, objSrv.BillingCityId, objSrv.BillingZipCode, objSrv.BillingPhone, objSrv.BillingEmail, objSrv.TwitterHandle, objSrv.FacebookHandle,
-          objSrv.InstagramHandle, objSrv.PinterestHandle, objSrv.Logo, objSrv.LogoImageBytes);
+          objSrv.InstagramHandle, objSrv.PinterestHandle, objSrv.Logo, objSrv.LogoImageBase64);
      
     };
     
