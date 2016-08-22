@@ -23,7 +23,7 @@ else
                     <span class="pull-left Theme_standard_clr" style="padding-left:0px;font-size:28px;" data-bind="NewCampaignBinding: CampaignName,visible:$root.isDisplayCouponsAds()">New Coupon</span>
                     <span class="pull-left Theme_standard_clr" style="padding-left:0px;font-size:28px;" data-bind="NewCampaignBinding: CampaignName,visible:!$root.isDisplayCouponsAds()">New Campaign</span>
                     <span class="control-label bold heading-style pull-left" style="    margin-top: 6px;    margin-left: 40px;" data-bind="text:StatusValue()"></span>
-                    <div style="float:right"><button data-bind="click: $root.closeNewCampaignDialog" class="btn btn-default">Close</button></div>
+                    <div  style="float:right"><button id="btnClose" data-bind="click: $root.closeNewCampaignDialog" class="btn btn-default">Close</button></div>
                 </div>
 
                 <div class="row" style="margin-bottom:15px;">
@@ -838,8 +838,9 @@ else
                     <div class="col-lg-3 form-horizontal" style="    padding: 20px;    height: 1027px;    background: rgb(220,220,220);
     margin-left: 0px !important;">
                         <div class="col-xs-12" style="text-align: right; padding-right:0;margin-bottom:10px;">
-                            <div class="pull-left" style="    width: 85%;
-    text-align: left;">
+                            <div class="pull-left" style="    width: 100%;
+    text-align: right;">
+                                <button class="btn  btn-success btnSubmitApproval" id="btnSaveAsDraft" data-bind="click:$root.SaveDraftCampaign, visible: $root.isNewCampaign() " style="width:80%;">Save as Draft</button>
                                 <button class="btn  btn-success btnSubmitApproval" id="btnSubmitForApproval2" data-bind="click:$root.submitCampaignData, visible: $root.isNewCampaign() " style="width:80%;">Submit for Approval</button>
                                 <button class="btn  btn-info " id="btnStopAndTerminate" data-bind=" click:$root.terminateCampaign,visible: $root.isTerminateBtnVisible " style="width: 80%;margin-bottom:10px;">Stop & Terminate Early</button>
                                 <button class="btn  btn-danger " id="btnArchive" data-bind=" click:$root.ArchiveCampaign,visible: $root.isShowArchiveBtn " style="width: 80%;margin-bottom:10px;">Archive Campaign</button>
