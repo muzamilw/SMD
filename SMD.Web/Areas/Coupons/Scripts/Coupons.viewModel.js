@@ -1578,13 +1578,12 @@ define("Coupons/Coupons.viewModel",
 
                  },
                 locationChanged = function (item) {
-                    
-                        var matchedItem = ko.utils.arrayFirst(branchLocations(), function (arrayitem) {
+                    var matchedItem = ko.utils.arrayFirst(branchLocations(), function (arrayitem) {
 
-                            return arrayitem.BranchId == item.LocationBranchId();
-                        });
-                        if (matchedItem != null) {
-                        console.log(matchedItem);
+                        return arrayitem.BranchId == item.LocationBranchId();
+                    });
+                    console.log(matchedItem);
+                    if (matchedItem != null) {
                         item.LocationLine1(matchedItem.BranchAddressLine1);
                         item.LocationLine2(matchedItem.BranchAddressLine2);
                         item.LocationCity(matchedItem.BranchCity);
