@@ -1,5 +1,6 @@
 ﻿using SMD.Interfaces.Services;
 using SMD.Models.RequestModels;
+using SMD.Models.ResponseModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,7 +44,7 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// </summary>
 
 
-        public bool Post(string email, int companyId, string mode)
+        public BaseApiResponse Post(string email, int companyId, string mode)
         {
             try
             {
@@ -56,10 +57,10 @@ namespace SMD.MIS.Areas.Api.Controllers
                 {
                     emailManagerService.SendEmailInviteAdvertiser(email, companyId);
                 }
-                return true;
+                return new BaseApiResponse { Message = "Success", Status = true };
             } catch (Exception ex)
             {
-                return false;
+                return new BaseApiResponse { Message = ex.ToString(), Status = false };
             }
           
             
