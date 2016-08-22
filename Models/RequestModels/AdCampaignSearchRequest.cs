@@ -34,4 +34,19 @@ namespace SMD.Models.RequestModels
 
         public bool? ShowCoupons { get; set; }
     }
+    public class DownloadImageModel
+    {
+
+        /// <summary>
+        ///  text for searching 
+        /// </summary>
+        public string path { get; set; }
+
+        public int id { get; set; }
+
+
+        public int type { get; set; }
+
+        public int mode { get; set; }
+    }
 }

@@ -697,7 +697,7 @@ $.imgAreaSelect = function (img, options) {
 
 $.fn.imgAreaSelect = function (options) {
     options = options || {};
-
+  
     this.each(function () {
         if ($(this).data('imgAreaSelect')) {
             if (options.remove) {

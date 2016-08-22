@@ -45,11 +45,13 @@ namespace SMD.Repository.Repositories
             return db.DamImage.Where(g => g.ImageId == id).SingleOrDefault();
         }
 
-        public List<DamImage> getAllImages(int mode)
+        public List<DamImage> getAllImages(int mode, out int companyId)
         {
+            companyId = 0;
             var user = db.Users.Where(g => g.Id == LoggedInUserIdentity).SingleOrDefault();
             if (user == null)
                 return null;
+            companyId = user.CompanyId.Value;
             return db.DamImage.Where(g => g.CompanyId == user.CompanyId && g.ImageCategory == mode).ToList();
         }
 

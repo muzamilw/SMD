@@ -197,11 +197,13 @@ div#title {
 .imageBox {
     margin: 5px; float: left; height: 96px; border: 0; overflow: hidden;
     width: 128px;
+    cursor:pointer;
+    border: 1px solid #fff;
 }
 
 .imageBox:hover {
-    height: 104px; margin: 0; border: 1px solid #CCC; background: #FDFDFD;
-    z-index: 1; width: 136px;
+   border: 1px solid #CCC; background: #FDFDFD;
+    z-index: 1; 
 }
 
 .imagePreview {
@@ -215,12 +217,11 @@ div#title {
 /* Styles for the image uploader
 -----------------------------------------------------------*/
 #upload-choices {
-    width: 450px;
+   
     float: left;
 }
 
 #upload-cut {
-    margin-left: 480px;
     padding-top: 10px;
     min-width: 150px;
 }
@@ -265,4 +266,7 @@ div#title {
 
 .flickrImage {
     height: 96px; margin: 4px; float: left; cursor: pointer;
+}
+.row {
+    margin:0px 0px 0px 0px !important;
 }
