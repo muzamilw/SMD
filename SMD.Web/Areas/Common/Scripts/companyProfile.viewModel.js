@@ -95,7 +95,7 @@ define("common/companyProfile.viewModel",
                    },
 
                      LogoUrlImageCallback = function (file, data) {
-                         selectedCompany().LogoImageBytes(data);
+                         selectedCompany().LogoImageBase64(data);
                          selectedCompany().Logo('');
                      },
                       randonNumber = ko.observable("?r=0"),

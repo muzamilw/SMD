@@ -349,6 +349,7 @@ define("ads/ads.viewModel",
                     }
                     //show the main menu;
                     showMainMenu();
+                    $("input,button,textarea,a,select").removeAttr('disabled');
                 });
                 confirmation.show();
 
@@ -369,7 +370,7 @@ define("ads/ads.viewModel",
                     //show the main menu;
                     showMainMenu();
 
-
+                    $("input,button,textarea,a,select").removeAttr('disabled');
 
 
 
@@ -517,6 +518,9 @@ define("ads/ads.viewModel",
                 //    toastr.error("Please fill the required feilds to continue.");
                 //}
             },
+                SaveDraftCampaign = function () {
+                    saveCampaign(1);
+                },
               terminateCampaign = function () {
                   saveCampaign(7);
               },
@@ -1150,6 +1154,13 @@ define("ads/ads.viewModel",
                     isNewCampaignVisible(false);
                     isShowArchiveBtn(false);
                     if (item.Status() == 1 || item.Status() == 2 || item.Status() == 3 || item.Status() == 4 || item.Status() == null || item.Status() == 7 || item.Status() == 9) {
+
+                        if (item.Status() == 1)//because it is in draft mode.
+                            isNewCampaign(true);
+                        else
+                            isNewCampaign(false);
+
+
                         canSubmitForApproval(true);
                         dataservice.getCampaignData({
                             CampaignId: item.CampaignID(),
@@ -1275,9 +1286,12 @@ define("ads/ads.viewModel",
                                         campaignModel().StatusValue("Draft");
                                     } else if (campaignModel().Status() == 2) {
                                         $("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
+                                        
+
+
                                         $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,#btnPauseCampaign,.lang_delSurvey,.table-link").css("display", "none");
                                         $("#saveBtn").css("display", "none")
-                                        $("#btnCancel,#btnPauseCampaign").removeAttr('disabled');
+                                        $("#btnCancel,#btnPauseCampaign,#btnClose").removeAttr('disabled');
                                         campaignModel().StatusValue("Submitted for Approval");
                                     } else if (campaignModel().Status() == 3) {
                                         //$("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
@@ -1326,7 +1340,7 @@ define("ads/ads.viewModel",
                                     isEditorVisible(true);
                                     isListVisible(false);
                                     isFromEdit(true);
-                                    isNewCampaign(false);
+                                    
                                     //  buildMap();
 
                                     if (campaignModel().AdCampaignTargetLocations() != null && campaignModel().AdCampaignTargetLocations().length > 0) {
@@ -2469,7 +2483,9 @@ define("ads/ads.viewModel",
                     backScreen: backScreen,
                     CurrPage: CurrPage,
                     MaxPage: MaxPage,
-                    SearchSelectedStatus : SearchSelectedStatus
+                    SearchSelectedStatus: SearchSelectedStatus,
+                    SaveDraftCampaign: SaveDraftCampaign
+
                 };
             })()
         };

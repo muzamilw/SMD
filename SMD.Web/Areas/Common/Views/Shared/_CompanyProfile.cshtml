@@ -130,9 +130,9 @@
                                             </div>
                                             <div class="col-lg-8">
                                                 <div class="defaultImgUploadImage pull-left" style="width:300px;cursor:pointer;text-align:center">
-                                                    <img style="width:auto;max-width:300px;" data-bind="visible: LogoImageBytes() != '',attr: { src: LogoImageBytes  }" src="/Content/Images/Company_Default.png" onclick="showUploadDialog();" />
+                                                    <img style="width:auto;max-width:300px;" data-bind="visible: LogoImageBase64() != '',attr: { src: LogoImageBase64  }" src="/Content/Images/Company_Default.png" onclick="showUploadDialog();" />
                                                     <img style="width:auto;max-width:300px;" data-bind="visible: Logo() != '' ,attr: { src: Logo()  }" onclick="showUploadDialog();" />
-                                                    <div style="height:auto;width:300px;" onclick="showUploadDialog();" data-bind="visible: Logo() == '' &&   LogoImageBytes() == ''"></div>
+                                                    <div style="height:auto;width:300px;" onclick="showUploadDialog();" data-bind="visible: Logo() == '' &&   LogoImageBase64() == ''"></div>
                                                     <div style="    padding-top: 10px;    text-align: center;    font-size: 12px;    color: gray;">
                                                         (300 x 150 pixels)
                                                     </div>

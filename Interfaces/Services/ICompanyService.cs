@@ -15,5 +15,8 @@ namespace SMD.Interfaces.Services
         Company GetCompanyById(int CompanyId);
 
         Company GetCurrentCompany();
+
+
+        bool UpdateCompany(Company company, byte[] LogoImageBytes);
     }
 }
