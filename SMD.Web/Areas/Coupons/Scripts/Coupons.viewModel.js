@@ -47,10 +47,7 @@ define("Coupons/Coupons.viewModel",
                     isShowArchiveBtn = ko.observable(false),
                     isTerminateBtnVisible = ko.observable(false),
                     CurrencyDropDown = ko.observableArray([{ id: 1, name: "Choice 1" }, { id: 2, name: "Choice 2" }, { id: 3, name: "Choice 3" }, { id: 0, name: "Ask User Suggestion" }]),
-                    YearRangeDropDown = ko.observableArray([{ id: 2, name: "Current Year +2" }, { id: 3, name: "Current Year +3" }, { id: 4, name: "Current Year +4" },
-                    { id: 5, name: "Current Year +5" }, { id: 6, name: "Current Year +6" }, { id: 7, name: "Current Year +7" },
-                    { id: 8, name: "Current Year +8" }, { id: 9, name: "Current Year +9" }, { id: 10, name: "Current Year +10" },
-                    { id: 11, name: "Current Year +11" }, { id: 12, name: "Current Year +12" }]),
+                    YearRangeDropDown = ko.observableArray([]),
                     selectedIndustryIncludeExclude = ko.observable(true),
                     UserAndCostDetail = ko.observable(),
                     pricePerclick = ko.observable(0),
@@ -152,6 +149,7 @@ define("Coupons/Coupons.viewModel",
                                 ko.utils.arrayPushAll(branchLocations(), data.listBranches);
                                 branchLocations.valueHasMutated();
 
+                                BindPeriodDD();
                             }
 
                         },
@@ -213,7 +211,41 @@ define("Coupons/Coupons.viewModel",
                 });
 
             },
-
+           BindPeriodDD = function ()
+           {
+               var d = new Date();
+               var month = new Array();
+               month[0] = "January";
+               month[1] = "February";
+               month[2] = "March";
+               month[3] = "April";
+               month[4] = "May";
+               month[5] = "June";
+               month[6] = "July";
+               month[7] = "August";
+               month[8] = "September";
+               month[9] = "October";
+               month[10] = "November";
+               month[11] = "December";
+               var date = '';
+               var getMonth = month[d.getMonth()];
+               var len = 2;
+               for (counter = d.getMonth() ; counter < 12; counter++) {
+                   date = d.getFullYear() + ' - ' + month[counter];
+                   var dateobj = { id: len, name: date }
+                   YearRangeDropDown.push(dateobj);
+                   len++;
+               }
+               if (d.getMonth() < 12)
+               {
+                   for (i = 0; i < d.getMonth() ; i++) {
+                       date = (d.getFullYear() + 1) + ' - ' + month[i];
+                       var dateobj = { id: len, name: date }
+                       YearRangeDropDown.push(dateobj);
+                       len++;
+                   }
+               }
+           },
             updateCampaignGridItem = function (item) {
                 canSubmitForApproval(false);
                 if (item.Status == 1) {
@@ -381,14 +413,23 @@ define("Coupons/Coupons.viewModel",
               ArchiveCampaign = function () {
                   saveCampaign(8);
               },
+                OnchangeDateDD = function (data) {
+                    var res = data.split("-");
+                    couponModel().CouponActiveYear(res[0]);
+                    couponModel().CouponActiveMonth(res[1]);
+                    alert(res[0]);
+                }
+                ,
             saveCampaign = function (mode) {
 
+                debugger;
                 var isPopulateErrorList = false;
 
 
                 var selectedCouponCategories = $.grep(couponCategories(), function (n, i) {
                     return (n.IsSelected == true);
                 });
+
                 couponModel().CouponCategories.removeAll();
                 _.each(selectedCouponCategories, function (coup) {
 
@@ -400,7 +441,7 @@ define("Coupons/Coupons.viewModel",
 
                 couponModel().Status(mode);
 
-
+                //alert(couponModel().CouponActiveMonth(CouponActiveMonth));
                 var campignServerObj = couponModel().convertToServerData();
 
                 dataservice.addCampaignData(campignServerObj, {
@@ -783,7 +824,7 @@ define("Coupons/Coupons.viewModel",
                     isShowArchiveBtn(false);
                     CouponTitle(item.CouponTitle());
                     
-                   
+                    alert(item.CouponId());
                     if (item.Status() == 1 || item.Status() == 2 || item.Status() == 3 || item.Status() == 4 || item.Status() == null || item.Status() == 7 || item.Status() == 9) {
                         canSubmitForApproval(true);
                         dataservice.getCampaignData({
@@ -919,6 +960,14 @@ define("Coupons/Coupons.viewModel",
                         if (couponModel().Savings() == "" || couponModel().Savings() == undefined) {
                             hasErrors = true;
                             toastr.error("Please enter Saving.");
+                        }
+                    }
+                    
+                    if (previewScreenNumber() == 2) {
+                       
+                        if (couponModel().CouponQtyPerUser() == "" || couponModel().CouponQtyPerUser() == undefined) {
+                            hasErrors = true;
+                            toastr.error("Please enter Quantity.");
                         }
                     }
                     if (hasErrors)

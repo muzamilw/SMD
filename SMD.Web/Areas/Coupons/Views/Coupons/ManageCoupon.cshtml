@@ -281,7 +281,7 @@ else
                                         <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn"> Coupon can be issued</label>
                                     </div>
                                     <div class="col-lg-7">
-                                        <textarea class="form-control" id="txtCampaignDesc" rows="1" placeholder="max 2 characters" data-bind="value: CouponQtyPerUser" style=" width:50px; float: left; margin-right: 16px;" maxlength="2"></textarea>
+                                        <textarea class="form-control" id="txtCampaignDesc" rows="1"  data-bind="value: CouponQtyPerUser" style=" width:50px; float: left; margin-right: 16px;" maxlength="2"></textarea>
                                         at this branch per user
                                     </div>
                                 </div>
@@ -310,7 +310,7 @@ else
                                             <label for="">
                                                 <span class="defaultThemeTxtClr"></span>Select month any year to list this coupon
                                                 <br /><br />   
-                                                <select class="form-control" id="yearDropDown" data-bind="options: $root.YearRangeDropDown, optionsText: 'name', optionsValue: 'id', value: CouponActiveMonth"></select> 
+                                                <select class="form-control" id="yearDropDown" data-bind="options: $root.YearRangeDropDown, optionsText: 'name', optionsValue: 'id', value: CouponActiveMonth,event:{ change: $root.OnchangeDateDD}"></select> 
 
                                             </label>
                                             <span class="help-block text-right"></span>
@@ -323,7 +323,7 @@ else
                                     <div class="col-lg-11">*@
                                 <div class="form-group" >
                                     <div class="col-lg-2">
-                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Fine print # 1 </label>
+                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn wrapspace">Fine print # 1 </label>
                                     </div>
                                     <div class="col-lg-7">
                                         <textarea class="form-control" id="fineprint1" rows="1" placeholder="max 72 characters" data-bind="value: FinePrintLine1,click:$root.selectJobDescription" maxlength=" 72"></textarea>
@@ -336,7 +336,7 @@ else
                                 </div>
                                 <div class="form-group" >
                                     <div class="col-lg-2">
-                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Fine print # 2 </label>
+                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn wrapspace">Fine print # 2 </label>
                                     </div>
                                     <div class="col-lg-7">
                                         <textarea class="form-control" id="fineprint2" rows="1" placeholder="max 72 characters" data-bind="value: FinePrintLine2,click:$root.selectJobDescription" maxlength="72"></textarea>
@@ -349,7 +349,7 @@ else
                                 </div>
                                 <div class="form-group" >
                                     <div class="col-lg-2">
-                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Fine print # 3 </label>
+                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn wrapspace">Fine print # 3 </label>
                                     </div>
                                     <div class="col-lg-7">
                                         <textarea class="form-control" id="fineprint3" rows="1" placeholder="max 72 characters" data-bind="value: FinePrintLine3,click:$root.selectJobDescription" maxlength="72"></textarea>
@@ -362,7 +362,7 @@ else
                                 </div>
                                 <div class="form-group" >
                                     <div class="col-lg-2">
-                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Fine print # 4 </label>
+                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn wrapspace">Fine print # 4 </label>
                                     </div>
                                     <div class="col-lg-7">
                                         <textarea class="form-control" id="fineprint4" rows="1" placeholder="max 72 characters" data-bind="value: FinePrintLine4,click:$root.selectJobDescription" maxlength="72"></textarea>
@@ -375,7 +375,7 @@ else
                                 </div>
                                 <div class="form-group" >
                                     <div class="col-lg-2">
-                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Fine print # 5 </label>
+                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn wrapspace">Fine print # 5 </label>
                                     </div>
                                     <div class="col-lg-7">
                                         <textarea class="form-control" id="fineprint5" rows="1" placeholder="max 72 characters" data-bind="value: FinePrintLine5,click:$root.selectJobDescription" maxlength="72"></textarea>
@@ -388,7 +388,7 @@ else
                                 </div>
                                 <div class="form-group" >
                                     <div class="col-lg-2">
-                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn" style=" font-size: 12px; ">How to redeem # 1 </label>
+                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn wrapspace" style=" font-size: 12px; ">How to redeem # 1 </label>
                                     </div>
                                     <div class="col-lg-7">
                                         <textarea class="form-control" id="redeemline1" rows="1" placeholder="max 72 characters" data-bind="value: HowToRedeemLine1,click:$root.selectJobDescription" maxlength="72"></textarea>
@@ -401,7 +401,7 @@ else
                                 </div>
                                 <div class="form-group" >
                                     <div class="col-lg-2">
-                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn" style=" font-size: 12px; ">How to redeem # 2 </label>
+                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn wrapspace" style=" font-size: 12px; ">How to redeem # 2 </label>
                                     </div>
                                     <div class="col-lg-7">
                                         <textarea class="form-control" id="redeemline2" rows="1" placeholder="max 72 characters" data-bind="value: HowToRedeemLine2,click:$root.selectJobDescription" maxlength="72"></textarea>
@@ -414,7 +414,7 @@ else
                                 </div>
                                 <div class="form-group" >
                                     <div class="col-lg-2">
-                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn" style=" font-size: 12px; ">How to redeem # 3 </label>
+                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn wrapspace" style=" font-size: 12px; ">How to redeem # 3 </label>
                                     </div>
                                     <div class="col-lg-7">
                                         <textarea class="form-control" id="redeemline3" rows="1" placeholder="max 72 characters" data-bind="value: HowToRedeemLine3,click:$root.selectJobDescription" maxlength="72"></textarea>
@@ -427,7 +427,7 @@ else
                                 </div>
                                 <div class="form-group" >
                                     <div class="col-lg-2">
-                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn" style=" font-size: 12px; ">How to redeem # 4 </label>
+                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn wrapspace" style=" font-size: 12px; ">How to redeem # 4 </label>
                                     </div>
                                     <div class="col-lg-7">
                                         <textarea class="form-control" id="redeemline4" rows="1" placeholder="max 72 characters" data-bind="value: HowToRedeemLine4,click:$root.selectJobDescription" maxlength="72"></textarea>
@@ -440,7 +440,7 @@ else
                                 </div>
                                 <div class="form-group" >
                                     <div class="col-lg-2">
-                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn" style=" font-size: 12px; ">How to redeem # 5 </label>
+                                        <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn wrapspace" style=" font-size: 12px; ">How to redeem # 5 </label>
                                     </div>
                                     <div class="col-lg-7">
                                         <textarea class="form-control" id="redeemline5" rows="1" placeholder="max 72 characters" data-bind="value: HowToRedeemLine5,click:$root.selectJobDescription" maxlength="72"></textarea>
