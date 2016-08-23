@@ -1926,7 +1926,8 @@ define("Coupons/Coupons.viewModel",
                     selectJobDescription: selectJobDescription,
                     CloseCouponsView: CloseCouponsView,
                     CouponTitle: CouponTitle,
-                    StatusValue: StatusValue
+                    StatusValue: StatusValue,
+                    OnchangeDateDD: OnchangeDateDD
                 };
             })()
         };
