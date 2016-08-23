@@ -1,5 +1,5 @@
 ﻿define("Layout/Layout.viewModel",
-    ["jquery", "amplify", "ko", "Layout/Layout.dataService", "Layout/Layout.model","common/confirmation.viewModel"],
+    ["jquery", "amplify", "ko", "Layout/Layout.dataService", "Layout/Layout.model", "common/confirmation.viewModel"],
 
     function ($, amplify, ko, dataService, model, confirmation) {
 
@@ -18,6 +18,7 @@
                 isSaveChangesEnable = ko.observable(false),
                 isMapVisible = ko.observable(false);
                 isdeleteEnable = ko.observable(true),
+                isCodeAddressEdit = ko.observable(false),
                 counter = ko.observable(0),
                 defaultOpenBranchFieldName = ko.observable(),
                 viewBranchDialog = function () {
@@ -42,7 +43,7 @@
                             if (callback && typeof callback === "function") {
                                 callback();
                             }
-                            
+
                         },
                         error: function () {
                             toastr.error("Failed to load branchCategory.");
@@ -59,6 +60,8 @@
                                 selectedBranch(branch);
                                 isSaveChangesEnable(true);
                                 isdeleteEnable(true);
+                                isCodeAddressEdit(true)
+                                initializeGEO();
                                 codeAddress();
                                 isMapVisible(true);
 
@@ -264,54 +267,53 @@
 
                     }
                     confirmation.afterProceed(function () {
-                        if (category.brachFeilds().length > 0)
-                        {
+                        if (category.brachFeilds().length > 0) {
                             return;
                         }
                         else {
                             selectedCategory(category);
-                        dataService.DeleteCurrentCategory(
-                                    category.convertToServerData(), {
-                                        success: function (data) {
-                                            if (data == true)
-                                                branchCategory.remove(selectedCategory());
-                                        },
-                                        error: function (response) {
-                                            toastr.error("Failed to Delete Category . Error: " + response);
-                                        }
-                                    });
-                        dataService.getBranchCategory({
-                            success: function (data) {
-                                branchCategory.removeAll();
-                                branchDdlist.removeAll();
-                                _.each(data, function (item) {
+                            dataService.DeleteCurrentCategory(
+                                        category.convertToServerData(), {
+                                            success: function (data) {
+                                                if (data == true)
+                                                    branchCategory.remove(selectedCategory());
+                                            },
+                                            error: function (response) {
+                                                toastr.error("Failed to Delete Category . Error: " + response);
+                                            }
+                                        });
+                            dataService.getBranchCategory({
+                                success: function (data) {
+                                    branchCategory.removeAll();
+                                    branchDdlist.removeAll();
+                                    _.each(data, function (item) {
 
-                                    var category = new model.BranchCategory.Create(item);
-                                    branchDdlist.push(category);
-                                    _.each(item.CompanyBranches, function (branchFieldItem) {
-                                        var branchField = new model.BranchField.Create(branchFieldItem);
-                                        category.brachFeilds.push(branchField);
-                                    });
-                                    branchCategory.push(category);
+                                        var category = new model.BranchCategory.Create(item);
+                                        branchDdlist.push(category);
+                                        _.each(item.CompanyBranches, function (branchFieldItem) {
+                                            var branchField = new model.BranchField.Create(branchFieldItem);
+                                            category.brachFeilds.push(branchField);
+                                        });
+                                        branchCategory.push(category);
 
-                                });
-                                if (callback && typeof callback === "function") {
-                                    callback();
+                                    });
+                                    if (callback && typeof callback === "function") {
+                                        callback();
+                                    }
+
+                                },
+                                error: function () {
+                                    toastr.error("Failed to load branchCategory.");
                                 }
-
-                            },
-                            error: function () {
-                                toastr.error("Failed to load branchCategory.");
-                            }
-                        });
+                            });
                         }
-                        
+
                     });
 
                     confirmation.afterCancel(function () {
                         confirmation.hide();
                     });
-                   
+
                 },
                 EditCategory = function (category) {
                     selectedCategory(category)
@@ -335,15 +337,15 @@
                               isMapVisible(true);
                               return true;
                           }
-                          
-                          
+
+
                       }
                       else {
 
                           return false;
                       }
-                     
-                      
+
+
                   }),
                 CreateNewBranchLocation = function () {
 
@@ -436,7 +438,7 @@
                     // branches.removeAll();
                     selectedBranchField(brachFeilds);
                     getBranchesByBranchFieldId(brachFeilds.branchId());
-                  
+
 
                 },
                 selectCategory = function (category, event) {
@@ -474,20 +476,24 @@
 
                }
                 codeAddress = function () {
+
                     // var address = selectedBranch().branchAddressline1().toLowerCase() + ',' + selectedBranch().branchCity().toLowerCase() + ',' + selectedBranch().branchZipCode() + ',' + selectedBranch().branchState().toLowerCase();
                     var address = selectedBranch().branchAddressline1().toLowerCase() + ' ' + selectedBranch().branchCity().toLowerCase() + ' ' + selectedBranch().branchZipCode() + ' ' + selectedBranch().branchState().toLowerCase();
                     geocoder.geocode({
                         'address': address
                     }, function (results, status) {
                         if (status == google.maps.GeocoderStatus.OK) {
-                            selectedBranch().branchLocationLat(results[0].geometry.location.lat());
-                            selectedBranch().branchLocationLon(results[0].geometry.location.lng());
+                            if (isCodeAddressEdit() == false) {
+                                selectedBranch().branchLocationLat(results[0].geometry.location.lat());
+                                selectedBranch().branchLocationLon(results[0].geometry.location.lng());
+                            }
                             map.setCenter(results[0].geometry.location);
 
                             var marker = new google.maps.Marker({
                                 map: map,
                                 position: results[0].geometry.location
                             });
+                            isCodeAddressEdit(false);
                         } else {
                             toastr.error("Failed to Search Address,please add valid address and search it . Error: " + status);
                             isMapVisible(false);
@@ -533,7 +539,7 @@
                      view = specifiedView;
                      var geocoder;
                      var map;
-                   //  initializeGEO();
+                     //  initializeGEO();
                      ko.applyBindings(view.viewModel, view.bindingRoot);
                      ko.applyBindings(view.viewModel, view.bindingPartial);
                  };
