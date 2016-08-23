@@ -110,6 +110,7 @@
                                                           })
                                                       }
                                                       selectedBranch(null);
+                                                      isCodeAddressEdit(false);
                                                       if (afterBranchSelect && typeof afterBranchSelect === "function") {
                                                           afterBranchSelect();
                                                       }
