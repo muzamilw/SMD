@@ -685,11 +685,11 @@ namespace SMD.MIS.Controllers
                  AuthenticationManager.SignIn(new AuthenticationProperties { IsPersistent = true }, identity);
 
                  if ( RoleId == "Supernova_Admin")
-                    return RedirectToLocal("/SupernovaDashboard/Index");
+                    return RedirectToLocal("/Supernova/Dashboard/Index");
                  else if (RoleId.StartsWith("Franchise_"))
-                     return RedirectToLocal("/FranchiseDashboard/Index");
+                     return RedirectToLocal("/Franchise/Dashboard/Index");
                  else
-                     return RedirectToLocal("/SupernovaDashboard/Index");
+                     return RedirectToLocal("");
 
              }
              else
