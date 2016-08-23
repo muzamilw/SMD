@@ -30,36 +30,8 @@ namespace SMD.Implementation.Identity
 
         public string LoggedInUserId { get { return HttpContext.Current.User.Identity.GetUserId(); } }
 
-        public string LoggedInUserRole {
-            get
-            {
-                if (!HttpContext.Current.User.Identity.IsAuthenticated ||
-                    string.IsNullOrEmpty(HttpContext.Current.User.Identity.GetUserId()))
-                {
-                    return string.Empty;
-                }
 
-                if (HttpContext.Current.User.IsInRole(Roles.User))
-                {
-                    return Roles.User;
-                }
-                if (HttpContext.Current.User.IsInRole(Roles.Adminstrator))
-                {
-                    return Roles.Adminstrator;
-                }
-                if (HttpContext.Current.User.IsInRole(Roles.Approver))
-                {
-                    return Roles.Approver;
-                }
-                if (HttpContext.Current.User.IsInRole(Roles.Editor))
-                {
-                    return Roles.Editor;
-                }
-
-                return Roles.User;
-            } 
-        }
-
+        
         /// <summary>
         /// Send Email
         /// </summary>

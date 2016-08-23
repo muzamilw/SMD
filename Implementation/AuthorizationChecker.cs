@@ -36,7 +36,7 @@ namespace SMD.Implementation
         public bool IsPortalAdministrator()
         {
             IList<SmdRoleClaimValue> roles = ClaimHelper.GetClaimsByType<SmdRoleClaimValue>(ClaimTypes.Role);
-            return roles.Any(role => role.Role == SecurityRoles.Admin);
+            return roles.Any(role => role.Role == SecurityRoles.Supernova_Admin);
         }
 
         /// <summary>

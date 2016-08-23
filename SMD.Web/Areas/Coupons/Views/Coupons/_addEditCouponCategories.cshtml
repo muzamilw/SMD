@@ -28,18 +28,27 @@
 <script id="productCategoryDialogTemplate" type="text/html">
     <li class="dd-item dd-item-list" data-bind="attr: { id: CategoryId }">
         <div class="dd-handle" style="padding-left:18px!important;">
-            <div>
+            <div id="Checkedcol">
                 <span data-bind="text: Name" style="font-size:12px!important;">
 
                 </span>
-                <input type="checkbox" class="bigcheckbox" style="float:right" data-bind="checked: IsSelected" />
+                <input name="mcheck" type="checkbox" onclick="onchangeCheckbox();"  class="bigcheckbox" style="float:right" data-bind="    checked: IsSelected" />
             </div>
-
-
 
         </div>
     </li>
 </script>
 
+<script type="text/javascript">
+    function onchangeCheckbox()
+    {
+        $('.bigcheckbox').change(function () {
+            if ($('input.bigcheckbox').filter(':checked').length == 3)
+                $('input.bigcheckbox:not(:checked)').attr('disabled', 'disabled');
+            else
+                $('input.bigcheckbox').removeAttr('disabled');
+        });
+    }
+</script>
 
 @* Wizard Popup ends here*@

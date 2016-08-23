@@ -58,8 +58,7 @@ namespace SMD.Repository.Repositories
         {
             bool isAdmin = false;
             var users = db.Users.Where(g => g.Id == LoggedInUserIdentity).SingleOrDefault();
-            if (users.Roles.FirstOrDefault().Name == Roles.Adminstrator)
-                isAdmin = true;
+          
             if (request == null)
             {
                 int fromRow = 0;
@@ -193,8 +192,7 @@ namespace SMD.Repository.Repositories
             if(usr!= null)
             {
                 bool isAdmin = false;
-                if (usr.Roles.FirstOrDefault().Name == Roles.Adminstrator)
-                    isAdmin = true;
+            
          
                  data.CityId =usr.Company == null? null: usr.Company.CityId;
                  data.CountryId = usr.Company == null ? null : usr.Company.CountryId; 

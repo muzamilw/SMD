@@ -405,12 +405,13 @@ a.reportAnchor a:hover {
 #topArea {
     padding-left:14px;
 }
-.control-label {
-   white-space: nowrap;
-}
+
 .padding_top {
     padding-top:2px!important;
 }
 .padding_left19 {
     padding-left:19px!important;
+}
+.wrapspace {
+     white-space: nowrap;
 }

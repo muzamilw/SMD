@@ -1158,10 +1158,10 @@ namespace SMD.Implementation.Services
                 return ThrowRegisterUserErrors(result);
             }
 
-            var addUserToRoleResult = await UserManager.AddToRoleAsync(user.Id, Roles.User); // Only Type 'User' Role will be registered from app
+            var addUserToRoleResult = await UserManager.AddToRoleAsync(user.Id, SecurityRoles.EndUser_Admin); // Only Type 'User' Role will be registered from app
             if (!addUserToRoleResult.Succeeded)
             {
-                throw new InvalidOperationException(string.Format("Failed to add user to role {0}", Roles.User));
+                throw new InvalidOperationException(string.Format("Failed to add user to role {0}", SecurityRoles.EndUser_Admin));
             }
             int companyId = companyRepository.createCompany(user.Id, request.Email, request.FullName,Guid.NewGuid().ToString());
             var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
@@ -1201,10 +1201,10 @@ namespace SMD.Implementation.Services
                 return ThrowRegisterUserErrors(result);
             }
 
-            var addUserToRoleResult = await UserManager.AddToRoleAsync(user.Id, Roles.User); // Only Type 'User' Role will be registered from app
+            var addUserToRoleResult = await UserManager.AddToRoleAsync(user.Id, SecurityRoles.EndUser_Admin); // Only Type 'User' Role will be registered from app
             if (!addUserToRoleResult.Succeeded)
             {
-                throw new InvalidOperationException(string.Format("Failed to add user to role {0}", Roles.User));
+                throw new InvalidOperationException(string.Format("Failed to add user to role {0}", SecurityRoles.EndUser_Admin));
             }
             int companyId = companyRepository.createCompany(user.Id, request.Email, request.FullName, Guid.NewGuid().ToString());
             

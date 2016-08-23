@@ -28,7 +28,7 @@
               CouponImage3 = ko.observable(CouponImage3),
               CouponIssuedCount = ko.observable(CouponIssuedCount),
               CouponListingMode = ko.observable(CouponListingMode),
-              CouponQtyPerUser = ko.observable(CouponQtyPerUser),
+              CouponQtyPerUser = ko.observable(CouponQtyPerUser).extend({ required: true}),
               CouponRedeemedCount = ko.observable(CouponRedeemedCount),
               CouponTitle = ko.observable(CouponTitle),
               CouponViewCount = ko.observable(CouponViewCount),

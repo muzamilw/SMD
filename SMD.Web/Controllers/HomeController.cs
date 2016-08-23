@@ -76,14 +76,8 @@ namespace SMD.MIS.Controllers
         public ActionResult Welcome()
         {
 
-            if (UserManager.LoggedInUserRole != (string)Roles.User)
-            {
-                ViewBag.isUser = false;
-            }
-            else
-            {
-                ViewBag.isUser = true;
-            }
+
+            ViewBag.isUser = true;
             return View();
         }
     }
