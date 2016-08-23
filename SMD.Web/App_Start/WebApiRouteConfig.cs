@@ -293,7 +293,12 @@ namespace SMD.MIS
             routeHandlers);
 
 
-             
+           config.Routes.MapHttpRoute(
+            "ReferUsers",
+            "ReferUsers/{AuthenticationToken}/",
+            new { controller = "ReferUsers" },
+            null,
+            routeHandlers);
 
             
 

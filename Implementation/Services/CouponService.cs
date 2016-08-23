@@ -574,10 +574,24 @@ namespace SMD.Implementation.Services
 
         public List<Coupon> GetCouponsByCompanyId(int CompanyId)
         {
+
+            var company = this._companyService.GetCompanyById(CompanyId);
+
             var res =couponRepository.GetCouponsByCompanyId(CompanyId);
             foreach (var coupon in res)
 	        {
 		        coupon.DaysLeft =Convert.ToInt32( (new DateTime(coupon.CouponActiveYear.Value, coupon.CouponActiveMonth.Value, DateTime.DaysInMonth(coupon.CouponActiveYear.Value, coupon.CouponActiveMonth.Value)) - DateTime.Today).TotalDays);
+
+
+                    if (coupon.LogoUrl == null)
+                    {
+                        coupon.LogoUrl = "http://manage.cash4ads.com/" + company.Logo;
+                    }
+                    else
+                    {
+                        coupon.LogoUrl = "http://manage.cash4ads.com/" + coupon.LogoUrl;
+                    }
+                
             }
             return res;
           }

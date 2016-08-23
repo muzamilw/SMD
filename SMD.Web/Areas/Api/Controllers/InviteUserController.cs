@@ -60,7 +60,7 @@ namespace SMD.MIS.Areas.Api.Controllers
             if (User == null) // user does not exists
             {
 
-                var userr = manageUserService.AddUserInvitation(request.Email, request.RoleId);
+                var userr = manageUserService.AddManageUserInvitation(request.Email, request.RoleId);
 
                
                 return true;

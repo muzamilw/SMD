@@ -71,9 +71,11 @@ namespace SMD.Repository.Repositories
                 Company company = new Company();
                 company.ReplyEmail = email;
                 company.CompanyName = fullname;
+                company.ReferralCode = Guid.NewGuid().ToString();
                 db.Companies.Add(company);
                 db.SaveChanges();
                 UserCompanyId = company.CompanyId;
+
             
             var user = db.Users.Where(g => g.Id == userId).SingleOrDefault();
             if (user != null)

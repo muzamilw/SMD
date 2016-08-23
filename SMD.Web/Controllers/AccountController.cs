@@ -182,8 +182,8 @@ namespace SMD.MIS.Controllers
         private ActionResult RedirectToLocal(string returnUrl)
         {
 
-            if (UserManager.LoggedInUserRole !=  "" && UserManager.LoggedInUserRole != (string)Roles.User)
-            {
+            //if (UserManager.LoggedInUserRole !=  "" && UserManager.LoggedInUserRole != (string)Roles.User)
+            //{
                 if (Url.IsLocalUrl(returnUrl))
                 {
                     return Redirect(returnUrl);
@@ -192,11 +192,11 @@ namespace SMD.MIS.Controllers
                 {
                     return RedirectToAction("Welcome", "Home", new { area = "" });
                 }
-            }
-            else
-            {
-                return RedirectToAction("Index","Ads", new { area = "Ads" });
-            }
+            //}
+            //else
+            //{
+            //    return RedirectToAction("Index","Ads", new { area = "Ads" });
+            //}
         }
         //
         // GET: /Account/AutoLogin
@@ -300,10 +300,10 @@ namespace SMD.MIS.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    var addUserToRoleResult = await UserManager.AddToRoleAsync(user.Id, Roles.User); // Only Type 'User' Role will be registered from app
+                    var addUserToRoleResult = await UserManager.AddToRoleAsync(user.Id, SecurityRoles.EndUser_Admin); // Only Type 'User' Role will be registered from app
                     if (!addUserToRoleResult.Succeeded)
                     {
-                        throw new InvalidOperationException(string.Format("Failed to add user to role {0}", Roles.User));
+                        throw new InvalidOperationException(string.Format("Failed to add user to role {0}", SecurityRoles.EndUser_Admin));
                     }
 
 
@@ -660,7 +660,7 @@ namespace SMD.MIS.Controllers
                  var companyrec = companyService.GetCompanyById(company.companyid);
 
 
-                 return RedirectToAction("SetCompany", "Account", new { CompanyId = company.companyid, Role = company.RoleName, CompanyName = company.CompanyName, CompanyLogo = companyrec.Logo });
+                 return RedirectToAction("SetCompany", "Account", new { CompanyId = company.companyid, Role = company.RoleName, CompanyName = company.CompanyName, CompanyLogo = companyrec.Logo, RoleId = company.RoleId });
             }
             else
             {
@@ -670,7 +670,7 @@ namespace SMD.MIS.Controllers
 
 
          [HttpGet]
-         public async Task<ActionResult> SetCompany(string CompanyId, string Role, string CompanyName, string CompanyLogo)
+         public async Task<ActionResult> SetCompany(string CompanyId, string Role, string CompanyName, string CompanyLogo, string RoleId)
          {
              User user = UserManager.FindById(User.Identity.GetUserId());
              ClaimsIdentity identity = await user.GenerateUserIdentityAsync(UserManager, DefaultAuthenticationTypes.ApplicationCookie);
@@ -683,7 +683,14 @@ namespace SMD.MIS.Controllers
                  SetupUserClaims(identity);
                  claimsSecurityService.AddCompanyIdClaimToIdentity(identity, Convert.ToInt32(CompanyId), CompanyName,CompanyLogo);
                  AuthenticationManager.SignIn(new AuthenticationProperties { IsPersistent = true }, identity);
-                 return RedirectToLocal("");
+
+                 if ( RoleId == "Supernova_Admin")
+                    return RedirectToLocal("/SupernovaDashboard/Index");
+                 else if (RoleId.StartsWith("Franchise_"))
+                     return RedirectToLocal("/FranchiseDashboard/Index");
+                 else
+                     return RedirectToLocal("/SupernovaDashboard/Index");
+
              }
              else
              {

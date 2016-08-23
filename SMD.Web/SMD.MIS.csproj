@@ -439,7 +439,7 @@
     <Compile Include="Areas\Api\Controllers\AdViewedController.cs" />
     <Compile Include="Areas\Api\Controllers\InvoiceDetailController.cs" />
     <Compile Include="Areas\Api\Controllers\InvoiceController.cs" />
-    <Compile Include="Areas\Api\Controllers\SendInviteUsingWebController.cs" />
+    <Compile Include="Areas\Api\Controllers\ReferUsersController.cs" />
     <Compile Include="Areas\Api\Controllers\StatementController.cs" />
     <Compile Include="Areas\Api\Controllers\UserBalanceInquiryController.cs" />
     <Compile Include="Areas\Api\Controllers\SurveyAudienceController.cs" />
@@ -534,6 +534,8 @@
     <Compile Include="Areas\ProfileQuestion\Controllers\ManageController.cs" />
     <Compile Include="Areas\Report\Controllers\ReportController.cs" />
     <Compile Include="Areas\Report\ReportAreaRegistration.cs" />
+    <Compile Include="Areas\SuperNova\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\SuperNova\SuperNovaAreaRegistration.cs" />
     <Compile Include="Areas\User\Controllers\ManageUserController.cs" />
     <Compile Include="Areas\User\UserAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -587,6 +589,13 @@
       <DependentUpon>User.aspx</DependentUpon>
     </Compile>
     <Compile Include="TypeRegistrations.cs" />
+    <Compile Include="Views\EmailTester.aspx.cs">
+      <DependentUpon>EmailTester.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\EmailTester.aspx.designer.cs">
+      <DependentUpon>EmailTester.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Common\Scripts\phraseLibrary.dataservice.js" />
@@ -1669,6 +1678,10 @@
     <Content Include="Content\less\Campaign.css.map">
       <DependentUpon>Campaign.css</DependentUpon>
     </Content>
+    <Content Include="Areas\SuperNova\Views\Shared\_Layout.cshtml" />
+    <None Include="Areas\SuperNova\Views\web.config" />
+    <Content Include="Areas\SuperNova\Views\Dashboard\Index.cshtml" />
+    <Content Include="Areas\SuperNova\Views\_ViewStart.cshtml" />
     <None Include="config\Web.connectionstrings.config" />
     <None Include="Properties\PublishProfiles\mz profile.pubxml" />
     <None Include="Properties\PublishProfiles\SMD MIS Saqib.pubxml" />
@@ -2735,6 +2748,7 @@
     <Content Include="Scripts\underscore.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="ReportViewers\User.aspx" />
+    <Content Include="Views\EmailTester.aspx" />
     <Content Include="Views\Home\-------Login.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -2775,6 +2789,7 @@
     <Content Include="Views\Account\SelectCompany.cshtml" />
     <Content Include="Views\Account\AcceptInvitation.cshtml" />
     <Content Include="Views\Shared\_Layout - Copy.cshtml" />
+    <Content Include="Views\Shared\_Layout_Supernova.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2792,6 +2807,7 @@
     <Folder Include="Areas\Common\Models\" />
     <Folder Include="Areas\Coupons\Models\" />
     <Folder Include="Areas\Report\Models\" />
+    <Folder Include="Areas\SuperNova\Models\" />
     <Folder Include="Areas\Survey\Models\" />
     <Folder Include="Content\themes\base\minified\images\" />
     <Folder Include="Models\" />
