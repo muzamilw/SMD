@@ -61,6 +61,7 @@
                                 isSaveChangesEnable(true);
                                 isdeleteEnable(true);
                                 isCodeAddressEdit(true)
+                                initializeGEO();
                                 codeAddress();
                                 isMapVisible(true);
 
