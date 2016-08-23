@@ -55,6 +55,9 @@ namespace SMD.Implementation.Services
 
             var result = managerUserRepository.GetCompaniesByUserId(UserId);
 
+            
+
+
             //addding the main company to the result.
             var rec = new vw_CompanyUsers{
         id = -999,
@@ -63,9 +66,10 @@ namespace SMD.Implementation.Services
         CreatedOn = usr.CreatedDateTime.HasValue == true ? usr.CreatedDateTime.Value:DateTime.Now,
         email = usr.Email,
         FullName = usr.FullName,
-        RoleName = "Administrator",
+        RoleName = usr.Roles.First().Name,
         status = "active",
-        UserId = UserId
+        UserId = UserId,
+        RoleId = usr.Roles.First().Id
             
         };
 

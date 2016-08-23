@@ -8096,3 +8096,15 @@ GO
 
 ALTER TABLE [dbo].Company
 ALTER COLUMN ReferralCode [nvarchar](128) NULL
+
+
+
+
+INSERT INTO [dbo].[AspNetRoles]            ([Id]           ,[Name])     VALUES           ('Franchise_Account_Manager','Franchise Account Manager')
+INSERT INTO [dbo].[AspNetRoles]            ([Id]           ,[Name])     VALUES           ('Franchise_Creative','Franchise Creative')
+INSERT INTO [dbo].[AspNetRoles]            ([Id]           ,[Name])     VALUES           ('Franchise_Admin','Franchise Admin')
+INSERT INTO [dbo].[AspNetRoles]            ([Id]           ,[Name])     VALUES           ('Franchise_Approvers ','Franchise Approver')
+INSERT INTO [dbo].[AspNetRoles]            ([Id]           ,[Name])     VALUES           ('EndUser_Accounts','EndUser Accounts')
+INSERT INTO [dbo].[AspNetRoles]            ([Id]           ,[Name])     VALUES           ('EndUser_Creative','EndUser Creative')
+INSERT INTO [dbo].[AspNetRoles]            ([Id]           ,[Name])     VALUES           ('EndUser_Admin','EndUser Admin')
+INSERT INTO [dbo].[AspNetRoles]            ([Id]           ,[Name])     VALUES           ('Supernova_Admin','Supernova Admin')

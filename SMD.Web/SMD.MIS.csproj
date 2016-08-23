@@ -2788,6 +2788,7 @@
     <Content Include="Views\Account\SelectCompany.cshtml" />
     <Content Include="Views\Account\AcceptInvitation.cshtml" />
     <Content Include="Views\Shared\_Layout - Copy.cshtml" />
+    <Content Include="Views\Shared\_Layout_Supernova.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
