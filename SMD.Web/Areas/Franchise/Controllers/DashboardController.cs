@@ -18,5 +18,15 @@ namespace SMD.MIS.Areas.Franchise.Controllers
         {
             return View();
         }
+
+
+
+        /// <summary>
+        /// Manage Survey Question Approval Action 
+        /// </summary>
+        public ActionResult SurveyQuestionApproval()
+        {
+            return View();
+        }
     }
 }

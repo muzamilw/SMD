@@ -657,10 +657,10 @@
     <Content Include="Areas\ProfileQuestion\Scripts\paypalExample.viewModel.js" />
     <Content Include="Areas\ProfileQuestion\Scripts\stripeExample.viewModel.js" />
     <Content Include="Areas\ProfileQuestion\Scripts\pQuestion.viewModel.js" />
-    <Content Include="Areas\Survey\Scripts\surveyQuestionApp.dataservice.js" />
-    <Content Include="Areas\Survey\Scripts\surveyQuestionApp.model.js" />
-    <Content Include="Areas\Survey\Scripts\surveyQuestionApp.view.js" />
-    <Content Include="Areas\Survey\Scripts\surveyQuestionApp.viewModel.js" />
+    <Content Include="Areas\Franchise\Scripts\surveyQuestionApp.dataservice.js" />
+    <Content Include="Areas\Franchise\Scripts\surveyQuestionApp.model.js" />
+    <Content Include="Areas\Franchise\Scripts\surveyQuestionApp.view.js" />
+    <Content Include="Areas\Franchise\Scripts\surveyQuestionApp.viewModel.js" />
     <Content Include="Areas\Survey\Scripts\survey.dataservice.js" />
     <Content Include="Areas\Survey\Scripts\survey.model.js" />
     <Content Include="Areas\Survey\Scripts\survey.view.js" />
@@ -1621,7 +1621,7 @@
     <Content Include="Areas\Survey\Views\Shared\_AddEditSurvey.cshtml" />
     <Content Include="Content\less\Campaign.less" />
     <Content Include="Content\less\Survey.less" />
-    <Content Include="Areas\Survey\Views\Survey\SurveyQuestionApproval.cshtml" />
+    <Content Include="Areas\Franchise\Views\Dashboard\SurveyQuestionApproval.cshtml" />
     <Content Include="Areas\Survey\Views\Survey\_SurveyQuestionEditor.cshtml" />
     <Content Include="Areas\Ads\Views\Ads\_addEditor.cshtml" />
     <Content Include="Areas\Ads\Views\Ads\AddAproval.cshtml" />

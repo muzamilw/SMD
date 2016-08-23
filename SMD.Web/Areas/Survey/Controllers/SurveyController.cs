@@ -15,13 +15,7 @@ namespace SMD.MIS.Areas.Survey.Controllers
         }
       
 
-        /// <summary>
-        /// Manage Survey Question Approval Action 
-        /// </summary>
-        public ActionResult SurveyQuestionApproval()
-        {
-            return View();
-        }
+
       
     }
 }
