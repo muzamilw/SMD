@@ -147,11 +147,12 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-3 pull-left" data-bind="visible:$root.isMapVisible() && $root.isAddressFilled" style="margin-top:17px">
-                                <a href="#" class="table-link danger" data-bind="visible:$root.isAddressFilled,click: $root.CodeAddressonMap" style="margin-top:50px">
+                            <div class="col-lg-3 pull-left" data-bind="visible:$root.isMapVisible() && $root.isAddressFilled" style="margin-top:116px">
+                                <button type="button" data-bind="visible:$root.isAddressFilled,click: $root.CodeAddressonMap" class=" btn btn-primary">Locate on Map</button>
+                                @*<a href="#" class="table-link danger" data-bind="visible:$root.isAddressFilled,click: $root.CodeAddressonMap" style="margin-top:50px">
                                     Locate on Map
-                                </a>
-                                <div data-bind="visible:$root.isAddressFilled" style="width:95%;height:239px; border:2px solid" id="map-canvas"></div>
+                                </a>*@
+                                <div data-bind="visible:$root.isAddressFilled" style="width:95%;height:239px; margin-top:10px; border:2px solid" id="map-canvas"></div>
 
                             </div>
 
