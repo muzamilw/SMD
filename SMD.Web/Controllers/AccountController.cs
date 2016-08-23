@@ -182,8 +182,8 @@ namespace SMD.MIS.Controllers
         private ActionResult RedirectToLocal(string returnUrl)
         {
 
-            if (UserManager.LoggedInUserRole !=  "" && UserManager.LoggedInUserRole != (string)Roles.User)
-            {
+            //if (UserManager.LoggedInUserRole !=  "" && UserManager.LoggedInUserRole != (string)Roles.User)
+            //{
                 if (Url.IsLocalUrl(returnUrl))
                 {
                     return Redirect(returnUrl);
@@ -192,11 +192,11 @@ namespace SMD.MIS.Controllers
                 {
                     return RedirectToAction("Welcome", "Home", new { area = "" });
                 }
-            }
-            else
-            {
-                return RedirectToAction("Index","Ads", new { area = "Ads" });
-            }
+            //}
+            //else
+            //{
+            //    return RedirectToAction("Index","Ads", new { area = "Ads" });
+            //}
         }
         //
         // GET: /Account/AutoLogin
@@ -300,10 +300,10 @@ namespace SMD.MIS.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    var addUserToRoleResult = await UserManager.AddToRoleAsync(user.Id, Roles.User); // Only Type 'User' Role will be registered from app
+                    var addUserToRoleResult = await UserManager.AddToRoleAsync(user.Id, SecurityRoles.EndUser_Admin); // Only Type 'User' Role will be registered from app
                     if (!addUserToRoleResult.Succeeded)
                     {
-                        throw new InvalidOperationException(string.Format("Failed to add user to role {0}", Roles.User));
+                        throw new InvalidOperationException(string.Format("Failed to add user to role {0}", SecurityRoles.EndUser_Admin));
                     }
 
 

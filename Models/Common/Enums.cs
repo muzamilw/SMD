@@ -9,16 +9,7 @@
         SHA512
     }
     
-    /// <summary>
-    /// Roles
-    /// </summary>
-    public static class Roles
-    {
-        public static string Adminstrator { get { return "AMD Admin"; } }
-        public static string Approver { get { return "SMD Approver"; } }
-        public static string Editor { get { return "SMD Editor"; } }
-        public static string User { get { return "User"; } }
-    }
+    
     public enum CompanyType
     {
         User = 2,

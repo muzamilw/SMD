@@ -2,21 +2,21 @@
 
 namespace SMD.MIS.Areas.SuperNovaDashboard
 {
-    public class SuperNovaDashboardAreaRegistration : AreaRegistration 
+    public class SuperNovaAreaRegistration : AreaRegistration 
     {
         public override string AreaName 
         {
             get 
             {
-                return "SuperNovaDashboard";
+                return "SuperNova";
             }
         }
 
         public override void RegisterArea(AreaRegistrationContext context) 
         {
             context.MapRoute(
-                "SuperNovaDashboard_default",
-                "SuperNovaDashboard/{controller}/{action}/{id}",
+                "SuperNova_default",
+                "SuperNova/{controller}/{action}/{id}",
                 new { action = "Index", id = UrlParameter.Optional }
             );
         }

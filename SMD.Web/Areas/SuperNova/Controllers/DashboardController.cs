@@ -10,8 +10,8 @@ using System.Web.Mvc;
 namespace SMD.MIS.Areas.SuperNovaDashboard.Controllers
 {
 
-    [SiteAuthorize(MisRoles = new[] { SecurityRoles.Supernova_Admin }, AccessRights = new[] { SecurityAccessRight.CanViewSuperNovaAdmin })]
-    public class IndexController : Controller
+    //[SiteAuthorize(MisRoles = new[] { SecurityRoles.Supernova_Admin }, AccessRights = new[] { SecurityAccessRight.CanViewSuperNovaAdmin })]
+    public class DashboardController : Controller
     {
         // GET: SuperNovaDashboard/Index
         public ActionResult Index()
