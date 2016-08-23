@@ -439,7 +439,7 @@
     <Compile Include="Areas\Api\Controllers\AdViewedController.cs" />
     <Compile Include="Areas\Api\Controllers\InvoiceDetailController.cs" />
     <Compile Include="Areas\Api\Controllers\InvoiceController.cs" />
-    <Compile Include="Areas\Api\Controllers\SendInviteUsingWebController.cs" />
+    <Compile Include="Areas\Api\Controllers\ReferUsersController.cs" />
     <Compile Include="Areas\Api\Controllers\StatementController.cs" />
     <Compile Include="Areas\Api\Controllers\UserBalanceInquiryController.cs" />
     <Compile Include="Areas\Api\Controllers\SurveyAudienceController.cs" />
@@ -534,6 +534,8 @@
     <Compile Include="Areas\ProfileQuestion\Controllers\ManageController.cs" />
     <Compile Include="Areas\Report\Controllers\ReportController.cs" />
     <Compile Include="Areas\Report\ReportAreaRegistration.cs" />
+    <Compile Include="Areas\SuperNovaDashboard\Controllers\IndexController.cs" />
+    <Compile Include="Areas\SuperNovaDashboard\SuperNovaDashboardAreaRegistration.cs" />
     <Compile Include="Areas\User\Controllers\ManageUserController.cs" />
     <Compile Include="Areas\User\UserAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -587,6 +589,13 @@
       <DependentUpon>User.aspx</DependentUpon>
     </Compile>
     <Compile Include="TypeRegistrations.cs" />
+    <Compile Include="Views\EmailTester.aspx.cs">
+      <DependentUpon>EmailTester.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\EmailTester.aspx.designer.cs">
+      <DependentUpon>EmailTester.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Common\Scripts\phraseLibrary.dataservice.js" />
@@ -733,6 +742,7 @@
     <Content Include="Content\Images\colorpicker_select.gif" />
     <Content Include="Content\Images\colorpicker_submit.png" />
     <Content Include="Content\Images\coming.jpg" />
+    <Content Include="Content\Images\CompanyLogo.png" />
     <Content Include="Content\Images\Company_Default.png" />
     <Content Include="Content\Images\CZ_AOFDdEE7.png" />
     <Content Include="Content\Images\foldericon3.png" />
@@ -742,11 +752,14 @@
     <Content Include="Content\Images\company_contact.jpg" />
     <Content Include="Content\Images\imageplaceholder.png" />
     <Content Include="Content\Images\meter.png" />
+    <Content Include="Content\Images\movie_up.png" />
     <Content Include="Content\Images\pin.png" />
     <Content Include="Content\Images\placeholder.png" />
     <Content Include="Content\Images\ReportControlbg.jpg" />
     <Content Include="Content\Images\UK-Union-Flag.png" />
     <Content Include="Content\Images\up-arrow-small.png" />
+    <Content Include="Content\Images\updatedMovie_lg.png" />
+    <Content Include="Content\Images\vide.png" />
     <Content Include="Content\layout.css" />
     <Content Include="Content\less\Campaign.css">
       <DependentUpon>Campaign.less</DependentUpon>
@@ -1665,6 +1678,9 @@
     <Content Include="Content\less\Campaign.css.map">
       <DependentUpon>Campaign.css</DependentUpon>
     </Content>
+    <Content Include="Areas\SuperNovaDashboard\Views\web.config" />
+    <Content Include="Areas\SuperNovaDashboard\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\SuperNovaDashboard\Views\Index\Index.cshtml" />
     <None Include="config\Web.connectionstrings.config" />
     <None Include="Properties\PublishProfiles\mz profile.pubxml" />
     <None Include="Properties\PublishProfiles\SMD MIS Saqib.pubxml" />
@@ -2731,6 +2747,7 @@
     <Content Include="Scripts\underscore.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="ReportViewers\User.aspx" />
+    <Content Include="Views\EmailTester.aspx" />
     <Content Include="Views\Home\-------Login.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -2788,6 +2805,7 @@
     <Folder Include="Areas\Common\Models\" />
     <Folder Include="Areas\Coupons\Models\" />
     <Folder Include="Areas\Report\Models\" />
+    <Folder Include="Areas\SuperNovaDashboard\Models\" />
     <Folder Include="Areas\Survey\Models\" />
     <Folder Include="Content\themes\base\minified\images\" />
     <Folder Include="Models\" />

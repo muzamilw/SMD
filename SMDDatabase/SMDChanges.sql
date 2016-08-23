@@ -8089,3 +8089,10 @@ GO
 ALTER TABLE dbo.SurveyQuestion SET (LOCK_ESCALATION = TABLE)
 GO
 COMMIT
+
+
+
+GO
+
+ALTER TABLE [dbo].Company
+ALTER COLUMN ReferralCode [nvarchar](128) NULL

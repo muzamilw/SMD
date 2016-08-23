@@ -108,7 +108,8 @@ define("Coupons/Coupons.viewModel",
                     numberOFCouponsToGenerate = ko.observable(0),
                     numberOFCouponsToGenerate = ko.observable(0),
                     TempSelectedObj = ko.observable(),
-
+                    CouponTitle = ko.observable(),
+                    StatusValue = ko.observable(),
                     previewScreenNumber = ko.observable(1);
                 CurrPage = ko.observable(9);
                 MaxPage = ko.observable(12);
@@ -253,7 +254,8 @@ define("Coupons/Coupons.viewModel",
                 isTerminateBtnVisible(false);
                 isNewCampaignVisible(false);
                 isShowArchiveBtn(false);
-
+                    CouponTitle('New Coupon');
+                    StatusValue('');
             },
 
             closeNewCampaignDialog = function () {
@@ -779,6 +781,9 @@ define("Coupons/Coupons.viewModel",
                     isTerminateBtnVisible(false);
                     isNewCampaignVisible(false);
                     isShowArchiveBtn(false);
+                    CouponTitle(item.CouponTitle());
+                    
+                   
                     if (item.Status() == 1 || item.Status() == 2 || item.Status() == 3 || item.Status() == 4 || item.Status() == null || item.Status() == 7 || item.Status() == 9) {
                         canSubmitForApproval(true);
                         dataservice.getCampaignData({
@@ -844,6 +849,7 @@ define("Coupons/Coupons.viewModel",
                                         isNewCampaignVisible(true);
                                         isShowArchiveBtn(true);
                                     }
+                                    StatusValue(couponModel().StatusValue());
                                     isEditCampaign(true);
                                     isEditorVisible(true);
                                     isListVisible(false);
@@ -1674,6 +1680,25 @@ define("Coupons/Coupons.viewModel",
 
                     SelectedTextField(Fieldvalue);
                 },
+                CloseCouponsView = function ()
+                {
+                    couponModel();
+                    selectedCriteria();
+                    isEditorVisible(false);
+                    if (isFromEdit() == true) {
+                        isListVisible(true);
+                        isWelcomeScreenVisible(false);
+                    }
+                    else {
+                        isListVisible(false);
+                        isWelcomeScreenVisible(true);
+                    }
+
+                    phraseLibrary.RefreshPhraseLibrary();
+                    //show the main menu;
+                    showMainMenu();
+                }
+                ,
                   selectJobDescription = function (jobDescription, e) {
                       selectedJobDescription(e.currentTarget.id);
                       TempSelectedObj(jobDescription);
@@ -1849,7 +1874,10 @@ define("Coupons/Coupons.viewModel",
                     TempSelectedObj: TempSelectedObj,
                     openBranchLocation: openBranchLocation,
                     selectedJobDescription: selectedJobDescription,
-                    selectJobDescription: selectJobDescription
+                    selectJobDescription: selectJobDescription,
+                    CloseCouponsView: CloseCouponsView,
+                    CouponTitle: CouponTitle,
+                    StatusValue: StatusValue
                 };
             })()
         };

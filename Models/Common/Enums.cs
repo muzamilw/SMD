@@ -49,6 +49,8 @@
        CampaignApproved = 17,
        CampaignReject = 18,
        PayoutNotificationToAdmin = 19,
+        InviteBusiness = 20,
+        InviteAdvertiser = 21
     }
 
     public enum AdCampaignCriteriaType
