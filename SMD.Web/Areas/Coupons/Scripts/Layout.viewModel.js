@@ -105,8 +105,8 @@
 
                                                               }
                                                           })
-                                                          selectedBranch(null);
                                                       }
+                                                      selectedBranch(null);
                                                       if (afterBranchSelect && typeof afterBranchSelect === "function") {
                                                           afterBranchSelect();
                                                       }
@@ -119,7 +119,7 @@
 
                     }
                     else {
-
+                        toastr.warning("please click on 'Locate on Map' for Map: ");
                         return;
                     }
 
@@ -139,6 +139,30 @@
                                      selectedCategory().isEditMode(false);
                                  }
                                  toastr.success("Successfully saved.");
+                                 dataService.getBranchCategory({
+                                     success: function (data) {
+                                         branchCategory.removeAll();
+                                         branchDdlist.removeAll();
+                                         _.each(data, function (item) {
+
+                                             var category = new model.BranchCategory.Create(item);
+                                             branchDdlist.push(category);
+                                             _.each(item.CompanyBranches, function (branchFieldItem) {
+                                                 var branchField = new model.BranchField.Create(branchFieldItem);
+                                                 category.brachFeilds.push(branchField);
+                                             });
+                                             branchCategory.push(category);
+
+                                         });
+                                         if (callback && typeof callback === "function") {
+                                             callback();
+                                         }
+
+                                     },
+                                     error: function () {
+                                         toastr.error("Failed to load branchCategory.");
+                                     }
+                                 });
 
                              },
                              error: function (response) {
@@ -256,6 +280,30 @@
                                             toastr.error("Failed to Delete Category . Error: " + response);
                                         }
                                     });
+                        dataService.getBranchCategory({
+                            success: function (data) {
+                                branchCategory.removeAll();
+                                branchDdlist.removeAll();
+                                _.each(data, function (item) {
+
+                                    var category = new model.BranchCategory.Create(item);
+                                    branchDdlist.push(category);
+                                    _.each(item.CompanyBranches, function (branchFieldItem) {
+                                        var branchField = new model.BranchField.Create(branchFieldItem);
+                                        category.brachFeilds.push(branchField);
+                                    });
+                                    branchCategory.push(category);
+
+                                });
+                                if (callback && typeof callback === "function") {
+                                    callback();
+                                }
+
+                            },
+                            error: function () {
+                                toastr.error("Failed to load branchCategory.");
+                            }
+                        });
                         }
                         
                     });
@@ -280,10 +328,15 @@
                 },
                   isAddressFilled = ko.computed(function () {
                       if (selectedBranch() != undefined && selectedBranch() != null) {
-                          if ((selectedBranch().branchAddressline1() == undefined || selectedBranch().branchAddressline1() == "") || (selectedBranch().branchCity() == undefined || selectedBranch().branchCity() == "") || (selectedBranch().branchState() == undefined || selectedBranch().branchState() == "") ||(selectedBranch().branchZipCode() == undefined || selectedBranch().branchZipCode() == "")) {
+                          if ((selectedBranch().branchAddressline1() == undefined || selectedBranch().branchAddressline1() == "") || (selectedBranch().branchCity() == undefined || selectedBranch().branchCity() == "") || (selectedBranch().branchState() == undefined || selectedBranch().branchState() == "")) {
                               return false;
                           }
-                          return true;
+                          else {
+                              isMapVisible(true);
+                              return true;
+                          }
+                          
+                          
                       }
                       else {
 
@@ -405,6 +458,7 @@
 
                 },
                 CodeAddressonMap = function () {
+                    initializeGEO();
                     codeAddress();
                     google.maps.event.addDomListener(window, 'load', initializeGEO);
                 },
@@ -436,6 +490,7 @@
                             });
                         } else {
                             toastr.error("Failed to Search Address,please add valid address and search it . Error: " + status);
+                            isMapVisible(false);
                             //alert('Geocode was not successful for the following reason: ' + status);
                         }
                     });
@@ -478,7 +533,7 @@
                      view = specifiedView;
                      var geocoder;
                      var map;
-                     initializeGEO();
+                   //  initializeGEO();
                      ko.applyBindings(view.viewModel, view.bindingRoot);
                      ko.applyBindings(view.viewModel, view.bindingPartial);
                  };
