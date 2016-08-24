@@ -620,10 +620,10 @@
     <Content Include="Areas\Ads\Scripts\ads.model.js" />
     <Content Include="Areas\Ads\Scripts\ads.view.js" />
     <Content Include="Areas\Ads\Scripts\ads.viewModel.js" />
-    <Content Include="Areas\Ads\Scripts\addApproval.dataservice.js" />
-    <Content Include="Areas\Ads\Scripts\addApproval.model.js" />
-    <Content Include="Areas\Ads\Scripts\addApproval.view.js" />
-    <Content Include="Areas\Ads\Scripts\addApproval.viewModel.js" />
+    <Content Include="Areas\Franchise\Scripts\addApproval.dataservice.js" />
+    <Content Include="Areas\Franchise\Scripts\addApproval.model.js" />
+    <Content Include="Areas\Franchise\Scripts\addApproval.view.js" />
+    <Content Include="Areas\Franchise\Scripts\addApproval.viewModel.js" />
     <Content Include="Areas\Ads\Scripts\BaseLibs.js" />
     <Content Include="Areas\Billing\Scripts\invoice.dataservice.js" />
     <Content Include="Areas\Billing\Scripts\invoice.model.js" />
@@ -1624,7 +1624,7 @@
     <Content Include="Areas\Franchise\Views\Dashboard\SurveyQuestionApproval.cshtml" />
     <Content Include="Areas\Franchise\Views\Dashboard\_SurveyQuestionEditor.cshtml" />
     <Content Include="Areas\Ads\Views\Ads\_addEditor.cshtml" />
-    <Content Include="Areas\Ads\Views\Ads\AddAproval.cshtml" />
+    <Content Include="Areas\Franchise\Views\Dashboard\AddAproval.cshtml" />
     <Content Include="RichTextEditor\CHANGES.md" />
     <Content Include="RichTextEditor\LICENSE.md" />
     <Content Include="RichTextEditor\plugins\scayt\LICENSE.md" />

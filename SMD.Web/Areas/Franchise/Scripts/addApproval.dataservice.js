@@ -1,7 +1,7 @@
 ﻿/*
     Data service module with ajax calls to the server
 */
-define("addApproval/addApproval.dataservice", function () {
+define("addAproval/addApproval.dataservice", function () {
 
     // Data service for forecast 
     var dataService = (function () {

@@ -18,7 +18,7 @@
             // SMD 
             "pQuestion": "/Areas/ProfileQuestion/Scripts",
             "ads": "/Areas/Ads/Scripts",
-            "addApproval": "/Areas/Ads/Scripts",
+          //  "addApproval": "/Areas/Ads/Scripts",
             "survey": "/Areas/Survey/Scripts",
             "surveyQuestionApp": "/Areas/Survey/Scripts",
             "invoice":"/Areas/Billing/Scripts",
@@ -26,7 +26,8 @@
             "Coupons": "/Areas/Coupons/Scripts",
             "Layout": "/Areas/Coupons/Scripts",
             "PhraseLibrary": "/Areas/Common/Scripts",
-            "DAM": "/Areas/DAM/Scripts"
+            "DAM": "/Areas/DAM/Scripts",
+            "addAproval": "/Areas/Franchise/Scripts"
         }
     });
 

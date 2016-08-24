@@ -84,10 +84,6 @@
 /// <reference path="underscore-ko-1.6.0.js" />
 /// <reference path="underscore-min.js" />
 /// <reference path="underscore.js" />
-/// <reference path="../areas/ads/scripts/addapproval.dataservice.js" />
-/// <reference path="../areas/ads/scripts/addapproval.model.js" />
-/// <reference path="../areas/ads/scripts/addapproval.view.js" />
-/// <reference path="../areas/ads/scripts/addapproval.viewmodel.js" />
 /// <reference path="../areas/ads/scripts/ads.dataservice.js" />
 /// <reference path="../areas/ads/scripts/ads.model.js" />
 /// <reference path="../areas/ads/scripts/ads.view.js" />
@@ -845,6 +841,10 @@
 /// <reference path="../areas/franchise/scripts/surveyquestionapp.view.js" />
 /// <reference path="../areas/franchise/scripts/surveyquestionapp.model.js" />
 /// <reference path="../areas/franchise/scripts/surveyquestionapp.dataservice.js" />
+/// <reference path="../areas/franchise/scripts/addapproval.dataservice.js" />
+/// <reference path="../areas/franchise/scripts/addapproval.model.js" />
+/// <reference path="../areas/franchise/scripts/addapproval.view.js" />
+/// <reference path="../areas/franchise/scripts/addapproval.viewmodel.js" />
 <<<<<<< HEAD
 =======
 /// <reference path="plugins/forms/timeentry/langs/jquery.timeentry-ca.js" />
