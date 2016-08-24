@@ -783,7 +783,7 @@ namespace SMD.Implementation.Services
             // Begin Transaction
             // SMD will get 100 %
             // Get Current Product
-            var product = productRepository.GetProductByCountryId(surveyQuestion.CountryId, "SQ");
+            var product = productRepository.GetProductByCountryId( "SQ");
             // Tax Applied
             var tax = taxRepository.GetTaxByCountryId(surveyQuestion.CountryId);
             var taxValue = tax != null && tax.TaxValue.HasValue ? tax.TaxValue.Value : 0;

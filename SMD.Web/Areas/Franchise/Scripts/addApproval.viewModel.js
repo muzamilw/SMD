@@ -105,8 +105,15 @@ define("FranchiseDashboard/addApproval.viewModel",
                         return (selectedCampaign().hasChanges());
                     }),
                     onApproveCampaign = function () {
-                        selectedCampaign().isApproved(true) ;
-                        onSaveCampaign();
+                        confirmation.messageText("Do you want to approve this Ad Campaign ? System will attempt to collect payment and generate invoice");
+                        confirmation.show();
+                        confirmation.afterCancel(function () {
+                            confirmation.hide();
+                        });
+                        confirmation.afterProceed(function () {
+                            selectedCampaign().isApproved(true) ;
+                            onSaveCampaign();
+                        });
                     },
                     // Reject buttoin handler 
                     onRejectCampaign = function() {

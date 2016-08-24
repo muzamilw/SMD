@@ -3,7 +3,7 @@
     var // ReSharper disable InconsistentNaming
       AdCampaign = function (sQId, spcName, spcDes, spcIsApproved, spcRejectionReason,
           subDate, spcCreatedBy, spcType, spcPath, spcLink, spcrate, spcBudget, CampaignDescription, Voucher1Heading, Voucher1Description, Voucher1Value, Voucher1ImagePath,
-          CouponSwapValue, CouponActualValue, CouponQuantity, CouponTakenCount, MaxDailyBudget, VerifyQuestion, Answer1, Answer2, Answer3, CorrectAnswer, DeliveryDays, BuuyItLine1, BuyItButtonLabel) {
+          CouponSwapValue, CouponActualValue, CouponQuantity, CouponTakenCount, MaxDailyBudget, VerifyQuestion, Answer1, Answer2, Answer3, CorrectAnswer, DeliveryDays, BuuyItLine1, BuyItButtonLabel, VideoUrl,VideoLink2) {
           var
               id = ko.observable(sQId),
               campaignName = ko.observable(spcName),
@@ -36,6 +36,8 @@
               deliveryDays = ko.observable(DeliveryDays),
               buyItLine1 = ko.observable(BuuyItLine1),
               buyItButtonLabel = ko.observable(BuyItButtonLabel),
+              videoUrl = ko.observable(VideoUrl),
+              videoLink2 = ko.observable(VideoLink2),
 
               errors = ko.validation.group({
 
@@ -98,7 +100,9 @@
               correctAnswer: correctAnswer,
               deliveryDays: deliveryDays,
               buyItLine1: buyItLine1,
-              buyItButtonLabel: buyItButtonLabel
+              buyItButtonLabel: buyItButtonLabel,
+              videoUrl: videoUrl,
+              videoLink2: videoLink2
 
           };
       };
@@ -119,7 +123,7 @@
             itemFromServer.Voucher1Value, itemFromServer.Voucher1ImagePath, itemFromServer.CouponSwapValue == null ? "" : itemFromServer.CouponSwapValue,
             itemFromServer.CouponActualValue == null ? "" : itemFromServer.CouponActualValue,
             itemFromServer.CouponQuantity == null ? "" : itemFromServer.CouponQuantity,
-            itemFromServer.CouponTakenCount == null ? "" : itemFromServer.CouponTakenCount, itemFromServer.MaxDailyBudget, itemFromServer.VerifyQuestion, itemFromServer.Answer1, itemFromServer.Answer2, itemFromServer.Answer3, itemFromServer.CorrectAnswer, itemFromServer.DeliveryDays, itemFromServer.BuuyItLine1, itemFromServer.BuyItButtonLabel);
+            itemFromServer.CouponTakenCount == null ? "" : itemFromServer.CouponTakenCount, itemFromServer.MaxDailyBudget, itemFromServer.VerifyQuestion, itemFromServer.Answer1, itemFromServer.Answer2, itemFromServer.Answer3, itemFromServer.CorrectAnswer, itemFromServer.DeliveryDays, itemFromServer.BuuyItLine1, itemFromServer.BuyItButtonLabel, itemFromServer.VideoUrl, itemFromServer.VideoLink2);
     };
 
     // Function to attain cancel button functionality AdCampaign

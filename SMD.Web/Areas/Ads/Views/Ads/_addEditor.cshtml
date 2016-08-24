@@ -52,7 +52,7 @@
                                             <div class="col-lg-4 text-right">
                                                 <label class="control-label text-right tooltip-float">Mode</label>
                                             </div>
-                                            <div class="col-lg-6"> 
+                                            <div class="col-lg-6">
                                                 <input type="text" readonly class="form-control" data-bind="value:deliveryDays">
                                             </div>
                                         </div>
@@ -157,150 +157,181 @@
                                     </div>
                                     <div class="col-lg-9" style="display:none;">
                                         @*Todo::pilot data-bind="visible:!$root.isShowCopounMode()"*@
-                                    <div class="form-group">
-                                        <div class="col-lg-4 text-right">
-                                            <label class="control-label text-right tooltip-float">Voucher Heading</label>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <input type="text" readonly class="form-control" data-bind="value: Voucher1Heading">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-9" style="display:none;">
-                                    @*Todo::pilot data-bind="visible:!$root.isShowCopounMode()"*@
-                                    <div class="form-group">
-                                        <div class="col-lg-4 text-right">
-                                            <div class="bs-example-tooltips tooltip-float-width">
-                                                <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
-                                                    <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                </a>
+                                        <div class="form-group">
+                                            <div class="col-lg-4 text-right">
+                                                <label class="control-label text-right tooltip-float">Voucher Heading</label>
                                             </div>
-                                            <label class="control-label text-right tooltip-float">Voucher Description</label>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <input type="text" readonly class="form-control" data-bind="value: Voucher1Description">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-9" style="display:none;">
-                                    @*Todo::pilot data-bind="visible:!$root.isShowCopounMode()"*@
-                                    <div class="form-group">
-                                        <div class="col-lg-4 text-right">
-                                            <div class="bs-example-tooltips tooltip-float-width">
-                                                <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
-                                                    <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                </a>
+                                            <div class="col-lg-6">
+                                                <input type="text" readonly class="form-control" data-bind="value: Voucher1Heading">
                                             </div>
-                                            <label class="control-label text-right tooltip-float">Voucher Value Discount</label>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <input type="text" readonly class="form-control" data-bind="value:Voucher1Value">
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-9 marginBottom12" style="display:none;">
-                                    @*Todo::pilot data-bind="visible:!$root.isShowCopounMode()"*@
-                                    <div class="form-group">
-                                        <div class="col-lg-4 text-right">
-                                            <div class="bs-example-tooltips tooltip-float-width">
-                                                <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
-                                                    <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                </a>
-                                            </div>
-                                            <label class="control-label text-right tooltip-float">Voucher Image</label>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <img id="vehicleImage" alt="" style="width: 120px;height:120px" data-bind="attr:{src:'/' + Voucher1ImagePath() }" />
-                                            <h5><span></span></h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-9" data-bind="visible:type()==2">
-                                    <div class="form-group">
-                                        <div class="col-lg-4 text-right">
-
-                                            <label class="control-label text-right tooltip-float"></label>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <a href="#" target="_blank" data-bind="text:landingLink , attr:{href:landingLink}"></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-9" data-bind="visible:type()==1">
-                                    <div class="form-group">
-                                        <div class="col-lg-4 text-right">
-
-                                            <label class="control-label text-right tooltip-float"></label>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <object id="objVideoLink" width="420" height="315" data-bind="attr:{data:landingLink}"></object>
-
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-lg-4 text-right">
-                                            <label class="control-label text-right tooltip-float">50/50 Quiz question</label>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <input type="text" readonly class="form-control" data-bind="value:verifyQuestion">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-lg-4 text-right">
-                                            <label class="control-label text-right tooltip-float">Choice 1</label>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <input type="text" readonly class="form-control" data-bind="value:answer1">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-lg-4 text-right">
-                                            <label class="control-label text-right tooltip-float">Choice 2</label>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <input type="text" readonly class="form-control" data-bind="value:answer2">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-lg-4 text-right">
-                                            <label class="control-label text-right tooltip-float">Choice 3</label>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <input type="text" readonly class="form-control" data-bind="value:answer3">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-lg-4 text-right">
-                                            <label class="control-label text-right tooltip-float">Correct Answer</label>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <input type="text" readonly class="form-control" data-bind="value:correctAnswer">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-9" data-bind="visible:!isApproved()">
-                                    <div class="form-group">
-                                        <div class="col-lg-4 text-right">
-                                            @*<div class="bs-example-tooltips tooltip-float-width">
+                                    <div class="col-lg-9" style="display:none;">
+                                        @*Todo::pilot data-bind="visible:!$root.isShowCopounMode()"*@
+                                        <div class="form-group">
+                                            <div class="col-lg-4 text-right">
+                                                <div class="bs-example-tooltips tooltip-float-width">
                                                     <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
                                                         <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
                                                     </a>
-                                                </div>*@
-                                            <label class="control-label text-right tooltip-float">Rejection Reason</label>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <input type="text" placeholder="Enter rejection reason " class="form-control" data-bind="value: rejectionReason">
+                                                </div>
+                                                <label class="control-label text-right tooltip-float">Voucher Description</label>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <input type="text" readonly class="form-control" data-bind="value: Voucher1Description">
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-9">
-                                    <div class="form-group">
-                                        <div class="col-lg-4 text-right">
-
+                                    <div class="col-lg-9" style="display:none;">
+                                        @*Todo::pilot data-bind="visible:!$root.isShowCopounMode()"*@
+                                        <div class="form-group">
+                                            <div class="col-lg-4 text-right">
+                                                <div class="bs-example-tooltips tooltip-float-width">
+                                                    <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
+                                                        <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                    </a>
+                                                </div>
+                                                <label class="control-label text-right tooltip-float">Voucher Value Discount</label>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <input type="text" readonly class="form-control" data-bind="value:Voucher1Value">
+                                            </div>
                                         </div>
-                                        <div class="col-lg-6">
-                                            <button class="btn  btn-info" id="saveBtn" data-bind="click:$root.onApproveCampaign">Approve</button>
-                                            <button class="btn  btn-info" id="saveBtn" data-bind="click:$root.onRejectCampaign, enable: $root.hasChangesOnCampaign, css: { 'btn-warning': $root.hasChangesOnCampaign }">Reject</button>
+                                    </div>
+                                    <div class="col-lg-9 marginBottom12" style="display:none;">
+                                        @*Todo::pilot data-bind="visible:!$root.isShowCopounMode()"*@
+                                        <div class="form-group">
+                                            <div class="col-lg-4 text-right">
+                                                <div class="bs-example-tooltips tooltip-float-width">
+                                                    <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
+                                                        <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                    </a>
+                                                </div>
+                                                <label class="control-label text-right tooltip-float">Voucher Image</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <img id="vehicleImage" alt="" style="width: 120px;height:120px" data-bind="attr:{src:'/' + Voucher1ImagePath() }" />
+                                                <h5><span></span></h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-9" data-bind="visible:type()==2">
+                                        <div class="form-group">
+                                            <div class="col-lg-4 text-right">
+
+                                                <label class="control-label text-right tooltip-float"></label>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <a href="#" target="_blank" data-bind="text:landingLink , attr:{href:landingLink}"></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-9" data-bind="visible:type()==1">
+                                        <div class="form-group">
+                                            <div class="col-lg-4 text-right">
+
+                                                <label class="control-label text-right tooltip-float"></label>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                @*<video controls width="420" height="315" data-bind="attr:{ src:videoLink2 }"></video>*@
+                                                <object id="objvideolink" width="420" height="315" data-bind="attr:{data:landingLink}"></object>
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-4 text-right">
+                                                <label class="control-label text-right tooltip-float">50/50 Quiz question</label>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <input type="text" readonly class="form-control" data-bind="value:verifyQuestion">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-4 text-right">
+                                                <label class="control-label text-right tooltip-float">Choice 1</label>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <input type="text" readonly class="form-control" data-bind="value:answer1">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-4 text-right">
+                                                <label class="control-label text-right tooltip-float">Choice 2</label>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <input type="text" readonly class="form-control" data-bind="value:answer2">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-4 text-right">
+                                                <label class="control-label text-right tooltip-float">Choice 3</label>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <input type="text" readonly class="form-control" data-bind="value:answer3">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-4 text-right">
+                                                <label class="control-label text-right tooltip-float">Correct Answer</label>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <input type="text" readonly class="form-control" data-bind="value:correctAnswer">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-4 text-campaign-left  Float-Left">
+                                                <label class="control-label text-right tooltip-float font20 floatNone" style="float:left !important;    margin-left: 6px; ">Coupon Buy it</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-4 text-right">
+                                                <label class="control-label text-right tooltip-float">First Line</label>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <input type="text" readonly class="form-control" data-bind="value:buyItLine1">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-4 text-right">
+                                                <label class="control-label text-right tooltip-float">Url</label>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <input type="text" readonly class="form-control" data-bind="value:videoUrl">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-4 text-right">
+                                                <label class="control-label text-right tooltip-float">Button Label</label>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <input type="text" readonly class="form-control" data-bind="value:buyItButtonLabel">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-9" data-bind="visible:!isApproved()">
+                                        <div class="form-group">
+                                            <div class="col-lg-4 text-right">
+                                                @*<div class="bs-example-tooltips tooltip-float-width">
+                                                        <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
+                                                            <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                        </a>
+                                                    </div>*@
+                                                <label class="control-label text-right tooltip-float">Rejection Reason</label>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <input type="text" placeholder="Enter rejection reason " class="form-control" data-bind="value: rejectionReason">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-9">
+                                        <div class="form-group">
+                                            <div class="col-lg-4 text-right">
+
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <button class="btn  btn-success" id="saveBtn" data-bind="click:$root.onApproveCampaign">Approve</button>
+                                                <button class="btn " id="saveBtn" data-bind="click:$root.onRejectCampaign, enable: $root.hasChangesOnCampaign, css: { ' btn-danger': $root.hasChangesOnCampaign }">Reject</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -310,8 +341,7 @@
                 </div>
             </div>
         </div>
-    </div>
 
-</div>
+    </div>
 
 </div>
