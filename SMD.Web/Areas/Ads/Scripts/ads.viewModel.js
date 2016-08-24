@@ -257,7 +257,9 @@ define("ads/ads.viewModel",
                 isNewCampaign(true);
                 isTerminateBtnVisible(false);
                 isNewCampaignVisible(false);
-                FlagToShowDivs(true);
+                VideoLink2src(0);
+                FlagToShowDivs(false);
+
                 VideoLink2src(null);
                 isShowArchiveBtn(false);
                 campaignModel().DeliveryDays("1");
