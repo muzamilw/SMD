@@ -1,7 +1,7 @@
 ﻿/*
     Data service module with ajax calls to the server
 */
-define("surveyQuestionApp/surveyQuestionApp.dataservice", function () {
+define("FranchiseDashboard/surveyQuestionApp.dataservice", function () {
 
     // Data service for forecast 
     var dataService = (function () {

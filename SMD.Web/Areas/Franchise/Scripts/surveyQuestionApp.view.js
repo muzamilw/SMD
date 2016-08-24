@@ -1,8 +1,8 @@
 ﻿/*
     View for the Survey Questions. Used to keep the viewmodel clear of UI related logic
 */
-define("surveyQuestionApp/surveyQuestionApp.view",
-    ["jquery", "surveyQuestionApp/surveyQuestionApp.viewModel"], function ($, surveyQuestionViewModel) {
+define("FranchiseDashboard/surveyQuestionApp.view",
+    ["jquery", "FranchiseDashboard/surveyQuestionApp.viewModel"], function ($, surveyQuestionViewModel) {
         var ist = window.ist || {};
         // View 
         ist.SurveyQuestion.view = (function (specifiedViewModel) {

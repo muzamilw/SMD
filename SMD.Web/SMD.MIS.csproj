@@ -1622,7 +1622,6 @@
     <Content Include="Content\less\Campaign.less" />
     <Content Include="Content\less\Survey.less" />
     <Content Include="Areas\Franchise\Views\Dashboard\SurveyQuestionApproval.cshtml" />
-    <Content Include="Areas\Franchise\Views\Dashboard\_SurveyQuestionEditor.cshtml" />
     <Content Include="Areas\Ads\Views\Ads\_addEditor.cshtml" />
     <Content Include="Areas\Franchise\Views\Dashboard\AddAproval.cshtml" />
     <Content Include="RichTextEditor\CHANGES.md" />
@@ -1688,7 +1687,6 @@
     <None Include="Areas\SuperNova\Views\web.config" />
     <Content Include="Areas\SuperNova\Views\Dashboard\Index.cshtml" />
     <Content Include="Areas\SuperNova\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\Survey\Views\Survey\_SurveyQuestionEditor.cshtml" />
     <None Include="config\Web.connectionstrings.config" />
     <None Include="Properties\PublishProfiles\mz profile.pubxml" />
     <None Include="Properties\PublishProfiles\SMD MIS Saqib.pubxml" />

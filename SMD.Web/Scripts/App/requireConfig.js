@@ -27,7 +27,7 @@
             "Layout": "/Areas/Coupons/Scripts",
             "PhraseLibrary": "/Areas/Common/Scripts",
             "DAM": "/Areas/DAM/Scripts",
-            "addAproval": "/Areas/Franchise/Scripts"
+            "FranchiseDashboard": "/Areas/Franchise/Scripts"
         }
     });
 
