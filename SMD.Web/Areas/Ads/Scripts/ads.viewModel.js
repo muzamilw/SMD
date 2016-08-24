@@ -257,6 +257,8 @@ define("ads/ads.viewModel",
                 isNewCampaign(true);
                 isTerminateBtnVisible(false);
                 isNewCampaignVisible(false);
+                FlagToShowDivs(true);
+                VideoLink2src(null);
                 isShowArchiveBtn(false);
                 campaignModel().DeliveryDays("1");
                 campaignModel().ChannelType("1");
@@ -664,7 +666,7 @@ define("ads/ads.viewModel",
               
 
                 var campignServerObj = campaignModel().convertToServerData();
-
+                debugger;
                 dataservice.addCampaignData(campignServerObj, {
                     success: function (data) {
 

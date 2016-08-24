@@ -166,7 +166,7 @@ else
                                             <div style="    padding-top: 10px;    text-align: center;    font-size: 12px;    color: gray;" data-bind="visible:$root.FlagToShowDivs()">
                                                 max length 30 sec
                                             </div>
-                                            <video controls style="width:300px;height:150px;" data-bind="attr:{ src: $root.VideoLink2src }"></video>
+                                            <video controls style="width:300px;height:150px;" ></video>
                                         </div>
                                         <div class="defaultImgUploadImageBtn" style="width:75px;">
                                             <div class="fileUpload" style="margin-top:8px;">
@@ -2769,29 +2769,31 @@ else
 <script type="">
 
     $(document).ready(function () {
+        function playVideo(event) {
+            
+            var playSelectedFile = function (event) {
+                var file = this.files[0]
+                var type = file.type
+                var videoNode = document.querySelector('video')
+                var canPlay = videoNode.canPlayType(type)
+                if (canPlay === '') canPlay = 'no'
+                var message = 'Can play type "' + type + '": ' + canPlay
+                var isError = canPlay === 'no'
+                //displayMessage(message, isError)
+                //if (isError) {
+                //    return
+                //}
+                var fileURL = URL.createObjectURL(file)
+
+                videoNode.src = fileURL
+            }
+            var inputNode = document.querySelector('#videoUploader')
+            inputNode.addEventListener('change', playSelectedFile, false)
+        }
 
     });
 
-    function playVideo(event) {
+ 
 
-        var playSelectedFile = function (event) {
-            var file = this.files[0]
-            var type = file.type
-            var videoNode = document.querySelector('video')
-            var canPlay = videoNode.canPlayType(type)
-            if (canPlay === '') canPlay = 'no'
-            var message = 'Can play type "' + type + '": ' + canPlay
-            var isError = canPlay === 'no'
-            //displayMessage(message, isError)
-            //if (isError) {
-            //    return
-            //}
-            var fileURL = URL.createObjectURL(file)
-           
-            videoNode.src = fileURL
-        }
-        var inputNode = document.querySelector('#videoUploader')
-        inputNode.addEventListener('change', playSelectedFile, false)
-    }
-
+  
 </script>
