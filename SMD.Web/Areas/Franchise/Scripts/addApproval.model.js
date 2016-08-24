@@ -94,7 +94,7 @@
               verifyQuestion: verifyQuestion,
               answer1: answer1,
               answer2: answer2,
-              answer3: answer2,
+              answer3: answer3,
               correctAnswer: correctAnswer,
               deliveryDays: deliveryDays,
               buyItLine1: buyItLine1,
