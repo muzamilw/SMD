@@ -238,7 +238,7 @@ namespace SMD.Implementation.Services
             UserAndCostDetail objUC = new UserAndCostDetail();
             if (loggedInUser != null)
             {
-                campaignProduct = productRepository.GetProductByCountryId(Convert.ToInt32(loggedInUser.Company.CountryId), code);
+                campaignProduct = productRepository.GetProductByCountryId(code);
                 objUC.CountryId = loggedInUser.Company.CountryId;
                 objUC.CityId = loggedInUser.Company.CityId;
                 objUC.CityName = loggedInUser.Company.City != null ? loggedInUser.Company.City.CityName : "";
@@ -726,7 +726,7 @@ namespace SMD.Implementation.Services
             // User who added Campaign for approval 
             var user = webApiUserService.GetUserByUserId(source.UserId);
             // Get Current Product
-            var product = productRepository.GetProductByCountryId(user.Company.CountryId, "Ad");
+            var product = productRepository.GetProductByCountryId("Ad");
             // Tax Applied
             var tax = taxRepository.GetTaxByCountryId(user.Company.CountryId);
             // Total includes tax
@@ -736,16 +736,12 @@ namespace SMD.Implementation.Services
 
 
                 // If It is not System User then make transation 
-                if (user.Roles.Any(role => role.Name.ToLower().Equals("user")))
-                {
+                //if (user.Roles.Any(role => role.Name.ToLower().Equals("user")))
+                //{
                     // Make Stripe actual payment 
                     response = stripeService.ChargeCustomer((int?)amount, user.Company.StripeCustomerId);
                     isSystemUser = false;
-                }
-                else
-                {
-                    isSystemUser = true;
-                }
+                
             }
 
             #endregion
