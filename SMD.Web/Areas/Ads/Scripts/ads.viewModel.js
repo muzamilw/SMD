@@ -106,10 +106,9 @@ define("ads/ads.viewModel",
                     vouchers = ko.observableArray(),
                     numberOFCouponsToGenerate = ko.observable(0),
                     previewScreenNumber = ko.observable(1),
-                    SearchSelectedStatus = ko.observable()
-
-
-                ;
+                    VideoLink2src = ko.observable(),
+                    SearchSelectedStatus = ko.observable();
+                    FlagToShowDivs = ko.observable(false);
                 CurrPage = ko.observable(9);
                 MaxPage = ko.observable(12);
                 getCampaignBaseContent = function () {
@@ -662,7 +661,7 @@ define("ads/ads.viewModel",
 
                 campaignModel().Status(mode);
                 campaignModel().ClickRate(pricePerclick());
-
+              
 
                 var campignServerObj = campaignModel().convertToServerData();
 
@@ -1148,7 +1147,7 @@ define("ads/ads.viewModel",
 
                     //hiding the main menu
                     collapseMainMenu();
-
+                 //   VideoLink2src(item.VideoLink2);
                     previewScreenNumber(1);
                     isTerminateBtnVisible(false);
                     isNewCampaignVisible(false);
@@ -1185,6 +1184,16 @@ define("ads/ads.viewModel",
                                     });
 
                                     campaignModel(model.Campaign.Create(data.Campaigns[0]));
+                                   
+                                    VideoLink2src(campaignModel().VideoLink2());
+
+                                    if (VideoLink2src() != null && VideoLink2src() != '') {
+                                        FlagToShowDivs(false);
+                                    }
+                                    else {
+                                        FlagToShowDivs(true);
+                                    }
+                                    
 
                                     _.each(clonedVersofCariterias, function (cclist) {
                                         if (cclist.Type == 1) {
@@ -2012,6 +2021,11 @@ define("ads/ads.viewModel",
                  LogoUrlImageCallback = function (file, data) {
                      campaignModel().LogoImageBytes(data);
                  },
+               
+                 VideoUrlCallback = function (file, data) {
+                     
+                     campaignModel().VideoBytes(data);
+                 },
                 ShowCouponPromotions = function () {
                     window.location.href = "/Coupons/Coupons";
                     //isDisplayCouponsAds(true);
@@ -2484,8 +2498,10 @@ define("ads/ads.viewModel",
                     CurrPage: CurrPage,
                     MaxPage: MaxPage,
                     SearchSelectedStatus: SearchSelectedStatus,
-                    SaveDraftCampaign: SaveDraftCampaign
-
+                    SaveDraftCampaign: SaveDraftCampaign,
+                    VideoUrlCallback: VideoUrlCallback,
+                    VideoLink2src: VideoLink2src,
+                    FlagToShowDivs: FlagToShowDivs
                 };
             })()
         };

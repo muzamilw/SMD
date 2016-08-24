@@ -11,7 +11,7 @@
           CouponDiscountValue, couponImage2, CouponImage3, CouponImage4, CouponExpiryLabel,
           couponSmdComission, CouponCategories, DeliveryDays, IsUseFilter, LogoUrl,
           VoucherAdditionalInfo, CouponId, IsShowVoucherSetting, VideoLink2, CouponType, IsSavedCoupon, viewCountToday, viewCountYesterday, viewCountAllTime, MaxDailyBudget, Locationss,ApprovalDateTime,
-          ChannelType) {
+          ChannelType, VideoBytes) {
        
           var
               //type and userID will be set on server sside
@@ -34,6 +34,7 @@
               priority = ko.observable(priority),
               CouponDiscountValue = ko.observable(CouponDiscountValue),
               CouponCategories = ko.observableArray([]),
+              VideoBytes = ko.observable(VideoBytes),
               StartDateTime = ko.observable((StartDateTime !== null && StartDateTime !== undefined) ? moment(StartDateTime).toDate() : undefined).extend({  // custom message
                   required: true
               }),//ko.observable(),
@@ -215,7 +216,8 @@
                   MaxDailyBudget : MaxDailyBudget,
                   Locationss: Locationss,
                   ApprovalDateTime : ApprovalDateTime,
-                  ChannelType: ChannelType
+                  ChannelType: ChannelType,
+                  VideoBytes: VideoBytes
 
               }),
               // Has Changes
@@ -295,6 +297,7 @@
                       Voucher2Value: Voucher2Value(),
                       Voucher1ImagePath:Voucher1ImagePath(),
                       VoucherImagePath: VoucherImagePath(),
+                      VideoBytes:VideoBytes(),
                       CreatedBy: CreatedBy(),
                       VideoUrl: VideoUrl(),
                       BuuyItLine1: BuuyItLine1(),
@@ -417,7 +420,8 @@
               MaxDailyBudget : MaxDailyBudget,
               Locationss: Locationss,
               ApprovalDateTime : ApprovalDateTime,
-              ChannelType: ChannelType
+              ChannelType: ChannelType,
+              VideoBytes: VideoBytes
           };
       };
 

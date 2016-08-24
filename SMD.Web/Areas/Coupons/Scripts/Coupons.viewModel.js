@@ -25,7 +25,7 @@ define("Coupons/Coupons.viewModel",
                     myQuizQuestions = ko.observableArray([]),
                     profileAnswerList = ko.observable([]),
                     criteriaCount = ko.observable(0),
-
+                    CouponActiveMonth = ko.observable(),
                     isShowSurveyAns = ko.observable(false),
                      // selected location 
                     selectedLocation = ko.observable(),
@@ -246,6 +246,25 @@ define("Coupons/Coupons.viewModel",
                    }
                }
            },
+           GetMonth = function (monthstr) {
+             
+               var month = new Array();
+               month[0] = "January";
+               month[1] = "February";
+               month[2] = "March";
+               month[3] = "April";
+               month[4] = "May";
+               month[5] = "June";
+               month[6] = "July";
+               month[7] = "August";
+               month[8] = "September";
+               month[9] = "October";
+               month[10] = "November";
+               month[11] = "December";
+               var index = month.indexOf(monthstr.trim());
+               return index;
+           }
+                ,
             updateCampaignGridItem = function (item) {
                 canSubmitForApproval(false);
                 if (item.Status == 1) {
@@ -414,15 +433,19 @@ define("Coupons/Coupons.viewModel",
                   saveCampaign(8);
               },
                 OnchangeDateDD = function (data) {
-                    var res = data.split("-");
-                    couponModel().CouponActiveYear(res[0]);
-                    couponModel().CouponActiveMonth(res[1]);
-                    alert(res[0]);
+                    //debugger;
+                    //alert(data);
+                    //var res = data.split("-");
+                    //couponModel().CouponActiveYear(res[0]);
+                    //couponModel().CouponActiveMonth(res[1]);
+                    //alert(res[0]);
+                    alert(CouponActiveMonth());
                 }
                 ,
             saveCampaign = function (mode) {
-
-                debugger;
+             
+               
+                
                 var isPopulateErrorList = false;
 
 
@@ -440,8 +463,10 @@ define("Coupons/Coupons.viewModel",
                 });
 
                 couponModel().Status(mode);
-
-                //alert(couponModel().CouponActiveMonth(CouponActiveMonth));
+                var res = CouponActiveMonth().split("-");
+                couponModel().CouponActiveYear(res[0]);
+                couponModel().CouponActiveMonth(GetMonth(res[1]));
+               
                 var campignServerObj = couponModel().convertToServerData();
 
                 dataservice.addCampaignData(campignServerObj, {
@@ -824,7 +849,7 @@ define("Coupons/Coupons.viewModel",
                     isShowArchiveBtn(false);
                     CouponTitle(item.CouponTitle());
                     
-                    alert(item.CouponId());
+                   
                     if (item.Status() == 1 || item.Status() == 2 || item.Status() == 3 || item.Status() == 4 || item.Status() == null || item.Status() == 7 || item.Status() == 9) {
                         canSubmitForApproval(true);
                         dataservice.getCampaignData({
@@ -1927,7 +1952,8 @@ define("Coupons/Coupons.viewModel",
                     CloseCouponsView: CloseCouponsView,
                     CouponTitle: CouponTitle,
                     StatusValue: StatusValue,
-                    OnchangeDateDD: OnchangeDateDD
+                    OnchangeDateDD: OnchangeDateDD,
+                    CouponActiveMonth: CouponActiveMonth
                 };
             })()
         };
