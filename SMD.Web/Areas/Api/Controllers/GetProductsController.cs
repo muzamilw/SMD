@@ -76,7 +76,7 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// <summary>
         /// Response From User on Ads, Surveys, Questions
         /// </summary>
-        [ApiExceptionCustom]
+        //[ApiExceptionCustom]
         public async Task<BaseApiResponse> Post(string authenticationToken, ProductActionRequest request)
         {
             if (string.IsNullOrEmpty(authenticationToken) || request == null || !ModelState.IsValid || string.IsNullOrEmpty(request.UserId))

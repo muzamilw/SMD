@@ -45,6 +45,15 @@ namespace SMD.MIS.Areas.Api.Models
         public int? CompanyId { get; set; }
         public int? AnswerNeeded { get; set; }
         public long? ResultClicks { get; set; }
+
+        public double? AmountCharged { get; set; }
+
+        public string Company { get; set; }
+
+        public long? ProjectedReach { get; set; }
+
+        
+        
     }
     public class SurveyQuestionTargetCriteria
     {

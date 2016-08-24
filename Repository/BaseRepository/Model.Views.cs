@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets9DA04403CB77AF73864F0D153A151DD3EED6AFDAF2AB5543D8877086832DF534))]
+[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets76A3FF7B863EF0B618D97E0633455A1D45A351336825E0340518CE70FDE5925C))]
 
 namespace Edm_EntityMappingGeneratedViews
 {
@@ -17,18 +17,18 @@ namespace Edm_EntityMappingGeneratedViews
     /// <Summary>
     /// The type contains views for EntitySets and AssociationSets that were generated at design time.
     /// </Summary>
-    public sealed class ViewsForBaseEntitySets9DA04403CB77AF73864F0D153A151DD3EED6AFDAF2AB5543D8877086832DF534 : System.Data.Mapping.EntityViewContainer
+    public sealed class ViewsForBaseEntitySets76A3FF7B863EF0B618D97E0633455A1D45A351336825E0340518CE70FDE5925C : System.Data.Mapping.EntityViewContainer
     {
         
         /// <Summary>
         /// The constructor stores the views for the extents and also the hash values generated based on the metadata and mapping closure and views.
         /// </Summary>
-        public ViewsForBaseEntitySets9DA04403CB77AF73864F0D153A151DD3EED6AFDAF2AB5543D8877086832DF534()
+        public ViewsForBaseEntitySets76A3FF7B863EF0B618D97E0633455A1D45A351336825E0340518CE70FDE5925C()
         {
             this.EdmEntityContainerName = "BaseDbContext";
             this.StoreEntityContainerName = "SMDModelStoreContainer";
-            this.HashOverMappingClosure = "920da3cd671ee6cfb5bcf395530583950a8ec37ea20e63dcacc669c064f0ee86";
-            this.HashOverAllExtentViews = "7163195b016fe3c11ae5d85370db922777c584a664d27d44098dbebe29c4fdb6";
+            this.HashOverMappingClosure = "9c32dca7b784563d7adf680ac6465050ee319e91f0326d84834da3d66737d5d2";
+            this.HashOverAllExtentViews = "f19bb5d1e50a1afc9142da9c4ac975a29a3f64f0c44faa0a8321d2c774031082";
             this.ViewCount = 104;
         }
         
@@ -980,7 +980,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// </Summary>
         private System.Collections.Generic.KeyValuePair<string, string> GetView23()
         {
-            System.Text.StringBuilder viewString = new System.Text.StringBuilder(3371);
+            System.Text.StringBuilder viewString = new System.Text.StringBuilder(3467);
             viewString.Append("\r\n    SELECT VALUE -- Constructing SurveyQuestion\r\n        [SMDModel.Store.Surve");
             viewString.Append("yQuestion](T1.SurveyQuestion_SQID, T1.SurveyQuestion_LanguageID, T1.SurveyQuesti");
             viewString.Append("on_CountryID, T1.SurveyQuestion_Type, T1.SurveyQuestion_UserID, T1.SurveyQuestio");
@@ -995,35 +995,36 @@ namespace Edm_EntityMappingGeneratedViews
             viewString.Append("tion_ProjectedReach, T1.SurveyQuestion_ResultClicks, T1.SurveyQuestion_AgeRangeS");
             viewString.Append("tart, T1.SurveyQuestion_AgeRangeEnd, T1.SurveyQuestion_Gender, T1.SurveyQuestion");
             viewString.Append("_SubmissionDate, T1.SurveyQuestion_ParentSurveyId, T1.SurveyQuestion_Priority, T");
-            viewString.Append("1.SurveyQuestion_CompanyId, T1.SurveyQuestion_AnswerNeeded)\r\n    FROM (\r\n       ");
-            viewString.Append(" SELECT \r\n            T.SqId AS SurveyQuestion_SQID, \r\n            T.LanguageId ");
-            viewString.Append("AS SurveyQuestion_LanguageID, \r\n            T.CountryId AS SurveyQuestion_Countr");
-            viewString.Append("yID, \r\n            T.Type AS SurveyQuestion_Type, \r\n            T.UserId AS Surv");
-            viewString.Append("eyQuestion_UserID, \r\n            T.Status AS SurveyQuestion_Status, \r\n          ");
-            viewString.Append("  T.Question AS SurveyQuestion_Question, \r\n            T.Description AS SurveyQu");
-            viewString.Append("estion_Description, \r\n            T.RepeatPeriod AS SurveyQuestion_RepeatPeriod,");
-            viewString.Append(" \r\n            T.DisplayQuestion AS SurveyQuestion_DisplayQuestion, \r\n          ");
-            viewString.Append("  T.StartDate AS SurveyQuestion_StartDate, \r\n            T.EndDate AS SurveyQues");
-            viewString.Append("tion_EndDate, \r\n            T.Approved AS SurveyQuestion_Approved, \r\n           ");
-            viewString.Append(" T.ApprovedByUserId AS SurveyQuestion_ApprovedByUserID, \r\n            T.Approval");
-            viewString.Append("Date AS SurveyQuestion_ApprovalDate, \r\n            T.CreationDate AS SurveyQuest");
-            viewString.Append("ion_CreationDate, \r\n            T.ModifiedDate AS SurveyQuestion_ModifiedDate, \r");
-            viewString.Append("\n            T.CreatedBy AS SurveyQuestion_CreatedBy, \r\n            T.ModifiedBy");
-            viewString.Append(" AS SurveyQuestion_ModifiedBy, \r\n            T.LeftPicturePath AS SurveyQuestion");
-            viewString.Append("_LeftPicturePath, \r\n            T.RightPicturePath AS SurveyQuestion_RightPictur");
-            viewString.Append("ePath, \r\n            T.DiscountVoucherApplied AS SurveyQuestion_DiscountVoucherA");
-            viewString.Append("pplied, \r\n            T.VoucherCode AS SurveyQuestion_VoucherCode, \r\n           ");
-            viewString.Append(" T.DiscountVoucherId AS SurveyQuestion_DiscountVoucherID, \r\n            T.Reject");
-            viewString.Append("ionReason AS SurveyQuestion_RejectionReason, \r\n            T.ProjectedReach AS S");
-            viewString.Append("urveyQuestion_ProjectedReach, \r\n            T.ResultClicks AS SurveyQuestion_Res");
-            viewString.Append("ultClicks, \r\n            T.AgeRangeStart AS SurveyQuestion_AgeRangeStart, \r\n    ");
-            viewString.Append("        T.AgeRangeEnd AS SurveyQuestion_AgeRangeEnd, \r\n            T.Gender AS S");
-            viewString.Append("urveyQuestion_Gender, \r\n            T.SubmissionDate AS SurveyQuestion_Submissio");
-            viewString.Append("nDate, \r\n            T.ParentSurveyId AS SurveyQuestion_ParentSurveyId, \r\n      ");
-            viewString.Append("      T.Priority AS SurveyQuestion_Priority, \r\n            T.CompanyId AS Survey");
-            viewString.Append("Question_CompanyId, \r\n            T.AnswerNeeded AS SurveyQuestion_AnswerNeeded,");
-            viewString.Append(" \r\n            True AS _from0\r\n        FROM BaseDbContext.SurveyQuestions AS T\r\n");
-            viewString.Append("    ) AS T1");
+            viewString.Append("1.SurveyQuestion_CompanyId, T1.SurveyQuestion_AnswerNeeded, T1.SurveyQuestion_Am");
+            viewString.Append("ountCharged)\r\n    FROM (\r\n        SELECT \r\n            T.SqId AS SurveyQuestion_");
+            viewString.Append("SQID, \r\n            T.LanguageId AS SurveyQuestion_LanguageID, \r\n            T.C");
+            viewString.Append("ountryId AS SurveyQuestion_CountryID, \r\n            T.Type AS SurveyQuestion_Typ");
+            viewString.Append("e, \r\n            T.UserId AS SurveyQuestion_UserID, \r\n            T.Status AS Su");
+            viewString.Append("rveyQuestion_Status, \r\n            T.Question AS SurveyQuestion_Question, \r\n    ");
+            viewString.Append("        T.Description AS SurveyQuestion_Description, \r\n            T.RepeatPerio");
+            viewString.Append("d AS SurveyQuestion_RepeatPeriod, \r\n            T.DisplayQuestion AS SurveyQuest");
+            viewString.Append("ion_DisplayQuestion, \r\n            T.StartDate AS SurveyQuestion_StartDate, \r\n  ");
+            viewString.Append("          T.EndDate AS SurveyQuestion_EndDate, \r\n            T.Approved AS Surve");
+            viewString.Append("yQuestion_Approved, \r\n            T.ApprovedByUserId AS SurveyQuestion_ApprovedB");
+            viewString.Append("yUserID, \r\n            T.ApprovalDate AS SurveyQuestion_ApprovalDate, \r\n        ");
+            viewString.Append("    T.CreationDate AS SurveyQuestion_CreationDate, \r\n            T.ModifiedDate ");
+            viewString.Append("AS SurveyQuestion_ModifiedDate, \r\n            T.CreatedBy AS SurveyQuestion_Crea");
+            viewString.Append("tedBy, \r\n            T.ModifiedBy AS SurveyQuestion_ModifiedBy, \r\n            T.");
+            viewString.Append("LeftPicturePath AS SurveyQuestion_LeftPicturePath, \r\n            T.RightPictureP");
+            viewString.Append("ath AS SurveyQuestion_RightPicturePath, \r\n            T.DiscountVoucherApplied A");
+            viewString.Append("S SurveyQuestion_DiscountVoucherApplied, \r\n            T.VoucherCode AS SurveyQu");
+            viewString.Append("estion_VoucherCode, \r\n            T.DiscountVoucherId AS SurveyQuestion_Discount");
+            viewString.Append("VoucherID, \r\n            T.RejectionReason AS SurveyQuestion_RejectionReason, \r\n");
+            viewString.Append("            T.ProjectedReach AS SurveyQuestion_ProjectedReach, \r\n            T.R");
+            viewString.Append("esultClicks AS SurveyQuestion_ResultClicks, \r\n            T.AgeRangeStart AS Sur");
+            viewString.Append("veyQuestion_AgeRangeStart, \r\n            T.AgeRangeEnd AS SurveyQuestion_AgeRang");
+            viewString.Append("eEnd, \r\n            T.Gender AS SurveyQuestion_Gender, \r\n            T.Submissio");
+            viewString.Append("nDate AS SurveyQuestion_SubmissionDate, \r\n            T.ParentSurveyId AS Survey");
+            viewString.Append("Question_ParentSurveyId, \r\n            T.Priority AS SurveyQuestion_Priority, \r\n");
+            viewString.Append("            T.CompanyId AS SurveyQuestion_CompanyId, \r\n            T.AnswerNeede");
+            viewString.Append("d AS SurveyQuestion_AnswerNeeded, \r\n            T.AmountCharged AS SurveyQuestio");
+            viewString.Append("n_AmountCharged, \r\n            True AS _from0\r\n        FROM BaseDbContext.Survey");
+            viewString.Append("Questions AS T\r\n    ) AS T1");
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.SurveyQuestion", viewString.ToString());
         }
         
@@ -2115,7 +2116,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// </Summary>
         private System.Collections.Generic.KeyValuePair<string, string> GetView63()
         {
-            System.Text.StringBuilder viewString = new System.Text.StringBuilder(3378);
+            System.Text.StringBuilder viewString = new System.Text.StringBuilder(3474);
             viewString.Append("\r\n    SELECT VALUE -- Constructing SurveyQuestions\r\n        [DomainModels.Survey");
             viewString.Append("Question](T1.SurveyQuestion_SqId, T1.SurveyQuestion_LanguageId, T1.SurveyQuestio");
             viewString.Append("n_CountryId, T1.SurveyQuestion_Type, T1.SurveyQuestion_UserId, T1.SurveyQuestion");
@@ -2130,35 +2131,36 @@ namespace Edm_EntityMappingGeneratedViews
             viewString.Append("ion_ProjectedReach, T1.SurveyQuestion_ResultClicks, T1.SurveyQuestion_AgeRangeSt");
             viewString.Append("art, T1.SurveyQuestion_AgeRangeEnd, T1.SurveyQuestion_Gender, T1.SurveyQuestion_");
             viewString.Append("SubmissionDate, T1.SurveyQuestion_ParentSurveyId, T1.SurveyQuestion_Priority, T1");
-            viewString.Append(".SurveyQuestion_CompanyId, T1.SurveyQuestion_AnswerNeeded)\r\n    FROM (\r\n        ");
-            viewString.Append("SELECT \r\n            T.SQID AS SurveyQuestion_SqId, \r\n            T.LanguageID A");
-            viewString.Append("S SurveyQuestion_LanguageId, \r\n            T.CountryID AS SurveyQuestion_Country");
-            viewString.Append("Id, \r\n            T.Type AS SurveyQuestion_Type, \r\n            T.UserID AS Surve");
-            viewString.Append("yQuestion_UserId, \r\n            T.Status AS SurveyQuestion_Status, \r\n           ");
-            viewString.Append(" T.Question AS SurveyQuestion_Question, \r\n            T.Description AS SurveyQue");
-            viewString.Append("stion_Description, \r\n            T.RepeatPeriod AS SurveyQuestion_RepeatPeriod, ");
-            viewString.Append("\r\n            T.DisplayQuestion AS SurveyQuestion_DisplayQuestion, \r\n           ");
-            viewString.Append(" T.StartDate AS SurveyQuestion_StartDate, \r\n            T.EndDate AS SurveyQuest");
-            viewString.Append("ion_EndDate, \r\n            T.Approved AS SurveyQuestion_Approved, \r\n            ");
-            viewString.Append("T.ApprovedByUserID AS SurveyQuestion_ApprovedByUserId, \r\n            T.ApprovalD");
-            viewString.Append("ate AS SurveyQuestion_ApprovalDate, \r\n            T.CreationDate AS SurveyQuesti");
-            viewString.Append("on_CreationDate, \r\n            T.ModifiedDate AS SurveyQuestion_ModifiedDate, \r\n");
-            viewString.Append("            T.CreatedBy AS SurveyQuestion_CreatedBy, \r\n            T.ModifiedBy ");
-            viewString.Append("AS SurveyQuestion_ModifiedBy, \r\n            T.LeftPicturePath AS SurveyQuestion_");
-            viewString.Append("LeftPicturePath, \r\n            T.RightPicturePath AS SurveyQuestion_RightPicture");
-            viewString.Append("Path, \r\n            T.DiscountVoucherApplied AS SurveyQuestion_DiscountVoucherAp");
-            viewString.Append("plied, \r\n            T.VoucherCode AS SurveyQuestion_VoucherCode, \r\n            ");
-            viewString.Append("T.DiscountVoucherID AS SurveyQuestion_DiscountVoucherId, \r\n            T.Rejecti");
-            viewString.Append("onReason AS SurveyQuestion_RejectionReason, \r\n            T.ProjectedReach AS Su");
-            viewString.Append("rveyQuestion_ProjectedReach, \r\n            T.ResultClicks AS SurveyQuestion_Resu");
-            viewString.Append("ltClicks, \r\n            T.AgeRangeStart AS SurveyQuestion_AgeRangeStart, \r\n     ");
-            viewString.Append("       T.AgeRangeEnd AS SurveyQuestion_AgeRangeEnd, \r\n            T.Gender AS Su");
-            viewString.Append("rveyQuestion_Gender, \r\n            T.SubmissionDate AS SurveyQuestion_Submission");
-            viewString.Append("Date, \r\n            T.ParentSurveyId AS SurveyQuestion_ParentSurveyId, \r\n       ");
-            viewString.Append("     T.Priority AS SurveyQuestion_Priority, \r\n            T.CompanyId AS SurveyQ");
-            viewString.Append("uestion_CompanyId, \r\n            T.AnswerNeeded AS SurveyQuestion_AnswerNeeded, ");
-            viewString.Append("\r\n            True AS _from0\r\n        FROM SMDModelStoreContainer.SurveyQuestion");
-            viewString.Append(" AS T\r\n    ) AS T1");
+            viewString.Append(".SurveyQuestion_CompanyId, T1.SurveyQuestion_AnswerNeeded, T1.SurveyQuestion_Amo");
+            viewString.Append("untCharged)\r\n    FROM (\r\n        SELECT \r\n            T.SQID AS SurveyQuestion_S");
+            viewString.Append("qId, \r\n            T.LanguageID AS SurveyQuestion_LanguageId, \r\n            T.Co");
+            viewString.Append("untryID AS SurveyQuestion_CountryId, \r\n            T.Type AS SurveyQuestion_Type");
+            viewString.Append(", \r\n            T.UserID AS SurveyQuestion_UserId, \r\n            T.Status AS Sur");
+            viewString.Append("veyQuestion_Status, \r\n            T.Question AS SurveyQuestion_Question, \r\n     ");
+            viewString.Append("       T.Description AS SurveyQuestion_Description, \r\n            T.RepeatPeriod");
+            viewString.Append(" AS SurveyQuestion_RepeatPeriod, \r\n            T.DisplayQuestion AS SurveyQuesti");
+            viewString.Append("on_DisplayQuestion, \r\n            T.StartDate AS SurveyQuestion_StartDate, \r\n   ");
+            viewString.Append("         T.EndDate AS SurveyQuestion_EndDate, \r\n            T.Approved AS Survey");
+            viewString.Append("Question_Approved, \r\n            T.ApprovedByUserID AS SurveyQuestion_ApprovedBy");
+            viewString.Append("UserId, \r\n            T.ApprovalDate AS SurveyQuestion_ApprovalDate, \r\n         ");
+            viewString.Append("   T.CreationDate AS SurveyQuestion_CreationDate, \r\n            T.ModifiedDate A");
+            viewString.Append("S SurveyQuestion_ModifiedDate, \r\n            T.CreatedBy AS SurveyQuestion_Creat");
+            viewString.Append("edBy, \r\n            T.ModifiedBy AS SurveyQuestion_ModifiedBy, \r\n            T.L");
+            viewString.Append("eftPicturePath AS SurveyQuestion_LeftPicturePath, \r\n            T.RightPicturePa");
+            viewString.Append("th AS SurveyQuestion_RightPicturePath, \r\n            T.DiscountVoucherApplied AS");
+            viewString.Append(" SurveyQuestion_DiscountVoucherApplied, \r\n            T.VoucherCode AS SurveyQue");
+            viewString.Append("stion_VoucherCode, \r\n            T.DiscountVoucherID AS SurveyQuestion_DiscountV");
+            viewString.Append("oucherId, \r\n            T.RejectionReason AS SurveyQuestion_RejectionReason, \r\n ");
+            viewString.Append("           T.ProjectedReach AS SurveyQuestion_ProjectedReach, \r\n            T.Re");
+            viewString.Append("sultClicks AS SurveyQuestion_ResultClicks, \r\n            T.AgeRangeStart AS Surv");
+            viewString.Append("eyQuestion_AgeRangeStart, \r\n            T.AgeRangeEnd AS SurveyQuestion_AgeRange");
+            viewString.Append("End, \r\n            T.Gender AS SurveyQuestion_Gender, \r\n            T.Submission");
+            viewString.Append("Date AS SurveyQuestion_SubmissionDate, \r\n            T.ParentSurveyId AS SurveyQ");
+            viewString.Append("uestion_ParentSurveyId, \r\n            T.Priority AS SurveyQuestion_Priority, \r\n ");
+            viewString.Append("           T.CompanyId AS SurveyQuestion_CompanyId, \r\n            T.AnswerNeeded");
+            viewString.Append(" AS SurveyQuestion_AnswerNeeded, \r\n            T.AmountCharged AS SurveyQuestion");
+            viewString.Append("_AmountCharged, \r\n            True AS _from0\r\n        FROM SMDModelStoreContaine");
+            viewString.Append("r.SurveyQuestion AS T\r\n    ) AS T1");
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.SurveyQuestions", viewString.ToString());
         }
         

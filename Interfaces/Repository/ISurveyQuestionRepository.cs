@@ -17,7 +17,7 @@ namespace SMD.Interfaces.Repository
         /// <summary>
         /// Get Rejected Survey Questions | baqer
         /// </summary>
-        IEnumerable<SurveyQuestion> SearchRejectedProfileQuestions(SurveySearchRequest request, out int rowCount);
+        IEnumerable<SurveyQuestion> GetSurveyQuestionsForAproval(SurveySearchRequest request, out int rowCount);
 
         IEnumerable<SurveyQuestion> GetAll();
 

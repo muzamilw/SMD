@@ -55,7 +55,7 @@
 
               
                 <td>
-                    <p data-bind="text:createdBy"></p>
+                    <p data-bind="text:Company"></p>
                 </td>
                 <td>
                     <p data-bind="dateString:submissionDate,datePattern: 'DD/MM/YYYY'"></p>
@@ -109,26 +109,15 @@
                                             </div>
                                         </div>
                                        
+                                      
                                         <div class="col-lg-9">
                                             <div class="form-group">
                                                 <div class="col-lg-4 text-right">
-                                                   
-                                                    <label class="control-label text-right tooltip-float defaultImgUploadImageBtn">Description</label>
+
+                                                    <label class="control-label text-right tooltip-float defaultImgUploadImageBtn">Survey Answer Required</label>
                                                 </div>
                                                 <div class="col-lg-6">
-                                                    <input type="text" readonly class="form-control" data-bind="value: description">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-9">
-                                            <div class="form-group">
-                                                <div class="col-lg-4 text-right">
-                                                   
-                                                    <label class="control-label text-right tooltip-float defaultImgUploadImageBtn">Creator's Address</label>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <label class="form-control" data-bind="text: creatorAddress">
-                                                    </label>
+                                                    <input type="text" readonly class="form-control" data-bind="value: AnswerNeeded">
                                                 </div>
                                             </div>
                                         </div>
@@ -136,10 +125,33 @@
                                             <div class="form-group">
                                                 <div class="col-lg-4 text-right">
 
+                                                    <label class="control-label text-right tooltip-float defaultImgUploadImageBtn">Amount to be charged</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <input type="text" readonly class="form-control" data-bind="value: AmountCharged">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-9">
+                                            <div class="form-group">
+                                                <div class="col-lg-4 text-right">
+
+                                                    <label class="control-label text-right tooltip-float defaultImgUploadImageBtn">Projected Reach</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <input type="text" readonly class="form-control" data-bind="value: ProjectedReach">
+                                                </div>
+                                            </div>
+                                        </div>
+                                      
+                                        <div class="col-lg-9">
+                                            <div class="form-group">
+                                                <div class="col-lg-4 text-right">
+
                                                     <label class="control-label text-right tooltip-float defaultImgUploadImageBtn">Submitted By</label>
                                                 </div>
                                                 <div class="col-lg-6">
-                                                    <label class="form-control" data-bind="text: createdBy">
+                                                    <label class="form-control" data-bind="text: Company">
                                                     </label>
                                                 </div>
                                             </div>

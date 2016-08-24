@@ -51,6 +51,8 @@ namespace SMD.Models.DomainModels
 
 
         public int? AnswerNeeded { get; set; }
+
+        public double? AmountCharged { get; set; }
         
 
 

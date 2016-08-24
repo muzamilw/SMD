@@ -18,7 +18,7 @@ namespace SMD.Interfaces.Services
         /// <summary>
         /// Get Survey Questions that are need aprroval | baqer
         /// </summary>
-        SurveyQuestionResposneModelForAproval GetRejectedSurveyQuestionsForAproval(SurveySearchRequest request);
+        SurveyQuestionResposneModelForAproval GetSurveyQuestionsForAproval(SurveySearchRequest request);
 
         /// <summary>
         /// Edit Survey Question | baqer
