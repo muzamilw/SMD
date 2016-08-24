@@ -1112,7 +1112,6 @@ blockquote.pull-right:before {
     line-height: 36px;
     margin-left: -15px;
     margin-right: -15px;
-    position: absolute;
     width: 100%;
 }
 

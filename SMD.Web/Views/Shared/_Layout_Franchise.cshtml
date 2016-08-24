@@ -26,7 +26,7 @@
     @Styles.Render("~/Content/themes/Centaurus/css/bundleCentaurus/css")
     @* If Debuggin is Enabled then pick css *@
     @if (HttpContext.Current.IsDebuggingEnabled)
-    { 
+    {
         <link href="~/Content/less/MainSite.css" rel="stylesheet" />
     }
     else
@@ -50,12 +50,12 @@
     <header class="navbar" id="header-navbar">
         <div class="col-md-12 col-lg-12 col-sm-12" style="height: 4px; background-color: black; position: absolute; margin-top: 100px;"></div>
         <div class="container" style="height:100px;">
-            <a href="~/" id="header" class="cashlogox my-navigator navbar-brand logoAnchor " ></a>
+            <a href="~/" id="header" class="cashlogox my-navigator navbar-brand logoAnchor "></a>
             <a href="~/" id="beta" class="cashbeta"></a>
             <div class="clearfix">
                 <button class="navbar-toggle" data-target=".navbar-ex1-collapse" data-toggle="collapse" type="button">
                     <span class="sr-only">Toggle navigation</span>
-                    @*<span class="fa fa-bars"></span>*@
+                   
                 </button>
                 <div style="display:inline-block;margin-top:20px;">
                     <div class="pull-left" style="width:100px;height:50px;background-color:white;"><img style="width:100px;height:50px;" src="~/@CompanyLogo" /></div>
@@ -66,26 +66,6 @@
                         <p style="font-size:24px;">@CompanyName</p>
                     </div>
                 </div>
-                <div class="nav-no-collapse navbar-left pull-left hidden-sm hidden-xs" style="margin-top:23px;">
-                    @*<span style="font-size: 3em;color:white;padding-left:200px;">Targeting Material</span>*@
-                    <ul class="nav navbar-nav pull-left">
-                        <li>
-                            @if (!User.IsInRole("User"))
-                            {
-                                @*<a class="btn" id="make-small-nav">
-                                        <i class="fa fa-bars"></i>
-                                    </a>*@
-                            }
-                            else
-                            {
-                                //  classes = "removeMenuMargin";
-                                classesMenu = "displayNone";
-                            }
-                        </li>
-                    </ul>
-                </div>
-
-
 
                 <div class="nav-no-collapse pull-right" id="header-nav" style="margin-top:23px;">
 
@@ -97,7 +77,7 @@
                                 <div class="user-positioner" style="position:fixed;">
                                 </div>
                             </a>
-                          
+
                         </li>
                         <!-- Normal Menu-->
                         <li class="dropdown profile-dropdown">
@@ -144,7 +124,7 @@
                                 <span class="hidden-xs">
                                     <i class="fa fa-life-ring"></i>
                                 </span> <b class="caret"></b>
-                              
+
                             </a>
                             <ul class="dropdown-menu loginMenu">
                                 <li><a href="">Startup Guide</a></li>
@@ -154,9 +134,9 @@
                             </ul>
                         </li>
 
-                   
+
                         <li class="hidden-xxs">
-                            <a  href="~/Account/LogOff">
+                            <a href="~/Account/LogOff">
                                 <i class="fa fa-power-off"></i>
                             </a>
                         </li>
@@ -172,8 +152,8 @@
             @RenderSection("leftmenue", required: false)
 
             @*content wrapper goes here*@
-            <div id="content-wrapper" class="removeMenuMargin" >
-               
+            <div id="content-wrapper" class="removeMenuMargin">
+
                 <div class="row" id="topArea" style="margin-bottom:15px;">
                     @*<div class="row">
                         <div class="col-sm-6 pull-left">
@@ -185,64 +165,64 @@
 
                         </div>
                         <div class="col-sm-6 pull-right text-right" >
-                          
+
                             <a class="btn btn-default btn-gray " id="btninviteusers" style="    width: 100px;float:right;margin-right:0px;" href="~/user/ManageUser/ManageUsers">Create Global Surveys</a>
                             <a class="btn btn-default btn-gray " id="btninviteusers" style="    width: 100px;float:right;margin-right:0px;" href="~/user/ManageUser/ManageUsers">Create Global Profile Questions</a>
                             <a class="btn btn-default btn-gray " id="btninviteusers" style="    width: 100px;float:right;margin-right:0px;" href="~/user/ManageUser/ManageUsers">Refer a Business</a>
                             <a class="btn btn-default btn-gray " id="btninviteusers" style="    width: 100px;float:right;margin-right:0px;" href="~/user/ManageUser/ManageUsers">Franchise Analtics</a>
                             <a class="btn btn-default btn-gray " id="btninviteusers" style="    width: 100px;float:right;margin-right:0px;" href="~/user/ManageUser/ManageUsers">Franchise sub Companies</a>
                             <a class="btn btn-default btn-gray " id="btninviteusers" style="    width: 100px;float:right;margin-right:0px;" href="~/user/ManageUser/ManageUsers">Invite Users</a>
-                            
+
                             </div>
                         </div>*@
-                    </div>
-
-
                 </div>
 
 
-                @RenderBody()
-                <!-- ko stopBinding: true -->
-                @Html.Partial("~/Areas/Common/Views/Shared/_ConfirmationDialog.cshtml")
-                <!-- /ko -->
-                <div id="bindingPartialViews">
-                    @{
-                        Html.RenderPartial("~/Areas/Coupons/Views/Shared/_BranchDetails.cshtml");
-                    }
-                </div>
-                <div id="bindingPhrasePartialViews">
-                    @{
-                        Html.RenderPartial("~/Areas/Common/Views/Shared/_phraseLibrary.cshtml");
-                    }
-                </div>
+            </div>
 
-                <div id="bindingUserProfilePartialViews">
-                    @{
-                        Html.RenderPartial("~/Areas/Common/Views/Shared/_UserProfile.cshtml");
-                    }
-                </div>
 
-                <div id="bindingCompanyProfilePartialViews">
-                    @{
-                        Html.RenderPartial("~/Areas/Common/Views/Shared/_companyProfile.cshtml");
-                    }
-                </div>
+            @RenderBody()
+            <!-- ko stopBinding: true -->
+            @Html.Partial("~/Areas/Common/Views/Shared/_ConfirmationDialog.cshtml")
+            <!-- /ko -->
+            <div id="bindingPartialViews">
+                @{
+                    Html.RenderPartial("~/Areas/Coupons/Views/Shared/_BranchDetails.cshtml");
+                }
+            </div>
+            <div id="bindingPhrasePartialViews">
+                @{
+                    Html.RenderPartial("~/Areas/Common/Views/Shared/_phraseLibrary.cshtml");
+                }
+            </div>
 
-                    <div id="spinner" style="display: none">
-                    </div>
-                    <div id="siteUrl">
-                    </div>
-                    <footer id="footer-bar" class="row">
-                        <p id="footer-copyright" class="col-xs-12">
-                            &copy; @DateTime.Now.Year Powered by CrowdCentz Ltd (UK)
-                        </p>
-                    </footer>
-                </div>
+            <div id="bindingUserProfilePartialViews">
+                @{
+                    Html.RenderPartial("~/Areas/Common/Views/Shared/_UserProfile.cshtml");
+                }
+            </div>
+
+            <div id="bindingCompanyProfilePartialViews">
+                @{
+                    Html.RenderPartial("~/Areas/Common/Views/Shared/_companyProfile.cshtml");
+                }
+            </div>
+
+            <div id="spinner" style="display: none">
+            </div>
+            <div id="siteUrl">
+            </div>
+            <footer id="footer-bar" class="row">
+                <p id="footer-copyright" class="col-xs-12">
+                    &copy; @DateTime.Now.Year Powered by CrowdCentz Ltd (UK)
+                </p>
+            </footer>
         </div>
     </div>
+   
     @*<!-- ko stopBinding: true -->
-    @Html.Partial("~/Areas/Common/Views/Shared/_ConfirmationDialog.cshtml")
-    <!-- /ko -->*@
+        @Html.Partial("~/Areas/Common/Views/Shared/_ConfirmationDialog.cshtml")
+        <!-- /ko -->*@
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     <script>
@@ -253,7 +233,7 @@
 
 
         function collapseMainMenu() {
-           
+
             $('#topArea').collapse('hide');
         }
 
@@ -274,7 +254,7 @@
         require(["PhraseLibrary/phraseLibrary.view"]);
         require(["common/userProfile.view"]);
         require(["common/companyProfile.view"]);
-      
+
         $(document).ready(function () {
             $("#make-small-nav").click(function () {
                 $("#header-logo").toggle();
@@ -282,11 +262,11 @@
             });
 
             $('#topArea').collapse();
-            
+
             $("#btnPhraseLibrary").click(function () {
                 $("#btnPhraseLibrary").css("background-color", "#93bf47");
             });
-          
+
             $("#phrase-libraryCloseButton").click(function () {
                 $("#btnPhraseLibrary").css("background-color", "#7f8c8d");
                 $("#btnPhraseLibrary").css("border-color", "#5c6667");
@@ -295,7 +275,7 @@
                 $("#btnPhraseLibrary").css("background-color", "#7f8c8d");
                 $("#btnPhraseLibrary").css("border-color", "#5c6667");
             });
-            
+
         });
     </script>
     @RenderSection("scripts", required: false)
