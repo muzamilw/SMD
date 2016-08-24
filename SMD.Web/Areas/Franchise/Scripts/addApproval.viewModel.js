@@ -1,8 +1,8 @@
 ﻿/*
     Module with the view model for the AdCampaign
 */
-define("addAproval/addApproval.viewModel",
-    ["jquery", "amplify", "ko", "addAproval/addApproval.dataservice", "addAproval/addApproval.model", "common/pagination",
+define("FranchiseDashboard/addApproval.viewModel",
+    ["jquery", "amplify", "ko", "FranchiseDashboard/addApproval.dataservice", "FranchiseDashboard/addApproval.model", "common/pagination",
      "common/confirmation.viewModel"],
     function ($, amplify, ko, dataservice, model, pagination, confirmation) {
         var ist = window.ist || {};

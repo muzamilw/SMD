@@ -39,7 +39,7 @@
                                     <div class="col-lg-9">
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
-                                                <label class="control-label text-right tooltip-float" data-bind="visible:!$root.isShowCopounMode()">Add Title</label>
+                                                <label class="control-label text-right tooltip-float" data-bind="visible:!$root.isShowCopounMode()">Ad Title</label>
                                                 <label class="control-label text-right tooltip-float" data-bind="visible:$root.isShowCopounMode()">Coupon Name</label>
                                             </div>
                                             <div class="col-lg-6">
@@ -52,8 +52,8 @@
                                             <div class="col-lg-4 text-right">
                                                 <label class="control-label text-right tooltip-float">Mode</label>
                                             </div>
-                                            <div class="col-lg-6">
-                                                <input type="text" readonly class="form-control">
+                                            <div class="col-lg-6"> 
+                                                <input type="text" readonly class="form-control" data-bind="value:deliveryDays">
                                             </div>
                                         </div>
                                     </div>
@@ -131,7 +131,7 @@
                                                 <label class="control-label text-right tooltip-float">Max Daily Budget</label>
                                             </div>
                                             <div class="col-lg-6">
-                                                <input type="text" readonly class="form-control">
+                                                <input type="text" readonly class="form-control" data-bind="value:maxDailyBudget">
                                             </div>
                                         </div>
                                     </div>

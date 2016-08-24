@@ -1,8 +1,8 @@
 ﻿/*
     View for the AdCampaign. Used to keep the viewmodel clear of UI related logic
 */
-define("addAproval/addApproval.view",
-    ["jquery", "addAproval/addApproval.viewModel"], function ($, adCampaignViewModel) {
+define("FranchiseDashboard/addApproval.view",
+    ["jquery", "FranchiseDashboard/addApproval.viewModel"], function ($, adCampaignViewModel) {
         var ist = window.ist || {};
         // View 
         ist.AdCampaign.view = (function (specifiedViewModel) {
