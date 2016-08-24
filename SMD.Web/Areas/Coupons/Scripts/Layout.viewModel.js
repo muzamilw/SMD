@@ -19,7 +19,7 @@
                 isMapVisible = ko.observable(false);
                 isdeleteEnable = ko.observable(true),
                 isCodeAddressEdit = ko.observable(false),
-                counter = ko.observable(0),
+                count = ko.observable(0),
                 defaultOpenBranchFieldName = ko.observable(),
                 viewBranchDialog = function () {
                     view.showBranchCategoryDialog()
@@ -110,6 +110,7 @@
                                                           })
                                                       }
                                                       selectedBranch(null);
+                                                      isCodeAddressEdit(false);
                                                       if (afterBranchSelect && typeof afterBranchSelect === "function") {
                                                           afterBranchSelect();
                                                       }
@@ -199,9 +200,9 @@
                      }
                  },
                 AddNewCategory = function () {
-                    counter(counter() - 1);
+                    count(count() - 1);
                     var newCategory = new model.BranchCategory.Create({});
-                    newCategory.categoryId(counter());
+                    newCategory.categoryId(count());
                     newCategory.name("New Category");
                     newCategory.isEditMode(true);
                     newCategory.isExpanded(false);

@@ -1,8 +1,8 @@
 ﻿/*
     Module with the view model for the AdCampaign
 */
-define("addApproval/addApproval.viewModel",
-    ["jquery", "amplify", "ko", "addApproval/addApproval.dataservice", "addApproval/addApproval.model", "common/pagination",
+define("FranchiseDashboard/addApproval.viewModel",
+    ["jquery", "amplify", "ko", "FranchiseDashboard/addApproval.dataservice", "FranchiseDashboard/addApproval.model", "common/pagination",
      "common/confirmation.viewModel"],
     function ($, amplify, ko, dataservice, model, pagination, confirmation) {
         var ist = window.ist || {};
@@ -105,8 +105,15 @@ define("addApproval/addApproval.viewModel",
                         return (selectedCampaign().hasChanges());
                     }),
                     onApproveCampaign = function () {
-                        selectedCampaign().isApproved(true) ;
-                        onSaveCampaign();
+                        confirmation.messageText("Do you want to approve this Ad Campaign ? System will attempt to collect payment and generate invoice");
+                        confirmation.show();
+                        confirmation.afterCancel(function () {
+                            confirmation.hide();
+                        });
+                        confirmation.afterProceed(function () {
+                            selectedCampaign().isApproved(true) ;
+                            onSaveCampaign();
+                        });
                     },
                     // Reject buttoin handler 
                     onRejectCampaign = function() {

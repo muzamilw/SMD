@@ -1,23 +1,22 @@
 ﻿@{
     ViewBag.Title = "Store Details";
 }
-
 <div data-bind="visible: $root.isEditorVisible()" style="display: none">
     <div class="col-lg-12">
         @*<div class="row">
-            <div class="col-lg-12">
-                <ol class="breadcrumb">
-                    <li><a href="#" class="my-navigator">Home</a></li>
-                    <li><a href="#" class="my-navigator" >Ad Campaign Approval</a></li>
-                </ol>
-               
-            </div>
-        </div>*@
+                <div class="col-lg-12">
+                    <ol class="breadcrumb">
+                        <li><a href="#" class="my-navigator">Home</a></li>
+                        <li><a href="#" class="my-navigator" >Ad Campaign Approval</a></li>
+                    </ol>
+
+                </div>
+            </div>*@
         <div class="row" id="user-profile">
             <div class="col-lg-12 col-md-8 col-sm-8" style="padding-bottom: 10px;">
                 <div class="clearfix ">
                     <div class="col-xs-12" style="text-align: right; padding-right:0;margin-bottom:10px;">
-                    
+
                         <button class="btn btn-default" id="saveBtn" data-bind="click: $root.closeEditDialog">Close</button>
                     </div>
                 </div>
@@ -40,12 +39,7 @@
                                     <div class="col-lg-9">
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
-                                                <div class="bs-example-tooltips tooltip-float-width">
-                                                    <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
-                                                        <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                    </a>
-                                                </div>
-                                                <label class="control-label text-right tooltip-float" data-bind="visible:!$root.isShowCopounMode()">Campaign Name</label>
+                                                <label class="control-label text-right tooltip-float" data-bind="visible:!$root.isShowCopounMode()">Ad Title</label>
                                                 <label class="control-label text-right tooltip-float" data-bind="visible:$root.isShowCopounMode()">Coupon Name</label>
                                             </div>
                                             <div class="col-lg-6">
@@ -53,15 +47,19 @@
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="col-lg-9">
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
-                                                <div class="bs-example-tooltips tooltip-float-width">
-                                                    <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
-                                                        <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                    </a>
-                                                </div>
+                                                <label class="control-label text-right tooltip-float">Mode</label>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <input type="text" readonly class="form-control" data-bind="value:deliveryDays">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-9" data-bind="visible:false">
+                                        <div class="form-group">
+                                            <div class="col-lg-4 text-right">
                                                 <label class="control-label text-right tooltip-float">First line</label>
                                             </div>
                                             <div class="col-lg-6">
@@ -69,14 +67,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-9">
+                                    <div class="col-lg-9" data-bind="visible:false">
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
-                                                <div class="bs-example-tooltips tooltip-float-width">
-                                                    <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
-                                                        <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                    </a>
-                                                </div>
                                                 <label class="control-label text-right tooltip-float">Second line</label>
                                             </div>
                                             <div class="col-lg-6">
@@ -86,14 +79,6 @@
                                     </div>
                                     <div class="col-lg-9" data-bind="visible:$root.isShowCopounMode()">
                                         <div class="form-group">
-                                            <div class="col-lg-4 text-right">
-                                                <div class="bs-example-tooltips tooltip-float-width">
-                                                    <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
-                                                        <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                    </a>
-                                                </div>
-                                                <label class="control-label text-right tooltip-float">Purse Swap Value</label>
-                                            </div>
                                             <div class="col-lg-6">
                                                 <input type="text" readonly class="form-control" data-bind="value: CouponSwapValue">
                                             </div>
@@ -102,11 +87,6 @@
                                     <div class="col-lg-9" data-bind="visible:$root.isShowCopounMode()">
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
-                                                <div class="bs-example-tooltips tooltip-float-width">
-                                                    <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
-                                                        <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                    </a>
-                                                </div>
                                                 <label class="control-label text-right tooltip-float">Actual Value</label>
                                             </div>
                                             <div class="col-lg-6">
@@ -117,11 +97,6 @@
                                     <div class="col-lg-9" data-bind="visible:$root.isShowCopounMode()">
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
-                                                <div class="bs-example-tooltips tooltip-float-width">
-                                                    <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
-                                                        <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                    </a>
-                                                </div>
                                                 <label class="control-label text-right tooltip-float">Quantity</label>
                                             </div>
                                             <div class="col-lg-6">
@@ -129,19 +104,13 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-9 marginBottom12">
+                                    <div class="col-lg-9 marginBottom12" data-bind="visible:imagePath()!=''">
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
-                                                <div class="bs-example-tooltips tooltip-float-width">
-                                                    <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
-                                                        <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                    </a>
-                                                </div>
-                                                <label class="control-label text-right tooltip-float">Image</label>
+                                                <label class="control-label text-right tooltip-float">Logo</label>
                                             </div>
-
                                             <div class="col-md-6">
-                                                <img id="vehicleImage" alt="" style="width: auto;height:80px" data-bind="attr:{src:'/'+ imagePath() }" />
+                                                <img id="vehicleImage" alt="" style="width: auto;height:80px" data-bind="attr:{src:'/'+ imagePath()}" />
                                                 <h5><span></span></h5>
                                             </div>
                                         </div>
@@ -149,11 +118,6 @@
                                     <div class="col-lg-9" data-bind="visible:!$root.isShowCopounMode()">
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
-                                                <div class="bs-example-tooltips tooltip-float-width">
-                                                    <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
-                                                        <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                    </a>
-                                                </div>
                                                 <label class="control-label text-right tooltip-float">Max Budget</label>
                                             </div>
                                             <div class="col-lg-6">
@@ -164,11 +128,16 @@
                                     <div class="col-lg-9" data-bind="visible:!$root.isShowCopounMode()">
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
-                                                <div class="bs-example-tooltips tooltip-float-width">
-                                                    <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
-                                                        <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                    </a>
-                                                </div>
+                                                <label class="control-label text-right tooltip-float">Max Daily Budget</label>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <input type="text" readonly class="form-control" data-bind="value:maxDailyBudget">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-9" data-bind="visible:!$root.isShowCopounMode()">
+                                        <div class="form-group">
+                                            <div class="col-lg-4 text-right">
                                                 <label class="control-label text-right tooltip-float">Click Rate</label>
                                             </div>
                                             <div class="col-lg-6">
@@ -179,11 +148,6 @@
                                     <div class="col-lg-9" data-bind="visible:!$root.isShowCopounMode()">
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
-                                                <div class="bs-example-tooltips tooltip-float-width">
-                                                    <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
-                                                        <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                    </a>
-                                                </div>
                                                 <label class="control-label text-right tooltip-float">Type</label>
                                             </div>
                                             <div class="col-lg-6">
@@ -191,14 +155,10 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-9" style="display:none;">@*Todo::pilot data-bind="visible:!$root.isShowCopounMode()"*@
+                                    <div class="col-lg-9" style="display:none;">
+                                        @*Todo::pilot data-bind="visible:!$root.isShowCopounMode()"*@
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
-                                                <div class="bs-example-tooltips tooltip-float-width">
-                                                    <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
-                                                        <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                    </a>
-                                                </div>
                                                 <label class="control-label text-right tooltip-float">Voucher Heading</label>
                                             </div>
                                             <div class="col-lg-6">
@@ -208,78 +168,6 @@
                                     </div>
                                     <div class="col-lg-9" style="display:none;">
                                         @*Todo::pilot data-bind="visible:!$root.isShowCopounMode()"*@
-                                    <div class="form-group">
-                                        <div class="col-lg-4 text-right">
-                                            <div class="bs-example-tooltips tooltip-float-width">
-                                                <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
-                                                    <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                </a>
-                                            </div>
-                                            <label class="control-label text-right tooltip-float">Voucher Description</label>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <input type="text" readonly class="form-control" data-bind="value: Voucher1Description">
-                                        </div>
-                                    </div>
-                                </div>
-                                    <div class="col-lg-9" style="display:none;">
-                                        @*Todo::pilot data-bind="visible:!$root.isShowCopounMode()"*@
-                                    <div class="form-group">
-                                        <div class="col-lg-4 text-right">
-                                            <div class="bs-example-tooltips tooltip-float-width">
-                                                <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
-                                                    <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                </a>
-                                            </div>
-                                            <label class="control-label text-right tooltip-float">Voucher Value Discount</label>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <input type="text" readonly class="form-control" data-bind="value:Voucher1Value">
-                                        </div>
-                                    </div>
-                                </div>
-                                    <div class="col-lg-9 marginBottom12" style="display:none;">
-                                        @*Todo::pilot data-bind="visible:!$root.isShowCopounMode()"*@
-                                    <div class="form-group">
-                                        <div class="col-lg-4 text-right">
-                                            <div class="bs-example-tooltips tooltip-float-width">
-                                                <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
-                                                    <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                </a>
-                                            </div>
-                                            <label class="control-label text-right tooltip-float">Voucher Image</label>
-                                        </div>
-
-                                        <div class="col-md-6">
-                                            <img id="vehicleImage" alt="" style="width: 120px;height:120px" data-bind="attr:{src:'/' + Voucher1ImagePath() }" />
-                                            <h5><span></span></h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                    <div class="col-lg-9" data-bind="visible:type()==2">
-                                        <div class="form-group">
-                                            <div class="col-lg-4 text-right">
-                                              
-                                                <label class="control-label text-right tooltip-float"></label>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <a href="#"target="_blank" data-bind="text:landingLink , attr:{href:landingLink}"></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-9" data-bind="visible:type()==1">
-                                        <div class="form-group">
-                                            <div class="col-lg-4 text-right">
-                                              
-                                                <label class="control-label text-right tooltip-float"></label>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <object id="objVideoLink" width="420" height="315" data-bind="attr:{data:landingLink}"></object>
-                                             
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-9" data-bind="visible:!isApproved()">
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
                                                 <div class="bs-example-tooltips tooltip-float-width">
@@ -287,6 +175,147 @@
                                                         <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
                                                     </a>
                                                 </div>
+                                                <label class="control-label text-right tooltip-float">Voucher Description</label>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <input type="text" readonly class="form-control" data-bind="value: Voucher1Description">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-9" style="display:none;">
+                                        @*Todo::pilot data-bind="visible:!$root.isShowCopounMode()"*@
+                                        <div class="form-group">
+                                            <div class="col-lg-4 text-right">
+                                                <div class="bs-example-tooltips tooltip-float-width">
+                                                    <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
+                                                        <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                    </a>
+                                                </div>
+                                                <label class="control-label text-right tooltip-float">Voucher Value Discount</label>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <input type="text" readonly class="form-control" data-bind="value:Voucher1Value">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-9 marginBottom12" style="display:none;">
+                                        @*Todo::pilot data-bind="visible:!$root.isShowCopounMode()"*@
+                                        <div class="form-group">
+                                            <div class="col-lg-4 text-right">
+                                                <div class="bs-example-tooltips tooltip-float-width">
+                                                    <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
+                                                        <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                    </a>
+                                                </div>
+                                                <label class="control-label text-right tooltip-float">Voucher Image</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <img id="vehicleImage" alt="" style="width: 120px;height:120px" data-bind="attr:{src:'/' + Voucher1ImagePath() }" />
+                                                <h5><span></span></h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-9" data-bind="visible:type()==2">
+                                        <div class="form-group">
+                                            <div class="col-lg-4 text-right">
+
+                                                <label class="control-label text-right tooltip-float"></label>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <a href="#" target="_blank" data-bind="text:landingLink , attr:{href:landingLink}"></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-9" data-bind="visible:type()==1">
+                                        <div class="form-group">
+                                            <div class="col-lg-4 text-right">
+
+                                                <label class="control-label text-right tooltip-float"></label>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                @*<video controls width="420" height="315" data-bind="attr:{ src:videoLink2 }"></video>*@
+                                                <object id="objvideolink" width="420" height="315" data-bind="attr:{data:landingLink}"></object>
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-4 text-right">
+                                                <label class="control-label text-right tooltip-float">50/50 Quiz question</label>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <input type="text" readonly class="form-control" data-bind="value:verifyQuestion">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-4 text-right">
+                                                <label class="control-label text-right tooltip-float">Choice 1</label>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <input type="text" readonly class="form-control" data-bind="value:answer1">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-4 text-right">
+                                                <label class="control-label text-right tooltip-float">Choice 2</label>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <input type="text" readonly class="form-control" data-bind="value:answer2">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-4 text-right">
+                                                <label class="control-label text-right tooltip-float">Choice 3</label>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <input type="text" readonly class="form-control" data-bind="value:answer3">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-4 text-right">
+                                                <label class="control-label text-right tooltip-float">Correct Answer</label>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <input type="text" readonly class="form-control" data-bind="value:correctAnswer">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-4 text-campaign-left  Float-Left">
+                                                <label class="control-label text-right tooltip-float font20 floatNone" style="float:left !important;    margin-left: 6px; ">Coupon Buy it</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-4 text-right">
+                                                <label class="control-label text-right tooltip-float">First Line</label>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <input type="text" readonly class="form-control" data-bind="value:buyItLine1">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-4 text-right">
+                                                <label class="control-label text-right tooltip-float">Url</label>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <input type="text" readonly class="form-control" data-bind="value:videoUrl">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-4 text-right">
+                                                <label class="control-label text-right tooltip-float">Button Label</label>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <input type="text" readonly class="form-control" data-bind="value:buyItButtonLabel">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-9" data-bind="visible:!isApproved()">
+                                        <div class="form-group">
+                                            <div class="col-lg-4 text-right">
+                                                @*<div class="bs-example-tooltips tooltip-float-width">
+                                                        <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
+                                                            <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                        </a>
+                                                    </div>*@
                                                 <label class="control-label text-right tooltip-float">Rejection Reason</label>
                                             </div>
                                             <div class="col-lg-6">
@@ -297,11 +326,11 @@
                                     <div class="col-lg-9">
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
-                                              
+
                                             </div>
                                             <div class="col-lg-6">
-                                                <button class="btn  btn-info" id="saveBtn" data-bind="click:$root.onApproveCampaign">Approve</button>
-                                                <button class="btn  btn-info" id="saveBtn" data-bind="click:$root.onRejectCampaign, enable: $root.hasChangesOnCampaign, css: { 'btn-warning': $root.hasChangesOnCampaign }">Reject</button>
+                                                <button class="btn  btn-success" id="saveBtn" data-bind="click:$root.onApproveCampaign">Approve</button>
+                                                <button class="btn " id="saveBtn" data-bind="click:$root.onRejectCampaign, enable: $root.hasChangesOnCampaign, css: { ' btn-danger': $root.hasChangesOnCampaign }">Reject</button>
                                             </div>
                                         </div>
                                     </div>
@@ -312,7 +341,7 @@
                 </div>
             </div>
         </div>
-       
+
     </div>
-   
+
 </div>

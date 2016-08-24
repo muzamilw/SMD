@@ -1,0 +1,283 @@
+﻿@using SMD.Models.Common
+@using SMD.Common
+@{
+
+
+    string classes = "";
+    string classesMenu = "";
+
+
+    IEnumerable<CompanyIdClaimValue> companyClaimValues = ClaimHelper.GetClaimsByType<CompanyIdClaimValue>(SmdClaimTypes.CompanyId);
+    string CompanyName = companyClaimValues != null && companyClaimValues.Any() ? companyClaimValues.ElementAt(0).CompanyName : "Company Not Loaded";
+    string CompanyLogo = companyClaimValues != null && companyClaimValues.Any() ? companyClaimValues.ElementAt(0).CompanyLogo : "Claim not found";
+
+
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <script src="~/Scripts/jquery-2.1.0.min.js"></script>
+    <script src="~/Scripts/jquery.blockUI.js"></script>
+    <link rel="stylesheet" href="~/Content/themes/Centaurus/css/libs/fullcalendar.css" type="text/css" />
+    <link rel="stylesheet" href="~/Content/themes/Centaurus/css/libs/fullcalendar.print.css" type="text/css" media="print" />
+    @Styles.Render("~/Content/themes/Centaurus/css/bundleCentaurus/css")
+    @* If Debuggin is Enabled then pick css *@
+    @if (HttpContext.Current.IsDebuggingEnabled)
+    {
+        <link href="~/Content/less/MainSite.css" rel="stylesheet" />
+    }
+    else
+    {
+        @Styles.Render("~/Bundle/AppLess")
+    }
+    @Styles.Render("~/Bundles/BaseCss")
+    @Styles.Render("~/Content/themes/base/css")
+    <link type="image/x-icon" href="favicon.png" rel="shortcut icon" />
+    @if (HttpContext.Current.Request.IsLocal == false)
+    {
+        <link href='//fonts.googleapis.com/css?family=Open+Sans:400,600,700,300|Titillium+Web:200,300,400' rel='stylesheet' type='text/css'>
+
+    }
+    <!--[if lt IE 9]>
+        <script src="js/html5shiv.js"></script>
+        <script src="js/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="theme-blue-gradient">
+    <header class="navbar" id="header-navbar">
+        <div class="col-md-12 col-lg-12 col-sm-12" style="height: 4px; background-color: black; position: absolute; margin-top: 100px;"></div>
+        <div class="container" style="height:100px;">
+            <a href="~/" id="header" class="cashlogox my-navigator navbar-brand logoAnchor "></a>
+            <a href="~/" id="beta" class="cashbeta"></a>
+            <div class="clearfix">
+                <button class="navbar-toggle" data-target=".navbar-ex1-collapse" data-toggle="collapse" type="button">
+                    <span class="sr-only">Toggle navigation</span>
+                   
+                </button>
+                <div style="display:inline-block;margin-top:20px;">
+                    <div class="pull-left" style="width:100px;height:50px;background-color:white;"><img style="width:100px;height:50px;" src="~/@CompanyLogo" /></div>
+                    <div class="pull-left" style="color:white;margin-left:10px;">
+                        <p style="box-shadow: inset 0 0px 0 white, inset 0 -1px 0 white;margin-bottom:3px;display:inline-block">
+                            Franchise Dashboard for
+                        </p>
+                        <p style="font-size:24px;">@CompanyName</p>
+                    </div>
+                </div>
+
+                <div class="nav-no-collapse pull-right" id="header-nav" style="margin-top:23px;">
+
+                    <ul class="nav navbar-nav pull-right">
+                        <!-- MPC Admin Menu-->
+                        <li class="dropdown profile-dropdown @classesMenu" style="display:none;">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <span class="hidden-xs"> Admin Options  </span> <b class="caret"></b>
+                                <div class="user-positioner" style="position:fixed;">
+                                </div>
+                            </a>
+
+                        </li>
+                        <!-- Normal Menu-->
+                        <li class="dropdown profile-dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <span class="hidden-xs">
+                                    @if (User != null && User.Identity != null)
+                                    {
+                                        @User.Identity.Name
+                                    }
+                                </span> <b class="caret"></b>
+                                <div class="user-positioner" style="position:fixed;">
+                                </div>
+                            </a>
+                            <ul class="dropdown-menu loginMenu">
+                                <li><a href="">Approve/Reject </a></li>
+                                <li class="inlineMenuItem"><a href="~/Franchise/Dashboard/AddAproval">Approve Campaigns</a></li>
+                                <li class="inlineMenuItem"><a href="~/Ads/Ads/AddAproval?mode=2">Approve Coupons</a></li>
+                                <li class="inlineMenuItem"><a href="~/Franchise/Dashboard/SurveyQuestionApproval">Approve Survey Questions</a></li>
+                                <li class="inlineMenuItem"><a href="~/ProfileQuestion/Manage/Index">Approve Profile Questions</a></li>
+                                <li><a href="">Manage</a></li>
+                                <li class="inlineMenuItem"><a href="~/ProfileQuestion/Manage/Index">Global Profile Questions</a></li>
+                                <li class="inlineMenuItem"><a href="~/survey">Global Surveys</a></li>
+                                <li class="inlineMenuItem"><a href="~/survey">Global Coupon Categories</a></li>
+                                <li><a href="">View</a></li>
+                                <li class="inlineMenuItem"><a href="~/Ads/Ads/Index">&nbsp;&nbsp;All Live Ad Campaigns</a></li>
+
+                                <li><a href="~/Billing/Manage/Invoice">Reports and Analytics</a></li>
+                                <li><a href="~/Report/Report/TransactionReport">Cash4Ads Transaction Report</a></li>
+                                <li class="inlineMenuItem"><a href="~/Ads/Ads/Index">&nbsp;&nbsp;All Live Ad Campaigns</a></li>
+
+                                <li><a href="">Manage</a></li>
+                                <li class="inlineMenuItem"><a href="~/Ads/Ads/Index">&nbsp;&nbsp;All Live Ad Campaigns</a></li>
+                                <li class=""><a href="~/user/ManageUser/ManageUsers">Invite users </a></li>
+
+                                <li><a href="">Profile</a></li>
+                                <li id="userProfileBinding"><a data-bind="click:showUserProfileDialog">User Profile</a></li>
+                                <li id="companyProfileBinding"><a data-bind="click:showCompanyProfileDialog">Marketing profile/logo</a></li>
+                                <li><a href="~/">Analytics</a></li>
+                                <li><a href="~/Account/LogOff"><i class="fa fa-power-off"></i>Logout</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown profile-dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <span class="hidden-xs">
+                                    <i class="fa fa-life-ring"></i>
+                                </span> <b class="caret"></b>
+
+                            </a>
+                            <ul class="dropdown-menu loginMenu">
+                                <li><a href="">Startup Guide</a></li>
+                                <li><a href="">Training Videos</a></li>
+                                <li><a href="">Help Center</a></li>
+                                <li><a href="">Contact Us</a></li>
+                            </ul>
+                        </li>
+
+
+                        <li class="hidden-xxs">
+                            <a href="~/Account/LogOff">
+                                <i class="fa fa-power-off"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div id="page-wrapper" class="container">
+        <div class="row topMenuBtns">
+
+
+            @RenderSection("leftmenue", required: false)
+
+            @*content wrapper goes here*@
+            <div id="content-wrapper" class="removeMenuMargin">
+
+                <div class="row" id="topArea" style="margin-bottom:15px;">
+                    @*<div class="row">
+                        <div class="col-sm-6 pull-left">
+                            <a class="btn  btn-default btn-gray" style="float:left; width:20%;height:66px;margin-right:15px; white-space:normal;" id="btncampaigns" href="/Ads/Ads/AddAproval">Approve Video Campaigns</a>
+                            <a class="btn  btn-default btn-gray" style="float:left;width:20%;height:66px;white-space:normal;" href="/Coupons/Coupons" id="btnCoupons">Approve Cooupons</a>
+                            <a class="btn  btn-default btn-gray" style="float:left;width:20%;height:66px;white-space:normal;" href="/Survey/" id="btnSurvey">Approve Survey Questions</a>
+                            <a class="btn  btn-default btn-gray" style="float:left;width:20%;height:66px;white-space:normal;" href="~/ProfileQuestion/Manage/Index" id="btnProQuestions">Approve Profile Questions</a>
+
+
+                        </div>
+                        <div class="col-sm-6 pull-right text-right" >
+
+                            <a class="btn btn-default btn-gray " id="btninviteusers" style="    width: 100px;float:right;margin-right:0px;" href="~/user/ManageUser/ManageUsers">Create Global Surveys</a>
+                            <a class="btn btn-default btn-gray " id="btninviteusers" style="    width: 100px;float:right;margin-right:0px;" href="~/user/ManageUser/ManageUsers">Create Global Profile Questions</a>
+                            <a class="btn btn-default btn-gray " id="btninviteusers" style="    width: 100px;float:right;margin-right:0px;" href="~/user/ManageUser/ManageUsers">Refer a Business</a>
+                            <a class="btn btn-default btn-gray " id="btninviteusers" style="    width: 100px;float:right;margin-right:0px;" href="~/user/ManageUser/ManageUsers">Franchise Analtics</a>
+                            <a class="btn btn-default btn-gray " id="btninviteusers" style="    width: 100px;float:right;margin-right:0px;" href="~/user/ManageUser/ManageUsers">Franchise sub Companies</a>
+                            <a class="btn btn-default btn-gray " id="btninviteusers" style="    width: 100px;float:right;margin-right:0px;" href="~/user/ManageUser/ManageUsers">Invite Users</a>
+
+                            </div>
+                        </div>*@
+                </div>
+
+
+            </div>
+
+
+            @RenderBody()
+            <!-- ko stopBinding: true -->
+            @Html.Partial("~/Areas/Common/Views/Shared/_ConfirmationDialog.cshtml")
+            <!-- /ko -->
+            <div id="bindingPartialViews">
+                @{
+                    Html.RenderPartial("~/Areas/Coupons/Views/Shared/_BranchDetails.cshtml");
+                }
+            </div>
+            <div id="bindingPhrasePartialViews">
+                @{
+                    Html.RenderPartial("~/Areas/Common/Views/Shared/_phraseLibrary.cshtml");
+                }
+            </div>
+
+            <div id="bindingUserProfilePartialViews">
+                @{
+                    Html.RenderPartial("~/Areas/Common/Views/Shared/_UserProfile.cshtml");
+                }
+            </div>
+
+            <div id="bindingCompanyProfilePartialViews">
+                @{
+                    Html.RenderPartial("~/Areas/Common/Views/Shared/_companyProfile.cshtml");
+                }
+            </div>
+
+            <div id="spinner" style="display: none">
+            </div>
+            <div id="siteUrl">
+            </div>
+            <footer id="footer-bar" class="row">
+                <p id="footer-copyright" class="col-xs-12">
+                    &copy; @DateTime.Now.Year Powered by CrowdCentz Ltd (UK)
+                </p>
+            </footer>
+        </div>
+    </div>
+   
+    @*<!-- ko stopBinding: true -->
+        @Html.Partial("~/Areas/Common/Views/Shared/_ConfirmationDialog.cshtml")
+        <!-- /ko -->*@
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    <script>
+
+        (function ($) {
+            $("#siteUrl").val("@(Request.ApplicationPath == " / " ? " / " : Request.ApplicationPath)");
+        })($);
+
+
+        function collapseMainMenu() {
+
+            $('#topArea').collapse('hide');
+        }
+
+
+        function showMainMenu() {
+
+            $('#topArea').collapse('show');
+        }
+
+    </script>
+    @Scripts.Render("~/Bundle/BaseLibs")
+    <script src="~/Content/themes/Centaurus/js/fullcalendar.min.js"></script>
+    @Scripts.Render("~/Bundle/CentaurusLibs")
+    <script>
+
+        require(["common/confirmation.view"]);
+        require(["Layout/Layout.view"]);
+        require(["PhraseLibrary/phraseLibrary.view"]);
+        require(["common/userProfile.view"]);
+        require(["common/companyProfile.view"]);
+
+        $(document).ready(function () {
+            $("#make-small-nav").click(function () {
+                $("#header-logo").toggle();
+                $("#menu-logo").toggle();
+            });
+
+            $('#topArea').collapse();
+
+            $("#btnPhraseLibrary").click(function () {
+                $("#btnPhraseLibrary").css("background-color", "#93bf47");
+            });
+
+            $("#phrase-libraryCloseButton").click(function () {
+                $("#btnPhraseLibrary").css("background-color", "#7f8c8d");
+                $("#btnPhraseLibrary").css("border-color", "#5c6667");
+            });
+            $(".close").click(function () {
+                $("#btnPhraseLibrary").css("background-color", "#7f8c8d");
+                $("#btnPhraseLibrary").css("border-color", "#5c6667");
+            });
+
+        });
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

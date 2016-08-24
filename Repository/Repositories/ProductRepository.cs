@@ -38,9 +38,9 @@ namespace SMD.Repository.Repositories
         /// <summary>
         /// Get Product By Country 
         /// </summary>
-        public Product GetProductByCountryId(int? countryId, string productCode)
+        public Product GetProductByCountryId( string productCode)
         {
-            return DbSet.FirstOrDefault(pro => pro.CountryId == countryId && pro.ProductCode==productCode);
+            return DbSet.FirstOrDefault(pro =>  pro.ProductCode==productCode);
         }
         #endregion
     }

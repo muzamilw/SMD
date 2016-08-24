@@ -1,8 +1,8 @@
 ﻿/*
     Module with the view model for the Survey Questions
 */
-define("surveyQuestionApp/surveyQuestionApp.viewModel",
-    ["jquery", "amplify", "ko", "surveyQuestionApp/surveyQuestionApp.dataservice", "surveyQuestionApp/surveyQuestionApp.model", "common/pagination",
+define("FranchiseDashboard/surveyQuestionApp.viewModel",
+    ["jquery", "amplify", "ko", "FranchiseDashboard/surveyQuestionApp.dataservice", "FranchiseDashboard/surveyQuestionApp.model", "common/pagination",
      "common/confirmation.viewModel", "common/stripeChargeCustomer.viewModel"],
     function ($, amplify, ko, dataservice, model, pagination, confirmation, stripeChargeCustomer) {
         var ist = window.ist || {};

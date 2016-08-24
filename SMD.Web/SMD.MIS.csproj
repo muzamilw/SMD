@@ -534,6 +534,8 @@
     <Compile Include="Areas\ProfileQuestion\Controllers\ManageController.cs" />
     <Compile Include="Areas\Report\Controllers\ReportController.cs" />
     <Compile Include="Areas\Report\ReportAreaRegistration.cs" />
+    <Compile Include="Areas\Franchise\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\Franchise\FranchiseAreaRegistration.cs" />
     <Compile Include="Areas\SuperNova\Controllers\DashboardController.cs" />
     <Compile Include="Areas\SuperNova\SuperNovaAreaRegistration.cs" />
     <Compile Include="Areas\User\Controllers\ManageUserController.cs" />
@@ -618,10 +620,10 @@
     <Content Include="Areas\Ads\Scripts\ads.model.js" />
     <Content Include="Areas\Ads\Scripts\ads.view.js" />
     <Content Include="Areas\Ads\Scripts\ads.viewModel.js" />
-    <Content Include="Areas\Ads\Scripts\addApproval.dataservice.js" />
-    <Content Include="Areas\Ads\Scripts\addApproval.model.js" />
-    <Content Include="Areas\Ads\Scripts\addApproval.view.js" />
-    <Content Include="Areas\Ads\Scripts\addApproval.viewModel.js" />
+    <Content Include="Areas\Franchise\Scripts\addApproval.dataservice.js" />
+    <Content Include="Areas\Franchise\Scripts\addApproval.model.js" />
+    <Content Include="Areas\Franchise\Scripts\addApproval.view.js" />
+    <Content Include="Areas\Franchise\Scripts\addApproval.viewModel.js" />
     <Content Include="Areas\Ads\Scripts\BaseLibs.js" />
     <Content Include="Areas\Billing\Scripts\invoice.dataservice.js" />
     <Content Include="Areas\Billing\Scripts\invoice.model.js" />
@@ -655,10 +657,10 @@
     <Content Include="Areas\ProfileQuestion\Scripts\paypalExample.viewModel.js" />
     <Content Include="Areas\ProfileQuestion\Scripts\stripeExample.viewModel.js" />
     <Content Include="Areas\ProfileQuestion\Scripts\pQuestion.viewModel.js" />
-    <Content Include="Areas\Survey\Scripts\surveyQuestionApp.dataservice.js" />
-    <Content Include="Areas\Survey\Scripts\surveyQuestionApp.model.js" />
-    <Content Include="Areas\Survey\Scripts\surveyQuestionApp.view.js" />
-    <Content Include="Areas\Survey\Scripts\surveyQuestionApp.viewModel.js" />
+    <Content Include="Areas\Franchise\Scripts\surveyQuestionApp.dataservice.js" />
+    <Content Include="Areas\Franchise\Scripts\surveyQuestionApp.model.js" />
+    <Content Include="Areas\Franchise\Scripts\surveyQuestionApp.view.js" />
+    <Content Include="Areas\Franchise\Scripts\surveyQuestionApp.viewModel.js" />
     <Content Include="Areas\Survey\Scripts\survey.dataservice.js" />
     <Content Include="Areas\Survey\Scripts\survey.model.js" />
     <Content Include="Areas\Survey\Scripts\survey.view.js" />
@@ -1619,10 +1621,9 @@
     <Content Include="Areas\Survey\Views\Shared\_AddEditSurvey.cshtml" />
     <Content Include="Content\less\Campaign.less" />
     <Content Include="Content\less\Survey.less" />
-    <Content Include="Areas\Survey\Views\Survey\SurveyQuestionApproval.cshtml" />
-    <Content Include="Areas\Survey\Views\Survey\_SurveyQuestionEditor.cshtml" />
+    <Content Include="Areas\Franchise\Views\Dashboard\SurveyQuestionApproval.cshtml" />
     <Content Include="Areas\Ads\Views\Ads\_addEditor.cshtml" />
-    <Content Include="Areas\Ads\Views\Ads\AddAproval.cshtml" />
+    <Content Include="Areas\Franchise\Views\Dashboard\AddAproval.cshtml" />
     <Content Include="RichTextEditor\CHANGES.md" />
     <Content Include="RichTextEditor\LICENSE.md" />
     <Content Include="RichTextEditor\plugins\scayt\LICENSE.md" />
@@ -1679,6 +1680,10 @@
       <DependentUpon>Campaign.css</DependentUpon>
     </Content>
     <Content Include="Areas\SuperNova\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Franchise\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Franchise\Views\Dashboard\Index.cshtml" />
+    <Content Include="Areas\Franchise\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Franchise\Views\web.config" />
     <None Include="Areas\SuperNova\Views\web.config" />
     <Content Include="Areas\SuperNova\Views\Dashboard\Index.cshtml" />
     <Content Include="Areas\SuperNova\Views\_ViewStart.cshtml" />
@@ -2790,6 +2795,7 @@
     <Content Include="Views\Account\AcceptInvitation.cshtml" />
     <Content Include="Views\Shared\_Layout - Copy.cshtml" />
     <Content Include="Views\Shared\_Layout_Supernova.cshtml" />
+    <Content Include="Views\Shared\_Layout_Franchise.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2806,6 +2812,7 @@
     <Folder Include="Areas\Common\Controllers\" />
     <Folder Include="Areas\Common\Models\" />
     <Folder Include="Areas\Coupons\Models\" />
+    <Folder Include="Areas\Franchise\Models\" />
     <Folder Include="Areas\Report\Models\" />
     <Folder Include="Areas\SuperNova\Models\" />
     <Folder Include="Areas\Survey\Models\" />

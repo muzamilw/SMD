@@ -91,7 +91,7 @@ namespace SMD.Implementation.Services
             #region Stripe Payment
 
             // Get Current Product
-            var product = productRepository.GetProductByCountryId(source.CountryId, "SQ");
+            var product = productRepository.GetProductByCountryId( "SQ");
             // Tax Applied
             var tax = taxRepository.GetTaxByCountryId(source.CountryId);
             // Total includes tax
