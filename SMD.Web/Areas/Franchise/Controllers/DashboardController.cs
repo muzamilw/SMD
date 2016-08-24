@@ -28,5 +28,13 @@ namespace SMD.MIS.Areas.Franchise.Controllers
         {
             return View();
         }
+
+        /// <summary>
+        /// Approval/rejection of adds
+        /// </summary>
+        public ActionResult AddAproval()
+        {
+            return View();
+        }
     }
 }
