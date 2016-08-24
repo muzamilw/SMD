@@ -23,8 +23,8 @@
                                 <thead>
                                     <tr>
                                         <th class="col-lg-3 th-pointer"><span id="1">Question<span class="icon-up"></span></span></th>
-                                     
-                                        <th class="col-lg-3 th-pointer"><span id="3">Display Question<span></span></span></th>
+
+                                        
                                         <th class="col-lg-2 th-pointer"><span id="4">SUBMITTED BY<span></span></span></th>
                                         <th class="col-lg-2 th-pointer"><span id="5">Submission Date<span></span></span></th>
                                         <th class="col-lg-1">&nbsp;</th>
@@ -52,10 +52,8 @@
                 <td>
                     <p data-bind="text:question"></p>
                 </td>
-             
-                <td>
-                    <p data-bind="text:displayQuestion"></p>
-                </td>
+
+              
                 <td>
                     <p data-bind="text:createdBy"></p>
                 </td>
@@ -97,16 +95,12 @@
                                 <div class="tab-pane fade in active" data-bind="with: $root.selectedQuestion" id="tab-generalinfo">
                                     <div class="col-lg-12 form-horizontal">
                                         <h3 class="group-header" style="margin-top:20px;">
-                                            Survey Question General Info
+                                            Survey Question Details
                                         </h3>
                                         <div class="col-lg-9">
                                             <div class="form-group">
                                                 <div class="col-lg-4 text-right">
-                                                    <div class="bs-example-tooltips tooltip-float-width">
-                                                        <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
-                                                            <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                        </a>
-                                                    </div>
+                                                    
                                                     <label class="control-label text-right tooltip-float defaultImgUploadImageBtn">Question</label>
                                                 </div>
                                                 <div class="col-lg-6">
@@ -114,29 +108,11 @@
                                                 </div>
                                             </div>
                                         </div>
+                                       
                                         <div class="col-lg-9">
                                             <div class="form-group">
                                                 <div class="col-lg-4 text-right">
-                                                    <div class="bs-example-tooltips tooltip-float-width">
-                                                        <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
-                                                            <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                        </a>
-                                                    </div>
-                                                    <label class="control-label text-right tooltip-float defaultImgUploadImageBtn">Display Question</label>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <input type="text" readonly class="form-control" data-bind="value: displayQuestion">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-9">
-                                            <div class="form-group">
-                                                <div class="col-lg-4 text-right">
-                                                    <div class="bs-example-tooltips tooltip-float-width">
-                                                        <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
-                                                            <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                        </a>
-                                                    </div>
+                                                   
                                                     <label class="control-label text-right tooltip-float defaultImgUploadImageBtn">Description</label>
                                                 </div>
                                                 <div class="col-lg-6">
@@ -147,15 +123,35 @@
                                         <div class="col-lg-9">
                                             <div class="form-group">
                                                 <div class="col-lg-4 text-right">
-                                                    <div class="bs-example-tooltips tooltip-float-width">
-                                                        <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
-                                                            <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                        </a>
-                                                    </div>
+                                                   
                                                     <label class="control-label text-right tooltip-float defaultImgUploadImageBtn">Creator's Address</label>
                                                 </div>
                                                 <div class="col-lg-6">
-                                                    <label disabled="" class="form-control" data-bind="text: creatorAddress">
+                                                    <label class="form-control" data-bind="text: creatorAddress">
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-9">
+                                            <div class="form-group">
+                                                <div class="col-lg-4 text-right">
+
+                                                    <label class="control-label text-right tooltip-float defaultImgUploadImageBtn">Submitted By</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <label class="form-control" data-bind="text: createdBy">
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-9">
+                                            <div class="form-group">
+                                                <div class="col-lg-4 text-right">
+
+                                                    <label class="control-label text-right tooltip-float defaultImgUploadImageBtn">Submission Date</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <label class="form-control" data-bind="dateString:submissionDate,datePattern: 'DD/MM/YYYY'">
                                                     </label>
                                                 </div>
                                             </div>
@@ -163,20 +159,16 @@
                                         <div class="col-lg-9 marginBottom12">
                                             <div class="form-group">
                                                 <div class="col-lg-4 text-right">
-                                                    <div class="bs-example-tooltips tooltip-float-width">
-                                                        <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
-                                                            <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                        </a>
-                                                    </div>
+                                                    
                                                     <label class="control-label text-right tooltip-float defaultImgUploadImageBtn">Images</label>
                                                 </div>
 
                                                 <div class="col-md-3">
-                                                    <img id="vehicleImage" alt="" style="width: 120px;height:120px" data-bind="attr:{src:leftImage }" />
+                                                    <img id="vehicleImage" alt="" style="width: 200px;height:400px" data-bind="attr:{src:leftImage }" />
                                                     <h5>Left<span></span></h5>
                                                 </div>
                                                 <div class="col-md-3">
-                                                    <img id="vehicleImage" alt="" style="width: 120px;height:120px" data-bind="attr:{src:rightImage }" />
+                                                    <img id="vehicleImage" alt="" style="width: 200px;height:400px" data-bind="attr:{src:rightImage }" />
                                                     <h5>Right<span></span></h5>
                                                 </div>
                                             </div>
@@ -184,11 +176,7 @@
                                         <div class="col-lg-9" data-bind="visible:!isApproved()">
                                             <div class="form-group">
                                                 <div class="col-lg-4 text-right">
-                                                    <div class="bs-example-tooltips tooltip-float-width">
-                                                        <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
-                                                            <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                        </a>
-                                                    </div>
+                                                   
                                                     <label class="control-label text-right tooltip-float defaultImgUploadImageBtn">Rejection Reason</label>
                                                 </div>
                                                 <div class="col-lg-6">
