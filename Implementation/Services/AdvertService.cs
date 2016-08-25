@@ -354,7 +354,6 @@ namespace SMD.Implementation.Services
             {
                 campaignModel.MaxBudget = Math.Round(Convert.ToDouble(campaignModel.MaxBudget), 2);
             }
-
             //todo pilot: harcoding ClickRate = 1 for every campaign
             campaignModel.ClickRate = 0.20;
 

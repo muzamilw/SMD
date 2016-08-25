@@ -166,12 +166,12 @@ else
                                             <div style="    padding-top: 10px;    text-align: center;    font-size: 12px;    color: gray;" data-bind="visible:$root.FlagToShowDivs()">
                                                 max length 30 sec
                                             </div>
-                                            <video id="videoTag" controls style="width:300px;height:150px;" data-bind="attr:{ src: $root.VideoLink2src}"></video>
+                                            <video id="videoTag" controls style="width:300px;height:150px;" data-bind="    attr: { src: $root.VideoLink2src()+$root.randonNumber() }"></video>
                                         </div>
                                         <div class="defaultImgUploadImageBtn" style="width:75px;">
                                             <div class="fileUpload" style="margin-top:8px;">
                                                 <span>change </span>
-                                                <input type="file" class="upload" accept="video/*" id="videoUploader" onclick="playVideo(this);" data-bind="files: { onLoaded: $root.VideoUrlCallback, fileFilter: 'video.*'}" />
+                                                <input type="file" class="upload" accept="video/mp4" onclick="playVideo(this)" id="videoUploader" data-bind="files: { onLoaded: $root.VideoUrlCallback, fileFilter: 'video.*'}" />
                                             </div>
                                         </div>
                                         <div class="clearfix">
@@ -206,9 +206,13 @@ else
                                         </div>
                                         <div class="col-lg-7">
                                             <div class="defaultImgUploadImage pull-left" style="cursor:pointer;text-align:center;width:335px!important;">
-                                                <img style="width:300px;height:150px;" data-bind="visible: $root.campaignModel().LogoImageBytes() != '',attr: { src: $root.campaignModel().LogoImageBytes  }" src="/Content/Images/Company_Default.png" onclick="showUploadDialog();" />
-                                                <img style="width:300px;height:150px;" data-bind="visible: LogoUrl() != '' ,attr: { src: '/' +  LogoUrl() + $root.randonNumber() }" onclick="showUploadDialog();" />
-                                                <img style="width:300px;height:150px;" onclick="showUploadDialog();" src="/Content/Images/CompanyLogo.png" data-bind="visible: LogoUrl() == '' &&   $root.campaignModel().LogoImageBytes() == ''" />
+                                              
+
+                                                <img style="width:300px;height:150px;" data-bind="attr: { src:LogoUrl()==''?'/Content/Images/Company_Default.png':'/' +  LogoUrl() + $root.randonNumber() },visible:$root.campaignModel().LogoImageBytes()==''" src="/Content/Images/Company_Default.png" onclick="showUploadDialog();" />
+
+                                                <img style="width:300px;height:150px;" data-bind="visible: $root.campaignModel().LogoImageBytes() != '',attr: { src: $root.campaignModel().LogoImageBytes()}" src="/Content/Images/Company_Default.png" onclick="showUploadDialog();" />
+
+
                                                 <div style="padding-top: 10px;    text-align: center;    font-size: 12px;    color: gray;">
                                                     (300 x 150 pixels)
                                                 </div>
@@ -2770,7 +2774,7 @@ else
 
     $(document).ready(function () {
         
-
+        
     });
     $(function () {
         
