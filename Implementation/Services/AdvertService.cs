@@ -58,12 +58,25 @@ namespace SMD.Implementation.Services
         }
         private string[] SaveImages(AdCampaign campaign)
         {
-            string[] savePaths = new string[8];
+            string[] savePaths = new string[9];
             string directoryPath = HttpContext.Current.Server.MapPath("~/SMD_Content/AdCampaign/" + campaign.CampaignId);
 
             if (directoryPath != null && !Directory.Exists(directoryPath))
             {
                 Directory.CreateDirectory(directoryPath);
+            }
+            if (!string.IsNullOrEmpty(campaign.VideoBytes))
+            {
+
+                string base64 = campaign.VideoBytes.Substring(campaign.VideoBytes.IndexOf(',') + 1);
+                base64 = base64.Trim('\0');
+                byte[] data = Convert.FromBase64String(base64);
+                string savePath = directoryPath+"\\guid_CampaignDefaultVideo.mp4";
+                File.WriteAllBytes(savePath, data);
+                int indexOf = savePath.LastIndexOf("SMD_Content", StringComparison.Ordinal);
+                savePath = savePath.Substring(indexOf, savePath.Length - indexOf);
+                savePaths[8] = savePath;
+
             }
             if (!string.IsNullOrEmpty(campaign.CampaignImagePath) && !campaign.CampaignImagePath.Contains("guid_CampaignDefaultImage") && !campaign.CampaignImagePath.Contains("http"))
             {
@@ -159,6 +172,7 @@ namespace SMD.Implementation.Services
                 savePaths[6] = savePath;
                 campaign.CouponImage4 = savePath;
             }
+
             if (!string.IsNullOrEmpty(campaign.LogoImageBytes))
             {
                 string base64 = campaign.LogoImageBytes.Substring(campaign.LogoImageBytes.IndexOf(',') + 1);
@@ -170,6 +184,8 @@ namespace SMD.Implementation.Services
                 savePath = savePath.Substring(indexOf, savePath.Length - indexOf);
                 savePaths[7] = savePath;
             }
+          
+
             return savePaths;
         }
 
@@ -338,7 +354,6 @@ namespace SMD.Implementation.Services
             {
                 campaignModel.MaxBudget = Math.Round(Convert.ToDouble(campaignModel.MaxBudget), 2);
             }
-
             //todo pilot: harcoding ClickRate = 1 for every campaign
             campaignModel.ClickRate = 0.20;
 
@@ -356,6 +371,10 @@ namespace SMD.Implementation.Services
                 if (!string.IsNullOrEmpty(paths[1]))
                 {
                     campaignModel.LandingPageVideoLink = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + paths[1];
+                }
+                if (!string.IsNullOrEmpty(paths[8]) && !paths[8].Contains("http:"))
+                {
+                    campaignModel.VideoLink2 = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + paths[8];
                 }
                 if (!string.IsNullOrEmpty(paths[2]))
                 {
@@ -476,6 +495,10 @@ namespace SMD.Implementation.Services
                 {
                     campaignModel.LandingPageVideoLink = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + paths[1];
                 }
+                if (!string.IsNullOrEmpty(paths[8]) && !paths[8].Contains("http:"))
+                {
+                    campaignModel.VideoLink2 = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + paths[8];
+                }
                 if (!string.IsNullOrEmpty(paths[3]))
                 {
                     campaignModel.BuyItImageUrl = paths[3];
@@ -516,6 +539,11 @@ namespace SMD.Implementation.Services
             {
                 campaignModel.CouponImage4 = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + campaignModel.CouponImage4;
             }
+            //if (!string.IsNullOrEmpty(campaignModel.VideoLink2) && !campaignModel.CouponImage4.Contains("http:"))
+            //{
+            //    campaignModel.CouponImage4 = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + campaignModel.CouponImage4;
+            //}
+
             campaignModel.StartDateTime = new DateTime(2005, 1, 1);//campaignModel.StartDateTime.Value.Subtract(_adCampaignRepository.UserTimezoneOffSet);
             campaignModel.EndDateTime = new DateTime(2040, 1, 1);//campaignModel.EndDateTime.Value.Subtract(_adCampaignRepository.UserTimezoneOffSet);
 

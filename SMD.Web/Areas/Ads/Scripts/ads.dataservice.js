@@ -83,7 +83,8 @@ define("ads/ads.dataservice", function () {
             });
         },
         addCampaignData = function (params, callbacks) {
-             initialize();
+            initialize();
+           
              return amplify.request({
                  resourceId: 'addCampaignData',
                  data: params,

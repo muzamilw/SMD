@@ -377,7 +377,7 @@ namespace SMD.Implementation.Services
                 _couponCategoriesRepository.SaveChanges();
 
             }
-
+            
             couponRepository.Update(couponModel);
             couponRepository.SaveChanges();
 

@@ -137,6 +137,10 @@ namespace SMD.Models.DomainModels
         public string LogoImageBytes { get; set; }
 
         [NotMapped]
+        public string VideoBytes { get; set; }
+
+
+        [NotMapped]
         public int AdViews { get; set; }
 
 
