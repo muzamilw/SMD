@@ -321,7 +321,7 @@
           <Property Name="GoogleWalletCustomerId" Type="nvarchar" MaxLength="250" />
           <Property Name="PreferredPayoutAccount" Type="int" />
           <Property Name="SalesEmail" Type="nvarchar" MaxLength="300" />
-          <Property Name="ReferralCode" Type="nvarchar" MaxLength="100" />
+          <Property Name="ReferralCode" Type="nvarchar" MaxLength="128" />
           <Property Name="AfilliatianStatus" Type="bit" />
           <Property Name="WebsiteLink" Type="nvarchar" MaxLength="100" />
           <Property Name="CompanyType" Type="int" />
@@ -718,6 +718,7 @@
           <Property Name="Priority" Type="int" />
           <Property Name="CompanyId" Type="int" />
           <Property Name="AnswerNeeded" Type="int" />
+          <Property Name="AmountCharged" Type="float" />
         </EntityType>
         <EntityType Name="SurveyQuestionResponse">
           <Key>
@@ -3697,6 +3698,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <NavigationProperty Name="AdCampaignTargetCriterias" Relationship="DomainModels.FK_AdCampaignTargetCriteria_SurveyQuestion" FromRole="SurveyQuestion" ToRole="AdCampaignTargetCriteria" />
           <NavigationProperty Name="Company" Relationship="DomainModels.FK_SurveyQuestion_Company" FromRole="SurveyQuestion" ToRole="Company" />
           <Property Name="AnswerNeeded" Type="Int32" />
+          <Property Name="AmountCharged" Type="Double" />
         </EntityType>
         <EntityType Name="SurveyQuestionResponse">
           <Key>
@@ -4921,7 +4923,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Property Name="GoogleWalletCustomerId" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="PreferredPayoutAccount" Type="Int32" />
           <Property Name="SalesEmail" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
-          <Property Name="ReferralCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ReferralCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="AfilliatianStatus" Type="Boolean" />
           <Property Name="WebsiteLink" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="CompanyType" Type="Int32" />
@@ -5581,6 +5583,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <EntitySetMapping Name="SurveyQuestions">
             <EntityTypeMapping TypeName="DomainModels.SurveyQuestion">
               <MappingFragment StoreEntitySet="SurveyQuestion">
+                <ScalarProperty Name="AmountCharged" ColumnName="AmountCharged" />
                 <ScalarProperty Name="AnswerNeeded" ColumnName="AnswerNeeded" />
                 <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
                 <ScalarProperty Name="Priority" ColumnName="Priority" />

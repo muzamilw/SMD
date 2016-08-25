@@ -35,7 +35,7 @@
     }
     @Styles.Render("~/Bundles/BaseCss")
     @Styles.Render("~/Content/themes/base/css")
-    <link type="image/x-icon" href="favicon.png" rel="shortcut icon" />
+    <link type="image/x-icon" href="/favicon.png" rel="shortcut icon" />
     @if (HttpContext.Current.Request.IsLocal == false)
     {
         <link href='//fonts.googleapis.com/css?family=Open+Sans:400,600,700,300|Titillium+Web:200,300,400' rel='stylesheet' type='text/css'>
@@ -99,7 +99,7 @@
                                 <li class="inlineMenuItem"><a href="~/ProfileQuestion/Manage/Index">Approve Profile Questions</a></li>
                                 <li><a href="">Manage</a></li>
                                 <li class="inlineMenuItem"><a href="~/ProfileQuestion/Manage/Index">Global Profile Questions</a></li>
-                                <li class="inlineMenuItem"><a href="~/survey">Global Surveys</a></li>
+                                <li class="inlineMenuItem"><a href="~/survey/?m=1">Global Surveys</a></li>
                                 <li class="inlineMenuItem"><a href="~/survey">Global Coupon Categories</a></li>
                                 <li><a href="">View</a></li>
                                 <li class="inlineMenuItem"><a href="~/Ads/Ads/Index">&nbsp;&nbsp;All Live Ad Campaigns</a></li>

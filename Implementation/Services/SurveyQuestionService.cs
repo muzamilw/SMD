@@ -203,12 +203,12 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Get Survey Questions that need aprroval | baqer
         /// </summary>
-        public SurveyQuestionResposneModelForAproval GetRejectedSurveyQuestionsForAproval(SurveySearchRequest request)
+        public SurveyQuestionResposneModelForAproval GetSurveyQuestionsForAproval(SurveySearchRequest request)
         {
             int rowCount;
             return new SurveyQuestionResposneModelForAproval
             {
-                SurveyQuestions = surveyQuestionRepository.SearchRejectedProfileQuestions(request, out rowCount),
+                SurveyQuestions = surveyQuestionRepository.GetSurveyQuestionsForAproval(request, out rowCount),
                 TotalCount = rowCount
             };
         }

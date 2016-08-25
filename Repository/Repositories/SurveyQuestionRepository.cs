@@ -56,55 +56,72 @@ namespace SMD.Repository.Repositories
         /// </summary>
         public IEnumerable<SurveyQuestion> SearchSurveyQuestions(SurveySearchRequest request, out int rowCount)
         {
-            bool isAdmin = false;
-            var users = db.Users.Where(g => g.Id == LoggedInUserIdentity).SingleOrDefault();
-          
-            if (request == null)
-            {
-                int fromRow = 0;
-                int toRow = 10;
-                rowCount = DbSet.Count();
-                if (isAdmin)
-                {
-                    return DbSet.OrderBy(g => g.SqId)
-                        .Skip(fromRow)
-                        .Take(toRow)
-                        .ToList();
-                }
-                else
-                {
-                    return DbSet.Where(g => g.UserId == LoggedInUserIdentity).OrderBy(g => g.SqId)
-                            .Skip(fromRow)
-                            .Take(toRow)
-                            .ToList();
-                }
-            }
-            else
-            {
+           
+           
+            //if (request == null)
+            //{
+            //    int fromRow = 0;
+            //    int toRow = 10;
+            //    rowCount = DbSet.Count();
+            //    if (isAdmin)
+            //    {
+            //        return DbSet.OrderBy(g => g.SqId)
+            //            .Skip(fromRow)
+            //            .Take(toRow)
+            //            .ToList();
+            //    }
+            //    else
+            //    {
+            //        return DbSet.Where(g => g.UserId == LoggedInUserIdentity).OrderBy(g => g.SqId)
+            //                .Skip(fromRow)
+            //                .Take(toRow)
+            //                .ToList();
+            //    }
+            //}
+            //else
+            //{
                 int fromRow = (request.PageNo - 1) * request.PageSize;
                 int toRow = request.PageSize;
-                Expression<Func<SurveyQuestion, bool>> query =
-                    question =>
-                        (string.IsNullOrEmpty(request.SearchText) ||
-                         (question.Question.Contains(request.SearchText)))
-                         && (request.CountryFilter == 0 ||  question.CountryId == request.CountryFilter)
-                         && (isAdmin || question.UserId == LoggedInUserIdentity)
-                         && (request.LanguageFilter == 0 || question.LanguageId == request.LanguageFilter)
-                         && (request.Status == 0 || question.Status == request.Status)&&(question.CompanyId==this.CompanyId);
+                Expression<Func<SurveyQuestion, bool>> query = null;
 
+                if (request.fmode == true)// admin
+                {
+                     query =
+                        question =>
+                            (string.IsNullOrEmpty(request.SearchText) ||
+                             (question.Question.Contains(request.SearchText)))
+                             && (request.CountryFilter == 0 || question.CountryId == request.CountryFilter)
+                             && (request.LanguageFilter == 0 || question.LanguageId == request.LanguageFilter)
+                             && (request.Status == 0 || question.Status == request.Status)
+                            
+                             && question.CompanyId == null;
+
+                }
+            else
+                {
+                    query =
+                        question =>
+                            (string.IsNullOrEmpty(request.SearchText) ||
+                             (question.Question.Contains(request.SearchText)))
+                             && (request.CountryFilter == 0 || question.CountryId == request.CountryFilter)
+                             && (request.LanguageFilter == 0 || question.LanguageId == request.LanguageFilter)
+                             && (request.Status == 0 || question.Status == request.Status)
+                             && question.CompanyId == this.CompanyId;
+                          
+                }
 
                 rowCount = DbSet.Count(query);
                 return DbSet.Where(query).OrderBy(g=>g.SqId)
                         .Skip(fromRow)
                         .Take(toRow)
                         .ToList();
-            }
+            
         }
 
         /// <summary>
         /// Get Rejected Survey Questions | baqer
         /// </summary>
-        public IEnumerable<SurveyQuestion> SearchRejectedProfileQuestions(SurveySearchRequest request, out int rowCount)
+        public IEnumerable<SurveyQuestion> GetSurveyQuestionsForAproval(SurveySearchRequest request, out int rowCount)
         {
             int fromRow = (request.PageNo - 1) * request.PageSize;
             int toRow = request.PageSize;

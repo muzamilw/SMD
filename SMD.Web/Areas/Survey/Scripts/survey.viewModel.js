@@ -77,7 +77,8 @@ define("survey/survey.viewModel",
                                 PageSize: pager().pageSize(),
                                 PageNo: pager().currentPage(),
                                 Status: statusFilterValue(),
-                                FirstLoad:false
+                                FirstLoad: false,
+                                fmode : isfMode()
                             },
                             {
                                 success: function (data) {
@@ -94,7 +95,8 @@ define("survey/survey.viewModel",
                         dataservice.searchSurveyQuestions({
                             FirstLoad: true,
                             PageSize: pager().pageSize(),
-                            PageNo: pager().currentPage()
+                            PageNo: pager().currentPage(),
+                            fmode: isfMode()
                         },
                             {
                                 success: function (data) {
@@ -233,6 +235,22 @@ define("survey/survey.viewModel",
                     {
                         getQuestions();
                     },
+                getUrlVars = function () {
+                    var vars = [], hash;
+                    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+                    for (var i = 0; i < hashes.length; i++) {
+                        hash = hashes[i].split('=');
+                        vars.push(hash[0]);
+                        vars[hash[0]] = hash[1];
+                    }
+                    return vars;
+                },
+                isfMode = function () {
+                    if (getUrlVars()["m"] == "1")
+                        return true;
+                    else
+                        return false;
+                },
                 gotoScreen = function (number) {
                     
                     previewScreenNumber(number);
@@ -1181,7 +1199,9 @@ define("survey/survey.viewModel",
                     isTerminateBtnVisible: isTerminateBtnVisible,
                     SelectedPvcVal: SelectedPvcVal,
                     HeaderText: HeaderText,
-                    StatusValue: StatusValue
+                    StatusValue: StatusValue,
+                    getUrlVars:getUrlVars,
+                    isfMode:isfMode
                 };
             })()
         };

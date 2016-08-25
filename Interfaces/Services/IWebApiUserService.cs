@@ -38,7 +38,7 @@ namespace SMD.Interfaces.Services
         /// <summary>
         /// Ad Viewed
         /// </summary>
-        Task<BaseApiResponse> UpdateTransactionOnViewingAd(AdViewedRequest request);
+        Task<BaseApiResponse> UpdateTransactionOnViewingAd(AdViewedRequest request,ProductActionRequest pRequest);
 
         /// <summary>
         /// Archive Account

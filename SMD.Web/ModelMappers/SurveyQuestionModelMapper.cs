@@ -109,7 +109,10 @@ namespace SMD.MIS.ModelMappers
                 CreatorAddress = source.User.Company.State + " " + source.User.Company.AddressLine1,
                 CompanyId = source.CompanyId,
                 AnswerNeeded=source.AnswerNeeded,
-                ResultClicks=source.ResultClicks
+                ResultClicks=source.ResultClicks,
+                AmountCharged = source.AmountCharged,
+                Company = source.Company != null ? source.Company.CompanyName : "System Survey",
+                ProjectedReach = source.ProjectedReach
             };
         }
 

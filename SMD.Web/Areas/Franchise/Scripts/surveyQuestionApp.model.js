@@ -2,7 +2,7 @@
 
     var // ReSharper disable InconsistentNaming
       Survey = function (sQId, spcQuestion, spcDes, spcDisplayQuestion, spcIsApproved, spcRejectionReason,
-          subDate, spcCreatedBy,address,leftImg,righImg) {
+          subDate, spcCreatedBy, address, leftImg, righImg, AmountCharged, AnswerNeeded, Company, ProjectedReach) {
           var
               id = ko.observable(sQId),
               question = ko.observable(spcQuestion),
@@ -15,7 +15,12 @@
               creatorAddress = ko.observable(address),
               leftImage = ko.observable(leftImg),
               rightImage = ko.observable(righImg),
-             
+                AmountCharged = ko.observable(AmountCharged),
+                AnswerNeeded = ko.observable(AnswerNeeded),
+                Company = ko.observable(Company),
+
+                ProjectedReach = ko.observable(ProjectedReach),
+
               errors = ko.validation.group({
 
               }),
@@ -55,7 +60,10 @@
               creatorAddress: creatorAddress,
               leftImage: leftImage,
               rightImage:rightImage,
-              
+              AmountCharged: AmountCharged,
+              AnswerNeeded: AnswerNeeded,
+              Company: Company,
+              ProjectedReach:ProjectedReach,
               hasChanges: hasChanges,
               convertToServerData:convertToServerData,
               reset: reset,
@@ -71,7 +79,7 @@
         return new Survey(itemFromServer.SqId, itemFromServer.Question, itemFromServer.Description,
             itemFromServer.DisplayQuestion, itemFromServer.Approved, itemFromServer.RejectionReason,
             itemFromServer.SubmissionDate, itemFromServer.CreatedBy, itemFromServer.CreatorAddress,
-        itemFromServer.LeftPicturePath, itemFromServer.RightPicturePath);
+        itemFromServer.LeftPicturePath, itemFromServer.RightPicturePath, itemFromServer.AmountCharged, itemFromServer.AnswerNeeded, itemFromServer.Company, itemFromServer.ProjectedReach);
     };
     
     // Function to attain cancel button functionality Survey QUESTION

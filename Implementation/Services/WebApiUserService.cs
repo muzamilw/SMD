@@ -51,6 +51,7 @@ namespace SMD.Implementation.Services
         private readonly ICompanyRepository companyRepository;
         private readonly IManageUserRepository manageUserRepository;
         private readonly IAccountService accountService;
+        private readonly IProfileQuestionRepository profileQuestionRepository;
         private ApplicationUserManager UserManager
         {
             get { return HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
@@ -154,7 +155,7 @@ namespace SMD.Implementation.Services
         /// <param name="adViewerUsedVoucher">If Ad Viewer Uses Voucher</param>
         private async Task PerformAdCampaignTransactions(AdViewedRequest request, Account advertisersAccount, double? adClickRate,
             Account adViewersAccount, double? adViewersCut, Company referringCompany, double? smdsCut, Account affiliatesAccount,
-            Account smdAccount, AdCampaign adCampaign, bool adViewerUsedVoucher = false)
+            Account smdAccount, AdCampaign adCampaign,ProductActionRequest pRequest, bool adViewerUsedVoucher = false)
         {
             // Debit Advertiser
             var transactionSequence = 1;
@@ -189,7 +190,7 @@ namespace SMD.Implementation.Services
 
             // Add Campaign Response 
             PerformSkipOrUpdateUserAdSelection((int)request.AdCampaignId, request.UserId,
-                (adViewerUsedVoucher ? (int)AdRewardType.Voucher : (int)AdRewardType.Cash), false, adViewersCut, request.companyId,request.userQuizSelection.HasValue?request.userQuizSelection.Value:0, false);
+                (adViewerUsedVoucher ? (int)AdRewardType.Voucher : (int)AdRewardType.Cash), false, adViewersCut, request.companyId, request.userQuizSelection.HasValue ? request.userQuizSelection.Value : 0, pRequest,false);
 
             // Save Changes
             transactionRepository.SaveChanges();
@@ -481,6 +482,14 @@ namespace SMD.Implementation.Services
                         UserId = request.UserId,
                         companyId = request.companyId.Value
                     });
+
+                //updating count
+                var profileQuestion = profileQuestionRepository.Find((int)request.ItemId.Value);
+                profileQuestion.AsnswerCount = (profileQuestion.AsnswerCount.HasValue ? profileQuestion.AsnswerCount.Value : 0) + 1;
+                profileQuestionRepository.Update(profileQuestion);
+                profileQuestionRepository.SaveChanges();
+
+                
             }
         }
 
@@ -492,26 +501,26 @@ namespace SMD.Implementation.Services
             if (request.AdClickedViewed.HasValue && request.AdClickedViewed.Value && request.ItemId.HasValue && request.AdRewardUserSelection.HasValue &&
                 (!request.IsSkipped.HasValue || !request.IsSkipped.Value))
             {
-                if (request.AdRewardUserSelection.Value == (int)AdRewardType.Cash)
-                {
+                
                     await UpdateTransactionOnViewingAd(new AdViewedRequest
                     {
                         AdCampaignId = request.ItemId.Value,
                         UserId = request.UserId,
                         companyId = request.companyId.Value,
                         userQuizSelection = request.UserQuestionResponse 
-                    });    
-                }
-                else if (request.AdRewardUserSelection.Value == (int)AdRewardType.Voucher)
-                {
-                    await UpdateTransactionOnViewingAdWithVoucher(new AdViewedRequest
-                    {
-                        AdCampaignId = request.ItemId.Value,
-                        UserId = request.UserId,
-                        companyId = request.companyId.Value,
-                        userQuizSelection =  request.UserQuestionResponse 
-                    }); 
-                }
+                    },request);    
+                
+
+                //else if (request.AdRewardUserSelection.Value == (int)AdRewardType.Voucher)
+                //{
+                //    await UpdateTransactionOnViewingAdWithVoucher(new AdViewedRequest
+                //    {
+                //        AdCampaignId = request.ItemId.Value,
+                //        UserId = request.UserId,
+                //        companyId = request.companyId.Value,
+                //        userQuizSelection =  request.UserQuestionResponse 
+                //    }); 
+                //}
             }
         }
 
@@ -519,7 +528,7 @@ namespace SMD.Implementation.Services
         /// Skips Ad Campaign
         /// </summary>
         private void PerformSkipOrUpdateUserAdSelection(int adCampaignId, string userId, int? userSelection, bool? isSkipped,
-            double? endUserAmount, int companyId,int userQuizSelection, bool saveChanges = true)
+            double? endUserAmount, int companyId, int userQuizSelection,  ProductActionRequest request,bool saveChanges = true)
         {
             AdCampaign adCampaign = adCampaignRepository.Find(adCampaignId);
             if (adCampaign == null)
@@ -529,7 +538,7 @@ namespace SMD.Implementation.Services
             }
 
             AdCampaignResponse adCampaignResponse = adCampaignResponseRepository.GetByUserId(adCampaignId, userId) ??
-                                                    CreateAdCampaignResponse(adCampaignId, userId, adCampaign);
+                                                    CreateAdCampaignResponse(adCampaignId, userId, adCampaign, request);
             adCampaignResponse.CompanyId = companyId;
             adCampaignResponse.UserQuestionResponse = userQuizSelection;
             UpdateAdResponse(userSelection, isSkipped, endUserAmount, adCampaignResponse);
@@ -545,13 +554,21 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Creates New Ad Campaign Response
         /// </summary>
-        private AdCampaignResponse CreateAdCampaignResponse(int adCampaignId, string userId, AdCampaign adCampaign)
+        private AdCampaignResponse CreateAdCampaignResponse(int adCampaignId, string userId, AdCampaign adCampaign, ProductActionRequest request)
         {
             AdCampaignResponse adCampaignResponse = adCampaignResponseRepository.Create();
             adCampaignResponse.CampaignId = adCampaignId;
             adCampaignResponse.UserId = userId;
+            adCampaignResponse.UserLocationLat = request.UserLocationLat;
+            adCampaignResponse.UserLocationLong = request.UserLocationLong;
+            adCampaignResponse.UserLocationCity = request.City;
+            adCampaignResponse.UserLocationCountry = request.Country;
+
+
+
             adCampaignResponseRepository.Add(adCampaignResponse);
             adCampaign.AdCampaignResponses.Add(adCampaignResponse);
+            
             return adCampaignResponse;
         }
 
@@ -595,6 +612,12 @@ namespace SMD.Implementation.Services
 
             SurveyQuestionResponse sqResponse = surveyQuestionResponseRepository.GetByUserId(sqId, userId) ??
                                                 CreateSurveyQuestionResponse(sqId, userId, surveyQuestion);
+
+            //increment counter
+            surveyQuestion.ResultClicks = (surveyQuestion.ResultClicks.HasValue  ? surveyQuestion.ResultClicks.Value : 0) +  1;
+
+
+            surveyQuestionRepository.Update(surveyQuestion);
             // Update User Response
             UpdateProductsResponse(userSelection, isSkipped, sqResponse,companyId);
             surveyQuestionRepository.SaveChanges();
@@ -657,7 +680,7 @@ namespace SMD.Implementation.Services
 
                 else if (request.Type.Value == (int)ProductType.Ad)
                 {
-                    PerformSkipOrUpdateUserAdSelection((int)request.ItemId.Value, request.UserId, null, true, null, request.companyId.Value,request.UserQuestionResponse.HasValue? request.UserQuestionResponse.Value:0, true);
+                    PerformSkipOrUpdateUserAdSelection((int)request.ItemId.Value, request.UserId, null, true, null, request.companyId.Value,request.UserQuestionResponse.HasValue? request.UserQuestionResponse.Value:0, request, true);
                 }
 
                 else if (request.Type.Value == (int)ProductType.SurveyQuestion)
@@ -683,7 +706,7 @@ namespace SMD.Implementation.Services
             ITaxRepository taxRepository, IProfileQuestionUserAnswerService profileQuestionAnswerService,
             ICountryRepository countryRepository, IIndustryRepository industryRepository,
             IProfileQuestionService profileQuestionService, IAdCampaignResponseRepository adCampaignResponseRepository,
-            ISurveyQuestionResponseRepository surveyQuestionResponseRepository, IEducationRepository educationRepository, ICityRepository cityRepository, ICompanyRepository companyRepository, IManageUserRepository manageUserRepository, IAccountService accountService)
+            ISurveyQuestionResponseRepository surveyQuestionResponseRepository, IEducationRepository educationRepository, ICityRepository cityRepository, ICompanyRepository companyRepository, IManageUserRepository manageUserRepository, IAccountService accountService, IProfileQuestionRepository profileQuestionRepository)
         {
             if (emailManagerService == null)
             {
@@ -750,6 +773,7 @@ namespace SMD.Implementation.Services
             this.companyRepository = companyRepository;
             this.manageUserRepository = manageUserRepository;
             this.accountService = accountService;
+            this.profileQuestionRepository = profileQuestionRepository;
         }
 
 
@@ -814,7 +838,7 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Update Transactions on viewing ad
         /// </summary>
-        public async Task<BaseApiResponse> UpdateTransactionOnViewingAd(AdViewedRequest request)
+        public async Task<BaseApiResponse> UpdateTransactionOnViewingAd(AdViewedRequest request,ProductActionRequest pRequest)
         {
             // Get Ad Viewer
             User adViewer = await UserManager.FindByIdAsync(request.UserId);
@@ -867,7 +891,7 @@ namespace SMD.Implementation.Services
 
             // Perform Transactions
             await PerformAdCampaignTransactions(request, advertisersAccount, adClickRate, adViewersAccount, adViewersCut, referringCompany, smdsCut,
-                affiliatesAccount, smdAccount, adCampaign);
+                affiliatesAccount, smdAccount, adCampaign,pRequest);
 
             return new BaseApiResponse
                    {
@@ -878,48 +902,49 @@ namespace SMD.Implementation.Services
 
         /// <summary>
         /// Update Transactions on Viewing Ad
+        /// this function is not needed anymore
         /// </summary>
-        public async Task<BaseApiResponse> UpdateTransactionOnViewingAdWithVoucher(AdViewedRequest request)
-        {
-            // Get Ad Viewer
-            User adViewer = await UserManager.FindByIdAsync(request.UserId);
-            if (adViewer == null)
-            {
-                throw new SMDException(LanguageResources.WebApiUserService_InvalidUserId);
-            }
+        //public async Task<BaseApiResponse> UpdateTransactionOnViewingAdWithVoucher(AdViewedRequest request)
+        //{
+        //    // Get Ad Viewer
+        //    User adViewer = await UserManager.FindByIdAsync(request.UserId);
+        //    if (adViewer == null)
+        //    {
+        //        throw new SMDException(LanguageResources.WebApiUserService_InvalidUserId);
+        //    }
 
-            User cash4Ads = await UserManager.FindByEmailAsync(SystemUsers.Cash4Ads);
-            if (cash4Ads == null)
-            {
-                throw new SMDException(string.Format(CultureInfo.InvariantCulture, LanguageResources.WebApiUserService_InvalidUser,
-                    "Cash4Ads"));
-            }
+        //    User cash4Ads = await UserManager.FindByEmailAsync(SystemUsers.Cash4Ads);
+        //    if (cash4Ads == null)
+        //    {
+        //        throw new SMDException(string.Format(CultureInfo.InvariantCulture, LanguageResources.WebApiUserService_InvalidUser,
+        //            "Cash4Ads"));
+        //    }
 
-            // Validates if Ad Campaing Exists
-            var adCampaign = await ValidateAdCampaign(request);
+        //    // Validates if Ad Campaing Exists
+        //    var adCampaign = await ValidateAdCampaign(request);
             
-            // Begin Transaction
-            // Ad Viewer will get Voucher and 100% will be given to SMD
-            double? adClickRate = adCampaign.ClickRate ?? 0;
-            double? smdsCut = adClickRate;
-            Account adViewersAccount;
-            Account advertisersAccount;
-            Account smdAccount;
+        //    // Begin Transaction
+        //    // Ad Viewer will get Voucher and 100% will be given to SMD
+        //    double? adClickRate = adCampaign.ClickRate ?? 0;
+        //    double? smdsCut = adClickRate;
+        //    Account adViewersAccount;
+        //    Account advertisersAccount;
+        //    Account smdAccount;
 
-            // Sets up transaction 
-            // Gets Accounts required
-            SetupAdCampaignTransaction(request, adCampaign, out adViewersAccount, out advertisersAccount, out smdAccount, cash4Ads.Id);
+        //    // Sets up transaction 
+        //    // Gets Accounts required
+        //    SetupAdCampaignTransaction(request, adCampaign, out adViewersAccount, out advertisersAccount, out smdAccount, cash4Ads.Id);
 
-            // Perform Transactions
-            await PerformAdCampaignTransactions(request, advertisersAccount, adClickRate, adViewersAccount, 0, null, smdsCut,
-                null, smdAccount, adCampaign, true);
+        //    // Perform Transactions
+        //    await PerformAdCampaignTransactions(request, advertisersAccount, adClickRate, adViewersAccount, 0, null, smdsCut,
+        //        null, smdAccount, adCampaign, true);
 
-            return new BaseApiResponse
-            {
-                Status = true,
-                Message = LanguageResources.Success
-            };
-        }
+        //    return new BaseApiResponse
+        //    {
+        //        Status = true,
+        //        Message = LanguageResources.Success
+        //    };
+        //}
 
 
         #endregion

@@ -44,18 +44,18 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// <summary>
         /// Ad Viewed
         /// </summary>
-        [ApiExceptionCustom]
-        public async Task<BaseApiResponse> Post(string authenticationToken, [FromUri] AdViewedRequest request)
-        {
-            if (string.IsNullOrEmpty(authenticationToken) || request == null || !ModelState.IsValid || 
-                string.IsNullOrEmpty(request.UserId) || request.AdCampaignId <= 0)
-            {
-                throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
-            }
+        //[ApiExceptionCustom]
+        //public async Task<BaseApiResponse> Post(string authenticationToken, [FromUri] AdViewedRequest request)
+        //{
+        //    if (string.IsNullOrEmpty(authenticationToken) || request == null || !ModelState.IsValid || 
+        //        string.IsNullOrEmpty(request.UserId) || request.AdCampaignId <= 0)
+        //    {
+        //        throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
+        //    }
 
-            // Update Transactions on Ad View
-            return await webApiUserService.UpdateTransactionOnViewingAd(request);
-        }
+        //    // Update Transactions on Ad View
+        //    return await webApiUserService.UpdateTransactionOnViewingAd(request);
+        //}
 
         #endregion
     }

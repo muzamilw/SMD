@@ -54,5 +54,16 @@ namespace SMD.Models.RequestModels
 
         public int? companyId { get; set; }
         public int? UserQuestionResponse { get; set; }
+
+
+        public string UserLocationLat { get; set; }
+
+
+        public string UserLocationLong { get; set; }
+
+        public string City { get; set; }
+
+
+        public string Country { get; set; }
     }
 }

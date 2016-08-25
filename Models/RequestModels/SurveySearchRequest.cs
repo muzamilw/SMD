@@ -39,5 +39,7 @@ namespace SMD.Models.RequestModels
         public long SqId { get; set; }
 
         public int Status { get; set; }
+
+        public bool fmode { get; set; }
     }
 }
