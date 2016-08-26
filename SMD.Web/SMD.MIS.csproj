@@ -386,15 +386,18 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Api\Controllers\BranchCategoryController.cs" />
     <Compile Include="Areas\Api\Controllers\CategoryController.cs" />
+    <Compile Include="Areas\Api\Controllers\CouponApprovalController.cs" />
     <Compile Include="Areas\Api\Controllers\CouponController.cs" />
     <Compile Include="Areas\Api\Controllers\DownloadImageController.cs" />
     <Compile Include="Areas\Api\Controllers\RedeemPurchasedCouponController.cs" />
     <Compile Include="Areas\Api\Controllers\PhaseLibraryController.cs" />
     <Compile Include="Areas\Api\Controllers\CompanyController.cs" />
     <Compile Include="Areas\Api\Controllers\UserCashoutController.cs" />
+    <Compile Include="Areas\Api\Models\AddCouponsResponseModelForApproval.cs" />
     <Compile Include="Areas\Api\Models\BranchCategory.cs" />
     <Compile Include="Areas\Api\Models\BranchCategoryResponseModel.cs" />
     <Compile Include="Areas\Api\Models\CompanyBranch.cs" />
+    <Compile Include="Areas\Api\Models\CouponsApproval.cs" />
     <Compile Include="Areas\Api\Models\Phrase.cs" />
     <Compile Include="Areas\Api\Models\PhraseResponseModel.cs" />
     <Compile Include="Areas\Api\Models\Section.cs" />
@@ -649,6 +652,9 @@
     <Content Include="Areas\DAM\Scripts\DamGrid.model.js" />
     <Content Include="Areas\DAM\Scripts\DamGrid.view.js" />
     <Content Include="Areas\DAM\Scripts\DamGrid.viewModel.js" />
+    <Content Include="Areas\Franchise\Scripts\Coupons.dataservice.js" />
+    <Content Include="Areas\Franchise\Scripts\Coupons.view.js" />
+    <Content Include="Areas\Franchise\Scripts\Coupons.viewModel.js" />
     <Content Include="Areas\ProfileQuestion\Scripts\pQuestion.dataservice.js" />
     <Content Include="Areas\ProfileQuestion\Scripts\pQuestion.model.js" />
     <Content Include="Areas\ProfileQuestion\Scripts\paypalExample.view.js" />
@@ -1684,6 +1690,8 @@
     <Content Include="Areas\Franchise\Views\Dashboard\Index.cshtml" />
     <Content Include="Areas\Franchise\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Franchise\Views\web.config" />
+    <Content Include="Areas\Franchise\Scripts\Coupons.model.js" />
+    <Content Include="Areas\Franchise\Views\Dashboard\CouponsAproval.cshtml" />
     <None Include="Areas\SuperNova\Views\web.config" />
     <Content Include="Areas\SuperNova\Views\Dashboard\Index.cshtml" />
     <Content Include="Areas\SuperNova\Views\_ViewStart.cshtml" />

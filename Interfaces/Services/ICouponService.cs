@@ -38,6 +38,7 @@ namespace SMD.Interfaces.Services
         int RedeemPurchasedCoupon(string UserId, long couponPurchaseId, string pinCode, string operatorId);
 
         List<Coupon> GetCouponsByCompanyId(int CompanyId);
+        CouponsResponseModelForApproval GetAdCampaignForAproval(GetPagedListRequest request);
 
     }
 }

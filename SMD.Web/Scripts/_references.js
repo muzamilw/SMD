@@ -845,6 +845,10 @@
 /// <reference path="underscore-ko-1.6.0.js" />
 /// <reference path="underscore-min.js" />
 /// <reference path="underscore.js" />
+/// <reference path="../areas/franchise/scripts/coupons.model.js" />
+/// <reference path="../areas/franchise/scripts/coupons.view.js" />
+/// <reference path="../areas/franchise/scripts/coupons.viewmodel.js" />
+/// <reference path="../areas/franchise/scripts/coupons.dataservice.js" />
 <<<<<<< HEAD
 =======
 /// <reference path="plugins/forms/timeentry/langs/jquery.timeentry-ca.js" />
