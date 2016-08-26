@@ -14,6 +14,18 @@ namespace SMD.Models.ResponseModels
         /// </summary>
         public IEnumerable<ProfileQuestion> ProfileQuestions { get; set; }
         public IEnumerable<Industry> Professions { get; set; }
+        public IEnumerable<Country> Countries { get; set; }
+        /// <summary>
+        /// Langs
+        /// </summary>
+        public IEnumerable<Language> Languages { get; set; }
+        /// <summary>
+
+        public IEnumerable<Industry> Industry { get; set; }
+        /// <summary>
+        /// Education
+        /// </summary>
+        public IEnumerable<Education> Education { get; set; }
         /// <summary>
         /// Total Count of  Profile Questions
         /// </summary>

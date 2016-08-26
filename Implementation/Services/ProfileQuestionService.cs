@@ -29,6 +29,7 @@ namespace SMD.Implementation.Services
         private readonly IProfileQuestionGroupRepository _profileQuestionGroupRepository;
         private readonly IProfileQuestionAnswerRepository _profileQuestionAnswerRepository;
         private readonly IIndustryRepository _industoryRepository;
+        private readonly IEducationRepository _educationRepository;
         #endregion
         #region Constructor
         /// <summary>
@@ -37,7 +38,7 @@ namespace SMD.Implementation.Services
 
         public ProfileQuestionService(IProfileQuestionRepository profileQuestionRepository, ICountryRepository countryRepository, 
             ILanguageRepository languageRepository, IProfileQuestionGroupRepository profileQuestionGroupRepository,
-            IProfileQuestionAnswerRepository profileQuestionAnswerRepository, IIndustryRepository industoryRepository)
+            IProfileQuestionAnswerRepository profileQuestionAnswerRepository, IIndustryRepository industoryRepository, IEducationRepository educationRepository)
         {
             _profileQuestionRepository = profileQuestionRepository;
             _countryRepository = countryRepository;
@@ -45,6 +46,8 @@ namespace SMD.Implementation.Services
             _profileQuestionGroupRepository = profileQuestionGroupRepository;
             _profileQuestionAnswerRepository = profileQuestionAnswerRepository;
             _industoryRepository = industoryRepository;
+            _educationRepository = educationRepository;
+
         }
 
         #endregion
@@ -79,14 +82,18 @@ namespace SMD.Implementation.Services
         /// </summary>
         public ProfileQuestionSearchRequestResponse GetProfileQuestions(ProfileQuestionSearchRequest request)
         {
-           
             int rowCount;
             return new ProfileQuestionSearchRequestResponse
             {
                 ProfileQuestions = _profileQuestionRepository.SearchProfileQuestions(request, out rowCount),
+                Countries = _countryRepository.GetAllCountries(),
+                Languages = _languageRepository.GetAllLanguages(),
                 Professions = _industoryRepository.GetAll(),
+                Education = _educationRepository.GetAll(),
+                Industry = _industoryRepository.GetAll(),
                 TotalCount = rowCount
             };
+            
         }
 
         /// <summary>
@@ -240,9 +247,12 @@ namespace SMD.Implementation.Services
                     SkippedCount = source.SkippedCount,
                     ModifiedDate = source.ModifiedDate,
                     PenalityForNotAnswering = source.PenalityForNotAnswering,
-                    Status = source.Status
+                    Status = source.Status,
+                    CompanyId=source.CompanyId
                 };
+                 serverObj.CompanyId = _profileQuestionRepository.CompanyId;
                 _profileQuestionRepository.Add(serverObj);
+
                 if (serverObj.ProfileQuestionAnswers == null)
                 {
                     serverObj.ProfileQuestionAnswers = new List<ProfileQuestionAnswer>();

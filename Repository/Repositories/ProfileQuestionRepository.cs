@@ -162,6 +162,11 @@ namespace SMD.Repository.Repositories
             }
             return ProfileQuestions;
         }
+        public void AddProfileQuestions(ProfileQuestion Obj)
+        {
+            Obj.CompanyId = this.CompanyId;
+            DbSet.Add(Obj);
+        }
         #endregion
     }
 }

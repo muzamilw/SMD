@@ -45,7 +45,7 @@ define("pQuestion/pQuestion.view",
                            displayKey: 'bindedValue',
                            source: array.ttAdapter()
                        }).bind('typeahead:selected', function (obj, selected) {
-                           debugger;
+                           
                            if (selected) {
                                var CityID = null, CountryID = null, Radius = 0, Country = '', City = '', latitude = '', longitude = '';
                                if (selected.IsCountry) {
