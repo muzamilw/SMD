@@ -19,6 +19,7 @@ using System.Configuration;
 using SMD.Interfaces;
 using SMD.WebBase.Mvc;
 using SMD.Implementation.Identity;
+using SMD.Interfaces.Data;
 
 namespace SMD.MIS.Controllers
 {
@@ -72,7 +73,8 @@ namespace SMD.MIS.Controllers
         /// <summary>
         /// Welcome Page
         /// </summary>
-        [SiteAuthorize]
+       
+        [SiteAuthorize(MisRoles = new[] { SecurityRoles.EndUser_Admin }, AccessRights = new[] { SecurityAccessRight.CanViewSuperNovaAdmin })]
         public ActionResult Welcome()
         {
 

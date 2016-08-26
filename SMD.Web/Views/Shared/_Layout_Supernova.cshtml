@@ -11,6 +11,9 @@
     string CompanyName = companyClaimValues != null && companyClaimValues.Any() ? companyClaimValues.ElementAt(0).CompanyName : "Company Not Loaded";
     string CompanyLogo = companyClaimValues != null && companyClaimValues.Any() ? companyClaimValues.ElementAt(0).CompanyLogo : "Claim not found";
 
+    IEnumerable<SmdRoleClaimValue> roleClaim = ClaimHelper.GetClaimsByType<SmdRoleClaimValue>(SmdClaimTypes.Role);
+    string RoleName = roleClaim != null && roleClaim.Any() ? roleClaim.ElementAt(0).Role : "Role Not Loaded";
+
 
 }
 <!DOCTYPE html>
@@ -97,7 +100,7 @@
                                 <span class="hidden-xs">
                                     @if (User != null && User.Identity != null)
                                     {
-                                        @User.Identity.Name
+                                        @User.Identity.Name  @RoleName
                                     }
                                 </span> <b class="caret"></b>
                                 <div class="user-positioner" style="position:fixed;">

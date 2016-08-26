@@ -14,6 +14,7 @@ namespace SMD.MIS.Areas.Franchise.Controllers
     public class DashboardController : Controller
     {
         // GET: SuperNovaDashboard/Index
+        [SiteAuthorize(MisRoles = new[] { SecurityRoles.Franchise_Account_Manager, SecurityRoles.Franchise_Admin,SecurityRoles.Franchise_Approvers,SecurityRoles.Franchise_Cashout_Manager,SecurityRoles.Franchise_Creative_ }, AccessRights = new[] { SecurityAccessRight.CanViewSuperNovaAdmin })]
         public ActionResult Index()
         {
             return View();

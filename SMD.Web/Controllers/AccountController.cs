@@ -53,6 +53,9 @@ namespace SMD.MIS.Controllers
             }
             claimsSecurityService.AddClaimsToIdentity(new UserIdentityModel { TimezoneOffset = timeZoneOffSetValue },
                 identity);
+
+            claimsSecurityService.AddClaimsToIdentity(new UserIdentityModel { TimezoneOffset = timeZoneOffSetValue },
+                identity);
             Session["UserTimezoneOffset"] = timeZoneOffSetValue;
         }
 
@@ -681,7 +684,8 @@ namespace SMD.MIS.Controllers
              if (identity != null)
              {
                  SetupUserClaims(identity);
-                 claimsSecurityService.AddCompanyIdClaimToIdentity(identity, Convert.ToInt32(CompanyId), CompanyName,CompanyLogo);
+                 claimsSecurityService.AddCompanyIdClaimToIdentity(identity, Convert.ToInt32(CompanyId), CompanyName, CompanyLogo, Role);
+                 
                  AuthenticationManager.SignIn(new AuthenticationProperties { IsPersistent = true }, identity);
 
                  if ( RoleId == "Supernova_Admin")

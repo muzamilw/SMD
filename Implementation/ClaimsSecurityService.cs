@@ -26,13 +26,15 @@ namespace SMD.Implementation
         {
             identity.AddClaim(new Claim(SmdClaimTypes.UserTimezoneOffset, userIdentity.TimezoneOffset.ToString()));
 
+           
+
           
         }
 
 
 
 
-        public void AddCompanyIdClaimToIdentity(ClaimsIdentity identity, int CompanyId, string CompanyName, string CompanyLogo)
+        public void AddCompanyIdClaimToIdentity(ClaimsIdentity identity, int CompanyId, string CompanyName, string CompanyLogo, string RoleName)
         {
             Claim claim = new Claim(SmdClaimTypes.CompanyId,
                 // ReSharper restore SuggestUseVarKeywordEvident
@@ -40,6 +42,8 @@ namespace SMD.Implementation
                                             new CompanyIdClaimValue { CompanyId = CompanyId, CompanyName = CompanyName, CompanyLogo = CompanyLogo }),
                                         typeof(CompanyIdClaimValue).AssemblyQualifiedName);
             identity.AddClaim(claim);
+
+            identity.AddClaim(new Claim(SmdClaimTypes.Role, ClaimHelper.Serialize(new SmdRoleClaimValue { Role = RoleName }), typeof(SmdRoleClaimValue).AssemblyQualifiedName));
         }
         #endregion
     }
