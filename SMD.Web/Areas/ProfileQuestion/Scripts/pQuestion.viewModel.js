@@ -79,7 +79,8 @@ define("pQuestion/pQuestion.viewModel",
                                 PageSize: pager().pageSize(),
                                 PageNo: pager().currentPage(),
                                 SortBy: sortOn(),
-                                IsAsc: sortIsAsc()
+                                IsAsc: sortIsAsc(),
+                                fmode : fmodevar
                             },
                             {
                                 success: function (data) {
@@ -106,7 +107,7 @@ define("pQuestion/pQuestion.viewModel",
                            if (item.AsnswerCount != null && item.AsnswerCount > 0 && item.AnswerNeeded != null && item.AnswerNeeded > 0) {
                                Percent = (item.AsnswerCount / item.AnswerNeeded) * 100;
                            }
-                           return  Math.round(Percent);
+                           return Math.round(percent);
                          },
                     SetStatusForQuestion = function (item)
                     {
