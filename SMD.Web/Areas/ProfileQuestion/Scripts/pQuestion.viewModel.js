@@ -79,7 +79,8 @@ define("pQuestion/pQuestion.viewModel",
                                 PageSize: pager().pageSize(),
                                 PageNo: pager().currentPage(),
                                 SortBy: sortOn(),
-                                IsAsc: sortIsAsc()
+                                IsAsc: sortIsAsc(),
+                                fmode : fmodevar
                             },
                             {
                                 success: function (data) {

@@ -89,5 +89,8 @@ namespace SMD.Models.DomainModels
         public string LogoImageBytes { get; set; }
 
         public virtual ICollection<UserPurchasedCoupon> UserPurchasedCoupons { get; set; }
+
+
+        public Nullable<System.DateTime> SubmissionDateTime { get; set; }
     }
 }

@@ -67,17 +67,38 @@ namespace SMD.Repository.Repositories
         {
             int fromRow = (request.PageNo - 1) * request.PageSize;
             int toRow = request.PageSize;
-            Expression<Func<ProfileQuestion, bool>> query =
+
+            Expression<Func<ProfileQuestion, bool>> query = null;
+            if ( request.fmode == true)
+            {
+                 query =
                 question =>
                     (string.IsNullOrEmpty(request.ProfileQuestionFilterText) ||
                      (question.Question.Contains(request.ProfileQuestionFilterText)))
                      &&
                      (request.QuestionGroupFilter == 0 || question.ProfileQuestionGroup.ProfileGroupId == request.QuestionGroupFilter)
                      &&
-                     (question.CountryId==request.CountryFilter)
+                     (question.CountryId == request.CountryFilter)
                      &&
-                     (question.LanguageId==request.LanguageFilter)
-                     && (question.Status == (Int32)ObjectStatus.Active) && (question.CompanyId==this.CompanyId);   
+                     (question.LanguageId == request.LanguageFilter)
+                     && (question.CompanyId == null);   
+            }
+            else
+            {
+                 query =
+                question =>
+                    (string.IsNullOrEmpty(request.ProfileQuestionFilterText) ||
+                     (question.Question.Contains(request.ProfileQuestionFilterText)))
+                     &&
+                     (request.QuestionGroupFilter == 0 || question.ProfileQuestionGroup.ProfileGroupId == request.QuestionGroupFilter)
+                     &&
+                     (question.CountryId == request.CountryFilter)
+                     &&
+                     (question.LanguageId == request.LanguageFilter)
+                     && (question.CompanyId == this.CompanyId);   
+            }
+
+           
 
             rowCount = DbSet.Count(query);
             return request.IsAsc
