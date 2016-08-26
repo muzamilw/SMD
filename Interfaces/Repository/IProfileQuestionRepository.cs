@@ -12,6 +12,7 @@ namespace SMD.Interfaces.Repository
         /// <summary>
         /// Search Profile Question 
         /// </summary>
+        /// 
         IEnumerable<ProfileQuestion> SearchProfileQuestions(ProfileQuestionSearchRequest request, out int rowCount);
 
         /// <summary>
@@ -35,6 +36,6 @@ namespace SMD.Interfaces.Repository
         /// </summary>
         int GetCountOfUnAnsweredQuestionsByGroupId(double groupId, string userId);
         IEnumerable<ProfileQuestion> UpdateQuestionsCompanyID(IEnumerable<ProfileQuestion> ProfileQuestions);
-
+        void AddProfileQuestions(ProfileQuestion Obj);
     }
 }

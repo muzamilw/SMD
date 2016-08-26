@@ -26,7 +26,7 @@ define("pQuestion/pQuestion.dataservice", function () {
                         type: 'DELETE'
                     });
 
-
+                    
                     //Get Base Data for Profile Questions
                     amplify.request.define('getBaseData', 'ajax', {
                         url: '/Api/ProfileQuestionBase',
