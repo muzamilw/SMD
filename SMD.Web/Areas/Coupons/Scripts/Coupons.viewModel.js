@@ -439,7 +439,7 @@ define("Coupons/Coupons.viewModel",
                     //couponModel().CouponActiveYear(res[0]);
                     //couponModel().CouponActiveMonth(res[1]);
                     //alert(res[0]);
-                    alert(CouponActiveMonth());
+                   
                 }
                 ,
             saveCampaign = function (mode) {

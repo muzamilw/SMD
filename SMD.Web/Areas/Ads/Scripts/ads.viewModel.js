@@ -74,7 +74,7 @@ define("ads/ads.viewModel",
                     audienceReachMode = ko.observable("1"),
                     MainHeading = ko.observable("Video Campaigns"),
                     SubHeading = ko.observable("Video campaigns can be paused and terminated at any time. Increase your conversions and reduce your spend by using profile filters."),
-                    errorList = ko.observableArray([]),
+                    errorListNew = ko.observableArray([]),
                       // unique country list used to bind location dropdown
                     selectedQuestionCountryList = ko.observableArray([]),
                     educations = ko.observableArray([]),
@@ -499,29 +499,58 @@ define("ads/ads.viewModel",
 
             submitCampaignData = function () {
                 //if (campaignModel().isValid()) {
-                if (reachedAudience() > 0) {
-                    if (UserAndCostDetail().isStripeIntegrated == false) {
-                        stripeChargeCustomer.show(function () {
-                            UserAndCostDetail().isStripeIntegrated = true;
+                if (ValidateCampaign()) {
+                    if (reachedAudience() > 0) {
+                        if (UserAndCostDetail().isStripeIntegrated == true) {
 
-                        }, 2000, 'Enter your details');
+                            stripeChargeCustomer.show(function () {
+                                UserAndCostDetail().isStripeIntegrated = false;
+                                saveCampaign(2);
+                            }, 2000, 'Enter your details');
+
+
+                        } else {
+                            saveCampaign(2);
+                        }
                     } else {
-
-                        saveCampaign(2);
-
-
-
+                        toastr.error("You have no audience against the specified criteria please broad your audience definition.");
                     }
-                } else {
-                    toastr.error("You have no audience against the specified criteria please broad your audience definition.");
                 }
+                else {
+                    if (errorListNew().length > 0) {
 
+                        ko.utils.arrayForEach(errorListNew(), function (errorListNew) {
 
+                            toastr.error(errorListNew.name);
+                        });
+                    }
+                }
                 //} else {
                 //    campaignModel().errors.showAllMessages();
                 //    toastr.error("Please fill the required feilds to continue.");
                 //}
             },
+                 ValidateCampaign = function () {
+
+                     errorListNew.removeAll();
+
+                     if (campaignModel().CampaignName() == "" || campaignModel().CampaignName() == undefined) {
+                         errorListNew.push({ name: "Please enter ad Title.", element: "" });
+                         
+                     }
+                     if (campaignModel().ClickRate() == undefined) {
+                         campaignModel().ClickRate(0);
+                     }
+                     if ((parseInt(campaignModel().MaxBudget()) < parseInt(campaignModel().ClickRate()))) {
+                         errorListNew.push({ name: "Campaign budget should be greater than ppvc.", element: "" });
+                       }
+
+                     if (errorListNew() == null || errorListNew().length == 0) {
+                         return true;
+                     } else {
+                         return false;
+                     }
+                 },
                 SaveDraftCampaign = function () {
                     saveCampaign(1);
                 },
@@ -533,14 +562,6 @@ define("ads/ads.viewModel",
               },
             saveCampaign = function (mode) {
                
-
-                if (campaignModel().CampaignName() == "" || campaignModel().CampaignName() == undefined) {
-                    toastr.error("Please enter ad Title.");
-                }
-                else {
-
-                    if (campaignModel().MaxBudget() > campaignModel().ClickRate()) {
-                  
                     var isPopulateErrorList = false;
                     if (isDisplayCouponsAds() == false) {
 
@@ -696,24 +717,10 @@ define("ads/ads.viewModel",
                             allCouponCodeItems.removeAll();
                         },
                         error: function (response) {
-
                         }
                     });
-
-
-                        //  }
-
-                }
-               else {
-                        toastr.error("Campaign budget should be greater than ppvc.");
-                   }
-
-
-
-                }
-                
+                },
             
-            },
                 // Add new profile Criteria
                 addNewProfileCriteria = function () {
 
@@ -2473,7 +2480,7 @@ define("ads/ads.viewModel",
                     audienceReachMode: audienceReachMode,
                     onRemoveEducation: onRemoveEducation,
                     bindAudienceReachCount: bindAudienceReachCount,
-                    errorList: errorList,
+                    errorListNew: errorListNew,
                     addCountryToCountryList: addCountryToCountryList,
                     findLocationsInCountry: findLocationsInCountry,
                     selectedQuestionCountryList: selectedQuestionCountryList,

@@ -67,9 +67,9 @@
                 Priority = ko.observable(Priority),
                 errors = ko.validation.group({
                     Question: Question,
-                    DisplayQuestion: DisplayQuestion,
-                    StartDate: StartDate,
-                    EndDate: EndDate,
+                    //DisplayQuestion: DisplayQuestion,
+                    //StartDate: StartDate,
+                    //EndDate: EndDate,
                     AgeRangeEnd: AgeRangeEnd,
                     }),
                 // Is Valid

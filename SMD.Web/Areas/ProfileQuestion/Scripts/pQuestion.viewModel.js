@@ -79,7 +79,8 @@ define("pQuestion/pQuestion.viewModel",
                                 PageSize: pager().pageSize(),
                                 PageNo: pager().currentPage(),
                                 SortBy: sortOn(),
-                                IsAsc: sortIsAsc()
+                                IsAsc: sortIsAsc(),
+                                fmode : fmodevar
                             },
                             {
                                 success: function (data) {
@@ -104,9 +105,9 @@ define("pQuestion/pQuestion.viewModel",
                        {
                            var percent = 0.0;
                            if (item.AsnswerCount != null && item.AsnswerCount > 0 && item.AnswerNeeded != null && item.AnswerNeeded > 0) {
-                               Percent = (item.AsnswerCount / item.AnswerNeeded) * 100;
+                               percent = (item.AsnswerCount / item.AnswerNeeded) * 100;
                            }
-                           return  Math.round(Percent);
+                           return Math.round(percent);
                          },
                     SetStatusForQuestion = function (item)
                     {
@@ -130,6 +131,7 @@ define("pQuestion/pQuestion.viewModel",
                     
                      //Get Base Data for Questions
                     getBasedata = function () {
+                        
                         dataservice.getBaseData(null, {
                             success: function (baseDataFromServer) {
                                 langs.removeAll();
@@ -172,8 +174,13 @@ define("pQuestion/pQuestion.viewModel",
                         selectedQuestion().countryId(214);
                         selectedQuestion().languageId(41);
                         selectedQuestion().penalityForNotAnswering(0);
+                        previewScreenNumber(1);
                         isEditorVisible(true);
                     },
+                     resetLocations = function () {
+                         $("#searchCampaignLocations").val("");
+                         selectedLocationRadius("");
+                     },
                     // Close Editor 
                     closeEditDialog = function () {
                         if (!hasChangesOnQuestion()) {
@@ -375,6 +382,7 @@ define("pQuestion/pQuestion.viewModel",
                                 serverAnswers.push(item().convertToServerData());
                             }
                         });
+                        debugger;
                         var serverQuestion = selectedQuestion().convertToServerData();
                         serverQuestion.ProfileQuestionAnswers = serverAnswers;
                         
@@ -531,7 +539,8 @@ define("pQuestion/pQuestion.viewModel",
                     SelectedPvcVal: SelectedPvcVal,
                     isTerminateBtnVisible: isTerminateBtnVisible,
                     isShowArchiveBtn: isShowArchiveBtn,
-                    canSubmitForApproval: canSubmitForApproval
+                    canSubmitForApproval: canSubmitForApproval,
+                    resetLocations:resetLocations
                 };
             })()
         };

@@ -691,33 +691,49 @@ define("survey/survey.viewModel",
                     },
                    // submit  survey question for approval
                     onSubmitSurveyQuestion = function () {
+                        debugger;
                         if (selectedQuestion().isValid()) {
 
                             if (ValidateSurvey() == true) {
                                 if (reachedAudience() > 0) {
-                                   
-                                    if (userBaseData().isStripeIntegrated == false) {
-                                        stripeChargeCustomer.show(function () {
-                                            userBaseData().isStripeIntegrated = true;
-                                            saveSurveyQuestion(2);
 
+                                    if (userBaseData().isStripeIntegrated == true) {
+                                        stripeChargeCustomer.show(function () {
+                                            userBaseData().isStripeIntegrated =false;
+                                            saveSurveyQuestion(2);
                                         }, 2000, 'Enter your details');
                                     } else {
-
                                         saveSurveyQuestion(2);
-
-
                                     }
                                 } else {
                                     toastr.error("You have no audience against the specified criteria please broad your audience definition.");
                                 }
-                             
+
+                            }
+                            else {
+
+                                if (errorList().length > 0) {
+                                   
+                                    ko.utils.arrayForEach(errorList(), function (errorList) {
+                                        
+                                        toastr.error(errorList.name);
+                                    });
+                                }
                             }
                            
                         } else {
+
+                            
+
                             if (isEditorVisible()) {
                                 selectedQuestion().errors.showAllMessages();
+                                
                                 toastr.error("Please fill the required feilds to continue.");
+                                if (errorList().length > 0) {
+                                    $.each(errorList(), function (key, value) {
+                                        toastr.error(value);
+                                    });
+                                }
                             }
 
                         }
@@ -1029,6 +1045,7 @@ define("survey/survey.viewModel",
                         }
                     },
                     ValidateSurvey = function () {
+                       
                         if (selectedQuestion().SQID() > 0)
                             return true;
                         errorList.removeAll();

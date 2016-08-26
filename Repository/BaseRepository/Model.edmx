@@ -115,6 +115,7 @@
           <Property Name="VoucherLocationLAT" Type="nvarchar" MaxLength="50" />
           <Property Name="VoucherLocationLON" Type="nchar" MaxLength="10" />
           <Property Name="MaxDailyBudget" Type="float" />
+          <Property Name="SubmissionDateTime" Type="datetime" />
         </EntityType>
         <EntityType Name="AdCampaignResponse">
           <Key>
@@ -243,6 +244,7 @@
           <Property Name="DOB" Type="datetime" />
           <Property Name="CompanyId" Type="int" />
           <Property Name="authenticationToken" Type="nvarchar" MaxLength="500" />
+          <Property Name="DevicePlatform" Type="int" />
         </EntityType>
         <EntityType Name="AuditLog">
           <Key>
@@ -428,6 +430,7 @@
           <Property Name="HowToRedeemLine3" Type="nvarchar" MaxLength="500" />
           <Property Name="HowToRedeemLine4" Type="nvarchar" MaxLength="500" />
           <Property Name="HowToRedeemLine5" Type="nvarchar" MaxLength="500" />
+          <Property Name="SubmissionDateTime" Type="datetime" />
         </EntityType>
         <EntityType Name="CouponCategories">
           <Key>
@@ -631,6 +634,7 @@
           <Property Name="CompanyId" Type="int" />
           <Property Name="AnswerNeeded" Type="int" />
           <Property Name="AsnswerCount" Type="int" />
+          <Property Name="SubmissionDateTime" Type="datetime" />
         </EntityType>
         <EntityType Name="ProfileQuestionAnswer">
           <Key>
@@ -2910,6 +2914,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Property Name="AnswerNeeded" Type="Int32" />
           <Property Name="AsnswerCount" Type="Int32" />
           <NavigationProperty Name="Company" Relationship="DomainModels.FK_ProfileQuestion_Company" FromRole="ProfileQuestion" ToRole="Company" />
+          <Property Name="SubmissionDateTime" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="ProfileQuestionAnswer">
           <Key>
@@ -3900,6 +3905,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <NavigationProperty Name="AdCampaignResponses" Relationship="DomainModels.FK_AdCampaignResponse_AspNetUsers" FromRole="User" ToRole="AdCampaignResponse" />
           <NavigationProperty Name="CompaniesAspNetUsers" Relationship="DomainModels.FK_CompaniesAspNetUsers_AspNetUsers" FromRole="User" ToRole="CompaniesAspNetUser" />
           <NavigationProperty Name="Company" Relationship="DomainModels.FK_AspNetUsers_Company" FromRole="User" ToRole="Company" />
+          <Property Name="DevicePlatform" Type="Int32" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Type="DomainModels.User" Role="AspNetUser" Multiplicity="1">
@@ -4206,6 +4212,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Property Name="VoucherLocationLON" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="MaxDailyBudget" Type="Double" />
           <NavigationProperty Name="Company" Relationship="DomainModels.FK_AdCampaign_Company" FromRole="AdCampaign" ToRole="Company" />
+          <Property Name="SubmissionDateTime" Type="DateTime" Precision="3" />
         </EntityType>
         <Association Name="FK_AdCampaign_Language">
           <End Type="DomainModels.Language" Role="Language" Multiplicity="0..1" />
@@ -4752,6 +4759,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <NavigationProperty Name="CouponCategories" Relationship="DomainModels.FK_CouponCategories_Coupon" FromRole="Coupon" ToRole="CouponCategories" />
           <NavigationProperty Name="UserPurchasedCoupons" Relationship="DomainModels.FK_UserPurchasedCoupon_Coupon" FromRole="Coupon" ToRole="UserPurchasedCoupon" />
           <NavigationProperty Name="Company" Relationship="DomainModels.FK_Coupon_Company" FromRole="Coupon" ToRole="Company" />
+          <Property Name="SubmissionDateTime" Type="DateTime" Precision="3" />
         </EntityType>
         <Association Name="FK_CompanyBranch_BranchCategory">
           <End Type="DomainModels.BranchCategory" Role="BranchCategory" Multiplicity="0..1" />
@@ -5187,6 +5195,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <EntitySetMapping Name="ProfileQuestions">
             <EntityTypeMapping TypeName="DomainModels.ProfileQuestion">
               <MappingFragment StoreEntitySet="ProfileQuestion">
+                <ScalarProperty Name="SubmissionDateTime" ColumnName="SubmissionDateTime" />
                 <ScalarProperty Name="AsnswerCount" ColumnName="AsnswerCount" />
                 <ScalarProperty Name="AnswerNeeded" ColumnName="AnswerNeeded" />
                 <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
@@ -5638,6 +5647,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="DomainModels.User">
               <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="DevicePlatform" ColumnName="DevicePlatform" />
                 <ScalarProperty Name="AuthenticationToken" ColumnName="authenticationToken" />
                 <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
                 <ScalarProperty Name="DOB" ColumnName="DOB" />
@@ -5747,6 +5757,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <EntitySetMapping Name="AdCampaigns">
             <EntityTypeMapping TypeName="DomainModels.AdCampaign">
               <MappingFragment StoreEntitySet="AdCampaign">
+                <ScalarProperty Name="SubmissionDateTime" ColumnName="SubmissionDateTime" />
                 <ScalarProperty Name="MaxDailyBudget" ColumnName="MaxDailyBudget" />
                 <ScalarProperty Name="VoucherLocationLON" ColumnName="VoucherLocationLON" />
                 <ScalarProperty Name="VoucherLocationLAT" ColumnName="VoucherLocationLAT" />
@@ -6146,6 +6157,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <EntitySetMapping Name="Coupons">
             <EntityTypeMapping TypeName="DomainModels.Coupon">
               <MappingFragment StoreEntitySet="Coupon">
+                <ScalarProperty Name="SubmissionDateTime" ColumnName="SubmissionDateTime" />
                 <ScalarProperty Name="HowToRedeemLine5" ColumnName="HowToRedeemLine5" />
                 <ScalarProperty Name="HowToRedeemLine4" ColumnName="HowToRedeemLine4" />
                 <ScalarProperty Name="HowToRedeemLine3" ColumnName="HowToRedeemLine3" />

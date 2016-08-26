@@ -37,6 +37,7 @@ namespace SMD.Models.DomainModels
 
         public virtual Company Company { get; set; }
 
+        public Nullable<System.DateTime> SubmissionDateTime { get; set; }
         
     }
 }

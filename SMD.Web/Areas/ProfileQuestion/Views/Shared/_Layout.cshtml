@@ -1,5 +1,25 @@
-﻿@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+﻿@using SMD.Models.Common
+@using SMD.Common
+@{
+    
+    
+    IEnumerable<SmdRoleClaimValue> roleClaim = ClaimHelper.GetClaimsByType<SmdRoleClaimValue>(SmdClaimTypes.Role);
+    string RoleName = roleClaim != null && roleClaim.Any() ? roleClaim.ElementAt(0).Role : "Role Not Loaded";
+    if ( RoleName.StartsWith("Franchise"))
+    {
+        Layout = "~/Views/Shared/_Layout_Franchise.cshtml";
+        
+        <script>
+            var fmodevar = true;
+        </script>
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+        <script>
+            var fmodevar = false;
+        </script>
+    }
 }
 
 @section leftmenue {
