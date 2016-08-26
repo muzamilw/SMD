@@ -499,23 +499,23 @@ define("ads/ads.viewModel",
 
             submitCampaignData = function () {
                 //if (campaignModel().isValid()) {
+                debugger;
                 if (reachedAudience() > 0) {
-                    if (UserAndCostDetail().isStripeIntegrated == false) {
+                    if (UserAndCostDetail().isStripeIntegrated == true) {
+
                         stripeChargeCustomer.show(function () {
-                            UserAndCostDetail().isStripeIntegrated = true;
-
+                            UserAndCostDetail().isStripeIntegrated = false;
+                            saveCampaign(2);
                         }, 2000, 'Enter your details');
+                       
+
                     } else {
-
                         saveCampaign(2);
-
-
-
                     }
                 } else {
                     toastr.error("You have no audience against the specified criteria please broad your audience definition.");
                 }
-
+                
 
                 //} else {
                 //    campaignModel().errors.showAllMessages();
@@ -533,13 +533,16 @@ define("ads/ads.viewModel",
               },
             saveCampaign = function (mode) {
                
-
+                debugger;
                 if (campaignModel().CampaignName() == "" || campaignModel().CampaignName() == undefined) {
                     toastr.error("Please enter ad Title.");
                 }
                 else {
-
-                    if (campaignModel().MaxBudget() > campaignModel().ClickRate()) {
+                    if (campaignModel().ClickRate() == undefined)
+                    {
+                        campaignModel().ClickRate(0);
+                    }
+                    if (parseInt(campaignModel().MaxBudget()) > parseInt(campaignModel().ClickRate())) {
                   
                     var isPopulateErrorList = false;
                     if (isDisplayCouponsAds() == false) {
