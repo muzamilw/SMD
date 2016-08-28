@@ -69,9 +69,7 @@ namespace SMD.MIS.Areas.DAM.Controllers
         [HttpPost]
         public ActionResult UploadImage(ImagesModel model)
         {
-            //Check if all simple data annotations are valid
-            if (ModelState.IsValid)
-            {
+           
                 //Prepare the needed variables
                 Bitmap original = null;
                 var name = "newimagefile";
@@ -81,34 +79,41 @@ namespace SMD.MIS.Areas.DAM.Controllers
                     errorField = "File";
                     name = Path.GetFileNameWithoutExtension(model.File.FileName);
                     original = Bitmap.FromStream(model.File.InputStream) as Bitmap;
-                
-                //If we had success so far
-                if (original != null)
-                {
-                    var img = CreateImage(original, model.X, model.Y, model.Width, model.Height);
-
-                    //Demo purposes only - save image in the file system
                     if (!Directory.Exists(Server.MapPath("~/SMD_Content/DamImages/" + model.CompanyId + "/" + model.mode + "/")))
                         Directory.CreateDirectory(Server.MapPath("~/SMD_Content/DamImages/" + model.CompanyId + "/" + model.mode + "/"));
                     var fn = Server.MapPath("~/SMD_Content/DamImages/" + model.CompanyId + "/" + model.mode + "/" + name + ".png");
-                    img.Save(fn, System.Drawing.Imaging.ImageFormat.Png);
+                    original.Save(fn, System.Drawing.Imaging.ImageFormat.Png);
+                    
                     DamImage damImg = new DamImage();
                     damImg.CompanyId = model.CompanyId;
-                  //  damImg.CreatedDateTime = DateTime.Now.ToString();
                     damImg.ImageCategory = model.mode;
                     damImg.ImageFileName = name + ".png";
                     damImg.ImageTitle = name;
                     damImageService.addImage(damImg);
-                    //Redirect to index
-                    return RedirectToAction("Index","Images",new {mode = model.mode});
-                }
-                else //Otherwise we add an error and return to the (previous) view with the model data
-                    ModelState.AddModelError(errorField, "Your upload did not seem valid. Please try again using only correct images!");
-            }
+                    return RedirectToAction("Index", "Images", new { mode = model.mode ,iId = damImg.ImageId});
 
-            return View(model);
+          
         }
-
+        public bool UpdateImage(ImageCropModel model)
+        {
+            string fileName = damImageService.updateImage(model.imageId, model.fileName);
+            if (!String.IsNullOrEmpty(model.bytes))
+            {
+                string base64 = model.bytes.Substring(model.bytes.IndexOf(',') + 1);
+                base64 = base64.Trim('\0');
+                byte[] data = Convert.FromBase64String(base64);
+                if (!Directory.Exists(Server.MapPath("~/SMD_Content/DamImages/" + model.CompanyId + "/" + model.mode + "/")))
+                    Directory.CreateDirectory(Server.MapPath("~/SMD_Content/DamImages/" + model.CompanyId + "/" + model.mode + "/"));
+                var fn = Server.MapPath("~/SMD_Content/DamImages/" + model.CompanyId + "/" + model.mode + "/" + fileName);
+                System.IO.File.WriteAllBytes(fn, data);
+            }
+            return true;
+        }
+        public bool DeleteImage(ImageCropModel model)
+        {
+            damImageService.deleteImage(model.imageId);
+            return true;
+        }
         /// <summary>
         /// Gets an image from the specified URL.
         /// </summary>

@@ -728,6 +728,11 @@
     <Content Include="Content\DAM\DamSite.css" />
     <Content Include="Content\DAM\empty.png" />
     <Content Include="Content\DAM\ImageArea.css" />
+    <Content Include="Content\DAM\jquery.cropbox.css" />
+    <Content Include="Content\DAM\jquery.cropbox.js" />
+    <Content Include="Content\DAM\pc1.js" />
+    <Content Include="Content\DAM\pc2.js" />
+    <Content Include="Content\DAM\pc3.js" />
     <Content Include="Content\Images\5_Main_4.png" />
     <Content Include="Content\Images\AD_Campaign_mobileStencil.png" />
     <Content Include="Content\Images\arrow-down-small.png" />
@@ -1675,7 +1680,6 @@
     <Content Include="Areas\DAM\Views\web.config" />
     <Content Include="Areas\DAM\Views\_ViewStart.cshtml" />
     <Content Include="Areas\DAM\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\DAM\Views\Images\-Index.cshtml" />
     <Content Include="Areas\DAM\Views\Shared\_DAMGrid.cshtml" />
     <Content Include="Areas\DAM\Views\Images\Index.cshtml" />
     <Content Include="Areas\DAM\Views\Images\Grid.cshtml" />
@@ -1692,6 +1696,7 @@
     <Content Include="Areas\Franchise\Views\web.config" />
     <Content Include="Areas\Franchise\Scripts\Coupons.model.js" />
     <Content Include="Areas\Franchise\Views\Dashboard\CouponsAproval.cshtml" />
+    <Content Include="Areas\DAM\Views\Images\-Index - Copy.cshtml" />
     <None Include="Areas\SuperNova\Views\web.config" />
     <Content Include="Areas\SuperNova\Views\Dashboard\Index.cshtml" />
     <Content Include="Areas\SuperNova\Views\_ViewStart.cshtml" />

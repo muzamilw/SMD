@@ -63,6 +63,20 @@ namespace SMD.Implementation.Services
             //type : 3 surveys 
             
         }
+        public bool deleteImage(long id)
+        {
+            var image = damRepository.Find(id);
+            damRepository.Delete(image);
+            damRepository.SaveChanges();
+            return true;
+        }
+        public string updateImage(long id, string name)
+        {
+            var image = damRepository.Find(id);
+            image.ImageTitle = name;
+            damRepository.SaveChanges();
+            return image.ImageFileName;
+        }
         #endregion
     }
 }
