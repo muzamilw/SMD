@@ -635,6 +635,9 @@
           <Property Name="AnswerNeeded" Type="int" />
           <Property Name="AsnswerCount" Type="int" />
           <Property Name="SubmissionDateTime" Type="datetime" />
+          <Property Name="AgeRangeStart" Type="int" />
+          <Property Name="AgeRangeEnd" Type="int" />
+          <Property Name="Gender" Type="int" />
         </EntityType>
         <EntityType Name="ProfileQuestionAnswer">
           <Key>
@@ -2915,6 +2918,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Property Name="AsnswerCount" Type="Int32" />
           <NavigationProperty Name="Company" Relationship="DomainModels.FK_ProfileQuestion_Company" FromRole="ProfileQuestion" ToRole="Company" />
           <Property Name="SubmissionDateTime" Type="DateTime" Precision="3" />
+          <Property Name="AgeRangeStart" Type="Int32" />
+          <Property Name="AgeRangeEnd" Type="Int32" />
+          <Property Name="Gender" Type="Int32" />
         </EntityType>
         <EntityType Name="ProfileQuestionAnswer">
           <Key>
@@ -5195,6 +5201,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <EntitySetMapping Name="ProfileQuestions">
             <EntityTypeMapping TypeName="DomainModels.ProfileQuestion">
               <MappingFragment StoreEntitySet="ProfileQuestion">
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="AgeRangeEnd" ColumnName="AgeRangeEnd" />
+                <ScalarProperty Name="AgeRangeStart" ColumnName="AgeRangeStart" />
                 <ScalarProperty Name="SubmissionDateTime" ColumnName="SubmissionDateTime" />
                 <ScalarProperty Name="AsnswerCount" ColumnName="AsnswerCount" />
                 <ScalarProperty Name="AnswerNeeded" ColumnName="AnswerNeeded" />
