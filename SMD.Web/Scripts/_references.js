@@ -730,6 +730,22 @@
 /// <reference path="plugins/forms/tiny_mce/plugins/autosave/editor_plugin_src.js" />
 /// <reference path="plugins/forms/tiny_mce/plugins/bbcode/editor_plugin.js" />
 /// <reference path="plugins/forms/tiny_mce/plugins/bbcode/editor_plugin_src.js" />
+/// <reference path="plugins/forms/tiny_mce/plugins/contextmenu/editor_plugin.js" />
+/// <reference path="plugins/forms/tiny_mce/plugins/contextmenu/editor_plugin_src.js" />
+/// <reference path="plugins/forms/tiny_mce/plugins/directionality/editor_plugin.js" />
+/// <reference path="plugins/forms/tiny_mce/plugins/directionality/editor_plugin_src.js" />
+/// <reference path="plugins/forms/tiny_mce/plugins/emotions/editor_plugin.js" />
+/// <reference path="plugins/forms/tiny_mce/plugins/emotions/editor_plugin_src.js" />
+/// <reference path="plugins/forms/tiny_mce/plugins/example/editor_plugin.js" />
+/// <reference path="plugins/forms/tiny_mce/plugins/example/editor_plugin_src.js" />
+/// <reference path="plugins/forms/tiny_mce/plugins/example_dependency/editor_plugin.js" />
+/// <reference path="plugins/forms/tiny_mce/plugins/example_dependency/editor_plugin_src.js" />
+/// <reference path="plugins/forms/tiny_mce/plugins/fullpage/editor_plugin.js" />
+/// <reference path="plugins/forms/tiny_mce/plugins/fullpage/editor_plugin_src.js" />
+/// <reference path="plugins/forms/tiny_mce/plugins/fullscreen/editor_plugin.js" />
+/// <reference path="plugins/forms/tiny_mce/plugins/fullscreen/editor_plugin_src.js" />
+/// <reference path="plugins/forms/tiny_mce/plugins/iespell/editor_plugin.js" />
+/// <reference path="plugins/forms/tiny_mce/plugins/iespell/editor_plugin_src.js" />
 <<<<<<< HEAD
 =======
 /// <reference path="plugins/forms/timeentry/langs/jquery.timeentry-ca.js" />
