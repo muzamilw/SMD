@@ -595,6 +595,15 @@ namespace SMD.Implementation.Services
             }
             return res;
           }
+        public CouponsResponseModelForApproval GetAdCampaignForAproval(GetPagedListRequest request)
+        {
+            int rowCount;
+            return new CouponsResponseModelForApproval
+            {
+                Coupons = couponRepository.GetCouponsForApproval(request, out rowCount),
+                TotalCount = rowCount
+            };
+        }
 
         #endregion
     }

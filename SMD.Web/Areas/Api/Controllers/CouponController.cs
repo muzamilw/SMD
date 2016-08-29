@@ -53,7 +53,7 @@ namespace SMD.MIS.Areas.Api.Controllers
 
         public void Post(SMD.Models.DomainModels.Coupon couponModel)
         {
-            couponModel.Status = (int)AdCampaignStatus.Draft;
+            //couponModel.Status = (int)AdCampaignStatus.Draft;
             if (couponModel.CouponId > 0)
             {
                 _couponService.UpdateCampaign(couponModel);

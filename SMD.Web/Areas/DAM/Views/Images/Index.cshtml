@@ -8,6 +8,8 @@
 <link href="~/content/dam/damsite.css" rel="stylesheet" />
 <link href="~/Content/DAM/ImageArea.css" rel="stylesheet" />
 <link href="~/Content/themes/Centaurus/css/bootstrap/bootstrap.min.css" rel="stylesheet" />
+
+<link href="~/Content/DAM/jquery.cropbox.css" rel="stylesheet" />
 <section id="main">
     <div class="row">
       
@@ -18,8 +20,9 @@
                         <div class="imageContainer">
                             @foreach (var img in Model.Images)
                             {
-                                <div class="imageBox">
+                                <div class="imageBox" id="@img.ImageId">
                                     <img src="@img.ImageFileName" alt="Image" class="imagePreview" />
+                                    <input  type="hidden" value="@img.ImageTitle" class="title"/> 
                                 </div>
                             }
                         </div>
@@ -67,11 +70,41 @@
                
             </div>
         
-        
-    </div>
-   
-</section>
+        <button style="display:none" id="loadModel" data-toggle="modal" data-target="#damImageEditor"></button>
 
+    </div>
+  
+</section>
+<!-- Modal -->
+<div class="modal fade" id="damImageEditor" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document" style="width:1000px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">&nbsp;</h4>
+            </div>
+            <div class="modal-body">
+                <div class="ImageContainer" style="display: block;">
+                    <p><a class="add QuickTextTitle ThemeColor ui-draggable" style="" data-style="title">Image Information</a></p>
+
+                    <div class="pnlImgBank">
+                        <div class="ImgLbl" style="">Image Title</div>
+                        <input type="text" name="InputImgTitle" id="InputImgTitle" class="qTextInput" placeholder="Image Title" maxlength="500">
+                    </div>
+                    <div class="pnlImgBank">
+                        <div class="ImgLbl" style="">Image Thumbnail</div>
+                        <img id="ImgDAMDetail" src="">
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="btnUpdateImgProp" class="buttonDesigner">Update</button>
+                <button id="btnDeleteImg" class="buttonDesigner">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 @section Scripts{
    
@@ -82,117 +115,48 @@
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
 <script src="@Url.Content("~/Scripts/jquery.imgareaselect.js")"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Content/DAM/pc1.js"></script>
+<script src="~/Content/DAM/pc2.js"></script>
+<script src="~/Content/DAM/pc3.js"></script>
+
 <script>
+    var aspectRatio = "2:1", minheight = 200, minWidth = 400;
+    var imgDataUrl = "";
+    var selectedImgId = 0;
     $(document).ready(function () {
-        //Get the checkboxes and disable them
-        //var boxes = $('input[type=checkbox]').attr('disabled', true);
-
-        //Get the preview image and set the onload event handler
-        var preview = $('#preview').load(function () {
-            
-            var coords;
-            var height = (this.width / ratioX) * ratioY;
-            if (height <= this.height) {
-                var diff = (this.height - height) / 2;
-                coords = { x1: 0, y1: diff, x2: this.width, y2: height + diff, show: true };
-            }
-            else { // if new height out of bounds, scale width instead
-                var width = (this.height / ratioY) * ratioX;
-                var diff = (this.width - width) / 2;
-                coords = { x1: diff, y1: 0, x2: width + diff, y2: this.height, show: true };
-            }
-            //ias.imgAreaSelect(coords);
-            if (ias != undefined)
-                ias.setOptions(coords);
-            var scale = preview[0].naturalWidth / preview.width();
-            var _f = Math.floor;
-            setPreview(_f(scale * coords.x1), _f(scale * coords.y1), _f(scale * coords.width), _f(scale * coords.height));
-        });
-
-        //Set the 4 coordinates for the cropping
-        var setPreview = function (x, y, w, h) {
-            $('#X').val(x || 0);
-            $('#Y').val(y || 0);
-            $('#Width').val(w || preview[0].naturalWidth);
-            $('#Height').val(h || preview[0].naturalHeight);
-        };
         var mode = GetURLParameter("mode");
-        var aspectRatio = "2:1",minheight = 200, minWidth = 400;
+        
         var ratioX = 2, ratioY = 1;
-        if(mode == 2) {
+        if (mode == 2) {
             aspectRatio = "8:5";
             minheight = 250;
             minWidth = 400
-        } else  if(mode == 3) {
+        } else if (mode == 3) {
             aspectRatio = "8:5";
             minheight = 250;
             minWidth = 400
         } else if (mode == 4) {
-            minheight =400;
+            minheight = 400;
             minWidth = 200
             aspectRatio = "1:2";
         }
-        //Initialize the image area select plugin
-        var ias = preview.imgAreaSelect({
-            handles: true,
-            aspectRatio:aspectRatio,
-            instance: true,
-            parent: 'body',
-            onSelectEnd: function (s, e) {
-                var scale = preview[0].naturalWidth / preview.width();
-                var _f = Math.floor;
-                setPreview(_f(scale * e.x1), _f(scale * e.y1), _f(scale * e.width), _f(scale * e.height));
-            },
-            onInit: function () {
-               
-            }
-        });
-
-        //Check one of the checkboxes
-        var setBox = function (filter) {
-            $('#btnSave').attr('disabled', false);
-         //   boxes.attr('checked', false)
-           // .filter(filter).attr({ 'checked': true, 'disabled': false });
-        };
-
-        //Initial state of X, Y, Width and Height is 0 0 1 1
-        setPreview(0, 0, 1, 1);
-
+     //   $("#ImgDAMDetail").css("height", minheight +"px");
+        $("#ImgDAMDetail").css("width", minWidth + "px");
+        $("#InputImgTitle").css("width", minWidth + "px");
+        var iId = GetURLParameter("iId");
+        if (iId > 0)
+        {
+            loadCropper(iId);
+        }
         //What happens if the File changes?
         $('#File').change(function (evt) {
-   
-            var f = evt.target.files[0];
-            var reader = new FileReader();
-
-            if (!f.type.match('image.*')) {
-                alert("The selected file does not appear to be an image.");
-                return;
-            }
-
-            setBox('#IsFile');
-            reader.onload = function (e) {
-                preview.attr('src', e.target.result);
-                $(".uploadPreview").css("display","block");
-              
-            };
-            reader.readAsDataURL(f);
-        });
-
-        //What happens if any checkbox is checked ?!
-        //boxes.change(function () {
-        //    setBox(this);
-        //    $('#' + this.id.substr(2)).change();
-        //});
-
-        
-        $('form').submit(function () {
-            $('#btnSave').attr('disabled', true).text('Please wait ...');
-        });
+            $('#btnSave').click()
+        });   
         $("#uploadFileMain").click(function () {
             $('#File').click();
             return false;
         });
-        $('#btnSave').attr('disabled', true);
     });
     function GetURLParameter(sParam)
     {
@@ -206,6 +170,82 @@
                 return sParameterName[1];
             }
         }
+        return 0;
+    }
+    function loadCropper(iId)
+    {
+        $("#InputImgTitle").val($("#" + iId + " .title").val());
+        $("#ImgDAMDetail").attr("src", $("#" + iId + " img").attr("src"));
+        selectedImgId = iId;
+        $('#ImgDAMDetail').each(function () {
+            var image = $(this);
+            var cb = image.cropbox({ width: minWidth, height: minheight, showControls: 'auto', xml: null })
+              .on('cropbox', function (event, results, img) {
+                  imgDataUrl = (getDataURL(img));
+              });
+
+        });
+        $("#loadModel").click();
+
+    }
+    $("#btnUpdateImgProp").click(function () {
+        var model = {
+            fileName: $("#InputImgTitle").val(),
+            bytes: imgDataUrl,
+            imageId: selectedImgId,
+            CompanyId: $("#CompanyId").val(),
+            mode: $("#mode").val()
+        }
+        var jsonObjects = JSON.stringify(model, null, 2);
+        var to;
+        to = "/DAMImages/UpdateImage/";
+        var options = {
+            type: "POST",
+            url: to,
+            data: jsonObjects,
+            contentType: "application/json",
+            async: true,
+            success: function (response) {
+                window.location.href = "/DamImages?mode=" + $("#mode").val()
+            },
+            error: function (msg) { alert("Error occured "); console.log(msg); }
+        };
+        var returnText = $.ajax(options).responseText;
+    });
+    function showProgress() {
+
+    }
+    function hideProgress() {
+
+    }
+    $("#btnDeleteImg").click(function () {
+        var model = {
+            imageId: selectedImgId
+        }
+        var jsonObjects = JSON.stringify(model, null, 2);
+        var to;
+        to = "/DAMImages/DeleteImage/";
+        var options = {
+            type: "POST",
+            url: to,
+            data: jsonObjects,
+            contentType: "application/json",
+            async: true,
+            success: function (response) {
+                window.location.href = "/DamImages?mode="+$("#mode").val()
+            },
+            error: function (msg) {
+                alert("Error occured "); console.log(msg);
+            }
+        };
+        var returnText = $.ajax(options).responseText;
+    });
+    function getDataURL(result) {
+        var canvas = document.createElement('canvas'), ctx = canvas.getContext('2d');
+        canvas.width = result.options.width;
+        canvas.height = result.options.height;
+        ctx.drawImage(result.$image.get(0), result.result.cropX, result.result.cropY, result.result.cropW, result.result.cropH, 0, 0, result.options.width, result.options.height);
+        return canvas.toDataURL();
     }
     window.onload = function () {
         try {

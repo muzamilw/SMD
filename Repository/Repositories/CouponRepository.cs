@@ -187,7 +187,24 @@ namespace SMD.Repository.Repositories
 
             return db.Coupons.Where(g => g.CompanyId == CompanyId).ToList(); //.GetCouponsByCompanyId(CompanyId).ToList();
         }
+        public IEnumerable<Coupon> GetCouponsForApproval(GetPagedListRequest request, out int rowCount)
+        {
+            int fromRow = (request.PageNo - 1) * request.PageSize;
+            int toRow = request.PageSize;
+            Expression<Func<Coupon, bool>> query =
+                c => c.Status == (Int32)AdCampaignStatus.SubmitForApproval && c.CompanyId==CompanyId;
 
+            //if (request.ShowCoupons.HasValue && request.ShowCoupons.Value == true)
+            //    query = c => c.Status == (Int32)AdCampaignStatus.SubmitForApproval;
+
+            rowCount = DbSet.Count(query);
+      
+            var res = DbSet.Where(query)
+                    .OrderByDescending(p=>p.CreatedDateTime);
+            return res.Skip(fromRow)
+                    .Take(toRow);
+
+        }
     
        
         #endregion
