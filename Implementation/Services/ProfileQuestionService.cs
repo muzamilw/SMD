@@ -83,6 +83,15 @@ namespace SMD.Implementation.Services
         public ProfileQuestionSearchRequestResponse GetProfileQuestions(ProfileQuestionSearchRequest request)
         {
             int rowCount;
+            //string code = Convert.ToString((int)ProductCode.);
+            //var product = productRepository.GetAll().Where(g => g.ProductCode == code).FirstOrDefault();
+            //var userBaseData = surveyQuestionRepository.getBaseData();
+            //double? setupPrice = 0;
+            //if (product != null)
+            //{
+            //    userBaseData.CurrencySymbol = product.Currency != null ? product.Currency.CurrencyCode : "$";
+            //    setupPrice = product.SetupPrice;
+            //}
             return new ProfileQuestionSearchRequestResponse
             {
                 ProfileQuestions = _profileQuestionRepository.SearchProfileQuestions(request, out rowCount),

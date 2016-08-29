@@ -70,6 +70,7 @@ define("pQuestion/pQuestion.view",
                                    Longitude: longitude
                                }
 
+                               
                                viewModel.selectedLocation(obj);
                                viewModel.onAddLocation();
                                $('#searchCampaignLocations').val("");

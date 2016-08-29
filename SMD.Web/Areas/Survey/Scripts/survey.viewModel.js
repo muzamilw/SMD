@@ -99,7 +99,9 @@ define("survey/survey.viewModel",
                             fmode: isfMode()
                         },
                             {
+                                
                                 success: function (data) {
+                                    debugger;
                                     // popullate base data 
                                     langs.removeAll();
                                     countries.removeAll();
@@ -377,6 +379,7 @@ define("survey/survey.viewModel",
                      },
                     //add location
                     onAddLocation = function (item) {
+                       
                         selectedLocation().Radius = (selectedLocationRadius);
                         selectedLocation().IncludeorExclude = (selectedLocationIncludeExclude);
                         selectedQuestion().SurveyQuestionTargetLocation.push( new model.SurveyQuestionTargetLocation.Create( {
@@ -691,7 +694,7 @@ define("survey/survey.viewModel",
                     },
                    // submit  survey question for approval
                     onSubmitSurveyQuestion = function () {
-                        debugger;
+                       
                         if (selectedQuestion().isValid()) {
 
                             if (ValidateSurvey() == true) {
@@ -721,7 +724,8 @@ define("survey/survey.viewModel",
                                 }
                             }
                            
-                        } else {
+                        }
+                        else {
 
                             
 

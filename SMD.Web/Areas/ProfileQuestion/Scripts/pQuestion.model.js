@@ -16,7 +16,7 @@
                 profileGroupId = ko.observable(groupId).extend({ required: true }),
                 type = ko.observable(spcType).extend({ required: true }),
                 statusValue = ko.observable(StatusValue),
-                
+                ProfileQuestionTargetLocation = ko.observableArray([]),
                 refreshTime = ko.observable(spcRefreshtime),
                 skippedCount = ko.observable(spcSkipped),
                 creationDate = ko.observable(spcCreationD),
@@ -67,7 +67,13 @@
                     dirtyFlag.reset();
                 },
                 // Convert to server data
-                convertToServerData = function() {
+             
+
+                convertToServerData = function () {
+                    var targetLocation = [];
+                    _.each(ProfileQuestionTargetLocation(), function (item) {
+                        targetLocation.push(item.convertToServerData());
+                    });
                     return {
                         PqId:qId(),
                         Question:questionString(),
@@ -81,7 +87,8 @@
                         RefreshTime: refreshTime(),
                         SkippedCount: skippedCount(),
                         PenalityForNotAnswering: penalityForNotAnswering(),
-                        Status: status()
+                        Status: status(),
+                        ProfileQuestionTargetLocation: targetLocation
                     };
                 };
             return {
@@ -113,7 +120,8 @@
                 statusValue: statusValue,
                 answerNeeded: answerNeeded,
                 answerCount:answerCount,
-                errors: errors
+                errors: errors,
+                ProfileQuestionTargetLocation: ProfileQuestionTargetLocation
             };
         };
 
@@ -270,7 +278,7 @@
     //////////////////////////////////////////////  QUESTION ANSWER  
 
     //server to client mapper For QUESTION ANSWER 
-    var questionAnswerServertoClientMapper = function (itemFromServer) {
+   var  questionAnswerServertoClientMapper = function (itemFromServer) {
         var obj= new questionAnswer(itemFromServer.AnswerString, itemFromServer.ImagePath, itemFromServer.LinkedQuestion1Id,
             itemFromServer.LinkedQuestion2Id, itemFromServer.LinkedQuestion3Id, itemFromServer.LinkedQuestion4Id, itemFromServer.LinkedQuestion5Id, itemFromServer.LinkedQuestion6Id, itemFromServer.PqAnswerId, itemFromServer.PqId
         , itemFromServer.SortOrder, itemFromServer.Type);
@@ -285,14 +293,14 @@
     };
 
     // Function to attain cancel button functionality QUESTION ANSWER
-    questionAnswer.CreateFromClientModel = function (item) {
+     questionAnswer.CreateFromClientModel = function (item) {
         return new questionAnswer(item.answerString, item.imagePath, item.linkedQuestion1Id,
             item.linkedQuestion2Id, item.linkedQuestion3Id, item.linkedQuestion4Id, item.linkedQuestion5Id, item.linkedQuestion6Id, item.pqAnswerId, item.pqId
         , item.sortOrder, item.type);
     };
 
     // Sets answer string of linked questions grid
-    var setAnswerString = function (id, obj) {
+   var setAnswerString = function (id, obj) {
         if ( id == null  )
             return undefined;
         var qst = ist.ProfileQuestion.viewModel.linkedQuestions.find(function (temp) {
@@ -305,12 +313,57 @@
         else
             return undefined;
     };
+  var  ProfileQuestionTargetLocation = function (ID, SQID, CountryID, CityID, Radius, Country, City, IncludeorExclude, Latitude, Longitude) {
+        var
+            //type and userID will be set on server sside
+            ID = ko.observable(ID),
+            SQID = ko.observable(SQID),
+            CountryID = ko.observable(CountryID),
+            CityID = ko.observable(CityID),
+            Radius = ko.observable(Radius),
+            Country = ko.observable(Country),
+            City = ko.observable(City),
+           IncludeorExclude = ko.observable(IncludeorExclude == true ? "1" : "0"),
+           Latitude = ko.observable(Latitude),
+           Longitude = ko.observable(Longitude),
+            // Convert to server data
+            convertToServerData = function () {
+                return {
+                    Id: ID(),
+                    SqId: SQID(),
+                    CountryId: CountryID(),
+                    CityId: CityID(),
+                    Radius: Radius(),
+                    Country: Country(),
+                    City: City(),
+                    IncludeorExclude: IncludeorExclude() == 1 ? true : false
+                };
+            };
+        return {
+            ID: ID,
+            SQID: SQID,
+            CountryID: CountryID,
+            CityID: CityID,
+            Radius: Radius,
+            Country: Country,
+            City: City,
+            IncludeorExclude: IncludeorExclude,
+            convertToServerData: convertToServerData,
+            Latitude: Latitude,
+            Longitude: Longitude
+        };
+   };
+    ProfileQuestionTargetLocation.Create = function (source) {
+        return new ProfileQuestionTargetLocation(source.Id, source.SqId, source.CountryId, source.CityId, source.Radius,
+           source.Country, source.City, source.IncludeorExclude, source.Latitude, source.Longitude);
+   }
     return {
         question: question,
         questionServertoClientMapper: questionServertoClientMapper,
         
         questionAnswer: questionAnswer,
         questionAnswerServertoClientMapper: questionAnswerServertoClientMapper,
-        setAnswerString: setAnswerString
+        setAnswerString: setAnswerString,
+        ProfileQuestionTargetLocation: ProfileQuestionTargetLocation
     };
 });

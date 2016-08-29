@@ -47,9 +47,8 @@ namespace SMD.Implementation.Services
            
             if (!string.IsNullOrEmpty(campaign.CouponImage2) && !campaign.CouponImage2.Contains("guid_Voucher2DefaultImage") && !campaign.CouponImage2.Contains("http://manage.cash4ads.com/"))
             {
-                //string base64 = campaign.CouponImage2.Substring(campaign.CouponImage2.IndexOf(',') + 1);
-                //base64 = base64.Trim('\0');
-                //byte[] data = Convert.FromBase64String(base64);
+               if(campaign.CouponImage2.Contains("SMD_Content"))
+               {
                 string[] paths = campaign.CouponImage2.Split(new string[] { "SMD_Content" }, StringSplitOptions.None);
                 string url = HttpContext.Current.Server.MapPath("~/SMD_Content/" + paths[paths.Length-1]);
                 string savePath = directoryPath + "\\guid_Voucher2DefaultImage.jpg";
@@ -59,9 +58,12 @@ namespace SMD.Implementation.Services
                 savePath = savePath.Substring(indexOf, savePath.Length - indexOf);
                 savePaths[4] = savePath;
                 campaign.CouponImage2 = savePath;
+               }
             }
             if (!string.IsNullOrEmpty(campaign.CouponImage3) && !campaign.CouponImage3.Contains("guid_Coupon3DefaultImage") && !campaign.CouponImage3.Contains("http://manage.cash4ads.com/"))
             {
+                if(campaign.CouponImage3.Contains("SMD_Content"))
+               {
                 string[] paths = campaign.CouponImage3.Split(new string[] { "SMD_Content" }, StringSplitOptions.None);
                 string url = HttpContext.Current.Server.MapPath("~/SMD_Content/" + paths[paths.Length - 1]);
                 //string base64 = campaign.CouponImage3.Substring(campaign.CouponImage3.IndexOf(',') + 1);
@@ -74,9 +76,12 @@ namespace SMD.Implementation.Services
                 savePath = savePath.Substring(indexOf, savePath.Length - indexOf);
                 savePaths[5] = savePath;
                 campaign.CouponImage3 = savePath;
+                }
             }
             if (!string.IsNullOrEmpty(campaign.couponImage1) && !campaign.couponImage1.Contains("guid_Voucher4DefaultImage") && !campaign.couponImage1.Contains("http://manage.cash4ads.com/"))
             {
+                if(campaign.couponImage1.Contains("SMD_Content"))
+                {
                 string[] paths = campaign.couponImage1.Split(new string[] { "SMD_Content" }, StringSplitOptions.None);
                 string url = HttpContext.Current.Server.MapPath("~/SMD_Content/" + paths[paths.Length - 1]);
                 //string base64 = campaign.couponImage1.Substring(campaign.couponImage1.IndexOf(',') + 1);
@@ -89,9 +94,12 @@ namespace SMD.Implementation.Services
                 savePath = savePath.Substring(indexOf, savePath.Length - indexOf);
                 savePaths[6] = savePath;
                 campaign.couponImage1 = savePath;
+                }
             }
             if (!string.IsNullOrEmpty(campaign.LogoUrl) && !campaign.LogoUrl.Contains("guid_CampaignLogoImage") && !campaign.LogoUrl.Contains("http://manage.cash4ads.com/"))
             {
+                if(campaign.LogoUrl.Contains("SMD_Content"))
+                {
                 string[] paths = campaign.LogoUrl.Split(new string[] { "SMD_Content" }, StringSplitOptions.None);
                 string url = HttpContext.Current.Server.MapPath("~/SMD_Content/" + paths[paths.Length - 1]);
                 //string base64 = campaign.LogoImageBytes.Substring(campaign.LogoImageBytes.IndexOf(',') + 1);
@@ -103,6 +111,7 @@ namespace SMD.Implementation.Services
                 int indexOf = savePath.LastIndexOf("SMD_Content", StringComparison.Ordinal);
                 savePath = savePath.Substring(indexOf, savePath.Length - indexOf);
                 savePaths[7] = savePath;
+                }
             }
             return savePaths;
         }
