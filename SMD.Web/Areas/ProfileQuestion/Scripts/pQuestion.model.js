@@ -67,7 +67,13 @@
                     dirtyFlag.reset();
                 },
                 // Convert to server data
-                convertToServerData = function() {
+             
+
+                convertToServerData = function () {
+                    var targetLocation = [];
+                    _.each(ProfileQuestionTargetLocation(), function (item) {
+                        targetLocation.push(item.convertToServerData());
+                    });
                     return {
                         PqId:qId(),
                         Question:questionString(),
@@ -82,7 +88,7 @@
                         SkippedCount: skippedCount(),
                         PenalityForNotAnswering: penalityForNotAnswering(),
                         Status: status(),
-                        ProfileQuestionTargetLocation:ProfileQuestionTargetLocation()
+                        ProfileQuestionTargetLocation: targetLocation
                     };
                 };
             return {
@@ -272,7 +278,7 @@
     //////////////////////////////////////////////  QUESTION ANSWER  
 
     //server to client mapper For QUESTION ANSWER 
-    var questionAnswerServertoClientMapper = function (itemFromServer) {
+   var  questionAnswerServertoClientMapper = function (itemFromServer) {
         var obj= new questionAnswer(itemFromServer.AnswerString, itemFromServer.ImagePath, itemFromServer.LinkedQuestion1Id,
             itemFromServer.LinkedQuestion2Id, itemFromServer.LinkedQuestion3Id, itemFromServer.LinkedQuestion4Id, itemFromServer.LinkedQuestion5Id, itemFromServer.LinkedQuestion6Id, itemFromServer.PqAnswerId, itemFromServer.PqId
         , itemFromServer.SortOrder, itemFromServer.Type);
@@ -287,14 +293,14 @@
     };
 
     // Function to attain cancel button functionality QUESTION ANSWER
-    questionAnswer.CreateFromClientModel = function (item) {
+     questionAnswer.CreateFromClientModel = function (item) {
         return new questionAnswer(item.answerString, item.imagePath, item.linkedQuestion1Id,
             item.linkedQuestion2Id, item.linkedQuestion3Id, item.linkedQuestion4Id, item.linkedQuestion5Id, item.linkedQuestion6Id, item.pqAnswerId, item.pqId
         , item.sortOrder, item.type);
     };
 
     // Sets answer string of linked questions grid
-    var setAnswerString = function (id, obj) {
+   var setAnswerString = function (id, obj) {
         if ( id == null  )
             return undefined;
         var qst = ist.ProfileQuestion.viewModel.linkedQuestions.find(function (temp) {
@@ -307,7 +313,7 @@
         else
             return undefined;
     };
-   var ProfileQuestionTargetLocation = function (ID, SQID, CountryID, CityID, Radius, Country, City, IncludeorExclude, Latitude, Longitude) {
+  var  ProfileQuestionTargetLocation = function (ID, SQID, CountryID, CityID, Radius, Country, City, IncludeorExclude, Latitude, Longitude) {
         var
             //type and userID will be set on server sside
             ID = ko.observable(ID),
@@ -346,7 +352,11 @@
             Latitude: Latitude,
             Longitude: Longitude
         };
-    };
+   };
+    ProfileQuestionTargetLocation.Create = function (source) {
+        return new ProfileQuestionTargetLocation(source.Id, source.SqId, source.CountryId, source.CityId, source.Radius,
+           source.Country, source.City, source.IncludeorExclude, source.Latitude, source.Longitude);
+   }
     return {
         question: question,
         questionServertoClientMapper: questionServertoClientMapper,

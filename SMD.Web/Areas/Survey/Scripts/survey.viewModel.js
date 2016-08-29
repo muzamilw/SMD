@@ -99,7 +99,9 @@ define("survey/survey.viewModel",
                             fmode: isfMode()
                         },
                             {
+                                
                                 success: function (data) {
+                                    debugger;
                                     // popullate base data 
                                     langs.removeAll();
                                     countries.removeAll();
@@ -377,7 +379,7 @@ define("survey/survey.viewModel",
                      },
                     //add location
                     onAddLocation = function (item) {
-
+                       
                         selectedLocation().Radius = (selectedLocationRadius);
                         selectedLocation().IncludeorExclude = (selectedLocationIncludeExclude);
                         selectedQuestion().SurveyQuestionTargetLocation.push( new model.SurveyQuestionTargetLocation.Create( {

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using SMD.Models.DomainModels;
 using SMD.Models.RequestModels;
+using SMD.Models.Common;
 
 namespace SMD.Interfaces.Repository
 {
@@ -13,6 +14,7 @@ namespace SMD.Interfaces.Repository
         /// Search Profile Question 
         /// </summary>
         /// 
+
         IEnumerable<ProfileQuestion> SearchProfileQuestions(ProfileQuestionSearchRequest request, out int rowCount);
 
         /// <summary>
@@ -37,5 +39,6 @@ namespace SMD.Interfaces.Repository
         int GetCountOfUnAnsweredQuestionsByGroupId(double groupId, string userId);
         IEnumerable<ProfileQuestion> UpdateQuestionsCompanyID(IEnumerable<ProfileQuestion> ProfileQuestions);
         void AddProfileQuestions(ProfileQuestion Obj);
+        UserBaseData getBaseData();
     }
 }

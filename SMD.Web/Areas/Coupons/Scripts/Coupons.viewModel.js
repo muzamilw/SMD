@@ -444,49 +444,48 @@ define("Coupons/Coupons.viewModel",
                 ,
             saveCampaign = function (mode) {
              
-               
-                
-                var isPopulateErrorList = false;
+                if (ValidateCoupon() == false) {
+
+                    var isPopulateErrorList = false;
 
 
-                var selectedCouponCategories = $.grep(couponCategories(), function (n, i) {
-                    return (n.IsSelected == true);
-                });
+                    var selectedCouponCategories = $.grep(couponCategories(), function (n, i) {
+                        return (n.IsSelected == true);
+                    });
 
-                couponModel().CouponCategories.removeAll();
-                _.each(selectedCouponCategories, function (coup) {
+                    couponModel().CouponCategories.removeAll();
+                    _.each(selectedCouponCategories, function (coup) {
 
-                    couponModel().CouponCategories.push(new model.selectedCouponCategory.Create({
-                        CategoryId: coup.CategoryId,
-                        Name: coup.Name
-                    }));
-                });
+                        couponModel().CouponCategories.push(new model.selectedCouponCategory.Create({
+                            CategoryId: coup.CategoryId,
+                            Name: coup.Name
+                        }));
+                    });
 
-                couponModel().Status(mode);
-                var res = CouponActiveMonth().split("-");
-                couponModel().CouponActiveYear(res[0]);
-                couponModel().CouponActiveMonth(GetMonth(res[1]));
-               
-                var campignServerObj = couponModel().convertToServerData();
+                    couponModel().Status(mode);
+                    var res = CouponActiveMonth().split("-");
+                    couponModel().CouponActiveYear(res[0]);
+                    couponModel().CouponActiveMonth(GetMonth(res[1]));
 
-                dataservice.addCampaignData(campignServerObj, {
-                    success: function (data) {
+                    var campignServerObj = couponModel().convertToServerData();
 
-                        isEditorVisible(false);
-                        getAdCampaignGridContent();
-                        isListVisible(true);
-                        isWelcomeScreenVisible(false);
-                        toastr.success("Successfully saved.");
-                        //   allCouponCodeItems.removeAll();
-                    },
-                    error: function (response) {
+                    dataservice.addCampaignData(campignServerObj, {
+                        success: function (data) {
 
-                    }
-                });
+                            isEditorVisible(false);
+                            getAdCampaignGridContent();
+                            isListVisible(true);
+                            isWelcomeScreenVisible(false);
+                            toastr.success("Successfully saved.");
+                            //   allCouponCodeItems.removeAll();
+                        },
+                        error: function (response) {
 
+                        }
+                    });
 
-                //  }
-
+                    //  }
+                }
             }
                 // Add new profile Criteria
                 addNewProfileCriteria = function () { },
@@ -1011,6 +1010,25 @@ define("Coupons/Coupons.viewModel",
                          $('html, body').animate({ scrollTop: 0 }, 800);
                      }
                  },
+                ValidateCoupon = function ()
+                {
+                    var hasErrors = false;
+                    if (previewScreenNumber() == 1) {
+                        if (couponModel().CouponTitle() == "" || couponModel().CouponTitle() == undefined) {
+                            hasErrors = true;
+                            toastr.error("Please enter Coupon Title.");
+                        }
+                        if (couponModel().Price() == "" || couponModel().Price() == undefined) {
+                            hasErrors = true;
+                            toastr.error("Please enter Price.");
+                        }
+                        if (couponModel().Savings() == "" || couponModel().Savings() == undefined) {
+                            hasErrors = true;
+                            toastr.error("Please enter Saving.");
+                        }
+                    }
+                    return hasErrors;
+                },
                 addIndustry = function (selected) {
 
                     couponModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({

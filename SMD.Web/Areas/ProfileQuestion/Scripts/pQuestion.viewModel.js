@@ -168,7 +168,30 @@ define("pQuestion/pQuestion.viewModel",
                         pager().reset();
                         getQuestions();
                     },
+                    onRemoveLocation = function (item) {
+                        // Ask for confirmation
+                        confirmation.afterProceed(function () {
+                            deleteLocation(item);
+                            // build location dropdown
+                            selectedQuestionCountryList.removeAll();
+                            _.each(selectedQuestion().ProfileQuestionTargetLocation(), function (item) {
+                                addCountryToCountryList(item.CountryID(), item.Country());
+                            });
+                        });
+                        confirmation.show();
+
+                    },
+                    deleteLocation = function (item) {
+                        if (item.CountryID() == userBaseData().CountryId && item.CityID() == userBaseData().CityId) {
+                            toastr.error("You cannot remove your home town or country!");
+                        } else {
+                            selectedQuestion().ProfileQuestionTargetLocation.remove(item);
+                            toastr.success("Removed Successfully!");
+                        }
+
+                    },
                        addCountryToCountryList = function (country, name) {
+                           debugger;
                            if (country != undefined) {
 
                                var matcharry = ko.utils.arrayFirst(selectedQuestionCountryList(), function (item) {
@@ -182,8 +205,7 @@ define("pQuestion/pQuestion.viewModel",
                            }
                        },
                 findLocationsInCountry = function (id) {
-
-                    var list = ko.utils.arrayFilter(campaignModel().AdCampaignTargetLocations(), function (prod) {
+                    var list = ko.utils.arrayFilter(selectedQuestion().ProfileQuestionTargetLocation(), function (prod) {
                         return prod.CountryID() == id;
                     });
                     return list;
@@ -216,13 +238,7 @@ define("pQuestion/pQuestion.viewModel",
                                 }
                             }
                         },
-                       findLocationsInCountry = function (id) {
-
-                    var list = ko.utils.arrayFilter(campaignModel().AdCampaignTargetLocations(), function (prod) {
-                        return prod.CountryID() == id;
-                    });
-                    return list;
-                },
+                
                     // Close Editor 
                     closeEditDialog = function () {
                         if (!hasChangesOnQuestion()) {
@@ -508,14 +524,14 @@ define("pQuestion/pQuestion.viewModel",
 
                         selectedLocation().Radius = (selectedLocationRadius);
                         selectedLocation().IncludeorExclude = (selectedLocationIncludeExclude);
-                        selectedLocation().ProfileQuestionTargetLocation.push(new model.ProfileQuestionTargetLocation.Create({
+                        selectedQuestion().ProfileQuestionTargetLocation.push(new model.ProfileQuestionTargetLocation.Create({
                             CountryId: selectedLocation().CountryID,
                             CityId: selectedLocation().CityID,
                             Radius: selectedLocation().Radius(),
                             Country: selectedLocation().Country,
                             City: selectedLocation().City,
                             IncludeorExclude: selectedLocation().IncludeorExclude(),
-                            CampaignId: campaignModel().CampaignID(),
+                            PQID: selectedQuestion().qId(),
                             Latitude: selectedLocation().Latitude,
                             Longitude: selectedLocation().Longitude,
                         }));
@@ -605,7 +621,9 @@ define("pQuestion/pQuestion.viewModel",
                     onAddLocation: onAddLocation,
                     addCountryToCountryList: addCountryToCountryList,
                     findLocationsInCountry: findLocationsInCountry,
-                    selectedLocation: selectedLocation
+                    selectedLocation: selectedLocation,
+                    onRemoveLocation: onRemoveLocation,
+                    deleteLocation: deleteLocation
                 };
             })()
         };

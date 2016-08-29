@@ -188,6 +188,35 @@ namespace SMD.Repository.Repositories
             Obj.CompanyId = this.CompanyId;
             DbSet.Add(Obj);
         }
+        public UserBaseData getBaseData()
+        {
+            UserBaseData data = new UserBaseData();
+            var usr = db.Users.Where(g => g.Id == LoggedInUserIdentity).SingleOrDefault();
+
+            if (usr != null)
+            {
+                bool isAdmin = false;
+
+
+                data.CityId = usr.Company == null ? null : usr.Company.CityId;
+                data.CountryId = usr.Company == null ? null : usr.Company.CountryId;
+                data.EducationId = usr.EducationId;
+                data.IndustryId = usr.IndustryId;
+                data.LanguageId = usr.LanguageId;
+                data.City = usr.Company.City != null ? usr.Company.City.CityName : "";
+                data.Country = usr.Company.Country != null ? usr.Company.Country.CountryName : "";
+                data.Education = usr.Education != null ? usr.Education.Title : "";
+                data.Industry = usr.Industry != null ? usr.Industry.IndustryName : "";
+                data.Language = usr.Language != null ? usr.Language.LanguageName : "";
+                data.isStripeIntegrated = usr.Company == null ? false : String.IsNullOrEmpty(usr.Company.StripeCustomerId) == true ? false : true;
+                data.Latitude = usr.Company.City != null ? usr.Company.City.GeoLat : "";
+                data.Longitude = usr.Company.City != null ? usr.Company.City.GeoLong : "";
+                data.isUserAdmin = isAdmin;
+            }
+
+            return data;
+        }
+
         #endregion
     }
 }
