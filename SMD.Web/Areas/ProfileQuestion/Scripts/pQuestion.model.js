@@ -16,7 +16,7 @@
                 profileGroupId = ko.observable(groupId).extend({ required: true }),
                 type = ko.observable(spcType).extend({ required: true }),
                 statusValue = ko.observable(StatusValue),
-                
+                ProfileQuestionTargetLocation = ko.observableArray([]),
                 refreshTime = ko.observable(spcRefreshtime),
                 skippedCount = ko.observable(spcSkipped),
                 creationDate = ko.observable(spcCreationD),
@@ -81,7 +81,8 @@
                         RefreshTime: refreshTime(),
                         SkippedCount: skippedCount(),
                         PenalityForNotAnswering: penalityForNotAnswering(),
-                        Status: status()
+                        Status: status(),
+                        ProfileQuestionTargetLocation:ProfileQuestionTargetLocation()
                     };
                 };
             return {
@@ -113,7 +114,8 @@
                 statusValue: statusValue,
                 answerNeeded: answerNeeded,
                 answerCount:answerCount,
-                errors: errors
+                errors: errors,
+                ProfileQuestionTargetLocation: ProfileQuestionTargetLocation
             };
         };
 
@@ -305,12 +307,53 @@
         else
             return undefined;
     };
+   var ProfileQuestionTargetLocation = function (ID, SQID, CountryID, CityID, Radius, Country, City, IncludeorExclude, Latitude, Longitude) {
+        var
+            //type and userID will be set on server sside
+            ID = ko.observable(ID),
+            SQID = ko.observable(SQID),
+            CountryID = ko.observable(CountryID),
+            CityID = ko.observable(CityID),
+            Radius = ko.observable(Radius),
+            Country = ko.observable(Country),
+            City = ko.observable(City),
+           IncludeorExclude = ko.observable(IncludeorExclude == true ? "1" : "0"),
+           Latitude = ko.observable(Latitude),
+           Longitude = ko.observable(Longitude),
+            // Convert to server data
+            convertToServerData = function () {
+                return {
+                    Id: ID(),
+                    SqId: SQID(),
+                    CountryId: CountryID(),
+                    CityId: CityID(),
+                    Radius: Radius(),
+                    Country: Country(),
+                    City: City(),
+                    IncludeorExclude: IncludeorExclude() == 1 ? true : false
+                };
+            };
+        return {
+            ID: ID,
+            SQID: SQID,
+            CountryID: CountryID,
+            CityID: CityID,
+            Radius: Radius,
+            Country: Country,
+            City: City,
+            IncludeorExclude: IncludeorExclude,
+            convertToServerData: convertToServerData,
+            Latitude: Latitude,
+            Longitude: Longitude
+        };
+    };
     return {
         question: question,
         questionServertoClientMapper: questionServertoClientMapper,
         
         questionAnswer: questionAnswer,
         questionAnswerServertoClientMapper: questionAnswerServertoClientMapper,
-        setAnswerString: setAnswerString
+        setAnswerString: setAnswerString,
+        ProfileQuestionTargetLocation: ProfileQuestionTargetLocation
     };
 });

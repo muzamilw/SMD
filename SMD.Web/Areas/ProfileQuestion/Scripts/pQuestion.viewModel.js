@@ -27,6 +27,7 @@ define("pQuestion/pQuestion.viewModel",
                     selectedLocationLong = ko.observable(0),
                     selectedLocationLat = ko.observable(0),
                     genderppc = ko.observable(),
+                    selectedLocation = ko.observable(),
                     selectedLocationRadius = ko.observable(),
                     HeaderText = ko.observable(),
                     StatusText = ko.observable(),
@@ -167,6 +168,26 @@ define("pQuestion/pQuestion.viewModel",
                         pager().reset();
                         getQuestions();
                     },
+                       addCountryToCountryList = function (country, name) {
+                           if (country != undefined) {
+
+                               var matcharry = ko.utils.arrayFirst(selectedQuestionCountryList(), function (item) {
+
+                                   return item.id == country;
+                               });
+
+                               if (matcharry == null) {
+                                   selectedQuestionCountryList.push({ id: country, name: name });
+                               }
+                           }
+                       },
+                findLocationsInCountry = function (id) {
+
+                    var list = ko.utils.arrayFilter(campaignModel().AdCampaignTargetLocations(), function (prod) {
+                        return prod.CountryID() == id;
+                    });
+                    return list;
+                },
                     // Add new Profile Question
                     addNewProfileQuestion = function () {
                         selectedQuestion(new model.question());
@@ -175,12 +196,33 @@ define("pQuestion/pQuestion.viewModel",
                         selectedQuestion().languageId(41);
                         selectedQuestion().penalityForNotAnswering(0);
                         previewScreenNumber(1);
+                        view.initializeTypeahead();
                         isEditorVisible(true);
                     },
                      resetLocations = function () {
                          $("#searchCampaignLocations").val("");
                          selectedLocationRadius("");
                      },
+                        addCountryToCountryList = function (country, name) {
+                            if (country != undefined) {
+
+                                var matcharry = ko.utils.arrayFirst(selectedQuestionCountryList(), function (item) {
+
+                                    return item.id == country;
+                                });
+
+                                if (matcharry == null) {
+                                    selectedQuestionCountryList.push({ id: country, name: name });
+                                }
+                            }
+                        },
+                       findLocationsInCountry = function (id) {
+
+                    var list = ko.utils.arrayFilter(campaignModel().AdCampaignTargetLocations(), function (prod) {
+                        return prod.CountryID() == id;
+                    });
+                    return list;
+                },
                     // Close Editor 
                     closeEditDialog = function () {
                         if (!hasChangesOnQuestion()) {
@@ -205,6 +247,7 @@ define("pQuestion/pQuestion.viewModel",
                         HeaderText(item.questionString());
                         StatusText(item.statusValue());
                         isTerminateBtnVisible(false);
+                        view.initializeTypeahead();
                         isShowArchiveBtn(false);
                         if (item.status() == 1 || item.status() == 2 || item.status() == 3 || item.status() == 4 || item.status() == null || item.status() == 7 || item.status() == 9) {
                             canSubmitForApproval(true);
@@ -461,6 +504,24 @@ define("pQuestion/pQuestion.viewModel",
                                  (leftOrder < rightOrder ? -1 : 1);
                         });
                     }),
+                    onAddLocation = function (item) {
+
+                        selectedLocation().Radius = (selectedLocationRadius);
+                        selectedLocation().IncludeorExclude = (selectedLocationIncludeExclude);
+                        selectedLocation().ProfileQuestionTargetLocation.push(new model.ProfileQuestionTargetLocation.Create({
+                            CountryId: selectedLocation().CountryID,
+                            CityId: selectedLocation().CityID,
+                            Radius: selectedLocation().Radius(),
+                            Country: selectedLocation().Country,
+                            City: selectedLocation().City,
+                            IncludeorExclude: selectedLocation().IncludeorExclude(),
+                            CampaignId: campaignModel().CampaignID(),
+                            Latitude: selectedLocation().Latitude,
+                            Longitude: selectedLocation().Longitude,
+                        }));
+                        addCountryToCountryList(selectedLocation().CountryID, selectedLocation().Country);
+                        resetLocations();
+                    },
                     // Initialize the view model
                     initialize = function (specifiedView) {
                         view = specifiedView;
@@ -540,7 +601,11 @@ define("pQuestion/pQuestion.viewModel",
                     isTerminateBtnVisible: isTerminateBtnVisible,
                     isShowArchiveBtn: isShowArchiveBtn,
                     canSubmitForApproval: canSubmitForApproval,
-                    resetLocations:resetLocations
+                    resetLocations:resetLocations,
+                    onAddLocation: onAddLocation,
+                    addCountryToCountryList: addCountryToCountryList,
+                    findLocationsInCountry: findLocationsInCountry,
+                    selectedLocation: selectedLocation
                 };
             })()
         };

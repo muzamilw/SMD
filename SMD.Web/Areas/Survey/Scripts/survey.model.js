@@ -70,7 +70,7 @@
                     //DisplayQuestion: DisplayQuestion,
                     //StartDate: StartDate,
                     //EndDate: EndDate,
-                    AgeRangeEnd: AgeRangeEnd,
+                    //AgeRangeEnd: AgeRangeEnd,
                     }),
                 // Is Valid
                 isValid = ko.computed(function () {
