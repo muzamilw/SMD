@@ -767,7 +767,8 @@ define("survey/survey.viewModel",
                         }
                        
                     }
-                    getAudienceCount = function () {
+                getAudienceCount = function () {
+                    debugger;
                         var countryIds = '', cityIds = '', countryIdsExcluded = '', cityIdsExcluded = '';
                         var educationIds = '', educationIdsExcluded = '';
                         _.each(selectedQuestion().SurveyQuestionTargetLocation(), function (item) {
@@ -989,6 +990,7 @@ define("survey/survey.viewModel",
                          }
                      },
                     bindAudienceReachCount = function () {
+                        debugger;
                          selectedQuestion().AgeRangeStart.subscribe(function (value) {
                              getAudienceCount();
                          });

@@ -2,7 +2,7 @@
 
     var // ReSharper disable InconsistentNaming
         question = function (questionId, spcQuestion, pr,linkQ,gName, langId, countId, groupId, spcType,
-        spcRefreshtime, spcSkipped, spcCreationD, spcModDate, penality, spcStatus, CreatedBy, StatusValue, AnswerNeeded, AnswerCount) {
+        spcRefreshtime, spcSkipped, spcCreationD, spcModDate, penality, spcStatus, CreatedBy, StatusValue, AnswerNeeded, AnswerCount, Gender, AgeRangeStart) {
             var 
                 qId = ko.observable(questionId),
                 questionString = ko.observable(spcQuestion).extend({ required: true }),
@@ -16,7 +16,18 @@
                 profileGroupId = ko.observable(groupId).extend({ required: true }),
                 type = ko.observable(spcType).extend({ required: true }),
                 statusValue = ko.observable(StatusValue),
+                Gender = ko.observable(Gender),
+                AgeRangeStart = ko.observable(AgeRangeStart),
+                AgeRangeEnd = ko.observable(AgeRangeEnd).extend({
+                    validation: {
+                        validator: function (val, someOtherVal) {
+                            return val > AgeRangeStart();
+                        },
+                        message: 'Age end range must be greater than start range',
+                    }
+                }),
                 ProfileQuestionTargetLocation = ko.observableArray([]),
+                ProfileQuestionTargetCriteria = ko.observableArray([]),
                 refreshTime = ko.observable(spcRefreshtime),
                 skippedCount = ko.observable(spcSkipped),
                 creationDate = ko.observable(spcCreationD),
@@ -49,14 +60,16 @@
                     skippedCount: skippedCount,
                     creationDate: creationDate,
                     modifiedDate: modifiedDate,
-
+                    ProfileQuestionTargetCriteria: ProfileQuestionTargetCriteria,
                     penalityForNotAnswering: penalityForNotAnswering,
                     status: status,
                     answers: answers,
                     createdBy: createdBy,
                     statusValue: statusValue,
                     answerCount: answerCount,
-                    answerNeeded: answerNeeded
+                    answerNeeded: answerNeeded,
+                    AgeRangeStart: AgeRangeStart,
+                    AgeRangeEnd: AgeRangeEnd
                 }),
                 // Has Changes
                 hasChanges = ko.computed(function() {
@@ -70,9 +83,12 @@
              
 
                 convertToServerData = function () {
-                    var targetLocation = [];
+                    var targetCriteria = [], targetLocation = [];
                     _.each(ProfileQuestionTargetLocation(), function (item) {
                         targetLocation.push(item.convertToServerData());
+                    });
+                    _.each(ProfileQuestionTargetCriteria(), function (item) {
+                        targetCriteria.push(item.convertToServerData());
                     });
                     return {
                         PqId:qId(),
@@ -88,7 +104,11 @@
                         SkippedCount: skippedCount(),
                         PenalityForNotAnswering: penalityForNotAnswering(),
                         Status: status(),
-                        ProfileQuestionTargetLocation: targetLocation
+                        Gender: Gender(),
+                        AgeRangeStart: AgeRangeStart(),
+                        AgeRangeEnd:AgeRangeEnd(),
+                        ProfileQuestionTargetLocation: targetLocation,
+                        ProfileQuestionTargetCriteria: ProfileQuestionTargetCriteria
                     };
                 };
             return {
@@ -121,7 +141,11 @@
                 answerNeeded: answerNeeded,
                 answerCount:answerCount,
                 errors: errors,
-                ProfileQuestionTargetLocation: ProfileQuestionTargetLocation
+                ProfileQuestionTargetLocation: ProfileQuestionTargetLocation,
+                ProfileQuestionTargetCriteria: ProfileQuestionTargetCriteria,
+                Gender: Gender,
+                AgeRangeStart: AgeRangeStart,
+                AgeRangeEnd: AgeRangeEnd
             };
         };
 
@@ -352,11 +376,79 @@
             Latitude: Latitude,
             Longitude: Longitude
         };
-   };
+  };
+  var // ReSharper disable InconsistentNaming
+ ProfileQuestionTargetCriteria = function (ID, SQID, Type, PQID, PQAnswerID, LinkedSQID, LinkedSqAnswer, IncludeorExclude, LanguageID, questionString, answerString, Language, surveyQuestLeftImageSrc, surveyQuestRightImageSrc, IndustryID, Industry, EducationId, Education) {
+     var
+         //type and userID will be set on server side
+         ID = ko.observable(ID),
+         SQID = ko.observable(SQID),
+         Type = ko.observable(Type),
+         PQID = ko.observable(PQID),
+         PQAnswerID = ko.observable(PQAnswerID),
+         LinkedSQID = ko.observable(LinkedSQID),
+         LinkedSQAnswer = ko.observable(LinkedSqAnswer + ""),
+         IncludeorExclude = ko.observable(IncludeorExclude == true ? "1" : "0"),
+         LanguageID = ko.observable(LanguageID),
+         questionString = ko.observable(questionString),
+         answerString = ko.observable(answerString),
+         Language = ko.observable(Language),
+         surveyQuestLeftImageSrc = ko.observable(surveyQuestLeftImageSrc),
+         surveyQuestRightImageSrc = ko.observable(surveyQuestRightImageSrc),
+         IndustryID = ko.observable(IndustryID),
+         Industry = ko.observable(Industry),
+         Education = ko.observable(Education),
+         EducationId = ko.observable(EducationId),
+         // Convert to server data
+         convertToServerData = function () {
+             return {
+                 Id: ID(),
+                 SqId: SQID(),
+                 Type: Type(),
+                 PqId: PQID(),
+                 PqAnswerId: PQAnswerID(),
+                 LinkedSqId: LinkedSQID(),
+                 LinkedSqAnswer: LinkedSQAnswer(),
+                 IncludeorExclude: IncludeorExclude() == 1 ? true : false,
+                 surveyQuestLeftImageSrc: surveyQuestLeftImageSrc(),
+                 surveyQuestRightImageSrc: surveyQuestRightImageSrc(),
+                 LanguageId: LanguageID(),
+                 IndustryID: IndustryID(),
+                 Industry: Industry(),
+                 EducationId: EducationId(),
+                 Education: Education()
+             };
+         };
+     return {
+         ID: ID,
+         SQID: SQID,
+         Type: Type,
+         PQID: PQID,
+         PQAnswerID: PQAnswerID,
+         LinkedSQID: LinkedSQID,
+         LinkedSQAnswer: LinkedSQAnswer,
+         IncludeorExclude: IncludeorExclude,
+         LanguageID: LanguageID,
+         questionString: questionString,
+         answerString: answerString,
+         Language: Language,
+         surveyQuestLeftImageSrc: surveyQuestLeftImageSrc,
+         surveyQuestRightImageSrc: surveyQuestRightImageSrc,
+         convertToServerData: convertToServerData,
+         IndustryID: IndustryID,
+         Industry: Industry,
+         EducationId: EducationId,
+         Education: Education
+     };
+ };
+
     ProfileQuestionTargetLocation.Create = function (source) {
         return new ProfileQuestionTargetLocation(source.Id, source.SqId, source.CountryId, source.CityId, source.Radius,
            source.Country, source.City, source.IncludeorExclude, source.Latitude, source.Longitude);
-   }
+    }
+    ProfileQuestionTargetCriteria.Create = function (source) {
+        return new ProfileQuestionTargetCriteria(source.Id, source.SqId, source.Type, source.PqId, source.PqAnswerId, source.LinkedSqId, source.LinkedSqAnswer, source.IncludeorExclude, source.LanguageId, source.questionString, source.answerString, source.Language, source.surveyQuestLeftImageSrc, source.surveyQuestRightImageSrc, source.IndustryId, source.Industry, source.EducationId, source.Education);
+    };
     return {
         question: question,
         questionServertoClientMapper: questionServertoClientMapper,
@@ -364,6 +456,7 @@
         questionAnswer: questionAnswer,
         questionAnswerServertoClientMapper: questionAnswerServertoClientMapper,
         setAnswerString: setAnswerString,
-        ProfileQuestionTargetLocation: ProfileQuestionTargetLocation
+        ProfileQuestionTargetLocation: ProfileQuestionTargetLocation,
+        ProfileQuestionTargetCriteria: ProfileQuestionTargetCriteria
     };
 });

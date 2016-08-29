@@ -58,8 +58,6 @@ namespace SMD.Repository.Repositories
         {
 
 
-
-
             bool isAdmin = false;
             var users = db.Users.Where(g => g.Id == LoggedInUserIdentity).SingleOrDefault();
           

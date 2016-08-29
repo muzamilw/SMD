@@ -34,7 +34,13 @@ define("pQuestion/pQuestion.dataservice", function () {
                         type: 'GET'
                     });
                     
-
+                    amplify.request.define('getAudienceData', 'ajax', {
+                        url: '/Api/SurveyAudience',
+                        dataType: 'json',
+                        dataMap: JSON.stringify,
+                        contentType: "application/json; charset=utf-8",
+                        type: 'POST'
+                    });
 
                     //Get Profile Question Answer 
                     amplify.request.define('getPqAnswer', 'ajax', {
@@ -63,7 +69,16 @@ define("pQuestion/pQuestion.dataservice", function () {
                     data: params
                 });
             },
-            
+              getAudienceData = function (params, callbacks) {
+                  initialize();
+                  return amplify.request({
+                      resourceId: 'getAudienceData',
+                      success: callbacks.success,
+                      error: callbacks.error,
+                      data: params
+                  });
+              },
+
 
              // Get Base Data of Profile Questions
             getBaseData = function (params, callbacks) {
@@ -114,7 +129,8 @@ define("pQuestion/pQuestion.dataservice", function () {
             getBaseData: getBaseData,
             deleteProfileQuestion: deleteProfileQuestion,
             getPqAnswer: getPqAnswer,
-            saveProfileQuestion: saveProfileQuestion
+            saveProfileQuestion: saveProfileQuestion,
+            getAudienceData: getAudienceData
         };
     })();
     return dataService;

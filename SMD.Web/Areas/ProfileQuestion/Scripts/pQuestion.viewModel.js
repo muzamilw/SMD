@@ -20,8 +20,9 @@ define("pQuestion/pQuestion.viewModel",
                     selectedQuestionCountryList = ko.observableArray([]),
                     professions = ko.observableArray([]),
                     ageRange = ko.observableArray([]),
-                    AgeRangeEnd=ko.observable(80),
-                    AgeRangeStart = ko.observable(13),
+                    AgeRangeEnd = ko.observable(80),
+                    ProfileQuestionList = ko.observableArray([]),
+                    AgeRangeStart=ko.observable(13),
                     SelectedPvcVal = ko.observable(0),
                     Gender = ko.observable('1'),
                     selectedLocationLong = ko.observable(0),
@@ -212,12 +213,31 @@ define("pQuestion/pQuestion.viewModel",
                 },
                     // Add new Profile Question
                     addNewProfileQuestion = function () {
+                       
+                        selectedQuestion(new model.question());
+                        selectedQuestion().Gender("1");
+                        
+                        selectedQuestion().AgeRangeStart(13);
+                        selectedQuestion().AgeRangeEnd(80);
+                        selectedQuestion().reset();
+                        selectedQuestion().ProfileQuestionTargetCriteria([]);
+                        selectedQuestion().ProfileQuestionTargetLocation([]);
+
+                        getAudienceCount();
+
+                        //buildParentSQList();
+
+                        bindAudienceReachCount();
+                        selectedQuestion().ProfileQuestionTargetCriteria([]);
+                        selectedQuestion().ProfileQuestionTargetLocation([]);
                         selectedQuestion(new model.question());
                         // Set Country Id and Language Id for now as UK and English
                         selectedQuestion().countryId(214);
                         selectedQuestion().languageId(41);
                         selectedQuestion().penalityForNotAnswering(0);
                         previewScreenNumber(1);
+                     
+                        
                         view.initializeTypeahead();
                         isEditorVisible(true);
                     },
@@ -225,6 +245,27 @@ define("pQuestion/pQuestion.viewModel",
                          $("#searchCampaignLocations").val("");
                          selectedLocationRadius("");
                      },
+                       buildParentSQList = function () {
+                           if (ProfileQuestionList().length == 0) {
+                               dataservice.getBaseData({
+                                   RequestId: 4,
+                                   QuestionId: 0,
+                                   SQID: selectedQuestion().SQID()
+                               }, {
+                                   success: function (data) {
+                                       if (data != null) {
+                                           surveyQuestionList([]);
+                                           ko.utils.arrayPushAll(ProfileQuestionList(), data.ProfileQuestions);
+                                           ProfileQuestionList.valueHasMutated();
+                                       }
+
+                                   },
+                                   error: function (response) {
+
+                                   }
+                               });
+                           }
+                       },
                         addCountryToCountryList = function (country, name) {
                             if (country != undefined) {
 
@@ -255,9 +296,12 @@ define("pQuestion/pQuestion.viewModel",
                     },
                     // On editing of existing PQ
                     onEditProfileQuestion = function (item) {
-
+                        AgeRangeStart(13);
+                        AgeRangeEnd(80);
                         getQuestionAnswer(item.qId());
                         selectedQuestion(item);
+                        
+
                         isEditorVisible(true);
                         gotoScreen(1);
                         HeaderText(item.questionString());
@@ -293,16 +337,26 @@ define("pQuestion/pQuestion.viewModel",
                            });
                     },
                             addNewProfessionCriteria = function () {
-                                //if ($("#ddpIndustory").val() != "") {
+                                if ($("#ddpIndustory").val() != "") {
 
-                                //    var matchedprofessionRec = ko.utils.arrayFirst(professions(), function (arrayitem) {
+                                    var matchedprofessionRec = ko.utils.arrayFirst(professions(), function (arrayitem) {
 
-                                //        return arrayitem.IndustryId == $("#ddpIndustory").val();
-                                //    });
-                                //    if (matchedprofessionRec != null) {
-                                //        addIndustry(matchedprofessionRec);
-                                //    }
-                                //}
+                                        return arrayitem.IndustryId == $("#ddpIndustory").val();
+                                    });
+                                    if (matchedprofessionRec != null) {
+                                        addIndustry(matchedprofessionRec);
+                                    }
+                                }
+                            },
+                            addIndustry = function (selected) {
+                                selectedQuestion().ProfileQuestionTargetCriteria.push(new model.ProfileQuestionTargetCriteria.Create({
+                                    Industry: selected.IndustryName,
+                                    IndustryId: selected.IndustryId,
+                                    IncludeorExclude: parseInt(selectedIndustryIncludeExclude()),
+                                    Type: 4,
+                                    SQID: selectedQuestion().SQID()
+                                }));
+                                $("#searchIndustries").val("");
                             },
                     // Delete Handler PQ
                     onDeleteProfileQuestion = function(item) {
@@ -538,6 +592,241 @@ define("pQuestion/pQuestion.viewModel",
                         addCountryToCountryList(selectedLocation().CountryID, selectedLocation().Country);
                         resetLocations();
                     },
+                     visibleTargetAudience = function (mode) {
+
+                         if (mode != undefined) {
+
+                             var matcharry = ko.utils.arrayFirst(selectedQuestion().ProfileQuestionTargetCriteria(), function (item) {
+
+                                 return item.Type() == mode;
+                             });
+
+                             if (matcharry != null) {
+                                 return 1;
+                             } else {
+                                 return 0;
+                             }
+                         } else {
+                             return 0;
+                         }
+                     },
+                 getAudienceCount = function () {
+                    var countryIds = '', cityIds = '', countryIdsExcluded = '', cityIdsExcluded = '';
+                    var educationIds = '', educationIdsExcluded = '';
+                    _.each(selectedQuestion().ProfileQuestionTargetLocation(), function (item) {
+                        if (item.CityID() == 0 || item.CityID() == null) {
+                            if (item.IncludeorExclude() == '0') {
+                                if (countryIdsExcluded == '') {
+                                    countryIdsExcluded += item.CountryID();
+                                } else {
+                                    countryIdsExcluded += ',' + item.CountryID();
+                                }
+                            } else {
+                                if (countryIds == '') {
+                                    countryIds += item.CountryID();
+                                } else {
+                                    countryIds += ',' + item.CountryID();
+                                }
+                            }
+                        } else {
+                            if (item.IncludeorExclude() == '0') {
+                                if (cityIdsExcluded == '') {
+                                    cityIdsExcluded += item.CityID();
+                                } else {
+                                    cityIdsExcluded += ',' + item.CityID();
+                                }
+                            } else {
+                                if (cityIds == '') {
+                                    cityIds += item.CityID();
+                                } else {
+                                    cityIds += ',' + item.CityID();
+                                }
+                            }
+                        }
+                    });
+                    var languageIds = '', industryIds = '', languageIdsExcluded = '',
+                        industryIdsExcluded = '', profileQuestionIds = '', profileAnswerIds = '',
+                        surveyQuestionIds = '', surveyAnswerIds = '', profileQuestionIdsExcluded = '', profileAnswerIdsExcluded = '',
+                        surveyQuestionIdsExcluded = '', surveyAnswerIdsExcluded = '';
+                    _.each(selectedQuestion().ProfileQuestionTargetCriteria(), function (item) {
+                        if (item.Type() == 1) {
+                            if (item.IncludeorExclude() == '0') {
+                                if (profileQuestionIdsExcluded == '') {
+                                    profileQuestionIdsExcluded += item.PQID();
+                                } else {
+                                    profileQuestionIdsExcluded += ',' + item.PQID();
+                                }
+                                if (profileAnswerIdsExcluded == '') {
+                                    profileAnswerIdsExcluded += item.PQAnswerID();
+                                } else {
+                                    profileAnswerIdsExcluded += ',' + item.PQAnswerID();
+                                }
+                            } else {
+                                if (profileQuestionIds == '') {
+                                    profileQuestionIds += item.PQID();
+                                } else {
+                                    profileQuestionIds += ',' + item.PQID();
+                                }
+                                if (profileAnswerIds == '') {
+                                    profileAnswerIds += item.PQAnswerID();
+                                } else {
+                                    profileAnswerIds += ',' + item.PQAnswerID();
+                                }
+                            }
+                        } else if (item.Type() == 2) {
+                            if (item.IncludeorExclude() == '0') {
+                                if (surveyQuestionIdsExcluded == '') {
+                                    surveyQuestionIdsExcluded += item.LinkedSQID();
+                                } else {
+                                    surveyQuestionIdsExcluded += ',' + item.LinkedSQID();
+                                }
+                                if (surveyAnswerIdsExcluded == '') {
+                                    surveyAnswerIdsExcluded += item.LinkedSQAnswer();
+                                } else {
+                                    surveyAnswerIdsExcluded += ',' + item.LinkedSQAnswer();
+                                }
+                            } else {
+                                if (surveyQuestionIds == '') {
+                                    surveyQuestionIds += item.LinkedSQID();
+                                } else {
+                                    surveyQuestionIds += ',' + item.LinkedSQID();
+                                }
+                                if (surveyAnswerIds == '') {
+                                    surveyAnswerIds += item.LinkedSQAnswer();
+                                } else {
+                                    surveyAnswerIds += ',' + item.LinkedSQAnswer();
+                                }
+                            }
+                        } else if (item.Type() == 3) {
+                            if (item.IncludeorExclude() == '0') {
+                                if (languageIdsExcluded == '') {
+                                    languageIdsExcluded += item.LanguageID();
+                                } else {
+                                    languageIdsExcluded += ',' + item.LanguageID();
+                                }
+                            } else {
+                                if (languageIds == '') {
+                                    languageIds += item.LanguageID();
+                                } else {
+                                    languageIds += ',' + item.LanguageID();
+                                }
+                            }
+                        } else if (item.Type() == 4) {
+                            if (item.IncludeorExclude() == '0') {
+                                if (industryIdsExcluded == '') {
+                                    industryIdsExcluded += item.IndustryID();
+                                } else {
+                                    industryIdsExcluded += ',' + item.IndustryID();
+                                }
+                            } else {
+                                if (industryIds == '') {
+                                    industryIds += item.IndustryID();
+                                } else {
+                                    industryIds += ',' + item.IndustryID();
+                                }
+                            }
+                        }
+                        else if (item.Type() == 5) {
+                            if (item.IncludeorExclude() == '0') {
+                                if (educationIdsExcluded == '') {
+                                    educationIdsExcluded += item.EducationId();
+                                } else {
+                                    educationIdsExcluded += ',' + item.EducationId();
+                                }
+                            } else {
+                                if (educationIds == '') {
+                                    educationIds += item.EducationId();
+                                } else {
+                                    educationIds += ',' + item.EducationId();
+                                }
+                            }
+                        }
+                    });
+                    var surveyData = {
+                        ageFrom: selectedQuestion().AgeRangeStart(),
+                        ageTo: selectedQuestion().AgeRangeEnd(),
+                        gender: selectedQuestion().Gender(),
+                        countryIds: countryIds,
+                        cityIds: cityIds,
+                        languageIds: languageIds,
+                        industryIds: industryIds,
+                        profileQuestionIds: profileQuestionIds,
+                        profileAnswerIds: profileAnswerIds,
+                        surveyQuestionIds: surveyQuestionIds,
+                        surveyAnswerIds: surveyAnswerIds,
+                        countryIdsExcluded: countryIdsExcluded,
+                        cityIdsExcluded: cityIdsExcluded,
+                        languageIdsExcluded: languageIdsExcluded,
+                        industryIdsExcluded: industryIdsExcluded,
+                        profileQuestionIdsExcluded: profileQuestionIdsExcluded,
+                        profileAnswerIdsExcluded: profileAnswerIdsExcluded,
+                        surveyQuestionIdsExcluded: surveyQuestionIdsExcluded,
+                        surveyAnswerIdsExcluded: surveyAnswerIdsExcluded,
+                        educationIds: educationIds,
+                        educationIdsExcluded: educationIdsExcluded
+                    };
+                    dataservice.getAudienceData(surveyData, {
+                        success: function (data) {
+                            reachedAudience(data.MatchingUsers);
+                            totalAudience(data.AllUsers);
+                            var percent = data.MatchingUsers / data.AllUsers;
+                            if (percent < 0.20) {
+                                audienceReachMode(1);
+                            } else if (percent < 0.70) {
+                                audienceReachMode(2);
+                            } else {
+                                audienceReachMode(3);
+                            }
+                            var dialPercent = percent * 180;
+                            if (dialPercent > 90)
+                                dialPercent -= 90;
+                            else
+                                dialPercent = (90 - dialPercent) * -1;
+                            $(".meterPin").css("-webkit-transform", "rotate(" + dialPercent + "deg)");
+                        },
+                        error: function (response) {
+                            toastr.error("Error while getting audience count.");
+                        }
+                    });
+                },
+                 bindAudienceReachCount = function () {
+                     selectedQuestion().AgeRangeStart.subscribe(function (value) {
+                         getAudienceCount();
+                     });
+                     selectedQuestion().AgeRangeEnd.subscribe(function (value) {
+                         getAudienceCount();
+                     });
+                     selectedQuestion().Gender.subscribe(function (value) {
+                         getAudienceCount();
+                     });
+                     selectedQuestion().ProfileQuestionTargetLocation.subscribe(function (value) {
+                         getAudienceCount();
+                         // update map 
+                         buildMap();
+                     });
+                     selectedQuestion().ProfileQuestionTargetCriteria.subscribe(function (value) {
+                         getAudienceCount();
+                     });
+                 }, buildMap = function () {
+                     $(".locMap").css("display", "none");
+                     var initialized = false;
+                     _.each(selectedQuestion().ProfileQuestionTargetLocation(), function (item) {
+                         //   $(".locMap").css("display", "inline-block");
+                         clearRadiuses();
+                         if (item.CityID() == 0 || item.CityID() == null) {
+                             addCountryMarker(item.Country());
+                         } else {
+                             if (!initialized)
+                                 initializeMap(parseFloat(item.Longitude()), parseFloat(item.Latitude()));
+                             initialized = true;
+                             var included = true;
+                             if (item.IncludeorExclude() == '0') {
+                                 included = false;
+                             }
+                             addPointer(parseFloat(item.Longitude()), parseFloat(item.Latitude()), item.City(), parseFloat(item.Radius()), included);
+                         }
+                     });
+                 },
                     // Initialize the view model
                     initialize = function (specifiedView) {
                         view = specifiedView;
@@ -623,7 +912,8 @@ define("pQuestion/pQuestion.viewModel",
                     findLocationsInCountry: findLocationsInCountry,
                     selectedLocation: selectedLocation,
                     onRemoveLocation: onRemoveLocation,
-                    deleteLocation: deleteLocation
+                    deleteLocation: deleteLocation,
+                    ProfileQuestionList: ProfileQuestionList
                 };
             })()
         };
