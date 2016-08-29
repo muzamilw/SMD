@@ -34,4 +34,12 @@ namespace SMD.MIS.Areas.DAM.Models
 
         public int mode { get; set; }
     }
+    public class ImageCropModel
+    {
+        public string fileName { get; set; }
+        public string bytes { get; set; }
+        public long imageId { get; set; }
+        public int CompanyId { get; set; }
+        public int mode { get; set; }
+    }
 }

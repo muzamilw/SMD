@@ -73,7 +73,7 @@ input[type="password"] {
     padding: 2px;
     font-size: 1.2em;
     color: #444;
-    width: 200px;
+    width: 304px;
 }
 
 select {
@@ -269,4 +269,53 @@ div#title {
 }
 .row {
     margin:0px 0px 0px 0px !important;
+}
+
+.add {
+    z-index: 101111;
+    text-decoration: none;
+}
+.ThemeColor {
+    color: black !important;
+}
+.addTxtBody, .QuickTextTitle {
+    font-family: 'Helvetica';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 134.16666666666669%;
+    color: auto;
+}
+.pnlImgBank {
+    margin: 5px;
+    clear: both;
+    text-align: left;
+}
+.ImgLbl {
+    width: 142px;
+    clear: none;
+    text-align: left;
+    clear: both;
+    float: left;
+    padding-top: 8px;
+    padding-bottom: 4px;
+}
+.qTextInput {
+    border: 2px solid #acb0b5;
+    position: relative;
+    z-index: 12;
+    width: 99%;
+    margin: 0;
+    box-sizing: border-box;
+    border-radius: 5px;
+    outline: none;
+    padding: 11px 15px;
+    font-size: 90%;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    height: 42px;
+}
+
+
+#ImgDAMDetail {
+    width: 191px;
+    max-height: 300px;
 }

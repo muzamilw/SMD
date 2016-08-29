@@ -37,5 +37,10 @@ namespace SMD.MIS.Areas.Franchise.Controllers
         {
             return View();
         }
+        public ActionResult CouponsAproval()
+        {
+            return View();
+        }
+
     }
 }

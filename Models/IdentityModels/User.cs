@@ -91,6 +91,7 @@ namespace SMD.Models.IdentityModels
         public string CountryName { get; set; }
         [NotMapped]
         public string CityName { get; set; }
+        public int? DevicePlatform { get; set; }
         #endregion
 
         #region Public
