@@ -198,9 +198,9 @@ namespace SMD.Repository.Repositories
             //    query = c => c.Status == (Int32)AdCampaignStatus.SubmitForApproval;
 
             rowCount = DbSet.Count(query);
-      
+
             var res = DbSet.Where(query)
-                    .OrderByDescending(p=>p.CreatedDateTime);
+                    .OrderByDescending(p=>p.SubmissionDateTime);
             return res.Skip(fromRow)
                     .Take(toRow);
 

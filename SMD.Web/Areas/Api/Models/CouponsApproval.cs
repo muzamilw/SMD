@@ -52,7 +52,7 @@ namespace SMD.MIS.Areas.Api.Models
         public string FinePrintLine3 { get; set; }
         public string FinePrintLine4 { get; set; }
         public string FinePrintLine5 { get; set; }
-        public Nullable<long> LocationBranchId { get; set; }
+       
         public string LocationTitle { get; set; }
         public string LocationLine1 { get; set; }
         public string LocationLine2 { get; set; }
@@ -62,12 +62,13 @@ namespace SMD.MIS.Areas.Api.Models
         public string LocationLAT { get; set; }
         public string LocationLON { get; set; }
         public string LocationPhone { get; set; }
-        public System.Data.Entity.Spatial.DbGeography GeographyColumn { get; set; }
-        public string HowToRedeemLine1 { get; set; }
-        public string HowToRedeemLine2 { get; set; }
-        public string HowToRedeemLine3 { get; set; }
-        public string HowToRedeemLine4 { get; set; }
-        public string HowToRedeemLine5 { get; set; }
+        public Nullable<System.DateTime> SubmissionDateTime { get; set; }
+        //public System.Data.Entity.Spatial.DbGeography GeographyColumn { get; set; }
+        //public string HowToRedeemLine1 { get; set; }
+        //public string HowToRedeemLine2 { get; set; }
+        //public string HowToRedeemLine3 { get; set; }
+        //public string HowToRedeemLine4 { get; set; }
+        //public string HowToRedeemLine5 { get; set; }
 
      
     }

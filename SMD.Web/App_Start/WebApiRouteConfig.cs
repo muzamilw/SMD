@@ -300,6 +300,12 @@ namespace SMD.MIS
             null,
             routeHandlers);
 
+           //config.Routes.MapHttpRoute(
+           //"CouponApproval",
+           //"CouponApproval/{AuthenticationToken}/",
+           //new { controller = "CouponApproval" },
+           //null,
+           //routeHandlers);
             
 
             

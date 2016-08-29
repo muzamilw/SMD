@@ -9,7 +9,7 @@ define("FranchiseDashboard/Coupons.viewModel",
         ist.Coupons = {
             viewModel: (function () {
                 var view,
-                    campaigns = ko.observableArray([]),
+                    coupons = ko.observableArray([]),
                     //pager
                     pager = ko.observable(),
                     //sorting
@@ -17,7 +17,7 @@ define("FranchiseDashboard/Coupons.viewModel",
                     //Assending  / Desending
                     sortIsAsc = ko.observable(true),
                       isShowCopounMode = ko.observable(false),
-                    getCampaigns = function () {
+                    getCoupons = function () {
                         dataservice.getCouponsForApproval(
                             {
                                 PageSize: pager().pageSize(),
@@ -28,14 +28,14 @@ define("FranchiseDashboard/Coupons.viewModel",
                             },
                             {
                                 success: function (data) {
-                                    campaigns.removeAll();
+                                    coupons.removeAll();
                                     console.log("approval campaign");
-                                    //console.log(data.AdCampaigns);
-                                    //_.each(data.AdCampaigns, function (item) {
-                                    //    campaigns.push(model.AdCampaignServertoClientMapper(item));
-                                    //});
+                                    console.log(data.Coupons);
+                                    _.each(data.Coupons, function (item) {
+                                        coupons.push(model.CouponsServertoClientMapper(item));
+                                    });
                                     //pager().totalCount(0);
-                                    //pager().totalCount(data.TotalCount);
+                                    pager().totalCount(data.TotalCount);
                                 },
                                 error: function () {
                                     toastr.error("Failed to load Ad Campaigns!");
@@ -47,19 +47,19 @@ define("FranchiseDashboard/Coupons.viewModel",
                     initialize = function (specifiedView) {
                         view = specifiedView;
                         ko.applyBindings(view.viewModel, view.bindingRoot);
-                        pager(pagination.Pagination({ PageSize: 10 }, campaigns, getCampaigns));
+                        pager(pagination.Pagination({ PageSize: 10 }, coupons, getCoupons));
                         var mode = getParameter(window.location.href, "mode");
                         if (mode == 2) {
                             lblPageTitle("Coupons For Approval");
                             isShowCopounMode(true);
                         }
                         //// First request for LV
-                        getCampaigns();
+                        getCoupons();
                     };
                 return {
 
                     initialize: initialize,
-                    getCampaigns: getCampaigns,
+                    getCoupons: getCoupons,
                  
                 };
             })()
