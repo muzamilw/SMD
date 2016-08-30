@@ -16,6 +16,7 @@ define("pQuestion/pQuestion.viewModel",
                     // Base Data
                     langs = ko.observableArray([]),
                     countries = ko.observableArray([]),
+                    userBaseData = ko.observable({ CurrencySymbol: '', isStripeIntegrated: false }),
                     qGroup = ko.observableArray([]),
                     selectedQuestionCountryList = ko.observableArray([]),
                     professions = ko.observableArray([]),
@@ -144,7 +145,7 @@ define("pQuestion/pQuestion.viewModel",
                                 countries.removeAll();
                                 qGroup.removeAll();
                                 linkedQuestions.removeAll();
-                                
+                                userBaseData(data.objBaseData);
                                 ko.utils.arrayPushAll(langs(), baseDataFromServer.LanguageDropdowns);
                                 ko.utils.arrayPushAll(countries(), baseDataFromServer.CountryDropdowns);
                                 ko.utils.arrayPushAll(qGroup(), baseDataFromServer.ProfileQuestionGroupDropdowns);
@@ -809,7 +810,7 @@ define("pQuestion/pQuestion.viewModel",
                        //  buildMap();
                      });
                      selectedQuestion().ProfileQuestionTargetCriteria.subscribe(function (value) {
-                         alert();
+                         
                          getAudienceCount();
                      });
                  }, buildMap = function () {
@@ -922,7 +923,8 @@ define("pQuestion/pQuestion.viewModel",
                     reachedAudience: reachedAudience,
                     totalAudience: totalAudience,
                     audienceReachMode: audienceReachMode,
-                    selectedIndustryIncludeExclude: selectedIndustryIncludeExclude
+                    selectedIndustryIncludeExclude: selectedIndustryIncludeExclude,
+                    userBaseData: userBaseData
                 };
             })()
         };

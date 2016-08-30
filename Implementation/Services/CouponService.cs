@@ -270,8 +270,10 @@ namespace SMD.Implementation.Services
             var user = UserManager.Users.Where(g => g.Id == couponRepository.LoggedInUserIdentity).SingleOrDefault();
             if (user != null)
                 couponModel.CreatedBy = user.FullName;
-           
-
+            if (couponModel.Status == 2)
+            {
+                couponModel.SubmissionDateTime = DateTime.Now;
+            }
             couponRepository.Add(couponModel);
             couponRepository.SaveChanges();
 
@@ -306,21 +308,20 @@ namespace SMD.Implementation.Services
 
             //savint the categories if any. do we need it ?
 
-            if (couponModel.CouponCategories != null && couponModel.CouponCategories.Count() > 0)
-            {
-                foreach (var item in couponModel.CouponCategories)
-                {
-                    CouponCategories oModel = new CouponCategories();
+            ////if (couponModel.CouponCategories != null && couponModel.CouponCategories.Count() > 0)
+            ////{
+            ////    foreach (var item in couponModel.CouponCategories)
+            ////    {
+            ////        CouponCategories oModel = new CouponCategories();
 
-                    oModel.CouponId = couponModel.CouponId;
-                    oModel.CategoryId = item.CategoryId;
-                    _couponCategoriesRepository.Add(oModel);
+            ////        oModel.CouponId = couponModel.CouponId;
+            ////        oModel.CategoryId = item.CategoryId;
+            ////       _couponCategoriesRepository.Add(oModel);
 
+            ////    }
+            ////    _couponCategoriesRepository.SaveChanges();
 
-                }
-                _couponCategoriesRepository.SaveChanges();
-
-            }
+            ////}
           
         }
 

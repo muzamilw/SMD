@@ -562,6 +562,7 @@ namespace SMD.MIS.ModelMappers
                 Status = source.Status,
                 SwapCost = source.SwapCost,
                 UserId = source.UserId,
+                SubmissionDateTime=source.SubmissionDateTime,
                 CouponCategories = source.CouponCategories != null ? source.CouponCategories.Select(coupon => coupon.CreateFrom()) : null
               };
 

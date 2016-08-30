@@ -211,6 +211,25 @@ define("Coupons/Coupons.viewModel",
                 });
 
             },
+           GetMonthNameByID = function (monthId)
+           {
+
+               var month = new Array();
+               month[0] = "January";
+               month[1] = "February";
+               month[2] = "March";
+               month[3] = "April";
+               month[4] = "May";
+               month[5] = "June";
+               month[6] = "July";
+               month[7] = "August";
+               month[8] = "September";
+               month[9] = "October";
+               month[10] = "November";
+               month[11] = "December";
+               var m = month[monthId];
+               return m;
+           },
            BindPeriodDD = function ()
            {
                var d = new Date();
@@ -304,6 +323,7 @@ define("Coupons/Coupons.viewModel",
                 isNewCampaign(true);
                 isTerminateBtnVisible(false);
                 isNewCampaignVisible(false);
+                $("#btnCancel").css("display", "block");
                 isShowArchiveBtn(false);
                     CouponTitle('New Coupon');
                     StatusValue('');
@@ -463,6 +483,9 @@ define("Coupons/Coupons.viewModel",
                     });
 
                     couponModel().Status(mode);
+                   
+                    couponModel().SubmissionDateTime(mode);
+                    
                     var res = CouponActiveMonth().split("-");
                     couponModel().CouponActiveYear(res[0]);
                     couponModel().CouponActiveMonth(GetMonth(res[1]));
@@ -859,7 +882,9 @@ define("Coupons/Coupons.viewModel",
 
                                 if (data != null) {
                                     couponModel(model.Coupon.Create(data.Coupon[0]));
-
+                                   
+                                    CouponActiveMonth(couponModel().CouponActiveYear() + ' - ' + GetMonthNameByID(couponModel().CouponActiveMonth()));
+                                  
                                     view.initializeTypeahead();
                                     if (couponModel().Status() == 1) {
 
@@ -870,6 +895,7 @@ define("Coupons/Coupons.viewModel",
                                         $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,#btnPauseCampaign,.lang_delSurvey,.table-link").css("display", "none");
                                         $("#saveBtn").css("display", "none")
                                         $("#btnCancel,#btnPauseCampaign").removeAttr('disabled');
+                                        $("#btnCancel").css("display", "none");
                                         couponModel().StatusValue("Submitted for Approval");
                                     } else if (couponModel().Status() == 3) {
                                         //$("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
@@ -880,19 +906,23 @@ define("Coupons/Coupons.viewModel",
                                         couponModel().StatusValue("Live");
                                         isTerminateBtnVisible(true);
                                         isNewCampaignVisible(true);
+                                        $("#btnCancel").css("display", "block");
                                     } else if (couponModel().Status() == 4) {
                                         $("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
                                         $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,.lang_delSurvey,.table-link").css("display", "none");
                                         $("#saveBtn").css("display", "none");
                                         $("#btnResumeCampagin").css("display", "inline-block");
                                         $("#btnCancel,#btnResumeCampagin,#btnCopyCampaign,#btnStopAndTerminate").removeAttr('disabled');
+                                        $("#btnCancel").css("display", "none");
                                         couponModel().StatusValue("Paused");
                                         isTerminateBtnVisible(true);
                                         isNewCampaignVisible(true);
                                     } else if (couponModel().Status() == 5) {
+                                        $("#btnCancel").css("display", "block");
                                         couponModel().StatusValue("Completed");
                                     } else if (couponModel().Status() == 6) {
                                         couponModel().StatusValue("Approval Rejected");
+                                        $("#btnCancel").css("display", "block");
                                     } else if (couponModel().Status() == 7) {
                                         couponModel().StatusValue("Terminated by user");
                                         $("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
@@ -900,9 +930,11 @@ define("Coupons/Coupons.viewModel",
                                         $("#saveBtn").css("display", "none");
                                         $("#btnPauseCampaign").css("display", "inline-block");
                                         $("#btnCancel,#btnPauseCampaign,#btnCopyCampaign,#btnArchive").removeAttr('disabled');
+                                       $("#btnCancel").css("display", "none");
                                         isNewCampaignVisible(true);
                                         isShowArchiveBtn(true);
                                     } else if (item.Status == 9) {
+                                      //  $("#btnCancel").css("display", "block");
                                         item.StatusValue = ("Completed");
                                     } else if (item.Status == 8) {
                                         item.StatusValue = ("Archived");
@@ -911,6 +943,7 @@ define("Coupons/Coupons.viewModel",
                                         $("#saveBtn").css("display", "none");
                                         $("#btnPauseCampaign").css("display", "inline-block");
                                         $("#btnCancel,#btnPauseCampaign,#btnCopyCampaign,#btnArchive").removeAttr('disabled');
+                                       $("#btnCancel").css("display", "none");
                                         isNewCampaignVisible(true);
                                         isShowArchiveBtn(true);
                                     }
@@ -1788,7 +1821,11 @@ define("Coupons/Coupons.viewModel",
 
                     phraseLibrary.RefreshPhraseLibrary();
                     //show the main menu;
+                    $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign").css("display", "none");
+                    $("#btnSubmitForApproval,#saveBtn,.table-link").css("display", "inline-block");
+                    $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign,#btnStopAndTerminate,#btnCopyCampaign").removeAttr('disabled');
                     showMainMenu();
+                      
                 }
                 ,
                   selectJobDescription = function (jobDescription, e) {

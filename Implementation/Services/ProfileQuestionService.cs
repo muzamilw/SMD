@@ -100,6 +100,7 @@ namespace SMD.Implementation.Services
                 Professions = _industoryRepository.GetAll(),
                 Education = _educationRepository.GetAll(),
                 Industry = _industoryRepository.GetAll(),
+                objBaseData=_profileQuestionRepository.getBaseData(),
                 TotalCount = rowCount
             };
             
