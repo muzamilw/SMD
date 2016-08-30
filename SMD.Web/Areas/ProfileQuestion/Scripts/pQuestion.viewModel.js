@@ -810,7 +810,7 @@ define("pQuestion/pQuestion.viewModel",
                        //  buildMap();
                      });
                      selectedQuestion().ProfileQuestionTargetCriteria.subscribe(function (value) {
-                         alert();
+                         
                          getAudienceCount();
                      });
                  }, buildMap = function () {

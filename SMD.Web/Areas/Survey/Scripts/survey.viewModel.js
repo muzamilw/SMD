@@ -771,8 +771,7 @@ define("survey/survey.viewModel",
                        
                     }
                 getAudienceCount = function () {
-                    debugger;
-                    alert(selectedQuestion().AgeRangeStart());
+                  
                         var countryIds = '', cityIds = '', countryIdsExcluded = '', cityIdsExcluded = '';
                         var educationIds = '', educationIdsExcluded = '';
                         _.each(selectedQuestion().SurveyQuestionTargetLocation(), function (item) {
@@ -997,15 +996,15 @@ define("survey/survey.viewModel",
                         
                         
                         selectedQuestion().AgeRangeStart.subscribe(function (value) {
-                            alert('agerangestart');
+                           
                              getAudienceCount();
                          });
                         selectedQuestion().AgeRangeEnd.subscribe(function (value) {
-                            alert('agerangeend');
+                           
                              getAudienceCount();
                          });
                          selectedQuestion().Gender.subscribe(function (value) {
-                             alert();
+                            
                              getAudienceCount();
                          });
                          selectedQuestion().SurveyQuestionTargetLocation.subscribe(function (value) {
