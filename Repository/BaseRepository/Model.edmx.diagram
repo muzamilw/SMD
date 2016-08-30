@@ -135,6 +135,7 @@
         <EntityTypeShape EntityType="DomainModels.DamImage" Width="1.5" PointX="8.125" PointY="73.5" />
         <AssociationConnector Association="DomainModels.FK_DamImages_Company" />
         <AssociationConnector Association="DomainModels.FK_ProfileQuestion_Company" />
+        <EntityTypeShape EntityType="DomainModels.UserCouponView" Width="1.5" PointX="9.375" PointY="3.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

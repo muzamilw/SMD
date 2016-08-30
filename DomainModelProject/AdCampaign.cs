@@ -121,6 +121,7 @@ namespace DomainModelProject
         public string VoucherLocationLAT { get; set; }
         public string VoucherLocationLON { get; set; }
         public Nullable<double> MaxDailyBudget { get; set; }
+        public Nullable<System.DateTime> SubmissionDateTime { get; set; }
     
         public virtual Company Company { get; set; }
         public virtual Language Language { get; set; }

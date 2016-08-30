@@ -7,19 +7,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DomainModelProject
+namespace SMD.Models.DomainModels
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Coupon
+    public partial class GetCouponByID_Result
     {
-        public Coupon()
-        {
-            this.CouponCategories = new HashSet<CouponCategories>();
-            this.UserPurchasedCoupons = new HashSet<UserPurchasedCoupon>();
-        }
-    
         public long CouponId { get; set; }
         public Nullable<int> LanguageId { get; set; }
         public string UserId { get; set; }
@@ -40,7 +33,6 @@ namespace DomainModelProject
         public Nullable<int> CurrencyId { get; set; }
         public Nullable<double> Price { get; set; }
         public Nullable<double> Savings { get; set; }
-        public Nullable<double> SwapCost { get; set; }
         public Nullable<int> CouponViewCount { get; set; }
         public Nullable<int> CouponIssuedCount { get; set; }
         public Nullable<int> CouponRedeemedCount { get; set; }
@@ -53,7 +45,6 @@ namespace DomainModelProject
         public string couponImage1 { get; set; }
         public string CouponImage2 { get; set; }
         public string CouponImage3 { get; set; }
-        public string LogoUrl { get; set; }
         public string HighlightLine1 { get; set; }
         public string HighlightLine2 { get; set; }
         public string HighlightLine3 { get; set; }
@@ -74,18 +65,16 @@ namespace DomainModelProject
         public string LocationLAT { get; set; }
         public string LocationLON { get; set; }
         public string LocationPhone { get; set; }
-        public System.Data.Entity.Spatial.DbGeography GeographyColumn { get; set; }
         public string HowToRedeemLine1 { get; set; }
         public string HowToRedeemLine2 { get; set; }
         public string HowToRedeemLine3 { get; set; }
         public string HowToRedeemLine4 { get; set; }
         public string HowToRedeemLine5 { get; set; }
         public Nullable<System.DateTime> SubmissionDateTime { get; set; }
-    
-        public virtual Company Company { get; set; }
-        public virtual CompanyBranch CompanyBranch { get; set; }
-        public virtual Language Language { get; set; }
-        public virtual ICollection<CouponCategories> CouponCategories { get; set; }
-        public virtual ICollection<UserPurchasedCoupon> UserPurchasedCoupons { get; set; }
+        public Nullable<double> distance { get; set; }
+        public string CurrencySymbol { get; set; }
+        public string LogoUrl { get; set; }
+        public Nullable<int> DaysLeft { get; set; }
+        public Nullable<double> SwapCost { get; set; }
     }
 }

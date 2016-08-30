@@ -82,6 +82,7 @@ namespace DomainModelProject
         public virtual DbSet<Section> Sections { get; set; }
         public virtual DbSet<UserPurchasedCoupon> UserPurchasedCoupons { get; set; }
         public virtual DbSet<DamImage> DamImages { get; set; }
+        public virtual DbSet<UserCouponView> UserCouponViews { get; set; }
     
         public virtual ObjectResult<SearchCoupons_Result> SearchCoupons(Nullable<int> categoryId, Nullable<int> type, string keywords, Nullable<int> distance, string lat, string lon, string userId, Nullable<int> fromRow, Nullable<int> toRow)
         {
@@ -151,6 +152,27 @@ namespace DomainModelProject
                 new ObjectParameter("adminMode", typeof(bool));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SearchCampaigns_Result>("SearchCampaigns", statusParameter, keywordParameter, companyIdParameter, fromRowParameter, toRowParameter, adminModeParameter);
+        }
+    
+        public virtual ObjectResult<GetCouponByID_Result> GetCouponByID(Nullable<long> couponId, string lat, string lon, string userId)
+        {
+            var couponIdParameter = couponId.HasValue ?
+                new ObjectParameter("CouponId", couponId) :
+                new ObjectParameter("CouponId", typeof(long));
+    
+            var latParameter = lat != null ?
+                new ObjectParameter("Lat", lat) :
+                new ObjectParameter("Lat", typeof(string));
+    
+            var lonParameter = lon != null ?
+                new ObjectParameter("Lon", lon) :
+                new ObjectParameter("Lon", typeof(string));
+    
+            var userIdParameter = userId != null ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCouponByID_Result>("GetCouponByID", couponIdParameter, latParameter, lonParameter, userIdParameter);
         }
     }
 }

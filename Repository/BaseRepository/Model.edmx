@@ -823,6 +823,15 @@
           <Property Name="IsCompleted" Type="bit" />
           <Property Name="Description" Type="nvarchar" MaxLength="500" />
         </EntityType>
+        <EntityType Name="UserCouponView">
+          <Key>
+            <PropertyRef Name="UserCouponViewId" />
+          </Key>
+          <Property Name="UserCouponViewId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CouponId" Type="bigint" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+          <Property Name="ViewDateTime" Type="datetime" />
+        </EntityType>
         <EntityType Name="UserFavouriteCoupon">
           <Key>
             <PropertyRef Name="FavouriteCouponId" />
@@ -1930,6 +1939,12 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Parameter Name="industryId" Type="int" Mode="In" />
           <Parameter Name="profileQuestionIds" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="GetCouponByID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CouponId" Type="bigint" Mode="In" />
+          <Parameter Name="Lat" Type="nvarchar" Mode="In" />
+          <Parameter Name="Lon" Type="nvarchar" Mode="In" />
+          <Parameter Name="UserId" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="GetCoupons" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserID" Type="nvarchar" Mode="In" />
         </Function>
@@ -2028,6 +2043,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <EntitySet Name="Tax" EntityType="Self.Tax" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Transaction" EntityType="Self.Transaction" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TransactionLog" EntityType="Self.TransactionLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserCouponView" EntityType="Self.UserCouponView" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserFavouriteCoupon" EntityType="Self.UserFavouriteCoupon" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserPurchasedCoupon" EntityType="Self.UserPurchasedCoupon" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="vw_Cash4AdsReport" EntityType="Self.vw_Cash4AdsReport" store:Type="Views" store:Schema="dbo">
@@ -2887,6 +2903,13 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
             <End Role="Company" EntitySet="Companies" />
             <End Role="ProfileQuestion" EntitySet="ProfileQuestions" />
           </AssociationSet>
+          <EntitySet Name="UserCouponViews" EntityType="DomainModels.UserCouponView" />
+          <FunctionImport Name="GetCouponByID" ReturnType="Collection(DomainModels.GetCouponByID_Result)">
+            <Parameter Name="CouponId" Mode="In" Type="Int64" />
+            <Parameter Name="Lat" Mode="In" Type="String" />
+            <Parameter Name="Lon" Mode="In" Type="String" />
+            <Parameter Name="UserId" Mode="In" Type="String" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="ProfileQuestion">
           <Key>
@@ -4601,6 +4624,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Property Type="Int32" Name="CompanyId" Nullable="true" />
           <Property Type="Int32" Name="CouponActiveMonth" Nullable="true" />
           <Property Type="Int32" Name="CouponActiveYear" Nullable="true" />
+          <Property Type="DateTime" Name="eod" Nullable="true" />
+          <Property Type="DateTime" Name="strt" Nullable="true" />
+          <Property Type="Double" Name="distance" Nullable="true" />
         </ComplexType>
         <EntityType Name="UserFavouriteCoupon">
           <Key>
@@ -5175,6 +5201,80 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="UserCouponView">
+          <Key>
+            <PropertyRef Name="UserCouponViewId" />
+          </Key>
+          <Property Name="UserCouponViewId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CouponId" Type="Int64" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ViewDateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <ComplexType Name="GetCouponByID_Result">
+          <Property Type="Int64" Name="CouponId" Nullable="false" />
+          <Property Type="Int32" Name="LanguageId" Nullable="true" />
+          <Property Type="String" Name="UserId" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="CouponTitle" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="SearchKeywords" Nullable="true" />
+          <Property Type="Int32" Name="Status" Nullable="true" />
+          <Property Type="Boolean" Name="Archived" Nullable="true" />
+          <Property Type="Boolean" Name="Approved" Nullable="true" />
+          <Property Type="String" Name="ApprovedBy" Nullable="true" MaxLength="128" />
+          <Property Type="DateTime" Name="ApprovalDateTime" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="CreatedDateTime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="ModifiedDateTime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="ModifiedBy" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="RejectedReason" Nullable="true" MaxLength="1000" />
+          <Property Type="DateTime" Name="Rejecteddatetime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="RejectedBy" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="CurrencyId" Nullable="true" />
+          <Property Type="Double" Name="Price" Nullable="true" />
+          <Property Type="Double" Name="Savings" Nullable="true" />
+          <Property Type="Int32" Name="CouponViewCount" Nullable="true" />
+          <Property Type="Int32" Name="CouponIssuedCount" Nullable="true" />
+          <Property Type="Int32" Name="CouponRedeemedCount" Nullable="true" />
+          <Property Type="Int32" Name="CouponQtyPerUser" Nullable="true" />
+          <Property Type="Int32" Name="CouponListingMode" Nullable="true" />
+          <Property Type="Int32" Name="CompanyId" Nullable="true" />
+          <Property Type="Int32" Name="CouponActiveMonth" Nullable="true" />
+          <Property Type="Int32" Name="CouponActiveYear" Nullable="true" />
+          <Property Type="DateTime" Name="CouponExpirydate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="couponImage1" Nullable="true" />
+          <Property Type="String" Name="CouponImage2" Nullable="true" />
+          <Property Type="String" Name="CouponImage3" Nullable="true" />
+          <Property Type="String" Name="HighlightLine1" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="HighlightLine2" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="HighlightLine3" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="HighlightLine4" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="HighlightLine5" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="FinePrintLine1" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="FinePrintLine2" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="FinePrintLine3" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="FinePrintLine4" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="FinePrintLine5" Nullable="true" MaxLength="100" />
+          <Property Type="Int64" Name="LocationBranchId" Nullable="true" />
+          <Property Type="String" Name="LocationTitle" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="LocationLine1" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="LocationLine2" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="LocationCity" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="LocationState" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="LocationZipCode" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="LocationLAT" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="LocationLON" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="LocationPhone" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="HowToRedeemLine1" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="HowToRedeemLine2" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="HowToRedeemLine3" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="HowToRedeemLine4" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="HowToRedeemLine5" Nullable="true" MaxLength="500" />
+          <Property Type="DateTime" Name="SubmissionDateTime" Nullable="true" Precision="23" />
+          <Property Type="Double" Name="distance" Nullable="true" />
+          <Property Type="String" Name="CurrencySymbol" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="LogoUrl" Nullable="true" MaxLength="227" />
+          <Property Type="Int32" Name="DaysLeft" Nullable="true" />
+          <Property Type="Double" Name="SwapCost" Nullable="true" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -6094,6 +6194,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
                 <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
                 <ScalarProperty Name="CouponActiveMonth" ColumnName="CouponActiveMonth" />
                 <ScalarProperty Name="CouponActiveYear" ColumnName="CouponActiveYear" />
+                <ScalarProperty Name="eod" ColumnName="eod" />
+                <ScalarProperty Name="strt" ColumnName="strt" />
+                <ScalarProperty Name="distance" ColumnName="distance" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -6350,6 +6453,85 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="UserCouponViews">
+            <EntityTypeMapping TypeName="DomainModels.UserCouponView">
+              <MappingFragment StoreEntitySet="UserCouponView">
+                <ScalarProperty Name="ViewDateTime" ColumnName="ViewDateTime" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CouponId" ColumnName="CouponId" />
+                <ScalarProperty Name="UserCouponViewId" ColumnName="UserCouponViewId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetCouponByID" FunctionName="SMDModel.Store.GetCouponByID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DomainModels.GetCouponByID_Result">
+                <ScalarProperty Name="CouponId" ColumnName="CouponId" />
+                <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CouponTitle" ColumnName="CouponTitle" />
+                <ScalarProperty Name="SearchKeywords" ColumnName="SearchKeywords" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Archived" ColumnName="Archived" />
+                <ScalarProperty Name="Approved" ColumnName="Approved" />
+                <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
+                <ScalarProperty Name="ApprovalDateTime" ColumnName="ApprovalDateTime" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ModifiedDateTime" ColumnName="ModifiedDateTime" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="RejectedReason" ColumnName="RejectedReason" />
+                <ScalarProperty Name="Rejecteddatetime" ColumnName="Rejecteddatetime" />
+                <ScalarProperty Name="RejectedBy" ColumnName="RejectedBy" />
+                <ScalarProperty Name="CurrencyId" ColumnName="CurrencyId" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Savings" ColumnName="Savings" />
+                <ScalarProperty Name="CouponViewCount" ColumnName="CouponViewCount" />
+                <ScalarProperty Name="CouponIssuedCount" ColumnName="CouponIssuedCount" />
+                <ScalarProperty Name="CouponRedeemedCount" ColumnName="CouponRedeemedCount" />
+                <ScalarProperty Name="CouponQtyPerUser" ColumnName="CouponQtyPerUser" />
+                <ScalarProperty Name="CouponListingMode" ColumnName="CouponListingMode" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="CouponActiveMonth" ColumnName="CouponActiveMonth" />
+                <ScalarProperty Name="CouponActiveYear" ColumnName="CouponActiveYear" />
+                <ScalarProperty Name="CouponExpirydate" ColumnName="CouponExpirydate" />
+                <ScalarProperty Name="couponImage1" ColumnName="couponImage1" />
+                <ScalarProperty Name="CouponImage2" ColumnName="CouponImage2" />
+                <ScalarProperty Name="CouponImage3" ColumnName="CouponImage3" />
+                <ScalarProperty Name="HighlightLine1" ColumnName="HighlightLine1" />
+                <ScalarProperty Name="HighlightLine2" ColumnName="HighlightLine2" />
+                <ScalarProperty Name="HighlightLine3" ColumnName="HighlightLine3" />
+                <ScalarProperty Name="HighlightLine4" ColumnName="HighlightLine4" />
+                <ScalarProperty Name="HighlightLine5" ColumnName="HighlightLine5" />
+                <ScalarProperty Name="FinePrintLine1" ColumnName="FinePrintLine1" />
+                <ScalarProperty Name="FinePrintLine2" ColumnName="FinePrintLine2" />
+                <ScalarProperty Name="FinePrintLine3" ColumnName="FinePrintLine3" />
+                <ScalarProperty Name="FinePrintLine4" ColumnName="FinePrintLine4" />
+                <ScalarProperty Name="FinePrintLine5" ColumnName="FinePrintLine5" />
+                <ScalarProperty Name="LocationBranchId" ColumnName="LocationBranchId" />
+                <ScalarProperty Name="LocationTitle" ColumnName="LocationTitle" />
+                <ScalarProperty Name="LocationLine1" ColumnName="LocationLine1" />
+                <ScalarProperty Name="LocationLine2" ColumnName="LocationLine2" />
+                <ScalarProperty Name="LocationCity" ColumnName="LocationCity" />
+                <ScalarProperty Name="LocationState" ColumnName="LocationState" />
+                <ScalarProperty Name="LocationZipCode" ColumnName="LocationZipCode" />
+                <ScalarProperty Name="LocationLAT" ColumnName="LocationLAT" />
+                <ScalarProperty Name="LocationLON" ColumnName="LocationLON" />
+                <ScalarProperty Name="LocationPhone" ColumnName="LocationPhone" />
+                <ScalarProperty Name="HowToRedeemLine1" ColumnName="HowToRedeemLine1" />
+                <ScalarProperty Name="HowToRedeemLine2" ColumnName="HowToRedeemLine2" />
+                <ScalarProperty Name="HowToRedeemLine3" ColumnName="HowToRedeemLine3" />
+                <ScalarProperty Name="HowToRedeemLine4" ColumnName="HowToRedeemLine4" />
+                <ScalarProperty Name="HowToRedeemLine5" ColumnName="HowToRedeemLine5" />
+                <ScalarProperty Name="SubmissionDateTime" ColumnName="SubmissionDateTime" />
+                <ScalarProperty Name="distance" ColumnName="distance" />
+                <ScalarProperty Name="CurrencySymbol" ColumnName="CurrencySymbol" />
+                <ScalarProperty Name="LogoUrl" ColumnName="LogoUrl" />
+                <ScalarProperty Name="DaysLeft" ColumnName="DaysLeft" />
+                <ScalarProperty Name="SwapCost" ColumnName="SwapCost" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

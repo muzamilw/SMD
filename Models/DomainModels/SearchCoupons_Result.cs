@@ -20,6 +20,8 @@ namespace SMD.Models.DomainModels
         public Nullable<int> CouponActiveYear { get; set; }
 
         public Nullable<int> TotalItems { get; set; }
+
+        public Nullable<double> distance { get; set; }
         
     }
 }

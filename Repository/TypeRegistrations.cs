@@ -61,6 +61,8 @@ namespace SMD.Repository
             unityContainer.RegisterType<IBranchCategoryRepository, BranchCategoryRepository>();
             unityContainer.RegisterType<ICompanyBranchRepository, CompanyBranchRepository>();
             unityContainer.RegisterType<IDamImageRepository, DamImageRepository>();
+
+            unityContainer.RegisterType<IUserCouponViewRepository, UserCouponViewRepository>();
         }
     }
 }

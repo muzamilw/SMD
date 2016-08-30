@@ -8239,3 +8239,337 @@ GO
 ALTER TABLE dbo.ProfileQuestion SET (LOCK_ESCALATION = TABLE)
 GO
 COMMIT
+
+
+
+
+
+GO
+
+/****** Object:  Table [dbo].[UserFavouriteCoupon]    Script Date: 8/30/2016 1:39:58 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[UserCouponView](
+	[UserCouponViewId] [bigint] IDENTITY(1,1) NOT NULL,
+	[CouponId] [bigint] NULL,
+	[UserId] [nvarchar](128) NULL,
+	[ViewDateTime] Datetime
+ CONSTRAINT [PK_UserCouponView] PRIMARY KEY CLUSTERED 
+(
+	[UserCouponViewId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+
+
+
+
+
+-- ================================================
+-- Template generated from Template Explorer using:
+-- Create Procedure (New Menu).SQL
+--
+-- Use the Specify Values for Template Parameters 
+-- command (Ctrl-Shift-M) to fill in the parameter 
+-- values below.
+--
+-- This block of comments will not be included in
+-- the definition of the procedure.
+-- ================================================
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Mz
+-- Create date: 30 august 2016
+-- Description:	
+-- =============================================
+ALTER PROCEDURE GetCouponByID 
+
+--    getcouponbyid 23, '','','d70b04d3-e76c-4ca2-95fe-9746ceff1a88'
+	-- Add the parameters for the stored procedure here
+	@CouponId as bigint = 0, 
+	@Lat as nvarchar(50),
+	@Lon as nvarchar(50),
+	@UserId as nvarchar(128)
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+
+if @lat = '' 
+	set @lat = '31.482932'
+
+
+if @lon = '' 
+	set @lon = '74.288557'
+
+
+DECLARE @source geography = geography::Point(@lat, @lon, 4326)
+
+
+	update coupon set CouponViewcount = CouponViewcount + 1 where CouponId= @CouponId
+
+
+INSERT INTO [dbo].[UserCouponView]
+           ([CouponId]
+           ,[UserId]
+           ,[ViewDateTime])
+     VALUES
+           (@CouponId
+           ,@UserId
+           ,GETDATE())
+
+
+SELECT [CouponId]
+      ,[LanguageId]
+      ,[UserId]
+      ,[CouponTitle]
+      ,[SearchKeywords]
+      ,[Status]
+      ,[Archived]
+      ,[Approved]
+      ,[ApprovedBy]
+      ,[ApprovalDateTime]
+      ,[CreatedDateTime]
+      ,[CreatedBy]
+      ,[ModifiedDateTime]
+      ,[ModifiedBy]
+      ,[RejectedReason]
+      ,[Rejecteddatetime]
+      ,[RejectedBy]
+      ,c.[CurrencyId]
+      ,[Price]
+      ,[Savings]
+      
+      ,[CouponViewCount]
+      ,[CouponIssuedCount]
+      ,[CouponRedeemedCount]
+      ,[CouponQtyPerUser]
+      ,[CouponListingMode]
+      ,[CompanyId]
+      ,[CouponActiveMonth]
+      ,[CouponActiveYear]
+      ,[CouponExpirydate]
+      ,[couponImage1]
+      ,[CouponImage2]
+      ,[CouponImage3]
+      
+      ,[HighlightLine1]
+      ,[HighlightLine2]
+      ,[HighlightLine3]
+      ,[HighlightLine4]
+      ,[HighlightLine5]
+      ,[FinePrintLine1]
+      ,[FinePrintLine2]
+      ,[FinePrintLine3]
+      ,[FinePrintLine4]
+      ,[FinePrintLine5]
+      ,[LocationBranchId]
+      ,[LocationTitle]
+      ,[LocationLine1]
+      ,[LocationLine2]
+      ,[LocationCity]
+      ,[LocationState]
+      ,[LocationZipCode]
+      ,[LocationLAT]
+      ,[LocationLON]
+      ,[LocationPhone]
+      ,[GeographyColumn]
+      ,[HowToRedeemLine1]
+      ,[HowToRedeemLine2]
+      ,[HowToRedeemLine3]
+      ,[HowToRedeemLine4]
+      ,[HowToRedeemLine5]
+      ,[SubmissionDateTime]
+ ,
+
+
+	case when c.CouponListingMode = 3 then 0 
+	else
+	@source.STDistance(geography::Point(c.LocationLAT, c.LocationLON, 4326))/1000 
+       
+	end  as distance, curr.CurrencySymbol
+	,
+		(select 
+	CASE
+		WHEN c.LogoUrl is null or c.LogoUrl = ''
+		THEN 'http://manage.cash4ads.com/' + comp.Logo
+		WHEN c.LogoUrl is not null
+		THEN 'http://manage.cash4ads.com/' + c.LogoUrl
+	END as AdvertisersLogoPath from company comp
+	 where comp.CompanyId = c.CompanyId) as [LogoUrl],
+
+	 case when c.CouponListingMode  = 2
+	 then 
+	  DATEDIFF(d, getdate(), DATEFROMPARTS(c.CouponActiveYear, c.CouponActiveMonth+2,day(EOMONTH ( DATEFROMPARTS(c.CouponActiveYear, c.CouponActiveMonth,1)))))
+	   when c.CouponListingMode  = 3
+	 then 
+	  DATEDIFF(d, getdate(), DATEFROMPARTS(c.CouponActiveYear, c.CouponActiveMonth+2,day(EOMONTH ( DATEFROMPARTS(c.CouponActiveYear, c.CouponActiveMonth,1)))))
+	 when CouponListingMode = 1
+	 then
+	 DATEDIFF(d, getdate(), DATEFROMPARTS(c.CouponActiveYear, c.CouponActiveMonth,day(EOMONTH ( DATEFROMPARTS(c.CouponActiveYear, c.CouponActiveMonth,1)))))
+	 end as DaysLeft
+	 ,
+	 case when 
+	 (c.Savings / curr.SMDCreditRatio) / 100  > 0.50 then (c.Savings / curr.SMDCreditRatio)
+	 else
+	 50
+	 end
+	 
+	 as SwapCost
+
+
+
+	from coupon as c 
+	inner join Currency curr on c.CurrencyId = curr.CurrencyID 
+	where c.CouponId = @CouponId
+END
+GO
+
+
+
+
+GO
+
+/****** Object:  Table [dbo].[SurveyQuestionTargetLocation]    Script Date: 8/30/2016 4:17:22 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[ProfileQuestionTargetLocation](
+	[ID] [bigint] IDENTITY(1,1) NOT NULL,
+	[PQID] int NULL,
+	[CountryID] [int] NULL,
+	[CityID] [int] NULL,
+	[Radius] [int] NULL,
+	[IncludeorExclude] [bit] NULL,
+ CONSTRAINT [PK_ProfileQuestionTargetLocation] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+ALTER TABLE [dbo].[ProfileQuestionTargetLocation]  WITH CHECK ADD  CONSTRAINT [FK_ProfileQuestionTargetLocation_City] FOREIGN KEY([CityID])
+REFERENCES [dbo].[City] ([CityID])
+GO
+
+ALTER TABLE [dbo].[ProfileQuestionTargetLocation] CHECK CONSTRAINT [FK_ProfileQuestionTargetLocation_City]
+GO
+
+ALTER TABLE [dbo].[ProfileQuestionTargetLocation]  WITH CHECK ADD  CONSTRAINT [FK_ProfileQuestionTargetLocation_Country] FOREIGN KEY([CountryID])
+REFERENCES [dbo].[Country] ([CountryID])
+GO
+
+ALTER TABLE [dbo].[ProfileQuestionTargetLocation] CHECK CONSTRAINT [FK_ProfileQuestionTargetLocation_Country]
+GO
+
+ALTER TABLE [dbo].[ProfileQuestionTargetLocation]  WITH CHECK ADD  CONSTRAINT [FK_ProfileQuestionTargetLocation_ProfileQuestion] FOREIGN KEY([PQID])
+REFERENCES [dbo].[ProfileQuestion] ([PQID])
+GO
+
+ALTER TABLE [dbo].[ProfileQuestionTargetLocation] CHECK CONSTRAINT [FK_ProfileQuestionTargetLocation_ProfileQuestion]
+GO
+
+
+
+
+
+
+--drop table [ProfileQuestionTargetCriteria]
+
+/****** Object:  Table [dbo].[ProfileQuestionTargetCriteria]    Script Date: 8/30/2016 4:02:09 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+-- alter table [ProfileQuestion] drop constraint FK_ProfileQuestionTargetCriteria_ProfileQuestion1
+-- alter table [ProfileQuestion] drop constraint FK_ProfileQuestionTargetCriteria_ProfileQuestion
+
+-- alter table [ProfileQuestionTargetCriteria]  drop constraint FK_ProfileQuestionTargetCriteria_ProfileQuestion
+
+
+CREATE TABLE [dbo].[ProfileQuestionTargetCriteria](
+	[ID] [bigint] IDENTITY(1,1) NOT NULL,
+	[PQID] int NULL,
+	[Type] [int] NULL,
+	[SQID] [int] NULL,
+	[PQAnswerID] [int] NULL,
+	[LinkedSQID] [bigint] NULL,
+	[LinkedSQAnswer] [int] NULL,
+	[IncludeorExclude] [bit] NULL,
+	[LanguageID] [int] NULL,
+	[IndustryID] [int] NULL,
+	[EducationID] [bigint] NULL,
+ CONSTRAINT [PK_ProfileQuestionTargetCriteria] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+ALTER TABLE [dbo].ProfileQuestionTargetCriteria  WITH CHECK ADD  CONSTRAINT [FK_ProfileQuestionTargetCriteria_Education] FOREIGN KEY([EducationID])
+REFERENCES [dbo].[Education] ([EducationId])
+GO
+
+ALTER TABLE [dbo].[ProfileQuestionTargetCriteria] CHECK CONSTRAINT [FK_ProfileQuestionTargetCriteria_Education]
+GO
+
+ALTER TABLE [dbo].ProfileQuestionTargetCriteria  WITH CHECK ADD  CONSTRAINT [FK_ProfileQuestionTargetCriteria_Industry] FOREIGN KEY([IndustryID])
+REFERENCES [dbo].[Industry] ([IndustryID])
+GO
+
+ALTER TABLE [dbo].ProfileQuestionTargetCriteria CHECK CONSTRAINT [FK_ProfileQuestionTargetCriteria_Industry]
+GO
+
+ALTER TABLE [dbo].[ProfileQuestionTargetCriteria]  WITH CHECK ADD  CONSTRAINT [FK_ProfileQuestionTargetCriteria_Language] FOREIGN KEY([LanguageID])
+REFERENCES [dbo].[Language] ([LanguageID])
+GO
+
+ALTER TABLE [dbo].[ProfileQuestionTargetCriteria] CHECK CONSTRAINT [FK_ProfileQuestionTargetCriteria_Language]
+GO
+
+ALTER TABLE [dbo].[ProfileQuestionTargetCriteria]  WITH CHECK ADD  CONSTRAINT [FK_ProfileQuestionTargetCriteria_ProfileQuestion] FOREIGN KEY([SQID])
+REFERENCES [dbo].[ProfileQuestion] ([PQID])
+GO
+
+ALTER TABLE [dbo].[ProfileQuestionTargetCriteria] CHECK CONSTRAINT [FK_ProfileQuestionTargetCriteria_ProfileQuestion]
+GO
+
+ALTER TABLE [dbo].[ProfileQuestionTargetCriteria]  WITH CHECK ADD  CONSTRAINT [FK_ProfileQuestionTargetCriteria_ProfileQuestionAnswer] FOREIGN KEY([PQAnswerID])
+REFERENCES [dbo].[ProfileQuestionAnswer] ([PQAnswerID])
+GO
+
+ALTER TABLE [dbo].[ProfileQuestionTargetCriteria] CHECK CONSTRAINT [FK_ProfileQuestionTargetCriteria_ProfileQuestionAnswer]
+GO
+
+
+ALTER TABLE [dbo].[ProfileQuestionTargetCriteria]  WITH CHECK ADD  CONSTRAINT [FK_ProfileQuestionTargetCriteria_ProfileQuestion1] FOREIGN KEY([LinkedSQID])
+REFERENCES [dbo].[surveyQuestion] ([SQID])
+GO
+
+ALTER TABLE [dbo].[ProfileQuestionTargetCriteria] CHECK CONSTRAINT [FK_ProfileQuestionTargetCriteria_ProfileQuestion1]
+GO
+
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'1 - Profile Question , 2 - Survery Question, 3 - Language' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'ProfileQuestionTargetCriteria', @level2type=N'COLUMN',@level2name=N'Type'
+GO
+
+
+--FK_ProfileQuestionTargetCriteria_ProfileQuestion

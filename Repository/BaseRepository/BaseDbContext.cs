@@ -250,7 +250,7 @@ namespace SMD.Repository.BaseRepository
 
         public DbSet<UserPurchasedCoupon> UserPurchasedCoupon { get; set; }
 
-        
+        public DbSet<UserCouponView> UserCouponView { get; set; }
 
         public DbSet<vw_GetUserTransactions> vw_GetUserTransactions { get; set; }
         public DbSet<vw_PublisherTransaction> vw_PublisherTransaction { get; set; }
@@ -471,6 +471,33 @@ namespace SMD.Repository.BaseRepository
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SearchCoupons_Result>("SearchCoupons", categoryIdParameter, typeIdParameter, keywordsParameter, distanceParameter, LatParameter, LonParameter, userIdParameter, fromRowParameter, toRowParameter);
         }
 
+
+
+
+        public ObjectResult<GetCouponByID_Result> GetCouponByID(long CouponId, string UserId, string Lat, string Lon)
+        {
+            var CouponIdIdParameter = CouponId != null ?
+                new ObjectParameter("CouponId", CouponId) :
+                new ObjectParameter("CouponId", typeof(long));
+
+
+            var userIdParameter = UserId != null ?
+         new ObjectParameter("UserId", UserId) :
+         new ObjectParameter("UserId", typeof(string));
+
+            var LatParameter = Lat != null ?
+      new ObjectParameter("Lat", Lat) :
+      new ObjectParameter("Lat", typeof(string));
+
+
+            var LonParameter = Lon != null ?
+      new ObjectParameter("Lon", Lon) :
+      new ObjectParameter("Lon", typeof(string));
+
+
+
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCouponByID_Result>("GetCouponByID", CouponIdIdParameter, userIdParameter, LatParameter, LonParameter);
+        }
 
 
         public ObjectResult<SearchCampaigns_Result> SearchCampaigns(int status, string keyword, int companyId, int fromRow, int toRow, bool adminMode)

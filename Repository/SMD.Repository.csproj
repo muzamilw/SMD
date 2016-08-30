@@ -215,6 +215,7 @@
     <Compile Include="Repositories\EducationRepository.cs" />
     <Compile Include="Repositories\InvoiceDetailRepository.cs" />
     <Compile Include="Repositories\ProductRepository.cs" />
+    <Compile Include="Repositories\UserCouponViewRepository.cs" />
     <Compile Include="Repositories\TaxRepository.cs" />
     <Compile Include="Repositories\IndustryRepository.cs" />
     <Compile Include="Repositories\InvoiceRepository.cs" />

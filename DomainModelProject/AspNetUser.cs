@@ -65,6 +65,7 @@ namespace DomainModelProject
         public Nullable<System.DateTime> DOB { get; set; }
         public Nullable<int> CompanyId { get; set; }
         public string authenticationToken { get; set; }
+        public Nullable<int> DevicePlatform { get; set; }
     
         public virtual ICollection<AdCampaignResponse> AdCampaignResponses { get; set; }
         public virtual ICollection<AspNetUserClaim> AspNetUserClaims { get; set; }

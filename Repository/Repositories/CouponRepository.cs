@@ -151,16 +151,27 @@ namespace SMD.Repository.Repositories
         {
 
 
-            db.Database.ExecuteSqlCommand("update coupon set CouponViewcount = CouponViewcount + 1 where CouponId=" + campaignId);
+         
 
             Expression<Func<Coupon, bool>> query =
                 ad => ad.CouponId == campaignId;
 
-            return DbSet.Where(query);
+            var coupon =  DbSet.Where(query);
+
+            return coupon;
 
 
 
         }
+
+
+        //SP cal for mobile apps
+        public GetCouponByID_Result GetCouponByIdSP(long CouponId, string UserId, string Lat, string Lon)
+        {
+            return db.GetCouponByID(CouponId,UserId,Lat,Lon).First();
+
+        }
+
 
 
 

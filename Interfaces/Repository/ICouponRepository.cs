@@ -22,5 +22,9 @@ namespace SMD.Interfaces.Repository
 
         List<Coupon> GetCouponsByCompanyId(int CompanyId);
         IEnumerable<Coupon> GetCouponsForApproval(GetPagedListRequest request, out int rowCount);
+
+
+        GetCouponByID_Result GetCouponByIdSP(long CouponId, string UserId, string Lat, string Lon);
+
     }
 }

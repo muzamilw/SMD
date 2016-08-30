@@ -26,7 +26,7 @@ namespace SMD.Interfaces.Services
         SearchCouponsResponse SearchCoupons(int categoryId, int type, int size, string keywords, int pageNo, int distance, string Lat, string Lon, string UserId);
 
 
-        Coupon GetCouponByIdDefault(long CouponId);
+        GetCouponByID_Result GetCouponByIdDefault(long CouponId, string UserId, string Lat, string Lon);
 
         bool CheckCouponFlaggedByUser(long CouponId, string UserId);
 

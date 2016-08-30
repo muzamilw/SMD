@@ -31,6 +31,7 @@ namespace SMD.Implementation.Services
         private readonly ICouponCategoriesRepository _couponCategoriesRepository;
         private readonly IWebApiUserService _userService;
         private readonly ICurrencyRepository _currencyRepository;
+        private readonly IUserCouponViewRepository _userCouponViewRepository;
         private ApplicationUserManager UserManager
         {
             get { return HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
@@ -122,7 +123,7 @@ namespace SMD.Implementation.Services
         /// Constructor 
         /// </summary>
         public CouponService(ICouponRepository couponRepository, IUserFavouriteCouponRepository userFavouriteCouponRepository, ICompanyService _companyService,
-            IUserPurchasedCouponRepository _userPurchasedCouponRepository, IAccountRepository _accountRepository, ICouponCategoriesRepository _couponCategoriesRepository, ICurrencyRepository _currencyRepository, IWebApiUserService _userService)
+            IUserPurchasedCouponRepository _userPurchasedCouponRepository, IAccountRepository _accountRepository, ICouponCategoriesRepository _couponCategoriesRepository, ICurrencyRepository _currencyRepository, IWebApiUserService _userService, IUserCouponViewRepository userCouponViewRepository)
         {
             this.couponRepository = couponRepository;
             this._userFavouriteCouponRepository = userFavouriteCouponRepository;
@@ -132,6 +133,7 @@ namespace SMD.Implementation.Services
             this._userService = _userService;
             this._currencyRepository = _currencyRepository;
             this._couponCategoriesRepository = _couponCategoriesRepository;
+            this._userCouponViewRepository = userCouponViewRepository;
         }
 
         #endregion
@@ -167,11 +169,15 @@ namespace SMD.Implementation.Services
                 //if (campaign.EndDateTime.HasValue)
                 //    campaign.EndDateTime = campaign.EndDateTime.Value.Add(couponRepository.UserTimezoneOffSet);
             }
+
+          
+
             return new CampaignResponseModel
             {
                 Coupon = campaignEnumarable
             };
         }
+
 
 
 
@@ -396,37 +402,41 @@ namespace SMD.Implementation.Services
         }
 
 
-        public Coupon GetCouponByIdDefault(long CouponId)
+        //called from mobile apps
+        public GetCouponByID_Result GetCouponByIdDefault(long CouponId,string UserId,string Lat, string Lon)
         {
 
-            var coupon = couponRepository.GetCouponById(CouponId).SingleOrDefault();
+            return couponRepository.GetCouponByIdSP(CouponId,UserId,Lat,Lon);
 
-            if (coupon.LogoUrl == null)
-            {
-                var company = this._companyService.GetCompanyById(coupon.CompanyId.Value);
 
-                coupon.LogoUrl = "http://manage.cash4ads.com/" + company.Logo;
+            
 
-            }
-            else
-            {
-                coupon.LogoUrl = "http://manage.cash4ads.com/" + coupon.LogoUrl;
-            }
+            //if (coupon.LogoUrl == null)
+            //{
+            //    var company = this._companyService.GetCompanyById(coupon.CompanyId.Value);
 
-            coupon.DaysLeft =Convert.ToInt32( (new DateTime(coupon.CouponActiveYear.Value, coupon.CouponActiveMonth.Value, DateTime.DaysInMonth(coupon.CouponActiveYear.Value, coupon.CouponActiveMonth.Value)) - DateTime.Today).TotalDays);
+            //    coupon.LogoUrl = "http://manage.cash4ads.com/" + company.Logo;
+
+            //}
+            //else
+            //{
+            //    coupon.LogoUrl = "http://manage.cash4ads.com/" + coupon.LogoUrl;
+            //}
+
+            //coupon.DaysLeft = Convert.ToInt32( (new DateTime(coupon.CouponActiveYear.Value, coupon.CouponActiveMonth.Value, DateTime.DaysInMonth(coupon.CouponActiveYear.Value, coupon.CouponActiveMonth.Value)) - DateTime.Today).TotalDays);
 
 
             //get the currency and its exchange rate.
-            var currency = _currencyRepository.Find(coupon.CurrencyId.Value);
+            //var currency = _currencyRepository.Find(coupon.CurrencyId.Value);
 
-            double swapcost = (coupon.Savings.Value / currency.SMDCreditRatio.Value) / 100;
+            //double swapcost = (coupon.Savings.Value / currency.SMDCreditRatio.Value) / 100;
 
-            coupon.SwapCost = swapcost > 0.50 ? swapcost : 0.50;
+            //coupon.SwapCost = swapcost > 0.50 ? swapcost * 100 : 0.50 * 100;
 
             //checking if its already flagged by user or not.
 
-
-            return coupon;
+            
+          
 
 
         }

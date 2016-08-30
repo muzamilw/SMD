@@ -41,6 +41,10 @@ namespace DomainModelProject
         public Nullable<int> CompanyId { get; set; }
         public Nullable<int> AnswerNeeded { get; set; }
         public Nullable<int> AsnswerCount { get; set; }
+        public Nullable<System.DateTime> SubmissionDateTime { get; set; }
+        public Nullable<int> AgeRangeStart { get; set; }
+        public Nullable<int> AgeRangeEnd { get; set; }
+        public Nullable<int> Gender { get; set; }
     
         public virtual ICollection<AdCampaignTargetCriteria> AdCampaignTargetCriterias { get; set; }
         public virtual ICollection<ProfileQuestionAnswer> ProfileQuestionAnswers { get; set; }

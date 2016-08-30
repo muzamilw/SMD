@@ -24,5 +24,8 @@ namespace DomainModelProject
         public Nullable<int> CouponActiveMonth { get; set; }
         public Nullable<int> CouponActiveYear { get; set; }
         public Nullable<int> TotalItems { get; set; }
+        public Nullable<System.DateTime> eod { get; set; }
+        public Nullable<System.DateTime> strt { get; set; }
+        public Nullable<double> distance { get; set; }
     }
 }
