@@ -752,13 +752,16 @@ else
     var bannerImage3 = "";
     var mode = 1;
     function changeIframeSrc(mode1) {
-        $("#iframe").attr("src", "/DamImages?mode=" + mode1);
         mode = mode1;
+        if (mode1 != 1)
+            mode1 = 2;
+        $("#iframe").attr("src", "/DamImages?mode=" + mode1);
+        
         console.log(mode);
     }
     function iframeLoaded() {
         var iframeBody = $('body', $('#iframe')[0].contentWindow.document);
-        $(iframeBody).on('click', 'img', function (event) {
+        $(iframeBody).on('click', '.damImgContainer img', function (event) {
             console.log(mode);
             if (mode == 1) {
                 $("#imgLogo").attr("src", this.src).change();

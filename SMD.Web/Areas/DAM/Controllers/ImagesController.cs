@@ -71,19 +71,25 @@ namespace SMD.MIS.Areas.DAM.Controllers
         {
            
                 //Prepare the needed variables
-                Bitmap original = null;
+               // Bitmap original = null;
                 var name = "newimagefile";
                 var errorField = string.Empty;
 
                 
                     errorField = "File";
-                    name = Path.GetFileNameWithoutExtension(model.File.FileName);
-                    original = Bitmap.FromStream(model.File.InputStream) as Bitmap;
+                    name = string.Format("text-{0:yyyy-MM-dd_hh-mm-ss-tt}", DateTime.Now);
+                   // original = Bitmap.FromStream(model.File.InputStream) as Bitmap;
                     if (!Directory.Exists(Server.MapPath("~/SMD_Content/DamImages/" + model.CompanyId + "/" + model.mode + "/")))
                         Directory.CreateDirectory(Server.MapPath("~/SMD_Content/DamImages/" + model.CompanyId + "/" + model.mode + "/"));
                     var fn = Server.MapPath("~/SMD_Content/DamImages/" + model.CompanyId + "/" + model.mode + "/" + name + ".png");
-                    original.Save(fn, System.Drawing.Imaging.ImageFormat.Png);
-                    
+                   // original.Save(fn, System.Drawing.Imaging.ImageFormat.Png);
+                    if (!String.IsNullOrEmpty(model.bytes))
+                    {
+                        string base64 = model.bytes.Substring(model.bytes.IndexOf(',') + 1);
+                        base64 = base64.Trim('\0');
+                        byte[] data = Convert.FromBase64String(base64);
+                        System.IO.File.WriteAllBytes(fn, data);
+                    }
                     DamImage damImg = new DamImage();
                     damImg.CompanyId = model.CompanyId;
                     damImg.ImageCategory = model.mode;
