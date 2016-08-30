@@ -64,10 +64,10 @@
                 <div style="display:inline-block;margin-top:20px;">
                     <div class="pull-left" style="width:100px;height:50px;background-color:white;"><img style="width:100px;height:50px;" src="~/@CompanyLogo" /></div>
                     <div class="pull-left" style="color:white;margin-left:10px;">
-                        <p style="box-shadow: inset 0 0px 0 white, inset 0 -1px 0 white;margin-bottom:3px;display:inline-block">
-                            Dashboard for
+                        <p style="box-shadow: inset 0 0px 0 white, inset 0 -1px 0 white;margin-bottom:3px;display:inline-block;font-size:11px;">
+                            Advertiser Dashboard for
                         </p>
-                        <p style="font-size:24px;">@CompanyName</p>
+                        <p style="font-size:16px;">@CompanyName</p>
                     </div>
                 </div>
                 <div class="nav-no-collapse navbar-left pull-left hidden-sm hidden-xs" style="margin-top:23px;">
@@ -122,13 +122,14 @@
                                 <span class="hidden-xs">
                                     @if (User != null && User.Identity != null)
                                     {
-                                        @User.Identity.Name  @RoleName
+                                        @User.Identity.Name  
                                     }
                                 </span> <b class="caret"></b>
                                 <div class="user-positioner" style="position:fixed;">
                                 </div>
                             </a>
                             <ul class="dropdown-menu loginMenu">
+                                <li><a href="">Role : @RoleName</a></li>
                                 @*<li><a href="">Ad Campaigns</a></li>
                                 <li class="inlineMenuItem" style="display:none;"><a href="~/Ads/Ads">&nbsp;&nbsp;Create Ad Campaigns</a></li>
                                 <li class="inlineMenuItem"><a href="~/Ads/Ads">&nbsp;&nbsp;View Ad Campaigns</a></li>

@@ -5476,13 +5476,13 @@ color:red !important;
 .cashbeta{
         background-image: url(/Images/beta.jpg);
     background-repeat: no-repeat;
-    background-size: 63%;
-    margin-top: 25px;
+    background-size: 47%;
+    margin-top: 35px;
     margin-left: auto;
     width: 72px;
     height: 18px;
     position: absolute;
-    left: 267px;
+    left: 191px;
     right: 0;
     margin-right: auto;
 }

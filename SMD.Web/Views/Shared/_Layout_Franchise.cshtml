@@ -87,13 +87,14 @@
                                 <span class="hidden-xs">
                                     @if (User != null && User.Identity != null)
                                     {
-                                        @User.Identity.Name  @RoleName
+                                        @User.Identity.Name
                                     }
                                 </span> <b class="caret"></b>
                                 <div class="user-positioner" style="position:fixed;">
                                 </div>
                             </a>
                             <ul class="dropdown-menu loginMenu">
+                                <li><a href="">Role : @RoleName</a></li>
                                 <li><a href="">Approve/Reject </a></li>
                                 <li class="inlineMenuItem"><a href="~/Franchise/Dashboard/AddAproval">Approve Campaigns</a></li>
                                 <li class="inlineMenuItem"><a href="~/Franchise/Dashboard/CouponsAproval">Approve Coupons</a></li>
