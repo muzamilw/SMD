@@ -1063,12 +1063,7 @@ define("survey/survey.viewModel",
                         if (selectedQuestion().SQID() > 0)
                             return true;
                         errorList.removeAll();
-                        if (selectedQuestion().LeftPictureBytes() == "" || selectedQuestion().LeftPictureBytes() == null) {
-                            errorList.push({ name: "Please select left survey answer.", element: "" });
-                        }
-                        if (selectedQuestion().RightPictureBytes() == "" || selectedQuestion().RightPictureBytes() == null) {
-                            errorList.push({ name: "Please select right survey answer.", element: "" });
-                        }
+                        
 
                         if (errorList() == null || errorList().length == 0) {
                             return true;
