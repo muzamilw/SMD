@@ -1,4 +1,5 @@
-﻿using SMD.Models.DomainModels;
+﻿using SMD.Models.Common;
+using SMD.Models.DomainModels;
 using System.Collections.Generic;
 
 namespace SMD.Models.ResponseModels
@@ -13,6 +14,7 @@ namespace SMD.Models.ResponseModels
         ///  Profile Questions List
         /// </summary>
         public IEnumerable<ProfileQuestion> ProfileQuestions { get; set; }
+        public UserBaseData objBaseData { get; set; }
         public IEnumerable<Industry> Professions { get; set; }
         public IEnumerable<Country> Countries { get; set; }
         /// <summary>
@@ -25,10 +27,12 @@ namespace SMD.Models.ResponseModels
         /// <summary>
         /// Education
         /// </summary>
+        /// 
         public IEnumerable<Education> Education { get; set; }
         /// <summary>
         /// Total Count of  Profile Questions
         /// </summary>
+        /// 
         public int TotalCount { get; set; }
         #endregion
     }

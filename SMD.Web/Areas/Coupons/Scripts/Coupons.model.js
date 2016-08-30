@@ -5,7 +5,7 @@
             HighlightLine5, HowToRedeemLine1, HowToRedeemLine2, HowToRedeemLine3, HowToRedeemLine4, HowToRedeemLine5, LanguageId, LocationBranchId, LocationCity, LocationLAT,
             LocationLine1, LocationLine2, LocationLON, LocationPhone, LocationState, LocationTitle, LocationZipCode, LogoUrl, ModifiedBy, ModifiedDateTime, Price, RejectedBy,
             Rejecteddatetime, RejectedReason, Savings, SearchKeywords, Status, SwapCost, UserId, CouponTitle, CouponExpirydate, CouponQtyPerUser, CouponId, couponImage1, CouponImage2, CouponImage3,
-            CurrencyId, CouponListingMode, CouponActiveMonth, CouponActiveYear, CouponRedeemedCount, CouponViewCount, CouponIssuedCount
+            CurrencyId, CouponListingMode, CouponActiveMonth, CouponActiveYear, CouponRedeemedCount, CouponViewCount, CouponIssuedCount, SubmissionDateTime
           ) {
           var
               //type and userID will be set on server sside
@@ -20,6 +20,7 @@
 
                   return getMonthName(CouponActiveMonth());
               }),
+              SubmissionDateTime = ko.observable(SubmissionDateTime),
               CouponActiveYear = ko.observable(CouponActiveYear),
               CouponExpirydate = ko.observable((CouponExpirydate !== null && CouponExpirydate !== undefined) ? moment(CouponExpirydate).toDate() : undefined),//ko.observable(),
               CouponId = ko.observable(CouponId),
@@ -89,7 +90,7 @@
                  Archived : (Archived),
                  CompanyId : (CompanyId),
                  CouponActiveMonth: (CouponActiveMonth),
-               
+                 SubmissionDateTime:SubmissionDateTime,
                  CouponActiveYear : (CouponActiveYear),
                  CouponExpirydate : (CouponExpirydate),
                  CouponId : (CouponId),
@@ -184,6 +185,7 @@
                       CouponTitle: CouponTitle(),
                       CouponViewCount: CouponViewCount(),
                       CreatedBy: CreatedBy(),
+                      SubmissionDateTime:SubmissionDateTime(),
                       CreatedDateTime: CreatedDateTime(),
                       CurrencyId: CurrencyId(),
                       FinePrintLine1: FinePrintLine1(),
@@ -298,6 +300,7 @@
               hasChanges: hasChanges,
               convertToServerData: convertToServerData,
               CouponCategories: CouponCategories,
+              SubmissionDateTime: (SubmissionDateTime)
           };
       };
 
@@ -312,7 +315,7 @@
             source.LocationLine1, source.LocationLine2, source.LocationLON, source.LocationPhone, source.LocationState,
             source.LocationTitle, source.LocationZipCode, "/" + source.LogoUrl, source.ModifiedBy, source.ModifiedDateTime, source.Price, source.RejectedBy,
             source.Rejecteddatetime, source.RejectedReason, source.Savings, source.SearchKeywords, source.Status, source.SwapCost, source.UserId,source.CouponTitle,source.CouponExpirydate,
-            source.CouponQtyPerUser, source.CouponId, source.couponImage1, source.CouponImage2, source.CouponImage3, source.CurrencyId, source.CouponListingMode, source.CouponActiveMonth, source.CouponActiveYear, source.CouponRedeemedCount, source.CouponViewCount, source.CouponIssuedCount
+            source.CouponQtyPerUser, source.CouponId, source.couponImage1, source.CouponImage2, source.CouponImage3, source.CurrencyId, source.CouponListingMode, source.CouponActiveMonth, source.CouponActiveYear, source.CouponRedeemedCount, source.CouponViewCount, source.CouponIssuedCount,source.SubmissionDateTime
             );
         _.each(source.CouponCategories, function (item) {
 
