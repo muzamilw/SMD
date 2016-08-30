@@ -2866,6 +2866,10 @@
       <Project>{81067904-2176-4648-87ab-014b0d76b85e}</Project>
       <Name>SMD.Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SMD.Common\SMD.Common.csproj">
+      <Project>{4ba9e712-f447-4a6b-bae6-18eeb43087c6}</Project>
+      <Name>SMD.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WebBase\SMD.WebBase.csproj">
       <Project>{bcb8bcfd-0163-430c-8088-224074d6e384}</Project>
       <Name>SMD.WebBase</Name>

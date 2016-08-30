@@ -21,6 +21,10 @@ using SMD.WebBase.Mvc;
 using SMD.Implementation.Identity;
 using SMD.Interfaces.Data;
 
+using SMD.Models.Common;
+using SMD.Common;
+
+
 namespace SMD.MIS.Controllers
 {
     public class HomeController : Controller
@@ -74,13 +78,42 @@ namespace SMD.MIS.Controllers
         /// Welcome Page
         /// </summary>
        
-        [SiteAuthorize(MisRoles = new[] { SecurityRoles.EndUser_Admin }, AccessRights = new[] { SecurityAccessRight.CanViewSuperNovaAdmin })]
+        //[SiteAuthorize(MisRoles = new[] { SecurityRoles.EndUser_Admin }, AccessRights = new[] { SecurityAccessRight.CanViewSuperNovaAdmin })]
         public ActionResult Welcome()
         {
+            IEnumerable<SmdRoleClaimValue> roleClaim = ClaimHelper.GetClaimsByType<SmdRoleClaimValue>(SmdClaimTypes.Role);
+            string RoleName = roleClaim != null && roleClaim.Any() ? roleClaim.ElementAt(0).Role : "Role Not Loaded";
 
+             
+            if (RoleName.StartsWith("Franchise"))
+                return RedirectToLocal("/Franchise/Dashboard/Index");
+
+            if (RoleName.StartsWith("Supernova"))
+               return RedirectToLocal("/Supernova/Dashboard/Index");
 
             ViewBag.isUser = true;
             return View();
+        }
+
+
+        private ActionResult RedirectToLocal(string returnUrl)
+        {
+
+            //if (UserManager.LoggedInUserRole !=  "" && UserManager.LoggedInUserRole != (string)Roles.User)
+            //{
+            if (Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+            else
+            {
+                return RedirectToAction("Welcome", "Home", new { area = "" });
+            }
+            //}
+            //else
+            //{
+            //    return RedirectToAction("Index","Ads", new { area = "Ads" });
+            //}
         }
     }
 }
