@@ -201,7 +201,7 @@ namespace SMD.Repository.Repositories
             int fromRow = (request.PageNo - 1) * request.PageSize;
             int toRow = request.PageSize;
             Expression<Func<Coupon, bool>> query =
-                c => c.Status == (Int32)AdCampaignStatus.SubmitForApproval && c.CompanyId==CompanyId;
+                c => c.Status == (Int32)AdCampaignStatus.SubmitForApproval;
 
             //if (request.ShowCoupons.HasValue && request.ShowCoupons.Value == true)
             //    query = c => c.Status == (Int32)AdCampaignStatus.SubmitForApproval;

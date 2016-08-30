@@ -675,6 +675,10 @@
     <Content Include="Areas\User\Scripts\user.model.js" />
     <Content Include="Areas\User\Scripts\user.view.js" />
     <Content Include="Areas\User\Scripts\user.viewModel.js" />
+    <Content Include="Areas\Coupons\Views\Coupons\_couponEditor.cshtml" />
+    <None Include="config\Web.connectionstrings.config">
+      <SubType>Designer</SubType>
+    </None>
     <Content Include="Content\colorpicker.css" />
     <Content Include="Content\CSS\bootstrap\bootstrap-responsive.css" />
     <Content Include="Content\CSS\bootstrap\bootstrap-responsive.min.css" />
@@ -1700,7 +1704,6 @@
     <None Include="Areas\SuperNova\Views\web.config" />
     <Content Include="Areas\SuperNova\Views\Dashboard\Index.cshtml" />
     <Content Include="Areas\SuperNova\Views\_ViewStart.cshtml" />
-    <None Include="config\Web.connectionstrings.config" />
     <None Include="Properties\PublishProfiles\mz profile.pubxml" />
     <None Include="Properties\PublishProfiles\SMD MIS Saqib.pubxml" />
     <None Include="Properties\PublishProfiles\SMD.pubxml" />

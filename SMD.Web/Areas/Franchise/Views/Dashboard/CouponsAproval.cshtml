@@ -1,9 +1,8 @@
 ﻿@{
     ViewBag.Title = "Coupons For Approval";
 }
-
 <div class="row" id="CouponsApprovalBindingSpot">
-    <div class="col-lg-12">
+    <div class="col-lg-12" data-bind="visible: !$root.isEditorVisible()">
         <div class="row">
             <div class="col-lg-12">
                 <ol class="breadcrumb">
@@ -28,67 +27,61 @@
                                         <th class="col-lg-2 th-pointer"><span id="4">Swap Cost<span></span></span> </th>
                                         <th class="col-lg-2 th-pointer"><span id="5">Submission Date<span class="icon-up"></span></span></th>
 
-
-
                                         <th class="col-lg-1">&nbsp;</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @*<!-- ko template: { name: 'adCampaignsLVTemplate' , foreach: campaigns } -->
-                                    <!-- /ko -->*@
+                                    <!-- ko template: { name: 'adCampaignsLVTemplate' , foreach: coupons } -->
+                                    <!-- /ko -->
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
-                @*<div id="pagerDivForStore" class="pull-right">
-                        <!-- ko with: pager -->
-                        @Html.Partial("~/Areas/Common/Views/Shared/_Pager.cshtml")
-                        <!-- /ko -->
-                    </div>*@
+                <div id="pagerDivForStore" class="pull-right">
+                    <!-- ko with: pager -->
+                    @Html.Partial("~/Areas/Common/Views/Shared/_Pager.cshtml")
+                    <!-- /ko -->
+                </div>
             </div>
         </div>
-
         <script id="adCampaignsLVTemplate" type="text/html">
             <tr style="cursor: pointer">
                 <td>
-                    <p></p>
+                    <p data-bind="text:submittedBy"></p>
                 </td>
                 <td>
-                    <p></p>
+                    <p data-bind="text:title"></p>
                 </td>
 
-
-
                 <td>
-                    <p </p>
+                    <p data-bind="text:category"> </p>
                 </td>
                 <td>
-                    <p></p>
+                    <p data-bind="text:swabCost"></p>
                 </td>
                 <td>
-                    <p></p>
-                    <p>Coupon</p>
+                    <p data-bind="text:submissionDate"></p>
+                    @*<p>Coupon</p>*@
                 </td>
                 <td>
                     <a class="table-link" style="float: right">
                         <span class="fa-stack">
                             <i class="fa fa-square fa-stack-2x"></i>
-                            <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                            <i class="fa fa-pencil fa-stack-1x fa-inverse" data-bind="click:$root.onEditCoupon"></i>
                         </span>
                     </a>
                 </td>
             </tr>
         </script>
     </div>
-    @*@{
-            Html.RenderPartial("~/Areas/Ads/Views/Ads/_addEditor.cshtml");
-        }*@
+    @{
+        Html.RenderPartial("~/Areas/Coupons/Views/Coupons/_couponEditor.cshtml");
+    }
 </div>
-
-<!-- ko stopBinding: true -->
-@Html.Partial("~/Areas/Common/Views/Shared/_ConfirmationDialog.cshtml")
-<!-- /ko -->
+@*<!-- ko stopBinding: true -->
+    @Html.Partial("~/Areas/Common/Views/Shared/_ConfirmationDialog.cshtml")
+    <!-- /ko -->*@
 @section Scripts{
     <script type="text/javascript">
         require(["FranchiseDashboard/Coupons.view", "common/confirmation.view"]);
