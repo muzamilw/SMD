@@ -1,14 +1,17 @@
 ﻿using AutoMapper;
 using SMD.Interfaces.Services;
 using SMD.MIS.Areas.Api.Models;
+using SMD.Models.Common;
+using SMD.Models.DomainModels;
 using SMD.Models.RequestModels;
+using SMD.Models.ResponseModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web;
 using System.Web.Http;
-using ApiModel = SMD.MIS.Areas.Api.Models;
 using DomainModel = SMD.Models.ResponseModels;
 
 namespace SMD.MIS.Areas.Api.Controllers
@@ -29,11 +32,28 @@ namespace SMD.MIS.Areas.Api.Controllers
 
         #region Methods
       
-        public AddCouponsResponseModelForApproval Get([FromUri] GetPagedListRequest request)
+        public AddCouponsResponseModelForApproval Get([FromUri]GetPagedListRequest request)
         {
-            Mapper.Initialize(cfg => cfg.CreateMap<DomainModel.CouponsResponseModelForApproval, ApiModel.AddCouponsResponseModelForApproval>());
+            
+            Mapper.Initialize(cfg => cfg.CreateMap<SMD.Models.DomainModels.Coupon, CouponsApproval >());
             var obj = _couponService.GetAdCampaignForAproval(request);
-            return Mapper.Map<DomainModel.CouponsResponseModelForApproval, ApiModel.AddCouponsResponseModelForApproval>(obj);
+
+           var retobj =  new AddCouponsResponseModelForApproval();
+
+          
+            foreach (var item in obj.Coupons)
+            {
+
+                retobj.Coupons.Add(Mapper.Map<SMD.Models.DomainModels.Coupon, CouponsApproval>(item));
+            }
+
+
+            retobj.TotalCount = obj.TotalCount;
+
+            return retobj;
+           
+
+            
         }
             
        

@@ -378,7 +378,7 @@
         };
   };
   var // ReSharper disable InconsistentNaming
- ProfileQuestionTargetCriteria = function (ID, SQID, Type, PQID, PQAnswerID, LinkedSQID, LinkedSqAnswer, IncludeorExclude, LanguageID, questionString, answerString, Language, surveyQuestLeftImageSrc, surveyQuestRightImageSrc, IndustryID, Industry, EducationId, Education) {
+ ProfileQuestionTargetCriteria = function (ID, PQID, Type, PQID, PQAnswerID, LinkedSQID, LinkedSqAnswer, IncludeorExclude, LanguageID, questionString, answerString, Language, surveyQuestLeftImageSrc, surveyQuestRightImageSrc, IndustryID, Industry, EducationId, Education) {
      var
          //type and userID will be set on server side
          ID = ko.observable(ID),

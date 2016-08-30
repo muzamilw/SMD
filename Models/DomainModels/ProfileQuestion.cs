@@ -29,6 +29,12 @@ namespace SMD.Models.DomainModels
         public Nullable<int> AnswerNeeded { get; set; }
         public Nullable<int> AsnswerCount { get; set; }
 
+
+          public Nullable<int> AgeRangeStart { get; set; }
+          public Nullable<int> AgeRangeEnd { get; set; }
+          public Nullable<int> Gender { get; set; }
+
+
         public virtual ICollection<ProfileQuestionAnswer> ProfileQuestionAnswers { get; set; }
         public virtual ICollection<ProfileQuestionUserAnswer> ProfileQuestionUserAnswers { get; set; }
         public virtual ProfileQuestionGroup ProfileQuestionGroup { get; set; }

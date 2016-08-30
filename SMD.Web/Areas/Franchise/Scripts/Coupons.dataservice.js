@@ -13,7 +13,7 @@ define("FranchiseDashboard/Coupons.dataservice", function () {
 
                     //Search AdCampaigns
                     amplify.request.define('getCouponsForApproval', 'ajax', {
-                        url: '/Api/CouponApprovalController',
+                        url: '/Api/CouponApproval',
                         dataType: 'json',
                         type: 'GET'
                     });

@@ -60,6 +60,11 @@ namespace SMD.Models.IdentityModels
         public virtual Company Company { get; set; }
         public virtual Industry Industry { get; set; }
         public virtual Language Language { get; set; }
+
+        public Nullable<int> DevicePlatform { get; set; }
+      
+        
+
         public virtual ICollection<UserLogin> UserLogins { get; set; }
         public virtual ICollection<Role> Roles { get; set; }
         public virtual ICollection<UserClaim> Claims { get; set; }
@@ -86,7 +91,7 @@ namespace SMD.Models.IdentityModels
         public string CountryName { get; set; }
         [NotMapped]
         public string CityName { get; set; }
-        public int? DevicePlatform { get; set; }
+        
         #endregion
 
         #region Public

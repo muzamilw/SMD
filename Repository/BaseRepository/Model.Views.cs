@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySetsE4A4745811927B3F278416233D1EA389878F1ED728CBADE4F28A8BBE4722FAAE))]
+[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySetsC2FEDD4D8E68D5D46435284B860904877276CBDB05426032EF99EDC9A6762011))]
 
 namespace Edm_EntityMappingGeneratedViews
 {
@@ -17,18 +17,18 @@ namespace Edm_EntityMappingGeneratedViews
     /// <Summary>
     /// The type contains views for EntitySets and AssociationSets that were generated at design time.
     /// </Summary>
-    public sealed class ViewsForBaseEntitySetsE4A4745811927B3F278416233D1EA389878F1ED728CBADE4F28A8BBE4722FAAE : System.Data.Mapping.EntityViewContainer
+    public sealed class ViewsForBaseEntitySetsC2FEDD4D8E68D5D46435284B860904877276CBDB05426032EF99EDC9A6762011 : System.Data.Mapping.EntityViewContainer
     {
         
         /// <Summary>
         /// The constructor stores the views for the extents and also the hash values generated based on the metadata and mapping closure and views.
         /// </Summary>
-        public ViewsForBaseEntitySetsE4A4745811927B3F278416233D1EA389878F1ED728CBADE4F28A8BBE4722FAAE()
+        public ViewsForBaseEntitySetsC2FEDD4D8E68D5D46435284B860904877276CBDB05426032EF99EDC9A6762011()
         {
             this.EdmEntityContainerName = "BaseDbContext";
             this.StoreEntityContainerName = "SMDModelStoreContainer";
-            this.HashOverMappingClosure = "635b6cf8c08758296ecd03c2d8037ff3f355f8a079a30239f70304c6c81066ee";
-            this.HashOverAllExtentViews = "cad452d78372f6cd94eb015887a0decede67a7c595b50485309c68eb65c4864b";
+            this.HashOverMappingClosure = "c6c3039a2ae6fff435624a552e52745d36d894da2988ec728b5cdbdfb51f733b";
+            this.HashOverAllExtentViews = "dfed812a2f819e8bc9c5f97601051286b486f408a93b1bfdcf06ac60eedbcce2";
             this.ViewCount = 104;
         }
         
@@ -496,7 +496,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// </Summary>
         private System.Collections.Generic.KeyValuePair<string, string> GetView2()
         {
-            System.Text.StringBuilder viewString = new System.Text.StringBuilder(2055);
+            System.Text.StringBuilder viewString = new System.Text.StringBuilder(2322);
             viewString.Append("\r\n    SELECT VALUE -- Constructing ProfileQuestion\r\n        [SMDModel.Store.Prof");
             viewString.Append("ileQuestion](T1.ProfileQuestion_PQID, T1.ProfileQuestion_LanguageID, T1.ProfileQ");
             viewString.Append("uestion_CountryID, T1.ProfileQuestion_ProfileGroupID, T1.ProfileQuestion_Priorit");
@@ -506,23 +506,27 @@ namespace Edm_EntityMappingGeneratedViews
             viewString.Append("ifiedBy, T1.ProfileQuestion_HasLinkedQuestions, T1.ProfileQuestion_PenalityForNo");
             viewString.Append("tAnswering, T1.ProfileQuestion_Status, T1.ProfileQuestion_CompanyId, T1.ProfileQ");
             viewString.Append("uestion_AnswerNeeded, T1.ProfileQuestion_AsnswerCount, T1.ProfileQuestion_Submis");
-            viewString.Append("sionDateTime)\r\n    FROM (\r\n        SELECT \r\n            T.PqId AS ProfileQuestio");
-            viewString.Append("n_PQID, \r\n            T.LanguageId AS ProfileQuestion_LanguageID, \r\n            ");
-            viewString.Append("T.CountryId AS ProfileQuestion_CountryID, \r\n            T.ProfileGroupId AS Prof");
-            viewString.Append("ileQuestion_ProfileGroupID, \r\n            T.Priority AS ProfileQuestion_Priority");
-            viewString.Append(", \r\n            T.Type AS ProfileQuestion_Type, \r\n            T.Question AS Prof");
-            viewString.Append("ileQuestion_Question, \r\n            T.RefreshTime AS ProfileQuestion_RefreshTime");
-            viewString.Append(", \r\n            T.SkippedCount AS ProfileQuestion_SkippedCount, \r\n            T.");
-            viewString.Append("CreationDate AS ProfileQuestion_CreationDate, \r\n            T.CreatedBy AS Profi");
-            viewString.Append("leQuestion_CreatedBy, \r\n            T.ModifiedDate AS ProfileQuestion_ModifiedDa");
-            viewString.Append("te, \r\n            T.ModifiedBy AS ProfileQuestion_ModifiedBy, \r\n            T.Ha");
-            viewString.Append("sLinkedQuestions AS ProfileQuestion_HasLinkedQuestions, \r\n            T.Penality");
-            viewString.Append("ForNotAnswering AS ProfileQuestion_PenalityForNotAnswering, \r\n            T.Stat");
-            viewString.Append("us AS ProfileQuestion_Status, \r\n            T.CompanyId AS ProfileQuestion_Compa");
-            viewString.Append("nyId, \r\n            T.AnswerNeeded AS ProfileQuestion_AnswerNeeded, \r\n          ");
-            viewString.Append("  T.AsnswerCount AS ProfileQuestion_AsnswerCount, \r\n            T.SubmissionDate");
-            viewString.Append("Time AS ProfileQuestion_SubmissionDateTime, \r\n            True AS _from0\r\n      ");
-            viewString.Append("  FROM BaseDbContext.ProfileQuestions AS T\r\n    ) AS T1");
+            viewString.Append("sionDateTime, T1.ProfileQuestion_AgeRangeStart, T1.ProfileQuestion_AgeRangeEnd, ");
+            viewString.Append("T1.ProfileQuestion_Gender)\r\n    FROM (\r\n        SELECT \r\n            T.PqId AS P");
+            viewString.Append("rofileQuestion_PQID, \r\n            T.LanguageId AS ProfileQuestion_LanguageID, \r");
+            viewString.Append("\n            T.CountryId AS ProfileQuestion_CountryID, \r\n            T.ProfileGr");
+            viewString.Append("oupId AS ProfileQuestion_ProfileGroupID, \r\n            T.Priority AS ProfileQues");
+            viewString.Append("tion_Priority, \r\n            T.Type AS ProfileQuestion_Type, \r\n            T.Que");
+            viewString.Append("stion AS ProfileQuestion_Question, \r\n            T.RefreshTime AS ProfileQuestio");
+            viewString.Append("n_RefreshTime, \r\n            T.SkippedCount AS ProfileQuestion_SkippedCount, \r\n ");
+            viewString.Append("           T.CreationDate AS ProfileQuestion_CreationDate, \r\n            T.Creat");
+            viewString.Append("edBy AS ProfileQuestion_CreatedBy, \r\n            T.ModifiedDate AS ProfileQuesti");
+            viewString.Append("on_ModifiedDate, \r\n            T.ModifiedBy AS ProfileQuestion_ModifiedBy, \r\n   ");
+            viewString.Append("         T.HasLinkedQuestions AS ProfileQuestion_HasLinkedQuestions, \r\n         ");
+            viewString.Append("   T.PenalityForNotAnswering AS ProfileQuestion_PenalityForNotAnswering, \r\n     ");
+            viewString.Append("       T.Status AS ProfileQuestion_Status, \r\n            T.CompanyId AS ProfileQ");
+            viewString.Append("uestion_CompanyId, \r\n            T.AnswerNeeded AS ProfileQuestion_AnswerNeeded,");
+            viewString.Append(" \r\n            T.AsnswerCount AS ProfileQuestion_AsnswerCount, \r\n            T.S");
+            viewString.Append("ubmissionDateTime AS ProfileQuestion_SubmissionDateTime, \r\n            T.AgeRang");
+            viewString.Append("eStart AS ProfileQuestion_AgeRangeStart, \r\n            T.AgeRangeEnd AS ProfileQ");
+            viewString.Append("uestion_AgeRangeEnd, \r\n            T.Gender AS ProfileQuestion_Gender, \r\n       ");
+            viewString.Append("     True AS _from0\r\n        FROM BaseDbContext.ProfileQuestions AS T\r\n    ) AS ");
+            viewString.Append("T1");
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.ProfileQuestion", viewString.ToString());
         }
         
@@ -1641,7 +1645,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// </Summary>
         private System.Collections.Generic.KeyValuePair<string, string> GetView42()
         {
-            System.Text.StringBuilder viewString = new System.Text.StringBuilder(2062);
+            System.Text.StringBuilder viewString = new System.Text.StringBuilder(2329);
             viewString.Append("\r\n    SELECT VALUE -- Constructing ProfileQuestions\r\n        [DomainModels.Profi");
             viewString.Append("leQuestion](T1.ProfileQuestion_PqId, T1.ProfileQuestion_LanguageId, T1.ProfileQu");
             viewString.Append("estion_CountryId, T1.ProfileQuestion_ProfileGroupId, T1.ProfileQuestion_Priority");
@@ -1651,23 +1655,27 @@ namespace Edm_EntityMappingGeneratedViews
             viewString.Append("fiedBy, T1.ProfileQuestion_HasLinkedQuestions, T1.ProfileQuestion_PenalityForNot");
             viewString.Append("Answering, T1.ProfileQuestion_Status, T1.ProfileQuestion_CompanyId, T1.ProfileQu");
             viewString.Append("estion_AnswerNeeded, T1.ProfileQuestion_AsnswerCount, T1.ProfileQuestion_Submiss");
-            viewString.Append("ionDateTime)\r\n    FROM (\r\n        SELECT \r\n            T.PQID AS ProfileQuestion");
-            viewString.Append("_PqId, \r\n            T.LanguageID AS ProfileQuestion_LanguageId, \r\n            T");
-            viewString.Append(".CountryID AS ProfileQuestion_CountryId, \r\n            T.ProfileGroupID AS Profi");
-            viewString.Append("leQuestion_ProfileGroupId, \r\n            T.Priority AS ProfileQuestion_Priority,");
-            viewString.Append(" \r\n            T.Type AS ProfileQuestion_Type, \r\n            T.Question AS Profi");
-            viewString.Append("leQuestion_Question, \r\n            T.RefreshTime AS ProfileQuestion_RefreshTime,");
-            viewString.Append(" \r\n            T.SkippedCount AS ProfileQuestion_SkippedCount, \r\n            T.C");
-            viewString.Append("reationDate AS ProfileQuestion_CreationDate, \r\n            T.CreatedBy AS Profil");
-            viewString.Append("eQuestion_CreatedBy, \r\n            T.ModifiedDate AS ProfileQuestion_ModifiedDat");
-            viewString.Append("e, \r\n            T.ModifiedBy AS ProfileQuestion_ModifiedBy, \r\n            T.Has");
-            viewString.Append("LinkedQuestions AS ProfileQuestion_HasLinkedQuestions, \r\n            T.PenalityF");
-            viewString.Append("orNotAnswering AS ProfileQuestion_PenalityForNotAnswering, \r\n            T.Statu");
-            viewString.Append("s AS ProfileQuestion_Status, \r\n            T.CompanyId AS ProfileQuestion_Compan");
-            viewString.Append("yId, \r\n            T.AnswerNeeded AS ProfileQuestion_AnswerNeeded, \r\n           ");
-            viewString.Append(" T.AsnswerCount AS ProfileQuestion_AsnswerCount, \r\n            T.SubmissionDateT");
-            viewString.Append("ime AS ProfileQuestion_SubmissionDateTime, \r\n            True AS _from0\r\n       ");
-            viewString.Append(" FROM SMDModelStoreContainer.ProfileQuestion AS T\r\n    ) AS T1");
+            viewString.Append("ionDateTime, T1.ProfileQuestion_AgeRangeStart, T1.ProfileQuestion_AgeRangeEnd, T");
+            viewString.Append("1.ProfileQuestion_Gender)\r\n    FROM (\r\n        SELECT \r\n            T.PQID AS Pr");
+            viewString.Append("ofileQuestion_PqId, \r\n            T.LanguageID AS ProfileQuestion_LanguageId, \r\n");
+            viewString.Append("            T.CountryID AS ProfileQuestion_CountryId, \r\n            T.ProfileGro");
+            viewString.Append("upID AS ProfileQuestion_ProfileGroupId, \r\n            T.Priority AS ProfileQuest");
+            viewString.Append("ion_Priority, \r\n            T.Type AS ProfileQuestion_Type, \r\n            T.Ques");
+            viewString.Append("tion AS ProfileQuestion_Question, \r\n            T.RefreshTime AS ProfileQuestion");
+            viewString.Append("_RefreshTime, \r\n            T.SkippedCount AS ProfileQuestion_SkippedCount, \r\n  ");
+            viewString.Append("          T.CreationDate AS ProfileQuestion_CreationDate, \r\n            T.Create");
+            viewString.Append("dBy AS ProfileQuestion_CreatedBy, \r\n            T.ModifiedDate AS ProfileQuestio");
+            viewString.Append("n_ModifiedDate, \r\n            T.ModifiedBy AS ProfileQuestion_ModifiedBy, \r\n    ");
+            viewString.Append("        T.HasLinkedQuestions AS ProfileQuestion_HasLinkedQuestions, \r\n          ");
+            viewString.Append("  T.PenalityForNotAnswering AS ProfileQuestion_PenalityForNotAnswering, \r\n      ");
+            viewString.Append("      T.Status AS ProfileQuestion_Status, \r\n            T.CompanyId AS ProfileQu");
+            viewString.Append("estion_CompanyId, \r\n            T.AnswerNeeded AS ProfileQuestion_AnswerNeeded, ");
+            viewString.Append("\r\n            T.AsnswerCount AS ProfileQuestion_AsnswerCount, \r\n            T.Su");
+            viewString.Append("bmissionDateTime AS ProfileQuestion_SubmissionDateTime, \r\n            T.AgeRange");
+            viewString.Append("Start AS ProfileQuestion_AgeRangeStart, \r\n            T.AgeRangeEnd AS ProfileQu");
+            viewString.Append("estion_AgeRangeEnd, \r\n            T.Gender AS ProfileQuestion_Gender, \r\n        ");
+            viewString.Append("    True AS _from0\r\n        FROM SMDModelStoreContainer.ProfileQuestion AS T\r\n  ");
+            viewString.Append("  ) AS T1");
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.ProfileQuestions", viewString.ToString());
         }
         

@@ -609,7 +609,7 @@ namespace SMD.Implementation.Services
             int rowCount;
             return new CouponsResponseModelForApproval
             {
-                Coupons = couponRepository.GetCouponsForApproval(request, out rowCount),
+                Coupons = couponRepository.GetCouponsForApproval(request, out rowCount).ToList(),
                 TotalCount = rowCount
             };
         }

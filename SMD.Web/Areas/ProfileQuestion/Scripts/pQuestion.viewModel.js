@@ -25,13 +25,17 @@ define("pQuestion/pQuestion.viewModel",
                     AgeRangeStart=ko.observable(13),
                     SelectedPvcVal = ko.observable(0),
                     Gender = ko.observable('1'),
+                    totalAudience = ko.observable(0),
+                    audienceReachMode = ko.observable(1),
                     selectedLocationLong = ko.observable(0),
                     selectedLocationLat = ko.observable(0),
                     genderppc = ko.observable(),
                     selectedLocation = ko.observable(),
                     selectedLocationRadius = ko.observable(),
+                    selectedIndustryIncludeExclude = ko.observable(true),
                     HeaderText = ko.observable(),
                     StatusText = ko.observable(),
+                    reachedAudience = ko.observable(0),
                     priorityList = ko.observableArray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]),
                     selectedLocationIncludeExclude = ko.observable(true),
                     isShowArchiveBtn = ko.observable(true),
@@ -223,21 +227,16 @@ define("pQuestion/pQuestion.viewModel",
                         selectedQuestion().ProfileQuestionTargetCriteria([]);
                         selectedQuestion().ProfileQuestionTargetLocation([]);
 
-                        getAudienceCount();
-
-                        //buildParentSQList();
-
-                        bindAudienceReachCount();
-                        selectedQuestion().ProfileQuestionTargetCriteria([]);
-                        selectedQuestion().ProfileQuestionTargetLocation([]);
-                        selectedQuestion(new model.question());
                         // Set Country Id and Language Id for now as UK and English
                         selectedQuestion().countryId(214);
                         selectedQuestion().languageId(41);
                         selectedQuestion().penalityForNotAnswering(0);
                         previewScreenNumber(1);
-                     
-                        
+                        getAudienceCount();
+                        //buildParentSQList();
+                        bindAudienceReachCount();
+                        selectedQuestion().ProfileQuestionTargetCriteria([]);
+                        selectedQuestion().ProfileQuestionTargetLocation([]);
                         view.initializeTypeahead();
                         isEditorVisible(true);
                     },
@@ -337,6 +336,7 @@ define("pQuestion/pQuestion.viewModel",
                            });
                     },
                             addNewProfessionCriteria = function () {
+                               
                                 if ($("#ddpIndustory").val() != "") {
 
                                     var matchedprofessionRec = ko.utils.arrayFirst(professions(), function (arrayitem) {
@@ -349,12 +349,13 @@ define("pQuestion/pQuestion.viewModel",
                                 }
                             },
                             addIndustry = function (selected) {
+                                debugger;
                                 selectedQuestion().ProfileQuestionTargetCriteria.push(new model.ProfileQuestionTargetCriteria.Create({
                                     Industry: selected.IndustryName,
                                     IndustryId: selected.IndustryId,
                                     IncludeorExclude: parseInt(selectedIndustryIncludeExclude()),
                                     Type: 4,
-                                    SQID: selectedQuestion().SQID()
+                                    PQID: selectedQuestion().qId()
                                 }));
                                 $("#searchIndustries").val("");
                             },
@@ -765,8 +766,10 @@ define("pQuestion/pQuestion.viewModel",
                         educationIds: educationIds,
                         educationIdsExcluded: educationIdsExcluded
                     };
+                    debugger;
                     dataservice.getAudienceData(surveyData, {
                         success: function (data) {
+                            
                             reachedAudience(data.MatchingUsers);
                             totalAudience(data.AllUsers);
                             var percent = data.MatchingUsers / data.AllUsers;
@@ -797,14 +800,16 @@ define("pQuestion/pQuestion.viewModel",
                          getAudienceCount();
                      });
                      selectedQuestion().Gender.subscribe(function (value) {
+                         
                          getAudienceCount();
                      });
                      selectedQuestion().ProfileQuestionTargetLocation.subscribe(function (value) {
                          getAudienceCount();
                          // update map 
-                         buildMap();
+                       //  buildMap();
                      });
                      selectedQuestion().ProfileQuestionTargetCriteria.subscribe(function (value) {
+                         alert();
                          getAudienceCount();
                      });
                  }, buildMap = function () {
@@ -812,7 +817,7 @@ define("pQuestion/pQuestion.viewModel",
                      var initialized = false;
                      _.each(selectedQuestion().ProfileQuestionTargetLocation(), function (item) {
                          //   $(".locMap").css("display", "inline-block");
-                         clearRadiuses();
+                         //clearRadiuses();
                          if (item.CityID() == 0 || item.CityID() == null) {
                              addCountryMarker(item.Country());
                          } else {
@@ -913,7 +918,11 @@ define("pQuestion/pQuestion.viewModel",
                     selectedLocation: selectedLocation,
                     onRemoveLocation: onRemoveLocation,
                     deleteLocation: deleteLocation,
-                    ProfileQuestionList: ProfileQuestionList
+                    ProfileQuestionList: ProfileQuestionList,
+                    reachedAudience: reachedAudience,
+                    totalAudience: totalAudience,
+                    audienceReachMode: audienceReachMode,
+                    selectedIndustryIncludeExclude: selectedIndustryIncludeExclude
                 };
             })()
         };

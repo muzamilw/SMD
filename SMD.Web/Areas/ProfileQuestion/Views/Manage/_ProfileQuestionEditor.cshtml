@@ -685,13 +685,13 @@
                                 </div>
                                 <div class="col-lg-7">
                                     <div class="col-lg-2" style=" padding: 0px !important;     margin-left: 8px;">
-                                        <select class="form-control" data-bind="options: $root.ageRange, optionsText: 'text', optionsValue: 'value', value:$root.AgeRangeStart"></select>
+                                        <select class="form-control" data-bind="options: $root.ageRange, optionsText: 'text', optionsValue: 'value', value:AgeRangeStart"></select>
                                     </div>
                                     <div class="pull-left range_dash">
                                         -
                                     </div>
                                     <div class="col-lg-2" style=" padding: 0px !important;">
-                                        <select class="form-control" data-bind="options: $root.ageRange, optionsText: 'text', optionsValue: 'value', value:$root.AgeRangeEnd,validationTooltip:$root.AgeRangeEnd, validationOnElement:$root.AgeRangeEnd"></select>
+                                        <select class="form-control" data-bind="options: $root.ageRange, optionsText: 'text', optionsValue: 'value', value:AgeRangeEnd,validationTooltip:AgeRangeEnd, validationOnElement:AgeRangeEnd"></select>
                                     </div>
                                 </div>
                                 <div class="col-lg-1" style=" padding: 0px !important;       text-align: left;    font-size: 17px;    color: red;">
@@ -793,7 +793,7 @@
                                             <div class="sep-line" style="display:none;">
                                             </div>
                                             <div class="count_token_opt_prof_cnt">
-                                                <select id="ddpIndustory" class="form-control" data-bind="options: $root.professions, optionsText: 'IndustryName', optionsValue: 'IndustryId',optionsCaption: '<ALL>'"></select>
+                                                <select id="ddpIndustory" class="form-control" data-bind="options: $root.professions, optionsText: 'IndustryName', optionsValue:'IndustryId',optionsCaption: '<ALL>',event: { change: $root.addNewProfessionCriteria }"></select>
                                                 @*<input type="text" data-autocomplete="off" class="" id="searchIndustries" placeholder="Enter an industry" />*@
                                             </div>
                                             <div class="clearfix">
@@ -863,8 +863,9 @@
                         <span class="pull-right"></span>
                         <div class="clearfix"> </div>
                         <span class=" pull-left" style="color:red;">Matches profiles:</span>
-                        <span class="pull-right" style="color:red;">0</span>
+                        <span class="pull-right" style="color:red;" data-bind="text:$root.reachedAudience"></span>
                         <div class="clearfix">
+                            
                         </div>
                     </div>
                     <div class="col-xs-12" style="text-align: left;margin-bottom: 20px; padding-right:0;margin-top:20px;">

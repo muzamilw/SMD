@@ -191,6 +191,7 @@ define("survey/survey.viewModel",
                     },
                     // Add new Profile Question
                     addNewSurvey = function () {
+                        debugger;
                         selectedQuestionCountryList([]);
                         gotoScreen(1);
                         isTerminateBtnVisible(false);
@@ -209,6 +210,7 @@ define("survey/survey.viewModel",
                         selectedQuestion().SurveyQuestionTargetLocation([]);
                       
                         buildParentSQList();
+
                         getAudienceCount();
                         isEditorVisible(true);
                         canSubmitForApproval(true);
@@ -412,6 +414,7 @@ define("survey/survey.viewModel",
                         $("#searchLanguages").val("");
                     },
                      addIndustry = function (selected) {
+                         debugger;
                          selectedQuestion().SurveyQuestionTargetCriteria.push(new model.SurveyQuestionTargetCriteria.Create({
                              Industry: selected.IndustryName,
                              IndustryId: selected.IndustryId,
@@ -769,6 +772,7 @@ define("survey/survey.viewModel",
                     }
                 getAudienceCount = function () {
                     debugger;
+                    alert(selectedQuestion().AgeRangeStart());
                         var countryIds = '', cityIds = '', countryIdsExcluded = '', cityIdsExcluded = '';
                         var educationIds = '', educationIdsExcluded = '';
                         _.each(selectedQuestion().SurveyQuestionTargetLocation(), function (item) {
@@ -904,7 +908,7 @@ define("survey/survey.viewModel",
                                 }
                             }
                         });
-                        var surveyData = {
+                        var ProfileData = {
                             ageFrom: selectedQuestion().AgeRangeStart(),
                             ageTo: selectedQuestion().AgeRangeEnd(),
                             gender: selectedQuestion().Gender(),
@@ -927,7 +931,7 @@ define("survey/survey.viewModel",
                             educationIds: educationIds,
                             educationIdsExcluded: educationIdsExcluded
                         };
-                        dataservice.getAudienceData(surveyData, {
+                        dataservice.getAudienceData(ProfileData, {
                             success: function (data) {
                                 reachedAudience(data.MatchingUsers);
                                 totalAudience(data.AllUsers);
@@ -990,14 +994,18 @@ define("survey/survey.viewModel",
                          }
                      },
                     bindAudienceReachCount = function () {
-                        debugger;
-                         selectedQuestion().AgeRangeStart.subscribe(function (value) {
+                        
+                        
+                        selectedQuestion().AgeRangeStart.subscribe(function (value) {
+                            alert('agerangestart');
                              getAudienceCount();
                          });
-                         selectedQuestion().AgeRangeEnd.subscribe(function (value) {
+                        selectedQuestion().AgeRangeEnd.subscribe(function (value) {
+                            alert('agerangeend');
                              getAudienceCount();
                          });
                          selectedQuestion().Gender.subscribe(function (value) {
+                             alert();
                              getAudienceCount();
                          });
                          selectedQuestion().SurveyQuestionTargetLocation.subscribe(function (value) {
@@ -1017,6 +1025,7 @@ define("survey/survey.viewModel",
                             clearRadiuses();
                             if (item.CityID() == 0 || item.CityID() == null) {
                                 addCountryMarker(item.Country());
+                                
                             } else {
                                 if (!initialized)
                                     initializeMap( parseFloat(item.Longitude()),parseFloat(item.Latitude()));
