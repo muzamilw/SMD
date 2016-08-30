@@ -24,6 +24,7 @@ namespace DomainModelProject
             this.SurveyQuestions = new HashSet<SurveyQuestion>();
             this.SurveyQuestionTargetLocations = new HashSet<SurveyQuestionTargetLocation>();
             this.Taxes = new HashSet<Tax>();
+            this.ProfileQuestionTargetLocations = new HashSet<ProfileQuestionTargetLocation>();
         }
     
         public int CountryID { get; set; }
@@ -38,5 +39,6 @@ namespace DomainModelProject
         public virtual ICollection<SurveyQuestion> SurveyQuestions { get; set; }
         public virtual ICollection<SurveyQuestionTargetLocation> SurveyQuestionTargetLocations { get; set; }
         public virtual ICollection<Tax> Taxes { get; set; }
+        public virtual ICollection<ProfileQuestionTargetLocation> ProfileQuestionTargetLocations { get; set; }
     }
 }

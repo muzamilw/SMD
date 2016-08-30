@@ -22,6 +22,7 @@ namespace DomainModelProject
             this.SurveyQuestionTargetCriterias = new HashSet<SurveyQuestionTargetCriteria>();
             this.SurveyQuestionTargetCriterias1 = new HashSet<SurveyQuestionTargetCriteria>();
             this.SurveyQuestionTargetLocations = new HashSet<SurveyQuestionTargetLocation>();
+            this.ProfileQuestionTargetCriterias = new HashSet<ProfileQuestionTargetCriteria>();
         }
     
         public long SQID { get; set; }
@@ -71,5 +72,6 @@ namespace DomainModelProject
         public virtual ICollection<SurveyQuestionTargetCriteria> SurveyQuestionTargetCriterias { get; set; }
         public virtual ICollection<SurveyQuestionTargetCriteria> SurveyQuestionTargetCriterias1 { get; set; }
         public virtual ICollection<SurveyQuestionTargetLocation> SurveyQuestionTargetLocations { get; set; }
+        public virtual ICollection<ProfileQuestionTargetCriteria> ProfileQuestionTargetCriterias { get; set; }
     }
 }

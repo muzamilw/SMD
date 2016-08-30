@@ -83,6 +83,8 @@ namespace DomainModelProject
         public virtual DbSet<UserPurchasedCoupon> UserPurchasedCoupons { get; set; }
         public virtual DbSet<DamImage> DamImages { get; set; }
         public virtual DbSet<UserCouponView> UserCouponViews { get; set; }
+        public virtual DbSet<ProfileQuestionTargetCriteria> ProfileQuestionTargetCriterias { get; set; }
+        public virtual DbSet<ProfileQuestionTargetLocation> ProfileQuestionTargetLocations { get; set; }
     
         public virtual ObjectResult<SearchCoupons_Result> SearchCoupons(Nullable<int> categoryId, Nullable<int> type, string keywords, Nullable<int> distance, string lat, string lon, string userId, Nullable<int> fromRow, Nullable<int> toRow)
         {

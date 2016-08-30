@@ -44,6 +44,11 @@ namespace SMD.Models.DomainModels
         public virtual Company Company { get; set; }
 
         public Nullable<System.DateTime> SubmissionDateTime { get; set; }
+
+
+
+        public virtual ICollection<ProfileQuestionTargetCriteria> ProfileQuestionTargetCriterias { get; set; }
+        public virtual ICollection<ProfileQuestionTargetLocation> ProfileQuestionTargetLocations { get; set; }
         
     }
 }

@@ -20,6 +20,8 @@ namespace DomainModelProject
             this.ProfileQuestionAnswers = new HashSet<ProfileQuestionAnswer>();
             this.ProfileQuestionUserAnswers = new HashSet<ProfileQuestionUserAnswer>();
             this.SurveyQuestionTargetCriterias = new HashSet<SurveyQuestionTargetCriteria>();
+            this.ProfileQuestionTargetCriterias = new HashSet<ProfileQuestionTargetCriteria>();
+            this.ProfileQuestionTargetLocations = new HashSet<ProfileQuestionTargetLocation>();
         }
     
         public int PQID { get; set; }
@@ -52,5 +54,7 @@ namespace DomainModelProject
         public virtual ICollection<ProfileQuestionUserAnswer> ProfileQuestionUserAnswers { get; set; }
         public virtual ICollection<SurveyQuestionTargetCriteria> SurveyQuestionTargetCriterias { get; set; }
         public virtual Company Company { get; set; }
+        public virtual ICollection<ProfileQuestionTargetCriteria> ProfileQuestionTargetCriterias { get; set; }
+        public virtual ICollection<ProfileQuestionTargetLocation> ProfileQuestionTargetLocations { get; set; }
     }
 }

@@ -21,5 +21,7 @@ namespace SMD.Models.DomainModels
 
         public virtual ICollection<User> Users { get; set; }
         public virtual ICollection<Company> Companies { get; set; }
+
+        public virtual ICollection<ProfileQuestionTargetLocation> ProfileQuestionTargetLocations { get; set; }
     }
 }

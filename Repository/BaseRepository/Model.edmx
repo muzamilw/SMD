@@ -667,6 +667,33 @@
           <Property Name="LangaugeID" Type="int" />
           <Property Name="CountryID" Type="int" />
         </EntityType>
+        <EntityType Name="ProfileQuestionTargetCriteria">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PQID" Type="int" />
+          <Property Name="Type" Type="int" />
+          <Property Name="SQID" Type="int" />
+          <Property Name="PQAnswerID" Type="int" />
+          <Property Name="LinkedSQID" Type="bigint" />
+          <Property Name="LinkedSQAnswer" Type="int" />
+          <Property Name="IncludeorExclude" Type="bit" />
+          <Property Name="LanguageID" Type="int" />
+          <Property Name="IndustryID" Type="int" />
+          <Property Name="EducationID" Type="bigint" />
+        </EntityType>
+        <EntityType Name="ProfileQuestionTargetLocation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PQID" Type="int" />
+          <Property Name="CountryID" Type="int" />
+          <Property Name="CityID" Type="int" />
+          <Property Name="Radius" Type="int" />
+          <Property Name="IncludeorExclude" Type="bit" />
+        </EntityType>
         <EntityType Name="ProfileQuestionUserAnswer">
           <Key>
             <PropertyRef Name="PQUAnswerID" />
@@ -1068,18 +1095,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
             </Principal>
             <Dependent Role="AdCampaignTargetCriteria">
               <PropertyRef Name="LanguageID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_AdCampaignTargetCriteria_ProfileQuestion">
-          <End Role="ProfileQuestion" Type="Self.ProfileQuestion" Multiplicity="0..1" />
-          <End Role="AdCampaignTargetCriteria" Type="Self.AdCampaignTargetCriteria" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ProfileQuestion">
-              <PropertyRef Name="PQID" />
-            </Principal>
-            <Dependent Role="AdCampaignTargetCriteria">
-              <PropertyRef Name="PQID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1559,6 +1574,114 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ProfileQuestionTargetCriteria_Education">
+          <End Role="Education" Type="Self.Education" Multiplicity="0..1" />
+          <End Role="ProfileQuestionTargetCriteria" Type="Self.ProfileQuestionTargetCriteria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Education">
+              <PropertyRef Name="EducationId" />
+            </Principal>
+            <Dependent Role="ProfileQuestionTargetCriteria">
+              <PropertyRef Name="EducationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfileQuestionTargetCriteria_Industry">
+          <End Role="Industry" Type="Self.Industry" Multiplicity="0..1" />
+          <End Role="ProfileQuestionTargetCriteria" Type="Self.ProfileQuestionTargetCriteria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Industry">
+              <PropertyRef Name="IndustryID" />
+            </Principal>
+            <Dependent Role="ProfileQuestionTargetCriteria">
+              <PropertyRef Name="IndustryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfileQuestionTargetCriteria_Language">
+          <End Role="Language" Type="Self.Language" Multiplicity="0..1" />
+          <End Role="ProfileQuestionTargetCriteria" Type="Self.ProfileQuestionTargetCriteria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Language">
+              <PropertyRef Name="LanguageID" />
+            </Principal>
+            <Dependent Role="ProfileQuestionTargetCriteria">
+              <PropertyRef Name="LanguageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfileQuestionTargetCriteria_ProfileQuestion">
+          <End Role="ProfileQuestion" Type="Self.ProfileQuestion" Multiplicity="0..1" />
+          <End Role="ProfileQuestionTargetCriteria" Type="Self.ProfileQuestionTargetCriteria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProfileQuestion">
+              <PropertyRef Name="PQID" />
+            </Principal>
+            <Dependent Role="ProfileQuestionTargetCriteria">
+              <PropertyRef Name="SQID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfileQuestionTargetCriteria_ProfileQuestion1">
+          <End Role="SurveyQuestion" Type="Self.SurveyQuestion" Multiplicity="0..1" />
+          <End Role="ProfileQuestionTargetCriteria" Type="Self.ProfileQuestionTargetCriteria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SurveyQuestion">
+              <PropertyRef Name="SQID" />
+            </Principal>
+            <Dependent Role="ProfileQuestionTargetCriteria">
+              <PropertyRef Name="LinkedSQID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfileQuestionTargetCriteria_ProfileQuestionAnswer">
+          <End Role="ProfileQuestionAnswer" Type="Self.ProfileQuestionAnswer" Multiplicity="0..1" />
+          <End Role="ProfileQuestionTargetCriteria" Type="Self.ProfileQuestionTargetCriteria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProfileQuestionAnswer">
+              <PropertyRef Name="PQAnswerID" />
+            </Principal>
+            <Dependent Role="ProfileQuestionTargetCriteria">
+              <PropertyRef Name="PQAnswerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfileQuestionTargetLocation_City">
+          <End Role="City" Type="Self.City" Multiplicity="0..1" />
+          <End Role="ProfileQuestionTargetLocation" Type="Self.ProfileQuestionTargetLocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="CityID" />
+            </Principal>
+            <Dependent Role="ProfileQuestionTargetLocation">
+              <PropertyRef Name="CityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfileQuestionTargetLocation_Country">
+          <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
+          <End Role="ProfileQuestionTargetLocation" Type="Self.ProfileQuestionTargetLocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="CountryID" />
+            </Principal>
+            <Dependent Role="ProfileQuestionTargetLocation">
+              <PropertyRef Name="CountryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfileQuestionTargetLocation_ProfileQuestion">
+          <End Role="ProfileQuestion" Type="Self.ProfileQuestion" Multiplicity="0..1" />
+          <End Role="ProfileQuestionTargetLocation" Type="Self.ProfileQuestionTargetLocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProfileQuestion">
+              <PropertyRef Name="PQID" />
+            </Principal>
+            <Dependent Role="ProfileQuestionTargetLocation">
+              <PropertyRef Name="PQID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ProfileQuestionUserAnswer_AspNetUsers">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="ProfileQuestionUserAnswer" Type="Self.ProfileQuestionUserAnswer" Multiplicity="*" />
@@ -2033,6 +2156,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <EntitySet Name="ProfileQuestion" EntityType="Self.ProfileQuestion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProfileQuestionAnswer" EntityType="Self.ProfileQuestionAnswer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProfileQuestionGroup" EntityType="Self.ProfileQuestionGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProfileQuestionTargetCriteria" EntityType="Self.ProfileQuestionTargetCriteria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProfileQuestionTargetLocation" EntityType="Self.ProfileQuestionTargetLocation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProfileQuestionUserAnswer" EntityType="Self.ProfileQuestionUserAnswer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Section" EntityType="Self.Section" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SurveyQuestion" EntityType="Self.SurveyQuestion" Schema="dbo" store:Type="Tables" />
@@ -2148,10 +2273,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           </AssociationSet>
           <AssociationSet Name="FK_AdCampaignTargetCriteria_Language" Association="Self.FK_AdCampaignTargetCriteria_Language">
             <End Role="Language" EntitySet="Language" />
-            <End Role="AdCampaignTargetCriteria" EntitySet="AdCampaignTargetCriteria" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AdCampaignTargetCriteria_ProfileQuestion" Association="Self.FK_AdCampaignTargetCriteria_ProfileQuestion">
-            <End Role="ProfileQuestion" EntitySet="ProfileQuestion" />
             <End Role="AdCampaignTargetCriteria" EntitySet="AdCampaignTargetCriteria" />
           </AssociationSet>
           <AssociationSet Name="FK_AdCampaignTargetCriteria_ProfileQuestionAnswer" Association="Self.FK_AdCampaignTargetCriteria_ProfileQuestionAnswer">
@@ -2309,6 +2430,42 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <AssociationSet Name="FK_ProfileQuestionGroup_ProfileQuestion" Association="Self.FK_ProfileQuestionGroup_ProfileQuestion">
             <End Role="ProfileQuestionGroup" EntitySet="ProfileQuestionGroup" />
             <End Role="ProfileQuestion" EntitySet="ProfileQuestion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfileQuestionTargetCriteria_Education" Association="Self.FK_ProfileQuestionTargetCriteria_Education">
+            <End Role="Education" EntitySet="Education" />
+            <End Role="ProfileQuestionTargetCriteria" EntitySet="ProfileQuestionTargetCriteria" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfileQuestionTargetCriteria_Industry" Association="Self.FK_ProfileQuestionTargetCriteria_Industry">
+            <End Role="Industry" EntitySet="Industry" />
+            <End Role="ProfileQuestionTargetCriteria" EntitySet="ProfileQuestionTargetCriteria" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfileQuestionTargetCriteria_Language" Association="Self.FK_ProfileQuestionTargetCriteria_Language">
+            <End Role="Language" EntitySet="Language" />
+            <End Role="ProfileQuestionTargetCriteria" EntitySet="ProfileQuestionTargetCriteria" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfileQuestionTargetCriteria_ProfileQuestion" Association="Self.FK_ProfileQuestionTargetCriteria_ProfileQuestion">
+            <End Role="ProfileQuestion" EntitySet="ProfileQuestion" />
+            <End Role="ProfileQuestionTargetCriteria" EntitySet="ProfileQuestionTargetCriteria" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfileQuestionTargetCriteria_ProfileQuestion1" Association="Self.FK_ProfileQuestionTargetCriteria_ProfileQuestion1">
+            <End Role="SurveyQuestion" EntitySet="SurveyQuestion" />
+            <End Role="ProfileQuestionTargetCriteria" EntitySet="ProfileQuestionTargetCriteria" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfileQuestionTargetCriteria_ProfileQuestionAnswer" Association="Self.FK_ProfileQuestionTargetCriteria_ProfileQuestionAnswer">
+            <End Role="ProfileQuestionAnswer" EntitySet="ProfileQuestionAnswer" />
+            <End Role="ProfileQuestionTargetCriteria" EntitySet="ProfileQuestionTargetCriteria" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfileQuestionTargetLocation_City" Association="Self.FK_ProfileQuestionTargetLocation_City">
+            <End Role="City" EntitySet="City" />
+            <End Role="ProfileQuestionTargetLocation" EntitySet="ProfileQuestionTargetLocation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfileQuestionTargetLocation_Country" Association="Self.FK_ProfileQuestionTargetLocation_Country">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="ProfileQuestionTargetLocation" EntitySet="ProfileQuestionTargetLocation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfileQuestionTargetLocation_ProfileQuestion" Association="Self.FK_ProfileQuestionTargetLocation_ProfileQuestion">
+            <End Role="ProfileQuestion" EntitySet="ProfileQuestion" />
+            <End Role="ProfileQuestionTargetLocation" EntitySet="ProfileQuestionTargetLocation" />
           </AssociationSet>
           <AssociationSet Name="FK_ProfileQuestionUserAnswer_AspNetUsers" Association="Self.FK_ProfileQuestionUserAnswer_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -2910,6 +3067,44 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
             <Parameter Name="Lon" Mode="In" Type="String" />
             <Parameter Name="UserId" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="ProfileQuestionTargetCriterias" EntityType="DomainModels.ProfileQuestionTargetCriteria" />
+          <EntitySet Name="ProfileQuestionTargetLocations" EntityType="DomainModels.ProfileQuestionTargetLocation" />
+          <AssociationSet Name="FK_ProfileQuestionTargetLocation_City" Association="DomainModels.FK_ProfileQuestionTargetLocation_City">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="ProfileQuestionTargetLocation" EntitySet="ProfileQuestionTargetLocations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfileQuestionTargetLocation_Country" Association="DomainModels.FK_ProfileQuestionTargetLocation_Country">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="ProfileQuestionTargetLocation" EntitySet="ProfileQuestionTargetLocations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfileQuestionTargetCriteria_Education" Association="DomainModels.FK_ProfileQuestionTargetCriteria_Education">
+            <End Role="Education" EntitySet="Educations" />
+            <End Role="ProfileQuestionTargetCriteria" EntitySet="ProfileQuestionTargetCriterias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfileQuestionTargetCriteria_Industry" Association="DomainModels.FK_ProfileQuestionTargetCriteria_Industry">
+            <End Role="Industry" EntitySet="Industries" />
+            <End Role="ProfileQuestionTargetCriteria" EntitySet="ProfileQuestionTargetCriterias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfileQuestionTargetCriteria_Language" Association="DomainModels.FK_ProfileQuestionTargetCriteria_Language">
+            <End Role="Language" EntitySet="Languages" />
+            <End Role="ProfileQuestionTargetCriteria" EntitySet="ProfileQuestionTargetCriterias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfileQuestionTargetCriteria_ProfileQuestion" Association="DomainModels.FK_ProfileQuestionTargetCriteria_ProfileQuestion">
+            <End Role="ProfileQuestion" EntitySet="ProfileQuestions" />
+            <End Role="ProfileQuestionTargetCriteria" EntitySet="ProfileQuestionTargetCriterias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfileQuestionTargetLocation_ProfileQuestion" Association="DomainModels.FK_ProfileQuestionTargetLocation_ProfileQuestion">
+            <End Role="ProfileQuestion" EntitySet="ProfileQuestions" />
+            <End Role="ProfileQuestionTargetLocation" EntitySet="ProfileQuestionTargetLocations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfileQuestionTargetCriteria_ProfileQuestionAnswer" Association="DomainModels.FK_ProfileQuestionTargetCriteria_ProfileQuestionAnswer">
+            <End Role="ProfileQuestionAnswer" EntitySet="ProfileQuestionAnswers" />
+            <End Role="ProfileQuestionTargetCriteria" EntitySet="ProfileQuestionTargetCriterias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfileQuestionTargetCriteria_ProfileQuestion1" Association="DomainModels.FK_ProfileQuestionTargetCriteria_ProfileQuestion1">
+            <End Role="SurveyQuestion" EntitySet="SurveyQuestions" />
+            <End Role="ProfileQuestionTargetCriteria" EntitySet="ProfileQuestionTargetCriterias" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="ProfileQuestion">
           <Key>
@@ -2944,6 +3139,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Property Name="AgeRangeStart" Type="Int32" />
           <Property Name="AgeRangeEnd" Type="Int32" />
           <Property Name="Gender" Type="Int32" />
+          <NavigationProperty Name="ProfileQuestionTargetCriterias" Relationship="DomainModels.FK_ProfileQuestionTargetCriteria_ProfileQuestion" FromRole="ProfileQuestion" ToRole="ProfileQuestionTargetCriteria" />
+          <NavigationProperty Name="ProfileQuestionTargetLocations" Relationship="DomainModels.FK_ProfileQuestionTargetLocation_ProfileQuestion" FromRole="ProfileQuestion" ToRole="ProfileQuestionTargetLocation" />
         </EntityType>
         <EntityType Name="ProfileQuestionAnswer">
           <Key>
@@ -2966,6 +3163,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Property Name="Status" Type="Int32" />
           <NavigationProperty Name="ProfileQuestionUserAnswers" Relationship="DomainModels.FK_ProfileQuestionUserAnswer_ProfileQuestionAnswer" FromRole="ProfileQuestionAnswer" ToRole="ProfileQuestionUserAnswer" />
           <NavigationProperty Name="AdCampaignTargetCriterias" Relationship="DomainModels.FK_AdCampaignTargetCriteria_ProfileQuestionAnswer" FromRole="ProfileQuestionAnswer" ToRole="AdCampaignTargetCriteria" />
+          <NavigationProperty Name="ProfileQuestionTargetCriterias" Relationship="DomainModels.FK_ProfileQuestionTargetCriteria_ProfileQuestionAnswer" FromRole="ProfileQuestionAnswer" ToRole="ProfileQuestionTargetCriteria" />
         </EntityType>
         <EntityType Name="ProfileQuestionGroup">
           <Key>
@@ -3016,6 +3214,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <NavigationProperty Name="Products" Relationship="DomainModels.FK_SMDPrice_Country" FromRole="Country" ToRole="Product" />
           <NavigationProperty Name="SurveyQuestions" Relationship="DomainModels.FK_SurveyQuestion_Country" FromRole="Country" ToRole="SurveyQuestion" />
           <NavigationProperty Name="Companies" Relationship="DomainModels.FK_Company_Country" FromRole="Country" ToRole="Company" />
+          <NavigationProperty Name="ProfileQuestionTargetLocations" Relationship="DomainModels.FK_ProfileQuestionTargetLocation_Country" FromRole="Country" ToRole="ProfileQuestionTargetLocation" />
         </EntityType>
         <EntityType Name="Language">
           <Key>
@@ -3030,6 +3229,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <NavigationProperty Name="AdCampaigns" Relationship="DomainModels.FK_AdCampaign_Language" FromRole="Language" ToRole="AdCampaign" />
           <NavigationProperty Name="AdCampaignTargetCriterias" Relationship="DomainModels.FK_AdCampaignTargetCriteria_Language" FromRole="Language" ToRole="AdCampaignTargetCriteria" />
           <NavigationProperty Name="Coupons" Relationship="DomainModels.FK_Coupon_Language" FromRole="Language" ToRole="Coupon" />
+          <NavigationProperty Name="ProfileQuestionTargetCriterias" Relationship="DomainModels.FK_ProfileQuestionTargetCriteria_Language" FromRole="Language" ToRole="ProfileQuestionTargetCriteria" />
         </EntityType>
         <Association Name="FK_ProfileQuestionGroup_Country">
           <End Type="DomainModels.Country" Role="Country" Multiplicity="0..1" />
@@ -3191,6 +3391,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <NavigationProperty Name="Country" Relationship="DomainModels.FK_City_Country" FromRole="City" ToRole="Country" />
           <NavigationProperty Name="SurveyQuestionTargetLocations" Relationship="DomainModels.FK_SurveyQuestionTargetLocation_City" FromRole="City" ToRole="SurveyQuestionTargetLocation" />
           <NavigationProperty Name="Companies" Relationship="DomainModels.FK_Company_City" FromRole="City" ToRole="Company" />
+          <NavigationProperty Name="ProfileQuestionTargetLocations" Relationship="DomainModels.FK_ProfileQuestionTargetLocation_City" FromRole="City" ToRole="ProfileQuestionTargetLocation" />
         </EntityType>
         <Association Name="FK_AdCampaignTargetLocation_City">
           <End Type="DomainModels.City" Role="City" Multiplicity="0..1" />
@@ -3238,6 +3439,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <NavigationProperty Name="SurveyQuestionTargetCriterias" Relationship="DomainModels.FK_SurveyQuestionTargetCriteria_Industry" FromRole="Industry" ToRole="SurveyQuestionTargetCriteria" />
           <NavigationProperty Name="AspNetUsers" Relationship="DomainModels.FK_AspNetUsers_Industry" FromRole="Industry" ToRole="AspNetUser" />
           <NavigationProperty Name="AdCampaignTargetCriterias" Relationship="DomainModels.FK_AdCampaignTargetCriteria_Industry" FromRole="Industry" ToRole="AdCampaignTargetCriteria" />
+          <NavigationProperty Name="ProfileQuestionTargetCriterias" Relationship="DomainModels.FK_ProfileQuestionTargetCriteria_Industry" FromRole="Industry" ToRole="ProfileQuestionTargetCriteria" />
         </EntityType>
         <Association Name="FK_SurveyQuestionTargetCriteria_Industry">
           <End Type="DomainModels.Industry" Role="Industry" Multiplicity="0..1" />
@@ -3490,6 +3692,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <NavigationProperty Name="SurveyQuestionTargetCriterias" Relationship="DomainModels.FK_SurveyQuestionTargetCriteria_Education" FromRole="Education" ToRole="SurveyQuestionTargetCriteria" />
           <NavigationProperty Name="AspNetUsers" Relationship="DomainModels.FK_AspNetUsers_Education" FromRole="Education" ToRole="AspNetUser" />
           <NavigationProperty Name="AdCampaignTargetCriterias" Relationship="DomainModels.FK_AdCampaignTargetCriteria_Education" FromRole="Education" ToRole="AdCampaignTargetCriteria" />
+          <NavigationProperty Name="ProfileQuestionTargetCriterias" Relationship="DomainModels.FK_ProfileQuestionTargetCriteria_Education" FromRole="Education" ToRole="ProfileQuestionTargetCriteria" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -3733,6 +3936,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <NavigationProperty Name="Company" Relationship="DomainModels.FK_SurveyQuestion_Company" FromRole="SurveyQuestion" ToRole="Company" />
           <Property Name="AnswerNeeded" Type="Int32" />
           <Property Name="AmountCharged" Type="Double" />
+          <NavigationProperty Name="ProfileQuestionTargetCriterias" Relationship="DomainModels.FK_ProfileQuestionTargetCriteria_ProfileQuestion1" FromRole="SurveyQuestion" ToRole="ProfileQuestionTargetCriteria" />
         </EntityType>
         <EntityType Name="SurveyQuestionResponse">
           <Key>
@@ -5275,6 +5479,150 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Property Type="Int32" Name="DaysLeft" Nullable="true" />
           <Property Type="Double" Name="SwapCost" Nullable="true" />
         </ComplexType>
+        <EntityType Name="ProfileQuestionTargetCriteria">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PQID" Type="Int32" />
+          <Property Name="Type" Type="Int32" />
+          <Property Name="SQID" Type="Int32" />
+          <Property Name="PQAnswerID" Type="Int32" />
+          <Property Name="LinkedSQID" Type="Int64" />
+          <Property Name="LinkedSQAnswer" Type="Int32" />
+          <Property Name="IncludeorExclude" Type="Boolean" />
+          <Property Name="LanguageID" Type="Int32" />
+          <Property Name="IndustryID" Type="Int32" />
+          <Property Name="EducationID" Type="Int64" />
+          <NavigationProperty Name="Education" Relationship="DomainModels.FK_ProfileQuestionTargetCriteria_Education" FromRole="ProfileQuestionTargetCriteria" ToRole="Education" />
+          <NavigationProperty Name="Industry" Relationship="DomainModels.FK_ProfileQuestionTargetCriteria_Industry" FromRole="ProfileQuestionTargetCriteria" ToRole="Industry" />
+          <NavigationProperty Name="Language" Relationship="DomainModels.FK_ProfileQuestionTargetCriteria_Language" FromRole="ProfileQuestionTargetCriteria" ToRole="Language" />
+          <NavigationProperty Name="ProfileQuestion" Relationship="DomainModels.FK_ProfileQuestionTargetCriteria_ProfileQuestion" FromRole="ProfileQuestionTargetCriteria" ToRole="ProfileQuestion" />
+          <NavigationProperty Name="ProfileQuestionAnswer" Relationship="DomainModels.FK_ProfileQuestionTargetCriteria_ProfileQuestionAnswer" FromRole="ProfileQuestionTargetCriteria" ToRole="ProfileQuestionAnswer" />
+          <NavigationProperty Name="SurveyQuestion" Relationship="DomainModels.FK_ProfileQuestionTargetCriteria_ProfileQuestion1" FromRole="ProfileQuestionTargetCriteria" ToRole="SurveyQuestion" />
+        </EntityType>
+        <EntityType Name="ProfileQuestionTargetLocation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PQID" Type="Int32" />
+          <Property Name="CountryID" Type="Int32" />
+          <Property Name="CityID" Type="Int32" />
+          <Property Name="Radius" Type="Int32" />
+          <Property Name="IncludeorExclude" Type="Boolean" />
+          <NavigationProperty Name="City" Relationship="DomainModels.FK_ProfileQuestionTargetLocation_City" FromRole="ProfileQuestionTargetLocation" ToRole="City" />
+          <NavigationProperty Name="Country" Relationship="DomainModels.FK_ProfileQuestionTargetLocation_Country" FromRole="ProfileQuestionTargetLocation" ToRole="Country" />
+          <NavigationProperty Name="ProfileQuestion" Relationship="DomainModels.FK_ProfileQuestionTargetLocation_ProfileQuestion" FromRole="ProfileQuestionTargetLocation" ToRole="ProfileQuestion" />
+        </EntityType>
+        <Association Name="FK_ProfileQuestionTargetLocation_City">
+          <End Type="DomainModels.City" Role="City" Multiplicity="0..1" />
+          <End Type="DomainModels.ProfileQuestionTargetLocation" Role="ProfileQuestionTargetLocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="CityId" />
+            </Principal>
+            <Dependent Role="ProfileQuestionTargetLocation">
+              <PropertyRef Name="CityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfileQuestionTargetLocation_Country">
+          <End Type="DomainModels.Country" Role="Country" Multiplicity="0..1" />
+          <End Type="DomainModels.ProfileQuestionTargetLocation" Role="ProfileQuestionTargetLocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="CountryId" />
+            </Principal>
+            <Dependent Role="ProfileQuestionTargetLocation">
+              <PropertyRef Name="CountryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfileQuestionTargetCriteria_Education">
+          <End Type="DomainModels.Education" Role="Education" Multiplicity="0..1" />
+          <End Type="DomainModels.ProfileQuestionTargetCriteria" Role="ProfileQuestionTargetCriteria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Education">
+              <PropertyRef Name="EducationId" />
+            </Principal>
+            <Dependent Role="ProfileQuestionTargetCriteria">
+              <PropertyRef Name="EducationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfileQuestionTargetCriteria_Industry">
+          <End Type="DomainModels.Industry" Role="Industry" Multiplicity="0..1" />
+          <End Type="DomainModels.ProfileQuestionTargetCriteria" Role="ProfileQuestionTargetCriteria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Industry">
+              <PropertyRef Name="IndustryId" />
+            </Principal>
+            <Dependent Role="ProfileQuestionTargetCriteria">
+              <PropertyRef Name="IndustryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfileQuestionTargetCriteria_Language">
+          <End Type="DomainModels.Language" Role="Language" Multiplicity="0..1" />
+          <End Type="DomainModels.ProfileQuestionTargetCriteria" Role="ProfileQuestionTargetCriteria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Language">
+              <PropertyRef Name="LanguageId" />
+            </Principal>
+            <Dependent Role="ProfileQuestionTargetCriteria">
+              <PropertyRef Name="LanguageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfileQuestionTargetCriteria_ProfileQuestion">
+          <End Type="DomainModels.ProfileQuestion" Role="ProfileQuestion" Multiplicity="0..1" />
+          <End Type="DomainModels.ProfileQuestionTargetCriteria" Role="ProfileQuestionTargetCriteria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProfileQuestion">
+              <PropertyRef Name="PqId" />
+            </Principal>
+            <Dependent Role="ProfileQuestionTargetCriteria">
+              <PropertyRef Name="SQID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfileQuestionTargetLocation_ProfileQuestion">
+          <End Type="DomainModels.ProfileQuestion" Role="ProfileQuestion" Multiplicity="0..1" />
+          <End Type="DomainModels.ProfileQuestionTargetLocation" Role="ProfileQuestionTargetLocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProfileQuestion">
+              <PropertyRef Name="PqId" />
+            </Principal>
+            <Dependent Role="ProfileQuestionTargetLocation">
+              <PropertyRef Name="PQID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfileQuestionTargetCriteria_ProfileQuestionAnswer">
+          <End Type="DomainModels.ProfileQuestionAnswer" Role="ProfileQuestionAnswer" Multiplicity="0..1" />
+          <End Type="DomainModels.ProfileQuestionTargetCriteria" Role="ProfileQuestionTargetCriteria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProfileQuestionAnswer">
+              <PropertyRef Name="PqAnswerId" />
+            </Principal>
+            <Dependent Role="ProfileQuestionTargetCriteria">
+              <PropertyRef Name="PQAnswerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfileQuestionTargetCriteria_ProfileQuestion1">
+          <End Type="DomainModels.SurveyQuestion" Role="SurveyQuestion" Multiplicity="0..1" />
+          <End Type="DomainModels.ProfileQuestionTargetCriteria" Role="ProfileQuestionTargetCriteria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SurveyQuestion">
+              <PropertyRef Name="SqId" />
+            </Principal>
+            <Dependent Role="ProfileQuestionTargetCriteria">
+              <PropertyRef Name="LinkedSQID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -6532,6 +6880,35 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="ProfileQuestionTargetCriterias">
+            <EntityTypeMapping TypeName="DomainModels.ProfileQuestionTargetCriteria">
+              <MappingFragment StoreEntitySet="ProfileQuestionTargetCriteria">
+                <ScalarProperty Name="EducationID" ColumnName="EducationID" />
+                <ScalarProperty Name="IndustryID" ColumnName="IndustryID" />
+                <ScalarProperty Name="LanguageID" ColumnName="LanguageID" />
+                <ScalarProperty Name="IncludeorExclude" ColumnName="IncludeorExclude" />
+                <ScalarProperty Name="LinkedSQAnswer" ColumnName="LinkedSQAnswer" />
+                <ScalarProperty Name="LinkedSQID" ColumnName="LinkedSQID" />
+                <ScalarProperty Name="PQAnswerID" ColumnName="PQAnswerID" />
+                <ScalarProperty Name="SQID" ColumnName="SQID" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="PQID" ColumnName="PQID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProfileQuestionTargetLocations">
+            <EntityTypeMapping TypeName="DomainModels.ProfileQuestionTargetLocation">
+              <MappingFragment StoreEntitySet="ProfileQuestionTargetLocation">
+                <ScalarProperty Name="IncludeorExclude" ColumnName="IncludeorExclude" />
+                <ScalarProperty Name="Radius" ColumnName="Radius" />
+                <ScalarProperty Name="CityID" ColumnName="CityID" />
+                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+                <ScalarProperty Name="PQID" ColumnName="PQID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

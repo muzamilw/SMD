@@ -195,6 +195,12 @@
     <Compile Include="ProfileQuestionGroup.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="ProfileQuestionTargetCriteria.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProfileQuestionTargetLocation.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="ProfileQuestionUserAnswer.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

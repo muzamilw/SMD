@@ -19,6 +19,7 @@ namespace DomainModelProject
             this.AdCampaignTargetCriterias = new HashSet<AdCampaignTargetCriteria>();
             this.AspNetUsers = new HashSet<AspNetUser>();
             this.SurveyQuestionTargetCriterias = new HashSet<SurveyQuestionTargetCriteria>();
+            this.ProfileQuestionTargetCriterias = new HashSet<ProfileQuestionTargetCriteria>();
         }
     
         public int IndustryID { get; set; }
@@ -28,5 +29,6 @@ namespace DomainModelProject
         public virtual ICollection<AdCampaignTargetCriteria> AdCampaignTargetCriterias { get; set; }
         public virtual ICollection<AspNetUser> AspNetUsers { get; set; }
         public virtual ICollection<SurveyQuestionTargetCriteria> SurveyQuestionTargetCriterias { get; set; }
+        public virtual ICollection<ProfileQuestionTargetCriteria> ProfileQuestionTargetCriterias { get; set; }
     }
 }

@@ -22,6 +22,7 @@ namespace DomainModelProject
             this.Coupons = new HashSet<Coupon>();
             this.SurveyQuestions = new HashSet<SurveyQuestion>();
             this.SurveyQuestionTargetCriterias = new HashSet<SurveyQuestionTargetCriteria>();
+            this.ProfileQuestionTargetCriterias = new HashSet<ProfileQuestionTargetCriteria>();
         }
     
         public int LanguageID { get; set; }
@@ -34,5 +35,6 @@ namespace DomainModelProject
         public virtual ICollection<Coupon> Coupons { get; set; }
         public virtual ICollection<SurveyQuestion> SurveyQuestions { get; set; }
         public virtual ICollection<SurveyQuestionTargetCriteria> SurveyQuestionTargetCriterias { get; set; }
+        public virtual ICollection<ProfileQuestionTargetCriteria> ProfileQuestionTargetCriterias { get; set; }
     }
 }

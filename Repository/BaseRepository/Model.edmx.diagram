@@ -136,6 +136,17 @@
         <AssociationConnector Association="DomainModels.FK_DamImages_Company" />
         <AssociationConnector Association="DomainModels.FK_ProfileQuestion_Company" />
         <EntityTypeShape EntityType="DomainModels.UserCouponView" Width="1.5" PointX="9.375" PointY="3.75" />
+        <EntityTypeShape EntityType="DomainModels.ProfileQuestionTargetCriteria" Width="1.5" PointX="19.875" PointY="49.25" />
+        <EntityTypeShape EntityType="DomainModels.ProfileQuestionTargetLocation" Width="1.5" PointX="11.875" PointY="62.25" />
+        <AssociationConnector Association="DomainModels.FK_ProfileQuestionTargetLocation_City" />
+        <AssociationConnector Association="DomainModels.FK_ProfileQuestionTargetLocation_Country" />
+        <AssociationConnector Association="DomainModels.FK_ProfileQuestionTargetCriteria_Education" />
+        <AssociationConnector Association="DomainModels.FK_ProfileQuestionTargetCriteria_Industry" />
+        <AssociationConnector Association="DomainModels.FK_ProfileQuestionTargetCriteria_Language" />
+        <AssociationConnector Association="DomainModels.FK_ProfileQuestionTargetCriteria_ProfileQuestion" />
+        <AssociationConnector Association="DomainModels.FK_ProfileQuestionTargetLocation_ProfileQuestion" />
+        <AssociationConnector Association="DomainModels.FK_ProfileQuestionTargetCriteria_ProfileQuestionAnswer" />
+        <AssociationConnector Association="DomainModels.FK_ProfileQuestionTargetCriteria_ProfileQuestion1" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

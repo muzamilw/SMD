@@ -19,6 +19,7 @@ namespace DomainModelProject
             this.AdCampaignTargetLocations = new HashSet<AdCampaignTargetLocation>();
             this.Companies = new HashSet<Company>();
             this.SurveyQuestionTargetLocations = new HashSet<SurveyQuestionTargetLocation>();
+            this.ProfileQuestionTargetLocations = new HashSet<ProfileQuestionTargetLocation>();
         }
     
         public int CityID { get; set; }
@@ -32,5 +33,6 @@ namespace DomainModelProject
         public virtual Country Country { get; set; }
         public virtual ICollection<Company> Companies { get; set; }
         public virtual ICollection<SurveyQuestionTargetLocation> SurveyQuestionTargetLocations { get; set; }
+        public virtual ICollection<ProfileQuestionTargetLocation> ProfileQuestionTargetLocations { get; set; }
     }
 }
