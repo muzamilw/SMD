@@ -195,10 +195,10 @@ div#title {
 }
 
 .imageBox {
-    margin: 5px; float: left; height: 96px; border: 0; overflow: hidden;
-    width: 128px;
+    margin: 6px; float: left; height: 200px; border: 0; overflow: hidden;
+    width: 200px;
     cursor:pointer;
-    border: 1px solid #fff;
+    border: 1px solid #eee;
 }
 
 .imageBox:hover {
@@ -207,7 +207,16 @@ div#title {
 }
 
 .imagePreview {
-    height: 100%; display: block; margin: 0 auto;
+    max-height: 150px; display: block; margin: 0 auto;max-width:200px;
+}
+
+.imageBoxName {
+    display:block;
+    padding:3px;
+    color:darkgray;
+    text-align:center;
+    font-size:12px;
+    margin-top:5px;
 }
 
 .imageCenter {
@@ -318,4 +327,67 @@ div#title {
 #ImgDAMDetail {
     width: 191px;
     max-height: 300px;
+}
+
+
+    .cropit-preview {
+        background-color: #f8f8f8;
+        background-size: cover;
+        border: 5px solid #ccc;
+        border-radius: 3px;
+        margin-top: 7px;
+        width: 250px;
+        height: 250px;
+      }
+
+      .cropit-preview-image-container {
+        cursor: move;
+      }
+
+      .cropit-preview-background {
+        opacity: .2;
+        cursor: auto;
+      }
+
+      .image-size-label {
+        margin-top: 10px;
+      }
+
+      input, .export {
+        /* Use relative position to prevent from being covered by image background */
+        position: relative;
+        z-index: 10;
+        display: block;
+      }
+
+      button {
+        margin-top: 10px;
+      }
+      .image-editor{
+          margin-top:62px;
+      }
+      .cropit-preview {
+              margin: auto;
+      }
+      
+.icon-image:before {
+    content: url(/Content/DAM/before.png);
+}
+
+.large-image:before {
+  content: url(/Content/DAM/after.png);
+}
+.cropit-image-zoom-input {
+    width:300px !important;
+        display: inline !important;
+}
+.slider-wrapper {
+
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.image-editor {
+    text-align:center;
+    display:none;
 }

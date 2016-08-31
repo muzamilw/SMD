@@ -157,6 +157,8 @@
         <AssociationConnector Association="SMDDevModel.FK_ProfileQuestionTargetLocation_ProfileQuestion" />
         <AssociationConnector Association="SMDDevModel.FK_ProfileQuestionTargetCriteria_ProfileQuestionAnswer" />
         <AssociationConnector Association="SMDDevModel.FK_ProfileQuestionTargetCriteria_ProfileQuestion1" />
+        <AssociationConnector Association="SMDDevModel.FK_InvoiceDetail_Coupon" />
+        <AssociationConnector Association="SMDDevModel.FK_InvoiceDetail_ProfileQuestion" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

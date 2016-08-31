@@ -53,32 +53,68 @@ namespace SMD.Implementation.Services
             {
                 Directory.CreateDirectory(directoryPath);
             }
-            if (question.LeftPictureBytes != null)
-            {
-                string base64 = question.LeftPictureBytes.Substring(question.LeftPictureBytes.IndexOf(',') + 1);
-                base64 = base64.Trim('\0');
-                byte[] data = Convert.FromBase64String(base64);
-                string savePath = directoryPath + "\\guid_LeftPicture.jpg";
-                File.WriteAllBytes(savePath, data);
-                int indexOf = savePath.LastIndexOf("SMD_Content", StringComparison.Ordinal);
-                savePath = savePath.Substring(indexOf, savePath.Length - indexOf);
-                savePaths[0] = savePath;
-            }
-            if (question.RightPictureBytes != null)
-            {
-                string base64 = question.RightPictureBytes.Substring(question.RightPictureBytes.IndexOf(',') + 1);
-                base64 = base64.Trim('\0');
-                byte[] data = Convert.FromBase64String(base64);
+            //if (question.LeftPictureBytes != null)
+            //{
+            //    string base64 = question.LeftPictureBytes.Substring(question.LeftPictureBytes.IndexOf(',') + 1);
+            //    base64 = base64.Trim('\0');
+            //    byte[] data = Convert.FromBase64String(base64);
+            //    string savePath = directoryPath + "\\guid_LeftPicture.jpg";
+            //    File.WriteAllBytes(savePath, data);
+            //    int indexOf = savePath.LastIndexOf("SMD_Content", StringComparison.Ordinal);
+            //    savePath = savePath.Substring(indexOf, savePath.Length - indexOf);
+            //    savePaths[0] = savePath;
+            //}
+            //if (question.RightPictureBytes != null)
+            //{
+            //    string base64 = question.RightPictureBytes.Substring(question.RightPictureBytes.IndexOf(',') + 1);
+            //    base64 = base64.Trim('\0');
+            //    byte[] data = Convert.FromBase64String(base64);
 
-                if (directoryPath != null && !Directory.Exists(directoryPath))
+            //    if (directoryPath != null && !Directory.Exists(directoryPath))
+            //    {
+            //        Directory.CreateDirectory(directoryPath);
+            //    }
+            //    string savePath = directoryPath + "\\guid_RightPicture.jpg";
+            //    File.WriteAllBytes(savePath, data);
+            //    int indexOf = savePath.LastIndexOf("SMD_Content", StringComparison.Ordinal);
+            //    savePath = savePath.Substring(indexOf, savePath.Length - indexOf);
+            //    savePaths[1] = savePath;
+            //}
+            if (!string.IsNullOrEmpty(question.LeftPicturePath) && !question.LeftPicturePath.Contains("guid_LeftPicture") && !question.LeftPicturePath.Contains("http://manage.cash4ads.com/"))
+            {
+                if (question.LeftPicturePath.Contains("SMD_Content"))
                 {
-                    Directory.CreateDirectory(directoryPath);
+                    string[] paths = question.LeftPicturePath.Split(new string[] { "SMD_Content" }, StringSplitOptions.None);
+                    string url = HttpContext.Current.Server.MapPath("~/SMD_Content/" + paths[paths.Length - 1]);
+                    if (directoryPath != null && !Directory.Exists(directoryPath))
+                    {
+                        Directory.CreateDirectory(directoryPath);
+                    }
+                    string savePath = directoryPath + "\\guid_LeftPicture.jpg";
+                    File.Copy(url, savePath, true);
+                    int indexOf = savePath.LastIndexOf("SMD_Content", StringComparison.Ordinal);
+                    savePath = savePath.Substring(indexOf, savePath.Length - indexOf);
+                    savePaths[0] = savePath;
+                    question.LeftPicturePath = savePath;
                 }
-                string savePath = directoryPath + "\\guid_RightPicture.jpg";
-                File.WriteAllBytes(savePath, data);
-                int indexOf = savePath.LastIndexOf("SMD_Content", StringComparison.Ordinal);
-                savePath = savePath.Substring(indexOf, savePath.Length - indexOf);
-                savePaths[1] = savePath;
+            }
+            if (!string.IsNullOrEmpty(question.RightPicturePath) && !question.RightPicturePath.Contains("guid_RightPicture") && !question.RightPicturePath.Contains("http://manage.cash4ads.com/"))
+            {
+                if (question.RightPicturePath.Contains("SMD_Content"))
+                {
+                    string[] paths = question.RightPicturePath.Split(new string[] { "SMD_Content" }, StringSplitOptions.None);
+                    string url = HttpContext.Current.Server.MapPath("~/SMD_Content/" + paths[paths.Length - 1]);
+                    if (directoryPath != null && !Directory.Exists(directoryPath))
+                    {
+                        Directory.CreateDirectory(directoryPath);
+                    }
+                    string savePath = directoryPath + "\\guid_RightPicture.jpg";
+                    File.Copy(url, savePath, true);
+                    int indexOf = savePath.LastIndexOf("SMD_Content", StringComparison.Ordinal);
+                    savePath = savePath.Substring(indexOf, savePath.Length - indexOf);
+                    savePaths[1] = savePath;
+                    question.RightPicturePath = savePath;
+                }
             }
             return savePaths;
         }

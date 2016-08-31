@@ -677,6 +677,10 @@
     <Content Include="Areas\User\Scripts\user.model.js" />
     <Content Include="Areas\User\Scripts\user.view.js" />
     <Content Include="Areas\User\Scripts\user.viewModel.js" />
+    <Content Include="Areas\Coupons\Views\Coupons\_couponEditor.cshtml" />
+    <None Include="config\Web.connectionstrings.config">
+      <SubType>Designer</SubType>
+    </None>
     <Content Include="Content\colorpicker.css" />
     <Content Include="Content\CSS\bootstrap\bootstrap-responsive.css" />
     <Content Include="Content\CSS\bootstrap\bootstrap-responsive.min.css" />
@@ -725,16 +729,24 @@
     <Content Include="Content\CSS\supr-theme\jquery.ui.supr.css" />
     <Content Include="Content\CSS\supr-theme\jquery.ui.theme.css" />
     <Content Include="Content\CSS\toastr.css" />
+    <Content Include="Content\DAM\after.png" />
+    <Content Include="Content\DAM\before.png" />
     <Content Include="Content\DAM\border-anim-h.gif" />
     <Content Include="Content\DAM\border-anim-v.gif" />
+    <Content Include="Content\DAM\constants.js" />
+    <Content Include="Content\DAM\cropit.js" />
     <Content Include="Content\DAM\DamSite.css" />
     <Content Include="Content\DAM\empty.png" />
     <Content Include="Content\DAM\ImageArea.css" />
     <Content Include="Content\DAM\jquery.cropbox.css" />
     <Content Include="Content\DAM\jquery.cropbox.js" />
+    <Content Include="Content\DAM\options.js" />
     <Content Include="Content\DAM\pc1.js" />
     <Content Include="Content\DAM\pc2.js" />
     <Content Include="Content\DAM\pc3.js" />
+    <Content Include="Content\DAM\plugin.js" />
+    <Content Include="Content\DAM\utils.js" />
+    <Content Include="Content\DAM\zoomer.js" />
     <Content Include="Content\Images\5_Main_4.png" />
     <Content Include="Content\Images\AD_Campaign_mobileStencil.png" />
     <Content Include="Content\Images\arrow-down-small.png" />
@@ -1702,7 +1714,6 @@
     <None Include="Areas\SuperNova\Views\web.config" />
     <Content Include="Areas\SuperNova\Views\Dashboard\Index.cshtml" />
     <Content Include="Areas\SuperNova\Views\_ViewStart.cshtml" />
-    <None Include="config\Web.connectionstrings.config" />
     <None Include="Properties\PublishProfiles\mz profile.pubxml" />
     <None Include="Properties\PublishProfiles\SMD MIS Saqib.pubxml" />
     <None Include="Properties\PublishProfiles\SMD.pubxml" />
@@ -2867,6 +2878,10 @@
     <ProjectReference Include="..\Models\SMD.Models.csproj">
       <Project>{81067904-2176-4648-87ab-014b0d76b85e}</Project>
       <Name>SMD.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SMD.Common\SMD.Common.csproj">
+      <Project>{4ba9e712-f447-4a6b-bae6-18eeb43087c6}</Project>
+      <Name>SMD.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\WebBase\SMD.WebBase.csproj">
       <Project>{bcb8bcfd-0163-430c-8088-224074d6e384}</Project>

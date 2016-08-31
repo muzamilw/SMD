@@ -92,5 +92,7 @@ namespace SMD.Models.DomainModels
 
 
         public Nullable<System.DateTime> SubmissionDateTime { get; set; }
+
+        public virtual ICollection<InvoiceDetail> InvoiceDetails { get; set; }
     }
 }

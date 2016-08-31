@@ -619,6 +619,8 @@
           <Property Name="CampaignId" Type="bigint" />
           <Property Name="SQId" Type="bigint" />
           <Property Name="ProductId" Type="int" />
+          <Property Name="PQID" Type="int" />
+          <Property Name="CouponID" Type="bigint" />
         </EntityType>
         <EntityType Name="Language">
           <Key>
@@ -1576,6 +1578,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_InvoiceDetail_Coupon">
+          <End Role="Coupon" Type="Self.Coupon" Multiplicity="0..1" />
+          <End Role="InvoiceDetail" Type="Self.InvoiceDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Coupon">
+              <PropertyRef Name="CouponId" />
+            </Principal>
+            <Dependent Role="InvoiceDetail">
+              <PropertyRef Name="CouponID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_InvoiceDetail_Invoice">
           <End Role="Invoice" Type="Self.Invoice" Multiplicity="1" />
           <End Role="InvoiceDetail" Type="Self.InvoiceDetail" Multiplicity="*" />
@@ -1597,6 +1611,18 @@
             </Principal>
             <Dependent Role="InvoiceDetail">
               <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InvoiceDetail_ProfileQuestion">
+          <End Role="ProfileQuestion" Type="Self.ProfileQuestion" Multiplicity="0..1" />
+          <End Role="InvoiceDetail" Type="Self.InvoiceDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProfileQuestion">
+              <PropertyRef Name="PQID" />
+            </Principal>
+            <Dependent Role="InvoiceDetail">
+              <PropertyRef Name="PQID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2410,12 +2436,20 @@
             <End Role="AdCampaign" EntitySet="AdCampaign" />
             <End Role="InvoiceDetail" EntitySet="InvoiceDetail" />
           </AssociationSet>
+          <AssociationSet Name="FK_InvoiceDetail_Coupon" Association="Self.FK_InvoiceDetail_Coupon">
+            <End Role="Coupon" EntitySet="Coupon" />
+            <End Role="InvoiceDetail" EntitySet="InvoiceDetail" />
+          </AssociationSet>
           <AssociationSet Name="FK_InvoiceDetail_Invoice" Association="Self.FK_InvoiceDetail_Invoice">
             <End Role="Invoice" EntitySet="Invoice" />
             <End Role="InvoiceDetail" EntitySet="InvoiceDetail" />
           </AssociationSet>
           <AssociationSet Name="FK_InvoiceDetail_Products" Association="Self.FK_InvoiceDetail_Products">
             <End Role="Products" EntitySet="Products" />
+            <End Role="InvoiceDetail" EntitySet="InvoiceDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InvoiceDetail_ProfileQuestion" Association="Self.FK_InvoiceDetail_ProfileQuestion">
+            <End Role="ProfileQuestion" EntitySet="ProfileQuestion" />
             <End Role="InvoiceDetail" EntitySet="InvoiceDetail" />
           </AssociationSet>
           <AssociationSet Name="FK_InvoiceDetail_SurveyQuestion" Association="Self.FK_InvoiceDetail_SurveyQuestion">
@@ -3135,6 +3169,7 @@
           <NavigationProperty Name="CouponCategories" Relationship="SMDDevModel.FK_CouponCategories_Coupon" FromRole="Coupon" ToRole="CouponCategories" />
           <NavigationProperty Name="UserPurchasedCoupons" Relationship="SMDDevModel.FK_UserPurchasedCoupon_Coupon" FromRole="Coupon" ToRole="UserPurchasedCoupon" />
           <Property Name="SubmissionDateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="InvoiceDetails" Relationship="SMDDevModel.FK_InvoiceDetail_Coupon" FromRole="Coupon" ToRole="InvoiceDetail" />
         </EntityType>
         <EntityType Name="CouponCode">
           <Key>
@@ -3288,6 +3323,10 @@
           <NavigationProperty Name="Invoice" Relationship="Self.FK_InvoiceDetail_Invoice" FromRole="InvoiceDetail" ToRole="Invoice" />
           <NavigationProperty Name="Product" Relationship="Self.FK_InvoiceDetail_Products" FromRole="InvoiceDetail" ToRole="Products" />
           <NavigationProperty Name="SurveyQuestion" Relationship="Self.FK_InvoiceDetail_SurveyQuestion" FromRole="InvoiceDetail" ToRole="SurveyQuestion" />
+          <Property Name="PQID" Type="Int32" />
+          <Property Name="CouponID" Type="Int64" />
+          <NavigationProperty Name="Coupon" Relationship="SMDDevModel.FK_InvoiceDetail_Coupon" FromRole="InvoiceDetail" ToRole="Coupon" />
+          <NavigationProperty Name="ProfileQuestion" Relationship="SMDDevModel.FK_InvoiceDetail_ProfileQuestion" FromRole="InvoiceDetail" ToRole="ProfileQuestion" />
         </EntityType>
         <EntityType Name="Language">
           <Key>
@@ -3400,6 +3439,7 @@
           <Property Name="Gender" Type="Int32" />
           <NavigationProperty Name="ProfileQuestionTargetCriterias" Relationship="SMDDevModel.FK_ProfileQuestionTargetCriteria_ProfileQuestion" FromRole="ProfileQuestion" ToRole="ProfileQuestionTargetCriteria" />
           <NavigationProperty Name="ProfileQuestionTargetLocations" Relationship="SMDDevModel.FK_ProfileQuestionTargetLocation_ProfileQuestion" FromRole="ProfileQuestion" ToRole="ProfileQuestionTargetLocation" />
+          <NavigationProperty Name="InvoiceDetails" Relationship="SMDDevModel.FK_InvoiceDetail_ProfileQuestion" FromRole="ProfileQuestion" ToRole="InvoiceDetail" />
         </EntityType>
         <EntityType Name="ProfileQuestionAnswer">
           <Key>
@@ -5018,6 +5058,14 @@
             <End Role="SurveyQuestion" EntitySet="SurveyQuestions" />
             <End Role="ProfileQuestionTargetCriteria" EntitySet="ProfileQuestionTargetCriterias" />
           </AssociationSet>
+          <AssociationSet Name="FK_InvoiceDetail_Coupon" Association="SMDDevModel.FK_InvoiceDetail_Coupon">
+            <End Role="Coupon" EntitySet="Coupons" />
+            <End Role="InvoiceDetail" EntitySet="InvoiceDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InvoiceDetail_ProfileQuestion" Association="SMDDevModel.FK_InvoiceDetail_ProfileQuestion">
+            <End Role="ProfileQuestion" EntitySet="ProfileQuestions" />
+            <End Role="InvoiceDetail" EntitySet="InvoiceDetails" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="CouponCategories">
           <Key>
@@ -5418,6 +5466,30 @@
             </Principal>
             <Dependent Role="ProfileQuestionTargetCriteria">
               <PropertyRef Name="LinkedSQID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InvoiceDetail_Coupon">
+          <End Type="SMDDevModel.Coupon" Role="Coupon" Multiplicity="0..1" />
+          <End Type="SMDDevModel.InvoiceDetail" Role="InvoiceDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Coupon">
+              <PropertyRef Name="CouponId" />
+            </Principal>
+            <Dependent Role="InvoiceDetail">
+              <PropertyRef Name="CouponID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InvoiceDetail_ProfileQuestion">
+          <End Type="SMDDevModel.ProfileQuestion" Role="ProfileQuestion" Multiplicity="0..1" />
+          <End Type="SMDDevModel.InvoiceDetail" Role="InvoiceDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProfileQuestion">
+              <PropertyRef Name="PQID" />
+            </Principal>
+            <Dependent Role="InvoiceDetail">
+              <PropertyRef Name="PQID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -6021,6 +6093,8 @@
           <EntitySetMapping Name="InvoiceDetails">
             <EntityTypeMapping TypeName="SMDDevModel.InvoiceDetail">
               <MappingFragment StoreEntitySet="InvoiceDetail">
+                <ScalarProperty Name="CouponID" ColumnName="CouponID" />
+                <ScalarProperty Name="PQID" ColumnName="PQID" />
                 <ScalarProperty Name="InvoiceDetailId" ColumnName="InvoiceDetailId" />
                 <ScalarProperty Name="InvoiceId" ColumnName="InvoiceId" />
                 <ScalarProperty Name="ItemName" ColumnName="ItemName" />

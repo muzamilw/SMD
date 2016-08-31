@@ -6,131 +6,108 @@
 
 @model SMD.MIS.Areas.DAM.Models.ImagesModel
 <link href="~/content/dam/damsite.css" rel="stylesheet" />
-<link href="~/Content/DAM/ImageArea.css" rel="stylesheet" />
 <link href="~/Content/themes/Centaurus/css/bootstrap/bootstrap.min.css" rel="stylesheet" />
 
-<link href="~/Content/DAM/jquery.cropbox.css" rel="stylesheet" />
 <section id="main">
     <div class="row">
-      
-            <div class="row" style="padding-left:0px;min-height:400px;">
-                <div class="pull-left" style="width:68%">
-                    @if (Model != null && Model.Images.Count > 0)
-                    {
-                        <div class="imageContainer">
-                            @foreach (var img in Model.Images)
-                            {
-                                <div class="imageBox" id="@img.ImageId">
-                                    <img src="@img.ImageFileName" alt="Image" class="imagePreview" />
-                                    <input  type="hidden" value="@img.ImageTitle" class="title"/> 
-                                </div>
-                            }
-                        </div>
-                    }
-                    else
-                    {
-                        <div class="imageCenter">
-                            No images have been uploaded so far.
-                        </div>
-                    }
-                </div>
-                <div class=" pull-left" style="width:28%">
-                    @using (Html.BeginForm("UploadImage", "Images", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                    {
-                        @Html.HiddenFor(model => model.X)
-                        @Html.HiddenFor(model => model.Y)
-                        @Html.HiddenFor(model => model.Width)
-                        @Html.HiddenFor(model => model.Height)
-                        @Html.HiddenFor(model => model.CompanyId)
-                        @Html.HiddenFor(model => model.mode)
-                        <div >
-                            <div class="editor-row" style="text-align:center;">
-                                -OR- <br />
-                                <button class="btn  btn-success " id="uploadFileMain" style="width:80%;margin-bottom:4px;">Upload an Image</button>
-                            </div>
-                            <div id="upload-choices">
-                                <div class="editor-row">
-                                    <div class="editor-field" style="display:none;">
-                                        @Html.FileFor(model => model.File)
-                                        @Html.ValidationMessageFor(model => model.File)
-                                    </div>
-                                </div>
 
+        <div class="row" style="padding-left:0px;min-height:400px;">
+            <div class="pull-left damImgContainer" style="width:60%">
+                @if (Model != null && Model.Images.Count > 0)
+                {
+                    <div class="imageContainer">
+                        @foreach (var img in Model.Images)
+                        {
+                            <div class="imageBox" id="@img.ImageId">
+                                <img src="@img.ImageFileName" alt="Image" class="imagePreview" />
+                                <input type="hidden" value="@img.ImageTitle" class="title" />
+
+                                <div class="imageBoxName">@img.ImageTitle</div>
                             </div>
-                            <div id="upload-cut" class="uploadPreview" style="display:none;">
-                                <img alt="Field for image cutting" id="preview" src="@Url.Content("~/Content/DAM/empty.png")" style="height:300px;" /><br />
-                                <div class="clear" style="text-align:center;">
-                                    <button type="submit" class="btn  btn-primary " id="btnSave">Crop & Upload</button>
+
+                        }
+                    </div>
+                }
+                else
+                {
+                    <div class="imageCenter">
+                        No images have been uploaded so far.
+                    </div>
+                }
+            </div>
+            <div class=" pull-left" style="width:38%">
+                @using (Html.BeginForm("UploadImage", "Images", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.HiddenFor(model => model.X)
+                    @Html.HiddenFor(model => model.Y)
+                    @Html.HiddenFor(model => model.Width)
+                    @Html.HiddenFor(model => model.Height)
+                    @Html.HiddenFor(model => model.CompanyId)
+                    @Html.HiddenFor(model => model.mode)
+                    @Html.HiddenFor(model => model.bytes)
+                    <div>
+                        <div class="editor-row" style="text-align:center;">
+
+                            <div id="lblOr">-OR-</div>
+                            <button class="btn  btn-success " id="uploadFileMain" style="width:80%;margin-bottom:4px;">Upload an Image</button>
+                        </div>
+                        <div class="image-editor">
+
+                            <div>Your uploaded image must be greater than minumum (<span id="sizestring"></span>). You can pan/zoom your bigger images and crop them to requied size below.</div>
+                            <input type="file" class="cropit-image-input" style="display:none;">
+                            <div class="cropit-preview"></div>
+                            <div class="controls-wrapper">
+                                <div class="slider-wrapper">
+                                    <span class="icon icon-image small-image"></span>
+                                    <input type="range" class="cropit-image-zoom-input" min="0" max="1" step="0.01">
+                                    <span class="icon icon-image large-image"></span>
                                 </div>
                             </div>
-                           
+                            <button class="btn  btn-info  export" id="changeCategory" style="width: 121px;"> Crop & Save</button>
+
                         </div>
-                    }
-                </div>
-               
+
+                    </div>
+                }
             </div>
-        
+
+        </div>
+
         <button style="display:none" id="loadModel" data-toggle="modal" data-target="#damImageEditor"></button>
 
     </div>
-  
+
 </section>
-<!-- Modal -->
-<div class="modal fade" id="damImageEditor" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document" style="width:1000px;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">&nbsp;</h4>
-            </div>
-            <div class="modal-body">
-                <div class="ImageContainer" style="display: block;">
-                    <p><a class="add QuickTextTitle ThemeColor ui-draggable" style="" data-style="title">Image Information</a></p>
 
-                    <div class="pnlImgBank">
-                        <div class="ImgLbl" style="">Image Title</div>
-                        <input type="text" name="InputImgTitle" id="InputImgTitle" class="qTextInput" placeholder="Image Title" maxlength="500">
-                    </div>
-                    <div class="pnlImgBank">
-                        <div class="ImgLbl" style="">Image Thumbnail</div>
-                        <img id="ImgDAMDetail" src="">
-                    </div>
 
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button id="btnUpdateImgProp" class="buttonDesigner">Update</button>
-                <button id="btnDeleteImg" class="buttonDesigner">Delete</button>
-            </div>
-        </div>
-    </div>
-</div>
 
 @section Scripts{
    
 
 
 }
-<script src="~/Scripts/jquery-2.1.0.js"></script>
-<script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
-<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
-<script src="@Url.Content("~/Scripts/jquery.imgareaselect.js")"></script>
-<script src="~/Scripts/bootstrap.min.js"></script>
-<script src="~/Content/DAM/pc1.js"></script>
-<script src="~/Content/DAM/pc2.js"></script>
-<script src="~/Content/DAM/pc3.js"></script>
 
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+<script src="~/Content/DAM/cropit.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
 <script>
     var aspectRatio = "2:1", minheight = 200, minWidth = 400;
     var imgDataUrl = "";
     var selectedImgId = 0;
     $(document).ready(function () {
         var mode = GetURLParameter("mode");
+        var sizeString = "";
         
         var ratioX = 2, ratioY = 1;
-        if (mode == 2) {
-            aspectRatio = "8:5";
-            minheight = 250;
+        if (mode == 1) {
+            aspectRatio = "2:1";
+            minheight = 150;
+            minWidth = 300
+        }
+        else if (mode == 2) {
+            aspectRatio = "2:1";
+            minheight = 200;
             minWidth = 400
         } else if (mode == 3) {
             aspectRatio = "8:5";
@@ -141,20 +118,37 @@
             minWidth = 200
             aspectRatio = "1:2";
         }
-     //   $("#ImgDAMDetail").css("height", minheight +"px");
-        $("#ImgDAMDetail").css("width", minWidth + "px");
-        $("#InputImgTitle").css("width", minWidth + "px");
-        var iId = GetURLParameter("iId");
-        if (iId > 0)
+
+        sizeString = minWidth + " x " + minheight;
+        $("#lblOr").text(sizestring);
+        
+
+        var selection = GetURLParameter("selection");
+        if (eval(selection) == true)
         {
-            loadCropper(iId);
+            $("#lblOr").show();
         }
+        else
+        {
+            $("#lblOr").hide();
+        }
+        
+
+     //   $("#ImgDAMDetail").css("height", minheight +"px");
+        $(".cropit-preview").css("width", minWidth + "px");
+        $(".cropit-preview").css("height", minheight + "px");
+       // $("#InputImgTitle").css("width", minWidth + "px");
+        //var iId = GetURLParameter("iId");
+        //if (iId > 0)
+        //{
+        //    loadCropper(iId);
+        //}
         //What happens if the File changes?
-        $('#File').change(function (evt) {
-            $('#btnSave').click()
+        $('.cropit-image-input').change(function (evt) {
+            $(".image-editor").css("display", "block");
         });   
         $("#uploadFileMain").click(function () {
-            $('#File').click();
+            $('.cropit-image-input').click();
             return false;
         });
     });
@@ -172,81 +166,81 @@
         }
         return 0;
     }
-    function loadCropper(iId)
-    {
-        $("#InputImgTitle").val($("#" + iId + " .title").val());
-        $("#ImgDAMDetail").attr("src", $("#" + iId + " img").attr("src"));
-        selectedImgId = iId;
-        $('#ImgDAMDetail').each(function () {
-            var image = $(this);
-            var cb = image.cropbox({ width: minWidth, height: minheight, showControls: 'auto', xml: null })
-              .on('cropbox', function (event, results, img) {
-                  imgDataUrl = (getDataURL(img));
-              });
+    //function loadCropper(iId)
+    //{
+    //    $("#InputImgTitle").val($("#" + iId + " .title").val());
+    //    $("#ImgDAMDetail").attr("src", $("#" + iId + " img").attr("src"));
+    //    selectedImgId = iId;
+    //    $('#ImgDAMDetail').each(function () {
+    //        var image = $(this);
+    //        var cb = image.cropbox({ width: minWidth, height: minheight, showControls: 'auto', xml: null })
+    //          .on('cropbox', function (event, results, img) {
+    //              imgDataUrl = (getDataURL(img));
+    //          });
 
-        });
-        $("#loadModel").click();
+    //    });
+    //    $("#loadModel").click();
 
-    }
-    $("#btnUpdateImgProp").click(function () {
-        var model = {
-            fileName: $("#InputImgTitle").val(),
-            bytes: imgDataUrl,
-            imageId: selectedImgId,
-            CompanyId: $("#CompanyId").val(),
-            mode: $("#mode").val()
-        }
-        var jsonObjects = JSON.stringify(model, null, 2);
-        var to;
-        to = "/DAMImages/UpdateImage/";
-        var options = {
-            type: "POST",
-            url: to,
-            data: jsonObjects,
-            contentType: "application/json",
-            async: true,
-            success: function (response) {
-                window.location.href = "/DamImages?mode=" + $("#mode").val()
-            },
-            error: function (msg) { alert("Error occured "); console.log(msg); }
-        };
-        var returnText = $.ajax(options).responseText;
-    });
+    //}
+    //$("#btnUpdateImgProp").click(function () {
+    //    var model = {
+    //        fileName: $("#InputImgTitle").val(),
+    //        bytes: imgDataUrl,
+    //        imageId: selectedImgId,
+    //        CompanyId: $("#CompanyId").val(),
+    //        mode: $("#mode").val()
+    //    }
+    //    var jsonObjects = JSON.stringify(model, null, 2);
+    //    var to;
+    //    to = "/DAMImages/UpdateImage/";
+    //    var options = {
+    //        type: "POST",
+    //        url: to,
+    //        data: jsonObjects,
+    //        contentType: "application/json",
+    //        async: true,
+    //        success: function (response) {
+    //            window.location.href = "/DamImages?mode=" + $("#mode").val()
+    //        },
+    //        error: function (msg) { alert("Error occured "); console.log(msg); }
+    //    };
+    //    var returnText = $.ajax(options).responseText;
+    //});
     function showProgress() {
 
     }
     function hideProgress() {
 
     }
-    $("#btnDeleteImg").click(function () {
-        var model = {
-            imageId: selectedImgId
-        }
-        var jsonObjects = JSON.stringify(model, null, 2);
-        var to;
-        to = "/DAMImages/DeleteImage/";
-        var options = {
-            type: "POST",
-            url: to,
-            data: jsonObjects,
-            contentType: "application/json",
-            async: true,
-            success: function (response) {
-                window.location.href = "/DamImages?mode="+$("#mode").val()
-            },
-            error: function (msg) {
-                alert("Error occured "); console.log(msg);
-            }
-        };
-        var returnText = $.ajax(options).responseText;
-    });
-    function getDataURL(result) {
-        var canvas = document.createElement('canvas'), ctx = canvas.getContext('2d');
-        canvas.width = result.options.width;
-        canvas.height = result.options.height;
-        ctx.drawImage(result.$image.get(0), result.result.cropX, result.result.cropY, result.result.cropW, result.result.cropH, 0, 0, result.options.width, result.options.height);
-        return canvas.toDataURL();
-    }
+    //$("#btnDeleteImg").click(function () {
+    //    var model = {
+    //        imageId: selectedImgId
+    //    }
+    //    var jsonObjects = JSON.stringify(model, null, 2);
+    //    var to;
+    //    to = "/DAMImages/DeleteImage/";
+    //    var options = {
+    //        type: "POST",
+    //        url: to,
+    //        data: jsonObjects,
+    //        contentType: "application/json",
+    //        async: true,
+    //        success: function (response) {
+    //            window.location.href = "/DamImages?mode="+$("#mode").val()
+    //        },
+    //        error: function (msg) {
+    //            alert("Error occured "); console.log(msg);
+    //        }
+    //    };
+    //    var returnText = $.ajax(options).responseText;
+    //});
+    //function getDataURL(result) {
+    //    var canvas = document.createElement('canvas'), ctx = canvas.getContext('2d');
+    //    canvas.width = result.options.width;
+    //    canvas.height = result.options.height;
+    //    ctx.drawImage(result.$image.get(0), result.result.cropX, result.result.cropY, result.result.cropW, result.result.cropH, 0, 0, result.options.width, result.options.height);
+    //    return canvas.toDataURL();
+    //}
     window.onload = function () {
         try {
             parent.iframeLoaded();
@@ -255,4 +249,29 @@
         }
         
     }
+
+</script>
+<script>
+    $(function () {
+        $('.image-editor').cropit({
+            imageState: {
+                src: '/content/images/placeholder.png',
+            },
+            imageBackground: true,
+            imageBackgroundBorderWidth: 40,
+        });
+
+        $('.rotate-cw').click(function () {
+            $('.image-editor').cropit('rotateCW');
+        });
+        $('.rotate-ccw').click(function () {
+            $('.image-editor').cropit('rotateCCW');
+        });
+
+        $('.export').click(function () {
+            var imageData = $('.image-editor').cropit('export');
+            $("#bytes").val(imageData);
+           // window.open(imageData);
+        });
+    });
 </script>
