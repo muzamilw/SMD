@@ -13,8 +13,8 @@
                     <div class="row">
                         <div class="col-sm-12" style="float: left; margin-bottom:20px;">
                             <br />
-                            <span style="font-size: 24px;" class="Theme_standard_clr">Your Image Library</span><br />
-                            <span class="red bold rightAlign" style=" margin-right: 14px;"> Watch Video <img src="/Images/youtube_play.JPG" height="25px" /> </span> <span style="font-size: 14px;margin-right:8px;" class="Theme_subheading-Clr">DAM description</span>&nbsp; &nbsp; &nbsp;<br />
+                            <span style="font-size: 24px;" class="Theme_standard_clr">Image Gallery</span><br />
+                            <span class="red bold rightAlign" style=" margin-right: 14px;"> Watch Video <img src="/Images/youtube_play.JPG" height="25px" /> </span> <span style="font-size: 14px;margin-right:8px;" class="Theme_subheading-Clr">All your previously used images in different categories are available for re-use</span>&nbsp; &nbsp; &nbsp;<br />
                         </div>
                     </div>
 
@@ -22,7 +22,12 @@
 
                         <div class="filter-block">
                             <div class="form-group">
-                                <div class="col-xs-3">
+                                
+                                <div class="col-xs-2">
+                                    <label for="txtCampaignDisplayName" class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn">Show images : </label>
+                                </div>
+                                <div class="col-xs-2">
+                                    
                                     <select class="form-control" id="CategoryType">
                                         <option value="1">Logo</option>
                                         <option value="2">Banner Image</option>
@@ -31,10 +36,9 @@
                                     </select>
                                 </div>
 
-                                <div class="col-xs-6">
-                                    <button class="btn  btn-info SurvyButtons" id="changeCategory" style="width: 121px;">Load Category</button>
-
-                                </div>
+                                @*<div class="col-xs-6">
+                                        <button class="btn  btn-info SurvyButtons" id="changeCategory" style="width: 121px;">Load Images</button>
+                                    </div>*@
 
                             </div>
                         </div>
@@ -43,7 +47,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <iframe src="~/DamImages?mode=1"  style="width:100%;height:600px;border:none;" id="iframe"></iframe>
+                        <iframe src="~/DamImages?mode=1&selection=false" style="width:100%;height:600px;border:none;" id="iframe"></iframe>
                     </div>
                 </div>
 
@@ -56,9 +60,14 @@
 </div>
 @section Scripts{
     <script type="text/javascript">
-        $("#changeCategory").click(function () {
-            $("#iframe").attr("src", "/DamImages?mode=" + $("#CategoryType").val());
+        $("#CategoryType").change(function () {
+            $("#iframe").attr("src", "/DamImages?selection=false&mode=" + $("#CategoryType").val());
         })
+
+        $("#changeCategory").click(function () {
+            $("#iframe").attr("src", "/DamImages?selection=false&mode=" + $("#CategoryType").val());
+        });
+
         $("#btnDAM").css("background-color", "#93bf47");
         function iframeLoaded() {
             var iframeBody = $('body', $('#iframe')[0].contentWindow.document);
@@ -66,7 +75,7 @@
                 console.log(this.src);
             });
         }
-       
+
     </script>
 
 

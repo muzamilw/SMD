@@ -195,10 +195,10 @@ div#title {
 }
 
 .imageBox {
-    margin: 5px; float: left; height: 96px; border: 0; overflow: hidden;
-    width: 128px;
+    margin: 6px; float: left; height: 200px; border: 0; overflow: hidden;
+    width: 200px;
     cursor:pointer;
-    border: 1px solid #fff;
+    border: 1px solid #eee;
 }
 
 .imageBox:hover {
@@ -207,7 +207,16 @@ div#title {
 }
 
 .imagePreview {
-    height: 100%; display: block; margin: 0 auto;
+    max-height: 150px; display: block; margin: 0 auto;max-width:200px;
+}
+
+.imageBoxName {
+    display:block;
+    padding:3px;
+    color:darkgray;
+    text-align:center;
+    font-size:12px;
+    margin-top:5px;
 }
 
 .imageCenter {
