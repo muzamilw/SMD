@@ -13,7 +13,12 @@
               couponId = ko.observable(couponid),
               isApproved = ko.observable(coApproved),
               rejectedReason = ko.observable(coRejectedReason),
-              expireDate = ko.observable(coExpireDate),
+              expireDate = ko.observable(coExpireDate),              
+              expirtyDateUi = ko.computed({
+                  read: function () {
+                      return expireDate() !== undefined ? moment(expireDate(), ist.datePattern).toDate() : undefined;
+                  }
+              }),
               couponImage1 = ko.observable(coImage1),
               couponImage2 = ko.observable(coImage2),
               couponImage3 = ko.observable(coImage3),
@@ -133,7 +138,7 @@
               reset: reset,
               isValid: isValid,
               errors: errors,
-
+              expirtyDateUi: expirtyDateUi
 
           };
       };
