@@ -882,7 +882,7 @@ define("Coupons/Coupons.viewModel",
 
                                 if (data != null) {
                                     couponModel(model.Coupon.Create(data.Coupon[0]));
-                                   
+                                    
                                     CouponActiveMonth(couponModel().CouponActiveYear() + ' - ' + GetMonthNameByID(couponModel().CouponActiveMonth()));
                                   
                                     view.initializeTypeahead();
@@ -896,6 +896,7 @@ define("Coupons/Coupons.viewModel",
                                         $("#saveBtn").css("display", "none")
                                         $("#btnCancel,#btnPauseCampaign").removeAttr('disabled');
                                         $("#btnCancel").css("display", "none");
+                                        $("#btnCancel,#btnPauseCampaign,#btnClose").removeAttr('disabled');
                                         couponModel().StatusValue("Submitted for Approval");
                                     } else if (couponModel().Status() == 3) {
                                         //$("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
@@ -983,7 +984,7 @@ define("Coupons/Coupons.viewModel",
                                     randonNumber("?r=" + Math.floor(Math.random() * (20 - 1 + 1)) + 1);
 
 
-
+                                 
                                     $.unblockUI(spinner);
 
                                 }
@@ -1824,6 +1825,7 @@ define("Coupons/Coupons.viewModel",
                     $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign").css("display", "none");
                     $("#btnSubmitForApproval,#saveBtn,.table-link").css("display", "inline-block");
                     $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign,#btnStopAndTerminate,#btnCopyCampaign").removeAttr('disabled');
+                    
                     showMainMenu();
                       
                 }

@@ -10,68 +10,76 @@
 
 <section id="main">
     <div class="row">
-      
-            <div class="row" style="padding-left:0px;min-height:400px;">
-                <div class="pull-left damImgContainer" style="width:60%">
-                    @if (Model != null && Model.Images.Count > 0)
-                    {
-                        <div class="imageContainer">
-                            @foreach (var img in Model.Images)
-                            {
-                                <div class="imageBox" id="@img.ImageId">
-                                    <img src="@img.ImageFileName" alt="Image" class="imagePreview" />
-                                    <input  type="hidden" value="@img.ImageTitle" class="title"/> 
-                                </div>
-                            }
-                        </div>
-                    }
-                    else
-                    {
-                        <div class="imageCenter">
-                            No images have been uploaded so far.
-                        </div>
-                    }
-                </div>
-                <div class=" pull-left" style="width:38%">
-                    @using (Html.BeginForm("UploadImage", "Images", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                    {
-                        @Html.HiddenFor(model => model.X)
-                        @Html.HiddenFor(model => model.Y)
-                        @Html.HiddenFor(model => model.Width)
-                        @Html.HiddenFor(model => model.Height)
-                        @Html.HiddenFor(model => model.CompanyId)
-                        @Html.HiddenFor(model => model.mode)
-                        @Html.HiddenFor(model => model.bytes)
-                        <div >
-                            <div class="editor-row" style="text-align:center;">
-                                -OR- <br />
-                                <button class="btn  btn-success " id="uploadFileMain" style="width:80%;margin-bottom:4px;">Upload an Image</button>
-                            </div>
-                            <div class="image-editor">
-                                <input type="file" class="cropit-image-input" style="display:none;">
-                                <div class="cropit-preview"></div>
-                                <div class="controls-wrapper">
-                                    <div class="slider-wrapper">
-                                        <span class="icon icon-image small-image"></span>
-                                        <input type="range" class="cropit-image-zoom-input" min="0" max="1" step="0.01">
-                                        <span class="icon icon-image large-image"></span>
-                                    </div>
-                                </div>
-                                <button class="btn  btn-info  export" id="changeCategory" style="width: 121px;"> Save</button>
-                              
+
+        <div class="row" style="padding-left:0px;min-height:400px;">
+            <div class="pull-left damImgContainer" style="width:60%">
+                @if (Model != null && Model.Images.Count > 0)
+                {
+                    <div class="imageContainer">
+                        @foreach (var img in Model.Images)
+                        {
+                            <div class="imageBox" id="@img.ImageId">
+                                <img src="@img.ImageFileName" alt="Image" class="imagePreview" />
+                                <input type="hidden" value="@img.ImageTitle" class="title" />
+
+                                <div class="imageBoxName">@img.ImageTitle</div>
                             </div>
 
-                        </div>
-                    }
-                </div>
-               
+                        }
+                    </div>
+                }
+                else
+                {
+                    <div class="imageCenter">
+                        No images have been uploaded so far.
+                    </div>
+                }
             </div>
-        
+            <div class=" pull-left" style="width:38%">
+                @using (Html.BeginForm("UploadImage", "Images", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.HiddenFor(model => model.X)
+                    @Html.HiddenFor(model => model.Y)
+                    @Html.HiddenFor(model => model.Width)
+                    @Html.HiddenFor(model => model.Height)
+                    @Html.HiddenFor(model => model.CompanyId)
+                    @Html.HiddenFor(model => model.mode)
+                    @Html.HiddenFor(model => model.bytes)
+                    <div>
+                        <div class="editor-row" style="text-align:center;">
+
+                            <div id="lblOr">-OR-</div>
+                            <button class="btn  btn-success " id="uploadFileMain" style="width:80%;margin-bottom:4px;">Upload an Image</button>
+                        </div>
+                        <div class="image-editor">
+
+                            <div>Your uploaded image must be greater than minumum (<span id="sizestring"></span>). You can pan/zoom your bigger images and crop them to requied size below.</div>
+                            <input type="file" class="cropit-image-input" style="display:none;">
+                            <div class="cropit-preview"></div>
+                            <div class="controls-wrapper">
+                                <div class="slider-wrapper">
+                                    <span class="icon icon-image small-image"></span>
+                                    <input type="range" class="cropit-image-zoom-input" min="0" max="1" step="0.01">
+                                    <span class="icon icon-image large-image"></span>
+                                </div>
+                            </div>
+                            <button class="btn  btn-info  export" id="changeCategory" style="width: 121px;"> Crop & Save</button>
+
+                        </div>
+
+                    </div>
+                }
+            </div>
+
+        </div>
+
         <button style="display:none" id="loadModel" data-toggle="modal" data-target="#damImageEditor"></button>
 
     </div>
-  
+
 </section>
+
+
 
 @section Scripts{
    
@@ -89,7 +97,7 @@
     var selectedImgId = 0;
     $(document).ready(function () {
         var mode = GetURLParameter("mode");
-        
+        var sizeString = "";
         
         var ratioX = 2, ratioY = 1;
         if (mode == 1) {
@@ -110,6 +118,22 @@
             minWidth = 200
             aspectRatio = "1:2";
         }
+
+        sizeString = minWidth + " x " + minheight;
+        $("#lblOr").text(sizestring);
+        
+
+        var selection = GetURLParameter("selection");
+        if (eval(selection) == true)
+        {
+            $("#lblOr").show();
+        }
+        else
+        {
+            $("#lblOr").hide();
+        }
+        
+
      //   $("#ImgDAMDetail").css("height", minheight +"px");
         $(".cropit-preview").css("width", minWidth + "px");
         $(".cropit-preview").css("height", minheight + "px");
@@ -231,7 +255,7 @@
     $(function () {
         $('.image-editor').cropit({
             imageState: {
-                src: 'http://lorempixel.com/500/400/',
+                src: '/content/images/placeholder.png',
             },
             imageBackground: true,
             imageBackgroundBorderWidth: 40,
