@@ -26,8 +26,15 @@ namespace SMD.MIS.Areas.Api.Models
         public int? PenalityForNotAnswering { get; set; }
         public Nullable<int> AnswerNeeded { get; set; }
         public Nullable<int> AsnswerCount { get; set; }
+        public Nullable<int> AgeRangeStart { get; set; }
+        public Nullable<int> AgeRangeEnd { get; set; }
+        public Nullable<int> Gender { get; set; }
+
         public int? Status { get; set; }
 
         public ICollection<ProfileQuestionAnswer> ProfileQuestionAnswers { get; set; }
+        public ICollection<ProfileQuestionTargetCriteria> ProfileQuestionTargetCriteria { get; set; }
+        public ICollection<ProfileQuestionTargetLocation> ProfileQuestionTargetLocation { get; set; }
+
     }
 }

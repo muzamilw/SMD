@@ -701,6 +701,7 @@ define("survey/survey.viewModel",
                         if (selectedQuestion().isValid()) {
 
                             if (ValidateSurvey() == true) {
+
                                 if (reachedAudience() > 0) {
 
                                     if (userBaseData().isStripeIntegrated == true) {

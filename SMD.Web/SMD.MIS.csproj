@@ -400,6 +400,8 @@
     <Compile Include="Areas\Api\Models\CouponsApproval.cs" />
     <Compile Include="Areas\Api\Models\Phrase.cs" />
     <Compile Include="Areas\Api\Models\PhraseResponseModel.cs" />
+    <Compile Include="Areas\Api\Models\ProfileQuestionTargetCriteria.cs" />
+    <Compile Include="Areas\Api\Models\ProfileQuestionTargetLocation.cs" />
     <Compile Include="Areas\Api\Models\Section.cs" />
     <Compile Include="Areas\Api\Models\CompanyApiModel.cs" />
     <Compile Include="Areas\Coupons\CouponsAreaRegistration.cs" />

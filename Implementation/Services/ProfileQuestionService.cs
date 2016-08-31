@@ -14,6 +14,8 @@ using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Web;
+using SMD.Repository.Repositories;
+using SMD.Interfaces;
 
 namespace SMD.Implementation.Services
 {
@@ -30,6 +32,9 @@ namespace SMD.Implementation.Services
         private readonly IProfileQuestionAnswerRepository _profileQuestionAnswerRepository;
         private readonly IIndustryRepository _industoryRepository;
         private readonly IEducationRepository _educationRepository;
+        private readonly IProfileQuestionTargetCriteriaRepository _profileQuestionTargetCriteriaRepository;
+        private readonly IProfileQuestionTargetLocationRepository _profileQuestionTargetLocationRepository;
+    
         #endregion
         #region Constructor
         /// <summary>
@@ -38,7 +43,7 @@ namespace SMD.Implementation.Services
 
         public ProfileQuestionService(IProfileQuestionRepository profileQuestionRepository, ICountryRepository countryRepository, 
             ILanguageRepository languageRepository, IProfileQuestionGroupRepository profileQuestionGroupRepository,
-            IProfileQuestionAnswerRepository profileQuestionAnswerRepository, IIndustryRepository industoryRepository, IEducationRepository educationRepository)
+            IProfileQuestionAnswerRepository profileQuestionAnswerRepository, IIndustryRepository industoryRepository, IEducationRepository educationRepository, IProfileQuestionTargetCriteriaRepository profileQuestionTargetCriteriaRepository, IProfileQuestionTargetLocationRepository profileQuestionTargetLocationRepository)
         {
             _profileQuestionRepository = profileQuestionRepository;
             _countryRepository = countryRepository;
@@ -47,7 +52,8 @@ namespace SMD.Implementation.Services
             _profileQuestionAnswerRepository = profileQuestionAnswerRepository;
             _industoryRepository = industoryRepository;
             _educationRepository = educationRepository;
-
+            _profileQuestionTargetCriteriaRepository = profileQuestionTargetCriteriaRepository;
+            _profileQuestionTargetLocationRepository = profileQuestionTargetLocationRepository;
         }
 
         #endregion
@@ -140,6 +146,8 @@ namespace SMD.Implementation.Services
         /// </summary>
         public ProfileQuestion SaveProfileQuestion(ProfileQuestion source)
         {
+
+
             var serverObj=_profileQuestionRepository.Find(source.PqId);
             #region Edit Question
             // Edit Profile Question 
@@ -148,7 +156,6 @@ namespace SMD.Implementation.Services
                 serverObj.Question = source.Question;
                 serverObj.Priority = source.Priority;
                 serverObj.HasLinkedQuestions = source.HasLinkedQuestions;
-
                 serverObj.LanguageId = source.LanguageId;
                 serverObj.CountryId = source.CountryId;
                 serverObj.ProfileGroupId = source.ProfileGroupId;
@@ -159,6 +166,7 @@ namespace SMD.Implementation.Services
                 serverObj.PenalityForNotAnswering = source.PenalityForNotAnswering;
                 serverObj.Status = source.Status;
                 serverObj.ModifiedDate = DateTime.Now.Add(-(_profileQuestionRepository.UserTimezoneOffSet));
+
                 if (source.ProfileQuestionAnswers != null)
                 {
                     if (serverObj.ProfileQuestionAnswers == null)
@@ -258,7 +266,11 @@ namespace SMD.Implementation.Services
                     ModifiedDate = source.ModifiedDate,
                     PenalityForNotAnswering = source.PenalityForNotAnswering,
                     Status = source.Status,
-                    CompanyId=source.CompanyId
+                    CompanyId=source.CompanyId,
+                    AgeRangeStart=source.AgeRangeStart,
+                    AgeRangeEnd=source.AgeRangeEnd,
+                    Gender=source.Gender
+
                 };
                  serverObj.CompanyId = _profileQuestionRepository.CompanyId;
                 _profileQuestionRepository.Add(serverObj);
@@ -293,7 +305,32 @@ namespace SMD.Implementation.Services
                 }
             }
             #endregion
-
+            foreach (var loc in source.ProfileQuestionTargetLocations)
+            {
+                if (loc.ID != 0)
+                {
+                     _profileQuestionTargetLocationRepository.Update(loc);
+                }
+                else
+                {
+                    loc.PQID = serverObj.PqId;
+                    _profileQuestionTargetLocationRepository.Add(loc);
+                }
+            }
+            // add or update criteria
+            foreach (var criteria in source.ProfileQuestionTargetCriterias)
+            {
+                if (criteria.ID != 0)
+                {
+                    if (criteria.Type != (int)ProfileQuestionTargetCriteriaType.Language && criteria.Type != (int)ProfileQuestionTargetCriteriaType.Industry)  // industry and languages are addable and deleteable
+                        _profileQuestionTargetCriteriaRepository.Update(criteria);
+                }
+                else
+                {
+                    criteria.PQID = serverObj.PqId;
+                    _profileQuestionTargetCriteriaRepository.Add(criteria);
+                }
+            }
             _profileQuestionRepository.SaveChanges();
             return _profileQuestionRepository.Find(serverObj.PqId);
 

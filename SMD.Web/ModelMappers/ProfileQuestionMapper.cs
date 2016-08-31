@@ -50,7 +50,10 @@ namespace SMD.MIS.ModelMappers
                 PenalityForNotAnswering = source.PenalityForNotAnswering,
                 Status = source.Status,
                 AnswerNeeded=source.AnswerNeeded,
-                AsnswerCount=source.AsnswerCount
+                AsnswerCount=source.AsnswerCount,
+                AgeRangeStart=source.AgeRangeStart,
+                AgeRangeEnd=source.AgeRangeEnd,
+                Gender=source.Gender
             };
         }
 

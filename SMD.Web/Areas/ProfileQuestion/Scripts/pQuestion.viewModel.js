@@ -145,7 +145,7 @@ define("pQuestion/pQuestion.viewModel",
                                 countries.removeAll();
                                 qGroup.removeAll();
                                 linkedQuestions.removeAll();
-                                userBaseData(data.objBaseData);
+                                userBaseData(baseDataFromServer.objBaseData);
                                 ko.utils.arrayPushAll(langs(), baseDataFromServer.LanguageDropdowns);
                                 ko.utils.arrayPushAll(countries(), baseDataFromServer.CountryDropdowns);
                                 ko.utils.arrayPushAll(qGroup(), baseDataFromServer.ProfileQuestionGroupDropdowns);
@@ -164,6 +164,14 @@ define("pQuestion/pQuestion.viewModel",
                             }
                         });
                     },
+                     onRemoveIndustry = function (item) {
+                         // Ask for confirmation
+                         confirmation.afterProceed(function () {
+                             selectedQuestion().ProfileQuestionTargetCriteria.remove(item);
+                             toastr.success("Removed Successfully!");
+                         });
+                         confirmation.show();
+                     },
                     // Search Filter 
                     filterProfileQuestion= function() {
                         pager().reset();
@@ -236,8 +244,7 @@ define("pQuestion/pQuestion.viewModel",
                         getAudienceCount();
                         //buildParentSQList();
                         bindAudienceReachCount();
-                        selectedQuestion().ProfileQuestionTargetCriteria([]);
-                        selectedQuestion().ProfileQuestionTargetLocation([]);
+                    
                         view.initializeTypeahead();
                         isEditorVisible(true);
                     },
@@ -350,7 +357,7 @@ define("pQuestion/pQuestion.viewModel",
                                 }
                             },
                             addIndustry = function (selected) {
-                                debugger;
+
                                 selectedQuestion().ProfileQuestionTargetCriteria.push(new model.ProfileQuestionTargetCriteria.Create({
                                     Industry: selected.IndustryName,
                                     IndustryId: selected.IndustryId,
@@ -370,6 +377,7 @@ define("pQuestion/pQuestion.viewModel",
                     },
                     // Delete PQ
                     deleteProfileQuestion = function (item) {
+
                         dataservice.deleteProfileQuestion(item.convertToServerData(), {
                             success: function () {
                                 var newObjtodelete = questions.find(function (temp) {
@@ -486,6 +494,7 @@ define("pQuestion/pQuestion.viewModel",
                     },
                     // Save Question / Add 
                     onSaveProfileQuestion = function () {
+                        debugger;
                         if (!doBeforeSave()) {
                             return;
                         }
@@ -497,8 +506,10 @@ define("pQuestion/pQuestion.viewModel",
                                 serverAnswers.push(item().convertToServerData());
                             }
                         });
-                        debugger;
+                       
                         var serverQuestion = selectedQuestion().convertToServerData();
+
+
                         serverQuestion.ProfileQuestionAnswers = serverAnswers;
                         
                         dataservice.saveProfileQuestion(serverQuestion, {
@@ -924,7 +935,8 @@ define("pQuestion/pQuestion.viewModel",
                     totalAudience: totalAudience,
                     audienceReachMode: audienceReachMode,
                     selectedIndustryIncludeExclude: selectedIndustryIncludeExclude,
-                    userBaseData: userBaseData
+                    userBaseData: userBaseData,
+                    onRemoveIndustry: onRemoveIndustry
                 };
             })()
         };
