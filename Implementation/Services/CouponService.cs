@@ -642,7 +642,7 @@ namespace SMD.Implementation.Services
         public string UpdateCouponForApproval(Coupon source)
         {
             string respMesg = "True";
-            var dbCo = couponRepository.Find(source.CouponId);
+            var dbCo = couponRepository.GetCouponByIdSingle(source.CouponId);
             // Update 
             if (dbCo != null)
             {
@@ -669,8 +669,8 @@ namespace SMD.Implementation.Services
                 {
                     dbCo.Status = (Int32)AdCampaignStatus.ApprovalRejected;
                     dbCo.Approved = false;
-                    dbCo.RejectedReason = source.RejectedReason;
-                    emailManagerService.SendQuestionRejectionEmail(dbCo.UserId);
+                    dbCo.RejectedReason = source.RejectedReason.ToString();
+                    emailManagerService.SendCouponRejectionEmail(dbCo.UserId, dbCo.RejectedReason);
                 }
                 dbCo.ModifiedDateTime = DateTime.Now;
                 dbCo.ModifiedBy = couponRepository.LoggedInUserIdentity;
@@ -689,7 +689,13 @@ namespace SMD.Implementation.Services
             // User who added Campaign for approval 
             var user = webApiUserService.GetUserByUserId(source.UserId);
             // Get Current Product
-            var product = productRepository.GetProductByCountryId("Ad");
+            var product = (dynamic)null;
+            if(source.CouponListingMode==1)
+                product = productRepository.GetProductByCountryId("couponfree");
+            if (source.CouponListingMode == 2)
+                product = productRepository.GetProductByCountryId("couponunlimited");
+            if (source.CouponListingMode == 3)
+                product = productRepository.GetProductByCountryId("couponnationwide");
             // Tax Applied
             var tax = taxRepository.GetTaxByCountryId(user.Company.CountryId);
             // Total includes tax
@@ -738,13 +744,14 @@ namespace SMD.Implementation.Services
                     {
                         InvoiceId = invoice.InvoiceId,
                         SqId = null,
+                        PQID=null,
                         ProductId = product.ProductId,
                         ItemName = "Coupons",
                         ItemAmount = (double)amount,
                         ItemTax = (double)tax.TaxValue,
                         ItemDescription = "This is description!",
                         ItemGrossAmount = (double)amount,
-                        CampaignId = source.CouponId,
+                        CouponID = source.CouponId,
 
                     };
                     invoiceDetailRepository.Add(invoiceDetail);

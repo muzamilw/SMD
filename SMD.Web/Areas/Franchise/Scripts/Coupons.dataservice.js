@@ -21,7 +21,7 @@ define("FranchiseDashboard/Coupons.dataservice", function () {
 
                     // Edit AdCampaign
                     amplify.request.define('saveCoupon', 'ajax', {
-                        url: '/Api/AdCampaignApproval',
+                        url: '/Api/CouponApproval',
                         dataType: 'json',
                         type: 'POST'
                     });

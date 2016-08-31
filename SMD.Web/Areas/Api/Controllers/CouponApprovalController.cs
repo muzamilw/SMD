@@ -18,9 +18,9 @@ namespace SMD.MIS.Areas.Api.Controllers
 {
     public class CouponApprovalController : ApiController
     {
-        #region Attributes 
+        #region Attributes
         private readonly ICouponService _couponService;
-        #endregion 
+        #endregion
 
         #region Constructor
 
@@ -31,34 +31,31 @@ namespace SMD.MIS.Areas.Api.Controllers
         #endregion
 
         #region Methods
-      
+
         public AddCouponsResponseModelForApproval Get([FromUri]GetPagedListRequest request)
         {
-            
-            Mapper.Initialize(cfg => cfg.CreateMap<SMD.Models.DomainModels.Coupon, CouponsApproval >());
+
+            Mapper.Initialize(cfg => cfg.CreateMap<SMD.Models.DomainModels.Coupon, CouponsApproval>());
             var obj = _couponService.GetAdCampaignForAproval(request);
-
-           var retobj =  new AddCouponsResponseModelForApproval();
-
-          
+            var retobj = new AddCouponsResponseModelForApproval();
             foreach (var item in obj.Coupons)
             {
-
                 retobj.Coupons.Add(Mapper.Map<SMD.Models.DomainModels.Coupon, CouponsApproval>(item));
             }
-
-
             retobj.TotalCount = obj.TotalCount;
-
             return retobj;
-           
-
-            
         }
-            
-       
-      
 
+        public string Post(CouponsApproval coupon)
+        {
+            Mapper.Initialize(cfg => cfg.CreateMap<CouponsApproval, SMD.Models.DomainModels.Coupon>());
+            if (coupon == null || !ModelState.IsValid)
+            {
+                throw new HttpException((int)HttpStatusCode.BadRequest, "Invalid Request");
+            }
+
+            return _couponService.UpdateCouponForApproval(Mapper.Map<CouponsApproval, SMD.Models.DomainModels.Coupon>(coupon));
+        }
         #endregion
     }
 }

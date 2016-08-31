@@ -52,37 +52,62 @@ define("FranchiseDashboard/Coupons.viewModel",
                                 }
                             });
                     },
+                   onApproveCoupon = function () {
+                             confirmation.messageText("Do you want to approve this Coupon ? System will attempt to collect payment and generate invoice");
+                             confirmation.show();
+                             confirmation.afterCancel(function () {
+                                 confirmation.hide();
+                             });
+                             confirmation.afterProceed(function () {
+                                 selectedCoupon().isApproved(true);
+                                 onSaveCoupon();
+                             });
+                         },
                       onSaveCoupon = function () {
 
                           var couponId = selectedCoupon().couponId();
-                          dataservice.saveAdCampaign(selectedCoupon().convertToServerData(), {
+                          dataservice.saveCoupon(selectedCoupon().convertToServerData(), {
                               success: function (response) {
 
-                                  //if (response.indexOf("Failed") == -1) {
-                                  //    dataservice.sendApprovalRejectionEmail(selectedCoupon().convertToServerData(), {
-                                  //        success: function (obj) {
-                                  //            getCampaigns();
-                                  //            //var existingCampaigntodelete = $.grep(campaigns(), function (n, i) {
-                                  //            //    return (n.id() == campId);
-                                  //            //});
+                                  if (response.indexOf("Failed") == -1) {
+                                      dataservice.sendApprovalRejectionEmail(selectedCoupon().convertToServerData(), {
+                                          success: function (obj) {
+                                              getCoupons();
+                                              //var existingCampaigntodelete = $.grep(campaigns(), function (n, i) {
+                                              //    return (n.id() == campId);
+                                              //});
 
-                                  //            //campaigns.remove(existingCampaigntodelete);
+                                              //campaigns.remove(existingCampaigntodelete);
 
-                                  //            isEditorVisible(false);
-                                  //        },
-                                  //        error: function () {
-                                  //            toastr.error("Failed to save!");
-                                  //        }
-                                  //    });
-                                  //} else {
-                                  //    toastr.error(response);
-                                  //}
+                                              isEditorVisible(false);
+                                          },
+                                          error: function () {
+                                              toastr.error("Failed to save!");
+                                          }
+                                      });
+                                  } else {
+                                      toastr.error(response);
+                                  }
                               },
                               error: function () {
                                   toastr.error("Failed to save!");
                               }
                           });
                       },
+                       hasChangesOnCoupon = ko.computed(function () {
+                           if (selectedCoupon() == undefined) {
+                                return false;
+                            }
+                           return (selectedCoupon().hasChanges());
+                        }),
+                      onRejectCoupon = function () {
+                          if (selectedCoupon().rejectedReason() == undefined || selectedCoupon().rejectedReason() == "" || selectedCoupon().rejectedReason() == " ") {
+                                 toastr.info("Please add rejection reason!");
+                                 return false;
+                             }
+                             selectedCoupon().isApproved(false);
+                             onSaveCoupon();
+                         },
 
                     // Initialize the view model
                     initialize = function (specifiedView) {
@@ -109,7 +134,10 @@ define("FranchiseDashboard/Coupons.viewModel",
                     onEditCoupon: onEditCoupon,
                     selectedCoupon: selectedCoupon,
                     closeEditDialog: closeEditDialog,
+                    onApproveCoupon:onApproveCoupon,
                     onSaveCoupon: onSaveCoupon,
+                    onRejectCoupon: onRejectCoupon,
+                    hasChangesOnCoupon: hasChangesOnCoupon,
 
                 };
             })()
