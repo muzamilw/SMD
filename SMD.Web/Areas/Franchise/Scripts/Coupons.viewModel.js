@@ -61,6 +61,7 @@ define("FranchiseDashboard/Coupons.viewModel",
                              confirmation.afterProceed(function () {
                                  selectedCoupon().isApproved(true);
                                  onSaveCoupon();
+                                 toastr.success("Approved Successfully.");
                              });
                          },
                       onSaveCoupon = function () {
@@ -85,7 +86,9 @@ define("FranchiseDashboard/Coupons.viewModel",
                                               toastr.error("Failed to save!");
                                           }
                                       });
-                                  } else {
+                                  }
+                                  else {
+
                                       toastr.error(response);
                                   }
                               },
@@ -107,6 +110,7 @@ define("FranchiseDashboard/Coupons.viewModel",
                              }
                              selectedCoupon().isApproved(false);
                              onSaveCoupon();
+                             toastr.success("Rejected Successfully.");
                          },
 
                     // Initialize the view model
