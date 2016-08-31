@@ -12,7 +12,7 @@
     <div class="row">
 
         <div class="row" style="padding-left:0px;min-height:400px;">
-            <div class="pull-left damImgContainer" style="width:60%">
+            <div class="pull-left damImgContainer" style="width:60%;overflow:auto;height:600px;overflow-x: hidden; ">
                 @if (Model != null && Model.Images.Count > 0)
                 {
                     <div class="imageContainer">
@@ -48,12 +48,12 @@
                     <div>
                         <div class="editor-row" style="text-align:center;">
 
-                            <div id="lblOr">-OR-</div>
+                            @*<div id="lblOr" >-OR-</div>*@
                             <button class="btn  btn-success " id="uploadFileMain" style="width:80%;margin-bottom:4px;">Upload an Image</button>
                         </div>
                         <div class="image-editor">
 
-                            <div>Your uploaded image must be greater than minumum (<span id="sizestring"></span>). You can pan/zoom your bigger images and crop them to requied size below.</div>
+                            <div style="margin-bottom:60px;margin-left:30px;margin-right:20px;">Your uploaded image must be greater than minimum size of (<b><span id="spansizestring"></span></b>). You can pan/zoom your bigger images and crop them to requied size below.</div>
                             <input type="file" class="cropit-image-input" style="display:none;">
                             <div class="cropit-preview"></div>
                             <div class="controls-wrapper">
@@ -119,19 +119,20 @@
             aspectRatio = "1:2";
         }
 
-        sizeString = minWidth + " x " + minheight;
-        $("#lblOr").text(sizestring);
+        //debugger
+        var sizeString = ''+ minWidth + ' x ' + minheight;
+        $("#spansizestring").text(sizeString);
         
 
         var selection = GetURLParameter("selection");
-        if (eval(selection) == true)
-        {
-            $("#lblOr").show();
-        }
-        else
-        {
-            $("#lblOr").hide();
-        }
+        //if (eval(selection) == true)
+        //{
+        //    $("#lblOr").show();
+        //}
+        //else
+        //{
+        //    $("#lblOr").hide();
+        //}
         
 
      //   $("#ImgDAMDetail").css("height", minheight +"px");

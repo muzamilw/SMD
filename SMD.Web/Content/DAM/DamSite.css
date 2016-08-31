@@ -191,7 +191,7 @@ div#title {
 -----------------------------------------------------------*/
 
 .imageContainer {
-    margin: 10px; position: relative;
+    margin: 5px; position: relative;
 }
 
 .imageBox {
@@ -364,7 +364,7 @@ div#title {
         margin-top: 10px;
       }
       .image-editor{
-          margin-top:62px;
+          margin-top:5px;
       }
       .cropit-preview {
               margin: auto;
