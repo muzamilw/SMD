@@ -147,6 +147,8 @@
         <AssociationConnector Association="DomainModels.FK_ProfileQuestionTargetLocation_ProfileQuestion" />
         <AssociationConnector Association="DomainModels.FK_ProfileQuestionTargetCriteria_ProfileQuestionAnswer" />
         <AssociationConnector Association="DomainModels.FK_ProfileQuestionTargetCriteria_ProfileQuestion1" />
+        <AssociationConnector Association="DomainModels.FK_InvoiceDetail_Coupon" />
+        <AssociationConnector Association="DomainModels.FK_InvoiceDetail_ProfileQuestion" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

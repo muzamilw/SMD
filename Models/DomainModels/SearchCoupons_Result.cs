@@ -21,6 +21,10 @@ namespace SMD.Models.DomainModels
 
         public Nullable<int> TotalItems { get; set; }
 
+        public Nullable<DateTime> eod { get; set; }
+
+        public Nullable<DateTime> strt { get; set; }
+
         public Nullable<double> distance { get; set; }
         
     }

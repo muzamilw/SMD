@@ -567,6 +567,8 @@
           <Property Name="CampaignId" Type="bigint" />
           <Property Name="SQId" Type="bigint" />
           <Property Name="ProductId" Type="int" />
+          <Property Name="PQID" Type="int" />
+          <Property Name="CouponID" Type="bigint" />
         </EntityType>
         <EntityType Name="Language">
           <Key>
@@ -1490,6 +1492,18 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_InvoiceDetail_Coupon">
+          <End Role="Coupon" Type="Self.Coupon" Multiplicity="0..1" />
+          <End Role="InvoiceDetail" Type="Self.InvoiceDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Coupon">
+              <PropertyRef Name="CouponId" />
+            </Principal>
+            <Dependent Role="InvoiceDetail">
+              <PropertyRef Name="CouponID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_InvoiceDetail_Invoice">
           <End Role="Invoice" Type="Self.Invoice" Multiplicity="1" />
           <End Role="InvoiceDetail" Type="Self.InvoiceDetail" Multiplicity="*" />
@@ -1511,6 +1525,18 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
             </Principal>
             <Dependent Role="InvoiceDetail">
               <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InvoiceDetail_ProfileQuestion">
+          <End Role="ProfileQuestion" Type="Self.ProfileQuestion" Multiplicity="0..1" />
+          <End Role="InvoiceDetail" Type="Self.InvoiceDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProfileQuestion">
+              <PropertyRef Name="PQID" />
+            </Principal>
+            <Dependent Role="InvoiceDetail">
+              <PropertyRef Name="PQID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2403,12 +2429,20 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
             <End Role="AdCampaign" EntitySet="AdCampaign" />
             <End Role="InvoiceDetail" EntitySet="InvoiceDetail" />
           </AssociationSet>
+          <AssociationSet Name="FK_InvoiceDetail_Coupon" Association="Self.FK_InvoiceDetail_Coupon">
+            <End Role="Coupon" EntitySet="Coupon" />
+            <End Role="InvoiceDetail" EntitySet="InvoiceDetail" />
+          </AssociationSet>
           <AssociationSet Name="FK_InvoiceDetail_Invoice" Association="Self.FK_InvoiceDetail_Invoice">
             <End Role="Invoice" EntitySet="Invoice" />
             <End Role="InvoiceDetail" EntitySet="InvoiceDetail" />
           </AssociationSet>
           <AssociationSet Name="FK_InvoiceDetail_Products" Association="Self.FK_InvoiceDetail_Products">
             <End Role="Products" EntitySet="Products" />
+            <End Role="InvoiceDetail" EntitySet="InvoiceDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InvoiceDetail_ProfileQuestion" Association="Self.FK_InvoiceDetail_ProfileQuestion">
+            <End Role="ProfileQuestion" EntitySet="ProfileQuestion" />
             <End Role="InvoiceDetail" EntitySet="InvoiceDetail" />
           </AssociationSet>
           <AssociationSet Name="FK_InvoiceDetail_SurveyQuestion" Association="Self.FK_InvoiceDetail_SurveyQuestion">
@@ -3105,6 +3139,14 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
             <End Role="SurveyQuestion" EntitySet="SurveyQuestions" />
             <End Role="ProfileQuestionTargetCriteria" EntitySet="ProfileQuestionTargetCriterias" />
           </AssociationSet>
+          <AssociationSet Name="FK_InvoiceDetail_Coupon" Association="DomainModels.FK_InvoiceDetail_Coupon">
+            <End Role="Coupon" EntitySet="Coupons" />
+            <End Role="InvoiceDetail" EntitySet="InvoiceDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InvoiceDetail_ProfileQuestion" Association="DomainModels.FK_InvoiceDetail_ProfileQuestion">
+            <End Role="ProfileQuestion" EntitySet="ProfileQuestions" />
+            <End Role="InvoiceDetail" EntitySet="InvoiceDetails" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="ProfileQuestion">
           <Key>
@@ -3141,6 +3183,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Property Name="Gender" Type="Int32" />
           <NavigationProperty Name="ProfileQuestionTargetCriterias" Relationship="DomainModels.FK_ProfileQuestionTargetCriteria_ProfileQuestion" FromRole="ProfileQuestion" ToRole="ProfileQuestionTargetCriteria" />
           <NavigationProperty Name="ProfileQuestionTargetLocations" Relationship="DomainModels.FK_ProfileQuestionTargetLocation_ProfileQuestion" FromRole="ProfileQuestion" ToRole="ProfileQuestionTargetLocation" />
+          <NavigationProperty Name="InvoiceDetails" Relationship="DomainModels.FK_InvoiceDetail_ProfileQuestion" FromRole="ProfileQuestion" ToRole="InvoiceDetail" />
         </EntityType>
         <EntityType Name="ProfileQuestionAnswer">
           <Key>
@@ -3659,6 +3702,10 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <NavigationProperty Name="Invoice" Relationship="DomainModels.FK_InvoiceDetail_Invoice" FromRole="InvoiceDetail" ToRole="Invoice" />
           <NavigationProperty Name="SurveyQuestion" Relationship="DomainModels.FK_InvoiceDetail_SurveyQuestion" FromRole="InvoiceDetail" ToRole="SurveyQuestion" />
           <NavigationProperty Name="AdCampaign" Relationship="DomainModels.FK_InvoiceDetail_AdCampaign" FromRole="InvoiceDetail" ToRole="AdCampaign" />
+          <Property Name="PQID" Type="Int32" />
+          <Property Name="CouponID" Type="Int64" />
+          <NavigationProperty Name="Coupon" Relationship="DomainModels.FK_InvoiceDetail_Coupon" FromRole="InvoiceDetail" ToRole="Coupon" />
+          <NavigationProperty Name="ProfileQuestion" Relationship="DomainModels.FK_InvoiceDetail_ProfileQuestion" FromRole="InvoiceDetail" ToRole="ProfileQuestion" />
         </EntityType>
         <EntityType Name="Tax">
           <Key>
@@ -4996,6 +5043,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <NavigationProperty Name="UserPurchasedCoupons" Relationship="DomainModels.FK_UserPurchasedCoupon_Coupon" FromRole="Coupon" ToRole="UserPurchasedCoupon" />
           <NavigationProperty Name="Company" Relationship="DomainModels.FK_Coupon_Company" FromRole="Coupon" ToRole="Company" />
           <Property Name="SubmissionDateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="InvoiceDetails" Relationship="DomainModels.FK_InvoiceDetail_Coupon" FromRole="Coupon" ToRole="InvoiceDetail" />
         </EntityType>
         <Association Name="FK_CompanyBranch_BranchCategory">
           <End Type="DomainModels.BranchCategory" Role="BranchCategory" Multiplicity="0..1" />
@@ -5623,6 +5671,30 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_InvoiceDetail_Coupon">
+          <End Type="DomainModels.Coupon" Role="Coupon" Multiplicity="0..1" />
+          <End Type="DomainModels.InvoiceDetail" Role="InvoiceDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Coupon">
+              <PropertyRef Name="CouponId" />
+            </Principal>
+            <Dependent Role="InvoiceDetail">
+              <PropertyRef Name="CouponID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InvoiceDetail_ProfileQuestion">
+          <End Type="DomainModels.ProfileQuestion" Role="ProfileQuestion" Multiplicity="0..1" />
+          <End Type="DomainModels.InvoiceDetail" Role="InvoiceDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProfileQuestion">
+              <PropertyRef Name="PqId" />
+            </Principal>
+            <Dependent Role="InvoiceDetail">
+              <PropertyRef Name="PQID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5877,6 +5949,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <EntitySetMapping Name="InvoiceDetails">
             <EntityTypeMapping TypeName="DomainModels.InvoiceDetail">
               <MappingFragment StoreEntitySet="InvoiceDetail">
+                <ScalarProperty Name="CouponID" ColumnName="CouponID" />
+                <ScalarProperty Name="PQID" ColumnName="PQID" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
                 <ScalarProperty Name="SqId" ColumnName="SQId" />
                 <ScalarProperty Name="CampaignId" ColumnName="CampaignId" />

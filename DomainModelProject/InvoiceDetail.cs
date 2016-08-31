@@ -24,10 +24,14 @@ namespace DomainModelProject
         public Nullable<long> CampaignId { get; set; }
         public Nullable<long> SQId { get; set; }
         public Nullable<int> ProductId { get; set; }
+        public Nullable<int> PQID { get; set; }
+        public Nullable<long> CouponID { get; set; }
     
         public virtual AdCampaign AdCampaign { get; set; }
         public virtual Invoice Invoice { get; set; }
         public virtual Product Product { get; set; }
         public virtual SurveyQuestion SurveyQuestion { get; set; }
+        public virtual Coupon Coupon { get; set; }
+        public virtual ProfileQuestion ProfileQuestion { get; set; }
     }
 }

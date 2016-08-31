@@ -90,10 +90,16 @@
     $(document).ready(function () {
         var mode = GetURLParameter("mode");
         
+        
         var ratioX = 2, ratioY = 1;
-        if (mode == 2) {
-            aspectRatio = "8:5";
-            minheight = 250;
+        if (mode == 1) {
+            aspectRatio = "2:1";
+            minheight = 150;
+            minWidth = 300
+        }
+        else if (mode == 2) {
+            aspectRatio = "2:1";
+            minheight = 200;
             minWidth = 400
         } else if (mode == 3) {
             aspectRatio = "8:5";

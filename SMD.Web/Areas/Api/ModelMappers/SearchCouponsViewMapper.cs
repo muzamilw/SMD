@@ -33,8 +33,8 @@ namespace SMD.MIS.Areas.Api.ModelMappers
         CompanyId = source.CompanyId.Value,
 
         LogoUrl = source.LogoUrl,
-        DaysLeft = Convert.ToInt32((new DateTime(source.CouponActiveYear.Value,source.CouponActiveMonth.Value,DateTime.DaysInMonth(source.CouponActiveYear.Value, source.CouponActiveMonth.Value)) - DateTime.Today).TotalDays)
-
+        DaysLeft = Convert.ToInt32((new DateTime(source.CouponActiveYear.Value,source.CouponActiveMonth.Value,DateTime.DaysInMonth(source.CouponActiveYear.Value, source.CouponActiveMonth.Value)) - DateTime.Today).TotalDays),
+        distance = Math.Round( source.distance.Value,1)
       
                    };
         }

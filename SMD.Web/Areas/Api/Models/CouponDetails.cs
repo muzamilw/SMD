@@ -58,8 +58,8 @@ namespace SMD.MIS.Areas.Api.Models
 
         public bool FlaggedByCurrentUser { get; set; }
 
-    
 
+        public Nullable<double> distance { get; set; }
 
     
 
