@@ -64,11 +64,11 @@ namespace SMD.MIS.Areas.Api.Models
         public string LocationPhone { get; set; }
         public Nullable<System.DateTime> SubmissionDateTime { get; set; }
         //public System.Data.Entity.Spatial.DbGeography GeographyColumn { get; set; }
-        //public string HowToRedeemLine1 { get; set; }
-        //public string HowToRedeemLine2 { get; set; }
-        //public string HowToRedeemLine3 { get; set; }
-        //public string HowToRedeemLine4 { get; set; }
-        //public string HowToRedeemLine5 { get; set; }
+        public string HowToRedeemLine1 { get; set; }
+        public string HowToRedeemLine2 { get; set; }
+        public string HowToRedeemLine3 { get; set; }
+        public string HowToRedeemLine4 { get; set; }
+        public string HowToRedeemLine5 { get; set; }
 
      
     }

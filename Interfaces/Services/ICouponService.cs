@@ -39,6 +39,7 @@ namespace SMD.Interfaces.Services
 
         List<Coupon> GetCouponsByCompanyId(int CompanyId);
         CouponsResponseModelForApproval GetAdCampaignForAproval(GetPagedListRequest request);
+        string UpdateCouponForApproval(Coupon source);
 
     }
 }
