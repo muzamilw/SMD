@@ -32,6 +32,13 @@ namespace SMD.Implementation.Services
         private readonly IWebApiUserService _userService;
         private readonly ICurrencyRepository _currencyRepository;
         private readonly IUserCouponViewRepository _userCouponViewRepository;
+        private readonly IEmailManagerService emailManagerService;
+        private readonly IStripeService stripeService;
+        private readonly WebApiUserService webApiUserService;
+        private readonly IProductRepository productRepository;
+        private readonly ITaxRepository taxRepository;
+        private readonly IInvoiceRepository invoiceRepository;
+        private readonly IInvoiceDetailRepository invoiceDetailRepository;
         private ApplicationUserManager UserManager
         {
             get { return HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
@@ -123,7 +130,8 @@ namespace SMD.Implementation.Services
         /// Constructor 
         /// </summary>
         public CouponService(ICouponRepository couponRepository, IUserFavouriteCouponRepository userFavouriteCouponRepository, ICompanyService _companyService,
-            IUserPurchasedCouponRepository _userPurchasedCouponRepository, IAccountRepository _accountRepository, ICouponCategoriesRepository _couponCategoriesRepository, ICurrencyRepository _currencyRepository, IWebApiUserService _userService, IUserCouponViewRepository userCouponViewRepository)
+            IUserPurchasedCouponRepository _userPurchasedCouponRepository, IAccountRepository _accountRepository, ICouponCategoriesRepository _couponCategoriesRepository, ICurrencyRepository _currencyRepository, IWebApiUserService _userService, IUserCouponViewRepository userCouponViewRepository, IEmailManagerService emailManagerService, WebApiUserService webApiUserService, IStripeService stripeService, IProductRepository productRepository
+            , ITaxRepository taxRepository, IInvoiceRepository invoiceRepository, IInvoiceDetailRepository invoiceDetailRepository)
         {
             this.couponRepository = couponRepository;
             this._userFavouriteCouponRepository = userFavouriteCouponRepository;
@@ -134,6 +142,13 @@ namespace SMD.Implementation.Services
             this._currencyRepository = _currencyRepository;
             this._couponCategoriesRepository = _couponCategoriesRepository;
             this._userCouponViewRepository = userCouponViewRepository;
+            this.emailManagerService = emailManagerService;
+            this.webApiUserService = webApiUserService;
+            this.stripeService = stripeService;
+            this.productRepository = productRepository;
+            this.taxRepository = taxRepository;
+            this.invoiceRepository = invoiceRepository;
+           this.invoiceDetailRepository = invoiceDetailRepository;
         }
 
         #endregion
@@ -624,6 +639,124 @@ namespace SMD.Implementation.Services
                 TotalCount = rowCount
             };
         }
+        public string UpdateCouponForApproval(Coupon source)
+        {
+            string respMesg = "True";
+            var dbCo = couponRepository.Find(source.CouponId);
+            // Update 
+            if (dbCo != null)
+            {
+                // Approval
+                if (source.Approved == true)
+                {
+                    dbCo.Approved = true;
+                    dbCo.ApprovalDateTime = DateTime.Now;
+                    dbCo.ApprovedBy = couponRepository.LoggedInUserIdentity;
+                    dbCo.Status = (Int32)AdCampaignStatus.Live;
+                    
+                    // Stripe payment + Invoice Generation
+                    // Muzi bhai said we will see it on latter stage 
+
+                    //todo pilot: unCommenting Stripe payment code on Ads approval
+                    respMesg = MakeStripePaymentandAddInvoiceForCoupon(dbCo);
+                    if (respMesg.Contains("Failed"))
+                    {
+                        return respMesg;
+                    }
+                }
+                // Rejection 
+                else
+                {
+                    dbCo.Status = (Int32)AdCampaignStatus.ApprovalRejected;
+                    dbCo.Approved = false;
+                    dbCo.RejectedReason = source.RejectedReason;
+                    emailManagerService.SendQuestionRejectionEmail(dbCo.UserId);
+                }
+                dbCo.ModifiedDateTime = DateTime.Now;
+                dbCo.ModifiedBy = couponRepository.LoggedInUserIdentity;
+
+                couponRepository.SaveChanges();
+
+            }
+            return respMesg;
+        }
+        private string MakeStripePaymentandAddInvoiceForCoupon(Coupon source)
+        {
+            #region Stripe Payment
+            string response = null;
+            Boolean isSystemUser = false;
+            double amount = 0;
+            // User who added Campaign for approval 
+            var user = webApiUserService.GetUserByUserId(source.UserId);
+            // Get Current Product
+            var product = productRepository.GetProductByCountryId("Ad");
+            // Tax Applied
+            var tax = taxRepository.GetTaxByCountryId(user.Company.CountryId);
+            // Total includes tax
+            if (product != null)
+            {
+                amount = product.SetupPrice ?? 0 + tax.TaxValue ?? 0;
+
+
+                // If It is not System User then make transation 
+                //if (user.Roles.Any(role => role.Name.ToLower().Equals("user")))
+                //{
+                // Make Stripe actual payment 
+                response = stripeService.ChargeCustomer((int?)amount, user.Company.StripeCustomerId);
+                isSystemUser = false;
+
+            }
+
+            #endregion
+
+            if (response != null && !response.Contains("Failed"))
+            {
+                if (isSystemUser)
+                {
+                    #region Add Invoice
+
+                    // Add invoice data
+                    var invoice = new Invoice
+                    {
+                        Country = user.Company.CountryId.ToString(),
+                        Total = (double)amount,
+                        NetTotal = (double)amount,
+                        InvoiceDate = DateTime.Now,
+                        InvoiceDueDate = DateTime.Now.AddDays(7),
+                        Address1 = user.Company.CountryId.ToString(),
+                        CompanyId = user.Company.CompanyId,
+                        CompanyName = "My Company",
+                        CreditCardRef = response
+                    };
+                    invoiceRepository.Add(invoice);
+
+                    #endregion
+                    #region Add Invoice Detail
+
+                    // Add Invoice Detail Data 
+                    var invoiceDetail = new InvoiceDetail
+                    {
+                        InvoiceId = invoice.InvoiceId,
+                        SqId = null,
+                        ProductId = product.ProductId,
+                        ItemName = "Coupons",
+                        ItemAmount = (double)amount,
+                        ItemTax = (double)tax.TaxValue,
+                        ItemDescription = "This is description!",
+                        ItemGrossAmount = (double)amount,
+                        CampaignId = source.CouponId,
+
+                    };
+                    invoiceDetailRepository.Add(invoiceDetail);
+                    invoiceDetailRepository.SaveChanges();
+
+                    #endregion
+                }
+            }
+            return response;
+        }
+
+
 
         #endregion
     }
