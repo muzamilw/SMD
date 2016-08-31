@@ -49,6 +49,8 @@ namespace SMD.Models.DomainModels
 
         public virtual ICollection<ProfileQuestionTargetCriteria> ProfileQuestionTargetCriterias { get; set; }
         public virtual ICollection<ProfileQuestionTargetLocation> ProfileQuestionTargetLocations { get; set; }
+
+        public virtual ICollection<InvoiceDetail> InvoiceDetails { get; set; }
         
     }
 }

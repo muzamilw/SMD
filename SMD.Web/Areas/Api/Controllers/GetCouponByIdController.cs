@@ -54,6 +54,7 @@ namespace SMD.MIS.Areas.Api.Controllers
 
             Mapper.Initialize(cfg => cfg.CreateMap<SMD.Models.DomainModels.GetCouponByID_Result, CouponDetails>());
             var res = Mapper.Map<SMD.Models.DomainModels.GetCouponByID_Result, CouponDetails>(coupon);
+            res.distance = Math.Round(res.distance.Value,1);
             res.FlaggedByCurrentUser = _couponService.CheckCouponFlaggedByUser(Convert.ToInt64(CouponId), UserId);
             return res;
 

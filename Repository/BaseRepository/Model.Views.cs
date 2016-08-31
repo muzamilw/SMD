@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySetsFF3FD22E86216791253306A7F1A9B10F71DC73B591A9B9758E971F8E39C4DA76))]
+[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets24D01AF7DC3A9BDF97860CDC1B082725D6C0ADA9D4CD9EF464A986A03059CA0D))]
 
 namespace Edm_EntityMappingGeneratedViews
 {
@@ -17,18 +17,18 @@ namespace Edm_EntityMappingGeneratedViews
     /// <Summary>
     /// The type contains views for EntitySets and AssociationSets that were generated at design time.
     /// </Summary>
-    public sealed class ViewsForBaseEntitySetsFF3FD22E86216791253306A7F1A9B10F71DC73B591A9B9758E971F8E39C4DA76 : System.Data.Mapping.EntityViewContainer
+    public sealed class ViewsForBaseEntitySets24D01AF7DC3A9BDF97860CDC1B082725D6C0ADA9D4CD9EF464A986A03059CA0D : System.Data.Mapping.EntityViewContainer
     {
         
         /// <Summary>
         /// The constructor stores the views for the extents and also the hash values generated based on the metadata and mapping closure and views.
         /// </Summary>
-        public ViewsForBaseEntitySetsFF3FD22E86216791253306A7F1A9B10F71DC73B591A9B9758E971F8E39C4DA76()
+        public ViewsForBaseEntitySets24D01AF7DC3A9BDF97860CDC1B082725D6C0ADA9D4CD9EF464A986A03059CA0D()
         {
             this.EdmEntityContainerName = "BaseDbContext";
             this.StoreEntityContainerName = "SMDModelStoreContainer";
-            this.HashOverMappingClosure = "24496856ef4fd08f01defcacce8d42cae0b9f4b74526abca546ef7b8e991b847";
-            this.HashOverAllExtentViews = "5b1f2f55f7e62b09cc842bc16cedef929b1a34e1b2bc482ce4c7847e6a1cb130";
+            this.HashOverMappingClosure = "d6d14e42af1b2dd8f62fa2eeda66c9b5d3cedd545af885196e392ad6e5966ae5";
+            this.HashOverAllExtentViews = "f2c8800f3a2f7d6ce169b79253df37b999b659665a85de7578ac4e177ccd2b3f";
             this.ViewCount = 110;
         }
         
@@ -818,7 +818,7 @@ namespace Edm_EntityMappingGeneratedViews
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.InvoiceDetail", @"
     SELECT VALUE -- Constructing InvoiceDetail
-        [SMDModel.Store.InvoiceDetail](T1.InvoiceDetail_InvoiceDetailId, T1.InvoiceDetail_InvoiceId, T1.InvoiceDetail_ItemName, T1.InvoiceDetail_ItemTax, T1.InvoiceDetail_ItemAmount, T1.InvoiceDetail_ItemGrossAmount, T1.InvoiceDetail_ItemDescription, T1.InvoiceDetail_CampaignId, T1.InvoiceDetail_SQId, T1.InvoiceDetail_ProductId)
+        [SMDModel.Store.InvoiceDetail](T1.InvoiceDetail_InvoiceDetailId, T1.InvoiceDetail_InvoiceId, T1.InvoiceDetail_ItemName, T1.InvoiceDetail_ItemTax, T1.InvoiceDetail_ItemAmount, T1.InvoiceDetail_ItemGrossAmount, T1.InvoiceDetail_ItemDescription, T1.InvoiceDetail_CampaignId, T1.InvoiceDetail_SQId, T1.InvoiceDetail_ProductId, T1.InvoiceDetail_PQID, T1.InvoiceDetail_CouponID)
     FROM (
         SELECT 
             T.InvoiceDetailId AS InvoiceDetail_InvoiceDetailId, 
@@ -831,6 +831,8 @@ namespace Edm_EntityMappingGeneratedViews
             T.CampaignId AS InvoiceDetail_CampaignId, 
             T.SqId AS InvoiceDetail_SQId, 
             T.ProductId AS InvoiceDetail_ProductId, 
+            T.PQID AS InvoiceDetail_PQID, 
+            T.CouponID AS InvoiceDetail_CouponID, 
             True AS _from0
         FROM BaseDbContext.InvoiceDetails AS T
     ) AS T1");
@@ -2014,7 +2016,7 @@ namespace Edm_EntityMappingGeneratedViews
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.InvoiceDetails", @"
     SELECT VALUE -- Constructing InvoiceDetails
-        [DomainModels.InvoiceDetail](T1.InvoiceDetail_InvoiceDetailId, T1.InvoiceDetail_InvoiceId, T1.InvoiceDetail_ItemName, T1.InvoiceDetail_ItemTax, T1.InvoiceDetail_ItemAmount, T1.InvoiceDetail_ItemGrossAmount, T1.InvoiceDetail_ItemDescription, T1.InvoiceDetail_CampaignId, T1.InvoiceDetail_SqId, T1.InvoiceDetail_ProductId)
+        [DomainModels.InvoiceDetail](T1.InvoiceDetail_InvoiceDetailId, T1.InvoiceDetail_InvoiceId, T1.InvoiceDetail_ItemName, T1.InvoiceDetail_ItemTax, T1.InvoiceDetail_ItemAmount, T1.InvoiceDetail_ItemGrossAmount, T1.InvoiceDetail_ItemDescription, T1.InvoiceDetail_CampaignId, T1.InvoiceDetail_SqId, T1.InvoiceDetail_ProductId, T1.InvoiceDetail_PQID, T1.InvoiceDetail_CouponID)
     FROM (
         SELECT 
             T.InvoiceDetailId AS InvoiceDetail_InvoiceDetailId, 
@@ -2027,6 +2029,8 @@ namespace Edm_EntityMappingGeneratedViews
             T.CampaignId AS InvoiceDetail_CampaignId, 
             T.SQId AS InvoiceDetail_SqId, 
             T.ProductId AS InvoiceDetail_ProductId, 
+            T.PQID AS InvoiceDetail_PQID, 
+            T.CouponID AS InvoiceDetail_CouponID, 
             True AS _from0
         FROM SMDModelStoreContainer.InvoiceDetail AS T
     ) AS T1");

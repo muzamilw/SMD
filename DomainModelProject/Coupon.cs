@@ -18,6 +18,7 @@ namespace DomainModelProject
         {
             this.CouponCategories = new HashSet<CouponCategories>();
             this.UserPurchasedCoupons = new HashSet<UserPurchasedCoupon>();
+            this.InvoiceDetails = new HashSet<InvoiceDetail>();
         }
     
         public long CouponId { get; set; }
@@ -87,5 +88,6 @@ namespace DomainModelProject
         public virtual Language Language { get; set; }
         public virtual ICollection<CouponCategories> CouponCategories { get; set; }
         public virtual ICollection<UserPurchasedCoupon> UserPurchasedCoupons { get; set; }
+        public virtual ICollection<InvoiceDetail> InvoiceDetails { get; set; }
     }
 }
