@@ -19,10 +19,11 @@ namespace SMD.MIS.Areas.Api.Models
         /// Langs
         /// </summary>
         public IEnumerable<LanguageDropdown> LanguageDropdowns { get; set; }
-
+        public UserBaseData objBaseData { get; set; }
         /// <summary>
         /// Profile Questions for showing in editor - linked question
         /// </summary>
         public IEnumerable<ProfileQuestionDropdown> ProfileQuestionDropdowns { get; set; }
+        
     }
 }

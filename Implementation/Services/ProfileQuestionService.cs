@@ -137,7 +137,8 @@ namespace SMD.Implementation.Services
                 Countries = _countryRepository.GetAllCountries(),
                 Languages = _languageRepository.GetAllLanguages(),
                 ProfileQuestionGroups = _profileQuestionGroupRepository.GetAllProfileQuestionGroups(),
-                ProfileQuestions = _profileQuestionRepository.GetAllProfileQuestions()
+                ProfileQuestions = _profileQuestionRepository.GetAllProfileQuestions(),
+                objBaseData = _profileQuestionRepository.getBaseData(),
             };
         }
 
@@ -274,7 +275,7 @@ namespace SMD.Implementation.Services
                 };
                  serverObj.CompanyId = _profileQuestionRepository.CompanyId;
                 _profileQuestionRepository.Add(serverObj);
-
+                _profileQuestionRepository.SaveChanges();
                 if (serverObj.ProfileQuestionAnswers == null)
                 {
                     serverObj.ProfileQuestionAnswers = new List<ProfileQuestionAnswer>();
@@ -301,6 +302,7 @@ namespace SMD.Implementation.Services
                             serverAns.ImagePath = SaveAnswerImage(answer);
                         }
                         _profileQuestionAnswerRepository.Add(serverAns);
+                        _profileQuestionAnswerRepository.SaveChanges();
                         serverObj.ProfileQuestionAnswers.Add(serverAns);
                 }
             }
@@ -310,11 +312,13 @@ namespace SMD.Implementation.Services
                 if (loc.ID != 0)
                 {
                      _profileQuestionTargetLocationRepository.Update(loc);
+                     _profileQuestionTargetLocationRepository.SaveChanges();
                 }
                 else
                 {
                     loc.PQID = serverObj.PqId;
                     _profileQuestionTargetLocationRepository.Add(loc);
+                    _profileQuestionTargetLocationRepository.SaveChanges();
                 }
             }
             // add or update criteria
@@ -324,14 +328,16 @@ namespace SMD.Implementation.Services
                 {
                     if (criteria.Type != (int)ProfileQuestionTargetCriteriaType.Language && criteria.Type != (int)ProfileQuestionTargetCriteriaType.Industry)  // industry and languages are addable and deleteable
                         _profileQuestionTargetCriteriaRepository.Update(criteria);
+                    _profileQuestionTargetCriteriaRepository.SaveChanges();
                 }
                 else
                 {
                     criteria.PQID = serverObj.PqId;
                     _profileQuestionTargetCriteriaRepository.Add(criteria);
+                    _profileQuestionTargetCriteriaRepository.SaveChanges();
                 }
             }
-            _profileQuestionRepository.SaveChanges();
+           // _profileQuestionRepository.SaveChanges();
             return _profileQuestionRepository.Find(serverObj.PqId);
 
         }

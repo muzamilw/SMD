@@ -931,6 +931,7 @@ define("survey/survey.viewModel",
                             educationIds: educationIds,
                             educationIdsExcluded: educationIdsExcluded
                         };
+                        debugger;
                         dataservice.getAudienceData(ProfileData, {
                             success: function (data) {
                                 reachedAudience(data.MatchingUsers);

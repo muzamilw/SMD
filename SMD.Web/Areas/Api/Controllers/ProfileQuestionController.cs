@@ -59,10 +59,10 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// </summary>
         public Models.ProfileQuestion Post(Models.ProfileQuestion question)
         {
-            if (question == null || !ModelState.IsValid)
-            {
-                throw new HttpException((int)HttpStatusCode.BadRequest, "Invalid Request");
-            }
+            //if (question == null || !ModelState.IsValid)
+            //{
+            //    throw new HttpException((int)HttpStatusCode.BadRequest, "Invalid Request");
+            //}
             return _profileQuestionService.SaveProfileQuestion(question.CreateFrom()).CreateFrom();
         }
         #endregion

@@ -17,7 +17,11 @@ define("pQuestion/pQuestion.dataservice", function () {
                         dataType: 'json',
                         type: 'GET'
                     });
-                    
+                    amplify.request.define('getBaseDataForProfileQuestions', 'ajax', {
+                        url: '/Api/AdCampaignBase',
+                        dataType: 'json',
+                        type: 'GET'
+                    });
 
                     //Delete Profile Questions
                     amplify.request.define('deleteProfileQuestion', 'ajax', {
@@ -64,6 +68,15 @@ define("pQuestion/pQuestion.dataservice", function () {
                 initialize();
                 return amplify.request({
                     resourceId: 'searchProfileQuestions',
+                    success: callbacks.success,
+                    error: callbacks.error,
+                    data: params
+                });
+            },
+            getBaseDataForProfileQuestions = function (params, callbacks) {
+                initialize();
+                return amplify.request({
+                    resourceId: 'getBaseDataForProfileQuestions',
                     success: callbacks.success,
                     error: callbacks.error,
                     data: params
@@ -130,7 +143,8 @@ define("pQuestion/pQuestion.dataservice", function () {
             deleteProfileQuestion: deleteProfileQuestion,
             getPqAnswer: getPqAnswer,
             saveProfileQuestion: saveProfileQuestion,
-            getAudienceData: getAudienceData
+            getAudienceData: getAudienceData,
+            getBaseDataForProfileQuestions: getBaseDataForProfileQuestions
         };
     })();
     return dataService;

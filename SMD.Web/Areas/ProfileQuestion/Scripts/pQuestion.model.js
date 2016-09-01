@@ -379,7 +379,7 @@
         };
   };
   var // ReSharper disable InconsistentNaming
- ProfileQuestionTargetCriteria = function (ID, PQID, Type, PQID, PQAnswerID, LinkedSQID, LinkedSqAnswer, IncludeorExclude, LanguageID, questionString, answerString, Language,IndustryID, Industry, EducationId, Education) {
+ ProfileQuestionTargetCriteria = function (ID, PQID, Type, PQID, PQAnswerID, LinkedSQID, LinkedSqAnswer, IncludeorExclude, LanguageID, questionString, answerString, Language, IndustryID, Industry, EducationId, Education,SQAnswer,QuizAnswerId, criteriaPrice, QuizPQId) {
      var
          //type and userID will be set on server side
          ID = ko.observable(ID),
@@ -399,6 +399,14 @@
          Industry = ko.observable(Industry),
          Education = ko.observable(Education),
          EducationId = ko.observable(EducationId),
+
+         
+          SQAnswer = ko.observable(SQAnswer),
+         
+          QuizAnswerId = ko.observable(QuizAnswerId),
+         criteriaPrice = ko.observable(criteriaPrice),
+          QuizPQId = ko.observable(QuizPQId),
+        
          // Convert to server data
          convertToServerData = function () {
              return {
@@ -415,7 +423,11 @@
                  IndustryID: IndustryID(),
                  Industry: Industry(),
                  EducationId: EducationId(),
-                 Education: Education()
+                 Education: Education(),
+                 SQAnswer: SQAnswer(),
+                 QuizAnswerId: QuizAnswerId(),
+                 criteriaPrice: criteriaPrice(),
+                 QuizPQId: QuizPQId()
              };
          };
      return {
@@ -435,7 +447,11 @@
          IndustryID: IndustryID,
          Industry: Industry,
          EducationId: EducationId,
-         Education: Education
+         Education: Education,
+         SQAnswer: SQAnswer,
+         QuizAnswerId: QuizAnswerId,
+         criteriaPrice: criteriaPrice,
+         QuizPQId: QuizPQId
      };
  };
 
@@ -444,7 +460,7 @@
            source.Country, source.City, source.IncludeorExclude, source.Latitude, source.Longitude);
     }
     ProfileQuestionTargetCriteria.Create = function (source) {
-        return new ProfileQuestionTargetCriteria(source.Id, source.SqId, source.Type, source.PqId, source.PqAnswerId, source.LinkedSqId, source.LinkedSqAnswer, source.IncludeorExclude, source.LanguageId, source.questionString, source.answerString, source.Language, source.surveyQuestLeftImageSrc, source.surveyQuestRightImageSrc, source.IndustryId, source.Industry, source.EducationId, source.Education);
+        return new ProfileQuestionTargetCriteria(source.Id, source.SqId, source.Type, source.PqId, source.PqAnswerId, source.LinkedSqId, source.LinkedSqAnswer, source.IncludeorExclude, source.LanguageId, source.questionString, source.answerString, source.Language,source.IndustryId, source.Industry, source.EducationId, source.Education);
     };
     return {
         question: question,
