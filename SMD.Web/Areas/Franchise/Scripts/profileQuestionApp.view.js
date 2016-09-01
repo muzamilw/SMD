@@ -10,7 +10,7 @@ define("FranchiseDashboard/profileQuestionApp.view",
                 // View model 
                 viewModel = specifiedViewModel,
                 // Binding root used with knockout
-                bindingRoot = $("#CouponsApprovalBindingSpot")[0],
+                bindingRoot = $("#PQApprovalBindingSpot")[0],
                 // Initialize
                 initialize = function () {
                     if (!bindingRoot) {

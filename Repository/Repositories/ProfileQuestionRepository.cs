@@ -217,6 +217,21 @@ namespace SMD.Repository.Repositories
             return data;
         }
 
+        public IEnumerable<ProfileQuestion> GetProfileQuestionsForApproval(GetPagedListRequest request, out int rowCount)
+        {
+            int fromRow = (request.PageNo - 1) * request.PageSize;
+            int toRow = request.PageSize;
+            Expression<Func<ProfileQuestion, bool>> query =
+                c => c.Status == (Int32)AdCampaignStatus.SubmitForApproval;
+                rowCount = DbSet.Count(query);
+                var res = DbSet.Where(query)
+               .OrderByDescending(p => p.SubmissionDateTime);
+                return res.Skip(fromRow)
+                    .Take(toRow);
+
+        }
+    
+
         #endregion
     }
 }

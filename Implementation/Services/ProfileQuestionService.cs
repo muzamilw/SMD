@@ -253,6 +253,17 @@ namespace SMD.Implementation.Services
             #region Add Question
             else
             {
+
+                IEnumerable<SmdRoleClaimValue> roleClaim = ClaimHelper.GetClaimsByType<SmdRoleClaimValue>(SmdClaimTypes.Role);
+                string RoleName = roleClaim != null && roleClaim.Any() ? roleClaim.ElementAt(0).Role : "Role Not Loaded";
+
+                int? compid = 0;
+
+                if (RoleName.StartsWith("Franchise"))
+                    compid = null;
+                else
+                    compid = _profileQuestionRepository.CompanyId;
+
                 serverObj= new ProfileQuestion
                 {
                     Question = source.Question,
@@ -267,13 +278,13 @@ namespace SMD.Implementation.Services
                     ModifiedDate = source.ModifiedDate,
                     PenalityForNotAnswering = source.PenalityForNotAnswering,
                     Status = source.Status,
-                    CompanyId=source.CompanyId,
+                    CompanyId = compid,
                     AgeRangeStart=source.AgeRangeStart,
                     AgeRangeEnd=source.AgeRangeEnd,
                     Gender=source.Gender
 
                 };
-                 serverObj.CompanyId = _profileQuestionRepository.CompanyId;
+                serverObj.CompanyId = compid;
                 _profileQuestionRepository.Add(serverObj);
                 _profileQuestionRepository.SaveChanges();
                 if (serverObj.ProfileQuestionAnswers == null)
@@ -396,8 +407,16 @@ namespace SMD.Implementation.Services
                 PercentageCompleted = percentageCompleted
             };
         }
-       
-        
+
+        public ProfileQuestionResponseModelForApproval GetProfileQuestionForAproval(GetPagedListRequest request)
+        {
+            int rowCount;
+            return new ProfileQuestionResponseModelForApproval
+            {
+                Coupons = _profileQuestionRepository.GetProfileQuestionsForApproval(request, out rowCount).ToList(),
+                TotalCount = rowCount
+            };
+        }
         #endregion
     }
 }

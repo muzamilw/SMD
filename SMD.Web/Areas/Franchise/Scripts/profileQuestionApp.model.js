@@ -1,11 +1,11 @@
 ﻿define(["ko", "underscore", "underscore-ko"], function (ko) {
 
     var // ReSharper disable InconsistentNaming
-      ProfileQuestion = function (coSubBy, coTitle, coCategory) {
+      ProfileQuestion = function (pqSubBy, pquestion,pqsubmissionDateTime) {
           var
-              submittedBy = ko.observable(coSubBy),
-              title = ko.observable(coTitle),
-              category = ko.observable(coCategory),
+              submittedBy = ko.observable(pqSubBy),
+              question = ko.observable(pquestion),
+              submissionDate = ko.observable(pqsubmissionDateTime),
            
               errors = ko.validation.group({
 
@@ -15,7 +15,7 @@
                   return errors().length === 0;
               }),
               dirtyFlag = new ko.dirtyFlag({
-                  rejectedReason: rejectedReason
+                  //rejectedReason: rejectedReason
               }),
               // Has Changes
               hasChanges = ko.computed(function () {
@@ -37,8 +37,8 @@
           return {
 
               submittedBy: submittedBy,
-              title: title,
-              category: category,
+              question: question,
+              submissionDate: submissionDate,
               hasChanges: hasChanges,
               convertToServerData: convertToServerData,
               reset: reset,
@@ -54,7 +54,7 @@
     var ProfileQuestionServertoClientMapper = function (itemFromServer) {
 
 
-        return new ProfileQuestion(itemFromServer.CreatedBy, itemFromServer.CouponTitle, itemFromServer.CreatedBy);
+        return new ProfileQuestion(itemFromServer.CreatedBy, itemFromServer.Question, itemFromServer.SubmissionDateTime);
     };
   
     // Function to attain cancel button functionality ProfileQuestion

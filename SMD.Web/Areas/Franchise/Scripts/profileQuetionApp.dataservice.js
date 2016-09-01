@@ -12,8 +12,8 @@ define("FranchiseDashboard/profileQuetionApp.dataservice", function () {
                 if (!isInitialized) {
 
                     //Search AdCampaigns
-                    amplify.request.define('getCouponsForApproval', 'ajax', {
-                        url: '/Api/CouponApproval',
+                    amplify.request.define('getPQForApproval', 'ajax', {
+                        url: '/Api/ApproveProfileQuestion',
                         dataType: 'json',
                         type: 'GET'
                     });
@@ -36,10 +36,10 @@ define("FranchiseDashboard/profileQuetionApp.dataservice", function () {
                 }
             },
             // Search Ad Campaigns
-            getCouponsForApproval = function (params, callbacks) {
+            getPQForApproval = function (params, callbacks) {
                 initialize();
                 return amplify.request({
-                    resourceId: 'getCouponsForApproval',
+                    resourceId: 'getPQForApproval',
                     success: callbacks.success,
                     error: callbacks.error,
                     data: params
@@ -70,7 +70,7 @@ define("FranchiseDashboard/profileQuetionApp.dataservice", function () {
 
         return {
             saveCoupon: saveCoupon,
-            getCouponsForApproval: getCouponsForApproval,
+            getPQForApproval: getPQForApproval,
             sendApprovalRejectionEmail: sendApprovalRejectionEmail
         };
     })();

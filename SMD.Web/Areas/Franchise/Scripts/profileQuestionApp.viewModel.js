@@ -2,20 +2,20 @@
     Module with the view model for the AdCampaign
 */
 define("FranchiseDashboard/profileQuestionApp.viewModel",
-    ["jquery", "amplify", "ko", "FranchiseDashboard/surveyQuestionApp.dataservice", "FranchiseDashboard/profileQuestionApp.model", "common/pagination",
+    ["jquery", "amplify", "ko", "FranchiseDashboard/profileQuetionApp.dataservice", "FranchiseDashboard/profileQuestionApp.model", "common/pagination",
      "common/confirmation.viewModel"],
     function ($, amplify, ko, dataservice, model, pagination, confirmation) {
         var ist = window.ist || {};
         ist.ProfileQuestion = {
             viewModel: (function () {
                 var view,
-                    //coupons = ko.observableArray([]),
-                    ////pager
-                    //pager = ko.observable(),
-                    ////sorting
-                    //sortOn = ko.observable(5),
-                    ////Assending  / Desending
-                    //sortIsAsc = ko.observable(true),
+                    profileQuestion = ko.observableArray([]),
+                    //pager
+                    pager = ko.observable(),
+                    //sorting
+                    sortOn = ko.observable(5),
+                    //Assending  / Desending
+                    sortIsAsc = ko.observable(true),
                     //isEditorVisible = ko.observable(false),
                     //isShowCopounMode = ko.observable(false),
                    // selectedCoupon = ko.observable(),
@@ -27,31 +27,31 @@ define("FranchiseDashboard/profileQuestionApp.viewModel",
                    //     selectedCoupon(undefined);
                    //     isEditorVisible(false);
                    // },
-                   // getCoupons = function () {
-                   //     dataservice.getCouponsForApproval(
-                   //         {
-                   //             PageSize: pager().pageSize(),
-                   //             PageNo: pager().currentPage(),
-                   //             SortBy: sortOn(),
-                   //             IsAsc: sortIsAsc(),
+                    getProfileQuestions = function () {
+                        dataservice.getPQForApproval(
+                            {
+                                PageSize: pager().pageSize(),
+                                PageNo: pager().currentPage(),
+                                SortBy: sortOn(),
+                                IsAsc: sortIsAsc(),
 
-                   //         },
-                   //         {
-                   //             success: function (data) {
-                   //                 coupons.removeAll();
-                   //                 console.log("approval Coupons");
-                   //                 console.log(data.Coupons);
-                   //                 _.each(data.Coupons, function (item) {
-                   //                     coupons.push(model.CouponsServertoClientMapper(item));
-                   //                 });
-                   //                 //pager().totalCount(0);
-                   //                 pager().totalCount(data.TotalCount);
-                   //             },
-                   //             error: function () {
-                   //                 toastr.error("Failed to load Ad Campaigns!");
-                   //             }
-                   //         });
-                   // },
+                            },
+                            {
+                                success: function (data) {
+                                    profileQuestion.removeAll();
+                                    console.log("approval Profile Question");
+                                    console.log(data.ProfileQuestion);
+                                    _.each(data.ProfileQuestion, function (item) {
+                                        profileQuestion.push(model.ProfileQuestionServertoClientMapper(item));
+                                    });
+                                    ////pager().totalCount(0);
+                                    pager().totalCount(data.TotalCount);
+                                },
+                                error: function () {
+                                    toastr.error("Failed to load Ad Campaigns!");
+                                }
+                            });
+                    },
                    // onApproveCoupon = function () {
                    //    confirmation.messageText("Do you want to approve this Coupon ? System will attempt to collect payment and generate invoice");
                    //    confirmation.show();
@@ -117,23 +117,23 @@ define("FranchiseDashboard/profileQuestionApp.viewModel",
                     initialize = function (specifiedView) {
                         view = specifiedView;
                         ko.applyBindings(view.viewModel, view.bindingRoot);
-                        pager(pagination.Pagination({ PageSize: 10 }, coupons, getCoupons));
+                        pager(pagination.Pagination({ PageSize: 10 }, profileQuestion, getProfileQuestions));
                         var mode = getParameter(window.location.href, "mode");
                         //if (mode == 2) {
                         //    lblPageTitle("Coupons For Approval");
                         //    isShowCopounMode(true);
                         //}
                         //// First request for LV
-                        getCoupons();
+                        getProfileQuestions();
                     };
                 return {
 
-                    initialize: initialize
-                    //getCoupons: getCoupons,
-                    //coupons: coupons,
-                    //pager: pager,
-                    //sortOn: sortOn,
-                    //sortIsAsc: sortIsAsc,
+                    initialize: initialize,
+                    getProfileQuestions: getProfileQuestions,
+                    profileQuestion: profileQuestion,
+                    pager: pager,
+                    sortOn: sortOn,
+                    sortIsAsc: sortIsAsc
                     //isEditorVisible: isEditorVisible,
                     //onEditCoupon: onEditCoupon,
                     //selectedCoupon: selectedCoupon,
