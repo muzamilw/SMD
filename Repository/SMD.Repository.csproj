@@ -209,6 +209,8 @@
     <Compile Include="Repositories\CouponCodeRepository.cs" />
     <Compile Include="Repositories\CouponRepository.cs" />
     <Compile Include="Repositories\ManageUserRepository.cs" />
+    <Compile Include="Repositories\ProfileQuestionTargetCriteriaRepository.cs" />
+    <Compile Include="Repositories\ProfileQuestionTargetLocation.cs" />
     <Compile Include="Repositories\SectionRepository.cs" />
     <Compile Include="Repositories\PhraseRepository.cs" />
     <Compile Include="Repositories\SurveyQuestionResponseRepository.cs" />

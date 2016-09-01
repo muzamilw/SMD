@@ -2,7 +2,7 @@
 
     var // ReSharper disable InconsistentNaming
         question = function (questionId, spcQuestion, pr,linkQ,gName, langId, countId, groupId, spcType,
-        spcRefreshtime, spcSkipped, spcCreationD, spcModDate, penality, spcStatus, CreatedBy, StatusValue, AnswerNeeded, AnswerCount, Gender, AgeRangeStart) {
+        spcRefreshtime, spcSkipped, spcCreationD, spcModDate, penality, spcStatus, CreatedBy, StatusValue, AnswerNeeded, AnswerCount, Gender, AgeRangeStart,AgeRangeEnd) {
             var 
                 qId = ko.observable(questionId),
                 questionString = ko.observable(spcQuestion).extend({ required: true }),
@@ -81,9 +81,10 @@
                 },
                 // Convert to server data
              
-
-                convertToServerData = function () {
-                    var targetCriteria = [], targetLocation = [];
+             targetCriteria = [], targetLocation = [],
+                convertToServerData = function () {                   
+                    debugger;
+                    
                     _.each(ProfileQuestionTargetLocation(), function (item) {
                         targetLocation.push(item.convertToServerData());
                     });
@@ -108,7 +109,7 @@
                         AgeRangeStart: AgeRangeStart(),
                         AgeRangeEnd:AgeRangeEnd(),
                         ProfileQuestionTargetLocation: targetLocation,
-                        ProfileQuestionTargetCriteria: ProfileQuestionTargetCriteria
+                        ProfileQuestionTargetCriteria: targetCriteria
                     };
                 };
             return {
@@ -291,7 +292,7 @@
        
         return new question(itemFromServer.PqId, itemFromServer.Question, itemFromServer.Priority,
             itemFromServer.HasLinkedQuestions, itemFromServer.ProfileGroupName, itemFromServer.LanguageId, itemFromServer.CountryId, itemFromServer.ProfileGroupId, itemFromServer.Type, itemFromServer.RefreshTime
-        , itemFromServer.SkippedCount, moment(itemFromServer.CreationDate), itemFromServer.ModifiedDate, itemFromServer.PenalityForNotAnswering, itemFromServer.Status, itemFromServer.CreatedBy, itemFromServer.StatusValue, itemFromServer.AnswerNeeded,itemFromServer.AsnswerCount);
+        , itemFromServer.SkippedCount, moment(itemFromServer.CreationDate), itemFromServer.ModifiedDate, itemFromServer.PenalityForNotAnswering, itemFromServer.Status, itemFromServer.CreatedBy, itemFromServer.StatusValue, itemFromServer.AnswerNeeded, itemFromServer.AsnswerCount, itemFromServer.Gender, itemFromServer.AgeRangeStart, itemFromServer.AgeRangeEnd);
     };
     
     // Function to attain cancel button functionality QUESTION
@@ -378,7 +379,7 @@
         };
   };
   var // ReSharper disable InconsistentNaming
- ProfileQuestionTargetCriteria = function (ID, PQID, Type, PQID, PQAnswerID, LinkedSQID, LinkedSqAnswer, IncludeorExclude, LanguageID, questionString, answerString, Language, surveyQuestLeftImageSrc, surveyQuestRightImageSrc, IndustryID, Industry, EducationId, Education) {
+ ProfileQuestionTargetCriteria = function (ID, PQID, Type, PQID, PQAnswerID, LinkedSQID, LinkedSqAnswer, IncludeorExclude, LanguageID, questionString, answerString, Language, IndustryID, Industry, EducationId, Education,SQAnswer,QuizAnswerId, criteriaPrice, QuizPQId) {
      var
          //type and userID will be set on server side
          ID = ko.observable(ID),
@@ -393,12 +394,19 @@
          questionString = ko.observable(questionString),
          answerString = ko.observable(answerString),
          Language = ko.observable(Language),
-         surveyQuestLeftImageSrc = ko.observable(surveyQuestLeftImageSrc),
-         surveyQuestRightImageSrc = ko.observable(surveyQuestRightImageSrc),
+         
          IndustryID = ko.observable(IndustryID),
          Industry = ko.observable(Industry),
          Education = ko.observable(Education),
          EducationId = ko.observable(EducationId),
+
+         
+          SQAnswer = ko.observable(SQAnswer),
+         
+          QuizAnswerId = ko.observable(QuizAnswerId),
+         criteriaPrice = ko.observable(criteriaPrice),
+          QuizPQId = ko.observable(QuizPQId),
+        
          // Convert to server data
          convertToServerData = function () {
              return {
@@ -410,13 +418,16 @@
                  LinkedSqId: LinkedSQID(),
                  LinkedSqAnswer: LinkedSQAnswer(),
                  IncludeorExclude: IncludeorExclude() == 1 ? true : false,
-                 surveyQuestLeftImageSrc: surveyQuestLeftImageSrc(),
-                 surveyQuestRightImageSrc: surveyQuestRightImageSrc(),
+                
                  LanguageId: LanguageID(),
                  IndustryID: IndustryID(),
                  Industry: Industry(),
                  EducationId: EducationId(),
-                 Education: Education()
+                 Education: Education(),
+                 SQAnswer: SQAnswer(),
+                 QuizAnswerId: QuizAnswerId(),
+                 criteriaPrice: criteriaPrice(),
+                 QuizPQId: QuizPQId()
              };
          };
      return {
@@ -432,13 +443,15 @@
          questionString: questionString,
          answerString: answerString,
          Language: Language,
-         surveyQuestLeftImageSrc: surveyQuestLeftImageSrc,
-         surveyQuestRightImageSrc: surveyQuestRightImageSrc,
          convertToServerData: convertToServerData,
          IndustryID: IndustryID,
          Industry: Industry,
          EducationId: EducationId,
-         Education: Education
+         Education: Education,
+         SQAnswer: SQAnswer,
+         QuizAnswerId: QuizAnswerId,
+         criteriaPrice: criteriaPrice,
+         QuizPQId: QuizPQId
      };
  };
 
@@ -447,7 +460,7 @@
            source.Country, source.City, source.IncludeorExclude, source.Latitude, source.Longitude);
     }
     ProfileQuestionTargetCriteria.Create = function (source) {
-        return new ProfileQuestionTargetCriteria(source.Id, source.SqId, source.Type, source.PqId, source.PqAnswerId, source.LinkedSqId, source.LinkedSqAnswer, source.IncludeorExclude, source.LanguageId, source.questionString, source.answerString, source.Language, source.surveyQuestLeftImageSrc, source.surveyQuestRightImageSrc, source.IndustryId, source.Industry, source.EducationId, source.Education);
+        return new ProfileQuestionTargetCriteria(source.Id, source.SqId, source.Type, source.PqId, source.PqAnswerId, source.LinkedSqId, source.LinkedSqAnswer, source.IncludeorExclude, source.LanguageId, source.questionString, source.answerString, source.Language,source.IndustryId, source.Industry, source.EducationId, source.Education);
     };
     return {
         question: question,

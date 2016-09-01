@@ -1,4 +1,5 @@
-﻿using SMD.Models.DomainModels;
+﻿using SMD.Models.Common;
+using SMD.Models.DomainModels;
 using System.Collections.Generic;
 
 namespace SMD.Models.ResponseModels
@@ -20,7 +21,7 @@ namespace SMD.Models.ResponseModels
         /// Langs
         /// </summary>
         public IEnumerable<Language> Languages { get; set; }
-
+        public UserBaseData objBaseData { get; set; }
         /// <summary>
         /// Profile Questions for showing in editor - linked question
         /// </summary>

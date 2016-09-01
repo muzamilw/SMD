@@ -509,7 +509,7 @@ define("Coupons/Coupons.viewModel",
 
                     //  }
                 }
-            }
+            },
                 // Add new profile Criteria
                 addNewProfileCriteria = function () { },
                   saveProfileQuestion = function (item) {

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Practices.Unity;
+using SMD.Interfaces;
 using SMD.Interfaces.Repository;
 using SMD.Repository.BaseRepository;
 using SMD.Repository.Repositories;
@@ -63,6 +64,8 @@ namespace SMD.Repository
             unityContainer.RegisterType<IDamImageRepository, DamImageRepository>();
 
             unityContainer.RegisterType<IUserCouponViewRepository, UserCouponViewRepository>();
+            unityContainer.RegisterType<IProfileQuestionTargetCriteriaRepository, ProfileQuestionTargetCriteriaRepository>();
+            unityContainer.RegisterType<IProfileQuestionTargetLocationRepository, ProfileQuestionTargetLocationRepository>();
         }
     }
 }
