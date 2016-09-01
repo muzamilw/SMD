@@ -773,7 +773,7 @@ define("ads/ads.viewModel",
                     //}
                 },
                   saveProfileQuestion = function (item) {
-
+                      debugger;
                       var selectedQuestionstring = $(".active .parent-list-title").text();
                       selectedCriteria().questionString(selectedQuestionstring);
                       selectedCriteria().PQID(item.PQID);

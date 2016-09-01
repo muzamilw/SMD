@@ -501,7 +501,13 @@ define("pQuestion/pQuestion.viewModel",
                         return isValid;
                     },
                     // Save Question / Add 
-                    onSaveProfileQuestion = function () {
+                    SaveChanges = function ()
+                    {
+
+                        onSaveProfileQuestion(2);
+                    },
+
+                    onSaveProfileQuestion = function (mode) {
                         debugger;
                         if (!doBeforeSave()) {
                             return;
@@ -514,7 +520,10 @@ define("pQuestion/pQuestion.viewModel",
                                 serverAnswers.push(item().convertToServerData());
                             }
                         });
-                       
+                        if (mode == 2)
+                        {
+                            selectedQuestion().status(2);
+                        }
                         var serverQuestion = selectedQuestion().convertToServerData();
 
 
@@ -1082,7 +1091,8 @@ define("pQuestion/pQuestion.viewModel",
                     selectedCriteria: selectedCriteria,
                     profileAnswerList: profileAnswerList,
                     onChangeProfileQuestion: onChangeProfileQuestion,
-                    saveProfileQuestion: saveProfileQuestion
+                    saveProfileQuestion: saveProfileQuestion,
+                    SaveChanges: SaveChanges
                 };
             })()
         };

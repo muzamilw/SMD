@@ -387,6 +387,7 @@
          Type = ko.observable(Type),
          PQID = ko.observable(PQID),
          PQAnswerID = ko.observable(PQAnswerID),
+         PQAnswerID = ko.observable(PQAnswerID),
          LinkedSQID = ko.observable(LinkedSQID),
          LinkedSQAnswer = ko.observable(LinkedSqAnswer + ""),
          IncludeorExclude = ko.observable(IncludeorExclude == true ? "1" : "0"),
