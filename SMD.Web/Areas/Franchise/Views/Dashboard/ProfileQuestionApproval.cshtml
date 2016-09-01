@@ -46,7 +46,7 @@
         <script id="adCampaignsLVTemplate" type="text/html">
             <tr style="cursor: pointer">
                 <td>
-                    <p data-bind="text:submittedBy"></p>
+                    <p data-bind="text:companyId()!=null ?submittedBy:'system survey'"></p>
                 </td>
                 <td>
                     <p data-bind="text:question"></p>
