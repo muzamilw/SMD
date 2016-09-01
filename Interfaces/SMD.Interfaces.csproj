@@ -75,6 +75,7 @@
     <Compile Include="Data\SecurityAccessRight.cs" />
     <Compile Include="IAuthorizationChecker.cs" />
     <Compile Include="IClaimsSecurityService.cs" />
+    <Compile Include="IProfileQuestionTargetLocation.cs" />
     <Compile Include="Logger\IMPCLogWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\IBranchCategoryRepository.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="Repository\ICouponCategoriesRepository.cs" />
     <Compile Include="Repository\IDamImageRepository.cs" />
     <Compile Include="Repository\ICurrencyRepository.cs" />
+    <Compile Include="Repository\IProfileQuestionTargetCriteriaRepository.cs" />
     <Compile Include="Repository\ISectionRepository.cs" />
     <Compile Include="Repository\IPhraseRepository.cs" />
     <Compile Include="Repository\ICityService.cs" />

@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using ProfileQuestionAnswer = SMD.Models.DomainModels.ProfileQuestionAnswer;
-
+using ProfileQuestionTargetCriteriaDM = SMD.Models.DomainModels.ProfileQuestionTargetCriteria;
+using ProfileQuestionTargetLocationDM = SMD.Models.DomainModels.ProfileQuestionTargetLocation;
 namespace SMD.MIS.ModelMappers
 {
     /// <summary>
@@ -50,7 +51,10 @@ namespace SMD.MIS.ModelMappers
                 PenalityForNotAnswering = source.PenalityForNotAnswering,
                 Status = source.Status,
                 AnswerNeeded=source.AnswerNeeded,
-                AsnswerCount=source.AsnswerCount
+                AsnswerCount=source.AsnswerCount,
+                AgeRangeStart=source.AgeRangeStart,
+                AgeRangeEnd=source.AgeRangeEnd,
+                Gender=source.Gender
             };
         }
 
@@ -76,6 +80,13 @@ namespace SMD.MIS.ModelMappers
                 ModifiedDate = source.ModifiedDate,
                 PenalityForNotAnswering = source.PenalityForNotAnswering,
                 Status = source.Status,
+                AgeRangeStart=source.AgeRangeStart,
+                AgeRangeEnd=source.AgeRangeEnd,
+                Gender=source.Gender,
+                ProfileQuestionTargetCriterias = source.ProfileQuestionTargetCriteria != null ? source.ProfileQuestionTargetCriteria.Select(crt => crt.CreateFromTargetCriteria()).ToList() : new Collection<ProfileQuestionTargetCriteriaDM>().ToList(),
+
+                ProfileQuestionTargetLocations = source.ProfileQuestionTargetLocation != null ? source.ProfileQuestionTargetLocation.Select(loc => loc.CreateFromTargetLocation()).ToList() : new Collection<ProfileQuestionTargetLocationDM>().ToList(),
+
                 ProfileQuestionAnswers = source.ProfileQuestionAnswers != null ? source.ProfileQuestionAnswers.Select(ans => ans.CreateFrom()).ToList() : new Collection<ProfileQuestionAnswer>().ToList()
             };
         }
@@ -102,7 +113,8 @@ namespace SMD.MIS.ModelMappers
                 CountryDropdowns = source.Countries.Select(country => country.CreateFrom()),
                 LanguageDropdowns = source.Languages.Select(lang => lang.CreateFrom()),
                 ProfileQuestionGroupDropdowns = source.ProfileQuestionGroups.Select(group => group.CreateFrom()),
-                ProfileQuestionDropdowns = source.ProfileQuestions.Select(question => question.CreateFromDropdown())
+                ProfileQuestionDropdowns = source.ProfileQuestions.Select(question => question.CreateFromDropdown()),
+                objBaseData=source.objBaseData.CreateFromBaseData()
             };
         }
 
@@ -135,7 +147,78 @@ namespace SMD.MIS.ModelMappers
                 PercentageCompleted= source.PercentageCompleted
             };
         }
+          public static SMD.MIS.Areas.Api.Models.UserBaseData CreateFromBaseData(this Models.Common.UserBaseData source)
+          {
+            if (source != null)
+            {
+                return new SMD.MIS.Areas.Api.Models.UserBaseData
+                {
+                    CityId = source.CityId,
+                    CountryId = source.CountryId,
+                    LanguageId = source.LanguageId,
+                    IndustryId = source.IndustryId,
+                    EducationId = source.EducationId,
+                    City = source.City,
+                    Country = source.Country,
+                    Language = source.Language,
+                    Industry = source.Industry,
+                    Education = source.Education,
+                    CurrencySymbol = source.CurrencySymbol,
+                    Latitude = source.Latitude,
+                    Longitude = source.Longitude,
+                    isStripeIntegrated = source.isStripeIntegrated,
+                    isUserAddmin = source.isUserAdmin
+                };
+            }
+            else
+            {
+                return null;
+            }
+        }
 
+          public static Models.DomainModels.ProfileQuestionTargetCriteria CreateFromTargetCriteria(this ProfileQuestionTargetCriteria source)
+          {
+              if (source != null)
+              {
+                  return  new Models.DomainModels.ProfileQuestionTargetCriteria
+                  { 
+                      ID=source.ID,
+                      PQID  = source.PQID,
+                      Type = source.Type,
+                      SQID = source.SQID,
+                      PQAnswerID = source.PQAnswerID,
+                      LinkedSQID = source.LinkedSQID,
+                      LinkedSQAnswer = source.LinkedSQAnswer,
+                      IncludeorExclude = source.IncludeorExclude,
+                      LanguageID = source.LanguageID,
+                      IndustryID = source.IndustryID,
+                      EducationID = source.EducationID,
+                  };
+              }
+              else
+              {
+                  return null;
+              }
+          }
+          public static Models.DomainModels.ProfileQuestionTargetLocation CreateFromTargetLocation(this ProfileQuestionTargetLocation source)
+          {
+              if (source != null)
+              {
+                  return new Models.DomainModels.ProfileQuestionTargetLocation
+                  {
+                      ID = source.ID,
+                      PQID = source.PQID,
+                      CountryID = source.CountryID,
+                      CityID = source.CityID,
+                      Radius = source.Radius,
+                      IncludeorExclude = source.IncludeorExclude
+                  };
+              }
+              else
+              {
+                  return null;
+              }
+          }
         /// <summary>
         /// Domain to API response 
         /// </summary>

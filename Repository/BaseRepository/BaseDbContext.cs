@@ -83,7 +83,8 @@ namespace SMD.Repository.BaseRepository
         /// User Claims
         /// </summary>
         public DbSet<UserClaim> UserClaims { get; set; }
-        
+        public DbSet<ProfileQuestionTargetCriteria> ProfileQuestionTargetCriteria { get; set; }
+        public DbSet<ProfileQuestionTargetLocation> ProfileQuestionTargetLocation { get; set; }
         /// <summary>
         /// Profile Questions
         /// </summary>

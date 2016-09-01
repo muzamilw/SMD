@@ -1,7 +1,7 @@
 ﻿@{
-    ViewBag.Title = "Coupons For Approval";
+    ViewBag.Title = "Profile Question For Approval";
 }
-<div class="row" id="CouponsApprovalBindingSpot">
+<div class="row" id="PQApprovalBindingSpot">
     <div class="col-lg-12" data-bind="visible: !$root.isEditorVisible()">
         <div class="row">
             <div class="col-lg-12">
@@ -9,7 +9,7 @@
                     <li><a href="~/Dashboard/Index">&nbsp;</a></li>
                 </ol>
                 <div class="clearfix">
-                    <h1 class="pull-left" style="padding-left:0px;">Coupons For Approval</h1>
+                    <h1 class="pull-left" style="padding-left:0px;">Profile Questions For Approval</h1>
                 </div>
             </div>
         </div>
@@ -22,16 +22,14 @@
                                 <thead>
                                     <tr>
                                         <th class="col-lg-2 th-pointer"><span id="4">Submitted By<span></span></span></th>
-                                        <th class="col-lg-2 th-pointer"><span id="4">Title<span></span></span> </th>
-                                      
-                                        <th class="col-lg-2 th-pointer"><span id="4">Swap Cost<span></span></span> </th>
+                                        <th class="col-lg-2 th-pointer"><span id="4">Profile Question<span></span></span> </th>
                                         <th class="col-lg-2 th-pointer"><span id="5">Submission Date<span class="icon-up"></span></span></th>
 
                                         <th class="col-lg-1">&nbsp;</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <!-- ko template: { name: 'adCampaignsLVTemplate' , foreach: coupons } -->
+                                    <!-- ko template: { name: 'adCampaignsLVTemplate' , foreach: profileQuestion } -->
                                     <!-- /ko -->
                                 </tbody>
                             </table>
@@ -46,27 +44,22 @@
             </div>
         </div>
         <script id="adCampaignsLVTemplate" type="text/html">
-            <tr style="cursor: pointer" data-bind="click:$root.onEditCoupon">
+            <tr style="cursor: pointer">
                 <td>
-                    <p data-bind="text:submittedBy"></p>
+                    <p data-bind="text:companyId()!=null ?submittedBy:'system survey'"></p>
                 </td>
                 <td>
-                    <p data-bind="text:title"></p>
-                </td>
-
-
-                <td>
-                    <p data-bind="text:swabCost"></p>
+                    <p data-bind="text:question"></p>
                 </td>
                 <td>
-                    <p data-bind="dateString:submissionDate,datePattern: 'DD/MM/YYYY'"></p>
+                    <p data-bind="text:submissionDate"></p>
                     @*<p>Coupon</p>*@
                 </td>
                 <td>
                     <a class="table-link" style="float: right">
                         <span class="fa-stack">
                             <i class="fa fa-square fa-stack-2x"></i>
-                            <i class="fa fa-pencil fa-stack-1x fa-inverse" data-bind="click:$root.onEditCoupon"></i>
+                            <i class="fa fa-pencil fa-stack-1x fa-inverse" data-bind="click:$root.onEditPQ"></i>
                         </span>
                     </a>
                 </td>
@@ -74,15 +67,15 @@
         </script>
     </div>
     @{
-        Html.RenderPartial("~/Areas/Coupons/Views/Coupons/_couponEditor.cshtml");
-    }
+        Html.RenderPartial("~/Areas/ProfileQuestion/Views/Manage/_pqEditorForApp.cshtml");
+        }
 </div>
-@*<!-- ko stopBinding: true -->
+<!-- ko stopBinding: true -->
     @Html.Partial("~/Areas/Common/Views/Shared/_ConfirmationDialog.cshtml")
-    <!-- /ko -->*@
+    <!-- /ko -->
 @section Scripts{
     <script type="text/javascript">
-        require(["FranchiseDashboard/Coupons.view", "common/confirmation.view"]);
+        require(["FranchiseDashboard/profileQuestionApp.view", "common/confirmation.view"]);
     </script>
     <script>
         function getParameter(url, param) {

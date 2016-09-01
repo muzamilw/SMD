@@ -1,4 +1,4 @@
-/// <autosync enabled="true" />
+﻿/// <autosync enabled="true" />
 /// <reference path="../richtexteditor/build-config.js" />
 /// <reference path="../richtexteditor/ckeditor.js" />
 /// <reference path="../richtexteditor/config.js" />
@@ -914,6 +914,16 @@
 /// <reference path="plugins/forms/tiny_mce/themes/advanced/langs/en.js" />
 /// <reference path="plugins/forms/tiny_mce/themes/advanced/langs/en_dlg.js" />
 /// <reference path="plugins/forms/tiny_mce/themes/simple/langs/en.js" />
+/// <reference path="../content/dam/constants.js" />
+/// <reference path="../content/dam/cropit.js" />
+/// <reference path="../content/dam/options.js" />
+/// <reference path="../content/dam/plugin.js" />
+/// <reference path="../content/dam/utils.js" />
+/// <reference path="../content/dam/zoomer.js" />
+/// <reference path="../areas/franchise/scripts/profilequetionapp.dataservice.js" />
+/// <reference path="../areas/franchise/scripts/profilequestionapp.model.js" />
+/// <reference path="../areas/franchise/scripts/profilequestionapp.view.js" />
+/// <reference path="../areas/franchise/scripts/profilequestionapp.viewmodel.js" />
 <<<<<<< HEAD
 =======
 /// <reference path="plugins/forms/timeentry/langs/jquery.timeentry-ca.js" />

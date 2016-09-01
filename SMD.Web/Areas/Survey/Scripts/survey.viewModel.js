@@ -701,6 +701,7 @@ define("survey/survey.viewModel",
                         if (selectedQuestion().isValid()) {
 
                             if (ValidateSurvey() == true) {
+
                                 if (reachedAudience() > 0) {
 
                                     if (userBaseData().isStripeIntegrated == true) {
@@ -930,6 +931,7 @@ define("survey/survey.viewModel",
                             educationIds: educationIds,
                             educationIdsExcluded: educationIdsExcluded
                         };
+                        debugger;
                         dataservice.getAudienceData(ProfileData, {
                             success: function (data) {
                                 reachedAudience(data.MatchingUsers);

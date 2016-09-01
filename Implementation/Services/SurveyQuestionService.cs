@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.Identity.Owin;
+using SMD.Common;
 using SMD.ExceptionHandling;
 using SMD.Implementation.Identity;
 using SMD.Interfaces.Repository;
@@ -288,8 +289,18 @@ namespace SMD.Implementation.Services
         {
             try
             {
+                IEnumerable<SmdRoleClaimValue> roleClaim = ClaimHelper.GetClaimsByType<SmdRoleClaimValue>(SmdClaimTypes.Role);
+                string RoleName = roleClaim != null && roleClaim.Any() ? roleClaim.ElementAt(0).Role : "Role Not Loaded";
+
+                int? compid = 0;
+
+                if (RoleName.StartsWith("Franchise"))
+                    compid = null;
+                else
+                    compid = this._companyRepository.CompanyId;
+
                 survey.UserId = surveyQuestionRepository.LoggedInUserIdentity;
-                survey.CompanyId = _companyRepository.GetUserCompany(surveyQuestionRepository.LoggedInUserIdentity);
+                survey.CompanyId = compid;
                 survey.Type = (int)SurveyQuestionType.Advertiser;
                 survey.StartDate = new DateTime(2005, 1, 1); //survey.StartDate.Value.Subtract(surveyQuestionRepository.UserTimezoneOffSet);
                 survey.EndDate = new DateTime(2040, 1, 1); //survey.EndDate.Value.Subtract(surveyQuestionRepository.UserTimezoneOffSet);

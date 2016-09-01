@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 
 namespace SMD.MIS.Areas.Api.Models
 {
-    /// <summary>
-    /// Profile Question Web Model
-    /// </summary>
-    public class ProfileQuestion
+    public class ApproveProfileQuestion
     {
         public int PqId { get; set; }
         public int? LanguageId { get; set; }
         public int? CountryId { get; set; }
         public int? ProfileGroupId { get; set; }
-        public string   ProfileGroupName { get; set; }
         public int? Priority { get; set; }
         public int? Type { get; set; }
         public string Question { get; set; }
@@ -24,17 +22,17 @@ namespace SMD.MIS.Areas.Api.Models
         public string ModifiedBy { get; set; }
         public bool? HasLinkedQuestions { get; set; }
         public int? PenalityForNotAnswering { get; set; }
+        public int? Status { get; set; }
+
+        public Nullable<int> CompanyId { get; set; }
         public Nullable<int> AnswerNeeded { get; set; }
         public Nullable<int> AsnswerCount { get; set; }
+
+
         public Nullable<int> AgeRangeStart { get; set; }
         public Nullable<int> AgeRangeEnd { get; set; }
         public Nullable<int> Gender { get; set; }
-
-        public int? Status { get; set; }
-
-        public ICollection<ProfileQuestionAnswer> ProfileQuestionAnswers { get; set; }
-        public ICollection<ProfileQuestionTargetCriteria> ProfileQuestionTargetCriteria { get; set; }
-        public ICollection<ProfileQuestionTargetLocation> ProfileQuestionTargetLocation { get; set; }
+        public Nullable<System.DateTime> SubmissionDateTime { get; set; }
 
     }
 }

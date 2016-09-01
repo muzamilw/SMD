@@ -1,5 +1,5 @@
 ﻿/*
-    View for the AdCampaign. Used to keep the viewmodel clear of UI related logic
+    View for the Coupons. Used to keep the viewmodel clear of UI related logic
 */
 define("FranchiseDashboard/Coupons.view",
     ["jquery", "FranchiseDashboard/Coupons.viewModel"], function ($, couponsViewModel) {
@@ -17,7 +17,7 @@ define("FranchiseDashboard/Coupons.view",
                         return;
                     }
                     // Handle Sorting
-                    handleSorting("adCampaignApprovalLVTable", viewModel.sortOn, viewModel.sortIsAsc, viewModel.getCampaigns);
+                    handleSorting("adCampaignApprovalLVTable", viewModel.sortOn, viewModel.sortIsAsc, viewModel.getCoupons);
                 };
             initialize();
             return {
