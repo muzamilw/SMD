@@ -46,7 +46,7 @@
             </div>
         </div>
         <script id="adCampaignsLVTemplate" type="text/html">
-            <tr style="cursor: pointer">
+            <tr style="cursor: pointer" data-bind="click:$root.onEditCoupon">
                 <td>
                     <p data-bind="text:submittedBy"></p>
                 </td>
@@ -54,7 +54,7 @@
                     <p data-bind="text:title"></p>
                 </td>
 
-               
+
                 <td>
                     <p data-bind="text:swabCost"></p>
                 </td>
