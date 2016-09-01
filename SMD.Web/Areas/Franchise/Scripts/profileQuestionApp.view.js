@@ -1,11 +1,11 @@
 ﻿/*
-    View for the Coupons. Used to keep the viewmodel clear of UI related logic
+    View for the ProfileQuestion. Used to keep the viewmodel clear of UI related logic
 */
-define("FranchiseDashboard/Coupons.view",
-    ["jquery", "FranchiseDashboard/Coupons.viewModel"], function ($, couponsViewModel) {
+define("FranchiseDashboard/profileQuestionApp.view",
+    ["jquery", "FranchiseDashboard/profileQuestionApp.viewModel"], function ($, profileQuestionViewModel) {
         var ist = window.ist || {};
         // View 
-        ist.Coupons.view = (function (specifiedViewModel) {
+        ist.ProfileQuestion.view = (function (specifiedViewModel) {
             var
                 // View model 
                 viewModel = specifiedViewModel,
@@ -17,17 +17,17 @@ define("FranchiseDashboard/Coupons.view",
                         return;
                     }
                     // Handle Sorting
-                    handleSorting("adCampaignApprovalLVTable", viewModel.sortOn, viewModel.sortIsAsc, viewModel.getCoupons);
+                    handleSorting("adCampaignApprovalLVTable", viewModel.sortOn, viewModel.sortIsAsc, viewModel.getCampaigns);
                 };
             initialize();
             return {
                 bindingRoot: bindingRoot,
                 viewModel: viewModel
             };
-        })(couponsViewModel);
+        })(profileQuestionViewModel);
         // Initialize the view model
-        if (ist.Coupons.view.bindingRoot) {
-            couponsViewModel.initialize(ist.Coupons.view);
+        if (ist.ProfileQuestion.view.bindingRoot) {
+            profileQuestionViewModel.initialize(ist.ProfileQuestion.view);
         }
-        return ist.Coupons.view;
+        return ist.ProfileQuestion.view;
     });

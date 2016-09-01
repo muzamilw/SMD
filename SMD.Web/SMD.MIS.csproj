@@ -384,6 +384,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\SecurityConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Api\Controllers\ApproveProfileQuestionController.cs" />
     <Compile Include="Areas\Api\Controllers\BranchCategoryController.cs" />
     <Compile Include="Areas\Api\Controllers\CategoryController.cs" />
     <Compile Include="Areas\Api\Controllers\CouponApprovalController.cs" />
@@ -655,6 +656,9 @@
     <Content Include="Areas\Franchise\Scripts\Coupons.dataservice.js" />
     <Content Include="Areas\Franchise\Scripts\Coupons.view.js" />
     <Content Include="Areas\Franchise\Scripts\Coupons.viewModel.js" />
+    <Content Include="Areas\Franchise\Scripts\profileQuestionApp.model.js" />
+    <Content Include="Areas\Franchise\Scripts\profileQuestionApp.view.js" />
+    <Content Include="Areas\Franchise\Scripts\profileQuestionApp.viewModel.js" />
     <Content Include="Areas\ProfileQuestion\Scripts\pQuestion.dataservice.js" />
     <Content Include="Areas\ProfileQuestion\Scripts\pQuestion.model.js" />
     <Content Include="Areas\ProfileQuestion\Scripts\paypalExample.view.js" />
@@ -676,6 +680,7 @@
     <Content Include="Areas\User\Scripts\user.view.js" />
     <Content Include="Areas\User\Scripts\user.viewModel.js" />
     <Content Include="Areas\Coupons\Views\Coupons\_couponEditor.cshtml" />
+    <Content Include="Areas\Franchise\Scripts\profileQuetionApp.dataservice.js" />
     <None Include="config\Web.connectionstrings.config">
       <SubType>Designer</SubType>
     </None>
