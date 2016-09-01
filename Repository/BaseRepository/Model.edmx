@@ -684,6 +684,9 @@
           <Property Name="LanguageID" Type="int" />
           <Property Name="IndustryID" Type="int" />
           <Property Name="EducationID" Type="bigint" />
+          <Property Name="AdCampaignID" Type="bigint" />
+          <Property Name="AdCampaignAnswer" Type="int" />
+          <Property Name="PQQuestionID" Type="int" />
         </EntityType>
         <EntityType Name="ProfileQuestionTargetLocation">
           <Key>
@@ -5548,6 +5551,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <NavigationProperty Name="ProfileQuestion" Relationship="DomainModels.FK_ProfileQuestionTargetCriteria_ProfileQuestion" FromRole="ProfileQuestionTargetCriteria" ToRole="ProfileQuestion" />
           <NavigationProperty Name="ProfileQuestionAnswer" Relationship="DomainModels.FK_ProfileQuestionTargetCriteria_ProfileQuestionAnswer" FromRole="ProfileQuestionTargetCriteria" ToRole="ProfileQuestionAnswer" />
           <NavigationProperty Name="SurveyQuestion" Relationship="DomainModels.FK_ProfileQuestionTargetCriteria_ProfileQuestion1" FromRole="ProfileQuestionTargetCriteria" ToRole="SurveyQuestion" />
+          <Property Name="AdCampaignID" Type="Int64" />
+          <Property Name="AdCampaignAnswer" Type="Int32" />
+          <Property Name="PQQuestionID" Type="Int32" />
         </EntityType>
         <EntityType Name="ProfileQuestionTargetLocation">
           <Key>
@@ -6957,6 +6963,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <EntitySetMapping Name="ProfileQuestionTargetCriterias">
             <EntityTypeMapping TypeName="DomainModels.ProfileQuestionTargetCriteria">
               <MappingFragment StoreEntitySet="ProfileQuestionTargetCriteria">
+                <ScalarProperty Name="PQQuestionID" ColumnName="PQQuestionID" />
+                <ScalarProperty Name="AdCampaignAnswer" ColumnName="AdCampaignAnswer" />
+                <ScalarProperty Name="AdCampaignID" ColumnName="AdCampaignID" />
                 <ScalarProperty Name="EducationID" ColumnName="EducationID" />
                 <ScalarProperty Name="IndustryID" ColumnName="IndustryID" />
                 <ScalarProperty Name="LanguageID" ColumnName="LanguageID" />
