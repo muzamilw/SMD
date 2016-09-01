@@ -686,6 +686,7 @@
     <Content Include="Areas\Coupons\Views\Coupons\_couponEditor.cshtml" />
     <Content Include="Areas\Franchise\Scripts\profileQuetionApp.dataservice.js" />
     <Content Include="Areas\Franchise\Views\Dashboard\ProfileQuestionApproval.cshtml" />
+    <Content Include="Areas\ProfileQuestion\Views\Manage\_pqEditorForApp.cshtml" />
     <None Include="config\Web.connectionstrings.config">
       <SubType>Designer</SubType>
     </None>

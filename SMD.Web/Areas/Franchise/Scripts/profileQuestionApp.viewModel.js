@@ -16,17 +16,17 @@ define("FranchiseDashboard/profileQuestionApp.viewModel",
                     sortOn = ko.observable(5),
                     //Assending  / Desending
                     sortIsAsc = ko.observable(true),
-                    //isEditorVisible = ko.observable(false),
-                    //isShowCopounMode = ko.observable(false),
-                   // selectedCoupon = ko.observable(),
-                   // onEditCoupon = function (item) {
-                   //     selectedCoupon(item);
-                   //     isEditorVisible(true);
-                   // },
-                   // closeEditDialog = function () {
-                   //     selectedCoupon(undefined);
-                   //     isEditorVisible(false);
-                   // },
+                    isEditorVisible = ko.observable(false),
+                   // isShowCopounMode = ko.observable(false),
+                    selectedProfileQuestion = ko.observable(),
+                    onEditPQ = function (item) {
+                        selectedProfileQuestion(item);
+                        isEditorVisible(true);
+                    },
+                    closeEditDialog = function () {
+                        selectedProfileQuestion(undefined);
+                        isEditorVisible(false);
+                    },
                     getProfileQuestions = function () {
                         dataservice.getPQForApproval(
                             {
@@ -133,11 +133,11 @@ define("FranchiseDashboard/profileQuestionApp.viewModel",
                     profileQuestion: profileQuestion,
                     pager: pager,
                     sortOn: sortOn,
-                    sortIsAsc: sortIsAsc
-                    //isEditorVisible: isEditorVisible,
-                    //onEditCoupon: onEditCoupon,
-                    //selectedCoupon: selectedCoupon,
-                    //closeEditDialog: closeEditDialog,
+                    sortIsAsc: sortIsAsc,
+                    isEditorVisible: isEditorVisible,
+                    onEditPQ: onEditPQ,
+                    selectedProfileQuestion: selectedProfileQuestion,
+                    closeEditDialog: closeEditDialog,
                     //onApproveCoupon: onApproveCoupon,
                     //onSaveCoupon: onSaveCoupon,
                     //onRejectCoupon: onRejectCoupon,
