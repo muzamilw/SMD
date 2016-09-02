@@ -47,7 +47,6 @@ namespace SMD.MIS.Areas.Api.Controllers
                    Mapper.Initialize(cfg => cfg.CreateMap<SearchCampaigns_Result, Models.AdCampaign>());
 
             
-            
 
                 if (request.CampaignId > 0)
                 {
