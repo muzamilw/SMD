@@ -16,7 +16,7 @@ namespace SMD.MIS.Areas.Api.Controllers
 {
     public class GetRandomGameController : ApiController
     {
-        private readonly IGameService gameService;
+        private readonly IWebApiUserService webApiUserService;
 
         #region Private
         

@@ -8,14 +8,14 @@ using System.Net;
 using System.Net.Http;
 using System.Web;
 using System.Web.Http;
-
 using SMD.MIS.Areas.Api.Models;
 using SMD.MIS.ModelMappers;
 namespace SMD.MIS.Areas.Api.Controllers
 {
     public class BuyItController : ApiController
     {
-         private readonly IWebApiUserService webApiUserService;
+
+        private readonly IWebApiUserService webApiUserService;
         private IEmailManagerService emailManagerService;
         private readonly IAdvertService _advertService;
         #region Private
