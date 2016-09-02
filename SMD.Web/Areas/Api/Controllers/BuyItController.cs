@@ -15,8 +15,8 @@ namespace SMD.MIS.Areas.Api.Controllers
 {
     public class BuyItController : ApiController
     {
-         private readonly IWebApiUserService webApiUserService;
-         private IEmailManagerService emailManagerService;
+        private readonly IWebApiUserService webApiUserService;
+        private IEmailManagerService emailManagerService;
         private readonly IAdvertService _advertService;
         #region Private
         
