@@ -1030,7 +1030,7 @@ define("pQuestion/pQuestion.viewModel",
 
                      },
                 saveCriteria = function (type, item) {
-                    debugger;
+                   
                     var selectedQuestionstring = item.VerifyQuestion;
 
                     selectedCriteria().questionString(selectedQuestionstring);
