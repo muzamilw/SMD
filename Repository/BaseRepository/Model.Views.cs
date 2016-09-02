@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets24D01AF7DC3A9BDF97860CDC1B082725D6C0ADA9D4CD9EF464A986A03059CA0D))]
+[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets778DC9D87D828D64CAC47D37AA96419B662DADEB877C705152417D171E6BD04A))]
 
 namespace Edm_EntityMappingGeneratedViews
 {
@@ -17,18 +17,18 @@ namespace Edm_EntityMappingGeneratedViews
     /// <Summary>
     /// The type contains views for EntitySets and AssociationSets that were generated at design time.
     /// </Summary>
-    public sealed class ViewsForBaseEntitySets24D01AF7DC3A9BDF97860CDC1B082725D6C0ADA9D4CD9EF464A986A03059CA0D : System.Data.Mapping.EntityViewContainer
+    public sealed class ViewsForBaseEntitySets778DC9D87D828D64CAC47D37AA96419B662DADEB877C705152417D171E6BD04A : System.Data.Mapping.EntityViewContainer
     {
         
         /// <Summary>
         /// The constructor stores the views for the extents and also the hash values generated based on the metadata and mapping closure and views.
         /// </Summary>
-        public ViewsForBaseEntitySets24D01AF7DC3A9BDF97860CDC1B082725D6C0ADA9D4CD9EF464A986A03059CA0D()
+        public ViewsForBaseEntitySets778DC9D87D828D64CAC47D37AA96419B662DADEB877C705152417D171E6BD04A()
         {
             this.EdmEntityContainerName = "BaseDbContext";
             this.StoreEntityContainerName = "SMDModelStoreContainer";
-            this.HashOverMappingClosure = "d6d14e42af1b2dd8f62fa2eeda66c9b5d3cedd545af885196e392ad6e5966ae5";
-            this.HashOverAllExtentViews = "f2c8800f3a2f7d6ce169b79253df37b999b659665a85de7578ac4e177ccd2b3f";
+            this.HashOverMappingClosure = "5c85e0abe793e218ac36e29e7309697f0b2be01164ed2878dcfd3f2495c52454";
+            this.HashOverAllExtentViews = "5774cb32885635ca2132df5fc2def3d7f8835d6bea7cf62fba7dac1aec3d49ae";
             this.ViewCount = 110;
         }
         
@@ -1619,25 +1619,30 @@ namespace Edm_EntityMappingGeneratedViews
         /// </Summary>
         private System.Collections.Generic.KeyValuePair<string, string> GetView39()
         {
-            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.ProfileQuestionTargetCriteria", @"
-    SELECT VALUE -- Constructing ProfileQuestionTargetCriteria
-        [SMDModel.Store.ProfileQuestionTargetCriteria](T1.ProfileQuestionTargetCriteria_ID, T1.ProfileQuestionTargetCriteria_PQID, T1.ProfileQuestionTargetCriteria_Type, T1.ProfileQuestionTargetCriteria_SQID, T1.ProfileQuestionTargetCriteria_PQAnswerID, T1.ProfileQuestionTargetCriteria_LinkedSQID, T1.ProfileQuestionTargetCriteria_LinkedSQAnswer, T1.ProfileQuestionTargetCriteria_IncludeorExclude, T1.ProfileQuestionTargetCriteria_LanguageID, T1.ProfileQuestionTargetCriteria_IndustryID, T1.ProfileQuestionTargetCriteria_EducationID)
-    FROM (
-        SELECT 
-            T.ID AS ProfileQuestionTargetCriteria_ID, 
-            T.PQID AS ProfileQuestionTargetCriteria_PQID, 
-            T.Type AS ProfileQuestionTargetCriteria_Type, 
-            T.SQID AS ProfileQuestionTargetCriteria_SQID, 
-            T.PQAnswerID AS ProfileQuestionTargetCriteria_PQAnswerID, 
-            T.LinkedSQID AS ProfileQuestionTargetCriteria_LinkedSQID, 
-            T.LinkedSQAnswer AS ProfileQuestionTargetCriteria_LinkedSQAnswer, 
-            T.IncludeorExclude AS ProfileQuestionTargetCriteria_IncludeorExclude, 
-            T.LanguageID AS ProfileQuestionTargetCriteria_LanguageID, 
-            T.IndustryID AS ProfileQuestionTargetCriteria_IndustryID, 
-            T.EducationID AS ProfileQuestionTargetCriteria_EducationID, 
-            True AS _from0
-        FROM BaseDbContext.ProfileQuestionTargetCriterias AS T
-    ) AS T1");
+            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.ProfileQuestionTargetCriteria", "\r\n    SELECT VALUE -- Constructing ProfileQuestionTargetCriteria\r\n        [SMDMod" +
+                    "el.Store.ProfileQuestionTargetCriteria](T1.ProfileQuestionTargetCriteria_ID, T1." +
+                    "ProfileQuestionTargetCriteria_PQID, T1.ProfileQuestionTargetCriteria_Type, T1.Pr" +
+                    "ofileQuestionTargetCriteria_SQID, T1.ProfileQuestionTargetCriteria_PQAnswerID, T" +
+                    "1.ProfileQuestionTargetCriteria_LinkedSQID, T1.ProfileQuestionTargetCriteria_Lin" +
+                    "kedSQAnswer, T1.ProfileQuestionTargetCriteria_IncludeorExclude, T1.ProfileQuesti" +
+                    "onTargetCriteria_LanguageID, T1.ProfileQuestionTargetCriteria_IndustryID, T1.Pro" +
+                    "fileQuestionTargetCriteria_EducationID, T1.ProfileQuestionTargetCriteria_AdCampa" +
+                    "ignID, T1.ProfileQuestionTargetCriteria_AdCampaignAnswer, T1.ProfileQuestionTarg" +
+                    "etCriteria_PQQuestionID)\r\n    FROM (\r\n        SELECT \r\n            T.ID AS Profi" +
+                    "leQuestionTargetCriteria_ID, \r\n            T.PQID AS ProfileQuestionTargetCriter" +
+                    "ia_PQID, \r\n            T.Type AS ProfileQuestionTargetCriteria_Type, \r\n         " +
+                    "   T.SQID AS ProfileQuestionTargetCriteria_SQID, \r\n            T.PQAnswerID AS P" +
+                    "rofileQuestionTargetCriteria_PQAnswerID, \r\n            T.LinkedSQID AS ProfileQu" +
+                    "estionTargetCriteria_LinkedSQID, \r\n            T.LinkedSQAnswer AS ProfileQuesti" +
+                    "onTargetCriteria_LinkedSQAnswer, \r\n            T.IncludeorExclude AS ProfileQues" +
+                    "tionTargetCriteria_IncludeorExclude, \r\n            T.LanguageID AS ProfileQuesti" +
+                    "onTargetCriteria_LanguageID, \r\n            T.IndustryID AS ProfileQuestionTarget" +
+                    "Criteria_IndustryID, \r\n            T.EducationID AS ProfileQuestionTargetCriteri" +
+                    "a_EducationID, \r\n            T.AdCampaignID AS ProfileQuestionTargetCriteria_AdC" +
+                    "ampaignID, \r\n            T.AdCampaignAnswer AS ProfileQuestionTargetCriteria_AdC" +
+                    "ampaignAnswer, \r\n            T.PQQuestionID AS ProfileQuestionTargetCriteria_PQQ" +
+                    "uestionID, \r\n            True AS _from0\r\n        FROM BaseDbContext.ProfileQuest" +
+                    "ionTargetCriterias AS T\r\n    ) AS T1");
         }
         
         /// <Summary>
@@ -2818,18 +2823,23 @@ namespace Edm_EntityMappingGeneratedViews
                     ".ProfileQuestionTargetCriteria_LinkedSQID, T1.ProfileQuestionTargetCriteria_Link" +
                     "edSQAnswer, T1.ProfileQuestionTargetCriteria_IncludeorExclude, T1.ProfileQuestio" +
                     "nTargetCriteria_LanguageID, T1.ProfileQuestionTargetCriteria_IndustryID, T1.Prof" +
-                    "ileQuestionTargetCriteria_EducationID)\r\n    FROM (\r\n        SELECT \r\n           " +
-                    " T.ID AS ProfileQuestionTargetCriteria_ID, \r\n            T.PQID AS ProfileQuesti" +
-                    "onTargetCriteria_PQID, \r\n            T.Type AS ProfileQuestionTargetCriteria_Typ" +
-                    "e, \r\n            T.SQID AS ProfileQuestionTargetCriteria_SQID, \r\n            T.P" +
-                    "QAnswerID AS ProfileQuestionTargetCriteria_PQAnswerID, \r\n            T.LinkedSQI" +
-                    "D AS ProfileQuestionTargetCriteria_LinkedSQID, \r\n            T.LinkedSQAnswer AS" +
-                    " ProfileQuestionTargetCriteria_LinkedSQAnswer, \r\n            T.IncludeorExclude " +
-                    "AS ProfileQuestionTargetCriteria_IncludeorExclude, \r\n            T.LanguageID AS" +
-                    " ProfileQuestionTargetCriteria_LanguageID, \r\n            T.IndustryID AS Profile" +
-                    "QuestionTargetCriteria_IndustryID, \r\n            T.EducationID AS ProfileQuestio" +
-                    "nTargetCriteria_EducationID, \r\n            True AS _from0\r\n        FROM SMDModel" +
-                    "StoreContainer.ProfileQuestionTargetCriteria AS T\r\n    ) AS T1");
+                    "ileQuestionTargetCriteria_EducationID, T1.ProfileQuestionTargetCriteria_AdCampai" +
+                    "gnID, T1.ProfileQuestionTargetCriteria_AdCampaignAnswer, T1.ProfileQuestionTarge" +
+                    "tCriteria_PQQuestionID)\r\n    FROM (\r\n        SELECT \r\n            T.ID AS Profil" +
+                    "eQuestionTargetCriteria_ID, \r\n            T.PQID AS ProfileQuestionTargetCriteri" +
+                    "a_PQID, \r\n            T.Type AS ProfileQuestionTargetCriteria_Type, \r\n          " +
+                    "  T.SQID AS ProfileQuestionTargetCriteria_SQID, \r\n            T.PQAnswerID AS Pr" +
+                    "ofileQuestionTargetCriteria_PQAnswerID, \r\n            T.LinkedSQID AS ProfileQue" +
+                    "stionTargetCriteria_LinkedSQID, \r\n            T.LinkedSQAnswer AS ProfileQuestio" +
+                    "nTargetCriteria_LinkedSQAnswer, \r\n            T.IncludeorExclude AS ProfileQuest" +
+                    "ionTargetCriteria_IncludeorExclude, \r\n            T.LanguageID AS ProfileQuestio" +
+                    "nTargetCriteria_LanguageID, \r\n            T.IndustryID AS ProfileQuestionTargetC" +
+                    "riteria_IndustryID, \r\n            T.EducationID AS ProfileQuestionTargetCriteria" +
+                    "_EducationID, \r\n            T.AdCampaignID AS ProfileQuestionTargetCriteria_AdCa" +
+                    "mpaignID, \r\n            T.AdCampaignAnswer AS ProfileQuestionTargetCriteria_AdCa" +
+                    "mpaignAnswer, \r\n            T.PQQuestionID AS ProfileQuestionTargetCriteria_PQQu" +
+                    "estionID, \r\n            True AS _from0\r\n        FROM SMDModelStoreContainer.Prof" +
+                    "ileQuestionTargetCriteria AS T\r\n    ) AS T1");
         }
         
         /// <Summary>

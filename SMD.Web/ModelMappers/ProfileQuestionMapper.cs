@@ -83,6 +83,7 @@ namespace SMD.MIS.ModelMappers
                 AgeRangeStart=source.AgeRangeStart,
                 AgeRangeEnd=source.AgeRangeEnd,
                 Gender=source.Gender,
+                
                 ProfileQuestionTargetCriterias = source.ProfileQuestionTargetCriteria != null ? source.ProfileQuestionTargetCriteria.Select(crt => crt.CreateFromTargetCriteria()).ToList() : new Collection<ProfileQuestionTargetCriteriaDM>().ToList(),
 
                 ProfileQuestionTargetLocations = source.ProfileQuestionTargetLocation != null ? source.ProfileQuestionTargetLocation.Select(loc => loc.CreateFromTargetLocation()).ToList() : new Collection<ProfileQuestionTargetLocationDM>().ToList(),
@@ -193,6 +194,9 @@ namespace SMD.MIS.ModelMappers
                       LanguageID = source.LanguageID,
                       IndustryID = source.IndustryID,
                       EducationID = source.EducationID,
+                      AdCampaignAnswer=source.AdCampaignAnswer,
+                      PQQuestionID=source.PQQuestionID,
+                      AdCampaignID=source.AdCampaignID
                   };
               }
               else
