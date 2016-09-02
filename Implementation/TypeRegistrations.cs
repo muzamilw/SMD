@@ -51,6 +51,7 @@ namespace SMD.Implementation
             unityContainer.RegisterType<IBrachCategoryService, BrachCategoryService>();
             unityContainer.RegisterType<ICompanyBranchService, CompanyBranchService>();
             unityContainer.RegisterType<IDamImageService, DamImageService>();
+            unityContainer.RegisterType<IGameService, GameService>();
         }
     }
 }

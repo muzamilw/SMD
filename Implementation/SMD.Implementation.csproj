@@ -181,6 +181,7 @@
     <Compile Include="Services\InvoiceService.cs" />
     <Compile Include="Services\ParentScheduler.cs" />
     <Compile Include="Services\PaypalService.cs" />
+    <Compile Include="Services\GameService.cs" />
     <Compile Include="Services\PhraseService.cs" />
     <Compile Include="Services\ProfileQuestionAnswerService .cs" />
     <Compile Include="Services\ProfileQuestionUserAnswerService.cs" />

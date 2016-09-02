@@ -128,7 +128,7 @@ namespace SMD.MIS.Areas.Api.ModelMappers
             {
                 transactions.AddRange(account.Transactions);
             }
-            transactions = transactions.Where(g=>g.isProcessed == true).OrderByDescending(g => g.TxId).Take(5).ToList();
+            transactions = transactions.OrderByDescending(g => g.TxId).ToList();
             foreach (var item in transactions)
             {
                 statements.Add(item.CreateFrom());

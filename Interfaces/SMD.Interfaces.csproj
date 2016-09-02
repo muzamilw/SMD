@@ -84,6 +84,7 @@
     <Compile Include="Repository\ICouponCategoriesRepository.cs" />
     <Compile Include="Repository\IDamImageRepository.cs" />
     <Compile Include="Repository\ICurrencyRepository.cs" />
+    <Compile Include="Repository\IGameRepository.cs" />
     <Compile Include="Repository\IProfileQuestionTargetCriteriaRepository.cs" />
     <Compile Include="Repository\ISectionRepository.cs" />
     <Compile Include="Repository\IPhraseRepository.cs" />
@@ -140,6 +141,7 @@
     <Compile Include="Services\IManageUserService.cs" />
     <Compile Include="Services\IPaypalService.cs" />
     <Compile Include="Services\IAccountService.cs" />
+    <Compile Include="Services\IGameService.cs" />
     <Compile Include="Services\IPhraseService.cs" />
     <Compile Include="Services\IProductService.cs" />
     <Compile Include="Services\IProfileQuestionAnswerService.cs" />
