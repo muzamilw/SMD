@@ -20,6 +20,22 @@ define("FranchiseDashboard/profileQuestionApp.viewModel",
                    // isShowCopounMode = ko.observable(false),
                     selectedProfileQuestion = ko.observable(),
                     onEditPQ = function (item) {
+                        dataservice.getPqAnswer(
+                        {
+                            ProfileQuestionId: item.id
+                        },
+                            {
+                                success: function (answers) {
+                                    selectedProfileQuestion().pqAnswers.removeAll();
+                                    _.each(answers, function (item) {
+                                        selectedProfileQuestion().pqAnswers.push(item);
+                                    });
+                                   // var pqAnswers = answers;
+                                },
+                                error: function () {
+                                    toastr.error("Failed to load profile question!");
+                                }
+                            });
                         selectedProfileQuestion(item);
                         isEditorVisible(true);
                     },

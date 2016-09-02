@@ -32,36 +32,15 @@
                             <div class="tab-pane fade in active" id="tab-generalinfo">
                                 <div class="col-lg-12 form-horizontal" data-bind="with:selectedProfileQuestion">
                                     <h3 class="group-header" style="margin-top:20px;">
-                                        Coupon General Info
+                                        Profile Question General Info
                                     </h3>
                                     <div class="col-lg-9">
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
-                                                <label class="control-label text-right tooltip-float">Coupon Title</label>
+                                                <label class="control-label text-right tooltip-float">Question</label>
                                             </div>
                                             <div class="col-lg-6">
-                                                <input type="text" readonly class="form-control">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-9">
-                                        <div class="form-group">
-                                            <div class="col-lg-4 text-right">
-                                                <label class="control-label text-right tooltip-float">Coupon listing mode</label>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <input type="text" readonly class="form-control">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-9 marginBottom12">
-                                        <div class="form-group">
-                                            <div class="col-lg-4 text-right">
-                                                <label class="control-label text-right tooltip-float">Logo</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <img id="vehicleImage" alt="" style="width: auto;height:150px;width:300px;" />
-                                                <h5><span></span></h5>
+                                                <input type="text" readonly class="form-control" data-bind="value:question">
                                             </div>
                                         </div>
                                     </div>
@@ -69,11 +48,46 @@
                                         <div class="form-group">
                                             <div class="form-group">
                                                 <div class="col-lg-4 text-campaign-left  Float-Left">
-                                                    <label class="control-label text-right tooltip-float font20 floatNone" style="float:left !important;    margin-left: 6px; ">Highlights & Saving</label>
+                                                    <label class="control-label text-right tooltip-float floatNone" style="float:left !important;    margin-left: 6px; ">Answers</label>
                                                 </div>
                                             </div>
                                             <div class="col-lg-4 text-right">
-                                                <label class="control-label text-right tooltip-float">Highlight # 1</label>
+
+                                            </div>
+                                            <div class="col-lg-6" data-bind="foreach:pqAnswers">
+                                                <p id="txtPages" data-bind="text: AnswerString">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-9">
+                                        <div class="form-group">
+                                            <div class="col-lg-4 text-right">
+                                                <label class="control-label text-right tooltip-float">Profile Group</label>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <input type="text" readonly class="form-control" data-bind="value:profileGroupId">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-9">
+                                        <div class="form-group">
+                                            <div class="col-lg-4 text-right">
+                                                <label class="control-label text-right tooltip-float">Question Type</label>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <input type="text" readonly class="form-control" data-bind="value:type">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-9">
+                                        <div class="form-group">
+                                            <div class="form-group">
+                                                <div class="col-lg-4 text-campaign-left  Float-Left">
+                                                    <label class="control-label text-right tooltip-float font20 floatNone" style="float:left !important;    margin-left: 6px; ">Target Audience</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 text-right">
+                                                <label class="control-label text-right tooltip-float">Show video ad in</label>
                                             </div>
                                             <div class="col-lg-6">
                                                 <input type="text" readonly class="form-control">
@@ -83,7 +97,7 @@
                                     <div class="col-lg-9">
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
-                                                <label class="control-label text-right tooltip-float">Highlight # 2</label>
+                                                <label class="control-label text-right tooltip-float">Add City</label>
                                             </div>
                                             <div class="col-lg-6">
                                                 <input type="text" readonly class="form-control">
@@ -93,7 +107,25 @@
                                     <div class="col-lg-9">
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
-                                                <label class="control-label text-right tooltip-float">Highlight # 3</label>
+                                                <label class="control-label text-right tooltip-float">Age Range</label>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="col-lg-2" style=" padding: 0px !important;     margin-left: 8px;">
+                                                    <input type="text" readonly class="form-control" data-bind="value:ageRangeStart">
+                                                </div>
+                                                <div class="pull-left range_dash">
+                                                    -
+                                                </div>
+                                                <div class="col-lg-2" style=" padding: 0px !important;">
+                                                    <input type="text" readonly class="form-control" data-bind="value:ageRangeEnd">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-9">
+                                        <div class="form-group">
+                                            <div class="col-lg-4 text-right">
+                                                <label class="control-label text-right tooltip-float">Gender</label>
                                             </div>
                                             <div class="col-lg-6">
                                                 <input type="text" readonly class="form-control">
@@ -103,27 +135,7 @@
                                     <div class="col-lg-9">
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
-                                                <label class="control-label text-right tooltip-float">Highlight # 4</label>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <input type="text" readonly class="form-control">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-9">
-                                        <div class="form-group">
-                                            <div class="col-lg-4 text-right">
-                                                <label class="control-label text-right tooltip-float">Highlight # 5</label>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <input type="text" readonly class="form-control">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-9">
-                                        <div class="form-group">
-                                            <div class="col-lg-4 text-right">
-                                                <label class="control-label text-right tooltip-float">Currency Symbol</label>
+                                                <label class="control-label text-right tooltip-float">Profession</label>
                                             </div>
                                             <div class="col-lg-6">
                                                 <input type="text" readonly class="form-control">
@@ -134,10 +146,10 @@
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
                                                 @*<div class="bs-example-tooltips tooltip-float-width">
-                            <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
-                                <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                            </a>
-                        </div>*@
+                                                        <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
+                                                            <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                        </a>
+                                                    </div>*@
                                                 <label class="control-label text-right tooltip-float">Rejection Reason</label>
                                             </div>
                                             <div class="col-lg-6">

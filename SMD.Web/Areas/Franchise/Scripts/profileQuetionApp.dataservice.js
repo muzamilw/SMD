@@ -32,6 +32,12 @@ define("FranchiseDashboard/profileQuetionApp.dataservice", function () {
                         dataType: 'json',
                         type: 'POST'
                     });
+                    //Get Profile Question Answer 
+                    amplify.request.define('getPqAnswer', 'ajax', {
+                        url: '/Api/ApproveProfileQuestionAns',
+                        dataType: 'json',
+                        type: 'GET'
+                    });
                     isInitialized = true;
                 }
             },
@@ -45,6 +51,7 @@ define("FranchiseDashboard/profileQuetionApp.dataservice", function () {
                     data: params
                 });
             },
+
 
 
              // Search Ad Campaigns
@@ -66,12 +73,23 @@ define("FranchiseDashboard/profileQuetionApp.dataservice", function () {
                     error: callbacks.error,
                     data: params
                 });
-            };
+            },
+        // Get Profile Questions Answer On edit 
+        getPqAnswer = function (params, callbacks) {
+            initialize();
+            return amplify.request({
+                resourceId: 'getPqAnswer',
+                success: callbacks.success,
+                error: callbacks.error,
+                data: params
+            });
+        };
 
         return {
             saveCoupon: saveCoupon,
             getPQForApproval: getPQForApproval,
-            sendApprovalRejectionEmail: sendApprovalRejectionEmail
+            sendApprovalRejectionEmail: sendApprovalRejectionEmail,
+            getPqAnswer: getPqAnswer
         };
     })();
     return dataService;

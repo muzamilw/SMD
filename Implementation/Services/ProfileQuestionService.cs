@@ -417,6 +417,11 @@ namespace SMD.Implementation.Services
                 TotalCount = rowCount
             };
         }
+        //public List<ProfileQuestionTargetLocation> GetPQlocation(long pqId)
+        //{ 
+        //return _profileQuestionTargetLocationReository
+        
+        //}
         #endregion
     }
 }
