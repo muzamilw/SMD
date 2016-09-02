@@ -176,5 +176,22 @@ namespace DomainModelProject
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCouponByID_Result>("GetCouponByID", couponIdParameter, latParameter, lonParameter, userIdParameter);
         }
+    
+        public virtual ObjectResult<GetProducts_Result> GetProducts(string userID, Nullable<int> fromRow, Nullable<int> toRow)
+        {
+            var userIDParameter = userID != null ?
+                new ObjectParameter("UserID", userID) :
+                new ObjectParameter("UserID", typeof(string));
+    
+            var fromRowParameter = fromRow.HasValue ?
+                new ObjectParameter("FromRow", fromRow) :
+                new ObjectParameter("FromRow", typeof(int));
+    
+            var toRowParameter = toRow.HasValue ?
+                new ObjectParameter("ToRow", toRow) :
+                new ObjectParameter("ToRow", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetProducts_Result>("GetProducts", userIDParameter, fromRowParameter, toRowParameter);
+        }
     }
 }
