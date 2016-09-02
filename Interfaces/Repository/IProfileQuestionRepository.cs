@@ -40,5 +40,6 @@ namespace SMD.Interfaces.Repository
         IEnumerable<ProfileQuestion> UpdateQuestionsCompanyID(IEnumerable<ProfileQuestion> ProfileQuestions);
         void AddProfileQuestions(ProfileQuestion Obj);
         UserBaseData getBaseData();
+        IEnumerable<ProfileQuestion> GetProfileQuestionsForApproval(GetPagedListRequest request, out int rowCount);
     }
 }

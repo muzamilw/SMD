@@ -41,6 +41,11 @@ namespace SMD.MIS.Areas.Franchise.Controllers
         {
             return View();
         }
+        public ActionResult ProfileQuestionApproval()
+        {
+            return View();
+        }
+
 
     }
 }
