@@ -17,6 +17,7 @@ using System.Web;
 using SMD.Repository.Repositories;
 using SMD.Interfaces;
 
+
 namespace SMD.Implementation.Services
 {
     /// <summary>
@@ -34,7 +35,7 @@ namespace SMD.Implementation.Services
         private readonly IEducationRepository _educationRepository;
         private readonly IProfileQuestionTargetCriteriaRepository _profileQuestionTargetCriteriaRepository;
         private readonly IProfileQuestionTargetLocationRepository _profileQuestionTargetLocationRepository;
-    
+     
         #endregion
         #region Constructor
         /// <summary>
@@ -148,8 +149,9 @@ namespace SMD.Implementation.Services
         public ProfileQuestion SaveProfileQuestion(ProfileQuestion source)
         {
 
-
             var serverObj=_profileQuestionRepository.Find(source.PqId);
+            //var user = UserManager.Users.Where(g => g.Id == _profileQuestionRepository.LoggedInUserIdentity).SingleOrDefault();
+          
             #region Edit Question
             // Edit Profile Question 
             if (serverObj != null)
@@ -281,10 +283,15 @@ namespace SMD.Implementation.Services
                     CompanyId = compid,
                     AgeRangeStart=source.AgeRangeStart,
                     AgeRangeEnd=source.AgeRangeEnd,
-                    Gender=source.Gender
-
+                    Gender=source.Gender,
+                    SubmissionDateTime=source.SubmissionDateTime
+                //    CreatedBy = user.FullName
                 };
-                serverObj.CompanyId = compid;
+                 serverObj.CompanyId = compid;
+                 if (serverObj.Status == 2)
+                 {
+                     serverObj.SubmissionDateTime = DateTime.Now;
+                 }
                 _profileQuestionRepository.Add(serverObj);
                 _profileQuestionRepository.SaveChanges();
                 if (serverObj.ProfileQuestionAnswers == null)
@@ -407,7 +414,10 @@ namespace SMD.Implementation.Services
                 PercentageCompleted = percentageCompleted
             };
         }
-
+        //private ApplicationUserManager UserManager
+        //{
+        //    get { return HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
+        //}
         public ProfileQuestionResponseModelForApproval GetProfileQuestionForAproval(GetPagedListRequest request)
         {
             int rowCount;
