@@ -379,15 +379,21 @@
         };
   };
   var // ReSharper disable InconsistentNaming
- ProfileQuestionTargetCriteria = function (ID, PQID, Type, PQID, PQAnswerID, LinkedSQID, LinkedSqAnswer, IncludeorExclude, LanguageID, questionString, answerString, Language, IndustryID, Industry, EducationId, Education,SQAnswer,QuizAnswerId, criteriaPrice, QuizPQId) {
+ ProfileQuestionTargetCriteria = function (ID, PQID, Type, PQID, PQAnswerID, LinkedSQID, LinkedSqAnswer, IncludeorExclude, LanguageID, questionString, answerString, Language, IndustryID, Industry, EducationId, Education, AddCampaignAnsID, PQQuestionID, AdCampaignId) {
      var
          //type and userID will be set on server side
          ID = ko.observable(ID),
          SQID = ko.observable(SQID),
          Type = ko.observable(Type),
          PQID = ko.observable(PQID),
+         LinkedPQId = ko.observable(LinkedPQId),
          PQAnswerID = ko.observable(PQAnswerID),
-         PQAnswerID = ko.observable(PQAnswerID),
+         
+         AddCampaignAnsID = ko.observable(AddCampaignAnsID),
+         PQQuestionID = ko.observable(PQQuestionID),
+         AdCampaignId = ko.observable(AdCampaignId),
+
+
          LinkedSQID = ko.observable(LinkedSQID),
          LinkedSQAnswer = ko.observable(LinkedSqAnswer + ""),
          IncludeorExclude = ko.observable(IncludeorExclude == true ? "1" : "0"),
@@ -399,15 +405,11 @@
          IndustryID = ko.observable(IndustryID),
          Industry = ko.observable(Industry),
          Education = ko.observable(Education),
-         EducationId = ko.observable(EducationId),
+         EducationId = ko.observable(EducationId)
 
          
-          SQAnswer = ko.observable(SQAnswer),
          
-          QuizAnswerId = ko.observable(QuizAnswerId),
-         criteriaPrice = ko.observable(criteriaPrice),
-          QuizPQId = ko.observable(QuizPQId),
-        
+         
          // Convert to server data
          convertToServerData = function () {
              return {
@@ -425,10 +427,9 @@
                  Industry: Industry(),
                  EducationId: EducationId(),
                  Education: Education(),
-                 SQAnswer: SQAnswer(),
-                 QuizAnswerId: QuizAnswerId(),
-                 criteriaPrice: criteriaPrice(),
-                 QuizPQId: QuizPQId()
+                 AddCampaignAnsID: AddCampaignAnsID(),
+                 PQQuestionID: PQQuestionID(),
+                 AdCampaignId: AdCampaignId()
              };
          };
      return {
@@ -449,10 +450,10 @@
          Industry: Industry,
          EducationId: EducationId,
          Education: Education,
-         SQAnswer: SQAnswer,
-         QuizAnswerId: QuizAnswerId,
-         criteriaPrice: criteriaPrice,
-         QuizPQId: QuizPQId
+         AddCampaignAnsID: AddCampaignAnsID,
+         PQQuestionID: PQQuestionID,
+         AdCampaignId: AdCampaignId
+        
      };
  };
 
@@ -461,7 +462,7 @@
            source.Country, source.City, source.IncludeorExclude, source.Latitude, source.Longitude);
     }
     ProfileQuestionTargetCriteria.Create = function (source) {
-        return new ProfileQuestionTargetCriteria(source.Id, source.SqId, source.Type, source.PqId, source.PqAnswerId, source.LinkedSqId, source.LinkedSqAnswer, source.IncludeorExclude, source.LanguageId, source.questionString, source.answerString, source.Language,source.IndustryId, source.Industry, source.EducationId, source.Education);
+        return new ProfileQuestionTargetCriteria(source.Id, source.SqId, source.Type, source.PqId, source.PqAnswerId, source.LinkedSqId, source.LinkedSqAnswer, source.IncludeorExclude, source.LanguageId, source.questionString, source.answerString, source.Language, source.IndustryId, source.Industry, source.EducationId, source.Education, source.AddCampaignAnsID, source.PQQuestionID, source.AdCampaignId);
     };
     return {
         question: question,

@@ -19,5 +19,6 @@ namespace SMD.MIS.Areas.Api.Models
         public Nullable<int> IndustryID { get; set; }
         public Nullable<long> EducationID { get; set; }
 
+
     }
 }
