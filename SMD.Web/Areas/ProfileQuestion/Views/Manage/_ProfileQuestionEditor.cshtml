@@ -1314,27 +1314,15 @@
                 <!--ko if:IncludeorExclude() == '0' -->
                 <td class="col-lg-2">
                     <p style="margin-top: 5px;margin-left: 12px;">
-                        <span data-bind="text: '(Excluded) ' + questionString() + ' = ' + answerString()"></span><span style="color:red;" data-bind="text:' (' + criteriaPrice() + 'p)'"></span>
+                        <span data-bind="text: '(Excluded) ' + questionString() + ' = ' + answerString()"></span><span style="color:red;" @*data-bind="text:' (' + criteriaPrice() + 'p)'"*@></span>
                     </p>
-                    @*<!-- ko if:   Type()  == "6" -->
-                    <p style="margin-top: 5px;margin-left: 12px;">
-                    <span data-bind="text: '(Excluded) ' +  questionString() + ' = ' "></span>
-                    <img data-bind="attr:{src: answerString()}" width="80" />
-                    </p>
-                    <!-- /ko -->*@
                 </td>
                 <!--/ko-->
                 <!--ko if:IncludeorExclude() == '1'-->
                 <td class="col-lg-2">
                     <p style="margin-top: 5px;margin-left: 12px;">
-                        <span data-bind="text: '(Included) ' + questionString() + ' = ' + answerString() "></span><span style="color:red;" data-bind="text:' (' + criteriaPrice() + 'p)'"></span>
+                        <span data-bind="text: '(Included) ' + questionString() + ' = ' + answerString() "></span><span style="color:red;" @*data-bind="text:' (' + criteriaPrice() + 'p)'"*@></span>
                     </p>
-                    @*<!-- ko if:   Type()  == "6" -->
-                    <p style="margin-top: 5px;margin-left: 12px;">
-                    <span data-bind="text: '(Included) ' + questionString() + ' = ' "></span>
-                    <img data-bind="attr:{src: answerString()}" width="80" />
-                    </p>
-                    <!-- /ko -->*@
                 </td>
                 <!--/ko-->
                 <td class="col-lg-1" style=" padding: 0px !important; text-align:right;">

@@ -13,9 +13,9 @@ using SMD.MIS.Areas.Api.Models;
 using SMD.MIS.ModelMappers;
 namespace SMD.MIS.Areas.Api.Controllers
 {
-    public class BuyItController : ApiController
+    public class GetRandomGameController : ApiController
     {
-         private readonly IWebApiUserService webApiUserService;
+        private readonly IWebApiUserService webApiUserService;
         private IEmailManagerService emailManagerService;
         private readonly IAdvertService _advertService;
         #region Private
@@ -27,13 +27,12 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// <summary>
         /// Constructor
         /// </summary>
-        public BuyItController(IWebApiUserService webApiUserService, IEmailManagerService emailManagerService, IAdvertService advertService)
+        public GetRandomGameController(IWebApiUserService webApiUserService, IEmailManagerService emailManagerService, IAdvertService advertService)
         {
             if (webApiUserService == null)
             {
                 throw new ArgumentNullException("webApiUserService");
             }
-
             this.webApiUserService = webApiUserService;
             this.emailManagerService = emailManagerService;
             this._advertService = advertService;
@@ -73,7 +72,6 @@ namespace SMD.MIS.Areas.Api.Controllers
                 throw new HttpException((int)HttpStatusCode.BadRequest, "Invalid Request");
             }
             return _advertService.SendApprovalRejectionEmail(campaign.CreateFrom()).CreateFrom();
-
         }
         #endregion
     }

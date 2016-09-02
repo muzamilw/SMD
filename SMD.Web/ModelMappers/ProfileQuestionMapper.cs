@@ -194,6 +194,9 @@ namespace SMD.MIS.ModelMappers
                       LanguageID = source.LanguageID,
                       IndustryID = source.IndustryID,
                       EducationID = source.EducationID,
+                      AdCampaignAnswer=source.AdCampaignAnswer,
+                      PQQuestionID=source.PQQuestionID,
+                      AdCampaignID=source.AdCampaignID
                   };
               }
               else

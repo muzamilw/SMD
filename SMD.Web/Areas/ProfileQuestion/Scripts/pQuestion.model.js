@@ -379,7 +379,8 @@
         };
   };
   var // ReSharper disable InconsistentNaming
- ProfileQuestionTargetCriteria = function (ID, PQID, Type, PQID, PQAnswerID, LinkedSQID, LinkedSqAnswer, IncludeorExclude, LanguageID, questionString, answerString, Language, IndustryID, Industry, EducationId, Education, AddCampaignAnsID, PQQuestionID, AdCampaignId) {
+ ProfileQuestionTargetCriteria = function (ID, PQID, Type, PQID, PQAnswerID, LinkedSQID, LinkedSqAnswer, IncludeorExclude, LanguageID, questionString, answerString, Language, IndustryID, Industry, EducationId, Education, AdCampaignAnswer, PQQuestionID, AdCampaignID) {
+     
      var
          //type and userID will be set on server side
          ID = ko.observable(ID),
@@ -389,9 +390,9 @@
          LinkedPQId = ko.observable(LinkedPQId),
          PQAnswerID = ko.observable(PQAnswerID),
          
-         AddCampaignAnsID = ko.observable(AddCampaignAnsID),
+         AdCampaignAnswer = ko.observable(AdCampaignAnswer),
          PQQuestionID = ko.observable(PQQuestionID),
-         AdCampaignId = ko.observable(AdCampaignId),
+         AdCampaignID = ko.observable(AdCampaignID),
 
 
          LinkedSQID = ko.observable(LinkedSQID),
@@ -407,8 +408,6 @@
          Education = ko.observable(Education),
          EducationId = ko.observable(EducationId)
 
-         
-         
          
          // Convert to server data
          convertToServerData = function () {
@@ -427,9 +426,9 @@
                  Industry: Industry(),
                  EducationId: EducationId(),
                  Education: Education(),
-                 AddCampaignAnsID: AddCampaignAnsID(),
+                 AdCampaignAnswer: AdCampaignAnswer(),
                  PQQuestionID: PQQuestionID(),
-                 AdCampaignId: AdCampaignId()
+                 AdCampaignID: AdCampaignID()
              };
          };
      return {
@@ -450,9 +449,9 @@
          Industry: Industry,
          EducationId: EducationId,
          Education: Education,
-         AddCampaignAnsID: AddCampaignAnsID,
+         AdCampaignAnswer: AdCampaignAnswer,
          PQQuestionID: PQQuestionID,
-         AdCampaignId: AdCampaignId
+         AdCampaignID: AdCampaignID
         
      };
  };
@@ -462,7 +461,8 @@
            source.Country, source.City, source.IncludeorExclude, source.Latitude, source.Longitude);
     }
     ProfileQuestionTargetCriteria.Create = function (source) {
-        return new ProfileQuestionTargetCriteria(source.Id, source.SqId, source.Type, source.PqId, source.PqAnswerId, source.LinkedSqId, source.LinkedSqAnswer, source.IncludeorExclude, source.LanguageId, source.questionString, source.answerString, source.Language, source.IndustryId, source.Industry, source.EducationId, source.Education, source.AddCampaignAnsID, source.PQQuestionID, source.AdCampaignId);
+        debugger;
+        return new ProfileQuestionTargetCriteria(source.Id, source.SqId, source.Type, source.PqId, source.PqAnswerId, source.LinkedSqId, source.LinkedSqAnswer, source.IncludeorExclude, source.LanguageId, source.questionString, source.answerString, source.Language, source.IndustryId, source.Industry, source.EducationId, source.Education, source.AdCampaignAnswer, source.PQQuestionID, source.AdCampaignID);
     };
     return {
         question: question,
