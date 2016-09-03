@@ -42,6 +42,7 @@ namespace SMD.Interfaces.Services
         ProfileQuestionApiSearchResponse GetProfileQuestionsByGroupForApi(GetProfileQuestionApiRequest request);
         ProfileQuestionResponseModelForApproval GetProfileQuestionForAproval(GetPagedListRequest request);
         //List<ProfileQuestionTargetLocation> GetPQlocation(long pqId);
+        string UpdatePQForApproval(ProfileQuestion source);
        
     }
 }

@@ -31,6 +31,11 @@ namespace SMD.MIS.Areas.Api.Models
         public Nullable<int> Gender { get; set; }
 
         public int? Status { get; set; }
+        public bool? Approved { get; set; }
+        public string ApprovedByUserId { get; set; }
+        public DateTime? ApprovalDate { get; set; }
+
+        public string RejectionReason { get; set; }
 
         public ICollection<ProfileQuestionAnswer> ProfileQuestionAnswers { get; set; }
         public ICollection<ProfileQuestionTargetCriteria> ProfileQuestionTargetCriteria { get; set; }
