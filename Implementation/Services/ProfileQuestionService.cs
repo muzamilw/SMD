@@ -429,8 +429,8 @@ namespace SMD.Implementation.Services
             };
         }
         //public List<ProfileQuestionTargetLocation> GetPQlocation(long pqId)
-        //{ 
-        //return _profileQuestionTargetLocationReository
+        //{
+        //    return _profileQuestionTargetLocationRepository.GetPQlocation(pqId);
         
         //}
         #endregion

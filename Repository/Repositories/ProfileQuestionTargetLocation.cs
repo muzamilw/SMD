@@ -26,19 +26,11 @@ namespace SMD.Repository.Repositories
         {
             get { return db.ProfileQuestionTargetLocation; }
         }
-        public List<ProfileQuestionTargetLocation> GetPQlocation(long pqId)
-        {
-            db.Configuration.LazyLoadingEnabled = false;
-            return DbSet.Include(c => c.Country).Include(d => d.City).ToList();
-
-            //var result = from a in db.ProfileQuestionTargetLocation
-            //             join c in db.Cities on a.CityID equals c.CityId
-            //             join u in db.Countries on a.CountryID equals u.CountryId
-            //             where a.PQID == pqId
-            //             select a.CountryID;
-
-            //return result.ToList();
-        }
+        //public List<ProfileQuestionTargetLocation> GetPQlocation(long pqId)
+        //{
+        //    db.Configuration.LazyLoadingEnabled = false;
+        //    return DbSet.Include(co => co.Country).Include(d => d.City).Where(pq => pq.PQID == pqId).ToList();
+        //}
 
     }
 }
