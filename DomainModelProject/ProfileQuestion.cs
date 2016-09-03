@@ -23,6 +23,7 @@ namespace DomainModelProject
             this.ProfileQuestionTargetCriterias = new HashSet<ProfileQuestionTargetCriteria>();
             this.ProfileQuestionTargetLocations = new HashSet<ProfileQuestionTargetLocation>();
             this.InvoiceDetails = new HashSet<InvoiceDetail>();
+            this.ProfileQuestionTargetCriterias1 = new HashSet<ProfileQuestionTargetCriteria>();
         }
     
         public int PQID { get; set; }
@@ -48,6 +49,11 @@ namespace DomainModelProject
         public Nullable<int> AgeRangeStart { get; set; }
         public Nullable<int> AgeRangeEnd { get; set; }
         public Nullable<int> Gender { get; set; }
+        public Nullable<bool> Approved { get; set; }
+        public string ApprovedByUserID { get; set; }
+        public Nullable<System.DateTime> ApprovalDate { get; set; }
+        public string RejectionReason { get; set; }
+        public string UserID { get; set; }
     
         public virtual ICollection<AdCampaignTargetCriteria> AdCampaignTargetCriterias { get; set; }
         public virtual ICollection<ProfileQuestionAnswer> ProfileQuestionAnswers { get; set; }
@@ -58,5 +64,6 @@ namespace DomainModelProject
         public virtual ICollection<ProfileQuestionTargetCriteria> ProfileQuestionTargetCriterias { get; set; }
         public virtual ICollection<ProfileQuestionTargetLocation> ProfileQuestionTargetLocations { get; set; }
         public virtual ICollection<InvoiceDetail> InvoiceDetails { get; set; }
+        public virtual ICollection<ProfileQuestionTargetCriteria> ProfileQuestionTargetCriterias1 { get; set; }
     }
 }

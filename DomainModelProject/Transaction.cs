@@ -36,6 +36,8 @@ namespace DomainModelProject
         public Nullable<int> Sequence { get; set; }
         public Nullable<long> CouponCodeId { get; set; }
         public Nullable<double> AccountBalance { get; set; }
+        public Nullable<long> CouponId { get; set; }
+        public Nullable<int> PQID { get; set; }
     
         public virtual Account Account { get; set; }
         public virtual ICollection<TransactionLog> TransactionLogs { get; set; }

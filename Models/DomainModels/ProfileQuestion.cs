@@ -40,7 +40,7 @@ namespace SMD.Models.DomainModels
           public DateTime? ApprovalDate { get; set; }
 
           public string RejectionReason { get; set; }
-
+          public string UserId { get; set; }
 
         public virtual ICollection<ProfileQuestionAnswer> ProfileQuestionAnswers { get; set; }
         public virtual ICollection<ProfileQuestionUserAnswer> ProfileQuestionUserAnswers { get; set; }
@@ -56,6 +56,8 @@ namespace SMD.Models.DomainModels
 
         public virtual ICollection<ProfileQuestionTargetCriteria> ProfileQuestionTargetCriterias { get; set; }
         public virtual ICollection<ProfileQuestionTargetLocation> ProfileQuestionTargetLocations { get; set; }
+
+        public virtual ICollection<ProfileQuestionTargetCriteria> ProfileQuestionTargetCriterias1 { get; set; }
 
         public virtual ICollection<InvoiceDetail> InvoiceDetails { get; set; }
         

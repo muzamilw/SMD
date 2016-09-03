@@ -645,6 +645,7 @@
           <Property Name="ApprovedByUserID" Type="nvarchar" MaxLength="128" />
           <Property Name="ApprovalDate" Type="datetime" />
           <Property Name="RejectionReason" Type="nvarchar" MaxLength="1000" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="ProfileQuestionAnswer">
           <Key>
@@ -1653,7 +1654,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
               <PropertyRef Name="PQID" />
             </Principal>
             <Dependent Role="ProfileQuestionTargetCriteria">
-              <PropertyRef Name="SQID" />
+              <PropertyRef Name="PQID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3156,6 +3157,10 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
             <Parameter Name="FromRow" Mode="In" Type="Int32" />
             <Parameter Name="ToRow" Mode="In" Type="Int32" />
           </FunctionImport>
+          <AssociationSet Name="FK_ProfileQuestionTargetCriteria_ProfileQuestion2" Association="DomainModels.FK_ProfileQuestionTargetCriteria_ProfileQuestion2">
+            <End Role="ProfileQuestion" EntitySet="ProfileQuestions" />
+            <End Role="ProfileQuestionTargetCriteria" EntitySet="ProfileQuestionTargetCriterias" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="ProfileQuestion">
           <Key>
@@ -3197,6 +3202,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Property Name="ApprovedByUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="ApprovalDate" Type="DateTime" Precision="3" />
           <Property Name="RejectionReason" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ProfileQuestionTargetCriterias1" Relationship="DomainModels.FK_ProfileQuestionTargetCriteria_ProfileQuestion2" FromRole="ProfileQuestion" ToRole="ProfileQuestionTargetCriteria" />
         </EntityType>
         <EntityType Name="ProfileQuestionAnswer">
           <Key>
@@ -5462,6 +5469,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Property Name="AdCampaignID" Type="Int64" />
           <Property Name="AdCampaignAnswer" Type="Int32" />
           <Property Name="PQQuestionID" Type="Int32" />
+          <NavigationProperty Name="ProfileQuestion1" Relationship="DomainModels.FK_ProfileQuestionTargetCriteria_ProfileQuestion2" FromRole="ProfileQuestionTargetCriteria" ToRole="ProfileQuestion" />
         </EntityType>
         <EntityType Name="ProfileQuestionTargetLocation">
           <Key>
@@ -5715,6 +5723,18 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Property Type="Int32" Name="AdCount" Nullable="true" />
           <Property Type="Int32" Name="TotalItems" Nullable="true" />
         </ComplexType>
+        <Association Name="FK_ProfileQuestionTargetCriteria_ProfileQuestion2">
+          <End Type="DomainModels.ProfileQuestion" Role="ProfileQuestion" Multiplicity="0..1" />
+          <End Type="DomainModels.ProfileQuestionTargetCriteria" Role="ProfileQuestionTargetCriteria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProfileQuestion">
+              <PropertyRef Name="PqId" />
+            </Principal>
+            <Dependent Role="ProfileQuestionTargetCriteria">
+              <PropertyRef Name="PQID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5741,6 +5761,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <EntitySetMapping Name="ProfileQuestions">
             <EntityTypeMapping TypeName="DomainModels.ProfileQuestion">
               <MappingFragment StoreEntitySet="ProfileQuestion">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="RejectionReason" ColumnName="RejectionReason" />
                 <ScalarProperty Name="ApprovalDate" ColumnName="ApprovalDate" />
                 <ScalarProperty Name="ApprovedByUserID" ColumnName="ApprovedByUserID" />

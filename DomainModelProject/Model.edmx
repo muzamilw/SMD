@@ -723,6 +723,11 @@
           <Property Name="AgeRangeStart" Type="int" />
           <Property Name="AgeRangeEnd" Type="int" />
           <Property Name="Gender" Type="int" />
+          <Property Name="Approved" Type="bit" />
+          <Property Name="ApprovedByUserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="ApprovalDate" Type="datetime" />
+          <Property Name="RejectionReason" Type="nvarchar" MaxLength="1000" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="ProfileQuestionAnswer">
           <Key>
@@ -931,8 +936,9 @@
           <Property Name="CurrencyID" Type="int" />
           <Property Name="CurrencyRateID" Type="int" />
           <Property Name="Sequence" Type="int" />
-          <Property Name="CouponCodeId" Type="bigint" />
+          <Property Name="CouponId" Type="bigint" />
           <Property Name="AccountBalance" Type="float" />
+          <Property Name="PQID" Type="int" />
         </EntityType>
         <EntityType Name="TransactionLog">
           <Key>
@@ -1734,7 +1740,7 @@
               <PropertyRef Name="PQID" />
             </Principal>
             <Dependent Role="ProfileQuestionTargetCriteria">
-              <PropertyRef Name="SQID" />
+              <PropertyRef Name="PQID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3450,6 +3456,12 @@
           <NavigationProperty Name="ProfileQuestionTargetCriterias" Relationship="SMDDevModel.FK_ProfileQuestionTargetCriteria_ProfileQuestion" FromRole="ProfileQuestion" ToRole="ProfileQuestionTargetCriteria" />
           <NavigationProperty Name="ProfileQuestionTargetLocations" Relationship="SMDDevModel.FK_ProfileQuestionTargetLocation_ProfileQuestion" FromRole="ProfileQuestion" ToRole="ProfileQuestionTargetLocation" />
           <NavigationProperty Name="InvoiceDetails" Relationship="SMDDevModel.FK_InvoiceDetail_ProfileQuestion" FromRole="ProfileQuestion" ToRole="InvoiceDetail" />
+          <Property Name="Approved" Type="Boolean" />
+          <Property Name="ApprovedByUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ApprovalDate" Type="DateTime" Precision="3" />
+          <Property Name="RejectionReason" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ProfileQuestionTargetCriterias1" Relationship="SMDDevModel.FK_ProfileQuestionTargetCriteria_ProfileQuestion2" FromRole="ProfileQuestion" ToRole="ProfileQuestionTargetCriteria" />
         </EntityType>
         <EntityType Name="ProfileQuestionAnswer">
           <Key>
@@ -3660,6 +3672,8 @@
           <Property Name="AccountBalance" Type="Double" />
           <NavigationProperty Name="Account" Relationship="Self.FK_Transaction_Account" FromRole="Transaction" ToRole="Account" />
           <NavigationProperty Name="TransactionLogs" Relationship="Self.FK_TransactionLog_TransactionLog" FromRole="Transaction" ToRole="TransactionLog" />
+          <Property Name="CouponId" Type="Int64" />
+          <Property Name="PQID" Type="Int32" />
         </EntityType>
         <EntityType Name="TransactionLog">
           <Key>
@@ -5081,6 +5095,10 @@
             <Parameter Name="FromRow" Mode="In" Type="Int32" />
             <Parameter Name="ToRow" Mode="In" Type="Int32" />
           </FunctionImport>
+          <AssociationSet Name="FK_ProfileQuestionTargetCriteria_ProfileQuestion2" Association="SMDDevModel.FK_ProfileQuestionTargetCriteria_ProfileQuestion2">
+            <End Role="ProfileQuestion" EntitySet="ProfileQuestions" />
+            <End Role="ProfileQuestionTargetCriteria" EntitySet="ProfileQuestionTargetCriterias" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="CouponCategories">
           <Key>
@@ -5364,6 +5382,7 @@
           <Property Name="AdCampaignID" Type="Int64" />
           <Property Name="AdCampaignAnswer" Type="Int32" />
           <Property Name="PQQuestionID" Type="Int32" />
+          <NavigationProperty Name="ProfileQuestion1" Relationship="SMDDevModel.FK_ProfileQuestionTargetCriteria_ProfileQuestion2" FromRole="ProfileQuestionTargetCriteria" ToRole="ProfileQuestion" />
         </EntityType>
         <EntityType Name="ProfileQuestionTargetLocation">
           <Key>
@@ -5617,6 +5636,18 @@
           <Property Type="Int32" Name="AdCount" Nullable="true" />
           <Property Type="Int32" Name="TotalItems" Nullable="true" />
         </ComplexType>
+        <Association Name="FK_ProfileQuestionTargetCriteria_ProfileQuestion2">
+          <End Type="SMDDevModel.ProfileQuestion" Role="ProfileQuestion" Multiplicity="0..1" />
+          <End Type="SMDDevModel.ProfileQuestionTargetCriteria" Role="ProfileQuestionTargetCriteria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProfileQuestion">
+              <PropertyRef Name="PQID" />
+            </Principal>
+            <Dependent Role="ProfileQuestionTargetCriteria">
+              <PropertyRef Name="PQID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -6304,6 +6335,11 @@
           <EntitySetMapping Name="ProfileQuestions">
             <EntityTypeMapping TypeName="SMDDevModel.ProfileQuestion">
               <MappingFragment StoreEntitySet="ProfileQuestion">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="RejectionReason" ColumnName="RejectionReason" />
+                <ScalarProperty Name="ApprovalDate" ColumnName="ApprovalDate" />
+                <ScalarProperty Name="ApprovedByUserID" ColumnName="ApprovedByUserID" />
+                <ScalarProperty Name="Approved" ColumnName="Approved" />
                 <ScalarProperty Name="Gender" ColumnName="Gender" />
                 <ScalarProperty Name="AgeRangeEnd" ColumnName="AgeRangeEnd" />
                 <ScalarProperty Name="AgeRangeStart" ColumnName="AgeRangeStart" />
@@ -6493,6 +6529,8 @@
           <EntitySetMapping Name="Transactions">
             <EntityTypeMapping TypeName="SMDDevModel.Transaction">
               <MappingFragment StoreEntitySet="Transaction">
+                <ScalarProperty Name="PQID" ColumnName="PQID" />
+                <ScalarProperty Name="CouponId" ColumnName="CouponId" />
                 <ScalarProperty Name="TxID" ColumnName="TxID" />
                 <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
@@ -6508,7 +6546,6 @@
                 <ScalarProperty Name="CurrencyID" ColumnName="CurrencyID" />
                 <ScalarProperty Name="CurrencyRateID" ColumnName="CurrencyRateID" />
                 <ScalarProperty Name="Sequence" ColumnName="Sequence" />
-                <ScalarProperty Name="CouponCodeId" ColumnName="CouponCodeId" />
                 <ScalarProperty Name="AccountBalance" ColumnName="AccountBalance" />
               </MappingFragment>
             </EntityTypeMapping>
