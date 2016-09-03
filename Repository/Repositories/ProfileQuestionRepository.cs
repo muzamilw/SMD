@@ -101,8 +101,8 @@ namespace SMD.Repository.Repositories
 
 
             rowCount = DbSet.Count(query);
-            DbSet.Where(query).Include(a => a.ProfileQuestionTargetCriterias);
-            DbSet.Where(query).Include(a => a.ProfileQuestionTargetLocations);
+           // DbSet.Where(query).Include(a => a.ProfileQuestionTargetCriterias);
+             DbSet.Where(query).Include(a => a.ProfileQuestionTargetLocations).Include("City");
 
             return request.IsAsc
                 ? DbSet.Where(query)

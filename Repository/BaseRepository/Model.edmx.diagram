@@ -49,7 +49,7 @@
         <AssociationConnector Association="DomainModels.FK_TransactionLog_TransactionLog" />
         <EntityTypeShape EntityType="DomainModels.Account" Width="1.5" PointX="14.125" PointY="109.375" />
         <EntityTypeShape EntityType="DomainModels.Invoice" Width="1.5" PointX="14.125" PointY="100.125" />
-        <EntityTypeShape EntityType="DomainModels.ProfileQuestionUserAnswer" Width="1.5" PointX="14.125" PointY="65.5" />
+        <EntityTypeShape EntityType="DomainModels.ProfileQuestionUserAnswer" Width="1.5" PointX="14.125" PointY="65.5" IsExpanded="true" />
         <EntityTypeShape EntityType="DomainModels.SurveyQuestion" Width="3" PointX="24.375" PointY="76.25" />
         <EntityTypeShape EntityType="DomainModels.SurveyQuestionResponse" Width="1.5" PointX="29.125" PointY="72.625" />
         <AssociationConnector Association="DomainModels.FK_Transaction_Account" />
@@ -137,7 +137,7 @@
         <AssociationConnector Association="DomainModels.FK_ProfileQuestion_Company" />
         <EntityTypeShape EntityType="DomainModels.UserCouponView" Width="1.5" PointX="6.75" PointY="8.75" />
         <EntityTypeShape EntityType="DomainModels.ProfileQuestionTargetCriteria" Width="1.5" PointX="15.75" PointY="58" />
-        <EntityTypeShape EntityType="DomainModels.ProfileQuestionTargetLocation" Width="1.5" PointX="14.875" PointY="69.625" />
+        <EntityTypeShape EntityType="DomainModels.ProfileQuestionTargetLocation" Width="1.5" PointX="14.875" PointY="68.75" />
         <AssociationConnector Association="DomainModels.FK_ProfileQuestionTargetLocation_City" />
         <AssociationConnector Association="DomainModels.FK_ProfileQuestionTargetLocation_Country" />
         <AssociationConnector Association="DomainModels.FK_ProfileQuestionTargetCriteria_Education" />
