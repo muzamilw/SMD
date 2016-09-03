@@ -8654,6 +8654,8 @@ GO
 COMMIT
 
 
+ALTER TABLE ProfileQuestionTargetCriteria DROP CONSTRAINT fk_ProfileQuestionTargetCriteria_PQuestions
+
 
 
 
@@ -9405,7 +9407,6 @@ GO
 ALTER TABLE dbo.ProfileQuestion SET (LOCK_ESCALATION = TABLE)
 GO
 COMMIT
-
 
 
 /* To prevent any potential data loss issues, you should review this script in detail before running it outside the context of the database designer.*/
