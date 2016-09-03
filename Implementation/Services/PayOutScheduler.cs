@@ -40,21 +40,21 @@ namespace SMD.Implementation.Services
             UpdateUsersPaypalAccount(smdCompany, amount, adCampaignId, dbContext, false);
 
         } 
-          private static void UpdateAccounts(Company company, Company smdCompany, double amount,
-           BaseDbContext dbContext)
-        {
-            // Update users virtual account and add to paypal account
-            UpdateUsersPaypalAccountNew(company, amount,  dbContext);
+        //  private static void UpdateAccounts(Company company, Company smdCompany, double amount,
+        //   BaseDbContext dbContext)
+        //{
+        //    // Update users virtual account and add to paypal account
+        //    UpdateUsersPaypalAccountNew(company, amount,  dbContext);
 
-            // Update Cash4ads accounts
-            UpdateUsersPaypalAccountNew(smdCompany, amount, dbContext, false);
+        //    // Update Cash4ads accounts
+        //    UpdateUsersPaypalAccountNew(smdCompany, amount, dbContext, false);
 
-            // update users  virutal accont debit 
-            updateUsersVirtualAccount(company, amount, dbContext,1, false);
-            // update smd users  virutal accont debit 
-            updateUsersVirtualAccount(smdCompany, amount, dbContext,1);
+        //    // update users  virutal accont debit 
+        //    updateUsersVirtualAccount(company, amount, dbContext,1, false);
+        //    // update smd users  virutal accont debit 
+        //    updateUsersVirtualAccount(smdCompany, amount, dbContext,1);
 
-        }
+        //}
 
 
           public static bool UpdateCouponAccounts(long couponId, double SwapCost, int CompanyId)
@@ -74,9 +74,9 @@ namespace SMD.Implementation.Services
                   // send user voucher email 
 
                   // update users  virutal accont debit 
-                  updateUsersVirtualAccount(userCompany, SwapCost, dbContext, (int)TransactionType.CouponPurchased, false, null, couponId);
+                  updateUsersVirtualAccount(userCompany, SwapCost, dbContext, TransactionType.CouponPurchased, false, couponId,null );
                   // update smd users  virutal accont credit 
-                  updateUsersVirtualAccount(smdCompany, SwapCost, dbContext, (int)TransactionType.CouponPurchased, true, null, couponId);
+                  updateUsersVirtualAccount(smdCompany, SwapCost, dbContext, TransactionType.CouponPurchased, true, couponId,null );
                   // update smd users  virutal accont credit 
                   //updateUsersVirtualAccount(coupon.Company, SwapCost, dbContext, 2, true, null, couponId);
 
@@ -96,9 +96,9 @@ namespace SMD.Implementation.Services
             UpdateUsersPaypalAccountNew(smdCompany, amount, dbContext, false);
 
             // update users  virutal accont debit 
-            updateUsersVirtualAccount(Usercompany, amount, dbContext, 1, false);
+            updateUsersVirtualAccount(Usercompany, amount, dbContext,  TransactionType.UserCashOut, false);
             // update smd users  virutal accont debit 
-            updateUsersVirtualAccount(smdCompany, amount, dbContext, 1);
+            updateUsersVirtualAccount(smdCompany, amount, dbContext, TransactionType.UserCashOut);
 
         }
         private static void UpdateUsersPaypalAccountNew(Company company, double amount,  BaseDbContext dbContext, bool isCredit = true)
@@ -154,7 +154,7 @@ namespace SMD.Implementation.Services
             usersPaypalAccount.Transactions.Add(batchTransaction);
             dbContext.Transactions.Add(batchTransaction);
         }
-        private static void updateUsersVirtualAccount(Company company, double amount, BaseDbContext dbContext, int type, bool isCredit = true, long? CouponId = null, long? CampaignId = null)
+        private static void updateUsersVirtualAccount(Company company, double amount, BaseDbContext dbContext, TransactionType type, bool isCredit = true, long? CouponId = null, long? CampaignId = null)
         {
             Account userVirtualAccount = company.Accounts.FirstOrDefault(acc => acc.AccountType == (int)AccountType.VirtualAccount);
             if (userVirtualAccount == null)
@@ -166,7 +166,7 @@ namespace SMD.Implementation.Services
             var batchTransaction = new Transaction
             {
                 AccountId = userVirtualAccount.AccountId,
-                Type = type,
+                Type = (int)type,
                 // AdCampaignId = adCampaignId,
                 isProcessed = true,
                 TransactionDate = DateTime.Now,
@@ -191,16 +191,23 @@ namespace SMD.Implementation.Services
                 batchTransaction.CreditAmount = amount;
                 //usersPaypalAccount.AccountBalance += amount;
                 //userVirtualAccount.AccountBalance -= amount;
-                if (type == 2)
+                if (type ==  TransactionType.AdClick || type == TransactionType.SurveyWatched || type == TransactionType.ProfileQuestionAnswered )
                     userVirtualAccount.AccountBalance += amount;
+
+                batchTransaction.AccountBalance = userVirtualAccount.AccountBalance;
             }
             else
             {
                 batchTransaction.DebitAmount = amount;
                 //usersPaypalAccount.AccountBalance -= amount;
-                if (type == 2)
+                //if (type == 2)
                     userVirtualAccount.AccountBalance -= amount;
+
+                batchTransaction.AccountBalance = userVirtualAccount.AccountBalance;
             }
+
+
+
             userVirtualAccount.Transactions.Add(batchTransaction);
             dbContext.Transactions.Add(batchTransaction);
         }
