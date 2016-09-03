@@ -81,69 +81,6 @@
                                     </div>
                                     <div class="col-lg-9">
                                         <div class="form-group">
-                                            <div class="form-group">
-                                                <div class="col-lg-4 text-campaign-left  Float-Left">
-                                                    <label class="control-label text-right tooltip-float font20 floatNone" style="float:left !important;    margin-left: 6px; ">Target Audience</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-4 text-right">
-                                                <label class="control-label text-right tooltip-float">Show video ad in</label>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <input type="text" readonly class="form-control">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-9">
-                                        <div class="form-group">
-                                            <div class="col-lg-4 text-right">
-                                                <label class="control-label text-right tooltip-float">Add City</label>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <input type="text" readonly class="form-control">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-9">
-                                        <div class="form-group">
-                                            <div class="col-lg-4 text-right">
-                                                <label class="control-label text-right tooltip-float">Age Range</label>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="col-lg-2" style=" padding: 0px !important;     margin-left: 8px;">
-                                                    <input type="text" readonly class="form-control" data-bind="value:ageRangeStart">
-                                                </div>
-                                                <div class="pull-left range_dash">
-                                                    -
-                                                </div>
-                                                <div class="col-lg-2" style=" padding: 0px !important;">
-                                                    <input type="text" readonly class="form-control" data-bind="value:ageRangeEnd">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-9">
-                                        <div class="form-group">
-                                            <div class="col-lg-4 text-right">
-                                                <label class="control-label text-right tooltip-float">Gender</label>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <input type="text" readonly class="form-control">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-9">
-                                        <div class="form-group">
-                                            <div class="col-lg-4 text-right">
-                                                <label class="control-label text-right tooltip-float">Profession</label>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <input type="text" readonly class="form-control">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-9">
-                                        <div class="form-group">
                                             <div class="col-lg-4 text-right">
                                                 @*<div class="bs-example-tooltips tooltip-float-width">
                                                         <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
@@ -163,7 +100,7 @@
 
                                             </div>
                                             <div class="col-lg-6">
-                                                <button class="btn  btn-success" id="saveBtn">Approve</button>
+                                                <button class="btn  btn-success" id="saveBtn" data-bind="click :$root.onApprovePq">Approve</button>
                                                 <button class="btn " id="saveBtn">Reject</button>
                                             </div>
                                         </div>

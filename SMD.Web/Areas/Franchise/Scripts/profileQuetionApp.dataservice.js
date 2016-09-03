@@ -20,8 +20,8 @@ define("FranchiseDashboard/profileQuetionApp.dataservice", function () {
 
 
                     // Edit AdCampaign
-                    amplify.request.define('saveCoupon', 'ajax', {
-                        url: '/Api/CouponApproval',
+                    amplify.request.define('savePq', 'ajax', {
+                        url: '/Api/ApproveProfileQuestion',
                         dataType: 'json',
                         type: 'POST'
                     });
@@ -65,10 +65,10 @@ define("FranchiseDashboard/profileQuetionApp.dataservice", function () {
                 });
             },
             // Save Ad Campaign edit
-            saveCoupon = function (params, callbacks) {
+            savePq = function (params, callbacks) {
                 initialize();
                 return amplify.request({
-                    resourceId: 'saveCoupon',
+                    resourceId: 'savePq',
                     success: callbacks.success,
                     error: callbacks.error,
                     data: params
@@ -86,7 +86,7 @@ define("FranchiseDashboard/profileQuetionApp.dataservice", function () {
         };
 
         return {
-            saveCoupon: saveCoupon,
+            savePq: savePq,
             getPQForApproval: getPQForApproval,
             sendApprovalRejectionEmail: sendApprovalRejectionEmail,
             getPqAnswer: getPqAnswer

@@ -68,51 +68,51 @@ define("FranchiseDashboard/profileQuestionApp.viewModel",
                                 }
                             });
                     },
-                   // onApproveCoupon = function () {
-                   //    confirmation.messageText("Do you want to approve this Coupon ? System will attempt to collect payment and generate invoice");
-                   //    confirmation.show();
-                   //    confirmation.afterCancel(function () {
-                   //        confirmation.hide();
-                   //    });
-                   //    confirmation.afterProceed(function () {
-                   //        selectedCoupon().isApproved(true);
-                   //        onSaveCoupon();
-                   //        toastr.success("Approved Successfully.");
-                   //    });
-                   //},
-                   // onSaveCoupon = function () {
+                    onApprovePq = function () {
+                       confirmation.messageText("Do you want to approve this Coupon ? System will attempt to collect payment and generate invoice");
+                       confirmation.show();
+                       confirmation.afterCancel(function () {
+                           confirmation.hide();
+                       });
+                       confirmation.afterProceed(function () {
+                       selectedProfileQuestion().isApproved(true);
+                           //onSaveCoupon();
+                           toastr.success("Approved Successfully.");
+                       });
+                   },
+                    onSavePQ = function () {
 
-                   //       var couponId = selectedCoupon().couponId();
-                   //       dataservice.saveCoupon(selectedCoupon().convertToServerData(), {
-                   //           success: function (response) {
+                        var pQId = selectedCoupon().id();
+                        dataservice.savePq(selectedProfileQuestion().convertToServerData(), {
+                              success: function (response) {
 
-                   //               if (response.indexOf("Failed") == -1) {
-                   //                   dataservice.sendApprovalRejectionEmail(selectedCoupon().convertToServerData(), {
-                   //                       success: function (obj) {
-                   //                           getCoupons();
-                   //                           //var existingCampaigntodelete = $.grep(campaigns(), function (n, i) {
-                   //                           //    return (n.id() == campId);
-                   //                           //});
+                                  if (response.indexOf("Failed") == -1) {
+                                      dataservice.sendApprovalRejectionEmail(selectedCoupon().convertToServerData(), {
+                                          success: function (obj) {
+                                              getCoupons();
+                                              //var existingCampaigntodelete = $.grep(campaigns(), function (n, i) {
+                                              //    return (n.id() == campId);
+                                              //});
 
-                   //                           //campaigns.remove(existingCampaigntodelete);
+                                              //campaigns.remove(existingCampaigntodelete);
 
-                   //                           isEditorVisible(false);
-                   //                       },
-                   //                       error: function () {
-                   //                           toastr.error("Failed to save!");
-                   //                       }
-                   //                   });
-                   //               }
-                   //               else {
+                                              isEditorVisible(false);
+                                          },
+                                          error: function () {
+                                              toastr.error("Failed to save!");
+                                          }
+                                      });
+                                  }
+                                  else {
 
-                   //                   toastr.error(response);
-                   //               }
-                   //           },
-                   //           error: function () {
-                   //               toastr.error("Failed to save!");
-                   //           }
-                   //       });
-                   //   },
+                                      toastr.error(response);
+                                  }
+                              },
+                              error: function () {
+                                  toastr.error("Failed to save!");
+                              }
+                          });
+                      },
                    // hasChangesOnCoupon = ko.computed(function () {
                    //        if (selectedCoupon() == undefined) {
                    //            return false;
@@ -154,8 +154,8 @@ define("FranchiseDashboard/profileQuestionApp.viewModel",
                     onEditPQ: onEditPQ,
                     selectedProfileQuestion: selectedProfileQuestion,
                     closeEditDialog: closeEditDialog,
-                    //onApproveCoupon: onApproveCoupon,
-                    //onSaveCoupon: onSaveCoupon,
+                    onApprovePq: onApprovePq,
+                    onSavePQ: onSavePQ,
                     //onRejectCoupon: onRejectCoupon,
                     //hasChangesOnCoupon: hasChangesOnCoupon,
 
