@@ -74,9 +74,9 @@ namespace SMD.Implementation.Services
                   // send user voucher email 
 
                   // update users  virutal accont debit 
-                  updateUsersVirtualAccount(userCompany, SwapCost, dbContext, (int)TransactionType.CouponPurchased, false, null, couponId);
+                  updateUsersVirtualAccount(userCompany, SwapCost, dbContext, (int)TransactionType.CouponPurchased, false, couponId,null );
                   // update smd users  virutal accont credit 
-                  updateUsersVirtualAccount(smdCompany, SwapCost, dbContext, (int)TransactionType.CouponPurchased, true, null, couponId);
+                  updateUsersVirtualAccount(smdCompany, SwapCost, dbContext, (int)TransactionType.CouponPurchased, true, couponId,null );
                   // update smd users  virutal accont credit 
                   //updateUsersVirtualAccount(coupon.Company, SwapCost, dbContext, 2, true, null, couponId);
 
@@ -193,6 +193,8 @@ namespace SMD.Implementation.Services
                 //userVirtualAccount.AccountBalance -= amount;
                 if (type == 2)
                     userVirtualAccount.AccountBalance += amount;
+
+                batchTransaction.AccountBalance = userVirtualAccount.AccountBalance;
             }
             else
             {
@@ -200,7 +202,12 @@ namespace SMD.Implementation.Services
                 //usersPaypalAccount.AccountBalance -= amount;
                 if (type == 2)
                     userVirtualAccount.AccountBalance -= amount;
+
+                batchTransaction.AccountBalance = userVirtualAccount.AccountBalance;
             }
+
+
+
             userVirtualAccount.Transactions.Add(batchTransaction);
             dbContext.Transactions.Add(batchTransaction);
         }
