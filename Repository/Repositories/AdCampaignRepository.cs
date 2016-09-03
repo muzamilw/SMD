@@ -235,6 +235,7 @@ namespace SMD.Repository.Repositories
                 ad => ad.CampaignId == campaignId;
 
             return DbSet.Where(query);
+
         }
         /// <summary>
         /// Get user by id

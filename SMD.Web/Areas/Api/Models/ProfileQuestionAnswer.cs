@@ -18,5 +18,6 @@ namespace SMD.MIS.Areas.Api.Models
         public int? LinkedQuestion4Id { get; set; }
         public int? LinkedQuestion5Id { get; set; }
         public int? LinkedQuestion6Id { get; set; }
+       
     }
 }

@@ -101,10 +101,9 @@ namespace SMD.MIS.ModelMappers
                 CampaignTypeImagePath = LandingPageVideoLinkAsPath,
                 Description = source.Description,
                 AdCampaignTargetCriterias =
-                    source.AdCampaignTargetCriterias != null ? source.AdCampaignTargetCriterias.Select(x => x.CreateFrom()).ToList() : null,
-
+                source.AdCampaignTargetCriterias != null ? source.AdCampaignTargetCriterias.Select(x => x.CreateFrom()).ToList() : null,
                 AdCampaignTargetLocations =
-                    source.AdCampaignTargetLocations != null ? source.AdCampaignTargetLocations.Select(x => x.CreateFrom()).ToList() : null,
+                source.AdCampaignTargetLocations != null ? source.AdCampaignTargetLocations.Select(x => x.CreateFrom()).ToList() : null,
                 Voucher1Description = source.Voucher1Description,
                 Voucher1Heading = source.Voucher1Heading,
                 Voucher1Value = source.Voucher1Value,
@@ -145,6 +144,7 @@ namespace SMD.MIS.ModelMappers
                 IsSavedCoupon = source.IsSavedCoupon ?? false,
                 DeliveryDays = source.DeliveryDays ?? 1,
                 MaxDailyBudget = source.MaxDailyBudget ?? 0
+
             };
 
 

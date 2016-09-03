@@ -65,6 +65,7 @@ namespace SMD.Repository.Repositories
         /// </summary>
         public IEnumerable<ProfileQuestion> SearchProfileQuestions(ProfileQuestionSearchRequest request, out int rowCount)
         {
+            db.Configuration.LazyLoadingEnabled = true;
             int fromRow = (request.PageNo - 1) * request.PageSize;
             int toRow = request.PageSize;
 
@@ -98,9 +99,11 @@ namespace SMD.Repository.Repositories
                      && (question.CompanyId == this.CompanyId);   
             }
 
-           
 
             rowCount = DbSet.Count(query);
+            DbSet.Where(query).Include(a => a.ProfileQuestionTargetCriterias);
+            DbSet.Where(query).Include(a => a.ProfileQuestionTargetLocations);
+
             return request.IsAsc
                 ? DbSet.Where(query)
                     .OrderBy(_profileQuestionOrderByClause[request.ProfileQuestionOrderBy])
@@ -112,7 +115,10 @@ namespace SMD.Repository.Repositories
                     .Skip(fromRow)
                     .Take(toRow)
                     .ToList();
-          
+
+            
+           
+             
         }
 
         /// <summary>

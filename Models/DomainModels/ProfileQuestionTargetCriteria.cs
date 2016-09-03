@@ -33,6 +33,8 @@ namespace SMD.Models.DomainModels
         public virtual ProfileQuestionAnswer ProfileQuestionAnswer { get; set; }
         public virtual SurveyQuestion SurveyQuestion { get; set; }
 
+        public virtual ProfileQuestion ProfileQuestion1 { get; set; }
+
 
          public Nullable<long> AdCampaignID { get; set; }
 

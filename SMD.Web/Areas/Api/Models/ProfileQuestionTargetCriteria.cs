@@ -25,5 +25,13 @@ namespace SMD.MIS.Areas.Api.Models
 
         public Nullable<int> AdCampaignAnswer { get; set; }
 
+        public string questionString { get; set; }
+
+        public string answerString { get; set; }
+
+        public string Language { get; set; }
+        public string Industry { get; set; }
+        public string Education { get; set; }
+
     }
 }

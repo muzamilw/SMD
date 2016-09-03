@@ -27,6 +27,7 @@ namespace SMD.MIS.ModelMappers
                 LinkedQuestion6Id = source.LinkedQuestion6Id,
                 PqAnswerId = source.PqAnswerId,
                 SortOrder = source.SortOrder
+               
             };
         }
 
@@ -113,5 +114,7 @@ namespace SMD.MIS.ModelMappers
             }
             return path;
         }
+
+
     }
 }
