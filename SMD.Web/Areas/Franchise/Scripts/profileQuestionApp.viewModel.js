@@ -76,20 +76,20 @@ define("FranchiseDashboard/profileQuestionApp.viewModel",
                        });
                        confirmation.afterProceed(function () {
                        selectedProfileQuestion().isApproved(true);
-                           //onSaveCoupon();
+                       onSavePQ();
                            toastr.success("Approved Successfully.");
                        });
                    },
                     onSavePQ = function () {
 
-                        var pQId = selectedCoupon().id();
+                        var pQId = selectedProfileQuestion().id();
                         dataservice.savePq(selectedProfileQuestion().convertToServerData(), {
                               success: function (response) {
 
                                   if (response.indexOf("Failed") == -1) {
-                                      dataservice.sendApprovalRejectionEmail(selectedCoupon().convertToServerData(), {
+                                      dataservice.sendApprovalRejectionEmail(selectedProfileQuestion().convertToServerData(), {
                                           success: function (obj) {
-                                              getCoupons();
+                                              getProfileQuestions();
                                               //var existingCampaigntodelete = $.grep(campaigns(), function (n, i) {
                                               //    return (n.id() == campId);
                                               //});
@@ -119,15 +119,15 @@ define("FranchiseDashboard/profileQuestionApp.viewModel",
                    //        }
                    //        return (selectedCoupon().hasChanges());
                    //    }),
-                   // onRejectCoupon = function () {
-                   //       if (selectedCoupon().rejectedReason() == undefined || selectedCoupon().rejectedReason() == "" || selectedCoupon().rejectedReason() == " ") {
-                   //           toastr.info("Please add rejection reason!");
-                   //           return false;
-                   //       }
-                   //       selectedCoupon().isApproved(false);
-                   //       onSaveCoupon();
-                   //       toastr.success("Rejected Successfully.");
-                   //   },
+                    onRejectPQ = function () {
+                        if (selectedProfileQuestion().rejectedReason() == undefined || selectedProfileQuestion().rejectedReason() == "" || selectedProfileQuestion().rejectedReason() == " ") {
+                              toastr.info("Please add rejection reason!");
+                              return false;
+                          }
+                        selectedProfileQuestion().isApproved(false);
+                          onSavePQ();
+                          toastr.success("Rejected Successfully.");
+                      },
 
                     // Initialize the view model
                     initialize = function (specifiedView) {
@@ -156,7 +156,7 @@ define("FranchiseDashboard/profileQuestionApp.viewModel",
                     closeEditDialog: closeEditDialog,
                     onApprovePq: onApprovePq,
                     onSavePQ: onSavePQ,
-                    //onRejectCoupon: onRejectCoupon,
+                    onRejectPQ: onRejectPQ,
                     //hasChangesOnCoupon: hasChangesOnCoupon,
 
                 };

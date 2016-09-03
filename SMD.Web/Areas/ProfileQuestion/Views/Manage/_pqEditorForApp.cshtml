@@ -90,7 +90,7 @@
                                                 <label class="control-label text-right tooltip-float">Rejection Reason</label>
                                             </div>
                                             <div class="col-lg-6">
-                                                <input type="text" placeholder="Enter rejection reason " class="form-control">
+                                                <input type="text" placeholder="Enter rejection reason " data-bind="value:rejectedReason" class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -101,11 +101,11 @@
                                             </div>
                                             <div class="col-lg-6">
                                                 <button class="btn  btn-success" id="saveBtn" data-bind="click :$root.onApprovePq">Approve</button>
-                                                <button class="btn " id="saveBtn">Reject</button>
+                                                <button class="btn  btn-danger" id="delbtn" data-bind="click:$root.onRejectPQ">Reject</button>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> 
                             </div>
                         </div>
                     </div>

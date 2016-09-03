@@ -16,6 +16,10 @@ using System.Linq;
 using System.Web;
 using SMD.Repository.Repositories;
 using SMD.Interfaces;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using SMD.Implementation.Identity;
+
 
 
 namespace SMD.Implementation.Services
@@ -37,11 +41,15 @@ namespace SMD.Implementation.Services
         private readonly IProfileQuestionTargetLocationRepository _profileQuestionTargetLocationRepository;
         private readonly IEmailManagerService _emailManagerService;
         private readonly IStripeService _stripeService;
-        private readonly WebApiUserService _webApiUserService;
+        //private readonly WebApiUserService _webApiUserService;
         private readonly IProductRepository _productRepository;
         private readonly ITaxRepository _taxRepository;
         private readonly IInvoiceRepository _invoiceRepository;
         private readonly IInvoiceDetailRepository _invoiceDetailRepository;
+        private ApplicationUserManager UserManager
+        {
+            get { return HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
+        }
 
         #endregion
         #region Constructor
@@ -52,7 +60,7 @@ namespace SMD.Implementation.Services
         public ProfileQuestionService(IProfileQuestionRepository profileQuestionRepository, ICountryRepository countryRepository,
             ILanguageRepository languageRepository, IProfileQuestionGroupRepository profileQuestionGroupRepository,
             IProfileQuestionAnswerRepository profileQuestionAnswerRepository, IIndustryRepository industoryRepository, IEducationRepository educationRepository, IProfileQuestionTargetCriteriaRepository profileQuestionTargetCriteriaRepository, IProfileQuestionTargetLocationRepository profileQuestionTargetLocationRepository
-            , IEmailManagerService emailManagerService, IStripeService stripeService, WebApiUserService webApiUserService, IProductRepository productRepository, ITaxRepository taxRepository, IInvoiceRepository invoiceRepository, IInvoiceDetailRepository invoiceDetailRepository)
+            , IEmailManagerService emailManagerService, IStripeService stripeService, IProductRepository productRepository, ITaxRepository taxRepository, IInvoiceRepository invoiceRepository, IInvoiceDetailRepository invoiceDetailRepository)
         {
             _profileQuestionRepository = profileQuestionRepository;
             _countryRepository = countryRepository;
@@ -65,7 +73,7 @@ namespace SMD.Implementation.Services
             _profileQuestionTargetLocationRepository = profileQuestionTargetLocationRepository;
             _emailManagerService = emailManagerService;
             _stripeService = stripeService;
-            _webApiUserService = webApiUserService;
+            //_webApiUserService = webApiUserService;
             _productRepository = productRepository;
             _taxRepository = taxRepository;
             _invoiceRepository = invoiceRepository;
@@ -498,7 +506,7 @@ namespace SMD.Implementation.Services
             Boolean isSystemUser = false;
             double amount = 0;
             // User who added Campaign for approval 
-            var user = _webApiUserService.GetUserByUserId(source.UserID);
+            var user = UserManager.FindById(source.UserID);
             // Get Current Product
             var product = (dynamic)null;
             product = _productRepository.GetProductByCountryId("PQID");
