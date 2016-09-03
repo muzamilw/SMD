@@ -32,10 +32,11 @@ namespace SMD.MIS.Areas.Api.Models
 
         public int? Status { get; set; }
         public bool? Approved { get; set; }
-        public string ApprovedByUserId { get; set; }
+        public string ApprovedByUserID { get; set; }
         public DateTime? ApprovalDate { get; set; }
 
         public string RejectionReason { get; set; }
+        public string UserID { get; set; }
 
         public List<ProfileQuestionAnswer> ProfileQuestionAnswers { get; set; }
         public List<ProfileQuestionTargetCriteria> ProfileQuestionTargetCriteria { get; set; }

@@ -462,7 +462,7 @@ namespace SMD.Implementation.Services
                 {
                     dbCo.Approved = true;
                     dbCo.ApprovalDate = DateTime.Now;
-                    dbCo.ApprovedByUserId = _profileQuestionRepository.LoggedInUserIdentity;
+                    dbCo.ApprovedByUserID = _profileQuestionRepository.LoggedInUserIdentity;
                     dbCo.Status = (Int32)AdCampaignStatus.Live;
 
                     // Stripe payment + Invoice Generation
@@ -481,7 +481,7 @@ namespace SMD.Implementation.Services
                     dbCo.Status = (Int32)AdCampaignStatus.ApprovalRejected;
                     dbCo.Approved = false;
                     dbCo.RejectionReason = source.RejectionReason.ToString();
-                    _emailManagerService.SendCouponRejectionEmail(dbCo.UserId, dbCo.RejectionReason);
+                    _emailManagerService.SendCouponRejectionEmail(dbCo.UserID, dbCo.RejectionReason);
                 }
                 dbCo.ModifiedDate = DateTime.Now;
                 dbCo.ModifiedBy = _profileQuestionRepository.LoggedInUserIdentity;
@@ -498,7 +498,7 @@ namespace SMD.Implementation.Services
             Boolean isSystemUser = false;
             double amount = 0;
             // User who added Campaign for approval 
-            var user = _webApiUserService.GetUserByUserId(source.UserId);
+            var user = _webApiUserService.GetUserByUserId(source.UserID);
             // Get Current Product
             var product = (dynamic)null;
             product = _productRepository.GetProductByCountryId("PQID");
