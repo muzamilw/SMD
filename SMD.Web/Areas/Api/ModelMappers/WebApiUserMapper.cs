@@ -128,6 +128,16 @@ namespace SMD.MIS.Areas.Api.ModelMappers
             {
                 transactions.AddRange(account.Transactions);
             }
+
+            account = source.Company.Accounts.FirstOrDefault(acc => acc.AccountType == (int)AccountType.VirtualAccount);
+            if (account != null)
+            {
+                transactions.AddRange(account.Transactions);
+            }
+
+
+
+
             transactions = transactions.OrderByDescending(g => g.TxId).ToList();
             foreach (var item in transactions)
             {
@@ -144,12 +154,22 @@ namespace SMD.MIS.Areas.Api.ModelMappers
                 accName = "Paypal";
             else if (source.Account.AccountType == (int)AccountType.GoogleWallet)
                 accName = "Google Wallet";
+            else if (source.Account.AccountType == (int)AccountType.VirtualAccount)
+                accName = "Centz";
+
+            string TransactionDetails = "";
+            if ( source.Type == 1)
+            {
+                TransactionDetails = "Ad Viewed :" + source.AdCampaignId.ToString();
+            }
+
             return new StatementTrasaction
             {
                DebitAmount  = source.DebitAmount,
                CreditAmount = source.CreditAmount,
                 Date = source.TransactionDate.ToString(),
                PaymentMethod = accName,
+               TransactionDetails = TransactionDetails
                 //AuthenticationToken = Guid.NewGuid()
             };
         }
