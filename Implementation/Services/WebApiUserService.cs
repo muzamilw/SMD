@@ -173,13 +173,13 @@ namespace SMD.Implementation.Services
                 
                 // Credit Affiliate
                 //todo pilot: Commenting Smd Transaction
-                //smdsCut = PerformCreditTransactionForAffiliate(request, referringCompany, smdsCut, affiliatesAccount, ref transactionSequence);
+                smdsCut = PerformCreditTransactionForAffiliate(request, referringCompany, smdsCut, affiliatesAccount, ref transactionSequence);
             }
             
             // Credit SMD
             //todo pilot: Commenting Smd Transaction
-           // transactionSequence += 1;
-           // PerformTransaction(request.AdCampaignId, null, smdAccount, smdsCut, transactionSequence, TransactionType.AdClick, true, true);
+            transactionSequence += 1;
+            PerformTransaction(request.AdCampaignId, null, smdAccount, smdsCut, transactionSequence, TransactionType.AdClick, true, true);
 
             // Update AdCampaign Amount Spent
             if (!adCampaign.AmountSpent.HasValue)
@@ -489,6 +489,23 @@ namespace SMD.Implementation.Services
                 profileQuestionRepository.Update(profileQuestion);
                 profileQuestionRepository.SaveChanges();
 
+
+                //since its a purchased ProfileQuestion hence reward the end user
+                if (profileQuestion.CompanyId != null)
+                {
+
+                      UpdateTransactionOnPaidProfileQuestionAnswer(new AdViewedRequest
+                    {
+                        AdCampaignId = request.ItemId.Value,
+                        UserId = request.UserId,
+                        companyId = request.companyId.Value,
+                        userQuizSelection = request.UserQuestionResponse,
+                        
+                    }, request,2,profileQuestion.CompanyId.Value );    
+
+                }
+
+
                 
             }
         }
@@ -601,7 +618,7 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Skips Survey Question
         /// </summary>
-        private void PerformSkipOrUserSurveySelection(int sqId, string userId, int? userSelection, bool? isSkipped,int companyId)
+        private void PerformSkipOrUserSurveySelection(int sqId, string userId, int? userSelection, bool? isSkipped,int companyId, ProductActionRequest request)
         {
             SurveyQuestion surveyQuestion = surveyQuestionRepository.Find(sqId);
             if (surveyQuestion == null)
@@ -621,6 +638,23 @@ namespace SMD.Implementation.Services
             // Update User Response
             UpdateProductsResponse(userSelection, isSkipped, sqResponse,companyId);
             surveyQuestionRepository.SaveChanges();
+
+
+
+            //since its a purchased ProfileQuestion hence reward the end user
+            if (surveyQuestion.CompanyId != null)
+            {
+
+                UpdateTransactionOnPaidSurveyAnswer(new AdViewedRequest
+                {
+                    AdCampaignId = request.ItemId.Value,
+                    UserId = request.UserId,
+                    companyId = request.companyId.Value,
+                    userQuizSelection = request.UserQuestionResponse,
+
+                }, request, 2, surveyQuestion.CompanyId.Value);
+
+            }
         }
 
         /// <summary>
@@ -685,7 +719,7 @@ namespace SMD.Implementation.Services
 
                 else if (request.Type.Value == (int)ProductType.SurveyQuestion)
                 {
-                    PerformSkipOrUserSurveySelection((int)request.ItemId.Value, request.UserId, null, true,request.companyId.Value);
+                    PerformSkipOrUserSurveySelection((int)request.ItemId.Value, request.UserId, null, true,request.companyId.Value,request);
                 }
             }
         }
@@ -900,6 +934,191 @@ namespace SMD.Implementation.Services
                    };
         }
 
+
+
+        public async Task<BaseApiResponse> UpdateTransactionOnPaidSurveyAnswer(AdViewedRequest request, ProductActionRequest pRequest, double rewardCentz, int AdvertiserCompanyId)
+        {
+            // Get Ad Viewer
+            User adViewer = await UserManager.FindByIdAsync(request.UserId);
+            if (adViewer == null)
+            {
+                throw new SMDException(LanguageResources.WebApiUserService_InvalidUserId);
+            }
+
+            User cash4Ads = await UserManager.FindByEmailAsync(SystemUsers.Cash4Ads);
+            if (cash4Ads == null)
+            {
+                throw new SMDException(string.Format(CultureInfo.InvariantCulture, LanguageResources.WebApiUserService_InvalidUser,
+                    "Cash4Ads"));
+            }
+
+            // Validates if Ad Campaing Exists
+           
+
+            // Get Referral if any
+            Company referringCompany = null;
+            Account affiliatesAccount = null;
+            if ((adViewer.Company.ReferringCompanyID.HasValue))
+            {
+                referringCompany = companyRepository.GetAll().Where(g => g.CompanyId == adViewer.Company.ReferringCompanyID).SingleOrDefault();
+                if (referringCompany == null)
+                {
+                    throw new SMDException(LanguageResources.WebApiUserService_ReferrerNotFound);
+                }
+
+                affiliatesAccount = accountRepository.GetByCompanyId(referringCompany.CompanyId, AccountType.VirtualAccount);
+                if (affiliatesAccount == null)
+                {
+                    throw new SMDException(string.Format(CultureInfo.InvariantCulture,
+                        LanguageResources.WebApiUserService_AccountNotFound, "Affiliate"));
+                }
+            }
+
+            // Begin Transaction
+            // Ad Viewer will get 50% and other 50% will be divided b/w SMD (30%), Affiliate(20%) (Referrer) if exists
+            double? adClickRate = rewardCentz;
+            double? adViewersCut = adClickRate; // commenting for pilot launch, now smd hace no percentage and all the money will go to user account from advertiser account. So there will be 2 transactions now advertiser debit transaction and user credit transaction ((adClickRate * 50) / 100); 
+            double? smdsCut = 0; //adViewersCut;
+            Account adViewersAccount;
+            Account advertisersAccount;
+            Account smdAccount;
+
+            // Sets up transaction 
+            // Gets Accounts required
+            // Get business Accounts for Each Individual involved in this transaction
+                adViewersAccount = accountRepository.GetByUserId(request.UserId, AccountType.VirtualAccount);
+                if (adViewersAccount == null)
+                {
+                    throw new SMDException(string.Format(CultureInfo.InvariantCulture,
+                        LanguageResources.WebApiUserService_AccountNotFound, "Current User"));
+                }
+
+                advertisersAccount = accountRepository.GetByCompanyId(AdvertiserCompanyId, AccountType.VirtualAccount);
+                if (advertisersAccount == null)
+                {
+                    throw new SMDException(string.Format(CultureInfo.InvariantCulture,
+                        LanguageResources.WebApiUserService_AccountNotFound, "Advertiser"));
+                }
+
+                smdAccount = accountRepository.GetByUserId(cash4Ads.Id, AccountType.VirtualAccount);
+                if (smdAccount == null)
+                {
+                    throw new SMDException(string.Format(CultureInfo.InvariantCulture,
+                        LanguageResources.WebApiUserService_AccountNotFound, "Cash4Ads"));
+                }
+
+            // Perform Transactions
+          
+
+
+            PerformTransaction(request.AdCampaignId, null, advertisersAccount, adClickRate, 1, TransactionType.SurveyWatched, false);
+
+            // Credit AdViewer
+          
+                
+                PerformTransaction(request.AdCampaignId, null, adViewersAccount, adViewersCut, 2, TransactionType.SurveyWatched);
+
+
+                transactionRepository.SaveChanges();
+
+            return new BaseApiResponse
+            {
+                Status = true,
+                Message = LanguageResources.Success
+            };
+        }
+
+
+        public async Task<BaseApiResponse> UpdateTransactionOnPaidProfileQuestionAnswer(AdViewedRequest request, ProductActionRequest pRequest, double rewardCentz, int AdvertiserCompanyId)
+        {
+            // Get Ad Viewer
+            User adViewer = await UserManager.FindByIdAsync(request.UserId);
+            if (adViewer == null)
+            {
+                throw new SMDException(LanguageResources.WebApiUserService_InvalidUserId);
+            }
+
+            User cash4Ads = await UserManager.FindByEmailAsync(SystemUsers.Cash4Ads);
+            if (cash4Ads == null)
+            {
+                throw new SMDException(string.Format(CultureInfo.InvariantCulture, LanguageResources.WebApiUserService_InvalidUser,
+                    "Cash4Ads"));
+            }
+
+            // Validates if Ad Campaing Exists
+
+
+            // Get Referral if any
+            Company referringCompany = null;
+            Account affiliatesAccount = null;
+            if ((adViewer.Company.ReferringCompanyID.HasValue))
+            {
+                referringCompany = companyRepository.GetAll().Where(g => g.CompanyId == adViewer.Company.ReferringCompanyID).SingleOrDefault();
+                if (referringCompany == null)
+                {
+                    throw new SMDException(LanguageResources.WebApiUserService_ReferrerNotFound);
+                }
+
+                affiliatesAccount = accountRepository.GetByCompanyId(referringCompany.CompanyId, AccountType.VirtualAccount);
+                if (affiliatesAccount == null)
+                {
+                    throw new SMDException(string.Format(CultureInfo.InvariantCulture,
+                        LanguageResources.WebApiUserService_AccountNotFound, "Affiliate"));
+                }
+            }
+
+            // Begin Transaction
+            // Ad Viewer will get 50% and other 50% will be divided b/w SMD (30%), Affiliate(20%) (Referrer) if exists
+            double? adClickRate = rewardCentz;
+            double? adViewersCut = adClickRate; // commenting for pilot launch, now smd hace no percentage and all the money will go to user account from advertiser account. So there will be 2 transactions now advertiser debit transaction and user credit transaction ((adClickRate * 50) / 100); 
+            double? smdsCut = 0; //adViewersCut;
+            Account adViewersAccount;
+            Account advertisersAccount;
+            Account smdAccount;
+
+            // Sets up transaction 
+            // Gets Accounts required
+            // Get business Accounts for Each Individual involved in this transaction
+            adViewersAccount = accountRepository.GetByUserId(request.UserId, AccountType.VirtualAccount);
+            if (adViewersAccount == null)
+            {
+                throw new SMDException(string.Format(CultureInfo.InvariantCulture,
+                    LanguageResources.WebApiUserService_AccountNotFound, "Current User"));
+            }
+
+            advertisersAccount = accountRepository.GetByCompanyId(AdvertiserCompanyId, AccountType.VirtualAccount);
+            if (advertisersAccount == null)
+            {
+                throw new SMDException(string.Format(CultureInfo.InvariantCulture,
+                    LanguageResources.WebApiUserService_AccountNotFound, "Advertiser"));
+            }
+
+            smdAccount = accountRepository.GetByUserId(cash4Ads.Id, AccountType.VirtualAccount);
+            if (smdAccount == null)
+            {
+                throw new SMDException(string.Format(CultureInfo.InvariantCulture,
+                    LanguageResources.WebApiUserService_AccountNotFound, "Cash4Ads"));
+            }
+
+            // Perform Transactions
+          
+
+            PerformTransaction(request.AdCampaignId, null, advertisersAccount, adClickRate, 1, TransactionType.ProfileQuestionAnswered, false);
+
+            // Credit AdViewer
+
+
+            PerformTransaction(request.AdCampaignId, null, adViewersAccount, adViewersCut, 2, TransactionType.ProfileQuestionAnswered);
+
+
+            transactionRepository.SaveChanges();
+
+            return new BaseApiResponse
+            {
+                Status = true,
+                Message = LanguageResources.Success
+            };
+        }
         /// <summary>
         /// Update Transactions on Viewing Ad
         /// this function is not needed anymore
@@ -950,6 +1169,9 @@ namespace SMD.Implementation.Services
         #endregion
 
         #region Other
+
+
+
 
         /// <summary>
         /// Get User By Id Async
@@ -1005,7 +1227,7 @@ namespace SMD.Implementation.Services
             // Update Survey User Selection
             if (request.Type.Value == (int)ProductType.SurveyQuestion && request.ItemId.HasValue && request.SqUserSelection.HasValue)
             {
-                PerformSkipOrUserSurveySelection((int)request.ItemId.Value, request.UserId, request.SqUserSelection, null,request.companyId.Value);
+                PerformSkipOrUserSurveySelection((int)request.ItemId.Value, request.UserId, request.SqUserSelection, null, request.companyId.Value, request);
             }
 
             // Product Skipped

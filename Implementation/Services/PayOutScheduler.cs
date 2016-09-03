@@ -74,9 +74,9 @@ namespace SMD.Implementation.Services
                   // send user voucher email 
 
                   // update users  virutal accont debit 
-                  updateUsersVirtualAccount(userCompany, SwapCost, dbContext, 2, false, null, couponId);
+                  updateUsersVirtualAccount(userCompany, SwapCost, dbContext, (int)TransactionType.CouponPurchased, false, null, couponId);
                   // update smd users  virutal accont credit 
-                  updateUsersVirtualAccount(smdCompany, SwapCost, dbContext, 2, true, null, couponId);
+                  updateUsersVirtualAccount(smdCompany, SwapCost, dbContext, (int)TransactionType.CouponPurchased, true, null, couponId);
                   // update smd users  virutal accont credit 
                   //updateUsersVirtualAccount(coupon.Company, SwapCost, dbContext, 2, true, null, couponId);
 
@@ -154,7 +154,7 @@ namespace SMD.Implementation.Services
             usersPaypalAccount.Transactions.Add(batchTransaction);
             dbContext.Transactions.Add(batchTransaction);
         }
-        private static void updateUsersVirtualAccount(Company company, double amount, BaseDbContext dbContext, int type, bool isCredit = true, long? CouponCodeId = null, long? CampaignId = null)
+        private static void updateUsersVirtualAccount(Company company, double amount, BaseDbContext dbContext, int type, bool isCredit = true, long? CouponId = null, long? CampaignId = null)
         {
             Account userVirtualAccount = company.Accounts.FirstOrDefault(acc => acc.AccountType == (int)AccountType.VirtualAccount);
             if (userVirtualAccount == null)
@@ -166,12 +166,13 @@ namespace SMD.Implementation.Services
             var batchTransaction = new Transaction
             {
                 AccountId = userVirtualAccount.AccountId,
-                Type = 1,
+                Type = type,
                 // AdCampaignId = adCampaignId,
                 isProcessed = true,
                 TransactionDate = DateTime.Now,
-                CouponCodeId = CouponCodeId,
+                CouponId = CouponId,
                 AdCampaignId = CampaignId,
+                
                 TransactionLogs = new List<TransactionLog>
                                                          {
                                                              new TransactionLog

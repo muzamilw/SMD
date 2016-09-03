@@ -46,6 +46,6 @@ namespace SMD.MIS.Areas.Api.Models
         public int VouchersCount { get; set; }
         public int CompanyId { get; set; }
 
-        public int GameId { get; set; }
+        public long GameId { get; set; }
     }
 }

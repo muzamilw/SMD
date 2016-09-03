@@ -499,8 +499,8 @@ namespace SMD.Implementation.Services
               List<Account> accounts = _accountRepository.GetByUserId(UserId);
 
               var userVirtualAccount = accounts.Where(g => g.AccountType == (int)AccountType.VirtualAccount).FirstOrDefault();
-              if (PurchaseAmount < userVirtualAccount.AccountBalance)
-              {
+              //if (PurchaseAmount < userVirtualAccount.AccountBalance)
+              //{
 
                   //Update Accounts
                   PayOutScheduler.UpdateCouponAccounts(CouponId, PurchaseAmount, userVirtualAccount.CompanyId.Value);
@@ -538,8 +538,8 @@ namespace SMD.Implementation.Services
 
                   return true;
 
-              }
-              return false;
+              //}
+              //return false;
 
           }
         public int RedeemPurchasedCoupon(string UserId, long couponPurchaseId, string pinCode, string operatorId)

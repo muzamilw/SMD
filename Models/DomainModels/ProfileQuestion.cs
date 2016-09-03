@@ -35,6 +35,13 @@ namespace SMD.Models.DomainModels
           public Nullable<int> Gender { get; set; }
 
 
+          public bool? Approved { get; set; }
+          public string ApprovedByUserId { get; set; }
+          public DateTime? ApprovalDate { get; set; }
+
+          public string RejectionReason { get; set; }
+
+
         public virtual ICollection<ProfileQuestionAnswer> ProfileQuestionAnswers { get; set; }
         public virtual ICollection<ProfileQuestionUserAnswer> ProfileQuestionUserAnswers { get; set; }
         public virtual ProfileQuestionGroup ProfileQuestionGroup { get; set; }
