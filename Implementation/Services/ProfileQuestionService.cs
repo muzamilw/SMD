@@ -16,6 +16,10 @@ using System.Linq;
 using System.Web;
 using SMD.Repository.Repositories;
 using SMD.Interfaces;
+using SMD.Implementation.Identity;
+using System.Globalization;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 
 
 namespace SMD.Implementation.Services
@@ -35,7 +39,12 @@ namespace SMD.Implementation.Services
         private readonly IEducationRepository _educationRepository;
         private readonly IProfileQuestionTargetCriteriaRepository _profileQuestionTargetCriteriaRepository;
         private readonly IProfileQuestionTargetLocationRepository _profileQuestionTargetLocationRepository;
-     
+        private ApplicationUserManager UserManager
+        {
+            get { return HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
+        }
+
+
         #endregion
         #region Constructor
         /// <summary>
@@ -151,6 +160,10 @@ namespace SMD.Implementation.Services
         /// </summary>
         public ProfileQuestion SaveProfileQuestion(ProfileQuestion source)
         {
+            var user = UserManager.Users.Where(g => g.Id == _profileQuestionRepository.LoggedInUserIdentity).SingleOrDefault();
+            
+                
+
 
             var serverObj=_profileQuestionRepository.Find(source.PqId);
             //var user = UserManager.Users.Where(g => g.Id == _profileQuestionRepository.LoggedInUserIdentity).SingleOrDefault();
@@ -160,6 +173,7 @@ namespace SMD.Implementation.Services
             if (serverObj != null)
             {
                 serverObj.Question = source.Question;
+
                 serverObj.Priority = source.Priority;
                 serverObj.HasLinkedQuestions = source.HasLinkedQuestions;
                 serverObj.LanguageId = source.LanguageId;
@@ -271,6 +285,7 @@ namespace SMD.Implementation.Services
 
                 serverObj= new ProfileQuestion
                 {
+                  
                     Question = source.Question,
                     Priority = source.Priority,
                     HasLinkedQuestions = source.HasLinkedQuestions,
@@ -287,7 +302,9 @@ namespace SMD.Implementation.Services
                     AgeRangeStart=source.AgeRangeStart,
                     AgeRangeEnd=source.AgeRangeEnd,
                     Gender=source.Gender,
-                    SubmissionDateTime=source.SubmissionDateTime
+                    SubmissionDateTime=source.SubmissionDateTime,
+                    CreatedBy=source.CreatedBy,
+                    UserID=source.UserID
                 //    CreatedBy = user.FullName
                 };
                  serverObj.CompanyId = compid;
@@ -295,6 +312,12 @@ namespace SMD.Implementation.Services
                  {
                      serverObj.SubmissionDateTime = DateTime.Now;
                  }
+                 if (user != null)
+                 {
+                     serverObj.CreatedBy = user.FullName;
+                     serverObj.UserID = user.Id;
+                 }
+
                 _profileQuestionRepository.Add(serverObj);
                 _profileQuestionRepository.SaveChanges();
                 if (serverObj.ProfileQuestionAnswers == null)
