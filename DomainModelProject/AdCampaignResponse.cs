@@ -32,6 +32,7 @@ namespace DomainModelProject
         public string UserLocationCity { get; set; }
         public string UserLocationCountry { get; set; }
         public string UserLocationAddress { get; set; }
+        public Nullable<int> ResponseType { get; set; }
     
         public virtual AdCampaign AdCampaign { get; set; }
         public virtual AdCampaignResponse AdCampaignResponse1 { get; set; }

@@ -11,13 +11,13 @@ using System.Web.Http;
 
 using SMD.MIS.Areas.Api.Models;
 using SMD.MIS.ModelMappers;
+using SMD.Models.ResponseModels;
 namespace SMD.MIS.Areas.Api.Controllers
 {
     public class GetRandomGameController : ApiController
     {
-        private readonly IWebApiUserService webApiUserService;
-        private IEmailManagerService emailManagerService;
-        private readonly IAdvertService _advertService;
+        private readonly IGameService gameService;
+
         #region Private
         
         #endregion
@@ -27,15 +27,9 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// <summary>
         /// Constructor
         /// </summary>
-        public GetRandomGameController(IWebApiUserService webApiUserService, IEmailManagerService emailManagerService, IAdvertService advertService)
+        public GetRandomGameController(IGameService gameService)
         {
-            if (webApiUserService == null)
-            {
-                throw new ArgumentNullException("webApiUserService");
-            }
-            this.webApiUserService = webApiUserService;
-            this.emailManagerService = emailManagerService;
-            this._advertService = advertService;
+            this.gameService = gameService;
         }
 
         #endregion
@@ -43,36 +37,23 @@ namespace SMD.MIS.Areas.Api.Controllers
         #region Public
 
         /// <summary>
-        ///invite user
+        ///Get Random game
         /// </summary>
 
 
-        public bool Get(string UserId, long CampaignId)//string BuyItModel request
+        public RandomGameResponse Get(string authenticationToken, string UserId, long CampaignId, int ExistingGameId)//string BuyItModel request
         {
             if (string.IsNullOrEmpty(UserId) || CampaignId == 0)
             {
                 throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
             }
 
-            SMD.Models.DomainModels.AdCampaign oCampaignRecord = _advertService.GetAdCampaignById(CampaignId);
-            if (oCampaignRecord != null)
-            {
-                emailManagerService.SendBuyItEmailToUser(UserId, oCampaignRecord);
-                return true;
-            }
-            else
-            {
-                throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
-            }
+            var game = gameService.GetRandomGame(ExistingGameId);
+
+            return new RandomGameResponse { GameId = game.GameId, GameName = game.GameName, GameUrl = game.GameUrl, Message = "Success", Status = true };
+          
         }
-        public SMD.MIS.Areas.Api.Models.AdCampaign Post(SMD.MIS.Areas.Api.Models.AdCampaign campaign)
-        {
-            if (campaign == null || !ModelState.IsValid)
-            {
-                throw new HttpException((int)HttpStatusCode.BadRequest, "Invalid Request");
-            }
-            return _advertService.SendApprovalRejectionEmail(campaign.CreateFrom()).CreateFrom();
-        }
+   
         #endregion
     }
 }

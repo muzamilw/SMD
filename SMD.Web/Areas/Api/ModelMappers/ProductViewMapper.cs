@@ -20,7 +20,7 @@ namespace SMD.MIS.Areas.Api.ModelMappers
             return new ProductView
                    {
                        ItemId = source.ItemId,
-                       Description = !string.IsNullOrEmpty(source.Description) ? source.Description.Replace("\n", "\n").Replace("\\n", "\n") : source.Description,
+                       Description = !string.IsNullOrEmpty(source.description) ? source.description.Replace("\n", "\n").Replace("\\n", "\n") : source.description,
                        Type = source.Type,
                        ItemType = source.ItemType,
                        ItemName = source.ItemName,
