@@ -36,11 +36,11 @@ namespace SMD.Models.DomainModels
 
 
           public bool? Approved { get; set; }
-          public string ApprovedByUserId { get; set; }
+          public string ApprovedByUserID { get; set; }
           public DateTime? ApprovalDate { get; set; }
-
+        
           public string RejectionReason { get; set; }
-          public string UserId { get; set; }
+          public string UserID { get; set; }
 
         public virtual ICollection<ProfileQuestionAnswer> ProfileQuestionAnswers { get; set; }
         public virtual ICollection<ProfileQuestionUserAnswer> ProfileQuestionUserAnswers { get; set; }
