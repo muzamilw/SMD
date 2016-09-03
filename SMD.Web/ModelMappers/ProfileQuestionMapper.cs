@@ -1,7 +1,9 @@
 ﻿using SMD.MIS.Areas.Api.Models;
+using SMD.Models.Common;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Web;
 using ProfileQuestionAnswer = SMD.Models.DomainModels.ProfileQuestionAnswer;
 using ProfileQuestionTargetCriteriaDM = SMD.Models.DomainModels.ProfileQuestionTargetCriteria;
 using ProfileQuestionTargetLocationDM = SMD.Models.DomainModels.ProfileQuestionTargetLocation;
@@ -54,7 +56,10 @@ namespace SMD.MIS.ModelMappers
                 AsnswerCount=source.AsnswerCount,
                 AgeRangeStart=source.AgeRangeStart,
                 AgeRangeEnd=source.AgeRangeEnd,
-                Gender=source.Gender
+                Gender=source.Gender,
+                ProfileQuestionTargetLocation = source.ProfileQuestionTargetLocations.Select(loc => loc.CreateForRecieveTLocation()).ToList(),
+                ProfileQuestionTargetCriteria = source.ProfileQuestionTargetCriterias.Select(crt => crt.CreateForRecieveTCriteria()).ToList()
+
             };
         }
 
@@ -69,7 +74,6 @@ namespace SMD.MIS.ModelMappers
                 Question = source.Question,
                 Priority = source.Priority,
                 HasLinkedQuestions = source.HasLinkedQuestions,
-
                 LanguageId = source.LanguageId,
                 CountryId = source.CountryId,
                 ProfileGroupId = source.ProfileGroupId,
@@ -83,11 +87,8 @@ namespace SMD.MIS.ModelMappers
                 AgeRangeStart=source.AgeRangeStart,
                 AgeRangeEnd=source.AgeRangeEnd,
                 Gender=source.Gender,
-                
                 ProfileQuestionTargetCriterias = source.ProfileQuestionTargetCriteria != null ? source.ProfileQuestionTargetCriteria.Select(crt => crt.CreateFromTargetCriteria()).ToList() : new Collection<ProfileQuestionTargetCriteriaDM>().ToList(),
-
                 ProfileQuestionTargetLocations = source.ProfileQuestionTargetLocation != null ? source.ProfileQuestionTargetLocation.Select(loc => loc.CreateFromTargetLocation()).ToList() : new Collection<ProfileQuestionTargetLocationDM>().ToList(),
-
                 ProfileQuestionAnswers = source.ProfileQuestionAnswers != null ? source.ProfileQuestionAnswers.Select(ans => ans.CreateFrom()).ToList() : new Collection<ProfileQuestionAnswer>().ToList()
             };
         }
@@ -222,6 +223,153 @@ namespace SMD.MIS.ModelMappers
               {
                   return null;
               }
+          }
+
+
+          public static SMD.MIS.Areas.Api.Models.ProfileQuestionTargetCriteria CreateForRecieveTCriteria(this Models.DomainModels.ProfileQuestionTargetCriteria source)
+          {
+              string QuestionString = "";
+              string AnswerString = "";
+              string LanguageName = "";
+              string IndustryName = "";
+              string EducationName = "";
+
+              if (source.Type != null && source.Type == (int)AdCampaignCriteriaType.ProfileQuestion)
+              {
+                  if (source.PQQuestionID != null && source.PQQuestionID > 0 && source.ProfileQuestion != null)
+                  {
+                      QuestionString = source.ProfileQuestion.Question;
+                  }
+                  if (source.PQAnswerID != null && source.PQAnswerID > 0 && source.ProfileQuestionAnswer != null)
+                  {
+                      AnswerString = source.ProfileQuestionAnswer.AnswerString;
+                  }
+              }
+              //else if (source.Type != null && source.Type == (int)AdCampaignCriteriaType.SurveyQuestion)
+              //{
+              //    if (source.SQID != null && source.SQID > 0 && source.SurveyQuestion != null)
+              //    {
+              //        QuestionString = source.SurveyQuestion.Question;
+              //    }
+              //    if (source.SqAnswer != null && source.SqAnswer > 0 && source.SurveyQuestion != null)
+              //    {
+              //        if (source.SqAnswer == 1)
+              //        {
+              //            if (!source.SurveyQuestion.LeftPicturePath.Contains("http:"))
+              //            {
+              //                AnswerString = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + source.SurveyQuestion.LeftPicturePath;
+              //            }
+              //            else
+              //            {
+              //                AnswerString = source.SurveyQuestion.LeftPicturePath;
+              //            }
+
+              //        }
+              //        else
+              //        {
+              //            if (!source.SurveyQuestion.RightPicturePath.Contains("http:"))
+              //            {
+              //                AnswerString = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + source.SurveyQuestion.RightPicturePath;
+              //            }
+              //            else
+              //            {
+              //                AnswerString = source.SurveyQuestion.RightPicturePath;
+              //            }
+
+              //        }
+
+              //    }
+              //}
+              else if (source.Type != null && source.Type == (int)AdCampaignCriteriaType.Language)
+              {
+                  if (source.LanguageID != null && source.LanguageID > 0 && source.Language != null)
+                  {
+                      LanguageName = source.Language.LanguageName;
+                  }
+              }
+              else if (source.Type == (int)SurveyQuestionTargetCriteriaType.Industry)
+              {
+                  if (source.Industry != null)
+                  {
+                      IndustryName = source.Industry.IndustryName;
+                  }
+              }
+              else if (source.Type == (int)SurveyQuestionTargetCriteriaType.Education)
+              {
+                  if (source.Education != null)
+                  {
+                      EducationName = source.Education.Title;
+                  }
+              }
+              //else if (source.Type == (int)AdCampaignCriteriaType.QuizQustion)
+              //{
+              //    if (source.QuizCampaign != null)
+              //    {
+              //        QuestionString = source.QuizCampaign.VerifyQuestion;
+              //        if (source.QuizAnswerId == 1)
+              //            AnswerString = source.QuizCampaign.Answer1;
+              //        if (source.QuizAnswerId == 2)
+              //            AnswerString = source.QuizCampaign.Answer2;
+              //    }
+              //}
+              return new SMD.MIS.Areas.Api.Models.ProfileQuestionTargetCriteria
+              {
+
+
+                  IncludeorExclude = source.IncludeorExclude,
+                  IndustryID = source.IndustryID,
+                  LanguageID = source.LanguageID,
+                  PQAnswerID = source.PQAnswerID,
+                  PQQuestionID=source.PQQuestionID,
+                  PQID = source.PQID,
+                  //SQAnswer = source.SqAnswer,
+                  SQID = source.SQID,
+                  Type = source.Type,
+                  questionString = QuestionString,
+                  answerString = AnswerString,
+                  Language = LanguageName,
+                  Industry = IndustryName,
+                  EducationID = source.EducationID,
+                  Education = EducationName,
+                  AdCampaignAnswer = source.AdCampaignAnswer,
+                  AdCampaignID = source.AdCampaignID
+              };
+          }
+
+          /// <summary>
+          /// Domain to Web Mapper
+          /// </summary>
+          public static SMD.MIS.Areas.Api.Models.ProfileQuestionTargetLocation CreateForRecieveTLocation(this Models.DomainModels.ProfileQuestionTargetLocation source)
+          {
+              string CName = "";
+              string CountName = "";
+              string latitdue = "";
+              string longitude = "";
+              if (source.CountryID != null && source.CountryID > 0 && source.Country != null)
+              {
+                  CountName = source.Country.CountryName;
+
+              }
+              if (source.CityID != null && source.CityID > 0 && source.City != null)
+              {
+                  CName = source.City.CityName;
+                  latitdue = source.City.GeoLat;
+                  longitude = source.City.GeoLong;
+              }
+              return new SMD.MIS.Areas.Api.Models.ProfileQuestionTargetLocation
+              {
+
+                  ID = source.ID,
+                  CityID = source.City.CityId,
+                  CountryID = source.Country.CountryId,
+                  IncludeorExclude = source.IncludeorExclude,
+                  Radius = source.Radius,
+                  City = CName,
+                  Country = CountName,
+                  Latitude = latitdue,
+                  Longitude = longitude
+
+              };
           }
         /// <summary>
         /// Domain to API response 

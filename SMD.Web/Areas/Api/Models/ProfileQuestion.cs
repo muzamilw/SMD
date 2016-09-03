@@ -32,9 +32,9 @@ namespace SMD.MIS.Areas.Api.Models
 
         public int? Status { get; set; }
 
-        public ICollection<ProfileQuestionAnswer> ProfileQuestionAnswers { get; set; }
-        public ICollection<ProfileQuestionTargetCriteria> ProfileQuestionTargetCriteria { get; set; }
-        public ICollection<ProfileQuestionTargetLocation> ProfileQuestionTargetLocation { get; set; }
+        public List<ProfileQuestionAnswer> ProfileQuestionAnswers { get; set; }
+        public List<ProfileQuestionTargetCriteria> ProfileQuestionTargetCriteria { get; set; }
+        public List<ProfileQuestionTargetLocation> ProfileQuestionTargetLocation { get; set; }
 
     }
 }

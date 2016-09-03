@@ -8654,4 +8654,10 @@ GO
 COMMIT
 
 
+ALTER TABLE ProfileQuestionTargetCriteria DROP CONSTRAINT fk_ProfileQuestionTargetCriteria_PQuestions
 
+
+ALTER TABLE ProfileQuestionTargetCriteria
+ADD CONSTRAINT FK_ProfileQuestionTargetCriteria_ProfileQuestion
+FOREIGN KEY (PQID)
+REFERENCES ProfileQuestion(PQID)

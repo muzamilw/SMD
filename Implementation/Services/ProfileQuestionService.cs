@@ -90,6 +90,8 @@ namespace SMD.Implementation.Services
         public ProfileQuestionSearchRequestResponse GetProfileQuestions(ProfileQuestionSearchRequest request)
         {
             int rowCount;
+           // var obj = _profileQuestionRepository.SearchProfileQuestions(request, out rowCount);
+            
             
             //string code = Convert.ToString((int)ProductCode.);
             //var product = productRepository.GetAll().Where(g => g.ProductCode == code).FirstOrDefault();

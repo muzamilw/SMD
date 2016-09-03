@@ -26,5 +26,13 @@ namespace SMD.Repository.Repositories
         {
             get { return db.ProfileQuestionTargetCriteria; }
         }
+
+        public List<ProfileQuestionTargetCriteria> GetProfileQuestionTargetCiteria(long PQID)
+        {
+
+            return DbSet.Where(i => i.PQID == PQID).ToList();
+        
+        }
+
     }
 }

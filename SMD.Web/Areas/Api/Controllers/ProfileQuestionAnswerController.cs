@@ -6,6 +6,7 @@ using SMD.MIS.ModelMappers;
 using System.Net;
 using System.Web;
 using System.Web.Http;
+using SMD.Interfaces.Repository;
 
 
 namespace SMD.MIS.Areas.Api.Controllers
@@ -17,14 +18,16 @@ namespace SMD.MIS.Areas.Api.Controllers
     {
         #region Public
         private readonly IProfileQuestionAnswerService _profileQuestionAnswerService;
+        private readonly IProfileQuestionTargetCriteriaRepository _criteria;
         #endregion
         #region Constructor
         /// <summary>
         /// Constuctor 
         /// </summary>
-        public ProfileQuestionAnswerController(IProfileQuestionAnswerService profileQuestionAnswerService)
+        public ProfileQuestionAnswerController(IProfileQuestionAnswerService profileQuestionAnswerService, IProfileQuestionTargetCriteriaRepository _criteria)
         {
             _profileQuestionAnswerService = profileQuestionAnswerService;
+            _criteria = _criteria;
         }
 
         #endregion
@@ -40,6 +43,9 @@ namespace SMD.MIS.Areas.Api.Controllers
                 throw new HttpException((int)HttpStatusCode.BadRequest, "Invalid Request");
             }
             var domainList = _profileQuestionAnswerService.GetProfileQuestionAnswerByQuestionId(request.ProfileQuestionId);
+            
+
+
             return domainList.Select(a => a.CreateFrom()).ToList();
         }
         #endregion
