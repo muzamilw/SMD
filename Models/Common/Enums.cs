@@ -179,7 +179,9 @@
 
         ApproveCoupon = 8,
 
-        ApproveAd = 9
+        ApproveAd = 9,
+
+        UserCashOut = 10
 
 
     }
