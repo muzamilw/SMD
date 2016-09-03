@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets778DC9D87D828D64CAC47D37AA96419B662DADEB877C705152417D171E6BD04A))]
+[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySetsFAC98018779483529F0C0BE65623D7041D591B07DF22187DAEB1625A346E7ADB))]
 
 namespace Edm_EntityMappingGeneratedViews
 {
@@ -17,18 +17,18 @@ namespace Edm_EntityMappingGeneratedViews
     /// <Summary>
     /// The type contains views for EntitySets and AssociationSets that were generated at design time.
     /// </Summary>
-    public sealed class ViewsForBaseEntitySets778DC9D87D828D64CAC47D37AA96419B662DADEB877C705152417D171E6BD04A : System.Data.Mapping.EntityViewContainer
+    public sealed class ViewsForBaseEntitySetsFAC98018779483529F0C0BE65623D7041D591B07DF22187DAEB1625A346E7ADB : System.Data.Mapping.EntityViewContainer
     {
         
         /// <Summary>
         /// The constructor stores the views for the extents and also the hash values generated based on the metadata and mapping closure and views.
         /// </Summary>
-        public ViewsForBaseEntitySets778DC9D87D828D64CAC47D37AA96419B662DADEB877C705152417D171E6BD04A()
+        public ViewsForBaseEntitySetsFAC98018779483529F0C0BE65623D7041D591B07DF22187DAEB1625A346E7ADB()
         {
             this.EdmEntityContainerName = "BaseDbContext";
             this.StoreEntityContainerName = "SMDModelStoreContainer";
-            this.HashOverMappingClosure = "5c85e0abe793e218ac36e29e7309697f0b2be01164ed2878dcfd3f2495c52454";
-            this.HashOverAllExtentViews = "5774cb32885635ca2132df5fc2def3d7f8835d6bea7cf62fba7dac1aec3d49ae";
+            this.HashOverMappingClosure = "93305199adfa8f45cabce2b597902ab2d45156e0141a05308a5b7e92ad0b703e";
+            this.HashOverAllExtentViews = "01d01be298d3bd19441dec7ad4d28fa59b2af102ca815b19b1976bcc8caf5fe9";
             this.ViewCount = 110;
         }
         
@@ -520,7 +520,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// </Summary>
         private System.Collections.Generic.KeyValuePair<string, string> GetView2()
         {
-            System.Text.StringBuilder viewString = new System.Text.StringBuilder(2322);
+            System.Text.StringBuilder viewString = new System.Text.StringBuilder(2711);
             viewString.Append("\r\n    SELECT VALUE -- Constructing ProfileQuestion\r\n        [SMDModel.Store.Prof");
             viewString.Append("ileQuestion](T1.ProfileQuestion_PQID, T1.ProfileQuestion_LanguageID, T1.ProfileQ");
             viewString.Append("uestion_CountryID, T1.ProfileQuestion_ProfileGroupID, T1.ProfileQuestion_Priorit");
@@ -531,26 +531,30 @@ namespace Edm_EntityMappingGeneratedViews
             viewString.Append("tAnswering, T1.ProfileQuestion_Status, T1.ProfileQuestion_CompanyId, T1.ProfileQ");
             viewString.Append("uestion_AnswerNeeded, T1.ProfileQuestion_AsnswerCount, T1.ProfileQuestion_Submis");
             viewString.Append("sionDateTime, T1.ProfileQuestion_AgeRangeStart, T1.ProfileQuestion_AgeRangeEnd, ");
-            viewString.Append("T1.ProfileQuestion_Gender)\r\n    FROM (\r\n        SELECT \r\n            T.PqId AS P");
-            viewString.Append("rofileQuestion_PQID, \r\n            T.LanguageId AS ProfileQuestion_LanguageID, \r");
-            viewString.Append("\n            T.CountryId AS ProfileQuestion_CountryID, \r\n            T.ProfileGr");
-            viewString.Append("oupId AS ProfileQuestion_ProfileGroupID, \r\n            T.Priority AS ProfileQues");
-            viewString.Append("tion_Priority, \r\n            T.Type AS ProfileQuestion_Type, \r\n            T.Que");
-            viewString.Append("stion AS ProfileQuestion_Question, \r\n            T.RefreshTime AS ProfileQuestio");
-            viewString.Append("n_RefreshTime, \r\n            T.SkippedCount AS ProfileQuestion_SkippedCount, \r\n ");
-            viewString.Append("           T.CreationDate AS ProfileQuestion_CreationDate, \r\n            T.Creat");
-            viewString.Append("edBy AS ProfileQuestion_CreatedBy, \r\n            T.ModifiedDate AS ProfileQuesti");
-            viewString.Append("on_ModifiedDate, \r\n            T.ModifiedBy AS ProfileQuestion_ModifiedBy, \r\n   ");
-            viewString.Append("         T.HasLinkedQuestions AS ProfileQuestion_HasLinkedQuestions, \r\n         ");
-            viewString.Append("   T.PenalityForNotAnswering AS ProfileQuestion_PenalityForNotAnswering, \r\n     ");
-            viewString.Append("       T.Status AS ProfileQuestion_Status, \r\n            T.CompanyId AS ProfileQ");
-            viewString.Append("uestion_CompanyId, \r\n            T.AnswerNeeded AS ProfileQuestion_AnswerNeeded,");
-            viewString.Append(" \r\n            T.AsnswerCount AS ProfileQuestion_AsnswerCount, \r\n            T.S");
-            viewString.Append("ubmissionDateTime AS ProfileQuestion_SubmissionDateTime, \r\n            T.AgeRang");
-            viewString.Append("eStart AS ProfileQuestion_AgeRangeStart, \r\n            T.AgeRangeEnd AS ProfileQ");
-            viewString.Append("uestion_AgeRangeEnd, \r\n            T.Gender AS ProfileQuestion_Gender, \r\n       ");
-            viewString.Append("     True AS _from0\r\n        FROM BaseDbContext.ProfileQuestions AS T\r\n    ) AS ");
-            viewString.Append("T1");
+            viewString.Append("T1.ProfileQuestion_Gender, T1.ProfileQuestion_Approved, T1.ProfileQuestion_Appro");
+            viewString.Append("vedByUserID, T1.ProfileQuestion_ApprovalDate, T1.ProfileQuestion_RejectionReason");
+            viewString.Append(")\r\n    FROM (\r\n        SELECT \r\n            T.PqId AS ProfileQuestion_PQID, \r\n  ");
+            viewString.Append("          T.LanguageId AS ProfileQuestion_LanguageID, \r\n            T.CountryId ");
+            viewString.Append("AS ProfileQuestion_CountryID, \r\n            T.ProfileGroupId AS ProfileQuestion_");
+            viewString.Append("ProfileGroupID, \r\n            T.Priority AS ProfileQuestion_Priority, \r\n        ");
+            viewString.Append("    T.Type AS ProfileQuestion_Type, \r\n            T.Question AS ProfileQuestion_");
+            viewString.Append("Question, \r\n            T.RefreshTime AS ProfileQuestion_RefreshTime, \r\n        ");
+            viewString.Append("    T.SkippedCount AS ProfileQuestion_SkippedCount, \r\n            T.CreationDate");
+            viewString.Append(" AS ProfileQuestion_CreationDate, \r\n            T.CreatedBy AS ProfileQuestion_C");
+            viewString.Append("reatedBy, \r\n            T.ModifiedDate AS ProfileQuestion_ModifiedDate, \r\n      ");
+            viewString.Append("      T.ModifiedBy AS ProfileQuestion_ModifiedBy, \r\n            T.HasLinkedQuest");
+            viewString.Append("ions AS ProfileQuestion_HasLinkedQuestions, \r\n            T.PenalityForNotAnswer");
+            viewString.Append("ing AS ProfileQuestion_PenalityForNotAnswering, \r\n            T.Status AS Profil");
+            viewString.Append("eQuestion_Status, \r\n            T.CompanyId AS ProfileQuestion_CompanyId, \r\n    ");
+            viewString.Append("        T.AnswerNeeded AS ProfileQuestion_AnswerNeeded, \r\n            T.AsnswerC");
+            viewString.Append("ount AS ProfileQuestion_AsnswerCount, \r\n            T.SubmissionDateTime AS Prof");
+            viewString.Append("ileQuestion_SubmissionDateTime, \r\n            T.AgeRangeStart AS ProfileQuestion");
+            viewString.Append("_AgeRangeStart, \r\n            T.AgeRangeEnd AS ProfileQuestion_AgeRangeEnd, \r\n  ");
+            viewString.Append("          T.Gender AS ProfileQuestion_Gender, \r\n            T.Approved AS Profil");
+            viewString.Append("eQuestion_Approved, \r\n            T.ApprovedByUserID AS ProfileQuestion_Approved");
+            viewString.Append("ByUserID, \r\n            T.ApprovalDate AS ProfileQuestion_ApprovalDate, \r\n      ");
+            viewString.Append("      T.RejectionReason AS ProfileQuestion_RejectionReason, \r\n            True A");
+            viewString.Append("S _from0\r\n        FROM BaseDbContext.ProfileQuestions AS T\r\n    ) AS T1");
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.ProfileQuestion", viewString.ToString());
         }
         
@@ -795,20 +799,21 @@ namespace Edm_EntityMappingGeneratedViews
                     "t, T1.Transaction_AccountID, T1.Transaction_TaxPerc, T1.Transaction_TaxValue, T1" +
                     ".Transaction_AdCampaignID, T1.Transaction_SQID, T1.Transaction_isProcessed, T1.T" +
                     "ransaction_CurrencyID, T1.Transaction_CurrencyRateID, T1.Transaction_Sequence, T" +
-                    "1.Transaction_CouponCodeId, T1.Transaction_AccountBalance)\r\n    FROM (\r\n        " +
-                    "SELECT \r\n            T.TxId AS Transaction_TxID, \r\n            T.TransactionDate" +
-                    " AS Transaction_TransactionDate, \r\n            T.Type AS Transaction_Type, \r\n   " +
-                    "         T.DebitCredit AS Transaction_DebitCredit, \r\n            T.CreditAmount " +
-                    "AS Transaction_CreditAmount, \r\n            T.DebitAmount AS Transaction_DebitAmo" +
-                    "unt, \r\n            T.AccountId AS Transaction_AccountID, \r\n            T.TaxPerc" +
-                    " AS Transaction_TaxPerc, \r\n            T.TaxValue AS Transaction_TaxValue, \r\n   " +
-                    "         T.AdCampaignId AS Transaction_AdCampaignID, \r\n            T.SQId AS Tra" +
-                    "nsaction_SQID, \r\n            T.isProcessed AS Transaction_isProcessed, \r\n       " +
-                    "     T.CurrencyId AS Transaction_CurrencyID, \r\n            T.CurrencyRateId AS T" +
-                    "ransaction_CurrencyRateID, \r\n            T.Sequence AS Transaction_Sequence, \r\n " +
-                    "           T.CouponCodeId AS Transaction_CouponCodeId, \r\n            T.AccountBa" +
-                    "lance AS Transaction_AccountBalance, \r\n            True AS _from0\r\n        FROM " +
-                    "BaseDbContext.Transactions AS T\r\n    ) AS T1");
+                    "1.Transaction_CouponId, T1.Transaction_AccountBalance, T1.Transaction_PQID)\r\n   " +
+                    " FROM (\r\n        SELECT \r\n            T.TxId AS Transaction_TxID, \r\n            " +
+                    "T.TransactionDate AS Transaction_TransactionDate, \r\n            T.Type AS Transa" +
+                    "ction_Type, \r\n            T.DebitCredit AS Transaction_DebitCredit, \r\n          " +
+                    "  T.CreditAmount AS Transaction_CreditAmount, \r\n            T.DebitAmount AS Tra" +
+                    "nsaction_DebitAmount, \r\n            T.AccountId AS Transaction_AccountID, \r\n    " +
+                    "        T.TaxPerc AS Transaction_TaxPerc, \r\n            T.TaxValue AS Transactio" +
+                    "n_TaxValue, \r\n            T.AdCampaignId AS Transaction_AdCampaignID, \r\n        " +
+                    "    T.SQId AS Transaction_SQID, \r\n            T.isProcessed AS Transaction_isPro" +
+                    "cessed, \r\n            T.CurrencyId AS Transaction_CurrencyID, \r\n            T.Cu" +
+                    "rrencyRateId AS Transaction_CurrencyRateID, \r\n            T.Sequence AS Transact" +
+                    "ion_Sequence, \r\n            T.CouponId AS Transaction_CouponId, \r\n            T." +
+                    "AccountBalance AS Transaction_AccountBalance, \r\n            T.PQID AS Transactio" +
+                    "n_PQID, \r\n            True AS _from0\r\n        FROM BaseDbContext.Transactions AS" +
+                    " T\r\n    ) AS T1");
         }
         
         /// <Summary>
@@ -1140,7 +1145,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// </Summary>
         private System.Collections.Generic.KeyValuePair<string, string> GetView26()
         {
-            System.Text.StringBuilder viewString = new System.Text.StringBuilder(2075);
+            System.Text.StringBuilder viewString = new System.Text.StringBuilder(2176);
             viewString.Append("\r\n    SELECT VALUE -- Constructing AdCampaignResponse\r\n        [SMDModel.Store.A");
             viewString.Append("dCampaignResponse](T1.AdCampaignResponse_ResponseID, T1.AdCampaignResponse_Campa");
             viewString.Append("ignID, T1.AdCampaignResponse_CreatedDateTime, T1.AdCampaignResponse_UserID, T1.A");
@@ -1150,23 +1155,25 @@ namespace Edm_EntityMappingGeneratedViews
             viewString.Append("T1.AdCampaignResponse_GameId, T1.AdCampaignResponse_UserQuestionResponse, T1.AdC");
             viewString.Append("ampaignResponse_UserLocationLat, T1.AdCampaignResponse_UserLocationLong, T1.AdCa");
             viewString.Append("mpaignResponse_UserLocationCity, T1.AdCampaignResponse_UserLocationCountry, T1.A");
-            viewString.Append("dCampaignResponse_UserLocationAddress)\r\n    FROM (\r\n        SELECT \r\n           ");
-            viewString.Append(" T.ResponseId AS AdCampaignResponse_ResponseID, \r\n            T.CampaignId AS Ad");
-            viewString.Append("CampaignResponse_CampaignID, \r\n            T.CreatedDateTime AS AdCampaignRespon");
-            viewString.Append("se_CreatedDateTime, \r\n            T.UserId AS AdCampaignResponse_UserID, \r\n     ");
-            viewString.Append("       T.EndUserDollarAmount AS AdCampaignResponse_EndUserDollarAmount, \r\n      ");
-            viewString.Append("      T.SkipCount AS AdCampaignResponse_SkipCount, \r\n            T.UserSelection");
-            viewString.Append(" AS AdCampaignResponse_UserSelection, \r\n            T.CompanyId AS AdCampaignRes");
-            viewString.Append("ponse_CompanyId, \r\n            T.GameTime AS AdCampaignResponse_GameTime, \r\n    ");
-            viewString.Append("        T.GameScore AS AdCampaignResponse_GameScore, \r\n            T.GameLevel A");
-            viewString.Append("S AdCampaignResponse_GameLevel, \r\n            T.GameId AS AdCampaignResponse_Gam");
-            viewString.Append("eId, \r\n            T.UserQuestionResponse AS AdCampaignResponse_UserQuestionResp");
-            viewString.Append("onse, \r\n            T.UserLocationLat AS AdCampaignResponse_UserLocationLat, \r\n ");
-            viewString.Append("           T.UserLocationLong AS AdCampaignResponse_UserLocationLong, \r\n        ");
-            viewString.Append("    T.UserLocationCity AS AdCampaignResponse_UserLocationCity, \r\n            T.U");
-            viewString.Append("serLocationCountry AS AdCampaignResponse_UserLocationCountry, \r\n            T.Us");
-            viewString.Append("erLocationAddress AS AdCampaignResponse_UserLocationAddress, \r\n            True ");
-            viewString.Append("AS _from0\r\n        FROM BaseDbContext.AdCampaignResponses AS T\r\n    ) AS T1");
+            viewString.Append("dCampaignResponse_UserLocationAddress, T1.AdCampaignResponse_ResponseType)\r\n    ");
+            viewString.Append("FROM (\r\n        SELECT \r\n            T.ResponseId AS AdCampaignResponse_Response");
+            viewString.Append("ID, \r\n            T.CampaignId AS AdCampaignResponse_CampaignID, \r\n            T");
+            viewString.Append(".CreatedDateTime AS AdCampaignResponse_CreatedDateTime, \r\n            T.UserId A");
+            viewString.Append("S AdCampaignResponse_UserID, \r\n            T.EndUserDollarAmount AS AdCampaignRe");
+            viewString.Append("sponse_EndUserDollarAmount, \r\n            T.SkipCount AS AdCampaignResponse_Skip");
+            viewString.Append("Count, \r\n            T.UserSelection AS AdCampaignResponse_UserSelection, \r\n    ");
+            viewString.Append("        T.CompanyId AS AdCampaignResponse_CompanyId, \r\n            T.GameTime AS");
+            viewString.Append(" AdCampaignResponse_GameTime, \r\n            T.GameScore AS AdCampaignResponse_Ga");
+            viewString.Append("meScore, \r\n            T.GameLevel AS AdCampaignResponse_GameLevel, \r\n          ");
+            viewString.Append("  T.GameId AS AdCampaignResponse_GameId, \r\n            T.UserQuestionResponse AS");
+            viewString.Append(" AdCampaignResponse_UserQuestionResponse, \r\n            T.UserLocationLat AS AdC");
+            viewString.Append("ampaignResponse_UserLocationLat, \r\n            T.UserLocationLong AS AdCampaignR");
+            viewString.Append("esponse_UserLocationLong, \r\n            T.UserLocationCity AS AdCampaignResponse");
+            viewString.Append("_UserLocationCity, \r\n            T.UserLocationCountry AS AdCampaignResponse_Use");
+            viewString.Append("rLocationCountry, \r\n            T.UserLocationAddress AS AdCampaignResponse_User");
+            viewString.Append("LocationAddress, \r\n            T.ResponseType AS AdCampaignResponse_ResponseType");
+            viewString.Append(", \r\n            True AS _from0\r\n        FROM BaseDbContext.AdCampaignResponses A");
+            viewString.Append("S T\r\n    ) AS T1");
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.AdCampaignResponse", viewString.ToString());
         }
         
@@ -1723,7 +1730,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// </Summary>
         private System.Collections.Generic.KeyValuePair<string, string> GetView44()
         {
-            System.Text.StringBuilder viewString = new System.Text.StringBuilder(2329);
+            System.Text.StringBuilder viewString = new System.Text.StringBuilder(2718);
             viewString.Append("\r\n    SELECT VALUE -- Constructing ProfileQuestions\r\n        [DomainModels.Profi");
             viewString.Append("leQuestion](T1.ProfileQuestion_PqId, T1.ProfileQuestion_LanguageId, T1.ProfileQu");
             viewString.Append("estion_CountryId, T1.ProfileQuestion_ProfileGroupId, T1.ProfileQuestion_Priority");
@@ -1734,26 +1741,30 @@ namespace Edm_EntityMappingGeneratedViews
             viewString.Append("Answering, T1.ProfileQuestion_Status, T1.ProfileQuestion_CompanyId, T1.ProfileQu");
             viewString.Append("estion_AnswerNeeded, T1.ProfileQuestion_AsnswerCount, T1.ProfileQuestion_Submiss");
             viewString.Append("ionDateTime, T1.ProfileQuestion_AgeRangeStart, T1.ProfileQuestion_AgeRangeEnd, T");
-            viewString.Append("1.ProfileQuestion_Gender)\r\n    FROM (\r\n        SELECT \r\n            T.PQID AS Pr");
-            viewString.Append("ofileQuestion_PqId, \r\n            T.LanguageID AS ProfileQuestion_LanguageId, \r\n");
-            viewString.Append("            T.CountryID AS ProfileQuestion_CountryId, \r\n            T.ProfileGro");
-            viewString.Append("upID AS ProfileQuestion_ProfileGroupId, \r\n            T.Priority AS ProfileQuest");
-            viewString.Append("ion_Priority, \r\n            T.Type AS ProfileQuestion_Type, \r\n            T.Ques");
-            viewString.Append("tion AS ProfileQuestion_Question, \r\n            T.RefreshTime AS ProfileQuestion");
-            viewString.Append("_RefreshTime, \r\n            T.SkippedCount AS ProfileQuestion_SkippedCount, \r\n  ");
-            viewString.Append("          T.CreationDate AS ProfileQuestion_CreationDate, \r\n            T.Create");
-            viewString.Append("dBy AS ProfileQuestion_CreatedBy, \r\n            T.ModifiedDate AS ProfileQuestio");
-            viewString.Append("n_ModifiedDate, \r\n            T.ModifiedBy AS ProfileQuestion_ModifiedBy, \r\n    ");
-            viewString.Append("        T.HasLinkedQuestions AS ProfileQuestion_HasLinkedQuestions, \r\n          ");
-            viewString.Append("  T.PenalityForNotAnswering AS ProfileQuestion_PenalityForNotAnswering, \r\n      ");
-            viewString.Append("      T.Status AS ProfileQuestion_Status, \r\n            T.CompanyId AS ProfileQu");
-            viewString.Append("estion_CompanyId, \r\n            T.AnswerNeeded AS ProfileQuestion_AnswerNeeded, ");
-            viewString.Append("\r\n            T.AsnswerCount AS ProfileQuestion_AsnswerCount, \r\n            T.Su");
-            viewString.Append("bmissionDateTime AS ProfileQuestion_SubmissionDateTime, \r\n            T.AgeRange");
-            viewString.Append("Start AS ProfileQuestion_AgeRangeStart, \r\n            T.AgeRangeEnd AS ProfileQu");
-            viewString.Append("estion_AgeRangeEnd, \r\n            T.Gender AS ProfileQuestion_Gender, \r\n        ");
-            viewString.Append("    True AS _from0\r\n        FROM SMDModelStoreContainer.ProfileQuestion AS T\r\n  ");
-            viewString.Append("  ) AS T1");
+            viewString.Append("1.ProfileQuestion_Gender, T1.ProfileQuestion_Approved, T1.ProfileQuestion_Approv");
+            viewString.Append("edByUserID, T1.ProfileQuestion_ApprovalDate, T1.ProfileQuestion_RejectionReason)");
+            viewString.Append("\r\n    FROM (\r\n        SELECT \r\n            T.PQID AS ProfileQuestion_PqId, \r\n   ");
+            viewString.Append("         T.LanguageID AS ProfileQuestion_LanguageId, \r\n            T.CountryID A");
+            viewString.Append("S ProfileQuestion_CountryId, \r\n            T.ProfileGroupID AS ProfileQuestion_P");
+            viewString.Append("rofileGroupId, \r\n            T.Priority AS ProfileQuestion_Priority, \r\n         ");
+            viewString.Append("   T.Type AS ProfileQuestion_Type, \r\n            T.Question AS ProfileQuestion_Q");
+            viewString.Append("uestion, \r\n            T.RefreshTime AS ProfileQuestion_RefreshTime, \r\n         ");
+            viewString.Append("   T.SkippedCount AS ProfileQuestion_SkippedCount, \r\n            T.CreationDate ");
+            viewString.Append("AS ProfileQuestion_CreationDate, \r\n            T.CreatedBy AS ProfileQuestion_Cr");
+            viewString.Append("eatedBy, \r\n            T.ModifiedDate AS ProfileQuestion_ModifiedDate, \r\n       ");
+            viewString.Append("     T.ModifiedBy AS ProfileQuestion_ModifiedBy, \r\n            T.HasLinkedQuesti");
+            viewString.Append("ons AS ProfileQuestion_HasLinkedQuestions, \r\n            T.PenalityForNotAnsweri");
+            viewString.Append("ng AS ProfileQuestion_PenalityForNotAnswering, \r\n            T.Status AS Profile");
+            viewString.Append("Question_Status, \r\n            T.CompanyId AS ProfileQuestion_CompanyId, \r\n     ");
+            viewString.Append("       T.AnswerNeeded AS ProfileQuestion_AnswerNeeded, \r\n            T.AsnswerCo");
+            viewString.Append("unt AS ProfileQuestion_AsnswerCount, \r\n            T.SubmissionDateTime AS Profi");
+            viewString.Append("leQuestion_SubmissionDateTime, \r\n            T.AgeRangeStart AS ProfileQuestion_");
+            viewString.Append("AgeRangeStart, \r\n            T.AgeRangeEnd AS ProfileQuestion_AgeRangeEnd, \r\n   ");
+            viewString.Append("         T.Gender AS ProfileQuestion_Gender, \r\n            T.Approved AS Profile");
+            viewString.Append("Question_Approved, \r\n            T.ApprovedByUserID AS ProfileQuestion_ApprovedB");
+            viewString.Append("yUserID, \r\n            T.ApprovalDate AS ProfileQuestion_ApprovalDate, \r\n       ");
+            viewString.Append("     T.RejectionReason AS ProfileQuestion_RejectionReason, \r\n            True AS");
+            viewString.Append(" _from0\r\n        FROM SMDModelStoreContainer.ProfileQuestion AS T\r\n    ) AS T1");
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.ProfileQuestions", viewString.ToString());
         }
         
@@ -1998,20 +2009,21 @@ namespace Edm_EntityMappingGeneratedViews
                     ", T1.Transaction_AccountId, T1.Transaction_TaxPerc, T1.Transaction_TaxValue, T1." +
                     "Transaction_AdCampaignId, T1.Transaction_SQId, T1.Transaction_isProcessed, T1.Tr" +
                     "ansaction_CurrencyId, T1.Transaction_CurrencyRateId, T1.Transaction_Sequence, T1" +
-                    ".Transaction_CouponCodeId, T1.Transaction_AccountBalance)\r\n    FROM (\r\n        S" +
-                    "ELECT \r\n            T.TxID AS Transaction_TxId, \r\n            T.TransactionDate " +
-                    "AS Transaction_TransactionDate, \r\n            T.Type AS Transaction_Type, \r\n    " +
-                    "        T.DebitCredit AS Transaction_DebitCredit, \r\n            T.CreditAmount A" +
-                    "S Transaction_CreditAmount, \r\n            T.DebitAmount AS Transaction_DebitAmou" +
-                    "nt, \r\n            T.AccountID AS Transaction_AccountId, \r\n            T.TaxPerc " +
-                    "AS Transaction_TaxPerc, \r\n            T.TaxValue AS Transaction_TaxValue, \r\n    " +
-                    "        T.AdCampaignID AS Transaction_AdCampaignId, \r\n            T.SQID AS Tran" +
-                    "saction_SQId, \r\n            T.isProcessed AS Transaction_isProcessed, \r\n        " +
-                    "    T.CurrencyID AS Transaction_CurrencyId, \r\n            T.CurrencyRateID AS Tr" +
-                    "ansaction_CurrencyRateId, \r\n            T.Sequence AS Transaction_Sequence, \r\n  " +
-                    "          T.CouponCodeId AS Transaction_CouponCodeId, \r\n            T.AccountBal" +
-                    "ance AS Transaction_AccountBalance, \r\n            True AS _from0\r\n        FROM S" +
-                    "MDModelStoreContainer.Transaction AS T\r\n    ) AS T1");
+                    ".Transaction_AccountBalance, T1.Transaction_CouponId, T1.Transaction_PQID)\r\n    " +
+                    "FROM (\r\n        SELECT \r\n            T.TxID AS Transaction_TxId, \r\n            T" +
+                    ".TransactionDate AS Transaction_TransactionDate, \r\n            T.Type AS Transac" +
+                    "tion_Type, \r\n            T.DebitCredit AS Transaction_DebitCredit, \r\n           " +
+                    " T.CreditAmount AS Transaction_CreditAmount, \r\n            T.DebitAmount AS Tran" +
+                    "saction_DebitAmount, \r\n            T.AccountID AS Transaction_AccountId, \r\n     " +
+                    "       T.TaxPerc AS Transaction_TaxPerc, \r\n            T.TaxValue AS Transaction" +
+                    "_TaxValue, \r\n            T.AdCampaignID AS Transaction_AdCampaignId, \r\n         " +
+                    "   T.SQID AS Transaction_SQId, \r\n            T.isProcessed AS Transaction_isProc" +
+                    "essed, \r\n            T.CurrencyID AS Transaction_CurrencyId, \r\n            T.Cur" +
+                    "rencyRateID AS Transaction_CurrencyRateId, \r\n            T.Sequence AS Transacti" +
+                    "on_Sequence, \r\n            T.AccountBalance AS Transaction_AccountBalance, \r\n   " +
+                    "         T.CouponId AS Transaction_CouponId, \r\n            T.PQID AS Transaction" +
+                    "_PQID, \r\n            True AS _from0\r\n        FROM SMDModelStoreContainer.Transac" +
+                    "tion AS T\r\n    ) AS T1");
         }
         
         /// <Summary>
@@ -2336,7 +2348,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// </Summary>
         private System.Collections.Generic.KeyValuePair<string, string> GetView68()
         {
-            System.Text.StringBuilder viewString = new System.Text.StringBuilder(2082);
+            System.Text.StringBuilder viewString = new System.Text.StringBuilder(2183);
             viewString.Append("\r\n    SELECT VALUE -- Constructing AdCampaignResponses\r\n        [DomainModels.Ad");
             viewString.Append("CampaignResponse](T1.AdCampaignResponse_ResponseId, T1.AdCampaignResponse_Campai");
             viewString.Append("gnId, T1.AdCampaignResponse_CreatedDateTime, T1.AdCampaignResponse_UserId, T1.Ad");
@@ -2346,24 +2358,25 @@ namespace Edm_EntityMappingGeneratedViews
             viewString.Append("1.AdCampaignResponse_GameId, T1.AdCampaignResponse_UserQuestionResponse, T1.AdCa");
             viewString.Append("mpaignResponse_UserLocationLat, T1.AdCampaignResponse_UserLocationLong, T1.AdCam");
             viewString.Append("paignResponse_UserLocationCity, T1.AdCampaignResponse_UserLocationCountry, T1.Ad");
-            viewString.Append("CampaignResponse_UserLocationAddress)\r\n    FROM (\r\n        SELECT \r\n            ");
-            viewString.Append("T.ResponseID AS AdCampaignResponse_ResponseId, \r\n            T.CampaignID AS AdC");
-            viewString.Append("ampaignResponse_CampaignId, \r\n            T.CreatedDateTime AS AdCampaignRespons");
-            viewString.Append("e_CreatedDateTime, \r\n            T.UserID AS AdCampaignResponse_UserId, \r\n      ");
-            viewString.Append("      T.EndUserDollarAmount AS AdCampaignResponse_EndUserDollarAmount, \r\n       ");
-            viewString.Append("     T.SkipCount AS AdCampaignResponse_SkipCount, \r\n            T.UserSelection ");
-            viewString.Append("AS AdCampaignResponse_UserSelection, \r\n            T.CompanyId AS AdCampaignResp");
-            viewString.Append("onse_CompanyId, \r\n            T.GameTime AS AdCampaignResponse_GameTime, \r\n     ");
-            viewString.Append("       T.GameScore AS AdCampaignResponse_GameScore, \r\n            T.GameLevel AS");
-            viewString.Append(" AdCampaignResponse_GameLevel, \r\n            T.GameId AS AdCampaignResponse_Game");
-            viewString.Append("Id, \r\n            T.UserQuestionResponse AS AdCampaignResponse_UserQuestionRespo");
-            viewString.Append("nse, \r\n            T.UserLocationLat AS AdCampaignResponse_UserLocationLat, \r\n  ");
-            viewString.Append("          T.UserLocationLong AS AdCampaignResponse_UserLocationLong, \r\n         ");
-            viewString.Append("   T.UserLocationCity AS AdCampaignResponse_UserLocationCity, \r\n            T.Us");
-            viewString.Append("erLocationCountry AS AdCampaignResponse_UserLocationCountry, \r\n            T.Use");
-            viewString.Append("rLocationAddress AS AdCampaignResponse_UserLocationAddress, \r\n            True A");
-            viewString.Append("S _from0\r\n        FROM SMDModelStoreContainer.AdCampaignResponse AS T\r\n    ) AS ");
-            viewString.Append("T1");
+            viewString.Append("CampaignResponse_UserLocationAddress, T1.AdCampaignResponse_ResponseType)\r\n    F");
+            viewString.Append("ROM (\r\n        SELECT \r\n            T.ResponseID AS AdCampaignResponse_ResponseI");
+            viewString.Append("d, \r\n            T.CampaignID AS AdCampaignResponse_CampaignId, \r\n            T.");
+            viewString.Append("CreatedDateTime AS AdCampaignResponse_CreatedDateTime, \r\n            T.UserID AS");
+            viewString.Append(" AdCampaignResponse_UserId, \r\n            T.EndUserDollarAmount AS AdCampaignRes");
+            viewString.Append("ponse_EndUserDollarAmount, \r\n            T.SkipCount AS AdCampaignResponse_SkipC");
+            viewString.Append("ount, \r\n            T.UserSelection AS AdCampaignResponse_UserSelection, \r\n     ");
+            viewString.Append("       T.CompanyId AS AdCampaignResponse_CompanyId, \r\n            T.GameTime AS ");
+            viewString.Append("AdCampaignResponse_GameTime, \r\n            T.GameScore AS AdCampaignResponse_Gam");
+            viewString.Append("eScore, \r\n            T.GameLevel AS AdCampaignResponse_GameLevel, \r\n           ");
+            viewString.Append(" T.GameId AS AdCampaignResponse_GameId, \r\n            T.UserQuestionResponse AS ");
+            viewString.Append("AdCampaignResponse_UserQuestionResponse, \r\n            T.UserLocationLat AS AdCa");
+            viewString.Append("mpaignResponse_UserLocationLat, \r\n            T.UserLocationLong AS AdCampaignRe");
+            viewString.Append("sponse_UserLocationLong, \r\n            T.UserLocationCity AS AdCampaignResponse_");
+            viewString.Append("UserLocationCity, \r\n            T.UserLocationCountry AS AdCampaignResponse_User");
+            viewString.Append("LocationCountry, \r\n            T.UserLocationAddress AS AdCampaignResponse_UserL");
+            viewString.Append("ocationAddress, \r\n            T.ResponseType AS AdCampaignResponse_ResponseType,");
+            viewString.Append(" \r\n            True AS _from0\r\n        FROM SMDModelStoreContainer.AdCampaignRes");
+            viewString.Append("ponse AS T\r\n    ) AS T1");
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.AdCampaignResponses", viewString.ToString());
         }
         

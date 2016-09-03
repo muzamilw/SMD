@@ -28,6 +28,8 @@ namespace SMD.Models.DomainModels
         public string UserLocationCountry { get; set; }
         public string UserLocationAddress { get; set; }
 
+        public Nullable<int> ResponseType { get; set; }
+
         public virtual AdCampaign AdCampaign { get; set; }
         public virtual User User { get; set; }
         public virtual Company Company { get; set; }

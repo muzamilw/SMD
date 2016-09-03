@@ -139,6 +139,7 @@
           <Property Name="UserLocationCity" Type="nvarchar" MaxLength="100" />
           <Property Name="UserLocationCountry" Type="nvarchar" MaxLength="100" />
           <Property Name="UserLocationAddress" Type="nvarchar" MaxLength="200" />
+          <Property Name="ResponseType" Type="int" />
         </EntityType>
         <EntityType Name="AdCampaignTargetCriteria">
           <Key>
@@ -640,6 +641,10 @@
           <Property Name="AgeRangeStart" Type="int" />
           <Property Name="AgeRangeEnd" Type="int" />
           <Property Name="Gender" Type="int" />
+          <Property Name="Approved" Type="bit" />
+          <Property Name="ApprovedByUserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="ApprovalDate" Type="datetime" />
+          <Property Name="RejectionReason" Type="nvarchar" MaxLength="1000" />
         </EntityType>
         <EntityType Name="ProfileQuestionAnswer">
           <Key>
@@ -838,8 +843,9 @@
           <Property Name="CurrencyID" Type="int" />
           <Property Name="CurrencyRateID" Type="int" />
           <Property Name="Sequence" Type="int" />
-          <Property Name="CouponCodeId" Type="bigint" />
+          <Property Name="CouponId" Type="bigint" />
           <Property Name="AccountBalance" Type="float" />
+          <Property Name="PQID" Type="int" />
         </EntityType>
         <EntityType Name="TransactionLog">
           <Key>
@@ -2958,11 +2964,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <EntitySet Name="EmailQueues" EntityType="DomainModels.EmailQueue" />
           <EntitySet Name="vw_PublisherTransaction" EntityType="DomainModels.vw_PublisherTransaction" />
           <EntitySet Name="vw_Cash4AdsReport" EntityType="DomainModels.vw_Cash4AdsReport" />
-          <FunctionImport Name="GetProducts" ReturnType="Collection(DomainModels.GetProducts_Result)">
-            <Parameter Name="UserID" Mode="In" Type="String" />
-            <Parameter Name="FromRow" Mode="In" Type="Int32" />
-            <Parameter Name="ToRow" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="GetCouponsByCompanyId" ReturnType="Collection(DomainModels.GetCouponsByCompanyId_Result)">
           <Parameter Name="CompanyId" Mode="In" Type="String" />
           </FunctionImport>
@@ -3150,6 +3151,11 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
             <End Role="ProfileQuestion" EntitySet="ProfileQuestions" />
             <End Role="InvoiceDetail" EntitySet="InvoiceDetails" />
           </AssociationSet>
+          <FunctionImport Name="GetProducts" ReturnType="Collection(DomainModels.GetProducts_Result)">
+            <Parameter Name="UserID" Mode="In" Type="String" />
+            <Parameter Name="FromRow" Mode="In" Type="Int32" />
+            <Parameter Name="ToRow" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="ProfileQuestion">
           <Key>
@@ -3187,6 +3193,10 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <NavigationProperty Name="ProfileQuestionTargetCriterias" Relationship="DomainModels.FK_ProfileQuestionTargetCriteria_ProfileQuestion" FromRole="ProfileQuestion" ToRole="ProfileQuestionTargetCriteria" />
           <NavigationProperty Name="ProfileQuestionTargetLocations" Relationship="DomainModels.FK_ProfileQuestionTargetLocation_ProfileQuestion" FromRole="ProfileQuestion" ToRole="ProfileQuestionTargetLocation" />
           <NavigationProperty Name="InvoiceDetails" Relationship="DomainModels.FK_InvoiceDetail_ProfileQuestion" FromRole="ProfileQuestion" ToRole="InvoiceDetail" />
+          <Property Name="Approved" Type="Boolean" />
+          <Property Name="ApprovedByUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ApprovalDate" Type="DateTime" Precision="3" />
+          <Property Name="RejectionReason" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="ProfileQuestionAnswer">
           <Key>
@@ -3531,8 +3541,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Property Name="Sequence" Type="Int32" />
           <NavigationProperty Name="TransactionLogs" Relationship="DomainModels.FK_TransactionLog_TransactionLog" FromRole="Transaction" ToRole="TransactionLog" />
           <NavigationProperty Name="Account" Relationship="DomainModels.FK_Transaction_Account" FromRole="Transaction" ToRole="Account" />
-          <Property Name="CouponCodeId" Type="Int64" />
           <Property Name="AccountBalance" Type="Double" />
+          <Property Name="CouponId" Type="Int64" />
+          <Property Name="PQID" Type="Int32" />
         </EntityType>
         <ComplexType Name="GetAds1_Result">
           <Property Type="Int64" Name="CampaignID" Nullable="false" />
@@ -4319,6 +4330,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Property Name="UserLocationCountry" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="UserLocationAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Company" Relationship="DomainModels.FK_AdCampaignResponse_Company" FromRole="AdCampaignResponse" ToRole="Company" />
+          <Property Name="ResponseType" Type="Int32" />
         </EntityType>
         <Association Name="FK_AdCampaignResponse_AdCampaignResponse">
           <End Type="DomainModels.AdCampaignResponse" Role="AdCampaignResponse" Multiplicity="1" />
@@ -4751,110 +4763,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Property Name="VoucherTitle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
         </EntityType>
-        <ComplexType Name="GetProducts_Result">
-          <Property Type="Int64" Name="ItemId" Nullable="true" />
-          <Property Type="String" Name="ItemName" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="Type" Nullable="false" MaxLength="8" />
-          <Property Type="String" Name="Description" Nullable="true" MaxLength="1502" />
-          <Property Type="Int32" Name="ItemType" Nullable="true" />
-          <Property Type="Double" Name="AdClickRate" Nullable="true" />
-          <Property Type="String" Name="AdImagePath" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="AdVideoLink" Nullable="true" MaxLength="1000" />
-          <Property Type="String" Name="AdAnswer1" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="AdAnswer2" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="AdAnswer3" Nullable="true" MaxLength="500" />
-          <Property Type="Int32" Name="AdCorrectAnswer" Nullable="true" />
-          <Property Type="String" Name="AdVerifyQuestion" Nullable="true" MaxLength="500" />
-          <Property Type="Int32" Name="AdRewardType" Nullable="true" />
-          <Property Type="String" Name="AdVoucher1Heading" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="AdVoucher1Description" Nullable="true" />
-          <Property Type="String" Name="AdVoucher1Value" Nullable="true" />
-          <Property Type="String" Name="SqLeftImagePath" Nullable="true" MaxLength="327" />
-          <Property Type="String" Name="SqRightImagePath" Nullable="true" MaxLength="327" />
-          <Property Type="String" Name="GameUrl" Nullable="true" MaxLength="200" />
-          <Property Type="Int32" Name="PqAnswer1Id" Nullable="true" />
-          <Property Type="String" Name="PqAnswer1" Nullable="true" MaxLength="100" />
-          <Property Type="Int32" Name="PqA1LinkedQ1" Nullable="true" />
-          <Property Type="Int32" Name="PqA1LinkedQ2" Nullable="true" />
-          <Property Type="Int32" Name="PQA1LinkedQ3" Nullable="true" />
-          <Property Type="Int32" Name="PQA1LinkedQ4" Nullable="true" />
-          <Property Type="Int32" Name="PQA1LinkedQ5" Nullable="true" />
-          <Property Type="Int32" Name="PQA1LinkedQ6" Nullable="true" />
-          <Property Type="Int32" Name="PqA1Type" Nullable="true" />
-          <Property Type="Int32" Name="PqA1SortOrder" Nullable="true" />
-          <Property Type="String" Name="PqA1ImagePath" Nullable="true" MaxLength="227" />
-          <Property Type="Int32" Name="PqAnswer2Id" Nullable="true" />
-          <Property Type="String" Name="PqAnswer2" Nullable="true" MaxLength="100" />
-          <Property Type="Int32" Name="PqA2LinkedQ1" Nullable="true" />
-          <Property Type="Int32" Name="PqA2LinkedQ2" Nullable="true" />
-          <Property Type="Int32" Name="PQA2LinkedQ3" Nullable="true" />
-          <Property Type="Int32" Name="PQA2LinkedQ4" Nullable="true" />
-          <Property Type="Int32" Name="PQA2LinkedQ5" Nullable="true" />
-          <Property Type="Int32" Name="PQA2LinkedQ6" Nullable="true" />
-          <Property Type="Int32" Name="PqA2Type" Nullable="true" />
-          <Property Type="Int32" Name="PqA2SortOrder" Nullable="true" />
-          <Property Type="String" Name="PqA2ImagePath" Nullable="true" MaxLength="227" />
-          <Property Type="Int32" Name="PqAnswer3Id" Nullable="true" />
-          <Property Type="String" Name="PqAnswer3" Nullable="true" MaxLength="100" />
-          <Property Type="Int32" Name="PqA3LinkedQ1" Nullable="true" />
-          <Property Type="Int32" Name="PqA3LinkedQ2" Nullable="true" />
-          <Property Type="Int32" Name="PQA3LinkedQ3" Nullable="true" />
-          <Property Type="Int32" Name="PQA3LinkedQ4" Nullable="true" />
-          <Property Type="Int32" Name="PQA3LinkedQ5" Nullable="true" />
-          <Property Type="Int32" Name="PQA3LinkedQ6" Nullable="true" />
-          <Property Type="Int32" Name="PqA3Type" Nullable="true" />
-          <Property Type="Int32" Name="PqA3SortOrder" Nullable="true" />
-          <Property Type="String" Name="PqA3ImagePath" Nullable="true" MaxLength="227" />
-          <Property Type="Int32" Name="PqAnswer4Id" Nullable="true" />
-          <Property Type="String" Name="PqAnswer4" Nullable="true" MaxLength="100" />
-          <Property Type="Int32" Name="PqA4LinkedQ1" Nullable="true" />
-          <Property Type="Int32" Name="PqA4LinkedQ2" Nullable="true" />
-          <Property Type="Int32" Name="PQA4LinkedQ3" Nullable="true" />
-          <Property Type="Int32" Name="PQA4LinkedQ4" Nullable="true" />
-          <Property Type="Int32" Name="PQA4LinkedQ5" Nullable="true" />
-          <Property Type="Int32" Name="PQA4LinkedQ6" Nullable="true" />
-          <Property Type="Int32" Name="PqA4Type" Nullable="true" />
-          <Property Type="Int32" Name="PqA4SortOrder" Nullable="true" />
-          <Property Type="String" Name="PqA4ImagePath" Nullable="true" MaxLength="227" />
-          <Property Type="Int32" Name="PqAnswer5Id" Nullable="true" />
-          <Property Type="String" Name="PqAnswer5" Nullable="true" MaxLength="100" />
-          <Property Type="Int32" Name="PqA5LinkedQ1" Nullable="true" />
-          <Property Type="Int32" Name="PqA5LinkedQ2" Nullable="true" />
-          <Property Type="Int32" Name="PQA5LinkedQ3" Nullable="true" />
-          <Property Type="Int32" Name="PQA5LinkedQ4" Nullable="true" />
-          <Property Type="Int32" Name="PQA5LinkedQ5" Nullable="true" />
-          <Property Type="Int32" Name="PQA5LinkedQ6" Nullable="true" />
-          <Property Type="Int32" Name="PqA5Type" Nullable="true" />
-          <Property Type="Int32" Name="PqA5SortOrder" Nullable="true" />
-          <Property Type="String" Name="PqA5ImagePath" Nullable="true" MaxLength="227" />
-          <Property Type="Int32" Name="PqAnswer6Id" Nullable="true" />
-          <Property Type="String" Name="PqAnswer6" Nullable="true" MaxLength="100" />
-          <Property Type="Int32" Name="PqA6LinkedQ1" Nullable="true" />
-          <Property Type="Int32" Name="PqA6LinkedQ2" Nullable="true" />
-          <Property Type="Int32" Name="PQA6LinkedQ3" Nullable="true" />
-          <Property Type="Int32" Name="PQA6LinkedQ4" Nullable="true" />
-          <Property Type="Int32" Name="PQA6LinkedQ5" Nullable="true" />
-          <Property Type="Int32" Name="PQA6LinkedQ6" Nullable="true" />
-          <Property Type="Int32" Name="PqA6Type" Nullable="true" />
-          <Property Type="Int32" Name="PqA6SortOrder" Nullable="true" />
-          <Property Type="String" Name="PqA6ImagePath" Nullable="true" MaxLength="227" />
-          <Property Type="Int64" Name="Weightage" Nullable="true" />
-          <Property Type="Double" Name="SqLeftImagePercentage" Nullable="true" />
-          <Property Type="Double" Name="SqRightImagePercentage" Nullable="true" />
-          <Property Type="String" Name="AdvertisersLogoPath" Nullable="true" MaxLength="227" />
-          <Property Type="String" Name="LandingPageUrl" Nullable="true" MaxLength="1000" />
-          <Property Type="String" Name="BuyItLine1" Nullable="true" />
-          <Property Type="String" Name="BuyItLine2" Nullable="true" />
-          <Property Type="String" Name="BuyItLine3" Nullable="true" />
-          <Property Type="String" Name="BuyItButtonText" Nullable="true" />
-          <Property Type="String" Name="BuyItImageUrl" Nullable="true" MaxLength="227" />
-          <Property Type="String" Name="VoucherImagePath" Nullable="true" MaxLength="227" />
-          <Property Type="String" Name="VideoLink2" Nullable="true" />
-          <Property Type="Boolean" Name="IsShowVoucherSetting" Nullable="true" />
-          <Property Type="Int32" Name="TotalItems" Nullable="true" />
-          <Property Type="Int32" Name="VoucherCount" Nullable="true" />
-          <Property Type="Int32" Name="CompanyId" Nullable="true" />
-        </ComplexType>
         <ComplexType Name="GetCouponsByCompanyId_Result">
           <Property Type="Int64" Name="CouponId" Nullable="false" />
           <Property Type="String" Name="CouponName" Nullable="true" MaxLength="200" />
@@ -5701,6 +5609,112 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="GetProducts_Result">
+          <Property Type="Int64" Name="ItemId" Nullable="false" />
+          <Property Type="String" Name="ItemName" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="Type" Nullable="false" MaxLength="8" />
+          <Property Type="String" Name="description" Nullable="true" MaxLength="1502" />
+          <Property Type="Int32" Name="ItemType" Nullable="true" />
+          <Property Type="Double" Name="AdClickRate" Nullable="true" />
+          <Property Type="String" Name="AdImagePath" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="AdVideoLink" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="AdAnswer1" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="AdAnswer2" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="AdAnswer3" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="AdCorrectAnswer" Nullable="true" />
+          <Property Type="String" Name="AdVerifyQuestion" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="AdRewardType" Nullable="true" />
+          <Property Type="String" Name="AdVoucher1Heading" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="AdVoucher1Description" Nullable="true" />
+          <Property Type="String" Name="AdVoucher1Value" Nullable="true" />
+          <Property Type="String" Name="SqLeftImagePath" Nullable="true" MaxLength="327" />
+          <Property Type="String" Name="SqRightImagePath" Nullable="true" MaxLength="327" />
+          <Property Type="Int32" Name="PqAnswer1Id" Nullable="true" />
+          <Property Type="String" Name="PqAnswer1" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="PqA1LinkedQ1" Nullable="true" />
+          <Property Type="Int32" Name="PqA1LinkedQ2" Nullable="true" />
+          <Property Type="Int32" Name="PQA1LinkedQ3" Nullable="true" />
+          <Property Type="Int32" Name="PQA1LinkedQ4" Nullable="true" />
+          <Property Type="Int32" Name="PQA1LinkedQ5" Nullable="true" />
+          <Property Type="Int32" Name="PQA1LinkedQ6" Nullable="true" />
+          <Property Type="Int32" Name="PqA1Type" Nullable="true" />
+          <Property Type="Int32" Name="PqA1SortOrder" Nullable="true" />
+          <Property Type="String" Name="PqA1ImagePath" Nullable="true" MaxLength="227" />
+          <Property Type="Int32" Name="PqAnswer2Id" Nullable="true" />
+          <Property Type="String" Name="PqAnswer2" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="PqA2LinkedQ1" Nullable="true" />
+          <Property Type="Int32" Name="PqA2LinkedQ2" Nullable="true" />
+          <Property Type="Int32" Name="PQA2LinkedQ3" Nullable="true" />
+          <Property Type="Int32" Name="PQA2LinkedQ4" Nullable="true" />
+          <Property Type="Int32" Name="PQA2LinkedQ5" Nullable="true" />
+          <Property Type="Int32" Name="PQA2LinkedQ6" Nullable="true" />
+          <Property Type="Int32" Name="PqA2Type" Nullable="true" />
+          <Property Type="Int32" Name="PqA2SortOrder" Nullable="true" />
+          <Property Type="String" Name="PqA2ImagePath" Nullable="true" MaxLength="227" />
+          <Property Type="Int32" Name="PqAnswer3Id" Nullable="true" />
+          <Property Type="String" Name="PqAnswer3" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="PqA3LinkedQ1" Nullable="true" />
+          <Property Type="Int32" Name="PqA3LinkedQ2" Nullable="true" />
+          <Property Type="Int32" Name="PQA3LinkedQ3" Nullable="true" />
+          <Property Type="Int32" Name="PQA3LinkedQ4" Nullable="true" />
+          <Property Type="Int32" Name="PQA3LinkedQ5" Nullable="true" />
+          <Property Type="Int32" Name="PQA3LinkedQ6" Nullable="true" />
+          <Property Type="Int32" Name="PqA3Type" Nullable="true" />
+          <Property Type="Int32" Name="PqA3SortOrder" Nullable="true" />
+          <Property Type="String" Name="PqA3ImagePath" Nullable="true" MaxLength="227" />
+          <Property Type="Int32" Name="PqAnswer4Id" Nullable="true" />
+          <Property Type="String" Name="PqAnswer4" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="PqA4LinkedQ1" Nullable="true" />
+          <Property Type="Int32" Name="PqA4LinkedQ2" Nullable="true" />
+          <Property Type="Int32" Name="PQA4LinkedQ3" Nullable="true" />
+          <Property Type="Int32" Name="PQA4LinkedQ4" Nullable="true" />
+          <Property Type="Int32" Name="PQA4LinkedQ5" Nullable="true" />
+          <Property Type="Int32" Name="PQA4LinkedQ6" Nullable="true" />
+          <Property Type="Int32" Name="PqA4Type" Nullable="true" />
+          <Property Type="Int32" Name="PqA4SortOrder" Nullable="true" />
+          <Property Type="String" Name="PqA4ImagePath" Nullable="true" MaxLength="227" />
+          <Property Type="Int32" Name="PqAnswer5Id" Nullable="true" />
+          <Property Type="String" Name="PqAnswer5" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="PqA5LinkedQ1" Nullable="true" />
+          <Property Type="Int32" Name="PqA5LinkedQ2" Nullable="true" />
+          <Property Type="Int32" Name="PQA5LinkedQ3" Nullable="true" />
+          <Property Type="Int32" Name="PQA5LinkedQ4" Nullable="true" />
+          <Property Type="Int32" Name="PQA5LinkedQ5" Nullable="true" />
+          <Property Type="Int32" Name="PQA5LinkedQ6" Nullable="true" />
+          <Property Type="Int32" Name="PqA5Type" Nullable="true" />
+          <Property Type="Int32" Name="PqA5SortOrder" Nullable="true" />
+          <Property Type="String" Name="PqA5ImagePath" Nullable="true" MaxLength="227" />
+          <Property Type="Int32" Name="PqAnswer6Id" Nullable="true" />
+          <Property Type="String" Name="PqAnswer6" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="PqA6LinkedQ1" Nullable="true" />
+          <Property Type="Int32" Name="PqA6LinkedQ2" Nullable="true" />
+          <Property Type="Int32" Name="PQA6LinkedQ3" Nullable="true" />
+          <Property Type="Int32" Name="PQA6LinkedQ4" Nullable="true" />
+          <Property Type="Int32" Name="PQA6LinkedQ5" Nullable="true" />
+          <Property Type="Int32" Name="PQA6LinkedQ6" Nullable="true" />
+          <Property Type="Int32" Name="PqA6Type" Nullable="true" />
+          <Property Type="Int32" Name="PqA6SortOrder" Nullable="true" />
+          <Property Type="String" Name="PqA6ImagePath" Nullable="true" MaxLength="227" />
+          <Property Type="Int64" Name="Weightage" Nullable="true" />
+          <Property Type="Double" Name="SqLeftImagePercentage" Nullable="true" />
+          <Property Type="Double" Name="SqRightImagePercentage" Nullable="true" />
+          <Property Type="String" Name="AdvertisersLogoPath" Nullable="true" MaxLength="227" />
+          <Property Type="String" Name="LandingPageUrl" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="BuyItLine1" Nullable="true" />
+          <Property Type="String" Name="BuyItLine2" Nullable="true" />
+          <Property Type="String" Name="BuyItLine3" Nullable="true" />
+          <Property Type="String" Name="BuyItButtonText" Nullable="true" />
+          <Property Type="String" Name="BuyItImageUrl" Nullable="true" MaxLength="227" />
+          <Property Type="String" Name="VoucherImagePath" Nullable="true" MaxLength="227" />
+          <Property Type="Int32" Name="VoucherCount" Nullable="true" />
+          <Property Type="Int32" Name="CompanyId" Nullable="true" />
+          <Property Type="String" Name="VideoLink2" Nullable="true" />
+          <Property Type="Boolean" Name="IsShowVoucherSetting" Nullable="true" />
+          <Property Type="Int64" Name="GameId" Nullable="true" />
+          <Property Type="String" Name="GameUrl" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="AdCount" Nullable="true" />
+          <Property Type="Int32" Name="TotalItems" Nullable="true" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5727,6 +5741,10 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <EntitySetMapping Name="ProfileQuestions">
             <EntityTypeMapping TypeName="DomainModels.ProfileQuestion">
               <MappingFragment StoreEntitySet="ProfileQuestion">
+                <ScalarProperty Name="RejectionReason" ColumnName="RejectionReason" />
+                <ScalarProperty Name="ApprovalDate" ColumnName="ApprovalDate" />
+                <ScalarProperty Name="ApprovedByUserID" ColumnName="ApprovedByUserID" />
+                <ScalarProperty Name="Approved" ColumnName="Approved" />
                 <ScalarProperty Name="Gender" ColumnName="Gender" />
                 <ScalarProperty Name="AgeRangeEnd" ColumnName="AgeRangeEnd" />
                 <ScalarProperty Name="AgeRangeStart" ColumnName="AgeRangeStart" />
@@ -5913,8 +5931,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <EntitySetMapping Name="Transactions">
             <EntityTypeMapping TypeName="DomainModels.Transaction">
               <MappingFragment StoreEntitySet="Transaction">
+                <ScalarProperty Name="PQID" ColumnName="PQID" />
+                <ScalarProperty Name="CouponId" ColumnName="CouponId" />
                 <ScalarProperty Name="AccountBalance" ColumnName="AccountBalance" />
-                <ScalarProperty Name="CouponCodeId" ColumnName="CouponCodeId" />
                 <ScalarProperty Name="Sequence" ColumnName="Sequence" />
                 <ScalarProperty Name="CurrencyRateId" ColumnName="CurrencyRateID" />
                 <ScalarProperty Name="CurrencyId" ColumnName="CurrencyID" />
@@ -6236,6 +6255,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <EntitySetMapping Name="AdCampaignResponses">
             <EntityTypeMapping TypeName="DomainModels.AdCampaignResponse">
               <MappingFragment StoreEntitySet="AdCampaignResponse">
+                <ScalarProperty Name="ResponseType" ColumnName="ResponseType" />
                 <ScalarProperty Name="UserLocationAddress" ColumnName="UserLocationAddress" />
                 <ScalarProperty Name="UserLocationCountry" ColumnName="UserLocationCountry" />
                 <ScalarProperty Name="UserLocationCity" ColumnName="UserLocationCity" />
@@ -6485,114 +6505,6 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="GetProducts" FunctionName="SMDModel.Store.GetProducts">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="DomainModels.GetProducts_Result">
-                <ScalarProperty Name="ItemId" ColumnName="ItemId" />
-                <ScalarProperty Name="ItemName" ColumnName="ItemName" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="Description" ColumnName="description" />
-                <ScalarProperty Name="ItemType" ColumnName="ItemType" />
-                <ScalarProperty Name="AdClickRate" ColumnName="AdClickRate" />
-                <ScalarProperty Name="AdImagePath" ColumnName="AdImagePath" />
-                <ScalarProperty Name="AdVideoLink" ColumnName="AdVideoLink" />
-                <ScalarProperty Name="AdAnswer1" ColumnName="AdAnswer1" />
-                <ScalarProperty Name="AdAnswer2" ColumnName="AdAnswer2" />
-                <ScalarProperty Name="AdAnswer3" ColumnName="AdAnswer3" />
-                <ScalarProperty Name="AdCorrectAnswer" ColumnName="AdCorrectAnswer" />
-                <ScalarProperty Name="AdVerifyQuestion" ColumnName="AdVerifyQuestion" />
-                <ScalarProperty Name="AdRewardType" ColumnName="AdRewardType" />
-                <ScalarProperty Name="AdVoucher1Heading" ColumnName="AdVoucher1Heading" />
-                <ScalarProperty Name="AdVoucher1Description" ColumnName="AdVoucher1Description" />
-                <ScalarProperty Name="AdVoucher1Value" ColumnName="AdVoucher1Value" />
-                <ScalarProperty Name="SqLeftImagePath" ColumnName="SqLeftImagePath" />
-                <ScalarProperty Name="SqRightImagePath" ColumnName="SqRightImagePath" />
-                <ScalarProperty Name="GameUrl" ColumnName="GameUrl" />
-                <ScalarProperty Name="PqAnswer1Id" ColumnName="PqAnswer1Id" />
-                <ScalarProperty Name="PqAnswer1" ColumnName="PqAnswer1" />
-                <ScalarProperty Name="PqA1LinkedQ1" ColumnName="PqA1LinkedQ1" />
-                <ScalarProperty Name="PqA1LinkedQ2" ColumnName="PqA1LinkedQ2" />
-                <ScalarProperty Name="PQA1LinkedQ3" ColumnName="PQA1LinkedQ3" />
-                <ScalarProperty Name="PQA1LinkedQ4" ColumnName="PQA1LinkedQ4" />
-                <ScalarProperty Name="PQA1LinkedQ5" ColumnName="PQA1LinkedQ5" />
-                <ScalarProperty Name="PQA1LinkedQ6" ColumnName="PQA1LinkedQ6" />
-                <ScalarProperty Name="PqA1Type" ColumnName="PqA1Type" />
-                <ScalarProperty Name="PqA1SortOrder" ColumnName="PqA1SortOrder" />
-                <ScalarProperty Name="PqA1ImagePath" ColumnName="PqA1ImagePath" />
-                <ScalarProperty Name="PqAnswer2Id" ColumnName="PqAnswer2Id" />
-                <ScalarProperty Name="PqAnswer2" ColumnName="PqAnswer2" />
-                <ScalarProperty Name="PqA2LinkedQ1" ColumnName="PqA2LinkedQ1" />
-                <ScalarProperty Name="PqA2LinkedQ2" ColumnName="PqA2LinkedQ2" />
-                <ScalarProperty Name="PQA2LinkedQ3" ColumnName="PQA2LinkedQ3" />
-                <ScalarProperty Name="PQA2LinkedQ4" ColumnName="PQA2LinkedQ4" />
-                <ScalarProperty Name="PQA2LinkedQ5" ColumnName="PQA2LinkedQ5" />
-                <ScalarProperty Name="PQA2LinkedQ6" ColumnName="PQA2LinkedQ6" />
-                <ScalarProperty Name="PqA2Type" ColumnName="PqA2Type" />
-                <ScalarProperty Name="PqA2SortOrder" ColumnName="PqA2SortOrder" />
-                <ScalarProperty Name="PqA2ImagePath" ColumnName="PqA2ImagePath" />
-                <ScalarProperty Name="PqAnswer3Id" ColumnName="PqAnswer3Id" />
-                <ScalarProperty Name="PqAnswer3" ColumnName="PqAnswer3" />
-                <ScalarProperty Name="PqA3LinkedQ1" ColumnName="PqA3LinkedQ1" />
-                <ScalarProperty Name="PqA3LinkedQ2" ColumnName="PqA3LinkedQ2" />
-                <ScalarProperty Name="PQA3LinkedQ3" ColumnName="PQA3LinkedQ3" />
-                <ScalarProperty Name="PQA3LinkedQ4" ColumnName="PQA3LinkedQ4" />
-                <ScalarProperty Name="PQA3LinkedQ5" ColumnName="PQA3LinkedQ5" />
-                <ScalarProperty Name="PQA3LinkedQ6" ColumnName="PQA3LinkedQ6" />
-                <ScalarProperty Name="PqA3Type" ColumnName="PqA3Type" />
-                <ScalarProperty Name="PqA3SortOrder" ColumnName="PqA3SortOrder" />
-                <ScalarProperty Name="PqA3ImagePath" ColumnName="PqA3ImagePath" />
-                <ScalarProperty Name="PqAnswer4Id" ColumnName="PqAnswer4Id" />
-                <ScalarProperty Name="PqAnswer4" ColumnName="PqAnswer4" />
-                <ScalarProperty Name="PqA4LinkedQ1" ColumnName="PqA4LinkedQ1" />
-                <ScalarProperty Name="PqA4LinkedQ2" ColumnName="PqA4LinkedQ2" />
-                <ScalarProperty Name="PQA4LinkedQ3" ColumnName="PQA4LinkedQ3" />
-                <ScalarProperty Name="PQA4LinkedQ4" ColumnName="PQA4LinkedQ4" />
-                <ScalarProperty Name="PQA4LinkedQ5" ColumnName="PQA4LinkedQ5" />
-                <ScalarProperty Name="PQA4LinkedQ6" ColumnName="PQA4LinkedQ6" />
-                <ScalarProperty Name="PqA4Type" ColumnName="PqA4Type" />
-                <ScalarProperty Name="PqA4SortOrder" ColumnName="PqA4SortOrder" />
-                <ScalarProperty Name="PqA4ImagePath" ColumnName="PqA4ImagePath" />
-                <ScalarProperty Name="PqAnswer5Id" ColumnName="PqAnswer5Id" />
-                <ScalarProperty Name="PqAnswer5" ColumnName="PqAnswer5" />
-                <ScalarProperty Name="PqA5LinkedQ1" ColumnName="PqA5LinkedQ1" />
-                <ScalarProperty Name="PqA5LinkedQ2" ColumnName="PqA5LinkedQ2" />
-                <ScalarProperty Name="PQA5LinkedQ3" ColumnName="PQA5LinkedQ3" />
-                <ScalarProperty Name="PQA5LinkedQ4" ColumnName="PQA5LinkedQ4" />
-                <ScalarProperty Name="PQA5LinkedQ5" ColumnName="PQA5LinkedQ5" />
-                <ScalarProperty Name="PQA5LinkedQ6" ColumnName="PQA5LinkedQ6" />
-                <ScalarProperty Name="PqA5Type" ColumnName="PqA5Type" />
-                <ScalarProperty Name="PqA5SortOrder" ColumnName="PqA5SortOrder" />
-                <ScalarProperty Name="PqA5ImagePath" ColumnName="PqA5ImagePath" />
-                <ScalarProperty Name="PqAnswer6Id" ColumnName="PqAnswer6Id" />
-                <ScalarProperty Name="PqAnswer6" ColumnName="PqAnswer6" />
-                <ScalarProperty Name="PqA6LinkedQ1" ColumnName="PqA6LinkedQ1" />
-                <ScalarProperty Name="PqA6LinkedQ2" ColumnName="PqA6LinkedQ2" />
-                <ScalarProperty Name="PQA6LinkedQ3" ColumnName="PQA6LinkedQ3" />
-                <ScalarProperty Name="PQA6LinkedQ4" ColumnName="PQA6LinkedQ4" />
-                <ScalarProperty Name="PQA6LinkedQ5" ColumnName="PQA6LinkedQ5" />
-                <ScalarProperty Name="PQA6LinkedQ6" ColumnName="PQA6LinkedQ6" />
-                <ScalarProperty Name="PqA6Type" ColumnName="PqA6Type" />
-                <ScalarProperty Name="PqA6SortOrder" ColumnName="PqA6SortOrder" />
-                <ScalarProperty Name="PqA6ImagePath" ColumnName="PqA6ImagePath" />
-                <ScalarProperty Name="Weightage" ColumnName="Weightage" />
-                <ScalarProperty Name="SqLeftImagePercentage" ColumnName="SqLeftImagePercentage" />
-                <ScalarProperty Name="SqRightImagePercentage" ColumnName="SqRightImagePercentage" />
-                <ScalarProperty Name="AdvertisersLogoPath" ColumnName="AdvertisersLogoPath" />
-                <ScalarProperty Name="LandingPageUrl" ColumnName="LandingPageUrl" />
-                <ScalarProperty Name="BuyItLine1" ColumnName="BuyItLine1" />
-                <ScalarProperty Name="BuyItLine2" ColumnName="BuyItLine2" />
-                <ScalarProperty Name="BuyItLine3" ColumnName="BuyItLine3" />
-                <ScalarProperty Name="BuyItButtonText" ColumnName="BuyItButtonText" />
-                <ScalarProperty Name="BuyItImageUrl" ColumnName="BuyItImageUrl" />
-                <ScalarProperty Name="VoucherImagePath" ColumnName="VoucherImagePath" />
-                <ScalarProperty Name="VideoLink2" ColumnName="VideoLink2" />
-                <ScalarProperty Name="IsShowVoucherSetting" ColumnName="IsShowVoucherSetting" />
-                <ScalarProperty Name="TotalItems" ColumnName="TotalItems" />
-                <ScalarProperty Name="VoucherCount" ColumnName="VoucherCount" />
-                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetCouponsByCompanyId" FunctionName="SMDModel.Store.GetCouponsByCompanyId">
             <ResultMapping>
               <ComplexTypeMapping TypeName="DomainModels.GetCouponsByCompanyId_Result">
@@ -6992,6 +6904,116 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetProducts" FunctionName="SMDModel.Store.GetProducts">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DomainModels.GetProducts_Result">
+                <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+                <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="ItemType" ColumnName="ItemType" />
+                <ScalarProperty Name="AdClickRate" ColumnName="AdClickRate" />
+                <ScalarProperty Name="AdImagePath" ColumnName="AdImagePath" />
+                <ScalarProperty Name="AdVideoLink" ColumnName="AdVideoLink" />
+                <ScalarProperty Name="AdAnswer1" ColumnName="AdAnswer1" />
+                <ScalarProperty Name="AdAnswer2" ColumnName="AdAnswer2" />
+                <ScalarProperty Name="AdAnswer3" ColumnName="AdAnswer3" />
+                <ScalarProperty Name="AdCorrectAnswer" ColumnName="AdCorrectAnswer" />
+                <ScalarProperty Name="AdVerifyQuestion" ColumnName="AdVerifyQuestion" />
+                <ScalarProperty Name="AdRewardType" ColumnName="AdRewardType" />
+                <ScalarProperty Name="AdVoucher1Heading" ColumnName="AdVoucher1Heading" />
+                <ScalarProperty Name="AdVoucher1Description" ColumnName="AdVoucher1Description" />
+                <ScalarProperty Name="AdVoucher1Value" ColumnName="AdVoucher1Value" />
+                <ScalarProperty Name="SqLeftImagePath" ColumnName="SqLeftImagePath" />
+                <ScalarProperty Name="SqRightImagePath" ColumnName="SqRightImagePath" />
+                <ScalarProperty Name="PqAnswer1Id" ColumnName="PqAnswer1Id" />
+                <ScalarProperty Name="PqAnswer1" ColumnName="PqAnswer1" />
+                <ScalarProperty Name="PqA1LinkedQ1" ColumnName="PqA1LinkedQ1" />
+                <ScalarProperty Name="PqA1LinkedQ2" ColumnName="PqA1LinkedQ2" />
+                <ScalarProperty Name="PQA1LinkedQ3" ColumnName="PQA1LinkedQ3" />
+                <ScalarProperty Name="PQA1LinkedQ4" ColumnName="PQA1LinkedQ4" />
+                <ScalarProperty Name="PQA1LinkedQ5" ColumnName="PQA1LinkedQ5" />
+                <ScalarProperty Name="PQA1LinkedQ6" ColumnName="PQA1LinkedQ6" />
+                <ScalarProperty Name="PqA1Type" ColumnName="PqA1Type" />
+                <ScalarProperty Name="PqA1SortOrder" ColumnName="PqA1SortOrder" />
+                <ScalarProperty Name="PqA1ImagePath" ColumnName="PqA1ImagePath" />
+                <ScalarProperty Name="PqAnswer2Id" ColumnName="PqAnswer2Id" />
+                <ScalarProperty Name="PqAnswer2" ColumnName="PqAnswer2" />
+                <ScalarProperty Name="PqA2LinkedQ1" ColumnName="PqA2LinkedQ1" />
+                <ScalarProperty Name="PqA2LinkedQ2" ColumnName="PqA2LinkedQ2" />
+                <ScalarProperty Name="PQA2LinkedQ3" ColumnName="PQA2LinkedQ3" />
+                <ScalarProperty Name="PQA2LinkedQ4" ColumnName="PQA2LinkedQ4" />
+                <ScalarProperty Name="PQA2LinkedQ5" ColumnName="PQA2LinkedQ5" />
+                <ScalarProperty Name="PQA2LinkedQ6" ColumnName="PQA2LinkedQ6" />
+                <ScalarProperty Name="PqA2Type" ColumnName="PqA2Type" />
+                <ScalarProperty Name="PqA2SortOrder" ColumnName="PqA2SortOrder" />
+                <ScalarProperty Name="PqA2ImagePath" ColumnName="PqA2ImagePath" />
+                <ScalarProperty Name="PqAnswer3Id" ColumnName="PqAnswer3Id" />
+                <ScalarProperty Name="PqAnswer3" ColumnName="PqAnswer3" />
+                <ScalarProperty Name="PqA3LinkedQ1" ColumnName="PqA3LinkedQ1" />
+                <ScalarProperty Name="PqA3LinkedQ2" ColumnName="PqA3LinkedQ2" />
+                <ScalarProperty Name="PQA3LinkedQ3" ColumnName="PQA3LinkedQ3" />
+                <ScalarProperty Name="PQA3LinkedQ4" ColumnName="PQA3LinkedQ4" />
+                <ScalarProperty Name="PQA3LinkedQ5" ColumnName="PQA3LinkedQ5" />
+                <ScalarProperty Name="PQA3LinkedQ6" ColumnName="PQA3LinkedQ6" />
+                <ScalarProperty Name="PqA3Type" ColumnName="PqA3Type" />
+                <ScalarProperty Name="PqA3SortOrder" ColumnName="PqA3SortOrder" />
+                <ScalarProperty Name="PqA3ImagePath" ColumnName="PqA3ImagePath" />
+                <ScalarProperty Name="PqAnswer4Id" ColumnName="PqAnswer4Id" />
+                <ScalarProperty Name="PqAnswer4" ColumnName="PqAnswer4" />
+                <ScalarProperty Name="PqA4LinkedQ1" ColumnName="PqA4LinkedQ1" />
+                <ScalarProperty Name="PqA4LinkedQ2" ColumnName="PqA4LinkedQ2" />
+                <ScalarProperty Name="PQA4LinkedQ3" ColumnName="PQA4LinkedQ3" />
+                <ScalarProperty Name="PQA4LinkedQ4" ColumnName="PQA4LinkedQ4" />
+                <ScalarProperty Name="PQA4LinkedQ5" ColumnName="PQA4LinkedQ5" />
+                <ScalarProperty Name="PQA4LinkedQ6" ColumnName="PQA4LinkedQ6" />
+                <ScalarProperty Name="PqA4Type" ColumnName="PqA4Type" />
+                <ScalarProperty Name="PqA4SortOrder" ColumnName="PqA4SortOrder" />
+                <ScalarProperty Name="PqA4ImagePath" ColumnName="PqA4ImagePath" />
+                <ScalarProperty Name="PqAnswer5Id" ColumnName="PqAnswer5Id" />
+                <ScalarProperty Name="PqAnswer5" ColumnName="PqAnswer5" />
+                <ScalarProperty Name="PqA5LinkedQ1" ColumnName="PqA5LinkedQ1" />
+                <ScalarProperty Name="PqA5LinkedQ2" ColumnName="PqA5LinkedQ2" />
+                <ScalarProperty Name="PQA5LinkedQ3" ColumnName="PQA5LinkedQ3" />
+                <ScalarProperty Name="PQA5LinkedQ4" ColumnName="PQA5LinkedQ4" />
+                <ScalarProperty Name="PQA5LinkedQ5" ColumnName="PQA5LinkedQ5" />
+                <ScalarProperty Name="PQA5LinkedQ6" ColumnName="PQA5LinkedQ6" />
+                <ScalarProperty Name="PqA5Type" ColumnName="PqA5Type" />
+                <ScalarProperty Name="PqA5SortOrder" ColumnName="PqA5SortOrder" />
+                <ScalarProperty Name="PqA5ImagePath" ColumnName="PqA5ImagePath" />
+                <ScalarProperty Name="PqAnswer6Id" ColumnName="PqAnswer6Id" />
+                <ScalarProperty Name="PqAnswer6" ColumnName="PqAnswer6" />
+                <ScalarProperty Name="PqA6LinkedQ1" ColumnName="PqA6LinkedQ1" />
+                <ScalarProperty Name="PqA6LinkedQ2" ColumnName="PqA6LinkedQ2" />
+                <ScalarProperty Name="PQA6LinkedQ3" ColumnName="PQA6LinkedQ3" />
+                <ScalarProperty Name="PQA6LinkedQ4" ColumnName="PQA6LinkedQ4" />
+                <ScalarProperty Name="PQA6LinkedQ5" ColumnName="PQA6LinkedQ5" />
+                <ScalarProperty Name="PQA6LinkedQ6" ColumnName="PQA6LinkedQ6" />
+                <ScalarProperty Name="PqA6Type" ColumnName="PqA6Type" />
+                <ScalarProperty Name="PqA6SortOrder" ColumnName="PqA6SortOrder" />
+                <ScalarProperty Name="PqA6ImagePath" ColumnName="PqA6ImagePath" />
+                <ScalarProperty Name="Weightage" ColumnName="Weightage" />
+                <ScalarProperty Name="SqLeftImagePercentage" ColumnName="SqLeftImagePercentage" />
+                <ScalarProperty Name="SqRightImagePercentage" ColumnName="SqRightImagePercentage" />
+                <ScalarProperty Name="AdvertisersLogoPath" ColumnName="AdvertisersLogoPath" />
+                <ScalarProperty Name="LandingPageUrl" ColumnName="LandingPageUrl" />
+                <ScalarProperty Name="BuyItLine1" ColumnName="BuyItLine1" />
+                <ScalarProperty Name="BuyItLine2" ColumnName="BuyItLine2" />
+                <ScalarProperty Name="BuyItLine3" ColumnName="BuyItLine3" />
+                <ScalarProperty Name="BuyItButtonText" ColumnName="BuyItButtonText" />
+                <ScalarProperty Name="BuyItImageUrl" ColumnName="BuyItImageUrl" />
+                <ScalarProperty Name="VoucherImagePath" ColumnName="VoucherImagePath" />
+                <ScalarProperty Name="VoucherCount" ColumnName="VoucherCount" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="VideoLink2" ColumnName="VideoLink2" />
+                <ScalarProperty Name="IsShowVoucherSetting" ColumnName="IsShowVoucherSetting" />
+                <ScalarProperty Name="GameId" ColumnName="GameId" />
+                <ScalarProperty Name="GameUrl" ColumnName="GameUrl" />
+                <ScalarProperty Name="AdCount" ColumnName="AdCount" />
+                <ScalarProperty Name="TotalItems" ColumnName="TotalItems" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

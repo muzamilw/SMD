@@ -66,6 +66,8 @@ namespace SMD.Repository
             unityContainer.RegisterType<IUserCouponViewRepository, UserCouponViewRepository>();
             unityContainer.RegisterType<IProfileQuestionTargetCriteriaRepository, ProfileQuestionTargetCriteriaRepository>();
             unityContainer.RegisterType<IProfileQuestionTargetLocationRepository, ProfileQuestionTargetLocationRepository>();
+
+            unityContainer.RegisterType<IGameRepository, GameRepository>();
         }
     }
 }

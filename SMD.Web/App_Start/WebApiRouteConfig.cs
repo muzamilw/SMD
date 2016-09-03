@@ -300,6 +300,14 @@ namespace SMD.MIS
             null,
             routeHandlers);
 
+
+           config.Routes.MapHttpRoute(
+      "GetRandomGame",
+      "GetRandomGame/{AuthenticationToken}/",
+      new { controller = "GetRandomGame" },
+      null,
+      routeHandlers);
+
            //config.Routes.MapHttpRoute(
            //"CouponApproval",
            //"CouponApproval/{AuthenticationToken}/",

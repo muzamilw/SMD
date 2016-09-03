@@ -45,5 +45,7 @@ namespace SMD.MIS.Areas.Api.Models
         //this contains the vouchers associated with the author of Ads.
         public int VouchersCount { get; set; }
         public int CompanyId { get; set; }
+
+        public long GameId { get; set; }
     }
 }

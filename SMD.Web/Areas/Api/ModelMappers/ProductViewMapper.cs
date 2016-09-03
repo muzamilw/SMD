@@ -20,7 +20,7 @@ namespace SMD.MIS.Areas.Api.ModelMappers
             return new ProductView
                    {
                        ItemId = source.ItemId,
-                       Description = !string.IsNullOrEmpty(source.Description) ? source.Description.Replace("\n", "\n").Replace("\\n", "\n") : source.Description,
+                       Description = !string.IsNullOrEmpty(source.description) ? source.description.Replace("\n", "\n").Replace("\\n", "\n") : source.description,
                        Type = source.Type,
                        ItemType = source.ItemType,
                        ItemName = source.ItemName,
@@ -54,7 +54,8 @@ namespace SMD.MIS.Areas.Api.ModelMappers
                        VideoLink2 = source.VideoLink2,
                        IsShowVoucherSetting = source.IsShowVoucherSetting ?? false,
                        VouchersCount = source.VoucherCount.HasValue == true? source.VoucherCount.Value:0,
-                       CompanyId = source.CompanyId.HasValue == true? source.CompanyId.Value:0
+                       CompanyId = source.CompanyId.HasValue == true? source.CompanyId.Value:0,
+                        GameId = source.GameId.HasValue == true ? source.GameId.Value:0
                        
                    };
         }

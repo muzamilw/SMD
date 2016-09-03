@@ -162,10 +162,26 @@
         /// </summary>
         ApproveSurvey = 2,
 
+        
+
         /// <summary>
         /// View Survey Report
         /// </summary>
-        ViewSurveyReport = 3
+        ViewSurveyReport = 3,
+
+        CouponPurchased = 4,
+
+        SurveyWatched = 5,
+
+        ProfileQuestionAnswered = 6,
+
+        ApproveProfileQuestion = 7,
+
+        ApproveCoupon = 8,
+
+        ApproveAd = 9
+
+
     }
     public enum SurveyQuestionTargetCriteriaType
     {

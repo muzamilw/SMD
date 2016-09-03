@@ -25,6 +25,9 @@ namespace DomainModelProject
         public Nullable<int> LanguageID { get; set; }
         public Nullable<int> IndustryID { get; set; }
         public Nullable<long> EducationID { get; set; }
+        public Nullable<long> AdCampaignID { get; set; }
+        public Nullable<int> AdCampaignAnswer { get; set; }
+        public Nullable<int> PQQuestionID { get; set; }
     
         public virtual Education Education { get; set; }
         public virtual Industry Industry { get; set; }
