@@ -24,7 +24,7 @@
                   return errors().length === 0;
               }),
               dirtyFlag = new ko.dirtyFlag({
-                  //rejectedReason: rejectedReason
+                  rejectedReason: rejectedReason
               }),
               // Has Changes
               hasChanges = ko.computed(function () {

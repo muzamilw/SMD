@@ -958,6 +958,26 @@ namespace SMD.Implementation.Services
                 throw new Exception("Email could not be sent!");
             }
         }
+
+        public void SendProfileQuestionRejectionEmailForApproval(string aspnetUserId, string RReason)
+        {
+            var oUser = manageUserRepository.GetByUserId(aspnetUserId);
+
+            if (oUser != null)
+            {
+                MMailto.Add(oUser.Email);
+                Mid = (int)EmailTypes.CampaignReject;
+                Muser = oUser.FullName;
+                RejectionReason = RReason;
+                CampaignLabel = "Profile Question";
+                SendEmailNotAysnc();
+            }
+            else
+            {
+                throw new Exception("Email could not be sent!");
+            }
+        }
+
         //public async Task SendEmailToInviteUser(string email, string UserId)
         //{
         //    var oUser = manageUserRepository.GetByUserId(UserId);

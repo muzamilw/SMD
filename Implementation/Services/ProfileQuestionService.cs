@@ -503,7 +503,7 @@ namespace SMD.Implementation.Services
                     dbCo.Status = (Int32)AdCampaignStatus.ApprovalRejected;
                     dbCo.Approved = false;
                     dbCo.RejectionReason = source.RejectionReason.ToString();
-                    _emailManagerService.SendCouponRejectionEmail(dbCo.UserID, dbCo.RejectionReason);
+                    _emailManagerService.SendProfileQuestionRejectionEmailForApproval(dbCo.UserID, dbCo.RejectionReason);
                 }
                 dbCo.ModifiedDate = DateTime.Now;
                 dbCo.ModifiedBy = _profileQuestionRepository.LoggedInUserIdentity;

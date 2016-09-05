@@ -72,5 +72,6 @@ namespace SMD.Interfaces.Services
 
         Task SendEmailInviteBusiness(string email, int companyId);
         Task SendEmailInviteAdvertiser(string email, int companyId);
+        void SendProfileQuestionRejectionEmailForApproval(string aspnetUserId, string RReason);
     }
 }
