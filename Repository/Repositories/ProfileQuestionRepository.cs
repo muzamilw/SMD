@@ -57,7 +57,11 @@ namespace SMD.Repository.Repositories
         /// </summary>
         public ProfileQuestion Find(int id)
         {
-            return DbSet.Find(id);
+           // ProfileQuestionTargetLocation
+
+            return DbSet.Include("ProfileQuestionTargetLocations.City").Include("ProfileQuestionTargetLocations.Country").Where(i => i.PqId == id).FirstOrDefault();
+            
+           // Query.ProfileQuestionTargetLocations.include<>
         }
 
         /// <summary>
@@ -101,8 +105,8 @@ namespace SMD.Repository.Repositories
 
 
             rowCount = DbSet.Count(query);
-            DbSet.Where(query).Include(a => a.ProfileQuestionTargetCriterias);
-            DbSet.Where(query).Include(a => a.ProfileQuestionTargetLocations);
+           // DbSet.Where(query).Include(a => a.ProfileQuestionTargetCriterias);
+             DbSet.Where(query).Include(a => a.ProfileQuestionTargetLocations).Include("City");
 
             return request.IsAsc
                 ? DbSet.Where(query)
@@ -236,7 +240,13 @@ namespace SMD.Repository.Repositories
                     .Take(toRow);
 
         }
-    
+
+        //public ProfileQuestion GetProfileQuestionByID(long PQID)
+        //{ 
+        
+        //   return DbSet.Where(i=>i.PqId==PQID).Include<q=>Queryable.>
+
+        //}
 
         #endregion
     }

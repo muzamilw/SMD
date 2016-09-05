@@ -10,6 +10,6 @@ namespace SMD.Interfaces
 {
     public interface IProfileQuestionTargetLocationRepository : IBaseRepository<ProfileQuestionTargetLocation, long>
     {
-       
+        //List<ProfileQuestionTargetLocation> GetPQlocation(long pqId);
     }
 }

@@ -14,5 +14,7 @@ namespace SMD.Interfaces.Repository
         IEnumerable<ProfileQuestionAnswer> GetProfileQuestionAnswerByQuestionId(long profileQuestionId);
 
         IEnumerable<ProfileQuestionAnswer> GetAllProfileQuestionAnswerByQuestionId(int profileQuestionId);
+
+        IEnumerable<ProfileQuestionAnswer> GetAllProfileQuestionAnswerOrderbySortOrder(long profileQuestionId);
     }
 }

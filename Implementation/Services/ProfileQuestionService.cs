@@ -16,6 +16,10 @@ using System.Linq;
 using System.Web;
 using SMD.Repository.Repositories;
 using SMD.Interfaces;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using SMD.Implementation.Identity;
+
 
 
 namespace SMD.Implementation.Services
@@ -35,16 +39,28 @@ namespace SMD.Implementation.Services
         private readonly IEducationRepository _educationRepository;
         private readonly IProfileQuestionTargetCriteriaRepository _profileQuestionTargetCriteriaRepository;
         private readonly IProfileQuestionTargetLocationRepository _profileQuestionTargetLocationRepository;
-     
+        private readonly IEmailManagerService _emailManagerService;
+        private readonly IStripeService _stripeService;
+        //private readonly WebApiUserService _webApiUserService;
+        private readonly IProductRepository _productRepository;
+        private readonly ITaxRepository _taxRepository;
+        private readonly IInvoiceRepository _invoiceRepository;
+        private readonly IInvoiceDetailRepository _invoiceDetailRepository;
+        private ApplicationUserManager UserManager
+        {
+            get { return HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
+        }
+
         #endregion
         #region Constructor
         /// <summary>
         /// Constructor 
         /// </summary>
 
-        public ProfileQuestionService(IProfileQuestionRepository profileQuestionRepository, ICountryRepository countryRepository, 
+        public ProfileQuestionService(IProfileQuestionRepository profileQuestionRepository, ICountryRepository countryRepository,
             ILanguageRepository languageRepository, IProfileQuestionGroupRepository profileQuestionGroupRepository,
-            IProfileQuestionAnswerRepository profileQuestionAnswerRepository, IIndustryRepository industoryRepository, IEducationRepository educationRepository, IProfileQuestionTargetCriteriaRepository profileQuestionTargetCriteriaRepository, IProfileQuestionTargetLocationRepository profileQuestionTargetLocationRepository)
+            IProfileQuestionAnswerRepository profileQuestionAnswerRepository, IIndustryRepository industoryRepository, IEducationRepository educationRepository, IProfileQuestionTargetCriteriaRepository profileQuestionTargetCriteriaRepository, IProfileQuestionTargetLocationRepository profileQuestionTargetLocationRepository
+            , IEmailManagerService emailManagerService, IStripeService stripeService, IProductRepository productRepository, ITaxRepository taxRepository, IInvoiceRepository invoiceRepository, IInvoiceDetailRepository invoiceDetailRepository)
         {
             _profileQuestionRepository = profileQuestionRepository;
             _countryRepository = countryRepository;
@@ -55,6 +71,13 @@ namespace SMD.Implementation.Services
             _educationRepository = educationRepository;
             _profileQuestionTargetCriteriaRepository = profileQuestionTargetCriteriaRepository;
             _profileQuestionTargetLocationRepository = profileQuestionTargetLocationRepository;
+            _emailManagerService = emailManagerService;
+            _stripeService = stripeService;
+            //_webApiUserService = webApiUserService;
+            _productRepository = productRepository;
+            _taxRepository = taxRepository;
+            _invoiceRepository = invoiceRepository;
+            _invoiceDetailRepository = invoiceDetailRepository;
         }
 
         #endregion
@@ -68,7 +91,7 @@ namespace SMD.Implementation.Services
             ProfileQuestion profileQuestion = _profileQuestionRepository.Find(pqId);
             if (profileQuestion == null)
             {
-                throw new SMDException(string.Format(CultureInfo.InvariantCulture, 
+                throw new SMDException(string.Format(CultureInfo.InvariantCulture,
                     LanguageResources.ProfileQuestionService_ProfileQuestionNotFound, pqId));
             }
 
@@ -92,7 +115,7 @@ namespace SMD.Implementation.Services
             int rowCount;
            // var obj = _profileQuestionRepository.SearchProfileQuestions(request, out rowCount);
             
-            
+
             //string code = Convert.ToString((int)ProductCode.);
             //var product = productRepository.GetAll().Where(g => g.ProductCode == code).FirstOrDefault();
             //var userBaseData = surveyQuestionRepository.getBaseData();
@@ -110,10 +133,10 @@ namespace SMD.Implementation.Services
                 Professions = _industoryRepository.GetAll(),
                 Education = _educationRepository.GetAll(),
                 Industry = _industoryRepository.GetAll(),
-                objBaseData=_profileQuestionRepository.getBaseData(),
+                objBaseData = _profileQuestionRepository.getBaseData(),
                 TotalCount = rowCount
             };
-            
+
         }
 
         /// <summary>
@@ -121,10 +144,10 @@ namespace SMD.Implementation.Services
         /// </summary>
         public bool DeleteProfileQuestion(ProfileQuestion profileQuestion)
         {
-            var dBprofileQuestion=_profileQuestionRepository.Find(profileQuestion.PqId);
+            var dBprofileQuestion = _profileQuestionRepository.Find(profileQuestion.PqId);
             if (dBprofileQuestion != null)
             {
-                dBprofileQuestion.Status = (Int32)ObjectStatus.Archived;     
+                dBprofileQuestion.Status = (Int32)ObjectStatus.Archived;
                 _profileQuestionRepository.SaveChanges();
                 return true;
             }
@@ -151,15 +174,20 @@ namespace SMD.Implementation.Services
         /// </summary>
         public ProfileQuestion SaveProfileQuestion(ProfileQuestion source)
         {
+            var user = UserManager.Users.Where(g => g.Id == _profileQuestionRepository.LoggedInUserIdentity).SingleOrDefault();
+            
+                
 
-            var serverObj=_profileQuestionRepository.Find(source.PqId);
+
+            var serverObj = _profileQuestionRepository.Find(source.PqId);
             //var user = UserManager.Users.Where(g => g.Id == _profileQuestionRepository.LoggedInUserIdentity).SingleOrDefault();
-          
+
             #region Edit Question
             // Edit Profile Question 
             if (serverObj != null)
             {
                 serverObj.Question = source.Question;
+
                 serverObj.Priority = source.Priority;
                 serverObj.HasLinkedQuestions = source.HasLinkedQuestions;
                 serverObj.LanguageId = source.LanguageId;
@@ -213,7 +241,7 @@ namespace SMD.Implementation.Services
                                 Type = answer.Type,
                                 AnswerString = answer.AnswerString,
                                 ImagePath = answer.ImagePath,
-                                Status = (int) ObjectStatus.Active,
+                                Status = (int)ObjectStatus.Active,
                                 LinkedQuestion1Id = answer.LinkedQuestion1Id,
                                 LinkedQuestion2Id = answer.LinkedQuestion2Id,
                                 LinkedQuestion3Id = answer.LinkedQuestion3Id,
@@ -234,25 +262,25 @@ namespace SMD.Implementation.Services
 
                     #endregion
                 }
-              
-                    #region Answer Deletion
+
+                #region Answer Deletion
 
                 if (source.ProfileQuestionAnswers == null)
                 {
-                    source.ProfileQuestionAnswers= new Collection<ProfileQuestionAnswer>();
+                    source.ProfileQuestionAnswers = new Collection<ProfileQuestionAnswer>();
                 }
-                    var serverListOfAns = _profileQuestionAnswerRepository.GetProfileQuestionAnswerByQuestionId(source.PqId);
-                    if (serverListOfAns != null)
+                var serverListOfAns = _profileQuestionAnswerRepository.GetProfileQuestionAnswerByQuestionId(source.PqId);
+                if (serverListOfAns != null)
+                {
+                    foreach (var serverAns in serverListOfAns)
                     {
-                        foreach (var serverAns in serverListOfAns)
+                        if (!source.ProfileQuestionAnswers.Any(ans => ans.PqAnswerId == serverAns.PqAnswerId))
                         {
-                            if (!source.ProfileQuestionAnswers.Any(ans => ans.PqAnswerId == serverAns.PqAnswerId))
-                            {
-                                serverAns.Status = (Int32)ObjectStatus.Archived;   
-                            }
+                            serverAns.Status = (Int32)ObjectStatus.Archived;
                         }
                     }
-                    #endregion
+                }
+                #endregion
             }
             #endregion
             #region Add Question
@@ -269,8 +297,9 @@ namespace SMD.Implementation.Services
                 else
                     compid = _profileQuestionRepository.CompanyId;
 
-                serverObj= new ProfileQuestion
+                serverObj = new ProfileQuestion
                 {
+                  
                     Question = source.Question,
                     Priority = source.Priority,
                     HasLinkedQuestions = source.HasLinkedQuestions,
@@ -284,17 +313,25 @@ namespace SMD.Implementation.Services
                     PenalityForNotAnswering = source.PenalityForNotAnswering,
                     Status = source.Status,
                     CompanyId = compid,
-                    AgeRangeStart=source.AgeRangeStart,
-                    AgeRangeEnd=source.AgeRangeEnd,
-                    Gender=source.Gender,
-                    SubmissionDateTime=source.SubmissionDateTime
-                //    CreatedBy = user.FullName
+                    AgeRangeStart = source.AgeRangeStart,
+                    AgeRangeEnd = source.AgeRangeEnd,
+                    Gender = source.Gender,
+                    SubmissionDateTime=source.SubmissionDateTime,
+                    CreatedBy=source.CreatedBy,
+                    UserID=source.UserID
+                    //    CreatedBy = user.FullName
                 };
-                 serverObj.CompanyId = compid;
-                 if (serverObj.Status == 2)
+                serverObj.CompanyId = compid;
+                if (serverObj.Status == 2)
+                {
+                    serverObj.SubmissionDateTime = DateTime.Now;
+                }
+                 if (user != null)
                  {
-                     serverObj.SubmissionDateTime = DateTime.Now;
+                     serverObj.CreatedBy = user.FullName;
+                     serverObj.UserID = user.Id;
                  }
+
                 _profileQuestionRepository.Add(serverObj);
                 _profileQuestionRepository.SaveChanges();
                 if (serverObj.ProfileQuestionAnswers == null)
@@ -316,15 +353,15 @@ namespace SMD.Implementation.Services
                             LinkedQuestion6Id = answer.LinkedQuestion6Id,
                             PqAnswerId = answer.PqAnswerId,
                             SortOrder = answer.SortOrder,
-                            Status = (int) ObjectStatus.Active
+                            Status = (int)ObjectStatus.Active
                         };
-                        if (serverAns.Type == 2)
-                        {
-                            serverAns.ImagePath = SaveAnswerImage(answer);
-                        }
-                        _profileQuestionAnswerRepository.Add(serverAns);
-                        _profileQuestionAnswerRepository.SaveChanges();
-                        serverObj.ProfileQuestionAnswers.Add(serverAns);
+                    if (serverAns.Type == 2)
+                    {
+                        serverAns.ImagePath = SaveAnswerImage(answer);
+                    }
+                    _profileQuestionAnswerRepository.Add(serverAns);
+                    _profileQuestionAnswerRepository.SaveChanges();
+                    serverObj.ProfileQuestionAnswers.Add(serverAns);
                 }
             }
             #endregion
@@ -332,8 +369,8 @@ namespace SMD.Implementation.Services
             {
                 if (loc.ID != 0)
                 {
-                     _profileQuestionTargetLocationRepository.Update(loc);
-                     _profileQuestionTargetLocationRepository.SaveChanges();
+                    _profileQuestionTargetLocationRepository.Update(loc);
+                    _profileQuestionTargetLocationRepository.SaveChanges();
                 }
                 else
                 {
@@ -358,11 +395,11 @@ namespace SMD.Implementation.Services
                     _profileQuestionTargetCriteriaRepository.SaveChanges();
                 }
             }
-           // _profileQuestionRepository.SaveChanges();
+            // _profileQuestionRepository.SaveChanges();
             return _profileQuestionRepository.Find(serverObj.PqId);
 
         }
-        
+
         /// <summary>
         /// Save Answer Image
         /// </summary>
@@ -371,7 +408,7 @@ namespace SMD.Implementation.Services
             string mpcContentPath = ConfigurationManager.AppSettings["SMD_Content"];
             HttpServerUtility server = HttpContext.Current.Server;
             string mapPath =
-                server.MapPath(mpcContentPath + "/ProfileQuestions/" + "PQId-"+source.PqId +
+                server.MapPath(mpcContentPath + "/ProfileQuestions/" + "PQId-" + source.PqId +
                                "/PQAId-" + source.PqAnswerId);
 
             if (!Directory.Exists(mapPath))
@@ -380,7 +417,7 @@ namespace SMD.Implementation.Services
             }
 
             mapPath = ImageHelper.Save(mapPath, string.Empty, string.Empty,
-                "AnswerImage_"+DateTime.Now.Second+".png", source.ImagePath, source.ImageUrlBytes);
+                "AnswerImage_" + DateTime.Now.Second + ".png", source.ImagePath, source.ImageUrlBytes);
 
             return mapPath;
         }
@@ -398,7 +435,7 @@ namespace SMD.Implementation.Services
             foreach (var pqGroup in allPqGroups)
             {
                 var unAnsweredQuestionsCount = _profileQuestionRepository.GetCountOfUnAnsweredQuestionsByGroupId(pqGroup.ProfileGroupId, request.UserId);
-               int totalQuestionsCount= _profileQuestionRepository.GetTotalCountOfGroupQuestion(pqGroup.ProfileGroupId);
+                int totalQuestionsCount = _profileQuestionRepository.GetTotalCountOfGroupQuestion(pqGroup.ProfileGroupId);
                 if (unAnsweredQuestionsCount > 0)
                 {
                     request.GroupId = pqGroup.ProfileGroupId;
@@ -429,6 +466,128 @@ namespace SMD.Implementation.Services
                 Coupons = _profileQuestionRepository.GetProfileQuestionsForApproval(request, out rowCount).ToList(),
                 TotalCount = rowCount
             };
+        }
+        //public List<ProfileQuestionTargetLocation> GetPQlocation(long pqId)
+        //{
+        //    return _profileQuestionTargetLocationRepository.GetPQlocation(pqId);
+
+        //}
+        public string UpdatePQForApproval(ProfileQuestion source)
+        {
+            string respMesg = "True";
+            var dbCo = _profileQuestionRepository.Find(source.PqId);
+            // Update 
+            if (dbCo != null)
+            {
+                // Approval
+                if (source.Approved == true)
+                {
+                    dbCo.Approved = true;
+                    dbCo.ApprovalDate = DateTime.Now;
+                    dbCo.ApprovedByUserID = _profileQuestionRepository.LoggedInUserIdentity;
+                    dbCo.Status = (Int32)AdCampaignStatus.Live;
+
+                    // Stripe payment + Invoice Generation
+                    // Muzi bhai said we will see it on latter stage 
+
+                    //todo pilot: unCommenting Stripe payment code on Ads approval
+                    respMesg = MakeStripePaymentandAddInvoiceForPQ(dbCo);
+                    if (respMesg.Contains("Failed"))
+                    {
+                        return respMesg;
+                    }
+                }
+                // Rejection 
+                else
+                {
+                    dbCo.Status = (Int32)AdCampaignStatus.ApprovalRejected;
+                    dbCo.Approved = false;
+                    dbCo.RejectionReason = source.RejectionReason.ToString();
+                    _emailManagerService.SendProfileQuestionRejectionEmailForApproval(dbCo.UserID, dbCo.RejectionReason);
+                }
+                dbCo.ModifiedDate = DateTime.Now;
+                dbCo.ModifiedBy = _profileQuestionRepository.LoggedInUserIdentity;
+
+                _profileQuestionRepository.SaveChanges();
+
+            }
+            return respMesg;
+        }
+        private string MakeStripePaymentandAddInvoiceForPQ(ProfileQuestion source)
+        {
+            #region Stripe Payment
+            string response = null;
+            Boolean isSystemUser = false;
+            double amount = 0;
+            // User who added Campaign for approval 
+            var user = UserManager.FindById(source.UserID);
+            // Get Current Product
+            var product = (dynamic)null;
+            product = _productRepository.GetProductByCountryId("PQID");
+          
+            // Tax Applied
+            var tax = _taxRepository.GetTaxByCountryId(user.Company.CountryId);
+            // Total includes tax
+            if (product != null)
+            {
+                amount = product.SetupPrice ?? 0 + tax.TaxValue ?? 0;
+
+
+                // If It is not System User then make transation 
+                //if (user.Roles.Any(role => role.Name.ToLower().Equals("user")))
+                //{
+                // Make Stripe actual payment 
+                response = _stripeService.ChargeCustomer((int?)amount, user.Company.StripeCustomerId);
+                isSystemUser = false;
+
+            }
+
+            #endregion
+
+            if (response != null && !response.Contains("Failed"))
+            {
+                if (isSystemUser)
+                {
+                    #region Add Invoice
+
+                    // Add invoice data
+                    var invoice = new Invoice
+                    {
+                        Country = user.Company.CountryId.ToString(),
+                        Total = (double)amount,
+                        NetTotal = (double)amount,
+                        InvoiceDate = DateTime.Now,
+                        InvoiceDueDate = DateTime.Now.AddDays(7),
+                        Address1 = user.Company.CountryId.ToString(),
+                        CompanyId = user.Company.CompanyId,
+                        CompanyName = "My Company",
+                        CreditCardRef = response
+                    };
+                    _invoiceRepository.Add(invoice);
+
+                    #endregion
+                    #region Add Invoice Detail
+
+                    // Add Invoice Detail Data 
+                    var invoiceDetail = new InvoiceDetail
+                    {
+                        InvoiceId = invoice.InvoiceId,
+                        ProductId = product.ProductId,
+                        ItemName = "Profile Question",
+                        ItemAmount = (double)amount,
+                        ItemTax = (double)tax.TaxValue,
+                        ItemDescription = "This is description!",
+                        ItemGrossAmount = (double)amount,
+                        PQID   = source.PqId,
+
+                    };
+                    _invoiceDetailRepository.Add(invoiceDetail);
+                    _invoiceDetailRepository.SaveChanges();
+
+                    #endregion
+                }
+            }
+            return response;
         }
         #endregion
     }

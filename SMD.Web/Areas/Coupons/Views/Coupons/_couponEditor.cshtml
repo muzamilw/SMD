@@ -155,7 +155,9 @@
                                                 <label class="control-label text-right tooltip-float">Coupon expiry date</label>
                                             </div>
                                             <div class="col-lg-6">
-                                                <input type="text" readonly class="form-control" data-bind="value:expireDate">
+                                                @*<input type="text" readonly class="form-control" data-bind="value:expireDate">*@
+                                                <label class="form-control" data-bind="dateString:expireDate,datePattern: 'DD/MM/YYYY'">
+                                                </label>
                                             </div>
                                         </div>
                                     </div>

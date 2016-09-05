@@ -57,6 +57,10 @@ namespace SMD.Repository.Repositories
         {
             return DbSet.Where(ans => ans.PqId == profileQuestionId && ans.Status != 0).OrderByDescending(g=>g.SortOrder.HasValue ).ThenBy(g=>g.SortOrder).ToList();
         }
+        public IEnumerable<ProfileQuestionAnswer> GetAllProfileQuestionAnswerOrderbySortOrder(long profileQuestionId)
+        {
+            return DbSet.Where(ans => ans.PqId == profileQuestionId && ans.Status != 0).OrderBy(g => g.SortOrder).ToList();
+        }
         #endregion
     }
 }

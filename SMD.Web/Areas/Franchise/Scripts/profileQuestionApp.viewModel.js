@@ -20,6 +20,22 @@ define("FranchiseDashboard/profileQuestionApp.viewModel",
                    // isShowCopounMode = ko.observable(false),
                     selectedProfileQuestion = ko.observable(),
                     onEditPQ = function (item) {
+                        dataservice.getPqAnswer(
+                        {
+                            ProfileQuestionId: item.id
+                        },
+                            {
+                                success: function (answers) {
+                                    selectedProfileQuestion().pqAnswers.removeAll();
+                                    _.each(answers, function (item) {
+                                        selectedProfileQuestion().pqAnswers.push(item);
+                                    });
+                                   // var pqAnswers = answers;
+                                },
+                                error: function () {
+                                    toastr.error("Failed to load profile question!");
+                                }
+                            });
                         selectedProfileQuestion(item);
                         isEditorVisible(true);
                     },
@@ -52,66 +68,66 @@ define("FranchiseDashboard/profileQuestionApp.viewModel",
                                 }
                             });
                     },
-                   // onApproveCoupon = function () {
-                   //    confirmation.messageText("Do you want to approve this Coupon ? System will attempt to collect payment and generate invoice");
-                   //    confirmation.show();
-                   //    confirmation.afterCancel(function () {
-                   //        confirmation.hide();
-                   //    });
-                   //    confirmation.afterProceed(function () {
-                   //        selectedCoupon().isApproved(true);
-                   //        onSaveCoupon();
-                   //        toastr.success("Approved Successfully.");
-                   //    });
-                   //},
-                   // onSaveCoupon = function () {
+                    onApprovePq = function () {
+                       confirmation.messageText("Do you want to approve this Coupon ? System will attempt to collect payment and generate invoice");
+                       confirmation.show();
+                       confirmation.afterCancel(function () {
+                           confirmation.hide();
+                       });
+                       confirmation.afterProceed(function () {
+                       selectedProfileQuestion().isApproved(true);
+                       onSavePQ();
+                           toastr.success("Approved Successfully.");
+                       });
+                   },
+                    onSavePQ = function () {
 
-                   //       var couponId = selectedCoupon().couponId();
-                   //       dataservice.saveCoupon(selectedCoupon().convertToServerData(), {
-                   //           success: function (response) {
+                        var pQId = selectedProfileQuestion().id();
+                        dataservice.savePq(selectedProfileQuestion().convertToServerData(), {
+                              success: function (response) {
 
-                   //               if (response.indexOf("Failed") == -1) {
-                   //                   dataservice.sendApprovalRejectionEmail(selectedCoupon().convertToServerData(), {
-                   //                       success: function (obj) {
-                   //                           getCoupons();
-                   //                           //var existingCampaigntodelete = $.grep(campaigns(), function (n, i) {
-                   //                           //    return (n.id() == campId);
-                   //                           //});
+                                  if (response.indexOf("Failed") == -1) {
+                                      dataservice.sendApprovalRejectionEmail(selectedProfileQuestion().convertToServerData(), {
+                                          success: function (obj) {
+                                              getProfileQuestions();
+                                              //var existingCampaigntodelete = $.grep(campaigns(), function (n, i) {
+                                              //    return (n.id() == campId);
+                                              //});
 
-                   //                           //campaigns.remove(existingCampaigntodelete);
+                                              //campaigns.remove(existingCampaigntodelete);
 
-                   //                           isEditorVisible(false);
-                   //                       },
-                   //                       error: function () {
-                   //                           toastr.error("Failed to save!");
-                   //                       }
-                   //                   });
-                   //               }
-                   //               else {
+                                              isEditorVisible(false);
+                                          },
+                                          error: function () {
+                                              toastr.error("Failed to save!");
+                                          }
+                                      });
+                                  }
+                                  else {
 
-                   //                   toastr.error(response);
-                   //               }
-                   //           },
-                   //           error: function () {
-                   //               toastr.error("Failed to save!");
-                   //           }
-                   //       });
-                   //   },
-                   // hasChangesOnCoupon = ko.computed(function () {
-                   //        if (selectedCoupon() == undefined) {
-                   //            return false;
-                   //        }
-                   //        return (selectedCoupon().hasChanges());
-                   //    }),
-                   // onRejectCoupon = function () {
-                   //       if (selectedCoupon().rejectedReason() == undefined || selectedCoupon().rejectedReason() == "" || selectedCoupon().rejectedReason() == " ") {
-                   //           toastr.info("Please add rejection reason!");
-                   //           return false;
-                   //       }
-                   //       selectedCoupon().isApproved(false);
-                   //       onSaveCoupon();
-                   //       toastr.success("Rejected Successfully.");
-                   //   },
+                                      toastr.error(response);
+                                  }
+                              },
+                              error: function () {
+                                  toastr.error("Failed to save!");
+                              }
+                          });
+                      },
+                    hasChangesOnPQ = ko.computed(function () {
+                        if (selectedProfileQuestion() == undefined) {
+                               return false;
+                           }
+                        return (selectedProfileQuestion().hasChanges());
+                       }),
+                    onRejectPQ = function () {
+                        if (selectedProfileQuestion().rejectedReason() == undefined || selectedProfileQuestion().rejectedReason() == "" || selectedProfileQuestion().rejectedReason() == " ") {
+                              toastr.info("Please add rejection reason!");
+                              return false;
+                          }
+                        selectedProfileQuestion().isApproved(false);
+                          onSavePQ();
+                          toastr.success("Rejected Successfully.");
+                      },
 
                     // Initialize the view model
                     initialize = function (specifiedView) {
@@ -138,10 +154,10 @@ define("FranchiseDashboard/profileQuestionApp.viewModel",
                     onEditPQ: onEditPQ,
                     selectedProfileQuestion: selectedProfileQuestion,
                     closeEditDialog: closeEditDialog,
-                    //onApproveCoupon: onApproveCoupon,
-                    //onSaveCoupon: onSaveCoupon,
-                    //onRejectCoupon: onRejectCoupon,
-                    //hasChangesOnCoupon: hasChangesOnCoupon,
+                    onApprovePq: onApprovePq,
+                    onSavePQ: onSavePQ,
+                    onRejectPQ: onRejectPQ,
+                    hasChangesOnPQ: hasChangesOnPQ,
 
                 };
             })()

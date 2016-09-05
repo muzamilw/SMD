@@ -24,6 +24,13 @@ namespace SMD.MIS.Areas.Api.Models
         public int? PenalityForNotAnswering { get; set; }
         public int? Status { get; set; }
 
+        public bool? Approved { get; set; }
+        public string ApprovedByUserID { get; set; }
+        public DateTime? ApprovalDate { get; set; }
+
+        public string RejectionReason { get; set; }
+        public string UserID { get; set; }
+
         public Nullable<int> CompanyId { get; set; }
         public Nullable<int> AnswerNeeded { get; set; }
         public Nullable<int> AsnswerCount { get; set; }

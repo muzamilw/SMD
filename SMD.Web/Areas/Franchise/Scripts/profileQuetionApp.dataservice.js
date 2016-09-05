@@ -20,8 +20,8 @@ define("FranchiseDashboard/profileQuetionApp.dataservice", function () {
 
 
                     // Edit AdCampaign
-                    amplify.request.define('saveCoupon', 'ajax', {
-                        url: '/Api/CouponApproval',
+                    amplify.request.define('savePq', 'ajax', {
+                        url: '/Api/ApproveProfileQuestion',
                         dataType: 'json',
                         type: 'POST'
                     });
@@ -31,6 +31,12 @@ define("FranchiseDashboard/profileQuetionApp.dataservice", function () {
                         url: '/Api/BuyIt',
                         dataType: 'json',
                         type: 'POST'
+                    });
+                    //Get Profile Question Answer 
+                    amplify.request.define('getPqAnswer', 'ajax', {
+                        url: '/Api/ApproveProfileQuestionAns',
+                        dataType: 'json',
+                        type: 'GET'
                     });
                     isInitialized = true;
                 }
@@ -47,6 +53,7 @@ define("FranchiseDashboard/profileQuetionApp.dataservice", function () {
             },
 
 
+
              // Search Ad Campaigns
             sendApprovalRejectionEmail = function (params, callbacks) {
                 initialize();
@@ -58,20 +65,31 @@ define("FranchiseDashboard/profileQuetionApp.dataservice", function () {
                 });
             },
             // Save Ad Campaign edit
-            saveCoupon = function (params, callbacks) {
+            savePq = function (params, callbacks) {
                 initialize();
                 return amplify.request({
-                    resourceId: 'saveCoupon',
+                    resourceId: 'savePq',
                     success: callbacks.success,
                     error: callbacks.error,
                     data: params
                 });
-            };
+            },
+        // Get Profile Questions Answer On edit 
+        getPqAnswer = function (params, callbacks) {
+            initialize();
+            return amplify.request({
+                resourceId: 'getPqAnswer',
+                success: callbacks.success,
+                error: callbacks.error,
+                data: params
+            });
+        };
 
         return {
-            saveCoupon: saveCoupon,
+            savePq: savePq,
             getPQForApproval: getPQForApproval,
-            sendApprovalRejectionEmail: sendApprovalRejectionEmail
+            sendApprovalRejectionEmail: sendApprovalRejectionEmail,
+            getPqAnswer: getPqAnswer
         };
     })();
     return dataService;

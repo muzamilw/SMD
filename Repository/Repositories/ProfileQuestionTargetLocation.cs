@@ -26,5 +26,11 @@ namespace SMD.Repository.Repositories
         {
             get { return db.ProfileQuestionTargetLocation; }
         }
+        //public List<ProfileQuestionTargetLocation> GetPQlocation(long pqId)
+        //{
+        //    db.Configuration.LazyLoadingEnabled = false;
+        //    return DbSet.Include(co => co.Country).Include(d => d.City).Where(pq => pq.PQID == pqId).ToList();
+        //}
+
     }
 }
