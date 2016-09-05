@@ -44,7 +44,7 @@ namespace SMD.MIS.ReportViewers
         }
         static List<vw_PublisherTransaction> getRecords(long companyId)
         {
-            return PayOutScheduler.GetPublisherTransactions().Where(g => g.ownerCompanyId == companyId ).ToList();
+            return TransactionManager.GetPublisherTransactions().Where(g => g.ownerCompanyId == companyId ).ToList();
         }
         static DataTable ConvertListToDataTable(List<vw_PublisherTransaction> list)
         {

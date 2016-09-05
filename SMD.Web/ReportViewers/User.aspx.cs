@@ -61,7 +61,7 @@ namespace SMD.MIS.test
         }
         static List<vw_GetUserTransactions> getRecords(string userId, DateTime startDate, DateTime endDate)
         {
-            return PayOutScheduler.GetUserTransactions().Where(g => g.userId == userId && g.TDate >= startDate && g.TDate <= endDate).ToList();
+            return TransactionManager.GetUserTransactions().Where(g => g.userId == userId && g.TDate >= startDate && g.TDate <= endDate).ToList();
         }
         static DataTable ConvertListToDataTable(List<vw_GetUserTransactions> list)
         {

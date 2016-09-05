@@ -503,7 +503,7 @@ namespace SMD.Implementation.Services
               //{
 
                   //Update Accounts
-                  PayOutScheduler.UpdateCouponAccounts(CouponId, PurchaseAmount, userVirtualAccount.CompanyId.Value);
+                  TransactionManager.CouponPurchaseTransaction(CouponId, PurchaseAmount, userVirtualAccount.CompanyId.Value);
 
 
                   //enter the entry for purchased coupon,
@@ -658,10 +658,19 @@ namespace SMD.Implementation.Services
                     // Muzi bhai said we will see it on latter stage 
 
                     //todo pilot: unCommenting Stripe payment code on Ads approval
+
+                    
+
                     respMesg = MakeStripePaymentandAddInvoiceForCoupon(dbCo);
+
+                   
                     if (respMesg.Contains("Failed"))
                     {
                         return respMesg;
+                    }
+                    else
+                    {
+                        TransactionManager.CouponApprovalTransaction(dbCo.CouponId, 30, dbCo.CompanyId.Value);
                     }
                 }
                 // Rejection 

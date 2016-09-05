@@ -19,7 +19,7 @@ namespace SMD.Implementation.Services
     /// <summary>
     /// Credit Scheduler 
     /// </summary>
-    public class PayOutScheduler
+    public class TransactionManager
     {
         #region Private
 
@@ -57,7 +57,7 @@ namespace SMD.Implementation.Services
         //}
 
 
-          public static bool UpdateCouponAccounts(long couponId, double SwapCost, int CompanyId)
+          public static bool CouponPurchaseTransaction(long couponId, double SwapCost, int CompanyId)
           {
 
               using (var dbContext = new BaseDbContext())
@@ -74,9 +74,9 @@ namespace SMD.Implementation.Services
                   // send user voucher email 
 
                   // update users  virutal accont debit 
-                  updateUsersVirtualAccount(userCompany, SwapCost, dbContext, TransactionType.CouponPurchased, false, couponId,null );
+                  updateVirtualAccount(userCompany, SwapCost, dbContext, TransactionType.CouponPurchased, false, couponId,null );
                   // update smd users  virutal accont credit 
-                  updateUsersVirtualAccount(smdCompany, SwapCost, dbContext, TransactionType.CouponPurchased, true, couponId,null );
+                  updateVirtualAccount(smdCompany, SwapCost, dbContext, TransactionType.CouponPurchased, true, couponId,null );
                   // update smd users  virutal accont credit 
                   //updateUsersVirtualAccount(coupon.Company, SwapCost, dbContext, 2, true, null, couponId);
 
@@ -85,6 +85,36 @@ namespace SMD.Implementation.Services
               }
             
           }
+
+
+          public static bool CouponApprovalTransaction(long couponId, double Payment, int CompanyId)
+          {
+
+              using (var dbContext = new BaseDbContext())
+              {
+
+                  var userCompany = dbContext.Companies.Where(g => g.CompanyId == CompanyId).SingleOrDefault();
+
+                  var smdCompany = GetCash4AdsUser(dbContext).Company;
+
+
+                 //get money from stripe
+
+                  // update users  virutal accont debit 
+                  updateVirtualAccount(userCompany, Payment, dbContext, TransactionType.CouponPurchased, false, couponId, null);
+                  // update smd users  virutal accont credit 
+                  updateVirtualAccount(smdCompany, Payment, dbContext, TransactionType.CouponPurchased, true, couponId, null);
+                  // update smd users  virutal accont credit 
+                  //updateUsersVirtualAccount(coupon.Company, SwapCost, dbContext, 2, true, null, couponId);
+
+                  dbContext.SaveChanges();
+                  return true;
+              }
+
+          }
+
+
+
         // used by new payout scheduler 
         private static void UpdateAccountsUserPayout(Company Usercompany, Company smdCompany, double amount,
            BaseDbContext dbContext)
@@ -96,9 +126,9 @@ namespace SMD.Implementation.Services
             UpdateUsersPaypalAccountNew(smdCompany, amount, dbContext, false);
 
             // update users  virutal accont debit 
-            updateUsersVirtualAccount(Usercompany, amount, dbContext,  TransactionType.UserCashOut, false);
+            updateVirtualAccount(Usercompany, amount, dbContext,  TransactionType.UserCashOut, false);
             // update smd users  virutal accont debit 
-            updateUsersVirtualAccount(smdCompany, amount, dbContext, TransactionType.UserCashOut);
+            updateVirtualAccount(smdCompany, amount, dbContext, TransactionType.UserCashOut);
 
         }
         private static void UpdateUsersPaypalAccountNew(Company company, double amount,  BaseDbContext dbContext, bool isCredit = true)
@@ -154,7 +184,7 @@ namespace SMD.Implementation.Services
             usersPaypalAccount.Transactions.Add(batchTransaction);
             dbContext.Transactions.Add(batchTransaction);
         }
-        private static void updateUsersVirtualAccount(Company company, double amount, BaseDbContext dbContext, TransactionType type, bool isCredit = true, long? CouponId = null, long? CampaignId = null)
+        private static void updateVirtualAccount(Company company, double amount, BaseDbContext dbContext, TransactionType type, bool isCredit = true, long? CouponId = null, long? CampaignId = null)
         {
             Account userVirtualAccount = company.Accounts.FirstOrDefault(acc => acc.AccountType == (int)AccountType.VirtualAccount);
             if (userVirtualAccount == null)
@@ -191,7 +221,7 @@ namespace SMD.Implementation.Services
                 batchTransaction.CreditAmount = amount;
                 //usersPaypalAccount.AccountBalance += amount;
                 //userVirtualAccount.AccountBalance -= amount;
-                if (type ==  TransactionType.AdClick || type == TransactionType.SurveyWatched || type == TransactionType.ProfileQuestionAnswered )
+                //if (type ==  TransactionType.AdClick || type == TransactionType.SurveyWatched || type == TransactionType.ProfileQuestionAnswered )
                     userVirtualAccount.AccountBalance += amount;
 
                 batchTransaction.AccountBalance = userVirtualAccount.AccountBalance;
@@ -211,6 +241,69 @@ namespace SMD.Implementation.Services
             userVirtualAccount.Transactions.Add(batchTransaction);
             dbContext.Transactions.Add(batchTransaction);
         }
+
+
+
+        private static void updateStripeAccount(Company company, double amount, BaseDbContext dbContext, TransactionType type, bool isCredit = true, long? CouponId = null, long? CampaignId = null, long? SurveyId = null, int? ProfileQuestionID = null)
+        {
+            Account stripeAccount = company.Accounts.FirstOrDefault(acc => acc.AccountType == (int)AccountType.Stripe);
+            if (stripeAccount == null)
+            {
+                throw new Exception(string.Format(CultureInfo.InvariantCulture,
+                    LanguageResources.CollectionService_AccountNotRegistered,
+                    company.CompanyId, "Stripe"));
+            }
+            var batchTransaction = new Transaction
+            {
+                AccountId = stripeAccount.AccountId,
+                Type = (int)type,
+                // AdCampaignId = adCampaignId,
+                isProcessed = true,
+                TransactionDate = DateTime.Now,
+                CouponId = CouponId,
+                AdCampaignId = CampaignId,
+                SQId = SurveyId,
+                PQID = ProfileQuestionID,
+
+                TransactionLogs = new List<TransactionLog>
+                                                         {
+                                                             new TransactionLog
+                                                             {
+                                                                 IsCompleted = true, 
+                                                                 Amount = amount, 
+                                                                 FromUser = "Cash4Ads",
+                                                                 LogDate = DateTime.Now,
+                                                                 ToUser = company.CompanyName,
+                                                                 Type = isCredit ? 1 : 2
+                                                             }
+                                                         }
+            };
+            if (isCredit)
+            {
+                batchTransaction.CreditAmount = amount;
+                //usersPaypalAccount.AccountBalance += amount;
+                //userVirtualAccount.AccountBalance -= amount;
+                //if (type ==  TransactionType.AdClick || type == TransactionType.SurveyWatched || type == TransactionType.ProfileQuestionAnswered )
+                stripeAccount.AccountBalance += amount;
+
+                batchTransaction.AccountBalance = stripeAccount.AccountBalance;
+            }
+            else
+            {
+                batchTransaction.DebitAmount = amount;
+                //usersPaypalAccount.AccountBalance -= amount;
+                //if (type == 2)
+                stripeAccount.AccountBalance -= amount;
+
+                batchTransaction.AccountBalance = stripeAccount.AccountBalance;
+            }
+
+
+
+            stripeAccount.Transactions.Add(batchTransaction);
+            dbContext.Transactions.Add(batchTransaction);
+        }
+
         /// <summary>
         /// Updates Users Paypal Account
         /// </summary>
