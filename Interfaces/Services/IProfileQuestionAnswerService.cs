@@ -13,5 +13,6 @@ namespace SMD.Interfaces.Services
         /// Get Answer by Profile Question Id 
         /// </summary>
         IEnumerable<ProfileQuestionAnswer> GetProfileQuestionAnswerByQuestionId(long profileQuestionId);
+        IEnumerable<ProfileQuestionAnswer> GetProfileQuestionAnswerOrderBySortorder(long profileQuestionId);
     }
 }

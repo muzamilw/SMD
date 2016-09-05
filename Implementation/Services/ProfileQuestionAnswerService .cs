@@ -33,6 +33,10 @@ namespace SMD.Implementation.Services
         {
             return _profileQuestionAnswerRepository.GetProfileQuestionAnswerByQuestionId(profileQuestionId);
         }
+        public IEnumerable<ProfileQuestionAnswer> GetProfileQuestionAnswerOrderBySortorder(long profileQuestionId)
+        {
+            return _profileQuestionAnswerRepository.GetAllProfileQuestionAnswerOrderbySortOrder(profileQuestionId);
+        }
         #endregion
     }
 }

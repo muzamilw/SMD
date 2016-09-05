@@ -1,12 +1,20 @@
 ﻿define(["ko", "underscore", "underscore-ko"], function (ko) {
 
     var // ReSharper disable InconsistentNaming
-      ProfileQuestion = function (pqSubBy, pquestion, pqsubmissionDateTime, poCompanyId) {
+      ProfileQuestion = function (pqSubBy, pquestion, pqsubmissionDateTime, pqCompanyId, pqprofileGroupId, pqType, PqId,pqApproved,pqRejectedReason, pqAgeRangeStart, pqAgeRangeEnd) {
           var
               submittedBy = ko.observable(pqSubBy),
               question = ko.observable(pquestion),
               submissionDate = ko.observable(pqsubmissionDateTime),
-              companyId = ko.observable(poCompanyId),
+              companyId = ko.observable(pqCompanyId),
+              profileGroupId = ko.observable(pqprofileGroupId),
+              type = ko.observable(pqType),
+              id = ko.observable(PqId),
+              isApproved = ko.observable(pqApproved),
+              rejectedReason = ko.observable(pqRejectedReason),
+              pqAnswers = ko.observableArray([]),
+              ageRangeStart = ko.observable(pqAgeRangeStart),
+              ageRangeEnd = ko.observable(pqAgeRangeEnd),
            
               errors = ko.validation.group({
 
@@ -30,9 +38,9 @@
               // Convert to server data
               convertToServerData = function () {
                   return {
-                      //CouponId: couponId(),
-                      //Approved: isApproved(),
-                      //RejectedReason: rejectedReason(),
+                      PqId: id(),
+                      Approved: isApproved(),
+                      RejectionReason: rejectedReason(),
                   };
               };
           return {
@@ -40,7 +48,15 @@
               submittedBy: submittedBy,
               question: question,
               submissionDate: submissionDate,
-              companyId:companyId,
+              companyId: companyId,
+              profileGroupId: profileGroupId,
+              id: id,
+              ageRangeStart: ageRangeStart,
+              ageRangeEnd: ageRangeEnd,
+              isApproved :isApproved,
+              rejectedReason :rejectedReason,
+              pqAnswers:pqAnswers,
+              type:type,
               hasChanges: hasChanges,
               convertToServerData: convertToServerData,
               reset: reset,
@@ -56,7 +72,7 @@
     var ProfileQuestionServertoClientMapper = function (itemFromServer) {
 
 
-        return new ProfileQuestion(itemFromServer.CreatedBy, itemFromServer.Question, itemFromServer.SubmissionDateTime, itemFromServer.CompanyId);
+        return new ProfileQuestion(itemFromServer.CreatedBy, itemFromServer.Question, itemFromServer.SubmissionDateTime, itemFromServer.CompanyId, itemFromServer.ProfileGroupId, itemFromServer.Type, itemFromServer.PqId, itemFromServer.Approved, itemFromServer.RejectionReason, itemFromServer.AgeRangeStart, itemFromServer.AgeRangeEnd);
     };
   
     // Function to attain cancel button functionality ProfileQuestion

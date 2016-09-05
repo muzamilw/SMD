@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web;
 using System.Web.Http;
 
 namespace SMD.MIS.Areas.Api.Controllers
@@ -40,6 +41,16 @@ namespace SMD.MIS.Areas.Api.Controllers
             }
             retobj.TotalCount = obj.TotalCount;
             return retobj;
+        }
+        public string Post(ApproveProfileQuestion pq)
+        {
+            Mapper.Initialize(cfg => cfg.CreateMap<ApproveProfileQuestion, SMD.Models.DomainModels.ProfileQuestion>());
+            if (pq == null || !ModelState.IsValid)
+            {
+                throw new HttpException((int)HttpStatusCode.BadRequest, "Invalid Request");
+            }
+
+            return _profileQuestionService.UpdatePQForApproval(Mapper.Map<ApproveProfileQuestion, SMD.Models.DomainModels.ProfileQuestion>(pq));
         }
         #endregion
 
