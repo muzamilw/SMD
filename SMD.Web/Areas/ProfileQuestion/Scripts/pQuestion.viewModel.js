@@ -108,6 +108,7 @@ define("pQuestion/pQuestion.viewModel",
                                  
 
                                     _.each(data.ProfileQuestions, function (item) {
+
                                         questions.push(model.questionServertoClientMapper(SetStatusForQuestion(item)).ProfileQuestionTargetLocation(model.ProfileQuestionTargetLocation.Create(item.ProfileQuestionTargetLocation)));
                                         professions.removeAll();
                                         ko.utils.arrayPushAll(professions(), data.Professions);

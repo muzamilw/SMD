@@ -280,6 +280,7 @@ define("survey/survey.viewModel",
                                    success: function (data) {
                                        //
                                        selectedQuestion(model.Survey.Create(updateSurveryItem(data.SurveyQuestion)));
+
                                        selectedQuestion().reset();
                                        view.initializeTypeahead();
                                        getAudienceCount();
