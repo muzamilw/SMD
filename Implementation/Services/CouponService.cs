@@ -649,6 +649,8 @@ namespace SMD.Implementation.Services
                 // Approval
                 if (source.Approved == true)
                 {
+                    double PaymentToBeCharged = 0;
+
                     dbCo.Approved = true;
                     dbCo.ApprovalDateTime = DateTime.Now;
                     dbCo.ApprovedBy = couponRepository.LoggedInUserIdentity;
@@ -659,9 +661,9 @@ namespace SMD.Implementation.Services
 
                     //todo pilot: unCommenting Stripe payment code on Ads approval
 
-                    
 
-                    respMesg = MakeStripePaymentandAddInvoiceForCoupon(dbCo);
+
+                    respMesg = MakeStripePaymentandAddInvoiceForCoupon(dbCo, out PaymentToBeCharged);
 
                    
                     if (respMesg.Contains("Failed"))
@@ -670,7 +672,7 @@ namespace SMD.Implementation.Services
                     }
                     else
                     {
-                        TransactionManager.CouponApprovalTransaction(dbCo.CouponId, 30, dbCo.CompanyId.Value);
+                        TransactionManager.CouponApprovalTransaction(dbCo.CouponId, PaymentToBeCharged, dbCo.CompanyId.Value);
                     }
                 }
                 // Rejection 
@@ -689,7 +691,7 @@ namespace SMD.Implementation.Services
             }
             return respMesg;
         }
-        private string MakeStripePaymentandAddInvoiceForCoupon(Coupon source)
+        private string MakeStripePaymentandAddInvoiceForCoupon(Coupon source, out double PaymentAmount)
         {
             #region Stripe Payment
             string response = null;
@@ -712,6 +714,8 @@ namespace SMD.Implementation.Services
             {
                 amount = product.SetupPrice ?? 0 + tax.TaxValue ?? 0;
 
+                PaymentAmount = amount;
+
 
                 // If It is not System User then make transation 
                 //if (user.Roles.Any(role => role.Name.ToLower().Equals("user")))
@@ -720,6 +724,11 @@ namespace SMD.Implementation.Services
                 response = stripeService.ChargeCustomer((int?)amount, user.Company.StripeCustomerId);
                 isSystemUser = false;
 
+            }
+            else
+            {
+                PaymentAmount = 0;
+                response = "Failed : Product not defined";
             }
 
             #endregion

@@ -73,7 +73,7 @@ namespace SMD.Implementation.Services
                   // add it to smd and users virtual account 
                   // send user voucher email 
 
-                  // update users  virutal accont debit 
+                  // deduct user centz balance.
                   updateVirtualAccount(userCompany, SwapCost, dbContext, TransactionType.CouponPurchased, false, couponId,null );
                   // update smd users  virutal accont credit 
                   updateVirtualAccount(smdCompany, SwapCost, dbContext, TransactionType.CouponPurchased, true, couponId,null );
@@ -100,10 +100,20 @@ namespace SMD.Implementation.Services
 
                  //get money from stripe
 
+                  // update company  stripe accont debit 
+                  updateStripeAccount(userCompany, Payment, dbContext, TransactionType.ApproveCoupon, false, couponId, null);
+                  // update smd users  stripe accont credit 
+                  updateStripeAccount(smdCompany, Payment, dbContext, TransactionType.ApproveCoupon, true, couponId, null);
+
+
+
+                  // 1 UsD = 100 Centz into virtual
                   // update users  virutal accont debit 
-                  updateVirtualAccount(userCompany, Payment, dbContext, TransactionType.CouponPurchased, false, couponId, null);
+                  updateVirtualAccount(userCompany, Payment * 100, dbContext, TransactionType.ApproveCoupon, true, couponId, null);
                   // update smd users  virutal accont credit 
-                  updateVirtualAccount(smdCompany, Payment, dbContext, TransactionType.CouponPurchased, true, couponId, null);
+                  updateVirtualAccount(smdCompany, Payment * 100, dbContext, TransactionType.ApproveCoupon, false, couponId, null);
+
+
                   // update smd users  virutal accont credit 
                   //updateUsersVirtualAccount(coupon.Company, SwapCost, dbContext, 2, true, null, couponId);
 
