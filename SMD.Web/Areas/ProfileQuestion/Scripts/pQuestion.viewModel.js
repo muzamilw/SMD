@@ -100,13 +100,23 @@ define("pQuestion/pQuestion.viewModel",
                             {
                                 success: function (data) {
                                     questions.removeAll();
-                                    _.each(data.ProfileQuestions, function (item) {
-                                        
 
-                                        questions.push(model.questionServertoClientMapper(SetStatusForQuestion(item)));
+                                    //selectedQuestion(model.question.Create(updateSurveryItem(data.SurveyQuestion)));
+
+                                   // selectedQuestion(model.question.Create(data.SurveyQuestion));
+                                    debugger;
+                                 
+
+                                    _.each(data.ProfileQuestions, function (item) {
+                                        questions.push(model.questionServertoClientMapper(SetStatusForQuestion(item)).ProfileQuestionTargetLocation(model.ProfileQuestionTargetLocation.Create(item.ProfileQuestionTargetLocation)));
                                         professions.removeAll();
                                         ko.utils.arrayPushAll(professions(), data.Professions);
                                         professions.valueHasMutated();
+
+
+                                        //ko.utils.arrayPushAll(itemselectedQuestion().ProfileQuestionTargetLocation(), item.ProfileQuestionTargetLocation);
+                                        //selectedQuestion().ProfileQuestionTargetLocation().valueHasMutated();
+
                                     });
                                    
                                     pager().totalCount(data.TotalCount);
@@ -116,6 +126,37 @@ define("pQuestion/pQuestion.viewModel",
                                 }
                             });
                     },
+                     updateSurveryItem = function (item) {
+
+                         _.each(langs(), function (language) {
+                             if (language.LanguageId == item.LanguageId) {
+                                 item.Language = language.LanguageName;
+                             }
+                         });
+                         _.each(countries(), function (country) {
+                             if (country.CountryId == item.CountryId) {
+                                 item.Country = country.CountryName;
+                             }
+                         });
+                         if (item.Status == 1) {
+                             item.StatusValue = "Draft";
+                         } else if (item.Status == 2) {
+                             item.StatusValue = "Submitted for Approval"; canSubmitForApproval(false);
+                         } else if (item.Status == 3) {
+                             item.StatusValue = "Live"; canSubmitForApproval(false);
+                         } else if (item.Status == 4) {
+                             item.StatusValue = "Paused"; canSubmitForApproval(false);
+                         } else if (item.Status == 5) {
+                             item.StatusValue = "Completed"; canSubmitForApproval(false);
+                         } else if (item.Status == 6) {
+                             item.StatusValue = "Approval Rejected"; canSubmitForApproval(true);
+                         }
+                         item.CreatedBy = DilveredPercentage(item);
+                         if (item.ResultClicks == null)
+                             item.ResultClicks = 0;
+                         return item;
+                     },
+               
                        DilveredPercentage = function (item)
                        {
                            var percent = 0.0;
@@ -228,6 +269,7 @@ define("pQuestion/pQuestion.viewModel",
                            }
                        },
                 findLocationsInCountry = function (id) {
+                    debugger;
                     var list = ko.utils.arrayFilter(selectedQuestion().ProfileQuestionTargetLocation(), function (prod) {
                         return prod.CountryID() == id;
                     });
@@ -591,6 +633,7 @@ define("pQuestion/pQuestion.viewModel",
                     }),
                     // get sorted array of answers 
                     getSortedAnswers = ko.computed(function () {
+                        debugger;
                         if (selectedQuestion() == null)
                             return null;
                         return selectedQuestion().answers().sort(function (left, right) {

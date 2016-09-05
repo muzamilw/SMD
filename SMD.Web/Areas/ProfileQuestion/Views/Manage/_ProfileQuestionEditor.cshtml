@@ -574,6 +574,9 @@
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
+
+
+
                                                                 <!-- ko template: { name: 'answersTemplate', foreach: $root.getSortedAnswers() } -->
                                                                 <!-- /ko -->
                                                             </tbody>
@@ -1082,9 +1085,9 @@
                     <p id="txtPages" data-bind="text: answerString">
                     </p>
                     <!-- /ko -->
-                    <!-- ko if: (Type() === 2 || Type() === '2') -->
+                    @*<!-- ko if: (Type() === 2 || Type() === '2') -->
                     <img id="vehicleImage" alt="" style="width: 35px;height:35px" data-bind="attr:{src:imagePath }" />
-                    <!-- /ko -->
+                    <!-- /ko -->*@
                 </td>
                 <td style="margin-bottom:0px!important;margin-top:0px!important;padding-top:0px!important;padding-bottom:0px!important;">
                     <a class="table-link danger" style="float: right">

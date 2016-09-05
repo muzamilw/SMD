@@ -40,7 +40,7 @@ namespace SMD.MIS.ModelMappers
                 Question = source.Question,
                 Priority = source.Priority,
                 HasLinkedQuestions = source.HasLinkedQuestions,
-                ProfileGroupName = source.ProfileQuestionGroup != null ? source.ProfileQuestionGroup.ProfileGroupName : null,
+                ProfileGroupName = source.ProfileQuestionGroup != null ? source.ProfileQuestionGroup.ProfileGroupName : string.Empty,
 
                 LanguageId = source.LanguageId,
                 CountryId = source.CountryId,
@@ -58,7 +58,7 @@ namespace SMD.MIS.ModelMappers
                 AgeRangeEnd=source.AgeRangeEnd,
                 Gender=source.Gender,
                 ProfileQuestionTargetLocation = source.ProfileQuestionTargetLocations.Select(loc => loc.CreateForRecieveTLocation()).ToList(),
-                ProfileQuestionTargetCriteria = source.ProfileQuestionTargetCriterias.Select(crt => crt.CreateForRecieveTCriteria()).ToList()
+                ProfileQuestionTargetCriteria = source.ProfileQuestionTargetCriterias1.Select(crt => crt.CreateForRecieveTCriteria()).ToList()
 
             };
         }

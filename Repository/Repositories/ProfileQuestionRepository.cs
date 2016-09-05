@@ -57,7 +57,11 @@ namespace SMD.Repository.Repositories
         /// </summary>
         public ProfileQuestion Find(int id)
         {
-            return DbSet.Find(id);
+           // ProfileQuestionTargetLocation
+
+            return DbSet.Include("ProfileQuestionTargetLocations.City").Include("ProfileQuestionTargetLocations.Country").Where(i => i.PqId == id).FirstOrDefault();
+            
+           // Query.ProfileQuestionTargetLocations.include<>
         }
 
         /// <summary>
@@ -236,7 +240,13 @@ namespace SMD.Repository.Repositories
                     .Take(toRow);
 
         }
-    
+
+        //public ProfileQuestion GetProfileQuestionByID(long PQID)
+        //{ 
+        
+        //   return DbSet.Where(i=>i.PqId==PQID).Include<q=>Queryable.>
+
+        //}
 
         #endregion
     }
