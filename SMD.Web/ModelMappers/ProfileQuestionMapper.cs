@@ -57,8 +57,8 @@ namespace SMD.MIS.ModelMappers
                 AgeRangeStart=source.AgeRangeStart,
                 AgeRangeEnd=source.AgeRangeEnd,
                 Gender=source.Gender,
-                ProfileQuestionTargetLocation = source.ProfileQuestionTargetLocations.Select(loc => loc.CreateForRecieveTLocation()).ToList(),
-                ProfileQuestionTargetCriteria = source.ProfileQuestionTargetCriterias1.Select(crt => crt.CreateForRecieveTCriteria()).ToList()
+                ProfileQuestionTargetLocation =source.ProfileQuestionTargetLocations!=null?source.ProfileQuestionTargetLocations.Select(loc => loc.CreateForRecieveTLocation()).ToList():null,
+                ProfileQuestionTargetCriteria = source.ProfileQuestionTargetCriterias1!=null? source.ProfileQuestionTargetCriterias1.Select(crt => crt.CreateForRecieveTCriteria()).ToList():null
 
             };
         }
