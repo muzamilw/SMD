@@ -1161,6 +1161,17 @@ define("pQuestion/pQuestion.viewModel",
                            }
                            AditionalCriteriaMode(3);
                        },
+                          getProductPrice = function () {
+
+                              dataservice.getProduct( {
+                                  success: function (product) {
+                                      
+                                  },
+                                  error: function () {
+                                      toastr.error("Failed to load base data!");
+                                  }
+                              });
+                          },
                     // Initialize the view model
                     initialize = function (specifiedView) {
                         view = specifiedView;
@@ -1168,6 +1179,7 @@ define("pQuestion/pQuestion.viewModel",
                         pager(pagination.Pagination({ PageSize: 10 }, questions, getQuestions));
                         // Base Data Call
                         getBasedata();
+                        getProductPrice
                         // First request for LV
                         getQuestions(214, 41);
                         for (var i = 10; i < 81; i++) {
