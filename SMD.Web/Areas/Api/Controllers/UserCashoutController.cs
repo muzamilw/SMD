@@ -62,7 +62,7 @@ namespace SMD.MIS.Areas.Api.Controllers
                     throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
                 }
 
-                var cashoutResult = PayOutScheduler.PerformUserPayout(UserId, user.CompanyId.Value, Convert.ToDouble( PayoutAmount));
+                var cashoutResult = TransactionManager.PerformUserPayout(UserId, user.CompanyId.Value, Convert.ToDouble( PayoutAmount));
 
                 if (cashoutResult == 1)//success
                     return response;

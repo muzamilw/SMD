@@ -48,9 +48,11 @@ namespace SMD.Repository.Repositories
         public IEnumerable<Coupon> GetAllFavouriteCouponByUserId(string UserId)
         {
 
+            DateTime nowd = DateTime.Today.AddHours(24);
+
             var result = from c in db.Coupons
                          join uc in db.UserFavouriteCoupons on c.CouponId equals uc.CouponId
-                         where uc.UserId == UserId
+                         where uc.UserId == UserId && c.CouponExpirydate > nowd
                         select c;
                          //select new Coupon { CouponId = c.CouponId, CouponTitle = c.CouponTitle, couponImage1 = c.couponImage1, Price = c.Price, Savings = c.Savings, SwapCost = c.SwapCost, DaysLeft = (DateTime.Today - new DateTime(c.CouponActiveYear.Value, c.CouponActiveMonth.Value, 30)).Days, CompanyId= c.CompanyId, LogoUrl = c.LogoUrl };
 

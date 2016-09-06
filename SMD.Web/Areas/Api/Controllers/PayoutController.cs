@@ -22,7 +22,7 @@ namespace SMD.MIS.Areas.Api.Controllers
         [ApiExceptionCustom]
         public void Get()
         {
-            PayOutScheduler.PerformPayout();
+            TransactionManager.PerformPayout();
         }
 
         #endregion
