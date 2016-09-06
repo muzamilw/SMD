@@ -1,4 +1,5 @@
-﻿using SMD.Interfaces.Services;
+﻿using SMD.Interfaces.Repository;
+using SMD.Interfaces.Services;
 using SMD.MIS.Areas.Api.Models;
 using SMD.MIS.ModelMappers;
 using SMD.Models.RequestModels;
@@ -17,14 +18,16 @@ namespace SMD.MIS.Areas.Api.Controllers
     {
         #region Public
         private readonly IProfileQuestionService _profileQuestionService;
+        private readonly IProductRepository _productRepository;
         #endregion
         #region Constructor
         /// <summary>
         /// Constuctor 
         /// </summary>
-        public ProfileQuestionController(IProfileQuestionService profileQuestionService)
+        public ProfileQuestionController(IProfileQuestionService profileQuestionService, IProductRepository productRepository)
         {
             _profileQuestionService = profileQuestionService;
+            _productRepository = productRepository;
         }
 
         #endregion
@@ -65,6 +68,18 @@ namespace SMD.MIS.Areas.Api.Controllers
             //    throw new HttpException((int)HttpStatusCode.BadRequest, "Invalid Request");
             //}
             return _profileQuestionService.SaveProfileQuestion(question.CreateFrom()).CreateFrom();
+        }
+
+       // Get Product price
+
+        public Product Get()
+        {
+          var pro =  _productRepository.GetProductByCountryId("PQID");
+          
+
+            return new Product();
+            
+
         }
         #endregion
     }

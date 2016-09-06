@@ -125,6 +125,7 @@
     <Compile Include="Repository\IProfileQuestionRepository.cs" />
     <Compile Include="Repository\IUserPurchasedCouponRepository.cs" />
     <Compile Include="Repository\IUserFavouriteCouponRepository.cs" />
+    <Compile Include="Services\IActiveUser.cs" />
     <Compile Include="Services\IAdvertService.cs" />
     <Compile Include="Services\IAuditLogService.cs" />
     <Compile Include="Services\IBrachCategoryService.cs" />
