@@ -406,6 +406,7 @@
     <Compile Include="Areas\Api\Models\Phrase.cs" />
     <Compile Include="Areas\Api\Models\PhraseResponseModel.cs" />
     <Compile Include="Areas\Api\Models\PQResponseModelForApproval.cs" />
+    <Compile Include="Areas\Api\Models\Product.cs" />
     <Compile Include="Areas\Api\Models\ProfileQuestionTargetCriteria.cs" />
     <Compile Include="Areas\Api\Models\ProfileQuestionTargetLocation.cs" />
     <Compile Include="Areas\Api\Models\Section.cs" />
