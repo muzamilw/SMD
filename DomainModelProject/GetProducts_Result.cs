@@ -112,10 +112,13 @@ namespace DomainModelProject
         public Nullable<int> VoucherCount { get; set; }
         public Nullable<int> CompanyId { get; set; }
         public string VideoLink2 { get; set; }
-        public Nullable<int> IsShowVoucherSetting { get; set; }
+        public Nullable<bool> IsShowVoucherSetting { get; set; }
         public Nullable<long> GameId { get; set; }
         public string GameUrl { get; set; }
         public Nullable<int> AdCount { get; set; }
         public Nullable<int> TotalItems { get; set; }
+        public string SocialHandle { get; set; }
+        public string SocialHandleType { get; set; }
+        public Nullable<long> FreeCouponID { get; set; }
     }
 }

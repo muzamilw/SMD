@@ -34,7 +34,6 @@ namespace DomainModelProject
         public Nullable<int> CurrencyID { get; set; }
         public Nullable<int> CurrencyRateID { get; set; }
         public Nullable<int> Sequence { get; set; }
-        public Nullable<long> CouponCodeId { get; set; }
         public Nullable<double> AccountBalance { get; set; }
         public Nullable<long> CouponId { get; set; }
         public Nullable<int> PQID { get; set; }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace SMD.MIS.Areas.Api.Models
 {
@@ -47,5 +48,10 @@ namespace SMD.MIS.Areas.Api.Models
         public int CompanyId { get; set; }
 
         public long GameId { get; set; }
+
+        public Nullable<long> FreeCouponID { get; set; }
+
+        public string SocialHandle { get; set; }
+        public string SocialHandleType { get; set; }
     }
 }
