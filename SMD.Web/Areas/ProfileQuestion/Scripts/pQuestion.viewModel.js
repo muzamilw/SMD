@@ -1174,15 +1174,32 @@ define("pQuestion/pQuestion.viewModel",
                               });
                           },
                             totalPrice = ko.computed(function () {
-                                var a;
+                                var ansNeeeded;
+                                var calculatePrice
                                 if (selectedQuestion() == undefined) {
                                     return 0;
                                 }
                                 else {
-                                    a = selectedQuestion().answerNeeded()
+                                    ansNeeeded = selectedQuestion().answerNeeded();
+                                    if (ansNeeeded > 0 && ansNeeeded <= 1000)
+                                    {
+                                        calculatePrice = price();
+                                        return calculatePrice;
+                                    }
+                                    if (ansNeeeded > 1000 && ansNeeeded % 1000 == 0) {
+                                        var val = ansNeeeded / 1000;
+                                        calculatePrice = val * price();
+                                        return calculatePrice;
+                                    }
+                                    else {
+                                        if (ansNeeeded > 1000 && ansNeeeded % 1000 != 0) {
+                                            var val2 = ansNeeeded / 1000
+                                            calculatePrice= price()* Math.ceil(val2);
+                                            return calculatePrice;
+                                        }
+
+                                    }
                                 }
-                                
-                                return a;
                             }),
                     // Initialize the view model
                     initialize = function (specifiedView) {

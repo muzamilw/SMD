@@ -2,7 +2,7 @@
 
     var // ReSharper disable InconsistentNaming
         question = function (questionId, spcQuestion, pr,linkQ,gName, langId, countId, groupId, spcType,
-        spcRefreshtime, spcSkipped, spcCreationD, spcModDate, penality, spcStatus, CreatedBy, StatusValue, AnswerNeeded, AnswerCount, Gender, AgeRangeStart,AgeRangeEnd) {
+        spcRefreshtime, spcSkipped, spcCreationD, spcModDate, penality, spcStatus, CreatedBy, StatusValue, AnswerNeeded,AmountCharge AnswerCount, Gender, AgeRangeStart,AgeRangeEnd) {
             var 
                 qId = ko.observable(questionId),
                 questionString = ko.observable(spcQuestion).extend({ required: true }),
@@ -10,6 +10,7 @@
                 hasLinkedQuestions = ko.observable(linkQ),
                 profileGroupName = ko.observable(gName),
                 answerNeeded = ko.observable(AnswerNeeded),
+                amountCharge = ko.observable(AmountCharge),
                 answerCount = ko.observable(AnswerCount),
                 languageId = ko.observable(langId),
                 countryId = ko.observable(countId),
@@ -67,6 +68,7 @@
                     createdBy: createdBy,
                     statusValue: statusValue,
                     answerCount: answerCount,
+                    amountCharge:amountCharge,
                     answerNeeded: answerNeeded,
                     AgeRangeStart: AgeRangeStart,
                     AgeRangeEnd: AgeRangeEnd
@@ -140,6 +142,7 @@
                 isValid: isValid,
                 statusValue: statusValue,
                 answerNeeded: answerNeeded,
+                amountCharge:amountCharge,
                 answerCount:answerCount,
                 errors: errors,
                 ProfileQuestionTargetLocation: ProfileQuestionTargetLocation,
@@ -292,7 +295,7 @@
        
         return new question(itemFromServer.PqId, itemFromServer.Question, itemFromServer.Priority,
             itemFromServer.HasLinkedQuestions, itemFromServer.ProfileGroupName, itemFromServer.LanguageId, itemFromServer.CountryId, itemFromServer.ProfileGroupId, itemFromServer.Type, itemFromServer.RefreshTime
-        , itemFromServer.SkippedCount, moment(itemFromServer.CreationDate), itemFromServer.ModifiedDate, itemFromServer.PenalityForNotAnswering, itemFromServer.Status, itemFromServer.CreatedBy, itemFromServer.StatusValue, itemFromServer.AnswerNeeded, itemFromServer.AsnswerCount, itemFromServer.Gender, itemFromServer.AgeRangeStart, itemFromServer.AgeRangeEnd);
+        , itemFromServer.SkippedCount, moment(itemFromServer.CreationDate), itemFromServer.ModifiedDate, itemFromServer.PenalityForNotAnswering, itemFromServer.Status, itemFromServer.CreatedBy, itemFromServer.StatusValue, itemFromServer.AnswerNeeded,itemFromServer, itemFromServer.AsnswerCount, itemFromServer.Gender, itemFromServer.AgeRangeStart, itemFromServer.AgeRangeEnd);
     };
     
     // Function to attain cancel button functionality QUESTION
