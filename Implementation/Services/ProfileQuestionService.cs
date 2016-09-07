@@ -543,7 +543,7 @@ namespace SMD.Implementation.Services
             // Total includes tax
             if (product != null)
             {
-                amount = product.SetupPrice ?? 0 + tax.TaxValue ?? 0;
+                amount = source.AmountCharged ?? 0 + tax.TaxValue ?? 0;
 
 
                 // If It is not System User then make transation 
