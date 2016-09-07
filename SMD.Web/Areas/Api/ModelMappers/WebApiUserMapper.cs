@@ -75,16 +75,16 @@ namespace SMD.MIS.Areas.Api.ModelMappers
                 Balance = CreateFromForAccount(source.User)
             };
         }
-        public static StatementInquiryResponse CreateFromForStatementBalance(this LoginResponse source)
-        {
-            return new StatementInquiryResponse
-            {
-                Status = source.Status,
-                Message = source.Message,
-                Balance = CreateFromForAccount(source.User),
-                Transactions = CreateFromForTransactionAccount(source.User)
-            };
-        }
+        //public static StatementInquiryResponse CreateFromForStatementBalance(this LoginResponse source)
+        //{
+        //    return new StatementInquiryResponse
+        //    {
+        //        Status = source.Status,
+        //        Message = source.Message,
+        //        Balance = CreateFromForAccount(source.User),
+        //        Transactions = CreateFromForTransactionAccount(source.User)
+        //    };
+        //}
 
         /// <summary>
         /// Create WebApi User from Domain Model
@@ -104,75 +104,75 @@ namespace SMD.MIS.Areas.Api.ModelMappers
 
             return account.AccountBalance;
         }
-        public static List<StatementTrasaction> CreateFromForTransactionAccount(this SMD.Models.IdentityModels.User source)
-        {
-            List<Transaction> transactions = new List<Transaction>();
-            List<StatementTrasaction> statements = new List<StatementTrasaction>();
-            if (source.Company.Accounts == null || !source.Company.Accounts.Any())
-            {
-                return null;
-            }
+        ////public static List<StatementTrasaction> CreateFromForTransactionAccount(this SMD.Models.IdentityModels.User source)
+        ////{
+        ////    List<Transaction> transactions = new List<Transaction>();
+        ////    List<StatementTrasaction> statements = new List<StatementTrasaction>();
+        ////    if (source.Company.Accounts == null || !source.Company.Accounts.Any())
+        ////    {
+        ////        return null;
+        ////    }
 
-            Account account = source.Company.Accounts.FirstOrDefault(acc => acc.AccountType == (int)AccountType.GoogleWallet);
-            if (account != null)
-            {
-                transactions.AddRange(account.Transactions);
-            }
-            account = source.Company.Accounts.FirstOrDefault(acc => acc.AccountType == (int)AccountType.Paypal);
-            if (account != null)
-            {
-                transactions.AddRange(account.Transactions);
-            }
-            account = source.Company.Accounts.FirstOrDefault(acc => acc.AccountType == (int)AccountType.Stripe);
-            if (account != null)
-            {
-                transactions.AddRange(account.Transactions);
-            }
+        ////    Account account = source.Company.Accounts.FirstOrDefault(acc => acc.AccountType == (int)AccountType.GoogleWallet);
+        ////    if (account != null)
+        ////    {
+        ////        transactions.AddRange(account.Transactions);
+        ////    }
+        ////    account = source.Company.Accounts.FirstOrDefault(acc => acc.AccountType == (int)AccountType.Paypal);
+        ////    if (account != null)
+        ////    {
+        ////        transactions.AddRange(account.Transactions);
+        ////    }
+        ////    account = source.Company.Accounts.FirstOrDefault(acc => acc.AccountType == (int)AccountType.Stripe);
+        ////    if (account != null)
+        ////    {
+        ////        transactions.AddRange(account.Transactions);
+        ////    }
 
-            account = source.Company.Accounts.FirstOrDefault(acc => acc.AccountType == (int)AccountType.VirtualAccount);
-            if (account != null)
-            {
-                transactions.AddRange(account.Transactions);
-            }
-
-
+        ////    account = source.Company.Accounts.FirstOrDefault(acc => acc.AccountType == (int)AccountType.VirtualAccount);
+        ////    if (account != null)
+        ////    {
+        ////        transactions.AddRange(account.Transactions);
+        ////    }
 
 
-            transactions = transactions.OrderByDescending(g => g.TxId).ToList();
-            foreach (var item in transactions)
-            {
-                statements.Add(item.CreateFrom());
-            }
-            return statements;
-        }
-        public static StatementTrasaction CreateFrom(this Transaction source)
-        {
-            string accName = "";
-            if (source.Account.AccountType == (int)AccountType.Stripe)
-                accName = "Stripe";
-            else if (source.Account.AccountType == (int)AccountType.Paypal)
-                accName = "Paypal";
-            else if (source.Account.AccountType == (int)AccountType.GoogleWallet)
-                accName = "Google Wallet";
-            else if (source.Account.AccountType == (int)AccountType.VirtualAccount)
-                accName = "Centz";
 
-            string TransactionDetails = "";
-            if ( source.Type == 1)
-            {
-                TransactionDetails = "Ad Viewed :" + source.AdCampaignId.ToString();
-            }
 
-            return new StatementTrasaction
-            {
-               DebitAmount  = source.DebitAmount,
-               CreditAmount = source.CreditAmount,
-                Date = source.TransactionDate.ToString(),
-               PaymentMethod = accName,
-               TransactionDetails = TransactionDetails
-                //AuthenticationToken = Guid.NewGuid()
-            };
-        }
+        ////    transactions = transactions.OrderByDescending(g => g.TxId).ToList();
+        ////    foreach (var item in transactions)
+        ////    {
+        ////        statements.Add(item.CreateFrom());
+        ////    }
+        ////    return statements;
+        ////}
+        ////public static StatementTrasaction CreateFrom(this Transaction source)
+        ////{
+        ////    string accName = "";
+        ////    if (source.Account.AccountType == (int)AccountType.Stripe)
+        ////        accName = "Stripe";
+        ////    else if (source.Account.AccountType == (int)AccountType.Paypal)
+        ////        accName = "Paypal";
+        ////    else if (source.Account.AccountType == (int)AccountType.GoogleWallet)
+        ////        accName = "Google Wallet";
+        ////    else if (source.Account.AccountType == (int)AccountType.VirtualAccount)
+        ////        accName = "Centz";
+
+        ////    string TransactionDetails = "";
+        ////    if ( source.Type == 1)
+        ////    {
+        ////        TransactionDetails = "Ad Viewed :" + source.AdCampaignId.ToString();
+        ////    }
+
+        ////    return new StatementTrasaction
+        ////    {
+        ////       DebitAmount  = source.DebitAmount,
+        ////       CreditAmount = source.CreditAmount,
+        ////        Date = source.TransactionDate.ToString(),
+        ////       PaymentMethod = accName,
+        ////       TransactionDetails = TransactionDetails
+        ////        //AuthenticationToken = Guid.NewGuid()
+        ////    };
+        ////}
         /// <summary>
         /// Create WebApi User from Domain Model
         /// </summary>

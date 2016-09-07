@@ -41,6 +41,16 @@ namespace SMD.Implementation.Services
         {
             return transactionRepository.GetUserTransactions();
         }
+
+
+        public List<GetTransactions_Result> GetUserVirtualTransactions(int companyId)
+        {
+
+
+            return transactionRepository.GetTransactions(companyId, 4, 30);
+        }
+
+        
         #endregion
     }
 }

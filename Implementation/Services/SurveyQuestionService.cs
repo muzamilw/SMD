@@ -139,34 +139,24 @@ namespace SMD.Implementation.Services
             string response = null;
             Boolean isSystemUser;
 
-            // If It is not System User then make transation 
-            if (user.Roles.Any(role => role.Name.ToLower().Equals("user")))
-            {
+          
                 // Make Stripe actual payment 
                 response = stripeService.ChargeCustomer((int?)amount, user.Company.StripeCustomerId);
-                isSystemUser = false;
-            }
-            else
-            {
-                isSystemUser = true;
-            }
 
-            #endregion
-            if (isSystemUser || (response != "failed"))
-            {
-                #region Invocing + Transactions
-                var requestModel = new ApproveSurveyRequest
+                if (response != null && !response.Contains("Failed"))
                 {
-                    UserId = source.UserId,
-                    Amount = (double)amount,
-                    SurveyQuestionId = source.SqId,
-                    StripeResponse = response
+                    if (source.CompanyId != null)
+                    {
 
-                };
-                // Transactions + Invocing 
-                await webApiUserService.UpdateTransactionOnSurveyApproval(requestModel, false);
-                #endregion
-            }
+                        //performing actual transaction into ledger
+                        TransactionManager.SurveyApproveTransaction(source.SqId, amount.Value, source.CompanyId.Value);
+                    }
+                }
+            #endregion
+         
+
+          
+
         }
         #endregion
         #region Constructor

@@ -152,36 +152,21 @@
     /// </summary>
     public enum TransactionType
     {
-        /// <summary>
-        /// Ad Click / Viewed
-        /// </summary>
+       
         AdClick = 1,
-
-        /// <summary>
-        /// Approve Survey
-        /// </summary>
         ApproveSurvey = 2,
-
-        
-
-        /// <summary>
-        /// View Survey Report
-        /// </summary>
         ViewSurveyReport = 3,
-
         CouponPurchased = 4,
-
         SurveyWatched = 5,
-
         ProfileQuestionAnswered = 6,
-
         ApproveProfileQuestion = 7,
-
         ApproveCoupon = 8,
-
         ApproveAd = 9,
-
-        UserCashOut = 10
+        UserCashOutPaypal = 10,
+        AdWeeklyCollection = 11,
+        WelcomeGiftBalance = 12,
+        PromotionalCentz = 13,
+        ReferFriendBalance = 14
 
 
     }
