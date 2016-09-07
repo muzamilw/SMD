@@ -61,7 +61,7 @@ define("pQuestion/pQuestion.dataservice", function () {
                         type: 'POST'
                     });
                     amplify.request.define('getProduct', 'ajax', {
-                        url: '/Api/ProfileQuestion',
+                        url: '/Api/GetProduct',
                         dataType: 'json',
                         type: 'GET'
                     });

@@ -82,8 +82,7 @@ define("pQuestion/pQuestion.viewModel",
                     isTerminateBtnVisible = ko.observable(true),
                     previewScreenNumber = ko.observable(0),
                     // Random number
-                    randomIdForNewObjects = -1,
-                    price = ko.observable(0),
+                    randomIdForNewObjects= -1,
                     //Get Questions
                     getQuestions = function (defaultCountryId, defaultLanguageId) {
                         dataservice.searchProfileQuestions(
@@ -276,10 +275,10 @@ define("pQuestion/pQuestion.viewModel",
                         return prod.CountryID() == id;
                     });
                     return list;
-                },     
+                },
                     // Add new Profile Question
                     addNewProfileQuestion = function () {
-                        getProductPrice();
+                       
                         selectedQuestion(new model.question());
                         selectedQuestion().Gender("1");
                         
@@ -1163,27 +1162,16 @@ define("pQuestion/pQuestion.viewModel",
                            AditionalCriteriaMode(3);
                        },
                           getProductPrice = function () {
-                              dataservice.getProduct({
-                                  success: function (data) {
-                                      price(data.SetupPrice);
 
+                              dataservice.getProduct( {
+                                  success: function (product) {
+                                      
                                   },
                                   error: function () {
-                                      toastr.error("Failed to load product.");
+                                      toastr.error("Failed to load base data!");
                                   }
                               });
                           },
-                            totalPrice = ko.computed(function () {
-                                var a;
-                                if (selectedQuestion() == undefined) {
-                                    return 0;
-                                }
-                                else {
-                                    a = selectedQuestion().answerNeeded()
-                                }
-                                
-                                return a;
-                            }),
                     // Initialize the view model
                     initialize = function (specifiedView) {
                         view = specifiedView;
@@ -1191,7 +1179,7 @@ define("pQuestion/pQuestion.viewModel",
                         pager(pagination.Pagination({ PageSize: 10 }, questions, getQuestions));
                         // Base Data Call
                         getBasedata();
-                        
+                        getProductPrice();
                         // First request for LV
                         getQuestions(214, 41);
                         for (var i = 10; i < 81; i++) {
@@ -1295,8 +1283,7 @@ define("pQuestion/pQuestion.viewModel",
                     showAdditionQuizCriteria: showAdditionQuizCriteria,
                     saveCriteria: saveCriteria,
                     isShowSurveyAns:isShowSurveyAns,
-                    getProductPrice: getProductPrice,
-                    totalPrice: totalPrice
+                    getProductPrice:getProductPrice
                 };
             })()
         };

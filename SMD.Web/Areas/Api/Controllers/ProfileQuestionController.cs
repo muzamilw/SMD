@@ -18,7 +18,7 @@ namespace SMD.MIS.Areas.Api.Controllers
     {
         #region Public
         private readonly IProfileQuestionService _profileQuestionService;
-        private readonly IProductRepository _productRepository;
+       
         #endregion
         #region Constructor
         /// <summary>
@@ -27,12 +27,11 @@ namespace SMD.MIS.Areas.Api.Controllers
         public ProfileQuestionController(IProfileQuestionService profileQuestionService, IProductRepository productRepository)
         {
             _profileQuestionService = profileQuestionService;
-            _productRepository = productRepository;
         }
 
         #endregion
         #region Public
-
+     
         /// <summary>
         /// Get Profile Questions
         /// </summary>
@@ -72,15 +71,7 @@ namespace SMD.MIS.Areas.Api.Controllers
 
        // Get Product price
 
-        public Product Get()
-        {
-          var pro =  _productRepository.GetProductByCountryId("PQID");
-          
-
-            return new Product();
-            
-
-        }
+       
         #endregion
     }
 }
