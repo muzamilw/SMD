@@ -85,12 +85,19 @@
                 convertToServerData = function () {                   
                     debugger;
                     
-                    _.each(ProfileQuestionTargetLocation(), function (item) {
-                        targetLocation.push(item.convertToServerData());
-                    });
+                        _.each(ProfileQuestionTargetCriteria(), function (item) {
+                           
+                                targetLocation.push(item.convertToServerData());
+                            
+                        });
+                    
+
                     _.each(ProfileQuestionTargetCriteria(), function (item) {
-                        targetCriteria.push(item.convertToServerData());
-                    });
+                        
+                            targetCriteria.push(item.convertToServerData());
+                        
+                        });
+                    
                     return {
                         PqId:qId(),
                         Question:questionString(),
@@ -153,7 +160,8 @@
 
     var // ReSharper disable InconsistentNaming
       questionAnswer = function (ansString, imgpath, linkQ1, linkQ2, linkQ3, linkQ4, linkQ5, linkQ6, ansId,
-      qstId, srtOrder, spcType) {
+      qstId, srtOrder, spcType, ProfleQuestion) {
+          debugger;
           var
               linkedQuestion1Id = ko.observable(linkQ1),
               linkedQuestion2Id = ko.observable(linkQ2),
@@ -164,7 +172,7 @@
               linkedQuestion6Id = ko.observable(linkQ6),
               
               linkedQustionsCount = ko.observable(0),
-              
+              ProfleQuestion = ko.observable(ProfleQuestion),
               question1String = ko.observable(undefined),
               question2String = ko.observable(undefined),
               question3String = ko.observable(undefined),
@@ -219,7 +227,7 @@
                   linkedQuestion5Id: linkedQuestion5Id,
                   linkedQuestion6Id: linkedQuestion6Id,
                   pqAnswerId: pqAnswerId,
-
+                  ProfleQuestion:ProfleQuestion,
                   pqId: pqId,
                   sortOrder: sortOrder,
                   type: type,
@@ -274,7 +282,7 @@
               question5String : question5String,
               question6String : question6String,
               linkedQustionsCount: linkedQustionsCount,
-              
+              ProfleQuestion:ProfleQuestion,
               hasChanges: hasChanges,
               reset: reset,
               convertToServerData: convertToServerData,
@@ -289,10 +297,38 @@
     /////////////////////////////////////////////////////////QUESTION
     //server to client mapper For QUESTION
     var questionServertoClientMapper = function (itemFromServer) {
-       
+        debugger;
         return new question(itemFromServer.PqId, itemFromServer.Question, itemFromServer.Priority,
             itemFromServer.HasLinkedQuestions, itemFromServer.ProfileGroupName, itemFromServer.LanguageId, itemFromServer.CountryId, itemFromServer.ProfileGroupId, itemFromServer.Type, itemFromServer.RefreshTime
         , itemFromServer.SkippedCount, moment(itemFromServer.CreationDate), itemFromServer.ModifiedDate, itemFromServer.PenalityForNotAnswering, itemFromServer.Status, itemFromServer.CreatedBy, itemFromServer.StatusValue, itemFromServer.AnswerNeeded, itemFromServer.AsnswerCount, itemFromServer.Gender, itemFromServer.AgeRangeStart, itemFromServer.AgeRangeEnd);
+
+        _.each(itemFromServer.ProfileQuestionTargetCriterias, function (item) {
+            debugger;
+            question.ProfileQuestionTargetCriteria.push(ProfileQuestionTargetCriteria.Create(item));
+        });
+        _.each(itemFromServer.ProfileQuestionTargetLocations, function (item) {
+            debugger;
+            question.ProfileQuestionTargetLocation.push(ProfileQuestionTargetLocations.Create(item));
+        });
+    };
+
+
+    var questionServertoClientMapperQuestionAnswer = function (itemFromServer) {
+        
+        var Question= new question(itemFromServer.PqId, itemFromServer.Question, itemFromServer.Priority,
+            itemFromServer.HasLinkedQuestions, itemFromServer.ProfileGroupName, itemFromServer.LanguageId, itemFromServer.CountryId, itemFromServer.ProfileGroupId, itemFromServer.Type, itemFromServer.RefreshTime
+        , itemFromServer.SkippedCount, moment(itemFromServer.CreationDate), itemFromServer.ModifiedDate, itemFromServer.PenalityForNotAnswering, itemFromServer.Status, itemFromServer.CreatedBy, itemFromServer.StatusValue, itemFromServer.AnswerNeeded, itemFromServer.AsnswerCount, itemFromServer.Gender, itemFromServer.AgeRangeStart, itemFromServer.AgeRangeEnd);
+
+        _.each(itemFromServer.ProfileQuestionTargetCriteria, function (item) {
+           
+            Question.ProfileQuestionTargetCriteria.push(ProfileQuestionTargetCriteria.Create(item));
+
+          });
+        _.each(itemFromServer.ProfileQuestionTargetLocation, function (item) {
+            
+            Question.ProfileQuestionTargetLocation.push(ProfileQuestionTargetLocation.Create(item));
+        });
+        return Question;
     };
     
     // Function to attain cancel button functionality QUESTION
@@ -303,10 +339,12 @@
     //////////////////////////////////////////////  QUESTION ANSWER  
 
     //server to client mapper For QUESTION ANSWER 
-   var  questionAnswerServertoClientMapper = function (itemFromServer) {
+    var questionAnswerServertoClientMapper = function (itemFromServer) {
+       
+
         var obj= new questionAnswer(itemFromServer.AnswerString, itemFromServer.ImagePath, itemFromServer.LinkedQuestion1Id,
             itemFromServer.LinkedQuestion2Id, itemFromServer.LinkedQuestion3Id, itemFromServer.LinkedQuestion4Id, itemFromServer.LinkedQuestion5Id, itemFromServer.LinkedQuestion6Id, itemFromServer.PqAnswerId, itemFromServer.PqId
-        , itemFromServer.SortOrder, itemFromServer.Type);
+        , itemFromServer.SortOrder, itemFromServer.Type,itemFromServer.ProfileQuestion);
        //  Setting strings of linked questinos
         obj.question1String(setAnswerString(obj.linkedQuestion1Id(), obj));
         obj.question2String(setAnswerString(obj.linkedQuestion2Id(), obj));
@@ -314,6 +352,16 @@
         obj.question4String(setAnswerString(obj.linkedQuestion4Id(), obj));
         obj.question5String(setAnswerString(obj.linkedQuestion5Id(), obj));
         obj.question6String(setAnswerString(obj.linkedQuestion6Id(), obj));
+
+        obj.ProfleQuestion(questionServertoClientMapperQuestionAnswer(itemFromServer.ProfileQuestion));
+
+        //_.each(obj.ProfileQuestion, function (item) {
+        //    item.ProfileQuestionTargetCriteria.push(ProfileQuestionTargetCriteria.Create(item));
+        //});
+        //_.each(obj.ProfileQuestion, function (item) {
+        //    item.ProfileQuestionTargetLocation.push(ProfileQuestionTargetLocations.Create(item));
+        //});
+
         return obj;
     };
 
@@ -321,7 +369,7 @@
      questionAnswer.CreateFromClientModel = function (item) {
         return new questionAnswer(item.answerString, item.imagePath, item.linkedQuestion1Id,
             item.linkedQuestion2Id, item.linkedQuestion3Id, item.linkedQuestion4Id, item.linkedQuestion5Id, item.linkedQuestion6Id, item.pqAnswerId, item.pqId
-        , item.sortOrder, item.type);
+        , item.sortOrder, item.type,item.ProfileQuestion);
     };
 
     // Sets answer string of linked questions grid
@@ -338,9 +386,11 @@
         else
             return undefined;
     };
-  var  ProfileQuestionTargetLocation = function (ID, SQID, CountryID, CityID, Radius, Country, City, IncludeorExclude, Latitude, Longitude) {
+   var ProfileQuestionTargetLocation = function (ID, SQID, CountryID, CityID, Radius, Country, City, IncludeorExclude, Latitude, Longitude, PQID) {
+      
         var
             //type and userID will be set on server sside
+           
             ID = ko.observable(ID),
             SQID = ko.observable(SQID),
             CountryID = ko.observable(CountryID),
@@ -351,6 +401,7 @@
            IncludeorExclude = ko.observable(IncludeorExclude == true ? "1" : "0"),
            Latitude = ko.observable(Latitude),
            Longitude = ko.observable(Longitude),
+            PQID = ko.observable(PQID)
             // Convert to server data
             convertToServerData = function () {
                 return {
@@ -379,7 +430,7 @@
         };
   };
   var // ReSharper disable InconsistentNaming
- ProfileQuestionTargetCriteria = function (ID, PQID, Type, PQID, PQAnswerID, LinkedSQID, LinkedSqAnswer, IncludeorExclude, LanguageID, questionString, answerString, Language, IndustryID, Industry, EducationId, Education, AdCampaignAnswer, PQQuestionID, AdCampaignID) {
+ ProfileQuestionTargetCriteria = function (ID, PQID, Type, PQID, PQAnswerID, LinkedSQID, LinkedSqAnswer, IncludeorExclude, LanguageID, questionString, answerString, Language, IndustryID, Industry, EducationId, Education, AdCampaignAnswer, PQQuestionID, AdCampaignID, PQQuestionString, profileQuestRightImageSrc, profileQuestLeftImageSrc, IsDeleted) {
      
      var
          //type and userID will be set on server side
@@ -393,7 +444,9 @@
          AdCampaignAnswer = ko.observable(AdCampaignAnswer),
          PQQuestionID = ko.observable(PQQuestionID),
          AdCampaignID = ko.observable(AdCampaignID),
+         PQQuestionString = ko.observable(PQQuestionString),
 
+         IsDeleted = ko.observable(IsDeleted),
 
          LinkedSQID = ko.observable(LinkedSQID),
          LinkedSQAnswer = ko.observable(LinkedSqAnswer + ""),
@@ -407,7 +460,8 @@
          Industry = ko.observable(Industry),
          Education = ko.observable(Education),
          EducationId = ko.observable(EducationId)
-
+         profileQuestLeftImageSrc = ko.observable(profileQuestLeftImageSrc),
+         profileQuestRightImageSrc = ko.observable(profileQuestRightImageSrc),
          
          // Convert to server data
          convertToServerData = function () {
@@ -428,7 +482,10 @@
                  Education: Education(),
                  AdCampaignAnswer: AdCampaignAnswer(),
                  PQQuestionID: PQQuestionID(),
-                 AdCampaignID: AdCampaignID()
+                 AdCampaignID: AdCampaignID(),
+                 profileQuestLeftImageSrc: profileQuestLeftImageSrc(),
+                 profileQuestRightImageSrc: profileQuestRightImageSrc(),
+                 IsDeleted: IsDeleted()
              };
          };
      return {
@@ -451,18 +508,21 @@
          Education: Education,
          AdCampaignAnswer: AdCampaignAnswer,
          PQQuestionID: PQQuestionID,
-         AdCampaignID: AdCampaignID
-        
+         AdCampaignID: AdCampaignID,
+         profileQuestLeftImageSrc: profileQuestLeftImageSrc,
+         profileQuestRightImageSrc: profileQuestRightImageSrc,
+         IsDeleted:IsDeleted
      };
  };
 
-    ProfileQuestionTargetLocation.Create = function (source) {
+  ProfileQuestionTargetLocation.Create = function (source) {
+      debugger;
         return new ProfileQuestionTargetLocation(source.Id, source.SqId, source.CountryId, source.CityId, source.Radius,
-           source.Country, source.City, source.IncludeorExclude, source.Latitude, source.Longitude);
+           source.Country, source.City, source.IncludeorExclude, source.Latitude, source.Longitude, source.pqid);
     }
     ProfileQuestionTargetCriteria.Create = function (source) {
-        debugger;
-        return new ProfileQuestionTargetCriteria(source.Id, source.SqId, source.Type, source.PqId, source.PqAnswerId, source.LinkedSqId, source.LinkedSqAnswer, source.IncludeorExclude, source.LanguageId, source.questionString, source.answerString, source.Language, source.IndustryId, source.Industry, source.EducationId, source.Education, source.AdCampaignAnswer, source.PQQuestionID, source.AdCampaignID);
+        
+        return new ProfileQuestionTargetCriteria(source.Id, source.SqId, source.Type, source.PqId, source.PqAnswerId, source.LinkedSqId, source.LinkedSqAnswer, source.IncludeorExclude, source.LanguageId, source.questionString, source.answerString, source.Language, source.IndustryId, source.Industry, source.EducationId, source.Education, source.AdCampaignAnswer, source.PQQuestionID, source.AdCampaignID, source.PQQuestionString, source.profileQuestRightImageSrc,source.profileQuestLeftImageSrc,source.IsDeleted);
     };
     return {
         question: question,

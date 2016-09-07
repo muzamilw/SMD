@@ -39,7 +39,7 @@ namespace SMD.MIS.Areas.Api.Controllers
             {
                 throw new HttpException((int)HttpStatusCode.BadRequest, "Invalid Request");
             }
-
+           
             return _profileQuestionService.GetProfileQuestions(request).CraeteFrom();
         }
 

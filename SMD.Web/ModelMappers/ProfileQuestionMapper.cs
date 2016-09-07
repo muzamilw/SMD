@@ -197,7 +197,8 @@ namespace SMD.MIS.ModelMappers
                       EducationID = source.EducationID,
                       AdCampaignAnswer=source.AdCampaignAnswer,
                       PQQuestionID=source.PQQuestionID,
-                      AdCampaignID=source.AdCampaignID
+                      AdCampaignID=source.AdCampaignID,
+                      IsDeleted=source.IsDeleted
                   };
               }
               else
@@ -233,6 +234,7 @@ namespace SMD.MIS.ModelMappers
               string LanguageName = "";
               string IndustryName = "";
               string EducationName = "";
+              
 
               if (source.Type != null && source.Type == (int)AdCampaignCriteriaType.ProfileQuestion)
               {
@@ -367,8 +369,8 @@ namespace SMD.MIS.ModelMappers
                   City = CName,
                   Country = CountName,
                   Latitude = latitdue,
-                  Longitude = longitude
-
+                  Longitude = longitude,
+                  PQID=source.PQID
               };
           }
         /// <summary>
