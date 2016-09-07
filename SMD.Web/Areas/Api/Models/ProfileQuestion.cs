@@ -37,6 +37,7 @@ namespace SMD.MIS.Areas.Api.Models
 
         public string RejectionReason { get; set; }
         public string UserID { get; set; }
+        public double? AmountCharged { get; set; }
 
         public List<ProfileQuestionAnswer> ProfileQuestionAnswers { get; set; }
         public List<ProfileQuestionTargetCriteria> ProfileQuestionTargetCriteria { get; set; }

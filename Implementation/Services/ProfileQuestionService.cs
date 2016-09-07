@@ -318,7 +318,9 @@ namespace SMD.Implementation.Services
                     Gender = source.Gender,
                     SubmissionDateTime=source.SubmissionDateTime,
                     CreatedBy=source.CreatedBy,
-                    UserID=source.UserID
+                    UserID=source.UserID,
+                    AmountCharged = source.AmountCharged,
+                    AnswerNeeded =source.AnswerNeeded
                     //    CreatedBy = user.FullName
                 };
                 serverObj.CompanyId = compid;

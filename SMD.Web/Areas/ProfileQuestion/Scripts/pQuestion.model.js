@@ -2,14 +2,15 @@
 
     var // ReSharper disable InconsistentNaming
         question = function (questionId, spcQuestion, pr,linkQ,gName, langId, countId, groupId, spcType,
-        spcRefreshtime, spcSkipped, spcCreationD, spcModDate, penality, spcStatus, CreatedBy, StatusValue, AnswerNeeded, AnswerCount, Gender, AgeRangeStart,AgeRangeEnd) {
+        spcRefreshtime, spcSkipped, spcCreationD, spcModDate, penality, spcStatus, CreatedBy, StatusValue, AnswerNeeded,AmountCharge ,AnswerCount, Gender, AgeRangeStart,AgeRangeEnd) {
             var 
                 qId = ko.observable(questionId),
                 questionString = ko.observable(spcQuestion).extend({ required: true }),
                 priority = ko.observable(pr),
                 hasLinkedQuestions = ko.observable(linkQ),
                 profileGroupName = ko.observable(gName),
-                answerNeeded = ko.observable(AnswerNeeded),
+                answerNeeded = ko.observable(AnswerNeeded).extend({ required: true }),
+                amountCharge = ko.observable(AmountCharge),
                 answerCount = ko.observable(AnswerCount),
                 languageId = ko.observable(langId),
                 countryId = ko.observable(countId),
@@ -39,6 +40,7 @@
                 errors = ko.validation.group({                    
                     questionString: questionString,
                     profileGroupId: profileGroupId,
+                    answerNeeded:answerNeeded,
                     type: type
                 }),
                 // Is Valid
@@ -54,6 +56,7 @@
                     languageId: languageId,
                     countryId: countryId,
                     profileGroupId: profileGroupId,
+                    answerNeeded:answerNeeded,
                     type: type,
 
                     refreshTime: refreshTime,
@@ -67,6 +70,7 @@
                     createdBy: createdBy,
                     statusValue: statusValue,
                     answerCount: answerCount,
+                    amountCharge:amountCharge,
                     answerNeeded: answerNeeded,
                     AgeRangeStart: AgeRangeStart,
                     AgeRangeEnd: AgeRangeEnd
@@ -116,7 +120,10 @@
                         AgeRangeStart: AgeRangeStart(),
                         AgeRangeEnd:AgeRangeEnd(),
                         ProfileQuestionTargetLocation: targetLocation,
-                        ProfileQuestionTargetCriteria: targetCriteria
+                        ProfileQuestionTargetCriteria: targetCriteria,
+                        AnswerNeeded:answerNeeded,
+                        AmountCharged: amountCharge,
+                        
                     };
                 };
             return {
@@ -147,6 +154,7 @@
                 isValid: isValid,
                 statusValue: statusValue,
                 answerNeeded: answerNeeded,
+                amountCharge:amountCharge,
                 answerCount:answerCount,
                 errors: errors,
                 ProfileQuestionTargetLocation: ProfileQuestionTargetLocation,
@@ -300,7 +308,7 @@
         debugger;
         return new question(itemFromServer.PqId, itemFromServer.Question, itemFromServer.Priority,
             itemFromServer.HasLinkedQuestions, itemFromServer.ProfileGroupName, itemFromServer.LanguageId, itemFromServer.CountryId, itemFromServer.ProfileGroupId, itemFromServer.Type, itemFromServer.RefreshTime
-        , itemFromServer.SkippedCount, moment(itemFromServer.CreationDate), itemFromServer.ModifiedDate, itemFromServer.PenalityForNotAnswering, itemFromServer.Status, itemFromServer.CreatedBy, itemFromServer.StatusValue, itemFromServer.AnswerNeeded, itemFromServer.AsnswerCount, itemFromServer.Gender, itemFromServer.AgeRangeStart, itemFromServer.AgeRangeEnd);
+        , itemFromServer.SkippedCount, moment(itemFromServer.CreationDate), itemFromServer.ModifiedDate, itemFromServer.PenalityForNotAnswering, itemFromServer.Status, itemFromServer.CreatedBy, itemFromServer.StatusValue, itemFromServer.AnswerNeeded,itemFromServer.AmountCharged, itemFromServer.AsnswerCount, itemFromServer.Gender, itemFromServer.AgeRangeStart, itemFromServer.AgeRangeEnd);
 
         _.each(itemFromServer.ProfileQuestionTargetCriterias, function (item) {
             debugger;
