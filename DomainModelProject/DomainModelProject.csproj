@@ -150,6 +150,9 @@
     <Compile Include="GetProducts_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="GetTransactions_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Industry.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

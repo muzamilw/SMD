@@ -136,9 +136,9 @@ namespace SMD.Implementation.Services
             UpdateUsersPaypalAccountNew(smdCompany, amount, dbContext, false);
 
             // update users  virutal accont debit 
-            updateVirtualAccount(Usercompany, amount, dbContext,  TransactionType.UserCashOut, false);
+            updateVirtualAccount(Usercompany, amount, dbContext,  TransactionType.UserCashOutPaypal, false);
             // update smd users  virutal accont debit 
-            updateVirtualAccount(smdCompany, amount, dbContext, TransactionType.UserCashOut);
+            updateVirtualAccount(smdCompany, amount, dbContext, TransactionType.UserCashOutPaypal);
 
         }
         private static void UpdateUsersPaypalAccountNew(Company company, double amount,  BaseDbContext dbContext, bool isCredit = true)

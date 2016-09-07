@@ -529,6 +529,33 @@ namespace SMD.Repository.BaseRepository
         }
 
 
+        /// <summary>
+        /// Returns the transactiopns agaisnt a companyid's account
+        /// </summary>
+        /// <param name="CompanyId"></param>
+        /// <param name="AccountType"></param>
+        /// <param name="Rows"></param>
+        /// <returns></returns>
+        public ObjectResult<GetTransactions_Result> GetTransactions(int CompanyId, int AccountType, int Rows)
+        {
+            var RowsParameter = Rows != null ?
+                new ObjectParameter("Rows", Rows) :
+                new ObjectParameter("Rows", typeof(int));
+
+            var AccountTypeParameter = AccountType != null ?
+               new ObjectParameter("AccountType", AccountType) :
+               new ObjectParameter("AccountType", typeof(int));
+
+            var CompanyIdParameter = CompanyId != null ?
+               new ObjectParameter("CompanyId", CompanyId) :
+               new ObjectParameter("CompanyId", typeof(int));
+
+
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetTransactions_Result>("GetTransactions", CompanyIdParameter, AccountTypeParameter, RowsParameter);
+        }
+
+
+
 
         #endregion
     }

@@ -13,5 +13,7 @@ namespace SMD.Interfaces.Repository
         /// </summary>
         IEnumerable<Transaction> GetUnprocessedTransactionsForDebit();
         List<vw_GetUserTransactions> GetUserTransactions();
+
+        List<GetTransactions_Result> GetTransactions(int CompanyId, int AccountType, int Rows);
     }
 }
