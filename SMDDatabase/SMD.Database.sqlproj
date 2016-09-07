@@ -60,5 +60,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="SMDChanges.sql" />
+    <None Include="GetUserProfileQuestions.sql" />
+    <None Include="GetUserSurveys.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="GetProducts.sql" />
   </ItemGroup>
 </Project>

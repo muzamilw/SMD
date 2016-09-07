@@ -384,6 +384,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\SecurityConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Api\Controllers\ActiveUserController.cs" />
     <Compile Include="Areas\Api\Controllers\ApproveProfileQuestionAnsController.cs" />
     <Compile Include="Areas\Api\Controllers\ApproveProfileQuestionController.cs" />
     <Compile Include="Areas\Api\Controllers\BranchCategoryController.cs" />
@@ -679,6 +680,10 @@
     <Content Include="Areas\Franchise\Scripts\surveyQuestionApp.model.js" />
     <Content Include="Areas\Franchise\Scripts\surveyQuestionApp.view.js" />
     <Content Include="Areas\Franchise\Scripts\surveyQuestionApp.viewModel.js" />
+    <Content Include="Areas\SuperNova\Scripts\analytic.dataservice.js" />
+    <Content Include="Areas\SuperNova\Scripts\analytic.model.js" />
+    <Content Include="Areas\SuperNova\Scripts\analytic.view.js" />
+    <Content Include="Areas\SuperNova\Scripts\analytic.viewModel.js" />
     <Content Include="Areas\Survey\Scripts\survey.dataservice.js" />
     <Content Include="Areas\Survey\Scripts\survey.model.js" />
     <Content Include="Areas\Survey\Scripts\survey.view.js" />

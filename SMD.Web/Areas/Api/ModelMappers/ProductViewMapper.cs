@@ -55,7 +55,10 @@ namespace SMD.MIS.Areas.Api.ModelMappers
                        IsShowVoucherSetting = source.IsShowVoucherSetting ?? false,
                        VouchersCount = source.VoucherCount.HasValue == true? source.VoucherCount.Value:0,
                        CompanyId = source.CompanyId.HasValue == true? source.CompanyId.Value:0,
-                        GameId = source.GameId.HasValue == true ? source.GameId.Value:0
+                        GameId = source.GameId.HasValue == true ? source.GameId.Value:0,
+                        FreeCouponID = source.FreeCouponID.HasValue == true ? source.FreeCouponID.Value :0,
+                        SocialHandle = source.SocialHandle,
+                        SocialHandleType = source.SocialHandleType
                        
                    };
         }

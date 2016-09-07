@@ -5722,6 +5722,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Property Type="String" Name="GameUrl" Nullable="true" MaxLength="200" />
           <Property Type="Int32" Name="AdCount" Nullable="true" />
           <Property Type="Int32" Name="TotalItems" Nullable="true" />
+          <Property Type="String" Name="SocialHandle" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="SocialHandleType" Nullable="true" MaxLength="128" />
+          <Property Type="Int64" Name="FreeCouponID" Nullable="true" />
         </ComplexType>
         <Association Name="FK_ProfileQuestionTargetCriteria_ProfileQuestion2">
           <End Type="DomainModels.ProfileQuestion" Role="ProfileQuestion" Multiplicity="0..1" />
@@ -7032,6 +7035,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
                 <ScalarProperty Name="GameUrl" ColumnName="GameUrl" />
                 <ScalarProperty Name="AdCount" ColumnName="AdCount" />
                 <ScalarProperty Name="TotalItems" ColumnName="TotalItems" />
+                <ScalarProperty Name="SocialHandle" ColumnName="SocialHandle" />
+                <ScalarProperty Name="SocialHandleType" ColumnName="SocialHandleType" />
+                <ScalarProperty Name="FreeCouponID" ColumnName="FreeCouponID" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
