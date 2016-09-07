@@ -62,6 +62,7 @@
     <None Include="SMDChanges.sql" />
     <None Include="GetUserProfileQuestions.sql" />
     <None Include="GetUserSurveys.sql" />
+    <None Include="SMDChanges2.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="GetProducts.sql" />

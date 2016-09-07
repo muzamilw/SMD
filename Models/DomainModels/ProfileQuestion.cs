@@ -42,6 +42,8 @@ namespace SMD.Models.DomainModels
           public string RejectionReason { get; set; }
           public string UserID { get; set; }
 
+          public double? AmountCharged { get; set; }
+
         public virtual ICollection<ProfileQuestionAnswer> ProfileQuestionAnswers { get; set; }
         public virtual ICollection<ProfileQuestionUserAnswer> ProfileQuestionUserAnswers { get; set; }
         public virtual ProfileQuestionGroup ProfileQuestionGroup { get; set; }
