@@ -124,6 +124,10 @@ namespace SMD.Repository.Repositories
             return db.Users.Where(g => g.AuthenticationToken == token).SingleOrDefault();
             
         }
+        public string GetCompanyNameByID(int CompanyId)
+        {
+            return DbSet.Where(c => c.CompanyId == CompanyId).FirstOrDefault().CompanyName;
+        }
         #endregion
     }
 }
