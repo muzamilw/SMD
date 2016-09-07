@@ -59,13 +59,27 @@ namespace SMD.MIS.Areas.Api.Controllers
             {
                 var trans = transactionService.GetUserVirtualTransactions(request.CompanyId);
 
-                return new StatementInquiryResponse
+                if ( trans.Count > 0)
                 {
-                    Status = true,
-                    Message = "Success",
-                    Balance = trans[0].CurrentBalance,
-                    Transactions = Mapper.Map<List<SMD.Models.DomainModels.GetTransactions_Result>, List<StatementTrasaction>>(trans)
-                };
+                    return new StatementInquiryResponse
+                    {
+                        Status = true,
+                        Message = "Success",
+                        Balance = trans[0].CurrentBalance,
+                        Transactions = Mapper.Map<List<SMD.Models.DomainModels.GetTransactions_Result>, List<StatementTrasaction>>(trans)
+                    };
+                }
+                else
+                {
+                    return new StatementInquiryResponse
+                    {
+                        Status = true,
+                        Message = "Success",
+                        Balance = 0,
+                        Transactions = null
+                    };
+                }
+                
             }
             catch (Exception e)
             {

@@ -90,7 +90,7 @@ namespace SMD.Implementation.Services
         /// <param name="isCredit">Credit if true</param>
         /// <param name="isProcessed">Tranation status </param>
         private void PerformTransaction(long? adCampaingId, long? surveyQuestionId, Account account, double? transactionAmount,
-            int transactionSequence, TransactionType transactionType, bool isCredit = true, bool isProcessed = false)
+            int transactionSequence, TransactionType transactionType, bool isCredit = true, bool isProcessed = false, int PQID = 0)
         {
             var transaction = new Transaction
                                              {
@@ -287,91 +287,9 @@ namespace SMD.Implementation.Services
         #region Survery Approval Transactions
 
 
-        /// <summary>
-        /// Validates Survey Question
-        /// Survey Question Exists
-        /// </summary>
-        private async Task<SurveyQuestion> ValidateSurveyQuestion(ApproveSurveyRequest request)
-        {
-            // Get Survey Question against Survery Question Id
-            SurveyQuestion surveyQuestion = surveyQuestionRepository.Find(request.SurveyQuestionId);
-            if (surveyQuestion == null)
-            {
-                throw new SMDException(string.Format(CultureInfo.InvariantCulture,
-                    LanguageResources.WebApiUserService_SurveyQuestionNotFound,
-                    request.SurveyQuestionId));
-            }
 
-            if (string.IsNullOrEmpty(surveyQuestion.UserId))
-            {
-                throw new SMDException(LanguageResources.WebApiUserService_AdvertiserNotFound);
-            }
 
-            // Get Advertiser
-            User advertiser = await UserManager.FindByIdAsync(surveyQuestion.UserId);
-            if (advertiser == null)
-            {
-                throw new SMDException(LanguageResources.WebApiUserService_AdvertiserNotFound);
-            }
 
-            return surveyQuestion;
-        }
-
-        /// <summary>
-        /// Sets up accounts for transcations
-        /// Verifies if required accounts exist
-        /// </summary>
-        private void SetupSurveyApproveTransaction(SurveyQuestion surveyQuestion, out Account advertisersAccount, out Account smdAccount, 
-            string systemUserId)
-        {
-            advertisersAccount = accountRepository.GetByUserId(surveyQuestion.UserId, AccountType.VirtualAccount);
-            if (advertisersAccount == null)
-            {
-                throw new SMDException(string.Format(CultureInfo.InvariantCulture,
-                    LanguageResources.WebApiUserService_AccountNotFound, "Advertiser"));
-            }
-
-            smdAccount = accountRepository.GetByUserId(systemUserId, AccountType.VirtualAccount);
-            if (smdAccount == null)
-            {
-                throw new SMDException(string.Format(CultureInfo.InvariantCulture,
-                    LanguageResources.WebApiUserService_AccountNotFound, "Cash4Ads"));
-            }
-        }
-
-        /// <summary>
-        /// Performs Transactions on Survey Approval
-        /// </summary>
-        private void PerformSurveyApproveTransactions(ApproveSurveyRequest request, Account advertisersAccount, double approvedSurveyAmount,
-            double? smdsCut, Account smdAccount, SurveyQuestion surveyQuestion, double amount, int? productId,
-            double taxValue, bool isApiCall = true)
-        {
-            // Debit Advertiser
-            var transactionSequence = 1;
-
-            // Perform the transactions
-            // Debit Survey Advertiser
-            PerformTransaction(null, request.SurveyQuestionId, advertisersAccount, approvedSurveyAmount, transactionSequence, TransactionType.ApproveSurvey, false, true);
-
-            // Credit SMD
-            transactionSequence += 1;
-            PerformTransaction(null, request.SurveyQuestionId, smdAccount, smdsCut, transactionSequence, TransactionType.ApproveSurvey, true, true);
-
-            // Add Invoice Details
-            AddInvoiceDetails(surveyQuestion, amount, request.StripeResponse, productId, taxValue, isApiCall);
-            // If called locally
-            if (!isApiCall)
-            {
-                return;
-            }
-
-            // Mark survey as approved
-            surveyQuestion.Approved = true;
-            surveyQuestion.ApprovedByUserId = request.UserId;
-
-            // Save Changes
-            transactionRepository.SaveChanges();
-        }
 
         /// <summary>
         /// Invoice + Details work 
@@ -814,58 +732,7 @@ namespace SMD.Implementation.Services
         #endregion
         #region Public
 
-        #region Approve Survey
-
-        /// <summary>
-        /// Update Transactions on viewing ad
-        /// </summary>
-        public async Task<BaseApiResponse> UpdateTransactionOnSurveyApproval(ApproveSurveyRequest request, bool isApiCall = true)
-        {
-            // Get Survey Approver
-            User surveyApprover = await UserManager.FindByIdAsync(request.UserId);
-            if (surveyApprover == null)
-            {
-                throw new SMDException(LanguageResources.WebApiUserService_InvalidUserId);
-            }
-
-            User cash4Ads = await UserManager.FindByEmailAsync(SystemUsers.Cash4Ads);
-            if (cash4Ads == null)
-            {
-                throw new SMDException(string.Format(CultureInfo.InvariantCulture, LanguageResources.WebApiUserService_InvalidUser,
-                    "Cash4Ads"));
-            }
-
-            // Validates if Ad Campaing Exists and has Advertiser info as well
-            var surveyQuestion = await ValidateSurveyQuestion(request);
-
-            // Begin Transaction
-            // SMD will get 100 %
-            // Get Current Product
-            var product = productRepository.GetProductByCountryId( "SQ");
-            // Tax Applied
-            var tax = taxRepository.GetTaxByCountryId(surveyQuestion.CountryId);
-            var taxValue = tax != null && tax.TaxValue.HasValue ? tax.TaxValue.Value : 0;
-            // Total includes tax
-            double? approvedSurveyAmount = product.SetupPrice + taxValue;
-            Account advertisersAccount;
-            Account smdAccount;
-
-            // Sets up transaction 
-            // Gets Accounts required
-            SetupSurveyApproveTransaction(surveyQuestion, out advertisersAccount, out smdAccount, cash4Ads.Id);
-
-            // Perform Transactions
-            PerformSurveyApproveTransactions(request, advertisersAccount, (double)approvedSurveyAmount, approvedSurveyAmount,
-                smdAccount, surveyQuestion, (double)approvedSurveyAmount, product.ProductId, taxValue, isApiCall);
-
-            return new BaseApiResponse
-            {
-                Status = true,
-                Message = "Success"
-            };
-        }
-
-        #endregion
+      
 
         #region Ad Approve
 

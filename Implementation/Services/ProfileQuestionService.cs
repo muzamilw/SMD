@@ -559,8 +559,11 @@ namespace SMD.Implementation.Services
 
             if (response != null && !response.Contains("Failed"))
             {
-                if (isSystemUser)
+                if (source.CompanyId != null)
                 {
+                    TransactionManager.ProfileQuestionApproveTransaction(source.PqId, amount, source.CompanyId.Value);
+
+
                     #region Add Invoice
 
                     // Add invoice data
