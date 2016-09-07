@@ -54,6 +54,7 @@ namespace DomainModelProject
         public Nullable<System.DateTime> ApprovalDate { get; set; }
         public string RejectionReason { get; set; }
         public string UserID { get; set; }
+        public Nullable<double> AmountCharged { get; set; }
     
         public virtual ICollection<AdCampaignTargetCriteria> AdCampaignTargetCriterias { get; set; }
         public virtual ICollection<ProfileQuestionAnswer> ProfileQuestionAnswers { get; set; }

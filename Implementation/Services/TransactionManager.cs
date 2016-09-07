@@ -124,6 +124,80 @@ namespace SMD.Implementation.Services
           }
 
 
+          public static bool SurveyApproveTransaction(long SQID, double Payment, int CompanyId)
+          {
+              using (var dbContext = new BaseDbContext())
+              {
+
+                  var userCompany = dbContext.Companies.Where(g => g.CompanyId == CompanyId).SingleOrDefault();
+
+                  var smdCompany = GetCash4AdsUser(dbContext).Company;
+
+
+                  //get money from stripe
+
+                  // update company  stripe accont debit 
+                  updateStripeAccount(userCompany, Payment, dbContext, TransactionType.ApproveSurvey, false, null, null,SQID);
+                  // update smd users  stripe accont credit 
+                  updateStripeAccount(smdCompany, Payment, dbContext, TransactionType.ApproveSurvey, true, null, null, SQID);
+
+
+
+                  // 1 UsD = 100 Centz into virtual
+                  // update users  virutal accont debit 
+                  updateVirtualAccount(userCompany, Payment * 100, dbContext, TransactionType.ApproveSurvey, true, null, null, SQID);
+                  // update smd users  virutal accont credit 
+                  updateVirtualAccount(smdCompany, Payment * 100, dbContext, TransactionType.ApproveSurvey, false, null, null, SQID);
+
+
+                  // update smd users  virutal accont credit 
+                  //updateUsersVirtualAccount(coupon.Company, SwapCost, dbContext, 2, true, null, couponId);
+
+                  dbContext.SaveChanges();
+                  return true;
+              }
+          }
+
+
+          public static bool ProfileQuestionApproveTransaction(int PQID, double Payment, int CompanyId)
+          {
+              using (var dbContext = new BaseDbContext())
+              {
+
+                  var userCompany = dbContext.Companies.Where(g => g.CompanyId == CompanyId).SingleOrDefault();
+
+                  var smdCompany = GetCash4AdsUser(dbContext).Company;
+
+
+                  //get money from stripe
+
+                  // update company  stripe accont debit 
+                  updateStripeAccount(userCompany, Payment, dbContext, TransactionType.ApproveProfileQuestion, false, null, null,null, PQID);
+                  // update smd users  stripe accont credit 
+                  updateStripeAccount(smdCompany, Payment, dbContext, TransactionType.ApproveProfileQuestion, true, null, null, null, PQID);
+
+
+
+                  // 1 UsD = 100 Centz into virtual
+                  // update users  virutal accont debit 
+                  updateVirtualAccount(userCompany, Payment * 100, dbContext, TransactionType.ApproveProfileQuestion, true, null, null, null, PQID);
+                  // update smd users  virutal accont credit 
+                  updateVirtualAccount(smdCompany, Payment * 100, dbContext, TransactionType.ApproveProfileQuestion, false, null, null, null, PQID);
+
+
+                  // update smd users  virutal accont credit 
+                  //updateUsersVirtualAccount(coupon.Company, SwapCost, dbContext, 2, true, null, couponId);
+
+                  dbContext.SaveChanges();
+                  return true;
+              }
+          }
+
+
+
+
+
+
 
         // used by new payout scheduler 
         private static void UpdateAccountsUserPayout(Company Usercompany, Company smdCompany, double amount,
@@ -136,9 +210,9 @@ namespace SMD.Implementation.Services
             UpdateUsersPaypalAccountNew(smdCompany, amount, dbContext, false);
 
             // update users  virutal accont debit 
-            updateVirtualAccount(Usercompany, amount, dbContext,  TransactionType.UserCashOut, false);
+            updateVirtualAccount(Usercompany, amount, dbContext,  TransactionType.UserCashOutPaypal, false);
             // update smd users  virutal accont debit 
-            updateVirtualAccount(smdCompany, amount, dbContext, TransactionType.UserCashOut);
+            updateVirtualAccount(smdCompany, amount, dbContext, TransactionType.UserCashOutPaypal);
 
         }
         private static void UpdateUsersPaypalAccountNew(Company company, double amount,  BaseDbContext dbContext, bool isCredit = true)
@@ -194,7 +268,7 @@ namespace SMD.Implementation.Services
             usersPaypalAccount.Transactions.Add(batchTransaction);
             dbContext.Transactions.Add(batchTransaction);
         }
-        private static void updateVirtualAccount(Company company, double amount, BaseDbContext dbContext, TransactionType type, bool isCredit = true, long? CouponId = null, long? CampaignId = null)
+        private static void updateVirtualAccount(Company company, double amount, BaseDbContext dbContext, TransactionType type, bool isCredit = true, long? CouponId = null, long? CampaignId = null, long? SurveyId = null, int? ProfileQuestionID = null)
         {
             Account userVirtualAccount = company.Accounts.FirstOrDefault(acc => acc.AccountType == (int)AccountType.VirtualAccount);
             if (userVirtualAccount == null)
@@ -212,6 +286,8 @@ namespace SMD.Implementation.Services
                 TransactionDate = DateTime.Now,
                 CouponId = CouponId,
                 AdCampaignId = CampaignId,
+                PQID = ProfileQuestionID,
+                SQId = SurveyId,
                 
                 TransactionLogs = new List<TransactionLog>
                                                          {

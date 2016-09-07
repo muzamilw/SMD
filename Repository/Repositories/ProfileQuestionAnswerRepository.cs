@@ -47,7 +47,8 @@ namespace SMD.Repository.Repositories
         /// </summary>
         public IEnumerable<ProfileQuestionAnswer> GetProfileQuestionAnswerByQuestionId(long profileQuestionId)
         {
-            return DbSet.Where(ans => ans.PqId == profileQuestionId && (ans.Status == (Int32)ObjectStatus.Active)).ToList();
+            var Query= DbSet.Where(ans => ans.PqId == profileQuestionId && (ans.Status == (Int32)ObjectStatus.Active)).Include("ProfileQuestionTargetCriterias.ProfileQuestion");
+            return Query;
         }
 
         /// <summary>

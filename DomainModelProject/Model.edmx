@@ -728,6 +728,7 @@
           <Property Name="ApprovalDate" Type="datetime" />
           <Property Name="RejectionReason" Type="nvarchar" MaxLength="1000" />
           <Property Name="UserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="AmountCharged" Type="float" />
         </EntityType>
         <EntityType Name="ProfileQuestionAnswer">
           <Key>
@@ -2175,6 +2176,11 @@
           <Parameter Name="FromRow" Type="int" Mode="In" />
           <Parameter Name="ToRow" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetTransactions" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CompanyID" Type="int" Mode="In" />
+          <Parameter Name="AccountType" Type="int" Mode="In" />
+          <Parameter Name="Rows" Type="int" Mode="In" />
+        </Function>
         <Function Name="SearchCampaigns" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Status" Type="int" Mode="In" />
           <Parameter Name="keyword" Type="nvarchar" Mode="In" />
@@ -3462,6 +3468,7 @@
           <Property Name="RejectionReason" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="ProfileQuestionTargetCriterias1" Relationship="SMDDevModel.FK_ProfileQuestionTargetCriteria_ProfileQuestion2" FromRole="ProfileQuestion" ToRole="ProfileQuestionTargetCriteria" />
+          <Property Name="AmountCharged" Type="Double" />
         </EntityType>
         <EntityType Name="ProfileQuestionAnswer">
           <Key>
@@ -3668,7 +3675,6 @@
           <Property Name="CurrencyID" Type="Int32" />
           <Property Name="CurrencyRateID" Type="Int32" />
           <Property Name="Sequence" Type="Int32" />
-          <Property Name="CouponCodeId" Type="Int64" />
           <Property Name="AccountBalance" Type="Double" />
           <NavigationProperty Name="Account" Relationship="Self.FK_Transaction_Account" FromRole="Transaction" ToRole="Account" />
           <NavigationProperty Name="TransactionLogs" Relationship="Self.FK_TransactionLog_TransactionLog" FromRole="Transaction" ToRole="TransactionLog" />
@@ -5099,6 +5105,11 @@
             <End Role="ProfileQuestion" EntitySet="ProfileQuestions" />
             <End Role="ProfileQuestionTargetCriteria" EntitySet="ProfileQuestionTargetCriterias" />
           </AssociationSet>
+          <FunctionImport Name="GetTransactions" ReturnType="Collection(SMDDevModel.GetTransactions_Result)">
+            <Parameter Name="CompanyID" Mode="In" Type="Int32" />
+            <Parameter Name="AccountType" Mode="In" Type="Int32" />
+            <Parameter Name="Rows" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="CouponCategories">
           <Key>
@@ -5630,11 +5641,14 @@
           <Property Type="Int32" Name="VoucherCount" Nullable="true" />
           <Property Type="Int32" Name="CompanyId" Nullable="true" />
           <Property Type="String" Name="VideoLink2" Nullable="true" />
-          <Property Type="Int32" Name="IsShowVoucherSetting" Nullable="true" />
+          <Property Type="Boolean" Name="IsShowVoucherSetting" Nullable="true" />
           <Property Type="Int64" Name="GameId" Nullable="true" />
           <Property Type="String" Name="GameUrl" Nullable="true" MaxLength="200" />
           <Property Type="Int32" Name="AdCount" Nullable="true" />
           <Property Type="Int32" Name="TotalItems" Nullable="true" />
+          <Property Type="String" Name="SocialHandle" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="SocialHandleType" Nullable="true" MaxLength="128" />
+          <Property Type="Int64" Name="FreeCouponID" Nullable="true" />
         </ComplexType>
         <Association Name="FK_ProfileQuestionTargetCriteria_ProfileQuestion2">
           <End Type="SMDDevModel.ProfileQuestion" Role="ProfileQuestion" Multiplicity="0..1" />
@@ -5648,6 +5662,28 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="GetTransactions_Result">
+          <Property Type="Int64" Name="TxID" Nullable="false" />
+          <Property Type="DateTime" Name="TransactionDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="Type" Nullable="true" />
+          <Property Type="Int32" Name="DebitCredit" Nullable="true" />
+          <Property Type="Double" Name="CreditAmount" Nullable="true" />
+          <Property Type="Double" Name="DebitAmount" Nullable="true" />
+          <Property Type="Int64" Name="AccountID" Nullable="true" />
+          <Property Type="Double" Name="TaxPerc" Nullable="true" />
+          <Property Type="Double" Name="TaxValue" Nullable="true" />
+          <Property Type="Int64" Name="AdCampaignID" Nullable="true" />
+          <Property Type="Int64" Name="SQID" Nullable="true" />
+          <Property Type="Boolean" Name="isProcessed" Nullable="true" />
+          <Property Type="Int32" Name="CurrencyID" Nullable="true" />
+          <Property Type="Int32" Name="CurrencyRateID" Nullable="true" />
+          <Property Type="Int32" Name="Sequence" Nullable="true" />
+          <Property Type="Int64" Name="CouponId" Nullable="true" />
+          <Property Type="Double" Name="AccountBalance" Nullable="true" />
+          <Property Type="Int32" Name="PQID" Nullable="true" />
+          <Property Type="Double" Name="CurrentBalance" Nullable="true" />
+          <Property Type="String" Name="description" Nullable="true" MaxLength="516" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -6335,6 +6371,7 @@
           <EntitySetMapping Name="ProfileQuestions">
             <EntityTypeMapping TypeName="SMDDevModel.ProfileQuestion">
               <MappingFragment StoreEntitySet="ProfileQuestion">
+                <ScalarProperty Name="AmountCharged" ColumnName="AmountCharged" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="RejectionReason" ColumnName="RejectionReason" />
                 <ScalarProperty Name="ApprovalDate" ColumnName="ApprovalDate" />
@@ -6914,6 +6951,35 @@
                 <ScalarProperty Name="GameUrl" ColumnName="GameUrl" />
                 <ScalarProperty Name="AdCount" ColumnName="AdCount" />
                 <ScalarProperty Name="TotalItems" ColumnName="TotalItems" />
+                <ScalarProperty Name="SocialHandle" ColumnName="SocialHandle" />
+                <ScalarProperty Name="SocialHandleType" ColumnName="SocialHandleType" />
+                <ScalarProperty Name="FreeCouponID" ColumnName="FreeCouponID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetTransactions" FunctionName="SMDDevModel.Store.GetTransactions">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SMDDevModel.GetTransactions_Result">
+                <ScalarProperty Name="TxID" ColumnName="TxID" />
+                <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="DebitCredit" ColumnName="DebitCredit" />
+                <ScalarProperty Name="CreditAmount" ColumnName="CreditAmount" />
+                <ScalarProperty Name="DebitAmount" ColumnName="DebitAmount" />
+                <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+                <ScalarProperty Name="TaxPerc" ColumnName="TaxPerc" />
+                <ScalarProperty Name="TaxValue" ColumnName="TaxValue" />
+                <ScalarProperty Name="AdCampaignID" ColumnName="AdCampaignID" />
+                <ScalarProperty Name="SQID" ColumnName="SQID" />
+                <ScalarProperty Name="isProcessed" ColumnName="isProcessed" />
+                <ScalarProperty Name="CurrencyID" ColumnName="CurrencyID" />
+                <ScalarProperty Name="CurrencyRateID" ColumnName="CurrencyRateID" />
+                <ScalarProperty Name="Sequence" ColumnName="Sequence" />
+                <ScalarProperty Name="CouponId" ColumnName="CouponId" />
+                <ScalarProperty Name="AccountBalance" ColumnName="AccountBalance" />
+                <ScalarProperty Name="PQID" ColumnName="PQID" />
+                <ScalarProperty Name="CurrentBalance" ColumnName="CurrentBalance" />
+                <ScalarProperty Name="description" ColumnName="description" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

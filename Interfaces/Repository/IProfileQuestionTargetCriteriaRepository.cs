@@ -10,5 +10,6 @@ namespace SMD.Interfaces.Repository
     public interface IProfileQuestionTargetCriteriaRepository : IBaseRepository<ProfileQuestionTargetCriteria, long>
     {
         List<ProfileQuestionTargetCriteria> GetProfileQuestionTargetCiteria(long PQID);
+         void RemoveCriteria(int PqID);
     }
 }

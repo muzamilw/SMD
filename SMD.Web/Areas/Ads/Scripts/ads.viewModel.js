@@ -1197,9 +1197,7 @@ define("ads/ads.viewModel",
                             SearchText: ""
                         }, {
                             success: function (data) {
-
                                 if (data != null) {
-
                                     // set languages drop down
                                     var profileQIds = [];
                                     var surveyQIds = [];
@@ -1315,6 +1313,7 @@ define("ads/ads.viewModel",
 
                                     selectedQuestionCountryList([]);
                                     _.each(campaignModel().AdCampaignTargetLocations(), function (item) {
+                                        debugger;
                                         addCountryToCountryList(item.CountryID(), item.Country());
                                     });
 
@@ -2037,7 +2036,7 @@ define("ads/ads.viewModel",
                 },
                 addCountryToCountryList = function (country, name) {
                     if (country != undefined) {
-
+                        debugger;
                         var matcharry = ko.utils.arrayFirst(selectedQuestionCountryList(), function (item) {
 
                             return item.id == country;
@@ -2049,6 +2048,7 @@ define("ads/ads.viewModel",
                     }
                 },
                 findLocationsInCountry = function (id) {
+                   
 
                     var list = ko.utils.arrayFilter(campaignModel().AdCampaignTargetLocations(), function (prod) {
                         return prod.CountryID() == id;

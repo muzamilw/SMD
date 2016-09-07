@@ -51,6 +51,13 @@ namespace SMD.Repository.Repositories
         {
             return db.vw_GetUserTransactions.ToList();
         }
+
+
+          public List<GetTransactions_Result> GetTransactions(int CompanyId, int AccountType, int Rows )
+        {
+            return db.GetTransactions(CompanyId, AccountType, Rows).ToList();
+
+        }
         #endregion 
     }
 }

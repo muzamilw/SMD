@@ -87,7 +87,7 @@ namespace SMD.Implementation.Services
             var stripeChargeCreateOptions = new StripeChargeCreateOptions
             {
                 CustomerId = customerStripeId,
-                Amount = amount,
+                Amount = amount *100,
                 Currency = "usd",
                 Capture = true
                 // (not required) set this to false if you don't want to capture the charge yet - requires you call capture later

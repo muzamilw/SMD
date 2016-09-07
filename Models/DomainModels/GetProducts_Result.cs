@@ -115,6 +115,11 @@ namespace SMD.Models.DomainModels
         public string GameUrl { get; set; }
         public Nullable<int> AdCount { get; set; }
         public Nullable<int> TotalItems { get; set; }
+        public Nullable<long> FreeCouponID { get; set; }
+
+        public string SocialHandle { get; set; }
+        public string SocialHandleType { get; set; }
+        
             
         /// <summary>
         /// Profile Question Answers

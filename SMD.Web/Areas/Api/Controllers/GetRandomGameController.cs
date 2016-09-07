@@ -43,6 +43,10 @@ namespace SMD.MIS.Areas.Api.Controllers
 
         public RandomGameResponse Get(string authenticationToken, string UserId, long CampaignId, int ExistingGameId)//string BuyItModel request
         {
+            try
+            {
+
+            
             if (string.IsNullOrEmpty(UserId) || CampaignId == 0)
             {
                 throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
@@ -51,7 +55,12 @@ namespace SMD.MIS.Areas.Api.Controllers
             var game = gameService.GetRandomGame(ExistingGameId);
 
             return new RandomGameResponse { GameId = game.GameId, GameName = game.GameName, GameUrl = game.GameUrl, Message = "Success", Status = true };
-          
+            }
+            catch (Exception e)
+            {
+
+                return new RandomGameResponse {  Message = "Error : " + e.ToString(), Status = false };
+            }
         }
    
         #endregion

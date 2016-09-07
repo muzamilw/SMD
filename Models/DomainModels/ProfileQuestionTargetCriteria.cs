@@ -11,6 +11,7 @@ namespace SMD.Models.DomainModels
 {
     using System;
     using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
     
     public partial class ProfileQuestionTargetCriteria
     {
@@ -41,6 +42,10 @@ namespace SMD.Models.DomainModels
          public Nullable<int> PQQuestionID { get; set; }
 
          public Nullable<int> AdCampaignAnswer { get; set; }
+         [NotMapped]
+         public string PQQuestionString { get; set; }
 
+         [NotMapped]
+         public bool IsDeleted { get; set; }
     }
 }

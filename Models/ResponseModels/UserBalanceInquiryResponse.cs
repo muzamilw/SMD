@@ -26,10 +26,9 @@ namespace SMD.Models.ResponseModels
         /// Balance
         /// </summary>
         /// 
-        public string TransactionDetails { get; set; }
+        public string description { get; set; }
         public double? DebitAmount { get; set; }
         public double? CreditAmount { get; set; }
-        public string PaymentMethod { get; set; }
-        public string Date { get; set; }
+        public string TransactionDate { get; set; }
     }
 }

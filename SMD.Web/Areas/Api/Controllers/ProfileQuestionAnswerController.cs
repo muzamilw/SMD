@@ -43,9 +43,7 @@ namespace SMD.MIS.Areas.Api.Controllers
                 throw new HttpException((int)HttpStatusCode.BadRequest, "Invalid Request");
             }
             var domainList = _profileQuestionAnswerService.GetProfileQuestionAnswerByQuestionId(request.ProfileQuestionId);
-            
-
-
+               
             return domainList.Select(a => a.CreateFrom()).ToList();
         }
         #endregion

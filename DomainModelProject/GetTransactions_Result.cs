@@ -10,15 +10,9 @@
 namespace DomainModelProject
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Transaction
+    public partial class GetTransactions_Result
     {
-        public Transaction()
-        {
-            this.TransactionLogs = new HashSet<TransactionLog>();
-        }
-    
         public long TxID { get; set; }
         public Nullable<System.DateTime> TransactionDate { get; set; }
         public Nullable<int> Type { get; set; }
@@ -34,11 +28,10 @@ namespace DomainModelProject
         public Nullable<int> CurrencyID { get; set; }
         public Nullable<int> CurrencyRateID { get; set; }
         public Nullable<int> Sequence { get; set; }
-        public Nullable<double> AccountBalance { get; set; }
         public Nullable<long> CouponId { get; set; }
+        public Nullable<double> AccountBalance { get; set; }
         public Nullable<int> PQID { get; set; }
-    
-        public virtual Account Account { get; set; }
-        public virtual ICollection<TransactionLog> TransactionLogs { get; set; }
+        public Nullable<double> CurrentBalance { get; set; }
+        public string description { get; set; }
     }
 }
