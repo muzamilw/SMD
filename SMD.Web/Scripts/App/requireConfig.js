@@ -1,4 +1,4 @@
-﻿// Setup requirejs
+// Setup requirejs
 (function () {
 
     var root = this;
@@ -27,7 +27,8 @@
             "Layout": "/Areas/Coupons/Scripts",
             "PhraseLibrary": "/Areas/Common/Scripts",
             "DAM": "/Areas/DAM/Scripts",
-            "FranchiseDashboard": "/Areas/Franchise/Scripts"
+            "FranchiseDashboard": "/Areas/Franchise/Scripts", 
+            "analytic": "/Areas/SuperNova/Scripts"
         }
     });
 
