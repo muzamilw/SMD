@@ -39,7 +39,7 @@ namespace SMD.MIS.ReportViewers
         }
         static List<vw_Cash4AdsReport> getRecords()
         {
-            return PayOutScheduler.GetSmdReport();
+            return TransactionManager.GetSmdReport();
         }
         static DataTable ConvertListToDataTable(List<vw_Cash4AdsReport> list)
         {

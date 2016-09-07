@@ -101,7 +101,7 @@
                                             </div>
                                             <div class="col-lg-6">
                                                 <button class="btn  btn-success" id="saveBtn" data-bind="click :$root.onApprovePq">Approve</button>
-                                                <button class="btn  btn-danger" id="delbtn" data-bind="click:$root.onRejectPQ">Reject</button>
+                                                <button class="btn  btn-danger" id="delbtn" data-bind="click:$root.onRejectPQ ,enable: $root.hasChangesOnPQ, css: { ' btn-danger': $root.hasChangesOnPQ }">Reject</button>
                                             </div>
                                         </div>
                                     </div>

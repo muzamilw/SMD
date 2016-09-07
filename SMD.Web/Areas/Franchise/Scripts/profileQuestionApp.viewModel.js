@@ -113,12 +113,12 @@ define("FranchiseDashboard/profileQuestionApp.viewModel",
                               }
                           });
                       },
-                   // hasChangesOnCoupon = ko.computed(function () {
-                   //        if (selectedCoupon() == undefined) {
-                   //            return false;
-                   //        }
-                   //        return (selectedCoupon().hasChanges());
-                   //    }),
+                    hasChangesOnPQ = ko.computed(function () {
+                        if (selectedProfileQuestion() == undefined) {
+                               return false;
+                           }
+                        return (selectedProfileQuestion().hasChanges());
+                       }),
                     onRejectPQ = function () {
                         if (selectedProfileQuestion().rejectedReason() == undefined || selectedProfileQuestion().rejectedReason() == "" || selectedProfileQuestion().rejectedReason() == " ") {
                               toastr.info("Please add rejection reason!");
@@ -157,7 +157,7 @@ define("FranchiseDashboard/profileQuestionApp.viewModel",
                     onApprovePq: onApprovePq,
                     onSavePQ: onSavePQ,
                     onRejectPQ: onRejectPQ,
-                    //hasChangesOnCoupon: hasChangesOnCoupon,
+                    hasChangesOnPQ: hasChangesOnPQ,
 
                 };
             })()

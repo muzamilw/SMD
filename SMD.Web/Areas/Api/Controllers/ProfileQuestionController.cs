@@ -1,4 +1,5 @@
-﻿using SMD.Interfaces.Services;
+﻿using SMD.Interfaces.Repository;
+using SMD.Interfaces.Services;
 using SMD.MIS.Areas.Api.Models;
 using SMD.MIS.ModelMappers;
 using SMD.Models.RequestModels;
@@ -17,19 +18,20 @@ namespace SMD.MIS.Areas.Api.Controllers
     {
         #region Public
         private readonly IProfileQuestionService _profileQuestionService;
+       
         #endregion
         #region Constructor
         /// <summary>
         /// Constuctor 
         /// </summary>
-        public ProfileQuestionController(IProfileQuestionService profileQuestionService)
+        public ProfileQuestionController(IProfileQuestionService profileQuestionService, IProductRepository productRepository)
         {
             _profileQuestionService = profileQuestionService;
         }
 
         #endregion
         #region Public
-
+     
         /// <summary>
         /// Get Profile Questions
         /// </summary>
@@ -66,6 +68,10 @@ namespace SMD.MIS.Areas.Api.Controllers
             //}
             return _profileQuestionService.SaveProfileQuestion(question.CreateFrom()).CreateFrom();
         }
+
+       // Get Product price
+
+       
         #endregion
     }
 }

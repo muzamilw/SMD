@@ -60,6 +60,11 @@ define("pQuestion/pQuestion.dataservice", function () {
                         dataType: 'json',
                         type: 'POST'
                     });
+                    amplify.request.define('getProduct', 'ajax', {
+                        url: '/Api/GetProduct',
+                        dataType: 'json',
+                        type: 'GET'
+                    });
                     isInitialized = true;
                 }
             },       
@@ -136,6 +141,14 @@ define("pQuestion/pQuestion.dataservice", function () {
                     data: params
                 });
             };
+        getProduct = function (callbacks) {
+            initialize();
+            return amplify.request({
+                resourceId: 'getProduct',
+                success: callbacks.success,
+                error: callbacks.error,
+            });
+        };
 
         return {
             searchProfileQuestions: searchProfileQuestions,
@@ -144,6 +157,7 @@ define("pQuestion/pQuestion.dataservice", function () {
             getPqAnswer: getPqAnswer,
             saveProfileQuestion: saveProfileQuestion,
             getAudienceData: getAudienceData,
+            getProduct:getProduct,
             getBaseDataForProfileQuestions: getBaseDataForProfileQuestions
         };
     })();

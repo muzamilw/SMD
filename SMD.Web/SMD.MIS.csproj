@@ -384,9 +384,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\SecurityConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Api\Controllers\ActiveUserController.cs" />
     <Compile Include="Areas\Api\Controllers\ApproveProfileQuestionAnsController.cs" />
     <Compile Include="Areas\Api\Controllers\ApproveProfileQuestionController.cs" />
     <Compile Include="Areas\Api\Controllers\BranchCategoryController.cs" />
+    <Compile Include="Areas\Api\Controllers\GetProductController.cs" />
     <Compile Include="Areas\Api\Controllers\GetRandomGameController.cs" />
     <Compile Include="Areas\Api\Controllers\CategoryController.cs" />
     <Compile Include="Areas\Api\Controllers\CouponApprovalController.cs" />
@@ -405,6 +407,7 @@
     <Compile Include="Areas\Api\Models\Phrase.cs" />
     <Compile Include="Areas\Api\Models\PhraseResponseModel.cs" />
     <Compile Include="Areas\Api\Models\PQResponseModelForApproval.cs" />
+    <Compile Include="Areas\Api\Models\Product.cs" />
     <Compile Include="Areas\Api\Models\ProfileQuestionTargetCriteria.cs" />
     <Compile Include="Areas\Api\Models\ProfileQuestionTargetLocation.cs" />
     <Compile Include="Areas\Api\Models\Section.cs" />
@@ -677,6 +680,10 @@
     <Content Include="Areas\Franchise\Scripts\surveyQuestionApp.model.js" />
     <Content Include="Areas\Franchise\Scripts\surveyQuestionApp.view.js" />
     <Content Include="Areas\Franchise\Scripts\surveyQuestionApp.viewModel.js" />
+    <Content Include="Areas\SuperNova\Scripts\analytic.dataservice.js" />
+    <Content Include="Areas\SuperNova\Scripts\analytic.model.js" />
+    <Content Include="Areas\SuperNova\Scripts\analytic.view.js" />
+    <Content Include="Areas\SuperNova\Scripts\analytic.viewModel.js" />
     <Content Include="Areas\Survey\Scripts\survey.dataservice.js" />
     <Content Include="Areas\Survey\Scripts\survey.model.js" />
     <Content Include="Areas\Survey\Scripts\survey.view.js" />

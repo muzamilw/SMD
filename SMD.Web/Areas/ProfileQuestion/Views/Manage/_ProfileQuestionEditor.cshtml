@@ -3,7 +3,6 @@
 }
 @section leftmenue {
 }
-
 <div data-bind="visible: $root.isEditorVisible()" style="display: none">
     <div class="col-lg-12">
         <div class="row">
@@ -12,7 +11,6 @@
                     <li><a href="/Dashboard/Index" class="my-navigator">Home</a></li>
                     <li><a data-bind="click: $root.closeEditDialog" class="my-navigator">Profile Questions</a></li>
                 </ol>
-
                 <div>
                     <span class="pull-left Theme_standard_clr" style="padding-left:0px;font-size:28px;" data-bind="text:$root.HeaderText"></span>
                     <span class="control-label bold heading-style pull-left" style=" margin-top: 6px; margin-left: 40px;" data-bind="text:$root.StatusText"></span>
@@ -23,11 +21,9 @@
                         <button class="btn btn-default" id="saveBtn" data-bind="click: $root.closeEditDialog">Close</button>
                     </div>
                 </div>
-
             </div>
         </div>
         <div class="row" id="user-profile" data-bind="with: $root.selectedQuestion">
-
             <div class="col-lg-12 col-md-12 col-sm-12">
                 <div class="no-header clearfix col-lg-9 form-horizontal">
                     <div class="main-box" style="padding: 20px;" id="SlectionPanel">
@@ -36,70 +32,62 @@
                                 <div class="ads-numbering-box ads-selected-numbering-box" data-bind="css: $root.previewScreenNumber() == 1 ? 'ads-selected-numbering-box' : '',click: $root.gotoScreen.bind(null,1)">
                                     1
                                 </div>
-
                                 <br>
                                 <span data-bind="css: $root.previewScreenNumber() == 1 ? 'ads-selected-numbering-text' : ''" class="ads-selected-numbering-text">Question <br>Info</span>
                             </div>
                             <div class="pull-left ads-numbering-linebar" data-bind="css: $root.previewScreenNumber() == 6 ? 'ads-selected-numbering-box' : ''">
-
 
                             </div>
                             <div class="pull-left ads-numbering-main">
                                 <div class="ads-numbering-box" data-bind="css: $root.previewScreenNumber() == 2 ? 'ads-selected-numbering-box' : '',click: $root.gotoScreen.bind(null,2)">
                                     2
                                 </div>
-
                                 <br>
                                 <span data-bind="css: $root.previewScreenNumber() == 2 ? 'ads-selected-numbering-text' : ''">Target<br>Audience</span>
                             </div>
                             @*<div class="pull-left ads-numbering-linebar" data-bind="css: $root.previewScreenNumber() == 6 ? 'ads-selected-numbering-box' : ''">
 
-                            </div>*@
+                                </div>*@
                             @*<div class="pull-left ads-numbering-main">
-                                <div class="ads-numbering-box" data-bind="css: $root.previewScreenNumber() == 3 ? 'ads-selected-numbering-box' : '',click: $root.gotoScreen.bind(null,3)">
-                                    3
+                                    <div class="ads-numbering-box" data-bind="css: $root.previewScreenNumber() == 3 ? 'ads-selected-numbering-box' : '',click: $root.gotoScreen.bind(null,3)">
+                                        3
+                                    </div>
+
+                                    <br>
+                                    <span data-bind="css: $root.previewScreenNumber() == 3  ? 'ads-selected-numbering-text' : ''">Fine print <br> &amp; Redeem</span>
                                 </div>
+                                <div class="pull-left ads-numbering-linebar" data-bind="css: $root.previewScreenNumber() == 6 ? 'ads-selected-numbering-box' : ''">
 
-                                <br>
-                                <span data-bind="css: $root.previewScreenNumber() == 3  ? 'ads-selected-numbering-text' : ''">Fine print <br> &amp; Redeem</span>
-                            </div>
-                            <div class="pull-left ads-numbering-linebar" data-bind="css: $root.previewScreenNumber() == 6 ? 'ads-selected-numbering-box' : ''">
-
-                            </div>
-                            <div class="pull-left ads-numbering-main">
-                                <div class="ads-numbering-box" data-bind="css: $root.previewScreenNumber() == 4 ? 'ads-selected-numbering-box' : '',click: $root.gotoScreen.bind(null,4)">
-                                    4
                                 </div>
+                                <div class="pull-left ads-numbering-main">
+                                    <div class="ads-numbering-box" data-bind="css: $root.previewScreenNumber() == 4 ? 'ads-selected-numbering-box' : '',click: $root.gotoScreen.bind(null,4)">
+                                        4
+                                    </div>
 
-                                <br>
-                                <span data-bind="css: $root.previewScreenNumber() == 4 ? 'ads-selected-numbering-text' : ''">Branch <br> &amp; Images</span>
-                            </div>*@
+                                    <br>
+                                    <span data-bind="css: $root.previewScreenNumber() == 4 ? 'ads-selected-numbering-text' : ''">Branch <br> &amp; Images</span>
+                                </div>*@
                             <div class="pull-left" style="width: 172px;">
                                 &nbsp;
                             </div>
                             <div class="pull-left ads-numbering-main">
                                 <a data-toggle="modal" data-target=".model_quizQ_ph">
 
-
                                     <div class="ads-numbering-box" style="background: rgb(104,179,89);">
-
                                         <img src="/Content/Images/AD_Campaign_mobileStencil.png" width="20px">
                                     </div>
-
                                     <br>
                                     <span>Preview</span>
                                 </a>
                             </div>
                             <div class="clearfix"></div>
                         </div>
-
                     </div>
-
                     <div class="main-box clearfix" id="tabsHeader" data-bind="visible: $root.previewScreenNumber() == 1">
                         <div class="tabs-wrapper profile-tabs">
                             @*<ul class="nav nav-tabs">
-                                <li class="active" id="generalInfoTab"><a href="#tab-generalinfo" data-toggle="tab">General Info</a></li>
-                            </ul>*@
+                                    <li class="active" id="generalInfoTab"><a href="#tab-generalinfo" data-toggle="tab">General Info</a></li>
+                                </ul>*@
                             <div class="tab-content">
                                 <div class="tab-pane fade in active" data-bind="with: $root.selectedQuestion" id="tab-generalinfo">
                                     <div class="col-lg-12 form-horizontal">
@@ -110,10 +98,8 @@
                                         <div class="col-lg-9">
                                             <div class="form-group">
                                                 <div class="col-lg-3 text-right" style="padding-right:17px;">
-
                                                     <label class="control-label text-right tooltip-float defaultImgUploadImageBtn">Question</label>
                                                 </div>
-
                                                 <div class="col-lg-8">
                                                     <input type="text" class="form-control" data-bind="value: questionString, validationTooltip: questionString">
                                                 </div>
@@ -122,20 +108,17 @@
                                                         <a class="input-group-addon" tabindex="-1" href="#" data-toggle="tooltip" title="Hooray!" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;    padding: 0px;
     padding-top: 5px;"
                                                            data-container="body" data-placement="right" data-content="Add a city">
-
                                                             <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
                                                         </a>
                                                         <i class="fa fa-chevron-up" aria-hidden="true" style="color:#68b359;"></i>
                                                         <span class="tooltiptext">Tooltip text</span>
                                                     </div>
-
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-lg-9" style="display:none;">
                                             <div class="form-group">
                                                 <div class="col-lg-3 text-right">
-
                                                     <label class="control-label text-right tooltip-float defaultImgUploadImageBtn">Language</label>
                                                 </div>
                                                 <div class="col-lg-8">
@@ -166,7 +149,6 @@
                                         <div class="col-lg-9">
                                             <div class="form-group">
                                                 <div class="col-lg-3 text-right" style="padding-right:17px;">
-
                                                     <label class="control-label text-right tooltip-float defaultImgUploadImageBtn">Profile Group</label>
                                                 </div>
                                                 <div class="col-lg-8">
@@ -177,7 +159,6 @@
                                                         <a class="input-group-addon" tabindex="-1" href="#" data-toggle="tooltip" title="Hooray!" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;    padding: 0px;
     padding-top: 5px;"
                                                            data-container="body" data-placement="right" data-content="Add a city">
-
                                                             <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
                                                         </a>
                                                         <i class="fa fa-chevron-up" aria-hidden="true" style="color:#68b359;"></i>
@@ -205,7 +186,6 @@
                                         <div class="col-lg-9">
                                             <div class="form-group">
                                                 <div class="col-lg-3 text-right" style="padding-right:17px;">
-
                                                     <label class="control-label text-right tooltip-float defaultImgUploadImageBtn">Question Type</label>
                                                 </div>
                                                 <div class="col-lg-8">
@@ -216,7 +196,6 @@
                                                         <a class="input-group-addon" tabindex="-1" href="#" data-toggle="tooltip" title="Hooray!" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;    padding: 0px;
     padding-top: 5px;"
                                                            data-container="body" data-placement="right" data-content="Add a city">
-
                                                             <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
                                                         </a>
                                                         <i class="fa fa-chevron-up" aria-hidden="true" style="color:#68b359;"></i>
@@ -350,15 +329,13 @@
                                         </div>
                                         <div class="col-lg-9 form-horizontal">
                                             @*<div class="tabsdescriptions" style="margin-top:25px;margin-left:2px;">
-                                                <p class="group-header-description">All possible answers to the question. </p>
-                                            </div>*@
-
+                                                    <p class="group-header-description">All possible answers to the question. </p>
+                                                </div>*@
                                             <div class="form-group" @*data-bind="with: template"*@ style="padding-left:3px;padding-right:0px;">
                                                 <div class="col-lg-3"></div>
                                                 <div class="col-lg-8">
                                                     <header class="main-box-header clearfix" style="padding-right:0px;">
                                                         <div class="filter-block pull-right">
-
                                                             <a href="#" id="addTemplatePageBtn" class="btn btn-primary pull-right" data-toggle="modal" data-target=".bs-example-modal-lg" data-bind="click: $root.addNewAnswer, visible: $root.CanAddAnswers()">
                                                                 Add Answer
                                                             </a>
@@ -373,10 +350,8 @@
                                                                             <div class="row">
                                                                                 <div class="col-lg-11 marginBottom12">
                                                                                     <div class="form-group">
-
                                                                                         <div class="col-lg-3">
                                                                                             <label class="control-label text-right tooltip-float">Answer Type</label>
-
                                                                                             <div class="radio" style="padding-left:0px;display:none;">
                                                                                                 <input type="radio" name="optionsRadios" value="2" id="optionNoForProduct" data-bind="checked:type">
                                                                                                 <label for="optionNoForProduct">
@@ -397,7 +372,6 @@
                                                                                                 <a class="input-group-addon" tabindex="-1" href="#" data-toggle="tooltip" title="Hooray!" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;    padding: 0px;
     padding-top: 5px;"
                                                                                                    data-container="body" data-placement="right" data-content="Add a city">
-
                                                                                                     <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
                                                                                                 </a>
                                                                                                 <i class="fa fa-chevron-up" aria-hidden="true" style="color:#68b359;"></i>
@@ -409,7 +383,6 @@
                                                                                 <div class="col-lg-11 marginBottom12" data-bind="visible:type()=='1'">
                                                                                     <div class="form-group">
                                                                                         <div class="col-lg-3 text-right">
-
                                                                                             <label class="control-label text-right tooltip-float">Answer String</label>
                                                                                         </div>
                                                                                         <div class="col-lg-7">
@@ -420,20 +393,17 @@
                                                                                                 <a class="input-group-addon" tabindex="-1" href="#" data-toggle="tooltip" title="Hooray!" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;    padding: 0px;
     padding-top: 5px;"
                                                                                                    data-container="body" data-placement="right" data-content="Add a city">
-
                                                                                                     <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
                                                                                                 </a>
                                                                                                 <i class="fa fa-chevron-up" aria-hidden="true" style="color:#68b359;"></i>
                                                                                                 <span class="tooltiptext">Tooltip text</span>
                                                                                             </div>
-
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="col-lg-11 marginBottom12">
                                                                                     <div class="form-group">
                                                                                         <div class="col-lg-3 text-right">
-
                                                                                             <label class="control-label text-right tooltip-float">Sort Order</label>
                                                                                         </div>
                                                                                         <div class="col-lg-7">
@@ -444,7 +414,6 @@
                                                                                                 <a class="input-group-addon" tabindex="-1" href="#" data-toggle="tooltip" title="Hooray!" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;    padding: 0px;
     padding-top: 5px;"
                                                                                                    data-container="body" data-placement="right" data-content="Add a city">
-
                                                                                                     <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
                                                                                                 </a>
                                                                                                 <i class="fa fa-chevron-up" aria-hidden="true" style="color:#68b359;"></i>
@@ -461,7 +430,6 @@
                                                                                                 <input type="file" class="upload" id="image_files" onchange="readPhotoURL(this);" />
                                                                                             </div>
                                                                                         </div>
-
                                                                                         <div class="col-md-6">
                                                                                             <img id="vehicleImage" alt="" style="width: 120px;height:120px" data-bind="attr:{src:imagePath }, css: { errorFill: isImageRequired }" />
                                                                                             <h5>Answer Image<span></span></h5>
@@ -484,12 +452,10 @@
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
-
                                                                                     <div class="col-lg-9 marginBottom12">
                                                                                         <div class="form-group" style="display:none;">
                                                                                             <div class="col-lg-4 text-right">
                                                                                                 <div class="bs-example-tooltips tooltip-float-width">
-
                                                                                                 </div>
                                                                                                 <label class="control-label text-right tooltip-float">Linked Question 2</label>
                                                                                             </div>
@@ -498,12 +464,10 @@
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
-
                                                                                     <div class="col-lg-9 marginBottom12">
                                                                                         <div class="form-group" style="display:none;">
                                                                                             <div class="col-lg-4 text-right">
                                                                                                 <div class="bs-example-tooltips tooltip-float-width">
-
                                                                                                 </div>
                                                                                                 <label class="control-label text-right tooltip-float">Linked Question 3</label>
                                                                                             </div>
@@ -512,12 +476,10 @@
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
-
                                                                                     <div class="col-lg-9 marginBottom12">
                                                                                         <div class="form-group" style="display:none;">
                                                                                             <div class="col-lg-4 text-right">
                                                                                                 <div class="bs-example-tooltips tooltip-float-width">
-
                                                                                                 </div>
                                                                                                 <label class="control-label text-right tooltip-float">Linked Question 4</label>
                                                                                             </div>
@@ -526,12 +488,10 @@
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
-
                                                                                     <div class="col-lg-9 marginBottom12">
                                                                                         <div class="form-group" style="display:none;">
                                                                                             <div class="col-lg-4 text-right">
                                                                                                 <div class="bs-example-tooltips tooltip-float-width">
-
                                                                                                 </div>
                                                                                                 <label class="control-label text-right tooltip-float">Linked Question 5</label>
                                                                                             </div>
@@ -540,12 +500,10 @@
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
-
                                                                                     <div class="col-lg-9 marginBottom12">
                                                                                         <div class="form-group" style="display:none;">
                                                                                             <div class="col-lg-4 text-right">
                                                                                                 <div class="bs-example-tooltips tooltip-float-width">
-
                                                                                                 </div>
                                                                                                 <label class="control-label text-right tooltip-float">Linked Question 6</label>
                                                                                             </div>
@@ -575,8 +533,6 @@
                                                             </thead>
                                                             <tbody>
 
-
-
                                                                 <!-- ko template: { name: 'answersTemplate', foreach: $root.getSortedAnswers() } -->
                                                                 <!-- /ko -->
                                                             </tbody>
@@ -592,13 +548,10 @@
                         </div>
                     </div>
                     <div class="main-box" style="padding: 20px;" id="Ttarget_audienceTbl" data-bind="visible: $root.previewScreenNumber() == 2">
-
                         <div class="adsubHeading Theme_standard_clr" data-bind="visible: $root.previewScreenNumber() == 2">
                             Define your target audience
                         </div>
-
                         <div class="col-lg-11" style="margin:auto;float:none !important;" data-bind="visible: $root.previewScreenNumber() == 2">
-
                             <div class="form-group" style="margin-top:10px; margin-left:-8px;display:none;">
                                 <div class="col-lg-8 text-campaign-left">
                                     <label class="control-label text-right tooltip-float font20 floatNone" style="float:left !important; ">Target Audience Criteria</label>
@@ -640,7 +593,6 @@
                                         <a class="input-group-addon" tabindex="-1" href="#" data-toggle="tooltip" title="Hooray!" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;    padding: 0px;
     padding-top: 5px;"
                                            data-container="body" data-placement="right" data-content="Add a city">
-
                                             <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
                                         </a>
                                         <i class="fa fa-chevron-up" aria-hidden="true" style="color:#68b359;"></i>
@@ -705,7 +657,6 @@
                                         <a class="input-group-addon" tabindex="-1" href="#" data-toggle="tooltip" title="Hooray!" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;    padding: 0px;
     padding-top: 5px;"
                                            data-container="body" data-placement="right" data-content="Add a city">
-
                                             <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
                                         </a>
                                         <i class="fa fa-chevron-up" aria-hidden="true" style="color:#68b359;"></i>
@@ -750,31 +701,30 @@
                                     <label for="txtLanguages" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Languages</label>
                                 </div>
                                 @*<div class="col-lg-8">
-                                    <div>
-                                        <div id="lang_token_cnt">
-                                            <!-- ko template: { name: 'AdCampaignLanguageTemplate' , foreach: AdCampaignTargetCriterias } -->
-                                            <!-- /ko -->
+                                        <div>
+                                            <div id="lang_token_cnt">
+                                                <!-- ko template: { name: 'AdCampaignLanguageTemplate' , foreach: AdCampaignTargetCriterias } -->
+                                                <!-- /ko -->
+                                            </div>
+                                            <div class="clearfix"></div>
+                                            <div id="land_edt">
+                                                <div class="coun_in_ex_cnt">
+                                                    <select id="in_ex_count_opt" class="form-control" data-bind="value: $root.selectedLangIncludeExclude">
+                                                        <option value="1">Include</option>
+                                                        <option value="0">Exclude</option>
+                                                    </select>
+                                                </div>
+                                                <div class="sep-line">
+                                                </div>
+                                                <div class="count_token_opt_cnt">
+                                                    <input type="text" data-autocomplete="off" class="" id="searchLanguages" placeholder="Enter a language" />
+                                                </div>
+                                                <div class="clearfix">
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="clearfix"></div>
-                                        <div id="land_edt">
-                                            <div class="coun_in_ex_cnt">
-                                                <select id="in_ex_count_opt" class="form-control" data-bind="value: $root.selectedLangIncludeExclude">
-                                                    <option value="1">Include</option>
-                                                    <option value="0">Exclude</option>
-                                                </select>
-                                            </div>
-                                            <div class="sep-line">
-                                            </div>
-                                            <div class="count_token_opt_cnt">
-                                                <input type="text" data-autocomplete="off" class="" id="searchLanguages" placeholder="Enter a language" />
-                                            </div>
-                                            <div class="clearfix">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>*@
+                                    </div>*@
                             </div>
-
                             <div class="form-group">
                                 <div class="col-lg-2">
                                     <label for="txtLanguages" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Profession</label>
@@ -822,11 +772,9 @@
                                         <div>
                                             <button class="btn  btn-danger btnAdsCampaign ButtonWidth" style="width:100%!important;" id="" data-toggle="modal" data-bind="click:$root.showAdditionQuizCriteria" data-target=".bs-example-modal-lg">Quiz answer matches</button>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
-
                             <div>
                                 <div class="table-responsive">
                                     <table class="table table-striped table-hover">
@@ -841,9 +789,7 @@
                                 </div>
                             </div>
 
-
                         </div>
-
                         <div class="adBottomHeading" data-bind="visible: $root.previewScreenNumber() == 1">
                             Advertising to mobile users has overtaken all other forms<br />
                             of advertising.
@@ -852,19 +798,16 @@
                         <div class="adBottomHeading" data-bind="visible: $root.previewScreenNumber() == 2">
                             Increase conversions by targeting more accurately.
                         </div>
-
                         <div class="clearfix">
                         </div>
                     </div>
                 </div>
-
                 <div class="col-lg-3 form-horizontal" style="    padding: 20px;    height: 1027px;    background: rgb(220,220,220);
     margin-left: 0px !important;">
                     <div class="col-xs-12" style="text-align: right; padding-right:0;margin-bottom:10px;">
                         <div class="pull-left" style="    width: 85%;
     text-align: left;">
                             <button class="btn  btn-success btnSubmitApproval" id="btnSubmitForApproval2" data-bind="visible:$root.canSubmitForApproval,click:$root.SaveChanges" style="width:80%;margin-bottom:4px;">Submit for Approval</button>
-
                             <button class="btn  btn-info " id="btnStopAndTerminate" data-bind="visible:$root.isTerminateBtnVisible" style="width: 80%;margin-bottom:10px;">Stop & Terminate Early</button>
                             <button class="btn  btn-danger " id="btnArchive" data-bind="visible: $root.isShowArchiveBtn" style="width: 80%;margin-bottom:10px;">Archive Campaign</button>
                             <button class="btn  btn-info Theme_standard_clr" id="btnCopyCampaign" style="display:none;">Create Copy - New Campaign</button>@*visible: $root.isNewCampaignVisible*@
@@ -872,43 +815,40 @@
                             <button class="btn  btn-success" id="btnResumeCampagin" style="display:none;">Resume</button>
                         </div>
                         @*<button class="btn  btn-warning" id="saveBtn" data-bind="click:$root.saveCampaignData, enable: $root.hasChangesOnQuestion, css: { 'btn-warning': $root.hasChangesOnQuestion }">Save</button>*@
-
                         <div class="clearfix"></div>
                     </div>
                     <div class="col-xs-12" style="line-height: 3;">
-
                         <span class=" pull-left">Minimum PPCV :</span>
                         <span class="pull-right"></span>
                         <div class="clearfix"> </div>
                         <span class=" pull-left" style="color:red;">Matches profiles:</span>
                         <span class="pull-right" style="color:red;" data-bind="text:$root.reachedAudience"></span>
                         <div class="clearfix">
-
                         </div>
                     </div>
                     <div class="col-xs-12" style="text-align: left;margin-bottom: 20px; padding-right:0;margin-top:20px;">
-
                         <div>Bid more to increaseviewing priority.</div>
                         <div>50% of PPCV is rewarded to viewer.</div>
                     </div>
+                    <div class="col-xs-12" style="text-align: left;margin-bottom: 20px; padding-right:0;margin-top:20px;">
+                        <span class="text-campaign-left control-label pull-left" style="    margin-top: 6px;">Answer Needed </span>
+                        <input type="text" class="pull-right" style="  color:red;width: 77px;margin-top: 6px;margin-left: 10px;font-weight: bold;font-size: 18px; " data-bind="value:answerNeeded" name="Budget" class="form-control" id="ansNeeded">
+                    </div>
                     <div class="col-xs-12" style="text-align: left; padding-right:0;margin-bottom:10px;font-size:0.9em;">
                         <span class="text-campaign-left control-label pull-left" style="    margin-top: 6px;">PPVC ($) </span>
-                        <input type="text" class="pull-right" style="  color:red;width: 77px;margin-top: 6px;margin-left: 10px;font-weight: bold;font-size: 18px; " data-bind="value:$root.SelectedPvcVal" name="Budget" class="form-control" id="txtPerClick">
-
+                        <input type="text" class="pull-right" style="  color:red;width: 77px;margin-top: 6px;margin-left: 10px;font-weight: bold;font-size: 18px; " data-bind="value:$root.totalPrice" name="Budget" class="form-control" id="txtPerClick">
+                        
                         <div class="clearfix">
                         </div>
                         <span class="text-campaign-left control-label pull-left" style="margin-top: 6px;display:none;">Cap your daily spend ($) </span>
                         <input type="text" class="pull-right" style="color: rgb(104,179,89);width: 77px; margin-top: 6px;margin-left: 10px; font-weight: bold;font-size: 18px;display:none; " name="Budget" class="form-control" id="txtBudget">
-
                         <div class="clearfix">
                         </div>
                         <span class="text-campaign-left control-label pull-left" style=" margin-top: 6px;display:none;">Campaign budget ($) </span>
                         <input type="text" class="pull-right" style="color: rgb(104,179,89);width: 77px; margin-top: 6px;margin-left: 10px; font-weight: bold;font-size: 18px;display:none; " name="Budget" class="form-control" id="txtCampaignBudget">
 
-
                         <div class="clearfix">
                         </div>
-
                     </div>
                     <div class="clearfix">
                     </div>
@@ -957,7 +897,6 @@
                             Our Digital Gurus are ready to help you
                         </div>
                         <div style="    background: rgb(107,106,254);color: white;font-size: 12px; line-height: 2;display:none;">
-
                             <div class="pull-left">
                                 <img src="~/Content/Images/AD_Campaign_cartoon.png" style="width: 64px;margin-top: -3px;margin-left: 20px;" />
                             </div>
@@ -982,9 +921,8 @@
                 <header class="main-box-header clearfix" style="padding-right:0px;">
                     <div class="filter-block pull-right">
                         @*<a href="#" id="addTemplatePageBtn" class="btn btn-primary pull-right" style="display:none;" data-toggle="modal" data-target=".bs-example-modal-lg" data-bind="click: $root.addNewSurveyCriteria">
-                        Add Survey Criteria
-                        </a>*@
-
+                            Add Survey Criteria
+                            </a>*@
                         <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
@@ -1105,53 +1043,53 @@
                 </td>
             </tr>
             @*<tr data-bind="visible:linkedQustionsCount()>0 && $root.selectedQuestion().hasLinkedQuestions()">
-                <td style="padding-top: 7px; padding-bottom: 0px">
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-hover" id="profileQuestionLVTable">
-                            <thead>
-                                <tr>
-                                    <th class="col-lg-8 th-pointer"><span id="1">Linked Questions</span></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr data-bind="visible:question1String()!=undefined">
-                                    <td style=" padding: 0px;">
-                                        <p style="margin-top: 5px;margin-left: 12px;" data-bind="text: question1String">
-                                    </td>
-                                </tr>
+                    <td style="padding-top: 7px; padding-bottom: 0px">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover" id="profileQuestionLVTable">
+                                <thead>
+                                    <tr>
+                                        <th class="col-lg-8 th-pointer"><span id="1">Linked Questions</span></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr data-bind="visible:question1String()!=undefined">
+                                        <td style=" padding: 0px;">
+                                            <p style="margin-top: 5px;margin-left: 12px;" data-bind="text: question1String">
+                                        </td>
+                                    </tr>
 
-                                <tr data-bind="visible:question2String()!=undefined">
-                                    <td style=" padding: 0px;">
-                                        <p style="margin-top: 5px;margin-left: 12px;" data-bind="text: question2String">
-                                    </td>
-                                </tr>
-                                <tr data-bind="visible:question3String()!=undefined">
-                                    <td style=" padding: 0px;">
-                                        <p style="margin-top: 5px;margin-left: 12px;" data-bind="text: question3String">
-                                    </td>
-                                </tr>
+                                    <tr data-bind="visible:question2String()!=undefined">
+                                        <td style=" padding: 0px;">
+                                            <p style="margin-top: 5px;margin-left: 12px;" data-bind="text: question2String">
+                                        </td>
+                                    </tr>
+                                    <tr data-bind="visible:question3String()!=undefined">
+                                        <td style=" padding: 0px;">
+                                            <p style="margin-top: 5px;margin-left: 12px;" data-bind="text: question3String">
+                                        </td>
+                                    </tr>
 
-                                <tr data-bind="visible:question4String()!=undefined">
-                                    <td style=" padding: 0px;">
-                                        <p style="margin-top: 5px;margin-left: 12px;" data-bind="text: question4String">
-                                    </td>
-                                </tr>
-                                <tr data-bind="visible:question5String()!=undefined">
-                                    <td style=" padding: 0px;">
-                                        <p style="margin-top: 5px;margin-left: 12px;" data-bind="text: question5String">
-                                    </td>
-                                </tr>
+                                    <tr data-bind="visible:question4String()!=undefined">
+                                        <td style=" padding: 0px;">
+                                            <p style="margin-top: 5px;margin-left: 12px;" data-bind="text: question4String">
+                                        </td>
+                                    </tr>
+                                    <tr data-bind="visible:question5String()!=undefined">
+                                        <td style=" padding: 0px;">
+                                            <p style="margin-top: 5px;margin-left: 12px;" data-bind="text: question5String">
+                                        </td>
+                                    </tr>
 
-                                <tr data-bind="visible:question6String()!=undefined">
-                                    <td style=" padding: 0px;">
-                                        <p style="margin-top: 5px;margin-left: 12px;" data-bind="text: question6String">
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </td>
-            </tr>*@
+                                    <tr data-bind="visible:question6String()!=undefined">
+                                        <td style=" padding: 0px;">
+                                            <p style="margin-top: 5px;margin-left: 12px;" data-bind="text: question6String">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </td>
+                </tr>*@
         </script>
         <script id="AdCampaignLocationTemplate" type="text/html">
             <li>
@@ -1168,7 +1106,6 @@
                             <div class="_4bl9">
                                 <span class="_3bsr">
                                     <span class="_3bss" data-bind="text:name">
-
                                     </span><span></span>
                                 </span>
                             </div>
@@ -1195,7 +1132,6 @@
                             <!--ko if:IncludeorExclude == '0' -->
                             <i class="_40n0 img sp_NQc91B1T0mb sx_999ca6" title="Excluded"></i>
                             <!--/ko-->
-
                         </div>
                         <div class="_4bl8 _4bl7">
                             <span class="_47la">
@@ -1207,7 +1143,6 @@
 
                         <div class="_4bl8 _4bl7">
                             <div>
-
                             </div>
                         </div>
                         <div class="_4bl9">
@@ -1260,8 +1195,6 @@
                     </div>
                 </li>
                 <!--/ko-->
-
-
 
             </div>
             <div class="clear"></div>
@@ -1384,5 +1317,4 @@
             <div class="list childList" data-bind="click:$root.updateProfileQuestion,css: { 'active': $root.selectedCriteria().PQAnswerID() == PqAnswerId }" data-dismiss="modal"> <span class="list-title" data-bind="text:Answer"></span> </div>
         </script>
     </div>
-
 </div>

@@ -161,6 +161,7 @@
     <Compile Include="ClaimsSecurityService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AccountService.cs" />
+    <Compile Include="Services\ActiveUser.cs" />
     <Compile Include="Services\AdvertService.cs" />
     <Compile Include="Services\AuditLogService.cs" />
     <Compile Include="Services\BrachCategoryService.cs" />
@@ -175,7 +176,7 @@
     <Compile Include="Services\EmailScheduler.cs" />
     <Compile Include="Services\IndustryService.cs" />
     <Compile Include="Services\ManageUserService.cs" />
-    <Compile Include="Services\PayOutScheduler.cs" />
+    <Compile Include="Services\TransactionManager.cs" />
     <Compile Include="Services\EmailManagerService.cs" />
     <Compile Include="Services\InvoiceDetailService.cs" />
     <Compile Include="Services\InvoiceService.cs" />

@@ -50,7 +50,7 @@ namespace SMD.Repository.Repositories
         public Game GetRandomGame(int ExistingGameId)
         {
             var games = DbSet.Where(g => g.GameId != ExistingGameId && g.Status == true).ToList();
-            int intRandomAnswer = (new Random()).Next(1, games.Count());
+            int intRandomAnswer = (new Random()).Next(1, games.Count()+1);
             return games.ElementAt(intRandomAnswer);
         }
       
