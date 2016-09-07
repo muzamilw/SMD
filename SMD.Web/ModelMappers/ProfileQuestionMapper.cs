@@ -86,6 +86,8 @@ namespace SMD.MIS.ModelMappers
                 Status = source.Status,
                 AgeRangeStart=source.AgeRangeStart,
                 AgeRangeEnd=source.AgeRangeEnd,
+                AnswerNeeded =source.AnswerNeeded,
+                AmountCharged =source.AmountCharged,
                 Gender=source.Gender,
                 ProfileQuestionTargetCriterias = source.ProfileQuestionTargetCriteria != null ? source.ProfileQuestionTargetCriteria.Select(crt => crt.CreateFromTargetCriteria()).ToList() : new Collection<ProfileQuestionTargetCriteriaDM>().ToList(),
                 ProfileQuestionTargetLocations = source.ProfileQuestionTargetLocation != null ? source.ProfileQuestionTargetLocation.Select(loc => loc.CreateFromTargetLocation()).ToList() : new Collection<ProfileQuestionTargetLocationDM>().ToList(),
@@ -197,7 +199,8 @@ namespace SMD.MIS.ModelMappers
                       EducationID = source.EducationID,
                       AdCampaignAnswer=source.AdCampaignAnswer,
                       PQQuestionID=source.PQQuestionID,
-                      AdCampaignID=source.AdCampaignID
+                      AdCampaignID=source.AdCampaignID,
+                      IsDeleted=source.IsDeleted
                   };
               }
               else
@@ -233,6 +236,7 @@ namespace SMD.MIS.ModelMappers
               string LanguageName = "";
               string IndustryName = "";
               string EducationName = "";
+              
 
               if (source.Type != null && source.Type == (int)AdCampaignCriteriaType.ProfileQuestion)
               {
@@ -367,8 +371,8 @@ namespace SMD.MIS.ModelMappers
                   City = CName,
                   Country = CountName,
                   Latitude = latitdue,
-                  Longitude = longitude
-
+                  Longitude = longitude,
+                  PQID=source.PQID
               };
           }
         /// <summary>

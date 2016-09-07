@@ -318,7 +318,9 @@ namespace SMD.Implementation.Services
                     Gender = source.Gender,
                     SubmissionDateTime=source.SubmissionDateTime,
                     CreatedBy=source.CreatedBy,
-                    UserID=source.UserID
+                    UserID=source.UserID,
+                    AmountCharged = source.AmountCharged,
+                    AnswerNeeded =source.AnswerNeeded
                     //    CreatedBy = user.FullName
                 };
                 serverObj.CompanyId = compid;
@@ -367,6 +369,7 @@ namespace SMD.Implementation.Services
             #endregion
             foreach (var loc in source.ProfileQuestionTargetLocations)
             {
+                
                 if (loc.ID != 0)
                 {
                     _profileQuestionTargetLocationRepository.Update(loc);
@@ -374,25 +377,35 @@ namespace SMD.Implementation.Services
                 }
                 else
                 {
-                    loc.PQID = serverObj.PqId;
-                    _profileQuestionTargetLocationRepository.Add(loc);
-                    _profileQuestionTargetLocationRepository.SaveChanges();
+                    if (loc.CityID > 0 && loc.CountryID > 0)
+                    {
+                        loc.PQID = serverObj.PqId;
+                        _profileQuestionTargetLocationRepository.Add(loc);
+                        _profileQuestionTargetLocationRepository.SaveChanges();
+                    }
                 }
             }
             // add or update criteria
             foreach (var criteria in source.ProfileQuestionTargetCriterias)
             {
-                if (criteria.ID != 0)
+                if (criteria.PQID > 0 && criteria.IsDeleted)
                 {
-                    if (criteria.Type != (int)ProfileQuestionTargetCriteriaType.Language && criteria.Type != (int)ProfileQuestionTargetCriteriaType.Industry)  // industry and languages are addable and deleteable
-                        _profileQuestionTargetCriteriaRepository.Update(criteria);
-                    _profileQuestionTargetCriteriaRepository.SaveChanges();
+                    _profileQuestionTargetCriteriaRepository.RemoveCriteria(criteria.PQID??0);
                 }
                 else
                 {
-                    criteria.PQID = serverObj.PqId;
-                    _profileQuestionTargetCriteriaRepository.Add(criteria);
-                    _profileQuestionTargetCriteriaRepository.SaveChanges();
+                    if (criteria.PQID != 0)
+                    {
+                        if (criteria.Type != (int)ProfileQuestionTargetCriteriaType.Language && criteria.Type != (int)ProfileQuestionTargetCriteriaType.Industry)  // industry and languages are addable and deleteable
+                            _profileQuestionTargetCriteriaRepository.Update(criteria);
+                        _profileQuestionTargetCriteriaRepository.SaveChanges();
+                    }
+                    else
+                    {
+                        criteria.PQID = serverObj.PqId;
+                        _profileQuestionTargetCriteriaRepository.Add(criteria);
+                        _profileQuestionTargetCriteriaRepository.SaveChanges();
+                    }
                 }
             }
             // _profileQuestionRepository.SaveChanges();

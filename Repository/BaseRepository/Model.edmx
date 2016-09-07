@@ -646,6 +646,7 @@
           <Property Name="ApprovalDate" Type="datetime" />
           <Property Name="RejectionReason" Type="nvarchar" MaxLength="1000" />
           <Property Name="UserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="AmountCharged" Type="float" />
         </EntityType>
         <EntityType Name="ProfileQuestionAnswer">
           <Key>
@@ -3204,6 +3205,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Property Name="RejectionReason" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="ProfileQuestionTargetCriterias1" Relationship="DomainModels.FK_ProfileQuestionTargetCriteria_ProfileQuestion2" FromRole="ProfileQuestion" ToRole="ProfileQuestionTargetCriteria" />
+          <Property Name="AmountCharged" Type="Double" />
         </EntityType>
         <EntityType Name="ProfileQuestionAnswer">
           <Key>
@@ -5764,6 +5766,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <EntitySetMapping Name="ProfileQuestions">
             <EntityTypeMapping TypeName="DomainModels.ProfileQuestion">
               <MappingFragment StoreEntitySet="ProfileQuestion">
+                <ScalarProperty Name="AmountCharged" ColumnName="AmountCharged" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="RejectionReason" ColumnName="RejectionReason" />
                 <ScalarProperty Name="ApprovalDate" ColumnName="ApprovalDate" />
