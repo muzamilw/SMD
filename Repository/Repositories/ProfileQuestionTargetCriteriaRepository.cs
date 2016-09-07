@@ -34,5 +34,17 @@ namespace SMD.Repository.Repositories
         
         }
 
+        public void RemoveCriteria(int PqID)
+        {
+            ProfileQuestionTargetCriteria obj = DbSet.Where(i => i.PQID == PqID).FirstOrDefault();
+
+            if (obj != null)
+            {
+                DbSet.Remove(obj);
+                db.SaveChanges();
+            }
+        
+        }
+
     }
 }

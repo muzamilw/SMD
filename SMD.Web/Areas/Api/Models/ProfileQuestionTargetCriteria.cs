@@ -32,6 +32,10 @@ namespace SMD.MIS.Areas.Api.Models
         public string Language { get; set; }
         public string Industry { get; set; }
         public string Education { get; set; }
+        public virtual ProfileQuestion ProfileQuestion { get; set; }
+       
+        public string PQQuestionString { get; set; }
 
+        public bool IsDeleted { get; set; }
     }
 }

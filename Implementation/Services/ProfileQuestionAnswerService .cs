@@ -12,15 +12,17 @@ namespace SMD.Implementation.Services
     {
         #region Private
         private readonly IProfileQuestionAnswerRepository _profileQuestionAnswerRepository;
+        private readonly IProfileQuestionRepository _ProfileQuestionRepository;
         #endregion
         #region Constructor
         /// <summary>
         /// Constructor 
         /// </summary>
 
-        public ProfileQuestionAnswerService(IProfileQuestionAnswerRepository profileQuestionAnswerRepository)
+        public ProfileQuestionAnswerService(IProfileQuestionAnswerRepository profileQuestionAnswerRepository, IProfileQuestionRepository ProfileQuestionRepository)
         {
             _profileQuestionAnswerRepository = profileQuestionAnswerRepository;
+            _ProfileQuestionRepository = ProfileQuestionRepository;
         }
 
         #endregion
@@ -31,7 +33,19 @@ namespace SMD.Implementation.Services
         /// </summary>
         public IEnumerable<ProfileQuestionAnswer> GetProfileQuestionAnswerByQuestionId(long profileQuestionId)
         {
-            return _profileQuestionAnswerRepository.GetProfileQuestionAnswerByQuestionId(profileQuestionId);
+            var Query= _profileQuestionAnswerRepository.GetProfileQuestionAnswerByQuestionId(profileQuestionId);
+
+               foreach (var item in Query)
+               {
+                foreach (var PCriteria in item.ProfileQuestion.ProfileQuestionTargetCriterias1)
+                { 
+                    if(PCriteria.PQQuestionID!=null&&PCriteria.PQQuestionID>0)
+                    {
+                        PCriteria.PQQuestionString=_ProfileQuestionRepository.Find(PCriteria.PQQuestionID??0).Question;
+                    }
+                }
+            }
+               return Query;
         }
         public IEnumerable<ProfileQuestionAnswer> GetProfileQuestionAnswerOrderBySortorder(long profileQuestionId)
         {
