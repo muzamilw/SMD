@@ -558,7 +558,6 @@ namespace SMD.Implementation.Services
             {
                 amount = source.AmountCharged ?? 0 + tax.TaxValue ?? 0;
 
-
                 // If It is not System User then make transation 
                 //if (user.Roles.Any(role => role.Name.ToLower().Equals("user")))
                 //{
@@ -576,7 +575,6 @@ namespace SMD.Implementation.Services
                 {
                     TransactionManager.ProfileQuestionApproveTransaction(source.PqId, amount, source.CompanyId.Value);
                     String CompanyName = _iCompanyRepository.GetCompanyNameByID(source.CompanyId.Value);
-
 
                     #region Add Invoice
 

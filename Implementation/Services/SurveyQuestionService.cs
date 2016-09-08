@@ -128,35 +128,66 @@ namespace SMD.Implementation.Services
             #region Stripe Payment
 
             // Get Current Product
-            var product = productRepository.GetProductByCountryId( "SQ");
+            var product = productRepository.GetProductByCountryId("SQ");
             // Tax Applied
             var tax = taxRepository.GetTaxByCountryId(source.CountryId);
             // Total includes tax
-            var amount = product.SetupPrice + tax.TaxValue;
+            var amount = product.SetupPrice ?? 0 + tax.TaxValue ?? 0;
             // User who added Survey Question for approval 
             var user = webApiUserService.GetUserByUserId(source.UserId);
 
             string response = null;
             Boolean isSystemUser;
+            // Make Stripe actual payment 
+            response = stripeService.ChargeCustomer((int?)amount, user.Company.StripeCustomerId);
 
-          
-                // Make Stripe actual payment 
-                response = stripeService.ChargeCustomer((int?)amount, user.Company.StripeCustomerId);
-
-                if (response != null && !response.Contains("Failed"))
+            if (response != null && !response.Contains("Failed"))
+            {
+                if (source.CompanyId != null)
                 {
-                    if (source.CompanyId != null)
+                    //performing actual transaction into ledger
+                    TransactionManager.SurveyApproveTransaction(source.SqId, amount, source.CompanyId.Value);
+                    String CompanyName = _companyRepository.GetCompanyNameByID(source.CompanyId.Value);
+                    #region Add Invoice
+
+                    // Add invoice data
+                    var invoice = new Invoice
                     {
+                        Country = user.Company.CountryId.ToString(),
+                        Total = (double)amount,
+                        NetTotal = (double)amount,
+                        InvoiceDate = DateTime.Now,
+                        InvoiceDueDate = DateTime.Now.AddDays(7),
+                        Address1 = user.Company.CountryId.ToString(),
+                        CompanyId = user.Company.CompanyId,
+                        CompanyName = CompanyName,
+                        CreditCardRef = response
+                    };
+                    invoiceRepository.Add(invoice);
 
-                        //performing actual transaction into ledger
-                        TransactionManager.SurveyApproveTransaction(source.SqId, amount.Value, source.CompanyId.Value);
-                    }
+                    #endregion
+                    #region Add Invoice Detail
+
+                    // Add Invoice Detail Data 
+                    var invoiceDetail = new InvoiceDetail
+                    {
+                        InvoiceId = invoice.InvoiceId,
+                        ProductId = product.ProductId,
+                        ItemName = product.ProductName,
+                        ItemAmount = (double)amount,
+                        ItemTax = (double)(tax != null ? tax.TaxValue : 0),
+                        ItemDescription = "This is description!",
+                        ItemGrossAmount = (double)amount,
+                        SqId = source.SqId,
+
+                    };
+                    invoiceDetailRepository.Add(invoiceDetail);
+                    invoiceDetailRepository.SaveChanges();
+
+                    #endregion
                 }
+            }
             #endregion
-         
-
-          
-
         }
         #endregion
         #region Constructor
@@ -191,7 +222,7 @@ namespace SMD.Implementation.Services
             int rowCount;
             return new SurveyQuestionResponseModel
             {
-                SurveyQuestions =surveyQuestionRepository.SearchSurveyQuestions(request, out rowCount),
+                SurveyQuestions = surveyQuestionRepository.SearchSurveyQuestions(request, out rowCount),
 
                 Countries = new List<Country>(),
                 Languages = new List<Language>(),
@@ -204,7 +235,7 @@ namespace SMD.Implementation.Services
         }
         public SurveyQuestionResponseModel GetSurveyQuestions()
         {
-           // int rowCount;
+            // int rowCount;
             string code = Convert.ToString((int)ProductCode.SurveyQuestion);
             var product = productRepository.GetAll().Where(g => g.ProductCode == code).FirstOrDefault();
             var userBaseData = surveyQuestionRepository.getBaseData();
@@ -219,7 +250,7 @@ namespace SMD.Implementation.Services
                 SurveyQuestions = new List<SurveyQuestion>(),
                 Countries = countryRepository.GetAllCountries(),
                 Languages = languageRepository.GetAllLanguages(),
-              //  TotalCount = rowCount,
+                //  TotalCount = rowCount,
                 setupPrice = setupPrice,
                 objBaseData = userBaseData,
                 Education = _educationRepository.GetAll(),
@@ -255,8 +286,12 @@ namespace SMD.Implementation.Services
                     dbServey.ApprovalDate = source.ApprovalDate;
                     dbServey.ApprovedByUserId = surveyQuestionRepository.LoggedInUserIdentity;
                     dbServey.Status = (Int32)AdCampaignStatus.Live;
+                    if (source.CompanyId != null)
+                    {
+                        MakeStripePaymentandAddInvoice(dbServey);
+                    }
                     // Strpe + Invoice Work 
-                    MakeStripePaymentandAddInvoice(dbServey);
+                   
 
                     //  emailManagerService.SendQuestionApprovalEmail(dbServey.UserId);
 
@@ -318,7 +353,7 @@ namespace SMD.Implementation.Services
             {
                 survey.ModifiedDate = DateTime.Now;
                 survey.ModifiedBy = surveyQuestionRepository.LoggedInUserIdentity;
-             //   survey.CompanyId = _companyRepository.GetUserCompany(surveyQuestionRepository.LoggedInUserIdentity);
+                //   survey.CompanyId = _companyRepository.GetUserCompany(surveyQuestionRepository.LoggedInUserIdentity);
                 survey.StartDate = new DateTime(2005, 1, 1); //survey.StartDate.Value.Subtract(surveyQuestionRepository.UserTimezoneOffSet);
                 survey.EndDate = new DateTime(2040, 1, 1); //survey.EndDate.Value.Subtract(surveyQuestionRepository.UserTimezoneOffSet);
                 surveyQuestionRepository.Update(survey);
