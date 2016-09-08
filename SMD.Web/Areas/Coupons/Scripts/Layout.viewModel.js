@@ -514,7 +514,7 @@
                                 });
                             });
                             function moveMarker(placeName, latlng) {
-                                marker.setIcon(image);
+                                //marker.setIcon(image);
                                 marker.setPosition(latlng);
                                 //infowindow.setContent(placeName);
                                 //infowindow.open(map, marker);
