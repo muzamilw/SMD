@@ -232,6 +232,34 @@ namespace SMD.Implementation.Services
 
 
 
+          public static bool UserSignupFreeGiftBalanceTransaction(double GiftAmount, int CompanyId)
+          {
+
+              using (var dbContext = new BaseDbContext())
+              {
+
+                  var userCompany = dbContext.Companies.Where(g => g.CompanyId == CompanyId).SingleOrDefault();
+
+                  var smdCompany = GetCash4AdsUser(dbContext).Company;
+
+
+                  // if coupon 
+                  // get money from user virtual account 
+                  // add it to smd and users virtual account 
+                  // send user voucher email 
+
+                  // deduct user centz balance.
+                  updateVirtualAccount(userCompany, GiftAmount, dbContext, TransactionType.CouponPurchased, true, null, null);
+                  // update smd users  virutal accont credit 
+                  updateVirtualAccount(smdCompany, GiftAmount, dbContext, TransactionType.CouponPurchased, false, null, null);
+                  // update smd users  virutal accont credit 
+                  //updateUsersVirtualAccount(coupon.Company, SwapCost, dbContext, 2, true, null, couponId);
+
+                  dbContext.SaveChanges();
+                  return true;
+              }
+
+          }
 
 
 
