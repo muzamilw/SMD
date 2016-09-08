@@ -76,11 +76,14 @@ namespace SMD.MIS.ModelMappers
             string PQQuestionString = "";
             if (source.Type != null && source.Type == (int)AdCampaignCriteriaType.ProfileQuestion)
             {
+
                 if (source.PQQuestionID != null && source.PQQuestionID > 0)
                 {
                     QuestionString = source.PQQuestionString;
+
                     PQQuestionString = source.PQQuestionString;
                 }
+
                 if (source.PQAnswerID != null && source.PQAnswerID > 0 && source.ProfileQuestionAnswer != null)
                 {
                     AnswerString = source.ProfileQuestionAnswer.AnswerString;
@@ -175,7 +178,8 @@ namespace SMD.MIS.ModelMappers
                 AdCampaignAnswer = source.AdCampaignAnswer,
                 AdCampaignID = source.AdCampaignID,
                 PQQuestionString=PQQuestionString,
-                IsDeleted=source.IsDeleted
+                IsDeleted=source.IsDeleted,
+                ID=source.ID
             };
         }
 
@@ -211,7 +215,8 @@ namespace SMD.MIS.ModelMappers
                 Country = CountName,
                 Latitude = latitdue,
                 Longitude = longitude,
-                PQID = source.PQID
+                PQID = source.PQID,
+               
             };
         }
 

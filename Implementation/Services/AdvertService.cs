@@ -356,7 +356,10 @@ namespace SMD.Implementation.Services
             }
             //todo pilot: harcoding ClickRate = 1 for every campaign
             campaignModel.ClickRate = 0.20;
-
+            if (campaignModel.Status == 2)
+            {
+                campaignModel.SubmissionDateTime = DateTime.Now;
+            }
 
             _adCampaignRepository.Add(campaignModel);
             _adCampaignRepository.SaveChanges();

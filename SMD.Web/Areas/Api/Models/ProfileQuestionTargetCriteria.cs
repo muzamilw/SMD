@@ -37,5 +37,6 @@ namespace SMD.MIS.Areas.Api.Models
         public string PQQuestionString { get; set; }
 
         public bool IsDeleted { get; set; }
+      
     }
 }

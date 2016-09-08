@@ -11,5 +11,6 @@ namespace SMD.Interfaces.Repository
     {
         List<ProfileQuestionTargetCriteria> GetProfileQuestionTargetCiteria(long PQID);
          void RemoveCriteria(int PqID);
+         bool UpdateTargetcriteria(ProfileQuestionTargetCriteria Crt);
     }
 }

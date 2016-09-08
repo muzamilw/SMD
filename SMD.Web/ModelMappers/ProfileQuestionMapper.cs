@@ -217,7 +217,8 @@ namespace SMD.MIS.ModelMappers
                       CountryID = source.CountryID,
                       CityID = source.CityID,
                       Radius = source.Radius,
-                      IncludeorExclude = source.IncludeorExclude
+                      IncludeorExclude = source.IncludeorExclude,
+                      IsDeleted=source.IsDeleted
                   };
               }
               else
@@ -370,7 +371,8 @@ namespace SMD.MIS.ModelMappers
                   Country = CountName,
                   Latitude = latitdue,
                   Longitude = longitude,
-                  PQID=source.PQID
+                  PQID=source.PQID,
+                  IsDeleted=source.IsDeleted
               };
           }
         /// <summary>

@@ -81,21 +81,17 @@
                 },
                 // Convert to server data
              
-             targetCriteria = [], targetLocation = [],
+             
                 convertToServerData = function () {                   
-                    debugger;
+                  var  targetCriteria = [], targetLocation = []
                     
-                        _.each(ProfileQuestionTargetCriteria(), function (item) {
+                    _.each(ProfileQuestionTargetLocation(), function (item) {
                            
                                 targetLocation.push(item.convertToServerData());
-                            
                         });
                     
-
                     _.each(ProfileQuestionTargetCriteria(), function (item) {
-                        
                             targetCriteria.push(item.convertToServerData());
-                        
                         });
                     
                     return {
@@ -297,17 +293,17 @@
     /////////////////////////////////////////////////////////QUESTION
     //server to client mapper For QUESTION
     var questionServertoClientMapper = function (itemFromServer) {
-        debugger;
+        
         return new question(itemFromServer.PqId, itemFromServer.Question, itemFromServer.Priority,
             itemFromServer.HasLinkedQuestions, itemFromServer.ProfileGroupName, itemFromServer.LanguageId, itemFromServer.CountryId, itemFromServer.ProfileGroupId, itemFromServer.Type, itemFromServer.RefreshTime
         , itemFromServer.SkippedCount, moment(itemFromServer.CreationDate), itemFromServer.ModifiedDate, itemFromServer.PenalityForNotAnswering, itemFromServer.Status, itemFromServer.CreatedBy, itemFromServer.StatusValue, itemFromServer.AnswerNeeded, itemFromServer.AsnswerCount, itemFromServer.Gender, itemFromServer.AgeRangeStart, itemFromServer.AgeRangeEnd);
 
         _.each(itemFromServer.ProfileQuestionTargetCriterias, function (item) {
-            debugger;
+            
             question.ProfileQuestionTargetCriteria.push(ProfileQuestionTargetCriteria.Create(item));
         });
         _.each(itemFromServer.ProfileQuestionTargetLocations, function (item) {
-            debugger;
+            
             question.ProfileQuestionTargetLocation.push(ProfileQuestionTargetLocations.Create(item));
         });
     };
@@ -386,7 +382,7 @@
         else
             return undefined;
     };
-   var ProfileQuestionTargetLocation = function (ID, SQID, CountryID, CityID, Radius, Country, City, IncludeorExclude, Latitude, Longitude, PQID) {
+   var ProfileQuestionTargetLocation = function (ID, SQID, CountryID, CityID, Radius, Country, City, IncludeorExclude, Latitude, Longitude, PQID, IsDeleted, ID) {
       
         var
             //type and userID will be set on server sside
@@ -396,6 +392,9 @@
             CountryID = ko.observable(CountryID),
             CityID = ko.observable(CityID),
             Radius = ko.observable(Radius),
+
+            IsDeleted = ko.observable(IsDeleted),
+
             Country = ko.observable(Country),
             City = ko.observable(City),
            IncludeorExclude = ko.observable(IncludeorExclude == true ? "1" : "0"),
@@ -412,7 +411,8 @@
                     Radius: Radius(),
                     Country: Country(),
                     City: City(),
-                    IncludeorExclude: IncludeorExclude() == 1 ? true : false
+                    IncludeorExclude: IncludeorExclude() == 1 ? true : false,
+                    IsDeleted: IsDeleted()
                 };
             };
         return {
@@ -426,11 +426,12 @@
             IncludeorExclude: IncludeorExclude,
             convertToServerData: convertToServerData,
             Latitude: Latitude,
-            Longitude: Longitude
+            Longitude: Longitude,
+            IsDeleted: IsDeleted
         };
   };
   var // ReSharper disable InconsistentNaming
- ProfileQuestionTargetCriteria = function (ID, PQID, Type, PQID, PQAnswerID, LinkedSQID, LinkedSqAnswer, IncludeorExclude, LanguageID, questionString, answerString, Language, IndustryID, Industry, EducationId, Education, AdCampaignAnswer, PQQuestionID, AdCampaignID, PQQuestionString, profileQuestRightImageSrc, profileQuestLeftImageSrc, IsDeleted) {
+ ProfileQuestionTargetCriteria = function (ID, PQID, Type, PQID, PQAnswerID, LinkedSQID, LinkedSqAnswer, IncludeorExclude, LanguageID, questionString, answerString, Language, IndustryID, Industry, EducationId, Education, AdCampaignAnswer, PQQuestionID, AdCampaignID, PQQuestionString, profileQuestRightImageSrc, profileQuestLeftImageSrc, IsDeleted,ID) {
      
      var
          //type and userID will be set on server side
@@ -447,7 +448,7 @@
          PQQuestionString = ko.observable(PQQuestionString),
 
          IsDeleted = ko.observable(IsDeleted),
-
+         ID = ko.observable(ID),
          LinkedSQID = ko.observable(LinkedSQID),
          LinkedSQAnswer = ko.observable(LinkedSqAnswer + ""),
          IncludeorExclude = ko.observable(IncludeorExclude == true ? "1" : "0"),
@@ -462,7 +463,38 @@
          EducationId = ko.observable(EducationId)
          profileQuestLeftImageSrc = ko.observable(profileQuestLeftImageSrc),
          profileQuestRightImageSrc = ko.observable(profileQuestRightImageSrc),
-         
+
+
+          dirtyFlag = new ko.dirtyFlag({
+              ID: ID,
+              SQID: SQID,
+              Type: Type,
+              PQID: PQID,
+              PQAnswerID: PQAnswerID,
+              LinkedSQID: LinkedSQID,
+              LinkedSQAnswer: LinkedSQAnswer,
+              IncludeorExclude: IncludeorExclude,
+              LanguageID: LanguageID,
+              questionString: questionString,
+              answerString: answerString,
+              Language: Language,
+              
+              IndustryID: IndustryID,
+              Industry: Industry,
+              EducationId: EducationId,
+              Education: Education,
+              AdCampaignAnswer: AdCampaignAnswer,
+              PQQuestionID: PQQuestionID,
+              AdCampaignID: AdCampaignID,
+              profileQuestLeftImageSrc: profileQuestLeftImageSrc,
+              profileQuestRightImageSrc: profileQuestRightImageSrc,
+              IsDeleted: IsDeleted,
+              ID: ID
+          }),
+     // Has Changes
+              hasChanges = ko.computed(function () {
+                  return dirtyFlag.isDirty();
+              }),
          // Convert to server data
          convertToServerData = function () {
              return {
@@ -485,7 +517,8 @@
                  AdCampaignID: AdCampaignID(),
                  profileQuestLeftImageSrc: profileQuestLeftImageSrc(),
                  profileQuestRightImageSrc: profileQuestRightImageSrc(),
-                 IsDeleted: IsDeleted()
+                 IsDeleted: IsDeleted(),
+                 ID: ID()
              };
          };
      return {
@@ -511,18 +544,20 @@
          AdCampaignID: AdCampaignID,
          profileQuestLeftImageSrc: profileQuestLeftImageSrc,
          profileQuestRightImageSrc: profileQuestRightImageSrc,
-         IsDeleted:IsDeleted
+         IsDeleted: IsDeleted,
+         ID: ID,
+         hasChanges: hasChanges
      };
  };
 
   ProfileQuestionTargetLocation.Create = function (source) {
-      debugger;
+      
         return new ProfileQuestionTargetLocation(source.Id, source.SqId, source.CountryId, source.CityId, source.Radius,
-           source.Country, source.City, source.IncludeorExclude, source.Latitude, source.Longitude, source.pqid);
+           source.Country, source.City, source.IncludeorExclude, source.Latitude, source.Longitude, source.pqid, source.IsDeleted,source.ID);
     }
     ProfileQuestionTargetCriteria.Create = function (source) {
         
-        return new ProfileQuestionTargetCriteria(source.Id, source.SqId, source.Type, source.PqId, source.PqAnswerId, source.LinkedSqId, source.LinkedSqAnswer, source.IncludeorExclude, source.LanguageId, source.questionString, source.answerString, source.Language, source.IndustryId, source.Industry, source.EducationId, source.Education, source.AdCampaignAnswer, source.PQQuestionID, source.AdCampaignID, source.PQQuestionString, source.profileQuestRightImageSrc,source.profileQuestLeftImageSrc,source.IsDeleted);
+        return new ProfileQuestionTargetCriteria(source.Id, source.SqId, source.Type, source.PqId, source.PqAnswerId, source.LinkedSqId, source.LinkedSqAnswer, source.IncludeorExclude, source.LanguageId, source.questionString, source.answerString, source.Language, source.IndustryId, source.Industry, source.EducationId, source.Education, source.AdCampaignAnswer, source.PQQuestionID, source.AdCampaignID, source.PQQuestionString, source.profileQuestRightImageSrc,source.profileQuestLeftImageSrc,source.IsDeleted,source.ID);
     };
     return {
         question: question,

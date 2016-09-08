@@ -11,6 +11,7 @@ namespace SMD.Models.DomainModels
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations.Schema;
     
     public partial class ProfileQuestionTargetLocation
     {
@@ -24,5 +25,9 @@ namespace SMD.Models.DomainModels
         public virtual City City { get; set; }
         public virtual Country Country { get; set; }
         public virtual ProfileQuestion ProfileQuestion { get; set; }
+
+
+        [NotMapped]
+        public bool IsDeleted { get; set; }
     }
 }
