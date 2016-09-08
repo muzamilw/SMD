@@ -246,6 +246,7 @@
     <Compile Include="ResponseModels\CouponsResponseModelForApproval.cs" />
     <Compile Include="ResponseModels\RandomGameResponse.cs" />
     <Compile Include="ResponseModels\ProfileQuestionResponseModelForApproval.cs" />
+    <Compile Include="ResponseModels\RevenueOverTimeResponseModel.cs" />
     <Compile Include="ResponseModels\SearchCouponsResponse.cs" />
     <Compile Include="ResponseModels\IndustryResponse.cs" />
     <Compile Include="ResponseModels\GetProductsResponse.cs" />

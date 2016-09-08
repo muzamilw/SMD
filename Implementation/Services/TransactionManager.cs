@@ -207,17 +207,17 @@ namespace SMD.Implementation.Services
                   //get money from stripe
 
                   // update company  stripe accont debit 
-                  updateStripeAccount(userCompany, Payment, dbContext, TransactionType.ApproveCoupon, false, AdId, null);
+                  updateStripeAccount(userCompany, Payment, dbContext, TransactionType.ApproveCoupon, false,null,AdId, null);
                   // update smd users  stripe accont credit 
-                  updateStripeAccount(smdCompany, Payment, dbContext, TransactionType.ApproveCoupon, true, AdId, null);
+                  updateStripeAccount(smdCompany, Payment, dbContext, TransactionType.ApproveCoupon, true,null,AdId, null);
 
 
 
                   // 1 UsD = 100 Centz into virtual
                   // update users  virutal accont debit 
-                  updateVirtualAccount(userCompany, Payment * 100, dbContext, TransactionType.ApproveCoupon, true, AdId, null);
+                  updateVirtualAccount(userCompany, Payment * 100, dbContext, TransactionType.ApproveCoupon, true,null,AdId, null);
                   // update smd users  virutal accont credit 
-                  updateVirtualAccount(smdCompany, Payment * 100, dbContext, TransactionType.ApproveCoupon, false, AdId, null);
+                  updateVirtualAccount(smdCompany, Payment * 100, dbContext, TransactionType.ApproveCoupon, false,null,AdId,null);
 
 
                   // update smd users  virutal accont credit 
@@ -228,10 +228,6 @@ namespace SMD.Implementation.Services
               }
 
           }
-
-
-
-
           public static bool UserSignupFreeGiftBalanceTransaction(double GiftAmount, int CompanyId)
           {
 
@@ -260,9 +256,6 @@ namespace SMD.Implementation.Services
               }
 
           }
-
-
-
         // used by new payout scheduler 
         private static void UpdateAccountsUserPayout(Company Usercompany, Company smdCompany, double amount,
            BaseDbContext dbContext)

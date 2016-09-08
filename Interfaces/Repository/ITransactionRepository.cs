@@ -15,5 +15,6 @@ namespace SMD.Interfaces.Repository
         List<vw_GetUserTransactions> GetUserTransactions();
 
         List<GetTransactions_Result> GetTransactions(int CompanyId, int AccountType, int Rows);
+        IEnumerable<Transaction> GetTransactionByAccountId(int accountId);
     }
 }
