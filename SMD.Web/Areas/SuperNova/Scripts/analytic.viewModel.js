@@ -10,6 +10,8 @@ define("analytic/analytic.viewModel",
                 var view,
                     activeUser = ko.observable(),
 					granularityDropDown = ko.observableArray([{ id: 1, name: "Day" }, { id: 2, name: "Week" }, { id: 3, name: "Month" }, { id: 4, name: "Year" }]),
+                    analyticFromdate = ko.observable();
+					analyticTodate = ko.observable();
                     getAnalytic = function () {
                         dataservice.getactiveuser(
                             {
@@ -41,7 +43,9 @@ define("analytic/analytic.viewModel",
                     initialize: initialize,
                     getAnalytic: getAnalytic,
 					activeUser:activeUser,
-					granularityDropDown:granularityDropDown					
+					granularityDropDown:granularityDropDown,
+					analyticFromdate: analyticFromdate,
+					analyticTodate:analyticTodate
 
                 };
             })()
