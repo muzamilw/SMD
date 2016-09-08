@@ -75,6 +75,6 @@ namespace SMD.Models.DomainModels
         public string CurrencySymbol { get; set; }
         public string LogoUrl { get; set; }
         public Nullable<int> DaysLeft { get; set; }
-        public Nullable<double> SwapCost { get; set; }
+        public Nullable<decimal> SwapCost { get; set; }
     }
 }
