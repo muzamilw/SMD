@@ -13,6 +13,7 @@
                 selectedBranch = ko.observable(),
                 branchDdlist = ko.observableArray([]),
                 selectedCategory = ko.observable(),
+                countries = ko.observableArray([]),
                 afterBranchSelect = null,
                 selectedBranchField = ko.observable(),
                 isSaveChangesEnable = ko.observable(false),
@@ -363,6 +364,7 @@
                 showBranchDialoge = function (callback) {
                     afterBranchSelect = callback;
                     getBranchCategories(viewBranchDialog);
+                    getAllCountries();
                 },
                 hideBranchCategoryDialog = function () {
 
@@ -442,6 +444,19 @@
 
 
                 },
+                  getAllCountries = function () {
+                      dataService.getAllCountries({
+                          success: function (data) {
+                              _.each(data, function (Item) {
+                                  countries.push(Item);
+                              });
+
+                          },
+                          error: function () {
+                              toastr.error("Failed to load Countries.");
+                          }
+                      });
+                  },
                 selectCategory = function (category, event) {
 
                     branchCategory()[0].isEditMode(false);
@@ -514,7 +529,6 @@
                                 });
                             });
                             function moveMarker(placeName, latlng) {
-                                marker.setIcon(image);
                                 marker.setPosition(latlng);
                                 //infowindow.setContent(placeName);
                                 //infowindow.open(map, marker);
@@ -594,7 +608,9 @@
                     isAddressFilled: isAddressFilled,
                     hideBranchCategoryDialog: hideBranchCategoryDialog,
                     CodeAddressonMap: CodeAddressonMap,
-                    branchDdlist: branchDdlist
+                    branchDdlist: branchDdlist,
+                    getAllCountries: getAllCountries,
+                    countries: countries
                 };
 
             })()
