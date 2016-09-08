@@ -132,6 +132,7 @@ namespace SMD.Repository.Repositories
             return request.IsAsc
                 ? DbSet.Where(query)
                     .OrderBy(_surveyQuestionOrderByClause[request.SurveyQuestionOrderBy])
+                    .OrderByDescending(s=>s.SubmissionDate)
                     .Skip(fromRow)
                     .Take(toRow)
                     .ToList()

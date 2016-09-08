@@ -18,5 +18,6 @@ namespace SMD.Interfaces.Repository
         bool updateCompany(Company request);
 
         User getUserBasedOnAuthenticationToken(string token);
+        string GetCompanyNameByID(int CompanyId);
     }
 }

@@ -307,7 +307,6 @@ define("pQuestion/pQuestion.viewModel",
                     addNewProfileQuestion = function () {
 
                         HeaderText("New Question");
-                        getProductPrice();
                         selectedQuestion(new model.question());
                         selectedQuestion().Gender("1");
                         
@@ -1409,15 +1408,35 @@ define("pQuestion/pQuestion.viewModel",
                               });
                           },
                             totalPrice = ko.computed(function () {
-                                var a;
+                                var ansNeeeded;
+                                var calculatePrice
                                 if (selectedQuestion() == undefined) {
                                     return 0;
                                 }
                                 else {
-                                    a = selectedQuestion().answerNeeded()
+                                    ansNeeeded = selectedQuestion().answerNeeded();
+                                    if (ansNeeeded > 0 && ansNeeeded <= 1000)
+                                    {
+                                        calculatePrice = price();
+                                        selectedQuestion().amountCharge(calculatePrice);
+                                        return calculatePrice;
+                                    }
+                                    if (ansNeeeded > 1000 && ansNeeeded % 1000 == 0) {
+                                        var val = ansNeeeded / 1000;
+                                        calculatePrice = val * price();
+                                        selectedQuestion().amountCharge(calculatePrice);
+                                        return calculatePrice;
+                                    }
+                                    else {
+                                        if (ansNeeeded > 1000 && ansNeeeded % 1000 != 0) {
+                                            var val2 = ansNeeeded / 1000
+                                            calculatePrice = price() * Math.ceil(val2);
+                                            selectedQuestion().amountCharge(calculatePrice);
+                                            return calculatePrice;
+                                        }
+
+                                    }
                                 }
-                                
-                                return a;
                             }),
                     // Initialize the view model
                     initialize = function (specifiedView) {
@@ -1426,7 +1445,7 @@ define("pQuestion/pQuestion.viewModel",
                         pager(pagination.Pagination({ PageSize: 10 }, questions, getQuestions));
                         // Base Data Call
                         getBasedata();
-                        
+                        getProductPrice();
                         // First request for LV
                         getQuestions(214, 41);
                         for (var i = 10; i < 81; i++) {
@@ -1532,7 +1551,8 @@ define("pQuestion/pQuestion.viewModel",
                     isShowSurveyAns: isShowSurveyAns,
                     onEditCriteria: onEditCriteria,
                     updateSurveyCriteria: updateSurveyCriteria,
-                    updateProfileQuestion: updateProfileQuestion
+                    updateProfileQuestion: updateProfileQuestion,
+                    totalPrice: totalPrice
                 };
             })()
         };

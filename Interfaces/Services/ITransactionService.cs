@@ -19,5 +19,7 @@ namespace SMD.Interfaces.Services
         /// </summary>
         IEnumerable<Transaction> GetUnprocessedTransactionsForDebit();
         List<vw_GetUserTransactions> GetUserTransactions();
+
+        List<GetTransactions_Result> GetUserVirtualTransactions(int companyId);
     }
 }

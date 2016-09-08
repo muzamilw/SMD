@@ -86,6 +86,8 @@ namespace SMD.MIS.ModelMappers
                 Status = source.Status,
                 AgeRangeStart=source.AgeRangeStart,
                 AgeRangeEnd=source.AgeRangeEnd,
+                AnswerNeeded =source.AnswerNeeded,
+                AmountCharged =source.AmountCharged,
                 Gender=source.Gender,
                 ProfileQuestionTargetCriterias = source.ProfileQuestionTargetCriteria != null ? source.ProfileQuestionTargetCriteria.Select(crt => crt.CreateFromTargetCriteria()).ToList() : new Collection<ProfileQuestionTargetCriteriaDM>().ToList(),
                 ProfileQuestionTargetLocations = source.ProfileQuestionTargetLocation != null ? source.ProfileQuestionTargetLocation.Select(loc => loc.CreateFromTargetLocation()).ToList() : new Collection<ProfileQuestionTargetLocationDM>().ToList(),

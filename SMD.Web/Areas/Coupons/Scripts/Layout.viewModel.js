@@ -494,6 +494,31 @@
                                 map: map,
                                 position: results[0].geometry.location
                             });
+                            google.maps.event.addListener(map, 'click', function (event) {
+                                selectedBranch().branchLocationLat(event.latLng.lat());
+                                selectedBranch().branchLocationLon(event.latLng.lng());
+                                var geocoder = new google.maps.Geocoder();
+                                geocoder.geocode({
+                                    "latLng": event.latLng
+                                }, function (results, status) {
+                                    console.log(results, status);
+                                    if (status == google.maps.GeocoderStatus.OK) {
+                                        console.log(results);
+                                        var lat = results[0].geometry.location.lat(),
+                                            lng = results[0].geometry.location.lng(),
+                                            placeName = results[0].address_components[0].long_name,
+                                            latlng = new google.maps.LatLng(lat, lng);
+
+                                        moveMarker(placeName, latlng);
+                                    }
+                                });
+                            });
+                            function moveMarker(placeName, latlng) {
+                                marker.setIcon(image);
+                                marker.setPosition(latlng);
+                                //infowindow.setContent(placeName);
+                                //infowindow.open(map, marker);
+                            }
                             isCodeAddressEdit(false);
                         } else {
                             toastr.error("Failed to Search Address,please add valid address and search it . Error: " + status);

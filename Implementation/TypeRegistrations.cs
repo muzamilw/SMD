@@ -52,6 +52,7 @@ namespace SMD.Implementation
             unityContainer.RegisterType<ICompanyBranchService, CompanyBranchService>();
             unityContainer.RegisterType<IDamImageService, DamImageService>();
             unityContainer.RegisterType<IGameService, GameService>();
+            unityContainer.RegisterType<IActiveUser, ActiveUser>();
         }
     }
 }

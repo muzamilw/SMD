@@ -30,11 +30,7 @@ namespace SMD.Interfaces.Services
         /// </summary>
         GetProductsResponse GetProducts(GetProductsRequest request);
         
-        /// <summary>
-        /// Approve Survey
-        /// </summary>
-        Task<BaseApiResponse> UpdateTransactionOnSurveyApproval(ApproveSurveyRequest request, bool isApiCall = true);
-
+        
         /// <summary>
         /// Ad Viewed
         /// </summary>

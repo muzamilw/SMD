@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SMD.Interfaces.Services;
+using SMD.Models.ResponseModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -9,10 +11,27 @@ namespace SMD.MIS.Areas.Api.Controllers
 {
     public class ActiveUserController : ApiController
     {
+        #region Private
+
+        private readonly IActiveUser activeUser;
+
+        #endregion
+
+        #region Constructor 
+
+        public ActiveUserController(IActiveUser activeUser) {
+            this.activeUser = activeUser;
+        }
+
+        #endregion
+
         // GET: api/ActiveUser
-        public IEnumerable<Int32> Get()
+        public ActiveUserResponseModel Get()
         {
-            return new Int32[] { 1, 2 };
+          ActiveUserResponseModel usr= activeUser.getActiveUser();
+
+
+            return activeUser.getActiveUser();
         }
 
         // GET: api/ActiveUser/5
@@ -20,6 +39,9 @@ namespace SMD.MIS.Areas.Api.Controllers
         {
             return "value";
         }
+
+
+
 
         // POST: api/ActiveUser
         public void Post([FromBody]string value)

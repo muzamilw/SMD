@@ -30,6 +30,7 @@ namespace SMD.MIS.Areas.Api.Models
 
         public string RejectionReason { get; set; }
         public string UserID { get; set; }
+        public double? AmountCharged { get; set; }
 
         public Nullable<int> CompanyId { get; set; }
         public Nullable<int> AnswerNeeded { get; set; }

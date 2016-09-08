@@ -68,6 +68,7 @@ namespace SMD.Repository
             unityContainer.RegisterType<IProfileQuestionTargetLocationRepository, ProfileQuestionTargetLocationRepository>();
 
             unityContainer.RegisterType<IGameRepository, GameRepository>();
+            unityContainer.RegisterType<IActiveUserRepository, ActiveUserRepository>();
         }
     }
 }

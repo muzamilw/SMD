@@ -18,6 +18,7 @@ using SMD.Models.IdentityModels;
 using Microsoft.AspNet.Identity.Owin;
 using ClaimsIdentity = System.Security.Claims.ClaimsIdentity;
 using SMD.Models.DomainModels;
+using SMD.Implementation.Services;
 
 namespace SMD.MIS.Controllers
 {
@@ -337,6 +338,7 @@ namespace SMD.MIS.Controllers
                         {
 
                             CreateUserAccounts(CompanyId);
+                            TransactionManager.UserSignupFreeGiftBalanceTransaction(500, CompanyId);
                             return RedirectToAction("Login","Account");
                         }
 
@@ -368,6 +370,7 @@ namespace SMD.MIS.Controllers
             {
                 int companyId = companyService.GetUserCompany(userId);
                 CreateUserAccounts(companyId);
+                TransactionManager.UserSignupFreeGiftBalanceTransaction(500, companyId);
                 return View("Login");
             }
             return View("Error");
@@ -578,6 +581,7 @@ namespace SMD.MIS.Controllers
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                         SetupUserClaims(info.ExternalIdentity);
                         CreateUserAccounts(user.CompanyId.Value);
+                        TransactionManager.UserSignupFreeGiftBalanceTransaction(500, user.CompanyId.Value);
                         return RedirectToLocal(returnUrl);
                     }
                 }

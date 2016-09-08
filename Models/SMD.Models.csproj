@@ -130,6 +130,7 @@
     <Compile Include="DomainModels\CouponCategories.cs" />
     <Compile Include="DomainModels\DamImage.cs" />
     <Compile Include="DomainModels\GetCouponByID_Result.cs" />
+    <Compile Include="DomainModels\GetTransactions_Result.cs" />
     <Compile Include="DomainModels\Phrase.cs" />
     <Compile Include="DomainModels\ProfileQuestionTargetCriteria.cs" />
     <Compile Include="DomainModels\ProfileQuestionTargetLocation.cs" />
@@ -210,6 +211,7 @@
     </Compile>
     <Compile Include="Common\CampaignGridModel.cs" />
     <Compile Include="RequestModels\AdCampaignSearchRequest.cs" />
+    <Compile Include="RequestModels\ApproveProfileQuestionRequest.cs" />
     <Compile Include="RequestModels\BuyItModel.cs" />
     <Compile Include="RequestModels\GetUserRequestModel.cs" />
     <Compile Include="RequestModels\InviteUserEmail.cs" />
@@ -236,6 +238,7 @@
     <Compile Include="RequestModels\ProfileQuestionSearchRequest.cs" />
     <Compile Include="RequestModels\SurveySearchRequest.cs" />
     <Compile Include="RequestModels\UpdateProfileQuestionUserAnswerApiRequest.cs" />
+    <Compile Include="ResponseModels\ActiveUserResponseModel.cs" />
     <Compile Include="ResponseModels\AdCampaignBaseResponse.cs" />
     <Compile Include="ResponseModels\AdCampaignResposneModelForAproval.cs" />
     <Compile Include="ResponseModels\AdCampaignApiSearchRequestResponse.cs" />
@@ -243,6 +246,7 @@
     <Compile Include="ResponseModels\CouponsResponseModelForApproval.cs" />
     <Compile Include="ResponseModels\RandomGameResponse.cs" />
     <Compile Include="ResponseModels\ProfileQuestionResponseModelForApproval.cs" />
+    <Compile Include="ResponseModels\RevenueOverTimeResponseModel.cs" />
     <Compile Include="ResponseModels\SearchCouponsResponse.cs" />
     <Compile Include="ResponseModels\IndustryResponse.cs" />
     <Compile Include="ResponseModels\GetProductsResponse.cs" />

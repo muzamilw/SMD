@@ -54,7 +54,8 @@ namespace SMD.MIS.Areas.Api.Controllers
             }
 
             // Update Transactions on Approve Survey
-            return await webApiUserService.UpdateTransactionOnSurveyApproval(request);
+            //return await webApiUserService.UpdateTransactionOnSurveyApproval(request);
+            throw new Exception("Not implemented anymore.");
         }
 
         #endregion

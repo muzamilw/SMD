@@ -84,10 +84,10 @@ namespace SMD.Repository.Repositories
             int fromRow = (request.PageNo - 1) * request.PageSize;
             int toRow = request.PageSize;
             Expression<Func<AdCampaign, bool>> query =
-                ad => ad.Status == (Int32)AdCampaignStatus.SubmitForApproval && ad.Type != (int)AdCampaignType.Coupon;
+                ad => ad.Status == (Int32)AdCampaignStatus.SubmitForApproval;
 
-            if (request.ShowCoupons.HasValue && request.ShowCoupons.Value == true)
-                query = ad => ad.Status == (Int32)AdCampaignStatus.SubmitForApproval && ad.Type == (int)AdCampaignType.Coupon;
+            //if (request.ShowCoupons.HasValue && request.ShowCoupons.Value == true)
+            //    query = ad => ad.Status == (Int32)AdCampaignStatus.SubmitForApproval && ad.Type == (int)AdCampaignType.Coupon;
 
             rowCount = DbSet.Count(query);
             //var res =  request.IsAsc
@@ -102,7 +102,7 @@ namespace SMD.Repository.Repositories
             //        .ToList();
             //res = res.OrderByDescending(g => g.priority);
             var res = DbSet.Where(query)
-                    .OrderByDescending(g => g.priority);
+                    .OrderByDescending(g => g.SubmissionDateTime);
             return res.Skip(fromRow)
                     .Take(toRow);
 

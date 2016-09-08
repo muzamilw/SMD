@@ -193,5 +193,22 @@ namespace DomainModelProject
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetProducts_Result>("GetProducts", userIDParameter, fromRowParameter, toRowParameter);
         }
+    
+        public virtual ObjectResult<GetTransactions_Result> GetTransactions(Nullable<int> companyID, Nullable<int> accountType, Nullable<int> rows)
+        {
+            var companyIDParameter = companyID.HasValue ?
+                new ObjectParameter("CompanyID", companyID) :
+                new ObjectParameter("CompanyID", typeof(int));
+    
+            var accountTypeParameter = accountType.HasValue ?
+                new ObjectParameter("AccountType", accountType) :
+                new ObjectParameter("AccountType", typeof(int));
+    
+            var rowsParameter = rows.HasValue ?
+                new ObjectParameter("Rows", rows) :
+                new ObjectParameter("Rows", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetTransactions_Result>("GetTransactions", companyIDParameter, accountTypeParameter, rowsParameter);
+        }
     }
 }

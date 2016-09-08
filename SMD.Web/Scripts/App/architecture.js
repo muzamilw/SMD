@@ -27,6 +27,7 @@ var ist = {
         JobCards: 9
     },
 
+
     
     //server exceptions enumeration 
     exceptionType: {

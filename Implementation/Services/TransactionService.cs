@@ -2,6 +2,7 @@
 using SMD.Interfaces.Repository;
 using SMD.Interfaces.Services;
 using SMD.Models.DomainModels;
+using SMD.Models.ResponseModels;
 
 namespace SMD.Implementation.Services
 {
@@ -41,6 +42,27 @@ namespace SMD.Implementation.Services
         {
             return transactionRepository.GetUserTransactions();
         }
+
+
+        public List<GetTransactions_Result> GetUserVirtualTransactions(int companyId)
+        {
+
+
+            return transactionRepository.GetTransactions(companyId, 4, 30);
+        }
+
+        public IEnumerable<RevenueOverTimeResponseModel> getRevenueOverTime(int accountId)
+        {
+
+            IEnumerable<Transaction> list = transactionRepository.GetTransactionByAccountId(accountId);
+
+            List<RevenueOverTimeResponseModel> result = new List<RevenueOverTimeResponseModel>();
+
+            return result;
+
+        }
+
+       // public IEnumerable<Transaction> GetTransactionByAccountId(int accountId)
         #endregion
     }
 }
