@@ -51,6 +51,7 @@ namespace SMD.Implementation.Services
         private readonly ICouponCategoryRepository _companyRepository;
         private readonly ICampaignCategoriesRepository _campaignCategoriesRepository;
         private readonly IUserFavouriteCouponRepository _userFavouriteCouponRepository;
+
         #region Private Funcs
         private ApplicationUserManager UserManager
         {
@@ -354,7 +355,11 @@ namespace SMD.Implementation.Services
             {
                 campaignModel.MaxBudget = Math.Round(Convert.ToDouble(campaignModel.MaxBudget), 2);
             }
-            //todo pilot: harcoding ClickRate = 1 for every campaign
+            if (campaignModel.Status == 2)
+            {
+                campaignModel.SubmissionDateTime = DateTime.Now;
+            }
+            //toCamdo pilot: harcoding ClickRate = 1 for every campaign
             campaignModel.ClickRate = 0.20;
 
 
@@ -776,10 +781,12 @@ namespace SMD.Implementation.Services
 
             if (response != null && !response.Contains("Failed"))
             {
-                if (isSystemUser)
+                if (source.CompanyId!=null)
                 {
+                  TransactionManager.AddCompaignApprovalTransaction(source.CampaignId, amount, source.CompanyId.Value);
+                  String CompanyName =  companyRepository.GetCompanyNameByID(source.CompanyId.Value);
+                   
                     #region Add Invoice
-
                     // Add invoice data
                     var invoice = new Invoice
                     {
@@ -790,7 +797,7 @@ namespace SMD.Implementation.Services
                         InvoiceDueDate = DateTime.Now.AddDays(7),
                         Address1 = user.Company.CountryId.ToString(),
                         CompanyId = user.Company.CompanyId,
-                        CompanyName = "My Company",
+                        CompanyName = CompanyName,
                         CreditCardRef = response
                     };
                     invoiceRepository.Add(invoice);
@@ -804,9 +811,9 @@ namespace SMD.Implementation.Services
                         InvoiceId = invoice.InvoiceId,
                         SqId = null,
                         ProductId = product.ProductId,
-                        ItemName = "Ad Campaign",
+                        ItemName = product.ProductName,
                         ItemAmount = (double)amount,
-                        ItemTax = (double)tax.TaxValue,
+                        ItemTax = (double)(tax != null ? tax.TaxValue : 0),
                         ItemDescription = "This is description!",
                         ItemGrossAmount = (double)amount,
                         CampaignId = source.CampaignId,
