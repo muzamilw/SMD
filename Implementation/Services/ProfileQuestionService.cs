@@ -400,8 +400,11 @@ namespace SMD.Implementation.Services
                 {
                     if (criteria.ID != null && criteria.ID != 0)
                     {
-                        if (criteria.Type != (int)ProfileQuestionTargetCriteriaType.Language && criteria.Type != (int)ProfileQuestionTargetCriteriaType.Industry)  // industry and languages are addable and deleteable
-                            _profileQuestionTargetCriteriaRepository.UpdateTargetcriteria(criteria);
+                        if (criteria.PQAnswerID != null && criteria.PQAnswerID != 0)
+                        {
+                            if (criteria.Type != (int)ProfileQuestionTargetCriteriaType.Language && criteria.Type != (int)ProfileQuestionTargetCriteriaType.Industry)  // industry and languages are addable and deleteable
+                                _profileQuestionTargetCriteriaRepository.UpdateTargetcriteria(criteria);
+                        }
                     }
                     else
                     {
@@ -411,7 +414,7 @@ namespace SMD.Implementation.Services
                     }
                 }
             }
-            // _profileQuestionRepository.SaveChanges();
+            
             return _profileQuestionRepository.Find(serverObj.PqId);
 
         }

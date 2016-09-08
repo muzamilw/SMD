@@ -35,7 +35,7 @@ namespace SMD.MIS.Areas.Api.Models
         public virtual ProfileQuestion ProfileQuestion { get; set; }
        
         public string PQQuestionString { get; set; }
-
+        
         public bool IsDeleted { get; set; }
       
     }
