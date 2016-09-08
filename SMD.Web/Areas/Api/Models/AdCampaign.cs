@@ -102,8 +102,7 @@ namespace SMD.MIS.Areas.Api.Models
         public Nullable<int> viewCountAllTime { get; set; }
         public string Locationss { get; set; }
         public Nullable<double> MaxDailyBudget { get; set; }
-
-    
+        public Nullable<System.DateTime> SubmissionDateTime { get; set; }
 
 
     }

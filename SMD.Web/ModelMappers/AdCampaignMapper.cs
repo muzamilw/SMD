@@ -143,8 +143,8 @@ namespace SMD.MIS.ModelMappers
                 CouponType = source.CouponType ?? 1,
                 IsSavedCoupon = source.IsSavedCoupon ?? false,
                 DeliveryDays = source.DeliveryDays ?? 1,
-                MaxDailyBudget = source.MaxDailyBudget ?? 0
-
+                MaxDailyBudget = source.MaxDailyBudget ?? 0,
+                SubmissionDateTime =source.SubmissionDateTime
             };
 
 
