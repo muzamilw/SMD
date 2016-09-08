@@ -46,6 +46,7 @@ namespace SMD.Implementation.Services
         private readonly ITaxRepository _taxRepository;
         private readonly IInvoiceRepository _invoiceRepository;
         private readonly IInvoiceDetailRepository _invoiceDetailRepository;
+        private readonly ICompanyRepository _iCompanyRepository;
         private ApplicationUserManager UserManager
         {
             get { return HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
@@ -60,7 +61,7 @@ namespace SMD.Implementation.Services
         public ProfileQuestionService(IProfileQuestionRepository profileQuestionRepository, ICountryRepository countryRepository,
             ILanguageRepository languageRepository, IProfileQuestionGroupRepository profileQuestionGroupRepository,
             IProfileQuestionAnswerRepository profileQuestionAnswerRepository, IIndustryRepository industoryRepository, IEducationRepository educationRepository, IProfileQuestionTargetCriteriaRepository profileQuestionTargetCriteriaRepository, IProfileQuestionTargetLocationRepository profileQuestionTargetLocationRepository
-            , IEmailManagerService emailManagerService, IStripeService stripeService, IProductRepository productRepository, ITaxRepository taxRepository, IInvoiceRepository invoiceRepository, IInvoiceDetailRepository invoiceDetailRepository)
+            , IEmailManagerService emailManagerService, IStripeService stripeService, IProductRepository productRepository, ITaxRepository taxRepository, IInvoiceRepository invoiceRepository, IInvoiceDetailRepository invoiceDetailRepository, ICompanyRepository iCompanyRepository)
         {
             _profileQuestionRepository = profileQuestionRepository;
             _countryRepository = countryRepository;
@@ -78,6 +79,7 @@ namespace SMD.Implementation.Services
             _taxRepository = taxRepository;
             _invoiceRepository = invoiceRepository;
             _invoiceDetailRepository = invoiceDetailRepository;
+            _iCompanyRepository = iCompanyRepository;
         }
 
         #endregion
@@ -113,8 +115,8 @@ namespace SMD.Implementation.Services
         public ProfileQuestionSearchRequestResponse GetProfileQuestions(ProfileQuestionSearchRequest request)
         {
             int rowCount;
-           // var obj = _profileQuestionRepository.SearchProfileQuestions(request, out rowCount);
-            
+            // var obj = _profileQuestionRepository.SearchProfileQuestions(request, out rowCount);
+
 
             //string code = Convert.ToString((int)ProductCode.);
             //var product = productRepository.GetAll().Where(g => g.ProductCode == code).FirstOrDefault();
@@ -175,8 +177,8 @@ namespace SMD.Implementation.Services
         public ProfileQuestion SaveProfileQuestion(ProfileQuestion source)
         {
             var user = UserManager.Users.Where(g => g.Id == _profileQuestionRepository.LoggedInUserIdentity).SingleOrDefault();
-            
-                
+
+
 
 
             var serverObj = _profileQuestionRepository.Find(source.PqId);
@@ -299,7 +301,7 @@ namespace SMD.Implementation.Services
 
                 serverObj = new ProfileQuestion
                 {
-                  
+
                     Question = source.Question,
                     Priority = source.Priority,
                     HasLinkedQuestions = source.HasLinkedQuestions,
@@ -316,11 +318,11 @@ namespace SMD.Implementation.Services
                     AgeRangeStart = source.AgeRangeStart,
                     AgeRangeEnd = source.AgeRangeEnd,
                     Gender = source.Gender,
-                    SubmissionDateTime=source.SubmissionDateTime,
-                    CreatedBy=source.CreatedBy,
-                    UserID=source.UserID,
+                    SubmissionDateTime = source.SubmissionDateTime,
+                    CreatedBy = source.CreatedBy,
+                    UserID = source.UserID,
                     AmountCharged = source.AmountCharged,
-                    AnswerNeeded =source.AnswerNeeded
+                    AnswerNeeded = source.AnswerNeeded
                     //    CreatedBy = user.FullName
                 };
                 serverObj.CompanyId = compid;
@@ -328,11 +330,11 @@ namespace SMD.Implementation.Services
                 {
                     serverObj.SubmissionDateTime = DateTime.Now;
                 }
-                 if (user != null)
-                 {
-                     serverObj.CreatedBy = user.FullName;
-                     serverObj.UserID = user.Id;
-                 }
+                if (user != null)
+                {
+                    serverObj.CreatedBy = user.FullName;
+                    serverObj.UserID = user.Id;
+                }
 
                 _profileQuestionRepository.Add(serverObj);
                 _profileQuestionRepository.SaveChanges();
@@ -369,7 +371,7 @@ namespace SMD.Implementation.Services
             #endregion
             foreach (var loc in source.ProfileQuestionTargetLocations)
             {
-                
+
                 if (loc.ID != 0)
                 {
                     _profileQuestionTargetLocationRepository.Update(loc);
@@ -390,7 +392,7 @@ namespace SMD.Implementation.Services
             {
                 if (criteria.PQID > 0 && criteria.IsDeleted)
                 {
-                    _profileQuestionTargetCriteriaRepository.RemoveCriteria(criteria.PQID??0);
+                    _profileQuestionTargetCriteriaRepository.RemoveCriteria(criteria.PQID ?? 0);
                 }
                 else
                 {
@@ -495,19 +497,31 @@ namespace SMD.Implementation.Services
                 // Approval
                 if (source.Approved == true)
                 {
-                    dbCo.Approved = true;
-                    dbCo.ApprovalDate = DateTime.Now;
-                    dbCo.ApprovedByUserID = _profileQuestionRepository.LoggedInUserIdentity;
-                    dbCo.Status = (Int32)AdCampaignStatus.Live;
-
                     // Stripe payment + Invoice Generation
                     // Muzi bhai said we will see it on latter stage 
 
                     //todo pilot: unCommenting Stripe payment code on Ads approval
-                    respMesg = MakeStripePaymentandAddInvoiceForPQ(dbCo);
-                    if (respMesg.Contains("Failed"))
+                    if (dbCo.CompanyId == null)
                     {
-                        return respMesg;
+                        dbCo.Approved = true;
+                        dbCo.ApprovalDate = DateTime.Now;
+                        dbCo.ApprovedByUserID = _profileQuestionRepository.LoggedInUserIdentity;
+                        dbCo.Status = (Int32)AdCampaignStatus.Live;
+                    }
+                    else
+                    {
+                        respMesg = MakeStripePaymentandAddInvoiceForPQ(dbCo);
+                        if (respMesg.Contains("Failed"))
+                        {
+                            return respMesg;
+                        }
+                        else
+                        {
+                            dbCo.Approved = true;
+                            dbCo.ApprovalDate = DateTime.Now;
+                            dbCo.ApprovedByUserID = _profileQuestionRepository.LoggedInUserIdentity;
+                            dbCo.Status = (Int32)AdCampaignStatus.Live;
+                        }
                     }
                 }
                 // Rejection 
@@ -520,7 +534,6 @@ namespace SMD.Implementation.Services
                 }
                 dbCo.ModifiedDate = DateTime.Now;
                 dbCo.ModifiedBy = _profileQuestionRepository.LoggedInUserIdentity;
-
                 _profileQuestionRepository.SaveChanges();
 
             }
@@ -537,13 +550,13 @@ namespace SMD.Implementation.Services
             // Get Current Product
             var product = (dynamic)null;
             product = _productRepository.GetProductByCountryId("PQID");
-          
+
             // Tax Applied
             var tax = _taxRepository.GetTaxByCountryId(user.Company.CountryId);
             // Total includes tax
             if (product != null)
             {
-                amount = product.SetupPrice ?? 0 + tax.TaxValue ?? 0;
+                amount = source.AmountCharged ?? 0 + tax.TaxValue ?? 0;
 
 
                 // If It is not System User then make transation 
@@ -562,6 +575,7 @@ namespace SMD.Implementation.Services
                 if (source.CompanyId != null)
                 {
                     TransactionManager.ProfileQuestionApproveTransaction(source.PqId, amount, source.CompanyId.Value);
+                    String CompanyName = _iCompanyRepository.GetCompanyNameByID(source.CompanyId.Value);
 
 
                     #region Add Invoice
@@ -576,7 +590,7 @@ namespace SMD.Implementation.Services
                         InvoiceDueDate = DateTime.Now.AddDays(7),
                         Address1 = user.Company.CountryId.ToString(),
                         CompanyId = user.Company.CompanyId,
-                        CompanyName = "My Company",
+                        CompanyName = CompanyName,
                         CreditCardRef = response
                     };
                     _invoiceRepository.Add(invoice);
@@ -589,12 +603,12 @@ namespace SMD.Implementation.Services
                     {
                         InvoiceId = invoice.InvoiceId,
                         ProductId = product.ProductId,
-                        ItemName = "Profile Question",
+                        ItemName = product.ProductName,
                         ItemAmount = (double)amount,
-                        ItemTax = (double)tax.TaxValue,
+                        ItemTax = (double)(tax != null ? tax.TaxValue : 0),
                         ItemDescription = "This is description!",
                         ItemGrossAmount = (double)amount,
-                        PQID   = source.PqId,
+                        PQID = source.PqId,
 
                     };
                     _invoiceDetailRepository.Add(invoiceDetail);

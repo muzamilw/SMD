@@ -1,7 +1,7 @@
 ﻿define(["ko", "underscore", "underscore-ko"], function (ko) {
 
     var // ReSharper disable InconsistentNaming
-      ProfileQuestion = function (pqSubBy, pquestion, pqsubmissionDateTime, pqCompanyId, pqprofileGroupId, pqType, PqId,pqApproved,pqRejectedReason, pqAgeRangeStart, pqAgeRangeEnd) {
+      ProfileQuestion = function (pqSubBy, pquestion, pqsubmissionDateTime, pqCompanyId, pqprofileGroupId, pqType, PqId, pqApproved, pqRejectedReason, pqAgeRangeStart, pqAgeRangeEnd, pqAmountCharged) {
           var
               submittedBy = ko.observable(pqSubBy),
               question = ko.observable(pquestion),
@@ -15,6 +15,7 @@
               pqAnswers = ko.observableArray([]),
               ageRangeStart = ko.observable(pqAgeRangeStart),
               ageRangeEnd = ko.observable(pqAgeRangeEnd),
+              amountCharged = ko.observable(pqAmountCharged),
            
               errors = ko.validation.group({
 
@@ -53,6 +54,7 @@
               id: id,
               ageRangeStart: ageRangeStart,
               ageRangeEnd: ageRangeEnd,
+              amountCharged:amountCharged,
               isApproved :isApproved,
               rejectedReason :rejectedReason,
               pqAnswers:pqAnswers,
@@ -72,7 +74,7 @@
     var ProfileQuestionServertoClientMapper = function (itemFromServer) {
 
 
-        return new ProfileQuestion(itemFromServer.CreatedBy, itemFromServer.Question, itemFromServer.SubmissionDateTime, itemFromServer.CompanyId, itemFromServer.ProfileGroupId, itemFromServer.Type, itemFromServer.PqId, itemFromServer.Approved, itemFromServer.RejectionReason, itemFromServer.AgeRangeStart, itemFromServer.AgeRangeEnd);
+        return new ProfileQuestion(itemFromServer.CreatedBy, itemFromServer.Question, itemFromServer.SubmissionDateTime, itemFromServer.CompanyId, itemFromServer.ProfileGroupId, itemFromServer.Type, itemFromServer.PqId, itemFromServer.Approved, itemFromServer.RejectionReason, itemFromServer.AgeRangeStart, itemFromServer.AgeRangeEnd, itemFromServer.AmountCharged);
     };
   
     // Function to attain cancel button functionality ProfileQuestion

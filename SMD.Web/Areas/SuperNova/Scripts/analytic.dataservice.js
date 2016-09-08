@@ -11,9 +11,9 @@ define("analytic/analytic.dataservice", function () {
             initialize = function () {
                 if (!isInitialized) {
 
-                     
+
                     amplify.request.define('getactiveuser', 'ajax', {
-                        url: '/Api/ApproveProfileQuestionAns',
+                        url: '/Api/ActiveUser',
                         dataType: 'json',
                         type: 'GET'
                     });
@@ -21,54 +21,18 @@ define("analytic/analytic.dataservice", function () {
                 }
             },
             // Search Ad Campaigns
-            getPQForApproval = function (params, callbacks) {
+            getactiveuser = function (params, callbacks) {
                 initialize();
                 return amplify.request({
-                    resourceId: 'getPQForApproval',
+                    resourceId: 'getactiveuser',
                     success: callbacks.success,
                     error: callbacks.error,
                     data: params
                 });
-            },
-
-
-
-             // Search Ad Campaigns
-            sendApprovalRejectionEmail = function (params, callbacks) {
-                initialize();
-                return amplify.request({
-                    resourceId: 'sendApprovalRejectionEmail',
-                    success: callbacks.success,
-                    error: callbacks.error,
-                    data: params
-                });
-            },
-            // Save Ad Campaign edit
-            savePq = function (params, callbacks) {
-                initialize();
-                return amplify.request({
-                    resourceId: 'savePq',
-                    success: callbacks.success,
-                    error: callbacks.error,
-                    data: params
-                });
-            },
-        // Get Profile Questions Answer On edit 
-        getPqAnswer = function (params, callbacks) {
-            initialize();
-            return amplify.request({
-                resourceId: 'getPqAnswer',
-                success: callbacks.success,
-                error: callbacks.error,
-                data: params
-            });
-        };
+            }; 
 
         return {
-            savePq: savePq,
-            getPQForApproval: getPQForApproval,
-            sendApprovalRejectionEmail: sendApprovalRejectionEmail,
-            getPqAnswer: getPqAnswer
+            getactiveuser: getactiveuser
         };
     })();
     return dataService;

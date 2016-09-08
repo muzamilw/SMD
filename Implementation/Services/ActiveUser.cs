@@ -1,4 +1,6 @@
-﻿using SMD.Interfaces.Services;
+﻿using SMD.Interfaces.Repository;
+using SMD.Interfaces.Services;
+using SMD.Models.ResponseModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +11,27 @@ namespace SMD.Implementation.Services
 {
     public class ActiveUser : IActiveUser
     {
+        #region Private
 
-        public IEnumerable<Int32> getActiveUser() { 
-        
-        return new Int32[]{1,2};
+        private readonly IActiveUserRepository activeUserRepository;
+
+
+        #endregion
+        #region Constructor
+        /// <summary>
+        /// Constructor 
+        /// </summary>
+        public ActiveUser(IActiveUserRepository activeUserRepository)
+        {
+            this.activeUserRepository = activeUserRepository;
+        }
+
+        #endregion
+
+
+        public ActiveUserResponseModel getActiveUser()
+        {
+            return activeUserRepository.getActiveUser();
         }
     }
 }

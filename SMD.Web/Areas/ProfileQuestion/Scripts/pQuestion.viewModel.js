@@ -306,7 +306,7 @@ define("pQuestion/pQuestion.viewModel",
                 },     
                     // Add new Profile Question
                     addNewProfileQuestion = function () {
-                        getProductPrice();
+                       // getProductPrice();
                         selectedQuestion(new model.question());
                         selectedQuestion().Gender("1");
                         
@@ -1398,7 +1398,7 @@ define("pQuestion/pQuestion.viewModel",
                         pager(pagination.Pagination({ PageSize: 10 }, questions, getQuestions));
                         // Base Data Call
                         getBasedata();
-                        
+                        getProductPrice();
                         // First request for LV
                         getQuestions(214, 41);
                         for (var i = 10; i < 81; i++) {

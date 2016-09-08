@@ -39,6 +39,7 @@ namespace SMD.Implementation.Services
         private readonly ITaxRepository taxRepository;
         private readonly IInvoiceRepository invoiceRepository;
         private readonly IInvoiceDetailRepository invoiceDetailRepository;
+        private readonly ICompanyRepository _iCompanyRepository;
         private ApplicationUserManager UserManager
         {
             get { return HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
@@ -131,7 +132,7 @@ namespace SMD.Implementation.Services
         /// </summary>
         public CouponService(ICouponRepository couponRepository, IUserFavouriteCouponRepository userFavouriteCouponRepository, ICompanyService _companyService,
             IUserPurchasedCouponRepository _userPurchasedCouponRepository, IAccountRepository _accountRepository, ICouponCategoriesRepository _couponCategoriesRepository, ICurrencyRepository _currencyRepository, IWebApiUserService _userService, IUserCouponViewRepository userCouponViewRepository, IEmailManagerService emailManagerService, WebApiUserService webApiUserService, IStripeService stripeService, IProductRepository productRepository
-            , ITaxRepository taxRepository, IInvoiceRepository invoiceRepository, IInvoiceDetailRepository invoiceDetailRepository)
+            , ITaxRepository taxRepository, IInvoiceRepository invoiceRepository, IInvoiceDetailRepository invoiceDetailRepository, ICompanyRepository iCompanyRepository)
         {
             this.couponRepository = couponRepository;
             this._userFavouriteCouponRepository = userFavouriteCouponRepository;
@@ -149,6 +150,7 @@ namespace SMD.Implementation.Services
             this.taxRepository = taxRepository;
             this.invoiceRepository = invoiceRepository;
            this.invoiceDetailRepository = invoiceDetailRepository;
+           _iCompanyRepository = iCompanyRepository;
         }
 
         #endregion
@@ -655,17 +657,11 @@ namespace SMD.Implementation.Services
                     dbCo.ApprovalDateTime = DateTime.Now;
                     dbCo.ApprovedBy = couponRepository.LoggedInUserIdentity;
                     dbCo.Status = (Int32)AdCampaignStatus.Live;
-                    
                     // Stripe payment + Invoice Generation
                     // Muzi bhai said we will see it on latter stage 
-
                     //todo pilot: unCommenting Stripe payment code on Ads approval
 
-
-
                     respMesg = MakeStripePaymentandAddInvoiceForCoupon(dbCo, out PaymentToBeCharged);
-
-                   
                     if (respMesg.Contains("Failed"))
                     {
                         return respMesg;
@@ -735,8 +731,9 @@ namespace SMD.Implementation.Services
 
             if (response != null && !response.Contains("Failed"))
             {
-                if (isSystemUser)
+                if (source.CompanyId!= null)
                 {
+                    String CompanyName = _iCompanyRepository.GetCompanyNameByID(source.CompanyId.Value);
                     #region Add Invoice
 
                     // Add invoice data
@@ -749,7 +746,7 @@ namespace SMD.Implementation.Services
                         InvoiceDueDate = DateTime.Now.AddDays(7),
                         Address1 = user.Company.CountryId.ToString(),
                         CompanyId = user.Company.CompanyId,
-                        CompanyName = "My Company",
+                        CompanyName = CompanyName,
                         CreditCardRef = response
                     };
                     invoiceRepository.Add(invoice);
@@ -764,9 +761,9 @@ namespace SMD.Implementation.Services
                         SqId = null,
                         PQID=null,
                         ProductId = product.ProductId,
-                        ItemName = "Coupons",
+                        ItemName = product.ProductName,
                         ItemAmount = (double)amount,
-                        ItemTax = (double)tax.TaxValue,
+                        ItemTax = (double)(tax != null ? tax.TaxValue : 0),
                         ItemDescription = "This is description!",
                         ItemGrossAmount = (double)amount,
                         CouponID = source.CouponId,
