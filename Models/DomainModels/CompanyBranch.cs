@@ -31,6 +31,8 @@ namespace SMD.Models.DomainModels
         public string BranchLocationLong { get; set; }
         public Nullable<long> BranchCategoryId { get; set; }
         public Nullable<int> CompanyId { get; set; }
+
+        public Nullable<int> CountryId { get; set; }
     
         public virtual BranchCategory BranchCategory { get; set; }
         public virtual Company Company { get; set; }

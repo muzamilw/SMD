@@ -382,6 +382,7 @@
           <Property Name="BranchLocationLong" Type="nvarchar" MaxLength="50" />
           <Property Name="BranchCategoryId" Type="bigint" />
           <Property Name="CompanyId" Type="int" />
+          <Property Name="CountryId" Type="int" />
         </EntityType>
         <EntityType Name="Country">
           <Key>
@@ -456,6 +457,7 @@
           <Property Name="HowToRedeemLine4" Type="nvarchar" MaxLength="500" />
           <Property Name="HowToRedeemLine5" Type="nvarchar" MaxLength="500" />
           <Property Name="SubmissionDateTime" Type="datetime" />
+          <Property Name="LocationCountryId" Type="int" />
         </EntityType>
         <EntityType Name="CouponCategories">
           <Key>
@@ -3103,6 +3105,7 @@
           <NavigationProperty Name="BranchCategory" Relationship="Self.FK_CompanyBranch_BranchCategory" FromRole="CompanyBranch" ToRole="BranchCategory" />
           <NavigationProperty Name="Company" Relationship="Self.FK_CompanyBranch_Company" FromRole="CompanyBranch" ToRole="Company" />
           <NavigationProperty Name="Coupons" Relationship="Self.FK_Coupon_CompanyBranch" FromRole="CompanyBranch" ToRole="Coupon" />
+          <Property Name="CountryId" Type="Int32" />
         </EntityType>
         <EntityType Name="Country">
           <Key>
@@ -3192,6 +3195,7 @@
           <NavigationProperty Name="UserPurchasedCoupons" Relationship="SMDDevModel.FK_UserPurchasedCoupon_Coupon" FromRole="Coupon" ToRole="UserPurchasedCoupon" />
           <Property Name="SubmissionDateTime" Type="DateTime" Precision="3" />
           <NavigationProperty Name="InvoiceDetails" Relationship="SMDDevModel.FK_InvoiceDetail_Coupon" FromRole="Coupon" ToRole="InvoiceDetail" />
+          <Property Name="LocationCountryId" Type="Int32" />
         </EntityType>
         <EntityType Name="CouponCode">
           <Key>
@@ -6062,6 +6066,7 @@
           <EntitySetMapping Name="CompanyBranches">
             <EntityTypeMapping TypeName="SMDDevModel.CompanyBranch">
               <MappingFragment StoreEntitySet="CompanyBranch">
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
                 <ScalarProperty Name="BranchId" ColumnName="BranchId" />
                 <ScalarProperty Name="BranchTitle" ColumnName="BranchTitle" />
                 <ScalarProperty Name="BranchAddressLine1" ColumnName="BranchAddressLine1" />
@@ -6089,6 +6094,7 @@
           <EntitySetMapping Name="Coupons">
             <EntityTypeMapping TypeName="SMDDevModel.Coupon">
               <MappingFragment StoreEntitySet="Coupon">
+                <ScalarProperty Name="LocationCountryId" ColumnName="LocationCountryId" />
                 <ScalarProperty Name="SubmissionDateTime" ColumnName="SubmissionDateTime" />
                 <ScalarProperty Name="CouponId" ColumnName="CouponId" />
                 <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
