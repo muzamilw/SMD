@@ -767,6 +767,7 @@ else
         console.log(mode);
     }
     function iframeLoaded() {
+        debugger;
         var iframeBody = $('body', $('#iframe')[0].contentWindow.document);
         $(iframeBody).on('click', '.damImgContainer img', function (event) {
             console.log(mode);

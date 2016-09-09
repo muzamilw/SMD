@@ -5,7 +5,7 @@
             HighlightLine5, HowToRedeemLine1, HowToRedeemLine2, HowToRedeemLine3, HowToRedeemLine4, HowToRedeemLine5, LanguageId, LocationBranchId, LocationCity, LocationLAT,
             LocationLine1, LocationLine2, LocationLON, LocationPhone, LocationState, LocationTitle, LocationZipCode, LogoUrl, ModifiedBy, ModifiedDateTime, Price, RejectedBy,
             Rejecteddatetime, RejectedReason, Savings, SearchKeywords, Status, SwapCost, UserId, CouponTitle, CouponExpirydate, CouponQtyPerUser, CouponId, couponImage1, CouponImage2, CouponImage3,
-            CurrencyId, CouponListingMode, CouponActiveMonth, CouponActiveYear, CouponRedeemedCount, CouponViewCount, CouponIssuedCount, SubmissionDateTime
+            CurrencyId, CouponListingMode, CouponActiveMonth, CouponActiveYear, CouponRedeemedCount, CouponViewCount, CouponIssuedCount, SubmissionDateTime,LocationCountryId
           ) {
           var
               //type and userID will be set on server sside
@@ -13,6 +13,7 @@
               Approved = ko.observable(Approved),
               ApprovedBy = ko.observable(ApprovedBy),
               Archived = ko.observable(Archived),
+              LocationCountryId = ko.observable(LocationCountryId),
               CompanyId = ko.observable(CompanyId),
               CouponCategories = ko.observableArray([]),
               CouponActiveMonth = ko.observable(CouponActiveMonth),
@@ -146,7 +147,8 @@
                  StatusValue :StatusValue ,
                  SwapCost : (SwapCost),
                  UserId: (UserId),
-                 LogoImageBytes: LogoImageBytes
+                 LogoImageBytes: LogoImageBytes,
+                 LocationCountryId: LocationCountryId
               }),
               // Has Changes
               hasChanges = ko.computed(function () {
@@ -205,6 +207,7 @@
                       HowToRedeemLine4: HowToRedeemLine4(),
                       HowToRedeemLine5: HowToRedeemLine5(),
                       LanguageId: LanguageId(),
+                      LocationCountryId:LocationCountryId(),
                       LocationBranchId: LocationBranchId(),
                       LocationCity: LocationCity(),
                       LocationLAT: LocationLAT(),
@@ -300,7 +303,8 @@
               hasChanges: hasChanges,
               convertToServerData: convertToServerData,
               CouponCategories: CouponCategories,
-              SubmissionDateTime: (SubmissionDateTime)
+              SubmissionDateTime: (SubmissionDateTime),
+              LocationCountryId: (LocationCountryId)
           };
       };
 
@@ -315,7 +319,7 @@
             source.LocationLine1, source.LocationLine2, source.LocationLON, source.LocationPhone, source.LocationState,
             source.LocationTitle, source.LocationZipCode, source.LogoUrl, source.ModifiedBy, source.ModifiedDateTime, source.Price, source.RejectedBy,
             source.Rejecteddatetime, source.RejectedReason, source.Savings, source.SearchKeywords, source.Status, source.SwapCost, source.UserId,source.CouponTitle,source.CouponExpirydate,
-            source.CouponQtyPerUser, source.CouponId, source.couponImage1, source.CouponImage2, source.CouponImage3, source.CurrencyId, source.CouponListingMode, source.CouponActiveMonth, source.CouponActiveYear, source.CouponRedeemedCount, source.CouponViewCount, source.CouponIssuedCount,source.SubmissionDateTime
+            source.CouponQtyPerUser, source.CouponId, source.couponImage1, source.CouponImage2, source.CouponImage3, source.CurrencyId, source.CouponListingMode, source.CouponActiveMonth, source.CouponActiveYear, source.CouponRedeemedCount, source.CouponViewCount, source.CouponIssuedCount, source.SubmissionDateTime, source.LocationCountryId
             );
         _.each(source.CouponCategories, function (item) {
 

@@ -113,7 +113,8 @@
                                                       selectedBranch(null);
                                                       isCodeAddressEdit(false);
                                                       if (afterBranchSelect && typeof afterBranchSelect === "function") {
-                                                          afterBranchSelect();
+                                                         
+                                                          afterBranchSelect(data);
                                                       }
 
                                                   },
@@ -364,7 +365,7 @@
                 showBranchDialoge = function (callback) {
                     afterBranchSelect = callback;
                     getBranchCategories(viewBranchDialog);
-                    getAllCountries();
+                    //getAllCountries();
                 },
                 hideBranchCategoryDialog = function () {
 
