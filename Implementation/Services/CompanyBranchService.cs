@@ -12,9 +12,11 @@ namespace SMD.Implementation.Services
     public class CompanyBranchService : ICompanyBranchService
     {
         private readonly ICompanyBranchRepository _companybranchrepository;
-        public CompanyBranchService(ICompanyBranchRepository _companybranchrepository)
+        private readonly ICountryRepository _countryRepository;
+        public CompanyBranchService(ICompanyBranchRepository _companybranchrepository, ICountryRepository countryRepository)
         {
             this._companybranchrepository = _companybranchrepository;
+            _countryRepository = countryRepository;
 
         }
 
@@ -51,6 +53,7 @@ namespace SMD.Implementation.Services
             model.BranchPhone = branch.BranchPhone;
             model.BranchLocationLat = branch.BranchLocationLat;
             model.BranchLocationLong = branch.BranchLocationLong;
+            model.CountryId = branch.CountryId;
             model.BranchCategoryId = branch.BranchCategoryId;
             model.CompanyId = _companybranchrepository.CompanyId;
             _companybranchrepository.Add(model);
@@ -66,6 +69,10 @@ namespace SMD.Implementation.Services
                 _companybranchrepository.Delete(delBranch);
             _companybranchrepository.SaveChanges();
             return true;
+        }
+        public List<Country> GetAllCountries()
+        {
+            return _countryRepository.GetAllCountries().ToList();
         }
 
     }

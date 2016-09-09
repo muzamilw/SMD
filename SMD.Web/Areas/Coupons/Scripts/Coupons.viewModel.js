@@ -38,6 +38,7 @@ define("Coupons/Coupons.viewModel",
                     isNewCriteria = ko.observable(true),
                     isEnableVedioVerificationLink = ko.observable(false),
                     SelectedTextField = ko.observable(),
+                    BranchLocationId = ko.observable(),
                     //caption variablels 
 
                 //
@@ -107,6 +108,7 @@ define("Coupons/Coupons.viewModel",
                     TempSelectedObj = ko.observable(),
                     CouponTitle = ko.observable(),
                     StatusValue = ko.observable(),
+                    GetCallBackBranchObject = ko.observable()
                     previewScreenNumber = ko.observable(1);
                 CurrPage = ko.observable(9);
                 MaxPage = ko.observable(12);
@@ -487,7 +489,11 @@ define("Coupons/Coupons.viewModel",
                     couponModel().SubmissionDateTime(mode);
                     
                     var res = CouponActiveMonth().split("-");
+
                     couponModel().CouponActiveYear(res[0]);
+                    debugger;
+                    couponModel().LocationCountryId(BranchLocationId);
+
                     couponModel().CouponActiveMonth(GetMonth(res[1]));
 
                     var campignServerObj = couponModel().convertToServerData();
@@ -1798,9 +1804,51 @@ define("Coupons/Coupons.viewModel",
                      });
                  },
                 openBranchLocation = function () {
-                    branchLocation.showBranchDialoge(getLocation);
+                   
+                    branchLocation.showBranchDialoge(function (BranchId) {
+                    SetSelectedBranchLocation(BranchId);
+                    
+                    });
 
                 },
+                SetSelectedBranchLocation = function (BranchID)
+                {
+
+                    dataservice.getBaseData({
+                        RequestId: 13,
+                        QuestionId: 0,
+                    }, {
+                        success: function (data) {
+                            if (data != null) {
+                                console.log(data);
+                                branchLocations([]);
+                                ko.utils.arrayPushAll(branchLocations(), data.listBranches);
+                                branchLocations.valueHasMutated();
+                                BindPeriodDD();
+
+                                var index = 0;
+                                
+                                $.each(branchLocations(), function (id, option) {
+                                    
+                                    if (option.BranchId == BranchID) {
+
+                                        $("#yearDropDown")[0].selectedIndex = 3;
+
+                                       // BranchLocationId = option.
+                                    }
+                                    index++;
+                                });
+                                debugger;
+                            }
+
+                        },
+                        error: function (response) {
+
+                        }
+                    });
+                },
+
+                
                 selectedField = function (Fieldvalue, event) {
 
 
@@ -2010,7 +2058,8 @@ define("Coupons/Coupons.viewModel",
                     CouponTitle: CouponTitle,
                     StatusValue: StatusValue,
                     OnchangeDateDD: OnchangeDateDD,
-                    CouponActiveMonth: CouponActiveMonth
+                    CouponActiveMonth: CouponActiveMonth,
+                    BranchLocationId: BranchLocationId
                 };
             })()
         };

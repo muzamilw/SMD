@@ -358,6 +358,7 @@
           <Property Name="BranchLocationLong" Type="nvarchar" MaxLength="50" />
           <Property Name="BranchCategoryId" Type="bigint" />
           <Property Name="CompanyId" Type="int" />
+          <Property Name="CountryId" Type="int" />
         </EntityType>
         <EntityType Name="Country">
           <Key>
@@ -432,6 +433,7 @@
           <Property Name="HowToRedeemLine4" Type="nvarchar" MaxLength="500" />
           <Property Name="HowToRedeemLine5" Type="nvarchar" MaxLength="500" />
           <Property Name="SubmissionDateTime" Type="datetime" />
+          <Property Name="LocationCountryId" Type="int" />
         </EntityType>
         <EntityType Name="CouponCategories">
           <Key>
@@ -2055,6 +2057,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="GetAdminDashBoardInsights" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetAds" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserID" Type="nvarchar" Mode="In" />
           <Parameter Name="FromRow" Type="int" Mode="In" />
@@ -3172,6 +3175,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
             <Parameter Name="AccountType" Mode="In" Type="Int32" />
             <Parameter Name="Rows" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="GetAdminDashBoardInsights" ReturnType="Collection(DomainModels.GetAdminDashBoardInsights_Result)" />
           </EntityContainer>
         <EntityType Name="ProfileQuestion">
           <Key>
@@ -4902,6 +4906,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <NavigationProperty Name="BranchCategory" Relationship="DomainModels.FK_CompanyBranch_BranchCategory" FromRole="CompanyBranch" ToRole="BranchCategory" />
           <NavigationProperty Name="Coupons" Relationship="DomainModels.FK_Coupon_CompanyBranch" FromRole="CompanyBranch" ToRole="Coupon" />
           <NavigationProperty Name="Company" Relationship="DomainModels.FK_CompanyBranch_Company" FromRole="CompanyBranch" ToRole="Company" />
+          <Property Name="CountryId" Type="Int32" />
         </EntityType>
         <EntityType Name="Coupon">
           <Key>
@@ -4974,6 +4979,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <NavigationProperty Name="Company" Relationship="DomainModels.FK_Coupon_Company" FromRole="Coupon" ToRole="Company" />
           <Property Name="SubmissionDateTime" Type="DateTime" Precision="3" />
           <NavigationProperty Name="InvoiceDetails" Relationship="DomainModels.FK_InvoiceDetail_Coupon" FromRole="Coupon" ToRole="InvoiceDetail" />
+          <Property Name="LocationCountryId" Type="Int32" />
         </EntityType>
         <Association Name="FK_CompanyBranch_BranchCategory">
           <End Type="DomainModels.BranchCategory" Role="BranchCategory" Multiplicity="0..1" />
@@ -5455,7 +5461,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Property Type="String" Name="CurrencySymbol" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="LogoUrl" Nullable="true" MaxLength="227" />
           <Property Type="Int32" Name="DaysLeft" Nullable="true" />
-          <Property Type="Double" Name="SwapCost" Nullable="true" />
+          <Property Type="Decimal" Name="SwapCost" Nullable="true" Precision="36" Scale="2" />
         </ComplexType>
         <EntityType Name="ProfileQuestionTargetCriteria">
           <Key>
@@ -5771,6 +5777,15 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Property Type="Int32" Name="PQID" Nullable="true" />
           <Property Type="Double" Name="CurrentBalance" Nullable="true" />
           <Property Type="String" Name="description" Nullable="true" MaxLength="516" />
+        </ComplexType>
+        <ComplexType Name="GetAdminDashBoardInsights_Result">
+          <Property Type="String" Name="rectype" Nullable="false" MaxLength="16" />
+          <Property Type="String" Name="pMonth" Nullable="false" MaxLength="14" />
+          <Property Type="Int32" Name="us" Nullable="true" />
+          <Property Type="Int32" Name="uk" Nullable="true" />
+          <Property Type="Int32" Name="ca" Nullable="true" />
+          <Property Type="Int32" Name="au" Nullable="true" />
+          <Property Type="Int32" Name="ae" Nullable="true" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -6650,6 +6665,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <EntitySetMapping Name="CompanyBranches">
             <EntityTypeMapping TypeName="DomainModels.CompanyBranch">
               <MappingFragment StoreEntitySet="CompanyBranch">
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
                 <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
                 <ScalarProperty Name="BranchCategoryId" ColumnName="BranchCategoryId" />
                 <ScalarProperty Name="BranchLocationLong" ColumnName="BranchLocationLong" />
@@ -6668,6 +6684,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <EntitySetMapping Name="Coupons">
             <EntityTypeMapping TypeName="DomainModels.Coupon">
               <MappingFragment StoreEntitySet="Coupon">
+                <ScalarProperty Name="LocationCountryId" ColumnName="LocationCountryId" />
                 <ScalarProperty Name="SubmissionDateTime" ColumnName="SubmissionDateTime" />
                 <ScalarProperty Name="HowToRedeemLine5" ColumnName="HowToRedeemLine5" />
                 <ScalarProperty Name="HowToRedeemLine4" ColumnName="HowToRedeemLine4" />
@@ -7099,6 +7116,19 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
                 <ScalarProperty Name="PQID" ColumnName="PQID" />
                 <ScalarProperty Name="CurrentBalance" ColumnName="CurrentBalance" />
                 <ScalarProperty Name="description" ColumnName="description" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAdminDashBoardInsights" FunctionName="SMDModel.Store.GetAdminDashBoardInsights">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DomainModels.GetAdminDashBoardInsights_Result">
+                <ScalarProperty Name="rectype" ColumnName="rectype" />
+                <ScalarProperty Name="pMonth" ColumnName="pMonth" />
+                <ScalarProperty Name="us" ColumnName="us" />
+                <ScalarProperty Name="uk" ColumnName="uk" />
+                <ScalarProperty Name="ca" ColumnName="ca" />
+                <ScalarProperty Name="au" ColumnName="au" />
+                <ScalarProperty Name="ae" ColumnName="ae" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

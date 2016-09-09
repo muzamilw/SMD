@@ -129,6 +129,7 @@
     <Compile Include="DomainModels\Coupon.cs" />
     <Compile Include="DomainModels\CouponCategories.cs" />
     <Compile Include="DomainModels\DamImage.cs" />
+    <Compile Include="DomainModels\GetAdminDashBoardInsights_Result.cs" />
     <Compile Include="DomainModels\GetCouponByID_Result.cs" />
     <Compile Include="DomainModels\GetTransactions_Result.cs" />
     <Compile Include="DomainModels\Phrase.cs" />

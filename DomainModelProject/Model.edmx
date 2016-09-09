@@ -382,6 +382,7 @@
           <Property Name="BranchLocationLong" Type="nvarchar" MaxLength="50" />
           <Property Name="BranchCategoryId" Type="bigint" />
           <Property Name="CompanyId" Type="int" />
+          <Property Name="CountryId" Type="int" />
         </EntityType>
         <EntityType Name="Country">
           <Key>
@@ -456,6 +457,7 @@
           <Property Name="HowToRedeemLine4" Type="nvarchar" MaxLength="500" />
           <Property Name="HowToRedeemLine5" Type="nvarchar" MaxLength="500" />
           <Property Name="SubmissionDateTime" Type="datetime" />
+          <Property Name="LocationCountryId" Type="int" />
         </EntityType>
         <EntityType Name="CouponCategories">
           <Key>
@@ -2165,6 +2167,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="GetAdminDashBoardInsights" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetCouponByID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CouponId" Type="bigint" Mode="In" />
           <Parameter Name="Lat" Type="nvarchar" Mode="In" />
@@ -3103,6 +3106,7 @@
           <NavigationProperty Name="BranchCategory" Relationship="Self.FK_CompanyBranch_BranchCategory" FromRole="CompanyBranch" ToRole="BranchCategory" />
           <NavigationProperty Name="Company" Relationship="Self.FK_CompanyBranch_Company" FromRole="CompanyBranch" ToRole="Company" />
           <NavigationProperty Name="Coupons" Relationship="Self.FK_Coupon_CompanyBranch" FromRole="CompanyBranch" ToRole="Coupon" />
+          <Property Name="CountryId" Type="Int32" />
         </EntityType>
         <EntityType Name="Country">
           <Key>
@@ -3192,6 +3196,7 @@
           <NavigationProperty Name="UserPurchasedCoupons" Relationship="SMDDevModel.FK_UserPurchasedCoupon_Coupon" FromRole="Coupon" ToRole="UserPurchasedCoupon" />
           <Property Name="SubmissionDateTime" Type="DateTime" Precision="3" />
           <NavigationProperty Name="InvoiceDetails" Relationship="SMDDevModel.FK_InvoiceDetail_Coupon" FromRole="Coupon" ToRole="InvoiceDetail" />
+          <Property Name="LocationCountryId" Type="Int32" />
         </EntityType>
         <EntityType Name="CouponCode">
           <Key>
@@ -5110,6 +5115,7 @@
             <Parameter Name="AccountType" Mode="In" Type="Int32" />
             <Parameter Name="Rows" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="GetAdminDashBoardInsights" ReturnType="Collection(SMDDevModel.GetAdminDashBoardInsights_Result)" />
           </EntityContainer>
         <EntityType Name="CouponCategories">
           <Key>
@@ -5684,6 +5690,15 @@
           <Property Type="Double" Name="CurrentBalance" Nullable="true" />
           <Property Type="String" Name="description" Nullable="true" MaxLength="516" />
         </ComplexType>
+        <ComplexType Name="GetAdminDashBoardInsights_Result">
+          <Property Type="String" Name="rectype" Nullable="false" MaxLength="16" />
+          <Property Type="String" Name="pMonth" Nullable="false" MaxLength="14" />
+          <Property Type="Int32" Name="us" Nullable="true" />
+          <Property Type="Int32" Name="uk" Nullable="true" />
+          <Property Type="Int32" Name="ca" Nullable="true" />
+          <Property Type="Int32" Name="au" Nullable="true" />
+          <Property Type="Int32" Name="ae" Nullable="true" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -6062,6 +6077,7 @@
           <EntitySetMapping Name="CompanyBranches">
             <EntityTypeMapping TypeName="SMDDevModel.CompanyBranch">
               <MappingFragment StoreEntitySet="CompanyBranch">
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
                 <ScalarProperty Name="BranchId" ColumnName="BranchId" />
                 <ScalarProperty Name="BranchTitle" ColumnName="BranchTitle" />
                 <ScalarProperty Name="BranchAddressLine1" ColumnName="BranchAddressLine1" />
@@ -6089,6 +6105,7 @@
           <EntitySetMapping Name="Coupons">
             <EntityTypeMapping TypeName="SMDDevModel.Coupon">
               <MappingFragment StoreEntitySet="Coupon">
+                <ScalarProperty Name="LocationCountryId" ColumnName="LocationCountryId" />
                 <ScalarProperty Name="SubmissionDateTime" ColumnName="SubmissionDateTime" />
                 <ScalarProperty Name="CouponId" ColumnName="CouponId" />
                 <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
@@ -6980,6 +6997,19 @@
                 <ScalarProperty Name="PQID" ColumnName="PQID" />
                 <ScalarProperty Name="CurrentBalance" ColumnName="CurrentBalance" />
                 <ScalarProperty Name="description" ColumnName="description" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAdminDashBoardInsights" FunctionName="SMDDevModel.Store.GetAdminDashBoardInsights">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SMDDevModel.GetAdminDashBoardInsights_Result">
+                <ScalarProperty Name="rectype" ColumnName="rectype" />
+                <ScalarProperty Name="pMonth" ColumnName="pMonth" />
+                <ScalarProperty Name="us" ColumnName="us" />
+                <ScalarProperty Name="uk" ColumnName="uk" />
+                <ScalarProperty Name="ca" ColumnName="ca" />
+                <ScalarProperty Name="au" ColumnName="au" />
+                <ScalarProperty Name="ae" ColumnName="ae" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

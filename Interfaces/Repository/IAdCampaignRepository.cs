@@ -36,10 +36,7 @@ namespace SMD.Interfaces.Repository
         List<GetCoupons_Result> GetCoupons(string UserId);
         IEnumerable<CompanyBranch> GetAllBranches();
 
-
-        
-    
-
-
+        string CampaignVerifyQuestionById(int CampaignID);
+        AdCampaign GetCampaignByID(long CampaignID);
     }
 }

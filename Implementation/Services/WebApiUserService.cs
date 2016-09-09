@@ -1367,6 +1367,7 @@ namespace SMD.Implementation.Services
                     user.AuthenticationToken = Guid.NewGuid().ToString();
                     var CompanyId = companyRepository.createCompany(user.Id, request.Email, request.FullName, user.AuthenticationToken);
                     accountService.AddAccountsForNewUser(CompanyId);
+                    TransactionManager.UserSignupFreeGiftBalanceTransaction(500, CompanyId);
                     
                 }
 
@@ -1407,6 +1408,7 @@ namespace SMD.Implementation.Services
                 }
                 // update GUID 
                 user.AuthenticationToken = Guid.NewGuid().ToString();
+                user.LastLoginTime = DateTime.Now;
                 await UserManager.UpdateAsync(user);
 
                 // Login user

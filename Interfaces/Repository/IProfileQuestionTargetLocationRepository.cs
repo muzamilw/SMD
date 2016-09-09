@@ -11,5 +11,7 @@ namespace SMD.Interfaces
     public interface IProfileQuestionTargetLocationRepository : IBaseRepository<ProfileQuestionTargetLocation, long>
     {
         //List<ProfileQuestionTargetLocation> GetPQlocation(long pqId);
+       bool UpdateTargetLocation(ProfileQuestionTargetLocation Tlocation);
+       bool DeleteTargetLocation(int PQID);
     }
 }

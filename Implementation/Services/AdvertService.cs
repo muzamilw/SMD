@@ -72,7 +72,7 @@ namespace SMD.Implementation.Services
                 string base64 = campaign.VideoBytes.Substring(campaign.VideoBytes.IndexOf(',') + 1);
                 base64 = base64.Trim('\0');
                 byte[] data = Convert.FromBase64String(base64);
-                string savePath = directoryPath+"\\guid_CampaignDefaultVideo.mp4";
+                string savePath = directoryPath + "\\guid_CampaignDefaultVideo.mp4";
                 File.WriteAllBytes(savePath, data);
                 int indexOf = savePath.LastIndexOf("SMD_Content", StringComparison.Ordinal);
                 savePath = savePath.Substring(indexOf, savePath.Length - indexOf);
@@ -185,7 +185,7 @@ namespace SMD.Implementation.Services
                 savePath = savePath.Substring(indexOf, savePath.Length - indexOf);
                 savePaths[7] = savePath;
             }
-          
+
 
             return savePaths;
         }
@@ -215,7 +215,7 @@ namespace SMD.Implementation.Services
             IStripeService stripeService, WebApiUserService webApiUserService, ICompanyRepository companyRepository, IAdCampaignResponseRepository adcampaignResponseRepository
             , ICouponCategoryRepository couponCategoryRepository
             , ICampaignCategoriesRepository campaignCategoriesRepository
-            ,  IUserFavouriteCouponRepository userFavouriteCouponRepository, ICurrencyRepository currencyRepository)
+            , IUserFavouriteCouponRepository userFavouriteCouponRepository, ICurrencyRepository currencyRepository)
         {
             this._adCampaignRepository = adCampaignRepository;
             this._languageRepository = languageRepository;
@@ -239,7 +239,7 @@ namespace SMD.Implementation.Services
             this._adcampaignResponseRepository = adcampaignResponseRepository;
             this._couponCategoryRepository = couponCategoryRepository;
             this._campaignCategoriesRepository = campaignCategoriesRepository;
-           
+
             this._userFavouriteCouponRepository = userFavouriteCouponRepository;
             this._currencyRepository = currencyRepository;
         }
@@ -361,7 +361,10 @@ namespace SMD.Implementation.Services
             }
             //toCamdo pilot: harcoding ClickRate = 1 for every campaign
             campaignModel.ClickRate = 0.20;
-
+            if (campaignModel.Status == 2)
+            {
+                campaignModel.SubmissionDateTime = DateTime.Now;
+            }
 
             _adCampaignRepository.Add(campaignModel);
             _adCampaignRepository.SaveChanges();
@@ -428,7 +431,7 @@ namespace SMD.Implementation.Services
                 _campaignCategoriesRepository.SaveChanges();
 
             }
-            
+
             if (campaignModel.Type == 5 && campaignModel.IsSavedCoupon == true)
             {
                 UserFavouriteCoupon oFav = new UserFavouriteCoupon();
@@ -771,10 +774,10 @@ namespace SMD.Implementation.Services
                 // If It is not System User then make transation 
                 //if (user.Roles.Any(role => role.Name.ToLower().Equals("user")))
                 //{
-                    // Make Stripe actual payment 
-                    response = stripeService.ChargeCustomer((int?)amount, user.Company.StripeCustomerId);
-                    isSystemUser = false;
-                
+                // Make Stripe actual payment 
+                response = stripeService.ChargeCustomer((int?)amount, user.Company.StripeCustomerId);
+                isSystemUser = false;
+
             }
 
             #endregion
@@ -1110,18 +1113,6 @@ namespace SMD.Implementation.Services
         }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
         /// <summary>
         /// Update Approval campaign
         /// </summary>
@@ -1215,5 +1206,11 @@ namespace SMD.Implementation.Services
         //    return _couponCodeRepository.UpdateCouponSettings(VoucherCode, SecretKey, UserId);
         //}
         #endregion
+
+        //public string CampaignVerifyQuestionById(int CampaignID)
+        //{
+        //    return DbSet.Where(i => i.CampaignId == CampaignID).FirstOrDefault().VerifyQuestion;
+
+        //}
     }
 }

@@ -536,8 +536,8 @@ else
                                                 </div>
                                                 <br />
                                                 <div class="fileUpload btn btn-primary" style="display:none;">
-                                                    <span>Upload </span>
-                                                    <input type="file" class="upload" id="campaignType_coupon_file1" data-bind="files: { onLoaded: $root.campaignImageCallback, fileFilter: 'image.*'}" />
+                                                    <span data-toggle="modal" data-target="#damModel" onclick="changeIframeSrc(1)">Upload </span>
+                                                    @*<input type="file" class="upload" id="campaignType_coupon_file1" data-bind="files: { onLoaded: $root.campaignImageCallback, fileFilter: 'image.*'}" />*@
                                                 </div>
                                             </div>
                                             
@@ -767,6 +767,7 @@ else
         console.log(mode);
     }
     function iframeLoaded() {
+        debugger;
         var iframeBody = $('body', $('#iframe')[0].contentWindow.document);
         $(iframeBody).on('click', '.damImgContainer img', function (event) {
             console.log(mode);

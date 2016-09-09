@@ -17,5 +17,9 @@ namespace SMD.MIS.Areas.Api.Models
         public string Country { get; set; }
         public string Latitude { get; set; }
         public string Longitude { get; set; }
+
+        public bool IsDeleted { get; set; }
+
+        
     }
 }

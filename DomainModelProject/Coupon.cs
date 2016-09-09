@@ -82,6 +82,7 @@ namespace DomainModelProject
         public string HowToRedeemLine4 { get; set; }
         public string HowToRedeemLine5 { get; set; }
         public Nullable<System.DateTime> SubmissionDateTime { get; set; }
+        public Nullable<int> LocationCountryId { get; set; }
     
         public virtual Company Company { get; set; }
         public virtual CompanyBranch CompanyBranch { get; set; }
