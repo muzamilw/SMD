@@ -52,6 +52,11 @@ define("Layout/Layout.dataService", function () {
 
                         type: 'DELETE'
                     });
+                    amplify.request.define('getAllCountries', 'ajax', {
+                        url: '/Api/GetCountry',
+                        dataType: 'json',
+                        type: 'GET'
+                    });
                 }
             };
 
@@ -123,6 +128,15 @@ define("Layout/Layout.dataService", function () {
                 data: parms
             });
         }
+        getAllCountries = function (callbacks) {
+            initialize();
+
+            return amplify.request({
+                resourceId: 'getAllCountries',
+                success: callbacks.success,
+                error: callbacks.error,
+            });
+        }
         return {
             getBranchCategory: getBranchCategory,
             getBranchByBranchId: getBranchByBranchId,
@@ -130,7 +144,8 @@ define("Layout/Layout.dataService", function () {
             DeleteCurrentBranch: DeleteCurrentBranch,
             DeleteCurrentCategory:DeleteCurrentCategory,
             SaveCompanyBranch: SaveCompanyBranch,
-            SaveCategory: SaveCategory
+            SaveCategory: SaveCategory,
+            getAllCountries: getAllCountries
         };
     })();
     return dataService;
