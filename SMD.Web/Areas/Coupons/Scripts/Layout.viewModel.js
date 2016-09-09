@@ -280,7 +280,7 @@
                                             success: function (data) {
                                                 if (data == true)
                                                     branchCategory.remove(selectedCategory());
-                                                udateCategoryDropDown();
+                                                updateCategoryDropDown();
 
                                             },
                                             error: function (response) {
@@ -296,7 +296,7 @@
                     });
 
                 },
-                udateCategoryDropDown = function () {
+                updateCategoryDropDown = function () {
                     dataService.getBranchCategory({
                         success: function (data) {
                             branchCategory.removeAll();
