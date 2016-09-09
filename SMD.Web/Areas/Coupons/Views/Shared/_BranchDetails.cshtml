@@ -194,7 +194,7 @@
                         </span>
                         <input data-bind="value:name,visible:isEditMode,event:{focusout:$root.SaveCategory}" autofocus class="form-control" style="width:98%;height:28px" type="text">
                     </div>
-                    <div class="col-sm-1 pull-right" style="padding:0 ;margin-right:5px">
+                    <div class="col-sm-1 pull-right" style="padding:0 ;margin-right:4px">
 
                         <a href="#" class="table-link danger" data-bind="click:$root.DeleteCategory,visible:isVisibleDelete()" title="Delete">
                             <span class="fa-stack">
@@ -203,7 +203,7 @@
                             </span>
                         </a>
                     </div>
-                    <div class="col-sm-1" data-bind="visible:false "> @*data-bind="visible:isEditMode()&& isVisibleDelete() "*@
+                    <div class="col-sm-1" data-bind="visible:isEditMode()&& isVisibleDelete() " style="padding:0;">
                         <a href="#" class="table-link success" data-bind="click:$root.SaveCategory,visible:isEditMode()" title="Save">
                             <span class="fa-stack">
                                 <i class=" fa fa-square fa-stack-2x">
