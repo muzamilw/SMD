@@ -53,6 +53,7 @@ namespace SMD.Implementation.Services
             model.BranchPhone = branch.BranchPhone;
             model.BranchLocationLat = branch.BranchLocationLat;
             model.BranchLocationLong = branch.BranchLocationLong;
+            model.CountryId = branch.CountryId;
             model.BranchCategoryId = branch.BranchCategoryId;
             model.CompanyId = _companybranchrepository.CompanyId;
             _companybranchrepository.Add(model);

@@ -21,6 +21,7 @@ namespace SMD.MIS.Areas.Api.Models
         public string BranchLocationLong { get; set; }
         public Nullable<long> BranchCategoryId { get; set; }
         public Nullable<int> CompanyId { get; set; }
+        public Nullable<int> CountryId { get; set; }
         public bool IsDeletedBranch { get; set; }
 
         //public BranchCategory BranchCategory { get; set; }
