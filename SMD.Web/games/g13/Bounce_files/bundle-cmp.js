@@ -2471,6 +2471,12 @@ Game.prototype = {
             //    me.state.addAttemptId(parseInt(json.entity.id));
             //    me.state.save()
             //});
+
+            me.lastRank = parseInt(json.rank);
+            me.state.addAttemptId(parseInt(json.entity.id));
+            me.state.save()
+
+
             if (!me.showedAddToHome && me.addToHome) {
                 me.showedAddToHome = true;
                 me.addToHome.show()
@@ -2492,31 +2498,31 @@ Game.prototype = {
         this.setOverlay(new LeaderboardScreen(this))
     },
     openMoreGames: function() {
-        if (window.kik && kik.send) {
-            kik.open(P.moreGamesURL)
-        } else if (P.cocoon) {
-            CocoonJS.App.openURL(P.moreGamesURL)
-        } else {
-            window.originalOpen(P.moreGamesURL)
-        }
+        //if (window.kik && kik.send) {
+        //    kik.open(P.moreGamesURL)
+        //} else if (P.cocoon) {
+        //    CocoonJS.App.openURL(P.moreGamesURL)
+        //} else {
+        //    window.originalOpen(P.moreGamesURL)
+        //}
     },
     kikInit: function() {
         if (window.kik) {
-            if (kik.push && kik.push.handler) {
-                kik.push.handler(function(data) {
-                    Tracker.event("push-notification", "push-notification-open");
-                    if (data.slug) {
-                        Tracker.event("push-notification", "push-msg-" + data.slug)
-                    }
-                    if (data.date) {
-                        var diff = (~~(+new Date / 1e3) - data.date) / 3600;
-                        var chunkSize = 1;
-                        var chunks = ~~(diff / chunkSize);
-                        var hours = chunks * chunkSize;
-                        Tracker.event("push-notification", "push-delay-" + hours + "-hours")
-                    }
-                })
-            }
+            //if (kik.push && kik.push.handler) {
+            //    kik.push.handler(function(data) {
+            //        Tracker.event("push-notification", "push-notification-open");
+            //        if (data.slug) {
+            //            Tracker.event("push-notification", "push-msg-" + data.slug)
+            //        }
+            //        if (data.date) {
+            //            var diff = (~~(+new Date / 1e3) - data.date) / 3600;
+            //            var chunkSize = 1;
+            //            var chunks = ~~(diff / chunkSize);
+            //            var hours = chunks * chunkSize;
+            //            Tracker.event("push-notification", "push-delay-" + hours + "-hours")
+            //        }
+            //    })
+            //}
             if (kik.browser) {
                 if (kik.browser.setOrientationLock) {
                     kik.browser.setOrientationLock("portrait")
@@ -3907,7 +3913,7 @@ EndScreen.prototype = extendPrototype(Screen, {
             action: this.game.openMoreGames.bind(this.game)
         });
         this.moreGames.x = P.width - this.moreGames.width;
-        this.view.addChild(this.moreGames);
+        //this.view.addChild(this.moreGames);
         this.addArea(this.moreGames);
         this.scoreLabel = new DisplayableTextField;
         with (this.scoreLabel) {
@@ -3978,7 +3984,7 @@ EndScreen.prototype = extendPrototype(Screen, {
             shadowOffsetX = 4;
             shadowOffsetY = 4
         }
-        this.view.addChild(this.rankLabel);
+        //this.view.addChild(this.rankLabel);
         this.rankTf = new DisplayableTextField;
         with (this.rankTf) {
             text = R.string.end.loading;
@@ -3992,7 +3998,7 @@ EndScreen.prototype = extendPrototype(Screen, {
             shadowOffsetX = 4;
             shadowOffsetY = 4
         }
-        this.view.addChild(this.rankTf);
+        //this.view.addChild(this.rankTf);
         var buttons = [];
         buttons.push(this.retryButton = new Button({
             content: "Try again",
@@ -4001,13 +4007,13 @@ EndScreen.prototype = extendPrototype(Screen, {
             fontColor: "white",
             action: this.retry.bind(this)
         }));
-        buttons.push(this.leaderboardButton = new Button({
-            content: R.string.menu.leaderboard,
-            bgColor: "black",
-            borderColor: "white",
-            fontColor: "white",
-            action: this.leaderboard.bind(this)
-        }));
+        //buttons.push(this.leaderboardButton = new Button({
+        //    content: R.string.menu.leaderboard,
+        //    bgColor: "black",
+        //    borderColor: "white",
+        //    fontColor: "white",
+        //    action: this.leaderboard.bind(this)
+        //}));
         if (window.kik && kik.send) {
             buttons.push(this.kikButton = new Button({
                 content: R.image.kik,

@@ -5781,11 +5781,11 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
         <ComplexType Name="GetAdminDashBoardInsights_Result">
           <Property Type="String" Name="rectype" Nullable="false" MaxLength="16" />
           <Property Type="String" Name="pMonth" Nullable="false" MaxLength="14" />
-          <Property Type="Int32" Name="us" Nullable="true" />
-          <Property Type="Int32" Name="uk" Nullable="true" />
-          <Property Type="Int32" Name="ca" Nullable="true" />
-          <Property Type="Int32" Name="au" Nullable="true" />
-          <Property Type="Int32" Name="ae" Nullable="true" />
+          <Property Type="Double" Name="us" Nullable="true" />
+          <Property Type="Double" Name="uk" Nullable="true" />
+          <Property Type="Double" Name="ca" Nullable="true" />
+          <Property Type="Double" Name="au" Nullable="true" />
+          <Property Type="Double" Name="ae" Nullable="true" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
