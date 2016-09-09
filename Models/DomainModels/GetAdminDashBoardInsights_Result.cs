@@ -10,10 +10,10 @@ namespace SMD.Models.DomainModels
     {
         public string rectype { get; set; }
         public string pMonth { get; set; }
-        public Nullable<int> us { get; set; }
-        public Nullable<int> uk { get; set; }
-        public Nullable<int> ca { get; set; }
-        public Nullable<int> au { get; set; }
-        public Nullable<int> ae { get; set; }
+        public Nullable<double> us { get; set; }
+        public Nullable<double> uk { get; set; }
+        public Nullable<double> ca { get; set; }
+        public Nullable<double> au { get; set; }
+        public Nullable<double> ae { get; set; }
     }
 }
