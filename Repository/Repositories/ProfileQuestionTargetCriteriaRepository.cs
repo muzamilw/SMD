@@ -45,6 +45,36 @@ namespace SMD.Repository.Repositories
             }
         
         }
+        public bool UpdateTargetcriteria(ProfileQuestionTargetCriteria Crt)
+        { 
+            bool Result=false;
+            ProfileQuestionTargetCriteria obj = DbSet.Where(i => i.ID == Crt.ID).FirstOrDefault();
+            if (obj != null)
+            {
+                obj.AdCampaignAnswer = Crt.AdCampaignAnswer;
+                obj.AdCampaignID = Crt.AdCampaignID;
+                obj.EducationID = Crt.EducationID;
+                obj.IncludeorExclude = Crt.IncludeorExclude;
+                obj.IndustryID = Crt.IndustryID;
+                obj.LanguageID = Crt.LanguageID;
+                obj.PQAnswerID = Crt.PQAnswerID;
+                obj.PQID = Crt.PQID;
+                //obj.ID = Crt.ID;
+                obj.Type = Crt.Type;
+
+                db.ProfileQuestionTargetCriteria.Attach(obj);
+
+                db.Entry(obj).State = EntityState.Modified;
+
+                if (db.SaveChanges() > 0)
+                {
+                    Result = true;
+                }
+            }
+            return Result;
+        }
+
+
 
     }
 }

@@ -388,6 +388,7 @@
     <Compile Include="Areas\Api\Controllers\ApproveProfileQuestionAnsController.cs" />
     <Compile Include="Areas\Api\Controllers\ApproveProfileQuestionController.cs" />
     <Compile Include="Areas\Api\Controllers\BranchCategoryController.cs" />
+    <Compile Include="Areas\Api\Controllers\GetCountryController.cs" />
     <Compile Include="Areas\Api\Controllers\GetProductController.cs" />
     <Compile Include="Areas\Api\Controllers\GetRandomGameController.cs" />
     <Compile Include="Areas\Api\Controllers\CategoryController.cs" />

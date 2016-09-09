@@ -13,5 +13,6 @@ namespace SMD.Interfaces.Services
         long CreateBranchAddress(CompanyBranch branch);
         long UpdateBranchAddress(CompanyBranch branch);
         bool DeleteCompanyBranch(CompanyBranch branch);
+        List<Country> GetAllCountries();
     }
 }

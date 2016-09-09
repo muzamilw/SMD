@@ -306,6 +306,15 @@ namespace SMD.Repository.Repositories
             var branches = db.CompanyBranches.Where(g => g.CompanyId == comp.CompanyId);
             return branches;
         }
-
+        public string CampaignVerifyQuestionById(int CampaignID)
+        {
+            return DbSet.Where(i => i.CampaignId == CampaignID).FirstOrDefault().VerifyQuestion;
+        
+        }
+        public AdCampaign GetCampaignByID(long CampaignID)
+        {
+            return DbSet.Where(i => i.CampaignId == CampaignID).FirstOrDefault();
+        
+        }
     }
 }
