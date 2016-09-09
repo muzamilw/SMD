@@ -144,6 +144,9 @@
     <Compile Include="Game.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="GetAdminDashBoardInsights_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="GetCouponByID_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

@@ -2167,6 +2167,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="GetAdminDashBoardInsights" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetCouponByID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CouponId" Type="bigint" Mode="In" />
           <Parameter Name="Lat" Type="nvarchar" Mode="In" />
@@ -5114,6 +5115,7 @@
             <Parameter Name="AccountType" Mode="In" Type="Int32" />
             <Parameter Name="Rows" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="GetAdminDashBoardInsights" ReturnType="Collection(SMDDevModel.GetAdminDashBoardInsights_Result)" />
           </EntityContainer>
         <EntityType Name="CouponCategories">
           <Key>
@@ -5687,6 +5689,15 @@
           <Property Type="Int32" Name="PQID" Nullable="true" />
           <Property Type="Double" Name="CurrentBalance" Nullable="true" />
           <Property Type="String" Name="description" Nullable="true" MaxLength="516" />
+        </ComplexType>
+        <ComplexType Name="GetAdminDashBoardInsights_Result">
+          <Property Type="String" Name="rectype" Nullable="false" MaxLength="16" />
+          <Property Type="String" Name="pMonth" Nullable="false" MaxLength="14" />
+          <Property Type="Int32" Name="us" Nullable="true" />
+          <Property Type="Int32" Name="uk" Nullable="true" />
+          <Property Type="Int32" Name="ca" Nullable="true" />
+          <Property Type="Int32" Name="au" Nullable="true" />
+          <Property Type="Int32" Name="ae" Nullable="true" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -6986,6 +6997,19 @@
                 <ScalarProperty Name="PQID" ColumnName="PQID" />
                 <ScalarProperty Name="CurrentBalance" ColumnName="CurrentBalance" />
                 <ScalarProperty Name="description" ColumnName="description" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAdminDashBoardInsights" FunctionName="SMDDevModel.Store.GetAdminDashBoardInsights">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SMDDevModel.GetAdminDashBoardInsights_Result">
+                <ScalarProperty Name="rectype" ColumnName="rectype" />
+                <ScalarProperty Name="pMonth" ColumnName="pMonth" />
+                <ScalarProperty Name="us" ColumnName="us" />
+                <ScalarProperty Name="uk" ColumnName="uk" />
+                <ScalarProperty Name="ca" ColumnName="ca" />
+                <ScalarProperty Name="au" ColumnName="au" />
+                <ScalarProperty Name="ae" ColumnName="ae" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
