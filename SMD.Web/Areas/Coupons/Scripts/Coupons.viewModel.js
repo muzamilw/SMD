@@ -1829,14 +1829,16 @@ define("Coupons/Coupons.viewModel",
                                 var index = 0;
                                 
                                 $.each(branchLocations(), function (id, option) {
-                                    debugger;
+                                    
                                     if (option.BranchId == BranchID) {
 
-                                        $("#yearDropDown")[0].selectedIndex = index;
+                                        $("#yearDropDown")[0].selectedIndex = 3;
+
                                        // BranchLocationId = option.
                                     }
                                     index++;
                                 });
+                                debugger;
                             }
 
                         },

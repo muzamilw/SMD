@@ -55,7 +55,7 @@
             branchState = ko.observable(specifiedState).extend({ required: true }),
             branchZipCode = ko.observable(specifiedZipcode),
             branchPhone = ko.observable(specifiedPhone).extend({ required: true}),
-            countryId = ko.observable(spccountryId).extend({ required: true }),
+            countryId = ko.observable(spccountryId),
             branchLocationLat = ko.observable(specifiedLocationLat).extend({ required: true}),
             branchLocationLon = ko.observable(specifiedLocationLong).extend({ required: true}),
             branchCategoryId = ko.observable(specifiedBranchCategoryId).extend({ required: true }),
