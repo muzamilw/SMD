@@ -3,6 +3,7 @@ using SMD.Interfaces.Services;
 using SMD.MIS.Areas.Api.Models;
 using SMD.Models.Common;
 using SMD.Models.DomainModels;
+using SMD.WebBase.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,9 +43,13 @@ namespace SMD.MIS.Areas.Api.Controllers
         ///invite user
         /// </summary>
 
-
+        [ApiException]
         public CouponDetails Get(string CouponId, string UserId, string Lat, string Lon)
         {
+            try
+            {
+
+     
             if (string.IsNullOrEmpty(CouponId))
             {
                 throw new HttpException((int)HttpStatusCode.BadRequest, LanguageResources.InvalidRequest);
@@ -57,6 +62,13 @@ namespace SMD.MIS.Areas.Api.Controllers
             res.distance = Math.Round(res.distance.Value,1);
             res.FlaggedByCurrentUser = _couponService.CheckCouponFlaggedByUser(Convert.ToInt64(CouponId), UserId);
             return res;
+
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
 
         }
 
