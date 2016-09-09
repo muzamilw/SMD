@@ -76,10 +76,11 @@ namespace SMD.MIS.ModelMappers
             string PQQuestionString = "";
             if (source.Type != null && source.Type == (int)AdCampaignCriteriaType.ProfileQuestion)
             {
+
                 if (source.PQQuestionID != null && source.PQQuestionID > 0)
                 {
                     QuestionString = source.PQQuestionString;
-                    PQQuestionString = source.PQQuestionString;
+                   // PQQuestionString = source.PQQuestionString;
                 }
                 if (source.PQAnswerID != null && source.PQAnswerID > 0 && source.ProfileQuestionAnswer != null)
                 {
@@ -142,17 +143,25 @@ namespace SMD.MIS.ModelMappers
                     EducationName = source.Education.Title;
                 }
             }
-            //else if (source.Type == (int)AdCampaignCriteriaType.QuizQustion)
-            //{
-            //    if (source.QuizCampaign != null)
-            //    {
-            //        QuestionString = source.QuizCampaign.VerifyQuestion;
-            //        if (source.QuizAnswerId == 1)
-            //            AnswerString = source.QuizCampaign.Answer1;
-            //        if (source.QuizAnswerId == 2)
-            //            AnswerString = source.QuizCampaign.Answer2;
-            //    }
-            //}
+            else if (source.Type == (int)AdCampaignCriteriaType.QuizQustion)
+            {
+                //if (source.QuizCampaign != null)
+                //{
+                //    QuestionString = source.QuizCampaign.VerifyQuestion;
+                //    if (source.QuizAnswerId == 1)
+                //        AnswerString = source.QuizCampaign.Answer1;
+                //    if (source.QuizAnswerId == 2)
+                //        AnswerString = source.QuizCampaign.Answer2;
+                //}
+                if (source.AdCampaignID != null && source.AdCampaignID > 0)
+                {
+                    QuestionString = source.PQQuestionString;
+                }
+                if (source.AdCampaignAnswer != null && source.AdCampaignAnswer > 0)
+                {
+                    AnswerString = source.AdCampaignAnswerString;
+                }
+            }
             return new SMD.MIS.Areas.Api.Models.ProfileQuestionTargetCriteria
             {
 
@@ -175,7 +184,8 @@ namespace SMD.MIS.ModelMappers
                 AdCampaignAnswer = source.AdCampaignAnswer,
                 AdCampaignID = source.AdCampaignID,
                 PQQuestionString=PQQuestionString,
-                IsDeleted=source.IsDeleted
+                IsDeleted=source.IsDeleted,
+                ID=source.ID
             };
         }
 
@@ -211,7 +221,8 @@ namespace SMD.MIS.ModelMappers
                 Country = CountName,
                 Latitude = latitdue,
                 Longitude = longitude,
-                PQID = source.PQID
+                PQID = source.PQID,
+               
             };
         }
 

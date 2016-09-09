@@ -521,7 +521,7 @@ define("survey/survey.viewModel",
                     //    }
                     //},
                     saveProfileQuestion = function (item) {
-                        var selectedQuestionstring = $(".active .parent-list-title").text();;
+                        var selectedQuestionstring = $(".active .parent-list-title").text();
                         selectedCriteria().questionString(selectedQuestionstring);
                         selectedCriteria().PQID(item.PQID);
                         var selectedQuestionAnswerstring = item.Answer;

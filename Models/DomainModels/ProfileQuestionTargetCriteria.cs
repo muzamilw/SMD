@@ -46,6 +46,17 @@ using System.ComponentModel.DataAnnotations.Schema;
          public string PQQuestionString { get; set; }
 
          [NotMapped]
+         public string AdCampaignAnswerString { get; set; }
+
+         [NotMapped]
          public bool IsDeleted { get; set; }
+
+         //[NotMapped]
+         //public bool RightImage { get; set; }
+
+
+
+         // profileQuestLeftImageSrc
+         // profileQuestRightImageSrc
     }
 }
