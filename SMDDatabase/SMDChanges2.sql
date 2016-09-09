@@ -16,3 +16,5 @@ GO
 ALTER TABLE dbo.ProfileQuestion SET (LOCK_ESCALATION = TABLE)
 GO
 COMMIT
+
+
