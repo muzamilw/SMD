@@ -492,7 +492,7 @@ define("Coupons/Coupons.viewModel",
 
                     couponModel().CouponActiveYear(res[0]);
                     debugger;
-                    couponModel().LocationCountryId(BranchLocationId);
+                   
 
                     couponModel().CouponActiveMonth(GetMonth(res[1]));
 
@@ -1825,20 +1825,8 @@ define("Coupons/Coupons.viewModel",
                                 ko.utils.arrayPushAll(branchLocations(), data.listBranches);
                                 branchLocations.valueHasMutated();
                                 BindPeriodDD();
-
-                                var index = 0;
-                                
-                                $.each(branchLocations(), function (id, option) {
-                                    
-                                    if (option.BranchId == BranchID) {
-
-                                        $("#yearDropDown")[0].selectedIndex = 3;
-
-                                       // BranchLocationId = option.
-                                    }
-                                    index++;
-                                });
-                                debugger;
+                                couponModel().LocationBranchId(BranchID);
+                              //  BranchLocationId
                             }
 
                         },
