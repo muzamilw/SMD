@@ -113,7 +113,8 @@
                                                       selectedBranch(null);
                                                       isCodeAddressEdit(false);
                                                       if (afterBranchSelect && typeof afterBranchSelect === "function") {
-                                                          afterBranchSelect();
+                                                         
+                                                          afterBranchSelect(data);
                                                       }
 
                                                   },
@@ -369,7 +370,7 @@
                 showBranchDialoge = function (callback) {
                     afterBranchSelect = callback;
                     getBranchCategories(viewBranchDialog);
-                    getAllCountries();
+                    //getAllCountries();
                 },
                 hideBranchCategoryDialog = function () {
 
@@ -534,6 +535,7 @@
                                 });
                             });
                             function moveMarker(placeName, latlng) {
+                                //marker.setIcon(image);
                                 marker.setPosition(latlng);
                                 //infowindow.setContent(placeName);
                                 //infowindow.open(map, marker);

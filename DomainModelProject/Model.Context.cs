@@ -210,5 +210,10 @@ namespace DomainModelProject
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetTransactions_Result>("GetTransactions", companyIDParameter, accountTypeParameter, rowsParameter);
         }
+    
+        public virtual ObjectResult<GetAdminDashBoardInsights_Result> GetAdminDashBoardInsights()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAdminDashBoardInsights_Result>("GetAdminDashBoardInsights");
+        }
     }
 }

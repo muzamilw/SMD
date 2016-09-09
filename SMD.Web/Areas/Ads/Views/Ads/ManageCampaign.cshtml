@@ -163,10 +163,10 @@ else
 
                                             @*<img style="width:300px;height:150px;" src="/Content/Images/updatedMovie_lg.png" data-bind="visible:$root.FlagToShowDivs()" />*@
 
-                                            <div style="    padding-top: 10px;    text-align: center;    font-size: 12px;    color: gray;" data-bind="visible:$root.FlagToShowDivs()">
+                                            <div style="    padding-top: 10px;    text-align: center;    font-size: 12px;    color: gray;" data-bind="visible: $root.FlagToShowDivs()" >
                                                 max length 30 sec
                                             </div>
-                                            <video id="videoTag" controls style="width:300px;height:150px;" data-bind="    attr: { src: $root.VideoLink2src()+$root.randonNumber() }"></video>
+                                            <video id="videoTag" controls style="width:300px;height:150px;" onclick="showvideoUploadDialog();" data-bind="    attr: { src: $root.VideoLink2src()+$root.randonNumber() }"></video>
                                         </div>
                                         <div class="defaultImgUploadImageBtn" style="width:75px;">
                                             <div class="fileUpload" style="margin-top:8px;">
@@ -208,12 +208,14 @@ else
                                             <div class="defaultImgUploadImage pull-left" style="cursor:pointer;text-align:center;width:335px!important;">
                                               
 
-                                                @*<img style="width:300px;height:150px;" data-bind="attr: { src:LogoUrl()==''?'/Content/Images/Company_Default.png':'/' +  LogoUrl() + $root.randonNumber() },visible:$root.campaignModel().LogoImageBytes()==''" src="/Content/Images/Company_Default.png" onclick="showUploadDialog();" />
+                                                <img style="width:300px;height:150px;" data-bind="attr: { src:LogoUrl()==''?'/Content/Images/Company_Default.png':'/' +  LogoUrl() + $root.randonNumber() },visible:$root.campaignModel().LogoImageBytes()==''" src="/Content/Images/Company_Default.png" onclick="showUploadDialog();" />
 
-                                                <img style="width:300px;height:150px;" data-bind="visible: $root.campaignModel().LogoImageBytes() != '',attr: { src: $root.campaignModel().LogoImageBytes()}" src="/Content/Images/Company_Default.png" onclick="showUploadDialog();" />*@
+                                                <img style="width:300px;height:150px;" data-bind="visible: $root.campaignModel().LogoImageBytes() != '',attr: { src: $root.campaignModel().LogoImageBytes()}" src="/Content/Images/Company_Default.png" onclick="showUploadDialog();" />
+
+                                             
 
 
-                                                <img style="height:150px;width:300px;" data-bind="visible: $root.campaignModel().LogoImageBytes() != '' &&  $root.campaignModel().LogoImageBytes() != null ,attr: { src: $root.campaignModel().LogoImageBytes() }" id="imgLogo" data-toggle="modal" data-target="#damModel" onclick="changeIframeSrc(1)" />
+                                                @*<img style="height:150px;width:300px;" data-bind="attr: { src: $root.campaignModel().LogoImageBytes() }" src="/Content/Images/Company_Default.png" id="imgLogo" data-toggle="modal" data-target="#damModel" onclick="changeIframeSrc(1)" />*@
 
                                                 <div style="padding-top: 10px;    text-align: center;    font-size: 12px;    color: gray;">
                                                     (300 x 150 pixels)
@@ -973,7 +975,7 @@ else
                     </div>
                 </div>
             </div>
-            <div class="col-lg-12">
+            <div class="col-lg-12" style="display:none;">
                 <div class="main-box no-header clearfix">
                     <div class="col-lg-12 form-horizontal" data-bind="with: $root.campaignModel" style="padding: 20px;">
                         <div class="col-lg-7">
@@ -2765,6 +2767,11 @@ else
         $("#campaignType_coupon_file3").click();
 
     }
+
+    function showvideoUploadDialog() {
+        $("#videoUploader").click();
+
+    }
 </script>
 <script type="">
 
@@ -2865,10 +2872,6 @@ else
     }
 
 </script>
-
-
-
-
 
 <!-- Modal -->
 <div class="modal fade" id="damModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

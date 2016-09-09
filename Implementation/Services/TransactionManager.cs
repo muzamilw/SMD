@@ -245,9 +245,9 @@ namespace SMD.Implementation.Services
                   // send user voucher email 
 
                   // deduct user centz balance.
-                  updateVirtualAccount(userCompany, GiftAmount, dbContext, TransactionType.CouponPurchased, true, null, null);
+                  updateVirtualAccount(userCompany, GiftAmount, dbContext, TransactionType.WelcomeGiftBalance, true, null, null);
                   // update smd users  virutal accont credit 
-                  updateVirtualAccount(smdCompany, GiftAmount, dbContext, TransactionType.CouponPurchased, false, null, null);
+                  updateVirtualAccount(smdCompany, GiftAmount, dbContext, TransactionType.WelcomeGiftBalance, false, null, null);
                   // update smd users  virutal accont credit 
                   //updateUsersVirtualAccount(coupon.Company, SwapCost, dbContext, 2, true, null, couponId);
 
