@@ -370,7 +370,7 @@
                 showBranchDialoge = function (callback) {
                     afterBranchSelect = callback;
                     getBranchCategories(viewBranchDialog);
-                    //getAllCountries();
+                    getAllCountries();
                 },
                 hideBranchCategoryDialog = function () {
 
