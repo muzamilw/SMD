@@ -766,6 +766,7 @@
     <Content Include="Content\DAM\pc2.js" />
     <Content Include="Content\DAM\pc3.js" />
     <Content Include="Content\DAM\plugin.js" />
+    <Content Include="Content\DAM\Preloader_3.gif" />
     <Content Include="Content\DAM\utils.js" />
     <Content Include="Content\DAM\zoomer.js" />
     <Content Include="Content\Images\5_Main_4.png" />

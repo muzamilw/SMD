@@ -428,4 +428,21 @@ a.reportAnchor a:hover {
 
   }
 
-    
+    .close {
+    float: right;
+    font-size: 1.429em;
+    text-decoration: none;
+    color: #7a7a7a;
+    cursor: pointer;
+}
+    .fa {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+    .fa-remove:before, .fa-close:before, .fa-times:before {
+    content: "\f00d";
+}
