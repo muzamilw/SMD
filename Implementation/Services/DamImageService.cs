@@ -38,6 +38,11 @@ namespace SMD.Implementation.Services
         {
             return damRepository.getAllImages(mode,out companyId);
         }
+        public List<DamImage> getAllFreeImages()
+        {
+            return damRepository.getAllFreeImages();
+        }
+        
         public bool addImage(DamImage img)
         {
             damRepository.Add(img);

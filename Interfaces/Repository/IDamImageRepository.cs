@@ -12,6 +12,7 @@ namespace SMD.Interfaces.Repository
         /// Get List of Coutries 
         /// </summary>
         List<DamImage> getAllImages(int mode,out int companyId);
+        List<DamImage> getAllFreeImages();
      
     }
 }

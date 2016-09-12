@@ -1,0 +1,73 @@
+@font-face{
+	font-family: ComfortaaRegular;
+	src:url("../fonts/ComfortaaRegular.ttf");
+}
+
+@font-face{
+	font-family: ComfortaaBold;
+	src:url("../fonts/ComfortaaBold.ttf");
+}
+
+*{
+	margin:0px;
+	padding:0px;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	font-size: 1em;
+	font-weight: normal;
+}
+
+body{
+	font-family: Arial;
+	background-color: black;
+}
+
+html,body{
+	width: 100%;
+	height: 100%;
+}
+
+#game-table{
+	display: table;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+}
+
+#game-cell{
+	display: table-cell;
+	vertical-align: middle;
+}
+
+#viewport{
+	margin: auto;
+	position: relative;
+}
+
+canvas{
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+	
+    image-rendering: optimizeSpeed;             // Older versions of FF
+    image-rendering: -moz-crisp-edges;          // FF 6.0+
+    image-rendering: -webkit-optimize-contrast; // Webkit
+                                                //  (Safari now, Chrome soon)
+    image-rendering: -o-crisp-edges;            // OS X & Windows Opera (12.02+)
+    image-rendering: optimize-contrast;         // Possible future browsers.
+    -ms-interpolation-mode: nearest-neighbor;   // IE
+}
+
+a{
+	color: white;
+}
+
+#ad-container{
+	width: 320px;
+	height: 50px;
+	background-color: black;
+	margin: auto;
+}
+
+button:active{
+	opacity: 0.5;
+}

@@ -14,6 +14,7 @@
                 branchDdlist = ko.observableArray([]),
                 selectedCategory = ko.observable(),
                 countries = ko.observableArray([]),
+                companyId = ko.observable(),
                 afterBranchSelect = null,
                 selectedBranchField = ko.observable(),
                 isSaveChangesEnable = ko.observable(false),
@@ -28,6 +29,7 @@
                 getBranchCategories = function (callback) {
                     dataService.getBranchCategory({
                         success: function (data) {
+                            companyId(data[0].CompanyId);
                             branchCategory.removeAll();
                             branchDdlist.removeAll();
                             _.each(data, function (item) {
@@ -160,9 +162,9 @@
                                              branchCategory.push(category);
 
                                          });
-                                         if (callback && typeof callback === "function") {
-                                             callback();
-                                         }
+                                         //if (callback && typeof callback === "function") {
+                                         //    callback();
+                                         //}
 
                                      },
                                      error: function () {
@@ -280,41 +282,46 @@
                                             success: function (data) {
                                                 if (data == true)
                                                     branchCategory.remove(selectedCategory());
+                                                updateCategoryDropDown();
+
                                             },
                                             error: function (response) {
                                                 toastr.error("Failed to Delete Category . Error: " + response);
                                             }
                                         });
-                            dataService.getBranchCategory({
-                                success: function (data) {
-                                    branchCategory.removeAll();
-                                    branchDdlist.removeAll();
-                                    _.each(data, function (item) {
-
-                                        var category = new model.BranchCategory.Create(item);
-                                        branchDdlist.push(category);
-                                        _.each(item.CompanyBranches, function (branchFieldItem) {
-                                            var branchField = new model.BranchField.Create(branchFieldItem);
-                                            category.brachFeilds.push(branchField);
-                                        });
-                                        branchCategory.push(category);
-
-                                    });
-                                    if (callback && typeof callback === "function") {
-                                        callback();
-                                    }
-
-                                },
-                                error: function () {
-                                    toastr.error("Failed to load branchCategory.");
-                                }
-                            });
                         }
 
                     });
 
                     confirmation.afterCancel(function () {
                         confirmation.hide();
+                    });
+
+                },
+                updateCategoryDropDown = function () {
+                    dataService.getBranchCategory({
+                        success: function (data) {
+                            branchCategory.removeAll();
+                            branchDdlist.removeAll();
+                            _.each(data, function (item) {
+
+                                var category = new model.BranchCategory.Create(item);
+                                branchDdlist.push(category);
+                                _.each(item.CompanyBranches, function (branchFieldItem) {
+                                    var branchField = new model.BranchField.Create(branchFieldItem);
+                                    category.brachFeilds.push(branchField);
+                                });
+                                branchCategory.push(category);
+
+                            });
+                            //if (callback && typeof callback === "function") {
+                            //    callback();
+                            //}
+
+                        },
+                        error: function () {
+                            toastr.error("Failed to load branchCategory.");
+                        }
                     });
 
                 },
@@ -351,13 +358,28 @@
 
                   }),
                 CreateNewBranchLocation = function () {
+                    dataService.getCompanyAddress(
+                     { companyId: companyId() },
+                     {
+                         success: function (data) {
 
-                    var newBranchLocation = model.Branch({});
-                    selectedBranch(undefined)
-                    selectedBranch(newBranchLocation);
-                    isSaveChangesEnable(true);
-                    isdeleteEnable(false);
-                    isMapVisible(true);
+                             var newBranchLocation = new model.Branch.CreateBillingAddress(data)
+                             selectedBranch(undefined)
+                             selectedBranch(newBranchLocation);
+                             isSaveChangesEnable(true);
+                             isdeleteEnable(false);
+                             isMapVisible(true);
+                           
+                             
+
+                         },
+                         error: function () {
+                             toastr.error("Failed to load Company Address.");
+                         }
+                     });
+
+                    //var newBranchLocation = model.Branch({});
+                    
                 },
                 resetTreeExpensionAfterSave = function (category) {
                     category.isExpanded(true);
@@ -365,7 +387,7 @@
                 showBranchDialoge = function (callback) {
                     afterBranchSelect = callback;
                     getBranchCategories(viewBranchDialog);
-                    //getAllCountries();
+                    getAllCountries();
                 },
                 hideBranchCategoryDialog = function () {
 
@@ -612,7 +634,8 @@
                     CodeAddressonMap: CodeAddressonMap,
                     branchDdlist: branchDdlist,
                     getAllCountries: getAllCountries,
-                    countries: countries
+                    countries: countries,
+                    companyId: companyId,
                 };
 
             })()
