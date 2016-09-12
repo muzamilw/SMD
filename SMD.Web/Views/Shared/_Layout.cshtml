@@ -54,20 +54,36 @@
     <header class="navbar" id="header-navbar">
         <div class="col-md-12 col-lg-12 col-sm-12" style="height: 4px; background-color: black; position: absolute; margin-top: 100px;"></div>
         <div class="container" style="height:100px;">
+            
+
+
+            
+
+
+
             <a href="~/" id="header" class="cashlogox my-navigator navbar-brand logoAnchor " ></a>
+
+
+
+
+
+
             <a href="~/" id="beta" class="cashbeta"></a>
             <div class="clearfix">
                 <button class="navbar-toggle" data-target=".navbar-ex1-collapse" data-toggle="collapse" type="button">
                     <span class="sr-only">Toggle navigation</span>
                     @*<span class="fa fa-bars"></span>*@
                 </button>
-                <div style="display:inline-block;margin-top:20px;">
-                    <div class="pull-left" style="width:100px;height:50px;background-color:white;"><img style="width:100px;height:50px;" src="~/@CompanyLogo" /></div>
-                    <div class="pull-left" style="color:white;margin-left:10px;">
-                        <p style="box-shadow: inset 0 0px 0 white, inset 0 -1px 0 white;margin-bottom:3px;display:inline-block;font-size:11px;">
-                            Advertiser Dashboard for
-                        </p>
-                        <p style="font-size:16px;">@CompanyName</p>
+
+                <div style="display:inline-block;margin-top:20px;width:770px;">
+                    <div style="float:right;">
+                        <div class="pull-left" style="display:inline-block;margin-top:20px;">
+                            @*<p style="box-shadow: inset 0 0px 0 white, inset 0 -1px 0 white;margin-bottom:3px;display:inline-block;font-size:11px;">
+                 Advertiser Dashboard for
+                </p>*@
+                            <p style="font-size:16px;color:white;">@CompanyName</p>
+                        </div>
+                        <div class="pull-left" style="color:white;margin-left: 10px;margin-top: 12px;margin-right: 9px;"><img style="width:87px;height:41px;" src="~/@CompanyLogo" /></div>
                     </div>
                 </div>
                 <div class="nav-no-collapse navbar-left pull-left hidden-sm hidden-xs" style="margin-top:23px;">
@@ -130,26 +146,37 @@
                             </a>
                             <ul class="dropdown-menu loginMenu">
                                 <li><a href="">Role : @RoleName</a></li>
+                                <li id="userProfileBinding"><a data-bind="click:showUserProfileDialog">Personal Profile</a></li>
+                                <li id="companyProfileBinding"><a data-bind="click:showCompanyProfileDialog">Company Profile</a></li>
+                                <li><a>Invite colleagues to manage campaigns</a></li>
+
+                                <li><a onclick="OpenBranchLocation();">Branch locations</a></li>
+                                <li><a href="/DamImages/Grid">Image library</a></li>
+                                <li><a onclick="OpenPhraseLibrary();">Phrase library</a></li>
+
+
+                                <li><a>Analytics and Charts</a></li>
+                                <li><a href="">Billing History</a></li>
+                                <li class="inlineMenuItem"><a href="~/Billing/Manage/Invoice">&nbsp;&nbsp;View Invoices</a></li>
+                                <li class="inlineMenuItem"><a href="">&nbsp;&nbsp;Payment Methods</a></li>
+                                
+                                <li><a href="">Help / Support</a></li>
+                                <li><a href="">Delete my Account</a></li>
+
                                 @*<li><a href="">Ad Campaigns</a></li>
                                 <li class="inlineMenuItem" style="display:none;"><a href="~/Ads/Ads">&nbsp;&nbsp;Create Ad Campaigns</a></li>
                                 <li class="inlineMenuItem"><a href="~/Ads/Ads">&nbsp;&nbsp;View Ad Campaigns</a></li>
                                 <li><a href="">Survey Slides</a></li>
                                 <li class="inlineMenuItem" style="display:none;"><a href="~/survey">&nbsp;&nbsp;Create Survey Slides</a></li>
                                 <li class="inlineMenuItem"><a href="~/survey">&nbsp;&nbsp;View Survey Slides</a></li>*@
-                                <li><a href="">Billing</a></li>
-                                <li class="inlineMenuItem"><a href="~/Billing/Manage/Invoice">&nbsp;&nbsp;View Statements </a></li>
-                                <li class="inlineMenuItem"><a href="">&nbsp;&nbsp;Payment Methods</a></li>
-                                <li class="inlineMenuItem"><a href="">&nbsp;&nbsp;Delete My Account</a></li>
+                                
                                 @*<li class=""><a href="~/user/ManageUser/ManageUsers">Invite users </a></li>*@
                                
-                                <li id="companyProfileBinding"><a data-bind="click:showCompanyProfileDialog">Marketing profile/logo</a></li>
-                                <li id="userProfileBinding"><a data-bind="click:showUserProfileDialog">User Profile</a>
-                                <a data-bind="click:ChangePassword">Change Password</a></li>
-                                <li><a href="~/">Analytics</a></li>
+                                
                                 <li><a href="~/Account/LogOff"><i class="fa fa-power-off"></i>Logout</a></li>
                             </ul>
                         </li>
-                        <li class="dropdown profile-dropdown">
+                        @*<li class="dropdown profile-dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <span class="hidden-xs">
                                     <i class="fa fa-life-ring"></i>
@@ -162,7 +189,7 @@
                                 <li><a href="">Help Center</a></li>
                                 <li><a href="">Contact Us</a></li>
                             </ul>
-                        </li>
+                        </li>*@
 
                    
                         <li class="hidden-xxs">
@@ -184,34 +211,100 @@
             @*content wrapper goes here*@
             <div id="content-wrapper" class="removeMenuMargin" >
                
-                <div class="row" id="topArea" style="margin-bottom:15px;">
-                    <div class="row">
-                        <div class="col-sm-6 pull-left">
-                            <a class="btn  btn-default btn-gray" style="float:left; width:20%;height:66px;margin-right:15px; white-space:normal;" id="btncampaigns" href="/Ads/Ads">Video Campaigns</a>
-                            <a class="btn  btn-default btn-gray" style="float:left;width:20%;height:66px;white-space:normal;" href="/Coupons/Coupons" id="btnCoupons">Coupon <br /> Promotions</a>
-                            <a class="btn  btn-default btn-gray" style="float:left;width:20%;height:66px;white-space:normal;" href="/Survey/" id="btnSurvey">Survey Cards</a>
-                            <a class="btn  btn-default btn-gray" style="float:left;width:20%;height:66px;white-space:normal;" href="~/ProfileQuestion/Manage/Index" id="btnProQuestions">Profile Questions</a>
+                <div class="row" id="panelArea">
 
-
+                    <div class="col-sm-8 pull-left" style="height:46px;">
+                        <div class="pull-left" style=" position: absolute;top: 28%;">
+                            <span style="font-weight:bold;color:#7f8c8d;font-size:17px;">Start here -</span>
+                            <span style="color:#7f8c8d;font-size:14px;">Whats your marketing objective</span>
                         </div>
-                        <div class="col-sm-6 pull-right text-right" >
+                        <div class="pull-right">
+                            <div class="pull-left" style="position: absolute;margin-left: -65px;margin-top: 16px;">Help center</div>
+
+
+                            <div class="pull-right">
+                                
+                                    <ul class="nav navbar-nav pull-right">
+                                        <li class="dropdown profile-dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                <span class="hidden-xs">
+                                                    <i class="fa fa-life-ring"></i>
+                                                </span> <b class="caret"></b>
+
+                                            </a>
+                                            <ul class="dropdown-menu loginMenu">
+                                                <li><a href="">Startup Guide</a></li>
+                                                <li><a href="">Training Videos</a></li>
+                                                <li><a href="">Help Center</a></li>
+                                                <li><a href="">Contact Us</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                               
+
+
+                            </div>
                           
-                            <a class="btn btn-default btn-gray " id="btninviteusers" style="    width: 100px;float:right;margin-right:0px;" href="~/user/ManageUser/ManageUsers">Invite<br /> Users</a>
-                            <div id="branchBinding" style="float: right">
-                                <a class="btn btn-default btn-gray btnSmall" data-bind="click:showBranchDialoge" style="    width: 100px;" href="#" id="btnBranchLocations">Branch Locations</a>
-                            </div>
-                            <a class="btn btn-default btn-gray btnSmall " id="btnDAM" style="    width: 100px;float:right" href="/DamImages/Grid" id="btnImageLibrary">Image Library</a>
-                            <div id="phraseLibraryBinding" style="float: right">
-                                <a class="btn btn-default btn-gray btnSmall" id="btnPhraseLibrary" style="    width: 100px;" data-bind="click:showphraseLibraryDialog">Phrase Library</a>
 
-                            </div>
+
+
                         </div>
+
+ 
+                    </div>
+                    <div class="col-sm-4 pull-left" style="height:46px;padding-left: 97px;color: black;">
+                        @*<div class="line-separator"></div>*@
+                        <span class="line-separator"></span>
+                        <span class="pull-left" style="color:#7f8c8d;font-size:11px;">Generate Income <br />Refer Businesses - Earn  <b style="margin-left:5px;">  25% </b></span>
+                        @*<span class="pull-right">Help center <i class="fa fa-life-ring"></i></span>*@
                     </div>
 
+                </div>
+                <div class="row" id="topArea">
+                    <div class="row">
+                        <div class="col-sm-8 pull-left" style="padding:0px;">
+
+                            <a class="btn  btn-default btn-gray" style="float:left; width:110px;height:66px;margin-right:15px; white-space:normal;" id="btncampaigns" href="/Ads/Ads">Video <br /> Ads</a>
+                            <a class="btn  btn-default btn-gray" style="float:left; width:110px;height:66px;margin-right:15px; white-space:normal;" id="btnspnsergames" >Sponser Games</a>
+                            <a class="btn  btn-default btn-gray" style="float:left;width:110px;height:66px;white-space:normal;" href="/Coupons/Coupons" id="btnCoupons">Offers <br />Coupons</a>
+                            <a class="btn  btn-default btn-gray" style="float:left;width:110px;height:66px;white-space:normal;" href="/Survey/" id="btnSurvey">Survey Cards</a>
+                            <a class="btn  btn-default btn-gray" style="float:left;width:110px;height:66px;white-space:normal;" href="/Survey/" id="btnSurvey">Survey Questions</a>
+
+                            @*<a class="btn  btn-default btn-gray" style="float:left;width:20%;height:66px;white-space:normal;" href="~/ProfileQuestion/Manage/Index" id="btnProQuestions">Profile Questions</a>*@
+                        </div>
+
+                        <div class="col-sm-4"style="padding-left:88px;margin-top:11px;" >
+
+                            @*<a class="btn btn-default btn-gray " id="btninviteusers" style="    width: 100px;float:right;margin-right:0px;" href="~/user/ManageUser/ManageUsers">Invite<br /> Users</a>*@
+                            <a class="btn btn-default btn-gray " href="~/ProfileQuestion/Manage/Index" id="btninviteusers" style=" width:88px;float:left;margin-right:20px;font-size:14px;height:55px;" href="#">Invite<br /> Business</a>
+                            <a class="btn btn-default btn-gray " id="btninviteusers" style=" width:88px;float:left;margin-right:0px;font-size:14px;height:55px;" href="#">Income<br /> Statement</a>
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <span style="color:#7f8c8d;font-size:11px;" id="MainSpan">Become a territory partner <a style="color:#7f8c8d;font-size:11px;" href="mailto:Cash.com">Email us: </a></span>
+                            <div id="branchBinding" style="float: right;display:none;" >
+                                <a class="btn btn-default btn-gray btnSmall" data-bind="click:showBranchDialoge" style="display:none;" href="#" id="btnBranchLocations">Branch Locations</a>
+                            </div>
+
+                            @*<a class="btn btn-default btn-gray btnSmall " id="btnDAM" style="    width: 100px;float:right" href="/DamImages/Grid" id="btnImageLibrary">Image Library</a>*@
+                            <div id="phraseLibraryBinding" style="float: right;display:none;">
+                                <a class="btn btn-default btn-gray btnSmall" id="btnPhraseLibrary" style="display:none;" data-bind="click:showphraseLibraryDialog">Phrase Library</a>
+                            </div>
+
+                        </div>
+                        
+                        </div>
 
                 </div>
 
+                @*<div class="row">
+                    <div class="col-sm-8"></div>
+                    <div class="col-sm-4">
+                        <span style="color:#7f8c8d;font-size:11px;">Become a territory partner <br /><a style="color:#7f8c8d;font-size:11px;" href="mailto:Cash.com">Email us: </a></span>
 
+                    </div>
+                </div>*@
                 @RenderBody()
                 <!-- ko stopBinding: true -->
                 @Html.Partial("~/Areas/Common/Views/Shared/_ConfirmationDialog.cshtml")
@@ -308,6 +401,14 @@
             });
             
         });
+
+        function OpenPhraseLibrary()
+        {
+            $("#btnPhraseLibrary").click();
+        }
+        function OpenBranchLocation() {
+            $("#btnBranchLocations").click();
+        }
     </script>
     @RenderSection("scripts", required: false)
 </body>

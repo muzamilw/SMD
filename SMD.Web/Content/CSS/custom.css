@@ -428,4 +428,34 @@ a.reportAnchor a:hover {
 
   }
 
-    
+    .branchAddressContainer .form-group{
+        margin-bottom:0px;
+    }
+    .close {
+    float: right;
+    font-size: 1.429em;
+
+    .line-separator{
+
+ border-left: 1px solid #7f8c8d;
+    border-right: 1px solid #7f8c8d;
+    height: 105px;
+    position: absolute;
+    right: 302px;
+    top: 10px;
+
+}
+    color: #7a7a7a;
+    cursor: pointer;
+}
+    .fa {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+    .fa-remove:before, .fa-close:before, .fa-times:before {
+    content: "\f00d";
+}

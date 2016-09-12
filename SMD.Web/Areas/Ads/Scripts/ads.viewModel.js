@@ -310,7 +310,16 @@ define("ads/ads.viewModel",
 
 
             },
-
+           GoToHomePage = function ()
+           {
+               //isListVisible(false);
+               isEditorVisible(false);
+               isWelcomeScreenVisible(false);
+               $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign").css("display", "none");
+               $("#btnSubmitForApproval,#saveBtn,.table-link").css("display", "inline-block");
+               $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign,#btnStopAndTerminate,#btnCopyCampaign").removeAttr('disabled');
+              // showMainMenu();
+           },
             closeNewCampaignDialog = function () {
                 if (campaignModel().hasChanges()) {    //&& (campaignModel().Status() == null || campaignModel().Status() == 1)
                 confirmation.messageText("Do you want to save changes?");
@@ -355,6 +364,7 @@ define("ads/ads.viewModel",
                     showMainMenu();
                     $("input,button,textarea,a,select").removeAttr('disabled');
                 });
+
                 confirmation.show();
 
              
@@ -552,7 +562,19 @@ define("ads/ads.viewModel",
                      }
                  },
                 SaveDraftCampaign = function () {
-                    saveCampaign(1);
+                    if (ValidateCampaign()) {
+                        saveCampaign(1);
+                    }
+                    else {
+                        if (errorListNew().length > 0) {
+
+                            ko.utils.arrayForEach(errorListNew(), function (errorListNew) {
+
+                                toastr.error(errorListNew.name);
+                            });
+                        }
+
+                    }
                 },
               terminateCampaign = function () {
                   saveCampaign(7);
@@ -715,6 +737,8 @@ define("ads/ads.viewModel",
                             isWelcomeScreenVisible(false);
                             toastr.success("Successfully saved.");
                             allCouponCodeItems.removeAll();
+                            //$("#MainBtnClose").click();
+                            GoToHomePage();
                         },
                         error: function (response) {
                         }

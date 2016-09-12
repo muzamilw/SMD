@@ -127,6 +127,7 @@ define("Coupons/Coupons.viewModel",
                                     langs.valueHasMutated();
 
                                 }
+
                                 if (data.CouponCategories != null) {
                                     couponCategories.removeAll();
                                     ko.utils.arrayPushAll(couponCategories, data.CouponCategories);
@@ -327,7 +328,7 @@ define("Coupons/Coupons.viewModel",
                 isNewCampaignVisible(false);
                 $("#btnCancel").css("display", "block");
                 isShowArchiveBtn(false);
-                    CouponTitle('New Coupon');
+                    CouponTitle('New Offer');
                     StatusValue('');
             },
 
@@ -427,6 +428,9 @@ define("Coupons/Coupons.viewModel",
                   couponModel().CouponImage3("/images/default-placeholder.png");
                   couponModel().couponImage1("/images/default-placeholder.png");
                   couponModel().LogoUrl("/images/default-placeholder.png");
+                  couponModel().Price(10);
+                  couponModel().Savings(15);
+                  couponModel().CouponQtyPerUser(3);
                   isWelcomeScreenVisible(false);
 
                   isEditorVisible(true);
@@ -465,7 +469,7 @@ define("Coupons/Coupons.viewModel",
                 }
                 ,
             saveCampaign = function (mode) {
-             
+               
                 if (ValidateCoupon() == false) {
 
                     var isPopulateErrorList = false;
@@ -492,7 +496,7 @@ define("Coupons/Coupons.viewModel",
 
                     couponModel().CouponActiveYear(res[0]);
                     debugger;
-                    couponModel().LocationCountryId(BranchLocationId);
+                   
 
                     couponModel().CouponActiveMonth(GetMonth(res[1]));
 
@@ -1017,6 +1021,9 @@ define("Coupons/Coupons.viewModel",
                             hasErrors = true;
                             toastr.error("Please enter Coupon Title.");
                         }
+
+                    }
+                    if (previewScreenNumber() == 4) {
                         if (couponModel().Price() == "" || couponModel().Price() == undefined) {
                             hasErrors = true;
                             toastr.error("Please enter Price.");
@@ -1025,9 +1032,9 @@ define("Coupons/Coupons.viewModel",
                             hasErrors = true;
                             toastr.error("Please enter Saving.");
                         }
+
                     }
-                    
-                    if (previewScreenNumber() == 2) {
+                    if (previewScreenNumber() == 3) {
                        
                         if (couponModel().CouponQtyPerUser() == "" || couponModel().CouponQtyPerUser() == undefined) {
                             hasErrors = true;
@@ -1052,21 +1059,25 @@ define("Coupons/Coupons.viewModel",
                  },
                 ValidateCoupon = function ()
                 {
+                   
                     var hasErrors = false;
-                    if (previewScreenNumber() == 1) {
+                   
                         if (couponModel().CouponTitle() == "" || couponModel().CouponTitle() == undefined) {
                             hasErrors = true;
                             toastr.error("Please enter Coupon Title.");
+                            gotoScreen(1);
                         }
                         if (couponModel().Price() == "" || couponModel().Price() == undefined) {
                             hasErrors = true;
                             toastr.error("Please enter Price.");
+                            gotoScreen(4);
                         }
                         if (couponModel().Savings() == "" || couponModel().Savings() == undefined) {
                             hasErrors = true;
                             toastr.error("Please enter Saving.");
+                            gotoScreen(4);
                         }
-                    }
+                   
                     return hasErrors;
                 },
                 addIndustry = function (selected) {
@@ -1716,9 +1727,34 @@ define("Coupons/Coupons.viewModel",
 
                  },
                 locationChanged = function (item) {
+
+                    debugger;
+
                     var matchedItem = ko.utils.arrayFirst(branchLocations(), function (arrayitem) {
 
                         return arrayitem.BranchId == item.LocationBranchId();
+                    });
+
+                    console.log(matchedItem);
+
+
+                    if (matchedItem != null) {
+                        item.LocationLine1(matchedItem.BranchAddressLine1);
+                        item.LocationLine2(matchedItem.BranchAddressLine2);
+                        item.LocationCity(matchedItem.BranchCity);
+                        item.LocationState(matchedItem.BranchState);
+                        item.LocationZipCode(matchedItem.BranchZipCode);
+                        item.LocationLAT(matchedItem.BranchLocationLat);
+                        item.LocationLON(matchedItem.BranchLocationLong);
+                        item.LocationPhone(matchedItem.BranchPhone);
+                    }
+                },
+                LocationChangedOnSelectedIndex = function (val)
+                {
+                    debugger;
+                    var matchedItem = ko.utils.arrayFirst(branchLocations(), function (arrayitem) {
+
+                        return arrayitem.BranchId == val;
                     });
                     console.log(matchedItem);
                     if (matchedItem != null) {
@@ -1759,6 +1795,11 @@ define("Coupons/Coupons.viewModel",
 
                              TempSelectedObj().CouponTitle(phrase);
                              //fineprint
+
+                         else if (selectedJobDescription() === 'txtCampaignDescription')
+
+                             TempSelectedObj().HowToRedeemLine2(phrase);
+
                          else if (selectedJobDescription() === 'fineprint1')
 
                              TempSelectedObj().FinePrintLine1(phrase);
@@ -1825,20 +1866,8 @@ define("Coupons/Coupons.viewModel",
                                 ko.utils.arrayPushAll(branchLocations(), data.listBranches);
                                 branchLocations.valueHasMutated();
                                 BindPeriodDD();
-
-                                var index = 0;
-                                
-                                $.each(branchLocations(), function (id, option) {
-                                    
-                                    if (option.BranchId == BranchID) {
-
-                                        $("#yearDropDown")[0].selectedIndex = 3;
-
-                                       // BranchLocationId = option.
-                                    }
-                                    index++;
-                                });
-                                debugger;
+                                couponModel().LocationBranchId(BranchID);
+                                locationChanged(couponModel());
                             }
 
                         },
