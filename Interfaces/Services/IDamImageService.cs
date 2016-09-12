@@ -10,6 +10,8 @@ namespace SMD.Interfaces.Services
     public interface IDamImageService
     {
         List<DamImage> getAllImages(int mode,out int companyId);
+        List<DamImage> getAllFreeImages();
+
         bool addImage(DamImage img);
         string downloadImage(int type, int mode, int id, string path);
         bool deleteImage(long id);

@@ -81,7 +81,24 @@
                         }
                     </div>
                     <div id="tabs-2">
-                       
+                        @if (Model != null && Model.FreeImages.Count > 0)
+                        {
+                            <div class="imageContainer">
+                                @foreach (var img in Model.FreeImages)
+                                {
+                                    <div class="imageBox" id="@img.ImageId" style="margin-left:0px;">
+                                        <img src="@img.ImageFileName" alt="Image" class="imagePreview imageFreePreview" />
+                                        <input type="hidden" value="@img.ImageTitle" class="title" />
+                                    </div>
+                                }
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="imageCenter">
+                                No  Free images have been uploaded so far.
+                            </div>
+                        }
                     </div>
                    
                 </div>
@@ -150,7 +167,15 @@
         $(".cropit-preview").css("height", minheight + "px");
         $('.cropit-image-input').change(function (evt) {
             $(".image-editor").css("display", "block");
-        });   
+        });
+        $('.imageFreePreview').click(function (evt) {
+            $(".image-editor").css("display", "block");
+            $('.image-editor').cropit('imageSrc', this.src);
+
+            $(".cropit-preview").attr("src",this.src);
+            $( "#tabs" ).tabs({ active: 0});
+        });
+        
         $("#uploadFileMain").click(function () {
             $('.cropit-image-input').click();
             return false;
@@ -238,13 +263,6 @@
             },
             imageBackground: true,
             imageBackgroundBorderWidth: 40,
-        });
-
-        $('.rotate-cw').click(function () {
-            $('.image-editor').cropit('rotateCW');
-        });
-        $('.rotate-ccw').click(function () {
-            $('.image-editor').cropit('rotateCCW');
         });
 
         $('.export').click(function () {

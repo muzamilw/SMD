@@ -54,6 +54,10 @@ namespace SMD.Repository.Repositories
             companyId = user.CompanyId.Value;
             return db.DamImage.Where(g => g.CompanyId == user.CompanyId && g.ImageCategory == mode).OrderByDescending(g=>g.ImageId).ToList();
         }
+        public List<DamImage> getAllFreeImages()
+        {
+            return db.DamImage.Where(g => g.CompanyId == null).OrderByDescending(g => g.ImageId).ToList();
+        }
 
         #endregion
     }
