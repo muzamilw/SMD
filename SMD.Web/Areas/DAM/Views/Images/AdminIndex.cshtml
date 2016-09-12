@@ -10,15 +10,27 @@
 
 <section id="main" style="display:none;">
     <div class="row">
-
+        <div class="row">
+            <div class="col-sm-12" style="float: left; margin-bottom:20px;">
+                <br />
+               
+                <div class="editor-row" style="">
+                    <span style="font-size: 24px;" class="Theme_standard_clr">Free Image Gallery</span>
+                    @*<div id="lblOr" >-OR-</div>*@
+                    <button class="btn  btn-success " id="uploadFileMain" style="width:300px;margin-bottom:4px;    margin-left: 12px; float:right;">Upload an Image</button>
+                </div>
+             
+                <br />
+            </div>
+        </div>
         <div class="row" style="padding-left:0px;min-height:400px;">
-            <div class="pull-left damImgContainer" style="width:35%;overflow:auto;height:600px;overflow-x: hidden; ">
+            <div class="pull-left damImgContainer" style="width:100%;overflow:auto;height:600px;overflow-x: hidden; ">
                 @if (Model != null && Model.Images.Count > 0)
                 {
                     <div class="imageContainer">
                         @foreach (var img in Model.Images)
                         {
-                            <div class="imageBox" id="@img.ImageId">
+                            <div class="imageBox" id="@img.ImageId" style="margin-left:2%;">
                                 <img src="@img.ImageFileName" alt="Image" class="imagePreview" />
                                 <input type="hidden" value="@img.ImageTitle" class="title" />
 
@@ -53,11 +65,7 @@
                         @Html.HiddenFor(model => model.mode)
                         @Html.HiddenFor(model => model.bytes)
                         <div>
-                            <div class="editor-row" style="">
-
-                                @*<div id="lblOr" >-OR-</div>*@
-                                <button class="btn  btn-success " id="uploadFileMain" style="width:30%;margin-bottom:4px;    margin-left: 12px;">Upload an Image</button>
-                            </div>
+                          
                             <div class="image-editor">
 
                                 <input type="file" class="cropit-image-input" style="display:none;">
