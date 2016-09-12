@@ -37,7 +37,7 @@ else
                                     <thead>
                                         <tr>
 
-                                            <th class="col-sm-3"><span class="GridHeaderFont_size">Coupon Name</span></th>
+                                            <th class="col-sm-3"><span class="GridHeaderFont_size">Offer Name</span></th>
 
                                             <th class="col-sm-2">
                                                 <span class="GridHeaderFont_size">
@@ -98,7 +98,7 @@ else
             </div>
             <div class="col-lg-6 col-sm-6" style="float:left;padding-left:50px; display:none;">
 
-                <button class="btn  btn-success btnAdsCampaign" style="width:24%;float:left;padding:0px;" id="btnSubmitForApproval" data-bind="click:$root.ShowCouponPromotions">Coupons</button>
+                <button class="btn  btn-success btnAdsCampaign" style="width:24%;float:left;padding:0px;" id="btnSubmitForApproval" data-bind="click:$root.ShowCouponPromotions">Offer</button>
                 <button class="btn  btn-success btnAdsCampaign @adminClasses" style="width:24%;float:left;padding:0px;" id="btnSubmitForApproval" data-bind="click:gotoManageUsers">Manage Users</button>
                 <button class="btn  btn-success btnAdsCampaign" style="width:24%;float:left;padding:0px;" id="btnSubmitForApproval" data-bind="click:gotoProfile">Marketing Info</button>
             </div>
@@ -243,7 +243,7 @@ else
         <div class="row">
             <div class="col-sm-12" style="float: left; margin-bottom:20px;">
                 <br />
-                <span style="font-size: 24px;" class="Theme_standard_clr">Coupon Promotions </span><br />
+                <span style="font-size: 24px;" class="Theme_standard_clr">Offer Promotions </span><br />
 
                 <span style="font-size: 14px;" class="Theme_subheading-Clr ">Paid coupon promotions are listed for whole one calendar month. Submission fee includes unlimited issuing and redemption at all branches. &nbsp; &nbsp; &nbsp; <span class="red bold rightAlign" style="margin-top:-9px;"> Watch Video <img src="/Images/youtube_play.JPG" height="25px" /> </span>   </span><br />
             </div>
@@ -275,7 +275,7 @@ else
             </form>
             <div class="col-sm-3" style="float:right;margin-top:2px; text-align:right">
                 <button class="btn btn-primary" data-bind="click:$root.addNewCampaign">
-                    Create Coupon
+                    Create Offer
                 </button>
             </div>
             <div class="clearfix">
@@ -296,5 +296,7 @@ else
     <script type="text/javascript">
         require(["Coupons/Coupons.view", "common/stripeChargeCustomer.view", "common/confirmation.view", "PhraseLibrary/phraseLibrary.view"]);
         $("#btnCoupons").css("background-color", "#93bf47");
+       
+        $("#panelArea").css("display", "block");
     </script>
 }

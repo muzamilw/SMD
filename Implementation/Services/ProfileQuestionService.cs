@@ -371,13 +371,13 @@ namespace SMD.Implementation.Services
             #endregion
             foreach (var loc in source.ProfileQuestionTargetLocations)
             {
-                if (loc.PQID > 0 && loc.IsDeleted)
+                if (loc.ID > 0 && loc.IsDeleted)
                 {
                     _profileQuestionTargetCriteriaRepository.RemoveCriteria(loc.PQID ?? 0);
                 }
                 else
                 {
-                    if (loc.PQID != null && loc.PQID != 0)
+                    if (loc.ID != null && loc.ID != 0)
                     {
                         _profileQuestionTargetLocationRepository.UpdateTargetLocation(loc);
                         

@@ -23,7 +23,7 @@ else
                     <span class="pull-left Theme_standard_clr" style="padding-left:0px;font-size:28px;" data-bind="NewCampaignBinding: CampaignName,visible:$root.isDisplayCouponsAds()">New Coupon</span>
                     <span class="pull-left Theme_standard_clr" style="padding-left:0px;font-size:28px;" data-bind="NewCampaignBinding: CampaignName,visible:!$root.isDisplayCouponsAds()">New Campaign</span>
                     <span class="control-label bold heading-style pull-left" style="    margin-top: 6px;    margin-left: 40px;" data-bind="text:StatusValue()"></span>
-                    <div style="float:right;margin-top:-5px;"><button data-bind="click: $root.closeNewCampaignDialog" class="btn btn-default">Close</button></div>
+                    <div style="float:right;margin-top:-5px;"><button id="MainBtnClose" data-bind="click: $root.closeNewCampaignDialog" class="btn btn-default">Close</button></div>
                 </div>
 
                 <div class="row" style="margin-bottom:15px;">
@@ -2812,8 +2812,9 @@ else
 
 <script>
 
-
-
+    $("#panelArea").css("display", "none");
+    $("#MainSpan").css("display", "none");
+    
     function showUploadDialog() {
         $("#logo_image_file").click();
 

@@ -428,4 +428,17 @@ a.reportAnchor a:hover {
 
   }
 
-    
+    .branchAddressContainer .form-group{
+        margin-bottom:0px;
+    }
+
+    .line-separator{
+
+ border-left: 1px solid #7f8c8d;
+    border-right: 1px solid #7f8c8d;
+    height: 105px;
+    position: absolute;
+    right: 302px;
+    top: 10px;
+
+}
