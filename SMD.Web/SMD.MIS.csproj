@@ -2848,6 +2848,10 @@
     <Content Include="Views\Shared\_Layout - Copy.cshtml" />
     <Content Include="Views\Shared\_Layout_Supernova.cshtml" />
     <Content Include="Views\Shared\_Layout_Franchise.cshtml" />
+    <Content Include="Views\Home\StartUpGuide.cshtml" />
+    <Content Include="Views\Home\TrainingVideos.cshtml" />
+    <Content Include="Views\Home\HelpCenter.cshtml" />
+    <Content Include="Views\Home\ContactUs.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -154,8 +154,7 @@
                     </a>
                     <a class="table-link fa fa-stack" style="float: right;display:none;">
                         <span class="fa-stack">
-                            <i class="fa fa-square fa-stack-2x"></i>
-                            <i class="fa fa-pencil fa-stack-1x fa-inverse" data-bind="click:$root.onEditProfileQuestion"></i>
+                            <i class="fa fa-pencil-square-o" data-bind="click:$root.onEditProfileQuestion"></i>
                         </span>
 
                     </a>
@@ -228,7 +227,7 @@
 @section Scripts{
     <script type="text/javascript">
         require(["pQuestion/pQuestion.view", "common/confirmation.view", "common/stripeChargeCustomer.view"]);
-
+        $("#MainSpan").css("display", "none");
         $("#btnSurveyQuestion").css("background-color", "#93bf47");
     </script>
 

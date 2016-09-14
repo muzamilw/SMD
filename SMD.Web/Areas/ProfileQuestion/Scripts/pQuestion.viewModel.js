@@ -290,7 +290,7 @@ define("pQuestion/pQuestion.viewModel",
                 },     
                     // Add new Profile Question
                     addNewProfileQuestion = function () {
-
+                        $("#panelArea,#topArea").css("display", "none");
                         HeaderText("New Question");
                         selectedQuestion(new model.question());
                         selectedQuestion().Gender("1");
@@ -352,6 +352,7 @@ define("pQuestion/pQuestion.viewModel",
                 
                     // Close Editor 
                     closeEditDialog = function () {
+                        $("#panelArea,#topArea").css("display", "block");
                         if (!hasChangesOnQuestion()) {
                             isEditorVisible(false);
                             return;
@@ -366,7 +367,7 @@ define("pQuestion/pQuestion.viewModel",
                     },
                     // On editing of existing PQ
                     onEditProfileQuestion = function (item) {
-                        
+                        $("#panelArea,#topArea").css("display", "none");
                         AgeRangeStart(13);
                         AgeRangeEnd(80);
 

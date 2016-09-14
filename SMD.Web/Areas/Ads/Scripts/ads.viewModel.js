@@ -245,7 +245,7 @@ define("ads/ads.viewModel",
             },
                 // Add new Profile Question
             addNewCampaign = function () {
-
+                $("#panelArea").css("display", "none");
                 //if (isDisplayCouponsAds() == false) {
                 //    isWelcomeScreenVisible(true);
                 //} else {
@@ -351,6 +351,7 @@ define("ads/ads.viewModel",
                     $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign,#btnStopAndTerminate,#btnCopyCampaign").removeAttr('disabled');
                     //show the main menu;
                     showMainMenu();
+                   
                 });
                 confirmation.afterCancel(function () {
 
@@ -408,6 +409,7 @@ define("ads/ads.viewModel",
                 //    $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign,#btnCopyCampaign,#btnStopAndTerminate").removeAttr('disabled');
                 }
                 isFromEdit(false);
+                $("#panelArea").css("display", "block");
             },
 
             saveCampaignData = function () {
@@ -1206,7 +1208,7 @@ define("ads/ads.viewModel",
 
                   },
                 onEditCampaign = function (item) {
-
+                
                     //hiding the main menu
                     collapseMainMenu();
                  //   VideoLink2src(item.VideoLink2);
@@ -1216,7 +1218,7 @@ define("ads/ads.viewModel",
                     isShowArchiveBtn(false);
                     
                     if (item.Status() == 1 || item.Status() == 2 || item.Status() == 3 || item.Status() == 4 || item.Status() == null || item.Status() == 7 || item.Status() == 9) {
-
+                        $("#panelArea").css("display", "none");
                         if (item.Status() == 1)//because it is in draft mode.
                             isNewCampaign(true);
                         else
