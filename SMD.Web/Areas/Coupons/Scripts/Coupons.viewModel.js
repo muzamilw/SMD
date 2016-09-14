@@ -450,7 +450,7 @@ define("Coupons/Coupons.viewModel",
 
 
             submitCampaignData = function () {
-                
+                hasErrors = false;
                     if (couponModel().CouponTitle() == "" || couponModel().CouponTitle() == undefined) {
                         hasErrors = true;
                         toastr.error("Please enter Coupon Title.");
@@ -474,10 +474,10 @@ define("Coupons/Coupons.viewModel",
                         hasErrors = true;
                         toastr.error("Please enter description.");
                     }//couponImage1
-                    if (couponModel().error() == "/images/default-placeholder.png" && couponModel().CouponImage2() == "/images/default-placeholder.png" && couponModel().CouponImage3() == "/images/default-placeholder.png") {
-                        hasErrors = true;
-                        toastr.error("Please enter atleast 1 banner image.");
-                    }
+                    //if (couponModel().couponImage1() == "/images/default-placeholder.png" && couponModel().CouponImage2() == "/images/default-placeholder.png" && couponModel().CouponImage3() == "/images/default-placeholder.png") {
+                    //    hasErrors = true;
+                    //    toastr.error("Please enter atleast 1 banner image.");
+                    //}
                 if (hasErrors)
                     return;
                 saveCampaign(2);
