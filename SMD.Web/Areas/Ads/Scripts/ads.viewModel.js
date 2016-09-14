@@ -48,7 +48,7 @@ define("ads/ads.viewModel",
                     isNewCampaignVisible = ko.observable(false),
                     isShowArchiveBtn = ko.observable(false),
                     isTerminateBtnVisible = ko.observable(false),
-                    correctAnswers = ko.observableArray([{ id: 1, name: "Choice 1" }, { id: 2, name: "Choice 2" }, { id: 3, name: "Choice 3" }, { id: 0, name: "Ask User Suggestion" }]),
+                    correctAnswers = ko.observableArray([{ id: 1, name: "Choice 1" }, { id: 2, name: "Choice 2" }, { id: 3, name: "Choice 3" }, { id: 0, name: "Any of the above" }]),
                     selectedIndustryIncludeExclude = ko.observable(true),
                     UserAndCostDetail = ko.observable(),
                     pricePerclick = ko.observable(0),
@@ -190,7 +190,8 @@ define("ads/ads.viewModel",
                     PageSize: pager().pageSize(),
                     PageNo: pager().currentPage(),
                     SearchText: searchFilterValue(),
-                    ShowCoupons: isDisplayCouponsAds()
+                    ShowCoupons: isDisplayCouponsAds(),
+                    mode:mode
                 }, {
                     success: function (data) {
                         if (data != null) {
@@ -265,6 +266,10 @@ define("ads/ads.viewModel",
                 isShowArchiveBtn(false);
                 campaignModel().DeliveryDays("1");
                 campaignModel().ChannelType("1");
+                campaignModel().ClickRate("0.1");
+                campaignModel().MaxDailyBudget("5");
+                campaignModel().MaxBudget("20");
+                campaignModel().Type(mode);
                 //isEditorVisible(true);
                 //canSubmitForApproval(true);
                 //campaignModel(new model.Campaign());
@@ -1409,7 +1414,7 @@ define("ads/ads.viewModel",
                                     isEditorVisible(true);
                                     isListVisible(false);
                                     isFromEdit(true);
-                                    
+                                    $("#MainBtnClose").removeAttr('disabled');
                                     //  buildMap();
 
                                     if (campaignModel().AdCampaignTargetLocations() != null && campaignModel().AdCampaignTargetLocations().length > 0) {

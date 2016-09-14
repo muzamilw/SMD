@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Profile Questions";
+    ViewBag.Title = "Survey Questions";
 
 
 }
@@ -173,7 +173,7 @@
 
                     <div class="col-sm-12" style="float: left; margin-bottom:20px;">
                         <br />
-                        <span style="font-size: 24px;" class="Theme_standard_clr" >Profile Questions</span><br />
+                        <span style="font-size: 24px;" class="Theme_standard_clr" >Survey Questions</span><br />
                         <span style="font-size: 14px;" class="Theme_subheading-Clr">Video campaigns can be paused and terminated at any time. Increase your conversions and reduce your spend by using profile filters.</span>  &nbsp; &nbsp; &nbsp; <span class="red bold rightAlign"> Watch Video <img src="/Images/youtube_play.JPG" height="25px" /> </span>   </span><br />
                     </div>
 
@@ -206,7 +206,7 @@
                     </form>
                     <div class="col-sm-3" style="float:right;margin-top:2px; text-align:right">
                         <button class="btn btn-primary" data-bind="click:$root.addNewProfileQuestion">
-                            Create Profile Questions 
+                            Create Survey Questions 
                         </button>
                      
                     </div>
@@ -228,7 +228,8 @@
 @section Scripts{
     <script type="text/javascript">
         require(["pQuestion/pQuestion.view", "common/confirmation.view", "common/stripeChargeCustomer.view"]);
-        $("#btnProQuestions").css("background-color", "#93bf47");
+
+        $("#btnSurveyQuestion").css("background-color", "#93bf47");
     </script>
 
 }

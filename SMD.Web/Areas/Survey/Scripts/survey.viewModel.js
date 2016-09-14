@@ -39,7 +39,7 @@ define("survey/survey.viewModel",
                     surveyQuestionList = ko.observableArray([]),
                     profileAnswerList = ko.observable([]),
                     editCriteriaHeading = ko.observable("Add Profile Criteria"),
-                    titleText = ko.observable("Add new survey"),
+                    titleText = ko.observable("Add new survey card"),
                     isNewCriteria = ko.observable(true),
                     canSubmitForApproval = ko.observable(true),
                     isTerminateBtnVisible = ko.observable(true),
@@ -196,7 +196,7 @@ define("survey/survey.viewModel",
                         gotoScreen(1);
                         isTerminateBtnVisible(false);
                         isShowArchiveBtn(false);
-                        HeaderText("Add new survey");
+                        HeaderText("Add new survey card");
                         StatusValue('');
                         selectedQuestion(new model.Survey());
                         selectedQuestion().Gender("1");
