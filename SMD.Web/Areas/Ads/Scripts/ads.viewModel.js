@@ -264,12 +264,12 @@ define("ads/ads.viewModel",
 
                 VideoLink2src(null);
                 isShowArchiveBtn(false);
-                campaignModel().DeliveryDays("1");
                 campaignModel().ChannelType("1");
                 campaignModel().ClickRate("0.1");
                 campaignModel().MaxDailyBudget("5");
                 campaignModel().MaxBudget("20");
                 campaignModel().Type(mode);
+                campaignModel().DeliveryDays("3");
                 //isEditorVisible(true);
                 //canSubmitForApproval(true);
                 //campaignModel(new model.Campaign());
@@ -802,7 +802,7 @@ define("ads/ads.viewModel",
                     //}
                 },
                   saveProfileQuestion = function (item) {
-                      debugger;
+                      ;
                       var selectedQuestionstring = $(".active .parent-list-title").text();
                       selectedCriteria().questionString(selectedQuestionstring);
                       selectedCriteria().PQID(item.PQID);
@@ -1025,6 +1025,9 @@ define("ads/ads.viewModel",
                 },
 
                 onChangeProfileQuestion = function (item) {
+          
+                    var y = $(".listview").scrollTop();  //your current y position on the page
+                    
                     if (item == null)
                         return;
                     var selectedQuestionId = item.PqId;
@@ -1044,7 +1047,7 @@ define("ads/ads.viewModel",
                                 ko.utils.arrayPushAll(profileAnswerList(), data.ProfileQuestionAnswers);
                                 profileAnswerList.valueHasMutated();
 
-
+                                $(".listview").scrollTop(y+60);
                             }
 
                         },
@@ -1342,7 +1345,7 @@ define("ads/ads.viewModel",
 
                                     selectedQuestionCountryList([]);
                                     _.each(campaignModel().AdCampaignTargetLocations(), function (item) {
-                                        debugger;
+                                        ;
                                         addCountryToCountryList(item.CountryID(), item.Country());
                                     });
 
@@ -2065,7 +2068,7 @@ define("ads/ads.viewModel",
                 },
                 addCountryToCountryList = function (country, name) {
                     if (country != undefined) {
-                        debugger;
+                        ;
                         var matcharry = ko.utils.arrayFirst(selectedQuestionCountryList(), function (item) {
 
                             return item.id == country;
@@ -2375,7 +2378,7 @@ define("ads/ads.viewModel",
                 },
                  gotoScreen = function (number) {
                      //  toastr.error("Validation.");
-                     debugger;
+                   
                      previewScreenNumber(number);
 
                  },
