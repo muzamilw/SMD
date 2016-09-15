@@ -4061,7 +4061,7 @@ input[type="radio"] {
 }
 
 .theme-blue-gradient #header-navbar, #config-tool #skin-colors li a.skin-changer.blue-gradient {
-    background: #58267b    !important;
+    background: #262626    !important;
     background: -moz-linear-gradient(top,#3498db 0%,#2980b9 100%);
     background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,#3498db),color-stop(100%,#2980b9));
     background: -webkit-linear-gradient(top,#3498db 0%,#2980b9 100%);
@@ -5473,7 +5473,7 @@ left: 0 !important;
        
 right: 0 !important;
        
-margin-left: 108px !important;
+margin-left:225px !important;
        
 margin-right: auto !important;
        
@@ -5491,7 +5491,7 @@ background-image: url(/Images/crowdcentz_logo.png) !important;
     width: 72px;
     height: 18px;
     position: absolute;
-    left: 191px;
+    left: 299px;
     right: 0;
     margin-right: auto;
 }

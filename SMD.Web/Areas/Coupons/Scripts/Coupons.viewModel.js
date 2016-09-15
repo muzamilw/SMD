@@ -327,6 +327,7 @@ define("Coupons/Coupons.viewModel",
                 isTerminateBtnVisible(false);
                 isNewCampaignVisible(false);
                 $("#btnCancel").css("display", "block");
+                $(".hideInCoupons").css("display", "none");
                 isShowArchiveBtn(false);
                     CouponTitle('New Offer');
                     StatusValue('');
@@ -449,7 +450,36 @@ define("Coupons/Coupons.viewModel",
 
 
             submitCampaignData = function () {
+                hasErrors = false;
+                    if (couponModel().CouponTitle() == "" || couponModel().CouponTitle() == undefined) {
+                        hasErrors = true;
+                        toastr.error("Please enter Coupon Title.");
+                    }
 
+                    if (couponModel().Price() == "" || couponModel().Price() == undefined) {
+                        hasErrors = true;
+                        toastr.error("Please enter Price.");
+                    }
+                    if (couponModel().Savings() == "" || couponModel().Savings() == undefined) {
+                        hasErrors = true;
+                        toastr.error("Please enter Saving.");
+                    }
+
+                    if (couponModel().CouponQtyPerUser() == "" || couponModel().CouponQtyPerUser() == undefined) {
+                        hasErrors = true;
+                        toastr.error("Please enter Quantity.");
+                    }
+                    console.log(couponModel());
+                    if (couponModel().HowToRedeemLine2() == "" || couponModel().HowToRedeemLine2() == undefined) {
+                        hasErrors = true;
+                        toastr.error("Please enter description.");
+                    }//couponImage1
+                    //if (couponModel().couponImage1() == "/images/default-placeholder.png" && couponModel().CouponImage2() == "/images/default-placeholder.png" && couponModel().CouponImage3() == "/images/default-placeholder.png") {
+                    //    hasErrors = true;
+                    //    toastr.error("Please enter atleast 1 banner image.");
+                    //}
+                if (hasErrors)
+                    return;
                 saveCampaign(2);
             },
               terminateCampaign = function () {
@@ -880,7 +910,7 @@ define("Coupons/Coupons.viewModel",
                     isNewCampaignVisible(false);
                     isShowArchiveBtn(false);
                     CouponTitle(item.CouponTitle());
-                    
+                    $(".hideInCoupons").css("display", "none");
                    
                     if (item.Status() == 1 || item.Status() == 2 || item.Status() == 3 || item.Status() == 4 || item.Status() == null || item.Status() == 7 || item.Status() == 9) {
                         canSubmitForApproval(true);
@@ -1885,6 +1915,7 @@ define("Coupons/Coupons.viewModel",
                 },
                 CloseCouponsView = function ()
                 {
+                    $(".hideInCoupons").css("display", "block");
                     couponModel();
                     selectedCriteria();
                     isEditorVisible(false);

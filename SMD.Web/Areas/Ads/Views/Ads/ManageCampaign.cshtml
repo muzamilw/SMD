@@ -50,7 +50,7 @@ else
                                         1
                                     </div>
                                     <br />
-                                    <span data-bind="css: $root.previewScreenNumber() == 1 ? 'ads-selected-numbering-text' : ''">Upload Video</span>
+                                    <span data-bind="css: $root.previewScreenNumber() == 1 ? 'ads-selected-numbering-text' : '',click: $root.gotoScreen.bind(null,1)">Upload Video</span>
                                 </div>
                                 <div class="pull-left ads-numbering-linebar" data-bind="css: $root.previewScreenNumber() == 6 ? 'ads-selected-numbering-box' : ''">
                                 </div>
@@ -59,7 +59,7 @@ else
                                         2
                                     </div>
                                     <br />
-                                    <span data-bind="css: $root.previewScreenNumber() == 2 ? 'ads-selected-numbering-text' : ''">Target Audience</span>
+                                    <span data-bind="css: $root.previewScreenNumber() == 2 ? 'ads-selected-numbering-text' : '',click: $root.gotoScreen.bind(null,2)">Target Audience</span>
                                 </div>
                                 <div class="pull-left ads-numbering-linebar" data-bind="css: $root.previewScreenNumber() == 6 ? 'ads-selected-numbering-box' : ''">
                                 </div>
@@ -68,7 +68,7 @@ else
                                         3
                                     </div>
                                     <br />
-                                    <span data-bind="css: $root.previewScreenNumber() == 3  ? 'ads-selected-numbering-text' : ''">Quiz Question</span>
+                                    <span data-bind="css: $root.previewScreenNumber() == 3  ? 'ads-selected-numbering-text' : '',click: $root.gotoScreen.bind(null,3)">Quiz Question</span>
                                 </div>
                                 <div class="pull-left ads-numbering-linebar" data-bind="css: $root.previewScreenNumber() == 6 ? 'ads-selected-numbering-box' : ''">
                                 </div>
@@ -77,7 +77,7 @@ else
                                         4
                                     </div>
                                     <br />
-                                    <span data-bind="css: $root.previewScreenNumber() == 4 ? 'ads-selected-numbering-text' : ''">Delivery Mode</span>
+                                    <span data-bind="css: $root.previewScreenNumber() == 4 ? 'ads-selected-numbering-text' : '',click: $root.gotoScreen.bind(null,4)">Delivery Mode</span>
                                 </div>
                                 <div class="pull-left" style="width: 172px;">
                                     &nbsp;
@@ -130,7 +130,7 @@ else
                                     </div>
                                 </div>
 
-                                    <div class="form-group" style="margin-bottom:25px;" data-bind="visible:!$root.isDisplayCouponsAds()">
+                                    <div class="form-group" style="margin-bottom:25px;visibility:hidden;height:0px;    position: absolute;" data-bind="" >
                                         <div class="col-lg-2">
                                             <label for="campaignType" class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn">Campaign Type</label>
                                         </div>
@@ -153,6 +153,30 @@ else
                                         </div>
 
                                     </div>
+                                <div class="form-group" style="margin-bottom:14px;">
+                                    <div class="col-lg-2">
+                                        <label for="txtCampaignDisplayName" class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn" data-bind="text:$root.lblAdTitle">Campaign Title</label>
+                                    </div>
+                                    <div class="col-lg-7">
+                                        <input type="text" maxlength="72" name="Campaign Display Name" class="form-control" id="txtCampaignDisplayName" placeholder="Campaign title (72 characters)" data-bind="value: CampaignName,validationTooltip: DisplayTitle, validationOnElement: DisplayTitle">
+                                    </div>
+                                    <div class="col-lg-1" data-bind="visible:!$root.isDisplayCouponsAds()" style="  text-align: right;
+    font-size: 17px;
+    color: red;">
+                                        <span>&nbsp;</span>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <div class="bs-example-tooltips tooltip-float-width tooltip">
+                                            <a class="input-group-addon" tabindex="-1" href="#" data-toggle="tooltip" title="Hooray!" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;    padding: 0px;
+    padding-top: 5px;"
+                                               data-container="body" data-placement="right" data-content="Add a city">
+                                                <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                            </a>
+                                            <i class="fa fa-chevron-up" aria-hidden="true" style="color:#68b359;"></i>
+                                            <span class="tooltiptext">Tooltip text</span>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="form-group" style="margin-bottom:25px;" data-bind="if: Type()==1,visible:!$root.isDisplayCouponsAds()">
                                     <div class="col-lg-2">
                                         <label for="txtUploadVideo" class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn">Upload Video</label>
@@ -200,6 +224,7 @@ else
                                         </div>
                                     </div>
                                 </div>
+                              
                                     <div class="form-group" style="margin-bottom:25px;" data-bind="visible:!$root.isDisplayCouponsAds()">
                                         <div class="col-lg-2">
                                             <label for="txtUploadLogo" class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn">Upload Logo</label>
@@ -208,9 +233,9 @@ else
                                             <div class="defaultImgUploadImage pull-left" style="cursor:pointer;text-align:center;width:335px!important;">
                                               
 
-                                                <img style="width:300px;height:150px;" data-bind="attr: { src:LogoUrl()==''?'/Content/Images/Company_Default.png':'/' +  LogoUrl() + $root.randonNumber() },visible:$root.campaignModel().LogoImageBytes()==''" src="/Content/Images/Company_Default.png" onclick="showUploadDialog();" />
+                                                <img style="width:150px;" data-bind="attr: { src:LogoUrl()==''?'/Content/Images/Company_Default.png':'/' +  LogoUrl() + $root.randonNumber() },visible:$root.campaignModel().LogoImageBytes()==''" src="/Content/Images/Company_Default.png" onclick="showUploadDialog();" />
 
-                                                <img style="width:300px;height:150px;" data-bind="visible: $root.campaignModel().LogoImageBytes() != '',attr: { src: $root.campaignModel().LogoImageBytes()}" src="/Content/Images/Company_Default.png" onclick="showUploadDialog();" />
+                                                <img style="width:150px;" data-bind="visible: $root.campaignModel().LogoImageBytes() != '',attr: { src: $root.campaignModel().LogoImageBytes()}" src="/Content/Images/Company_Default.png" onclick="showUploadDialog();" />
 
                                              
 
@@ -238,30 +263,7 @@ else
                 </a>
                 </div>*@
                                     </div>
-                                    <div class="form-group" style="margin-bottom:14px;">
-                                        <div class="col-lg-2">
-                                            <label for="txtCampaignDisplayName" class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn" data-bind="text:$root.lblAdTitle">Ad Title</label>
-                                        </div>
-                                        <div class="col-lg-7">
-                                            <input type="text" maxlength="72" name="Campaign Display Name" class="form-control" id="txtCampaignDisplayName" placeholder="Ad title (72 characters)" data-bind="value: CampaignName,validationTooltip: DisplayTitle, validationOnElement: DisplayTitle">
-                                        </div>
-                                        <div class="col-lg-1" data-bind="visible:!$root.isDisplayCouponsAds()" style="  text-align: right;
-    font-size: 17px;
-    color: red;">
-                                            <span>&nbsp;</span>
-                                        </div>
-                                        <div class="col-lg-2">
-                                            <div class="bs-example-tooltips tooltip-float-width tooltip">
-                                                <a class="input-group-addon" tabindex="-1" href="#" data-toggle="tooltip" title="Hooray!" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;    padding: 0px;
-    padding-top: 5px;"
-                                                   data-container="body" data-placement="right" data-content="Add a city">
-                                                    <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                </a>
-                                                <i class="fa fa-chevron-up" aria-hidden="true" style="color:#68b359;"></i>
-                                                <span class="tooltiptext">Tooltip text</span>
-                                            </div>
-                                        </div>
-                                    </div>
+                                   
                                     <div class="form-group" style="margin-bottom:25px; display:none;">
                                         <div class="col-lg-2">
                                             <label for="txtCampaignDesc" class="control-label text-right tooltip-float floatNone" data-bind="text:$root.lblFirstLine">First line </label>
@@ -335,7 +337,7 @@ else
                                                             <div class="_53gb clearfix">
                                                                 <div class="_4bl9">
                                                                     <span class="_3bsr">
-                                                                        <img src="~/Content/Images/UK-Union-Flag.png" width="20" /> United Kingdom
+                                                                       Nationwide
                                                                     </span>
                                                                 </div>
                                                             </div>
@@ -349,7 +351,7 @@ else
                                         </div>
                                         <div class="clearfix"></div>
                                     </div>
-                                    <div class="col-lg-1" data-bind="visible:!$root.isDisplayCouponsAds()" style="  text-align: right;font-size: 17px; color: red;">
+                                    <div class="col-lg-1" style="  text-align: right;font-size: 17px; color: red; display:none;">
                                         <span>(0p)</span>
                                     </div>
                                     <div class="col-lg-2">
@@ -413,7 +415,7 @@ else
                                             <select class="form-control" data-bind="options: $root.ageRange, optionsText: 'text', optionsValue: 'value', value: AgeRangeEnd,validationTooltip: AgeRangeEnd, validationOnElement: AgeRangeEnd"></select>
                                         </div>
                                     </div>
-                                    <div class="col-lg-1" data-bind="visible:!$root.isDisplayCouponsAds()" style=" padding: 0px !important;       text-align: left;    font-size: 17px;    color: red;">
+                                    <div class="col-lg-1"  style=" padding: 0px !important;    display:none;   text-align: left;    font-size: 17px;    color: red;">
                                         <span data-bind="text: $root.genderppc()"></span>
                                     </div>
                                     <div class="col-lg-2">
@@ -454,7 +456,7 @@ else
                                             <span class="help-block text-right"></span>
                                         </div>
                                     </div>
-                                    <div class="col-lg-3" data-bind="visible:!$root.isDisplayCouponsAds()" style=" padding: 0px !important;    text-align: left;
+                                    <div class="col-lg-3" style=" padding: 0px !important; display:none;   text-align: left;
     font-size: 17px;
     color: red;">
                                         <span data-bind="text: $root.ageppc()"></span>
@@ -548,7 +550,7 @@ else
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-3" data-bind="visible:!$root.isDisplayCouponsAds()" style="  text-align: left;    padding: 0px !important;
+                                    <div class="col-lg-3"  style="  text-align: left;   display:none; padding: 0px !important;
     font-size: 17px;
     color: red;">
                                         <span data-bind="text: $root.professionppc()"></span>
@@ -618,7 +620,7 @@ else
                                 </div>
                                 <div class="form-group">
                                     <div class="col-lg-2">
-                                        <label for="txtVerifyQuestion" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">50/50 Quiz question</label>
+                                        <label for="txtVerifyQuestion" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn"> Quiz question</label>
                                     </div>
                                     <div class="col-lg-7">
                                         <input type="text" class="form-control" id="txtVerifyQuestion" placeholder="Enter your question (72 characters)" data-bind="value: VerifyQuestion" maxlength="72">
@@ -683,9 +685,10 @@ else
                                     <div class="col-lg-11">
                                         <div class="form-group" style="margin-bottom:20px; margin-top:20px;">
                                             <div class="col-lg-4 text-campaign-left  Float-Left">
-                                                <label class="control-label text-right tooltip-float font20 floatNone" style="float:left !important;    margin-left: 6px; ">Coupon Buy it</label>
+                                                <label class="control-label text-right tooltip-float font20 floatNone hideInGames" style="float:left !important;       font-size: 17px; margin-left: 6px; ">Video Landing page Url</label>
+                                                <label class="control-label text-right tooltip-float font20 floatNone showInGames" style="float:left !important;      font-size: 17px;  margin-left: 6px; ">Win game Landing page Url</label>
                                             </div>
-                                            <div class="col-lg-2 Float-Left" style="padding-top:3px;">
+                                            <div class="col-lg-2 Float-Left" style="padding-top:3px;" >
                                                 <div class="onoffswitch">
                                                     <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switchVoucherONOFf" data-bind="checked: $root.buyItQuestionStatus, event: { click: $root.addBuyItPrice}">
                                                     <label class="onoffswitch-label" for="switchVoucherONOFf">
@@ -694,11 +697,11 @@ else
                                                     </label>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-2 text-campaign-left Float-Left" style="margin-left:6px;">
+                                            <div class="col-lg-2 text-campaign-left Float-Left" style="margin-left:6px;display:none;">
                                                 <span class="control-label text-right tooltip-float font20 floatNone" style="float:left !important;color:red; " data-bind="text: '(' +  $root.buyItPriceLbl() + ')'"></span>
                                             </div>
                                             <div class="col-lg-3 Float-Left" style="margin-left:40px;">
-                                                <a href="#" id="idpreviewquizscreen" class="btn btn-primary pull-right" data-toggle="modal" data-target=".model_BuyItQ_ph" data-bind="visible: $root.buyItQuestionStatus()">
+                                                <a href="#" id="idpreviewquizscreen" class="btn btn-primary pull-right" data-toggle="modal" data-target=".model_BuyItQ_ph" style="margin-left:6px;display:none;">
                                                     Preview
                                                 </a>
                                             </div>
@@ -725,7 +728,7 @@ else
                                   
                                     <div class="form-group" data-bind="visible: $root.buyItQuestionStatus() == 1 ">
                                         <div class="col-lg-2">
-                                            <label for="txtBuyItUrl" class="control-label text-right tooltip-float floatNone">Ladning page url </label>
+                                            <label for="txtBuyItUrl" class="control-label text-right tooltip-float floatNone">Landing page url </label>
                                         </div>
                                         <div class="col-lg-8">
                                             <textarea class="form-control" id="txtBuyItUrl" rows="1" placeholder="Enter in landing page url " data-bind="value: VideoUrl" style="margin-top:5px;"></textarea>
@@ -779,19 +782,20 @@ else
                                     <span class="help-block text-right"></span>
                                 </div>
                                 <div class="radio col-lg-12" style="text-align: left;font-size:14px !important;">
-                                    <input type="radio" name="optionsRadiosDelvTypes" value="2" id="optionsRadiosApplyFilterOnce" data-bind="checked: DeliveryDays">
-                                    <label for="optionsRadiosApplyFilterOnce" class="font14">
-                                        <span class="defaultThemeTxtClr">BROADCAST ONCE</span> - Show video only once to a region specific audience.
-                                    </label>
-                                    <span class="help-block text-right"></span>
-                                </div>
-                                <div class="radio col-lg-12" style="text-align: left;font-size:14px !important;">
                                     <input type="radio" name="optionsRadiosDelvTypes" value="3" id="optionsRadiosNoFilterDaily" data-bind="checked: DeliveryDays">
                                     <label for="optionsRadiosNoFilterDaily" class="font14">
                                         <span class="defaultThemeTxtClr">BROADCAST DAILY</span> - Repeat video each day to a region specific audience.
                                     </label>
                                     <span class="help-block text-right"></span>
                                 </div>
+                                <div class="radio col-lg-12" style="text-align: left;font-size:14px !important;">
+                                    <input type="radio" name="optionsRadiosDelvTypes" value="2" id="optionsRadiosApplyFilterOnce" data-bind="checked: DeliveryDays">
+                                    <label for="optionsRadiosApplyFilterOnce" class="font14">
+                                        <span class="defaultThemeTxtClr">BROADCAST ONCE</span> - Show video only once to a region specific audience.
+                                    </label>
+                                    <span class="help-block text-right"></span>
+                                </div>
+                                
                                 <div class="radio col-lg-12" style="text-align: left; display:none;">
                                     <input type="radio" name="optionsRadiosDelvTypes" value="4" id="optionsRadiosApplyFilterAudience" data-bind="checked: DeliveryDays">
                                     <label for="optionsRadiosApplyFilterAudience">
@@ -822,21 +826,7 @@ else
                             </div>
                             <div class="clearfix">
                             </div>
-                            <div class="adBottomHeading" data-bind="visible: $root.previewScreenNumber() == 1">
-                                Advertising to mobile users has overtaken all other forms<br />
-                                of advertising.
-
-                            </div>
-                            <div class="adBottomHeading" data-bind="visible: $root.previewScreenNumber() == 2">
-                                Increase conversions by targeting more accurately.
-                            </div>
-                            <div class="adBottomHeading" data-bind="visible: $root.previewScreenNumber() == 4">
-                                Quiz answers can be used in future ad campaigns <br /> to tighten your messaging
-                            </div>
-                            <div class="adBottomHeading" data-bind="visible: $root.previewScreenNumber() == 3">
-                                Your only billed AFTER users have watched your video in full<br /> And correctly answered your survey question.
-
-                            </div>
+                          
                             <div class="clearfix">
                             </div>
                         </div>
@@ -868,7 +858,7 @@ else
                             </div>
                         </div>
                         <div class="col-xs-12" style="text-align: left;margin-bottom: 20px; padding-right:0;margin-top:20px;" data-bind="with: $root.campaignModel">
-                            <div>Bid more to increaseviewing priority.</div>
+                            <div>Bid more to increase viewing priority.</div> <br />
                             <div>50% of PPCV is rewarded to viewer.</div>
                         </div>
                         <div class="col-xs-12" style="text-align: left; padding-right:0;margin-bottom:10px;font-size:0.9em;" data-bind="with: $root.campaignModel">
@@ -899,16 +889,11 @@ else
     font-size: 18px; " name="Budget" class="form-control" id="txtCampaignBudget" data-bind="value: MaxBudget,validationTooltip:MaxBudget, validationOnElement: MaxBudget">
                             <div class="clearfix">
                             </div>
+                            <button class="btn  btn-success gtild-color pull-right" id="btnChart" data-bind="visible: !$root.isNewCampaign()" style="    margin-top: 6px;">Chart</button>
                         </div>
                         <div class="clearfix">
                         </div>
-                        <div class="col-lg-11" data-bind="visible: !$root.isNewCampaign()" style="      background: white;
-    padding: 20px;
-    padding-top: 10px;
-    /* vertical-align: -webkit-baseline-middle; */
-    position: absolute;
-    bottom: 15px;
-    margin-left: -5px;">
+                        <div class="col-lg-11" data-bind="visible: !$root.isNewCampaign()" style=" display:none;background: white;    padding: 20px;    padding-top: 10px;    position: absolute;    bottom: 15px;    margin-left: -5px;">
                             <span style="    font-weight: bold;
     line-height: 3;">Campaign Summary</span><br />
                             <span class=" pull-left" style="color:red;">Matches profiles:</span>
@@ -933,11 +918,11 @@ else
                                 <span>PPCV to date : £1234.00 </span>
                                 <br />
                                 <br />
-                                <button class="btn  btn-success gtild-color pull-right" id="btnChart">Chart</button>
+                               
                                 <div class="clearfix"></div>
                             </div>
                         </div>
-                        <div class="col-lg-11" data-bind="visible: $root.isNewCampaign()" style="        position: absolute;
+                        <div class="col-lg-11" data-bind="" style="display:none;  position: absolute;
     bottom: 15px;
     margin-left: -10px;">
                             <div style="    background: rgb(69,68,142);
@@ -975,180 +960,104 @@ else
                     </div>
                 </div>
             </div>
-            <div class="col-lg-12" style="display:none;">
+            <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="gridSystemModalLabel">Add Criteria</h4>
+                        </div>
+                        <div class="modal-body" data-bind="with:$root.selectedCriteria">
+                            <div class="row">
+                               
+                                <div>
+                                    <div class="col-lg-12 marginBottom12">
+                                        <div class="form-group" data-bind="visible:$root.isNewCriteria">
+                                            <div class="col-lg-4 pull-left">
+                                                <div class="form-group">
+                                                    <div class="row header">
+                                                        <label class="control-label modelHeading">Criteria</label>
+                                                    </div>
+                                                    <div class="radio row" style="margin-top:20px;">
+                                                        <input type="radio" name="optionRadioSelectionCriteria" id="optionIncludeCriteria" value="1" data-bind="checked: IncludeorExclude">
+                                                        <label for="optionIncludeCriteria">
+                                                            Include
+                                                        </label>
+                                                    </div>
+                                                    <div class="radio row" style="margin-top:20px;">
+                                                        <input type="radio" name="optionRadioSelectionCriteria" id="optionExcludeCriteria" value="0" data-bind="checked: IncludeorExclude ">
+                                                        <label for="optionExcludeCriteria">
+                                                            Exclude
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-8 pull-right" data-bind="visible: $root.AditionalCriteriaMode() == '2'">
+                                                <div class="row header">
+                                                    <label class="control-label modelHeading">Profile Questions</label>
+                                                </div>
+                                                <div class="listview parentList set-border padding10 list-type-tiles" data-role="listview" id="lv1">
+                                                    <!-- ko template: { name: 'profileQuestionTiles' , foreach: $root.profileQuestionList} --><!-- /ko -->
+                                                    <div class="clear-both"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-8 pull-left" data-bind="visible: $root.AditionalCriteriaMode() == '3'">
+                                                <div class="row header">
+                                                    <label class="control-label modelHeading">Your Quiz Questions</label>
+                                                </div>
+                                                <div class="listview parentList set-border padding10 list-type-tiles" data-role="listview" id="lv2">
+                                                    <!-- ko template: { name: 'surveyQuestionTiles' , foreach: $root.myQuizQuestions} --><!-- /ko -->
+                                                    <div data-bind="visible: $root.myQuizQuestions().length == 0" style="display:none;">
+                                                        <div class="" style="padding:20px;" >
+                                                            No quiz questions found.
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="clear-both"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" data-bind="visible:$root.isNewCriteria() == false,with:$root.selectedCriteria">
+                                            <div class="col-lg-9 marginBottom12" style="    margin-left: 20px;">
+                                                <div class="form-group">
+                                                    <div class="row header">
+                                                        <label class="control-label modelHeading">Edit Criteria </label>
+                                                    </div>
+                                                    <div class="listview parentList set-border padding10 list-type-tiles" data-role="listview">
+                                                        <div class="list active">
+                                                            <span data-bind="text:questionString"></span>
+                                                            <div class="listview set-border padding10 list-type-tiles chlidList" data-role="listview">
+                                                                <!--ko if:Type() == 6 -->
+                                                                <div class="list childList leftImg" data-bind="click:$root.updateSurveyCriteria.bind($data, 1),css: { 'active': QuizAnswerId() ==1 }"> <label data-bind="text:surveyQuestLeftImageSrc "></label> </div>
+                                                                <div class="list childList rightImg" data-bind="click:$root.updateSurveyCriteria.bind($data, 2),css: { 'active': QuizAnswerId() ==2 }"><label data-bind="text:surveyQuestRightImageSrc "></label></div>
+                                                                <!--/ko-->
+                                                                <!--ko if:Type() == 1 -->
+                                                                <!-- ko template: { name: 'criteriaEditorTemplate' ,  foreach: $root.profileAnswerList} --><!-- /ko -->
+                                                                <!--/ko-->
+                                                                <div class="clear-both"></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="clear-both"></div>
+                                                        <div class="clear-both"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-12" style="display:none;" >
                 <div class="main-box no-header clearfix">
                     <div class="col-lg-12 form-horizontal" data-bind="with: $root.campaignModel" style="padding: 20px;">
                         <div class="col-lg-7">
-                            @*<div class="form-group formcontrol-bg" style="margin-bottom:14px;display:none;">
-                                <div class="col-lg-11" style="padding-right:0px;">
-                                <div class="col-lg-3 text-campaign-left font19">
-                                <span data-bind="text:$root.lblCampaignName">  Campaign Name</span>
-                                </div>
-                                <div class="col-lg-9" style="padding-left:0px;padding-right:0px;">
-                                <input type="text" name="Campaign Name" class="form-control" maxlength="36" id="txtCampaignName" placeholder="Campaign Name (36 characters)" data-bind="value: CampaignName,validationTooltip: CampaignName, validationOnElement: CampaignName, attr:{placeholder : $root.campaignNamePlaceHolderValue}">
-
-                                </div>
-                                </div>
-                                </div>*@
-                            @*<div class="form-group formcontrol-bg form-horizontal">
-                                <div class="col-lg-11">
-                                ad title area old
-
-                                </div>
-                                <div class="col-lg-2" style="display:none;">
-                                <img class="display-Mobile hidden-sm hidden-xs" src="/Content/Images/5_Main_4.png" alt="" style="    width: 120px;            margin-top: 23px;" />
-                                </div>
-                                <div class="clearfix">
-                                &nbsp;
-
-                                </div>
-                                </div>*@
-                            @*<div class="form-group" style="display:none;">
-                                <div class="col-lg-3 text-right">
-
-                                <label for="ddpLanguage" class="control-label text-right tooltip-float">Select Language</label>
-                                </div>
-                                <div class="col-lg-6">
-                                <select id="ddpLanguage" class="form-control" data-bind="options: $root.langs, optionsText: 'LanguageName', optionsValue: 'LanguageId', value: LanguageId" disabled="disabled"></select>
-                                </div>
-                                </div>*@
+                          
                             <div class="form-group" style="margin-bottom:11px;">
-                                @*<span class="text-campaign-left font19" data-bind="visible:!$root.isDisplayCouponsAds()"> Advert Content Type</span>
-                                    <div class="clearfix">
-                                    &nbsp;
-                                    </div>
-                                    <div class="col-lg-3" data-bind="visible:!$root.isDisplayCouponsAds()">
-                                    &nbsp;
-                                    </div>
-                                    <div class="col-lg-9" data-bind="visible:!$root.isDisplayCouponsAds()">
-                                    <!-- ko if: $root.isNewCampaign -->
-                                    <!-- ko if: Type() == 3 ||  Type() == 2 -->
-                                    <div class="row">
-                                    <div class="form-group" style="margin-top:10px;">
-                                    <div class="col-lg-5 text-campaign-left" style="float:left;">
-                                    <div class="bs-example-tooltips tooltip-float-width margin-Top-0" style="margin-top: 10px;">
-                                    <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-original-title="" title="">
-                                    <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                    </a>
-                                    </div>
-                                    <label class="control-label text-right tooltip-float floatNone font16">Banner Image (400 x 800)</label>
-                                    </div>
-                                    <div class="col-lg-7" style="float:left;">
-                                    <div class="fileUpload btn btn-primary">
-                                    <span>Upload </span>
-                                    <input type="file" class="upload" id="campaignType_image_file" data-bind="files: { onLoaded: $root.campaignTypeImageCallback, fileFilter: 'image.*'}" />
-                                    </div>
-
-                                    </div>
-
-                                    </div>
-                                    </div>
-                                    <!-- /ko -->
-                                    <!-- /ko -->
-                                    <div class="row">
-                                    <!-- ko if: !$root.isNewCampaign() -->
-                                    <div class="radio col-lg-3">
-
-
-                                    <input type="radio" name="optionsRadiosStoreType" id="optionsRadiosVideos" value="1" data-bind="checked: Type, event:{ change: $root.OnChangeCampaignType }">
-                                    <label for="optionsRadiosVideos">
-                                    Video
-                                    </label>
-
-                                    </div>
-                                    <!-- /ko -->
-                                    <!-- ko if: $root.isNewCampaign() -->
-                                    <div class="col-lg-3 text-right control-label" data-bind="visible: Type() == 1">
-                                    <span>  Enter Video Link</span>
-                                    </div>
-                                    <!-- /ko -->
-                                    <div class="col-lg-9" data-bind="visible: Type() == 1">
-
-                                    <textarea class="form-control" id="txtLinkOfCampaign" rows="1" placeholder="" data-bind="value: LandingPageVideoLink,validationTooltip:LandingPageVideoLink, validationOnElement: LandingPageVideoLink, attr:{placeholder : $root.campaignTypePlaceHolderValue}" style="margin-bottom:10px;"></textarea>
-                                    <textarea class="form-control" id="txtVideoLink2" rows="1" placeholder="Enter Video Link 2" data-bind="value: VideoLink2" style="margin-bottom:10px;"></textarea>
-
-                                    </div>
-
-
-
-                                    </div>
-
-                                    <div class="row" data-bind="visible:   Type() ==3">
-
-                                    <div class="radio col-lg-3">
-                                    <!-- ko if: !$root.isNewCampaign() -->
-                                    <input type="radio" name="optionsRadiosStoreType" id="optionsRadiosLink" value="2" data-bind="checked: Type, event:{ change: $root.OnChangeCampaignType }">
-                                    <label for="optionsRadiosLink" style="display:none;">
-                                    URL
-                                    </label>
-                                    <span class="help-block text-right"></span>
-                                    <!-- /ko -->
-                                    </div>
-                                    <div class="col-lg-9" data-bind="visible: Type() == 2" style="    margin-bottom: 10px;">
-
-                                    <textarea class="form-control" id="txtLinkOfCampaign" rows="1" placeholder="" data-bind="value: LandingPageVideoLink,validationTooltip:LandingPageVideoLink, validationOnElement: LandingPageVideoLink, attr:{placeholder : $root.campaignTypePlaceHolderValue}"></textarea>
-
-                                    </div>
-
-
-
-                                    </div>
-
-                                    <div class="row">
-
-                                    <div class="radio col-lg-4">
-                                    <!-- ko if: !$root.isNewCampaign() -->
-                                    <input type="radio" name="optionsRadiosStoreType" id="optionsRadiosUploadImage" value="3" data-bind="checked: Type, event:{ change: $root.OnChangeCampaignType }">
-                                    <label for="optionsRadiosUploadImage">
-                                    Flyer / Leaflet
-                                    </label>
-                                    <span class="help-block text-right"></span>
-                                    <!-- /ko -->
-                                    </div>
-
-                                    <div class="col-lg-8" style="margin-left:-10px;" data-bind="visible: Type() == 3 ||  Type() == 2">
-
-                                    <div>
-
-                                    <div style="float:left;">
-
-                                    <img style="width:auto;height:250px;" data-bind="visible: CampaignTypeImagePath() == ''" src="/Content/Images/Company_Default.png" />
-                                    <img style="width:auto;    max-height: 250px;    max-width: 250px;" data-bind="visible: CampaignTypeImagePath() != '' ,attr: { src: CampaignTypeImagePath }" />
-
-                                    </div>
-                                    <!-- ko if: !$root.isNewCampaign() -->
-                                    <div class="fileUpload btn btn-primary" style="    margin-top: 18px;margin-left: 20px;">
-                                    <span>Upload </span>
-                                    <input type="file" class="upload" id="campaignType_image_file" data-bind="files: { onLoaded: $root.campaignTypeImageCallback, fileFilter: 'image.*'}" />
-                                    </div>
-                                    <!-- /ko -->
-                                    </div>
-
-
-                                    </div>
-
-
-                                    </div>
-
-                                    <div class="row">
-
-                                    <div class="radio col-lg-5">
-                                    <!-- ko if: !$root.isNewCampaign() -->
-                                    <input type="radio" name="optionsRadiosStoreType" id="optionsRadiosGame" value="4" data-bind="checked: Type, event:{ change: $root.OnChangeCampaignType }">
-                                    <label for="optionsRadiosGame">
-                                    Sponsor Games
-                                    </label>
-                                    <span class="help-block text-right"></span>
-                                    <!-- /ko -->
-                                    </div>
-
-                                    </div>
-
-
-                                    </div>
-                                    <div class="clearfix">
-                                    &nbsp;
-                                    </div>*@
+                              
                                 <div data-bind="visible:$root.isDisplayCouponsAds()">
                                     <div class="col-lg-4">
                                         <div style="margin-top:5px;    text-align: center;cursor:pointer;">
@@ -1353,305 +1262,13 @@ else
                                         </div>
                                     </div>
                                 </div>
-                                @*<div class="col-lg-3" style="display:none;">
-                                    <img class="hidden-sm hidden-xs" src="/Content/Images/5_Main_4.png" alt="" style="    width: 120px;    " />
-                                    </div>*@
+                           
                             </div>
-                            <div class="clearfix">
-                                &nbsp;
-                            </div>
-                            @*<div class="form-group">
-
-                                <div class="col-lg-3 text-right">
-                                <div class="bs-example-tooltips tooltip-float-width">
-                                <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-original-title="" title="">
-                                <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                </a>
-                                </div>
-                                <label for="txtBudget" class="control-label text-right tooltip-float">Max Budget</label>
-                                </div>
-                                <div class="col-lg-6">
-                                <div class="input-group">
-                                <span class="input-group-addon">$</span>
-                                <input type="number" name="Budget" class="form-control" id="txtBudget" data-bind="value: MaxBudget,validationTooltip:MaxBudget, validationOnElement: MaxBudget">
-                                <span class="input-group-addon">.00</span>
-                                </div>
-                                </div>
-                                </div>*@
-                            <div class="clearfix col-lg-12 asdasd">
-                                <header class="main-box-header clearfix" style="padding-right:0px;">
-                                    <div class="filter-block pull-right">
-                                        @*<a href="#" id="addTemplatePageBtn" class="btn btn-primary pull-right" style="display:none;" data-toggle="modal" data-target=".bs-example-modal-lg" data-bind="click: $root.addNewSurveyCriteria">
-                                            Add Survey Criteria
-                                            </a>*@
-                                        <a href="#" id="addTemplatePageBtn" class="btn btn-primary pull-right" data-toggle="modal" data-target=".bs-example-modal-lg" data-bind="click: $root.addNewProfileCriteria">
-                                            Advance filtering criteria
-                                        </a>
-                                        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-                                            <div class="modal-dialog modal-lg">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                        <h4 class="modal-title" id="gridSystemModalLabel">Add Criteria</h4>
-                                                    </div>
-                                                    <div class="modal-body" data-bind="with:$root.selectedCriteria">
-                                                        <div class="row">
-                                                            <div class="col-lg-9 marginBottom12">
-                                                                <div class="form-group">
-                                                                    <div class="col-lg-5 text-right">
-                                                                        <label class="control-label text-right tooltip-float"> Criteria</label>
-                                                                    </div>
-                                                                    <div class="col-lg-5">
-                                                                        <div class="col-lg-12" style="margin-left:-10px;">
-                                                                            <div class="radio col-lg-6">
-                                                                                <input type="radio" name="optionRadioSelectionCriteria" id="optionIncludeCriteria" value="1" data-bind="checked: IncludeorExclude">
-                                                                                <label for="optionIncludeCriteria">
-                                                                                    Include
-                                                                                </label>
-                                                                            </div>
-                                                                            <div class="radio col-lg-6">
-                                                                                <input type="radio" name="optionRadioSelectionCriteria" id="optionExcludeCriteria" value="0" data-bind="checked: IncludeorExclude ">
-                                                                                <label for="optionExcludeCriteria">
-                                                                                    Exclude
-                                                                                </label>
-                                                                                <span class="help-block text-right"></span>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div>
-                                                                <div class="col-lg-12 marginBottom12">
-                                                                    <div class="form-group" data-bind="visible:$root.isNewCriteria">
-                                                                        <div class="col-lg-12 pull-left" data-bind="visible: $root.AditionalCriteriaMode() == '2'">
-                                                                            <div class="row header">
-                                                                                <label class="control-label modelHeading">Profile Questions</label>
-                                                                            </div>
-                                                                            <div class="listview parentList set-border padding10 list-type-tiles" data-role="listview" id="lv1">
-                                                                                <!-- ko template: { name: 'profileQuestionTiles' , foreach: $root.profileQuestionList} --><!-- /ko -->
-                                                                                <div class="clear-both"></div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-lg-12 pull-left" data-bind="visible: $root.AditionalCriteriaMode() == '3'">
-                                                                            <div class="row header">
-                                                                                <label class="control-label modelHeading">Your Quiz Questions</label>
-                                                                            </div>
-                                                                            <div class="listview parentList set-border padding10 list-type-tiles" data-role="listview" id="lv2">
-                                                                                <!-- ko template: { name: 'surveyQuestionTiles' , foreach: $root.myQuizQuestions} --><!-- /ko -->
-                                                                                <div class="clear-both"></div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group" data-bind="visible:$root.isNewCriteria() == false,with:$root.selectedCriteria">
-                                                                        <div class="col-lg-9 marginBottom12" style="    margin-left: 20px;">
-                                                                            <div class="form-group">
-                                                                                <div class="row header">
-                                                                                    <label class="control-label modelHeading">Edit Criteria </label>
-                                                                                </div>
-                                                                                <div class="listview parentList set-border padding10 list-type-tiles" data-role="listview">
-                                                                                    <div class="list active">
-                                                                                        <span data-bind="text:questionString"></span>
-                                                                                        <div class="listview set-border padding10 list-type-tiles chlidList" data-role="listview">
-                                                                                            <!--ko if:Type() == 6 -->
-                                                                                            <div class="list childList leftImg" data-bind="click:$root.updateSurveyCriteria.bind($data, 1),css: { 'active': QuizAnswerId() ==1 }"> <label data-bind="text:surveyQuestLeftImageSrc "></label> </div>
-                                                                                            <div class="list childList rightImg" data-bind="click:$root.updateSurveyCriteria.bind($data, 2),css: { 'active': QuizAnswerId() ==2 }"><label data-bind="text:surveyQuestRightImageSrc "></label></div>
-                                                                                            <!--/ko-->
-                                                                                            <!--ko if:Type() == 1 -->
-                                                                                            <!-- ko template: { name: 'criteriaEditorTemplate' ,  foreach: $root.profileAnswerList} --><!-- /ko -->
-                                                                                            <!--/ko-->
-                                                                                            <div class="clear-both"></div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="clear-both"></div>
-                                                                                    <div class="clear-both"></div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </header>
-                            </div>
+                        
                             @*<div class="clearfix" data-bind="visible:!$root.isDisplayCouponsAds()">
                                 &nbsp;
                                 </div>*@
                             <div>
-                                @*<span class="text-campaign-left font19" data-bind="text:$root.lblCampaignSchedule,visible:!$root.isDisplayCouponsAds()">Schedule</span>
-                                    <div class="clearfix" data-bind="visible:!$root.isDisplayCouponsAds()">
-                                    &nbsp;
-                                    </div>
-                                    <div class="col-lg-3" data-bind="visible:!$root.isDisplayCouponsAds()">
-                                    &nbsp;
-                                    </div>*@
-                                <div class="col-lg-9" data-bind="visible:!$root.isDisplayCouponsAds()">
-                                    <div class="row">
-                                        @*<div class="col-lg-6">
-                                            <div class="row" style="margin-bottom:10px;">
-                                            <div class="col-lg-4">
-                                            <label for="validFromDate" class="control-label text-left">Start Date</label>
-                                            </div>
-                                            <div class="col-sm-8">
-
-                                            <input type="text" class="form-control" id="validFromDate" data-bind="datetimepicker:StartDateTime">
-
-
-                                            </div>
-                                            </div>
-                                            <div class="row">
-                                            <div class="col-lg-4">
-                                            <label for="validUptoDate" class="control-label text-left">End Date</label>
-                                            </div>
-                                            <div class="col-sm-8">
-                                            <input type="text" class="form-control" id="validUptoDate" data-bind="datetimepicker:EndDateTime,validationTooltip:EndDateTime, validationOnElement: EndDateTime">
-                                            </div>
-                                            </div>
-
-                                            </div>
-                                            <div class="col-lg-2">
-                                            &nbsp;
-                                            </div>*@
-                                        <div class="col-lg-4">
-                                            <div style="width:100%">
-                                                @*<div class="aud_cnt_head hidden-sm hidden-xs" style=" display:none;">
-                                                    <h4 class="ad_h4" data-bind="visible: Type() == 1">Video</h4>
-                                                    <h4 class="ad_h4" data-bind="visible: Type() == 2">URL</h4>
-                                                    <h4 class="ad_h4" data-bind="visible: Type() == 3">Flyer / Leaflet</h4>
-                                                    <h4 class="ad_h4" data-bind="visible: Type() == 4">Sponsored game</h4>
-                                                    </div>*@
-                                                <div class="aud_cnt hidden-sm hidden-xs">
-                                                    <div style="padding: 10px; border: 5px;">
-                                                        <div class="clearfix _1gab VAGUE" style="display:none;">
-                                                            <div class="_1g9- lfloat">
-                                                                <div class="_1g9_">
-                                                                    <i class="_1ga0 broad_aud img sp_NQc91B1T0mb sx_f05cb6 meterPin"></i>
-                                                                    <i class="_1ga1 img sp_NQc91B1T0mb3 sx_0eeab0"></i>
-                                                                    <div class="_1ga2 clearfix">
-                                                                        <div class="_ohe lfloat">
-                                                                            <span class="_1ga3">Specific</span>
-                                                                        </div>
-                                                                        <div class="_ohf rfloat">
-                                                                            <span class="_1ga3">Broad</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>yo
-                                                            </div>
-                                                            <div class="rfloat fsm _1ga4">
-                                                                <p data-bind="visible: $root.audienceReachMode()  == 1">Your audience is too specific for your ads to be shown. Try making it broader.</p>
-                                                                <p data-bind="visible: $root.audienceReachMode()  == 3">Your audience selection is fairly broad.</p>
-                                                                <p data-bind="visible: $root.audienceReachMode()  == 2">Your audience is defined.</p>
-                                                            </div>
-                                                            <div class="clearfix">
-                                                                &nbsp;
-                                                            </div>
-                                                        </div>
-                                                        <div style="display:none;">
-                                                            @*<span class="ad_h4_noborder">Audience Details:</span>*@
-                                                            <ul style="display:none;">
-                                                                <li class="li-audul" data-bind="visible: $root.campaignModel().AdCampaignTargetLocations().length > 0">
-                                                                    <div class="fsm_bold">Locations:</div>
-                                                                    <ul class="pad-11">
-                                                                        <!-- ko template: { name: 'targetLocationAudienceTemplate' , foreach: AdCampaignTargetLocations } -->
-                                                                        <!-- /ko -->
-                                                                    </ul>
-                                                                </li>
-                                                                <li class="li-audul" data-bind="visible: $root.visibleTargetAudience(3)  == 1">
-                                                                    <div class="fsm_bold">Languages:</div>
-                                                                    <ul class="pad-11">
-                                                                        <!-- ko template: { name: 'targetLanguageAudienceTemplate' , foreach: AdCampaignTargetCriterias } -->
-                                                                        <!-- /ko -->
-                                                                    </ul>
-                                                                </li>
-                                                                <li class="li-audul" data-bind="visible: $root.visibleTargetAudience(5)  == 1">
-                                                                    <div class="fsm_bold">Education:</div>
-                                                                    <ul class="pad-11">
-                                                                        <!-- ko template: { name: 'targetEducationAudienceTemplate' , foreach: AdCampaignTargetCriterias } -->
-                                                                        <!-- /ko -->
-                                                                    </ul>
-                                                                </li>
-                                                                <li class="li-audul" data-bind="visible: $root.visibleTargetAudience(4)  == 1">
-                                                                    <div class="fsm_bold">Profession:</div>
-                                                                    <ul class="pad-11">
-                                                                        <!-- ko template: { name: 'targetIndustryAudienceTemplate' , foreach: AdCampaignTargetCriterias } -->
-                                                                        <!-- /ko -->
-                                                                    </ul>
-                                                                </li>
-                                                                <li class="li-audul" data-bind="visible: $root.visibleTargetAudience(1) == 1 || $root.visibleTargetAudience(2)  == 1">
-                                                                    <div class="fsm_bold">ADDITIONAL TARGETING CRITERIA'S:</div>
-                                                                    <ul class="pad-11">
-                                                                        <!-- ko template: { name: 'targetCriteriasAudienceTemplate', foreach: AdCampaignTargetCriterias } -->
-                                                                        <!-- /ko -->
-                                                                    </ul>
-                                                                </li>
-                                                                <li class="li-audul">
-                                                                    <div class="fsm_bold">Age:</div>
-                                                                    <ul class="pad-11">
-                                                                        <li>
-                                                                            <span data-bind="text: $root.campaignModel().AgeRangeStart() +' - '+ $root.campaignModel().AgeRangeEnd()"></span>
-                                                                        </li>
-                                                                    </ul>
-                                                                </li>
-                                                                <li class="li-audul">
-                                                                    <div class="fsm_bold">Gender:</div>
-                                                                    <ul class="pad-11">
-                                                                        <li>
-                                                                            <!--ko if:$root.campaignModel().Gender() == 1 -->
-                                                                            <span class="aud_licontent">All</span>
-                                                                            <!--/ko-->
-                                                                            <!--ko if:$root.campaignModel().Gender() == 2 -->
-                                                                            <span class="aud_licontent">Men</span>
-                                                                            <!--/ko-->
-                                                                            <!--ko if:$root.campaignModel().Gender() == 3 -->
-                                                                            <span class="aud_licontent">Women</span>
-                                                                            <!--/ko-->
-                                                                        </li>
-                                                                    </ul>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                        <div>
-                                                            @*<div class="" data-bind="visible:!$root.isDisplayCouponsAds()">
-                                                                <span>PPC  </span>
-                                                                </div>*@
-                                                            <div class="clearfix"> </div>
-                                                        </div>
-                                                        <div style=" display:none;   font-weight: bold;    padding-top: 0px;    font-size: 16px;">
-                                                            <div class="yourBudgtHeadingCnt">
-                                                                <div style="float:left;">
-                                                                </div>
-                                                                <div style="float:left;">
-                                                                    <div id="spinnerAudience" style="display: none;">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            @*<div class="" data-bind="visible:!$root.isDisplayCouponsAds()">
-                                                                <span data-bind="text: '£' + $root.pricePerclick().toFixed(2)" style="font-size: 18px;"></span>
-                                                                <span data-bind="text: '£1'" style="font-size: 18px;"></span>
-                                                                </div>*@
-                                                            <div class="clearfix"> </div>
-                                                        </div>
-                                                        <div style="display:none;">
-                                                        </div>
-                                                    </div>
-                                                    <div style="background-color:white;color:black;padding: 10px; border: 5px;display:none;">
-                                                        <span>Possible Campaign spend  :  </span>
-                                                        <span data-bind="text:  '£ ' +(($root.pricePerclick() * $root.reachedAudience()).toFixed(2)) +'' " style="font-size:16px; font-weight:bold;">73 %</span><br />
-                                                        <span>Plus </span>
-                                                        <span style="font-size:16px; font-weight:bold;">£10.00 </span><span> Submission fee </span><br />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                @*<div class="clearfix" data-bind="visible:!$root.isDisplayCouponsAds()">
-                                    &nbsp;
-                                    </div>*@
                             </div>
                             @*<div class="form-group formcontrol-bg" data-bind="visible:!$root.isDisplayCouponsAds()">
                                 <div class="col-lg-11">
@@ -2285,12 +1902,12 @@ else
     <tr>
         <!--ko if:IncludeorExclude() == '0' -->
         <td class="col-lg-2">
-            <p style="margin-top: 5px;margin-left: 12px;">
-                <span data-bind="text: '(Excluded) ' + questionString() + ' = ' + answerString()"></span><span style="color:red;" data-bind="text:' (' + criteriaPrice() + 'p)'"></span>
+            <p style="margin-top: 5px;margin-left: 12px; font-size:13px;">
+                <span data-bind="text: '(Exclude) ' + questionString() + ' = ' + answerString()"></span><span style="color:red; display:none;" data-bind="text:' (' + criteriaPrice() + 'p)'"></span>
             </p>
             @*<!-- ko if:   Type()  == "6" -->
                 <p style="margin-top: 5px;margin-left: 12px;">
-                <span data-bind="text: '(Excluded) ' +  questionString() + ' = ' "></span>
+                <span data-bind="text: '(Exclude) ' +  questionString() + ' = ' "></span>
                 <img data-bind="attr:{src: answerString()}" width="80" />
                 </p>
                 <!-- /ko -->*@
@@ -2298,12 +1915,12 @@ else
         <!--/ko-->
         <!--ko if:IncludeorExclude() == '1'-->
         <td class="col-lg-2">
-            <p style="margin-top: 5px;margin-left: 12px;">
-                <span data-bind="text: '(Included) ' + questionString() + ' = ' + answerString() "></span><span style="color:red;" data-bind="text:' (' + criteriaPrice() + 'p)'"></span>
+            <p style="margin-top: 5px;margin-left: 12px; font-size:13px;">
+                <span data-bind="text: '(Include) ' + questionString() + ' = ' + answerString() "></span><span style="color:red;display:none;" data-bind="text:' (' + criteriaPrice() + 'p)'"></span>
             </p>
             @*<!-- ko if:   Type()  == "6" -->
                 <p style="margin-top: 5px;margin-left: 12px;">
-                <span data-bind="text: '(Included) ' + questionString() + ' = ' "></span>
+                <span data-bind="text: '(Include) ' + questionString() + ' = ' "></span>
                 <img data-bind="attr:{src: answerString()}" width="80" />
                 </p>
                 <!-- /ko -->*@
@@ -2312,16 +1929,14 @@ else
         <td class="col-lg-1" style=" padding: 0px !important; text-align:right;">
             <a class="table-link">
                 <span class="fa-stack">
-                    <i class="fa fa-square fa-stack-2x"></i>
-                    <i class="fa fa-pencil fa-stack-1x fa-inverse" data-bind="click:$root.onEditCriteria" data-toggle="modal" data-target=".bs-example-modal-lg"></i>
+                    <i class="fa fa-pencil-square-o" data-bind="click:$root.onEditCriteria" data-toggle="modal" data-target=".bs-example-modal-lg"></i>
                 </span>
             </a>
         </td>
         <td class="col-lg-1" style=" padding: 0px !important;">
             <a class="table-link danger">
                 <span class="fa-stack">
-                    <i class="fa fa-square fa-stack-2x"></i>
-                    <i class="fa fa-trash-o fa-stack-1x fa-inverse" data-bind="click:$root.onDeleteCriteria"></i>
+                    <i class="fa fa-trash-o" data-bind="click:$root.onDeleteCriteria" ></i>
                 </span>
             </a>
         </td>
@@ -2338,10 +1953,10 @@ else
     <!--/ko-->
     <!--ko if:Radius() != 0 && Radius() != null && Radius() != undefined-->
     <!--ko if:IncludeorExclude() == '1'-->
-    <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'Included (' + Radius() +')' "></span>
+    <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'Include (' + Radius() +')' "></span>
     <!--/ko-->
     <!--ko if:IncludeorExclude() == '0' -->
-    <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'Excluded (' + Radius() +')' "></span>
+    <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'Exclude (' + Radius() +')' "></span>
     <!--/ko-->
     <!--/ko-->
     <a id="" data-bind="click:$root.onRemoveLocation" title=" delete" class="lang_delSurvey"> <i class="fa fa-times "></i></a>
@@ -2353,10 +1968,10 @@ else
         <!--ko if:Type() == 3 -->
         <span class="form-control lang_nr_box areaCity" data-bind="text:Language() " style=" "></span>
         <!--ko if:IncludeorExclude() == '1'-->
-        <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Included)' "></span>
+        <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Include)' "></span>
         <!--/ko-->
         <!--ko if:IncludeorExclude() == '0' -->
-        <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Excluded)' "></span>
+        <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Exclude)' "></span>
         <!--/ko-->
         <a id="" data-bind="click:$root.onRemoveLanguage" title=" delete" class="lang_delSurvey"> <i class="fa fa-times "></i></a>
         <!--/ko-->
@@ -2368,10 +1983,10 @@ else
         <!--ko if:Type() == 4 -->
         <span class="form-control lang_nr_box areaCity" data-bind="text:Industry() " style=" "></span>
         <!--ko if:IncludeorExclude() == '1'-->
-        <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Included)' "></span>
+        <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Include)' "></span>
         <!--/ko-->
         <!--ko if:IncludeorExclude() == '0' -->
-        <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Excluded)' "></span>
+        <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Exclude)' "></span>
         <!--/ko-->
         <a id="" data-bind="click:$root.onRemoveIndustry" title=" delete" class="lang_delSurvey"> <i class="fa fa-times "></i></a>
         <!--/ko-->
@@ -2383,12 +1998,12 @@ else
     <!--ko if:IncludeorExclude() == '0' -->
     <li>
         <!-- ko if:   Type() == "1" -->
-        <p class="aud_licontent" data-bind="text: '(Excluded) ' + questionString() + ' = ' + answerString()">
+        <p class="aud_licontent" data-bind="text: '(Exclude) ' + questionString() + ' = ' + answerString()">
         </p>
         <!-- /ko -->
         <!-- ko if:   Type()  == "2" -->
         <p class="aud_licontent">
-            <span data-bind="text: '(Excluded) ' +  questionString() + ' = ' "></span>
+            <span data-bind="text: '(Exclude) ' +  questionString() + ' = ' "></span>
             <img data-bind="attr:{src: answerString()}" width="80" />
         </p>
         <!-- /ko -->
@@ -2397,12 +2012,12 @@ else
     <!--ko if:IncludeorExclude() == '1'-->
     <li>
         <!-- ko if:   Type() == "1" -->
-        <p class="aud_licontent" data-bind="text: '(Included) ' + questionString() + ' = ' + answerString()">
+        <p class="aud_licontent" data-bind="text: '(Include) ' + questionString() + ' = ' + answerString()">
         </p>
         <!-- /ko -->
         <!-- ko if:   Type()  == "2" -->
         <p class="aud_licontent">
-            <span data-bind="text: '(Included) ' + questionString() + ' = ' "></span>
+            <span data-bind="text: '(Include) ' + questionString() + ' = ' "></span>
             <img data-bind="attr:{src: answerString()}" width="80" />
         </p>
         <!-- /ko -->
@@ -2414,10 +2029,10 @@ else
     <!--ko if:Type() == 4 -->
     <li>
         <!--ko if:IncludeorExclude() == '1'-->
-        <span class="aud_licontent" data-bind="text:'(Included)' + Industry() "></span>
+        <span class="aud_licontent" data-bind="text:'(Include)' + Industry() "></span>
         <!--/ko-->
         <!--ko if:IncludeorExclude() == '0' -->
-        <span class="aud_licontent" data-bind="text:'(Excluded)' + Industry() "></span>
+        <span class="aud_licontent" data-bind="text:'(Exclude)' + Industry() "></span>
         <!--/ko-->
     </li>
     <!--/ko-->
@@ -2426,10 +2041,10 @@ else
     <!--ko if:Type() == 5 -->
     <li>
         <!--ko if:IncludeorExclude() == '1'-->
-        <span class="aud_licontent" data-bind="text:'(Included)' + Education() "></span>
+        <span class="aud_licontent" data-bind="text:'(Include)' + Education() "></span>
         <!--/ko-->
         <!--ko if:IncludeorExclude() == '0' -->
-        <span class="aud_licontent" data-bind="text:'(Excluded)' + Education() "></span>
+        <span class="aud_licontent" data-bind="text:'(Exclude)' + Education() "></span>
         <!--/ko-->
     </li>
     <!--/ko-->
@@ -2438,10 +2053,10 @@ else
     <!--ko if:Type() == 3 -->
     <li>
         <!--ko if:IncludeorExclude() == '1'-->
-        <span class="aud_licontent" data-bind="text:'(Included)' + Language()"></span>
+        <span class="aud_licontent" data-bind="text:'(Include)' + Language()"></span>
         <!--/ko-->
         <!--ko if:IncludeorExclude() == '0' -->
-        <span class="aud_licontent" data-bind="text:'(Excluded)' + Language() "></span>
+        <span class="aud_licontent" data-bind="text:'(Exclude)' + Language() "></span>
         <!--/ko-->
     </li>
     <!--/ko-->
@@ -2451,36 +2066,36 @@ else
         <!--ko if:CityID() == 0 || CityID() == null-->
         <!--ko if:Radius() != 0 && Radius() != null && Radius() != undefined-->
         <!--ko if:IncludeorExclude() == '1'-->
-        <span class="aud_licontent" data-bind="text:'Included (' + Radius() +') ' + Country()"></span>
+        <span class="aud_licontent" data-bind="text:'Include (' + Radius() +') ' + Country()"></span>
         <!--/ko-->
         <!--ko if:IncludeorExclude() == '0' -->
-        <span class="aud_licontent" data-bind="text:'Excluded (' + Radius() +') ' + Country()"></span>
+        <span class="aud_licontent" data-bind="text:'Exclude (' + Radius() +') ' + Country()"></span>
         <!--/ko-->
         <!--/ko-->
         <!--ko if:Radius() == null || Radius() == undefined-->
         <!--ko if:IncludeorExclude() == '1'-->
-        <span class="aud_licontent" data-bind="text:'(Included) ' + Country()"></span>
+        <span class="aud_licontent" data-bind="text:'(Include) ' + Country()"></span>
         <!--/ko-->
         <!--ko if:IncludeorExclude() == '0' -->
-        <span class="aud_licontent" data-bind="text:'(Excluded) ' + Country()"></span>
+        <span class="aud_licontent" data-bind="text:'(Exclude) ' + Country()"></span>
         <!--/ko-->
         <!--/ko-->
         <!--/ko-->
         <!--ko if:CityID() != 0 && CityID() != null-->
         <!--ko if:Radius() != 0 && Radius() != null && Radius() != undefined-->
         <!--ko if:IncludeorExclude() == '1'-->
-        <span class="aud_licontent" data-bind="text:'Included (' + Radius() +') ' + City() "></span>
+        <span class="aud_licontent" data-bind="text:'Include (' + Radius() +') ' + City() "></span>
         <!--/ko-->
         <!--ko if:IncludeorExclude() == '0' -->
-        <span class="aud_licontent" data-bind="text:'Excluded (' + Radius() +') ' + City()"></span>
+        <span class="aud_licontent" data-bind="text:'Exclude (' + Radius() +') ' + City()"></span>
         <!--/ko-->
         <!--/ko-->
         <!--ko if:Radius() == null || Radius() == undefined-->
         <!--ko if:IncludeorExclude() == '1'-->
-        <span class="aud_licontent" data-bind="text:'(Included) ' + City() "></span>
+        <span class="aud_licontent" data-bind="text:'(Include) ' + City() "></span>
         <!--/ko-->
         <!--ko if:IncludeorExclude() == '0' -->
-        <span class="aud_licontent" data-bind="text:'(Excluded) ' + City()"></span>
+        <span class="aud_licontent" data-bind="text:'(Exclude) ' + City()"></span>
         <!--/ko-->
         <!--/ko-->
         <!--/ko-->
@@ -2491,10 +2106,10 @@ else
         <!--ko if:Type() == 5 -->
         <span class="form-control lang_nr_box areaCity" data-bind="text:Education() " style=" "></span>
         <!--ko if:IncludeorExclude() == '1'-->
-        <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Included)' "></span>
+        <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Include)' "></span>
         <!--/ko-->
         <!--ko if:IncludeorExclude() == '0' -->
-        <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Excluded)' "></span>
+        <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Exclude)' "></span>
         <!--/ko-->
         <a id="" data-bind="click:$root.onRemoveEducation" title=" delete" class="lang_delSurvey"> <i class="fa fa-times "></i></a>
         <!--/ko-->
@@ -2536,10 +2151,10 @@ else
             <div class="clearfix">
                 <div class="_4bl7">
                     <!--ko if:IncludeorExclude() == '1'-->
-                    <i class="_40n0 img sp_NQc91B1T0mb sx_d7a1cb" title="Included"></i>
+                    <i class="_40n0 img sp_NQc91B1T0mb sx_d7a1cb" title="Include"></i>
                     <!--/ko-->
                     <!--ko if:IncludeorExclude() == '0' -->
-                    <i class="_40n0 img sp_NQc91B1T0mb sx_999ca6" title="Excluded"></i>
+                    <i class="_40n0 img sp_NQc91B1T0mb sx_999ca6" title="Exclude"></i>
                     <!--/ko-->
                 </div>
                 <div class="_4bl8 _4bl7">
@@ -2566,10 +2181,10 @@ else
             <div class="clearfix">
                 <div class="_4bl7">
                     <!--ko if:IncludeorExclude() == '1'-->
-                    <i class="_40n0 img sp_NQc91B1T0mb sx_d7a1cb" title="Included"></i>
+                    <i class="_40n0 img sp_NQc91B1T0mb sx_d7a1cb" title="Include"></i>
                     <!--/ko-->
                     <!--ko if:IncludeorExclude() == '0' -->
-                    <i class="_40n0 img sp_NQc91B1T0mb sx_999ca6" title="Excluded"></i>
+                    <i class="_40n0 img sp_NQc91B1T0mb sx_999ca6" title="Exclude"></i>
                     <!--/ko-->
                 </div>
                 <div class="_4bl8 _4bl7">
@@ -2692,6 +2307,7 @@ else
         var bws = getBrowserHeight();
         var top = parseInt((bws.height - 637) / 2);
         $("#phAdsDialog").css("top", top + "px");
+      
     });
     function getBrowserHeight() {
         var intH = 0;
@@ -2871,7 +2487,16 @@ else
             }
         });
     }
-
+    $(document).ready(function () {
+        var modeLoc = GetURLParameter("mode");
+        if (modeLoc == 1) {
+           
+        } else {
+            $(".hideInGames").css("display", "none");
+            $(".showInGames").css("display", "block");
+          
+        }
+    });
 </script>
 
 <!-- Modal -->

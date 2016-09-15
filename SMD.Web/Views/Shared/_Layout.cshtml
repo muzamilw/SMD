@@ -83,7 +83,7 @@
                 </p>*@
                             <p style="font-size:16px;color:white;">@CompanyName</p>
                         </div>
-                        <div class="pull-left" style="color:white;margin-left: 10px;margin-top: 12px;margin-right: 9px;"><img style="width:87px;height:41px;" src="~/@CompanyLogo" /></div>
+                        <div class="pull-left" style="color:white;margin-left: 10px;margin-top: 12px;margin-right: 9px;"><img style="width:87px;height:41px;    background-color: white; border: 1px solid white;" src="~/@CompanyLogo" /></div>
                     </div>
                 </div>
                 <div class="nav-no-collapse navbar-left pull-left hidden-sm hidden-xs" style="margin-top:23px;">
@@ -214,37 +214,37 @@
                 <div class="row" id="panelArea">
 
                     <div class="col-sm-8 pull-left" style="height:46px;">
-                        <div class="pull-left" style=" position: absolute;top: 28%;">
-                            <span style="font-weight:bold;color:#7f8c8d;font-size:17px;">Start here -</span>
+                        <div class="pull-left hideInCoupons" style=" position: absolute;top: 28%;">
+                            <span style="font-weight:bold;color:#7f8c8d;font-size:14px;">Start here -</span>
                             <span style="color:#7f8c8d;font-size:14px;">Whats your marketing objective</span>
                         </div>
-                        <div class="pull-right">
+                        <div class="pull-right hideInCoupons">
                             <div class="pull-left" style="position: absolute;margin-left: -65px;margin-top: 16px;">Help center</div>
 
 
                             <div class="pull-right">
-                                
-                                    <ul class="nav navbar-nav pull-right">
-                                        <li class="dropdown profile-dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                                <span class="hidden-xs">
-                                                    <i class="fa fa-life-ring"></i>
-                                                </span> <b class="caret"></b>
 
-                                            </a>
-                                            <ul class="dropdown-menu loginMenu">
-                                                <li><a href="">Startup Guide</a></li>
-                                                <li><a href="">Training Videos</a></li>
-                                                <li><a href="">Help Center</a></li>
-                                                <li><a href="">Contact Us</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                               
+                                <ul class="nav navbar-nav pull-right">
+                                    <li class="dropdown profile-dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                            <span class="hidden-xs">
+                                                <i class="fa fa-life-ring"></i>
+                                            </span> <b class="caret"></b>
+
+                                        </a>
+                                        <ul class="dropdown-menu loginMenu">
+                                            <li><a href="">Startup Guide</a></li>
+                                            <li><a href="">Training Videos</a></li>
+                                            <li><a href="">Help Center</a></li>
+                                            <li><a href="">Contact Us</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+
 
 
                             </div>
-                          
+
 
 
 
@@ -252,10 +252,10 @@
 
  
                     </div>
-                    <div class="col-sm-4 pull-left" style="height:46px;padding-left: 97px;color: black;">
+                    <div class="col-sm-4 pull-left hideInCoupons" style="height:46px;padding-left: 97px;color: black;">
                         @*<div class="line-separator"></div>*@
                         <span class="line-separator"></span>
-                        <span class="pull-left" style="color:#7f8c8d;font-size:11px;">Generate Income <br />Refer Businesses - Earn  <b style="margin-left:5px;">  25% </b></span>
+                        <span class="pull-left" style="color:#7f8c8d;font-size:14px;">Generate Income <br />Refer Businesses - <b style="color: #3498db;">Earn 25% </b></span>
                         @*<span class="pull-right">Help center <i class="fa fa-life-ring"></i></span>*@
                     </div>
 
@@ -264,16 +264,16 @@
                     <div class="row">
                         <div class="col-sm-8 pull-left" style="padding:0px;">
 
-                            <a class="btn  btn-default btn-gray" style="float:left; width:110px;height:66px;margin-right:15px; white-space:normal;" id="btncampaigns" href="/Ads/Ads">Video <br /> Ads</a>
-                            <a class="btn  btn-default btn-gray" style="float:left; width:110px;height:66px;margin-right:15px; white-space:normal;" id="btnspnsergames" >Sponser Games</a>
-                            <a class="btn  btn-default btn-gray" style="float:left;width:110px;height:66px;white-space:normal;" href="/Coupons/Coupons" id="btnCoupons">Offers <br />Coupons</a>
+                            <a class="btn  btn-default btn-gray" style="float:left; width:110px;height:66px;margin-right:15px; white-space:normal;" id="btncampaigns" href="/Ads/Ads?mode=1">Video <br /> Ads</a>
+                            <a class="btn  btn-default btn-gray" style="float:left; width:110px;height:66px;margin-right:15px; white-space:normal;" id="btnspnsergames" href="/Ads/Ads?mode=4">Sponser Games</a>
+                            <a class="btn  btn-default btn-gray" style="float:left;width:110px;height:66px;white-space:normal;    padding-top: 18px;" href="/Coupons/Coupons" id="btnCoupons">Offers </a>
                             <a class="btn  btn-default btn-gray" style="float:left;width:110px;height:66px;white-space:normal;" href="/Survey/" id="btnSurvey">Survey Cards</a>
-                            <a class="btn  btn-default btn-gray" style="float:left;width:110px;height:66px;white-space:normal;" href="/Survey/" id="btnSurvey">Survey Questions</a>
+                            <a class="btn  btn-default btn-gray" style="float:left;width:110px;height:66px;white-space:normal;" href="~/ProfileQuestion/Manage/Index" id="btnSurveyQuestion">Survey Questions</a>
 
                             @*<a class="btn  btn-default btn-gray" style="float:left;width:20%;height:66px;white-space:normal;" href="~/ProfileQuestion/Manage/Index" id="btnProQuestions">Profile Questions</a>*@
                         </div>
 
-                        <div class="col-sm-4"style="padding-left:88px;margin-top:11px;" >
+                        <div class="col-sm-4 hideInCoupons" style="padding-left:88px;margin-top:11px;">
 
                             @*<a class="btn btn-default btn-gray " id="btninviteusers" style="    width: 100px;float:right;margin-right:0px;" href="~/user/ManageUser/ManageUsers">Invite<br /> Users</a>*@
                             <a class="btn btn-default btn-gray " href="~/ProfileQuestion/Manage/Index" id="btninviteusers" style=" width:88px;float:left;margin-right:20px;font-size:14px;height:55px;" href="#">Invite<br /> Business</a>
@@ -282,8 +282,9 @@
                             <br />
                             <br />
                             <br />
-                            <span style="color:#7f8c8d;font-size:11px;" id="MainSpan">Become a territory partner <a style="color:#7f8c8d;font-size:11px;" href="mailto:Cash.com">Email us: </a></span>
-                            <div id="branchBinding" style="float: right;display:none;" >
+                            <span style="color:#7f8c8d;font-size:14px;" id="MainSpan">Become a territory partner 
+                            <a style="color:#7f8c8d;font-size:14px; color:#3498db; font-weight:bold;" href="mailto:partners@crowdcentz.com" >Email us </a></span>
+                            <div id="branchBinding" style="float: right;display:none;">
                                 <a class="btn btn-default btn-gray btnSmall" data-bind="click:showBranchDialoge" style="display:none;" href="#" id="btnBranchLocations">Branch Locations</a>
                             </div>
 
