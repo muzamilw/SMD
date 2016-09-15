@@ -53,6 +53,8 @@ namespace SMD.Implementation
             unityContainer.RegisterType<IDamImageService, DamImageService>();
             unityContainer.RegisterType<IGameService, GameService>();
             unityContainer.RegisterType<IActiveUser, ActiveUser>();
+            unityContainer.RegisterType<IDashboardService, DashboardService>();
+            
         }
     }
 }

@@ -269,9 +269,17 @@ namespace SMD.Repository.BaseRepository
         public DbSet<BranchCategory> BranchCategories { get; set; }
 
         public DbSet<DamImage> DamImage { get; set; }
-       
 
-     
+
+
+        /// <summary>
+        /// Get Ad-Campaigns for APIs | baqer
+        /// </summary>
+        public ObjectResult<GetAdminDashBoardInsights_Result> GetAdminDashBoardInsights()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAdminDashBoardInsights_Result>("GetAdminDashBoardInsight");
+        }
+
 
         /// <summary>
         /// Get Ad-Campaigns for APIs | baqer
