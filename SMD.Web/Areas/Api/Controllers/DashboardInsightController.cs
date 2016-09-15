@@ -15,6 +15,10 @@ namespace SMD.MIS.Areas.Api.Controllers
         private readonly IDashboardService IDashboardService;
         #endregion
 
+        public DashboardInsightController(IDashboardService _IDashboardService)
+        {
+            this.IDashboardService = _IDashboardService;
+        }
 
         // GET api/<controller>
         public IEnumerable<GetAdminDashBoardInsights_Result> Get()
