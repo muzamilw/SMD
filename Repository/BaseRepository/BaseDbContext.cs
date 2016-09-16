@@ -277,7 +277,7 @@ namespace SMD.Repository.BaseRepository
         /// </summary>
         public ObjectResult<GetAdminDashBoardInsights_Result> GetAdminDashBoardInsights()
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAdminDashBoardInsights_Result>("GetAdminDashBoardInsight");
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAdminDashBoardInsights_Result>("GetAdminDashBoardInsights");
         }
 
 
