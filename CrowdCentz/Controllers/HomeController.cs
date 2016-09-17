@@ -61,7 +61,10 @@ namespace CrowdCentz.Controllers
         {
             return View();
         }
-
+        public ActionResult faq()
+        {
+            return View();
+        }
         public ActionResult logOut()
         {
             //using (var client = new HttpClient())
