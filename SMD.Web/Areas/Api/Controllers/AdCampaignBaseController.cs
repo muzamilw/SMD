@@ -67,6 +67,25 @@ namespace SMD.MIS.Areas.Api.Controllers
 
                 };
             }
+
+            else
+                if (request.RequestId == 6) //  get survey question data 
+            {
+                return new AdCampaignBaseResponse
+                {
+                    SurveyQuestions = _campaignService.GetALLSurveyQuestionData().SurveyQuestions.Select(ques => ques.CreateFromDropdowndd()),
+
+                };
+            }
+                else
+                    if (request.RequestId == 7) //  get survey question Answers 
+                    {
+                        return new AdCampaignBaseResponse
+                        {
+                            SurveyQuestions = _campaignService.GetSurveyQuestionAnser((int)request.QuestionId).SurveyQuestions.Select(ques => ques.CreateFromDropdowndd()),
+
+                        };
+                    }
             else if (request.RequestId == 13) // get branch addresses 
             {
 

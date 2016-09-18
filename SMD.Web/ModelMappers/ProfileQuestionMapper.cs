@@ -106,6 +106,17 @@ namespace SMD.MIS.ModelMappers
             };
         }
 
+        public static SurveyQuestionDropDown CreateFromDropdowndd(this Models.DomainModels.SurveyQuestion source)
+        {
+            return new SurveyQuestionDropDown
+            {
+                SQID = source.SqId,
+                DisplayQuestion = source.Question,
+                LeftPicturePath=source.LeftPicturePath,
+                RightPicturePath=source.RightPicturePath
+            };
+        }
+
         /// <summary>
         /// Creates web model of BaseData
         /// </summary>

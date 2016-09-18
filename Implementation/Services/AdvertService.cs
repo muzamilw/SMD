@@ -844,6 +844,21 @@ namespace SMD.Implementation.Services
             };
         }
 
+        public AdCampaignBaseResponse GetALLSurveyQuestionData()
+        {
+            return new AdCampaignBaseResponse
+            {
+                SurveyQuestions = _surveyQuestionRepository.GetAll().Where(g => g.Status != 0)
+            };
+        }
+        public AdCampaignBaseResponse GetSurveyQuestionAnser(long SqID)
+        {
+            return new AdCampaignBaseResponse
+            {
+                SurveyQuestions = _surveyQuestionRepository.GetSurveyQuestionAnswer(SqID)
+            };
+        }
+
         /// <summary>
         /// Get profile answers by question id 
         /// </summary>
