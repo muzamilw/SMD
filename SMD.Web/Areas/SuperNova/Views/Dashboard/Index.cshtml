@@ -6,20 +6,130 @@
         <div class="row">
             <div class="col-lg-12">
                 <br />
-                <h1 style="padding-left:7px!important;">DashBoard </h1>
+                <h1 style="padding-left:7px!important;">DashBoard Insights </h1>
             </div>
         </div>
         <div class="col-lg-12">
+            <div class="table-responsive tbl-dashboard" style="margin-right:-4px; ">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th>
+                                <span class="GridHeaderFont_size">
+                                    USA
+                                </span>
+                            </th>
+                            <th></th>
+                            <th></th>
+                            <th>
+                                <span class="GridHeaderFont_size">
+                                    UK
+                                </span>
+                            </th>
+                            <th></th>
+                            <th></th>
+                            <th>
+                                <span class="GridHeaderFont_size">
+                                    Canada
+                                </span>
+                            </th>
+                            <th></th>
+                            <th></th>
+                            <th>
+                                <span class="GridHeaderFont_size">
+                                    Australia
+                                </span>
+                            </th>
+                            <th></th>
+                            <th></th>
+                            <th>
+                                <span class="GridHeaderFont_size">
+                                    UAE
+                                </span>
+                            </th>
+                            <th> </th>
+                            <th> </th>
+                        </tr>
+                        <tr>
+                            <td><span class="Theme_subheading-Clr font14">Activity</span></td>
+                            <td> </td>
+                            <td>
+                                <span class="Theme_subheading-Clr  font14">
+                                    Last
+                                </span>
+                            </td>
+                            <td>
+                                <span class="Theme_subheading-Clr  font14">
+                                    Current
+                                </span>
+                            </td>
+                            <td> </td>
+                            <td>
+                                <span class="Theme_subheading-Clr  font14">
+                                    Last
+                                </span>
+                            </td>
+                            <td>
+                                <span class="Theme_subheading-Clr  font14">
+                                    Current
+                                </span>
+                            </td>
+                            <td> </td>
+                            <td>
+                                <span class="Theme_subheading-Clr  font14">
+                                    Last
+                                </span>
+                            </td>
+                            <td>
+                                <span class="Theme_subheading-Clr  font14">
+                                    Current
+                                </span>
+                            </td>
+                            <td> </td>
+                            <td>
+                                <span class="Theme_subheading-Clr  font14">
+                                    Last
+                                </span>
+                            </td>
+                            <td>
+                                <span class="Theme_subheading-Clr  font14">
+                                    Current
+                                </span>
+                            </td>
+                            <td> </td>
+                            <td>
+                                <span class="Theme_subheading-Clr  font14">
+                                    Last
+                                </span>
+                            </td>
+                            <td>
+                                <span class="Theme_subheading-Clr  font14">
+                                    Current
+                                </span>
+                            </td>
+                            <td> </td>
 
-            <div class="main-box">
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- ko template: { name: 'DashboardInsightTemplate' , foreach: $root.DashboardInsightsData } -->
+                        <!-- /ko -->
+                    </tbody>
+                </table>
+            </div>
+
+
+            @*<div class="main-box">
                 <div class="row">
                     <div class="col-lg-8"></div>
                     <div class="col-lg-4">
                         <label class="control-label text-right pull-left margin10" style="padding-top:8px;">Date Range </label>
-                        
+
                         <input type="text" class="form-control margin10 pull-left" style="width:35%;" id="FromDate" data-bind="datepicker:analyticFromdate">
                         <input type="text" class="form-control margin10" style="width:35%;" id="ToDate" data-bind="datepicker:analyticTodate">
-                   
+
 
                     </div>
                 </div>
@@ -28,7 +138,7 @@
                     <div class="col-lg-6">
                         <h2 class="graphheaderleft">Top 10 Spenders on platform</h2>
                         <div class="form-group lightgray-bg graph-box-analytics">
-                            
+
                         </div>
                         <h2 class="graphheaderleft">Revenue over time</h2>
                         <div class="form-group lightgray-bg graph-box-analytics" style="margin-right:10px">
@@ -42,16 +152,16 @@
                     <div class="col-lg-6">
                         <h2 class="graphheaderright">Top 10 campaigns by spend</h2>
                         <div class="form-group lightgray-bg graph-box-analytics" style="margin-right:10px">
-                           
+
 
                         </div>
-                        @*<h2 class="graphheaderright">Afilliate Vs SMD Revenue</h2>
+                        <h2 class="graphheaderright">Afilliate Vs SMD Revenue</h2>
                         <div class="form-group" style="margin-right:10px">
                             <div class="graph-box lightgray-bg">
-                               
+
                             </div>
 
-                        </div>*@
+                        </div>
                         <h2 class="graphheaderright">Active Users</h2>
                         <div class="form-group lightgray-bg graph-box-analytics" style="margin-right:10px">
 
@@ -59,23 +169,172 @@
                             <div class="margin-Top-30" data-bind="morris: {type: 'Bar', data: $root.activeUser, xkey: 'y', ykeys: ['a'], labels: ['Active Users']}" style="width: 600px; float: left"></div>
 
                         </div>
-							
-						
-                        </div>
-                    
-                    </div>
-                </div>
-            </div>
 
+
+                        </div>
+
+                    </div>
+                </div>*@
         </div>
 
     </div>
-</div>
-@section Scripts{
-<script type="text/javascript">
-    require(["analytic/analytic.view"]);
-	
 
-    
+</div>
+
+<script id="DashboardInsightTemplate" type="text/html">
+    <tr style="border-bottom: none;">
+        <td class="col-sm-3 font14">
+            <span class="" data-bind="text: activity"></span>
+        </td>
+        <td></td>
+        <td>
+            <!-- ko if: activity() === "Video Ads Revenue" || activity() === "Game Ads Revenue" || activity() === "Survey Cards Revenue" || activity() === "Profile Questions Revenue" || activity() === "Payout via Paypal" || activity() === "Income from Stripe" -->
+          $
+            <!-- /ko -->
+            <span  data-bind="text: usL"></span>
+        </td>
+        <td>
+            <!-- ko if: activity() === "Video Ads Revenue" || activity() === "Game Ads Revenue" || activity() === "Survey Cards Revenue" || activity() === "Profile Questions Revenue" || activity() === "Payout via Paypal" || activity() === "Income from Stripe" -->
+            $
+            <!-- /ko -->
+            <span  data-bind="text: usC()"></span>
+             <!-- ko if: usT() > 0-->
+            <span style="color:green;padding-left:10px">
+                <i class="fa fa-long-arrow-up" aria-hidden="true"></i>
+                <span data-bind="text: usT"></span>%
+                
+            </span>
+            <!-- /ko -->
+            <!-- ko if: usT() < 0-->
+            <span style="color:red; padding-left:10px">
+                <i class="fa fa-long-arrow-down" aria-hidden="true"></i>
+                <span data-bind="text: usT"></span>%
+                
+            </span>
+            <!-- /ko -->
+        </td>
+        <td>
+         
+</td>
+        <td> 
+            <!-- ko if: activity() === "Video Ads Revenue" || activity() === "Game Ads Revenue" || activity() === "Survey Cards Revenue" || activity() === "Profile Questions Revenue" || activity() === "Payout via Paypal" || activity() === "Income from Stripe" -->
+          $
+<!-- /ko -->
+            <span data-bind="text: ukL"></span>
+        </td>
+        <td>
+            <!-- ko if: activity() === "Video Ads Revenue" || activity() === "Game Ads Revenue" || activity() === "Survey Cards Revenue" || activity() === "Profile Questions Revenue" || activity() === "Payout via Paypal" || activity() === "Income from Stripe" -->
+            $
+            <!-- /ko -->
+            <span data-bind="text: ukC"></span>
+            <!-- ko if: ukT() > 0-->
+            <span style="color:green;padding-left:10px">
+                <i class="fa fa-long-arrow-up" aria-hidden="true"></i>
+                <span data-bind="text: ukT"></span>%
+
+            </span>
+            <!-- /ko -->
+            <!-- ko if: ukT() < 0-->
+            <span style="color:red; padding-left:10px">
+                <i class="fa fa-long-arrow-down" aria-hidden="true"></i>
+                <span data-bind="text: ukT"></span>%
+
+            </span>
+            <!-- /ko -->
+        </td>
+        <td></td>
+
+        <td>
+            <!-- ko if: activity() === "Video Ads Revenue" || activity() === "Game Ads Revenue" || activity() === "Survey Cards Revenue" || activity() === "Profile Questions Revenue" || activity() === "Payout via Paypal" || activity() === "Income from Stripe" -->
+            $
+            <!-- /ko -->
+            <span data-bind="text: caL"></span>
+        </td>
+        <td>
+            <!-- ko if: activity() === "Video Ads Revenue" || activity() === "Game Ads Revenue" || activity() === "Survey Cards Revenue" || activity() === "Profile Questions Revenue" || activity() === "Payout via Paypal" || activity() === "Income from Stripe" -->
+            $
+            <!-- /ko -->
+            <span data-bind="text: caC"></span>
+            <!-- ko if: caT() > 0-->
+            <span style="color:green;padding-left:10px">
+                <i class="fa fa-long-arrow-up" aria-hidden="true"></i>
+                <span data-bind="text: caT"></span>%
+
+            </span>
+            <!-- /ko -->
+            <!-- ko if: caT() < 0-->
+            <span style="color:red; padding-left:10px">
+                <i class="fa fa-long-arrow-down" aria-hidden="true"></i>
+                <span data-bind="text: caT"></span>%
+
+            </span>
+            <!-- /ko -->
+        </td>
+        <td></td>
+
+        <td>
+            <!-- ko if: activity() === "Video Ads Revenue" || activity() === "Game Ads Revenue" || activity() === "Survey Cards Revenue" || activity() === "Profile Questions Revenue" || activity() === "Payout via Paypal" || activity() === "Income from Stripe" -->
+            $
+            <!-- /ko -->
+            <span data-bind="text: auL"></span>
+        </td>
+        <td>
+            <!-- ko if: activity() === "Video Ads Revenue" || activity() === "Game Ads Revenue" || activity() === "Survey Cards Revenue" || activity() === "Profile Questions Revenue" || activity() === "Payout via Paypal" || activity() === "Income from Stripe" -->
+            $
+            <!-- /ko -->
+            <span data-bind="text: auC"></span>
+            <!-- ko if: auT() > 0-->
+            <span style="color:green;padding-left:10px">
+                <i class="fa fa-long-arrow-up" aria-hidden="true"></i>
+                <span data-bind="text: auT"></span>%
+
+            </span>
+            <!-- /ko -->
+            <!-- ko if: auT() < 0-->
+            <span style="color:red; padding-left:10px">
+                <i class="fa fa-long-arrow-down" aria-hidden="true"></i>
+                <span data-bind="text: auT"></span>%
+
+            </span>
+            <!-- /ko -->
+        </td>
+        <td></td>
+
+        <td>
+            <!-- ko if: activity() === "Video Ads Revenue" || activity() === "Game Ads Revenue" || activity() === "Survey Cards Revenue" || activity() === "Profile Questions Revenue" || activity() === "Payout via Paypal" || activity() === "Income from Stripe" -->
+            $
+            <!-- /ko -->
+            <span data-bind="text: aeL"></span>
+        </td>
+        <td>
+            <!-- ko if: activity() === "Video Ads Revenue" || activity() === "Game Ads Revenue" || activity() === "Survey Cards Revenue" || activity() === "Profile Questions Revenue" || activity() === "Payout via Paypal" || activity() === "Income from Stripe" -->
+            $
+            <!-- /ko -->
+            <span data-bind="text: aeC"></span>
+            <!-- ko if: aeT() > 0-->
+            <span style="color:green;padding-left:10px">
+                <i class="fa fa-long-arrow-up" aria-hidden="true"></i>
+                <span data-bind="text: aeT"></span>%
+
+            </span>
+            <!-- /ko -->
+            <!-- ko if: aeT() < 0-->
+            <span style="color:red; padding-left:10px">
+                <i class="fa fa-long-arrow-down" aria-hidden="true"></i>
+                <span data-bind="text: aeT"></span>%
+
+            </span>
+            <!-- /ko -->
+        </td>
+        <td></td>
+    </tr>
 </script>
+
+@section Scripts{
+    <script type="text/javascript">
+        require(["analytic/analytic.view"]);
+
+
+
+    </script>
 }

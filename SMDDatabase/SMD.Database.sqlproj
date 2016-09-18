@@ -65,6 +65,9 @@
     <None Include="SMDChanges2.sql" />
   </ItemGroup>
   <ItemGroup>
+    <PostDeploy Include="GetRevenueOverTime.sql" />
+  </ItemGroup>
+  <ItemGroup>
     <Build Include="GetProducts.sql" />
   </ItemGroup>
 </Project>

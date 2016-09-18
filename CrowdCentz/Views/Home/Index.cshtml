@@ -2,7 +2,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
+<script src="~/Scripts/jquery-2.1.4.min.js"></script>
 @section COLOR
 {
 
@@ -11,41 +11,42 @@
 }
 
 <!-- Header -->
-<section id="header" class="container-fluid text-white">
-    <div class="container">
+<section id="header" class="container-fluid text-white homepage-hero-module" style="height: 560px;">
+   
+    <div class="container" style="padding-top: 70px;position: absolute;z-index: 1000;width: 1170px;margin-left: 13%">
+        <h3 class="totalDownloads" style="position:absolute;">Total Downloads : 11001</h3>
         <div class="row clearfix">
-
+          
             <div class="row clearfix text-center">
 
-                <h1 class="main_title" style="margin-bottom:0px;">Advertise to mobile users<br /><br /></h1>
+                <h1 class="main_title" style="margin-bottom:0px;">
+                    Advertise to mobile users<br><br></h1>
 
-                @*<a class="popup-youtube" href="http://www.youtube.com/watch?v=i3i1Ne4qyZI" style="font-size:30px;">
-                        <i class="fa fa-play-circle-o fa-3x" style="color:white;"></i>
-                    </a>*@
+
 
             </div>
 
 
             <div class="row clearfix staff">
                 <div class="col-xs-6 col-md-3 column text-center subbox" id="anshowvideo" style="cursor:pointer">
-                    
-                        <img class="img-circle" alt="140x140" src="~/images/team_01.png" />
-                        <h3 class="">Show video Ads</h3>
-                  
+
+                    <img class="img-circle" alt="140x140" src="/images/team_01.png">
+                    <h3 class="">Show video Ads</h3>
+
                 </div>
                 <div class="col-xs-6 col-md-3 column text-center subbox" id="ansaudience" style="cursor:pointer">
-                    <img class="img-circle" alt="140x140" src="~/images/team_03.png" />
+                    <img class="img-circle" alt="140x140" src="/images/team_03.png">
                     <h3 class="">Choose your audience</h3>
 
                 </div>
                 <div class="col-xs-6 col-md-3 column text-center subbox" id="anssurvey" style="cursor:pointer">
-                    <img class="img-circle" alt="140x140" src="~/images/team_02.png" />
+                    <img class="img-circle" alt="140x140" src="/images/team_02.png">
                     <h3 class="">Run surveys</h3>
 
                 </div>
                 <div class="col-xs-6 col-md-3 column text-center subbox" id="andpromotions" style="cursor:pointer">
-                    <img class="img-circle" alt="140x140" src="~/images/team_04.png" />
-                    <h3 class="">Offer coupon promotions</h3>
+                    <img class="img-circle" alt="140x140" src="/images/team_04.png">
+                    <h3 class="">List Deals</h3>
 
                 </div>
             </div>
@@ -55,7 +56,14 @@
             </div>
 
         </div>
-    </div><!-- /container  -->
+    </div>
+    <div class="video-container" style="position:absolute;">
+   
+        <video autoplay="" loop="" class="fillWidth fadeIn animated" style="margin-top: 0px; margin-left: 0px; width: 1583px; height: 791px; top: -23px;">
+            <source src="http://dfcb.github.io/BigVideo.js/vids/dock.mp4" type="video/mp4">Your browser does not support the video tag. I suggest you upgrade your browser.
+        </video>
+       
+    </div>
 </section>
 
 
@@ -69,36 +77,33 @@
                         <h2>
                             Show video ads
                         </h2>
-                        <h3 style="color:#7a539b">
-                            30 second commercials – Guaranteed views!
+                        <h3 style="color:#8aa0ca">
+                            Guaranteed commercial views
                         </h3>
                         <p class="text-left">
-                            We reward your target audience with 50% of your Pay Per Confirmed View (PPCV).
+                            We reward audiences to watch your ads and answers surveys.
 
                         </p>
 
-                        <h3 style="color:#7a539b">
-                            Take them to your landing pages.
+                        <h3 style="color:#8aa0ca">
+                            Buy Now, Book Now, Check availability
                         </h3>
                         <p class="text-left">
-                            Call for action – drive users to your landing pages to continue the marketing or purchasing experience.
-
+                            Drive users to your landing pages to achieve your marketing objectives
                         </p>
 
-                        <h3 style="color:#7a539b">
-                            You set the PPCV and daily ad spend
+                        <h3 style="color:#8aa0ca">
+                            Ad click and daily spend
                         </h3>
                         <p class="text-left">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
-
+                            We reward your target audience with 50% of the ad click charge.  You set the ad click, daily spend and maximum ad spend per campaign.
                         </p>
 
-                        <h3 style="color:#7a539b">
-                            Broadcast modes
+                        <h3 style="color:#8aa0ca">
+                            Broadcast daily
                         </h3>
                         <p class="text-left">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
-
+                            Show your video commercials on a daily basis to the same audience or one-time views. 
                         </p>
 
                     </div>
@@ -135,28 +140,25 @@
                         <h2>
                             Choose your audience
                         </h2>
-                        <h3 style="color:#7a539b">
-                            Age, Gender, Location, Profession segmentation
+                        <h3 style="color:#8aa0ca">
+                            Age, Gender, Profession & Location
                         </h3>
                         <p class=" text-left">
-                            We reward your target audience with 50% of your Pay Per Confirmed View (PPCV).
-
+                            Know your maximum reach count & cost before running campaigns.
                         </p>
 
-                        <h3 style="color:#7a539b">
-                            Over 100 personal profile filter
+                        <h3 style="color:#8aa0ca">
+                            Over 100 other segmentation filters
                         </h3>
                         <p class=" text-left">
-                            Call for action – drive users to your landing pages to continue the marketing or purchasing experience.
-
+                            Fine tune and narrow your audiences further by combining user profiles with specific preferences. 
                         </p>
 
-                        <h3 style="color:#7a539b">
-                            Advance linking with surveys
+                        <h3 style="color:#8aa0ca">
+                            Create your own surveys
                         </h3>
                         <p class=" text-left">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
-
+                            Create survey questions and re-target survey participants with video campaigns.
                         </p>
 
 
@@ -180,32 +182,43 @@
                 <div class="row">
                     <div class="col-sm-12 col-md-12 ">
                         <h2>
-                            Run surveys
+                            List unlimited deals
                         </h2>
-                        <h3 style="color:#7a539b">
-                            Video ad questions
+                        <h3 style="color:#8aa0ca">
+                            One flat fee - $29 /pm
                         </h3>
-                        <p class="text-left">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
+                        <p class=" text-left">
+                            List as many coupons, vouchers, offers or promotions, we call them all ‘Deals’.
+                        </p>
+
+                        <h3 style="color:#8aa0ca">
+                            No additional fees or commissions
+                        </h3>
+                        <p class=" text-left">
+                            App users can save and redeem vouchers in store, or purchase directly from your website without you incurring any fees or revenue charging models.
+                        </p>
+
+                        <h3 style="color:#8aa0ca">
+                            Group offers together
+                        </h3>
+                        <p class=" text-left">
+                            We list all your live promotions together so app users can see the variety of deal.
 
                         </p>
 
-                        <h3 style="color:#7a539b">
-                            Survey cards
+                        <h3 style="color:#8aa0ca">
+                            Notify new deals to app users
                         </h3>
-                        <p class="text-left">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
-
+                        <p class=" text-left">
+                            We send out daily emails and in-app notifications announcing hot deals near them.
                         </p>
 
-                        <h3 style="color:#7a539b">
-                            Specific profile questions
+                        <h3 style="color:#8aa0ca">
+                            Subscription – Cancel at any time
                         </h3>
-                        <p class="text-left">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
-
+                        <p class=" text-left">
+                            Create and list as many deals as you like and as long as your subscribed, all your live deals will be listed – How simple is that ;)
                         </p>
-
                     </div>
 
                 </div>
@@ -214,7 +227,7 @@
                 </div>
             </div>
             <div class="col-sm-12 col-md-6 column" style="vertical-align:bottom;text-align:center">
-                <img alt="App" class="inner-top-sm img-responsive" src="~/images/surveys.png" c />
+                <img alt="App" class="inner-top-sm img-responsive" src="~/images/coupon_promotions.png" />
 
 
             </div>
@@ -223,192 +236,6 @@
     </div> <!-- /container -->
 </section>
 <!-- end surveys -->
-
-<!-- promotions -->
-<section id="promotions" class="container-fluid text-blue inner-xs">
-    <div class="container">
-        <div class="row clearfix">
-
-            <div class="col-sm-12 col-md-6 column" style="vertical-align:bottom;text-align:center">
-                <img alt="App" class="inner-top-sm img-responsive" src="~/images/coupon_promotions.png" />
-
-
-            </div>
-            <div class="col-sm-12 col-md-6">
-                <div class="row">
-                    <div class="col-sm-12 col-md-12 ">
-                        <h2>
-                            Offer coupon promotions
-                        </h2>
-                        <h3 style="color:#7a539b">
-                            Proximity coupons
-                        </h3>
-                        <p class=" text-left">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
-
-                        </p>
-
-                        <h3 style="color:#7a539b">
-                            Big saving discount vouchers
-                        </h3>
-                        <p class=" text-left">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
-
-                        </p>
-
-                        <h3 style="color:#7a539b">
-                            2 for 1 deals
-                        </h3>
-                        <p class=" text-left">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
-
-                        </p>
-
-                        <h3 style="color:#7a539b">
-                            Redeem at multiple branches
-                        </h3>
-                        <p class=" text-left">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
-
-                        </p>
-
-
-                    </div>
-
-                </div>
-                <div class="row clearfix text-left inner-top-xs">
-                    <a href="http://manage.cash4ads.com/Account/Login" class="btn btn-lg btn-success " style="margin-left:15px;">Get started now</a>
-                </div>
-            </div>
-        </div>
-    </div> <!-- /container -->
-</section>
-<!-- end audience -->
-
-<!-- Feature -->
-<section id="feature" class="text-blue">
-    <div class="container">
-        <div class="row clearfix">
-            <div class="col-md-12 column ">
-                <h2 class="text-center">We reward your target audience with 50% of your PPCV</h2>
-                <p class="text-center">(Pay Per Confirmed Click)</p>
-            </div>
-            <div class="col-md-12 column">
-                <div class="row clearfix">
-                    <!-- RIGHT COLUMN -->
-                    <div class="col-sm-4 col-md-4 column text-center">
-
-                        <!-- #1 -->
-                        <div class="item-icon ">
-                            <i class="fa fa-bicycle fa-2x"></i>
-                        </div>
-
-                        <h3>Sharing is Caring</h3>
-
-                        <p>
-                            We pay people 50% of your PPCV to watch
-                            your ad and to correctly answer your quiz question
-
-
-                        </p>
-
-                        <!-- #2 -->
-                        <div class="item-icon ">
-                            <i class="fa fa-cubes fa-2x"></i>
-                        </div>
-
-                        <h3>
-                            BOG OF!
-
-                        </h3>
-
-                        <p>
-                          Create coupons for free and attract new
-customers to your stores
-
-
-                        </p>
-
-                        <!-- #3 -->
-                        <div class="item-icon ">
-                            <i class="fa fa-line-chart fa-2x"></i>
-                        </div>
-
-                        <h3>No video, no problem</h3>
-
-                        <p>
-                            Sponsor fun mind games designed to help
-                            improve memory and reward winners with cash
-                            credits.
-                            <br /><br />
-                        </p>
-
-                    </div>
-
-
-                    <!-- IPHONE IMAGE -->
-                    <div class="col-sm-4 col-md-4 column ">
-                        <img alt="iPhone" class="img-responsive" src="~/images/app_crowdcentz.png" />
-                    </div>
-
-                    <!-- LEFT COLUMN -->
-                    <div class="col-sm-4 col-md-4 column text-center">
-
-                        <!-- #1 -->
-                        <div class="item-icon ">
-                            <i class="fa fa-life-ring fa-2x"></i>
-                        </div>
-
-                        <h3>Cash Out Super Hero</h3>
-
-                        <p>
-                            Contact our team if you would like to offer
-                            a super promotion in the apps Cash Out section
-
-
-                        </p>
-
-                        <!-- #2 -->
-                        <div class="item-icon ">
-                            <i class="fa fa-laptop fa-2x"></i>
-                        </div>
-
-                        <h3>A B Testing</h3>
-
-                        <p>
-                            Target and refine your audience quickly and simply
-                            Set your daily limit and PPCV caps.
-
-
-                        </p>
-
-                        <!-- #3 -->
-                        <div class="item-icon ">
-                            <i class="fa fa-users fa-2x"></i>
-                        </div>
-
-                        <h3>Gurus wanted</h3>
-
-                        <p>
-                            Are you a digital marketer ?
-                            Contact us if your interested in joining our family.
-
-
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="col-md-12 column text-center inner-top-xs">
-                <h2 class="text-center">Target more accurately by asking direct questions!</h2><br /><br />
-                <a href="http://manage.cash4ads.com/Account/Login" class="btn btn-lg btn-success ">Get started now</a>
-
-            </div>
-        </div>
-    </div> <!-- /container -->
-</section>
-<!-- end feature -->
 
 
 <!-- strategy -->
@@ -430,22 +257,22 @@ customers to your stores
             <div class="row clearfix staff">
                 <div class="col-xs-6 col-md-3 column text-center subbox">
                     <img class="img-circle" alt="140x140" src="~/images/team_01.png" />
-                    <h3 class="">Simple and clear analytics</h3>
+                    <h3 class="">Simple and clear return on investment</h3>
 
                 </div>
                 <div class="col-xs-6 col-md-3 column text-center subbox">
                     <img class="img-circle" alt="140x140" src="~/images/team_03.png" />
-                    <h3 class="">Cap your daily ad<br /> spend</h3>
+                    <h3 class="">Cap your daily ad spend</h3>
 
                 </div>
                 <div class="col-xs-6 col-md-3 column text-center subbox">
                     <img class="img-circle" alt="140x140" src="~/images/team_02.png" />
-                    <h3 class="">Create proximity coupons</h3>
+                    <h3 class="">Create deals and promotions</h3>
 
                 </div>
                 <div class="col-xs-6 col-md-3 column text-center subbox">
                     <img class="img-circle" alt="140x140" src="~/images/team_04.png" />
-                    <h3 class="">Link survey results to future promotions</h3>
+                    <h3 class="">Show video ads to a targeted audience</h3>
 
                 </div>
             </div>
@@ -471,8 +298,8 @@ customers to your stores
 
     <div class="row">
         <div class='col-md-12 text-center p_title'>
-            <img src="~/images/crowdcentz_logo_whitebg.png" class="img-responsive" style="text-align:center;display:inline-block" />
-            <h2>The sharing advertising platform</h2>
+          
+            <h2>The advertising platform run by you</h2>
             
         </div>
     </div>
@@ -581,3 +408,82 @@ customers to your stores
 <!-- end testimonial -->
 
 
+
+<script type="text/javascript">
+$(function(){
+/** Document Ready Functions **/
+/********************************************************************/
+
+$( document ).ready(function() {
+
+    // Resive video
+    scaleVideoContainer();
+
+    initBannerVideoSize('.video-container .poster img');
+    initBannerVideoSize('.video-container .filter');
+    initBannerVideoSize('.video-container video');
+
+    $(window).on('resize', function() {
+        scaleVideoContainer();
+        scaleBannerVideoSize('.video-container .poster img');
+        scaleBannerVideoSize('.video-container .filter');
+        scaleBannerVideoSize('.video-container video');
+    });
+
+});
+
+/** Reusable Functions **/
+/********************************************************************/
+
+function scaleVideoContainer() {
+
+    var height = $(window).height();
+    var unitHeight = parseInt(height) + 'px';
+   // $('.homepage-hero-module').css('height',unitHeight);
+
+}
+
+function initBannerVideoSize(element){
+
+    $(element).each(function(){
+        $(this).data('height', $(this).height());
+        $(this).data('width', $(this).width());
+    });
+
+    scaleBannerVideoSize(element);
+
+}
+
+function scaleBannerVideoSize(element){
+
+    var windowWidth = $(window).width(),
+        windowHeight = $(window).height(),
+        videoWidth,
+        videoHeight;
+
+    console.log(windowHeight);
+
+    $(element).each(function(){
+        var videoAspectRatio = $(this).data('height')/$(this).data('width'),
+            windowAspectRatio = windowHeight/windowWidth;
+
+        if (videoAspectRatio > windowAspectRatio) {
+            videoWidth = windowWidth;
+            videoHeight = videoWidth * videoAspectRatio;
+            $(this).css({'top' : -(videoHeight - windowHeight) / 2 + 'px', 'margin-left' : 0});
+        } else {
+            videoHeight = windowHeight;
+            videoWidth = videoHeight / videoAspectRatio;
+            $(this).css({'margin-top' : 0, 'margin-left' : -(videoWidth - windowWidth) / 2 + 'px'});
+        }
+
+        $(this).width(videoWidth).height(videoHeight);
+
+        $('.homepage-hero-module .video-container video').addClass('fadeIn animated');
+
+
+    });
+}
+});
+
+</script>

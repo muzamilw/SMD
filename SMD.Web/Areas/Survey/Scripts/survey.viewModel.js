@@ -101,7 +101,7 @@ define("survey/survey.viewModel",
                             {
                                 
                                 success: function (data) {
-                                    debugger;
+                                    
                                     // popullate base data 
                                     langs.removeAll();
                                     countries.removeAll();
@@ -191,7 +191,7 @@ define("survey/survey.viewModel",
                     },
                     // Add new Profile Question
                     addNewSurvey = function () {
-                        debugger;
+                        $("#panelArea,#topArea").css("display", "none");
                         selectedQuestionCountryList([]);
                         gotoScreen(1);
                         isTerminateBtnVisible(false);
@@ -234,6 +234,7 @@ define("survey/survey.viewModel",
                     // Close Editor 
                     closeEditDialog = function () {
                         isEditorVisible(false); enableControls();
+                        $("#panelArea,#topArea").css("display", "block");
                     },
                     SurveyQuestionsByFilter=function()
                     {
@@ -262,7 +263,7 @@ define("survey/survey.viewModel",
                 },
                     // On editing of existing PQ
                     onEditSurvey = function (item) {
-                        selectedQuestionCountryList([]);
+                        selectedQuestionCountryList([]); $("#panelArea,#topArea").css("display", "none");
                         gotoScreen(1);
                         isTerminateBtnVisible(false);
                         isShowArchiveBtn(false);
@@ -416,7 +417,7 @@ define("survey/survey.viewModel",
                         $("#searchLanguages").val("");
                     },
                      addIndustry = function (selected) {
-                         debugger;
+                         
                          selectedQuestion().SurveyQuestionTargetCriteria.push(new model.SurveyQuestionTargetCriteria.Create({
                              Industry: selected.IndustryName,
                              IndustryId: selected.IndustryId,
@@ -941,7 +942,7 @@ define("survey/survey.viewModel",
                             educationIds: educationIds,
                             educationIdsExcluded: educationIdsExcluded
                         };
-                        debugger;
+                        
                         dataservice.getAudienceData(ProfileData, {
                             success: function (data) {
                                 reachedAudience(data.MatchingUsers);

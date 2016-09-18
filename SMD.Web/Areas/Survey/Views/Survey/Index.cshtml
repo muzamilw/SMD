@@ -157,8 +157,7 @@ else
             <td style="display:none;">
                 <a class="table-link" style="float: right">
                     <span class="fa-stack">
-                        <i class="fa fa-square fa-stack-2x"></i>
-                        <i class="fa fa-pencil fa-stack-1x fa-inverse" data-bind="click:$root.onEditSurvey"></i>
+                        <i class="fa fa-pencil-square-o" data-bind="click:$root.onEditSurvey"></i>
                     </span>
                 </a> 
             </td>
@@ -228,6 +227,7 @@ else
 @section Scripts{
 <script src="~/Scripts/jquery.tokenize.js"></script>
     <script type="text/javascript">
+        $("#MainSpan").css("display", "none");
         require(["survey/survey.view", "common/confirmation.view", "common/stripeChargeCustomer.view"]);
         $("#btnSurvey").css("background-color", "#93bf47");
     </script>

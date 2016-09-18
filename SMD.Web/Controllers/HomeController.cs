@@ -115,5 +115,22 @@ namespace SMD.MIS.Controllers
             //    return RedirectToAction("Index","Ads", new { area = "Ads" });
             //}
         }
+        public ActionResult StartUpGuide()
+        {
+            return View();
+        }
+        public ActionResult TrainingVideos()
+        {
+            return View();
+        }
+        public ActionResult HelpCenter()
+        {
+            return View();
+        }
+        public ActionResult ContactUs()
+        {
+            return View();
+        }
+
     }
 }

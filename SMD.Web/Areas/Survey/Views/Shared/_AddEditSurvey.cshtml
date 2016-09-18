@@ -5,7 +5,7 @@
 <div data-bind="visible: $root.isEditorVisible()" style="display: none;">
     <div class="col-lg-12">
         <div class="row">
-            <div class="col-lg-12" id="topArea">
+            <div class="col-lg-12" id="">
                 <ol class="breadcrumb" style="display:none;">
                     <li><a href="/Dashboard/Index" class="my-navigator">Home</a></li>
                     <li><a data-bind="click: $root.closeEditDialog" class="my-navigator">Survey Cards</a></li>
@@ -81,7 +81,7 @@
                                         </div>
 
                                         <br>
-                                        <span data-bind="css: $root.previewScreenNumber() == 1 ? 'ads-selected-numbering-text' : ''" class="">Question <br>Info</span>
+                                        <span data-bind="css: $root.previewScreenNumber() == 1 ? 'ads-selected-numbering-text' : '',click: $root.gotoScreen.bind(null,1)" class="">Question <br>Info</span>
                                     </div>
                                     <div class="pull-left ads-numbering-linebar" data-bind="css: $root.previewScreenNumber() == 6 ? 'ads-selected-numbering-box' : ''">
 
@@ -93,7 +93,7 @@
                                         </div>
 
                                         <br>
-                                        <span data-bind="css: $root.previewScreenNumber() == 2 ? 'ads-selected-numbering-text' : ''" class="ads-selected-numbering-text">Target<br>Audience</span>
+                                        <span data-bind="css: $root.previewScreenNumber() == 2 ? 'ads-selected-numbering-text' : '',click: $root.gotoScreen.bind(null,2)" class="ads-selected-numbering-text">Target<br>Audience</span>
                                     </div>
 
 
@@ -123,15 +123,13 @@
 
                             <div class="main-box" style=" background-color:white;padding: 20px;">
 
-                                <div class="adsubHeading Theme_standard_clr" data-bind="text: $root.titleText,visible: $root.previewScreenNumber() == 1">
-                                    Add New Survey card
-                                </div>
+                               
                                 <div class="" id="survey_subscreen1" data-bind="visible: $root.previewScreenNumber() == 1">
 
                                     <div class="form-group" style="margin-bottom:14px;">
                                         <div class="col-lg-2">
 
-                                            <label for="txtSurveyTtile" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Survey Name</label>
+                                            <label for="txtSurveyTtile" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Campaign Title</label>
                                         </div>
                                         <div class="col-lg-7">
                                             <input type="text" name="Campaign Name" class="form-control" id="txtSurveyTtile" placeholder="Enter Survey title" data-bind="value: Question,validationTooltip: Question, validationOnElement: Question">

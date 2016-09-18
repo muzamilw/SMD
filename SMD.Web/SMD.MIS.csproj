@@ -388,6 +388,7 @@
     <Compile Include="Areas\Api\Controllers\ApproveProfileQuestionAnsController.cs" />
     <Compile Include="Areas\Api\Controllers\ApproveProfileQuestionController.cs" />
     <Compile Include="Areas\Api\Controllers\BranchCategoryController.cs" />
+    <Compile Include="Areas\Api\Controllers\DashboardInsightController.cs" />
     <Compile Include="Areas\Api\Controllers\GetCompanyController.cs" />
     <Compile Include="Areas\Api\Controllers\GetCountryController.cs" />
     <Compile Include="Areas\Api\Controllers\GetProductController.cs" />
@@ -2850,6 +2851,10 @@
     <Content Include="Views\Shared\_Layout - Copy.cshtml" />
     <Content Include="Views\Shared\_Layout_Supernova.cshtml" />
     <Content Include="Views\Shared\_Layout_Franchise.cshtml" />
+    <Content Include="Views\Home\StartUpGuide.cshtml" />
+    <Content Include="Views\Home\TrainingVideos.cshtml" />
+    <Content Include="Views\Home\HelpCenter.cshtml" />
+    <Content Include="Views\Home\ContactUs.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
