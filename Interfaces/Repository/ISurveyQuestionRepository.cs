@@ -45,5 +45,6 @@ namespace SMD.Interfaces.Repository
         long GetAudienceAdCampaignCount(GetAudienceSurveyRequest request);
         GetAudience_Result GetAudienceCount(GetAudienceCountRequest request);
         UserBaseData getBaseData();
+        IEnumerable<SurveyQuestion> GetSurveyQuestionAnswer(long SurveyQuestionId);
     }
 }

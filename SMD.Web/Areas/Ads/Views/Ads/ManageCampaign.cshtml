@@ -15,7 +15,7 @@ else
     <div class="col-lg-12">
         <div class="row">
             <div class="col-lg-12" id="topArea">
-                <ol class="breadcrumb">
+                <ol class="breadcrumb" style="display:none;">
                     <li><a href="~/Dashboard/Index" class="my-navigator">Home</a></li>
                     <li><a data-bind="click: $root.closeNewCampaignDialog" class="my-navigator">Video Campaigns</a></li>
                 </ol>
@@ -572,7 +572,7 @@ else
 
                                         <div class="col-lg-4">
                                             <div>
-                                                <button class="btn  btn-danger btnAdsCampaign ButtonWidth" style="width:100%!important;" id="" data-toggle="modal" data-target=".bs-example-modal-lg">My Survey Cards</button>
+                                                <button class="btn  btn-danger btnAdsCampaign ButtonWidth" style="width:100%!important;" id="" data-toggle="modal" data-bind="click:$root.showAdditionUserSurveyCriteria" data-target=".bs-example-modal-lg">My Survey Cards</button>
                                             </div>
                                             <div>
                                                 <button class="btn  btn-danger btnAdsCampaign ButtonWidth" style="width:100%!important;" id="" data-toggle="modal" data-target=".bs-example-modal-lg">My Profile Questions</button>
@@ -1001,6 +1001,18 @@ else
                                                     <div class="clear-both"></div>
                                                 </div>
                                             </div>
+
+
+                                            <div class="col-lg-8 pull-right" data-bind="visible: $root.AditionalCriteriaMode() == '4'">
+                                                <div class="row header">
+                                                    <label class="control-label modelHeading">Survey Questions</label>
+                                                </div>
+                                                <div class="listview parentList set-border padding10 list-type-tiles" data-role="listview" id="lv1">
+                                                    <!-- ko template: { name: 'SurveyssQuestionTiles' , foreach: $root.surveyquestionList} --><!-- /ko -->
+                                                    <div class="clear-both"></div>
+                                                </div>
+                                            </div>
+
                                             <div class="col-lg-8 pull-left" data-bind="visible: $root.AditionalCriteriaMode() == '3'">
                                                 <div class="row header">
                                                     <label class="control-label modelHeading">Your Quiz Questions</label>
@@ -1027,10 +1039,19 @@ else
                                                         <div class="list active">
                                                             <span data-bind="text:questionString"></span>
                                                             <div class="listview set-border padding10 list-type-tiles chlidList" data-role="listview">
+
+                                                                <!--ko if:Type() == 2 -->
+                                                                <div class="list childList leftImg" data-bind="click:$root.updateSurveyCriteriass.bind($data, 1),css: { 'active': SQAnswer() ==1 }"> <img data-bind="attr: { src:surveyQuestLeftImageSrc}" style="height:75px;width:auto;" /></div>
+                                                                <div class="list childList rightImg" data-bind="click:$root.updateSurveyCriteriass.bind($data, 2),css: { 'active': SQAnswer() ==2 }"><img data-bind="attr: { src:surveyQuestRightImageSrc}" style="height:75px;width:auto;" /></div>
+                                                                <!--/ko-->
+
+
+
                                                                 <!--ko if:Type() == 6 -->
                                                                 <div class="list childList leftImg" data-bind="click:$root.updateSurveyCriteria.bind($data, 1),css: { 'active': QuizAnswerId() ==1 }"> <label data-bind="text:surveyQuestLeftImageSrc "></label> </div>
                                                                 <div class="list childList rightImg" data-bind="click:$root.updateSurveyCriteria.bind($data, 2),css: { 'active': QuizAnswerId() ==2 }"><label data-bind="text:surveyQuestRightImageSrc "></label></div>
                                                                 <!--/ko-->
+
                                                                 <!--ko if:Type() == 1 -->
                                                                 <!-- ko template: { name: 'criteriaEditorTemplate' ,  foreach: $root.profileAnswerList} --><!-- /ko -->
                                                                 <!--/ko-->
@@ -1074,7 +1095,7 @@ else
                                         </div>
                                     </div>
                                     <div class="col-lg-4">
-                                        <div style="margin-top:5px;    text-align: center;cursor:pointer;">
+                                        <div style="margin-top:5px;  text-align: center;cursor:pointer;">
                                             <img style="height:90px;" data-bind="visible: couponImage2() == '' || couponImage2() == null" src="/Content/Images/placeholder.png" onclick="showCouponDialog2();" />
                                             <img style="height:90px;" data-bind="visible: couponImage2() != '' && couponImage2() != null ,attr: { src: couponImage2 }" onclick="showCouponDialog2();" />
                                             <div style="    padding-top: 10px;    text-align: center;    font-size: 12px;    color: gray;">
@@ -1898,6 +1919,7 @@ else
 </div>
 
 <script id="answersTemplate" type="text/html">
+
     <!--ko if:Type() != 3 && Type() != 4 && Type() != 5 -->
     <tr>
         <!--ko if:IncludeorExclude() == '0' -->
@@ -1913,17 +1935,21 @@ else
                 <!-- /ko -->*@
         </td>
         <!--/ko-->
+
         <!--ko if:IncludeorExclude() == '1'-->
         <td class="col-lg-2">
+            <!-- ko if:Type()  == "2" -->
+            <p style="margin-top: 5px;margin-left: 12px;">
+                <span data-bind="text: '(Include) ' + questionString() + ' = ' "></span>
+                <img data-bind="attr:{src: answerString()}" width="40" />
+            </p>
+            <!-- /ko -->
+
+            <!-- ko if:Type() !="2" -->
             <p style="margin-top: 5px;margin-left: 12px; font-size:13px;">
                 <span data-bind="text: '(Include) ' + questionString() + ' = ' + answerString() "></span><span style="color:red;display:none;" data-bind="text:' (' + criteriaPrice() + 'p)'"></span>
             </p>
-            @*<!-- ko if:   Type()  == "6" -->
-                <p style="margin-top: 5px;margin-left: 12px;">
-                <span data-bind="text: '(Include) ' + questionString() + ' = ' "></span>
-                <img data-bind="attr:{src: answerString()}" width="80" />
-                </p>
-                <!-- /ko -->*@
+            <!-- /ko -->
         </td>
         <!--/ko-->
         <td class="col-lg-1" style=" padding: 0px !important; text-align:right;">
@@ -2342,7 +2368,29 @@ else
         <div class="clear-both"></div>
     </div>
 </script>
+
+
+<script id="SurveyssQuestionTiles" type="text/html">
+    <div class="list">
+        <div class="parent-list-title" ><span data-bind="text:DisplayQuestion"></span></div>
+        <div class="listview set-border padding10 list-type-tiles chlidList" data-role="listview">
+            @*<!-- ko template: { name: 'SurveyQuestionAnsTiles' , foreach: $root.profileAnswerList } --><!-- /ko -->*@
+
+            <img data-bind="attr: { src:LeftPicturePath},click:$root.saveSurveyQuestion.bind($data, 1)" style="width:100px;height:100px;" />
+            <img data-bind="attr: { src:RightPicturePath},click:$root.saveSurveyQuestion.bind($data, 1)" style="width:100px;height:100px;" />
+
+            <div class="clear-both"></div>
+        </div>
+        <div class="clear-both"></div>
+    </div>
+</script>
+
+
 <script id="profileQuestionAnsTiles" type="text/html">
+    <div class="list childList" data-bind="click:$root.saveProfileQuestion" data-dismiss="modal"> <span class="list-title" data-bind="text:Answer"></span> </div>
+</script>
+
+<script id="SurveyQuestionAnsTiles" type="text/html">
     <div class="list childList" data-bind="click:$root.saveProfileQuestion" data-dismiss="modal"> <span class="list-title" data-bind="text:Answer"></span> </div>
 </script>
 <script id="surveyQuestionTiles" type="text/html">

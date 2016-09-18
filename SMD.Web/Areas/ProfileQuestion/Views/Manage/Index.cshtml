@@ -26,10 +26,11 @@
                             <thead>
                                 <tr>
                                     <th class="col-lg-7 th-pointer"><span class="GridHeaderFont_size" id="2">Question<span></span></span></th>
-                                    <th class="col-lg-2 th-pointer"><span class="GridHeaderFont_size" id="1">Group<span class="icon-up"></span></span></th>
+                                    <th class="col-lg-2 th-pointer" style="display:none;"><span class="GridHeaderFont_size" id="1">Group<span class="icon-up"></span></span></th>
+                                    <th class="col-lg-2 th-pointer"><span class="GridHeaderFont_size" id="1">Start Date<span class="icon-up"></span></span></th>
                                     <th class="col-lg-2 th-pointer"><span class="GridHeaderFont_size" id="1">Answered</span></th>
                                     <th class="col-lg-2 th-pointer"><span class="GridHeaderFont_size" id="1">Delivered%</span></th>
-                                    <th class="col-lg-2 th-pointer"><span class="GridHeaderFont_size" id="1">SkippedCount</span></th>
+                                    <th class="col-lg-2 th-pointer" style="display:none;"><span class="GridHeaderFont_size" id="1">SkippedCount</span></th>
                                     <th class="col-lg-2 th-pointer"><span class="GridHeaderFont_size" id="1">Status</span></th>
                                     
 
@@ -58,8 +59,11 @@
                 <td>
                     <a class="store-user-link" data-bind="text:questionString,click:$root.onEditProfileQuestion"></a>
                 </td>
-                <td style="padding-left:9px;">
+                <td style="padding-left:9px;display:none;">
                     <p data-bind="text:profileGroupName"></p>
+                </td>
+                <td style="padding-left:9px;">
+                    <p data-bind="text:creationDate"></p>
                 </td>
                 <td style="padding-left:9px;">
                     <p data-bind="text:answerCount"></p>
@@ -68,7 +72,7 @@
                     <p data-bind="text:createdBy"></p>
                 </td>
                 <td style="padding-left:11px;">
-                    <p data-bind="text:skippedCount"></p>
+                    <p style="display:none;" data-bind="text:skippedCount"></p>
                 </td>
                 <td style="padding-left:11px;">
                     <!-- ko if: status() == 1-->
@@ -174,7 +178,7 @@
                     <div class="col-sm-12" style="float: left; margin-bottom:20px;">
                         <br />
                         <span style="font-size: 24px;" class="Theme_standard_clr" >Survey Questions</span><br />
-                        <span style="font-size: 14px;" class="Theme_subheading-Clr">Video campaigns can be paused and terminated at any time. Increase your conversions and reduce your spend by using profile filters.</span>  &nbsp; &nbsp; &nbsp; <span class="red bold rightAlign"> Watch Video <img src="/Images/youtube_play.JPG" height="25px" /> </span>   </span><br />
+                        <span style="font-size: 14px;" class="Theme_subheading-Clr">Video campaigns can be paused and terminated at any time. Increase your conversions and reduce your spend by using profile filters.</span>  &nbsp; &nbsp; &nbsp; <span class="red bold rightAlign" style="display:none;"> Watch Video <img src="/Images/youtube_play.JPG" height="25px" /> </span>   </span><br />
                     </div>
 
 

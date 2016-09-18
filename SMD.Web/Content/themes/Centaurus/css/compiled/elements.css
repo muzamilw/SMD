@@ -84,11 +84,11 @@ h1 small, h2 small, h3 small, h1 .small, h2 .small, h3 .small {
 }
 
 .btn-gray {
-    background-color: #95a5a6;
+    background-color: #81d3dc!important;
     border-color: #7f8c8d;
     color: #fff;
     height:60px;
-    font-size:1.3em;
+    font-size:14px;
     width:130px;
     white-space:normal;
     margin-right:15px;
@@ -125,7 +125,7 @@ h1 small, h2 small, h3 small, h1 .small, h2 .small, h3 .small {
     }
 
     .btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open .dropdown-toggle.btn-default {
-        background-color: #7f8c8d;
+        background-color: #34b9c7;
         border-color: #5c6667;
     }
 
@@ -5473,7 +5473,7 @@ left: 0 !important;
        
 right: 0 !important;
        
-margin-left:225px !important;
+margin-left:98px !important;
        
 margin-right: auto !important;
        
@@ -5491,7 +5491,7 @@ background-image: url(/Images/crowdcentz_logo.png) !important;
     width: 72px;
     height: 18px;
     position: absolute;
-    left: 299px;
+    left:250px;
     right: 0;
     margin-right: auto;
 }

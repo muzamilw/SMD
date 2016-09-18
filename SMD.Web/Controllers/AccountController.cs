@@ -688,7 +688,7 @@ namespace SMD.MIS.Controllers
              if (identity != null)
              {
                  SetupUserClaims(identity);
-                 claimsSecurityService.AddCompanyIdClaimToIdentity(identity, Convert.ToInt32(CompanyId), CompanyName, CompanyLogo, Role);
+                 claimsSecurityService.AddCompanyIdClaimToIdentity(identity, Convert.ToInt32(CompanyId), CompanyName, CompanyLogo, Role,user.FullName,user.Phone1);
                  
                  AuthenticationManager.SignIn(new AuthenticationProperties { IsPersistent = true }, identity);
 

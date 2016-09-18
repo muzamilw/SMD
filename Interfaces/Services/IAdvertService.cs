@@ -8,7 +8,8 @@ namespace SMD.Interfaces.Services
 {
     public interface IAdvertService
     {
-        
+        AdCampaignBaseResponse GetSurveyQuestionAnser(long SqID);
+        AdCampaignBaseResponse GetALLSurveyQuestionData();
         AdCampaignBaseResponse GetCampaignBaseData();
         AdCampaignBaseResponse SearchCountriesAndCities(string searchString);
         AdCampaignBaseResponse SearchLanguages(string searchString);
