@@ -221,3 +221,201 @@ GO
 ALTER TABLE dbo.Coupon SET (LOCK_ESCALATION = TABLE)
 GO
 COMMIT
+
+
+/*----------------*/
+USE [SMDv2]
+GO
+/****** Object:  StoredProcedure [dbo].[GetAdminDashBoardInsights]    Script Date: 9/17/2016 12:17:24 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER PROCEDURE [dbo].[GetAdminDashBoardInsights]
+
+as
+Begin
+select rectype, pMonth, us, uk, ca, au, ae
+from 
+(
+  select ordr, stats, countrycode, rectype, pMonth
+  from ( 
+		select 1 as ordr, count(u.id) stats, c.CountryCode, (case when month( DATEADD(MONTH,DATEDIFF(MONTH, 0, u.LastLoginTime), 0)) = month(getdate()) then 'current' else 'prev' end) pMonth,'Active App Users' rectype
+		from [SMDv2].[dbo].[AspNetUsers] u
+		inner join Company co on u.CompanyId = co.CompanyId
+		inner join Country c on co.CountryId = c.CountryID
+		where u.LastLoginTime > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2))
+		group by DATEADD(MONTH,DATEDIFF(MONTH, 0, u.LastLoginTime), 0) ,  c.CountryCode
+
+		union
+
+		select 2 as ordr,  count(u.id) stats, c.CountryCode, (case when month( DATEADD(MONTH,DATEDIFF(MONTH, 0, u.CreatedDateTime), 0)) = month(getdate()) then 'current' else 'prev' end) pMonth,'New App Users' rectype
+		from [SMDv2].[dbo].[AspNetUsers] u
+		inner join Company co on u.CompanyId = co.CompanyId
+		inner join Country c on co.CountryId = c.CountryID
+		where u.CreatedDateTime > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2))
+		group by DATEADD(MONTH,DATEDIFF(MONTH, 0, u.CreatedDateTime), 0) ,  c.CountryCode
+		union
+
+		select 3 as ordr,   count(ac.CampaignID) stats, c.CountryCode , 'prev' pMonth,'Active Campaigns' rectype
+		from AdCampaign ac
+		inner join Company co on ac.CompanyId = co.CompanyId
+		inner join Country c on co.CountryId = c.CountryID
+		where ac.EndDateTime > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) AND ac.StartDateTime < =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-1))
+		group by c.CountryCode
+		union
+		select 3 as ordr,  count(ac.CampaignID) stats, c.CountryCode , 'current' pMonth,'Active Campaigns' rectype
+		from AdCampaign ac
+		inner join Company co on ac.CompanyId = co.CompanyId
+		inner join Country c on co.CountryId = c.CountryID
+		where ac.EndDateTime > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-1)) AND ac.StartDateTime < =  GETDATE()
+		group by c.CountryCode
+
+		union 
+		select 4 as ordr,  count(ac.CampaignID) stats, c.CountryCode , (case when month( DATEADD(MONTH,DATEDIFF(MONTH, 0, ac.ApprovalDateTime), 0)) = month(getdate()) then 'current' else 'prev' end) pMonth,'New Campaigns' rectype
+		from AdCampaign ac
+		inner join Company co on ac.CompanyId = co.CompanyId
+		inner join Country c on co.CountryId = c.CountryID
+		where ac.ApprovalDateTime > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) 
+		group by DATEADD(MONTH,DATEDIFF(MONTH, 0, ac.ApprovalDateTime), 0) ,  c.CountryCode
+		union 
+				 
+		select 5 as ordr,  count(coup.CouponId) stats, c.CountryCode , (case when month( DATEADD(MONTH,DATEDIFF(MONTH, 0, coup.ApprovalDateTime), 0)) = month(getdate()) then 'current' else 'prev' end) pMonth,'Coupons approved' rectype
+		from Coupon coup
+		inner join Company co on coup.CompanyId = co.CompanyId
+		inner join Country c on co.CountryId = c.CountryID
+		where coup.ApprovalDateTime > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) 
+		group by DATEADD(MONTH,DATEDIFF(MONTH, 0, coup.ApprovalDateTime), 0) ,  c.CountryCode
+
+		union 
+		select 6 as ordr,  count(upc.CouponPurchaseId) stats, c.CountryCode , (case when month( DATEADD(MONTH,DATEDIFF(MONTH, 0, upc.PurchaseDateTime), 0)) = month(getdate()) then 'current' else 'prev' end) pMonth,'Coupons Purchased' rectype
+		from UserPurchasedCoupon upc
+		inner join Coupon cpn on cpn.CouponId = upc.CouponId
+		inner join Company co on cpn.CompanyId = co.CompanyId
+		inner join Country c on co.CountryId = c.CountryID
+		where upc.PurchaseDateTime > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) 
+		group by DATEADD(MONTH,DATEDIFF(MONTH, 0, upc.PurchaseDateTime), 0) ,  c.CountryCode
+
+		union 
+
+		select 7 as ordr,  count(upc.RedemptionDateTime) stats, c.CountryCode , (case when month( DATEADD(MONTH,DATEDIFF(MONTH, 0, upc.RedemptionDateTime), 0)) = month(getdate()) then 'current' else 'prev' end) pMonth,'Coupons Redeemed' rectype
+		from UserPurchasedCoupon upc
+		inner join Coupon cpn on cpn.CouponId = upc.CouponId
+		inner join Company co on cpn.CompanyId = co.CompanyId
+		inner join Country c on co.CountryId = c.CountryID
+		where upc.RedemptionDateTime > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) 
+		group by DATEADD(MONTH,DATEDIFF(MONTH, 0, upc.RedemptionDateTime), 0) ,  c.CountryCode
+
+		union
+		select 8 as ordr,   count(acr.ResponseID) stats, c.CountryCode , (case when month( DATEADD(MONTH,DATEDIFF(MONTH, 0, acr.CreatedDateTime), 0)) = month(getdate()) then 'current' else 'prev' end) pMonth,'Video Ads delivered' rectype
+		from AdCampaignResponse acr
+		inner join AdCampaign ac on ac.CampaignID = acr.CampaignID
+		inner join Company co on acr.CompanyId = co.CompanyId
+		inner join Country c on co.CountryId = c.CountryID
+		where acr.CreatedDateTime > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) AND ac.Type = 1
+		group by DATEADD(MONTH,DATEDIFF(MONTH, 0, acr.CreatedDateTime), 0) ,  c.CountryCode
+		
+		union 
+
+		select 9 as ordr,   count(acr.ResponseID) stats, c.CountryCode , (case when month( DATEADD(MONTH,DATEDIFF(MONTH, 0, acr.CreatedDateTime), 0)) = month(getdate()) then 'current' else 'prev' end) pMonth,'Games Ads delivered' rectype
+		from AdCampaignResponse acr
+		inner join AdCampaign ac on ac.CampaignID = acr.CampaignID
+		inner join Company co on acr.CompanyId = co.CompanyId
+		inner join Country c on co.CountryId = c.CountryID
+		where acr.CreatedDateTime > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) AND ac.Type = 4
+		group by DATEADD(MONTH,DATEDIFF(MONTH, 0, acr.CreatedDateTime), 0) ,  c.CountryCode
+
+		union
+		select 10 as ordr,   count(sqr.SQResponseID) stats, c.CountryCode , (case when month( DATEADD(MONTH,DATEDIFF(MONTH, 0, sqr.ResoponseDateTime), 0)) = month(getdate()) then 'current' else 'prev' end) pMonth,'Survey Question Answered' rectype
+		from SurveyQuestionResponse sqr
+		inner join Company co on sqr.CompanyId = co.CompanyId
+		inner join Country c on co.CountryId = c.CountryID
+		where sqr.ResoponseDateTime > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) 
+		group by DATEADD(MONTH,DATEDIFF(MONTH, 0, sqr.ResoponseDateTime), 0) ,  c.CountryCode
+
+		union
+
+		select 11 as ordr,   count(pqua.PQUAnswerID) stats, c.CountryCode , (case when month( DATEADD(MONTH,DATEDIFF(MONTH, 0, pqua.AnswerDateTime), 0)) = month(getdate()) then 'current' else 'prev' end) pMonth,'Profile Question Answered' rectype
+		from ProfileQuestionUserAnswer pqua
+		inner join Company co on pqua.CompanyId = co.CompanyId
+		inner join Country c on co.CountryId = c.CountryID
+		where pqua.AnswerDateTime > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) 
+		group by DATEADD(MONTH,DATEDIFF(MONTH, 0, pqua.AnswerDateTime), 0) ,  c.CountryCode
+
+		union 
+		select 12 as ordr,  sum(t.CreditAmount) stats, c.CountryCode, (case when month( DATEADD(MONTH,DATEDIFF(MONTH, 0, t.TransactionDate), 0)) = month(getdate()) then 'current' else 'prev' end) pMonth,'Video Ads Revenue' rectype
+		from [Transaction] t
+		inner join Account a on a.AccountId = t.AccountID
+		inner join AdCampaign ac on ac.CampaignID = t.AdCampaignID
+		inner join Company co on ac.CompanyId = co.CompanyId
+		inner join Country c on co.CountryId = c.CountryID
+		where t.TransactionDate > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) AND t.Type = 1 AND a.AccountType = 1 AND ac.Type = 1
+		group by DATEADD(MONTH,DATEDIFF(MONTH, 0, t.TransactionDate), 0) ,  c.CountryCode
+
+		union 
+		select 13 as ordr,  sum(t.CreditAmount) stats, c.CountryCode, (case when month( DATEADD(MONTH,DATEDIFF(MONTH, 0, t.TransactionDate), 0)) = month(getdate()) then 'current' else 'prev' end) pMonth,'Game Ads Revenue' rectype
+		from [Transaction] t
+		inner join Account a on a.AccountId = t.AccountID
+		inner join AdCampaign ac on ac.CampaignID = t.AdCampaignID
+		inner join Company co on ac.CompanyId = co.CompanyId
+		inner join Country c on co.CountryId = c.CountryID
+		where t.TransactionDate > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) AND t.Type = 1 AND  a.AccountType = 1 AND ac.Type = 4
+		group by DATEADD(MONTH,DATEDIFF(MONTH, 0, t.TransactionDate), 0) ,  c.CountryCode
+
+
+		union 
+		select 14 as ordr,   sum(t.CreditAmount) stats, c.CountryCode, (case when month( DATEADD(MONTH,DATEDIFF(MONTH, 0, t.TransactionDate), 0)) = month(getdate()) then 'current' else 'prev' end) pMonth,'Survay Cards Revenue' rectype
+		from [Transaction] t
+		inner join Account a on a.AccountId = t.AccountID
+		inner join SurveyQuestion sq on sq.SQID = t.SQID
+		-- inner join Company co on ac.CompanyId = co.CompanyId
+		inner join Country c on sq.CountryId = c.CountryID
+		where t.TransactionDate > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) AND t.Type = 2 AND  a.AccountType = 1 
+		group by DATEADD(MONTH,DATEDIFF(MONTH, 0, t.TransactionDate), 0) ,  c.CountryCode
+
+		union
+
+		select 15 as ordr,   sum(t.CreditAmount) stats, c.CountryCode, (case when month( DATEADD(MONTH,DATEDIFF(MONTH, 0, t.TransactionDate), 0)) = month(getdate()) then 'current' else 'prev' end) pMonth,'Profile Questions Revenue' rectype
+		from [Transaction] t
+		inner join Account a on a.AccountId = t.AccountID
+		inner join ProfileQuestion pq on pq.PQID = t.PQID
+		-- inner join Company co on ac.CompanyId = co.CompanyId
+		inner join Country c on pq.CountryId = c.CountryID
+		where t.TransactionDate > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) AND t.Type = 7 AND  a.AccountType = 1 
+		group by DATEADD(MONTH,DATEDIFF(MONTH, 0, t.TransactionDate), 0) ,  c.CountryCode
+
+		union  
+		select 16 as ordr,  sum(t.DebitAmount) stats, c.CountryCode, (case when month( DATEADD(MONTH,DATEDIFF(MONTH, 0, t.TransactionDate), 0)) = month(getdate()) then 'current' else 'prev' end) pMonth,'Payout via PayPal' rectype
+		from [Transaction] t
+		inner join Account a on a.AccountId = t.AccountID
+		inner join Company co on a.CompanyId = co.CompanyId
+		inner join Country c on co.CountryId = c.CountryID
+		where t.TransactionDate > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) AND t.Type = 10 AND  a.AccountType = 4 
+		group by DATEADD(MONTH,DATEDIFF(MONTH, 0, t.TransactionDate), 0) ,  c.CountryCode
+
+		union  
+		select 17 as ordr, CASE WHEN sum(t.CreditAmount) > 0 THEN sum(t.CreditAmount) ELSE 0 END stats, c.CountryCode, (case when month( DATEADD(MONTH,DATEDIFF(MONTH, 0, t.TransactionDate), 0)) = month(getdate()) then 'current' else 'prev' end) pMonth,'Income from Stripe' rectype
+		from [Transaction] t
+		inner join Account a on a.AccountId = t.AccountID
+		inner join Company co on a.CompanyId = co.CompanyId
+		inner join Country c on co.CountryId = c.CountryID
+		where t.TransactionDate > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) AND  a.AccountType = 1 
+		group by DATEADD(MONTH,DATEDIFF(MONTH, 0, t.TransactionDate), 0) ,  c.CountryCode
+
+
+		) as rec
+				
+)  src
+
+pivot
+(
+  max(stats)
+    for countrycode in ([us], [uk],[ca], [au], [ae]) 
+) piv
+
+
+order by ordr
+END
+
+

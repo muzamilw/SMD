@@ -312,8 +312,7 @@ define("analytic/analytic.viewModel",
                         view = specifiedView;
                         ko.applyBindings(view.viewModel, view.bindingRoot);
 						intializeDashboardInsightsData();
-						
-                       // getAnalytic();
+						getAnalytic();
                     };
                 return {
 

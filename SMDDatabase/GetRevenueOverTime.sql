@@ -1,10 +1,6 @@
-﻿/*
-Created By Hadia 
---------------------------------------------------------------------------------------
-*/
-USE [SMDv2]
+﻿USE [SMDv2]
 GO
-/****** Object:  StoredProcedure [dbo].[GetRevenueOverTime]    Script Date: 9/8/2016 11:38:10 AM ******/
+/****** Object:  StoredProcedure [dbo].[GetRevenueOverTime]    Script Date: 9/17/2016 1:07:53 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -39,7 +35,7 @@ CREATE TABLE #dim
   [day]        AS DATEPART(DAY,      [date]),
   [month]      AS DATEPART(MONTH,    [date]),
   FirstOfMonth AS CONVERT(DATE, DATEADD(MONTH, DATEDIFF(MONTH, 0, [date]), 0)),
-  [MonthName]  AS DATENAME(MONTH,    [date]),
+  [MonthName]  AS right(convert(varchar, [date], 106), 8),
   [week]       AS DATEPART(WEEK,     [date]),
   [ISOweek]    AS DATEPART(ISO_WEEK, [date]),
   [DayOfWeek]  AS DATEPART(WEEKDAY,  [date]),
@@ -92,18 +88,19 @@ ELSE IF @Granularity = 2
 		  inner join #dim d on d.date = CONVERT(date, t.TransactionDate)
 		where a.CompanyId = @CompanyId and a.AccountType = 1
 		group by d.week
-
+		
+		
 		END
 ELSE IF @Granularity = 3
 	BEGIN
-		select   sum(t.CreditAmount) amountcollected, d.month
+		select   sum(t.CreditAmount) amountcollected, d.MonthName
 
 		  from [Transaction] t
 		  inner join Account a on t.AccountID = a.AccountId
 		  inner join Company co on a.CompanyId = co.CompanyId
 		  inner join #dim d on d.date = CONVERT(date, t.TransactionDate)
 		where a.CompanyId = @CompanyId and a.AccountType = 1
-		group by d.month
+		group by d.MonthName
 
 		END
 ELSE IF @Granularity = 4
@@ -125,4 +122,4 @@ END
 
 --@Granularity INT,			----- 1 for day, 2 for week, 3 for month and 4 for year
 
-EXEC GetRevenueOverTime 466, 4
+--EXEC GetRevenueOverTime 466, 3
