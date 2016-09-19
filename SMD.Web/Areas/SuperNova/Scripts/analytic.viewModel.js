@@ -14,7 +14,7 @@ define("analytic/analytic.viewModel",
                     analyticFromdate = ko.observable(),
 					analyticTodate = ko.observable(),
 					selectedGranualforRevenue = ko.observable(1),
-					RevenueOverTimeData = ko.observableArray(),
+					RevenueOverTimeData = ko.observable([]),
 					intializeDashboardInsightsData = function(){
 						DashboardInsightsData.push(new model.DashboardInsightsModel("Active App User"));
 						DashboardInsightsData.push(new model.DashboardInsightsModel("New App User"));
@@ -320,6 +320,9 @@ define("analytic/analytic.viewModel",
                                 success: function (data) {
 									//data[0].amountcollected
 									//data[0].granular
+									RevenueOverTimeData([]);
+                                ko.utils.arrayPushAll(RevenueOverTimeData(), data);
+                                RevenueOverTimeData.valueHasMutated();
 	                            },
                                 error: function (response) {
                                     toastr.error("Failed to load Ad Campaigns!");
