@@ -14,8 +14,6 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                 </div>
 
-
-                
                 <div class="row" id="">
 
                     <div class="col-lg-12 col-md-12 col-sm-12">
@@ -23,7 +21,7 @@
                         <div class="tab-pane fade in active" data-bind="with: $root.selectedCompany" id="tab-generalinfo">
 
                             <div class="col-lg-12 form-horizontal">
-                                <h4  style="margin-top:20px;">
+                                <h4  style="margin-top:20px; display:none;">
                                     Company Info
                                 </h4>
                                 <div class="col-lg-9" style="margin-top: 12px;">
@@ -51,7 +49,7 @@
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
 
-                                                <label class="control-label text-right tooltip-float">Phone</label>
+                                                <label class="control-label text-right tooltip-float">Sales line</label>
                                             </div>
                                             <div class="col-lg-6">
                                                 <input type="text" class="form-control" data-bind="value: Tel1">
@@ -61,7 +59,7 @@
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
 
-                                                <label class="control-label text-right tooltip-float">Phone 2</label>
+                                                <label class="control-label text-right tooltip-float">Sales line 2</label>
                                             </div>
                                             <div class="col-lg-6">
                                                 <input type="text" class="form-control" data-bind="value: Tel2">
@@ -129,10 +127,10 @@
                                                 <label for="txtUploadLogo" class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn">Upload Logo</label>
                                             </div>
                                             <div class="col-lg-8">
-                                                <div class="defaultImgUploadImage pull-left" style="width:300px;cursor:pointer;text-align:center">
-                                                    <img style="width:auto;max-width:300px;" data-bind="visible: LogoImageBase64() != '',attr: { src: LogoImageBase64  }" src="/Content/Images/Company_Default.png" onclick="showUploadDialog();" />
-                                                    <img style="width:auto;max-width:300px;" data-bind="visible: Logo() != '' ,attr: { src: Logo()  }" onclick="showUploadDialog();" />
-                                                    <div style="height:auto;width:300px;" onclick="showUploadDialog();" data-bind="visible: Logo() == '' &&   LogoImageBase64() == ''"></div>
+                                                <div class="defaultImgUploadImage pull-left" style="width:270px;cursor:pointer;text-align:center">
+                                                    <img style="width:auto;max-width:236px; min-height:150px;" data-bind="visible: LogoImageBase64() != '',attr: { src: LogoImageBase64  }" src="/Content/Images/Company_Default.png" onclick="showUploadDialog();" />
+                                                    <img style="width:auto;max-width:236px; min-height:150px;" data-bind="visible: Logo() != '' ,attr: { src: Logo()  }" onclick="showUploadDialog();" />
+                                                    <div style="height:auto;width:236px; min-height:150px;" onclick="showUploadDialog();" data-bind="visible: Logo() == '' &&   LogoImageBase64() == ''"></div>
                                                     <div style="    padding-top: 10px;    text-align: center;    font-size: 12px;    color: gray;">
                                                         (300 x 150 pixels)
                                                     </div>
@@ -164,9 +162,98 @@
                                     </div>
                                 </div>
                             </div>
+                            
                             <div class="col-lg-12 form-horizontal">
-                                <h4 style="margin-top:20px;">
-                                   Billing Information
+                                <h4  style="margin-top:20px; display:none;">
+                                    Social Media Handles
+                                </h4>
+
+                                <div class="col-lg-9" style="margin-top: 12px;">
+                                    <div class="col-lg-12">
+
+                                        <div class="form-group">
+                                            <div class="col-lg-4 text-right">
+                                                <label class="control-label text-right tooltip-float">Social Media Handle</label>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                @*<input type="text" class="form-control" data-bind="value: TwitterHandle() !='undefined' ? TwitterHandle :'( Not Configured )'">*@
+                                                <select class="form-control">
+                                                    <option style="background-image:url(~/Content/Images/TwitterNew.png)"></option>
+                                                    @*<option><img src="~/Content/Images/facebookNew.png" /></option>
+                                                    <option><img src="~/Content/Images/LinkedInNew.png" /></option>*@
+                                                   
+                                                    
+                                                </select>
+                                                
+                                            </div>
+
+                                        </div>
+
+
+
+                                        <div class="form-group" style="display:none;">
+                                            <div class="col-lg-4 text-right">
+                                                <label class="control-label text-right tooltip-float">Facebook Handle</label>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <input type="text" class="form-control" data-bind="value: FacebookHandle() !='undefined' ? FacebookHandle :'( Not Configured )'">
+                                            </div>
+
+                                        </div>
+
+
+
+                                        <div class="form-group" style="display:none;">
+                                            <div class="col-lg-4 text-right">
+                                                <label class="control-label text-right tooltip-float">Instagram Handle</label>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <input type="text" class="form-control" data-bind="value: InstagramHandle() !='undefined' ? InstagramHandle :'( Not Configured )'">
+                                            </div>
+
+                                        </div>
+
+
+
+                                        <div class="form-group" style="display:none;">
+                                            <div class="col-lg-4 text-right">
+                                                <label class="control-label text-right tooltip-float">Pinterest Handle</label>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <input type="text" class="form-control" data-bind="value: PinterestHandle() !='undefined' ? PinterestHandle :'( Not Configured )'">
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+
+                                    </div>
+                                    <div class="col-lg-12 form-horizontal">
+                                        <h4  style="margin-top:20px; display:none;">
+                                            Credit Card Information
+                                        </h4>
+                                        <div class="col-lg-9">
+                                            <div class="form-group">
+                                                <div class="col-lg-4 text-right">
+                                                    <label class="control-label text-right tooltip-float">Stripe Account</label>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <input type="text" readonly class="form-control" data-bind="value: StripeCustomerId() !='undefined' ? StripeCustomerId :'( Not Configured )'">
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <button class="btn  btn-info" id="saveBtn" data-bind="click: $root.chargeCustomer, text:StripeCustomerId() =='undefined' ? 'Configure':'Update' ">Processing...</button>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                            <div class="col-lg-12 form-horizontal">
+                                <h4 style="margin-top:20px; display:none;">
+                                    Billing Information
                                 </h4>
                                 <div class="col-lg-9" style="margin-top: 12px;">
                                     <div class="col-lg-12">
@@ -179,7 +266,7 @@
                                                 <input type="text" class="form-control" data-bind="value: BillingAddressLine1">
                                             </div>
                                         </div>
-                                   
+
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
 
@@ -189,7 +276,7 @@
                                                 <input type="text" class="form-control" data-bind="value: BillingAddressLine2">
                                             </div>
                                         </div>
-                                   
+
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
 
@@ -199,7 +286,7 @@
                                                 <select class="form-control" data-bind="options: $root.countries, optionsText: 'CountryName', optionsValue: 'CountryId', optionsCaption: '&lt;' + 'Select Country'+ '&gt;' , value:BillingCountryId"></select>
                                             </div>
                                         </div>
-                                  
+
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
 
@@ -209,7 +296,7 @@
                                                 <select class="form-control" data-bind="options: $root.cities, optionsText: 'CityName', optionsValue: 'CityId', optionsCaption: '&lt;' + 'Select City'+ '&gt;' , value:BillingCityId"></select>
                                             </div>
                                         </div>
-                                  
+
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
 
@@ -219,7 +306,7 @@
                                                 <input type="text" class="form-control" data-bind="value: BillingState">
                                             </div>
                                         </div>
-                                   
+
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
 
@@ -229,7 +316,7 @@
                                                 <input type="text" class="form-control" data-bind="value: BillingZipCode">
                                             </div>
                                         </div>
-                                   
+
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
 
@@ -251,90 +338,9 @@
                                         </div>
                                     </div>
 
-                                
+
                                 </div>
                             </div>
-                            <div class="col-lg-12 form-horizontal">
-                                <h4  style="margin-top:20px;">
-                                    Social Media Handles
-                                </h4>
-
-                                <div class="col-lg-9" style="margin-top: 12px;">
-                                    <div class="col-lg-12">
-
-                                        <div class="form-group">
-                                            <div class="col-lg-4 text-right">
-                                                <label class="control-label text-right tooltip-float">Twitter Handle</label>
-                                            </div>
-                                            <div class="col-lg-4">
-                                                <input type="text" class="form-control" data-bind="value: TwitterHandle() !='undefined' ? TwitterHandle :'( Not Configured )'">
-                                            </div>
-
-                                        </div>
-
-
-
-                                        <div class="form-group">
-                                            <div class="col-lg-4 text-right">
-                                                <label class="control-label text-right tooltip-float">Facebook Handle</label>
-                                            </div>
-                                            <div class="col-lg-4">
-                                                <input type="text" class="form-control" data-bind="value: FacebookHandle() !='undefined' ? FacebookHandle :'( Not Configured )'">
-                                            </div>
-
-                                        </div>
-
-
-
-                                        <div class="form-group">
-                                            <div class="col-lg-4 text-right">
-                                                <label class="control-label text-right tooltip-float">Instagram Handle</label>
-                                            </div>
-                                            <div class="col-lg-4">
-                                                <input type="text" class="form-control" data-bind="value: InstagramHandle() !='undefined' ? InstagramHandle :'( Not Configured )'">
-                                            </div>
-
-                                        </div>
-
-
-
-                                        <div class="form-group">
-                                            <div class="col-lg-4 text-right">
-                                                <label class="control-label text-right tooltip-float">Pinterest Handle</label>
-                                            </div>
-                                            <div class="col-lg-4">
-                                                <input type="text" class="form-control" data-bind="value: PinterestHandle() !='undefined' ? PinterestHandle :'( Not Configured )'">
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-                                </div>
-
-
-
-                                    </div>
-                                    <div class="col-lg-12 form-horizontal">
-                                        <h4  style="margin-top:20px;">
-                                            Credit Card Information
-                                        </h4>
-                                        <div class="col-lg-9">
-                                            <div class="form-group">
-                                                <div class="col-lg-4 text-right">
-                                                    <label class="control-label text-right tooltip-float">Stripe Account</label>
-                                                </div>
-                                                <div class="col-lg-4">
-                                                    <input type="text" readonly class="form-control" data-bind="value: StripeCustomerId() !='undefined' ? StripeCustomerId :'( Not Configured )'">
-                                                </div>
-                                                <div class="col-lg-2">
-                                                    <button class="btn  btn-info" id="saveBtn" data-bind="click: $root.chargeCustomer, text:StripeCustomerId() =='undefined' ? 'Configure':'Update' ">Processing...</button>
-                                                </div>
-                                            </div>
-
-
-                                        </div>
-                                    </div>
-
 
 
                                 </div>

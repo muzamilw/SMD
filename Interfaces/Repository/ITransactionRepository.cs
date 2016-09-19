@@ -16,5 +16,10 @@ namespace SMD.Interfaces.Repository
 
         List<GetTransactions_Result> GetTransactions(int CompanyId, int AccountType, int Rows);
         IEnumerable<Transaction> GetTransactionByAccountId(int accountId);
+        IEnumerable<GetAdminDashBoardInsights_Result> GetAdminDashBoardInsights();
+        
+
+
+    
     }
 }

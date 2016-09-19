@@ -106,11 +106,6 @@ define("pQuestion/pQuestion.viewModel",
 
                                     questions.removeAll();
                                     
-                                      //selectedQuestion(model.question.Create(updateSurveryItem(data.SurveyQuestion)));
-
-                                      //selectedQuestion(model.question.Create(data.SurveyQuestion));
-
-                                   
                                        ko.utils.arrayPushAll(professions(), data.Professions);
 
                                        professions.valueHasMutated();
@@ -120,24 +115,14 @@ define("pQuestion/pQuestion.viewModel",
 
                                         questions.push(model.questionServertoClientMapper(SetStatusForQuestion(item)));
 
-
-                                        
-
                                         //GetAllLocationList.removeAll();
                                         //GetAllLocationList().push(item.ProfileQuestionTargetLocation);
                                         //GetAllLocationList.valueHasMutated();
 
-
-
-
                                         //GetAllLocationList.push(item.ProfileQuestionTargetLocation);
                                       
-
                                         //ko.utils.arrayPushAll(GetAllLocationList(), item.ProfileQuestionTargetLocation);
                                         
-                                     
-
-
                                     });
                                    
                                     pager().totalCount(data.TotalCount);
@@ -305,7 +290,7 @@ define("pQuestion/pQuestion.viewModel",
                 },     
                     // Add new Profile Question
                     addNewProfileQuestion = function () {
-
+                        $("#panelArea,#topArea").css("display", "none");
                         HeaderText("New Question");
                         selectedQuestion(new model.question());
                         selectedQuestion().Gender("1");
@@ -367,6 +352,7 @@ define("pQuestion/pQuestion.viewModel",
                 
                     // Close Editor 
                     closeEditDialog = function () {
+                        $("#panelArea,#topArea").css("display", "block");
                         if (!hasChangesOnQuestion()) {
                             isEditorVisible(false);
                             return;
@@ -381,7 +367,7 @@ define("pQuestion/pQuestion.viewModel",
                     },
                     // On editing of existing PQ
                     onEditProfileQuestion = function (item) {
-                        
+                        $("#panelArea,#topArea").css("display", "none");
                         AgeRangeStart(13);
                         AgeRangeEnd(80);
 
@@ -446,18 +432,13 @@ define("pQuestion/pQuestion.viewModel",
                                ProfileQuestionId: profileQuestionId
                            },
                            {
-                               
                                success: function (answers) {
                                  
                                     selectedQuestion().reset();
 
-                                    
-
                                     selectedQuestion().answers.removeAll();
                                     
-
                                     _.each(answers, function (item) {
-                                        
                                         selectedQuestion().answers.push(model.questionAnswerServertoClientMapper(item));
                                     });
 
@@ -467,9 +448,41 @@ define("pQuestion/pQuestion.viewModel",
                                  //   selectedQuestion().ProfileQuestionTargetLocation.push(answers[0].ProfileQuestion.ProfileQuestionTargetLocation)
 
                                     
-                                    selectedQuestion().ProfileQuestionTargetCriteria.removeAll();
+                                     selectedQuestion().ProfileQuestionTargetCriteria.removeAll();
 
-                                    selectedQuestion().ProfileQuestionTargetLocation.removeAll();
+                                     selectedQuestion().ProfileQuestionTargetLocation.removeAll();
+
+                                    
+                                    //var matchedItem = ko.utils.arrayFirst(branchLocations(), function (arrayitem) {
+
+                                    //    return arrayitem.BranchId == item.LocationBranchId();
+                                   //});
+                                    console.log(selectedQuestion().ProfileQuestionTargetLocation());
+                                    
+                                   // ko.utils.arrayPushAll(selectedQuestion().ProfileQuestionTargetLocation(), answers[0].ProfileQuestion.ProfileQuestionTargetLocation);
+
+                                     
+                                    _.each(answers[0].ProfileQuestion.ProfileQuestionTargetLocation, function (itemtemp, i) {
+
+                                        selectedQuestion().ProfileQuestionTargetLocation.push(new model.ProfileQuestionTargetLocation.Create({
+                                            CountryId: itemtemp.CountryID,
+                                            Country: itemtemp.Country,
+                                            PqId: itemtemp.PQID,
+                                            Radius: itemtemp.Radius,
+                                            Id: itemtemp.ID,
+                                            CityId: itemtemp.CityID,
+                                            City: itemtemp.City
+                                        }));
+                                    });
+
+
+                                    debugger;
+
+
+                                    _.each(selectedQuestion().ProfileQuestionTargetLocation(), function (item) {
+                                        addCountryToCountryList(item.CountryID(), item.Country());
+                                    });
+
 
 
                                    _.each(answers[0].ProfileQuestion.ProfileQuestionTargetCriteria, function (itemtemp, i) {
@@ -913,7 +926,7 @@ define("pQuestion/pQuestion.viewModel",
                             Country: selectedLocation().Country,
                             City: selectedLocation().City,
                             IncludeorExclude: selectedLocation().IncludeorExclude(),
-                            PQID: selectedQuestion().qId(),
+                            //PQID: selectedQuestion().qId(),
                             Latitude: selectedLocation().Latitude,
                             Longitude: selectedLocation().Longitude,
                         }));

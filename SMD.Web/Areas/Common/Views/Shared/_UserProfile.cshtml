@@ -22,127 +22,136 @@
 
 
                 <div class="row" id="">
-                   
+
                     <div class="col-lg-12 col-md-12 col-sm-12">
-                       
+                        s
                                     <div class="tab-pane fade in active" data-bind="with: $root.selectedUser" id="tab-generalinfo">
                                         <div class="col-lg-12 form-horizontal">
-                                            <h4 class="" style="margin-top:20px;">
-                                                Personal Info
-                                            </h4>
-                                            <div class="col-lg-9" style="margin-top: 12px;">
-                                                <div class="col-lg-12">
-                                                    <div class="form-group">
-                                                        <div class="col-lg-4 text-right">
+                                            <div class="col-lg-12 form-horizontal">
+                                                <div class="col-lg-4 form-horizontal" style="text-align:right;">
+                                                    <h4 class="" style="margin-top:20px; display:none;">
+                                                        Personal Info
+                                                    </h4>
+                                                </div>
+                                                <div class="col-lg-8 form-horizontal" style="text-align:right;">
+                                                    <button data-bind="click:$root.ChangePassword" class="btn btn-primary">
+                                                        Change Password
+                                                    </button>
+                                                </div>
+                                                </div>
+                                                <div class="col-lg-9" style="margin-top: 12px;">
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <div class="col-lg-4 text-right">
 
-                                                            <label class="control-label text-right tooltip-float">Full Name</label>
-                                                        </div>
-                                                        <div class="col-lg-6">
-                                                            <input type="text" class="form-control" data-bind="value: fullName">
+                                                                <label class="control-label text-right tooltip-float">Full Name</label>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <input type="text" class="form-control" data-bind="value: fullName">
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-lg-12">
-                                                    <div class="form-group">
-                                                        <div class="col-lg-4 text-right">
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <div class="col-lg-4 text-right">
 
-                                                            <label class="control-label text-right tooltip-float">Gender</label>
-                                                        </div>
-                                                        <div class="col-lg-6">
-                                                            <select class="form-control" data-bind="options: $root.genderList, optionsText: 'name', optionsValue: 'id', optionsCaption: '&lt;' + 'Select Gender'+ '&gt;' , value:gender"></select>
+                                                                <label class="control-label text-right tooltip-float">Gender</label>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <select class="form-control" data-bind="options: $root.genderList, optionsText: 'name', optionsValue: 'id', optionsCaption: '&lt;' + 'Select Gender'+ '&gt;' , value:gender"></select>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-lg-12">
-                                                    <div class="form-group">
-                                                        <div class="col-lg-4 text-right">
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <div class="col-lg-4 text-right">
 
-                                                            <label class="control-label text-right tooltip-float">DOB</label>
-                                                        </div>
-                                                        <div class="col-lg-6">
-                                                            <input type="text" class="form-control" data-bind="datepicker:dob, datepickerOptions: { yearRange: '-60:+0' }">
+                                                                <label class="control-label text-right tooltip-float">DOB</label>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <input type="text" class="form-control" data-bind="datepicker:dob, datepickerOptions: { yearRange: '-60:+0' }">
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-lg-12">
-                                                    <div class="form-group">
-                                                        <div class="col-lg-4 text-right">
+                                                    <div class="col-lg-12" style="display:none;">
+                                                        <div class="form-group">
+                                                            <div class="col-lg-4 text-right">
 
-                                                            <label class="control-label text-right tooltip-float">Education</label>
-                                                        </div>
-                                                        <div class="col-lg-6">
-                                                            <select class="form-control" data-bind="options: $root.educations, optionsText: 'EducationName', optionsValue: 'EducationId', optionsCaption:  'Select ...' , value:educationId"></select>
+                                                                <label class="control-label text-right tooltip-float">Education</label>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <select class="form-control" data-bind="options: $root.educations, optionsText: 'EducationName', optionsValue: 'EducationId', optionsCaption:  'Select ...' , value:educationId"></select>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-lg-12">
-                                                    <div class="form-group">
-                                                        <div class="col-lg-4 text-right">
+                                                    <div class="col-lg-12" style=" display: none;">
+                                                        <div class="form-group">
+                                                            <div class="col-lg-4 text-right">
 
-                                                            <label class="control-label text-right tooltip-float">Job Title</label>
-                                                        </div>
-                                                        <div class="col-lg-6">
-                                                            <input type="text" class="form-control" data-bind="value: jobTitle">
+                                                                <label class="control-label text-right tooltip-float">Job Title</label>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <input type="text" class="form-control" data-bind="value: jobTitle">
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-lg-12">
-                                                    <div class="form-group">
-                                                        <div class="col-lg-4 text-right">
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <div class="col-lg-4 text-right">
 
-                                                            <label class="control-label text-right tooltip-float">Profession</label>
-                                                        </div>
-                                                        <div class="col-lg-6">
-                                                            <select class="form-control" data-bind="options: $root.industries, optionsText: 'IndusteryName', optionsValue: 'IndusteryId', optionsCaption:  'Select ...', value:industeryId"></select>
+                                                                <label class="control-label text-right tooltip-float">Profession</label>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <select class="form-control" data-bind="options: $root.industries, optionsText: 'IndusteryName', optionsValue: 'IndusteryId', optionsCaption:  'Select ...', value:industeryId"></select>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
 
 
-                                                <div class="col-lg-12" data-bind="visible: $root.isChangePasswordVisible">
-                                                    <div class="form-group">
-                                                        <div class="col-lg-4 text-right">
+                                                    <div class="col-lg-12" data-bind="visible: $root.isChangePasswordVisible">
+                                                        <div class="form-group">
+                                                            <div class="col-lg-4 text-right">
 
-                                                            <label class="control-label text-right tooltip-float">Current Password</label>
-                                                        </div>
-                                                        <div class="col-lg-6">
-                                                            <input type="password" class="form-control" data-bind="value: $root.OldPassword">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-12" data-bind="visible: $root.isChangePasswordVisible">
-                                                    <div class="form-group">
-                                                        <div class="col-lg-4 text-right">
-
-                                                            <label class="control-label text-right tooltip-float">New Password</label>
-                                                        </div>
-                                                        <div class="col-lg-6">
-                                                            <input type="password" class="form-control" data-bind="value: Password, validationTooltip: Password">
+                                                                <label class="control-label text-right tooltip-float">Current Password</label>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <input type="password" class="form-control" data-bind="value: $root.OldPassword">
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-lg-12" data-bind="visible: $root.isChangePasswordVisible">
-                                                    <div class="form-group">
-                                                        <div class="col-lg-4 text-right">
+                                                    <div class="col-lg-12" data-bind="visible: $root.isChangePasswordVisible">
+                                                        <div class="form-group">
+                                                            <div class="col-lg-4 text-right">
 
-                                                            <label class="control-label text-right tooltip-float">Confirm Password</label>
-                                                        </div>
-                                                        <div class="col-lg-6">
-                                                            <input type="password" class="form-control" data-bind="value: ConfirmPassword, validationTooltip: ConfirmPassword">
+                                                                <label class="control-label text-right tooltip-float">New Password</label>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <input type="password" class="form-control" data-bind="value: Password, validationTooltip: Password">
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                    <div class="col-lg-12" data-bind="visible: $root.isChangePasswordVisible">
+                                                        <div class="form-group">
+                                                            <div class="col-lg-4 text-right">
 
+                                                                <label class="control-label text-right tooltip-float">Confirm Password</label>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <input type="password" class="form-control" data-bind="value: ConfirmPassword, validationTooltip: ConfirmPassword">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                @*<div class="col-lg-12">
+                <div class="col-lg-9"></div>
+                <div class="col-lg-3">
+                    <button class="btn btn-info" style="float:right;" id="saveBtn" data-bind="click: $root.ChangePassword">Change Password</button>
+                </div>
+            </div>*@
                                             </div>
-                                            @*<div class="col-lg-12">
-                                                <div class="col-lg-9"></div>
-                                                <div class="col-lg-3">
-                                                    <button class="btn btn-info" style="float:right;" id="saveBtn" data-bind="click: $root.ChangePassword">Change Password</button>
-                                                </div>
-                                            </div>*@
-                                        </div>
-                                        <div class="col-lg-12 form-horizontal changepasswordTop">
-                                            <h4 class="" style="margin-top:20px;">
+                                        <div class="col-lg-12 form-horizontal changepasswordTop" >
+                                            <h4 class="" style="margin-top:20px; display:none;">
                                                 Contact Info
                                             </h4>
 
@@ -162,7 +171,7 @@
                                                     <div class="form-group">
                                                         <div class="col-lg-4 text-right">
 
-                                                            <label class="control-label text-right tooltip-float">Phone 1</label>
+                                                            <label class="control-label text-right tooltip-float">Mobile #</label>
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <input type="text" class="form-control" data-bind="value: phone1">
@@ -173,7 +182,7 @@
                                                     <div class="form-group">
                                                         <div class="col-lg-4 text-right">
 
-                                                            <label class="control-label text-right tooltip-float">Phone 2</label>
+                                                            <label class="control-label text-right tooltip-float">Alternative #</label>
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <input type="text" class="form-control" data-bind="value: phone2">
@@ -181,6 +190,19 @@
                                                     </div>
                                                 </div>
 
+
+                                                <div class="col-lg-12">
+                                                    <div class="form-group">
+                                                        <div class="col-lg-4 text-right">
+
+                                                           
+                                                        </div>
+
+                                                        <div class="col-lg-6">
+                                                           
+                                                        </div>
+                                                    </div>
+                                                </div>
 
                                             </div>
                                         </div>

@@ -41,15 +41,18 @@ else
                                         <tr style="height:25px;">
 
                                             <th class="col-sm-3" style="vertical-align:top"><span class="GridHeaderFont_size">Campaign Name</span></th>
-                                            <th class="col-sm-1" style="vertical-align:top"><span class="GridHeaderFont_size">Type</span></th>
+                                            <th class="col-sm-1" style="vertical-align:top;display:none;"><span class="GridHeaderFont_size">Type</span></th>
+
+                                            <th class="col-sm-2" style="vertical-align:top"><span class="GridHeaderFont_size">Start Date</span></th>
+
                                             <th class="col-sm-2" style="vertical-align:top"><span class="GridHeaderFont_size">Locations</span></th>
 
-                                            <th class="col-sm-1" style="vertical-align:top"><span class="GridHeaderFont_size">PPCV</span></th>
+                                            <th class="col-sm-1" style="vertical-align:top"><span class="GridHeaderFont_size">Ad Click</span></th>
 
 
 
 
-                                            <th class="col-sm-2" style="vertical-align:top">
+                                            <th class="col-sm-3" style="vertical-align:top">
                                                 <span class="GridHeaderFont_size">Views</span><br />
                                                 <span style="color:darkgray;font-size:10px;">Today</span>
                                                 <span style="color:darkgray;font-size:10px;">Yesterday</span>
@@ -57,7 +60,7 @@ else
 
                                             </th>
                                             <th class="col-sm-1" style="vertical-align:top"><span class="GridHeaderFont_size">Daily Cap</span></th>
-                                            <th class="col-sm-1" style="vertical-align:top"><span style="white-space:nowrap;" class="GridHeaderFont_size">Total Spent</span></th>
+                                            <th class="col-sm-1" style="vertical-align:top"><span style="white-space:nowrap;display:none;" class="GridHeaderFont_size">Total Spent</span></th>
                                             <th class="col-sm-1" style="vertical-align:top"><span class="GridHeaderFont_size">Status</span></th>
                                             @*<th class="col-sm-2"><span class="@userClasses">Spent</span><span class="@adminClasses">Created by</span></th>*@
 
@@ -143,7 +146,7 @@ else
                 <span class="">&nbsp;</span>
             </td>
             <td class="col-sm-1"><span class="" data-bind="text: MaxBudget"></span></td>*@
-        <td class="col-sm-1">
+        <td class="col-sm-1" style="display:none;">
 
             <!-- ko if: Type() == 1-->
             <span class="">Video</span>
@@ -157,6 +160,9 @@ else
             <!-- ko if: Type() == 4-->
             <span class="">Game</span>
             <!-- /ko -->
+        </td>
+        <td class="col-sm-2">
+            <span data-bind="text: StartDateTime"></span>
         </td>
         <td class="col-sm-2">
             <span data-bind="text: Locationss"></span>
@@ -176,7 +182,7 @@ else
         <td class="col-sm-1">
             <span data-bind="text: MaxDailyBudget"></span>
         </td>
-        <td class="col-sm-1"><span class="@userClasses" data-bind="text: AmountSpent() ? '$'+ AmountSpent().toFixed(2) : '$'+ 0"></span></td>
+        <td class="col-sm-1" ><span class="@userClasses" data-bind="text: AmountSpent() ? '$'+ AmountSpent().toFixed(2) : '$'+ 0"></span></td>
         <td class="col-sm-2">
             <!-- ko if: Status() == 1-->
             <div class="text-left statusbg" style="background:#6D6EFA;    width: 125px;">
@@ -242,8 +248,8 @@ else
             <!-- ko if: Status() == 1 ||  Status() == 3 || Status() == 4 || Status() == 7|| Status() == 9-->
             <a class="table-link" style="float: right">
                 <span class="fa-stack">
-                    <i class="fa fa-square fa-stack-2x"></i>
-                    <i class="fa fa-pencil fa-stack-1x fa-inverse" data-bind="click:$root.onEditCampaign"></i>
+                    
+                    <i class="fa fa-pencil-square-o" data-bind="click:$root.onEditCampaign"></i>
                 </span>
             </a>
             <!-- /ko -->
@@ -263,7 +269,7 @@ else
             <div class="col-sm-12" style="float: left; margin-bottom:20px;">
                 <br />
                 <span style="font-size: 24px;" class="Theme_standard_clr" data-bind="text:$root.MainHeading"></span><br />
-                <span style="font-size: 14px;" class="Theme_subheading-Clr" data-bind="text:$root.SubHeading"></span>  &nbsp; &nbsp; &nbsp; <span class="red bold rightAlign"> Watch Video <img src="/Images/youtube_play.JPG" height="25px" /> </span>   </span><br />
+                <span style="font-size: 14px;" class="Theme_subheading-Clr" data-bind="text:$root.SubHeading"></span>  &nbsp; &nbsp; &nbsp; <span class="red bold rightAlign" style="display:none;"> Watch Video <img src="/Images/youtube_play.JPG" height="25px" /> </span>   </span><br />
             </div>
 
 
@@ -321,8 +327,30 @@ else
 @section Scripts{
     <script src="~/Scripts/jquery.tokenize.js"></script>
     <script type="text/javascript">
+        var mode = 1;
         require(["ads/ads.view", "common/stripeChargeCustomer.view", "common/confirmation.view", ]);
-        $("#btncampaigns").css("background-color", "#93bf47");
+        
+        function GetURLParameter(sParam) {
+            var sPageURL = window.location.search.substring(1);
+            var sURLVariables = sPageURL.split('&');
+            for (var i = 0; i < sURLVariables.length; i++) {
+                var sParameterName = sURLVariables[i].split('=');
+                if (sParameterName[0] == sParam) {
+                    return sParameterName[1];
+                }
+            }
+            return 0;
+        }
+        $(document).ready(function () {
+            var modeLoc = GetURLParameter("mode");
+            if(modeLoc == 1)
+            {
+                $("#btncampaigns").css("background-color", "#93bf47");
+            } else {
+                $("#btnspnsergames").css("background-color", "#93bf47");
+                mode = modeLoc;
+            }
+        });
     </script>
 
 

@@ -11,15 +11,30 @@ define("analytic/analytic.dataservice", function () {
             initialize = function () {
                 if (!isInitialized) {
 
-
                     amplify.request.define('getactiveuser', 'ajax', {
                         url: '/Api/ActiveUser',
+                        dataType: 'json',
+                        type: 'GET'
+                    });
+
+                    amplify.request.define('getDashboardInsights', 'ajax', {
+                        url: '/Api/DashboardInsight',
                         dataType: 'json',
                         type: 'GET'
                     });
                     isInitialized = true;
                 }
             },
+            // get DashboardInsight
+            getDashboardInsights = function (params, callbacks) {
+                initialize();
+                return amplify.request({
+                    resourceId: 'getDashboardInsights',
+                    success: callbacks.success,
+                    error: callbacks.error,
+                    data: params
+                });
+			},
             // Search Ad Campaigns
             getactiveuser = function (params, callbacks) {
                 initialize();
@@ -32,7 +47,8 @@ define("analytic/analytic.dataservice", function () {
             }; 
 
         return {
-            getactiveuser: getactiveuser
+            getactiveuser: getactiveuser,
+			getDashboardInsights:getDashboardInsights
         };
     })();
     return dataService;

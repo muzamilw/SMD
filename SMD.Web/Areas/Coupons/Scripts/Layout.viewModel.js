@@ -14,6 +14,7 @@
                 branchDdlist = ko.observableArray([]),
                 selectedCategory = ko.observable(),
                 countries = ko.observableArray([]),
+                companyId = ko.observable(),
                 afterBranchSelect = null,
                 selectedBranchField = ko.observable(),
                 isSaveChangesEnable = ko.observable(false),
@@ -28,6 +29,7 @@
                 getBranchCategories = function (callback) {
                     dataService.getBranchCategory({
                         success: function (data) {
+                            companyId(data[0].CompanyId);
                             branchCategory.removeAll();
                             branchDdlist.removeAll();
                             _.each(data, function (item) {
@@ -356,13 +358,28 @@
 
                   }),
                 CreateNewBranchLocation = function () {
+                    dataService.getCompanyAddress(
+                     { companyId: companyId() },
+                     {
+                         success: function (data) {
 
-                    var newBranchLocation = model.Branch({});
-                    selectedBranch(undefined)
-                    selectedBranch(newBranchLocation);
-                    isSaveChangesEnable(true);
-                    isdeleteEnable(false);
-                    isMapVisible(true);
+                             var newBranchLocation = new model.Branch.CreateBillingAddress(data)
+                             selectedBranch(undefined)
+                             selectedBranch(newBranchLocation);
+                             isSaveChangesEnable(true);
+                             isdeleteEnable(false);
+                             isMapVisible(true);
+                           
+                             
+
+                         },
+                         error: function () {
+                             toastr.error("Failed to load Company Address.");
+                         }
+                     });
+
+                    //var newBranchLocation = model.Branch({});
+                    
                 },
                 resetTreeExpensionAfterSave = function (category) {
                     category.isExpanded(true);
@@ -617,7 +634,8 @@
                     CodeAddressonMap: CodeAddressonMap,
                     branchDdlist: branchDdlist,
                     getAllCountries: getAllCountries,
-                    countries: countries
+                    countries: countries,
+                    companyId: companyId,
                 };
 
             })()

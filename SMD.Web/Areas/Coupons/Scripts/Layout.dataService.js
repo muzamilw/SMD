@@ -57,6 +57,11 @@ define("Layout/Layout.dataService", function () {
                         dataType: 'json',
                         type: 'GET'
                     });
+                    amplify.request.define('getCompanyAddress', 'ajax', {
+                        url: '/Api/GetCompany',
+                        dataType: 'json',
+                        type: 'GET'
+                    });
                 }
             };
 
@@ -128,6 +133,16 @@ define("Layout/Layout.dataService", function () {
                 data: parms
             });
         }
+        getCompanyAddress = function (parms, callbacks) {
+            initialize();
+
+            return amplify.request({
+                resourceId: 'getCompanyAddress',
+                data: parms,
+                success: callbacks.success,
+                error: callbacks.error,
+            });
+        }
         getAllCountries = function (callbacks) {
             initialize();
 
@@ -145,7 +160,8 @@ define("Layout/Layout.dataService", function () {
             DeleteCurrentCategory:DeleteCurrentCategory,
             SaveCompanyBranch: SaveCompanyBranch,
             SaveCategory: SaveCategory,
-            getAllCountries: getAllCountries
+            getAllCountries: getAllCountries,
+            getCompanyAddress: getCompanyAddress
         };
     })();
     return dataService;

@@ -70,9 +70,9 @@ namespace SMD.Models.DomainModels
         public virtual ICollection<InvoiceDetail> InvoiceDetails { get; set; }
         public virtual Company Company { get; set; }
         //left image and right image not mapped bytes
-        [NotMapped]
+        //[NotMapped]
         public string LeftPictureBytes { get; set; }
-        [NotMapped]
+        //[NotMapped]
         public string RightPictureBytes { get; set; }
     }
 }

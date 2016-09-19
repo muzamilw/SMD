@@ -14,7 +14,18 @@
                         <div class="col-sm-12" style="float: left; margin-bottom:20px;">
                             <br />
                             <span style="font-size: 24px;" class="Theme_standard_clr">Image Gallery</span><br />
-                            <span class="red bold rightAlign" style=" margin-right: 14px;"> Watch Video <img src="/Images/youtube_play.JPG" height="25px" /> </span> <span style="font-size: 14px;margin-right:8px;" class="Theme_subheading-Clr">All your previously used images in different categories are available for re-use</span>&nbsp; &nbsp; &nbsp;<br />
+                            <span class="red bold rightAlign" style=" margin-right: 14px;"> Watch Video <img src="/Images/youtube_play.JPG" height="25px" /> </span>
+                             <span style="font-size: 14px;margin-right:8px;" class="Theme_subheading-Clr">All your previously used images in different categories are available for re-use</span>
+                            &nbsp; 
+                            <div class="bs-example-tooltips tooltip-float-width tooltip" style="float: none; position: absolute; margin-top: -4px;">
+                                <a class="input-group-addon" tabindex="-1" href="#" data-toggle="tooltip" title="" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;    padding: 0px;
+                                padding-top: 5px;" data-container="body" data-placement="right" data-content="Add a city" data-original-title="Hooray!">
+                                    <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                </a>
+                                <i class="fa fa-chevron-up" aria-hidden="true" style="color:#68b359;"></i>
+                                <span class="tooltiptext">Tooltip text</span>
+                            </div>
+                            <br />
                         </div>
                     </div>
 
@@ -24,18 +35,20 @@
                             <div class="form-group">
                                 
                                 <div class="col-xs-2">
-                                    <label for="txtCampaignDisplayName" class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn">Show images : </label>
+                                    <label class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn Theme_standard_clr" style=" font-size: 14px;">Select from existing images : </label>
                                 </div>
                                 <div class="col-xs-2">
                                     
                                     <select class="form-control" id="CategoryType">
                                         <option value="1">Logo</option>
                                         <option value="2">Banner Image</option>
-                                        <option value="3">Buy It Image</option>
+                                        @*<option value="3">Buy It Image</option>*@
                                         <option value="4">Survey</option>
                                     </select>
                                 </div>
-
+                                <div class="col-xs-2" style=" margin-left: 25px;">
+                                    <label for="" class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn Theme_standard_clr" style=" font-size: 14px;">Upload new image</label>
+                                </div>
                                 @*<div class="col-xs-6">
                                         <button class="btn  btn-info SurvyButtons" id="changeCategory" style="width: 121px;">Load Images</button>
                                     </div>*@
