@@ -20,7 +20,7 @@
                 BillingAddressLine2 = ko.observable(BillingAddressLine2),
                 BillingState = ko.observable(BillingState).extend({ required: true }),
                 BillingCountryId = ko.observable(BillingCountryId).extend({ required: true }),
-                BillingCityId = ko.observable(BillingCityId),//.extend({ required: true }),
+                BillingCityId = ko.observable(BillingCityId).extend({ required: true }),
                 BillingZipCode = ko.observable(BillingZipCode).extend({ required: true }),
                 BillingPhone = ko.observable(BillingPhone).extend({ required: true }),
                 BillingEmail = ko.observable(BillingEmail).extend({ required: true }),

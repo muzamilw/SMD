@@ -283,7 +283,7 @@
                                                 <label class="control-label text-right tooltip-float">Country</label>
                                             </div>
                                             <div class="col-lg-6">
-                                                <select class="form-control" data-bind="options: $root.countries, optionsText: 'CountryName', optionsValue: 'CountryId', optionsCaption: '&lt;' + 'Select Country'+ '&gt;' , value:BillingCountryId"></select>
+                                                <select class="form-control" data-bind="options: $root.countries, optionsText: 'CountryName', optionsValue: 'CountryId', optionsCaption: '&lt;' + 'Select Country'+ '&gt;' , value:BillingCountryId,event:{ change: $root.getCitiesByCountryId}"></select>
                                             </div>
                                         </div>
 

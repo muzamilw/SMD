@@ -13,10 +13,12 @@ namespace SMD.Implementation.Services
     {
         private readonly ICompanyBranchRepository _companybranchrepository;
         private readonly ICountryRepository _countryRepository;
-        public CompanyBranchService(ICompanyBranchRepository _companybranchrepository, ICountryRepository countryRepository)
+        private readonly ICityRepository _cityRepository;
+        public CompanyBranchService(ICompanyBranchRepository _companybranchrepository, ICountryRepository countryRepository, ICityRepository cityRepository)
         {
             this._companybranchrepository = _companybranchrepository;
             _countryRepository = countryRepository;
+            _cityRepository = cityRepository;
 
         }
 
@@ -73,6 +75,10 @@ namespace SMD.Implementation.Services
         public List<Country> GetAllCountries()
         {
             return _countryRepository.GetAllCountries().ToList();
+        }
+        public List<City> GetAllCities()
+        {
+            return _cityRepository.GetAllCities().ToList();
         }
 
     }

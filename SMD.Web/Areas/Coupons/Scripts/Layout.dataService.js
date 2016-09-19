@@ -57,8 +57,18 @@ define("Layout/Layout.dataService", function () {
                         dataType: 'json',
                         type: 'GET'
                     });
+                    amplify.request.define('getAllCities', 'ajax', {
+                        url: '/Api/GetCities',
+                        dataType: 'json',
+                        type: 'GET'
+                    });
                     amplify.request.define('getCompanyAddress', 'ajax', {
                         url: '/Api/GetCompany',
+                        dataType: 'json',
+                        type: 'GET'
+                    });
+                    amplify.request.define('getCitiesByCountry', 'ajax', {
+                        url: '/Api/GetCityByCountry',
                         dataType: 'json',
                         type: 'GET'
                     });
@@ -151,6 +161,27 @@ define("Layout/Layout.dataService", function () {
                 error: callbacks.error,
             });
         }
+
+        getAllCities = function (callbacks) {
+            initialize();
+
+            return amplify.request({
+                resourceId: 'getAllCities',
+                success: callbacks.success,
+                error: callbacks.error,
+            });
+        }
+        // Get Cities
+        getCitiesByCountry = function (params, callbacks) {
+            initialize();
+            return amplify.request({
+                resourceId: 'getCitiesByCountry',
+                success: callbacks.success,
+                error: callbacks.error,
+                data: params
+            });
+
+        }
         return {
             getBranchCategory: getBranchCategory,
             getBranchByBranchId: getBranchByBranchId,
@@ -160,7 +191,9 @@ define("Layout/Layout.dataService", function () {
             SaveCompanyBranch: SaveCompanyBranch,
             SaveCategory: SaveCategory,
             getAllCountries: getAllCountries,
-            getCompanyAddress: getCompanyAddress
+            getAllCities:getAllCities,
+            getCompanyAddress: getCompanyAddress,
+            getCitiesByCountry: getCitiesByCountry,
         };
     })();
     return dataService;

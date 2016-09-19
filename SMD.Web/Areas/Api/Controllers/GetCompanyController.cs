@@ -29,10 +29,18 @@ namespace SMD.MIS.Areas.Api.Controllers
         {
             Mapper.Initialize(cfg => cfg.CreateMap<SMD.Models.DomainModels.Company, CompanybillingAddress>());
             var obj = _companyService.GetCompanyForAddress();
-
-            return Mapper.Map<SMD.Models.DomainModels.Company, CompanybillingAddress>(obj);
+            CompanybillingAddress objaddress = new CompanybillingAddress();
+            objaddress.BillingAddressLine1 = obj.BillingAddressLine1;
+            objaddress.BillingAddressLine2 = obj.BillingAddressLine2;
+            objaddress.BillingCityId = obj.BillingCityId;
+            objaddress.BillingCountryId = obj.BillingCountryId;
+            objaddress.BillingState = obj.BillingState;
+            objaddress.BillingZipCode = obj.BillingZipCode;
+            objaddress.BillingPhone = obj.BillingPhone;
+            return objaddress;
+            //return Mapper.Map<SMD.Models.DomainModels.Company, CompanybillingAddress>(obj);
         }
-
+         
         #endregion
     }
 }

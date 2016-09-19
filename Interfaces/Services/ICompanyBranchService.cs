@@ -14,5 +14,6 @@ namespace SMD.Interfaces.Services
         long UpdateBranchAddress(CompanyBranch branch);
         bool DeleteCompanyBranch(CompanyBranch branch);
         List<Country> GetAllCountries();
+        List<City> GetAllCities();
     }
 }
