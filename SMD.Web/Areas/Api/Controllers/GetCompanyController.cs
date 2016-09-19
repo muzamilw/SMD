@@ -25,10 +25,10 @@ namespace SMD.MIS.Areas.Api.Controllers
         #endregion
 
         #region methods
-        public CompanybillingAddress Get(int companyId)
+        public CompanybillingAddress Get()
         {
             Mapper.Initialize(cfg => cfg.CreateMap<SMD.Models.DomainModels.Company, CompanybillingAddress>());
-            var obj = _companyService.GetCompanyById(companyId);
+            var obj = _companyService.GetCompanyForAddress();
 
             return Mapper.Map<SMD.Models.DomainModels.Company, CompanybillingAddress>(obj);
         }
