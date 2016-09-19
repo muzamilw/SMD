@@ -109,6 +109,10 @@ namespace SMD.Implementation.Services
             ////string destPath = res + "_thumb" + imgExt;
             ////ImageHelper.GenerateThumbNail(sourcePath, sourcePath, 200);
         }
+        public Company GetCompanyForAddress()
+        {
+            return companyRepository.GetCompanyById();
+        }
         #endregion
     }
 }

@@ -858,8 +858,8 @@ else
                             </div>
                         </div>
                         <div class="col-xs-12" style="text-align: left;margin-bottom: 20px; padding-right:0;margin-top:20px;" data-bind="with: $root.campaignModel">
-                            <div>Bid more to increase viewing priority.</div> <br />
-                            <div>50% of PPCV is rewarded to viewer.</div>
+                            <div style="display:none;">Bid more to increase viewing priority.</div> <br />
+                            <div style="display:none;">50% of PPCV is rewarded to viewer.</div>
                         </div>
                         <div class="col-xs-12" style="text-align: left; padding-right:0;margin-bottom:10px;font-size:0.9em;" data-bind="with: $root.campaignModel">
                             <span class="text-campaign-left control-label pull-left" style="    margin-top: 6px;">PPVC ($) </span>
@@ -2477,7 +2477,7 @@ else
 <script>
 
    // $("#panelArea").css("display", "none");
-    $("#MainSpan").css("display", "none");
+  //  $("#MainSpan").css("display", "none");
     
     function showUploadDialog() {
         $("#logo_image_file").click();

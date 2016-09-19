@@ -1089,8 +1089,10 @@ define("survey/survey.viewModel",
                     {
                         $("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
                         $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,#btnPauseCampaign,.lang_delSurvey,.table-link").css("display", "none");
-                        $("#saveBtn").css("display", "none");
-                        $("#closeBtn").removeAttr('disabled');
+                        //  $("#saveBtn").css("display", "none");
+                        $("#saveBtn").removeAttr('disabled');
+
+                      //  $("#closeBtn").removeAttr('disabled');
                         if (status == 3) {
                             $("#btnPauseCampaign").css("display", "inline-block");
                             $("#btnPauseCampaign").removeAttr('disabled');

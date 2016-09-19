@@ -18,5 +18,7 @@ namespace SMD.Interfaces.Services
 
 
         bool UpdateCompany(Company company, byte[] LogoImageBytes);
+
+        Company GetCompanyForAddress();
     }
 }

@@ -153,9 +153,9 @@ namespace SMD.Implementation.Services
         /// <param name="smdAccount">SMD Account Info</param>
         /// <param name="adCampaign">Ad Campaign</param>
         /// <param name="adViewerUsedVoucher">If Ad Viewer Uses Voucher</param>
-        private async Task PerformAdCampaignTransactions(AdViewedRequest request, Account advertisersAccount, double? adClickRate,
+        private async Task PerformAdCampaignClickTransactions(AdViewedRequest request, Account advertisersAccount, double? adClickRate,
             Account adViewersAccount, double? adViewersCut, Company referringCompany, double? smdsCut, Account affiliatesAccount,
-            Account smdAccount, AdCampaign adCampaign,ProductActionRequest pRequest, bool adViewerUsedVoucher = false)
+            Account smdAccount, AdCampaign adCampaign, ProductActionRequest pRequest, bool ReferralScenario, double? referralCut)
         {
             // Debit Advertiser
             var transactionSequence = 1;
@@ -164,17 +164,19 @@ namespace SMD.Implementation.Services
             // Debit Campaign Advertiser
             PerformTransaction(request.AdCampaignId, null, advertisersAccount, adClickRate, transactionSequence, TransactionType.AdClick, false);
 
-            // Credit AdViewer
-            if (!adViewerUsedVoucher)
+           
+            transactionSequence += 1;
+            PerformTransaction(request.AdCampaignId, null, adViewersAccount, adViewersCut, transactionSequence, TransactionType.AdClick,true);
+
+  
+            // Credit Affiliate
+            //todo pilot: Commenting Smd Transaction
+            if (ReferralScenario)
             {
                 transactionSequence += 1;
-                PerformTransaction(request.AdCampaignId, null, adViewersAccount, adViewersCut, transactionSequence, TransactionType.AdClick);
-
-                
-                // Credit Affiliate
-                //todo pilot: Commenting Smd Transaction
-                smdsCut = PerformCreditTransactionForAffiliate(request, referringCompany, smdsCut, affiliatesAccount, ref transactionSequence);
+                PerformTransaction(request.AdCampaignId, null, affiliatesAccount, referralCut, transactionSequence, TransactionType.AdClick);
             }
+            
             
             // Credit SMD
             //todo pilot: Commenting Smd Transaction
@@ -190,36 +192,13 @@ namespace SMD.Implementation.Services
 
             // Add Campaign Response 
             PerformSkipOrUpdateUserAdSelection((int)request.AdCampaignId, request.UserId,
-                (adViewerUsedVoucher ? (int)AdRewardType.Voucher : (int)AdRewardType.Cash), false, adViewersCut, request.companyId, request.userQuizSelection.HasValue ? request.userQuizSelection.Value : 0, pRequest,false);
+                (int)AdRewardType.Cash,false, adViewersCut, request.companyId, request.userQuizSelection.HasValue ? request.userQuizSelection.Value : 0, pRequest,false);
 
             // Save Changes
             transactionRepository.SaveChanges();
-
-            // If Ad Viewer Used Voucher then Email Voucher to Him
-            if (adViewerUsedVoucher)
-            {
-                await emailManagerService.SendVoucherEmail(request.UserId, adCampaign.Voucher1Description, adCampaign.Voucher1Value, adCampaign.Voucher1ImagePath);
-            }
+          
         }
 
-        /// <summary>
-        /// Credit Campaing Affiliate
-        /// </summary>
-        private double? PerformCreditTransactionForAffiliate(AdViewedRequest request, Company referringCompany, double? smdsCut,
-            Account affiliatesAccount, ref int transactionSequence)
-        {
-            if (referringCompany != null)
-            {
-                // Credit Affiliate - if exists
-                double? affiliatesCut = ((smdsCut * 20) / 100);
-                smdsCut = ((smdsCut * 30) / 100);
-                transactionSequence += 1;
-                // Perform Transaction
-                PerformTransaction(request.AdCampaignId, null, affiliatesAccount, affiliatesCut, transactionSequence, TransactionType.AdClick);
-            }
-
-            return smdsCut;
-        }
 
         /// <summary>
         /// Sets up accounts for transcations
@@ -757,31 +736,50 @@ namespace SMD.Implementation.Services
 
             // Validates if Ad Campaing Exists
             var adCampaign = await ValidateAdCampaign(request);
+            bool ReferralScenario = false;
+            Company referringCompany = null;
+            Account referringCompanyAccount = null;
+            var advertiserCompany = companyRepository.Find(adCampaign.CompanyId.Value);
 
             // Get Referral if any
-            Company referringCompany = null;
-            Account affiliatesAccount = null;
-            if ((adViewer.Company.ReferringCompanyID.HasValue))
+            if (advertiserCompany.ReferringCompanyID.HasValue)
             {
-                referringCompany = companyRepository.GetAll().Where(g=>g.CompanyId == adViewer.Company.ReferringCompanyID).SingleOrDefault();
+                referringCompany = companyRepository.Find(advertiserCompany.ReferringCompanyID.Value);
+                ReferralScenario = true;
+          
                 if (referringCompany == null)
                 {
                     throw new SMDException(LanguageResources.WebApiUserService_ReferrerNotFound);
                 }
 
-                affiliatesAccount = accountRepository.GetByCompanyId(referringCompany.CompanyId, AccountType.VirtualAccount);
-                if (affiliatesAccount == null)
+                referringCompanyAccount = accountRepository.GetByCompanyId(referringCompany.CompanyId, AccountType.VirtualAccount);
+                if (referringCompanyAccount == null)
                 {
                     throw new SMDException(string.Format(CultureInfo.InvariantCulture,
                         LanguageResources.WebApiUserService_AccountNotFound, "Affiliate"));
                 }
             }
 
-            // Begin Transaction
+          
             // Ad Viewer will get 50% and other 50% will be divided b/w SMD (30%), Affiliate(20%) (Referrer) if exists
             double? adClickRate = adCampaign.ClickRate ?? 0;
-            double? adViewersCut = adClickRate; // commenting for pilot launch, now smd hace no percentage and all the money will go to user account from advertiser account. So there will be 2 transactions now advertiser debit transaction and user credit transaction ((adClickRate * 50) / 100); 
-            double? smdsCut = 0; //adViewersCut;
+            
+            double? adViewersCut = adClickRate /2; // commenting for pilot launch, now smd hace no percentage and all the money will go to user account from advertiser account. So there will be 2 transactions now advertiser debit transaction and user credit transaction ((adClickRate * 50) / 100); 
+            double? smdsCut = 0;
+            double? referralCut=0;
+
+
+            if (ReferralScenario)
+            {
+                smdsCut = adClickRate / 4; //adViewersCut;
+                referralCut = adClickRate / 4;
+            }
+            else
+            {
+                smdsCut = adClickRate / 2;
+                referralCut = 0;
+            }
+
             Account adViewersAccount;
             Account advertisersAccount;
             Account smdAccount;
@@ -791,8 +789,8 @@ namespace SMD.Implementation.Services
             SetupAdCampaignTransaction(request, adCampaign, out adViewersAccount, out advertisersAccount, out smdAccount, cash4Ads.Id);
 
             // Perform Transactions
-            await PerformAdCampaignTransactions(request, advertisersAccount, adClickRate, adViewersAccount, adViewersCut, referringCompany, smdsCut,
-                affiliatesAccount, smdAccount, adCampaign,pRequest);
+            await PerformAdCampaignClickTransactions(request, advertisersAccount, adClickRate, adViewersAccount, adViewersCut, referringCompany, smdsCut,
+                referringCompanyAccount, smdAccount, adCampaign, pRequest, ReferralScenario, referralCut);
 
             return new BaseApiResponse
                    {
@@ -800,7 +798,6 @@ namespace SMD.Implementation.Services
                        Message = LanguageResources.Success
                    };
         }
-
 
 
         public async Task<BaseApiResponse> UpdateTransactionOnPaidSurveyAnswer(AdViewedRequest request, ProductActionRequest pRequest, double rewardCentz, int AdvertiserCompanyId)
@@ -820,31 +817,14 @@ namespace SMD.Implementation.Services
             }
 
             // Validates if Ad Campaing Exists
-           
-
-            // Get Referral if any
-            Company referringCompany = null;
-            Account affiliatesAccount = null;
-            if ((adViewer.Company.ReferringCompanyID.HasValue))
-            {
-                referringCompany = companyRepository.GetAll().Where(g => g.CompanyId == adViewer.Company.ReferringCompanyID).SingleOrDefault();
-                if (referringCompany == null)
-                {
-                    throw new SMDException(LanguageResources.WebApiUserService_ReferrerNotFound);
-                }
-
-                affiliatesAccount = accountRepository.GetByCompanyId(referringCompany.CompanyId, AccountType.VirtualAccount);
-                if (affiliatesAccount == null)
-                {
-                    throw new SMDException(string.Format(CultureInfo.InvariantCulture,
-                        LanguageResources.WebApiUserService_AccountNotFound, "Affiliate"));
-                }
-            }
+          
 
             // Begin Transaction
             // Ad Viewer will get 50% and other 50% will be divided b/w SMD (30%), Affiliate(20%) (Referrer) if exists
             double? adClickRate = rewardCentz;
             double? adViewersCut = adClickRate; // commenting for pilot launch, now smd hace no percentage and all the money will go to user account from advertiser account. So there will be 2 transactions now advertiser debit transaction and user credit transaction ((adClickRate * 50) / 100); 
+            
+         
             double? smdsCut = 0; //adViewersCut;
             Account adViewersAccount;
             Account advertisersAccount;
@@ -875,18 +855,12 @@ namespace SMD.Implementation.Services
                 }
 
             // Perform Transactions
-          
-
 
             PerformTransaction(request.AdCampaignId, null, advertisersAccount, adClickRate, 1, TransactionType.SurveyWatched, false);
 
             // Credit AdViewer
-          
-                
-                PerformTransaction(request.AdCampaignId, null, adViewersAccount, adViewersCut, 2, TransactionType.SurveyWatched);
-
-
-                transactionRepository.SaveChanges();
+            PerformTransaction(request.AdCampaignId, null, adViewersAccount, adClickRate, 2, TransactionType.SurveyWatched);
+            transactionRepository.SaveChanges();
 
             return new BaseApiResponse
             {
@@ -914,25 +888,6 @@ namespace SMD.Implementation.Services
 
             // Validates if Ad Campaing Exists
 
-
-            // Get Referral if any
-            Company referringCompany = null;
-            Account affiliatesAccount = null;
-            if ((adViewer.Company.ReferringCompanyID.HasValue))
-            {
-                referringCompany = companyRepository.GetAll().Where(g => g.CompanyId == adViewer.Company.ReferringCompanyID).SingleOrDefault();
-                if (referringCompany == null)
-                {
-                    throw new SMDException(LanguageResources.WebApiUserService_ReferrerNotFound);
-                }
-
-                affiliatesAccount = accountRepository.GetByCompanyId(referringCompany.CompanyId, AccountType.VirtualAccount);
-                if (affiliatesAccount == null)
-                {
-                    throw new SMDException(string.Format(CultureInfo.InvariantCulture,
-                        LanguageResources.WebApiUserService_AccountNotFound, "Affiliate"));
-                }
-            }
 
             // Begin Transaction
             // Ad Viewer will get 50% and other 50% will be divided b/w SMD (30%), Affiliate(20%) (Referrer) if exists

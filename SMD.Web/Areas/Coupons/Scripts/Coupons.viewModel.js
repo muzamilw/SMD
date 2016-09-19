@@ -329,7 +329,7 @@ define("Coupons/Coupons.viewModel",
                 $("#btnCancel").css("display", "block");
                 $(".hideInCoupons").css("display", "none");
                 isShowArchiveBtn(false);
-                    CouponTitle('New Offer');
+                    CouponTitle('New Deal');
                     StatusValue('');
             },
 

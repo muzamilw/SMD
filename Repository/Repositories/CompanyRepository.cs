@@ -128,6 +128,10 @@ namespace SMD.Repository.Repositories
         {
             return DbSet.Where(c => c.CompanyId == CompanyId).FirstOrDefault().CompanyName;
         }
+        public Company GetCompanyById()
+        {
+            return DbSet.Where(g => g.CompanyId == CompanyId).SingleOrDefault();
+        }
         #endregion
     }
 }
