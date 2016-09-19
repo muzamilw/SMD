@@ -133,12 +133,11 @@ define("Layout/Layout.dataService", function () {
                 data: parms
             });
         }
-        getCompanyAddress = function (parms, callbacks) {
+        getCompanyAddress = function (callbacks) {
             initialize();
 
             return amplify.request({
                 resourceId: 'getCompanyAddress',
-                data: parms,
                 success: callbacks.success,
                 error: callbacks.error,
             });
