@@ -31,6 +31,7 @@ namespace SMD.Models.RequestModels
 
 
         public int status { get; set; }
+        public int mode { get; set; }
 
         public bool? ShowCoupons { get; set; }
     }

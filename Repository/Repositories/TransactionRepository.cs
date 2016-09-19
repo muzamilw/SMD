@@ -62,6 +62,12 @@ namespace SMD.Repository.Repositories
             return db.GetTransactions(CompanyId, AccountType, Rows).ToList();
 
         }
+
+          public IEnumerable<GetAdminDashBoardInsights_Result> GetAdminDashBoardInsights()
+          {
+              return db.GetAdminDashBoardInsights();
+
+          }
         #endregion 
     }
 }

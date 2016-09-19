@@ -12,6 +12,7 @@ namespace SMD.MIS.Areas.DAM.Models
     {
    
         public List<DamImage> Images { get; set; }
+        public List<DamImage> FreeImages { get; set; }
 
         [Display(Name = "Local file")]
         public HttpPostedFileBase File { get; set; }

@@ -252,5 +252,9 @@ namespace SMD.Repository.Repositories
         
         }
 
+        public IEnumerable<SurveyQuestion> GetSurveyQuestionAnswer(long SurveyQuestionId)
+        {
+            return DbSet.Where(ans => ans.SqId == SurveyQuestionId && ans.Status != 0).ToList();
+        }
     }
 }

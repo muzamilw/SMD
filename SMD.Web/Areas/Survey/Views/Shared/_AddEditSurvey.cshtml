@@ -5,8 +5,8 @@
 <div data-bind="visible: $root.isEditorVisible()" style="display: none;">
     <div class="col-lg-12">
         <div class="row">
-            <div class="col-lg-12" id="topArea">
-                <ol class="breadcrumb">
+            <div class="col-lg-12" id="">
+                <ol class="breadcrumb" style="display:none;">
                     <li><a href="/Dashboard/Index" class="my-navigator">Home</a></li>
                     <li><a data-bind="click: $root.closeEditDialog" class="my-navigator">Survey Cards</a></li>
                 </ol>
@@ -81,7 +81,7 @@
                                         </div>
 
                                         <br>
-                                        <span data-bind="css: $root.previewScreenNumber() == 1 ? 'ads-selected-numbering-text' : ''" class="">Question <br>Info</span>
+                                        <span data-bind="css: $root.previewScreenNumber() == 1 ? 'ads-selected-numbering-text' : '',click: $root.gotoScreen.bind(null,1)" class="">Question <br>Info</span>
                                     </div>
                                     <div class="pull-left ads-numbering-linebar" data-bind="css: $root.previewScreenNumber() == 6 ? 'ads-selected-numbering-box' : ''">
 
@@ -93,7 +93,7 @@
                                         </div>
 
                                         <br>
-                                        <span data-bind="css: $root.previewScreenNumber() == 2 ? 'ads-selected-numbering-text' : ''" class="ads-selected-numbering-text">Target<br>Audience</span>
+                                        <span data-bind="css: $root.previewScreenNumber() == 2 ? 'ads-selected-numbering-text' : '',click: $root.gotoScreen.bind(null,2)" class="ads-selected-numbering-text">Target<br>Audience</span>
                                     </div>
 
 
@@ -123,15 +123,13 @@
 
                             <div class="main-box" style=" background-color:white;padding: 20px;">
 
-                                <div class="adsubHeading Theme_standard_clr" data-bind="text: $root.titleText,visible: $root.previewScreenNumber() == 1">
-                                    Add New Survey
-                                </div>
+                               
                                 <div class="" id="survey_subscreen1" data-bind="visible: $root.previewScreenNumber() == 1">
 
                                     <div class="form-group" style="margin-bottom:14px;">
                                         <div class="col-lg-2">
 
-                                            <label for="txtSurveyTtile" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Survey Name</label>
+                                            <label for="txtSurveyTtile" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Campaign Title</label>
                                         </div>
                                         <div class="col-lg-7">
                                             <input type="text" name="Campaign Name" class="form-control" id="txtSurveyTtile" placeholder="Enter Survey title" data-bind="value: Question,validationTooltip: Question, validationOnElement: Question">
@@ -723,14 +721,7 @@
 
                                     </div>
 
-                                    <div class="adBottomHeading" data-bind="visible: $root.previewScreenNumber() == 1" style="display: none;">
-                                        Advertising to mobile users has overtaken all other forms<br>
-                                        of advertising.
-
-                                    </div>
-                                    <div class="adBottomHeading" data-bind="visible: $root.previewScreenNumber() == 2">
-                                        Increase conversions by targeting more accurately.
-                                    </div>
+                                  
 
                                     <div class="clearfix">
                                     </div>
@@ -1028,10 +1019,10 @@
             <div class="clearfix">
                 <div class="_4bl7">
                     <!--ko if:IncludeorExclude() == '1'-->
-                    <i class="_40n0 img sp_NQc91B1T0mb sx_d7a1cb" title="Included"></i>
+                    <i class="_40n0 img sp_NQc91B1T0mb sx_d7a1cb" title="Include"></i>
                     <!--/ko-->
                     <!--ko if:IncludeorExclude() == '0' -->
-                    <i class="_40n0 img sp_NQc91B1T0mb sx_999ca6" title="Excluded"></i>
+                    <i class="_40n0 img sp_NQc91B1T0mb sx_999ca6" title="Exclude"></i>
                     <!--/ko-->
                     
                 </div>
@@ -1060,10 +1051,10 @@
             <div class="clearfix">
                 <div class="_4bl7">
                     <!--ko if:IncludeorExclude() == '1'-->
-                    <i class="_40n0 img sp_NQc91B1T0mb sx_d7a1cb" title="Included"></i>
+                    <i class="_40n0 img sp_NQc91B1T0mb sx_d7a1cb" title="Include"></i>
                     <!--/ko-->
                     <!--ko if:IncludeorExclude() == '0' -->
-                    <i class="_40n0 img sp_NQc91B1T0mb sx_999ca6" title="Excluded"></i>
+                    <i class="_40n0 img sp_NQc91B1T0mb sx_999ca6" title="Exclude"></i>
                     <!--/ko-->
                 </div>
                 <div class="_4bl8 _4bl7">
@@ -1106,10 +1097,10 @@
         <!--ko if:Type() == 3 -->
         <span class="form-control lang_nr_box areaCity" data-bind="text:Language() " style=" "></span>
         <!--ko if:IncludeorExclude() == '1'-->
-        <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Included)' "></span>
+        <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Include)' "></span>
         <!--/ko-->
         <!--ko if:IncludeorExclude() == '0' -->
-        <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Excluded)' "></span>
+        <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Exclude)' "></span>
         <!--/ko-->
         <a id="" data-bind="click:$root.onRemoveLanguage" title=" delete" class="lang_delSurvey"> <i class="fa fa-times "></i></a>
         <!--/ko-->
@@ -1121,10 +1112,10 @@
         <!--ko if:Type() == 4 -->
         <span class="form-control lang_nr_box areaCity" data-bind="text:Industry() " style=" "></span>
         <!--ko if:IncludeorExclude() == '1'-->
-        <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Included)' "></span>
+        <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Include)' "></span>
         <!--/ko-->
         <!--ko if:IncludeorExclude() == '0' -->
-        <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Excluded)' "></span>
+        <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Exclude)' "></span>
         <!--/ko-->
         <a id="" data-bind="click:$root.onRemoveIndustry" title=" delete" class="lang_delSurvey"> <i class="fa fa-times "></i></a>
         <!--/ko-->
@@ -1136,10 +1127,10 @@
         <!--ko if:Type() == 5 -->
         <span class="form-control lang_nr_box areaCity" data-bind="text:Education() " style=" "></span>
         <!--ko if:IncludeorExclude() == '1'-->
-        <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Included)' "></span>
+        <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Include)' "></span>
         <!--/ko-->
         <!--ko if:IncludeorExclude() == '0' -->
-        <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Excluded)' "></span>
+        <span class="form-control lang_nr_box langIncludeExclText" data-bind="text:'(Exclude)' "></span>
         <!--/ko-->
         <a id="" data-bind="click:$root.onRemoveIndustry" title=" delete" class="lang_delSurvey"> <i class="fa fa-times "></i></a>
         <!--/ko-->
@@ -1231,12 +1222,12 @@
         <!--ko if:IncludeorExclude() == '0' -->
         <td class="col-lg-3">
             <!-- ko if:   Type() == "1" -->
-            <p style="margin-top: 5px;margin-left: 12px;" data-bind="text: '(Excluded) ' + questionString() + ' = ' + answerString()">
+            <p style="margin-top: 5px;margin-left: 12px;" data-bind="text: '(Exclude) ' + questionString() + ' = ' + answerString()">
             </p>
             <!-- /ko -->
             <!-- ko if:   Type()  == "2" -->
             <p style="margin-top: 5px;margin-left: 12px;">
-                <span data-bind="text: '(Excluded) ' +  questionString() + ' = ' "></span>
+                <span data-bind="text: '(Exclude) ' +  questionString() + ' = ' "></span>
                 <img data-bind="attr:{src: answerString()}" width="80" />
             </p>
             <!-- /ko -->
@@ -1245,12 +1236,12 @@
         <!--ko if:IncludeorExclude() == '1'-->
         <td class="col-lg-3">
             <!-- ko if:   Type() == "1" -->
-            <p style="margin-top: 5px;margin-left: 12px;" data-bind="text: '(Included) ' + questionString() + ' = ' + answerString()">
+            <p style="margin-top: 5px;margin-left: 12px;" data-bind="text: '(Include) ' + questionString() + ' = ' + answerString()">
             </p>
             <!-- /ko -->
             <!-- ko if:   Type()  == "2" -->
             <p style="margin-top: 5px;margin-left: 12px;">
-                <span data-bind="text: '(Included) ' +  questionString() + ' = ' "></span>
+                <span data-bind="text: '(Include) ' +  questionString() + ' = ' "></span>
                 <img data-bind="attr:{src: answerString()}" width="80" />
             </p>
             <!-- /ko -->
@@ -1261,8 +1252,7 @@
         <td class="col-lg-1" style=" padding: 0px !important; text-align:right;">
             <a class="table-link">
                 <span class="fa-stack">
-                    <i class="fa fa-square fa-stack-2x"></i>
-                    <i class="fa fa-pencil fa-stack-1x fa-inverse" data-bind="click:$root.onEditCriteria" data-toggle="modal" data-target=".bs-example-modal-lg"></i>
+                    <i class="fa fa-pencil-square-o" data-bind="click:$root.onEditCriteria" data-toggle="modal" data-target=".bs-example-modal-lg"></i>
                 </span>
 
             </a>
@@ -1271,8 +1261,7 @@
 
             <a class="table-link danger">
                 <span class="fa-stack">
-                    <i class="fa fa-square fa-stack-2x"></i>
-                    <i class="fa fa-trash-o fa-stack-1x fa-inverse" data-bind="click:$root.onDeleteCriteria"></i>
+                    <i class="fa fa-trash-o" data-bind="click:$root.onDeleteCriteria"></i>
                 </span>
 
             </a>
@@ -1286,12 +1275,12 @@
     <!--ko if:IncludeorExclude() == '0' -->
     <li>
         <!-- ko if:   Type() == "1" -->
-        <p class="aud_licontent" data-bind="text: '(Excluded) ' + questionString() + ' = ' + answerString()">
+        <p class="aud_licontent" data-bind="text: '(Exclude) ' + questionString() + ' = ' + answerString()">
         </p>
         <!-- /ko -->
         <!-- ko if:   Type()  == "2" -->
         <p class="aud_licontent">
-            <span data-bind="text: '(Excluded) ' +  questionString() + ' = ' "></span>
+            <span data-bind="text: '(Exclude) ' +  questionString() + ' = ' "></span>
             <img data-bind="attr:{src: answerString()}" width="80" />
         </p>
         <!-- /ko -->
@@ -1300,12 +1289,12 @@
     <!--ko if:IncludeorExclude() == '1'-->
     <li>
         <!-- ko if:   Type() == "1" -->
-        <p class="aud_licontent" data-bind="text: '(Included) ' + questionString() + ' = ' + answerString()">
+        <p class="aud_licontent" data-bind="text: '(Include) ' + questionString() + ' = ' + answerString()">
         </p>
         <!-- /ko -->
         <!-- ko if:   Type()  == "2" -->
         <p class="aud_licontent">
-            <span data-bind="text: '(Included) ' + questionString() + ' = ' "></span>
+            <span data-bind="text: '(Include) ' + questionString() + ' = ' "></span>
             <img data-bind="attr:{src: answerString()}" width="80" />
         </p>
         <!-- /ko -->
@@ -1318,10 +1307,10 @@
     <!--ko if:Type() == 4 -->
     <li>
         <!--ko if:IncludeorExclude() == '1'-->
-        <span class="aud_licontent" data-bind="text:'(Included)' + Industry() "></span>
+        <span class="aud_licontent" data-bind="text:'(Include)' + Industry() "></span>
         <!--/ko-->
         <!--ko if:IncludeorExclude() == '0' -->
-        <span class="aud_licontent" data-bind="text:'(Excluded)' + Industry() "></span>
+        <span class="aud_licontent" data-bind="text:'(Exclude)' + Industry() "></span>
         <!--/ko-->
     </li>
     <!--/ko-->
@@ -1333,10 +1322,10 @@
     <!--ko if:Type() == 5 -->
     <li>
         <!--ko if:IncludeorExclude() == '1'-->
-        <span class="aud_licontent" data-bind="text:'(Included)' + Education() "></span>
+        <span class="aud_licontent" data-bind="text:'(Include)' + Education() "></span>
         <!--/ko-->
         <!--ko if:IncludeorExclude() == '0' -->
-        <span class="aud_licontent" data-bind="text:'(Excluded)' + Education() "></span>
+        <span class="aud_licontent" data-bind="text:'(Exclude)' + Education() "></span>
         <!--/ko-->
     </li>
     <!--/ko-->
@@ -1349,10 +1338,10 @@
     <!--ko if:Type() == 3 -->
     <li>
         <!--ko if:IncludeorExclude() == '1'-->
-        <span class="aud_licontent" data-bind="text:'(Included)' + Language()"></span>
+        <span class="aud_licontent" data-bind="text:'(Include)' + Language()"></span>
         <!--/ko-->
         <!--ko if:IncludeorExclude() == '0' -->
-        <span class="aud_licontent" data-bind="text:'(Excluded)' + Language() "></span>
+        <span class="aud_licontent" data-bind="text:'(Exclude)' + Language() "></span>
         <!--/ko-->
     </li>
     <!--/ko-->
@@ -1366,24 +1355,24 @@
         <!--ko if:Radius() != 0 && Radius() != null && Radius() != undefined-->
         <!--ko if:IncludeorExclude() == '1'-->
 
-        <span class="aud_licontent" data-bind="text:'Included (' + Radius() +') ' + Country()"></span>
+        <span class="aud_licontent" data-bind="text:'Include (' + Radius() +') ' + Country()"></span>
 
         <!--/ko-->
         <!--ko if:IncludeorExclude() == '0' -->
 
-        <span class="aud_licontent" data-bind="text:'Excluded (' + Radius() +') ' + Country()"></span>
+        <span class="aud_licontent" data-bind="text:'Exclude (' + Radius() +') ' + Country()"></span>
 
         <!--/ko-->
         <!--/ko-->
         <!--ko if:Radius() == null || Radius() == undefined-->
         <!--ko if:IncludeorExclude() == '1'-->
 
-        <span class="aud_licontent" data-bind="text:'(Included) ' + Country()"></span>
+        <span class="aud_licontent" data-bind="text:'(Include) ' + Country()"></span>
 
         <!--/ko-->
         <!--ko if:IncludeorExclude() == '0' -->
 
-        <span class="aud_licontent" data-bind="text:'(Excluded) ' + Country()"></span>
+        <span class="aud_licontent" data-bind="text:'(Exclude) ' + Country()"></span>
 
         <!--/ko-->
         <!--/ko-->
@@ -1392,24 +1381,24 @@
         <!--ko if:Radius() != 0 && Radius() != null && Radius() != undefined-->
         <!--ko if:IncludeorExclude() == '1'-->
 
-        <span class="aud_licontent" data-bind="text:'Included (' + Radius() +') ' + City() "></span>
+        <span class="aud_licontent" data-bind="text:'Include (' + Radius() +') ' + City() "></span>
 
         <!--/ko-->
         <!--ko if:IncludeorExclude() == '0' -->
 
-        <span class="aud_licontent" data-bind="text:'Excluded (' + Radius() +') ' + City()"></span>
+        <span class="aud_licontent" data-bind="text:'Exclude (' + Radius() +') ' + City()"></span>
 
         <!--/ko-->
         <!--/ko-->
         <!--ko if:Radius() == null || Radius() == undefined-->
         <!--ko if:IncludeorExclude() == '1'-->
 
-        <span class="aud_licontent" data-bind="text:'(Included) ' + City() "></span>
+        <span class="aud_licontent" data-bind="text:'(Include) ' + City() "></span>
 
         <!--/ko-->
         <!--ko if:IncludeorExclude() == '0' -->
 
-        <span class="aud_licontent" data-bind="text:'(Excluded) ' + City()"></span>
+        <span class="aud_licontent" data-bind="text:'(Exclude) ' + City()"></span>
 
         <!--/ko-->
         <!--/ko-->

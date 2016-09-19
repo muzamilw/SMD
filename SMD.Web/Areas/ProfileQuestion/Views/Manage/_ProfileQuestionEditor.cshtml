@@ -6,8 +6,8 @@
 <div data-bind="visible: $root.isEditorVisible()" style="display: none">
     <div class="col-lg-12">
         <div class="row">
-            <div class="col-lg-12" id="topArea">
-                <ol class="breadcrumb">
+            <div class="col-lg-12" id="">
+                <ol class="breadcrumb" style="display:none;">
                     <li><a href="/Dashboard/Index" class="my-navigator">Home</a></li>
                     <li><a data-bind="click: $root.closeEditDialog" class="my-navigator">Profile Questions</a></li>
                 </ol>
@@ -336,10 +336,10 @@
                                                 <div class="col-lg-8">
                                                     <header class="main-box-header clearfix" style="padding-right:0px;">
                                                         <div class="filter-block pull-right">
-                                                            <a href="#" id="addTemplatePageBtn" class="btn btn-primary pull-right" data-toggle="modal" data-target=".bs-example-modal-lg" data-bind="click: $root.addNewAnswer, visible: $root.CanAddAnswers()">
+                                                            <a href="#" id="addTemplatePageBtn" class="btn btn-primary pull-right" data-toggle="modal" data-target=".bs-example-modal-lg1" data-bind="click: $root.addNewAnswer, visible: $root.CanAddAnswers()">
                                                                 Add Answer
                                                             </a>
-                                                            <div class="modal fade bs-example-modal-lg" id="pqAnswerDialog" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                                                            <div class="modal fade bs-example-modal-lg1" id="pqAnswerDialog" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
                                                                 <div class="modal-dialog modal-lg">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
@@ -1035,9 +1035,8 @@
                         </span>
                     </a>
                     <a class="table-link fa fa-stack" style="float: right">
-                        <span class="fa-stack">
-                            <i class="fa fa-square fa-stack-2x"></i>
-                            <i class="fa fa-pencil fa-stack-1x fa-inverse" data-bind="click:$root.onEditQuestionAnswer" data-toggle="modal" data-target=".bs-example-modal-lg"></i>
+                        <span class="fa-stack" style="text-align:right;">
+                            <i class="fa fa-pencil-square-o" style="margin-right:5px;" data-bind="click:$root.onEditQuestionAnswer" data-toggle="modal" data-target=".bs-example-modal-lg1"></i>
                         </span>
                     </a>
                 </td>

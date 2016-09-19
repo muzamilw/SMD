@@ -53,7 +53,25 @@ namespace SMD.MIS.Areas.DAM.Controllers
             {
                 img.ImageFileName = "/SMD_Content/DamImages/" + companyId + "/" + mode + "/" + img.ImageFileName;
             }
+            images.FreeImages = damImageService.getAllFreeImages();
+            foreach (var img in images.FreeImages)
+            {
+                img.ImageFileName = "/SMD_Content/DamImages/FreeImages/" + img.ImageFileName;
+            }
             images.mode = mode;
+            images.CompanyId = companyId;
+            return View(images);
+        }
+        public ActionResult AdminIndex()
+        {
+            ViewBag.Status = 1;
+            var images = new ImagesModel();
+            int companyId = 0;
+            images.Images = damImageService.getAllFreeImages();
+            foreach (var img in images.Images)
+            {
+                img.ImageFileName = "/SMD_Content/DamImages/FreeImages/"  + img.ImageFileName;
+            }
             images.CompanyId = companyId;
             return View(images);
         }
@@ -99,6 +117,41 @@ namespace SMD.MIS.Areas.DAM.Controllers
                     return RedirectToAction("Index", "Images", new { mode = model.mode ,iId = damImg.ImageId});
 
           
+        }
+        [HttpPost]
+        public bool UploadImageAdmin(ImagesModel model)
+        {
+
+            //Prepare the needed variables
+            // Bitmap original = null;
+            var name = "newimagefile";
+            var errorField = string.Empty;
+
+
+            errorField = "File";
+            name = string.Format("text-{0:yyyy-MM-dd_hh-mm-ss-tt}", DateTime.Now);
+            // original = Bitmap.FromStream(model.File.InputStream) as Bitmap;
+            if (!Directory.Exists(Server.MapPath("~/SMD_Content/DamImages/FreeImages/")))
+                Directory.CreateDirectory(Server.MapPath("~/SMD_Content/DamImages/FreeImages/"));
+           // var fn = Server.MapPath("~/SMD_Content/DamImages/FreeImages/");
+           
+               var httpPostedFile = HttpContext.Request.Files["UploadedImage"];
+
+               if (httpPostedFile != null)
+               {
+                   var fileSavePath = Path.Combine(Server.MapPath("~/SMD_Content/DamImages/FreeImages/"), httpPostedFile.FileName);
+                   DamImage damImg = new DamImage();
+                   damImg.CompanyId = null;
+                   damImg.ImageCategory = model.mode;
+                   damImg.ImageFileName = httpPostedFile.FileName;
+                   damImg.ImageTitle = httpPostedFile.FileName;
+                   damImageService.addImage(damImg);
+                   httpPostedFile.SaveAs(fileSavePath);
+               }
+           
+            return true;
+
+
         }
         public bool UpdateImage(ImageCropModel model)
         {

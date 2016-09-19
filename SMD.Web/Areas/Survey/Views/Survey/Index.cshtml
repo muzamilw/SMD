@@ -157,8 +157,7 @@ else
             <td style="display:none;">
                 <a class="table-link" style="float: right">
                     <span class="fa-stack">
-                        <i class="fa fa-square fa-stack-2x"></i>
-                        <i class="fa fa-pencil fa-stack-1x fa-inverse" data-bind="click:$root.onEditSurvey"></i>
+                        <i class="fa fa-pencil-square-o" data-bind="click:$root.onEditSurvey"></i>
                     </span>
                 </a> 
             </td>
@@ -174,7 +173,7 @@ else
                 <div class="col-sm-12" style="float: left; margin-bottom:20px;">
                     <br />
                     <span style="font-size: 24px;" class="Theme_standard_clr">Survey Questions</span><br />
-                       <span class="red bold rightAlign" style=" margin-right: 14px;margin-top:-11px!important;"> Watch Video <img src="/Images/youtube_play.JPG" height="25px" /> </span> <span style="font-size: 14px;margin-right:8px;" class="Theme_subheading-Clr">survey description</span>&nbsp; &nbsp; &nbsp;<br />
+                       <span  class="red bold rightAlign" style=" margin-right: 14px;margin-top:-11px!important;display:none;"> Watch Video <img src="/Images/youtube_play.JPG" height="25px" /> </span> <span style="font-size: 14px;margin-right:8px;" class="Theme_subheading-Clr">survey description</span>&nbsp; &nbsp; &nbsp;<br />
                 </div>
 
 
@@ -228,6 +227,7 @@ else
 @section Scripts{
 <script src="~/Scripts/jquery.tokenize.js"></script>
     <script type="text/javascript">
+        $("#MainSpan").css("display", "none");
         require(["survey/survey.view", "common/confirmation.view", "common/stripeChargeCustomer.view"]);
         $("#btnSurvey").css("background-color", "#93bf47");
     </script>
