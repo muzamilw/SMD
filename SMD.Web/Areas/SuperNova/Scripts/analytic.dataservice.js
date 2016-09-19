@@ -22,6 +22,11 @@ define("analytic/analytic.dataservice", function () {
                         dataType: 'json',
                         type: 'GET'
                     });
+					 amplify.request.define('getRevenueOverTime', 'ajax', {
+                        url: '/Api/Revenue',
+                        dataType: 'json',
+                        type: 'GET'
+                    });
                     isInitialized = true;
                 }
             },
@@ -30,6 +35,15 @@ define("analytic/analytic.dataservice", function () {
                 initialize();
                 return amplify.request({
                     resourceId: 'getDashboardInsights',
+                    success: callbacks.success,
+                    error: callbacks.error,
+                    data: params
+                });
+			},
+			getRevenueOverTime = function (params, callbacks) {
+                initialize();
+                return amplify.request({
+                    resourceId: 'getRevenueOverTime',
                     success: callbacks.success,
                     error: callbacks.error,
                     data: params
@@ -48,7 +62,8 @@ define("analytic/analytic.dataservice", function () {
 
         return {
             getactiveuser: getactiveuser,
-			getDashboardInsights:getDashboardInsights
+			getDashboardInsights:getDashboardInsights,
+			getRevenueOverTime:getRevenueOverTime
         };
     })();
     return dataService;

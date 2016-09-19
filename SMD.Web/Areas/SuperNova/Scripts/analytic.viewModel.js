@@ -13,6 +13,8 @@ define("analytic/analytic.viewModel",
 					granularityDropDown = ko.observableArray([{ id: 1, name: "Day" }, { id: 2, name: "Week" }, { id: 3, name: "Month" }, { id: 4, name: "Year" }]),
                     analyticFromdate = ko.observable(),
 					analyticTodate = ko.observable(),
+					selectedGranualforRevenue = ko.observable(1),
+					RevenueOverTimeData = ko.observableArray(),
 					intializeDashboardInsightsData = function(){
 						DashboardInsightsData.push(new model.DashboardInsightsModel("Active App User"));
 						DashboardInsightsData.push(new model.DashboardInsightsModel("New App User"));
@@ -307,12 +309,31 @@ define("analytic/analytic.viewModel",
                             });
                     },
                
+			   getRevenueOverTime = function () {
+                        dataservice.getRevenueOverTime(
+                            {
+								granuality: selectedGranualforRevenue(),
+								DateFrom: '2016-08-02',
+								DateTo :'2016-09-17'
+                                                           },
+                            {
+                                success: function (data) {
+									//data[0].amountcollected
+									//data[0].granular
+	                            },
+                                error: function (response) {
+                                    toastr.error("Failed to load Ad Campaigns!");
+                                }
+                            });
+                    },
+               
                     // Initialize the view model
                     initialize = function (specifiedView) {
                         view = specifiedView;
                         ko.applyBindings(view.viewModel, view.bindingRoot);
 						intializeDashboardInsightsData();
 						getAnalytic();
+						getRevenueOverTime();
                     };
                 return {
 
@@ -322,7 +343,10 @@ define("analytic/analytic.viewModel",
 					granularityDropDown:granularityDropDown,
 					analyticFromdate: analyticFromdate,
 					analyticTodate:analyticTodate,
-					DashboardInsightsData:DashboardInsightsData
+					DashboardInsightsData:DashboardInsightsData,
+					selectedGranualforRevenue:selectedGranualforRevenue,
+					RevenueOverTimeData:RevenueOverTimeData
+					
 
                 };
             })()

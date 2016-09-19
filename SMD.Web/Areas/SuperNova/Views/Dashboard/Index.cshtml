@@ -145,7 +145,7 @@
                         <div class="form-group lightgray-bg graph-box-analytics" style="margin-right:10px">
                         </div>
                         <div class=" margin10">
-                            <select class="form-control" style="width:35%!important;" id="ddpCorrectAns" data-bind="options: $root.granularityDropDown, optionsText: 'name', optionsValue: 'Id'"></select>
+                            <select class="form-control" style="width:35%!important;" id="ddpCorrectAns" data-bind="options: $root.granularityDropDown, optionsText: 'name', optionsValue: 'id', value:$root.selectedGranualforRevenue"></select>
                         </div>
                     </div>
                     <div class="col-lg-6">
@@ -155,6 +155,8 @@
                         <h2 class="graphheaderright">Afilliate Vs SMD Revenue</h2>
                         <div class="form-group" style="margin-right:10px">
                             <div class="graph-box lightgray-bg">
+                               
+                                <div class="margin-Top-30" data-bind="morris: {type: 'Line', data: $root.activeUser, xkey: 'y', ykeys: ['a'], labels: ['Active Users']}" style="width: 600px; float: left"></div>
                             </div>
                         </div>
                         <h2 class="graphheaderright">Active Users</h2>
