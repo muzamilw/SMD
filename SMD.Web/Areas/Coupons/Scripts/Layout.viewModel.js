@@ -29,23 +29,26 @@
                 getBranchCategories = function (callback) {
                     dataService.getBranchCategory({
                         success: function (data) {
-                            companyId(data[0].CompanyId);
-                            branchCategory.removeAll();
-                            branchDdlist.removeAll();
-                            _.each(data, function (item) {
-
-                                var category = new model.BranchCategory.Create(item);
-                                branchDdlist.push(category);
-                                _.each(item.CompanyBranches, function (branchFieldItem) {
-                                    var branchField = new model.BranchField.Create(branchFieldItem);
-                                    category.brachFeilds.push(branchField);
-                                });
-                                branchCategory.push(category);
-
-                            });
-                            if (callback && typeof callback === "function") {
-                                callback();
+                            if (data.length > 0) {
+                                companyId(data[0].CompanyId);
                             }
+                                branchCategory.removeAll();
+                                branchDdlist.removeAll();
+                                _.each(data, function (item) {
+
+                                    var category = new model.BranchCategory.Create(item);
+                                    branchDdlist.push(category);
+                                    _.each(item.CompanyBranches, function (branchFieldItem) {
+                                        var branchField = new model.BranchField.Create(branchFieldItem);
+                                        category.brachFeilds.push(branchField);
+                                    });
+                                    branchCategory.push(category);
+
+                                });
+                                if (callback && typeof callback === "function") {
+                                    callback();
+                                }
+                            
 
                         },
                         error: function () {
@@ -358,11 +361,8 @@
 
                   }),
                 CreateNewBranchLocation = function () {
-                    dataService.getCompanyAddress(
-                     { companyId: companyId() },
-                     {
+                    dataService.getCompanyAddress({
                          success: function (data) {
-
                              var newBranchLocation = new model.Branch.CreateBillingAddress(data)
                              selectedBranch(undefined)
                              selectedBranch(newBranchLocation);
@@ -370,9 +370,6 @@
                              isSaveChangesEnable(true);
                              isdeleteEnable(false);
                              isMapVisible(true);
-                           
-                             
-
                          },
                          error: function () {
                              toastr.error("Failed to load Company Address.");

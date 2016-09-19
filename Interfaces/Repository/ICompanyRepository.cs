@@ -19,5 +19,6 @@ namespace SMD.Interfaces.Repository
 
         User getUserBasedOnAuthenticationToken(string token);
         string GetCompanyNameByID(int CompanyId);
+        Company GetCompanyById();
     }
 }
