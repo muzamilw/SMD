@@ -348,8 +348,8 @@ define("analytic/analytic.viewModel",
 					analyticTodate:analyticTodate,
 					DashboardInsightsData:DashboardInsightsData,
 					selectedGranualforRevenue:selectedGranualforRevenue,
-					RevenueOverTimeData:RevenueOverTimeData
-					
+					RevenueOverTimeData:RevenueOverTimeData,
+					getRevenueOverTime:getRevenueOverTime
 
                 };
             })()

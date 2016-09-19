@@ -280,6 +280,14 @@ namespace SMD.Repository.BaseRepository
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAdminDashBoardInsights_Result>("GetAdminDashBoardInsights");
         }
 
+        public ObjectResult<GetRevenueOverTime_Result> GetRevenueOverTime(int CompanyId, DateTime DateFrom, DateTime DateTo, int Granularity)
+        {
+            var CID = new ObjectParameter("CompanyId", CompanyId);
+            var DateFrm = new ObjectParameter("DateFrom", DateFrom);
+            var DatTo = new ObjectParameter("DateTo", DateTo);
+            var Granulrty = new ObjectParameter("Granularity", Granularity);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetRevenueOverTime_Result>("GetRevenueOverTime", CID, DateFrm, DatTo, Granulrty);
+        }
 
         /// <summary>
         /// Get Ad-Campaigns for APIs | baqer
