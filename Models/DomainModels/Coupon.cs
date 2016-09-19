@@ -83,6 +83,11 @@ namespace SMD.Models.DomainModels
         public virtual Company Company { get; set; }
         public virtual CompanyBranch CompanyBranch { get; set; }
         public virtual Language Language { get; set; }
+
+        public Nullable<System.DateTime> CouponStartDate { get; set; }
+        public Nullable<System.DateTime> CouponEndDate { get; set; }
+        public Nullable<int> Priority { get; set; }
+
         public virtual ICollection<CouponCategories> CouponCategories { get; set; }
 
         [NotMapped]
