@@ -366,6 +366,7 @@
                              var newBranchLocation = new model.Branch.CreateBillingAddress(data)
                              selectedBranch(undefined)
                              selectedBranch(newBranchLocation);
+                             CodeAddressonMap()
                              isSaveChangesEnable(true);
                              isdeleteEnable(false);
                              isMapVisible(true);
