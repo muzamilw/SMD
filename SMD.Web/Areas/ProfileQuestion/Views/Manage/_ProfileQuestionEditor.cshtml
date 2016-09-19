@@ -827,17 +827,17 @@
                         </div>
                     </div>
                     <div class="col-xs-12" style="text-align: left;margin-bottom: 20px; padding-right:0;margin-top:20px;">
-                        <div>Bid more to increaseviewing priority.</div>
-                        <div>50% of PPCV is rewarded to viewer.</div>
+                        <div style="display:none;">Bid more to increaseviewing priority.</div>
+                        <div style="display:none;">50% of PPCV is rewarded to viewer.</div>
                     </div>
                     <div class="col-xs-12" style="text-align: left;margin-bottom: 20px; padding-right:0;margin-top:20px;">
-                        <span class="text-campaign-left control-label pull-left" style="    margin-top: 6px;">Answer Needed </span>
+                        <span class="text-campaign-left control-label pull-left" style="    margin-top: 6px;">Deliver Count</span>
                         <input type="text" class="pull-right" style="  color:red;width: 77px;margin-top: 6px;margin-left: 10px;font-weight: bold;font-size: 18px; " data-bind="value:answerNeeded" name="Budget" class="form-control" id="ansNeeded">
                     </div>
                     <div class="col-xs-12" style="text-align: left; padding-right:0;margin-bottom:10px;font-size:0.9em;">
                         <span class="text-campaign-left control-label pull-left" style="    margin-top: 6px;">Purchase Amount($) </span>
-                        <input type="text" class="pull-right " readonly="readonly" style="  color:red;width: 77px;margin-top: 6px;margin-left: 10px;font-weight: bold;font-size: 18px; " data-bind="value:$root.totalPrice" name="Budget" class="form-control" id="txtPerClick">
-                        
+                        @*<input type="text" class="pull-right " readonly="readonly" style="  color:red;width: 77px;margin-top: 6px;margin-left: 10px;font-weight: bold;font-size: 18px; " data-bind="value:$root.totalPrice" name="Budget" class="form-control" id="txtPerClick">*@
+                        <span class="pull-right" style="font-size: 18px; color: rgb(104,179,89);font-weight: bold;margin-top: 9px;margin-right: 56px;" id="txtPerClick" data-bind="text:$root.totalPrice"></span>
                         <div class="clearfix">
                         </div>
                         <span class="text-campaign-left control-label pull-left" style="margin-top: 6px;display:none;">Cap your daily spend ($) </span>

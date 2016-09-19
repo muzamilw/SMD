@@ -40,7 +40,7 @@ else
                                     <thead>
                                         <tr style="height:25px;">
 
-                                            <th class="col-sm-3" style="vertical-align:top"><span class="GridHeaderFont_size">Campaign Name</span></th>
+                                            <th class="col-sm-3" style="vertical-align:top"><span class="GridHeaderFont_size ">Campaign Name</span></th>
                                             <th class="col-sm-1" style="vertical-align:top;display:none;"><span class="GridHeaderFont_size">Type</span></th>
 
                                             <th class="col-sm-2" style="vertical-align:top"><span class="GridHeaderFont_size">Start Date</span></th>
@@ -268,8 +268,8 @@ else
 
             <div class="col-sm-12" style="float: left; margin-bottom:20px;">
                 <br />
-                <span style="font-size: 24px;" class="Theme_standard_clr" data-bind="text:$root.MainHeading"></span><br />
-                <span style="font-size: 14px;" class="Theme_subheading-Clr" data-bind="text:$root.SubHeading"></span>  &nbsp; &nbsp; &nbsp; <span class="red bold rightAlign" style="display:none;"> Watch Video <img src="/Images/youtube_play.JPG" height="25px" /> </span>   </span><br />
+                <span style="font-size: 24px;" class="Theme_standard_clr headingFontFamily" data-bind="text:$root.MainHeading"></span><br />
+                <span style="font-size: 14px;" class="Theme_subheading-Clr headingFontFamily" data-bind="text:$root.SubHeading"></span>  &nbsp; &nbsp; &nbsp; <span class="red bold rightAlign" style="display:none;"> Watch Video <img src="/Images/youtube_play.JPG" height="25px" /> </span>   </span><br />
             </div>
 
 
@@ -345,9 +345,11 @@ else
             var modeLoc = GetURLParameter("mode");
             if(modeLoc == 1)
             {
-                $("#btncampaigns").css("background-color", "#93bf47");
+                
+                $("#btncampaigns").css("background-color", "#34b9c7!important");
+
             } else {
-                $("#btnspnsergames").css("background-color", "#93bf47");
+                $("#btnspnsergames").css("background-color", "#34b9c7!important");
                 mode = modeLoc;
             }
         });
