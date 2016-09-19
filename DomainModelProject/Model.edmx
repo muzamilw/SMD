@@ -458,6 +458,9 @@
           <Property Name="HowToRedeemLine5" Type="nvarchar" MaxLength="500" />
           <Property Name="SubmissionDateTime" Type="datetime" />
           <Property Name="LocationCountryId" Type="int" />
+          <Property Name="CouponStartDate" Type="datetime" />
+          <Property Name="CouponEndDate" Type="datetime" />
+          <Property Name="Priority" Type="int" />
         </EntityType>
         <EntityType Name="CouponCategories">
           <Key>
@@ -2179,6 +2182,12 @@
           <Parameter Name="FromRow" Type="int" Mode="In" />
           <Parameter Name="ToRow" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetRevenueOverTime" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CompanyId" Type="int" Mode="In" />
+          <Parameter Name="DateFrom" Type="datetime" Mode="In" />
+          <Parameter Name="DateTo" Type="datetime" Mode="In" />
+          <Parameter Name="Granularity" Type="int" Mode="In" />
+        </Function>
         <Function Name="GetTransactions" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CompanyID" Type="int" Mode="In" />
           <Parameter Name="AccountType" Type="int" Mode="In" />
@@ -3197,6 +3206,9 @@
           <Property Name="SubmissionDateTime" Type="DateTime" Precision="3" />
           <NavigationProperty Name="InvoiceDetails" Relationship="SMDDevModel.FK_InvoiceDetail_Coupon" FromRole="Coupon" ToRole="InvoiceDetail" />
           <Property Name="LocationCountryId" Type="Int32" />
+          <Property Name="CouponStartDate" Type="DateTime" Precision="3" />
+          <Property Name="CouponEndDate" Type="DateTime" Precision="3" />
+          <Property Name="Priority" Type="Int32" />
         </EntityType>
         <EntityType Name="CouponCode">
           <Key>
@@ -5116,6 +5128,12 @@
             <Parameter Name="Rows" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetAdminDashBoardInsights" ReturnType="Collection(SMDDevModel.GetAdminDashBoardInsights_Result)" />
+          <FunctionImport Name="GetRevenueOverTime" ReturnType="Collection(SMDDevModel.GetRevenueOverTime_Result)">
+            <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+            <Parameter Name="DateFrom" Mode="In" Type="DateTime" />
+            <Parameter Name="DateTo" Mode="In" Type="DateTime" />
+            <Parameter Name="Granularity" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="CouponCategories">
           <Key>
@@ -5699,6 +5717,10 @@
           <Property Type="Int32" Name="au" Nullable="true" />
           <Property Type="Int32" Name="ae" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="GetRevenueOverTime_Result">
+          <Property Type="Decimal" Name="amountcollected" Nullable="false" Precision="1" Scale="1" />
+          <Property Type="String" Name="granular" Nullable="false" MaxLength="1" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -6105,6 +6127,9 @@
           <EntitySetMapping Name="Coupons">
             <EntityTypeMapping TypeName="SMDDevModel.Coupon">
               <MappingFragment StoreEntitySet="Coupon">
+                <ScalarProperty Name="Priority" ColumnName="Priority" />
+                <ScalarProperty Name="CouponEndDate" ColumnName="CouponEndDate" />
+                <ScalarProperty Name="CouponStartDate" ColumnName="CouponStartDate" />
                 <ScalarProperty Name="LocationCountryId" ColumnName="LocationCountryId" />
                 <ScalarProperty Name="SubmissionDateTime" ColumnName="SubmissionDateTime" />
                 <ScalarProperty Name="CouponId" ColumnName="CouponId" />
@@ -7010,6 +7035,14 @@
                 <ScalarProperty Name="ca" ColumnName="ca" />
                 <ScalarProperty Name="au" ColumnName="au" />
                 <ScalarProperty Name="ae" ColumnName="ae" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetRevenueOverTime" FunctionName="SMDDevModel.Store.GetRevenueOverTime" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SMDDevModel.GetRevenueOverTime_Result">
+                <ScalarProperty Name="amountcollected" ColumnName="amountcollected" />
+                <ScalarProperty Name="granular" ColumnName="granular" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
