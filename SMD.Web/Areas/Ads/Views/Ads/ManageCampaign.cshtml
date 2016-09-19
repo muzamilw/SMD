@@ -22,7 +22,7 @@ else
                 <div class="clearfix" data-bind="with: $root.campaignModel">
                     <span class="pull-left Theme_standard_clr" style="padding-left:0px;font-size:28px;" data-bind="NewCampaignBinding: CampaignName,visible:$root.isDisplayCouponsAds()">New Coupon</span>
                     <span class="pull-left Theme_standard_clr" style="padding-left:0px;font-size:28px;" data-bind="NewCampaignBinding: CampaignName,visible:!$root.isDisplayCouponsAds()">New Campaign</span>
-                    <span class="control-label bold heading-style pull-left" style="    margin-top: 6px;    margin-left: 40px;" data-bind="text:StatusValue()"></span>
+                    <span class="control-label heading-style pull-left" style="    margin-top: 6px;    margin-left: 40px;" data-bind="text:StatusValue()"></span>
                     <div style="float:right;margin-top:-5px;"><button id="MainBtnClose" data-bind="click: $root.closeNewCampaignDialog" class="btn btn-default">Close</button></div>
                 </div>
 
@@ -843,6 +843,7 @@ else
                                 <button class="btn  btn-info Theme_standard_clr" id="btnCopyCampaign" data-bind=" click:$root.copyCampaign  " style="display:none;">Create Copy - New Campaign</button>@*visible: $root.isNewCampaignVisible*@
                                 <button class="btn  btn-success" id="btnPauseCampaign" data-bind="click:$root.changeStatus(4)" style="display:none;">Pause</button>
                                 <button class="btn  btn-success" id="btnResumeCampagin" data-bind="click:$root.changeStatus(3)" style="display:none;">Resume</button>
+                                <button class="btn  btn-success gtild-color pull-right" id="btnChart" data-bind="visible: !$root.isNewCampaign()" style="    margin-top: 6px;width:80%;">Analytic Charts</button>
                             </div>
                             @*<button class="btn  btn-warning" id="saveBtn" data-bind="click:$root.saveCampaignData, enable: $root.hasChangesOnQuestion, css: { 'btn-warning': $root.hasChangesOnQuestion }">Save</button>*@
 
@@ -852,8 +853,8 @@ else
                             <span class=" pull-left">Minimum PPCV :</span>
                             <span class="pull-right" data-bind="text: '£' + ($root.pricePerclick().toFixed(2) * $root.reachedAudience() )"></span>
                             <div class="clearfix"> </div>
-                            <span class=" pull-left" style="color:red;">Matches profiles:</span>
-                            <span class="pull-right" style="color:red;" data-bind="text:$root.reachedAudience()">0</span>
+                            <span class=" pull-left" style="color:#3DD2B5;">Matches profiles:</span>
+                            <span class="pull-right" style="color:#3DD2B5;" data-bind="text:$root.reachedAudience()">0</span>
                             <div class="clearfix">
                             </div>
                         </div>
@@ -889,11 +890,11 @@ else
     font-size: 18px; " name="Budget" class="form-control" id="txtCampaignBudget" data-bind="value: MaxBudget,validationTooltip:MaxBudget, validationOnElement: MaxBudget">
                             <div class="clearfix">
                             </div>
-                            <button class="btn  btn-success gtild-color pull-right" id="btnChart" data-bind="visible: !$root.isNewCampaign()" style="    margin-top: 6px;">Chart</button>
+                            @*<button class="btn  btn-success gtild-color pull-right" id="btnChart" data-bind="visible: !$root.isNewCampaign()" style="    margin-top: 6px;">Analytic Charts</button>*@
                         </div>
                         <div class="clearfix">
                         </div>
-                        <div class="col-lg-11" data-bind="visible: !$root.isNewCampaign()" style=" display:none;background: white;    padding: 20px;    padding-top: 10px;    position: absolute;    bottom: 15px;    margin-left: -5px;">
+                        @*<div class="col-lg-11" data-bind="visible: !$root.isNewCampaign()" style=" display:none!important;background: white;    padding: 20px;    padding-top: 10px;    position: absolute;    bottom: 15px;    margin-left: -5px;">
                             <span style="    font-weight: bold;
     line-height: 3;">Campaign Summary</span><br />
                             <span class=" pull-left" style="color:red;">Matches profiles:</span>
@@ -921,7 +922,7 @@ else
                                
                                 <div class="clearfix"></div>
                             </div>
-                        </div>
+                        </div>*@
                         <div class="col-lg-11" data-bind="" style="display:none;  position: absolute;
     bottom: 15px;
     margin-left: -10px;">

@@ -266,7 +266,7 @@ define("ads/ads.viewModel",
                 isNewCampaignVisible(false);
                 VideoLink2src(0);
                 FlagToShowDivs(false);
-
+                campaignModel().StatusValue('Draft');
                 VideoLink2src(null);
                 isShowArchiveBtn(false);
                 campaignModel().ChannelType("1");

@@ -5,7 +5,7 @@
             HighlightLine5, HowToRedeemLine1, HowToRedeemLine2, HowToRedeemLine3, HowToRedeemLine4, HowToRedeemLine5, LanguageId, LocationBranchId, LocationCity, LocationLAT,
             LocationLine1, LocationLine2, LocationLON, LocationPhone, LocationState, LocationTitle, LocationZipCode, LogoUrl, ModifiedBy, ModifiedDateTime, Price, RejectedBy,
             Rejecteddatetime, RejectedReason, Savings, SearchKeywords, Status, SwapCost, UserId, CouponTitle, CouponExpirydate, CouponQtyPerUser, CouponId, couponImage1, CouponImage2, CouponImage3,
-            CurrencyId, CouponListingMode, CouponActiveMonth, CouponActiveYear, CouponRedeemedCount, CouponViewCount, CouponIssuedCount, SubmissionDateTime,LocationCountryId
+            CurrencyId, CouponListingMode, CouponActiveMonth, CouponActiveYear, CouponRedeemedCount, CouponViewCount, CouponIssuedCount, SubmissionDateTime, LocationCountryId, CouponStartDate, CouponEndDate, Priority
           ) {
           var
               //type and userID will be set on server sside
@@ -78,6 +78,11 @@
               SwapCost = ko.observable(SwapCost),
               UserId = ko.observable(UserId),
               LogoImageBytes = ko.observable(LogoUrl),
+              
+              CouponStartDate = ko.observable((CouponStartDate !== null && CouponStartDate !== undefined) ? moment(CouponStartDate).toDate() : undefined),//ko.observable(),
+
+              CouponEndDate = ko.observable((CouponEndDate !== null && CouponEndDate !== undefined) ? moment(CouponEndDate).toDate() : undefined),//ko.observable(),
+              Priority = ko.observable(Priority),
                // Errors
               errors = ko.validation.group({ }),
                 // Is Valid 
@@ -148,7 +153,10 @@
                  SwapCost : (SwapCost),
                  UserId: (UserId),
                  LogoImageBytes: LogoImageBytes,
-                 LocationCountryId: LocationCountryId
+                 LocationCountryId: LocationCountryId,
+                 Priority: Priority,
+                 CouponStartDate: CouponStartDate,
+                 CouponEndDate: CouponEndDate
               }),
               // Has Changes
               hasChanges = ko.computed(function () {
@@ -175,7 +183,7 @@
                       CouponActiveMonth: CouponActiveMonth(),
                       
                       CouponActiveYear: CouponActiveYear(),
-                      CouponExpirydate: CouponExpirydate(),
+                      CouponExpirydate: moment(CouponExpirydate()).format(ist.utcFormat) + 'Z',
                       CouponId: CouponId(),
                       couponImage1: bannerImage1 == "" ? couponImage1() : bannerImage1,
                       CouponImage2: bannerImage2 == "" ? CouponImage2() : bannerImage2,
@@ -234,6 +242,10 @@
                       LogoImageBytes: LogoImageBytes(),
                       hasChanges: hasChanges(),
                       CouponCategories: selectedCoupons,
+                      CouponStartDate: moment(CouponStartDate()).format(ist.utcFormat) + 'Z',
+                      CouponEndDate: moment(CouponEndDate()).format(ist.utcFormat) + 'Z',
+                      Priority: Priority()
+                      
                   };
               };
           return {
@@ -304,14 +316,17 @@
               convertToServerData: convertToServerData,
               CouponCategories: CouponCategories,
               SubmissionDateTime: (SubmissionDateTime),
-              LocationCountryId: (LocationCountryId)
+              LocationCountryId: (LocationCountryId),
+              CouponStartDate: (CouponStartDate),
+              CouponEndDate: (CouponEndDate),
+              Priority: (Priority)
           };
       };
 
    
     // Factory Method
     Coupon.Create = function (source) {
-     
+        debugger;
         var coupon = new Coupon(source.FinePrintLine1, source.FinePrintLine2, source.FinePrintLine3, source.FinePrintLine4, source.FinePrintLine5,
             source.GeographyColumn, source.HighlightLine1, source.HighlightLine2, source.HighlightLine3, source.HighlightLine4,
             source.HighlightLine5, source.HowToRedeemLine1, source.HowToRedeemLine2, source.HowToRedeemLine3, source.HowToRedeemLine4,
@@ -319,8 +334,9 @@
             source.LocationLine1, source.LocationLine2, source.LocationLON, source.LocationPhone, source.LocationState,
             source.LocationTitle, source.LocationZipCode, source.LogoUrl, source.ModifiedBy, source.ModifiedDateTime, source.Price, source.RejectedBy,
             source.Rejecteddatetime, source.RejectedReason, source.Savings, source.SearchKeywords, source.Status, source.SwapCost, source.UserId,source.CouponTitle,source.CouponExpirydate,
-            source.CouponQtyPerUser, source.CouponId, source.couponImage1, source.CouponImage2, source.CouponImage3, source.CurrencyId, source.CouponListingMode, source.CouponActiveMonth, source.CouponActiveYear, source.CouponRedeemedCount, source.CouponViewCount, source.CouponIssuedCount, source.SubmissionDateTime, source.LocationCountryId
+            source.CouponQtyPerUser, source.CouponId, source.couponImage1, source.CouponImage2, source.CouponImage3, source.CurrencyId, source.CouponListingMode, source.CouponActiveMonth, source.CouponActiveYear, source.CouponRedeemedCount, source.CouponViewCount, source.CouponIssuedCount, source.SubmissionDateTime, source.LocationCountryId, source.CouponStartDate, source.CouponEndDate, source.Priority
             );
+
         _.each(source.CouponCategories, function (item) {
 
             coupon.CouponCategories.push(selectedCouponCategory.Create(item));

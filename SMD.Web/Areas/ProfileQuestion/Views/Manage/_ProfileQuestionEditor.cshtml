@@ -33,7 +33,7 @@
                                     1
                                 </div>
                                 <br>
-                                <span data-bind="css: $root.previewScreenNumber() == 1 ? 'ads-selected-numbering-text' : ''" class="ads-selected-numbering-text">Question <br>Info</span>
+                                <span data-bind="css: $root.previewScreenNumber() == 1 ? 'ads-selected-numbering-text' : '',click: $root.gotoScreen.bind(null,1)" class="ads-selected-numbering-text">Question <br>Info</span>
                             </div>
                             <div class="pull-left ads-numbering-linebar" data-bind="css: $root.previewScreenNumber() == 6 ? 'ads-selected-numbering-box' : ''">
 
@@ -43,7 +43,7 @@
                                     2
                                 </div>
                                 <br>
-                                <span data-bind="css: $root.previewScreenNumber() == 2 ? 'ads-selected-numbering-text' : ''">Target<br>Audience</span>
+                                <span data-bind="css: $root.previewScreenNumber() == 2 ? 'ads-selected-numbering-text' : '',click: $root.gotoScreen.bind(null,2)">Target<br>Audience</span>
                             </div>
                             @*<div class="pull-left ads-numbering-linebar" data-bind="css: $root.previewScreenNumber() == 6 ? 'ads-selected-numbering-box' : ''">
 
@@ -92,7 +92,7 @@
                                 <div class="tab-pane fade in active" data-bind="with: $root.selectedQuestion" id="tab-generalinfo">
                                     <div class="col-lg-12 form-horizontal">
                                         <h3 class="adsubHeading Theme_standard_clr" style="margin-top:20px;border-bottom:none!important;">
-                                            Profile Question General Info
+                                            Survey Question General Info
                                         </h3>
                                         @*<p class="group-header-description Theme_subheading-Clr">Enter information below </p>*@
                                         <div class="col-lg-9">
@@ -147,7 +147,7 @@
                                             </div>
                                         </div>
                                         <div class="col-lg-9">
-                                            <div class="form-group">
+                                            <div class="form-group" style="display:none;">
                                                 <div class="col-lg-3 text-right" style="padding-right:17px;">
                                                     <label class="control-label text-right tooltip-float defaultImgUploadImageBtn">Profile Group</label>
                                                 </div>
@@ -961,7 +961,7 @@
                                                     <div class="form-group" data-bind="visible:$root.isNewCriteria">
                                                         <div class="col-lg-12 pull-left" data-bind="visible: $root.AditionalCriteriaMode() == '2'">
                                                             <div class="row header">
-                                                                <label class="control-label modelHeading">Profile Questions</label>
+                                                                <label class="control-label modelHeading">Survey Questions</label>
                                                             </div>
                                                             <div class="listview parentList set-border padding10 list-type-tiles" data-role="listview" id="lv1">
                                                                 <!-- ko template: { name: 'profileQuestionTiles' , foreach: $root.profileQuestionList} --><!-- /ko -->
