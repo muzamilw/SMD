@@ -3185,7 +3185,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
             <Parameter Name="Rows" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetAdminDashBoardInsights" ReturnType="Collection(DomainModels.GetAdminDashBoardInsights_Result)" />
-          <FunctionImport Name="GetRevenueOverTime">
+          <FunctionImport Name="GetRevenueOverTime" ReturnType="Collection(DomainModels.GetRevenueOverTime_Result)">
             <Parameter Name="CompanyId" Mode="In" Type="Int32" />
             <Parameter Name="DateFrom" Mode="In" Type="DateTime" />
             <Parameter Name="DateTo" Mode="In" Type="DateTime" />
@@ -5805,6 +5805,10 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Property Type="Double" Name="au" Nullable="true" />
           <Property Type="Double" Name="ae" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="GetRevenueOverTime_Result">
+          <Property Type="Decimal" Name="amountcollected" Nullable="false" Precision="1" Scale="1" />
+          <Property Type="String" Name="granular" Nullable="false" MaxLength="1" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -7153,7 +7157,14 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetRevenueOverTime" FunctionName="SMDModel.Store.GetRevenueOverTime" />
+          <FunctionImportMapping FunctionImportName="GetRevenueOverTime" FunctionName="SMDModel.Store.GetRevenueOverTime" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DomainModels.GetRevenueOverTime_Result">
+                <ScalarProperty Name="amountcollected" ColumnName="amountcollected" />
+                <ScalarProperty Name="granular" ColumnName="granular" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
