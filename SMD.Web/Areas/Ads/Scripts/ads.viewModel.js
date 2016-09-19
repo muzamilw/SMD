@@ -22,9 +22,9 @@ define("ads/ads.viewModel",
                     profileQuestionList = ko.observable([]),
                     myQuizQuestions = ko.observableArray([]),
                     profileAnswerList = ko.observable([]),
-                    
+
                     surveyAnswerList = ko.observable([]),
-                    
+
                     criteriaCount = ko.observable(0),
                     isShowSurveyAns = ko.observable(false),
                      // selected location 
@@ -52,6 +52,19 @@ define("ads/ads.viewModel",
                     isShowArchiveBtn = ko.observable(false),
                     isTerminateBtnVisible = ko.observable(false),
                     correctAnswers = ko.observableArray([{ id: 1, name: "Choice 1" }, { id: 2, name: "Choice 2" }, { id: 3, name: "Choice 3" }, { id: 0, name: "Any of the above" }]),
+                    DefaultTextBtns = ko.observableArray([
+                        { id: "Apply Now", name: "Apply Now" },
+                        { id: "Book Now", name: "Book Now" },
+                        { id: "Contact Us", name: "Contact Us" },
+                        { id: "Download", name: "Download" },
+                        { id: "Learn More", name: "Learn More" },
+                        { id: "Shop Now", name: "Shop Now" },
+                        { id: "Sign Up", name: "Sign Up" },
+                        { id: "Watch More", name: "Watch More" },
+                        { id: "Buy Now", name: "Buy Now" },
+                        { id: "Check Availability", name: "Check Availability" },
+                        { id: "Custom Button Label", name: "Custom Button Label" }
+                    ]),
                     selectedIndustryIncludeExclude = ko.observable(true),
                     UserAndCostDetail = ko.observable(),
                     pricePerclick = ko.observable(0),
@@ -76,7 +89,11 @@ define("ads/ads.viewModel",
                     // audience reach mode 
                     audienceReachMode = ko.observable("1"),
                     MainHeading = ko.observable("Video Ad campaigns"),
+                    uploadTitle = ko.observable("Upload Video"),
                     SubHeading = ko.observable("Show video commercials to target audiences, increase brand awareness, run surveys and your list deals."),
+                    tab1Heading = ko.observable("Upload a 10-20 second video ad.");
+                tab2Heading = ko.observable(" Define the target audience to deliver video ad.");
+                tab4SubHeading = ko.observable("Select your ad campaign delivery mode:");
                     errorListNew = ko.observableArray([]),
                       // unique country list used to bind location dropdown
                     selectedQuestionCountryList = ko.observableArray([]),
@@ -275,6 +292,7 @@ define("ads/ads.viewModel",
                 campaignModel().MaxBudget("20");
                 campaignModel().Type(mode);
                 campaignModel().DeliveryDays("3");
+                campaignModel().reset();
                 //isEditorVisible(true);
                 //canSubmitForApproval(true);
                 //campaignModel(new model.Campaign());
@@ -501,7 +519,7 @@ define("ads/ads.viewModel",
                   campaignModel().VoucherImagePath("");
                   campaignModel().LanguageId(41);
                   campaignModel().DeliveryDays('10');
-                  campaignModel().LogoUrl('Content/Images/Company_Default.png');
+                  campaignModel().LogoUrl('Images/default-placeholder.png');
                   campaignModel().IsShowVoucherSetting(false);
                   if (UserAndCostDetail() != null || UserAndCostDetail() != undefined) {
                       alreadyAddedDeliveryValue(10);
@@ -1372,7 +1390,7 @@ define("ads/ads.viewModel",
                 onEditCampaign = function (item) {
                 
                     //hiding the main menu
-                    collapseMainMenu();
+                   
                  //   VideoLink2src(item.VideoLink2);
                     previewScreenNumber(1);
                     isTerminateBtnVisible(false);
@@ -1380,6 +1398,7 @@ define("ads/ads.viewModel",
                     isShowArchiveBtn(false);
                     
                     if (item.Status() == 1 || item.Status() == 2 || item.Status() == 3 || item.Status() == 4 || item.Status() == null || item.Status() == 7 || item.Status() == 9) {
+                        collapseMainMenu();
                         $("#panelArea").css("display", "none");
                         if (item.Status() == 1)//because it is in draft mode.
                             isNewCampaign(true);
@@ -1502,8 +1521,7 @@ define("ads/ads.viewModel",
 
                                     });
 
-
-
+                                    DefaultTextBtns.push({ id: campaignModel().BuyItButtonLabel(), name: campaignModel().BuyItButtonLabel() });
                                     campaignModel().reset();
 
 
@@ -2300,6 +2318,11 @@ define("ads/ads.viewModel",
                     isDisplayCouponsAds(false);
                     MainHeading("Video Campaigns");
                     SubHeading("Video campaigns can be paused and terminated at any time. Increase your conversions and reduce your spend by using profile filters.");
+                    if (mode == 4)
+                    {
+                        MainHeading("Game Campaigns");
+                        SubHeading("Game campaigns can be paused and terminated at any time. Increase your conversions and reduce your spend by using profile filters.");
+                    }
                     getAdCampaignGridContent();
                 },
                 gotoProfile = function () {
@@ -2634,6 +2657,15 @@ define("ads/ads.viewModel",
                 },
                 // Initialize the view model
                 initialize = function (specifiedView) {
+                    if (mode == 4) {
+                        MainHeading("Game Campaigns");
+                        SubHeading("Game campaigns can be paused and terminated at any time. Increase your conversions and reduce your spend by using profile filters.");
+                        lblAdTitle("Game  Title");
+                        uploadTitle("Upload Logo");
+                        tab1Heading("Add game title and logo");
+                        tab2Heading("Define the target audience to deliver game ad.");
+                        tab4SubHeading("Select your game campaign delivery mode:");
+                    }
                     view = specifiedView;
                     ko.applyBindings(view.viewModel, view.bindingRoot);
                     for (var i = 10; i < 81; i++) {
@@ -2739,6 +2771,7 @@ define("ads/ads.viewModel",
                     isNewCampaign: isNewCampaign,
                     BackToAds: BackToAds,
                     MainHeading: MainHeading,
+                    uploadTitle:uploadTitle,
                     SubHeading: SubHeading,
                     ShowAdCampaigns: ShowAdCampaigns,
                     ShowCouponPromotions: ShowCouponPromotions,
@@ -2749,6 +2782,10 @@ define("ads/ads.viewModel",
                     lblFirstLine: lblFirstLine,
                     lbllSecondLine: lbllSecondLine,
                     lblCampaignSchedule: lblCampaignSchedule,
+                    tab1Heading: tab1Heading,
+                    tab2Heading: tab2Heading,
+                    tab4SubHeading: tab4SubHeading,
+
                     gotoProfile: gotoProfile,
                     gotoManageUsers: gotoManageUsers,
                     ArchiveCampaign: ArchiveCampaign,
@@ -2775,6 +2812,7 @@ define("ads/ads.viewModel",
                     BetterListitemToAdd: BetterListitemToAdd,
                     allCouponCodeItems: allCouponCodeItems,
                     selectedCouponCodeItems: selectedCouponCodeItems,
+                    DefaultTextBtns:DefaultTextBtns,
                     addItemToCouponCodeList: addItemToCouponCodeList,
                     removeSelectedCouponCodeItem: removeSelectedCouponCodeItem,
                     opencouponCodesDialog: opencouponCodesDialog,
