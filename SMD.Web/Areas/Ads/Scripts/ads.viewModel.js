@@ -75,8 +75,8 @@ define("ads/ads.viewModel",
                     totalAudience = ko.observable(0),
                     // audience reach mode 
                     audienceReachMode = ko.observable("1"),
-                    MainHeading = ko.observable("Video Campaigns"),
-                    SubHeading = ko.observable("Video campaigns can be paused and terminated at any time. Increase your conversions and reduce your spend by using profile filters."),
+                    MainHeading = ko.observable("Video Ad campaigns"),
+                    SubHeading = ko.observable("Show video commercials to target audiences, increase brand awareness, run surveys and your list deals."),
                     errorListNew = ko.observableArray([]),
                       // unique country list used to bind location dropdown
                     selectedQuestionCountryList = ko.observableArray([]),

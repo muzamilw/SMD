@@ -534,8 +534,11 @@ namespace SMD.MIS.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    SetupUserClaims(loginInfo.ExternalIdentity);
-                    return RedirectToLocal(returnUrl);
+                    
+                        SetupUserClaims(loginInfo.ExternalIdentity);
+                        AuthenticationManager.SignIn(new AuthenticationProperties { IsPersistent = true }, loginInfo.ExternalIdentity);
+                        return RedirectToAction("SelectCompany");
+
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:

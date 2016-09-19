@@ -2,30 +2,30 @@
     Module with the view model for the User
 */
 define("common/companyProfile.viewModel",
-    ["jquery", "amplify", "ko", "common/companyProfile.dataservice", "common/companyProfile.model","common/confirmation.viewModel", "common/stripeChargeCustomer.viewModel"],
-    function ($, amplify, ko, dataservice, model,confirmation, stripeChargeCustomer) {
+    ["jquery", "amplify", "ko", "common/companyProfile.dataservice", "common/companyProfile.model", "common/confirmation.viewModel", "common/stripeChargeCustomer.viewModel"],
+    function ($, amplify, ko, dataservice, model, confirmation, stripeChargeCustomer) {
         var ist = window.ist || {};
         ist.companyProfile = {
-            viewModel: (function() {
+            viewModel: (function () {
                 var view,
                      // Current User
                     selectedCompany = ko.observable(),
-                   
-                    
+
+
                     // list of countries
                     countries = ko.observableArray([]),
                     // list of cities 
                     cities = ko.observableArray([]),
-                   
+
 
                      showCompanyProfileDialog = function () {
-                        
+
                          view.showCompanyProfileDialog();
                          getCompanyProfile();
                      },
                      //closing
                      onCloseCompanyProfileDialog = function () {
-                       
+
                          if (selectedCompany().hasChanges()) {    //&& (campaignModel().Status() == null || campaignModel().Status() == 1)
                              confirmation.messageText("Do you want to save changes?");
                              confirmation.afterProceed(function () {
@@ -50,7 +50,7 @@ define("common/companyProfile.viewModel",
 
                              view.CloseCompanyProfileDialog();
                          }
-                        
+
                      },
 
                     //Update Profile
@@ -72,26 +72,43 @@ define("common/companyProfile.viewModel",
 
                     },
 
-                    
+                    getCitiesByCountryId = function (data) {
+
+                        dataservice.getCitiesByCountry(
+                       { countryId: data.BillingCountryId },
+                       {
+                           success: function (data) {
+                               if (data.length > 0) {
+                                   cities.removeAll();
+                                   ko.utils.arrayPushAll(cities(), data);
+                                   cities.valueHasMutated();
+                               }
+                           },
+                           error: function () {
+                               toastr.error("Failed to load Cities.");
+                           }
+                       });
+
+                    },
                     // Get User Profile For Editing 
                    getCompanyProfile = function () {
-                        dataservice.getCompanyProfile(null,
-                            {
-                                success: function (companyProfile) {
-                                    //console.log(userProfile);
-                                    selectedCompany(model.CompanyServertoClientMapper(companyProfile));
-                                    // Load Cities by Country
-                                    //updateCities(userProfile.CityId);
-                                    //selectedCompany().countryId.subscribe(function() {
-                                    //    updateCities();
-                                       
-                                    //});
-                                    selectedCompany().reset();
-                                },
-                                error: function () {
-                                    toastr.error("Failed to load User's Profile!");
-                                }
-                            });
+                       dataservice.getCompanyProfile(null,
+                           {
+                               success: function (companyProfile) {
+                                   //console.log(userProfile);
+                                   selectedCompany(model.CompanyServertoClientMapper(companyProfile));
+                                   // Load Cities by Country
+                                   //updateCities(userProfile.CityId);
+                                   //selectedCompany().countryId.subscribe(function() {
+                                   //    updateCities();
+
+                                   //});
+                                   selectedCompany().reset();
+                               },
+                               error: function () {
+                                   toastr.error("Failed to load User's Profile!");
+                               }
+                           });
                    },
 
                      LogoUrlImageCallback = function (file, data) {
@@ -99,19 +116,24 @@ define("common/companyProfile.viewModel",
                          selectedCompany().Logo('');
                      },
                       randonNumber = ko.observable("?r=0"),
-                  
+
                     //Get Base Data for Questions
                     getBasedata = function () {
                         dataservice.getBaseDataForCompanyProfile(null, {
                             success: function (baseDataFromServer) {
-                              
+
                                 if (baseDataFromServer != null && baseDataFromServer.CountryDropdowns != null) {
                                     countries.removeAll();
                                     ko.utils.arrayPushAll(countries(), baseDataFromServer.CountryDropdowns);
                                     countries.valueHasMutated();
                                 }
-                             
-                        
+                                if (baseDataFromServer != null && baseDataFromServer.CityDropDowns != null) {
+                                    cities.removeAll();
+                                    ko.utils.arrayPushAll(cities(), baseDataFromServer.CityDropDowns);
+                                    cities.valueHasMutated();
+                                }
+
+
 
                             },
                             error: function () {
@@ -121,21 +143,21 @@ define("common/companyProfile.viewModel",
                     },
 
                     hasChangesOnProfile = ko.computed(function () {
-                          if (selectedCompany() == undefined) {
-                              return false;
-                          }
-                          return (selectedCompany().hasChanges());
-                      }),
+                        if (selectedCompany() == undefined) {
+                            return false;
+                        }
+                        return (selectedCompany().hasChanges());
+                    }),
 
 
-                 
 
-                
 
-                
+
+
+
 
                     // Update Button handler
-                    onUpdateProfile= function() {
+                    onUpdateProfile = function () {
                         updateProfile();
                     },
                      // Charge Customer
@@ -147,9 +169,9 @@ define("common/companyProfile.viewModel",
                         view = specifiedView;
                         ko.applyBindings(view.viewModel, view.bindingRoot);
                         ko.applyBindings(view.viewModel, view.bindingPartial);
-                       
+
                         getBasedata();
-                        
+
 
 
                     };
@@ -159,14 +181,14 @@ define("common/companyProfile.viewModel",
                     selectedCompany: selectedCompany,
                     countries: countries,
                     cities: cities,
-                    LogoUrlImageCallback:LogoUrlImageCallback,
+                    LogoUrlImageCallback: LogoUrlImageCallback,
                     randonNumber: randonNumber,
                     onUpdateProfile: onUpdateProfile,
-                  
-                  
+
+
                     chargeCustomer: chargeCustomer,
                     hasChangesOnProfile: hasChangesOnProfile,
-                    
+                    getCitiesByCountryId: getCitiesByCountryId,
                     showCompanyProfileDialog: showCompanyProfileDialog,
                     onCloseCompanyProfileDialog: onCloseCompanyProfileDialog
                 };
