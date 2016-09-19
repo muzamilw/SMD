@@ -84,7 +84,7 @@ h1 small, h2 small, h3 small, h1 .small, h2 .small, h3 .small {
 }
 
 .btn-gray {
-    background-color: #81d3dc!important;
+    background-color: #81d3dc;
     border-color: #7f8c8d;
     color: #fff;
     height:60px;
@@ -109,7 +109,7 @@ h1 small, h2 small, h3 small, h1 .small, h2 .small, h3 .small {
 
 
 .btn-default, .wizard-cancel, .wizard-back {
-    background-color: #95a5a6;
+    background-color: #81d3dc;
     border-color: #7f8c8d;
     color: #fff;
 }
