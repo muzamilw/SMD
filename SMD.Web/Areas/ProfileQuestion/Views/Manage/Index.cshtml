@@ -10,9 +10,9 @@
 <script src="~/Content/metroUI/js/metro.js"></script>
 <script src="~/Content/metroUI/js/prettify/run_prettify.js"></script>
 
-<div class="row" id="ProfileQuestionBindingSpot">
+<div class="row" id="ProfileQuestionBindingSpot" style="margin-top: 15px;">
     <div class="col-lg-12" data-bind="visible: !$root.isEditorVisible()">
-        
+
         <!-- ko stopBinding: true -->
         @Html.Partial("~/Areas/Common/Views/Shared/_StripeChargeCustomerDialog.cshtml")
         <!-- /ko -->
@@ -30,9 +30,9 @@
                                     <th class="col-lg-2 th-pointer"><span class="GridHeaderFont_size" id="1">Start Date<span class="icon-up"></span></span></th>
                                     <th class="col-lg-2 th-pointer"><span class="GridHeaderFont_size" id="1">Answered</span></th>
                                     <th class="col-lg-2 th-pointer"><span class="GridHeaderFont_size" id="1">Delivered%</span></th>
-                                    <th class="col-lg-2 th-pointer" ><span style="display:none;" class="GridHeaderFont_size" id="1">SkippedCount</span></th>
+                                    <th class="col-lg-2 th-pointer"><span style="display:none;" class="GridHeaderFont_size" id="1">SkippedCount</span></th>
                                     <th class="col-lg-2 th-pointer"><span class="GridHeaderFont_size" id="1">Status</span></th>
-                                    
+
 
                                     <th class="col-lg-1 th-pointer" style="display:none;"><span class="GridHeaderFont_size" id="3">Priority<span></span></span></th>
                                     <th id="hasLinkedtableHeader" style="display:none;" class="col-lg-1 th-pointer"><span class="GridHeaderFont_size" id="4">Has Link Q<span></span></span></th>
@@ -131,7 +131,7 @@
                     <!-- /ko -->
 
                 </td>
-                
+
 
                 <td style="display:none;">
                     <p data-bind="text:priority"></p>
@@ -142,8 +142,8 @@
                     </div>
                 </td>
                 @*<td>
-                    <p id="IsLInkedQuestionParah" data-bind="text:hasLinkedQuestions()==true ? 'YES' : 'NO',css: { 'label-success': hasLinkedQuestions(), 'label-danger': !hasLinkedQuestions() }"></p>
-                </td>*@
+                        <p id="IsLInkedQuestionParah" data-bind="text:hasLinkedQuestions()==true ? 'YES' : 'NO',css: { 'label-success': hasLinkedQuestions(), 'label-danger': !hasLinkedQuestions() }"></p>
+                    </td>*@
                 <td>
                     @*<p data-bind="text:Status"></p>*@
                 </td>
@@ -160,14 +160,14 @@
                         </span>
 
                     </a>
-                 
+
                 </td>
             </tr>
         </script>
-        
+
 
         <script id="filterTemplate" type="text/html">
-            <div class="filter-body" id="filter" >
+            <div class="filter-body" id="filter">
 
                 <div class="row">
 
@@ -175,13 +175,13 @@
                     <div class="col-sm-12" style="float: left; margin-bottom:20px;">
                         <br />
                         <div>
-                        <span style="font-size: 24px;float:left;" class="Theme_standard_clr" >Survey Questions</span>
+                            <span style="font-size: 24px;float:left;" class="Theme_standard_clr">Survey Questions</span>
                             <button style="float:right;margin-top:-10px;" class="btn btn-primary" data-bind="click:$root.addNewProfileQuestion">
                                 Create Survey Questions
                             </button>
-                       </div>
+                        </div>
                         <div style="clear:both;"></div>
-                            <br />
+                        <br />
                         <span style="font-size: 14px;" class="Theme_subheading-Clr">Video campaigns can be paused and terminated at any time. Increase your conversions and reduce your spend by using profile filters.</span>  &nbsp; &nbsp; &nbsp; <span class="red bold rightAlign" style="display:none;"> Watch Video <img src="/Images/youtube_play.JPG" height="25px" /> </span>   </span><br />
                     </div>
 
@@ -214,9 +214,9 @@
                     </form>
                     <div class="col-sm-3" style="float:right;margin-top:2px; text-align:right">
                         @*<button class="btn btn-primary" data-bind="click:$root.addNewProfileQuestion">
-                            Create Survey Questions 
-                        </button>*@
-                     
+                                Create Survey Questions
+                            </button>*@
+
                     </div>
                     <div class="clearfix">
 

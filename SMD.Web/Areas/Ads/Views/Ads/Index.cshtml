@@ -18,7 +18,7 @@ else
     adminClasses = "displayNone";
 }
 
-<div class="row" id="adsBinding">
+<div class="row" id="adsBinding" style="margin-top:15px;">
     <div class="col-lg-12" data-bind="visible: $root.isListVisible()">
 
         <div class="row">
@@ -262,7 +262,8 @@ else
 @* Filter Template *@
 <script id="filterTemplate" type="text/html">
     <div class="filter-body" id="filter" data-bind="visible:!isDisplayCouponsAds()">
-
+        <div class="row" id="topArea" style="margin-bottom:15px;">
+        </div>
         <div class="row">
 
 
