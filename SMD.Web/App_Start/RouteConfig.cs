@@ -10,11 +10,11 @@ namespace SMD.MIS
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
             routes.IgnoreRoute("{*allActiveReport}", new { allActiveReport = @".*\.ar7(/.*)?" });
 
-            routes.MapRoute(
-                name: "Google API Sign-in",
-                url: "signin-google",
-                defaults: new { controller = "Account", action = "ExternalLoginCallbackRedirect" }
-            );
+            //routes.MapRoute(
+            //    name: "Google API Sign-in",
+            //    url: "signin-google",
+            //    defaults: new { controller = "Account", action = "ExternalLoginCallbackRedirect" }
+            //);
 
             routes.MapRoute(
                 name: "Default",
