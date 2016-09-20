@@ -18,5 +18,6 @@ namespace SMD.Models.DomainModels
         public virtual User User { get; set; }
         public virtual SurveyQuestion SurveyQuestion { get; set; }
         public virtual Company Company { get; set; }
+        public Nullable<int> ResponseType { get; set; }
     }
 }

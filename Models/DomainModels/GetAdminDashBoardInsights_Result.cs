@@ -15,5 +15,6 @@ namespace SMD.Models.DomainModels
         public Nullable<double> ca { get; set; }
         public Nullable<double> au { get; set; }
         public Nullable<double> ae { get; set; }
+        public Nullable<int> ordr { get; set; }
     }
 }

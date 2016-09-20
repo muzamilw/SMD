@@ -56,7 +56,7 @@ define("analytic/analytic.viewModel",
 						DashboardInsightsData.push(new model.DashboardInsightsModel("All Revenue (income from stripe)"));
 						DashboardInsightsData.push(new model.DashboardInsightsModel("Payout via PayPal"));
 						
-						//getDashboardInsights();
+						getDashboardInsights();
 					},
 					getDashboardInsights = function () {
                         dataservice.getDashboardInsights(

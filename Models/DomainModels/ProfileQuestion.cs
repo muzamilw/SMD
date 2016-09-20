@@ -43,7 +43,8 @@ namespace SMD.Models.DomainModels
           public string UserID { get; set; }
 
           public double? AmountCharged { get; set; }
-
+          public DateTime? StartDate { get; set; }
+          public DateTime? EndDate { get; set; }
         public virtual ICollection<ProfileQuestionAnswer> ProfileQuestionAnswers { get; set; }
         public virtual ICollection<ProfileQuestionUserAnswer> ProfileQuestionUserAnswers { get; set; }
         public virtual ProfileQuestionGroup ProfileQuestionGroup { get; set; }
