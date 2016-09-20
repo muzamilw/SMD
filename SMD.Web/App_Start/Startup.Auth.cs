@@ -62,7 +62,7 @@ namespace SMD.MIS
             // Use Facebook Authentication
             app.UseFacebookAuthentication(
                 appId: "900194280062971",
-                appSecret: "7d8a7f398bb09ca362a051f1d8e2d71e");
+                appSecret: "acd6c38978bc63083321cb5ad7122aa2");
 
 
             //app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);

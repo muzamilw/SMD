@@ -471,9 +471,14 @@ namespace SMD.MIS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ExternalLogin(string provider, string returnUrl)
         {
+
+            ControllerContext.HttpContext.Session.RemoveAll();
+
             // Request a redirect to the external login provider
-            return new ChallengeResult(provider,
+            var res =  new ChallengeResult(provider,
                 Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
+
+            return res;
         }
 
         //
@@ -512,11 +517,11 @@ namespace SMD.MIS.Controllers
             return RedirectToAction("VerifyCode", new { Provider = model.SelectedProvider, ReturnUrl = model.ReturnUrl });
         }
 
-        [AllowAnonymous]
-        public ActionResult ExternalLoginCallbackRedirect(string returnUrl)
-        {
-            return RedirectPermanent("ExternalLoginCallback");
-        }
+        //[AllowAnonymous]
+        //public ActionResult ExternalLoginCallbackRedirect(string returnUrl)
+        //{
+        //    return RedirectPermanent("ExternalLoginCallback");
+        //}
 
         //
         // GET: /Account/ExternalLoginCallback
@@ -526,11 +531,11 @@ namespace SMD.MIS.Controllers
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
             if (loginInfo == null)
             {
-                return RedirectToAction("Login");
+                return RedirectToAction("LoginExternalFailed");
             }
 
             // Sign in the user with this external login provider if the user already has a login
-            var result = await SignInManager.ExternalSignInAsync(loginInfo, isPersistent: false);
+            var result = await SignInManager.ExternalSignInAsync(loginInfo, isPersistent: true);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -581,10 +586,11 @@ namespace SMD.MIS.Controllers
                     result = await UserManager.AddLoginAsync(user.Id, info.Login);
                     if (result.Succeeded)
                     {
+                        int CompanyId = companyService.createCompany(user.Id, model.Email, info.DefaultUserName, Guid.NewGuid().ToString());
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                         SetupUserClaims(info.ExternalIdentity);
-                        CreateUserAccounts(user.CompanyId.Value);
-                        TransactionManager.UserSignupFreeGiftBalanceTransaction(500, user.CompanyId.Value);
+                        CreateUserAccounts(CompanyId);
+                        TransactionManager.UserSignupFreeGiftBalanceTransaction(500, CompanyId);
                         return RedirectToLocal(returnUrl);
                     }
                 }
@@ -773,6 +779,9 @@ namespace SMD.MIS.Controllers
 
             public override void ExecuteResult(ControllerContext context)
             {
+                // this line did the trick
+                context.RequestContext.HttpContext.Response.SuppressFormsAuthenticationRedirect = true;
+
                 var properties = new AuthenticationProperties { RedirectUri = RedirectUri };
                 if (UserId != null)
                 {
