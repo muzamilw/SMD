@@ -331,6 +331,7 @@ define("Coupons/Coupons.viewModel",
                 isShowArchiveBtn(false);
                     CouponTitle('New Deal');
                     StatusValue('Draft');
+                    couponModel().reset();
             },
 
             closeNewCampaignDialog = function () {

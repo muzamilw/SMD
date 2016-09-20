@@ -50,7 +50,7 @@ else
                                         1
                                     </div>
                                     <br />
-                                    <span data-bind="css: $root.previewScreenNumber() == 1 ? 'ads-selected-numbering-text' : '',click: $root.gotoScreen.bind(null,1)">Upload Video</span>
+                                    <span data-bind="css: $root.previewScreenNumber() == 1 ? 'ads-selected-numbering-text' : '',click: $root.gotoScreen.bind(null,1),text:$root.uploadTitle">Upload Video</span>
                                 </div>
                                 <div class="pull-left ads-numbering-linebar" data-bind="css: $root.previewScreenNumber() == 6 ? 'ads-selected-numbering-box' : ''">
                                 </div>
@@ -95,10 +95,10 @@ else
                             </div>
                         </div>
                         <div class="main-box" style="padding: 20px;">
-                            <div class="adsubHeading Theme_standard_clr" data-bind="visible: $root.previewScreenNumber() == 1">
+                            <div class="adsubHeading Theme_standard_clr" data-bind="visible: $root.previewScreenNumber() == 1,text: $root.tab1Heading">
                                 Upload a 10-20 second video ad.
                             </div>
-                            <div class="adsubHeading Theme_standard_clr" data-bind="visible: $root.previewScreenNumber() == 2">
+                            <div class="adsubHeading Theme_standard_clr" data-bind="visible: $root.previewScreenNumber() == 2,,text: $root.tab2Heading">
                                 Define the target audience to deliver video ad.
                             </div>
                             <div class="adsubHeading Theme_standard_clr" data-bind="visible: $root.previewScreenNumber() == 4">
@@ -230,19 +230,19 @@ else
                                             <label for="txtUploadLogo" class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn">Upload Logo</label>
                                         </div>
                                         <div class="col-lg-7">
-                                            <div class="defaultImgUploadImage pull-left" style="cursor:pointer;text-align:center;width:335px!important;">
-                                              
+                                            <div class=" pull-left" style="margin-top:5px;    text-align: left;cursor:pointer;padding-right:24px;">
 
-                                                <img style="width:150px;" data-bind="attr: { src:LogoUrl()==''?'/Content/Images/Company_Default.png':'/' +  LogoUrl() + $root.randonNumber() },visible:$root.campaignModel().LogoImageBytes()==''" src="/Content/Images/Company_Default.png" onclick="showUploadDialog();" />
 
-                                                <img style="width:150px;" data-bind="visible: $root.campaignModel().LogoImageBytes() != '',attr: { src: $root.campaignModel().LogoImageBytes()}" src="/Content/Images/Company_Default.png" onclick="showUploadDialog();" />
+                                                <img style="    height:70px;" data-bind="attr: { src:LogoUrl()==''?'/images/default-placeholder.png':'/' +  LogoUrl() + $root.randonNumber() },visible:$root.campaignModel().LogoImageBytes()==''" src="/Content/Images/Company_Default.png" onclick="showUploadDialog();" />
 
-                                             
+                                                <img style="   height:70px;" data-bind="visible: $root.campaignModel().LogoImageBytes() != '',attr: { src: $root.campaignModel().LogoImageBytes()}" src="/Content/Images/Company_Default.png" onclick="showUploadDialog();" />
+
+
 
 
                                                 @*<img style="height:150px;width:300px;" data-bind="attr: { src: $root.campaignModel().LogoImageBytes() }" src="/Content/Images/Company_Default.png" id="imgLogo" data-toggle="modal" data-target="#damModel" onclick="changeIframeSrc(1)" />*@
 
-                                                <div style="padding-top: 10px;    text-align: center;    font-size: 12px;    color: gray;">
+                                                <div style="    padding-top: 10px;   text-align: center;    font-size: 12px;    color: gray;">
                                                     (300 x 150 pixels)
                                                 </div>
                                             </div>
@@ -325,7 +325,7 @@ else
                                 </div>
                                 <div class="form-group">
                                     <div class="col-lg-2">
-                                        <label for="txtCountries" class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn">Show video ad in</label>
+                                        <label for="txtCountries" class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn">Show campaign in</label>
                                     </div>
                                     <div class="col-lg-7">
                                         <div id="coun_token_cnt">
@@ -739,7 +739,14 @@ else
                                             <label for="txtBuyItlbl" class="control-label text-right tooltip-float floatNone">Button Label </label>
                                         </div>
                                         <div class="col-lg-8">
-                                            <input type="text" class="form-control" id="txtBuyItlbl" placeholder="Enter Description  (72 characters)" data-bind="value: BuyItButtonLabel" maxlength="72">
+                                            <select id="ddTextBtns" class="form-control" data-bind="options: $root.DefaultTextBtns, optionsText: 'name', optionsValue: 'id',value: BuyItButtonLabel">
+                                              
+                                            </select>
+                                            <!-- ko if: BuyItButtonLabel() == "Custom Button Label"-->
+                                            <br />
+                                            <input type="text" class="form-control txtBuyItlbl" id="txtBuyItlbl" placeholder="Enter Description  (72 characters)" data-bind="" maxlength="72">
+                                            <!-- /ko -->
+                                           
                                         </div>
                                     </div>
                                     @*<div class="form-group" style="display:none">
@@ -766,7 +773,9 @@ else
                                 </div>
                             </div>
                             <div class="col-lg-11" style="margin:auto;float:none !important;    " data-bind="visible: $root.previewScreenNumber() == 4">
-                                <span class=" adBottomHeadingtext-campaign-left defaultThemeTxtClr font14" data-bind="visible:!$root.isDisplayCouponsAds()" style="    color: rgb(52,152,219) !important;"> Select your ad campaign delivery mode:</span>
+                                <span class=" adBottomHeadingtext-campaign-left defaultThemeTxtClr font14" data-bind="visible:!$root.isDisplayCouponsAds(),text:tab4SubHeading" style="    color: rgb(52,152,219) !important;">
+                                    Select your ad campaign delivery mode:
+                                </span>
                                 <div class="clearfix">
                                 </div><br />
                                 @*<div class="col-lg-3" data-bind="visible:!$root.isDisplayCouponsAds()">
@@ -2545,6 +2554,12 @@ else
             $(".showInGames").css("display", "block");
           
         }
+        
+    });
+    $(".txtBuyItlbl").keyup(function() {
+            
+        $("#ddTextBtns").val($( "#txtBuyItlbl" ).val());
+        console.log($("#ddTextBtns").val());
     });
 </script>
 
