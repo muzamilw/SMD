@@ -170,7 +170,9 @@ namespace SMD.MIS.Areas.Api.Models
         public string HowToRedeemLine4 { get; set; }
         public string HowToRedeemLine5 { get; set; }
         public Nullable<System.DateTime> SubmissionDateTime { get; set; }
-
+        public Nullable<System.DateTime> CouponStartDate { get; set; }
+        public Nullable<System.DateTime> CouponEndDate { get; set; }
+        public Nullable<int> Priority { get; set; }
         public string CurrencySymbol { get; set; }
         public virtual IEnumerable<SMD.MIS.Areas.Api.Models.CouponCategories> CouponCategories { get; set; }
     }

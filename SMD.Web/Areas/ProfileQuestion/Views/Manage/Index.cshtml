@@ -176,8 +176,15 @@
 
                     <div class="col-sm-12" style="float: left; margin-bottom:20px;">
                         <br />
-                        <span style="font-size: 24px;" class="Theme_standard_clr" >Survey Question campaigns</span><br />
-                        <span style="font-size: 14px;" class="Theme_subheading-Clr">Run a question & answer survey to identify an own audience segment to market in a separate video campaign.</span>  &nbsp; &nbsp; &nbsp; <span class="red bold rightAlign" style="display:none;"> Watch Video <img src="/Images/youtube_play.JPG" height="25px" /> </span>   </span><br />
+                        <div>
+                        <span style="font-size: 24px;float:left;" class="Theme_standard_clr" >Survey Questions</span>
+                            <button style="float:right;margin-top:-10px;" class="btn btn-primary" data-bind="click:$root.addNewProfileQuestion">
+                                Create Survey Questions
+                            </button>
+                       </div>
+                        <div style="clear:both;"></div>
+                            <br />
+                        <span style="font-size: 14px;" class="Theme_subheading-Clr">Video campaigns can be paused and terminated at any time. Increase your conversions and reduce your spend by using profile filters.</span>  &nbsp; &nbsp; &nbsp; <span class="red bold rightAlign" style="display:none;"> Watch Video <img src="/Images/youtube_play.JPG" height="25px" /> </span>   </span><br />
                     </div>
 
 
@@ -187,7 +194,7 @@
 
 
                     <form data-bind="submit:$root.filterProfileQuestion">
-                        <div class="col-sm-3" style="float:left;">
+                        <div class="col-sm-2" style="float:left;">
 
                             <div class="filter-block" style="margin-right: -10px">
                                 <div class="form-group ">
@@ -201,16 +208,16 @@
 
                         </div>
 
-                        <div class="col-sm-3" style="float:left;">
+                        <div class="col-sm-2" style="float:left;">
                             <select id="ddlStatus" class="form-control" style="float:right;height:36px;margin-top:2px;" data-bind="options: $root.qGroup, optionsText: 'ProfileGroupName', optionsValue: 'ProfileGroupId', optionsCaption:'All' , value:$root.qGroupfilterValue,event:{ change: $root.getQuestionsByFilter}">
                                 @*<option value="0">All Statuses</option>*@
                             </select>
                         </div>
                     </form>
                     <div class="col-sm-3" style="float:right;margin-top:2px; text-align:right">
-                        <button class="btn btn-primary" data-bind="click:$root.addNewProfileQuestion">
+                        @*<button class="btn btn-primary" data-bind="click:$root.addNewProfileQuestion">
                             Create Survey Questions 
-                        </button>
+                        </button>*@
                      
                     </div>
                     <div class="clearfix">
