@@ -604,55 +604,56 @@
 
                }
                 codeAddress = function () {
+                    if (selectedBranch().branchAddressline1() != null) {
+                        // var address = selectedBranch().branchAddressline1().toLowerCase() + ',' + selectedBranch().branchCity().toLowerCase() + ',' + selectedBranch().branchZipCode() + ',' + selectedBranch().branchState().toLowerCase();
+                        var address = selectedBranch().branchAddressline1().toLowerCase() + ' ' + selectedBranch().branchCity() + ' ' + selectedBranch().branchZipCode() + ' ' + selectedBranch().branchState().toLowerCase();
+                        geocoder.geocode({
+                            'address': address
+                        }, function (results, status) {
+                            if (status == google.maps.GeocoderStatus.OK) {
+                                if (isCodeAddressEdit() == false) {
+                                    selectedBranch().branchLocationLat(results[0].geometry.location.lat());
+                                    selectedBranch().branchLocationLon(results[0].geometry.location.lng());
+                                }
+                                map.setCenter(results[0].geometry.location);
 
-                    // var address = selectedBranch().branchAddressline1().toLowerCase() + ',' + selectedBranch().branchCity().toLowerCase() + ',' + selectedBranch().branchZipCode() + ',' + selectedBranch().branchState().toLowerCase();
-                    var address = selectedBranch().branchAddressline1().toLowerCase() + ' ' + selectedBranch().branchCity() + ' ' + selectedBranch().branchZipCode() + ' ' + selectedBranch().branchState().toLowerCase();
-                    geocoder.geocode({
-                        'address': address
-                    }, function (results, status) {
-                        if (status == google.maps.GeocoderStatus.OK) {
-                            if (isCodeAddressEdit() == false) {
-                                selectedBranch().branchLocationLat(results[0].geometry.location.lat());
-                                selectedBranch().branchLocationLon(results[0].geometry.location.lng());
-                            }
-                            map.setCenter(results[0].geometry.location);
-
-                            var marker = new google.maps.Marker({
-                                map: map,
-                                position: results[0].geometry.location
-                            });
-                            google.maps.event.addListener(map, 'click', function (event) {
-                                selectedBranch().branchLocationLat(event.latLng.lat());
-                                selectedBranch().branchLocationLon(event.latLng.lng());
-                                var geocoder = new google.maps.Geocoder();
-                                geocoder.geocode({
-                                    "latLng": event.latLng
-                                }, function (results, status) {
-                                    console.log(results, status);
-                                    if (status == google.maps.GeocoderStatus.OK) {
-                                        console.log(results);
-                                        var lat = results[0].geometry.location.lat(),
-                                            lng = results[0].geometry.location.lng(),
-                                            placeName = results[0].address_components[0].long_name,
-                                            latlng = new google.maps.LatLng(lat, lng);
-
-                                        moveMarker(placeName, latlng);
-                                    }
+                                var marker = new google.maps.Marker({
+                                    map: map,
+                                    position: results[0].geometry.location
                                 });
-                            });
-                            function moveMarker(placeName, latlng) {
-                                //marker.setIcon(image);
-                                marker.setPosition(latlng);
-                                //infowindow.setContent(placeName);
-                                //infowindow.open(map, marker);
+                                google.maps.event.addListener(map, 'click', function (event) {
+                                    selectedBranch().branchLocationLat(event.latLng.lat());
+                                    selectedBranch().branchLocationLon(event.latLng.lng());
+                                    var geocoder = new google.maps.Geocoder();
+                                    geocoder.geocode({
+                                        "latLng": event.latLng
+                                    }, function (results, status) {
+                                        console.log(results, status);
+                                        if (status == google.maps.GeocoderStatus.OK) {
+                                            console.log(results);
+                                            var lat = results[0].geometry.location.lat(),
+                                                lng = results[0].geometry.location.lng(),
+                                                placeName = results[0].address_components[0].long_name,
+                                                latlng = new google.maps.LatLng(lat, lng);
+
+                                            moveMarker(placeName, latlng);
+                                        }
+                                    });
+                                });
+                                function moveMarker(placeName, latlng) {
+                                    //marker.setIcon(image);
+                                    marker.setPosition(latlng);
+                                    //infowindow.setContent(placeName);
+                                    //infowindow.open(map, marker);
+                                }
+                                isCodeAddressEdit(false);
+                            } else {
+                                toastr.error("Failed to Search Address,please add valid address and search it . Error: " + status);
+                                isMapVisible(false);
+                                //alert('Geocode was not successful for the following reason: ' + status);
                             }
-                            isCodeAddressEdit(false);
-                        } else {
-                            toastr.error("Failed to Search Address,please add valid address and search it . Error: " + status);
-                            isMapVisible(false);
-                            //alert('Geocode was not successful for the following reason: ' + status);
-                        }
-                    });
+                        });
+                    }
                 }
                 getBranchFields = function (category, afterSaveRefreshListFlag) {
                     dataservice.getBranchFiledsByCategoryID({
