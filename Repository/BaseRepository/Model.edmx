@@ -652,6 +652,8 @@
           <Property Name="RejectionReason" Type="nvarchar" MaxLength="1000" />
           <Property Name="UserID" Type="nvarchar" MaxLength="128" />
           <Property Name="AmountCharged" Type="float" />
+          <Property Name="StartDate" Type="datetime" />
+          <Property Name="EndDate" Type="datetime" />
         </EntityType>
         <EntityType Name="ProfileQuestionAnswer">
           <Key>
@@ -721,6 +723,7 @@
           <Property Name="AnswerDateTime" Type="datetime" Nullable="false" />
           <Property Name="PQAnswerID" Type="int" Nullable="false" />
           <Property Name="CompanyId" Type="int" />
+          <Property Name="ResponseType" Type="int" />
         </EntityType>
         <EntityType Name="Section">
           <Key>
@@ -782,6 +785,7 @@
           <Property Name="UserSelection" Type="int" />
           <Property Name="SkipCount" Type="int" />
           <Property Name="CompanyId" Type="int" />
+          <Property Name="ResponseType" Type="int" />
         </EntityType>
         <EntityType Name="SurveyQuestionTargetCriteria">
           <Key>
@@ -897,6 +901,7 @@
           <Property Name="IsRedeemed" Type="bit" />
           <Property Name="RedemptionDateTime" Type="datetime" />
           <Property Name="RedemptionOperator" Type="nvarchar" MaxLength="500" />
+          <Property Name="ResponseType" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'SMDDev.dbo.vw_Cash4AdsReport' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -3235,6 +3240,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="ProfileQuestionTargetCriterias1" Relationship="DomainModels.FK_ProfileQuestionTargetCriteria_ProfileQuestion2" FromRole="ProfileQuestion" ToRole="ProfileQuestionTargetCriteria" />
           <Property Name="AmountCharged" Type="Double" />
+          <Property Name="StartDate" Type="DateTime" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="ProfileQuestionAnswer">
           <Key>
@@ -3985,6 +3992,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <NavigationProperty Name="ProfileQuestionAnswer" Relationship="DomainModels.FK_ProfileQuestionUserAnswer_ProfileQuestionAnswer" FromRole="ProfileQuestionUserAnswer" ToRole="ProfileQuestionAnswer" />
           <NavigationProperty Name="User" Relationship="DomainModels.FK_ProfileQuestionUserAnswer_AspNetUsers" FromRole="ProfileQuestionUserAnswer" ToRole="AspNetUser" />
           <NavigationProperty Name="Company" Relationship="DomainModels.FK_ProfileQuestionUserAnswer_Company" FromRole="ProfileQuestionUserAnswer" ToRole="Company" />
+          <Property Name="ResponseType" Type="Int32" />
         </EntityType>
         <EntityType Name="SurveyQuestion">
           <Key>
@@ -4051,6 +4059,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <NavigationProperty Name="SurveyQuestion" Relationship="DomainModels.FK_SurveyQuestionResponse_SurveyQuestion" FromRole="SurveyQuestionResponse" ToRole="SurveyQuestion" />
           <NavigationProperty Name="User" Relationship="DomainModels.FK_SurveyQuestionResponse_AspNetUsers" FromRole="SurveyQuestionResponse" ToRole="AspNetUser" />
           <NavigationProperty Name="Company" Relationship="DomainModels.FK_SurveyQuestionResponse_Company" FromRole="SurveyQuestionResponse" ToRole="Company" />
+          <Property Name="ResponseType" Type="Int32" />
         </EntityType>
         <Association Name="FK_Transaction_Account">
           <End Type="DomainModels.Account" Role="Account" Multiplicity="0..1" />
@@ -5113,6 +5122,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Property Name="RedemptionDateTime" Type="DateTime" Precision="3" />
           <Property Name="RedemptionOperator" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Coupon" Relationship="DomainModels.FK_UserPurchasedCoupon_Coupon" FromRole="UserPurchasedCoupon" ToRole="Coupon" />
+          <Property Name="ResponseType" Type="Int32" />
         </EntityType>
         <Association Name="FK_UserPurchasedCoupon_Coupon">
           <End Type="DomainModels.Coupon" Role="Coupon" Multiplicity="0..1" />
@@ -5797,13 +5807,14 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Property Type="String" Name="description" Nullable="true" MaxLength="516" />
         </ComplexType>
         <ComplexType Name="GetAdminDashBoardInsights_Result">
-          <Property Type="String" Name="rectype" Nullable="false" MaxLength="16" />
-          <Property Type="String" Name="pMonth" Nullable="false" MaxLength="14" />
+          <Property Type="String" Name="rectype" Nullable="false" MaxLength="32" />
+          <Property Type="String" Name="pMonth" Nullable="false" MaxLength="7" />
           <Property Type="Double" Name="us" Nullable="true" />
           <Property Type="Double" Name="uk" Nullable="true" />
           <Property Type="Double" Name="ca" Nullable="true" />
           <Property Type="Double" Name="au" Nullable="true" />
           <Property Type="Double" Name="ae" Nullable="true" />
+          <Property Type="Int32" Name="ordr" Nullable="false" />
         </ComplexType>
         <ComplexType Name="GetRevenueOverTime_Result">
           <Property Type="Double" Name="amountcollected" Nullable="true" />
@@ -5835,6 +5846,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <EntitySetMapping Name="ProfileQuestions">
             <EntityTypeMapping TypeName="DomainModels.ProfileQuestion">
               <MappingFragment StoreEntitySet="ProfileQuestion">
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
                 <ScalarProperty Name="AmountCharged" ColumnName="AmountCharged" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="RejectionReason" ColumnName="RejectionReason" />
@@ -6232,6 +6245,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <EntitySetMapping Name="ProfileQuestionUserAnswers">
             <EntityTypeMapping TypeName="DomainModels.ProfileQuestionUserAnswer">
               <MappingFragment StoreEntitySet="ProfileQuestionUserAnswer">
+                <ScalarProperty Name="ResponseType" ColumnName="ResponseType" />
                 <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
                 <ScalarProperty Name="PqAnswerId" ColumnName="PQAnswerID" />
                 <ScalarProperty Name="AnswerDateTime" ColumnName="AnswerDateTime" />
@@ -6286,6 +6300,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <EntitySetMapping Name="SurveyQuestionResponses">
             <EntityTypeMapping TypeName="DomainModels.SurveyQuestionResponse">
               <MappingFragment StoreEntitySet="SurveyQuestionResponse">
+                <ScalarProperty Name="ResponseType" ColumnName="ResponseType" />
                 <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
                 <ScalarProperty Name="SkipCount" ColumnName="SkipCount" />
                 <ScalarProperty Name="UserSelection" ColumnName="UserSelection" />
@@ -6805,6 +6820,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <EntitySetMapping Name="UserPurchasedCoupons">
             <EntityTypeMapping TypeName="DomainModels.UserPurchasedCoupon">
               <MappingFragment StoreEntitySet="UserPurchasedCoupon">
+                <ScalarProperty Name="ResponseType" ColumnName="ResponseType" />
                 <ScalarProperty Name="RedemptionOperator" ColumnName="RedemptionOperator" />
                 <ScalarProperty Name="RedemptionDateTime" ColumnName="RedemptionDateTime" />
                 <ScalarProperty Name="IsRedeemed" ColumnName="IsRedeemed" />
@@ -7154,6 +7170,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
                 <ScalarProperty Name="ca" ColumnName="ca" />
                 <ScalarProperty Name="au" ColumnName="au" />
                 <ScalarProperty Name="ae" ColumnName="ae" />
+                <ScalarProperty Name="ordr" ColumnName="ordr" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
