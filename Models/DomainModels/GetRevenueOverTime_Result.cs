@@ -8,7 +8,8 @@ namespace SMD.Models.DomainModels
 {
     public partial class GetRevenueOverTime_Result
     {
-        public decimal amountcollected { get; set; }
+        public Nullable<double> amountcollected { get; set; }
+
         public string granular { get; set; }
     }
 }

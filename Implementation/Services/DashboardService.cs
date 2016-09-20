@@ -34,6 +34,10 @@ namespace SMD.Implementation.Services
 
         }
 
+        public IEnumerable<GetRevenueOverTime_Result> GetRevenueOverTime(int CompanyId, DateTime DateFrom, DateTime DateTo, int Granularity)
+        {
+            return ITransactionRepository.GetRevenueOverTime(CompanyId, DateFrom, DateTo, Granularity);
+        }
 
         #endregion
     }

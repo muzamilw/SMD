@@ -69,5 +69,6 @@
   </ItemGroup>
   <ItemGroup>
     <Build Include="GetProducts.sql" />
+    <Build Include="GetAdminDashBoardInsights.sql" />
   </ItemGroup>
 </Project>
