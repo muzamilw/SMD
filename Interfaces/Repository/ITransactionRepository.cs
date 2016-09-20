@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using SMD.Models.DomainModels;
+using System;
 
 namespace SMD.Interfaces.Repository
 {
@@ -17,7 +18,7 @@ namespace SMD.Interfaces.Repository
         List<GetTransactions_Result> GetTransactions(int CompanyId, int AccountType, int Rows);
         IEnumerable<Transaction> GetTransactionByAccountId(int accountId);
         IEnumerable<GetAdminDashBoardInsights_Result> GetAdminDashBoardInsights();
-        
+        IEnumerable<GetRevenueOverTime_Result> GetRevenueOverTime(int CompanyId, DateTime DateFrom, DateTime DateTo, int Granularity);
 
 
     

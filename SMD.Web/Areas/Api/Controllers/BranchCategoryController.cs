@@ -30,9 +30,9 @@ namespace SMD.MIS.Areas.Api.Controllers
             var GetBrachCategories = _branchcategoryservice.GetAllBranchCategories();
             Mapper.Initialize(cfg => cfg.CreateMap<DomainModel.BranchCategory, ApiModel.BranchCategory>());
 
-            foreach (var branch in GetBrachCategories)
+            foreach (var Category in GetBrachCategories)
             {
-                var mapSection = Mapper.Map<DomainModel.BranchCategory, ApiModel.BranchCategory>(branch);
+                var mapSection = Mapper.Map<DomainModel.BranchCategory, ApiModel.BranchCategory>(Category);
                 lst.Add(new ApiModel.BranchCategoryResponseModel
                 {
                     BranchCategoryId = mapSection.BranchCategoryId,
@@ -40,6 +40,7 @@ namespace SMD.MIS.Areas.Api.Controllers
                     CompanyId = mapSection.CompanyId,
                     CompanyBranches = new List<ApiModel.CompanyBranch>()
                 });
+                Mapper.Initialize(cfg => cfg.CreateMap<DomainModel.BranchCategory, ApiModel.BranchCategory>());
 
             }
 

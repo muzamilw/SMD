@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SMD.Interfaces.Services;
+using SMD.Models.DomainModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -9,19 +11,19 @@ namespace SMD.MIS.Areas.Api.Controllers
 {
     public class RevenueController : ApiController
     {
-        // GET: api/Revenue
-        public IEnumerable<ResultDataTest> Get(int granuality, DateTime DateFrom, DateTime DateTo)
+        #region private
+        private readonly IDashboardService IDashboardService;
+        #endregion
+
+        public RevenueController(IDashboardService _IDashboardService)
         {
-            List<ResultDataTest> list = new List<ResultDataTest>();
-
-            ResultDataTest obj1 = new ResultDataTest(30,"2016-08-28");
-            ResultDataTest obj2 = new ResultDataTest(7,"2016-09-08");
-            ResultDataTest obj3 = new ResultDataTest(3, "2016-09-15");
-            list.Add(obj1);
-            list.Add(obj2);
-            list.Add(obj3);
-
-            return list;
+            this.IDashboardService = _IDashboardService;
+        }
+        // GET: api/Revenue
+        public IEnumerable<GetRevenueOverTime_Result> Get(int granuality, DateTime DateFrom, DateTime DateTo)
+        {
+           
+            return IDashboardService.GetRevenueOverTime(466, DateFrom, DateTo, granuality);
         }
 
         // GET: api/Revenue/5
@@ -45,16 +47,16 @@ namespace SMD.MIS.Areas.Api.Controllers
         {
         }
     }
-    public class ResultDataTest
-    {
-        public int amountcollected { get; set; }
+    //public class ResultDataTest
+    //{
+    //    public int amountcollected { get; set; }
        
-        public string granular { get; set; }
+    //    public string granular { get; set; }
         
-        public ResultDataTest(int amountcollected, string granular)
-        {
-           this.amountcollected = amountcollected;
-           this.granular = granular;
-        }
-    }
+    //    public ResultDataTest(int amountcollected, string granular)
+    //    {
+    //       this.amountcollected = amountcollected;
+    //       this.granular = granular;
+    //    }
+    //}
 }

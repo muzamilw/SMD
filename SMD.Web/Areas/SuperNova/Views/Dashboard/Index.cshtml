@@ -55,56 +55,56 @@
                         <tr>
                             <td><span class="Theme_subheading-Clr font14">Activity</span></td>
                             <td> </td>
-                            <td>
+                            <td class="text-right">
                                 <span class="Theme_subheading-Clr  font14">
                                     Last
                                 </span>
                             </td>
-                            <td>
+                            <td class="text-right">
                                 <span class="Theme_subheading-Clr  font14">
                                     Current
                                 </span>
                             </td>
                             <td> </td>
-                            <td>
+                            <td class="text-right">
                                 <span class="Theme_subheading-Clr  font14">
                                     Last
                                 </span>
                             </td>
-                            <td>
+                            <td class="text-right">
                                 <span class="Theme_subheading-Clr  font14">
                                     Current
                                 </span>
                             </td>
                             <td> </td>
-                            <td>
+                            <td class="text-right">
                                 <span class="Theme_subheading-Clr  font14">
                                     Last
                                 </span>
                             </td>
-                            <td>
+                            <td class="text-right">
                                 <span class="Theme_subheading-Clr  font14">
                                     Current
                                 </span>
                             </td>
                             <td> </td>
-                            <td>
+                            <td class="text-right">
                                 <span class="Theme_subheading-Clr  font14">
                                     Last
                                 </span>
                             </td>
-                            <td>
+                            <td class="text-right">
                                 <span class="Theme_subheading-Clr  font14">
                                     Current
                                 </span>
                             </td>
                             <td> </td>
-                            <td>
+                            <td class="text-right">
                                 <span class="Theme_subheading-Clr  font14">
                                     Last
                                 </span>
                             </td>
-                            <td>
+                            <td class="text-right">
                                 <span class="Theme_subheading-Clr  font14">
                                     Current
                                 </span>
@@ -132,30 +132,30 @@
                     <div class="col-lg-8"></div>
                     <div class="col-lg-4">
                         <label class="control-label text-right pull-left margin10" style="padding-top:8px;">Date Range </label>
-                        <input type="text" class="form-control margin10 pull-left" style="width:35%;" id="FromDate" data-bind="datepicker:analyticFromdate">
-                        <input type="text" class="form-control margin10" style="width:35%;" id="ToDate" data-bind="datepicker:analyticTodate">
+                        <input type="text" class="form-control margin10 pull-left" style="width:35%;" id="FromDate" data-bind="datepicker:$root.analyticFromdate,  event: { change: $root.ReloadAnalytic }">
+                        <input type="text" class="form-control margin10" style="width:35%;" id="ToDate" data-bind="datepicker:$root.analyticTodate,  event: { change: $root.ReloadAnalytic }">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-6">
-                        <h2 class="graphheaderleft">Top 10 Spenders on platform</h2>
+                        @*<h2 class="graphheaderleft">Top 10 Spenders on platform</h2>
                         <div class="form-group lightgray-bg graph-box-analytics">
-                        </div>
+                        </div>*@
                         <h2 class="graphheaderleft">Revenue over time</h2>
                         <div class="form-group lightgray-bg graph-box-analytics" style="margin-right:10px">
                         </div>
                         <div class=" margin10">
-                            <select class="form-control" style="width:35%!important;" id="ddprevenue" data-bind="options: $root.granularityDropDown, optionsText: 'name', optionsValue: 'id', value:$root.selectedGranualforRevenue"></select>
+                            <select class="form-control" style="width:35%!important;" id="ddprevenue" data-bind="options: $root.granularityDropDown, optionsText: 'name', optionsValue: 'id', value:$root.selectedGranualforRevenue, event: { change: $root.getRevenueOverTime }"></select>
                             
 
-                                <div class="margin-Top-30" data-bind="morris: {type: 'Line', data: $root.RevenueOverTimeData, xkey: 'granular', ykeys: ['amountcollected'], labels: ['Revenue']}" style="width: 600px; float: left"></div>
+                            <div class="margin-Top-30" data-bind="morris: {type: 'Line', data: $root.RevenueOverTimeData, xkey: 'granular', ykeys: ['amountcollected'], labels: ['Revenue'], parseTime:false}" style="width: 600px; float: left"></div>
                             
                           </div>
                     </div>
                     <div class="col-lg-6">
-                        <h2 class="graphheaderright">Top 10 campaigns by spend</h2>
+                        @*<h2 class="graphheaderright">Top 10 campaigns by spend</h2>
                         <div class="form-group lightgray-bg graph-box-analytics" style="margin-right:10px">
-                        </div>
+                        </div>*@
                         @*<h2 class="graphheaderright">Afilliate Vs SMD Revenue</h2>
                         <div class="form-group" style="margin-right:10px">
                             <div class="graph-box lightgray-bg">
@@ -165,7 +165,7 @@
                         </div>*@
                         <h2 class="graphheaderright">Active Users</h2>
                         <div class="form-group lightgray-bg graph-box-analytics" style="margin-right:10px">
-                            <div class="margin-Top-30" data-bind="morris: {type: 'Bar', data: $root.activeUser, xkey: 'y', ykeys: ['a'], labels: ['Active Users']}" style="width: 600px; float: left"></div>
+                            <div  data-bind="morris: {type: 'Bar', data: $root.activeUser, xkey: 'y', ykeys: ['a'], labels: ['Active Users']}" style="width: 600px; float: left; margin-top:96px;"></div>
                         </div>
                     </div>
                 </div>
@@ -180,44 +180,47 @@
             <span class="" data-bind="text: activity"></span>
         </td>
         <td></td>
-        <td>
+        <td class="text-right">
             <!-- ko if: activity() === "Video Ads Revenue" || activity() === "Game Ads Revenue" || activity() === "Survey Cards Revenue" || activity() === "Profile Questions Revenue" || activity() === "Payout via Paypal" || activity() === "Income from Stripe" -->
             $
             <!-- /ko -->
             <span data-bind="text: usL"></span>
         </td>
-        <td>
+        <td class="text-right">
             <!-- ko if: activity() === "Video Ads Revenue" || activity() === "Game Ads Revenue" || activity() === "Survey Cards Revenue" || activity() === "Profile Questions Revenue" || activity() === "Payout via Paypal" || activity() === "Income from Stripe" -->
             $
             <!-- /ko -->
             <span data-bind="text: usC()"></span>
+        </td>
+        <td class="text-left">
             <!-- ko if: usT() > 0-->
-            <span style="color:green;padding-left:10px">
+            <span style="color:green;">
                 <i class="fa fa-long-arrow-up" aria-hidden="true"></i>
                 <span data-bind="text: usT"></span>%
 
             </span>
             <!-- /ko -->
             <!-- ko if: usT() < 0-->
-            <span style="color:red; padding-left:10px">
+            <span style="color:red;">
                 <i class="fa fa-long-arrow-down" aria-hidden="true"></i>
                 <span data-bind="text: usT"></span>%
 
             </span>
             <!-- /ko -->
         </td>
-        <td></td>
-        <td>
+        <td class="text-right">
             <!-- ko if: activity() === "Video Ads Revenue" || activity() === "Game Ads Revenue" || activity() === "Survey Cards Revenue" || activity() === "Profile Questions Revenue" || activity() === "Payout via Paypal" || activity() === "Income from Stripe" -->
             $
             <!-- /ko -->
             <span data-bind="text: ukL"></span>
         </td>
-        <td>
+        <td class="text-right">
             <!-- ko if: activity() === "Video Ads Revenue" || activity() === "Game Ads Revenue" || activity() === "Survey Cards Revenue" || activity() === "Profile Questions Revenue" || activity() === "Payout via Paypal" || activity() === "Income from Stripe" -->
             $
             <!-- /ko -->
             <span data-bind="text: ukC"></span>
+            </td>
+        <td class="text-left">
             <!-- ko if: ukT() > 0-->
             <span style="color:green;padding-left:10px">
                 <i class="fa fa-long-arrow-up" aria-hidden="true"></i>
@@ -233,19 +236,21 @@
             </span>
             <!-- /ko -->
         </td>
-        <td></td>
+       
 
-        <td>
+        <td class="text-right">
             <!-- ko if: activity() === "Video Ads Revenue" || activity() === "Game Ads Revenue" || activity() === "Survey Cards Revenue" || activity() === "Profile Questions Revenue" || activity() === "Payout via Paypal" || activity() === "Income from Stripe" -->
             $
             <!-- /ko -->
             <span data-bind="text: caL"></span>
         </td>
-        <td>
+        <td class="text-right">
             <!-- ko if: activity() === "Video Ads Revenue" || activity() === "Game Ads Revenue" || activity() === "Survey Cards Revenue" || activity() === "Profile Questions Revenue" || activity() === "Payout via Paypal" || activity() === "Income from Stripe" -->
             $
             <!-- /ko -->
             <span data-bind="text: caC"></span>
+            </td>
+        <td class="text-left">
             <!-- ko if: caT() > 0-->
             <span style="color:green;padding-left:10px">
                 <i class="fa fa-long-arrow-up" aria-hidden="true"></i>
@@ -261,19 +266,20 @@
             </span>
             <!-- /ko -->
         </td>
-        <td></td>
-
-        <td>
+       
+        <td class="text-right">
             <!-- ko if: activity() === "Video Ads Revenue" || activity() === "Game Ads Revenue" || activity() === "Survey Cards Revenue" || activity() === "Profile Questions Revenue" || activity() === "Payout via Paypal" || activity() === "Income from Stripe" -->
             $
             <!-- /ko -->
             <span data-bind="text: auL"></span>
         </td>
-        <td>
+        <td class="text-right">
             <!-- ko if: activity() === "Video Ads Revenue" || activity() === "Game Ads Revenue" || activity() === "Survey Cards Revenue" || activity() === "Profile Questions Revenue" || activity() === "Payout via Paypal" || activity() === "Income from Stripe" -->
             $
             <!-- /ko -->
             <span data-bind="text: auC"></span>
+            </td>
+        <td class="text-left">
             <!-- ko if: auT() > 0-->
             <span style="color:green;padding-left:10px">
                 <i class="fa fa-long-arrow-up" aria-hidden="true"></i>
@@ -289,19 +295,21 @@
             </span>
             <!-- /ko -->
         </td>
-        <td></td>
+        
 
-        <td>
+        <td class="text-right">
             <!-- ko if: activity() === "Video Ads Revenue" || activity() === "Game Ads Revenue" || activity() === "Survey Cards Revenue" || activity() === "Profile Questions Revenue" || activity() === "Payout via Paypal" || activity() === "Income from Stripe" -->
             $
             <!-- /ko -->
             <span data-bind="text: aeL"></span>
         </td>
-        <td>
+        <td class="text-right">
             <!-- ko if: activity() === "Video Ads Revenue" || activity() === "Game Ads Revenue" || activity() === "Survey Cards Revenue" || activity() === "Profile Questions Revenue" || activity() === "Payout via Paypal" || activity() === "Income from Stripe" -->
             $
             <!-- /ko -->
             <span data-bind="text: aeC"></span>
+            </td>
+        <td class="text-left">
             <!-- ko if: aeT() > 0-->
             <span style="color:green;padding-left:10px">
                 <i class="fa fa-long-arrow-up" aria-hidden="true"></i>
@@ -317,7 +325,7 @@
             </span>
             <!-- /ko -->
         </td>
-        <td></td>
+        
     </tr>
 </script>
 

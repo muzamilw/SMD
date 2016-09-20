@@ -5718,7 +5718,7 @@
           <Property Type="Int32" Name="ae" Nullable="true" />
         </ComplexType>
         <ComplexType Name="GetRevenueOverTime_Result">
-          <Property Type="Decimal" Name="amountcollected" Nullable="false" Precision="1" Scale="1" />
+          <Property Type="Double" Name="amountcollected" Nullable="true" />
           <Property Type="String" Name="granular" Nullable="false" MaxLength="1" />
         </ComplexType>
         </Schema>

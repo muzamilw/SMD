@@ -5806,7 +5806,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Property Type="Double" Name="ae" Nullable="true" />
         </ComplexType>
         <ComplexType Name="GetRevenueOverTime_Result">
-          <Property Type="Decimal" Name="amountcollected" Nullable="false" Precision="1" Scale="1" />
+          <Property Type="Double" Name="amountcollected" Nullable="true" />
           <Property Type="String" Name="granular" Nullable="false" MaxLength="1" />
         </ComplexType>
         </Schema>

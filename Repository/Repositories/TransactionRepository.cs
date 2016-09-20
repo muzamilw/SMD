@@ -5,6 +5,7 @@ using SMD.Interfaces.Repository;
 using SMD.Models.DomainModels;
 using SMD.Repository.BaseRepository;
 using System.Data.Entity;
+using System;
 
 namespace SMD.Repository.Repositories
 {
@@ -50,7 +51,12 @@ namespace SMD.Repository.Repositories
         {
             return DbSet.Where(trans => trans.AccountId == accountId).ToList();
         }
+        public IEnumerable<GetRevenueOverTime_Result> GetRevenueOverTime(int CompanyId, DateTime DateFrom, DateTime DateTo, int Granularity)
+        {
+            return db.GetRevenueOverTime(CompanyId, DateFrom, DateTo, Granularity);
+        }
 
+        
         public List<vw_GetUserTransactions> GetUserTransactions()
         {
             return db.vw_GetUserTransactions.ToList();
