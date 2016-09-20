@@ -859,10 +859,10 @@ else
                             <div class="clearfix"></div>
                         </div>
                         <div class="col-xs-12" style="line-height: 3;">
-                            <span class=" pull-left">Minimum ad click :</span>
+                            @*<span class=" pull-left">Minimum ad click :</span>*@
                             <span class="pull-right" data-bind="text: '£' + ($root.pricePerclick().toFixed(2) * $root.reachedAudience() )"></span>
                             <div class="clearfix"> </div>
-                            <span class=" pull-left" style="color:#3DD2B5;">Matches profiles:</span>
+                            <span class=" pull-left" style="color:#3DD2B5;">Estimated reach:</span>
                             <span class="pull-right" style="color:#3DD2B5;" data-bind="text:$root.reachedAudience()">0</span>
                             <div class="clearfix">
                             </div>
@@ -872,7 +872,7 @@ else
                             <div style="display:none;">50% of ad click is rewarded to viewer.</div>
                         </div>
                         <div class="col-xs-12" style="text-align: left; padding-right:0;margin-bottom:10px;font-size:0.9em;" data-bind="with: $root.campaignModel">
-                            <span class="text-campaign-left control-label pull-left" style="    margin-top: 6px;">ad click ($) </span>
+                            <span class="text-campaign-left control-label pull-left" style="    margin-top: 6px;">Ad click ($) </span>
                             <input type="text" class="pull-right" style="  color:red;
     width: 77px;
     margin-top: 6px;
