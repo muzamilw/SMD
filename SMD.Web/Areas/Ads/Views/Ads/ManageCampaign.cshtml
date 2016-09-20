@@ -563,10 +563,10 @@ else
                                     <div class="col-lg-10" style="padding:0px;">
                                         <div class="col-lg-4">
                                             <div>
-                                                <button class="btn  btn-danger btnAdsCampaign ButtonWidth" style="width:100%!important;" id="" data-toggle="modal" data-target=".bs-example-modal-lg" data-bind="click:$root.showAdditionUserCriteria">Profle card matches</button>
+                                                <button class="btn  btn-danger btnAdsCampaign ButtonWidth" style="width:100%!important;" id="" data-toggle="modal" data-target=".bs-example-modal-lg" data-bind="click:$root.showAdditionUserCriteria">Profle Insights</button>
                                             </div>
                                             <div>
-                                                <button class="btn  btn-danger btnAdsCampaign ButtonWidth" style="width:100%!important;" id="" data-toggle="modal" data-target=".bs-example-modal-lg" data-bind="click:$root.showAdditionQuizCriteria">Quiz answer matches</button>
+                                                <button class="btn  btn-danger btnAdsCampaign ButtonWidth" style="width:100%!important;" id="" data-toggle="modal" data-target=".bs-example-modal-lg" data-bind="click:$root.showAdditionQuizCriteria">Ad Click Answers</button>
                                             </div>
                                         </div>
 
@@ -575,7 +575,7 @@ else
                                                 <button class="btn  btn-danger btnAdsCampaign ButtonWidth" style="width:100%!important;" id="" data-toggle="modal" data-bind="click:$root.showAdditionUserSurveyCriteria" data-target=".bs-example-modal-lg">My Survey Cards</button>
                                             </div>
                                             <div>
-                                                <button class="btn  btn-danger btnAdsCampaign ButtonWidth" style="width:100%!important;" id="" data-toggle="modal" data-target=".bs-example-modal-lg">My Profile Questions</button>
+                                                <button class="btn  btn-danger btnAdsCampaign ButtonWidth" style="width:100%!important;" id="" data-toggle="modal" data-target=".bs-example-modal-lg">My Survey Questions</button>
                                             </div>
                                         </div>
 
@@ -859,7 +859,7 @@ else
                             <div class="clearfix"></div>
                         </div>
                         <div class="col-xs-12" style="line-height: 3;">
-                            <span class=" pull-left">Minimum PPCV :</span>
+                            <span class=" pull-left">Minimum ad click :</span>
                             <span class="pull-right" data-bind="text: '£' + ($root.pricePerclick().toFixed(2) * $root.reachedAudience() )"></span>
                             <div class="clearfix"> </div>
                             <span class=" pull-left" style="color:#3DD2B5;">Matches profiles:</span>
@@ -869,10 +869,10 @@ else
                         </div>
                         <div class="col-xs-12" style="text-align: left;margin-bottom: 20px; padding-right:0;margin-top:20px;" data-bind="with: $root.campaignModel">
                             <div style="display:none;">Bid more to increase viewing priority.</div> <br />
-                            <div style="display:none;">50% of PPCV is rewarded to viewer.</div>
+                            <div style="display:none;">50% of ad click is rewarded to viewer.</div>
                         </div>
                         <div class="col-xs-12" style="text-align: left; padding-right:0;margin-bottom:10px;font-size:0.9em;" data-bind="with: $root.campaignModel">
-                            <span class="text-campaign-left control-label pull-left" style="    margin-top: 6px;">PPVC ($) </span>
+                            <span class="text-campaign-left control-label pull-left" style="    margin-top: 6px;">ad click ($) </span>
                             <input type="text" class="pull-right" style="  color:red;
     width: 77px;
     margin-top: 6px;

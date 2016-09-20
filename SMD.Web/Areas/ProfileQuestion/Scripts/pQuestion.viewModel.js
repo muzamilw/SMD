@@ -724,6 +724,9 @@ define("pQuestion/pQuestion.viewModel",
                                 linkedQuestions.push({ PqId: obj.PqId, Question: obj.Question });
                                 isEditorVisible(false);
                                 toastr.success("Saved Successfully.");
+
+                                $("#topArea,#panelArea").css("display", "block");
+                                
                                 selectedQuestion().ProfileQuestionTargetCriteria.removeAll();
                             },
                             error: function () {
