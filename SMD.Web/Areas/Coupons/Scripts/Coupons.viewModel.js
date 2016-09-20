@@ -330,7 +330,8 @@ define("Coupons/Coupons.viewModel",
                 $(".hideInCoupons").css("display", "none");
                 isShowArchiveBtn(false);
                     CouponTitle('New Deal');
-                    StatusValue('');
+                    StatusValue('Draft');
+                    couponModel().reset();
             },
 
             closeNewCampaignDialog = function () {

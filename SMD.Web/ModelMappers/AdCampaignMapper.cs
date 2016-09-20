@@ -196,7 +196,7 @@ namespace SMD.MIS.ModelMappers
                 StartDateTime = source.StartDateTime,
                 UserId = source.UserId,
                 VerifyQuestion = source.VerifyQuestion,
-                 
+               
             };
 
 
@@ -563,7 +563,10 @@ namespace SMD.MIS.ModelMappers
                 SwapCost = source.SwapCost,
                 UserId = source.UserId,
                 SubmissionDateTime=source.SubmissionDateTime,
-                CouponCategories = source.CouponCategories != null ? source.CouponCategories.Select(coupon => coupon.CreateFrom()) : null
+                CouponCategories = source.CouponCategories != null ? source.CouponCategories.Select(coupon => coupon.CreateFrom()) : null,
+                CouponStartDate=source.CouponStartDate,
+                CouponEndDate=source.CouponEndDate,
+                Priority=source.Priority
               };
 
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SMD.Models.DomainModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -15,5 +16,7 @@ namespace SMD.MIS.Areas.Api.Models
         public string BillingZipCode { get; set; }
         public string BillingPhone { get; set; }
         public string BillingEmail { get; set; }
+
+     
     }
 }
