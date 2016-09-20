@@ -364,19 +364,32 @@
                 CreateNewBranchLocation = function () {
                     dataService.getCompanyAddress({
                         success: function (data) {
-                            //getCitiesDropDown(data)
-                            var city = cities().find(function (city) {
-                                return city.CityId === data.BillingCityId;
-                            });
-                            
-                            var newBranchLocation = new model.Branch.CreateBillingAddress(data);
-                            newBranchLocation.branchCity(city.CityName);
-                             selectedBranch(undefined)
-                             selectedBranch(newBranchLocation);
-                             CodeAddressonMap()
-                             isSaveChangesEnable(true);
-                             isdeleteEnable(false);
-                             isMapVisible(true);
+                            if (data.BillingCountryId == null) {
+                                getCitiesDropDown(1)
+                                var newBranchLocation = new model.Branch.CreateBillingAddress(data);
+                                //newBranchLocation.branchCity(city.CityName);
+                                selectedBranch(undefined)
+                                selectedBranch(newBranchLocation);
+                                isSaveChangesEnable(true);
+                                isdeleteEnable(false);
+                                isMapVisible(true);
+                            }
+                            else {
+                                //getCitiesDropDown(data.BillingCountryId)
+                                var city = cities().find(function (city) {
+                                    return city.CityId === data.BillingCityId;
+                                });
+                                var newBranchLocation = new model.Branch.CreateBillingAddress(data);
+                                newBranchLocation.branchCity(city.CityName);
+                                selectedBranch(undefined)
+                                selectedBranch(newBranchLocation);
+                                isSaveChangesEnable(true);
+                                CodeAddressonMap()
+
+                                isdeleteEnable(false);
+                                isMapVisible(true);
+                            }
+                           
                          },
                          error: function () {
                              toastr.error("Failed to load Company Address.");
@@ -541,7 +554,13 @@
                 {
                     dataService.getCompanyAddress({
                         success: function (data) {
-                            getCitiesDropDown(data.BillingCountryId);
+                            if (data.BillingCountryId == null) {
+                                getCitiesDropDown(1);
+                            }
+                            else {
+                                getCitiesDropDown(data.BillingCountryId);
+                            }
+                           
                             
                         },
                         error: function () {
