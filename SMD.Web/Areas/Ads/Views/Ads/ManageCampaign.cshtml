@@ -575,7 +575,7 @@ else
                                                 <button class="btn  btn-danger btnAdsCampaign ButtonWidth" style="width:100%!important;" id="" data-toggle="modal" data-bind="click:$root.showAdditionUserSurveyCriteria" data-target=".bs-example-modal-lg">My Survey Cards</button>
                                             </div>
                                             <div>
-                                                <button class="btn  btn-danger btnAdsCampaign ButtonWidth" style="width:100%!important;" id="" data-toggle="modal" data-target=".bs-example-modal-lg">My Survey Questions</button>
+                                                <button class="btn  btn-danger btnAdsCampaign ButtonWidth" style="width:100%!important;" id="" data-toggle="modal" data-bind="click:$root.showAdditionalSurveyQuestions" data-target=".bs-example-modal-lg">My Survey Questions</button>
                                             </div>
                                         </div>
 
@@ -1031,7 +1031,7 @@ else
                                                     <!-- ko template: { name: 'surveyQuestionTiles' , foreach: $root.myQuizQuestions} --><!-- /ko -->
                                                     <div data-bind="visible: $root.myQuizQuestions().length == 0" style="display:none;">
                                                         <div class="" style="padding:20px;" >
-                                                            No quiz questions found.
+                                                            No ad click answer found.
                                                         </div>
 
                                                     </div>
@@ -2369,6 +2369,7 @@ else
     }
 </script>
 <script id="profileQuestionTiles" type="text/html">
+    <!--ko if:$root.showCompanyProfileQuestions() == true && CompanyId != null -->
     <div class="list">
         <div class="parent-list-title" data-bind="click:$root.onChangeProfileQuestion"><span data-bind="text:Question"></span></div>
         <div class="listview set-border padding10 list-type-tiles chlidList" data-role="listview">
@@ -2377,6 +2378,17 @@ else
         </div>
         <div class="clear-both"></div>
     </div>
+    <!--/ko-->
+    <!--ko if:$root.showCompanyProfileQuestions() == false && CompanyId == null-->
+    <div class="list">
+        <div class="parent-list-title" data-bind="click:$root.onChangeProfileQuestion"><span data-bind="text:Question"></span></div>
+        <div class="listview set-border padding10 list-type-tiles chlidList" data-role="listview">
+            <!-- ko template: { name: 'profileQuestionAnsTiles' , foreach: $root.profileAnswerList } --><!-- /ko -->
+            <div class="clear-both"></div>
+        </div>
+        <div class="clear-both"></div>
+    </div>
+    <!--/ko-->
 </script>
 
 
@@ -2386,8 +2398,8 @@ else
         <div class="listview set-border padding10 list-type-tiles chlidList" data-role="listview">
             @*<!-- ko template: { name: 'SurveyQuestionAnsTiles' , foreach: $root.profileAnswerList } --><!-- /ko -->*@
 
-            <img data-bind="attr: { src:LeftPicturePath},click:$root.saveSurveyQuestion.bind($data, 1)" style="width:100px;height:100px;" />
-            <img data-bind="attr: { src:RightPicturePath},click:$root.saveSurveyQuestion.bind($data, 1)" style="width:100px;height:100px;" />
+            <img data-bind="attr: { src:LeftPicturePath},click:$root.saveSurveyQuestion.bind($data, 1)" style="width:100px;" />
+            <img data-bind="attr: { src:RightPicturePath},click:$root.saveSurveyQuestion.bind($data, 1)" style="width:100px;" />
 
             <div class="clear-both"></div>
         </div>

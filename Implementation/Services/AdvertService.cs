@@ -838,9 +838,10 @@ namespace SMD.Implementation.Services
         /// </summary>
         public AdCampaignBaseResponse GetProfileQuestionData()
         {
+
             return new AdCampaignBaseResponse
             {
-                ProfileQuestions = _profileQuestionRepository.GetAll().Where(g => g.Status != 0)
+                ProfileQuestions = _profileQuestionRepository.GetAll().Where(g => g.Status != 0 &&( g.CompanyId == _profileQuestionAnswerRepository.CompanyId || g.CompanyId == null))
             };
         }
 

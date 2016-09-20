@@ -103,6 +103,7 @@ define("ads/ads.viewModel",
                     voucherQuestionStatus = ko.observable(false),
                     buyItQuestionStatus = ko.observable(false),
                     AditionalCriteriaMode = ko.observable("1"), //1 = main buttons, 2 = profile questions , 3 = ad linked questions
+                showCompanyProfileQuestions = ko.observable(false),
                     couponCategories = ko.observableArray([]),
                     quizQuestionStatus = ko.observable(false),
                     quizPriceLbl = ko.observable("1"),
@@ -2375,8 +2376,46 @@ define("ads/ads.viewModel",
                         });
                     }
                     AditionalCriteriaMode(2);
-                },
+                    showCompanyProfileQuestions(false);
 
+                },
+                showAdditionalSurveyQuestions = function () {
+                    isNewCriteria(true);
+                    var objProfileCriteria = new model.AdCampaignTargetCriteriasModel();
+
+                    objProfileCriteria.Type("1");
+                    objProfileCriteria.IncludeorExclude("1");
+                    criteriaCount(criteriaCount() + 1);
+                    objProfileCriteria.CriteriaID(criteriaCount());
+                    selectedCriteria(objProfileCriteria);
+
+
+                    if (profileQuestionList().length == 0) {
+                        dataservice.getBaseData({
+                            RequestId: 2,
+                            QuestionId: 0,
+                        }, {
+                            success: function (data) {
+                                if (data != null) {
+                                    profileQuestionList([]);
+                                    ko.utils.arrayPushAll(profileQuestionList(), data.ProfileQuestions);
+                                    console.log(data.profileQuestionList)
+                                    profileQuestionList.valueHasMutated();
+
+                                    console.log(data)
+                                }
+
+                            },
+                            error: function (response) {
+
+                            }
+                        });
+
+                    }
+                   
+                    AditionalCriteriaMode(2);
+                    showCompanyProfileQuestions(true);
+                },
                 showAdditionUserSurveyCriteria = function () {
                     debugger;
                     isNewCriteria(true);
@@ -2791,8 +2830,10 @@ define("ads/ads.viewModel",
                     ArchiveCampaign: ArchiveCampaign,
                     copyCampaign: copyCampaign,
                     AditionalCriteriaMode: AditionalCriteriaMode,
+                    showCompanyProfileQuestions:showCompanyProfileQuestions,
                     showAdditionCriteria: showAdditionCriteria,
                     showAdditionUserCriteria: showAdditionUserCriteria,
+                    showAdditionalSurveyQuestions:showAdditionalSurveyQuestions,
                     showAdditionQuizCriteria: showAdditionQuizCriteria,
                     addBuyItPrice: addBuyItPrice,
                     couponCategories: couponCategories,
