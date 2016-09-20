@@ -12,26 +12,9 @@ var GetActiveUser = function (data) {
     return tempData;
 };
 
-var DashboardInsightsModel = function (ActivityName) {
-	if(ActivityName.length>0){
+var DashboardInsightsModel = function (ActivityName, isBlankrow) {
+	if(isBlankrow){
 		activity = ko.observable(ActivityName), 
-	 usL = ko.observable(0), 
-	 usC = ko.observable(0),
-	 ukL = ko.observable(0),
-	 ukC = ko.observable(0),
-	 caL = ko.observable(0),
-	 caC = ko.observable(0), 
-	 auL = ko.observable(0), 
-	 auC = ko.observable(0),
-	 aeL = ko.observable(0), 
-	 aeC = ko.observable(0),
-	 ukT= ko.observable(0),
-	 usT= ko.observable(0),
-	 caT= ko.observable(0),
-	 auT= ko.observable(0),
-	 aeT= ko.observable(0)
-	} else{
-	 activity = ko.observable(ActivityName), 
 	 usL = ko.observable(""), 
 	 usC = ko.observable(""),
 	 ukL = ko.observable(""),
@@ -47,6 +30,23 @@ var DashboardInsightsModel = function (ActivityName) {
 	 caT= ko.observable(""),
 	 auT= ko.observable(""),
 	 aeT= ko.observable("")
+	} else{
+	 activity = ko.observable(ActivityName), 
+	 usL = ko.observable(0), 
+	 usC = ko.observable(0),
+	 ukL = ko.observable(0),
+	 ukC = ko.observable(0),
+	 caL = ko.observable(0),
+	 caC = ko.observable(0), 
+	 auL = ko.observable(0), 
+	 auC = ko.observable(0),
+	 aeL = ko.observable(0), 
+	 aeC = ko.observable(0),
+	 ukT= ko.observable(0),
+	 usT= ko.observable(0),
+	 caT= ko.observable(0),
+	 auT= ko.observable(0),
+	 aeT= ko.observable(0)
 	}
 	return{
 		activity:activity,
