@@ -335,9 +335,10 @@ namespace SMD.Implementation.Services
                     serverObj.CreatedBy = user.FullName;
                     serverObj.UserID = user.Id;
                 }
-
+                serverObj.CreationDate = DateTime.Now;
                 _profileQuestionRepository.Add(serverObj);
                 _profileQuestionRepository.SaveChanges();
+
                 if (serverObj.ProfileQuestionAnswers == null)
                 {
                     serverObj.ProfileQuestionAnswers = new List<ProfileQuestionAnswer>();

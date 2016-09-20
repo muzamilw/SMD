@@ -173,18 +173,19 @@ define("pQuestion/pQuestion.viewModel",
                          },
                     SetStatusForQuestion = function (item)
                     {
+                       
                         if (item.Status == 1) {
                             item.StatusValue = "Draft";
-                        } else if (item.status == 2) {
-                            item.StatusValue = "Submitted for Approval";// canSubmitForApproval(false);
+                        } else if (item.Status == 2) {
+                            item.StatusValue = "Submitted for Approval"; canSubmitForApproval(false);
                         } else if (item.Status == 3) {
-                            item.StatusValue = "Live";// canSubmitForApproval(false);
+                            item.StatusValue = "Live"; canSubmitForApproval(false);
                         } else if (item.Status == 4) {
-                            item.StatusValue = "Paused"; //canSubmitForApproval(false);
+                            item.StatusValue = "Paused"; canSubmitForApproval(false);
                         } else if (item.Status == 5) {
-                            item.StatusValue = "Completed"; //canSubmitForApproval(false);
+                            item.StatusValue = "Completed"; canSubmitForApproval(false);
                         } else if (item.Status == 6) {
-                            item.StatusValue = "Approval Rejected"; //canSubmitForApproval(true);
+                            item.StatusValue = "Approval Rejected"; canSubmitForApproval(true);
                         }
                         item.CreatedBy=DilveredPercentage(item);
                         return item;
@@ -239,6 +240,11 @@ define("pQuestion/pQuestion.viewModel",
                         pager().reset();
                         getQuestions();
                     },
+                      enableControls = function (mode) {
+                          $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign").css("display", "none");
+                          $("#btnSubmitForApproval,.lang_delSurvey,.table-link").css("display", "inline-block");
+                          $("input,button,textarea,a,select,#closeBtn,#btnPauseCampaign").removeAttr('disabled');
+                      },
                     onRemoveLocation = function (item) {
                         // Ask for confirmation
                         confirmation.afterProceed(function () {
@@ -291,7 +297,9 @@ define("pQuestion/pQuestion.viewModel",
                     // Add new Profile Question
                     addNewProfileQuestion = function () {
                         $("#panelArea,#topArea").css("display", "none");
-                        HeaderText("New Question");
+                        HeaderText("New Survey Question");
+
+                        canSubmitForApproval(true);
                         selectedQuestion(new model.question());
                         selectedQuestion().Gender("1");
                         
@@ -351,26 +359,30 @@ define("pQuestion/pQuestion.viewModel",
                         },
                 
                     // Close Editor 
-                    closeEditDialog = function () {
-                        $("#panelArea,#topArea").css("display", "block");
-                        if (!hasChangesOnQuestion()) {
-                            isEditorVisible(false);
-                            return;
-                        }
+                    //closeEditDialog = function () {
+                    //    $("#panelArea,#topArea").css("display", "block");
+                    //    if (!hasChangesOnQuestion()) {
+                    //        isEditorVisible(false);
+                    //        return;
+                    //    }
                     // Ask for confirmation
-                    confirmation.afterProceed(function () {
-                            selectedQuestion().answers.removeAll();
-                            selectedQuestion(undefined);
-                            isEditorVisible(false);
-                      });
-                      confirmation.show();
-                    },
+                    //confirmation.afterProceed(function () {
+                    //        selectedQuestion().answers.removeAll();
+                    //        selectedQuestion(undefined);
+                    //        isEditorVisible(false);
+                    //  });
+                    //  confirmation.show();
+                    //},
                     // On editing of existing PQ
                     onEditProfileQuestion = function (item) {
                         $("#panelArea,#topArea").css("display", "none");
                         AgeRangeStart(13);
                         AgeRangeEnd(80);
-
+                        isTerminateBtnVisible(false);
+                        isShowArchiveBtn(false);
+                        if (item.status() == 1 || item.status() == 2 || item.status() == 3 || item.status() == 4 || item.status() == null || item.status() == 7 || item.status() == 9) {
+                            canSubmitForApproval(true);
+                        }
                         getQuestionAnswer(item.qId());
 
                         selectedQuestion(item);
@@ -409,6 +421,8 @@ define("pQuestion/pQuestion.viewModel",
                             canSubmitForApproval(true);
                         }
                       
+
+
                         //selectedQuestion(new model.question());
 
                         //selectedQuestion().ProfileQuestionTargetLocation.push(item.ProfileQuestionTargetLocation);
@@ -426,7 +440,7 @@ define("pQuestion/pQuestion.viewModel",
                 },
                     // On Edit PQ, Get PQ Answer & linked Question 
                     getQuestionAnswer = function (profileQuestionId) {
-                      
+                        debugger;
                         dataservice.getPqAnswer(
                            {
                                ProfileQuestionId: profileQuestionId
@@ -476,7 +490,7 @@ define("pQuestion/pQuestion.viewModel",
                                     });
 
 
-                                    debugger;
+                                    
 
 
                                     _.each(selectedQuestion().ProfileQuestionTargetLocation(), function (item) {
@@ -630,7 +644,8 @@ define("pQuestion/pQuestion.viewModel",
                         view.hideAnswerDialog();
                     },
                     // To do before save
-                    doBeforeSave = function() {
+                    doBeforeSave = function () {
+                        debugger;
                         var isValid = true;
                         if (!selectedQuestion().isValid()) {
                             selectedQuestion().errors.showAllMessages();
@@ -687,11 +702,14 @@ define("pQuestion/pQuestion.viewModel",
                         serverQuestion.ProfileQuestionAnswers = serverAnswers;
                         
                         dataservice.saveProfileQuestion(serverQuestion, {
+                           
                             success: function (obj) {
+                                
                                 var newAssigendGroup = qGroup.find(function (temp) {
                                     return obj.ProfileGroupId == temp.ProfileGroupId;
                                 });
-                                selectedQuestion().profileGroupName(newAssigendGroup.ProfileGroupName);
+                              
+                                
                                 selectedQuestion().questionString(obj.Question);
                                 selectedQuestion().priority(obj.Priority);
                                 selectedQuestion().hasLinkedQuestions(obj.HasLinkedQuestions);
@@ -1328,6 +1346,10 @@ define("pQuestion/pQuestion.viewModel",
                           selectedCriteria().answerString(item.Answer);
                           selectedCriteria().PQAnswerID(item.PQAnswerID);
                            $(".close").click();
+                     },
+                        closeEditDialog = function () {
+                        isEditorVisible(false); enableControls();
+                        $("#panelArea,#topArea").css("display", "block");
                     },
                 saveCriteria = function (type, item) {
                    

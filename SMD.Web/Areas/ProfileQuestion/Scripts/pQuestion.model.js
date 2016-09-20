@@ -15,6 +15,7 @@
                 languageId = ko.observable(langId),
                 countryId = ko.observable(countId),
                 profileGroupId = ko.observable(groupId).extend({ required: true }),
+                
                 type = ko.observable(spcType).extend({ required: true }),
                 statusValue = ko.observable(StatusValue),
                 Gender = ko.observable(Gender),
@@ -31,7 +32,9 @@
                 ProfileQuestionTargetCriteria = ko.observableArray([]),
                 refreshTime = ko.observable(spcRefreshtime),
                 skippedCount = ko.observable(spcSkipped),
-                creationDate = ko.observable(spcCreationD),
+                
+                 
+                creationDate = ko.observable((spcCreationD !== null && spcCreationD !== undefined) ? moment(spcCreationD).toDate() : undefined),
                 modifiedDate = ko.observable(spcModDate),
                 createdBy = ko.observable(CreatedBy),
                 penalityForNotAnswering = ko.observable(penality),
@@ -119,7 +122,7 @@
                         ProfileQuestionTargetCriteria: targetCriteria,
                         AnswerNeeded:answerNeeded,
                         AmountCharged: amountCharge,
-                        
+                        creationDate: moment(creationDate()).format(ist.utcFormat) + 'Z'
                     };
                 };
             return {
@@ -337,6 +340,7 @@
     
     // Function to attain cancel button functionality QUESTION
     question.CreateFromClientModel = function (item) {
+        debugger;
         return new question(item.qId, item.questionString, item.priority, item.hasLinkedQuestions, item.profileGroupName, item.languageId, item.countryId, item.profileGroupId, item.type, item.refreshTime
         , item.skippedCount, item.creationDate);
     };
