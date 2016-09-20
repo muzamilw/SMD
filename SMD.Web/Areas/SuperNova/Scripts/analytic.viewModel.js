@@ -20,14 +20,14 @@ define("analytic/analytic.viewModel",
 						DashboardInsightsData.push(new model.DashboardInsightsModel("New App User"));
 						DashboardInsightsData.push(new model.DashboardInsightsModel(""));
 						DashboardInsightsData.push(new model.DashboardInsightsModel("Approved Campaigns", true));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("Deal Campaigns"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("Deals Campaigns"));
 						DashboardInsightsData.push(new model.DashboardInsightsModel("Video Campaigns"));
 						DashboardInsightsData.push(new model.DashboardInsightsModel("Game Campaigns"));
 						DashboardInsightsData.push(new model.DashboardInsightsModel("Survey card Campaigns"));
 						DashboardInsightsData.push(new model.DashboardInsightsModel("Survey question Campaigns"));
 						DashboardInsightsData.push(new model.DashboardInsightsModel(""));
 						DashboardInsightsData.push(new model.DashboardInsightsModel("Active Campaigns", true));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("Deal Campaigns"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("Deals Campaigns"));
 						DashboardInsightsData.push(new model.DashboardInsightsModel("Video Campaigns"));
 						DashboardInsightsData.push(new model.DashboardInsightsModel("Game Campaigns"));
 						DashboardInsightsData.push(new model.DashboardInsightsModel("Survey card Campaigns"));
