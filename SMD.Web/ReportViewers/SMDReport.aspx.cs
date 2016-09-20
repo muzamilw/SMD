@@ -34,7 +34,7 @@ namespace SMD.MIS.ReportViewers
             }
             catch (Exception ex)
             {
-
+                throw ex;
             }
         }
         static List<vw_Cash4AdsReport> getRecords()

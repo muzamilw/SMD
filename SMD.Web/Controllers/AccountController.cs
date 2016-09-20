@@ -282,8 +282,13 @@ namespace SMD.MIS.Controllers
         {
 
             var model = new RegisterViewModel();
-            if (code!=null)
+            if (code != null)
+            {
                 model.code = code;
+
+                Response.Cookies["invitationcode"].Value = code;
+
+            }
 
 
             return View(model);
@@ -569,7 +574,7 @@ namespace SMD.MIS.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("Index", "Manage");
+                return RedirectToAction("Login");
             }
 
             if (ModelState.IsValid)
@@ -600,6 +605,14 @@ namespace SMD.MIS.Controllers
                         SetupUserClaims(info.ExternalIdentity);
                         CreateUserAccounts(CompanyId);
                         TransactionManager.UserSignupFreeGiftBalanceTransaction(500, CompanyId);
+
+
+                        if (Request.Cookies["invitationcode"].Value != null)
+                        {
+
+                            manageUserService.AcceptInvitation(Request.Cookies["invitationcode"].Value, user.Id);
+
+                        }
                         return RedirectToAction("SelectCompany");
                     }
                 }

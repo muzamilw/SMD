@@ -1524,7 +1524,7 @@ namespace SMD.Implementation.Services
                Cities =cityRepository.GetAllCities().ToList(),
                Industries = industryRepository.GetAll().ToList(),
                Educations = educationRepository.GetAllEducations().ToList(),
-               UserRoles =  this.RoleManager.Roles.Where(g => g.Id.StartsWith("cust")).ToList() //   manageUserRepository.getUserRoles().ToList()
+               UserRoles = this.RoleManager.Roles.Where(g => g.Id.StartsWith("EndUser")).ToList() //   manageUserRepository.getUserRoles().ToList()
             };
         }
         public int generateAndSmsCode(string userId, string phone)
