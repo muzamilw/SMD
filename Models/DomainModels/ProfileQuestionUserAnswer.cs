@@ -15,6 +15,7 @@ namespace SMD.Models.DomainModels
         public DateTime AnswerDateTime { get; set; }
         public int PqAnswerId { get; set; }
         public Nullable<int> CompanyId { get; set; }
+        public Nullable<int> ResponseType { get; set; }
         public virtual User User { get; set; }
         public virtual ProfileQuestion ProfileQuestion { get; set; }
         public virtual ProfileQuestionAnswer ProfileQuestionAnswer { get; set; }

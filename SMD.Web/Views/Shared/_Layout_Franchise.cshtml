@@ -163,17 +163,45 @@
             @RenderSection("leftmenue", required: false)
 
             @*content wrapper goes here*@
-            <div id="content-wrapper" class="removeMenuMargin">
+            <div style="margin-top:20px;margin-left:25px;">
+                <span style="font-weight:bold;color:#7f8c8d;font-size:14px;">Approve or Rejected</span>
 
+            </div>
+           
+            <div id="content-wrapper" class="removeMenuMargin">
+               
+               
                 <div class="row" id="topArea" style="margin-bottom:15px;">
+                    
+                      
+                       
+                    
+                    <div class="pull-left hideInCoupons" style=" position: absolute;top:32%;">
+                       
+                    </div>
                     <div class="row">
                         <div class="col-sm-12 pull-left">
 
-                            <a  class="btn btn-default btn-gray "  aria-expanded="false" style="padding-top:16px;" href="~/">
-                                Dashboard
+                            <a class="btn btn-default btn-gray " aria-expanded="false" style="padding-top:16px;" href="~/Franchise/Dashboard/CouponsAproval">
+                                Deals
+                            </a>
+                            <a class="btn btn-default btn-gray " aria-expanded="false" style="padding-top:16px;" href="~/Franchise/Dashboard/AddAproval">
+                                Video Ads
+                            </a>
+                            <a class="btn btn-default btn-gray " aria-expanded="false" style="padding-top:16px;" href="~/">
+                                Sponser Games
+                            </a>
+                            <a class="btn btn-default btn-gray " aria-expanded="false" style="padding-top:16px;" href="~/Franchise/Dashboard/SurveyQuestionApproval">
+                                Survey Cards
+                            </a>
+                            <a class="btn btn-default btn-gray " aria-expanded="false" style="padding-top:16px;" href="~/Franchise/Dashboard/ProfileQuestionApproval">
+                                Survey Questions
+                            </a>
+                            <a class="btn btn-default btn-gray " aria-expanded="false" style="padding-top:16px;" href="~/">
+                                Reviews
                             </a>
 
-                            <div class="btn-group">
+                            <div class="btn-group"style="display:none">
                                 <button type="button" class="btn btn-default btn-gray dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width:177px;">
                                     Approve/Reject <span class="caret"></span>
                                 </button>
@@ -188,23 +216,21 @@
 
                                 </ul>
                                 </div>
-                            <div class="btn-group">
+                            <div class="btn-group" style="margin-left:100px ">
                                 <button type="button" class="btn btn-default btn-gray dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Manage <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu">
 
-
-                                    <li ><a href="~/ProfileQuestion/Manage/Index">System Profile Questions</a></li>
-                                    <li ><a href="~/survey/?m=1">System Surveys</a></li>
-                                    <li ><a href="~/survey">System Coupon Categories</a></li>
-
+                                    <li><a href="~/ProfileQuestion/Manage/Index">System Profile Questions</a></li>
+                                    <li><a href="~/survey/?m=1">System Surveys</a></li>
+                                    <li><a href="~/survey">System Coupon Categories</a></li>
 
                                 </ul>
-                                </div>
+                            </div>
 
                             <div class="btn-group">
-                                <button type="button" class="btn btn-default btn-gray dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <button type="button" class="btn btn-default btn-gray dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="display:none">
                                     Reports <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu">
@@ -219,7 +245,7 @@
                             </div>
 
                             <div class="btn-group">
-                                <button type="button" class="btn btn-default btn-gray dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <button type="button" class="btn btn-default btn-gray dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="display:none ">
                                     Actions <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu">

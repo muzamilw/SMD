@@ -24,5 +24,6 @@ namespace SMD.Models.DomainModels
         public string RedemptionOperator { get; set; }
     
         public virtual Coupon Coupon { get; set; }
+        public Nullable<int> ResponseType { get; set; }
     }
 }
