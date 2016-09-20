@@ -11,33 +11,52 @@ define("analytic/analytic.viewModel",
                     activeUser = ko.observable(),
 					DashboardInsightsData = ko.observableArray(),
 					granularityDropDown = ko.observableArray([{ id: 1, name: "Day" }, { id: 2, name: "Week" }, { id: 3, name: "Month" }, { id: 4, name: "Year" }]),
-                    analyticFromdate = ko.observable(),
-					analyticTodate = ko.observable(),
+                    analyticFromdate = ko.observable(new Date()),
+					analyticTodate = ko.observable(new Date()),
 					selectedGranualforRevenue = ko.observable(1),
 					RevenueOverTimeData = ko.observable([]),
 					intializeDashboardInsightsData = function(){
 						DashboardInsightsData.push(new model.DashboardInsightsModel("Active App User"));
 						DashboardInsightsData.push(new model.DashboardInsightsModel("New App User"));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("Active Campaigns"));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("New Campaigns"));
 						DashboardInsightsData.push(new model.DashboardInsightsModel(""));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("Coupons Approved"));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("Coupons Purchased"));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("Coupons Redeemed"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("Approved Campaigns", true));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("Deal Campaigns"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("Video Campaigns"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("Game Campaigns"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("Survey card Campaigns"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("Survey question Campaigns"));
 						DashboardInsightsData.push(new model.DashboardInsightsModel(""));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("Video Ads Delivered"));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("Game Ads Delivered"));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("Survey Cards Campaigns"));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("Profile Questions Campaingns"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("Active Campaigns", true));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("Deal Campaigns"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("Video Campaigns"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("Game Campaigns"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("Survey card Campaigns"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("Survey question Campaigns"));
 						DashboardInsightsData.push(new model.DashboardInsightsModel(""));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("Video Ads Revenue"));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("Game Ads Revenue"));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("Survey Cards Revenue"));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("Profile Questions Revenue"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("Impressions", true));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("Deals viewed"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("Deals referred to landing pages"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("Deals Saved"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("Deals Redeemed"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("Videos referred to landing pages"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("Video Quiz Ad clicks"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("Game quiz Ad clicks"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("Survey questions answered"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("Survey cards answered"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("Video ads skipped"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("Games skipped"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("Survey cards skipped"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("Survey question skipped"));
 						DashboardInsightsData.push(new model.DashboardInsightsModel(""));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("Payout via Paypal"));
-						DashboardInsightsData.push(new model.DashboardInsightsModel("Income from Stripe"));
-						getDashboardInsights();
+						DashboardInsightsData.push(new model.DashboardInsightsModel("Revenue", true));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("Video Ad revenue"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("Game Ad revenue"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("Survey card revenue"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("Survey Question revenue"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("All Revenue (income from stripe)"));
+						DashboardInsightsData.push(new model.DashboardInsightsModel("Payout via PayPal"));
+						
+						//getDashboardInsights();
 					},
 					getDashboardInsights = function () {
                         dataservice.getDashboardInsights(
@@ -313,8 +332,8 @@ define("analytic/analytic.viewModel",
                         dataservice.getRevenueOverTime(
                             {
 								granuality: selectedGranualforRevenue(),
-								DateFrom: '2016-08-02',
-								DateTo :'2016-09-17'
+								DateFrom: analyticFromdate().toISOString().substring(0, 10),
+								DateTo :analyticTodate().toISOString().substring(0, 10)
                                                            },
                             {
                                 success: function (data) {
@@ -329,14 +348,19 @@ define("analytic/analytic.viewModel",
                                 }
                             });
                     },
-               
+					ReloadAnalytic = function () {
+						getRevenueOverTime();
+						
+					},
                     // Initialize the view model
                     initialize = function (specifiedView) {
+						
                         view = specifiedView;
+						analyticFromdate().setMonth(analyticFromdate().getMonth()-1)
                         ko.applyBindings(view.viewModel, view.bindingRoot);
 						intializeDashboardInsightsData();
-						getAnalytic();
-						getRevenueOverTime();
+						//getAnalytic();
+						//getRevenueOverTime();
                     };
                 return {
 
@@ -349,7 +373,8 @@ define("analytic/analytic.viewModel",
 					DashboardInsightsData:DashboardInsightsData,
 					selectedGranualforRevenue:selectedGranualforRevenue,
 					RevenueOverTimeData:RevenueOverTimeData,
-					getRevenueOverTime:getRevenueOverTime
+					getRevenueOverTime:getRevenueOverTime,
+					ReloadAnalytic:ReloadAnalytic
 
                 };
             })()

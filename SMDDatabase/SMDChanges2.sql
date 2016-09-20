@@ -419,3 +419,33 @@ order by ordr
 END
 
 
+/*--------------------- 9/20/2016----------------------------------
+Added by Hadia 
+*/
+
+ALTER TABLE ProfileQuestion
+ADD StartDate datetime default NULL
+
+ALTER TABLE ProfileQuestion
+ADD EndDate datetime default NULL
+
+ ALTER TABLE UserPurchasedCoupon
+ADD ResponseType int default NULL
+
+ ALTER TABLE SurveyQuestionResponse
+ADD ResponseType int default NULL
+
+ ALTER TABLE ProfileQuestionUserAnswer
+ADD ResponseType int default NULL
+
+--ResponseType for video
+--1 = click
+--2 = skip
+--3 = reffered to landing page
+--Survay Cards / questions ResponseType
+--1 = answered
+--2 = skiped
+
+
+--ResponseType = 3 // for referred to landing pages in UserPurchasedCoupon
+
