@@ -12,8 +12,8 @@
                 </ol>
                 <div>
                     
-                    <span class="pull-left Theme_standard_clr" style="padding-left:0px;font-size:28px;" data-bind="text:$root.HeaderText">Are you single ?</span>
-                    <span class="control-label  heading-style pull-left" style=" margin-top: 6px; margin-left: 40px;" data-bind="text:StatusValue">Draft</span>
+                    <span class="pull-left" style="color:black!important; padding-left:0px;font-size:23px;" data-bind="text:$root.HeaderText">Are you single ?</span>
+                    <span class="control-label  heading-style pull-left" style=" margin-top: 0px; margin-left: 40px;" data-bind="text:StatusValue">Draft</span>
                     <div class="clearfix" style="float:right;">
                         <div class="col-xs-12" style="text-align: right; padding-right:0;margin-bottom:10px;margin-top:-5px;">
                             @*<button style="display:none;" class="btn  btn-info" id="saveBtn" data-bind="click:$root.onSaveProfileQuestion, enable: $root.hasChangesOnQuestion, css: { 'btn-warning': $root.hasChangesOnQuestion }">Save</button>*@
@@ -881,10 +881,10 @@
                             </div>
                             <div class="col-xs-12" style="line-height: 3;">
 
-                                <span class=" pull-left">Minimum ad click :</span>
+                                @*<span class=" pull-left">Estimated reach:</span>*@
                                 <span class="pull-right"></span>
                                 <div class="clearfix"> </div>
-                                <span class=" pull-left" style="color:#3DD2B5;">Matches profiles:</span>
+                                <span class=" pull-left" style="color:#3DD2B5;">Estimated reach:</span>
                                 <span class="pull-right" style="color:#3DD2B5;" data-bind="text: $root.reachedAudience">0</span>
                                 <div class="clearfix">
                                     
@@ -896,7 +896,7 @@
                                 <div style="display:none;">50% of ad click is rewarded to viewer.</div>
                             </div>
                             <div class="col-xs-12" style="text-align: left; padding-right:0;margin-bottom:10px;font-size:0.9em;">
-                                <span class="text-campaign-left control-label pull-left" style="    margin-top: 6px;">PPVC ($) </span>
+                                <span class="text-campaign-left control-label pull-left" style="    margin-top: 6px;">Ad click ($) </span>
                                 <input type="text" class="pull-right" style="  color:red;width: 77px;margin-top: 6px;margin-left: 10px;font-weight: bold;font-size: 18px; " data-bind="value:$root.SelectedPvcVal" name="Budget" id="txtPerClick">
 
                                 <div class="clearfix">

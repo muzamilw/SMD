@@ -199,6 +199,8 @@ define("survey/survey.viewModel",
                         isShowArchiveBtn(false);
                         HeaderText("Add new survey card");
                         StatusValue('');
+                        isNewCampaign(true);
+                        StatusValue("Draft");
                         selectedQuestion(new model.Survey());
                         selectedQuestion().Gender("1");
                         selectedQuestion().LeftPicturePath("/Images/select_image.jpg");
