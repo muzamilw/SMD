@@ -395,6 +395,13 @@ namespace SMD.Implementation.Services
             {
                 _couponCategoriesRepository.Delete(couponCategory);
             }
+
+            if (couponModel.Status == 7)
+            {
+                couponModel.CouponEndDate = DateTime.Now;
+            
+            }
+
             if (couponModel.CouponCategories != null && couponModel.CouponCategories.Count() > 0)
             {
                 foreach (var item in couponModel.CouponCategories)

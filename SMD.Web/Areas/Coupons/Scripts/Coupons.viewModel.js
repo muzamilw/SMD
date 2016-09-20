@@ -522,15 +522,15 @@ define("Coupons/Coupons.viewModel",
                     couponModel().Status(mode);
                    
                     couponModel().SubmissionDateTime(mode);
-                    
-                    var res = CouponActiveMonth().split("-");
+                    if (CouponActiveMonth() != null && CouponActiveMonth() > 0) {
 
-                    couponModel().CouponActiveYear(res[0]);
-                    debugger;
-                   
+                        var res = CouponActiveMonth().split("-");
 
-                    couponModel().CouponActiveMonth(GetMonth(res[1]));
+                        couponModel().CouponActiveYear(res[0]);
 
+
+                        couponModel().CouponActiveMonth(GetMonth(res[1]));
+                    }
                     var campignServerObj = couponModel().convertToServerData();
 
                     dataservice.addCampaignData(campignServerObj, {
@@ -950,6 +950,7 @@ define("Coupons/Coupons.viewModel",
                                         couponModel().StatusValue("Live");
                                         isTerminateBtnVisible(true);
                                         isNewCampaignVisible(true);
+
                                         $("#btnCancel").css("display", "block");
                                     } else if (couponModel().Status() == 4) {
                                         $("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
