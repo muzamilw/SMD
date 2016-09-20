@@ -1759,7 +1759,7 @@ input[type="radio"] {
 
 
 #login-page-full {
-    background-color: #7a539b;
+    background-color: #e7ebee;
     color:white;
 }
 
@@ -1812,7 +1812,7 @@ input[type="radio"] {
 
 #login-box-inner {
     padding: 60px 25px;
-    background-color:#6c3d8f;
+    background-color:#b0b0b0;
 }
 
 
@@ -1837,7 +1837,7 @@ input[type="radio"] {
 }
 
 #login-logo {
-    background: none repeat scroll 0 0 #572a79;
+    background: none repeat scroll 0 0 #262626;
     color: #fff;
     display: block;
     font-size: 2em;
@@ -5027,14 +5027,14 @@ input[type="radio"] {
 }
 .login-logo-bakImg {
 background: url(/Images/crowdcentz_logo.png);
-    width: 210px;
-    height: 40px;
-    background-size: 100%;
-    /* background-position-x: 125px; */
+    width: 228px;
+    height: 70px;
+    background-size: 70%;
+    background-position-x: 33px;
     margin: auto;
     background-repeat: no-repeat;
-    position:relative;
-    top:34px;
+    position: relative;
+    top: 16px;
 }
 
 .padding23
@@ -5476,11 +5476,9 @@ text-align: center !important;
        
 position: absolute !important;
        
-left: 0 !important;
+
        
-right: 0 !important;
-       
-margin-left:98px !important;
+margin-left:0px !important;
        
 margin-right: auto !important;
        
@@ -5494,12 +5492,11 @@ background-image: url(/Images/crowdcentz_logo.png) !important;
     background-repeat: no-repeat;
     background-size: 47%;
     margin-top: 18px;
-    margin-left: 38px;
+    margin-left: 180px;
     width: 72px;
     height: 18px;
     position: absolute;
-    left:250px;
-    right: 0;
+  
     margin-right: auto;
 }
 .tooltip {

@@ -53,21 +53,46 @@
         <div class="col-md-12 col-lg-12 col-sm-12" style="height: 4px; background-color: black; position: absolute; margin-top: 100px;"></div>
         <div class="container" style="height:100px;">
             <a href="~/" id="header" class="cashlogox my-navigator navbar-brand logoAnchor "></a>
+
+
+
             <a href="~/" id="beta" class="cashbeta"></a>
             <div class="clearfix">
                 <button class="navbar-toggle" data-target=".navbar-ex1-collapse" data-toggle="collapse" type="button">
                     <span class="sr-only">Toggle navigation</span>
-                   
+                    @*<span class="fa fa-bars"></span>*@
                 </button>
-                <div style="display:inline-block;margin-top:20px;">
-                    <div class="pull-left" style="width:100px;height:50px;background-color:white;"><img style="width:100px;height:50px;" src="~/@CompanyLogo" /></div>
-                    <div class="pull-left" style="color:white;margin-left:10px;">
-                        <p style="box-shadow: inset 0 0px 0 white, inset 0 -1px 0 white;margin-bottom:3px;display:inline-block">
-                            Franchise Dashboard for
-                        </p>
-                        <p style="font-size:24px;">@CompanyName</p>
+
+                <div style="display:inline-block;margin-top:20px;width:795px;">
+                    <div style="float:right;">
+                        <div class="pull-left" style="display:inline-block;margin-top:20px;">
+                            <p style="box-shadow: inset 0 0px 0 white, inset 0 -1px 0 white;margin-bottom:3px;display:inline-block;font-size:11px;color:white">
+                                Franchise Dashboard
+                            </p>
+                            <p style="font-size:16px;color:white;">@CompanyName</p>
+                        </div>
+                        <div class="pull-left" style="color:white;margin-left: 10px;margin-top: 12px;margin-right: 9px;"><img style="width:87px;height:41px;    background-color: white; border: 1px solid white;" src="~/@CompanyLogo" /></div>
                     </div>
                 </div>
+                <div class="nav-no-collapse navbar-left pull-left hidden-sm hidden-xs" style="margin-top:23px;">
+                    @*<span style="font-size: 3em;color:white;padding-left:200px;">Targeting Material</span>*@
+                    <ul class="nav navbar-nav pull-left">
+                        <li>
+                            @if (!User.IsInRole("User"))
+                            {
+                                @*<a class="btn" id="make-small-nav">
+                                <i class="fa fa-bars"></i>
+                            </a>*@
+                            }
+                            else
+                            {
+                                //  classes = "removeMenuMargin";
+                                classesMenu = "displayNone";
+                            }
+                        </li>
+                    </ul>
+                </div>
+
 
                 <div class="nav-no-collapse pull-right" id="header-nav" style="margin-top:23px;">
 
@@ -95,13 +120,13 @@
                             </a>
                             <ul class="dropdown-menu loginMenu">
                                 <li><a href="">Role : @RoleName</a></li>
-                              
+
                                 <li id="companyProfileBinding"><a data-bind="click:showCompanyProfileDialog">Marketing profile/logo</a></li>
                                 <li id="userProfileBinding">
                                     <a data-bind="click:showUserProfileDialog">User Profile</a>
                                     <a data-bind="click:ChangePassword">Change Password</a>
                                 </li>
-                                
+
                                 <li><a href="~/Account/LogOff"><i class="fa fa-power-off"></i>Logout</a></li>
                             </ul>
                         </li>

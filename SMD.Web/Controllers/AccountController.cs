@@ -531,7 +531,7 @@ namespace SMD.MIS.Controllers
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
             if (loginInfo == null)
             {
-                return RedirectToAction("LoginExternalFailed");
+                return RedirectToAction("ExternalLoginFailure");
             }
 
             // Sign in the user with this external login provider if the user already has a login
@@ -540,8 +540,9 @@ namespace SMD.MIS.Controllers
             {
                 case SignInStatus.Success:
                     
-                        SetupUserClaims(loginInfo.ExternalIdentity);
-                        AuthenticationManager.SignIn(new AuthenticationProperties { IsPersistent = true }, loginInfo.ExternalIdentity);
+                        //SetupUserClaims(loginInfo.ExternalIdentity);
+                        //AuthenticationManager.SignIn(new AuthenticationProperties { IsPersistent = true }, loginInfo.ExternalIdentity);
+                       
                         return RedirectToAction("SelectCompany");
 
                 case SignInStatus.LockedOut:
@@ -586,12 +587,20 @@ namespace SMD.MIS.Controllers
                     result = await UserManager.AddLoginAsync(user.Id, info.Login);
                     if (result.Succeeded)
                     {
+
+                        var addUserToRoleResult = await UserManager.AddToRoleAsync(user.Id, SecurityRoles.EndUser_Admin); // Only Type 'User' Role will be registered from app
+                        if (!addUserToRoleResult.Succeeded)
+                        {
+                            throw new InvalidOperationException(string.Format("Failed to add user to role {0}", SecurityRoles.EndUser_Admin));
+                        }
+
+
                         int CompanyId = companyService.createCompany(user.Id, model.Email, info.DefaultUserName, Guid.NewGuid().ToString());
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                         SetupUserClaims(info.ExternalIdentity);
                         CreateUserAccounts(CompanyId);
                         TransactionManager.UserSignupFreeGiftBalanceTransaction(500, CompanyId);
-                        return RedirectToLocal(returnUrl);
+                        return RedirectToAction("SelectCompany");
                     }
                 }
                 AddErrors(result);
@@ -660,10 +669,11 @@ namespace SMD.MIS.Controllers
 
 
          [HttpGet]
+         [AllowAnonymous]
         public ActionResult SelectCompany()
         {
 
-         
+            //var id = SignInManager.AuthenticationManager.AuthenticationResponseGrant.Identity;
              
 
             List<vw_CompanyUsers> comapnies = manageUserService.GetCompaniesByUserId(User.Identity.GetUserId());
@@ -680,7 +690,7 @@ namespace SMD.MIS.Controllers
             }
             else
             {
-                return RedirectToLocal("");
+                return RedirectToLocal("Login");
             }
         }
 
