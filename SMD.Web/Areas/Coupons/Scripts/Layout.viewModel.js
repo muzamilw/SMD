@@ -363,8 +363,14 @@
                   }),
                 CreateNewBranchLocation = function () {
                     dataService.getCompanyAddress({
-                         success: function (data) {
-                             var newBranchLocation = new model.Branch.CreateBillingAddress(data)
+                        success: function (data) {
+                            //getCitiesDropDown(data)
+                            var city = cities().find(function (city) {
+                                return city.CityId === data.BillingCityId;
+                            });
+                            
+                            var newBranchLocation = new model.Branch.CreateBillingAddress(data);
+                            newBranchLocation.branchCity(city.CityName);
                              selectedBranch(undefined)
                              selectedBranch(newBranchLocation);
                              CodeAddressonMap()
@@ -387,6 +393,7 @@
                     afterBranchSelect = callback;
                     getBranchCategories(viewBranchDialog);
                     getAllCountries();
+                    getCompanyddress();
                     
                 },
                 hideBranchCategoryDialog = function () {
@@ -473,7 +480,7 @@
                               _.each(data, function (Item) {
                                   countries.push(Item);
                               });
-                              getAllCities()
+                             // getAllCities()
 
                           },
                           error: function () {
@@ -497,7 +504,7 @@
                     getCitiesByCountryId = function (data) {
 
                         dataService.getCitiesByCountry(
-                       { countryId: data.BillingCountryId },
+                       { countryId: data.countryId },
                        {
                            success: function (data) {
                                if (data.length > 0) {
@@ -512,6 +519,37 @@
                        });
 
                     },
+                getCitiesDropDown = function (data) {
+
+                    dataService.getCitiesByCountry(
+                   { countryId: data },
+                   {
+                       success: function (data) {
+                           if (data.length > 0) {
+                               cities.removeAll();
+                               ko.utils.arrayPushAll(cities(), data);
+                               cities.valueHasMutated();
+                           }
+                       },
+                       error: function () {
+                           toastr.error("Failed to load Cities.");
+                       }
+                   });
+
+                },
+                getCompanyddress = function ()
+                {
+                    dataService.getCompanyAddress({
+                        success: function (data) {
+                            getCitiesDropDown(data.BillingCountryId);
+                            
+                        },
+                        error: function () {
+                            toastr.error("Failed to load Company Address.");
+                        }
+                    });
+                   
+                },
                 selectCategory = function (category, event) {
 
                     branchCategory()[0].isEditMode(false);
