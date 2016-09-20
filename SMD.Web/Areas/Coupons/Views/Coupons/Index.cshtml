@@ -242,15 +242,20 @@ else
         <div class="row">
             <div class="col-sm-12" style="float: left; margin-bottom:20px;">
                 <br />
-                <span style="font-size: 24px;" class="Theme_standard_clr">Deal Promotions </span><br />
-
-                <span style="font-size: 14px;" class="Theme_subheading-Clr ">Paid offer promotions are listed for whole one calendar month. Submission fee includes unlimited issuing and redemption at all branches. &nbsp; &nbsp; &nbsp; <span class="red bold rightAlign" style="margin-top:-9px;display:none;"> Watch Video <img src="/Images/youtube_play.JPG" height="25px" /> </span>   </span><br />
-            </div>
+                <div>
+                    <span style="font-size: 24px;float:left;" class="Theme_standard_clr">Deal Promotions </span>
+                    <button style="float:right;margin-top:-7px;" class="btn btn-primary" data-bind="click:$root.addNewCampaign">
+                        Create Deal
+                    </button>
+                    <div style="clear:both;"></div>
+                </div>
+                <br />
+</div>
         </div>
 
         <div class="row">
             <form data-bind="submit: $root.getCampaignByFilter">
-                <div class="col-sm-3" style="float:left;">
+                <div class="col-sm-2" style="float:left;">
 
                     <div class="filter-block" style="margin-right: -10px">
                         <div class="form-group ">
@@ -265,7 +270,7 @@ else
 
                 </div>
 
-                <div class="col-sm-3" style="float:left;">
+                <div class="col-sm-2" style="float:left;">
                     <select class="form-control" style="float:right;height:36px;">
                         <option value="0">All Value</option>
 
@@ -273,9 +278,9 @@ else
                 </div>
             </form>
             <div class="col-sm-3" style="float:right;margin-top:2px; text-align:right">
-                <button class="btn btn-primary" data-bind="click:$root.addNewCampaign">
+                @*<button class="btn btn-primary" data-bind="click:$root.addNewCampaign">
                     Create Deal
-                </button>
+                </button>*@
             </div>
             <div class="clearfix">
 

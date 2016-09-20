@@ -130,7 +130,7 @@ namespace SMD.Repository.Repositories
         }
         public Company GetCompanyById()
         {
-            return DbSet.Where(g => g.CompanyId == CompanyId).SingleOrDefault();
+            return DbSet. Where(g => g.CompanyId == CompanyId).SingleOrDefault();
         }
         #endregion
     }

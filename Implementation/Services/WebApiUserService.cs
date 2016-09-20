@@ -1521,6 +1521,7 @@ namespace SMD.Implementation.Services
             return new UserProfileBaseResponseModel
             {
                Countries = countryRepository.GetAllCountries().ToList(),
+               Cities =cityRepository.GetAllCities().ToList(),
                Industries = industryRepository.GetAll().ToList(),
                Educations = educationRepository.GetAllEducations().ToList(),
                UserRoles =  this.RoleManager.Roles.Where(g => g.Id.StartsWith("cust")).ToList() //   manageUserRepository.getUserRoles().ToList()

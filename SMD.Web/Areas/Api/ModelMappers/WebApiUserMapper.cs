@@ -201,6 +201,7 @@ namespace SMD.MIS.Areas.Api.ModelMappers
             return new UserProfileBaseResponse
             {
                 CountryDropdowns = source.Countries.Select(country => country.CreateFrom()),
+                CityDropDowns = source.Cities.Select(city=>city.CreateFrom()),
                 IndusteryDropdowns = source.Industries.Select(industery => industery.CreateForDd()),
                 EducationDropdowns = source.Educations.Select(edu => edu.CreateFromDd()),
                 UserRoles = source.UserRoles.Select(role => role.CreateFromDd()),
