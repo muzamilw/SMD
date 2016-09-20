@@ -54,7 +54,7 @@
 }
     </style>
 </head>
-<body>
+
       <form id="form1" runat="server">
           <div runat="server" id="ShowDateSelector" visible="false">Date Range 
             <input class="datefield form-control" data-val="true"  data-val-required="Date is required" 

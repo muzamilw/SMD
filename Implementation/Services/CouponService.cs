@@ -507,12 +507,12 @@ namespace SMD.Implementation.Services
 
               List<Account> accounts = _accountRepository.GetByUserId(UserId);
 
-              var userVirtualAccount = accounts.Where(g => g.AccountType == (int)AccountType.VirtualAccount).FirstOrDefault();
+              //var userVirtualAccount = accounts.Where(g => g.AccountType == (int)AccountType.VirtualAccount).FirstOrDefault();
               //if (PurchaseAmount < userVirtualAccount.AccountBalance)
               //{
 
                   //Update Accounts
-                  TransactionManager.CouponPurchaseTransaction(CouponId, PurchaseAmount, userVirtualAccount.CompanyId.Value);
+                  //TransactionManager.CouponPurchaseTransaction(CouponId, PurchaseAmount, userVirtualAccount.CompanyId.Value);
 
 
                   //enter the entry for purchased coupon,
