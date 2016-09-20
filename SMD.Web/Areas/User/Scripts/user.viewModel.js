@@ -192,7 +192,11 @@ define("user/user.viewModel",
                                     roles.removeAll();
                                     ko.utils.arrayPushAll(roles(), baseDataFromServer.UserRoles);
                                     roles.valueHasMutated();
+
+                                    
                                 }
+
+                                
 
                                 // Get Profile When Base data is loaded 
                                 //if (isUserEdit() == true)
@@ -401,6 +405,7 @@ define("user/user.viewModel",
                             if (view.bindingRoot != undefined) {
                                 getBasedata();
                                 getManagedUsers();
+                                
                             }
                         }
 
