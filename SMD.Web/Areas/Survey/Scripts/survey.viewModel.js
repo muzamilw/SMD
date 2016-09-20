@@ -47,6 +47,7 @@ define("survey/survey.viewModel",
                     ageRange = ko.observableArray([]),
                     //audience reach
                     reachedAudience = ko.observable(0),
+                    isNewCampaign = ko.observable(false),
                     //total audience
                     totalAudience = ko.observable(0),
                     selectedQuestionCountryList = ko.observableArray([]),
@@ -706,6 +707,58 @@ define("survey/survey.viewModel",
                         }
                         
                     },
+
+                     SaveAsDraft = function ()
+                     {
+                         if (selectedQuestion().isValid()) {
+
+                             if (ValidateSurvey() == true) {
+
+                                 if (reachedAudience() > 0) {
+
+                                     if (userBaseData().isStripeIntegrated == true) {
+                                         stripeChargeCustomer.show(function () {
+                                             userBaseData().isStripeIntegrated = false;
+                                             saveSurveyQuestion(2);
+                                         }, 2000, 'Enter your details');
+                                     } else {
+                                         saveSurveyQuestion(1);
+                                     }
+                                 } else {
+                                     toastr.error("You have no audience against the specified criteria please broad your audience definition.");
+                                 }
+
+                             }
+                             else {
+
+                                 if (errorList().length > 0) {
+
+                                     ko.utils.arrayForEach(errorList(), function (errorList) {
+
+                                         toastr.error(errorList.name);
+                                     });
+                                 }
+                             }
+
+                         }
+                         else {
+
+
+
+                             if (isEditorVisible()) {
+                                 selectedQuestion().errors.showAllMessages();
+
+                                 toastr.error("Please fill the required feilds to continue.");
+                                 if (errorList().length > 0) {
+                                     $.each(errorList(), function (key, value) {
+                                         toastr.error(value);
+                                     });
+                                 }
+                             }
+
+                         }
+
+                     },
                    // submit  survey question for approval
                     onSubmitSurveyQuestion = function () {
                        
@@ -1243,7 +1296,9 @@ define("survey/survey.viewModel",
                     HeaderText: HeaderText,
                     StatusValue: StatusValue,
                     getUrlVars:getUrlVars,
-                    isfMode:isfMode
+                    isfMode: isfMode,
+                    isNewCampaign: isNewCampaign,
+                    SaveAsDraft: SaveAsDraft
                 };
             })()
         };

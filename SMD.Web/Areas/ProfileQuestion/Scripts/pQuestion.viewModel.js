@@ -35,6 +35,7 @@ define("pQuestion/pQuestion.viewModel",
                     GetAllLocationList = ko.observableArray([]),
                     selectedLocationLat = ko.observable(0),
                     genderppc = ko.observable(),
+                    isNewCampaign = ko.observable(false),
                     myQuizQuestions = ko.observableArray([]),
                     profileQuestionList = ko.observable([]),
                     selectedLocation = ko.observable(),
@@ -298,6 +299,10 @@ define("pQuestion/pQuestion.viewModel",
                     addNewProfileQuestion = function () {
                         $("#panelArea,#topArea").css("display", "none");
                         HeaderText("New Survey Question");
+
+                        isTerminateBtnVisible(false);
+                        isNewCampaign(true);
+                        isShowArchiveBtn(false);
 
                         canSubmitForApproval(true);
                         selectedQuestion(new model.question());
@@ -676,7 +681,10 @@ define("pQuestion/pQuestion.viewModel",
 
                         onSaveProfileQuestion(2);
                     },
-
+                    SaveAsDraft = function ()
+                    {
+                        onSaveProfileQuestion(1);
+                    },
                     onSaveProfileQuestion = function (mode) {
                         
                         if (!doBeforeSave()) {
@@ -690,10 +698,9 @@ define("pQuestion/pQuestion.viewModel",
                                 serverAnswers.push(item().convertToServerData());
                             }
                         });
-                        if (mode == 2)
-                        {
-                            selectedQuestion().status(2);
-                        }
+                        
+                        selectedQuestion().status(mode);
+                        
 
                      
                         var serverQuestion = selectedQuestion().convertToServerData();
@@ -1587,7 +1594,9 @@ define("pQuestion/pQuestion.viewModel",
                     onEditCriteria: onEditCriteria,
                     updateSurveyCriteria: updateSurveyCriteria,
                     updateProfileQuestion: updateProfileQuestion,
-                    totalPrice: totalPrice
+                    totalPrice: totalPrice,
+                    isNewCampaign: isNewCampaign,
+                    SaveAsDraft: SaveAsDraft
                 };
             })()
         };

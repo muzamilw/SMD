@@ -81,7 +81,7 @@ h1 small, h2 small, h3 small, h1 .small, h2 .small, h3 .small {
     -webkit-transition: border-color 0.1s ease-in-out 0s,background-color 0.1s ease-in-out 0s;
     transition: border-color 0.1s ease-in-out 0s,background-color 0.1s ease-in-out 0s;
     outline: none;
-    font-family:Neue Helvetica Bold!important;
+    
 }
 .headingFontFamily {
     font-family:Neue Helvetica Medium!important;
