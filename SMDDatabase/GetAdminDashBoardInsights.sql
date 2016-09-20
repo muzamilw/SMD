@@ -62,7 +62,7 @@ from
 		group by DATEADD(MONTH,DATEDIFF(MONTH, 0, sq.ApprovalDate), 0) ,  c.CountryCode
 
 		union
-		select 7 as ordr,   count(pq.PQID) stats, c.CountryCode , (case when month( DATEADD(MONTH,DATEDIFF(MONTH, 0, pq.ApprovalDate), 0)) = month(getdate()) then 'current' else 'prev' end) pMonth,'Profile Question Answered' rectype
+		select 7 as ordr,   count(pq.PQID) stats, c.CountryCode , (case when month( DATEADD(MONTH,DATEDIFF(MONTH, 0, pq.ApprovalDate), 0)) = month(getdate()) then 'current' else 'prev' end) pMonth,'Survey question Campaigns' rectype
 		from ProfileQuestion pq
 		inner join Country c on pq.CountryId = c.CountryID
 		where pq.ApprovalDate > =  DATEADD(DAY,1,EOMONTH(CURRENT_TIMESTAMP,-2)) 
@@ -207,7 +207,7 @@ from
 
 		union
 
-		select 20 as ordr,   count(pqua.PQUAnswerID) stats, c.CountryCode , (case when month( DATEADD(MONTH,DATEDIFF(MONTH, 0, pqua.AnswerDateTime), 0)) = month(getdate()) then 'current' else 'prev' end) pMonth,'Survey Question Answered' rectype
+		select 20 as ordr,   count(pqua.PQUAnswerID) stats, c.CountryCode , (case when month( DATEADD(MONTH,DATEDIFF(MONTH, 0, pqua.AnswerDateTime), 0)) = month(getdate()) then 'current' else 'prev' end) pMonth,'Survey Questions Answered' rectype
 		from ProfileQuestionUserAnswer pqua
 		inner join Company co on pqua.CompanyId = co.CompanyId
 		inner join Country c on co.CountryId = c.CountryID

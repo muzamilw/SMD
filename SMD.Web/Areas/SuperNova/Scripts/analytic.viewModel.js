@@ -66,7 +66,379 @@ define("analytic/analytic.viewModel",
                                 success: function (data) {
 								
 									for(var i=0;i<data.length;i++){
-										
+										if((data[i].ordr ==1) && data[i].pMonth == "current" ){
+											DashboardInsightsData()[0].usC(data[i].us != null ? data[i].us:0);
+											DashboardInsightsData()[0].ukC(data[i].uk != null ? data[i].uk:0);
+											DashboardInsightsData()[0].caC(data[i].ca!= null ? data[i].ca:0);
+											DashboardInsightsData()[0].auC(data[i].au != null ? data[i].au:0);
+											DashboardInsightsData()[0].aeC(data[i].ae != null ? data[i].ae:0);
+										}else if((data[i].ordr ==1) && data[i].pMonth == "prev" ){
+											DashboardInsightsData()[0].usL(data[i].us != null ? data[i].us:0);
+											DashboardInsightsData()[0].ukL(data[i].uk != null ? data[i].uk:0);
+											DashboardInsightsData()[0].caL(data[i].ca!= null ? data[i].ca:0);
+											DashboardInsightsData()[0].auL(data[i].au != null ? data[i].au:0);
+											DashboardInsightsData()[0].aeL(data[i].ae != null ? data[i].ae:0);
+										}else if((data[i].ordr ==2) && data[i].pMonth == "current" ){
+											DashboardInsightsData()[1].usC(data[i].us != null ? data[i].us:0);
+											DashboardInsightsData()[1].ukC(data[i].uk != null ? data[i].uk:0);
+											DashboardInsightsData()[1].caC(data[i].ca!= null ? data[i].ca:0);
+											DashboardInsightsData()[1].auC(data[i].au != null ? data[i].au:0);
+											DashboardInsightsData()[1].aeC(data[i].ae != null ? data[i].ae:0);
+										}else if((data[i].ordr ==2) && data[i].pMonth == "prev" ){
+											DashboardInsightsData()[1].usL(data[i].us != null ? data[i].us:0);
+											DashboardInsightsData()[1].ukL(data[i].uk != null ? data[i].uk:0);
+											DashboardInsightsData()[1].caL(data[i].ca!= null ? data[i].ca:0);
+											DashboardInsightsData()[1].auL(data[i].au != null ? data[i].au:0);
+											DashboardInsightsData()[1].aeL(data[i].ae != null ? data[i].ae:0);
+										}else if((data[i].ordr ==3) && data[i].pMonth == "current" ){
+											DashboardInsightsData()[5].usC(data[i].us != null ? data[i].us:0);
+											DashboardInsightsData()[5].ukC(data[i].uk != null ? data[i].uk:0);
+											DashboardInsightsData()[5].caC(data[i].ca!= null ? data[i].ca:0);
+											DashboardInsightsData()[5].auC(data[i].au != null ? data[i].au:0);
+											DashboardInsightsData()[5].aeC(data[i].ae != null ? data[i].ae:0);
+										}else if((data[i].ordr ==3) && data[i].pMonth == "prev" ){
+											DashboardInsightsData()[5].usL(data[i].us != null ? data[i].us:0);
+											DashboardInsightsData()[5].ukL(data[i].uk != null ? data[i].uk:0);
+											DashboardInsightsData()[5].caL(data[i].ca!= null ? data[i].ca:0);
+											DashboardInsightsData()[5].auL(data[i].au != null ? data[i].au:0);
+											DashboardInsightsData()[5].aeL(data[i].ae != null ? data[i].ae:0);
+										}else if((data[i].ordr ==4) && data[i].pMonth == "current" ){
+											DashboardInsightsData()[6].usC(data[i].us != null ? data[i].us:0);
+											DashboardInsightsData()[6].ukC(data[i].uk != null ? data[i].uk:0);
+											DashboardInsightsData()[6].caC(data[i].ca!= null ? data[i].ca:0);
+											DashboardInsightsData()[6].auC(data[i].au != null ? data[i].au:0);
+											DashboardInsightsData()[6].aeC(data[i].ae != null ? data[i].ae:0);
+										}else if((data[i].ordr ==4) && data[i].pMonth == "prev" ){
+											DashboardInsightsData()[6].usL(data[i].us != null ? data[i].us:0);
+											DashboardInsightsData()[6].ukL(data[i].uk != null ? data[i].uk:0);
+											DashboardInsightsData()[6].caL(data[i].ca!= null ? data[i].ca:0);
+											DashboardInsightsData()[6].auL(data[i].au != null ? data[i].au:0);
+											DashboardInsightsData()[6].aeL(data[i].ae != null ? data[i].ae:0);
+										}else if((data[i].ordr ==5) && data[i].pMonth == "current" ){
+											DashboardInsightsData()[4].usC(data[i].us != null ? data[i].us:0);
+											DashboardInsightsData()[4].ukC(data[i].uk != null ? data[i].uk:0);
+											DashboardInsightsData()[4].caC(data[i].ca!= null ? data[i].ca:0);
+											DashboardInsightsData()[4].auC(data[i].au != null ? data[i].au:0);
+											DashboardInsightsData()[4].aeC(data[i].ae != null ? data[i].ae:0);
+										}else if((data[i].ordr ==5) && data[i].pMonth == "prev" ){
+											DashboardInsightsData()[4].usL(data[i].us != null ? data[i].us:0);
+											DashboardInsightsData()[4].ukL(data[i].uk != null ? data[i].uk:0);
+											DashboardInsightsData()[4].caL(data[i].ca!= null ? data[i].ca:0);
+											DashboardInsightsData()[4].auL(data[i].au != null ? data[i].au:0);
+											DashboardInsightsData()[4].aeL(data[i].ae != null ? data[i].ae:0);
+										}else if((data[i].ordr ==6) && data[i].pMonth == "current" ){
+											DashboardInsightsData()[7].usC(data[i].us != null ? data[i].us:0);
+											DashboardInsightsData()[7].ukC(data[i].uk != null ? data[i].uk:0);
+											DashboardInsightsData()[7].caC(data[i].ca!= null ? data[i].ca:0);
+											DashboardInsightsData()[7].auC(data[i].au != null ? data[i].au:0);
+											DashboardInsightsData()[7].aeC(data[i].ae != null ? data[i].ae:0);
+										}else if((data[i].ordr ==6) && data[i].pMonth == "prev" ){
+											DashboardInsightsData()[7].usL(data[i].us != null ? data[i].us:0);
+											DashboardInsightsData()[7].ukL(data[i].uk != null ? data[i].uk:0);
+											DashboardInsightsData()[7].caL(data[i].ca!= null ? data[i].ca:0);
+											DashboardInsightsData()[7].auL(data[i].au != null ? data[i].au:0);
+											DashboardInsightsData()[7].aeL(data[i].ae != null ? data[i].ae:0);
+										}else if((data[i].ordr ==7) && data[i].pMonth == "current" ){
+											DashboardInsightsData()[8].usC(data[i].us != null ? data[i].us:0);
+											DashboardInsightsData()[8].ukC(data[i].uk != null ? data[i].uk:0);
+											DashboardInsightsData()[8].caC(data[i].ca!= null ? data[i].ca:0);
+											DashboardInsightsData()[8].auC(data[i].au != null ? data[i].au:0);
+											DashboardInsightsData()[8].aeC(data[i].ae != null ? data[i].ae:0);
+										}else if((data[i].ordr ==7) && data[i].pMonth == "prev" ){
+											DashboardInsightsData()[8].usL(data[i].us != null ? data[i].us:0);
+											DashboardInsightsData()[8].ukL(data[i].uk != null ? data[i].uk:0);
+											DashboardInsightsData()[8].caL(data[i].ca!= null ? data[i].ca:0);
+											DashboardInsightsData()[8].auL(data[i].au != null ? data[i].au:0);
+											DashboardInsightsData()[8].aeL(data[i].ae != null ? data[i].ae:0);
+										}else if((data[i].ordr ==8) && data[i].pMonth == "current" ){
+											DashboardInsightsData()[12].usC(data[i].us != null ? data[i].us:0);
+											DashboardInsightsData()[12].ukC(data[i].uk != null ? data[i].uk:0);
+											DashboardInsightsData()[12].caC(data[i].ca!= null ? data[i].ca:0);
+											DashboardInsightsData()[12].auC(data[i].au != null ? data[i].au:0);
+											DashboardInsightsData()[12].aeC(data[i].ae != null ? data[i].ae:0);
+										}else if((data[i].ordr ==8) && data[i].pMonth == "prev" ){
+											DashboardInsightsData()[12].usL(data[i].us != null ? data[i].us:0);
+											DashboardInsightsData()[12].ukL(data[i].uk != null ? data[i].uk:0);
+											DashboardInsightsData()[12].caL(data[i].ca!= null ? data[i].ca:0);
+											DashboardInsightsData()[12].auL(data[i].au != null ? data[i].au:0);
+											DashboardInsightsData()[12].aeL(data[i].ae != null ? data[i].ae:0);
+										}else if((data[i].ordr ==9) && data[i].pMonth == "current" ){
+											DashboardInsightsData()[13].usC(data[i].us != null ? data[i].us:0);
+											DashboardInsightsData()[13].ukC(data[i].uk != null ? data[i].uk:0);
+											DashboardInsightsData()[13].caC(data[i].ca!= null ? data[i].ca:0);
+											DashboardInsightsData()[13].auC(data[i].au != null ? data[i].au:0);
+											DashboardInsightsData()[13].aeC(data[i].ae != null ? data[i].ae:0);
+										}else if((data[i].ordr ==9) && data[i].pMonth == "prev" ){
+											DashboardInsightsData()[13].usL(data[i].us != null ? data[i].us:0);
+											DashboardInsightsData()[13].ukL(data[i].uk != null ? data[i].uk:0);
+											DashboardInsightsData()[13].caL(data[i].ca!= null ? data[i].ca:0);
+											DashboardInsightsData()[13].auL(data[i].au != null ? data[i].au:0);
+											DashboardInsightsData()[13].aeL(data[i].ae != null ? data[i].ae:0);
+										}else if((data[i].ordr ==10) && data[i].pMonth == "current" ){
+											DashboardInsightsData()[11].usC(data[i].us != null ? data[i].us:0);
+											DashboardInsightsData()[11].ukC(data[i].uk != null ? data[i].uk:0);
+											DashboardInsightsData()[11].caC(data[i].ca!= null ? data[i].ca:0);
+											DashboardInsightsData()[11].auC(data[i].au != null ? data[i].au:0);
+											DashboardInsightsData()[11].aeC(data[i].ae != null ? data[i].ae:0);
+										}else if((data[i].ordr ==10) && data[i].pMonth == "prev" ){
+											DashboardInsightsData()[11].usL(data[i].us != null ? data[i].us:0);
+											DashboardInsightsData()[11].ukL(data[i].uk != null ? data[i].uk:0);
+											DashboardInsightsData()[11].caL(data[i].ca!= null ? data[i].ca:0);
+											DashboardInsightsData()[11].auL(data[i].au != null ? data[i].au:0);
+											DashboardInsightsData()[11].aeL(data[i].ae != null ? data[i].ae:0);
+										}else if((data[i].ordr ==11) && data[i].pMonth == "current" ){
+											DashboardInsightsData()[14].usC(data[i].us != null ? data[i].us:0);
+											DashboardInsightsData()[14].ukC(data[i].uk != null ? data[i].uk:0);
+											DashboardInsightsData()[14].caC(data[i].ca!= null ? data[i].ca:0);
+											DashboardInsightsData()[14].auC(data[i].au != null ? data[i].au:0);
+											DashboardInsightsData()[14].aeC(data[i].ae != null ? data[i].ae:0);
+										}else if((data[i].ordr ==11) && data[i].pMonth == "prev" ){
+											DashboardInsightsData()[14].usL(data[i].us != null ? data[i].us:0);
+											DashboardInsightsData()[14].ukL(data[i].uk != null ? data[i].uk:0);
+											DashboardInsightsData()[14].caL(data[i].ca!= null ? data[i].ca:0);
+											DashboardInsightsData()[14].auL(data[i].au != null ? data[i].au:0);
+											DashboardInsightsData()[14].aeL(data[i].ae != null ? data[i].ae:0);
+										}else if((data[i].ordr ==12) && data[i].pMonth == "current" ){
+											DashboardInsightsData()[15].usC(data[i].us != null ? data[i].us:0);
+											DashboardInsightsData()[15].ukC(data[i].uk != null ? data[i].uk:0);
+											DashboardInsightsData()[15].caC(data[i].ca!= null ? data[i].ca:0);
+											DashboardInsightsData()[15].auC(data[i].au != null ? data[i].au:0);
+											DashboardInsightsData()[15].aeC(data[i].ae != null ? data[i].ae:0);
+										}else if((data[i].ordr ==12) && data[i].pMonth == "prev" ){
+											DashboardInsightsData()[15].usL(data[i].us != null ? data[i].us:0);
+											DashboardInsightsData()[15].ukL(data[i].uk != null ? data[i].uk:0);
+											DashboardInsightsData()[15].caL(data[i].ca!= null ? data[i].ca:0);
+											DashboardInsightsData()[15].auL(data[i].au != null ? data[i].au:0);
+											DashboardInsightsData()[15].aeL(data[i].ae != null ? data[i].ae:0);
+										}else if((data[i].ordr ==13) && data[i].pMonth == "current" ){
+											DashboardInsightsData()[18].usC(data[i].us != null ? data[i].us:0);
+											DashboardInsightsData()[18].ukC(data[i].uk != null ? data[i].uk:0);
+											DashboardInsightsData()[18].caC(data[i].ca!= null ? data[i].ca:0);
+											DashboardInsightsData()[18].auC(data[i].au != null ? data[i].au:0);
+											DashboardInsightsData()[18].aeC(data[i].ae != null ? data[i].ae:0);
+										}else if((data[i].ordr ==13) && data[i].pMonth == "prev" ){
+											DashboardInsightsData()[18].usL(data[i].us != null ? data[i].us:0);
+											DashboardInsightsData()[18].ukL(data[i].uk != null ? data[i].uk:0);
+											DashboardInsightsData()[18].caL(data[i].ca!= null ? data[i].ca:0);
+											DashboardInsightsData()[18].auL(data[i].au != null ? data[i].au:0);
+											DashboardInsightsData()[18].aeL(data[i].ae != null ? data[i].ae:0);
+										}else if((data[i].ordr ==14) && data[i].pMonth == "current" ){
+											DashboardInsightsData()[19].usC(data[i].us != null ? data[i].us:0);
+											DashboardInsightsData()[19].ukC(data[i].uk != null ? data[i].uk:0);
+											DashboardInsightsData()[19].caC(data[i].ca!= null ? data[i].ca:0);
+											DashboardInsightsData()[19].auC(data[i].au != null ? data[i].au:0);
+											DashboardInsightsData()[19].aeC(data[i].ae != null ? data[i].ae:0);
+										}else if((data[i].ordr ==14) && data[i].pMonth == "prev" ){
+											DashboardInsightsData()[19].usL(data[i].us != null ? data[i].us:0);
+											DashboardInsightsData()[19].ukL(data[i].uk != null ? data[i].uk:0);
+											DashboardInsightsData()[19].caL(data[i].ca!= null ? data[i].ca:0);
+											DashboardInsightsData()[19].auL(data[i].au != null ? data[i].au:0);
+											DashboardInsightsData()[19].aeL(data[i].ae != null ? data[i].ae:0);
+										}else if((data[i].ordr ==15) && data[i].pMonth == "current" ){
+											DashboardInsightsData()[20].usC(data[i].us != null ? data[i].us:0);
+											DashboardInsightsData()[20].ukC(data[i].uk != null ? data[i].uk:0);
+											DashboardInsightsData()[20].caC(data[i].ca!= null ? data[i].ca:0);
+											DashboardInsightsData()[20].auC(data[i].au != null ? data[i].au:0);
+											DashboardInsightsData()[20].aeC(data[i].ae != null ? data[i].ae:0);
+										}else if((data[i].ordr ==15) && data[i].pMonth == "prev" ){
+											DashboardInsightsData()[20].usL(data[i].us != null ? data[i].us:0);
+											DashboardInsightsData()[20].ukL(data[i].uk != null ? data[i].uk:0);
+											DashboardInsightsData()[20].caL(data[i].ca!= null ? data[i].ca:0);
+											DashboardInsightsData()[20].auL(data[i].au != null ? data[i].au:0);
+											DashboardInsightsData()[20].aeL(data[i].ae != null ? data[i].ae:0);
+										}else if((data[i].ordr ==16) && data[i].pMonth == "current" ){
+											DashboardInsightsData()[21].usC(data[i].us != null ? data[i].us:0);
+											DashboardInsightsData()[21].ukC(data[i].uk != null ? data[i].uk:0);
+											DashboardInsightsData()[21].caC(data[i].ca!= null ? data[i].ca:0);
+											DashboardInsightsData()[21].auC(data[i].au != null ? data[i].au:0);
+											DashboardInsightsData()[21].aeC(data[i].ae != null ? data[i].ae:0);
+										}else if((data[i].ordr ==16) && data[i].pMonth == "prev" ){
+											DashboardInsightsData()[21].usL(data[i].us != null ? data[i].us:0);
+											DashboardInsightsData()[21].ukL(data[i].uk != null ? data[i].uk:0);
+											DashboardInsightsData()[21].caL(data[i].ca!= null ? data[i].ca:0);
+											DashboardInsightsData()[21].auL(data[i].au != null ? data[i].au:0);
+											DashboardInsightsData()[21].aeL(data[i].ae != null ? data[i].ae:0);
+										}else if((data[i].ordr ==17) && data[i].pMonth == "current" ){
+											DashboardInsightsData()[22].usC(data[i].us != null ? data[i].us:0);
+											DashboardInsightsData()[22].ukC(data[i].uk != null ? data[i].uk:0);
+											DashboardInsightsData()[22].caC(data[i].ca!= null ? data[i].ca:0);
+											DashboardInsightsData()[22].auC(data[i].au != null ? data[i].au:0);
+											DashboardInsightsData()[22].aeC(data[i].ae != null ? data[i].ae:0);
+										}else if((data[i].ordr ==17) && data[i].pMonth == "prev" ){
+											DashboardInsightsData()[22].usL(data[i].us != null ? data[i].us:0);
+											DashboardInsightsData()[22].ukL(data[i].uk != null ? data[i].uk:0);
+											DashboardInsightsData()[22].caL(data[i].ca!= null ? data[i].ca:0);
+											DashboardInsightsData()[22].auL(data[i].au != null ? data[i].au:0);
+											DashboardInsightsData()[22].aeL(data[i].ae != null ? data[i].ae:0);
+										}else if((data[i].ordr ==18) && data[i].pMonth == "current" ){
+											DashboardInsightsData()[23].usC(data[i].us != null ? data[i].us:0);
+											DashboardInsightsData()[23].ukC(data[i].uk != null ? data[i].uk:0);
+											DashboardInsightsData()[23].caC(data[i].ca!= null ? data[i].ca:0);
+											DashboardInsightsData()[23].auC(data[i].au != null ? data[i].au:0);
+											DashboardInsightsData()[23].aeC(data[i].ae != null ? data[i].ae:0);
+										}else if((data[i].ordr ==18) && data[i].pMonth == "prev" ){
+											DashboardInsightsData()[23].usL(data[i].us != null ? data[i].us:0);
+											DashboardInsightsData()[23].ukL(data[i].uk != null ? data[i].uk:0);
+											DashboardInsightsData()[23].caL(data[i].ca!= null ? data[i].ca:0);
+											DashboardInsightsData()[23].auL(data[i].au != null ? data[i].au:0);
+											DashboardInsightsData()[23].aeL(data[i].ae != null ? data[i].ae:0);
+										}else if((data[i].ordr ==19) && data[i].pMonth == "current" ){
+											DashboardInsightsData()[24].usC(data[i].us != null ? data[i].us:0);
+											DashboardInsightsData()[24].ukC(data[i].uk != null ? data[i].uk:0);
+											DashboardInsightsData()[24].caC(data[i].ca!= null ? data[i].ca:0);
+											DashboardInsightsData()[24].auC(data[i].au != null ? data[i].au:0);
+											DashboardInsightsData()[24].aeC(data[i].ae != null ? data[i].ae:0);
+										}else if((data[i].ordr ==19) && data[i].pMonth == "prev" ){
+											DashboardInsightsData()[24].usL(data[i].us != null ? data[i].us:0);
+											DashboardInsightsData()[24].ukL(data[i].uk != null ? data[i].uk:0);
+											DashboardInsightsData()[24].caL(data[i].ca!= null ? data[i].ca:0);
+											DashboardInsightsData()[24].auL(data[i].au != null ? data[i].au:0);
+											DashboardInsightsData()[24].aeL(data[i].ae != null ? data[i].ae:0);
+										}else if((data[i].ordr ==20) && data[i].pMonth == "current" ){
+											DashboardInsightsData()[25].usC(data[i].us != null ? data[i].us:0);
+											DashboardInsightsData()[25].ukC(data[i].uk != null ? data[i].uk:0);
+											DashboardInsightsData()[25].caC(data[i].ca!= null ? data[i].ca:0);
+											DashboardInsightsData()[25].auC(data[i].au != null ? data[i].au:0);
+											DashboardInsightsData()[25].aeC(data[i].ae != null ? data[i].ae:0);
+										}else if((data[i].ordr ==20) && data[i].pMonth == "prev" ){
+											DashboardInsightsData()[25].usL(data[i].us != null ? data[i].us:0);
+											DashboardInsightsData()[25].ukL(data[i].uk != null ? data[i].uk:0);
+											DashboardInsightsData()[25].caL(data[i].ca!= null ? data[i].ca:0);
+											DashboardInsightsData()[25].auL(data[i].au != null ? data[i].au:0);
+											DashboardInsightsData()[25].aeL(data[i].ae != null ? data[i].ae:0);
+										}else if((data[i].ordr ==21) && data[i].pMonth == "current" ){
+											DashboardInsightsData()[26].usC(data[i].us != null ? data[i].us:0);
+											DashboardInsightsData()[26].ukC(data[i].uk != null ? data[i].uk:0);
+											DashboardInsightsData()[26].caC(data[i].ca!= null ? data[i].ca:0);
+											DashboardInsightsData()[26].auC(data[i].au != null ? data[i].au:0);
+											DashboardInsightsData()[26].aeC(data[i].ae != null ? data[i].ae:0);
+										}else if((data[i].ordr ==21) && data[i].pMonth == "prev" ){
+											DashboardInsightsData()[26].usL(data[i].us != null ? data[i].us:0);
+											DashboardInsightsData()[26].ukL(data[i].uk != null ? data[i].uk:0);
+											DashboardInsightsData()[26].caL(data[i].ca!= null ? data[i].ca:0);
+											DashboardInsightsData()[26].auL(data[i].au != null ? data[i].au:0);
+											DashboardInsightsData()[26].aeL(data[i].ae != null ? data[i].ae:0);
+										}else if((data[i].ordr ==22) && data[i].pMonth == "current" ){
+											DashboardInsightsData()[27].usC(data[i].us != null ? data[i].us:0);
+											DashboardInsightsData()[27].ukC(data[i].uk != null ? data[i].uk:0);
+											DashboardInsightsData()[27].caC(data[i].ca!= null ? data[i].ca:0);
+											DashboardInsightsData()[27].auC(data[i].au != null ? data[i].au:0);
+											DashboardInsightsData()[27].aeC(data[i].ae != null ? data[i].ae:0);
+										}else if((data[i].ordr ==22) && data[i].pMonth == "prev" ){
+											DashboardInsightsData()[27].usL(data[i].us != null ? data[i].us:0);
+											DashboardInsightsData()[27].ukL(data[i].uk != null ? data[i].uk:0);
+											DashboardInsightsData()[27].caL(data[i].ca!= null ? data[i].ca:0);
+											DashboardInsightsData()[27].auL(data[i].au != null ? data[i].au:0);
+											DashboardInsightsData()[27].aeL(data[i].ae != null ? data[i].ae:0);
+										}else if((data[i].ordr ==23) && data[i].pMonth == "current" ){
+											DashboardInsightsData()[28].usC(data[i].us != null ? data[i].us:0);
+											DashboardInsightsData()[28].ukC(data[i].uk != null ? data[i].uk:0);
+											DashboardInsightsData()[28].caC(data[i].ca!= null ? data[i].ca:0);
+											DashboardInsightsData()[28].auC(data[i].au != null ? data[i].au:0);
+											DashboardInsightsData()[28].aeC(data[i].ae != null ? data[i].ae:0);
+										}else if((data[i].ordr ==23) && data[i].pMonth == "prev" ){
+											DashboardInsightsData()[28].usL(data[i].us != null ? data[i].us:0);
+											DashboardInsightsData()[28].ukL(data[i].uk != null ? data[i].uk:0);
+											DashboardInsightsData()[28].caL(data[i].ca!= null ? data[i].ca:0);
+											DashboardInsightsData()[28].auL(data[i].au != null ? data[i].au:0);
+											DashboardInsightsData()[28].aeL(data[i].ae != null ? data[i].ae:0);
+										}else if((data[i].ordr ==24) && data[i].pMonth == "current" ){
+											DashboardInsightsData()[30].usC(data[i].us != null ? data[i].us:0);
+											DashboardInsightsData()[30].ukC(data[i].uk != null ? data[i].uk:0);
+											DashboardInsightsData()[30].caC(data[i].ca!= null ? data[i].ca:0);
+											DashboardInsightsData()[30].auC(data[i].au != null ? data[i].au:0);
+											DashboardInsightsData()[30].aeC(data[i].ae != null ? data[i].ae:0);
+										}else if((data[i].ordr ==24) && data[i].pMonth == "prev" ){
+											DashboardInsightsData()[30].usL(data[i].us != null ? data[i].us:0);
+											DashboardInsightsData()[30].ukL(data[i].uk != null ? data[i].uk:0);
+											DashboardInsightsData()[30].caL(data[i].ca!= null ? data[i].ca:0);
+											DashboardInsightsData()[30].auL(data[i].au != null ? data[i].au:0);
+											DashboardInsightsData()[30].aeL(data[i].ae != null ? data[i].ae:0);
+										}else if((data[i].ordr ==25) && data[i].pMonth == "current" ){
+											DashboardInsightsData()[29].usC(data[i].us != null ? data[i].us:0);
+											DashboardInsightsData()[29].ukC(data[i].uk != null ? data[i].uk:0);
+											DashboardInsightsData()[29].caC(data[i].ca!= null ? data[i].ca:0);
+											DashboardInsightsData()[29].auC(data[i].au != null ? data[i].au:0);
+											DashboardInsightsData()[29].aeC(data[i].ae != null ? data[i].ae:0);
+										}else if((data[i].ordr ==25) && data[i].pMonth == "prev" ){
+											DashboardInsightsData()[29].usL(data[i].us != null ? data[i].us:0);
+											DashboardInsightsData()[29].ukL(data[i].uk != null ? data[i].uk:0);
+											DashboardInsightsData()[29].caL(data[i].ca!= null ? data[i].ca:0);
+											DashboardInsightsData()[29].auL(data[i].au != null ? data[i].au:0);
+											DashboardInsightsData()[29].aeL(data[i].ae != null ? data[i].ae:0);
+										}else if((data[i].ordr ==26) && data[i].pMonth == "current" ){
+											DashboardInsightsData()[33].usC(data[i].us != null ? data[i].us:0);
+											DashboardInsightsData()[33].ukC(data[i].uk != null ? data[i].uk:0);
+											DashboardInsightsData()[33].caC(data[i].ca!= null ? data[i].ca:0);
+											DashboardInsightsData()[33].auC(data[i].au != null ? data[i].au:0);
+											DashboardInsightsData()[33].aeC(data[i].ae != null ? data[i].ae:0);
+										}else if((data[i].ordr ==26) && data[i].pMonth == "prev" ){
+											DashboardInsightsData()[33].usL(data[i].us != null ? data[i].us:0);
+											DashboardInsightsData()[33].ukL(data[i].uk != null ? data[i].uk:0);
+											DashboardInsightsData()[33].caL(data[i].ca!= null ? data[i].ca:0);
+											DashboardInsightsData()[33].auL(data[i].au != null ? data[i].au:0);
+											DashboardInsightsData()[33].aeL(data[i].ae != null ? data[i].ae:0);
+										}else if((data[i].ordr ==27) && data[i].pMonth == "current" ){
+											DashboardInsightsData()[34].usC(data[i].us != null ? data[i].us:0);
+											DashboardInsightsData()[34].ukC(data[i].uk != null ? data[i].uk:0);
+											DashboardInsightsData()[34].caC(data[i].ca!= null ? data[i].ca:0);
+											DashboardInsightsData()[34].auC(data[i].au != null ? data[i].au:0);
+											DashboardInsightsData()[34].aeC(data[i].ae != null ? data[i].ae:0);
+										}else if((data[i].ordr ==27) && data[i].pMonth == "prev" ){
+											DashboardInsightsData()[34].usL(data[i].us != null ? data[i].us:0);
+											DashboardInsightsData()[34].ukL(data[i].uk != null ? data[i].uk:0);
+											DashboardInsightsData()[34].caL(data[i].ca!= null ? data[i].ca:0);
+											DashboardInsightsData()[34].auL(data[i].au != null ? data[i].au:0);
+											DashboardInsightsData()[34].aeL(data[i].ae != null ? data[i].ae:0);
+										}else if((data[i].ordr ==29) && data[i].pMonth == "current" ){
+											DashboardInsightsData()[35].usC(data[i].us != null ? data[i].us:0);
+											DashboardInsightsData()[35].ukC(data[i].uk != null ? data[i].uk:0);
+											DashboardInsightsData()[35].caC(data[i].ca!= null ? data[i].ca:0);
+											DashboardInsightsData()[35].auC(data[i].au != null ? data[i].au:0);
+											DashboardInsightsData()[35].aeC(data[i].ae != null ? data[i].ae:0);
+										}else if((data[i].ordr ==29) && data[i].pMonth == "prev" ){
+											DashboardInsightsData()[35].usL(data[i].us != null ? data[i].us:0);
+											DashboardInsightsData()[35].ukL(data[i].uk != null ? data[i].uk:0);
+											DashboardInsightsData()[35].caL(data[i].ca!= null ? data[i].ca:0);
+											DashboardInsightsData()[35].auL(data[i].au != null ? data[i].au:0);
+											DashboardInsightsData()[35].aeL(data[i].ae != null ? data[i].ae:0);
+										}else if((data[i].ordr ==30) && data[i].pMonth == "current" ){
+											DashboardInsightsData()[36].usC(data[i].us != null ? data[i].us:0);
+											DashboardInsightsData()[36].ukC(data[i].uk != null ? data[i].uk:0);
+											DashboardInsightsData()[36].caC(data[i].ca!= null ? data[i].ca:0);
+											DashboardInsightsData()[36].auC(data[i].au != null ? data[i].au:0);
+											DashboardInsightsData()[36].aeC(data[i].ae != null ? data[i].ae:0);
+										}else if((data[i].ordr ==30) && data[i].pMonth == "prev" ){
+											DashboardInsightsData()[36].usL(data[i].us != null ? data[i].us:0);
+											DashboardInsightsData()[36].ukL(data[i].uk != null ? data[i].uk:0);
+											DashboardInsightsData()[36].caL(data[i].ca!= null ? data[i].ca:0);
+											DashboardInsightsData()[36].auL(data[i].au != null ? data[i].au:0);
+											DashboardInsightsData()[36].aeL(data[i].ae != null ? data[i].ae:0);
+										}else if((data[i].ordr ==31) && data[i].pMonth == "current" ){
+											DashboardInsightsData()[37].usC(data[i].us != null ? data[i].us:0);
+											DashboardInsightsData()[37].ukC(data[i].uk != null ? data[i].uk:0);
+											DashboardInsightsData()[37].caC(data[i].ca!= null ? data[i].ca:0);
+											DashboardInsightsData()[37].auC(data[i].au != null ? data[i].au:0);
+											DashboardInsightsData()[37].aeC(data[i].ae != null ? data[i].ae:0);
+										}else if((data[i].ordr ==31) && data[i].pMonth == "prev" ){
+											DashboardInsightsData()[37].usL(data[i].us != null ? data[i].us:0);
+											DashboardInsightsData()[37].ukL(data[i].uk != null ? data[i].uk:0);
+											DashboardInsightsData()[37].caL(data[i].ca!= null ? data[i].ca:0);
+											DashboardInsightsData()[37].auL(data[i].au != null ? data[i].au:0);
+											DashboardInsightsData()[37].aeL(data[i].ae != null ? data[i].ae:0);
+										}else if((data[i].ordr ==32) && data[i].pMonth == "current" ){
+											DashboardInsightsData()[38].usC(data[i].us != null ? data[i].us:0);
+											DashboardInsightsData()[38].ukC(data[i].uk != null ? data[i].uk:0);
+											DashboardInsightsData()[38].caC(data[i].ca!= null ? data[i].ca:0);
+											DashboardInsightsData()[38].auC(data[i].au != null ? data[i].au:0);
+											DashboardInsightsData()[38].aeC(data[i].ae != null ? data[i].ae:0);
+										}else if((data[i].ordr ==32) && data[i].pMonth == "prev" ){
+											DashboardInsightsData()[38].usL(data[i].us != null ? data[i].us:0);
+											DashboardInsightsData()[38].ukL(data[i].uk != null ? data[i].uk:0);
+											DashboardInsightsData()[38].caL(data[i].ca!= null ? data[i].ca:0);
+											DashboardInsightsData()[38].auL(data[i].au != null ? data[i].au:0);
+											DashboardInsightsData()[38].aeL(data[i].ae != null ? data[i].ae:0);
+										}
 									}
 									
 									for(var i=0;i<DashboardInsightsData().length;i++){
