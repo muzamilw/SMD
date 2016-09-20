@@ -799,9 +799,9 @@ namespace SMD.Implementation.Services
             CompanyNameInviteUser =   manageUserRepository.getCompanyName(out userName, out companyid);
             Muser = userName;
 
-            if ( mode == true)
+            if ( mode == true)//user will have to register and a new user will be created etc and link established,.
                 InviteURL = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/Account/Register?code=" + InvitationCode;
-            else
+            else//simple link acceptance logic since user already exists.
                 InviteURL = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/Account/AcceptInvitation?code=" + InvitationCode;
 
 

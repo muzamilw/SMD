@@ -1,6 +1,6 @@
-﻿
+﻿USE [SMDv2]
 GO
-/****** Object:  StoredProcedure [dbo].[GetAdminDashBoardInsights]    Script Date: 9/20/2016 12:10:34 PM ******/
+/****** Object:  StoredProcedure [dbo].[GetAdminDashBoardInsights]    Script Date: 9/20/2016 4:10:00 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -10,7 +10,7 @@ ALTER PROCEDURE [dbo].[GetAdminDashBoardInsights]
 
 as
 Begin
-select rectype, pMonth, us, uk, ca, au, ae
+select ordr, rectype, pMonth, us, uk, ca, au, ae
 from 
 (
   select ordr, stats, countrycode, rectype, pMonth

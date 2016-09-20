@@ -11,6 +11,7 @@
 
                 branchCategory = ko.observableArray([]),
                 selectedBranch = ko.observable(),
+                selectedBranchTemp = ko.observable(),
                 branchDdlist = ko.observableArray([]),
                 selectedCategory = ko.observable(),
                 countries = ko.observableArray([]),
@@ -64,13 +65,10 @@
                         {
                             success: function (data) {
                                 var branch = new model.Branch.Create(data);
-                                selectedBranch(branch);
-                                isSaveChangesEnable(true);
-                                isdeleteEnable(true);
-                                isCodeAddressEdit(true)
-                                initializeGEO();
-                                codeAddress();
-                                isMapVisible(true);
+                                selectedBranchTemp(branch);
+
+                                getCitiesDropDown(branch.countryId());
+                                
 
                                 //}
 
@@ -80,6 +78,15 @@
                             }
                         });
 
+                },
+                triggerGoogleMapSelection = function()
+                {
+                    isSaveChangesEnable(true);
+                    isdeleteEnable(true);
+                    isCodeAddressEdit(true)
+                    initializeGEO();
+                    codeAddress();
+                    isMapVisible(true);
                 },
                 SaveChanges = function () {
 
@@ -542,6 +549,14 @@
                                cities.removeAll();
                                ko.utils.arrayPushAll(cities(), data);
                                cities.valueHasMutated();
+
+
+                               if (  selectedBranchTemp() != null)
+                               {
+                                   selectedBranch(selectedBranchTemp());
+                                   triggerGoogleMapSelection();
+
+                               }
                            }
                        },
                        error: function () {
