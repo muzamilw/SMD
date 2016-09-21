@@ -487,7 +487,7 @@
 
                                             </div>
                                             <div class="col-lg-6">
-                                                <button class="btn  btn-success" id="saveBtn" data-bind="click:$root.onApproveCoupon">Approve</button>
+                                                <button class="btn  btn-success" id="saveBtn" data-bind="click:$root.onApproveCoupon,visible:rejectedReason()==null ||rejectedReason()==''">Approve</button>
                                                 <button class="btn " id="saveBtn" data-bind="click:$root.onRejectCoupon,enable: $root.hasChangesOnCoupon, css: { ' btn-danger': $root.hasChangesOnCoupon }">Reject</button>
                                             </div>
                                         </div>
