@@ -299,7 +299,7 @@ define("pQuestion/pQuestion.viewModel",
                     addNewProfileQuestion = function () {
                         $("#panelArea,#topArea").css("display", "none");
                         HeaderText("New Survey Question");
-
+                        StatusText("Draft");
                         isTerminateBtnVisible(false);
                         isNewCampaign(true);
                         isShowArchiveBtn(false);

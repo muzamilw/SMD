@@ -860,7 +860,7 @@ else
                         </div>
                         <div class="col-xs-12" style="line-height: 3;">
                             @*<span class=" pull-left">Minimum ad click :</span>*@
-                            <span class="pull-right" data-bind="text: '£' + ($root.pricePerclick().toFixed(2) * $root.reachedAudience() )"></span>
+                            <span style="display:none;" class="pull-right" data-bind="text: '£' + ($root.pricePerclick().toFixed(2) * $root.reachedAudience() )"></span>
                             <div class="clearfix"> </div>
                             <span class=" pull-left" style="color:#3DD2B5;">Estimated reach:</span>
                             <span class="pull-right" style="color:#3DD2B5;" data-bind="text:$root.reachedAudience()">0</span>
