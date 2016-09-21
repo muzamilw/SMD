@@ -523,8 +523,8 @@ define("analytic/analytic.viewModel",
 						analyticFromdate().setMonth(analyticFromdate().getMonth()-1)
                         ko.applyBindings(view.viewModel, view.bindingRoot);
 						intializeDashboardInsightsData();
-						//getAnalytic();
-						//getRevenueOverTime();
+						getAnalytic();
+						getRevenueOverTime();
                     };
                 return {
 
