@@ -63,6 +63,7 @@
     <None Include="GetUserProfileQuestions.sql" />
     <None Include="GetUserSurveys.sql" />
     <None Include="SMDChanges2.sql" />
+    <None Include="GetActiveVSNewUsers.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="GetRevenueOverTime.sql" />
