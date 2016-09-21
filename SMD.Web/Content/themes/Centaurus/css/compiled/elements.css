@@ -5459,7 +5459,9 @@ color:red !important;
     color:black!important;
 }
 
-
+.CloseBtn {
+    width:105px!important;
+}
 
 
 .cashlogox{

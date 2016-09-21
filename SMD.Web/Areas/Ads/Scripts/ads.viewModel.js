@@ -88,9 +88,10 @@ define("ads/ads.viewModel",
                     totalAudience = ko.observable(0),
                     // audience reach mode 
                     audienceReachMode = ko.observable("1"),
-                    MainHeading = ko.observable("Video Ad campaigns"),
+                    MainHeading = ko.observable("Video ads - Upload a video and target audiences near you."),
                     uploadTitle = ko.observable("Upload Video"),
-                    SubHeading = ko.observable("Show video commercials to target audiences, increase brand awareness, run surveys and your list deals."),
+                    SubHeading = ko.observable("Reward audiences 50% of your ‘ad click’ Increase branding and drive people to your web site with one ‘ad click’ Show a video ad, ask a reinforcing question and show your deals.");
+
                     tab1Heading = ko.observable("Upload a 10-20 second video ad.");
                 tab2Heading = ko.observable(" Define the target audience to deliver video ad.");
                 tab4SubHeading = ko.observable("Select your ad campaign delivery mode:");
@@ -269,6 +270,13 @@ define("ads/ads.viewModel",
                 // Add new Profile Question
             addNewCampaign = function () {
                 $("#panelArea").css("display", "none");
+
+                $(".hideInCoupons").css("display", "none");
+
+                $("#MarketobjDiv").css("display", "none");
+                $("#topArea").css("display", "none");
+                $("#headlabel").css("display", "none");
+
                 //if (isDisplayCouponsAds() == false) {
                 //    isWelcomeScreenVisible(true);
                 //} else {
@@ -350,6 +358,7 @@ define("ads/ads.viewModel",
               // showMainMenu();
            },
             closeNewCampaignDialog = function () {
+           
                 if (campaignModel().hasChanges()) {    //&& (campaignModel().Status() == null || campaignModel().Status() == 1)
                 confirmation.messageText("Do you want to save changes?");
                 confirmation.afterProceed(function () {
@@ -373,6 +382,10 @@ define("ads/ads.viewModel",
                     $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign").css("display", "none");
                     $("#btnSubmitForApproval,#saveBtn,.table-link").css("display", "inline-block");
                     $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign,#btnStopAndTerminate,#btnCopyCampaign").removeAttr('disabled');
+
+                    $("#headlabel").css("display", "block");
+
+                    $("#panelArea").css("display", "block");
                     //show the main menu;
                     showMainMenu();
                    
@@ -393,6 +406,12 @@ define("ads/ads.viewModel",
                     //show the main menu;
                     showMainMenu();
                     $("input,button,textarea,a,select").removeAttr('disabled');
+                    $("#headlabel").css("display", "block");
+
+                    $(".hideInCoupons").css("display", "block");
+
+                    $("#MarketobjDiv").css("display", "block");
+                    $("#topArea").css("display", "block");
                 });
 
                 confirmation.show();
@@ -434,8 +453,57 @@ define("ads/ads.viewModel",
                 }
                 isFromEdit(false);
                 $("#panelArea").css("display", "block");
+                $(".hideInCoupons").css("display", "block");
+
+                $("#MarketobjDiv").css("display", "block");
+                $("#topArea").css("display", "block");
+                $("#headlabel").css("display", "block");
             },
 
+
+                closeContent = function ()
+                {
+                    campaignModel();
+                    selectedCriteria();
+                    isEditorVisible(false);
+                    if (isFromEdit() == true) {
+                        isListVisible(true);
+                        isWelcomeScreenVisible(false);
+                    }
+                    else {
+                        isListVisible(false);
+                        isWelcomeScreenVisible(true);
+                    }
+                    //show the main menu;
+                    showMainMenu();
+
+                    $("input,button,textarea,a,select").removeAttr('disabled');
+
+
+
+                    //    isEditorVisible(false);
+                    //    if (isFromEdit() == true) {
+                    //        isListVisible(true);
+                    //        isWelcomeScreenVisible(false);
+                    //    }
+                    //    else {
+                    //        isListVisible(false);
+                    //        isWelcomeScreenVisible(true);
+                    //    }
+
+                    //    $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign").css("display", "none");
+                    //    $("#btnSubmitForApproval,#saveBtn,.table-link").css("display", "inline-block");
+                    //    $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign,#btnCopyCampaign,#btnStopAndTerminate").removeAttr('disabled');
+                
+                isFromEdit(false);
+                $("#panelArea").css("display", "block");
+
+                $(".hideInCoupons").css("display", "block");
+
+                $("#MarketobjDiv").css("display", "block");
+                $("#topArea").css("display", "block");
+                $("#headlabel").css("display", "block");
+                },
             saveCampaignData = function () {
 
                 //if (campaignModel().isValid()) {
@@ -772,6 +840,8 @@ define("ads/ads.viewModel",
                             $("#topArea").css("display", "block");
                             //$("#MainBtnClose").click();
                             //GoToHomePage();
+
+                            closeContent();
                         },
                         error: function (response) {
                             $("#topArea").css("display", "block");
@@ -1398,9 +1468,15 @@ define("ads/ads.viewModel",
                     isNewCampaignVisible(false);
                     isShowArchiveBtn(false);
                     
+                    $(".hideInCoupons").css("display", "none");
+
+                    $("#MarketobjDiv").css("display", "none");
+                    $("#topArea").css("display", "none");
+                    $("#panelArea").css("display", "none");
+
                     if (item.Status() == 1 || item.Status() == 2 || item.Status() == 3 || item.Status() == 4 || item.Status() == null || item.Status() == 7 || item.Status() == 9) {
                         collapseMainMenu();
-                        $("#panelArea").css("display", "none");
+                       
                         if (item.Status() == 1)//because it is in draft mode.
                             isNewCampaign(true);
                         else
@@ -2321,8 +2397,9 @@ define("ads/ads.viewModel",
                     SubHeading("Video campaigns can be paused and terminated at any time. Increase your conversions and reduce your spend by using profile filters.");
                     if (mode == 4)
                     {
-                        MainHeading("Game Campaigns");
-                        SubHeading("Game campaigns can be paused and terminated at any time. Increase your conversions and reduce your spend by using profile filters.");
+                        MainHeading("Sponsor an app ‘Brain game’.");
+                        SubHeading("Reward audiences 50% of your ‘ad click’Drive people to your web site, ask a reinforcing question and show your deals –All for one ‘ad click’ fee.");
+
                     }
                     getAdCampaignGridContent();
                 },
@@ -2697,8 +2774,9 @@ define("ads/ads.viewModel",
                 // Initialize the view model
                 initialize = function (specifiedView) {
                     if (mode == 4) {
-                        MainHeading("Game Campaigns");
-                        SubHeading("Game campaigns can be paused and terminated at any time. Increase your conversions and reduce your spend by using profile filters.");
+                        MainHeading("Sponsor an app ‘Brain game’.");
+                        SubHeading("Reward audiences 50% of your ‘ad click’Drive people to your web site, ask a reinforcing question and show your deals –All for one ‘ad click’ fee.");
+
                         lblAdTitle("Game  Title");
                         uploadTitle("Upload Logo");
                         tab1Heading("Add game title and logo");

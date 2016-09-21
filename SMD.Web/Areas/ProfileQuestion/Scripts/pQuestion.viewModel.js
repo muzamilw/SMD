@@ -297,8 +297,10 @@ define("pQuestion/pQuestion.viewModel",
                 },     
                     // Add new Profile Question
                     addNewProfileQuestion = function () {
-                        $("#panelArea,#topArea").css("display", "none");
+                        $("#panelArea,#topArea,#Heading_div").css("display", "none");
                         HeaderText("New Survey Question");
+
+
                         StatusText("Draft");
                         isTerminateBtnVisible(false);
                         isNewCampaign(true);
@@ -380,7 +382,7 @@ define("pQuestion/pQuestion.viewModel",
                     //},
                     // On editing of existing PQ
                     onEditProfileQuestion = function (item) {
-                        $("#panelArea,#topArea").css("display", "none");
+                        $("#panelArea,#topArea,#Heading_div").css("display", "none");
                         AgeRangeStart(13);
                         AgeRangeEnd(80);
                         isTerminateBtnVisible(false);
@@ -725,7 +727,7 @@ define("pQuestion/pQuestion.viewModel",
                                 isEditorVisible(false);
                                 toastr.success("Saved Successfully.");
 
-                                $("#topArea,#panelArea").css("display", "block");
+                                $("#topArea,#panelArea,#Heading_div").css("display", "block");
                                 
                                 selectedQuestion().ProfileQuestionTargetCriteria.removeAll();
                             },
@@ -1359,7 +1361,7 @@ define("pQuestion/pQuestion.viewModel",
                      },
                         closeEditDialog = function () {
                         isEditorVisible(false); enableControls();
-                        $("#panelArea,#topArea").css("display", "block");
+                        $("#panelArea,#topArea,#headlabel").css("display", "block");
                     },
                 saveCriteria = function (type, item) {
                    

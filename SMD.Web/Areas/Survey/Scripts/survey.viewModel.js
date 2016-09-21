@@ -207,7 +207,7 @@ define("survey/survey.viewModel",
                     },
                     // Add new Profile Question
                     addNewSurvey = function () {
-                        $("#panelArea,#topArea").css("display", "none");
+                        $("#panelArea,#topArea,#Heading_div").css("display", "none");
                         selectedQuestionCountryList([]);
                         gotoScreen(1);
                         isTerminateBtnVisible(false);
@@ -252,7 +252,7 @@ define("survey/survey.viewModel",
                     // Close Editor 
                     closeEditDialog = function () {
                         isEditorVisible(false); enableControls();
-                        $("#panelArea,#topArea").css("display", "block");
+                        $("#panelArea,#topArea,#Heading_div").css("display", "block");
                     },
                     SurveyQuestionsByFilter=function()
                     {
@@ -894,7 +894,7 @@ define("survey/survey.viewModel",
                               }
                           });
 
-                          debugger;
+                          
                           if (isNewCriteria()) {
                               if (matchedSurveyCriteriaRec == null) {
                              
@@ -1062,6 +1062,11 @@ define("survey/survey.viewModel",
                                         isEditorVisible(false);
                                         getQuestions();
                                         toastr.success("Successfully saved.");
+
+                                        $("#Heading_div").css("display", "block");
+                                        closeEditDialog();
+
+
                                     },
                                     error: function (response) {
 

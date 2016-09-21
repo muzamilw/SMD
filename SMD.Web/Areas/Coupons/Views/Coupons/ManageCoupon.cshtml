@@ -12,6 +12,7 @@ else
     adminClasses = "displayNone";
 }
 <div data-bind="visible: $root.isEditorVisible()" style="display: none">
+
     <div class="col-lg-12">
         <div class="row">
             <div class="col-lg-12" id="topArea">
@@ -23,7 +24,7 @@ else
                 <div class="clearfix">
                     <span class="pull-left " style="color:black!important; padding-left: 0px; font-size: 23px;" data-bind="text: $root.CouponTitle"></span>
                     <span class="control-label  heading-style pull-left" style="margin-top:0px;margin-left: 40px;" data-bind="text: $root.StatusValue"></span>
-                    <div style="float:right;margin-top:-5px;"><button data-bind="click: $root.CloseCouponsView" id="btnClose" class="btn btn-default">Close</button></div>
+                    <div  style="float:right;margin-top:-9px;"><button data-bind="click: $root.CloseCouponsView" id="btnClose" class="btn btn-default CloseBtn">Close</button></div>
                 </div>
                 
                 <div class="row" style="margin-bottom:15px;">
@@ -921,7 +922,7 @@ else
                             <div class="pull-left" style="    width: 85%;
     text-align: left;">
 
-                                <button class="btn  btn-success btnSubmitApproval" id="btnSaveAsDraft" data-bind="click:$root.SaveAsDraft, visible: $root.isNewCampaign() " style="width:80%;">Save as Draft</button>
+                                @*<button class="btn  btn-success btnSubmitApproval" id="btnSaveAsDraft" data-bind="click:$root.SaveAsDraft, visible: $root.isNewCampaign() " style="width:80%; display:none;">Save as Draft</button>*@
 
                                 <button class="btn  btn-success btnSubmitApproval" id="btnSubmitForApproval2" data-bind="click:$root.submitCampaignData, visible: $root.isNewCampaign() " style="width:80%;">Post Deal for Approval</button>
 
