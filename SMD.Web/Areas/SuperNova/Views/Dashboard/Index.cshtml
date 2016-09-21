@@ -16,41 +16,42 @@
                         <tr>
                             <th></th>
                             <th></th>
-                            <th>
+                            <th></th>
+                            <th class="text-left" >
                                 <span class="GridHeaderFont_size">
                                     USA
                                 </span>
                             </th>
                             <th></th>
-                            <th></th>
-                            <th>
+                            <th ></th>
+                            <th class="text-left">
                                 <span class="GridHeaderFont_size">
                                     UK
                                 </span>
                             </th>
+                            <th ></th>
                             <th></th>
-                            <th></th>
-                            <th>
+                            <th class="text-left">
                                 <span class="GridHeaderFont_size">
                                     Canada
                                 </span>
                             </th>
                             <th></th>
-                            <th></th>
-                            <th>
+                            <th ></th>
+                            <th class="text-left">
                                 <span class="GridHeaderFont_size">
                                     Australia
                                 </span>
                             </th>
+                            <th ></th>
                             <th></th>
-                            <th></th>
-                            <th>
+                            <th class="text-left">
                                 <span class="GridHeaderFont_size">
                                     UAE
                                 </span>
                             </th>
                             <th> </th>
-                            <th> </th>
+                          
                         </tr>
                         <tr>
                             <td><span class="Theme_subheading-Clr font14">Activity</span></td>
@@ -66,6 +67,17 @@
                                 </span>
                             </td>
                             <td> </td>
+                            <td class="text-right bk-gray">
+                                <span class="Theme_subheading-Clr  font14">
+                                    Last
+                                </span>
+                            </td>
+                            <td class="text-right bk-gray">
+                                <span class="Theme_subheading-Clr  font14">
+                                    Current
+                                </span>
+                            </td>
+                            <td class="bk-gray"> </td>
                             <td class="text-right">
                                 <span class="Theme_subheading-Clr  font14">
                                     Last
@@ -77,28 +89,17 @@
                                 </span>
                             </td>
                             <td> </td>
-                            <td class="text-right">
+                            <td class="text-right bk-gray">
                                 <span class="Theme_subheading-Clr  font14">
                                     Last
                                 </span>
                             </td>
-                            <td class="text-right">
+                            <td class="text-right bk-gray">
                                 <span class="Theme_subheading-Clr  font14">
                                     Current
                                 </span>
                             </td>
-                            <td> </td>
-                            <td class="text-right">
-                                <span class="Theme_subheading-Clr  font14">
-                                    Last
-                                </span>
-                            </td>
-                            <td class="text-right">
-                                <span class="Theme_subheading-Clr  font14">
-                                    Current
-                                </span>
-                            </td>
-                            <td> </td>
+                            <td class="bk-gray"> </td>
                             <td class="text-right">
                                 <span class="Theme_subheading-Clr  font14">
                                     Last
@@ -112,10 +113,12 @@
                             <td> </td>
 
                         </tr>
+
                     </thead>
                     <tbody>
                         <!-- ko template: { name: 'DashboardInsightTemplate' , foreach: $root.DashboardInsightsData } -->
                         <!-- /ko -->
+                        <tr><td colspan="17"> </td></tr>
                     </tbody>
                 </table>
             </div>
@@ -177,7 +180,13 @@
 <script id="DashboardInsightTemplate" type="text/html">
     <tr style="border-bottom: none;">
         <td class="col-sm-3 font14">
-            <span class="" data-bind="text: activity"></span>
+            <!-- ko if: activity() === "Approved Campaigns" || activity() === "Active Campaigns" || activity() === "Impressions" || activity() === "Revenue" -->
+            <span class="h4" data-bind="text: activity"></span>
+            <!-- /ko -->
+
+            <!-- ko ifnot: activity() === "Approved Campaigns" || activity() === "Active Campaigns" || activity() === "Impressions" || activity() === "Revenue" -->
+            <span class="paddingLeft20px" data-bind="text: activity"></span>
+            <!-- /ko -->
         </td>
         <td></td>
         <td class="text-right">
@@ -208,19 +217,19 @@
             </span>
             <!-- /ko -->
         </td>
-        <td class="text-right">
+        <td class="text-right bk-gray">
             <!-- ko if: activity() === "Video Ads Revenue" || activity() === "Game Ads Revenue" || activity() === "Survey Cards Revenue" || activity() === "Profile Questions Revenue" || activity() === "Payout via Paypal" || activity() === "Income from Stripe" -->
             $
             <!-- /ko -->
             <span data-bind="text: ukL"></span>
         </td>
-        <td class="text-right">
+        <td class="text-right bk-gray">
             <!-- ko if: activity() === "Video Ads Revenue" || activity() === "Game Ads Revenue" || activity() === "Survey Cards Revenue" || activity() === "Profile Questions Revenue" || activity() === "Payout via Paypal" || activity() === "Income from Stripe" -->
             $
             <!-- /ko -->
             <span data-bind="text: ukC"></span>
-            </td>
-        <td class="text-left">
+        </td>
+        <td class="text-left bk-gray">
             <!-- ko if: ukT() > 0-->
             <span style="color:green;padding-left:10px">
                 <i class="fa fa-long-arrow-up" aria-hidden="true"></i>
@@ -267,19 +276,19 @@
             <!-- /ko -->
         </td>
        
-        <td class="text-right">
+        <td class="text-right bk-gray">
             <!-- ko if: activity() === "Video Ads Revenue" || activity() === "Game Ads Revenue" || activity() === "Survey Cards Revenue" || activity() === "Profile Questions Revenue" || activity() === "Payout via Paypal" || activity() === "Income from Stripe" -->
             $
             <!-- /ko -->
             <span data-bind="text: auL"></span>
         </td>
-        <td class="text-right">
+        <td class="text-right bk-gray">
             <!-- ko if: activity() === "Video Ads Revenue" || activity() === "Game Ads Revenue" || activity() === "Survey Cards Revenue" || activity() === "Profile Questions Revenue" || activity() === "Payout via Paypal" || activity() === "Income from Stripe" -->
             $
             <!-- /ko -->
             <span data-bind="text: auC"></span>
-            </td>
-        <td class="text-left">
+        </td>
+        <td class="text-left bk-gray">
             <!-- ko if: auT() > 0-->
             <span style="color:green;padding-left:10px">
                 <i class="fa fa-long-arrow-up" aria-hidden="true"></i>

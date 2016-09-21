@@ -507,7 +507,9 @@ a.reportAnchor a:hover {
       
       
     }
-
+.bk-gray {
+    background-color:#e7ebee;
+}
    
 
 /*table tr:nth-child(even) td{

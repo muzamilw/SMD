@@ -102,7 +102,8 @@ namespace SMD.MIS.ModelMappers
             return new ProfileQuestionDropdown
             {
                 PqId = source.PqId,
-                Question = source.Question
+                Question = source.Question,
+                CompanyId = source.CompanyId
             };
         }
 
