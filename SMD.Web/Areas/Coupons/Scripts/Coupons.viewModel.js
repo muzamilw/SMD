@@ -316,7 +316,7 @@ define("Coupons/Coupons.viewModel",
                 getAdCampaignGridContent();
             },
             addNewCampaign = function () {
-
+                
                 //show the main menu;
                 collapseMainMenu();
 
@@ -328,6 +328,12 @@ define("Coupons/Coupons.viewModel",
                 isNewCampaignVisible(false);
                 $("#btnCancel").css("display", "block");
                 $(".hideInCoupons").css("display", "none");
+
+                $("#MarketobjDiv").css("display", "none");
+                $("#topArea").css("display", "none");
+
+
+                $("#Heading_div").css("display", "none");
                 isShowArchiveBtn(false);
                     CouponTitle('New Deal');
                     StatusValue('Draft');
@@ -454,7 +460,7 @@ define("Coupons/Coupons.viewModel",
                 hasErrors = false;
                     if (couponModel().CouponTitle() == "" || couponModel().CouponTitle() == undefined) {
                         hasErrors = true;
-                        toastr.error("Please enter Coupon Title.");
+                        toastr.error("Please enter Group Title.");
                     }
 
                     if (couponModel().Price() == "" || couponModel().Price() == undefined) {
@@ -473,7 +479,7 @@ define("Coupons/Coupons.viewModel",
                     console.log(couponModel());
                     if (couponModel().HowToRedeemLine2() == "" || couponModel().HowToRedeemLine2() == undefined) {
                         hasErrors = true;
-                        toastr.error("Please enter description.");
+                        toastr.error("Please enter deal summary.");
                     }//couponImage1
                     //if (couponModel().couponImage1() == "/images/default-placeholder.png" && couponModel().CouponImage2() == "/images/default-placeholder.png" && couponModel().CouponImage3() == "/images/default-placeholder.png") {
                     //    hasErrors = true;
@@ -542,6 +548,13 @@ define("Coupons/Coupons.viewModel",
                             isWelcomeScreenVisible(false);
                             toastr.success("Successfully saved.");
                             $("#topArea").css("display", "block");
+                            CloseContent();
+
+
+                            //if (mode == 1)
+                            //{
+                            //    CloseContent();
+                            //}
                             //   allCouponCodeItems.removeAll();
                         },
                         error: function (response) {
@@ -915,6 +928,11 @@ define("Coupons/Coupons.viewModel",
                     $(".hideInCoupons").css("display", "none");
 
                     $("#MarketobjDiv").css("display", "none");
+
+                    $("#topArea").css("display", "none");
+                    $("#panelArea").css("display", "none");
+
+                    $("#Heading_div").css("display", "none");
                     if (item.Status() == 1 || item.Status() == 2 || item.Status() == 3 || item.Status() == 4 || item.Status() == null || item.Status() == 7 || item.Status() == 9) {
                         canSubmitForApproval(true);
                         dataservice.getCampaignData({
@@ -1030,7 +1048,7 @@ define("Coupons/Coupons.viewModel",
 
                                  
                                     $.unblockUI(spinner);
-
+                                    couponModel().reset();
                                 }
 
                             },
@@ -1185,7 +1203,7 @@ define("Coupons/Coupons.viewModel",
                     hasErrors = false;
                     if (couponModel().CouponTitle() == "" || couponModel().CouponTitle() == undefined) {
                         hasErrors = true;
-                        toastr.error("Please enter Coupon Title.");
+                        toastr.error("Please enter Group Title.");
                     }
 
                     if (couponModel().Price() == "" || couponModel().Price() == undefined) {
@@ -1204,7 +1222,7 @@ define("Coupons/Coupons.viewModel",
                     console.log(couponModel());
                     if (couponModel().HowToRedeemLine2() == "" || couponModel().HowToRedeemLine2() == undefined) {
                         hasErrors = true;
-                        toastr.error("Please enter description.");
+                        toastr.error("Please enter deal description.");
                     }//couponImage1
                     //if (couponModel().couponImage1() == "/images/default-placeholder.png" && couponModel().CouponImage2() == "/images/default-placeholder.png" && couponModel().CouponImage3() == "/images/default-placeholder.png") {
                     //    hasErrors = true;
@@ -1951,10 +1969,35 @@ define("Coupons/Coupons.viewModel",
 
                     SelectedTextField(Fieldvalue);
                 },
-                CloseCouponsView = function ()
+                CloseCouponsView = function () {
+
+                    if (couponModel().hasChanges()) {
+                        confirmation.messageText("Do you want to save changes?");
+                        confirmation.afterProceed(function () {
+                            SaveAsDraft();
+                        });
+                        confirmation.afterCancel(function () {
+
+                            CloseContent();
+                        });
+
+                        confirmation.show();
+
+                    }
+                    else {
+                        CloseContent();
+                    }
+
+                }
+                ,
+                CloseContent = function ()
                 {
                     $(".hideInCoupons").css("display", "block");
                     $("#MarketobjDiv").css("display", "block");
+
+                    $("#topArea").css("display", "block");
+                    $("#Heading_div").css("display", "block");
+
                     couponModel();
                     selectedCriteria();
                     isEditorVisible(false);
@@ -1972,10 +2015,12 @@ define("Coupons/Coupons.viewModel",
                     $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign").css("display", "none");
                     $("#btnSubmitForApproval,#saveBtn,.table-link").css("display", "inline-block");
                     $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign,#btnStopAndTerminate,#btnCopyCampaign").removeAttr('disabled');
-                    
+
                     showMainMenu();
-                      
+
+
                 }
+
                 ,
                   selectJobDescription = function (jobDescription, e) {
                       selectedJobDescription(e.currentTarget.id);

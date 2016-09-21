@@ -17,7 +17,11 @@ else
 {
     adminClasses = "displayNone";
 }
+<div class="row" id="Heading_div">
 
+    <label id="headlabel" style="font-size:24px;color:black!important;margin-top:7px;">Videos ads</label>
+
+</div> 
 <div class="row" id="adsBinding" style="margin-top:15px;">
     <div class="col-lg-12" data-bind="visible: $root.isListVisible()">
 
@@ -161,7 +165,7 @@ else
             <span class="">Game</span>
             <!-- /ko -->
         </td>
-        <td class="col-sm-2">
+        <td class="col-sm-3">
             <span data-bind="text: StartDateTime"></span>
         </td>
         <td class="col-sm-2">
@@ -243,7 +247,7 @@ else
 
 
 
-        <td class="col-sm-2" style="padding-top:23px;">
+        <td class="col-sm-2" style="padding-top:23px;display:none;">
 
             <!-- ko if: Status() == 1 ||  Status() == 3 || Status() == 4 || Status() == 7|| Status() == 9-->
             <a class="table-link" style="float: right">
@@ -270,7 +274,7 @@ else
             <div class="col-sm-12" style="float: left; margin-bottom:20px;">
                 <br />
                 <div style="width:100%;">
-                    <span style="font-size: 24px;float:left;" class="Theme_standard_clr headingFontFamily" data-bind="text:$root.MainHeading"></span>
+                    <span style="font-size: 24px;float:left;color:#81d3dc!important;"  data-bind="text:$root.MainHeading"></span>
                     <button style="float:right;margin-top:-4px;" class="btn btn-primary" data-bind="click:$root.addNewCampaign,visible:!$root.isDisplayCouponsAds()">
                         Create New Campaign
                     </button>
@@ -279,7 +283,7 @@ else
                 
                <br />
 
-                <span style="font-size: 14px;" class="Theme_subheading-Clr headingFontFamily" data-bind="text:$root.SubHeading"></span>  &nbsp; &nbsp; &nbsp; <span class="red bold rightAlign" style="display:none;"> Watch Video <img src="/Images/youtube_play.JPG" height="25px" /> </span>   </span><br />
+                <span style="font-size: 14px;" class="Theme_subheading-Clr " data-bind="text:$root.SubHeading"></span>  &nbsp; &nbsp; &nbsp; <span class="red bold rightAlign" style="display:none;"> Watch Video <img src="/Images/youtube_play.JPG" height="25px" /> </span>   </span><br />
             </div>
 
 
@@ -363,6 +367,10 @@ else
                 mode = modeLoc;
             }
 
+            if (modeLoc == 4)
+            {
+                $("#headlabel").text("Display ads");
+            }
         });
        
 
