@@ -24,23 +24,15 @@
                 BillingZipCode = ko.observable(BillingZipCode).extend({ required: true }),
                 BillingPhone = ko.observable(BillingPhone).extend({ required: true }),
                 BillingEmail = ko.observable(BillingEmail).extend({ required: true }),
+                mediaHandleui = ko.observable(TwitterHandle != null ? TwitterHandle : FacebookHandle != null ? FacebookHandle : InstagramHandle != null ? InstagramHandle : PinterestHandle != null ? PinterestHandle : ""),
                 TwitterHandle = ko.observable(TwitterHandle),
                 FacebookHandle = ko.observable(FacebookHandle),
                 InstagramHandle = ko.observable(InstagramHandle),
                 PinterestHandle = ko.observable(PinterestHandle),
+                selectedMedia = ko.observable(),
                 Logo = ko.observable(Logo),
                 LogoImageBase64 = ko.observable(LogoImageBase64),
-                //TwitterHandleui = ko.computed({
-                //    read: function () {                        
-                //        return TwitterHandle());
-                //    },
-                //    write: function (value) {
-                //        TwitterHandle(value);
-                //        FacebookHandle(undefined);
-                //        InstagramHandle(undefined);
-                //        PinterestHandle(undefined);
-                //    }
-                //}),
+                
                 //FacebookHandleui = ko.computed({
                 //    read: function () {                        
                 //        return FacebookHandle());
@@ -97,7 +89,9 @@
                   FacebookHandle: FacebookHandle,
                   InstagramHandle: InstagramHandle,
                   PinterestHandle: PinterestHandle,
-                  LogoImageBase64: LogoImageBase64
+                  LogoImageBase64: LogoImageBase64,
+                  mediaHandleui: mediaHandleui,
+                  selectedMedia: selectedMedia,
 
               }),
               // Has Changes
@@ -160,7 +154,8 @@
               InstagramHandle: InstagramHandle,
               PinterestHandle: PinterestHandle,
               LogoImageBase64: LogoImageBase64,
-              //TwitterHandleui:TwitterHandleui,
+              mediaHandleui: mediaHandleui,
+              selectedMedia:selectedMedia,
               //FacebookHandleui:FacebookHandleui,
               convertToServerData:convertToServerData,
               hasChanges: hasChanges,
