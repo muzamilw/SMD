@@ -30,7 +30,9 @@
                 PinterestHandle = ko.observable(PinterestHandle),
                 Logo = ko.observable(Logo),
                 LogoImageBase64 = ko.observable(LogoImageBase64),
-
+                ActiveHandle = ko.computed(function () {
+                    return dirtyFlag.isDirty();
+                }),
 
 
               errors = ko.validation.group({
