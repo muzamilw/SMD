@@ -33,7 +33,9 @@ define("FranchiseDashboard/Coupons.viewModel",
 
                             },
                             error: function () {
-                                toastr.error("Failed to load Currency");
+                                selectedCoupon(item);
+                                isEditorVisible(true);
+                                //toastr.error("Failed to load Currency");
                             }
                         });
 
