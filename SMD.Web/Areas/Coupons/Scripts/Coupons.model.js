@@ -319,7 +319,8 @@
               LocationCountryId: (LocationCountryId),
               CouponStartDate: (CouponStartDate),
               CouponEndDate: (CouponEndDate),
-              Priority: (Priority)
+              Priority: (Priority),
+              reset: (reset)
           };
       };
 

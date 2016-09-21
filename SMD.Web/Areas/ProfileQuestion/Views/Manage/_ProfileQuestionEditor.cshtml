@@ -18,7 +18,7 @@
                 <div class="clearfix" style="float:right;margin-top:-5px;">
                     <div class="col-xs-12" style="text-align: right; padding-right:0;margin-bottom:10px;">
                         <button style="display:none;" class="btn  btn-info" id="saveBtn" data-bind="click:$root.onSaveProfileQuestion, enable: $root.hasChangesOnQuestion, css: { 'btn-warning': $root.hasChangesOnQuestion }">Save</button>
-                        <button class="btn btn-default" id="saveBtn" data-bind="click: $root.closeEditDialog">Close</button>
+                        <button class="btn btn-default CloseBtn" id="saveBtn" data-bind="click: $root.closeEditDialog">Close</button>
                     </div>
                 </div>
             </div>
@@ -809,7 +809,7 @@
     text-align: left;">
                             <button class="btn  btn-success btnSubmitApproval" id="btnSubmitForApproval2" data-bind="visible:$root.canSubmitForApproval,click:$root.SaveChanges" style="width:80%;margin-bottom:4px;">Submit for Approval</button>
 
-                            <button class="btn  btn-success btnSubmitApproval" id="btnSaveAsDraft" data-bind="click:$root.SaveAsDraft, visible: $root.isNewCampaign() " style="width: 80%;">Save as Draft</button>
+                            <button class="btn  btn-success btnSubmitApproval" id="btnSaveAsDraft" data-bind="click:$root.SaveAsDraft, visible: $root.isNewCampaign() " style="width: 80%;display:none;">Save as Draft</button>
 
                             <button class="btn  btn-info " id="btnStopAndTerminate" data-bind="visible:$root.isTerminateBtnVisible" style="width: 80%;margin-bottom:10px;">Stop & Terminate Early</button>
                             <button class="btn  btn-danger " id="btnArchive" data-bind="visible: $root.isShowArchiveBtn" style="width: 80%;margin-bottom:10px;">Archive Campaign</button>

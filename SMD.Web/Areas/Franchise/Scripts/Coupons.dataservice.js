@@ -26,6 +26,17 @@ define("FranchiseDashboard/Coupons.dataservice", function () {
                         type: 'POST'
                     });
 
+                    amplify.request.define('getCurrenybyID', 'ajax', {
+                        url: '/Api/GetCurrency',
+                        dataType: 'json',
+                        type: 'GET'
+                    });
+
+                    amplify.request.define('getCouponCategories', 'ajax', {
+                        url: '/Api/Coupon',
+                        dataType: 'json',
+                        type: 'GET'
+                    });
                     // Send Mail
                     amplify.request.define('sendApprovalRejectionEmail', 'ajax', {
                         url: '/Api/BuyIt',
@@ -57,6 +68,24 @@ define("FranchiseDashboard/Coupons.dataservice", function () {
                     data: params
                 });
             },
+               getCurrenybyID = function (params, callbacks) {
+                   initialize();
+                   return amplify.request({
+                       resourceId: 'getCurrenybyID',
+                       success: callbacks.success,
+                       error: callbacks.error,
+                       data: params
+                   });
+               },
+                getCouponCategories = function (params, callbacks) {
+                    initialize();
+                    return amplify.request({
+                        resourceId: 'getCouponCategories',
+                        success: callbacks.success,
+                        error: callbacks.error,
+                        data: params
+                    });
+                },
             // Save Ad Campaign edit
             saveCoupon = function (params, callbacks) {
                 initialize();
@@ -71,6 +100,8 @@ define("FranchiseDashboard/Coupons.dataservice", function () {
         return {
             saveCoupon: saveCoupon,
             getCouponsForApproval: getCouponsForApproval,
+            getCurrenybyID: getCurrenybyID,
+            getCouponCategories:getCouponCategories,
             sendApprovalRejectionEmail: sendApprovalRejectionEmail
         };
     })();
