@@ -275,6 +275,10 @@ namespace SMD.Repository.BaseRepository
         /// <summary>
         /// Get Ad-Campaigns for APIs | baqer
         /// </summary>
+        public ObjectResult<GetActiveVSNewUsers_Result> GetActiveVSNewUsers()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetActiveVSNewUsers_Result>("GetActiveVSNewUsers");
+        }
         public ObjectResult<GetAdminDashBoardInsights_Result> GetAdminDashBoardInsights()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAdminDashBoardInsights_Result>("GetAdminDashBoardInsights");

@@ -1,5 +1,6 @@
 ﻿using SMD.Interfaces.Repository;
 using SMD.Interfaces.Services;
+using SMD.Models.DomainModels;
 using SMD.Models.ResponseModels;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ namespace SMD.Implementation.Services
     {
         #region Private
 
-        private readonly IActiveUserRepository activeUserRepository;
+        private readonly ICompanyAspNetUsersRepository companyAspNetUsersRepository;
 
 
         #endregion
@@ -21,17 +22,17 @@ namespace SMD.Implementation.Services
         /// <summary>
         /// Constructor 
         /// </summary>
-        public ActiveUser(IActiveUserRepository activeUserRepository)
+        public ActiveUser(ICompanyAspNetUsersRepository _companyAspNetUsersRepository)
         {
-            this.activeUserRepository = activeUserRepository;
+            this.companyAspNetUsersRepository = _companyAspNetUsersRepository;
         }
 
         #endregion
 
 
-        public ActiveUserResponseModel getActiveUser()
+        public IEnumerable<GetActiveVSNewUsers_Result> GetActiveVSNewUsers()
         {
-            return activeUserRepository.getActiveUser();
+            return companyAspNetUsersRepository.GetActiveVSNewUsers();
         }
     }
 }
