@@ -30,11 +30,32 @@
                 PinterestHandle = ko.observable(PinterestHandle),
                 Logo = ko.observable(Logo),
                 LogoImageBase64 = ko.observable(LogoImageBase64),
-                ActiveHandle = ko.computed(function () {
-                    return dirtyFlag.isDirty();
-                }),
-
-
+                //TwitterHandleui = ko.computed({
+                //    read: function () {                        
+                //        return TwitterHandle());
+                //    },
+                //    write: function (value) {
+                //        TwitterHandle(value);
+                //        FacebookHandle(undefined);
+                //        InstagramHandle(undefined);
+                //        PinterestHandle(undefined);
+                //    }
+                //}),
+                //FacebookHandleui = ko.computed({
+                //    read: function () {                        
+                //        return FacebookHandle());
+                //    },
+                //    write: function (value) {
+                //        FacebookHandle(value);
+                //        TwitterHandle(undefined);
+                //        InstagramHandle(undefined);
+                //        PinterestHandle(undefined);
+                //    }
+                //}),
+                //ActiveHandle = ko.computed(function () {
+                //    return dirtyFlag.isDirty();
+                //}),
+              
               errors = ko.validation.group({
                   CompanyName: CompanyName,
                   Tel1: Tel1,
@@ -139,12 +160,14 @@
               InstagramHandle: InstagramHandle,
               PinterestHandle: PinterestHandle,
               LogoImageBase64: LogoImageBase64,
-
+              //TwitterHandleui:TwitterHandleui,
+              //FacebookHandleui:FacebookHandleui,
               convertToServerData:convertToServerData,
               hasChanges: hasChanges,
              
               reset: reset,
               isValid: isValid,
+              
               errors: errors
             
           };
