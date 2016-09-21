@@ -19,10 +19,10 @@ else
 }
 <div class="row" id="Heading_div">
 
-    <label id="headlabel" style="font-size:24px;color:black!important;margin-top:7px;">Videos ads</label>
+    <label id="headlabel" style="font-size:24px;color:black!important;margin-top:14px;">Videos ads</label>
 
 </div> 
-<div class="row" id="adsBinding" style="margin-top:15px;">
+<div class="row" id="adsBinding" style="margin-top:5px;">
     <div class="col-lg-12" data-bind="visible: $root.isListVisible()">
 
         <div class="row">
@@ -270,20 +270,20 @@ else
         </div>
         <div class="row">
 
-
-            <div class="col-sm-12" style="float: left; margin-bottom:20px;">
-                <br />
+            <div class="col-sm-12" style="float: left;">
+               
                 <div style="width:100%;">
-                    <span style="font-size: 24px;float:left;color:#81d3dc!important;"  data-bind="text:$root.MainHeading"></span>
-                    <button style="float:right;margin-top:-4px;" class="btn btn-primary" data-bind="click:$root.addNewCampaign,visible:!$root.isDisplayCouponsAds()">
+                    <span style="font-size:18px;float:left;color:#81d3dc!important;"  data-bind="text:$root.MainHeading"></span>
+                    <button style="float:right;margin-top:-15px;" class="btn btn-primary" data-bind="click:$root.addNewCampaign,visible:!$root.isDisplayCouponsAds()">
                         Create New Campaign
                     </button>
                     <div style="clear:both;"></div>
                 </div>
                 
-               <br />
-
-                <span style="font-size: 14px;" class="Theme_subheading-Clr " data-bind="text:$root.SubHeading"></span>  &nbsp; &nbsp; &nbsp; <span class="red bold rightAlign" style="display:none;"> Watch Video <img src="/Images/youtube_play.JPG" height="25px" /> </span>   </span><br />
+               
+                <div style="width:641px;word-wrap:break-word;">
+                    <span style="font-size: 14px;" class="Theme_subheading-Clr " data-bind="text:$root.SubHeading"></span>  &nbsp; &nbsp; &nbsp; <span class="red bold rightAlign" style="display:none;"> Watch Video <img src="/Images/youtube_play.JPG" height="25px" /> </span>   </span><br />
+                </div>
             </div>
 
 
@@ -293,7 +293,7 @@ else
 
 
             <form data-bind="submit: $root.getCampaignByFilter">
-                <div class="col-sm-2" style="float:left;">
+                <div class="col-sm-2" style="float:left;margin-top:30px;">
 
                     <div class="filter-block" style="margin-right: -10px">
                         <div class="form-group ">
@@ -308,7 +308,7 @@ else
 
                 </div>
 
-                <div class="col-sm-2" style="float:left;">
+                <div class="col-sm-2" style="float:left;margin-top:30px;">
                     <select id="ddlStatus" class="form-control" style="float:right;height:36px;" data-bind="value : SearchSelectedStatus, event:{ change: $root.getCampaignByFilter}">
                         <option value="0">All Statuses</option>
 
