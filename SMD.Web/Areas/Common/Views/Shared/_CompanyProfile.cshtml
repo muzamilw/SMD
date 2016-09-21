@@ -177,13 +177,7 @@
                                             </div>
                                             <div class="col-lg-6">
                                                 @*<input type="text" class="form-control" data-bind="value: TwitterHandle() !='undefined' ? TwitterHandle :'( Not Configured )'">*@
-                                                <select class="form-control">
-                                                    <option style="background-image:url(~/Content/Images/TwitterNew.png)"></option>
-                                                    @*<option><img src="~/Content/Images/facebookNew.png" /></option>
-                                                    <option><img src="~/Content/Images/LinkedInNew.png" /></option>*@
-                                                   
-                                                    
-                                                </select>
+                                                <select id="slectSocialmedia" class="form-control" data-bind="options: $root.socialMedia, optionsText: 'Text', optionsValue: 'Text', optionsCaption: '&lt;' + 'Select'+ '&gt;' , value:$root.selectedMedia ,event:{ change: $root.socialMediaHandler}"></select>
                                                 
                                             </div>
 
@@ -191,38 +185,43 @@
 
 
 
-                                        <div class="form-group" style="display:none;">
+                                        <div class="form-group" data-bind="visible:$root.selectedMedia()=='Facebook'">
                                             <div class="col-lg-4 text-right">
                                                 <label class="control-label text-right tooltip-float">Facebook Handle</label>
                                             </div>
                                             <div class="col-lg-6">
-                                                <input type="text" class="form-control" data-bind="value: FacebookHandle() !='undefined' ? FacebookHandle :'( Not Configured )'">
+                                                <input type="text" class="form-control" data-bind="value:FacebookHandle">
                                             </div>
-
+                                        </div>
+                                        <div class="form-group" data-bind="visible:$root.selectedMedia()=='Twitter'">
+                                            <div class="col-lg-4 text-right">
+                                                <label class="control-label text-right tooltip-float">Twitter Handle</label>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <input type="text" class="form-control" data-bind="value: TwitterHandle">
+                                            </div>
                                         </div>
 
 
 
-                                        <div class="form-group" style="display:none;">
+                                        <div class="form-group" data-bind="visible:$root.selectedMedia()=='Instagram'">
                                             <div class="col-lg-4 text-right">
                                                 <label class="control-label text-right tooltip-float">Instagram Handle</label>
                                             </div>
                                             <div class="col-lg-6">
-                                                <input type="text" class="form-control" data-bind="value: InstagramHandle() !='undefined' ? InstagramHandle :'( Not Configured )'">
+                                                <input type="text" class="form-control" data-bind="value: InstagramHandle">
                                             </div>
-
                                         </div>
 
 
 
-                                        <div class="form-group" style="display:none;">
+                                        <div class="form-group" data-bind="visible:$root.selectedMedia()=='Pinterest'">
                                             <div class="col-lg-4 text-right">
                                                 <label class="control-label text-right tooltip-float">Pinterest Handle</label>
                                             </div>
                                             <div class="col-lg-6">
-                                                <input type="text" class="form-control" data-bind="value: PinterestHandle() !='undefined' ? PinterestHandle :'( Not Configured )'">
+                                                <input type="text" class="form-control" data-bind="value: PinterestHandle">
                                             </div>
-
                                         </div>
 
                                     </div>

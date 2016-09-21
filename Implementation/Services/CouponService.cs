@@ -785,6 +785,11 @@ namespace SMD.Implementation.Services
             return response;
         }
 
+        public Currency GetCurrenyById( int id)
+        {
+            return _currencyRepository.Find(id);
+        }
+
 
 
         #endregion

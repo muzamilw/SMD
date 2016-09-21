@@ -20,8 +20,43 @@ define("FranchiseDashboard/Coupons.viewModel",
                     isShowCopounMode = ko.observable(false),
                     selectedCoupon = ko.observable(),
                     onEditCoupon = function (item) {
-                        selectedCoupon(item);
-                        isEditorVisible(true);
+                        dataservice.getCurrenybyID(
+                        { id: item.currencyId },
+                        {
+                            success: function (data) {
+                                selectedCoupon(item);
+                                selectedCoupon().currencyId(data.CurrencyCode)
+                                isEditorVisible(true);
+                                //getCouponCategories(item.couponId);
+
+                               
+
+                            },
+                            error: function () {
+                                selectedCoupon(item);
+                                isEditorVisible(true);
+                                //toastr.error("Failed to load Currency");
+                            }
+                        });
+
+                        //selectedCoupon(item);
+                        //isEditorVisible(true);
+                    },
+                    getCouponCategories = function (couponid)
+                    {
+                        dataservice.getCouponCategories(
+                                             { CampaignId: couponid },
+                                             {
+                                                 success: function (data) {
+                                                     var a = data;
+
+
+                                                 },
+                                                 error: function () {
+                                                     toastr.error("Failed to load CouponCategory");
+                                                 }
+                                             });
+
                     },
                     closeEditDialog = function () {
                         selectedCoupon(undefined);

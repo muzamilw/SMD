@@ -12,13 +12,13 @@
                     <li><a data-bind="click: $root.closeEditDialog" class="my-navigator">Profile Questions</a></li>
                 </ol>
                 <div>
-                    <span class="pull-left Theme_standard_clr" style="padding-left:0px;font-size:28px;" data-bind="text:$root.HeaderText"></span>
-                    <span class="control-label  heading-style pull-left" style=" margin-top: 6px; margin-left: 40px;" data-bind="text:$root.StatusText"></span>
+                    <span class="pull-left " style="color:black!important; padding-left:7px;font-size:23px;" data-bind="text:$root.HeaderText"></span>
+                    <span class="control-label  heading-style pull-left" style=" margin-top: 0px; margin-left: 40px;" data-bind="text:$root.StatusText"></span>
                 </div>
                 <div class="clearfix" style="float:right;margin-top:-5px;">
                     <div class="col-xs-12" style="text-align: right; padding-right:0;margin-bottom:10px;">
                         <button style="display:none;" class="btn  btn-info" id="saveBtn" data-bind="click:$root.onSaveProfileQuestion, enable: $root.hasChangesOnQuestion, css: { 'btn-warning': $root.hasChangesOnQuestion }">Save</button>
-                        <button class="btn btn-default" id="saveBtn" data-bind="click: $root.closeEditDialog">Close</button>
+                        <button class="btn btn-default CloseBtn" id="saveBtn" data-bind="click: $root.closeEditDialog">Close</button>
                     </div>
                 </div>
             </div>
@@ -809,7 +809,7 @@
     text-align: left;">
                             <button class="btn  btn-success btnSubmitApproval" id="btnSubmitForApproval2" data-bind="visible:$root.canSubmitForApproval,click:$root.SaveChanges" style="width:80%;margin-bottom:4px;">Submit for Approval</button>
 
-                            <button class="btn  btn-success btnSubmitApproval" id="btnSaveAsDraft" data-bind="click:$root.SaveAsDraft, visible: $root.isNewCampaign() " style="width: 80%;">Save as Draft</button>
+                            <button class="btn  btn-success btnSubmitApproval" id="btnSaveAsDraft" data-bind="click:$root.SaveAsDraft, visible: $root.isNewCampaign() " style="width: 80%;display:none;">Save as Draft</button>
 
                             <button class="btn  btn-info " id="btnStopAndTerminate" data-bind="visible:$root.isTerminateBtnVisible" style="width: 80%;margin-bottom:10px;">Stop & Terminate Early</button>
                             <button class="btn  btn-danger " id="btnArchive" data-bind="visible: $root.isShowArchiveBtn" style="width: 80%;margin-bottom:10px;">Archive Campaign</button>
@@ -821,8 +821,8 @@
                         <div class="clearfix"></div>
                     </div>
                     <div class="col-xs-12" style="line-height: 3;">
-                        <span class=" pull-left">Minimum ad click :</span>
-                        <span class="pull-right"></span>
+                        <span class=" pull-left" style="display:none;">Minimum ad click :</span>
+                        <span class="pull-right" style="display:none;"></span>
                         <div class="clearfix"> </div>
                         <span class=" pull-left" style="color:#3DD2B5;">Matches profiles:</span>
                         <span class="pull-right" style="color:#3DD2B5;" data-bind="text:$root.reachedAudience"></span>
