@@ -704,12 +704,16 @@ namespace SMD.Implementation.Services
             var user = webApiUserService.GetUserByUserId(source.UserId);
             // Get Current Product
             var product = (dynamic)null;
+
             if(source.CouponListingMode==1)
                 product = productRepository.GetProductByCountryId("couponfree");
-            if (source.CouponListingMode == 2)
+            else if (source.CouponListingMode == 2)
                 product = productRepository.GetProductByCountryId("couponunlimited");
-            if (source.CouponListingMode == 3)
+            else if (source.CouponListingMode == 3)
                 product = productRepository.GetProductByCountryId("couponnationwide");
+            else {
+                product = productRepository.GetProductByCountryId("couponfree");
+            }
             // Tax Applied
             var tax = taxRepository.GetTaxByCountryId(user.Company.CountryId);
             // Total includes tax

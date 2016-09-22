@@ -16,7 +16,7 @@
         <div class="row" id="user-profile">
             <div class="col-lg-12 col-md-8 col-sm-8" style="padding-bottom: 10px;">
                 <div class="clearfix ">
-                    <div class="col-xs-12" style="text-align: right; padding-right:0;margin-bottom:10px;">
+                    <div class="col-xs-12" style="text-align: right; padding-right:0;margin-bottom:1px; margin-top:10px;">
 
                         <button class="btn btn-default" id="saveBtn" data-bind="click:$root.closeEditDialog">Close</button>
                     </div>
@@ -100,7 +100,7 @@
 
                                             </div>
                                             <div class="col-lg-6">
-                                                <button class="btn  btn-success" id="saveBtn" data-bind="click :$root.onApprovePq">Approve</button>
+                                                <button class="btn  btn-success" id="saveBtn" data-bind="click :$root.onApprovePq,visible:rejectedReason()==null ||rejectedReason()==''">Approve</button>
                                                 <button class="btn  btn-danger" id="delbtn" data-bind="click:$root.onRejectPQ ,enable: $root.hasChangesOnPQ, css: { ' btn-danger': $root.hasChangesOnPQ }">Reject</button>
                                             </div>
                                         </div>
