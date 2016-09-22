@@ -5487,7 +5487,9 @@ margin-right: auto !important;
 background-image: url(/Images/crowdcentz_logo.png) !important;
     
 }
-
+.CreateBtnWidth {
+    width:185px!important;
+}
 
 .cashbeta{
        background-image: url(/Images/beta.jpg);

@@ -301,6 +301,8 @@ define("pQuestion/pQuestion.viewModel",
                         HeaderText("New Survey Question");
 
 
+                        
+
                         StatusText("Draft");
                         isTerminateBtnVisible(false);
                         isNewCampaign(true);
@@ -324,7 +326,7 @@ define("pQuestion/pQuestion.viewModel",
                         getAudienceCount();
                         //buildParentSQList();
                         bindAudienceReachCount();
-                    
+                        selectedQuestion().reset();
                         view.initializeTypeahead();
                         isEditorVisible(true);
                     },
@@ -436,7 +438,7 @@ define("pQuestion/pQuestion.viewModel",
 
                         SelectedPvcVal(item.answerNeeded());
 
-
+                        selectedQuestion().reset();
                     },
                     
                  getSelectedItems=function(items,pqid) {
@@ -729,6 +731,7 @@ define("pQuestion/pQuestion.viewModel",
 
                                 $("#topArea,#panelArea,#Heading_div").css("display", "block");
                                 
+                                CloseContent();
                                 selectedQuestion().ProfileQuestionTargetCriteria.removeAll();
                             },
                             error: function () {
@@ -1360,9 +1363,34 @@ define("pQuestion/pQuestion.viewModel",
                            $(".close").click();
                      },
                         closeEditDialog = function () {
-                        isEditorVisible(false); enableControls();
-                        $("#panelArea,#topArea,#headlabel").css("display", "block");
-                    },
+                            
+                            if (selectedQuestion().hasChanges()) {
+
+                                confirmation.messageText("Do you want to save changes?");
+                                confirmation.afterProceed(function () {
+                                    SaveAsDraft();
+                                });
+                                confirmation.afterCancel(function () {
+
+                                    CloseContent();
+                                });
+
+                                confirmation.show();
+
+                            }
+                            else {
+                                CloseContent();
+                            }
+
+                        },
+
+                        CloseContent = function ()
+                        {
+                            isEditorVisible(false); enableControls();
+                            $("#panelArea,#topArea,#headlabel").css("display", "block");
+
+                        }
+                ,
                 saveCriteria = function (type, item) {
                    
                     var selectedQuestionstring = item.VerifyQuestion;
