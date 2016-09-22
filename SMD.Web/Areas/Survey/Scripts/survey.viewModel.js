@@ -235,6 +235,7 @@ define("survey/survey.viewModel",
                         view.initializeTypeahead();
                         bindAudienceReachCount();
                         selectedQuestionCountryList([]);
+                        selectedQuestion().reset();
                         //if (userBaseData().CountryId != null) {
                         //    selectedQuestion().SurveyQuestionTargetLocation.push(new model.SurveyQuestionTargetLocation.Create({
                         //        CountryId: userBaseData().CountryId,
@@ -251,9 +252,28 @@ define("survey/survey.viewModel",
                     },
                     // Close Editor 
                     closeEditDialog = function () {
-                        isEditorVisible(false); enableControls();
-                        $("#panelArea,#topArea,#Heading_div").css("display", "block");
+                        debugger;
+                        if (selectedQuestion().hasChanges()) {
+                            confirmation.messageText("Do you want to save changes?");
+                            confirmation.afterProceed(function () {
+                                SaveAsDraft();
+                            });
+                            confirmation.afterCancel(function () {
+
+                                CloseContent();
+                            });
+
+                            confirmation.show();
+
+                        }
+                        else {
+                            CloseContent();
+                        }
                     },
+                  CloseContent = function () {
+                      isEditorVisible(false); enableControls();
+                      $("#panelArea,#topArea,#Heading_div").css("display", "block");
+                  },
                     SurveyQuestionsByFilter=function()
                     {
                         getQuestions();
@@ -284,6 +304,8 @@ define("survey/survey.viewModel",
                         selectedQuestionCountryList([]); $("#panelArea,#topArea").css("display", "none");
                         gotoScreen(1);
                         isTerminateBtnVisible(false);
+                        
+
                         isShowArchiveBtn(false);
                         if (item.Status() == 1 || item.Status() == 2 || item.Status() == 3 || item.Status() == 4 || item.Status() == null || item.Status() == 7 || item.Status() == 9) {
                             canSubmitForApproval(true);
@@ -361,6 +383,7 @@ define("survey/survey.viewModel",
                                            }
                                           
                                        }
+                                       selectedQuestion().reset();
                                      //  getParentSurveyList();
                                    },
                                    error: function () {
@@ -1064,7 +1087,7 @@ define("survey/survey.viewModel",
                                         toastr.success("Successfully saved.");
 
                                         $("#Heading_div").css("display", "block");
-                                        closeEditDialog();
+                                        CloseContent();
 
 
                                     },
