@@ -463,7 +463,7 @@ namespace SMD.Implementation.Services
                 //Languages = _languageRepository.GetAllLanguages(),
                 TotalCount = rowCount
                 // UserAndCostDetails = _adCampaignRepository.GetUserAndCostDetail()
-            };
+            }; 
         }
 
         public CampaignResponseModel GetCampaignById(long CampaignId)
