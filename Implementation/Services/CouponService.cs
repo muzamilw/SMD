@@ -358,6 +358,7 @@ namespace SMD.Implementation.Services
                 }
             }
             string[] paths = SaveImages(couponModel);
+
             if (paths != null && paths.Count() > 0)
             {
               
@@ -378,7 +379,7 @@ namespace SMD.Implementation.Services
                 }
                 if (!string.IsNullOrEmpty(paths[7]))
                 {
-                    couponModel.LogoUrl = paths[7];
+                    couponModel.LogoUrl = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + paths[7];
                 }
                 else if (couponModel.LogoUrl != null && couponModel.LogoUrl.Contains("Content/Images"))
                 {
@@ -704,12 +705,16 @@ namespace SMD.Implementation.Services
             var user = webApiUserService.GetUserByUserId(source.UserId);
             // Get Current Product
             var product = (dynamic)null;
+
             if(source.CouponListingMode==1)
                 product = productRepository.GetProductByCountryId("couponfree");
-            if (source.CouponListingMode == 2)
+            else if (source.CouponListingMode == 2)
                 product = productRepository.GetProductByCountryId("couponunlimited");
-            if (source.CouponListingMode == 3)
+            else if (source.CouponListingMode == 3)
                 product = productRepository.GetProductByCountryId("couponnationwide");
+            else {
+                product = productRepository.GetProductByCountryId("couponfree");
+            }
             // Tax Applied
             var tax = taxRepository.GetTaxByCountryId(user.Company.CountryId);
             // Total includes tax

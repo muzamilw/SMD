@@ -1416,6 +1416,7 @@ define("pQuestion/pQuestion.viewModel",
                         {
                             isEditorVisible(false); enableControls();
                             $("#panelArea,#topArea,#headlabel").css("display", "block");
+                            filterProfileQuestion();
 
                         }
                 ,

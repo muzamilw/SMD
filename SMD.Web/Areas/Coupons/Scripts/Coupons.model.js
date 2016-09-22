@@ -5,7 +5,8 @@
             HighlightLine5, HowToRedeemLine1, HowToRedeemLine2, HowToRedeemLine3, HowToRedeemLine4, HowToRedeemLine5, LanguageId, LocationBranchId, LocationCity, LocationLAT,
             LocationLine1, LocationLine2, LocationLON, LocationPhone, LocationState, LocationTitle, LocationZipCode, LogoUrl, ModifiedBy, ModifiedDateTime, Price, RejectedBy,
             Rejecteddatetime, RejectedReason, Savings, SearchKeywords, Status, SwapCost, UserId, CouponTitle, CouponExpirydate, CouponQtyPerUser, CouponId, couponImage1, CouponImage2, CouponImage3,
-            CurrencyId, CouponListingMode, CouponActiveMonth, CouponActiveYear, CouponRedeemedCount, CouponViewCount, CouponIssuedCount, SubmissionDateTime, LocationCountryId, CouponStartDate, CouponEndDate, Priority
+            CurrencyId, CouponListingMode, CouponActiveMonth, CouponActiveYear, CouponRedeemedCount, CouponViewCount, CouponIssuedCount, SubmissionDateTime, LocationCountryId, CouponStartDate, CouponEndDate, Priority,
+            ShowBuyitBtn, BuyitLandingPageUrl, BuyitBtnLabel
           ) {
           var
               //type and userID will be set on server sside
@@ -83,6 +84,16 @@
 
               CouponEndDate = ko.observable((CouponEndDate !== null && CouponEndDate !== undefined) ? moment(CouponEndDate).toDate() : undefined),//ko.observable(),
               Priority = ko.observable(Priority),
+
+              ShowBuyitBtn = ko.observable(ShowBuyitBtn),
+              BuyitLandingPageUrl = ko.observable(BuyitLandingPageUrl),
+              BuyitBtnLabel = ko.observable(BuyitBtnLabel),
+
+
+
+
+
+
                // Errors
               errors = ko.validation.group({ }),
                 // Is Valid 
@@ -156,7 +167,12 @@
                  LocationCountryId: LocationCountryId,
                  Priority: Priority,
                  CouponStartDate: CouponStartDate,
-                 CouponEndDate: CouponEndDate
+                 CouponEndDate: CouponEndDate,
+
+                ShowBuyitBtn : ShowBuyitBtn,
+                BuyitLandingPageUrl : BuyitLandingPageUrl,
+                BuyitBtnLabel: BuyitBtnLabel
+
               }),
               // Has Changes
               hasChanges = ko.computed(function () {
@@ -185,9 +201,14 @@
                       CouponActiveYear: CouponActiveYear(),
                       CouponExpirydate: moment(CouponExpirydate()).format(ist.utcFormat) + 'Z',
                       CouponId: CouponId(),
+
+
                       couponImage1: bannerImage1 == "" ? couponImage1() : bannerImage1,
                       CouponImage2: bannerImage2 == "" ? CouponImage2() : bannerImage2,
                       CouponImage3: bannerImage3 == "" ? CouponImage3() : bannerImage3,
+
+
+
                       CouponIssuedCount: CouponIssuedCount(),
                       CouponListingMode: CouponListingMode(),
                       CouponQtyPerUser: CouponQtyPerUser(),
@@ -244,7 +265,10 @@
                       CouponCategories: selectedCoupons,
                       CouponStartDate: moment(CouponStartDate()).format(ist.utcFormat) + 'Z',
                       CouponEndDate: moment(CouponEndDate()).format(ist.utcFormat) + 'Z',
-                      Priority: Priority()
+                      Priority: Priority(),
+                      ShowBuyitBtn: ShowBuyitBtn(),
+                      BuyitLandingPageUrl: BuyitLandingPageUrl(),
+                      BuyitBtnLabel: BuyitBtnLabel()
                       
                   };
               };
@@ -320,6 +344,9 @@
               CouponStartDate: (CouponStartDate),
               CouponEndDate: (CouponEndDate),
               Priority: (Priority),
+              ShowBuyitBtn : (ShowBuyitBtn),
+              BuyitLandingPageUrl : (BuyitLandingPageUrl),
+              BuyitBtnLabel: (BuyitBtnLabel),
               reset: (reset)
           };
       };
@@ -327,7 +354,7 @@
    
     // Factory Method
     Coupon.Create = function (source) {
-        debugger;
+        
         var coupon = new Coupon(source.FinePrintLine1, source.FinePrintLine2, source.FinePrintLine3, source.FinePrintLine4, source.FinePrintLine5,
             source.GeographyColumn, source.HighlightLine1, source.HighlightLine2, source.HighlightLine3, source.HighlightLine4,
             source.HighlightLine5, source.HowToRedeemLine1, source.HowToRedeemLine2, source.HowToRedeemLine3, source.HowToRedeemLine4,
@@ -336,6 +363,7 @@
             source.LocationTitle, source.LocationZipCode, source.LogoUrl, source.ModifiedBy, source.ModifiedDateTime, source.Price, source.RejectedBy,
             source.Rejecteddatetime, source.RejectedReason, source.Savings, source.SearchKeywords, source.Status, source.SwapCost, source.UserId,source.CouponTitle,source.CouponExpirydate,
             source.CouponQtyPerUser, source.CouponId, source.couponImage1, source.CouponImage2, source.CouponImage3, source.CurrencyId, source.CouponListingMode, source.CouponActiveMonth, source.CouponActiveYear, source.CouponRedeemedCount, source.CouponViewCount, source.CouponIssuedCount, source.SubmissionDateTime, source.LocationCountryId, source.CouponStartDate, source.CouponEndDate, source.Priority
+            , source.ShowBuyitBtn, source.BuyitLandingPageUrl, source.BuyitBtnLabel
             );
 
         _.each(source.CouponCategories, function (item) {

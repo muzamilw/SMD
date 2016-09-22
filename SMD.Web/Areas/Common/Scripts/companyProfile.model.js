@@ -29,7 +29,7 @@
                 FacebookHandle = ko.observable(FacebookHandle),
                 InstagramHandle = ko.observable(InstagramHandle),
                 PinterestHandle = ko.observable(PinterestHandle),
-                selectedMedia = ko.observable(),
+                selectedMedia = ko.observable().extend({ required: true }),
                 Logo = ko.observable(Logo),
                 LogoImageBase64 = ko.observable(LogoImageBase64),
                 
@@ -60,7 +60,8 @@
                   //BillingCityId: BillingCityId,
                   BillingZipCode: BillingZipCode,
                   BillingPhone: BillingPhone,
-                  BillingEmail: BillingEmail
+                  BillingEmail: BillingEmail,
+                  selectedMedia: selectedMedia,
 
               }),
               // Is Valid

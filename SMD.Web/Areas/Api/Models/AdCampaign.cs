@@ -174,6 +174,11 @@ namespace SMD.MIS.Areas.Api.Models
         public Nullable<System.DateTime> CouponEndDate { get; set; }
         public Nullable<int> Priority { get; set; }
         public string CurrencySymbol { get; set; }
+
+        public Nullable<bool> ShowBuyitBtn { get; set; }
+        public string BuyitLandingPageUrl { get; set; }
+        public string BuyitBtnLabel { get; set; }
+
         public virtual IEnumerable<SMD.MIS.Areas.Api.Models.CouponCategories> CouponCategories { get; set; }
     }
 }
