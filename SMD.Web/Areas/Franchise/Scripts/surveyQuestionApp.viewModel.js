@@ -85,16 +85,33 @@ define("FranchiseDashboard/surveyQuestionApp.viewModel",
                         }
                         return (selectedQuestion().hasChanges());
                     }),
-                    onRejectQuestion= function() {
-                        if (selectedQuestion().rejectionReason() == undefined || selectedQuestion().rejectionReason() == "" || selectedQuestion().rejectionReason() == " ") {
-                            toastr.info("Please add rejection reason!");
-                            return false;
-                        }
-                        onSaveQuestion();
+                    onRejectQuestion = function () {
+
+                        confirmation.messageText("Do you want to Reject this Survay Cards ?");
+                        confirmation.show();
+                        confirmation.afterCancel(function () {
+                            confirmation.hide();
+                        });
+                        confirmation.afterProceed(function () {
+                            if (selectedQuestion().rejectionReason() == undefined || selectedQuestion().rejectionReason() == "" || selectedQuestion().rejectionReason() == " ") {
+                                toastr.info("Please add rejection reason!");
+                                return false;
+                            }
+                            onSaveQuestion();
+                        });
                     },
                      onApproveQuestion = function () {
-                         selectedQuestion().isApproved(true);
-                         onSaveQuestion();
+
+                         confirmation.messageText("Do you want to approve this Survay Cards ? System will attempt to collect payment and generate invoice");
+                         confirmation.show();
+                         confirmation.afterCancel(function () {
+                             confirmation.hide();
+                         });
+                         confirmation.afterProceed(function () {
+                             selectedQuestion().isApproved(true);
+                             onSaveQuestion();
+                             toastr.success("Approved Successfully.");
+                         });
                      },
                     // Initialize the view model
                     initialize = function (specifiedView) {

@@ -9,7 +9,7 @@
                     <li><a href="~/Dashboard/Index">&nbsp;</a></li>
                 </ol>
                 <div class="clearfix">
-                    <h1 class="pull-left" style="padding-left:0px;">Profile Questions For Approval</h1>
+                    <h1 class="pull-left" style="padding-left:0px;">Survey questions for approval</h1>
                 </div>
             </div>
         </div>
@@ -44,7 +44,7 @@
             </div>
         </div>
         <script id="adCampaignsLVTemplate" type="text/html">
-            <tr style="cursor: pointer">
+            <tr style="cursor: pointer" data-bind="click:$root.onEditPQ">
                 <td>
                     <p data-bind="text:companyId()!=null ?submittedBy:'system survey'"></p>
                 </td>
