@@ -255,3 +255,21 @@ ADD ResponseType int default NULL
 
 --ResponseType = 3 // for referred to landing pages in UserPurchasedCoupon
 
+
+
+
+
+
+ALTER TABLE dbo.coupon
+	
+	alter column HighlightLine1 nvarchar(800) NULL
+ALTER TABLE dbo.coupon
+	alter column FinePrintLine1 nvarchar(800) NULL
+
+
+
+
+	ALTER TABLE dbo.coupon ADD
+	ShowBuyitBtn bit NULL,
+	BuyitLandingPageUrl nvarchar(500) NULL,
+	BuyitBtnLabel nvarchar(200) NULL

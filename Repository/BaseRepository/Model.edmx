@@ -406,12 +406,12 @@
           <Property Name="CouponImage2" Type="nvarchar(max)" />
           <Property Name="CouponImage3" Type="nvarchar(max)" />
           <Property Name="LogoUrl" Type="nvarchar" MaxLength="200" />
-          <Property Name="HighlightLine1" Type="nvarchar" MaxLength="100" />
+          <Property Name="HighlightLine1" Type="nvarchar" MaxLength="800" />
           <Property Name="HighlightLine2" Type="nvarchar" MaxLength="100" />
           <Property Name="HighlightLine3" Type="nvarchar" MaxLength="100" />
           <Property Name="HighlightLine4" Type="nvarchar" MaxLength="100" />
           <Property Name="HighlightLine5" Type="nvarchar" MaxLength="100" />
-          <Property Name="FinePrintLine1" Type="nvarchar" MaxLength="100" />
+          <Property Name="FinePrintLine1" Type="nvarchar" MaxLength="800" />
           <Property Name="FinePrintLine2" Type="nvarchar" MaxLength="100" />
           <Property Name="FinePrintLine3" Type="nvarchar" MaxLength="100" />
           <Property Name="FinePrintLine4" Type="nvarchar" MaxLength="100" />
@@ -437,6 +437,9 @@
           <Property Name="CouponStartDate" Type="datetime" />
           <Property Name="CouponEndDate" Type="datetime" />
           <Property Name="Priority" Type="int" />
+          <Property Name="ShowBuyitBtn" Type="bit" />
+          <Property Name="BuyitLandingPageUrl" Type="nvarchar" MaxLength="500" />
+          <Property Name="BuyitBtnLabel" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="CouponCategories">
           <Key>
@@ -4972,12 +4975,12 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Property Name="CouponImage2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CouponImage3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="LogoUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="HighlightLine1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="HighlightLine1" Type="String" MaxLength="800" FixedLength="false" Unicode="true" />
           <Property Name="HighlightLine2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="HighlightLine3" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="HighlightLine4" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="HighlightLine5" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="FinePrintLine1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FinePrintLine1" Type="String" MaxLength="800" FixedLength="false" Unicode="true" />
           <Property Name="FinePrintLine2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="FinePrintLine3" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="FinePrintLine4" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
@@ -5009,6 +5012,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Property Name="CouponStartDate" Type="DateTime" Precision="3" />
           <Property Name="CouponEndDate" Type="DateTime" Precision="3" />
           <Property Name="Priority" Type="Int32" />
+          <Property Name="ShowBuyitBtn" Type="Boolean" />
+          <Property Name="BuyitLandingPageUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="BuyitBtnLabel" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_CompanyBranch_BranchCategory">
           <End Type="DomainModels.BranchCategory" Role="BranchCategory" Multiplicity="0..1" />
@@ -6728,6 +6734,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <EntitySetMapping Name="Coupons">
             <EntityTypeMapping TypeName="DomainModels.Coupon">
               <MappingFragment StoreEntitySet="Coupon">
+                <ScalarProperty Name="BuyitBtnLabel" ColumnName="BuyitBtnLabel" />
+                <ScalarProperty Name="BuyitLandingPageUrl" ColumnName="BuyitLandingPageUrl" />
+                <ScalarProperty Name="ShowBuyitBtn" ColumnName="ShowBuyitBtn" />
                 <ScalarProperty Name="Priority" ColumnName="Priority" />
                 <ScalarProperty Name="CouponEndDate" ColumnName="CouponEndDate" />
                 <ScalarProperty Name="CouponStartDate" ColumnName="CouponStartDate" />

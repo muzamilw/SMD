@@ -34,7 +34,7 @@ else
 
 <div class="row" id="Heading_div">
 
-    <label style="font-size:24px;color:black!important;margin-top:7px;">Survey cards</label>
+    <label style="font-size:24px;color:black!important;margin-top:14px;">Survey cards</label>
 
 </div> 
 <div class="row" id="surveyBinding" style="margin-top: 5px;">
@@ -177,10 +177,16 @@ else
 
 
                 <div class="col-sm-12" style="float: left; margin-bottom:20px;">
-                    <br />
-                    <span style="font-size: 24px; color:#81d3dc;" >picture survey</span><br />
-                    <br />
-                    <span class="red bold rightAlign" style=" margin-right: 14px;margin-top:-11px!important;display:none;"> Watch Video <img src="/Images/youtube_play.JPG" height="25px" /> </span> <span style="font-size: 14px;margin-right:8px;" class="Theme_subheading-Clr">Run a 2 picture card survey and create a new target audience groups that can be used in any of your video or display ads campaigns.</span>&nbsp; &nbsp; &nbsp;<br />
+                    <div>
+                        <span style="font-size:18px; color:#81d3dc;float:left;margin-top:17px;">Picture survey</span>
+                        <button class="btn btn-primary btnclick FloatRight" data-bind="click:$root.addNewSurvey" style="float:right;margin-top:2px; text-align:right">
+                            Create Survey Card
+                        </button>
+                        <div style="clear:both;"></div>
+                    </div>
+                    
+                    
+                    <span class="red bold rightAlign" style=" margin-right: 14px;margin-top:-11px!important;display:none;"> Watch Video <img src="/Images/youtube_play.JPG" height="25px" /> </span> <span style="font-size: 14px;margin-right:8px;" class="Theme_subheading-Clr">Run a 2 picture card survey and create a new target audience groups <br />that can be used in any of your video or display ads campaigns.</span>&nbsp; &nbsp; &nbsp;<br />
                 </div>
 
 
@@ -193,20 +199,20 @@ else
                     <div class="filter-block">
                         <div class="form-group">
 
-                            <div class="col-xs-3">
+                            <div class="col-xs-2" style="margin-top:10px;">
                                 <input type="text" class="form-control" placeholder="Search..." data-bind="value:$root.filterValue">
                                 <i data-bind="click:$root.filterSurveyQuestion" class="fa fa-search search-icon" style=" margin-right: 8px;"></i>
                             </div>
-                            <div class="col-xs-3">
+                            <div class="col-xs-2" style="margin-top:10px;">
                                 <select class="form-control" data-bind="options: $root.qStatuses, optionsText: 'value', optionsValue: 'id',value:$root.statusFilterValue,event:{ change: $root.SurveyQuestionsByFilter}"></select>
                             </div>
 
                             <div class="col-xs-6">
                                 @*<button class="btn  btn-info SurvyButtons" id="saveBtn" data-bind="click:$root.filterProfileQuestion" style="display:none!important;">Search</button>
                                     <button class="btn btn-default SurvyButtons" id="saveBtn" data-bind="click:$root.clearFilters" style="display:none!important;">Reset</button>*@
-                                <button class="btn btn-primary btnclick FloatRight" data-bind="click:$root.addNewSurvey" style="float:right;margin-top:2px; text-align:right">
+                                @*<button class="btn btn-primary btnclick FloatRight" data-bind="click:$root.addNewSurvey" style="float:right;margin-top:2px; text-align:right">
                                     Create Survey Card
-                                </button>
+                                </button>*@
                             </div>
 
                         </div>

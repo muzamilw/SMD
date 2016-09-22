@@ -67,7 +67,7 @@
                                 var branch = new model.Branch.Create(data);
                                 selectedBranchTemp(branch);
 
-                                getCitiesDropDown(branch.countryId());
+                                getCitiesDropDownForSelectedBranch(branch.countryId());
                                 
 
                                 //}
@@ -551,12 +551,12 @@
                                cities.valueHasMutated();
 
 
-                               if (  selectedBranchTemp() != null)
-                               {
-                                   selectedBranch(selectedBranchTemp());
-                                   triggerGoogleMapSelection();
+                               //if (  selectedBranchTemp() != null)
+                               //{
+                               //    selectedBranch(selectedBranchTemp());
+                               //    triggerGoogleMapSelection();
 
-                               }
+                               //}
                            }
                        },
                        error: function () {
@@ -565,6 +565,31 @@
                    });
 
                 },
+                getCitiesDropDownForSelectedBranch = function (data) {
+
+                        dataService.getCitiesByCountry(
+                       { countryId: data },
+                       {
+                           success: function (data) {
+                               if (data.length > 0) {
+                                   cities.removeAll();
+                                   ko.utils.arrayPushAll(cities(), data);
+                                   cities.valueHasMutated();
+
+
+                                   if (selectedBranchTemp() != null) {
+                                       selectedBranch(selectedBranchTemp());
+                                       triggerGoogleMapSelection();
+
+                                   }
+                               }
+                           },
+                           error: function () {
+                               toastr.error("Failed to load Cities.");
+                           }
+                       });
+
+                    },
                 getCompanyddress = function ()
                 {
                     dataService.getCompanyAddress({

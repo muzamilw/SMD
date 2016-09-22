@@ -12,7 +12,7 @@
 
 <div class="row" id="Heading_div">
 
-    <label style="font-size:24px;color:black!important;margin-top:7px;">Survey questions</label>
+    <label style="font-size:24px;color:black!important;margin-top:14px;">Survey questions</label>
 
 </div> 
 
@@ -179,17 +179,17 @@
 
 
                     <div class="col-sm-12" style="float: left; margin-bottom:20px;">
-                        <br />
+                       <br />
                         <div>
-                            <span style="font-size: 24px;float:left;color:#81d3dc!important;">Run a 2, 4 or 6 Q & A survey.</span>
-                            <button style="float:right;margin-top:-10px;" class="btn btn-primary" data-bind="click:$root.addNewProfileQuestion">
+                            <span style="font-size:18px;float:left;color:#81d3dc!important;">Run a 2, 4 or 6 Q & A survey.</span>
+                            <button style="float:right;margin-top:-17px;" class="btn btn-primary" data-bind="click:$root.addNewProfileQuestion">
                                 Create Survey Questions
                             </button>
                         </div>
                         <div style="clear:both;"></div>
                        
-                        <span class="red bold rightAlign" style="display:none;"> Watch Video <img src="/Images/youtube_play.JPG" height="25px" /> </span>   </span><br />
-                        <span style="font-size: 14px;" class="Theme_subheading-Clr ">Run a question and answer survey and create new target audience groups that can be used in any of your video or display ads campaigns.  .</span>
+                        @*<span class="red bold rightAlign" style="display:none;"> Watch Video <img src="/Images/youtube_play.JPG" height="25px" /> </span>   </span><br />*@
+                        <span style="font-size: 14px;" class="Theme_subheading-Clr ">Run a question and answer survey and create new target audience groups <br />that can be used in any of your video or display ads campaigns.  .</span>
                     </div>
 
 
@@ -201,7 +201,7 @@
                     <form data-bind="submit:$root.filterProfileQuestion">
                         <div class="col-sm-2" style="float:left;">
 
-                            <div class="filter-block" style="margin-right: -10px">
+                            <div class="filter-block" style="margin-right: -10px;margin-top:10px;">
                                 <div class="form-group ">
                                     <input type="text" class="form-control " placeholder="Search..." data-bind="value: $root.filterValue">
                                     <i class="fa fa-search search-icon" data-bind="click: $root.filterProfileQuestion"></i>
@@ -213,7 +213,7 @@
 
                         </div>
 
-                        <div class="col-sm-2" style="float:left;">
+                        <div class="col-sm-2" style="float:left;margin-top:10px;">
                             <select id="ddlStatus" class="form-control" style="float:right;height:36px;margin-top:2px;" data-bind="options: $root.qGroup, optionsText: 'ProfileGroupName', optionsValue: 'ProfileGroupId', optionsCaption:'All' , value:$root.qGroupfilterValue,event:{ change: $root.getQuestionsByFilter}">
                                 @*<option value="0">All Statuses</option>*@
                             </select>

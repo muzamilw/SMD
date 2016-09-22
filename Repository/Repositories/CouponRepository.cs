@@ -118,11 +118,11 @@ namespace SMD.Repository.Repositories
                          && (campaign.CompanyId == CompanyId || isAdmin);
 
 
-                rowCount = DbSet.Count(query);
+              
                 IEnumerable<Coupon> adCampaigns = null;
                 if (request.ShowCoupons != null && request.ShowCoupons == true)
                 {
-                    rowCount = DbSet.Count();
+                   
                     adCampaigns = DbSet.Select(c=>c).Where(query).OrderByDescending(g => g.CouponId)
                       .Skip(fromRow)
                       .Take(toRow)
@@ -136,14 +136,16 @@ namespace SMD.Repository.Repositories
                          .ToList();
                 }
 
-                if (adCampaigns != null && adCampaigns.Count() > 0)
-                {
-                    foreach (var ad in adCampaigns)
-                    {
-                     
-                    }
+                rowCount = DbSet.Count(query);
 
-                }
+                //if (adCampaigns != null && adCampaigns.Count() > 0)
+                //{
+                //    foreach (var ad in adCampaigns)
+                //    {
+                     
+                //    }
+
+                //}
                 return adCampaigns;
             }
         }

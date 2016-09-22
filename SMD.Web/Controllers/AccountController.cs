@@ -606,12 +606,14 @@ namespace SMD.MIS.Controllers
                         CreateUserAccounts(CompanyId);
                         TransactionManager.UserSignupFreeGiftBalanceTransaction(500, CompanyId);
 
-
-                        if (Request.Cookies["invitationcode"].Value != null)
+                        if (Request.Cookies["invitationcode"] != null)
                         {
+                            if (Request.Cookies["invitationcode"].Value != null)
+                            {
 
-                            manageUserService.AcceptInvitation(Request.Cookies["invitationcode"].Value, user.Id);
+                                manageUserService.AcceptInvitation(Request.Cookies["invitationcode"].Value, user.Id);
 
+                            }
                         }
                         return RedirectToAction("SelectCompany");
                     }

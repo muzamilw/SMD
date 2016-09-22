@@ -566,7 +566,11 @@ namespace SMD.MIS.ModelMappers
                 CouponCategories = source.CouponCategories != null ? source.CouponCategories.Select(coupon => coupon.CreateFrom()) : null,
                 CouponStartDate=source.CouponStartDate,
                 CouponEndDate=source.CouponEndDate,
-                Priority=source.Priority
+                Priority=source.Priority,
+                BuyitBtnLabel = source.BuyitBtnLabel,
+                BuyitLandingPageUrl = source.BuyitLandingPageUrl,
+                ShowBuyitBtn = source.ShowBuyitBtn
+               
               };
 
 
