@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySetsE567B8AD834B0199E2C80EE616E3528762AE148E9A0F6B23A28C7F04D829ACAC))]
+[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets6E9498A2FFB6FE04715962F6DE6E6512CD193EE073F5F967B77457F66B32C69E))]
 
 namespace Edm_EntityMappingGeneratedViews
 {
@@ -17,18 +17,18 @@ namespace Edm_EntityMappingGeneratedViews
     /// <Summary>
     /// The type contains views for EntitySets and AssociationSets that were generated at design time.
     /// </Summary>
-    public sealed class ViewsForBaseEntitySetsE567B8AD834B0199E2C80EE616E3528762AE148E9A0F6B23A28C7F04D829ACAC : System.Data.Mapping.EntityViewContainer
+    public sealed class ViewsForBaseEntitySets6E9498A2FFB6FE04715962F6DE6E6512CD193EE073F5F967B77457F66B32C69E : System.Data.Mapping.EntityViewContainer
     {
         
         /// <Summary>
         /// The constructor stores the views for the extents and also the hash values generated based on the metadata and mapping closure and views.
         /// </Summary>
-        public ViewsForBaseEntitySetsE567B8AD834B0199E2C80EE616E3528762AE148E9A0F6B23A28C7F04D829ACAC()
+        public ViewsForBaseEntitySets6E9498A2FFB6FE04715962F6DE6E6512CD193EE073F5F967B77457F66B32C69E()
         {
             this.EdmEntityContainerName = "BaseDbContext";
             this.StoreEntityContainerName = "SMDModelStoreContainer";
-            this.HashOverMappingClosure = "21d3ee65882fd4fddcb02af5d6d4bb267c696a3c2982be7a60b716276a129806";
-            this.HashOverAllExtentViews = "f6742bd99446e54feb42a6f1691c2ecd97401f97fb38f6667a3e224069ec0bc1";
+            this.HashOverMappingClosure = "fb1ab695dabfc8b13f6ae7ec9c71d0b3e63981ad420d6d86cfb561f032534955";
+            this.HashOverAllExtentViews = "a9d581662e5b89366b2d66d1cfba1097afbce45463031f50f1ee6ddebe56e68d";
             this.ViewCount = 110;
         }
         
@@ -1448,7 +1448,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// </Summary>
         private System.Collections.Generic.KeyValuePair<string, string> GetView34()
         {
-            System.Text.StringBuilder viewString = new System.Text.StringBuilder(5364);
+            System.Text.StringBuilder viewString = new System.Text.StringBuilder(5619);
             viewString.Append("\r\n    SELECT VALUE -- Constructing Coupon\r\n        [SMDModel.Store.Coupon](T1.Co");
             viewString.Append("upon_CouponId, T1.Coupon_LanguageId, T1.Coupon_UserId, T1.Coupon_CouponTitle, T1");
             viewString.Append(".Coupon_SearchKeywords, T1.Coupon_Status, T1.Coupon_Archived, T1.Coupon_Approved");
@@ -1470,7 +1470,8 @@ namespace Edm_EntityMappingGeneratedViews
             viewString.Append("eemLine1, T1.Coupon_HowToRedeemLine2, T1.Coupon_HowToRedeemLine3, T1.Coupon_HowT");
             viewString.Append("oRedeemLine4, T1.Coupon_HowToRedeemLine5, T1.Coupon_SubmissionDateTime, T1.Coupo");
             viewString.Append("n_LocationCountryId, T1.Coupon_CouponStartDate, T1.Coupon_CouponEndDate, T1.Coup");
-            viewString.Append("on_Priority)\r\n    FROM (\r\n        SELECT \r\n            T.CouponId AS Coupon_Coup");
+            viewString.Append("on_Priority, T1.Coupon_ShowBuyitBtn, T1.Coupon_BuyitLandingPageUrl, T1.Coupon_Bu");
+            viewString.Append("yitBtnLabel)\r\n    FROM (\r\n        SELECT \r\n            T.CouponId AS Coupon_Coup");
             viewString.Append("onId, \r\n            T.LanguageId AS Coupon_LanguageId, \r\n            T.UserId AS");
             viewString.Append(" Coupon_UserId, \r\n            T.CouponTitle AS Coupon_CouponTitle, \r\n           ");
             viewString.Append(" T.SearchKeywords AS Coupon_SearchKeywords, \r\n            T.Status AS Coupon_Sta");
@@ -1515,8 +1516,10 @@ namespace Edm_EntityMappingGeneratedViews
             viewString.Append("SubmissionDateTime, \r\n            T.LocationCountryId AS Coupon_LocationCountryI");
             viewString.Append("d, \r\n            T.CouponStartDate AS Coupon_CouponStartDate, \r\n            T.Co");
             viewString.Append("uponEndDate AS Coupon_CouponEndDate, \r\n            T.Priority AS Coupon_Priority");
-            viewString.Append(", \r\n            True AS _from0\r\n        FROM BaseDbContext.Coupons AS T\r\n    ) A");
-            viewString.Append("S T1");
+            viewString.Append(", \r\n            T.ShowBuyitBtn AS Coupon_ShowBuyitBtn, \r\n            T.BuyitLand");
+            viewString.Append("ingPageUrl AS Coupon_BuyitLandingPageUrl, \r\n            T.BuyitBtnLabel AS Coupo");
+            viewString.Append("n_BuyitBtnLabel, \r\n            True AS _from0\r\n        FROM BaseDbContext.Coupon");
+            viewString.Append("s AS T\r\n    ) AS T1");
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.Coupon", viewString.ToString());
         }
         
@@ -2664,7 +2667,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// </Summary>
         private System.Collections.Generic.KeyValuePair<string, string> GetView76()
         {
-            System.Text.StringBuilder viewString = new System.Text.StringBuilder(5371);
+            System.Text.StringBuilder viewString = new System.Text.StringBuilder(5626);
             viewString.Append("\r\n    SELECT VALUE -- Constructing Coupons\r\n        [DomainModels.Coupon](T1.Cou");
             viewString.Append("pon_CouponId, T1.Coupon_LanguageId, T1.Coupon_UserId, T1.Coupon_CouponTitle, T1.");
             viewString.Append("Coupon_SearchKeywords, T1.Coupon_Status, T1.Coupon_Archived, T1.Coupon_Approved,");
@@ -2686,7 +2689,8 @@ namespace Edm_EntityMappingGeneratedViews
             viewString.Append("emLine1, T1.Coupon_HowToRedeemLine2, T1.Coupon_HowToRedeemLine3, T1.Coupon_HowTo");
             viewString.Append("RedeemLine4, T1.Coupon_HowToRedeemLine5, T1.Coupon_SubmissionDateTime, T1.Coupon");
             viewString.Append("_LocationCountryId, T1.Coupon_CouponStartDate, T1.Coupon_CouponEndDate, T1.Coupo");
-            viewString.Append("n_Priority)\r\n    FROM (\r\n        SELECT \r\n            T.CouponId AS Coupon_Coupo");
+            viewString.Append("n_Priority, T1.Coupon_ShowBuyitBtn, T1.Coupon_BuyitLandingPageUrl, T1.Coupon_Buy");
+            viewString.Append("itBtnLabel)\r\n    FROM (\r\n        SELECT \r\n            T.CouponId AS Coupon_Coupo");
             viewString.Append("nId, \r\n            T.LanguageId AS Coupon_LanguageId, \r\n            T.UserId AS ");
             viewString.Append("Coupon_UserId, \r\n            T.CouponTitle AS Coupon_CouponTitle, \r\n            ");
             viewString.Append("T.SearchKeywords AS Coupon_SearchKeywords, \r\n            T.Status AS Coupon_Stat");
@@ -2731,8 +2735,10 @@ namespace Edm_EntityMappingGeneratedViews
             viewString.Append("ubmissionDateTime, \r\n            T.LocationCountryId AS Coupon_LocationCountryId");
             viewString.Append(", \r\n            T.CouponStartDate AS Coupon_CouponStartDate, \r\n            T.Cou");
             viewString.Append("ponEndDate AS Coupon_CouponEndDate, \r\n            T.Priority AS Coupon_Priority,");
-            viewString.Append(" \r\n            True AS _from0\r\n        FROM SMDModelStoreContainer.Coupon AS T\r\n");
-            viewString.Append("    ) AS T1");
+            viewString.Append(" \r\n            T.ShowBuyitBtn AS Coupon_ShowBuyitBtn, \r\n            T.BuyitLandi");
+            viewString.Append("ngPageUrl AS Coupon_BuyitLandingPageUrl, \r\n            T.BuyitBtnLabel AS Coupon");
+            viewString.Append("_BuyitBtnLabel, \r\n            True AS _from0\r\n        FROM SMDModelStoreContaine");
+            viewString.Append("r.Coupon AS T\r\n    ) AS T1");
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.Coupons", viewString.ToString());
         }
         
