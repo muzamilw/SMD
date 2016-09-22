@@ -177,7 +177,7 @@
                                             </div>
                                             <div class="col-lg-6">
                                                 @*<input type="text" class="form-control" data-bind="value: TwitterHandle() !='undefined' ? TwitterHandle :'( Not Configured )'">*@
-                                                <select id="slectSocialmedia" class="form-control" data-bind="options: $root.socialMedia, optionsText: 'Text', optionsValue: 'Text', optionsCaption: '&lt;' + 'Select'+ '&gt;' , value:$root.selectedMedia ,event:{ change: $root.socialMediaHandler}"></select>
+                                                <select id="slectSocialmedia" class="form-control" data-bind="options: $root.socialMedia, optionsText: 'Text', optionsValue: 'Text', optionsCaption: '&lt;' + 'Select'+ '&gt;' , value:selectedMedia"></select>
                                                 
                                             </div>
 
@@ -185,20 +185,23 @@
 
 
 
-                                        <div class="form-group" data-bind="visible:$root.selectedMedia()=='Facebook'">
+                                        <div class="form-group">
                                             <div class="col-lg-4 text-right">
-                                                <label class="control-label text-right tooltip-float">Facebook Handle</label>
+                                                <label class="control-label text-right tooltip-float" data-bind="visible:selectedMedia()=='Facebook'">Facebook Handle</label>
+                                                <label class="control-label text-right tooltip-float" data-bind="visible:selectedMedia()=='Twitter'">Twitter Handle</label>
+                                                <label class="control-label text-right tooltip-float" data-bind="visible:selectedMedia()=='Instagram'">Instagram Handle</label>
+                                                <label class="control-label text-right tooltip-float" data-bind="visible:selectedMedia()=='Pinterest'">Pinterest Handle</label>
                                             </div>
                                             <div class="col-lg-6">
-                                                <input type="text" class="form-control" data-bind="value:FacebookHandle">
+                                                <input type="text" class="form-control" data-bind="value:mediaHandleui">
                                             </div>
                                         </div>
-                                        <div class="form-group" data-bind="visible:$root.selectedMedia()=='Twitter'">
+                                        @*<div class="form-group" data-bind="visible:$root.selectedMedia()=='Twitter'">
                                             <div class="col-lg-4 text-right">
                                                 <label class="control-label text-right tooltip-float">Twitter Handle</label>
                                             </div>
                                             <div class="col-lg-6">
-                                                <input type="text" class="form-control" data-bind="value: TwitterHandle">
+                                                <input type="text" class="form-control" data-bind="value: TwitterHandleui">
                                             </div>
                                         </div>
 
@@ -209,7 +212,7 @@
                                                 <label class="control-label text-right tooltip-float">Instagram Handle</label>
                                             </div>
                                             <div class="col-lg-6">
-                                                <input type="text" class="form-control" data-bind="value: InstagramHandle">
+                                                <input type="text" class="form-control" data-bind="value: TwitterHandleui">
                                             </div>
                                         </div>
 
@@ -220,9 +223,9 @@
                                                 <label class="control-label text-right tooltip-float">Pinterest Handle</label>
                                             </div>
                                             <div class="col-lg-6">
-                                                <input type="text" class="form-control" data-bind="value: PinterestHandle">
+                                                <input type="text" class="form-control" data-bind="value: TwitterHandleui">
                                             </div>
-                                        </div>
+                                        </div>*@
 
                                     </div>
                                 </div>

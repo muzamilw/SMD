@@ -629,6 +629,10 @@
     <Content Include="Areas\Common\Scripts\companyProfile.view.js" />
     <Content Include="Areas\Common\Scripts\companyProfile.model.js" />
     <Content Include="Areas\Common\Scripts\companyProfile.dataservice.js" />
+    <Content Include="Areas\Common\Scripts\InviteUser.dataservice.js" />
+    <Content Include="Areas\Common\Scripts\InviteUser.model.js" />
+    <Content Include="Areas\Common\Scripts\InviteUser.view.js" />
+    <Content Include="Areas\Common\Scripts\InviteUser.viewModel.js" />
     <Content Include="Areas\Common\Scripts\userProfile.viewModel.js" />
     <Content Include="Areas\Common\Scripts\userProfile.dataservice.js" />
     <Content Include="Areas\Common\Scripts\userProfile.model.js" />
@@ -705,6 +709,7 @@
     <Content Include="Areas\Franchise\Views\Dashboard\ProfileQuestionApproval.cshtml" />
     <Content Include="Areas\ProfileQuestion\Views\Manage\_pqEditorForApp.cshtml" />
     <Content Include="Areas\DAM\Views\Images\AdminIndex.cshtml" />
+    <Content Include="Areas\Common\Views\Shared\_InviteSharingUser.cshtml" />
     <None Include="config\Web.connectionstrings.config">
       <SubType>Designer</SubType>
     </None>

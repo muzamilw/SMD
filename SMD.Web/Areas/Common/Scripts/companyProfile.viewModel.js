@@ -59,42 +59,7 @@ define("common/companyProfile.viewModel",
             { Id: 3, Text: 'Instagram' },
             { Id: 4, Text: 'Pinterest' }
                 ]),
-                  socialMediaHandler = function () {
-                      if (selectedMedia() == 'Facebook')
-                      {
-                          selectedCompany().TwitterHandle(null)
-                          selectedCompany().InstagramHandle(null) 
-                          selectedCompany().PinterestHandle(null)
-                      }
-                      else if (selectedMedia() == 'Twitter')
-                      {
-                          selectedCompany().FacebookHandle(null)
-                          selectedCompany().InstagramHandle(null)
-                          selectedCompany().PinterestHandle(null)
-                      
-                      }
-                      else if (selectedMedia() == 'Instagram')
-                      {
-                          selectedCompany().FacebookHandle(null)
-                          selectedCompany().TwitterHandle(null)
-                          selectedCompany().PinterestHandle(null)
-                      }
-                      else if (selectedMedia() == 'Pinterest') {
-
-                          selectedCompany().FacebookHandle(null)
-                          selectedCompany().TwitterHandle(null)
-                          selectedCompany().InstagramHandle(null)
-                      }
-                      else {
-                          selectedCompany().FacebookHandle(null)
-                          selectedCompany().TwitterHandle(null)
-                          selectedCompany().InstagramHandle(null)
-                          selectedCompany().PinterestHandle(null)
-                      }
-
-                           
-                     
-                  },
+                
                 //Update Profile
                 //Get Base Data for Questions
                 updateProfile = function () {
@@ -146,17 +111,17 @@ define("common/companyProfile.viewModel",
 
                                //});
                              
-                               selectedCompany().reset();
-                                setFieldSubscription();
-                               if (selectedCompany().FacebookHandle() != null) 
-                                   selectedMedia('Facebook');
-                                   if(selectedCompany().TwitterHandle() != null)
-                                       selectedMedia('Twitter');
-                                   if(selectedCompany().InstagramHandle() != null)
-                                       selectedMedia('Instagram');
-                                   if(selectedCompany().PinterestHandle() != null)
-                                       selectedMedia('Pinterest');
                                
+                                
+                               if (selectedCompany().FacebookHandle() != null) 
+                                   selectedCompany().selectedMedia('Facebook');
+                                   if(selectedCompany().TwitterHandle() != null)
+                                       selectedCompany().selectedMedia('Twitter');
+                                   if(selectedCompany().InstagramHandle() != null)
+                                       selectedCompany().selectedMedia('Instagram');
+                                   if(selectedCompany().PinterestHandle() != null)
+                                       selectedCompany().selectedMedia('Pinterest');
+                                   selectedCompany().reset();
                            },
                            error: function () {
                                toastr.error("Failed to load User's Profile!");
@@ -202,61 +167,23 @@ define("common/companyProfile.viewModel",
                     return (selectedCompany().hasChanges());
                 }),
 
-                setFieldSubscription = function () {
-                    if (selectedCompany() == undefined)
-                        return;
-                        selectedCompany().FacebookHandle.subscribe(function (value) {
-                            if (selectedMedia == 'Facebook') {
-                            if (value !== selectedCompany().FacebookHandle()) {
-                                selectedCompany().FacebookHandle(value);
-                            }
-                            selectedCompany().TwitterHandle(undefined);
-                            selectedCompany().InstagramHandle(undefined);
-                            selectedCompany().PinterestHandle(undefined);
-                            }
-                        });
-                    
-                    
-                        selectedCompany().TwitterHandle.subscribe(function (value) {
-                            if (selectedMedia == 'Twitter') {
-                                if (value !== selectedCompany().TwitterHandle()) {
-                                    selectedCompany().TwitterHandle(value);
-                                }
-                                selectedCompany().FacebookHandle(undefined);
-                                selectedCompany().InstagramHandle(undefined);
-                                selectedCompany().PinterestHandle(undefined);
-                            }
-                    });
-                        selectedCompany().InstagramHandle.subscribe(function (value) {
-                            if (selectedMedia == 'Instagram') {
-                                if (value !== selectedCompany().InstagramHandle()) {
-                                    selectedCompany().InstagramHandle(value);
-                                }
-                                selectedCompany().TwitterHandle(undefined);
-                                selectedCompany().FacebookHandle(undefined);
-                                selectedCompany().PinterestHandle(undefined);
-                            }
-                    });
-                        selectedCompany().PinterestHandle.subscribe(function (value) {
-                            if (selectedMedia == 'Pinterest') {
-                                if (value !== selectedCompany().PinterestHandle()) {
-                                    selectedCompany().PinterestHandle(value);
-                                }
-                                selectedCompany().TwitterHandle(undefined);
-                                selectedCompany().InstagramHandle(undefined);
-                                selectedCompany().FacebookHandle(undefined);
-                            }
-                    });
-                },
-
-
-
-
-
-
+                
 
                 // Update Button handler
                 onUpdateProfile = function () {
+                    selectedCompany().TwitterHandle(null);
+                    selectedCompany().InstagramHandle(null);
+                    selectedCompany().FacebookHandle(null);
+                    selectedCompany().PinterestHandle(null)
+                    if (selectedCompany().selectedMedia() == 'Twitter')
+                        selectedCompany().TwitterHandle(selectedCompany().mediaHandleui());
+                    else if (selectedCompany().selectedMedia() == 'Facebook')
+                        selectedCompany().FacebookHandle(selectedCompany().mediaHandleui());
+                    else if (selectedCompany().selectedMedia() == 'Instagram')
+                        selectedCompany().InstagramHandle(selectedCompany().mediaHandleui());
+                    else if (selectedCompany().selectedMedia() == 'Pinterest')
+                        selectedCompany().PinterestHandle(selectedCompany().mediaHandleui());
+
                     updateProfile();
                 },
                 // Charge Customer
@@ -283,7 +210,6 @@ define("common/companyProfile.viewModel",
             LogoUrlImageCallback: LogoUrlImageCallback,
             randonNumber: randonNumber,
             onUpdateProfile: onUpdateProfile,
-            socialMediaHandler: socialMediaHandler,
             chargeCustomer: chargeCustomer,
             hasChangesOnProfile: hasChangesOnProfile,
             getCitiesByCountryId: getCitiesByCountryId,

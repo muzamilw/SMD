@@ -115,7 +115,10 @@ namespace SMD.Repository.Repositories
 
             return true;
         }
-
+        public IEnumerable<GetActiveVSNewUsers_Result> GetActiveVSNewUsers()
+        {
+          return  db.GetActiveVSNewUsers();
+        }
         #endregion
     }
 }

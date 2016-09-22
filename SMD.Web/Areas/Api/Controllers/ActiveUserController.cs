@@ -1,4 +1,5 @@
 ﻿using SMD.Interfaces.Services;
+using SMD.Models.DomainModels;
 using SMD.Models.ResponseModels;
 using System;
 using System.Collections.Generic;
@@ -26,12 +27,9 @@ namespace SMD.MIS.Areas.Api.Controllers
         #endregion
 
         // GET: api/ActiveUser
-        public ActiveUserResponseModel Get()
+        public IEnumerable<GetActiveVSNewUsers_Result> Get()
         {
-          ActiveUserResponseModel usr= activeUser.getActiveUser();
-
-
-            return activeUser.getActiveUser();
+            return activeUser.GetActiveVSNewUsers();
         }
 
         // GET: api/ActiveUser/5

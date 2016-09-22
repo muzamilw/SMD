@@ -2065,6 +2065,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="GetActiveVSNewUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetAdminDashBoardInsights" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetAds" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserID" Type="nvarchar" Mode="In" />
@@ -3196,6 +3197,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
             <Parameter Name="DateTo" Mode="In" Type="DateTime" />
             <Parameter Name="Granularity" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="GetActiveVSNewUsers" ReturnType="Collection(DomainModels.GetActiveVSNewUsers_Result)" />
           </EntityContainer>
         <EntityType Name="ProfileQuestion">
           <Key>
@@ -5820,6 +5822,11 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Property Type="Double" Name="amountcollected" Nullable="true" />
           <Property Type="String" Name="granular" Nullable="false" MaxLength="1" />
         </ComplexType>
+        <ComplexType Name="GetActiveVSNewUsers_Result">
+          <Property Type="Int64" Name="ActiveStats" Nullable="true" />
+          <Property Type="Int64" Name="NewStats" Nullable="true" />
+          <Property Type="String" Name="Granual" Nullable="true" MaxLength="200" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -7179,6 +7186,15 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
               <ComplexTypeMapping TypeName="DomainModels.GetRevenueOverTime_Result">
                 <ScalarProperty Name="amountcollected" ColumnName="amountcollected" />
                 <ScalarProperty Name="granular" ColumnName="granular" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetActiveVSNewUsers" FunctionName="SMDModel.Store.GetActiveVSNewUsers">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DomainModels.GetActiveVSNewUsers_Result">
+                <ScalarProperty Name="ActiveStats" ColumnName="ActiveStats" />
+                <ScalarProperty Name="NewStats" ColumnName="NewStats" />
+                <ScalarProperty Name="Granual" ColumnName="Granual" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

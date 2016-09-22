@@ -20,5 +20,6 @@ namespace SMD.Interfaces.Repository
 
         bool AcceptInvitationCode(string InvitationCode);
         bool AcceptInvitationCode(string InvitationCode, string UserId);
+        IEnumerable<GetActiveVSNewUsers_Result> GetActiveVSNewUsers();
     }
 }

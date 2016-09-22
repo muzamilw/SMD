@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SMD.Models.ResponseModels;
+using SMD.Models.DomainModels;
 
 namespace SMD.Interfaces.Services
 {
     public interface IActiveUser
     {
 
-        ActiveUserResponseModel getActiveUser();
+        IEnumerable<GetActiveVSNewUsers_Result> GetActiveVSNewUsers();
     }
 }

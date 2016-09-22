@@ -479,17 +479,13 @@ define("analytic/analytic.viewModel",
                     getAnalytic = function () {
                         dataservice.getactiveuser(
                             {
-                                                           },
+                             },
                             {
                                 success: function (data) {
-									activeUser([
-											{ y: '1 day' , a: data.Last1DayActiveUser },
-											{ y: '7 days' , a: data.Last7DayActiveUser },
-											{ y: '14 days' , a: data.Last14DayActiveUser },
-											{ y: '30 days' , a: data.Last30DayActiveUser },
-											{ y: '3 months' , a: data.Last3MonthsActiveUser }
-										]);
-	                            },
+									activeUser([]);
+									ko.utils.arrayPushAll(activeUser(), data);
+									activeUser.valueHasMutated();
+								},
                                 error: function (response) {
                                     toastr.error("Failed to load Ad Campaigns!");
                                 }
@@ -507,7 +503,7 @@ define("analytic/analytic.viewModel",
                                 success: function (data) {
 									//data[0].amountcollected
 									//data[0].granular
-									RevenueOverTimeData([]);
+								RevenueOverTimeData([]);
                                 ko.utils.arrayPushAll(RevenueOverTimeData(), data);
                                 RevenueOverTimeData.valueHasMutated();
 	                            },
@@ -527,8 +523,8 @@ define("analytic/analytic.viewModel",
 						analyticFromdate().setMonth(analyticFromdate().getMonth()-1)
                         ko.applyBindings(view.viewModel, view.bindingRoot);
 						intializeDashboardInsightsData();
-						//getAnalytic();
-						//getRevenueOverTime();
+						getAnalytic();
+						getRevenueOverTime();
                     };
                 return {
 
