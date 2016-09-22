@@ -28,7 +28,8 @@
             "PhraseLibrary": "/Areas/Common/Scripts",
             "DAM": "/Areas/DAM/Scripts",
             "FranchiseDashboard": "/Areas/Franchise/Scripts", 
-            "analytic": "/Areas/SuperNova/Scripts"
+            "analytic": "/Areas/SuperNova/Scripts",
+            "Report": "/Areas/Report/Scripts",
         }
     });
 

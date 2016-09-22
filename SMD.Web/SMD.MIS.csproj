@@ -694,6 +694,10 @@
     <Content Include="Areas\Franchise\Scripts\surveyQuestionApp.model.js" />
     <Content Include="Areas\Franchise\Scripts\surveyQuestionApp.view.js" />
     <Content Include="Areas\Franchise\Scripts\surveyQuestionApp.viewModel.js" />
+    <Content Include="Areas\Report\Scripts\walletReport.dataservice.js" />
+    <Content Include="Areas\Report\Scripts\walletReport.model.js" />
+    <Content Include="Areas\Report\Scripts\walletReport.view.js" />
+    <Content Include="Areas\Report\Scripts\walletReport.viewModel.js" />
     <Content Include="Areas\SuperNova\Scripts\analytic.dataservice.js" />
     <Content Include="Areas\SuperNova\Scripts\analytic.model.js" />
     <Content Include="Areas\SuperNova\Scripts\analytic.view.js" />
@@ -712,6 +716,7 @@
     <Content Include="Areas\ProfileQuestion\Views\Manage\_pqEditorForApp.cshtml" />
     <Content Include="Areas\DAM\Views\Images\AdminIndex.cshtml" />
     <Content Include="Areas\Common\Views\Shared\_InviteSharingUser.cshtml" />
+    <Content Include="Areas\Report\Views\Report\WalletReport.cshtml" />
     <None Include="config\Web.connectionstrings.config">
       <SubType>Designer</SubType>
     </None>

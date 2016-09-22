@@ -22,7 +22,7 @@
               couponImage1 = ko.observable(coImage1),
               couponImage2 = ko.observable(coImage2),
               couponImage3 = ko.observable(coImage3),
-              logoUrl = ko.observable(coLogoUrl),
+              logoUrl = ko.observable(coLogoUrl.startsWith('http') ? coLogoUrl : '/' + coLogoUrl),
               highlight1 = ko.observable(cohighlight1),
               highlight2 = ko.observable(cohighlight2),
               highlight3 = ko.observable(cohighlight3),
