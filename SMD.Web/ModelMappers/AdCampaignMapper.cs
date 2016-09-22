@@ -550,7 +550,7 @@ namespace SMD.MIS.ModelMappers
                 LocationState = source.LocationState,
                 LocationTitle = source.LocationTitle,
                 LocationZipCode = source.LocationZipCode,
-                LogoUrl = source.LogoUrl[0] != '/' ? "/" + source.LogoUrl : source.LogoUrl,
+                LogoUrl = source.LogoUrl.StartsWith("http://") ? source.LogoUrl : "/" + source.LogoUrl,
                 ModifiedBy = source.ModifiedBy,
                 ModifiedDateTime = source.ModifiedDateTime,
                 Price = source.Price,

@@ -773,13 +773,15 @@ define("ads/ads.viewModel",
 
                         //if (errorList().length > 0) {
                         //    return false;
-                        //} else {
-                    if (quizQuestionStatus() == false) {
-                        campaignModel().VerifyQuestion('');
-                        campaignModel().Answer1('');
-                        campaignModel().Answer2('');
+                //} else {
 
-                    }
+                //bullshit code written below by someone. 
+                    ////if (quizQuestionStatus() == false) {
+                    ////    campaignModel().VerifyQuestion('');
+                    ////    campaignModel().Answer1('');
+                    ////    campaignModel().Answer2('');
+
+                    ////}
                     if (isDisplayCouponsAds() == true) {
 
                         var selectedCouponCategories = $.grep(couponCategories(), function (n, i) {

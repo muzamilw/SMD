@@ -122,6 +122,7 @@ define("Coupons/Coupons.viewModel",
                         success: function (data) {
 
                             if (data != null) {
+                                UserAndCostDetail(data.UserAndCostDetails);
 
                                 if (data.Currencies != null) {
                                     CurrencyDropDown.removeAll();
@@ -1104,6 +1105,8 @@ define("Coupons/Coupons.viewModel",
                                             ButItOtherLabel(buyitbuttonlabel);
                                         }
                                     }
+
+                                  
 
 
 
