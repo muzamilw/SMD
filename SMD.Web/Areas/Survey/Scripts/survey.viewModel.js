@@ -252,7 +252,7 @@ define("survey/survey.viewModel",
                     },
                     // Close Editor 
                     closeEditDialog = function () {
-                        debugger;
+                        
                         if (selectedQuestion().hasChanges()) {
                             confirmation.messageText("Do you want to save changes?");
                             confirmation.afterProceed(function () {
