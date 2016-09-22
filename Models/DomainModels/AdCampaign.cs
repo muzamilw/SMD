@@ -122,6 +122,9 @@ namespace SMD.Models.DomainModels
         public virtual ICollection<AdCampaignTargetCriteria> AdCampaignTargetCriterias { get; set; }
         public virtual ICollection<AdCampaignTargetLocation> AdCampaignTargetLocations { get; set; }
         public virtual ICollection<InvoiceDetail> InvoiceDetails { get; set; }
+
+        public virtual ICollection<SurveyQuestionTargetCriteria> SurveyQuestionTargetCriterias { get; set; }
+
         public virtual ICollection<CouponCategory> CouponCategories { get; set; }
     
         public virtual ICollection<CampaignCategory> CampaignCategories { get; set; }
