@@ -176,17 +176,16 @@ namespace SMD.Implementation.Services
 
             if (!string.IsNullOrEmpty(campaign.LogoImageBytes))
             {
-                string base64 = campaign.LogoImageBytes.Substring(campaign.LogoImageBytes.IndexOf(',') + 1);
-                base64 = base64.Trim('\0');
-                byte[] data = Convert.FromBase64String(base64);
+               
+                string[] paths = campaign.LogoImageBytes.Split(new string[] { "SMD_Content" }, StringSplitOptions.None);
+                string url = HttpContext.Current.Server.MapPath("~/SMD_Content/" + paths[paths.Length - 1]);
                 string savePath = directoryPath + "\\guid_CampaignLogoImage.jpg";
-                File.WriteAllBytes(savePath, data);
+                File.Copy(url, savePath, true);
                 int indexOf = savePath.LastIndexOf("SMD_Content", StringComparison.Ordinal);
                 savePath = savePath.Substring(indexOf, savePath.Length - indexOf);
                 savePaths[7] = savePath;
+                campaign.LogoImageBytes = savePath;
             }
-
-
             return savePaths;
         }
 
@@ -406,7 +405,7 @@ namespace SMD.Implementation.Services
                 }
                 if (!string.IsNullOrEmpty(paths[7]))
                 {
-                    campaignModel.LogoUrl = paths[7];
+                    campaignModel.LogoUrl = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + paths[7];
                 }
                 else if (campaignModel.LogoUrl.Contains("Content/Images"))
                 {
@@ -464,7 +463,7 @@ namespace SMD.Implementation.Services
                 //Languages = _languageRepository.GetAllLanguages(),
                 TotalCount = rowCount
                 // UserAndCostDetails = _adCampaignRepository.GetUserAndCostDetail()
-            };
+            }; 
         }
 
         public CampaignResponseModel GetCampaignById(long CampaignId)
@@ -528,7 +527,7 @@ namespace SMD.Implementation.Services
                 }
                 if (!string.IsNullOrEmpty(paths[7]))
                 {
-                    campaignModel.LogoUrl = paths[7];
+                    campaignModel.LogoUrl = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + paths[7];
                 }
                 else if (campaignModel.LogoUrl.Contains("Content/Images"))
                 {

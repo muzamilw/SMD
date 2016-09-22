@@ -253,6 +253,7 @@
                       targetCouponCodes.push(item.convertToServerData());
                   });
                   return {
+
                       CampaignID: CampaignID(),
                       LanguageID: LanguageID(),
                       CampaignName: CampaignName(),
@@ -320,7 +321,9 @@
                       IsUseFilter: IsUseFilter(),
                       LogoUrl: LogoUrl(),
                       VoucherAdditionalInfo: VoucherAdditionalInfo(),
-                      LogoImageBytes: LogoImageBytes(),
+                     
+                      LogoImageBytes: logoImage == "" ? LogoImageBytes() : logoImage,
+
                       CouponId: CouponId(),
                       IsShowVoucherSetting: IsShowVoucherSetting(),
                       VideoLink2: VideoLink2(),

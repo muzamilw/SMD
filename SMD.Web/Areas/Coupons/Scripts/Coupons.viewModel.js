@@ -436,6 +436,7 @@ define("Coupons/Coupons.viewModel",
                   isEnableVedioVerificationLink(false);
 
                   couponModel().CouponImage2("/images/default-placeholder.png");
+
                   couponModel().CouponImage3("/images/default-placeholder.png");
                   couponModel().couponImage1("/images/default-placeholder.png");
                   couponModel().LogoUrl("/images/default-placeholder.png");
