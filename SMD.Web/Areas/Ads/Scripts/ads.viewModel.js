@@ -610,10 +610,10 @@ define("ads/ads.viewModel",
                 //if (campaignModel().isValid()) {
                 if (ValidateCampaign()) {
                     if (reachedAudience() > 0) {
-                        if (UserAndCostDetail().isStripeIntegrated == true) {
+                        if (UserAndCostDetail().isStripeIntegrated == false) {
 
                             stripeChargeCustomer.show(function () {
-                                UserAndCostDetail().isStripeIntegrated = false;
+                                UserAndCostDetail().isStripeIntegrated = true;
                                 saveCampaign(2);
                             }, 2000, 'Enter your details');
 
