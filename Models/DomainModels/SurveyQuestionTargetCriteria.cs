@@ -37,5 +37,6 @@ namespace SMD.Models.DomainModels
         public virtual Language Language { get; set; }
 
         public virtual Education Education { get; set; }
+        public virtual AdCampaign AdCampaign { get; set; }
     }
 }
