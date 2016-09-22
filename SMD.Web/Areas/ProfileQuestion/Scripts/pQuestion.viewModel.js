@@ -449,7 +449,7 @@ define("pQuestion/pQuestion.viewModel",
                 },
                     // On Edit PQ, Get PQ Answer & linked Question 
                     getQuestionAnswer = function (profileQuestionId) {
-                        debugger;
+                      
                         dataservice.getPqAnswer(
                            {
                                ProfileQuestionId: profileQuestionId
@@ -1388,6 +1388,7 @@ define("pQuestion/pQuestion.viewModel",
                         {
                             isEditorVisible(false); enableControls();
                             $("#panelArea,#topArea,#headlabel").css("display", "block");
+                            filterProfileQuestion();
 
                         }
                 ,
