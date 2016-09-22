@@ -151,7 +151,7 @@
                             <select class="form-control" style="width:35%!important;" id="ddprevenue" data-bind="options: $root.granularityDropDown, optionsText: 'name', optionsValue: 'id', value:$root.selectedGranualforRevenue, event: { change: $root.getRevenueOverTime }"></select>
                             
 
-                            <div class="margin-Top-30" data-bind="morris: {type: 'Line', data: $root.RevenueOverTimeData, xkey: 'granular', ykeys: ['amountcollected'], labels: ['Revenue'], parseTime:false}" style="width: 600px; float: left"></div>
+                            <div class="margin-Top-30" data-bind="morris: {type: 'Line', data: $root.RevenueOverTimeData, xkey: 'granular', ykeys: ['amountcollected'], labels: ['Revenue'], parseTime:false, setAxisAlignFirstX: true}" ></div>
                             
                           </div>
                     </div>
