@@ -695,12 +695,13 @@
                     });
                 }
                 getBranchFields = function (category, afterSaveRefreshListFlag) {
-                    dataservice.getBranchFiledsByCategoryID({
+                    dataService.getBranchFiledsByCategoryID({
                         categoryId: category.categoryId(),
                     }, {
                         success: function (data) {
                             if (data != null) {
-                                category.branchFields.removeAll();
+                                if (category.brachFeilds().length > 0)
+                                { category.branchFields.removeAll(); }
                                 _.each(data, function (Item) {
                                     var branchfield1 = new model.BranchField.Create(Item);
                                     category.branchFields.push(phraseField1);
