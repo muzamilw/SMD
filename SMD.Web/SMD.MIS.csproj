@@ -399,6 +399,7 @@
     <Compile Include="Areas\Api\Controllers\CouponApprovalController.cs" />
     <Compile Include="Areas\Api\Controllers\CouponController.cs" />
     <Compile Include="Areas\Api\Controllers\DownloadImageController.cs" />
+    <Compile Include="Areas\Api\Controllers\ProfileQuestionGroupAppController.cs" />
     <Compile Include="Areas\Api\Controllers\RedeemPurchasedCouponController.cs" />
     <Compile Include="Areas\Api\Controllers\PhaseLibraryController.cs" />
     <Compile Include="Areas\Api\Controllers\CompanyController.cs" />
@@ -416,6 +417,7 @@
     <Compile Include="Areas\Api\Models\PhraseResponseModel.cs" />
     <Compile Include="Areas\Api\Models\PQResponseModelForApproval.cs" />
     <Compile Include="Areas\Api\Models\Product.cs" />
+    <Compile Include="Areas\Api\Models\ProfileQuestionGroupApp.cs" />
     <Compile Include="Areas\Api\Models\ProfileQuestionTargetCriteria.cs" />
     <Compile Include="Areas\Api\Models\ProfileQuestionTargetLocation.cs" />
     <Compile Include="Areas\Api\Models\Section.cs" />

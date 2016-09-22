@@ -24,7 +24,7 @@
                                         <th class="col-lg-2 th-pointer"><span id="4">Submitted By<span></span></span></th>
                                         <th class="col-lg-2 th-pointer"><span id="4">Title<span></span></span> </th>
                                       
-                                        <th class="col-lg-2 th-pointer"><span id="4">Swap Cost<span></span></span> </th>
+                                        @*<th class="col-lg-2 th-pointer"><span id="4">Swap Cost<span></span></span> </th>*@
                                         <th class="col-lg-2 th-pointer"><span id="5">Submission Date<span class="icon-up"></span></span></th>
 
                                         <th class="col-lg-1">&nbsp;</th>
@@ -46,7 +46,7 @@
             </div>
         </div>
         <script id="adCampaignsLVTemplate" type="text/html">
-            <tr style="cursor: pointer">
+            <tr style="cursor: pointer" data-bind="click:$root.onEditCoupon">
                 <td>
                     <p data-bind="text:submittedBy"></p>
                 </td>
@@ -55,9 +55,9 @@
                 </td>
 
 
-                <td>
+                @*<td>
                     <p data-bind="text:swabCost"></p>
-                </td>
+                </td>*@
                 <td>
                     <p data-bind="dateString:submissionDate,datePattern: 'DD/MM/YYYY'"></p>
                     @*<p>Coupon</p>*@
