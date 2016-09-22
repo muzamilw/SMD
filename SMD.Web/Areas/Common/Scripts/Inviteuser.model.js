@@ -47,13 +47,13 @@
    
     
     // Function to attain cancel button functionality User
-    User.CreateFromClientModel = function () {
+    InviteUser.CreateFromClientModel = function () {
         //todo
     };
    
 
     return {
-        User: User
+        InviteUser: InviteUser
        
        
     };

@@ -16,15 +16,6 @@ namespace SMD.Models.RequestModels
         public string RoleId { get; set; }
 
     }
-    public class InviteUserWebEmail
-    {
-        /// <summary>
-        /// email
-        /// </summary>
-        public string Email { get; set; }
-        public int CompanyId { get; set; }
-
-    }
 
 
 

@@ -1079,23 +1079,30 @@ define("Coupons/Coupons.viewModel",
                                     buyItQuestionStatus(couponModel().ShowBuyitBtn());
                                     var buyitbuttonlabel = couponModel().BuyitBtnLabel();
 
-                                    if (buyitbuttonlabel == 'Apply Now' || 
-                                        buyitbuttonlabel == 'Book Now'  || 
-                                        buyitbuttonlabel == 'Contact Us' || 
-                                        buyitbuttonlabel == 'Download' || 
-                                        buyitbuttonlabel == 'Learn More' || 
-                                        buyitbuttonlabel == 'Shop Now' || 
-                                        buyitbuttonlabel == 'Sign Up' || 
-                                        buyitbuttonlabel == 'Watch More'
-                                         )
+                                    if (couponModel().ShowBuyitBtn() == false)
                                     {
-                                        buyItQuestionLabelStatus(false);
-                                        
-
+                                        $("#buyItddl").val('0');
                                     }
                                     else
                                     {
-                                        buyItQuestionLabelStatus(true);
+                                        if (buyitbuttonlabel == 'Apply Now' ||
+                                            buyitbuttonlabel == 'Book Now' ||
+                                            buyitbuttonlabel == 'Contact Us' ||
+                                            buyitbuttonlabel == 'Download' ||
+                                            buyitbuttonlabel == 'Learn More' ||
+                                            buyitbuttonlabel == 'Shop Now' ||
+                                            buyitbuttonlabel == 'Sign Up' ||
+                                            buyitbuttonlabel == 'Watch More'
+                                             ) {
+                                            buyItQuestionLabelStatus(false);
+                                            $("#buyItddl").val(buyitbuttonlabel);
+
+                                        }
+                                        else {
+                                            $("#buyItddl").val('999');
+                                            buyItQuestionLabelStatus(true);
+                                            ButItOtherLabel(buyitbuttonlabel);
+                                        }
                                     }
 
 
@@ -1137,6 +1144,7 @@ define("Coupons/Coupons.viewModel",
                         buyItQuestionStatus(true);
                         couponModel().ShowBuyitBtn(true);
                         buyItQuestionLabelStatus(true);
+                        couponModel().BuyitBtnLabel('');
                         
                     }
                     else
@@ -1145,6 +1153,7 @@ define("Coupons/Coupons.viewModel",
                         couponModel().ShowBuyitBtn(true);
                         buyItQuestionLabelStatus(false);
                         ButItOtherLabel('');
+                        couponModel().BuyitBtnLabel('');
                     }
 
                  },
