@@ -2,30 +2,29 @@
     View for the User. Used to keep the viewmodel clear of UI related logic
 */
 define("common/InviteUser.view",
-    ["jquery", "common/InviteUser.viewModel"], function ($, userViewModel) {
+    ["jquery", "common/InviteUser.viewModel"], function ($, inviteUserViewModel) {
         var ist = window.ist || {};
         // View 
-        ist.userProfile.view = (function (specifiedViewModel) {
+        ist.inviteUser.view = (function (specifiedViewModel) {
             var
                 // View model 
                 viewModel = specifiedViewModel,
                 // Binding root used with knockout
-                bindingRoot = $("#manageUserBinding")[0],
-                // Binding root used with knockout
-                //bindingRootUser = $("#manageUserBinding")[0],
+                bindingRoot = $("#InviteUserBinding")[0],
+                bindingPartial = $("#bindingInviteUserPartialViews")[0],
 
              
                 
 
                 // show invite user dialoge
                 showInviteUser = function () {
-                    $("#InviteUser").modal("show");
-                    initializeLabelPopovers();
+                    $("#InviteSharingUser").modal("show");
+                    //initializeLabelPopovers();
                 },
                
                  // Hideinvite user
-                hideEditManagedUserPopup = function () {
-                    $("#EditManagedUser").modal("hide");
+                hideInviteUser = function () {
+                    $("#InviteSharingUser").modal("hide");
                 },
                 // Initialize
                 initialize = function () {
@@ -36,21 +35,21 @@ define("common/InviteUser.view",
             initialize();
             return {
                 bindingRoot: bindingRoot,
-                //bindingRootUser: bindingRootUser,
+                bindingPartial: bindingPartial,
                 viewModel: viewModel,
          
                 showInviteUser: showInviteUser,
                
-                hideEditManagedUserPopup: hideEditManagedUserPopup
+                hideInviteUser: hideInviteUser
 
             };
-        })(userViewModel);
+        })(inviteUserViewModel);
         // Initialize the view model
-        if (ist.userProfile.view.bindingRoot) {
-            userViewModel.initialize(ist.userProfile.view);
+        if (ist.inviteUser.view.bindingRoot) {
+            inviteUserViewModel.initialize(ist.inviteUser.view);
         }
-        //if (ist.userProfile.view.bindingRootUser) {
-        //    userViewModel.initialize(ist.userProfile.view);
+        //if (ist.inviteUser.view.bindingRootUser) {
+        //    userViewModel.initialize(ist.inviteUser.view);
         //}
-        return ist.userProfile.view;
+        return ist.inviteUser.view;
     });

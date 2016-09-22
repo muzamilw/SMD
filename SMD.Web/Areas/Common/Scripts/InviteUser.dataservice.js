@@ -14,7 +14,7 @@ define("common/InviteUser.dataService", function () {
 
                     isInitialized = true;
                     amplify.request.define('InviteUserSvc', 'ajax', {
-                        url: '/Api/PhaseLibrary',
+                        url: '/Api_Mobile/ReferUsers/token/',
                         dataType: 'json',
                         type: 'GET'
                     });
