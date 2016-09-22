@@ -25,6 +25,11 @@ define("FranchiseDashboard/profileQuetionApp.dataservice", function () {
                         dataType: 'json',
                         type: 'POST'
                     });
+                    amplify.request.define('getProfileGroupbyID', 'ajax', {
+                        url: '/Api/ProfileQuestionGroupApp',
+                        dataType: 'json',
+                        type: 'GET'
+                    });
 
                     // Send Mail
                     amplify.request.define('sendApprovalRejectionEmail', 'ajax', {
@@ -64,6 +69,15 @@ define("FranchiseDashboard/profileQuetionApp.dataservice", function () {
                     data: params
                 });
             },
+               getProfileGroupbyID = function (params, callbacks) {
+                   initialize();
+                   return amplify.request({
+                       resourceId: 'getProfileGroupbyID',
+                       success: callbacks.success,
+                       error: callbacks.error,
+                       data: params
+                   });
+               },
             // Save Ad Campaign edit
             savePq = function (params, callbacks) {
                 initialize();
@@ -89,7 +103,8 @@ define("FranchiseDashboard/profileQuetionApp.dataservice", function () {
             savePq: savePq,
             getPQForApproval: getPQForApproval,
             sendApprovalRejectionEmail: sendApprovalRejectionEmail,
-            getPqAnswer: getPqAnswer
+            getPqAnswer: getPqAnswer,
+            getProfileGroupbyID: getProfileGroupbyID
         };
     })();
     return dataService;

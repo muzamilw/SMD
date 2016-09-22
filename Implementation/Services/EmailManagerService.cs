@@ -672,7 +672,7 @@ namespace SMD.Implementation.Services
                 Muser = oUser.Email;
                 Fname = oUser.FullName;
                 PhoneNo = oUser.PhoneNumber;
-                await SendEmail();
+                SendEmailNoAsync();
             }
             else
             {

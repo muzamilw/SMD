@@ -105,7 +105,7 @@ define("FranchiseDashboard/addApproval.viewModel",
                         return (selectedCampaign().hasChanges());
                     }),
                     onApproveCampaign = function () {
-                        confirmation.messageText("Do you want to approve this Ad Campaign ? System will attempt to collect payment and generate invoice");
+                        confirmation.messageText("Do you want to Approve this vidio ad campaign ? system will attempt to collect payment and generate invoice");
                         confirmation.show();
                         confirmation.afterCancel(function () {
                             confirmation.hide();
@@ -116,13 +116,21 @@ define("FranchiseDashboard/addApproval.viewModel",
                         });
                     },
                     // Reject buttoin handler 
-                    onRejectCampaign = function() {
-                        if (selectedCampaign().rejectionReason() == undefined || selectedCampaign().rejectionReason() == "" || selectedCampaign().rejectionReason() == " ") {
-                            toastr.info("Please add rejection reason!");
-                            return false;
-                        }
-                        selectedCampaign().isApproved(false);
-                        onSaveCampaign();
+                    onRejectCampaign = function () {
+                        confirmation.messageText("Do you want to Reject this vidio ad campaign ?");
+                        confirmation.show();
+                        confirmation.afterCancel(function () {
+                            confirmation.hide();
+                        });
+                        confirmation.afterProceed(function () {
+                            if (selectedCampaign().rejectionReason() == undefined || selectedCampaign().rejectionReason() == "" || selectedCampaign().rejectionReason() == " ") {
+                                toastr.info("Please add rejection reason!");
+                                return false;
+                            }
+                            selectedCampaign().isApproved(false);
+                            onSaveCampaign();
+                        });
+                     
                     },
                     // Initialize the view model
                     initialize = function (specifiedView) {

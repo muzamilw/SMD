@@ -404,6 +404,8 @@
                         smallImage: this.options.smallImage
                     })) {
                         this.onImageError(_constants.ERRORS.SMALL_IMAGE);
+                        alert('Please upload an image with dimensions greater than (' + this.previewSize.width + ' x ' + this.previewSize.height + ') pixels');
+                        //toastr.error("Failed to load  questions!");
                         if (this.image.src) {
                             this.setImageLoadedClass();
                         }

@@ -46,7 +46,7 @@ namespace SMD.Implementation.Services
         private readonly ITaxRepository _taxRepository;
         private readonly IInvoiceRepository _invoiceRepository;
         private readonly IInvoiceDetailRepository _invoiceDetailRepository;
-        private readonly ICompanyRepository _iCompanyRepository;
+        private readonly ICompanyRepository _iCompanyRepository;                                          
         private ApplicationUserManager UserManager
         {
             get { return HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
@@ -625,6 +625,12 @@ namespace SMD.Implementation.Services
                 }
             }
             return response;
+        }
+
+        public ProfileQuestionGroup GetPQGroupById(int id)
+        {
+            return _profileQuestionGroupRepository.Find(id);
+        
         }
         #endregion
     }

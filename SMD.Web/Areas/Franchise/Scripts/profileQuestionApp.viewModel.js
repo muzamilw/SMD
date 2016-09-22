@@ -30,6 +30,7 @@ define("FranchiseDashboard/profileQuestionApp.viewModel",
                                     _.each(answers, function (item) {
                                         selectedProfileQuestion().pqAnswers.push(item);
                                     });
+                                    getProfileGroup(item);
                                    // var pqAnswers = answers;
                                 },
                                 error: function () {
@@ -69,7 +70,7 @@ define("FranchiseDashboard/profileQuestionApp.viewModel",
                             });
                     },
                     onApprovePq = function () {
-                       confirmation.messageText("Do you want to approve this Coupon ? System will attempt to collect payment and generate invoice");
+                       confirmation.messageText("Do you want to approve this Survay question ? System will attempt to collect payment and generate invoice");
                        confirmation.show();
                        confirmation.afterCancel(function () {
                            confirmation.hide();
@@ -112,7 +113,23 @@ define("FranchiseDashboard/profileQuestionApp.viewModel",
                                   toastr.error("Failed to save!");
                               }
                           });
-                      },
+                    },
+                    getProfileGroup = function (item)
+                    {
+                        dataservice.getProfileGroupbyID(
+                       { id: item.profileGroupId },
+                       {
+                           success: function (data) {
+                               
+                               selectedProfileQuestion().profileGroupId(data.ProfileGroupName)
+                           },
+                           error: function () {
+                               selectedProfileQuestion().profileGroupId(item.profileGroupId());
+                               //isEditorVisible(true);
+                               //toastr.error("Failed to load PG");
+                           }
+                       });
+                    },
                     hasChangesOnPQ = ko.computed(function () {
                         if (selectedProfileQuestion() == undefined) {
                                return false;
@@ -120,13 +137,20 @@ define("FranchiseDashboard/profileQuestionApp.viewModel",
                         return (selectedProfileQuestion().hasChanges());
                        }),
                     onRejectPQ = function () {
-                        if (selectedProfileQuestion().rejectedReason() == undefined || selectedProfileQuestion().rejectedReason() == "" || selectedProfileQuestion().rejectedReason() == " ") {
-                              toastr.info("Please add rejection reason!");
-                              return false;
-                          }
-                        selectedProfileQuestion().isApproved(false);
-                          onSavePQ();
-                          toastr.success("Rejected Successfully.");
+                        confirmation.messageText("Do you want to Reject this Survay question ?");
+                        confirmation.show();
+                        confirmation.afterCancel(function () {
+                            confirmation.hide();
+                        });
+                        confirmation.afterProceed(function () {
+                            if (selectedProfileQuestion().rejectedReason() == undefined || selectedProfileQuestion().rejectedReason() == "" || selectedProfileQuestion().rejectedReason() == " ") {
+                                toastr.info("Please add rejection reason!");
+                                return false;
+                            }
+                            selectedProfileQuestion().isApproved(false);
+                            onSavePQ();
+                            toastr.success("Rejected Successfully.");
+                        });
                       },
 
                     // Initialize the view model

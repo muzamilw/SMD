@@ -38,7 +38,7 @@ namespace SMD.Repository.Repositories
         #region Public
         public ProfileQuestionGroup Find(int id)
         {
-            throw new NotImplementedException();
+            return DbSet.Where(pg => pg.ProfileGroupId == id).SingleOrDefault();
         }
 
         /// <summary>
