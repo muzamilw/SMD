@@ -27,8 +27,8 @@ namespace SMD.MIS.ModelMappers
             {
                 LocationId = source.CityId + "_City",
                 LocationName = source.CityName,
-                GeoLat = source.GeoLat,
-                GeoLong = source.GeoLong,
+                GeoLat = source.GeoLAT,
+                GeoLong = source.GeoLONG,
                 IsCity = true,
                 CityId = source.CityId,
                 CountryId = source.CountryId.Value,

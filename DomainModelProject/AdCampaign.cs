@@ -124,7 +124,6 @@ namespace DomainModelProject
         public Nullable<double> MaxDailyBudget { get; set; }
         public Nullable<System.DateTime> SubmissionDateTime { get; set; }
     
-        public virtual Company Company { get; set; }
         public virtual Language Language { get; set; }
         public virtual ICollection<AdCampaignResponse> AdCampaignResponses { get; set; }
         public virtual ICollection<AdCampaignTargetCriteria> AdCampaignTargetCriterias { get; set; }
@@ -134,5 +133,6 @@ namespace DomainModelProject
         public virtual ICollection<CouponCode> CouponCodes { get; set; }
         public virtual ICollection<InvoiceDetail> InvoiceDetails { get; set; }
         public virtual ICollection<SurveyQuestionTargetCriteria> SurveyQuestionTargetCriterias { get; set; }
+        public virtual Company Company { get; set; }
     }
 }

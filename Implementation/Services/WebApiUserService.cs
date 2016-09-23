@@ -1315,7 +1315,7 @@ namespace SMD.Implementation.Services
                     if (user.Company.Country != null)
                         user.CountryName = user.Company.Country.CountryName;
                     if (user.Company.City != null)
-                        user.CityName = user.Company.City.CityName;
+                        user.CityName = user.Company.City;
                 }
                 else
                 {

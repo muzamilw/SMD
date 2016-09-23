@@ -19,6 +19,7 @@ namespace DomainModelProject
             this.CouponCategories = new HashSet<CouponCategories>();
             this.UserPurchasedCoupons = new HashSet<UserPurchasedCoupon>();
             this.InvoiceDetails = new HashSet<InvoiceDetail>();
+            this.CouponPriceOptions = new HashSet<CouponPriceOption>();
         }
     
         public long CouponId { get; set; }
@@ -90,11 +91,12 @@ namespace DomainModelProject
         public string BuyitLandingPageUrl { get; set; }
         public string BuyitBtnLabel { get; set; }
     
-        public virtual Company Company { get; set; }
         public virtual CompanyBranch CompanyBranch { get; set; }
         public virtual Language Language { get; set; }
         public virtual ICollection<CouponCategories> CouponCategories { get; set; }
         public virtual ICollection<UserPurchasedCoupon> UserPurchasedCoupons { get; set; }
         public virtual ICollection<InvoiceDetail> InvoiceDetails { get; set; }
+        public virtual ICollection<CouponPriceOption> CouponPriceOptions { get; set; }
+        public virtual Company Company { get; set; }
     }
 }

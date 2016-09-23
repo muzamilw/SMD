@@ -685,12 +685,17 @@ namespace SMD.Implementation.Services
                     dbCo.Status = (Int32)AdCampaignStatus.ApprovalRejected;
                     dbCo.Approved = false;
                     dbCo.RejectedReason = source.RejectedReason.ToString();
-                    emailManagerService.SendCouponRejectionEmail(dbCo.UserId, dbCo.RejectedReason);
+                   
                 }
                 dbCo.ModifiedDateTime = DateTime.Now;
                 dbCo.ModifiedBy = couponRepository.LoggedInUserIdentity;
 
                 couponRepository.SaveChanges();
+
+                if (source.Approved == false)
+                {
+                    emailManagerService.SendCouponRejectionEmail(dbCo.UserId, dbCo.RejectedReason);
+                }
 
             }
             return respMesg;

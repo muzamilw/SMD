@@ -1,14 +1,12 @@
 ﻿define(["ko", "underscore", "underscore-ko"], function (ko) {
 
     var // ReSharper disable InconsistentNaming
-      WalletReport = function (pqSubBy, pquestion, pqsubmissionDateTime, pqCompanyId, pqprofileGroupId) {
+      WalletReport = function (wrDescription, wrTransactionDate, wrCreditAmount, wrDebitAmount) {
           var
-              submittedBy = ko.observable(pqSubBy),
-              question = ko.observable(pquestion),
-              submissionDate = ko.observable(pqsubmissionDateTime),
-              companyId = ko.observable(pqCompanyId),
-              profileGroupId = ko.observable(pqprofileGroupId),
-             
+              description = ko.observable(wrDescription),
+              transatinDate = ko.observable(wrTransactionDate),
+              creditAmount = ko.observable(wrCreditAmount == 0 ? '-' + wrDebitAmount :'+'+wrCreditAmount),
+              debitAmount = ko.observable(wrDebitAmount),
               errors = ko.validation.group({
 
               }),
@@ -25,25 +23,15 @@
               // Reset
               reset = function () {
                   dirtyFlag.reset();
-              },
-
-              // Convert to server data
-              //convertToServerData = function () {
-              //    return {
-              //        PqId: id(),
-              //        Approved: isApproved(),
-              //        RejectionReason: rejectedReason(),
-              //    };
-              //};
+              };
           return {
 
-              submittedBy: submittedBy,
-              question: question,
-              submissionDate: submissionDate,
-              companyId: companyId,
-              profileGroupId: profileGroupId,
+              description: description,
+              transatinDate: transatinDate,
+              creditAmount: creditAmount,
+              debitAmount: debitAmount,
               hasChanges: hasChanges,
-              convertToServerData: convertToServerData,
+              //convertToServerData: convertToServerData,
               reset: reset,
               isValid: isValid,
               errors: errors
@@ -55,16 +43,12 @@
     ///////////////////////////////////////////////////////// Ad-Campaign
     //server to client mapper For AdCampaign
     var WalletReportServertoClientMapper = function (itemFromServer) {
-
-
-        return new WalletReport(itemFromServer.CreatedBy, itemFromServer.Question, itemFromServer.SubmissionDateTime, itemFromServer.CompanyId, itemFromServer.ProfileGroupId);
+        return new WalletReport(itemFromServer.description, itemFromServer.TransactionDate, itemFromServer.CreditAmount, itemFromServer.DebitAmount);
     };
-
     // Function to attain cancel button functionality WalletReport
     WalletReport.CreateFromClientModel = function (item) {
         // To be Implemented
     };
-
     return {
         WalletReport: WalletReport,
         WalletReportServertoClientMapper: WalletReportServertoClientMapper

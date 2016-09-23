@@ -23,7 +23,7 @@ namespace DomainModelProject
         public string BranchCategoryName { get; set; }
         public Nullable<int> CompanyId { get; set; }
     
-        public virtual Company Company { get; set; }
         public virtual ICollection<CompanyBranch> CompanyBranches { get; set; }
+        public virtual Company Company { get; set; }
     }
 }

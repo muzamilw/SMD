@@ -231,7 +231,7 @@ namespace SMD.MIS.ModelMappers
             {
                 return new SMD.MIS.Areas.Api.Models.UserBaseData
                 {
-                    CityId = source.CityId,
+                    //CityId = source.CityId,
                     CountryId = source.CountryId,
                     LanguageId = source.LanguageId,
                     IndustryId = source.IndustryId,
@@ -412,8 +412,8 @@ namespace SMD.MIS.ModelMappers
                 if (location.City != null)
                 {
                     modelLocation.City = location.City.CityName;
-                    modelLocation.Latitude = location.City.GeoLat;
-                    modelLocation.Longitude = location.City.GeoLong;
+                    modelLocation.Latitude = location.City.GeoLAT;
+                    modelLocation.Longitude = location.City.GeoLONG;
                 }
                 if (location.Country != null)
                     modelLocation.Country = location.Country.CountryName;

@@ -104,7 +104,7 @@ namespace SMD.Repository.Repositories
               company.BillingAddressLine2= request.BillingAddressLine2;
               company.BillingState= request.BillingState;
               company.BillingCountryId= request.BillingCountryId;
-              company.BillingCityId= request.BillingCityId;
+              company.BillingCity= request.BillingCity;
               company.BillingZipCode= request.BillingZipCode;
               company.BillingPhone= request.BillingPhone;
               company.BillingEmail= request.BillingEmail;

@@ -6,48 +6,47 @@
         ist.Report = {
             viewModel: (function () {
                 var view,
-                    profileQuestion = ko.observableArray([]),
+                    walletReport = ko.observableArray([]),
+                    balance = ko.observable();
                     //pager
                    
                 
-                    getProfileQuestions = function () {
-
-                        alert(success);
-                        //dataservice.getPQForApproval(
-                        //    {
-                        //        PageSize: pager().pageSize(),
-                        //        PageNo: pager().currentPage(),
-                        //        SortBy: sortOn(),
-                        //        IsAsc: sortIsAsc(),
-
-                        //    },
-                        //    {
-                        //        success: function (data) {
-                        //            profileQuestion.removeAll();
-                        //            console.log("approval Profile Question");
-                        //            console.log(data.ProfileQuestion);
-                        //            _.each(data.ProfileQuestion, function (item) {
-                        //                profileQuestion.push(model.ProfileQuestionServertoClientMapper(item));
-                        //            });
-                        //            ////pager().totalCount(0);
-                        //            pager().totalCount(data.TotalCount);
-                        //        },
-                        //        error: function () {
-                        //            toastr.error("Failed to load Ad Campaigns!");
-                        //        }
-                        //    });
+                    getWalletReportHistory = function () {
+                        dataservice.getWalletReport(
+                            {
+                                CompanyId: gCompanyID,
+                                authenticationToken :'test',
+                            },
+                            {
+                                success: function (data) {
+                                    walletReport.removeAll();
+                                    console.log("wallet Report");
+                                    console.log(data.Transactions);
+                                    _.each(data.Transactions, function (item) {
+                                        walletReport.push(model.WalletReportServertoClientMapper(item));
+                                    });
+                                    balance(data.Balance);
+                                    ////pager().totalCount(0);
+                                    //pager().totalCount(data.TotalCount);
+                                },
+                                error: function () {
+                                    toastr.error("Failed to load Wallet Report");
+                                }
+                            });
                     },
                    
                     // Initialize the view model
                     initialize = function (specifiedView) {
                         view = specifiedView;
                         ko.applyBindings(view.viewModel, view.bindingRoot);
-                        getProfileQuestions();
+                        getWalletReportHistory();
                     };
                 return {
 
                     initialize: initialize,
-                    getProfileQuestions: getProfileQuestions,
+                    getWalletReportHistory: getWalletReportHistory,
+                    walletReport: walletReport,
+                    balance: balance,
                 };
             })()
         };

@@ -66,11 +66,13 @@ namespace DomainModelProject
         public Nullable<int> CompanyId { get; set; }
         public string authenticationToken { get; set; }
         public Nullable<int> DevicePlatform { get; set; }
+        public Nullable<bool> optDealsNearMeEmails { get; set; }
+        public Nullable<bool> optLatestNewsEmails { get; set; }
+        public Nullable<bool> optMarketingEmails { get; set; }
     
         public virtual ICollection<AdCampaignResponse> AdCampaignResponses { get; set; }
         public virtual ICollection<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual ICollection<AspNetUserLogin> AspNetUserLogins { get; set; }
-        public virtual Company Company { get; set; }
         public virtual Education Education { get; set; }
         public virtual Industry Industry { get; set; }
         public virtual Language Language { get; set; }
@@ -81,5 +83,6 @@ namespace DomainModelProject
         public virtual ICollection<SurveyQuestionResponse> SurveyQuestionResponses { get; set; }
         public virtual ICollection<AspNetRole> AspNetRoles { get; set; }
         public virtual ICollection<App> Apps { get; set; }
+        public virtual Company Company { get; set; }
     }
 }
