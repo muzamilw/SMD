@@ -9,10 +9,10 @@
           Voucher1ImagePath, VoucherImagePath, CreatedBy, VideoUrl, BuuyItLine1, BuyItLine2, BuyItLine3, BuyItButtonLabel,
           BuyItImageUrl, AdViews, CompanyId, CouponSwapValue, CouponActualValue, CouponQuantity, CouponTakenCount, priority,
           CouponDiscountValue, couponImage2, CouponImage3, CouponImage4, CouponExpiryLabel,
-          couponSmdComission, CouponCategories, DeliveryDays, IsUseFilter, LogoUrl,
+          couponSmdComission, CouponCategories, DeliveryDays, IsUseFilter, logoUrl,
           VoucherAdditionalInfo, CouponId, IsShowVoucherSetting, VideoLink2, CouponType, IsSavedCoupon, viewCountToday, viewCountYesterday, viewCountAllTime, MaxDailyBudget, Locationss,ApprovalDateTime,
           ChannelType, VideoBytes) {
-       
+          debugger;
           var
               //type and userID will be set on server sside
               CampaignID = ko.observable(CampaignID),
@@ -137,7 +137,9 @@
               DeliveryDays = ko.observable(DeliveryDays),
               CouponCodes = ko.observableArray([]),
               IsUseFilter = ko.observable(IsUseFilter),
-              LogoUrl = ko.observable(LogoUrl),
+
+              LogoUrl = ko.observable(logoUrl != null ? logoUrl.startsWith('http') ? logoUrl : '/' + logoUrl : null),
+
               VoucherAdditionalInfo = ko.observable(VoucherAdditionalInfo),
               LogoImageBytes = ko.observable(''),
               CouponId = ko.observable(CouponId),
@@ -606,7 +608,7 @@
 
     // Factory Method
     Campaign.Create = function (source) {
-     
+        debugger;
         var campaign = new Campaign(source.CampaignId, source.LanguageId, source.CampaignName, source.UserId, source.Status, source.StatusValue,
             source.CampaignDescription, source.Gender + "", source.Archived, source.StartDateTime, source.EndDateTime, source.MaxBudget
             , source.Type + "", source.DisplayTitle, source.LandingPageVideoLink, source.VerifyQuestion, source.Answer1, source.Answer2, source.Answer3,

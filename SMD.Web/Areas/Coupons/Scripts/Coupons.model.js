@@ -65,7 +65,10 @@
               LocationState = ko.observable(LocationState),
               LocationTitle = ko.observable(LocationTitle),
               LocationZipCode = ko.observable(LocationZipCode),
-              LogoUrl = ko.observable(LogoUrl),
+
+
+              LogoUrl = ko.observable(LogoUrl != null ? LogoUrl.startsWith('http') ? LogoUrl : '/' + LogoUrl : null),
+
               ModifiedBy = ko.observable(ModifiedBy),
               ModifiedDateTime = ko.observable(ModifiedDateTime),
               Price = ko.observable(Price),

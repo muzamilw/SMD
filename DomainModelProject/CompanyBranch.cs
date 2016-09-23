@@ -34,7 +34,7 @@ namespace DomainModelProject
         public Nullable<int> CountryId { get; set; }
     
         public virtual BranchCategory BranchCategory { get; set; }
-        public virtual Company Company { get; set; }
         public virtual ICollection<Coupon> Coupons { get; set; }
+        public virtual Company Company { get; set; }
     }
 }

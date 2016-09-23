@@ -36,7 +36,7 @@ namespace DomainModelProject
         public string CreditCardRef { get; set; }
         public Nullable<int> CompanyId { get; set; }
     
-        public virtual Company Company { get; set; }
         public virtual ICollection<InvoiceDetail> InvoiceDetails { get; set; }
+        public virtual Company Company { get; set; }
     }
 }

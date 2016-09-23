@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="b6ef084096a74d0cbd3034e3cafbef32" Name="Diagram1" ZoomLevel="100">
+      <Diagram DiagramId="b6ef084096a74d0cbd3034e3cafbef32" Name="Diagram1" ZoomLevel="75">
         <EntityTypeShape EntityType="DomainModels.Role" Width="1.5" PointX="11.875" PointY="79" IsExpanded="true" />
         <EntityTypeShape EntityType="DomainModels.UserLogin" Width="1.5" PointX="16.375" PointY="91.125" IsExpanded="true" />
         <EntityTypeShape EntityType="DomainModels.ProfileQuestion" Width="2.5" PointX="6.625" PointY="56.5" />
@@ -25,10 +25,6 @@
         <AssociationConnector Association="DomainModels.FK_SurveyQuestionTargetCriteria_ProfileQuestion" />
         <AssociationConnector Association="DomainModels.FK_SurveyQuestionTargetCriteria_ProfileQuestionAnswer" />
         <EntityTypeShape EntityType="DomainModels.AuditLog" Width="1.5" PointX="2.75" PointY="3.75" />
-        <EntityTypeShape EntityType="DomainModels.City" Width="1.5" PointX="3.625" PointY="78.5" />
-        <AssociationConnector Association="DomainModels.FK_AdCampaignTargetLocation_City" />
-        <AssociationConnector Association="DomainModels.FK_City_Country" />
-        <AssociationConnector Association="DomainModels.FK_SurveyQuestionTargetLocation_City" />
         <EntityTypeShape EntityType="DomainModels.Industry" Width="3.25" PointX="8.75" PointY="48.625" />
         <AssociationConnector Association="DomainModels.FK_SurveyQuestionTargetCriteria_Industry" />
         <EntityTypeShape EntityType="DomainModels.Currency" Width="1.5" PointX="1.375" PointY="67.625" />
@@ -117,28 +113,10 @@
         <AssociationConnector Association="DomainModels.fk_sectionId" />
         <EntityTypeShape EntityType="DomainModels.UserPurchasedCoupon" Width="3.25" PointX="30.875" PointY="84.75" />
         <AssociationConnector Association="DomainModels.FK_UserPurchasedCoupon_Coupon" />
-        <EntityTypeShape EntityType="DomainModels.Company" Width="1.5" PointX="11.875" PointY="66.125" />
-        <AssociationConnector Association="DomainModels.FK_Account_Company" />
-        <AssociationConnector Association="DomainModels.FK_AdCampaign_Company" />
-        <AssociationConnector Association="DomainModels.FK_AdCampaignResponse_Company" />
-        <AssociationConnector Association="DomainModels.FK_AspNetUsers_Company" />
-        <AssociationConnector Association="DomainModels.FK_BranchCategory_Company" />
-        <AssociationConnector Association="DomainModels.FK_Company_City" />
-        <AssociationConnector Association="DomainModels.FK_CompaniesAspNetUsers_Company" />
-        <AssociationConnector Association="DomainModels.FK_Company_Country" />
-        <AssociationConnector Association="DomainModels.FK_CompanyBranch_Company" />
-        <AssociationConnector Association="DomainModels.FK_Coupon_Company" />
-        <AssociationConnector Association="DomainModels.FK_Invoice_Company" />
-        <AssociationConnector Association="DomainModels.FK_ProfileQuestionUserAnswer_Company" />
-        <AssociationConnector Association="DomainModels.FK_SurveyQuestion_Company" />
-        <AssociationConnector Association="DomainModels.FK_SurveyQuestionResponse_Company" />
         <EntityTypeShape EntityType="DomainModels.DamImage" Width="1.5" PointX="14.125" PointY="97" />
-        <AssociationConnector Association="DomainModels.FK_DamImages_Company" />
-        <AssociationConnector Association="DomainModels.FK_ProfileQuestion_Company" />
         <EntityTypeShape EntityType="DomainModels.UserCouponView" Width="1.5" PointX="6.75" PointY="8.75" />
         <EntityTypeShape EntityType="DomainModels.ProfileQuestionTargetCriteria" Width="1.5" PointX="15.75" PointY="58" />
         <EntityTypeShape EntityType="DomainModels.ProfileQuestionTargetLocation" Width="1.5" PointX="14.875" PointY="68.75" />
-        <AssociationConnector Association="DomainModels.FK_ProfileQuestionTargetLocation_City" />
         <AssociationConnector Association="DomainModels.FK_ProfileQuestionTargetLocation_Country" />
         <AssociationConnector Association="DomainModels.FK_ProfileQuestionTargetCriteria_Education" />
         <AssociationConnector Association="DomainModels.FK_ProfileQuestionTargetCriteria_Industry" />
@@ -151,6 +129,31 @@
         <AssociationConnector Association="DomainModels.FK_InvoiceDetail_ProfileQuestion" />
         <AssociationConnector Association="DomainModels.FK_ProfileQuestionTargetCriteria_ProfileQuestion2" />
         <AssociationConnector Association="DomainModels.FK_SurveyQuestionTargetCriteria_AdCampaign" />
+        <EntityTypeShape EntityType="DomainModels.CouponPriceOption" Width="1.5" PointX="30.875" PointY="78" />
+        <AssociationConnector Association="DomainModels.FK_CouponPriceOption_Coupon" />
+        <EntityTypeShape EntityType="DomainModels.Company" Width="1.5" PointX="3.625" PointY="72.75" />
+        <AssociationConnector Association="DomainModels.FK_Account_Company" />
+        <AssociationConnector Association="DomainModels.FK_AdCampaign_Company" />
+        <AssociationConnector Association="DomainModels.FK_AdCampaignResponse_Company" />
+        <AssociationConnector Association="DomainModels.FK_AspNetUsers_Company" />
+        <AssociationConnector Association="DomainModels.FK_BranchCategory_Company" />
+        <AssociationConnector Association="DomainModels.FK_CompaniesAspNetUsers_Company" />
+        <AssociationConnector Association="DomainModels.FK_Company_Country" />
+        <AssociationConnector Association="DomainModels.FK_CompanyBranch_Company" />
+        <AssociationConnector Association="DomainModels.FK_Coupon_Company" />
+        <AssociationConnector Association="DomainModels.FK_DamImages_Company" />
+        <AssociationConnector Association="DomainModels.FK_Invoice_Company" />
+        <AssociationConnector Association="DomainModels.FK_ProfileQuestion_Company" />
+        <AssociationConnector Association="DomainModels.FK_ProfileQuestionUserAnswer_Company" />
+        <AssociationConnector Association="DomainModels.FK_SurveyQuestion_Company" />
+        <AssociationConnector Association="DomainModels.FK_SurveyQuestionResponse_Company" />
+        <EntityTypeShape EntityType="DomainModels.PayOutHistory" Width="1.5" PointX="5.875" PointY="77.125" />
+        <AssociationConnector Association="DomainModels.FK_PayOutHistory_Company" />
+        <EntityTypeShape EntityType="DomainModels.City" Width="1.5" PointX="3.625" PointY="55.375" />
+        <AssociationConnector Association="DomainModels.FK_AdCampaignTargetLocation_City" />
+        <AssociationConnector Association="DomainModels.FK_City_Country" />
+        <AssociationConnector Association="DomainModels.FK_ProfileQuestionTargetLocation_City" />
+        <AssociationConnector Association="DomainModels.FK_SurveyQuestionTargetLocation_City" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

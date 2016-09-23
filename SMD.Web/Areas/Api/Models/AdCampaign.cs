@@ -180,5 +180,8 @@ namespace SMD.MIS.Areas.Api.Models
         public string BuyitBtnLabel { get; set; }
 
         public virtual IEnumerable<SMD.MIS.Areas.Api.Models.CouponCategories> CouponCategories { get; set; }
+
+        
+        public virtual IEnumerable<CouponPriceOption> CouponPriceOptions { get; set; }
     }
 }

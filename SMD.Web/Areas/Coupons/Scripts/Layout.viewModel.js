@@ -387,7 +387,8 @@
                                     return city.CityId === data.BillingCityId;
                                 });
                                 var newBranchLocation = new model.Branch.CreateBillingAddress(data);
-                                newBranchLocation.branchCity(city.CityName);
+                                if (city != undefined)
+                                    newBranchLocation.branchCity(city.CityName);
                                 selectedBranch(undefined)
                                 selectedBranch(newBranchLocation);
                                 isSaveChangesEnable(true);

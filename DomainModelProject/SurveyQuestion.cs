@@ -64,7 +64,6 @@ namespace DomainModelProject
     
         public virtual ICollection<AdCampaignTargetCriteria> AdCampaignTargetCriterias { get; set; }
         public virtual AspNetUser AspNetUser { get; set; }
-        public virtual Company Company { get; set; }
         public virtual Country Country { get; set; }
         public virtual ICollection<InvoiceDetail> InvoiceDetails { get; set; }
         public virtual Language Language { get; set; }
@@ -73,5 +72,6 @@ namespace DomainModelProject
         public virtual ICollection<SurveyQuestionTargetCriteria> SurveyQuestionTargetCriterias1 { get; set; }
         public virtual ICollection<SurveyQuestionTargetLocation> SurveyQuestionTargetLocations { get; set; }
         public virtual ICollection<ProfileQuestionTargetCriteria> ProfileQuestionTargetCriterias { get; set; }
+        public virtual Company Company { get; set; }
     }
 }

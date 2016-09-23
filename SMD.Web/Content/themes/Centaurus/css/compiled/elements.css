@@ -5533,6 +5533,26 @@ background-image: url(/Images/crowdcentz_logo.png) !important;
     visibility: visible;
 }
 .tooltip-float {
-    width:100%;
-        font-size: 13px;
+    width: 100%;
+    font-size: 13px;
+}
+.DamModelclose {
+       margin-top: -2px;
+-webkit-appearance: none;
+    padding: 0;
+    cursor: pointer;
+    background: 0 0;
+    border: 0;
+    float: right;
+    font-size: 1.429em;
+    color: #7a7a7a;
+    cursor: pointer;
+
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    filter: alpha(opacity=20);
+    opacity: .2;
 }
