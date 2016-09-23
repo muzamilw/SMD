@@ -217,8 +217,9 @@
                   Locationss: Locationss,
                   ApprovalDateTime : ApprovalDateTime,
                   ChannelType: ChannelType,
-                  VideoBytes: VideoBytes
-
+                  VideoBytes: VideoBytes,
+                  LogoUrl: LogoUrl,
+                  
               }),
               // Has Changes
               hasChanges = ko.computed(function () {

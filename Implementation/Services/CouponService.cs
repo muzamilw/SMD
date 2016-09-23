@@ -312,7 +312,7 @@ namespace SMD.Implementation.Services
                 }
                 if (!string.IsNullOrEmpty(paths[7]))
                 {
-                    couponModel.LogoUrl = paths[7];
+                    couponModel.LogoUrl = "/" + paths[7];
                 }
                 else if (couponModel != null && couponModel.LogoUrl != null && couponModel.LogoUrl.Contains("Content/Images"))
                 {
@@ -379,7 +379,7 @@ namespace SMD.Implementation.Services
                 }
                 if (!string.IsNullOrEmpty(paths[7]))
                 {
-                    couponModel.LogoUrl = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + paths[7];
+                    couponModel.LogoUrl = "/" + paths[7];
                 }
                 else if (couponModel.LogoUrl != null && couponModel.LogoUrl.Contains("Content/Images"))
                 {
