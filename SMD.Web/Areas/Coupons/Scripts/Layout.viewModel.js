@@ -65,9 +65,10 @@
                         {
                             success: function (data) {
                                 var branch = new model.Branch.Create(data);
-                                selectedBranchTemp(branch);
+                                selectedBranch(branch);
+                                triggerGoogleMapSelection();
 
-                                getCitiesDropDownForSelectedBranch(branch.countryId());
+                               // getCitiesDropDownForSelectedBranch(branch.countryId());
                                 
 
                                 //}
@@ -372,7 +373,7 @@
                     dataService.getCompanyAddress({
                         success: function (data) {
                             if (data.BillingCountryId == null) {
-                                getCitiesDropDown(1)
+                              //  getCitiesDropDown(1)
                                 var newBranchLocation = new model.Branch.CreateBillingAddress(data);
                                 //newBranchLocation.branchCity(city.CityName);
                                 selectedBranch(undefined)
@@ -383,11 +384,11 @@
                             }
                             else {
                                 //getCitiesDropDown(data.BillingCountryId)
-                                var city = cities().find(function (city) {
-                                    return city.CityId === data.BillingCityId;
-                                });
+                                //var city = cities().find(function (city) {
+                                //    return city.CityId === data.BillingCityId;
+                                //});
                                 var newBranchLocation = new model.Branch.CreateBillingAddress(data);
-                                newBranchLocation.branchCity(city.CityName);
+                               // newBranchLocation.branchCity(city.CityName);
                                 selectedBranch(undefined)
                                 selectedBranch(newBranchLocation);
                                 isSaveChangesEnable(true);
@@ -413,7 +414,7 @@
                     afterBranchSelect = callback;
                     getBranchCategories(viewBranchDialog);
                     getAllCountries();
-                    getCompanyddress();
+                   // getCompanyddress();
                     
                 },
                 hideBranchCategoryDialog = function () {
@@ -704,7 +705,8 @@
                                 { category.branchFields.removeAll(); }
                                 _.each(data, function (Item) {
                                     var branchfield1 = new model.BranchField.Create(Item);
-                                    category.branchFields.push(phraseField1);
+                                    if (branchfield1.branchId()!=undefined)
+                                    category.branchFields.push(branchfield1);
                                 });
 
 

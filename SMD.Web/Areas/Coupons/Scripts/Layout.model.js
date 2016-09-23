@@ -182,7 +182,7 @@
         return new Branch(source.BranchId, source.BranchTitle, source.BranchAddressLine1, source.BranchAddressLine2, source.BranchCity, source.BranchState, source.BranchZipCode,source.CountryId, source.BranchPhone, source.BranchLocationLat, source.BranchLocationLong, source.BranchCategoryId);
     }
     Branch.CreateBillingAddress = function (source) {
-        return new Branch(null, null, source.BillingAddressLine1, source.BillingAddressLine2, source.BillingCityId, source.BillingState, source.BillingZipCode, source.BillingCountryId, source.BillingPhone);
+        return new Branch(null, null, source.BillingAddressLine1, source.BillingAddressLine2,' ', source.BillingState, source.BillingZipCode, source.BillingCountryId, source.BillingPhone);
     }
 
 
