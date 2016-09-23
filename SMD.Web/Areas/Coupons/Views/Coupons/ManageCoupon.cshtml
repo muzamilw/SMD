@@ -315,7 +315,7 @@ else
                                             <div class="col-lg-4">
                                                 <div style="margin-top:5px;    text-align: center;cursor:pointer;">
                                                     @*<img style="height:90px;" data-bind="visible: couponImage1() == '' || couponImage1() == null"  src="/Content/Images/placeholder.png" onclick="showCouponDialog4();" />*@
-                                                    <img style="height:70px;" data-bind="visible: couponImage1() != '' ,attr: { src: couponImage1 }" id="bannerImage1" data-toggle="modal" data-target="#damModel" onclick="changeIframeSrc(2)" />
+                                                    <img style="height:70px;" data-bind="visible: couponImage1() != '',attr: { src: couponImage1 }" id="bannerImage1" data-toggle="modal" data-target="#damModel" onclick="changeIframeSrc(2)" />
                                                     <div style="    padding-top: 10px;    text-align: center;    font-size: 12px;    color: gray;">
                                                         (450 x 300 pixels)
                                                     </div>
@@ -372,8 +372,9 @@ else
                                                 <div style="margin-top:5px;    text-align: center;cursor:pointer;padding-right:24px;">
                                                     @*<img style="height:90px;" data-bind="visible: LogoImageBytes() == '' || LogoImageBytes() == null" src="/Content/Images/placeholder.png" onclick="showCouponDialog1();" />*@
                                                     @*<img style="height:90px;" data-bind="visible: LogoImageBytes() != '' &&  LogoImageBytes() != null ,attr: { src: LogoImageBytes() }" onclick="showCouponDialog1();" />*@
-                                                    <img style="    margin-left: 24px;height:70px;" data-bind="visible: LogoImageBytes() != '' &&  LogoImageBytes() != null ,attr: { src: LogoImageBytes() }" id="imgLogo" data-toggle="modal" data-target="#damModel" onclick="changeIframeSrc(1)" />
-                                                    <div style="    padding-top: 10px;padding-left:24px;    text-align: center;    font-size: 12px;    color: gray;">
+                                                    <img style="height:70px;" data-bind="visible: LogoImageBytes() != '' &&  LogoImageBytes() != null ,attr: { src: LogoImageBytes() }" id="imgLogo" data-toggle="modal" data-target="#damModel" onclick="changeIframeSrc(1)" />
+
+                                                    <div style="padding-top: 10px;padding-left:24px;    text-align: center;    font-size: 12px;    color: gray;">
                                                         (300 x 150 pixels)
                                                     </div>
                                                 </div>

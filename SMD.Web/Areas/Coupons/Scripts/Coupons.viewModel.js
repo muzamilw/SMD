@@ -436,6 +436,7 @@ define("Coupons/Coupons.viewModel",
                   isEnableVedioVerificationLink(false);
 
                   couponModel().CouponImage2("/images/default-placeholder.png");
+
                   couponModel().CouponImage3("/images/default-placeholder.png");
                   couponModel().couponImage1("/images/default-placeholder.png");
                   couponModel().LogoUrl("/images/default-placeholder.png");
@@ -491,7 +492,7 @@ define("Coupons/Coupons.viewModel",
                 if (hasErrors)
                     return;
 
-                if (UserAndCostDetail().isStripeIntegrated == true) {
+                if (UserAndCostDetail().isStripeIntegrated == false) {
 
                     stripeChargeCustomer.show(function () {
                         UserAndCostDetail().isStripeIntegrated = false;

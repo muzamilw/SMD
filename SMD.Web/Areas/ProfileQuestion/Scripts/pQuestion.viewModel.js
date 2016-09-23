@@ -384,7 +384,9 @@ define("pQuestion/pQuestion.viewModel",
                     //},
                     // On editing of existing PQ
                     onEditProfileQuestion = function (item) {
+                       
                         $("#panelArea,#topArea,#Heading_div").css("display", "none");
+                        
                         AgeRangeStart(13);
                         AgeRangeEnd(80);
                         isTerminateBtnVisible(false);
@@ -393,30 +395,67 @@ define("pQuestion/pQuestion.viewModel",
                             canSubmitForApproval(true);
                         }
                         getQuestionAnswer(item.qId());
-
                         selectedQuestion(item);
-
-                       // selectedQuestion().ProfileQuestionTargetLocation.push(GetAllLocationList());
-
-                        //debugger;
-                       
-
-                        //var FilteredList = getSelectedItems(GetAllLocationList(), item.qId())
-                        //debugger;
-                        //selectedQuestion().ProfileQuestionTargetLocation.push(FilteredList);
-
-                        //_.each(FilteredList, function (item,index) {
-                        //    debugger;
-                        //    addCountryToCountryList(item[index].CountryID, item[index].Country);
-                        //});
-                        //debugger;
                         
-                        //
-                        
-                        //_.each(selectedQuestion().SurveyQuestionTargetLocation(), function (item) {
-                        //    addCountryToCountryList(item.CountryID(), item.Country());
-                        //});
+                        if (selectedQuestion().status() == 1) {
+                            selectedQuestion().statusValue("Draft");
+                        } else if (selectedQuestion().status() == 2) {
 
+                            $("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
+
+
+                            $("#CloseBtn").removeAttr('disabled');
+                            
+                            $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,#btnPauseCampaign,.lang_delSurvey,.table-link").css("display", "none");
+                          //  $("#saveBtn").css("display", "none")
+                            $("#btnCancel,#btnPauseCampaign,.btnClose").removeAttr('disabled');
+
+                            selectedQuestion().statusValue("Submitted for Approval");
+
+                        } else if (selectedQuestion().status() == 3) {
+                            //$("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
+                            $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,.lang_delSurvey,.table-link").css("display", "none");
+                            //$("#saveBtn").css("display", "none");
+                            //$("#btnPauseCampaign").css("display", "inline-block");
+                            //$("#btnCancel,#btnPauseCampaign,#btnCopyCampaign,#btnStopAndTerminate").removeAttr('disabled');
+                            selectedQuestion().statusValue("Live");
+                            isTerminateBtnVisible(true);
+                            isNewCampaignVisible(true);
+
+                        } else if (selectedQuestion().status() == 4) {
+                            $("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
+                            $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,.lang_delSurvey,.table-link").css("display", "none");
+                        //    $("#saveBtn").css("display", "none");
+                            $("#btnResumeCampagin").css("display", "inline-block");
+                            $("#btnCancel,#btnResumeCampagin,#btnCopyCampaign,#btnStopAndTerminate").removeAttr('disabled');
+                            selectedQuestion().statusValue("Paused");
+                            isTerminateBtnVisible(true);
+                            isNewCampaignVisible(true);
+                        } else if (selectedQuestion().status() == 5) {
+                            selectedQuestion().statusValue("Completed");
+                        } else if (selectedQuestion().status() == 6) {
+                            selectedQuestion().statusValue("Approval Rejected");
+                        } else if (selectedQuestion().status() == 7) {
+                            selectedQuestion().statusValue("Terminated by user");
+                            $("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
+                            $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,.lang_delSurvey,.table-link").css("display", "none");
+                           // $("#saveBtn").css("display", "none");
+                            $("#btnPauseCampaign").css("display", "inline-block");
+                            $("#btnCancel,#btnPauseCampaign,#btnCopyCampaign,#btnArchive").removeAttr('disabled');
+                            isNewCampaignVisible(true);
+                            isShowArchiveBtn(true);
+                        } else if (item.status == 9) {
+                            item.statusValue = ("Completed");
+                        } else if (item.status == 8) {
+                            item.statusValue = ("Archived");
+                            $("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
+                            $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,.lang_delSurvey,.table-link").css("display", "none");
+                           // $("#saveBtn").css("display", "none");
+                            $("#btnPauseCampaign").css("display", "inline-block");
+                            $("#btnCancel,#btnPauseCampaign,#btnCopyCampaign,#btnArchive").removeAttr('disabled');
+                            isNewCampaignVisible(true);
+                            isShowArchiveBtn(true);
+                        }
 
                         isEditorVisible(true);
                         gotoScreen(1);
@@ -429,16 +468,10 @@ define("pQuestion/pQuestion.viewModel",
                         if (item.status() == 1 || item.status() == 2 || item.status() == 3 || item.status() == 4 || item.status() == null || item.status() == 7 || item.status() == 9) {
                             canSubmitForApproval(true);
                         }
-                      
-
-
-                        //selectedQuestion(new model.question());
-
-                        //selectedQuestion().ProfileQuestionTargetLocation.push(item.ProfileQuestionTargetLocation);
-
                         SelectedPvcVal(item.answerNeeded());
 
                         selectedQuestion().reset();
+
                     },
                     
                  getSelectedItems=function(items,pqid) {
@@ -449,7 +482,7 @@ define("pQuestion/pQuestion.viewModel",
                 },
                     // On Edit PQ, Get PQ Answer & linked Question 
                     getQuestionAnswer = function (profileQuestionId) {
-                      
+                        
                         dataservice.getPqAnswer(
                            {
                                ProfileQuestionId: profileQuestionId
@@ -457,14 +490,12 @@ define("pQuestion/pQuestion.viewModel",
                            {
                                success: function (answers) {
                                  
-                                    selectedQuestion().reset();
-
                                     selectedQuestion().answers.removeAll();
                                     
                                     _.each(answers, function (item) {
                                         selectedQuestion().answers.push(model.questionAnswerServertoClientMapper(item));
                                     });
-
+                                    selectedQuestion().reset();
 
                                   // var List = answers[0].ProfileQuestion.ProfileQuestionTargetCriteria;
                                    
@@ -476,11 +507,7 @@ define("pQuestion/pQuestion.viewModel",
                                      selectedQuestion().ProfileQuestionTargetLocation.removeAll();
 
                                     
-                                    //var matchedItem = ko.utils.arrayFirst(branchLocations(), function (arrayitem) {
-
-                                    //    return arrayitem.BranchId == item.LocationBranchId();
-                                   //});
-                                    console.log(selectedQuestion().ProfileQuestionTargetLocation());
+                                    
                                     
                                    // ko.utils.arrayPushAll(selectedQuestion().ProfileQuestionTargetLocation(), answers[0].ProfileQuestion.ProfileQuestionTargetLocation);
 
@@ -523,7 +550,7 @@ define("pQuestion/pQuestion.viewModel",
                                            AdCampaignID: itemtemp.AdCampaignID
                                        }));
                                    });
-
+                                   selectedQuestion().reset();
                                },
                                error: function () {
                                    toastr.error("Failed to load profile question!");
@@ -654,7 +681,7 @@ define("pQuestion/pQuestion.viewModel",
                     },
                     // To do before save
                     doBeforeSave = function () {
-                        debugger;
+                        
                         var isValid = true;
                         if (!selectedQuestion().isValid()) {
                             selectedQuestion().errors.showAllMessages();
@@ -1264,7 +1291,7 @@ define("pQuestion/pQuestion.viewModel",
                                  ko.utils.arrayPushAll(profileAnswerList(), data.ProfileQuestionAnswers);
                                  profileAnswerList.valueHasMutated();
 
-
+                                 
                              }
 
                          },
@@ -1363,25 +1390,26 @@ define("pQuestion/pQuestion.viewModel",
                            $(".close").click();
                      },
                         closeEditDialog = function () {
+
                             
-                            if (selectedQuestion().hasChanges()) {
+                                if (selectedQuestion().hasChanges()) {
 
-                                confirmation.messageText("Do you want to save changes?");
-                                confirmation.afterProceed(function () {
-                                    SaveAsDraft();
-                                });
-                                confirmation.afterCancel(function () {
+                                    confirmation.messageText("Do you want to save changes?");
+                                    confirmation.afterProceed(function () {
+                                        SaveAsDraft();
+                                    });
+                                    confirmation.afterCancel(function () {
 
+                                        CloseContent();
+                                    });
+
+                                    confirmation.show();
+
+                                }
+                                else {
                                     CloseContent();
-                                });
-
-                                confirmation.show();
-
-                            }
-                            else {
-                                CloseContent();
-                            }
-
+                                }
+                            
                         },
 
                         CloseContent = function ()

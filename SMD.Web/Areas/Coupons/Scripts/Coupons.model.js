@@ -201,9 +201,14 @@
                       CouponActiveYear: CouponActiveYear(),
                       CouponExpirydate: moment(CouponExpirydate()).format(ist.utcFormat) + 'Z',
                       CouponId: CouponId(),
+
+
                       couponImage1: bannerImage1 == "" ? couponImage1() : bannerImage1,
                       CouponImage2: bannerImage2 == "" ? CouponImage2() : bannerImage2,
                       CouponImage3: bannerImage3 == "" ? CouponImage3() : bannerImage3,
+
+
+
                       CouponIssuedCount: CouponIssuedCount(),
                       CouponListingMode: CouponListingMode(),
                       CouponQtyPerUser: CouponQtyPerUser(),

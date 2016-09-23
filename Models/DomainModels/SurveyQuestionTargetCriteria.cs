@@ -1,4 +1,5 @@
-﻿namespace SMD.Models.DomainModels
+﻿using System;
+namespace SMD.Models.DomainModels
 {
     /// <summary>
     /// SurveyQuestionTargetCriteria Domain Model
@@ -20,8 +21,13 @@
         public int? IndustryId { get; set; }
 
         public long? EducationId { get; set; }
+
+        public Nullable<long> QuizCampaignId { get; set; }
+        public Nullable<int> QuizAnswerId { get; set; }
     
         public virtual Industry Industry { get; set; }
+
+
 
         public virtual ProfileQuestion ProfileQuestion { get; set; }
         public virtual ProfileQuestionAnswer ProfileQuestionAnswer { get; set; }
@@ -31,5 +37,6 @@
         public virtual Language Language { get; set; }
 
         public virtual Education Education { get; set; }
+        public virtual AdCampaign AdCampaign { get; set; }
     }
 }
