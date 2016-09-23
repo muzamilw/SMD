@@ -42,9 +42,7 @@ namespace DomainModelProject
         public virtual DbSet<CampaignCategory> CampaignCategories { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<CategoryLog> CategoryLogs { get; set; }
-        public virtual DbSet<City> Cities { get; set; }
         public virtual DbSet<CompaniesAspNetUser> CompaniesAspNetUsers { get; set; }
-        public virtual DbSet<Company> Companies { get; set; }
         public virtual DbSet<CompanyBranch> CompanyBranches { get; set; }
         public virtual DbSet<Country> Countries { get; set; }
         public virtual DbSet<Coupon> Coupons { get; set; }
@@ -85,6 +83,10 @@ namespace DomainModelProject
         public virtual DbSet<UserCouponView> UserCouponViews { get; set; }
         public virtual DbSet<ProfileQuestionTargetCriteria> ProfileQuestionTargetCriterias { get; set; }
         public virtual DbSet<ProfileQuestionTargetLocation> ProfileQuestionTargetLocations { get; set; }
+        public virtual DbSet<CouponPriceOption> CouponPriceOptions { get; set; }
+        public virtual DbSet<City> Cities { get; set; }
+        public virtual DbSet<Company> Companies { get; set; }
+        public virtual DbSet<PayOutHistory> PayOutHistories { get; set; }
     
         public virtual ObjectResult<SearchCoupons_Result> SearchCoupons(Nullable<int> categoryId, Nullable<int> type, string keywords, Nullable<int> distance, string lat, string lon, string userId, Nullable<int> fromRow, Nullable<int> toRow)
         {

@@ -488,17 +488,16 @@ define("Coupons/Coupons.viewModel",
                     //if (couponModel().couponImage1() == "/images/default-placeholder.png" && couponModel().CouponImage2() == "/images/default-placeholder.png" && couponModel().CouponImage3() == "/images/default-placeholder.png") {
                     //    hasErrors = true;
                     //    toastr.error("Please enter atleast 1 banner image.");
-                    //}
+                //}
+
                 if (hasErrors)
                     return;
 
                 if (UserAndCostDetail().isStripeIntegrated == false) {
-
                     stripeChargeCustomer.show(function () {
                         UserAndCostDetail().isStripeIntegrated = false;
                         saveCampaign(2);
                     }, 2000, 'Enter your details');
-
 
                 } else {
                     saveCampaign(2);
@@ -571,6 +570,7 @@ define("Coupons/Coupons.viewModel",
                     var campignServerObj = couponModel().convertToServerData();
 
                     dataservice.addCampaignData(campignServerObj, {
+
                         success: function (data) {
 
                             isEditorVisible(false);
@@ -596,326 +596,47 @@ define("Coupons/Coupons.viewModel",
                     //  }
                 }
             },
-                // Add new profile Criteria
-                addNewProfileCriteria = function () { },
-                  saveProfileQuestion = function (item) {
+                ///*** Stock Sub Categories Region ***
 
-                      var selectedQuestionstring = $(".active .parent-list-title").text();
-                      selectedCriteria().questionString(selectedQuestionstring);
-                      selectedCriteria().PQID(item.PQID);
-                      var selectedQuestionAnswerstring = item.Answer;
-                      selectedCriteria().answerString(selectedQuestionAnswerstring);
-                      selectedCriteria().PQAnswerID(item.PqAnswerId);
-
-
-                      var matchedProfileCriteriaRec = ko.utils.arrayFirst(couponModel().AdCampaignTargetCriterias(), function (arrayitem) {
-
-                          return arrayitem.PQID() == item.PQID
-                      });
-
-                      if (matchedProfileCriteriaRec == null) {
-                          if (UserAndCostDetail().OtherClausePrice != null) {
-                              pricePerclick(pricePerclick() + UserAndCostDetail().OtherClausePrice);
-
-                          }
-                          couponModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
-                              Type: 1,
-                              PQId: selectedCriteria().PQID(),
-                              PQAnswerId: selectedCriteria().PQAnswerID(),
-                              SQId: selectedCriteria().SQID(),
-                              SQAnswer: selectedCriteria().SQAnswer(),
-                              questionString: selectedCriteria().questionString(),
-                              answerString: selectedCriteria().answerString(),
-                              IncludeorExclude: selectedCriteria().IncludeorExclude(),
-                              CampaignId: couponModel().CampaignID,
-                              criteriaPrice: UserAndCostDetail().OtherClausePrice
-                          }));
-                      } else {
-                          couponModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
-                              Type: 1,
-                              PQId: selectedCriteria().PQID(),
-                              PQAnswerId: selectedCriteria().PQAnswerID(),
-                              SQId: selectedCriteria().SQID(),
-                              SQAnswer: selectedCriteria().SQAnswer(),
-                              questionString: selectedCriteria().questionString(),
-                              answerString: selectedCriteria().answerString(),
-                              IncludeorExclude: selectedCriteria().IncludeorExclude(),
-                              CampaignId: couponModel().CampaignID,
-                              criteriaPrice: 0
-                          }));
-                      }
-
-                      $(".close").click();
-
-                  },
-                    updateSurveyCriteria = function (type, item) {
-                        selectedCriteria().QuizAnswerId(type);
-                        if (type == 1) {
-                            selectedCriteria().answerString(selectedCriteria().surveyQuestLeftImageSrc());
-                        } else {
-                            selectedCriteria().answerString(selectedCriteria().surveyQuestRightImageSrc());
+                // Select a Sub Category
+                    selectSubCategory = function (stockSubCategory) {
+                        if (selectedStockSubCategory() !== stockSubCategory) {
+                            selectedStockSubCategory(stockSubCategory);
                         }
-                        $(".close").click();
                     },
-                     updateProfileQuestion = function (item) {
-                         selectedCriteria().answerString(item.Answer);
-                         selectedCriteria().PQAnswerID(item.PQAnswerID);
-                         $(".close").click();
+                // Template Chooser For Stock Sub Categories
+                    templateToUseStockSubCategories = function (stockSubCategory) {
+                        return (stockSubCategory === selectedStockSubCategory() ? 'editStockSubCategoryTemplate' : 'itemStockSubCategoryTemplate');
+                    },
+                //Create Stock Sub Category
+                     onCreateNewStockSubCategory = function () {
+                         var stockSubCategory = selectedStockCategory().stockSubCategories()[0];
+                         //Create Stock Categories for the very First Time
+                         if (stockSubCategory == undefined) {
+                             selectedStockCategory().stockSubCategories.splice(0, 0, new model.InventorySubCategory());
+                             selectedStockSubCategory(selectedStockCategory().stockSubCategories()[0]);
+                         }
+                             //If There are already stock categories in list
+                         else {
+                             if (!stockSubCategory.isValid()) {
+                                 stockSubCategory.errors.showAllMessages();
+                             }
+                             else {
+                                 selectedStockCategory().stockSubCategories.splice(0, 0, new model.InventorySubCategory());
+                                 selectedStockSubCategory(selectedStockCategory().stockSubCategories()[0]);
+                             }
+                         }
                      },
-                saveCriteria = function (type, item) {
-
-                    var selectedQuestionstring = item.VerifyQuestion;
-                    selectedCriteria().questionString(selectedQuestionstring);
-                    if (type == 1) {
-                        selectedCriteria().answerString(item.Answer1);
-                    } else {
-                        selectedCriteria().answerString(item.Answer2);
-                    }
-
-                    var matchedSurveyCriteriaRec = null;
-
-                    _.each(couponModel().AdCampaignTargetCriterias(), function (itemarry) {
-
-                        if (itemarry.QuizCampaignId() == item.CampaignId) {
-
-                            matchedSurveyCriteriaRec = itemarry;
-                        }
-                    });
-
-
-                    if (isNewCriteria()) {
-                        if (matchedSurveyCriteriaRec == null) {
-                            if (UserAndCostDetail().OtherClausePrice != null) {
-                                pricePerclick(pricePerclick() + UserAndCostDetail().OtherClausePrice);
-
-                            }
-
-                            couponModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
-                                Type: 6,
-                                PQId: selectedCriteria().PQID(),
-                                PQAnswerId: selectedCriteria().PQAnswerID(),
-                                QuizCampaignId: item.CampaignId,
-                                QuizAnswerId: type,
-                                questionString: selectedCriteria().questionString(),
-                                answerString: selectedCriteria().answerString(),
-                                IncludeorExclude: selectedCriteria().IncludeorExclude(),
-                                CampaignId: couponModel().CampaignID,
-                                criteriaPrice: UserAndCostDetail().OtherClausePrice
-                            }));
-
-                        } else {
-
-
-                            couponModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
-                                Type: 6,
-                                PQId: selectedCriteria().PQID(),
-                                PQAnswerId: selectedCriteria().PQAnswerID(),
-                                QuizCampaignId: item.CampaignId,
-                                QuizAnswerId: type,
-                                questionString: selectedCriteria().questionString(),
-                                answerString: selectedCriteria().answerString(),
-                                IncludeorExclude: selectedCriteria().IncludeorExclude(),
-                                CampaignId: couponModel().CampaignID,
-                                criteriaPrice: 0
-                            }));
-
-                        }
-                    }
-                    $(".close").click();
-                    isShowSurveyAns(false);
-                },
-
-                onEditCriteria = function (item) {
-                    AditionalCriteriaMode("2");
-                    isNewCriteria(false);
-                    var val = item.PQAnswerID() + 0;
-                    var valQuest = item.PQID() + 0;
-                    if (item.Type() == "1") {
-
-                        if (profileQuestionList().length == 0) {
-                            dataservice.getBaseData({
-                                RequestId: 2,
-                                QuestionId: 0,
-                            }, {
-                                success: function (data) {
-                                    if (data != null) {
-                                        profileQuestionList([]);
-                                        ko.utils.arrayPushAll(profileQuestionList(), data.ProfileQuestions);
-                                        profileQuestionList.valueHasMutated();
-                                        item.PQID(valQuest);
-                                    }
-
-                                },
-                                error: function (response) {
-
-                                }
-                            });
-                        }
-
-
-                        dataservice.getBaseData({
-                            RequestId: 3,
-                            QuestionId: item.PQID(),
-                        }, {
-                            success: function (data) {
-                                if (data != null) {
-                                    _.each(data.ProfileQuestionAnswers, function (question) {
-                                        question.PQID = question.PqId;
-                                        question.PQAnswerID = question.PqAnswerId;
-                                    });
-                                    profileAnswerList([]);
-                                    ko.utils.arrayPushAll(profileAnswerList(), data.ProfileQuestionAnswers);
-                                    profileAnswerList.valueHasMutated();
-                                    item.PQAnswerID(val);
-                                }
-
-                            },
-                            error: function (response) {
-
-                            }
+                // Delete a Stock Sub Category
+                    onDeleteStockSubCategory = function (stockSubCategory) {
+                        confirmation.messageText("WARNING - This item will be removed from the system and you won’t be able to recover.  There is no undo");
+                        confirmation.afterProceed(function () {
+                            selectedStockCategory().stockSubCategories.remove(stockSubCategory);
                         });
-
-                        selectedCriteria(item);
-                    } else {
-                        selectedCriteria(item);
-                        var matchSurveyQuestion = ko.utils.arrayFirst(myQuizQuestions(), function (survey) {
-                            return survey.CampaignId == item.QuizCampaignId();
-                        });
-                        selectedCriteria().surveyQuestLeftImageSrc(matchSurveyQuestion.Answer1);
-                        selectedCriteria().surveyQuestRightImageSrc(matchSurveyQuestion.Answer2);
-                        // adjust item
-                    }
-
-                },
-                // Delete Handler PQ
-                onDeleteCriteria = function (item) {
-
-                    pricePerclick(pricePerclick() - item.criteriaPrice());
-                    couponModel().AdCampaignTargetCriterias.remove(item);
-
-                },
-
-                onChangeProfileQuestion = function (item) {
-                    if (item == null)
+                        confirmation.show();
                         return;
-                    var selectedQuestionId = item.PqId;
-
-                    dataservice.getBaseData({
-                        RequestId: 3,
-                        QuestionId: selectedQuestionId,
-                    }, {
-                        success: function (data) {
-                            if (data != null) {
-                                if (profileAnswerList().length > 0) {
-                                    profileAnswerList([]);
-                                }
-                                _.each(data.ProfileQuestionAnswers, function (question) {
-                                    question.PQID = item.PqId;
-                                });
-                                ko.utils.arrayPushAll(profileAnswerList(), data.ProfileQuestionAnswers);
-                                profileAnswerList.valueHasMutated();
-
-
-                            }
-
-                        },
-                        error: function (response) {
-
-                        }
-                    });
-                },
-
-                onChangeSurveyQuestion = function (item) {
-                },
-
-                onRemoveLocation = function (item) {
-                    // Ask for confirmation
-                    deleteLocation(item);
-
-                },
-
-                deleteLocation = function (item) {
-                    couponModel().AdCampaignTargetLocations.remove(item);
-
-                    if (couponModel().AdCampaignTargetLocations() == null || couponModel().AdCampaignTargetLocations().length == 0) {
-                        isLocationPerClickPriceAdded(false);
-                        pricePerclick(pricePerclick() - UserAndCostDetail().LocationClausePrice);
-                    }
-                    selectedQuestionCountryList([]);
-                    _.each(couponModel().AdCampaignTargetLocations(), function (item) {
-                        addCountryToCountryList(item.CountryID(), item.Country());
-                    });
-                    toastr.success("Removed Successfully!");
-                },
-                //add location
-                onAddLocation = function (item) {
-
-                    selectedLocation().Radius = (selectedLocationRadius);
-                    selectedLocation().IncludeorExclude = (selectedLocationIncludeExclude);
-                    couponModel().AdCampaignTargetLocations.push(new model.AdCampaignTargetLocation.Create({
-                        CountryId: selectedLocation().CountryID,
-                        CityId: selectedLocation().CityID,
-                        Radius: selectedLocation().Radius(),
-                        Country: selectedLocation().Country,
-                        City: selectedLocation().City,
-                        IncludeorExclude: selectedLocation().IncludeorExclude(),
-                        CampaignId: couponModel().CampaignID(),
-                        Latitude: selectedLocation().Latitude,
-                        Longitude: selectedLocation().Longitude,
-                    }));
-                    addCountryToCountryList(selectedLocation().CountryID, selectedLocation().Country);
-
-                    if (UserAndCostDetail().LocationClausePrice != null && isLocationPerClickPriceAdded() == false) {
-                        pricePerclick(pricePerclick() + UserAndCostDetail().LocationClausePrice);
-                        isLocationPerClickPriceAdded(true);
-                    }
-                },
-
-                resetLocations = function () {
-                    $("#searchCampaignLocations").val("");
-                    selectedLocationRadius("");
-                },
-
-                addLanguage = function (selected) {
-
-                    couponModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
-                        Language: selected.LanguageName,
-                        LanguageId: selected.LanguageId,
-                        IncludeorExclude: parseInt(selectedLangIncludeExclude()),
-                        Type: 3,
-                        CriteriaId: 0,
-                        CampaignId: couponModel().CampaignID()
-                    }));
-                    $("#searchLanguages").val("");
-                    if (UserAndCostDetail().OtherClausePrice != null && isLanguagePerClickPriceAdded() == false) {
-                        pricePerclick(pricePerclick() + UserAndCostDetail().OtherClausePrice);
-                        isLanguagePerClickPriceAdded(true);
-                    }
-                },
-
-                onRemoveLanguage = function (item) {
-                    // Ask for confirmation
-                    deleteLanguage(item);
-
-
-                },
-
-                deleteLanguage = function (item) {
-
-                    couponModel().AdCampaignTargetCriterias.remove(item);
-
-                    var matchedLanguageCriterias = ko.utils.arrayFirst(couponModel().AdCampaignTargetCriterias(), function (arrayitem) {
-
-                        return arrayitem.Type() == item.Type();
-                    });
-
-                    if (matchedLanguageCriterias == null) {
-                        isLanguagePerClickPriceAdded(false);
-                        pricePerclick(pricePerclick() - UserAndCostDetail().OtherClausePrice);
-                    }
-                    toastr.success("Removed Successfully!");
-
-                },
+                    },
+            
                 // Has Changes
                 hasChangesOnQuestion = ko.computed(function () {
                     if (couponModel() == undefined) {
@@ -2162,14 +1883,14 @@ define("Coupons/Coupons.viewModel",
                     profileQuestionList: profileQuestionList,
                     branchLocations: branchLocations,
                     profileAnswerList: profileAnswerList,
-                    saveCriteria: saveCriteria,
-                    onDeleteCriteria: onDeleteCriteria,
-                    onEditCriteria: onEditCriteria,
-                    addNewProfileCriteria: addNewProfileCriteria,
-                    onChangeProfileQuestion: onChangeProfileQuestion,
+                   
+                    
+                    
+                    
+                    
                     myQuizQuestions: myQuizQuestions,
-                    //   addNewSurveyCriteria: addNewSurveyCriteria,
-                    onChangeSurveyQuestion: onChangeSurveyQuestion,
+                    
+                    
                     getCampaignByFilter: getCampaignByFilter,
                     searchFilterValue: searchFilterValue,
                     isShowSurveyAns: isShowSurveyAns,
@@ -2179,13 +1900,7 @@ define("Coupons/Coupons.viewModel",
                     selectedLangIncludeExclude: selectedLangIncludeExclude,
                     selectedLocationLat: selectedLocationLat,
                     selectedLocationLong: selectedLocationLong,
-                    onAddLocation: onAddLocation,
-                    onRemoveLocation: onRemoveLocation,
-                    deleteLocation: deleteLocation,
-                    addLanguage: addLanguage,
-                    onRemoveLanguage: onRemoveLanguage,
-                    deleteLanguage: deleteLanguage,
-                    ageRange: ageRange,
+                    
                     isNewCriteria: isNewCriteria,
                     isEnableVedioVerificationLink: isEnableVedioVerificationLink,
                     campaignTypeImageCallback: campaignTypeImageCallback,
@@ -2225,9 +1940,7 @@ define("Coupons/Coupons.viewModel",
                     voucherQuestionStatus: voucherQuestionStatus,
                     ChangeVoucherSettings: ChangeVoucherSettings,
                     VoucherImageCallback: VoucherImageCallback,
-                    saveProfileQuestion: saveProfileQuestion,
-                    updateProfileQuestion: updateProfileQuestion,
-                    updateSurveyCriteria: updateSurveyCriteria,
+                    
                     buyItQuestionStatus: buyItQuestionStatus,
                     buyItQuestionLabelStatus: buyItQuestionLabelStatus,
                     ButItOtherLabel: ButItOtherLabel,
@@ -2304,7 +2017,10 @@ define("Coupons/Coupons.viewModel",
                     CouponActiveMonth: CouponActiveMonth,
                     BranchLocationId: BranchLocationId,
                     SaveAsDraft: SaveAsDraft,
-                    handleBuyIt: handleBuyIt
+                    handleBuyIt: handleBuyIt,
+                    templateToUseStockSubCategories: templateToUseStockSubCategories,
+                    onCreateNewStockSubCategory: onCreateNewStockSubCategory,
+                    onDeleteStockSubCategory: onDeleteStockSubCategory
                 };
             })()
         };

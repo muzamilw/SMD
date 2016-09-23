@@ -25,7 +25,7 @@ namespace DomainModelProject
         public Nullable<double> AccountBalance { get; set; }
         public Nullable<int> CompanyId { get; set; }
     
-        public virtual Company Company { get; set; }
         public virtual ICollection<Transaction> Transactions { get; set; }
+        public virtual Company Company { get; set; }
     }
 }

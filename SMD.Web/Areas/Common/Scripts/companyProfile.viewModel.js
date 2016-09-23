@@ -46,6 +46,7 @@ define("common/companyProfile.viewModel",
                              view.CloseCompanyProfileDialog();
                          });
                          confirmation.show();
+                         logoImage = '';
                      }
                      else {
 
@@ -151,7 +152,7 @@ define("common/companyProfile.viewModel",
                                 cities.valueHasMutated();
                             }
 
-
+                            randonNumber("?r=" + Math.floor(Math.random() * (20 - 1 + 1)) + 1);
 
                         },
                         error: function () {
@@ -164,7 +165,11 @@ define("common/companyProfile.viewModel",
                     if (selectedCompany() == undefined) {
                         return false;
                     }
-                    return (selectedCompany().hasChanges());
+                    if (selectedCompany().hasChanges() || logoImage != '')
+                        return true;
+                    else
+                        false;
+                   // return (selectedCompany().hasChanges());
                 }),
 
                 

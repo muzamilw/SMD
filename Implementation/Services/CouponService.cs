@@ -312,7 +312,7 @@ namespace SMD.Implementation.Services
                 }
                 if (!string.IsNullOrEmpty(paths[7]))
                 {
-                    couponModel.LogoUrl = "/" + paths[7];
+                    couponModel.LogoUrl = paths[7];
                 }
                 else if (couponModel != null && couponModel.LogoUrl != null && couponModel.LogoUrl.Contains("Content/Images"))
                 {
@@ -379,7 +379,7 @@ namespace SMD.Implementation.Services
                 }
                 if (!string.IsNullOrEmpty(paths[7]))
                 {
-                    couponModel.LogoUrl = "/" + paths[7];
+                    couponModel.LogoUrl = paths[7];
                 }
                 else if (couponModel.LogoUrl != null && couponModel.LogoUrl.Contains("Content/Images"))
                 {
@@ -685,12 +685,17 @@ namespace SMD.Implementation.Services
                     dbCo.Status = (Int32)AdCampaignStatus.ApprovalRejected;
                     dbCo.Approved = false;
                     dbCo.RejectedReason = source.RejectedReason.ToString();
-                    emailManagerService.SendCouponRejectionEmail(dbCo.UserId, dbCo.RejectedReason);
+                   
                 }
                 dbCo.ModifiedDateTime = DateTime.Now;
                 dbCo.ModifiedBy = couponRepository.LoggedInUserIdentity;
 
                 couponRepository.SaveChanges();
+
+                if (source.Approved == false)
+                {
+                    emailManagerService.SendCouponRejectionEmail(dbCo.UserId, dbCo.RejectedReason);
+                }
 
             }
             return respMesg;

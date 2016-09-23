@@ -128,14 +128,20 @@
                                             </div>
                                             <div class="col-lg-8">
                                                 <div class="defaultImgUploadImage pull-left" style="width:270px;cursor:pointer;text-align:center">
-                                                    <img style="width:auto;max-width:236px; min-height:150px;" data-bind="visible: LogoImageBase64() != '',attr: { src: LogoImageBase64  }" src="/Content/Images/Company_Default.png" onclick="showUploadDialog();" />
+                                                    @*<img style="width:auto;max-width:236px; min-height:150px;" data-bind="visible: LogoImageBase64() != '',attr: { src: LogoImageBase64  }" src="/Content/Images/Company_Default.png" onclick="showUploadDialog();" />
                                                     <img style="width:auto;max-width:236px; min-height:150px;" data-bind="visible: Logo() != '' ,attr: { src: Logo()  }" onclick="showUploadDialog();" />
-                                                    <div style="height:auto;width:236px; min-height:150px;" onclick="showUploadDialog();" data-bind="visible: Logo() == '' &&   LogoImageBase64() == ''"></div>
+                                                    <div style="height:auto;width:236px; min-height:150px;" onclick="showUploadDialog();" data-bind="visible: Logo() == '' &&   LogoImageBase64() == ''"></div>*@
+
+
+                                                    <img style="height:auto;width:236px; min-height:150px;" data-bind="attr: { src: $root.selectedCompany().Logo() }" src="/Content/Images/Company_Default.png" id="imgLogo" data-toggle="modal" data-target="#damModel" onclick="changeIframeSrc(1)" />
+
+
+
                                                     <div style="    padding-top: 10px;    text-align: center;    font-size: 12px;    color: gray;">
                                                         (300 x 150 pixels)
                                                     </div>
                                                 </div>
-                                                <div class="defaultImgUploadImageBtn pull-left" style="">
+                                                <div class="defaultImgUploadImageBtn pull-left" style="display:none;">
                                                     <div class="fileUpload">
                                                         <span>change </span>
                                                         <input type="file" class="upload" id="logo_image_file" data-bind="files: { onLoaded: $root.LogoUrlImageCallback, fileFilter: 'image.*'}" />
@@ -375,6 +381,7 @@
 
 
 
+
 @section Scripts{
     <script type="text/javascript">
         require(["common/userProfile.view", "common/confirmation.view", "common/stripeChargeCustomer.view"]);
@@ -390,4 +397,57 @@
             return url[1].split(pattern)[1];
         }
     </script>
+@*<script type="text/javascript">
+
+
+    var logoImage = "";
+    var bannerImage1 = "";
+    var bannerImage2 = "";
+    var bannerImage3 = "";
+    var mode = 1;
+
+
+    function changeIframeSrc(mode1) {
+        mode = mode1;
+        if (mode1 != 1)
+            mode1 = 2;
+        $("#iframe").attr("src", "/DamImages?mode=" + mode1 + "&selection=true");
+
+        console.log(mode);
+    }
+
+    function iframeLoaded() {
+        var iframeBody = $('body', $('#iframe')[0].contentWindow.document);
+        $(iframeBody).on('click', '.damImgContainer img', function (event) {
+            console.log(mode);
+            if (mode == 1) {
+                $("#imgLogo").attr("src", this.src).change();
+                logoImage = this.src;
+                $(".close").click();
+            } else if (mode == 2) {
+                $("#bannerImage1").attr("src", this.src).change();
+                bannerImage1 = this.src;
+                $(".close").click();
+            } else if (mode == 3) {
+                $("#bannerImage2").attr("src", this.src).change();
+                bannerImage2 = this.src;
+                $(".close").click();
+            } else if (mode == 4) {
+                $("#bannerImage3").attr("src", this.src).change();
+                bannerImage3 = this.src;
+                $(".close").click();
+            }
+        });
+    }
+    $(document).ready(function () {
+     
+
+    });
+    
+</script>*@
+
+
+
+
+
 }

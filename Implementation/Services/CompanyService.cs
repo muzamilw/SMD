@@ -65,11 +65,13 @@ namespace SMD.Implementation.Services
         {
 
 
-           
-            
-            if (LogoImageBytes != null)
+
+
+            if (company.Logo != null && company.Logo!=string.Empty)
             {
+
                 var currentCompany = companyRepository.Find(companyRepository.CompanyId);
+
                 var logoUrl = UpdateCompanyProfileImage(company, LogoImageBytes, currentCompany.Logo);
 
                 companyRepository.updateCompanyLogo(logoUrl, companyRepository.CompanyId);
@@ -97,17 +99,9 @@ namespace SMD.Implementation.Services
                 Directory.CreateDirectory(mapPath);
             }
 
-            return  ImageHelper.Save(mapPath, existingFileName, string.Empty, string.Empty,
-                "blah", LogoImageBytes);
+            return ImageHelper.SaveImage(mapPath,request.Logo, string.Empty, string.Empty,
+                "blah", LogoImageBytes,request.CompanyId);
 
-
-             
-            ////string imgExt = Path.GetExtension(user.ProfileImage);
-            ////string sourcePath = HttpContext.Current.Server.MapPath("~/" + user.ProfileImage);
-            ////string[] results = sourcePath.Split(new string[] { imgExt }, StringSplitOptions.None);
-            ////string res = results[0];
-            ////string destPath = res + "_thumb" + imgExt;
-            ////ImageHelper.GenerateThumbNail(sourcePath, sourcePath, 200);
         }
         public Company GetCompanyForAddress()
         {

@@ -7,7 +7,7 @@ namespace SMD.MIS.Areas.Api.Models
 {
     public class UserAndCostDetail
     {
-        public int? CityId { get; set; }
+        //public int? CityId { get; set; }
         public int? CountryId { get; set; }
         public int? LanguageId { get; set; }
         public int? IndustryId { get; set; }
