@@ -11,7 +11,7 @@ define("Report/walletReport.dataservice", function () {
 
                     // Get wallet Report
                     amplify.request.define('getWalletReport', 'ajax', {
-                        url: '/Api/ApproveProfileQuestion',
+                        url: '/Api/Statement',
                         dataType: 'json',
                         type: 'GET'
                     });
