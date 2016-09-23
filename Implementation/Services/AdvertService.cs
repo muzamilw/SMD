@@ -405,7 +405,7 @@ namespace SMD.Implementation.Services
                 }
                 if (!string.IsNullOrEmpty(paths[7]))
                 {
-                    campaignModel.LogoUrl = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + paths[7];
+                    campaignModel.LogoUrl = "/" + paths[7];
                 }
                 else if (campaignModel.LogoUrl.Contains("Content/Images"))
                 {
@@ -527,7 +527,7 @@ namespace SMD.Implementation.Services
                 }
                 if (!string.IsNullOrEmpty(paths[7]))
                 {
-                    campaignModel.LogoUrl = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/" + paths[7];
+                    campaignModel.LogoUrl ="/" + paths[7];
                 }
                 else if (campaignModel.LogoUrl.Contains("Content/Images"))
                 {
