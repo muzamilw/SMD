@@ -257,7 +257,7 @@ namespace SMD.Repository.Repositories
                         select new UserAndCostDetail
                         {
                             AgeClausePrice = prod.AgeClausePrice ?? 0,
-                            CityId = usr.Company.CityId,
+                            City = usr.Company.City,
                             CountryId = usr.Company.CountryId,
                             EducationClausePrice = prod.EducationClausePrice ?? 0,
                             EducationId = usr.EducationId,

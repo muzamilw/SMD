@@ -394,8 +394,8 @@ namespace SMD.MIS.ModelMappers
             if (source.CityId != null && source.CityId > 0 && source.City != null)
             {
                 CName = source.City.CityName;
-                latitdue = source.City.GeoLat;
-                longitude = source.City.GeoLong;
+                latitdue = source.City.GeoLAT;
+                longitude = source.City.GeoLONG;
             }
             return new SMD.MIS.Areas.Api.Models.AdCampaignTargetLocation
             {
@@ -423,7 +423,7 @@ namespace SMD.MIS.ModelMappers
             return new SMD.MIS.Areas.Api.Models.UserAndCostDetail
             {
                 AgeClausePrice = source.AgeClausePrice,
-                CityId = source.CityId,
+                //CityId = source.CityId,
                 CountryId = source.CountryId,
                 EducationClausePrice = source.EducationClausePrice,
                 EducationId = source.EducationId,
@@ -433,7 +433,7 @@ namespace SMD.MIS.ModelMappers
                 LocationClausePrice = source.LocationClausePrice,
                 OtherClausePrice = source.OtherClausePrice,
                 ProfessionClausePrice = source.ProfessionClausePrice,
-                City = source.CityName,
+                City = source.City,
                 Country = source.CountryName,
                 Education = source.EducationTitle,
                 Industry = source.IndustryName,
@@ -569,7 +569,8 @@ namespace SMD.MIS.ModelMappers
                 Priority=source.Priority,
                 BuyitBtnLabel = source.BuyitBtnLabel,
                 BuyitLandingPageUrl = source.BuyitLandingPageUrl,
-                ShowBuyitBtn = source.ShowBuyitBtn
+                ShowBuyitBtn = source.ShowBuyitBtn,
+                CouponPriceOptions = source.CouponPriceOptions
                
               };
 

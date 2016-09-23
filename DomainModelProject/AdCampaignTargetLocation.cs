@@ -22,7 +22,7 @@ namespace DomainModelProject
         public Nullable<bool> IncludeorExclude { get; set; }
     
         public virtual AdCampaign AdCampaign { get; set; }
-        public virtual City City { get; set; }
         public virtual Country Country { get; set; }
+        public virtual City City { get; set; }
     }
 }

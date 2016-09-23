@@ -8,7 +8,7 @@ namespace SMD.Models.Common
 {
     public class UserAndCostDetail
     {
-        public int? CityId { get; set; }
+        public string City { get; set; }
         public int? CountryId { get; set; }
         public int? LanguageId { get; set; }
         public int? IndustryId { get; set; }
@@ -26,7 +26,7 @@ namespace SMD.Models.Common
         public double FiveDayDeliveryClausePrice { get; set; }
         public double ThreeDayDeliveryClausePrice { get; set; }
         public double VoucherClausePrice { get; set; }
-        public string CityName { get; set; }
+        //public string CityName { get; set; }
         public string CountryName { get; set; }
         public string LanguageName { get; set; }
         public string IndustryName { get; set; }

@@ -21,8 +21,8 @@ namespace DomainModelProject
         public Nullable<int> Radius { get; set; }
         public Nullable<bool> IncludeorExclude { get; set; }
     
-        public virtual City City { get; set; }
         public virtual Country Country { get; set; }
         public virtual ProfileQuestion ProfileQuestion { get; set; }
+        public virtual City City { get; set; }
     }
 }

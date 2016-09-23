@@ -24,7 +24,7 @@ namespace DomainModelProject
         public Nullable<int> ResponseType { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
-        public virtual Company Company { get; set; }
         public virtual SurveyQuestion SurveyQuestion { get; set; }
+        public virtual Company Company { get; set; }
     }
 }
