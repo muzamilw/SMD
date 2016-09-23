@@ -59,6 +59,7 @@ define("Coupons/Coupons.viewModel",
                     isEducationPerClickPriceAdded = ko.observable(false),
                     isBuyItPerClickPriceAdded = ko.observable(false),
                     isVoucherPerClickPriceAdded = ko.observable(false),
+                    selectedPriceOption = ko.observable(),
 
                     selectedEducationIncludeExclude = ko.observable(true),
                     isListVisible = ko.observable(true),
@@ -599,36 +600,36 @@ define("Coupons/Coupons.viewModel",
                 ///*** Stock Sub Categories Region ***
 
                 // Select a Sub Category
-                    selectSubCategory = function (stockSubCategory) {
-                        if (selectedStockSubCategory() !== stockSubCategory) {
-                            selectedStockSubCategory(stockSubCategory);
+                    selectPriceOption = function (priceOption) {
+                        if (selectedPriceOption() !== priceOption) {
+                            selectedPriceOption(priceOption);
                         }
                     },
                 // Template Chooser For Stock Sub Categories
-                    templateToUseStockSubCategories = function (stockSubCategory) {
-                        return (stockSubCategory === selectedStockSubCategory() ? 'editStockSubCategoryTemplate' : 'itemStockSubCategoryTemplate');
+                    templateToUsePriceOptions = function (priceOption) {
+                        return (priceOption === selectedPriceOption() ? 'editPriceOptionTemplate' : 'itemPriceOptionTemplate');
                     },
                 //Create Stock Sub Category
-                     onCreateNewStockSubCategory = function () {
-                         var stockSubCategory = selectedStockCategory().stockSubCategories()[0];
+                     onCreatePriceOption = function () {
+                         var priceOption = couponModel().CouponPriceOptions()[0];
                          //Create Stock Categories for the very First Time
-                         if (stockSubCategory == undefined) {
-                             selectedStockCategory().stockSubCategories.splice(0, 0, new model.InventorySubCategory());
-                             selectedStockSubCategory(selectedStockCategory().stockSubCategories()[0]);
+                         if (priceOption == undefined) {
+                             couponModel().stockSubCategories.splice(0, 0, new model.CouponPriceOptions());
+                             selectedPriceOption(couponModel().CouponPriceOptions()[0]);
                          }
                              //If There are already stock categories in list
                          else {
-                             if (!stockSubCategory.isValid()) {
-                                 stockSubCategory.errors.showAllMessages();
+                             if (!priceOption.isValid()) {
+                                 priceOption.errors.showAllMessages();
                              }
                              else {
-                                 selectedStockCategory().stockSubCategories.splice(0, 0, new model.InventorySubCategory());
-                                 selectedStockSubCategory(selectedStockCategory().stockSubCategories()[0]);
+                                 couponModel().CouponPriceOptions.splice(0, 0, new model.CouponPriceOptions());
+                                 selectedStockSubCategory(couponModel().CouponPriceOptions()[0]);
                              }
                          }
                      },
                 // Delete a Stock Sub Category
-                    onDeleteStockSubCategory = function (stockSubCategory) {
+                    onDeletePriceOption = function (priceOption) {
                         confirmation.messageText("WARNING - This item will be removed from the system and you won’t be able to recover.  There is no undo");
                         confirmation.afterProceed(function () {
                             selectedStockCategory().stockSubCategories.remove(stockSubCategory);
@@ -2018,9 +2019,11 @@ define("Coupons/Coupons.viewModel",
                     BranchLocationId: BranchLocationId,
                     SaveAsDraft: SaveAsDraft,
                     handleBuyIt: handleBuyIt,
-                    templateToUseStockSubCategories: templateToUseStockSubCategories,
-                    onCreateNewStockSubCategory: onCreateNewStockSubCategory,
-                    onDeleteStockSubCategory: onDeleteStockSubCategory
+                    templateToUsePriceOptions: templateToUsePriceOptions,
+                    onCreatePriceOption: onCreatePriceOption,
+                    onDeletePriceOption: onDeletePriceOption,
+                    selectedPriceOption: selectedPriceOption,
+                    selectPriceOption: selectPriceOption
                 };
             })()
         };

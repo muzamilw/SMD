@@ -90,6 +90,8 @@
               BuyitBtnLabel = ko.observable(BuyitBtnLabel),
 
 
+              CouponPriceOptions = ko.observableArray([])
+
 
 
 
@@ -171,7 +173,8 @@
 
                 ShowBuyitBtn : ShowBuyitBtn,
                 BuyitLandingPageUrl : BuyitLandingPageUrl,
-                BuyitBtnLabel: BuyitBtnLabel
+                BuyitBtnLabel: BuyitBtnLabel,
+                CouponPriceOptions: CouponPriceOptions
 
               }),
               // Has Changes
@@ -190,6 +193,15 @@
 
                       selectedCoupons.push(item.convertToServerData());
                   });
+
+
+
+                  //SubCategories
+                  var priceOptions = [];
+                  _.each(CouponPriceOptions(), function (item) {
+                      priceOptions.push(item.convertToServerData());
+                  });
+
                   return {
                       ApprovalDateTime: ApprovalDateTime(),
                       Approved: Approved(),
@@ -268,7 +280,10 @@
                       Priority: Priority(),
                       ShowBuyitBtn: ShowBuyitBtn(),
                       BuyitLandingPageUrl: BuyitLandingPageUrl(),
-                      BuyitBtnLabel: BuyitBtnLabel()
+                      BuyitBtnLabel: BuyitBtnLabel(),
+                      CouponPriceOptions: priceOptions
+
+
                       
                   };
               };
@@ -347,6 +362,7 @@
               ShowBuyitBtn : (ShowBuyitBtn),
               BuyitLandingPageUrl : (BuyitLandingPageUrl),
               BuyitBtnLabel: (BuyitBtnLabel),
+              CouponPriceOptions : (CouponPriceOptions),
               reset: (reset)
           };
       };
@@ -370,6 +386,12 @@
 
             coupon.CouponCategories.push(selectedCouponCategory.Create(item));
         });
+
+        _.each(source.CouponPriceOptions, function (item) {
+
+            coupon.CouponPriceOptions.push(selectedCouponCategory.Create(item));
+        });
+
 
         return coupon;
     };
