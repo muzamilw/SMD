@@ -5,8 +5,9 @@
           StripeCustomerId, SalesEmail, WebsiteLink, VoucherSecretKey, BillingAddressLine1, BillingAddressLine2,
           BillingState, BillingCountryId, BillingCityId, BillingZipCode, BillingPhone, BillingEmail, TwitterHandle, FacebookHandle,
           InstagramHandle, PinterestHandle, Logo, LogoImageBase64) {
+          debugger;
           var
-
+               
                 CompanyId = ko.observable(CompanyId),
                 CompanyName = ko.observable(CompanyName).extend({ required: true }),
                 Tel1 = ko.observable(Tel1).extend({ required: true }),
@@ -110,7 +111,9 @@
                   CompanyName: CompanyName(),
                   Tel1: Tel1(),
                   Tel2: Tel2(),
-                  Logo: Logo(),
+                  
+                  Logo: logoImage == "" ? Logo() : logoImage,
+
                   StripeCustomerId: StripeCustomerId(),
                   SalesEmail: SalesEmail(),
                   WebsiteLink: WebsiteLink(),
@@ -172,6 +175,7 @@
     ////=================================== User
     //Server to Client mapper For User
     var CompanyServertoClientMapper = function (objSrv) {
+        debugger;
         return new User(objSrv.CompanyId, objSrv.CompanyName, objSrv.Tel1, objSrv.Tel2, objSrv.Logo,
           objSrv.StripeCustomerId, objSrv.SalesEmail, objSrv.WebsiteLink, objSrv.VoucherSecretKey, objSrv.BillingAddressLine1, objSrv.BillingAddressLine2,
           objSrv.BillingState, objSrv.BillingCountryId, objSrv.BillingCityId, objSrv.BillingZipCode, objSrv.BillingPhone, objSrv.BillingEmail, objSrv.TwitterHandle, objSrv.FacebookHandle,

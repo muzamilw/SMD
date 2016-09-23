@@ -488,17 +488,16 @@ define("Coupons/Coupons.viewModel",
                     //if (couponModel().couponImage1() == "/images/default-placeholder.png" && couponModel().CouponImage2() == "/images/default-placeholder.png" && couponModel().CouponImage3() == "/images/default-placeholder.png") {
                     //    hasErrors = true;
                     //    toastr.error("Please enter atleast 1 banner image.");
-                    //}
+                //}
+
                 if (hasErrors)
                     return;
 
                 if (UserAndCostDetail().isStripeIntegrated == false) {
-
                     stripeChargeCustomer.show(function () {
                         UserAndCostDetail().isStripeIntegrated = false;
                         saveCampaign(2);
                     }, 2000, 'Enter your details');
-
 
                 } else {
                     saveCampaign(2);
@@ -571,6 +570,7 @@ define("Coupons/Coupons.viewModel",
                     var campignServerObj = couponModel().convertToServerData();
 
                     dataservice.addCampaignData(campignServerObj, {
+
                         success: function (data) {
 
                             isEditorVisible(false);

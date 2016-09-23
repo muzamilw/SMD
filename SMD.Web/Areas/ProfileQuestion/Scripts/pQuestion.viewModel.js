@@ -1415,7 +1415,7 @@ define("pQuestion/pQuestion.viewModel",
                         CloseContent = function ()
                         {
                             isEditorVisible(false); enableControls();
-                            $("#panelArea,#topArea,#headlabel").css("display", "block");
+                            $("#panelArea,#topArea,#headlabel,#Heading_div").css("display", "block");
                             filterProfileQuestion();
 
                         }
