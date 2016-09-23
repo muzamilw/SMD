@@ -172,7 +172,8 @@
     }
     public enum SurveyQuestionTargetCriteriaType
     {
-        ProfileQuestion = 1, 
+        ProfileQuestion = 1,
+        UserProfileQuestion = 6, 
         SurveryQuestion = 2, 
         Language = 3,
         Industry = 4,

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets6E9498A2FFB6FE04715962F6DE6E6512CD193EE073F5F967B77457F66B32C69E))]
+[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets7142E14C00BC8A8FED23435ACA8AF4FAA858A91F9A3A8AF63C71A3AAC80C3016))]
 
 namespace Edm_EntityMappingGeneratedViews
 {
@@ -17,18 +17,18 @@ namespace Edm_EntityMappingGeneratedViews
     /// <Summary>
     /// The type contains views for EntitySets and AssociationSets that were generated at design time.
     /// </Summary>
-    public sealed class ViewsForBaseEntitySets6E9498A2FFB6FE04715962F6DE6E6512CD193EE073F5F967B77457F66B32C69E : System.Data.Mapping.EntityViewContainer
+    public sealed class ViewsForBaseEntitySets7142E14C00BC8A8FED23435ACA8AF4FAA858A91F9A3A8AF63C71A3AAC80C3016 : System.Data.Mapping.EntityViewContainer
     {
         
         /// <Summary>
         /// The constructor stores the views for the extents and also the hash values generated based on the metadata and mapping closure and views.
         /// </Summary>
-        public ViewsForBaseEntitySets6E9498A2FFB6FE04715962F6DE6E6512CD193EE073F5F967B77457F66B32C69E()
+        public ViewsForBaseEntitySets7142E14C00BC8A8FED23435ACA8AF4FAA858A91F9A3A8AF63C71A3AAC80C3016()
         {
             this.EdmEntityContainerName = "BaseDbContext";
             this.StoreEntityContainerName = "SMDModelStoreContainer";
-            this.HashOverMappingClosure = "fb1ab695dabfc8b13f6ae7ec9c71d0b3e63981ad420d6d86cfb561f032534955";
-            this.HashOverAllExtentViews = "a9d581662e5b89366b2d66d1cfba1097afbce45463031f50f1ee6ddebe56e68d";
+            this.HashOverMappingClosure = "96d13a0f236b0655bcc1f8f1c0f95dfeea8c643ae407b031dc8ce7976154cc4b";
+            this.HashOverAllExtentViews = "21b3fc8b5dedf69ce731b77122c1512ecb43b5c8734dbdbc64281946ac672f8e";
             this.ViewCount = 110;
         }
         
@@ -692,25 +692,28 @@ namespace Edm_EntityMappingGeneratedViews
         /// </Summary>
         private System.Collections.Generic.KeyValuePair<string, string> GetView9()
         {
-            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.SurveyQuestionTargetCriteria", @"
-    SELECT VALUE -- Constructing SurveyQuestionTargetCriteria
-        [SMDModel.Store.SurveyQuestionTargetCriteria](T1.SurveyQuestionTargetCriteria_ID, T1.SurveyQuestionTargetCriteria_SQID, T1.SurveyQuestionTargetCriteria_Type, T1.SurveyQuestionTargetCriteria_PQID, T1.SurveyQuestionTargetCriteria_PQAnswerID, T1.SurveyQuestionTargetCriteria_LinkedSQID, T1.SurveyQuestionTargetCriteria_LinkedSQAnswer, T1.SurveyQuestionTargetCriteria_IncludeorExclude, T1.SurveyQuestionTargetCriteria_LanguageID, T1.SurveyQuestionTargetCriteria_IndustryID, T1.SurveyQuestionTargetCriteria_EducationID)
-    FROM (
-        SELECT 
-            T.Id AS SurveyQuestionTargetCriteria_ID, 
-            T.SqId AS SurveyQuestionTargetCriteria_SQID, 
-            T.Type AS SurveyQuestionTargetCriteria_Type, 
-            T.PqId AS SurveyQuestionTargetCriteria_PQID, 
-            T.PqAnswerId AS SurveyQuestionTargetCriteria_PQAnswerID, 
-            T.LinkedSqId AS SurveyQuestionTargetCriteria_LinkedSQID, 
-            T.LinkedSqAnswer AS SurveyQuestionTargetCriteria_LinkedSQAnswer, 
-            T.IncludeorExclude AS SurveyQuestionTargetCriteria_IncludeorExclude, 
-            T.LanguageId AS SurveyQuestionTargetCriteria_LanguageID, 
-            T.IndustryId AS SurveyQuestionTargetCriteria_IndustryID, 
-            T.EducationId AS SurveyQuestionTargetCriteria_EducationID, 
-            True AS _from0
-        FROM BaseDbContext.SurveyQuestionTargetCriterias AS T
-    ) AS T1");
+            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.SurveyQuestionTargetCriteria", "\r\n    SELECT VALUE -- Constructing SurveyQuestionTargetCriteria\r\n        [SMDMode" +
+                    "l.Store.SurveyQuestionTargetCriteria](T1.SurveyQuestionTargetCriteria_ID, T1.Sur" +
+                    "veyQuestionTargetCriteria_SQID, T1.SurveyQuestionTargetCriteria_Type, T1.SurveyQ" +
+                    "uestionTargetCriteria_PQID, T1.SurveyQuestionTargetCriteria_PQAnswerID, T1.Surve" +
+                    "yQuestionTargetCriteria_LinkedSQID, T1.SurveyQuestionTargetCriteria_LinkedSQAnsw" +
+                    "er, T1.SurveyQuestionTargetCriteria_IncludeorExclude, T1.SurveyQuestionTargetCri" +
+                    "teria_LanguageID, T1.SurveyQuestionTargetCriteria_IndustryID, T1.SurveyQuestionT" +
+                    "argetCriteria_EducationID, T1.SurveyQuestionTargetCriteria_QuizCampaignId, T1.Su" +
+                    "rveyQuestionTargetCriteria_QuizAnswerId)\r\n    FROM (\r\n        SELECT \r\n         " +
+                    "   T.Id AS SurveyQuestionTargetCriteria_ID, \r\n            T.SqId AS SurveyQuesti" +
+                    "onTargetCriteria_SQID, \r\n            T.Type AS SurveyQuestionTargetCriteria_Type" +
+                    ", \r\n            T.PqId AS SurveyQuestionTargetCriteria_PQID, \r\n            T.PqA" +
+                    "nswerId AS SurveyQuestionTargetCriteria_PQAnswerID, \r\n            T.LinkedSqId A" +
+                    "S SurveyQuestionTargetCriteria_LinkedSQID, \r\n            T.LinkedSqAnswer AS Sur" +
+                    "veyQuestionTargetCriteria_LinkedSQAnswer, \r\n            T.IncludeorExclude AS Su" +
+                    "rveyQuestionTargetCriteria_IncludeorExclude, \r\n            T.LanguageId AS Surve" +
+                    "yQuestionTargetCriteria_LanguageID, \r\n            T.IndustryId AS SurveyQuestion" +
+                    "TargetCriteria_IndustryID, \r\n            T.EducationId AS SurveyQuestionTargetCr" +
+                    "iteria_EducationID, \r\n            T.QuizCampaignId AS SurveyQuestionTargetCriter" +
+                    "ia_QuizCampaignId, \r\n            T.QuizAnswerId AS SurveyQuestionTargetCriteria_" +
+                    "QuizAnswerId, \r\n            True AS _from0\r\n        FROM BaseDbContext.SurveyQue" +
+                    "stionTargetCriterias AS T\r\n    ) AS T1");
         }
         
         /// <Summary>
@@ -1918,25 +1921,28 @@ namespace Edm_EntityMappingGeneratedViews
         /// </Summary>
         private System.Collections.Generic.KeyValuePair<string, string> GetView51()
         {
-            return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.SurveyQuestionTargetCriterias", @"
-    SELECT VALUE -- Constructing SurveyQuestionTargetCriterias
-        [DomainModels.SurveyQuestionTargetCriteria](T1.SurveyQuestionTargetCriteria_Id, T1.SurveyQuestionTargetCriteria_SqId, T1.SurveyQuestionTargetCriteria_Type, T1.SurveyQuestionTargetCriteria_PqId, T1.SurveyQuestionTargetCriteria_PqAnswerId, T1.SurveyQuestionTargetCriteria_LinkedSqId, T1.SurveyQuestionTargetCriteria_LinkedSqAnswer, T1.SurveyQuestionTargetCriteria_IncludeorExclude, T1.SurveyQuestionTargetCriteria_LanguageId, T1.SurveyQuestionTargetCriteria_IndustryId, T1.SurveyQuestionTargetCriteria_EducationId)
-    FROM (
-        SELECT 
-            T.ID AS SurveyQuestionTargetCriteria_Id, 
-            T.SQID AS SurveyQuestionTargetCriteria_SqId, 
-            T.Type AS SurveyQuestionTargetCriteria_Type, 
-            T.PQID AS SurveyQuestionTargetCriteria_PqId, 
-            T.PQAnswerID AS SurveyQuestionTargetCriteria_PqAnswerId, 
-            T.LinkedSQID AS SurveyQuestionTargetCriteria_LinkedSqId, 
-            T.LinkedSQAnswer AS SurveyQuestionTargetCriteria_LinkedSqAnswer, 
-            T.IncludeorExclude AS SurveyQuestionTargetCriteria_IncludeorExclude, 
-            T.LanguageID AS SurveyQuestionTargetCriteria_LanguageId, 
-            T.IndustryID AS SurveyQuestionTargetCriteria_IndustryId, 
-            T.EducationID AS SurveyQuestionTargetCriteria_EducationId, 
-            True AS _from0
-        FROM SMDModelStoreContainer.SurveyQuestionTargetCriteria AS T
-    ) AS T1");
+            return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.SurveyQuestionTargetCriterias", "\r\n    SELECT VALUE -- Constructing SurveyQuestionTargetCriterias\r\n        [Domain" +
+                    "Models.SurveyQuestionTargetCriteria](T1.SurveyQuestionTargetCriteria_Id, T1.Surv" +
+                    "eyQuestionTargetCriteria_SqId, T1.SurveyQuestionTargetCriteria_Type, T1.SurveyQu" +
+                    "estionTargetCriteria_PqId, T1.SurveyQuestionTargetCriteria_PqAnswerId, T1.Survey" +
+                    "QuestionTargetCriteria_LinkedSqId, T1.SurveyQuestionTargetCriteria_LinkedSqAnswe" +
+                    "r, T1.SurveyQuestionTargetCriteria_IncludeorExclude, T1.SurveyQuestionTargetCrit" +
+                    "eria_LanguageId, T1.SurveyQuestionTargetCriteria_IndustryId, T1.SurveyQuestionTa" +
+                    "rgetCriteria_EducationId, T1.SurveyQuestionTargetCriteria_QuizCampaignId, T1.Sur" +
+                    "veyQuestionTargetCriteria_QuizAnswerId)\r\n    FROM (\r\n        SELECT \r\n          " +
+                    "  T.ID AS SurveyQuestionTargetCriteria_Id, \r\n            T.SQID AS SurveyQuestio" +
+                    "nTargetCriteria_SqId, \r\n            T.Type AS SurveyQuestionTargetCriteria_Type," +
+                    " \r\n            T.PQID AS SurveyQuestionTargetCriteria_PqId, \r\n            T.PQAn" +
+                    "swerID AS SurveyQuestionTargetCriteria_PqAnswerId, \r\n            T.LinkedSQID AS" +
+                    " SurveyQuestionTargetCriteria_LinkedSqId, \r\n            T.LinkedSQAnswer AS Surv" +
+                    "eyQuestionTargetCriteria_LinkedSqAnswer, \r\n            T.IncludeorExclude AS Sur" +
+                    "veyQuestionTargetCriteria_IncludeorExclude, \r\n            T.LanguageID AS Survey" +
+                    "QuestionTargetCriteria_LanguageId, \r\n            T.IndustryID AS SurveyQuestionT" +
+                    "argetCriteria_IndustryId, \r\n            T.EducationID AS SurveyQuestionTargetCri" +
+                    "teria_EducationId, \r\n            T.QuizCampaignId AS SurveyQuestionTargetCriteri" +
+                    "a_QuizCampaignId, \r\n            T.QuizAnswerId AS SurveyQuestionTargetCriteria_Q" +
+                    "uizAnswerId, \r\n            True AS _from0\r\n        FROM SMDModelStoreContainer.S" +
+                    "urveyQuestionTargetCriteria AS T\r\n    ) AS T1");
         }
         
         /// <Summary>

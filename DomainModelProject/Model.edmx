@@ -430,12 +430,12 @@
           <Property Name="CouponImage2" Type="nvarchar(max)" />
           <Property Name="CouponImage3" Type="nvarchar(max)" />
           <Property Name="LogoUrl" Type="nvarchar" MaxLength="200" />
-          <Property Name="HighlightLine1" Type="nvarchar" MaxLength="100" />
+          <Property Name="HighlightLine1" Type="nvarchar" MaxLength="800" />
           <Property Name="HighlightLine2" Type="nvarchar" MaxLength="100" />
           <Property Name="HighlightLine3" Type="nvarchar" MaxLength="100" />
           <Property Name="HighlightLine4" Type="nvarchar" MaxLength="100" />
           <Property Name="HighlightLine5" Type="nvarchar" MaxLength="100" />
-          <Property Name="FinePrintLine1" Type="nvarchar" MaxLength="100" />
+          <Property Name="FinePrintLine1" Type="nvarchar" MaxLength="800" />
           <Property Name="FinePrintLine2" Type="nvarchar" MaxLength="100" />
           <Property Name="FinePrintLine3" Type="nvarchar" MaxLength="100" />
           <Property Name="FinePrintLine4" Type="nvarchar" MaxLength="100" />
@@ -461,6 +461,9 @@
           <Property Name="CouponStartDate" Type="datetime" />
           <Property Name="CouponEndDate" Type="datetime" />
           <Property Name="Priority" Type="int" />
+          <Property Name="ShowBuyitBtn" Type="bit" />
+          <Property Name="BuyitLandingPageUrl" Type="nvarchar" MaxLength="500" />
+          <Property Name="BuyitBtnLabel" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="CouponCategories">
           <Key>
@@ -734,6 +737,8 @@
           <Property Name="RejectionReason" Type="nvarchar" MaxLength="1000" />
           <Property Name="UserID" Type="nvarchar" MaxLength="128" />
           <Property Name="AmountCharged" Type="float" />
+          <Property Name="StartDate" Type="datetime" />
+          <Property Name="EndDate" Type="datetime" />
         </EntityType>
         <EntityType Name="ProfileQuestionAnswer">
           <Key>
@@ -803,6 +808,7 @@
           <Property Name="AnswerDateTime" Type="datetime" Nullable="false" />
           <Property Name="PQAnswerID" Type="int" Nullable="false" />
           <Property Name="CompanyId" Type="int" />
+          <Property Name="ResponseType" Type="int" />
         </EntityType>
         <EntityType Name="Section">
           <Key>
@@ -864,6 +870,7 @@
           <Property Name="UserSelection" Type="int" />
           <Property Name="SkipCount" Type="int" />
           <Property Name="CompanyId" Type="int" />
+          <Property Name="ResponseType" Type="int" />
         </EntityType>
         <EntityType Name="SurveyQuestionTargetCriteria">
           <Key>
@@ -880,6 +887,8 @@
           <Property Name="LanguageID" Type="int" />
           <Property Name="IndustryID" Type="int" />
           <Property Name="EducationID" Type="bigint" />
+          <Property Name="QuizCampaignId" Type="bigint" />
+          <Property Name="QuizAnswerId" Type="int" />
         </EntityType>
         <EntityType Name="SurveyQuestionTargetLocation">
           <Key>
@@ -997,6 +1006,7 @@
           <Property Name="IsRedeemed" Type="bit" />
           <Property Name="RedemptionDateTime" Type="datetime" />
           <Property Name="RedemptionOperator" Type="nvarchar" MaxLength="500" />
+          <Property Name="ResponseType" Type="int" />
         </EntityType>
         <Association Name="FK_Account_Company">
           <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
@@ -1978,6 +1988,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_SurveyQuestionTargetCriteria_AdCampaign">
+          <End Role="AdCampaign" Type="Self.AdCampaign" Multiplicity="0..1" />
+          <End Role="SurveyQuestionTargetCriteria" Type="Self.SurveyQuestionTargetCriteria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdCampaign">
+              <PropertyRef Name="CampaignID" />
+            </Principal>
+            <Dependent Role="SurveyQuestionTargetCriteria">
+              <PropertyRef Name="QuizCampaignId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_SurveyQuestionTargetCriteria_Education">
           <End Role="Education" Type="Self.Education" Multiplicity="0..1" />
           <End Role="SurveyQuestionTargetCriteria" Type="Self.SurveyQuestionTargetCriteria" Multiplicity="*" />
@@ -2597,6 +2619,10 @@
             <End Role="SurveyQuestion" EntitySet="SurveyQuestion" />
             <End Role="SurveyQuestionResponse" EntitySet="SurveyQuestionResponse" />
           </AssociationSet>
+          <AssociationSet Name="FK_SurveyQuestionTargetCriteria_AdCampaign" Association="Self.FK_SurveyQuestionTargetCriteria_AdCampaign">
+            <End Role="AdCampaign" EntitySet="AdCampaign" />
+            <End Role="SurveyQuestionTargetCriteria" EntitySet="SurveyQuestionTargetCriteria" />
+          </AssociationSet>
           <AssociationSet Name="FK_SurveyQuestionTargetCriteria_Education" Association="Self.FK_SurveyQuestionTargetCriteria_Education">
             <End Role="Education" EntitySet="Education" />
             <End Role="SurveyQuestionTargetCriteria" EntitySet="SurveyQuestionTargetCriteria" />
@@ -2788,6 +2814,7 @@
           <NavigationProperty Name="InvoiceDetails" Relationship="Self.FK_InvoiceDetail_AdCampaign" FromRole="AdCampaign" ToRole="InvoiceDetail" />
           <Property Name="MaxDailyBudget" Type="Double" />
           <Property Name="SubmissionDateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="SurveyQuestionTargetCriterias" Relationship="SMDDevModel.FK_SurveyQuestionTargetCriteria_AdCampaign" FromRole="AdCampaign" ToRole="SurveyQuestionTargetCriteria" />
         </EntityType>
         <EntityType Name="AdCampaignResponse">
           <Key>
@@ -3172,12 +3199,12 @@
           <Property Name="CouponImage2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CouponImage3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="LogoUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="HighlightLine1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="HighlightLine1" Type="String" MaxLength="800" FixedLength="false" Unicode="true" />
           <Property Name="HighlightLine2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="HighlightLine3" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="HighlightLine4" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="HighlightLine5" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="FinePrintLine1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FinePrintLine1" Type="String" MaxLength="800" FixedLength="false" Unicode="true" />
           <Property Name="FinePrintLine2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="FinePrintLine3" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="FinePrintLine4" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
@@ -3209,6 +3236,9 @@
           <Property Name="CouponStartDate" Type="DateTime" Precision="3" />
           <Property Name="CouponEndDate" Type="DateTime" Precision="3" />
           <Property Name="Priority" Type="Int32" />
+          <Property Name="ShowBuyitBtn" Type="Boolean" />
+          <Property Name="BuyitLandingPageUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="BuyitBtnLabel" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="CouponCode">
           <Key>
@@ -3486,6 +3516,8 @@
           <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="ProfileQuestionTargetCriterias1" Relationship="SMDDevModel.FK_ProfileQuestionTargetCriteria_ProfileQuestion2" FromRole="ProfileQuestion" ToRole="ProfileQuestionTargetCriteria" />
           <Property Name="AmountCharged" Type="Double" />
+          <Property Name="StartDate" Type="DateTime" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="ProfileQuestionAnswer">
           <Key>
@@ -3536,6 +3568,7 @@
           <NavigationProperty Name="Company" Relationship="Self.FK_ProfileQuestionUserAnswer_Company" FromRole="ProfileQuestionUserAnswer" ToRole="Company" />
           <NavigationProperty Name="ProfileQuestion" Relationship="Self.FK_ProfileQuestionUserAnswer_ProfileQuestion" FromRole="ProfileQuestionUserAnswer" ToRole="ProfileQuestion" />
           <NavigationProperty Name="ProfileQuestionAnswer" Relationship="Self.FK_ProfileQuestionUserAnswer_ProfileQuestionAnswer" FromRole="ProfileQuestionUserAnswer" ToRole="ProfileQuestionAnswer" />
+          <Property Name="ResponseType" Type="Int32" />
         </EntityType>
         <EntityType Name="SurveyQuestion">
           <Key>
@@ -3603,6 +3636,7 @@
           <NavigationProperty Name="AspNetUser" Relationship="Self.FK_SurveyQuestionResponse_AspNetUsers" FromRole="SurveyQuestionResponse" ToRole="AspNetUsers" />
           <NavigationProperty Name="Company" Relationship="Self.FK_SurveyQuestionResponse_Company" FromRole="SurveyQuestionResponse" ToRole="Company" />
           <NavigationProperty Name="SurveyQuestion" Relationship="Self.FK_SurveyQuestionResponse_SurveyQuestion" FromRole="SurveyQuestionResponse" ToRole="SurveyQuestion" />
+          <Property Name="ResponseType" Type="Int32" />
         </EntityType>
         <EntityType Name="SurveyQuestionTargetCriteria">
           <Key>
@@ -3626,6 +3660,9 @@
           <NavigationProperty Name="ProfileQuestionAnswer" Relationship="Self.FK_SurveyQuestionTargetCriteria_ProfileQuestionAnswer" FromRole="SurveyQuestionTargetCriteria" ToRole="ProfileQuestionAnswer" />
           <NavigationProperty Name="SurveyQuestion" Relationship="Self.FK_SurveyQuestionTargetCriteria_SurveyQuestion" FromRole="SurveyQuestionTargetCriteria" ToRole="SurveyQuestion" />
           <NavigationProperty Name="SurveyQuestion1" Relationship="Self.FK_SurveyQuestionTargetCriteria_SurveyQuestion1" FromRole="SurveyQuestionTargetCriteria" ToRole="SurveyQuestion" />
+          <Property Name="QuizCampaignId" Type="Int64" />
+          <Property Name="QuizAnswerId" Type="Int32" />
+          <NavigationProperty Name="AdCampaign" Relationship="SMDDevModel.FK_SurveyQuestionTargetCriteria_AdCampaign" FromRole="SurveyQuestionTargetCriteria" ToRole="AdCampaign" />
         </EntityType>
         <EntityType Name="SurveyQuestionTargetLocation">
           <Key>
@@ -5134,6 +5171,10 @@
             <Parameter Name="DateTo" Mode="In" Type="DateTime" />
             <Parameter Name="Granularity" Mode="In" Type="Int32" />
           </FunctionImport>
+          <AssociationSet Name="FK_SurveyQuestionTargetCriteria_AdCampaign" Association="SMDDevModel.FK_SurveyQuestionTargetCriteria_AdCampaign">
+            <End Role="AdCampaign" EntitySet="AdCampaigns" />
+            <End Role="SurveyQuestionTargetCriteria" EntitySet="SurveyQuestionTargetCriterias" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="CouponCategories">
           <Key>
@@ -5253,6 +5294,7 @@
           <Property Name="RedemptionDateTime" Type="DateTime" Precision="3" />
           <Property Name="RedemptionOperator" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Coupon" Relationship="SMDDevModel.FK_UserPurchasedCoupon_Coupon" FromRole="UserPurchasedCoupon" ToRole="Coupon" />
+          <Property Name="ResponseType" Type="Int32" />
         </EntityType>
         <Association Name="FK_UserPurchasedCoupon_Coupon">
           <End Type="SMDDevModel.Coupon" Role="Coupon" Multiplicity="0..1" />
@@ -5721,6 +5763,18 @@
           <Property Type="Double" Name="amountcollected" Nullable="true" />
           <Property Type="String" Name="granular" Nullable="false" MaxLength="1" />
         </ComplexType>
+        <Association Name="FK_SurveyQuestionTargetCriteria_AdCampaign">
+          <End Type="SMDDevModel.AdCampaign" Role="AdCampaign" Multiplicity="0..1" />
+          <End Type="SMDDevModel.SurveyQuestionTargetCriteria" Role="SurveyQuestionTargetCriteria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdCampaign">
+              <PropertyRef Name="CampaignID" />
+            </Principal>
+            <Dependent Role="SurveyQuestionTargetCriteria">
+              <PropertyRef Name="QuizCampaignId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -6127,6 +6181,9 @@
           <EntitySetMapping Name="Coupons">
             <EntityTypeMapping TypeName="SMDDevModel.Coupon">
               <MappingFragment StoreEntitySet="Coupon">
+                <ScalarProperty Name="BuyitBtnLabel" ColumnName="BuyitBtnLabel" />
+                <ScalarProperty Name="BuyitLandingPageUrl" ColumnName="BuyitLandingPageUrl" />
+                <ScalarProperty Name="ShowBuyitBtn" ColumnName="ShowBuyitBtn" />
                 <ScalarProperty Name="Priority" ColumnName="Priority" />
                 <ScalarProperty Name="CouponEndDate" ColumnName="CouponEndDate" />
                 <ScalarProperty Name="CouponStartDate" ColumnName="CouponStartDate" />
@@ -6413,6 +6470,8 @@
           <EntitySetMapping Name="ProfileQuestions">
             <EntityTypeMapping TypeName="SMDDevModel.ProfileQuestion">
               <MappingFragment StoreEntitySet="ProfileQuestion">
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
                 <ScalarProperty Name="AmountCharged" ColumnName="AmountCharged" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="RejectionReason" ColumnName="RejectionReason" />
@@ -6478,6 +6537,7 @@
           <EntitySetMapping Name="ProfileQuestionUserAnswers">
             <EntityTypeMapping TypeName="SMDDevModel.ProfileQuestionUserAnswer">
               <MappingFragment StoreEntitySet="ProfileQuestionUserAnswer">
+                <ScalarProperty Name="ResponseType" ColumnName="ResponseType" />
                 <ScalarProperty Name="PQUAnswerID" ColumnName="PQUAnswerID" />
                 <ScalarProperty Name="PQID" ColumnName="PQID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
@@ -6532,6 +6592,7 @@
           <EntitySetMapping Name="SurveyQuestionResponses">
             <EntityTypeMapping TypeName="SMDDevModel.SurveyQuestionResponse">
               <MappingFragment StoreEntitySet="SurveyQuestionResponse">
+                <ScalarProperty Name="ResponseType" ColumnName="ResponseType" />
                 <ScalarProperty Name="SQResponseID" ColumnName="SQResponseID" />
                 <ScalarProperty Name="SQID" ColumnName="SQID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
@@ -6545,6 +6606,8 @@
           <EntitySetMapping Name="SurveyQuestionTargetCriterias">
             <EntityTypeMapping TypeName="SMDDevModel.SurveyQuestionTargetCriteria">
               <MappingFragment StoreEntitySet="SurveyQuestionTargetCriteria">
+                <ScalarProperty Name="QuizAnswerId" ColumnName="QuizAnswerId" />
+                <ScalarProperty Name="QuizCampaignId" ColumnName="QuizCampaignId" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="SQID" ColumnName="SQID" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
@@ -6731,6 +6794,7 @@
           <EntitySetMapping Name="UserPurchasedCoupons">
             <EntityTypeMapping TypeName="SMDDevModel.UserPurchasedCoupon">
               <MappingFragment StoreEntitySet="UserPurchasedCoupon">
+                <ScalarProperty Name="ResponseType" ColumnName="ResponseType" />
                 <ScalarProperty Name="RedemptionOperator" ColumnName="RedemptionOperator" />
                 <ScalarProperty Name="RedemptionDateTime" ColumnName="RedemptionDateTime" />
                 <ScalarProperty Name="IsRedeemed" ColumnName="IsRedeemed" />

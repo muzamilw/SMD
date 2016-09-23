@@ -805,6 +805,8 @@
           <Property Name="LanguageID" Type="int" />
           <Property Name="IndustryID" Type="int" />
           <Property Name="EducationID" Type="bigint" />
+          <Property Name="QuizCampaignId" Type="bigint" />
+          <Property Name="QuizAnswerId" Type="int" />
         </EntityType>
         <EntityType Name="SurveyQuestionTargetLocation">
           <Key>
@@ -1900,6 +1902,18 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_SurveyQuestionTargetCriteria_AdCampaign">
+          <End Role="AdCampaign" Type="Self.AdCampaign" Multiplicity="0..1" />
+          <End Role="SurveyQuestionTargetCriteria" Type="Self.SurveyQuestionTargetCriteria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdCampaign">
+              <PropertyRef Name="CampaignID" />
+            </Principal>
+            <Dependent Role="SurveyQuestionTargetCriteria">
+              <PropertyRef Name="QuizCampaignId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_SurveyQuestionTargetCriteria_Education">
           <End Role="Education" Type="Self.Education" Multiplicity="0..1" />
           <End Role="SurveyQuestionTargetCriteria" Type="Self.SurveyQuestionTargetCriteria" Multiplicity="*" />
@@ -2594,6 +2608,10 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
             <End Role="SurveyQuestion" EntitySet="SurveyQuestion" />
             <End Role="SurveyQuestionResponse" EntitySet="SurveyQuestionResponse" />
           </AssociationSet>
+          <AssociationSet Name="FK_SurveyQuestionTargetCriteria_AdCampaign" Association="Self.FK_SurveyQuestionTargetCriteria_AdCampaign">
+            <End Role="AdCampaign" EntitySet="AdCampaign" />
+            <End Role="SurveyQuestionTargetCriteria" EntitySet="SurveyQuestionTargetCriteria" />
+          </AssociationSet>
           <AssociationSet Name="FK_SurveyQuestionTargetCriteria_Education" Association="Self.FK_SurveyQuestionTargetCriteria_Education">
             <End Role="Education" EntitySet="Education" />
             <End Role="SurveyQuestionTargetCriteria" EntitySet="SurveyQuestionTargetCriteria" />
@@ -3201,6 +3219,10 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
             <Parameter Name="Granularity" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetActiveVSNewUsers" ReturnType="Collection(DomainModels.GetActiveVSNewUsers_Result)" />
+          <AssociationSet Name="FK_SurveyQuestionTargetCriteria_AdCampaign" Association="DomainModels.FK_SurveyQuestionTargetCriteria_AdCampaign">
+            <End Role="AdCampaign" EntitySet="AdCampaigns" />
+            <End Role="SurveyQuestionTargetCriteria" EntitySet="SurveyQuestionTargetCriterias" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="ProfileQuestion">
           <Key>
@@ -3408,6 +3430,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Property Name="EducationId" Type="Int64" />
           <NavigationProperty Name="Education" Relationship="DomainModels.FK_SurveyQuestionTargetCriteria_Education" FromRole="SurveyQuestionTargetCriteria" ToRole="Education" />
           <NavigationProperty Name="SurveyQuestion" Relationship="DomainModels.FK_SurveyQuestionTargetCriteria_SurveyQuestion" FromRole="SurveyQuestionTargetCriteria" ToRole="SurveyQuestion" />
+          <Property Name="QuizCampaignId" Type="Int64" />
+          <Property Name="QuizAnswerId" Type="Int32" />
+          <NavigationProperty Name="AdCampaign" Relationship="DomainModels.FK_SurveyQuestionTargetCriteria_AdCampaign" FromRole="SurveyQuestionTargetCriteria" ToRole="AdCampaign" />
         </EntityType>
         <EntityType Name="SurveyQuestionTargetLocation">
           <Key>
@@ -4560,6 +4585,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Property Name="MaxDailyBudget" Type="Double" />
           <NavigationProperty Name="Company" Relationship="DomainModels.FK_AdCampaign_Company" FromRole="AdCampaign" ToRole="Company" />
           <Property Name="SubmissionDateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="SurveyQuestionTargetCriterias" Relationship="DomainModels.FK_SurveyQuestionTargetCriteria_AdCampaign" FromRole="AdCampaign" ToRole="SurveyQuestionTargetCriteria" />
         </EntityType>
         <Association Name="FK_AdCampaign_Language">
           <End Type="DomainModels.Language" Role="Language" Multiplicity="0..1" />
@@ -5833,6 +5859,18 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Property Type="Int64" Name="NewStats" Nullable="true" />
           <Property Type="String" Name="Granual" Nullable="true" MaxLength="200" />
         </ComplexType>
+        <Association Name="FK_SurveyQuestionTargetCriteria_AdCampaign">
+          <End Type="DomainModels.AdCampaign" Role="AdCampaign" Multiplicity="0..1" />
+          <End Type="DomainModels.SurveyQuestionTargetCriteria" Role="SurveyQuestionTargetCriteria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdCampaign">
+              <PropertyRef Name="CampaignId" />
+            </Principal>
+            <Dependent Role="SurveyQuestionTargetCriteria">
+              <PropertyRef Name="QuizCampaignId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5979,6 +6017,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <EntitySetMapping Name="SurveyQuestionTargetCriterias">
             <EntityTypeMapping TypeName="DomainModels.SurveyQuestionTargetCriteria">
               <MappingFragment StoreEntitySet="SurveyQuestionTargetCriteria">
+                <ScalarProperty Name="QuizAnswerId" ColumnName="QuizAnswerId" />
+                <ScalarProperty Name="QuizCampaignId" ColumnName="QuizCampaignId" />
                 <ScalarProperty Name="EducationId" ColumnName="EducationID" />
                 <ScalarProperty Name="IndustryId" ColumnName="IndustryID" />
                 <ScalarProperty Name="LanguageId" ColumnName="LanguageID" />

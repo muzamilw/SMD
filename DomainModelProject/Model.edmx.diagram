@@ -160,6 +160,7 @@
         <AssociationConnector Association="SMDDevModel.FK_InvoiceDetail_Coupon" />
         <AssociationConnector Association="SMDDevModel.FK_InvoiceDetail_ProfileQuestion" />
         <AssociationConnector Association="SMDDevModel.FK_ProfileQuestionTargetCriteria_ProfileQuestion2" />
+        <AssociationConnector Association="SMDDevModel.FK_SurveyQuestionTargetCriteria_AdCampaign" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

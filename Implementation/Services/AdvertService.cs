@@ -1163,12 +1163,17 @@ namespace SMD.Implementation.Services
                     dbAd.Status = (Int32)AdCampaignStatus.ApprovalRejected;
                     dbAd.Approved = false;
                     dbAd.RejectedReason = source.RejectedReason;
-                    emailManagerService.SendQuestionRejectionEmail(dbAd.UserId);
+                   
                 }
                 dbAd.ModifiedDateTime = DateTime.Now;
                 dbAd.ModifiedBy = _adCampaignRepository.LoggedInUserIdentity;
 
                 _adCampaignRepository.SaveChanges();
+
+                if (source.Approved != true)
+                {
+                   emailManagerService.SendQuestionRejectionEmail(dbAd.UserId);
+                }
 
             }
             return respMesg;

@@ -68,6 +68,8 @@ namespace SMD.MIS.Areas.Api.Models
         public int? LanguageId { get; set; }
         public int? IndustryId { get; set; }
         public long? EducationId { get; set; }
+        public Nullable<long> QuizCampaignId { get; set; }
+        public Nullable<int> QuizAnswerId { get; set; }
         public string questionString { get; set; }   // survey Question , profile Question,  industry name
         public string answerString { get; set; }  // survey Question Answer , profile Question Answer
         public string Language { get; set; } // language name

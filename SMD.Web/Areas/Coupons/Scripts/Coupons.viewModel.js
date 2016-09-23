@@ -492,7 +492,7 @@ define("Coupons/Coupons.viewModel",
                 if (hasErrors)
                     return;
 
-                if (UserAndCostDetail().isStripeIntegrated == true) {
+                if (UserAndCostDetail().isStripeIntegrated == false) {
 
                     stripeChargeCustomer.show(function () {
                         UserAndCostDetail().isStripeIntegrated = false;

@@ -1,7 +1,7 @@
 ﻿@{
     ViewBag.Title = "Wallet Report";
 }
-<div class="row" id="CouponsApprovalBindingSpot">
+<div class="row" id="walletreportBindingRoot">
     <div class="col-lg-12">
         <div class="row">
             <div class="col-lg-12">
@@ -23,7 +23,7 @@
                                     <tr>
                                         <th class="col-lg-2 th-pointer"><span id="4">Submitted By<span></span></span></th>
                                         <th class="col-lg-2 th-pointer"><span id="4">Title<span></span></span> </th>
-                                      
+
                                         @*<th class="col-lg-2 th-pointer"><span id="4">Swap Cost<span></span></span> </th>*@
                                         <th class="col-lg-2 th-pointer"><span id="5">Submission Date<span class="icon-up"></span></span></th>
 
@@ -31,7 +31,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <!-- ko template: { name: 'adCampaignsLVTemplate' , foreach: coupons } -->
+                                    <!-- ko template: { name: 'adCampaignsLVTemplate' } -->
                                     <!-- /ko -->
                                 </tbody>
                             </table>
@@ -39,16 +39,16 @@
                     </div>
                 </div>
                 @*<div id="pagerDivForStore" class="pull-right">
-                    <!-- ko with: pager -->
-                    @Html.Partial("~/Areas/Common/Views/Shared/_Pager.cshtml")
-                    <!-- /ko -->
-                </div>*@
+                        <!-- ko with: pager -->
+                        @Html.Partial("~/Areas/Common/Views/Shared/_Pager.cshtml")
+                        <!-- /ko -->
+                    </div>*@
             </div>
         </div>
         <script id="adCampaignsLVTemplate" type="text/html">
             <tr style="cursor: pointer">
                 <td>
-                    <p ></p>
+                    <p></p>
                 </td>
                 <td>
                     <p></p>
@@ -56,10 +56,10 @@
 
 
                 @*<td>
-                    <p data-bind="text:swabCost"></p>
-                </td>*@
+                        <p data-bind="text:swabCost"></p>
+                    </td>*@
                 <td>
-                    <p ></p>
+                    <p></p>
                     @*<p>Coupon</p>*@
                 </td>
                 <td>
@@ -74,8 +74,8 @@
         </script>
     </div>
     @*@{
-        Html.RenderPartial("~/Areas/Coupons/Views/Coupons/_couponEditor.cshtml");
-    }*@
+            Html.RenderPartial("~/Areas/Coupons/Views/Coupons/_couponEditor.cshtml");
+        }*@
 </div>
 @*<!-- ko stopBinding: true -->
     @Html.Partial("~/Areas/Common/Views/Shared/_ConfirmationDialog.cshtml")
