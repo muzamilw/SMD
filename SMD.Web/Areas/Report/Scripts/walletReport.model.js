@@ -42,14 +42,6 @@
               submissionDate: submissionDate,
               companyId: companyId,
               profileGroupId: profileGroupId,
-              id: id,
-              ageRangeStart: ageRangeStart,
-              ageRangeEnd: ageRangeEnd,
-              amountCharged: amountCharged,
-              isApproved: isApproved,
-              rejectedReason: rejectedReason,
-              pqAnswers: pqAnswers,
-              type: type,
               hasChanges: hasChanges,
               convertToServerData: convertToServerData,
               reset: reset,
@@ -65,7 +57,7 @@
     var WalletReportServertoClientMapper = function (itemFromServer) {
 
 
-        return new WalletReport(itemFromServer.CreatedBy, itemFromServer.Question, itemFromServer.SubmissionDateTime, itemFromServer.CompanyId, itemFromServer.ProfileGroupId, itemFromServer.Type, itemFromServer.PqId, itemFromServer.Approved, itemFromServer.RejectionReason, itemFromServer.AgeRangeStart, itemFromServer.AgeRangeEnd, itemFromServer.AmountCharged);
+        return new WalletReport(itemFromServer.CreatedBy, itemFromServer.Question, itemFromServer.SubmissionDateTime, itemFromServer.CompanyId, itemFromServer.ProfileGroupId);
     };
 
     // Function to attain cancel button functionality WalletReport
