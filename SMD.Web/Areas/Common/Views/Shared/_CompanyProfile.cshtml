@@ -2,26 +2,70 @@
     ViewBag.Title = "User Profile";
 }
 
-
-
 <div class="modal fade my-modal" id="companyProfileDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-
-            <div class="modal-content partial-contents" style="background-color:#FFFFFF;border-radius:5px;width:790px;margin-left:-116px;margin-top:-1px;" id="">
+            <div class="modal-content partial-contents" style="background-color:#FFFFFF;border-radius:5px;width:950px;margin-left:-116px;margin-top:-1px;" id="">
                 <div class="modal-header" id="">
-                    <span class="modal-title " style="font-size:24px;">Update Company Details</span>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <span class="modal-title " style="font-size:24px;">Merchant account essentials</span>
                 </div>
-
                 <div class="row" id="">
+                    <div class="col-lg-12" style="margin-top:15px;float:none !important; border-bottom: 3px solid gray">
+                        <div class="col-lg-3">
 
-                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="pull-left">
+                                <div class="ads-numbering-box" data-bind="css: 'ads-selected-numbering-box'">
+                                    1
+                                </div>
 
+                                <br />
+                                <span>Personal</span>
+                            </div>
+                            <div class="pull-left ads-numbering-linebar">
+
+
+                            </div>
+                            <div class="pull-left">
+                                <div class="ads-numbering-box" data-bind="css: 'ads-selected-numbering-box'">
+                                    2
+                                </div>
+
+                                <br />
+                                <span>Business</span>
+                            </div>
+                            <div class="pull-left ads-numbering-linebar">
+
+                            </div>
+                            <div class="pull-left">
+                                <div class="ads-numbering-box" data-bind="css: 'ads-selected-numbering-box'">
+                                    3
+                                </div>
+
+                                <br />
+                                <span>Defaults & Logo</span>
+                            </div>
+                        </div>
+                       
+                        <div class="col-lg-3">
+
+                        </div>
+
+                        <div class="clearfix"></div>
+                    </div>
+                   
+                    <div class="col-lg-12 col-md-12 col-sm-12" style="margin-top: 15px;">
                         <div class="tab-pane fade in active" data-bind="with: $root.selectedCompany" id="tab-generalinfo">
+                            <div class="col-lg-6">
+                                
+                            </div>
+                            <div class="col-lg-6">
 
+                            </div>
                             <div class="col-lg-12 form-horizontal">
-                                <h4  style="margin-top:20px; display:none;">
+                                <h4 style="margin-top:20px; display:none;">
                                     Company Info
                                 </h4>
                                 <div class="col-lg-9" style="margin-top: 12px;">
@@ -37,7 +81,6 @@
                                             </div>*@
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
-
                                                 <label class="control-label text-right tooltip-float">Company Name</label>
                                             </div>
                                             <div class="col-lg-6">
@@ -45,32 +88,27 @@
                                             </div>
                                         </div>
 
-
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
-
                                                 <label class="control-label text-right tooltip-float">Sales line</label>
                                             </div>
                                             <div class="col-lg-6">
                                                 <input type="text" class="form-control" data-bind="value: Tel1">
                                             </div>
                                         </div>
-
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
-
                                                 <label class="control-label text-right tooltip-float">Sales line 2</label>
                                             </div>
                                             <div class="col-lg-6">
                                                 <input type="text" class="form-control" data-bind="value: Tel2">
                                             </div>
                                         </div>
-                                  
-                                    
-                                  
+
+
+
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
-
                                                 <label class="control-label text-right tooltip-float">Sales Email</label>
                                             </div>
                                             <div class="col-lg-6">
@@ -78,64 +116,57 @@
                                             </div>
                                         </div>
 
-
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
-
                                                 <label class="control-label text-right tooltip-float">Website</label>
                                             </div>
                                             <div class="col-lg-6">
                                                 <input type="text" class="form-control" data-bind="value: WebsiteLink">
                                             </div>
                                         </div>
-                                   
-                                       
-                                   
+
+
 
                                         @*<div class="form-group">
-                                            <div class="col-lg-4 text-right">
+                                                <div class="col-lg-4 text-right">
 
-                                                <label class="control-label text-right tooltip-float">&nbsp;</label>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="form-group">
-                                                    <div class="col-md-3" style="text-align:right;margin-left: 10px;">
-                                                        <div class="fileUpload btn btn-primary">
-                                                            <span>Image / Logo </span>
-                                                            
-                                                            <input type="file" class="upload" id="image_files" onchange="readPhotoURL(this);" />
-                                                        </div>
-                                                        <div class="bs-example-tooltips tooltip-float-width" style="    margin-top: 10px;">
-                                                            <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-original-title="  760 pixels  by 200 pixels" title="  760 pixels  by 200 pixels">
-                                                                <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                            </a>
-                                                        </div>
-                                                    </div>
+                                                    <label class="control-label text-right tooltip-float">&nbsp;</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <div class="col-md-3" style="text-align:right;margin-left: 10px;">
+                                                            <div class="fileUpload btn btn-primary">
+                                                                <span>Image / Logo </span>
 
-                                                    <div class="col-md-6">
-                                                        
-                                                        <img id="vehicleImage" alt="" style="width: auto;height:120px" data-bind="attr:{src:Logo }" />
-                                                        <h5><span></span></h5>
+                                                                <input type="file" class="upload" id="image_files" onchange="readPhotoURL(this);" />
+                                                            </div>
+                                                            <div class="bs-example-tooltips tooltip-float-width" style="    margin-top: 10px;">
+                                                                <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-original-title="  760 pixels  by 200 pixels" title="  760 pixels  by 200 pixels">
+                                                                    <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-6">
+
+                                                            <img id="vehicleImage" alt="" style="width: auto;height:120px" data-bind="attr:{src:Logo }" />
+                                                            <h5><span></span></h5>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>*@
+                                            </div>*@
 
-
-                                        <div class="form-group" style="margin-bottom:25px;" >
-                                            <div class="col-lg-4 text-right" >
+                                        <div class="form-group" style="margin-bottom:25px;">
+                                            <div class="col-lg-4 text-right">
                                                 <label for="txtUploadLogo" class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn">Upload Logo</label>
                                             </div>
                                             <div class="col-lg-8">
                                                 <div class="defaultImgUploadImage pull-left" style="width:270px;cursor:pointer;text-align:center">
                                                     @*<img style="width:auto;max-width:236px; min-height:150px;" data-bind="visible: LogoImageBase64() != '',attr: { src: LogoImageBase64  }" src="/Content/Images/Company_Default.png" onclick="showUploadDialog();" />
-                                                    <img style="width:auto;max-width:236px; min-height:150px;" data-bind="visible: Logo() != '' ,attr: { src: Logo()  }" onclick="showUploadDialog();" />
-                                                    <div style="height:auto;width:236px; min-height:150px;" onclick="showUploadDialog();" data-bind="visible: Logo() == '' &&   LogoImageBase64() == ''"></div>*@
-
+                                                        <img style="width:auto;max-width:236px; min-height:150px;" data-bind="visible: Logo() != '' ,attr: { src: Logo()  }" onclick="showUploadDialog();" />
+                                                        <div style="height:auto;width:236px; min-height:150px;" onclick="showUploadDialog();" data-bind="visible: Logo() == '' &&   LogoImageBase64() == ''"></div>*@
 
                                                     <img style="height:auto;width:236px; min-height:150px;" data-bind="attr: { src: $root.selectedCompany().Logo() }" src="/Content/Images/Company_Default.png" id="imgLogo" data-toggle="modal" data-target="#damModel" onclick="changeIframeSrc(1)" />
-
-
 
                                                     <div style="    padding-top: 10px;    text-align: center;    font-size: 12px;    color: gray;">
                                                         (300 x 150 pixels)
@@ -151,14 +182,11 @@
                                                     &nbsp;
                                                 </div>
                                             </div>
-                                            
+
                                         </div>
-
-
 
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
-
                                                 <label class="control-label text-right tooltip-float">Coupon redemption key</label>
                                             </div>
                                             <div class="col-lg-6">
@@ -168,15 +196,13 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="col-lg-12 form-horizontal">
-                                <h4  style="margin-top:20px; display:none;">
+                                <h4 style="margin-top:20px; display:none;">
                                     Social Media Handles
                                 </h4>
-
                                 <div class="col-lg-9" style="margin-top: 12px;">
                                     <div class="col-lg-12">
-
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
                                                 <label class="control-label text-right tooltip-float">Social Media Handle</label>
@@ -184,12 +210,9 @@
                                             <div class="col-lg-6">
                                                 @*<input type="text" class="form-control" data-bind="value: TwitterHandle() !='undefined' ? TwitterHandle :'( Not Configured )'">*@
                                                 <select id="slectSocialmedia" class="form-control" data-bind="options: $root.socialMedia, optionsText: 'Text', optionsValue: 'Text', optionsCaption: '&lt;' + 'Select'+ '&gt;' , value:selectedMedia"></select>
-                                                
+
                                             </div>
-
                                         </div>
-
-
 
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
@@ -203,62 +226,58 @@
                                             </div>
                                         </div>
                                         @*<div class="form-group" data-bind="visible:$root.selectedMedia()=='Twitter'">
-                                            <div class="col-lg-4 text-right">
-                                                <label class="control-label text-right tooltip-float">Twitter Handle</label>
+                                                <div class="col-lg-4 text-right">
+                                                    <label class="control-label text-right tooltip-float">Twitter Handle</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <input type="text" class="form-control" data-bind="value: TwitterHandleui">
+                                                </div>
                                             </div>
-                                            <div class="col-lg-6">
-                                                <input type="text" class="form-control" data-bind="value: TwitterHandleui">
+
+
+
+                                            <div class="form-group" data-bind="visible:$root.selectedMedia()=='Instagram'">
+                                                <div class="col-lg-4 text-right">
+                                                    <label class="control-label text-right tooltip-float">Instagram Handle</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <input type="text" class="form-control" data-bind="value: TwitterHandleui">
+                                                </div>
                                             </div>
-                                        </div>
 
 
 
-                                        <div class="form-group" data-bind="visible:$root.selectedMedia()=='Instagram'">
-                                            <div class="col-lg-4 text-right">
-                                                <label class="control-label text-right tooltip-float">Instagram Handle</label>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <input type="text" class="form-control" data-bind="value: TwitterHandleui">
-                                            </div>
-                                        </div>
-
-
-
-                                        <div class="form-group" data-bind="visible:$root.selectedMedia()=='Pinterest'">
-                                            <div class="col-lg-4 text-right">
-                                                <label class="control-label text-right tooltip-float">Pinterest Handle</label>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <input type="text" class="form-control" data-bind="value: TwitterHandleui">
-                                            </div>
-                                        </div>*@
-
+                                            <div class="form-group" data-bind="visible:$root.selectedMedia()=='Pinterest'">
+                                                <div class="col-lg-4 text-right">
+                                                    <label class="control-label text-right tooltip-float">Pinterest Handle</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <input type="text" class="form-control" data-bind="value: TwitterHandleui">
+                                                </div>
+                                            </div>*@
                                     </div>
                                 </div>
 
-
-
-                                    </div>
-                                    <div class="col-lg-12 form-horizontal">
-                                        <h4  style="margin-top:20px; display:none;">
-                                            Credit Card Information
-                                        </h4>
-                                        <div class="col-lg-9">
-                                            <div class="form-group">
-                                                <div class="col-lg-4 text-right">
-                                                    <label class="control-label text-right tooltip-float">Stripe Account</label>
-                                                </div>
-                                                <div class="col-lg-4">
-                                                    <input type="text" readonly class="form-control" data-bind="value: StripeCustomerId() !='undefined' ? StripeCustomerId :'( Not Configured )'">
-                                                </div>
-                                                <div class="col-lg-2">
-                                                    <button class="btn  btn-info" id="saveBtn" data-bind="click: $root.chargeCustomer, text:StripeCustomerId() =='undefined' ? 'Configure':'Update' ">Processing...</button>
-                                                </div>
-                                            </div>
-
-
+                            </div>
+                            <div class="col-lg-12 form-horizontal">
+                                <h4 style="margin-top:20px; display:none;">
+                                    Credit Card Information
+                                </h4>
+                                <div class="col-lg-9">
+                                    <div class="form-group">
+                                        <div class="col-lg-4 text-right">
+                                            <label class="control-label text-right tooltip-float">Stripe Account</label>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <input type="text" readonly class="form-control" data-bind="value: StripeCustomerId() !='undefined' ? StripeCustomerId :'( Not Configured )'">
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <button class="btn  btn-info" id="saveBtn" data-bind="click: $root.chargeCustomer, text:StripeCustomerId() =='undefined' ? 'Configure':'Update' ">Processing...</button>
                                         </div>
                                     </div>
+
+                                </div>
+                            </div>
                             <div class="col-lg-12 form-horizontal">
                                 <h4 style="margin-top:20px; display:none;">
                                     Billing Information
@@ -267,77 +286,64 @@
                                     <div class="col-lg-12">
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
-
                                                 <label class="control-label text-right tooltip-float">Address 1</label>
                                             </div>
                                             <div class="col-lg-6">
                                                 <input type="text" class="form-control" data-bind="value: BillingAddressLine1">
                                             </div>
                                         </div>
-
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
-
                                                 <label class="control-label text-right tooltip-float">Address 2</label>
                                             </div>
                                             <div class="col-lg-6">
                                                 <input type="text" class="form-control" data-bind="value: BillingAddressLine2">
                                             </div>
                                         </div>
-
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
-
                                                 <label class="control-label text-right tooltip-float">Country</label>
                                             </div>
                                             <div class="col-lg-6">
                                                 <select class="form-control" data-bind="options: $root.countries, optionsText: 'CountryName', optionsValue: 'CountryId', optionsCaption: '&lt;' + 'Select Country'+ '&gt;' , value:BillingCountryId,event:{ change: $root.getCitiesByCountryId}"></select>
                                             </div>
                                         </div>
-
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
-
                                                 <label class="control-label text-right tooltip-float">City</label>
                                             </div>
                                             <div class="col-lg-6">
-                                                <select class="form-control" data-bind="options: $root.cities, optionsText: 'CityName', optionsValue: 'CityId', optionsCaption: '&lt;' + 'Select City'+ '&gt;' , value:BillingCityId"></select>
+                                                @*<select class="form-control" data-bind="options: $root.cities, optionsText: 'CityName', optionsValue: 'CityName', optionsCaption: '&lt;' + 'Select City'+ '&gt;' , value:BillingCity"></select>*@
+                                                @*<input class="form-control" data-bind="autocomplete: { data: $root.cities, maxItems: 8 }, value:BillingCity" />*@
+                                                <input type="text" class="form-control" data-bind="value: billingCity">
                                             </div>
                                         </div>
-
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
-
                                                 <label class="control-label text-right tooltip-float">State</label>
                                             </div>
                                             <div class="col-lg-6">
                                                 <input type="text" class="form-control" data-bind="value: BillingState">
                                             </div>
                                         </div>
-
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
-
                                                 <label class="control-label text-right tooltip-float">Zip Code</label>
                                             </div>
                                             <div class="col-lg-6">
                                                 <input type="text" class="form-control" data-bind="value: BillingZipCode">
                                             </div>
                                         </div>
-
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
-
                                                 <label class="control-label text-right tooltip-float">Billing Phone</label>
                                             </div>
                                             <div class="col-lg-6">
                                                 <input type="text" class="form-control" data-bind="value: BillingPhone">
                                             </div>
                                         </div>
-
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
-
                                                 <label class="control-label text-right tooltip-float">Billing Email</label>
                                             </div>
                                             <div class="col-lg-6">
@@ -346,33 +352,25 @@
                                         </div>
                                     </div>
 
-
                                 </div>
                             </div>
 
+                        </div>
 
-                                </div>
-
-
-                                <!-- ko stopBinding: true -->
-                                @Html.Partial("~/Areas/Common/Views/Shared/_StripeChargeCustomerDialog.cshtml")
-
-                                <!-- /ko -->
-                                <!-- ko stopBinding: true -->
-                                @Html.Partial("~/Areas/Common/Views/Shared/_ConfirmationDialog.cshtml")
-                                <!-- /ko -->
-                            </div>
+                        <!-- ko stopBinding: true -->
+                        @Html.Partial("~/Areas/Common/Views/Shared/_StripeChargeCustomerDialog.cshtml")
+                        <!-- /ko -->
+                        <!-- ko stopBinding: true -->
+                        @Html.Partial("~/Areas/Common/Views/Shared/_ConfirmationDialog.cshtml")
+                        <!-- /ko -->
+                    </div>
                 </div>
 
-
-
                 <div class="modal-footer" style="padding-left:0px;padding-right:0px;padding-bottom:5px;">
-
                     <div style="padding-right:8px;">
                         <button class="btn  btn-info" id="saveBtn" data-bind="click:$root.onUpdateProfile , enable: $root.hasChangesOnProfile, css: { 'btn-warning': $root.hasChangesOnProfile }">Save</button>
                         <a class="btn btn-default" aria-hidden="true" data-bind="click: $root.onCloseUserProfileDialog" data-dismiss="modal" id="" style="float: right;margin-bottom: 10px;visibility:visible; ">Close</a>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -380,14 +378,11 @@
 </div>
 
 
-
-
 @section Scripts{
     <script type="text/javascript">
         require(["common/userProfile.view", "common/confirmation.view", "common/stripeChargeCustomer.view"]);
 
     </script>
-
     <script>
         function getParameter(url, param) {
             if (url.indexOf('?') == -1)
@@ -397,55 +392,54 @@
             return url[1].split(pattern)[1];
         }
     </script>
-@*<script type="text/javascript">
+    @*<script type="text/javascript">
 
 
-    var logoImage = "";
-    var bannerImage1 = "";
-    var bannerImage2 = "";
-    var bannerImage3 = "";
-    var mode = 1;
+            var logoImage = "";
+            var bannerImage1 = "";
+            var bannerImage2 = "";
+            var bannerImage3 = "";
+            var mode = 1;
 
 
-    function changeIframeSrc(mode1) {
-        mode = mode1;
-        if (mode1 != 1)
-            mode1 = 2;
-        $("#iframe").attr("src", "/DamImages?mode=" + mode1 + "&selection=true");
+            function changeIframeSrc(mode1) {
+                mode = mode1;
+                if (mode1 != 1)
+                    mode1 = 2;
+                $("#iframe").attr("src", "/DamImages?mode=" + mode1 + "&selection=true");
 
-        console.log(mode);
-    }
-
-    function iframeLoaded() {
-        var iframeBody = $('body', $('#iframe')[0].contentWindow.document);
-        $(iframeBody).on('click', '.damImgContainer img', function (event) {
-            console.log(mode);
-            if (mode == 1) {
-                $("#imgLogo").attr("src", this.src).change();
-                logoImage = this.src;
-                $(".close").click();
-            } else if (mode == 2) {
-                $("#bannerImage1").attr("src", this.src).change();
-                bannerImage1 = this.src;
-                $(".close").click();
-            } else if (mode == 3) {
-                $("#bannerImage2").attr("src", this.src).change();
-                bannerImage2 = this.src;
-                $(".close").click();
-            } else if (mode == 4) {
-                $("#bannerImage3").attr("src", this.src).change();
-                bannerImage3 = this.src;
-                $(".close").click();
+                console.log(mode);
             }
-        });
-    }
-    $(document).ready(function () {
-     
 
-    });
-    
-</script>*@
+            function iframeLoaded() {
+                var iframeBody = $('body', $('#iframe')[0].contentWindow.document);
+                $(iframeBody).on('click', '.damImgContainer img', function (event) {
+                    console.log(mode);
+                    if (mode == 1) {
+                        $("#imgLogo").attr("src", this.src).change();
+                        logoImage = this.src;
+                        $(".close").click();
+                    } else if (mode == 2) {
+                        $("#bannerImage1").attr("src", this.src).change();
+                        bannerImage1 = this.src;
+                        $(".close").click();
+                    } else if (mode == 3) {
+                        $("#bannerImage2").attr("src", this.src).change();
+                        bannerImage2 = this.src;
+                        $(".close").click();
+                    } else if (mode == 4) {
+                        $("#bannerImage3").attr("src", this.src).change();
+                        bannerImage3 = this.src;
+                        $(".close").click();
+                    }
+                });
+            }
+            $(document).ready(function () {
 
+
+            });
+
+        </script>*@
 
 
 

@@ -3,7 +3,7 @@
     var // ReSharper disable InconsistentNaming
       User = function (CompanyId, CompanyName, Tel1, Tel2, Logo,
           StripeCustomerId, SalesEmail, WebsiteLink, VoucherSecretKey, BillingAddressLine1, BillingAddressLine2,
-          BillingState, BillingCountryId, BillingCityId, BillingZipCode, BillingPhone, BillingEmail, TwitterHandle, FacebookHandle,
+          BillingState, BillingCountryId, BillingCity, BillingZipCode, BillingPhone, BillingEmail, TwitterHandle, FacebookHandle,
           InstagramHandle, PinterestHandle, Logo, LogoImageBase64) {
           debugger;
           var
@@ -21,7 +21,7 @@
                 BillingAddressLine2 = ko.observable(BillingAddressLine2),
                 BillingState = ko.observable(BillingState).extend({ required: true }),
                 BillingCountryId = ko.observable(BillingCountryId).extend({ required: true }),
-                BillingCityId = ko.observable(BillingCityId).extend({ required: true }),
+                billingCity = ko.observable(BillingCity).extend({ required: true }),
                 BillingZipCode = ko.observable(BillingZipCode).extend({ required: true }),
                 BillingPhone = ko.observable(BillingPhone).extend({ required: true }),
                 BillingEmail = ko.observable(BillingEmail).extend({ required: true }),
@@ -58,7 +58,7 @@
                   
                   BillingState: BillingState,
                   BillingCountryId: BillingCountryId,
-                  //BillingCityId: BillingCityId,
+                  billingCity: billingCity,
                   BillingZipCode: BillingZipCode,
                   BillingPhone: BillingPhone,
                   BillingEmail: BillingEmail,
@@ -83,7 +83,7 @@
                   BillingAddressLine2: BillingAddressLine2,
                   BillingState: BillingState,
                   BillingCountryId: BillingCountryId,
-                  BillingCityId: BillingCityId,
+                  billingCity: billingCity,
                   BillingZipCode: BillingZipCode,
                   BillingPhone: BillingPhone,
                   BillingEmail: BillingEmail,
@@ -122,7 +122,7 @@
                   BillingAddressLine2: BillingAddressLine2(),
                   BillingState: BillingState(),
                   BillingCountryId: BillingCountryId(),
-                  BillingCityId: BillingCityId(),
+                  BillingCity: billingCity(),
                   BillingZipCode: BillingZipCode(),
                   BillingPhone: BillingPhone(),
                   BillingEmail: BillingEmail(),
@@ -149,7 +149,7 @@
               BillingAddressLine2: BillingAddressLine2,
               BillingState: BillingState,
               BillingCountryId: BillingCountryId,
-              BillingCityId: BillingCityId,
+              billingCity: billingCity,
               BillingZipCode: BillingZipCode,
               BillingPhone: BillingPhone,
               BillingEmail: BillingEmail,
@@ -178,7 +178,7 @@
         debugger;
         return new User(objSrv.CompanyId, objSrv.CompanyName, objSrv.Tel1, objSrv.Tel2, objSrv.Logo,
           objSrv.StripeCustomerId, objSrv.SalesEmail, objSrv.WebsiteLink, objSrv.VoucherSecretKey, objSrv.BillingAddressLine1, objSrv.BillingAddressLine2,
-          objSrv.BillingState, objSrv.BillingCountryId, objSrv.BillingCityId, objSrv.BillingZipCode, objSrv.BillingPhone, objSrv.BillingEmail, objSrv.TwitterHandle, objSrv.FacebookHandle,
+          objSrv.BillingState, objSrv.BillingCountryId, objSrv.BillingCity, objSrv.BillingZipCode, objSrv.BillingPhone, objSrv.BillingEmail, objSrv.TwitterHandle, objSrv.FacebookHandle,
           objSrv.InstagramHandle, objSrv.PinterestHandle, objSrv.Logo, objSrv.LogoImageBase64);
      
     };
