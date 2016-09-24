@@ -301,7 +301,7 @@ define("survey/survey.viewModel",
                 },
                     // On editing of existing PQ
                     onEditSurvey = function (item) {
-                        selectedQuestionCountryList([]); $("#panelArea,#topArea").css("display", "none");
+                        selectedQuestionCountryList([]); $("#panelArea,#topArea,#Heading_div").css("display", "none");
                         gotoScreen(1);
                         isTerminateBtnVisible(false);
                         
@@ -1046,19 +1046,7 @@ define("survey/survey.viewModel",
 
                              if (ValidateSurvey() == true) {
 
-                                 if(true) {// (reachedAudience() > 0) {
-
-                                     if (userBaseData().isStripeIntegrated == true) {
-                                         stripeChargeCustomer.show(function () {
-                                             userBaseData().isStripeIntegrated = false;
-                                             saveSurveyQuestion(2);
-                                         }, 2000, 'Enter your details');
-                                     } else {
-                                         saveSurveyQuestion(1);
-                                     }
-                                 } else {
-                                     toastr.error("You have no audience against the specified criteria please broad your audience definition.");
-                                 }
+                                 saveSurveyQuestion(1);
 
                              }
                              else {

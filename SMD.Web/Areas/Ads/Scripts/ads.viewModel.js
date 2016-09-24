@@ -358,8 +358,9 @@ define("ads/ads.viewModel",
               // showMainMenu();
            },
             closeNewCampaignDialog = function () {
-           
-                if (campaignModel().hasChanges()) {    //&& (campaignModel().Status() == null || campaignModel().Status() == 1)
+               
+                if (campaignModel().hasChanges() || logoImage != '') {    //&& (campaignModel().Status() == null || campaignModel().Status() == 1)
+
                 confirmation.messageText("Do you want to save changes?");
                 confirmation.afterProceed(function () {
                     saveCampaignData();
@@ -388,7 +389,7 @@ define("ads/ads.viewModel",
                     $("#panelArea").css("display", "block");
                     //show the main menu;
                     showMainMenu();
-                   
+                    logoImage = '';
                 });
                 confirmation.afterCancel(function () {
 
@@ -1479,7 +1480,7 @@ define("ads/ads.viewModel",
                     $("#topArea").css("display", "none");
                     $("#panelArea").css("display", "none");
 
-                   
+                    $("#Heading_div").css("display", "none");
 
 
                     if (item.Status() == 1 || item.Status() == 2 || item.Status() == 3 || item.Status() == 4 || item.Status() == null || item.Status() == 7 || item.Status() == 9) {
@@ -1516,11 +1517,11 @@ define("ads/ads.viewModel",
 
                                     campaignModel(model.Campaign.Create(data.Campaigns[0]));
                                     
-                                    if (campaignModel().LogoUrl() == '' || campaignModel().LogoUrl() == undefined)
-                                    {
-                                        
+                                    if (campaignModel().LogoUrl() == '' || campaignModel().LogoUrl() == undefined) {
+
                                         campaignModel().LogoUrl("/images/default-placeholder.png");
                                     }
+                                   
                                    
                                     VideoLink2src(campaignModel().VideoLink2()+''+'');
                                     

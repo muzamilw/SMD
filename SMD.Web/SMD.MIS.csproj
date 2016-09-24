@@ -2826,6 +2826,7 @@
     <Content Include="ReportViewers\User.aspx" />
     <Content Include="Views\EmailTester.aspx" />
     <Content Include="Views\Home\-------Login.cshtml" />
+    <Content Include="Views\MobileMessageBox\Message.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
