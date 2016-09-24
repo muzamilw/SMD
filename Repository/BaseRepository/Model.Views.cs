@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySetsF0AA09BEDF138CB623AAFD14F4A9473F45EE33EBA9BFA3D2937CC25764C116AF))]
+[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySetsC8870335411148B9EA06FA2B086A41D88CBDB3CDC7810691079D4BF94A920803))]
 
 namespace Edm_EntityMappingGeneratedViews
 {
@@ -17,18 +17,18 @@ namespace Edm_EntityMappingGeneratedViews
     /// <Summary>
     /// The type contains views for EntitySets and AssociationSets that were generated at design time.
     /// </Summary>
-    public sealed class ViewsForBaseEntitySetsF0AA09BEDF138CB623AAFD14F4A9473F45EE33EBA9BFA3D2937CC25764C116AF : System.Data.Mapping.EntityViewContainer
+    public sealed class ViewsForBaseEntitySetsC8870335411148B9EA06FA2B086A41D88CBDB3CDC7810691079D4BF94A920803 : System.Data.Mapping.EntityViewContainer
     {
         
         /// <Summary>
         /// The constructor stores the views for the extents and also the hash values generated based on the metadata and mapping closure and views.
         /// </Summary>
-        public ViewsForBaseEntitySetsF0AA09BEDF138CB623AAFD14F4A9473F45EE33EBA9BFA3D2937CC25764C116AF()
+        public ViewsForBaseEntitySetsC8870335411148B9EA06FA2B086A41D88CBDB3CDC7810691079D4BF94A920803()
         {
             this.EdmEntityContainerName = "BaseDbContext";
             this.StoreEntityContainerName = "SMDModelStoreContainer";
-            this.HashOverMappingClosure = "d1802a4000b83c6899858c4dbcc2ce177c5a667958b638bf49d59d711c47a620";
-            this.HashOverAllExtentViews = "7cb6aeace6bc74071351bab60443f7157e15c288956d873e49b0a2a1b632d6bf";
+            this.HashOverMappingClosure = "02d63e9c13b56053c23f0cf02cd8f3ae02173b1a57cac8441771e8f673c0fd17";
+            this.HashOverAllExtentViews = "9b3cf0e67f93c0427dbb3b4ac95637852aca4389e14567f9857029b3ff0fbe01";
             this.ViewCount = 114;
         }
         
@@ -1647,7 +1647,7 @@ namespace Edm_EntityMappingGeneratedViews
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.CouponPriceOption", @"
     SELECT VALUE -- Constructing CouponPriceOption
-        [SMDModel.Store.CouponPriceOption](T1.CouponPriceOption_CouponPriceOptionId, T1.CouponPriceOption_CouponId, T1.CouponPriceOption_Description, T1.CouponPriceOption_Price, T1.CouponPriceOption_Savings, T1.CouponPriceOption_CoucherCode, T1.CouponPriceOption_OptionUrl)
+        [SMDModel.Store.CouponPriceOption](T1.CouponPriceOption_CouponPriceOptionId, T1.CouponPriceOption_CouponId, T1.CouponPriceOption_Description, T1.CouponPriceOption_Price, T1.CouponPriceOption_Savings, T1.CouponPriceOption_VoucherCode, T1.CouponPriceOption_OptionUrl)
     FROM (
         SELECT 
             T.CouponPriceOptionId AS CouponPriceOption_CouponPriceOptionId, 
@@ -1655,7 +1655,7 @@ namespace Edm_EntityMappingGeneratedViews
             T.Description AS CouponPriceOption_Description, 
             T.Price AS CouponPriceOption_Price, 
             T.Savings AS CouponPriceOption_Savings, 
-            T.CoucherCode AS CouponPriceOption_CoucherCode, 
+            T.VoucherCode AS CouponPriceOption_VoucherCode, 
             T.OptionUrl AS CouponPriceOption_OptionUrl, 
             True AS _from0
         FROM BaseDbContext.CouponPriceOptions AS T
@@ -2929,7 +2929,7 @@ namespace Edm_EntityMappingGeneratedViews
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.CouponPriceOptions", @"
     SELECT VALUE -- Constructing CouponPriceOptions
-        [DomainModels.CouponPriceOption](T1.CouponPriceOption_CouponPriceOptionId, T1.CouponPriceOption_CouponId, T1.CouponPriceOption_Description, T1.CouponPriceOption_Price, T1.CouponPriceOption_Savings, T1.CouponPriceOption_CoucherCode, T1.CouponPriceOption_OptionUrl)
+        [DomainModels.CouponPriceOption](T1.CouponPriceOption_CouponPriceOptionId, T1.CouponPriceOption_CouponId, T1.CouponPriceOption_Description, T1.CouponPriceOption_Price, T1.CouponPriceOption_Savings, T1.CouponPriceOption_OptionUrl, T1.CouponPriceOption_VoucherCode)
     FROM (
         SELECT 
             T.CouponPriceOptionId AS CouponPriceOption_CouponPriceOptionId, 
@@ -2937,8 +2937,8 @@ namespace Edm_EntityMappingGeneratedViews
             T.Description AS CouponPriceOption_Description, 
             T.Price AS CouponPriceOption_Price, 
             T.Savings AS CouponPriceOption_Savings, 
-            T.CoucherCode AS CouponPriceOption_CoucherCode, 
             T.OptionUrl AS CouponPriceOption_OptionUrl, 
+            T.VoucherCode AS CouponPriceOption_VoucherCode, 
             True AS _from0
         FROM SMDModelStoreContainer.CouponPriceOption AS T
     ) AS T1");

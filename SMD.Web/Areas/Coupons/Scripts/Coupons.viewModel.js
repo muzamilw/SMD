@@ -597,42 +597,42 @@ define("Coupons/Coupons.viewModel",
                     //  }
                 }
             },
-                ///*** Stock Sub Categories Region ***
+                ///*** Price option Region ***
 
-                // Select a Sub Category
+                // Select a Price option
                     selectPriceOption = function (priceOption) {
                         if (selectedPriceOption() !== priceOption) {
                             selectedPriceOption(priceOption);
                         }
                     },
-                // Template Chooser For Stock Sub Categories
+                // Template Chooser For Price option
                     templateToUsePriceOptions = function (priceOption) {
                         return (priceOption === selectedPriceOption() ? 'editPriceOptionTemplate' : 'itemPriceOptionTemplate');
                     },
-                //Create Stock Sub Category
+                //Create Price option
                      onCreatePriceOption = function () {
                          var priceOption = couponModel().CouponPriceOptions()[0];
-                         //Create Stock Categories for the very First Time
+                         //Create Price option for the very First Time
                          if (priceOption == undefined) {
-                             couponModel().stockSubCategories.splice(0, 0, new model.CouponPriceOptions());
+                             couponModel().CouponPriceOptions.splice(0, 0, new model.CouponPriceOption());
                              selectedPriceOption(couponModel().CouponPriceOptions()[0]);
                          }
-                             //If There are already stock categories in list
+                             //If There are already Price options in list
                          else {
                              if (!priceOption.isValid()) {
                                  priceOption.errors.showAllMessages();
                              }
                              else {
-                                 couponModel().CouponPriceOptions.splice(0, 0, new model.CouponPriceOptions());
-                                 selectedStockSubCategory(couponModel().CouponPriceOptions()[0]);
+                                 couponModel().CouponPriceOptions.splice(0, 0, new model.CouponPriceOption());
+                                 selectedPriceOption(couponModel().CouponPriceOptions()[0]);
                              }
                          }
                      },
-                // Delete a Stock Sub Category
+                // Delete a Price option
                     onDeletePriceOption = function (priceOption) {
                         confirmation.messageText("WARNING - This item will be removed from the system and you won’t be able to recover.  There is no undo");
                         confirmation.afterProceed(function () {
-                            selectedStockCategory().stockSubCategories.remove(stockSubCategory);
+                            couponModel().CouponPriceOptions.remove(priceOption);
                         });
                         confirmation.show();
                         return;

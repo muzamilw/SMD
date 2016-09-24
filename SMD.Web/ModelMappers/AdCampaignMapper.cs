@@ -570,7 +570,7 @@ namespace SMD.MIS.ModelMappers
                 BuyitBtnLabel = source.BuyitBtnLabel,
                 BuyitLandingPageUrl = source.BuyitLandingPageUrl,
                 ShowBuyitBtn = source.ShowBuyitBtn,
-                CouponPriceOptions = source.CouponPriceOptions
+                CouponPriceOptions =  source.CouponPriceOptions == null? null: source.CouponPriceOptions.Select(cr =>cr.CreateFrom())// source.CouponPriceOptions
                
               };
 
@@ -583,6 +583,22 @@ namespace SMD.MIS.ModelMappers
                 CategoryId = source.CategoryId,
                 CouponId = source.CouponId,
                 Id = source.Id
+            };
+        }
+
+
+
+        public static SMD.MIS.Areas.Api.Models.CouponPriceOption CreateFrom(this Models.DomainModels.CouponPriceOption source)
+        {
+            return new SMD.MIS.Areas.Api.Models.CouponPriceOption
+            {
+                CouponId = source.CouponId,
+                 CouponPriceOptionId = source.CouponPriceOptionId,
+                 Description = source.Description,
+                 OptionUrl = source.OptionUrl,
+                 Price = source.Price,
+                 Savings = source.Savings,
+                 VoucherCode = source.VoucherCode
             };
         }
     }

@@ -46,6 +46,20 @@ namespace SMD.MIS.Areas.Api.Models
         public Nullable<long> CouponId { get; set; }
 
     }
+
+    public class CouponPriceOption
+    {
+        public long CouponPriceOptionId { get; set; }
+        public Nullable<long> CouponId { get; set; }
+        public string Description { get; set; }
+        public Nullable<double> Price { get; set; }
+        public Nullable<double> Savings { get; set; }
+        public string VoucherCode { get; set; }
+        public string OptionUrl { get; set; }
+      
+    }
+
+
     public class CouponCodeModel
     {
         public long CodeId { get; set; }
