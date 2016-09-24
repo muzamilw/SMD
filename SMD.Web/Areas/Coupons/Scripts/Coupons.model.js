@@ -93,6 +93,8 @@
               BuyitBtnLabel = ko.observable(BuyitBtnLabel),
 
 
+              CouponPriceOptions = ko.observableArray([])
+
 
 
 
@@ -175,11 +177,12 @@
                 ShowBuyitBtn : ShowBuyitBtn,
                 BuyitLandingPageUrl : BuyitLandingPageUrl,
                 BuyitBtnLabel: BuyitBtnLabel
+                //CouponPriceOptions: CouponPriceOptions
 
               }),
               // Has Changes
               hasChanges = ko.computed(function () {
-                  return dirtyFlag.isDirty();
+                  return true;//dirtyFlag.isDirty();
               }),
               // Reset
               reset = function () {
@@ -193,6 +196,15 @@
 
                       selectedCoupons.push(item.convertToServerData());
                   });
+
+
+
+                  //SubCategories
+                  var priceOptions = [];
+                  _.each(CouponPriceOptions(), function (item) {
+                      priceOptions.push(item.convertToServerData());
+                  });
+
                   return {
                       ApprovalDateTime: ApprovalDateTime(),
                       Approved: Approved(),
@@ -271,7 +283,10 @@
                       Priority: Priority(),
                       ShowBuyitBtn: ShowBuyitBtn(),
                       BuyitLandingPageUrl: BuyitLandingPageUrl(),
-                      BuyitBtnLabel: BuyitBtnLabel()
+                      BuyitBtnLabel: BuyitBtnLabel(),
+                      CouponPriceOptions: priceOptions
+
+
                       
                   };
               };
@@ -350,6 +365,7 @@
               ShowBuyitBtn : (ShowBuyitBtn),
               BuyitLandingPageUrl : (BuyitLandingPageUrl),
               BuyitBtnLabel: (BuyitBtnLabel),
+              CouponPriceOptions : (CouponPriceOptions),
               reset: (reset)
           };
       };
@@ -373,6 +389,12 @@
 
             coupon.CouponCategories.push(selectedCouponCategory.Create(item));
         });
+
+        _.each(source.CouponPriceOptions, function (item) {
+
+            coupon.CouponPriceOptions.push(CouponPriceOption.Create(item));
+        });
+
 
         return coupon;
     };
@@ -402,8 +424,96 @@
 
         return new selectedCouponCategory(source.CategoryId, source.Name);
     };
+
+
+    // ReSharper disable once AssignToImplicitGlobalInFunctionScope
+    CouponPriceOption = function (specifiedCouponPriceOptionId, specifiedCouponId, specifiedDescription, specifiedPrice, specifiedSavings, specifiedOptionUrl, specifiedVoucherCode) {
+        var
+            self,
+            CouponPriceOptionId = ko.observable(specifiedCouponPriceOptionId),
+            CouponId = ko.observable(specifiedCouponId),
+            Price = ko.observable(specifiedPrice).extend({ required: true }),
+            Description = ko.observable(specifiedDescription).extend({ required: true }),
+            Savings = ko.observable(specifiedSavings).extend({ required: true }),
+            OptionUrl = ko.observable(specifiedOptionUrl),
+            VoucherCode = ko.observable(specifiedVoucherCode)
+        // Errors
+        errors = ko.validation.group({
+            Description: Description,
+            Price: Price,
+            Savings: Savings,
+            VoucherCode: VoucherCode
+        }),
+        // Is Valid 
+        isValid = ko.computed(function () {
+            return errors().length === 0 ? true : false;
+        }),
+
+        // True if the booking has been changed
+        // ReSharper disable InconsistentNaming
+        dirtyFlag = new ko.dirtyFlag({
+            Description: Description,
+            Price: Price,
+            Savings: Savings,
+            VoucherCode: VoucherCode
+
+        }),
+        // Has Changes
+        hasChanges = ko.computed(function () {
+            return dirtyFlag.isDirty();
+        }),
+        convertToServerData = function () {
+            return {
+                CouponPriceOptionId: CouponPriceOptionId(),
+                CouponId: CouponId(),
+                Price: Price(),
+                Description: Description(),
+                Savings: Savings(),
+                OptionUrl: OptionUrl(),
+                VoucherCode: VoucherCode()
+            }
+        },
+        // Reset
+        reset = function () {
+            dirtyFlag.reset();
+        };
+        self = {
+
+            CouponPriceOptionId: CouponPriceOptionId,
+            CouponId: CouponId,
+            Price: Price,
+            Description: Description,
+            Savings: Savings,
+            OptionUrl: OptionUrl,
+            VoucherCode: VoucherCode,
+
+            isValid: isValid,
+            errors: errors,
+            dirtyFlag: dirtyFlag,
+            hasChanges: hasChanges,
+            convertToServerData: convertToServerData,
+            reset: reset
+        };
+        return self;
+    };
+
+    //function to attain cancel button functionality 
+    CouponPriceOption.CreateFromClientModel = function (source) {
+        return new CouponPriceOption(source.CouponPriceOptionId, source.CouponId, source.Description, source.Price, source.Savings, source.OptionUrl, source.VoucherCode);
+    };
+
+
+    CouponPriceOption.Create = function (source) {
+        return new CouponPriceOption(source.CouponPriceOptionId, source.CouponId, source.Description, source.Price, source.Savings, source.OptionUrl, source.VoucherCode);
+    };
+    
+
     return {
         Coupon: Coupon,
         selectedCouponCategory: selectedCouponCategory,
+        CouponPriceOption: CouponPriceOption
     };
+
+
+
 });

@@ -13,7 +13,7 @@ namespace SMD.Models.DomainModels
         public string Description { get; set; }
         public Nullable<double> Price { get; set; }
         public Nullable<double> Savings { get; set; }
-        public string CoucherCode { get; set; }
+        public string VoucherCode { get; set; }
         public string OptionUrl { get; set; }
 
         public virtual Coupon Coupon { get; set; }
