@@ -2458,16 +2458,46 @@ else
         $("#videoUploader").click();
 
     }
+    $(document).ready(function () {
+        var modeLoc = GetURLParameter("mode");
+        if (modeLoc == 1) {
+
+        } else {
+            $(".hideInGames").css("display", "none");
+            $(".showInGames").css("display", "block");
+
+        }
+
+    });
+    $(".txtBuyItlbl").keyup(function() {
+
+        $("#ddTextBtns").val($( "#txtBuyItlbl" ).val());
+        console.log($("#ddTextBtns").val());
+    });
+
 </script>
 <script type="">
+      
+    function showUploadDialog() {
+        $("#logo_image_file").click();
 
-    $(document).ready(function () {
-        
-        
-    });
-    $(function () {
-        
-    })
+    }
+    function showCouponDialog1() {
+        $("#campaignType_coupon_file1").click();
+
+    }
+    function showCouponDialog2() {
+        $("#campaignType_coupon_file2").click();
+
+    }
+    function showCouponDialog3() {
+        $("#campaignType_coupon_file3").click();
+
+    }
+    function showCouponDialog4() {
+        $("#campaignType_image_file1").click();
+
+    }
     function playVideo(event) {
 
         var playSelectedFile = function (event) {
@@ -2496,31 +2526,11 @@ else
 </script>
 
 
-<script>
+<script type="text/javascript">
 
-   // $("#panelArea").css("display", "none");
-  //  $("#MainSpan").css("display", "none");
-    
-    function showUploadDialog() {
-        $("#logo_image_file").click();
+    // $("#panelArea").css("display", "none");
+    //  $("#MainSpan").css("display", "none");
 
-    }
-    function showCouponDialog1() {
-        $("#campaignType_coupon_file1").click();
-
-    }
-    function showCouponDialog2() {
-        $("#campaignType_coupon_file2").click();
-
-    }
-    function showCouponDialog3() {
-        $("#campaignType_coupon_file3").click();
-
-    }
-    function showCouponDialog4() {
-        $("#campaignType_image_file1").click();
-
-    }
     var logoImage = "";
     var bannerImage1 = "";
     var bannerImage2 = "";
@@ -2541,6 +2551,7 @@ else
             if (mode == 1) {
                 $("#imgLogo").attr("src", this.src).change();
                 logoImage = this.src;
+                
                 $(".close").click();
             } else if (mode == 2) {
                 $("#bannerImage1").attr("src", this.src).change();
@@ -2557,22 +2568,7 @@ else
             }
         });
     }
-    $(document).ready(function () {
-        var modeLoc = GetURLParameter("mode");
-        if (modeLoc == 1) {
-           
-        } else {
-            $(".hideInGames").css("display", "none");
-            $(".showInGames").css("display", "block");
-          
-        }
-        
-    });
-    $(".txtBuyItlbl").keyup(function() {
-            
-        $("#ddTextBtns").val($( "#txtBuyItlbl" ).val());
-        console.log($("#ddTextBtns").val());
-    });
+   
 </script>
 
 <!-- Modal -->
@@ -2580,7 +2576,7 @@ else
     <div class="modal-dialog" role="document" style="width:1150px;">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button"  class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">Select an Image or upload</h4>
             </div>
             <div class="modal-body">
