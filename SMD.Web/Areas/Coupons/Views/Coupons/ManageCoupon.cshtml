@@ -151,7 +151,7 @@ else
                                 </div>
 
 
-                                <h3>Sub Categories</h3>
+                                <h3>Price options</h3>
                                 <div class="col-lg-12" style="padding-left:0px;padding-right:0px;">
                                     <header class="main-box-header clearfix" style="padding-right:0px;">
                                         @*<h2>Sub Categories</h2>*@
@@ -160,8 +160,8 @@ else
                         <input type="text" class="form-control" placeholder="Search...">
                         <i class="fa fa-search search-icon"></i>
                     </div>*@
-                                            <a href="#" class="btn btn-primary pull-right" ddata-bind="click: $root.onCreateNewStockSubCategory">
-                                                Add New Sub Category
+                                            <a href="#" class="btn btn-primary pull-right" data-bind="click: $root.onCreatePriceOption">
+                                                Add New Price Option
                                             </a>
                                         </div>
                                     </header>
@@ -171,16 +171,17 @@ else
                                                 <thead>
                                                     <tr>
                                                         <th class="col-lg-1"></th>
-                                                        <th class="col-lg-3"><span>Code</span></th>
-                                                        <th class="col-lg-2"> <span>Name</span></th>
-                                                        <th class="col-lg-2"> <span>Description</span></th>
-                                                        <th class="col-lg-2">&nbsp;</th>
+                                                        <th class="col-lg-6"><span>Description</span></th>
+                                                        <th class="col-lg-1"> <span>Price</span></th>
+                                                        <th class="col-lg-1"> <span>Savings</span></th>
+                                                        <th class="col-lg-1"> <span>Voucher Code</span></th>
+                                                       
                                                         <th class="col-lg-2">&nbsp;</th>
 
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <!-- ko template: { name: $root.templateToUseStockSubCategories , foreach: $root.selectedStockCategory().stockSubCategories } -->
+                                                    <!-- ko template: { name: $root.templateToUsePriceOptions , foreach: $root.couponModel().CouponPriceOptions } -->
                                                     <!-- /ko -->
                                                 </tbody>
                                             </table>
@@ -1033,42 +1034,64 @@ else
 @Html.Partial("~/Areas/Coupons/Views/Coupons/_addEditCouponCategories.cshtml")
 
 
+<script id="editActionPirceOptionTemplate" type="text/html">
+    <a href="#" class="table-link" data-bind="click: $root.selectPriceOption, css: { selectedRow: $data === $root.selectedPriceOption() }">
+        <span class="fa-stack">
+            <i class="fa fa-square fa-stack-2x"></i>
+            <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+        </span>
+    </a>
+</script>
+<script id="deleteActionPriceOptionTemplate" type="text/html">
+    <a href="#" class="table-link danger" data-bind="click: $root.onDeletePriceOption" title="Delete">
+        <span class="fa-stack">
+            <i class="fa fa-square fa-stack-2x"></i>
+            <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+        </span>
+    </a>
+</script>
 
 
-<script id="editStockSubCategoryTemplate" type="text/html">
-    <tr data-bind="css: { selectedRow: $data === $root.selectedStockSubCategory() }">
+<script id="editPriceOptionTemplate" type="text/html">
+    edit
+    <tr data-bind="css: { selectedRow: $data === $root.selectedPriceOption() }">
         <td>&nbsp;</td>
         <td>
-            <input type="text" class="form-control" data-bind="value: code, validationTooltip: code" />
+            <textarea class="form-control" data-bind="value: Description" placeholder="Max 72 characters" maxlength="72" style="height: 60px;" />
         </td>
         <td>
-            <input type="text" class="form-control" data-bind="value: name, validationTooltip: name" />
+            <input type="text" class="form-control" data-bind="value: Price" maxlength="7" />
         </td>
         <td>
-            <input type="text" class="form-control" data-bind="value: description, validationTooltip: description" />
+            <input type="text" class="form-control" data-bind="value: Savings" maxlength="7" />
         </td>
-        <td>&nbsp;</td>
+        <td>
+            <input type="text" class="form-control" data-bind="value: VoucherCode" maxlength="32" />
+        </td>
+        
 
         <td id="actionColumn" style="text-align:right;">
-            <!-- ko template: { name: 'editActionStockSubCategoryTemplate' } -->
+            <!-- ko template: { name: 'editActionPirceOptionTemplate' } -->
             <!-- /ko -->
-            <!-- ko template: { name: 'deleteActionStockSubCategoryTemplate' } -->
+            <!-- ko template: { name: 'deleteActionPriceOptionTemplate' } -->
             <!-- /ko -->
         </td>
 
     </tr>
 </script>
-<script id="itemStockSubCategoryTemplate" type="text/html">
+<script id="itemPriceOptionTemplate" type="text/html">
+    item
     <tr>
         <td>&nbsp;</td>
-        <td data-bind="text: code"></td>
-        <td data-bind="text: name"></td>
-        <td data-bind="text: description"></td>
-        <td>&nbsp;</td>
+        <td data-bind="text: Description"></td>
+        <td data-bind="text: Price"></td>
+        <td data-bind="text: Savings"></td>
+        <td data-bind="text: VoucherCode"></td>
+       
         <td id="actionColumn" style="text-align:right;">
-            <!-- ko template: { name: 'editActionStockSubCategoryTemplate' } -->
+            <!-- ko template: { name: 'editActionPirceOptionTemplate' } -->
             <!-- /ko -->
-            <!-- ko template: { name: 'deleteActionStockSubCategoryTemplate' } -->
+            <!-- ko template: { name: 'deleteActionPriceOptionTemplate' } -->
             <!-- /ko -->
         </td>
 

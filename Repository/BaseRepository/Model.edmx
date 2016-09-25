@@ -478,7 +478,7 @@
           <Property Name="Description" Type="nvarchar" MaxLength="500" />
           <Property Name="Price" Type="float" />
           <Property Name="Savings" Type="float" />
-          <Property Name="CoucherCode" Type="nvarchar" MaxLength="100" />
+          <Property Name="VoucherCode" Type="nvarchar" MaxLength="100" />
           <Property Name="OptionUrl" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="Currency">
@@ -5634,9 +5634,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Price" Type="Double" />
           <Property Name="Savings" Type="Double" />
-          <Property Name="CoucherCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="OptionUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Coupon" Relationship="DomainModels.FK_CouponPriceOption_Coupon" FromRole="CouponPriceOption" ToRole="Coupon" />
+          <Property Name="VoucherCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_CouponPriceOption_Coupon">
           <End Type="DomainModels.Coupon" Role="Coupon" Multiplicity="0..1" />
@@ -7317,8 +7317,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <EntitySetMapping Name="CouponPriceOptions">
             <EntityTypeMapping TypeName="DomainModels.CouponPriceOption">
               <MappingFragment StoreEntitySet="CouponPriceOption">
+                <ScalarProperty Name="VoucherCode" ColumnName="VoucherCode" />
                 <ScalarProperty Name="OptionUrl" ColumnName="OptionUrl" />
-                <ScalarProperty Name="CoucherCode" ColumnName="CoucherCode" />
                 <ScalarProperty Name="Savings" ColumnName="Savings" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
