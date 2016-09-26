@@ -31,7 +31,7 @@
                             <div class="tab-pane fade in active" data-bind="with: $root.selectedCampaign" id="tab-generalinfo">
                                 <div class="col-lg-12 form-horizontal">
                                     <h3 class="group-header" style="margin-top:20px;" data-bind="visible:!$root.isShowCopounMode()">
-                                       Vidio ad campaign
+                                        Vidio ad campaign
                                     </h3>
                                     <h3 class="group-header" style="margin-top:20px;" data-bind="visible:$root.isShowCopounMode()">
                                         Coupon General Info
@@ -104,18 +104,18 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-9 marginBottom12" data-bind="visible:imagePath()!=''">
-                                        <div class="form-group">
-                                            <div class="col-lg-4 text-right">
-                                                <label class="control-label text-right tooltip-float">Logo</label>
+                                    @*<div class="col-lg-9 marginBottom12" data-bind="visible:imagePath()!=''">
+                                            <div class="form-group">
+                                                <div class="col-lg-4 text-right">
+                                                    <label class="control-label text-right tooltip-float">Logo</label>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <img id="vehicleImage" alt="" style="width: auto;height:80px" data-bind="attr:{src:'/'+ imagePath()}" />
+                                                    <h5><span></span></h5>
+                                                </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <img id="vehicleImage" alt="" style="width: auto;height:80px" data-bind="attr:{src:'/'+ imagePath()}" />
-                                                <h5><span></span></h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-9" data-bind="visible:!$root.isShowCopounMode()">
+                                        </div>*@
+                                    <div class="col-lg-9" style="display:none" > @*data-bind="visible:!$root.isShowCopounMode()"*@
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
                                                 <label class="control-label text-right tooltip-float">Max Budget</label>
@@ -125,7 +125,28 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-9" data-bind="visible:!$root.isShowCopounMode()">
+
+                                    <div class="col-lg-12" data-bind="visible:!$root.isShowCopounMode()">
+                                        <div class="col-lg-9">
+                                            <div class="form-group">
+                                                <div class="col-lg-4 text-right">
+                                                    <label class="control-label text-right tooltip-float">Daily Budget</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <input type="text" readonly class="form-control" data-bind="value: maxDailyBudget">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 marginBottom12" style="margin-bottom:0px;" data-bind="visible:imagePath()!=''">
+                                            <div class="col-md-6">
+                                                <label>Logo</label>
+                                                <img id="vehicleImage" alt="" style="width: auto;height:80px" data-bind="attr:{src:'/'+ imagePath()}" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    @*<div class="col-lg-9" data-bind="visible:!$root.isShowCopounMode()">
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
                                                 <label class="control-label text-right tooltip-float">Max Daily Budget</label>
@@ -134,18 +155,18 @@
                                                 <input type="text" readonly class="form-control" data-bind="value:maxDailyBudget">
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>*@
                                     <div class="col-lg-9" data-bind="visible:!$root.isShowCopounMode()">
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
-                                                <label class="control-label text-right tooltip-float">Click Rate</label>
+                                                <label class="control-label text-right tooltip-float">Ad Click</label>
                                             </div>
                                             <div class="col-lg-6">
                                                 <input type="text" readonly class="form-control" data-bind="value: clickRate">
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-9">
+                                    <div class="col-lg-9" style="display:none">
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
                                                 <label class="control-label text-right tooltip-float">Currency Symbol</label>
@@ -156,15 +177,15 @@
                                         </div>
                                     </div>
                                     @*<div class="col-lg-9" data-bind="visible:!$root.isShowCopounMode()" style="display:none">
-                                        <div class="form-group">
-                                            <div class="col-lg-4 text-right">
-                                                <label class="control-label text-right tooltip-float">Type</label>
+                                            <div class="form-group">
+                                                <div class="col-lg-4 text-right">
+                                                    <label class="control-label text-right tooltip-float">Type</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <input type="text" readonly class="form-control" data-bind="value: type()==1 ? 'Video':'Link'">
+                                                </div>
                                             </div>
-                                            <div class="col-lg-6">
-                                                <input type="text" readonly class="form-control" data-bind="value: type()==1 ? 'Video':'Link'">
-                                            </div>
-                                        </div>
-                                    </div>*@
+                                        </div>*@
                                     <div class="col-lg-9" style="display:none;">
                                         @*Todo::pilot data-bind="visible:!$root.isShowCopounMode()"*@
                                         <div class="form-group">
@@ -295,7 +316,7 @@
                                         </div>
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
-                                                <label class="control-label text-right tooltip-float">First Line</label>
+                                                <label class="control-label text-right tooltip-float">Call For Action</label>
                                             </div>
                                             <div class="col-lg-6">
                                                 <input type="text" readonly class="form-control" data-bind="value:buyItLine1">
@@ -303,7 +324,7 @@
                                         </div>
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
-                                                <label class="control-label text-right tooltip-float">Url</label>
+                                                <label class="control-label text-right tooltip-float">Test Url</label>
                                             </div>
                                             <div class="col-lg-6">
                                                 <input type="text" readonly class="form-control" data-bind="value:videoUrl">
@@ -311,7 +332,7 @@
                                         </div>
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
-                                                <label class="control-label text-right tooltip-float">Button Label</label>
+                                                <label class="control-label text-right tooltip-float">Test Button</label>
                                             </div>
                                             <div class="col-lg-6">
                                                 <input type="text" readonly class="form-control" data-bind="value:buyItButtonLabel">
@@ -324,14 +345,14 @@
                                                 <div class="form-group">
                                                     <div class="col-lg-4 text-right">
                                                         @*<div class="bs-example-tooltips tooltip-float-width">
-                        <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
-                            <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                        </a>
-                    </div>*@
+                                                                <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
+                                                                    <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                                                </a>
+                                                            </div>*@
                                                         <label class="control-label text-right tooltip-float">Rejection Reason</label>
                                                     </div>
                                                     <div class="col-lg-6">
-                                                        <textarea placeholder="Enter rejection reason " class="form-control" data-bind="value: rejectionReason"></textarea>
+                                                        <textarea placeholder="Enter rejection reason " style=" resize: none" class="form-control" data-bind="value: rejectionReason"></textarea>
                                                         @*<input type="text" placeholder="Enter rejection reason " class="form-control" data-bind="value: rejectionReason">*@
                                                     </div>
                                                 </div>
@@ -349,7 +370,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                  
+
                                 </div>
                             </div>
                         </div>
