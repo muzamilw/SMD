@@ -377,6 +377,7 @@
           <Property Name="CountryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CountryName" Type="nvarchar" MaxLength="200" />
           <Property Name="CountryCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="CurrencyID" Type="int" />
         </EntityType>
         <EntityType Name="Coupon">
           <Key>
@@ -988,6 +989,84 @@ warning 6002: The table/view 'SMDDev.dbo.vw_CompanyUsers' does not have a primar
           <Property Name="RoleId" Type="nvarchar" MaxLength="128" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'SMDDev.dbo.vw_Coupons' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_Coupons">
+          <Key>
+            <PropertyRef Name="CouponId" />
+          </Key>
+          <Property Name="CouponId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="LanguageId" Type="int" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+          <Property Name="CouponTitle" Type="nvarchar" MaxLength="200" />
+          <Property Name="SearchKeywords" Type="nvarchar(max)" />
+          <Property Name="Status" Type="int" />
+          <Property Name="Archived" Type="bit" />
+          <Property Name="Approved" Type="bit" />
+          <Property Name="ApprovedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="ApprovalDateTime" Type="datetime" />
+          <Property Name="CreatedDateTime" Type="datetime" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="100" />
+          <Property Name="ModifiedDateTime" Type="datetime" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="100" />
+          <Property Name="RejectedReason" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Rejecteddatetime" Type="datetime" />
+          <Property Name="RejectedBy" Type="nvarchar" MaxLength="100" />
+          <Property Name="CurrencyId" Type="int" />
+          <Property Name="Price" Type="float" />
+          <Property Name="Savings" Type="float" />
+          <Property Name="SwapCost" Type="float" />
+          <Property Name="CouponViewCount" Type="int" />
+          <Property Name="CouponIssuedCount" Type="int" />
+          <Property Name="CouponRedeemedCount" Type="int" />
+          <Property Name="CouponQtyPerUser" Type="int" />
+          <Property Name="CouponListingMode" Type="int" />
+          <Property Name="CompanyId" Type="int" />
+          <Property Name="CouponActiveMonth" Type="int" />
+          <Property Name="CouponActiveYear" Type="int" />
+          <Property Name="CouponExpirydate" Type="datetime" />
+          <Property Name="couponImage1" Type="nvarchar(max)" />
+          <Property Name="CouponImage2" Type="nvarchar(max)" />
+          <Property Name="CouponImage3" Type="nvarchar(max)" />
+          <Property Name="LogoUrl" Type="nvarchar" MaxLength="200" />
+          <Property Name="HighlightLine1" Type="nvarchar" MaxLength="800" />
+          <Property Name="HighlightLine2" Type="nvarchar" MaxLength="100" />
+          <Property Name="HighlightLine3" Type="nvarchar" MaxLength="100" />
+          <Property Name="HighlightLine4" Type="nvarchar" MaxLength="100" />
+          <Property Name="HighlightLine5" Type="nvarchar" MaxLength="100" />
+          <Property Name="FinePrintLine1" Type="nvarchar" MaxLength="800" />
+          <Property Name="FinePrintLine2" Type="nvarchar" MaxLength="100" />
+          <Property Name="FinePrintLine3" Type="nvarchar" MaxLength="100" />
+          <Property Name="FinePrintLine4" Type="nvarchar" MaxLength="100" />
+          <Property Name="FinePrintLine5" Type="nvarchar" MaxLength="100" />
+          <Property Name="LocationBranchId" Type="bigint" />
+          <Property Name="LocationTitle" Type="nvarchar" MaxLength="500" />
+          <Property Name="LocationLine1" Type="nvarchar" MaxLength="500" />
+          <Property Name="LocationLine2" Type="nvarchar" MaxLength="500" />
+          <Property Name="LocationCity" Type="nvarchar" MaxLength="500" />
+          <Property Name="LocationState" Type="nvarchar" MaxLength="500" />
+          <Property Name="LocationZipCode" Type="nvarchar" MaxLength="500" />
+          <Property Name="LocationLAT" Type="nvarchar" MaxLength="50" />
+          <Property Name="LocationLON" Type="nvarchar" MaxLength="50" />
+          <Property Name="LocationPhone" Type="nvarchar" MaxLength="200" />
+          <Property Name="GeographyColumn" Type="geography" />
+          <Property Name="HowToRedeemLine1" Type="nvarchar" MaxLength="500" />
+          <Property Name="HowToRedeemLine2" Type="nvarchar" MaxLength="500" />
+          <Property Name="HowToRedeemLine3" Type="nvarchar" MaxLength="500" />
+          <Property Name="HowToRedeemLine4" Type="nvarchar" MaxLength="500" />
+          <Property Name="HowToRedeemLine5" Type="nvarchar" MaxLength="500" />
+          <Property Name="SubmissionDateTime" Type="datetime" />
+          <Property Name="LocationCountryId" Type="int" />
+          <Property Name="CouponStartDate" Type="datetime" />
+          <Property Name="CouponEndDate" Type="datetime" />
+          <Property Name="Priority" Type="int" />
+          <Property Name="ShowBuyitBtn" Type="bit" />
+          <Property Name="BuyitLandingPageUrl" Type="nvarchar" MaxLength="500" />
+          <Property Name="BuyitBtnLabel" Type="nvarchar" MaxLength="200" />
+          <Property Name="Categories" Type="nvarchar(max)" />
+          <Property Name="CurrencyCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="CurrencySymbol" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'SMDDev.dbo.vw_GetUserTransactions' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vw_GetUserTransactions">
           <Key>
@@ -1392,6 +1471,18 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
             </Principal>
             <Dependent Role="CompanyBranch">
               <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Country_Currency">
+          <End Role="Currency" Type="Self.Currency" Multiplicity="0..1" />
+          <End Role="Country" Type="Self.Country" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currency">
+              <PropertyRef Name="CurrencyID" />
+            </Principal>
+            <Dependent Role="Country">
+              <PropertyRef Name="CurrencyID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2332,6 +2423,81 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
     [vw_CompanyUsers].[RoleId] AS [RoleId]
     FROM [dbo].[vw_CompanyUsers] AS [vw_CompanyUsers]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="vw_Coupons" EntityType="Self.vw_Coupons" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_Coupons].[CouponId] AS [CouponId], 
+    [vw_Coupons].[LanguageId] AS [LanguageId], 
+    [vw_Coupons].[UserId] AS [UserId], 
+    [vw_Coupons].[CouponTitle] AS [CouponTitle], 
+    [vw_Coupons].[SearchKeywords] AS [SearchKeywords], 
+    [vw_Coupons].[Status] AS [Status], 
+    [vw_Coupons].[Archived] AS [Archived], 
+    [vw_Coupons].[Approved] AS [Approved], 
+    [vw_Coupons].[ApprovedBy] AS [ApprovedBy], 
+    [vw_Coupons].[ApprovalDateTime] AS [ApprovalDateTime], 
+    [vw_Coupons].[CreatedDateTime] AS [CreatedDateTime], 
+    [vw_Coupons].[CreatedBy] AS [CreatedBy], 
+    [vw_Coupons].[ModifiedDateTime] AS [ModifiedDateTime], 
+    [vw_Coupons].[ModifiedBy] AS [ModifiedBy], 
+    [vw_Coupons].[RejectedReason] AS [RejectedReason], 
+    [vw_Coupons].[Rejecteddatetime] AS [Rejecteddatetime], 
+    [vw_Coupons].[RejectedBy] AS [RejectedBy], 
+    [vw_Coupons].[CurrencyId] AS [CurrencyId], 
+    [vw_Coupons].[Price] AS [Price], 
+    [vw_Coupons].[Savings] AS [Savings], 
+    [vw_Coupons].[SwapCost] AS [SwapCost], 
+    [vw_Coupons].[CouponViewCount] AS [CouponViewCount], 
+    [vw_Coupons].[CouponIssuedCount] AS [CouponIssuedCount], 
+    [vw_Coupons].[CouponRedeemedCount] AS [CouponRedeemedCount], 
+    [vw_Coupons].[CouponQtyPerUser] AS [CouponQtyPerUser], 
+    [vw_Coupons].[CouponListingMode] AS [CouponListingMode], 
+    [vw_Coupons].[CompanyId] AS [CompanyId], 
+    [vw_Coupons].[CouponActiveMonth] AS [CouponActiveMonth], 
+    [vw_Coupons].[CouponActiveYear] AS [CouponActiveYear], 
+    [vw_Coupons].[CouponExpirydate] AS [CouponExpirydate], 
+    [vw_Coupons].[couponImage1] AS [couponImage1], 
+    [vw_Coupons].[CouponImage2] AS [CouponImage2], 
+    [vw_Coupons].[CouponImage3] AS [CouponImage3], 
+    [vw_Coupons].[LogoUrl] AS [LogoUrl], 
+    [vw_Coupons].[HighlightLine1] AS [HighlightLine1], 
+    [vw_Coupons].[HighlightLine2] AS [HighlightLine2], 
+    [vw_Coupons].[HighlightLine3] AS [HighlightLine3], 
+    [vw_Coupons].[HighlightLine4] AS [HighlightLine4], 
+    [vw_Coupons].[HighlightLine5] AS [HighlightLine5], 
+    [vw_Coupons].[FinePrintLine1] AS [FinePrintLine1], 
+    [vw_Coupons].[FinePrintLine2] AS [FinePrintLine2], 
+    [vw_Coupons].[FinePrintLine3] AS [FinePrintLine3], 
+    [vw_Coupons].[FinePrintLine4] AS [FinePrintLine4], 
+    [vw_Coupons].[FinePrintLine5] AS [FinePrintLine5], 
+    [vw_Coupons].[LocationBranchId] AS [LocationBranchId], 
+    [vw_Coupons].[LocationTitle] AS [LocationTitle], 
+    [vw_Coupons].[LocationLine1] AS [LocationLine1], 
+    [vw_Coupons].[LocationLine2] AS [LocationLine2], 
+    [vw_Coupons].[LocationCity] AS [LocationCity], 
+    [vw_Coupons].[LocationState] AS [LocationState], 
+    [vw_Coupons].[LocationZipCode] AS [LocationZipCode], 
+    [vw_Coupons].[LocationLAT] AS [LocationLAT], 
+    [vw_Coupons].[LocationLON] AS [LocationLON], 
+    [vw_Coupons].[LocationPhone] AS [LocationPhone], 
+    [vw_Coupons].[GeographyColumn] AS [GeographyColumn], 
+    [vw_Coupons].[HowToRedeemLine1] AS [HowToRedeemLine1], 
+    [vw_Coupons].[HowToRedeemLine2] AS [HowToRedeemLine2], 
+    [vw_Coupons].[HowToRedeemLine3] AS [HowToRedeemLine3], 
+    [vw_Coupons].[HowToRedeemLine4] AS [HowToRedeemLine4], 
+    [vw_Coupons].[HowToRedeemLine5] AS [HowToRedeemLine5], 
+    [vw_Coupons].[SubmissionDateTime] AS [SubmissionDateTime], 
+    [vw_Coupons].[LocationCountryId] AS [LocationCountryId], 
+    [vw_Coupons].[CouponStartDate] AS [CouponStartDate], 
+    [vw_Coupons].[CouponEndDate] AS [CouponEndDate], 
+    [vw_Coupons].[Priority] AS [Priority], 
+    [vw_Coupons].[ShowBuyitBtn] AS [ShowBuyitBtn], 
+    [vw_Coupons].[BuyitLandingPageUrl] AS [BuyitLandingPageUrl], 
+    [vw_Coupons].[BuyitBtnLabel] AS [BuyitBtnLabel], 
+    [vw_Coupons].[Categories] AS [Categories], 
+    [vw_Coupons].[CurrencyCode] AS [CurrencyCode], 
+    [vw_Coupons].[CurrencySymbol] AS [CurrencySymbol]
+    FROM [dbo].[vw_Coupons] AS [vw_Coupons]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="vw_GetUserTransactions" EntityType="Self.vw_GetUserTransactions" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [vw_GetUserTransactions].[tid] AS [tid], 
@@ -2482,6 +2648,10 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <AssociationSet Name="FK_CompanyBranch_Company" Association="Self.FK_CompanyBranch_Company">
             <End Role="Company" EntitySet="Company" />
             <End Role="CompanyBranch" EntitySet="CompanyBranch" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Country_Currency" Association="Self.FK_Country_Currency">
+            <End Role="Currency" EntitySet="Currency" />
+            <End Role="Country" EntitySet="Country" />
           </AssociationSet>
           <AssociationSet Name="FK_Coupon_Company" Association="Self.FK_Coupon_Company">
             <End Role="Company" EntitySet="Company" />
@@ -3288,6 +3458,11 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
             <End Role="City" EntitySet="Cities" />
             <End Role="SurveyQuestionTargetLocation" EntitySet="SurveyQuestionTargetLocations" />
           </AssociationSet>
+          <EntitySet Name="vw_Coupons" EntityType="DomainModels.vw_Coupons" />
+          <AssociationSet Name="FK_Country_Currency" Association="DomainModels.FK_Country_Currency">
+            <End Role="Currency" EntitySet="Currencies" />
+            <End Role="Country" EntitySet="Countries" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="ProfileQuestion">
           <Key>
@@ -3408,6 +3583,8 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <NavigationProperty Name="ProfileQuestionTargetLocations" Relationship="DomainModels.FK_ProfileQuestionTargetLocation_Country" FromRole="Country" ToRole="ProfileQuestionTargetLocation" />
           <NavigationProperty Name="Companies" Relationship="DomainModels.FK_Company_Country" FromRole="Country" ToRole="Company" />
           <NavigationProperty Name="Cities" Relationship="DomainModels.FK_City_Country" FromRole="Country" ToRole="City" />
+          <Property Name="CurrencyID" Type="Int32" />
+          <NavigationProperty Name="Currency" Relationship="DomainModels.FK_Country_Currency" FromRole="Country" ToRole="Currency" />
         </EntityType>
         <EntityType Name="Language">
           <Key>
@@ -3607,6 +3784,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <Property Name="SMDCreditRatio" Type="Double" />
           <Property Name="CurrencySymbol" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Products" Relationship="DomainModels.FK_SMDPrice_Currency" FromRole="Currency" ToRole="Product" />
+          <NavigationProperty Name="Countries" Relationship="DomainModels.FK_Country_Currency" FromRole="Currency" ToRole="Country" />
         </EntityType>
         <EntityType Name="Transaction">
           <Key>
@@ -5991,6 +6169,94 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="vw_Coupons">
+          <Key>
+            <PropertyRef Name="CouponId" />
+          </Key>
+          <Property Name="CouponId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LanguageId" Type="Int32" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CouponTitle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="SearchKeywords" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="Archived" Type="Boolean" />
+          <Property Name="Approved" Type="Boolean" />
+          <Property Name="ApprovedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ApprovalDateTime" Type="DateTime" Precision="3" />
+          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="RejectedReason" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Rejecteddatetime" Type="DateTime" Precision="3" />
+          <Property Name="RejectedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CurrencyId" Type="Int32" />
+          <Property Name="Price" Type="Double" />
+          <Property Name="Savings" Type="Double" />
+          <Property Name="SwapCost" Type="Double" />
+          <Property Name="CouponViewCount" Type="Int32" />
+          <Property Name="CouponIssuedCount" Type="Int32" />
+          <Property Name="CouponRedeemedCount" Type="Int32" />
+          <Property Name="CouponQtyPerUser" Type="Int32" />
+          <Property Name="CouponListingMode" Type="Int32" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="CouponActiveMonth" Type="Int32" />
+          <Property Name="CouponActiveYear" Type="Int32" />
+          <Property Name="CouponExpirydate" Type="DateTime" Precision="3" />
+          <Property Name="couponImage1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CouponImage2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CouponImage3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LogoUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="HighlightLine1" Type="String" MaxLength="800" FixedLength="false" Unicode="true" />
+          <Property Name="HighlightLine2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="HighlightLine3" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="HighlightLine4" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="HighlightLine5" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FinePrintLine1" Type="String" MaxLength="800" FixedLength="false" Unicode="true" />
+          <Property Name="FinePrintLine2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FinePrintLine3" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FinePrintLine4" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FinePrintLine5" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LocationBranchId" Type="Int64" />
+          <Property Name="LocationTitle" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="LocationLine1" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="LocationLine2" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="LocationCity" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="LocationState" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="LocationZipCode" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="LocationLAT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LocationLON" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LocationPhone" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="GeographyColumn" Type="Geography" />
+          <Property Name="HowToRedeemLine1" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="HowToRedeemLine2" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="HowToRedeemLine3" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="HowToRedeemLine4" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="HowToRedeemLine5" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="SubmissionDateTime" Type="DateTime" Precision="3" />
+          <Property Name="LocationCountryId" Type="Int32" />
+          <Property Name="CouponStartDate" Type="DateTime" Precision="3" />
+          <Property Name="CouponEndDate" Type="DateTime" Precision="3" />
+          <Property Name="Priority" Type="Int32" />
+          <Property Name="ShowBuyitBtn" Type="Boolean" />
+          <Property Name="BuyitLandingPageUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="BuyitBtnLabel" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Categories" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CurrencyCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CurrencySymbol" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_Country_Currency">
+          <End Type="DomainModels.Currency" Role="Currency" Multiplicity="0..1" />
+          <End Type="DomainModels.Country" Role="Country" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currency">
+              <PropertyRef Name="CurrencyId" />
+            </Principal>
+            <Dependent Role="Country">
+              <PropertyRef Name="CurrencyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -6094,6 +6360,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
           <EntitySetMapping Name="Countries">
             <EntityTypeMapping TypeName="DomainModels.Country">
               <MappingFragment StoreEntitySet="Country">
+                <ScalarProperty Name="CurrencyID" ColumnName="CurrencyID" />
                 <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
                 <ScalarProperty Name="CountryName" ColumnName="CountryName" />
                 <ScalarProperty Name="CountryId" ColumnName="CountryID" />
@@ -7407,6 +7674,83 @@ warning 6002: The table/view 'SMDDev.dbo.vw_PublisherTransaction' does not have 
                 <ScalarProperty Name="IsCapital" ColumnName="IsCapital" />
                 <ScalarProperty Name="CityName" ColumnName="CityName" />
                 <ScalarProperty Name="CityId" ColumnName="CityId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_Coupons">
+            <EntityTypeMapping TypeName="DomainModels.vw_Coupons">
+              <MappingFragment StoreEntitySet="vw_Coupons">
+                <ScalarProperty Name="CurrencySymbol" ColumnName="CurrencySymbol" />
+                <ScalarProperty Name="CurrencyCode" ColumnName="CurrencyCode" />
+                <ScalarProperty Name="Categories" ColumnName="Categories" />
+                <ScalarProperty Name="BuyitBtnLabel" ColumnName="BuyitBtnLabel" />
+                <ScalarProperty Name="BuyitLandingPageUrl" ColumnName="BuyitLandingPageUrl" />
+                <ScalarProperty Name="ShowBuyitBtn" ColumnName="ShowBuyitBtn" />
+                <ScalarProperty Name="Priority" ColumnName="Priority" />
+                <ScalarProperty Name="CouponEndDate" ColumnName="CouponEndDate" />
+                <ScalarProperty Name="CouponStartDate" ColumnName="CouponStartDate" />
+                <ScalarProperty Name="LocationCountryId" ColumnName="LocationCountryId" />
+                <ScalarProperty Name="SubmissionDateTime" ColumnName="SubmissionDateTime" />
+                <ScalarProperty Name="HowToRedeemLine5" ColumnName="HowToRedeemLine5" />
+                <ScalarProperty Name="HowToRedeemLine4" ColumnName="HowToRedeemLine4" />
+                <ScalarProperty Name="HowToRedeemLine3" ColumnName="HowToRedeemLine3" />
+                <ScalarProperty Name="HowToRedeemLine2" ColumnName="HowToRedeemLine2" />
+                <ScalarProperty Name="HowToRedeemLine1" ColumnName="HowToRedeemLine1" />
+                <ScalarProperty Name="GeographyColumn" ColumnName="GeographyColumn" />
+                <ScalarProperty Name="LocationPhone" ColumnName="LocationPhone" />
+                <ScalarProperty Name="LocationLON" ColumnName="LocationLON" />
+                <ScalarProperty Name="LocationLAT" ColumnName="LocationLAT" />
+                <ScalarProperty Name="LocationZipCode" ColumnName="LocationZipCode" />
+                <ScalarProperty Name="LocationState" ColumnName="LocationState" />
+                <ScalarProperty Name="LocationCity" ColumnName="LocationCity" />
+                <ScalarProperty Name="LocationLine2" ColumnName="LocationLine2" />
+                <ScalarProperty Name="LocationLine1" ColumnName="LocationLine1" />
+                <ScalarProperty Name="LocationTitle" ColumnName="LocationTitle" />
+                <ScalarProperty Name="LocationBranchId" ColumnName="LocationBranchId" />
+                <ScalarProperty Name="FinePrintLine5" ColumnName="FinePrintLine5" />
+                <ScalarProperty Name="FinePrintLine4" ColumnName="FinePrintLine4" />
+                <ScalarProperty Name="FinePrintLine3" ColumnName="FinePrintLine3" />
+                <ScalarProperty Name="FinePrintLine2" ColumnName="FinePrintLine2" />
+                <ScalarProperty Name="FinePrintLine1" ColumnName="FinePrintLine1" />
+                <ScalarProperty Name="HighlightLine5" ColumnName="HighlightLine5" />
+                <ScalarProperty Name="HighlightLine4" ColumnName="HighlightLine4" />
+                <ScalarProperty Name="HighlightLine3" ColumnName="HighlightLine3" />
+                <ScalarProperty Name="HighlightLine2" ColumnName="HighlightLine2" />
+                <ScalarProperty Name="HighlightLine1" ColumnName="HighlightLine1" />
+                <ScalarProperty Name="LogoUrl" ColumnName="LogoUrl" />
+                <ScalarProperty Name="CouponImage3" ColumnName="CouponImage3" />
+                <ScalarProperty Name="CouponImage2" ColumnName="CouponImage2" />
+                <ScalarProperty Name="couponImage1" ColumnName="couponImage1" />
+                <ScalarProperty Name="CouponExpirydate" ColumnName="CouponExpirydate" />
+                <ScalarProperty Name="CouponActiveYear" ColumnName="CouponActiveYear" />
+                <ScalarProperty Name="CouponActiveMonth" ColumnName="CouponActiveMonth" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="CouponListingMode" ColumnName="CouponListingMode" />
+                <ScalarProperty Name="CouponQtyPerUser" ColumnName="CouponQtyPerUser" />
+                <ScalarProperty Name="CouponRedeemedCount" ColumnName="CouponRedeemedCount" />
+                <ScalarProperty Name="CouponIssuedCount" ColumnName="CouponIssuedCount" />
+                <ScalarProperty Name="CouponViewCount" ColumnName="CouponViewCount" />
+                <ScalarProperty Name="SwapCost" ColumnName="SwapCost" />
+                <ScalarProperty Name="Savings" ColumnName="Savings" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="CurrencyId" ColumnName="CurrencyId" />
+                <ScalarProperty Name="RejectedBy" ColumnName="RejectedBy" />
+                <ScalarProperty Name="Rejecteddatetime" ColumnName="Rejecteddatetime" />
+                <ScalarProperty Name="RejectedReason" ColumnName="RejectedReason" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDateTime" ColumnName="ModifiedDateTime" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="ApprovalDateTime" ColumnName="ApprovalDateTime" />
+                <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
+                <ScalarProperty Name="Approved" ColumnName="Approved" />
+                <ScalarProperty Name="Archived" ColumnName="Archived" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="SearchKeywords" ColumnName="SearchKeywords" />
+                <ScalarProperty Name="CouponTitle" ColumnName="CouponTitle" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
+                <ScalarProperty Name="CouponId" ColumnName="CouponId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

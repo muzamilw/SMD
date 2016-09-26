@@ -158,6 +158,9 @@ namespace SMD.Repository.BaseRepository
         /// </summary>
         public DbSet<AdCampaign> AdCampaigns { get; set; }
         public DbSet<Coupon> Coupons { get; set; }
+
+
+        public DbSet<vw_Coupons> vw_Coupons { get; set; }
         /// <summary>
         /// Profile Question Answers
         /// </summary>
@@ -269,6 +272,11 @@ namespace SMD.Repository.BaseRepository
         public DbSet<BranchCategory> BranchCategories { get; set; }
 
         public DbSet<DamImage> DamImage { get; set; }
+
+
+
+        public DbSet<CouponPriceOption> CouponPriceOption { get; set; }
+
 
 
 

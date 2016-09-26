@@ -75,6 +75,7 @@
     <Compile Include="Data\SecurityAccessRight.cs" />
     <Compile Include="IAuthorizationChecker.cs" />
     <Compile Include="IClaimsSecurityService.cs" />
+    <Compile Include="Repository\ICouponPriceOptionRepository.cs" />
     <Compile Include="Repository\IProfileQuestionTargetLocationRepository.cs" />
     <Compile Include="Logger\IMPCLogWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

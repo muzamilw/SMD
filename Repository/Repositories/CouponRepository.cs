@@ -167,6 +167,7 @@ namespace SMD.Repository.Repositories
         }
 
 
+
         //SP cal for mobile apps
         public GetCouponByID_Result GetCouponByIdSP(long CouponId, string UserId, string Lat, string Lon)
         {
@@ -198,7 +199,7 @@ namespace SMD.Repository.Repositories
 
             return db.Coupons.Where(g => g.CompanyId == CompanyId).ToList(); //.GetCouponsByCompanyId(CompanyId).ToList();
         }
-        public IEnumerable<Coupon> GetCouponsForApproval(GetPagedListRequest request, out int rowCount)
+        public IEnumerable<vw_Coupons> GetCouponsForApproval(GetPagedListRequest request, out int rowCount)
         {
             int fromRow = (request.PageNo - 1) * request.PageSize;
             int toRow = request.PageSize;
@@ -210,8 +211,10 @@ namespace SMD.Repository.Repositories
 
             rowCount = DbSet.Count(query);
 
-            var res = DbSet.Where(query)
+            var res = db.vw_Coupons.Where( g=> g.Status == 2)
                     .OrderByDescending(p=>p.SubmissionDateTime);
+
+
             return res.Skip(fromRow)
                     .Take(toRow);
 

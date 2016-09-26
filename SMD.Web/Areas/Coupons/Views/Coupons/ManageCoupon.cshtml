@@ -997,16 +997,16 @@ else
 
                                 @*<button class="btn  btn-success btnSubmitApproval" id="btnSaveAsDraft" data-bind="click:$root.SaveAsDraft, visible: $root.isNewCampaign() " style="width:80%; display:none;">Save as Draft</button>*@
 
-                                <button class="btn  btn-success btnSubmitApproval" id="btnSubmitForApproval2" data-bind="click:$root.submitCampaignData, visible: $root.isNewCampaign() " style="width:88%;">Post Deal for Approval</button>
+                                <button class="btn  btn-success btnSubmitApproval" id="btnSubmitForApproval2" data-bind="click:$root.submitCampaignData, visible: $root.IsSubmitBtnVisible() " style="width:88%;">Post Deal for Approval</button>
 
 
                                 <button class="btn  btn-info " id="btnStopAndTerminate" data-bind=" click:$root.terminateCampaign,visible: $root.isTerminateBtnVisible " style="width: 80%;margin-bottom:10px;margin-top:7px;">Unpost Deal</button>
 
                                 <button class="btn  btn-danger " id="btnArchive" data-bind=" click:$root.ArchiveCampaign,visible: $root.isShowArchiveBtn " style="width: 80%;margin-bottom:10px;">Archive Campaign</button>
 
-                                <button class="btn  btn-info " id="btnCopyCampaign" data-bind=" click:$root.copyCampaign  " style="display:none;">Create Copy - New Campaign</button>@*visible: $root.isNewCampaignVisible*@
-                                <button class="btn  btn-success" id="btnPauseCampaign" data-bind="click:$root.changeStatus(4)" style="display:none;">Pause</button>
-                                <button class="btn  btn-success" id="btnResumeCampagin" data-bind="click:$root.changeStatus(3)" style="display:none;">Resume</button>
+                                <button class="btn  btn-info " id="btnCopyCampaign" data-bind=" click:$root.copyCampaign,  visible: $root.IsCopyBtnVisible()" style="display:none;">Create Copy - New Campaign</button>@*visible: $root.isNewCampaignVisible*@
+                                <button class="btn  btn-success" id="btnPauseCampaign" data-bind="click:$root.changeStatus(4),  visible: $root.IsPauseBtnVisible()" style="display:none;">Pause</button>
+                                <button class="btn  btn-success" id="btnResumeCampagin" data-bind="click:$root.changeStatus(3),  visible: $root.IsResumeBtnVisible()" style="display:none;">Resume</button>
                             </div>
 
                             @*<button class="btn  btn-warning" id="saveBtn" data-bind="click:$root.saveCampaignData, enable: $root.hasChangesOnQuestion, css: { 'btn-warning': $root.hasChangesOnQuestion }">Save</button>*@

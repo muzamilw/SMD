@@ -41,12 +41,16 @@ define("Coupons/Coupons.viewModel",
                     BranchLocationId = ko.observable(),
                     //caption variablels 
 
-                //
+                //  Buttons visible properties
                     isEditCampaign = ko.observable(false),
-                    canSubmitForApproval = ko.observable(true),
+                    IsSubmitBtnVisible = ko.observable(true),
                     isNewCampaignVisible = ko.observable(false),
                     isShowArchiveBtn = ko.observable(false),
                     isTerminateBtnVisible = ko.observable(false),
+                    IsCopyBtnVisible = ko.observable(false),
+                    IsPauseBtnVisible = ko.observable(false),
+                    IsResumeBtnVisible = ko.observable(false),
+
                     CurrencyDropDown = ko.observableArray([{ id: 1, name: "Choice 1" }, { id: 2, name: "Choice 2" }, { id: 3, name: "Choice 3" }, { id: 0, name: "Ask User Suggestion" }]),
                     YearRangeDropDown = ko.observableArray([]),
                     selectedIndustryIncludeExclude = ko.observable(true),
@@ -292,10 +296,10 @@ define("Coupons/Coupons.viewModel",
            }
                 ,
             updateCampaignGridItem = function (item) {
-                canSubmitForApproval(false);
+                IsSubmitBtnVisible(false);
                 if (item.Status == 1) {
                     item.StatusValue = "Draft";
-                    canSubmitForApproval(true);
+                    IsSubmitBtnVisible(true);
                 } else if (item.Status == 2) {
                     item.StatusValue = "Pending Approval"
                 } else if (item.Status == 3) {
@@ -342,6 +346,9 @@ define("Coupons/Coupons.viewModel",
                     CouponTitle('New Deal');
                     StatusValue('Draft');
                     couponModel().reset();
+                    couponModel().CouponPriceOptions.splice(0, 0, new model.CouponPriceOption());
+                    selectedPriceOption(couponModel().CouponPriceOptions()[0]);
+
             },
 
             closeNewCampaignDialog = function () {
@@ -447,7 +454,7 @@ define("Coupons/Coupons.viewModel",
                   isWelcomeScreenVisible(false);
 
                   isEditorVisible(true);
-                  canSubmitForApproval(true);
+                  IsSubmitBtnVisible(true);
 
 
 
@@ -468,24 +475,19 @@ define("Coupons/Coupons.viewModel",
                         toastr.error("Please enter Group Title.");
                     }
 
-                    if (couponModel().Price() == "" || couponModel().Price() == undefined) {
+                    if (couponModel().CouponPriceOptions().length == 0 || couponModel().Savings() == undefined) {
                         hasErrors = true;
-                        toastr.error("Please enter Price.");
-                    }
-                    if (couponModel().Savings() == "" || couponModel().Savings() == undefined) {
-                        hasErrors = true;
-                        toastr.error("Please enter Saving.");
+                        toastr.error("Please create atleast one Price option");
+                        gotoScreen(1);
                     }
 
-                    if (couponModel().CouponQtyPerUser() == "" || couponModel().CouponQtyPerUser() == undefined) {
-                        hasErrors = true;
-                        toastr.error("Please enter Quantity.");
-                    }
-                    console.log(couponModel());
+                  
                     if (couponModel().HowToRedeemLine2() == "" || couponModel().HowToRedeemLine2() == undefined) {
                         hasErrors = true;
                         toastr.error("Please enter deal summary.");
-                    }//couponImage1
+                    }
+
+                //couponImage1
                     //if (couponModel().couponImage1() == "/images/default-placeholder.png" && couponModel().CouponImage2() == "/images/default-placeholder.png" && couponModel().CouponImage3() == "/images/default-placeholder.png") {
                     //    hasErrors = true;
                     //    toastr.error("Please enter atleast 1 banner image.");
@@ -494,11 +496,12 @@ define("Coupons/Coupons.viewModel",
                 if (hasErrors)
                     return;
 
+                
                 if (UserAndCostDetail().isStripeIntegrated == false) {
                     stripeChargeCustomer.show(function () {
-                        UserAndCostDetail().isStripeIntegrated = false;
+                        UserAndCostDetail().isStripeIntegrated = true;
                         saveCampaign(2);
-                    }, 2000, 'Enter your details');
+                    }, 1000, 'Configure your credit card');
 
                 } else {
                     saveCampaign(2);
@@ -615,7 +618,7 @@ define("Coupons/Coupons.viewModel",
                          //Create Price option for the very First Time
                          if (priceOption == undefined) {
                              couponModel().CouponPriceOptions.splice(0, 0, new model.CouponPriceOption());
-                             selectedPriceOption(couponModel().CouponPriceOptions()[0]);
+                             selectedPriceOption(couponModel().CouponPriceOptions()[couponModel().CouponPriceOptions.length+1]);
                          }
                              //If There are already Price options in list
                          else {
@@ -623,8 +626,8 @@ define("Coupons/Coupons.viewModel",
                                  priceOption.errors.showAllMessages();
                              }
                              else {
-                                 couponModel().CouponPriceOptions.splice(0, 0, new model.CouponPriceOption());
-                                 selectedPriceOption(couponModel().CouponPriceOptions()[0]);
+                                 couponModel().CouponPriceOptions.splice(couponModel().CouponPriceOptions().length, 0, new model.CouponPriceOption());
+                                 selectedPriceOption(couponModel().CouponPriceOptions()[couponModel().CouponPriceOptions().length-1]);
                              }
                          }
                      },
@@ -687,7 +690,7 @@ define("Coupons/Coupons.viewModel",
 
                     $("#Heading_div").css("display", "none");
                     if (item.Status() == 1 || item.Status() == 2 || item.Status() == 3 || item.Status() == 4 || item.Status() == null || item.Status() == 7 || item.Status() == 9) {
-                        canSubmitForApproval(true);
+                        IsSubmitBtnVisible(true);
                         dataservice.getCampaignData({
                             CampaignId: item.CouponId(),
                             SearchText: ""
@@ -891,16 +894,16 @@ define("Coupons/Coupons.viewModel",
                             toastr.error("Please enter Coupon Title.");
                         }
 
+                        if (couponModel().CouponPriceOptions().length == 0 || couponModel().Savings() == undefined) {
+                            hasErrors = true;
+                            toastr.error("Please create atleast one Price option");
+                           
+                        }
+
+
                     }
                     if (previewScreenNumber() == 4) {
-                        if (couponModel().Price() == "" || couponModel().Price() == undefined) {
-                            hasErrors = true;
-                            toastr.error("Please enter Price.");
-                        }
-                        if (couponModel().Savings() == "" || couponModel().Savings() == undefined) {
-                            hasErrors = true;
-                            toastr.error("Please enter Saving.");
-                        }
+                        
 
                     }
                     if (previewScreenNumber() == 3) {
@@ -936,16 +939,15 @@ define("Coupons/Coupons.viewModel",
                             toastr.error("Please enter Coupon Title.");
                             gotoScreen(1);
                         }
-                        if (couponModel().Price() == "" || couponModel().Price() == undefined) {
+                       
+
+                        if (couponModel().CouponPriceOptions().length == 0 || couponModel().Savings() == undefined) {
                             hasErrors = true;
-                            toastr.error("Please enter Price.");
-                            gotoScreen(4);
+                            toastr.error("Please create atleast one Price option");
+                            gotoScreen(1);
                         }
-                        if (couponModel().Savings() == "" || couponModel().Savings() == undefined) {
-                            hasErrors = true;
-                            toastr.error("Please enter Saving.");
-                            gotoScreen(4);
-                        }
+
+
                    
                     return hasErrors;
                 },
@@ -1023,24 +1025,20 @@ define("Coupons/Coupons.viewModel",
                         toastr.error("Please enter Group Title.");
                     }
 
-                    if (couponModel().Price() == "" || couponModel().Price() == undefined) {
-                        hasErrors = true;
-                        toastr.error("Please enter Price.");
-                    }
-                    if (couponModel().Savings() == "" || couponModel().Savings() == undefined) {
-                        hasErrors = true;
-                        toastr.error("Please enter Saving.");
-                    }
-
-                    if (couponModel().CouponQtyPerUser() == "" || couponModel().CouponQtyPerUser() == undefined) {
-                        hasErrors = true;
-                        toastr.error("Please enter Quantity.");
-                    }
-                    console.log(couponModel());
+                  
                     if (couponModel().HowToRedeemLine2() == "" || couponModel().HowToRedeemLine2() == undefined) {
                         hasErrors = true;
                         toastr.error("Please enter deal description.");
-                    }//couponImage1
+                    }
+
+
+                    if (couponModel().CouponPriceOptions().length == 0 || couponModel().Savings() == undefined) {
+                        hasErrors = true;
+                        toastr.error("Please create atleast one Price option");
+                        gotoScreen(1);
+                    }
+
+                    //couponImage1
                     //if (couponModel().couponImage1() == "/images/default-placeholder.png" && couponModel().CouponImage2() == "/images/default-placeholder.png" && couponModel().CouponImage3() == "/images/default-placeholder.png") {
                     //    hasErrors = true;
                     //    toastr.error("Please enter atleast 1 banner image.");
@@ -1912,7 +1910,7 @@ define("Coupons/Coupons.viewModel",
                     CurrencyDropDown: CurrencyDropDown,
                     YearRangeDropDown: YearRangeDropDown,
                     onEditCampaign: onEditCampaign,
-                    canSubmitForApproval: canSubmitForApproval,
+                    IsSubmitBtnVisible: IsSubmitBtnVisible,
                     isTerminateBtnVisible: isTerminateBtnVisible,
                     isNewCampaignVisible: isNewCampaignVisible,
                     isShowArchiveBtn: isShowArchiveBtn,
