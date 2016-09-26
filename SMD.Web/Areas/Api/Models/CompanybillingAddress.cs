@@ -16,6 +16,7 @@ namespace SMD.MIS.Areas.Api.Models
         public string BillingZipCode { get; set; }
         public string BillingPhone { get; set; }
         public string BillingEmail { get; set; }
+        public string BillingCity { get; set; }
 
      
     }
