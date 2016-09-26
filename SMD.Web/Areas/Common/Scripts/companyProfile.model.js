@@ -4,7 +4,10 @@
       User = function (CompanyId, CompanyName, Tel1, Tel2, Logo,
           StripeCustomerId, SalesEmail, WebsiteLink, VoucherSecretKey, BillingAddressLine1, BillingAddressLine2,
           BillingState, BillingCountryId, BillingCity, BillingZipCode, BillingPhone, BillingEmail, TwitterHandle, FacebookHandle,
-          InstagramHandle, PinterestHandle, Logo, LogoImageBase64) {
+          InstagramHandle, PinterestHandle, Logo, LogoImageBase64, specifiedSolutation, specifiedProfession, specifiedFirstName, specifiedLastName, specifiedEmail, specifiedMobile,
+            specifiedDob, specifiedPassport, specifiedIsDeals, specifiedIsWeeklyUpdate, specifiedIsLatestService, specifiedBranchName, specifiedBranchCount, specifiedWebAddress,
+            specifiedSalesEmail, specifiedSalesPhone, specifiedCompanyType, specifiedAboutUs, specifiedPaypalId, specifiedBusinessName, specifiedBillingEmail, specifiedRegNumber, specifiedStartDate,
+            specifiedCreditCard, specifiedBillingPhone, specifiedVatNumber) {
           debugger;
           var
                
@@ -33,6 +36,46 @@
                 selectedMedia = ko.observable().extend({ required: true }),
                 Logo = ko.observable(Logo),
                 LogoImageBase64 = ko.observable(LogoImageBase64),
+              
+                
+              
+              //Fields for User profil-------------
+              solutation = ko.observable(),
+              professsion = ko.observable(),
+              firstName = ko.observable(),
+              lastName = ko.observable(),
+              email = ko.observable(),
+              mobileNumber = ko.observable(),
+              dateOfBirth = ko.observable(),
+              passportNumber = ko.observable(),
+              isReceiveDeals = ko.observable(),
+              isReceiveWeeklyUpdates = ko.observable(),
+              isReceiveLatestServices = ko.observable(),
+              //----------------
+              //Fields for User Branch-------------
+              branchName = ko.observable(),
+              numberOfBranches = ko.observable(),
+              webAddress = ko.observable(),
+              salesEmail = ko.observable(),
+              salesPhone = ko.observable(),
+              companyType = ko.observable(),
+              aboutUs = ko.observable(),
+              
+              //---------------------------
+              //Money Tab Fields
+              paypalMailId = ko.observable(),
+              billingBusinessName = ko.observable(),
+              billingEmail = ko.observable(),
+              companyRegNo = ko.observable(),
+              businessStartDate = ko.observable(),
+              creditCard = ko.observable(),
+              billingPhone = ko.observable(),
+              vatNumber = ko.observable(),
+              creditCardUi = ko.computed(function () {
+                  return creditCard() ? "Linked | " + creditCard() : "Not Linked | Link with Stripe Id";
+                  }),
+              
+              //-------------------
                 
                 //FacebookHandleui = ko.computed({
                 //    read: function () {                        

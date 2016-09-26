@@ -5,34 +5,38 @@
 <div class="modal fade my-modal" id="companyProfileDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-content partial-contents" style="background-color:#FFFFFF;border-radius:5px;width:950px;margin-left:-116px;margin-top:-1px;" id="">
-                <div class="modal-header" id="">
+            <div class="modal-content partial-contents" style="background-color:#dedede;border-radius:5px;width:900px;margin-left:-116px;margin-top:-1px;" id="">
+                <div class="modal-header" id="" style="background-color: #81d3dc;">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                    <span class="modal-title " style="font-size:24px;">Merchant account essentials</span>
+                   <div class="col-lg-4"></div> <span class="modal-title text-center" style="font-size:24px;color: #ffffff; line-height: 2.5 !important;">Merchant account essentials</span>
                 </div>
-                <div class="row" id="">
-                    <div class="col-lg-12" style="margin-top:15px;float:none !important; border-bottom: 3px solid gray">
-                        <div class="col-lg-3">
+                <div class="row" id="" style="margin-left: 0; margin-right: 0">
+
+                    <div class="col-lg-12" style="padding-top:15px;float:none !important; background-color: #ffffff; padding-bottom: 15px; margin-bottom: 15px;">
+                        <div class="col-lg-2">
 
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-8">
                             <div class="pull-left">
-                                <div class="ads-numbering-box" data-bind="css: 'ads-selected-numbering-box'">
-                                    1
-                                </div>
-
+                                <a href="#tab-PersonalInfo" style="text-decoration: none" data-toggle="tab" data-bind="click: function(){$root.onTabChange(1);}">
+                                    <div class="ads-numbering-box" data-bind="css: $root.currentTab() == 1 ? 'ads-selected-numbering-box' : ''">
+                                        1
+                                    </div>
+                                </a>
                                 <br />
                                 <span>Personal</span>
+
                             </div>
                             <div class="pull-left ads-numbering-linebar">
 
 
                             </div>
                             <div class="pull-left">
-                                <div class="ads-numbering-box" data-bind="css: 'ads-selected-numbering-box'">
-                                    2
-                                </div>
-
+                                <a href="#tab-Business" style="text-decoration: none" data-toggle="tab" data-bind="click: function(){$root.onTabChange(2);}">
+                                    <div class="ads-numbering-box" data-bind="css: $root.currentTab() == 2 ? 'ads-selected-numbering-box' : ''">
+                                        2
+                                    </div>
+                                </a>
                                 <br />
                                 <span>Business</span>
                             </div>
@@ -40,338 +44,370 @@
 
                             </div>
                             <div class="pull-left">
-                                <div class="ads-numbering-box" data-bind="css: 'ads-selected-numbering-box'">
-                                    3
-                                </div>
-
+                                <a href="#tab-Logo" style="text-decoration: none" data-toggle="tab" data-bind="click: function(){$root.onTabChange(3);}">
+                                    <div class="ads-numbering-box" data-bind="css: $root.currentTab() == 3 ? 'ads-selected-numbering-box' : ''">
+                                        3
+                                    </div>
+                                </a>
                                 <br />
-                                <span>Defaults & Logo</span>
+                                <span>Logo</span>
+                            </div>
+                            <div class="pull-left ads-numbering-linebar">
+                            </div>
+                            <div class="pull-left">
+                                <a href="#tab-Money" style="text-decoration: none" data-toggle="tab" data-bind="click: function(){$root.onTabChange(4);}">
+                                    <div class="ads-numbering-box" data-bind="css: $root.currentTab() == 4 ? 'ads-selected-numbering-box' : ''">
+                                        4
+                                    </div>
+                                </a>
+                                <br />
+                                <span>Money</span>
                             </div>
                         </div>
-                       
-                        <div class="col-lg-3">
+
+                        <div class="col-lg-2">
 
                         </div>
 
                         <div class="clearfix"></div>
                     </div>
-                   
-                    <div class="col-lg-12 col-md-12 col-sm-12" style="margin-top: 15px;">
-                        <div class="tab-pane fade in active" data-bind="with: $root.selectedCompany" id="tab-generalinfo">
-                            <div class="col-lg-6">
+
+                    <div class="tab-content">
+                        <div class="tab-pane fade in active" id="tab-PersonalInfo">
+                            <div class="col-lg-12 col-sm-12 col-md-12 form-horizontal">
+                                <div class="col-md-12 main-box">
+                                    <div class="col-md-6">
+                                        <header class="main-box-header clearfix" style="padding-left: 0">
+                                            <h2>1. Your personal data:</h2>
+                                        </header>
+                                        <div class="main-box-body" style="padding-bottom: 0;">
+                                            <div class="form-group">
+                                                <label for="ddlSolutation" class="requiredlabel">Solutation </label>
+                                                <select class="form-control" id="ddlSolutation" data-bind="options: $root.genderList, optionsText: 'name', optionsValue: 'id', optionsCaption: '<' + 'Select Gender'+ '>' , value:solutation"></select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="txtFirstName" class="requiredlabel">First Name </label>
+                                                <input type="text" id="txtFirstName" class="form-control" placeholder="Enter First Name">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="txtEmail" class="requiredlabel">Email </label>
+                                                <input type="email" class="form-control" id="txtEmail" placeholder="Enter email">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="txtDob" class="requiredlabel">Date of Birth </label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                    <input type="text" class="form-control" id="txtDob" placeholder="Enter Date of birth">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <header class="main-box-header clearfix" style="padding-left: 0">
+                                            <p style="color:red">* required to verifty <b>money</b> transfers & <b>commission</b> to you. </p>
+                                        </header>
+                                        <div class="main-box-body clearfix" style="padding-bottom: 0;">
+                                            <div class="form-group">
+                                                <label for="ddlProfession" class="requiredlabel">Profession </label>
+                                                <select class="form-control" id="ddlProfession">
+                                                    <option>Designing</option>
+                                                    <option>Information Technology</option>
+                                                    <option>Electrical Engineering</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="txtLastName" class="requiredlabel">Last Name </label>
+                                                <input type="text" id="txtLastName" class="form-control" placeholder="Enter Last Name">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="txtMobileNo" class="requiredlabel">Mobile Number </label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+                                                    <input type="text" id="txtMobileNo" class="form-control" placeholder="Enter Mobile Number">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="txtPasportNo" class="requiredlabel">Valid Passport number </label>
+                                                <input type="text" id="txtPasportNo" class="form-control" placeholder="Enter Valid Passport number">
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12" style="padding-top: 0;padding-left: 20px;">
+                                        <div class="col-md-11" style="padding-top: 0;">
+                                            <div class="form-group">
+                                                <span class="help-block text-left">We take your privacy extremely seriously. See our privacy policy for full details on how we use and secure your personal data.</span>
+                                            </div>
+
+                                            <div class="form-group" style="margin-bottom:0;">
+                                                <div class="checkbox-nice ">
+                                                    <input type="checkbox" name="wupdates" value="1" id="chkreceiveDeals">
+                                                    <label for="chkreceiveDeals">
+                                                        Yes, I want to receive deals near me by email.
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group" style="margin-bottom:0;">
+                                                <div class="checkbox-nice ">
+                                                    <input type="checkbox" name="wupdates" value="1" id="chkwupdates">
+                                                    <label for="chkwupdates">
+                                                        Yes, I want to receive weekly updates on how my advertising campaigns are performing.
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="checkbox-nice ">
+                                                    <input type="checkbox" name="wupdates" value="1" id="chklatescasg4ads">
+                                                    <label for="chklatescasg4ads">
+                                                        Yes, I want to receive emails about the latest Cash4Ads news and partnering services.
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="btn-group" style="float: left;">
+                                                    <button type="button" class="btn btn-primary">Change Password</button>
+                                                </div>
+                                                <div class="btn-group" style="float: left; margin-left: 5px;">
+                                                    <button type="button" class="btn btn-danger"> Delete Account</button>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <p>
+                                                    &copy; @DateTime.Now.Year Powered by CASH 4 Ads Inc.,USA
+                                                </p>
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+
+                                </div>
+                                <div style="float: right;">
+                                    <a class="btn btn-default" href="#tab-Business" style="text-decoration: none;margin-bottom: 10px;" data-toggle="tab" data-bind="click: function(){$root.onTabChange(2);}">
+                                        <span>Continue to Step 2</span>
+                                    </a>
+                                    <button class="btn  btn-success" style="margin-bottom: 10px; margin-left: 5px;" id="btnSaveCompProfile">Save</button>
+                                </div>
+                               
                                 
-                            </div>
-                            <div class="col-lg-6">
-
-                            </div>
-                            <div class="col-lg-12 form-horizontal">
-                                <h4 style="margin-top:20px; display:none;">
-                                    Company Info
-                                </h4>
-                                <div class="col-lg-9" style="margin-top: 12px;">
-                                    <div class="col-lg-12">
-                                        @*<div class="form-group">
-                                                <div class="col-lg-4 text-right">
-
-                                                    <label class="control-label text-right tooltip-float">Advertising Contact</label>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <input type="text" class="form-control" data-bind="value: advert">
-                                                </div>
-                                            </div>*@
-                                        <div class="form-group">
-                                            <div class="col-lg-4 text-right">
-                                                <label class="control-label text-right tooltip-float">Company Name</label>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <input type="text" class="form-control" data-bind="value: CompanyName">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <div class="col-lg-4 text-right">
-                                                <label class="control-label text-right tooltip-float">Sales line</label>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <input type="text" class="form-control" data-bind="value: Tel1">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-lg-4 text-right">
-                                                <label class="control-label text-right tooltip-float">Sales line 2</label>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <input type="text" class="form-control" data-bind="value: Tel2">
-                                            </div>
-                                        </div>
-
-
-
-                                        <div class="form-group">
-                                            <div class="col-lg-4 text-right">
-                                                <label class="control-label text-right tooltip-float">Sales Email</label>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <input type="text" class="form-control" data-bind="value: SalesEmail">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <div class="col-lg-4 text-right">
-                                                <label class="control-label text-right tooltip-float">Website</label>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <input type="text" class="form-control" data-bind="value: WebsiteLink">
-                                            </div>
-                                        </div>
-
-
-
-                                        @*<div class="form-group">
-                                                <div class="col-lg-4 text-right">
-
-                                                    <label class="control-label text-right tooltip-float">&nbsp;</label>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="form-group">
-                                                        <div class="col-md-3" style="text-align:right;margin-left: 10px;">
-                                                            <div class="fileUpload btn btn-primary">
-                                                                <span>Image / Logo </span>
-
-                                                                <input type="file" class="upload" id="image_files" onchange="readPhotoURL(this);" />
-                                                            </div>
-                                                            <div class="bs-example-tooltips tooltip-float-width" style="    margin-top: 10px;">
-                                                                <a class="input-group-addon" tabindex="-1" href="#" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-original-title="  760 pixels  by 200 pixels" title="  760 pixels  by 200 pixels">
-                                                                    <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                                </a>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-md-6">
-
-                                                            <img id="vehicleImage" alt="" style="width: auto;height:120px" data-bind="attr:{src:Logo }" />
-                                                            <h5><span></span></h5>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>*@
-
-                                        <div class="form-group" style="margin-bottom:25px;">
-                                            <div class="col-lg-4 text-right">
-                                                <label for="txtUploadLogo" class="control-label text-right tooltip-float floatNone defaultThemeTxtClr defaultImgUploadImageBtn">Upload Logo</label>
-                                            </div>
-                                            <div class="col-lg-8">
-                                                <div class="defaultImgUploadImage pull-left" style="width:270px;cursor:pointer;text-align:center">
-                                                    @*<img style="width:auto;max-width:236px; min-height:150px;" data-bind="visible: LogoImageBase64() != '',attr: { src: LogoImageBase64  }" src="/Content/Images/Company_Default.png" onclick="showUploadDialog();" />
-                                                        <img style="width:auto;max-width:236px; min-height:150px;" data-bind="visible: Logo() != '' ,attr: { src: Logo()  }" onclick="showUploadDialog();" />
-                                                        <div style="height:auto;width:236px; min-height:150px;" onclick="showUploadDialog();" data-bind="visible: Logo() == '' &&   LogoImageBase64() == ''"></div>*@
-
-                                                    <img style="height:auto;width:236px; min-height:150px;" data-bind="attr: { src: $root.selectedCompany().Logo() }" src="/Content/Images/Company_Default.png" id="imgLogo" data-toggle="modal" data-target="#damModel" onclick="changeIframeSrc(1)" />
-
-                                                    <div style="    padding-top: 10px;    text-align: center;    font-size: 12px;    color: gray;">
-                                                        (300 x 150 pixels)
-                                                    </div>
-                                                </div>
-                                                <div class="defaultImgUploadImageBtn pull-left" style="display:none;">
-                                                    <div class="fileUpload">
-                                                        <span>change </span>
-                                                        <input type="file" class="upload" id="logo_image_file" data-bind="files: { onLoaded: $root.LogoUrlImageCallback, fileFilter: 'image.*'}" />
-                                                    </div>
-                                                </div>
-                                                <div class="clearfix">
-                                                    &nbsp;
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                        <div class="form-group">
-                                            <div class="col-lg-4 text-right">
-                                                <label class="control-label text-right tooltip-float">Coupon redemption key</label>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <input type="text" class="form-control" data-bind="value: VoucherSecretKey">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-12 form-horizontal">
-                                <h4 style="margin-top:20px; display:none;">
-                                    Social Media Handles
-                                </h4>
-                                <div class="col-lg-9" style="margin-top: 12px;">
-                                    <div class="col-lg-12">
-                                        <div class="form-group">
-                                            <div class="col-lg-4 text-right">
-                                                <label class="control-label text-right tooltip-float">Social Media Handle</label>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                @*<input type="text" class="form-control" data-bind="value: TwitterHandle() !='undefined' ? TwitterHandle :'( Not Configured )'">*@
-                                                <select id="slectSocialmedia" class="form-control" data-bind="options: $root.socialMedia, optionsText: 'Text', optionsValue: 'Text', optionsCaption: '&lt;' + 'Select'+ '&gt;' , value:selectedMedia"></select>
-
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <div class="col-lg-4 text-right">
-                                                <label class="control-label text-right tooltip-float" data-bind="visible:selectedMedia()=='Facebook'">Facebook Handle</label>
-                                                <label class="control-label text-right tooltip-float" data-bind="visible:selectedMedia()=='Twitter'">Twitter Handle</label>
-                                                <label class="control-label text-right tooltip-float" data-bind="visible:selectedMedia()=='Instagram'">Instagram Handle</label>
-                                                <label class="control-label text-right tooltip-float" data-bind="visible:selectedMedia()=='Pinterest'">Pinterest Handle</label>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <input type="text" class="form-control" data-bind="value:mediaHandleui">
-                                            </div>
-                                        </div>
-                                        @*<div class="form-group" data-bind="visible:$root.selectedMedia()=='Twitter'">
-                                                <div class="col-lg-4 text-right">
-                                                    <label class="control-label text-right tooltip-float">Twitter Handle</label>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <input type="text" class="form-control" data-bind="value: TwitterHandleui">
-                                                </div>
-                                            </div>
-
-
-
-                                            <div class="form-group" data-bind="visible:$root.selectedMedia()=='Instagram'">
-                                                <div class="col-lg-4 text-right">
-                                                    <label class="control-label text-right tooltip-float">Instagram Handle</label>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <input type="text" class="form-control" data-bind="value: TwitterHandleui">
-                                                </div>
-                                            </div>
-
-
-
-                                            <div class="form-group" data-bind="visible:$root.selectedMedia()=='Pinterest'">
-                                                <div class="col-lg-4 text-right">
-                                                    <label class="control-label text-right tooltip-float">Pinterest Handle</label>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <input type="text" class="form-control" data-bind="value: TwitterHandleui">
-                                                </div>
-                                            </div>*@
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="col-lg-12 form-horizontal">
-                                <h4 style="margin-top:20px; display:none;">
-                                    Credit Card Information
-                                </h4>
-                                <div class="col-lg-9">
-                                    <div class="form-group">
-                                        <div class="col-lg-4 text-right">
-                                            <label class="control-label text-right tooltip-float">Stripe Account</label>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <input type="text" readonly class="form-control" data-bind="value: StripeCustomerId() !='undefined' ? StripeCustomerId :'( Not Configured )'">
-                                        </div>
-                                        <div class="col-lg-2">
-                                            <button class="btn  btn-info" id="saveBtn" data-bind="click: $root.chargeCustomer, text:StripeCustomerId() =='undefined' ? 'Configure':'Update' ">Processing...</button>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="col-lg-12 form-horizontal">
-                                <h4 style="margin-top:20px; display:none;">
-                                    Billing Information
-                                </h4>
-                                <div class="col-lg-9" style="margin-top: 12px;">
-                                    <div class="col-lg-12">
-                                        <div class="form-group">
-                                            <div class="col-lg-4 text-right">
-                                                <label class="control-label text-right tooltip-float">Address 1</label>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <input type="text" class="form-control" data-bind="value: BillingAddressLine1">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-lg-4 text-right">
-                                                <label class="control-label text-right tooltip-float">Address 2</label>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <input type="text" class="form-control" data-bind="value: BillingAddressLine2">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-lg-4 text-right">
-                                                <label class="control-label text-right tooltip-float">Country</label>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <select class="form-control" data-bind="options: $root.countries, optionsText: 'CountryName', optionsValue: 'CountryId', optionsCaption: '&lt;' + 'Select Country'+ '&gt;' , value:BillingCountryId,event:{ change: $root.getCitiesByCountryId}"></select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-lg-4 text-right">
-                                                <label class="control-label text-right tooltip-float">City</label>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                @*<select class="form-control" data-bind="options: $root.cities, optionsText: 'CityName', optionsValue: 'CityName', optionsCaption: '&lt;' + 'Select City'+ '&gt;' , value:BillingCity"></select>*@
-                                                @*<input class="form-control" data-bind="autocomplete: { data: $root.cities, maxItems: 8 }, value:BillingCity" />*@
-                                                <input type="text" class="form-control" data-bind="value: billingCity">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-lg-4 text-right">
-                                                <label class="control-label text-right tooltip-float">State</label>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <input type="text" class="form-control" data-bind="value: BillingState">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-lg-4 text-right">
-                                                <label class="control-label text-right tooltip-float">Zip Code</label>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <input type="text" class="form-control" data-bind="value: BillingZipCode">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-lg-4 text-right">
-                                                <label class="control-label text-right tooltip-float">Billing Phone</label>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <input type="text" class="form-control" data-bind="value: BillingPhone">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-lg-4 text-right">
-                                                <label class="control-label text-right tooltip-float">Billing Email</label>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <input type="text" class="form-control" data-bind="value: BillingEmail">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
+                                @*<button class="btn  btn-default pull-right" style="margin-bottom: 10px;" id="saveBtn" data-bind="click: $root.onTabChange(2)">Continue to Step 2</button>*@
                             </div>
 
                         </div>
+                        <div class="tab-pane fade" id="tab-Business">
+                            
+                            <div class="col-lg-12 col-sm-12 col-md-12 form-horizontal clearfix">
+                                <div class="col-md-12 main-box">
+                                    <div class="col-md-6">
+                                        <header class="main-box-header clearfix" style="padding-left: 0">
+                                            <h2>2. Your business data:</h2>
+                                        </header>
+                                        <div class="main-box-body clearfix" style="padding-bottom: 0">
+                                            <div class="form-group">
+                                                <label for="txtBusinessName" class="requiredlabel">Business Name </label>
+                                                <input type="text" id="txtBusinessName" class="form-control" placeholder="Enter Your Business Name">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="txtBusinessAddress" class="requiredlabel">Business Address </label>
+                                                <input type="text" id="txtBusinessAddress" class="form-control" placeholder="Enter Business Address">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="txtCity" class="requiredlabel">Town/City</label>
+                                                <input type="text" id="txtCity" class="form-control" placeholder="Enter Town/City">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="txtState" class="requiredlabel">State/County</label>
+                                                <input type="text" id="txtState" class="form-control" placeholder="Enter State/County">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="txtPostCode" class="requiredlabel">Post Code </label>
+                                                <input type="text" id="txtPostCode" class="form-control" placeholder="Enter Postal Code">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="ddlCountry" class="requiredlabel">Country </label>
+                                                <select class="form-control" id="ddlCountry" data-bind="options: $root.countries, optionsText: 'CountryName', optionsValue: 'CountryId', optionsCaption:  '&lt;' + 'Select Country'+ '&gt;', value:BillingCountryId"></select>
+                                            </div>
+                                           
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <header class="main-box-header clearfix" style="padding-left: 0">
+                                            <p style="color:red">* required if listing <b>Deals</b> or running <b>Campaigns</b></p>
+                                        </header>
+                                        <div class="main-box-body clearfix" style="padding-bottom: 0">
+                                            <div class="form-group">
+                                                <label for="map-canvas">Get direction pointer and map </label>
+                                                <div style="width:100%;height:268px; border:2px solid" id="map-canvas"></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="txtBranchName" class="requiredlabel">Branch Name </label>
+                                                <input type="text" id="txtBranchName" class="form-control" placeholder="Enter Branch Name">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="txtBranchLocations" class="requiredlabel">How Many Branch Locations do you have? </label>
+                                                <input type="text" id="txtBranchLocations" class="form-control" placeholder="Enter Number of branches">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @*<button class="btn  btn-default pull-right" style="margin-bottom: 10px;" id="saveBtn" data-bind="click: $root.onTabChange(3)">Continue to Step 3</button>*@
+                                <div style="float: right;">
+                                    <a class="btn btn-default" href="#tab-Logo" style="text-decoration: none;margin-bottom: 10px;" data-toggle="tab" data-bind="click: function(){$root.onTabChange(3);}">
+                                        <span>Continue to Step 3</span>
+                                    </a>
+                                    <button class="btn  btn-success" style="margin-bottom: 10px;margin-left: 5px;" id="btnSaveCompProfile">Save</button>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="tab-Logo">
+                            <div class="col-lg-12 col-sm-12 col-md-12 form-horizontal clearfix">
+                                <div class="col-md-12 main-box">
+                                    <div class="col-md-6">
+                                        <header class="main-box-header clearfix" style="padding-left: 0">
+                                            <h2>3. Logo and Sales contact details:</h2>
+                                        </header>
+                                        <div class="main-box-body clearfix" style="padding-bottom: 0">
+                                            <div class="form-group">
+                                                <label for="divLogo" class="requiredlabel">Logo </label>
+                                                <div id="divLogo" style="background-color: #dedede; height: 125px;width:50%">
+                                                    <img src="" id="imgLogo" alt="Company Logo" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="txtWebsite" class="requiredlabel">Website </label>
+                                                <input type="text" id="txtWebsite" class="form-control" placeholder="Enter Web Address">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="txtSalesEmail" class="requiredlabel">Sales Email</label>
+                                                <input type="text" id="txtSalesEmail" class="form-control" placeholder="Enter Sales Email">
+                                            </div>
+                                           
+                                            <div class="form-group">
+                                                <label for="txtSalesPhone" class="requiredlabel">Sales Phone Line </label>
+                                                <input type="text" id="txtSalesPhone" class="form-control" placeholder="Enter Sales Phone">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="ddlCountry" class="requiredlabel">Company Type </label>
+                                                <select class="form-control" id="ddlCountry">
+                                                    <option>Advertising</option>
+                                                    <option>Realestate</option>
+                                                    <option>Marketing</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <header class="main-box-header clearfix" style="padding-left: 0">
+                                            <p style="color:red">* required if listing <b>Deals</b> or running <b>Campaigns</b></p>
+                                        </header>
+                                        <div class="main-box-body clearfix" style="padding-bottom: 0">
+                                            <div class="form-group">
+                                                <label for="txtAboutUs">Tell us more about your business.</label>
+                                                <textarea class="form-control" style="height:268px; border:1px solid" id="txtAboutUs"></textarea>
+                                                <span class="help-block text-left">This text is used for About Us Section.</span>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                @*<button class="btn  btn-default pull-right" style="margin-bottom: 10px;" id="saveBtn" data-bind="click: $root.onTabChange(4)">Continue to Step 4</button>*@
+                                <div style="float: right;">
+                                    <a class="btn btn-default" href="#tab-Money" style="text-decoration: none;margin-bottom: 10px;" data-toggle="tab" data-bind="click: function(){$root.onTabChange(4);}">
+                                        <span>Continue to Step 4</span>
+                                    </a>
+                                    <button class="btn  btn-success" style="margin-bottom: 10px; margin-left:5px;" id="btnSaveCompProfile">Save</button>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="tab-Money">
+                            <div class="col-lg-12 col-sm-12 col-md-12 form-horizontal clearfix">
+                                <div class="col-md-12 main-box">
+                                    <div class="col-md-6">
+                                        <header class="main-box-header clearfix" style="padding-left: 0">
+                                            <h2>4. Money Transfers & Billing Details:</h2>
+                                        </header>
+                                        <div class="main-box-body clearfix" style="padding-bottom: 0">
+                                            <div class="form-group">
+                                                <label for="txtPaypalId" class="requiredlabel">Your Paypal Id (email) </label>
+                                                <input type="text" id="txtPaypalId" class="form-control" placeholder="Enter Your Paypal Id">
+                                                <span class="help-block text-left">This used to transfer cash credits(centz) from your App wallet to your Paypal account.</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <header class="main-box-header clearfix" style="padding-left: 0">
+                                            <p style="color:red">* required if listing <b>Deals</b> or running <b>Campaigns</b></p>
+                                        </header>
+                                        <div class="main-box-body clearfix" style="padding-bottom: 0">
+                                            <div class="form-group">
+                                               
+                                            </div>
 
-                        <!-- ko stopBinding: true -->
-                        @Html.Partial("~/Areas/Common/Views/Shared/_StripeChargeCustomerDialog.cshtml")
-                        <!-- /ko -->
-                        <!-- ko stopBinding: true -->
-                        @Html.Partial("~/Areas/Common/Views/Shared/_ConfirmationDialog.cshtml")
-                        <!-- /ko -->
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-12 main-box" style="background-color: #dedede; padding-top: 20px;">
+                                        <div class="col-md-6 main-box-body clearfix">
+                                            <div class="form-group">
+                                                <label for="txtBillInvoiceTo" class="requiredlabel">Bill Invoices to (Business Name) </label>
+                                                <input type="text" id="txtBillInvoiceTo" class="form-control" placeholder="Enter Billing Business Name">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="txtBillingEmail" class="requiredlabel">Billing Email </label>
+                                                <input type="text" id="txtBillingEmail" class="form-control" placeholder="Enter Billing Email">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="txtRegNo" class="requiredlabel">Company Registration Number</label>
+                                                <input type="text" id="txtRegNo" class="form-control" placeholder="Enter Registration Number">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="txtBusinessStartDate" class="requiredlabel">Business Start Date </label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                    <input type="text" class="form-control" id="txtBusinessStartDate" placeholder="Enter Business Start Date">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 main-box-body clearfix">
+                                            <div class="form-group">
+                                                <label for="txtCreditCard" class="requiredlabel">Your Paypal Id (email) </label>
+                                                <div class="col-md-10" style="padding-left:0;">
+                                                    <input type="text" id="txtCreditCard" class="form-control" placeholder="Enter Your Paypal Id">
+                                                </div>
+                                                <div class="col-md-2" style="padding-right:0;">
+                                                    <button class="btn  btn-success pull-right" id="btnlinkCard">Link</button>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="txtBillingPhone" class="requiredlabel">Billing Phone Line</label>
+                                                <input type="text" id="txtBillingPhone" class="form-control" placeholder="Enter Billing Phone Line">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="txtVatNo" class="requiredlabel">VAT Number</label>
+                                                <input type="text" id="txtVatNo" class="form-control" placeholder="Enter VAT Number">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <button class="btn  btn-success pull-right" style="margin-bottom: 10px;" id="btnSaveCompProfile">Save</button>
+                            </div>
+                        </div>
                     </div>
+
                 </div>
 
-                <div class="modal-footer" style="padding-left:0px;padding-right:0px;padding-bottom:5px;">
+
+                @* <div class="modal-footer" style="padding-left:0;padding-right:0;padding-bottom:5px;background-color:#dedede">
                     <div style="padding-right:8px;">
-                        <button class="btn  btn-info" id="saveBtn" data-bind="click:$root.onUpdateProfile , enable: $root.hasChangesOnProfile, css: { 'btn-warning': $root.hasChangesOnProfile }">Save</button>
-                        <a class="btn btn-default" aria-hidden="true" data-bind="click: $root.onCloseUserProfileDialog" data-dismiss="modal" id="" style="float: right;margin-bottom: 10px;visibility:visible; ">Close</a>
-                    </div>
-                </div>
+
+                       <button class="btn  btn-info" id="saveBtn" data-bind="click:$root.onUpdateProfile , enable: $root.hasChangesOnProfile, css: { 'btn-warning': $root.hasChangesOnProfile }">Save</button>
+                                       <a class="btn btn-default" aria-hidden="true" data-bind="click: $root.onCloseUserProfileDialog" data-dismiss="modal" id="" style="float: right;margin-bottom: 10px;visibility:visible; ">Close</a>
+                                    </div>
+                                </div>*@
             </div>
         </div>
     </div>
