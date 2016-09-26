@@ -182,7 +182,7 @@
               }),
               // Has Changes
               hasChanges = ko.computed(function () {
-                  return true;//dirtyFlag.isDirty();
+                  return dirtyFlag.isDirty();
               }),
               // Reset
               reset = function () {

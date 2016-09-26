@@ -43,7 +43,7 @@ define("Coupons/Coupons.viewModel",
 
                 //  Buttons visible properties
                     isEditCampaign = ko.observable(false),
-                    IsSubmitBtnVisible = ko.observable(true),
+                    IsSubmitBtnVisible = ko.observable(false),
                     isNewCampaignVisible = ko.observable(false),
                     isShowArchiveBtn = ko.observable(false),
                     isTerminateBtnVisible = ko.observable(false),
@@ -296,10 +296,10 @@ define("Coupons/Coupons.viewModel",
            }
                 ,
             updateCampaignGridItem = function (item) {
-                IsSubmitBtnVisible(false);
+             
                 if (item.Status == 1) {
                     item.StatusValue = "Draft";
-                    IsSubmitBtnVisible(true);
+                
                 } else if (item.Status == 2) {
                     item.StatusValue = "Pending Approval"
                 } else if (item.Status == 3) {
@@ -343,11 +343,11 @@ define("Coupons/Coupons.viewModel",
 
                 $("#Heading_div").css("display", "none");
                 isShowArchiveBtn(false);
-                    CouponTitle('New Deal');
-                    StatusValue('Draft');
-                    couponModel().reset();
-                    couponModel().CouponPriceOptions.splice(0, 0, new model.CouponPriceOption());
-                    selectedPriceOption(couponModel().CouponPriceOptions()[0]);
+                CouponTitle('New Deal');
+                StatusValue('Draft');
+                couponModel().reset();
+                couponModel().CouponPriceOptions.splice(0, 0, new model.CouponPriceOption());
+                selectedPriceOption(couponModel().CouponPriceOptions()[0]);
 
             },
 
@@ -454,7 +454,7 @@ define("Coupons/Coupons.viewModel",
                   isWelcomeScreenVisible(false);
 
                   isEditorVisible(true);
-                  IsSubmitBtnVisible(true);
+           
 
 
 
@@ -673,6 +673,10 @@ define("Coupons/Coupons.viewModel",
                   },
                 onEditCampaign = function (item) {
 
+                    //resetting flags
+                    IsSubmitBtnVisible(false);
+
+
                     //hide the main menu;
                     collapseMainMenu();
 
@@ -690,7 +694,7 @@ define("Coupons/Coupons.viewModel",
 
                     $("#Heading_div").css("display", "none");
                     if (item.Status() == 1 || item.Status() == 2 || item.Status() == 3 || item.Status() == 4 || item.Status() == null || item.Status() == 7 || item.Status() == 9) {
-                        IsSubmitBtnVisible(true);
+                       
                         dataservice.getCampaignData({
                             CampaignId: item.CouponId(),
                             SearchText: ""
@@ -707,6 +711,7 @@ define("Coupons/Coupons.viewModel",
 
                                         isNewCampaign(true);
                                         couponModel().StatusValue("Draft");
+                                        IsSubmitBtnVisible(true);
                                     } else if (couponModel().Status() == 2) {
                                         $("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
                                         $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,#btnPauseCampaign,.lang_delSurvey,.table-link").css("display", "none");
@@ -715,6 +720,7 @@ define("Coupons/Coupons.viewModel",
                                         $("#btnCancel").css("display", "none");
                                         $("#btnCancel,#btnPauseCampaign,#btnClose").removeAttr('disabled');
                                         couponModel().StatusValue("Submitted for Approval");
+                                    
                                     } else if (couponModel().Status() == 3) {
                                         //$("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
                                         $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,.lang_delSurvey,.table-link").css("display", "none");
@@ -734,14 +740,16 @@ define("Coupons/Coupons.viewModel",
                                         $("#btnCancel,#btnResumeCampagin,#btnCopyCampaign,#btnStopAndTerminate").removeAttr('disabled');
                                         $("#btnCancel").css("display", "none");
                                         couponModel().StatusValue("Paused");
-                                        isTerminateBtnVisible(true);
-                                        isNewCampaignVisible(true);
+                                        
+                                        
+                                        IsResumeBtnVisible(true);
                                     } else if (couponModel().Status() == 5) {
                                         $("#btnCancel").css("display", "block");
                                         couponModel().StatusValue("Completed");
                                     } else if (couponModel().Status() == 6) {
                                         couponModel().StatusValue("Approval Rejected");
                                         $("#btnCancel").css("display", "block");
+                                        IsSubmitBtnVisible(true);
                                     } else if (couponModel().Status() == 7) {
                                         couponModel().StatusValue("Terminated by user");
                                         $("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 

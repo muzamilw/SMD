@@ -62,6 +62,10 @@ namespace SMD.Models.DomainModels
         public string CompanyRegNo { get; set; }
         public string TaxRegNo { get; set; }
 
+        public Nullable<System.DateTime> CreationDateTime { get; set; }
+        public Nullable<int> NoOfBranches { get; set; }
+        public string BillingAddressName { get; set; }
+
         public virtual ICollection<AdCampaign> AdCampaigns { get; set; }
         public virtual ICollection<Invoice> Invoices { get; set; }
         public virtual ICollection<ProfileQuestionUserAnswer> ProfileQuestionUserAnswers { get; set; }

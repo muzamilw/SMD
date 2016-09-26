@@ -258,6 +258,7 @@
           <Property Name="optDealsNearMeEmails" Type="bit" />
           <Property Name="optLatestNewsEmails" Type="bit" />
           <Property Name="optMarketingEmails" Type="bit" />
+          <Property Name="PassportNo" Type="nvarchar" MaxLength="150" />
         </EntityType>
         <EntityType Name="AuditLog">
           <Key>
@@ -375,6 +376,9 @@
           <Property Name="LastPaymentMethodError" Type="nvarchar(max)" />
           <Property Name="CompanyRegNo" Type="nvarchar" MaxLength="100" />
           <Property Name="TaxRegNo" Type="nvarchar" MaxLength="100" />
+          <Property Name="CreationDateTime" Type="datetime" />
+          <Property Name="NoOfBranches" Type="int" />
+          <Property Name="BillingAddressName" Type="nvarchar" MaxLength="150" />
         </EntityType>
         <EntityType Name="CompanyBranch">
           <Key>
@@ -3213,6 +3217,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_Coupons' does not have a primary key
           <Property Name="optLatestNewsEmails" Type="Boolean" />
           <Property Name="optMarketingEmails" Type="Boolean" />
           <NavigationProperty Name="Company" Relationship="SMDDevModel.FK_AspNetUsers_Company" FromRole="AspNetUser" ToRole="Company" />
+          <Property Name="PassportNo" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="AuditLog">
           <Key>
@@ -5797,6 +5802,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_Coupons' does not have a primary key
           <Property Name="CompanyRegNo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="TaxRegNo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="PayOutHistories" Relationship="SMDDevModel.FK_PayOutHistory_Company" FromRole="Company" ToRole="PayOutHistory" />
+          <Property Name="CreationDateTime" Type="DateTime" Precision="3" />
+          <Property Name="NoOfBranches" Type="Int32" />
+          <Property Name="BillingAddressName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_Account_Company">
           <End Type="SMDDevModel.Company" Role="Company" Multiplicity="0..1" />
@@ -6377,6 +6385,7 @@ warning 6002: The table/view 'SMDDev.dbo.vw_Coupons' does not have a primary key
           <EntitySetMapping Name="AspNetUsers">
             <EntityTypeMapping TypeName="SMDDevModel.AspNetUser">
               <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="PassportNo" ColumnName="PassportNo" />
                 <ScalarProperty Name="optMarketingEmails" ColumnName="optMarketingEmails" />
                 <ScalarProperty Name="optLatestNewsEmails" ColumnName="optLatestNewsEmails" />
                 <ScalarProperty Name="optDealsNearMeEmails" ColumnName="optDealsNearMeEmails" />
@@ -7460,6 +7469,9 @@ warning 6002: The table/view 'SMDDev.dbo.vw_Coupons' does not have a primary key
           <EntitySetMapping Name="Companies">
             <EntityTypeMapping TypeName="SMDDevModel.Company">
               <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="BillingAddressName" ColumnName="BillingAddressName" />
+                <ScalarProperty Name="NoOfBranches" ColumnName="NoOfBranches" />
+                <ScalarProperty Name="CreationDateTime" ColumnName="CreationDateTime" />
                 <ScalarProperty Name="TaxRegNo" ColumnName="TaxRegNo" />
                 <ScalarProperty Name="CompanyRegNo" ColumnName="CompanyRegNo" />
                 <ScalarProperty Name="LastPaymentMethodError" ColumnName="LastPaymentMethodError" />
