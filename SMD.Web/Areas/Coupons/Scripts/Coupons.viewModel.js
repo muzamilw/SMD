@@ -14,6 +14,7 @@ define("Coupons/Coupons.viewModel",
                        // Controlls editor visibility 
                     searchFilterValue = ko.observable(),
                     isEditorVisible = ko.observable(false),
+                    EditorLoading= ko.observable(false),
                     langs = ko.observableArray([]),
                     countoryidList = [],
                     cityidList = [],
@@ -116,7 +117,10 @@ define("Coupons/Coupons.viewModel",
                     CouponTitle = ko.observable(),
                     StatusValue = ko.observable(),
                     GetCallBackBranchObject = ko.observable()
-                    previewScreenNumber = ko.observable(1);
+                previewScreenNumber = ko.observable(1);
+
+                
+
                 CurrPage = ko.observable(9);
                 MaxPage = ko.observable(12);
                 getCampaignBaseContent = function () {
@@ -544,7 +548,7 @@ define("Coupons/Coupons.viewModel",
                     });
 
                     couponModel().Status(mode);
-                   
+
                     couponModel().SubmissionDateTime(mode);
 
 
@@ -672,7 +676,7 @@ define("Coupons/Coupons.viewModel",
 
                   },
                 onEditCampaign = function (item) {
-
+                    EditorLoading(true);
                     //resetting flags
                     IsSubmitBtnVisible(false);
 
@@ -685,6 +689,7 @@ define("Coupons/Coupons.viewModel",
                     isNewCampaignVisible(false);
                     isShowArchiveBtn(false);
                     CouponTitle(item.CouponTitle());
+                    
                     $(".hideInCoupons").css("display", "none");
 
                     $("#MarketobjDiv").css("display", "none");
@@ -705,6 +710,13 @@ define("Coupons/Coupons.viewModel",
                                     couponModel(model.Coupon.Create(data.Coupon[0]));
                                     
                                     CouponActiveMonth(couponModel().CouponActiveYear() + ' - ' + GetMonthNameByID(couponModel().CouponActiveMonth()));
+
+
+                                    couponModel().CouponListingMode.subscribe(function (item) {
+                                        CouponListingModeChecker(item);
+                                    });
+
+                                    
                                   
                                     view.initializeTypeahead();
                                     if (couponModel().Status() == 1) {
@@ -733,16 +745,15 @@ define("Coupons/Coupons.viewModel",
 
                                         $("#btnCancel").css("display", "block");
                                     } else if (couponModel().Status() == 4) {
-                                        $("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
-                                        $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,.lang_delSurvey,.table-link").css("display", "none");
-                                        $("#saveBtn").css("display", "none");
-                                        $("#btnResumeCampagin").css("display", "inline-block");
-                                        $("#btnCancel,#btnResumeCampagin,#btnCopyCampaign,#btnStopAndTerminate").removeAttr('disabled');
-                                        $("#btnCancel").css("display", "none");
+                                        //$("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
+                                        //$("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,.lang_delSurvey,.table-link").css("display", "none");
+                                        //$("#saveBtn").css("display", "none");
+                                        //$("#btnResumeCampagin").css("display", "inline-block");
+                                        //$("#btnCancel,#btnResumeCampagin,#btnCopyCampaign,#btnStopAndTerminate").removeAttr('disabled');
+                                        //$("#btnCancel").css("display", "none");
                                         couponModel().StatusValue("Paused");
-                                        
-                                        
                                         IsResumeBtnVisible(true);
+
                                     } else if (couponModel().Status() == 5) {
                                         $("#btnCancel").css("display", "block");
                                         couponModel().StatusValue("Completed");
@@ -848,13 +859,15 @@ define("Coupons/Coupons.viewModel",
                                     $.unblockUI(spinner);
                                     couponModel().reset();
                                 }
-
+                                EditorLoading(false);
                             },
                             error: function (response) {
 
                             }
                         });
                     }
+
+                   
                 },
                 changeStatus = function (status) {
                     if (couponModel() != undefined)
@@ -864,6 +877,19 @@ define("Coupons/Coupons.viewModel",
                     $("#btnSubmitForApproval,#saveBtn,.lang_delSurvey,.table-link").css("display", "inline-block");
                     $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign").removeAttr('disabled');
                 },
+                CouponListingModeChecker = function (item)
+                {
+                    
+                    if (EditorLoading() == false) {
+                        //if upgrading to paid mode and mode is otehr than draft
+                        if (item == 2 && couponModel().Status() != 1) {
+                            IsSubmitBtnVisible(true);
+                        }
+                    }
+
+                    return item;
+                }
+                ,
                  handleBuyIt = function (item) {
                    
 
@@ -1874,6 +1900,12 @@ define("Coupons/Coupons.viewModel",
                     getAdCampaignGridContent();
                     getCampaignBaseContent();
                     isEditorVisible(false);
+
+
+                    
+
+                 
+
                 };
                 return {
                     initialize: initialize,
@@ -2032,7 +2064,9 @@ define("Coupons/Coupons.viewModel",
                     onCreatePriceOption: onCreatePriceOption,
                     onDeletePriceOption: onDeletePriceOption,
                     selectedPriceOption: selectedPriceOption,
-                    selectPriceOption: selectPriceOption
+                    selectPriceOption: selectPriceOption,
+                    EditorLoading: EditorLoading(),
+                    CouponListingModeChecker: CouponListingModeChecker
                 };
             })()
         };
