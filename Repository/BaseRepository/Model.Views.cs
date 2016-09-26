@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets7DE3C92169DE326DDCD7B0BBF7888156765DDB2B003D13AA170A66933C0B3BEE))]
+[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySetsF20880E2BA981250289E7DA379A32672CB9732CC8FC4619023A857047ADE1165))]
 
 namespace Edm_EntityMappingGeneratedViews
 {
@@ -17,18 +17,18 @@ namespace Edm_EntityMappingGeneratedViews
     /// <Summary>
     /// The type contains views for EntitySets and AssociationSets that were generated at design time.
     /// </Summary>
-    public sealed class ViewsForBaseEntitySets7DE3C92169DE326DDCD7B0BBF7888156765DDB2B003D13AA170A66933C0B3BEE : System.Data.Mapping.EntityViewContainer
+    public sealed class ViewsForBaseEntitySetsF20880E2BA981250289E7DA379A32672CB9732CC8FC4619023A857047ADE1165 : System.Data.Mapping.EntityViewContainer
     {
         
         /// <Summary>
         /// The constructor stores the views for the extents and also the hash values generated based on the metadata and mapping closure and views.
         /// </Summary>
-        public ViewsForBaseEntitySets7DE3C92169DE326DDCD7B0BBF7888156765DDB2B003D13AA170A66933C0B3BEE()
+        public ViewsForBaseEntitySetsF20880E2BA981250289E7DA379A32672CB9732CC8FC4619023A857047ADE1165()
         {
             this.EdmEntityContainerName = "BaseDbContext";
             this.StoreEntityContainerName = "SMDModelStoreContainer";
-            this.HashOverMappingClosure = "9fcf98f4b5325be046194a947ead540efc8b4f80234975e0a72c1e806e343d28";
-            this.HashOverAllExtentViews = "69c255a66c4207188361ac8d54ab0b5cea2712d058c14509ca88efaf6f525fb3";
+            this.HashOverMappingClosure = "29f98b51c2c3f218fc643bb44b11ba5646836e083cae3b762544a9d5820e5dc4";
+            this.HashOverAllExtentViews = "10df4f430dcba23dc6970bcb81ed4720afc4b38084616abe7a090e4f589eb7c6";
             this.ViewCount = 116;
         }
         
@@ -1107,7 +1107,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// </Summary>
         private System.Collections.Generic.KeyValuePair<string, string> GetView24()
         {
-            System.Text.StringBuilder viewString = new System.Text.StringBuilder(3742);
+            System.Text.StringBuilder viewString = new System.Text.StringBuilder(3823);
             viewString.Append("\r\n    SELECT VALUE -- Constructing AspNetUsers\r\n        [SMDModel.Store.AspNetUs");
             viewString.Append("ers](T1.AspNetUsers_Id, T1.AspNetUsers_Email, T1.AspNetUsers_EmailConfirmed, T1.");
             viewString.Append("AspNetUsers_PasswordHash, T1.AspNetUsers_SecurityStamp, T1.AspNetUsers_PhoneNumb");
@@ -1123,38 +1123,39 @@ namespace Edm_EntityMappingGeneratedViews
             viewString.Append("ileImage, T1.AspNetUsers_UserCode, T1.AspNetUsers_SmsCode, T1.AspNetUsers_Websit");
             viewString.Append("eLink, T1.AspNetUsers_DOB, T1.AspNetUsers_CompanyId, T1.AspNetUsers_authenticati");
             viewString.Append("onToken, T1.AspNetUsers_DevicePlatform, T1.AspNetUsers_optDealsNearMeEmails, T1.");
-            viewString.Append("AspNetUsers_optLatestNewsEmails, T1.AspNetUsers_optMarketingEmails)\r\n    FROM (\r");
-            viewString.Append("\n        SELECT \r\n            T.Id AS AspNetUsers_Id, \r\n            T.Email AS A");
-            viewString.Append("spNetUsers_Email, \r\n            T.EmailConfirmed AS AspNetUsers_EmailConfirmed, ");
-            viewString.Append("\r\n            T.PasswordHash AS AspNetUsers_PasswordHash, \r\n            T.Securi");
-            viewString.Append("tyStamp AS AspNetUsers_SecurityStamp, \r\n            T.PhoneNumberConfirmed AS As");
-            viewString.Append("pNetUsers_PhoneNumberConfirmed, \r\n            T.TwoFactorEnabled AS AspNetUsers_");
-            viewString.Append("TwoFactorEnabled, \r\n            T.LockoutEndDateUtc AS AspNetUsers_LockoutEndDat");
-            viewString.Append("eUtc, \r\n            T.LockoutEnabled AS AspNetUsers_LockoutEnabled, \r\n          ");
-            viewString.Append("  T.AccessFailedCount AS AspNetUsers_AccessFailedCount, \r\n            T.UserName");
-            viewString.Append(" AS AspNetUsers_UserName, \r\n            T.FullName AS AspNetUsers_FullName, \r\n  ");
-            viewString.Append("          T.AlternateEmail AS AspNetUsers_AlternateEmail, \r\n            T.IsEmai");
-            viewString.Append("lVerified AS AspNetUsers_IsEmailVerified, \r\n            T.Status AS AspNetUsers_");
-            viewString.Append("Status, \r\n            T.CreatedDateTime AS AspNetUsers_CreatedDateTime, \r\n      ");
-            viewString.Append("      T.ModifiedDateTime AS AspNetUsers_ModifiedDateTime, \r\n            T.LastLo");
-            viewString.Append("ginTime AS AspNetUsers_LastLoginTime, \r\n            T.Phone1 AS AspNetUsers_Phon");
-            viewString.Append("e1, \r\n            T.Phone2 AS AspNetUsers_Phone2, \r\n            T.Jobtitle AS As");
-            viewString.Append("pNetUsers_Jobtitle, \r\n            T.ContactNotes AS AspNetUsers_ContactNotes, \r\n");
-            viewString.Append("            T.IsSubscribed AS AspNetUsers_IsSubscribed, \r\n            T.AppID AS");
-            viewString.Append(" AspNetUsers_AppID, \r\n            T.IsCompanyRepresentative AS AspNetUsers_IsCom");
-            viewString.Append("panyRepresentative, \r\n            T.UserTimeZone AS AspNetUsers_UserTimeZone, \r\n");
-            viewString.Append("            T.Gender AS AspNetUsers_Gender, \r\n            T.LanguageId AS AspNet");
-            viewString.Append("Users_LanguageID, \r\n            T.IndustryId AS AspNetUsers_IndustryID, \r\n      ");
-            viewString.Append("      T.EducationId AS AspNetUsers_EducationId, \r\n            T.ProfileImage AS ");
-            viewString.Append("AspNetUsers_ProfileImage, \r\n            T.UserCode AS AspNetUsers_UserCode, \r\n  ");
-            viewString.Append("          T.SmsCode AS AspNetUsers_SmsCode, \r\n            T.WebsiteLink AS AspNe");
-            viewString.Append("tUsers_WebsiteLink, \r\n            T.DOB AS AspNetUsers_DOB, \r\n            T.Comp");
-            viewString.Append("anyId AS AspNetUsers_CompanyId, \r\n            T.AuthenticationToken AS AspNetUse");
-            viewString.Append("rs_authenticationToken, \r\n            T.DevicePlatform AS AspNetUsers_DevicePlat");
-            viewString.Append("form, \r\n            T.optDealsNearMeEmails AS AspNetUsers_optDealsNearMeEmails, ");
-            viewString.Append("\r\n            T.optLatestNewsEmails AS AspNetUsers_optLatestNewsEmails, \r\n      ");
-            viewString.Append("      T.optMarketingEmails AS AspNetUsers_optMarketingEmails, \r\n            True");
-            viewString.Append(" AS _from0\r\n        FROM BaseDbContext.Users AS T\r\n    ) AS T1");
+            viewString.Append("AspNetUsers_optLatestNewsEmails, T1.AspNetUsers_optMarketingEmails, T1.AspNetUse");
+            viewString.Append("rs_PassportNo)\r\n    FROM (\r\n        SELECT \r\n            T.Id AS AspNetUsers_Id,");
+            viewString.Append(" \r\n            T.Email AS AspNetUsers_Email, \r\n            T.EmailConfirmed AS A");
+            viewString.Append("spNetUsers_EmailConfirmed, \r\n            T.PasswordHash AS AspNetUsers_PasswordH");
+            viewString.Append("ash, \r\n            T.SecurityStamp AS AspNetUsers_SecurityStamp, \r\n            T");
+            viewString.Append(".PhoneNumberConfirmed AS AspNetUsers_PhoneNumberConfirmed, \r\n            T.TwoFa");
+            viewString.Append("ctorEnabled AS AspNetUsers_TwoFactorEnabled, \r\n            T.LockoutEndDateUtc A");
+            viewString.Append("S AspNetUsers_LockoutEndDateUtc, \r\n            T.LockoutEnabled AS AspNetUsers_L");
+            viewString.Append("ockoutEnabled, \r\n            T.AccessFailedCount AS AspNetUsers_AccessFailedCoun");
+            viewString.Append("t, \r\n            T.UserName AS AspNetUsers_UserName, \r\n            T.FullName AS");
+            viewString.Append(" AspNetUsers_FullName, \r\n            T.AlternateEmail AS AspNetUsers_AlternateEm");
+            viewString.Append("ail, \r\n            T.IsEmailVerified AS AspNetUsers_IsEmailVerified, \r\n         ");
+            viewString.Append("   T.Status AS AspNetUsers_Status, \r\n            T.CreatedDateTime AS AspNetUser");
+            viewString.Append("s_CreatedDateTime, \r\n            T.ModifiedDateTime AS AspNetUsers_ModifiedDateT");
+            viewString.Append("ime, \r\n            T.LastLoginTime AS AspNetUsers_LastLoginTime, \r\n            T");
+            viewString.Append(".Phone1 AS AspNetUsers_Phone1, \r\n            T.Phone2 AS AspNetUsers_Phone2, \r\n ");
+            viewString.Append("           T.Jobtitle AS AspNetUsers_Jobtitle, \r\n            T.ContactNotes AS A");
+            viewString.Append("spNetUsers_ContactNotes, \r\n            T.IsSubscribed AS AspNetUsers_IsSubscribe");
+            viewString.Append("d, \r\n            T.AppID AS AspNetUsers_AppID, \r\n            T.IsCompanyRepresen");
+            viewString.Append("tative AS AspNetUsers_IsCompanyRepresentative, \r\n            T.UserTimeZone AS A");
+            viewString.Append("spNetUsers_UserTimeZone, \r\n            T.Gender AS AspNetUsers_Gender, \r\n       ");
+            viewString.Append("     T.LanguageId AS AspNetUsers_LanguageID, \r\n            T.IndustryId AS AspNe");
+            viewString.Append("tUsers_IndustryID, \r\n            T.EducationId AS AspNetUsers_EducationId, \r\n   ");
+            viewString.Append("         T.ProfileImage AS AspNetUsers_ProfileImage, \r\n            T.UserCode AS");
+            viewString.Append(" AspNetUsers_UserCode, \r\n            T.SmsCode AS AspNetUsers_SmsCode, \r\n       ");
+            viewString.Append("     T.WebsiteLink AS AspNetUsers_WebsiteLink, \r\n            T.DOB AS AspNetUser");
+            viewString.Append("s_DOB, \r\n            T.CompanyId AS AspNetUsers_CompanyId, \r\n            T.Authe");
+            viewString.Append("nticationToken AS AspNetUsers_authenticationToken, \r\n            T.DevicePlatfor");
+            viewString.Append("m AS AspNetUsers_DevicePlatform, \r\n            T.optDealsNearMeEmails AS AspNetU");
+            viewString.Append("sers_optDealsNearMeEmails, \r\n            T.optLatestNewsEmails AS AspNetUsers_op");
+            viewString.Append("tLatestNewsEmails, \r\n            T.optMarketingEmails AS AspNetUsers_optMarketin");
+            viewString.Append("gEmails, \r\n            T.PassportNo AS AspNetUsers_PassportNo, \r\n            Tru");
+            viewString.Append("e AS _from0\r\n        FROM BaseDbContext.Users AS T\r\n    ) AS T1");
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.AspNetUsers", viewString.ToString());
         }
         
@@ -1676,7 +1677,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// </Summary>
         private System.Collections.Generic.KeyValuePair<string, string> GetView40()
         {
-            System.Text.StringBuilder viewString = new System.Text.StringBuilder(3915);
+            System.Text.StringBuilder viewString = new System.Text.StringBuilder(4182);
             viewString.Append("\r\n    SELECT VALUE -- Constructing Company\r\n        [SMDModel.Store.Company](T1.");
             viewString.Append("Company_CompanyId, T1.Company_CompanyName, T1.Company_ReplyEmail, T1.Company_Tel");
             viewString.Append("1, T1.Company_Tel2, T1.Company_AddressLine1, T1.Company_AddressLine2, T1.Company");
@@ -1692,40 +1693,44 @@ namespace Edm_EntityMappingGeneratedViews
             viewString.Append("1.Company_PinterestHandle, T1.Company_VoucherSecretKey, T1.Company_City, T1.Comp");
             viewString.Append("any_BillingCity, T1.Company_AboutUsDescription, T1.Company_Status, T1.Company_Pa");
             viewString.Append("ymentMethodStatus, T1.Company_LastPaymentMethodErrorDate, T1.Company_LastPayment");
-            viewString.Append("MethodError, T1.Company_CompanyRegNo, T1.Company_TaxRegNo)\r\n    FROM (\r\n        ");
-            viewString.Append("SELECT \r\n            T.CompanyId AS Company_CompanyId, \r\n            T.CompanyNa");
-            viewString.Append("me AS Company_CompanyName, \r\n            T.ReplyEmail AS Company_ReplyEmail, \r\n ");
-            viewString.Append("           T.Tel1 AS Company_Tel1, \r\n            T.Tel2 AS Company_Tel2, \r\n     ");
-            viewString.Append("       T.AddressLine1 AS Company_AddressLine1, \r\n            T.AddressLine2 AS C");
-            viewString.Append("ompany_AddressLine2, \r\n            T.State AS Company_State, \r\n            T.Cou");
-            viewString.Append("ntryId AS Company_CountryId, \r\n            T.ZipCode AS Company_ZipCode, \r\n     ");
-            viewString.Append("       T.TimeZone AS Company_TimeZone, \r\n            T.Logo AS Company_Logo, \r\n ");
-            viewString.Append("           T.StripeCustomerId AS Company_StripeCustomerId, \r\n            T.Charg");
-            viewString.Append("eBeesubscriptionID AS Company_ChargeBeesubscriptionID, \r\n            T.Registere");
-            viewString.Append("dViaReferral AS Company_RegisteredViaReferral, \r\n            T.ReferringCompanyI");
-            viewString.Append("D AS Company_ReferringCompanyID, \r\n            T.PaypalCustomerId AS Company_Pay");
-            viewString.Append("palCustomerId, \r\n            T.GoogleWalletCustomerId AS Company_GoogleWalletCus");
-            viewString.Append("tomerId, \r\n            T.PreferredPayoutAccount AS Company_PreferredPayoutAccoun");
-            viewString.Append("t, \r\n            T.SalesEmail AS Company_SalesEmail, \r\n            T.ReferralCod");
-            viewString.Append("e AS Company_ReferralCode, \r\n            T.AfilliatianStatus AS Company_Afilliat");
-            viewString.Append("ianStatus, \r\n            T.WebsiteLink AS Company_WebsiteLink, \r\n            T.C");
-            viewString.Append("ompanyType AS Company_CompanyType, \r\n            T.BillingAddressLine1 AS Compan");
-            viewString.Append("y_BillingAddressLine1, \r\n            T.BillingAddressLine2 AS Company_BillingAdd");
-            viewString.Append("ressLine2, \r\n            T.BillingState AS Company_BillingState, \r\n            T");
-            viewString.Append(".BillingCountryId AS Company_BillingCountryId, \r\n            T.BillingZipCode AS");
-            viewString.Append(" Company_BillingZipCode, \r\n            T.BillingPhone AS Company_BillingPhone, \r");
-            viewString.Append("\n            T.BillingEmail AS Company_BillingEmail, \r\n            T.TwitterHand");
-            viewString.Append("le AS Company_TwitterHandle, \r\n            T.FacebookHandle AS Company_FacebookH");
-            viewString.Append("andle, \r\n            T.InstagramHandle AS Company_InstagramHandle, \r\n           ");
-            viewString.Append(" T.PinterestHandle AS Company_PinterestHandle, \r\n            T.VoucherSecretKey ");
-            viewString.Append("AS Company_VoucherSecretKey, \r\n            T.City AS Company_City, \r\n           ");
-            viewString.Append(" T.BillingCity AS Company_BillingCity, \r\n            T.AboutUsDescription AS Com");
-            viewString.Append("pany_AboutUsDescription, \r\n            T.Status AS Company_Status, \r\n           ");
-            viewString.Append(" T.PaymentMethodStatus AS Company_PaymentMethodStatus, \r\n            T.LastPayme");
-            viewString.Append("ntMethodErrorDate AS Company_LastPaymentMethodErrorDate, \r\n            T.LastPay");
-            viewString.Append("mentMethodError AS Company_LastPaymentMethodError, \r\n            T.CompanyRegNo ");
-            viewString.Append("AS Company_CompanyRegNo, \r\n            T.TaxRegNo AS Company_TaxRegNo, \r\n       ");
-            viewString.Append("     True AS _from0\r\n        FROM BaseDbContext.Companies AS T\r\n    ) AS T1");
+            viewString.Append("MethodError, T1.Company_CompanyRegNo, T1.Company_TaxRegNo, T1.Company_CreationDa");
+            viewString.Append("teTime, T1.Company_NoOfBranches, T1.Company_BillingAddressName)\r\n    FROM (\r\n   ");
+            viewString.Append("     SELECT \r\n            T.CompanyId AS Company_CompanyId, \r\n            T.Comp");
+            viewString.Append("anyName AS Company_CompanyName, \r\n            T.ReplyEmail AS Company_ReplyEmail");
+            viewString.Append(", \r\n            T.Tel1 AS Company_Tel1, \r\n            T.Tel2 AS Company_Tel2, \r\n");
+            viewString.Append("            T.AddressLine1 AS Company_AddressLine1, \r\n            T.AddressLine2");
+            viewString.Append(" AS Company_AddressLine2, \r\n            T.State AS Company_State, \r\n            ");
+            viewString.Append("T.CountryId AS Company_CountryId, \r\n            T.ZipCode AS Company_ZipCode, \r\n");
+            viewString.Append("            T.TimeZone AS Company_TimeZone, \r\n            T.Logo AS Company_Logo");
+            viewString.Append(", \r\n            T.StripeCustomerId AS Company_StripeCustomerId, \r\n            T.");
+            viewString.Append("ChargeBeesubscriptionID AS Company_ChargeBeesubscriptionID, \r\n            T.Regi");
+            viewString.Append("steredViaReferral AS Company_RegisteredViaReferral, \r\n            T.ReferringCom");
+            viewString.Append("panyID AS Company_ReferringCompanyID, \r\n            T.PaypalCustomerId AS Compan");
+            viewString.Append("y_PaypalCustomerId, \r\n            T.GoogleWalletCustomerId AS Company_GoogleWall");
+            viewString.Append("etCustomerId, \r\n            T.PreferredPayoutAccount AS Company_PreferredPayoutA");
+            viewString.Append("ccount, \r\n            T.SalesEmail AS Company_SalesEmail, \r\n            T.Referr");
+            viewString.Append("alCode AS Company_ReferralCode, \r\n            T.AfilliatianStatus AS Company_Afi");
+            viewString.Append("lliatianStatus, \r\n            T.WebsiteLink AS Company_WebsiteLink, \r\n          ");
+            viewString.Append("  T.CompanyType AS Company_CompanyType, \r\n            T.BillingAddressLine1 AS C");
+            viewString.Append("ompany_BillingAddressLine1, \r\n            T.BillingAddressLine2 AS Company_Billi");
+            viewString.Append("ngAddressLine2, \r\n            T.BillingState AS Company_BillingState, \r\n        ");
+            viewString.Append("    T.BillingCountryId AS Company_BillingCountryId, \r\n            T.BillingZipCo");
+            viewString.Append("de AS Company_BillingZipCode, \r\n            T.BillingPhone AS Company_BillingPho");
+            viewString.Append("ne, \r\n            T.BillingEmail AS Company_BillingEmail, \r\n            T.Twitte");
+            viewString.Append("rHandle AS Company_TwitterHandle, \r\n            T.FacebookHandle AS Company_Face");
+            viewString.Append("bookHandle, \r\n            T.InstagramHandle AS Company_InstagramHandle, \r\n      ");
+            viewString.Append("      T.PinterestHandle AS Company_PinterestHandle, \r\n            T.VoucherSecre");
+            viewString.Append("tKey AS Company_VoucherSecretKey, \r\n            T.City AS Company_City, \r\n      ");
+            viewString.Append("      T.BillingCity AS Company_BillingCity, \r\n            T.AboutUsDescription A");
+            viewString.Append("S Company_AboutUsDescription, \r\n            T.Status AS Company_Status, \r\n      ");
+            viewString.Append("      T.PaymentMethodStatus AS Company_PaymentMethodStatus, \r\n            T.Last");
+            viewString.Append("PaymentMethodErrorDate AS Company_LastPaymentMethodErrorDate, \r\n            T.La");
+            viewString.Append("stPaymentMethodError AS Company_LastPaymentMethodError, \r\n            T.CompanyR");
+            viewString.Append("egNo AS Company_CompanyRegNo, \r\n            T.TaxRegNo AS Company_TaxRegNo, \r\n  ");
+            viewString.Append("          T.CreationDateTime AS Company_CreationDateTime, \r\n            T.NoOfBr");
+            viewString.Append("anches AS Company_NoOfBranches, \r\n            T.BillingAddressName AS Company_Bi");
+            viewString.Append("llingAddressName, \r\n            True AS _from0\r\n        FROM BaseDbContext.Compa");
+            viewString.Append("nies AS T\r\n    ) AS T1");
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.Company", viewString.ToString());
         }
         
@@ -2397,7 +2402,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// </Summary>
         private System.Collections.Generic.KeyValuePair<string, string> GetView68()
         {
-            System.Text.StringBuilder viewString = new System.Text.StringBuilder(3168);
+            System.Text.StringBuilder viewString = new System.Text.StringBuilder(3235);
             viewString.Append("\r\n    SELECT VALUE -- Constructing Users\r\n        [DomainModels.User](T1.User_Id");
             viewString.Append(", T1.User_Email, T1.User_EmailConfirmed, T1.User_PasswordHash, T1.User_SecurityS");
             viewString.Append("tamp, T1.User_PhoneNumberConfirmed, T1.User_TwoFactorEnabled, T1.User_LockoutEnd");
@@ -2410,34 +2415,35 @@ namespace Edm_EntityMappingGeneratedViews
             viewString.Append("ser_ProfileImage, T1.User_UserCode, T1.User_SmsCode, T1.User_WebsiteLink, T1.Use");
             viewString.Append("r_DOB, T1.User_CompanyId, T1.User_AuthenticationToken, T1.User_DevicePlatform, T");
             viewString.Append("1.User_optDealsNearMeEmails, T1.User_optLatestNewsEmails, T1.User_optMarketingEm");
-            viewString.Append("ails)\r\n    FROM (\r\n        SELECT \r\n            T.Id AS User_Id, \r\n            T");
-            viewString.Append(".Email AS User_Email, \r\n            T.EmailConfirmed AS User_EmailConfirmed, \r\n ");
-            viewString.Append("           T.PasswordHash AS User_PasswordHash, \r\n            T.SecurityStamp AS");
-            viewString.Append(" User_SecurityStamp, \r\n            T.PhoneNumberConfirmed AS User_PhoneNumberCon");
-            viewString.Append("firmed, \r\n            T.TwoFactorEnabled AS User_TwoFactorEnabled, \r\n           ");
-            viewString.Append(" T.LockoutEndDateUtc AS User_LockoutEndDateUtc, \r\n            T.LockoutEnabled A");
-            viewString.Append("S User_LockoutEnabled, \r\n            T.AccessFailedCount AS User_AccessFailedCou");
-            viewString.Append("nt, \r\n            T.UserName AS User_UserName, \r\n            T.FullName AS User_");
-            viewString.Append("FullName, \r\n            T.AlternateEmail AS User_AlternateEmail, \r\n            T");
-            viewString.Append(".IsEmailVerified AS User_IsEmailVerified, \r\n            T.Status AS User_Status,");
-            viewString.Append(" \r\n            T.CreatedDateTime AS User_CreatedDateTime, \r\n            T.Modifi");
-            viewString.Append("edDateTime AS User_ModifiedDateTime, \r\n            T.LastLoginTime AS User_LastL");
-            viewString.Append("oginTime, \r\n            T.Phone1 AS User_Phone1, \r\n            T.Phone2 AS User_");
-            viewString.Append("Phone2, \r\n            T.Jobtitle AS User_Jobtitle, \r\n            T.ContactNotes ");
-            viewString.Append("AS User_ContactNotes, \r\n            T.IsSubscribed AS User_IsSubscribed, \r\n     ");
-            viewString.Append("       T.AppID AS User_AppID, \r\n            T.IsCompanyRepresentative AS User_Is");
-            viewString.Append("CompanyRepresentative, \r\n            T.UserTimeZone AS User_UserTimeZone, \r\n    ");
-            viewString.Append("        T.Gender AS User_Gender, \r\n            T.LanguageID AS User_LanguageId, ");
-            viewString.Append("\r\n            T.IndustryID AS User_IndustryId, \r\n            T.EducationId AS Us");
-            viewString.Append("er_EducationId, \r\n            T.ProfileImage AS User_ProfileImage, \r\n           ");
-            viewString.Append(" T.UserCode AS User_UserCode, \r\n            T.SmsCode AS User_SmsCode, \r\n       ");
-            viewString.Append("     T.WebsiteLink AS User_WebsiteLink, \r\n            T.DOB AS User_DOB, \r\n     ");
-            viewString.Append("       T.CompanyId AS User_CompanyId, \r\n            T.authenticationToken AS Use");
-            viewString.Append("r_AuthenticationToken, \r\n            T.DevicePlatform AS User_DevicePlatform, \r\n");
-            viewString.Append("            T.optDealsNearMeEmails AS User_optDealsNearMeEmails, \r\n            T");
-            viewString.Append(".optLatestNewsEmails AS User_optLatestNewsEmails, \r\n            T.optMarketingEm");
-            viewString.Append("ails AS User_optMarketingEmails, \r\n            True AS _from0\r\n        FROM SMDM");
-            viewString.Append("odelStoreContainer.AspNetUsers AS T\r\n    ) AS T1");
+            viewString.Append("ails, T1.User_PassportNo)\r\n    FROM (\r\n        SELECT \r\n            T.Id AS User");
+            viewString.Append("_Id, \r\n            T.Email AS User_Email, \r\n            T.EmailConfirmed AS User");
+            viewString.Append("_EmailConfirmed, \r\n            T.PasswordHash AS User_PasswordHash, \r\n          ");
+            viewString.Append("  T.SecurityStamp AS User_SecurityStamp, \r\n            T.PhoneNumberConfirmed AS");
+            viewString.Append(" User_PhoneNumberConfirmed, \r\n            T.TwoFactorEnabled AS User_TwoFactorEn");
+            viewString.Append("abled, \r\n            T.LockoutEndDateUtc AS User_LockoutEndDateUtc, \r\n          ");
+            viewString.Append("  T.LockoutEnabled AS User_LockoutEnabled, \r\n            T.AccessFailedCount AS ");
+            viewString.Append("User_AccessFailedCount, \r\n            T.UserName AS User_UserName, \r\n           ");
+            viewString.Append(" T.FullName AS User_FullName, \r\n            T.AlternateEmail AS User_AlternateEm");
+            viewString.Append("ail, \r\n            T.IsEmailVerified AS User_IsEmailVerified, \r\n            T.St");
+            viewString.Append("atus AS User_Status, \r\n            T.CreatedDateTime AS User_CreatedDateTime, \r\n");
+            viewString.Append("            T.ModifiedDateTime AS User_ModifiedDateTime, \r\n            T.LastLog");
+            viewString.Append("inTime AS User_LastLoginTime, \r\n            T.Phone1 AS User_Phone1, \r\n         ");
+            viewString.Append("   T.Phone2 AS User_Phone2, \r\n            T.Jobtitle AS User_Jobtitle, \r\n       ");
+            viewString.Append("     T.ContactNotes AS User_ContactNotes, \r\n            T.IsSubscribed AS User_I");
+            viewString.Append("sSubscribed, \r\n            T.AppID AS User_AppID, \r\n            T.IsCompanyRepre");
+            viewString.Append("sentative AS User_IsCompanyRepresentative, \r\n            T.UserTimeZone AS User_");
+            viewString.Append("UserTimeZone, \r\n            T.Gender AS User_Gender, \r\n            T.LanguageID ");
+            viewString.Append("AS User_LanguageId, \r\n            T.IndustryID AS User_IndustryId, \r\n           ");
+            viewString.Append(" T.EducationId AS User_EducationId, \r\n            T.ProfileImage AS User_Profile");
+            viewString.Append("Image, \r\n            T.UserCode AS User_UserCode, \r\n            T.SmsCode AS Use");
+            viewString.Append("r_SmsCode, \r\n            T.WebsiteLink AS User_WebsiteLink, \r\n            T.DOB ");
+            viewString.Append("AS User_DOB, \r\n            T.CompanyId AS User_CompanyId, \r\n            T.authen");
+            viewString.Append("ticationToken AS User_AuthenticationToken, \r\n            T.DevicePlatform AS Use");
+            viewString.Append("r_DevicePlatform, \r\n            T.optDealsNearMeEmails AS User_optDealsNearMeEma");
+            viewString.Append("ils, \r\n            T.optLatestNewsEmails AS User_optLatestNewsEmails, \r\n        ");
+            viewString.Append("    T.optMarketingEmails AS User_optMarketingEmails, \r\n            T.PassportNo ");
+            viewString.Append("AS User_PassportNo, \r\n            True AS _from0\r\n        FROM SMDModelStoreCont");
+            viewString.Append("ainer.AspNetUsers AS T\r\n    ) AS T1");
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.Users", viewString.ToString());
         }
         
@@ -2959,7 +2965,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// </Summary>
         private System.Collections.Generic.KeyValuePair<string, string> GetView84()
         {
-            System.Text.StringBuilder viewString = new System.Text.StringBuilder(3922);
+            System.Text.StringBuilder viewString = new System.Text.StringBuilder(4189);
             viewString.Append("\r\n    SELECT VALUE -- Constructing Companies\r\n        [DomainModels.Company](T1.");
             viewString.Append("Company_CompanyId, T1.Company_CompanyName, T1.Company_ReplyEmail, T1.Company_Tel");
             viewString.Append("1, T1.Company_Tel2, T1.Company_AddressLine1, T1.Company_AddressLine2, T1.Company");
@@ -2975,41 +2981,44 @@ namespace Edm_EntityMappingGeneratedViews
             viewString.Append("1.Company_PinterestHandle, T1.Company_VoucherSecretKey, T1.Company_City, T1.Comp");
             viewString.Append("any_BillingCity, T1.Company_AboutUsDescription, T1.Company_Status, T1.Company_Pa");
             viewString.Append("ymentMethodStatus, T1.Company_LastPaymentMethodErrorDate, T1.Company_LastPayment");
-            viewString.Append("MethodError, T1.Company_CompanyRegNo, T1.Company_TaxRegNo)\r\n    FROM (\r\n        ");
-            viewString.Append("SELECT \r\n            T.CompanyId AS Company_CompanyId, \r\n            T.CompanyNa");
-            viewString.Append("me AS Company_CompanyName, \r\n            T.ReplyEmail AS Company_ReplyEmail, \r\n ");
-            viewString.Append("           T.Tel1 AS Company_Tel1, \r\n            T.Tel2 AS Company_Tel2, \r\n     ");
-            viewString.Append("       T.AddressLine1 AS Company_AddressLine1, \r\n            T.AddressLine2 AS C");
-            viewString.Append("ompany_AddressLine2, \r\n            T.State AS Company_State, \r\n            T.Cou");
-            viewString.Append("ntryId AS Company_CountryId, \r\n            T.ZipCode AS Company_ZipCode, \r\n     ");
-            viewString.Append("       T.TimeZone AS Company_TimeZone, \r\n            T.Logo AS Company_Logo, \r\n ");
-            viewString.Append("           T.StripeCustomerId AS Company_StripeCustomerId, \r\n            T.Charg");
-            viewString.Append("eBeesubscriptionID AS Company_ChargeBeesubscriptionID, \r\n            T.Registere");
-            viewString.Append("dViaReferral AS Company_RegisteredViaReferral, \r\n            T.ReferringCompanyI");
-            viewString.Append("D AS Company_ReferringCompanyID, \r\n            T.PaypalCustomerId AS Company_Pay");
-            viewString.Append("palCustomerId, \r\n            T.GoogleWalletCustomerId AS Company_GoogleWalletCus");
-            viewString.Append("tomerId, \r\n            T.PreferredPayoutAccount AS Company_PreferredPayoutAccoun");
-            viewString.Append("t, \r\n            T.SalesEmail AS Company_SalesEmail, \r\n            T.ReferralCod");
-            viewString.Append("e AS Company_ReferralCode, \r\n            T.AfilliatianStatus AS Company_Afilliat");
-            viewString.Append("ianStatus, \r\n            T.WebsiteLink AS Company_WebsiteLink, \r\n            T.C");
-            viewString.Append("ompanyType AS Company_CompanyType, \r\n            T.BillingAddressLine1 AS Compan");
-            viewString.Append("y_BillingAddressLine1, \r\n            T.BillingAddressLine2 AS Company_BillingAdd");
-            viewString.Append("ressLine2, \r\n            T.BillingState AS Company_BillingState, \r\n            T");
-            viewString.Append(".BillingCountryId AS Company_BillingCountryId, \r\n            T.BillingZipCode AS");
-            viewString.Append(" Company_BillingZipCode, \r\n            T.BillingPhone AS Company_BillingPhone, \r");
-            viewString.Append("\n            T.BillingEmail AS Company_BillingEmail, \r\n            T.TwitterHand");
-            viewString.Append("le AS Company_TwitterHandle, \r\n            T.FacebookHandle AS Company_FacebookH");
-            viewString.Append("andle, \r\n            T.InstagramHandle AS Company_InstagramHandle, \r\n           ");
-            viewString.Append(" T.PinterestHandle AS Company_PinterestHandle, \r\n            T.VoucherSecretKey ");
-            viewString.Append("AS Company_VoucherSecretKey, \r\n            T.City AS Company_City, \r\n           ");
-            viewString.Append(" T.BillingCity AS Company_BillingCity, \r\n            T.AboutUsDescription AS Com");
-            viewString.Append("pany_AboutUsDescription, \r\n            T.Status AS Company_Status, \r\n           ");
-            viewString.Append(" T.PaymentMethodStatus AS Company_PaymentMethodStatus, \r\n            T.LastPayme");
-            viewString.Append("ntMethodErrorDate AS Company_LastPaymentMethodErrorDate, \r\n            T.LastPay");
-            viewString.Append("mentMethodError AS Company_LastPaymentMethodError, \r\n            T.CompanyRegNo ");
-            viewString.Append("AS Company_CompanyRegNo, \r\n            T.TaxRegNo AS Company_TaxRegNo, \r\n       ");
-            viewString.Append("     True AS _from0\r\n        FROM SMDModelStoreContainer.Company AS T\r\n    ) AS ");
-            viewString.Append("T1");
+            viewString.Append("MethodError, T1.Company_CompanyRegNo, T1.Company_TaxRegNo, T1.Company_CreationDa");
+            viewString.Append("teTime, T1.Company_NoOfBranches, T1.Company_BillingAddressName)\r\n    FROM (\r\n   ");
+            viewString.Append("     SELECT \r\n            T.CompanyId AS Company_CompanyId, \r\n            T.Comp");
+            viewString.Append("anyName AS Company_CompanyName, \r\n            T.ReplyEmail AS Company_ReplyEmail");
+            viewString.Append(", \r\n            T.Tel1 AS Company_Tel1, \r\n            T.Tel2 AS Company_Tel2, \r\n");
+            viewString.Append("            T.AddressLine1 AS Company_AddressLine1, \r\n            T.AddressLine2");
+            viewString.Append(" AS Company_AddressLine2, \r\n            T.State AS Company_State, \r\n            ");
+            viewString.Append("T.CountryId AS Company_CountryId, \r\n            T.ZipCode AS Company_ZipCode, \r\n");
+            viewString.Append("            T.TimeZone AS Company_TimeZone, \r\n            T.Logo AS Company_Logo");
+            viewString.Append(", \r\n            T.StripeCustomerId AS Company_StripeCustomerId, \r\n            T.");
+            viewString.Append("ChargeBeesubscriptionID AS Company_ChargeBeesubscriptionID, \r\n            T.Regi");
+            viewString.Append("steredViaReferral AS Company_RegisteredViaReferral, \r\n            T.ReferringCom");
+            viewString.Append("panyID AS Company_ReferringCompanyID, \r\n            T.PaypalCustomerId AS Compan");
+            viewString.Append("y_PaypalCustomerId, \r\n            T.GoogleWalletCustomerId AS Company_GoogleWall");
+            viewString.Append("etCustomerId, \r\n            T.PreferredPayoutAccount AS Company_PreferredPayoutA");
+            viewString.Append("ccount, \r\n            T.SalesEmail AS Company_SalesEmail, \r\n            T.Referr");
+            viewString.Append("alCode AS Company_ReferralCode, \r\n            T.AfilliatianStatus AS Company_Afi");
+            viewString.Append("lliatianStatus, \r\n            T.WebsiteLink AS Company_WebsiteLink, \r\n          ");
+            viewString.Append("  T.CompanyType AS Company_CompanyType, \r\n            T.BillingAddressLine1 AS C");
+            viewString.Append("ompany_BillingAddressLine1, \r\n            T.BillingAddressLine2 AS Company_Billi");
+            viewString.Append("ngAddressLine2, \r\n            T.BillingState AS Company_BillingState, \r\n        ");
+            viewString.Append("    T.BillingCountryId AS Company_BillingCountryId, \r\n            T.BillingZipCo");
+            viewString.Append("de AS Company_BillingZipCode, \r\n            T.BillingPhone AS Company_BillingPho");
+            viewString.Append("ne, \r\n            T.BillingEmail AS Company_BillingEmail, \r\n            T.Twitte");
+            viewString.Append("rHandle AS Company_TwitterHandle, \r\n            T.FacebookHandle AS Company_Face");
+            viewString.Append("bookHandle, \r\n            T.InstagramHandle AS Company_InstagramHandle, \r\n      ");
+            viewString.Append("      T.PinterestHandle AS Company_PinterestHandle, \r\n            T.VoucherSecre");
+            viewString.Append("tKey AS Company_VoucherSecretKey, \r\n            T.City AS Company_City, \r\n      ");
+            viewString.Append("      T.BillingCity AS Company_BillingCity, \r\n            T.AboutUsDescription A");
+            viewString.Append("S Company_AboutUsDescription, \r\n            T.Status AS Company_Status, \r\n      ");
+            viewString.Append("      T.PaymentMethodStatus AS Company_PaymentMethodStatus, \r\n            T.Last");
+            viewString.Append("PaymentMethodErrorDate AS Company_LastPaymentMethodErrorDate, \r\n            T.La");
+            viewString.Append("stPaymentMethodError AS Company_LastPaymentMethodError, \r\n            T.CompanyR");
+            viewString.Append("egNo AS Company_CompanyRegNo, \r\n            T.TaxRegNo AS Company_TaxRegNo, \r\n  ");
+            viewString.Append("          T.CreationDateTime AS Company_CreationDateTime, \r\n            T.NoOfBr");
+            viewString.Append("anches AS Company_NoOfBranches, \r\n            T.BillingAddressName AS Company_Bi");
+            viewString.Append("llingAddressName, \r\n            True AS _from0\r\n        FROM SMDModelStoreContai");
+            viewString.Append("ner.Company AS T\r\n    ) AS T1");
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.Companies", viewString.ToString());
         }
         

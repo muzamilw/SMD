@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SMD.Models.ResponseModels;
 
 namespace SMD.Interfaces.Services
 {
@@ -20,5 +21,6 @@ namespace SMD.Interfaces.Services
         bool UpdateCompany(Company company, byte[] LogoImageBytes);
 
         Company GetCompanyForAddress();
+        CompanyResponseModel GetCompanyDetails();
     }
 }
