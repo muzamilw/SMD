@@ -677,3 +677,38 @@ GO
 ALTER TABLE dbo.Country SET (LOCK_ESCALATION = TABLE)
 GO
 COMMIT
+
+
+
+
+
+
+/****** Object:  View [dbo].[vw_Coupons]    Script Date: 9/26/2016 3:25:03 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+alter VIEW [dbo].[vw_Coupons]
+AS
+select a.*, ( select
+			stuff((
+					select ', ' + c1.Name
+					from [CouponCategories] l1 
+					left outer join CouponCategory c1 on l1.CategoryId = c1.CategoryId
+					
+					where l1.CouponId = l.CouponId
+					--order by c1.CountryName
+					for xml path('')
+				),1,1,'') as name_csv
+			from [dbo].[CouponCategories] l 
+			where CouponId = a.CouponId
+			group by l.CouponId  
+		)  Categories,
+		curr.CurrencyCode, curr.CurrencySymbol
+		 from Coupon a
+		left outer join Country cc on a.LocationCountryId = cc.CountryID
+		left outer join Currency curr on curr.CurrencyID = cc.CurrencyID
+
+GO
