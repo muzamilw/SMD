@@ -66,9 +66,9 @@
                 <div style="display:inline-block;margin-top:20px;width:795px;">
                     <div style="float:right;">
                         <div class="pull-left" style="display:inline-block;margin-top:20px;">
-                            <p style="box-shadow: inset 0 0px 0 white, inset 0 -1px 0 white;margin-bottom:3px;display:inline-block;font-size:11px;color:white">
+                            @*<p style="box-shadow: inset 0 0px 0 white, inset 0 -1px 0 white;margin-bottom:3px;display:inline-block;font-size:11px;color:white">
                                 Franchise Dashboard
-                            </p>
+                            </p>*@
                             <p style="font-size:16px;color:white;">@CompanyName</p>
                         </div>
                         <div class="pull-left" style="color:white;margin-left: 10px;margin-top: 12px;margin-right: 9px;"><img style="width:87px;height:41px;    background-color: white; border: 1px solid white;" src="~/@CompanyLogo" /></div>
@@ -163,15 +163,15 @@
             @RenderSection("leftmenue", required: false)
 
             @*content wrapper goes here*@
-            <div style="margin-top:20px;margin-left:25px;">
+            <div style="margin-top:20px;margin-left:12px;">
                 <span style="font-weight:bold;color:#7f8c8d;font-size:14px;">Approve or Rejected</span>
 
             </div>
            
-            <div id="content-wrapper" class="removeMenuMargin">
+            <div id="content-wrapper" style="padding-bottom:0px;" class="removeMenuMargin">
                
                
-                <div class="row" id="topArea" style="margin-bottom:15px;">
+                <div class="row" id="topArea" style="padding-left:0px; ">
                     
                       
                        
@@ -198,7 +198,7 @@
                                 Survey Questions
                             </a>
                             <a class="btn btn-default btn-gray " aria-expanded="false" style="padding-top:16px;" href="~/">
-                                Reviews
+                                Deals
                             </a>
 
                             <div class="btn-group"style="display:none">
@@ -216,7 +216,7 @@
 
                                 </ul>
                                 </div>
-                            <div class="btn-group" style="margin-left:100px ">
+                            <div class="btn-group" style="margin-left:109px ">
                                 <button type="button" class="btn btn-default btn-gray dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Manage <span class="caret"></span>
                                 </button>

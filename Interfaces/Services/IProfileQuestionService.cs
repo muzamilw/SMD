@@ -43,6 +43,7 @@ namespace SMD.Interfaces.Services
         ProfileQuestionResponseModelForApproval GetProfileQuestionForAproval(GetPagedListRequest request);
         //List<ProfileQuestionTargetLocation> GetPQlocation(long pqId);
         string UpdatePQForApproval(ProfileQuestion source);
+        ProfileQuestionGroup GetPQGroupById(int id);
        
     }
 }

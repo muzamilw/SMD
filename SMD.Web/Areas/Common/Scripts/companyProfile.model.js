@@ -3,10 +3,14 @@
     var // ReSharper disable InconsistentNaming
       User = function (CompanyId, CompanyName, Tel1, Tel2, Logo,
           StripeCustomerId, SalesEmail, WebsiteLink, VoucherSecretKey, BillingAddressLine1, BillingAddressLine2,
-          BillingState, BillingCountryId, BillingCityId, BillingZipCode, BillingPhone, BillingEmail, TwitterHandle, FacebookHandle,
-          InstagramHandle, PinterestHandle, Logo, LogoImageBase64) {
+          BillingState, BillingCountryId, BillingCity, BillingZipCode, BillingPhone, BillingEmail, TwitterHandle, FacebookHandle,
+          InstagramHandle, PinterestHandle, Logo, LogoImageBase64, specifiedSolutation, specifiedProfession, specifiedFirstName, specifiedLastName, specifiedEmail, specifiedMobile,
+            specifiedDob, specifiedPassport, specifiedIsDeals, specifiedIsWeeklyUpdate, specifiedIsLatestService, specifiedBranchName, specifiedBranchCount, specifiedWebAddress,
+            specifiedSalesEmail, specifiedSalesPhone, specifiedCompanyType, specifiedAboutUs, specifiedPaypalId, specifiedBusinessName, specifiedBillingEmail, specifiedRegNumber, specifiedStartDate,
+            specifiedCreditCard, specifiedBillingPhone, specifiedVatNumber) {
+          debugger;
           var
-
+               
                 CompanyId = ko.observable(CompanyId),
                 CompanyName = ko.observable(CompanyName).extend({ required: true }),
                 Tel1 = ko.observable(Tel1).extend({ required: true }),
@@ -20,7 +24,7 @@
                 BillingAddressLine2 = ko.observable(BillingAddressLine2),
                 BillingState = ko.observable(BillingState).extend({ required: true }),
                 BillingCountryId = ko.observable(BillingCountryId).extend({ required: true }),
-                BillingCityId = ko.observable(BillingCityId).extend({ required: true }),
+                billingCity = ko.observable(BillingCity).extend({ required: true }),
                 BillingZipCode = ko.observable(BillingZipCode).extend({ required: true }),
                 BillingPhone = ko.observable(BillingPhone).extend({ required: true }),
                 BillingEmail = ko.observable(BillingEmail).extend({ required: true }),
@@ -29,9 +33,49 @@
                 FacebookHandle = ko.observable(FacebookHandle),
                 InstagramHandle = ko.observable(InstagramHandle),
                 PinterestHandle = ko.observable(PinterestHandle),
-                selectedMedia = ko.observable(),
+                selectedMedia = ko.observable().extend({ required: true }),
                 Logo = ko.observable(Logo),
                 LogoImageBase64 = ko.observable(LogoImageBase64),
+              
+                
+              
+              //Fields for User profil-------------
+              solutation = ko.observable(),
+              professsion = ko.observable(),
+              firstName = ko.observable(),
+              lastName = ko.observable(),
+              email = ko.observable(),
+              mobileNumber = ko.observable(),
+              dateOfBirth = ko.observable(),
+              passportNumber = ko.observable(),
+              isReceiveDeals = ko.observable(),
+              isReceiveWeeklyUpdates = ko.observable(),
+              isReceiveLatestServices = ko.observable(),
+              //----------------
+              //Fields for User Branch-------------
+              branchName = ko.observable(),
+              numberOfBranches = ko.observable(),
+              webAddress = ko.observable(),
+              salesEmail = ko.observable(),
+              salesPhone = ko.observable(),
+              companyType = ko.observable(),
+              aboutUs = ko.observable(),
+              
+              //---------------------------
+              //Money Tab Fields
+              paypalMailId = ko.observable(),
+              billingBusinessName = ko.observable(),
+              billingEmail = ko.observable(),
+              companyRegNo = ko.observable(),
+              businessStartDate = ko.observable(),
+              creditCard = ko.observable(),
+              billingPhone = ko.observable(),
+              vatNumber = ko.observable(),
+              creditCardUi = ko.computed(function () {
+                  return creditCard() ? "Linked | " + creditCard() : "Not Linked | Link with Stripe Id";
+                  }),
+              
+              //-------------------
                 
                 //FacebookHandleui = ko.computed({
                 //    read: function () {                        
@@ -57,10 +101,11 @@
                   
                   BillingState: BillingState,
                   BillingCountryId: BillingCountryId,
-                  //BillingCityId: BillingCityId,
+                  billingCity: billingCity,
                   BillingZipCode: BillingZipCode,
                   BillingPhone: BillingPhone,
-                  BillingEmail: BillingEmail
+                  BillingEmail: BillingEmail,
+                  selectedMedia: selectedMedia,
 
               }),
               // Is Valid
@@ -81,7 +126,7 @@
                   BillingAddressLine2: BillingAddressLine2,
                   BillingState: BillingState,
                   BillingCountryId: BillingCountryId,
-                  BillingCityId: BillingCityId,
+                  billingCity: billingCity,
                   BillingZipCode: BillingZipCode,
                   BillingPhone: BillingPhone,
                   BillingEmail: BillingEmail,
@@ -109,7 +154,9 @@
                   CompanyName: CompanyName(),
                   Tel1: Tel1(),
                   Tel2: Tel2(),
-                  Logo: Logo(),
+                  
+                  Logo: logoImage == "" ? Logo() : logoImage,
+
                   StripeCustomerId: StripeCustomerId(),
                   SalesEmail: SalesEmail(),
                   WebsiteLink: WebsiteLink(),
@@ -118,7 +165,7 @@
                   BillingAddressLine2: BillingAddressLine2(),
                   BillingState: BillingState(),
                   BillingCountryId: BillingCountryId(),
-                  BillingCityId: BillingCityId(),
+                  BillingCity: billingCity(),
                   BillingZipCode: BillingZipCode(),
                   BillingPhone: BillingPhone(),
                   BillingEmail: BillingEmail(),
@@ -145,7 +192,7 @@
               BillingAddressLine2: BillingAddressLine2,
               BillingState: BillingState,
               BillingCountryId: BillingCountryId,
-              BillingCityId: BillingCityId,
+              billingCity: billingCity,
               BillingZipCode: BillingZipCode,
               BillingPhone: BillingPhone,
               BillingEmail: BillingEmail,
@@ -171,9 +218,10 @@
     ////=================================== User
     //Server to Client mapper For User
     var CompanyServertoClientMapper = function (objSrv) {
+        debugger;
         return new User(objSrv.CompanyId, objSrv.CompanyName, objSrv.Tel1, objSrv.Tel2, objSrv.Logo,
           objSrv.StripeCustomerId, objSrv.SalesEmail, objSrv.WebsiteLink, objSrv.VoucherSecretKey, objSrv.BillingAddressLine1, objSrv.BillingAddressLine2,
-          objSrv.BillingState, objSrv.BillingCountryId, objSrv.BillingCityId, objSrv.BillingZipCode, objSrv.BillingPhone, objSrv.BillingEmail, objSrv.TwitterHandle, objSrv.FacebookHandle,
+          objSrv.BillingState, objSrv.BillingCountryId, objSrv.BillingCity, objSrv.BillingZipCode, objSrv.BillingPhone, objSrv.BillingEmail, objSrv.TwitterHandle, objSrv.FacebookHandle,
           objSrv.InstagramHandle, objSrv.PinterestHandle, objSrv.Logo, objSrv.LogoImageBase64);
      
     };

@@ -168,6 +168,12 @@ namespace SMD.Repository.Repositories
             return user;
         }
 
+        public User GetLoginUser()
+        {
+            db.Configuration.LazyLoadingEnabled = false;
+            return DbSet.FirstOrDefault(u => u.Id == LoggedInUserIdentity);
+        }
+
 
     }
 }

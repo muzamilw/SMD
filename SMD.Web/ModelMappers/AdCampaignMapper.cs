@@ -394,8 +394,8 @@ namespace SMD.MIS.ModelMappers
             if (source.CityId != null && source.CityId > 0 && source.City != null)
             {
                 CName = source.City.CityName;
-                latitdue = source.City.GeoLat;
-                longitude = source.City.GeoLong;
+                latitdue = source.City.GeoLAT;
+                longitude = source.City.GeoLONG;
             }
             return new SMD.MIS.Areas.Api.Models.AdCampaignTargetLocation
             {
@@ -423,7 +423,7 @@ namespace SMD.MIS.ModelMappers
             return new SMD.MIS.Areas.Api.Models.UserAndCostDetail
             {
                 AgeClausePrice = source.AgeClausePrice,
-                CityId = source.CityId,
+                //CityId = source.CityId,
                 CountryId = source.CountryId,
                 EducationClausePrice = source.EducationClausePrice,
                 EducationId = source.EducationId,
@@ -433,7 +433,7 @@ namespace SMD.MIS.ModelMappers
                 LocationClausePrice = source.LocationClausePrice,
                 OtherClausePrice = source.OtherClausePrice,
                 ProfessionClausePrice = source.ProfessionClausePrice,
-                City = source.CityName,
+                City = source.City,
                 Country = source.CountryName,
                 Education = source.EducationTitle,
                 Industry = source.IndustryName,
@@ -550,7 +550,7 @@ namespace SMD.MIS.ModelMappers
                 LocationState = source.LocationState,
                 LocationTitle = source.LocationTitle,
                 LocationZipCode = source.LocationZipCode,
-                LogoUrl = source.LogoUrl[0] != '/' ? "/" + source.LogoUrl : source.LogoUrl,
+                LogoUrl = source.LogoUrl.StartsWith("http://") ? source.LogoUrl : "/" + source.LogoUrl,
                 ModifiedBy = source.ModifiedBy,
                 ModifiedDateTime = source.ModifiedDateTime,
                 Price = source.Price,
@@ -566,7 +566,12 @@ namespace SMD.MIS.ModelMappers
                 CouponCategories = source.CouponCategories != null ? source.CouponCategories.Select(coupon => coupon.CreateFrom()) : null,
                 CouponStartDate=source.CouponStartDate,
                 CouponEndDate=source.CouponEndDate,
-                Priority=source.Priority
+                Priority=source.Priority,
+                BuyitBtnLabel = source.BuyitBtnLabel,
+                BuyitLandingPageUrl = source.BuyitLandingPageUrl,
+                ShowBuyitBtn = source.ShowBuyitBtn,
+                CouponPriceOptions =  source.CouponPriceOptions == null? null: source.CouponPriceOptions.Select(cr =>cr.CreateFrom())// source.CouponPriceOptions
+               
               };
 
 
@@ -578,6 +583,22 @@ namespace SMD.MIS.ModelMappers
                 CategoryId = source.CategoryId,
                 CouponId = source.CouponId,
                 Id = source.Id
+            };
+        }
+
+
+
+        public static SMD.MIS.Areas.Api.Models.CouponPriceOption CreateFrom(this Models.DomainModels.CouponPriceOption source)
+        {
+            return new SMD.MIS.Areas.Api.Models.CouponPriceOption
+            {
+                CouponId = source.CouponId,
+                 CouponPriceOptionId = source.CouponPriceOptionId,
+                 Description = source.Description,
+                 OptionUrl = source.OptionUrl,
+                 Price = source.Price,
+                 Savings = source.Savings,
+                 VoucherCode = source.VoucherCode
             };
         }
     }

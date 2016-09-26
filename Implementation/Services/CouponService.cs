@@ -40,6 +40,8 @@ namespace SMD.Implementation.Services
         private readonly IInvoiceRepository invoiceRepository;
         private readonly IInvoiceDetailRepository invoiceDetailRepository;
         private readonly ICompanyRepository _iCompanyRepository;
+
+        private readonly ICouponPriceOptionRepository couponPriceOptionRepository;
         private ApplicationUserManager UserManager
         {
             get { return HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
@@ -132,7 +134,7 @@ namespace SMD.Implementation.Services
         /// </summary>
         public CouponService(ICouponRepository couponRepository, IUserFavouriteCouponRepository userFavouriteCouponRepository, ICompanyService _companyService,
             IUserPurchasedCouponRepository _userPurchasedCouponRepository, IAccountRepository _accountRepository, ICouponCategoriesRepository _couponCategoriesRepository, ICurrencyRepository _currencyRepository, IWebApiUserService _userService, IUserCouponViewRepository userCouponViewRepository, IEmailManagerService emailManagerService, WebApiUserService webApiUserService, IStripeService stripeService, IProductRepository productRepository
-            , ITaxRepository taxRepository, IInvoiceRepository invoiceRepository, IInvoiceDetailRepository invoiceDetailRepository, ICompanyRepository iCompanyRepository)
+            , ITaxRepository taxRepository, IInvoiceRepository invoiceRepository, IInvoiceDetailRepository invoiceDetailRepository, ICompanyRepository iCompanyRepository, ICouponPriceOptionRepository couponPriceOptionRepository)
         {
             this.couponRepository = couponRepository;
             this._userFavouriteCouponRepository = userFavouriteCouponRepository;
@@ -151,6 +153,7 @@ namespace SMD.Implementation.Services
             this.invoiceRepository = invoiceRepository;
            this.invoiceDetailRepository = invoiceDetailRepository;
            _iCompanyRepository = iCompanyRepository;
+           this.couponPriceOptionRepository = couponPriceOptionRepository;
         }
 
         #endregion
@@ -358,6 +361,7 @@ namespace SMD.Implementation.Services
                 }
             }
             string[] paths = SaveImages(couponModel);
+
             if (paths != null && paths.Count() > 0)
             {
               
@@ -417,11 +421,75 @@ namespace SMD.Implementation.Services
                 _couponCategoriesRepository.SaveChanges();
 
             }
-            
+
+
+
             couponRepository.Update(couponModel);
             couponRepository.SaveChanges();
 
-        
+
+            //price option logic
+
+
+            var couponDbVersion = couponRepository.GetCouponByIdSingle(couponModel.CouponId);
+            #region Sub Stock Categories Items
+            //Add  SubStockCategories 
+            if (couponModel.CouponPriceOptions != null)
+            {
+                foreach (var item in couponModel.CouponPriceOptions)
+                {
+                    if (couponDbVersion.CouponPriceOptions.All(x => x.CouponPriceOptionId != item.CouponPriceOptionId) || item.CouponPriceOptionId == 0)
+                    {
+                        item.CouponId = couponModel.CouponId;
+
+                        couponDbVersion.CouponPriceOptions.Add(item);
+                    }
+                    
+                }
+            }
+            //find missing items
+
+            List<CouponPriceOption> missingCouponPriceOptions = new List<CouponPriceOption>();
+            // ReSharper disable once LoopCanBeConvertedToQuery
+            foreach (CouponPriceOption dbversionCouponPriceOptions in couponDbVersion.CouponPriceOptions)
+            {
+
+                if (couponModel.CouponPriceOptions != null && couponModel.CouponPriceOptions.All(x => x.CouponPriceOptionId != dbversionCouponPriceOptions.CouponPriceOptionId && x.CouponId == couponModel.CouponId))
+                    {
+                        missingCouponPriceOptions.Add(dbversionCouponPriceOptions);
+                    }
+                
+
+            }
+
+            //remove missing items
+            foreach (CouponPriceOption missingCouponPriceOption in missingCouponPriceOptions)
+            {
+
+                CouponPriceOption dbVersionMissingItem = couponDbVersion.CouponPriceOptions.First(x => x.CouponPriceOptionId == missingCouponPriceOption.CouponPriceOptionId);
+                if (dbVersionMissingItem.CouponPriceOptionId > 0)
+                {
+
+
+                    couponDbVersion.CouponPriceOptions.Remove(dbVersionMissingItem);
+                    couponPriceOptionRepository.Delete(dbVersionMissingItem);
+                }
+            }
+            if (couponModel.CouponPriceOptions != null)
+            {
+                //updating stock sub categories
+                foreach (var subCategoryItem in couponModel.CouponPriceOptions)
+                {
+                    couponPriceOptionRepository.Update(subCategoryItem);
+                }
+            }
+
+            #endregion
+
+
+            couponRepository.Update(couponModel);
+            couponRepository.SaveChanges();
+
 
             
         }
@@ -684,12 +752,17 @@ namespace SMD.Implementation.Services
                     dbCo.Status = (Int32)AdCampaignStatus.ApprovalRejected;
                     dbCo.Approved = false;
                     dbCo.RejectedReason = source.RejectedReason.ToString();
-                    emailManagerService.SendCouponRejectionEmail(dbCo.UserId, dbCo.RejectedReason);
+                   
                 }
                 dbCo.ModifiedDateTime = DateTime.Now;
                 dbCo.ModifiedBy = couponRepository.LoggedInUserIdentity;
 
                 couponRepository.SaveChanges();
+
+                if (source.Approved == false)
+                {
+                    emailManagerService.SendCouponRejectionEmail(dbCo.UserId, dbCo.RejectedReason);
+                }
 
             }
             return respMesg;
@@ -704,12 +777,16 @@ namespace SMD.Implementation.Services
             var user = webApiUserService.GetUserByUserId(source.UserId);
             // Get Current Product
             var product = (dynamic)null;
+
             if(source.CouponListingMode==1)
                 product = productRepository.GetProductByCountryId("couponfree");
-            if (source.CouponListingMode == 2)
+            else if (source.CouponListingMode == 2)
                 product = productRepository.GetProductByCountryId("couponunlimited");
-            if (source.CouponListingMode == 3)
+            else if (source.CouponListingMode == 3)
                 product = productRepository.GetProductByCountryId("couponnationwide");
+            else {
+                product = productRepository.GetProductByCountryId("couponfree");
+            }
             // Tax Applied
             var tax = taxRepository.GetTaxByCountryId(user.Company.CountryId);
             // Total includes tax

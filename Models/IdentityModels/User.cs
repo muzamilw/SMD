@@ -62,7 +62,10 @@ namespace SMD.Models.IdentityModels
         public virtual Language Language { get; set; }
 
         public Nullable<int> DevicePlatform { get; set; }
-      
+
+        public Nullable<bool> optDealsNearMeEmails { get; set; }
+        public Nullable<bool> optLatestNewsEmails { get; set; }
+        public Nullable<bool> optMarketingEmails { get; set; }
         
 
         public virtual ICollection<UserLogin> UserLogins { get; set; }
@@ -82,6 +85,8 @@ namespace SMD.Models.IdentityModels
 
 
         public virtual Education Education { get; set; }
+
+        public string PassportNo { get; set; }
 
         //public virtual City City { get; set; }
         //public virtual Country Country { get; set; }

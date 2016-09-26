@@ -327,19 +327,26 @@ else
                     <div class="col-sm-12" style="float: left;">
                         
                         <div>
-                            <span style="font-size: 18px;float:left;color:#81d3dc!important;" class="Theme_standard_clr">Deals</span>
+                            <span style="font-size: 18px;float:left;color:#81d3dc!important;margin-top:15px;" class="Theme_standard_clr">Deals - List for free !</span>
+                           
                             <button style="float:right;margin-top:0px;" class="btn btn-primary" data-bind="click:$root.addNewCampaign">
                                 Create Deal
                             </button>
                             <div style="clear:both;"></div>
                         </div>
+                        <div style="width:641px;word-wrap:break-word;">
+                            <span style="font-size: 14px;" class="Theme_subheading-Clr ">
+                                Use short and inspiring titles that state your deal clearly.<br /> Note : All your deals are listed inside the Group headline
+                            </span>
+                        </div>
                         <br />
                     </div>
+                    <br />
                 </div>
                 <div class="row">
                     <form data-bind="submit: $root.getCampaignByFilter">
                         <div class="col-sm-2" style="float:left;">
-                            <div class="filter-block" style="margin-right: -10px">
+                            <div class="filter-block" style="margin-right: -10px;margin-top:10px;">
                                 <div class="form-group ">
                                     <input type="text" class="form-control " placeholder="Search..." data-bind="value: $root.searchFilterValue">
                                     <i class="fa fa-search search-icon" data-bind="click: $root.getCampaignByFilter"></i>
@@ -348,7 +355,7 @@ else
                             </div>
                             <div class="clearfix"></div>
                         </div>
-                        <div class="col-sm-2" style="float:left;">
+                        <div class="col-sm-2" style="float:left;margin-top:10px;">
                             <select class="form-control" style="float:right;height:36px;">
                                 <option value="0">All Value</option>
                             </select>

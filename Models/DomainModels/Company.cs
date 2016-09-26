@@ -19,7 +19,7 @@ namespace SMD.Models.DomainModels
         public string AddressLine2 { get; set; }
         public string State { get; set; }
         public Nullable<int> CountryId { get; set; }
-        public Nullable<int> CityId { get; set; }
+       
         public string ZipCode { get; set; }
         public string TimeZone { get; set; }
         public string Logo { get; set; }
@@ -41,7 +41,7 @@ namespace SMD.Models.DomainModels
         public string BillingAddressLine2 { get; set; }
         public string BillingState { get; set; }
         public Nullable<int> BillingCountryId { get; set; }
-        public Nullable<int> BillingCityId { get; set; }
+        
         public string BillingZipCode { get; set; }
         public string BillingPhone { get; set; }
         public string BillingEmail { get; set; }
@@ -50,12 +50,28 @@ namespace SMD.Models.DomainModels
         public string InstagramHandle { get; set; }
         public string PinterestHandle { get; set; }
 
+
+        public string City { get; set; }
+        public string BillingCity { get; set; }
+        public string AboutUsDescription { get; set; }
+        public Nullable<int> Status { get; set; }
+        public Nullable<int> PaymentMethodStatus { get; set; }
+        public Nullable<System.DateTime> LastPaymentMethodErrorDate { get; set; }
+        public string LastPaymentMethodError { get; set; }
+
+        public string CompanyRegNo { get; set; }
+        public string TaxRegNo { get; set; }
+
+        public Nullable<System.DateTime> CreationDateTime { get; set; }
+        public Nullable<int> NoOfBranches { get; set; }
+        public string BillingAddressName { get; set; }
+
         public virtual ICollection<AdCampaign> AdCampaigns { get; set; }
         public virtual ICollection<Invoice> Invoices { get; set; }
         public virtual ICollection<ProfileQuestionUserAnswer> ProfileQuestionUserAnswers { get; set; }
         public virtual ICollection<SurveyQuestion> SurveyQuestions { get; set; }
         public virtual ICollection<SurveyQuestionResponse> SurveyQuestionResponses { get; set; }
-        public virtual City City { get; set; }
+       
         public virtual Country Country { get; set; }
         public virtual ICollection<Account> Accounts { get; set; }
         public virtual ICollection<User> Users { get; set; }
@@ -74,6 +90,8 @@ namespace SMD.Models.DomainModels
         public virtual ICollection<DamImage> DamImages { get; set; }
 
         public virtual ICollection<ProfileQuestion> ProfileQuestions { get; set; }
+
+        public virtual ICollection<PayOutHistory> PayOutHistories { get; set; }
 
     }
 }

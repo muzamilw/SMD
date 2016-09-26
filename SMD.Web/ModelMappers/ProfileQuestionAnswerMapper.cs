@@ -206,8 +206,8 @@ namespace SMD.MIS.ModelMappers
             if (source.CityID != null && source.CityID > 0 && source.City != null)
             {
                 CName = source.City.CityName;
-                latitdue = source.City.GeoLat;
-                longitude = source.City.GeoLong;
+                latitdue = source.City.GeoLAT;
+                longitude = source.City.GeoLONG;
             }
             return new SMD.MIS.Areas.Api.Models.ProfileQuestionTargetLocation
             {

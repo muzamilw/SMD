@@ -17,7 +17,7 @@ define("common/stripeChargeCustomer.view",
                 showDialog = function() {
                     handler = StripeCheckout.configure({
                         key: 'pk_test_H5ynmxoBz7YATHN18SgZ5hjc',
-                        image: '/img/documentation/checkout/marketplace.png',
+                        image: 'http://cash4ads.com/wp-content/uploads/2016/09/Cash_4_ads_Circle.png',
                         locale: 'auto',
                         token: function (token) {
                             // Use the token to create the charge with a server-side script.
@@ -42,9 +42,15 @@ define("common/stripeChargeCustomer.view",
             $("#stripeChargeCustomerButton").on('click', function (event) {
                 // Open Checkout with further options
                 handler.open({
-                    name: 'Sell My Data',
+                    name: 'Cash4Ads',
                     description: viewModel.chargeDescription(),
-                    amount: viewModel.chargeAmount()
+                    amount: 0,
+                    zipCode: true,
+                    billingAddress: true,
+                    panelLabel: 'Configure Credit Card',
+                    label: 'Configure Credit Card'
+
+
                 });
                 event.preventDefault(); 
             });

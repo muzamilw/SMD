@@ -176,17 +176,16 @@ namespace SMD.Implementation.Services
 
             if (!string.IsNullOrEmpty(campaign.LogoImageBytes))
             {
-                string base64 = campaign.LogoImageBytes.Substring(campaign.LogoImageBytes.IndexOf(',') + 1);
-                base64 = base64.Trim('\0');
-                byte[] data = Convert.FromBase64String(base64);
+               
+                string[] paths = campaign.LogoImageBytes.Split(new string[] { "SMD_Content" }, StringSplitOptions.None);
+                string url = HttpContext.Current.Server.MapPath("~/SMD_Content/" + paths[paths.Length - 1]);
                 string savePath = directoryPath + "\\guid_CampaignLogoImage.jpg";
-                File.WriteAllBytes(savePath, data);
+                File.Copy(url, savePath, true);
                 int indexOf = savePath.LastIndexOf("SMD_Content", StringComparison.Ordinal);
                 savePath = savePath.Substring(indexOf, savePath.Length - indexOf);
                 savePaths[7] = savePath;
+                campaign.LogoImageBytes = savePath;
             }
-
-
             return savePaths;
         }
 
@@ -257,10 +256,10 @@ namespace SMD.Implementation.Services
             {
                 campaignProduct = productRepository.GetProductByCountryId(code);
                 objUC.CountryId = loggedInUser.Company.CountryId;
-                objUC.CityId = loggedInUser.Company.CityId;
-                objUC.CityName = loggedInUser.Company.City != null ? loggedInUser.Company.City.CityName : "";
-                objUC.GeoLat = loggedInUser.Company.City != null ? loggedInUser.Company.City.GeoLat : "";
-                objUC.GeoLong = loggedInUser.Company.City != null ? loggedInUser.Company.City.GeoLong : "";
+                //objUC.CityId = loggedInUser.Company.CityId;
+                objUC.City = loggedInUser.Company.City != null ? loggedInUser.Company.City : "";
+                //objUC.GeoLat = loggedInUser.Company.City != null ? loggedInUser.Company.City.GeoLat : "";
+                //objUC.GeoLong = loggedInUser.Company.City != null ? loggedInUser.Company.City.GeoLong : "";
 
 
                 objUC.EducationId = loggedInUser.EducationId;
@@ -273,7 +272,7 @@ namespace SMD.Implementation.Services
                 objUC.EducationTitle = loggedInUser.Education != null ? loggedInUser.Education.Title : "";
                 objUC.IndustryName = loggedInUser.Industry != null ? loggedInUser.Industry.IndustryName : "";
                 objUC.LanguageName = loggedInUser.Language != null ? loggedInUser.Language.LanguageName : "";
-                objUC.isStripeIntegrated = loggedInUser.Company == null ? false : (String.IsNullOrEmpty(loggedInUser.Company.StripeCustomerId) ? false : true);
+                objUC.isStripeIntegrated = loggedInUser.Company == null ? false : (String.IsNullOrEmpty(loggedInUser.Company.StripeCustomerId) || loggedInUser.Company.StripeCustomerId  == "undefined" ? false : true);
             }
             if (campaignProduct != null)
             {
@@ -464,7 +463,7 @@ namespace SMD.Implementation.Services
                 //Languages = _languageRepository.GetAllLanguages(),
                 TotalCount = rowCount
                 // UserAndCostDetails = _adCampaignRepository.GetUserAndCostDetail()
-            };
+            }; 
         }
 
         public CampaignResponseModel GetCampaignById(long CampaignId)
@@ -528,7 +527,7 @@ namespace SMD.Implementation.Services
                 }
                 if (!string.IsNullOrEmpty(paths[7]))
                 {
-                    campaignModel.LogoUrl = paths[7];
+                    campaignModel.LogoUrl =paths[7];
                 }
                 else if (campaignModel.LogoUrl.Contains("Content/Images"))
                 {
@@ -1164,12 +1163,18 @@ namespace SMD.Implementation.Services
                     dbAd.Status = (Int32)AdCampaignStatus.ApprovalRejected;
                     dbAd.Approved = false;
                     dbAd.RejectedReason = source.RejectedReason;
-                    emailManagerService.SendQuestionRejectionEmail(dbAd.UserId);
+                    
+                   
                 }
                 dbAd.ModifiedDateTime = DateTime.Now;
                 dbAd.ModifiedBy = _adCampaignRepository.LoggedInUserIdentity;
 
                 _adCampaignRepository.SaveChanges();
+
+                if (source.Approved != true)
+                {
+                   emailManagerService.SendQuestionRejectionEmail(dbAd.UserId);
+                }
 
             }
             return respMesg;

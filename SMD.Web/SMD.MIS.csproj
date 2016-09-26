@@ -399,6 +399,7 @@
     <Compile Include="Areas\Api\Controllers\CouponApprovalController.cs" />
     <Compile Include="Areas\Api\Controllers\CouponController.cs" />
     <Compile Include="Areas\Api\Controllers\DownloadImageController.cs" />
+    <Compile Include="Areas\Api\Controllers\ProfileQuestionGroupAppController.cs" />
     <Compile Include="Areas\Api\Controllers\RedeemPurchasedCouponController.cs" />
     <Compile Include="Areas\Api\Controllers\PhaseLibraryController.cs" />
     <Compile Include="Areas\Api\Controllers\CompanyController.cs" />
@@ -416,6 +417,7 @@
     <Compile Include="Areas\Api\Models\PhraseResponseModel.cs" />
     <Compile Include="Areas\Api\Models\PQResponseModelForApproval.cs" />
     <Compile Include="Areas\Api\Models\Product.cs" />
+    <Compile Include="Areas\Api\Models\ProfileQuestionGroupApp.cs" />
     <Compile Include="Areas\Api\Models\ProfileQuestionTargetCriteria.cs" />
     <Compile Include="Areas\Api\Models\ProfileQuestionTargetLocation.cs" />
     <Compile Include="Areas\Api\Models\Section.cs" />
@@ -692,6 +694,10 @@
     <Content Include="Areas\Franchise\Scripts\surveyQuestionApp.model.js" />
     <Content Include="Areas\Franchise\Scripts\surveyQuestionApp.view.js" />
     <Content Include="Areas\Franchise\Scripts\surveyQuestionApp.viewModel.js" />
+    <Content Include="Areas\Report\Scripts\walletReport.dataservice.js" />
+    <Content Include="Areas\Report\Scripts\walletReport.model.js" />
+    <Content Include="Areas\Report\Scripts\walletReport.view.js" />
+    <Content Include="Areas\Report\Scripts\walletReport.viewModel.js" />
     <Content Include="Areas\SuperNova\Scripts\analytic.dataservice.js" />
     <Content Include="Areas\SuperNova\Scripts\analytic.model.js" />
     <Content Include="Areas\SuperNova\Scripts\analytic.view.js" />
@@ -710,6 +716,7 @@
     <Content Include="Areas\ProfileQuestion\Views\Manage\_pqEditorForApp.cshtml" />
     <Content Include="Areas\DAM\Views\Images\AdminIndex.cshtml" />
     <Content Include="Areas\Common\Views\Shared\_InviteSharingUser.cshtml" />
+    <Content Include="Areas\Report\Views\Report\WalletReport.cshtml" />
     <None Include="config\Web.connectionstrings.config">
       <SubType>Designer</SubType>
     </None>
@@ -2819,6 +2826,7 @@
     <Content Include="ReportViewers\User.aspx" />
     <Content Include="Views\EmailTester.aspx" />
     <Content Include="Views\Home\-------Login.cshtml" />
+    <Content Include="Views\MobileMessageBox\Message.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

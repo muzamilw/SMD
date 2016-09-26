@@ -3,7 +3,7 @@
     var // ReSharper disable InconsistentNaming
       Coupons = function (coSubBy, coTitle, coCategory, coSwabCost, coSubDate, couponid, coApproved,coRejectedReason, coExpireDate, coImage1, coImage2, coImage3, coLogoUrl, cohighlight1, cohighlight2, cohighlight3, cohighlight4, cohighlight5, coCurrencyId, coPrice
           , coSavings, couponExpirydate, couponListingMode, coSearchKeywords, couponQtyPerUser, coMonthYear, coFinePrintLine1, coFinePrintLine2, coFinePrintLine3, coFinePrintLine4, coFinePrintLine5, coHowToRedeemLine1, coHowToRedeemLine2
-          , coHowToRedeemLine3, coHowToRedeemLine4, coHowToRedeemLine5, coLocationTitle, coLocationLine1, coLocationLine2, coLocationCity, coLocationState, coLocationZipCode, coLocationLAT, coLocationLON, coLocationPhone) {
+          , coHowToRedeemLine3, coHowToRedeemLine4, coHowToRedeemLine5, coLocationTitle, coLocationLine1, coLocationLine2, coLocationCity, coLocationState, coLocationZipCode, coLocationLAT, coLocationLON, coLocationPhone, coCategories, cobuyItBtnLabel, cobuyitLandingPageUrl) {
           var
               submittedBy = ko.observable(coSubBy),
               title = ko.observable(coTitle),
@@ -22,7 +22,7 @@
               couponImage1 = ko.observable(coImage1),
               couponImage2 = ko.observable(coImage2),
               couponImage3 = ko.observable(coImage3),
-              logoUrl = ko.observable(coLogoUrl),
+              logoUrl = ko.observable(coLogoUrl.startsWith('http') ? coLogoUrl : '/' + coLogoUrl),
               highlight1 = ko.observable(cohighlight1),
               highlight2 = ko.observable(cohighlight2),
               highlight3 = ko.observable(cohighlight3),
@@ -55,6 +55,10 @@
               locationLAT = ko.observable(coLocationLAT),
               locationLON = ko.observable(coLocationLON),
               locationPhone = ko.observable(coLocationPhone),
+              categories = ko.observable(coCategories != null && coCategories.includes('&amp;') ? coCategories.replace('&amp;', '&') : coCategories),
+              buyItBtnLabel = ko.observable(cobuyItBtnLabel),
+              buyitLandingPageUrl = ko.observable(cobuyitLandingPageUrl),
+
 
 
 
@@ -132,6 +136,9 @@
               locationLAT: locationLAT,
               locationLON: locationLON,
               locationPhone: locationPhone,
+              categories: categories,
+              buyItBtnLabel: buyItBtnLabel,
+              buyitLandingPageUrl:buyitLandingPageUrl,
 
               hasChanges: hasChanges,
               convertToServerData: convertToServerData,
@@ -152,7 +159,7 @@
         return new Coupons(itemFromServer.CreatedBy, itemFromServer.CouponTitle, itemFromServer.CreatedBy,
             itemFromServer.SwapCost, itemFromServer.SubmissionDateTime, itemFromServer.CouponId, itemFromServer.Approved,itemFromServer.RejectedReason, itemFromServer.CouponExpirydate, itemFromServer.couponImage1, itemFromServer.CouponImage2, itemFromServer.CouponImage3, itemFromServer.LogoUrl, itemFromServer.HighlightLine1, itemFromServer.HighlightLine2, itemFromServer.HighlightLine3, itemFromServer.HighlightLine4, itemFromServer.HighlightLine5, itemFromServer.CurrencyId, itemFromServer.Price
             , itemFromServer.Savings, itemFromServer.CouponExpirydate, itemFromServer.CouponListingMode, itemFromServer.SearchKeywords, itemFromServer.CouponQtyPerUser, GetMonth(itemFromServer.CouponActiveMonth, itemFromServer.CouponActiveYear), itemFromServer.FinePrintLine1, itemFromServer.FinePrintLine2, itemFromServer.FinePrintLine3, itemFromServer.FinePrintLine4, itemFromServer.FinePrintLine5, itemFromServer.HowToRedeemLine1
-            , itemFromServer.HowToRedeemLine2, itemFromServer.HowToRedeemLine3, itemFromServer.HowToRedeemLine4, itemFromServer.HowToRedeemLine5, itemFromServer.LocationTitle, itemFromServer.LocationLine1, itemFromServer.LocationLine2, itemFromServer.LocationCity, itemFromServer.LocationState, itemFromServer.LocationZipCode, itemFromServer.LocationLAT, itemFromServer.LocationLON, itemFromServer.LocationPhone);
+            , itemFromServer.HowToRedeemLine2, itemFromServer.HowToRedeemLine3, itemFromServer.HowToRedeemLine4, itemFromServer.HowToRedeemLine5, itemFromServer.LocationTitle, itemFromServer.LocationLine1, itemFromServer.LocationLine2, itemFromServer.LocationCity, itemFromServer.LocationState, itemFromServer.LocationZipCode, itemFromServer.LocationLAT, itemFromServer.LocationLON, itemFromServer.LocationPhone, itemFromServer.Categories, itemFromServer.BuyitBtnLabel, itemFromServer.BuyitLandingPageUrl);
     };
     var GetMonth = function (monthstr, year) {
 

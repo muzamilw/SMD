@@ -358,8 +358,9 @@ define("ads/ads.viewModel",
               // showMainMenu();
            },
             closeNewCampaignDialog = function () {
-           
-                if (campaignModel().hasChanges()) {    //&& (campaignModel().Status() == null || campaignModel().Status() == 1)
+               
+                if (campaignModel().hasChanges() || logoImage != '') {    //&& (campaignModel().Status() == null || campaignModel().Status() == 1)
+
                 confirmation.messageText("Do you want to save changes?");
                 confirmation.afterProceed(function () {
                     saveCampaignData();
@@ -383,12 +384,12 @@ define("ads/ads.viewModel",
                     $("#btnSubmitForApproval,#saveBtn,.table-link").css("display", "inline-block");
                     $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign,#btnStopAndTerminate,#btnCopyCampaign").removeAttr('disabled');
 
-                    $("#headlabel").css("display", "block");
-
+                    $("#headlabel, #Heading_div").css("display", "block");
+                   
                     $("#panelArea").css("display", "block");
                     //show the main menu;
                     showMainMenu();
-                   
+                    logoImage = '';
                 });
                 confirmation.afterCancel(function () {
 
@@ -528,7 +529,7 @@ define("ads/ads.viewModel",
                  isListVisible(true);
              },
               openEditScreen = function (mode) {
-                
+                 
                   campaignModel(new model.Campaign());
                   // campaignModel().CampaignName('New Campaign');
 
@@ -588,7 +589,10 @@ define("ads/ads.viewModel",
                   campaignModel().VoucherImagePath("");
                   campaignModel().LanguageId(41);
                   campaignModel().DeliveryDays('10');
-                  campaignModel().LogoUrl('Images/default-placeholder.png');
+                  campaignModel().LogoUrl('/images/default-placeholder.png');
+                  
+                 // campaignModel().LogoImageBytes("/images/default-placeholder.png");
+
                   campaignModel().IsShowVoucherSetting(false);
                   if (UserAndCostDetail() != null || UserAndCostDetail() != undefined) {
                       alreadyAddedDeliveryValue(10);
@@ -610,10 +614,10 @@ define("ads/ads.viewModel",
                 //if (campaignModel().isValid()) {
                 if (ValidateCampaign()) {
                     if (reachedAudience() > 0) {
-                        if (UserAndCostDetail().isStripeIntegrated == true) {
+                        if (UserAndCostDetail().isStripeIntegrated == false) {
 
                             stripeChargeCustomer.show(function () {
-                                UserAndCostDetail().isStripeIntegrated = false;
+                                UserAndCostDetail().isStripeIntegrated = true;
                                 saveCampaign(2);
                             }, 2000, 'Enter your details');
 
@@ -773,13 +777,15 @@ define("ads/ads.viewModel",
 
                         //if (errorList().length > 0) {
                         //    return false;
-                        //} else {
-                    if (quizQuestionStatus() == false) {
-                        campaignModel().VerifyQuestion('');
-                        campaignModel().Answer1('');
-                        campaignModel().Answer2('');
+                //} else {
 
-                    }
+                //bullshit code written below by someone. 
+                    ////if (quizQuestionStatus() == false) {
+                    ////    campaignModel().VerifyQuestion('');
+                    ////    campaignModel().Answer1('');
+                    ////    campaignModel().Answer2('');
+
+                    ////}
                     if (isDisplayCouponsAds() == true) {
 
                         var selectedCouponCategories = $.grep(couponCategories(), function (n, i) {
@@ -1474,6 +1480,9 @@ define("ads/ads.viewModel",
                     $("#topArea").css("display", "none");
                     $("#panelArea").css("display", "none");
 
+                    $("#Heading_div").css("display", "none");
+
+
                     if (item.Status() == 1 || item.Status() == 2 || item.Status() == 3 || item.Status() == 4 || item.Status() == null || item.Status() == 7 || item.Status() == 9) {
                         collapseMainMenu();
                        
@@ -1507,6 +1516,12 @@ define("ads/ads.viewModel",
                                     });
 
                                     campaignModel(model.Campaign.Create(data.Campaigns[0]));
+                                    
+                                    if (campaignModel().LogoUrl() == '' || campaignModel().LogoUrl() == undefined) {
+
+                                        campaignModel().LogoUrl("/images/default-placeholder.png");
+                                    }
+                                   
                                    
                                     VideoLink2src(campaignModel().VideoLink2()+''+'');
                                     

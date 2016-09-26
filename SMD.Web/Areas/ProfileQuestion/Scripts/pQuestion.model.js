@@ -67,6 +67,7 @@
                     creationDate: creationDate,
                     modifiedDate: modifiedDate,
                     ProfileQuestionTargetCriteria: ProfileQuestionTargetCriteria,
+                    ProfileQuestionTargetLocation:ProfileQuestionTargetLocation,
                     penalityForNotAnswering: penalityForNotAnswering,
                     status: status,
                     answers: answers,

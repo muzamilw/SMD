@@ -16,7 +16,7 @@
         <div class="row" id="user-profile">
             <div class="col-lg-12 col-md-8 col-sm-8" style="padding-bottom: 10px;">
                 <div class="clearfix ">
-                    <div class="col-xs-12" style="text-align: right; padding-right:0;margin-bottom:10px;">
+                    <div class="col-xs-12" style="text-align: right; padding-right:0;margin-bottom:1px; margin-top:10px;">
 
                         <button class="btn btn-default" id="saveBtn" data-bind="click:$root.closeEditDialog">Close</button>
                     </div>
@@ -32,7 +32,7 @@
                             <div class="tab-pane fade in active" id="tab-generalinfo">
                                 <div class="col-lg-12 form-horizontal" data-bind="with:selectedProfileQuestion">
                                     <h3 class="group-header" style="margin-top:20px;">
-                                        Profile Question General Info
+                                        Survay question
                                     </h3>
                                     <div class="col-lg-9">
                                         <div class="form-group">
@@ -46,7 +46,7 @@
                                     </div>
                                     <div class="col-lg-9">
                                         <div class="form-group">
-                                            <div class="form-group">
+                                            <div class="form-group" style="margin-bottom:0px;">
                                                 <div class="col-lg-4 text-campaign-left  Float-Left">
                                                     <label class="control-label text-right tooltip-float floatNone" style="float:left !important;    margin-left: 6px; ">Answers</label>
                                                 </div>
@@ -69,7 +69,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-9">
+                                    <div class="col-lg-9" style="display:none">
                                         <div class="form-group">
                                             <div class="col-lg-4 text-right">
                                                 <label class="control-label text-right tooltip-float">Question Type</label>
@@ -79,35 +79,40 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-9">
-                                        <div class="form-group">
-                                            <div class="col-lg-4 text-right">
-                                                @*<div class="bs-example-tooltips tooltip-float-width">
-                                                        <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
-                                                            <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
-                                                        </a>
-                                                    </div>*@
-                                                <label class="control-label text-right tooltip-float">Rejection Reason</label>
+                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                        <div class="modal-header" style="padding-left:0px;padding-right:0px;padding-bottom:5px; min-height: 128.90px">
+                                            <div class="col-lg-9">
+                                                <div class="form-group">
+                                                    <div class="col-lg-4 text-right">
+                                                        @*<div class="bs-example-tooltips tooltip-float-width">
+                                    <a class="input-group-addon" tabindex="-1" href="#" data-bind="click: function(){}" data-trigger="focus" style="text-decoration: none; border: 0; cursor: pointer;" data-container="body" data-toggle="popover" data-placement="right" data-content="Facebook URL for social media icons displayed on the store (https://www.facebook.com/MyPrintCloud)" data-original-title="" title="">
+                                        <span class="label label-circle-question">&nbsp;&nbsp;?&nbsp;&nbsp;</span>
+                                    </a>
+                                </div>*@
+                                                        <label class="control-label text-right tooltip-float">Rejection Reason</label>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <textarea placeholder="Enter rejection reason " style="resize: none" data-bind="value:rejectedReason" class="form-control"></textarea>
+                                                        @*<input type="text" placeholder="Enter rejection reason " data-bind="value:rejectedReason" class="form-control">*@
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="col-lg-6">
-                                                <input type="text" placeholder="Enter rejection reason " data-bind="value:rejectedReason" class="form-control">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-9">
-                                        <div class="form-group">
-                                            <div class="col-lg-4 text-right">
+                                            <div class="col-lg-9">
+                                                <div class="form-group">
+                                                    <div class="col-lg-4 text-right">
 
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <button class="btn  btn-success" id="saveBtn" data-bind="click :$root.onApprovePq,visible:rejectedReason()==null ||rejectedReason()==''">Approve</button>
+                                                        <button class="btn  btn-danger" id="delbtn" data-bind="click:$root.onRejectPQ ,enable: $root.hasChangesOnPQ, css: { ' btn-danger': $root.hasChangesOnPQ }">Reject</button>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="col-lg-6">
-                                                <button class="btn  btn-success" id="saveBtn" data-bind="click :$root.onApprovePq">Approve</button>
-                                                <button class="btn  btn-danger" id="delbtn" data-bind="click:$root.onRejectPQ ,enable: $root.hasChangesOnPQ, css: { ' btn-danger': $root.hasChangesOnPQ }">Reject</button>
                                             </div>
                                         </div>
+                                        </div>
                                     </div>
-                                </div> 
-                            </div>
-                        </div>
+                                </div>
                     </div>
                 </div>
             </div>

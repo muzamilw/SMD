@@ -5432,19 +5432,32 @@ color:red !important;
     cursor: pointer;
 }
 .ads-numbering-main {
-    width: 60px;
+    width:51px;
     text-align: center;
     cursor:pointer;
 }
 .ads-numbering-box {
         background: rgb(220,220,220);
     padding: 8px 0px 30px 0px;
-    width: 60px;
-    height: 60px;
+    width:52px;
+    height:52px;
     border-radius: 60px;
     text-align: center;
     color: white;
-    font-size: 30px;
+    font-size:26px;
+}
+.Subpanels {
+
+       background: #FFFFFF;
+    -webkit-box-shadow: 1px 1px 2px 0 #CCCCCC;
+    -moz-box-shadow: 1px 1px 2px 0 #CCCCCC;
+    -o-box-shadow: 1px 1px 2px 0 #CCCCCC;
+    -ms-box-shadow: 1px 1px 2px 0 #CCCCCC;
+    box-shadow: 1px 1px 2px 0 #CCCCCC;
+    margin-bottom: 16px;
+    -webikt-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
 }
 .ads-numbering-linebar {
     width: 80px;
@@ -5487,7 +5500,9 @@ margin-right: auto !important;
 background-image: url(/Images/crowdcentz_logo.png) !important;
     
 }
-
+.CreateBtnWidth {
+    width:185px!important;
+}
 
 .cashbeta{
        background-image: url(/Images/beta.jpg);
@@ -5531,6 +5546,26 @@ background-image: url(/Images/crowdcentz_logo.png) !important;
     visibility: visible;
 }
 .tooltip-float {
-    width:100%;
-        font-size: 13px;
+    width: 100%;
+    font-size: 13px;
+}
+.DamModelclose {
+       margin-top: -2px;
+-webkit-appearance: none;
+    padding: 0;
+    cursor: pointer;
+    background: 0 0;
+    border: 0;
+    float: right;
+    font-size: 1.429em;
+    color: #7a7a7a;
+    cursor: pointer;
+
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    filter: alpha(opacity=20);
+    opacity: .2;
 }

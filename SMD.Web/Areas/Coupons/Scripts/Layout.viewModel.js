@@ -65,9 +65,10 @@
                         {
                             success: function (data) {
                                 var branch = new model.Branch.Create(data);
-                                selectedBranchTemp(branch);
+                                selectedBranch(branch);
+                                triggerGoogleMapSelection();
 
-                                getCitiesDropDown(branch.countryId());
+                               // getCitiesDropDownForSelectedBranch(branch.countryId());
                                 
 
                                 //}
@@ -371,8 +372,8 @@
                 CreateNewBranchLocation = function () {
                     dataService.getCompanyAddress({
                         success: function (data) {
-                            if (data.BillingCountryId == null) {
-                                getCitiesDropDown(1)
+                            if (data.BillingAddressLine1 == null) {
+                              //  getCitiesDropDown(1)
                                 var newBranchLocation = new model.Branch.CreateBillingAddress(data);
                                 //newBranchLocation.branchCity(city.CityName);
                                 selectedBranch(undefined)
@@ -383,11 +384,11 @@
                             }
                             else {
                                 //getCitiesDropDown(data.BillingCountryId)
-                                var city = cities().find(function (city) {
-                                    return city.CityId === data.BillingCityId;
-                                });
+                                //var city = cities().find(function (city) {
+                                //    return city.CityId === data.BillingCityId;
+                                //});
                                 var newBranchLocation = new model.Branch.CreateBillingAddress(data);
-                                newBranchLocation.branchCity(city.CityName);
+                               // newBranchLocation.branchCity(city.CityName);
                                 selectedBranch(undefined)
                                 selectedBranch(newBranchLocation);
                                 isSaveChangesEnable(true);
@@ -413,7 +414,7 @@
                     afterBranchSelect = callback;
                     getBranchCategories(viewBranchDialog);
                     getAllCountries();
-                    getCompanyddress();
+                   // getCompanyddress();
                     
                 },
                 hideBranchCategoryDialog = function () {
@@ -551,12 +552,12 @@
                                cities.valueHasMutated();
 
 
-                               if (  selectedBranchTemp() != null)
-                               {
-                                   selectedBranch(selectedBranchTemp());
-                                   triggerGoogleMapSelection();
+                               //if (  selectedBranchTemp() != null)
+                               //{
+                               //    selectedBranch(selectedBranchTemp());
+                               //    triggerGoogleMapSelection();
 
-                               }
+                               //}
                            }
                        },
                        error: function () {
@@ -565,6 +566,31 @@
                    });
 
                 },
+                getCitiesDropDownForSelectedBranch = function (data) {
+
+                        dataService.getCitiesByCountry(
+                       { countryId: data },
+                       {
+                           success: function (data) {
+                               if (data.length > 0) {
+                                   cities.removeAll();
+                                   ko.utils.arrayPushAll(cities(), data);
+                                   cities.valueHasMutated();
+
+
+                                   if (selectedBranchTemp() != null) {
+                                       selectedBranch(selectedBranchTemp());
+                                       triggerGoogleMapSelection();
+
+                                   }
+                               }
+                           },
+                           error: function () {
+                               toastr.error("Failed to load Cities.");
+                           }
+                       });
+
+                    },
                 getCompanyddress = function ()
                 {
                     dataService.getCompanyAddress({
@@ -670,15 +696,17 @@
                     });
                 }
                 getBranchFields = function (category, afterSaveRefreshListFlag) {
-                    dataservice.getBranchFiledsByCategoryID({
+                    dataService.getBranchFiledsByCategoryID({
                         categoryId: category.categoryId(),
                     }, {
                         success: function (data) {
                             if (data != null) {
-                                category.branchFields.removeAll();
+                                if (category.brachFeilds().length > 0)
+                                { category.branchFields.removeAll(); }
                                 _.each(data, function (Item) {
                                     var branchfield1 = new model.BranchField.Create(Item);
-                                    category.branchFields.push(phraseField1);
+                                    if (branchfield1.branchId()!=undefined)
+                                    category.branchFields.push(branchfield1);
                                 });
 
 

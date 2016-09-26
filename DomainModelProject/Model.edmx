@@ -255,6 +255,10 @@
           <Property Name="CompanyId" Type="int" />
           <Property Name="authenticationToken" Type="nvarchar" MaxLength="500" />
           <Property Name="DevicePlatform" Type="int" />
+          <Property Name="optDealsNearMeEmails" Type="bit" />
+          <Property Name="optLatestNewsEmails" Type="bit" />
+          <Property Name="optMarketingEmails" Type="bit" />
+          <Property Name="PassportNo" Type="nvarchar" MaxLength="150" />
         </EntityType>
         <EntityType Name="AuditLog">
           <Key>
@@ -301,12 +305,12 @@
         </EntityType>
         <EntityType Name="City">
           <Key>
-            <PropertyRef Name="CityID" />
+            <PropertyRef Name="CityId" />
           </Key>
-          <Property Name="CityID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CityId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CityName" Type="nvarchar" MaxLength="200" />
           <Property Name="IsCapital" Type="bit" />
-          <Property Name="CountryID" Type="int" />
+          <Property Name="CountryId" Type="int" />
           <Property Name="GeoLONG" Type="nvarchar" MaxLength="100" />
           <Property Name="GeoLAT" Type="nvarchar" MaxLength="100" />
         </EntityType>
@@ -336,7 +340,6 @@
           <Property Name="AddressLine2" Type="nvarchar(max)" />
           <Property Name="State" Type="nvarchar" MaxLength="50" />
           <Property Name="CountryId" Type="int" />
-          <Property Name="CityId" Type="int" />
           <Property Name="ZipCode" Type="nvarchar" MaxLength="100" />
           <Property Name="TimeZone" Type="nvarchar" MaxLength="50" />
           <Property Name="Logo" Type="nvarchar" MaxLength="200" />
@@ -356,7 +359,6 @@
           <Property Name="BillingAddressLine2" Type="nvarchar" MaxLength="150" />
           <Property Name="BillingState" Type="nvarchar" MaxLength="50" />
           <Property Name="BillingCountryId" Type="int" />
-          <Property Name="BillingCityId" Type="int" />
           <Property Name="BillingZipCode" Type="nvarchar" MaxLength="50" />
           <Property Name="BillingPhone" Type="nvarchar" MaxLength="50" />
           <Property Name="BillingEmail" Type="nvarchar" MaxLength="200" />
@@ -365,6 +367,18 @@
           <Property Name="InstagramHandle" Type="nvarchar" MaxLength="200" />
           <Property Name="PinterestHandle" Type="nvarchar" MaxLength="200" />
           <Property Name="VoucherSecretKey" Type="nvarchar(max)" />
+          <Property Name="City" Type="nvarchar" MaxLength="200" />
+          <Property Name="BillingCity" Type="nvarchar" MaxLength="200" />
+          <Property Name="AboutUsDescription" Type="nvarchar(max)" />
+          <Property Name="Status" Type="int" />
+          <Property Name="PaymentMethodStatus" Type="int" />
+          <Property Name="LastPaymentMethodErrorDate" Type="datetime" />
+          <Property Name="LastPaymentMethodError" Type="nvarchar(max)" />
+          <Property Name="CompanyRegNo" Type="nvarchar" MaxLength="100" />
+          <Property Name="TaxRegNo" Type="nvarchar" MaxLength="100" />
+          <Property Name="CreationDateTime" Type="datetime" />
+          <Property Name="NoOfBranches" Type="int" />
+          <Property Name="BillingAddressName" Type="nvarchar" MaxLength="150" />
         </EntityType>
         <EntityType Name="CompanyBranch">
           <Key>
@@ -391,6 +405,7 @@
           <Property Name="CountryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CountryName" Type="nvarchar" MaxLength="200" />
           <Property Name="CountryCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="CurrencyID" Type="int" />
         </EntityType>
         <EntityType Name="Coupon">
           <Key>
@@ -430,12 +445,12 @@
           <Property Name="CouponImage2" Type="nvarchar(max)" />
           <Property Name="CouponImage3" Type="nvarchar(max)" />
           <Property Name="LogoUrl" Type="nvarchar" MaxLength="200" />
-          <Property Name="HighlightLine1" Type="nvarchar" MaxLength="100" />
+          <Property Name="HighlightLine1" Type="nvarchar" MaxLength="800" />
           <Property Name="HighlightLine2" Type="nvarchar" MaxLength="100" />
           <Property Name="HighlightLine3" Type="nvarchar" MaxLength="100" />
           <Property Name="HighlightLine4" Type="nvarchar" MaxLength="100" />
           <Property Name="HighlightLine5" Type="nvarchar" MaxLength="100" />
-          <Property Name="FinePrintLine1" Type="nvarchar" MaxLength="100" />
+          <Property Name="FinePrintLine1" Type="nvarchar" MaxLength="800" />
           <Property Name="FinePrintLine2" Type="nvarchar" MaxLength="100" />
           <Property Name="FinePrintLine3" Type="nvarchar" MaxLength="100" />
           <Property Name="FinePrintLine4" Type="nvarchar" MaxLength="100" />
@@ -461,6 +476,9 @@
           <Property Name="CouponStartDate" Type="datetime" />
           <Property Name="CouponEndDate" Type="datetime" />
           <Property Name="Priority" Type="int" />
+          <Property Name="ShowBuyitBtn" Type="bit" />
+          <Property Name="BuyitLandingPageUrl" Type="nvarchar" MaxLength="500" />
+          <Property Name="BuyitBtnLabel" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="CouponCategories">
           <Key>
@@ -490,6 +508,18 @@
           <Property Name="IsTaken" Type="bit" />
           <Property Name="UserId" Type="nvarchar" MaxLength="128" />
           <Property Name="TakenDateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CouponPriceOption">
+          <Key>
+            <PropertyRef Name="CouponPriceOptionId" />
+          </Key>
+          <Property Name="CouponPriceOptionId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CouponId" Type="bigint" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="Price" Type="float" />
+          <Property Name="Savings" Type="float" />
+          <Property Name="VoucherCode" Type="nvarchar" MaxLength="100" />
+          <Property Name="OptionUrl" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="Currency">
           <Key>
@@ -666,6 +696,25 @@
           <Property Name="GeneratedOn" Type="datetime" />
           <Property Name="GeneratedBy" Type="nvarchar" MaxLength="128" />
         </EntityType>
+        <EntityType Name="PayOutHistory">
+          <Key>
+            <PropertyRef Name="PayOutId" />
+          </Key>
+          <Property Name="PayOutId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyId" Type="int" />
+          <Property Name="RequestDateTime" Type="datetime" />
+          <Property Name="CentzAmount" Type="float" />
+          <Property Name="DollarAmount" Type="float" />
+          <Property Name="StageOneStatus" Type="bit" />
+          <Property Name="StageOneRejectionReason" Type="nvarchar" MaxLength="500" />
+          <Property Name="StageOneEventDate" Type="datetime" />
+          <Property Name="StageOneUserId" Type="nvarchar" MaxLength="128" />
+          <Property Name="StageTwoStatus" Type="bit" />
+          <Property Name="StageTwoRejectionReason" Type="nvarchar" MaxLength="500" />
+          <Property Name="StageTwoEventDate" Type="datetime" />
+          <Property Name="StageTwoUserId" Type="nvarchar" MaxLength="128" />
+          <Property Name="TargetPayoutAccount" Type="nvarchar" MaxLength="500" />
+        </EntityType>
         <EntityType Name="Phrase">
           <Key>
             <PropertyRef Name="PhraseId" />
@@ -734,6 +783,8 @@
           <Property Name="RejectionReason" Type="nvarchar" MaxLength="1000" />
           <Property Name="UserID" Type="nvarchar" MaxLength="128" />
           <Property Name="AmountCharged" Type="float" />
+          <Property Name="StartDate" Type="datetime" />
+          <Property Name="EndDate" Type="datetime" />
         </EntityType>
         <EntityType Name="ProfileQuestionAnswer">
           <Key>
@@ -803,6 +854,7 @@
           <Property Name="AnswerDateTime" Type="datetime" Nullable="false" />
           <Property Name="PQAnswerID" Type="int" Nullable="false" />
           <Property Name="CompanyId" Type="int" />
+          <Property Name="ResponseType" Type="int" />
         </EntityType>
         <EntityType Name="Section">
           <Key>
@@ -864,6 +916,7 @@
           <Property Name="UserSelection" Type="int" />
           <Property Name="SkipCount" Type="int" />
           <Property Name="CompanyId" Type="int" />
+          <Property Name="ResponseType" Type="int" />
         </EntityType>
         <EntityType Name="SurveyQuestionTargetCriteria">
           <Key>
@@ -880,6 +933,8 @@
           <Property Name="LanguageID" Type="int" />
           <Property Name="IndustryID" Type="int" />
           <Property Name="EducationID" Type="bigint" />
+          <Property Name="QuizCampaignId" Type="bigint" />
+          <Property Name="QuizAnswerId" Type="int" />
         </EntityType>
         <EntityType Name="SurveyQuestionTargetLocation">
           <Key>
@@ -997,6 +1052,85 @@
           <Property Name="IsRedeemed" Type="bit" />
           <Property Name="RedemptionDateTime" Type="datetime" />
           <Property Name="RedemptionOperator" Type="nvarchar" MaxLength="500" />
+          <Property Name="ResponseType" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SMDDev.dbo.vw_Coupons' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_Coupons">
+          <Key>
+            <PropertyRef Name="CouponId" />
+          </Key>
+          <Property Name="CouponId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="LanguageId" Type="int" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+          <Property Name="CouponTitle" Type="nvarchar" MaxLength="200" />
+          <Property Name="SearchKeywords" Type="nvarchar(max)" />
+          <Property Name="Status" Type="int" />
+          <Property Name="Archived" Type="bit" />
+          <Property Name="Approved" Type="bit" />
+          <Property Name="ApprovedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="ApprovalDateTime" Type="datetime" />
+          <Property Name="CreatedDateTime" Type="datetime" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="100" />
+          <Property Name="ModifiedDateTime" Type="datetime" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="100" />
+          <Property Name="RejectedReason" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Rejecteddatetime" Type="datetime" />
+          <Property Name="RejectedBy" Type="nvarchar" MaxLength="100" />
+          <Property Name="CurrencyId" Type="int" />
+          <Property Name="Price" Type="float" />
+          <Property Name="Savings" Type="float" />
+          <Property Name="SwapCost" Type="float" />
+          <Property Name="CouponViewCount" Type="int" />
+          <Property Name="CouponIssuedCount" Type="int" />
+          <Property Name="CouponRedeemedCount" Type="int" />
+          <Property Name="CouponQtyPerUser" Type="int" />
+          <Property Name="CouponListingMode" Type="int" />
+          <Property Name="CompanyId" Type="int" />
+          <Property Name="CouponActiveMonth" Type="int" />
+          <Property Name="CouponActiveYear" Type="int" />
+          <Property Name="CouponExpirydate" Type="datetime" />
+          <Property Name="couponImage1" Type="nvarchar(max)" />
+          <Property Name="CouponImage2" Type="nvarchar(max)" />
+          <Property Name="CouponImage3" Type="nvarchar(max)" />
+          <Property Name="LogoUrl" Type="nvarchar" MaxLength="200" />
+          <Property Name="HighlightLine1" Type="nvarchar" MaxLength="800" />
+          <Property Name="HighlightLine2" Type="nvarchar" MaxLength="100" />
+          <Property Name="HighlightLine3" Type="nvarchar" MaxLength="100" />
+          <Property Name="HighlightLine4" Type="nvarchar" MaxLength="100" />
+          <Property Name="HighlightLine5" Type="nvarchar" MaxLength="100" />
+          <Property Name="FinePrintLine1" Type="nvarchar" MaxLength="800" />
+          <Property Name="FinePrintLine2" Type="nvarchar" MaxLength="100" />
+          <Property Name="FinePrintLine3" Type="nvarchar" MaxLength="100" />
+          <Property Name="FinePrintLine4" Type="nvarchar" MaxLength="100" />
+          <Property Name="FinePrintLine5" Type="nvarchar" MaxLength="100" />
+          <Property Name="LocationBranchId" Type="bigint" />
+          <Property Name="LocationTitle" Type="nvarchar" MaxLength="500" />
+          <Property Name="LocationLine1" Type="nvarchar" MaxLength="500" />
+          <Property Name="LocationLine2" Type="nvarchar" MaxLength="500" />
+          <Property Name="LocationCity" Type="nvarchar" MaxLength="500" />
+          <Property Name="LocationState" Type="nvarchar" MaxLength="500" />
+          <Property Name="LocationZipCode" Type="nvarchar" MaxLength="500" />
+          <Property Name="LocationLAT" Type="nvarchar" MaxLength="50" />
+          <Property Name="LocationLON" Type="nvarchar" MaxLength="50" />
+          <Property Name="LocationPhone" Type="nvarchar" MaxLength="200" />
+          <Property Name="GeographyColumn" Type="geography" />
+          <Property Name="HowToRedeemLine1" Type="nvarchar" MaxLength="500" />
+          <Property Name="HowToRedeemLine2" Type="nvarchar" MaxLength="500" />
+          <Property Name="HowToRedeemLine3" Type="nvarchar" MaxLength="500" />
+          <Property Name="HowToRedeemLine4" Type="nvarchar" MaxLength="500" />
+          <Property Name="HowToRedeemLine5" Type="nvarchar" MaxLength="500" />
+          <Property Name="SubmissionDateTime" Type="datetime" />
+          <Property Name="LocationCountryId" Type="int" />
+          <Property Name="CouponStartDate" Type="datetime" />
+          <Property Name="CouponEndDate" Type="datetime" />
+          <Property Name="Priority" Type="int" />
+          <Property Name="ShowBuyitBtn" Type="bit" />
+          <Property Name="BuyitLandingPageUrl" Type="nvarchar" MaxLength="500" />
+          <Property Name="BuyitBtnLabel" Type="nvarchar" MaxLength="200" />
+          <Property Name="Categories" Type="nvarchar(max)" />
+          <Property Name="CurrencyCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="CurrencySymbol" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <Association Name="FK_Account_Company">
           <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
@@ -1183,7 +1317,7 @@
           <End Role="AdCampaignTargetLocation" Type="Self.AdCampaignTargetLocation" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="City">
-              <PropertyRef Name="CityID" />
+              <PropertyRef Name="CityId" />
             </Principal>
             <Dependent Role="AdCampaignTargetLocation">
               <PropertyRef Name="CityID" />
@@ -1318,7 +1452,7 @@
               <PropertyRef Name="CountryID" />
             </Principal>
             <Dependent Role="City">
-              <PropertyRef Name="CountryID" />
+              <PropertyRef Name="CountryId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1358,18 +1492,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Company_City">
-          <End Role="City" Type="Self.City" Multiplicity="0..1" />
-          <End Role="Company" Type="Self.Company" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="City">
-              <PropertyRef Name="CityID" />
-            </Principal>
-            <Dependent Role="Company">
-              <PropertyRef Name="CityId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Company_Country">
           <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
           <End Role="Company" Type="Self.Company" Multiplicity="*" />
@@ -1403,6 +1525,18 @@
             </Principal>
             <Dependent Role="CompanyBranch">
               <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Country_Currency">
+          <End Role="Currency" Type="Self.Currency" Multiplicity="0..1" />
+          <End Role="Country" Type="Self.Country" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currency">
+              <PropertyRef Name="CurrencyID" />
+            </Principal>
+            <Dependent Role="Country">
+              <PropertyRef Name="CurrencyID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1487,6 +1621,18 @@
             </Principal>
             <Dependent Role="CouponCodes">
               <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CouponPriceOption_Coupon">
+          <End Role="Coupon" Type="Self.Coupon" Multiplicity="0..1" />
+          <End Role="CouponPriceOption" Type="Self.CouponPriceOption" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Coupon">
+              <PropertyRef Name="CouponId" />
+            </Principal>
+            <Dependent Role="CouponPriceOption">
+              <PropertyRef Name="CouponId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1654,6 +1800,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_PayOutHistory_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="PayOutHistory" Type="Self.PayOutHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="PayOutHistory">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ProfileQuestion_Company">
           <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
           <End Role="ProfileQuestion" Type="Self.ProfileQuestion" Multiplicity="*" />
@@ -1779,7 +1937,7 @@
           <End Role="ProfileQuestionTargetLocation" Type="Self.ProfileQuestionTargetLocation" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="City">
-              <PropertyRef Name="CityID" />
+              <PropertyRef Name="CityId" />
             </Principal>
             <Dependent Role="ProfileQuestionTargetLocation">
               <PropertyRef Name="CityID" />
@@ -1978,6 +2136,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_SurveyQuestionTargetCriteria_AdCampaign">
+          <End Role="AdCampaign" Type="Self.AdCampaign" Multiplicity="0..1" />
+          <End Role="SurveyQuestionTargetCriteria" Type="Self.SurveyQuestionTargetCriteria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdCampaign">
+              <PropertyRef Name="CampaignID" />
+            </Principal>
+            <Dependent Role="SurveyQuestionTargetCriteria">
+              <PropertyRef Name="QuizCampaignId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_SurveyQuestionTargetCriteria_Education">
           <End Role="Education" Type="Self.Education" Multiplicity="0..1" />
           <End Role="SurveyQuestionTargetCriteria" Type="Self.SurveyQuestionTargetCriteria" Multiplicity="*" />
@@ -2067,7 +2237,7 @@
           <End Role="SurveyQuestionTargetLocation" Type="Self.SurveyQuestionTargetLocation" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="City">
-              <PropertyRef Name="CityID" />
+              <PropertyRef Name="CityId" />
             </Principal>
             <Dependent Role="SurveyQuestionTargetLocation">
               <PropertyRef Name="CityID" />
@@ -2238,6 +2408,7 @@
           <EntitySet Name="CouponCategories" EntityType="Self.CouponCategories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CouponCategory" EntityType="Self.CouponCategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CouponCodes" EntityType="Self.CouponCodes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CouponPriceOption" EntityType="Self.CouponPriceOption" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Currency" EntityType="Self.Currency" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CustomUrl" EntityType="Self.CustomUrl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DamImages" EntityType="Self.DamImages" Schema="dbo" store:Type="Tables" />
@@ -2251,6 +2422,7 @@
           <EntitySet Name="Language" EntityType="Self.Language" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Notifications" EntityType="Self.Notifications" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PayOutHistory" EntityType="Self.PayOutHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Phrase" EntityType="Self.Phrase" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProfileQuestion" EntityType="Self.ProfileQuestion" Schema="dbo" store:Type="Tables" />
@@ -2273,6 +2445,81 @@
           <EntitySet Name="UserCouponView" EntityType="Self.UserCouponView" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserFavouriteCoupon" EntityType="Self.UserFavouriteCoupon" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserPurchasedCoupon" EntityType="Self.UserPurchasedCoupon" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vw_Coupons" EntityType="Self.vw_Coupons" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_Coupons].[CouponId] AS [CouponId], 
+    [vw_Coupons].[LanguageId] AS [LanguageId], 
+    [vw_Coupons].[UserId] AS [UserId], 
+    [vw_Coupons].[CouponTitle] AS [CouponTitle], 
+    [vw_Coupons].[SearchKeywords] AS [SearchKeywords], 
+    [vw_Coupons].[Status] AS [Status], 
+    [vw_Coupons].[Archived] AS [Archived], 
+    [vw_Coupons].[Approved] AS [Approved], 
+    [vw_Coupons].[ApprovedBy] AS [ApprovedBy], 
+    [vw_Coupons].[ApprovalDateTime] AS [ApprovalDateTime], 
+    [vw_Coupons].[CreatedDateTime] AS [CreatedDateTime], 
+    [vw_Coupons].[CreatedBy] AS [CreatedBy], 
+    [vw_Coupons].[ModifiedDateTime] AS [ModifiedDateTime], 
+    [vw_Coupons].[ModifiedBy] AS [ModifiedBy], 
+    [vw_Coupons].[RejectedReason] AS [RejectedReason], 
+    [vw_Coupons].[Rejecteddatetime] AS [Rejecteddatetime], 
+    [vw_Coupons].[RejectedBy] AS [RejectedBy], 
+    [vw_Coupons].[CurrencyId] AS [CurrencyId], 
+    [vw_Coupons].[Price] AS [Price], 
+    [vw_Coupons].[Savings] AS [Savings], 
+    [vw_Coupons].[SwapCost] AS [SwapCost], 
+    [vw_Coupons].[CouponViewCount] AS [CouponViewCount], 
+    [vw_Coupons].[CouponIssuedCount] AS [CouponIssuedCount], 
+    [vw_Coupons].[CouponRedeemedCount] AS [CouponRedeemedCount], 
+    [vw_Coupons].[CouponQtyPerUser] AS [CouponQtyPerUser], 
+    [vw_Coupons].[CouponListingMode] AS [CouponListingMode], 
+    [vw_Coupons].[CompanyId] AS [CompanyId], 
+    [vw_Coupons].[CouponActiveMonth] AS [CouponActiveMonth], 
+    [vw_Coupons].[CouponActiveYear] AS [CouponActiveYear], 
+    [vw_Coupons].[CouponExpirydate] AS [CouponExpirydate], 
+    [vw_Coupons].[couponImage1] AS [couponImage1], 
+    [vw_Coupons].[CouponImage2] AS [CouponImage2], 
+    [vw_Coupons].[CouponImage3] AS [CouponImage3], 
+    [vw_Coupons].[LogoUrl] AS [LogoUrl], 
+    [vw_Coupons].[HighlightLine1] AS [HighlightLine1], 
+    [vw_Coupons].[HighlightLine2] AS [HighlightLine2], 
+    [vw_Coupons].[HighlightLine3] AS [HighlightLine3], 
+    [vw_Coupons].[HighlightLine4] AS [HighlightLine4], 
+    [vw_Coupons].[HighlightLine5] AS [HighlightLine5], 
+    [vw_Coupons].[FinePrintLine1] AS [FinePrintLine1], 
+    [vw_Coupons].[FinePrintLine2] AS [FinePrintLine2], 
+    [vw_Coupons].[FinePrintLine3] AS [FinePrintLine3], 
+    [vw_Coupons].[FinePrintLine4] AS [FinePrintLine4], 
+    [vw_Coupons].[FinePrintLine5] AS [FinePrintLine5], 
+    [vw_Coupons].[LocationBranchId] AS [LocationBranchId], 
+    [vw_Coupons].[LocationTitle] AS [LocationTitle], 
+    [vw_Coupons].[LocationLine1] AS [LocationLine1], 
+    [vw_Coupons].[LocationLine2] AS [LocationLine2], 
+    [vw_Coupons].[LocationCity] AS [LocationCity], 
+    [vw_Coupons].[LocationState] AS [LocationState], 
+    [vw_Coupons].[LocationZipCode] AS [LocationZipCode], 
+    [vw_Coupons].[LocationLAT] AS [LocationLAT], 
+    [vw_Coupons].[LocationLON] AS [LocationLON], 
+    [vw_Coupons].[LocationPhone] AS [LocationPhone], 
+    [vw_Coupons].[GeographyColumn] AS [GeographyColumn], 
+    [vw_Coupons].[HowToRedeemLine1] AS [HowToRedeemLine1], 
+    [vw_Coupons].[HowToRedeemLine2] AS [HowToRedeemLine2], 
+    [vw_Coupons].[HowToRedeemLine3] AS [HowToRedeemLine3], 
+    [vw_Coupons].[HowToRedeemLine4] AS [HowToRedeemLine4], 
+    [vw_Coupons].[HowToRedeemLine5] AS [HowToRedeemLine5], 
+    [vw_Coupons].[SubmissionDateTime] AS [SubmissionDateTime], 
+    [vw_Coupons].[LocationCountryId] AS [LocationCountryId], 
+    [vw_Coupons].[CouponStartDate] AS [CouponStartDate], 
+    [vw_Coupons].[CouponEndDate] AS [CouponEndDate], 
+    [vw_Coupons].[Priority] AS [Priority], 
+    [vw_Coupons].[ShowBuyitBtn] AS [ShowBuyitBtn], 
+    [vw_Coupons].[BuyitLandingPageUrl] AS [BuyitLandingPageUrl], 
+    [vw_Coupons].[BuyitBtnLabel] AS [BuyitBtnLabel], 
+    [vw_Coupons].[Categories] AS [Categories], 
+    [vw_Coupons].[CurrencyCode] AS [CurrencyCode], 
+    [vw_Coupons].[CurrencySymbol] AS [CurrencySymbol]
+    FROM [dbo].[vw_Coupons] AS [vw_Coupons]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_Account_Company" Association="Self.FK_Account_Company">
             <End Role="Company" EntitySet="Company" />
             <End Role="Account" EntitySet="Account" />
@@ -2393,10 +2640,6 @@
             <End Role="Company" EntitySet="Company" />
             <End Role="CompaniesAspNetUsers" EntitySet="CompaniesAspNetUsers" />
           </AssociationSet>
-          <AssociationSet Name="FK_Company_City" Association="Self.FK_Company_City">
-            <End Role="City" EntitySet="City" />
-            <End Role="Company" EntitySet="Company" />
-          </AssociationSet>
           <AssociationSet Name="FK_Company_Country" Association="Self.FK_Company_Country">
             <End Role="Country" EntitySet="Country" />
             <End Role="Company" EntitySet="Company" />
@@ -2408,6 +2651,10 @@
           <AssociationSet Name="FK_CompanyBranch_Company" Association="Self.FK_CompanyBranch_Company">
             <End Role="Company" EntitySet="Company" />
             <End Role="CompanyBranch" EntitySet="CompanyBranch" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Country_Currency" Association="Self.FK_Country_Currency">
+            <End Role="Currency" EntitySet="Currency" />
+            <End Role="Country" EntitySet="Country" />
           </AssociationSet>
           <AssociationSet Name="FK_Coupon_Company" Association="Self.FK_Coupon_Company">
             <End Role="Company" EntitySet="Company" />
@@ -2436,6 +2683,10 @@
           <AssociationSet Name="FK_CouponCodes_AspNetUsers" Association="Self.FK_CouponCodes_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="CouponCodes" EntitySet="CouponCodes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CouponPriceOption_Coupon" Association="Self.FK_CouponPriceOption_Coupon">
+            <End Role="Coupon" EntitySet="Coupon" />
+            <End Role="CouponPriceOption" EntitySet="CouponPriceOption" />
           </AssociationSet>
           <AssociationSet Name="FK_DamImages_Company" Association="Self.FK_DamImages_Company">
             <End Role="Company" EntitySet="Company" />
@@ -2488,6 +2739,10 @@
           <AssociationSet Name="FK_InvoiceDetail_SurveyQuestion" Association="Self.FK_InvoiceDetail_SurveyQuestion">
             <End Role="SurveyQuestion" EntitySet="SurveyQuestion" />
             <End Role="InvoiceDetail" EntitySet="InvoiceDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PayOutHistory_Company" Association="Self.FK_PayOutHistory_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="PayOutHistory" EntitySet="PayOutHistory" />
           </AssociationSet>
           <AssociationSet Name="FK_ProfileQuestion_Company" Association="Self.FK_ProfileQuestion_Company">
             <End Role="Company" EntitySet="Company" />
@@ -2597,6 +2852,10 @@
             <End Role="SurveyQuestion" EntitySet="SurveyQuestion" />
             <End Role="SurveyQuestionResponse" EntitySet="SurveyQuestionResponse" />
           </AssociationSet>
+          <AssociationSet Name="FK_SurveyQuestionTargetCriteria_AdCampaign" Association="Self.FK_SurveyQuestionTargetCriteria_AdCampaign">
+            <End Role="AdCampaign" EntitySet="AdCampaign" />
+            <End Role="SurveyQuestionTargetCriteria" EntitySet="SurveyQuestionTargetCriteria" />
+          </AssociationSet>
           <AssociationSet Name="FK_SurveyQuestionTargetCriteria_Education" Association="Self.FK_SurveyQuestionTargetCriteria_Education">
             <End Role="Education" EntitySet="Education" />
             <End Role="SurveyQuestionTargetCriteria" EntitySet="SurveyQuestionTargetCriteria" />
@@ -2675,8 +2934,8 @@
           <Property Name="AccountType" Type="Int32" />
           <Property Name="AccountBalance" Type="Double" />
           <Property Name="CompanyId" Type="Int32" />
-          <NavigationProperty Name="Company" Relationship="Self.FK_Account_Company" FromRole="Account" ToRole="Company" />
           <NavigationProperty Name="Transactions" Relationship="Self.FK_Transaction_Account" FromRole="Account" ToRole="Transaction" />
+          <NavigationProperty Name="Company" Relationship="SMDDevModel.FK_Account_Company" FromRole="Account" ToRole="Company" />
         </EntityType>
         <EntityType Name="AdCampaign">
           <Key>
@@ -2777,7 +3036,6 @@
           <Property Name="VoucherRedemptionPhone" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="VoucherLocationLAT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="VoucherLocationLON" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="Company" Relationship="Self.FK_AdCampaign_Company" FromRole="AdCampaign" ToRole="Company" />
           <NavigationProperty Name="Language" Relationship="Self.FK_AdCampaign_Language" FromRole="AdCampaign" ToRole="Language" />
           <NavigationProperty Name="AdCampaignResponses" Relationship="Self.FK_AdCampaignResponse_AdCampaign" FromRole="AdCampaign" ToRole="AdCampaignResponse" />
           <NavigationProperty Name="AdCampaignTargetCriterias" Relationship="Self.FK_AdCampaignTargetCriteria_AdCampaign" FromRole="AdCampaign" ToRole="AdCampaignTargetCriteria" />
@@ -2788,6 +3046,8 @@
           <NavigationProperty Name="InvoiceDetails" Relationship="Self.FK_InvoiceDetail_AdCampaign" FromRole="AdCampaign" ToRole="InvoiceDetail" />
           <Property Name="MaxDailyBudget" Type="Double" />
           <Property Name="SubmissionDateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="SurveyQuestionTargetCriterias" Relationship="SMDDevModel.FK_SurveyQuestionTargetCriteria_AdCampaign" FromRole="AdCampaign" ToRole="SurveyQuestionTargetCriteria" />
+          <NavigationProperty Name="Company" Relationship="SMDDevModel.FK_AdCampaign_Company" FromRole="AdCampaign" ToRole="Company" />
         </EntityType>
         <EntityType Name="AdCampaignResponse">
           <Key>
@@ -2810,13 +3070,13 @@
           <NavigationProperty Name="AdCampaignResponse1" Relationship="Self.FK_AdCampaignResponse_AdCampaignResponse" FromRole="AdCampaignResponse" ToRole="AdCampaignResponse1" />
           <NavigationProperty Name="AdCampaignResponse2" Relationship="Self.FK_AdCampaignResponse_AdCampaignResponse" FromRole="AdCampaignResponse1" ToRole="AdCampaignResponse" />
           <NavigationProperty Name="AspNetUser" Relationship="Self.FK_AdCampaignResponse_AspNetUsers" FromRole="AdCampaignResponse" ToRole="AspNetUsers" />
-          <NavigationProperty Name="Company" Relationship="Self.FK_AdCampaignResponse_Company" FromRole="AdCampaignResponse" ToRole="Company" />
           <Property Name="UserLocationLat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="UserLocationLong" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="UserLocationCity" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="UserLocationCountry" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="UserLocationAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="ResponseType" Type="Int32" />
+          <NavigationProperty Name="Company" Relationship="SMDDevModel.FK_AdCampaignResponse_Company" FromRole="AdCampaignResponse" ToRole="Company" />
         </EntityType>
         <EntityType Name="AdCampaignTargetCriteria">
           <Key>
@@ -2855,9 +3115,9 @@
           <Property Name="Radius" Type="Int32" />
           <Property Name="IncludeorExclude" Type="Boolean" />
           <NavigationProperty Name="AdCampaign" Relationship="Self.FK_AdCampaignTargetLocation_AdCampaign" FromRole="AdCampaignTargetLocation" ToRole="AdCampaign" />
-          <NavigationProperty Name="City" Relationship="Self.FK_AdCampaignTargetLocation_City" FromRole="AdCampaignTargetLocation" ToRole="City" />
           <NavigationProperty Name="Country" Relationship="Self.FK_AdCampaignTargetLocation_Country" FromRole="AdCampaignTargetLocation" ToRole="Country" />
-        </EntityType>
+          <NavigationProperty Name="City" Relationship="SMDDevModel.FK_AdCampaignTargetLocation_City" FromRole="AdCampaignTargetLocation" ToRole="City" />
+          </EntityType>
         <EntityType Name="App">
           <Key>
             <PropertyRef Name="AppID" />
@@ -2942,7 +3202,6 @@
           <NavigationProperty Name="AdCampaignResponses" Relationship="Self.FK_AdCampaignResponse_AspNetUsers" FromRole="AspNetUsers" ToRole="AdCampaignResponse" />
           <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
-          <NavigationProperty Name="Company" Relationship="Self.FK_AspNetUsers_Company" FromRole="AspNetUsers" ToRole="Company" />
           <NavigationProperty Name="Education" Relationship="Self.FK_AspNetUsers_Education" FromRole="AspNetUsers" ToRole="Education" />
           <NavigationProperty Name="Industry" Relationship="Self.FK_AspNetUsers_Industry" FromRole="AspNetUsers" ToRole="Industry" />
           <NavigationProperty Name="Language" Relationship="Self.FK_AspNetUsers_Language" FromRole="AspNetUsers" ToRole="Language" />
@@ -2954,6 +3213,11 @@
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
           <NavigationProperty Name="Apps" Relationship="Self.UserApps" FromRole="AspNetUsers" ToRole="Apps" />
           <Property Name="DevicePlatform" Type="Int32" />
+          <Property Name="optDealsNearMeEmails" Type="Boolean" />
+          <Property Name="optLatestNewsEmails" Type="Boolean" />
+          <Property Name="optMarketingEmails" Type="Boolean" />
+          <NavigationProperty Name="Company" Relationship="SMDDevModel.FK_AspNetUsers_Company" FromRole="AspNetUser" ToRole="Company" />
+          <Property Name="PassportNo" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="AuditLog">
           <Key>
@@ -2974,8 +3238,8 @@
           <Property Name="BranchCategoryId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="BranchCategoryName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="CompanyId" Type="Int32" />
-          <NavigationProperty Name="Company" Relationship="Self.FK_BranchCategory_Company" FromRole="BranchCategory" ToRole="Company" />
           <NavigationProperty Name="CompanyBranches" Relationship="Self.FK_CompanyBranch_BranchCategory" FromRole="BranchCategory" ToRole="CompanyBranch" />
+          <NavigationProperty Name="Company" Relationship="SMDDevModel.FK_BranchCategory_Company" FromRole="BranchCategory" ToRole="Company" />
         </EntityType>
         <EntityType Name="CampaignCategory">
           <Key>
@@ -3005,22 +3269,6 @@
           <NavigationProperty Name="Category" Relationship="Self.FK_CategoryLog_Category" FromRole="CategoryLog" ToRole="Category" />
           <NavigationProperty Name="Log" Relationship="Self.FK_CategoryLog_Log" FromRole="CategoryLog" ToRole="Log" />
         </EntityType>
-        <EntityType Name="City">
-          <Key>
-            <PropertyRef Name="CityID" />
-          </Key>
-          <Property Name="CityID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CityName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="IsCapital" Type="Boolean" />
-          <Property Name="CountryID" Type="Int32" />
-          <Property Name="GeoLONG" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="GeoLAT" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AdCampaignTargetLocations" Relationship="Self.FK_AdCampaignTargetLocation_City" FromRole="City" ToRole="AdCampaignTargetLocation" />
-          <NavigationProperty Name="Country" Relationship="Self.FK_City_Country" FromRole="City" ToRole="Country" />
-          <NavigationProperty Name="Companies" Relationship="Self.FK_Company_City" FromRole="City" ToRole="Company" />
-          <NavigationProperty Name="SurveyQuestionTargetLocations" Relationship="Self.FK_SurveyQuestionTargetLocation_City" FromRole="City" ToRole="SurveyQuestionTargetLocation" />
-          <NavigationProperty Name="ProfileQuestionTargetLocations" Relationship="SMDDevModel.FK_ProfileQuestionTargetLocation_City" FromRole="City" ToRole="ProfileQuestionTargetLocation" />
-        </EntityType>
         <EntityType Name="CompaniesAspNetUser">
           <Key>
             <PropertyRef Name="Id" />
@@ -3035,66 +3283,7 @@
           <Property Name="InvitationEmail" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetRole" Relationship="Self.FK_CompaniesAspNetUsers_AspNetRoles" FromRole="CompaniesAspNetUsers" ToRole="AspNetRoles" />
           <NavigationProperty Name="AspNetUser" Relationship="Self.FK_CompaniesAspNetUsers_AspNetUsers" FromRole="CompaniesAspNetUsers" ToRole="AspNetUsers" />
-          <NavigationProperty Name="Company" Relationship="Self.FK_CompaniesAspNetUsers_Company" FromRole="CompaniesAspNetUsers" ToRole="Company" />
-        </EntityType>
-        <EntityType Name="Company">
-          <Key>
-            <PropertyRef Name="CompanyId" />
-          </Key>
-          <Property Name="CompanyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CompanyName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ReplyEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Tel1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Tel2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="AddressLine1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="AddressLine2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CountryId" Type="Int32" />
-          <Property Name="CityId" Type="Int32" />
-          <Property Name="ZipCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="TimeZone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Logo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="StripeCustomerId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ChargeBeesubscriptionID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="RegisteredViaReferral" Type="Boolean" />
-          <Property Name="ReferringCompanyID" Type="Int32" />
-          <Property Name="PaypalCustomerId" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="GoogleWalletCustomerId" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="PreferredPayoutAccount" Type="Int32" />
-          <Property Name="SalesEmail" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
-          <Property Name="ReferralCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="AfilliatianStatus" Type="Boolean" />
-          <Property Name="WebsiteLink" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="CompanyType" Type="Int32" />
-          <NavigationProperty Name="Accounts" Relationship="Self.FK_Account_Company" FromRole="Company" ToRole="Account" />
-          <NavigationProperty Name="AdCampaigns" Relationship="Self.FK_AdCampaign_Company" FromRole="Company" ToRole="AdCampaign" />
-          <NavigationProperty Name="AdCampaignResponses" Relationship="Self.FK_AdCampaignResponse_Company" FromRole="Company" ToRole="AdCampaignResponse" />
-          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_AspNetUsers_Company" FromRole="Company" ToRole="AspNetUsers" />
-          <NavigationProperty Name="BranchCategories" Relationship="Self.FK_BranchCategory_Company" FromRole="Company" ToRole="BranchCategory" />
-          <NavigationProperty Name="City" Relationship="Self.FK_Company_City" FromRole="Company" ToRole="City" />
-          <NavigationProperty Name="CompaniesAspNetUsers" Relationship="Self.FK_CompaniesAspNetUsers_Company" FromRole="Company" ToRole="CompaniesAspNetUsers" />
-          <NavigationProperty Name="Country" Relationship="Self.FK_Company_Country" FromRole="Company" ToRole="Country" />
-          <NavigationProperty Name="CompanyBranches" Relationship="Self.FK_CompanyBranch_Company" FromRole="Company" ToRole="CompanyBranch" />
-          <NavigationProperty Name="Coupons" Relationship="Self.FK_Coupon_Company" FromRole="Company" ToRole="Coupon" />
-          <NavigationProperty Name="Invoices" Relationship="Self.FK_Invoice_Company" FromRole="Company" ToRole="Invoice" />
-          <NavigationProperty Name="ProfileQuestionUserAnswers" Relationship="Self.FK_ProfileQuestionUserAnswer_Company" FromRole="Company" ToRole="ProfileQuestionUserAnswer" />
-          <NavigationProperty Name="SurveyQuestions" Relationship="Self.FK_SurveyQuestion_Company" FromRole="Company" ToRole="SurveyQuestion" />
-          <NavigationProperty Name="SurveyQuestionResponses" Relationship="Self.FK_SurveyQuestionResponse_Company" FromRole="Company" ToRole="SurveyQuestionResponse" />
-          <Property Name="VoucherSecretKey" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="BillingAddressLine1" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="BillingAddressLine2" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="BillingState" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="BillingCountryId" Type="Int32" />
-          <Property Name="BillingCityId" Type="Int32" />
-          <Property Name="BillingZipCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="BillingPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="BillingEmail" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="TwitterHandle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="FacebookHandle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="InstagramHandle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="PinterestHandle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="DamImages" Relationship="SMDDevModel.FK_DamImages_Company" FromRole="Company" ToRole="DamImage" />
-          <NavigationProperty Name="ProfileQuestions" Relationship="SMDDevModel.FK_ProfileQuestion_Company" FromRole="Company" ToRole="ProfileQuestion" />
+          <NavigationProperty Name="Company" Relationship="SMDDevModel.FK_CompaniesAspNetUsers_Company" FromRole="CompaniesAspNetUser" ToRole="Company" />
         </EntityType>
         <EntityType Name="CompanyBranch">
           <Key>
@@ -3113,9 +3302,9 @@
           <Property Name="BranchCategoryId" Type="Int64" />
           <Property Name="CompanyId" Type="Int32" />
           <NavigationProperty Name="BranchCategory" Relationship="Self.FK_CompanyBranch_BranchCategory" FromRole="CompanyBranch" ToRole="BranchCategory" />
-          <NavigationProperty Name="Company" Relationship="Self.FK_CompanyBranch_Company" FromRole="CompanyBranch" ToRole="Company" />
           <NavigationProperty Name="Coupons" Relationship="Self.FK_Coupon_CompanyBranch" FromRole="CompanyBranch" ToRole="Coupon" />
           <Property Name="CountryId" Type="Int32" />
+          <NavigationProperty Name="Company" Relationship="SMDDevModel.FK_CompanyBranch_Company" FromRole="CompanyBranch" ToRole="Company" />
         </EntityType>
         <EntityType Name="Country">
           <Key>
@@ -3125,14 +3314,16 @@
           <Property Name="CountryName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="CountryCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AdCampaignTargetLocations" Relationship="Self.FK_AdCampaignTargetLocation_Country" FromRole="Country" ToRole="AdCampaignTargetLocation" />
-          <NavigationProperty Name="Cities" Relationship="Self.FK_City_Country" FromRole="Country" ToRole="City" />
-          <NavigationProperty Name="Companies" Relationship="Self.FK_Company_Country" FromRole="Country" ToRole="Company" />
           <NavigationProperty Name="ProfileQuestionGroups" Relationship="Self.FK_ProfileQuestionGroup_Country" FromRole="Country" ToRole="ProfileQuestionGroup" />
           <NavigationProperty Name="Products" Relationship="Self.FK_SMDPrice_Country" FromRole="Country" ToRole="Products" />
           <NavigationProperty Name="SurveyQuestions" Relationship="Self.FK_SurveyQuestion_Country" FromRole="Country" ToRole="SurveyQuestion" />
           <NavigationProperty Name="SurveyQuestionTargetLocations" Relationship="Self.FK_SurveyQuestionTargetLocation_Country" FromRole="Country" ToRole="SurveyQuestionTargetLocation" />
           <NavigationProperty Name="Taxes" Relationship="Self.FK_Tax_Country" FromRole="Country" ToRole="Tax" />
           <NavigationProperty Name="ProfileQuestionTargetLocations" Relationship="SMDDevModel.FK_ProfileQuestionTargetLocation_Country" FromRole="Country" ToRole="ProfileQuestionTargetLocation" />
+          <NavigationProperty Name="Companies" Relationship="SMDDevModel.FK_Company_Country" FromRole="Country" ToRole="Company" />
+          <Property Name="CurrencyID" Type="Int32" />
+          <NavigationProperty Name="Currency" Relationship="SMDDevModel.FK_Country_Currency" FromRole="Country" ToRole="Currency" />
+          <NavigationProperty Name="Cities" Relationship="SMDDevModel.FK_City_Country" FromRole="Country" ToRole="City" />
         </EntityType>
         <EntityType Name="Coupon">
           <Key>
@@ -3172,12 +3363,12 @@
           <Property Name="CouponImage2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CouponImage3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="LogoUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="HighlightLine1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="HighlightLine1" Type="String" MaxLength="800" FixedLength="false" Unicode="true" />
           <Property Name="HighlightLine2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="HighlightLine3" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="HighlightLine4" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="HighlightLine5" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="FinePrintLine1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FinePrintLine1" Type="String" MaxLength="800" FixedLength="false" Unicode="true" />
           <Property Name="FinePrintLine2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="FinePrintLine3" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="FinePrintLine4" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
@@ -3198,7 +3389,6 @@
           <Property Name="HowToRedeemLine3" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="HowToRedeemLine4" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="HowToRedeemLine5" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Company" Relationship="Self.FK_Coupon_Company" FromRole="Coupon" ToRole="Company" />
           <NavigationProperty Name="CompanyBranch" Relationship="Self.FK_Coupon_CompanyBranch" FromRole="Coupon" ToRole="CompanyBranch" />
           <NavigationProperty Name="Language" Relationship="Self.FK_Coupon_Language" FromRole="Coupon" ToRole="Language" />
           <NavigationProperty Name="CouponCategories" Relationship="SMDDevModel.FK_CouponCategories_Coupon" FromRole="Coupon" ToRole="CouponCategories" />
@@ -3209,6 +3399,11 @@
           <Property Name="CouponStartDate" Type="DateTime" Precision="3" />
           <Property Name="CouponEndDate" Type="DateTime" Precision="3" />
           <Property Name="Priority" Type="Int32" />
+          <Property Name="ShowBuyitBtn" Type="Boolean" />
+          <Property Name="BuyitLandingPageUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="BuyitBtnLabel" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CouponPriceOptions" Relationship="SMDDevModel.FK_CouponPriceOption_Coupon" FromRole="Coupon" ToRole="CouponPriceOption" />
+          <NavigationProperty Name="Company" Relationship="SMDDevModel.FK_Coupon_Company" FromRole="Coupon" ToRole="Company" />
         </EntityType>
         <EntityType Name="CouponCode">
           <Key>
@@ -3233,6 +3428,7 @@
           <Property Name="SMDCreditRatio" Type="Double" />
           <Property Name="CurrencySymbol" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Products" Relationship="Self.FK_SMDPrice_Currency" FromRole="Currency" ToRole="Products" />
+          <NavigationProperty Name="Countries" Relationship="SMDDevModel.FK_Country_Currency" FromRole="Currency" ToRole="Country" />
         </EntityType>
         <EntityType Name="CustomUrl">
           <Key>
@@ -3341,8 +3537,8 @@
           <Property Name="ZipCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="CreditCardRef" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="CompanyId" Type="Int32" />
-          <NavigationProperty Name="Company" Relationship="Self.FK_Invoice_Company" FromRole="Invoice" ToRole="Company" />
           <NavigationProperty Name="InvoiceDetails" Relationship="Self.FK_InvoiceDetail_Invoice" FromRole="Invoice" ToRole="InvoiceDetail" />
+          <NavigationProperty Name="Company" Relationship="SMDDevModel.FK_Invoice_Company" FromRole="Invoice" ToRole="Company" />
         </EntityType>
         <EntityType Name="InvoiceDetail">
           <Key>
@@ -3471,7 +3667,6 @@
           <Property Name="CompanyId" Type="Int32" />
           <Property Name="AnswerNeeded" Type="Int32" />
           <Property Name="AsnswerCount" Type="Int32" />
-          <NavigationProperty Name="Company" Relationship="SMDDevModel.FK_ProfileQuestion_Company" FromRole="ProfileQuestion" ToRole="Company" />
           <Property Name="SubmissionDateTime" Type="DateTime" Precision="3" />
           <Property Name="AgeRangeStart" Type="Int32" />
           <Property Name="AgeRangeEnd" Type="Int32" />
@@ -3486,6 +3681,9 @@
           <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="ProfileQuestionTargetCriterias1" Relationship="SMDDevModel.FK_ProfileQuestionTargetCriteria_ProfileQuestion2" FromRole="ProfileQuestion" ToRole="ProfileQuestionTargetCriteria" />
           <Property Name="AmountCharged" Type="Double" />
+          <Property Name="StartDate" Type="DateTime" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Company" Relationship="SMDDevModel.FK_ProfileQuestion_Company" FromRole="ProfileQuestion" ToRole="Company" />
         </EntityType>
         <EntityType Name="ProfileQuestionAnswer">
           <Key>
@@ -3533,9 +3731,10 @@
           <Property Name="PQAnswerID" Type="Int32" Nullable="false" />
           <Property Name="CompanyId" Type="Int32" />
           <NavigationProperty Name="AspNetUser" Relationship="Self.FK_ProfileQuestionUserAnswer_AspNetUsers" FromRole="ProfileQuestionUserAnswer" ToRole="AspNetUsers" />
-          <NavigationProperty Name="Company" Relationship="Self.FK_ProfileQuestionUserAnswer_Company" FromRole="ProfileQuestionUserAnswer" ToRole="Company" />
           <NavigationProperty Name="ProfileQuestion" Relationship="Self.FK_ProfileQuestionUserAnswer_ProfileQuestion" FromRole="ProfileQuestionUserAnswer" ToRole="ProfileQuestion" />
           <NavigationProperty Name="ProfileQuestionAnswer" Relationship="Self.FK_ProfileQuestionUserAnswer_ProfileQuestionAnswer" FromRole="ProfileQuestionUserAnswer" ToRole="ProfileQuestionAnswer" />
+          <Property Name="ResponseType" Type="Int32" />
+          <NavigationProperty Name="Company" Relationship="SMDDevModel.FK_ProfileQuestionUserAnswer_Company" FromRole="ProfileQuestionUserAnswer" ToRole="Company" />
         </EntityType>
         <EntityType Name="SurveyQuestion">
           <Key>
@@ -3577,7 +3776,6 @@
           <Property Name="CompanyId" Type="Int32" />
           <NavigationProperty Name="AdCampaignTargetCriterias" Relationship="Self.FK_AdCampaignTargetCriteria_SurveyQuestion" FromRole="SurveyQuestion" ToRole="AdCampaignTargetCriteria" />
           <NavigationProperty Name="AspNetUser" Relationship="Self.FK_SurveyQuestion_AspNetUsers" FromRole="SurveyQuestion" ToRole="AspNetUsers" />
-          <NavigationProperty Name="Company" Relationship="Self.FK_SurveyQuestion_Company" FromRole="SurveyQuestion" ToRole="Company" />
           <NavigationProperty Name="Country" Relationship="Self.FK_SurveyQuestion_Country" FromRole="SurveyQuestion" ToRole="Country" />
           <NavigationProperty Name="InvoiceDetails" Relationship="Self.FK_InvoiceDetail_SurveyQuestion" FromRole="SurveyQuestion" ToRole="InvoiceDetail" />
           <NavigationProperty Name="Language" Relationship="Self.FK_SurveyQuestion_Language" FromRole="SurveyQuestion" ToRole="Language" />
@@ -3588,6 +3786,7 @@
           <Property Name="AnswerNeeded" Type="Int32" />
           <Property Name="AmountCharged" Type="Double" />
           <NavigationProperty Name="ProfileQuestionTargetCriterias" Relationship="SMDDevModel.FK_ProfileQuestionTargetCriteria_ProfileQuestion1" FromRole="SurveyQuestion" ToRole="ProfileQuestionTargetCriteria" />
+          <NavigationProperty Name="Company" Relationship="SMDDevModel.FK_SurveyQuestion_Company" FromRole="SurveyQuestion" ToRole="Company" />
         </EntityType>
         <EntityType Name="SurveyQuestionResponse">
           <Key>
@@ -3601,8 +3800,9 @@
           <Property Name="SkipCount" Type="Int32" />
           <Property Name="CompanyId" Type="Int32" />
           <NavigationProperty Name="AspNetUser" Relationship="Self.FK_SurveyQuestionResponse_AspNetUsers" FromRole="SurveyQuestionResponse" ToRole="AspNetUsers" />
-          <NavigationProperty Name="Company" Relationship="Self.FK_SurveyQuestionResponse_Company" FromRole="SurveyQuestionResponse" ToRole="Company" />
           <NavigationProperty Name="SurveyQuestion" Relationship="Self.FK_SurveyQuestionResponse_SurveyQuestion" FromRole="SurveyQuestionResponse" ToRole="SurveyQuestion" />
+          <Property Name="ResponseType" Type="Int32" />
+          <NavigationProperty Name="Company" Relationship="SMDDevModel.FK_SurveyQuestionResponse_Company" FromRole="SurveyQuestionResponse" ToRole="Company" />
         </EntityType>
         <EntityType Name="SurveyQuestionTargetCriteria">
           <Key>
@@ -3626,6 +3826,9 @@
           <NavigationProperty Name="ProfileQuestionAnswer" Relationship="Self.FK_SurveyQuestionTargetCriteria_ProfileQuestionAnswer" FromRole="SurveyQuestionTargetCriteria" ToRole="ProfileQuestionAnswer" />
           <NavigationProperty Name="SurveyQuestion" Relationship="Self.FK_SurveyQuestionTargetCriteria_SurveyQuestion" FromRole="SurveyQuestionTargetCriteria" ToRole="SurveyQuestion" />
           <NavigationProperty Name="SurveyQuestion1" Relationship="Self.FK_SurveyQuestionTargetCriteria_SurveyQuestion1" FromRole="SurveyQuestionTargetCriteria" ToRole="SurveyQuestion" />
+          <Property Name="QuizCampaignId" Type="Int64" />
+          <Property Name="QuizAnswerId" Type="Int32" />
+          <NavigationProperty Name="AdCampaign" Relationship="SMDDevModel.FK_SurveyQuestionTargetCriteria_AdCampaign" FromRole="SurveyQuestionTargetCriteria" ToRole="AdCampaign" />
         </EntityType>
         <EntityType Name="SurveyQuestionTargetLocation">
           <Key>
@@ -3637,10 +3840,10 @@
           <Property Name="CityID" Type="Int32" />
           <Property Name="Radius" Type="Int32" />
           <Property Name="IncludeorExclude" Type="Boolean" />
-          <NavigationProperty Name="City" Relationship="Self.FK_SurveyQuestionTargetLocation_City" FromRole="SurveyQuestionTargetLocation" ToRole="City" />
           <NavigationProperty Name="Country" Relationship="Self.FK_SurveyQuestionTargetLocation_Country" FromRole="SurveyQuestionTargetLocation" ToRole="Country" />
           <NavigationProperty Name="SurveyQuestion" Relationship="Self.FK_SurveyQuestionTargetLocation_SurveyQuestion" FromRole="SurveyQuestionTargetLocation" ToRole="SurveyQuestion" />
-        </EntityType>
+          <NavigationProperty Name="City" Relationship="SMDDevModel.FK_SurveyQuestionTargetLocation_City" FromRole="SurveyQuestionTargetLocation" ToRole="City" />
+          </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -3721,18 +3924,6 @@
           <Property Name="CouponId" Type="Int64" />
           <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
         </EntityType>
-        <Association Name="FK_Account_Company">
-          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
-          <End Role="Account" Type="Self.Account" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Company">
-              <PropertyRef Name="CompanyId" />
-            </Principal>
-            <Dependent Role="Account">
-              <PropertyRef Name="CompanyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Transaction_Account">
           <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
           <End Role="Transaction" Type="Self.Transaction" Multiplicity="*" />
@@ -3742,18 +3933,6 @@
             </Principal>
             <Dependent Role="Transaction">
               <PropertyRef Name="AccountID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_AdCampaign_Company">
-          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
-          <End Role="AdCampaign" Type="Self.AdCampaign" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Company">
-              <PropertyRef Name="CompanyId" />
-            </Principal>
-            <Dependent Role="AdCampaign">
-              <PropertyRef Name="CompanyId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3877,18 +4056,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_AdCampaignResponse_Company">
-          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
-          <End Role="AdCampaignResponse" Type="Self.AdCampaignResponse" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Company">
-              <PropertyRef Name="CompanyId" />
-            </Principal>
-            <Dependent Role="AdCampaignResponse">
-              <PropertyRef Name="CompanyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_AdCampaignTargetCriteria_Education">
           <End Role="Education" Type="Self.Education" Multiplicity="0..1" />
           <End Role="AdCampaignTargetCriteria" Type="Self.AdCampaignTargetCriteria" Multiplicity="*" />
@@ -3961,18 +4128,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_AdCampaignTargetLocation_City">
-          <End Role="City" Type="Self.City" Multiplicity="0..1" />
-          <End Role="AdCampaignTargetLocation" Type="Self.AdCampaignTargetLocation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="City">
-              <PropertyRef Name="CityID" />
-            </Principal>
-            <Dependent Role="AdCampaignTargetLocation">
-              <PropertyRef Name="CityID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_AdCampaignTargetLocation_Country">
           <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
           <End Role="AdCampaignTargetLocation" Type="Self.AdCampaignTargetLocation" Multiplicity="*" />
@@ -4022,18 +4177,6 @@
             </Principal>
             <Dependent Role="AspNetUserLogins">
               <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_AspNetUsers_Company">
-          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
-          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Company">
-              <PropertyRef Name="CompanyId" />
-            </Principal>
-            <Dependent Role="AspNetUsers">
-              <PropertyRef Name="CompanyId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4133,18 +4276,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_BranchCategory_Company">
-          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
-          <End Role="BranchCategory" Type="Self.BranchCategory" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Company">
-              <PropertyRef Name="CompanyId" />
-            </Principal>
-            <Dependent Role="BranchCategory">
-              <PropertyRef Name="CompanyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_CompanyBranch_BranchCategory">
           <End Role="BranchCategory" Type="Self.BranchCategory" Multiplicity="0..1" />
           <End Role="CompanyBranch" Type="Self.CompanyBranch" Multiplicity="*" />
@@ -4178,138 +4309,6 @@
             </Principal>
             <Dependent Role="CategoryLog">
               <PropertyRef Name="LogID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_City_Country">
-          <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
-          <End Role="City" Type="Self.City" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Country">
-              <PropertyRef Name="CountryID" />
-            </Principal>
-            <Dependent Role="City">
-              <PropertyRef Name="CountryID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Company_City">
-          <End Role="City" Type="Self.City" Multiplicity="0..1" />
-          <End Role="Company" Type="Self.Company" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="City">
-              <PropertyRef Name="CityID" />
-            </Principal>
-            <Dependent Role="Company">
-              <PropertyRef Name="CityId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SurveyQuestionTargetLocation_City">
-          <End Role="City" Type="Self.City" Multiplicity="0..1" />
-          <End Role="SurveyQuestionTargetLocation" Type="Self.SurveyQuestionTargetLocation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="City">
-              <PropertyRef Name="CityID" />
-            </Principal>
-            <Dependent Role="SurveyQuestionTargetLocation">
-              <PropertyRef Name="CityID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CompaniesAspNetUsers_Company">
-          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
-          <End Role="CompaniesAspNetUsers" Type="Self.CompaniesAspNetUser" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Company">
-              <PropertyRef Name="CompanyId" />
-            </Principal>
-            <Dependent Role="CompaniesAspNetUsers">
-              <PropertyRef Name="CompanyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Company_Country">
-          <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
-          <End Role="Company" Type="Self.Company" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Country">
-              <PropertyRef Name="CountryID" />
-            </Principal>
-            <Dependent Role="Company">
-              <PropertyRef Name="CountryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CompanyBranch_Company">
-          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
-          <End Role="CompanyBranch" Type="Self.CompanyBranch" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Company">
-              <PropertyRef Name="CompanyId" />
-            </Principal>
-            <Dependent Role="CompanyBranch">
-              <PropertyRef Name="CompanyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Coupon_Company">
-          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
-          <End Role="Coupon" Type="Self.Coupon" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Company">
-              <PropertyRef Name="CompanyId" />
-            </Principal>
-            <Dependent Role="Coupon">
-              <PropertyRef Name="CompanyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Invoice_Company">
-          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
-          <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Company">
-              <PropertyRef Name="CompanyId" />
-            </Principal>
-            <Dependent Role="Invoice">
-              <PropertyRef Name="CompanyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ProfileQuestionUserAnswer_Company">
-          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
-          <End Role="ProfileQuestionUserAnswer" Type="Self.ProfileQuestionUserAnswer" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Company">
-              <PropertyRef Name="CompanyId" />
-            </Principal>
-            <Dependent Role="ProfileQuestionUserAnswer">
-              <PropertyRef Name="CompanyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SurveyQuestion_Company">
-          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
-          <End Role="SurveyQuestion" Type="Self.SurveyQuestion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Company">
-              <PropertyRef Name="CompanyId" />
-            </Principal>
-            <Dependent Role="SurveyQuestion">
-              <PropertyRef Name="CompanyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SurveyQuestionResponse_Company">
-          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
-          <End Role="SurveyQuestionResponse" Type="Self.SurveyQuestionResponse" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Company">
-              <PropertyRef Name="CompanyId" />
-            </Principal>
-            <Dependent Role="SurveyQuestionResponse">
-              <PropertyRef Name="CompanyId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4661,9 +4660,7 @@
           <EntitySet Name="CampaignCategories" EntityType="Self.CampaignCategory" />
           <EntitySet Name="Categories" EntityType="Self.Category" />
           <EntitySet Name="CategoryLogs" EntityType="Self.CategoryLog" />
-          <EntitySet Name="Cities" EntityType="Self.City" />
           <EntitySet Name="CompaniesAspNetUsers" EntityType="Self.CompaniesAspNetUser" />
-          <EntitySet Name="Companies" EntityType="Self.Company" />
           <EntitySet Name="CompanyBranches" EntityType="Self.CompanyBranch" />
           <EntitySet Name="Countries" EntityType="Self.Country" />
           <EntitySet Name="Coupons" EntityType="Self.Coupon" />
@@ -4695,17 +4692,9 @@
           <EntitySet Name="Transactions" EntityType="Self.Transaction" />
           <EntitySet Name="TransactionLogs" EntityType="Self.TransactionLog" />
           <EntitySet Name="UserFavouriteCoupons" EntityType="Self.UserFavouriteCoupon" />
-          <AssociationSet Name="FK_Account_Company" Association="Self.FK_Account_Company">
-            <End Role="Company" EntitySet="Companies" />
-            <End Role="Account" EntitySet="Accounts" />
-          </AssociationSet>
           <AssociationSet Name="FK_Transaction_Account" Association="Self.FK_Transaction_Account">
             <End Role="Account" EntitySet="Accounts" />
             <End Role="Transaction" EntitySet="Transactions" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AdCampaign_Company" Association="Self.FK_AdCampaign_Company">
-            <End Role="Company" EntitySet="Companies" />
-            <End Role="AdCampaign" EntitySet="AdCampaigns" />
           </AssociationSet>
           <AssociationSet Name="FK_AdCampaign_Language" Association="Self.FK_AdCampaign_Language">
             <End Role="Language" EntitySet="Languages" />
@@ -4747,10 +4736,6 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AdCampaignResponse" EntitySet="AdCampaignResponses" />
           </AssociationSet>
-          <AssociationSet Name="FK_AdCampaignResponse_Company" Association="Self.FK_AdCampaignResponse_Company">
-            <End Role="Company" EntitySet="Companies" />
-            <End Role="AdCampaignResponse" EntitySet="AdCampaignResponses" />
-          </AssociationSet>
           <AssociationSet Name="FK_AdCampaignTargetCriteria_Education" Association="Self.FK_AdCampaignTargetCriteria_Education">
             <End Role="Education" EntitySet="Educations" />
             <End Role="AdCampaignTargetCriteria" EntitySet="AdCampaignTargetCriterias" />
@@ -4775,10 +4760,6 @@
             <End Role="SurveyQuestion" EntitySet="SurveyQuestions" />
             <End Role="AdCampaignTargetCriteria" EntitySet="AdCampaignTargetCriterias" />
           </AssociationSet>
-          <AssociationSet Name="FK_AdCampaignTargetLocation_City" Association="Self.FK_AdCampaignTargetLocation_City">
-            <End Role="City" EntitySet="Cities" />
-            <End Role="AdCampaignTargetLocation" EntitySet="AdCampaignTargetLocations" />
-          </AssociationSet>
           <AssociationSet Name="FK_AdCampaignTargetLocation_Country" Association="Self.FK_AdCampaignTargetLocation_Country">
             <End Role="Country" EntitySet="Countries" />
             <End Role="AdCampaignTargetLocation" EntitySet="AdCampaignTargetLocations" />
@@ -4794,10 +4775,6 @@
           <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AspNetUsers_Company" Association="Self.FK_AspNetUsers_Company">
-            <End Role="Company" EntitySet="Companies" />
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
           <AssociationSet Name="FK_AspNetUsers_Education" Association="Self.FK_AspNetUsers_Education">
             <End Role="Education" EntitySet="Educations" />
@@ -4831,10 +4808,6 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="SurveyQuestionResponse" EntitySet="SurveyQuestionResponses" />
           </AssociationSet>
-          <AssociationSet Name="FK_BranchCategory_Company" Association="Self.FK_BranchCategory_Company">
-            <End Role="Company" EntitySet="Companies" />
-            <End Role="BranchCategory" EntitySet="BranchCategories" />
-          </AssociationSet>
           <AssociationSet Name="FK_CompanyBranch_BranchCategory" Association="Self.FK_CompanyBranch_BranchCategory">
             <End Role="BranchCategory" EntitySet="BranchCategories" />
             <End Role="CompanyBranch" EntitySet="CompanyBranches" />
@@ -4846,50 +4819,6 @@
           <AssociationSet Name="FK_CategoryLog_Log" Association="Self.FK_CategoryLog_Log">
             <End Role="Log" EntitySet="Logs" />
             <End Role="CategoryLog" EntitySet="CategoryLogs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_City_Country" Association="Self.FK_City_Country">
-            <End Role="Country" EntitySet="Countries" />
-            <End Role="City" EntitySet="Cities" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Company_City" Association="Self.FK_Company_City">
-            <End Role="City" EntitySet="Cities" />
-            <End Role="Company" EntitySet="Companies" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SurveyQuestionTargetLocation_City" Association="Self.FK_SurveyQuestionTargetLocation_City">
-            <End Role="City" EntitySet="Cities" />
-            <End Role="SurveyQuestionTargetLocation" EntitySet="SurveyQuestionTargetLocations" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CompaniesAspNetUsers_Company" Association="Self.FK_CompaniesAspNetUsers_Company">
-            <End Role="Company" EntitySet="Companies" />
-            <End Role="CompaniesAspNetUsers" EntitySet="CompaniesAspNetUsers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Company_Country" Association="Self.FK_Company_Country">
-            <End Role="Country" EntitySet="Countries" />
-            <End Role="Company" EntitySet="Companies" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CompanyBranch_Company" Association="Self.FK_CompanyBranch_Company">
-            <End Role="Company" EntitySet="Companies" />
-            <End Role="CompanyBranch" EntitySet="CompanyBranches" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Coupon_Company" Association="Self.FK_Coupon_Company">
-            <End Role="Company" EntitySet="Companies" />
-            <End Role="Coupon" EntitySet="Coupons" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Invoice_Company" Association="Self.FK_Invoice_Company">
-            <End Role="Company" EntitySet="Companies" />
-            <End Role="Invoice" EntitySet="Invoices" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProfileQuestionUserAnswer_Company" Association="Self.FK_ProfileQuestionUserAnswer_Company">
-            <End Role="Company" EntitySet="Companies" />
-            <End Role="ProfileQuestionUserAnswer" EntitySet="ProfileQuestionUserAnswers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SurveyQuestion_Company" Association="Self.FK_SurveyQuestion_Company">
-            <End Role="Company" EntitySet="Companies" />
-            <End Role="SurveyQuestion" EntitySet="SurveyQuestions" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SurveyQuestionResponse_Company" Association="Self.FK_SurveyQuestionResponse_Company">
-            <End Role="Company" EntitySet="Companies" />
-            <End Role="SurveyQuestionResponse" EntitySet="SurveyQuestionResponses" />
           </AssociationSet>
           <AssociationSet Name="FK_Coupon_CompanyBranch" Association="Self.FK_Coupon_CompanyBranch">
             <End Role="CompanyBranch" EntitySet="CompanyBranches" />
@@ -5052,14 +4981,6 @@
             <Parameter Name="adminMode" Mode="In" Type="Boolean" />
           </FunctionImport>
           <EntitySet Name="DamImages" EntityType="SMDDevModel.DamImage" />
-          <AssociationSet Name="FK_DamImages_Company" Association="SMDDevModel.FK_DamImages_Company">
-            <End Role="Company" EntitySet="Companies" />
-            <End Role="DamImage" EntitySet="DamImages" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProfileQuestion_Company" Association="SMDDevModel.FK_ProfileQuestion_Company">
-            <End Role="Company" EntitySet="Companies" />
-            <End Role="ProfileQuestion" EntitySet="ProfileQuestions" />
-          </AssociationSet>
           <EntitySet Name="UserCouponViews" EntityType="SMDDevModel.UserCouponView" />
           <FunctionImport Name="GetCouponByID" ReturnType="Collection(SMDDevModel.GetCouponByID_Result)">
             <Parameter Name="CouponId" Mode="In" Type="Int64" />
@@ -5069,10 +4990,6 @@
           </FunctionImport>
           <EntitySet Name="ProfileQuestionTargetCriterias" EntityType="SMDDevModel.ProfileQuestionTargetCriteria" />
           <EntitySet Name="ProfileQuestionTargetLocations" EntityType="SMDDevModel.ProfileQuestionTargetLocation" />
-          <AssociationSet Name="FK_ProfileQuestionTargetLocation_City" Association="SMDDevModel.FK_ProfileQuestionTargetLocation_City">
-            <End Role="City" EntitySet="Cities" />
-            <End Role="ProfileQuestionTargetLocation" EntitySet="ProfileQuestionTargetLocations" />
-          </AssociationSet>
           <AssociationSet Name="FK_ProfileQuestionTargetLocation_Country" Association="SMDDevModel.FK_ProfileQuestionTargetLocation_Country">
             <End Role="Country" EntitySet="Countries" />
             <End Role="ProfileQuestionTargetLocation" EntitySet="ProfileQuestionTargetLocations" />
@@ -5134,6 +5051,103 @@
             <Parameter Name="DateTo" Mode="In" Type="DateTime" />
             <Parameter Name="Granularity" Mode="In" Type="Int32" />
           </FunctionImport>
+          <AssociationSet Name="FK_SurveyQuestionTargetCriteria_AdCampaign" Association="SMDDevModel.FK_SurveyQuestionTargetCriteria_AdCampaign">
+            <End Role="AdCampaign" EntitySet="AdCampaigns" />
+            <End Role="SurveyQuestionTargetCriteria" EntitySet="SurveyQuestionTargetCriterias" />
+          </AssociationSet>
+          <EntitySet Name="CouponPriceOptions" EntityType="SMDDevModel.CouponPriceOption" />
+          <AssociationSet Name="FK_CouponPriceOption_Coupon" Association="SMDDevModel.FK_CouponPriceOption_Coupon">
+            <End Role="Coupon" EntitySet="Coupons" />
+            <End Role="CouponPriceOption" EntitySet="CouponPriceOptions" />
+          </AssociationSet>
+          <EntitySet Name="Companies" EntityType="SMDDevModel.Company" />
+          <AssociationSet Name="FK_Account_Company" Association="SMDDevModel.FK_Account_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Account" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AdCampaign_Company" Association="SMDDevModel.FK_AdCampaign_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="AdCampaign" EntitySet="AdCampaigns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AdCampaignResponse_Company" Association="SMDDevModel.FK_AdCampaignResponse_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="AdCampaignResponse" EntitySet="AdCampaignResponses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUsers_Company" Association="SMDDevModel.FK_AspNetUsers_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BranchCategory_Company" Association="SMDDevModel.FK_BranchCategory_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="BranchCategory" EntitySet="BranchCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompaniesAspNetUsers_Company" Association="SMDDevModel.FK_CompaniesAspNetUsers_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="CompaniesAspNetUser" EntitySet="CompaniesAspNetUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Company_Country" Association="SMDDevModel.FK_Company_Country">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="Company" EntitySet="Companies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyBranch_Company" Association="SMDDevModel.FK_CompanyBranch_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="CompanyBranch" EntitySet="CompanyBranches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Coupon_Company" Association="SMDDevModel.FK_Coupon_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Coupon" EntitySet="Coupons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DamImages_Company" Association="SMDDevModel.FK_DamImages_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="DamImage" EntitySet="DamImages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invoice_Company" Association="SMDDevModel.FK_Invoice_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Invoice" EntitySet="Invoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfileQuestion_Company" Association="SMDDevModel.FK_ProfileQuestion_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="ProfileQuestion" EntitySet="ProfileQuestions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfileQuestionUserAnswer_Company" Association="SMDDevModel.FK_ProfileQuestionUserAnswer_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="ProfileQuestionUserAnswer" EntitySet="ProfileQuestionUserAnswers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurveyQuestion_Company" Association="SMDDevModel.FK_SurveyQuestion_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="SurveyQuestion" EntitySet="SurveyQuestions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurveyQuestionResponse_Company" Association="SMDDevModel.FK_SurveyQuestionResponse_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="SurveyQuestionResponse" EntitySet="SurveyQuestionResponses" />
+          </AssociationSet>
+          <EntitySet Name="PayOutHistories" EntityType="SMDDevModel.PayOutHistory" />
+          <AssociationSet Name="FK_PayOutHistory_Company" Association="SMDDevModel.FK_PayOutHistory_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="PayOutHistory" EntitySet="PayOutHistories" />
+          </AssociationSet>
+          <EntitySet Name="vw_Coupons" EntityType="SMDDevModel.vw_Coupons" />
+          <AssociationSet Name="FK_Country_Currency" Association="SMDDevModel.FK_Country_Currency">
+            <End Role="Currency" EntitySet="Currencies" />
+            <End Role="Country" EntitySet="Countries" />
+          </AssociationSet>
+          <EntitySet Name="Cities" EntityType="SMDDevModel.City" />
+          <AssociationSet Name="FK_AdCampaignTargetLocation_City" Association="SMDDevModel.FK_AdCampaignTargetLocation_City">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="AdCampaignTargetLocation" EntitySet="AdCampaignTargetLocations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_City_Country" Association="SMDDevModel.FK_City_Country">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="City" EntitySet="Cities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfileQuestionTargetLocation_City" Association="SMDDevModel.FK_ProfileQuestionTargetLocation_City">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="ProfileQuestionTargetLocation" EntitySet="ProfileQuestionTargetLocations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurveyQuestionTargetLocation_City" Association="SMDDevModel.FK_SurveyQuestionTargetLocation_City">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="SurveyQuestionTargetLocation" EntitySet="SurveyQuestionTargetLocations" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="CouponCategories">
           <Key>
@@ -5253,6 +5267,7 @@
           <Property Name="RedemptionDateTime" Type="DateTime" Precision="3" />
           <Property Name="RedemptionOperator" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Coupon" Relationship="SMDDevModel.FK_UserPurchasedCoupon_Coupon" FromRole="UserPurchasedCoupon" ToRole="Coupon" />
+          <Property Name="ResponseType" Type="Int32" />
         </EntityType>
         <Association Name="FK_UserPurchasedCoupon_Coupon">
           <End Type="SMDDevModel.Coupon" Role="Coupon" Multiplicity="0..1" />
@@ -5295,30 +5310,6 @@
           <Property Name="CompanyId" Type="Int32" />
           <NavigationProperty Name="Company" Relationship="SMDDevModel.FK_DamImages_Company" FromRole="DamImage" ToRole="Company" />
         </EntityType>
-        <Association Name="FK_DamImages_Company">
-          <End Type="SMDDevModel.Company" Role="Company" Multiplicity="0..1" />
-          <End Type="SMDDevModel.DamImage" Role="DamImage" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Company">
-              <PropertyRef Name="CompanyId" />
-            </Principal>
-            <Dependent Role="DamImage">
-              <PropertyRef Name="CompanyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ProfileQuestion_Company">
-          <End Type="SMDDevModel.Company" Role="Company" Multiplicity="0..1" />
-          <End Type="SMDDevModel.ProfileQuestion" Role="ProfileQuestion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Company">
-              <PropertyRef Name="CompanyId" />
-            </Principal>
-            <Dependent Role="ProfileQuestion">
-              <PropertyRef Name="CompanyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="UserCouponView">
           <Key>
             <PropertyRef Name="UserCouponViewId" />
@@ -5429,22 +5420,10 @@
           <Property Name="CityID" Type="Int32" />
           <Property Name="Radius" Type="Int32" />
           <Property Name="IncludeorExclude" Type="Boolean" />
-          <NavigationProperty Name="City" Relationship="SMDDevModel.FK_ProfileQuestionTargetLocation_City" FromRole="ProfileQuestionTargetLocation" ToRole="City" />
           <NavigationProperty Name="Country" Relationship="SMDDevModel.FK_ProfileQuestionTargetLocation_Country" FromRole="ProfileQuestionTargetLocation" ToRole="Country" />
           <NavigationProperty Name="ProfileQuestion" Relationship="SMDDevModel.FK_ProfileQuestionTargetLocation_ProfileQuestion" FromRole="ProfileQuestionTargetLocation" ToRole="ProfileQuestion" />
-        </EntityType>
-        <Association Name="FK_ProfileQuestionTargetLocation_City">
-          <End Type="SMDDevModel.City" Role="City" Multiplicity="0..1" />
-          <End Type="SMDDevModel.ProfileQuestionTargetLocation" Role="ProfileQuestionTargetLocation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="City">
-              <PropertyRef Name="CityID" />
-            </Principal>
-            <Dependent Role="ProfileQuestionTargetLocation">
-              <PropertyRef Name="CityID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+          <NavigationProperty Name="City" Relationship="SMDDevModel.FK_ProfileQuestionTargetLocation_City" FromRole="ProfileQuestionTargetLocation" ToRole="City" />
+          </EntityType>
         <Association Name="FK_ProfileQuestionTargetLocation_Country">
           <End Type="SMDDevModel.Country" Role="Country" Multiplicity="0..1" />
           <End Type="SMDDevModel.ProfileQuestionTargetLocation" Role="ProfileQuestionTargetLocation" Multiplicity="*" />
@@ -5721,6 +5700,475 @@
           <Property Type="Double" Name="amountcollected" Nullable="true" />
           <Property Type="String" Name="granular" Nullable="false" MaxLength="1" />
         </ComplexType>
+        <Association Name="FK_SurveyQuestionTargetCriteria_AdCampaign">
+          <End Type="SMDDevModel.AdCampaign" Role="AdCampaign" Multiplicity="0..1" />
+          <End Type="SMDDevModel.SurveyQuestionTargetCriteria" Role="SurveyQuestionTargetCriteria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdCampaign">
+              <PropertyRef Name="CampaignID" />
+            </Principal>
+            <Dependent Role="SurveyQuestionTargetCriteria">
+              <PropertyRef Name="QuizCampaignId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CouponPriceOption">
+          <Key>
+            <PropertyRef Name="CouponPriceOptionId" />
+          </Key>
+          <Property Name="CouponPriceOptionId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CouponId" Type="Int64" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Double" />
+          <Property Name="Savings" Type="Double" />
+          <Property Name="OptionUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Coupon" Relationship="SMDDevModel.FK_CouponPriceOption_Coupon" FromRole="CouponPriceOption" ToRole="Coupon" />
+          <Property Name="VoucherCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_CouponPriceOption_Coupon">
+          <End Type="SMDDevModel.Coupon" Role="Coupon" Multiplicity="0..1" />
+          <End Type="SMDDevModel.CouponPriceOption" Role="CouponPriceOption" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Coupon">
+              <PropertyRef Name="CouponId" />
+            </Principal>
+            <Dependent Role="CouponPriceOption">
+              <PropertyRef Name="CouponId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="CompanyId" />
+          </Key>
+          <Property Name="CompanyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ReplyEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Tel1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Tel2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="AddressLine1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AddressLine2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CountryId" Type="Int32" />
+          <Property Name="ZipCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TimeZone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Logo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="StripeCustomerId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ChargeBeesubscriptionID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RegisteredViaReferral" Type="Boolean" />
+          <Property Name="ReferringCompanyID" Type="Int32" />
+          <Property Name="PaypalCustomerId" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="GoogleWalletCustomerId" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="PreferredPayoutAccount" Type="Int32" />
+          <Property Name="SalesEmail" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="ReferralCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="AfilliatianStatus" Type="Boolean" />
+          <Property Name="WebsiteLink" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyType" Type="Int32" />
+          <Property Name="BillingAddressLine1" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="BillingAddressLine2" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="BillingState" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BillingCountryId" Type="Int32" />
+          <Property Name="BillingZipCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BillingPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BillingEmail" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="TwitterHandle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="FacebookHandle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="InstagramHandle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="PinterestHandle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="VoucherSecretKey" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="BillingCity" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="AboutUsDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="PaymentMethodStatus" Type="Int32" />
+          <Property Name="LastPaymentMethodErrorDate" Type="DateTime" Precision="3" />
+          <Property Name="LastPaymentMethodError" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Accounts" Relationship="SMDDevModel.FK_Account_Company" FromRole="Company" ToRole="Account" />
+          <NavigationProperty Name="AdCampaigns" Relationship="SMDDevModel.FK_AdCampaign_Company" FromRole="Company" ToRole="AdCampaign" />
+          <NavigationProperty Name="AdCampaignResponses" Relationship="SMDDevModel.FK_AdCampaignResponse_Company" FromRole="Company" ToRole="AdCampaignResponse" />
+          <NavigationProperty Name="AspNetUsers" Relationship="SMDDevModel.FK_AspNetUsers_Company" FromRole="Company" ToRole="AspNetUser" />
+          <NavigationProperty Name="BranchCategories" Relationship="SMDDevModel.FK_BranchCategory_Company" FromRole="Company" ToRole="BranchCategory" />
+          <NavigationProperty Name="CompaniesAspNetUsers" Relationship="SMDDevModel.FK_CompaniesAspNetUsers_Company" FromRole="Company" ToRole="CompaniesAspNetUser" />
+          <NavigationProperty Name="Country" Relationship="SMDDevModel.FK_Company_Country" FromRole="Company" ToRole="Country" />
+          <NavigationProperty Name="CompanyBranches" Relationship="SMDDevModel.FK_CompanyBranch_Company" FromRole="Company" ToRole="CompanyBranch" />
+          <NavigationProperty Name="Coupons" Relationship="SMDDevModel.FK_Coupon_Company" FromRole="Company" ToRole="Coupon" />
+          <NavigationProperty Name="DamImages" Relationship="SMDDevModel.FK_DamImages_Company" FromRole="Company" ToRole="DamImage" />
+          <NavigationProperty Name="Invoices" Relationship="SMDDevModel.FK_Invoice_Company" FromRole="Company" ToRole="Invoice" />
+          <NavigationProperty Name="ProfileQuestions" Relationship="SMDDevModel.FK_ProfileQuestion_Company" FromRole="Company" ToRole="ProfileQuestion" />
+          <NavigationProperty Name="ProfileQuestionUserAnswers" Relationship="SMDDevModel.FK_ProfileQuestionUserAnswer_Company" FromRole="Company" ToRole="ProfileQuestionUserAnswer" />
+          <NavigationProperty Name="SurveyQuestions" Relationship="SMDDevModel.FK_SurveyQuestion_Company" FromRole="Company" ToRole="SurveyQuestion" />
+          <NavigationProperty Name="SurveyQuestionResponses" Relationship="SMDDevModel.FK_SurveyQuestionResponse_Company" FromRole="Company" ToRole="SurveyQuestionResponse" />
+          <Property Name="CompanyRegNo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TaxRegNo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PayOutHistories" Relationship="SMDDevModel.FK_PayOutHistory_Company" FromRole="Company" ToRole="PayOutHistory" />
+          <Property Name="CreationDateTime" Type="DateTime" Precision="3" />
+          <Property Name="NoOfBranches" Type="Int32" />
+          <Property Name="BillingAddressName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_Account_Company">
+          <End Type="SMDDevModel.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="SMDDevModel.Account" Role="Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AdCampaign_Company">
+          <End Type="SMDDevModel.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="SMDDevModel.AdCampaign" Role="AdCampaign" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="AdCampaign">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AdCampaignResponse_Company">
+          <End Type="SMDDevModel.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="SMDDevModel.AdCampaignResponse" Role="AdCampaignResponse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="AdCampaignResponse">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUsers_Company">
+          <End Type="SMDDevModel.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="SMDDevModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="AspNetUser">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BranchCategory_Company">
+          <End Type="SMDDevModel.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="SMDDevModel.BranchCategory" Role="BranchCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="BranchCategory">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompaniesAspNetUsers_Company">
+          <End Type="SMDDevModel.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="SMDDevModel.CompaniesAspNetUser" Role="CompaniesAspNetUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="CompaniesAspNetUser">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Company_Country">
+          <End Type="SMDDevModel.Country" Role="Country" Multiplicity="0..1" />
+          <End Type="SMDDevModel.Company" Role="Company" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="CountryID" />
+            </Principal>
+            <Dependent Role="Company">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyBranch_Company">
+          <End Type="SMDDevModel.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="SMDDevModel.CompanyBranch" Role="CompanyBranch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="CompanyBranch">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Coupon_Company">
+          <End Type="SMDDevModel.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="SMDDevModel.Coupon" Role="Coupon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="Coupon">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DamImages_Company">
+          <End Type="SMDDevModel.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="SMDDevModel.DamImage" Role="DamImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="DamImage">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Invoice_Company">
+          <End Type="SMDDevModel.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="SMDDevModel.Invoice" Role="Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="Invoice">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfileQuestion_Company">
+          <End Type="SMDDevModel.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="SMDDevModel.ProfileQuestion" Role="ProfileQuestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="ProfileQuestion">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfileQuestionUserAnswer_Company">
+          <End Type="SMDDevModel.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="SMDDevModel.ProfileQuestionUserAnswer" Role="ProfileQuestionUserAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="ProfileQuestionUserAnswer">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SurveyQuestion_Company">
+          <End Type="SMDDevModel.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="SMDDevModel.SurveyQuestion" Role="SurveyQuestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="SurveyQuestion">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SurveyQuestionResponse_Company">
+          <End Type="SMDDevModel.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="SMDDevModel.SurveyQuestionResponse" Role="SurveyQuestionResponse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="SurveyQuestionResponse">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="PayOutHistory">
+          <Key>
+            <PropertyRef Name="PayOutId" />
+          </Key>
+          <Property Name="PayOutId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="RequestDateTime" Type="DateTime" Precision="3" />
+          <Property Name="CentzAmount" Type="Double" />
+          <Property Name="DollarAmount" Type="Double" />
+          <Property Name="StageOneStatus" Type="Boolean" />
+          <Property Name="StageOneRejectionReason" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="StageOneEventDate" Type="DateTime" Precision="3" />
+          <Property Name="StageOneUserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="StageTwoStatus" Type="Boolean" />
+          <Property Name="StageTwoRejectionReason" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="StageTwoEventDate" Type="DateTime" Precision="3" />
+          <Property Name="StageTwoUserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="TargetPayoutAccount" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Company" Relationship="SMDDevModel.FK_PayOutHistory_Company" FromRole="PayOutHistory" ToRole="Company" />
+        </EntityType>
+        <Association Name="FK_PayOutHistory_Company">
+          <End Type="SMDDevModel.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="SMDDevModel.PayOutHistory" Role="PayOutHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="PayOutHistory">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="vw_Coupons">
+          <Key>
+            <PropertyRef Name="CouponId" />
+          </Key>
+          <Property Name="CouponId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LanguageId" Type="Int32" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CouponTitle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="SearchKeywords" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="Archived" Type="Boolean" />
+          <Property Name="Approved" Type="Boolean" />
+          <Property Name="ApprovedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ApprovalDateTime" Type="DateTime" Precision="3" />
+          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="RejectedReason" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Rejecteddatetime" Type="DateTime" Precision="3" />
+          <Property Name="RejectedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CurrencyId" Type="Int32" />
+          <Property Name="Price" Type="Double" />
+          <Property Name="Savings" Type="Double" />
+          <Property Name="SwapCost" Type="Double" />
+          <Property Name="CouponViewCount" Type="Int32" />
+          <Property Name="CouponIssuedCount" Type="Int32" />
+          <Property Name="CouponRedeemedCount" Type="Int32" />
+          <Property Name="CouponQtyPerUser" Type="Int32" />
+          <Property Name="CouponListingMode" Type="Int32" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="CouponActiveMonth" Type="Int32" />
+          <Property Name="CouponActiveYear" Type="Int32" />
+          <Property Name="CouponExpirydate" Type="DateTime" Precision="3" />
+          <Property Name="couponImage1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CouponImage2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CouponImage3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LogoUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="HighlightLine1" Type="String" MaxLength="800" FixedLength="false" Unicode="true" />
+          <Property Name="HighlightLine2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="HighlightLine3" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="HighlightLine4" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="HighlightLine5" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FinePrintLine1" Type="String" MaxLength="800" FixedLength="false" Unicode="true" />
+          <Property Name="FinePrintLine2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FinePrintLine3" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FinePrintLine4" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FinePrintLine5" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LocationBranchId" Type="Int64" />
+          <Property Name="LocationTitle" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="LocationLine1" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="LocationLine2" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="LocationCity" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="LocationState" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="LocationZipCode" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="LocationLAT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LocationLON" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LocationPhone" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="GeographyColumn" Type="Geography" />
+          <Property Name="HowToRedeemLine1" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="HowToRedeemLine2" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="HowToRedeemLine3" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="HowToRedeemLine4" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="HowToRedeemLine5" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="SubmissionDateTime" Type="DateTime" Precision="3" />
+          <Property Name="LocationCountryId" Type="Int32" />
+          <Property Name="CouponStartDate" Type="DateTime" Precision="3" />
+          <Property Name="CouponEndDate" Type="DateTime" Precision="3" />
+          <Property Name="Priority" Type="Int32" />
+          <Property Name="ShowBuyitBtn" Type="Boolean" />
+          <Property Name="BuyitLandingPageUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="BuyitBtnLabel" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Categories" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CurrencyCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CurrencySymbol" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_Country_Currency">
+          <End Type="SMDDevModel.Currency" Role="Currency" Multiplicity="0..1" />
+          <End Type="SMDDevModel.Country" Role="Country" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currency">
+              <PropertyRef Name="CurrencyID" />
+            </Principal>
+            <Dependent Role="Country">
+              <PropertyRef Name="CurrencyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="CityId" />
+          </Key>
+          <Property Name="CityId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CityName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="IsCapital" Type="Boolean" />
+          <Property Name="CountryId" Type="Int32" />
+          <Property Name="GeoLONG" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="GeoLAT" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AdCampaignTargetLocations" Relationship="SMDDevModel.FK_AdCampaignTargetLocation_City" FromRole="City" ToRole="AdCampaignTargetLocation" />
+          <NavigationProperty Name="Country" Relationship="SMDDevModel.FK_City_Country" FromRole="City" ToRole="Country" />
+          <NavigationProperty Name="ProfileQuestionTargetLocations" Relationship="SMDDevModel.FK_ProfileQuestionTargetLocation_City" FromRole="City" ToRole="ProfileQuestionTargetLocation" />
+          <NavigationProperty Name="SurveyQuestionTargetLocations" Relationship="SMDDevModel.FK_SurveyQuestionTargetLocation_City" FromRole="City" ToRole="SurveyQuestionTargetLocation" />
+        </EntityType>
+        <Association Name="FK_AdCampaignTargetLocation_City">
+          <End Type="SMDDevModel.City" Role="City" Multiplicity="0..1" />
+          <End Type="SMDDevModel.AdCampaignTargetLocation" Role="AdCampaignTargetLocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="CityId" />
+            </Principal>
+            <Dependent Role="AdCampaignTargetLocation">
+              <PropertyRef Name="CityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_City_Country">
+          <End Type="SMDDevModel.Country" Role="Country" Multiplicity="0..1" />
+          <End Type="SMDDevModel.City" Role="City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="CountryID" />
+            </Principal>
+            <Dependent Role="City">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfileQuestionTargetLocation_City">
+          <End Type="SMDDevModel.City" Role="City" Multiplicity="0..1" />
+          <End Type="SMDDevModel.ProfileQuestionTargetLocation" Role="ProfileQuestionTargetLocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="CityId" />
+            </Principal>
+            <Dependent Role="ProfileQuestionTargetLocation">
+              <PropertyRef Name="CityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SurveyQuestionTargetLocation_City">
+          <End Type="SMDDevModel.City" Role="City" Multiplicity="0..1" />
+          <End Type="SMDDevModel.SurveyQuestionTargetLocation" Role="SurveyQuestionTargetLocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="CityId" />
+            </Principal>
+            <Dependent Role="SurveyQuestionTargetLocation">
+              <PropertyRef Name="CityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5937,6 +6385,10 @@
           <EntitySetMapping Name="AspNetUsers">
             <EntityTypeMapping TypeName="SMDDevModel.AspNetUser">
               <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="PassportNo" ColumnName="PassportNo" />
+                <ScalarProperty Name="optMarketingEmails" ColumnName="optMarketingEmails" />
+                <ScalarProperty Name="optLatestNewsEmails" ColumnName="optLatestNewsEmails" />
+                <ScalarProperty Name="optDealsNearMeEmails" ColumnName="optDealsNearMeEmails" />
                 <ScalarProperty Name="DevicePlatform" ColumnName="DevicePlatform" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
@@ -6026,18 +6478,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Cities">
-            <EntityTypeMapping TypeName="SMDDevModel.City">
-              <MappingFragment StoreEntitySet="City">
-                <ScalarProperty Name="CityID" ColumnName="CityID" />
-                <ScalarProperty Name="CityName" ColumnName="CityName" />
-                <ScalarProperty Name="IsCapital" ColumnName="IsCapital" />
-                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
-                <ScalarProperty Name="GeoLONG" ColumnName="GeoLONG" />
-                <ScalarProperty Name="GeoLAT" ColumnName="GeoLAT" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="CompaniesAspNetUsers">
             <EntityTypeMapping TypeName="SMDDevModel.CompaniesAspNetUser">
               <MappingFragment StoreEntitySet="CompaniesAspNetUsers">
@@ -6049,50 +6489,6 @@
                 <ScalarProperty Name="InvitationCode" ColumnName="InvitationCode" />
                 <ScalarProperty Name="RoleId" ColumnName="RoleId" />
                 <ScalarProperty Name="InvitationEmail" ColumnName="InvitationEmail" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Companies">
-            <EntityTypeMapping TypeName="SMDDevModel.Company">
-              <MappingFragment StoreEntitySet="Company">
-                <ScalarProperty Name="PinterestHandle" ColumnName="PinterestHandle" />
-                <ScalarProperty Name="InstagramHandle" ColumnName="InstagramHandle" />
-                <ScalarProperty Name="FacebookHandle" ColumnName="FacebookHandle" />
-                <ScalarProperty Name="TwitterHandle" ColumnName="TwitterHandle" />
-                <ScalarProperty Name="BillingEmail" ColumnName="BillingEmail" />
-                <ScalarProperty Name="BillingPhone" ColumnName="BillingPhone" />
-                <ScalarProperty Name="BillingZipCode" ColumnName="BillingZipCode" />
-                <ScalarProperty Name="BillingCityId" ColumnName="BillingCityId" />
-                <ScalarProperty Name="BillingCountryId" ColumnName="BillingCountryId" />
-                <ScalarProperty Name="BillingState" ColumnName="BillingState" />
-                <ScalarProperty Name="BillingAddressLine2" ColumnName="BillingAddressLine2" />
-                <ScalarProperty Name="BillingAddressLine1" ColumnName="BillingAddressLine1" />
-                <ScalarProperty Name="VoucherSecretKey" ColumnName="VoucherSecretKey" />
-                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
-                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
-                <ScalarProperty Name="ReplyEmail" ColumnName="ReplyEmail" />
-                <ScalarProperty Name="Tel1" ColumnName="Tel1" />
-                <ScalarProperty Name="Tel2" ColumnName="Tel2" />
-                <ScalarProperty Name="AddressLine1" ColumnName="AddressLine1" />
-                <ScalarProperty Name="AddressLine2" ColumnName="AddressLine2" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
-                <ScalarProperty Name="CityId" ColumnName="CityId" />
-                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
-                <ScalarProperty Name="TimeZone" ColumnName="TimeZone" />
-                <ScalarProperty Name="Logo" ColumnName="Logo" />
-                <ScalarProperty Name="StripeCustomerId" ColumnName="StripeCustomerId" />
-                <ScalarProperty Name="ChargeBeesubscriptionID" ColumnName="ChargeBeesubscriptionID" />
-                <ScalarProperty Name="RegisteredViaReferral" ColumnName="RegisteredViaReferral" />
-                <ScalarProperty Name="ReferringCompanyID" ColumnName="ReferringCompanyID" />
-                <ScalarProperty Name="PaypalCustomerId" ColumnName="PaypalCustomerId" />
-                <ScalarProperty Name="GoogleWalletCustomerId" ColumnName="GoogleWalletCustomerId" />
-                <ScalarProperty Name="PreferredPayoutAccount" ColumnName="PreferredPayoutAccount" />
-                <ScalarProperty Name="SalesEmail" ColumnName="SalesEmail" />
-                <ScalarProperty Name="ReferralCode" ColumnName="ReferralCode" />
-                <ScalarProperty Name="AfilliatianStatus" ColumnName="AfilliatianStatus" />
-                <ScalarProperty Name="WebsiteLink" ColumnName="WebsiteLink" />
-                <ScalarProperty Name="CompanyType" ColumnName="CompanyType" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -6118,6 +6514,7 @@
           <EntitySetMapping Name="Countries">
             <EntityTypeMapping TypeName="SMDDevModel.Country">
               <MappingFragment StoreEntitySet="Country">
+                <ScalarProperty Name="CurrencyID" ColumnName="CurrencyID" />
                 <ScalarProperty Name="CountryID" ColumnName="CountryID" />
                 <ScalarProperty Name="CountryName" ColumnName="CountryName" />
                 <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
@@ -6127,6 +6524,9 @@
           <EntitySetMapping Name="Coupons">
             <EntityTypeMapping TypeName="SMDDevModel.Coupon">
               <MappingFragment StoreEntitySet="Coupon">
+                <ScalarProperty Name="BuyitBtnLabel" ColumnName="BuyitBtnLabel" />
+                <ScalarProperty Name="BuyitLandingPageUrl" ColumnName="BuyitLandingPageUrl" />
+                <ScalarProperty Name="ShowBuyitBtn" ColumnName="ShowBuyitBtn" />
                 <ScalarProperty Name="Priority" ColumnName="Priority" />
                 <ScalarProperty Name="CouponEndDate" ColumnName="CouponEndDate" />
                 <ScalarProperty Name="CouponStartDate" ColumnName="CouponStartDate" />
@@ -6413,6 +6813,8 @@
           <EntitySetMapping Name="ProfileQuestions">
             <EntityTypeMapping TypeName="SMDDevModel.ProfileQuestion">
               <MappingFragment StoreEntitySet="ProfileQuestion">
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
                 <ScalarProperty Name="AmountCharged" ColumnName="AmountCharged" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="RejectionReason" ColumnName="RejectionReason" />
@@ -6478,6 +6880,7 @@
           <EntitySetMapping Name="ProfileQuestionUserAnswers">
             <EntityTypeMapping TypeName="SMDDevModel.ProfileQuestionUserAnswer">
               <MappingFragment StoreEntitySet="ProfileQuestionUserAnswer">
+                <ScalarProperty Name="ResponseType" ColumnName="ResponseType" />
                 <ScalarProperty Name="PQUAnswerID" ColumnName="PQUAnswerID" />
                 <ScalarProperty Name="PQID" ColumnName="PQID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
@@ -6532,6 +6935,7 @@
           <EntitySetMapping Name="SurveyQuestionResponses">
             <EntityTypeMapping TypeName="SMDDevModel.SurveyQuestionResponse">
               <MappingFragment StoreEntitySet="SurveyQuestionResponse">
+                <ScalarProperty Name="ResponseType" ColumnName="ResponseType" />
                 <ScalarProperty Name="SQResponseID" ColumnName="SQResponseID" />
                 <ScalarProperty Name="SQID" ColumnName="SQID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
@@ -6545,6 +6949,8 @@
           <EntitySetMapping Name="SurveyQuestionTargetCriterias">
             <EntityTypeMapping TypeName="SMDDevModel.SurveyQuestionTargetCriteria">
               <MappingFragment StoreEntitySet="SurveyQuestionTargetCriteria">
+                <ScalarProperty Name="QuizAnswerId" ColumnName="QuizAnswerId" />
+                <ScalarProperty Name="QuizCampaignId" ColumnName="QuizCampaignId" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="SQID" ColumnName="SQID" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
@@ -6731,6 +7137,7 @@
           <EntitySetMapping Name="UserPurchasedCoupons">
             <EntityTypeMapping TypeName="SMDDevModel.UserPurchasedCoupon">
               <MappingFragment StoreEntitySet="UserPurchasedCoupon">
+                <ScalarProperty Name="ResponseType" ColumnName="ResponseType" />
                 <ScalarProperty Name="RedemptionOperator" ColumnName="RedemptionOperator" />
                 <ScalarProperty Name="RedemptionDateTime" ColumnName="RedemptionDateTime" />
                 <ScalarProperty Name="IsRedeemed" ColumnName="IsRedeemed" />
@@ -7046,6 +7453,182 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="CouponPriceOptions">
+            <EntityTypeMapping TypeName="SMDDevModel.CouponPriceOption">
+              <MappingFragment StoreEntitySet="CouponPriceOption">
+                <ScalarProperty Name="VoucherCode" ColumnName="VoucherCode" />
+                <ScalarProperty Name="OptionUrl" ColumnName="OptionUrl" />
+                <ScalarProperty Name="Savings" ColumnName="Savings" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CouponId" ColumnName="CouponId" />
+                <ScalarProperty Name="CouponPriceOptionId" ColumnName="CouponPriceOptionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Companies">
+            <EntityTypeMapping TypeName="SMDDevModel.Company">
+              <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="BillingAddressName" ColumnName="BillingAddressName" />
+                <ScalarProperty Name="NoOfBranches" ColumnName="NoOfBranches" />
+                <ScalarProperty Name="CreationDateTime" ColumnName="CreationDateTime" />
+                <ScalarProperty Name="TaxRegNo" ColumnName="TaxRegNo" />
+                <ScalarProperty Name="CompanyRegNo" ColumnName="CompanyRegNo" />
+                <ScalarProperty Name="LastPaymentMethodError" ColumnName="LastPaymentMethodError" />
+                <ScalarProperty Name="LastPaymentMethodErrorDate" ColumnName="LastPaymentMethodErrorDate" />
+                <ScalarProperty Name="PaymentMethodStatus" ColumnName="PaymentMethodStatus" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="AboutUsDescription" ColumnName="AboutUsDescription" />
+                <ScalarProperty Name="BillingCity" ColumnName="BillingCity" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="VoucherSecretKey" ColumnName="VoucherSecretKey" />
+                <ScalarProperty Name="PinterestHandle" ColumnName="PinterestHandle" />
+                <ScalarProperty Name="InstagramHandle" ColumnName="InstagramHandle" />
+                <ScalarProperty Name="FacebookHandle" ColumnName="FacebookHandle" />
+                <ScalarProperty Name="TwitterHandle" ColumnName="TwitterHandle" />
+                <ScalarProperty Name="BillingEmail" ColumnName="BillingEmail" />
+                <ScalarProperty Name="BillingPhone" ColumnName="BillingPhone" />
+                <ScalarProperty Name="BillingZipCode" ColumnName="BillingZipCode" />
+                <ScalarProperty Name="BillingCountryId" ColumnName="BillingCountryId" />
+                <ScalarProperty Name="BillingState" ColumnName="BillingState" />
+                <ScalarProperty Name="BillingAddressLine2" ColumnName="BillingAddressLine2" />
+                <ScalarProperty Name="BillingAddressLine1" ColumnName="BillingAddressLine1" />
+                <ScalarProperty Name="CompanyType" ColumnName="CompanyType" />
+                <ScalarProperty Name="WebsiteLink" ColumnName="WebsiteLink" />
+                <ScalarProperty Name="AfilliatianStatus" ColumnName="AfilliatianStatus" />
+                <ScalarProperty Name="ReferralCode" ColumnName="ReferralCode" />
+                <ScalarProperty Name="SalesEmail" ColumnName="SalesEmail" />
+                <ScalarProperty Name="PreferredPayoutAccount" ColumnName="PreferredPayoutAccount" />
+                <ScalarProperty Name="GoogleWalletCustomerId" ColumnName="GoogleWalletCustomerId" />
+                <ScalarProperty Name="PaypalCustomerId" ColumnName="PaypalCustomerId" />
+                <ScalarProperty Name="ReferringCompanyID" ColumnName="ReferringCompanyID" />
+                <ScalarProperty Name="RegisteredViaReferral" ColumnName="RegisteredViaReferral" />
+                <ScalarProperty Name="ChargeBeesubscriptionID" ColumnName="ChargeBeesubscriptionID" />
+                <ScalarProperty Name="StripeCustomerId" ColumnName="StripeCustomerId" />
+                <ScalarProperty Name="Logo" ColumnName="Logo" />
+                <ScalarProperty Name="TimeZone" ColumnName="TimeZone" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="AddressLine2" ColumnName="AddressLine2" />
+                <ScalarProperty Name="AddressLine1" ColumnName="AddressLine1" />
+                <ScalarProperty Name="Tel2" ColumnName="Tel2" />
+                <ScalarProperty Name="Tel1" ColumnName="Tel1" />
+                <ScalarProperty Name="ReplyEmail" ColumnName="ReplyEmail" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PayOutHistories">
+            <EntityTypeMapping TypeName="SMDDevModel.PayOutHistory">
+              <MappingFragment StoreEntitySet="PayOutHistory">
+                <ScalarProperty Name="TargetPayoutAccount" ColumnName="TargetPayoutAccount" />
+                <ScalarProperty Name="StageTwoUserId" ColumnName="StageTwoUserId" />
+                <ScalarProperty Name="StageTwoEventDate" ColumnName="StageTwoEventDate" />
+                <ScalarProperty Name="StageTwoRejectionReason" ColumnName="StageTwoRejectionReason" />
+                <ScalarProperty Name="StageTwoStatus" ColumnName="StageTwoStatus" />
+                <ScalarProperty Name="StageOneUserId" ColumnName="StageOneUserId" />
+                <ScalarProperty Name="StageOneEventDate" ColumnName="StageOneEventDate" />
+                <ScalarProperty Name="StageOneRejectionReason" ColumnName="StageOneRejectionReason" />
+                <ScalarProperty Name="StageOneStatus" ColumnName="StageOneStatus" />
+                <ScalarProperty Name="DollarAmount" ColumnName="DollarAmount" />
+                <ScalarProperty Name="CentzAmount" ColumnName="CentzAmount" />
+                <ScalarProperty Name="RequestDateTime" ColumnName="RequestDateTime" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="PayOutId" ColumnName="PayOutId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_Coupons">
+            <EntityTypeMapping TypeName="SMDDevModel.vw_Coupons">
+              <MappingFragment StoreEntitySet="vw_Coupons">
+                <ScalarProperty Name="CurrencySymbol" ColumnName="CurrencySymbol" />
+                <ScalarProperty Name="CurrencyCode" ColumnName="CurrencyCode" />
+                <ScalarProperty Name="Categories" ColumnName="Categories" />
+                <ScalarProperty Name="BuyitBtnLabel" ColumnName="BuyitBtnLabel" />
+                <ScalarProperty Name="BuyitLandingPageUrl" ColumnName="BuyitLandingPageUrl" />
+                <ScalarProperty Name="ShowBuyitBtn" ColumnName="ShowBuyitBtn" />
+                <ScalarProperty Name="Priority" ColumnName="Priority" />
+                <ScalarProperty Name="CouponEndDate" ColumnName="CouponEndDate" />
+                <ScalarProperty Name="CouponStartDate" ColumnName="CouponStartDate" />
+                <ScalarProperty Name="LocationCountryId" ColumnName="LocationCountryId" />
+                <ScalarProperty Name="SubmissionDateTime" ColumnName="SubmissionDateTime" />
+                <ScalarProperty Name="HowToRedeemLine5" ColumnName="HowToRedeemLine5" />
+                <ScalarProperty Name="HowToRedeemLine4" ColumnName="HowToRedeemLine4" />
+                <ScalarProperty Name="HowToRedeemLine3" ColumnName="HowToRedeemLine3" />
+                <ScalarProperty Name="HowToRedeemLine2" ColumnName="HowToRedeemLine2" />
+                <ScalarProperty Name="HowToRedeemLine1" ColumnName="HowToRedeemLine1" />
+                <ScalarProperty Name="GeographyColumn" ColumnName="GeographyColumn" />
+                <ScalarProperty Name="LocationPhone" ColumnName="LocationPhone" />
+                <ScalarProperty Name="LocationLON" ColumnName="LocationLON" />
+                <ScalarProperty Name="LocationLAT" ColumnName="LocationLAT" />
+                <ScalarProperty Name="LocationZipCode" ColumnName="LocationZipCode" />
+                <ScalarProperty Name="LocationState" ColumnName="LocationState" />
+                <ScalarProperty Name="LocationCity" ColumnName="LocationCity" />
+                <ScalarProperty Name="LocationLine2" ColumnName="LocationLine2" />
+                <ScalarProperty Name="LocationLine1" ColumnName="LocationLine1" />
+                <ScalarProperty Name="LocationTitle" ColumnName="LocationTitle" />
+                <ScalarProperty Name="LocationBranchId" ColumnName="LocationBranchId" />
+                <ScalarProperty Name="FinePrintLine5" ColumnName="FinePrintLine5" />
+                <ScalarProperty Name="FinePrintLine4" ColumnName="FinePrintLine4" />
+                <ScalarProperty Name="FinePrintLine3" ColumnName="FinePrintLine3" />
+                <ScalarProperty Name="FinePrintLine2" ColumnName="FinePrintLine2" />
+                <ScalarProperty Name="FinePrintLine1" ColumnName="FinePrintLine1" />
+                <ScalarProperty Name="HighlightLine5" ColumnName="HighlightLine5" />
+                <ScalarProperty Name="HighlightLine4" ColumnName="HighlightLine4" />
+                <ScalarProperty Name="HighlightLine3" ColumnName="HighlightLine3" />
+                <ScalarProperty Name="HighlightLine2" ColumnName="HighlightLine2" />
+                <ScalarProperty Name="HighlightLine1" ColumnName="HighlightLine1" />
+                <ScalarProperty Name="LogoUrl" ColumnName="LogoUrl" />
+                <ScalarProperty Name="CouponImage3" ColumnName="CouponImage3" />
+                <ScalarProperty Name="CouponImage2" ColumnName="CouponImage2" />
+                <ScalarProperty Name="couponImage1" ColumnName="couponImage1" />
+                <ScalarProperty Name="CouponExpirydate" ColumnName="CouponExpirydate" />
+                <ScalarProperty Name="CouponActiveYear" ColumnName="CouponActiveYear" />
+                <ScalarProperty Name="CouponActiveMonth" ColumnName="CouponActiveMonth" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="CouponListingMode" ColumnName="CouponListingMode" />
+                <ScalarProperty Name="CouponQtyPerUser" ColumnName="CouponQtyPerUser" />
+                <ScalarProperty Name="CouponRedeemedCount" ColumnName="CouponRedeemedCount" />
+                <ScalarProperty Name="CouponIssuedCount" ColumnName="CouponIssuedCount" />
+                <ScalarProperty Name="CouponViewCount" ColumnName="CouponViewCount" />
+                <ScalarProperty Name="SwapCost" ColumnName="SwapCost" />
+                <ScalarProperty Name="Savings" ColumnName="Savings" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="CurrencyId" ColumnName="CurrencyId" />
+                <ScalarProperty Name="RejectedBy" ColumnName="RejectedBy" />
+                <ScalarProperty Name="Rejecteddatetime" ColumnName="Rejecteddatetime" />
+                <ScalarProperty Name="RejectedReason" ColumnName="RejectedReason" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDateTime" ColumnName="ModifiedDateTime" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="ApprovalDateTime" ColumnName="ApprovalDateTime" />
+                <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
+                <ScalarProperty Name="Approved" ColumnName="Approved" />
+                <ScalarProperty Name="Archived" ColumnName="Archived" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="SearchKeywords" ColumnName="SearchKeywords" />
+                <ScalarProperty Name="CouponTitle" ColumnName="CouponTitle" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
+                <ScalarProperty Name="CouponId" ColumnName="CouponId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cities">
+            <EntityTypeMapping TypeName="SMDDevModel.City">
+              <MappingFragment StoreEntitySet="City">
+                <ScalarProperty Name="GeoLAT" ColumnName="GeoLAT" />
+                <ScalarProperty Name="GeoLONG" ColumnName="GeoLONG" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="IsCapital" ColumnName="IsCapital" />
+                <ScalarProperty Name="CityName" ColumnName="CityName" />
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

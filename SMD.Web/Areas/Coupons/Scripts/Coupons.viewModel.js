@@ -41,12 +41,16 @@ define("Coupons/Coupons.viewModel",
                     BranchLocationId = ko.observable(),
                     //caption variablels 
 
-                //
+                //  Buttons visible properties
                     isEditCampaign = ko.observable(false),
-                    canSubmitForApproval = ko.observable(true),
+                    IsSubmitBtnVisible = ko.observable(false),
                     isNewCampaignVisible = ko.observable(false),
                     isShowArchiveBtn = ko.observable(false),
                     isTerminateBtnVisible = ko.observable(false),
+                    IsCopyBtnVisible = ko.observable(false),
+                    IsPauseBtnVisible = ko.observable(false),
+                    IsResumeBtnVisible = ko.observable(false),
+
                     CurrencyDropDown = ko.observableArray([{ id: 1, name: "Choice 1" }, { id: 2, name: "Choice 2" }, { id: 3, name: "Choice 3" }, { id: 0, name: "Ask User Suggestion" }]),
                     YearRangeDropDown = ko.observableArray([]),
                     selectedIndustryIncludeExclude = ko.observable(true),
@@ -59,6 +63,7 @@ define("Coupons/Coupons.viewModel",
                     isEducationPerClickPriceAdded = ko.observable(false),
                     isBuyItPerClickPriceAdded = ko.observable(false),
                     isVoucherPerClickPriceAdded = ko.observable(false),
+                    selectedPriceOption = ko.observable(),
 
                     selectedEducationIncludeExclude = ko.observable(true),
                     isListVisible = ko.observable(true),
@@ -79,6 +84,8 @@ define("Coupons/Coupons.viewModel",
                     professions = ko.observableArray([]),
                     voucherQuestionStatus = ko.observable(false),
                     buyItQuestionStatus = ko.observable(false),
+                    buyItQuestionLabelStatus = ko.observable(false),
+                    ButItOtherLabel = ko.observable(''),
                     AditionalCriteriaMode = ko.observable("1"), //1 = main buttons, 2 = profile questions , 3 = ad linked questions
                     couponCategories = ko.observableArray([]),
                     quizQuestionStatus = ko.observable(false),
@@ -120,6 +127,7 @@ define("Coupons/Coupons.viewModel",
                         success: function (data) {
 
                             if (data != null) {
+                                UserAndCostDetail(data.UserAndCostDetails);
 
                                 if (data.Currencies != null) {
                                     CurrencyDropDown.removeAll();
@@ -288,10 +296,10 @@ define("Coupons/Coupons.viewModel",
            }
                 ,
             updateCampaignGridItem = function (item) {
-                canSubmitForApproval(false);
+             
                 if (item.Status == 1) {
                     item.StatusValue = "Draft";
-                    canSubmitForApproval(true);
+                
                 } else if (item.Status == 2) {
                     item.StatusValue = "Pending Approval"
                 } else if (item.Status == 3) {
@@ -335,9 +343,12 @@ define("Coupons/Coupons.viewModel",
 
                 $("#Heading_div").css("display", "none");
                 isShowArchiveBtn(false);
-                    CouponTitle('New Deal');
-                    StatusValue('Draft');
-                    couponModel().reset();
+                CouponTitle('New Deal');
+                StatusValue('Draft');
+                couponModel().reset();
+                couponModel().CouponPriceOptions.splice(0, 0, new model.CouponPriceOption());
+                selectedPriceOption(couponModel().CouponPriceOptions()[0]);
+
             },
 
             closeNewCampaignDialog = function () {
@@ -433,6 +444,7 @@ define("Coupons/Coupons.viewModel",
                   isEnableVedioVerificationLink(false);
 
                   couponModel().CouponImage2("/images/default-placeholder.png");
+
                   couponModel().CouponImage3("/images/default-placeholder.png");
                   couponModel().couponImage1("/images/default-placeholder.png");
                   couponModel().LogoUrl("/images/default-placeholder.png");
@@ -442,7 +454,7 @@ define("Coupons/Coupons.viewModel",
                   isWelcomeScreenVisible(false);
 
                   isEditorVisible(true);
-                  canSubmitForApproval(true);
+           
 
 
 
@@ -463,31 +475,37 @@ define("Coupons/Coupons.viewModel",
                         toastr.error("Please enter Group Title.");
                     }
 
-                    if (couponModel().Price() == "" || couponModel().Price() == undefined) {
+                    if (couponModel().CouponPriceOptions().length == 0 || couponModel().Savings() == undefined) {
                         hasErrors = true;
-                        toastr.error("Please enter Price.");
-                    }
-                    if (couponModel().Savings() == "" || couponModel().Savings() == undefined) {
-                        hasErrors = true;
-                        toastr.error("Please enter Saving.");
+                        toastr.error("Please create atleast one Price option");
+                        gotoScreen(1);
                     }
 
-                    if (couponModel().CouponQtyPerUser() == "" || couponModel().CouponQtyPerUser() == undefined) {
-                        hasErrors = true;
-                        toastr.error("Please enter Quantity.");
-                    }
-                    console.log(couponModel());
+                  
                     if (couponModel().HowToRedeemLine2() == "" || couponModel().HowToRedeemLine2() == undefined) {
                         hasErrors = true;
                         toastr.error("Please enter deal summary.");
-                    }//couponImage1
+                    }
+
+                //couponImage1
                     //if (couponModel().couponImage1() == "/images/default-placeholder.png" && couponModel().CouponImage2() == "/images/default-placeholder.png" && couponModel().CouponImage3() == "/images/default-placeholder.png") {
                     //    hasErrors = true;
                     //    toastr.error("Please enter atleast 1 banner image.");
-                    //}
+                //}
+
                 if (hasErrors)
                     return;
-                saveCampaign(2);
+
+                
+                if (UserAndCostDetail().isStripeIntegrated == false) {
+                    stripeChargeCustomer.show(function () {
+                        UserAndCostDetail().isStripeIntegrated = true;
+                        saveCampaign(2);
+                    }, 1000, 'Configure your credit card');
+
+                } else {
+                    saveCampaign(2);
+                }
             },
               terminateCampaign = function () {
                   saveCampaign(7);
@@ -496,7 +514,7 @@ define("Coupons/Coupons.viewModel",
                   saveCampaign(8);
               },
                 OnchangeDateDD = function (data) {
-                    //debugger;
+                    //
                     //alert(data);
                     //var res = data.split("-");
                     //couponModel().CouponActiveYear(res[0]);
@@ -528,6 +546,22 @@ define("Coupons/Coupons.viewModel",
                     couponModel().Status(mode);
                    
                     couponModel().SubmissionDateTime(mode);
+
+
+                    //buy it button logic
+                    couponModel().ShowBuyitBtn(buyItQuestionStatus());
+                    
+                    //if other question then
+                    if (buyItQuestionLabelStatus() == true)
+                    {
+                        couponModel().BuyitBtnLabel(ButItOtherLabel());
+                    }
+                    else
+                    {
+                        couponModel().BuyitBtnLabel($("#buyItddl").val());
+                    }
+
+
                     if (CouponActiveMonth() != null && CouponActiveMonth() > 0) {
 
                         var res = CouponActiveMonth().split("-");
@@ -540,6 +574,7 @@ define("Coupons/Coupons.viewModel",
                     var campignServerObj = couponModel().convertToServerData();
 
                     dataservice.addCampaignData(campignServerObj, {
+
                         success: function (data) {
 
                             isEditorVisible(false);
@@ -565,326 +600,47 @@ define("Coupons/Coupons.viewModel",
                     //  }
                 }
             },
-                // Add new profile Criteria
-                addNewProfileCriteria = function () { },
-                  saveProfileQuestion = function (item) {
+                ///*** Price option Region ***
 
-                      var selectedQuestionstring = $(".active .parent-list-title").text();
-                      selectedCriteria().questionString(selectedQuestionstring);
-                      selectedCriteria().PQID(item.PQID);
-                      var selectedQuestionAnswerstring = item.Answer;
-                      selectedCriteria().answerString(selectedQuestionAnswerstring);
-                      selectedCriteria().PQAnswerID(item.PqAnswerId);
-
-
-                      var matchedProfileCriteriaRec = ko.utils.arrayFirst(couponModel().AdCampaignTargetCriterias(), function (arrayitem) {
-
-                          return arrayitem.PQID() == item.PQID
-                      });
-
-                      if (matchedProfileCriteriaRec == null) {
-                          if (UserAndCostDetail().OtherClausePrice != null) {
-                              pricePerclick(pricePerclick() + UserAndCostDetail().OtherClausePrice);
-
-                          }
-                          couponModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
-                              Type: 1,
-                              PQId: selectedCriteria().PQID(),
-                              PQAnswerId: selectedCriteria().PQAnswerID(),
-                              SQId: selectedCriteria().SQID(),
-                              SQAnswer: selectedCriteria().SQAnswer(),
-                              questionString: selectedCriteria().questionString(),
-                              answerString: selectedCriteria().answerString(),
-                              IncludeorExclude: selectedCriteria().IncludeorExclude(),
-                              CampaignId: couponModel().CampaignID,
-                              criteriaPrice: UserAndCostDetail().OtherClausePrice
-                          }));
-                      } else {
-                          couponModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
-                              Type: 1,
-                              PQId: selectedCriteria().PQID(),
-                              PQAnswerId: selectedCriteria().PQAnswerID(),
-                              SQId: selectedCriteria().SQID(),
-                              SQAnswer: selectedCriteria().SQAnswer(),
-                              questionString: selectedCriteria().questionString(),
-                              answerString: selectedCriteria().answerString(),
-                              IncludeorExclude: selectedCriteria().IncludeorExclude(),
-                              CampaignId: couponModel().CampaignID,
-                              criteriaPrice: 0
-                          }));
-                      }
-
-                      $(".close").click();
-
-                  },
-                    updateSurveyCriteria = function (type, item) {
-                        selectedCriteria().QuizAnswerId(type);
-                        if (type == 1) {
-                            selectedCriteria().answerString(selectedCriteria().surveyQuestLeftImageSrc());
-                        } else {
-                            selectedCriteria().answerString(selectedCriteria().surveyQuestRightImageSrc());
+                // Select a Price option
+                    selectPriceOption = function (priceOption) {
+                        if (selectedPriceOption() !== priceOption) {
+                            selectedPriceOption(priceOption);
                         }
-                        $(".close").click();
                     },
-                     updateProfileQuestion = function (item) {
-                         selectedCriteria().answerString(item.Answer);
-                         selectedCriteria().PQAnswerID(item.PQAnswerID);
-                         $(".close").click();
+                // Template Chooser For Price option
+                    templateToUsePriceOptions = function (priceOption) {
+                        return (priceOption === selectedPriceOption() ? 'editPriceOptionTemplate' : 'itemPriceOptionTemplate');
+                    },
+                //Create Price option
+                     onCreatePriceOption = function () {
+                         var priceOption = couponModel().CouponPriceOptions()[0];
+                         //Create Price option for the very First Time
+                         if (priceOption == undefined) {
+                             couponModel().CouponPriceOptions.splice(0, 0, new model.CouponPriceOption());
+                             selectedPriceOption(couponModel().CouponPriceOptions()[couponModel().CouponPriceOptions.length+1]);
+                         }
+                             //If There are already Price options in list
+                         else {
+                             if (!priceOption.isValid()) {
+                                 priceOption.errors.showAllMessages();
+                             }
+                             else {
+                                 couponModel().CouponPriceOptions.splice(couponModel().CouponPriceOptions().length, 0, new model.CouponPriceOption());
+                                 selectedPriceOption(couponModel().CouponPriceOptions()[couponModel().CouponPriceOptions().length-1]);
+                             }
+                         }
                      },
-                saveCriteria = function (type, item) {
-
-                    var selectedQuestionstring = item.VerifyQuestion;
-                    selectedCriteria().questionString(selectedQuestionstring);
-                    if (type == 1) {
-                        selectedCriteria().answerString(item.Answer1);
-                    } else {
-                        selectedCriteria().answerString(item.Answer2);
-                    }
-
-                    var matchedSurveyCriteriaRec = null;
-
-                    _.each(couponModel().AdCampaignTargetCriterias(), function (itemarry) {
-
-                        if (itemarry.QuizCampaignId() == item.CampaignId) {
-
-                            matchedSurveyCriteriaRec = itemarry;
-                        }
-                    });
-
-
-                    if (isNewCriteria()) {
-                        if (matchedSurveyCriteriaRec == null) {
-                            if (UserAndCostDetail().OtherClausePrice != null) {
-                                pricePerclick(pricePerclick() + UserAndCostDetail().OtherClausePrice);
-
-                            }
-
-                            couponModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
-                                Type: 6,
-                                PQId: selectedCriteria().PQID(),
-                                PQAnswerId: selectedCriteria().PQAnswerID(),
-                                QuizCampaignId: item.CampaignId,
-                                QuizAnswerId: type,
-                                questionString: selectedCriteria().questionString(),
-                                answerString: selectedCriteria().answerString(),
-                                IncludeorExclude: selectedCriteria().IncludeorExclude(),
-                                CampaignId: couponModel().CampaignID,
-                                criteriaPrice: UserAndCostDetail().OtherClausePrice
-                            }));
-
-                        } else {
-
-
-                            couponModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
-                                Type: 6,
-                                PQId: selectedCriteria().PQID(),
-                                PQAnswerId: selectedCriteria().PQAnswerID(),
-                                QuizCampaignId: item.CampaignId,
-                                QuizAnswerId: type,
-                                questionString: selectedCriteria().questionString(),
-                                answerString: selectedCriteria().answerString(),
-                                IncludeorExclude: selectedCriteria().IncludeorExclude(),
-                                CampaignId: couponModel().CampaignID,
-                                criteriaPrice: 0
-                            }));
-
-                        }
-                    }
-                    $(".close").click();
-                    isShowSurveyAns(false);
-                },
-
-                onEditCriteria = function (item) {
-                    AditionalCriteriaMode("2");
-                    isNewCriteria(false);
-                    var val = item.PQAnswerID() + 0;
-                    var valQuest = item.PQID() + 0;
-                    if (item.Type() == "1") {
-
-                        if (profileQuestionList().length == 0) {
-                            dataservice.getBaseData({
-                                RequestId: 2,
-                                QuestionId: 0,
-                            }, {
-                                success: function (data) {
-                                    if (data != null) {
-                                        profileQuestionList([]);
-                                        ko.utils.arrayPushAll(profileQuestionList(), data.ProfileQuestions);
-                                        profileQuestionList.valueHasMutated();
-                                        item.PQID(valQuest);
-                                    }
-
-                                },
-                                error: function (response) {
-
-                                }
-                            });
-                        }
-
-
-                        dataservice.getBaseData({
-                            RequestId: 3,
-                            QuestionId: item.PQID(),
-                        }, {
-                            success: function (data) {
-                                if (data != null) {
-                                    _.each(data.ProfileQuestionAnswers, function (question) {
-                                        question.PQID = question.PqId;
-                                        question.PQAnswerID = question.PqAnswerId;
-                                    });
-                                    profileAnswerList([]);
-                                    ko.utils.arrayPushAll(profileAnswerList(), data.ProfileQuestionAnswers);
-                                    profileAnswerList.valueHasMutated();
-                                    item.PQAnswerID(val);
-                                }
-
-                            },
-                            error: function (response) {
-
-                            }
+                // Delete a Price option
+                    onDeletePriceOption = function (priceOption) {
+                        confirmation.messageText("WARNING - This item will be removed from the system and you won’t be able to recover.  There is no undo");
+                        confirmation.afterProceed(function () {
+                            couponModel().CouponPriceOptions.remove(priceOption);
                         });
-
-                        selectedCriteria(item);
-                    } else {
-                        selectedCriteria(item);
-                        var matchSurveyQuestion = ko.utils.arrayFirst(myQuizQuestions(), function (survey) {
-                            return survey.CampaignId == item.QuizCampaignId();
-                        });
-                        selectedCriteria().surveyQuestLeftImageSrc(matchSurveyQuestion.Answer1);
-                        selectedCriteria().surveyQuestRightImageSrc(matchSurveyQuestion.Answer2);
-                        // adjust item
-                    }
-
-                },
-                // Delete Handler PQ
-                onDeleteCriteria = function (item) {
-
-                    pricePerclick(pricePerclick() - item.criteriaPrice());
-                    couponModel().AdCampaignTargetCriterias.remove(item);
-
-                },
-
-                onChangeProfileQuestion = function (item) {
-                    if (item == null)
+                        confirmation.show();
                         return;
-                    var selectedQuestionId = item.PqId;
-
-                    dataservice.getBaseData({
-                        RequestId: 3,
-                        QuestionId: selectedQuestionId,
-                    }, {
-                        success: function (data) {
-                            if (data != null) {
-                                if (profileAnswerList().length > 0) {
-                                    profileAnswerList([]);
-                                }
-                                _.each(data.ProfileQuestionAnswers, function (question) {
-                                    question.PQID = item.PqId;
-                                });
-                                ko.utils.arrayPushAll(profileAnswerList(), data.ProfileQuestionAnswers);
-                                profileAnswerList.valueHasMutated();
-
-
-                            }
-
-                        },
-                        error: function (response) {
-
-                        }
-                    });
-                },
-
-                onChangeSurveyQuestion = function (item) {
-                },
-
-                onRemoveLocation = function (item) {
-                    // Ask for confirmation
-                    deleteLocation(item);
-
-                },
-
-                deleteLocation = function (item) {
-                    couponModel().AdCampaignTargetLocations.remove(item);
-
-                    if (couponModel().AdCampaignTargetLocations() == null || couponModel().AdCampaignTargetLocations().length == 0) {
-                        isLocationPerClickPriceAdded(false);
-                        pricePerclick(pricePerclick() - UserAndCostDetail().LocationClausePrice);
-                    }
-                    selectedQuestionCountryList([]);
-                    _.each(couponModel().AdCampaignTargetLocations(), function (item) {
-                        addCountryToCountryList(item.CountryID(), item.Country());
-                    });
-                    toastr.success("Removed Successfully!");
-                },
-                //add location
-                onAddLocation = function (item) {
-
-                    selectedLocation().Radius = (selectedLocationRadius);
-                    selectedLocation().IncludeorExclude = (selectedLocationIncludeExclude);
-                    couponModel().AdCampaignTargetLocations.push(new model.AdCampaignTargetLocation.Create({
-                        CountryId: selectedLocation().CountryID,
-                        CityId: selectedLocation().CityID,
-                        Radius: selectedLocation().Radius(),
-                        Country: selectedLocation().Country,
-                        City: selectedLocation().City,
-                        IncludeorExclude: selectedLocation().IncludeorExclude(),
-                        CampaignId: couponModel().CampaignID(),
-                        Latitude: selectedLocation().Latitude,
-                        Longitude: selectedLocation().Longitude,
-                    }));
-                    addCountryToCountryList(selectedLocation().CountryID, selectedLocation().Country);
-
-                    if (UserAndCostDetail().LocationClausePrice != null && isLocationPerClickPriceAdded() == false) {
-                        pricePerclick(pricePerclick() + UserAndCostDetail().LocationClausePrice);
-                        isLocationPerClickPriceAdded(true);
-                    }
-                },
-
-                resetLocations = function () {
-                    $("#searchCampaignLocations").val("");
-                    selectedLocationRadius("");
-                },
-
-                addLanguage = function (selected) {
-
-                    couponModel().AdCampaignTargetCriterias.push(new model.AdCampaignTargetCriteriasModel.Create({
-                        Language: selected.LanguageName,
-                        LanguageId: selected.LanguageId,
-                        IncludeorExclude: parseInt(selectedLangIncludeExclude()),
-                        Type: 3,
-                        CriteriaId: 0,
-                        CampaignId: couponModel().CampaignID()
-                    }));
-                    $("#searchLanguages").val("");
-                    if (UserAndCostDetail().OtherClausePrice != null && isLanguagePerClickPriceAdded() == false) {
-                        pricePerclick(pricePerclick() + UserAndCostDetail().OtherClausePrice);
-                        isLanguagePerClickPriceAdded(true);
-                    }
-                },
-
-                onRemoveLanguage = function (item) {
-                    // Ask for confirmation
-                    deleteLanguage(item);
-
-
-                },
-
-                deleteLanguage = function (item) {
-
-                    couponModel().AdCampaignTargetCriterias.remove(item);
-
-                    var matchedLanguageCriterias = ko.utils.arrayFirst(couponModel().AdCampaignTargetCriterias(), function (arrayitem) {
-
-                        return arrayitem.Type() == item.Type();
-                    });
-
-                    if (matchedLanguageCriterias == null) {
-                        isLanguagePerClickPriceAdded(false);
-                        pricePerclick(pricePerclick() - UserAndCostDetail().OtherClausePrice);
-                    }
-                    toastr.success("Removed Successfully!");
-
-                },
+                    },
+            
                 // Has Changes
                 hasChangesOnQuestion = ko.computed(function () {
                     if (couponModel() == undefined) {
@@ -917,6 +673,10 @@ define("Coupons/Coupons.viewModel",
                   },
                 onEditCampaign = function (item) {
 
+                    //resetting flags
+                    IsSubmitBtnVisible(false);
+
+
                     //hide the main menu;
                     collapseMainMenu();
 
@@ -934,7 +694,7 @@ define("Coupons/Coupons.viewModel",
 
                     $("#Heading_div").css("display", "none");
                     if (item.Status() == 1 || item.Status() == 2 || item.Status() == 3 || item.Status() == 4 || item.Status() == null || item.Status() == 7 || item.Status() == 9) {
-                        canSubmitForApproval(true);
+                       
                         dataservice.getCampaignData({
                             CampaignId: item.CouponId(),
                             SearchText: ""
@@ -951,6 +711,7 @@ define("Coupons/Coupons.viewModel",
 
                                         isNewCampaign(true);
                                         couponModel().StatusValue("Draft");
+                                        IsSubmitBtnVisible(true);
                                     } else if (couponModel().Status() == 2) {
                                         $("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
                                         $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,#btnPauseCampaign,.lang_delSurvey,.table-link").css("display", "none");
@@ -959,6 +720,7 @@ define("Coupons/Coupons.viewModel",
                                         $("#btnCancel").css("display", "none");
                                         $("#btnCancel,#btnPauseCampaign,#btnClose").removeAttr('disabled');
                                         couponModel().StatusValue("Submitted for Approval");
+                                    
                                     } else if (couponModel().Status() == 3) {
                                         //$("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
                                         $("#btnSubmitForApproval,#btnResumeCampagin,#btnPauseCampaign,.lang_delSurvey,.table-link").css("display", "none");
@@ -978,14 +740,16 @@ define("Coupons/Coupons.viewModel",
                                         $("#btnCancel,#btnResumeCampagin,#btnCopyCampaign,#btnStopAndTerminate").removeAttr('disabled');
                                         $("#btnCancel").css("display", "none");
                                         couponModel().StatusValue("Paused");
-                                        isTerminateBtnVisible(true);
-                                        isNewCampaignVisible(true);
+                                        
+                                        
+                                        IsResumeBtnVisible(true);
                                     } else if (couponModel().Status() == 5) {
                                         $("#btnCancel").css("display", "block");
                                         couponModel().StatusValue("Completed");
                                     } else if (couponModel().Status() == 6) {
                                         couponModel().StatusValue("Approval Rejected");
                                         $("#btnCancel").css("display", "block");
+                                        IsSubmitBtnVisible(true);
                                     } else if (couponModel().Status() == 7) {
                                         couponModel().StatusValue("Terminated by user");
                                         $("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
@@ -1046,6 +810,40 @@ define("Coupons/Coupons.viewModel",
                                     randonNumber("?r=" + Math.floor(Math.random() * (20 - 1 + 1)) + 1);
 
 
+                                    //buy it button logic
+                                    buyItQuestionStatus(couponModel().ShowBuyitBtn());
+                                    var buyitbuttonlabel = couponModel().BuyitBtnLabel();
+
+                                    if (couponModel().ShowBuyitBtn() == false)
+                                    {
+                                        $("#buyItddl").val('0');
+                                    }
+                                    else
+                                    {
+                                        if (buyitbuttonlabel == 'Apply Now' ||
+                                            buyitbuttonlabel == 'Book Now' ||
+                                            buyitbuttonlabel == 'Contact Us' ||
+                                            buyitbuttonlabel == 'Download' ||
+                                            buyitbuttonlabel == 'Learn More' ||
+                                            buyitbuttonlabel == 'Shop Now' ||
+                                            buyitbuttonlabel == 'Sign Up' ||
+                                            buyitbuttonlabel == 'Watch More'
+                                             ) {
+                                            buyItQuestionLabelStatus(false);
+                                            $("#buyItddl").val(buyitbuttonlabel);
+
+                                        }
+                                        else {
+                                            $("#buyItddl").val('999');
+                                            buyItQuestionLabelStatus(true);
+                                            ButItOtherLabel(buyitbuttonlabel);
+                                        }
+                                    }
+
+                                  
+
+
+
                                  
                                     $.unblockUI(spinner);
                                     couponModel().reset();
@@ -1066,6 +864,36 @@ define("Coupons/Coupons.viewModel",
                     $("#btnSubmitForApproval,#saveBtn,.lang_delSurvey,.table-link").css("display", "inline-block");
                     $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign").removeAttr('disabled');
                 },
+                 handleBuyIt = function (item) {
+                   
+
+                    var selectionoption = $("#buyItddl").val();
+
+                    if (selectionoption == '0')
+                    {
+                        buyItQuestionStatus(false);
+                        couponModel().ShowBuyitBtn(false);
+                        buyItQuestionLabelStatus(false);
+                        ButItOtherLabel('');
+                    }
+                    else if (selectionoption == '999')  //other scenario
+                    {
+                        buyItQuestionStatus(true);
+                        couponModel().ShowBuyitBtn(true);
+                        buyItQuestionLabelStatus(true);
+                        couponModel().BuyitBtnLabel('');
+                        
+                    }
+                    else
+                    {
+                        buyItQuestionStatus(true);
+                        couponModel().ShowBuyitBtn(true);
+                        buyItQuestionLabelStatus(false);
+                        ButItOtherLabel('');
+                        couponModel().BuyitBtnLabel('');
+                    }
+
+                 },
                 nextPreviewScreen = function () {
                     var hasErrors = false;
                     if (previewScreenNumber() == 1) {
@@ -1074,16 +902,16 @@ define("Coupons/Coupons.viewModel",
                             toastr.error("Please enter Coupon Title.");
                         }
 
+                        if (couponModel().CouponPriceOptions().length == 0 || couponModel().Savings() == undefined) {
+                            hasErrors = true;
+                            toastr.error("Please create atleast one Price option");
+                           
+                        }
+
+
                     }
                     if (previewScreenNumber() == 4) {
-                        if (couponModel().Price() == "" || couponModel().Price() == undefined) {
-                            hasErrors = true;
-                            toastr.error("Please enter Price.");
-                        }
-                        if (couponModel().Savings() == "" || couponModel().Savings() == undefined) {
-                            hasErrors = true;
-                            toastr.error("Please enter Saving.");
-                        }
+                        
 
                     }
                     if (previewScreenNumber() == 3) {
@@ -1119,16 +947,15 @@ define("Coupons/Coupons.viewModel",
                             toastr.error("Please enter Coupon Title.");
                             gotoScreen(1);
                         }
-                        if (couponModel().Price() == "" || couponModel().Price() == undefined) {
+                       
+
+                        if (couponModel().CouponPriceOptions().length == 0 || couponModel().Savings() == undefined) {
                             hasErrors = true;
-                            toastr.error("Please enter Price.");
-                            gotoScreen(4);
+                            toastr.error("Please create atleast one Price option");
+                            gotoScreen(1);
                         }
-                        if (couponModel().Savings() == "" || couponModel().Savings() == undefined) {
-                            hasErrors = true;
-                            toastr.error("Please enter Saving.");
-                            gotoScreen(4);
-                        }
+
+
                    
                     return hasErrors;
                 },
@@ -1206,24 +1033,20 @@ define("Coupons/Coupons.viewModel",
                         toastr.error("Please enter Group Title.");
                     }
 
-                    if (couponModel().Price() == "" || couponModel().Price() == undefined) {
-                        hasErrors = true;
-                        toastr.error("Please enter Price.");
-                    }
-                    if (couponModel().Savings() == "" || couponModel().Savings() == undefined) {
-                        hasErrors = true;
-                        toastr.error("Please enter Saving.");
-                    }
-
-                    if (couponModel().CouponQtyPerUser() == "" || couponModel().CouponQtyPerUser() == undefined) {
-                        hasErrors = true;
-                        toastr.error("Please enter Quantity.");
-                    }
-                    console.log(couponModel());
+                  
                     if (couponModel().HowToRedeemLine2() == "" || couponModel().HowToRedeemLine2() == undefined) {
                         hasErrors = true;
                         toastr.error("Please enter deal description.");
-                    }//couponImage1
+                    }
+
+
+                    if (couponModel().CouponPriceOptions().length == 0 || couponModel().Savings() == undefined) {
+                        hasErrors = true;
+                        toastr.error("Please create atleast one Price option");
+                        gotoScreen(1);
+                    }
+
+                    //couponImage1
                     //if (couponModel().couponImage1() == "/images/default-placeholder.png" && couponModel().CouponImage2() == "/images/default-placeholder.png" && couponModel().CouponImage3() == "/images/default-placeholder.png") {
                     //    hasErrors = true;
                     //    toastr.error("Please enter atleast 1 banner image.");
@@ -1231,6 +1054,8 @@ define("Coupons/Coupons.viewModel",
                     if (hasErrors)
                         return;
                     saveCampaign(1);
+
+
                 },
                 onRemoveIndustry = function (item) {
                     // Ask for confirmation
@@ -1814,14 +1639,14 @@ define("Coupons/Coupons.viewModel",
                  },
                 locationChanged = function (item) {
 
-                    debugger;
+                    
 
                     var matchedItem = ko.utils.arrayFirst(branchLocations(), function (arrayitem) {
 
                         return arrayitem.BranchId == item.LocationBranchId();
                     });
 
-                    console.log(matchedItem);
+                    //console.log(matchedItem);
 
 
                     if (matchedItem != null) {
@@ -1837,7 +1662,7 @@ define("Coupons/Coupons.viewModel",
                 },
                 LocationChangedOnSelectedIndex = function (val)
                 {
-                    debugger;
+                    
                     var matchedItem = ko.utils.arrayFirst(branchLocations(), function (arrayitem) {
 
                         return arrayitem.BranchId == val;
@@ -2065,14 +1890,14 @@ define("Coupons/Coupons.viewModel",
                     profileQuestionList: profileQuestionList,
                     branchLocations: branchLocations,
                     profileAnswerList: profileAnswerList,
-                    saveCriteria: saveCriteria,
-                    onDeleteCriteria: onDeleteCriteria,
-                    onEditCriteria: onEditCriteria,
-                    addNewProfileCriteria: addNewProfileCriteria,
-                    onChangeProfileQuestion: onChangeProfileQuestion,
+                   
+                    
+                    
+                    
+                    
                     myQuizQuestions: myQuizQuestions,
-                    //   addNewSurveyCriteria: addNewSurveyCriteria,
-                    onChangeSurveyQuestion: onChangeSurveyQuestion,
+                    
+                    
                     getCampaignByFilter: getCampaignByFilter,
                     searchFilterValue: searchFilterValue,
                     isShowSurveyAns: isShowSurveyAns,
@@ -2082,13 +1907,7 @@ define("Coupons/Coupons.viewModel",
                     selectedLangIncludeExclude: selectedLangIncludeExclude,
                     selectedLocationLat: selectedLocationLat,
                     selectedLocationLong: selectedLocationLong,
-                    onAddLocation: onAddLocation,
-                    onRemoveLocation: onRemoveLocation,
-                    deleteLocation: deleteLocation,
-                    addLanguage: addLanguage,
-                    onRemoveLanguage: onRemoveLanguage,
-                    deleteLanguage: deleteLanguage,
-                    ageRange: ageRange,
+                    
                     isNewCriteria: isNewCriteria,
                     isEnableVedioVerificationLink: isEnableVedioVerificationLink,
                     campaignTypeImageCallback: campaignTypeImageCallback,
@@ -2099,8 +1918,11 @@ define("Coupons/Coupons.viewModel",
                     CurrencyDropDown: CurrencyDropDown,
                     YearRangeDropDown: YearRangeDropDown,
                     onEditCampaign: onEditCampaign,
-                    canSubmitForApproval: canSubmitForApproval,
+                    IsSubmitBtnVisible: IsSubmitBtnVisible,
                     isTerminateBtnVisible: isTerminateBtnVisible,
+                    IsCopyBtnVisible : IsCopyBtnVisible,
+                    IsPauseBtnVisible : IsPauseBtnVisible,
+                    IsResumeBtnVisible : IsResumeBtnVisible,
                     isNewCampaignVisible: isNewCampaignVisible,
                     isShowArchiveBtn: isShowArchiveBtn,
                     submitCampaignData: submitCampaignData,
@@ -2128,10 +1950,10 @@ define("Coupons/Coupons.viewModel",
                     voucherQuestionStatus: voucherQuestionStatus,
                     ChangeVoucherSettings: ChangeVoucherSettings,
                     VoucherImageCallback: VoucherImageCallback,
-                    saveProfileQuestion: saveProfileQuestion,
-                    updateProfileQuestion: updateProfileQuestion,
-                    updateSurveyCriteria: updateSurveyCriteria,
+                    
                     buyItQuestionStatus: buyItQuestionStatus,
+                    buyItQuestionLabelStatus: buyItQuestionLabelStatus,
+                    ButItOtherLabel: ButItOtherLabel,
                     buyItImageCallback: buyItImageCallback,
                     openEditScreen: openEditScreen,
                     isWelcomeScreenVisible: isWelcomeScreenVisible,
@@ -2204,7 +2026,13 @@ define("Coupons/Coupons.viewModel",
                     OnchangeDateDD: OnchangeDateDD,
                     CouponActiveMonth: CouponActiveMonth,
                     BranchLocationId: BranchLocationId,
-                    SaveAsDraft: SaveAsDraft
+                    SaveAsDraft: SaveAsDraft,
+                    handleBuyIt: handleBuyIt,
+                    templateToUsePriceOptions: templateToUsePriceOptions,
+                    onCreatePriceOption: onCreatePriceOption,
+                    onDeletePriceOption: onDeletePriceOption,
+                    selectedPriceOption: selectedPriceOption,
+                    selectPriceOption: selectPriceOption
                 };
             })()
         };

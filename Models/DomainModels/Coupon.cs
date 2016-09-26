@@ -88,6 +88,11 @@ namespace SMD.Models.DomainModels
         public Nullable<System.DateTime> CouponEndDate { get; set; }
         public Nullable<int> Priority { get; set; }
 
+
+        public Nullable<bool> ShowBuyitBtn { get; set; }
+        public string BuyitLandingPageUrl { get; set; }
+	    public string BuyitBtnLabel { get; set; }
+
         public virtual ICollection<CouponCategories> CouponCategories { get; set; }
 
         [NotMapped]
@@ -101,5 +106,7 @@ namespace SMD.Models.DomainModels
         public Nullable<System.DateTime> SubmissionDateTime { get; set; }
 
         public virtual ICollection<InvoiceDetail> InvoiceDetails { get; set; }
+
+        public virtual ICollection<CouponPriceOption> CouponPriceOptions { get; set; }
     }
 }

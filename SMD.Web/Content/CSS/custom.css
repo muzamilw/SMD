@@ -449,14 +449,14 @@ a.reportAnchor a:hover {
 
 }
    
-    .fa {
+    /*.fa {
     display: inline-block;
     font: normal normal normal 14px/1 FontAwesome;
     font-size: inherit;
     text-rendering: auto;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-}
+}*/
     .fa-remove:before, .fa-close:before, .fa-times:before {
     content: "\f00d";
 }
@@ -467,10 +467,10 @@ a.reportAnchor a:hover {
 .fa-trash-o:before {
     content: "\f014";
 }
-.fa-pencil-square-o {
+/*.fa-pencil-square-o {
         margin-right: 10px;
     margin-top: 8px;
-}
+}*/
     /*.fa-pencil {
         color:blue !important;
         background-color:transparent !important;  cursor:pointer;
@@ -511,7 +511,11 @@ a.reportAnchor a:hover {
 .bk-gray {
     background-color:#e7ebee;
 }
-   
+.requiredlabel:after {
+    content: "*"; /* Insert content that looks like bullets */
+    padding-left: 2px;
+    color: red; /* Or a color you prefer */
+}
 
 /*table tr:nth-child(even) td{
 }*/

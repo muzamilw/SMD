@@ -42,8 +42,35 @@ namespace SMD.MIS.Areas.Api.Controllers
         /// <summary>
         ///invite user
         /// </summary>
+        /// 
 
 
+        public BaseApiResponse Get(string email, int companyId, string mode)
+        {
+            try
+            {
+
+                if (mode == "business")
+                {
+                    emailManagerService.SendEmailInviteBusiness(email, companyId);
+                }
+                else if (mode == "advertiser")
+                {
+                    emailManagerService.SendEmailInviteAdvertiser(email, companyId);
+                }
+                return new BaseApiResponse { Message = "Success", Status = true };
+            }
+            catch (Exception ex)
+            {
+                return new BaseApiResponse { Message = ex.ToString(), Status = false };
+            }
+
+
+        }
+
+
+
+        //this one is used by  mobile app
         public BaseApiResponse Post(string email, int companyId, string mode)
         {
             try

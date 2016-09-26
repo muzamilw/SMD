@@ -26,7 +26,7 @@ namespace SMD.MIS.Areas.Api.Models
         public string BillingAddressLine2 { get; set; }
         public string BillingState { get; set; }
         public Nullable<int> BillingCountryId { get; set; }
-        public Nullable<int> BillingCityId { get; set; }
+        public string BillingCity { get; set; }
         public string BillingZipCode { get; set; }
         public string BillingPhone { get; set; }
         public string BillingEmail { get; set; }

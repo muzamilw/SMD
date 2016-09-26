@@ -3,6 +3,7 @@ using SMD.Interfaces.Repository;
 using SMD.Models.DomainModels;
 using SMD.Models.IdentityModels;
 using SMD.Models.RequestModels;
+using SMD.Models.ResponseModels;
 using SMD.Repository.BaseRepository;
 using System;
 using System.Collections.Generic;
@@ -104,7 +105,7 @@ namespace SMD.Repository.Repositories
               company.BillingAddressLine2= request.BillingAddressLine2;
               company.BillingState= request.BillingState;
               company.BillingCountryId= request.BillingCountryId;
-              company.BillingCityId= request.BillingCityId;
+              company.BillingCity= request.BillingCity;
               company.BillingZipCode= request.BillingZipCode;
               company.BillingPhone= request.BillingPhone;
               company.BillingEmail= request.BillingEmail;
@@ -132,6 +133,14 @@ namespace SMD.Repository.Repositories
         {
             return DbSet. Where(g => g.CompanyId == CompanyId).SingleOrDefault();
         }
+
+        public Company GetCompanyWithoutChilds()
+        {
+            db.Configuration.LazyLoadingEnabled = false;
+            return DbSet.FirstOrDefault(c => c.CompanyId == CompanyId);
+        }
+
+        
         #endregion
     }
 }

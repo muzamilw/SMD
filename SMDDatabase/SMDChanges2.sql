@@ -255,3 +255,508 @@ ADD ResponseType int default NULL
 
 --ResponseType = 3 // for referred to landing pages in UserPurchasedCoupon
 
+
+
+
+
+
+ALTER TABLE dbo.coupon
+	
+	alter column HighlightLine1 nvarchar(800) NULL
+ALTER TABLE dbo.coupon
+	alter column FinePrintLine1 nvarchar(800) NULL
+
+
+
+
+	ALTER TABLE dbo.coupon ADD
+	ShowBuyitBtn bit NULL,
+	BuyitLandingPageUrl nvarchar(500) NULL,
+	BuyitBtnLabel nvarchar(200) NULL
+
+
+
+
+
+
+
+
+
+	/* To prevent any potential data loss issues, you should review this script in detail before running it outside the context of the database designer.*/
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.AdCampaign SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.SurveyQuestionTargetCriteria ADD
+	QuizCampaignId bigint NULL,
+	QuizAnswerId int NULL
+GO
+ALTER TABLE dbo.SurveyQuestionTargetCriteria ADD CONSTRAINT
+	FK_SurveyQuestionTargetCriteria_AdCampaign FOREIGN KEY
+	(
+	QuizCampaignId
+	) REFERENCES dbo.AdCampaign
+	(
+	CampaignID
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+	
+GO
+ALTER TABLE dbo.SurveyQuestionTargetCriteria SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* To prevent any potential data loss issues, you should review this script in detail before running it outside the context of the database designer.*/
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.Coupon SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+BEGIN TRANSACTION
+GO
+CREATE TABLE dbo.CouponPriceOption
+	(
+	CouponPriceOptionId bigint NOT NULL IDENTITY (1, 1),
+	CouponId bigint NULL,
+	Description nvarchar(500) NULL,
+	Price float(53) NULL,
+	Savings float(53) NULL,
+	CoucherCode nvarchar(100) NULL,
+	OptionUrl nvarchar(500) NULL
+	)  ON [PRIMARY]
+GO
+ALTER TABLE dbo.CouponPriceOption ADD CONSTRAINT
+	PK_CouponPriceOption PRIMARY KEY CLUSTERED 
+	(
+	CouponPriceOptionId
+	) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+
+GO
+ALTER TABLE dbo.CouponPriceOption ADD CONSTRAINT
+	FK_CouponPriceOption_Coupon FOREIGN KEY
+	(
+	CouponId
+	) REFERENCES dbo.Coupon
+	(
+	CouponId
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+	
+GO
+ALTER TABLE dbo.CouponPriceOption SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+
+
+
+
+
+
+
+
+/* To prevent any potential data loss issues, you should review this script in detail before running it outside the context of the database designer.*/
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.Company
+	DROP CONSTRAINT FK_Company_City
+GO
+ALTER TABLE dbo.City SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.Company ADD
+	City nvarchar(200) NULL,
+	BillingCity nvarchar(200) NULL
+GO
+ALTER TABLE dbo.Company
+	DROP COLUMN CityId, BillingCityId
+GO
+ALTER TABLE dbo.Company SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+
+
+
+
+
+/* To prevent any potential data loss issues, you should review this script in detail before running it outside the context of the database designer.*/
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.Company ADD
+	AboutUsDescription nvarchar(MAX) NULL,
+	Status int NULL,
+	PaymentMethodStatus int NULL,
+	LastPaymentMethodErrorDate datetime NULL,
+	LastPaymentMethodError nvarchar(MAX) NULL
+GO
+ALTER TABLE dbo.Company SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+
+
+
+
+/* To prevent any potential data loss issues, you should review this script in detail before running it outside the context of the database designer.*/
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.AspNetUsers ADD
+	optDealsNearMeEmails bit NULL,
+	optLatestNewsEmails bit NULL,
+	optMarketingEmails bit NULL
+GO
+ALTER TABLE dbo.AspNetUsers SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+
+
+
+
+/* To prevent any potential data loss issues, you should review this script in detail before running it outside the context of the database designer.*/
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.Company ADD
+	CompanyRegNo nvarchar(100) NULL,
+	TaxRegNo nvarchar(100) NULL
+GO
+ALTER TABLE dbo.Company SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+
+
+
+
+
+
+
+
+/* To prevent any potential data loss issues, you should review this script in detail before running it outside the context of the database designer.*/
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.Company SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+BEGIN TRANSACTION
+GO
+CREATE TABLE dbo.PayOutHistory
+	(
+	PayOutId bigint NOT NULL IDENTITY (1, 1),
+	CompanyId int NULL,
+	RequestDateTime datetime NULL,
+	CentzAmount float(53) NULL,
+	DollarAmount float(53) NULL,
+	StageOneStatus bit NULL,
+	StageOneRejectionReason nvarchar(500) NULL,
+	StageOneEventDate datetime NULL,
+	StageOneUserId nvarchar(128) NULL,
+	StageTwoStatus bit NULL,
+	StageTwoRejectionReason nvarchar(500) NULL,
+	StageTwoEventDate datetime NULL,
+	StageTwoUserId nvarchar(128) NULL,
+	TargetPayoutAccount nvarchar(500) NULL
+	)  ON [PRIMARY]
+GO
+ALTER TABLE dbo.PayOutHistory ADD CONSTRAINT
+	PK_PayOutHistory PRIMARY KEY CLUSTERED 
+	(
+	PayOutId
+	) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+
+GO
+ALTER TABLE dbo.PayOutHistory ADD CONSTRAINT
+	FK_PayOutHistory_Company FOREIGN KEY
+	(
+	CompanyId
+	) REFERENCES dbo.Company
+	(
+	CompanyId
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+	
+GO
+ALTER TABLE dbo.PayOutHistory SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+
+
+
+
+
+/* To prevent any potential data loss issues, you should review this script in detail before running it outside the context of the database designer.*/
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+GO
+EXECUTE sp_rename N'dbo.City.CityID', N'Tmp_CityId', 'COLUMN' 
+GO
+EXECUTE sp_rename N'dbo.City.Tmp_CityId', N'CityId', 'COLUMN' 
+GO
+ALTER TABLE dbo.City SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+
+
+
+
+
+/* To prevent any potential data loss issues, you should review this script in detail before running it outside the context of the database designer.*/
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+GO
+EXECUTE sp_rename N'dbo.City.CountryID', N'Tmp_CountryId_4', 'COLUMN' 
+GO
+EXECUTE sp_rename N'dbo.City.Tmp_CountryId_4', N'CountryId', 'COLUMN' 
+GO
+ALTER TABLE dbo.City SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+
+
+
+
+
+
+/* To prevent any potential data loss issues, you should review this script in detail before running it outside the context of the database designer.*/
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+GO
+EXECUTE sp_rename N'dbo.CouponPriceOption.CoucherCode', N'Tmp_VoucherCode', 'COLUMN' 
+GO
+EXECUTE sp_rename N'dbo.CouponPriceOption.Tmp_VoucherCode', N'VoucherCode', 'COLUMN' 
+GO
+ALTER TABLE dbo.CouponPriceOption SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+
+
+
+
+
+
+
+
+/* To prevent any potential data loss issues, you should review this script in detail before running it outside the context of the database designer.*/
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.Currency SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.Country ADD
+	CurrencyID int NULL
+GO
+ALTER TABLE dbo.Country ADD CONSTRAINT
+	FK_Country_Currency FOREIGN KEY
+	(
+	CurrencyID
+	) REFERENCES dbo.Currency
+	(
+	CurrencyID
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+	
+GO
+ALTER TABLE dbo.Country SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+
+
+
+
+
+
+/****** Object:  View [dbo].[vw_Coupons]    Script Date: 9/26/2016 3:25:03 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+alter VIEW [dbo].[vw_Coupons]
+AS
+select a.*, ( select
+			stuff((
+					select ', ' + c1.Name
+					from [CouponCategories] l1 
+					left outer join CouponCategory c1 on l1.CategoryId = c1.CategoryId
+					
+					where l1.CouponId = l.CouponId
+					--order by c1.CountryName
+					for xml path('')
+				),1,1,'') as name_csv
+			from [dbo].[CouponCategories] l 
+			where CouponId = a.CouponId
+			group by l.CouponId  
+		)  Categories,
+		curr.CurrencyCode, curr.CurrencySymbol
+		 from Coupon a
+		left outer join Country cc on a.LocationCountryId = cc.CountryID
+		left outer join Currency curr on curr.CurrencyID = cc.CurrencyID
+
+GO
+
+
+
+
+/* To prevent any potential data loss issues, you should review this script in detail before running it outside the context of the database designer.*/
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.Company ADD
+	CreationDateTime datetime NULL,
+	NoOfBranches int NULL,
+	BillingAddressName nvarchar(150) NULL
+GO
+ALTER TABLE dbo.Company SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+
+
+
+
+
+
+/* To prevent any potential data loss issues, you should review this script in detail before running it outside the context of the database designer.*/
+BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.AspNetUsers ADD
+	PassportNo nvarchar(150) NULL
+GO
+ALTER TABLE dbo.AspNetUsers SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT

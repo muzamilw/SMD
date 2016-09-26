@@ -70,6 +70,12 @@ namespace SMD.MIS.Areas.Api.Models
         public string HowToRedeemLine4 { get; set; }
         public string HowToRedeemLine5 { get; set; }
 
+        public string Categories { get; set; }
+        public string CurrencyCode { get; set; }
+        public string CurrencySymbol { get; set; }
+        public string BuyitLandingPageUrl { get; set; }
+        public string BuyitBtnLabel { get; set; }
+
      
     }
     

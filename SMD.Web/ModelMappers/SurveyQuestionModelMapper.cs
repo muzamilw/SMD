@@ -231,7 +231,7 @@ namespace SMD.MIS.ModelMappers
             {
                 return new SMD.MIS.Areas.Api.Models.UserBaseData
                 {
-                    CityId = source.CityId,
+                    //CityId = source.CityId,
                     CountryId = source.CountryId,
                     LanguageId = source.LanguageId,
                     IndustryId = source.IndustryId,
@@ -338,8 +338,11 @@ namespace SMD.MIS.ModelMappers
                 modelCriteria.PqId = criteria.PqId;
                 modelCriteria.SqId = criteria.SqId;
                 modelCriteria.Type = criteria.Type;
+                modelCriteria.QuizAnswerId = criteria.QuizAnswerId;
+                modelCriteria.QuizCampaignId = criteria.QuizCampaignId;
                 modelCriteria.EducationId = criteria.EducationId;
-                if (criteria.Type == (int)SurveyQuestionTargetCriteriaType.ProfileQuestion)
+                
+                if (criteria.Type == (int)SurveyQuestionTargetCriteriaType.ProfileQuestion )
                 {
                     if (criteria.ProfileQuestion != null)
                     {
@@ -384,6 +387,15 @@ namespace SMD.MIS.ModelMappers
                     {
                         modelCriteria.Education = criteria.Education.Title;
                     }
+                } else if (criteria.Type == (int)SurveyQuestionTargetCriteriaType.UserProfileQuestion) {
+                    if (criteria.AdCampaign != null)
+                    {
+                        modelCriteria.questionString = criteria.AdCampaign.VerifyQuestion;
+                        if (criteria.QuizAnswerId == 1)
+                            modelCriteria.answerString = criteria.AdCampaign.Answer1;
+                        if (criteria.QuizAnswerId == 2)
+                            modelCriteria.answerString = criteria.AdCampaign.Answer2;
+                    }
                 }
                 result.Add(modelCriteria);
             }
@@ -400,8 +412,8 @@ namespace SMD.MIS.ModelMappers
                 if (location.City != null)
                 {
                     modelLocation.City = location.City.CityName;
-                    modelLocation.Latitude = location.City.GeoLat;
-                    modelLocation.Longitude = location.City.GeoLong;
+                    modelLocation.Latitude = location.City.GeoLAT;
+                    modelLocation.Longitude = location.City.GeoLONG;
                 }
                 if (location.Country != null)
                     modelLocation.Country = location.Country.CountryName;

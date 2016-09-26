@@ -12,6 +12,7 @@
     string CompanyLogo = companyClaimValues != null && companyClaimValues.Any() ? companyClaimValues.ElementAt(0).CompanyLogo : "Claim not found";
     string userName = companyClaimValues != null && companyClaimValues.Any() ? companyClaimValues.ElementAt(0).UserName : "Claim not found";
     string MobileNo = companyClaimValues != null && companyClaimValues.Any() ? companyClaimValues.ElementAt(0).MobileNumber : "Claim not found";
+    string CompanyID = companyClaimValues != null && companyClaimValues.Any() ? companyClaimValues.ElementAt(0).CompanyId.ToString() : "Claim not found";
     IEnumerable<SmdRoleClaimValue> roleClaim = ClaimHelper.GetClaimsByType<SmdRoleClaimValue>(SmdClaimTypes.Role);
     
     string RoleName = roleClaim != null && roleClaim.Any() ? roleClaim.ElementAt(0).Role : "Role Not Loaded";
@@ -50,6 +51,12 @@
         <script src="js/html5shiv.js"></script>
         <script src="js/respond.min.js"></script>
     <![endif]-->
+
+
+    <script>
+        var gCompanyID = @CompanyID;
+
+    </script>
 </head>
 <body class="theme-blue-gradient">
     <header class="navbar" id="header-navbar">
@@ -164,7 +171,7 @@
 
                                 <li><a href="">Role : @RoleName</a></li>
                                 <li id="userProfileBinding"><a data-bind="click:showUserProfileDialog">Personal Profile</a></li>
-                                <li id="companyProfileBinding"><a data-bind="click:showCompanyProfileDialog">Company Profile</a></li>
+                                <li id="companyProfileBinding"><a style="cursor: pointer" data-bind="click:showCompanyProfileDialog">Company Profile</a></li>
                                 <li><a href="/User/ManageUser/ManageUsers">Invite colleagues to manage campaigns</a></li>
 
                                 <li><a onclick="OpenBranchLocation();">Branch locations</a></li>
@@ -341,26 +348,32 @@
                         </div>
 
                         <div class="col-sm-4 hideInCoupons" style="padding-left:42px;margin-top:3px;">
+                            <div id="InviteUserBinding">
+                                <a class="btn btn-default btn-gray" data-bind="click:showInviteUserPopup" id="btninviteusers" style="  height:58px;  width: 136px;float:right;margin-right:0px;padding-top:17px">Invite users</a>
 
-                            @*<a class="btn btn-default btn-gray " id="btninviteusers" style="    width: 100px;float:right;margin-right:0px;" href="~/user/ManageUser/ManageUsers">Invite<br /> Users</a>*@
-                            @*<a class="btn btn-default btn-gray " href="~/ProfileQuestion/Manage/Index" id="btninviteusers" style=" width:136px;float:left;margin-right:20px;font-size:14px;padding-top:17px; height:58px;" href="#">Invite Business</a>*@
-                            <a class="btn btn-default btn-gray " id="btninviteusers" style=" width:136px;float:left;margin-right:0px;font-size:14px;height:58px;padding-top:17px" href="#">Wallet History</a>
-                            <br />
-                            <br />
-                            <br />
-                            
-                            <span style="color:#7f8c8d;font-size:13px;display:none;" id="MainSpan">Become a country partner 
-                            <a style="color:#7f8c8d;font-size:14px; color:#3498db; font-weight:bold;" href="mailto:partners@crowdcentz.com" >Email us </a></span>
-                            <div id="branchBinding" style="float: right;display:none;">
-                                <a class="btn btn-default btn-gray btnSmall" data-bind="click:showBranchDialoge" style="display:none;" href="#" id="btnBranchLocations">Branch Locations</a>
+                                </div>
+                                @*<a class="btn btn-default btn-gray " href="~/ProfileQuestion/Manage/Index" id="btninviteusers" style=" width:136px;float:left;margin-right:20px;font-size:14px;padding-top:17px; height:58px;" href="#">Invite Business</a>*@
+
+                            <a class="btn btn-default btn-gray " id="" style=" width:136px;float:left;margin-right:0px;font-size:14px;height:58px;padding-top:17px" href="~/Report/report/WalletReport">Wallet History</a>
+                                
+                                <br />
+                                <br />
+                                <br />
+
+                                <span style="color:#7f8c8d;font-size:13px;display:none;" id="MainSpan">
+                                    Become a country partner
+                                    <a style="color:#7f8c8d;font-size:14px; color:#3498db; font-weight:bold;" href="mailto:partners@crowdcentz.com">Email us </a>
+                                </span>
+                                <div id="branchBinding" style="float: right;display:none;">
+                                    <a class="btn btn-default btn-gray btnSmall" data-bind="click:showBranchDialoge" style="display:none;" href="#" id="btnBranchLocations">Branch Locations</a>
+                                </div>
+
+                                @*<a class="btn btn-default btn-gray btnSmall " id="btnDAM" style="    width: 100px;float:right" href="/DamImages/Grid" id="btnImageLibrary">Image Library</a>*@
+                                <div id="phraseLibraryBinding" style="float: right;display:none;">
+                                    <a class="btn btn-default btn-gray btnSmall" id="btnPhraseLibrary" style="display:none;" data-bind="click:showphraseLibraryDialog">Phrase Library</a>
+                                </div>
+
                             </div>
-
-                            @*<a class="btn btn-default btn-gray btnSmall " id="btnDAM" style="    width: 100px;float:right" href="/DamImages/Grid" id="btnImageLibrary">Image Library</a>*@
-                            <div id="phraseLibraryBinding" style="float: right;display:none;">
-                                <a class="btn btn-default btn-gray btnSmall" id="btnPhraseLibrary" style="display:none;" data-bind="click:showphraseLibraryDialog">Phrase Library</a>
-                            </div>
-
-                        </div>
                         
                         </div>
 
@@ -397,6 +410,12 @@
                 <div id="bindingCompanyProfilePartialViews">
                     @{
                         Html.RenderPartial("~/Areas/Common/Views/Shared/_companyProfile.cshtml");
+                    }
+                </div>
+
+                <div id="bindingInviteUserPartialViews">
+                    @{
+                        Html.RenderPartial("~/Areas/Common/Views/Shared/_InviteSharingUser.cshtml");
                     }
                 </div>
 
@@ -446,6 +465,7 @@
         require(["PhraseLibrary/phraseLibrary.view"]);
         require(["common/userProfile.view"]);
         require(["common/companyProfile.view"]);
+        require(["common/InviteUser.view"]);
       
         $(document).ready(function () {
             $("#make-small-nav").click(function () {
@@ -478,6 +498,10 @@
             $("#btnBranchLocations").click();
         }
     </script>
+
+  
+
+
     @RenderSection("scripts", required: false)
 </body>
 </html>

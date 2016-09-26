@@ -68,6 +68,30 @@ namespace SMD.Common
             return imageurl;
         }
 
+
+
+
+        public static string SaveImage(string mapPath, string existingImage, string caption, string fileName,
+            string fileSource, byte[] fileSourceBytes,int CompanyId, bool fileDeleted = false)
+        {
+            // return if no file specified
+            if (string.IsNullOrEmpty(fileSource) && !fileDeleted)
+            {
+                return null;
+            }
+
+           
+            string[] paths = existingImage.Split(new string[] { "SMD_Content" }, StringSplitOptions.None);
+            string url = HttpContext.Current.Server.MapPath("~/SMD_Content/" + paths[paths.Length - 1]);
+            string savePath = mapPath + "\\" +CompanyId+ ".png";
+            File.Copy(url, savePath, true);
+            int indexOf = savePath.LastIndexOf("SMD_Content", StringComparison.Ordinal);
+            savePath = savePath.Substring(indexOf, savePath.Length - indexOf);
+            return savePath;
+
+        }
+
+
         public static void GenerateThumbNail(string sourcefile, string destinationfile, int width)
         {
             System.Drawing.Image image = null;

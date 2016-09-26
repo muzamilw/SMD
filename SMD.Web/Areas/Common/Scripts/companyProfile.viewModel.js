@@ -17,12 +17,12 @@ define("common/companyProfile.viewModel",
                 countries = ko.observableArray([]),
                 // list of cities 
                 cities = ko.observableArray([]),
-
+                currentTab = ko.observable(1),
 
                  showCompanyProfileDialog = function () {
 
-                     view.showCompanyProfileDialog();
-                     getCompanyProfile();
+                    // view.showCompanyProfileDialog();
+                     getCompanyProfile(view.showCompanyProfileDialog);
                  },
                 //closing
                  onCloseCompanyProfileDialog = function () {
@@ -46,6 +46,7 @@ define("common/companyProfile.viewModel",
                              view.CloseCompanyProfileDialog();
                          });
                          confirmation.show();
+                         logoImage = '';
                      }
                      else {
 
@@ -59,7 +60,13 @@ define("common/companyProfile.viewModel",
             { Id: 3, Text: 'Instagram' },
             { Id: 4, Text: 'Pinterest' }
                 ]),
-                
+                genderList = ko.observableArray([{
+                    id: 1,
+                    name: 'Mr.'
+                }, {
+                    id: 2,
+                    name: 'MRs.'
+                }]),
                 //Update Profile
                 //Get Base Data for Questions
                 updateProfile = function () {
@@ -98,7 +105,7 @@ define("common/companyProfile.viewModel",
 
                 },
                 // Get User Profile For Editing 
-               getCompanyProfile = function () {
+               getCompanyProfile = function (callback) {
                    dataservice.getCompanyProfile(null,
                        {
                            success: function (companyProfile) {
@@ -113,15 +120,18 @@ define("common/companyProfile.viewModel",
                              
                                
                                 
-                               if (selectedCompany().FacebookHandle() != null) 
-                                   selectedCompany().selectedMedia('Facebook');
-                                   if(selectedCompany().TwitterHandle() != null)
-                                       selectedCompany().selectedMedia('Twitter');
-                                   if(selectedCompany().InstagramHandle() != null)
-                                       selectedCompany().selectedMedia('Instagram');
-                                   if(selectedCompany().PinterestHandle() != null)
-                                       selectedCompany().selectedMedia('Pinterest');
-                                   selectedCompany().reset();
+                               //if (selectedCompany().FacebookHandle() != null) 
+                               //    selectedCompany().selectedMedia('Facebook');
+                               //    if(selectedCompany().TwitterHandle() != null)
+                               //        selectedCompany().selectedMedia('Twitter');
+                               //    if(selectedCompany().InstagramHandle() != null)
+                               //        selectedCompany().selectedMedia('Instagram');
+                               //    if(selectedCompany().PinterestHandle() != null)
+                               //        selectedCompany().selectedMedia('Pinterest');
+                               selectedCompany().reset();
+                               if (callback && typeof callback === "function") {
+                                   callback();
+                               }
                            },
                            error: function () {
                                toastr.error("Failed to load User's Profile!");
@@ -151,7 +161,7 @@ define("common/companyProfile.viewModel",
                                 cities.valueHasMutated();
                             }
 
-
+                            randonNumber("?r=" + Math.floor(Math.random() * (20 - 1 + 1)) + 1);
 
                         },
                         error: function () {
@@ -164,9 +174,15 @@ define("common/companyProfile.viewModel",
                     if (selectedCompany() == undefined) {
                         return false;
                     }
-                    return (selectedCompany().hasChanges());
+                    if (selectedCompany().hasChanges() || logoImage != '')
+                        return true;
+                    else
+                        false;
+                   // return (selectedCompany().hasChanges());
                 }),
-
+                onTabChange = function(tabNo) {
+                    currentTab(tabNo);
+                },
                 
 
                 // Update Button handler
@@ -216,7 +232,10 @@ define("common/companyProfile.viewModel",
             showCompanyProfileDialog: showCompanyProfileDialog,
             onCloseCompanyProfileDialog: onCloseCompanyProfileDialog,
             socialMedia: socialMedia,
-            selectedMedia: selectedMedia
+            selectedMedia: selectedMedia,
+            currentTab: currentTab,
+            onTabChange: onTabChange,
+            genderList: genderList
         };
     })()
 };

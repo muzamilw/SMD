@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using SMD.Models.ResponseModels;
 
 namespace SMD.Implementation.Services
 {
@@ -19,15 +20,17 @@ namespace SMD.Implementation.Services
        #region Private
 
         private readonly ICompanyRepository companyRepository;
+        private readonly IManageUserRepository _manageUserRepository;
 
         #endregion 
         #region Constructor
         /// <summary>
         /// Constructor 
         /// </summary>
-        public CompanyService(ICompanyRepository companyRepository)
+        public CompanyService(ICompanyRepository companyRepository, IManageUserRepository managerUserRepository)
         {
             this.companyRepository = companyRepository;
+            this._manageUserRepository = managerUserRepository;
         }
 
         #endregion
@@ -59,17 +62,59 @@ namespace SMD.Implementation.Services
             return companyRepository.Find(companyRepository.CompanyId);
         }
 
+        public CompanyResponseModel GetCompanyDetails()
+        {
+            Company company = companyRepository.GetCompanyWithoutChilds();
+            User loginUser = _manageUserRepository.GetLoginUser();
+            return new CompanyResponseModel
+            {
+                CompanyId = company.CompanyId,
+                AboutUs = company.AboutUsDescription,
+                BillingAddressLine1 = company.BillingAddressLine1,
+                BillingAddressLine2 = company.BillingAddressLine2,
+                BillingBusinessName = company.CompanyName,
+                BillingCity = company.BillingCity,
+                BillingCountryId = company.BillingCountryId,
+                BillingEmail = company.BillingEmail,
+                BillingPhone = company.BillingPhone,
+                BillingState = company.BillingState,
+                BillingZipCode = company.BillingZipCode,
+                CompanyName = company.CompanyName,
+                CompanyRegistrationNo = company.CompanyRegNo,
+                CompanyType = company.CompanyType??0,
+                StripeCustomerId = company.StripeCustomerId,
+                PayPalId =  company.PaypalCustomerId,
+                FirstName = loginUser.FullName,
+                Email = loginUser.Email,
+                Solutation = loginUser.Gender == 1? 1 : 2,
+                Mobile = loginUser.Phone1,
+                DateOfBirth = loginUser.DOB,
+                IsReceiveDeals = loginUser.optDealsNearMeEmails??false,
+                IsReceiveLatestServices = loginUser.optLatestNewsEmails??false,
+                IsReceiveWeeklyUpdates = loginUser.optMarketingEmails??false,
+                Logo = company.Logo,
+                WebsiteLink = company.WebsiteLink,
+                SalesEmail = company.SalesEmail,
+                SalesPhone = company.Tel1,
+                VatNumber = company.TaxRegNo
+
+            };
+        }
+
+
 
 
         public bool UpdateCompany(Company company, byte[] LogoImageBytes)
         {
 
 
-           
-            
-            if (LogoImageBytes != null)
+
+
+            if (company.Logo != null && company.Logo!=string.Empty)
             {
+
                 var currentCompany = companyRepository.Find(companyRepository.CompanyId);
+
                 var logoUrl = UpdateCompanyProfileImage(company, LogoImageBytes, currentCompany.Logo);
 
                 companyRepository.updateCompanyLogo(logoUrl, companyRepository.CompanyId);
@@ -97,17 +142,9 @@ namespace SMD.Implementation.Services
                 Directory.CreateDirectory(mapPath);
             }
 
-            return  ImageHelper.Save(mapPath, existingFileName, string.Empty, string.Empty,
-                "blah", LogoImageBytes);
+            return ImageHelper.SaveImage(mapPath,request.Logo, string.Empty, string.Empty,
+                "blah", LogoImageBytes,request.CompanyId);
 
-
-             
-            ////string imgExt = Path.GetExtension(user.ProfileImage);
-            ////string sourcePath = HttpContext.Current.Server.MapPath("~/" + user.ProfileImage);
-            ////string[] results = sourcePath.Split(new string[] { imgExt }, StringSplitOptions.None);
-            ////string res = results[0];
-            ////string destPath = res + "_thumb" + imgExt;
-            ////ImageHelper.GenerateThumbNail(sourcePath, sourcePath, 200);
         }
         public Company GetCompanyForAddress()
         {

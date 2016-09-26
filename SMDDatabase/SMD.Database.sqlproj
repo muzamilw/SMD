@@ -65,6 +65,7 @@
     <None Include="SMDChanges2.sql" />
     <None Include="GetActiveVSNewUsers.sql" />
     <None Include="getApprovedCampaignsOverTime.sql" />
+    <None Include="SearchCoupons.sql" />
     <None Include="getActiveCampaignsOverTime.sql" />
   </ItemGroup>
   <ItemGroup>
