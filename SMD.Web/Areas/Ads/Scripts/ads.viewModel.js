@@ -384,8 +384,8 @@ define("ads/ads.viewModel",
                     $("#btnSubmitForApproval,#saveBtn,.table-link").css("display", "inline-block");
                     $("input,button,textarea,a,select,#btnCancel,#btnPauseCampaign,#btnStopAndTerminate,#btnCopyCampaign").removeAttr('disabled');
 
-                    $("#headlabel").css("display", "block");
-
+                    $("#headlabel, #Heading_div").css("display", "block");
+                   
                     $("#panelArea").css("display", "block");
                     //show the main menu;
                     showMainMenu();
