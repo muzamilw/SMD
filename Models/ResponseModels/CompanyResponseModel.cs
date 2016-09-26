@@ -37,7 +37,7 @@ namespace SMD.Models.ResponseModels
         public string Mobile { get; set; }
 
         public string PassportNumber { get; set; }
-        public DateTime DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
         public bool IsReceiveDeals { get; set; }
         public bool IsReceiveWeeklyUpdates { get; set; }
         public bool IsReceiveLatestServices { get; set; }
@@ -53,7 +53,6 @@ namespace SMD.Models.ResponseModels
         public string BillingBusinessName { get; set; }
         public string CompanyRegistrationNo { get; set; }
         public DateTime? BusinessStartDate { get; set; }
-        public string CreditCard { get; set; }
         public string VatNumber { get; set; }
         
         #endregion
