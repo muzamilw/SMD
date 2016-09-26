@@ -12,7 +12,7 @@ namespace SMD.Models.ResponseModels
         /// <summary>
         ///  Rejected Ad Campaigns List
         /// </summary>
-       public IEnumerable<Coupon> Coupons { get; set; }
+       public IEnumerable<vw_Coupons> Coupons { get; set; }
 
         /// <summary>
         /// Total Count of Ad Campaigns

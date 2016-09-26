@@ -21,10 +21,10 @@ namespace DomainModelProject
             this.SurveyQuestionTargetLocations = new HashSet<SurveyQuestionTargetLocation>();
         }
     
-        public int CityID { get; set; }
+        public int CityId { get; set; }
         public string CityName { get; set; }
         public Nullable<bool> IsCapital { get; set; }
-        public Nullable<int> CountryID { get; set; }
+        public Nullable<int> CountryId { get; set; }
         public string GeoLONG { get; set; }
         public string GeoLAT { get; set; }
     

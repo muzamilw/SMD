@@ -23,13 +23,14 @@ namespace DomainModelProject
             this.SurveyQuestionTargetLocations = new HashSet<SurveyQuestionTargetLocation>();
             this.Taxes = new HashSet<Tax>();
             this.ProfileQuestionTargetLocations = new HashSet<ProfileQuestionTargetLocation>();
-            this.Cities = new HashSet<City>();
             this.Companies = new HashSet<Company>();
+            this.Cities = new HashSet<City>();
         }
     
         public int CountryID { get; set; }
         public string CountryName { get; set; }
         public string CountryCode { get; set; }
+        public Nullable<int> CurrencyID { get; set; }
     
         public virtual ICollection<AdCampaignTargetLocation> AdCampaignTargetLocations { get; set; }
         public virtual ICollection<ProfileQuestionGroup> ProfileQuestionGroups { get; set; }
@@ -38,7 +39,8 @@ namespace DomainModelProject
         public virtual ICollection<SurveyQuestionTargetLocation> SurveyQuestionTargetLocations { get; set; }
         public virtual ICollection<Tax> Taxes { get; set; }
         public virtual ICollection<ProfileQuestionTargetLocation> ProfileQuestionTargetLocations { get; set; }
-        public virtual ICollection<City> Cities { get; set; }
         public virtual ICollection<Company> Companies { get; set; }
+        public virtual Currency Currency { get; set; }
+        public virtual ICollection<City> Cities { get; set; }
     }
 }
