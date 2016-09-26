@@ -15,5 +15,7 @@ namespace SMD.Models.DomainModels
         public string CurrencySymbol { get; set; }
 
         public virtual ICollection<Product> Products { get; set; }
+
+        public virtual ICollection<Country> Countries { get; set; }
     }
 }

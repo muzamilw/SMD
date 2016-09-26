@@ -40,7 +40,7 @@ namespace SMD.MIS.Areas.Api.Controllers
             var retobj = new AddCouponsResponseModelForApproval();
             foreach (var item in obj.Coupons)
             {
-                retobj.Coupons.Add(Mapper.Map<SMD.Models.DomainModels.Coupon, CouponsApproval>(item));
+                retobj.Coupons.Add(Mapper.Map<SMD.Models.DomainModels.vw_Coupons, CouponsApproval>(item));
             }
             retobj.TotalCount = obj.TotalCount;
             return retobj;

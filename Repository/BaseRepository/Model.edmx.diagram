@@ -154,6 +154,8 @@
         <AssociationConnector Association="DomainModels.FK_City_Country" />
         <AssociationConnector Association="DomainModels.FK_ProfileQuestionTargetLocation_City" />
         <AssociationConnector Association="DomainModels.FK_SurveyQuestionTargetLocation_City" />
+        <EntityTypeShape EntityType="DomainModels.vw_Coupons" Width="1.5" PointX="9.375" PointY="7.75" />
+        <AssociationConnector Association="DomainModels.FK_Country_Currency" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
