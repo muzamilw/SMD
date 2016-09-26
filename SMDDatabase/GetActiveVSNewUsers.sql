@@ -1,4 +1,8 @@
-﻿
+﻿-- updated on 26/9/2016
+
+USE [SMDv2]
+GO
+/****** Object:  StoredProcedure [dbo].[GetActiveVSNewUsers]    Script Date: 9/26/2016 1:38:45 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -8,73 +12,32 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-CREATE PROCEDURE GetActiveVSNewUsers 
+ALTER PROCEDURE [dbo].[GetActiveVSNewUsers] 
 	
 AS
 BEGIN
-	DECLARE @T1 TABLE (
-ActiveStats Bigint,
-Granual  VARCHAR(200)
-
-)
-
-
-insert into @T1 
-Select count(u.id) ActiveStats, '1 Day' Granual 
+	
+Select count(u.id) ActiveStats, (Select count(us.id) from AspNetUsers us where us.CreatedDateTime > getdate()-1) as NewStats, '1 Day' Granual
 from AspNetUsers u
 where u.LastLoginTime > getdate()-1
 union
-Select count(u.id) ActiveStats, '7 Days' Granual
+Select count(u.id) ActiveStats, (Select count(us.id) from AspNetUsers us where us.CreatedDateTime > getdate()-7) as NewStats, '7 Days' Granual
 from AspNetUsers u
 where u.LastLoginTime > getdate()-7
 union
-Select count(u.id) ActiveStats, '14 Days' Granual 
+Select count(u.id) ActiveStats, (Select count(us.id) from AspNetUsers us where us.CreatedDateTime > getdate()-14) as NewStats, '14 Days' Granual
 from AspNetUsers u
 where u.LastLoginTime > getdate()-14
 union
-Select count(u.id) ActiveStats, '1 Month' Granual 
+Select count(u.id) ActiveStats, (Select count(us.id) from AspNetUsers us where us.CreatedDateTime > getdate()-30) as NewStats, '1 Month' Granual 
 from AspNetUsers u
 where u.LastLoginTime > getdate()-30
 union
-Select count(u.id) ActiveStats, '3 Months' Granual 
+Select count(u.id) ActiveStats, (Select count(us.id) from AspNetUsers us where us.CreatedDateTime > getdate()-90) as NewStats, '3 Months' Granual 
 from AspNetUsers u
 where u.LastLoginTime > getdate()-90
 
 
-DECLARE @T2 TABLE (
-NewStats Bigint,
-Granual  VARCHAR(200)
-
-)
-
-
-insert into @T2 
-Select count(u.id) NewStats, '1 Day' Granual 
-from AspNetUsers u
-where u.CreatedDateTime > getdate()-1
-union
-Select count(u.id) NewStats, '7 Days' Granual
-from AspNetUsers u
-where u.CreatedDateTime > getdate()-7
-union
-Select count(u.id) NewStats, '14 Days' Granual 
-from AspNetUsers u
-where u.CreatedDateTime > getdate()-14
-union
-Select count(u.id) NewStats, '1 Month' Granual 
-from AspNetUsers u
-where u.CreatedDateTime > getdate()-30
-union
-Select count(u.id) NewStats, '3 Months' Granual 
-from AspNetUsers u
-where u.CreatedDateTime > getdate()-90
-
-
-select t.ActiveStats, t2.* from  @T1 t
-inner join @T2 t2 on t.Granual = t2.Granual
-
- 
 END
-GO
 
 --EXEC GetActiveVSNewUsers
