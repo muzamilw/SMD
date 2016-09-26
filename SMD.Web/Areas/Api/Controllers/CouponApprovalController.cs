@@ -35,7 +35,7 @@ namespace SMD.MIS.Areas.Api.Controllers
         public AddCouponsResponseModelForApproval Get([FromUri]GetPagedListRequest request)
         {
 
-            Mapper.Initialize(cfg => cfg.CreateMap<SMD.Models.DomainModels.Coupon, CouponsApproval>());
+            Mapper.Initialize(cfg => cfg.CreateMap<SMD.Models.DomainModels.vw_Coupons, CouponsApproval>());
             var obj = _couponService.GetAdCampaignForAproval(request);
             var retobj = new AddCouponsResponseModelForApproval();
             foreach (var item in obj.Coupons)
