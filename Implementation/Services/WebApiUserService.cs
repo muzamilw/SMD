@@ -1518,10 +1518,11 @@ namespace SMD.Implementation.Services
         /// </summary>
         public UserProfileBaseResponseModel GetBaseDataForUserProfile()
         {
+            Company company = companyRepository.GetCompanyById();
             return new UserProfileBaseResponseModel
             {
                Countries = countryRepository.GetAllCountries().ToList(),
-               Cities =cityRepository.GetAllCities().ToList(),
+               Cities = company != null? cityRepository.GetAllCitiesOfCountry(company.BillingCountryId??0).ToList(): null,
                Industries = industryRepository.GetAll().ToList(),
                Educations = educationRepository.GetAllEducations().ToList(),
                UserRoles = this.RoleManager.Roles.Where(g => g.Id.StartsWith("EndUser")).ToList() //   manageUserRepository.getUserRoles().ToList()

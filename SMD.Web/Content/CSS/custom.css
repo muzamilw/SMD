@@ -511,7 +511,11 @@ a.reportAnchor a:hover {
 .bk-gray {
     background-color:#e7ebee;
 }
-   
+.requiredlabel:after {
+    content: "*"; /* Insert content that looks like bullets */
+    padding-left: 2px;
+    color: red; /* Or a color you prefer */
+}
 
 /*table tr:nth-child(even) td{
 }*/
