@@ -884,6 +884,7 @@ define("Coupons/Coupons.viewModel",
                         //if upgrading to paid mode and mode is otehr than draft
                         if (item == 2 && couponModel().Status() != 1) {
                             IsSubmitBtnVisible(true);
+                            IsResumeBtnVisible(false);
                         }
                     }
 
