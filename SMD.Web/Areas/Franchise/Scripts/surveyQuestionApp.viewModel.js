@@ -54,9 +54,13 @@ define("FranchiseDashboard/surveyQuestionApp.viewModel",
                         //confirmation.show();
                         selectedQuestion(undefined);
                         isEditorVisible(false);
+                        $("#topArea").css("display", "block");
+                        $("#divApprove").css("display", "block");
                     },
                     // On editing of existing PQ
                     onEditQuestion = function (item) {
+                        $("#topArea").css("display", "none");
+                        $("#divApprove").css("display", "none");
                         selectedQuestion(item);
                         isEditorVisible(true);
                     },

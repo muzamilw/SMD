@@ -30,11 +30,11 @@
                         <div class="tab-content">
                             <div class="tab-pane fade in active" data-bind="with: $root.selectedCampaign" id="tab-generalinfo">
                                 <div class="col-lg-12 form-horizontal">
-                                    <h3 class="group-header" style="margin-top:20px;" data-bind="visible:!$root.isShowCopounMode()">
-                                        Vidio ad campaign
+                                    <h3 class="group-header" style="margin-top:20px;" data-bind="visible:type()==1">
+                                   Approve - Reject Vidio Ads
                                     </h3>
-                                    <h3 class="group-header" style="margin-top:20px;" data-bind="visible:$root.isShowCopounMode()">
-                                        Coupon General Info
+                                    <h3 class="group-header" style="margin-top:20px;" data-bind="visible:type()==4">
+                                        Approve - Reject Display Ads
                                     </h3>
                                     <div class="col-lg-9">
                                         <div class="form-group">
@@ -257,8 +257,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-9" data-bind="visible:type()==1">
-                                        <div class="form-group">
+                                    <div class="col-lg-9" >
+                                        <div class="form-group" data-bind="visible:type()==1">
                                             <div class="col-lg-4 text-right">
 
                                                 <label class="control-label text-right tooltip-float"></label>
