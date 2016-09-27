@@ -52,6 +52,8 @@ define("Coupons/Coupons.viewModel",
                     IsPauseBtnVisible = ko.observable(false),
                     IsResumeBtnVisible = ko.observable(false),
 
+                    IsRejectionReasonVisible = ko.observable(false),
+
                     CurrencyDropDown = ko.observableArray([{ id: 1, name: "Choice 1" }, { id: 2, name: "Choice 2" }, { id: 3, name: "Choice 3" }, { id: 0, name: "Ask User Suggestion" }]),
                     YearRangeDropDown = ko.observableArray([]),
                     selectedIndustryIncludeExclude = ko.observable(true),
@@ -159,7 +161,7 @@ define("Coupons/Coupons.viewModel",
                     }, {
                         success: function (data) {
                             if (data != null) {
-                                console.log(data);
+                                
                                 branchLocations([]);
                                 ko.utils.arrayPushAll(branchLocations(), data.listBranches);
                                 branchLocations.valueHasMutated();
@@ -180,7 +182,7 @@ define("Coupons/Coupons.viewModel",
                 }, {
                     success: function (data) {
                         if (data != null) {
-                            console.log(data);
+                            
                             branchLocations([]);
                             ko.utils.arrayPushAll(branchLocations(), data.listBranches);
                             branchLocations.valueHasMutated();
@@ -679,15 +681,16 @@ define("Coupons/Coupons.viewModel",
                     EditorLoading(true);
                     //resetting flags
                     IsSubmitBtnVisible(false);
-
+                    IsRejectionReasonVisible(false);
+                    buyItQuestionLabelStatus(false);
+                    isTerminateBtnVisible(false);
+                    isNewCampaignVisible(false);
+                    isShowArchiveBtn(false);
 
                     //hide the main menu;
                     collapseMainMenu();
 
                     previewScreenNumber(1);
-                    isTerminateBtnVisible(false);
-                    isNewCampaignVisible(false);
-                    isShowArchiveBtn(false);
                     CouponTitle(item.CouponTitle());
                     
                     $(".hideInCoupons").css("display", "none");
@@ -698,7 +701,7 @@ define("Coupons/Coupons.viewModel",
                     $("#panelArea").css("display", "none");
 
                     $("#Heading_div").css("display", "none");
-                    if (item.Status() == 1 || item.Status() == 2 || item.Status() == 3 || item.Status() == 4 || item.Status() == null || item.Status() == 7 || item.Status() == 9) {
+                    if (item.Status() == 1 || item.Status() == 2 || item.Status() == 3 || item.Status() == 4 || item.Status() == 6 || item.Status() == 7 || item.Status() == 9) {
                        
                         dataservice.getCampaignData({
                             CampaignId: item.CouponId(),
@@ -761,6 +764,7 @@ define("Coupons/Coupons.viewModel",
                                         couponModel().StatusValue("Approval Rejected");
                                         $("#btnCancel").css("display", "block");
                                         IsSubmitBtnVisible(true);
+                                        IsRejectionReasonVisible(true);
                                     } else if (couponModel().Status() == 7) {
                                         couponModel().StatusValue("Terminated by user");
                                         $("input,button,textarea,a,select").attr('disabled', 'disabled'); // disable all controls 
@@ -814,7 +818,7 @@ define("Coupons/Coupons.viewModel",
                                     });
 
 
-                                    var arrayOfUpdatedList = couponCategories().clone();
+                                    var arrayOfUpdatedList = couponCategories().slice(0);
                                     couponCategories.removeAll();
                                     ko.utils.arrayPushAll(couponCategories(), arrayOfUpdatedList);
                                     couponCategories.valueHasMutated();
@@ -1566,7 +1570,7 @@ define("Coupons/Coupons.viewModel",
                 },
                 removeSelectedCouponCodeItem = function (item) {
 
-                    //console.log(allCouponCodeItems().remove(item.Code()));
+                    
                     allCouponCodeItems.removeAll();
                     selectedCouponCodeItems([]); // Clear selection
 
@@ -1575,7 +1579,7 @@ define("Coupons/Coupons.viewModel",
 
                         allCouponCodeItems.push(cc.Code);
                     });
-                    console.log(allCouponCodeItems());
+                    
                     couponModel().CouponQuantity(allCouponCodeItems().length);
                 },
                 addVoucherClickRate = function () {
@@ -1673,7 +1677,7 @@ define("Coupons/Coupons.viewModel",
                         return arrayitem.BranchId == item.LocationBranchId();
                     });
 
-                    //console.log(matchedItem);
+                    
 
 
                     if (matchedItem != null) {
@@ -1694,7 +1698,7 @@ define("Coupons/Coupons.viewModel",
 
                         return arrayitem.BranchId == val;
                     });
-                    console.log(matchedItem);
+                    
                     if (matchedItem != null) {
                         item.LocationLine1(matchedItem.BranchAddressLine1);
                         item.LocationLine2(matchedItem.BranchAddressLine2);
@@ -1799,7 +1803,7 @@ define("Coupons/Coupons.viewModel",
                     }, {
                         success: function (data) {
                             if (data != null) {
-                                console.log(data);
+                                
                                 branchLocations([]);
                                 ko.utils.arrayPushAll(branchLocations(), data.listBranches);
                                 branchLocations.valueHasMutated();
@@ -1955,7 +1959,8 @@ define("Coupons/Coupons.viewModel",
                     isTerminateBtnVisible: isTerminateBtnVisible,
                     IsCopyBtnVisible : IsCopyBtnVisible,
                     IsPauseBtnVisible : IsPauseBtnVisible,
-                    IsResumeBtnVisible : IsResumeBtnVisible,
+                    IsResumeBtnVisible: IsResumeBtnVisible,
+                    IsRejectionReasonVisible:IsRejectionReasonVisible,
                     isNewCampaignVisible: isNewCampaignVisible,
                     isShowArchiveBtn: isShowArchiveBtn,
                     submitCampaignData: submitCampaignData,
