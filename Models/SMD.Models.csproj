@@ -188,6 +188,7 @@
     <Compile Include="DomainModels\TransactionLog.cs" />
     <Compile Include="DomainModels\UserFavouriteCoupon.cs" />
     <Compile Include="DomainModels\vw_Cash4AdsReport.cs" />
+    <Compile Include="DomainModels\vw_Coupons.cs" />
     <Compile Include="DomainModels\vw_GetUserTransactions.cs" />
     <Compile Include="DomainModels\vw_PublisherTransaction.cs" />
     <Compile Include="IdentityModels\Role.cs" />
@@ -247,6 +248,7 @@
     <Compile Include="ResponseModels\AdCampaignResposneModelForAproval.cs" />
     <Compile Include="ResponseModels\AdCampaignApiSearchRequestResponse.cs" />
     <Compile Include="ResponseModels\BaseApiResponse.cs" />
+    <Compile Include="ResponseModels\CompanyResponseModel.cs" />
     <Compile Include="ResponseModels\CouponsResponseModelForApproval.cs" />
     <Compile Include="ResponseModels\RandomGameResponse.cs" />
     <Compile Include="ResponseModels\ProfileQuestionResponseModelForApproval.cs" />

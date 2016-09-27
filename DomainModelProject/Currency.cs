@@ -17,6 +17,7 @@ namespace DomainModelProject
         public Currency()
         {
             this.Products = new HashSet<Product>();
+            this.Countries = new HashSet<Country>();
         }
     
         public int CurrencyID { get; set; }
@@ -26,5 +27,6 @@ namespace DomainModelProject
         public string CurrencySymbol { get; set; }
     
         public virtual ICollection<Product> Products { get; set; }
+        public virtual ICollection<Country> Countries { get; set; }
     }
 }

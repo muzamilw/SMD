@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySetsC8870335411148B9EA06FA2B086A41D88CBDB3CDC7810691079D4BF94A920803))]
+[assembly: System.Data.Mapping.EntityViewGenerationAttribute(typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySetsF20880E2BA981250289E7DA379A32672CB9732CC8FC4619023A857047ADE1165))]
 
 namespace Edm_EntityMappingGeneratedViews
 {
@@ -17,19 +17,19 @@ namespace Edm_EntityMappingGeneratedViews
     /// <Summary>
     /// The type contains views for EntitySets and AssociationSets that were generated at design time.
     /// </Summary>
-    public sealed class ViewsForBaseEntitySetsC8870335411148B9EA06FA2B086A41D88CBDB3CDC7810691079D4BF94A920803 : System.Data.Mapping.EntityViewContainer
+    public sealed class ViewsForBaseEntitySetsF20880E2BA981250289E7DA379A32672CB9732CC8FC4619023A857047ADE1165 : System.Data.Mapping.EntityViewContainer
     {
         
         /// <Summary>
         /// The constructor stores the views for the extents and also the hash values generated based on the metadata and mapping closure and views.
         /// </Summary>
-        public ViewsForBaseEntitySetsC8870335411148B9EA06FA2B086A41D88CBDB3CDC7810691079D4BF94A920803()
+        public ViewsForBaseEntitySetsF20880E2BA981250289E7DA379A32672CB9732CC8FC4619023A857047ADE1165()
         {
             this.EdmEntityContainerName = "BaseDbContext";
             this.StoreEntityContainerName = "SMDModelStoreContainer";
-            this.HashOverMappingClosure = "02d63e9c13b56053c23f0cf02cd8f3ae02173b1a57cac8441771e8f673c0fd17";
-            this.HashOverAllExtentViews = "9b3cf0e67f93c0427dbb3b4ac95637852aca4389e14567f9857029b3ff0fbe01";
-            this.ViewCount = 114;
+            this.HashOverMappingClosure = "29f98b51c2c3f218fc643bb44b11ba5646836e083cae3b762544a9d5820e5dc4";
+            this.HashOverAllExtentViews = "10df4f430dcba23dc6970bcb81ed4720afc4b38084616abe7a090e4f589eb7c6";
+            this.ViewCount = 116;
         }
         
         /// <Summary>
@@ -493,6 +493,14 @@ namespace Edm_EntityMappingGeneratedViews
             {
                 return GetView113();
             }
+            if ((index == 114))
+            {
+                return GetView114();
+            }
+            if ((index == 115))
+            {
+                return GetView115();
+            }
             throw new System.IndexOutOfRangeException();
         }
         
@@ -653,12 +661,13 @@ namespace Edm_EntityMappingGeneratedViews
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.Country", @"
     SELECT VALUE -- Constructing Country
-        [SMDModel.Store.Country](T1.Country_CountryID, T1.Country_CountryName, T1.Country_CountryCode)
+        [SMDModel.Store.Country](T1.Country_CountryID, T1.Country_CountryName, T1.Country_CountryCode, T1.Country_CurrencyID)
     FROM (
         SELECT 
             T.CountryId AS Country_CountryID, 
             T.CountryName AS Country_CountryName, 
             T.CountryCode AS Country_CountryCode, 
+            T.CurrencyID AS Country_CurrencyID, 
             True AS _from0
         FROM BaseDbContext.Countries AS T
     ) AS T1");
@@ -1098,7 +1107,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// </Summary>
         private System.Collections.Generic.KeyValuePair<string, string> GetView24()
         {
-            System.Text.StringBuilder viewString = new System.Text.StringBuilder(3742);
+            System.Text.StringBuilder viewString = new System.Text.StringBuilder(3823);
             viewString.Append("\r\n    SELECT VALUE -- Constructing AspNetUsers\r\n        [SMDModel.Store.AspNetUs");
             viewString.Append("ers](T1.AspNetUsers_Id, T1.AspNetUsers_Email, T1.AspNetUsers_EmailConfirmed, T1.");
             viewString.Append("AspNetUsers_PasswordHash, T1.AspNetUsers_SecurityStamp, T1.AspNetUsers_PhoneNumb");
@@ -1114,38 +1123,39 @@ namespace Edm_EntityMappingGeneratedViews
             viewString.Append("ileImage, T1.AspNetUsers_UserCode, T1.AspNetUsers_SmsCode, T1.AspNetUsers_Websit");
             viewString.Append("eLink, T1.AspNetUsers_DOB, T1.AspNetUsers_CompanyId, T1.AspNetUsers_authenticati");
             viewString.Append("onToken, T1.AspNetUsers_DevicePlatform, T1.AspNetUsers_optDealsNearMeEmails, T1.");
-            viewString.Append("AspNetUsers_optLatestNewsEmails, T1.AspNetUsers_optMarketingEmails)\r\n    FROM (\r");
-            viewString.Append("\n        SELECT \r\n            T.Id AS AspNetUsers_Id, \r\n            T.Email AS A");
-            viewString.Append("spNetUsers_Email, \r\n            T.EmailConfirmed AS AspNetUsers_EmailConfirmed, ");
-            viewString.Append("\r\n            T.PasswordHash AS AspNetUsers_PasswordHash, \r\n            T.Securi");
-            viewString.Append("tyStamp AS AspNetUsers_SecurityStamp, \r\n            T.PhoneNumberConfirmed AS As");
-            viewString.Append("pNetUsers_PhoneNumberConfirmed, \r\n            T.TwoFactorEnabled AS AspNetUsers_");
-            viewString.Append("TwoFactorEnabled, \r\n            T.LockoutEndDateUtc AS AspNetUsers_LockoutEndDat");
-            viewString.Append("eUtc, \r\n            T.LockoutEnabled AS AspNetUsers_LockoutEnabled, \r\n          ");
-            viewString.Append("  T.AccessFailedCount AS AspNetUsers_AccessFailedCount, \r\n            T.UserName");
-            viewString.Append(" AS AspNetUsers_UserName, \r\n            T.FullName AS AspNetUsers_FullName, \r\n  ");
-            viewString.Append("          T.AlternateEmail AS AspNetUsers_AlternateEmail, \r\n            T.IsEmai");
-            viewString.Append("lVerified AS AspNetUsers_IsEmailVerified, \r\n            T.Status AS AspNetUsers_");
-            viewString.Append("Status, \r\n            T.CreatedDateTime AS AspNetUsers_CreatedDateTime, \r\n      ");
-            viewString.Append("      T.ModifiedDateTime AS AspNetUsers_ModifiedDateTime, \r\n            T.LastLo");
-            viewString.Append("ginTime AS AspNetUsers_LastLoginTime, \r\n            T.Phone1 AS AspNetUsers_Phon");
-            viewString.Append("e1, \r\n            T.Phone2 AS AspNetUsers_Phone2, \r\n            T.Jobtitle AS As");
-            viewString.Append("pNetUsers_Jobtitle, \r\n            T.ContactNotes AS AspNetUsers_ContactNotes, \r\n");
-            viewString.Append("            T.IsSubscribed AS AspNetUsers_IsSubscribed, \r\n            T.AppID AS");
-            viewString.Append(" AspNetUsers_AppID, \r\n            T.IsCompanyRepresentative AS AspNetUsers_IsCom");
-            viewString.Append("panyRepresentative, \r\n            T.UserTimeZone AS AspNetUsers_UserTimeZone, \r\n");
-            viewString.Append("            T.Gender AS AspNetUsers_Gender, \r\n            T.LanguageId AS AspNet");
-            viewString.Append("Users_LanguageID, \r\n            T.IndustryId AS AspNetUsers_IndustryID, \r\n      ");
-            viewString.Append("      T.EducationId AS AspNetUsers_EducationId, \r\n            T.ProfileImage AS ");
-            viewString.Append("AspNetUsers_ProfileImage, \r\n            T.UserCode AS AspNetUsers_UserCode, \r\n  ");
-            viewString.Append("          T.SmsCode AS AspNetUsers_SmsCode, \r\n            T.WebsiteLink AS AspNe");
-            viewString.Append("tUsers_WebsiteLink, \r\n            T.DOB AS AspNetUsers_DOB, \r\n            T.Comp");
-            viewString.Append("anyId AS AspNetUsers_CompanyId, \r\n            T.AuthenticationToken AS AspNetUse");
-            viewString.Append("rs_authenticationToken, \r\n            T.DevicePlatform AS AspNetUsers_DevicePlat");
-            viewString.Append("form, \r\n            T.optDealsNearMeEmails AS AspNetUsers_optDealsNearMeEmails, ");
-            viewString.Append("\r\n            T.optLatestNewsEmails AS AspNetUsers_optLatestNewsEmails, \r\n      ");
-            viewString.Append("      T.optMarketingEmails AS AspNetUsers_optMarketingEmails, \r\n            True");
-            viewString.Append(" AS _from0\r\n        FROM BaseDbContext.Users AS T\r\n    ) AS T1");
+            viewString.Append("AspNetUsers_optLatestNewsEmails, T1.AspNetUsers_optMarketingEmails, T1.AspNetUse");
+            viewString.Append("rs_PassportNo)\r\n    FROM (\r\n        SELECT \r\n            T.Id AS AspNetUsers_Id,");
+            viewString.Append(" \r\n            T.Email AS AspNetUsers_Email, \r\n            T.EmailConfirmed AS A");
+            viewString.Append("spNetUsers_EmailConfirmed, \r\n            T.PasswordHash AS AspNetUsers_PasswordH");
+            viewString.Append("ash, \r\n            T.SecurityStamp AS AspNetUsers_SecurityStamp, \r\n            T");
+            viewString.Append(".PhoneNumberConfirmed AS AspNetUsers_PhoneNumberConfirmed, \r\n            T.TwoFa");
+            viewString.Append("ctorEnabled AS AspNetUsers_TwoFactorEnabled, \r\n            T.LockoutEndDateUtc A");
+            viewString.Append("S AspNetUsers_LockoutEndDateUtc, \r\n            T.LockoutEnabled AS AspNetUsers_L");
+            viewString.Append("ockoutEnabled, \r\n            T.AccessFailedCount AS AspNetUsers_AccessFailedCoun");
+            viewString.Append("t, \r\n            T.UserName AS AspNetUsers_UserName, \r\n            T.FullName AS");
+            viewString.Append(" AspNetUsers_FullName, \r\n            T.AlternateEmail AS AspNetUsers_AlternateEm");
+            viewString.Append("ail, \r\n            T.IsEmailVerified AS AspNetUsers_IsEmailVerified, \r\n         ");
+            viewString.Append("   T.Status AS AspNetUsers_Status, \r\n            T.CreatedDateTime AS AspNetUser");
+            viewString.Append("s_CreatedDateTime, \r\n            T.ModifiedDateTime AS AspNetUsers_ModifiedDateT");
+            viewString.Append("ime, \r\n            T.LastLoginTime AS AspNetUsers_LastLoginTime, \r\n            T");
+            viewString.Append(".Phone1 AS AspNetUsers_Phone1, \r\n            T.Phone2 AS AspNetUsers_Phone2, \r\n ");
+            viewString.Append("           T.Jobtitle AS AspNetUsers_Jobtitle, \r\n            T.ContactNotes AS A");
+            viewString.Append("spNetUsers_ContactNotes, \r\n            T.IsSubscribed AS AspNetUsers_IsSubscribe");
+            viewString.Append("d, \r\n            T.AppID AS AspNetUsers_AppID, \r\n            T.IsCompanyRepresen");
+            viewString.Append("tative AS AspNetUsers_IsCompanyRepresentative, \r\n            T.UserTimeZone AS A");
+            viewString.Append("spNetUsers_UserTimeZone, \r\n            T.Gender AS AspNetUsers_Gender, \r\n       ");
+            viewString.Append("     T.LanguageId AS AspNetUsers_LanguageID, \r\n            T.IndustryId AS AspNe");
+            viewString.Append("tUsers_IndustryID, \r\n            T.EducationId AS AspNetUsers_EducationId, \r\n   ");
+            viewString.Append("         T.ProfileImage AS AspNetUsers_ProfileImage, \r\n            T.UserCode AS");
+            viewString.Append(" AspNetUsers_UserCode, \r\n            T.SmsCode AS AspNetUsers_SmsCode, \r\n       ");
+            viewString.Append("     T.WebsiteLink AS AspNetUsers_WebsiteLink, \r\n            T.DOB AS AspNetUser");
+            viewString.Append("s_DOB, \r\n            T.CompanyId AS AspNetUsers_CompanyId, \r\n            T.Authe");
+            viewString.Append("nticationToken AS AspNetUsers_authenticationToken, \r\n            T.DevicePlatfor");
+            viewString.Append("m AS AspNetUsers_DevicePlatform, \r\n            T.optDealsNearMeEmails AS AspNetU");
+            viewString.Append("sers_optDealsNearMeEmails, \r\n            T.optLatestNewsEmails AS AspNetUsers_op");
+            viewString.Append("tLatestNewsEmails, \r\n            T.optMarketingEmails AS AspNetUsers_optMarketin");
+            viewString.Append("gEmails, \r\n            T.PassportNo AS AspNetUsers_PassportNo, \r\n            Tru");
+            viewString.Append("e AS _from0\r\n        FROM BaseDbContext.Users AS T\r\n    ) AS T1");
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.AspNetUsers", viewString.ToString());
         }
         
@@ -1667,7 +1677,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// </Summary>
         private System.Collections.Generic.KeyValuePair<string, string> GetView40()
         {
-            System.Text.StringBuilder viewString = new System.Text.StringBuilder(3915);
+            System.Text.StringBuilder viewString = new System.Text.StringBuilder(4182);
             viewString.Append("\r\n    SELECT VALUE -- Constructing Company\r\n        [SMDModel.Store.Company](T1.");
             viewString.Append("Company_CompanyId, T1.Company_CompanyName, T1.Company_ReplyEmail, T1.Company_Tel");
             viewString.Append("1, T1.Company_Tel2, T1.Company_AddressLine1, T1.Company_AddressLine2, T1.Company");
@@ -1683,40 +1693,44 @@ namespace Edm_EntityMappingGeneratedViews
             viewString.Append("1.Company_PinterestHandle, T1.Company_VoucherSecretKey, T1.Company_City, T1.Comp");
             viewString.Append("any_BillingCity, T1.Company_AboutUsDescription, T1.Company_Status, T1.Company_Pa");
             viewString.Append("ymentMethodStatus, T1.Company_LastPaymentMethodErrorDate, T1.Company_LastPayment");
-            viewString.Append("MethodError, T1.Company_CompanyRegNo, T1.Company_TaxRegNo)\r\n    FROM (\r\n        ");
-            viewString.Append("SELECT \r\n            T.CompanyId AS Company_CompanyId, \r\n            T.CompanyNa");
-            viewString.Append("me AS Company_CompanyName, \r\n            T.ReplyEmail AS Company_ReplyEmail, \r\n ");
-            viewString.Append("           T.Tel1 AS Company_Tel1, \r\n            T.Tel2 AS Company_Tel2, \r\n     ");
-            viewString.Append("       T.AddressLine1 AS Company_AddressLine1, \r\n            T.AddressLine2 AS C");
-            viewString.Append("ompany_AddressLine2, \r\n            T.State AS Company_State, \r\n            T.Cou");
-            viewString.Append("ntryId AS Company_CountryId, \r\n            T.ZipCode AS Company_ZipCode, \r\n     ");
-            viewString.Append("       T.TimeZone AS Company_TimeZone, \r\n            T.Logo AS Company_Logo, \r\n ");
-            viewString.Append("           T.StripeCustomerId AS Company_StripeCustomerId, \r\n            T.Charg");
-            viewString.Append("eBeesubscriptionID AS Company_ChargeBeesubscriptionID, \r\n            T.Registere");
-            viewString.Append("dViaReferral AS Company_RegisteredViaReferral, \r\n            T.ReferringCompanyI");
-            viewString.Append("D AS Company_ReferringCompanyID, \r\n            T.PaypalCustomerId AS Company_Pay");
-            viewString.Append("palCustomerId, \r\n            T.GoogleWalletCustomerId AS Company_GoogleWalletCus");
-            viewString.Append("tomerId, \r\n            T.PreferredPayoutAccount AS Company_PreferredPayoutAccoun");
-            viewString.Append("t, \r\n            T.SalesEmail AS Company_SalesEmail, \r\n            T.ReferralCod");
-            viewString.Append("e AS Company_ReferralCode, \r\n            T.AfilliatianStatus AS Company_Afilliat");
-            viewString.Append("ianStatus, \r\n            T.WebsiteLink AS Company_WebsiteLink, \r\n            T.C");
-            viewString.Append("ompanyType AS Company_CompanyType, \r\n            T.BillingAddressLine1 AS Compan");
-            viewString.Append("y_BillingAddressLine1, \r\n            T.BillingAddressLine2 AS Company_BillingAdd");
-            viewString.Append("ressLine2, \r\n            T.BillingState AS Company_BillingState, \r\n            T");
-            viewString.Append(".BillingCountryId AS Company_BillingCountryId, \r\n            T.BillingZipCode AS");
-            viewString.Append(" Company_BillingZipCode, \r\n            T.BillingPhone AS Company_BillingPhone, \r");
-            viewString.Append("\n            T.BillingEmail AS Company_BillingEmail, \r\n            T.TwitterHand");
-            viewString.Append("le AS Company_TwitterHandle, \r\n            T.FacebookHandle AS Company_FacebookH");
-            viewString.Append("andle, \r\n            T.InstagramHandle AS Company_InstagramHandle, \r\n           ");
-            viewString.Append(" T.PinterestHandle AS Company_PinterestHandle, \r\n            T.VoucherSecretKey ");
-            viewString.Append("AS Company_VoucherSecretKey, \r\n            T.City AS Company_City, \r\n           ");
-            viewString.Append(" T.BillingCity AS Company_BillingCity, \r\n            T.AboutUsDescription AS Com");
-            viewString.Append("pany_AboutUsDescription, \r\n            T.Status AS Company_Status, \r\n           ");
-            viewString.Append(" T.PaymentMethodStatus AS Company_PaymentMethodStatus, \r\n            T.LastPayme");
-            viewString.Append("ntMethodErrorDate AS Company_LastPaymentMethodErrorDate, \r\n            T.LastPay");
-            viewString.Append("mentMethodError AS Company_LastPaymentMethodError, \r\n            T.CompanyRegNo ");
-            viewString.Append("AS Company_CompanyRegNo, \r\n            T.TaxRegNo AS Company_TaxRegNo, \r\n       ");
-            viewString.Append("     True AS _from0\r\n        FROM BaseDbContext.Companies AS T\r\n    ) AS T1");
+            viewString.Append("MethodError, T1.Company_CompanyRegNo, T1.Company_TaxRegNo, T1.Company_CreationDa");
+            viewString.Append("teTime, T1.Company_NoOfBranches, T1.Company_BillingAddressName)\r\n    FROM (\r\n   ");
+            viewString.Append("     SELECT \r\n            T.CompanyId AS Company_CompanyId, \r\n            T.Comp");
+            viewString.Append("anyName AS Company_CompanyName, \r\n            T.ReplyEmail AS Company_ReplyEmail");
+            viewString.Append(", \r\n            T.Tel1 AS Company_Tel1, \r\n            T.Tel2 AS Company_Tel2, \r\n");
+            viewString.Append("            T.AddressLine1 AS Company_AddressLine1, \r\n            T.AddressLine2");
+            viewString.Append(" AS Company_AddressLine2, \r\n            T.State AS Company_State, \r\n            ");
+            viewString.Append("T.CountryId AS Company_CountryId, \r\n            T.ZipCode AS Company_ZipCode, \r\n");
+            viewString.Append("            T.TimeZone AS Company_TimeZone, \r\n            T.Logo AS Company_Logo");
+            viewString.Append(", \r\n            T.StripeCustomerId AS Company_StripeCustomerId, \r\n            T.");
+            viewString.Append("ChargeBeesubscriptionID AS Company_ChargeBeesubscriptionID, \r\n            T.Regi");
+            viewString.Append("steredViaReferral AS Company_RegisteredViaReferral, \r\n            T.ReferringCom");
+            viewString.Append("panyID AS Company_ReferringCompanyID, \r\n            T.PaypalCustomerId AS Compan");
+            viewString.Append("y_PaypalCustomerId, \r\n            T.GoogleWalletCustomerId AS Company_GoogleWall");
+            viewString.Append("etCustomerId, \r\n            T.PreferredPayoutAccount AS Company_PreferredPayoutA");
+            viewString.Append("ccount, \r\n            T.SalesEmail AS Company_SalesEmail, \r\n            T.Referr");
+            viewString.Append("alCode AS Company_ReferralCode, \r\n            T.AfilliatianStatus AS Company_Afi");
+            viewString.Append("lliatianStatus, \r\n            T.WebsiteLink AS Company_WebsiteLink, \r\n          ");
+            viewString.Append("  T.CompanyType AS Company_CompanyType, \r\n            T.BillingAddressLine1 AS C");
+            viewString.Append("ompany_BillingAddressLine1, \r\n            T.BillingAddressLine2 AS Company_Billi");
+            viewString.Append("ngAddressLine2, \r\n            T.BillingState AS Company_BillingState, \r\n        ");
+            viewString.Append("    T.BillingCountryId AS Company_BillingCountryId, \r\n            T.BillingZipCo");
+            viewString.Append("de AS Company_BillingZipCode, \r\n            T.BillingPhone AS Company_BillingPho");
+            viewString.Append("ne, \r\n            T.BillingEmail AS Company_BillingEmail, \r\n            T.Twitte");
+            viewString.Append("rHandle AS Company_TwitterHandle, \r\n            T.FacebookHandle AS Company_Face");
+            viewString.Append("bookHandle, \r\n            T.InstagramHandle AS Company_InstagramHandle, \r\n      ");
+            viewString.Append("      T.PinterestHandle AS Company_PinterestHandle, \r\n            T.VoucherSecre");
+            viewString.Append("tKey AS Company_VoucherSecretKey, \r\n            T.City AS Company_City, \r\n      ");
+            viewString.Append("      T.BillingCity AS Company_BillingCity, \r\n            T.AboutUsDescription A");
+            viewString.Append("S Company_AboutUsDescription, \r\n            T.Status AS Company_Status, \r\n      ");
+            viewString.Append("      T.PaymentMethodStatus AS Company_PaymentMethodStatus, \r\n            T.Last");
+            viewString.Append("PaymentMethodErrorDate AS Company_LastPaymentMethodErrorDate, \r\n            T.La");
+            viewString.Append("stPaymentMethodError AS Company_LastPaymentMethodError, \r\n            T.CompanyR");
+            viewString.Append("egNo AS Company_CompanyRegNo, \r\n            T.TaxRegNo AS Company_TaxRegNo, \r\n  ");
+            viewString.Append("          T.CreationDateTime AS Company_CreationDateTime, \r\n            T.NoOfBr");
+            viewString.Append("anches AS Company_NoOfBranches, \r\n            T.BillingAddressName AS Company_Bi");
+            viewString.Append("llingAddressName, \r\n            True AS _from0\r\n        FROM BaseDbContext.Compa");
+            viewString.Append("nies AS T\r\n    ) AS T1");
             return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.Company", viewString.ToString());
         }
         
@@ -1943,12 +1957,13 @@ namespace Edm_EntityMappingGeneratedViews
         {
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.Countries", @"
     SELECT VALUE -- Constructing Countries
-        [DomainModels.Country](T1.Country_CountryId, T1.Country_CountryName, T1.Country_CountryCode)
+        [DomainModels.Country](T1.Country_CountryId, T1.Country_CountryName, T1.Country_CountryCode, T1.Country_CurrencyID)
     FROM (
         SELECT 
             T.CountryID AS Country_CountryId, 
             T.CountryName AS Country_CountryName, 
             T.CountryCode AS Country_CountryCode, 
+            T.CurrencyID AS Country_CurrencyID, 
             True AS _from0
         FROM SMDModelStoreContainer.Country AS T
     ) AS T1");
@@ -2387,7 +2402,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// </Summary>
         private System.Collections.Generic.KeyValuePair<string, string> GetView68()
         {
-            System.Text.StringBuilder viewString = new System.Text.StringBuilder(3168);
+            System.Text.StringBuilder viewString = new System.Text.StringBuilder(3235);
             viewString.Append("\r\n    SELECT VALUE -- Constructing Users\r\n        [DomainModels.User](T1.User_Id");
             viewString.Append(", T1.User_Email, T1.User_EmailConfirmed, T1.User_PasswordHash, T1.User_SecurityS");
             viewString.Append("tamp, T1.User_PhoneNumberConfirmed, T1.User_TwoFactorEnabled, T1.User_LockoutEnd");
@@ -2400,34 +2415,35 @@ namespace Edm_EntityMappingGeneratedViews
             viewString.Append("ser_ProfileImage, T1.User_UserCode, T1.User_SmsCode, T1.User_WebsiteLink, T1.Use");
             viewString.Append("r_DOB, T1.User_CompanyId, T1.User_AuthenticationToken, T1.User_DevicePlatform, T");
             viewString.Append("1.User_optDealsNearMeEmails, T1.User_optLatestNewsEmails, T1.User_optMarketingEm");
-            viewString.Append("ails)\r\n    FROM (\r\n        SELECT \r\n            T.Id AS User_Id, \r\n            T");
-            viewString.Append(".Email AS User_Email, \r\n            T.EmailConfirmed AS User_EmailConfirmed, \r\n ");
-            viewString.Append("           T.PasswordHash AS User_PasswordHash, \r\n            T.SecurityStamp AS");
-            viewString.Append(" User_SecurityStamp, \r\n            T.PhoneNumberConfirmed AS User_PhoneNumberCon");
-            viewString.Append("firmed, \r\n            T.TwoFactorEnabled AS User_TwoFactorEnabled, \r\n           ");
-            viewString.Append(" T.LockoutEndDateUtc AS User_LockoutEndDateUtc, \r\n            T.LockoutEnabled A");
-            viewString.Append("S User_LockoutEnabled, \r\n            T.AccessFailedCount AS User_AccessFailedCou");
-            viewString.Append("nt, \r\n            T.UserName AS User_UserName, \r\n            T.FullName AS User_");
-            viewString.Append("FullName, \r\n            T.AlternateEmail AS User_AlternateEmail, \r\n            T");
-            viewString.Append(".IsEmailVerified AS User_IsEmailVerified, \r\n            T.Status AS User_Status,");
-            viewString.Append(" \r\n            T.CreatedDateTime AS User_CreatedDateTime, \r\n            T.Modifi");
-            viewString.Append("edDateTime AS User_ModifiedDateTime, \r\n            T.LastLoginTime AS User_LastL");
-            viewString.Append("oginTime, \r\n            T.Phone1 AS User_Phone1, \r\n            T.Phone2 AS User_");
-            viewString.Append("Phone2, \r\n            T.Jobtitle AS User_Jobtitle, \r\n            T.ContactNotes ");
-            viewString.Append("AS User_ContactNotes, \r\n            T.IsSubscribed AS User_IsSubscribed, \r\n     ");
-            viewString.Append("       T.AppID AS User_AppID, \r\n            T.IsCompanyRepresentative AS User_Is");
-            viewString.Append("CompanyRepresentative, \r\n            T.UserTimeZone AS User_UserTimeZone, \r\n    ");
-            viewString.Append("        T.Gender AS User_Gender, \r\n            T.LanguageID AS User_LanguageId, ");
-            viewString.Append("\r\n            T.IndustryID AS User_IndustryId, \r\n            T.EducationId AS Us");
-            viewString.Append("er_EducationId, \r\n            T.ProfileImage AS User_ProfileImage, \r\n           ");
-            viewString.Append(" T.UserCode AS User_UserCode, \r\n            T.SmsCode AS User_SmsCode, \r\n       ");
-            viewString.Append("     T.WebsiteLink AS User_WebsiteLink, \r\n            T.DOB AS User_DOB, \r\n     ");
-            viewString.Append("       T.CompanyId AS User_CompanyId, \r\n            T.authenticationToken AS Use");
-            viewString.Append("r_AuthenticationToken, \r\n            T.DevicePlatform AS User_DevicePlatform, \r\n");
-            viewString.Append("            T.optDealsNearMeEmails AS User_optDealsNearMeEmails, \r\n            T");
-            viewString.Append(".optLatestNewsEmails AS User_optLatestNewsEmails, \r\n            T.optMarketingEm");
-            viewString.Append("ails AS User_optMarketingEmails, \r\n            True AS _from0\r\n        FROM SMDM");
-            viewString.Append("odelStoreContainer.AspNetUsers AS T\r\n    ) AS T1");
+            viewString.Append("ails, T1.User_PassportNo)\r\n    FROM (\r\n        SELECT \r\n            T.Id AS User");
+            viewString.Append("_Id, \r\n            T.Email AS User_Email, \r\n            T.EmailConfirmed AS User");
+            viewString.Append("_EmailConfirmed, \r\n            T.PasswordHash AS User_PasswordHash, \r\n          ");
+            viewString.Append("  T.SecurityStamp AS User_SecurityStamp, \r\n            T.PhoneNumberConfirmed AS");
+            viewString.Append(" User_PhoneNumberConfirmed, \r\n            T.TwoFactorEnabled AS User_TwoFactorEn");
+            viewString.Append("abled, \r\n            T.LockoutEndDateUtc AS User_LockoutEndDateUtc, \r\n          ");
+            viewString.Append("  T.LockoutEnabled AS User_LockoutEnabled, \r\n            T.AccessFailedCount AS ");
+            viewString.Append("User_AccessFailedCount, \r\n            T.UserName AS User_UserName, \r\n           ");
+            viewString.Append(" T.FullName AS User_FullName, \r\n            T.AlternateEmail AS User_AlternateEm");
+            viewString.Append("ail, \r\n            T.IsEmailVerified AS User_IsEmailVerified, \r\n            T.St");
+            viewString.Append("atus AS User_Status, \r\n            T.CreatedDateTime AS User_CreatedDateTime, \r\n");
+            viewString.Append("            T.ModifiedDateTime AS User_ModifiedDateTime, \r\n            T.LastLog");
+            viewString.Append("inTime AS User_LastLoginTime, \r\n            T.Phone1 AS User_Phone1, \r\n         ");
+            viewString.Append("   T.Phone2 AS User_Phone2, \r\n            T.Jobtitle AS User_Jobtitle, \r\n       ");
+            viewString.Append("     T.ContactNotes AS User_ContactNotes, \r\n            T.IsSubscribed AS User_I");
+            viewString.Append("sSubscribed, \r\n            T.AppID AS User_AppID, \r\n            T.IsCompanyRepre");
+            viewString.Append("sentative AS User_IsCompanyRepresentative, \r\n            T.UserTimeZone AS User_");
+            viewString.Append("UserTimeZone, \r\n            T.Gender AS User_Gender, \r\n            T.LanguageID ");
+            viewString.Append("AS User_LanguageId, \r\n            T.IndustryID AS User_IndustryId, \r\n           ");
+            viewString.Append(" T.EducationId AS User_EducationId, \r\n            T.ProfileImage AS User_Profile");
+            viewString.Append("Image, \r\n            T.UserCode AS User_UserCode, \r\n            T.SmsCode AS Use");
+            viewString.Append("r_SmsCode, \r\n            T.WebsiteLink AS User_WebsiteLink, \r\n            T.DOB ");
+            viewString.Append("AS User_DOB, \r\n            T.CompanyId AS User_CompanyId, \r\n            T.authen");
+            viewString.Append("ticationToken AS User_AuthenticationToken, \r\n            T.DevicePlatform AS Use");
+            viewString.Append("r_DevicePlatform, \r\n            T.optDealsNearMeEmails AS User_optDealsNearMeEma");
+            viewString.Append("ils, \r\n            T.optLatestNewsEmails AS User_optLatestNewsEmails, \r\n        ");
+            viewString.Append("    T.optMarketingEmails AS User_optMarketingEmails, \r\n            T.PassportNo ");
+            viewString.Append("AS User_PassportNo, \r\n            True AS _from0\r\n        FROM SMDModelStoreCont");
+            viewString.Append("ainer.AspNetUsers AS T\r\n    ) AS T1");
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.Users", viewString.ToString());
         }
         
@@ -2949,7 +2965,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// </Summary>
         private System.Collections.Generic.KeyValuePair<string, string> GetView84()
         {
-            System.Text.StringBuilder viewString = new System.Text.StringBuilder(3922);
+            System.Text.StringBuilder viewString = new System.Text.StringBuilder(4189);
             viewString.Append("\r\n    SELECT VALUE -- Constructing Companies\r\n        [DomainModels.Company](T1.");
             viewString.Append("Company_CompanyId, T1.Company_CompanyName, T1.Company_ReplyEmail, T1.Company_Tel");
             viewString.Append("1, T1.Company_Tel2, T1.Company_AddressLine1, T1.Company_AddressLine2, T1.Company");
@@ -2965,41 +2981,44 @@ namespace Edm_EntityMappingGeneratedViews
             viewString.Append("1.Company_PinterestHandle, T1.Company_VoucherSecretKey, T1.Company_City, T1.Comp");
             viewString.Append("any_BillingCity, T1.Company_AboutUsDescription, T1.Company_Status, T1.Company_Pa");
             viewString.Append("ymentMethodStatus, T1.Company_LastPaymentMethodErrorDate, T1.Company_LastPayment");
-            viewString.Append("MethodError, T1.Company_CompanyRegNo, T1.Company_TaxRegNo)\r\n    FROM (\r\n        ");
-            viewString.Append("SELECT \r\n            T.CompanyId AS Company_CompanyId, \r\n            T.CompanyNa");
-            viewString.Append("me AS Company_CompanyName, \r\n            T.ReplyEmail AS Company_ReplyEmail, \r\n ");
-            viewString.Append("           T.Tel1 AS Company_Tel1, \r\n            T.Tel2 AS Company_Tel2, \r\n     ");
-            viewString.Append("       T.AddressLine1 AS Company_AddressLine1, \r\n            T.AddressLine2 AS C");
-            viewString.Append("ompany_AddressLine2, \r\n            T.State AS Company_State, \r\n            T.Cou");
-            viewString.Append("ntryId AS Company_CountryId, \r\n            T.ZipCode AS Company_ZipCode, \r\n     ");
-            viewString.Append("       T.TimeZone AS Company_TimeZone, \r\n            T.Logo AS Company_Logo, \r\n ");
-            viewString.Append("           T.StripeCustomerId AS Company_StripeCustomerId, \r\n            T.Charg");
-            viewString.Append("eBeesubscriptionID AS Company_ChargeBeesubscriptionID, \r\n            T.Registere");
-            viewString.Append("dViaReferral AS Company_RegisteredViaReferral, \r\n            T.ReferringCompanyI");
-            viewString.Append("D AS Company_ReferringCompanyID, \r\n            T.PaypalCustomerId AS Company_Pay");
-            viewString.Append("palCustomerId, \r\n            T.GoogleWalletCustomerId AS Company_GoogleWalletCus");
-            viewString.Append("tomerId, \r\n            T.PreferredPayoutAccount AS Company_PreferredPayoutAccoun");
-            viewString.Append("t, \r\n            T.SalesEmail AS Company_SalesEmail, \r\n            T.ReferralCod");
-            viewString.Append("e AS Company_ReferralCode, \r\n            T.AfilliatianStatus AS Company_Afilliat");
-            viewString.Append("ianStatus, \r\n            T.WebsiteLink AS Company_WebsiteLink, \r\n            T.C");
-            viewString.Append("ompanyType AS Company_CompanyType, \r\n            T.BillingAddressLine1 AS Compan");
-            viewString.Append("y_BillingAddressLine1, \r\n            T.BillingAddressLine2 AS Company_BillingAdd");
-            viewString.Append("ressLine2, \r\n            T.BillingState AS Company_BillingState, \r\n            T");
-            viewString.Append(".BillingCountryId AS Company_BillingCountryId, \r\n            T.BillingZipCode AS");
-            viewString.Append(" Company_BillingZipCode, \r\n            T.BillingPhone AS Company_BillingPhone, \r");
-            viewString.Append("\n            T.BillingEmail AS Company_BillingEmail, \r\n            T.TwitterHand");
-            viewString.Append("le AS Company_TwitterHandle, \r\n            T.FacebookHandle AS Company_FacebookH");
-            viewString.Append("andle, \r\n            T.InstagramHandle AS Company_InstagramHandle, \r\n           ");
-            viewString.Append(" T.PinterestHandle AS Company_PinterestHandle, \r\n            T.VoucherSecretKey ");
-            viewString.Append("AS Company_VoucherSecretKey, \r\n            T.City AS Company_City, \r\n           ");
-            viewString.Append(" T.BillingCity AS Company_BillingCity, \r\n            T.AboutUsDescription AS Com");
-            viewString.Append("pany_AboutUsDescription, \r\n            T.Status AS Company_Status, \r\n           ");
-            viewString.Append(" T.PaymentMethodStatus AS Company_PaymentMethodStatus, \r\n            T.LastPayme");
-            viewString.Append("ntMethodErrorDate AS Company_LastPaymentMethodErrorDate, \r\n            T.LastPay");
-            viewString.Append("mentMethodError AS Company_LastPaymentMethodError, \r\n            T.CompanyRegNo ");
-            viewString.Append("AS Company_CompanyRegNo, \r\n            T.TaxRegNo AS Company_TaxRegNo, \r\n       ");
-            viewString.Append("     True AS _from0\r\n        FROM SMDModelStoreContainer.Company AS T\r\n    ) AS ");
-            viewString.Append("T1");
+            viewString.Append("MethodError, T1.Company_CompanyRegNo, T1.Company_TaxRegNo, T1.Company_CreationDa");
+            viewString.Append("teTime, T1.Company_NoOfBranches, T1.Company_BillingAddressName)\r\n    FROM (\r\n   ");
+            viewString.Append("     SELECT \r\n            T.CompanyId AS Company_CompanyId, \r\n            T.Comp");
+            viewString.Append("anyName AS Company_CompanyName, \r\n            T.ReplyEmail AS Company_ReplyEmail");
+            viewString.Append(", \r\n            T.Tel1 AS Company_Tel1, \r\n            T.Tel2 AS Company_Tel2, \r\n");
+            viewString.Append("            T.AddressLine1 AS Company_AddressLine1, \r\n            T.AddressLine2");
+            viewString.Append(" AS Company_AddressLine2, \r\n            T.State AS Company_State, \r\n            ");
+            viewString.Append("T.CountryId AS Company_CountryId, \r\n            T.ZipCode AS Company_ZipCode, \r\n");
+            viewString.Append("            T.TimeZone AS Company_TimeZone, \r\n            T.Logo AS Company_Logo");
+            viewString.Append(", \r\n            T.StripeCustomerId AS Company_StripeCustomerId, \r\n            T.");
+            viewString.Append("ChargeBeesubscriptionID AS Company_ChargeBeesubscriptionID, \r\n            T.Regi");
+            viewString.Append("steredViaReferral AS Company_RegisteredViaReferral, \r\n            T.ReferringCom");
+            viewString.Append("panyID AS Company_ReferringCompanyID, \r\n            T.PaypalCustomerId AS Compan");
+            viewString.Append("y_PaypalCustomerId, \r\n            T.GoogleWalletCustomerId AS Company_GoogleWall");
+            viewString.Append("etCustomerId, \r\n            T.PreferredPayoutAccount AS Company_PreferredPayoutA");
+            viewString.Append("ccount, \r\n            T.SalesEmail AS Company_SalesEmail, \r\n            T.Referr");
+            viewString.Append("alCode AS Company_ReferralCode, \r\n            T.AfilliatianStatus AS Company_Afi");
+            viewString.Append("lliatianStatus, \r\n            T.WebsiteLink AS Company_WebsiteLink, \r\n          ");
+            viewString.Append("  T.CompanyType AS Company_CompanyType, \r\n            T.BillingAddressLine1 AS C");
+            viewString.Append("ompany_BillingAddressLine1, \r\n            T.BillingAddressLine2 AS Company_Billi");
+            viewString.Append("ngAddressLine2, \r\n            T.BillingState AS Company_BillingState, \r\n        ");
+            viewString.Append("    T.BillingCountryId AS Company_BillingCountryId, \r\n            T.BillingZipCo");
+            viewString.Append("de AS Company_BillingZipCode, \r\n            T.BillingPhone AS Company_BillingPho");
+            viewString.Append("ne, \r\n            T.BillingEmail AS Company_BillingEmail, \r\n            T.Twitte");
+            viewString.Append("rHandle AS Company_TwitterHandle, \r\n            T.FacebookHandle AS Company_Face");
+            viewString.Append("bookHandle, \r\n            T.InstagramHandle AS Company_InstagramHandle, \r\n      ");
+            viewString.Append("      T.PinterestHandle AS Company_PinterestHandle, \r\n            T.VoucherSecre");
+            viewString.Append("tKey AS Company_VoucherSecretKey, \r\n            T.City AS Company_City, \r\n      ");
+            viewString.Append("      T.BillingCity AS Company_BillingCity, \r\n            T.AboutUsDescription A");
+            viewString.Append("S Company_AboutUsDescription, \r\n            T.Status AS Company_Status, \r\n      ");
+            viewString.Append("      T.PaymentMethodStatus AS Company_PaymentMethodStatus, \r\n            T.Last");
+            viewString.Append("PaymentMethodErrorDate AS Company_LastPaymentMethodErrorDate, \r\n            T.La");
+            viewString.Append("stPaymentMethodError AS Company_LastPaymentMethodError, \r\n            T.CompanyR");
+            viewString.Append("egNo AS Company_CompanyRegNo, \r\n            T.TaxRegNo AS Company_TaxRegNo, \r\n  ");
+            viewString.Append("          T.CreationDateTime AS Company_CreationDateTime, \r\n            T.NoOfBr");
+            viewString.Append("anches AS Company_NoOfBranches, \r\n            T.BillingAddressName AS Company_Bi");
+            viewString.Append("llingAddressName, \r\n            True AS _from0\r\n        FROM SMDModelStoreContai");
+            viewString.Append("ner.Company AS T\r\n    ) AS T1");
             return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.Companies", viewString.ToString());
         }
         
@@ -3651,6 +3670,193 @@ namespace Edm_EntityMappingGeneratedViews
             True AS _from0
         FROM SMDModelStoreContainer.UserCouponView AS T
     ) AS T1");
+        }
+        
+        /// <Summary>
+        /// return view for SMDModelStoreContainer.vw_Coupons
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView114()
+        {
+            System.Text.StringBuilder viewString = new System.Text.StringBuilder(6713);
+            viewString.Append("\r\n    SELECT VALUE -- Constructing vw_Coupons\r\n        [SMDModel.Store.vw_Coupon");
+            viewString.Append("s](T1.[vw_Coupons.CouponId], T1.[vw_Coupons.LanguageId], T1.[vw_Coupons.UserId],");
+            viewString.Append(" T1.[vw_Coupons.CouponTitle], T1.[vw_Coupons.SearchKeywords], T1.[vw_Coupons.Sta");
+            viewString.Append("tus], T1.[vw_Coupons.Archived], T1.[vw_Coupons.Approved], T1.[vw_Coupons.Approve");
+            viewString.Append("dBy], T1.[vw_Coupons.ApprovalDateTime], T1.[vw_Coupons.CreatedDateTime], T1.[vw_");
+            viewString.Append("Coupons.CreatedBy], T1.[vw_Coupons.ModifiedDateTime], T1.[vw_Coupons.ModifiedBy]");
+            viewString.Append(", T1.[vw_Coupons.RejectedReason], T1.[vw_Coupons.Rejecteddatetime], T1.[vw_Coupo");
+            viewString.Append("ns.RejectedBy], T1.[vw_Coupons.CurrencyId], T1.[vw_Coupons.Price], T1.[vw_Coupon");
+            viewString.Append("s.Savings], T1.[vw_Coupons.SwapCost], T1.[vw_Coupons.CouponViewCount], T1.[vw_Co");
+            viewString.Append("upons.CouponIssuedCount], T1.[vw_Coupons.CouponRedeemedCount], T1.[vw_Coupons.Co");
+            viewString.Append("uponQtyPerUser], T1.[vw_Coupons.CouponListingMode], T1.[vw_Coupons.CompanyId], T");
+            viewString.Append("1.[vw_Coupons.CouponActiveMonth], T1.[vw_Coupons.CouponActiveYear], T1.[vw_Coupo");
+            viewString.Append("ns.CouponExpirydate], T1.[vw_Coupons.couponImage1], T1.[vw_Coupons.CouponImage2]");
+            viewString.Append(", T1.[vw_Coupons.CouponImage3], T1.[vw_Coupons.LogoUrl], T1.[vw_Coupons.Highligh");
+            viewString.Append("tLine1], T1.[vw_Coupons.HighlightLine2], T1.[vw_Coupons.HighlightLine3], T1.[vw_");
+            viewString.Append("Coupons.HighlightLine4], T1.[vw_Coupons.HighlightLine5], T1.[vw_Coupons.FinePrin");
+            viewString.Append("tLine1], T1.[vw_Coupons.FinePrintLine2], T1.[vw_Coupons.FinePrintLine3], T1.[vw_");
+            viewString.Append("Coupons.FinePrintLine4], T1.[vw_Coupons.FinePrintLine5], T1.[vw_Coupons.Location");
+            viewString.Append("BranchId], T1.[vw_Coupons.LocationTitle], T1.[vw_Coupons.LocationLine1], T1.[vw_");
+            viewString.Append("Coupons.LocationLine2], T1.[vw_Coupons.LocationCity], T1.[vw_Coupons.LocationSta");
+            viewString.Append("te], T1.[vw_Coupons.LocationZipCode], T1.[vw_Coupons.LocationLAT], T1.[vw_Coupon");
+            viewString.Append("s.LocationLON], T1.[vw_Coupons.LocationPhone], T1.[vw_Coupons.GeographyColumn], ");
+            viewString.Append("T1.[vw_Coupons.HowToRedeemLine1], T1.[vw_Coupons.HowToRedeemLine2], T1.[vw_Coupo");
+            viewString.Append("ns.HowToRedeemLine3], T1.[vw_Coupons.HowToRedeemLine4], T1.[vw_Coupons.HowToRede");
+            viewString.Append("emLine5], T1.[vw_Coupons.SubmissionDateTime], T1.[vw_Coupons.LocationCountryId],");
+            viewString.Append(" T1.[vw_Coupons.CouponStartDate], T1.[vw_Coupons.CouponEndDate], T1.[vw_Coupons.");
+            viewString.Append("Priority], T1.[vw_Coupons.ShowBuyitBtn], T1.[vw_Coupons.BuyitLandingPageUrl], T1");
+            viewString.Append(".[vw_Coupons.BuyitBtnLabel], T1.[vw_Coupons.Categories], T1.[vw_Coupons.Currency");
+            viewString.Append("Code], T1.[vw_Coupons.CurrencySymbol])\r\n    FROM (\r\n        SELECT \r\n           ");
+            viewString.Append(" T.CouponId AS [vw_Coupons.CouponId], \r\n            T.LanguageId AS [vw_Coupons.");
+            viewString.Append("LanguageId], \r\n            T.UserId AS [vw_Coupons.UserId], \r\n            T.Coup");
+            viewString.Append("onTitle AS [vw_Coupons.CouponTitle], \r\n            T.SearchKeywords AS [vw_Coupo");
+            viewString.Append("ns.SearchKeywords], \r\n            T.Status AS [vw_Coupons.Status], \r\n           ");
+            viewString.Append(" T.Archived AS [vw_Coupons.Archived], \r\n            T.Approved AS [vw_Coupons.Ap");
+            viewString.Append("proved], \r\n            T.ApprovedBy AS [vw_Coupons.ApprovedBy], \r\n            T.");
+            viewString.Append("ApprovalDateTime AS [vw_Coupons.ApprovalDateTime], \r\n            T.CreatedDateTi");
+            viewString.Append("me AS [vw_Coupons.CreatedDateTime], \r\n            T.CreatedBy AS [vw_Coupons.Cre");
+            viewString.Append("atedBy], \r\n            T.ModifiedDateTime AS [vw_Coupons.ModifiedDateTime], \r\n  ");
+            viewString.Append("          T.ModifiedBy AS [vw_Coupons.ModifiedBy], \r\n            T.RejectedReaso");
+            viewString.Append("n AS [vw_Coupons.RejectedReason], \r\n            T.Rejecteddatetime AS [vw_Coupon");
+            viewString.Append("s.Rejecteddatetime], \r\n            T.RejectedBy AS [vw_Coupons.RejectedBy], \r\n  ");
+            viewString.Append("          T.CurrencyId AS [vw_Coupons.CurrencyId], \r\n            T.Price AS [vw_");
+            viewString.Append("Coupons.Price], \r\n            T.Savings AS [vw_Coupons.Savings], \r\n            T");
+            viewString.Append(".SwapCost AS [vw_Coupons.SwapCost], \r\n            T.CouponViewCount AS [vw_Coupo");
+            viewString.Append("ns.CouponViewCount], \r\n            T.CouponIssuedCount AS [vw_Coupons.CouponIssu");
+            viewString.Append("edCount], \r\n            T.CouponRedeemedCount AS [vw_Coupons.CouponRedeemedCount");
+            viewString.Append("], \r\n            T.CouponQtyPerUser AS [vw_Coupons.CouponQtyPerUser], \r\n        ");
+            viewString.Append("    T.CouponListingMode AS [vw_Coupons.CouponListingMode], \r\n            T.Compa");
+            viewString.Append("nyId AS [vw_Coupons.CompanyId], \r\n            T.CouponActiveMonth AS [vw_Coupons");
+            viewString.Append(".CouponActiveMonth], \r\n            T.CouponActiveYear AS [vw_Coupons.CouponActiv");
+            viewString.Append("eYear], \r\n            T.CouponExpirydate AS [vw_Coupons.CouponExpirydate], \r\n   ");
+            viewString.Append("         T.couponImage1 AS [vw_Coupons.couponImage1], \r\n            T.CouponImag");
+            viewString.Append("e2 AS [vw_Coupons.CouponImage2], \r\n            T.CouponImage3 AS [vw_Coupons.Cou");
+            viewString.Append("ponImage3], \r\n            T.LogoUrl AS [vw_Coupons.LogoUrl], \r\n            T.Hig");
+            viewString.Append("hlightLine1 AS [vw_Coupons.HighlightLine1], \r\n            T.HighlightLine2 AS [v");
+            viewString.Append("w_Coupons.HighlightLine2], \r\n            T.HighlightLine3 AS [vw_Coupons.Highlig");
+            viewString.Append("htLine3], \r\n            T.HighlightLine4 AS [vw_Coupons.HighlightLine4], \r\n     ");
+            viewString.Append("       T.HighlightLine5 AS [vw_Coupons.HighlightLine5], \r\n            T.FinePrin");
+            viewString.Append("tLine1 AS [vw_Coupons.FinePrintLine1], \r\n            T.FinePrintLine2 AS [vw_Cou");
+            viewString.Append("pons.FinePrintLine2], \r\n            T.FinePrintLine3 AS [vw_Coupons.FinePrintLin");
+            viewString.Append("e3], \r\n            T.FinePrintLine4 AS [vw_Coupons.FinePrintLine4], \r\n          ");
+            viewString.Append("  T.FinePrintLine5 AS [vw_Coupons.FinePrintLine5], \r\n            T.LocationBranc");
+            viewString.Append("hId AS [vw_Coupons.LocationBranchId], \r\n            T.LocationTitle AS [vw_Coupo");
+            viewString.Append("ns.LocationTitle], \r\n            T.LocationLine1 AS [vw_Coupons.LocationLine1], ");
+            viewString.Append("\r\n            T.LocationLine2 AS [vw_Coupons.LocationLine2], \r\n            T.Loc");
+            viewString.Append("ationCity AS [vw_Coupons.LocationCity], \r\n            T.LocationState AS [vw_Cou");
+            viewString.Append("pons.LocationState], \r\n            T.LocationZipCode AS [vw_Coupons.LocationZipC");
+            viewString.Append("ode], \r\n            T.LocationLAT AS [vw_Coupons.LocationLAT], \r\n            T.L");
+            viewString.Append("ocationLON AS [vw_Coupons.LocationLON], \r\n            T.LocationPhone AS [vw_Cou");
+            viewString.Append("pons.LocationPhone], \r\n            T.GeographyColumn AS [vw_Coupons.GeographyCol");
+            viewString.Append("umn], \r\n            T.HowToRedeemLine1 AS [vw_Coupons.HowToRedeemLine1], \r\n     ");
+            viewString.Append("       T.HowToRedeemLine2 AS [vw_Coupons.HowToRedeemLine2], \r\n            T.HowT");
+            viewString.Append("oRedeemLine3 AS [vw_Coupons.HowToRedeemLine3], \r\n            T.HowToRedeemLine4 ");
+            viewString.Append("AS [vw_Coupons.HowToRedeemLine4], \r\n            T.HowToRedeemLine5 AS [vw_Coupon");
+            viewString.Append("s.HowToRedeemLine5], \r\n            T.SubmissionDateTime AS [vw_Coupons.Submissio");
+            viewString.Append("nDateTime], \r\n            T.LocationCountryId AS [vw_Coupons.LocationCountryId],");
+            viewString.Append(" \r\n            T.CouponStartDate AS [vw_Coupons.CouponStartDate], \r\n            ");
+            viewString.Append("T.CouponEndDate AS [vw_Coupons.CouponEndDate], \r\n            T.Priority AS [vw_C");
+            viewString.Append("oupons.Priority], \r\n            T.ShowBuyitBtn AS [vw_Coupons.ShowBuyitBtn], \r\n ");
+            viewString.Append("           T.BuyitLandingPageUrl AS [vw_Coupons.BuyitLandingPageUrl], \r\n        ");
+            viewString.Append("    T.BuyitBtnLabel AS [vw_Coupons.BuyitBtnLabel], \r\n            T.Categories AS");
+            viewString.Append(" [vw_Coupons.Categories], \r\n            T.CurrencyCode AS [vw_Coupons.CurrencyCo");
+            viewString.Append("de], \r\n            T.CurrencySymbol AS [vw_Coupons.CurrencySymbol], \r\n          ");
+            viewString.Append("  True AS _from0\r\n        FROM BaseDbContext.vw_Coupons AS T\r\n    ) AS T1");
+            return new System.Collections.Generic.KeyValuePair<string, string>("SMDModelStoreContainer.vw_Coupons", viewString.ToString());
+        }
+        
+        /// <Summary>
+        /// return view for BaseDbContext.vw_Coupons
+        /// </Summary>
+        private System.Collections.Generic.KeyValuePair<string, string> GetView115()
+        {
+            System.Text.StringBuilder viewString = new System.Text.StringBuilder(6720);
+            viewString.Append("\r\n    SELECT VALUE -- Constructing vw_Coupons\r\n        [DomainModels.vw_Coupons]");
+            viewString.Append("(T1.[vw_Coupons.CouponId], T1.[vw_Coupons.LanguageId], T1.[vw_Coupons.UserId], T");
+            viewString.Append("1.[vw_Coupons.CouponTitle], T1.[vw_Coupons.SearchKeywords], T1.[vw_Coupons.Statu");
+            viewString.Append("s], T1.[vw_Coupons.Archived], T1.[vw_Coupons.Approved], T1.[vw_Coupons.ApprovedB");
+            viewString.Append("y], T1.[vw_Coupons.ApprovalDateTime], T1.[vw_Coupons.CreatedDateTime], T1.[vw_Co");
+            viewString.Append("upons.CreatedBy], T1.[vw_Coupons.ModifiedDateTime], T1.[vw_Coupons.ModifiedBy], ");
+            viewString.Append("T1.[vw_Coupons.RejectedReason], T1.[vw_Coupons.Rejecteddatetime], T1.[vw_Coupons");
+            viewString.Append(".RejectedBy], T1.[vw_Coupons.CurrencyId], T1.[vw_Coupons.Price], T1.[vw_Coupons.");
+            viewString.Append("Savings], T1.[vw_Coupons.SwapCost], T1.[vw_Coupons.CouponViewCount], T1.[vw_Coup");
+            viewString.Append("ons.CouponIssuedCount], T1.[vw_Coupons.CouponRedeemedCount], T1.[vw_Coupons.Coup");
+            viewString.Append("onQtyPerUser], T1.[vw_Coupons.CouponListingMode], T1.[vw_Coupons.CompanyId], T1.");
+            viewString.Append("[vw_Coupons.CouponActiveMonth], T1.[vw_Coupons.CouponActiveYear], T1.[vw_Coupons");
+            viewString.Append(".CouponExpirydate], T1.[vw_Coupons.couponImage1], T1.[vw_Coupons.CouponImage2], ");
+            viewString.Append("T1.[vw_Coupons.CouponImage3], T1.[vw_Coupons.LogoUrl], T1.[vw_Coupons.HighlightL");
+            viewString.Append("ine1], T1.[vw_Coupons.HighlightLine2], T1.[vw_Coupons.HighlightLine3], T1.[vw_Co");
+            viewString.Append("upons.HighlightLine4], T1.[vw_Coupons.HighlightLine5], T1.[vw_Coupons.FinePrintL");
+            viewString.Append("ine1], T1.[vw_Coupons.FinePrintLine2], T1.[vw_Coupons.FinePrintLine3], T1.[vw_Co");
+            viewString.Append("upons.FinePrintLine4], T1.[vw_Coupons.FinePrintLine5], T1.[vw_Coupons.LocationBr");
+            viewString.Append("anchId], T1.[vw_Coupons.LocationTitle], T1.[vw_Coupons.LocationLine1], T1.[vw_Co");
+            viewString.Append("upons.LocationLine2], T1.[vw_Coupons.LocationCity], T1.[vw_Coupons.LocationState");
+            viewString.Append("], T1.[vw_Coupons.LocationZipCode], T1.[vw_Coupons.LocationLAT], T1.[vw_Coupons.");
+            viewString.Append("LocationLON], T1.[vw_Coupons.LocationPhone], T1.[vw_Coupons.GeographyColumn], T1");
+            viewString.Append(".[vw_Coupons.HowToRedeemLine1], T1.[vw_Coupons.HowToRedeemLine2], T1.[vw_Coupons");
+            viewString.Append(".HowToRedeemLine3], T1.[vw_Coupons.HowToRedeemLine4], T1.[vw_Coupons.HowToRedeem");
+            viewString.Append("Line5], T1.[vw_Coupons.SubmissionDateTime], T1.[vw_Coupons.LocationCountryId], T");
+            viewString.Append("1.[vw_Coupons.CouponStartDate], T1.[vw_Coupons.CouponEndDate], T1.[vw_Coupons.Pr");
+            viewString.Append("iority], T1.[vw_Coupons.ShowBuyitBtn], T1.[vw_Coupons.BuyitLandingPageUrl], T1.[");
+            viewString.Append("vw_Coupons.BuyitBtnLabel], T1.[vw_Coupons.Categories], T1.[vw_Coupons.CurrencyCo");
+            viewString.Append("de], T1.[vw_Coupons.CurrencySymbol])\r\n    FROM (\r\n        SELECT \r\n            T");
+            viewString.Append(".CouponId AS [vw_Coupons.CouponId], \r\n            T.LanguageId AS [vw_Coupons.La");
+            viewString.Append("nguageId], \r\n            T.UserId AS [vw_Coupons.UserId], \r\n            T.Coupon");
+            viewString.Append("Title AS [vw_Coupons.CouponTitle], \r\n            T.SearchKeywords AS [vw_Coupons");
+            viewString.Append(".SearchKeywords], \r\n            T.Status AS [vw_Coupons.Status], \r\n            T");
+            viewString.Append(".Archived AS [vw_Coupons.Archived], \r\n            T.Approved AS [vw_Coupons.Appr");
+            viewString.Append("oved], \r\n            T.ApprovedBy AS [vw_Coupons.ApprovedBy], \r\n            T.Ap");
+            viewString.Append("provalDateTime AS [vw_Coupons.ApprovalDateTime], \r\n            T.CreatedDateTime");
+            viewString.Append(" AS [vw_Coupons.CreatedDateTime], \r\n            T.CreatedBy AS [vw_Coupons.Creat");
+            viewString.Append("edBy], \r\n            T.ModifiedDateTime AS [vw_Coupons.ModifiedDateTime], \r\n    ");
+            viewString.Append("        T.ModifiedBy AS [vw_Coupons.ModifiedBy], \r\n            T.RejectedReason ");
+            viewString.Append("AS [vw_Coupons.RejectedReason], \r\n            T.Rejecteddatetime AS [vw_Coupons.");
+            viewString.Append("Rejecteddatetime], \r\n            T.RejectedBy AS [vw_Coupons.RejectedBy], \r\n    ");
+            viewString.Append("        T.CurrencyId AS [vw_Coupons.CurrencyId], \r\n            T.Price AS [vw_Co");
+            viewString.Append("upons.Price], \r\n            T.Savings AS [vw_Coupons.Savings], \r\n            T.S");
+            viewString.Append("wapCost AS [vw_Coupons.SwapCost], \r\n            T.CouponViewCount AS [vw_Coupons");
+            viewString.Append(".CouponViewCount], \r\n            T.CouponIssuedCount AS [vw_Coupons.CouponIssued");
+            viewString.Append("Count], \r\n            T.CouponRedeemedCount AS [vw_Coupons.CouponRedeemedCount],");
+            viewString.Append(" \r\n            T.CouponQtyPerUser AS [vw_Coupons.CouponQtyPerUser], \r\n          ");
+            viewString.Append("  T.CouponListingMode AS [vw_Coupons.CouponListingMode], \r\n            T.Company");
+            viewString.Append("Id AS [vw_Coupons.CompanyId], \r\n            T.CouponActiveMonth AS [vw_Coupons.C");
+            viewString.Append("ouponActiveMonth], \r\n            T.CouponActiveYear AS [vw_Coupons.CouponActiveY");
+            viewString.Append("ear], \r\n            T.CouponExpirydate AS [vw_Coupons.CouponExpirydate], \r\n     ");
+            viewString.Append("       T.couponImage1 AS [vw_Coupons.couponImage1], \r\n            T.CouponImage2");
+            viewString.Append(" AS [vw_Coupons.CouponImage2], \r\n            T.CouponImage3 AS [vw_Coupons.Coupo");
+            viewString.Append("nImage3], \r\n            T.LogoUrl AS [vw_Coupons.LogoUrl], \r\n            T.Highl");
+            viewString.Append("ightLine1 AS [vw_Coupons.HighlightLine1], \r\n            T.HighlightLine2 AS [vw_");
+            viewString.Append("Coupons.HighlightLine2], \r\n            T.HighlightLine3 AS [vw_Coupons.Highlight");
+            viewString.Append("Line3], \r\n            T.HighlightLine4 AS [vw_Coupons.HighlightLine4], \r\n       ");
+            viewString.Append("     T.HighlightLine5 AS [vw_Coupons.HighlightLine5], \r\n            T.FinePrintL");
+            viewString.Append("ine1 AS [vw_Coupons.FinePrintLine1], \r\n            T.FinePrintLine2 AS [vw_Coupo");
+            viewString.Append("ns.FinePrintLine2], \r\n            T.FinePrintLine3 AS [vw_Coupons.FinePrintLine3");
+            viewString.Append("], \r\n            T.FinePrintLine4 AS [vw_Coupons.FinePrintLine4], \r\n            ");
+            viewString.Append("T.FinePrintLine5 AS [vw_Coupons.FinePrintLine5], \r\n            T.LocationBranchI");
+            viewString.Append("d AS [vw_Coupons.LocationBranchId], \r\n            T.LocationTitle AS [vw_Coupons");
+            viewString.Append(".LocationTitle], \r\n            T.LocationLine1 AS [vw_Coupons.LocationLine1], \r\n");
+            viewString.Append("            T.LocationLine2 AS [vw_Coupons.LocationLine2], \r\n            T.Locat");
+            viewString.Append("ionCity AS [vw_Coupons.LocationCity], \r\n            T.LocationState AS [vw_Coupo");
+            viewString.Append("ns.LocationState], \r\n            T.LocationZipCode AS [vw_Coupons.LocationZipCod");
+            viewString.Append("e], \r\n            T.LocationLAT AS [vw_Coupons.LocationLAT], \r\n            T.Loc");
+            viewString.Append("ationLON AS [vw_Coupons.LocationLON], \r\n            T.LocationPhone AS [vw_Coupo");
+            viewString.Append("ns.LocationPhone], \r\n            T.GeographyColumn AS [vw_Coupons.GeographyColum");
+            viewString.Append("n], \r\n            T.HowToRedeemLine1 AS [vw_Coupons.HowToRedeemLine1], \r\n       ");
+            viewString.Append("     T.HowToRedeemLine2 AS [vw_Coupons.HowToRedeemLine2], \r\n            T.HowToR");
+            viewString.Append("edeemLine3 AS [vw_Coupons.HowToRedeemLine3], \r\n            T.HowToRedeemLine4 AS");
+            viewString.Append(" [vw_Coupons.HowToRedeemLine4], \r\n            T.HowToRedeemLine5 AS [vw_Coupons.");
+            viewString.Append("HowToRedeemLine5], \r\n            T.SubmissionDateTime AS [vw_Coupons.SubmissionD");
+            viewString.Append("ateTime], \r\n            T.LocationCountryId AS [vw_Coupons.LocationCountryId], \r");
+            viewString.Append("\n            T.CouponStartDate AS [vw_Coupons.CouponStartDate], \r\n            T.");
+            viewString.Append("CouponEndDate AS [vw_Coupons.CouponEndDate], \r\n            T.Priority AS [vw_Cou");
+            viewString.Append("pons.Priority], \r\n            T.ShowBuyitBtn AS [vw_Coupons.ShowBuyitBtn], \r\n   ");
+            viewString.Append("         T.BuyitLandingPageUrl AS [vw_Coupons.BuyitLandingPageUrl], \r\n          ");
+            viewString.Append("  T.BuyitBtnLabel AS [vw_Coupons.BuyitBtnLabel], \r\n            T.Categories AS [");
+            viewString.Append("vw_Coupons.Categories], \r\n            T.CurrencyCode AS [vw_Coupons.CurrencyCode");
+            viewString.Append("], \r\n            T.CurrencySymbol AS [vw_Coupons.CurrencySymbol], \r\n            ");
+            viewString.Append("True AS _from0\r\n        FROM SMDModelStoreContainer.vw_Coupons AS T\r\n    ) AS T1");
+            viewString.Append("");
+            return new System.Collections.Generic.KeyValuePair<string, string>("BaseDbContext.vw_Coupons", viewString.ToString());
         }
     }
 }

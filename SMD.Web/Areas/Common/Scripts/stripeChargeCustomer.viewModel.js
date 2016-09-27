@@ -31,7 +31,7 @@ define("common/stripeChargeCustomer.viewModel",
                     // Show Charge Dialog
 
                     show = function (proceedCallback, amount, description, isExistingCustomer) {
-                       
+                        
                         afterProceed(proceedCallback);
                         chargeAmount(amount || 0);
                         chargeDescription(description || '');
@@ -43,15 +43,16 @@ define("common/stripeChargeCustomer.viewModel",
                     },
                     // Create Customer
                     createCustomer = function (token) {
+                        
                         dataservice.createStripeCustomer({ Token: token.id, Email: token.email, Amount: chargeAmount() }, {
                             success: function () {
-                                toastr.success("Customer has been added!");
+                                toastr.success("Credit card configured successfully");
                                 proceed(); // Callback if any
 
                                 
                             },
                             error: function (response) {
-                                toastr.error("Failed to do payment. Error: " + response);
+                                toastr.error("Failure in Credit card configurations. Error: " + response);
                             }
                         });
                     },

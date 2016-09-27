@@ -33,14 +33,14 @@
                             <th></th>
                             <th class="text-left">
                                 <span class="GridHeaderFont_size">
-                                    Canada
+                                    PK
                                 </span>
                             </th>
                             <th></th>
                             <th ></th>
                             <th class="text-left">
                                 <span class="GridHeaderFont_size">
-                                    Australia
+                                    AU
                                 </span>
                             </th>
                             <th ></th>
@@ -180,11 +180,11 @@
 <script id="DashboardInsightTemplate" type="text/html">
     <tr style="border-bottom: none;">
         <td class="col-sm-3 font14">
-            <!-- ko if: activity() === "Approved Campaigns" || activity() === "Active Campaigns" || activity() === "Impressions" || activity() === "Revenue" -->
+            <!-- ko if: activity() === "#Approved Campaigns" ||  activity() === "Payout" || activity() === "#Active Campaigns" || activity() === "Impressions" || activity() === "Revenue" -->
             <span class="h4" data-bind="text: activity"></span>
             <!-- /ko -->
 
-            <!-- ko ifnot: activity() === "Approved Campaigns" || activity() === "Active Campaigns" || activity() === "Impressions" || activity() === "Revenue" -->
+            <!-- ko ifnot: activity() === "#Approved Campaigns" || activity() === "Payout" || activity() === "#Active Campaigns" || activity() === "Impressions" || activity() === "Revenue" -->
             <span class="paddingLeft20px" data-bind="text: activity"></span>
             <!-- /ko -->
         </td>

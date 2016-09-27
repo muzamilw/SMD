@@ -21,7 +21,7 @@ namespace SMD.Interfaces.Repository
         IEnumerable<SearchCoupons_Result> SearchCoupons(int categoryId, int type, int size, string keywords, int pageNo, int distance, string Lat, string Lon, string UserId);
 
         List<Coupon> GetCouponsByCompanyId(int CompanyId);
-        IEnumerable<Coupon> GetCouponsForApproval(GetPagedListRequest request, out int rowCount);
+        IEnumerable<vw_Coupons> GetCouponsForApproval(GetPagedListRequest request, out int rowCount);
 
 
         GetCouponByID_Result GetCouponByIdSP(long CouponId, string UserId, string Lat, string Lon);

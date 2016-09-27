@@ -33,6 +33,7 @@ namespace SMD.MIS.Areas.Api.Controllers
             objaddress.BillingAddressLine1 = obj.BillingAddressLine1;
             objaddress.BillingAddressLine2 = obj.BillingAddressLine2;
             //objaddress.BillingCityId = obj.BillingCityId;
+            objaddress.BillingCity = obj.BillingCity;
             objaddress.BillingCountryId = obj.BillingCountryId;
             objaddress.BillingState = obj.BillingState;
             objaddress.BillingZipCode = obj.BillingZipCode;

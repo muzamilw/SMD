@@ -372,7 +372,7 @@
                 CreateNewBranchLocation = function () {
                     dataService.getCompanyAddress({
                         success: function (data) {
-                            if (data.BillingCountryId == null) {
+                            if (data.BillingAddressLine1 == null) {
                               //  getCitiesDropDown(1)
                                 var newBranchLocation = new model.Branch.CreateBillingAddress(data);
                                 //newBranchLocation.branchCity(city.CityName);
