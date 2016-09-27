@@ -72,7 +72,7 @@ namespace SMD.Implementation.Services
                 AboutUs = company.AboutUsDescription,
                 BillingAddressLine1 = company.BillingAddressLine1,
                 BillingAddressLine2 = company.BillingAddressLine2,
-                BillingBusinessName = company.CompanyName,
+                BillingBusinessName = company.BillingAddressName,
                 BillingCity = company.BillingCity,
                 BillingCountryId = company.BillingCountryId,
                 BillingEmail = company.BillingEmail,
@@ -96,7 +96,10 @@ namespace SMD.Implementation.Services
                 WebsiteLink = company.WebsiteLink,
                 SalesEmail = company.SalesEmail,
                 SalesPhone = company.Tel1,
-                VatNumber = company.TaxRegNo
+                VatNumber = company.TaxRegNo,
+                BranchesCount =  company.NoOfBranches??0,
+                BusinessStartDate = company.CreationDateTime,
+                
 
             };
         }
