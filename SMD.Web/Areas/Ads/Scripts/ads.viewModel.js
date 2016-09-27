@@ -89,7 +89,7 @@ define("ads/ads.viewModel",
                     // audience reach mode 
                     audienceReachMode = ko.observable("1"),
                     MainHeading = ko.observable("Video ads - Upload a video and target audiences near you."),
-                    uploadTitle = ko.observable("Upload Video"),
+                    uploadTitle = ko.observable("Video"),
                     SubHeading = ko.observable("Reward audiences 50% of your ‘ad click’ Increase branding and drive people to your web site with one ‘ad click’ Show a video ad, ask a reinforcing question and show your deals.");
 
                     tab1Heading = ko.observable("Upload a 10-20 second video ad.");
@@ -275,7 +275,7 @@ define("ads/ads.viewModel",
 
                 $("#MarketobjDiv").css("display", "none");
                 $("#topArea").css("display", "none");
-                $("#headlabel").css("display", "none");
+                $("#headlabel,#headdesc").css("display", "none");
 
                 //if (isDisplayCouponsAds() == false) {
                 //    isWelcomeScreenVisible(true);
@@ -386,7 +386,7 @@ define("ads/ads.viewModel",
 
                     $("#headlabel, #Heading_div").css("display", "block");
                    
-                    $("#panelArea").css("display", "block");
+                    $("#panelArea,#headdesc").css("display", "block");
                     //show the main menu;
                     showMainMenu();
                     logoImage = '';
@@ -412,7 +412,7 @@ define("ads/ads.viewModel",
                     $(".hideInCoupons").css("display", "block");
 
                     $("#MarketobjDiv").css("display", "block");
-                    $("#topArea").css("display", "block");
+                    $("#topArea,#headdesc").css("display", "block");
                 });
 
                 confirmation.show();
@@ -459,6 +459,8 @@ define("ads/ads.viewModel",
                 $("#MarketobjDiv").css("display", "block");
                 $("#topArea").css("display", "block");
                 $("#headlabel").css("display", "block");
+                $("#headdesc").css("display", "block")
+                
             },
 
 
@@ -504,6 +506,8 @@ define("ads/ads.viewModel",
                 $("#MarketobjDiv").css("display", "block");
                 $("#topArea").css("display", "block");
                 $("#headlabel").css("display", "block");
+                
+                $("#headdesc").css("display", "block");
                 },
             saveCampaignData = function () {
 

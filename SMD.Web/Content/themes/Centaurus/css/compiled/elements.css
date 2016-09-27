@@ -5446,9 +5446,21 @@ color:red !important;
     color: white;
     font-size:26px;
 }
+.Subpanels >div> p {
+    font-size:11px;
+}
+.hr {
+    display: block;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: inset;
+    border-width: 1px;
+}
 .Subpanels {
 
-       background: #FFFFFF;
+       background: #f9f9f9;
     -webkit-box-shadow: 1px 1px 2px 0 #CCCCCC;
     -moz-box-shadow: 1px 1px 2px 0 #CCCCCC;
     -o-box-shadow: 1px 1px 2px 0 #CCCCCC;
@@ -5568,4 +5580,44 @@ background-image: url(/Images/crowdcentz_logo.png) !important;
     text-shadow: 0 1px 0 #fff;
     filter: alpha(opacity=20);
     opacity: .2;
+}
+
+
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
+
+
+
+
+
+#colbtn {
+  display: block;
+  padding: 0.5em;
+  text-align: center;
+  border-bottom: 1px solid #CCC;
+  color: #666;
+}
+#colbtn:hover {
+  color: #000;
+}
+#colbtn::before {
+  font-family: Consolas, monaco, monospace;
+  font-weight: bold;
+  font-size: 15px;
+  content: "+";
+  vertical-align: text-top;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-right: 3px;
+  background: radial-gradient(ellipse at center, #CCC 50%, transparent 50%);
+}
+
+section {
+  padding: 0 20px;
+}
+#toggle:checked ~ #expand {
+  height: 250px;
+}
+#toggle:checked ~ label::before {
+  content: "-";
 }

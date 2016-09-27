@@ -700,30 +700,7 @@
                                 <div class="col-lg-3">
                                     <label for="txtLanguages" class="control-label text-right tooltip-float floatNone defaultImgUploadImageBtn">Languages</label>
                                 </div>
-                                @*<div class="col-lg-8">
-                                        <div>
-                                            <div id="lang_token_cnt">
-                                                <!-- ko template: { name: 'AdCampaignLanguageTemplate' , foreach: AdCampaignTargetCriterias } -->
-                                                <!-- /ko -->
-                                            </div>
-                                            <div class="clearfix"></div>
-                                            <div id="land_edt">
-                                                <div class="coun_in_ex_cnt">
-                                                    <select id="in_ex_count_opt" class="form-control" data-bind="value: $root.selectedLangIncludeExclude">
-                                                        <option value="1">Include</option>
-                                                        <option value="0">Exclude</option>
-                                                    </select>
-                                                </div>
-                                                <div class="sep-line">
-                                                </div>
-                                                <div class="count_token_opt_cnt">
-                                                    <input type="text" data-autocomplete="off" class="" id="searchLanguages" placeholder="Enter a language" />
-                                                </div>
-                                                <div class="clearfix">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>*@
+                             
                             </div>
                             <div class="form-group">
                                 <div class="col-lg-2">
@@ -767,27 +744,40 @@
                                 <div class="col-lg-10" style="padding:0px;">
                                     <div class="col-lg-4">
                                         <div>
-                                            <button class="btn  btn-danger btnAdsCampaign ButtonWidth" style="width:100%!important;" id="" data-toggle="modal" data-target=".bs-example-modal-lg" data-bind="click:$root.showAdditionUserCriteria">Profle card matches</button>
+                                            <button class="btn  btn-danger btnAdsCampaign ButtonWidth" style="width:100%!important;" id="" data-toggle="modal" data-target=".bs-example-modal-lg" data-bind="click:$root.showAdditionUserCriteria">Profle Insights</button>
                                         </div>
                                         <div>
-                                            <button class="btn  btn-danger btnAdsCampaign ButtonWidth" style="width:100%!important;" id="" data-toggle="modal" data-bind="click:$root.showAdditionQuizCriteria" data-target=".bs-example-modal-lg">Quiz answer matches</button>
+                                            <button class="btn  btn-danger btnAdsCampaign ButtonWidth" style="width:100%!important;" id="" data-toggle="modal" data-target=".bs-example-modal-lg" data-bind="click:$root.showAdditionQuizCriteria">Ad Click Answers</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4">
+                                        <div>
+                                            <button class="btn  btn-danger btnAdsCampaign ButtonWidth" style="width:100%!important;" id="" data-toggle="modal" data-bind="click:$root.showAdditionUserSurveyCriteria" data-target=".bs-example-modal-lg">My Survey Cards</button>
+                                        </div>
+                                        <div>
+                                            <button class="btn  btn-danger btnAdsCampaign ButtonWidth" style="width:100%!important;" id="" data-toggle="modal" data-bind="click:$root.showAdditionalSurveyQuestions" data-target=".bs-example-modal-lg">My Survey Questions</button>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <div class="table-responsive">
+                                            <table class="table table-striped table-hover">
+                                                <tbody>
+                                                    <tr data-bind="visible: $root.visibleTargetAudience(1)  != 1 && $root.visibleTargetAudience(2)  != 1&& $root.visibleTargetAudience(6)  != 1">
+                                                        <td class="noCriteria"><span>No additional targeting criteria selected</span></td>
+                                                    </tr>
+                                                    <!-- ko template: { name: 'filterAnswersTemplate', foreach: ProfileQuestionTargetCriteria } -->
+                                                    <!-- /ko -->
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
-                            <div>
-                                <div class="table-responsive">
-                                    <table class="table table-striped table-hover">
-                                        <tbody>
-                                            <tr data-bind="visible: $root.visibleTargetAudience(1)  != 1 && $root.visibleTargetAudience(2)  != 1&& $root.visibleTargetAudience(6)  != 1">
-                                                <td class="noCriteria"><span>No additional targeting criteria selected</span></td>
-                                            </tr>
-                                            <!-- ko template: { name: 'answersTemplateForShowAndEdit', foreach: ProfileQuestionTargetCriteria } -->
-                                            <!-- /ko -->
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+                          
+                          
 
                         </div>
                         <div class="adBottomHeading" data-bind="visible: $root.previewScreenNumber() == 1">
@@ -855,41 +845,7 @@
                     </div>
                     <div class="clearfix">
                     </div>
-                    @*<div class="col-lg-11" style="background: white;
-                        padding: 20px;
-                        padding-top: 10px;
-                        /* vertical-align: -webkit-baseline-middle; */
-                        position: absolute;
-                        bottom: 15px;
-                        margin-left: -5px;">
-                                            <span style="    font-weight: bold;
-                        line-height: 3;">Campaign Summary</span><br />
-                                            <span class=" pull-left" style="color:red;">Matches profiles:</span>
-                                            <span class="pull-right" style="color:red;">0</span>
-                                            <div class="clearfix">
-                                            </div>
-                                            <div style="    margin-top: 20px;
-                        background: #f3f3f3;
-                        padding: 5px;
-                        font-size: 12px">
-                                                <span>Period</span><br />
-                                                <span>21st May 2017 to <bold style="color:red;">CURRENT</bold></span>
-                                                <br />
-                                                <br />
-                                                <span>Quiz answer 1 : 3000 times</span><br />
-                                                <span>Quiz answer 2 : 3000 times</span><br />
-                                                <span>Quiz answer 3 : 3000 times</span>
-                                                <br />
-                                                <br />
-                                                <span>26 coupons were swapped after quiz question card</span>
-                                                <br /><br />
-                                                <span>PPCV to date : £1234.00 </span>
-                                                <br />
-                                                <br />
-                                                <button class="btn  btn-success gtild-color pull-right" id="btnChart">Chart</button>
-                                                <div class="clearfix"></div>
-                                            </div>
-                                        </div>*@
+              
                     <div class="col-lg-11" style="position: absolute;
     bottom: 15px;
     margin-left: -10px;">
@@ -920,93 +876,104 @@
                     </div>
                 </div>
             </div>
-            <div class="clearfix col-lg-12 asdasd">
-                <header class="main-box-header clearfix" style="padding-right:0px;">
-                    <div class="filter-block pull-right">
-                        @*<a href="#" id="addTemplatePageBtn" class="btn btn-primary pull-right" style="display:none;" data-toggle="modal" data-target=".bs-example-modal-lg" data-bind="click: $root.addNewSurveyCriteria">
-                            Add Survey Criteria
-                            </a>*@
-                        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-                            <div class="modal-dialog modal-lg">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title" id="gridSystemModalLabel">Add Criteria</h4>
-                                    </div>
-                                    <div class="modal-body" data-bind="with:$root.selectedCriteria">
-                                        <div class="row">
-                                            <div class="col-lg-9 marginBottom12">
-                                                <div class="form-group">
-                                                    <div class="col-lg-5 text-right">
-                                                        <label class="control-label text-right tooltip-float"> Criteria</label>
-                                                    </div>
-                                                    <div class="col-lg-5">
-                                                        <div class="col-lg-12" style="margin-left:-10px;">
-                                                            <div class="radio col-lg-6">
-                                                                <input type="radio" name="optionRadioSelectionCriteria" id="optionIncludeCriteria" value="1" data-bind="checked: IncludeorExclude">
-                                                                <label for="optionIncludeCriteria">
-                                                                    Include
-                                                                </label>
-                                                            </div>
-                                                            <div class="radio col-lg-6">
-                                                                <input type="radio" name="optionRadioSelectionCriteria" id="optionExcludeCriteria" value="0" data-bind="checked: IncludeorExclude ">
-                                                                <label for="optionExcludeCriteria">
-                                                                    Exclude
-                                                                </label>
-                                                                <span class="help-block text-right"></span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+          
+        </div>
+        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="gridSystemModalLabel">Add Criteria</h4>
+                    </div>
+                    <div class="modal-body" data-bind="with:$root.selectedCriteria">
+                        <div class="row">
+
+                            <div>
+                                <div class="col-lg-12 marginBottom12">
+                                    <div class="form-group" data-bind="visible:$root.isNewCriteria">
+                                        <div class="col-lg-4 pull-left">
+                                            <div class="" style="margin-left:40px">
+                                                <div class="row header">
+                                                    <label class="control-label modelHeading">Criteria</label>
+                                                </div>
+                                                <div class="radio row" style="margin-top:20px;">
+                                                    <input type="radio" name="optionRadioSelectionCriteria" id="optionIncludeCriteria" value="1" data-bind="checked: IncludeorExclude">
+                                                    <label for="optionIncludeCriteria">
+                                                        Include
+                                                    </label>
+                                                </div>
+                                                <div class="radio row" style="margin-top:20px;">
+                                                    <input type="radio" name="optionRadioSelectionCriteria" id="optionExcludeCriteria" value="0" data-bind="checked: IncludeorExclude ">
+                                                    <label for="optionExcludeCriteria">
+                                                        Exclude
+                                                    </label>
                                                 </div>
                                             </div>
-                                            <div>
-                                                <div class="col-lg-12 marginBottom12">
-                                                    <div class="form-group" data-bind="visible:$root.isNewCriteria">
-                                                        <div class="col-lg-12 pull-left" data-bind="visible: $root.AditionalCriteriaMode() == '2'">
-                                                            <div class="row header">
-                                                                <label class="control-label modelHeading">Survey Questions</label>
-                                                            </div>
-                                                            <div class="listview parentList set-border padding10 list-type-tiles" data-role="listview" id="lv1">
-                                                                <!-- ko template: { name: 'profileQuestionTiles' , foreach: $root.profileQuestionList} --><!-- /ko -->
-                                                                <div class="clear-both"></div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-12 pull-left" data-bind="visible: $root.AditionalCriteriaMode() == '3'">
-                                                            <div class="row header">
-                                                                <label class="control-label modelHeading">Your Quiz Questions</label>
-                                                            </div>
-                                                            <div class="listview parentList set-border padding10 list-type-tiles" data-role="listview" id="lv2">
-                                                                <!-- ko template: { name: 'surveyQuestionTiles' , foreach: $root.myQuizQuestions} --><!-- /ko -->
-                                                                <div class="clear-both"></div>
-                                                            </div>
+                                        </div>
+                                        <div class="col-lg-8 pull-right" data-bind="visible: $root.AditionalCriteriaMode() == '2'">
+                                            <div class="row header">
+                                                <label class="control-label modelHeading">Profile Questions</label>
+                                            </div>
+                                            <div class="listview parentList set-border padding10 list-type-tiles" data-role="listview" id="lv1">
+                                                <!-- ko template: { name: 'profileQuestionTiles' , foreach: $root.profileQuestionList} --><!-- /ko -->
+                                                <div class="clear-both"></div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-lg-8 pull-right" data-bind="visible: $root.AditionalCriteriaMode() == '4'">
+                                            <div class="row header">
+                                                <label class="control-label modelHeading">Survey Questions</label>
+                                            </div>
+                                            <div class="listview parentList set-border padding10 list-type-tiles" data-role="listview" id="lv1">
+                                                <!-- ko template: { name: 'SurveyssQuestionTiles' , foreach: $root.surveyquestionList} --><!-- /ko -->
+                                                <div class="clear-both"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-8 pull-left" data-bind="visible: $root.AditionalCriteriaMode() == '3'">
+                                            <div class="row header">
+                                                <label class="control-label modelHeading">Your Quiz Questions</label>
+                                            </div>
+                                            <div class="listview parentList set-border padding10 list-type-tiles" data-role="listview" id="lv2">
+                                                <!-- ko template: { name: 'surveyQuestionTiles' , foreach: $root.myQuizQuestions} --><!-- /ko -->
+                                                <div data-bind="visible: $root.myQuizQuestions().length == 0" style="display:none;">
+                                                    <div class="" style="padding:20px;">
+                                                        No ad click answer found.
+                                                    </div>
+
+                                                </div>
+                                                <div class="clear-both"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" data-bind="visible:$root.isNewCriteria() == false,with:$root.selectedCriteria">
+                                        <div class="col-lg-9 marginBottom12" style="    margin-left: 20px;">
+                                            <div class="form-group">
+                                                <div class="row header">
+                                                    <label class="control-label modelHeading">Edit Criteria </label>
+                                                </div>
+                                                <div class="listview parentList set-border padding10 list-type-tiles" data-role="listview">
+                                                    <div class="list active">
+                                                        <span data-bind="text:questionString"></span>
+                                                        <div class="listview set-border padding10 list-type-tiles chlidList" data-role="listview">
+
+                                                            <!--ko if:Type() == 2 -->
+                                                            <div class="list childList leftImg" data-bind="click:$root.updateSurveyCriteriass.bind($data, 1),css: { 'active': LinkedSQAnswer() ==1 }"> <img data-bind="attr: { src:profileQuestLeftImageSrc}" style="height:75px;width:auto;" /></div>
+                                                            <div class="list childList rightImg" data-bind="click:$root.updateSurveyCriteriass.bind($data, 2),css: { 'active': LinkedSQAnswer() ==2 }"><img data-bind="attr: { src:profileQuestRightImageSrc}" style="height:75px;width:auto;" /></div>
+                                                            <!--/ko-->
+                                                            <!--ko if:Type() == 6 -->
+                                                            <div class="list childList leftImg" data-bind="click:$root.updateSurveyCriteria.bind($data, 1),css: { 'active': QuizAnswerId() ==1 }"> <label data-bind="text:profileQuestLeftImageSrc "></label> </div>
+                                                            <div class="list childList rightImg" data-bind="click:$root.updateSurveyCriteria.bind($data, 2),css: { 'active': QuizAnswerId() ==2 }"><label data-bind="text:profileQuestRightImageSrc "></label></div>
+                                                            <!--/ko-->
+                                                            <!--ko if:Type() == 1 -->
+                                                            <!-- ko template: { name: 'criteriaEditorTemplate' ,  foreach: $root.profileAnswerList} --><!-- /ko -->
+                                                            <!--/ko-->
+                                                            <div class="clear-both"></div>
                                                         </div>
                                                     </div>
-                                                    <div class="form-group" data-bind="visible:$root.isNewCriteria() == false,with:$root.selectedCriteria">
-                                                        <div class="col-lg-9 marginBottom12" style="    margin-left: 20px;">
-                                                            <div class="form-group">
-                                                                <div class="row header">
-                                                                    <label class="control-label modelHeading">Edit Criteria </label>
-                                                                </div>
-                                                                <div class="listview parentList set-border padding10 list-type-tiles" data-role="listview">
-                                                                    <div class="list active">
-                                                                        <span data-bind="text:questionString"></span>
-                                                                        <div class="listview set-border padding10 list-type-tiles chlidList" data-role="listview">
-                                                                            <!--ko if:Type() == 6 -->
-                                                                            <div class="list childList leftImg" data-bind="click:$root.updateSurveyCriteria.bind($data, 1),css: { 'active': AdCampaignAnswer() ==1 }"> <label data-bind="text:profileQuestLeftImageSrc "></label> </div>
-                                                                            <div class="list childList rightImg" data-bind="click:$root.updateSurveyCriteria.bind($data, 2),css: { 'active': AdCampaignAnswer() ==2 }"><label data-bind="text:profileQuestRightImageSrc "></label></div>
-                                                                            <!--/ko-->
-                                                                            <!--ko if:Type() == 1 -->
-                                                                            <!-- ko template: { name: 'criteriaEditorTemplate' ,  foreach: $root.profileAnswerList} --><!-- /ko -->
-                                                                            <!--/ko-->
-                                                                            <div class="clear-both"></div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="clear-both"></div>
-                                                                    <div class="clear-both"></div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                    <div class="clear-both"></div>
+                                                    <div class="clear-both"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -1015,83 +982,65 @@
                             </div>
                         </div>
                     </div>
-                </header>
+                </div>
             </div>
         </div>
         @*Template Page Template *@
-        <script id="answersTemplate" type="text/html">
+      
+        <script id="filterAnswersTemplate" type="text/html">
+            <!--ko if:Type() == 1  || Type() == 2   || Type() == 5  || Type() == 6-->
             <tr>
-                <td style="margin-bottom:0px!important;margin-top:0px!important;">
-                    <!-- ko if: (type() == 1 || type() == '1') -->
-                    <p id="txtPages" data-bind="text: answerString()">
+
+                <!--ko if:IncludeorExclude() == '0' -->
+                <td class="col-lg-3">
+                    <!-- ko if:   Type() != "2" -->
+                    <p style="margin-top: 5px;margin-left: 12px;" data-bind="text: '(Exclude) ' + questionString() + ' = ' + answerString()">
                     </p>
                     <!-- /ko -->
-                    @*<!-- ko if: (type() ==2 || type() == '2') -->
-                        <img id="vehicleImage" alt="" style="width: 35px;height:35px" data-bind="attr:{src:imagePath }" />
-                        <!-- /ko -->*@
+                    <!-- ko if:   Type()  == "2" -->
+                    <p style="margin-top: 5px;margin-left: 12px;">
+                        <span data-bind="text: '(Exclude) ' +  questionString() + ' = ' "></span>
+                        <img data-bind="attr:{src: answerString()}" width="80" />
+                    </p>
+                    <!-- /ko -->
                 </td>
-                <td style="margin-bottom:0px!important;margin-top:0px!important;padding-top:0px!important;padding-bottom:0px!important;">
-                    <a class="table-link danger" style="float: right">
+                <!--/ko-->
+                <!--ko if:IncludeorExclude() == '1'-->
+                <td class="col-lg-3">
+                    <!-- ko if:   Type() != "2" -->
+                    <p style="margin-top: 5px;margin-left: 12px;" data-bind="text: '(Include) ' + questionString() + ' = ' + answerString()">
+                    </p>
+                    <!-- /ko -->
+                    <!-- ko if:   Type()  == "2" -->
+                    <p style="margin-top: 5px;margin-left: 12px;">
+                        <span data-bind="text: '(Include) ' +  questionString() + ' = ' "></span>
+                        <img data-bind="attr:{src: answerString()}" width="80" />
+                    </p>
+                    <!-- /ko -->
+                </td>
+                <!--/ko-->
+
+
+                <td class="col-lg-1" style=" padding: 0px !important; text-align:right;">
+                    <a class="table-link">
                         <span class="fa-stack">
-                            <i class="fa fa-square fa-stack-2x"></i>
-                            <i class="fa fa-trash-o fa-stack-1x fa-inverse " data-bind="click:$root.onDeleteQuestionAnswer"></i>
+                            <i class="fa fa-pencil-square-o" data-bind="click:$root.onEditCriteria" data-toggle="modal" data-target=".bs-example-modal-lg"></i>
                         </span>
+
                     </a>
-                    <a class="table-link fa fa-stack" style="float: right">
-                        <span class="fa-stack" style="text-align:right;">
-                            <i class="fa fa-pencil-square-o" style="margin-right:5px;" data-bind="click:$root.onEditQuestionAnswer" data-toggle="modal" data-target=".bs-example-modal-lg1"></i>
+                </td>
+                <td class="col-lg-1" style=" padding: 0px !important;">
+
+                    <a class="table-link danger">
+                        <span class="fa-stack">
+                            <i class="fa fa-trash-o" data-bind="click:$root.onDeleteCriteria"></i>
                         </span>
+
                     </a>
                 </td>
             </tr>
-            @*<tr data-bind="visible:linkedQustionsCount()>0 && $root.selectedQuestion().hasLinkedQuestions()">
-                    <td style="padding-top: 7px; padding-bottom: 0px">
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-hover" id="profileQuestionLVTable">
-                                <thead>
-                                    <tr>
-                                        <th class="col-lg-8 th-pointer"><span id="1">Linked Questions</span></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr data-bind="visible:question1String()!=undefined">
-                                        <td style=" padding: 0px;">
-                                            <p style="margin-top: 5px;margin-left: 12px;" data-bind="text: question1String">
-                                        </td>
-                                    </tr>
 
-                                    <tr data-bind="visible:question2String()!=undefined">
-                                        <td style=" padding: 0px;">
-                                            <p style="margin-top: 5px;margin-left: 12px;" data-bind="text: question2String">
-                                        </td>
-                                    </tr>
-                                    <tr data-bind="visible:question3String()!=undefined">
-                                        <td style=" padding: 0px;">
-                                            <p style="margin-top: 5px;margin-left: 12px;" data-bind="text: question3String">
-                                        </td>
-                                    </tr>
-
-                                    <tr data-bind="visible:question4String()!=undefined">
-                                        <td style=" padding: 0px;">
-                                            <p style="margin-top: 5px;margin-left: 12px;" data-bind="text: question4String">
-                                        </td>
-                                    </tr>
-                                    <tr data-bind="visible:question5String()!=undefined">
-                                        <td style=" padding: 0px;">
-                                            <p style="margin-top: 5px;margin-left: 12px;" data-bind="text: question5String">
-                                        </td>
-                                    </tr>
-
-                                    <tr data-bind="visible:question6String()!=undefined">
-                                        <td style=" padding: 0px;">
-                                            <p style="margin-top: 5px;margin-left: 12px;" data-bind="text: question6String">
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </td>
-                </tr>*@
+            <!--/ko-->
         </script>
         <script id="AdCampaignLocationTemplate" type="text/html">
             <li>
@@ -1290,32 +1239,142 @@
             <!--/ko-->
             <!--/ko-->
         </script>
-        <script id="profileQuestionTiles" type="text/html">
-            <div class="list">
-                <div class="parent-list-title" data-bind="click:$root.onChangeProfileQuestion"><span data-bind="text:Question"></span></div>
-                <div class="listview set-border padding10 list-type-tiles chlidList" data-role="listview">
-                    <!-- ko template: { name: 'profileQuestionAnsTiles' , foreach: $root.profileAnswerList } --><!-- /ko -->
-                    <div class="clear-both"></div>
-                </div>
-                <div class="clear-both"></div>
-            </div>
-        </script>
-        <script id="profileQuestionAnsTiles" type="text/html">
-            <div class="list childList" data-bind="click:$root.saveProfileQuestion" data-dismiss="modal"> <span class="list-title" data-bind="text:Answer"></span> </div>
-        </script>
-        <script id="surveyQuestionTiles" type="text/html">
-            <div class="list">
-                <div class="parent-list-title"><span data-bind="text:VerifyQuestion"></span></div>
-                <div class="listview set-border padding10 list-type-tiles chlidList" data-role="listview">
-                    <div class="list childList leftImg" data-bind="click:$root.saveCriteria.bind($data, 1)"><span class="list-title" data-bind="text:Answer1"></span> </div>
-                    <div class="list childList rightImg" data-bind="click:$root.saveCriteria.bind($data, 2)"> <span class="list-title" data-bind="text:Answer2"></span> </div>
-                    <div class="clear-both"></div>
-                </div>
-                <div class="clear-both"></div>
-            </div>
-        </script>
+     
+       
+     
         <script id="criteriaEditorTemplate" type="text/html">
             <div class="list childList" data-bind="click:$root.updateProfileQuestion,css: { 'active': $root.selectedCriteria().PQAnswerID() == PqAnswerId }" data-dismiss="modal"> <span class="list-title" data-bind="text:Answer"></span> </div>
         </script>
     </div>
 </div>
+<script id="profileQuestionTiles" type="text/html">
+    <!--ko if:$root.showCompanyProfileQuestions() == true && CompanyId != null -->
+    <div class="list">
+        <div class="parent-list-title" data-bind="click:$root.onChangeProfileQuestion"><span data-bind="text:Question"></span></div>
+        <div class="listview set-border padding10 list-type-tiles chlidList" data-role="listview">
+            <!-- ko template: { name: 'profileQuestionAnsTiles' , foreach: $root.profileAnswerList } --><!-- /ko -->
+            <div class="clear-both"></div>
+        </div>
+        <div class="clear-both"></div>
+    </div>
+    <!--/ko-->
+    <!--ko if:$root.showCompanyProfileQuestions() == false && CompanyId == null-->
+    <div class="list">
+        <div class="parent-list-title" data-bind="click:$root.onChangeProfileQuestion"><span data-bind="text:Question"></span></div>
+        <div class="listview set-border padding10 list-type-tiles chlidList" data-role="listview">
+            <!-- ko template: { name: 'profileQuestionAnsTiles' , foreach: $root.profileAnswerList } --><!-- /ko -->
+            <div class="clear-both"></div>
+        </div>
+        <div class="clear-both"></div>
+    </div>
+    <!--/ko-->
+
+</script>
+<script id="SurveyssQuestionTiles" type="text/html">
+    <div class="list">
+        <div class="parent-list-title"><span data-bind="text:DisplayQuestion"></span></div>
+        <div class="listview set-border padding10 list-type-tiles chlidList" data-role="listview">
+            @*<!-- ko template: { name: 'SurveyQuestionAnsTiles' , foreach: $root.profileAnswerList } --><!-- /ko -->*@
+
+            <img data-bind="attr: { src:LeftPicturePath},click:$root.saveSurveyQuestionCriteria.bind($data, 1)" style="width:100px;" />
+            <img data-bind="attr: { src:RightPicturePath},click:$root.saveSurveyQuestionCriteria.bind($data, 1)" style="width:100px;" />
+
+            <div class="clear-both"></div>
+        </div>
+        <div class="clear-both"></div>
+    </div>
+</script>
+
+
+<script id="profileQuestionAnsTiles" type="text/html">
+    <div class="list childList" data-bind="click:$root.saveProfileQuestion" data-dismiss="modal"> <span class="list-title" data-bind="text:Answer"></span> </div>
+</script>
+
+<script id="SurveyQuestionAnsTiles" type="text/html">
+    <div class="list childList" data-bind="click:$root.saveProfileQuestion" data-dismiss="modal"> <span class="list-title" data-bind="text:Answer"></span> </div>
+</script>
+<script id="surveyQuestionTiles" type="text/html">
+    <div class="list">
+        <div class="parent-list-title"><span data-bind="text:VerifyQuestion"></span></div>
+        <div class="listview set-border padding10 list-type-tiles chlidList" data-role="listview">
+            <div class="list childList leftImg" data-bind="click:$root.saveCriteria.bind($data, 1)"><span class="list-title" data-bind="text:Answer1"></span> </div>
+            <div class="list childList rightImg" data-bind="click:$root.saveCriteria.bind($data, 2)"> <span class="list-title" data-bind="text:Answer2"></span> </div>
+            <div class="clear-both"></div>
+        </div>
+        <div class="clear-both"></div>
+    </div>
+</script>
+<script id="answersTemplate" type="text/html">
+    <tr>
+        <td style="margin-bottom:0px!important;margin-top:0px!important;">
+            <!-- ko if: (type() == 1 || type() == '1') -->
+            <p id="txtPages" data-bind="text: answerString()">
+            </p>
+            <!-- /ko -->
+            @*<!-- ko if: (type() ==2 || type() == '2') -->
+                <img id="vehicleImage" alt="" style="width: 35px;height:35px" data-bind="attr:{src:imagePath }" />
+                <!-- /ko -->*@
+        </td>
+        <td style="margin-bottom:0px!important;margin-top:0px!important;padding-top:0px!important;padding-bottom:0px!important;">
+            <a class="table-link danger" style="float: right">
+                <span class="fa-stack">
+                    <i class="fa fa-square fa-stack-2x"></i>
+                    <i class="fa fa-trash-o fa-stack-1x fa-inverse " data-bind="click:$root.onDeleteQuestionAnswer"></i>
+                </span>
+            </a>
+            <a class="table-link fa fa-stack" style="float: right">
+                <span class="fa-stack" style="text-align:right;">
+                    <i class="fa fa-pencil-square-o" style="margin-right:5px;" data-bind="click:$root.onEditQuestionAnswer" data-toggle="modal" data-target=".bs-example-modal-lg1"></i>
+                </span>
+            </a>
+        </td>
+    </tr>
+    @*<tr data-bind="visible:linkedQustionsCount()>0 && $root.selectedQuestion().hasLinkedQuestions()">
+            <td style="padding-top: 7px; padding-bottom: 0px">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover" id="profileQuestionLVTable">
+                        <thead>
+                            <tr>
+                                <th class="col-lg-8 th-pointer"><span id="1">Linked Questions</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr data-bind="visible:question1String()!=undefined">
+                                <td style=" padding: 0px;">
+                                    <p style="margin-top: 5px;margin-left: 12px;" data-bind="text: question1String">
+                                </td>
+                            </tr>
+
+                            <tr data-bind="visible:question2String()!=undefined">
+                                <td style=" padding: 0px;">
+                                    <p style="margin-top: 5px;margin-left: 12px;" data-bind="text: question2String">
+                                </td>
+                            </tr>
+                            <tr data-bind="visible:question3String()!=undefined">
+                                <td style=" padding: 0px;">
+                                    <p style="margin-top: 5px;margin-left: 12px;" data-bind="text: question3String">
+                                </td>
+                            </tr>
+
+                            <tr data-bind="visible:question4String()!=undefined">
+                                <td style=" padding: 0px;">
+                                    <p style="margin-top: 5px;margin-left: 12px;" data-bind="text: question4String">
+                                </td>
+                            </tr>
+                            <tr data-bind="visible:question5String()!=undefined">
+                                <td style=" padding: 0px;">
+                                    <p style="margin-top: 5px;margin-left: 12px;" data-bind="text: question5String">
+                                </td>
+                            </tr>
+
+                            <tr data-bind="visible:question6String()!=undefined">
+                                <td style=" padding: 0px;">
+                                    <p style="margin-top: 5px;margin-left: 12px;" data-bind="text: question6String">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </td>
+        </tr>*@
+</script>
