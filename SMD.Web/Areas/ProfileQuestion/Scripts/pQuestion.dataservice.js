@@ -22,7 +22,11 @@ define("pQuestion/pQuestion.dataservice", function () {
                         dataType: 'json',
                         type: 'GET'
                     });
-
+                    amplify.request.define('getFilterBaseData', 'ajax', {
+                        url: '/Api/AdCampaignBase',
+                        dataType: 'json',
+                        type: 'GET'
+                    });
                     //Delete Profile Questions
                     amplify.request.define('deleteProfileQuestion', 'ajax', {
                         url: '/Api/ProfileQuestion',
@@ -67,7 +71,17 @@ define("pQuestion/pQuestion.dataservice", function () {
                     });
                     isInitialized = true;
                 }
-            },       
+            },
+             // callings ads comapaign service for profile questions and survey questions list 
+            getFilterBaseData = function (params, callbacks) {
+                initialize();
+                return amplify.request({
+                    resourceId: 'getFilterBaseData',
+                    data: params,
+                    success: callbacks.success,
+                    error: callbacks.error,
+                });
+            },
             // Search Profile Questions
             searchProfileQuestions = function(params, callbacks) {
                 initialize();
@@ -157,7 +171,8 @@ define("pQuestion/pQuestion.dataservice", function () {
             getPqAnswer: getPqAnswer,
             saveProfileQuestion: saveProfileQuestion,
             getAudienceData: getAudienceData,
-            getProduct:getProduct,
+            getProduct: getProduct,
+            getFilterBaseData:getFilterBaseData,
             getBaseDataForProfileQuestions: getBaseDataForProfileQuestions
         };
     })();

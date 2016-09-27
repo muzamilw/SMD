@@ -444,7 +444,9 @@
         };
   };
   var // ReSharper disable InconsistentNaming
- ProfileQuestionTargetCriteria = function (ID, PQID, Type, PQID, PQAnswerID, LinkedSQID, LinkedSqAnswer, IncludeorExclude, LanguageID, questionString, answerString, Language, IndustryID, Industry, EducationId, Education, AdCampaignAnswer, PQQuestionID, AdCampaignID, PQQuestionString, profileQuestRightImageSrc, profileQuestLeftImageSrc, IsDeleted,ID) {
+ ProfileQuestionTargetCriteria = function (ID, PQID, Type, PQID, PQAnswerID, LinkedSQID, LinkedSqAnswer, IncludeorExclude, LanguageID,
+     questionString, answerString, Language, IndustryID, Industry, EducationId, Education, AdCampaignAnswer, PQQuestionID, AdCampaignID,
+     PQQuestionString, profileQuestRightImageSrc, profileQuestLeftImageSrc, IsDeleted, ID) {
      
      var
          //type and userID will be set on server side
